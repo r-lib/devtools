@@ -7,7 +7,7 @@
 #'   \item name (lookup in .Rpackages)
 #'   \item package object
 #' }
-#' @params x object to coerce to a package
+#' @param x object to coerce to a package
 #' @export
 as.package <- function(x) {
   if (is.package(x)) 

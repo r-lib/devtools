@@ -1,4 +1,4 @@
-#' Use roxygen to make documentation
+#' Use roxygen to make documentation.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information

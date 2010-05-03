@@ -1,6 +1,6 @@
 .file_cache <- character()
 
-#' Generate checksums for a vector of file paths
+#' Generate checksums for a vector of file paths.
 #' @keywords internal
 md5 <- function(paths) {
   unlist(llply(paths, tools::md5sum))
@@ -8,7 +8,7 @@ md5 <- function(paths) {
 
 #' Given vector of paths, return only those paths that have changed since the
 #' last invocation.
-#' @keyword internal
+#' @keywords internal
 changed_files <- function(paths) {
   paths <- path.expand(paths)
   new_hash <- md5(paths)
@@ -20,7 +20,7 @@ changed_files <- function(paths) {
   paths[changed]
 }
 
-#' Clear file cache
+#' Clear file cache.
 #' @keywords internal
 clear_cache <- function() {
   .file_cache <<- character()

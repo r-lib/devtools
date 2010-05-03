@@ -1,4 +1,3 @@
-Package: devtools
 Type: Package
 Title: Tools to make developing R code easier
 Version: 0.1
@@ -8,3 +7,18 @@ Description: Collection of package development tools
 Depends: testthat, profr, roxygen, stringr
 Imports: plyr
 License: MIT
+Collate: 'all.r' 'c.r' 'code.r' 'common-mistakes.r' 'data.r'
+    'dependencies.r' 'documentation.r' 'environment.r' 'file-cache.r'
+    'package.r' 'run-examples.r' 'utils.r'
+Type: Package
+Title: Tools to make developing R code easier
+Version: 0.1
+Author: Hadley Wickham <h.wickham@gmail.com>
+Maintainer: Hadley Wickham <h.wickham@gmail.com>
+Description: Collection of package development tools
+Depends: testthat, profr, roxygen, stringr
+Imports: plyr
+License: MIT
+Collate: 'all.r' 'c.r' 'code.r' 'common-mistakes.r' 'data.r'
+    'dependencies.r' 'documentation.r' 'environment.r' 'file-cache.r'
+    'package.r' 'run-examples.r' 'utils.r'

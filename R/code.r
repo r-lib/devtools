@@ -30,7 +30,7 @@ load_code <- function(pkg, env = pkg_env(pkg)) {
 }
 
 
-#' Parse collate string into vector of function names
+#' Parse collate string into vector of function names.
 #' @keywords internal
 parse_collate <- function(string) {
   con <- textConnection(string)
@@ -38,7 +38,7 @@ parse_collate <- function(string) {
   scan(con, "character", sep = " ", quiet = TRUE)
 }
 
-#' Find all R files in given directory
+#' Find all R files in given directory.
 #' @keywords internal
 find_code <- function(path) {
   code_paths <- dir(path, "\\.[Rr]$", full = TRUE)  

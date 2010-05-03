@@ -15,7 +15,7 @@ load_deps <- function(pkg) {
 }
 
 #' Parse dependencies.
-#' @returns character vector of package names
+#' @return character vector of package names
 #' @keywords internal
 parse_deps <- function(string) {
   library(stringr)
