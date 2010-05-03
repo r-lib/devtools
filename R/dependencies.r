@@ -9,6 +9,8 @@
 load_deps <- function(pkg) {
   pkg <- as.package(pkg)
   
+  if (is.null(pkg$depends)) return(invisible())
+  
   deps <- parse_deps(pkg$depends)
   plyr::l_ply(deps, require, character.only = TRUE, quietly = TRUE, 
     warn.conflicts = FALSE)
