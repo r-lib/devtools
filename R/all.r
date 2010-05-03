@@ -1,7 +1,3 @@
-# Possibile specifications of package:
-#   * name (look up in .Rpackages)
-#   * path
-#   * package object
 
 # load_code
 # load_data
@@ -11,10 +7,10 @@
 # run_examples
 # run_tests
 # run_benchmarks
-# run_roxygen
+# make_docs
 
-# load_from_git?
-# load_from_svn?
+# install_package
+# build_package
 
 # Think about caching - particularly for data (tools::md5sum)
 # Should everything go in it's own environment?

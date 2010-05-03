@@ -13,6 +13,12 @@ load_pkg_description <- function(path) {
 }
 
 is.package <- function(x) inherits(x, "package")
+
+
+# Possibile specifications of package:
+#   * name (look up in .Rpackages)
+#   * path
+#   * package object
 as.package <- function(x) {
   if (is.package(x)) 
     return(x)
