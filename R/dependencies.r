@@ -9,5 +9,6 @@ load_deps <- function(pkg) {
 }
 
 parse_deps <- function(string) {
+  library(stringr)
   stringr::str_split(string, ", ")[[1]]
 }
