@@ -20,3 +20,11 @@ run_examples <- function(pkg) {
     }
   )  
 }
+
+
+# If an error occurs, should print out the suspect line of code, and offer
+# the following options:
+#   * skip to the next example
+#   * quit
+#   * rerun roxygen and rerun example
+#   * reload code and rerun example
