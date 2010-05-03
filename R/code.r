@@ -8,7 +8,7 @@ load_code <- function(pkg) {
     paths <- file.path(path_r, parse_collate(pkg$collate))
   }
 
-  lapply(paths, source, chdir = TRUE)
+  l_ply(paths, source, chdir = TRUE)
 }
 
 
