@@ -1,9 +1,13 @@
-load_dependencies <- function(pkg) {
-  pkgs <- parse_packages(pkg$depends)
-  lapply(pkg, require, character.only = TRUE, quietly = TRUE, 
+load_deps <- function(pkg) {
+  pkg <- as.package(pkg)
+  
+  deps <- parse_deps(pkg$depends)
+  plyr::l_ply(deps, require, character.only = TRUE, quietly = TRUE, 
     warn.conflicts = FALSE)
+  
+  invisible(deps)
 }
 
-parse_packages <- function(string) {
+parse_deps <- function(string) {
   stringr::str_split(string, ", ")[[1]]
 }
