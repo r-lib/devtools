@@ -7,6 +7,7 @@ load_code <- function(pkg, env = pkg_env(pkg)) {
   } else {
     paths <- file.path(path_r, parse_collate(pkg$collate))
   }
+  paths <- changed_files(paths)
 
   plyr::l_ply(paths, sys.source, envir = env, chdir = TRUE)
   invisible(paths)

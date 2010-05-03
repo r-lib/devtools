@@ -5,6 +5,7 @@ load_data <- function(pkg, env = pkg_env(pkg)) {
   if (!file.exists(path_data)) return(invisible())
   
   paths <- dir(path_data, "\\.[rR]da(ta)?$", full = TRUE)
+  paths <- changed_files(paths)
 
   objs <- unlist(plyr::llply(paths, load, envir = env))
   invisible(objs)
