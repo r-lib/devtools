@@ -12,8 +12,14 @@
 # install_package
 # build_package
 
-load_all <- function(pkg) {
+load_all <- function(pkg, reset = FALSE) {
   pkg <- as.package(pkg)
+
+  if (reset) {
+    clear_cache()
+    clear_pkg_env(pkg)
+  }
+  
   env <- pkg_env(pkg)
   
   load_deps(pkg)
