@@ -12,8 +12,9 @@ load_code <- function(pkg, env = pkg_env(pkg)) {
   plyr::l_ply(paths, sys.source, envir = env, chdir = TRUE)
   
   # Load .onLoad if it's defined
-  if (exists(".onLoad", env)) {
+  if (exists(".onLoad", env) && !exists("__loaded", env)) {
     env$.onLoad()
+    env$`__loaded` <- TRUE
   }
   
   invisible(paths)
