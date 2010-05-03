@@ -5,9 +5,6 @@ Version: 0.1
 Author: Hadley Wickham <h.wickham@gmail.com>
 Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Description: Collection of package development tools
-URL: http://had.co.nz/profr
 Depends: testthat, profr, roxygen, stringr
-Imports: stringr, plyr
-Suggests: ggplot2
+Imports: plyr
 License: MIT
-LazyData: true
