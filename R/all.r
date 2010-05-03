@@ -25,25 +25,10 @@
 load_all <- function(pkg) {
   pkg <- as.package(pkg)
   
-  load_dependecies(pkg)
+  load_deps(pkg)
   load_data(pkg)
   load_code(pkg)
-  load_c(pkg)
-
-  # Load data
-  datasets <- find_data(file.path(path, "data"))
-  load_data(datasets)
-
-  # Load code
-  if (is.null(desc$collate)) {
-    code_paths <- find_data(file.path(path, "R"))
-    code_paths <- dir(, "\\.[Rr]$", full = TRUE)  
-    code_paths <- with_locale("C", sort(code_paths))
-  } else {
-    files <- gsub("^'|'$", "", strsplit(desc$collate, "'\\s'")[[1]])
-    code_paths <- file.path(path, "R", files)
-  }
-  lapply(code_paths, source)
+  # load_c(pkg)
 
   invisible()  
 }
