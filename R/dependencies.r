@@ -10,5 +10,11 @@ load_deps <- function(pkg) {
 
 parse_deps <- function(string) {
   library(stringr)
-  stringr::str_split(string, ", ")[[1]]
+  
+  # Remove version specifications
+  string <- str_replace(string, "\\s*\\(.*?\\)", "")
+  
+  # Split into pieces and remove R dependency
+  pieces <- str_split(string, ", ")[[1]]
+  pieces[pieces != "R"]
 }
