@@ -1,4 +1,4 @@
-load_code <- function(pkg) {
+load_code <- function(pkg, env = pkg_env(pkg)) {
   pkg <- as.package(pkg)
   path_r <- file.path(pkg$path, "R")
 
@@ -8,7 +8,7 @@ load_code <- function(pkg) {
     paths <- file.path(path_r, parse_collate(pkg$collate))
   }
 
-  plyr::l_ply(paths, source, chdir = TRUE)
+  plyr::l_ply(paths, sys.source, envir = env, chdir = TRUE)
   invisible(paths)
 }
 
