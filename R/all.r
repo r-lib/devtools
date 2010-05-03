@@ -28,7 +28,7 @@ load_all <- function(pkg) {
   load_deps(pkg)
   load_data(pkg)
   load_code(pkg)
-  # load_c(pkg)
+  load_c(pkg)
 
   invisible()  
 }
