@@ -6,6 +6,10 @@
 \description{
   Load dependencies.
 }
+
+\details{
+  Load all package dependencies as described in \code{DESCRIPTION}.
+}
 \keyword{programming}
 \arguments{
   \item{pkg}{package description, can be path or package name.  See

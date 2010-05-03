@@ -1,5 +1,7 @@
 #' Load data.
 #'
+#' Loads all \code{.Rdata} files in the data subdirectory.
+#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param env environment in which to load code.  Defaults to \code{devel:pkg}

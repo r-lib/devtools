@@ -1,5 +1,8 @@
 #' Load R code.
 #'
+#' Load all R code in the \code{R} directory. The first time the code is 
+#' loaded, \code{.onLoad} will be run if it exists.
+#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param env environment in which to load code.  Defaults to \code{devel:pkg}

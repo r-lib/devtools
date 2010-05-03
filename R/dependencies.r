@@ -1,5 +1,7 @@
 #' Load dependencies.
 #'
+#' Load all package dependencies as described in \code{DESCRIPTION}.
+#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @keywords programming

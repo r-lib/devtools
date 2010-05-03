@@ -6,6 +6,10 @@
 \description{
   Load data.
 }
+
+\details{
+  Loads all \code{.Rdata} files in the data subdirectory.
+}
 \keyword{programming}
 \arguments{
   \item{pkg}{package description, can be path or package name.  See
