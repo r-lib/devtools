@@ -1,10 +1,10 @@
-library(plyr)
-library(tools)
+run_examples <- function(pkg) {
+  pkg <- as.package(pkg)
+  
+  path_man <- file.path(pkg$path, "man")
+  files <- dir(path_man, pattern = "\\.Rd$", full = TRUE)
 
-run_examples <- function(path) {
-  files <- dir(path, full = TRUE)
-
-  parsed <- llply(files, parse_Rd)
+  parsed <- llply(files, tools::parse_Rd)
   names(parsed) <- basename(files)
 
   extract_examples <- function(rd) {
