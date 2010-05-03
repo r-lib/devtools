@@ -21,7 +21,9 @@ load_code <- function(pkg, env = pkg_env(pkg)) {
 
 
 parse_collate <- function(string) {
-  gsub("^'|'$", "", strsplit(string, "'\\s'")[[1]])
+  con <- textConnection(string)
+  on.exit(close(con))
+  scan(con, "character", sep = " ", quiet = TRUE)
 }
 
 find_code <- function(path) {
