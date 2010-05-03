@@ -1,3 +1,9 @@
+#' Load C code.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @keywords programming
+#' @export
 load_c <- function(pkg) {
   pkg <- as.package(pkg)
   

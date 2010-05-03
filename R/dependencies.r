@@ -1,3 +1,9 @@
+#' Load dependencies.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @keywords programming
+#' @export
 load_deps <- function(pkg) {
   pkg <- as.package(pkg)
   
@@ -8,6 +14,9 @@ load_deps <- function(pkg) {
   invisible(deps)
 }
 
+#' Parse dependencies.
+#' @returns character vector of package names
+#' @keywords internal
 parse_deps <- function(string) {
   library(stringr)
   

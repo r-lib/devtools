@@ -1,3 +1,14 @@
+#' Run all examples in a package.
+#'
+#' One of the most frustrating parts of `R CMD check` is getting all of your
+#' examples to pass - whenever one fails you need to fix the problem and then
+#' restart the whole process.  This function makes it a little easier by
+#' making it possible to run all examples from an R function.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @keywords programming
+#' @export
 run_examples <- function(pkg) {
   pkg <- as.package(pkg)
   

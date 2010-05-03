@@ -1,3 +1,12 @@
+#' Load R code.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @param env environment in which to load code.  Defaults to \code{devel:pkg}
+#'   which is attached just after the global environment.  See
+#'  \code{\link{pkg_env}} for more information
+#' @keywords programming
+#' @export
 load_code <- function(pkg, env = pkg_env(pkg)) {
   pkg <- as.package(pkg)
   path_r <- file.path(pkg$path, "R")
@@ -21,12 +30,16 @@ load_code <- function(pkg, env = pkg_env(pkg)) {
 }
 
 
+#' Parse collate string into vector of function names
+#' @keywords internal
 parse_collate <- function(string) {
   con <- textConnection(string)
   on.exit(close(con))
   scan(con, "character", sep = " ", quiet = TRUE)
 }
 
+#' Find all R files in given directory
+#' @keywords internal
 find_code <- function(path) {
   code_paths <- dir(path, "\\.[Rr]$", full = TRUE)  
   with_locale("C", sort(code_paths))

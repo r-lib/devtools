@@ -1,24 +1,14 @@
-load_pkg_description <- function(path) {
-  path_desc <- file.path(path, "DESCRIPTION")
-  
-  if (!file.exists(path_desc)) {
-    stop("No description at ", path_desc, call. = FALSE)
-  }
-  
-  desc <- as.list(read.dcf(path_desc)[1, ])
-  names(desc) <- tolower(names(desc))
-  desc$path <- path
-  
-  structure(desc, class = "package")
-}
-
-is.package <- function(x) inherits(x, "package")
-
-
-# Possibile specifications of package:
-#   * name (look up in .Rpackages)
-#   * path
-#   * package object
+#' Coerce input to a package.
+#' 
+#' Possibile specifications of package:
+#'
+#' \itemize{
+#'   \item path
+#'   \item name (lookup in .Rpackages)
+#'   \item package object
+#' }
+#' @params x object to coerce to a package
+#' @export
 as.package <- function(x) {
   if (is.package(x)) 
     return(x)
@@ -36,3 +26,26 @@ as.package <- function(x) {
     
   stop("Can't find package ", x, call. = FALSE)
 }
+
+#' Load package DESCRIPTION into convenient form.
+#' @keywords internal
+load_pkg_description <- function(path) {
+  path_desc <- file.path(path, "DESCRIPTION")
+  
+  if (!file.exists(path_desc)) {
+    stop("No description at ", path_desc, call. = FALSE)
+  }
+  
+  desc <- as.list(read.dcf(path_desc)[1, ])
+  names(desc) <- tolower(names(desc))
+  desc$path <- path
+  
+  structure(desc, class = "package")
+}
+
+#' Is the object a package?
+#' @keywords internal
+#' @export
+is.package <- function(x) inherits(x, "package")
+
+

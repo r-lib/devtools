@@ -1,3 +1,12 @@
+#' Load data.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @param env environment in which to load code.  Defaults to \code{devel:pkg}
+#'   which is attached just after the global environment.  See
+#'  \code{\link{pkg_env}} for more information
+#' @keywords programming
+#' @export
 load_data <- function(pkg, env = pkg_env(pkg)) {
   pkg <- as.package(pkg)
   
