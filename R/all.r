@@ -22,8 +22,8 @@
 #   use sys.source
 #   attach and detach
 
-load_package <- function(path) {
-  pkg <- load_pkg_description(path)
+load_all <- function(pkg) {
+  pkg <- as.package(pkg)
   
   load_dependecies(pkg)
   load_data(pkg)
