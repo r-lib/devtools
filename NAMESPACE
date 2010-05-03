@@ -1,6 +1,8 @@
 export(load_all)
 export(load_c)
 export(load_code)
+export(trace_all)
+export(functions_with_arg)
 export(load_data)
 export(load_deps)
 export(make_docs)
