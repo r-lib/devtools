@@ -1,0 +1,7 @@
+run_examples
+run_tests
+run_benchmarks
+make_docs
+
+install_package
+build_package
