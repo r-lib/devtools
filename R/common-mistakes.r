@@ -10,20 +10,19 @@ functions_with_arg <- function(arg, pos) {
 
   fs[present]
 }
-
-trace_all(
-  functions_with_arg("drop", "package:base"), 
-  quote(if (drop) warning("na.rm = FALSE"))
-)
-
-
-#trace_all(list("sum"), quote(if (!na.rm) warning("na.rm = FALSE")))
-
-trace_all(
-  functions_with_arg("drop", "package:base"), 
-  quote(if (drop) warning("drop = TRUE"))
-)
-
-
-#T <- function() {}
-#F <- function() {}
+# 
+# trace_all(
+#   functions_with_arg("drop", "package:base"), 
+#   quote(if (drop) warning("na.rm = FALSE"))
+# )
+# 
+# 
+# #trace_all(list("sum"), quote(if (!na.rm) warning("na.rm = FALSE")))
+# 
+# trace_all(
+#   functions_with_arg("drop", "package:base"), 
+#   quote(if (drop) warning("drop = TRUE"))
+# )
+# 
+# makeActiveBinding("T", function(value) stop("Use TRUE!", call. = FALSE), globalenv())
+# makeActiveBinding("F", function(value) stop("Use FALSE!", call. = FALSE), globalenv())
