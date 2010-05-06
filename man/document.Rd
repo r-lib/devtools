@@ -1,7 +1,7 @@
-\name{make_docs}
-\alias{make_docs}
+\name{document}
+\alias{document}
 \title{Use roxygen to make documentation.}
-\usage{make_docs(pkg)}
+\usage{document(pkg)}
 
 \description{
   Use roxygen to make documentation.
