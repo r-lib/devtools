@@ -15,9 +15,11 @@ load_all <- function(pkg, reset = FALSE) {
     clear_pkg_env(pkg)
   }
   
+  # Load dependencies before creating environment so it sees all the required
+  # packages
+  load_deps(pkg)
   env <- pkg_env(pkg)
   
-  load_deps(pkg)
   load_data(pkg, env)
   load_code(pkg, env)
   load_c(pkg)
