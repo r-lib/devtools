@@ -33,10 +33,12 @@ For example, a small section of my `~/.Rpackages` looks like this:
 
 To make it even easier to use, you might want to add the following lines to your `.Rprofile`:
 
-    suppressMessages(require(devtools))
-    l <- function(pkg, ...) {
-      pkg <- tolower(deparse(substitute(pkg)))
-      load_all(pkg, ...)
+    if (interactive()) {
+      suppressMessages(require(devtools))
+      l <- function(pkg, ...) {
+        pkg <- tolower(deparse(substitute(pkg)))
+        load_all(pkg, ...)
+      }  
     }
 
 That way you can reload any development package with the minimum of typing.
