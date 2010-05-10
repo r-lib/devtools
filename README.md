@@ -19,11 +19,15 @@ It keeps your global workspace clean by loading all objects into an environment 
 
 ## Referring to a package
 
-All `devtools` functions as either a path or a name. If you specify a name it will first look in `~/documents/name/name` (because that's how I organise my packages), and if not found there it will load `~/.Rpackages` which should be an R list mapping package name to full path.  
+All `devtools` functions as either a path or a name. If you specify a name it will load `~/.Rpackages`, and try the path given by the default function, if it's not there, it will look up the package name in the list and use that path.  
 
 For example, a small section of my `~/.Rpackages` looks like this:
 
     list(
+        default = function(x) {
+          file.path("~/documents/", x, x)
+        }, 
+
       "describedisplay" = "~/ggobi/describedisplay",
       "tourr" =    "~/documents/tour/tourr", 
       "mutatr" = "~/documents/oo/mutatr"

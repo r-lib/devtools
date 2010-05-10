@@ -14,16 +14,23 @@ as.package <- function(x) {
     return(x)
   if (file.exists(x)) 
     return(load_pkg_description(x))
-  
-  home <- file.path("~/documents", x, x)
-  if (file.exists(home)) 
-    return(load_pkg_description(home))
-  
-  lookup <- source("~/.Rpackages")$value
-  
-  if (!is.null(lookup[[x]]))
-    return(load_pkg_description(lookup[[x]]))
+
+  # If .Rpackages exists, use that to find the package locations
+  if (file.exists("~/.Rpackages")) {
+    lookup <- source("~/.Rpackages")$value
     
+    # Try default function, if it exists
+    if (!is.null(lookup$default)) {
+      default_loc <- lookup$default(x)
+      if (file.exists(default_loc)) 
+        return(load_pkg_description(default_loc))
+    }
+    
+    # Otherwise try special cases
+    if (!is.null(lookup[[x]]))
+      return(load_pkg_description(lookup[[x]]))
+  }
+  
   stop("Can't find package ", x, call. = FALSE)
 }
 
