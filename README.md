@@ -32,7 +32,7 @@ For example, a small section of my `~/.Rpackages` looks like this:
       "tourr" =    "~/documents/tour/tourr", 
       "mutatr" = "~/documents/oo/mutatr"
     )
-    
+
 ## `.Rprofile`
 
 To make it even easier to use, you might want to add the following lines to your `.Rprofile`:
@@ -46,3 +46,5 @@ To make it even easier to use, you might want to add the following lines to your
     }
 
 That way you can reload any development package with the minimum of typing.
+
+Make sure that there is a newline at the end of the file - otherwise R will (silently) ignore the if statement.
