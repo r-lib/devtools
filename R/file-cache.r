@@ -11,7 +11,7 @@ md5 <- function(paths) {
 make_cache <- function() {
   .file_cache <- character()
 
-  function(paths) {
+  make <- function(paths) {
     paths <- path.expand(paths)
     new_hash <- md5(paths)
     old_hash <- .file_cache[paths]
@@ -21,11 +21,17 @@ make_cache <- function() {
   
     paths[changed]
   }
+  
+  clear <- function() { 
+    .file_cache <<- character()
+  }
+  
+  list(make = make, clear = clear)
 }
-changed_files <- make_cache()
+.cache <- make_cache()
+
+changed_files <- .cache$make
 
 #' Clear file cache.
 #' @keywords internal
-clear_cache <- function() {
-  .file_cache <<- character()
-}
+clear_cache <- .cache$clear
