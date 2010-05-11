@@ -7,7 +7,7 @@
 #' 
 #' @keywords programming
 #' @export
-load_all <- function(pkg, reset = TRUE) {
+load_all <- function(pkg, reset = FALSE) {
   pkg <- as.package(pkg)
   
   # Load dependencies before creating environment so it sees all the required
@@ -27,4 +27,19 @@ load_all <- function(pkg, reset = TRUE) {
   invisible()  
 }
 
-
+#' Load package as development or installed verison.
+#' 
+#' If package exists in known development location on disk, load it from
+#' there.  Otherwise load the installed package with \code{\link{library}}.
+#'
+#' @keywords programming
+#' @export
+load_or_library <- function(pkg, ...) {
+  path <- find_package(pkg)
+  
+  if (is.null(path)) {
+    library(pkg, character.only = TRUE)
+  } else {
+    load_all(as.package(path), ...)
+  }
+}

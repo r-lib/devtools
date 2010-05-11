@@ -12,8 +12,18 @@
 as.package <- function(x) {
   if (is.package(x)) 
     return(x)
+  
+  path <- find_package(x)
+  if (is.null(path)) {
+    stop("Can't find package ", x, call. = FALSE)
+  }
+    
+  load_pkg_description(path)
+}
+
+find_package <- function(x) {
   if (file.exists(x)) 
-    return(load_pkg_description(x))
+    return(x)
 
   # If .Rpackages exists, use that to find the package locations
   if (file.exists("~/.Rpackages")) {
@@ -23,15 +33,14 @@ as.package <- function(x) {
     if (!is.null(lookup$default)) {
       default_loc <- lookup$default(x)
       if (file.exists(default_loc)) 
-        return(load_pkg_description(default_loc))
+        return(default_loc)
     }
     
     # Otherwise try special cases
     if (!is.null(lookup[[x]]))
-      return(load_pkg_description(lookup[[x]]))
+      return(lookup[[x]])
   }
-  
-  stop("Can't find package ", x, call. = FALSE)
+  NULL
 }
 
 #' Load package DESCRIPTION into convenient form.

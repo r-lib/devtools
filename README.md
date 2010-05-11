@@ -41,6 +41,8 @@ To make it even easier to use, you might want to add the following lines to your
       suppressMessages(require(devtools))
       l <- function(pkg, ...) {
         pkg <- tolower(deparse(substitute(pkg)))
+        
+        
         load_all(pkg, ...)
       }  
     }
