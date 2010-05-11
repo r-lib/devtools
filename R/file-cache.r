@@ -1,13 +1,9 @@
-
 #' Generate checksums for a vector of file paths.
 #' @keywords internal
 md5 <- function(paths) {
-  unlist(llply(paths, tools::md5sum))
+  unlist(plyr::llply(paths, tools::md5sum))
 }
 
-#' Given vector of paths, return only those paths that have changed since the
-#' last invocation.
-#' @keywords internal
 make_cache <- function() {
   .file_cache <- character()
 
@@ -30,6 +26,9 @@ make_cache <- function() {
 }
 .cache <- make_cache()
 
+#' Given vector of paths, return only those paths that have changed since the
+#' last invocation.
+#' @keywords internal
 changed_files <- .cache$make
 
 #' Clear file cache.

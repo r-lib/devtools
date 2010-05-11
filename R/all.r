@@ -7,19 +7,19 @@
 #' 
 #' @keywords programming
 #' @export
-load_all <- function(pkg, reset = FALSE) {
+load_all <- function(pkg, reset = TRUE) {
   pkg <- as.package(pkg)
+  
+  # Load dependencies before creating environment so it sees all the required
+  # packages
+  load_deps(pkg)
 
   if (reset) {
     clear_cache()
     clear_pkg_env(pkg)
   }
   
-  # Load dependencies before creating environment so it sees all the required
-  # packages
-  load_deps(pkg)
   env <- pkg_env(pkg)
-  
   load_data(pkg, env)
   load_code(pkg, env)
   load_c(pkg)
