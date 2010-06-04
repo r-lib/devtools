@@ -3,7 +3,7 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @export
-update <- function(pkg) {
+update_src <- function(pkg) {
   pkg <- as.package(pkg)
   
   cmd <- str_c("cd ", pkg$path, " && ")
