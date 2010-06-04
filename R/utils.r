@@ -7,3 +7,11 @@ with_locale <- function(locale, code) {
   Sys.setlocale(category = "LC_COLLATE", locale = cur)
   res
 }
+
+in_dir <- function(dir, code) {
+  cur <- getwd()
+  setwd(dir)
+  on.exit(setwd(cur))
+  
+  force(code)
+}

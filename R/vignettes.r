@@ -1,0 +1,23 @@
+#' Build package vignettes.
+#' Sweave and latex package vignettes.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @keywords programming
+#' @export
+build_vignettes <- function(pkg) {
+  pkg <- as.package(pkg)
+  
+  path_vig <- file.path(pkg$path, "inst", "doc")
+  if (!file.exists(path_vig)) return()
+  
+  in_dir(path_vig, {
+    vigs <- dir(pattern = "\\.Rnw$", full.name = TRUE)
+    capture.output(lapply(vigs, Sweave))
+    
+    tex <- dir(pattern = "\\.tex$", full.name = TRUE)
+    in_dir(path_vig, lapply(tex, tools::texi2dvi, pdf = TRUE, quiet = TRUE))
+  })
+  
+  invisible(TRUE)
+}
