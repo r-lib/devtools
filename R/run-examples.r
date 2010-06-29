@@ -13,8 +13,8 @@ run_examples <- function(pkg) {
   pkg <- as.package(pkg)
   
   path_man <- file.path(pkg$path, "man")
-  files <- dir(path_man, pattern = "\\.Rd$", full = TRUE)
-
+  files <- dir(path_man, pattern = "\\.[Rr]d$", full = TRUE)
+  
   parsed <- llply(files, tools::parse_Rd)
   names(parsed) <- basename(files)
 

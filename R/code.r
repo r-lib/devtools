@@ -21,7 +21,8 @@ load_code <- function(pkg, env = pkg_env(pkg)) {
   }
   paths <- changed_files(paths)
 
-  plyr::l_ply(paths, sys.source, envir = env, chdir = TRUE)
+  plyr::l_ply(paths, sys.source, envir = env, chdir = TRUE, 
+    keep.source = TRUE)
   
   # Load .onLoad if it's defined
   if (exists(".onLoad", env) && !exists("__loaded", env)) {
