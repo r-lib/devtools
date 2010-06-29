@@ -9,14 +9,22 @@
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
 #' @export
-run_examples <- function(pkg) {
+run_examples <- function(pkg, start = NULL) {
   pkg <- as.package(pkg)
   
   path_man <- file.path(pkg$path, "man")
   files <- dir(path_man, pattern = "\\.[Rr]d$", full = TRUE)
+  names(files) <- basename(files)
+  files <- sort(files)
+  
+  if (!is.null(start)) {
+    start_pos <- which(names(files) == start)
+    if (length(start_pos) == 1) {
+      files <- files[seq(start_pos, length(files))]
+    }
+  }
   
   parsed <- llply(files, tools::parse_Rd)
-  names(parsed) <- basename(files)
 
   extract_examples <- function(rd) {
     tags <- tools:::RdTags(rd)
@@ -24,10 +32,12 @@ run_examples <- function(pkg) {
   }
 
   examples <- llply(parsed, extract_examples)
+  examples <- examples[examples != ""]
   m_ply(cbind(file = names(examples), example = examples), 
     function(file, example) {
-      cat("Checking ", file, "...\n", sep = "")
-      eval(parse(text = example))
+      message("Checking ", file, "...")
+      src <- srcfilecopy("<text>", example)
+      eval.echo(parse(text = example, srcfile = src), parent.frame())
     }
   )  
 }
@@ -37,5 +47,6 @@ run_examples <- function(pkg) {
 # the following options:
 #   * skip to the next example
 #   * quit
-#   * rerun roxygen and rerun example
-#   * reload code and rerun example
+#   * browser
+#   * rerun example and rerun
+#   * reload code and rerun
