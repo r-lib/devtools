@@ -20,7 +20,7 @@ run_examples <- function(pkg, start = NULL) {
   if (!is.null(start)) {
     start_pos <- which(names(files) == start)
     if (length(start_pos) == 1) {
-      files <- files[seq(start_pos, length(files))]
+      files <- files[- seq(1, start_pos - 1)]
     }
   }
   
@@ -33,15 +33,15 @@ run_examples <- function(pkg, start = NULL) {
 
   examples <- llply(parsed, extract_examples)
   examples <- examples[examples != ""]
-  m_ply(cbind(file = names(examples), example = examples), 
-    function(file, example) {
-      message("Checking ", file, "...")
-      src <- srcfilecopy("<text>", example)
-      eval.echo(parse(text = example, srcfile = src), parent.frame())
-    }
-  )  
+  m_ply(cbind(names(examples), example = examples), run_example,
+    parent.frame())  
 }
 
+run_example <- function(name, example, env = parent.frame()) {
+  message("Checking ", name, "...")
+  src <- srcfilecopy("<text>", example)
+  eval.echo(parse(text = example, srcfile = src), env)
+}
 
 # If an error occurs, should print out the suspect line of code, and offer
 # the following options:
