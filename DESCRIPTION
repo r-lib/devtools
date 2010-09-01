@@ -8,6 +8,6 @@ Depends: testthat, profr, roxygen, stringr
 Imports: plyr
 License: MIT
 Collate: 'all.r' 'c.r' 'code.r' 'common-mistakes.r' 'data.r'
-    'dependencies.r' 'documentation.r' 'environment.r' 'file-cache.r'
-    'package.r' 'rcs.r' 'run-examples.r' 'test.r' 'utils.r'
-    'vignettes.r' 'echo.r'
+    'dependencies.r' 'documentation.r' 'echo.r' 'environment.r'
+    'file-cache.r' 'news.r' 'package.r' 'rcs.r' 'run-examples.r'
+    'test.r' 'utils.r' 'vignettes.r'
