@@ -8,8 +8,8 @@
 }
 
 \details{
-  If package exists in known development location on disk, load it from
-  there.  Otherwise load the installed package with
-  \code{\link{library}}.
+  If package exists in known development location on disk,
+  load it from there.  Otherwise load the installed package
+  with \code{\link{library}}.
 }
 \keyword{programming}

@@ -8,7 +8,8 @@
 }
 
 \details{
-  Load all package dependencies as described in \code{DESCRIPTION}.
+  Load all package dependencies as described in
+  \code{DESCRIPTION}.
 }
 \keyword{programming}
 \arguments{

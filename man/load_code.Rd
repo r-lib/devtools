@@ -8,8 +8,9 @@
 }
 
 \details{
-  Load all R code in the \code{R} directory. The first time the code is
-  loaded, \code{.onLoad} will be run if it exists.
+  Load all R code in the \code{R} directory. The first time
+  the code is loaded, \code{.onLoad} will be run if it
+  exists.
 }
 \keyword{programming}
 \arguments{

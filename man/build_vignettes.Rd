@@ -4,7 +4,8 @@
 \usage{build_vignettes(pkg)}
 
 \description{
-  Build package vignettes. Sweave and latex package vignettes.
+  Build package vignettes. Sweave and latex package
+  vignettes.
 }
 \keyword{programming}
 \arguments{

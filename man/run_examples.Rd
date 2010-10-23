@@ -1,17 +1,18 @@
 \name{run_examples}
 \alias{run_examples}
 \title{Run all examples in a package.}
-\usage{run_examples(pkg)}
+\usage{run_examples(pkg, start)}
 
 \description{
   Run all examples in a package.
 }
 
 \details{
-  One of the most frustrating parts of `R CMD check` is getting all of
-  your examples to pass - whenever one fails you need to fix the
-  problem and then restart the whole process.  This function makes it a
-  little easier by making it possible to run all examples from an R
+  One of the most frustrating parts of `R CMD check` is
+  getting all of your examples to pass - whenever one fails
+  you need to fix the problem and then restart the whole
+  process.  This function makes it a little easier by
+  making it possible to run all examples from an R
   function.
 }
 \keyword{programming}

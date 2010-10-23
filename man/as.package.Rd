@@ -10,8 +10,8 @@
 \details{
   Possibile specifications of package:
 
-  \itemize{ \item path \item name (lookup in .Rpackages) \item package
-  object }
+  \itemize{ \item path \item name (lookup in .Rpackages)
+  \item package object }
 }
 \arguments{
   \item{x}{object to coerce to a package}
