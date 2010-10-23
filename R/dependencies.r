@@ -23,6 +23,7 @@ load_deps <- function(pkg) {
 #' @keywords internal
 parse_deps <- function(string) {
   library(stringr)
+  if (is.null(string)) return()
   
   # Remove version specifications
   string <- str_replace(string, "\\s*\\(.*?\\)", "")
