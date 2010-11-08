@@ -16,6 +16,7 @@ load_all <- function(pkg, reset = FALSE) {
 
   if (reset) {
     clear_cache()
+    clear_classes(pkg)
     clear_pkg_env(pkg)
   }
   

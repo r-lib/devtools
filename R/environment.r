@@ -34,3 +34,10 @@ env_name <- function(pkg) {
   pkg <- as.package(pkg)
   stringr::str_c("package:", pkg$package)
 }
+
+clear_classes <- function(pkg) {
+  pkg <- as.package(pkg)
+  name <- env_name(pkg)
+  classes <- getClasses(name)
+  l_ply(classes, removeClass, where = name)
+}
