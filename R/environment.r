@@ -32,5 +32,5 @@ clear_pkg_env <- function(pkg) {
 #' @keywords internal
 env_name <- function(pkg) {
   pkg <- as.package(pkg)
-  stringr::str_c("devel:", pkg$package)
+  stringr::str_c("package:", pkg$package)
 }
