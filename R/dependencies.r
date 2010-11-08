@@ -26,7 +26,7 @@ parse_deps <- function(string) {
   if (is.null(string)) return()
   
   # Remove version specifications
-  string <- str_replace(string, "\\s*\\(.*?\\)", "")
+  string <- str_replace_all(string, "\\s*\\(.*?\\)", "")
   
   # Split into pieces and remove R dependency
   pieces <- str_split(string, ",(\\s|\n)*")[[1]]
