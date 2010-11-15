@@ -9,5 +9,6 @@ test <- function(pkg) {
   path_test <- file.path(pkg$path, "inst", "tests")
   if (!file.exists(path_test)) return()
   
+  require(testthat)
   test_dir(path_test)
 }

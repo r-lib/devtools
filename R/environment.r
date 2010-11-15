@@ -32,12 +32,13 @@ clear_pkg_env <- function(pkg) {
 #' @keywords internal
 env_name <- function(pkg) {
   pkg <- as.package(pkg)
-  stringr::str_c("package:", pkg$package)
+  paste("package:", pkg$package, sep = "")
 }
 
 clear_classes <- function(pkg) {
   pkg <- as.package(pkg)
   name <- env_name(pkg)
   classes <- getClasses(name)
-  l_ply(classes, removeClass, where = name)
+  lapply(classes, removeClass, where = name)
+  invisible()
 }

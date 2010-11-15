@@ -7,5 +7,6 @@
 document <- function(pkg) {
   pkg <- as.package(pkg)
   
+  require(roxygen)
   roxygenise(pkg$path, pkg$path, roclets = c("had", "collate", "namespace"))
 }

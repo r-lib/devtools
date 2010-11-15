@@ -6,12 +6,12 @@
 update_src <- function(pkg) {
   pkg <- as.package(pkg)
   
-  cmd <- str_c("cd ", pkg$path, " && ")
+  cmd <- paste("cd ", pkg$path, " && ", sep = "")
   
   if (is.svn(pkg)) {
-    cmd <- str_c(cmd, "svn up")
+    cmd <- paste(cmd, "svn up", sep = "")
   } else if (is.git(pkg)) {
-    cmd <- str_c(cmd, "git pull")    
+    cmd <- paste(cmd, "git pull", sep = "")
   } else {
     stop("Unknown rcs software")
   }

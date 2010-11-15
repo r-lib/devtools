@@ -1,7 +1,7 @@
 #' Generate checksums for a vector of file paths.
 #' @keywords internal
 md5 <- function(paths) {
-  unlist(plyr::llply(paths, tools::md5sum))
+  unlist(lapply(paths, tools::md5sum))
 }
 
 make_cache <- function() {

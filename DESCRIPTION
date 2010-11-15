@@ -4,8 +4,7 @@ Version: 0.1
 Author: Hadley Wickham <h.wickham@gmail.com>
 Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Description: Collection of package development tools
-Depends: testthat, profr, roxygen, stringr
-Imports: plyr
+Suggests: testthat, roxygen, profr
 License: MIT
 Collate: 'all.r' 'c.r' 'code.r' 'common-mistakes.r'
     'data.r' 'dependencies.r' 'documentation.r' 'echo.r'

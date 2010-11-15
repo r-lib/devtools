@@ -12,7 +12,7 @@ load_deps <- function(pkg) {
   
   if (length(deps) == 0) return(invisible())
   
-  plyr::l_ply(deps, require, character.only = TRUE, quietly = TRUE, 
+  lapply(deps, require, character.only = TRUE, quietly = TRUE, 
     warn.conflicts = FALSE)
   
   invisible(deps)
@@ -26,9 +26,9 @@ parse_deps <- function(string) {
   if (is.null(string)) return()
   
   # Remove version specifications
-  string <- str_replace_all(string, "\\s*\\(.*?\\)", "")
+  string <- gsub("\\s*\\(.*?\\)", "", string)
   
   # Split into pieces and remove R dependency
-  pieces <- str_split(string, ",(\\s|\n)*")[[1]]
+  pieces <- strsplit(string, ",(\\s|\n)*")[[1]]
   pieces[pieces != "R"]
 }

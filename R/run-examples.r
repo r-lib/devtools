@@ -24,17 +24,17 @@ run_examples <- function(pkg, start = NULL) {
     }
   }
   
-  parsed <- llply(files, tools::parse_Rd)
+  parsed <- lapply(files, tools::parse_Rd)
 
   extract_examples <- function(rd) {
     tags <- tools:::RdTags(rd)
     paste(unlist(rd[tags == "\\examples"]), collapse = "")
   }
 
-  examples <- llply(parsed, extract_examples)
+  examples <- lapply(parsed, extract_examples)
   examples <- examples[examples != ""]
-  m_ply(cbind(names(examples), example = examples), run_example,
-    parent.frame())  
+  mapply(run_example, names(examples), examples, run_example,
+    MoreArgs = list(parent.frame()))  
 }
 
 run_example <- function(name, example, env = parent.frame()) {

@@ -12,7 +12,8 @@
 #'   quote(if (drop) warning("drop = TRUE"))
 #' )
 trace_all <- function(fs, tracer) {
-  l_ply(fs, trace, exit = tracer, print = FALSE)
+  lapply(fs, trace, exit = tracer, print = FALSE)
+  invisible()
 }
 
 #' Find all functions with specified argument.

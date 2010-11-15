@@ -12,6 +12,6 @@ load_c <- function(pkg) {
   
   paths <- dir(path_src, "\\.(so|dll)$", full = TRUE)
 
-  l_ply(paths, dyn.load)
+  lapply(paths, dyn.load)
   invisible(paths)
 }

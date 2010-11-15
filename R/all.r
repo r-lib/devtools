@@ -13,7 +13,7 @@ load_all <- function(pkg, reset = FALSE) {
   # If installed version of package loaded, unload it
   name <- env_name(pkg)
   if (any(name == search()) && environmentIsLocked(as.environment(name))) {
-    detach(name, character.only = TRUE)
+    detach(name, character.only = TRUE, force = TRUE)
   }
   
   # Load dependencies before creating environment so it sees all the required
