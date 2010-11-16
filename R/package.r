@@ -26,8 +26,9 @@ find_package <- function(x) {
     return(x)
 
   # If .Rpackages exists, use that to find the package locations
-  if (file.exists("~/.Rpackages")) {
-    lookup <- source("~/.Rpackages")$value
+  config_path <- path.expand("~/.Rpackages")
+  if (file.exists(config_path)) {
+    lookup <- source(config_path)$value
     
     # Try default function, if it exists
     if (!is.null(lookup$default)) {
