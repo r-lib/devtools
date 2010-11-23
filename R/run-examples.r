@@ -33,7 +33,7 @@ run_examples <- function(pkg, start = NULL) {
 
   examples <- lapply(parsed, extract_examples)
   examples <- examples[examples != ""]
-  mapply(run_example, names(examples), examples, run_example,
+  mapply(run_example, names(examples), examples, 
     MoreArgs = list(parent.frame()))  
 }
 
