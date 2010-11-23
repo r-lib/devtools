@@ -8,5 +8,12 @@ document <- function(pkg) {
   pkg <- as.package(pkg)
   
   require(roxygen)
-  roxygenise(pkg$path, pkg$path, roclets = c("had", "collate", "namespace"))
+  if (exists("roxygenise")) {
+    # My version of roxygen
+    roxygenise(pkg$path, pkg$path, roclets = c("had", "collate", "namespace"))
+  } else {
+    # Standard version of roxygen
+    roxygenize(pkg$path, pkg$path)
+  }
+  
 }
