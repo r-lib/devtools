@@ -22,7 +22,6 @@ load_deps <- function(pkg) {
 #' @return character vector of package names
 #' @keywords internal
 parse_deps <- function(string) {
-  library(stringr)
   if (is.null(string)) return()
   
   # Remove version specifications
