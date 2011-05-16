@@ -28,6 +28,7 @@ parse_deps <- function(string) {
   string <- gsub("\\s*\\(.*?\\)", "", string)
   
   # Split into pieces and remove R dependency
-  pieces <- strsplit(string, ",(\\s|\n)*")[[1]]
+  pieces <- strsplit(string, ",")[[1]]
+  pieces <- gsub("^\\s+|\\s+$", "", pieces)
   pieces[pieces != "R"]
 }
