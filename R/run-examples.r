@@ -24,7 +24,7 @@ run_examples <- function(pkg, start = NULL) {
     }
   }
   
-  parsed <- lapply(files, tools::parse_Rd)
+  suppressWarnings(parsed <- lapply(files, tools::parse_Rd))
 
   extract_examples <- function(rd) {
     tags <- tools:::RdTags(rd)
@@ -33,14 +33,22 @@ run_examples <- function(pkg, start = NULL) {
 
   examples <- lapply(parsed, extract_examples)
   examples <- examples[examples != ""]
+
+  message("Running ", length(examples), " examples")
+  message(paste(rep("-", getOption("width"), collapse = "")))
   mapply(run_example, names(examples), examples, 
     MoreArgs = list(parent.frame()))  
 }
 
 run_example <- function(name, example, env = parent.frame()) {
   message("Checking ", name, "...")
-  src <- srcfilecopy("<text>", example)
-  eval.echo(parse(text = example, srcfile = src), env)
+  
+  # Write out to temporary file to circumvent bug in source + echo = T
+  tmp <- tempfile()
+  on.exit(unlink(tmp))
+
+  writeLines(example, tmp)
+  source(tmp, echo = TRUE, keep.source = TRUE, max.deparse.length = Inf)
 }
 
 # If an error occurs, should print out the suspect line of code, and offer

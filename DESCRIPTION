@@ -7,7 +7,7 @@ Description: Collection of package development tools
 Suggests: testthat, roxygen, profr
 License: MIT
 Collate: 'all.r' 'c.r' 'code.r' 'common-mistakes.r'
-    'data.r' 'dependencies.r' 'documentation.r' 'echo.r'
+    'data.r' 'dependencies.r' 'documentation.r'   
     'environment.r' 'file-cache.r' 'news.r' 'package.r'
     'rcs.r' 'run-examples.r' 'test.r' 'utils.r'
     'vignettes.r'
