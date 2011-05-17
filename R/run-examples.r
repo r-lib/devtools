@@ -42,6 +42,7 @@ run_examples <- function(pkg, start = NULL) {
 
 run_example <- function(name, example, env = parent.frame()) {
   message("Checking ", name, "...")
+  message(paste(rep("-", getOption("width"), collapse = "")))
   
   # Write out to temporary file to circumvent bug in source + echo = T
   tmp <- tempfile()
@@ -49,6 +50,7 @@ run_example <- function(name, example, env = parent.frame()) {
 
   writeLines(example, tmp)
   source(tmp, echo = TRUE, keep.source = TRUE, max.deparse.length = Inf)
+  cat("\n\n")
 }
 
 # If an error occurs, should print out the suspect line of code, and offer
