@@ -38,7 +38,10 @@ env_name <- function(pkg) {
 clear_classes <- function(pkg) {
   pkg <- as.package(pkg)
   name <- env_name(pkg)
-  classes <- getClasses(name)
-  lapply(classes, removeClass, where = name)
+  
+  if (name %in% search()) {
+    classes <- getClasses(name)
+    lapply(classes, removeClass, where = name)    
+  }
   invisible()
 }
