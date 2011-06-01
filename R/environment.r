@@ -11,7 +11,7 @@ pkg_env <- function(pkg) {
   pkg <- as.package(pkg)
   name <- env_name(pkg)
   
-  if (!(name %in% search())) {
+  if (!is.loaded(pkg)) {
     attach(new.env(parent = emptyenv()), name = name)
   }
   
@@ -21,10 +21,9 @@ pkg_env <- function(pkg) {
 #' Detach development environment
 #' @keywords internal
 clear_pkg_env <- function(pkg) {
-  name <- env_name(pkg)
   
-  if (name %in% search()) {
-    detach(name, character.only = TRUE)
+  if (is.loaded(pkg)) {
+    unload(pkg)
   }  
 }
 
@@ -37,11 +36,10 @@ env_name <- function(pkg) {
 
 clear_classes <- function(pkg) {
   pkg <- as.package(pkg)
-  name <- env_name(pkg)
+  if (!is.loaded(pkg)) return()
   
-  if (name %in% search()) {
-    classes <- getClasses(name)
-    lapply(classes, removeClass, where = name)    
-  }
+  name <- env_name(pkg)
+  classes <- getClasses(name)
+  lapply(classes, removeClass, where = name)    
   invisible()
 }

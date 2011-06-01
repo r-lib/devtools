@@ -1,5 +1,6 @@
 #' Install a package.
 #'
+#' @export
 install <- function(pkg) {
   pkg <- as.package(pkg)
   
