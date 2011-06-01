@@ -1,4 +1,7 @@
-check_doc <- function(pkg, start = NULL) {
+#' Check package documentation.
+#'
+#' @export
+check_doc <- function(pkg) {
   pkg <- as.package(pkg)
   
   path_man <- file.path(pkg$path, "man")
