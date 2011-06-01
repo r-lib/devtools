@@ -1,7 +1,7 @@
 \name{show_news}
 \alias{show_news}
 \title{Show package news...}
-\usage{show_news(pkg, ...)}
+\usage{show_news(pkg, latest=TRUE, ...)}
 
 \description{
   Show package news
@@ -9,4 +9,7 @@
 \arguments{
   \item{pkg}{package description, can be path or package name.  See
 \code{\link{as.package}} for more information}
+  \item{latest}{if \code{TRUE}, only show the news for the most recent 
+version.}
+  \item{...}{other arguments passed on to \code{news}}
 }
