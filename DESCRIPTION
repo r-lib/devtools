@@ -13,6 +13,7 @@ Collate:
     'all.r'
     'c.r'
     'check-rd.r'
+    'check.r'
     'code.r'
     'common-mistakes.r'
     'data.r'
