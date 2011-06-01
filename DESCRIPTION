@@ -4,10 +4,26 @@ Version: 0.1
 Author: Hadley Wickham <h.wickham@gmail.com>
 Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Description: Collection of package development tools
-Suggests: testthat, roxygen, profr
+Suggests:
+    testthat,
+    roxygen,
+    profr
 License: MIT
-Collate: 'all.r' 'c.r' 'code.r' 'common-mistakes.r'
-    'data.r' 'dependencies.r' 'documentation.r'   
-    'environment.r' 'file-cache.r' 'news.r' 'package.r'
-    'rcs.r' 'run-examples.r' 'test.r' 'utils.r'
-    'vignettes.r' 'check-rd.r'
+Collate:
+    'all.r'
+    'c.r'
+    'check-rd.r'
+    'code.r'
+    'common-mistakes.r'
+    'data.r'
+    'dependencies.r'
+    'documentation.r'
+    'environment.r'
+    'file-cache.r'
+    'news.r'
+    'package.r'
+    'rcs.r'
+    'run-examples.r'
+    'test.r'
+    'utils.r'
+    'vignettes.r'
