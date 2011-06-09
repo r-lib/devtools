@@ -9,11 +9,12 @@ check <- function(pkg) {
   in_dir(dirname(pkg$path), {
     targz <- paste(pkg$package, "_", pkg$version, ".tar.gz", sep = "")
     
-    system(paste("R CMD build ", basename(pkg$path), sep = ""))
+    system(paste("R CMD build ", shQuote(basename(pkg$path)), sep = ""))
     res <- system(paste("R CMD check ", targz, sep = ""))
     
     if (res != 0) {
-      stop("R CMD check ", pkg$package, " failed", call. = FALSE, sep = "")
+      stop("R CMD check ", shQuote(pkg$package), " failed", call. = FALSE, 
+        sep = "")
     }
     
     unlink(targz)
