@@ -9,6 +9,6 @@ install <- function(pkg) {
   pkg <- as.package(pkg)
   
   in_dir(dirname(pkg$path), {
-    system(paste("R CMD install ", basename(pkg$path), sep = ""))    
+    system(paste("R CMD INSTALL ", basename(pkg$path), sep = ""))    
   })  
 }
