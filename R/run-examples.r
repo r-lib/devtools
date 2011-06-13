@@ -23,33 +23,33 @@ run_examples <- function(pkg, start = NULL) {
       files <- files[- seq(1, start_pos - 1)]
     }
   }
-  
-  suppressWarnings(parsed <- lapply(files, tools::parse_Rd))
-
-  extract_examples <- function(rd) {
+      
+  suppressWarnings(rd <- lapply(files, tools::parse_Rd))
+  has_examples <- function(rd) {
     tags <- tools:::RdTags(rd)
-    paste(unlist(rd[tags == "\\examples"]), collapse = "")
+    any(tags == "\\examples")
   }
+  rd <- Filter(has_examples, rd)
 
-  examples <- lapply(parsed, extract_examples)
-  examples <- examples[examples != ""]
-
-  message("Running ", length(examples), " examples")
+  message("Running ", length(rd), " examples")
   message(paste(rep("-", getOption("width"), collapse = "")))
-  mapply(run_example, names(examples), examples, 
+  mapply(run_example, names(rd), rd, 
     MoreArgs = list(parent.frame()))  
+  invisible()
 }
 
-run_example <- function(name, example, env = parent.frame()) {
+run_example <- function(name, rd, env = parent.frame()) {
   message("Checking ", name, "...")
   message(paste(rep("-", getOption("width"), collapse = "")))
   
-  # Write out to temporary file to circumvent bug in source + echo = T
+  # Need to write out to temporary file to circumvent bug in source + echo = T
   tmp <- tempfile()
   on.exit(unlink(tmp))
 
-  writeLines(example, tmp)
-  source(tmp, echo = TRUE, keep.source = TRUE, max.deparse.length = Inf)
+  # Use internal Rd2ex code which strips out \dontrun etc
+  tools:::Rd2ex(rd, tmp)
+  source(tmp, echo = TRUE, keep.source = TRUE, max.deparse.length = Inf,
+    skip.echo = 6)
   cat("\n\n")
 }
 

@@ -7,5 +7,7 @@
   Find all functions with specified argument.
 }
 \keyword{programming}
-\examples{functions_with_arg("drop", "package:base")
-functions_with_arg("na.rm", "package:base")}
+\examples{\dontrun{
+functions_with_arg("drop", "package:base")
+functions_with_arg("na.rm", "package:base")
+}}

@@ -3,6 +3,7 @@
 #' @keywords programming
 #' @export 
 #' @examples
+#' \dontrun{
 #' trace_all(
 #'   functions_with_arg("na.rm", "package:base"), 
 #'   quote(if (!na.rm) warning("na.rm = FALSE"))
@@ -11,6 +12,7 @@
 #'   functions_with_arg("drop", "package:base"), 
 #'   quote(if (drop) warning("drop = TRUE"))
 #' )
+#' }
 trace_all <- function(fs, tracer) {
   lapply(fs, trace, exit = tracer, print = FALSE)
   invisible()
@@ -21,8 +23,10 @@ trace_all <- function(fs, tracer) {
 #' @keywords programming
 #' @export
 #' @examples
+#' \dontrun{
 #' functions_with_arg("drop", "package:base")
 #' functions_with_arg("na.rm", "package:base")
+#' }
 functions_with_arg <- function(arg, pos) {
   fs <- ls(pos=pos)
   
