@@ -13,15 +13,26 @@ These tools are described in more detail below.
 
 ## Installation
 
-While developing a package, you often want to reload all objects in the package without having to quit R, run `R CMD install` and then reopen. `load_all` will package dependencies described in `DESCRIPTION`, R code in `R/`, compiled shared objects in  `src/`, data files in `data/`.
+There are two ways to reload the package from disk:
 
-It keeps your global workspace clean by loading all objects into an environment called `devel:package-name`, and works efficiently by only reload files that have changed.
+* `load_all("pkg")` will package dependencies described in `DESCRIPTION`, R
+  code in `R/`, compiled shared objects in `src/`, data files in `data/`. It
+  keeps your global workspace clean by loading all objects into a package
+  environment, and works efficiently by only reloading files that have
+  changed. During development you usually want to access all functions (even
+  if not exported), so `load_all` ignores the package `NAMESPACE`.
+
+* Alternatively, you can run `install("pkg") && reload("pkg")`. This will
+  reinstall the package using `R CMD install`, detach the package namespace
+  and the then reload the package using `library`. Non-internal functions will
+  not be available, so this slower option is more suitable as you get closer
+  to release.
 
 ## Referring to a package
 
-All `devtools` functions as either a path or a name. If you specify a name it will load `~/.Rpackages`, and try the path given by the default function, if it's not there, it will look up the package name in the list and use that path.  
+All `devtools` functions accept either a path or a name. If you're only developing a small number of packages, the easiest way to use devtools is ensure that your working directory is set to the directory in which you package lives.
 
-For example, a small section of my `~/.Rpackages` looks like this:
+If you are developing many packges, it may be more convenient to refer to packages by name. In this case, `devtools` will `~/.Rpackages`, and try the path given by the default function, if it's not there, it will look up the package name in the list and use that path. For example, a small section of my `~/.Rpackages` looks like this:
 
     list(
         default = function(x) {
@@ -32,21 +43,3 @@ For example, a small section of my `~/.Rpackages` looks like this:
       "tourr" =    "~/documents/tour/tourr", 
       "mutatr" = "~/documents/oo/mutatr"
     )
-
-## `.Rprofile`
-
-To make it even easier to use, you might want to add the following lines to your `.Rprofile`:
-
-    if (interactive()) {
-      suppressMessages(require(devtools))
-      l <- function(pkg, ...) {
-        pkg <- tolower(deparse(substitute(pkg)))
-        
-        
-        load_all(pkg, ...)
-      }  
-    }
-
-That way you can reload any development package with the minimum of typing.
-
-Make sure that there is a newline at the end of the file - otherwise R will (silently) ignore the if statement.
