@@ -5,15 +5,19 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @param reload if \code{TRUE} (the default), will automatically reload the 
+#'   package after installing.
 #' @export
-install <- function(pkg = NULL) {
+install <- function(pkg = NULL, reload = TRUE) {
   pkg <- as.package(pkg)
   message("Installing ", pkg$package)
   install_deps(pkg)  
   
   in_dir(dirname(pkg$path), {
-    system_check(paste("R CMD INSTALL ", shQuote(basename(pkg$path)), sep = ""))    
+    system_check(paste("R CMD INSTALL ", shQuote(basename(pkg$path)), 
+      sep = ""))    
   })
+  reload(pkg)
 }
 
 install_deps <- function(pkg = NULL) {
