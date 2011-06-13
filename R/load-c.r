@@ -4,7 +4,7 @@
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
 #' @export
-load_c <- function(pkg) {
+load_c <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   
   path_src <- file.path(pkg$path, "src")

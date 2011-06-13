@@ -3,7 +3,7 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @export
-test <- function(pkg) {
+test <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   
   path_test <- file.path(pkg$path, "inst", "tests")

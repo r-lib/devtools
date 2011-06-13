@@ -7,7 +7,7 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
-pkg_env <- function(pkg) {
+pkg_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   name <- env_name(pkg)
   
@@ -20,7 +20,7 @@ pkg_env <- function(pkg) {
 
 #' Detach development environment
 #' @keywords internal
-clear_pkg_env <- function(pkg) {
+clear_pkg_env <- function(pkg = NULL) {
   
   if (is.loaded(pkg)) {
     unload(pkg)
@@ -29,12 +29,12 @@ clear_pkg_env <- function(pkg) {
 
 #' Generate name of package development environment
 #' @keywords internal
-env_name <- function(pkg) {
+env_name <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   paste("package:", pkg$package, sep = "")
 }
 
-clear_classes <- function(pkg) {
+clear_classes <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   if (!is.loaded(pkg)) return()
   

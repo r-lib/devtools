@@ -6,7 +6,7 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @export
-install <- function(pkg) {
+install <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   install_deps(pkg)  
   
@@ -15,7 +15,7 @@ install <- function(pkg) {
   })
 }
 
-install_deps <- function(pkg) {
+install_deps <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   deps <- c(parse_deps(pkg$depends), parse_deps(pkg$imports), 
     parse_deps(pkg$suggests), parse_deps(pkg$enhances),

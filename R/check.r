@@ -3,7 +3,7 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @export
-check <- function(pkg) {
+check <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   
   in_dir(dirname(pkg$path), {

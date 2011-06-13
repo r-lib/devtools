@@ -6,7 +6,7 @@
 #'   version.
 #' @param ... other arguments passed on to \code{news}
 #' @export
-show_news <- function(pkg, latest = TRUE, ...) {
+show_news <- function(pkg = NULL, latest = TRUE, ...) {
   pkg <- as.package(pkg)
   news_path <- file.path(pkg$path, "NEWS")
   

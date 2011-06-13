@@ -1,7 +1,7 @@
 #' Detach and reload package.
 #' 
 #' @export
-reload <- function(pkg) {
+reload <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   name <- env_name(pkg)
   
@@ -10,10 +10,10 @@ reload <- function(pkg) {
   
 }
 
-is.loaded <- function(pkg) {
+is.loaded <- function(pkg = NULL) {
   env_name(pkg) %in% search()
 }
 
-unload <- function(pkg) {
+unload <- function(pkg = NULL) {
   detach(env_name(pkg), character.only = TRUE, force = TRUE, unload = TRUE)
 }

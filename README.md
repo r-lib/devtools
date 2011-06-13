@@ -22,7 +22,7 @@ There are two ways to reload the package from disk:
   changed. During development you usually want to access all functions (even
   if not exported), so `load_all` ignores the package `NAMESPACE`.
 
-* Alternatively, you can run `install("pkg") && reload("pkg")`. This will
+* Alternatively, you can run `install("pkg"); reload()`. This will
   reinstall the package using `R CMD install`, detach the package namespace
   and the then reload the package using `library`. Non-internal functions will
   not be available, so this slower option is more suitable as you get closer
@@ -43,3 +43,6 @@ If you are developing many packges, it may be more convenient to refer to packag
       "tourr" =    "~/documents/tour/tourr", 
       "mutatr" = "~/documents/oo/mutatr"
     )
+
+If you don't specify a package, `devtools` will use the last package you referred to.
+

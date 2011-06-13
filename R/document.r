@@ -6,7 +6,7 @@
 #'   check documentation after running roxygen.
 #' @keywords programming
 #' @export
-document <- function(pkg, check = TRUE) {
+document <- function(pkg = NULL, check = TRUE) {
   message("Updating documentation with roxygen")
   pkg <- as.package(pkg)
   
@@ -23,7 +23,7 @@ document <- function(pkg, check = TRUE) {
   invisible()
 }
 
-check_doc <- function(pkg) {
+check_doc <- function(pkg = NULL) {
   message("Checking documentation")
   pkg <- as.package(pkg)
 

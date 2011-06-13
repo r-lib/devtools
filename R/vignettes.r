@@ -5,7 +5,7 @@
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
 #' @export
-build_vignettes <- function(pkg) {
+build_vignettes <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   
   path_vig <- file.path(pkg$path, "inst", "doc")

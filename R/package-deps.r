@@ -6,7 +6,7 @@
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
 #' @export
-load_deps <- function(pkg) {
+load_deps <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   deps <- c(parse_deps(pkg$depends), parse_deps(pkg$imports))
   

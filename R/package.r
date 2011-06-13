@@ -9,7 +9,14 @@
 #' }
 #' @param x object to coerce to a package
 #' @export
-as.package <- function(x) {
+as.package <- function(x = NULL) {
+  if (is.null(x)) {
+    x <- get_last_package()
+  }
+  if (is.null(x)) {
+    stop("No package specified", call. = FALSE)
+  }
+  
   if (is.package(x)) 
     return(x)
   
@@ -17,9 +24,25 @@ as.package <- function(x) {
   if (is.null(path)) {
     stop("Can't find package ", x, call. = FALSE)
   }
-    
-  load_pkg_description(path)
+  
+  pkg <- load_pkg_description(path)
+  set_last_package(pkg)
 }
+
+get_last_package <- NULL
+set_last_package <- NULL
+local({
+  package <- NULL
+  
+  get_last_package <<- function() {
+    package
+  }
+  set_last_package <<- function(x) {
+    package <<- x
+    x
+  }
+
+})
 
 find_package <- function(x) {
   if (file.exists(x)) 

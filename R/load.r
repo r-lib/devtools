@@ -7,7 +7,7 @@
 #' 
 #' @keywords programming
 #' @export
-load_all <- function(pkg, reset = FALSE) {
+load_all <- function(pkg = NULL, reset = FALSE) {
   pkg <- as.package(pkg)
   
   # If installed version of package loaded, unload it
@@ -34,6 +34,6 @@ load_all <- function(pkg, reset = FALSE) {
 }
 
 
-is.locked <- function(pkg) {
+is.locked <- function(pkg = NULL) {
   environmentIsLocked(as.environment(env_name(pkg)))
 }

@@ -9,7 +9,7 @@
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
 #' @export
-run_examples <- function(pkg, start = NULL) {
+run_examples <- function(pkg = NULL, start = NULL) {
   pkg <- as.package(pkg)
   
   path_man <- file.path(pkg$path, "man")
