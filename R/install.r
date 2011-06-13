@@ -17,7 +17,9 @@ install <- function(pkg = NULL, reload = TRUE) {
     system_check(paste("R CMD INSTALL ", shQuote(basename(pkg$path)), 
       sep = ""))    
   })
-  reload(pkg)
+
+  if (reload) reload(pkg)
+  invisible(TRUE)
 }
 
 install_deps <- function(pkg = NULL) {
@@ -48,25 +50,26 @@ install_deps <- function(pkg = NULL) {
 #' install_github("roxygen")
 #' }
 install_github <- function(repo, username = "hadley") {
-  url <- paste("http://github.com/", username, "/", repo, sep = "")
+  message("Installing ", repo, " from ", username)
+  name <- paste(username, "-", repo, sep = "")
+  url <- paste("https://github.com/", username, "/", repo, sep = "")
   
-  # Check that this is actually an R package
-  desc_url <- paste(url, "/blob/master/DESCRIPTION/raw")
-  if (length(readLines(desc_url)) == 0) {
+  # Download and unzip repo zip
+  zip_url <- paste("https://nodeload.github.com/", username, "/", repo,
+    "/zipball/master", sep = "")
+  src <- file.path(tempdir(), paste(name, ".zip", sep = ""))
+  download.file(zip_url, src, method = "wget", quiet = TRUE)
+  on.exit(unlink(src), add = TRUE)
+  
+  out_path <- file.path(tempdir(), unzip(src, list = TRUE)$Name[1])
+  unzip(src, exdir = tempdir())
+  on.exit(unlink(out_path), add = TRUE)
+  
+  # Check it's an R package
+  if (!file.exists(file.path(out_path, "DESCRIPTION"))) {
     stop("Does not appear to be an R package", call. = FALSE)
   }
   
-  # Download repo zip
-  name <- paste(username, "-", rep, sep = "")
-  src <- file.path(tempdir(), paste(name, ".zip", sep = ""))
-  download.file(paste(url, "/...zip"), src)
-  on.exit(unlink(src))
-  
-  # Extract 
-  src_dir <- file.path(tempdir(), name)
-  unzip(src, exdir = src_dir)
-  on.exit(unlink(src_dir), add = TRUE)
-  
   # Install
-  install(src_dir)
+  install(out_path, reload = FALSE)
 }
