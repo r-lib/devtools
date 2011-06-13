@@ -12,7 +12,7 @@ install <- function(pkg = NULL) {
   install_deps(pkg)  
   
   in_dir(dirname(pkg$path), {
-    system(paste("R CMD INSTALL ", shQuote(basename(pkg$path)), sep = ""))    
+    system_check(paste("R CMD INSTALL ", shQuote(basename(pkg$path)), sep = ""))    
   })
 }
 

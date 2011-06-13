@@ -25,6 +25,7 @@ Collate:
     'package.r'
     'reload.r'
     'run-examples.r'
+    'system.r'
     'test.r'
     'update-src.r'
     'utils.r'

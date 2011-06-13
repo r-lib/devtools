@@ -10,15 +10,11 @@ check <- function(pkg = NULL) {
   in_dir(dirname(pkg$path), {
     targz <- paste(pkg$package, "_", pkg$version, ".tar.gz", sep = "")
     
-    system(paste("R CMD build ", shQuote(basename(pkg$path)), sep = ""))
-    res <- system(paste("R CMD check ", targz, sep = ""))
+    system_check(paste("R CMD build ", shQuote(basename(pkg$path)), sep = ""))
+    on.exit(unlink(targz))
     
-    if (res != 0) {
-      stop("R CMD check ", shQuote(pkg$package), " failed", call. = FALSE, 
-        sep = "")
-    }
-    
-    unlink(targz)
+    system_check(paste("R CMD check ", targz, sep = ""))
     unlink(paste(pkg$package, ".Rcheck", sep = ""))
-  })  
+  })
+  invisible(TRUE)
 }
