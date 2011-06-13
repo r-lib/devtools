@@ -5,6 +5,7 @@
 #' @export
 update_src <- function(pkg = NULL) {
   pkg <- as.package(pkg)
+  message("Updating ", pkg$package, " source")
   
   cmd <- paste("cd ", pkg$path, " && ", sep = "")
   

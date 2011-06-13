@@ -5,6 +5,7 @@
 #' @export
 check <- function(pkg = NULL) {
   pkg <- as.package(pkg)
+  message("Checking ", pkg$package)
   
   in_dir(dirname(pkg$path), {
     targz <- paste(pkg$package, "_", pkg$version, ".tar.gz", sep = "")

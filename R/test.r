@@ -5,6 +5,7 @@
 #' @export
 test <- function(pkg = NULL) {
   pkg <- as.package(pkg)
+  message("Testing ", pkg$package)
   
   path_test <- file.path(pkg$path, "inst", "tests")
   if (!file.exists(path_test)) return()

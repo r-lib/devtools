@@ -3,10 +3,11 @@
 #' @export
 reload <- function(pkg = NULL) {
   pkg <- as.package(pkg)
+  message("Reloading installed ", pkg$package)
   name <- env_name(pkg)
   
   if (is.loaded(pkg)) unload(pkg)
-  require(pkg$package, character.only = TRUE)
+  require(pkg$package, character.only = TRUE, quiet = TRUE)
   
 }
 

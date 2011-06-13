@@ -9,6 +9,7 @@
 #' @export
 load_all <- function(pkg = NULL, reset = FALSE) {
   pkg <- as.package(pkg)
+  message("Loading ", pkg$package)
   
   # If installed version of package loaded, unload it
   if (is.loaded(pkg) && is.locked(pkg)) {

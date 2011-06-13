@@ -8,6 +8,7 @@
 #' @export
 install <- function(pkg = NULL) {
   pkg <- as.package(pkg)
+  message("Installing ", pkg$package)
   install_deps(pkg)  
   
   in_dir(dirname(pkg$path), {
@@ -27,7 +28,8 @@ install_deps <- function(pkg = NULL) {
   
   if (length(deps) == 0) return(invisible())
   
-  message("Installing dependencies: ", paste(deps, collapse = ", "))
+  message("Installing dependencies for ", pkg$package, ":\n", 
+    paste(deps, collapse = ", "))
   install.packages(deps)
   invisible(deps)
 }

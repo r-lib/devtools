@@ -7,8 +7,8 @@
 #' @keywords programming
 #' @export
 document <- function(pkg = NULL, check = TRUE) {
-  message("Updating documentation with roxygen")
   pkg <- as.package(pkg)
+  message("Updating ", pkg$package, " documentation")
   
   require(roxygen)
   if (exists("roxygenise")) {
@@ -24,7 +24,7 @@ document <- function(pkg = NULL, check = TRUE) {
 }
 
 check_doc <- function(pkg = NULL) {
-  message("Checking documentation")
+  message("Checking ", pkg$package, " documentation")
   pkg <- as.package(pkg)
 
   check <- tools:::.check_package_description(

@@ -31,7 +31,7 @@ run_examples <- function(pkg = NULL, start = NULL) {
   }
   rd <- Filter(has_examples, rd)
 
-  message("Running ", length(rd), " examples")
+  message("Running ", length(rd), " examples in ", pkg$package)
   message(paste(rep("-", getOption("width"), collapse = "")))
   mapply(run_example, names(rd), rd, 
     MoreArgs = list(parent.frame()))  
