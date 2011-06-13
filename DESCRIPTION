@@ -14,6 +14,7 @@ Collate:
     'common-mistakes.r'
     'document.r'
     'file-cache.r'
+    'has-devel.r'
     'install.r'
     'load-c.r'
     'load-code.r'
