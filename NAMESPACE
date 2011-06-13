@@ -1,7 +1,6 @@
 export(load_all)
 export(load_or_library)
 export(load_c)
-export(check_doc)
 export(check)
 export(load_code)
 export(trace_all)
