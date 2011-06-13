@@ -7,9 +7,13 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @param document if \code{TRUE} (the default), will update and check
+#'   documentation before running formal check.
 #' @export
-check <- function(pkg = NULL) {
+check <- function(pkg = NULL, document = TRUE) {
   pkg <- as.package(pkg)
+  
+  document(pkg)
   message("Checking ", pkg$package)
   
   in_dir(dirname(pkg$path), {
