@@ -31,3 +31,36 @@ install_deps <- function(pkg) {
   install.packages(deps)
   invisible(deps)
 }
+
+#' Attempts to install a package directly from github.
+#'
+#' @param username Github username
+#' @param repo Repo name
+#' @export
+#' @examples
+#' \dontrun{
+#' install_github("roxygen")
+#' }
+install_github <- function(repo, username = "hadley") {
+  url <- paste("http://github.com/", username, "/", repo, sep = "")
+  
+  # Check that this is actually an R package
+  desc_url <- paste(url, "/blob/master/DESCRIPTION/raw")
+  if (length(readLines(desc_url)) == 0) {
+    stop("Does not appear to be an R package", call. = FALSE)
+  }
+  
+  # Download repo zip
+  name <- paste(username, "-", rep, sep = "")
+  src <- file.path(tempdir(), paste(name, ".zip", sep = ""))
+  download.file(paste(url, "/...zip"), src)
+  on.exit(unlink(src))
+  
+  # Extract 
+  src_dir <- file.path(tempdir(), name)
+  unzip(src, exdir = src_dir)
+  on.exit(unlink(src_dir), add = TRUE)
+  
+  # Install
+  install(src_dir)
+}
