@@ -1,6 +1,4 @@
 export(check)
-export(trace_all)
-export(functions_with_arg)
 export(document)
 export(install)
 export(install_github)

@@ -1,5 +1,7 @@
 #' Detach and reload package.
 #' 
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
 #' @export
 reload <- function(pkg = NULL) {
   pkg <- as.package(pkg)

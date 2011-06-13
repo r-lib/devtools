@@ -7,6 +7,10 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @param start name of \code{Rd} file to start with - if omitted, will start
+#'   with the (lexicographically) first file.  This is useful if you have a 
+#'   lot of examples and don't want to rerun them every time when you fix a 
+#'   problem.
 #' @keywords programming
 #' @export
 run_examples <- function(pkg = NULL, start = NULL) {

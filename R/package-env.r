@@ -1,4 +1,5 @@
 #' Generate an development environment for a package.
+#'
 #' \code{devtools} keeps the global workspace clean by loading all code and
 #' data into a separate environment.  This environment is 
 #' \code{\link{attach}}ed to the search path just after the global environment
