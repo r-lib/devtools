@@ -24,8 +24,8 @@ document <- function(pkg = NULL, check = TRUE) {
 }
 
 check_doc <- function(pkg = NULL) {
-  message("Checking ", pkg$package, " documentation")
   pkg <- as.package(pkg)
+  message("Checking ", pkg$package, " documentation")
 
   check <- tools:::.check_package_description(
     file.path(pkg$path, "DESCRIPTION"))
