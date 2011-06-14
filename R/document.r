@@ -16,7 +16,7 @@ document <- function(pkg = NULL, check = TRUE) {
     roxygenise(pkg$path, pkg$path, roclets = c("had", "collate", "namespace"))
   } else {
     # Standard version of roxygen
-    roxygenize(pkg$path, pkg$path)
+    roxygenize(pkg$path)
   }
   
   if (check) check_doc(pkg)
