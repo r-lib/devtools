@@ -13,7 +13,9 @@ document <- function(pkg = NULL, check = TRUE) {
   require(roxygen)
   if (exists("roxygenise")) {
     # My version of roxygen
-    roxygenise(pkg$path, pkg$path, roclets = c("had", "collate", "namespace"))
+    in_dir(pkg$path, 
+      roxygenise(".", ".", roclets = c("had", "collate", "namespace"))
+    )
   } else {
     # Standard version of roxygen
     roxygenize(pkg$path, pkg$path)
