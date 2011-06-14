@@ -1,5 +1,6 @@
 export(check)
 export(document)
+export(has_devel)
 export(install)
 export(install_github)
 export(load_c)

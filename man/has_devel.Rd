@@ -11,3 +11,4 @@
 }
 \value{TRUE if your development environment is correctly set up, otherwise
 returns an error.}
+\examples{has_devel()}
