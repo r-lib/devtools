@@ -7,6 +7,7 @@ Description: Collection of package development tools
 Suggests:
     testthat,
     roxygen,
+    RCurl,
     profr
 License: MIT
 Collate:
@@ -25,6 +26,7 @@ Collate:
     'package-deps.r'
     'package-env.r'
     'package.r'
+    'release.r'
     'reload.r'
     'run-examples.r'
     'system.r'

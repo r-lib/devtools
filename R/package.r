@@ -70,6 +70,7 @@ find_package <- function(x) {
 #' Load package DESCRIPTION into convenient form.
 #' @keywords internal
 load_pkg_description <- function(path) {
+  path <- normalizePath(path)
   path_desc <- file.path(path, "DESCRIPTION")
   
   if (!file.exists(path_desc)) {
