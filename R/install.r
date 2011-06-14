@@ -1,7 +1,10 @@
 #' Install a package.
 #'
-#' Uses \code{R CMD install} to install the package. Will also try to install
+#' Uses \code{R CMD INSTALL} to install the package. Will also try to install
 #' dependencies of the package from CRAN, if they're not already installed.
+#'
+#' Installation takes place on a copy of the package produced by 
+#' \code{R CMD build} to avoid modifying the local directory in any way.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
@@ -14,8 +17,12 @@ install <- function(pkg = NULL, reload = TRUE) {
   install_deps(pkg)  
   
   in_dir(dirname(pkg$path), {
-    system_check(paste("R CMD INSTALL ", shQuote(basename(pkg$path)), 
-      sep = ""))    
+    targz <- paste(pkg$package, "_", pkg$version, ".tar.gz", sep = "")
+    
+    system_check(paste("R CMD build ", shQuote(basename(pkg$path)), sep = ""))
+    on.exit(unlink(targz))
+
+    system_check(paste("R CMD INSTALL ", targz, sep = ""))    
   })
 
   if (reload) reload(pkg)

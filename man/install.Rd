@@ -8,9 +8,13 @@
 }
 
 \details{
-  Uses \code{R CMD install} to install the package. Will
+  Uses \code{R CMD INSTALL} to install the package. Will
   also try to install dependencies of the package from
   CRAN, if they're not already installed.
+
+  Installation takes place on a copy of the package
+  produced by \code{R CMD build} to avoid modifying the
+  local directory in any way.
 }
 \arguments{
   \item{pkg}{package description, can be path or package name.  See
