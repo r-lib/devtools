@@ -12,6 +12,7 @@ License: MIT
 Collate:
     'check.r'
     'common-mistakes.r'
+    'devel-mode.r'
     'document.r'
     'file-cache.r'
     'has-devel.r'
