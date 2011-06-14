@@ -1,5 +1,8 @@
 #' Detach and reload package.
 #' 
+#' See the caveats in \code{\link{detach}} for the many reasons why this 
+#' might not work. If in doubt, quit R and restart.
+#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @export
