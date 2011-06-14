@@ -7,7 +7,7 @@
 #'
 #' @param on turn dev mode on (\code{TRUE}) or off (\code{FALSE}).  If omitted
 #'  will guess based on whether or not \code{path} is in
-#'  \code{\link{libPaths}}
+#'  \code{\link{.libPaths}}
 #' @param path directory to for library.
 #' @export
 #' @examples

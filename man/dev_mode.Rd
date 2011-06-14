@@ -17,7 +17,7 @@
 \arguments{
   \item{on}{turn dev mode on (\code{TRUE}) or off (\code{FALSE}).  If omitted
 will guess based on whether or not \code{path} is in
-\code{\link{libPaths}}}
+\code{\link{.libPaths}}}
   \item{path}{directory to for library.}
 }
 \examples{dev_mode()
