@@ -32,7 +32,6 @@ install <- function(pkg = NULL, reload = TRUE) {
 install_deps <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   deps <- c(parse_deps(pkg$depends), parse_deps(pkg$imports), 
-    parse_deps(pkg$suggests), parse_deps(pkg$enhances),
     parse_deps(pkg$linkingto))
   
   # Remove packages that are already installed
