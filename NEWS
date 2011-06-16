@@ -1,0 +1,3 @@
+
+* Check for presence of `DESCRIPTION` when loading packages to avoid false
+  positives

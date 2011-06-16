@@ -45,7 +45,8 @@ local({
 })
 
 find_package <- function(x) {
-  if (file.exists(x)) 
+  desc_path <- file.path(x, "DESCRIPTION")
+  if (file.exists(x) && file.exists(desc_path)) 
     return(x)
 
   # If .Rpackages exists, use that to find the package locations
