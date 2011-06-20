@@ -18,7 +18,7 @@ document <- function(pkg = NULL, check = TRUE) {
     )
   } else {
     # Standard version of roxygen
-    roxygenize(pkg$path, pkg$path)
+    roxygenize(pkg$path, pkg$path, copy.package = FALSE)
   }
   
   if (check) check_doc(pkg)
