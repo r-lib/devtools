@@ -1,3 +1,6 @@
 
 * Check for presence of `DESCRIPTION` when loading packages to avoid false
   positives
+
+* `install` now works correctly with `devel_mode` to install packages in your
+  development library

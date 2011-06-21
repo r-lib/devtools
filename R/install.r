@@ -22,7 +22,8 @@ install <- function(pkg = NULL, reload = TRUE) {
     system_check(paste("R CMD build ", shQuote(basename(pkg$path)), sep = ""))
     on.exit(unlink(targz))
 
-    system_check(paste("R CMD INSTALL ", targz, sep = ""))    
+    system_check(paste("R CMD INSTALL ", targz,
+      " --library=", .libPaths()[1], sep = ""))
   })
 
   if (reload) reload(pkg)
