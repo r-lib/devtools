@@ -22,7 +22,7 @@ release <- function(pkg = NULL) {
   cat("Was package check successful?")
   if(menu(c("Yes", "No")) == 2) return(invisible())
   
-  try(show_news(pkg))
+  try(print(show_news(pkg)))
   cat("Is package news up-to-date?")
   if(menu(c("Yes", "No")) == 2) return(invisible())
   

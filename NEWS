@@ -4,3 +4,6 @@
 
 * `install` now works correctly with `devel_mode` to install packages in your
   development library
+
+* `release` prints news so you can more easily check it
+
