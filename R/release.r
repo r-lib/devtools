@@ -32,7 +32,7 @@ release <- function(pkg = NULL) {
   
   targz <- paste(pkg$package, "_", pkg$version, ".tar.gz", sep = "")
   in_dir(tempdir(), {
-    system_check(paste("R CMD build ", shQuote(pkg$path), sep = ""))
+    R(paste("CMD build ", shQuote(pkg$path), sep = ""))
   })
   
   require("RCurl", quiet = TRUE)

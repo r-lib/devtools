@@ -19,10 +19,10 @@ install <- function(pkg = NULL, reload = TRUE) {
   in_dir(dirname(pkg$path), {
     targz <- paste(pkg$package, "_", pkg$version, ".tar.gz", sep = "")
     
-    system_check(paste("R CMD build ", shQuote(basename(pkg$path)), sep = ""))
+    R(paste("CMD build ", shQuote(basename(pkg$path)), sep = ""))
     on.exit(unlink(targz))
 
-    system_check(paste("R CMD INSTALL ", targz,
+    R(paste("CMD INSTALL ", targz,
       " --library=", .libPaths()[1], sep = ""))
   })
 

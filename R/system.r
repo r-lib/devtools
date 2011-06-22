@@ -5,3 +5,9 @@ system_check <- function(cmd) {
   }
   invisible(TRUE)
 }
+
+R <- function(options) {
+  r_path <- file.path(R.home("bin"), "R")
+  system_check(paste(r_path, options))
+  
+}

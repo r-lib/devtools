@@ -13,7 +13,7 @@ has_devel <- function() {
   cat("void foo(int *bar) { *bar=1; }\n", file = foo_path)
   on.exit(unlink(foo_path))
   
-  in_dir(tempdir(), system_check("R CMD SHLIB foo.c"))
+  in_dir(tempdir(), R("CMD SHLIB foo.c"))
   dylib <- file.path(tempdir(), paste("foo", .Platform$dynlib.ext, sep=''))
   on.exit(unlink(dylib), add = TRUE)
   

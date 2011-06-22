@@ -19,10 +19,10 @@ check <- function(pkg = NULL, document = TRUE) {
   in_dir(dirname(pkg$path), {
     targz <- paste(pkg$package, "_", pkg$version, ".tar.gz", sep = "")
     
-    system_check(paste("R CMD build ", shQuote(basename(pkg$path)), sep = ""))
+    R(paste("CMD build ", shQuote(basename(pkg$path)), sep = ""))
     on.exit(unlink(targz))
     
-    system_check(paste("R CMD check ", targz, sep = ""))
+    R(paste("CMD check ", targz, sep = ""))
     unlink(paste(pkg$package, ".Rcheck", sep = ""))
   })
   invisible(TRUE)
