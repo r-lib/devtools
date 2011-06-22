@@ -15,6 +15,7 @@
 #' @export
 run_examples <- function(pkg = NULL, start = NULL) {
   pkg <- as.package(pkg)
+  document(pkg)
   
   path_man <- file.path(pkg$path, "man")
   files <- dir(path_man, pattern = "\\.[Rr]d$", full = TRUE)
