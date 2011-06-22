@@ -20,6 +20,6 @@ has_devel <- function() {
   dyn.load(dylib)
   on.exit(dyn.unload(dylib), add = TRUE)
 
-  stopifnot(.C("foo",0L)[[1]] == 1L)
+  stopifnot(do.call(".C", list("foo",0L))[[1]] == 1L)
   TRUE
 }
