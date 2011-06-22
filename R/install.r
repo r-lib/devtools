@@ -22,8 +22,7 @@ install <- function(pkg = NULL, reload = TRUE) {
     R(paste("CMD build ", shQuote(basename(pkg$path)), sep = ""))
     on.exit(unlink(targz))
 
-    R(paste("CMD INSTALL ", targz,
-      " --library=", .libPaths()[1], sep = ""))
+    install.packages(targz, repos = NULL)
   })
 
   if (reload) reload(pkg)
