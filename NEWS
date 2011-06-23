@@ -1,3 +1,6 @@
+
+* Quote the path to R so it works even if there are spaces in the path.
+
 devtools 0.1
 ------------
 
