@@ -23,7 +23,7 @@ check <- function(pkg = NULL, document = TRUE) {
     on.exit(unlink(targz))
     
     R(paste("CMD check ", targz, sep = ""))
-    unlink(paste(pkg$package, ".Rcheck", sep = ""))
+    unlink(paste(pkg$package, ".Rcheck", sep = ""), recursive = TRUE)
   })
   invisible(TRUE)
 }

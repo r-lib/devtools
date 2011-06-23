@@ -1,3 +1,4 @@
+* `check` automatically deletes `.Rcheck` directory on successful completion
 
 * Quote the path to R so it works even if there are spaces in the path.
 
