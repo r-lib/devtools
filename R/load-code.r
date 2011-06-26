@@ -19,6 +19,13 @@ load_code <- function(pkg = NULL, env = pkg_env(pkg)) {
   } else {
     paths <- file.path(path_r, parse_collate(pkg$collate))
   }
+  exists <- vapply(paths, file.exists, logical(1))
+  if (any(!exists)) {
+    warning("Skipping missing files: ", 
+      paste(basename(paths[!exists]), collapse = ", "), call. = FALSE)
+    paths <- paths[exists]
+  }
+  
   paths <- changed_files(paths)
 
   lapply(paths, sys.source, envir = env, chdir = TRUE, 
