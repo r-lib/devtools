@@ -67,7 +67,8 @@ install_github <- function(repo, username = "hadley") {
     "/zipball/master", sep = "")
   src <- file.path(tempdir(), paste(name, ".zip", sep = ""))
   
-  content <- getBinaryURL(zip_url, .opts = list(followlocation = TRUE))
+  content <- getBinaryURL(zip_url, .opts = list(
+    followlocation = TRUE, ssl.verifypeer = FALSE))
   writeBin(content, src)
   on.exit(unlink(src), add = TRUE)
   
