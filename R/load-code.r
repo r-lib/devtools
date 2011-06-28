@@ -32,7 +32,8 @@ load_code <- function(pkg = NULL, env = pkg_env(pkg)) {
     keep.source = TRUE)
   
   # Load .onLoad if it's defined
-  if (exists(".onLoad", env) && !exists("__loaded", env)) {
+  if (exists(".onLoad", env, inherits = FALSE) && 
+     !exists("__loaded", env, inherits = FALSE)) {
     env$.onLoad()
     env$`__loaded` <- TRUE
   }
