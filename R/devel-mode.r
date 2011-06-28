@@ -16,7 +16,7 @@
 dev_mode <- function(on = NULL, path = "~/R-dev") {
   lib_paths <- .libPaths()
 
-  path <- normalizePath(path, mustWork = FALSE)
+  path <- normalizePath(path)
   if (is.null(on)) {
     on <- !(path %in% lib_paths)
   }
