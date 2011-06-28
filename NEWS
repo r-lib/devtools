@@ -1,3 +1,6 @@
+devtools 0.2
+------------
+
 * `install_github` now uses `RCurl` instead of external `wget` to retrieve
   package. This should make it more robust wrt external dependencies.
 
