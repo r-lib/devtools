@@ -72,7 +72,8 @@ install_github <- function(repo, username = "hadley") {
   writeBin(content, src)
   on.exit(unlink(src), add = TRUE)
   
-  out_path <- file.path(tempdir(), unzip(src, list = TRUE)$Name[1])
+  pkg_name <- basename(as.character(unzip(src, list = TRUE)$Name[1]))
+  out_path <- file.path(tempdir(), pkg_name)
   unzip(src, exdir = tempdir())
   on.exit(unlink(out_path), add = TRUE)
   
