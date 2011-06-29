@@ -38,7 +38,7 @@ release <- function(pkg = NULL) {
   require("RCurl", quiet = TRUE)
   message("Uploading")
   ftpUpload(file.path(tempdir(), targz),
-    paste("ftp://cran.R-project.org/incoming/", targz))
+    paste("ftp://cran.R-project.org/incoming/", targz, sep = ""))
   
   message("Preparing email")
   msg <- paste(
