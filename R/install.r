@@ -16,14 +16,10 @@ install <- function(pkg = NULL, reload = TRUE) {
   message("Installing ", pkg$package)
   install_deps(pkg)  
   
-  in_dir(dirname(pkg$path), {
-    targz <- paste(pkg$package, "_", pkg$version, ".tar.gz", sep = "")
-    
-    R(paste("CMD build ", shQuote(basename(pkg$path)), sep = ""))
-    on.exit(unlink(targz))
-    
-    install.packages(targz, repos = NULL, type = "source")
-  })
+  built_path <- build(pkg)  
+  on.exit(unlink(built_path))    
+
+  install.packages(built_path, repos = NULL, type = "source")
 
   if (reload) reload(pkg)
   invisible(TRUE)

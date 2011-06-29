@@ -6,8 +6,7 @@ system_check <- function(cmd) {
   invisible(TRUE)
 }
 
-R <- function(options) {
+R <- function(options, path = tempdir()) {
   r_path <- shQuote(file.path(R.home("bin"), "R"))
-  system_check(paste(r_path, options))
-  
+  in_dir(path, system_check(paste(r_path, options)))
 }

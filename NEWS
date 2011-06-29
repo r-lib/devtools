@@ -3,6 +3,13 @@
 
 * fix bug in ftp upload that was adding extraneous space
 
+* `build` function builds package in specified directory. `install`, `check`
+  and `release` now all use this function.
+
+* `build`, `install`, `check` and `release` better about cleaning up after
+  themselves - always try to both work in session temporary directory and
+  delete any files/directories that they create
+
 devtools 0.2
 ------------
 

@@ -15,15 +15,13 @@ check <- function(pkg = NULL, document = TRUE) {
   
   document(pkg)
   message("Checking ", pkg$package)
+
+  built_path <- build(pkg)  
+  on.exit(unlink(built_path))
   
-  in_dir(dirname(pkg$path), {
-    targz <- paste(pkg$package, "_", pkg$version, ".tar.gz", sep = "")
-    
-    R(paste("CMD build ", shQuote(basename(pkg$path)), sep = ""))
-    on.exit(unlink(targz))
-    
-    R(paste("CMD check ", targz, sep = ""))
-    unlink(paste(pkg$package, ".Rcheck", sep = ""), recursive = TRUE)
-  })
+  R(paste("CMD check ", built_path, sep = ""), tempdir())
+  check_path <- file.path(tempdir(), paste(pkg$package, ".Rcheck", sep = ""))
+  unlink(check_path, recursive = TRUE)
+
   invisible(TRUE)
 }

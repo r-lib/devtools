@@ -30,15 +30,12 @@ release <- function(pkg = NULL) {
   cat("Is DESCRIPTION up-to-date?")
   if(menu(c("Yes", "No")) == 2) return(invisible())
   
-  targz <- paste(pkg$package, "_", pkg$version, ".tar.gz", sep = "")
-  in_dir(tempdir(), {
-    R(paste("CMD build ", shQuote(pkg$path), sep = ""))
-  })
-  
+  message("Building and uploading")
+  built_path <- build(pkg)
+
   require("RCurl", quiet = TRUE)
-  message("Uploading")
-  ftpUpload(file.path(tempdir(), targz),
-    paste("ftp://cran.R-project.org/incoming/", targz, sep = ""))
+  ftpUpload(file.path(tempdir(), built_path),
+    paste("ftp://cran.R-project.org/incoming/", built_path, sep = ""))
   
   message("Preparing email")
   msg <- paste(
