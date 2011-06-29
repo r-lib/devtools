@@ -57,6 +57,11 @@ There are two ways to reload the package from disk:
   build and upload to CRAN. It will also draft an email to let the CRAN
   maintainer know that you've uploaded a new package.
 
+## Other commands
+
+* `bash()` will open a bash shell in your package directory so you can use 
+   git or other command line tools.
+
 ## Development mode
 
 Calling `dev_mode()` will switch your version of R into "development mode". In this mode, R will install packages to `~/R-dev`. This is useful to avoid clobbering existing versions of CRAN packages. Calling `dev_mode()` again will turn development mode off, and return you to your default library set up.
