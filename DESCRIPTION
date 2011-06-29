@@ -13,6 +13,7 @@ Suggests:
     profr
 License: MIT
 Collate:
+    'bash.r'
     'check.r'
     'common-mistakes.r'
     'devel-mode.r'

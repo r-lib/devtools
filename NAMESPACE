@@ -1,3 +1,4 @@
+export(bash)
 export(check)
 export(dev_mode)
 export(document)
