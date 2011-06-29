@@ -1,3 +1,5 @@
+* don't build manual in `build`
+
 * `install_github` now allows you to specify which branch to download
 
 devtools 0.3

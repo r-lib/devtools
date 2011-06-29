@@ -8,7 +8,7 @@
 build <- function(pkg = NULL, path = tempdir()) {
   pkg <- as.package(pkg)
   
-  R(paste("CMD build ", shQuote(pkg$path), sep = ""), path)
+  R(paste("CMD build ", shQuote(pkg$path), " --no-manual", sep = ""), path)
 
   targz <- paste(pkg$package, "_", pkg$version, ".tar.gz", sep = "")
   file.path(path, targz)
