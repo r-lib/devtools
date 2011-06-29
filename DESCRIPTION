@@ -35,6 +35,5 @@ Collate:
     'run-examples.r'
     'system.r'
     'test.r'
-    'update-src.r'
     'utils.r'
     'vignettes.r'

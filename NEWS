@@ -1,6 +1,8 @@
 * new `bash()` function that starts bash shell in package directory. Useful if
   you want to use git etc.
 
+* removed inelegant `update_src()` since now superseded by `bash()`
+
 * fix bug in ftp upload that was adding extraneous space
 
 * `build` function builds package in specified directory. `install`, `check`
