@@ -1,22 +1,15 @@
 # devtools
 
-The aim of `devtools` is to make your life as a package developer easy. It does this by providing tools to:
+The aim of `devtools` is to make your life as a package developer easy, by R functions that simplify many of the common tasks of package development. Devtools is currently very opinionated about how to do package development, and requires that you use `roxygen` for documentation and `testthat` for testing. Future version will relax these opinions - patches are welcome! Track development of `devtools` at https://github.com/hadley/devtools.
 
-* simulate `R CMD install` during development
-* build documentation (using roxygen), run tests (using testthat)
-* run `R CMD check` from within R
-* help you release your package
-
-These tools are described in more detail below.
-
-To use all features of devtools, you also need to install `RCurl`.  To get it:
+To use all features of `devtools`, you also need to install `RCurl`. To get it:
 
 * On windows, run 
   `install.packages("RCurl", repos = "http://www.stats.ox.ac.uk/pub/RWin/")`
 * On everything else, run 
   `install.packages("RCurl")`
 
-I also recommend that you use my fork of roxygen, rather than the official CRAN version. Once you've installed and loaded `devtools`, you can install this direct from my github account by running `install_github("roxygen")`.
+I also recommend that you use my fork of `roxygen`, rather than the official CRAN version. Once you've installed and loaded `devtools`, you can install this directly from my github account by running `install_github("roxygen")`.
 
 ## Package development tools
 
@@ -43,6 +36,8 @@ Building and installing:
 * `install("pkg")` reinstalls the package, detaches the currently loaded
   version then reloads the new version with `library`. Reloading a package is
   not guaranteed to work: see the documentation to `reload` for caveats.
+  
+* `install_github("repo", "username")` installs an R package from github.
 
 Check and release:
 
@@ -63,23 +58,33 @@ Other commands:
 
 ## Development mode
 
-Calling `dev_mode()` will switch your version of R into "development mode". In this mode, R will install packages to `~/R-dev`. This is useful to avoid clobbering the existing versions of CRAN packages, that you need for other analyses you're performing . Calling `dev_mode()` again will turn development mode off, and return you to your default library setup.
+Calling `dev_mode()` will switch your version of R into "development mode". In this mode, R will install packages to `~/R-dev`. This is useful to avoid clobbering the existing versions of CRAN packages that you need for other tasks. Calling `dev_mode()` again will turn development mode off, and return you to your default library setup.
 
 ## Referring to a package
 
-All `devtools` functions accept either a path or a name. If you're only developing a small number of packages, the easiest way to use devtools is ensure that your working directory is set to the directory in which you package lives.
+All `devtools` functions accept either a path, a name, or nothing.
 
-If you don't specify a package, all `devtools` commands automatically use the last package you referred to.
+* Specifying a path is easiest if you're only developing a small number of
+  packages. Just ensuring your working directory is the directory in which
+  your packages live then use (e.g.) `install("mypkg")`
 
-If you are developing many packages, it may be more convenient to refer to packages by name. In this case, `devtools` will `~/.Rpackages`, and try the path given by the default function, if it's not there, it will look up the package name in the list and use that path. For example, a small section of my `~/.Rpackages` looks like this:
+* If you don't specify anything, all `devtools` commands automatically use the
+  last package you referred to.
 
-    list(
-        default = function(x) {
-          file.path("~/documents/", x, x)
-        }, 
+* Specifying package names is useful if you are developing many packages. In
+  this case, `devtools` will look in `~/.Rpackages`, and try the path given by
+  the default function, if it's not there, it will look up the package name in
+  the list and use that path. 
 
-      "describedisplay" = "~/ggobi/describedisplay",
-      "tourr" =    "~/documents/tour/tourr", 
-      "mutatr" = "~/documents/oo/mutatr"
-    )
+  For example, a small section of my `~/.Rpackages` looks like this:
+
+        list(
+            default = function(x) {
+              file.path("~/documents/", x, x)
+            }, 
+
+          "describedisplay" = "~/ggobi/describedisplay",
+          "tourr" =    "~/documents/tour/tourr", 
+          "mutatr" = "~/documents/oo/mutatr"
+        )
 
