@@ -1,3 +1,5 @@
+* test automatically reloads code
+
 * don't build manual or vignettes in `build`
 
 * `install_github` now allows you to specify which branch to download
