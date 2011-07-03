@@ -10,18 +10,23 @@ document <- function(pkg = NULL, check = TRUE) {
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
   
-  require(roxygen)
-  if (exists("roxygenise")) {
-    # My version of roxygen
-    in_dir(pkg$path, 
-      roxygenise(".", ".", roclets = c("had", "collate", "namespace"))
-    )
+  if (!suppressWarnings(require("rxygn", quiet = TRUE))) {
+    require("roxygen")    
+    if (exists("roxygenise")) {
+      # My version of roxygen
+      in_dir(pkg$path, 
+        roxygenise(".", ".", roclets = c("had", "collate", "namespace"))
+      )
+    } else {
+      # Standard version of roxygen
+      roxygenize(pkg$path, pkg$path, copy.package = FALSE)
+    }
+    
   } else {
-    # Standard version of roxygen
-    roxygenize(pkg$path, pkg$path, copy.package = FALSE)
+    in_dir(pkg$path, roxygenise("."))
   }
   
-  if (check) check_doc(pkg)
+  # if (check) check_doc(pkg)
   invisible()
 }
 
