@@ -1,6 +1,10 @@
 * `document` has new parameter `clean` which clears all roxygen caches and
   removes all existing man files.
 
+* `check_doc` function eliminated because roxygen now automatically checks
+  documentation just for the files that it has modified. DESCRIPTION checking
+  has been moved into `load_all`.
+
 * test automatically reloads code
 
 * don't build manual or vignettes in `build`

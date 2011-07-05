@@ -11,6 +11,14 @@ load_all <- function(pkg = NULL, reset = FALSE) {
   pkg <- as.package(pkg)
   message("Loading ", pkg$package)
   
+  # Check description file is ok
+  check <- tools:::.check_package_description(
+    file.path(pkg$path, "DESCRIPTION"))
+  if (length(check) > 0) {
+    msg <- capture.output(tools:::print.check_package_description(check))
+    message("Invalid DESCRIPTION:\n", paste(msg, collapse = "\n"))
+  }
+  
   # If installed version of package loaded, unload it
   if (is.loaded(pkg) && is.locked(pkg)) {
     unload(pkg)
