@@ -22,8 +22,14 @@ dev_mode <- function(on = NULL, path = "~/R-dev") {
   }
 
   if (on) {
+    if (!file.exists(path)) {
+      dir.create(path, recursive = TRUE, showWarnings = FALSE)
+    }
+    if (!file.exists(path)) {
+      stop("Failed to create ", path, call. = FALSE)
+    }
+
     message("Dev mode: ON")
-    dir.create(path, showWarnings = FALSE)
     .libPaths(c(path, lib_paths))
   } else {
     message("Dev mode: OFF")

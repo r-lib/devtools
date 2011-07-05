@@ -1,3 +1,6 @@
+* `dev_mode` will create directories recursively, and complain if it can't
+  create them.
+
 * `document` has new parameter `clean` which clears all roxygen caches and
   removes all existing man files.
 
