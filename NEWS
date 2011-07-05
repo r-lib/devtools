@@ -1,3 +1,6 @@
+* `document` has new parameter `clean` which clears all roxygen caches and
+  removes all existing man files.
+
 * test automatically reloads code
 
 * don't build manual or vignettes in `build`
