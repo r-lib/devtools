@@ -7,25 +7,18 @@
 #' @keywords programming
 #' @export
 document <- function(pkg = NULL, check = TRUE) {
+  roxygen_installed <- length(find.package("roxygen", quiet = T)) > 0
+  
+  if (!roxygen_installed || packageVersion("roxygen") < 1) {
+    stop("roxygen 1.0 not found", call. = FALSE)
+  }
+  require("roxygen")
+  
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
   
-  if (!suppressWarnings(require("rxygn", quiet = TRUE))) {
-    require("roxygen")    
-    if (exists("roxygenise")) {
-      # My version of roxygen
-      in_dir(pkg$path, 
-        roxygenise(".", ".", roclets = c("had", "collate", "namespace"))
-      )
-    } else {
-      # Standard version of roxygen
-      roxygenize(pkg$path, pkg$path, copy.package = FALSE)
-    }
+  in_dir(pkg$path, roxygenise("."))
     
-  } else {
-    in_dir(pkg$path, roxygenise("."))
-  }
-  
   # if (check) check_doc(pkg)
   invisible()
 }
