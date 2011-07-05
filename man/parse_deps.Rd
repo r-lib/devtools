@@ -1,10 +1,14 @@
 \name{parse_deps}
 \alias{parse_deps}
 \title{Parse dependencies.}
-\usage{parse_deps(string)}
-
+\usage{
+  parse_deps(string)
+}
+\value{
+  character vector of package names
+}
 \description{
   Parse dependencies.
 }
-\value{character vector of package names}
 \keyword{internal}
+

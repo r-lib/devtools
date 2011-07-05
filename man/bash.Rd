@@ -1,12 +1,14 @@
 \name{bash}
 \alias{bash}
 \title{Open bash shell in package directory.}
-\usage{bash(pkg)}
-
+\usage{
+  bash(pkg = NULL)
+}
+\arguments{
+  \item{pkg}{package description, can be path or package
+  name.  See \code{\link{as.package}} for more information}
+}
 \description{
   Open bash shell in package directory.
 }
-\arguments{
-  \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
-}
+
