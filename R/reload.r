@@ -1,5 +1,7 @@
 #' Detach and reload package.
 #' 
+#' If the package is not loaded already, this does nothing.
+#' 
 #' See the caveats in \code{\link{detach}} for the many reasons why this 
 #' might not work. If in doubt, quit R and restart.
 #'
@@ -8,12 +10,13 @@
 #' @export
 reload <- function(pkg = NULL) {
   pkg <- as.package(pkg)
-  message("Reloading installed ", pkg$package)
   name <- env_name(pkg)
   
-  if (is.loaded(pkg)) unload(pkg)
-  require(pkg$package, character.only = TRUE, quiet = TRUE)
-  
+  if (is.loaded(pkg)) {
+    message("Reloading installed ", pkg$package)
+    unload(pkg)
+    require(pkg$package, character.only = TRUE, quiet = TRUE)
+  }
 }
 
 is.loaded <- function(pkg = NULL) {

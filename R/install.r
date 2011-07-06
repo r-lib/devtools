@@ -80,5 +80,5 @@ install_github <- function(repo, username = "hadley", branch = "master") {
   }
   
   # Install
-  install(out_path, reload = FALSE)
+  install(out_path)
 }

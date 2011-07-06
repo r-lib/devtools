@@ -12,6 +12,8 @@
   Detach and reload package.
 }
 \details{
+  If the package is not loaded already, this does nothing.
+
   See the caveats in \code{\link{detach}} for the many
   reasons why this might not work. If in doubt, quit R and
   restart.

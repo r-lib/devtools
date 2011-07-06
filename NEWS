@@ -1,3 +1,6 @@
+* `reload` now will only reload if the package is already loaded, and
+  `install_github` will automatically reload if needed.
+
 * `dev_mode` will create directories recursively, and complain if it can't
   create them.
 
