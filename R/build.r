@@ -12,7 +12,7 @@
 build <- function(pkg = NULL, path = NULL, binary = FALSE) {
   pkg <- as.package(pkg)
   if (is.null(path)) {
-    path <- basename(pkg$path)
+    path <- dirname(pkg$path)
   }
   
   if (binary) {
