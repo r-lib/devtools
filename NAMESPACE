@@ -1,6 +1,7 @@
 export(as.package)
 export(bash)
 export(build_vignettes)
+export(build)
 export(check)
 export(dev_mode)
 export(document)

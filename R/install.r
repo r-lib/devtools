@@ -16,7 +16,7 @@ install <- function(pkg = NULL, reload = TRUE) {
   message("Installing ", pkg$package)
   install_deps(pkg)  
   
-  built_path <- build(pkg)  
+  built_path <- build(pkg, tempdir())
   on.exit(unlink(built_path))    
 
   install.packages(built_path, repos = NULL, type = "source")

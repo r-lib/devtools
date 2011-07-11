@@ -31,7 +31,7 @@ release <- function(pkg = NULL) {
   if(menu(c("Yes", "No")) == 2) return(invisible())
   
   message("Building and uploading")
-  built_path <- build(pkg)
+  built_path <- build(pkg, tempdir())
 
   require("RCurl", quiet = TRUE)
   ftpUpload(built_path, paste("ftp://cran.R-project.org/incoming/",
