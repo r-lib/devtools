@@ -1,3 +1,6 @@
+* on Windows, `devtools` now checks for the presence of `Rtools` on startup,
+  and will automatically add it to the path if needed.
+
 * use `roxygen2` instead of `roxygen` for documentation
 
 * `reload` now will only reload if the package is already loaded, and
@@ -13,7 +16,7 @@
   documentation just for the files that it has modified. DESCRIPTION checking
   has been moved into `load_all`.
 
-* test automatically reloads code
+* `test` automatically reloads code
 
 * `build` is now exported, and defaults to building in the package's parent
   directory. It also gains a new `binary` parameter controls whether a binary
