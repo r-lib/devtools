@@ -1,4 +1,4 @@
-.onLoad <- function() {
+.onLoad <- function(...) {
   if (!os() == "win") return()
   
   rtools <- normalizePath("c:\\Rtools\\bin", mustWork = FALSE)
