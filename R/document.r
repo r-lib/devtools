@@ -9,12 +9,7 @@
 #' @keywords programming
 #' @export
 document <- function(pkg = NULL, clean = FALSE) {
-  roxygen_installed <- length(find.package("roxygen", quiet = T)) > 0
-  
-  if (!roxygen_installed || packageVersion("roxygen") < 1) {
-    stop("roxygen 1.0 not found", call. = FALSE)
-  }
-  require("roxygen")
+  require("roxygen2")
   
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")

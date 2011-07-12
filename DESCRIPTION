@@ -8,7 +8,7 @@ Depends:
     R (>= 2.13)
 Suggests:
     testthat,
-    roxygen,
+    roxygen2,
     RCurl,
     profr
 License: MIT
