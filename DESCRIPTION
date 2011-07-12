@@ -37,3 +37,4 @@ Collate:
     'test.r'
     'utils.r'
     'vignettes.r'
+    'os.r'

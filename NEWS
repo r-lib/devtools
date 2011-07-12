@@ -17,7 +17,8 @@
 
 * `build` is now exported, and defaults to building in the package's parent
   directory. It also gains a new `binary` parameter controls whether a binary
-  or a source version (with no vignettes or manuals) is built.
+  or a source version (with no vignettes or manuals) is built. Confusingly,
+  binary packages are built with `R CMD INSTALL`.
 
 * `install_github` now allows you to specify which branch to download
 

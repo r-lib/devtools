@@ -16,13 +16,15 @@ build <- function(pkg = NULL, path = NULL, binary = FALSE) {
   }
   
   if (binary) {
-    options <- "--binary"
+    cmd <- paste("CMD install ", shQuote(pkg$path), " --build", sep = "")
+    ext <- if (os() == "win") "zip" else "tgz"
   } else {
-    options <- "--no-manual --no-vignettes"
+    cmd <- paste("CMD build ", shQuote(pkg$path), 
+      " --no-manual --no-vignettes", sep = "")
+    ext <- "tar.gz"
   }
-  
-  R(paste("CMD build ", shQuote(pkg$path), " ", options, sep = ""), path)
+  R(cmd, path)
 
-  targz <- paste(pkg$package, "_", pkg$version, ".tar.gz", sep = "")
+  targz <- paste(pkg$package, "_", pkg$version, ".", ext, sep = "")
   file.path(path, targz)
 }
