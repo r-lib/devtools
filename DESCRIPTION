@@ -10,8 +10,7 @@ Imports:
     RCurl
 Suggests:
     testthat,
-    roxygen2,
-    profr
+    roxygen2
 License: MIT
 Collate:
     'bash.r'
