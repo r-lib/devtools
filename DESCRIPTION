@@ -38,3 +38,4 @@ Collate:
     'utils.r'
     'vignettes.r'
     'os.r'
+    'zzz.r'
