@@ -2,7 +2,7 @@
 
 The aim of `devtools` is to make your life as a package developer easy, by R functions that simplify many of the common tasks of package development. Devtools is currently very opinionated about how to do package development, and requires that you use `roxygen` for documentation and `testthat` for testing. Future version will relax these opinions - patches are welcome! Track development of `devtools` at https://github.com/hadley/devtools.
 
-I also recommend that use `roxygen2`, which has not quite made it to CRAN yet. Once you've installed and loaded `devtools`, you can install the development version of roxygen by running `install_github("roxygen", "klutometis")`.
+I also recommend that you use `roxygen2`, which has not quite made it to CRAN yet. Once you've installed and loaded `devtools`, you can install the development version of roxygen by running `install_github("roxygen", "klutometis")`.
 
 ## Package development tools
 
