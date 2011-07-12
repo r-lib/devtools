@@ -8,7 +8,7 @@
   }
 
   paths <- strsplit(Sys.getenv("PATH"), ";")[[1]]
-  paths <- normalizePaths(paths, mustWork = FALSE)
+  paths <- normalizePath(paths, mustWork = FALSE)
 
   in_path <- any(paths == rtools)
   if (!in_path) {
