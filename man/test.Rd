@@ -1,6 +1,6 @@
 \name{test}
 \alias{test}
-\title{Execute all test_that tests in a package...}
+\title{Execute all test_that tests in a package}
 \usage{
   test(pkg = NULL)
 }

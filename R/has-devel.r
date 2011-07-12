@@ -1,6 +1,6 @@
 #' Check if you have a development environment installed.
 #'
-#' Thanks to the suggestion on Simon Urbanek. 
+#' Thanks to the suggestion of Simon Urbanek. 
 #'
 #' @return TRUE if your development environment is correctly set up, otherwise
 #'   returns an error.

@@ -9,9 +9,6 @@
   name.  See \code{\link{as.package}} for more information}
 }
 \description{
-  Generate an development environment for a package.
-}
-\details{
   \code{devtools} keeps the global workspace clean by
   loading all code and data into a separate environment.
   This environment is \code{\link{attach}}ed to the search

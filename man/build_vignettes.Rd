@@ -9,8 +9,7 @@
   name.  See \code{\link{as.package}} for more information}
 }
 \description{
-  Build package vignettes. Sweave and latex package
-  vignettes.
+  Sweave and latex package vignettes.
 }
 \keyword{programming}
 

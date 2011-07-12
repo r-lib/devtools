@@ -1,6 +1,6 @@
 \name{env_name}
 \alias{env_name}
-\title{Generate name of package development environment...}
+\title{Generate name of package development environment}
 \usage{
   env_name(pkg = NULL)
 }

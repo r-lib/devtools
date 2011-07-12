@@ -1,6 +1,6 @@
 \name{show_news}
 \alias{show_news}
-\title{Show package news...}
+\title{Show package news}
 \usage{
   show_news(pkg = NULL, latest = TRUE, ...)
 }

@@ -1,7 +1,6 @@
 #' Coerce input to a package.
 #' 
 #' Possibile specifications of package:
-#'
 #' \itemize{
 #'   \item path
 #'   \item name (lookup in .Rpackages)

@@ -12,9 +12,6 @@
   \item{path}{directory to for library.}
 }
 \description{
-  Activate and deactivate development mode.
-}
-\details{
   When activated, \code{dev_mode} creates a new library for
   storing installed packages. This is automatically removed
   when \code{dev_mode} is activated. This allows you to

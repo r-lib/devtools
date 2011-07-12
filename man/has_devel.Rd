@@ -6,10 +6,7 @@
   otherwise returns an error.
 }
 \description{
-  Check if you have a development environment installed.
-}
-\details{
-  Thanks to the suggestion on Simon Urbanek.
+  Thanks to the suggestion of Simon Urbanek.
 }
 \examples{
 has_devel()

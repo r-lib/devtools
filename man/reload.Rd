@@ -9,11 +9,9 @@
   name.  See \code{\link{as.package}} for more information}
 }
 \description{
-  Detach and reload package.
+  If the package is not loaded already, this does nothing.
 }
 \details{
-  If the package is not loaded already, this does nothing.
-
   See the caveats in \code{\link{detach}} for the many
   reasons why this might not work. If in doubt, quit R and
   restart.

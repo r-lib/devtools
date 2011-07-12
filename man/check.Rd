@@ -12,10 +12,6 @@
   and check documentation before running formal check.}
 }
 \description{
-  Build and check a package, cleaning up automatically on
-  success.
-}
-\details{
   \code{check} automatically builds a package before using
   \code{R CMD check} as this is the recommended way to
   check pakcages.  Note that this process runs in an

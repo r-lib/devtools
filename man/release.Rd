@@ -9,11 +9,9 @@
   name.  See \code{\link{as.package}} for more information}
 }
 \description{
-  Release package to CRAN.
+  The package release process will:
 }
 \details{
-  The package release process will:
-
   \itemize{ %}
 
   \item Confirm that the package passes \code{R CMD check}

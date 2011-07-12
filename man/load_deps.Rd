@@ -9,9 +9,6 @@
   name.  See \code{\link{as.package}} for more information}
 }
 \description{
-  Load dependencies.
-}
-\details{
   Load all package dependencies as described in
   \code{DESCRIPTION}.
 }

@@ -1,4 +1,5 @@
 #' Build package vignettes.
+#'
 #' Sweave and latex package vignettes.
 #'
 #' @param pkg package description, can be path or package name.  See

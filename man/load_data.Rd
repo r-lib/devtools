@@ -14,9 +14,6 @@
   information}
 }
 \description{
-  Load data.
-}
-\details{
   Loads all \code{.Rdata} files in the data subdirectory.
 }
 \keyword{programming}

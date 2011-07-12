@@ -15,9 +15,6 @@
   problem.}
 }
 \description{
-  Run all examples in a package.
-}
-\details{
   One of the most frustrating parts of `R CMD check` is
   getting all of your examples to pass - whenever one fails
   you need to fix the problem and then restart the whole

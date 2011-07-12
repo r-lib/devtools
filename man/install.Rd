@@ -12,13 +12,11 @@
   automatically reload the package after installing.}
 }
 \description{
-  Install a package.
-}
-\details{
   Uses \code{R CMD INSTALL} to install the package. Will
   also try to install dependencies of the package from
   CRAN, if they're not already installed.
-
+}
+\details{
   Installation takes place on a copy of the package
   produced by \code{R CMD build} to avoid modifying the
   local directory in any way.
