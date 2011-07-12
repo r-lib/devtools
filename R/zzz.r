@@ -1,7 +1,7 @@
 .onLoad <- function() {
   if (!os() == "win") return()
   
-  rtools <- normalizePaths("c:\\Rtools\\bin", mustWork = FALSE)
+  rtools <- normalizePath("c:\\Rtools\\bin", mustWork = FALSE)
   if (!file.exists(rtools)) {
     message("Rtools not installed.")
     return()
