@@ -15,6 +15,7 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @export
+#' @importFrom RCurl ftpUpload
 release <- function(pkg = NULL) {
   pkg <- as.package(pkg)
 
@@ -33,7 +34,6 @@ release <- function(pkg = NULL) {
   message("Building and uploading")
   built_path <- build(pkg, tempdir())
 
-  require("RCurl", quiet = TRUE)
   ftpUpload(built_path, paste("ftp://cran.R-project.org/incoming/",
     basename(built_path), sep = ""))
   

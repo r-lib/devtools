@@ -2,13 +2,6 @@
 
 The aim of `devtools` is to make your life as a package developer easy, by R functions that simplify many of the common tasks of package development. Devtools is currently very opinionated about how to do package development, and requires that you use `roxygen` for documentation and `testthat` for testing. Future version will relax these opinions - patches are welcome! Track development of `devtools` at https://github.com/hadley/devtools.
 
-To use all features of `devtools`, you also need to install `RCurl`. To get it:
-
-* On windows, run 
-  `install.packages("RCurl", repos = "http://www.stats.ox.ac.uk/pub/RWin/")`
-* On everything else, run 
-  `install.packages("RCurl")`
-
 I also recommend that you use my fork of `roxygen`, rather than the official CRAN version. Once you've installed and loaded `devtools`, you can install this directly from my github account by running `install_github("roxygen")`.
 
 ## Package development tools

@@ -48,12 +48,12 @@ install_deps <- function(pkg = NULL) {
 #' @param repo Repo name
 #' @param branch Desired branch - defaults to \code{"master"}
 #' @export
+#' @importFrom RCurl getBinaryURL
 #' @examples
 #' \dontrun{
 #' install_github("roxygen")
 #' }
 install_github <- function(repo, username = "hadley", branch = "master") {
-  require("RCurl")
   
   message("Installing ", repo, " from ", username)
   name <- paste(username, "-", repo, sep = "")

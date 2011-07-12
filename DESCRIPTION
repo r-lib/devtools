@@ -6,10 +6,11 @@ Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Description: Collection of package development tools
 Depends:
     R (>= 2.13)
+Imports:
+    RCurl
 Suggests:
     testthat,
     roxygen2,
-    RCurl,
     profr
 License: MIT
 Collate:
