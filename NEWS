@@ -14,9 +14,9 @@
 * `document` has new parameter `clean` which clears all roxygen caches and
   removes all existing man files. `check` now runs `document` in this mode.
 
-* `check_doc` function eliminated because roxygen now automatically checks
-  documentation just for the files that it has modified. DESCRIPTION checking
-  has been moved into `load_all`.
+* `check_doc` now checks package documentation as a whole, in the same way
+  that `R CMD check` does, rather than low-level syntax checking, which is
+  done by `roxygen2. DESCRIPTION checking has been moved into `load_all`.
 
 * `test` automatically reloads code
 

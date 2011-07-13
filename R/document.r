@@ -24,3 +24,19 @@ document <- function(pkg = NULL, clean = FALSE) {
   # if (check) check_doc(pkg)
   invisible()
 }
+
+#' Check documentation, as \code{R CMD check} does.
+#'
+#' Currently runs these checks: package parseRd, Rd metadata, Rd xrefs, and
+#' Rd contents.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @export
+check_doc <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
+  tools:::.check_package_parseRd(dir = pkg$path)
+  tools:::.check_Rd_metadata(dir = pkg$path)
+  tools:::.check_Rd_xrefs(dir = pkg$path)
+  tools:::.check_Rd_contents(dir = pkg$path)  
+}
