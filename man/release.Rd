@@ -2,17 +2,23 @@
 \alias{release}
 \title{Release package to CRAN.}
 \usage{
-  release(pkg = NULL)
+  release(pkg = NULL, check = TRUE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
   name.  See \code{\link{as.package}} for more information}
+
+  \item{check}{if \code{TRUE}, run checking, otherwise omit
+  it.  This is useful if you've just checked your package
+  and you're ready to release it.}
 }
 \description{
-  The package release process will:
+  Run automated and manual tests, then ftp to CRAN.
 }
 \details{
-  \itemize{ %}
+  The package release process will:
+
+  \itemize{
 
   \item Confirm that the package passes \code{R CMD check}
   \item Confirm that news is up-to-date \item Confirm that

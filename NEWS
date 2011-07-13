@@ -1,3 +1,6 @@
+* `check` parameter in `release` allows you to omit package check if you've
+   just done it. 
+
 * new `wd` function to change the working directory to a package subdirectory.
 
 * on Windows, `devtools` now checks for the presence of `Rtools` on startup,
