@@ -39,3 +39,4 @@ Collate:
     'vignettes.r'
     'os.r'
     'zzz.r'
+    'wd.r'
