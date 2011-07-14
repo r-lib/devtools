@@ -37,8 +37,15 @@ document <- function(pkg = NULL, clean = FALSE) {
 #' @export
 check_doc <- function(pkg = NULL) {
   pkg <- as.package(pkg)
-  tools:::.check_package_parseRd(dir = pkg$path)
-  tools:::.check_Rd_metadata(dir = pkg$path)
-  tools:::.check_Rd_xrefs(dir = pkg$path)
-  tools:::.check_Rd_contents(dir = pkg$path)
+  old <- options(warn = -1)
+  on.exit(options(old))
+  
+  print(tools:::.check_package_parseRd(dir = pkg$path))
+  print(tools:::.check_Rd_metadata(dir = pkg$path))
+  print(tools:::.check_Rd_xrefs(dir = pkg$path))
+  print(tools:::.check_Rd_contents(dir = pkg$path))
+  
+  print(tools::checkDocFiles(dir = pkg$path))
+  # print(tools::checkDocStyle(dir = pkg$path))
+  # print(tools::undoc(dir = pkg$path))
 }
