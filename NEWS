@@ -34,7 +34,7 @@ IMPROVEMENTS AND BUG FIXES
   removes all existing man files. `check` now runs `document` in this mode.
 
 * `dev_mode` will create directories recursively, and complain if it can't
-  create them.
+  create them.  It should also work better on windows.
 
 * `install_github` now allows you to specify which branch to download, and
   automatically reloads package if needed.
