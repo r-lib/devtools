@@ -17,6 +17,8 @@ NEW FUNCTIONS
 
 IMPROVEMENTS AND BUG FIXES
 
+* if using `.Rpackages` config file, default function is used last, not first.
+
 * on Windows, `devtools` now checks for the presence of `Rtools` on startup,
   and will automatically add it to the path if needed.
 
