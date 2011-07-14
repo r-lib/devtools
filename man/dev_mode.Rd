@@ -13,10 +13,11 @@
 }
 \description{
   When activated, \code{dev_mode} creates a new library for
-  storing installed packages. This is automatically removed
-  when \code{dev_mode} is activated. This allows you to
-  test development packages in a sandbox, without
-  interfering with the other packages you have installed.
+  storing installed packages. This new library is
+  automatically created when \code{dev_mode} is activated
+  if it does not already exist. This allows you to test
+  development packages in a sandbox, without interfering
+  with the other packages you have installed.
 }
 \examples{
 dev_mode()

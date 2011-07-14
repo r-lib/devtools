@@ -1,7 +1,8 @@
 #' Activate and deactivate development mode.
 #'
 #' When activated, \code{dev_mode} creates a new library for storing installed
-#' packages. This is automatically removed when \code{dev_mode} is activated.
+#' packages. This new library is automatically created when \code{dev_mode} is 
+#' activated if it does not already exist.
 #' This allows you to test development packages in a sandbox, without
 #' interfering with the other packages you have installed.
 #'
@@ -16,7 +17,7 @@
 dev_mode <- function(on = NULL, path = "~/R-dev") {
   lib_paths <- .libPaths()
 
-  path <- normalizePath(path, mustWork = FALSE)
+  path <- normalizePath(path, winslash = "/", mustWork = FALSE)
   if (is.null(on)) {
     on <- !(path %in% lib_paths)
   }
