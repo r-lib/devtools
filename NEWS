@@ -1,36 +1,44 @@
-* `check` parameter in `release` allows you to omit package check if you've
-   just done it. 
+devtools 0.4
+------------
+
+NEW FUNCTIONS
 
 * new `wd` function to change the working directory to a package subdirectory.
-
-* on Windows, `devtools` now checks for the presence of `Rtools` on startup,
-  and will automatically add it to the path if needed.
-
-* use `roxygen2` instead of `roxygen` for documentation. `document` now loads
-  dependent packages so that they're available when roxygen executes the
-  package source code.
-
-* `reload` now will only reload if the package is already loaded, and
-  `install_github` will automatically reload if needed.
-
-* `dev_mode` will create directories recursively, and complain if it can't
-  create them.
-
-* `document` has new parameter `clean` which clears all roxygen caches and
-  removes all existing man files. `check` now runs `document` in this mode.
 
 * `check_doc` now checks package documentation as a whole, in the same way
   that `R CMD check` does, rather than low-level syntax checking, which is
   done by `roxygen2. DESCRIPTION checking has been moved into `load_all`.
-
-* `test` automatically reloads code
+  `check_rd` has been removed.
 
 * `build` is now exported, and defaults to building in the package's parent
   directory. It also gains a new `binary` parameter controls whether a binary
   or a source version (with no vignettes or manuals) is built. Confusingly,
   binary packages are built with `R CMD INSTALL`.
 
-* `install_github` now allows you to specify which branch to download
+IMPROVEMENTS AND BUG FIXES
+
+* on Windows, `devtools` now checks for the presence of `Rtools` on startup,
+  and will automatically add it to the path if needed.
+
+* `document` uses `roxygen2` instead of `roxygen`. It now loads package
+  dependency so that they're available when roxygen executes the package
+  source code.
+
+* `document` has new parameter `clean` which clears all roxygen caches and
+  removes all existing man files. `check` now runs `document` in this mode.
+
+* `dev_mode` will create directories recursively, and complain if it can't
+  create them.
+
+* `install_github` now allows you to specify which branch to download, and
+  automatically reloads package if needed.
+
+* `reload` now will only reload if the package is already loaded.
+
+* `release` gains `check` parameter that allows you to skip package check (if
+  you've just done it.)
+
+* `test` automatically reloads code so you never run tests on old code 
 
 devtools 0.3
 ------------

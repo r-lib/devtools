@@ -1,6 +1,6 @@
 Package: devtools
 Title: Tools to make developing R code easier
-Version: 0.3
+Version: 0.4
 Author: Hadley Wickham <h.wickham@gmail.com>
 Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Description: Collection of package development tools
