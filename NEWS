@@ -6,7 +6,9 @@
 * on Windows, `devtools` now checks for the presence of `Rtools` on startup,
   and will automatically add it to the path if needed.
 
-* use `roxygen2` instead of `roxygen` for documentation
+* use `roxygen2` instead of `roxygen` for documentation. `document` now loads
+  dependent packages so that they're available when roxygen executes the
+  package source code.
 
 * `reload` now will only reload if the package is already loaded, and
   `install_github` will automatically reload if needed.

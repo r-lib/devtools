@@ -19,6 +19,8 @@ document <- function(pkg = NULL, clean = FALSE) {
     file.remove(dir(file.path(pkg$path, "man"), full = TRUE))
   }
   
+  # Ensure dependent pacakges are available.
+  load_deps(pkg)
   in_dir(pkg$path, roxygenise("."))
     
   # if (check) check_doc(pkg)
