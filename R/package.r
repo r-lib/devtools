@@ -44,26 +44,36 @@ local({
 })
 
 find_package <- function(x) {
-  desc_path <- file.path(x, "DESCRIPTION")
-  if (file.exists(x) && file.exists(desc_path)) 
-    return(x)
-
-  # If .Rpackages exists, use that to find the package locations
-  config_path <- path.expand("~/.Rpackages")
-  if (file.exists(config_path)) {
-    lookup <- source(config_path)$value
+  is_package_path <- function(x) {
+    if (is.null(x)) return(FALSE)
     
-    # Try default function, if it exists
-    if (!is.null(lookup$default)) {
-      default_loc <- lookup$default(x)
-      if (file.exists(default_loc)) 
-        return(default_loc)
-    }
-    
-    # Otherwise try special cases
-    if (!is.null(lookup[[x]]))
-      return(lookup[[x]])
+    desc_path <- file.path(x, "DESCRIPTION")
+    file.exists(x) && file.exists(desc_path)
   }
+  if (is_package_path(x)) {
+    return(x)
+  }
+
+  # Look for config file, and give up if it doesn't exist
+  config_path <- path.expand("~/.Rpackages")
+  if (!file.exists(config_path)) {
+    return(NULL)
+  }
+  lookup <- source(config_path)$value
+  
+  # Try special case
+  if (is_package_path(lookup[[x]])) {
+    return(lookup[[x]])
+  }
+
+  # Otherwise try default function, if it exists
+  if (!is.null(lookup$default)) {
+    default_loc <- lookup$default(x)
+    if (is_package_path(default_loc)) {
+      return(default_loc)
+    }
+  }
+
   NULL
 }
 
