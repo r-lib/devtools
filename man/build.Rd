@@ -23,4 +23,7 @@
 \description{
   Build package in specified directory.
 }
+\seealso{
+  Other build functions: \code{\link{build_win}}
+}
 

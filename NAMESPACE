@@ -1,6 +1,7 @@
 export(as.package)
 export(bash)
 export(build_vignettes)
+export(build_win)
 export(build)
 export(check_doc)
 export(check)
