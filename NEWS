@@ -15,6 +15,10 @@ NEW FUNCTIONS
   or a source version (with no vignettes or manuals) is built. Confusingly,
   binary packages are built with `R CMD INSTALL`.
 
+* `build_win` sends your package to the R windows builder, allowing you to
+  make a binary version of your package for windows users if you're using
+  linux or a max (if you're using windows already, use `build(binary = T)`)
+
 IMPROVEMENTS AND BUG FIXES
 
 * if using `.Rpackages` config file, default function is used last, not first.

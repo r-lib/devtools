@@ -25,6 +25,10 @@ Building and installing:
   `install` and `check` to ensure that your development directory is left
   untouched. You can also use it to build a binary version of your package.
 
+* `build_win("pkg")` builds a package using
+  [win-builder](http://win-builder.r-project.org/), allowing you to easily
+  make a windows binary package if you're not on windows.
+
 * `install("pkg")` reinstalls the package, detaches the currently loaded
   version then reloads the new version with `library`. Reloading a package is
   not guaranteed to work: see the documentation to `reload` for caveats.
