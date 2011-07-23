@@ -20,7 +20,9 @@
   with the other packages you have installed.
 }
 \examples{
+\donttest{
 dev_mode()
 dev_mode()
+}
 }
 

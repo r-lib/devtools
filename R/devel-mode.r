@@ -12,8 +12,10 @@
 #' @param path directory to for library.
 #' @export
 #' @examples
+#' \donttest{
 #' dev_mode()
 #' dev_mode()
+#' }
 dev_mode <- function(on = NULL, path = "~/R-dev") {
   lib_paths <- .libPaths()
 
