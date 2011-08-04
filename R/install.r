@@ -11,6 +11,7 @@
 #' @param reload if \code{TRUE} (the default), will automatically reload the 
 #'   package after installing.
 #' @export
+#' @importFrom utils install.packages
 install <- function(pkg = NULL, reload = TRUE) {
   pkg <- as.package(pkg)
   message("Installing ", pkg$package)

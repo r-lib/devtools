@@ -7,7 +7,8 @@ Description: Collection of package development tools
 Depends:
     R (>= 2.13)
 Imports:
-    RCurl
+    RCurl,
+    utils
 Suggests:
     testthat,
     roxygen2
