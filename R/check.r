@@ -13,7 +13,9 @@
 check <- function(pkg = NULL, document = TRUE) {
   pkg <- as.package(pkg)
   
-  document(pkg, clean = TRUE)
+  if (document) {
+    document(pkg, clean = TRUE)
+  }
   message("Checking ", pkg$package)
 
   built_path <- build(pkg, tempdir())  
