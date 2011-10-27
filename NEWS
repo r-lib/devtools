@@ -3,6 +3,9 @@
   (`vanilla = T`), it will source in a vanilla R environment which ignores all
   local environment settings.
 
+* On windows, `devtools` will also add the path to `mingw` on startup. (Thanks
+  to pointer from Dave Lovell)
+
 devtools 0.4
 ------------
 

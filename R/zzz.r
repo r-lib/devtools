@@ -2,6 +2,8 @@
   if (!os() == "win") return()
   
   rtools <- normalizePath("c:\\Rtools\\bin", mustWork = FALSE)
+  mingw <- normalizePath("C:\\Rtools\\MinGW\\bin", mustWork = FALSE)
+
   if (!file.exists(rtools)) {
     message("Rtools not installed.")
     return()
@@ -13,7 +15,7 @@
   in_path <- any(paths == rtools)
   if (!in_path) {
     message("Rtools not in path, adding automatically.")
-    path <- paste(c(rtools, paths), collapse = ";")
+    path <- paste(c(rtools, mingw, paths), collapse = ";")
     Sys.setenv(PATH = path)
   }
 }
