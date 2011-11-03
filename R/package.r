@@ -19,6 +19,7 @@ as.package <- function(x = NULL) {
   if (is.package(x)) 
     return(x)
   
+  x <- removeTrailingSlash(x)
   path <- find_package(x)
   if (is.null(path)) {
     stop("Can't find package ", x, call. = FALSE)
@@ -100,3 +101,17 @@ load_pkg_description <- function(path) {
 is.package <- function(x) inherits(x, "package")
 
 
+#' Remove trailing slash of path, if it exists
+#' @keywords internal
+removeTrailingSlash <- function(x){
+  if (substrRight(x, 1)  == "/")
+    return(strtrim(x, nchar(x) - 1))
+  else
+    return(x)	
+}
+
+#' Return substring from end of string
+#' @keywords internal
+substrRight <- function(x, n){
+  substr(x, nchar(x)-n+1, nchar(x))
+}
