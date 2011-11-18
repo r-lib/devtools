@@ -1,3 +1,6 @@
+* external R commands always run in locale `C`, because that's what the CRAN
+  severs do.
+
 * `clean_source` sources an R script into a fresh R environment, ensuring that
   it can run independently of your current working environment. Optionally
   (`vanilla = T`), it will source in a vanilla R environment which ignores all

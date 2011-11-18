@@ -9,5 +9,5 @@ system_check <- function(cmd) {
 R <- function(options, path = tempdir()) {
   r_path <- shQuote(file.path(R.home("bin"), "R"))
   options <- paste(options, collapse = " ")
-  in_dir(path, system_check(paste(r_path, options)))
+  in_dir(path, system_check(paste("LC_ALL=C", r_path, options)))
 }
