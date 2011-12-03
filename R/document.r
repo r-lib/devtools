@@ -57,6 +57,7 @@ check_doc <- function(pkg = NULL) {
 #'   \code{\link{as.package}} for more information
 #' @param file name of Rd file to open.  Can optionally omit Rd extension.
 #' @export
+#' @importFrom tools file_ext
 #' @importFrom tools Rd2txt
 show_rd <- function(pkg = NULL, file) {
   pkg <- as.package(pkg)
