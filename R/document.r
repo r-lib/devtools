@@ -49,3 +49,23 @@ check_doc <- function(pkg = NULL) {
   # print(tools::checkDocStyle(dir = pkg$path))
   # print(tools::undoc(dir = pkg$path))
 }
+
+
+#' Show an Rd file in a package.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @param file name of Rd file to open.  Can optionally omit Rd extension.
+#' @export
+#' @importFrom tools Rd2txt
+show_rd <- function(pkg = NULL, file) {
+  pkg <- as.package(pkg)
+  if (file_ext(file) == "") file <- paste(file, ".Rd", sep ="")
+
+  path <- file.path(pkg$path, "man", file)
+  stopifnot(file.exists(path))
+  
+  temp <- Rd2txt(path, out = tempfile("Rtxt"), package = pkg$package)
+  file.show(temp, title = paste("Dev documentation: ", file), 
+    delete.file = TRUE) 
+}
