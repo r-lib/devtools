@@ -1,5 +1,12 @@
+devtools 0.5
+--------------
+
+NEW FUNCTIONS
+
 * new `show_rd` function that will show the development version of a help
   file.
+
+IMPROVEMENTS AND BUG FIXES
 
 * external R commands always run in locale `C`, because that's what the CRAN
   severs do.
