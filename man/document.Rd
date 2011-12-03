@@ -11,7 +11,7 @@
   \item{clean}{if \code{TRUE} will automatically clear all
   roxygen caches and delete currently man contents to
   ensure that you have the freshest version of the
-  documentation. check documentation after running
+  documentation.  check documentation after running
   roxygen.}
 }
 \description{
