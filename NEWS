@@ -1,3 +1,6 @@
+* `test` function takes `filter` argument which allows you to restrict which
+  tests are to be run
+
 devtools 0.5
 --------------
 

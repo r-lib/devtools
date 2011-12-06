@@ -2,8 +2,9 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @inheritParams testthat::test_dir
 #' @export
-test <- function(pkg = NULL) {
+test <- function(pkg = NULL, filter = NULL) {
   pkg <- as.package(pkg)
   load_all(pkg)
   message("Testing ", pkg$package)
@@ -12,5 +13,5 @@ test <- function(pkg = NULL) {
   if (!file.exists(path_test)) return()
   
   require(testthat)
-  test_dir(path_test)
+  test_dir(path_test, filter = filter)
 }
