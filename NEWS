@@ -1,6 +1,11 @@
 * `test` function takes `filter` argument which allows you to restrict which
   tests are to be run
 
+devtools 0.5.1
+--------------
+
+* Fix error in that was causing R commands to fail on windows.
+
 devtools 0.5
 --------------
 
