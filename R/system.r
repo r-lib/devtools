@@ -1,6 +1,6 @@
 system_check <- function(cmd) {
   if (.Platform$OS.type == "windows") {
-    shell(cmd, mustWork = TRUE)
+    shell(cmd, shell = NULL, mustWork = TRUE)
   } else {
     res <- system(cmd)
     if (res != 0) {
