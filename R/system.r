@@ -16,7 +16,7 @@ R <- function(options, path = tempdir()) {
   options <- paste(options, collapse = " ")
   
   if (.Platform$OS.type == "windows") {
-    lc <- "SET LC_ALL = C && "
+    lc <- "(SET LC_ALL=C) && "
   } else {
     lc <- "LC_ALL=C "
   }
