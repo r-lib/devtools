@@ -1,5 +1,5 @@
 .onAttach <- function(...) {
-  if (!os() == "win") return()
+  if (.Platform$OS.type != "windows") return()
   
   rtools <- normalizePath("c:\\Rtools\\bin", mustWork = FALSE)
   mingw <- normalizePath("C:\\Rtools\\MinGW\\bin", mustWork = FALSE)

@@ -38,7 +38,6 @@ Collate:
     'test.r'
     'utils.r'
     'vignettes.r'
-    'os.r'
     'zzz.r'
     'wd.r'
     'source.r'

@@ -1,5 +1,5 @@
 system_check <- function(cmd) {
-  if (os() == "win") {
+  if (.Platform$OS.type == "windows") {
     shell(cmd, mustWork = TRUE)
   } else {
     res <- system(cmd)
@@ -15,7 +15,7 @@ R <- function(options, path = tempdir()) {
   r_path <- shQuote(file.path(R.home("bin"), "R"))
   options <- paste(options, collapse = " ")
   
-  if (os() == "win") {
+  if (.Platform$OS.type == "windows") {
     lc <- "SET LC_ALL = C && "
   } else {
     lc <- "LC_ALL=C "

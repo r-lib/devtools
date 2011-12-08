@@ -1,3 +1,5 @@
+* better check for OS type, thanks to Brian Ripley.
+
 * `test` function takes `filter` argument which allows you to restrict which
   tests are to be run
 
