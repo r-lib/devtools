@@ -83,3 +83,47 @@ install_github <- function(repo, username = "hadley", branch = "master") {
   # Install
   install(out_path)
 }
+
+#' Attempts to install a package directly from gitorious.
+#'
+#' @param project Gitorious project name
+#' @param repo Repo name
+#' @param branch Desired branch - defaults to \code{"master"}
+#' @export
+#' @importFrom RCurl getBinaryURL
+#' @examples
+#' \dontrun{
+#' install_gitorious("test", "r")
+#' }
+
+install_gitorious <- function(repo, project, branch = "master") {
+  
+  repo <- tolower(repo)
+  project <- tolower(project)
+  
+  message("Installing ", repo, " from ", project)
+  name <- paste(project, "-", repo, sep = "")
+
+  # Download and uncompress the tar archive
+  tar_url <- paste("https://gitorious.org/", project, "/", repo,
+    "/archive-tarball/", branch, sep = "")
+  src <- file.path(tempdir(), paste(name, ".tar.gz", sep = ""))
+  
+  content <- getBinaryURL(tar_url, .opts = list(
+    followlocation = TRUE, ssl.verifypeer = FALSE))
+  writeBin(content, src)
+  on.exit(unlink(src), add = TRUE)
+  
+  pkg_name <- basename(untar(src, list = TRUE, compressed = "gzip")[1])
+  out_path <- file.path(tempdir(), name)
+  untar(src, compressed = "gzip", exdir = tempdir())
+  on.exit(unlink(out_path), add = TRUE)
+  
+  # Check it's an R package
+  if (!file.exists(file.path(out_path, "DESCRIPTION"))) {
+    stop("Does not appear to be an R package", call. = FALSE)
+  }
+  
+  # Install
+  install(out_path)
+}
