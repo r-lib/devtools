@@ -1,3 +1,7 @@
+* `dev_mode` performs some basic tests to make sure you're not setting your
+  development library to a directory that's not already an R library. (Fixes
+  #25)
+
 * remote installation will ensure the configure file is executable.
 
 * all external package installation functions are vectorised so you can

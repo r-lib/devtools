@@ -31,6 +31,11 @@ dev_mode <- function(on = NULL, path = "~/R-dev") {
     if (!file.exists(path)) {
       stop("Failed to create ", path, call. = FALSE)
     }
+    
+    if (!is_library(path)) {
+      warning(path, " does not appear to be a library. ", 
+        "Are sure you specified the correct directory?", call. = FALSE)
+    }
 
     message("Dev mode: ON")
     .libPaths(c(path, lib_paths))
@@ -39,4 +44,19 @@ dev_mode <- function(on = NULL, path = "~/R-dev") {
     # unlink(path, recursive = TRUE)
     .libPaths(setdiff(lib_paths, path))
   }  
+}
+
+is_library <- function(path) {
+  # empty directories can be libraries
+  if (length(dir(path)) == 0) return (TRUE)
+  
+  # otherwise check that the directories are compiled R directories -
+  # i.e. that they contain a help directory
+  dirs <- dir(path, full.names = TRUE)
+  dirs <- dirs[file_test("-d", dirs)]
+  
+  has_pkg_dir <- function(path) length(dir(path, pattern = "Meta")) > 0
+  help_dirs <- vapply(dirs, has_pkg_dir, logical(1))
+  
+  all(help_dirs)
 }
