@@ -11,7 +11,7 @@ install_url <- function(url, name = NULL) {
     name <- rep(list(NULL), length(url))
   }
   
-  mapply(install_url_single, url, name)
+  invisible(mapply(install_url_single, url, name))
 }
 
 #' @importFrom RCurl getBinaryURL
