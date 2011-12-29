@@ -42,3 +42,6 @@ Collate:
     'wd.r'
     'source.r'
     'decompress.r'
+    'install-github.r'
+    'install-url.r'
+    'install-version.r'
