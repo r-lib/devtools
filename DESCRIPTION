@@ -45,3 +45,4 @@ Collate:
     'install-github.r'
     'install-url.r'
     'install-version.r'
+    'install-gitorious.r'
