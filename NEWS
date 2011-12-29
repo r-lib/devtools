@@ -1,3 +1,5 @@
+* new `install_url` function for installing package from an arbitrary url
+
 * better default paths for 64-bit R on windows (Fixes #35)
 
 * include `install_version` function from Jeremy Stephens for installing a

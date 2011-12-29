@@ -43,6 +43,36 @@ install_deps <- function(pkg = NULL) {
   invisible(deps)
 }
 
+#' Install a package from a url
+#'
+#' @param url location of package on internet
+#' @export
+install_url <- function(url, name = NULL) {
+  if (is.null(name)) {
+    name <- basename(url)
+  }
+
+  message("Installing ", name, " from ", dirname(url))
+  bundle <- file.path(tempdir(), name)
+  
+  # Download package file
+  content <- getBinaryURL(url, .opts = list(
+    followlocation = TRUE, ssl.verifypeer = FALSE))
+  writeBin(content, bundle)
+  on.exit(unlink(bundle), add = TRUE)
+  
+  unbundle <- decompress(bundle)
+  on.exit(unlink(unbundle), add = TRUE)
+  
+  # Check it's an R package
+  if (!file.exists(file.path(unbundle, "DESCRIPTION"))) {
+    stop("Does not appear to be an R package", call. = FALSE)
+  }
+  
+  # Install
+  install(unbundle)
+}
+
 #' Attempts to install a package directly from github.
 #'
 #' @param username Github username
@@ -56,32 +86,13 @@ install_deps <- function(pkg = NULL) {
 #' }
 install_github <- function(repo, username = "hadley", branch = "master") {
   
-  message("Installing ", repo, " from ", username)
+  message("Installing github repo ", repo, " from ", username)
   name <- paste(username, "-", repo, sep = "")
-  url <- paste("https://github.com/", username, "/", repo, sep = "")
+  
+  url <- paste("https://github.com/", username, "/", repo,
+    "/zipball/master", sep = "")
 
-  # Download and unzip repo zip
-  zip_url <- paste("https://nodeload.github.com/", username, "/", repo,
-    "/zipball/", branch, sep = "")
-  src <- file.path(tempdir(), paste(name, ".zip", sep = ""))
-  
-  content <- getBinaryURL(zip_url, .opts = list(
-    followlocation = TRUE, ssl.verifypeer = FALSE))
-  writeBin(content, src)
-  on.exit(unlink(src), add = TRUE)
-  
-  pkg_name <- basename(as.character(unzip(src, list = TRUE)$Name[1]))
-  out_path <- file.path(tempdir(), pkg_name)
-  unzip(src, exdir = tempdir())
-  on.exit(unlink(out_path), add = TRUE)
-  
-  # Check it's an R package
-  if (!file.exists(file.path(out_path, "DESCRIPTION"))) {
-    stop("Does not appear to be an R package", call. = FALSE)
-  }
-  
-  # Install
-  install(out_path)
+  install_url(url, paste(repo, ".zip", sep = ""))  
 }
 
 #' Install specified version of a CRAN package.
@@ -135,12 +146,6 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     }
   }
   package.url <- sprintf("%s/src/contrib/Archive/%s", repos, package.path)
-  local.path <- file.path(tempdir(), basename(package.path))
-
-  if (download.file(package.url, local.path) != 0) {
-    stop("couldn't download file: ", package.url)
-  }
-  on.exit(unlink(local.path), add = TRUE)
   
-  install.packages(local.path, repos = NULL, type = "source")
+  install_url(package.url)
 }
