@@ -50,6 +50,6 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     }
   }
 
-  url <- paste(repos, "/src/contrib/Archive/", package.path)  
+  url <- paste(repos, "/src/contrib/Archive/", package.path, sep = "")  
   install_url(url)
 }

@@ -1,19 +1,23 @@
 decompress <- function(src, target = tempdir()) {
   filename <- basename(src)
-  ext <- gsub("^[^.]*\\.", "", filename)
   
-  if (ext == "zip") {
+  if (grepl("\\.zip$", filename)) {
     expand <- unzip
-  } else if (ext %in% c("tar.gz", "tgz")) {
+    outdir <- function() {
+      basename(as.character(expand(src, list = TRUE)$Name[1]))
+    }
+  } else if (grepl("\\.(tar\\.gz|tgz)$", filename)) {
     expand <- function(...) untar(..., compressed = "gzip")
-  } else if (ext %in% c("tar.bz2", "tbz")) {
+    outdir <- function() expand(src, list = TRUE)[1]
+  } else if (grepl("\\.(tar\\.bz2|tbz)$", filename)) {
     expand <- function(...) untar(..., compressed = "bzip2")
+    outdir <- function() expand(src, list = TRUE)[1]
   } else {
+    ext <- gsub("^[^.]*\\.", "", filename)
     stop("Don't know how to decompress files with extension ", ext, 
       call. = FALSE)
   }
-  outdir <- basename(as.character(expand(src, list = TRUE)$Name[1]))
   expand(src, exdir = tempdir())
   
-  file.path(target, outdir)
+  file.path(target, outdir())
 }
