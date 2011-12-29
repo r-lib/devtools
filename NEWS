@@ -1,3 +1,6 @@
+* all external package installation functions are vectorised so you can
+  install multiple packages at time
+
 * new `install_gitorious` function install packages in gitorious repos.
 
 * new `install_url` function for installing package from an arbitrary url

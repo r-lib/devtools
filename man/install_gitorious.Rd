@@ -14,11 +14,17 @@
   \code{"master"}}
 }
 \description{
-  Attempts to install a package directly from gitorious.
+  This function is vectorised so you can install multiple
+  packages in a single command.
 }
 \examples{
 \dontrun{
 install_gitorious("r-mpc-package")
 }
+}
+\seealso{
+  Other package installation: \code{\link{install}},
+  \code{\link{install_github}}, \code{\link{install_url}},
+  \code{\link{install_version}}
 }
 

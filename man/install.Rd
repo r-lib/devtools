@@ -1,6 +1,6 @@
 \name{install}
 \alias{install}
-\title{Install a package.}
+\title{Install a local development package.}
 \usage{
   install(pkg = NULL, reload = TRUE)
 }
@@ -20,5 +20,10 @@
   Installation takes place on a copy of the package
   produced by \code{R CMD build} to avoid modifying the
   local directory in any way.
+}
+\seealso{
+  Other package installation: \code{\link{install_github}},
+  \code{\link{install_gitorious}},
+  \code{\link{install_url}}, \code{\link{install_version}}
 }
 

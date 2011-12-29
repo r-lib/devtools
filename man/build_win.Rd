@@ -22,6 +22,6 @@
   usually takes around 30 minutes.
 }
 \seealso{
-  Other build.functions: \code{\link{build}}
+  Other build functions: \code{\link{build}}
 }
 

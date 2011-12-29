@@ -14,11 +14,17 @@
   \code{"master"}}
 }
 \description{
-  Attempts to install a package directly from github.
+  This function is vectorised so you can install multiple
+  packages in a single command.
 }
 \examples{
 \dontrun{
 install_github("roxygen")
 }
+}
+\seealso{
+  Other package installation: \code{\link{install}},
+  \code{\link{install_gitorious}},
+  \code{\link{install_url}}, \code{\link{install_version}}
 }
 

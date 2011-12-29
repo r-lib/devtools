@@ -1,4 +1,4 @@
-#' Install a package.
+#' Install a local development package.
 #'
 #' Uses \code{R CMD INSTALL} to install the package. Will also try to install
 #' dependencies of the package from CRAN, if they're not already installed.
@@ -11,6 +11,7 @@
 #' @param reload if \code{TRUE} (the default), will automatically reload the 
 #'   package after installing.
 #' @export
+#' @family package installation
 #' @importFrom utils install.packages
 install <- function(pkg = NULL, reload = TRUE) {
   pkg <- as.package(pkg)

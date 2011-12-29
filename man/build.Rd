@@ -24,6 +24,6 @@
   Build package in specified directory.
 }
 \seealso{
-  Other build.functions: \code{\link{build_win}}
+  Other build functions: \code{\link{build_win}}
 }
 

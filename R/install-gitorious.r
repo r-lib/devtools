@@ -1,15 +1,22 @@
 #' Attempts to install a package directly from gitorious.
 #'
+#' This function is vectorised so you can install multiple packages in 
+#' a single command.
+#'
 #' @param project Gitorious project name
 #' @param repo Repo name
 #' @param branch Desired branch - defaults to \code{"master"}
 #' @export
+#' @family package installation
 #' @examples
 #' \dontrun{
 #' install_gitorious("r-mpc-package")
 #' }
 install_gitorious <- function(repo, project = repo, branch = "master") {
-  message("Installing gitorious repo ", repo, " from ", project)
+  message("Installing gitorious repo(s) ", 
+    paste(repo, collapse = ", "), 
+    " from ", 
+    paste(project, collapse = ", "))
 
   repo <- tolower(repo)
   project <- tolower(project)  

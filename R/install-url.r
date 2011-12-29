@@ -1,8 +1,21 @@
 #' Install a package from a url
 #'
+#' This function is vectorised so you can install multiple packages in 
+#' a single command.
+#'
 #' @param url location of package on internet
 #' @export
+#' @family package installation
 install_url <- function(url, name = NULL) {
+  if (is.null(name)) {
+    name <- rep(list(NULL), length(url))
+  }
+  
+  mapply(install_url_single, url, name)
+}
+
+#' @importFrom RCurl getBinaryURL
+install_url_single <- function(url, name = NULL) {
   if (is.null(name)) {
     name <- basename(url)
   }

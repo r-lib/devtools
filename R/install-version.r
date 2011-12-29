@@ -5,6 +5,7 @@
 #' if you do by running \code{\link{has_devel}}.
 #'
 #' @export
+#' @family package installation
 #' @param package package name
 #' @param version If the specified version is NULL or the same as the most
 #'   recent version of the package, this function simply calls
