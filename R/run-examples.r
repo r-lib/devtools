@@ -11,9 +11,12 @@
 #'   with the (lexicographically) first file.  This is useful if you have a 
 #'   lot of examples and don't want to rerun them every time when you fix a 
 #'   problem.
+#' @param strict if \code{TRUE}, each example is run in a clean R environment
+#'   mimicing what \code{R CMD check} does.  This is useful for discovering
+#'   namespace problems in your examples.
 #' @keywords programming
 #' @export
-run_examples <- function(pkg = NULL, start = NULL) {
+run_examples <- function(pkg = NULL, start = NULL, strict = TRUE) {
   pkg <- as.package(pkg)
   document(pkg)
   
@@ -39,11 +42,11 @@ run_examples <- function(pkg = NULL, start = NULL) {
   message("Running ", length(rd), " examples in ", pkg$package)
   message(paste(rep("-", getOption("width"), collapse = "")))
   mapply(run_example, names(rd), rd, 
-    MoreArgs = list(parent.frame()))  
+    MoreArgs = list(env = parent.frame(), strict = strict, pkg = pkg))  
   invisible()
 }
 
-run_example <- function(name, rd, env = parent.frame()) {
+run_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) {
   message("Checking ", name, "...")
   message(paste(rep("-", getOption("width"), collapse = "")))
   
@@ -53,8 +56,18 @@ run_example <- function(name, rd, env = parent.frame()) {
 
   # Use internal Rd2ex code which strips out \dontrun etc
   tools:::Rd2ex(rd, tmp)
-  source(tmp, echo = TRUE, keep.source = TRUE, max.deparse.length = Inf,
-    skip.echo = 6)
+  
+  if (strict) {
+    ex <- c(
+      "library(devtools)",
+      paste("load_all('", pkg$package, "')", sep = ""), 
+      readLines(tmp))
+    writeLines(ex, tmp)
+    clean_source(tmp)
+  } else {
+    source(tmp, echo = TRUE, keep.source = TRUE, max.deparse.length = Inf,
+      skip.echo = 6)    
+  }
   cat("\n\n")
 }
 

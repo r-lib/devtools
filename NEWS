@@ -1,3 +1,8 @@
+* `strict` mode for `run_examples` which runs each example in a clean
+  environment. This is much slower than the default (running in the current
+  environment), but ensures that each example works standalone, and simplifies
+  discovering namespace problems in your examples.
+
 * `dev_mode` performs some basic tests to make sure you're not setting your
   development library to a directory that's not already an R library. (Fixes
   #25)
