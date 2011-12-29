@@ -36,6 +36,11 @@ install_url_single <- function(url, name = NULL) {
   if (!file.exists(file.path(unbundle, "DESCRIPTION"))) {
     stop("Does not appear to be an R package", call. = FALSE)
   }
+
+  config_path <- file.path(unbundle, "configure")
+  if (file.exists(config_path)) {
+    Sys.chmod(config_path, "777")
+  }
   
   # Install
   install(unbundle)

@@ -1,3 +1,5 @@
+* remote installation will ensure the configure file is executable.
+
 * all external package installation functions are vectorised so you can
   install multiple packages at time
 
