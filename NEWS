@@ -1,3 +1,5 @@
+* better default paths for 64-bit R on windows (Fixes #35)
+
 * include `install_version` function from Jeremy Stephens for installing a
   specific version of a CRAN package from the archive.
 

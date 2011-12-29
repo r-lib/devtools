@@ -2,10 +2,15 @@
   if (.Platform$OS.type != "windows") return()
   
   rtools <- normalizePath("c:\\Rtools\\bin", mustWork = FALSE)
-  mingw <- normalizePath("C:\\Rtools\\MinGW\\bin", mustWork = FALSE)
+  
+  if (.Platform$OS$r_arch == "x64") {
+    mingw <- normalizePath("C:\\Rtools\\MinGW64\\bin", mustWork = FALSE)    
+  } else {
+    mingw <- normalizePath("C:\\Rtools\\MinGW\\bin", mustWork = FALSE)
+  }
 
   if (!file.exists(rtools)) {
-    packageStartupMessage("Rtools not installed.")
+    packageStartupMessage("Rtools not installed in default location.")
     return()
   }
 
