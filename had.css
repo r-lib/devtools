@@ -1,0 +1,54 @@
+/* http://colorschemedesigner.com/#1T21Ow0w0w0w0 */
+html, body {
+  background-image: url("/exclusive-paper.png");
+  background-attachment:fixed;
+}
+
+pre, code {
+  font-family: 'Inconsolata', monospace;
+  background-color: #eee;
+  color: #000;
+  font-size: 1.1em;
+}
+
+pre {
+  border: 1px solid #ccc;
+  padding: 5px; 
+  line-height: 1.4em;
+  margin: 0.75em 0 0.75em 0;
+  overflow: hidden;
+}
+
+header {
+  margin-top: 5em;
+  margin-bottom: 3em;
+  padding-bottom: 1em;
+  border-bottom: solid #d95b5c 2px;
+}
+header p {
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+footer {
+  margin-top: 3em;
+  margin-bottom: 2em;
+  border-top: solid #d95b5c 2px;
+  padding: 1em;
+}
+
+h2 {
+ margin-top: 0.5em;
+}
+.sidebar h2 {
+  font-size: 2em;
+}
+.sidebar h2:first-child {margin-top: -8px}
+
+ul li, ol li {
+  margin-left: 1em;
+  list-style-type: disc;
+}
+
+
+a:hover {color: #A6A600}

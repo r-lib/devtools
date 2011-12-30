@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+  <title>{{page.title}}</title>
+  
+  <meta name="viewport" 
+    content="width=device-width, initial-scale=1, maximum-scale=1" /> 
+  
+  <link rel="alternate" type="application/atom+xml" href="/atom.xml">
+  
+  <link href='http://fonts.googleapis.com/css?family=Inconsolata&amp;v2'
+    rel='stylesheet' type='text/css'>    
+  <link rel="stylesheet" href="/-skeleton/base.css">
+  <link rel="stylesheet" href="/-skeleton/skeleton.css">
+  <link rel="stylesheet" href="/-skeleton/layout.css">
+  <link rel="stylesheet" href="/had.css">
+  
+  <!--[if lt IE 9]><script src="/-skeleton/html5.js"></script><![endif]-->
+  <!-- <script src="/-skeleton/jquery-1.5.1.min.js"></script> -->
+  <!-- <script src="/-skeleton/app.js"></script> -->
+  
+</head>
+<body>
+
+  <div class="container">  
+    <header class="sixteen columns"> 
+      <img class="scale-with-grid" src="/toolbox.png" 
+        width="200" height="135" align="right" />
+      <hgroup>
+        <h1 class="remove-bottom">{{page.title}}</h1> 
+        <h5>{{page.subtitle}}</h5> 
+      </hgroup>
+    </header>
+
+    {{ content }}
+
+    <div class="sixteen columns">
+      <footer>
+      Styled with <a href="http://www.getskeleton.com/">skeleton</a> and <a href="http://subtlepatterns.com/">subtlepatterns</a>.  Hosted on <a href="http://github.com">github</a>.
+      </footer>
+    </div>
+  </div><!-- container -->
+    
+  
+<!-- End Document
+================================================== -->
+</body>
+</html>
