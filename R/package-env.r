@@ -12,11 +12,48 @@ pkg_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   name <- env_name(pkg)
   
-  if (!is.loaded(pkg)) {
-    attach(new.env(parent = emptyenv()), name = name)
+  if (is.loaded(pkg)) return(as.environment(name))
+  
+  # Set up package environments ----------------------------------------------
+  imp_env <- new.env(parent = .BaseNamespaceEnv, hash = TRUE)
+  attr(imp_env, "name") <- paste("imports", pkg$package, sep = ":")
+
+  env <- new.env(parent = imp_env, hash = TRUE)
+  env$.packageName <- pkg$package
+
+  ns_env <- new.env(hash = TRUE, parent = baseenv())
+  ns_env[["spec"]] <- c(name = pkg$package, version = pkg$version)
+  env[[".__NAMESPACE__."]] <- ns_env
+
+  setNamespaceInfo(env, "exports", new.env(hash = TRUE, parent = baseenv()))
+  setNamespaceInfo(env, "imports", list("base" = TRUE))
+  setNamespaceInfo(env, "path", pkg$path)
+  setNamespaceInfo(env, "dynlibs", NULL)
+  setNamespaceInfo(env, "S3methods", matrix(NA_character_, 0L, 3L))
+  env[[".__S3MethodsTable__."]] <- new.env(hash = TRUE, parent = baseenv())
+
+  dimpenv <- new.env(parent = baseenv(), hash = TRUE)
+  attr(dimpenv, "name") <- paste("lazydata", pkg$package, sep=":")
+  setNamespaceInfo(env, "lazydata", dimpenv)
+  
+  # Set up imports -----------------------------------------------------------
+  nsInfo <- parseNamespaceFile(basename(pkg$path), dirname(pkg$path))
+  
+  for (i in nsInfo$imports) {
+    if (is.character(i)) {
+      namespaceImport(env, loadNamespace(i))
+    } else {
+      namespaceImportFrom(env, loadNamespace(i[[1L]]), i[[2L]])
+    }
+  }
+  for(imp in nsInfo$importClasses) {
+    namespaceImportClasses(env, loadNamespace(imp[[1L]]), imp[[2L]])
+  }
+  for(imp in nsInfo$importMethods) {
+    namespaceImportMethods(env, loadNamespace(imp[[1L]]), imp[[2L]])
   }
   
-  as.environment(name)
+  attach(env, name = name)
 }
 
 #' Detach development environment
@@ -43,4 +80,24 @@ clear_classes <- function(pkg = NULL) {
   classes <- getClasses(name)
   lapply(classes, removeClass, where = name)    
   invisible()
+}
+
+
+attach_namespace <- function (ns, pos = 2, depends = NULL) {
+  nsname <- getNamespaceName(ns)
+  nspath <- getNamespaceInfo(ns, "path")
+  attname <- paste("package", nsname, sep = ":")
+  if (attname %in% search()) 
+      stop("namespace is already attached")
+  env <- attach(NULL, pos = pos, name = attname)
+  on.exit(.Internal(detach(pos)))
+  attr(env, "path") <- nspath
+  exports <- getNamespaceExports(ns)
+  importIntoEnv(env, exports, ns, exports)
+  dimpenv <- getNamespaceInfo(ns, "lazydata")
+  dnames <- ls(dimpenv, all.names = TRUE)
+  .Internal(importIntoEnv(env, dnames, dimpenv, dnames))
+  if (length(depends)) 
+      assign(".Depends", depends, env)
+  invisible(env)
 }
