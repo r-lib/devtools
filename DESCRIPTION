@@ -46,3 +46,4 @@ Collate:
     'install-url.r'
     'install-version.r'
     'install-gitorious.r'
+    'missing-s3.r'

@@ -1,3 +1,6 @@
+* `missing_s3` function to help figure out if you've forgotten to export any
+  s3 methods
+
 * `check_cran` downloads and checks a CRAN package - this is useful to run as
   part of the testing process of your package if you want to check the
   dependencies of your package
