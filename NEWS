@@ -1,3 +1,7 @@
+* `check_cran` downloads and checks a CRAN package - this is useful to run as
+  part of the testing process of your package if you want to check the
+  dependencies of your package
+
 * `strict` mode for `run_examples` which runs each example in a clean
   environment. This is much slower than the default (running in the current
   environment), but ensures that each example works standalone, and simplifies

@@ -18,4 +18,9 @@
   independent realisation of R, so nothing in your current
   workspace will affect the proces.
 }
+\details{
+  The check directory is only removed if the check is
+  successful - this allows you to inspect the results to
+  figure out what went wrong.
+}
 
