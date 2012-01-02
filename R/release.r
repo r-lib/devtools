@@ -46,7 +46,7 @@ release <- function(pkg = NULL, check = TRUE) {
   
   message("Preparing email")
   msg <- paste(
-    "Dear Kurt,\n",
+    "Dear CRAN maintainers,\n",
     "\n",
     "I have just uploaded a new version of ", pkg$package, " to CRAN.\n",
     "\n",
