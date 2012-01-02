@@ -15,9 +15,8 @@
   problem.}
 
   \item{strict}{if \code{TRUE}, each example is run in a
-  clean R environment mimicing what \code{R CMD check}
-  does.  This is useful for discovering namespace problems
-  in your examples.}
+  clean R environment somewhat mimicing what \code{R CMD
+  check} does.}
 }
 \description{
   One of the most frustrating parts of `R CMD check` is

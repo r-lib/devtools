@@ -12,8 +12,7 @@
 #'   lot of examples and don't want to rerun them every time when you fix a 
 #'   problem.
 #' @param strict if \code{TRUE}, each example is run in a clean R environment
-#'   mimicing what \code{R CMD check} does.  This is useful for discovering
-#'   namespace problems in your examples.
+#'   somewhat mimicing what \code{R CMD check} does. 
 #' @keywords programming
 #' @export
 run_examples <- function(pkg = NULL, start = NULL, strict = TRUE) {
