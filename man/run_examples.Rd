@@ -2,7 +2,7 @@
 \alias{run_examples}
 \title{Run all examples in a package.}
 \usage{
-  run_examples(pkg = NULL, start = NULL)
+  run_examples(pkg = NULL, start = NULL, strict = TRUE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -13,6 +13,11 @@
   file.  This is useful if you have a lot of examples and
   don't want to rerun them every time when you fix a
   problem.}
+
+  \item{strict}{if \code{TRUE}, each example is run in a
+  clean R environment mimicing what \code{R CMD check}
+  does.  This is useful for discovering namespace problems
+  in your examples.}
 }
 \description{
   One of the most frustrating parts of `R CMD check` is
