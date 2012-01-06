@@ -9,14 +9,15 @@
 #' @param on turn dev mode on (\code{TRUE}) or off (\code{FALSE}).  If omitted
 #'  will guess based on whether or not \code{path} is in
 #'  \code{\link{.libPaths}}
-#' @param path directory to for library.
+#' @param path directory to library.
+#' @param prompt logical. If TRUE, the command prompt shows the path directory to library
 #' @export
 #' @examples
 #' \donttest{
 #' dev_mode()
 #' dev_mode()
 #' }
-dev_mode <- function(on = NULL, path = "~/R-dev") {
+dev_mode <- function(on = NULL, path = "~/R-dev", prompt = FALSE) {
   lib_paths <- .libPaths()
 
   path <- normalizePath(path, winslash = "/", mustWork = FALSE)
@@ -38,9 +39,20 @@ dev_mode <- function(on = NULL, path = "~/R-dev") {
     }
 
     message("Dev mode: ON")
+
+    if (prompt) {
+      .old_prompt <<- getOption("prompt")
+      options(prompt = paste("DEVMODE[", basename(path), "] ", .old_prompt, sep = ""))
+    }
+    
     .libPaths(c(path, lib_paths))
   } else {
+    if (!is.null(.old_prompt)) {
+      options(prompt = .old_prompt)
+      .old_prompt <<- NULL
+    }
     message("Dev mode: OFF")
+    
     # unlink(path, recursive = TRUE)
     .libPaths(setdiff(lib_paths, path))
   }  
@@ -60,3 +72,5 @@ is_library <- function(path) {
   
   all(help_dirs)
 }
+
+.old_prompt <- NULL
