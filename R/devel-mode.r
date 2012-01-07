@@ -39,16 +39,16 @@ dev_mode <- function(on = NULL, path = "~/R-dev") {
 
     message("Dev mode: ON")
 
-    if (is.null(.old_prompt)) .old_prompt <<- getOption("prompt")
+    if (is.null(.old_prompt$get())) .old_prompt$set(getOption("prompt"))
     options(prompt = paste("#> "))
     
     .libPaths(c(path, lib_paths))
   } else {
     
     message("Dev mode: OFF")
-    
-    if (!is.null(.old_prompt)) options(prompt = .old_prompt)
-    .old_prompt <<- NULL
+
+    if (!is.null(.old_prompt$get())) options(prompt = .old_prompt$get())
+    .old_prompt$set(NULL)
 
     # unlink(path, recursive = TRUE)
     .libPaths(setdiff(lib_paths, path))
@@ -70,4 +70,11 @@ is_library <- function(path) {
   all(help_dirs)
 }
 
-.old_prompt <- NULL
+.old_prompt <- (function() {
+  .prompt <- NULL
+  list(
+    get = function() .prompt,
+    set = function(value) .prompt <<- value
+  )
+})()
+
