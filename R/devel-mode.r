@@ -43,7 +43,7 @@ dev_mode <- local({
       message("Dev mode: ON")
   
       if (is.null(.prompt)) .prompt <<- getOption("prompt")
-      options(prompt = paste("#> "))
+      options(prompt = paste("@> "))
       
       .libPaths(c(path, lib_paths))
     } else {
