@@ -6,17 +6,17 @@
 }
 \arguments{
   \item{entry}{either full url (character), gist ID
-  (numeric or character of numeric).  If only an entry ID
-  is specified and the entry has multiple code block, the
+  (numeric or character of numeric). If only an entry ID is
+  specified and the entry has multiple code block, the
   first entry is sourced.}
 
   \item{...}{other options passed to \code{\link{source}}}
 }
 \description{
   \dQuote{Gist is a simple way to share snippets and pastes
-  with others. All gists are git repositories, so they are
+  with others.  All gists are git repositories, so they are
   automatically versioned, forkable and usable as a git
-  repository. \url{https://gist.github.com/}}
+  repository.} \url{https://gist.github.com/}
 }
 \details{
   A gist entry can have multiple code blocks (one file for
