@@ -3,7 +3,7 @@
 \title{Install specified version of a CRAN package.}
 \usage{
   install_version(package, version = NULL,
-    repos = getOption("repos"),
+    as.of.date = NULL, repos = getOption("repos"),
     type = getOption("pkgType"))
 }
 \arguments{
@@ -14,6 +14,10 @@
   function simply calls \code{\link{install.packages}}.
   Otherwise, it looks at the list of archived source
   tarballs and tries to install an older version instead.}
+
+  \item{as.of.date}{If the specified date is not NULL and
+  version is NULL, attempt to find the package version as
+  of a certain date.}
 
   \item{repos}{ character vector, the base URL(s) of the
   repositories to use, i.e., the URL of the CRAN master
