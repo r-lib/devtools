@@ -37,7 +37,7 @@ install_version <- function(package, version = NULL, as.of.date = NULL, repos = 
       dcf <- read.dcf(dcon)
 
       current.release.date <- as.Date(dcf[1, 'Date'])
-      install.latest <- (as.of.date > current.release.date)
+      install.latest <- (as.of.date >= current.release.date)
     }
     else {
       current.version <- available[package, 'Version']
