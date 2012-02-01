@@ -1,3 +1,7 @@
+* functions that run R now do so with `R_LIBS` set to the current
+  `.libPaths()` - this will ensure that checking uses the development library
+  if you are in development mgode.
+
 * `check` runs with example timings, as is done on CRAN. Run with new param
   `cleanup = F` to access the timings. 
 
