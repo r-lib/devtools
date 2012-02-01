@@ -10,10 +10,11 @@
 #'   \code{\link{as.package}} for more information
 #' @param reload if \code{TRUE} (the default), will automatically reload the 
 #'   package after installing.
+#' @param ... Other arguments passed on to \code{\link{install.packages}}.
 #' @export
 #' @family package installation
 #' @importFrom utils install.packages
-install <- function(pkg = NULL, reload = TRUE) {
+install <- function(pkg = NULL, reload = TRUE, ...) {
   pkg <- as.package(pkg)
   message("Installing ", pkg$package)
   install_deps(pkg)  
@@ -21,7 +22,7 @@ install <- function(pkg = NULL, reload = TRUE) {
   built_path <- build(pkg, tempdir())
   on.exit(unlink(built_path))    
 
-  install.packages(built_path, repos = NULL, type = "source")
+  install.packages(built_path, repos = NULL, type = "source", ...)
 
   if (reload) reload(pkg)
   invisible(TRUE)

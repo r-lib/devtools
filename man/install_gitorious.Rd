@@ -3,7 +3,7 @@
 \title{Attempts to install a package directly from gitorious.}
 \usage{
   install_gitorious(repo, project = repo,
-    branch = "master")
+    branch = "master", ...)
 }
 \arguments{
   \item{project}{Gitorious project name}
@@ -12,6 +12,9 @@
 
   \item{branch}{Desired branch - defaults to
   \code{"master"}}
+
+  \item{...}{Other arguments passed on to
+  \code{\link{install.packages}}.}
 }
 \description{
   This function is vectorised so you can install multiple

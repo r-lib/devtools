@@ -1,3 +1,6 @@
+* all `install` functions now pass ... on to `install.packages` allowing you
+  to specify (e.g.) install and compile options.
+
 * if an error occurs when calling loading R files, the cache will be
   automatically cleared so that all files are loaded again next time you try
   (Fixes #55)

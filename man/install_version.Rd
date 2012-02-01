@@ -4,7 +4,7 @@
 \usage{
   install_version(package, version = NULL,
     repos = getOption("repos"),
-    type = getOption("pkgType"))
+    type = getOption("pkgType"), ...)
 }
 \arguments{
   \item{package}{package name}
@@ -14,6 +14,9 @@
   function simply calls \code{\link{install.packages}}.
   Otherwise, it looks at the list of archived source
   tarballs and tries to install an older version instead.}
+
+  \item{...}{Other arguments passed on to
+  \code{\link{install.packages}}.}
 
   \item{repos}{ character vector, the base URL(s) of the
   repositories to use, i.e., the URL of the CRAN master
