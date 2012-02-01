@@ -14,9 +14,11 @@
   don't want to rerun them every time when you fix a
   problem.}
 
-  \item{strict}{if \code{TRUE}, each example is run in a
-  clean R environment somewhat mimicing what \code{R CMD
-  check} does.}
+  \item{strict}{if \code{TRUE}, the package is first
+  installed, and then each example is run in a clean R
+  environment somewhat mimicing what \code{R CMD check}
+  does.  Since this involves installing the package you
+  should probably be in \code{\link{dev_mode}}}
 }
 \description{
   One of the most frustrating parts of `R CMD check` is
