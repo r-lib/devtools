@@ -5,15 +5,15 @@
 #' runs in an independent realisation of R, so nothing in your current 
 #' workspace will affect the proces.
 #'
-#' The check directory is only removed if the check is successful - this
-#' allows you to inspect the results to figure out what went wrong.
-
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param document if \code{TRUE} (the default), will update and check
 #'   documentation before running formal check.
+#' @param cleanup if \code{TRUE} the check directory is removed if the check
+#'   is successful - this allows you to inspect the results to figure out what
+#'   went wrong. If \code{FALSE} the check directory is never removed.
 #' @export
-check <- function(pkg = NULL, document = TRUE) {
+check <- function(pkg = NULL, document = TRUE, cleanup = TRUE) {
   pkg <- as.package(pkg)
   
   if (document) {
@@ -25,8 +25,14 @@ check <- function(pkg = NULL, document = TRUE) {
   on.exit(unlink(built_path))
   
   R(paste("CMD check ", built_path, " --timings", sep = ""), tempdir())
-  check_path <- file.path(tempdir(), paste(pkg$package, ".Rcheck", sep = ""))
-  unlink(check_path, recursive = TRUE)
+  
+  check_path <- file.path(tempdir(), paste(pkg$package, ".Rcheck", 
+    sep = ""))
+  if (cleanup) {
+    unlink(check_path, recursive = TRUE)    
+  } else {
+    message("Check results in ", check_path)
+  }
 
   invisible(TRUE)
 }

@@ -1,4 +1,5 @@
-* `check` runs with example timings, as is done on CRAN
+* `check` runs with example timings, as is done on CRAN. Run with new param
+  `cleanup = F` to access the timings. 
 
 * `missing_s3` function to help figure out if you've forgotten to export any
   s3 methods
