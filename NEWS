@@ -46,6 +46,8 @@
 * `test` function takes `filter` argument which allows you to restrict which
   tests are to be run
 
+* show the status of `dev_mode` in a prompt on a colsole.
+
 devtools 0.5.1
 --------------
 
