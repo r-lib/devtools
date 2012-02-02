@@ -47,3 +47,4 @@ Collate:
     'install-version.r'
     'install-gitorious.r'
     'missing-s3.r'
+    'bisect.r'
