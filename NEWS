@@ -46,6 +46,8 @@
 * `test` function takes `filter` argument which allows you to restrict which
   tests are to be run
 
+* New functions for automated git bisect testing. (Thanks to Winston Chang)
+
 devtools 0.5.1
 --------------
 
