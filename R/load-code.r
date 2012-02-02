@@ -28,8 +28,14 @@ load_code <- function(pkg = NULL, env = pkg_env(pkg)) {
   
   paths <- changed_files(paths)
 
-  lapply(paths, sys.source, envir = env, chdir = TRUE, 
-    keep.source = TRUE)
+  tryCatch(
+    lapply(paths, sys.source, envir = env, chdir = TRUE, 
+      keep.source = TRUE), 
+    error = function(e) {
+      clear_cache()
+      stop(e)
+    }
+  )
   
   # Load .onLoad if it's defined
   if (exists(".onLoad", env, inherits = FALSE) && 

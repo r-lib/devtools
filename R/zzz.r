@@ -3,7 +3,7 @@
   
   rtools <- normalizePath("c:\\Rtools\\bin", mustWork = FALSE)
   
-  if (.Platform$OS$r_arch == "x64") {
+  if (.Platform$r_arch == "x64") {
     mingw <- normalizePath("C:\\Rtools\\MinGW64\\bin", mustWork = FALSE)    
   } else {
     mingw <- normalizePath("C:\\Rtools\\MinGW\\bin", mustWork = FALSE)

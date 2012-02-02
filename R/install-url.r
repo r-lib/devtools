@@ -4,18 +4,19 @@
 #' a single command.
 #'
 #' @param url location of package on internet
+#' @param ... Other arguments passed on to \code{\link{install.packages}}.
 #' @export
 #' @family package installation
-install_url <- function(url, name = NULL) {
+install_url <- function(url, name = NULL, ...) {
   if (is.null(name)) {
     name <- rep(list(NULL), length(url))
   }
   
-  invisible(mapply(install_url_single, url, name))
+  invisible(mapply(install_url_single, url, name, ...))
 }
 
 #' @importFrom RCurl getBinaryURL
-install_url_single <- function(url, name = NULL) {
+install_url_single <- function(url, name = NULL, ...) {
   if (is.null(name)) {
     name <- basename(url)
   }
@@ -43,5 +44,5 @@ install_url_single <- function(url, name = NULL) {
   }
   
   # Install
-  install(unbundle)
+  install(unbundle, ...)
 }

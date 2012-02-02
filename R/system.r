@@ -1,26 +1,21 @@
-system_check <- function(cmd) {
-  if (.Platform$OS.type == "windows") {
-    shell(cmd, shell = Sys.getenv("COMSPEC") , mustWork = TRUE)
-  } else {
-    res <- system(cmd)
-    if (res != 0) {
-      stop("Command failed (", res, ")", call. = FALSE)
-    }    
-  }
+# @param arg a vector of command arguments.
+# @param env a named character vector.  Will be quoted
+system_check <- function(cmd, args = character(), env = character()) {
+  env[] <- shQuote(env)
+  env <- paste(names(env), env, sep = "=")
+  
+  res <- system2(cmd, args = args, env = env)
+  if (res != 0) {
+    stop("Command failed (", res, ")", call. = FALSE)
+  }    
   
   invisible(TRUE)
 }
 
 R <- function(options, path = tempdir()) {
-  r_path <- shQuote(file.path(R.home("bin"), "R"))
-  options <- paste(options, collapse = " ")
+  r_path <- file.path(R.home("bin"), "R")
   
-  if (.Platform$OS.type == "windows") {
-    lc <- "(SET LC_ALL=C) && "
-  } else {
-    lc <- "LC_ALL=C "
-  }
+  env <- c("LC_ALL" = "C", "R_LIBS" = paste(.libPaths(), collapse = ":"))
    
-  cmd <- paste(lc, r_path, " ", options, sep = "")
-  in_dir(path, system_check(cmd))
+  in_dir(path, system_check(r_path, options, env))
 }

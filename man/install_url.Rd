@@ -2,10 +2,13 @@
 \alias{install_url}
 \title{Install a package from a url}
 \usage{
-  install_url(url, name = NULL)
+  install_url(url, name = NULL, ...)
 }
 \arguments{
   \item{url}{location of package on internet}
+
+  \item{...}{Other arguments passed on to
+  \code{\link{install.packages}}.}
 }
 \description{
   This function is vectorised so you can install multiple

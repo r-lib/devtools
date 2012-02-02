@@ -11,9 +11,10 @@
 #'   recent version of the package, this function simply calls
 #'   \code{\link{install.packages}}. Otherwise, it looks at the list of
 #'   archived source tarballs and tries to install an older version instead.
+#' @param ... Other arguments passed on to \code{\link{install.packages}}.
 #' @inheritParams utils::install.packages
 #' @author Jeremy Stephens
-install_version <- function(package, version = NULL, repos = getOption("repos"), type = getOption("pkgType")) {
+install_version <- function(package, version = NULL, repos = getOption("repos"), type = getOption("pkgType"), ...) {
   
   contriburl <- contrib.url(repos, type)
   available <- available.packages(contriburl)
@@ -26,7 +27,7 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     current.version <- available[package, 'Version']
     if (is.null(version) || version == current.version) {
       return(install.packages(package, repos = repos, contriburl = contriburl,
-        type = type))
+        type = type, ...))
     }
   }
 
@@ -52,5 +53,5 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
   }
 
   url <- paste(repos, "/src/contrib/Archive/", package.path, sep = "")  
-  install_url(url)
+  install_url(url, ...)
 }
