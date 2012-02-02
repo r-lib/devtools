@@ -3,7 +3,7 @@
 \title{Attempts to install a package directly from github.}
 \usage{
   install_github(repo, username = "hadley",
-    branch = "master")
+    branch = "master", ...)
 }
 \arguments{
   \item{username}{Github username}
@@ -12,6 +12,9 @@
 
   \item{branch}{Desired branch - defaults to
   \code{"master"}}
+
+  \item{...}{Other arguments passed on to
+  \code{\link{install.packages}}.}
 }
 \description{
   This function is vectorised so you can install multiple

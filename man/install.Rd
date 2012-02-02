@@ -2,7 +2,7 @@
 \alias{install}
 \title{Install a local development package.}
 \usage{
-  install(pkg = NULL, reload = TRUE)
+  install(pkg = NULL, reload = TRUE, ...)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -10,6 +10,9 @@
 
   \item{reload}{if \code{TRUE} (the default), will
   automatically reload the package after installing.}
+
+  \item{...}{Other arguments passed on to
+  \code{\link{install.packages}}.}
 }
 \description{
   Uses \code{R CMD INSTALL} to install the package. Will

@@ -6,13 +6,14 @@
 #' @param project Gitorious project name
 #' @param repo Repo name
 #' @param branch Desired branch - defaults to \code{"master"}
+#' @param ... Other arguments passed on to \code{\link{install.packages}}.
 #' @export
 #' @family package installation
 #' @examples
 #' \dontrun{
 #' install_gitorious("r-mpc-package")
 #' }
-install_gitorious <- function(repo, project = repo, branch = "master") {
+install_gitorious <- function(repo, project = repo, branch = "master", ...) {
   message("Installing gitorious repo(s) ", 
     paste(repo, collapse = ", "), 
     " from ", 
@@ -24,5 +25,5 @@ install_gitorious <- function(repo, project = repo, branch = "master") {
   url <- paste("https://gitorious.org/", project, "/", repo,
     "/archive-tarball/", branch, sep = "")
     
-  install_url(url, paste(repo, ".tar.gz", sep = ""))
+  install_url(url, paste(repo, ".tar.gz", sep = ""), ...)
 }
