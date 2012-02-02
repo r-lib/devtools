@@ -46,6 +46,9 @@
 * `test` function takes `filter` argument which allows you to restrict which
   tests are to be run
 
+* new `source_url` and `source_gist` function for running a script on a remote
+  server via protocols other than http.
+
 devtools 0.5.1
 --------------
 
