@@ -1,3 +1,8 @@
+NEW FEATURES
+
+* `test` function takes `filter` argument which allows you to restrict which
+  tests are to be run
+
 * if an error occurs when calling loading R files, the cache will be
   automatically cleared so that all files are loaded again next time you try
   (Fixes #55)
@@ -25,6 +30,8 @@
   development library to a directory that's not already an R library. (Fixes
   #25)
 
+INSTALLATION
+
 * remote installation will ensure the configure file is executable.
 
 * all external package installation functions are vectorised so you can
@@ -34,15 +41,14 @@
 
 * new `install_url` function for installing package from an arbitrary url
 
-* better default paths for 64-bit R on windows (Fixes #35)
-
 * include `install_version` function from Jeremy Stephens for installing a
   specific version of a CRAN package from the archive.
 
+BETTER WINDOWS BEHAVIOUR
+
 * better check for OS type, thanks to Brian Ripley.
 
-* `test` function takes `filter` argument which allows you to restrict which
-  tests are to be run
+* better default paths for 64-bit R on windows (Fixes #35)
 
 devtools 0.5.1
 --------------
