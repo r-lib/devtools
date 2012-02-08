@@ -22,7 +22,8 @@ install <- function(pkg = NULL, reload = TRUE, ...) {
   built_path <- build(pkg, tempdir())
   on.exit(unlink(built_path))    
 
-  R(paste("CMD INSTALL ", built_path, sep = ""), tempdir())
+  R(paste("CMD INSTALL ", built_path, " --library=", .libPaths()[1], 
+    sep = ""), tempdir())
 
   if (reload) reload(pkg)
   invisible(TRUE)

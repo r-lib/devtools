@@ -1,13 +1,11 @@
-* all `install` functions now pass ... on to `install.packages` allowing you
-  to specify (e.g.) install and compile options.
-
 * if an error occurs when calling loading R files, the cache will be
   automatically cleared so that all files are loaded again next time you try
   (Fixes #55)
 
 * functions that run R now do so with `R_LIBS` set to the current
   `.libPaths()` - this will ensure that checking uses the development library
-  if you are in development mgode.
+  if you are in development mode. `R_ENVIRON_USER` is set to an empty file to
+  avoid your existing settings overriding this.
 
 * `check` runs with example timings, as is done on CRAN. Run with new param
   `cleanup = F` to access the timings. 
