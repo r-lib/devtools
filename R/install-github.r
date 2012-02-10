@@ -14,15 +14,14 @@
 #' install_github("roxygen")
 #' }
 install_github <- function(repo, username = "hadley", branch = "master", ...) {
-  
   message("Installing github repo(s) ", 
-    paste(repo, collapse = ", "), 
+    paste(repo, branch, sep = "/", collapse = ", "), 
     " from ", 
     paste(username, collapse = ", "))
   name <- paste(username, "-", repo, sep = "")
   
   url <- paste("https://github.com/", username, "/", repo,
-    "/zipball/master", sep = "")
+    "/zipball/", branch, sep = "")
 
   install_url(url, paste(repo, ".zip", sep = ""), ...)
 }
