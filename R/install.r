@@ -35,7 +35,7 @@ install_deps <- function(pkg = NULL) {
     parse_deps(pkg$linkingto))
   
   # Remove packages that are already installed
-  not.installed <- function(x) length(find.package(x, quiet = TRUE)) == 0
+  not.installed <- function(x) length(find_package(x, quiet = TRUE)) == 0
   deps <- Filter(not.installed, deps)
   
   if (length(deps) == 0) return(invisible())
