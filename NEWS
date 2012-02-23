@@ -3,15 +3,6 @@ NEW FEATURES
 * `test` function takes `filter` argument which allows you to restrict which
   tests are to be run
 
-* if an error occurs when calling loading R files, the cache will be
-  automatically cleared so that all files are loaded again next time you try
-  (Fixes #55)
-
-* functions that run R now do so with `R_LIBS` set to the current
-  `.libPaths()` - this will ensure that checking uses the development library
-  if you are in development mode. `R_ENVIRON_USER` is set to an empty file to
-  avoid your existing settings overriding this.
-
 * `check` runs with example timings, as is done on CRAN. Run with new param
   `cleanup = F` to access the timings. 
 
@@ -26,10 +17,6 @@ NEW FEATURES
   environment. This is much slower than the default (running in the current
   environment), but ensures that each example works standalone. 
 
-* `dev_mode` performs some basic tests to make sure you're not setting your
-  development library to a directory that's not already an R library. (Fixes
-  #25)
-
 * `dev_mode` now updates prompt to indicate that it's active (Thanks to Kohske
   Takahashi)
 
@@ -43,8 +30,6 @@ NEW FEATURES
   this works around some bugs in the way that devtools attaches the
   development environment into the search path in a way that fails to recreate
   what happens normally during package loading.
-  
-* `load_data` (called by `load_all`) will also load data defined in R files in the data directory. (Fixes #45)
 
 INSTALLATION
 
@@ -62,12 +47,30 @@ INSTALLATION
 
 BETTER WINDOWS BEHAVIOUR
 
-* better check for OS type, thanks to Brian Ripley.
+* better check for OS type (thanks to Brian Ripley)
 
 * better default paths for 64-bit R on windows (Fixes #35)
 
 * check to see if Rtools is already available before trying to mess with the
   paths. (Fixes #55)
+
+BUG FIXES
+
+* if an error occurs when calling loading R files, the cache will be
+  automatically cleared so that all files are loaded again next time you try
+  (Fixes #55)
+
+* functions that run R now do so with `R_LIBS` set to the current
+  `.libPaths()` - this will ensure that checking uses the development library
+  if you are in development mode. `R_ENVIRON_USER` is set to an empty file to
+  avoid your existing settings overriding this.
+
+* `load_data` (called by `load_all`) will also load data defined in R files in
+  the data directory. (Fixes #45)
+
+* `dev_mode` performs some basic tests to make sure you're not setting your
+  development library to a directory that's not already an R library. (Fixes
+  #25)
 
 devtools 0.5.1
 --------------
