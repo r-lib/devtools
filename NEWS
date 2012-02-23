@@ -39,6 +39,11 @@ NEW FEATURES
 * new `source_gist` function to source R code stored in a github gist. (Thanks
   to Kohske Takahashi)
 
+* `load_all` now also loads all package dependencies (including suggestions) -
+  this works around some bugs in the way that devtools attaches the
+  development environment into the search path in a way that fails to recreate
+  what happens normally during package loading.
+
 INSTALLATION
 
 * remote installation will ensure the configure file is executable.
