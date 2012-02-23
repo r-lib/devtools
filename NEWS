@@ -52,6 +52,8 @@ BETTER WINDOWS BEHAVIOUR
 
 * better default paths for 64-bit R on windows (Fixes #35)
 
+* New functions for automated git bisect testing. (Thanks to Winston Chang)
+
 devtools 0.5.1
 --------------
 
