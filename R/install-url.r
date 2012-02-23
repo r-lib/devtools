@@ -4,6 +4,8 @@
 #' a single command.
 #'
 #' @param url location of package on internet
+#' @param name optional package name, used to provide more informative
+#'   messages
 #' @param ... Other arguments passed on to \code{\link{install.packages}}.
 #' @export
 #' @family package installation

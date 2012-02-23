@@ -7,6 +7,9 @@
 \arguments{
   \item{url}{location of package on internet}
 
+  \item{name}{optional package name, used to provide more
+  informative messages}
+
   \item{...}{Other arguments passed on to
   \code{\link{install.packages}}.}
 }

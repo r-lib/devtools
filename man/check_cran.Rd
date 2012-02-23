@@ -2,7 +2,7 @@
 \alias{check_cran}
 \title{Check a package from CRAN.}
 \usage{
-  check_cran(pkg, ..., show = FALSE)
+  check_cran(pkg, ...)
 }
 \arguments{
   \item{pkg}{Package name - note that unlike other
@@ -10,7 +10,7 @@
   package, not a path.}
 
   \item{...}{other parameters passed onto
-  \code{\link{download.packges}}}
+  \code{\link{download.packages}}}
 }
 \description{
   This is useful for automatically checking that

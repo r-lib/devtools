@@ -49,15 +49,16 @@ check <- function(pkg = NULL, document = TRUE, cleanup = TRUE) {
 #'
 #' @param pkg Package name - note that unlike other \pkg{devtools} functions
 #'   this is the name of a CRAN package, not a path.
-#' @param ... other parameters passed onto \code{\link{download.packges}}
+#' @param ... other parameters passed onto \code{\link{download.packages}}
 #' @export
-check_cran <- function(pkg, ..., show = FALSE) {
+check_cran <- function(pkg, ...) {
   message("Checking CRAN package ", pkg)
 
   tmp <- tempdir()
   stopifnot(is.character(pkg) && length(pkg) == 1)
   
-  downloaded <- download.packages(pkg, tmp, type = "source", quiet = TRUE)
+  downloaded <- download.packages(pkg, tmp, type = "source", quiet = TRUE,
+    ...)
   out_path <- downloaded[1,2]
   check_path <- gsub("_.*?$", ".Rcheck", out_path)
   
