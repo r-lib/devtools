@@ -43,7 +43,7 @@ dev_mode <- local({
       message("Dev mode: ON")
   
       if (is.null(.prompt)) .prompt <<- getOption("prompt")
-      options(prompt = paste("@> "))
+      options(prompt = paste("d> "))
       
       .libPaths(c(path, lib_paths))
     } else {
@@ -53,7 +53,6 @@ dev_mode <- local({
       if (!is.null(.prompt)) options(prompt = .prompt)
       .prompt <<- NULL
   
-      # unlink(path, recursive = TRUE)
       .libPaths(setdiff(lib_paths, path))
     }
   }
@@ -64,7 +63,7 @@ is_library <- function(path) {
   if (length(dir(path)) == 0) return (TRUE)
   
   # otherwise check that the directories are compiled R directories -
-  # i.e. that they contain a help directory
+  # i.e. that they contain a Meta directory
   dirs <- dir(path, full.names = TRUE)
   dirs <- dirs[file_test("-d", dirs)]
   
