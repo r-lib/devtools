@@ -1,8 +1,8 @@
 # devtools
 
-The aim of `devtools` is to make your life as a package developer easy, by R functions that simplify many of the common tasks of package development. Devtools is currently very opinionated about how to do package development, and requires that you use `roxygen` for documentation and `testthat` for testing. Future version will relax these opinions - patches are welcome! Track development of `devtools` at https://github.com/hadley/devtools.
+The aim of `devtools` is to make your life as a package developer easier by providing R functions that simplify many common tasks. Devtools is opinionated about how to do package development, and requires that you use `roxygen2` for documentation and `testthat` for testing. Future version will relax these opinions - patches are welcome! You can track (and contribute to) development of `devtools` at https://github.com/hadley/devtools.
 
-I also recommend that you use `roxygen2`, which has not quite made it to CRAN yet. Once you've installed and loaded `devtools`, you can install the development version of roxygen by running `install_github("roxygen", "klutometis")`.
+For discussion related to package development with devtools see the [rdevtools](http://groups.google.com/group/rdevtools) mailing list.
 
 ## Package development tools
 
@@ -32,13 +32,15 @@ Building and installing:
 * `install("pkg")` reinstalls the package, detaches the currently loaded
   version then reloads the new version with `library`. Reloading a package is
   not guaranteed to work: see the documentation to `reload` for caveats.
-  
-* `install_github("repo", "username")` installs an R package from github.
+
+* `install_github("repo", "username")` installs an R package from github,
+  `install_gitorious` from gitorious, and `install_url` from an arbitrary url.
 
 Check and release:
 
 * `check("pkg")` updates the documentation, then builds and checks the
-  package.
+  package. `build_win("pkg")` uploads the package to CRAN's win-builder
+  (provided by Uwe Ligges) and emails you the check results.
 
 * `run_examples()` runs all examples to make sure they work. This is useful
   because example checking is the last step of `R CMD check`.
