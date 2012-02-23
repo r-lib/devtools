@@ -43,6 +43,8 @@ NEW FEATURES
   this works around some bugs in the way that devtools attaches the
   development environment into the search path in a way that fails to recreate
   what happens normally during package loading.
+  
+* `load_data` (called by `load_all`) will also load data defined in R files in the data directory. (Fixes #45)
 
 INSTALLATION
 
