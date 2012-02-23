@@ -52,6 +52,9 @@ BETTER WINDOWS BEHAVIOUR
 
 * better default paths for 64-bit R on windows (Fixes #35)
 
+* new `source_url` and `source_gist` function for running a script on a remote
+  server via protocols other than http.
+
 devtools 0.5.1
 --------------
 
