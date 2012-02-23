@@ -66,6 +66,9 @@ BETTER WINDOWS BEHAVIOUR
 
 * better default paths for 64-bit R on windows (Fixes #35)
 
+* check to see if Rtools is already available before trying to mess with the
+  paths. (Fixes #55)
+
 devtools 0.5.1
 --------------
 
