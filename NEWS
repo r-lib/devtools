@@ -50,6 +50,8 @@ BETTER WINDOWS BEHAVIOUR
 
 * better default paths for 64-bit R on windows (Fixes #35)
 
+* show the status of `dev_mode` in a prompt on a colsole.
+
 devtools 0.5.1
 --------------
 
