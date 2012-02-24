@@ -5,7 +5,7 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @export
-missing_s3 <- function(pkg) {
+missing_s3 <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   ns <- parseNamespaceFile(basename(pkg$path), dirname(pkg$path))
 
