@@ -45,5 +45,5 @@ source_url <- function(url, ...) {
 source_gist <- function(entry, ...) {
   if (is.numeric(entry) ||  grepl("^[[:digit:]]+$", entry))
     entry <- paste("https://raw.github.com/gist/", entry, sep = "")
-  source_https(entry, ...)
+  source_url(entry, ...)
 }
