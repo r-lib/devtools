@@ -40,10 +40,18 @@ source_url <- function(url, ...) {
 #' \dontrun{
 #' source_gist(1654919)
 #' source_gist("1654919")
+#' source_gist("https://gist.github.com/1654919")
+#' source_gist("gist.github.com/1654919")
 #' source_gist("https://raw.github.com/gist/1654919/8161f74fb0ec26d1ba9fd54473a96f768ed76f56/test2.r")
 #' }
 source_gist <- function(entry, ...) {
-  if (is.numeric(entry) ||  grepl("^[[:digit:]]+$", entry))
+  # 1654919 or "1654919"
+  if (is.numeric(entry) ||  grepl("^[[:digit:]]+$", entry)) {
     entry <- paste("https://raw.github.com/gist/", entry, sep = "")
+  }
+  # https://gist.github.com/1899720 or gist.github.com/1899720
+  else if (grepl("((^https://)|^)gist.github.com/[[:digit:]]+$", entry)) {
+    entry <- paste("https://raw.github.com/gist/", regmatches(entry, regexpr("[[:digit:]]+$", entry)), sep = "")
+  }
   source_url(entry, ...)
 }
