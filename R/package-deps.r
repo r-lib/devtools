@@ -7,7 +7,7 @@
 #' @param deps dependencies to be loaded (e.g. "depends", "imports", "suggests", "enhances")
 #' @keywords programming
 #' @export
-load_deps <- function(pkg = NULL, deps = c("depends", "imports", "suggests")) {
+load_deps <- function(pkg = NULL, deps = c("suggests", "depends", "imports")) {
   pkg <- as.package(pkg)
   deps <- unlist(lapply(pkg[deps], parse_deps))
   
