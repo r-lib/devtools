@@ -16,7 +16,7 @@ document <- function(pkg = NULL, clean = FALSE) {
   
   if (clean) {
     clear_caches()
-    file.remove(dir(file.path(pkg$path, "man"), full = TRUE))
+    file.remove(dir(file.path(pkg$path, "man"), full.names = TRUE))
   }
   
   # Ensure dependent pacakges are available.

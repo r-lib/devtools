@@ -22,7 +22,7 @@ run_examples <- function(pkg = NULL, start = NULL, strict = TRUE) {
   document(pkg)
   
   path_man <- file.path(pkg$path, "man")
-  files <- dir(path_man, pattern = "\\.[Rr]d$", full = TRUE)
+  files <- dir(path_man, pattern = "\\.[Rr]d$", full.names = TRUE)
   names(files) <- basename(files)
   files <- sort(files)
   

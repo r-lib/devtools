@@ -14,10 +14,10 @@ build_vignettes <- function(pkg = NULL) {
   if (!file.exists(path_vig)) return()
   
   in_dir(path_vig, {
-    vigs <- dir(pattern = "\\.Rnw$", full.name = TRUE)
+    vigs <- dir(pattern = "\\.Rnw$", full.names = TRUE)
     capture.output(lapply(vigs, Sweave))
     
-    tex <- dir(pattern = "\\.tex$", full.name = TRUE)
+    tex <- dir(pattern = "\\.tex$", full.names = TRUE)
     in_dir(path_vig, lapply(tex, tools::texi2dvi, pdf = TRUE, quiet = TRUE))
   })
   

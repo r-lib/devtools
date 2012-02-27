@@ -20,11 +20,11 @@ load_data <- function(pkg = NULL, env = pkg_env(pkg)) {
   
   path_data <- file.path(pkg$path, "data")
   if (file.exists(path_data)) {
-    paths <- dir(path_data, "\\.[rR]da(ta)?$", full = TRUE)
+    paths <- dir(path_data, "\\.[rR]da(ta)?$", full.names = TRUE)
     paths <- changed_files(paths)
     objs <- c(objs, unlist(lapply(paths, load, envir = env)))
     
-    paths <- dir(path_data, "\\.[rR]$", full = TRUE)
+    paths <- dir(path_data, "\\.[rR]$", full.names = TRUE)
     paths <- changed_files(paths)
     objs <- c(objs, unlist(lapply(paths, sys.source, envir = env, 
       chdir = TRUE, keep.source = TRUE)))
