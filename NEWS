@@ -1,3 +1,6 @@
+devtools 0.6
+------------
+
 NEW FEATURES
 
 * `test` function takes `filter` argument which allows you to restrict which
