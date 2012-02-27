@@ -3,7 +3,7 @@
 \title{Load dependencies.}
 \usage{
   load_deps(pkg = NULL,
-    deps = c("depends", "imports", "suggests"))
+    deps = c("suggests", "depends", "imports"))
 }
 \arguments{
   \item{pkg}{package description, can be path or package
