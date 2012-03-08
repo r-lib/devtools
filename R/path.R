@@ -1,5 +1,3 @@
-library('stringr')
-
 #' get the PATH variable as a vector  f
 #' @export
 #' @examples
