@@ -5,32 +5,26 @@
   # Check if Rtools is already set up
   if (all(on_path("ls.exe", "gcc.exe"))) return()
   
-  # Look for default installation directories
-  rtools <- normalizePath("c:\\Rtools\\bin", mustWork = FALSE)
-  
-  if (.Platform$r_arch == "x64") {
-    mingw <- normalizePath("C:\\Rtools\\MinGW64\\bin", mustWork = FALSE)    
-  } else {
-    mingw <- normalizePath("C:\\Rtools\\MinGW\\bin", mustWork = FALSE)
-  }
-
-  if (!file.exists(rtools)) {
+  #read from registry
+  key <- try(readRegistry("SOFTWARE\\R-core\\Rtools", hive="HLM", view="32-bit"), silent=TRUE)
+  if(class(key) == "try-error")
+    rtools.home <- normalizePath("c:\\Rtools", mustWork = FALSE)
+  else 
+    rtools.home <- key$InstallPath
+    
+  if (!file.exists(rtools.home)) {
     packageStartupMessage(
       "Rtools not on path and not installed in default location.")
     return()
+  } else {
+    rtools <- file.path(rtools.home,'bin')
   }
-
-  paths <- strsplit(Sys.getenv("PATH"), ";")[[1]]
-  paths <- normalizePath(paths, mustWork = FALSE)
-
-  in_path <- any(paths == rtools)
+  
+  in_path <- (normalizePath(rtools, mustWork = FALSE) %in% get_path())
   if (!in_path) {
     packageStartupMessage("Rtools not in path, adding automatically.")
-    path <- paste(c(rtools, mingw, paths), collapse = ";")
-    Sys.setenv(PATH = path)
+    add_path(rtools, file.path(rtools.home, "MinGW","bin"))
+    if (.Platform$r_arch == "x64")
+      add_path( file.path(rtools.home, "MinGW64","bin"), after=0)
   }
-}
-
-on_path <- function(...) {
-  unname(Sys.which(c(...)) != "")
 }
