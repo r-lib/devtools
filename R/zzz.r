@@ -1,3 +1,4 @@
+#' @importFrom utils readRegistry
 .onAttach <- function(...) {
   # Assume that non-windows users have paths set correctly
   if (.Platform$OS.type != "windows") return()
@@ -6,12 +7,12 @@
   if (all(on_path("ls.exe", "gcc.exe"))) return()
   
   #read from registry
-  key <- try(utils::readRegistry("SOFTWARE\\R-core\\Rtools", hive="HLM", view="32-bit"), silent=TRUE)
-  if(class(key) == "try-error")
+  key <- try(readRegistry("SOFTWARE\\R-core\\Rtools", hive="HLM", view="32-bit"), silent=TRUE)
+  if(inherits(key, "try-error")) {
     rtools.home <- normalizePath("c:\\Rtools", mustWork = FALSE)
-  else 
+  } else {
     rtools.home <- key$InstallPath
-    
+  }
   if (!file.exists(rtools.home)) {
     packageStartupMessage(
       "Rtools not on path and not installed in default location.")
