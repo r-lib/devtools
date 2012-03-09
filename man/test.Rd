@@ -14,8 +14,8 @@
   stripped of \code{"test-"} and \code{".r"}.}
 }
 \description{
-Tests are assumed to be located in a \code{inst/tests/}
-directory. See \code{\link[testthat]{test_dir}} for the
-naming convention of test scripts within that directory.
+  Tests are assumed to be located in a \code{inst/tests/}
+  directory. See \code{\link[testthat]{test_dir}} for the
+  naming convention of test scripts within that directory.
 }
 
