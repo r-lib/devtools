@@ -48,6 +48,7 @@ Collate:
     'install-gitorious.r'
     'missing-s3.r'
     'run-source.r'
+    'path.R'
 Package: devtools
 Title: Tools to make developing R code easier
 Version: 0.6
