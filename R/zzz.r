@@ -6,7 +6,7 @@
   if (all(on_path("ls.exe", "gcc.exe"))) return()
   
   #read from registry
-  key <- try(readRegistry("SOFTWARE\\R-core\\Rtools", hive="HLM", view="32-bit"), silent=TRUE)
+  key <- try(utils::readRegistry("SOFTWARE\\R-core\\Rtools", hive="HLM", view="32-bit"), silent=TRUE)
   if(class(key) == "try-error")
     rtools.home <- normalizePath("c:\\Rtools", mustWork = FALSE)
   else 
