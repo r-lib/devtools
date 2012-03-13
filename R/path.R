@@ -1,4 +1,4 @@
-#' get the PATH variable as a vector  f
+#' get the PATH variable as a vector 
 #' @export
 #' @examples
 #' path <- get_path()

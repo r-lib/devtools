@@ -17,14 +17,20 @@
       "Rtools not on path and not installed in default location.")
     return()
   } else {
-    rtools <- file.path(rtools.home,'bin')
+    rtools <- normalizePath(file.path(rtools.home,'bin'), mustWork=FALSE)
   }
   
-  in_path <- (normalizePath(rtools, mustWork = FALSE) %in% get_path())
-  if (!in_path) {
+  if(key$`Current Version`=="2.15"){ 
+    gccbin <- normalizePath(file.path(rtools.home,'gcc-4.6.3\bin'), mustWork=FALSE)
+    if(!(gccbin %in% get_path()) && file.exists(gccbin)) try(add_path(gccbin, after=0))
+    if(!(rtools %in% get_path()) && file.exists(rtools)) try(add_path(rtools, after=0))
+  } else if (!(rtools %in% get_path())) {
     packageStartupMessage("Rtools not in path, adding automatically.")
-    add_path(rtools, file.path(rtools.home, "MinGW","bin"))
+    gccbin <- normalizePath(file.path(rtools.home, "MinGW","bin"), mustWork=FALSE)
+    if(!(gccbin %in% get_path()) && file.exists(gccbin)) try(add_path(gccbin, after=0))
+    if(!(rtools %in% get_path()) && file.exists(rtools)) try(add_path(rtools, after=0))
     if (.Platform$r_arch == "x64")
-      add_path( file.path(rtools.home, "MinGW64","bin"), after=0)
+      gcc.64 <- normalizePath(file.path(rtools.home, "MinGW64","bin"), mustWork=FALSE)
+      if(!(gcc.64 %in% get_path()) && file.exists(gcc.64)) try(add_path(gcc.64, after=0))
   }
 }
