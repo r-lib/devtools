@@ -21,9 +21,9 @@
   }
   
   if(key$`Current Version`=="2.15"){ 
-    gccbin <- normalizePath(file.path(rtools.home,'gcc-4.6.3\bin'), mustWork=FALSE)
+    gccbin <- normalizePath(file.path(rtools.home,'gcc-4.6.3','bin'), mustWork=FALSE)
     if(!(gccbin %in% get_path()) && file.exists(gccbin)) try(add_path(gccbin, after=0))
-    if(!(rtools %in% get_path()) && file.exists(rtools)) try(add_path(rtools, after=0))
+    if(!(rtools %in% get_path()) && file.existsdevtools(rtools)) try(add_path(rtools, after=0))
   } else if (!(rtools %in% get_path())) {
     packageStartupMessage("Rtools not in path, adding automatically.")
     gccbin <- normalizePath(file.path(rtools.home, "MinGW","bin"), mustWork=FALSE)
