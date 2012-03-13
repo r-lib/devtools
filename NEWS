@@ -1,3 +1,6 @@
+* `install` now quotes `libpath` so paths with embedded spaces work. (Fixes
+  #73)
+
 devtools 0.6
 ------------
 
