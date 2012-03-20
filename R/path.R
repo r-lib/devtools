@@ -1,5 +1,4 @@
 #' @title System Path Manipulations
-#' @name path
 #' @rdname path
 #' @details
 #' \code{get_path()} will retrieve the system path, also known as the $PATH, or 
