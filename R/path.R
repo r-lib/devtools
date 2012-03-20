@@ -1,15 +1,27 @@
-#' get the PATH variable as a vector 
+#' @title System Path Manipulations
+#' @name path
+#' @rdname path
+#' @details
+#' \code{get_path()} will retrieve the system path, also known as the $PATH, or 
+#' %PATH% environment variable.  The system path the the set of directories 
+#' that the system will search to find programs and executables.
+#' 
+#' \code{get_path} will retrieve the system path as a caracter vector of directories.
+#' 
 #' @export
 #' @examples
-#' path <- get_path()
+#' (path <- get_path())
 #' length(path)
 get_path <- function() {
   strsplit(Sys.getenv("PATH"),.Platform$path.sep)[[1]]
 }
 
-#' set the path from a vector of individual paths
+#' @rdname path
 #' @param path character vector of locations
-#' @note This only works for the current session.  The path is not set permanantly.
+#' @details
+#' \code{set_path()}  Takes a character vector of directories, 
+#' and sets the path to that list.
+#' The changes remain in effect until the end of the session.
 #' @export
 set_path <- function(path) {
   sep  <- .Platform$path.sep
@@ -17,22 +29,29 @@ set_path <- function(path) {
   Sys.setenv(PATH = path)
 }
 
-#' Add a location to the Path variable
-#' 
-#' Temporarily adds a location to the path.
-#' 
+
+#' @rdname path
 #' @param ... character locations
-#' @param after the place on the path, defaults to the end
+#' @param after the place on the path, defaults to first
+#' @details
+#' add_path temporarily adds location(s) to the system path.
+#' Added paths will be available to R and to any sub processes 
+#' until the end of the R session, or unless otherwise overwritten.
+#' 
 #' @export
-#'
-add_path <- function(..., after = Inf) {
+#' @examples
+#' add_path(R.home())
+#' get_path()
+add_path <- function(..., after = 0) {
   newpaths <- normalizePath(as.character(c(...)), mustWork = TRUE)
   set_path(append(get_path(), newpaths, after))
 }
 
 
-#' test if an object is on the path
-#' @param ... Strings indicating the exacutables to check for on the path.
+#' Test if an object is on the path
+#' @param ... character vectors indicating the exacutables to check for on the path.
+#' @return logical TRUE of FALSE for each element of \code{...} indicating
+#'   if it was found on the system path.
 #' @export
 on_path <- function(...) {
  unname(Sys.which(as.character(c(...))) != "")
