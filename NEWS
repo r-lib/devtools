@@ -1,3 +1,6 @@
+* `check` uses new `--as-cran` option to make checking as close to CRAN as
+  possible (fixes #68)
+
 * `install` now quotes `libpath` so paths with embedded spaces work. (Fixes
   #73)
 

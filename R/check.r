@@ -62,7 +62,7 @@ check_cran <- function(pkg, ...) {
   out_path <- downloaded[1,2]
   check_path <- gsub("_.*?$", ".Rcheck", out_path)
   
-  R(paste("CMD check ", out_path, sep = ""), tempdir())
+  R(paste("CMD check --as-cran ", out_path, sep = ""), tempdir())
 
   unlink(out_path)
   unlink(check_path, recursive = TRUE)
