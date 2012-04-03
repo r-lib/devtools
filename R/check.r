@@ -24,7 +24,7 @@ check <- function(pkg = NULL, document = TRUE, cleanup = TRUE) {
   built_path <- build(pkg, tempdir())  
   on.exit(unlink(built_path))
   
-  R(paste("CMD check ", built_path, " --timings", sep = ""), tempdir())
+  R(paste("CMD check ", built_path, " --timings --as-cran", sep = ""), tempdir())
   
   check_path <- file.path(tempdir(), paste(pkg$package, ".Rcheck", 
     sep = ""))
