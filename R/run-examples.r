@@ -12,7 +12,7 @@
 #'   lot of examples and don't want to rerun them every time when you fix a 
 #'   problem.
 #' @param strict if \code{TRUE}, the package is first installed, and then each
-#'   example is run in a clean R environment somewhat mimicing what 
+#'   example is run in a clean R environment somewhat mimicking what 
 #'   \code{R CMD check} does.  Since this involves installing the package
 #'   you should probably be in \code{\link{dev_mode}}
 #' @keywords programming

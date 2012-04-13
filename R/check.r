@@ -1,9 +1,9 @@
 #' Build and check a package, cleaning up automatically on success.
 #'
 #' \code{check} automatically builds a package before using \code{R CMD check}
-#' as this is the recommended way to check pakcages.  Note that this process
+#' as this is the recommended way to check packages.  Note that this process
 #' runs in an independent realisation of R, so nothing in your current 
-#' workspace will affect the proces.
+#' workspace will affect the process.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information

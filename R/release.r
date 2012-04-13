@@ -12,7 +12,7 @@
 #'   \item Confirm that DESCRIPTION is ok
 #'   \item Ask if you've checked packages that depend on your package
 #'   \item Build the package
-#'   \item Upload the pakcage to CRAN
+#'   \item Upload the package to CRAN
 #'   \item Draft an email to the CRAN maintainer.
 #' }
 #'
