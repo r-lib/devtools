@@ -12,19 +12,27 @@
 #' Default is to move 1 level up.
 #' @export
 cd <- function(dir, levels = 1){
-    if(substr(dir, 1, 1) == '/' || grepl(':', dir)){ 
+    if(substr(dir, 1, 1) == '/' || substr(dir, 1, 1) == '~'){ 
         setwd(dir)
-    } else {
-        old <- getwd()    
-        if(dir == '..'){
-            new <- old
-            for(i in 1:levels){
-                forward_slash <- gregexpr('/', new)[[1]]
-                new <- substr(new, 1, forward_slash[length(forward_slash)]-1)            
-            }        
-        } else {            
-            new <- paste(old, '/', dir, sep='')
-        }    
-        setwd(new)    
+        return(invisible(''))
     }
+    if(nchar(dir) > 2){
+        if(substr(dir, 2, 3) == ':/' || substr(dir, 2, 3) == ":\\"  ){ 
+            setwd(dir)
+            return(invisible(''))
+        }
+    }    
+    old <- getwd() 
+    if(substr(old, nchar(old), nchar(old)) != '/') 
+        old <- paste(old, '/', sep="")
+    if(dir == '..'){
+        new <- old
+        for(i in 1:levels){
+            forward_slash <- gregexpr('/', new)[[1]]
+            new <- substr(new, 1, forward_slash[length(forward_slash)-1])            
+        }        
+    } else {
+        new <- paste(old, dir, sep='')    
+    }
+    setwd(new)    
 }
