@@ -29,7 +29,7 @@ source_url <- function(url, ...) {
 #'
 #' A gist entry can have multiple code blocks (one file for one block).
 #' Gist is based on git, which means gist has commit histories (i.e., revisions).
-#' You can specify a commit by ginving SHA.
+#' You can specify a commit by giving SHA.
 #'
 #' @param entry either full url (character), gist ID (numeric or character of
 #'   numeric). If only an entry ID is specified and the entry has multiple code

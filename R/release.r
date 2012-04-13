@@ -10,7 +10,7 @@
 #'   \item Confirm that news is up-to-date
 #'   \item Confirm that DESCRIPTION is ok
 #'   \item Build the package
-#'   \item Upload the pakcage to CRAN
+#'   \item Upload the package to CRAN
 #'   \item Draft an email to the CRAN maintainer.
 #' }
 #'
