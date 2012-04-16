@@ -17,7 +17,7 @@ decompress <- function(src, target = tempdir()) {
     stop("Don't know how to decompress files with extension ", ext, 
       call. = FALSE)
   }
-  expand(src, exdir = tempdir())
+  expand(src, exdir = target)
   
   file.path(target, outdir())
 }
