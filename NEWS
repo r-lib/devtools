@@ -1,3 +1,6 @@
+* `decompress` now uses target directory as defined in the function call
+  when expanding a compressed file. (Fixes #84)
+
 * `check` uses new `--as-cran` option to make checking as close to CRAN as
   possible (fixes #68)
 
