@@ -10,20 +10,27 @@
 #'   \code{\link{as.package}} for more information
 #' @param reload if \code{TRUE} (the default), will automatically reload the 
 #'   package after installing.
+#' @param quick if \code{TRUE} skips docs, multiple-architectures,
+#'   and demos to make installation as fast as possible.
 #' @param ... Other arguments passed on to \code{\link{install.packages}}.
 #' @export
 #' @family package installation
 #' @importFrom utils install.packages
-install <- function(pkg = NULL, reload = TRUE, ...) {
+install <- function(pkg = NULL, reload = TRUE, quick = FALSE, ...) {
   pkg <- as.package(pkg)
   message("Installing ", pkg$package)
   install_deps(pkg)  
   
   built_path <- build(pkg, tempdir())
   on.exit(unlink(built_path))    
-
-  R(paste("CMD INSTALL ", shquote(built_path), 
-    " --library=", shQuote(.libPaths()[1]), sep = ""), tempdir())
+  
+  opts <- paste("--library=", shQuote(.libPaths()[1]), sep = "")
+  if (quick) {
+    opts <- paste(opts, "--no-docs", "--no-multiarch", "--no-demo")
+  }
+  
+  R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, " ", tempdir(), 
+    sep = ""))
 
   if (reload) reload(pkg)
   invisible(TRUE)

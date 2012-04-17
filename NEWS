@@ -3,6 +3,10 @@ NEW FEATURES
 * `check` uses new `--as-cran` option to make checking as close to CRAN as
   possible (fixes #68)
 
+* `install` has new quick option to make package installation faster, by
+  sacrificing documentation, demos and multi-architecture binaries. (Fixes
+  #77)
+
 BUG FIXES
 
 * `decompress` now uses target directory as defined in the function call

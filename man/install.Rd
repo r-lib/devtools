@@ -2,7 +2,7 @@
 \alias{install}
 \title{Install a local development package.}
 \usage{
-  install(pkg = NULL, reload = TRUE, ...)
+  install(pkg = NULL, reload = TRUE, quick = FALSE, ...)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -10,6 +10,10 @@
 
   \item{reload}{if \code{TRUE} (the default), will
   automatically reload the package after installing.}
+
+  \item{quick}{if \code{TRUE} skips docs,
+  multiple-architectures, and demos to make installation as
+  fast as possible.}
 
   \item{...}{Other arguments passed on to
   \code{\link{install.packages}}.}
