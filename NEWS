@@ -1,5 +1,13 @@
 NEW FEATURES
 
+* `revdep`, `revdep_maintainers` and `revdep_check` for calculating reverse
+  dependencies, finding their maintainers and running `R CMD check`. 
+  (Fixes #78)
+
+* `check_cran` has received a massive overhaul: it now checks multiple
+  packages, installs dependencies (in user specified library), and parse check
+  output to extract errors and warnings
+
 * `check` uses new `--as-cran` option to make checking as close to CRAN as
   possible (fixes #68)
 

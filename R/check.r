@@ -38,34 +38,3 @@ check <- function(pkg = NULL, document = TRUE, cleanup = TRUE) {
 }
 
 
-#' Check a package from CRAN.
-#'
-#' This is useful for automatically checking that dependencies of your 
-#' packages work.
-#'
-#' The downloaded package and check directory are only removed if the check is
-#' successful - this allows you to inspect the results to figure out what
-#' went wrong.
-#'
-#' @param pkg Package name - note that unlike other \pkg{devtools} functions
-#'   this is the name of a CRAN package, not a path.
-#' @param ... other parameters passed onto \code{\link{download.packages}}
-#' @export
-check_cran <- function(pkg, ...) {
-  message("Checking CRAN package ", pkg)
-
-  tmp <- tempdir()
-  stopifnot(is.character(pkg) && length(pkg) == 1)
-  
-  downloaded <- download.packages(pkg, tmp, type = "source", quiet = TRUE,
-    ...)
-  out_path <- downloaded[1,2]
-  check_path <- gsub("_.*?$", ".Rcheck", out_path)
-  
-  R(paste("CMD check --as-cran ", out_path, sep = ""), tempdir())
-
-  unlink(out_path)
-  unlink(check_path, recursive = TRUE)
-  
-  invisible(TRUE)
-}
