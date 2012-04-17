@@ -1,3 +1,5 @@
+* `build_path` in install now quoted (Fixes #76)
+
 * `decompress` now uses target directory as defined in the function call
   when expanding a compressed file. (Fixes #84)
 
