@@ -1,13 +1,15 @@
-* `build_path` in install now quoted (Fixes #76)
-
-* `decompress` now uses target directory as defined in the function call
-  when expanding a compressed file. (Fixes #84)
+NEW FEATURES
 
 * `check` uses new `--as-cran` option to make checking as close to CRAN as
   possible (fixes #68)
 
-* `install` now quotes `libpath` so paths with embedded spaces work. (Fixes
-  #73)
+BUG FIXES
+
+* `decompress` now uses target directory as defined in the function call
+  when expanding a compressed file. (Fixes #84)
+
+* `install` now quotes `libpath` so paths with embedded spaces work and build
+  path (Fixes #73 and #76)
 
 devtools 0.6
 ------------
