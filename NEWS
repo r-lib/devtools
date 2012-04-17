@@ -10,6 +10,8 @@ BUG FIXES
 
 * `install` now quotes `libpath` so paths with embedded spaces work and build
   path (Fixes #73 and #76)
+  
+* `load_data` now also loads `.RData` files (Fixes #81)
 
 devtools 0.6
 ------------
