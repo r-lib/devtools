@@ -22,6 +22,8 @@ NEW FEATURES
   argument which makes it possible to install packages that are contained
   within a sub-directory of a repository or compressed file. (Fixes #64)
 
+* `source_gist` now accepts default url such as "https://gist.github.com/nnn"
+
 BUG FIXES
 
 * `decompress` now uses target directory as defined in the function call
