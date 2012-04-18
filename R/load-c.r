@@ -10,7 +10,7 @@ load_c <- function(pkg = NULL) {
   path_src <- file.path(pkg$path, "src")
   if (!file.exists(path_src)) return(invisible())
   
-  paths <- dir(path_src, "\\.(so|dll)$", full = TRUE)
+  paths <- dir(path_src, "\\.(so|dll)$", full.names = TRUE)
 
   lapply(paths, dyn.load)
   invisible(paths)

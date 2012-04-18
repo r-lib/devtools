@@ -3,7 +3,7 @@
 \title{Attempts to install a package directly from gitorious.}
 \usage{
   install_gitorious(repo, project = repo,
-    branch = "master", ...)
+    branch = "master", subdir = NULL, ...)
 }
 \arguments{
   \item{project}{Gitorious project name}
@@ -13,8 +13,11 @@
   \item{branch}{Desired branch - defaults to
   \code{"master"}}
 
+  \item{subdir}{subdirectory within repo that contains the
+  R package.}
+
   \item{...}{Other arguments passed on to
-  \code{\link{install.packages}}.}
+  \code{\link{install}}.}
 }
 \description{
   This function is vectorised so you can install multiple

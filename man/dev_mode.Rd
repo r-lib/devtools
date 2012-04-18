@@ -9,7 +9,7 @@
   (\code{FALSE}).  If omitted will guess based on whether
   or not \code{path} is in \code{\link{.libPaths}}}
 
-  \item{path}{directory to for library.}
+  \item{path}{directory to library.}
 }
 \description{
   When activated, \code{dev_mode} creates a new library for

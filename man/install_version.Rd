@@ -11,17 +11,16 @@
 
   \item{version}{If the specified version is NULL or the
   same as the most recent version of the package, this
-  function simply calls \code{\link{install.packages}}.
-  Otherwise, it looks at the list of archived source
-  tarballs and tries to install an older version instead.}
+  function simply calls \code{\link{install}}. Otherwise,
+  it looks at the list of archived source tarballs and
+  tries to install an older version instead.}
 
   \item{...}{Other arguments passed on to
-  \code{\link{install.packages}}.}
+  \code{\link{install}}.}
 
-  \item{repos}{ character vector, the base URL(s) of the
-  repositories to use, i.e., the URL of the CRAN master
-  such as \code{"http://cran.r-project.org"} or its Statlib
-  mirror, \code{"http://lib.stat.cmu.edu/R/CRAN"}.
+  \item{repos}{ character vector, the base URLs of the
+  repositories to use, e.g., the URL of a CRAN mirror such
+  as \code{"http://cran.us.r-project.org"}.
 
   Can be \code{NULL} to install from local files (with
   extension \file{.tar.gz} for source packages).  }
@@ -29,14 +28,19 @@
   \item{type}{character, indicating the type of package to
   download and install.
 
-  Possible values are \code{"source"}, \code{"mac.binary"}
-  (obsolete), \code{"mac.binary.leopard"} and
-  \code{"win.binary"}: the binary types can be listed and
-  downloaded but not installed on other platforms.
+  Possible values are \code{"source"},
+  \code{"mac.binary.leopard"} and \code{"win.binary"}: the
+  binary types can be listed and downloaded but not
+  installed on other platforms.
 
   The default is the appropriate binary type on Windows and
   on the CRAN binary Mac OS X distribution, otherwise
-  \code{"source"}.  }
+  \code{"source"}.  For the platforms where binary packages
+  are the default, an alternative is \code{"both"} which
+  means \sQuote{try binary if available, otherwise try
+  source}.  (This will only choose the binary package if
+  its version number is no older than the source version.)
+  }
 }
 \description{
   If you are installing an package that contains compiled

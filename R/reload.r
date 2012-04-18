@@ -15,7 +15,7 @@ reload <- function(pkg = NULL) {
   if (is.loaded(pkg)) {
     message("Reloading installed ", pkg$package)
     unload(pkg)
-    require(pkg$package, character.only = TRUE, quiet = TRUE)
+    require(pkg$package, character.only = TRUE, quietly = TRUE)
   }
 }
 

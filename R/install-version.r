@@ -9,9 +9,9 @@
 #' @param package package name
 #' @param version If the specified version is NULL or the same as the most
 #'   recent version of the package, this function simply calls
-#'   \code{\link{install.packages}}. Otherwise, it looks at the list of
+#'   \code{\link{install}}. Otherwise, it looks at the list of
 #'   archived source tarballs and tries to install an older version instead.
-#' @param ... Other arguments passed on to \code{\link{install.packages}}.
+#' @param ... Other arguments passed on to \code{\link{install}}.
 #' @inheritParams utils::install.packages
 #' @author Jeremy Stephens
 install_version <- function(package, version = NULL, repos = getOption("repos"), type = getOption("pkgType"), ...) {

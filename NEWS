@@ -1,13 +1,48 @@
-* all `install` functions now pass ... on to `install.packages` allowing you
-  to specify (e.g.) install and compile options.
+NEW FEATURES
 
-* if an error occurs when calling loading R files, the cache will be
-  automatically cleared so that all files are loaded again next time you try
-  (Fixes #55)
+* `revdep`, `revdep_maintainers` and `revdep_check` for calculating reverse
+  dependencies, finding their maintainers and running `R CMD check`. 
+  (Fixes #78)
 
-* functions that run R now do so with `R_LIBS` set to the current
-  `.libPaths()` - this will ensure that checking uses the development library
-  if you are in development mgode.
+* `check_cran` has received a massive overhaul: it now checks multiple
+  packages, installs dependencies (in user specified library), and parse check
+  output to extract errors and warnings
+
+* `check` uses new `--as-cran` option to make checking as close to CRAN as
+  possible (fixes #68)
+
+* `install` has new quick option to make package installation faster, by
+  sacrificing documentation, demos and multi-architecture binaries. (Fixes
+  #77)
+
+* `release` ask more questions and randomises correct answers so you really
+  need to read them (Fixes #79)
+
+* `install_url`, `install_github` and `install_gitorious` gain a subdir
+  argument which makes it possible to install packages that are contained
+  within a sub-directory of a repository or compressed file. (Fixes #64)
+
+BUG FIXES
+
+* `decompress` now uses target directory as defined in the function call
+  when expanding a compressed file. (Fixes #84)
+
+* `install` now quotes `libpath` so paths with embedded spaces work and build
+  path (Fixes #73 and #76)
+  
+* `load_data` now also loads `.RData` files (Fixes #81)
+
+* `install` now has `args` argument to pass additional command line arguments
+  on to `R CMD install` (replaces `...` which didn't actually do anything).
+  (Fixes #69)
+
+devtools 0.6
+------------
+
+NEW FEATURES
+
+* `test` function takes `filter` argument which allows you to restrict which
+  tests are to be run
 
 * `check` runs with example timings, as is done on CRAN. Run with new param
   `cleanup = F` to access the timings. 
@@ -23,9 +58,21 @@
   environment. This is much slower than the default (running in the current
   environment), but ensures that each example works standalone. 
 
-* `dev_mode` performs some basic tests to make sure you're not setting your
-  development library to a directory that's not already an R library. (Fixes
-  #25)
+* `dev_mode` now updates prompt to indicate that it's active (Thanks to Kohske
+  Takahashi)
+
+* new `source_url` function for sourcing script on a remote server via
+  protocols other than http (e.g. https or ftp). (Thanks to Kohske Takahashi)
+
+* new `source_gist` function to source R code stored in a github gist. (Thanks
+  to Kohske Takahashi)
+
+* `load_all` now also loads all package dependencies (including suggestions) -
+  this works around some bugs in the way that devtools attaches the
+  development environment into the search path in a way that fails to recreate
+  what happens normally during package loading.
+
+INSTALLATION
 
 * remote installation will ensure the configure file is executable.
 
@@ -36,18 +83,35 @@
 
 * new `install_url` function for installing package from an arbitrary url
 
-* better default paths for 64-bit R on windows (Fixes #35)
-
 * include `install_version` function from Jeremy Stephens for installing a
   specific version of a CRAN package from the archive.
 
-* better check for OS type, thanks to Brian Ripley.
+BETTER WINDOWS BEHAVIOUR
 
-* `test` function takes `filter` argument which allows you to restrict which
-  tests are to be run
+* better check for OS type (thanks to Brian Ripley)
 
-* new `source_url` and `source_gist` function for running a script on a remote
-  server via protocols other than http.
+* better default paths for 64-bit R on windows (Fixes #35)
+
+* check to see if Rtools is already available before trying to mess with the
+  paths. (Fixes #55)
+
+BUG FIXES
+
+* if an error occurs when calling loading R files, the cache will be
+  automatically cleared so that all files are loaded again next time you try
+  (Fixes #55)
+
+* functions that run R now do so with `R_LIBS` set to the current
+  `.libPaths()` - this will ensure that checking uses the development library
+  if you are in development mode. `R_ENVIRON_USER` is set to an empty file to
+  avoid your existing settings overriding this.
+
+* `load_data` (called by `load_all`) will also load data defined in R files in
+  the data directory. (Fixes #45)
+
+* `dev_mode` performs some basic tests to make sure you're not setting your
+  development library to a directory that's not already an R library. (Fixes
+  #25)
 
 devtools 0.5.1
 --------------

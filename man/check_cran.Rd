@@ -2,15 +2,25 @@
 \alias{check_cran}
 \title{Check a package from CRAN.}
 \usage{
-  check_cran(pkg, ..., show = FALSE)
+  check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"),
+    ...)
 }
 \arguments{
   \item{pkg}{Package name - note that unlike other
   \pkg{devtools} functions this is the name of a CRAN
   package, not a path.}
 
+  \item{libpath}{path to library to store dependencies
+  packages - if you you're doing this a lot it's a good
+  idea to pick a directory and stick with it so you don't
+  have to download all the packages every time.}
+
   \item{...}{other parameters passed onto
-  \code{\link{download.packges}}}
+  \code{\link{download.packages}}}
+}
+\value{
+  invisible \code{TRUE} if successful and no ERRORs or
+  WARNINGS,
 }
 \description{
   This is useful for automatically checking that
@@ -20,5 +30,9 @@
   The downloaded package and check directory are only
   removed if the check is successful - this allows you to
   inspect the results to figure out what went wrong.
+
+  This function does not clean up after itself, but does
+  work in a session-specific temporary directory, so all
+  files will be removed when your current R session ends.
 }
 

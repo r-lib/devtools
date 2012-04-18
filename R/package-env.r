@@ -85,23 +85,3 @@ clear_classes <- function(pkg = NULL) {
   lapply(classes, removeClass, where = name)    
   invisible()
 }
-
-
-attach_namespace <- function (ns, pos = 2, depends = NULL) {
-  nsname <- getNamespaceName(ns)
-  nspath <- getNamespaceInfo(ns, "path")
-  attname <- paste("package", nsname, sep = ":")
-  if (attname %in% search()) 
-      stop("namespace is already attached")
-  env <- attach(NULL, pos = pos, name = attname)
-  on.exit(.Internal(detach(pos)))
-  attr(env, "path") <- nspath
-  exports <- getNamespaceExports(ns)
-  importIntoEnv(env, exports, ns, exports)
-  dimpenv <- getNamespaceInfo(ns, "lazydata")
-  dnames <- ls(dimpenv, all.names = TRUE)
-  .Internal(importIntoEnv(env, dnames, dimpenv, dnames))
-  if (length(depends)) 
-      assign(".Depends", depends, env)
-  invisible(env)
-}

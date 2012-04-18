@@ -6,23 +6,23 @@
 #' @param username Github username
 #' @param repo Repo name
 #' @param branch Desired branch - defaults to \code{"master"}
-#' @param ... Other arguments passed on to \code{\link{install.packages}}.
+#' @param subdir subdirectory within repo that contains the R package.
+#' @param ... Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
 #' @examples
 #' \dontrun{
 #' install_github("roxygen")
 #' }
-install_github <- function(repo, username = "hadley", branch = "master", ...) {
-  
+install_github <- function(repo, username = "hadley", branch = "master", subdir = NULL, ...) {
   message("Installing github repo(s) ", 
-    paste(repo, collapse = ", "), 
+    paste(repo, branch, sep = "/", collapse = ", "), 
     " from ", 
     paste(username, collapse = ", "))
   name <- paste(username, "-", repo, sep = "")
   
   url <- paste("https://github.com/", username, "/", repo,
-    "/zipball/master", sep = "")
+    "/zipball/", branch, sep = "")
 
-  install_url(url, paste(repo, ".zip", sep = ""), ...)
+  install_url(url, paste(repo, ".zip", sep = ""), subdir = subdir, ...)
 }

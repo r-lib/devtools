@@ -1,6 +1,6 @@
 Package: devtools
 Title: Tools to make developing R code easier
-Version: 0.5.1
+Version: 0.6
 Author: Hadley Wickham <h.wickham@gmail.com>
 Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Description: Collection of package development tools
@@ -8,7 +8,9 @@ Depends:
     R (>= 2.13)
 Imports:
     RCurl,
-    utils
+    utils,
+    tools,
+    memoise
 Suggests:
     testthat,
     roxygen2
@@ -17,6 +19,7 @@ Collate:
     'bash.r'
     'build.r'
     'check.r'
+    'check-cran.r'
     'common-mistakes.r'
     'devel-mode.r'
     'document.r'
@@ -48,3 +51,4 @@ Collate:
     'install-gitorious.r'
     'missing-s3.r'
     'run-source.r'
+    'dependencies.r'

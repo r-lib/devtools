@@ -59,7 +59,7 @@ parse_collate <- function(string) {
 #' Find all R files in given directory.
 #' @keywords internal
 find_code <- function(path) {
-  code_paths <- dir(path, "\\.[Rr]$", full = TRUE)  
+  code_paths <- dir(path, "\\.[Rr]$", full.names = TRUE)  
   with_locale("C", sort(code_paths))
 }
 
