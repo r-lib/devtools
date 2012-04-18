@@ -2,7 +2,8 @@
 \alias{install}
 \title{Install a local development package.}
 \usage{
-  install(pkg = NULL, reload = TRUE, quick = FALSE, ...)
+  install(pkg = NULL, reload = TRUE, quick = FALSE,
+    args = NULL)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -15,8 +16,9 @@
   multiple-architectures, and demos to make installation as
   fast as possible.}
 
-  \item{...}{Other arguments passed on to
-  \code{\link{install.packages}}.}
+  \item{args}{An optional character vector of additional
+  command line arguments to be passed to \code{R CMD
+  install}.}
 }
 \description{
   Uses \code{R CMD INSTALL} to install the package. Will

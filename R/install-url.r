@@ -8,7 +8,7 @@
 #' @param name optional package name, used to provide more informative
 #'   messages
 #' @param subdir subdirectory within url bundle that contains the R package.
-#' @param ... Other arguments passed on to \code{\link{install.packages}}.
+#' @param ... Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
 install_url <- function(url, name = NULL, subdir = NULL, ...) {

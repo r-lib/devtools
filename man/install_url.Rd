@@ -16,7 +16,7 @@
   contains the R package.}
 
   \item{...}{Other arguments passed on to
-  \code{\link{install.packages}}.}
+  \code{\link{install}}.}
 }
 \description{
   This function is vectorised so you can install multiple

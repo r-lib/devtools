@@ -11,12 +11,12 @@
 
   \item{version}{If the specified version is NULL or the
   same as the most recent version of the package, this
-  function simply calls \code{\link{install.packages}}.
-  Otherwise, it looks at the list of archived source
-  tarballs and tries to install an older version instead.}
+  function simply calls \code{\link{install}}. Otherwise,
+  it looks at the list of archived source tarballs and
+  tries to install an older version instead.}
 
   \item{...}{Other arguments passed on to
-  \code{\link{install.packages}}.}
+  \code{\link{install}}.}
 
   \item{repos}{ character vector, the base URLs of the
   repositories to use, e.g., the URL of a CRAN mirror such

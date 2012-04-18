@@ -32,6 +32,10 @@ BUG FIXES
   
 * `load_data` now also loads `.RData` files (Fixes #81)
 
+* `install` now has `args` argument to pass additional command line arguments
+  on to `R CMD install` (replaces `...` which didn't actually do anything).
+  (Fixes #69)
+
 devtools 0.6
 ------------
 

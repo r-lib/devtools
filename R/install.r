@@ -12,11 +12,12 @@
 #'   package after installing.
 #' @param quick if \code{TRUE} skips docs, multiple-architectures,
 #'   and demos to make installation as fast as possible.
-#' @param ... Other arguments passed on to \code{\link{install.packages}}.
+#' @param args An optional character vector of additional command line
+#'   arguments to be passed to \code{R CMD install}.
 #' @export
 #' @family package installation
 #' @importFrom utils install.packages
-install <- function(pkg = NULL, reload = TRUE, quick = FALSE, ...) {
+install <- function(pkg = NULL, reload = TRUE, quick = FALSE, args = NULL) {
   pkg <- as.package(pkg)
   message("Installing ", pkg$package)
   install_deps(pkg)  
@@ -28,9 +29,9 @@ install <- function(pkg = NULL, reload = TRUE, quick = FALSE, ...) {
   if (quick) {
     opts <- paste(opts, "--no-docs", "--no-multiarch", "--no-demo")
   }
+  opts <- paste(opts, paste(args, collapse = " "))
   
-  R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, " ", tempdir(), 
-    sep = ""))
+  R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""))
 
   if (reload) reload(pkg)
   invisible(TRUE)

@@ -7,7 +7,7 @@
 #' @param repo Repo name
 #' @param branch Desired branch - defaults to \code{"master"}
 #' @param subdir subdirectory within repo that contains the R package.
-#' @param ... Other arguments passed on to \code{\link{install.packages}}.
+#' @param ... Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
 #' @examples
