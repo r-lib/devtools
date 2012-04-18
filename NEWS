@@ -18,6 +18,10 @@ NEW FEATURES
 * `release` ask more questions and randomises correct answers so you really
   need to read them (Fixes #79)
 
+* `install_url`, `install_github` and `install_gitorious` gain a subdir
+  argument which makes it possible to install packages that are contained
+  within a sub-directory of a repository or compressed file. (Fixes #64)
+
 BUG FIXES
 
 * `decompress` now uses target directory as defined in the function call

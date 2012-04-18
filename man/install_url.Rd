@@ -2,13 +2,18 @@
 \alias{install_url}
 \title{Install a package from a url}
 \usage{
-  install_url(url, name = NULL, ...)
+  install_url(url, name = NULL, subdir = NULL, ...)
 }
 \arguments{
-  \item{url}{location of package on internet}
+  \item{url}{location of package on internet. The url
+  should point to a zip file, a tar file or a
+  bzipped/gzipped tar file.}
 
   \item{name}{optional package name, used to provide more
   informative messages}
+
+  \item{subdir}{subdirectory within url bundle that
+  contains the R package.}
 
   \item{...}{Other arguments passed on to
   \code{\link{install.packages}}.}
