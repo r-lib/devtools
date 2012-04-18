@@ -15,6 +15,9 @@ NEW FEATURES
   sacrificing documentation, demos and multi-architecture binaries. (Fixes
   #77)
 
+* `release` ask more questions and randomises correct answers so you really
+  need to read them (Fixes #79)
+
 BUG FIXES
 
 * `decompress` now uses target directory as defined in the function call

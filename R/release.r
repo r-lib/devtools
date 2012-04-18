@@ -26,17 +26,23 @@ release <- function(pkg = NULL, check = TRUE) {
 
   if (check) {
     check(pkg)
-    cat("Was package check successful?")
-    if(menu(c("Yes", "No")) == 2) return(invisible())    
+    if (yesno("Was package check successful?")) 
+      return(invisible())
   }
   
   try(print(show_news(pkg)))
-  cat("Is package news up-to-date?")
-  if(menu(c("Yes", "No")) == 2) return(invisible())
+  if (yesno("Is package news up-to-date?")) 
+    return(invisible())
   
   cat(readLines(file.path(pkg$path, "DESCRIPTION")), sep = "\n")
-  cat("Is DESCRIPTION up-to-date?")
-  if(menu(c("Yes", "No")) == 2) return(invisible())
+  if (yesno("Is DESCRIPTION up-to-date?")) 
+    return(invisible())
+
+  if (yesno("Have you checked packages that depend on this package?"))
+    return(invisible())
+  
+  if (yesno("Ready to upload?")) 
+    return(invisible())
   
   message("Building and uploading")
   built_path <- build(pkg, tempdir())
@@ -57,3 +63,14 @@ release <- function(pkg = NULL, check = TRUE) {
   
   invisible(TRUE)
 }  
+
+yesno <- function(question) {
+  yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah")
+  nos <- c("No way", "Not yet", "I forgot", "No", "Nope")
+  
+  cat(question)
+  qs <- c(sample(yeses, 1), sample(nos, 2))
+  rand <- sample(length(qs))
+  
+  menu(qs[rand]) != which(rand == 1)
+}
