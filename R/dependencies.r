@@ -14,11 +14,13 @@ revdep <- function(pkg, dependencies = c("Depends", "Imports")) {
 }
 
 #' @rdname revdep
+#' @export
 revdep_maintainers <- function(pkg) {
   as.person(unique(packages()[revdep(pkg), "Maintainer"]))
 }
 
 #' @rdname revdep
+#' @export
 revdep_check <- function(pkg) {
   pkgs <- revdep(pkg)
   check_cran(pkgs)

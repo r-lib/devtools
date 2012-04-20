@@ -18,6 +18,7 @@
 #'   with it so you don't have to download all the packages every time.
 #' @return invisible \code{TRUE} if successful and no ERRORs or WARNINGS,
 #' @param ... other parameters passed onto \code{\link{download.packages}}
+#' @importFrom tools package_dependencies
 #' @export
 check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"), ...) {
   stopifnot(is.character(pkgs))
