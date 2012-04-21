@@ -1,14 +1,18 @@
 \name{on_path}
 \alias{on_path}
-\title{test if an object is on the path}
+\title{Test if an object is on the path}
 \usage{
   on_path(...)
 }
 \arguments{
-  \item{...}{Strings indicating the exacutables to check
-  for on the path.}
+  \item{...}{character vectors indicating the exacutables
+  to check for on the path.}
+}
+\value{
+  logical TRUE of FALSE for each element of \code{...}
+  indicating if it was found on the system path.
 }
 \description{
-  test if an object is on the path
+  Test if an object is on the path
 }
 
