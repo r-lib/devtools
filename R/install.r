@@ -14,10 +14,12 @@
 #'   and demos to make installation as fast as possible.
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to \code{R CMD install}.
+#' @param keep.source whether to keep source references. See ?options.
 #' @export
 #' @family package installation
 #' @importFrom utils install.packages
-install <- function(pkg = NULL, reload = TRUE, quick = FALSE, args = NULL) {
+install <- function(pkg = NULL, reload = TRUE, quick = FALSE, args = NULL,
+                    keep.source = getOption("keep.source")) {
   pkg <- as.package(pkg)
   message("Installing ", pkg$package)
   install_deps(pkg)  
@@ -29,8 +31,11 @@ install <- function(pkg = NULL, reload = TRUE, quick = FALSE, args = NULL) {
   if (quick) {
     opts <- paste(opts, "--no-docs", "--no-multiarch", "--no-demo")
   }
+  if (keep.source){
+    opts <- paste(opts, "--with-keep.source")
+  }
   opts <- paste(opts, paste(args, collapse = " "))
-  
+
   R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""))
 
   if (reload) reload(pkg)
