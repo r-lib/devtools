@@ -56,4 +56,16 @@ install_deps <- function(pkg = NULL) {
 
 
 
+#' @rdname install
+#' @description
+#' \code{install_debug}  will install the package with debugging
+#' compilation flags set.
+#' \code{PKG_CXXFLAGS="-Wall -pedantic -g -O0"}
+#' @export
+install_debug <- function(pkg = NULL, reload = TRUE, ...) {
+  old_PKG_CXXFLAGS <- Sys.getenv("PKG_CXXFLAGS")
+  Sys.setenv(PKG_CXXFLAGS="-UNDEBUG -Wall -pedantic -g -O0")
+  install(pkg=pkg, reload=TRUE, ...)
+  Sys.setenv(PKG_CXXFLAGS=old_PKG_CXXFLAGS)
+}
 

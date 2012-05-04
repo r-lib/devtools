@@ -1,9 +1,12 @@
 \name{install}
 \alias{install}
+\alias{install_debug}
 \title{Install a local development package.}
 \usage{
   install(pkg = NULL, reload = TRUE, quick = FALSE,
     args = NULL)
+
+  install_debug(pkg = NULL, reload = TRUE, ...)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -24,6 +27,10 @@
   Uses \code{R CMD INSTALL} to install the package. Will
   also try to install dependencies of the package from
   CRAN, if they're not already installed.
+
+  \code{install_debug} will install the package with
+  debugging compilation flags set.
+  \code{PKG_CXXFLAGS="-Wall -pedantic -g -O0"}
 }
 \details{
   Installation takes place on a copy of the package
