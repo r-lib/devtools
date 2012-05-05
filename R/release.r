@@ -30,6 +30,9 @@ release <- function(pkg = NULL, check = TRUE) {
       return(invisible())
   }
   
+  if (yesno("Have you checked on win-builder?"))
+    return(invisible())
+  
   try(print(show_news(pkg)))
   if (yesno("Is package news up-to-date?")) 
     return(invisible())
