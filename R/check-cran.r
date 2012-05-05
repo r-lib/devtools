@@ -25,8 +25,12 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"), ...) {
   if (length(pkgs) == 0) return()
   message("Checking CRAN packages: ", paste(pkgs, collapse = ", "))
   
-  repos <- c(CRAN = "http://cran.r-project.org/", 
-             BioC = "http://www.bioconductor.org/packages/release/bioc")
+  repos <- c(
+    CRAN = "http://cran.r-project.org/", 
+    bioc = "http://bioconductor.org/packages/release/bioc",
+    aData = "http://bioconductor.org/packages/release/data/annotation",
+    eData = "http://bioconductor.org/packages/release/data/experiment"
+  )
   tmp <- tempdir()
 
   # Create and use temporary library
