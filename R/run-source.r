@@ -7,15 +7,16 @@
 #'
 #' @param url url
 #' @param ... other options passed to \code{\link{source}}
-#' @importFrom RCurl getURL
+#' @importFrom httr GET stop_for_status
 #' @export
 #' @examples
 #' \dontrun{
 #' source_url("https://raw.github.com/gist/1654919/8161f74fb0ec26d1ba9fd54473a96f768ed76f56/test2.r")
 #' }
 source_url <- function(url, ...) {
-  contents <- getURL(url)
-  handle <- textConnection(contents)
+  request <- GET(url)
+  stop_for_status(request)
+  handle <- textConnection(text_content(request))
   on.exit(close(handle))
   source(handle, ...)
 }

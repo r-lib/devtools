@@ -16,10 +16,11 @@ install_url <- function(url, name = NULL, subdir = NULL, ...) {
     name <- rep(list(NULL), length(url))
   }
   
-  invisible(mapply(install_url_single, url, name, subdir = subdir, ...))
+  invisible(mapply(install_url_single, url, name, 
+    MoreArgs = list(subdir = subdir, ...)))
 }
 
-#' @importFrom RCurl getBinaryURL
+#' @importFrom httr GET config stop_for_status
 install_url_single <- function(url, name = NULL, subdir = NULL, ...) {
   if (is.null(name)) {
     name <- basename(url)
@@ -29,9 +30,9 @@ install_url_single <- function(url, name = NULL, subdir = NULL, ...) {
   bundle <- file.path(tempdir(), name)
   
   # Download package file
-  content <- getBinaryURL(url, .opts = list(
-    followlocation = TRUE, ssl.verifypeer = FALSE))
-  writeBin(content, bundle)
+  request <- GET(url, config(ssl.verifypeer = FALSE))
+  stop_for_status(request)
+  writeBin(content(request), bundle)
   on.exit(unlink(bundle), add = TRUE)
   
   unbundle <- decompress(bundle)

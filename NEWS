@@ -1,5 +1,8 @@
 NEW FEATURES
 
+* All remote install functions give better error messages in the case of http
+  errors (Fixes #82).
+
 * `revdep`, `revdep_maintainers` and `revdep_check` for calculating reverse
   dependencies, finding their maintainers and running `R CMD check`. 
   (Fixes #78)
