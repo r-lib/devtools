@@ -20,18 +20,25 @@
 #' @param ... other parameters passed onto \code{\link{download.packages}}
 #' @importFrom tools package_dependencies
 #' @export
-check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"), ...) {
+check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath, bioconductor  = FALSE, type = getOption("pkgType"), ...) {
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
-  message("Checking CRAN packages: ", paste(pkgs, collapse = ", "))
-  
+
+  message("Checking ", length(pkgs), " CRAN packages")
+  old <- options(warn = 1)
+  on.exit(options(old))
+
+  message("Determining available packages") # --------------------------------
   repos <- c(
     CRAN = "http://cran.r-project.org/", 
-    bioc = "http://bioconductor.org/packages/release/bioc",
-    aData = "http://bioconductor.org/packages/release/data/annotation",
-    eData = "http://bioconductor.org/packages/release/data/experiment"
+    omegahat = "http://www.omegahat.org/R"
   )
-  tmp <- tempdir()
+  if (bioconductor) {
+    require("BiocInstaller")
+    repos <- c(repos, biocinstallRepos())
+  }
+  available_src <- available_packages(repos, "source")
+  available_bin <- available_packages(repos, type)
 
   # Create and use temporary library
   if (!file.exists(libpath)) dir.create(libpath)
@@ -39,34 +46,53 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"), ...) {
   .libPaths(c(libpath, .libPaths()))
   on.exit(.libPaths(setdiff(.libPaths(), libpath)))
 
-  # Make sure existing dependencies are up to date
-  message("Check existing dependencies up to date")
-  update.packages(libpath, ask = FALSE, quiet = TRUE)
+  # Make sure existing dependencies are up to date ---------------------------
+  old <- old.packages(libpath, repos = repos, type = type, 
+    available = available_bin)
+  if (!is.null(old)) {
+    message("Updating ", nrow(old), " existing dependencies")
+    install.packages(old[, "Package"], libpath, repos = repos, type = type)
+  }
   
   # Install missing dependencies
   deps <- unique(unlist(package_dependencies(pkgs, packages(), 
     which = "all")))
   to_install <- setdiff(deps, installed.packages()[, 1])
-  if (length(to_install) > 0) {
-    message("Installing ", length(to_install), " missing dependencies")
-    install.packages(to_install, lib = libpath, quiet = TRUE, repos = repos)    
+  known <- intersect(to_install, rownames(available_bin))
+  unknown <- setdiff(to_install, rownames(available_bin))
+
+  if (length(known) > 0) {
+    message("Installing ", length(known), " missing binary dependencies")
+    install.packages(known, lib = libpath, quiet = TRUE, repos = repos)    
+  }
+  if (length(unknown) > 0) {
+    message("No binary packages available for dependenices: ", 
+      paste(unknown, collapse = ", "))
   }
     
-  # Download source packages
-  message("Downloading ", length(pkgs), " source packages for checking")
-  downloaded <- download.packages(pkgs, tmp, repos = repos, 
-    type = "source") #, quiet = TRUE)
-  out_path <- downloaded[, 2]
-  check_path <- gsub("_.*?$", ".Rcheck", out_path)
-  
-  # Check each package, parsing output as we go.
+  # Download and check each package, parsing output as we go.
+  tmp <- tempdir()
   check <- function(i) {
+    url <- package_url(pkgs[i], repos, available = available_src)
+    
+    if (length(url$url) == 0) {
+      message("Can't find package source. Skipping...")
+      return(NULL)
+    }
+    local <- file.path(srcpath, url$name)
+    
+    if (!file.exists(local)) {
+      message("Downloading ", pkgs[i])
+      download.file(url$url, local, quiet = TRUE)
+    }
+    
     message("Checking ", pkgs[i])
     cmd <- paste("CMD check --as-cran --no-multiarch --no-manual --no-codoc ",
-      out_path[i], sep = "")
+      local, sep = "")
     try(R(cmd, tmp, stdout = NULL), silent = TRUE)
     
-    results <- parse_check_results(check_path[i])
+    check_path <- file.path(tmp, gsub("_.*?$", ".Rcheck", url$name))
+    results <- parse_check_results(check_path)
     if (length(results) > 0) cat(results, "\n")
     results
   }
@@ -79,6 +105,26 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"), ...) {
   }
   
   invisible(results)
+}
+
+available_packages <- memoise(function(repos, type) {
+  suppressWarnings(available.packages(contrib.url(repos, type)))
+})
+
+package_url <- function(package, repos, available = available.packages(contrib.url(repos, "source"))) {
+  
+  ok <- (available[, "Package"] == package)
+  ok <- ok & !is.na(ok)
+  
+  vers <- package_version(available[ok, "Version"])
+  keep <- vers == max(vers)
+  keep[duplicated(keep)] <- FALSE
+  ok[ok][!keep] <- FALSE
+  
+  name <- paste(package, "_", available[ok, "Version"], ".tar.gz", sep = "")
+  url <- file.path(available[ok, "Repository"], name)
+  
+  list(name = name, url = url)
 }
 
 parse_check_results <- function(path) {
