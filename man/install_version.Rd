@@ -53,6 +53,7 @@
 }
 \seealso{
   Other package installation: \code{\link{install}},
+  \code{\link{install_debug}},
   \code{\link{install_github}},
   \code{\link{install_gitorious}},
   \code{\link{install_url}}

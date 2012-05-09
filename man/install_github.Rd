@@ -30,6 +30,7 @@ install_github("roxygen")
 }
 \seealso{
   Other package installation: \code{\link{install}},
+  \code{\link{install_debug}},
   \code{\link{install_gitorious}},
   \code{\link{install_url}}, \code{\link{install_version}}
 }
