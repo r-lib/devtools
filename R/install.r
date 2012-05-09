@@ -83,11 +83,13 @@ install_debug <- function(pkg = NULL, reload = TRUE, quick = FALSE, args = NULL
   Sys.setenv(PKG_FFLAGS   = PKG_FFLAGS)
   Sys.setenv(PKG_FCFLAGS  = PKG_FCFLAGS)
   
+  on.exit({
+    Sys.setenv(PKG_CFLAGS   = old_PKG_CFLAGS)
+    Sys.setenv(PKG_CXXFLAGS = old_PKG_CXXFLAGS)
+    Sys.setenv(PKG_FFLAGS   = old_PKG_FFLAGS)
+    Sys.setenv(PKG_FCFLAGS  = old_PKG_FCFLAGS)
+  })
+
   install(pkg=pkg, reload=reload, quick=quick, args=args)
-  
-  Sys.setenv(PKG_CFLAGS   = old_PKG_CFLAGS)
-  Sys.setenv(PKG_CXXFLAGS = old_PKG_CXXFLAGS)
-  Sys.setenv(PKG_FFLAGS   = old_PKG_FFLAGS)
-  Sys.setenv(PKG_FCFLAGS  = old_PKG_FCFLAGS)
 }
 
