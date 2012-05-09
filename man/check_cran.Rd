@@ -3,7 +3,8 @@
 \title{Check a package from CRAN.}
 \usage{
   check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"),
-    ...)
+    srcpath = libpath, bioconductor = FALSE,
+    type = getOption("pkgType"), ...)
 }
 \arguments{
   \item{pkg}{Package name - note that unlike other
