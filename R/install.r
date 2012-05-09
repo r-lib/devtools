@@ -57,15 +57,37 @@ install_deps <- function(pkg = NULL) {
 
 
 #' @rdname install
+#' @param PKG_CFLAGS The flags should be set to for compiling c code
+#' @param PKG_CXXFLAGS The flags for compiling c++ code
+#' @param PKG_FFLAGS The flags for compiling Fortran code.
+#' @param PKG_FCFLAGS The flags for Fortrans 9x code. 
 #' @description
 #' \code{install_debug}  will install the package with debugging
 #' compilation flags set.
 #' \code{PKG_CXXFLAGS="-Wall -pedantic -g -O0"}
+#' @seealso Writing R Exentsions Manual.
 #' @export
-install_debug <- function(pkg = NULL, reload = TRUE, ...) {
+install_debug <- function(pkg = NULL, reload = TRUE, quick = FALSE, args = NULL
+  , PKG_CFLAGS   = "-UNDEBUG -Wall -pedanitc -g -O0"
+  , PKG_CXXFLAGS = "-UNDEBUG -Wall -pedantic -g -O0" 
+  , PKG_FFLAGS   = "-g -O0"
+  , PKG_FCFLAGS  = "-g -O0"
+) {
+  old_PKG_CFLAGS   <- Sys.getenv("PKG_CFLAGS")
   old_PKG_CXXFLAGS <- Sys.getenv("PKG_CXXFLAGS")
-  Sys.setenv(PKG_CXXFLAGS="-UNDEBUG -Wall -pedantic -g -O0")
-  install(pkg=pkg, reload=TRUE, ...)
-  Sys.setenv(PKG_CXXFLAGS=old_PKG_CXXFLAGS)
+  old_PKG_FFLAGS   <- Sys.getenv("PKG_FFLAGS")
+  old_PKG_FCFLAGS  <- Sys.getenv("PKG_FCFLAGS")
+  
+  Sys.setenv(PKG_CFLAGS   = PKG_CFLAGS)
+  Sys.setenv(PKG_CXXFLAGS = PKG_CXXFLAGS)
+  Sys.setenv(PKG_FFLAGS   = PKG_FFLAGS)
+  Sys.setenv(PKG_FCFLAGS  = PKG_FCFLAGS)
+  
+  install(pkg=pkg, reload=reload, quick=quick, args=args)
+  
+  Sys.setenv(PKG_CFLAGS   = old_PKG_CFLAGS)
+  Sys.setenv(PKG_CXXFLAGS = old_PKG_CXXFLAGS)
+  Sys.setenv(PKG_FFLAGS   = old_PKG_FFLAGS)
+  Sys.setenv(PKG_FCFLAGS  = old_PKG_FCFLAGS)
 }
 
