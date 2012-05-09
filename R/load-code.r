@@ -60,6 +60,6 @@ parse_collate <- function(string) {
 #' @keywords internal
 find_code <- function(path) {
   code_paths <- dir(path, "\\.[Rr]$", full.names = TRUE)  
-  with_locale("C", sort(code_paths))
+  with_collate("C", sort(code_paths))
 }
 

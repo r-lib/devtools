@@ -40,7 +40,6 @@ Collate:
     'run-examples.r'
     'system.r'
     'test.r'
-    'utils.r'
     'vignettes.r'
     'zzz.r'
     'wd.r'
@@ -53,3 +52,4 @@ Collate:
     'missing-s3.r'
     'run-source.r'
     'dependencies.r'
+    'with.r'
