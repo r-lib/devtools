@@ -25,11 +25,13 @@ install <- function(pkg = NULL, reload = TRUE, quick = FALSE, args = NULL) {
   built_path <- build(pkg, tempdir())
   on.exit(unlink(built_path))    
   
-  opts <- paste("--library=", shQuote(.libPaths()[1]), sep = "")
+  opts <- c(
+    paste("--library=", shQuote(.libPaths()[1]), sep = ""),
+    "--with-keep.source")
   if (quick) {
-    opts <- paste(opts, "--no-docs", "--no-multiarch", "--no-demo")
+    opts <- c(opts, "--no-docs", "--no-multiarch", "--no-demo")
   }
-  opts <- paste(opts, paste(args, collapse = " "))
+  opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
   
   R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""))
 

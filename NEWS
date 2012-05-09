@@ -1,5 +1,7 @@
 NEW FEATURES
 
+* `install` now uses `--with-keep.source` to make debugging a little easier.
+
 * A suite of `with` functions that allow you to temporarily alter the
   environment in which code is run: `in_dir`, `with_collate`, `with_locale`,
   `with_options`, ... (Fixes #89)
