@@ -1,5 +1,8 @@
 NEW FEATURES
 
+* System path manipulation functions, `get_path`, `set_path`, `add_path`, 
+  and `on_path` added.  Contributed by Andrew Redd.
+
 * `revdep`, `revdep_maintainers` and `revdep_check` for calculating reverse
   dependencies, finding their maintainers and running `R CMD check`. 
   (Fixes #78)
