@@ -14,7 +14,8 @@ Imports:
     memoise
 Suggests:
     testthat,
-    roxygen2
+    roxygen2,
+    BiocInstaller
 License: MIT
 Collate:
     'bash.r'
