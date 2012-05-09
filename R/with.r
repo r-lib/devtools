@@ -43,6 +43,7 @@ set_env <- function(...) {
   invisible(old)
 }
 #' @rdname with_something
+#' @export
 with_env <- with_something(set_env)
 
 # old <- set_locale(LC_TIME = "de_DE", LC_COLLATE = "de_DE")
@@ -59,13 +60,16 @@ set_locale <- function(...) {
 }
 
 #' @rdname with_something
+#' @export
 with_locale <- with_something(set_locale)
 
 set_collate <- function(locale) set_locale(LC_COLLATE = locale)
 #' @rdname with_something
+#' @export
 with_collate <- with_something(set_collate)
 
 #' @rdname with_something
+#' @export
 in_dir <- with_something(setwd)
 
 set_libpaths <- function(...) {
@@ -78,10 +82,13 @@ set_libpaths <- function(...) {
 }
 
 #' @rdname with_something
+#' @export
 with_libpaths <- with_something(set_libpaths)
 
 #' @rdname with_something
+#' @export
 with_options <- with_something(options)
 
 #' @rdname with_something
+#' @export
 with_par <- with_something(par)
