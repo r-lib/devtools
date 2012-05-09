@@ -1,5 +1,9 @@
 NEW FEATURES
 
+* `install_debug` allows for customization of 
+  package compile flags for building debug versions where compiled code
+  can be debugged through gdb or other debuggers.  Contributed by Andrew Redd.
+
 * `revdep`, `revdep_maintainers` and `revdep_check` for calculating reverse
   dependencies, finding their maintainers and running `R CMD check`. 
   (Fixes #78)
