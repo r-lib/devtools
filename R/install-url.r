@@ -20,7 +20,7 @@ install_url <- function(url, name = NULL, subdir = NULL, ...) {
     MoreArgs = list(subdir = subdir, ...)))
 }
 
-#' @importFrom httr GET config stop_for_status
+#' @importFrom httr GET config stop_for_status content
 install_url_single <- function(url, name = NULL, subdir = NULL, ...) {
   if (is.null(name)) {
     name <- basename(url)

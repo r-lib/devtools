@@ -7,7 +7,7 @@
 #'
 #' @param url url
 #' @param ... other options passed to \code{\link{source}}
-#' @importFrom httr GET stop_for_status
+#' @importFrom httr GET stop_for_status text_content
 #' @export
 #' @examples
 #' \dontrun{
