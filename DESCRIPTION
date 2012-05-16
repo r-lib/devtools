@@ -54,3 +54,4 @@ Collate:
     'run-source.r'
     'dependencies.r'
     'with.r'
+    'install-bitbucket.r'

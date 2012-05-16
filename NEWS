@@ -1,5 +1,7 @@
 NEW FEATURES
 
+* `install_bitbucket` installs R packages on bitbucket.
+
 * `install` now uses `--with-keep.source` to make debugging a little easier.
 
 * A suite of `with` functions that allow you to temporarily alter the

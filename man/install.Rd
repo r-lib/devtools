@@ -31,7 +31,9 @@
   local directory in any way.
 }
 \seealso{
-  Other package installation: \code{\link{install_github}},
+  Other package installation:
+  \code{\link{install_bitbucket}},
+  \code{\link{install_github}},
   \code{\link{install_gitorious}},
   \code{\link{install_url}}, \code{\link{install_version}}
 }
