@@ -26,7 +26,7 @@ install_url_single <- function(url, name = NULL, subdir = NULL, ...) {
     name <- basename(url)
   }
 
-  message("Installing ", name, " from ", dirname(url))
+  message("Installing ", name, " from ", url)
   bundle <- file.path(tempdir(), name)
   
   # Download package file
