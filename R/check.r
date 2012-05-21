@@ -12,8 +12,10 @@
 #' @param cleanup if \code{TRUE} the check directory is removed if the check
 #'   is successful - this allows you to inspect the results to figure out what
 #'   went wrong. If \code{FALSE} the check directory is never removed.
+#' @param args An optional character vector of additional command line
+#'   arguments to be passed to \code{R CMD check}.
 #' @export
-check <- function(pkg = NULL, document = TRUE, cleanup = TRUE) {
+check <- function(pkg = NULL, document = TRUE, cleanup = TRUE, args = NULL) {
   pkg <- as.package(pkg)
   
   if (document) {
@@ -23,8 +25,11 @@ check <- function(pkg = NULL, document = TRUE, cleanup = TRUE) {
 
   built_path <- build(pkg, tempdir())  
   on.exit(unlink(built_path))
+
+  opts <- c("--timings", "--as-cran")
+  opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
   
-  R(paste("CMD check ", built_path, " --timings --as-cran", sep = ""), tempdir())
+  R(paste("CMD check ", built_path, " ", opts, sep = ""), tempdir())
   
   check_path <- file.path(tempdir(), paste(pkg$package, ".Rcheck", 
     sep = ""))
