@@ -29,7 +29,7 @@ check <- function(pkg = NULL, document = TRUE, cleanup = TRUE, args = NULL) {
   opts <- c("--timings", "--as-cran")
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
   
-  R(paste("CMD check ", built_path, " ", opts, sep = ""), tempdir())
+  R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), tempdir())
   
   check_path <- file.path(tempdir(), paste(pkg$package, ".Rcheck", 
     sep = ""))
