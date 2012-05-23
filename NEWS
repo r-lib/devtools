@@ -1,5 +1,8 @@
 NEW FEATURES
 
+* `show_rd` passes `...` on to `Rd2txt` - this is useful if you're checking
+  how build time `\Sexpr`s are generated.
+
 * `install_bitbucket` installs R packages on bitbucket.
 
 * `install` now uses `--with-keep.source` to make debugging a little easier.
