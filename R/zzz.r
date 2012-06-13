@@ -5,26 +5,61 @@
   # Check if Rtools is already set up
   if (all(on_path("ls.exe", "gcc.exe"))) return()
   
-  # Look for default installation directories
-  rtools <- normalizePath("c:\\Rtools\\bin", mustWork = FALSE)
+  # Look for rtools
+  rtools_path <- rtools()
+  if (is.null(rtools_path)) return()
   
-  if (.Platform$r_arch == "x64") {
-    mingw <- normalizePath("C:\\Rtools\\MinGW64\\bin", mustWork = FALSE)    
+  # Look for gcc 
+  if (current_version == "2.15") { 
+    gcc_path <- file.path(rtools_path, "gcc-4.6.3", "bin")
   } else {
-    mingw <- normalizePath("C:\\Rtools\\MinGW\\bin", mustWork = FALSE)
+    gcc_path <- file.path(rtools_path, "MinGW", "bin")
+    if (.Platform$r_arch == "x64") {
+      gcc_path <- c(gcc_path, file.path(rtools.home, "MinGW64", "bin"))
+    }
   }
-
-  if (!file.exists(rtools)) {
-    packageStartupMessage(
-      "Rtools not on path and not installed in default location.")
-    return()
-  }
-
-  paths <- get_paths()
-  in_path <- any(paths == rtools)
   
-  if (!in_path) {
-    packageStartupMessage("Rtools not in path, adding automatically.")
-    add_path(rtools, mingw)
-  }
+  paths <- normalizePath(c(rtools_path, gcc_path))
+  new_paths <- setdiff(paths, get_path())
+  
+  if (length(new_paths) == 0) return()
+  
+  packageStartupMessage("Rtools not in path, adding automatically.")
+  add_paths(new_paths)
 }
+
+rtools_url <- "http://cran.r-project.org/bin/windows/Rtools/"
+
+rtools <- function() {
+  # Look in registry
+  key <- NULL
+  try(key <- utils::readRegistry("SOFTWARE\\R-core\\Rtools", 
+    hive = "HLM", view = "32-bit"), silent = TRUE)
+    
+  if (!is.null(key)) {
+    version_match <- key$`Current Version` == current_ver()
+    
+    if (!version_match) {
+      packageStartupMessage("Version of Rtools does not match R version. ", 
+        "Please reinstall Rtools from ", rtools_url, ".")
+      return()
+    }
+    
+    return(key$InstallPath)
+  }
+  
+  # Look in default location
+  default_path <- normalizePath("c:\\Rtools\\bin", mustWork = FALSE)
+  if (file.exists(default_path)) return(default_path)
+  
+  # Give up
+  packageStartupMessage("Rtools not installed.  Please install from", 
+    rtools_url, ".")  
+  invisible(NULL)
+}
+
+current_ver <- function() {
+  minor <- strsplit(version$minor, ".", fixed = TRUE)[[1]]
+  paste(version$major, ".", minor[1], sep = "")
+}
+

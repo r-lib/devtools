@@ -1,5 +1,9 @@
 NEW FEATURES
 
+* on windows, devtools now looks in the registry to find where Rtools is
+  installed, and does a better a job of locating gcc. (Contributed by Andrew
+  Redd)
+
 * `show_rd` passes `...` on to `Rd2txt` - this is useful if you're checking
   how build time `\Sexpr`s are generated.
 
