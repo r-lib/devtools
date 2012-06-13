@@ -9,8 +9,8 @@
   rtools_path <- rtools()
   if (is.null(rtools_path)) return()
   
-  # Look for gcc 
-  if (current_version == "2.15") { 
+  # Look for gcc
+  if (current_version == "2.15") {
     gcc_path <- file.path(rtools_path, "gcc-4.6.3", "bin")
   } else {
     gcc_path <- file.path(rtools_path, "MinGW", "bin")
