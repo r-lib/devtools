@@ -7,12 +7,20 @@
 #' \itemize{
 #'
 #'   \item Confirm that the package passes \code{R CMD check}
+#'   \item Ask if you've checked your code on win-builder
 #'   \item Confirm that news is up-to-date
 #'   \item Confirm that DESCRIPTION is ok
+#'   \item Ask if you've checked packages that depend on your package
 #'   \item Build the package
 #'   \item Upload the pakcage to CRAN
 #'   \item Draft an email to the CRAN maintainer.
 #' }
+#'
+#' You should also read the CRAN repository policy at
+#' \url{http://cran.r-project.org/web/packages/policies.html} and make
+#' sure you're in line with them.  \code{release} tries to automate as much
+#' of them as possible, but they do change and you should be familiar with
+#' them.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
@@ -30,7 +38,7 @@ release <- function(pkg = NULL, check = TRUE) {
       return(invisible())
   }
   
-  if (yesno("Have you checked on win-builder?"))
+  if (yesno("Have you checked on win-builder (with build_win)?"))
     return(invisible())
   
   try(print(show_news(pkg)))
