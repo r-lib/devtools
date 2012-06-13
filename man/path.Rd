@@ -1,0 +1,39 @@
+\name{path}
+\alias{add_path}
+\alias{path}
+\alias{set_path}
+\title{Get/set the PATH variable.}
+\usage{
+  get_path()
+
+  set_path(path)
+
+  add_path(path, after = Inf)
+}
+\arguments{
+  \item{path}{character vector of paths}
+
+  \item{after}{for \code{add_path}, the place on the PATH
+  where the new paths should be added}
+}
+\value{
+  \code{set_path} invisibly returns the old path.
+}
+\description{
+  Get/set the PATH variable.
+}
+\examples{
+path <- get_path()
+length(path)
+old <- add_path(".")
+length(get_path())
+set_path(old)
+length(get_path())
+}
+\seealso{
+  \code{\link{with_path}} to temporarily set the path for a
+  block of code
+
+  Other path: \code{\link{on_path}}
+}
+

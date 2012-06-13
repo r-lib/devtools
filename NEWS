@@ -9,7 +9,7 @@ NEW FEATURES
 
 * A suite of `with` functions that allow you to temporarily alter the
   environment in which code is run: `in_dir`, `with_collate`, `with_locale`,
-  `with_options`, ... (Fixes #89)
+  `with_options`, `with_path`, ... (Fixes #89)
 
 * All remote install functions give better error messages in the case of http
   errors (Fixes #82).
@@ -37,6 +37,9 @@ NEW FEATURES
   within a sub-directory of a repository or compressed file. (Fixes #64)
 
 * `source_gist` now accepts default url such as "https://gist.github.com/nnn"
+
+* System path manipulation functions, `get_path`, `set_path`, `add_path` and
+  `on_path` added. Contributed by Andrew Redd.
 
 BUG FIXES
 

@@ -1,0 +1,25 @@
+\name{on_path}
+\alias{on_path}
+\title{Test if an object is on the path.}
+\usage{
+  on_path(...)
+}
+\arguments{
+  \item{...}{Strings indicating the executables to check
+  for on the path.}
+}
+\description{
+  Test if an object is on the path.
+}
+\examples{
+on_path("R")
+on_path("gcc")
+on_path("foo", "bar")  # FALSE in most cases
+with_path(".", on_path("gcc"))
+}
+\seealso{
+  Other path: \code{\link{add_path}}, \code{\link{path}},
+  \code{\link{set_path}}
+}
+\keyword{internal}
+

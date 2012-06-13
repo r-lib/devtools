@@ -20,17 +20,11 @@
     return()
   }
 
-  paths <- strsplit(Sys.getenv("PATH"), ";")[[1]]
-  paths <- normalizePath(paths, mustWork = FALSE)
-
+  paths <- get_paths()
   in_path <- any(paths == rtools)
+  
   if (!in_path) {
     packageStartupMessage("Rtools not in path, adding automatically.")
-    path <- paste(c(rtools, mingw, paths), collapse = ";")
-    Sys.setenv(PATH = path)
+    add_path(rtools, mingw)
   }
-}
-
-on_path <- function(...) {
-  unname(Sys.which(c(...)) != "")
 }

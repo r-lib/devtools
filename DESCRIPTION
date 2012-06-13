@@ -55,3 +55,4 @@ Collate:
     'dependencies.r'
     'with.r'
     'install-bitbucket.r'
+    'path.r'

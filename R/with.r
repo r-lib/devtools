@@ -7,6 +7,7 @@
 #'   \item \code{with_libpaths}: library paths
 #'   \item \code{with_locale}: any locale setting
 #'   \item \code{with_options}: options
+#'   \item \code{with_path}: PATH environment variable 
 #'   \item \code{with_par}: graphics parameters
 #' }
 #' @param new values for setting
@@ -34,6 +35,8 @@ is.named <- function(x) {
   !is.null(names(x)) && all(names(x) != "")
 }
 
+# env ------------------------------------------------------------------------
+
 set_env <- function(...) {
   envs <- c(...)
   stopifnot(is.named(envs))
@@ -46,8 +49,7 @@ set_env <- function(...) {
 #' @export
 with_env <- with_something(set_env)
 
-# old <- set_locale(LC_TIME = "de_DE", LC_COLLATE = "de_DE")
-# set_locale(old)
+# locale ---------------------------------------------------------------------
 
 set_locale <- function(...) {
   cats <- c(...)
@@ -63,14 +65,20 @@ set_locale <- function(...) {
 #' @export
 with_locale <- with_something(set_locale)
 
+# collate --------------------------------------------------------------------
+
 set_collate <- function(locale) set_locale(LC_COLLATE = locale)
 #' @rdname with_something
 #' @export
 with_collate <- with_something(set_collate)
 
+# working directory ----------------------------------------------------------
+
 #' @rdname with_something
 #' @export
 in_dir <- with_something(setwd)
+
+# libpaths -------------------------------------------------------------------
 
 set_libpaths <- function(...) {
   paths <- c(...)
@@ -85,10 +93,28 @@ set_libpaths <- function(...) {
 #' @export
 with_libpaths <- with_something(set_libpaths)
 
+# options --------------------------------------------------------------------
+
 #' @rdname with_something
 #' @export
 with_options <- with_something(options)
 
+# par ------------------------------------------------------------------------
+
 #' @rdname with_something
 #' @export
 with_par <- with_something(par)
+
+# path -----------------------------------------------------------------------
+
+#' @rdname with_something
+#' @export
+#' @param add Combine with existing values? Currently for
+#'   \code{\link{with_path}} only. If \code{FALSE} all existing 
+#'   paths are ovewritten, which don't you usually want. 
+with_path <- function(new, code, add = TRUE) { 
+  if (add) new <- c(get_path(), new)
+  old <- set_path(new)
+  on.exit(set_path(old))
+  force(code)
+}
