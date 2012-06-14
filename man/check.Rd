@@ -2,7 +2,8 @@
 \alias{check}
 \title{Build and check a package, cleaning up automatically on success.}
 \usage{
-  check(pkg = NULL, document = TRUE, cleanup = TRUE)
+  check(pkg = NULL, document = TRUE, cleanup = TRUE,
+    cran = TRUE, args = NULL)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -15,6 +16,13 @@
   removed if the check is successful - this allows you to
   inspect the results to figure out what went wrong. If
   \code{FALSE} the check directory is never removed.}
+
+  \item{cran}{if \code{TRUE} (the default), check with
+  CRAN.}
+
+  \item{args}{An optional character vector of additional
+  command line arguments to be passed to \code{R CMD
+  check}.}
 }
 \description{
   \code{check} automatically builds a package before using
