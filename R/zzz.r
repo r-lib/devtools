@@ -10,12 +10,12 @@
   if (is.null(rtools_path)) return()
   
   # Look for gcc
-  if (current_version() == "2.15") {
+  if (current_ver() == "2.15") {
     gcc_path <- file.path(rtools_path, "gcc-4.6.3", "bin")
   } else {
     gcc_path <- file.path(rtools_path, "MinGW", "bin")
     if (.Platform$r_arch == "x64") {
-      gcc_path <- c(gcc_path, file.path(rtools.home, "MinGW64", "bin"))
+      gcc_path <- c(gcc_path, file.path(rtools_path, "MinGW64", "bin"))
     }
   }
   
@@ -25,7 +25,7 @@
   if (length(new_paths) == 0) return()
   
   packageStartupMessage("Rtools not in path, adding automatically.")
-  add_paths(new_paths)
+  add_path(new_paths)
 }
 
 rtools_url <- "http://cran.r-project.org/bin/windows/Rtools/"
