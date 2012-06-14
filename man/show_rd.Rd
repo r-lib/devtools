@@ -12,7 +12,7 @@
   Rd extension.}
 
   \item{...}{additional arguments passed onto
-  \code{\link[utils]{Rd2txt}}.  This is particular useful
+  \code{\link[tools]{Rd2txt}}.  This is particular useful
   if you're checking macros and want to simulate what
   happens when the package is built (\code{stage =
   "build"})}

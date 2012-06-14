@@ -10,14 +10,13 @@
 \arguments{
   \item{code}{to execute.}
 
-  \item{\env{PKG_CFLAGS}}{flags for compiling C code}
+  \item{PKG_CFLAGS}{flags for compiling C code}
 
-  \item{\env{PKG_CXXFLAGS}}{flags for compiling C++ code}
+  \item{PKG_CXXFLAGS}{flags for compiling C++ code}
 
-  \item{\env{PKG_FFLAGS}}{flags for compiling Fortran
-  code.}
+  \item{PKG_FFLAGS}{flags for compiling Fortran code.}
 
-  \item{\env{PKG_FCFLAGS}}{flags for Fortran 9x code.}
+  \item{PKG_FCFLAGS}{flags for Fortran 9x code.}
 }
 \description{
   Temporarily set debugging compilation flags.

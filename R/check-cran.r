@@ -11,11 +11,16 @@
 #' session-specific temporary directory, so all files will be removed
 #' when your current R session ends.
 #'
-#' @param pkg Package name - note that unlike other \pkg{devtools} functions
-#'   this is the name of a CRAN package, not a path.
+#' @param pkgs Vector of package names - note that unlike other \pkg{devtools}
+#'   functions this is the name of a CRAN package, not a path.
 #' @param libpath path to library to store dependencies packages - if you
 #'   you're doing this a lot it's a good idea to pick a directory and stick
 #'   with it so you don't have to download all the packages every time.
+#' @param srcpath path to directory to store source versions of dependent
+#'   packages - again, this saves a lot of time because you don't need to
+#'   redownload the packages every time you run the package.
+#' @param bioconductor include bioconductor packages in checking?
+#' @param type binary package type of test
 #' @return invisible \code{TRUE} if successful and no ERRORs or WARNINGS,
 #' @param ... other parameters passed onto \code{\link{download.packages}}
 #' @importFrom tools package_dependencies

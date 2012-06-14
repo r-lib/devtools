@@ -56,7 +56,7 @@ check_doc <- function(pkg = NULL) {
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param file name of Rd file to open.  Can optionally omit Rd extension.
-#' @param ... additional arguments passed onto \code{\link[utils]{Rd2txt}}.
+#' @param ... additional arguments passed onto \code{\link[tools]{Rd2txt}}.
 #'   This is particular useful if you're checking macros and want to simulate
 #'   what happens when the package is built (\code{stage = "build"})
 #' @export

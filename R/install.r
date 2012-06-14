@@ -61,10 +61,10 @@ install_deps <- function(pkg = NULL) {
 #' Temporarily set debugging compilation flags.
 #'
 #' @param code to execute.
-#' @param \env{PKG_CFLAGS} flags for compiling C code
-#' @param \env{PKG_CXXFLAGS} flags for compiling C++ code
-#' @param \env{PKG_FFLAGS} flags for compiling Fortran code.
-#' @param \env{PKG_FCFLAGS} flags for Fortran 9x code. 
+#' @param PKG_CFLAGS flags for compiling C code
+#' @param PKG_CXXFLAGS flags for compiling C++ code
+#' @param PKG_FFLAGS flags for compiling Fortran code.
+#' @param PKG_FCFLAGS flags for Fortran 9x code. 
 #' @export
 #' @examples
 #' \dontrun{
