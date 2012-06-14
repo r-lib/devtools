@@ -37,8 +37,7 @@ is.named <- function(x) {
 
 # env ------------------------------------------------------------------------
 
-set_env <- function(...) {
-  envs <- c(...)
+set_env <- function(envs) {
   stopifnot(is.named(envs))
 
   old <- Sys.getenv(names(envs), names = TRUE)
@@ -51,9 +50,8 @@ with_env <- with_something(set_env)
 
 # locale ---------------------------------------------------------------------
 
-set_locale <- function(...) {
-  cats <- c(...)
-  stopifnot(is.named(cats))
+set_locale <- function(cats) {
+  stopifnot(is.named(cats), is.character(cats))
   
   old <- vapply(names(cats), Sys.getlocale, character(1))
 
@@ -67,7 +65,7 @@ with_locale <- with_something(set_locale)
 
 # collate --------------------------------------------------------------------
 
-set_collate <- function(locale) set_locale(LC_COLLATE = locale)
+set_collate <- function(locale) set_locale(c(LC_COLLATE = locale))[[1]]
 #' @rdname with_something
 #' @export
 with_collate <- with_something(set_collate)
@@ -80,8 +78,7 @@ in_dir <- with_something(setwd)
 
 # libpaths -------------------------------------------------------------------
 
-set_libpaths <- function(...) {
-  paths <- c(...)
+set_libpaths <- function(paths) {
   libpath <- normalizePath(paths, mustWork = TRUE)
   
   old <- .libPaths()
