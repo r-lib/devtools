@@ -1,29 +1,25 @@
-NEW FEATURES
-
-* if no package supplied, and no package has been worked with previously, all
-  functions now will try the working directory. (Fixes #87)
-
-* `with_debug` function temporarily sets env vars so that compilation is
-  performed with the appropriate debugging flags set. Contributed by Andrew
-  Redd.
-
-* on windows, devtools now looks in the registry to find where Rtools is
-  installed, and does a better a job of locating gcc. (Contributed by Andrew
-  Redd)
-
-* `show_rd` passes `...` on to `Rd2txt` - this is useful if you're checking
-  how build time `\Sexpr`s are generated.
+INSTALLATION
 
 * `install_bitbucket` installs R packages on bitbucket.
 
 * `install` now uses `--with-keep.source` to make debugging a little easier.
 
-* A suite of `with` functions that allow you to temporarily alter the
-  environment in which code is run: `in_dir`, `with_collate`, `with_locale`,
-  `with_options`, `with_path`, ... (Fixes #89)
-
 * All remote install functions give better error messages in the case of http
   errors (Fixes #82).
+
+* `install` has new quick option to make package installation faster, by
+  sacrificing documentation, demos and multi-architecture binaries. (Fixes
+  #77)
+
+* `install_url`, `install_github` and `install_gitorious` gain a subdir
+  argument which makes it possible to install packages that are contained
+  within a sub-directory of a repository or compressed file. (Fixes #64)
+
+CHECKING
+
+* `with_debug` function temporarily sets env vars so that compilation is
+  performed with the appropriate debugging flags set. Contributed by Andrew
+  Redd.
 
 * `revdep`, `revdep_maintainers` and `revdep_check` for calculating reverse
   dependencies, finding their maintainers and running `R CMD check`. 
@@ -36,30 +32,38 @@ NEW FEATURES
 * `check` uses new `--as-cran` option to make checking as close to CRAN as
   possible (fixes #68)
 
-* `install` has new quick option to make package installation faster, by
-  sacrificing documentation, demos and multi-architecture binaries. (Fixes
-  #77)
+OTHER NEW FEATURES
+
+* if no package supplied, and no package has been worked with previously, all
+  functions now will try the working directory. (Fixes #87)
+
+* on windows, devtools now looks in the registry to find where Rtools is
+  installed, and does a better a job of locating gcc. (Contributed by Andrew
+  Redd)
+
+* `show_rd` passes `...` on to `Rd2txt` - this is useful if you're checking
+  how build time `\Sexpr`s are generated.
+
+* A suite of `with` functions that allow you to temporarily alter the
+  environment in which code is run: `in_dir`, `with_collate`, `with_locale`,
+  `with_options`, `with_path`, ... (Fixes #89)
 
 * `release` ask more questions and randomises correct answers so you really
   need to read them (Fixes #79)
 
-* `install_url`, `install_github` and `install_gitorious` gain a subdir
-  argument which makes it possible to install packages that are contained
-  within a sub-directory of a repository or compressed file. (Fixes #64)
-
 * `source_gist` now accepts default url such as "https://gist.github.com/nnn"
 
-* System path manipulation functions, `get_path`, `set_path`, `add_path` and
-  `on_path` added. Contributed by Andrew Redd.
+* New system path manipulation functions, `get_path`, `set_path`, `add_path`
+  and `on_path`, contributed by Andrew Redd.
 
 BUG FIXES
 
 * `decompress` now uses target directory as defined in the function call
   when expanding a compressed file. (Fixes #84)
 
-* `install` now quotes `libpath` so paths with embedded spaces work and build
-  path (Fixes #73 and #76)
-  
+* `install` now quotes `libpath` and build path so paths with embedded spaces
+  work (Fixes #73 and #76)
+
 * `load_data` now also loads `.RData` files (Fixes #81)
 
 * `install` now has `args` argument to pass additional command line arguments
