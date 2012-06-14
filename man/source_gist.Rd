@@ -22,7 +22,7 @@
   A gist entry can have multiple code blocks (one file for
   one block). Gist is based on git, which means gist has
   commit histories (i.e., revisions). You can specify a
-  commit by ginving SHA.
+  commit by giving SHA.
 }
 \examples{
 \dontrun{

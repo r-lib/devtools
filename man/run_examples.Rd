@@ -16,7 +16,7 @@
 
   \item{strict}{if \code{TRUE}, the package is first
   installed, and then each example is run in a clean R
-  environment somewhat mimicing what \code{R CMD check}
+  environment somewhat mimicking what \code{R CMD check}
   does.  Since this involves installing the package you
   should probably be in \code{\link{dev_mode}}}
 }

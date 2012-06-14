@@ -27,8 +27,8 @@
 \description{
   \code{check} automatically builds a package before using
   \code{R CMD check} as this is the recommended way to
-  check pakcages.  Note that this process runs in an
+  check packages.  Note that this process runs in an
   independent realisation of R, so nothing in your current
-  workspace will affect the proces.
+  workspace will affect the process.
 }
 
