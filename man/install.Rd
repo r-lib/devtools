@@ -31,6 +31,9 @@
   local directory in any way.
 }
 \seealso{
+  \code{\link{with_debug}} to install packages with
+  debugging flags set.
+
   Other package installation:
   \code{\link{install_bitbucket}},
   \code{\link{install_github}},

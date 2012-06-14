@@ -16,6 +16,8 @@
 #'   arguments to be passed to \code{R CMD install}.
 #' @export
 #' @family package installation
+#' @seealso \code{\link{with_debug}} to install packages with debugging flags
+#'   set.
 #' @importFrom utils install.packages
 install <- function(pkg = NULL, reload = TRUE, quick = FALSE, args = NULL) {
   pkg <- as.package(pkg)
@@ -56,6 +58,28 @@ install_deps <- function(pkg = NULL) {
   invisible(deps)
 }
 
-
-
+#' Temporarily set debugging compilation flags.
+#'
+#' @param code to execute.
+#' @param \env{PKG_CFLAGS} flags for compiling C code
+#' @param \env{PKG_CXXFLAGS} flags for compiling C++ code
+#' @param \env{PKG_FFLAGS} flags for compiling Fortran code.
+#' @param \env{PKG_FCFLAGS} flags for Fortran 9x code. 
+#' @export
+#' @examples
+#' \dontrun{
+#' install("mypkg")
+#' with_debug(install("mypkg"))
+#' }
+with_debug <- function(code,
+                       PKG_CFLAGS   = "-UNDEBUG -Wall -pedantic -g -O0",
+                       PKG_CXXFLAGS = "-UNDEBUG -Wall -pedantic -g -O0", 
+                       PKG_FFLAGS   = "-g -O0", 
+                       PKG_FCFLAGS  = "-g -O0") {
+  flags <- c(
+    PKG_CFLAGS = PKG_CFLAGS, PKG_CXXFLAGS = PKG_CXXFLAGS,
+    PKG_FFLAGS = PKG_FFLAGS, PKG_FCFLAGS = PKG_FCFLAGS)
+  
+  with_env(flags, code)
+}
 

@@ -1,5 +1,9 @@
 NEW FEATURES
 
+* `with_debug` function temporarily sets env vars so that compilation is
+  performed with the appropriate debugging flags set. Contributed by Andrew
+  Redd.
+
 * on windows, devtools now looks in the registry to find where Rtools is
   installed, and does a better a job of locating gcc. (Contributed by Andrew
   Redd)
