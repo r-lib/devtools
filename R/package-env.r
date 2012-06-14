@@ -13,7 +13,7 @@ pkg_env <- function(pkg = NULL) {
   name <- env_name(pkg)
   
   if (!is.loaded(pkg)) {
-    attach(new.env(parent = emptyenv()), name = name)
+    attach(base_env(pkg), name = name)
   }
   
   # if (is.loaded(pkg)) return(as.environment(name))
@@ -84,4 +84,8 @@ clear_classes <- function(pkg = NULL) {
   classes <- getClasses(name)
   lapply(classes, removeClass, where = name)    
   invisible()
+}
+
+base_env <- function(pkg) {
+  new.env(parent = emptyenv())
 }
