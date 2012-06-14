@@ -1,0 +1,8 @@
+Package: basic
+Title: Test package
+Version: 0.1
+License: GPL-2
+Author: Hadley Wickham <h.wickham@gmail.com>
+Maintainer: Hadley Wickham <h.wickham@gmail.com>
+Description: Used for testing
+Collate: home.r

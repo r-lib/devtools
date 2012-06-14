@@ -87,5 +87,15 @@ clear_classes <- function(pkg = NULL) {
 }
 
 base_env <- function(pkg) {
-  new.env(parent = emptyenv())
+  env <- new.env(parent = emptyenv())
+  env$system.file <- function(..., package = "base") {
+    if (package == pkg$package) {
+      file.path(pkg$path, ...)
+    } else {
+      system.file(..., package = package)
+    }
+  }
+  
+  # new.env(parent = env)
+  env
 }
