@@ -64,8 +64,7 @@ current_ver <- function() {
   paste(version$major, ".", minor[1], sep = "")
 }
 
-.onLoad <- function(libname, pkgname)
-{
+.onLoad <- function(libname, pkgname) {
   op <- options()
   op.devtools <- list(
     dev.path="~/R-dev",
