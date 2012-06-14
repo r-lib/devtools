@@ -1,5 +1,8 @@
 NEW FEATURES
 
+* if no package supplied, and no package has been worked with previously, all
+  functions now will try the working directory. (Fixes #87)
+
 * `with_debug` function temporarily sets env vars so that compilation is
   performed with the appropriate debugging flags set. Contributed by Andrew
   Redd.

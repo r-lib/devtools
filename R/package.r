@@ -9,15 +9,15 @@
 #' @param x object to coerce to a package
 #' @export
 as.package <- function(x = NULL) {
+  if (is.package(x)) return(x)
+
   if (is.null(x)) {
-    x <- get_last_package()
+    last <- get_last_package()
+    if (!is.null(last)) return(last)
+    
+    message("No package specified, using working directory.")
+    x <- "."
   }
-  if (is.null(x)) {
-    stop("No package specified", call. = FALSE)
-  }
-  
-  if (is.package(x)) 
-    return(x)
   
   path <- find_package(x)
   if (is.null(path)) {
