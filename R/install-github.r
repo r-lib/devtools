@@ -14,7 +14,7 @@
 #' \dontrun{
 #' install_github("roxygen")
 #' }
-install_github <- function(repo, username = getOption("devtools.github.user"), branch = "master", subdir = NULL, ...) {
+install_github <- function(repo, username = getOption("github.user"), branch = "master", subdir = NULL, ...) {
   message("Installing github repo(s) ", 
     paste(repo, branch, sep = "/", collapse = ", "), 
     " from ", 
