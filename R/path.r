@@ -13,6 +13,7 @@
 #' length(get_path())
 #' set_path(old)
 #' length(get_path())
+NULL
 
 #' @export
 #' @rdname path

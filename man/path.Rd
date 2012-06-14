@@ -1,5 +1,6 @@
 \name{path}
 \alias{add_path}
+\alias{get_path}
 \alias{path}
 \alias{set_path}
 \title{Get/set the PATH variable.}

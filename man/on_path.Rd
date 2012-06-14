@@ -18,7 +18,8 @@ on_path("foo", "bar")  # FALSE in most cases
 with_path(".", on_path("gcc"))
 }
 \seealso{
-  Other path: \code{\link{add_path}}, \code{\link{path}},
+  Other path: \code{\link{add_path}},
+  \code{\link{get_path}}, \code{\link{path}},
   \code{\link{set_path}}
 }
 \keyword{internal}
