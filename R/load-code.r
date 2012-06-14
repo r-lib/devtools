@@ -14,19 +14,25 @@ load_code <- function(pkg = NULL, env = pkg_env(pkg)) {
   pkg <- as.package(pkg)
   path_r <- file.path(pkg$path, "R")
 
-  if (is.null(pkg$collate)) {
-    paths <- find_code(path_r)
-  } else {
-    paths <- file.path(path_r, parse_collate(pkg$collate))
-  }
-  exists <- vapply(paths, file.exists, logical(1))
-  if (any(!exists)) {
-    warning("Skipping missing files: ", 
-      paste(basename(paths[!exists]), collapse = ", "), call. = FALSE)
-    paths <- paths[exists]
+  r_files <- find_code(path_r)
+  if (!is.null(pkg$collate)) {
+    collate <- file.path(path_r, parse_collate(pkg$collate))
+    
+    missing <- setdiff(collate, r_files)
+    files <- function(x) paste(basename(x), collapse = ", ")
+    if (length(missing) > 0) {
+      message("Skipping missing files: ", files(missing))
+    }
+    
+    extra <- setdiff(r_files, collate)
+    if (length(extra) > 0) {
+      message("Adding files missing in collate: ", files(extra))
+    }
+    
+    r_files <- intersect(collate, r_files)
   }
   
-  paths <- changed_files(paths)
+  paths <- changed_files(r_files)
 
   tryCatch(
     lapply(paths, sys.source, envir = env, chdir = TRUE, 

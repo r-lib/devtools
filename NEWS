@@ -66,6 +66,9 @@ BUG FIXES
   on to `R CMD install` (replaces `...` which didn't actually do anything).
   (Fixes #69)
 
+* `load_code` does a better job of reconciling files in DESCRIPTION collate
+  with files that actually exist in the R directory. (Fixes #14)
+
 devtools 0.6
 ------------
 
