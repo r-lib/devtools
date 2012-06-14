@@ -19,7 +19,8 @@ R <- function(options, path = tempdir(), ...) {
   env <- c(
     "R_ENVIRON_USER" = tempfile(),
     "LC_ALL" = "C", 
-    "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep))
+    "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
+    "CYGWIN" = "nodosfilewarning")
    
   in_dir(path, system_check(r_path, options, env, ...))
 }

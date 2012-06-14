@@ -56,6 +56,9 @@ OTHER NEW FEATURES
 * New system path manipulation functions, `get_path`, `set_path`, `add_path`
   and `on_path`, contributed by Andrew Redd.
 
+* If you're on windows, `devtools` now suppresses the unimportant warning from
+  CYGWIN about the dos style file paths
+
 BUG FIXES
 
 * `decompress` now uses target directory as defined in the function call
