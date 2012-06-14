@@ -11,15 +11,16 @@
   
   # Look for gcc
   if (current_ver() == "2.15") {
-    gcc_path <- file.path(rtools_path, "gcc-4.6.3", "bin")
+    gcc_bin <- file.path(rtools_path, "gcc-4.6.3", "bin")
   } else {
-    gcc_path <- file.path(rtools_path, "MinGW", "bin")
+    gcc_bin <- file.path(rtools_path, "MinGW", "bin")
     if (.Platform$r_arch == "x64") {
-      gcc_path <- c(gcc_path, file.path(rtools_path, "MinGW64", "bin"))
+      gcc_bin <- c(gcc_bin, file.path(rtools_path, "MinGW64", "bin"))
     }
   }
   
-  paths <- normalizePath(c(rtools_path, gcc_path))
+  rtools_bin <- file.path(rtools_path, "bin")
+  paths <- normalizePath(c(rtools_bin, gcc_bin))
   new_paths <- setdiff(paths, get_path())
   
   if (length(new_paths) == 0) return()
