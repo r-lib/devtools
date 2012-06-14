@@ -19,7 +19,7 @@
 dev_mode <- local({
   .prompt <- NULL
   
-  function(on = NULL, path = getOption("dev.path")) {
+  function(on = NULL, path = getOption("devtools.path")) {
     lib_paths <- .libPaths()
   
     path <- normalizePath(path, winslash = "/", mustWork = FALSE)

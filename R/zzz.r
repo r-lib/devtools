@@ -67,8 +67,8 @@ current_ver <- function() {
 .onLoad <- function(libname, pkgname) {
   op <- options()
   op.devtools <- list(
-    dev.path="~/R-dev",
-    github.user="hadley"
+    devtools.path="~/R-dev",
+    devtools.github.user="hadley"
   )
   toset <- !(names(op.devtools) %in% names(op))
   if(any(toset)) options(op.devtools[toset])
