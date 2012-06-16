@@ -64,3 +64,17 @@ current_ver <- function() {
   paste(version$major, ".", minor[1], sep = "")
 }
 
+.onLoad <- function(libname, pkgname) {
+  op <- options()
+  op.devtools <- list(
+    devtools.path="~/R-dev",
+    github.user="hadley"
+  )
+  toset <- !(names(op.devtools) %in% names(op))
+  if(any(toset)) options(op.devtools[toset])
+}
+
+on_path <- function(...) {
+  unname(Sys.which(c(...)) != "")
+}
+
