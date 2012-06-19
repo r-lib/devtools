@@ -34,6 +34,10 @@ CHECKING
 
 OTHER NEW FEATURES
 
+* devtools now uses options `devtools.path` to set the default path to use
+  with devmode, and `github.user` to set the default user when installing
+  packages from github.
+
 * if no package supplied, and no package has been worked with previously, all
   functions now will try the working directory. (Fixes #87)
 
