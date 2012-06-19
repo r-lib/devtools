@@ -29,7 +29,7 @@ load_code <- function(pkg = NULL, env = pkg_env(pkg)) {
       message("Adding files missing in collate: ", files(extra))
     }
     
-    r_files <- intersect(collate, r_files)
+    r_files <- union(collate, r_files)
   }
   
   paths <- changed_files(r_files)
