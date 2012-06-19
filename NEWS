@@ -68,6 +68,9 @@ BUG FIXES
 * `decompress` now uses target directory as defined in the function call
   when expanding a compressed file. (Fixes #84)
 
+* `document` is always run in a C locale so that `NAMESPACE` sort order is
+  consistent across platforms.
+
 * `install` now quotes `libpath` and build path so paths with embedded spaces
   work (Fixes #73 and #76)
 

@@ -21,7 +21,7 @@ document <- function(pkg = NULL, clean = FALSE) {
   
   # Ensure dependent pacakges are available.
   load_deps(pkg)
-  in_dir(pkg$path, roxygenise("."))
+  with_collate("C", in_dir(pkg$path, roxygenise(".")))
     
   # if (check) check_doc(pkg)
   invisible()
