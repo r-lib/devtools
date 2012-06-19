@@ -24,7 +24,7 @@ get_path <- function() {
 #' @export
 #' @rdname path
 set_path <- function(path) {
-  path <- normalizePath(path, mustWork = TRUE)
+  path <- normalizePath(path, mustWork = FALSE)
   
   old <- get_path()
   path <- paste(path, collapse = .Platform$path.sep)
@@ -51,7 +51,7 @@ add_path <- function(path, after = Inf) {
 #' on_path("R")
 #' on_path("gcc")
 #' on_path("foo", "bar")  # FALSE in most cases
-#' with_path(".", on_path("gcc"))
+#' with_path(tempdir(), on_path("gcc"))
 on_path <- function(...) {
   commands <- c(...)
   stopifnot(is.character(commands))

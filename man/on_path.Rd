@@ -15,7 +15,7 @@
 on_path("R")
 on_path("gcc")
 on_path("foo", "bar")  # FALSE in most cases
-with_path(".", on_path("gcc"))
+with_path(tempdir(), on_path("gcc"))
 }
 \seealso{
   Other path: \code{\link{add_path}},
