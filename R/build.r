@@ -50,7 +50,7 @@ build <- function(pkg = NULL, path = NULL, binary = FALSE) {
 build_win <- function(pkg = NULL, version = "R-release") {
   pkg <- as.package(pkg)
   message("Building windows version of ", pkg$package, 
-    " with win-builder.org.\n  Check your email for link to package.")
+    " with win-builder.org.\nCheck your email for link to package.")
 
   built_path <- build(pkg, tempdir())
   on.exit(unlink(built_path))

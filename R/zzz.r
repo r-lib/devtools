@@ -25,7 +25,7 @@
   
   if (length(new_paths) == 0) return()
   
-  packageStartupMessage("Rtools not in path, adding automatically.")
+  packageStartupMessage("Rtools not in path, but I'm adding it automatically :)")
   add_path(new_paths)
 }
 
@@ -41,7 +41,7 @@ rtools <- function() {
     version_match <- key$`Current Version` == current_ver()
     
     if (!version_match) {
-      packageStartupMessage("Version of Rtools does not match R version. ", 
+      packageStartupMessage("Version of Rtools does not match R version :(. ", 
         "Please reinstall Rtools from ", rtools_url, ".")
       return()
     }
@@ -54,7 +54,7 @@ rtools <- function() {
   if (file.exists(default_path)) return(default_path)
   
   # Give up
-  packageStartupMessage("Rtools not installed.  Please install from", 
+  packageStartupMessage("Rtools not installed :(. Please install from ", 
     rtools_url, ".")  
   invisible(NULL)
 }
