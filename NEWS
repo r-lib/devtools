@@ -1,4 +1,3 @@
-
 * `build_vignettes` now looks in modern location for vignettes (`vignettes/`) 
    and warn if vignettes found in old location (`inst/doc`).  Building now 
    occurs in a temporary directory (to avoid polluting the package with
@@ -8,6 +7,9 @@
   from vignettes in `vignettes/`
 
 * Add `--no-resave-data` to default build command. 
+
+* The subject line of the email created by `release` is now "CRAN submission
+  [package] [version]", per CRAN repository policy.
 
 devtools 0.7.1
 --------------
