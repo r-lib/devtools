@@ -1,3 +1,6 @@
+devtools 0.7.1
+--------------
+
 * bump dependency to R 2.15
 
 * `load_code` now also looks for files ending in `.q` - this is not
