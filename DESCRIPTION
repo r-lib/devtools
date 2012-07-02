@@ -5,7 +5,7 @@ Author: Hadley Wickham <h.wickham@gmail.com>
 Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Description: Collection of package development tools
 Depends:
-    R (>= 2.13)
+    R (>= 2.15)
 Imports:
     httr,
     RCurl,
