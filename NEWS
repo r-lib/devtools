@@ -1,3 +1,6 @@
+* `load_code` now also looks for files ending in `.q` - this is not
+  recommended, but is needed for some older packages
+
 devtools 0.7
 ------------
 
