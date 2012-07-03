@@ -1,3 +1,7 @@
+
+* Added git functions and auto tagging version on release(). 
+  Contributed by Andrew Redd.
+
 devtools 0.7.1
 --------------
 

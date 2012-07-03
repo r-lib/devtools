@@ -56,3 +56,4 @@ Collate:
     'with.r'
     'install-bitbucket.r'
     'path.r'
+    'git.r'
