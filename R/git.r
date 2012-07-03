@@ -73,7 +73,7 @@ git_status <- function(path = '.', show.untracked = c('all', 'normal', 'no')
 #' 
 #' @param path The path to tag.
 #' @param name The name of the tag.
-#' @param 
+#' @param message The message for the tag.
 #' 
 #' @family git
 #' @export
