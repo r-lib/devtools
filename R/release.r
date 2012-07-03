@@ -51,6 +51,20 @@ release <- function(pkg = NULL, check = TRUE) {
 
   if (yesno("Have you checked packages that depend on this package?"))
     return(invisible())
+    
+  if (is_git_repo(pkg$path)) {
+    gs <- git_status(pkg$path)
+    if(nrow(gs)) {
+      print(gs)
+      if (yesno("You have uncommitted changes to your git repository. Proceed?"))
+        return(invisible())
+    }
+    
+    tagname <- sprintf("version_%s", pkg$version)
+    message <- sprintf("Version %s, released on %s.", pkg$version, Sys.Date())
+    if (!yesno(sprintf("Should I git-tag this as `%s` with message '%s'?", tagname, message)))
+        git_tag(name = tagname, message = message, path = pkg$path)
+  }
   
   if (yesno("Ready to upload?")) 
     return(invisible())
