@@ -52,7 +52,7 @@ release <- function(pkg = NULL, check = TRUE) {
   if (yesno("Have you checked packages that depend on this package?"))
     return(invisible())
     
-  if (is_git_repo(pkg$path)) {
+  if (has_git() && is_git_repo(pkg$path)) {
     gs <- git_status(pkg$path)
     if(nrow(gs)) {
       print(gs)

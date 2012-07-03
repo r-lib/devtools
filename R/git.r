@@ -10,8 +10,9 @@
 #' @export
 has_git <- function(){
     if (on_path('git')) return(TRUE)
-    if (.Platform$OS.type != "windows") {
+    if (.Platform$OS.type == "windows") {
         wp <- win_has_git()
+        if(wp == '') return(FALSE)
         add_path(wp)
         return(TRUE)
     }
