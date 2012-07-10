@@ -10,6 +10,7 @@ Imports:
     httr,
     RCurl,
     utils,
+	stringr,
     tools,
     memoise
 Suggests:
@@ -56,3 +57,4 @@ Collate:
     'with.r'
     'install-bitbucket.r'
     'path.r'
+    'install-bioconductor.r'

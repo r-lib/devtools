@@ -53,6 +53,7 @@
 }
 \seealso{
   Other package installation: \code{\link{install}},
+  \code{\link{install_bioconductor}},
   \code{\link{install_bitbucket}},
   \code{\link{install_github}},
   \code{\link{install_gitorious}},
