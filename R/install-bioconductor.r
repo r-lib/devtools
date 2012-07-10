@@ -39,8 +39,7 @@ install_bioconductor <- function(pkgs, ...) {
     }
 
     # create a temporary directory to hold the package content
-    # temp <- str_c(tempfile(), "/", pkg, "/")
-    temp <- str_c("~/Downloads", "/", pkg, "/") # !!! Warning, FOR NOW
+    temp <- str_c(tempfile(), "/", pkg, "/")
 
     # get all packages files
     message("Downloading ", pkg)
