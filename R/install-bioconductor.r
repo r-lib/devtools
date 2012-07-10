@@ -17,7 +17,7 @@
 #' @examples
 #' \dontrun{install_bioconductor(pkgs=c("ggbio", "pcaMethods"))
 #' }
-#' @importFrom httr set_config reset_config config stop_for_status content HEAD GET authenticate handle
+#' @importFrom httr set_config reset_config stop_for_status content HEAD GET authenticate handle
 #' @importFrom stringr str_c str_replace str_detect str_extract_all fixed
 install_bioconductor <- function(pkgs, ...) {
 
