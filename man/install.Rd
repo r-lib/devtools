@@ -35,6 +35,7 @@
   debugging flags set.
 
   Other package installation:
+  \code{\link{install_bioconductor}},
   \code{\link{install_bitbucket}},
   \code{\link{install_github}},
   \code{\link{install_gitorious}},
