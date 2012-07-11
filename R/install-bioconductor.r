@@ -18,7 +18,7 @@
 #' @examples
 #' \dontrun{install_bioconductor(pkgs=c("ggbio", "pcaMethods"))
 #' }
-#' @importFrom httr set_config reset_config stop_for_status content HEAD GET authenticate handle
+#' @importFrom httr stop_for_status content HEAD GET authenticate
 #' @importFrom stringr str_c str_replace str_detect str_extract_all fixed
 install_bioconductor <- function(pkgs, ...) {
 
@@ -54,9 +54,6 @@ install_bioconductor <- function(pkgs, ...) {
     # remove temporary files
     unlink(temp, recursive=TRUE)
   }
-
-  # reset RCurl options
-  on.exit(expr=reset_config())
 
   return(invisible(TRUE))
 }
