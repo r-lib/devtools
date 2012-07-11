@@ -1,4 +1,4 @@
-#' Install a package from SVN on bioconductor
+#' Install packages from SVN on bioconductor
 #'
 #' This function installs the latest development version of the packages,
 #' which is useful for testing purposes.

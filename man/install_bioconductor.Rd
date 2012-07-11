@@ -1,6 +1,6 @@
 \name{install_bioconductor}
 \alias{install_bioconductor}
-\title{Install a package from SVN on bioconductor}
+\title{Install packages from SVN on bioconductor}
 \usage{
   install_bioconductor(pkgs, ...)
 }
