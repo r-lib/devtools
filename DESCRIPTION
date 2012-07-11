@@ -10,7 +10,7 @@ Imports:
     httr,
     RCurl,
     utils,
-	stringr,
+    stringr,
     tools,
     memoise
 Suggests:

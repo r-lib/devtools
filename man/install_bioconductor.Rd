@@ -11,12 +11,13 @@
   \code{\link{install}}}
 }
 \description{
-  This function fetches the latest development version of
-  each package, for testing purposes. In contrast, the
-  \code{biocLite()} function provided by bioconductor
-  installs a stable (hence usually older) version. It is
-  vectorised so you can install multiple packages in a
-  single command.
+  This function installs the latest development version of
+  the packages, which is useful for testing purposes. In
+  contrast, the \code{biocLite()} function provided by
+  bioconductor installs a stable (hence usually older)
+  version, which should be preferred for production work.
+  It is vectorised so you can install multiple packages in
+  a single command.
 }
 \details{
   Please note that the function has to download each file

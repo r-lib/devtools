@@ -1,9 +1,10 @@
 #' Install a package from SVN on bioconductor
 #'
-#' This function fetches the latest development version of each package,
-#' for testing purposes.
+#' This function installs the latest development version of the packages,
+#' which is useful for testing purposes.
 #' In contrast, the \code{biocLite()} function provided by bioconductor
-#' installs a stable (hence usually older) version.
+#' installs a stable (hence usually older) version, which should be preferred
+#' for production work.
 #' It is vectorised so you can install multiple packages in
 #' a single command.
 #'
