@@ -22,28 +22,30 @@
 install_bioconductor <- function(pkgs, ...) {
 
   # prepare connection
-	set_config(authenticate("readonly", "readonly"))
-  domain <- "https://hedgehog.fhcrc.org"
-  base <- "bioconductor/trunk/madman/Rpacks"
-	h <- handle(domain)
+  user <- "readonly"
+  password <- "readonly"
+  auth <- authenticate(user=user, password=password)
+  base <- "https://hedgehog.fhcrc.org/bioconductor/trunk/madman/Rpacks"
 
   for (pkg in pkgs) {
 
     # prepare URL
-    path <- str_c(base, pkg, sep="/")
+    url <- str_c(base, pkg, sep="/")
 
     # check that the package exists
-    status <- HEAD(handle=h, path=path)$status_code
-    if (status >= 300) {
-      next("Package not found on bioconductor")
+    # TODO replace by url_ok() from httr
+    status <- HEAD(url=url, config=auth)$status_code
+    if (status != 200) {
+      warning("Package ", pkg, " not found on bioconductor")
+      next()
     }
 
     # create a temporary directory to hold the package content
-    temp <- str_c(tempfile(), "/", pkg, "/")
+    temp <- file.path(tempfile(), pkg)
 
     # get all packages files
     message("Downloading ", pkg)
-    download_subversion_listing(handle=h, path=path, destdir=temp)
+    spider_svn(url=url, destdir=temp, config=auth)
 
     # install package
     install(pkg=temp, ...)
@@ -53,20 +55,20 @@ install_bioconductor <- function(pkgs, ...) {
   }
 
   # reset RCurl options
-	on.exit(expr=reset_config())
+  on.exit(expr=reset_config())
 
   return(invisible(TRUE))
 }
 
 
-# Walk the listing of the subversion http interface and download all files
-# handle    connection handle to bioconductor (contains url)
-# path      location on the bioconductor server
+# Walk the listing of a subversion http interface and download all files
+# url       URL of the SVN repository web interface
 # destdir   destination of the downloaded files
-download_subversion_listing <- function(handle, path, destdir, ...) {
+# ...       passed to GET
+spider_svn <- function(url, destdir, ...) {
 
   # download the content of the page
-  page <- text_content(GET(handle=handle, path=path))
+  page <- text_content(GET(url, ...))
 
   # get all links
   links <- str_extract_all(page, pattern="href=\".*?\"")[[1]]
@@ -89,14 +91,14 @@ download_subversion_listing <- function(handle, path, destdir, ...) {
 
   # download files
   for (file in files) {
-    req <- GET(handle=handle, path=str_c(path, "/", file))
+    req <- GET(url=str_c(url, "/", file), ...)
     stop_for_status(req)
-    writeBin(content(req), con=str_c(destdir, "/", file))
+    writeBin(content(req), con=file.path(destdir, file))
   }
 
   # walk dirs and download their content too
   for (dir in dirs) {
-    download_subversion_listing(handle=handle, path=str_c(path, "/", dir), destdir=str_c(destdir, "/", dir), ...)
+    spider_svn(url=str_c(url, "/", dir, "/"), destdir=file.path(destdir, dir), ...)
   }
 
   return(invisible(TRUE))
