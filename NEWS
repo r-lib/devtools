@@ -1,3 +1,5 @@
+* Add `--no-resave-data` to default build command. 
+
 devtools 0.7.1
 --------------
 

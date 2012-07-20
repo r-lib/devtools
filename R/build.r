@@ -21,7 +21,7 @@ build <- function(pkg = NULL, path = NULL, binary = FALSE) {
     ext <- if (.Platform$OS.type == "windows") "zip" else "tgz"
   } else {
     cmd <- paste("CMD build ", shQuote(pkg$path), 
-      " --no-manual --no-vignettes", sep = "")
+      " --no-manual --no-vignettes --no-resave-data", sep = "")
     ext <- "tar.gz"
   }
   R(cmd, path)
