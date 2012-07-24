@@ -75,6 +75,7 @@ unload_dynlibs <- function(pkg = NULL) {
   # Get all shared libraries whose name matches this package
   # (can be more than one)
   libs <- libs[vapply(libs, "[[", character(1), "name") == pkg$package]
+  if (length(libs) == 0) return(invisible())
 
   # Get just the paths
   libpaths <- vapply(libs, "[[", character(1), "path")
@@ -85,5 +86,8 @@ unload_dynlibs <- function(pkg = NULL) {
   # Installation path of package
   pkgpath <- system.file(package = pkg$package)
 
-  library.dynam.unload(libnames, pkgpath)
+  # Unload each entry in libnames
+  lapply(libnames, library.dynam.unload, pkgpath)
+
+  invisible()
 }
