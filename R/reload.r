@@ -84,4 +84,27 @@ unload <- function(pkg = NULL) {
 
   # Clear so that loading the package again will re-read all files
   clear_cache()
+
+  # Do this after detach, so that packages that have an .onUnload function
+  # which unloads DLLs (like MASS) won't try to unload the DLL twice.
+  unload_dynlibs(pkg)
+}
+
+unload_dynlibs <- function(pkg = NULL) {
+  libs <- .dynLibs()
+
+  # Get all shared libraries whose name matches this package
+  # (can be more than one)
+  libs <- libs[vapply(libs, "[[", character(1), "name") == pkg$package]
+
+  # Get just the paths
+  libpaths <- vapply(libs, "[[", character(1), "path")
+
+  # Strip off path and extension
+  libnames <- sub("\\.[^\\.]*$", "", basename(libpaths))
+
+  # Installation path of package
+  pkgpath <- system.file(package = pkg$package)
+
+  library.dynam.unload(libnames, pkgpath)
 }
