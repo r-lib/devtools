@@ -49,14 +49,12 @@ create <- function(
   }
 
   package.skeleton(name=name, path=path, environment=environment, ...)
-  message("Removing automatically generated documentation, since we're using Roxygen to generate it.")
 
-  # These are package.skeleton generated files which add more noise than help. We'll replace them with
-  # Roxygen-generated documentation and devtools workflows.
+  message("Removing automatically generated documentation, since we're using Roxygen to generate the actual documenation.")
   paths_to_remove <- c('man', 'Read-and-delete-me')
   unlink(file.path(package_path, paths_to_remove), recursive = TRUE)
 
-  # Add empty R and data paths.
+  # Add empty R directory:
   r_path <- file.path(package_path, 'R')
   if(!file.exists(r_path)) dir.create(r_path)
 
