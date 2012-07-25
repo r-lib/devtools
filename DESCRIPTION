@@ -62,3 +62,6 @@ Collate:
     'env-utils.r'
     'inst.r'
     'metadata.r'
+    'create.r'
+    'load-description.r'
+    'write-description.r'
