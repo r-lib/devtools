@@ -48,3 +48,6 @@ Collate:
     'install-gitorious.r'
     'missing-s3.r'
     'run-source.r'
+    'create.r'
+    'load-description.r'
+    'write-description.r'
