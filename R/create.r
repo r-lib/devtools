@@ -62,8 +62,6 @@ create <- function(
 
   # Run common devtools tasks on the new package:
   message("Checking devtools tasks on the new package.")
-  document(package_path)
   check(package_path)
-  install(package_path)
 
 }
