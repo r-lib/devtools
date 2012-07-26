@@ -1,4 +1,5 @@
-#' Creates package-level documentation.
+#' Creates package-level documentation, where the developer can add
+#' documentation for data, vignettes, etc.
 #' @param path path to the package
 #' @param name of the package
 #' @importFrom brew brew
