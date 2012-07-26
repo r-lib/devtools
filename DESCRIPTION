@@ -11,7 +11,8 @@ Imports:
     RCurl,
     utils,
     tools,
-    memoise
+    memoise,
+    brew
 Suggests:
     testthat,
     roxygen2,
@@ -65,3 +66,4 @@ Collate:
     'create.r'
     'load-description.r'
     'write-description.r'
+    'create-package-doc.r'
