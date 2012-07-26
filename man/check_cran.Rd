@@ -4,7 +4,7 @@
 \usage{
   check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"),
     srcpath = libpath, bioconductor = FALSE,
-    type = getOption("pkgType"), ...)
+    type = getOption("pkgType"), threads = 1, ...)
 }
 \arguments{
   \item{pkgs}{Vector of package names - note that unlike
