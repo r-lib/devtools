@@ -46,4 +46,10 @@
   work in a session-specific temporary directory, so all
   files will be removed when your current R session ends.
 }
+\examples{
+\dontrun{
+dep <- revdep("ggplot2")
+check_cran(dep, "~/documents/ggplot/ggplot-check")
+}
+}
 
