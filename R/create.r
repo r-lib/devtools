@@ -59,6 +59,7 @@ create <- function(
   if(!file.exists(r_path)) dir.create(r_path)
 
   write_description(package_path, description)
+  create_package_doc(package_path, name)
 
   # Run common devtools tasks on the new package:
   message("Checking devtools tasks on the new package.")

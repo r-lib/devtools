@@ -8,7 +8,8 @@ Depends:
     R (>= 2.13)
 Imports:
     RCurl,
-    utils
+    utils,
+    brew
 Suggests:
     testthat,
     roxygen2
@@ -51,3 +52,4 @@ Collate:
     'create.r'
     'load-description.r'
     'write-description.r'
+    'create-package-doc.r'
