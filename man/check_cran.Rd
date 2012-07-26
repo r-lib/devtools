@@ -26,6 +26,9 @@
 
   \item{type}{binary package type of test}
 
+  \item{threads}{number of concurrent threads to use for
+  checking.}
+
   \item{...}{other parameters passed onto
   \code{\link{download.packages}}}
 }

@@ -21,6 +21,7 @@
 #'   redownload the packages every time you run the package.
 #' @param bioconductor include bioconductor packages in checking?
 #' @param type binary package type of test
+#' @param threads number of concurrent threads to use for checking.
 #' @return invisible \code{TRUE} if successful and no ERRORs or WARNINGS,
 #' @param ... other parameters passed onto \code{\link{download.packages}}
 #' @importFrom tools package_dependencies
