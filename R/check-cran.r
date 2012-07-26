@@ -77,7 +77,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
   if (length(known) > 0) {
     message("Installing ", length(known), " missing binary dependencies")
-    install.packages(known, lib = libpath, quiet = TRUE, repos = repos)    
+    install.packages(known, lib = libpath, quiet = TRUE, repos = repos,
+      Ncpus = threads)
   }
   if (length(unknown) > 0) {
     message("No binary packages available for dependenices: ", 
