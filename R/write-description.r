@@ -7,7 +7,7 @@ write_description <- function(path, description) {
   fields <- names(description)
 
   description.matrix <-
-    matrix(as.vector(description), ncol=length(fields),dimnames=list(NULL,fields))
-  write.dcf(description.matrix, file.path(path, 'DESCRIPTION'))
+    matrix(description, ncol=length(fields),dimnames=list(NULL,fields))
+  write.dcf(x=description.matrix, file=file.path(path, 'DESCRIPTION'))
 
 }

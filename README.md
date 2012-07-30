@@ -37,6 +37,9 @@ Building and installing:
   gitorious, `install_bitbucket` from bitbucket, and `install_url` from an
   arbitrary url. `install_version` installs a specified version from cran,
 
+Creating a new package:
+* `create("pkg")` creates a new R package, followint all devtools conventions.
+
 Check and release:
 
 * `check("pkg")` updates the documentation, then builds and checks the

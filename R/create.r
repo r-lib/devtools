@@ -1,4 +1,5 @@
 #' Creates a new package, following all devtools package conventions.
+#'
 #' Similar to package.skeleton, except that it omits the default of adding
 #' current environment variables, instead defaulting to adding no objects.
 #' Also adds the standard devtools conventions.
@@ -6,8 +7,9 @@
 #'        your package.
 #' @param path to put the package directory in
 #' @param environment to be included in the package. Defaults to empty environment.
-#' @param description names vector of description values to add. Note that default values exist, as well.
+#' @param description list of description values to override default values or add additional values.
 #' @param ... other options passed to \code{package.skeleton}
+#' @seealso Text with \code{\link{package.skeleton}}
 #' @export
 #' @examples
 #'
@@ -18,31 +20,33 @@
 #' # Override a description attribute.
 #' # Note that overriding one atribute implies that you must override
 #' # all default attributes, as well.
-#' my_description <- as.list(formals(create)$description)
-#' my_description$Package <- "myCustomPackage"
-#' my_description$Maintainer <- "'Yoni Ben-Meshulam' <yoni@@opower.com>"
-#' 
+#' my_description <- list("Maintainer"="'Yoni Ben-Meshulam' <yoni@@opower.com>")
 #' create(name='myCustomPackage', path=path_to_package, description=my_description)
 create <- function(
                    name,
                    path,
                    environment=new.env(),
-                   description=c("Package"=name,
-                                 "Maintainer"="Who to complain to <yourfault@somewhere.net>",
-                                 "Author"=Sys.getenv("USER"),
-                                 "Version"="1.0",
-                                 "License"="GPL-3",
-                                 "Title"="",
-                                 "Description"="",
-                                 "Suggests"="\ntestthat,\nroxygen2"
-                                 ),
+                   description=list(),
                    ...) {
+
+  description.defaults <- c(
+                            "Package"=name,
+                            "Maintainer"="Who to complain to <yourfault@somewhere.net>",
+                            "Author"=Sys.getenv("USER"),
+                            "Version"="1.0",
+                            "License"="GPL-3",
+                            "Title"=name,
+                            "Description"=name,
+                            "Suggests"="\ntestthat,\nroxygen2"
+                            )
 
   package_path <- file.path(path, name)
   message(sprintf("Creating package [%s] in path [%s]", name, package_path))
 
   created_dummy_function <- FALSE
   # Workaround for empty environments. Will add a simple function that prints 'hello'.
+  # This is a known issue documented here:
+  # https://stat.ethz.ch/pipermail/r-devel/2011-October/062279.html
   if(length(ls(environment)) == 0) {
     created_dummy_function <- TRUE
     assign('hello', function() print('hello'), environment)
@@ -57,6 +61,10 @@ create <- function(
   # Add empty R directory:
   r_path <- file.path(package_path, 'R')
   if(!file.exists(r_path)) dir.create(r_path)
+
+  # Combine default and override values:
+  description <- c(description, description.defaults)
+  description <- description[unique(names(description))]
 
   write_description(package_path, description)
   create_package_doc(package_path, name)
