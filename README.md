@@ -36,6 +36,9 @@ Building and installing:
 * `install_github("repo", "username")` installs an R package from github,
   `install_gitorious` from gitorious, and `install_url` from an arbitrary url.
 
+Creating a new package:
+* `create("pkg")` creates a new R package, followint all devtools conventions.
+
 Check and release:
 
 * `check("pkg")` updates the documentation, then builds and checks the
