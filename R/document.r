@@ -3,7 +3,7 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param clean if \code{TRUE} will automatically clear all roxygen caches
-#'   and delete currently man contents to ensure that you have the freshest
+#'   and delete current `/man` contents to ensure that you have the freshest
 #'   version of the documentation.
 #'   check documentation after running roxygen.
 #' @keywords programming
