@@ -10,7 +10,7 @@
 #'  \code{\link{pkg_env}} for more information
 #' @keywords programming
 #' @export
-load_code <- function(pkg = NULL, env = pkg_env(pkg)) {
+load_code <- function(pkg = NULL, env = pkg_ns_env(pkg)) {
   pkg <- as.package(pkg)
   path_r <- file.path(pkg$path, "R")
 

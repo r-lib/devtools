@@ -8,55 +8,31 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
-pkg_env <- function(pkg = NULL) {
+pkg_ns_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
-  name <- env_name(pkg)
-  
-  if (!is.loaded(pkg)) {
-    attach(base_env(pkg), name = name)
+  name <- env_ns_name(pkg)
+  print(name)
+
+  if (!is.loaded_ns(pkg)) {
+    env <- makeNamespace(pkg$package)
+    attr(env, 'name') <- name
   }
+
+  env
+}
+
+
+#' Package development environment
+#' Contains exported objects
+#' @export
+pkg_pkg_env <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
+  name <- env_pkg_name(pkg)
   
-  # if (is.loaded(pkg)) return(as.environment(name))
-  # 
-  # # Set up package environments ----------------------------------------------
-  # imp_env <- new.env(parent = .BaseNamespaceEnv, hash = TRUE)
-  # attr(imp_env, "name") <- paste("imports", pkg$package, sep = ":")
-  # 
-  # env <- new.env(parent = imp_env, hash = TRUE)
-  # env$.packageName <- pkg$package
-  # 
-  # ns_env <- new.env(hash = TRUE, parent = baseenv())
-  # ns_env[["spec"]] <- c(name = pkg$package, version = pkg$version)
-  # env[[".__NAMESPACE__."]] <- ns_env
-  # 
-  # setNamespaceInfo(env, "exports", new.env(hash = TRUE, parent = baseenv()))
-  # setNamespaceInfo(env, "imports", list("base" = TRUE))
-  # setNamespaceInfo(env, "path", pkg$path)
-  # setNamespaceInfo(env, "dynlibs", NULL)
-  # setNamespaceInfo(env, "S3methods", matrix(NA_character_, 0L, 3L))
-  # env[[".__S3MethodsTable__."]] <- new.env(hash = TRUE, parent = baseenv())
-  # 
-  # dimpenv <- new.env(parent = baseenv(), hash = TRUE)
-  # attr(dimpenv, "name") <- paste("lazydata", pkg$package, sep=":")
-  # setNamespaceInfo(env, "lazydata", dimpenv)
-  # 
-  # # Set up imports -----------------------------------------------------------
-  # nsInfo <- parseNamespaceFile(basename(pkg$path), dirname(pkg$path))
-  # 
-  # for (i in nsInfo$imports) {
-  #   if (is.character(i)) {
-  #     namespaceImport(env, loadNamespace(i))
-  #   } else {
-  #     namespaceImportFrom(env, loadNamespace(i[[1L]]), i[[2L]])
-  #   }
-  # }
-  # for(imp in nsInfo$importClasses) {
-  #   namespaceImportClasses(env, loadNamespace(imp[[1L]]), imp[[2L]])
-  # }
-  # for(imp in nsInfo$importMethods) {
-  #   namespaceImportMethods(env, loadNamespace(imp[[1L]]), imp[[2L]])
-  # }
-  
+  if (!is.loaded_pkg(pkg)) {
+    attach(new.env(parent = emptyenv()), name = name)
+  }
+
   as.environment(name)
 }
 
@@ -69,9 +45,18 @@ clear_pkg_env <- function(pkg = NULL) {
   }  
 }
 
-#' Generate name of package development environment
+#' Generate name of package namespace environment
+#' Contains all objects
 #' @keywords internal
-env_name <- function(pkg = NULL) {
+env_ns_name <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
+  paste("namespace:", pkg$package, sep = "")
+}
+
+#' Generate name of package development environment
+#' Contains exported objects
+#' @keywords internal
+env_pkg_name <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   paste("package:", pkg$package, sep = "")
 }
@@ -80,7 +65,7 @@ clear_classes <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   if (!is.loaded(pkg)) return()
   
-  name <- env_name(pkg)
+  name <- env_pkg_name(pkg)
   classes <- getClasses(name)
   lapply(classes, removeClass, where = name)    
   invisible()
@@ -88,4 +73,32 @@ clear_classes <- function(pkg = NULL) {
 
 base_env <- function(pkg) {
   new.env(parent = emptyenv())
+}
+
+
+# Took this from base::loadNamespace()
+makeNamespace <- function(name, version = NULL, lib = NULL) {
+  impenv <- new.env(parent = .BaseNamespaceEnv, hash = TRUE)
+  attr(impenv, "name") <- paste("imports", name, sep = ":")
+  env <- new.env(parent = impenv, hash = TRUE)
+  name <- as.character(as.name(name))
+  version <- as.character(version)
+  info <- new.env(hash = TRUE, parent = baseenv())
+  assign(".__NAMESPACE__.", info, envir = env)
+  assign("spec", c(name = name, version = version), envir = info)
+  setNamespaceInfo(env, "exports", new.env(hash = TRUE, 
+      parent = baseenv()))
+  dimpenv <- new.env(parent = baseenv(), hash = TRUE)
+  attr(dimpenv, "name") <- paste("lazydata", name, sep = ":")
+  setNamespaceInfo(env, "lazydata", dimpenv)
+  setNamespaceInfo(env, "imports", list(base = TRUE))
+  setNamespaceInfo(env, "path", normalizePath(file.path(lib, 
+      name), "/", TRUE))
+  setNamespaceInfo(env, "dynlibs", NULL)
+  setNamespaceInfo(env, "S3methods", matrix(NA_character_, 
+      0L, 3L))
+  assign(".__S3MethodsTable__.", new.env(hash = TRUE, 
+      parent = baseenv()), envir = env)
+  .Internal(registerNamespace(name, env))
+  env
 }

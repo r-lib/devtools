@@ -9,7 +9,7 @@
 #'  \code{\link{pkg_env}} for more information
 #' @keywords programming
 #' @export
-load_data <- function(pkg = NULL, env = pkg_env(pkg)) {
+load_data <- function(pkg = NULL, env = pkg_ns_env(pkg)) {
   pkg <- as.package(pkg)
   objs <- character()
   

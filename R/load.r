@@ -34,15 +34,26 @@ load_all <- function(pkg = NULL, reset = FALSE) {
     clear_pkg_env(pkg)
   }
   
-  env <- pkg_env(pkg)
-  load_data(pkg, env)
-  load_code(pkg, env)
+  package_ns_env <- pkg_ns_env(pkg)
+  load_data(pkg, package_ns_env)
+  load_code(pkg, package_ns_env)
   load_c(pkg)
+
+  copy_env(package_ns_env, pkg_pkg_env(pkg))
 
   invisible()  
 }
 
 
 is.locked <- function(pkg = NULL) {
-  environmentIsLocked(as.environment(env_name(pkg)))
+  environmentIsLocked(as.environment(env_pkg_name(pkg)))
+}
+
+copy_env <- function(src, dest) {
+  src_objs <- ls(envir = src)
+  for (objname in src_objs) {
+    obj <- get(objname, envir = src)
+    assign(objname, obj, envir = dest)
+  }
+
 }

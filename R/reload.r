@@ -10,7 +10,7 @@
 #' @export
 reload <- function(pkg = NULL) {
   pkg <- as.package(pkg)
-  name <- env_name(pkg)
+  name <- env_pkg_name(pkg)
   
   if (is.loaded(pkg)) {
     message("Reloading installed ", pkg$package)
@@ -20,9 +20,16 @@ reload <- function(pkg = NULL) {
 }
 
 is.loaded <- function(pkg = NULL) {
-  env_name(pkg) %in% search()
+  env_pkg_name(pkg) %in% search()
+}
+
+is.loaded_pkg <- is.loaded
+
+is.loaded_ns <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
+  pkg$package %in% loadedNamespaces()
 }
 
 unload <- function(pkg = NULL) {
-  detach(env_name(pkg), character.only = TRUE, force = TRUE, unload = TRUE)
+  detach(env_pkg_name(pkg), character.only = TRUE, force = TRUE, unload = TRUE)
 }
