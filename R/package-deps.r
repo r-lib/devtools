@@ -61,7 +61,7 @@ load_imports <- function(pkg = NULL, deps = c("suggests", "depends", "imports"))
   deps <- lapply(pkg[deps], parse_deps)
   deps <- Reduce(rbind, deps)
 
-  if (nrow(deps) == 0) return(invisible())
+  if (is.null(deps) || nrow(deps) == 0) return(invisible())
 
   mapply(import_dep, deps$name, deps$version, MoreArgs = list(pkg = pkg))
 
