@@ -7,7 +7,7 @@
 #'   \code{\link{as.package}} for more information
 #' @param env environment in which to load code.  Defaults to \code{devel:pkg}
 #'   which is attached just after the global environment.  See
-#'  \code{\link{pkg_env}} for more information
+#'  \code{\link{pkg_ns_env}} for more information
 #' @keywords programming
 #' @export
 load_code <- function(pkg = NULL, env = pkg_ns_env(pkg)) {
