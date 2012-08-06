@@ -41,6 +41,8 @@ load_all <- function(pkg = NULL, reset = FALSE) {
   load_code(pkg, package_ns_env)
   load_c(pkg)
 
+  # Copy all the objects from namespace env to package env, so that they
+  # are visible in global env.
   copy_env(package_ns_env, pkg_pkg_env(pkg))
 
   invisible()  
@@ -51,11 +53,11 @@ is.locked <- function(pkg = NULL) {
   environmentIsLocked(as.environment(env_pkg_name(pkg)))
 }
 
+# Copy all objects from one environment to another.
 copy_env <- function(src, dest) {
-  src_objs <- ls(envir = src)
+  src_objs <- ls(envir = src, all.names = TRUE)
   for (objname in src_objs) {
     obj <- get(objname, envir = src)
     assign(objname, obj, envir = dest, inherits = FALSE)
   }
-
 }
