@@ -1,4 +1,7 @@
-#' Generate an development environment for a package.
+#' Generate an development namespace environment for a package.
+#'
+#' Contains all (exported and non-exported) objects, and is a child of
+#' R_GlobalEnv.
 #'
 #' \code{devtools} keeps the global workspace clean by loading all code and
 #' data into a separate environment.  This environment is 
@@ -11,11 +14,11 @@
 pkg_ns_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   name <- env_ns_name(pkg)
-  print(name)
 
   if (!is.loaded_ns(pkg)) {
     env <- makeNamespace(pkg$package)
-    attr(env, 'name') <- name
+  } else {
+    env <- asNamespace(pkg$package)
   }
 
   env
@@ -23,7 +26,7 @@ pkg_ns_env <- function(pkg = NULL) {
 
 
 #' Package development environment
-#' Contains exported objects
+#' Contains exported objects, and is an ancestor of R_GlobalEnv.
 #' @export
 pkg_pkg_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
@@ -34,6 +37,29 @@ pkg_pkg_env <- function(pkg = NULL) {
   }
 
   as.environment(name)
+}
+
+#' Package imports environment
+#' Contains objects imported from other packages. Is a child of R_GlobalEnv
+#' and is the parent of the package namespace environment.
+#' @export
+pkg_imports_env <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
+  name <- env_pkg_name(pkg)
+
+  if (!is.loaded_ns(pkg)) {
+    stop("Namespace environment must be created before accessing imports environment.")
+  }
+
+  env <- parent.env(pkg_ns_env(pkg))
+
+  if (attr(env, 'name') != env_imports_name(pkg)) {
+    stop("Imports environment does not have attribute 'name' with value ",
+      env_imports_name(pkg),
+      ". This probably means that the namespace environment was not created correctly.")
+  }
+
+  env
 }
 
 #' Detach development environment
@@ -53,13 +79,22 @@ env_ns_name <- function(pkg = NULL) {
   paste("namespace:", pkg$package, sep = "")
 }
 
-#' Generate name of package development environment
+#' Generate name of package environment
 #' Contains exported objects
 #' @keywords internal
 env_pkg_name <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   paste("package:", pkg$package, sep = "")
 }
+
+#' Generate name of package imports environment
+#' Contains exported objects
+#' @keywords internal
+env_imports_name <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
+  paste("imports:", pkg$package, sep = "")
+}
+
 
 clear_classes <- function(pkg = NULL) {
   pkg <- as.package(pkg)
@@ -73,32 +108,4 @@ clear_classes <- function(pkg = NULL) {
 
 base_env <- function(pkg) {
   new.env(parent = emptyenv())
-}
-
-
-# Took this from base::loadNamespace()
-makeNamespace <- function(name, version = NULL, lib = NULL) {
-  impenv <- new.env(parent = .BaseNamespaceEnv, hash = TRUE)
-  attr(impenv, "name") <- paste("imports", name, sep = ":")
-  env <- new.env(parent = impenv, hash = TRUE)
-  name <- as.character(as.name(name))
-  version <- as.character(version)
-  info <- new.env(hash = TRUE, parent = baseenv())
-  assign(".__NAMESPACE__.", info, envir = env)
-  assign("spec", c(name = name, version = version), envir = info)
-  setNamespaceInfo(env, "exports", new.env(hash = TRUE, 
-      parent = baseenv()))
-  dimpenv <- new.env(parent = baseenv(), hash = TRUE)
-  attr(dimpenv, "name") <- paste("lazydata", name, sep = ":")
-  setNamespaceInfo(env, "lazydata", dimpenv)
-  setNamespaceInfo(env, "imports", list(base = TRUE))
-  setNamespaceInfo(env, "path", normalizePath(file.path(lib, 
-      name), "/", TRUE))
-  setNamespaceInfo(env, "dynlibs", NULL)
-  setNamespaceInfo(env, "S3methods", matrix(NA_character_, 
-      0L, 3L))
-  assign(".__S3MethodsTable__.", new.env(hash = TRUE, 
-      parent = baseenv()), envir = env)
-  .Internal(registerNamespace(name, env))
-  env
 }

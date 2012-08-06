@@ -24,17 +24,19 @@ load_all <- function(pkg = NULL, reset = FALSE) {
     unload(pkg)
   }
   
-  # Load dependencies before creating environment so it sees all the required
-  # packages
-  load_deps(pkg)
-
   if (reset) {
     clear_cache()
     clear_classes(pkg)
     clear_pkg_env(pkg)
   }
-  
+
+  # Create the namespace environment
+  # namspace:xx is a child of imports::xx is a child of R_GlobalEnv
   package_ns_env <- pkg_ns_env(pkg)
+
+  # Load dependencies into the imports environment
+  load_imports(pkg)
+
   load_data(pkg, package_ns_env)
   load_code(pkg, package_ns_env)
   load_c(pkg)
@@ -53,7 +55,7 @@ copy_env <- function(src, dest) {
   src_objs <- ls(envir = src)
   for (objname in src_objs) {
     obj <- get(objname, envir = src)
-    assign(objname, obj, envir = dest)
+    assign(objname, obj, envir = dest, inherits = FALSE)
   }
 
 }
