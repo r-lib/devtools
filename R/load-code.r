@@ -23,6 +23,7 @@ load_code <- function(pkg = NULL, env = pkg_ns_env(pkg)) {
     if (length(missing) > 0) {
       message("Skipping missing files: ", files(missing))
     }
+    collate <- setdiff(collate, missing)
     
     extra <- setdiff(r_files, collate)
     if (length(extra) > 0) {
