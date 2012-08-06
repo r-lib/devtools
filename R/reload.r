@@ -32,4 +32,7 @@ is.loaded_ns <- function(pkg = NULL) {
 
 unload <- function(pkg = NULL) {
   detach(env_pkg_name(pkg), character.only = TRUE, force = TRUE, unload = TRUE)
+
+  # Clear so that loading the package again will re-read all files
+  clear_cache()
 }
