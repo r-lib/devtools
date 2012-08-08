@@ -1,3 +1,4 @@
+context("Dependencies")
 
 test_that("Warned about dependency versions", {
   # Should give a warning about grid version
