@@ -25,41 +25,14 @@ reload_devtools <- function(pkg = NULL, reset = FALSE) {
       pkg$package)
   }
 
-  oldenv <- asNamespace("devtools")
-
   # Duplicate the devtools environment
-  newenv_list <- as.list(oldenv, all.names=TRUE)
+  newenv_list <- as.list(asNamespace("devtools"), all.names=TRUE)
   # Remove namespace info so R doesn't do weird stuff
   newenv_list[[".__NAMESPACE__."]] <- NULL
 
   # Create the new environment.
   # Set the parent to global env so it can see basic functions
   newenv <- list2env(newenv_list, parent = globalenv())
-
-  # Change the environment of all the objects that have an environment
-  # from <namespace:devtools> to the new environment.
-  # Use a loop; doing this with a function and lapply is hard,
-  # because environment setting has to be done on the original object,
-  # not a pass-by-value copy of it.
-  newenv_objs <- ls(newenv, all.names = TRUE)
-  for (obj in newenv_objs) {
-    obj_env <- environment(newenv[[obj]])
-
-    if (is.null(obj_env))  next
-
-    if (identical(oldenv, obj_env)) {
-      # If the object's environment is the old namespace environment,
-      # change it to the new environment.
-      environment(newenv[[obj]]) <- newenv
-
-    } else if (identical(oldenv, parent.env(obj_env))) {
-      # For closures: if the _parent_ env is the old namespace environment,
-      # change it to the new environment
-      parent.env(obj_env) <- newenv
-    }
-    # I guess we could keep going for more deeply nested closures, but
-    # this should be good enough for our purposes
-  }
 
   # Finally we can reload devtools
   newenv$load_all(pkg, reset)
