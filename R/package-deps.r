@@ -12,18 +12,27 @@ parse_deps <- function(string) {
   names <- gsub("\\s*\\(.*?\\)", "", pieces)
   names <- gsub("^\\s+|\\s+$", "", names)
 
-  # Get the versions
-  versions <- pieces
-  # Assume that version specification is always '>='
-  have_version <- grepl("\\(>=.*\\)", versions)
-  versions[!have_version] <- NA
-  versions <- sub(".*\\(>= ?(.*?)\\)", "\\1", versions)
+  # Get the versions and comparison operators
+  versions_str <- pieces
+  have_version <- grepl("\\(.*\\)", versions_str)
+  versions_str[!have_version] <- NA
+
+  compare  <- sub(".*\\((\\S+)\\s+.*\\)", "\\1", versions_str)
+  versions <- sub(".*\\(\\S+\\s+(.*)\\)", "\\1", versions_str)
+
+  # Check that non-NA comparison operators are valid
+  compare_nna   <- compare[!is.na(compare)]
+  compare_valid <- compare_nna %in% c(">", ">=", "==", "<=", "<")
+  if(!all(compare_valid)) {
+    stop("Invalid comparison operator in dependency: ",
+      paste(compare_nna[!compare_valid], collapse = ", "))
+  }
+
+  deps <- data.frame(name = names, compare = compare,
+    version = versions, stringsAsFactors = FALSE)
 
   # Remove R dependency
-  versions <- versions[names != "R"]
-  names <- names[names != "R"]
-
-  data.frame(name = names, version = versions, stringsAsFactors = FALSE)
+  deps[names != "R", ]
 }
 
 #' Load all of the imports for a package
@@ -42,7 +51,8 @@ load_imports <- function(pkg = NULL, deps = c("suggests", "depends", "imports"))
 
   if (is.null(deps) || nrow(deps) == 0) return(invisible())
 
-  mapply(import_dep, deps$name, deps$version, MoreArgs = list(pkg = pkg))
+  mapply(import_dep, deps$name, deps$version, deps$compare,
+    MoreArgs = list(pkg = pkg))
 
   invisible(deps)
 }
@@ -54,9 +64,11 @@ load_imports <- function(pkg = NULL, deps = c("suggests", "depends", "imports"))
 #' (but not attach) the dependency package.
 #'
 #' @param pkg The package that is doing the importing
-#' @param dep The name of the package with objects to import
+#' @param dep_name The name of the package with objects to import
+#' @param dep_ver The version of the package
+#' @param dep_compare The comparison operator to use to check the version
 #' @keywords internal
-import_dep <- function(pkg, dep_name, dep_ver = NA) {
+import_dep <- function(pkg, dep_name, dep_ver = NA, dep_compare = NA) {
   pkg <- as.package(pkg)
   imp_env <- pkg_imports_env(pkg)
 
@@ -64,14 +76,23 @@ import_dep <- function(pkg, dep_name, dep_ver = NA) {
     stop("Dependency package ", dep_name, " not available.")
   }
 
-  # Assume that version specification is always '>='
-  if (!is.na(dep_ver) &&
-    as.numeric_version(getNamespaceVersion(dep_name)) <
-    as.numeric_version(dep_ver)) {
 
-    warning(pkg$package, " needs ", dep_name, " >=", dep_ver,
-      " but loaded version is ", getNamespaceVersion(dep_name))
+  if (xor(is.na(dep_ver), is.na(dep_compare))) {
+    stop("dep_ver and dep_compare must be both NA or both non-NA")
+
+  } else if(!is.na(dep_ver) && !is.na(dep_compare)) {
+
+    compare <- match.fun(dep_compare)
+    if (!compare(
+      as.numeric_version(getNamespaceVersion(dep_name)),
+      as.numeric_version(dep_ver))) {
+
+      warning(pkg$package, " needs ", dep_name, " ", dep_compare,
+        " ", dep_ver,
+        " but loaded version is ", getNamespaceVersion(dep_name))
+    }
   }
+
 
   # Copy all exported objects from dep to the imports environment.
   # Running getNamespaceExports will automatically load (but not attach)
