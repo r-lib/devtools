@@ -60,7 +60,8 @@ find_code <- function(pkg) {
     if (length(missing) > 0) {
       message("Skipping missing files: ", files(missing))
     }
-    
+    collate <- setdiff(collate, missing)
+
     extra <- setdiff(r_files, collate)
     if (length(extra) > 0) {
       message("Adding files missing in collate: ", files(extra))
