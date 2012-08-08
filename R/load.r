@@ -41,20 +41,20 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
 
   # Create the namespace environment
   # namspace:xx is a child of imports::xx is a child of R_GlobalEnv
-  ns_env <- pkg_ns_env(pkg)
+  nsenv <- ns_env(pkg)
 
-  out <- list(env = ns_env)
+  out <- list(env = nsenv)
 
   # Load dependencies into the imports environment
   load_imports(pkg)
 
-  out$data <- load_data(pkg, ns_env)
-  out$code <- load_code(pkg, ns_env)
+  out$data <- load_data(pkg, nsenv)
+  out$code <- load_code(pkg, nsenv)
   out$c <- load_c(pkg)
 
   # Copy all the objects from namespace env to package env, so that they
   # are visible in global env.
-  copy_env(ns_env, pkg_pkg_env(pkg))
+  copy_env(nsenv, pkg_pkg_env(pkg))
 
   invisible(out)  
 }

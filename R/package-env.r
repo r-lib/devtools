@@ -1,17 +1,14 @@
-#' Generate an development namespace environment for a package.
+#' Generate a namespace environment for a package.
 #'
-#' Contains all (exported and non-exported) objects, and is a child of
-#' R_GlobalEnv.
-#'
-#' \code{devtools} keeps the global workspace clean by loading all code and
-#' data into a separate environment.  This environment is 
-#' \code{\link{attach}}ed to the search path just after the global environment
-#' so it will override loaded packages.
+#' Contains all (exported and non-exported) objects, and is a descendent of
+#' \code{R_GlobalEnv}. The hieararchy is \code{<namespace:pkg>}, 
+#' \code{<imports:pkg>}, \code{<namespace:base>}, and then
+#' \code{R_GlobalEnv}
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
-pkg_ns_env <- function(pkg = NULL) {
+ns_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   name <- env_ns_name(pkg)
 
@@ -51,7 +48,7 @@ pkg_imports_env <- function(pkg = NULL) {
     stop("Namespace environment must be created before accessing imports environment.")
   }
 
-  env <- parent.env(pkg_ns_env(pkg))
+  env <- parent.env(ns_env(pkg))
 
   if (attr(env, 'name') != env_imports_name(pkg)) {
     stop("Imports environment does not have attribute 'name' with value ",

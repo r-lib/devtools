@@ -88,13 +88,13 @@ test_that("Namespace, imports, and package environments have correct hierarchy",
   load_all("namespace")
 
   pkg_env <- pkg_pkg_env("namespace")
-  ns_env  <- pkg_ns_env("namespace")
+  nsenv   <- ns_env("namespace")
   imp_env <- pkg_imports_env("namespace")
 
 
-  expect_identical(env_parent(ns_env, n = 1), imp_env)
-  expect_identical(env_parent(ns_env, n = 2), .BaseNamespaceEnv)
-  expect_identical(env_parent(ns_env, n = 3), .GlobalEnv)
+  expect_identical(env_parent(nsenv, n = 1), imp_env)
+  expect_identical(env_parent(nsenv, n = 2), .BaseNamespaceEnv)
+  expect_identical(env_parent(nsenv, n = 3), .GlobalEnv)
 
   # pkg_env should be an ancestor of the global environment
   expect_true(is_ancestor_env(pkg_env, .GlobalEnv))
@@ -109,7 +109,7 @@ test_that("Namespace, imports, and package environments have correct hierarchy",
 test_that("unload() removes package environments from search", {
   load_all("namespace")
   pkg_env <- pkg_pkg_env("namespace")
-  ns_env  <- pkg_ns_env("namespace")
+  nsenv   <- ns_env("namespace")
   imp_env <- pkg_imports_env("namespace")
   unload("namespace")
 
