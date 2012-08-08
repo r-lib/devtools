@@ -41,7 +41,8 @@ pkg_env <- function(pkg = NULL) {
   name <- env_pkg_name(pkg)
   
   if (!is.loaded_pkg(pkg)) {
-    attach(new.env(parent = emptyenv()), name = name)
+    pkgenv <- attach(new.env(parent = emptyenv()), name = name)
+    attr(pkgenv, "path") <- pkg$path
   }
 
   as.environment(name)
