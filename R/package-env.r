@@ -8,6 +8,7 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
+#' @export
 ns_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   name <- env_ns_name(pkg)
