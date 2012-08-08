@@ -25,16 +25,8 @@ load_code <- function(pkg = NULL, env = ns_env(pkg)) {
     }
   )
   
-  # Load .onLoad if it's defined
-  if (exists(".onLoad", env, inherits = FALSE) && 
-     !exists("__loaded", env, inherits = FALSE)) {
-    env$.onLoad()
-    env$`__loaded` <- TRUE
-  }
-  
   invisible(r_files)
 }
-
 
 #' Parse collate string into vector of function names.
 #' @keywords internal
