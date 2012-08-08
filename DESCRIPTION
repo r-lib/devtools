@@ -56,3 +56,5 @@ Collate:
     'with.r'
     'install-bitbucket.r'
     'path.r'
+    'namespace.r'
+    'reload-devtools.r'

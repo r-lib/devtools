@@ -2,7 +2,7 @@
 \alias{load_code}
 \title{Load R code.}
 \usage{
-  load_code(pkg = NULL, env = pkg_env(pkg))
+  load_code(pkg = NULL, env = pkg_ns_env(pkg))
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -10,8 +10,8 @@
 
   \item{env}{environment in which to load code.  Defaults
   to \code{devel:pkg} which is attached just after the
-  global environment.  See \code{\link{pkg_env}} for more
-  information}
+  global environment.  See \code{\link{pkg_ns_env}} for
+  more information}
 }
 \description{
   Load all R code in the \code{R} directory. The first time
