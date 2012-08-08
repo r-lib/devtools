@@ -25,6 +25,11 @@
 #' @param ... other parameters passed onto \code{\link{download.packages}}
 #' @importFrom tools package_dependencies
 #' @export
+#' @examples
+#' \dontrun{
+#' dep <- revdep("ggplot2")
+#' check_cran(dep, "~/documents/ggplot/ggplot-check")
+#' }
 check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath, bioconductor  = FALSE, type = getOption("pkgType"), ...) {
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
