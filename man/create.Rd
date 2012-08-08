@@ -2,8 +2,7 @@
 \alias{create}
 \title{Creates a new package, following all devtools package conventions.}
 \usage{
-  create(name, path, environment = new.env(),
-    description = list(), ...)
+  create(name, path, description = list())
 }
 \arguments{
   \item{name}{character string: the package name and
@@ -11,20 +10,12 @@
 
   \item{path}{to put the package directory in}
 
-  \item{environment}{to be included in the package.
-  Defaults to empty environment.}
-
   \item{description}{list of description values to override
   default values or add additional values.}
-
-  \item{...}{other options passed to
-  \code{package.skeleton}}
 }
 \description{
-  Similar to package.skeleton, except that it omits the
-  default of adding current environment variables, instead
-  defaulting to adding no objects. Also adds the standard
-  devtools conventions.
+  Creates a new package, following all devtools package
+  conventions.
 }
 \examples{
 # Create a package using all defaults:

@@ -1,8 +1,8 @@
-\name{write_description}
-\alias{write_description}
+\name{save_package_description}
+\alias{save_package_description}
 \title{Writes the DESCRIPTION parameters to the given package.}
 \usage{
-  write_description(path, description)
+  save_package_description(path, description)
 }
 \arguments{
   \item{path}{to the package}
