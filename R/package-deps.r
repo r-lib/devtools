@@ -81,8 +81,8 @@ import_dep <- function(pkg, dep_name, dep_ver = NA) {
   pkg <- as.package(pkg)
   imp_env <- pkg_imports_env(pkg)
 
-  if (!requireNamespace(dep_name)) {
-    return(FALSE)
+  if (!requireNamespace(dep_name, quietly = TRUE)) {
+    stop("Dependency package ", dep_name, " not available.")
   }
 
   # Assume that version specification is always '>='

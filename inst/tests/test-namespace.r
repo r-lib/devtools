@@ -144,20 +144,3 @@ test_that("Imported objects are copied to package environment", {
 
   unload("namespace")
 })
-
-
-test_that("Named imported objects are copied to package environment", {
-  # Check that non-named objects are not copied
-})
-
-
-test_that("Warned about dependency versions", {
-  # Should give a warning about grid version
-  expect_warning(load_all("depend-version"), "needs grid >=")
-  unload("depend-version")
-
-  # TODO: Add check for NOT giving a warning about compiler version
-  # Not possible with testthat?
-})
-
-
