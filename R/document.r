@@ -14,7 +14,7 @@ document <- function(pkg = NULL, clean = FALSE, roclets = c("collate", "namespac
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
 
-  man_path <- file.path(pkg$path)
+  man_path <- file.path(pkg$path, "man")
   if (!file.exists(pkg$path)) dir.create(man_path)
   
   if (clean) {
