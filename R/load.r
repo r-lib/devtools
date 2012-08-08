@@ -35,11 +35,13 @@ load_all <- function(pkg = NULL, reset = FALSE) {
   }
   
   env <- pkg_env(pkg)
-  load_data(pkg, env)
-  load_code(pkg, env)
-  load_c(pkg)
+  out <- list(env = env)
+  
+  out$data <- load_data(pkg, env)
+  out$code <- load_code(pkg, env)
+  out$c <- load_c(pkg)
 
-  invisible()  
+  invisible(out)  
 }
 
 
