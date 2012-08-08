@@ -2,7 +2,7 @@
 #' @param path to the package
 #' @param description names vector of description values
 #' @export
-write_description <- function(path, description) {
+save_package_description <- function(path, description) {
 
   fields <- names(description)
 
