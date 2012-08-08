@@ -54,7 +54,7 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
 
   # Copy all the objects from namespace env to package env, so that they
   # are visible in global env.
-  copy_env(nsenv, pkg_pkg_env(pkg))
+  copy_env(nsenv, pkg_env(pkg))
 
   invisible(out)  
 }

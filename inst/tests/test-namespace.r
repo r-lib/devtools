@@ -55,9 +55,9 @@ test_that("All package objects are loaded into namespace environment", {
 
 test_that("All package objects are copied to package environment", {
   load_all("namespace")
-  pkg_env <- pkg_pkg_env("namespace")
-  expect_equal(pkg_env$a, 1)
-  expect_equal(pkg_env$b, 2)
+  pkgenv <- pkg_env("namespace")
+  expect_equal(pkgenv$a, 1)
+  expect_equal(pkgenv$b, 2)
   unload("namespace")
 })
 
@@ -87,7 +87,7 @@ test_that("Unloading and reloading a package works", {
 test_that("Namespace, imports, and package environments have correct hierarchy", {
   load_all("namespace")
 
-  pkg_env <- pkg_pkg_env("namespace")
+  pkgenv <- pkg_env("namespace")
   nsenv   <- ns_env("namespace")
   imp_env <- pkg_imports_env("namespace")
 
@@ -96,8 +96,8 @@ test_that("Namespace, imports, and package environments have correct hierarchy",
   expect_identical(env_parent(nsenv, n = 2), .BaseNamespaceEnv)
   expect_identical(env_parent(nsenv, n = 3), .GlobalEnv)
 
-  # pkg_env should be an ancestor of the global environment
-  expect_true(is_ancestor_env(pkg_env, .GlobalEnv))
+  # pkgenv should be an ancestor of the global environment
+  expect_true(is_ancestor_env(pkgenv, .GlobalEnv))
 
   # Import environment should have name attribute
   expect_equal(attr(imp_env, "name"), "imports:namespace")
@@ -108,7 +108,7 @@ test_that("Namespace, imports, and package environments have correct hierarchy",
 
 test_that("unload() removes package environments from search", {
   load_all("namespace")
-  pkg_env <- pkg_pkg_env("namespace")
+  pkgenv <- pkg_env("namespace")
   nsenv   <- ns_env("namespace")
   imp_env <- pkg_imports_env("namespace")
   unload("namespace")
@@ -120,9 +120,9 @@ test_that("unload() removes package environments from search", {
   # R's asNamespace function should error
   expect_error(asNamespace("namespace"))
 
-  # pkg_env should NOT be an ancestor of the global environment
+  # pkgenv should NOT be an ancestor of the global environment
   # This is what makes the objects inaccessible from global env
-  expect_false(is_ancestor_env(pkg_env, .GlobalEnv))
+  expect_false(is_ancestor_env(pkgenv, .GlobalEnv))
   # Another check of same thing
   expect_false(env_pkg_name("namespace") %in% search())
 

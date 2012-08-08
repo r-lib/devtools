@@ -3,7 +3,7 @@
 #' Contains all (exported and non-exported) objects, and is a descendent of
 #' \code{R_GlobalEnv}. The hieararchy is \code{<namespace:pkg>}, 
 #' \code{<imports:pkg>}, \code{<namespace:base>}, and then
-#' \code{R_GlobalEnv}
+#' \code{R_GlobalEnv}.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
@@ -22,10 +22,20 @@ ns_env <- function(pkg = NULL) {
 }
 
 
-#' Package development environment
-#' Contains exported objects, and is an ancestor of R_GlobalEnv.
+#' Generate a package environment
+#'
+#' This is an environment like \code{<package:pkg>}. It is attached,
+#' so it is an ancestor of \code{R_GlobalEnv}.
+#'
+#' When a package is loaded the normal way, using \code{\link{library}},
+#' this environment contains only the exported objects from the
+#' namespace. However, when loaded with \code{\link{load_all}}, this
+#' environment will contain all the objects from the namespace.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
 #' @export
-pkg_pkg_env <- function(pkg = NULL) {
+pkg_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   name <- env_pkg_name(pkg)
   
