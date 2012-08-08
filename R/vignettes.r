@@ -10,7 +10,9 @@ build_vignettes <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   message("Building ", pkg$package, " vignettes")
   
-  path_vig <- file.path(pkg$path, "inst", "doc")
+  path_vig <- file.path(pkg$path, "vignettes")
+  if (!file.exists(path_vig)) # look in deprecated inst/doc
+      path_vig <- file.path(pkg$path, "inst", "doc")
   if (!file.exists(path_vig)) return()
   
   in_dir(path_vig, {
