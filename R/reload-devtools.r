@@ -16,14 +16,8 @@
 #'   \code{\link{as.package}} for more information
 #' @param reset clear package environment and reset file cache before loading
 #'   any pieces of the package.
-#'
-#' @export
 reload_devtools <- function(pkg = NULL, reset = FALSE) {
   pkg <- as.package(pkg)
-  if (pkg$package != "devtools") {
-    stop("This function can only be used to reload devtools, but you are trying to load ",
-      pkg$package)
-  }
 
   # Duplicate the devtools environment
   newenv_list <- as.list(asNamespace("devtools"), all.names=TRUE)
@@ -35,5 +29,5 @@ reload_devtools <- function(pkg = NULL, reset = FALSE) {
   newenv <- list2env(newenv_list, parent = globalenv())
 
   # Finally we can reload devtools
-  newenv$load_all(pkg, reset)
+  newenv$load_all(pkg, reset, self = TRUE)
 }

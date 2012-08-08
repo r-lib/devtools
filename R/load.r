@@ -4,12 +4,21 @@
 #'   \code{\link{as.package}} for more information
 #' @param reset clear package environment and reset file cache before loading
 #'   any pieces of the package.
+#' @param self For internal use only. (This is used when \code{load_all}
+#'   is called from \code{\link{reload_devtools}})
 #' 
 #' @keywords programming
 #' @export
-load_all <- function(pkg = NULL, reset = FALSE) {
+load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
   pkg <- as.package(pkg)
-  message("Loading ", pkg$package)
+
+  # Reloading devtools is a special case
+  if (pkg$package == "devtools" && self == FALSE) {
+    reload_devtools(pkg, reset)
+  } else {
+    message("Loading ", pkg$package)
+  }
+
   
   # Check description file is ok
   check <- tools:::.check_package_description(
