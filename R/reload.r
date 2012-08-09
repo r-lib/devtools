@@ -91,6 +91,7 @@ unload <- function(pkg = NULL) {
 }
 
 unload_dynlibs <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
   libs <- .dynLibs()
 
   # Get all shared libraries whose name matches this package
