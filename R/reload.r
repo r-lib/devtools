@@ -59,6 +59,7 @@ is.loaded_ns <- function(pkg = NULL) {
 #' }
 #' @export
 unload <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
   detach(env_pkg_name(pkg), character.only = TRUE, force = TRUE, unload = TRUE)
 
   # Clear so that loading the package again will re-read all files
@@ -70,6 +71,7 @@ unload <- function(pkg = NULL) {
 }
 
 unload_dynlibs <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
   libs <- .dynLibs()
 
   # Get all shared libraries whose name matches this package
