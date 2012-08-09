@@ -6,7 +6,7 @@
 }
 \arguments{
   \item{pkg}{package description, can be path or package
-  name.  See \code{\link{as.package}} for more information}
+  name.  This must be the devtools package.}
 
   \item{reset}{clear package environment and reset file
   cache before loading any pieces of the package.}

@@ -59,3 +59,4 @@ Collate:
     'namespace.r'
     'reload-devtools.r'
     'run-loadhooks.r'
+    'env-utils.r'

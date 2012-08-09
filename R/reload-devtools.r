@@ -12,22 +12,15 @@
 #' devtools namespace environment, and then calls \code{load_all}
 #' from the duplicate environment.
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
+#' @param pkg package description, can be path or package name.  This
+#'   must be the devtools package.
 #' @param reset clear package environment and reset file cache before loading
 #'   any pieces of the package.
 reload_devtools <- function(pkg = NULL, reset = FALSE) {
   pkg <- as.package(pkg)
 
-  # Duplicate the devtools environment
-  newenv_list <- as.list(asNamespace("devtools"), all.names=TRUE)
-  # Remove namespace info so R doesn't do weird stuff
-  newenv_list[[".__NAMESPACE__."]] <- NULL
+  newenv <- copy_env(ns_env(pkg), ignore = ".__NAMESPACE__.")
 
-  # Create the new environment.
-  # Set the parent to global env so it can see basic functions
-  newenv <- list2env(newenv_list, parent = globalenv())
-
-  # Finally we can reload devtools
+  # Now we can reload devtools by calling load_all from the new environment
   newenv$load_all(pkg, reset, self = TRUE)
 }

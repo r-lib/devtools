@@ -57,7 +57,8 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
 
   # Copy all the objects from namespace env to package env, so that they
   # are visible in global env.
-  copy_env(nsenv, pkg_env(pkg))
+  copy_env(nsenv, pkg_env(pkg),
+    ignore = c(".__NAMESPACE__.", ".__S3MethodsTable__.", ".packageName"))
 
   run_onattach(pkg)
 
@@ -67,13 +68,4 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
 
 is.locked <- function(pkg = NULL) {
   environmentIsLocked(as.environment(env_pkg_name(pkg)))
-}
-
-# Copy all objects from one environment to another.
-copy_env <- function(src, dest) {
-  src_objs <- ls(envir = src, all.names = TRUE)
-  for (objname in src_objs) {
-    obj <- get(objname, envir = src)
-    assign(objname, obj, envir = dest, inherits = FALSE)
-  }
 }
