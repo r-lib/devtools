@@ -7,15 +7,21 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @param create if namespace environment doesn't already exist,
+#'   create it?
 #' @keywords programming
 #' @export
-ns_env <- function(pkg = NULL) {
+ns_env <- function(pkg = NULL, create = FALSE) {
   pkg <- as.package(pkg)
   name <- env_ns_name(pkg)
 
   if (!is.loaded_ns(pkg)) {
-    env <- makeNamespace(pkg$package)
-    setPackageName(pkg$package, env)
+    if (create) {
+      env <- makeNamespace(pkg$package)
+      setPackageName(pkg$package, env)
+    } else {
+      return(NULL)
+    }
   } else {
     env <- asNamespace(pkg$package)
   }
@@ -36,14 +42,20 @@ ns_env <- function(pkg = NULL) {
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @param create if package environment doesn't already exist,
+#'   create it?
 #' @export
-pkg_env <- function(pkg = NULL) {
+pkg_env <- function(pkg = NULL, create = FALSE) {
   pkg <- as.package(pkg)
   name <- env_pkg_name(pkg)
   
   if (!is.loaded_pkg(pkg)) {
-    pkgenv <- attach(new.env(parent = emptyenv()), name = name)
-    attr(pkgenv, "path") <- pkg$path
+    if (create) {
+      pkgenv <- attach(new.env(parent = emptyenv()), name = name)
+      attr(pkgenv, "path") <- pkg$path
+    } else {
+      return(NULL)
+    }
   }
 
   as.environment(name)

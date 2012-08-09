@@ -16,4 +16,16 @@
   reasons why this might not work. If in doubt, quit R and
   restart.
 }
+\examples{
+\dontrun{
+# Reload package that is in current directory
+reload(".")
+
+# Reload package that is in ./ggplot2/
+reload("ggplot2/")
+
+# Can use inst() to find the package path
+reload(inst("ggplot2"))
+}
+}
 

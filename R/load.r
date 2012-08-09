@@ -42,7 +42,7 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
   # Create the namespace environment
   # namspace:xx is a child of imports:xx is a child of namespace:base
   # is a child of R_GlobalEnv
-  nsenv <- ns_env(pkg)
+  nsenv <- ns_env(pkg, create = TRUE)
 
   out <- list(env = nsenv)
 
@@ -57,7 +57,7 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
 
   # Copy all the objects from namespace env to package env, so that they
   # are visible in global env.
-  copy_env(nsenv, pkg_env(pkg),
+  copy_env(nsenv, pkg_env(pkg, create = TRUE),
     ignore = c(".__NAMESPACE__.", ".__S3MethodsTable__.",
       ".packageName", ".First.lib", ".onLoad", ".onAttach",
       ".conflicts.OK", ".noGenerics"))

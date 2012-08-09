@@ -1,6 +1,6 @@
 \name{import_dep}
 \alias{import_dep}
-\title{Load a dependency package.}
+\title{Load a package in an "imports" environment.}
 \usage{
   import_dep(pkg, dep_name, dep_ver = NA, dep_compare = NA)
 }
@@ -16,10 +16,10 @@
   check the version}
 }
 \description{
-  All of the exported objects from the dependency are
-  copied to the imports environment for the package. This
-  will automatically load (but not attach) the dependency
-  package.
+  All of the exported objects from the imported package are
+  copied to the imports environment for the development
+  package. This will automatically load (but not attach)
+  the imported package.
 }
 \keyword{internal}
 

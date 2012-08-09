@@ -60,3 +60,4 @@ Collate:
     'reload-devtools.r'
     'run-loadhooks.r'
     'env-utils.r'
+    'inst.r'
