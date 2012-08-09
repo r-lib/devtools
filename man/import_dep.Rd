@@ -2,13 +2,18 @@
 \alias{import_dep}
 \title{Load a dependency package.}
 \usage{
-  import_dep(pkg, dep_name, dep_ver = NA)
+  import_dep(pkg, dep_name, dep_ver = NA, dep_compare = NA)
 }
 \arguments{
   \item{pkg}{The package that is doing the importing}
 
-  \item{dep}{The name of the package with objects to
+  \item{dep_name}{The name of the package with objects to
   import}
+
+  \item{dep_ver}{The version of the package}
+
+  \item{dep_compare}{The comparison operator to use to
+  check the version}
 }
 \description{
   All of the exported objects from the dependency are

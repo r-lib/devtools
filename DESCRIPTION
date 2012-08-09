@@ -58,3 +58,4 @@ Collate:
     'path.r'
     'namespace.r'
     'reload-devtools.r'
+    'run-loadhooks.r'
