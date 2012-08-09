@@ -49,8 +49,8 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
   # Load dependencies into the imports environment
   load_imports(pkg)
 
-  out$data <- load_data(pkg, nsenv)
-  out$code <- load_code(pkg, nsenv)
+  out$data <- load_data(pkg)
+  out$code <- load_code(pkg)
   out$c <- load_c(pkg)
 
   # Copy all the objects from namespace env to package env, so that they

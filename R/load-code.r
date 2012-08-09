@@ -5,13 +5,11 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @param env environment in which to load code.  Defaults to \code{namespace:pkg}
-#'   which is a descendent of the global environment.  See
-#'  \code{\link{ns_env}} for more information
 #' @keywords programming
 #' @export
-load_code <- function(pkg = NULL, env = ns_env(pkg)) {
+load_code <- function(pkg = NULL) {
   pkg <- as.package(pkg)
+  env <- ns_env(pkg)
 
   r_files <- find_code(pkg)
   paths <- changed_files(r_files)
