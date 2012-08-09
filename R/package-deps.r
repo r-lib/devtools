@@ -42,7 +42,7 @@ parse_deps <- function(string) {
 #' the dependency packages.
 #'
 #' @keywords internal
-load_imports <- function(pkg = NULL, deps = c("suggests", "depends", "imports")) {
+load_imports <- function(pkg = NULL, deps = c("depends", "imports")) {
   pkg <- as.package(pkg)
 
   # Get data frame of dependency names and versions
