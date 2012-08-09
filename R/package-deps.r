@@ -57,11 +57,11 @@ load_imports <- function(pkg = NULL, deps = c("suggests", "depends", "imports"))
   invisible(deps)
 }
 
-#' Load a dependency package.
+#' Load a package in an "imports" environment.
 #'
-#' All of the exported objects from the dependency are copied to the
-#' imports environment for the package. This will automatically load
-#' (but not attach) the dependency package.
+#' All of the exported objects from the imported package are copied to
+#' the imports environment for the development package. This will
+#' automatically load (but not attach) the imported package.
 #'
 #' @param pkg The package that is doing the importing
 #' @param dep_name The name of the package with objects to import
