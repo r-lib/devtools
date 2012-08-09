@@ -1,3 +1,8 @@
+* New function `inst()`, which takes the name of a package and returns
+  the installation path of that package.
+
+* Add `--no-resave-data` to default build command. 
+
 LOADING
 
 * Development packages are now loaded into a namespace environment,
@@ -31,8 +36,6 @@ LOADING
 
 * The package environment now has a 'path' attribute, similar to a
   package loaded the normal way. (Winston Chang)
-
-* Add `--no-resave-data` to default build command. 
 
 BUG FIXES
 
