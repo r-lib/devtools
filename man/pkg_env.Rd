@@ -2,11 +2,14 @@
 \alias{pkg_env}
 \title{Generate a package environment}
 \usage{
-  pkg_env(pkg = NULL)
+  pkg_env(pkg = NULL, create = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
   name.  See \code{\link{as.package}} for more information}
+
+  \item{create}{if package environment doesn't already
+  exist, create it?}
 }
 \description{
   This is an environment like \code{<package:pkg>}. It is

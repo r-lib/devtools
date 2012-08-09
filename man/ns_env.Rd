@@ -2,11 +2,14 @@
 \alias{ns_env}
 \title{Generate a namespace environment for a package.}
 \usage{
-  ns_env(pkg = NULL)
+  ns_env(pkg = NULL, create = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
   name.  See \code{\link{as.package}} for more information}
+
+  \item{create}{if namespace environment doesn't already
+  exist, create it?}
 }
 \description{
   Contains all (exported and non-exported) objects, and is
