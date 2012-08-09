@@ -11,7 +11,7 @@
   don't do that with load_all.
 }
 \details{
-  devtoolsc creates a variable called .__loaded in the
+  devtools creates a variable called .__loaded in the
   namespace to indicate that it's attached.
 }
 
