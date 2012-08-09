@@ -7,6 +7,17 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @examples
+#' \dontrun{
+#' # Reload package that is in current directory
+#' reload(".")
+#'
+#' # Reload package that is in ./ggplot2/
+#' reload("ggplot2/")
+#'
+#' # Can use inst() to find the package path
+#' reload(inst("ggplot2"))
+#' }
 #' @export
 reload <- function(pkg = NULL) {
   pkg <- as.package(pkg)
@@ -30,6 +41,23 @@ is.loaded_ns <- function(pkg = NULL) {
   pkg$package %in% loadedNamespaces()
 }
 
+#' Unload a package
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#'
+#' @examples
+#' \dontrun{
+#' # Unload package that is in current directory
+#' unload(".")
+#'
+#' # Unload package that is in ./ggplot2/
+#' unload("ggplot2/")
+#'
+#' # Can use inst() to find the package path
+#' unload(inst("ggplot2"))
+#' }
+#' @export
 unload <- function(pkg = NULL) {
   detach(env_pkg_name(pkg), character.only = TRUE, force = TRUE, unload = TRUE)
 

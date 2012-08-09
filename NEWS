@@ -1,6 +1,8 @@
 * New function `inst()`, which takes the name of a package and returns
   the installation path of that package.
 
+* `unload()` is now an exported function.
+
 * Add `--no-resave-data` to default build command. 
 
 LOADING
