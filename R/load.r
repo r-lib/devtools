@@ -58,7 +58,9 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
   # Copy all the objects from namespace env to package env, so that they
   # are visible in global env.
   copy_env(nsenv, pkg_env(pkg),
-    ignore = c(".__NAMESPACE__.", ".__S3MethodsTable__.", ".packageName"))
+    ignore = c(".__NAMESPACE__.", ".__S3MethodsTable__.",
+      ".packageName", ".First.lib", ".onLoad", ".onAttach",
+      ".conflicts.OK", ".noGenerics"))
 
   run_onattach(pkg)
 
