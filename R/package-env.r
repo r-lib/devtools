@@ -15,6 +15,7 @@ ns_env <- function(pkg = NULL) {
 
   if (!is.loaded_ns(pkg)) {
     env <- makeNamespace(pkg$package)
+    setPackageName(pkg$package, env)
   } else {
     env <- asNamespace(pkg$package)
   }
