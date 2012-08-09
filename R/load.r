@@ -53,11 +53,13 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
   out$code <- load_code(pkg)
   out$c <- load_c(pkg)
 
+  run_onload(pkg)
+
   # Copy all the objects from namespace env to package env, so that they
   # are visible in global env.
   copy_env(nsenv, pkg_env(pkg))
 
-  run_loadhooks(pkg)
+  run_onattach(pkg)
 
   invisible(out)  
 }
