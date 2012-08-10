@@ -2,10 +2,13 @@
 \alias{dev_meta}
 \title{Return devtools metadata environment}
 \usage{
-  dev_meta(name)
+  dev_meta(name, create = FALSE)
 }
 \arguments{
   \item{name}{The name of a loaded package}
+
+  \item{create}{If the metadata environment does not exist,
+  create it?  For internal use only.}
 }
 \description{
   Return devtools metadata environment

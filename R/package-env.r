@@ -19,7 +19,7 @@ ns_env <- function(pkg = NULL, create = FALSE) {
     if (create) {
       env <- makeNamespace(pkg$package)
       setPackageName(pkg$package, env)
-      create_dev_meta(env)
+      dev_meta(pkg$package, create = TRUE)
     } else {
       return(NULL)
     }

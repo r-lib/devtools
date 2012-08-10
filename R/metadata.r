@@ -1,12 +1,8 @@
-# Create the devtools metadata environment.
-# @param a namespace environment in which to create the metadata env
-create_dev_meta <- function(env) {
-  env$.__DEVTOOLS__ <- new.env(parent = emptyenv())
-}
-
 #' Return devtools metadata environment
 #'
 #' @param name The name of a loaded package
+#' @param create If the metadata environment does not exist, create it?
+#'   For internal use only.
 #' @examples
 #' # Load the test package in directory "load-hooks"
 #' load_all(devtest("load-hooks"))
@@ -19,18 +15,20 @@ create_dev_meta <- function(env) {
 #' # Clean up.
 #' unload(devtest("load-hooks"))
 #' @export
-dev_meta <- function(name) {
+dev_meta <- function(name, create = FALSE) {
   ns <- .Internal(getRegisteredNamespace(as.name(name)))
   if (is.null(ns)) {
     stop("Namespace not found for ", name, ". Is it loaded?")
   }
 
-  x <- ns$.__DEVTOOLS__
-
-  if (is.null(x)) {
-    stop("No devtools metadata found for ", name,
-      ". Was it loaded with devtools?")
+  if (is.null(ns$.__DEVTOOLS__)) {
+    if (create) {
+      ns$.__DEVTOOLS__ <- new.env(parent = ns)
+    } else {
+      stop("No devtools metadata found for ", name,
+        ". Was it loaded with devtools?")
+    }
   }
 
-  x
+  ns$.__DEVTOOLS__
 }
