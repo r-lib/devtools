@@ -50,6 +50,5 @@ Collate:
     'missing-s3.r'
     'run-source.r'
     'create.r'
-    'load-description.r'
     'create-package-doc.r'
     'save-package-description.R'
