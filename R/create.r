@@ -45,7 +45,6 @@ create <- function(
   save_package_description(package_path, description)
   create_package_doc(package_path, name)
 
-  message("Checking devtools tasks on the new package.")
   check(package_path)
 
 }
