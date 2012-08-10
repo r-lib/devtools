@@ -94,25 +94,22 @@ clear_pkg_env <- function(pkg = NULL) {
   }  
 }
 
-#' Generate name of package namespace environment
-#' Contains all objects
-#' @keywords internal
+# Generate name of package namespace environment
+# Contains all objects
 env_ns_name <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   paste("namespace:", pkg$package, sep = "")
 }
 
-#' Generate name of package environment
-#' Contains exported objects
-#' @keywords internal
+# Generate name of package environment
+# Contains exported objects
 env_pkg_name <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   paste("package:", pkg$package, sep = "")
 }
 
-#' Generate name of package imports environment
-#' Contains exported objects
-#' @keywords internal
+# Generate name of package imports environment
+# Contains exported objects
 env_imports_name <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   paste("imports:", pkg$package, sep = "")
