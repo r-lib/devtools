@@ -1,21 +1,14 @@
 #' Get the installation path of a package
 #'
-#' Given the name of a package, this returns a path to the package,
-#' which can be passed to other devtools functions.
+#' Given the name of a package, this returns a path to the installed
+#' copy of the package, which can be passed to other devtools functions.
 #'
-#' This will first check if there's a loaded package matching the name.
-#' If so, it will return the \code{path} attribute of the package
-#' environment.
-#'
-#' Next it will look for a directory with the name. Finally, it will
-#' search in the lib paths for a directory with that name. If multiple
+#' It searches for the package in \code{\link{.libPaths}()}. If multiple
 #' dirs are found, it will return the first one.
 #'
-#' @param name the name of a package or the installation dir of a
-#'   package. If it's a directory, a relative path may be used.
+#' @param name the name of a package.
 #'
 #' @examples
-#' inst(".")
 #' inst("devtools")
 #' inst("grid")
 #' \dontrun{
@@ -24,24 +17,9 @@
 #' }
 #' @export
 inst <- function(name) {
-
-  # First check loaded packages for a path attribute
-  envs <- search()
-  pkgenv_name <- envs[grep(paste("^package:", name, "$", sep = ""), envs)]
-
-  if (length(pkgenv_name) > 0) {
-    pkgenv <- as.environment(pkgenv_name)
-    pkgpath <- attr(pkgenv, "path")
-
-    if (!is.null(pkgpath))
-      return(pkgpath)
-  }
-
-  # If loaded package with path not found, look for a directory with the
-  # name
-  if (file.exists(name) && file.info(name)$isdir) {
-    return(normalizePath(name))
-  }
+  # It would be nice to use find.package or system.file, but they
+  # also search in the directory in the 'path' attribute of the
+  # package environment.
 
   # Look in the library paths
   paths <- file.path(.libPaths(), name)
@@ -49,12 +27,9 @@ inst <- function(name) {
   paths <- paths[file.info(paths)$isdir]
 
   if (length(paths) > 0) {
+    # If multiple matches, return the first one
     return(normalizePath(paths[1]))
   } else {
     return(NULL)
   }
 }
-
-inst('.')
-inst('devtools')
-inst('grid')
