@@ -19,3 +19,18 @@ test <- function(pkg = NULL, filter = NULL) {
   require(testthat)
   test_dir(path_test, filter = filter)
 }
+
+
+#' Return the path to one of the packages in the devtools test dir
+#'
+#' Devtools comes with some simple packages for testing. This function
+#' returns the path to them.
+#'
+#' @param package Name of the test package.
+#' @examples
+#' devtest("collate-extra")
+#'
+#' @export
+devtest <- function(package) {
+  system.file(package = "devtools", "inst", "tests", package)
+}

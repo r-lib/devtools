@@ -4,13 +4,11 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @param env environment in which to load code.  Defaults to \code{devel:pkg}
-#'   which is attached just after the global environment.  See
-#'  \code{\link{pkg_env}} for more information
 #' @keywords programming
 #' @export
-load_data <- function(pkg = NULL, env = pkg_env(pkg)) {
+load_data <- function(pkg = NULL) {
   pkg <- as.package(pkg)
+  env <- ns_env(pkg)
   objs <- character()
   
   sysdata <- file.path(pkg$path, "R", "sysdata.rda")
