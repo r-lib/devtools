@@ -1,9 +1,18 @@
-* New function `inst()`, which takes the name of a package and returns
-  the installation path of that package.
-
 * `unload()` is now an exported function.
 
 * Add `--no-resave-data` to default build command. 
+
+* Packages loaded with `load_all` now store devtools metadata in their
+  namespace environment, in a variable called `.__DEVTOOLS__`. This can
+  be accessed with the `dev_meta` function. (Winston Chang. Fixes #128)
+
+* `as.package` no longer uses ~/.Rpackages.
+
+* New function `devtest`, which returns the path to an internal testing
+  package from devtools.
+
+* New function `inst()`, which takes the name of a package and returns
+  the installation path of that package. (Winston Chang. Fixes #130)
 
 LOADING
 
