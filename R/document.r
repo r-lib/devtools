@@ -13,6 +13,7 @@ document <- function(pkg = NULL, clean = FALSE, roclets = c("collate", "namespac
   require("roxygen2")
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
+  clear_topic_index(pkg)
 
   man_path <- file.path(pkg$path, "man")
   if (!file.exists(pkg$path)) dir.create(man_path)
@@ -66,7 +67,7 @@ check_doc <- function(pkg = NULL) {
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @param file name of Rd file to open.  Can optionally omit Rd extension.
+#' @param file topic or name Rd file to open. 
 #' @param ... additional arguments passed onto \code{\link[tools]{Rd2txt}}.
 #'   This is particular useful if you're checking macros and want to simulate
 #'   what happens when the package is built (\code{stage = "build"})
@@ -75,11 +76,13 @@ check_doc <- function(pkg = NULL) {
 #' @importFrom tools Rd2txt
 show_rd <- function(pkg = NULL, file, ...) {
   pkg <- as.package(pkg)
-  if (file_ext(file) == "") file <- paste(file, ".Rd", sep ="")
-
-  path <- file.path(pkg$path, "man", file)
-  stopifnot(file.exists(path))
   
+  rd <- find_topic(pkg, file)
+  if (is.null(rd)) {
+    stop("Could not find topic or Rd file ", file, call. = FALSE)
+  }
+
+  path <- file.path(pkg$path, "man", rd)  
   temp <- Rd2txt(path, out = tempfile("Rtxt"), package = pkg$package, 
     ...)
   file.show(temp, title = paste("Dev documentation: ", file), 
