@@ -15,6 +15,7 @@
 #'   example is run in a clean R environment somewhat mimicking what 
 #'   \code{R CMD check} does.  Since this involves installing the package
 #'   you should probably be in \code{\link{dev_mode}}
+#' @family example functions
 #' @keywords programming
 #' @export
 run_examples <- function(pkg = NULL, start = NULL, strict = TRUE) {
@@ -44,12 +45,12 @@ run_examples <- function(pkg = NULL, start = NULL, strict = TRUE) {
 
   message("Running ", length(rd), " examples in ", pkg$package)
   message(paste(rep("-", getOption("width"), collapse = "")))
-  mapply(run_example, names(rd), rd, 
+  mapply(run_one_example, names(rd), rd, 
     MoreArgs = list(env = parent.frame(), strict = strict, pkg = pkg))  
   invisible()
 }
 
-run_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) {
+run_one_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) {
   message("Checking ", name, "...")
   message(paste(rep("-", getOption("width"), collapse = "")))
   
@@ -69,6 +70,21 @@ run_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) {
       skip.echo = 6)    
   }
   cat("\n\n")
+}
+
+#' Run a single example.
+#'
+#' @inheritParams run_examples 
+#' @param topic Name or topic (or name of Rd) file to run examples for
+#' @export
+#' @family example functions
+run_example <- function(pkg, topic, strict = FALSE) {
+  pkg <- as.package(pkg)
+  rd <- find_topic(pkg, topic)
+  path <- file.path(pkg$path, "man", rd)
+  
+  load_all(pkg)
+  run_one_example(topic, path, pkg, strict = strict)
 }
 
 # If an error occurs, should print out the suspect line of code, and offer

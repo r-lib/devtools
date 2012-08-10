@@ -28,5 +28,8 @@
   making it possible to run all examples from an R
   function.
 }
+\seealso{
+  Other examples: \code{\link{run_example}}
+}
 \keyword{programming}
 
