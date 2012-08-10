@@ -61,3 +61,4 @@ Collate:
     'run-loadhooks.r'
     'env-utils.r'
     'inst.r'
+    'metadata.r'

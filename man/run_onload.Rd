@@ -11,7 +11,8 @@
   don't do that with load_all.
 }
 \details{
-  devtools creates a variable called .__loaded in the
-  namespace to indicate that it's attached.
+  A variable called \code{onLoad} is created in the
+  package's devtools metdata to indicate that it's
+  attached.
 }
 
