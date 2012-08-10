@@ -46,6 +46,10 @@ local({
 find_package <- function(x) {
   is_package_path <- function(x) {
     if (is.null(x)) return(FALSE)
+
+    # Strip trailing slashes (needed only for windows)
+    x <- normalizePath(x, mustWork = FALSE)
+    x <- gsub("\\\\$", "", x)
     
     desc_path <- file.path(x, "DESCRIPTION")
     file.exists(x) && file.exists(desc_path)
