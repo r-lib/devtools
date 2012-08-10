@@ -11,9 +11,12 @@
   create it?  For internal use only.}
 }
 \description{
-  Return devtools metadata environment
+  If the package was not loaded with devtools, returns
+  \code{NULL}.
 }
 \examples{
+dev_meta("stats") # NULL
+
 # Load the test package in directory "load-hooks"
 load_all(devtest("load-hooks"))
 

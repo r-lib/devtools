@@ -19,3 +19,6 @@ test_that("devtools metadata for load hooks", {
 })
 
 
+test_that("NULL metadata for non-devtools-loaded packages", {
+  expect_true(is.null(dev_meta("stats")))
+})

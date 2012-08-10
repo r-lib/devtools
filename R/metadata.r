@@ -1,9 +1,13 @@
 #' Return devtools metadata environment
 #'
+#' If the package was not loaded with devtools, returns \code{NULL}.
+#'
 #' @param name The name of a loaded package
 #' @param create If the metadata environment does not exist, create it?
 #'   For internal use only.
 #' @examples
+#' dev_meta("stats") # NULL
+#'
 #' # Load the test package in directory "load-hooks"
 #' load_all(devtest("load-hooks"))
 #'
@@ -25,8 +29,7 @@ dev_meta <- function(name, create = FALSE) {
     if (create) {
       ns$.__DEVTOOLS__ <- new.env(parent = ns)
     } else {
-      stop("No devtools metadata found for ", name,
-        ". Was it loaded with devtools?")
+      return(NULL)
     }
   }
 
