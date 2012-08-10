@@ -9,6 +9,6 @@
 }
 \description{
   Possible specifications of package: \itemize{ \item path
-  \item name (lookup in .Rpackages) \item package object }
+  \item package object }
 }
 
