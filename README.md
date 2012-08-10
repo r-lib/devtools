@@ -33,8 +33,9 @@ Building and installing:
   version then reloads the new version with `library`. Reloading a package is
   not guaranteed to work: see the documentation to `reload` for caveats.
 
-* `install_github("repo", "username")` installs an R package from github,
-  `install_gitorious` from gitorious, and `install_url` from an arbitrary url.
+* `install_github` installs an R package from github, `install_gitorious` from
+  gitorious, `install_bitbucket` from bitbucket, and `install_url` from an
+  arbitrary url. `install_version` installs a specified version from cran,
 
 Check and release:
 
