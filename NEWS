@@ -1,3 +1,12 @@
+
+* `build_vignettes` now looks in modern location for vignettes (`vignettes/`) 
+   and warn if vignettes found in old location (`inst/doc`).  Building now 
+   occurs in a temporary directory (to avoid polluting the package with
+   build artefacts) and only final pdf files are copied over.
+
+* new `clean_vignettes` function to remove pdfs in `inst/doc` that were built
+  from vignettes in `vignettes/`
+
 * Add `--no-resave-data` to default build command. 
 
 devtools 0.7.1
