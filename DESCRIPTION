@@ -64,6 +64,5 @@ Collate:
     'inst.r'
     'metadata.r'
     'create.r'
-    'load-description.r'
     'create-package-doc.r'
     'save-package-description.R'
