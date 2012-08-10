@@ -50,6 +50,7 @@ find_package <- function(x) {
     desc_path <- file.path(x, "DESCRIPTION")
     file.exists(x) && file.exists(desc_path)
   }
+  x <- gsub('[/\\\\]+$', '', x, perl=TRUE)
   if (is_package_path(x)) {
     return(x)
   }
