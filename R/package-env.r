@@ -62,10 +62,11 @@ pkg_env <- function(pkg = NULL, create = FALSE) {
 }
 
 #' Package imports environment
-#' Contains objects imported from other packages. Is a child of R_GlobalEnv
-#' and is the parent of the package namespace environment.
+#' Contains objects imported from other packages. Is the parent of the
+#' package namespace environment, and is a child of <namespace:base>,
+#' which is a child of R_GlobalEnv,
 #' @export
-pkg_imports_env <- function(pkg = NULL) {
+imports_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   name <- env_pkg_name(pkg)
 

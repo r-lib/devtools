@@ -89,7 +89,7 @@ test_that("Namespace, imports, and package environments have correct hierarchy",
 
   pkgenv <- pkg_env("namespace")
   nsenv   <- ns_env("namespace")
-  imp_env <- pkg_imports_env("namespace")
+  imp_env <- imports_env("namespace")
 
 
   expect_identical(env_parent(nsenv, n = 1), imp_env)
@@ -110,7 +110,7 @@ test_that("unload() removes package environments from search", {
   load_all("namespace")
   pkgenv <- pkg_env("namespace")
   nsenv   <- ns_env("namespace")
-  imp_env <- pkg_imports_env("namespace")
+  imp_env <- imports_env("namespace")
   unload("namespace")
 
   # Should report not loaded for package and namespace environments
@@ -133,7 +133,7 @@ test_that("unload() removes package environments from search", {
 test_that("Imported objects are copied to package environment", {
   load_all("namespace")
   # 'compiler' is one of the imports
-  imp_env <- pkg_imports_env("namespace")
+  imp_env <- imports_env("namespace")
 
   # cmpfun is exported from compiler, so it should be in imp_env
   expect_identical(imp_env$cmpfun, compiler::cmpfun)

@@ -70,7 +70,7 @@ load_imports <- function(pkg = NULL, deps = c("depends", "imports")) {
 #' @keywords internal
 import_dep <- function(pkg, dep_name, dep_ver = NA, dep_compare = NA) {
   pkg <- as.package(pkg)
-  imp_env <- pkg_imports_env(pkg)
+  imp_env <- imports_env(pkg)
 
   if (!requireNamespace(dep_name, quietly = TRUE)) {
     stop("Dependency package ", dep_name, " not available.")
