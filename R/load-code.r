@@ -5,13 +5,11 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @param env environment in which to load code.  Defaults to \code{devel:pkg}
-#'   which is attached just after the global environment.  See
-#'  \code{\link{pkg_env}} for more information
 #' @keywords programming
 #' @export
-load_code <- function(pkg = NULL, env = pkg_env(pkg)) {
+load_code <- function(pkg = NULL) {
   pkg <- as.package(pkg)
+  env <- ns_env(pkg)
 
   r_files <- find_code(pkg)
   paths <- changed_files(r_files)
@@ -21,20 +19,13 @@ load_code <- function(pkg = NULL, env = pkg_env(pkg)) {
       keep.source = TRUE), 
     error = function(e) {
       clear_cache()
+      unloadNamespace(pkg$package)
       stop(e)
     }
   )
   
-  # Load .onLoad if it's defined
-  if (exists(".onLoad", env, inherits = FALSE) && 
-     !exists("__loaded", env, inherits = FALSE)) {
-    env$.onLoad()
-    env$`__loaded` <- TRUE
-  }
-  
   invisible(r_files)
 }
-
 
 #' Parse collate string into vector of function names.
 #' @keywords internal
@@ -60,7 +51,8 @@ find_code <- function(pkg) {
     if (length(missing) > 0) {
       message("Skipping missing files: ", files(missing))
     }
-    
+    collate <- setdiff(collate, missing)
+
     extra <- setdiff(r_files, collate)
     if (length(extra) > 0) {
       message("Adding files missing in collate: ", files(extra))

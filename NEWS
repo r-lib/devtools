@@ -11,6 +11,58 @@
 * The subject line of the email created by `release` is now "CRAN submission
   [package] [version]", per CRAN repository policy.
 
+* `unload()` is now an exported function.
+
+* Packages loaded with `load_all` now store devtools metadata in their
+  namespace environment, in a variable called `.__DEVTOOLS__`. This can
+  be accessed with the `dev_meta` function. (Winston Chang. Fixes #128)
+
+* `as.package` no longer uses ~/.Rpackages.
+
+* New function `devtest`, which returns the path to an internal testing
+  package from devtools.
+
+* New function `inst()`, which takes the name of a package and returns
+  the installation path of that package. (Winston Chang. Fixes #130)
+
+LOADING
+
+* Development packages are now loaded into a namespace environment,
+  <namespace:xxxx>, and then the objects namespace are copied to the
+  package environment, <package:xxxx>. This more accurately simulates
+  how packages are normally loaded. However, all of the objects (not
+  just the exported ones) are still copied to the package environment.
+  (Winston Chang. Fixes #3, #60, and #125)
+
+* Packages listed in Imports and Depends are now loaded into an imports
+  environment, with name attribute "imports:xxxx", which is the parent
+  of the namespace environment. The imports environment is in turn a
+  child of the <namespace:base> environment, which is a child of the
+  global environment. This more accurately simulates how packages are
+  normally loaded.  These packages previously were loaded and attached.
+  (Winston Chang. Fixes #85)
+
+* `load_all` can now be used to properly reload devtools. It does this
+  by creating a copy of the devtools namespace environment, and calling
+  `load_all` from that environment. (Winston Chang)
+
+* The `.onLoad` and `.onAttach` functions for a development package are
+  now both called when loading a package for the first time, or with
+  `reset=TRUE`, and the order more correctly simulates normal package
+  loading (create the namespace, call `.onLoad`, copy objects to the
+  package environment, and then call `.onAttach`). (Winston Chang)
+
+* `load_all` will now throw a warning if a dependency package does not
+  satisfy the version requirement listed in DESCRIPTION. (Winston Chang.
+  Fixes #109)
+
+* The package environment now has a 'path' attribute, similar to a
+  package loaded the normal way. (Winston Chang)
+
+BUG FIXES
+
+* `load_code` now properly skips missing files. (Winston Chang)
+
 devtools 0.7.1
 --------------
 

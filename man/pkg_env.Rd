@@ -1,19 +1,25 @@
 \name{pkg_env}
 \alias{pkg_env}
-\title{Generate an development environment for a package.}
+\title{Generate a package environment}
 \usage{
-  pkg_env(pkg = NULL)
+  pkg_env(pkg = NULL, create = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
   name.  See \code{\link{as.package}} for more information}
+
+  \item{create}{if package environment doesn't already
+  exist, create it?}
 }
 \description{
-  \code{devtools} keeps the global workspace clean by
-  loading all code and data into a separate environment.
-  This environment is \code{\link{attach}}ed to the search
-  path just after the global environment so it will
-  override loaded packages.
+  This is an environment like \code{<package:pkg>}. It is
+  attached, so it is an ancestor of \code{R_GlobalEnv}.
 }
-\keyword{programming}
+\details{
+  When a package is loaded the normal way, using
+  \code{\link{library}}, this environment contains only the
+  exported objects from the namespace. However, when loaded
+  with \code{\link{load_all}}, this environment will
+  contain all the objects from the namespace.
+}
 
