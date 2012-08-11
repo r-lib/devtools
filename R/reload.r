@@ -58,7 +58,28 @@ is.loaded_ns <- function(pkg = NULL) {
 #' }
 #' @export
 unload <- function(pkg = NULL) {
-  detach(env_pkg_name(pkg), character.only = TRUE, force = TRUE, unload = TRUE)
+
+  if (pkg$package %in% loadedNamespaces()) {
+    # unloadNamespace will throw an error if it has trouble unloading.
+    # This can happen when there's another package that depends on the
+    # namespace.
+    # unloadNamespace will also detach the package if it's attached.
+    try(unloadNamespace(pkg$package), silent = TRUE)
+
+  } else {
+    stop("Package ", pkg$package, " not found in loaded packages or namespaces")
+  }
+
+  # Sometimes the namespace won't unload with detach(), like when there's
+  # another package that depends on it. If it's still around, force it
+  # to go away.
+  # loadedNamespaces() and unloadNamespace() often don't work here
+  # because things can be in a weird state.
+  if (!is.null(.Internal(getRegisteredNamespace(pkg$package)))) {
+    message("unloadNamespace(\"", pkg$package,
+      "\") not successful. Forcing unload.")
+    .Internal(unregisterNamespace(pkg$package))
+  }
 
   # Clear so that loading the package again will re-read all files
   clear_cache()
