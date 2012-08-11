@@ -32,5 +32,11 @@ test <- function(pkg = NULL, filter = NULL) {
 #'
 #' @export
 devtest <- function(package) {
-  system.file(package = "devtools", "inst", "tests", package)
+  if (is.null(dev_meta("devtools"))) {
+    # devtools was loaded the normal way
+    system.file(package = "devtools", "tests", package)
+  } else {
+    # devtools was loaded with load_all
+    system.file(package = "devtools", "inst", "tests", package)
+  }
 }
