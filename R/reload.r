@@ -21,7 +21,6 @@
 #' @export
 reload <- function(pkg = NULL) {
   pkg <- as.package(pkg)
-  name <- env_pkg_name(pkg)
   
   if (is.loaded(pkg)) {
     message("Reloading installed ", pkg$package)
