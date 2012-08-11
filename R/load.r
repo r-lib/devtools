@@ -29,7 +29,7 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
   }
   
   # If installed version of package loaded, unload it
-  if (is.loaded(pkg) && is.locked(pkg)) {
+  if (is.loaded(pkg) && is.null(dev_meta(pkg$package))) {
     unload(pkg)
   }
   
