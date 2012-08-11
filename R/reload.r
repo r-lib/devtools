@@ -58,6 +58,7 @@ is.loaded_ns <- function(pkg = NULL) {
 #' }
 #' @export
 unload <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
 
   if (pkg$package %in% loadedNamespaces()) {
     # unloadNamespace will throw an error if it has trouble unloading.
