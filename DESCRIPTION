@@ -62,3 +62,4 @@ Collate:
     'env-utils.r'
     'inst.r'
     'metadata.r'
+    'session-info.r'
