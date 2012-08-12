@@ -1,0 +1,17 @@
+\name{print.envlist}
+\alias{print.envlist}
+\title{Print an \code{envlist}}
+\usage{
+  print.envlist(x, name = TRUE, path = TRUE, ...)
+}
+\arguments{
+  \item{name}{If \code{TRUE} (the default), print the
+  \code{name} attribute of each environment.}
+
+  \item{path}{If \code{TRUE} (the default), print the
+  \code{path} attribute of each environment.}
+}
+\description{
+  Print an \code{envlist}
+}
+
