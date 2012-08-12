@@ -1,3 +1,6 @@
+* `create` function makes it easier to create a package skeleton using
+  devtools standards.
+
 * `build_vignettes` now looks in modern location for vignettes (`vignettes/`) 
    and warn if vignettes found in old location (`inst/doc`).  Building now 
    occurs in a temporary directory (to avoid polluting the package with
