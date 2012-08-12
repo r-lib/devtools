@@ -1,8 +1,5 @@
-#' <%= name %>
+#' {{{ name }}}
 #' 
-#' @name <%= name %>-package
-#' @aliases <%= name %>
+#' @name {{{ name }}}
 #' @docType package
-#' @title <%= name %>
-#' @keywords package
 NULL

@@ -2,31 +2,34 @@
 \alias{create}
 \title{Creates a new package, following all devtools package conventions.}
 \usage{
-  create(name, path, description = list())
+  create(path, description = list())
 }
 \arguments{
-  \item{name}{character string: the package name and
-  directory name for your package.}
-
-  \item{path}{to put the package directory in}
+  \item{path}{location to create new package.  The last
+  component of the path will be used as the package name.}
 
   \item{description}{list of description values to override
   default values or add additional values.}
+
+  \item{...}{other options passed to
+  \code{package.skeleton}}
 }
 \description{
-  Creates a new package, following all devtools package
-  conventions.
+  Similar to \code{\link{package.skeleton}}, except that it
+  only creates the standard devtools directory structures,
+  it doesn't try and create source code and data files by
+  inspecting the global environment.
 }
 \examples{
 # Create a package using all defaults:
-path_to_package <- tempdir()
-create(name='myDefaultPackage', path=path_to_package)
+path <- file.path(tempdir(), "myDefaultPackage")
+create(path)
 
 # Override a description attribute.
-# Note that overriding one atribute implies that you must override
-# all default attributes, as well.
-my_description <- list("Maintainer"="'Yoni Ben-Meshulam' <yoni@opower.com>")
-create(name='myCustomPackage', path=path_to_package, description=my_description)
+path <- file.path(tempdir(), "myCustomPackage")
+my_description <- list("Maintainer" =
+  "'Yoni Ben-Meshulam' <yoni@opower.com>")
+create("../myCustomPackage", my_description)
 }
 \seealso{
   Text with \code{\link{package.skeleton}}

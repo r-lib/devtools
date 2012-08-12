@@ -12,7 +12,7 @@ Imports:
     utils,
     tools,
     memoise,
-    brew
+    whisker
 Suggests:
     testthat,
     roxygen2,
@@ -64,5 +64,3 @@ Collate:
     'inst.r'
     'metadata.r'
     'create.r'
-    'create-package-doc.r'
-    'save-package-description.R'

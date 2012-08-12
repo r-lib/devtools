@@ -1,50 +1,64 @@
 #' Creates a new package, following all devtools package conventions.
 #'
-#' @param name character string: the package name and directory name for
-#'        your package.
-#' @param path to put the package directory in
-#' @param description list of description values to override default values or add additional values.
+#' Similar to \code{\link{package.skeleton}}, except that it only creates
+#' the standard devtools directory structures, it doesn't try and create 
+#' source code and data files by inspecting the global environment.
+#'
+#' @param path location to create new package.  The last component of the path
+#'   will be used as the package name.
+#' @param description list of description values to override default values or
+#'   add additional values.
+#' @param ... other options passed to \code{package.skeleton}
 #' @seealso Text with \code{\link{package.skeleton}}
 #' @export
 #' @examples
-#'
 #' # Create a package using all defaults:
-#' path_to_package <- tempdir()
-#' create(name='myDefaultPackage', path=path_to_package)
+#' path <- file.path(tempdir(), "myDefaultPackage")
+#' create(path)
 #'
 #' # Override a description attribute.
-#' # Note that overriding one atribute implies that you must override
-#' # all default attributes, as well.
-#' my_description <- list("Maintainer"="'Yoni Ben-Meshulam' <yoni@@opower.com>")
-#' create(name='myCustomPackage', path=path_to_package, description=my_description)
-create <- function(
-                   name,
-                   path,
-                   description=list()
-                   ) {
+#' path <- file.path(tempdir(), "myCustomPackage")
+#' my_description <- list("Maintainer" = 
+#'   "'Yoni Ben-Meshulam' <yoni@@opower.com>")
+#' create("../myCustomPackage", my_description)
+create <- function(path, description = list()) {
+  name <- basename(path)
+  message("Creating package ", name, " in ", dirname(path))
 
-  description.defaults <- list(
-                            Package=name,
-                            Maintainer="Who to complain to <yourfault@somewhere.net>",
-                            Author=Sys.getenv("USER"),
-                            Version="1.0",
-                            License="GPL-3",
-                            Title=name,
-                            Description=name,
-                            Suggests="\ntestthat,\nroxygen2"
-                            )
+  if (file.exists(path)) {
+    stop("Directory already exists", call. = FALSE)
+  }
+  if (!file.exists(dirname(path))) {
+    stop("Parent directory does not exist.", call. = FALSE)
+  }
 
-  package_path <- file.path(path, name)
-  message(sprintf("Creating package [%s] in path [%s]", name, package_path))
+  dir.create(path)
 
-  dir.create(package_path)
-  dir.create(file.path(package_path, 'R'))
+  defaults <- list(
+    Package = name,
+    Maintainer = "Who to complain to <yourfault@somewhere.net>",
+    Author = Sys.getenv("USER"),
+    Version = "1.0",
+    License = "GPL-3",
+    Title = "",
+    Description = "",
+    Suggests = "\ntestthat,\nroxygen2"
+  )
+  description <- modifyList(defaults, description)
+  write.dcf(description, file.path(path, 'DESCRIPTION'))
+  
+  dir.create(file.path(path, "R"))
+  create_package_doc(path, name)
 
-  description <- modifyList(description.defaults, description)
+  check(path)
+}
 
-  save_package_description(package_path, description)
-  create_package_doc(package_path, name)
+#' @importFrom whisker whisker.render
+create_package_doc <- function(path, name) {
+  template <- readLines(system.file("templates", "packagename-package.r",
+    package = "devtools"))
+  out <- whisker.render(template, list(name = name))
 
-  check(package_path)
-
+  target <- file.path(path, "R", paste(name, "-package.r", sep = ""))
+  writeLines(out, target)
 }

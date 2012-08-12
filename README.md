@@ -38,7 +38,9 @@ Building and installing:
   arbitrary url. `install_version` installs a specified version from cran,
 
 Creating a new package:
-* `create("pkg")` creates a new R package, followint all devtools conventions.
+
+* `create("path/to/pkg")` creates a new R package following devtools
+  conventions. called `pkg` in `path/to`,
 
 Check and release:
 
