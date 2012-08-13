@@ -28,6 +28,12 @@
 * New function `inst()`, which takes the name of a package and returns
   the installation path of that package. (Winston Chang. Fixes #130)
 
+* New function `loaded_packages()`, which returns the names of packages
+  that are loaded and attached.
+
+* New function `parse_ns_file()`, which parses a NAMESPACE file for a
+  package.
+
 LOADING
 
 * Development packages are now loaded into a namespace environment,

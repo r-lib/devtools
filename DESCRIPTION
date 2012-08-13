@@ -64,3 +64,4 @@ Collate:
     'inst.r'
     'metadata.r'
     'create.r'
+    'session-info.r'

@@ -20,3 +20,26 @@ makeNamespace <- function(name, version = NULL, lib = NULL) {
   .Internal(registerNamespace(name, env))
   env
 }
+
+
+# Read the NAMESPACE file and set up some of the namespace info
+# (which is stored in .__NAMESPACE__.)
+setup_ns_info <- function(pkg) {
+  nsInfo <- parse_ns_file(pkg)
+  setNamespaceInfo(pkg$package, "imports", nsInfo$imports)
+  setNamespaceInfo(pkg$package, "exports", nsInfo$exports)
+}
+
+#' Parses the NAMESPACE file for a package
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @examples
+#' parse_ns_file(devtest("load-hooks"))
+#' @export
+parse_ns_file <- function(pkg) {
+  pkg <- as.package(pkg)
+
+  parseNamespaceFile(basename(pkg$path), dirname(pkg$path),
+    mustExist = FALSE)
+}
