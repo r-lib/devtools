@@ -25,8 +25,12 @@ parent_envs()
 e <- parent_envs(load_all)
 e
 
-# Print e without paths
-print(e, path = FALSE)
+# Get all parent environments, going all the way to empty env
+e <- parent_envs(load_all, trim = FALSE)
+e
+
+# Print e with paths
+print(e, path = TRUE)
 
 # Print the first 6 environments in the envlist
 e[1:6]

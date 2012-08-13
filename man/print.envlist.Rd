@@ -8,8 +8,8 @@
   \item{name}{If \code{TRUE} (the default), print the
   \code{name} attribute of each environment.}
 
-  \item{path}{If \code{TRUE} (the default), print the
-  \code{path} attribute of each environment.}
+  \item{path}{If \code{TRUE}, print the \code{path}
+  attribute of each environment.}
 }
 \description{
   Print an \code{envlist}

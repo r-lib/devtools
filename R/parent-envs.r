@@ -16,8 +16,12 @@
 #' e <- parent_envs(load_all)
 #' e
 #'
-#' # Print e without paths
-#' print(e, path = FALSE)
+#' # Get all parent environments, going all the way to empty env
+#' e <- parent_envs(load_all, trim = FALSE)
+#' e
+#'
+#' # Print e with paths
+#' print(e, path = TRUE)
 #'
 #' # Print the first 6 environments in the envlist
 #' e[1:6]
@@ -66,8 +70,8 @@ as.envlist <- function(x) {
 #'
 #' @param name If \code{TRUE} (the default), print the \code{name}
 #'   attribute of each environment.
-#' @param path If \code{TRUE} (the default), print the \code{path}
-#'   attribute of each environment.
+#' @param path If \code{TRUE}, print the \code{path} attribute of
+#'   each environment.
 #' @export
 print.envlist <- function(x, name = TRUE, path = FALSE, ...) {
 
