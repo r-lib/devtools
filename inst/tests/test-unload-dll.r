@@ -27,5 +27,8 @@ test_that("unload() unloads DLLs", {
 
   # Reset the libpath
   .libPaths(old_libpaths)
+
+  # Clean out compiled objects
+  clean_dll("unload-dll")
 })
 
