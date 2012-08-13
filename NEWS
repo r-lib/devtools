@@ -37,6 +37,10 @@
 * New function `parent_envs()`, which parents the parent environments
   of an object. (Winston Chang)
 
+* New functions `compile_dll()` and `clean_dll()`, which compile C
+  source code, and clean up the compiled objects, respectively.
+  (Winston Chang. Fixes #131)
+
 LOADING
 
 * Development packages are now loaded into a namespace environment,
@@ -70,6 +74,10 @@ LOADING
 
 * The package environment now has a 'path' attribute, similar to a
   package loaded the normal way. (Winston Chang)
+
+* `load_all` now compiles C files in the /src directory. (Winston Chang)
+
+* `unload` also unloads DLLs. (Winston Chang. Fixes #119)
 
 BUG FIXES
 

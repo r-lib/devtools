@@ -32,12 +32,19 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
   if (is.loaded_ns(pkg) && is.null(dev_meta(pkg$package))) {
     unload(pkg)
   }
+
+  # Unload dlls
+  unload_dll(pkg)
   
   if (reset) {
     clear_cache()
     clear_classes(pkg)
     clear_pkg_env(pkg)
+    clean_dll(pkg)
   }
+
+  # Compile dll if it exists
+  compile_dll(pkg)
 
   # Create the namespace environment
   # namspace:xx is a child of imports:xx is a child of namespace:base
@@ -51,7 +58,7 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
 
   out$data <- load_data(pkg)
   out$code <- load_code(pkg)
-  out$c <- load_c(pkg)
+  out$dll <- load_dll(pkg)
 
   run_onload(pkg)
 
