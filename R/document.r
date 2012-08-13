@@ -18,7 +18,7 @@ document <- function(pkg = NULL, clean = FALSE, roclets = c("collate", "namespac
   if (!file.exists(pkg$path)) dir.create(man_path)
   
   if (clean) {
-    clear_caches()
+    roxygen2:::clear_caches()
     file.remove(dir(man_path, full.names = TRUE))
   }
   loaded <- load_all(pkg, reset = clean)
