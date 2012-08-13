@@ -14,7 +14,7 @@ compile_dll <- function(pkg) {
 
   # Check source dir exists
   srcdir <- file.path(pkg$path, "src")
-  if (!file.exists(srcdir) || !file.info(srcdir)$isdir)
+  if (!dir.exists(srcdir))
     return(invisible())
 
   # Check that there are source files to compile

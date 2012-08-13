@@ -23,8 +23,7 @@ inst <- function(name) {
 
   # Look in the library paths
   paths <- file.path(.libPaths(), name)
-  paths <- paths[file.exists(paths)]
-  paths <- paths[file.info(paths)$isdir]
+  paths <- paths[dir.exists(paths)]
 
   if (length(paths) > 0) {
     # If multiple matches, return the first one
