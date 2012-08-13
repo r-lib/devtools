@@ -78,7 +78,7 @@ run_one_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) 
 #' @param topic Name or topic (or name of Rd) file to run examples for
 #' @export
 #' @family example functions
-run_example <- function(pkg, topic, strict = FALSE) {
+run_example <- function(pkg = NULL, topic, strict = FALSE) {
   pkg <- as.package(pkg)
   rd <- find_topic(pkg, topic)
   path <- file.path(pkg$path, "man", rd)
