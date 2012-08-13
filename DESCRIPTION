@@ -67,3 +67,4 @@ Collate:
     'parent-envs.r'
     'compile.r'
     'load-dll.r'
+    'utils.r'

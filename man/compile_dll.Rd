@@ -9,6 +9,13 @@
   name.  See \code{\link{as.package}} for more information}
 }
 \description{
-  Compile a .dll/.so from source
+  The DLL is stored in the same directory as the source
+  code, \code{/src/}.
+}
+\details{
+  Invisibly returns the names of the DLL.
+}
+\seealso{
+  \code{\link{clean_dll}}
 }
 

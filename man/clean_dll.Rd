@@ -9,6 +9,9 @@
   name.  See \code{\link{as.package}} for more information}
 }
 \description{
-  Remove compiled objects from pkgdir/src
+  Invisibly returns the names of the deleted files.
+}
+\seealso{
+  \code{\link{compile_dll}}
 }
 
