@@ -58,7 +58,7 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
 
   out$data <- load_data(pkg)
   out$code <- load_code(pkg)
-  out$c <- load_c(pkg)
+  out$dll <- load_dll(pkg)
 
   run_onload(pkg)
 

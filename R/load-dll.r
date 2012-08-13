@@ -1,10 +1,10 @@
-#' Load C code.
+#' Load a compiled DLL
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
 #' @export
-load_c <- function(pkg = NULL) {
+load_dll <- function(pkg = NULL) {
   pkg <- as.package(pkg)
 
   dllfile <- dll_name(pkg, path = TRUE)
