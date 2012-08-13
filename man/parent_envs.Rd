@@ -3,10 +3,15 @@
 \title{Given an environment or object, return an \code{envlist} of its
 parent environments.}
 \usage{
-  parent_envs(e = parent.frame())
+  parent_envs(e = parent.frame(), trim = TRUE)
 }
 \arguments{
   \item{e}{An environment or other object.}
+
+  \item{trim}{If \code{TRUE} (the default), stop at the
+  global environment or the empty environment. If
+  \code{FALSE}, stop only at the empty environment (which
+  is the top-level environment).}
 }
 \description{
   If \code{e} is not specified, it will start with
