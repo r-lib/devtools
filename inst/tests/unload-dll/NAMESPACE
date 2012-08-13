@@ -1,0 +1,2 @@
+useDynLib(unloaddll)
+export(nulltest)
