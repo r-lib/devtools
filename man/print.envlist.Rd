@@ -2,7 +2,8 @@
 \alias{print.envlist}
 \title{Print an \code{envlist}}
 \usage{
-  print.envlist(x, name = TRUE, path = FALSE, ...)
+  \method{print}{envlist} (x, name = TRUE, path = FALSE,
+    ...)
 }
 \arguments{
   \item{name}{If \code{TRUE} (the default), print the

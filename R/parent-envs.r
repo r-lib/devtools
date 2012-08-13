@@ -73,6 +73,7 @@ as.envlist <- function(x) {
 #' @param path If \code{TRUE}, print the \code{path} attribute of
 #'   each environment.
 #' @export
+#' @method print envlist
 print.envlist <- function(x, name = TRUE, path = FALSE, ...) {
 
   labels <- vapply(x, format, FUN.VALUE = character(1))
