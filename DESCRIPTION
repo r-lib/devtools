@@ -29,7 +29,6 @@ Collate:
     'file-cache.r'
     'has-devel.r'
     'install.r'
-    'load-c.r'
     'load-code.r'
     'load-data.r'
     'load.r'
@@ -66,3 +65,5 @@ Collate:
     'create.r'
     'session-info.r'
     'parent-envs.r'
+    'compile.r'
+    'load-dll.r'
