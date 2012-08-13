@@ -62,37 +62,25 @@ as.envlist <- function(x) {
 #'   attribute of each environment.
 #' @param path If \code{TRUE} (the default), print the \code{path}
 #'   attribute of each environment.
-print.envlist <- function(x, name = TRUE, path = TRUE, ...) {
-  # Given a vector of strings, pad them with spaces to be the same length
-  samelength <- function(s, right = FALSE) {
-    juststr <- ifelse(right, "", "-")
-    formatstr <- paste("%", juststr, max(nchar(s)), "s", sep = "")
-    sprintf(formatstr, s)
-  }
+#' @export
+print.envlist <- function(x, name = TRUE, path = FALSE, ...) {
 
-  output <- samelength(c("", seq_len(length(x))), right = TRUE)
-
-  labels <- vapply(x, FUN.VALUE = character(1), format)
-  labels <- c("label", labels)
-  output <- paste(output, samelength(labels))
+  labels <- vapply(x, format, FUN.VALUE = character(1))
+  dat <- data.frame(label = labels, stringsAsFactors = FALSE)
 
   if (name) {
     names <- vapply(x, FUN.VALUE = character(1),
       function(e) paste('"', attr(e, "name"), '"', sep = ""))
-    names <- c("name", names)
-    output <- paste(output, samelength(names))
+    dat <- cbind(dat, name = names, stringsAsFactors = FALSE)
   }
 
   if (path) {
     paths <- vapply(x, FUN.VALUE = character(1),
       function(e) paste('"', attr(e, "path"), '"', sep = ""))
-    paths <- c("path", paths)
-    output <- paste(output, paths)
+    dat <- cbind(dat, path = paths, stringsAsFactors = FALSE)
   }
 
-  for (line in output) {
-    cat(line, "\n")
-  }
+  print(dat, right = FALSE)
 
   invisible(x)
 }
