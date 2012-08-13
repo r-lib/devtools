@@ -48,6 +48,7 @@ create <- function(path, description = list()) {
   write.dcf(description, file.path(path, 'DESCRIPTION'))
   
   dir.create(file.path(path, "R"))
+  dir.create(file.path(path, "man"))
   create_package_doc(path, name)
 
   check(path)
