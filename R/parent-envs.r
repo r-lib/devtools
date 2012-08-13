@@ -5,6 +5,9 @@
 #' the function was called.
 #'
 #' @param e An environment or other object.
+#' @param trim If \code{TRUE} (the default), stop at the global
+#'   environment or the empty environment. If \code{FALSE}, stop only
+#'   at the empty environment (which is the top-level environment).
 #' @examples
 #' # Print the current environment and its parents
 #' parent_envs()
@@ -27,12 +30,15 @@
 #' e[[1]]
 #' ls(e[[1]], all.names = TRUE)
 #' @export
-parent_envs <- function(e = parent.frame()) {
+parent_envs <- function(e = parent.frame(), trim = TRUE) {
   if (!is.environment(e))  e <- environment(e)
   if (is.null(e))  return(NULL)
 
   envs <- list(e)
-  while (!identical(e, emptyenv())) {
+  while (TRUE) {
+    if (identical(e, emptyenv())) break
+    if (trim && identical(e, globalenv()))  break
+
     e <- parent.env(e)
     envs <- c(envs, e)
   }
