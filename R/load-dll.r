@@ -7,7 +7,7 @@
 load_dll <- function(pkg = NULL) {
   pkg <- as.package(pkg)
 
-  dllfile <- dll_name(pkg, path = TRUE)
+  dllfile <- dll_name(pkg)
   if (!file.exists(dllfile))
     return(invisible())
 

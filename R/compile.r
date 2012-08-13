@@ -1,7 +1,11 @@
 #' Compile a .dll/.so from source
 #'
+#' The DLL is stored in the same directory as the source code,
+#' \code{/src/}.
+#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @seealso \code{\link{clean_dll}}
 #' @export
 compile_dll <- function(pkg) {
   pkg <- as.package(pkg)
@@ -12,12 +16,13 @@ compile_dll <- function(pkg) {
     return(invisible())
 
   # Check that there are source files to compile
-  srcfiles <- list.files(dll_srcdir(pkg), pattern = ".c$")
+  srcfiles <- dir(dll_srcdir(pkg), pattern = "\\.c$")
   if (length(srcfiles) == 0)
     return(invisible())
 
   # Compile the DLL
-  R(paste("CMD SHLIB *.c -o", dll_name(pkg)), path = dll_srcdir(pkg))
+  R(paste("CMD SHLIB *.c -o", basename(dll_name(pkg))),
+    path = dll_srcdir(pkg))
 
   invisible()
 }
@@ -26,32 +31,24 @@ compile_dll <- function(pkg) {
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @seealso \code{\link{compile_dll}}
 #' @export
 clean_dll <- function(pkg) {
   pkg <- as.package(pkg)
 
   # Clean out the /src/ directory
-  files <- list.files(dll_srcdir(pkg), pattern = "\\.(dll|so|o)$",
+  files <- dir(dll_srcdir(pkg), pattern = "\\.(dll|so|o)$",
     full.names = TRUE)
   unlink(files)
 }
 
-# Returns the name of the DLL file, with or without extension,
-# and with or without path
-dll_name <- function(pkg, ext = TRUE, path = FALSE) {
+# Returns the full path and name of the DLL file
+dll_name <- function(pkg) {
   pkg <- as.package(pkg)
 
-  if (ext) {
-    name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
-  } else {
-    name <- pkg$package
-  }
+  name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
 
-  if (path) {
-    file.path(dll_srcdir(pkg), name)
-  } else {
-    name
-  }
+  file.path(dll_srcdir(pkg), name)
 }
 
 # Return the directory containing code that will be compiled
