@@ -6,12 +6,17 @@
 #' @export
 load_c <- function(pkg = NULL) {
   pkg <- as.package(pkg)
-  
-  path_src <- file.path(pkg$path, "src")
-  if (!file.exists(path_src)) return(invisible())
-  
-  paths <- dir(path_src, "\\.(so|dll)$", full.names = TRUE)
 
-  lapply(paths, dyn.load)
-  invisible(paths)
+  dllfile <- dll_name(pkg, path = TRUE)
+  if (!file.exists(dllfile))
+    return(invisible())
+
+  # The loading and registering of the dll is similar to how it's done
+  # in library.dynam.
+  dllinfo <- dyn.load(dllfile)
+
+  # Register dll info so it can be unloaded with library.dynam.unload
+  .dynLibs(c(.dynLibs(), list(dllinfo)))
+
+  invisible(dllfile)
 }
