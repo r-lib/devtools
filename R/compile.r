@@ -11,18 +11,18 @@ compile_dll <- function(pkg) {
   pkg <- as.package(pkg)
 
   # Check source dir exists
-  srcdir <- dll_srcdir(pkg)
+  srcdir <- file.path(pkg$path, "src")
   if (!file.exists(srcdir) || !file.info(srcdir)$isdir)
     return(invisible())
 
   # Check that there are source files to compile
-  srcfiles <- dir(dll_srcdir(pkg), pattern = "\\.c$")
+  srcfiles <- dir(srcdir, pattern = "\\.c$")
   if (length(srcfiles) == 0)
     return(invisible())
 
   # Compile the DLL
   R(paste("CMD SHLIB *.c -o", basename(dll_name(pkg))),
-    path = dll_srcdir(pkg))
+    path = srcdir)
 
   invisible()
 }
@@ -37,7 +37,7 @@ clean_dll <- function(pkg) {
   pkg <- as.package(pkg)
 
   # Clean out the /src/ directory
-  files <- dir(dll_srcdir(pkg), pattern = "\\.(dll|so|o)$",
+  files <- dir(file.path(pkg$path, "src"), pattern = "\\.(dll|so|o)$",
     full.names = TRUE)
   unlink(files)
 }
@@ -48,11 +48,5 @@ dll_name <- function(pkg) {
 
   name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
 
-  file.path(dll_srcdir(pkg), name)
-}
-
-# Return the directory containing code that will be compiled
-dll_srcdir <- function(pkg) {
-  pkg <- as.package(pkg)
-  file.path(pkg$path, "src")
+  file.path(pkg$path, "src", name)
 }
