@@ -1,14 +1,11 @@
 #' Reload the devtools package
 #'
-#' Special care must be take to reload the devtools package, for a
-#' number of reasons. First, if devtools was loaded with
-#' \code{library()}, its namespace environment will be locked.
-#' Second, even if it is not locked, if you use \code{load_all}
-#' with \code{reset=TRUE}, then the utility functions that are used
-#' to load the package will be deleted before it is actually
-#' reloaded.
+#' Special care must be take to reload the devtools package. Attempts
+#' to detach and unregister the devtools namespace from within a
+#' function in the devtools namespace don't seem to work; the
+#' namespace seems to re-register itself.
 #'
-#' This function avoids these problems by creating a duplicate of the
+#' This function dodges the problem by creating a copy of the
 #' devtools namespace environment, and then calls \code{load_all}
 #' from the duplicate environment.
 #'
@@ -20,6 +17,11 @@ reload_devtools <- function(pkg = NULL, reset = FALSE) {
   pkg <- as.package(pkg)
 
   newenv <- copy_env(ns_env(pkg), ignore = ".__NAMESPACE__.")
+  # It's not entirely clear why this works, since the parent env of
+  # newenv$load_all is still <namespace:devtools>.
+  # Also, if you only copy over load_all, the reloading fails:
+  # newenv <- new.env(parent = emptyenv())
+  # newenv$load_all <- load_all
 
   # Now we can reload devtools by calling load_all from the new environment
   newenv$load_all(pkg, reset, self = TRUE)

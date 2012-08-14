@@ -27,7 +27,8 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
 
   # Reloading devtools is a special case
   if (pkg$package == "devtools" && self == FALSE) {
-    reload_devtools(pkg, reset)
+    out <- reload_devtools(pkg, reset)
+    return(invisible(out))
   } else {
     message("Loading ", pkg$package)
   }
