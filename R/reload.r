@@ -23,19 +23,20 @@
 reload <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   
-  if (is.loaded(pkg)) {
+  if (is.loaded_pkg(pkg)) {
     message("Reloading installed ", pkg$package)
     unload(pkg)
     require(pkg$package, character.only = TRUE, quietly = TRUE)
   }
 }
 
-is.loaded <- function(pkg = NULL) {
+# Reports whether a package is loaded and attached
+is.loaded_pkg <- function(pkg = NULL) {
   env_pkg_name(pkg) %in% search()
 }
 
-is.loaded_pkg <- is.loaded
-
+# Reports whether a package is loaded into a namespace. It may be
+# attached or not attached.
 is.loaded_ns <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   pkg$package %in% loadedNamespaces()
