@@ -1,6 +1,6 @@
 \name{clean_dll}
 \alias{clean_dll}
-\title{Remove compiled objects from pkgdir/src}
+\title{Remove compiled objects from /src/ directory}
 \usage{
   clean_dll(pkg)
 }

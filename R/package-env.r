@@ -94,7 +94,7 @@ imports_env <- function(pkg = NULL) {
 #' @keywords internal
 clear_pkg_env <- function(pkg = NULL) {
   
-  if (is.loaded(pkg)) {
+  if (is.loaded_pkg(pkg)) {
     unload(pkg)
   }  
 }
@@ -123,7 +123,7 @@ env_imports_name <- function(pkg = NULL) {
 
 clear_classes <- function(pkg = NULL) {
   pkg <- as.package(pkg)
-  if (!is.loaded(pkg)) return()
+  if (!is.loaded_pkg(pkg)) return()
   
   name <- env_pkg_name(pkg)
   classes <- getClasses(name)

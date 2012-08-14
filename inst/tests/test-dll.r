@@ -8,8 +8,8 @@ test_that("unload() unloads DLLs from packages loaded with library()", {
   dir.create(tmp_libpath)
   .libPaths(c(tmp_libpath, .libPaths()))
 
-  install("unload-dll")
-  expect_true(require(unloaddll))
+  install("dll-unload")
+  expect_true(require(dllunload))
 
   # Check that it's loaded properly, by running a function from the package.
   # nulltest() calls a C function which returns null.
@@ -17,27 +17,27 @@ test_that("unload() unloads DLLs from packages loaded with library()", {
 
   # DLL should be listed in .dynLibs()
   dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
-  expect_true(any(grepl("unloaddll", dynlibs)))
+  expect_true(any(grepl("dllunload", dynlibs)))
 
-  unload("unload-dll")
+  unload("dll-unload")
 
   # DLL should not be listed in .dynLibs()
   dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
-  expect_false(any(grepl("unloaddll", dynlibs)))
+  expect_false(any(grepl("dllunload", dynlibs)))
 
   # Reset the libpath
   .libPaths(old_libpaths)
 
   # Clean out compiled objects
-  clean_dll("unload-dll")
+  clean_dll("dll-unload")
 })
 
 
 test_that("load_all() compiles and loads DLLs", {
 
-  clean_dll("unload-dll")
+  clean_dll("dll-unload")
 
-  load_all("unload-dll", reset = TRUE)
+  load_all("dll-unload", reset = TRUE)
 
   # Check that it's loaded properly, by running a function from the package.
   # nulltest() calls a C function which returns null.
@@ -45,30 +45,30 @@ test_that("load_all() compiles and loads DLLs", {
 
   # DLL should be listed in .dynLibs()
   dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
-  expect_true(any(grepl("unloaddll", dynlibs)))
+  expect_true(any(grepl("dllunload", dynlibs)))
 
-  unload("unload-dll")
+  unload("dll-unload")
 
   # DLL should not be listed in .dynLibs()
   dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
-  expect_false(any(grepl("unloaddll", dynlibs)))
+  expect_false(any(grepl("dllunload", dynlibs)))
 
 
   # Loading again, and reloading
   # Should not re-compile (don't have a proper test for it)
-  load_all("unload-dll")
+  load_all("dll-unload")
   expect_true(is.null(nulltest()))
 
   # Should not re-compile (don't have a proper test for it)
-  load_all("unload-dll")
+  load_all("dll-unload")
   expect_true(is.null(nulltest()))
 
   # Should re-compile (don't have a proper test for it)
-  load_all("unload-dll", reset = TRUE)
+  load_all("dll-unload", reset = TRUE)
   expect_true(is.null(nulltest()))
-  unload("unload-dll")
+  unload("dll-unload")
 
   # Clean out compiled objects
-  clean_dll("unload-dll")
+  clean_dll("dll-unload")
 })
 
