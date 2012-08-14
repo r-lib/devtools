@@ -5,11 +5,13 @@
 #'
 #' @param username Github username
 #' @param repo Repo name
-#' @param branch Desired branch - defaults to \code{"master"}
+#' @param ref Desired git reference. Could be a commit, tag, or branch
+#'   name. Defaults to \code{"master"}.
 #' @param pull Desired pull request. A pull request refers to a branch,
 #'   so you can't specify both \code{branch} and \code{pull}; one of
 #'   them must be \code{NULL}.
 #' @param subdir subdirectory within repo that contains the R package.
+#' @param branch Deprecated. Use \code{ref} instead.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
@@ -18,31 +20,35 @@
 #' install_github("roxygen")
 #' }
 install_github <- function(repo, username = getOption("github.user"),
-  branch = "master", pull = NULL, subdir = NULL, ...) {
+  ref = "master", pull = NULL, subdir = NULL, branch = NULL, ...) {
 
-  if (!is.null(pull)) {
-    if (!is.null(branch)) {
-      stop("Can't specify both a branch and a pull request. ",
-       "Perhaps you want to use 'branch=NULL'?")
-    }
+  if (!is.null(branch)) {
+    warning("'branch' is deprecated. In the future, please use 'ref' instead.")
+    ref <- branch
+  }
+  if (!xor(is.null(pull), is.null(ref))) {
+    stop("Must specify either a ref or a pull request, not both. ",
+     "Perhaps you want to use 'ref=NULL'?")
+  }
+  if(!is.null(pull)) {
     pullinfo <- github_pull_info(repo, username, pull)
     username <- pullinfo$username
-    branch <- pullinfo$branch
+    ref <- pullinfo$ref
   }
 
   message("Installing github repo(s) ", 
-    paste(repo, branch, sep = "/", collapse = ", "), 
+    paste(repo, ref, sep = "/", collapse = ", "),
     " from ", 
     paste(username, collapse = ", "))
   name <- paste(username, "-", repo, sep = "")
   
   url <- paste("https://github.com/", username, "/", repo,
-    "/zipball/", branch, sep = "")
+    "/zipball/", ref, sep = "")
 
   install_url(url, paste(repo, ".zip", sep = ""), subdir = subdir, ...)
 }
 
-# Retrieve the username and branch for a pull request
+# Retrieve the username and ref for a pull request
 github_pull_info <- function(repo, username, pull) {
   host <- "https://api.github.com"
   # GET /repos/:user/:repo/pulls/:number
@@ -52,5 +58,5 @@ github_pull_info <- function(repo, username, pull) {
   head <- parsed_content(r)$head
 
   list(repo = head$repo$name, username = head$repo$owner$login,
-    branch = head$ref)
+    ref = head$ref)
 }

@@ -3,15 +3,16 @@
 \title{Attempts to install a package directly from github.}
 \usage{
   install_github(repo, username = getOption("github.user"),
-    branch = "master", pull = NULL, subdir = NULL, ...)
+    ref = "master", pull = NULL, subdir = NULL,
+    branch = NULL, ...)
 }
 \arguments{
   \item{username}{Github username}
 
   \item{repo}{Repo name}
 
-  \item{branch}{Desired branch - defaults to
-  \code{"master"}}
+  \item{ref}{Desired git reference. Could be a commit, tag,
+  or branch name. Defaults to \code{"master"}.}
 
   \item{pull}{Desired pull request. A pull request refers
   to a branch, so you can't specify both \code{branch} and
@@ -19,6 +20,8 @@
 
   \item{subdir}{subdirectory within repo that contains the
   R package.}
+
+  \item{branch}{Deprecated. Use \code{ref} instead.}
 
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}
