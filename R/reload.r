@@ -16,6 +16,7 @@
 #' reload("ggplot2/")
 #'
 #' # Can use inst() to find the package path
+#' # This will reload the installed ggplot2 package
 #' reload(inst("ggplot2"))
 #' }
 #' @export
@@ -53,7 +54,9 @@ is.loaded_ns <- function(pkg = NULL) {
 #' # Unload package that is in ./ggplot2/
 #' unload("ggplot2/")
 #'
-#' # Can use inst() to find the package path
+#' # Can use inst() to find the path of an installed package
+#' # This will load and unload the installed ggplot2 package
+#' library(ggplot2)
 #' unload(inst("ggplot2"))
 #' }
 #' @export
