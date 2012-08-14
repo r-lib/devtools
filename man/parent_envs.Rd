@@ -3,15 +3,15 @@
 \title{Given an environment or object, return an \code{envlist} of its
 parent environments.}
 \usage{
-  parent_envs(e = parent.frame(), trim = TRUE)
+  parent_envs(e = parent.frame(), all = FALSE)
 }
 \arguments{
   \item{e}{An environment or other object.}
 
-  \item{trim}{If \code{TRUE} (the default), stop at the
+  \item{all}{If \code{FALSE} (the default), stop at the
   global environment or the empty environment. If
-  \code{FALSE}, stop only at the empty environment (which
-  is the top-level environment).}
+  \code{TRUE}, print all parents, stopping only at the
+  empty environment (which is the top-level environment).}
 }
 \description{
   If \code{e} is not specified, it will start with
@@ -26,7 +26,7 @@ e <- parent_envs(load_all)
 e
 
 # Get all parent environments, going all the way to empty env
-e <- parent_envs(load_all, trim = FALSE)
+e <- parent_envs(load_all, T)
 e
 
 # Print e with paths
