@@ -1,4 +1,4 @@
-Package: unloaddll
+Package: dllunload
 Title: Tools to make developing R code easier
 License: GPL-2
 Description:
