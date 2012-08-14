@@ -2,15 +2,18 @@
 \alias{install_bitbucket}
 \title{Install a package directly from bitbucket}
 \usage{
-  install_bitbucket(repo, username, branch = "master", ...)
+  install_bitbucket(repo, username, ref = "master",
+    branch = NULL, ...)
 }
 \arguments{
   \item{username}{bitbucket username}
 
   \item{repo}{Repo name}
 
-  \item{branch}{Desired branch - defaults to
-  \code{"master"}}
+  \item{ref}{Desired git reference. Could be a commit, tag,
+  or branch name. Defaults to \code{"master"}.}
+
+  \item{branch}{Deprecated. Use \code{ref} instead.}
 
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}

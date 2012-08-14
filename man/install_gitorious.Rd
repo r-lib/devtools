@@ -2,19 +2,20 @@
 \alias{install_gitorious}
 \title{Attempts to install a package directly from gitorious.}
 \usage{
-  install_gitorious(repo, project = repo,
-    branch = "master", subdir = NULL, ...)
+  install_gitorious(repo, project = repo, ref = "master",
+    subdir = NULL, branch = NULL, ...)
 }
 \arguments{
   \item{project}{Gitorious project name}
 
   \item{repo}{Repo name}
 
-  \item{branch}{Desired branch - defaults to
-  \code{"master"}}
+  \item{ref}{Desired git ref - defaults to \code{"master"}}
 
   \item{subdir}{subdirectory within repo that contains the
   R package.}
+
+  \item{branch}{Deprecated. Use \code{ref} instead.}
 
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}

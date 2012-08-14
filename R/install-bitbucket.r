@@ -13,14 +13,18 @@
 #' install_bitbucket(c("testrepo", "testrepo2")
 #' }
 #'
-install_bitbucket <- function(repo, username, branch = "master", ...)
+install_bitbucket <- function(repo, username, ref = "master", branch = NULL, ...)
 {
+  if (!is.null(branch)) {
+    warning("'branch' is deprecated. In the future, please use 'ref' instead.")
+    ref <- branch
+  }
   message("Installing bitbucket repo(s) ",
-    paste(repo, branch, sep = "/", collapse = ", "),
+    paste(repo, ref, sep = "/", collapse = ", "),
     " from ",
     paste(username, collapse = ", "))
 
   url <- paste("https://bitbucket.org/", username, "/", repo, "/get/", 
-    branch, ".zip", sep = "")
-  install_url(url, paste(branch, ".zip", sep = ""), ...)
+    ref, ".zip", sep = "")
+  install_url(url, paste(ref, ".zip", sep = ""), ...)
 }
