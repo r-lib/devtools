@@ -37,8 +37,8 @@
 * New function `parent_envs()`, which parents the parent environments
   of an object. (Winston Chang)
 
-* New functions `compile_dll()` and `clean_dll()`, which compile C
-  source code, and clean up the compiled objects, respectively.
+* New functions `compile_dll()` and `clean_dll()`, which compile C/C++/
+  Fortan source code, and clean up the compiled objects, respectively.
   (Winston Chang. Fixes #131)
 
 LOADING
