@@ -3,7 +3,7 @@
 \title{Attempts to install a package directly from github.}
 \usage{
   install_github(repo, username = getOption("github.user"),
-    branch = "master", subdir = NULL, ...)
+    branch = "master", pull = NULL, subdir = NULL, ...)
 }
 \arguments{
   \item{username}{Github username}
@@ -12,6 +12,10 @@
 
   \item{branch}{Desired branch - defaults to
   \code{"master"}}
+
+  \item{pull}{Desired pull request. A pull request refers
+  to a branch, so you can't specify both \code{branch} and
+  \code{pull}; one of them must be \code{NULL}.}
 
   \item{subdir}{subdirectory within repo that contains the
   R package.}
