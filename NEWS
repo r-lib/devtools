@@ -41,6 +41,9 @@
   Fortan source code, and clean up the compiled objects, respectively.
   (Winston Chang. Fixes #131)
 
+* `install_github()` can now install from a pull request -- it installs
+  the branch referenced in the pull request.
+
 LOADING
 
 * Development packages are now loaded into a namespace environment,
