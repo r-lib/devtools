@@ -13,7 +13,6 @@
 #' @export
 ns_env <- function(pkg = NULL, create = FALSE) {
   pkg <- as.package(pkg)
-  name <- env_ns_name(pkg)
 
   if (!is.loaded_ns(pkg)) {
     if (create) {
@@ -73,7 +72,6 @@ pkg_env <- function(pkg = NULL, create = FALSE) {
 #' @export
 imports_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
-  name <- env_pkg_name(pkg)
 
   if (!is.loaded_ns(pkg)) {
     stop("Namespace environment must be created before accessing imports environment.")
@@ -97,13 +95,6 @@ clear_pkg_env <- function(pkg = NULL) {
   if (is.loaded_pkg(pkg)) {
     unload(pkg)
   }  
-}
-
-# Generate name of package namespace environment
-# Contains all objects
-env_ns_name <- function(pkg = NULL) {
-  pkg <- as.package(pkg)
-  paste("namespace:", pkg$package, sep = "")
 }
 
 # Generate name of package environment
