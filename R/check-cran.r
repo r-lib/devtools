@@ -21,16 +21,22 @@
 #'   redownload the packages every time you run the package.
 #' @param bioconductor include bioconductor packages in checking?
 #' @param type binary package type of test
+#' @param threads number of concurrent threads to use for checking.
 #' @return invisible \code{TRUE} if successful and no ERRORs or WARNINGS,
 #' @param ... other parameters passed onto \code{\link{download.packages}}
 #' @importFrom tools package_dependencies
+#' @importFrom parallel mclapply
 #' @export
 #' @examples
 #' \dontrun{
 #' dep <- revdep("ggplot2")
 #' check_cran(dep, "~/documents/ggplot/ggplot-check")
+#' # Or, equivalently:
+#' revdep_check("ggplot2")
 #' }
-check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath, bioconductor  = FALSE, type = getOption("pkgType"), ...) {
+check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
+  srcpath = libpath, bioconductor = FALSE, type = getOption("pkgType"),
+  threads = 1, ...) {
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
 
@@ -73,7 +79,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = 
 
   if (length(known) > 0) {
     message("Installing ", length(known), " missing binary dependencies")
-    install.packages(known, lib = libpath, quiet = TRUE, repos = repos)    
+    install.packages(known, lib = libpath, quiet = FALSE, repos = repos,
+      Ncpus = threads)
   }
   if (length(unknown) > 0) {
     message("No binary packages available for dependenices: ", 
@@ -96,7 +103,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = 
       download.file(url$url, local, quiet = TRUE)
     }
     
-    message("Checking ", pkgs[i])
+    message("Checking ", i , ": ", pkgs[i])
     cmd <- paste("CMD check --as-cran --no-multiarch --no-manual --no-codoc ",
       local, sep = "")
     try(R(cmd, tmp, stdout = NULL), silent = TRUE)
@@ -106,7 +113,9 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = 
     if (length(results) > 0) cat(results, "\n")
     results
   }
-  results <- lapply(seq_along(pkgs), check)
+  results <- mclapply(seq_along(pkgs), check, mc.preschedule = FALSE,
+    mc.cores = threads)
+
   names(results) <- pkgs
   
   n_problems <- sum(vapply(results, length, integer(1)))
