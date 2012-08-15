@@ -31,6 +31,8 @@
 #' \dontrun{
 #' dep <- revdep("ggplot2")
 #' check_cran(dep, "~/documents/ggplot/ggplot-check")
+#' # Or, equivalently:
+#' revdep_check("ggplot2")
 #' }
 check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   srcpath = libpath, bioconductor = FALSE, type = getOption("pkgType"),
@@ -77,7 +79,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
   if (length(known) > 0) {
     message("Installing ", length(known), " missing binary dependencies")
-    install.packages(known, lib = libpath, quiet = TRUE, repos = repos,
+    install.packages(known, lib = libpath, quiet = FALSE, repos = repos,
       Ncpus = threads)
   }
   if (length(unknown) > 0) {

@@ -53,6 +53,8 @@
 \dontrun{
 dep <- revdep("ggplot2")
 check_cran(dep, "~/documents/ggplot/ggplot-check")
+# Or, equivalently:
+revdep_check("ggplot2")
 }
 }
 
