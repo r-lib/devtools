@@ -51,31 +51,28 @@ load_imports <- function(pkg = NULL, deps = c("depends", "imports")) {
 
   if (is.null(deps) || nrow(deps) == 0) return(invisible())
 
-  mapply(import_dep, deps$name, deps$version, deps$compare,
-    MoreArgs = list(pkg = pkg))
+  # If we've already loaded imports, don't load again (until load_all
+  # is run with reset=TRUE). This is to avoid warnings when running
+  # process_imports()
+  if (length(ls(imports_env(pkg))) > 0) return(invisible(deps))
+
+  mapply(check_dep_version, deps$name, deps$version, deps$compare)
+
+  process_imports(pkg)
 
   invisible(deps)
 }
 
-#' Load a package in an "imports" environment.
+#' Check that the version of an imported package satisfies the requirements
 #'
-#' All of the exported objects from the imported package are copied to
-#' the imports environment for the development package. This will
-#' automatically load (but not attach) the imported package.
-#'
-#' @param pkg The package that is doing the importing
 #' @param dep_name The name of the package with objects to import
 #' @param dep_ver The version of the package
 #' @param dep_compare The comparison operator to use to check the version
 #' @keywords internal
-import_dep <- function(pkg, dep_name, dep_ver = NA, dep_compare = NA) {
-  pkg <- as.package(pkg)
-  imp_env <- imports_env(pkg)
-
+check_dep_version <- function(dep_name, dep_ver = NA, dep_compare = NA) {
   if (!requireNamespace(dep_name, quietly = TRUE)) {
     stop("Dependency package ", dep_name, " not available.")
   }
-
 
   if (xor(is.na(dep_ver), is.na(dep_compare))) {
     stop("dep_ver and dep_compare must be both NA or both non-NA")
@@ -87,22 +84,32 @@ import_dep <- function(pkg, dep_name, dep_ver = NA, dep_compare = NA) {
       as.numeric_version(getNamespaceVersion(dep_name)),
       as.numeric_version(dep_ver))) {
 
-      warning(pkg$package, " needs ", dep_name, " ", dep_compare,
+      warning("Need ", dep_name, " ", dep_compare,
         " ", dep_ver,
         " but loaded version is ", getNamespaceVersion(dep_name))
     }
   }
-
-
-  # Copy all exported objects from dep to the imports environment.
-  # Running getNamespaceExports will automatically load (but not attach)
-  # the dependency.
-  for (objname in getNamespaceExports(dep_name)) {
-    # I think this should use inherits = FALSE but that seems to cause
-    # problems with some packages (hexbin, for example)
-    obj <- get(objname, envir = asNamespace(dep_name))
-    assign(objname, obj, envir = imp_env, inherits = FALSE)
-  }
-
   return(TRUE)
+}
+
+
+
+# Load imported objects
+# The code in this function is taken from base::loadNamespace
+process_imports <- function(pkg) {
+  nsInfo <- parse_ns_file(pkg)
+  ns <- ns_env(pkg)
+  lib.loc <- NULL
+
+  ## process imports
+  for (i in nsInfo$imports) {
+    if (is.character(i))
+      namespaceImport(ns, loadNamespace(i))
+    else
+      namespaceImportFrom(ns, loadNamespace(i[[1L]]), i[[2L]])
+  }
+  for(imp in nsInfo$importClasses)
+    namespaceImportClasses(ns, loadNamespace(imp[[1L]]), imp[[2L]])
+  for(imp in nsInfo$importMethods)
+    namespaceImportMethods(ns, loadNamespace(imp[[1L]]), imp[[2L]])
 }
