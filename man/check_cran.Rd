@@ -4,7 +4,7 @@
 \usage{
   check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"),
     srcpath = libpath, bioconductor = FALSE,
-    type = getOption("pkgType"), ...)
+    type = getOption("pkgType"), threads = 1, ...)
 }
 \arguments{
   \item{pkgs}{Vector of package names - note that unlike
@@ -25,6 +25,9 @@
   checking?}
 
   \item{type}{binary package type of test}
+
+  \item{threads}{number of concurrent threads to use for
+  checking.}
 
   \item{...}{other parameters passed onto
   \code{\link{download.packages}}}
@@ -50,6 +53,8 @@
 \dontrun{
 dep <- revdep("ggplot2")
 check_cran(dep, "~/documents/ggplot/ggplot-check")
+# Or, equivalently:
+revdep_check("ggplot2")
 }
 }
 
