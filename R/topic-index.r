@@ -31,7 +31,7 @@ topic_index <- function(pkg) {
 
 clear_topic_index <- function(pkg) {
   pkg <- as.package(pkg)
-  topic_indices[[pkg$package]] <- NULL
+  rm(pkg$package, envir = topic_indices)
   
   invisible(TRUE)
 }
