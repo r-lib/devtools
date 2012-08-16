@@ -6,5 +6,6 @@ Author: Hadley <h.wickham@gmail.com>
 Maintainer: Hadley <h.wickham@gmail.com>
 Version: 0.1
 Imports:
-    compiler
+    compiler,
+    MASS
 Collate: a.r b.r

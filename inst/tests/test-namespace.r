@@ -1,32 +1,11 @@
 context("Namespace")
 
-# Return ancestor environment
-# e: the environment to start in
-# n: number of levels to go back (if n is greater than number of ancestors,
-#    return the highest level, R_EmptyEnv)
-# p: print all the environments while traveling up the stack?
-env_parent <- function(e = parent.frame(), n = 100, print = FALSE) {
-  if (print)  cat(str(e, give.attr=F))
-  i <- 0
-  while(i < n) {
-    if (identical(e, emptyenv()))  break
-
-    e <- parent.env(e)
-    if (print)  cat(str(e, give.attr=F))
-    i <- i+1
-  }
-  if (print)  cat("\n")
-  return(e)
-}
-
 # Is e an ancestor environment of x?
 is_ancestor_env <- function(e, x) {
-  while (!identical(x, emptyenv())) {
-    if (identical(x, e)) {
-      return(TRUE)
-    } else {
-      x <- parent.env(x)
-    }
+  x_par <- parent_envs(x, all = TRUE)
+
+  for (p in x_par) {
+    if (identical(e, p)) return(TRUE)
   }
 
   return(FALSE)
@@ -92,9 +71,9 @@ test_that("Namespace, imports, and package environments have correct hierarchy",
   imp_env <- imports_env("namespace")
 
 
-  expect_identical(env_parent(nsenv, n = 1), imp_env)
-  expect_identical(env_parent(nsenv, n = 2), .BaseNamespaceEnv)
-  expect_identical(env_parent(nsenv, n = 3), .GlobalEnv)
+  expect_identical(parent_envs(nsenv)[[2]], imp_env)
+  expect_identical(parent_envs(nsenv)[[3]], .BaseNamespaceEnv)
+  expect_identical(parent_envs(nsenv)[[4]], .GlobalEnv)
 
   # pkgenv should be an ancestor of the global environment
   expect_true(is_ancestor_env(pkgenv, .GlobalEnv))
@@ -112,6 +91,8 @@ test_that("unload() removes package environments from search", {
   nsenv   <- ns_env("namespace")
   imp_env <- imports_env("namespace")
   unload("namespace")
+  unload(inst("compiler"))
+  unload(inst("MASS"))
 
   # Should report not loaded for package and namespace environments
   expect_false(is.loaded_pkg("namespace"))
@@ -126,21 +107,4 @@ test_that("unload() removes package environments from search", {
   # Another check of same thing
   expect_false(env_pkg_name("namespace") %in% search())
 
-  # TODO: test that it unloads dynlibs
-})
-
-
-test_that("Imported objects are copied to package environment", {
-  load_all("namespace")
-  # 'compiler' is one of the imports
-  imp_env <- imports_env("namespace")
-
-  # cmpfun is exported from compiler, so it should be in imp_env
-  expect_identical(imp_env$cmpfun, compiler::cmpfun)
-
-  # cmpSpecial is NOT exported from grid, so it should not be in imp_env
-  expect_true(exists("cmpSpecial", asNamespace("compiler")))
-  expect_false(exists("cmpSpecial", imp_env))
-
-  unload("namespace")
 })
