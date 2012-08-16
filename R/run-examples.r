@@ -72,16 +72,15 @@ run_one_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) 
   cat("\n\n")
 }
 
-#' Run a single example.
+#' Run a examples for an in-development function.
 #'
 #' @inheritParams run_examples 
 #' @param topic Name or topic (or name of Rd) file to run examples for
 #' @export
 #' @family example functions
-run_example <- function(pkg = NULL, topic, strict = FALSE) {
-  pkg <- as.package(pkg)
-  rd <- find_topic(pkg, topic)
-  path <- file.path(pkg$path, "man", rd)
+dev_example <- function(topic, strict = FALSE) {
+  path <- find_topic(topic)
+  pkg <- as.package(names(path)[[1]])
   
   load_all(pkg)
   run_one_example(topic, path, pkg, strict = strict)

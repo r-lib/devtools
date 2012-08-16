@@ -61,30 +61,3 @@ check_doc <- function(pkg = NULL) {
   # print(tools::checkDocStyle(dir = pkg$path))
   # print(tools::undoc(dir = pkg$path))
 }
-
-
-#' Show an Rd file in a package.
-#'
-#' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
-#' @param file topic or name Rd file to open. 
-#' @param ... additional arguments passed onto \code{\link[tools]{Rd2txt}}.
-#'   This is particular useful if you're checking macros and want to simulate
-#'   what happens when the package is built (\code{stage = "build"})
-#' @export
-#' @importFrom tools file_ext
-#' @importFrom tools Rd2txt
-show_rd <- function(pkg = NULL, file, ...) {
-  pkg <- as.package(pkg)
-  
-  rd <- find_topic(pkg, file)
-  if (is.null(rd)) {
-    stop("Could not find topic or Rd file ", file, call. = FALSE)
-  }
-
-  path <- file.path(pkg$path, "man", rd)  
-  temp <- Rd2txt(path, out = tempfile("Rtxt"), package = pkg$package, 
-    ...)
-  file.show(temp, title = paste("Dev documentation: ", file), 
-    delete.file = TRUE) 
-}

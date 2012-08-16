@@ -1,7 +1,8 @@
 # Tools for indexing package documentation by alias, and for finding
 # the rd file for a given topic (alias).
 
-find_topic <- function(pkg, topic) {
+#' @return path to rd file within package
+find_pkg_topic <- function(pkg, topic) {
   pkg <- as.package(pkg)
   
   # First see if a man file of that name exists
@@ -15,6 +16,18 @@ find_topic <- function(pkg, topic) {
   # Finally, try adding .Rd to name
   man_rd <- file.path(pkg$path, "man", paste(topic, ".Rd"))
   if (file.exists(man)) return(basename(man))
+  
+  NULL
+}
+
+# @return complete path to man file, with name giving path to package.
+find_topic <- function(topic) {
+  pkgs <- dev_packages()
+  for (pkg in pkgs) {
+    path <- getNamespaceInfo(pkg, "path")
+    rd <- find_pkg_topic(path, topic)
+    if (!is.null(rd)) return(setNames(file.path(path, "man", rd), path))
+  }
   
   NULL
 }
