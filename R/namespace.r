@@ -43,10 +43,8 @@ setup_ns_exports <- function(pkg) {
 
   # Update the exports metadata for the namespace with base::namespaceExport
   # It will throw warnings if objects are already listed in the exports
-  # metadata, so catch those errors and ignore them.
-  tryCatch(
-    namespaceExport(ns_env(pkg), exports),
-    warning = function(w) NULL)
+  # metadata, so catch those warnings and ignore them.
+  suppressWarnings(namespaceExport(ns_env(pkg), exports))
 
   invisible()
 }
