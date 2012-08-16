@@ -20,14 +20,13 @@ test_that("Package objects are visible from global environment", {
   expect_equal(a, 1)
   expect_equal(b, 2)
   unload("namespace")
-
-  # Check that objects
 })
 
 test_that("All package objects are loaded into namespace environment", {
   load_all("namespace")
-  expect_equal(a, 1)
-  expect_equal(b, 2)
+  nsenv <- ns_env("namespace")
+  expect_equal(nsenv$a, 1)
+  expect_equal(nsenv$b, 2)
   unload("namespace")
 })
 
