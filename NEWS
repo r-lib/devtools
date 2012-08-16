@@ -61,6 +61,14 @@ LOADING
   normally loaded.  These packages previously were loaded and attached.
   (Winston Chang. Fixes #85)
 
+* The NAMESPACE file is now used for loading imports, instead of the
+  DESCRIPTION file. Previously, `load_all` loaded all objects from the
+  packages listed in DESCRIPTION. Now it loads packages (and, when
+  when 'importfrom' is used, specific objects from packages) listed in
+  NAMESPACE. This more closely simulates normal package loading. It
+  still checks version numbers of packages listed in DESCRIPTION.
+  (Winston Chang)
+
 * `load_all` can now be used to properly reload devtools. It does this
   by creating a copy of the devtools namespace environment, and calling
   `load_all` from that environment. (Winston Chang)
