@@ -90,6 +90,9 @@ LOADING
 
 * `unload` also unloads DLLs. (Winston Chang. Fixes #119)
 
+* `load_all` now has an option `export_all`. When set to TRUE, only the
+  objects listed as exports in NAMESPACE are exported. (Winston Chang)
+
 BUG FIXES
 
 * `load_code` now properly skips missing files. (Winston Chang)
