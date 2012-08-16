@@ -13,21 +13,28 @@ is_ancestor_env <- function(e, x) {
 
 
 test_that("Package objects are visible from global environment", {
-  load_all("namespace")
 
-  # a is exported, b is not. But with load_all(), they should both be
-  # visible in global env.
+  # a is exported, b is not. With load_all(), they should by default
+  # both be visible in the global env.
+  load_all("namespace")
   expect_equal(a, 1)
   expect_equal(b, 2)
   unload("namespace")
 
-  # Check that objects
+
+  # With export_all = FALSE, only the exported object should be visible
+  # in the global env.
+  load_all("namespace", export_all = FALSE)
+  expect_equal(a, 1)
+  expect_false(exists("b"))
+  unload("namespace")
 })
 
 test_that("All package objects are loaded into namespace environment", {
   load_all("namespace")
-  expect_equal(a, 1)
-  expect_equal(b, 2)
+  nsenv <- ns_env("namespace")
+  expect_equal(nsenv$a, 1)
+  expect_equal(nsenv$b, 2)
   unload("namespace")
 })
 

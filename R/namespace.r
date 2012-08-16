@@ -22,13 +22,33 @@ makeNamespace <- function(name, version = NULL, lib = NULL) {
 }
 
 
-# Read the NAMESPACE file and set up some of the namespace info
+# Read the NAMESPACE file and set up the imports metdata.
 # (which is stored in .__NAMESPACE__.)
-setup_ns_info <- function(pkg) {
+setup_ns_imports <- function(pkg) {
   nsInfo <- parse_ns_file(pkg)
   setNamespaceInfo(pkg$package, "imports", nsInfo$imports)
-  setNamespaceInfo(pkg$package, "exports", nsInfo$exports)
 }
+
+
+# Read the NAMESPACE file and set up the exports metdata. This must be
+# run after all the objects are loaded into the namespace because
+# namespaceExport throw errors if the objects are not present.
+setup_ns_exports <- function(pkg) {
+  nsInfo <- parse_ns_file(pkg)
+
+  # This code is from base::loadNamespace
+  exports <- nsInfo$exports
+  for (p in nsInfo$exportPatterns)
+    exports <- c(ls(env, pattern = p, all.names = TRUE), exports)
+
+  # Update the exports metadata for the namespace with base::namespaceExport
+  # It will throw warnings if objects are already listed in the exports
+  # metadata, so catch those warnings and ignore them.
+  suppressWarnings(namespaceExport(ns_env(pkg), exports))
+
+  invisible()
+}
+
 
 #' Parses the NAMESPACE file for a package
 #'
@@ -42,4 +62,36 @@ parse_ns_file <- function(pkg) {
 
   parseNamespaceFile(basename(pkg$path), dirname(pkg$path),
     mustExist = FALSE)
+}
+
+
+# Create the package environment and copy over objects from the
+# namespace environment
+attach_ns <- function(pkg, export_all = TRUE) {
+  pkg <- as.package(pkg)
+  nsenv <- ns_env(pkg)
+  pkgenv <- pkg_env(pkg, create = TRUE)
+
+  if (export_all) {
+    # Copy all the objects from namespace env to package env, so that they
+    # are visible in global env.
+    copy_env(nsenv, pkgenv,
+      ignore = c(".__NAMESPACE__.", ".__S3MethodsTable__.",
+        ".packageName", ".First.lib", ".onLoad", ".onAttach",
+        ".conflicts.OK", ".noGenerics"))
+
+  } else {
+    # Export only the objects specified in NAMESPACE
+    # This code from base::attachNamespace
+    exports <- getNamespaceExports(nsenv)
+    importIntoEnv(pkgenv, exports, nsenv, exports)
+  }
+}
+
+register_s3 <- function(pkg) {
+  pkg <- as.package(pkg)
+  nsInfo <- parse_ns_file(pkg)
+
+  # Adapted from loadNamespace
+  registerS3methods(nsInfo$S3methods, pkg$package, ns_env(pkg))
 }

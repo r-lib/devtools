@@ -22,7 +22,7 @@ ns_env <- function(pkg = NULL, create = FALSE) {
       dev_meta(pkg$package, create = TRUE)
 
       setNamespaceInfo(env, "path", pkg$path)
-      setup_ns_info(pkg)
+      setup_ns_imports(pkg)
     } else {
       return(NULL)
     }
@@ -55,6 +55,7 @@ pkg_env <- function(pkg = NULL, create = FALSE) {
   
   if (!is.loaded_pkg(pkg)) {
     if (create) {
+      # This should be similar to attachNamespace
       pkgenv <- attach(new.env(parent = emptyenv()), name = name)
       attr(pkgenv, "path") <- pkg$path
     } else {
