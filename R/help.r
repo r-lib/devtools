@@ -52,6 +52,7 @@ show_rd <- function(pkg = NULL, file, ...) {
   view_rd(path, pkg, ...)
 }
 
+#' @importFrom tools Rd2txt Rd2HTML
 view_rd <- function(path, package, stage = "render", type = getOption("help_type")) {
   if (is.null(type)) type <- "text"
   type <- match.arg(type, c("text", "html"))

@@ -51,6 +51,7 @@ clear_topic_index <- function(pkg) {
   invisible(TRUE)
 }
 
+#' @importFrom tools parse_Rd
 build_topic_index <- function(pkg) {
   pkg <- as.package(pkg)
   
