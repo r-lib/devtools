@@ -1,7 +1,7 @@
 # Tools for indexing package documentation by alias, and for finding
 # the rd file for a given topic (alias).
 
-#' @return path to rd file within package
+# @return path to rd file within package
 find_pkg_topic <- function(pkg, topic) {
   pkg <- as.package(pkg)
   
@@ -44,7 +44,9 @@ topic_index <- function(pkg) {
 
 clear_topic_index <- function(pkg) {
   pkg <- as.package(pkg)
-  rm(pkg$package, envir = topic_indices)
+  if (exists(pkg$package, topic_indices)) {
+    rm(pkg$package, envir = topic_indices)    
+  }
   
   invisible(TRUE)
 }

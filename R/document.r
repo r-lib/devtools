@@ -13,7 +13,6 @@ document <- function(pkg = NULL, clean = FALSE, roclets = c("collate", "namespac
   require("roxygen2")
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
-  clear_topic_index(pkg)
 
   man_path <- file.path(pkg$path, "man")
   if (!file.exists(pkg$path)) dir.create(man_path)
@@ -36,6 +35,7 @@ document <- function(pkg = NULL, clean = FALSE, roclets = c("collate", "namespac
     roxygen2:::roc_output(roc, results, pkg$path)
   }
   
+  clear_topic_index(pkg)
   invisible()
 }
 

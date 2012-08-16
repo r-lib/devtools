@@ -29,7 +29,7 @@
   function.
 }
 \seealso{
-  Other examples: \code{\link{run_example}}
+  Other example functions: \code{\link{dev_example}}
 }
 \keyword{programming}
 
