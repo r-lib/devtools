@@ -28,8 +28,8 @@
 #'
 #' To export only the objects listed as exports, use
 #' \code{export_all=TRUE}. This more closely simulates behavior when
-#' loading an installed package with `library()`, and can be useful for
-#' checking for missing exports.
+#' loading an installed package with \code{\link{library}}, and can be
+#' useful for checking for missing exports.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
@@ -48,7 +48,6 @@
 #' @keywords programming
 #' @examples
 #' \dontrun{
-#'
 #' # Load the package in the current directory
 #' load_all("./")
 #'
