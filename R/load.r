@@ -113,6 +113,7 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
 
   out$data <- load_data(pkg)
   out$code <- load_code(pkg)
+  register_s3(pkg)
   out$dll <- load_dll(pkg)
 
   # Set up the exports in the namespace metadata (this must happen after

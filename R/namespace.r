@@ -87,3 +87,11 @@ attach_ns <- function(pkg, export_all = TRUE) {
     importIntoEnv(pkgenv, exports, nsenv, exports)
   }
 }
+
+register_s3 <- function(pkg) {
+  pkg <- as.package(pkg)
+  nsInfo <- parse_ns_file(pkg)
+
+  # Adapted from loadNamespace
+  registerS3methods(nsInfo$S3methods, pkg$package, ns_env(pkg))
+}
