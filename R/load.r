@@ -63,9 +63,8 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
   # Compile dll if it exists
   compile_dll(pkg)
 
-  # Create the namespace environment
-  # namspace:xx is a child of imports:xx is a child of namespace:base
-  # is a child of R_GlobalEnv
+
+  # Set up the namespace environment ----------------------------------
   nsenv <- ns_env(pkg, create = TRUE)
 
   out <- list(env = nsenv)
@@ -77,14 +76,16 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
   out$code <- load_code(pkg)
   out$dll <- load_dll(pkg)
 
+  # Set up the exports in the namespace metadata (this must happen after
+  # the objects are loaded)
+  setup_ns_exports(pkg)
+
   run_onload(pkg)
 
-  # Copy all the objects from namespace env to package env, so that they
-  # are visible in global env.
-  copy_env(nsenv, pkg_env(pkg, create = TRUE),
-    ignore = c(".__NAMESPACE__.", ".__S3MethodsTable__.",
-      ".packageName", ".First.lib", ".onLoad", ".onAttach",
-      ".conflicts.OK", ".noGenerics"))
+  # Set up the package environment ------------------------------------
+  # Create the package environment and copy over objects from the
+  # namespace environment.
+  attach_ns(pkg)
 
   run_onattach(pkg)
 
