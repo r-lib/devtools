@@ -111,17 +111,6 @@ env_imports_name <- function(pkg = NULL) {
   paste("imports:", pkg$package, sep = "")
 }
 
-
-clear_classes <- function(pkg = NULL) {
-  pkg <- as.package(pkg)
-  if (!is.loaded_pkg(pkg)) return()
-  
-  name <- env_pkg_name(pkg)
-  classes <- getClasses(name)
-  lapply(classes, removeClass, where = name)    
-  invisible()
-}
-
 base_env <- function(pkg) {
   new.env(parent = emptyenv())
 }

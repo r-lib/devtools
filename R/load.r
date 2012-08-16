@@ -52,7 +52,6 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
   
   if (reset) {
     clear_cache()
-    clear_classes(pkg)
     clear_pkg_env(pkg)
     clean_dll(pkg)
   }
