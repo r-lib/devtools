@@ -2,7 +2,8 @@
 \alias{dev_help}
 \title{Read the in-development help for a package loaded with devtools.}
 \usage{
-  dev_help(topic, stage = "render")
+  dev_help(topic, stage = "render",
+    type = getOption("help_type"))
 }
 \arguments{
   \item{topic}{name of help to search for.}
@@ -11,6 +12,10 @@
   ‘"render"’) should \\Sexpr macros be executed? This is
   only important if you're using \\Sexpr macro's in your Rd
   files.}
+
+  \item{type}{of html to produce: \code{"html"} or
+  \code{"text"}. Defaults to your default documentation
+  type.}
 }
 \description{
   Note that this only renders a single documentation file,
