@@ -67,6 +67,7 @@ clean_vignettes <- function(pkg = NULL) {
   invisible(TRUE)
 }
 
+#' @importFrom tools file_path_sans_ext
 file_name <- function(x) {
   if (length(x) == 0) return(NULL)
   file_path_sans_ext(basename(x))
