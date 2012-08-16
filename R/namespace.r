@@ -41,8 +41,12 @@ setup_ns_exports <- function(pkg) {
   for (p in nsInfo$exportPatterns)
     exports <- c(ls(env, pattern = p, all.names = TRUE), exports)
 
-  # This updates the exports metadata for the namespace
-  namespaceExport(ns_env(pkg), exports)
+  # Update the exports metadata for the namespace with base::namespaceExport
+  # It will throw warnings if objects are already listed in the exports
+  # metadata, so catch those errors and ignore them.
+  tryCatch(
+    namespaceExport(ns_env(pkg), exports),
+    warning = function(w) NULL)
 
   invisible()
 }
