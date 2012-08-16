@@ -8,7 +8,6 @@
 #'   will be used as the package name.
 #' @param description list of description values to override default values or
 #'   add additional values.
-#' @param ... other options passed to \code{package.skeleton}
 #' @seealso Text with \code{\link{package.skeleton}}
 #' @export
 #' @examples
