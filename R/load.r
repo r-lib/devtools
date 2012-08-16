@@ -17,12 +17,15 @@
 #'   \code{\link{as.package}} for more information
 #' @param reset clear package environment and reset file cache before loading
 #'   any pieces of the package.
+#' @param recompile force a recompile of DLL from source code, if present.
 #' @param self For internal use only. (This is used when \code{load_all}
 #'   is called from \code{\link{reload_devtools}})
 #' 
 #' @keywords programming
 #' @export
-load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
+load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
+  self = FALSE) {
+
   pkg <- as.package(pkg)
 
   # Reloading devtools is a special case
@@ -53,8 +56,9 @@ load_all <- function(pkg = NULL, reset = FALSE, self = FALSE) {
   if (reset) {
     clear_cache()
     clear_pkg_env(pkg)
-    clean_dll(pkg)
   }
+
+  if (recompile) clean_dll(pkg)
 
   # Compile dll if it exists
   compile_dll(pkg)
