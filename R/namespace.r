@@ -65,15 +65,23 @@ parse_ns_file <- function(pkg) {
 
 # Create the package environment and copy over objects from the
 # namespace environment
-attach_ns <- function(pkg) {
+attach_ns <- function(pkg, export_all = TRUE) {
   pkg <- as.package(pkg)
   nsenv <- ns_env(pkg)
   pkgenv <- pkg_env(pkg, create = TRUE)
 
-  # Copy all the objects from namespace env to package env, so that they
-  # are visible in global env.
-  copy_env(nsenv, pkgenv,
-    ignore = c(".__NAMESPACE__.", ".__S3MethodsTable__.",
-      ".packageName", ".First.lib", ".onLoad", ".onAttach",
-      ".conflicts.OK", ".noGenerics"))
+  if (export_all) {
+    # Copy all the objects from namespace env to package env, so that they
+    # are visible in global env.
+    copy_env(nsenv, pkgenv,
+      ignore = c(".__NAMESPACE__.", ".__S3MethodsTable__.",
+        ".packageName", ".First.lib", ".onLoad", ".onAttach",
+        ".conflicts.OK", ".noGenerics"))
+
+  } else {
+    # Export only the objects specified in NAMESPACE
+    # This code from base::attachNamespace
+    exports <- getNamespaceExports(nsenv)
+    importIntoEnv(pkgenv, exports, nsenv, exports)
+  }
 }

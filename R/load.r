@@ -13,24 +13,64 @@
 #' \code{/src/} directory is experimental. See \code{\link{compile_dll}}
 #' for more information about compiling code.
 #'
+#' The namespace environment \code{<namespace:pkgname>}, is a child of
+#' the imports environment, which has the name attribute
+#' \code{imports:pkgname}. It is in turn is a child of
+#' \code{<namespace:base>}, which is a child of the global environment.
+#'
+#' The package environment \code{<package:pkgname>} is an ancestor of the
+#' global environment. Normally when loading a package, the objects
+#' listed as exports in the NAMESPACE file are copied from the namespace
+#' to the package environment. However, \code{load_all} by default will
+#' copy all objects (not just the ones listed as exports) to the package
+#' environment. This is useful during development because it makes all
+#' objects easy to access.
+#'
+#' To export only the objects listed as exports, use
+#' \code{export_all=TRUE}. This more closely simulates behavior when
+#' loading an installed package with `library()`, and can be useful for
+#' checking for missing exports.
+#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param reset clear package environment and reset file cache before loading
 #'   any pieces of the package.
 #' @param recompile force a recompile of DLL from source code, if present.
+#' @param export_all If \code{TRUE} (the default), export all objects.
+#'   If \code{FALSE}, export only the objects that are listed as exports
+#'   in the NAMESPACE file.
 #' @param self For internal use only. (This is used when \code{load_all}
 #'   is called from \code{\link{reload_devtools}})
-#' 
+#'
+#' @seealso \code{\link{unload}}
+#' @seealso \code{\link{compile_dll}}
+#' @seealso \code{\link{clean_dll}}
 #' @keywords programming
+#' @examples
+#' \dontrun{
+#'
+#' # Load the package in the current directory
+#' load_all("./")
+#'
+#' # Running again loads changed files
+#' load_all("./")
+#'
+#' # With reset=TRUE, unload and reload the package for a clean start
+#' load_all("./", TRUE)
+#'
+#' # With export_all=FALSE, only objects listed as exports in NAMESPACE
+#' # are exported
+#' load_all("./", export_all = FALSE)
+#' }
 #' @export
 load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
-  self = FALSE) {
+  export_all = TRUE, self = FALSE) {
 
   pkg <- as.package(pkg)
 
   # Reloading devtools is a special case
   if (pkg$package == "devtools" && self == FALSE) {
-    out <- reload_devtools(pkg, reset)
+    out <- reload_devtools(pkg, reset, recompile, export_all)
     return(invisible(out))
   } else {
     message("Loading ", pkg$package)
@@ -85,7 +125,7 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
   # Set up the package environment ------------------------------------
   # Create the package environment and copy over objects from the
   # namespace environment.
-  attach_ns(pkg)
+  attach_ns(pkg, export_all)
 
   run_onattach(pkg)
 

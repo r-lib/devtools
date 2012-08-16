@@ -11,9 +11,7 @@
 #'
 #' @param pkg package description, can be path or package name.  This
 #'   must be the devtools package.
-#' @param reset clear package environment and reset file cache before loading
-#'   any pieces of the package.
-reload_devtools <- function(pkg = NULL, reset = FALSE) {
+reload_devtools <- function(pkg = NULL, ...) {
   pkg <- as.package(pkg)
 
   newenv <- copy_env(ns_env(pkg), ignore = ".__NAMESPACE__.")
@@ -24,5 +22,5 @@ reload_devtools <- function(pkg = NULL, reset = FALSE) {
   # newenv$load_all <- load_all
 
   # Now we can reload devtools by calling load_all from the new environment
-  newenv$load_all(pkg, reset, self = TRUE)
+  newenv$load_all(pkg, ..., self = TRUE)
 }
