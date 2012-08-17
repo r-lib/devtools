@@ -24,7 +24,7 @@ dev_help <- function(topic, stage = "render", type = getOption("help_type")) {
     stop("Could not find topic ", topic, " in: ", dev)
   }
   
-  pkg <- names(path)[1]
+  pkg <- basename(names(path)[1])
   view_rd(path, pkg, stage = stage, type = type)
 } 
 
