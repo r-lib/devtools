@@ -22,7 +22,14 @@ find_pkg_topic <- function(pkg, topic) {
 
 # @return complete path to man file, with name giving path to package.
 find_topic <- function(topic) {
-  pkgs <- dev_packages()
+  pieces <- strsplit(topic, "::")[[1]]
+  if (length(pieces) == 1) {
+    pkgs <- dev_packages()
+  } else {
+    pkgs <- pieces[1]
+    topic <- pieces[2]
+  }
+  
   for (pkg in pkgs) {
     path <- getNamespaceInfo(pkg, "path")
     rd <- find_pkg_topic(path, topic)
