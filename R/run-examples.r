@@ -78,11 +78,26 @@ run_one_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) 
 #' @param topic Name or topic (or name of Rd) file to run examples for
 #' @export
 #' @family example functions
+#' @examples
+#' \dontrun{
+#' # Runs installed example:
+#' library("ggplot2")
+#' example("ggplot")
+#'
+#' # Runs develoment example:
+#' load_all("ggplot2")
+#' dev_example("ggplot")
+#' }
 dev_example <- function(topic, strict = FALSE) {
   path <- find_topic(topic)
-  pkg <- as.package(names(path)[[1]])
   
+  if (is.null(path)) {
+    stop("Can't find development example for topic ", topic, call. = FALSE)
+  }
+  
+  pkg <- as.package(names(path)[[1]])
   load_all(pkg)
+  
   run_one_example(topic, path, pkg, strict = strict)
 }
 
