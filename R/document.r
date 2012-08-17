@@ -31,7 +31,7 @@ document <- function(pkg = NULL, clean = FALSE, roclets = c("collate", "namespac
   roclets <- paste(roclets, "_roclet", sep = "")
   for (roclet in roclets) {
     roc <- match.fun(roclet)()
-    results <- roxygen2:::roc_process(roc, parsed, pkg$path)
+    results <- with_collate("C", roxygen2:::roc_process(roc, parsed, pkg$path))
     roxygen2:::roc_output(roc, results, pkg$path)
   }
   
