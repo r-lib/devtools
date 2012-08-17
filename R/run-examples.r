@@ -58,8 +58,10 @@ run_one_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) 
   tmp <- tempfile()
   on.exit(unlink(tmp))
 
-  # Use internal Rd2ex code which strips out \dontrun etc
+  # Use internal Rd2ex code which strips out \dontrun etc - if there is
+  # no example it doesn't create the file
   tools:::Rd2ex(rd, tmp)
+  if (!file.exists(tmp)) return(invisible(NULL))
   
   if (strict) {
     ex <- c(paste("library('", pkg$package, "')", sep = ""), readLines(tmp))
