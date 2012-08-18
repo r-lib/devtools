@@ -1,3 +1,8 @@
+* `install_github` now accepts `auth_user` and `password` arguments if you
+  want to install a package in a private github repo. You only need to specify
+  `auth_user` if it's not your package (i.e. it's not your `username`) (Fixes
+  #116)
+
 * `create` function makes it easier to create a package skeleton using
   devtools standards.
 

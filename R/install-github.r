@@ -12,6 +12,10 @@
 #'   them must be \code{NULL}.
 #' @param subdir subdirectory within repo that contains the R package.
 #' @param branch Deprecated. Use \code{ref} instead.
+#' @param auth_user your github username if you're attempting to install
+#'   a package hosted in a private repository (and your username is different
+#'   to \code{username})
+#' @param password your github password
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
@@ -19,8 +23,9 @@
 #' \dontrun{
 #' install_github("roxygen")
 #' }
+#' @importFrom httr authenticate
 install_github <- function(repo, username = getOption("github.user"),
-  ref = "master", pull = NULL, subdir = NULL, branch = NULL, ...) {
+  ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL, password = NULL, ...) {
 
   if (!is.null(branch)) {
     warning("'branch' is deprecated. In the future, please use 'ref' instead.")
@@ -35,17 +40,27 @@ install_github <- function(repo, username = getOption("github.user"),
     username <- pullinfo$username
     ref <- pullinfo$ref
   }
-
+  
+  if (!is.null(password)) {
+    auth <- authenticate(
+      user = if (is.null(auth_user)) username else auth_user,
+      password = password,
+      type = "basic")
+  } else {
+    auth <- NULL
+  }
+  
   message("Installing github repo(s) ", 
     paste(repo, ref, sep = "/", collapse = ", "),
     " from ", 
     paste(username, collapse = ", "))
   name <- paste(username, "-", repo, sep = "")
   
-  url <- paste("https://github.com/", username, "/", repo,
+  url <- paste("https://api.github.com/repos/", username, "/", repo,
     "/zipball/", ref, sep = "")
 
-  install_url(url, paste(repo, ".zip", sep = ""), subdir = subdir, ...)
+  install_url(url, paste(repo, ".zip", sep = ""), subdir = subdir, 
+    config = auth, ...)
 }
 
 # Retrieve the username and ref for a pull request

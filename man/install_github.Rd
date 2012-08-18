@@ -4,7 +4,7 @@
 \usage{
   install_github(repo, username = getOption("github.user"),
     ref = "master", pull = NULL, subdir = NULL,
-    branch = NULL, ...)
+    branch = NULL, auth_user = NULL, password = NULL, ...)
 }
 \arguments{
   \item{username}{Github username}
@@ -22,6 +22,13 @@
   R package.}
 
   \item{branch}{Deprecated. Use \code{ref} instead.}
+
+  \item{auth_user}{your github username if you're
+  attempting to install a package hosted in a private
+  repository (and your username is different to
+  \code{username})}
+
+  \item{password}{your github password}
 
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}
