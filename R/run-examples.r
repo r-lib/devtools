@@ -11,21 +11,19 @@
 #'   with the (lexicographically) first file.  This is useful if you have a 
 #'   lot of examples and don't want to rerun them every time when you fix a 
 #'   problem.
-#' @param strict if \code{TRUE}, the package is first installed, and then each
-#'   example is run in a clean R environment somewhat mimicking what 
-#'   \code{R CMD check} does.  Since this involves installing the package
-#'   you should probably be in \code{\link{dev_mode}}
 #' @family example functions
 #' @keywords programming
 #' @export
-run_examples <- function(pkg = NULL, start = NULL, strict = TRUE) {
+run_examples <- function(pkg = NULL, start = NULL, show = TRUE, test = FALSE, run = TRUE) {
   pkg <- as.package(pkg)
+  load_all(pkg, reset = TRUE, export_all = FALSE)
+  on.exit(load_all(pkg, reset = TRUE))
   document(pkg)
   
   path_man <- file.path(pkg$path, "man")
   files <- dir(path_man, pattern = "\\.[Rr]d$", full.names = TRUE)
   names(files) <- basename(files)
-  files <- sort(files)
+  files <- with_collate("C", sort(files))
   
   if (!is.null(start)) {
     start_pos <- which(names(files) == start)
@@ -34,44 +32,78 @@ run_examples <- function(pkg = NULL, start = NULL, strict = TRUE) {
     }
   }
   
-  suppressWarnings(rd <- lapply(files, tools::parse_Rd))
-  has_examples <- function(rd) {
-    tags <- tools:::RdTags(rd)
-    any(tags == "\\examples")
-  }
-  rd <- Filter(has_examples, rd)
-
-  if (strict) install(pkg)
-
-  message("Running ", length(rd), " examples in ", pkg$package)
-  message(paste(rep("-", getOption("width"), collapse = "")))
-  mapply(run_one_example, names(rd), rd, 
-    MoreArgs = list(env = parent.frame(), strict = strict, pkg = pkg))  
+  message("Running ", length(files), " examples in ", pkg$package)
+  rule()
+  lapply(files, run_example, show = show, test = test, run = run)
+  
   invisible()
 }
+# If an error occurs, should print out the suspect line of code, and offer
+# the following options:
+#   * skip to the next example
+#   * quit
+#   * browser
+#   * rerun example and rerun
+#   * reload code and rerun
 
-run_one_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) {
-  message("Checking ", name, "...")
-  message(paste(rep("-", getOption("width"), collapse = "")))
+#' @importFrom evaluate evaluate replay
+#' @importFrom tools parse_Rd
+run_example <- function(path, show = TRUE, test = FALSE, run = TRUE, env = new.env(parent = globalenv())) {  
+  rd <- parse_Rd(path)
+  ex <- rd[rd_tags(rd) == "examples"]
+  code <- process_ex(ex, show = show, test = test, run = run)
+  if (is.null(code)) return()
   
-  # Need to write out to temporary file to circumvent bug in source + echo = T
-  tmp <- tempfile()
-  on.exit(unlink(tmp))
+  message("Running examples in ", basename(path))
+  rule()  
 
-  # Use internal Rd2ex code which strips out \dontrun etc - if there is
-  # no example it doesn't create the file
-  tools:::Rd2ex(rd, tmp)
-  if (!file.exists(tmp)) return(invisible(NULL))
+  code <- paste(code, collapse = "")
+  results <- evaluate(code, env)
+  replay(results)
+}
+
+# cat(extract_example("man/reload.Rd", run = F))
+# cat(extract_example("man/reload.Rd", run = T))
+# cat(extract_example("man/dev_mode.Rd", test = F))
+# cat(extract_example("man/dev_mode.Rd", test = T))
+
+process_ex <- function(rd, show = TRUE, test = FALSE, run = TRUE) {
+  tag <- rd_tag(rd)
   
-  if (strict) {
-    ex <- c(paste("library('", pkg$package, "')", sep = ""), readLines(tmp))
-    writeLines(ex, tmp)
-    clean_source(tmp)
-  } else {
-    source(tmp, echo = TRUE, keep.source = TRUE, max.deparse.length = Inf,
-      skip.echo = 6)    
+  recurse <- function(rd) {
+    unlist(lapply(rd, process_ex, show = show, test = test, run = run))
   }
-  cat("\n\n")
+  
+  if (is.null(tag) || tag == "examples") {
+    return(recurse(rd))
+  }
+
+  # Base case
+  if (tag %in% c("RCODE", "COMMENT", "TEXT", "VERB")) {
+    return(rd[[1]])
+  }
+  
+  # Conditional execution
+  if (tag %in% c("dontshow", "dontrun", "donttest", "testonly")) {
+    out <- recurse(rd)
+    
+    if ((tag == "dontshow" && show) ||
+        (tag == "dontrun" && run) ||
+        (tag == "donttest" && test) ||
+        (tag == "testonly" && !test)) {
+      type <- paste("\n# ", toupper(tag), "\n", sep = "")
+      out <- c(type, out)
+      out <- gsub("\n", "\n# ", out)
+    }
+    return(out)
+  }
+  
+  if (tag %in% c("dots", "ldots")) {
+    return("...")
+  }
+  
+  warning("Unknown tag ", tag, call. = FALSE)
+  tag
 }
 
 #' Run a examples for an in-development function.
@@ -110,3 +142,18 @@ dev_example <- function(topic, strict = FALSE) {
 #   * browser
 #   * rerun example and rerun
 #   * reload code and rerun
+rd_tag <- function(x) {
+  tag <- attr(x, "Rd_tag")
+  if (is.null(tag)) return()
+  
+  gsub("\\", "", tag, fixed = TRUE)
+}
+
+rd_tags <- function(x) {
+  vapply(x, function(x) rd_tag(x) %||% "", character(1))
+}
+
+remove_tag <- function(x) {
+  attr(x, "Rd_tag") <- NULL
+  x
+}

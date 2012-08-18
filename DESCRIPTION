@@ -13,7 +13,8 @@ Imports:
     utils,
     tools,
     memoise,
-    whisker
+    whisker,
+    evaluate
 Suggests:
     testthat,
     roxygen2,
