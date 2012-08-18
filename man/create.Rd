@@ -10,9 +10,6 @@
 
   \item{description}{list of description values to override
   default values or add additional values.}
-
-  \item{...}{other options passed to
-  \code{package.skeleton}}
 }
 \description{
   Similar to \code{\link{package.skeleton}}, except that it
