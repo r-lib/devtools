@@ -12,6 +12,11 @@
 #'   lot of examples and don't want to rerun them every time when you fix a 
 #'   problem.
 #' @family example functions
+#' @param show if \code{TRUE}, code in \code{\\dontshow{}} will be commented
+#'   out
+#' @param test if \code{TRUE}, code in \code{\\donttest{}} will be commented
+#'   out. If \code{FALSE}, code in \code{\\testonly{}} will be commented out.
+#' @param run if \code{TRUE}, code in \code{\\donrun{}} will be commented out.
 #' @keywords programming
 #' @export
 run_examples <- function(pkg = NULL, start = NULL, show = TRUE, test = FALSE, run = TRUE) {

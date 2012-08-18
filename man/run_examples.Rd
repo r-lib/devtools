@@ -14,6 +14,16 @@
   file.  This is useful if you have a lot of examples and
   don't want to rerun them every time when you fix a
   problem.}
+
+  \item{show}{if \code{TRUE}, code in \code{\\dontshow{}}
+  will be commented out}
+
+  \item{test}{if \code{TRUE}, code in \code{\\donttest{}}
+  will be commented out. If \code{FALSE}, code in
+  \code{\\testonly{}} will be commented out.}
+
+  \item{run}{if \code{TRUE}, code in \code{\\donrun{}} will
+  be commented out.}
 }
 \description{
   One of the most frustrating parts of `R CMD check` is
