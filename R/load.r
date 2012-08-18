@@ -104,6 +104,7 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
 
 
   # Set up the namespace environment ----------------------------------
+  # This mimics the procedure in loadNamespace
   nsenv <- ns_env(pkg, create = TRUE)
 
   out <- list(env = nsenv)
@@ -134,5 +135,5 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
 
 
 is.locked <- function(pkg = NULL) {
-  environmentIsLocked(as.environment(env_pkg_name(pkg)))
+  environmentIsLocked(as.environment(pkg_env_name(pkg)))
 }

@@ -112,6 +112,6 @@ test_that("unload() removes package environments from search", {
   # This is what makes the objects inaccessible from global env
   expect_false(is_ancestor_env(pkgenv, .GlobalEnv))
   # Another check of same thing
-  expect_false(env_pkg_name("namespace") %in% search())
+  expect_false(pkg_env_name("namespace") %in% search())
 
 })

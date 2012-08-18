@@ -32,7 +32,7 @@ reload <- function(pkg = NULL) {
 
 # Reports whether a package is loaded and attached
 is.loaded_pkg <- function(pkg = NULL) {
-  env_pkg_name(pkg) %in% search()
+  pkg_env_name(pkg) %in% search()
 }
 
 # Reports whether a package is loaded into a namespace. It may be

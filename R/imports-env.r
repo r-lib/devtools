@@ -1,4 +1,3 @@
-
 #' Package imports environment
 #' Contains objects imported from other packages. Is the parent of the
 #' package namespace environment, and is a child of <namespace:base>,
@@ -13,9 +12,9 @@ imports_env <- function(pkg = NULL) {
 
   env <- parent.env(ns_env(pkg))
 
-  if (attr(env, 'name') != env_imports_name(pkg)) {
+  if (attr(env, 'name') != imports_env_name(pkg)) {
     stop("Imports environment does not have attribute 'name' with value ",
-      env_imports_name(pkg),
+      imports_env_name(pkg),
       ". This probably means that the namespace environment was not created correctly.")
   }
 
@@ -25,7 +24,7 @@ imports_env <- function(pkg = NULL) {
 
 # Generate name of package imports environment
 # Contains exported objects
-env_imports_name <- function(pkg = NULL) {
+imports_env_name <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   paste("imports:", pkg$package, sep = "")
 }

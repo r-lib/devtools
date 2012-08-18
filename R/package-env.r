@@ -39,7 +39,7 @@ attach_ns <- function(pkg, export_all = TRUE) {
 #' @export
 pkg_env <- function(pkg = NULL, create = FALSE) {
   pkg <- as.package(pkg)
-  name <- env_pkg_name(pkg)
+  name <- pkg_env_name(pkg)
   
   if (!is.loaded_pkg(pkg)) {
     if (create) {
@@ -67,7 +67,7 @@ clear_pkg_env <- function(pkg = NULL) {
 
 # Generate name of package environment
 # Contains exported objects
-env_pkg_name <- function(pkg = NULL) {
+pkg_env_name <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   paste("package:", pkg$package, sep = "")
 }
