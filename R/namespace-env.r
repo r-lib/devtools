@@ -1,3 +1,39 @@
+#' Generate a namespace environment for a package.
+#'
+#' Contains all (exported and non-exported) objects, and is a descendent of
+#' \code{R_GlobalEnv}. The hieararchy is \code{<namespace:pkg>}, 
+#' \code{<imports:pkg>}, \code{<namespace:base>}, and then
+#' \code{R_GlobalEnv}.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @param create if namespace environment doesn't already exist,
+#'   create it?
+#' @keywords programming
+#' @export
+ns_env <- function(pkg = NULL, create = FALSE) {
+  pkg <- as.package(pkg)
+
+  if (!is.loaded_ns(pkg)) {
+    if (create) {
+      env <- makeNamespace(pkg$package)
+      setPackageName(pkg$package, env)
+      # Create devtools metadata in namespace
+      dev_meta(pkg$package, create = TRUE)
+
+      setNamespaceInfo(env, "path", pkg$path)
+      setup_ns_imports(pkg)
+    } else {
+      return(NULL)
+    }
+  } else {
+    env <- asNamespace(pkg$package)
+  }
+
+  env
+}
+
+
 # This is taken directly from base::loadNamespace() in R 2.15.1
 makeNamespace <- function(name, version = NULL, lib = NULL) {
   impenv <- new.env(parent = .BaseNamespaceEnv, hash = TRUE)
@@ -64,29 +100,6 @@ parse_ns_file <- function(pkg) {
     mustExist = FALSE)
 }
 
-
-# Create the package environment and copy over objects from the
-# namespace environment
-attach_ns <- function(pkg, export_all = TRUE) {
-  pkg <- as.package(pkg)
-  nsenv <- ns_env(pkg)
-  pkgenv <- pkg_env(pkg, create = TRUE)
-
-  if (export_all) {
-    # Copy all the objects from namespace env to package env, so that they
-    # are visible in global env.
-    copy_env(nsenv, pkgenv,
-      ignore = c(".__NAMESPACE__.", ".__S3MethodsTable__.",
-        ".packageName", ".First.lib", ".onLoad", ".onAttach",
-        ".conflicts.OK", ".noGenerics"))
-
-  } else {
-    # Export only the objects specified in NAMESPACE
-    # This code from base::attachNamespace
-    exports <- getNamespaceExports(nsenv)
-    importIntoEnv(pkgenv, exports, nsenv, exports)
-  }
-}
 
 register_s3 <- function(pkg) {
   pkg <- as.package(pkg)
