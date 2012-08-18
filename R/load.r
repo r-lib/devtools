@@ -105,9 +105,10 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
 
   # Set up the namespace environment ----------------------------------
   # This mimics the procedure in loadNamespace
-  nsenv <- ns_env(pkg, create = TRUE)
 
-  out <- list(env = nsenv)
+  if (!is.loaded_ns(pkg)) create_ns_env(pkg)
+
+  out <- list(env = ns_env(pkg))
 
   # Load dependencies into the imports environment
   load_imports(pkg)
