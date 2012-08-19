@@ -6,9 +6,6 @@
 }
 \arguments{
   \item{name}{The name of a loaded package}
-
-  \item{create}{If the metadata environment does not exist,
-  create it?  For internal use only.}
 }
 \description{
   If the package was not loaded with devtools, returns
