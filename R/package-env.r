@@ -59,16 +59,6 @@ pkg_env <- function(pkg = NULL) {
 }
 
 
-#' Detach development environment
-#' @keywords internal
-clear_pkg_env <- function(pkg = NULL) {
-  
-  if (is_attached(pkg)) {
-    unload(pkg)
-  }  
-}
-
-
 # Generate name of package environment
 # Contains exported objects
 pkg_env_name <- function(pkg = NULL) {

@@ -94,7 +94,7 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
   
   if (reset) {
     clear_cache()
-    clear_pkg_env(pkg)
+    if (is_loaded(pkg)) unload(pkg)
   }
 
   if (recompile) clean_dll(pkg)
