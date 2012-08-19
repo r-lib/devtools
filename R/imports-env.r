@@ -1,4 +1,4 @@
-#' Package imports environment
+#' Return imports environment for a package
 #'
 #' Contains objects imported from other packages. Is the parent of the
 #' package namespace environment, and is a child of <namespace:base>,
