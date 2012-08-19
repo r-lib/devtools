@@ -74,19 +74,15 @@ test_that("Namespace, imports, and package environments have correct hierarchy",
   load_all("namespace")
 
   pkgenv <- pkg_env("namespace")
-  nsenv   <- ns_env("namespace")
-  imp_env <- imports_env("namespace")
+  nsenv  <- ns_env("namespace")
+  impenv <- imports_env("namespace")
 
-
-  expect_identical(parent_envs(nsenv)[[2]], imp_env)
+  expect_identical(parent_envs(nsenv)[[2]], impenv)
   expect_identical(parent_envs(nsenv)[[3]], .BaseNamespaceEnv)
   expect_identical(parent_envs(nsenv)[[4]], .GlobalEnv)
 
   # pkgenv should be an ancestor of the global environment
   expect_true(is_ancestor_env(pkgenv, .GlobalEnv))
-
-  # Import environment should have name attribute
-  expect_equal(attr(imp_env, "name"), "imports:namespace")
 
   unload("namespace")
 })
@@ -96,7 +92,6 @@ test_that("unload() removes package environments from search", {
   load_all("namespace")
   pkgenv <- pkg_env("namespace")
   nsenv   <- ns_env("namespace")
-  imp_env <- imports_env("namespace")
   unload("namespace")
   unload(inst("compiler"))
   unload(inst("MASS"))
@@ -114,4 +109,26 @@ test_that("unload() removes package environments from search", {
   # Another check of same thing
   expect_false(pkg_env_name("namespace") %in% search())
 
+})
+
+
+test_that("Environments have the correct attributes", {
+  load_all("namespace")
+  pkgenv <- pkg_env("namespace")
+  impenv <- imports_env("namespace")
+
+  # as.environment finds the same package environment
+  expect_identical(pkgenv, as.environment("package:namespace"))
+
+  # Check name attribute of package environment
+  expect_identical(attr(pkgenv, "name"), "package:namespace")
+
+  # Check path attribute of package environment
+  wd <- normalizePath(devtest("namespace"))
+  expect_identical(wd, attr(pkgenv, "path"))
+
+  # Check name attribute of imports environment
+  expect_identical(attr(impenv, "name"), "imports:namespace")
+
+  unload("namespace")
 })
