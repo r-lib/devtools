@@ -85,7 +85,7 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
   }
   
   # If installed version of package loaded, unload it
-  if (is.loaded_ns(pkg) && is.null(dev_meta(pkg$package))) {
+  if (is_loaded(pkg) && is.null(dev_meta(pkg$package))) {
     unload(pkg)
   }
 
@@ -106,7 +106,7 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
   # Set up the namespace environment ----------------------------------
   # This mimics the procedure in loadNamespace
 
-  if (!is.loaded_ns(pkg)) create_ns_env(pkg)
+  if (!is_loaded(pkg)) create_ns_env(pkg)
 
   out <- list(env = ns_env(pkg))
 
@@ -126,7 +126,7 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
 
   # Set up the package environment ------------------------------------
   # Create the package environment if needed
-  if (!is.loaded_pkg(pkg)) attach_ns(pkg)
+  if (!is_attached(pkg)) attach_ns(pkg)
   
   # Copy over objects from the namespace environment
   export_ns(pkg, export_all)

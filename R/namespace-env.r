@@ -12,7 +12,7 @@
 ns_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
 
-  if (!is.loaded_ns(pkg)) return(NULL)
+  if (!is_loaded(pkg)) return(NULL)
 
   asNamespace(pkg$package)
 }
@@ -22,7 +22,7 @@ ns_env <- function(pkg = NULL) {
 create_ns_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
 
-  if (is.loaded_ns(pkg)) {
+  if (is_loaded(pkg)) {
     stop("Namespace for ", pkg$package, " already exists.")
   }
 

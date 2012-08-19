@@ -1,4 +1,5 @@
 #' Package imports environment
+#'
 #' Contains objects imported from other packages. Is the parent of the
 #' package namespace environment, and is a child of <namespace:base>,
 #' which is a child of R_GlobalEnv,
@@ -6,7 +7,7 @@
 imports_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
 
-  if (!is.loaded_ns(pkg)) {
+  if (!is_loaded(pkg)) {
     stop("Namespace environment must be created before accessing imports environment.")
   }
 

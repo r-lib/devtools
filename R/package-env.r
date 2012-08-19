@@ -3,7 +3,7 @@ attach_ns <- function(pkg) {
   pkg <- as.package(pkg)
   nsenv <- ns_env(pkg)
 
-  if (is.loaded_pkg(pkg)) {
+  if (is_attached(pkg)) {
     stop("Package ", pkg$package, " is already attached.")
   }
 
@@ -53,7 +53,7 @@ pkg_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   name <- pkg_env_name(pkg)
   
-  if (!is.loaded_pkg(pkg)) return(NULL)
+  if (!is_attached(pkg)) return(NULL)
 
   as.environment(name)
 }
@@ -63,7 +63,7 @@ pkg_env <- function(pkg = NULL) {
 #' @keywords internal
 clear_pkg_env <- function(pkg = NULL) {
   
-  if (is.loaded_pkg(pkg)) {
+  if (is_attached(pkg)) {
     unload(pkg)
   }  
 }

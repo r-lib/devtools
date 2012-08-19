@@ -102,8 +102,8 @@ test_that("unload() removes package environments from search", {
   unload(inst("MASS"))
 
   # Should report not loaded for package and namespace environments
-  expect_false(is.loaded_pkg("namespace"))
-  expect_false(is.loaded_ns("namespace"))
+  expect_false(is_attached("namespace"))
+  expect_false(is_loaded("namespace"))
 
   # R's asNamespace function should error
   expect_error(asNamespace("namespace"))
