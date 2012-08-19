@@ -1,3 +1,48 @@
+#' Return the namespace environment for a package.
+#'
+#' Contains all (exported and non-exported) objects, and is a descendent of
+#' \code{R_GlobalEnv}. The hieararchy is \code{<namespace:pkg>}, 
+#' \code{<imports:pkg>}, \code{<namespace:base>}, and then
+#' \code{R_GlobalEnv}.
+#'
+#' If the package is not loaded, this function returns \code{NULL}.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @keywords programming
+#' @seealso \code{\link{pkg_env}} for the attached environment that
+#'   contains the exported objects.
+#' @seealso \code{\link{imports_env}} for the environment that contains
+#'   imported objects for the package.
+#' @export
+ns_env <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
+
+  if (!is_loaded(pkg)) return(NULL)
+
+  asNamespace(pkg$package)
+}
+
+
+# Create the namespace environment for a package
+create_ns_env <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
+
+  if (is_loaded(pkg)) {
+    stop("Namespace for ", pkg$package, " already exists.")
+  }
+
+  env <- makeNamespace(pkg$package)
+  setPackageName(pkg$package, env)
+  # Create devtools metadata in namespace
+  create_dev_meta(pkg$package)
+
+  setNamespaceInfo(env, "path", pkg$path)
+  setup_ns_imports(pkg)
+
+  env
+}
+
 # This is taken directly from base::loadNamespace() in R 2.15.1
 makeNamespace <- function(name, version = NULL, lib = NULL) {
   impenv <- new.env(parent = .BaseNamespaceEnv, hash = TRUE)
@@ -33,14 +78,26 @@ setup_ns_imports <- function(pkg) {
 # Read the NAMESPACE file and set up the exports metdata. This must be
 # run after all the objects are loaded into the namespace because
 # namespaceExport throw errors if the objects are not present.
-setup_ns_exports <- function(pkg) {
+setup_ns_exports <- function(pkg, export_all = FALSE) {
   nsInfo <- parse_ns_file(pkg)
 
-  # This code is from base::loadNamespace
-  exports <- nsInfo$exports
-  for (p in nsInfo$exportPatterns)
-    exports <- c(ls(env, pattern = p, all.names = TRUE), exports)
+  if (export_all) {
+    exports <- ls(ns_env(pkg), all.names = TRUE)
 
+    # List of things to ignore is from loadNamespace. There are also a
+    # couple things to ignore from devtools.
+    ignoreidx <- exports %in% c( ".__NAMESPACE__.",
+      ".__S3MethodsTable__.", ".packageName", ".First.lib", ".onLoad",
+      ".onAttach", ".conflicts.OK", ".noGenerics",
+      ".__DEVTOOLS__", ".cache")
+    exports <- exports[!ignoreidx]
+
+  } else {
+    # This code is from base::loadNamespace
+    exports <- nsInfo$exports
+    for (p in nsInfo$exportPatterns)
+      exports <- c(ls(env, pattern = p, all.names = TRUE), exports)
+  }
   # Update the exports metadata for the namespace with base::namespaceExport
   # It will throw warnings if objects are already listed in the exports
   # metadata, so catch those warnings and ignore them.
@@ -65,33 +122,19 @@ parse_ns_file <- function(pkg) {
 }
 
 
-# Create the package environment and copy over objects from the
-# namespace environment
-attach_ns <- function(pkg, export_all = TRUE) {
-  pkg <- as.package(pkg)
-  nsenv <- ns_env(pkg)
-  pkgenv <- pkg_env(pkg, create = TRUE)
-
-  if (export_all) {
-    # Copy all the objects from namespace env to package env, so that they
-    # are visible in global env.
-    copy_env(nsenv, pkgenv,
-      ignore = c(".__NAMESPACE__.", ".__S3MethodsTable__.",
-        ".packageName", ".First.lib", ".onLoad", ".onAttach",
-        ".conflicts.OK", ".noGenerics"))
-
-  } else {
-    # Export only the objects specified in NAMESPACE
-    # This code from base::attachNamespace
-    exports <- getNamespaceExports(nsenv)
-    importIntoEnv(pkgenv, exports, nsenv, exports)
-  }
-}
-
+# Register the S3 methods for this package
 register_s3 <- function(pkg) {
   pkg <- as.package(pkg)
   nsInfo <- parse_ns_file(pkg)
 
   # Adapted from loadNamespace
   registerS3methods(nsInfo$S3methods, pkg$package, ns_env(pkg))
+}
+
+
+# Reports whether a package is loaded into a namespace. It may be
+# attached or not attached.
+is_loaded <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
+  pkg$package %in% loadedNamespaces()
 }

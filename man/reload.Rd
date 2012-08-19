@@ -1,6 +1,6 @@
 \name{reload}
 \alias{reload}
-\title{Detach and reload package.}
+\title{Unload and reload package.}
 \usage{
   reload(pkg = NULL)
 }

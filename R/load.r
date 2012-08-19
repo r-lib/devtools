@@ -85,7 +85,7 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
   }
   
   # If installed version of package loaded, unload it
-  if (is.loaded_ns(pkg) && is.null(dev_meta(pkg$package))) {
+  if (is_loaded(pkg) && is.null(dev_meta(pkg$package))) {
     unload(pkg)
   }
 
@@ -94,7 +94,7 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
   
   if (reset) {
     clear_cache()
-    clear_pkg_env(pkg)
+    if (is_loaded(pkg)) unload(pkg)
   }
 
   if (recompile) clean_dll(pkg)
@@ -104,9 +104,11 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
 
 
   # Set up the namespace environment ----------------------------------
-  nsenv <- ns_env(pkg, create = TRUE)
+  # This mimics the procedure in loadNamespace
 
-  out <- list(env = nsenv)
+  if (!is_loaded(pkg)) create_ns_env(pkg)
+
+  out <- list(env = ns_env(pkg))
 
   # Load dependencies into the imports environment
   load_imports(pkg)
@@ -118,21 +120,18 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
 
   # Set up the exports in the namespace metadata (this must happen after
   # the objects are loaded)
-  setup_ns_exports(pkg)
+  setup_ns_exports(pkg, export_all)
 
   run_onload(pkg)
 
   # Set up the package environment ------------------------------------
-  # Create the package environment and copy over objects from the
-  # namespace environment.
-  attach_ns(pkg, export_all)
+  # Create the package environment if needed
+  if (!is_attached(pkg)) attach_ns(pkg)
+  
+  # Copy over objects from the namespace environment
+  export_ns(pkg)
 
   run_onattach(pkg)
 
   invisible(out)  
-}
-
-
-is.locked <- function(pkg = NULL) {
-  environmentIsLocked(as.environment(env_pkg_name(pkg)))
 }
