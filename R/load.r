@@ -120,7 +120,7 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
 
   # Set up the exports in the namespace metadata (this must happen after
   # the objects are loaded)
-  setup_ns_exports(pkg)
+  setup_ns_exports(pkg, export_all)
 
   run_onload(pkg)
 
@@ -129,7 +129,7 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
   if (!is_attached(pkg)) attach_ns(pkg)
   
   # Copy over objects from the namespace environment
-  export_ns(pkg, export_all)
+  export_ns(pkg)
 
   run_onattach(pkg)
 

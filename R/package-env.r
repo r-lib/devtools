@@ -14,25 +14,13 @@ attach_ns <- function(pkg) {
 
 
 # Copy over the objects from the namespace env to the package env
-export_ns <- function(pkg, export_all = TRUE) {
+export_ns <- function(pkg) {
   pkg <- as.package(pkg)
   nsenv <- ns_env(pkg)
   pkgenv <- pkg_env(pkg)
 
-  if (export_all) {
-    # Copy all the objects from namespace env to package env, so that they
-    # are visible in global env.
-    copy_env(nsenv, pkgenv,
-      ignore = c(".__NAMESPACE__.", ".__S3MethodsTable__.",
-        ".packageName", ".First.lib", ".onLoad", ".onAttach",
-        ".conflicts.OK", ".noGenerics"))
-
-  } else {
-    # Export only the objects specified in NAMESPACE
-    # This code from base::attachNamespace
-    exports <- getNamespaceExports(nsenv)
-    importIntoEnv(pkgenv, exports, nsenv, exports)
-  }
+  exports <- getNamespaceExports(nsenv)
+  importIntoEnv(pkgenv, exports, nsenv, exports)
 }
 
 
