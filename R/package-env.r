@@ -65,3 +65,9 @@ pkg_env_name <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   paste("package:", pkg$package, sep = "")
 }
+
+
+# Reports whether a package is loaded and attached
+is_attached <- function(pkg = NULL) {
+  pkg_env_name(pkg) %in% search()
+}

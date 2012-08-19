@@ -30,18 +30,6 @@ reload <- function(pkg = NULL) {
   }
 }
 
-# Reports whether a package is loaded and attached
-is_attached <- function(pkg = NULL) {
-  pkg_env_name(pkg) %in% search()
-}
-
-# Reports whether a package is loaded into a namespace. It may be
-# attached or not attached.
-is_loaded <- function(pkg = NULL) {
-  pkg <- as.package(pkg)
-  pkg$package %in% loadedNamespaces()
-}
-
 #' Unload a package
 #'
 #' @param pkg package description, can be path or package name.  See

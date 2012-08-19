@@ -111,3 +111,11 @@ register_s3 <- function(pkg) {
   # Adapted from loadNamespace
   registerS3methods(nsInfo$S3methods, pkg$package, ns_env(pkg))
 }
+
+
+# Reports whether a package is loaded into a namespace. It may be
+# attached or not attached.
+is_loaded <- function(pkg = NULL) {
+  pkg <- as.package(pkg)
+  pkg$package %in% loadedNamespaces()
+}
