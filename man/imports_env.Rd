@@ -1,6 +1,6 @@
 \name{imports_env}
 \alias{imports_env}
-\title{Package imports environment}
+\title{Return imports environment for a package}
 \usage{
   imports_env(pkg = NULL)
 }
