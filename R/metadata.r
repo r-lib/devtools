@@ -17,7 +17,7 @@
 #' # Clean up.
 #' unload(devtest("load-hooks"))
 #' @export
-dev_meta <- function(name, create = FALSE) {
+dev_meta <- function(name) {
   ns <- .Internal(getRegisteredNamespace(as.name(name)))
   if (is.null(ns)) {
     stop("Namespace not found for ", name, ". Is it loaded?")
