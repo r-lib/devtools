@@ -2,7 +2,12 @@
 #'
 #' Contains objects imported from other packages. Is the parent of the
 #' package namespace environment, and is a child of <namespace:base>,
-#' which is a child of R_GlobalEnv,
+#' which is a child of R_GlobalEnv.
+#' @keywords programming
+#' @seealso \code{\link{ns_env}} for the namespace environment that
+#'   all the objects (exported and not exported).
+#' @seealso \code{\link{pkg_env}} for the attached environment that contains
+#'   the exported objects.
 #' @export
 imports_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)

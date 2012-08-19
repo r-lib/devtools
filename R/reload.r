@@ -1,4 +1,4 @@
-#' Detach and reload package.
+#' Unload and reload package.
 #' 
 #' If the package is not loaded already, this does nothing.
 #' 
