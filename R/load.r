@@ -135,8 +135,3 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
 
   invisible(out)  
 }
-
-
-is.locked <- function(pkg = NULL) {
-  environmentIsLocked(as.environment(pkg_env_name(pkg)))
-}
