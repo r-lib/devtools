@@ -12,17 +12,17 @@ is_ancestor_env <- function(e, x) {
 }
 
 
-test_that("Package objects are visible from global environment", {
+test_that("Exported objects are visible from global environment", {
 
-  # a is exported, b is not. With load_all(), they should by default
-  # both be visible in the global env.
+  # a is listed as an export in NAMESPACE, b is not. But with load_all(),
+  # they should both be visible in the global env.
   load_all("namespace")
   expect_equal(a, 1)
   expect_equal(b, 2)
   unload("namespace")
 
 
-  # With export_all = FALSE, only the exported object should be visible
+  # With export_all = FALSE, only the listed export should be visible
   # in the global env.
   load_all("namespace", export_all = FALSE)
   expect_equal(a, 1)
@@ -30,7 +30,7 @@ test_that("Package objects are visible from global environment", {
   unload("namespace")
 })
 
-test_that("All package objects are loaded into namespace environment", {
+test_that("All objects are loaded into namespace environment", {
   load_all("namespace")
   nsenv <- ns_env("namespace")
   expect_equal(nsenv$a, 1)
@@ -39,13 +39,21 @@ test_that("All package objects are loaded into namespace environment", {
 })
 
 
-test_that("All package objects are copied to package environment", {
+test_that("All objects are copied to package environment", {
   load_all("namespace")
   pkgenv <- pkg_env("namespace")
   expect_equal(pkgenv$a, 1)
   expect_equal(pkgenv$b, 2)
   unload("namespace")
+
+  # With export_all = FALSE, only the listed export should be copied
+  load_all("namespace", export_all = FALSE)
+  pkgenv <- pkg_env("namespace")
+  expect_equal(pkgenv$a, 1)
+  expect_false(exists("b", envir = pkgenv))
+  unload("namespace")
 })
+
 
 test_that("Unloading and reloading a package works", {
   load_all("namespace")
