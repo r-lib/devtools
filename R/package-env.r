@@ -65,8 +65,3 @@ pkg_env_name <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   paste("package:", pkg$package, sep = "")
 }
-
-
-base_env <- function(pkg) {
-  new.env(parent = emptyenv())
-}
