@@ -29,7 +29,7 @@ create_ns_env <- function(pkg = NULL) {
   env <- makeNamespace(pkg$package)
   setPackageName(pkg$package, env)
   # Create devtools metadata in namespace
-  dev_meta(pkg$package, create = TRUE)
+  create_dev_meta(pkg$package)
 
   setNamespaceInfo(env, "path", pkg$path)
   setup_ns_imports(pkg)
