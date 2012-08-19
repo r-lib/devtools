@@ -125,9 +125,11 @@ load_all <- function(pkg = NULL, reset = FALSE, recompile = FALSE,
   run_onload(pkg)
 
   # Set up the package environment ------------------------------------
-  # Create the package environment and copy over objects from the
-  # namespace environment.
-  attach_ns(pkg, export_all)
+  # Create the package environment if needed
+  if (!is.loaded_pkg(pkg)) attach_ns(pkg)
+  
+  # Copy over objects from the namespace environment
+  export_ns(pkg, export_all)
 
   run_onattach(pkg)
 

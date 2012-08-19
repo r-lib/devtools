@@ -1,9 +1,23 @@
-# Create the package environment and copy over objects from the
-# namespace environment
-attach_ns <- function(pkg, export_all = TRUE) {
+# Create the package environment where objects will be copied to
+attach_ns <- function(pkg) {
   pkg <- as.package(pkg)
   nsenv <- ns_env(pkg)
-  pkgenv <- pkg_env(pkg, create = TRUE)
+
+  if (is.loaded_pkg(pkg)) {
+    stop("Package ", pkg$package, " is already attached.")
+  }
+
+  # This should be similar to attachNamespace
+  pkgenv <- attach(new.env(parent = emptyenv()), name = pkg_env_name(pkg))
+  attr(pkgenv, "path") <- getNamespaceInfo(nsenv, "path")
+}
+
+
+# Copy over the objects from the namespace env to the package env
+export_ns <- function(pkg, export_all = TRUE) {
+  pkg <- as.package(pkg)
+  nsenv <- ns_env(pkg)
+  pkgenv <- pkg_env(pkg)
 
   if (export_all) {
     # Copy all the objects from namespace env to package env, so that they
@@ -22,7 +36,7 @@ attach_ns <- function(pkg, export_all = TRUE) {
 }
 
 
-#' Generate a package environment
+#' Return package environment
 #'
 #' This is an environment like \code{<package:pkg>}. It is attached,
 #' so it is an ancestor of \code{R_GlobalEnv}.
@@ -34,22 +48,12 @@ attach_ns <- function(pkg, export_all = TRUE) {
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @param create if package environment doesn't already exist,
-#'   create it?
 #' @export
-pkg_env <- function(pkg = NULL, create = FALSE) {
+pkg_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   name <- pkg_env_name(pkg)
   
-  if (!is.loaded_pkg(pkg)) {
-    if (create) {
-      # This should be similar to attachNamespace
-      pkgenv <- attach(new.env(parent = emptyenv()), name = name)
-      attr(pkgenv, "path") <- pkg$path
-    } else {
-      return(NULL)
-    }
-  }
+  if (!is.loaded_pkg(pkg)) return(NULL)
 
   as.environment(name)
 }
