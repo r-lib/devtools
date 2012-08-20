@@ -26,7 +26,7 @@ e <- parent_envs(load_all)
 e
 
 # Get all parent environments, going all the way to empty env
-e <- parent_envs(load_all, T)
+e <- parent_envs(load_all, TRUE)
 e
 
 # Print e with paths
