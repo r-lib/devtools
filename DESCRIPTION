@@ -72,4 +72,6 @@ Collate:
     'imports-env.r'
     'namespace-env.r'
     'topic-index.r'
+    'dev-example.r'
+    'run-example.r'
     'help.r'
