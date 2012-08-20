@@ -41,6 +41,7 @@ dev_mode <- local({
       }
   
       message("Dev mode: ON")
+      options(dev_path = path)
   
       if (is.null(.prompt)) .prompt <<- getOption("prompt")
       options(prompt = paste("d> "))
@@ -49,6 +50,7 @@ dev_mode <- local({
     } else {
       
       message("Dev mode: OFF")
+      options(dev_path = NULL)
   
       if (!is.null(.prompt)) options(prompt = .prompt)
       .prompt <<- NULL

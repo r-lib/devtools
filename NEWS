@@ -1,3 +1,6 @@
+* `dev_mode` now stores the path it uses in option `dev_path`. That makes it
+  easy for other applications to detect when it is on and to act accordingly.
+
 * `install_github` now accepts `auth_user` and `password` arguments if you
   want to install a package in a private github repo. You only need to specify
   `auth_user` if it's not your package (i.e. it's not your `username`) (Fixes
