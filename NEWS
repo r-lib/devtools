@@ -1,3 +1,6 @@
+* `as.package` provides more informative error messages when path does not
+  exist, isn't a directory, or doesn't contain a `DESCRIPTION` file.
+
 * `dev_mode` now stores the path it uses in option `dev_path`. That makes it
   easy for other applications to detect when it is on and to act accordingly.
 

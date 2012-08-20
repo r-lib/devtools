@@ -9,12 +9,11 @@
 #' @export
 as.package <- function(x = NULL) {
   if (is.package(x)) return(x)
-
+  
   if (is.null(x)) {
     last <- get_last_package()
     if (!is.null(last)) return(last)
     
-    message("No package specified, using working directory.")
     x <- "."
   }
   
@@ -41,19 +40,24 @@ local({
 
 find_package <- function(x) {
   if (is.null(x)) return(FALSE)
-
+  
   # Strip trailing slashes (needed only for windows)
   x <- normalizePath(x, mustWork = FALSE)
   x <- gsub("\\\\$", "", x)
-
-  desc_path <- file.path(x, "DESCRIPTION")
-
-  if ( file.exists(x) && file.exists(desc_path)) {
-    return(x)
-  } else {
-    stop("Can't find package at '", file.path(normalizePath("."), x)
-      , "'", call. = FALSE)
+  
+  if (!file.exists(x)) {
+    stop("Can't find directory ", x, call. = FALSE)
   }
+  if (!file.info(x)$isdir) {
+    stop(x, " is not a directory", call. = FALSE)
+  }
+  
+  desc_path <- file.path(x, "DESCRIPTION")
+  if (!file.exists(desc_path)) {
+    stop("No DESCRIPTION file found in ", x, call. = FALSE)
+  }
+  
+  x
 }
 
 #' Load package DESCRIPTION into convenient form.
