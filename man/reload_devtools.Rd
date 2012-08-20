@@ -7,6 +7,9 @@
 \arguments{
   \item{pkg}{package description, can be path or package
   name.  This must be the devtools package.}
+
+  \item{...}{other arguments to be passed on to
+  \code{load_all}.}
 }
 \description{
   Special care must be take to reload the devtools package.

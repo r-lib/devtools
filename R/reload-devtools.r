@@ -11,6 +11,7 @@
 #'
 #' @param pkg package description, can be path or package name.  This
 #'   must be the devtools package.
+#' @param ... other arguments to be passed on to \code{load_all}.
 reload_devtools <- function(pkg = NULL, ...) {
   pkg <- as.package(pkg)
 

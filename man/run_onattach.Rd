@@ -4,6 +4,10 @@
 \usage{
   run_onattach(pkg = NULL)
 }
+\arguments{
+  \item{pkg}{package description, can be path or package
+  name.  See \code{\link{as.package}} for more information}
+}
 \description{
   This is run after copying objects from the namespace to
   the package environment. In a normal install + load, the

@@ -69,10 +69,12 @@ as.envlist <- function(x) {
 
 #' Print an \code{envlist}
 #'
+#' @param x An \code{envlist} object to print.
 #' @param name If \code{TRUE} (the default), print the \code{name}
 #'   attribute of each environment.
 #' @param path If \code{TRUE}, print the \code{path} attribute of
 #'   each environment.
+#' @param ... Other arguments to be passed to \code{print}.
 #' @export
 #' @method print envlist
 print.envlist <- function(x, name = TRUE, path = FALSE, ...) {
@@ -92,7 +94,7 @@ print.envlist <- function(x, name = TRUE, path = FALSE, ...) {
     dat <- cbind(dat, path = paths, stringsAsFactors = FALSE)
   }
 
-  print(dat, right = FALSE)
+  print(dat, ..., right = FALSE)
 
   invisible(x)
 }

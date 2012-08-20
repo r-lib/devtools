@@ -80,9 +80,10 @@ setup_ns_imports <- function(pkg) {
 # namespaceExport throw errors if the objects are not present.
 setup_ns_exports <- function(pkg, export_all = FALSE) {
   nsInfo <- parse_ns_file(pkg)
+  nsenv <- ns_env(pkg)
 
   if (export_all) {
-    exports <- ls(ns_env(pkg), all.names = TRUE)
+    exports <- ls(nsenv, all.names = TRUE)
 
     # List of things to ignore is from loadNamespace. There are also a
     # couple things to ignore from devtools.
@@ -96,12 +97,12 @@ setup_ns_exports <- function(pkg, export_all = FALSE) {
     # This code is from base::loadNamespace
     exports <- nsInfo$exports
     for (p in nsInfo$exportPatterns)
-      exports <- c(ls(env, pattern = p, all.names = TRUE), exports)
+      exports <- c(ls(nsenv, pattern = p, all.names = TRUE), exports)
   }
   # Update the exports metadata for the namespace with base::namespaceExport
   # It will throw warnings if objects are already listed in the exports
   # metadata, so catch those warnings and ignore them.
-  suppressWarnings(namespaceExport(ns_env(pkg), exports))
+  suppressWarnings(namespaceExport(nsenv, exports))
 
   invisible()
 }

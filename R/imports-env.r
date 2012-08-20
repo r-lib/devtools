@@ -4,6 +4,8 @@
 #' package namespace environment, and is a child of <namespace:base>,
 #' which is a child of R_GlobalEnv.
 #' @keywords programming
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information.
 #' @seealso \code{\link{ns_env}} for the namespace environment that
 #'   all the objects (exported and not exported).
 #' @seealso \code{\link{pkg_env}} for the attached environment that contains

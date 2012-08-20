@@ -4,6 +4,11 @@
 \usage{
   imports_env(pkg = NULL)
 }
+\arguments{
+  \item{pkg}{package description, can be path or package
+  name.  See \code{\link{as.package}} for more
+  information.}
+}
 \description{
   Contains objects imported from other packages. Is the
   parent of the package namespace environment, and is a

@@ -6,6 +6,8 @@
 #'
 #' A variable called \code{onLoad} is created in the package's
 #' devtools metdata to indicate that it's attached.
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
 run_onload <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   nsenv <- ns_env(pkg)
@@ -27,6 +29,9 @@ run_onload <- function(pkg = NULL) {
 #'
 #' A variable called \code{onAttach} is created in the package's
 #' devtools metdata to indicate that it's attached.
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @importFrom httr parsed_content
 run_onattach <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   nsenv <- ns_env(pkg)
