@@ -1,7 +1,8 @@
 Package: devtools
 Title: Tools to make developing R code easier
 Version: 0.7.1
-Author: Hadley Wickham <h.wickham@gmail.com>
+Author: Hadley Wickham <h.wickham@gmail.com>, 
+  Winston Chang <winston@stdout.org>
 Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Description: Collection of package development tools
 Depends:
