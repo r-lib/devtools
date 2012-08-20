@@ -8,9 +8,9 @@
 \arguments{
   \item{topic}{name of help to search for.}
 
-  \item{stage}{at which stage (‘"build"’, ‘"install"’, or
-  ‘"render"’) should \\Sexpr macros be executed? This is
-  only important if you're using \\Sexpr macro's in your Rd
+  \item{stage}{at which stage ("build", "install", or
+  "render") should \\Sexpr macros be executed? This is only
+  important if you're using \\Sexpr macro's in your Rd
   files.}
 
   \item{type}{of html to produce: \code{"html"} or

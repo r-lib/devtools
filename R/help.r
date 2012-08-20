@@ -4,7 +4,7 @@
 #' to other files within the package won't work.
 #' 
 #' @param topic name of help to search for.
-#' @param stage at which stage (‘"build"’, ‘"install"’, or ‘"render"’) should
+#' @param stage at which stage ("build", "install", or "render") should
 #'   \\Sexpr macros be executed? This is only important if you're using
 #'   \\Sexpr macro's in your Rd files.
 #' @param type of html to produce: \code{"html"} or \code{"text"}. Defaults to

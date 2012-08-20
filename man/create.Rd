@@ -18,6 +18,7 @@
   inspecting the global environment.
 }
 \examples{
+\donttest{
 # Create a package using all defaults:
 path <- file.path(tempdir(), "myDefaultPackage")
 create(path)
@@ -26,7 +27,8 @@ create(path)
 path <- file.path(tempdir(), "myCustomPackage")
 my_description <- list("Maintainer" =
   "'Yoni Ben-Meshulam' <yoni@opower.com>")
-create("../myCustomPackage", my_description)
+create(path, my_description)
+}
 }
 \seealso{
   Text with \code{\link{package.skeleton}}

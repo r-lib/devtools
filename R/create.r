@@ -11,6 +11,7 @@
 #' @seealso Text with \code{\link{package.skeleton}}
 #' @export
 #' @examples
+#' \donttest{
 #' # Create a package using all defaults:
 #' path <- file.path(tempdir(), "myDefaultPackage")
 #' create(path)
@@ -19,7 +20,8 @@
 #' path <- file.path(tempdir(), "myCustomPackage")
 #' my_description <- list("Maintainer" = 
 #'   "'Yoni Ben-Meshulam' <yoni@@opower.com>")
-#' create("../myCustomPackage", my_description)
+#' create(path, my_description)
+#' }
 create <- function(path, description = list()) {
   name <- basename(path)
   message("Creating package ", name, " in ", dirname(path))
