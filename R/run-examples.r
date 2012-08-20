@@ -28,7 +28,7 @@ run_examples <- function(pkg = NULL, start = NULL, show = TRUE, test = FALSE, ru
   path_man <- file.path(pkg$path, "man")
   files <- dir(path_man, pattern = "\\.[Rr]d$", full.names = TRUE)
   names(files) <- basename(files)
-  files <- with_collate("C", sort(files)) 
+  files <- with_collate("C", sort(files))
   
   if (!is.null(start)) {
     start_pos <- which(names(files) == start)
