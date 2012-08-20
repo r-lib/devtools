@@ -7,10 +7,11 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @param start name of \code{Rd} file to start with - if omitted, will start
-#'   with the (lexicographically) first file.  This is useful if you have a 
-#'   lot of examples and don't want to rerun them every time when you fix a 
-#'   problem.
+#' @param start Where to start running the examples: this can either be the
+#'   name of \code{Rd} file to start with (with or without extensions), or
+#'   a topic name. If omitted, will start with the (lexicographically) first
+#'   file. This is useful if you have a lot of examples and don't want to
+#'   rerun them every time when you fix a problem.
 #' @family example functions
 #' @param show if \code{TRUE}, code in \code{\\dontshow{}} will be commented
 #'   out
@@ -31,7 +32,12 @@ run_examples <- function(pkg = NULL, start = NULL, show = TRUE, test = FALSE, ru
   files <- with_collate("C", sort(files))
   
   if (!is.null(start)) {
-    start_pos <- which(names(files) == start)
+    start_path <- find_pkg_topic(pkg, start)
+    if (is.null(start_path)) {
+      stop("Couldn't find start position ", start, call. = FALSE)
+    }
+    
+    start_pos <- which(names(files) == start_path)
     if (length(start_pos) == 1) {
       files <- files[- seq(1, start_pos - 1)]
     }

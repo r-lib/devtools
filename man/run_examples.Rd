@@ -9,9 +9,11 @@
   \item{pkg}{package description, can be path or package
   name.  See \code{\link{as.package}} for more information}
 
-  \item{start}{name of \code{Rd} file to start with - if
+  \item{start}{Where to start running the examples: this
+  can either be the name of \code{Rd} file to start with
+  (with or without extensions), or a topic name. If
   omitted, will start with the (lexicographically) first
-  file.  This is useful if you have a lot of examples and
+  file. This is useful if you have a lot of examples and
   don't want to rerun them every time when you fix a
   problem.}
 
