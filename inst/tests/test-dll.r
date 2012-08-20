@@ -55,16 +55,17 @@ test_that("load_all() compiles and loads DLLs", {
 
 
   # Loading again, and reloading
-  # Should not re-compile (don't have a proper test for it)
+  # Should not re-compile (don't have a proper test for this)
   load_all("dll-unload")
   expect_true(is.null(nulltest()))
 
-  # Should not re-compile (don't have a proper test for it)
+  # load_all when already loaded
+  # Should not re-compile (don't have a proper test for this)
   load_all("dll-unload")
   expect_true(is.null(nulltest()))
 
-  # Should re-compile (don't have a proper test for it)
-  load_all("dll-unload", reset = TRUE)
+  # Should re-compile (don't have a proper test for this)
+  load_all("dll-unload", recompile = TRUE)
   expect_true(is.null(nulltest()))
   unload("dll-unload")
 

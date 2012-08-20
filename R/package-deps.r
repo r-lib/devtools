@@ -35,33 +35,6 @@ parse_deps <- function(string) {
   deps[names != "R", ]
 }
 
-#' Load all of the imports for a package
-#'
-#' The imported objects are copied to the imports environment, and are not
-#' visible from R_GlobalEnv. This will automatically load (but not attach)
-#' the dependency packages.
-#'
-#' @keywords internal
-load_imports <- function(pkg = NULL, deps = c("depends", "imports")) {
-  pkg <- as.package(pkg)
-
-  # Get data frame of dependency names and versions
-  deps <- lapply(pkg[deps], parse_deps)
-  deps <- Reduce(rbind, deps)
-
-  if (is.null(deps) || nrow(deps) == 0) return(invisible())
-
-  # If we've already loaded imports, don't load again (until load_all
-  # is run with reset=TRUE). This is to avoid warnings when running
-  # process_imports()
-  if (length(ls(imports_env(pkg))) > 0) return(invisible(deps))
-
-  mapply(check_dep_version, deps$name, deps$version, deps$compare)
-
-  process_imports(pkg)
-
-  invisible(deps)
-}
 
 #' Check that the version of an imported package satisfies the requirements
 #'
@@ -90,26 +63,4 @@ check_dep_version <- function(dep_name, dep_ver = NA, dep_compare = NA) {
     }
   }
   return(TRUE)
-}
-
-
-
-# Load imported objects
-# The code in this function is taken from base::loadNamespace
-process_imports <- function(pkg) {
-  nsInfo <- parse_ns_file(pkg)
-  ns <- ns_env(pkg)
-  lib.loc <- NULL
-
-  ## process imports
-  for (i in nsInfo$imports) {
-    if (is.character(i))
-      namespaceImport(ns, loadNamespace(i))
-    else
-      namespaceImportFrom(ns, loadNamespace(i[[1L]]), i[[2L]])
-  }
-  for(imp in nsInfo$importClasses)
-    namespaceImportClasses(ns, loadNamespace(imp[[1L]]), imp[[2L]])
-  for(imp in nsInfo$importMethods)
-    namespaceImportMethods(ns, loadNamespace(imp[[1L]]), imp[[2L]])
 }

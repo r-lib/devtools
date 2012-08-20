@@ -1,117 +1,70 @@
-#' Generate a namespace environment for a package.
-#'
-#' Contains all (exported and non-exported) objects, and is a descendent of
-#' \code{R_GlobalEnv}. The hieararchy is \code{<namespace:pkg>}, 
-#' \code{<imports:pkg>}, \code{<namespace:base>}, and then
-#' \code{R_GlobalEnv}.
-#'
-#' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
-#' @param create if namespace environment doesn't already exist,
-#'   create it?
-#' @keywords programming
-#' @export
-ns_env <- function(pkg = NULL, create = FALSE) {
+# Create the package environment where exported objects will be copied to
+attach_ns <- function(pkg) {
   pkg <- as.package(pkg)
+  nsenv <- ns_env(pkg)
 
-  if (!is.loaded_ns(pkg)) {
-    if (create) {
-      env <- makeNamespace(pkg$package)
-      setPackageName(pkg$package, env)
-      # Create devtools metadata in namespace
-      dev_meta(pkg$package, create = TRUE)
-
-      setNamespaceInfo(env, "path", pkg$path)
-      setup_ns_imports(pkg)
-    } else {
-      return(NULL)
-    }
-  } else {
-    env <- asNamespace(pkg$package)
+  if (is_attached(pkg)) {
+    stop("Package ", pkg$package, " is already attached.")
   }
 
-  env
+  # This should be similar to attachNamespace
+  pkgenv <- attach(NULL, name = pkg_env_name(pkg))
+  attr(pkgenv, "path") <- getNamespaceInfo(nsenv, "path")
 }
 
 
-#' Generate a package environment
+# Copy over the objects from the namespace env to the package env
+export_ns <- function(pkg) {
+  pkg <- as.package(pkg)
+  nsenv <- ns_env(pkg)
+  pkgenv <- pkg_env(pkg)
+
+  exports <- getNamespaceExports(nsenv)
+  importIntoEnv(pkgenv, exports, nsenv, exports)
+}
+
+
+#' Return package environment
 #'
-#' This is an environment like \code{<package:pkg>}. It is attached,
-#' so it is an ancestor of \code{R_GlobalEnv}.
+#' This is an environment like \code{<package:pkg>}. The package
+#' environment contains the exported objects from a package. It is
+#' attached, so it is an ancestor of \code{R_GlobalEnv}.
 #'
 #' When a package is loaded the normal way, using \code{\link{library}},
 #' this environment contains only the exported objects from the
 #' namespace. However, when loaded with \code{\link{load_all}}, this
-#' environment will contain all the objects from the namespace.
+#' environment will contain all the objects from the namespace, unless
+#' \code{load_all} is used with \code{export_all=FALSE}.
+#'
+#' If the package is not attached, this function returns \code{NULL}.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @param create if package environment doesn't already exist,
-#'   create it?
+#' @keywords programming
+#' @seealso \code{\link{ns_env}} for the namespace environment that
+#'   all the objects (exported and not exported).
+#' @seealso \code{\link{imports_env}} for the environment that contains
+#'   imported objects for the package.
 #' @export
-pkg_env <- function(pkg = NULL, create = FALSE) {
+pkg_env <- function(pkg = NULL) {
   pkg <- as.package(pkg)
-  name <- env_pkg_name(pkg)
+  name <- pkg_env_name(pkg)
   
-  if (!is.loaded_pkg(pkg)) {
-    if (create) {
-      # This should be similar to attachNamespace
-      pkgenv <- attach(new.env(parent = emptyenv()), name = name)
-      attr(pkgenv, "path") <- pkg$path
-    } else {
-      return(NULL)
-    }
-  }
+  if (!is_attached(pkg)) return(NULL)
 
   as.environment(name)
 }
 
-#' Package imports environment
-#' Contains objects imported from other packages. Is the parent of the
-#' package namespace environment, and is a child of <namespace:base>,
-#' which is a child of R_GlobalEnv,
-#' @export
-imports_env <- function(pkg = NULL) {
-  pkg <- as.package(pkg)
-
-  if (!is.loaded_ns(pkg)) {
-    stop("Namespace environment must be created before accessing imports environment.")
-  }
-
-  env <- parent.env(ns_env(pkg))
-
-  if (attr(env, 'name') != env_imports_name(pkg)) {
-    stop("Imports environment does not have attribute 'name' with value ",
-      env_imports_name(pkg),
-      ". This probably means that the namespace environment was not created correctly.")
-  }
-
-  env
-}
-
-#' Detach development environment
-#' @keywords internal
-clear_pkg_env <- function(pkg = NULL) {
-  
-  if (is.loaded_pkg(pkg)) {
-    unload(pkg)
-  }  
-}
 
 # Generate name of package environment
 # Contains exported objects
-env_pkg_name <- function(pkg = NULL) {
+pkg_env_name <- function(pkg = NULL) {
   pkg <- as.package(pkg)
   paste("package:", pkg$package, sep = "")
 }
 
-# Generate name of package imports environment
-# Contains exported objects
-env_imports_name <- function(pkg = NULL) {
-  pkg <- as.package(pkg)
-  paste("imports:", pkg$package, sep = "")
-}
 
-base_env <- function(pkg) {
-  new.env(parent = emptyenv())
+# Reports whether a package is loaded and attached
+is_attached <- function(pkg = NULL) {
+  pkg_env_name(pkg) %in% search()
 }

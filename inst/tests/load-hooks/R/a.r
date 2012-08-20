@@ -18,5 +18,8 @@ c <- 1
 }
 
 .onUnload <- function(libpath) {
-  .GlobalEnv$.__loadhooks__ <- .GlobalEnv$.__loadhooks__ + 1
+  # Increment this variable if it exists in the global env
+  if (exists(".__loadhooks__", .GlobalEnv)) {
+    .GlobalEnv$.__loadhooks__ <- .GlobalEnv$.__loadhooks__ + 1
+  }
 }

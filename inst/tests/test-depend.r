@@ -13,6 +13,9 @@ test_that("Warned about dependency versions", {
 test_that("Error on missing dependencies", {
   # Should give a warning about grid version
   expect_error(load_all("depend-missing"), "missingpackage not available")
+
+  # Loading process will be partially done; unload it
+  unload("depend-missing")
 })
 
 

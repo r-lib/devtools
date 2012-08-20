@@ -22,3 +22,29 @@ test_that("devtools metadata for load hooks", {
 test_that("NULL metadata for non-devtools-loaded packages", {
   expect_true(is.null(dev_meta("stats")))
 })
+
+
+test_that("dev_packages() lists devtools-loaded packages", {
+  expect_false(any(c("namespace", "loadhooks") %in% dev_packages()))
+  expect_false("namespace" %in% dev_packages())
+  expect_false("loadhooks" %in% dev_packages())
+
+  load_all("namespace")
+  expect_true("namespace" %in% dev_packages())
+  expect_false("loadhooks" %in% dev_packages())
+
+  load_all("load-hooks")
+  expect_true("namespace" %in% dev_packages())
+  expect_true("loadhooks" %in% dev_packages())
+
+  unload("namespace")
+  expect_false("namespace" %in% dev_packages())
+  expect_true("loadhooks" %in% dev_packages())
+
+  unload("load-hooks")
+  expect_false("namespace" %in% dev_packages())
+  expect_false("loadhooks" %in% dev_packages())
+
+
+  expect_false("stats" %in% dev_packages())
+})
