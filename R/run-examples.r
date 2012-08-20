@@ -23,7 +23,7 @@ run_examples <- function(pkg = NULL, start = NULL, show = TRUE, test = FALSE, ru
   pkg <- as.package(pkg)
   load_all(pkg, reset = TRUE, export_all = FALSE)
   on.exit(load_all(pkg, reset = TRUE))
-  document(pkg)
+  document(pkg, reload = FALSE)
   
   path_man <- file.path(pkg$path, "man")
   files <- dir(path_man, pattern = "\\.[Rr]d$", full.names = TRUE)
