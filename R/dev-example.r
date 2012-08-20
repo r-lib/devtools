@@ -14,7 +14,7 @@
 #' load_all("ggplot2")
 #' dev_example("ggplot")
 #' }
-dev_example <- function(topic, strict = FALSE) {
+dev_example <- function(topic) {
   path <- find_topic(topic)
   
   if (is.null(path)) {
@@ -24,5 +24,5 @@ dev_example <- function(topic, strict = FALSE) {
   pkg <- as.package(names(path)[[1]])
   load_all(pkg)
   
-  run_example(topic, path, pkg, strict = strict)
+  run_example(path)
 }
