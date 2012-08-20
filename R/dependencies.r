@@ -41,8 +41,9 @@ cran_packages <- memoise(function() {
 
 #' @importFrom memoise memoise
 bioc_packages <- memoise(function() {
-  on.exit(closeAllConnections())
-  bioc <- read.dcf(url("http://bioconductor.org/packages/release/bioc/VIEWS"))
+  con <- url("http://bioconductor.org/packages/release/bioc/VIEWS")
+  on.exit(close(con))
+  bioc <- read.dcf(con)
   rownames(bioc) <- bioc[, 1]
   bioc
 })
