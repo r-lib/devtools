@@ -35,6 +35,7 @@ document <- function(pkg = NULL, clean = FALSE, roclets = c("collate", "namespac
     roxygen2:::roc_output(roc, results, pkg$path)
   }
   
+  clear_topic_index(pkg)
   invisible()
 }
 
@@ -59,29 +60,4 @@ check_doc <- function(pkg = NULL) {
   print(tools::checkDocFiles(dir = pkg$path))
   # print(tools::checkDocStyle(dir = pkg$path))
   # print(tools::undoc(dir = pkg$path))
-}
-
-
-#' Show an Rd file in a package.
-#'
-#' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
-#' @param file name of Rd file to open.  Can optionally omit Rd extension.
-#' @param ... additional arguments passed onto \code{\link[tools]{Rd2txt}}.
-#'   This is particular useful if you're checking macros and want to simulate
-#'   what happens when the package is built (\code{stage = "build"})
-#' @export
-#' @importFrom tools file_ext
-#' @importFrom tools Rd2txt
-show_rd <- function(pkg = NULL, file, ...) {
-  pkg <- as.package(pkg)
-  if (file_ext(file) == "") file <- paste(file, ".Rd", sep ="")
-
-  path <- file.path(pkg$path, "man", file)
-  stopifnot(file.exists(path))
-  
-  temp <- Rd2txt(path, out = tempfile("Rtxt"), package = pkg$package, 
-    ...)
-  file.show(temp, title = paste("Dev documentation: ", file), 
-    delete.file = TRUE) 
 }

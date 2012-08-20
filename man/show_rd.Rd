@@ -8,8 +8,7 @@
   \item{pkg}{package description, can be path or package
   name.  See \code{\link{as.package}} for more information}
 
-  \item{file}{name of Rd file to open.  Can optionally omit
-  Rd extension.}
+  \item{file}{topic or name Rd file to open.}
 
   \item{...}{additional arguments passed onto
   \code{\link[tools]{Rd2txt}}.  This is particular useful
