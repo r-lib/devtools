@@ -15,6 +15,7 @@
 #'   example is run in a clean R environment somewhat mimicking what 
 #'   \code{R CMD check} does.  Since this involves installing the package
 #'   you should probably be in \code{\link{dev_mode}}
+#' @family example functions
 #' @keywords programming
 #' @export
 run_examples <- function(pkg = NULL, start = NULL, strict = TRUE) {
@@ -44,12 +45,12 @@ run_examples <- function(pkg = NULL, start = NULL, strict = TRUE) {
 
   message("Running ", length(rd), " examples in ", pkg$package)
   message(paste(rep("-", getOption("width"), collapse = "")))
-  mapply(run_example, names(rd), rd, 
+  mapply(run_one_example, names(rd), rd, 
     MoreArgs = list(env = parent.frame(), strict = strict, pkg = pkg))  
   invisible()
 }
 
-run_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) {
+run_one_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) {
   message("Checking ", name, "...")
   message(paste(rep("-", getOption("width"), collapse = "")))
   
@@ -57,8 +58,10 @@ run_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) {
   tmp <- tempfile()
   on.exit(unlink(tmp))
 
-  # Use internal Rd2ex code which strips out \dontrun etc
+  # Use internal Rd2ex code which strips out \dontrun etc - if there is
+  # no example it doesn't create the file
   tools:::Rd2ex(rd, tmp)
+  if (!file.exists(tmp)) return(invisible(NULL))
   
   if (strict) {
     ex <- c(paste("library('", pkg$package, "')", sep = ""), readLines(tmp))
@@ -69,6 +72,35 @@ run_example <- function(name, rd, pkg, env = parent.frame(), strict = TRUE) {
       skip.echo = 6)    
   }
   cat("\n\n")
+}
+
+#' Run a examples for an in-development function.
+#'
+#' @inheritParams run_examples 
+#' @param topic Name or topic (or name of Rd) file to run examples for
+#' @export
+#' @family example functions
+#' @examples
+#' \dontrun{
+#' # Runs installed example:
+#' library("ggplot2")
+#' example("ggplot")
+#'
+#' # Runs develoment example:
+#' load_all("ggplot2")
+#' dev_example("ggplot")
+#' }
+dev_example <- function(topic, strict = FALSE) {
+  path <- find_topic(topic)
+  
+  if (is.null(path)) {
+    stop("Can't find development example for topic ", topic, call. = FALSE)
+  }
+  
+  pkg <- as.package(names(path)[[1]])
+  load_all(pkg)
+  
+  run_one_example(topic, path, pkg, strict = strict)
 }
 
 # If an error occurs, should print out the suspect line of code, and offer

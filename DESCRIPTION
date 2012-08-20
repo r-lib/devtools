@@ -69,3 +69,5 @@ Collate:
     'utils.r'
     'imports-env.r'
     'namespace-env.r'
+    'topic-index.r'
+    'help.r'
