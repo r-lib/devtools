@@ -32,7 +32,7 @@ create_ns_env <- function(pkg = NULL) {
     stop("Namespace for ", pkg$package, " already exists.")
   }
 
-  env <- makeNamespace(pkg$package)
+  env <- makeNamespace(pkg$package, pkg$version)
   setPackageName(pkg$package, env)
   # Create devtools metadata in namespace
   create_dev_meta(pkg$package)
