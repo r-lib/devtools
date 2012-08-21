@@ -12,6 +12,12 @@ is_ancestor_env <- function(e, x) {
 }
 
 
+test_that("Loaded namespaces have correct version", {
+  load_all("namespace")
+  expect_identical(c(version="0.1"), getNamespaceVersion("namespace"))
+  unload("namespace")
+})
+
 test_that("Exported objects are visible from global environment", {
 
   # a is listed as an export in NAMESPACE, b is not. But with load_all(),
