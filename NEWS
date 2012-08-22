@@ -32,6 +32,11 @@ NEW FEATURES
   harder than just `detach`. It now also unloads DLLs. (Winston Chang. Fixes
   #119)
 
+* `run_examples` now has parameters `show`, `test`, `run` to control which of
+  `\dontrun{}`, `\dontshow{}`, `\donttest{}` and `\testonly{}` are commented
+  out. The `strict` parameter has been removed since it is no longer necessary
+  because `load_all` can respect namespaces. (Fixes #118)
+
 PACKAGE PATHS
 
 * `as.package` no longer uses `~/.Rpackages`.
