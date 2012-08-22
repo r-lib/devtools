@@ -7,9 +7,12 @@
 #'   freshest version of the documentation.
 #'   check documentation after running roxygen.
 #' @param roclets character vector of roclet names to apply to package
+#' @param reload if \code{TRUE} uses \code{load_all} to reload the package
+#'   prior to documenting.  This is important because \pkg{roxygen2} uses
+#'   introspection on the code objects to determine how to document them.
 #' @keywords programming
 #' @export
-document <- function(pkg = NULL, clean = FALSE, roclets = c("collate", "namespace", "rd")) {
+document <- function(pkg = NULL, clean = FALSE, roclets = c("collate", "namespace", "rd"), reload = TRUE) {
   require("roxygen2")
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
@@ -21,18 +24,25 @@ document <- function(pkg = NULL, clean = FALSE, roclets = c("collate", "namespac
     roxygen2:::clear_caches()
     file.remove(dir(man_path, full.names = TRUE))
   }
-  loaded <- load_all(pkg, reset = clean)
+  
+  if (reload) {
+    load_all(pkg, reset = clean)
+  }
   
   # Integrate source and evaluated code
-  env_hash <- suppressWarnings(digest(loaded$env))  
-  parsed <- unlist(lapply(loaded$code, parse.file, env = loaded$env, 
+  env <- ns_env(pkg)
+  env_hash <- suppressWarnings(digest(env))
+  r_files <- find_code(pkg)
+  parsed <- unlist(lapply(r_files, parse.file, env = env, 
     env_hash = env_hash), recursive = FALSE)
   
   roclets <- paste(roclets, "_roclet", sep = "")
   for (roclet in roclets) {
     roc <- match.fun(roclet)()
-    results <- with_collate("C", roxygen2:::roc_process(roc, parsed, pkg$path))
-    roxygen2:::roc_output(roc, results, pkg$path)
+    with_collate("C", {
+      results <- roxygen2:::roc_process(roc, parsed, pkg$path)
+      roxygen2:::roc_output(roc, results, pkg$path)      
+    })
   }
   
   clear_topic_index(pkg)

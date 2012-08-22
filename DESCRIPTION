@@ -1,8 +1,8 @@
 Package: devtools
 Title: Tools to make developing R code easier
 Version: 0.7.1
-Author: Hadley Wickham <h.wickham@gmail.com>, 
-  Winston Chang <winston@stdout.org>
+Author: Hadley Wickham <h.wickham@gmail.com>,
+    Winston Chang <winston@stdout.org>
 Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Description: Collection of package development tools
 Depends:
@@ -13,7 +13,8 @@ Imports:
     utils,
     tools,
     memoise,
-    whisker
+    whisker,
+    evaluate
 Suggests:
     testthat,
     roxygen2,
@@ -71,4 +72,6 @@ Collate:
     'imports-env.r'
     'namespace-env.r'
     'topic-index.r'
-    'help.r'
+    'dev-example.r'
+    'run-example.r'
+    'dev-help.r'
