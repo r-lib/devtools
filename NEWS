@@ -37,6 +37,12 @@ NEW FEATURES
   out. The `strict` parameter has been removed since it is no longer necessary
   because `load_all` can respect namespaces. (Fixes #118)
 
+* `build()`, `check()`, `install()` etc now run R in `--vanilla` mode which
+  prevents it from reading any of your site or personal configuration files.
+  This should prevent inconsistencies between the environment in which the
+  package is run between your computer and other computers (e.g. the CRAN
+  server) (Fixes #145)
+
 PACKAGE PATHS
 
 * `as.package` no longer uses `~/.Rpackages`.

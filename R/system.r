@@ -12,10 +12,10 @@ system_check <- function(cmd, args = character(), env = character(), ...) {
 }
 
 R <- function(options, path = tempdir(), ...) {
+  options <- paste("--vanilla", options)
   r_path <- file.path(R.home("bin"), "R")
   
   env <- c(
-    "R_ENVIRON_USER" = tempfile(),
     "LC_ALL" = "C", 
     "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
     "CYGWIN" = "nodosfilewarning")
