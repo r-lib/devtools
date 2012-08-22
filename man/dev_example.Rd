@@ -2,17 +2,11 @@
 \alias{dev_example}
 \title{Run a examples for an in-development function.}
 \usage{
-  dev_example(topic, strict = FALSE)
+  dev_example(topic)
 }
 \arguments{
   \item{topic}{Name or topic (or name of Rd) file to run
   examples for}
-
-  \item{strict}{if \code{TRUE}, the package is first
-  installed, and then each example is run in a clean R
-  environment somewhat mimicking what \code{R CMD check}
-  does.  Since this involves installing the package you
-  should probably be in \code{\link{dev_mode}}}
 }
 \description{
   Run a examples for an in-development function.

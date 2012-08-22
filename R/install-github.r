@@ -43,7 +43,7 @@ install_github <- function(repo, username = getOption("github.user"),
   
   if (!is.null(password)) {
     auth <- authenticate(
-      user = if (is.null(auth_user)) username else auth_user,
+      user = auth_user %||% username,
       password = password,
       type = "basic")
   } else {
