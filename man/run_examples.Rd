@@ -24,8 +24,8 @@
   will be commented out. If \code{FALSE}, code in
   \code{\\testonly{}} will be commented out.}
 
-  \item{run}{if \code{TRUE}, code in \code{\\donrun{}} will
-  be commented out.}
+  \item{run}{if \code{TRUE}, code in \code{\\dontrun{}}
+  will be commented out.}
 }
 \description{
   One of the most frustrating parts of `R CMD check` is
