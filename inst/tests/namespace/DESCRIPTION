@@ -7,5 +7,5 @@ Maintainer: Hadley <h.wickham@gmail.com>
 Version: 0.1
 Imports:
     compiler,
-    MASS
+    splines
 Collate: a.r b.r

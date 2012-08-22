@@ -2,7 +2,7 @@ context("Imports")
 
 test_that("Imported objects are copied to package environment", {
   load_all("namespace")
-  # This package imports the whole 'compiler' package and 'MASS::area'
+  # This package imports the whole 'compiler' package and 'splines::polySpline'
   imp_env <- imports_env("namespace")
 
   # cmpfun is exported from compiler, so it should be in imp_env
@@ -13,13 +13,13 @@ test_that("Imported objects are copied to package environment", {
   expect_false(exists("cmpSpecial", imp_env))
 
 
-  # 'area' is a single object imported specifically from MASS
-  expect_true(exists("area", imp_env))
+  # 'polySpline' is a single object imported specifically from splines
+  expect_true(exists("polySpline", imp_env))
 
-  # 'addterm' is not imported from MASS
-  expect_false(exists("addterm", imp_env))
+  # 'interpSpline' is not imported from splines
+  expect_false(exists("interpSpline", imp_env))
 
   unload("namespace")
   unload(inst("compiler"))
-  unload(inst("MASS"))
+  unload(inst("splines"))
 })

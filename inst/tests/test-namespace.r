@@ -108,7 +108,7 @@ test_that("unload() removes package environments from search", {
   nsenv   <- ns_env("namespace")
   unload("namespace")
   unload(inst("compiler"))
-  unload(inst("MASS"))
+  unload(inst("splines"))
 
   # Should report not loaded for package and namespace environments
   expect_false(is_attached("namespace"))
