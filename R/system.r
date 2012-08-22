@@ -18,7 +18,8 @@ R <- function(options, path = tempdir(), ...) {
   env <- c(
     "LC_ALL" = "C", 
     "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
-    "CYGWIN" = "nodosfilewarning")
+    "CYGWIN" = "nodosfilewarning",
+    "R_TESTS" = "")
    
   in_dir(path, system_check(r_path, options, env, ...))
 }
