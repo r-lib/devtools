@@ -20,6 +20,10 @@ R <- function(options, path = tempdir(), ...) {
     "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
     "CYGWIN" = "nodosfilewarning",
     "R_TESTS" = "")
-   
+    # When R CMD check runs tests, it sets R_TESTS. When the tests
+    # themeselves run R CMD xxxx, as is the case with the tests in
+    # devtools, having R_TESTS set causes errors because it confuses
+    # the R subprocesses. Unsetting it here avoids those problems.
+
   in_dir(path, system_check(r_path, options, env, ...))
 }
