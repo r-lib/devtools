@@ -11,7 +11,7 @@ run_example <- function(path, show = TRUE, test = FALSE, run = TRUE, env = new.e
 
   code <- paste(code, collapse = "")
   results <- evaluate(code, env)
-  replay(results)
+  replay_stop(results)
 }
 
 process_ex <- function(rd, show = TRUE, test = FALSE, run = TRUE) {
@@ -68,4 +68,40 @@ rd_tags <- function(x) {
 remove_tag <- function(x) {
   attr(x, "Rd_tag") <- NULL
   x
+}
+
+replay.error <- function(x) {
+  if (is.null(x$call)) {
+    message("Error: ", x$message)    
+  } else {
+    call <- deparse(x$call)
+    message("Error in ", call, ": ", x$message)    
+  }
+}
+
+
+replay_stop <- function(x) UseMethod("replay_stop", x)
+#' @S3method replay_stop error
+replay_stop.error <- function(x) {
+  stop(quiet_error(x$message, x$call))
+}
+#' @S3method replay_stop default
+replay_stop.default <- function(x) replay(x)
+
+#' @S3method replay_stop list
+replay_stop.list <- function(x) {
+  invisible(lapply(x, replay_stop))
+}
+
+quiet_error <- function(message, call = NULL) {
+  structure(list(message = as.character(message), call = call), 
+    class = c("quietError", "error", "condition"))
+}
+as.character.quietError <- function(x) {
+  if (is.null(x$call)) {
+    paste("Error: ", x$message, sep = "")
+  } else {
+    call <- deparse(x$call)
+    paste("Error in ", call, ": ", x$message, sep = "")
+  }
 }
