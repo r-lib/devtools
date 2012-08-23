@@ -1,3 +1,6 @@
+devtools 0.8.0
+--------------
+
 NEW FEATURES
 
 * `create` function makes it easier to create a package skeleton using
