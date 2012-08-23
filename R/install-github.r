@@ -47,7 +47,7 @@ install_github <- function(repo, username = getOption("github.user"),
       password = password,
       type = "basic")
   } else {
-    auth <- NULL
+    auth <- list()
   }
   
   message("Installing github repo(s) ", 

@@ -3,7 +3,7 @@
 \title{Install a package from a url}
 \usage{
   install_url(url, name = NULL, subdir = NULL,
-    config = NULL, ...)
+    config = list(), ...)
 }
 \arguments{
   \item{url}{location of package on internet. The url

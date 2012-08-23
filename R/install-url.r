@@ -13,7 +13,7 @@
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
-install_url <- function(url, name = NULL, subdir = NULL, config = NULL, ...) {
+install_url <- function(url, name = NULL, subdir = NULL, config = list(), ...) {
   if (is.null(name)) {
     name <- rep(list(NULL), length(url))
   }
@@ -23,7 +23,7 @@ install_url <- function(url, name = NULL, subdir = NULL, config = NULL, ...) {
 }
 
 #' @importFrom httr GET config stop_for_status content
-install_url_single <- function(url, name = NULL, subdir = NULL, config = NULL, ...) {
+install_url_single <- function(url, name = NULL, subdir = NULL, config = list(), ...) {
   if (is.null(name)) {
     name <- basename(url)
   }
