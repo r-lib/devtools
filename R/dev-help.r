@@ -9,6 +9,7 @@
 #'   \\Sexpr macro's in your Rd files.
 #' @param type of html to produce: \code{"html"} or \code{"text"}. Defaults to
 #'   your default documentation type.
+#' @export
 #' @examples
 #' \dontrun{
 #' library("ggplot2")
