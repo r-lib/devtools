@@ -2,7 +2,7 @@
 \alias{run_examples}
 \title{Run all examples in a package.}
 \usage{
-  run_examples(pkg = NULL, start = NULL, show = TRUE,
+  run_examples(pkg = ".", start = NULL, show = TRUE,
     test = FALSE, run = TRUE)
 }
 \arguments{

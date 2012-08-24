@@ -2,7 +2,7 @@
 \alias{show_rd}
 \title{Show an Rd file in a package.}
 \usage{
-  show_rd(pkg = NULL, file, ...)
+  show_rd(pkg = ".", file, ...)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

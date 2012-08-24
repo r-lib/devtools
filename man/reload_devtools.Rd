@@ -2,7 +2,7 @@
 \alias{reload_devtools}
 \title{Reload the devtools package}
 \usage{
-  reload_devtools(pkg = NULL, ...)
+  reload_devtools(pkg = ".", ...)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

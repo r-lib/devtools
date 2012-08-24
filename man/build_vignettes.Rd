@@ -2,7 +2,7 @@
 \alias{build_vignettes}
 \title{Build package vignettes.}
 \usage{
-  build_vignettes(pkg = NULL)
+  build_vignettes(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

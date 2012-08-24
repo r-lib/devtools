@@ -2,7 +2,7 @@
 \alias{run_onload}
 \title{Run .onLoad if needed}
 \usage{
-  run_onload(pkg = NULL)
+  run_onload(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package
