@@ -8,7 +8,7 @@
 #'   \code{\link{as.package}} for more information
 #' @inheritParams testthat::test_dir
 #' @export
-test <- function(pkg = NULL, filter = NULL) {
+test <- function(pkg = ".", filter = NULL) {
   pkg <- as.package(pkg)
   load_all(pkg)
   message("Testing ", pkg$package)

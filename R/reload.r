@@ -20,7 +20,7 @@
 #' reload(inst("ggplot2"))
 #' }
 #' @export
-reload <- function(pkg = NULL) {
+reload <- function(pkg = ".") {
   pkg <- as.package(pkg)
   
   if (is_attached(pkg)) {
@@ -49,7 +49,7 @@ reload <- function(pkg = NULL) {
 #' unload(inst("ggplot2"))
 #' }
 #' @export
-unload <- function(pkg = NULL) {
+unload <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   # This is a hack to work around unloading devtools itself. The unloading
@@ -93,7 +93,7 @@ unload <- function(pkg = NULL) {
 }
 
 # This unloads dlls loaded by either library() or load_all()
-unload_dll <- function(pkg = NULL) {
+unload_dll <- function(pkg = ".") {
   pkg <- as.package(pkg)
   libs <- .dynLibs()
 

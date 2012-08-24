@@ -4,7 +4,7 @@
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
 #' @export
-load_dll <- function(pkg = NULL) {
+load_dll <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   dllfile <- dll_name(pkg)

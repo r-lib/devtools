@@ -12,7 +12,7 @@
 #' @param pkg package description, can be path or package name.  This
 #'   must be the devtools package.
 #' @param ... other arguments to be passed on to \code{load_all}.
-reload_devtools <- function(pkg = NULL, ...) {
+reload_devtools <- function(pkg = ".", ...) {
   pkg <- as.package(pkg)
 
   newenv <- copy_env(ns_env(pkg), ignore = ".__NAMESPACE__.")

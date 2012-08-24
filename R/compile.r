@@ -21,7 +21,7 @@
 #'   \code{\link{as.package}} for more information
 #' @seealso \code{\link{clean_dll}} to delete the compiled files.
 #' @export
-compile_dll <- function(pkg) {
+compile_dll <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   # Check source dir exists
@@ -50,7 +50,7 @@ compile_dll <- function(pkg) {
 #'   \code{\link{as.package}} for more information
 #' @seealso \code{\link{compile_dll}}
 #' @export
-clean_dll <- function(pkg) {
+clean_dll <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   # Clean out the /src/ directory
@@ -63,7 +63,7 @@ clean_dll <- function(pkg) {
 }
 
 # Returns the full path and name of the DLL file
-dll_name <- function(pkg) {
+dll_name <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")

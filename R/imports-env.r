@@ -11,7 +11,7 @@
 #' @seealso \code{\link{pkg_env}} for the attached environment that contains
 #'   the exported objects.
 #' @export
-imports_env <- function(pkg = NULL) {
+imports_env <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   if (!is_loaded(pkg)) {
@@ -32,7 +32,7 @@ imports_env <- function(pkg = NULL) {
 
 # Generate name of package imports environment
 # Contains exported objects
-imports_env_name <- function(pkg = NULL) {
+imports_env_name <- function(pkg = ".") {
   pkg <- as.package(pkg)
   paste("imports:", pkg$package, sep = "")
 }
@@ -45,7 +45,7 @@ imports_env_name <- function(pkg = NULL) {
 #' the dependency packages.
 #'
 #' @keywords internal
-load_imports <- function(pkg = NULL, deps = c("depends", "imports")) {
+load_imports <- function(pkg = ".", deps = c("depends", "imports")) {
   pkg <- as.package(pkg)
 
   # Get data frame of dependency names and versions
@@ -69,7 +69,7 @@ load_imports <- function(pkg = NULL, deps = c("depends", "imports")) {
 
 # Load imported objects
 # The code in this function is taken from base::loadNamespace
-process_imports <- function(pkg) {
+process_imports <- function(pkg = ".") {
   nsInfo <- parse_ns_file(pkg)
   ns <- ns_env(pkg)
   lib.loc <- NULL

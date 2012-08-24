@@ -7,7 +7,7 @@
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
 #' @export
-load_code <- function(pkg = NULL) {
+load_code <- function(pkg = ".") {
   pkg <- as.package(pkg)
   env <- ns_env(pkg)
 
@@ -37,7 +37,7 @@ parse_collate <- function(string) {
 
 #' Find all R files in given directory.
 #' @keywords internal
-find_code <- function(pkg) {
+find_code <- function(pkg = ".") {
   path_r <- file.path(pkg$path, "R")
   
   code_paths <- dir(path_r, "\\.[Rrq]$", full.names = TRUE)  

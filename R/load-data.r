@@ -6,7 +6,7 @@
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
 #' @export
-load_data <- function(pkg = NULL) {
+load_data <- function(pkg = ".") {
   pkg <- as.package(pkg)
   env <- ns_env(pkg)
   objs <- character()

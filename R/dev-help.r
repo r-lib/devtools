@@ -40,7 +40,7 @@ dev_help <- function(topic, stage = "render", type = getOption("help_type")) {
 #' @export
 #' @importFrom tools file_ext
 #' @importFrom tools Rd2txt
-show_rd <- function(pkg = NULL, file, ...) {
+show_rd <- function(pkg = ".", file, ...) {
   .Deprecated("dev_help")
   pkg <- as.package(pkg)
   

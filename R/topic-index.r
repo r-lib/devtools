@@ -2,7 +2,7 @@
 # the rd file for a given topic (alias).
 
 # @return path to rd file within package
-find_pkg_topic <- function(pkg, topic) {
+find_pkg_topic <- function(pkg = ".", topic) {
   pkg <- as.package(pkg)
   
   # First see if a man file of that name exists
@@ -40,7 +40,7 @@ find_topic <- function(topic) {
 }
 
 topic_indices <- new.env(parent = emptyenv())
-topic_index <- function(pkg) {
+topic_index <- function(pkg = ".") {
   pkg <- as.package(pkg)
   
   if (!exists(pkg$package, topic_indices)) {    
@@ -49,7 +49,7 @@ topic_index <- function(pkg) {
   topic_indices[[pkg$package]]
 }
 
-clear_topic_index <- function(pkg) {
+clear_topic_index <- function(pkg = ".") {
   pkg <- as.package(pkg)
   if (exists(pkg$package, topic_indices)) {
     rm(pkg$package, envir = topic_indices)    
@@ -59,7 +59,7 @@ clear_topic_index <- function(pkg) {
 }
 
 #' @importFrom tools parse_Rd
-build_topic_index <- function(pkg) {
+build_topic_index <- function(pkg = ".") {
   pkg <- as.package(pkg)
   
   rds <- dir(file.path(pkg, "man"), full.names = TRUE)
