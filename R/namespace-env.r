@@ -15,7 +15,7 @@
 #' @seealso \code{\link{imports_env}} for the environment that contains
 #'   imported objects for the package.
 #' @export
-ns_env <- function(pkg = NULL) {
+ns_env <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   if (!is_loaded(pkg)) return(NULL)
@@ -25,7 +25,7 @@ ns_env <- function(pkg = NULL) {
 
 
 # Create the namespace environment for a package
-create_ns_env <- function(pkg = NULL) {
+create_ns_env <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   if (is_loaded(pkg)) {
@@ -69,7 +69,7 @@ makeNamespace <- function(name, version = NULL, lib = NULL) {
 
 # Read the NAMESPACE file and set up the imports metdata.
 # (which is stored in .__NAMESPACE__.)
-setup_ns_imports <- function(pkg) {
+setup_ns_imports <- function(pkg = ".") {
   nsInfo <- parse_ns_file(pkg)
   setNamespaceInfo(pkg$package, "imports", nsInfo$imports)
 }
@@ -78,7 +78,7 @@ setup_ns_imports <- function(pkg) {
 # Read the NAMESPACE file and set up the exports metdata. This must be
 # run after all the objects are loaded into the namespace because
 # namespaceExport throw errors if the objects are not present.
-setup_ns_exports <- function(pkg, export_all = FALSE) {
+setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
   nsInfo <- parse_ns_file(pkg)
   nsenv <- ns_env(pkg)
 
@@ -115,7 +115,7 @@ setup_ns_exports <- function(pkg, export_all = FALSE) {
 #' @examples
 #' parse_ns_file(devtest("load-hooks"))
 #' @export
-parse_ns_file <- function(pkg) {
+parse_ns_file <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   parseNamespaceFile(basename(pkg$path), dirname(pkg$path),
@@ -124,7 +124,7 @@ parse_ns_file <- function(pkg) {
 
 
 # Register the S3 methods for this package
-register_s3 <- function(pkg) {
+register_s3 <- function(pkg = ".") {
   pkg <- as.package(pkg)
   nsInfo <- parse_ns_file(pkg)
 
@@ -135,7 +135,7 @@ register_s3 <- function(pkg) {
 
 # Reports whether a package is loaded into a namespace. It may be
 # attached or not attached.
-is_loaded <- function(pkg = NULL) {
+is_loaded <- function(pkg = ".") {
   pkg <- as.package(pkg)
   pkg$package %in% loadedNamespaces()
 }

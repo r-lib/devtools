@@ -2,7 +2,7 @@
 \alias{run_onattach}
 \title{Run .onAttach if needed}
 \usage{
-  run_onattach(pkg = NULL)
+  run_onattach(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

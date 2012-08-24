@@ -11,32 +11,14 @@ as.package <- function(x = NULL) {
   if (is.package(x)) return(x)
   
   if (is.null(x)) {
-    last <- get_last_package()
-    if (!is.null(last)) return(last)
-    
-    x <- "."
+    stop("pkg must not be NULL", call. = FALSE)
   }
   
   path <- find_package(x)
   
   pkg <- load_pkg_description(path)
-  set_last_package(pkg)
 }
 
-get_last_package <- NULL
-set_last_package <- NULL
-local({
-  package <- NULL
-  
-  get_last_package <<- function() {
-    package
-  }
-  set_last_package <<- function(x) {
-    package <<- x
-    x
-  }
-
-})
 
 find_package <- function(x) {
   if (is.null(x)) return(FALSE)

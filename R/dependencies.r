@@ -9,20 +9,20 @@
 #' @export
 #' @examples
 #' revdep("ggplot2")
-revdep <- function(pkg, dependencies = c("Depends", "Imports"), recursive = FALSE) {
+revdep <- function(pkg = ".", dependencies = c("Depends", "Imports"), recursive = FALSE) {
   sort(dependsOnPkgs(pkg, dependencies, recursive, installed = packages()))
 }
 
 #' @rdname revdep
 #' @export
-revdep_maintainers <- function(pkg) {
+revdep_maintainers <- function(pkg = ".") {
   as.person(unique(packages()[revdep(pkg), "Maintainer"]))
 }
 
 #' @rdname revdep
 #' @param ... Other parameters passed on to \code{\link{check_cran}}
 #' @export
-revdep_check <- function(pkg, ...) {
+revdep_check <- function(pkg = ".", ...) {
   pkgs <- revdep(pkg)
   check_cran(pkgs, ...)
 }

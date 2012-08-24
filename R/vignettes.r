@@ -10,7 +10,7 @@
 #' @seealso \code{\link{clean_vignettes}} to remove the pdfs in
 #'   \file{inst/doc} created from vignettes
 #' @export
-build_vignettes <- function(pkg = NULL) {
+build_vignettes <- function(pkg = ".") {
   pkg <- as.package(pkg)
   message("Building ", pkg$package, " vignettes")
   
@@ -51,7 +51,7 @@ build_vignettes <- function(pkg = NULL) {
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @export
-clean_vignettes <- function(pkg = NULL) {
+clean_vignettes <- function(pkg = ".") {
   pkg <- as.package(pkg)
   message("Cleaning built vignettes from ", pkg$package)
   
@@ -73,7 +73,7 @@ file_name <- function(x) {
   file_path_sans_ext(basename(x))
 }
 
-find_vignettes <- function(pkg) {
+find_vignettes <- function(pkg = ".") {
   pkg <- as.package(pkg)
   vig_match <- "\\.(Rnw|Snw|Rtex|Stex)$"
   

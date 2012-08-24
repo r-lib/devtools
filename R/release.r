@@ -29,7 +29,7 @@
 #'   release it.
 #' @export
 #' @importFrom RCurl ftpUpload
-release <- function(pkg = NULL, check = TRUE) {
+release <- function(pkg = ".", check = TRUE) {
   pkg <- as.package(pkg)
 
   if (check) {

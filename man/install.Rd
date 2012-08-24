@@ -2,7 +2,7 @@
 \alias{install}
 \title{Install a local development package.}
 \usage{
-  install(pkg = NULL, reload = TRUE, quick = FALSE,
+  install(pkg = ".", reload = TRUE, quick = FALSE,
     args = NULL)
 }
 \arguments{

@@ -2,7 +2,7 @@
 \alias{build}
 \title{Build package in specified directory.}
 \usage{
-  build(pkg = NULL, path = NULL, binary = FALSE)
+  build(pkg = ".", path = NULL, binary = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

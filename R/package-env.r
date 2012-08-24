@@ -1,5 +1,5 @@
 # Create the package environment where exported objects will be copied to
-attach_ns <- function(pkg) {
+attach_ns <- function(pkg = ".") {
   pkg <- as.package(pkg)
   nsenv <- ns_env(pkg)
 
@@ -14,7 +14,7 @@ attach_ns <- function(pkg) {
 
 
 # Copy over the objects from the namespace env to the package env
-export_ns <- function(pkg) {
+export_ns <- function(pkg = ".") {
   pkg <- as.package(pkg)
   nsenv <- ns_env(pkg)
   pkgenv <- pkg_env(pkg)
@@ -46,7 +46,7 @@ export_ns <- function(pkg) {
 #' @seealso \code{\link{imports_env}} for the environment that contains
 #'   imported objects for the package.
 #' @export
-pkg_env <- function(pkg = NULL) {
+pkg_env <- function(pkg = ".") {
   pkg <- as.package(pkg)
   name <- pkg_env_name(pkg)
   
@@ -58,13 +58,13 @@ pkg_env <- function(pkg = NULL) {
 
 # Generate name of package environment
 # Contains exported objects
-pkg_env_name <- function(pkg = NULL) {
+pkg_env_name <- function(pkg = ".") {
   pkg <- as.package(pkg)
   paste("package:", pkg$package, sep = "")
 }
 
 
 # Reports whether a package is loaded and attached
-is_attached <- function(pkg = NULL) {
+is_attached <- function(pkg = ".") {
   pkg_env_name(pkg) %in% search()
 }

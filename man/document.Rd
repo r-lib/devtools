@@ -2,7 +2,7 @@
 \alias{document}
 \title{Use roxygen to make documentation.}
 \usage{
-  document(pkg = NULL, clean = FALSE,
+  document(pkg = ".", clean = FALSE,
     roclets = c("collate", "namespace", "rd"),
     reload = TRUE)
 }
