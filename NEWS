@@ -14,6 +14,10 @@ NEW FEATURES
   `auth_user` if it's not your package (i.e. it's not your `username`) (Fixes
   #116)
 
+* `install_version` now accepts `archive_structure` argument to indicate
+  whether the repository stores archived packages following the CRAN directory
+  structure. This is useful to load a specific version from a custom repository.
+
 * new `dev_help` function replaces `show_rd` and makes it easy to get help on
   any topic in a development package (i.e. a package loaded with `load_all`)
   (Fixes #110)
