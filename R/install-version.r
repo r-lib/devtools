@@ -43,7 +43,7 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     archive <- readRDS(con)
     info <- archive[[package]]
   } else {
-    available_all <- available.packages(sprintf("%s/src/contrib", repos), filters=c('OS_type', 'subarch'))
+    available.all <- available.packages(sprintf("%s/src/contrib", repos), filters=c('OS_type', 'subarch'))
     available.all <- available.all[row.names(available.all) == package, c('Package', 'Version')]
     info <- if (nrow(available.all) == 0) NULL else sprintf('%s_%s.tar.gz', available.all[, 'Package'], available.all[, 'Version'])
   }
@@ -52,11 +52,13 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     stop(sprintf("Couldn't find package '%s'.", package))
   }
 
-  # Shouldn't this never trigger? I suppose it will iff a package is in the Archive directory but not fetched from available.packages.
-  # Is that even a valid use case? I'm thinking we should remove this if structure
+  # Shouldn't this never trigger? I suppose it will iff a package is in the Archive directory 
+  # but not listed in  available.packages, which means someone wants to install a deprecated package.
+  # Is that even a valid use case? I'm thinking we should remove this if structure if so.
   if (is.null(version)) {
     # Grab the latest one
-    # actually, this grabs the second to last one when archive_structure == TRUE since the latest version isn't listed in Archive.rds 
+    # actually, this grabs the second to last one when archive_structure == TRUE, 
+    # since the latest version isn't listed in Archive.rds 
     package.path <- info[length(info)]
   } else {
     directory.path <- if(archive_structure) paste(package, "/", sep="") else ""
