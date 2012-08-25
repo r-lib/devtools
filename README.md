@@ -35,7 +35,8 @@ Building and installing:
 
 * `install_github` installs an R package from github, `install_gitorious` from
   gitorious, `install_bitbucket` from bitbucket, and `install_url` from an
-  arbitrary url. `install_version` installs a specified version from cran,
+  arbitrary url. `install_version` installs a specified version from a given
+  repository.
 
 Creating a new package:
 
