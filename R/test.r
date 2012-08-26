@@ -17,7 +17,9 @@ test <- function(pkg = ".", filter = NULL) {
   if (!file.exists(path_test)) return()
   
   require(testthat)
-  test_dir(path_test, filter = filter)
+  # Run tests in a child of the namespace environment, like testthat::test_package
+  env <- new.env(parent = ns_env(pkg))
+  test_dir(path_test, filter = filter, env = env)
 }
 
 
