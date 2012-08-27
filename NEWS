@@ -121,6 +121,9 @@ BUG FIXES
 * The subject line of the email created by `release` is now "CRAN submission
   [package] [version]", per CRAN repository policy.
 
+* `install_bitbucket` properly installs zip files of projects stored
+  in Mercurial repositories. (Winston Chang. Fixes #148)
+
 INTROSPECTION
 
 * New function `loaded_packages()`, which returns the names of packages
