@@ -4,7 +4,8 @@
 \usage{
   install_version(package, version = NULL,
     repos = getOption("repos"),
-    type = getOption("pkgType"), ...)
+    type = getOption("pkgType"), archive_structure = TRUE,
+    ...)
 }
 \arguments{
   \item{package}{package name}
@@ -14,6 +15,15 @@
   function simply calls \code{\link{install}}. Otherwise,
   it looks at the list of archived source tarballs and
   tries to install an older version instead.}
+
+  \item{archive_structure}{Does the repository have a
+  defined archive structure?  When TRUE, the function looks
+  for older versions of packages in the
+  src/contrib/Archive/packageName directory of the
+  repository, like on CRAN. Setting this to FALSE indicates
+  that all versions of all packages are located in the
+  src/contrib directory of the repository, which is usually
+  the case of custom repositories.}
 
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}
