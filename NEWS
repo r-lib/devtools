@@ -46,6 +46,9 @@ NEW FEATURES
   package is run between your computer and other computers (e.g. the CRAN
   server) (Fixes #145)
 
+* All system R command now print the full command used to make it easier to
+  understand what's going on.
+
 PACKAGE PATHS
 
 * `as.package` no longer uses `~/.Rpackages`.

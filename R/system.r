@@ -1,6 +1,7 @@
 # @param arg a vector of command arguments.
 # @param env a named character vector.  Will be quoted
 system_check <- function(cmd, args = character(), env = character(), ...) {
+  message(cmd, " ", paste(args, collapse = ", "))
   with_env(env, {
     res <- system2(cmd, args = args, ...)
   })
