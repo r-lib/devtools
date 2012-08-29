@@ -53,13 +53,12 @@ unload <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   # This is a hack to work around unloading devtools itself. The unloading
-  # process normally makes clear_cache and unload_dll inaccessible,
-  # resulting in "Error in unload(pkg) : internal error -3 in R_decompress1",
-  # but if we simply evaluate them here (without calling them), then they
-  # will remain available for use later in this function.
+  # process normally makes other devtools functions inaccessible,
+  # resulting in "Error in unload(pkg) : internal error -3 in R_decompress1".
+  # If we simply access them here using as.list (without calling them), then
+  # they will remain available for use later.
   if (pkg$package == "devtools") {
-    clear_cache
-    unload_dll
+    as.list(ns_env(pkg))
   }
 
   if (pkg$package %in% loadedNamespaces()) {
