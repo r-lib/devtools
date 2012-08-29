@@ -3,7 +3,7 @@
 \title{Load complete package.}
 \usage{
   load_all(pkg = ".", reset = FALSE, recompile = FALSE,
-    export_all = TRUE, self = FALSE)
+    export_all = TRUE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -18,10 +18,6 @@
   \item{export_all}{If \code{TRUE} (the default), export
   all objects.  If \code{FALSE}, export only the objects
   that are listed as exports in the NAMESPACE file.}
-
-  \item{self}{For internal use only. (This is used when
-  \code{load_all} is called from
-  \code{\link{reload_devtools}})}
 }
 \description{
   \code{load_all} loads a package. It roughly simulates

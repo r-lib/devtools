@@ -58,7 +58,6 @@ Collate:
     'with.r'
     'install-bitbucket.r'
     'path.r'
-    'reload-devtools.r'
     'run-loadhooks.r'
     'env-utils.r'
     'inst.r'

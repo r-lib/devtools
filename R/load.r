@@ -39,8 +39,6 @@
 #' @param export_all If \code{TRUE} (the default), export all objects.
 #'   If \code{FALSE}, export only the objects that are listed as exports
 #'   in the NAMESPACE file.
-#' @param self For internal use only. (This is used when \code{load_all}
-#'   is called from \code{\link{reload_devtools}})
 #'
 #' @seealso \code{\link{unload}}
 #' @seealso \code{\link{compile_dll}}
@@ -63,19 +61,21 @@
 #' }
 #' @export
 load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
-  export_all = TRUE, self = FALSE) {
+  export_all = TRUE) {
 
   pkg <- as.package(pkg)
 
-  # Reloading devtools is a special case
-  if (pkg$package == "devtools" && self == FALSE) {
-    out <- reload_devtools(pkg, reset, recompile, export_all)
-    return(invisible(out))
-  } else {
-    message("Loading ", pkg$package)
+  message("Loading ", pkg$package)
+
+  # Reloading devtools is a special case. Normally, objects in the
+  # namespace become inaccessible if the namespace is unloaded before the
+  # the object has been accessed. This is kind of a hack - using as.list
+  # on the namespace accesses each object, making the objects accessible
+  # later, after the namespace is unloaded.
+  if (pkg$package == "devtools") {
+    as.list(ns_env(pkg))
   }
 
-  
   # Check description file is ok
   check <- tools:::.check_package_description(
     file.path(pkg$path, "DESCRIPTION"))
