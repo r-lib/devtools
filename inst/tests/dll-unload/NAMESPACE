@@ -1,2 +1,0 @@
-useDynLib(dllunload)
-export(nulltest)

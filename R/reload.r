@@ -94,18 +94,16 @@ unload <- function(pkg = ".") {
 # This unloads dlls loaded by either library() or load_all()
 unload_dll <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  libs <- .dynLibs()
 
-  # Get all dlls whose name matches this package
-  # (can be more than one)
-  matchidx <- vapply(libs, "[[", character(1), "name") == pkg$package
+  pkglibs <- loaded_dlls(pkg)
 
-  for (matchlib in libs[matchidx]) {
-    dyn.unload(matchlib[["path"]])
+  for (lib in pkglibs) {
+    dyn.unload(lib[["path"]])
   }
 
   # Remove the unloaded dlls from .dynLibs()
-  .dynLibs(libs[!matchidx])
+  libs <- .dynLibs()
+  .dynLibs(libs[!(libs %in% pkglibs)])
 
   invisible()
 }
