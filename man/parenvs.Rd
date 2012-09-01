@@ -1,9 +1,9 @@
-\name{parent_envs}
-\alias{parent_envs}
+\name{parenvs}
+\alias{parenvs}
 \title{Given an environment or object, return an \code{envlist} of its
 parent environments.}
 \usage{
-  parent_envs(e = parent.frame(), all = FALSE)
+  parenvs(e = parent.frame(), all = FALSE)
 }
 \arguments{
   \item{e}{An environment or other object.}
@@ -19,14 +19,14 @@ parent environments.}
 }
 \examples{
 # Print the current environment and its parents
-parent_envs()
+parenvs()
 
 # Print the parent environments of the load_all function
-e <- parent_envs(load_all)
+e <- parenvs(load_all)
 e
 
 # Get all parent environments, going all the way to empty env
-e <- parent_envs(load_all, TRUE)
+e <- parenvs(load_all, TRUE)
 e
 
 # Print e with paths

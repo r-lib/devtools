@@ -142,7 +142,7 @@ INTROSPECTION
 * New function `parse_ns_file()`, which parses a NAMESPACE file for a
   package.
 
-* New function `parent_envs()`, which parents the parent environments
+* New function `parenvs()`, which parents the parent environments
   of an object. (Winston Chang)
 
 devtools 0.7.1

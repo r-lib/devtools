@@ -2,7 +2,7 @@ context("Namespace")
 
 # Is e an ancestor environment of x?
 is_ancestor_env <- function(e, x) {
-  x_par <- parent_envs(x, all = TRUE)
+  x_par <- parenvs(x, all = TRUE)
 
   for (p in x_par) {
     if (identical(e, p)) return(TRUE)
@@ -91,9 +91,9 @@ test_that("Namespace, imports, and package environments have correct hierarchy",
   nsenv  <- ns_env("namespace")
   impenv <- imports_env("namespace")
 
-  expect_identical(parent_envs(nsenv)[[2]], impenv)
-  expect_identical(parent_envs(nsenv)[[3]], .BaseNamespaceEnv)
-  expect_identical(parent_envs(nsenv)[[4]], .GlobalEnv)
+  expect_identical(parenvs(nsenv)[[2]], impenv)
+  expect_identical(parenvs(nsenv)[[3]], .BaseNamespaceEnv)
+  expect_identical(parenvs(nsenv)[[4]], .GlobalEnv)
 
   # pkgenv should be an ancestor of the global environment
   expect_true(is_ancestor_env(pkgenv, .GlobalEnv))

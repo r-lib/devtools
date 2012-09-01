@@ -11,14 +11,14 @@
 #'   top-level environment).
 #' @examples
 #' # Print the current environment and its parents
-#' parent_envs()
+#' parenvs()
 #'
 #' # Print the parent environments of the load_all function
-#' e <- parent_envs(load_all)
+#' e <- parenvs(load_all)
 #' e
 #'
 #' # Get all parent environments, going all the way to empty env
-#' e <- parent_envs(load_all, TRUE)
+#' e <- parenvs(load_all, TRUE)
 #' e
 #'
 #' # Print e with paths
@@ -35,7 +35,7 @@
 #' e[[1]]
 #' ls(e[[1]], all.names = TRUE)
 #' @export
-parent_envs <- function(e = parent.frame(), all = FALSE) {
+parenvs <- function(e = parent.frame(), all = FALSE) {
   if (!is.environment(e))  e <- environment(e)
   if (is.null(e))  return(NULL)
 
