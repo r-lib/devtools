@@ -3,78 +3,43 @@
 #' Possible specifications of package:
 #' \itemize{
 #'   \item path
-#'   \item name (lookup in .Rpackages)
 #'   \item package object
 #' }
 #' @param x object to coerce to a package
 #' @export
 as.package <- function(x = NULL) {
   if (is.package(x)) return(x)
-
+  
   if (is.null(x)) {
-    last <- get_last_package()
-    if (!is.null(last)) return(last)
-    
-    message("No package specified, using working directory.")
-    x <- "."
+    stop("pkg must not be NULL", call. = FALSE)
   }
   
   path <- find_package(x)
-  if (is.null(path)) {
-    stop("Can't find package ", x, call. = FALSE)
-  }
   
   pkg <- load_pkg_description(path)
-  set_last_package(pkg)
 }
 
-get_last_package <- NULL
-set_last_package <- NULL
-local({
-  package <- NULL
-  
-  get_last_package <<- function() {
-    package
-  }
-  set_last_package <<- function(x) {
-    package <<- x
-    x
-  }
-
-})
 
 find_package <- function(x) {
-  is_package_path <- function(x) {
-    if (is.null(x)) return(FALSE)
-    
-    desc_path <- file.path(x, "DESCRIPTION")
-    file.exists(x) && file.exists(desc_path)
-  }
-  if (is_package_path(x)) {
-    return(x)
-  }
-
-  # Look for config file, and give up if it doesn't exist
-  config_path <- path.expand("~/.Rpackages")
-  if (!file.exists(config_path)) {
-    return(NULL)
-  }
-  lookup <- source(config_path)$value
+  if (is.null(x)) return(FALSE)
   
-  # Try special case
-  if (is_package_path(lookup[[x]])) {
-    return(lookup[[x]])
+  # Strip trailing slashes (needed only for windows)
+  x <- normalizePath(x, mustWork = FALSE)
+  x <- gsub("\\\\$", "", x)
+  
+  if (!file.exists(x)) {
+    stop("Can't find directory ", x, call. = FALSE)
   }
-
-  # Otherwise try default function, if it exists
-  if (!is.null(lookup$default)) {
-    default_loc <- lookup$default(x)
-    if (is_package_path(default_loc)) {
-      return(default_loc)
-    }
+  if (!file.info(x)$isdir) {
+    stop(x, " is not a directory", call. = FALSE)
   }
-
-  NULL
+  
+  desc_path <- file.path(x, "DESCRIPTION")
+  if (!file.exists(desc_path)) {
+    stop("No DESCRIPTION file found in ", x, call. = FALSE)
+  }
+  
+  x
 }
 
 #' Load package DESCRIPTION into convenient form.

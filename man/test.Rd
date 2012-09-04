@@ -2,7 +2,7 @@
 \alias{test}
 \title{Execute all \pkg{test_that} tests in a package.}
 \usage{
-  test(pkg = NULL, filter = NULL)
+  test(pkg = ".", filter = NULL)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

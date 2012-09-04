@@ -8,20 +8,22 @@
 #' @param name optional package name, used to provide more informative
 #'   messages
 #' @param subdir subdirectory within url bundle that contains the R package.
+#' @param config additional configuration argument (e.g. proxy,
+#'   authentication) passed on to \code{\link[httr]{GET}}.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
-install_url <- function(url, name = NULL, subdir = NULL, ...) {
+install_url <- function(url, name = NULL, subdir = NULL, config = list(), ...) {
   if (is.null(name)) {
     name <- rep(list(NULL), length(url))
   }
   
   invisible(mapply(install_url_single, url, name, 
-    MoreArgs = list(subdir = subdir, ...)))
+    MoreArgs = list(subdir = subdir, config = config, ...)))
 }
 
 #' @importFrom httr GET config stop_for_status content
-install_url_single <- function(url, name = NULL, subdir = NULL, ...) {
+install_url_single <- function(url, name = NULL, subdir = NULL, config = list(), ...) {
   if (is.null(name)) {
     name <- basename(url)
   }
@@ -30,7 +32,7 @@ install_url_single <- function(url, name = NULL, subdir = NULL, ...) {
   bundle <- file.path(tempdir(), name)
   
   # Download package file
-  request <- GET(url, config(ssl.verifypeer = FALSE))
+  request <- GET(url, config)
   stop_for_status(request)
   writeBin(content(request), bundle)
   on.exit(unlink(bundle), add = TRUE)

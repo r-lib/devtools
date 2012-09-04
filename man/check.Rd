@@ -2,7 +2,7 @@
 \alias{check}
 \title{Build and check a package, cleaning up automatically on success.}
 \usage{
-  check(pkg = NULL, document = TRUE, cleanup = TRUE,
+  check(pkg = ".", document = TRUE, cleanup = TRUE,
     cran = TRUE, args = NULL)
 }
 \arguments{

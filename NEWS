@@ -1,4 +1,149 @@
+devtools 0.8.0
+--------------
+
+NEW FEATURES
+
+* `create` function makes it easier to create a package skeleton using
+  devtools standards.
+
+* `install_github()` can now install from a pull request -- it installs
+  the branch referenced in the pull request.
+
+* `install_github` now accepts `auth_user` and `password` arguments if you
+  want to install a package in a private github repo. You only need to specify
+  `auth_user` if it's not your package (i.e. it's not your `username`) (Fixes
+  #116)
+
+* new `dev_help` function replaces `show_rd` and makes it easy to get help on
+  any topic in a development package (i.e. a package loaded with `load_all`)
+  (Fixes #110)
+
+* `dev_example` runs the examples for one in-development package. (Fixes #108)
+
+* `build_vignettes` now looks in modern location for vignettes (`vignettes/`) 
+   and warn if vignettes found in old location (`inst/doc`).  Building now 
+   occurs in a temporary directory (to avoid polluting the package with
+   build artefacts) and only final pdf files are copied over.
+
+* new `clean_vignettes` function to remove pdfs in `inst/doc` that were built
+  from vignettes in `vignettes/`
+
+* `load_all` does a much much better job at simulating package loading (see
+  LOADING section). It also compiles and loads C/C++/Fortran code.
+
+* `unload()` is now an exported function, which unloads a package, trying
+  harder than just `detach`. It now also unloads DLLs. (Winston Chang. Fixes
+  #119)
+
+* `run_examples` now has parameters `show`, `test`, `run` to control which of
+  `\dontrun{}`, `\dontshow{}`, `\donttest{}` and `\testonly{}` are commented
+  out. The `strict` parameter has been removed since it is no longer necessary
+  because `load_all` can respect namespaces. (Fixes #118)
+
+* `build()`, `check()`, `install()` etc now run R in `--vanilla` mode which
+  prevents it from reading any of your site or personal configuration files.
+  This should prevent inconsistencies between the environment in which the
+  package is run between your computer and other computers (e.g. the CRAN
+  server) (Fixes #145)
+
+* All system R command now print the full command used to make it easier to
+  understand what's going on.
+
+PACKAGE PATHS
+
+* `as.package` no longer uses `~/.Rpackages`.
+
+* `as.package` provides more informative error messages when path does not
+  exist, isn't a directory, or doesn't contain a `DESCRIPTION` file.
+
+* New function `inst()` takes the name of a package and returns the installed
+  path of that package. (Winston Chang. Fixes #130). This makes it possible to
+  use `devtools` functions (e.g. `unload`) with regular installed packages,
+  not just in-development source packages.
+
+* New function `devtest()` returns paths to an internal testing packages
+  in devtools.
+
+LOADING
+
+* Development packages are now loaded into a namespace environment,
+  <namespace:xxxx>, and then the objects namespace are copied to the
+  package environment, <package:xxxx>. This more accurately simulates
+  how packages are normally loaded. However, all of the objects (not
+  just the exported ones) are still copied to the package environment.
+  (Winston Chang. Fixes #3, #60, and #125)
+
+* Packages listed in Imports and Depends are now loaded into an imports
+  environment, with name attribute "imports:xxxx", which is the parent
+  of the namespace environment. The imports environment is in turn a
+  child of the <namespace:base> environment, which is a child of the
+  global environment. This more accurately simulates how packages are
+  normally loaded.  These packages previously were loaded and attached.
+  (Winston Chang. Fixes #85)
+
+* The NAMESPACE file is now used for loading imports, instead of the
+  DESCRIPTION file. Previously, `load_all` loaded all objects from the
+  packages listed in DESCRIPTION. Now it loads packages (and, when
+  when 'importfrom' is used, specific objects from packages) listed in
+  NAMESPACE. This more closely simulates normal package loading. It
+  still checks version numbers of packages listed in DESCRIPTION.
+  (Winston Chang)
+
+* `load_all` can now be used to properly reload devtools. It does this
+  by creating a copy of the devtools namespace environment, and calling
+  `load_all` from that environment. (Winston Chang)
+
+* The `.onLoad` and `.onAttach` functions for a development package are
+  now both called when loading a package for the first time, or with
+  `reset=TRUE`, and the order more correctly simulates normal package
+  loading (create the namespace, call `.onLoad`, copy objects to the
+  package environment, and then call `.onAttach`). (Winston Chang)
+
+* `load_all` will now throw a warning if a dependency package does not
+  satisfy the version requirement listed in DESCRIPTION. (Winston Chang.
+  Fixes #109)
+
+* The package environment now has a 'path' attribute, similar to a
+  package loaded the normal way. (Winston Chang)
+
+* `load_all` now has an option `export_all`. When set to TRUE, only the
+  objects listed as exports in NAMESPACE are exported. (Winston Chang)
+
+* `load_all` now compiles C files in the /src directory. (Winston Chang)
+
+* New functions `compile_dll()` and `clean_dll()`, which compile C/C++/
+  Fortan source code, and clean up the compiled objects, respectively.
+  (Winston Chang. Fixes #131)
+
+BUG FIXES
+
+* `load_code` now properly skips missing files. (Winston Chang)
+
 * Add `--no-resave-data` to default build command. 
+
+* The subject line of the email created by `release` is now "CRAN submission
+  [package] [version]", per CRAN repository policy.
+
+* `install_bitbucket` properly installs zip files of projects stored
+  in Mercurial repositories. (Winston Chang. Fixes #148)
+
+INTROSPECTION
+
+* New function `loaded_packages()`, which returns the names of packages
+  that are loaded and attached.
+
+* Packages loaded with `load_all` now store devtools metadata in their
+  namespace environment, in a variable called `.__DEVTOOLS__`. This can
+  be accessed with the `dev_meta` function. (Winston Chang. Fixes #128)
+
+* `dev_mode` now stores the path it uses in option `dev_path`. That makes it
+  easy for other applications to detect when it is on and to act accordingly.
+
+* New function `parse_ns_file()`, which parses a NAMESPACE file for a
+  package.
+
+* New function `parenvs()`, which parents the parent environments
+  of an object. (Winston Chang)
 
 devtools 0.7.1
 --------------

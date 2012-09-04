@@ -29,7 +29,7 @@
 #'   release it.
 #' @export
 #' @importFrom RCurl ftpUpload
-release <- function(pkg = NULL, check = TRUE) {
+release <- function(pkg = ".", check = TRUE) {
   pkg <- as.package(pkg)
 
   if (check) {
@@ -69,7 +69,7 @@ release <- function(pkg = NULL, check = TRUE) {
     "\n",
     "Thanks!\n",
     "INSERT YOUR NAME", "\n\n\n", sep = "")
-  subject <- paste("CRAN upload: ", pkg$package, " ", pkg$version, sep = "")
+  subject <- paste("CRAN submission ", pkg$package, " ", pkg$version, sep = "")
   create.post(msg, subject = subject, address = "cran@r-project.org")
   
   invisible(TRUE)

@@ -8,7 +8,7 @@
 #'   \code{\link{as.package}} for more information
 #' @inheritParams testthat::test_dir
 #' @export
-test <- function(pkg = NULL, filter = NULL) {
+test <- function(pkg = ".", filter = NULL) {
   pkg <- as.package(pkg)
   load_all(pkg)
   message("Testing ", pkg$package)
@@ -17,5 +17,28 @@ test <- function(pkg = NULL, filter = NULL) {
   if (!file.exists(path_test)) return()
   
   require(testthat)
-  test_dir(path_test, filter = filter)
+  # Run tests in a child of the namespace environment, like testthat::test_package
+  env <- new.env(parent = ns_env(pkg))
+  test_dir(path_test, filter = filter, env = env)
+}
+
+
+#' Return the path to one of the packages in the devtools test dir
+#'
+#' Devtools comes with some simple packages for testing. This function
+#' returns the path to them.
+#'
+#' @param package Name of the test package.
+#' @examples
+#' devtest("collate-extra")
+#'
+#' @export
+devtest <- function(package) {
+  if (is.null(dev_meta("devtools"))) {
+    # devtools was loaded the normal way
+    system.file(package = "devtools", "tests", package)
+  } else {
+    # devtools was loaded with load_all
+    system.file(package = "devtools", "inst", "tests", package)
+  }
 }

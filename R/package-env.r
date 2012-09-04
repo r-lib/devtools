@@ -1,91 +1,70 @@
-#' Generate an development environment for a package.
+# Create the package environment where exported objects will be copied to
+attach_ns <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+  nsenv <- ns_env(pkg)
+
+  if (is_attached(pkg)) {
+    stop("Package ", pkg$package, " is already attached.")
+  }
+
+  # This should be similar to attachNamespace
+  pkgenv <- attach(NULL, name = pkg_env_name(pkg))
+  attr(pkgenv, "path") <- getNamespaceInfo(nsenv, "path")
+}
+
+
+# Copy over the objects from the namespace env to the package env
+export_ns <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+  nsenv <- ns_env(pkg)
+  pkgenv <- pkg_env(pkg)
+
+  exports <- getNamespaceExports(nsenv)
+  importIntoEnv(pkgenv, exports, nsenv, exports)
+}
+
+
+#' Return package environment
 #'
-#' \code{devtools} keeps the global workspace clean by loading all code and
-#' data into a separate environment.  This environment is 
-#' \code{\link{attach}}ed to the search path just after the global environment
-#' so it will override loaded packages.
+#' This is an environment like \code{<package:pkg>}. The package
+#' environment contains the exported objects from a package. It is
+#' attached, so it is an ancestor of \code{R_GlobalEnv}.
+#'
+#' When a package is loaded the normal way, using \code{\link{library}},
+#' this environment contains only the exported objects from the
+#' namespace. However, when loaded with \code{\link{load_all}}, this
+#' environment will contain all the objects from the namespace, unless
+#' \code{load_all} is used with \code{export_all=FALSE}.
+#'
+#' If the package is not attached, this function returns \code{NULL}.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
-pkg_env <- function(pkg = NULL) {
+#' @seealso \code{\link{ns_env}} for the namespace environment that
+#'   all the objects (exported and not exported).
+#' @seealso \code{\link{imports_env}} for the environment that contains
+#'   imported objects for the package.
+#' @export
+pkg_env <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  name <- env_name(pkg)
+  name <- pkg_env_name(pkg)
   
-  if (!is.loaded(pkg)) {
-    attach(base_env(pkg), name = name)
-  }
-  
-  # if (is.loaded(pkg)) return(as.environment(name))
-  # 
-  # # Set up package environments ----------------------------------------------
-  # imp_env <- new.env(parent = .BaseNamespaceEnv, hash = TRUE)
-  # attr(imp_env, "name") <- paste("imports", pkg$package, sep = ":")
-  # 
-  # env <- new.env(parent = imp_env, hash = TRUE)
-  # env$.packageName <- pkg$package
-  # 
-  # ns_env <- new.env(hash = TRUE, parent = baseenv())
-  # ns_env[["spec"]] <- c(name = pkg$package, version = pkg$version)
-  # env[[".__NAMESPACE__."]] <- ns_env
-  # 
-  # setNamespaceInfo(env, "exports", new.env(hash = TRUE, parent = baseenv()))
-  # setNamespaceInfo(env, "imports", list("base" = TRUE))
-  # setNamespaceInfo(env, "path", pkg$path)
-  # setNamespaceInfo(env, "dynlibs", NULL)
-  # setNamespaceInfo(env, "S3methods", matrix(NA_character_, 0L, 3L))
-  # env[[".__S3MethodsTable__."]] <- new.env(hash = TRUE, parent = baseenv())
-  # 
-  # dimpenv <- new.env(parent = baseenv(), hash = TRUE)
-  # attr(dimpenv, "name") <- paste("lazydata", pkg$package, sep=":")
-  # setNamespaceInfo(env, "lazydata", dimpenv)
-  # 
-  # # Set up imports -----------------------------------------------------------
-  # nsInfo <- parseNamespaceFile(basename(pkg$path), dirname(pkg$path))
-  # 
-  # for (i in nsInfo$imports) {
-  #   if (is.character(i)) {
-  #     namespaceImport(env, loadNamespace(i))
-  #   } else {
-  #     namespaceImportFrom(env, loadNamespace(i[[1L]]), i[[2L]])
-  #   }
-  # }
-  # for(imp in nsInfo$importClasses) {
-  #   namespaceImportClasses(env, loadNamespace(imp[[1L]]), imp[[2L]])
-  # }
-  # for(imp in nsInfo$importMethods) {
-  #   namespaceImportMethods(env, loadNamespace(imp[[1L]]), imp[[2L]])
-  # }
-  
+  if (!is_attached(pkg)) return(NULL)
+
   as.environment(name)
 }
 
-#' Detach development environment
-#' @keywords internal
-clear_pkg_env <- function(pkg = NULL) {
-  
-  if (is.loaded(pkg)) {
-    unload(pkg)
-  }  
-}
 
-#' Generate name of package development environment
-#' @keywords internal
-env_name <- function(pkg = NULL) {
+# Generate name of package environment
+# Contains exported objects
+pkg_env_name <- function(pkg = ".") {
   pkg <- as.package(pkg)
   paste("package:", pkg$package, sep = "")
 }
 
-clear_classes <- function(pkg = NULL) {
-  pkg <- as.package(pkg)
-  if (!is.loaded(pkg)) return()
-  
-  name <- env_name(pkg)
-  classes <- getClasses(name)
-  lapply(classes, removeClass, where = name)    
-  invisible()
-}
 
-base_env <- function(pkg) {
-  new.env(parent = emptyenv())
+# Reports whether a package is loaded and attached
+is_attached <- function(pkg = ".") {
+  pkg_env_name(pkg) %in% search()
 }

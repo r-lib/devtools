@@ -16,7 +16,7 @@
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to \code{R CMD check}.
 #' @export
-check <- function(pkg = NULL, document = TRUE, cleanup = TRUE,
+check <- function(pkg = ".", document = TRUE, cleanup = TRUE,
   cran = TRUE, args = NULL) {
   pkg <- as.package(pkg)
   

@@ -1,0 +1,11 @@
+Package: dependversion
+Title: Tools to make developing R code easier
+License: GPL-2
+Description:
+Author: Hadley <h.wickham@gmail.com>
+Maintainer: Hadley <h.wickham@gmail.com>
+Version: 0.1
+Imports:
+    grid (>= 100.0),
+    compiler (>= 2.0-0)
+Collate: a.r b.r

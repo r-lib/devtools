@@ -1,7 +1,8 @@
 Package: devtools
 Title: Tools to make developing R code easier
 Version: 0.7.1
-Author: Hadley Wickham <h.wickham@gmail.com>
+Author: Hadley Wickham <h.wickham@gmail.com>,
+    Winston Chang <winston@stdout.org>
 Maintainer: Hadley Wickham <h.wickham@gmail.com>
 Description: Collection of package development tools
 Depends:
@@ -11,7 +12,9 @@ Imports:
     RCurl,
     utils,
     tools,
-    memoise
+    memoise,
+    whisker,
+    evaluate
 Suggests:
     testthat,
     roxygen2,
@@ -28,7 +31,6 @@ Collate:
     'file-cache.r'
     'has-devel.r'
     'install.r'
-    'load-c.r'
     'load-code.r'
     'load-data.r'
     'load.r'
@@ -56,3 +58,19 @@ Collate:
     'with.r'
     'install-bitbucket.r'
     'path.r'
+    'run-loadhooks.r'
+    'env-utils.r'
+    'inst.r'
+    'metadata.r'
+    'create.r'
+    'session-info.r'
+    'parent-envs.r'
+    'compile.r'
+    'load-dll.r'
+    'utils.r'
+    'imports-env.r'
+    'namespace-env.r'
+    'topic-index.r'
+    'dev-example.r'
+    'run-example.r'
+    'dev-help.r'

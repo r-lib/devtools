@@ -1,0 +1,34 @@
+\name{dev_help}
+\alias{dev_help}
+\title{Read the in-development help for a package loaded with devtools.}
+\usage{
+  dev_help(topic, stage = "render",
+    type = getOption("help_type"))
+}
+\arguments{
+  \item{topic}{name of help to search for.}
+
+  \item{stage}{at which stage ("build", "install", or
+  "render") should \\Sexpr macros be executed? This is only
+  important if you're using \\Sexpr macro's in your Rd
+  files.}
+
+  \item{type}{of html to produce: \code{"html"} or
+  \code{"text"}. Defaults to your default documentation
+  type.}
+}
+\description{
+  Note that this only renders a single documentation file,
+  so that links to other files within the package won't
+  work.
+}
+\examples{
+\dontrun{
+library("ggplot2")
+help("ggplot") # loads installed documentation for ggplot
+
+load_all("ggplot2")
+dev_help("ggplot") # loads development documentation for ggplot
+}
+}
+

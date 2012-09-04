@@ -9,20 +9,20 @@
 #' @export
 #' @examples
 #' revdep("ggplot2")
-revdep <- function(pkg, dependencies = c("Depends", "Imports"), recursive = FALSE) {
+revdep <- function(pkg = ".", dependencies = c("Depends", "Imports"), recursive = FALSE) {
   sort(dependsOnPkgs(pkg, dependencies, recursive, installed = packages()))
 }
 
 #' @rdname revdep
 #' @export
-revdep_maintainers <- function(pkg) {
+revdep_maintainers <- function(pkg = ".") {
   as.person(unique(packages()[revdep(pkg), "Maintainer"]))
 }
 
 #' @rdname revdep
 #' @param ... Other parameters passed on to \code{\link{check_cran}}
 #' @export
-revdep_check <- function(pkg, ...) {
+revdep_check <- function(pkg = ".", ...) {
   pkgs <- revdep(pkg)
   check_cran(pkgs, ...)
 }
@@ -41,8 +41,9 @@ cran_packages <- memoise(function() {
 
 #' @importFrom memoise memoise
 bioc_packages <- memoise(function() {
-  on.exit(closeAllConnections())
-  bioc <- read.dcf(url("http://bioconductor.org/packages/release/bioc/VIEWS"))
+  con <- url("http://bioconductor.org/packages/release/bioc/VIEWS")
+  on.exit(close(con))
+  bioc <- read.dcf(con)
   rownames(bioc) <- bioc[, 1]
   bioc
 })

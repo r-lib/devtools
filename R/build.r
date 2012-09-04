@@ -10,7 +10,7 @@
 #' @family build functions
 #' @return a string giving the location (including file name) of the built
 #'  package
-build <- function(pkg = NULL, path = NULL, binary = FALSE) {
+build <- function(pkg = ".", path = NULL, binary = FALSE) {
   pkg <- as.package(pkg)
   if (is.null(path)) {
     path <- dirname(pkg$path)
@@ -47,10 +47,10 @@ build <- function(pkg = NULL, path = NULL, binary = FALSE) {
 #' @importFrom RCurl ftpUpload
 #' @export
 #' @family build functions
-build_win <- function(pkg = NULL, version = "R-release") {
+build_win <- function(pkg = ".", version = "R-release") {
   pkg <- as.package(pkg)
   message("Building windows version of ", pkg$package, 
-    " with win-builder.org.\nCheck your email for link to package.")
+    " with win-builder.r-project.org.\nCheck your email for link to package.")
 
   built_path <- build(pkg, tempdir())
   on.exit(unlink(built_path))

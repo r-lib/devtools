@@ -19,7 +19,7 @@
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
 #'   set.
 #' @importFrom utils install.packages
-install <- function(pkg = NULL, reload = TRUE, quick = FALSE, args = NULL) {
+install <- function(pkg = ".", reload = TRUE, quick = FALSE, args = NULL) {
   pkg <- as.package(pkg)
   message("Installing ", pkg$package)
   install_deps(pkg)  
@@ -41,10 +41,10 @@ install <- function(pkg = NULL, reload = TRUE, quick = FALSE, args = NULL) {
   invisible(TRUE)
 }
 
-install_deps <- function(pkg = NULL) {
+install_deps <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  deps <- c(parse_deps(pkg$depends), parse_deps(pkg$imports), 
-    parse_deps(pkg$linkingto))
+  deps <- c(parse_deps(pkg$depends)$name, parse_deps(pkg$imports)$name, 
+    parse_deps(pkg$linkingto)$name)
   
   # Remove packages that are already installed
   not.installed <- function(x) length(find.package(x, quiet = TRUE)) == 0

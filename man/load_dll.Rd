@@ -1,15 +1,15 @@
-\name{load_c}
-\alias{load_c}
-\title{Load C code.}
+\name{load_dll}
+\alias{load_dll}
+\title{Load a compiled DLL}
 \usage{
-  load_c(pkg = NULL)
+  load_dll(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package
   name.  See \code{\link{as.package}} for more information}
 }
 \description{
-  Load C code.
+  Load a compiled DLL
 }
 \keyword{programming}
 
