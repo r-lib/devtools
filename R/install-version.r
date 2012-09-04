@@ -44,7 +44,7 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     info <- archive[[package]]
   } else {
     available.all <- available.packages(sprintf("%s/src/contrib", repos), filters=c('OS_type', 'subarch'))
-    available.all <- available.all[row.names(available.all) == package, c('Package', 'Version')]
+    available.all <- available.all[row.names(available.all) == package, c('Package', 'Version'), drop=FALSE]
     info <- if (nrow(available.all) == 0) NULL else sprintf('%s_%s.tar.gz', available.all[, 'Package'], available.all[, 'Version'])
   }
 
