@@ -11,10 +11,16 @@
 #'   recent version of the package, this function simply calls
 #'   \code{\link{install}}. Otherwise, it looks at the list of
 #'   archived source tarballs and tries to install an older version instead.
+#' @param archive_structure Does the repository have a defined archive structure?
+#'   When TRUE, the function  looks for older versions of packages in
+#'   the src/contrib/Archive/packageName directory of the repository, like 
+#'   on CRAN. Setting this to FALSE indicates that all versions of all packages
+#'   are located in the src/contrib directory of the repository, which is
+#'   usually the case of custom repositories.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @inheritParams utils::install.packages
 #' @author Jeremy Stephens
-install_version <- function(package, version = NULL, repos = getOption("repos"), type = getOption("pkgType"), ...) {
+install_version <- function(package, version = NULL, repos = getOption("repos"), type = getOption("pkgType"), archive_structure=TRUE, ...) {
   
   contriburl <- contrib.url(repos, type)
   available <- available.packages(contriburl)
@@ -31,27 +37,39 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     }
   }
 
-  con <- gzcon(url(sprintf("%s/src/contrib/Archive.rds", repos), "rb"))
-  on.exit(close(con))
-  archive <- readRDS(con)
-
-  info <- archive[[package]]
-  if (is.null(info)) {
-    stop(sprintf("couldn't find package '%s'", package))
+  if (archive_structure) {
+    con <- gzcon(url(sprintf("%s/src/contrib/Archive.rds", repos), "rb"))
+    on.exit(close(con))
+    archive <- readRDS(con)
+    info <- archive[[package]]
+  } else {
+    available.all <- available.packages(sprintf("%s/src/contrib", repos), filters=c('OS_type', 'subarch'))
+    available.all <- available.all[row.names(available.all) == package, c('Package', 'Version'), drop=FALSE]
+    info <- if (nrow(available.all) == 0) NULL else sprintf('%s_%s.tar.gz', available.all[, 'Package'], available.all[, 'Version'])
   }
 
+  if (is.null(info)) {
+    stop(sprintf("Couldn't find package '%s'.", package))
+  }
+
+  # Shouldn't this never trigger? I suppose it will iff a package is in the Archive directory 
+  # but not listed in  available.packages, which means someone wants to install a deprecated package.
+  # Is that even a valid use case? I'm thinking we should remove this if structure if so.
   if (is.null(version)) {
-    # Grab the latest one: only happens if pulled from CRAN
+    # Grab the latest one
+    # actually, this grabs the second to last one when archive_structure == TRUE, 
+    # since the latest version isn't listed in Archive.rds 
     package.path <- info[length(info)]
   } else {
-    package.path <- paste(package, "/", package, "_", version, ".tar.gz",
-      sep = "")
+    directory.path <- if(archive_structure) paste(package, "/", sep="") else ""
+    package.path <- paste(directory.path, package, "_", version, ".tar.gz", sep="")
     if (!(package.path %in% info)) {
-      stop(sprintf("version '%s' is invalid for package '%s'", package,
-        version))
+      stop(sprintf("Version '%s' is invalid for package '%s'. Valid versions are: %s.", version,
+        package, paste(gsub(sprintf("%s|/|_|.tar.gz", package), "", info), collapse=', ')))
     }
   }
 
-  url <- paste(repos, "/src/contrib/Archive/", package.path, sep = "")  
+  archive.path <- sprintf("/src/contrib/%s", if (archive_structure) "Archive/" else "")
+  url <- paste(repos, archive.path, package.path, sep = "")
   install_url(url, ...)
 }
