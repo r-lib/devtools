@@ -1,9 +1,12 @@
 Package: devtools
 Title: Tools to make developing R code easier
 Version: 0.8
-Author: Hadley Wickham <h.wickham@gmail.com>,
-    Winston Chang <winston@stdout.org>
-Maintainer: Hadley Wickham <h.wickham@gmail.com>
+Authors@R: c( 
+    person("Hadley", "Wickham", 
+      email = "h.wickham@gmail.com", role = c("aut", "cre")),
+    person("Winston", "Chang", role = "aut"), 
+    person("R Core team", role = "ctb", 
+      comment = "Namespace related code extracted out of base R"))
 Description: Collection of package development tools
 Depends:
     R (>= 2.15)
@@ -19,7 +22,7 @@ Suggests:
     testthat,
     roxygen2,
     BiocInstaller
-License: MIT
+License: GPL (>= 2)
 Collate:
     'bash.r'
     'build.r'
