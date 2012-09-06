@@ -67,7 +67,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     available = available_bin)
   if (!is.null(old)) {
     message("Updating ", nrow(old), " existing dependencies")
-    install.packages(old[, "Package"], libpath, repos = repos, type = type)
+    install.packages(old[, "Package"], libpath, repos = repos, type = type,
+      Ncpus = threads)
   }
   
   # Install missing dependencies
