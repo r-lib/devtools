@@ -123,6 +123,9 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   if (n_problems > 0) {
     warning("Found ", n_problems, call. = FALSE)
   }
+
+  # Collect the output
+  collect_check_results(tmp)
   
   invisible(results)
 }
