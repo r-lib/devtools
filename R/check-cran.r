@@ -123,6 +123,9 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   if (n_problems > 0) {
     warning("Found ", n_problems, call. = FALSE)
   }
+
+  # Collect the output
+  collect_check_results(tmp)
   
   invisible(results)
 }
@@ -158,5 +161,61 @@ parse_check_results <- function(path) {
   messages <- pieces[problems & !cran_version]
   if (length(messages)) {
     paste("* ", messages, collapse = "\n")
+  }
+}
+
+# Collects all the results from running check_cran and puts in a
+# directory results/ under the top level tempdir.
+collect_check_results <- function(topdir = tempdir()) {
+  # Directory for storing results
+  rdir <- file.path(topdir, "results")
+  if (!dir.exists(rdir))
+    dir.create(rdir)
+
+  checkdirs <- list.dirs(topdir, recursive=FALSE)
+  checkdirs <- checkdirs[grepl("\\.Rcheck$", checkdirs)]
+  # Make it a named vector so that the output of lapply below contains names
+  names(checkdirs) <- sub("\\.Rcheck$", "", basename(checkdirs))
+
+  # Copy over all the 00check.log and 00install.out files
+  message("Copying check logs to ", rdir)
+  checklogs <- file.path(checkdirs, "00check.log")
+  checklogs_dest <- file.path(rdir, paste(names(checkdirs), "-check", sep=""))
+  names(checklogs_dest) <- names(checkdirs)
+  file.copy(checklogs, checklogs_dest, overwrite = TRUE)
+
+
+  message("Copying install logs to ", rdir)
+  installlogs <- file.path(checkdirs, "00install.out")
+  installlogs_dest <- file.path(rdir, paste(names(checkdirs), "-install", sep=""))
+  file.copy(installlogs, installlogs_dest, overwrite = TRUE)
+
+
+  checkresults <- lapply(checkdirs, devtools:::parse_check_results)
+
+  message("Writing warnings and error summary for each package to ", rdir)
+  for (i in seq_along(checkresults)) {
+    pkgname <- names(checkresults[i])
+    result <- checkresults[[i]]
+
+    if (!is.null(result) && nzchar(result)) {
+      err_filename <- file.path(rdir, paste(pkgname, "-error", sep=""))
+      err_out <- file(err_filename, "w")
+      on.exit(close(err_out))
+
+      cat(pkgname, result, file = err_out)
+    }
+  }
+
+
+  summary_filename <- file.path(rdir, "00check-summary.txt")
+  message("Creating summary of check warnings and errors in ", summary_filename)
+  summary_out <- file(summary_filename, "w")
+  on.exit(close(summary_out))
+
+  for (i in seq_along(checkresults)) {
+    pkgname <- names(checkresults[i])
+    linetext <- paste(rep("=", 72 - nchar(pkgname)), collapse = "")
+    cat(pkgname, linetext, "\n", checkresults[[i]], "\n\n\n", file = summary_out)
   }
 }
