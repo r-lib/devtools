@@ -95,9 +95,9 @@ check_pkg_extra_files <- function(pkgname, pkg_targz) {
   files <- files[!(files %in% c(req_files, opt_files, other_files))]
 
   if (length(files) > 0) {
-    message("Non-standard files found: ",
-      paste(files, collapse=", "),
-      ".\n  Did you intend to include these files?\n")
+    message("\n  Non-standard files found:\n    ",
+      paste(files, collapse="\n    "),
+      "\n  Did you intend to include these files?\n")
   } else {
     message("OK")
   }
