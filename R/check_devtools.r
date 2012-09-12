@@ -44,7 +44,7 @@ check_pkg_extra_files <- function(pkgname, built_path) {
   if (length(files) > 0) {
     message("\n  Non-standard files found:\n    ",
       paste(files, collapse="\n    "),
-      "\n  Did you intend to include these files?\n")
+      "\n  Did you intend to include these files? If not, add them to .Rbuildignore.\n")
   } else {
     message("OK")
   }
