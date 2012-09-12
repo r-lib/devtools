@@ -23,7 +23,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE,
   if (document) {
     document(pkg, clean = TRUE)
   }
-  message("Checking ", pkg$package)
+  message("Checking ", pkg$package, " with R CMD check")
 
   built_path <- build(pkg, tempdir())  
   on.exit(unlink(built_path))
@@ -34,6 +34,8 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE,
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
   
   R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), tempdir())
+
+  check_devtools(pkg, built_path)
   
   check_path <- file.path(tempdir(), paste(pkg$package, ".Rcheck", 
     sep = ""))
@@ -45,5 +47,3 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE,
 
   invisible(TRUE)
 }
-
-
