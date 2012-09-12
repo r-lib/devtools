@@ -27,6 +27,9 @@ build <- function(pkg = ".", path = NULL, binary = FALSE) {
   R(cmd, path)
 
   targz <- paste(pkg$package, "_", pkg$version, ".", ext, sep = "")
+
+  check_pkg_extra_files(pkg$package, file.path(path, targz))
+
   file.path(path, targz)
 }
 
@@ -57,5 +60,47 @@ build_win <- function(pkg = ".", version = "R-release") {
   
   ftpUpload(built_path, paste("ftp://win-builder.r-project.org/", version,
     "/", basename(built_path), sep = ""))
+  invisible()
+}
+
+
+# This checks for extra files in a built package source .tar.gz file
+#
+# @param pkgname The name of the package
+# @param pkg_targz An R source package tar.gz file
+check_pkg_extra_files <- function(pkgname, pkg_targz) {
+  message("devtools is checking for any extra files in built .tar.gz file... ",
+    appendLF = FALSE)
+
+  # Get unique second-level paths of all files in the tar.gz file.
+  # If file is "gtable/man/gtable.Rd", second-level path is "man"
+  files <- untar(pkg_targz, compressed = "gzip", list = TRUE)
+  files <- sub(paste("^", pkgname, "/", sep=""), "", files)
+  files <- sub("/.*$", "", files)
+  files <- unique(files)
+
+  # These are the files that are officially required in a source package,
+  # according to "Writing R Extensions"
+  req_files <- c("DESCRIPTION", "R", "data", "demo", "exec", "inst",
+    "man", "po", "src", "tests")
+  # Files that are optional in a source package, according to the doc
+  opt_files <- c("INDEX", "NAMESPACE", "configure", "cleanup", "LICENSE",
+    "LICENCE", "NEWS")
+
+  # These are other common files in a source package
+  other_files <- c("", "build", "CHANGELOG", "INSTALL", "README",
+    "README.md")
+
+  # Now remove all the OK paths from the list; what remains are bad paths
+  files <- files[!(files %in% c(req_files, opt_files, other_files))]
+
+  if (length(files) > 0) {
+    message("Non-standard files found: ",
+      paste(files, collapse=", "),
+      ".\n  Did you intend to include these files?\n")
+  } else {
+    message("OK")
+  }
+
   invisible()
 }
