@@ -5,6 +5,9 @@
 #' runs in an independent realisation of R, so nothing in your current 
 #' workspace will affect the process.
 #'
+#' After the \code{R CMD check}, this will run checks that are specific
+#' to devtools.
+#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param document if \code{TRUE} (the default), will update and check

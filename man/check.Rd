@@ -31,4 +31,8 @@
   independent realisation of R, so nothing in your current
   workspace will affect the process.
 }
+\details{
+  After the \code{R CMD check}, this will run checks that
+  are specific to devtools.
+}
 
