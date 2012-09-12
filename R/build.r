@@ -27,6 +27,7 @@ build <- function(pkg = ".", path = NULL, binary = FALSE) {
   R(cmd, path)
 
   targz <- paste(pkg$package, "_", pkg$version, ".", ext, sep = "")
+
   file.path(path, targz)
 }
 

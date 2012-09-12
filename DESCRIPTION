@@ -1,12 +1,12 @@
 Package: devtools
 Title: Tools to make developing R code easier
 Version: 0.8
-Authors@R: c( 
-    person("Hadley", "Wickham", 
-      email = "h.wickham@gmail.com", role = c("aut", "cre")),
-    person("Winston", "Chang", role = "aut"), 
-    person("R Core team", role = "ctb", 
-      comment = "Namespace related code extracted out of base R"))
+Authors@R: c(
+    person("Hadley", "Wickham",
+    email = "h.wickham@gmail.com", role = c("aut", "cre")),
+    person("Winston", "Chang", role = "aut"),
+    person("R Core team", role = "ctb",
+    comment = "Namespace related code extracted out of base R"))
 Description: Collection of package development tools
 Depends:
     R (>= 2.15)
@@ -77,3 +77,4 @@ Collate:
     'dev-example.r'
     'run-example.r'
     'dev-help.r'
+    'check_devtools.r'

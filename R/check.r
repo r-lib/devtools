@@ -5,6 +5,9 @@
 #' runs in an independent realisation of R, so nothing in your current 
 #' workspace will affect the process.
 #'
+#' After the \code{R CMD check}, this will run checks that are specific
+#' to devtools.
+#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param document if \code{TRUE} (the default), will update and check
@@ -23,27 +26,40 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE,
   if (document) {
     document(pkg, clean = TRUE)
   }
-  message("Checking ", pkg$package)
 
   built_path <- build(pkg, tempdir())  
   on.exit(unlink(built_path))
 
-  opts <- "--timings"
-  if (cran)
-    opts <- c(opts, "--as-cran")
-  opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
+  r_cmd_check_path <- check_r_cmd(pkg, built_path, cran, args)
+
+  check_devtools(pkg, built_path)
   
-  R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), tempdir())
-  
-  check_path <- file.path(tempdir(), paste(pkg$package, ".Rcheck", 
-    sep = ""))
+
   if (cleanup) {
-    unlink(check_path, recursive = TRUE)    
+    unlink(r_cmd_check_path, recursive = TRUE)
   } else {
-    message("Check results in ", check_path)
+    message("R CMD check results in ", r_cmd_check_path)
   }
 
   invisible(TRUE)
 }
 
 
+# Run R CMD check and return the path for the check
+# @param built_path The path to the built .tar.gz source package.
+check_r_cmd <- function(pkg = ".", built_path = NULL, cran = TRUE,
+  args = NULL) {
+
+  pkg <- as.package(pkg)
+  message("Checking ", pkg$package, " with R CMD check")
+
+  opts <- "--timings"
+  if (cran)
+    opts <- c(opts, "--as-cran")
+  opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
+
+  R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), tempdir())
+
+  # Return the path to the check output
+  file.path(tempdir(), paste(pkg$package, ".Rcheck", sep = ""))
+}
