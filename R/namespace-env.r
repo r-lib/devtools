@@ -168,3 +168,19 @@ register_namespace <- function(name = NULL, env = NULL) {
 
   env
 }
+
+
+# unregister a namespace - should be used only if unloadNamespace()
+# fails for some reason
+unregister_namespace <- function(name = NULL) {
+  # Be careful about what we allow
+  if (!is.character(name) || name == "" || length(name) != 1)
+    stop("'name' must be a non-empty character string.")
+
+  if (!(name %in% loadedNamespaces()))
+    stop(name, " is not a registered namespace.")
+
+  # Remove the item from the registry
+  rm(name, ns_registry())
+  invisible()
+}

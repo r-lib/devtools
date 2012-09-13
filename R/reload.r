@@ -80,7 +80,7 @@ unload <- function(pkg = ".") {
   if (!is.null(.Internal(getRegisteredNamespace(pkg$package)))) {
     message("unloadNamespace(\"", pkg$package,
       "\") not successful. Forcing unload.")
-    .Internal(unregisterNamespace(pkg$package))
+    unregister_namespace(pkg$package)
   }
 
   # Clear so that loading the package again will re-read all files
