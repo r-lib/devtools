@@ -127,6 +127,8 @@ BUG FIXES
 * `install_bitbucket` properly installs zip files of projects stored
   in Mercurial repositories. (Winston Chang. Fixes #148)
 
+* `build` now builds vignettes because `install` does not. (Fixes #155)
+
 INTROSPECTION
 
 * New function `loaded_packages()`, which returns the names of packages
