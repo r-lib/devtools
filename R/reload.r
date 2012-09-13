@@ -95,6 +95,14 @@ unload <- function(pkg = ".") {
 unload_dll <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
+  # Special case for devtools - don't unload DLL because we need to be able
+  # to access nsreg() in the DLL in order to run makeNamespace. This means
+  # that changes to compiled code in devtools can't be reloaded with
+  # load_all -- it requires a reinstallation.
+  if (pkg$package == "devtools") {
+    return(invisible())
+  }
+
   pkglibs <- loaded_dlls(pkg)
 
   for (lib in pkglibs) {
