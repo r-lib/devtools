@@ -139,3 +139,10 @@ is_loaded <- function(pkg = ".") {
   pkg <- as.package(pkg)
   pkg$package %in% loadedNamespaces()
 }
+
+
+# Returns the namespace registry
+#' @useDynLib devtools nsreg
+ns_registry <- function() {
+  .Call(nsreg)
+}
