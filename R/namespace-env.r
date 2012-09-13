@@ -43,7 +43,9 @@ create_ns_env <- function(pkg = ".") {
   env
 }
 
-# This is taken directly from base::loadNamespace() in R 2.15.1
+# This is taken directly from base::loadNamespace() in R 2.15.1.
+# Except .Internal(registerNamespace(name, env)) is replaced by
+# register_namespace(name, env)
 makeNamespace <- function(name, version = NULL, lib = NULL) {
   impenv <- new.env(parent = .BaseNamespaceEnv, hash = TRUE)
   attr(impenv, "name") <- paste("imports", name, sep = ":")
@@ -62,7 +64,7 @@ makeNamespace <- function(name, version = NULL, lib = NULL) {
   setNamespaceInfo(env, "dynlibs", NULL)
   setNamespaceInfo(env, "S3methods", matrix(NA_character_, 0L, 3L))
   assign(".__S3MethodsTable__.", new.env(hash = TRUE, parent = baseenv()), envir = env)
-  .Internal(registerNamespace(name, env))
+  register_namespace(name, env)
   env
 }
 
@@ -145,4 +147,24 @@ is_loaded <- function(pkg = ".") {
 #' @useDynLib devtools nsreg
 ns_registry <- function() {
   .Call(nsreg)
+}
+
+
+# Register a namespace
+register_namespace <- function(name = NULL, env = NULL) {
+  # Be careful about what we allow
+  if (!is.character(name) || name == "" || length(name) != 1)
+    stop("'name' must be a non-empty character string.")
+
+  if (!is.environment(env))
+    stop("'env' must be an environment.")
+
+  if (name %in% loadedNamespaces())
+    stop("Namespace ", name, " is already registered.")
+
+  # Add the environment to the registry
+  nsr <- ns_registry()
+  nsr[[name]] <- env
+
+  env
 }
