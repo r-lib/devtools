@@ -43,7 +43,9 @@ create_ns_env <- function(pkg = ".") {
   env
 }
 
-# This is taken directly from base::loadNamespace() in R 2.15.1
+# This is taken directly from base::loadNamespace() in R 2.15.1.
+# Except .Internal(registerNamespace(name, env)) is replaced by
+# register_namespace(name, env)
 makeNamespace <- function(name, version = NULL, lib = NULL) {
   impenv <- new.env(parent = .BaseNamespaceEnv, hash = TRUE)
   attr(impenv, "name") <- paste("imports", name, sep = ":")
@@ -62,7 +64,7 @@ makeNamespace <- function(name, version = NULL, lib = NULL) {
   setNamespaceInfo(env, "dynlibs", NULL)
   setNamespaceInfo(env, "S3methods", matrix(NA_character_, 0L, 3L))
   assign(".__S3MethodsTable__.", new.env(hash = TRUE, parent = baseenv()), envir = env)
-  .Internal(registerNamespace(name, env))
+  register_namespace(name, env)
   env
 }
 
@@ -138,4 +140,61 @@ register_s3 <- function(pkg = ".") {
 is_loaded <- function(pkg = ".") {
   pkg <- as.package(pkg)
   pkg$package %in% loadedNamespaces()
+}
+
+
+# Returns the namespace registry
+#' @useDynLib devtools nsreg
+ns_registry <- function() {
+  .Call(nsreg)
+}
+
+
+# Register a namespace
+register_namespace <- function(name = NULL, env = NULL) {
+  # Be careful about what we allow
+  if (!is.character(name) || name == "" || length(name) != 1)
+    stop("'name' must be a non-empty character string.")
+
+  if (!is.environment(env))
+    stop("'env' must be an environment.")
+
+  if (name %in% loadedNamespaces())
+    stop("Namespace ", name, " is already registered.")
+
+  # Add the environment to the registry
+  nsr <- ns_registry()
+  nsr[[name]] <- env
+
+  env
+}
+
+
+# unregister a namespace - should be used only if unloadNamespace()
+# fails for some reason
+unregister_namespace <- function(name = NULL) {
+  # Be careful about what we allow
+  if (!is.character(name) || name == "" || length(name) != 1)
+    stop("'name' must be a non-empty character string.")
+
+  if (!(name %in% loadedNamespaces()))
+    stop(name, " is not a registered namespace.")
+
+  # Remove the item from the registry
+  rm(name, ns_registry())
+  invisible()
+}
+
+# This is similar to getNamespace(), except that getNamespace will load
+# the namespace if it's not already loaded. This function will not.
+# In R 2.16, a function called .getNamespace() will have the same effect
+# and this will no longer be necessary.
+get_namespace <- function(name) {
+  # Sometimes we'll be passed something like as.name(name), so make sure
+  # it's a string
+  name <- as.character(name)
+  if (!(name %in% loadedNamespaces()))
+    return(NULL)
+  else
+    return(getNamespace(name))
 }

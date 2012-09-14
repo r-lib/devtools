@@ -18,7 +18,7 @@
 #' unload(devtest("load-hooks"))
 #' @export
 dev_meta <- function(name) {
-  ns <- .Internal(getRegisteredNamespace(as.name(name)))
+  ns <- get_namespace(as.name(name))
   if (is.null(ns)) {
     stop("Namespace not found for ", name, ". Is it loaded?")
   }
@@ -34,7 +34,7 @@ dev_meta <- function(name) {
 # Create the devtools metadata environment for a package.
 # This should be run when packages are loaded by devtools.
 create_dev_meta <- function(name) {
-  ns <- .Internal(getRegisteredNamespace(as.name(name)))
+  ns <- get_namespace(as.name(name))
 
   if (!is.null(ns$.__DEVTOOLS__)) {
     stop("devtools metadata for package ", name, " already exists.")

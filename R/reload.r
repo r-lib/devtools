@@ -77,10 +77,10 @@ unload <- function(pkg = ".") {
   # to go away.
   # loadedNamespaces() and unloadNamespace() often don't work here
   # because things can be in a weird state.
-  if (!is.null(.Internal(getRegisteredNamespace(pkg$package)))) {
+  if (!is.null(get_namespace(pkg$package))) {
     message("unloadNamespace(\"", pkg$package,
       "\") not successful. Forcing unload.")
-    .Internal(unregisterNamespace(pkg$package))
+    unregister_namespace(pkg$package)
   }
 
   # Clear so that loading the package again will re-read all files
@@ -94,6 +94,14 @@ unload <- function(pkg = ".") {
 # This unloads dlls loaded by either library() or load_all()
 unload_dll <- function(pkg = ".") {
   pkg <- as.package(pkg)
+
+  # Special case for devtools - don't unload DLL because we need to be able
+  # to access nsreg() in the DLL in order to run makeNamespace. This means
+  # that changes to compiled code in devtools can't be reloaded with
+  # load_all -- it requires a reinstallation.
+  if (pkg$package == "devtools") {
+    return(invisible())
+  }
 
   pkglibs <- loaded_dlls(pkg)
 
