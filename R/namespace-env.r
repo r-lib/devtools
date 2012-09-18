@@ -181,7 +181,7 @@ unregister_namespace <- function(name = NULL) {
     stop(name, " is not a registered namespace.")
 
   # Remove the item from the registry
-  rm(name, ns_registry())
+  do.call(rm, args = list(name, envir = ns_registry()))
   invisible()
 }
 
