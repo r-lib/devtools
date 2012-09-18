@@ -1,3 +1,7 @@
+BUG FIXES
+
+* Reloading a package that requires a forced-unload of the namespace now works.
+
 devtools 0.8.0
 --------------
 
