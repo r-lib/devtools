@@ -72,6 +72,7 @@ makeNamespace <- function(name, version = NULL, lib = NULL) {
 # Read the NAMESPACE file and set up the imports metdata.
 # (which is stored in .__NAMESPACE__.)
 setup_ns_imports <- function(pkg = ".") {
+  pkg <- as.package(pkg)
   nsInfo <- parse_ns_file(pkg)
   setNamespaceInfo(pkg$package, "imports", nsInfo$imports)
 }
@@ -81,6 +82,7 @@ setup_ns_imports <- function(pkg = ".") {
 # run after all the objects are loaded into the namespace because
 # namespaceExport throw errors if the objects are not present.
 setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
+  pkg <- as.package(pkg)
   nsInfo <- parse_ns_file(pkg)
   nsenv <- ns_env(pkg)
 
