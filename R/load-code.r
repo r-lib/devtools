@@ -19,7 +19,7 @@ load_code <- function(pkg = ".") {
       keep.source = TRUE), 
     error = function(e) {
       clear_cache()
-      unloadNamespace(pkg$package)
+      unload(pkg)
       stop(e)
     }
   )
