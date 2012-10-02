@@ -2,6 +2,14 @@ BUG FIXES
 
 * Reloading a package that requires a forced-unload of the namespace now works.
 
+* When reloading a package that another loaded package depends on, if there
+  was an error loading the code, devtools would print out something about an
+  error in `unloadNamespace`, which was confusing. It now gives more useful
+  errors.
+
+* An intermittent error in `clear_topic_index` related to using `rm()` has
+  been fixed. (Thanks to Gregory Jefferis)
+
 devtools 0.8.0
 --------------
 
