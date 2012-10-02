@@ -52,7 +52,7 @@ topic_index <- function(pkg = ".") {
 clear_topic_index <- function(pkg = ".") {
   pkg <- as.package(pkg)
   if (exists(pkg$package, topic_indices)) {
-    rm(pkg$package, envir = topic_indices)    
+    rm(list = pkg$package, envir = topic_indices)
   }
   
   invisible(TRUE)
