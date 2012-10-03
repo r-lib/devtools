@@ -80,7 +80,7 @@ I recommend adding the following code to your `.Rprofile`:
 
     .First <- function() {
       options(
-        repos = c(CRAN = "http://cran.r-project.org/"),
+        repos = c(CRAN = "http://cran.r-project.com/"),
         browserNLdisabled = TRUE,
         deparse.max.lines = 2)
     }
