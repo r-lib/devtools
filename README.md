@@ -80,7 +80,7 @@ I recommend adding the following code to your `.Rprofile`:
 
     .First <- function() {
       options(
-        repos = c(CRAN = "http://cran.r-project.com/"),
+        repos = c(CRAN = "http://cran.rstudio.com/"),
         browserNLdisabled = TRUE,
         deparse.max.lines = 2)
     }
@@ -91,7 +91,7 @@ I recommend adding the following code to your `.Rprofile`:
 
 This will set up R to:
 
-* always install packages from the main CRAN mirror
+* always install packages from the RStudio CRAN mirror
 * ignore newlines when  `browse()`ing
 * give minimal output from `traceback`
 * automatically load `devtools` in interactive sessions
