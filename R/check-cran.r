@@ -201,9 +201,9 @@ collect_check_results <- function(topdir = tempdir()) {
     if (!is.null(result) && nzchar(result)) {
       err_filename <- file.path(rdir, paste(pkgname, "-error", sep=""))
       err_out <- file(err_filename, "w")
-      on.exit(close(err_out))
 
       cat(pkgname, result, file = err_out)
+      close(err_out)
     }
   }
 
