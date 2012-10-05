@@ -46,7 +46,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
   message("Determining available packages") # --------------------------------
   repos <- c(
-    CRAN = "http://cran.r-project.org/", 
+    CRAN = "http://cran.rstudio.com/",
     omegahat = "http://www.omegahat.org/R"
   )
   if (bioconductor) {
