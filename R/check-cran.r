@@ -191,7 +191,7 @@ collect_check_results <- function(topdir = tempdir()) {
   file.copy(installlogs, installlogs_dest, overwrite = TRUE)
 
 
-  checkresults <- lapply(checkdirs, devtools:::parse_check_results)
+  checkresults <- lapply(checkdirs, parse_check_results)
 
   message("Writing warnings and error summary for each package to ", rdir)
   for (i in seq_along(checkresults)) {
