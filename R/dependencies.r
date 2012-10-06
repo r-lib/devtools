@@ -9,7 +9,8 @@
 #' @export
 #' @examples
 #' revdep("ggplot2")
-revdep <- function(pkg = ".", dependencies = c("Depends", "Imports"), recursive = FALSE) {
+revdep <- function(pkg = NULL, dependencies = c("Depends", "Imports", "Suggests"),
+  recursive = FALSE) {
   sort(dependsOnPkgs(pkg, dependencies, recursive, installed = packages()))
 }
 
