@@ -23,8 +23,8 @@ revdep_maintainers <- function(pkg = ".") {
 #' @rdname revdep
 #' @param ... Other parameters passed on to \code{\link{check_cran}}
 #' @export
-revdep_check <- function(pkg = ".", ...) {
-  pkgs <- revdep(pkg)
+revdep_check <- function(pkg = NULL, recursive = FALSE, ...) {
+  pkgs <- revdep(pkg, recursive)
   check_cran(pkgs, ...)
 }
 
