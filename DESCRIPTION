@@ -55,6 +55,7 @@ Collate:
     'decompress.r'
     'install-github.r'
     'install-url.r'
+    'install-git.r'
     'install-version.r'
     'install-gitorious.r'
     'missing-s3.r'
