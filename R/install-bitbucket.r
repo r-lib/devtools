@@ -19,12 +19,18 @@ install_bitbucket <- function(repo, username, ref = "master", branch = NULL, ...
     warning("'branch' is deprecated. In the future, please use 'ref' instead.")
     ref <- branch
   }
+
+
+
   message("Installing bitbucket repo(s) ",
     paste(repo, ref, sep = "/", collapse = ", "),
     " from ",
     paste(username, collapse = ", "))
-
-  url <- paste("https://bitbucket.org/", username, "/", repo, "/get/", 
+  
+# convert repo to lower case in line with bitbucket convention
+  repo <- tolower(repo)
+  
+url <- paste("https://bitbucket.org/", username, "/", repo, "/get/", 
     ref, ".zip", sep = "")
   install_url(url, paste(ref, ".zip", sep = ""), ...)
 }
