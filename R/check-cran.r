@@ -171,7 +171,7 @@ collect_check_results <- function(topdir = tempdir()) {
   rdir <- file.path(topdir, "results")
   if (dir.exists(rdir)) {
     # Remove existing results
-    unlink(dir(rdir), recursive = TRUE)
+    unlink(dir(normalizePath(rdir), include.dirs = TRUE), recursive = TRUE)
   } else {
     dir.create(rdir)
   }
