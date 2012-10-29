@@ -169,8 +169,12 @@ parse_check_results <- function(path) {
 collect_check_results <- function(topdir = tempdir()) {
   # Directory for storing results
   rdir <- file.path(topdir, "results")
-  if (!dir.exists(rdir))
+  if (dir.exists(rdir)) {
+    # Remove existing results
+    unlink(dir(rdir), recursive = TRUE)
+  } else {
     dir.create(rdir)
+  }
 
   checkdirs <- list.dirs(topdir, recursive=FALSE)
   checkdirs <- checkdirs[grepl("\\.Rcheck$", checkdirs)]
