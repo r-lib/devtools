@@ -34,6 +34,24 @@ compile_dll <- function(pkg = ".") {
   if (length(srcfiles) == 0)
     return(invisible())
 
+  # Compile Rcpp attributes if necessary
+  compile_rcpp_attributes(pkg)
+  
+  # Add include directories for LinkingTo dependencies
+  if (!is.null(pkg$linkingto)) {
+    lpkgs <- strsplit(pkg$linkingto, ",[[:blank:]]*")[[1L]]
+    paths <- find.package(lpkgs, quiet=TRUE)
+    if (length(paths)) {
+      oldCppflags <- Sys.getenv("CLINK_CPPFLAGS", unset=NA)
+      cppflags <- paste(paste0('-I"', paths, '/include"'), collapse=" ")
+      Sys.setenv(CLINK_CPPFLAGS = cppflags)
+      on.exit(ifelse(is.na(oldCppflags), 
+                Sys.unsetenv("CLINK_CPPFLAGS"),
+                Sys.setenv(CLINK_CPPFLAGS = oldCppflags))
+      )
+    }
+  }
+  
   # Compile the DLL
   srcfiles <- paste(srcfiles, collapse = " ")
   R(paste("CMD SHLIB", "-o", basename(dll_name(pkg)), srcfiles),
