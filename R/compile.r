@@ -42,13 +42,9 @@ compile_dll <- function(pkg = ".") {
     lpkgs <- strsplit(pkg$linkingto, ",[[:blank:]]*")[[1L]]
     paths <- find.package(lpkgs, quiet=TRUE)
     if (length(paths)) {
-      oldCppflags <- Sys.getenv("CLINK_CPPFLAGS", unset=NA)
       cppflags <- paste(paste0('-I"', paths, '/include"'), collapse=" ")
-      Sys.setenv(CLINK_CPPFLAGS = cppflags)
-      on.exit(ifelse(is.na(oldCppflags), 
-                Sys.unsetenv("CLINK_CPPFLAGS"),
-                Sys.setenv(CLINK_CPPFLAGS = oldCppflags))
-      )
+      oldCppflags <- set_env(c(CLINK_CPPFLAGS = cppflags))
+      on.exit(set_env(oldCppflags))
     }
   }
   

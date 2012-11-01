@@ -1,6 +1,10 @@
 devtools 0.8.0.99
 -----------------
 
+NEW FEATURES
+
+* Rcpp attributes are now automatically compiled during build and load_all.
+
 BUG FIXES
 
 * Reloading a package that requires a forced-unload of the namespace now works.
@@ -12,6 +16,9 @@ BUG FIXES
 
 * An intermittent error in `clear_topic_index` related to using `rm()` has
   been fixed. (Thanks to Gregory Jefferis)
+
+* Include directories for packages listed in LinkingTo are now added to 
+  compilations performed by load_all.
 
 devtools 0.8.0
 --------------
