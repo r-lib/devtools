@@ -21,7 +21,8 @@ Imports:
 Suggests:
     testthat,
     roxygen2,
-    BiocInstaller
+    BiocInstaller,
+    Rcpp (>= 0.9.15.6)
 License: GPL (>= 2)
 Collate:
     'bash.r'
@@ -78,3 +79,4 @@ Collate:
     'run-example.r'
     'dev-help.r'
     'check_devtools.r'
+    'rcpp-attributes.r'
