@@ -37,16 +37,9 @@ compile_dll <- function(pkg = ".") {
   # Compile Rcpp attributes if necessary
   compile_rcpp_attributes(pkg)
   
-  # Add include directories for LinkingTo dependencies
-  if (!is.null(pkg$linkingto)) {
-    lpkgs <- strsplit(pkg$linkingto, ",[[:blank:]]*")[[1L]]
-    paths <- find.package(lpkgs, quiet=TRUE)
-    if (length(paths)) {
-      cppflags <- paste(paste0('-I"', paths, '/include"'), collapse=" ")
-      oldCppflags <- set_env(c(CLINK_CPPFLAGS = cppflags))
-      on.exit(set_env(oldCppflags))
-    }
-  }
+  # Setup build environment then restore it when done
+  restore <- setup_build_environment(c(pkg$package, pkg$linkingto))
+  on.exit(restore_build_environment(restore))
   
   # Compile the DLL
   srcfiles <- paste(srcfiles, collapse = " ")
@@ -83,4 +76,102 @@ dll_name <- function(pkg = ".") {
   name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
 
   file.path(pkg$path, "src", name)
+}
+
+
+# Setup the build environment based on the specified dependencies. Returns an
+# opaque object that can be passed to restore_build_environment to reverse 
+# whatever changes that were made
+setup_build_environment <- function(packages) {
+  
+  # discover dependencies
+  linkingToPackages <- character()
+  buildEnv <- list()
+  for (package in packages) {
+    
+    # add a LinkingTo for this package
+    linkingToPackages <- unique(c(linkingToPackages, package))
+    
+    # see if the package exports a plugin
+    plugin <- get_inline_plugin(package)
+    if (!is.null(plugin)) {
+      
+      # get the plugin settings 
+      settings <- plugin()
+      
+      # merge environment variables
+      pluginEnv <- settings$env
+      for (name in names(pluginEnv)) {
+        # if it doesn't exist already just set it
+        if (is.null(buildEnv[[name]])) {
+          buildEnv[[name]] <- pluginEnv[[name]]
+        }
+        # if it's not identical then append
+        else if (!identical(buildEnv[[name]],
+          pluginEnv[[name]])) {
+          buildEnv[[name]] <- paste(buildEnv[[name]], 
+            pluginEnv[[name]]);
+        }
+        else {
+          # it already exists and it's the same value, this 
+          # likely means it's a flag-type variable so we 
+          # do nothing rather than appending it
+        }   
+      }
+      
+      # capture any LinkingTo elements defined by the plugin
+      linkingToPackages <- unique(c(linkingToPackages, settings$LinkingTo))
+    }
+  }
+  
+  # set cxxFlags based on the LinkingTo dependencies (and also respect
+  # any PKG_CXXFLAGS set by the plugin)
+  pkgCxxFlags <- pkg_cxx_flags(linkingToPackages)
+  buildEnv$PKG_CXXFLAGS <- paste(buildEnv$PKG_CXXFLAGS, pkgCxxFlags)  
+  buildEnv$CLINK_CPPFLAGS <- buildEnv$PKG_CXXFLAGS
+  
+  # add cygwin message muffler
+  buildEnv$CYGWIN = "nodosfilewarning"
+  
+  # create restore list
+  restore <- list()
+  for (name in names(buildEnv))
+    restore[[name]] <- Sys.getenv(name, unset = NA)
+  
+  # set environment variables
+  do.call(Sys.setenv, buildEnv)
+
+  # return restore list
+  return (restore)
+}
+
+restore_build_environment <- function(restore) {
+  # variables to reset
+  setVars <- restore[!is.na(restore)]
+  if (length(setVars))
+    do.call(Sys.setenv, setVars)
+  
+  # variables to remove
+  removeVars <- names(restore[is.na(restore)])
+  if (length(removeVars))
+    Sys.unsetenv(removeVars)
+}
+
+
+# Get the inline plugin for the specified package (return NULL if none found)
+get_inline_plugin <- function(package) {
+  tryCatch(get("inlineCxxPlugin", asNamespace(package)),
+    error = function(e) NULL) 
+}
+
+# Build PKG_CXXFLAGS by from include directories of LinkingTo packages
+pkg_cxx_flags <- function(linkingToPackages) {
+  pkgCxxFlags <- NULL
+  for (package in linkingToPackages) {
+    packagePath <- find.package(package, NULL, quiet=TRUE)
+    pkgCxxFlags <- paste(pkgCxxFlags, 
+      paste0('-I"', packagePath, '/include"'), 
+      collapse=" ")
+  }
+  return (pkgCxxFlags)
 }
