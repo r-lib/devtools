@@ -29,15 +29,19 @@ compile_dll <- function(pkg = ".") {
   if (!dir.exists(srcdir))
     return(invisible())
 
+  # Compile Rcpp attributes if necessary
+  compile_rcpp_attributes(pkg)
+  
   # Check that there are source files to compile
   srcfiles <- dir(srcdir, pattern = "\\.(c|cpp|f)$")
   if (length(srcfiles) == 0)
     return(invisible())
-
-  # Compile the DLL
-  srcfiles <- paste(srcfiles, collapse = " ")
-  R(paste("CMD SHLIB", "-o", basename(dll_name(pkg)), srcfiles),
-    path = srcdir)
+  # Compile the DLL using an approriately constructed build environment
+  with_env(build_env_vars(pkg), {
+    srcfiles <- paste(srcfiles, collapse = " ")
+    R(paste("CMD SHLIB", "-o", basename(dll_name(pkg)), srcfiles),
+      path = srcdir)
+  })
 
   invisible(dll_name(pkg))
 }
@@ -70,3 +74,48 @@ dll_name <- function(pkg = ".") {
 
   file.path(pkg$path, "src", name)
 }
+
+# Get the build environment variables for a package:
+#   - CLINK_CPPFLAGS with include paths (inst/include and LinkingTo)
+#   - PKG_LIBS for Rcpp if it's a dependency
+# Returns a named list of variables that can be passed to set_env
+build_env_vars <- function(pkg) {
+
+  # Environment variables to set for the build
+  buildEnv <- list()
+
+  # Include directories - start with the package inst/include directory then
+  # add any packages found in LinkingTo
+  includeDirs <- '-I"../inst/include"'
+  linkingTo <- pkg_linking_to(pkg)
+  includeDirs <- c(includeDirs, linking_to_includes(linkingTo))
+  buildEnv$CLINK_CPPFLAGS <- paste(includeDirs, collapse = " ")
+
+  # If the package depends on Rcpp then set PKG_LIBS as appropirate
+  if (links_to_rcpp(pkg)) {  
+    if (!require("Rcpp", quietly = TRUE)) 
+      stop("Rcpp required for building this package")
+    buildEnv$PKG_LIBS <- Rcpp:::RcppLdFlags()
+  }
+
+  # Return variables
+  buildEnv
+}
+
+
+# Get the LinkingTo field of a package as a character vector
+pkg_linking_to <- function(pkg) {
+  parse_deps(pkg$linkingto)$name
+}
+
+# Build a list of include directories from a list of packages
+linking_to_includes <- function(linkingTo) {
+  includes <- character()
+  for (package in linkingTo) {
+    pkgPath <- find.package(package, NULL, quiet=TRUE)
+    pkgIncludes <- paste0('-I"', pkgPath, .Platform$file.sep, 'include"')
+    includes <- c(includes, pkgIncludes)
+  }
+  includes
+}
+

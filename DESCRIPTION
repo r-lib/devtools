@@ -15,13 +15,15 @@ Imports:
     RCurl,
     utils,
     tools,
+    methods,
     memoise,
     whisker,
     evaluate
 Suggests:
     testthat,
     roxygen2,
-    BiocInstaller
+    BiocInstaller,
+    Rcpp (>= 0.10.0)
 License: GPL (>= 2)
 Collate:
     'bash.r'
@@ -78,3 +80,4 @@ Collate:
     'run-example.r'
     'dev-help.r'
     'check_devtools.r'
+    'rcpp-attributes.r'

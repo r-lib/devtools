@@ -12,6 +12,16 @@ attach_ns <- function(pkg = ".") {
   attr(pkgenv, "path") <- getNamespaceInfo(nsenv, "path")
 }
 
+# Invoke namespace load actions. According to the documentation for setLoadActions
+# these actions should be called at the end of processing of S4 metadata, after 
+# dynamically linking any libraries, the call to .onLoad(), if any, and caching 
+# method and class definitions, but before the namespace is sealed
+run_ns_load_actions <- function(pkg = ".") {
+  nsenv <- ns_env(pkg)
+  actions <- methods::getLoadActions(nsenv)
+  for (action in actions) 
+    action(nsenv)
+}
 
 # Copy over the objects from the namespace env to the package env
 export_ns <- function(pkg = ".") {

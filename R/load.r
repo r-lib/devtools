@@ -118,12 +118,15 @@ load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
   register_s3(pkg)
   out$dll <- load_dll(pkg)
 
+  run_onload(pkg)
+
+  # Invoke namespace load actions
+  run_ns_load_actions(pkg)
+
   # Set up the exports in the namespace metadata (this must happen after
   # the objects are loaded)
   setup_ns_exports(pkg, export_all)
-
-  run_onload(pkg)
-
+  
   # Set up the package environment ------------------------------------
   # Create the package environment if needed
   if (!is_attached(pkg)) attach_ns(pkg)
