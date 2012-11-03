@@ -122,8 +122,17 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
 parse_ns_file <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  parseNamespaceFile(basename(pkg$path), dirname(pkg$path),
-    mustExist = FALSE)
+
+  # If NAMESPACE doesn't exist, or is empty, run parseNamespaceFile on NA;
+  # this will return a list with the proper (empty) entries.
+  ns_file_size <- file.info(file.path(pkg$path, "NAMESPACE"))$size
+  if (is.na(ns_file_size) || ns_file_size == 0) {
+    parseNamespaceFile(NA, NA, mustExist = FALSE)
+
+  } else {
+    parseNamespaceFile(basename(pkg$path), dirname(pkg$path),
+      mustExist = FALSE)
+  }
 }
 
 
