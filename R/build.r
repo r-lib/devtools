@@ -15,6 +15,8 @@ build <- function(pkg = ".", path = NULL, binary = FALSE) {
   if (is.null(path)) {
     path <- dirname(pkg$path)
   }
+  
+  compile_rcpp_attributes(pkg)
 
   if (binary) {
     cmd <- paste("CMD INSTALL ", shQuote(pkg$path), " --build", sep = "")
