@@ -95,3 +95,19 @@ test_that("Specific functions from DLLs listed in NAMESPACE can be called", {
   # Clean out compiled objects
   clean_dll("dll-load")
 })
+
+
+test_that("load_all() can compile and load DLLs linked to Rcpp", {
+
+  clean_dll("dll-rcpp")
+
+  load_all("dll-rcpp", reset = TRUE)
+
+  # Check that it's loaded properly by calling the hello world function
+  # which returns a list
+  expect_true(is.list(rcpp_hello_world()))
+
+  # Unload and clean out compiled objects
+  unload("dll-rcpp")
+  clean_dll("dll-rcpp")
+})
