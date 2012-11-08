@@ -1,10 +1,12 @@
 
+# Call the Rcpp::compileAttributes function for a package (only do so if the
+# package links to Rcpp and a recent enough version of Rcpp in installed).
 compile_rcpp_attributes <- function(pkg) {
   
   # Only scan for attributes in packages explicitly linking to Rcpp
   if (links_to_rcpp(pkg)) {
     
-    if (!require("Rcpp")) 
+    if (!require("Rcpp", quietly=T)) 
       stop("Rcpp required for building this package")
     
     # Only compile attributes if we know we have the function available
@@ -13,6 +15,7 @@ compile_rcpp_attributes <- function(pkg) {
   }
 }
 
+# Does this package have a compilation dependency on Rcpp?
 links_to_rcpp <- function(pkg) {
-  !is.null(pkg$linkingto) && grepl("Rcpp", pkg$linkingto, fixed = T)
+  "Rcpp" %in% pkg_linking_to(pkg)
 }

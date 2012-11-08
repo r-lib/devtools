@@ -40,8 +40,12 @@ is.named <- function(x) {
 set_env <- function(envs) {
   stopifnot(is.named(envs))
 
-  old <- Sys.getenv(names(envs), names = TRUE)
-  do.call("Sys.setenv", as.list(envs))
+  old <- Sys.getenv(names(envs), names = TRUE, unset = NA)
+  
+  set <- !is.na(envs)
+  if (any(set)) do.call("Sys.setenv", as.list(envs[set]))
+  if (any(!set)) Sys.unsetenv(names(envs)[!set])
+  
   invisible(old)
 }
 #' @rdname with_something
