@@ -33,6 +33,13 @@ compile_dll <- function(pkg = ".") {
   srcfiles <- dir(srcdir, pattern = "\\.(c|cpp|f)$")
   if (length(srcfiles) == 0)
     return(invisible())
+  
+  # Compile Rcpp attributes if necessary
+  compile_rcpp_attributes(pkg)
+  
+  # Setup the build environment (then restore on.exit)
+  restore <- setup_build_environment(pkg)
+  on.exit(restore_environment(restore))
 
   # Compile the DLL
   srcfiles <- paste(srcfiles, collapse = " ")
@@ -70,3 +77,73 @@ dll_name <- function(pkg = ".") {
 
   file.path(pkg$path, "src", name)
 }
+
+# Setup the build environment for a package:
+#   - Set CLINK_CPPFLAGS with include paths (inst/include and LinkingTo)
+#   - Set PKG_LIBS for Rcpp if it's a dependency
+# Returns an object that can be passed to restore_environment to reverse any
+# changes made by the function
+setup_build_environment <- function(pkg) {
+
+  # Environment variables to set for the build
+  buildEnv <- list()
+
+  # Include directories - start with the package inst/include directory then
+  # add any packages found in LinkingTo
+  includeDirs <- '-I"../inst/include"'
+  linkingTo <- parse_linking_to(pkg$linkingto)
+  includeDirs <- c(includeDirs, linking_to_includes(linkingTo))
+  buildEnv$CLINK_CPPFLAGS <- paste(includeDirs, collapse = " ")
+
+  # If the package depends on Rcpp then set PKG_LIBS as appropirate
+  if (links_to_rcpp(pkg)) {  
+    if (!require("Rcpp")) 
+      stop("Rcpp required for building this package")
+    buildEnv$PKG_LIBS <- Rcpp:::RcppLdFlags()
+  }
+
+  # Create restore list (previous values of environment variables)
+  restore <- list()
+  for (name in names(buildEnv))
+    restore[[name]] <- Sys.getenv(name, unset = NA)
+
+  # Set build environment variables
+  do.call(Sys.setenv, buildEnv)
+
+  # Return restore list
+  return (restore)
+}
+
+# Restore the environment after compilation
+restore_environment <- function(restore) {
+
+  # Variables to reset (were set to another value before the build)
+  setVars <- restore[!is.na(restore)]
+  if (length(setVars))
+    do.call(Sys.setenv, setVars)
+
+  # Variables to remove (were NA before the build)
+  removeVars <- names(restore[is.na(restore)])
+  if (length(removeVars))
+    Sys.unsetenv(removeVars)
+}
+
+# Parse a LinkingTo field into a character vector
+parse_linking_to <- function(linkingTo) {
+  if (is.null(linkingTo))
+    return (character())
+  linkingTo <- strsplit(linkingTo, "\\s*\\,")[[1]]
+  gsub("\\s", "", linkingTo)
+}
+
+# Build a list of include directories from a list of packages
+linking_to_includes <- function(linkingTo) {
+  includes <- character()
+  for (package in linkingTo) {
+    pkgPath <- find.package(package, NULL, quiet=TRUE)
+    pkgIncludes <- paste0('-I"', pkgPath, .Platform$file.sep, 'include"')
+    includes <- c(includes, pkgIncludes)
+  }
+  return (includes)
+}
+
