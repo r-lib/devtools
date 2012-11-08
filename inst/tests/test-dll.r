@@ -107,6 +107,7 @@ test_that("load_all() can compile and load DLLs linked to Rcpp", {
   # which returns a list
   expect_true(is.list(rcpp_hello_world()))
 
-  # Clean out compiled objects
+  # Unload and clean out compiled objects
+  unload("dll-rcpp")
   clean_dll("dll-rcpp")
 })
