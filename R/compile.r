@@ -94,7 +94,7 @@ build_env_vars <- function(pkg) {
 
   # If the package depends on Rcpp then set PKG_LIBS as appropirate
   if (links_to_rcpp(pkg)) {  
-    if (!require("Rcpp", quietly=T)) 
+    if (!require("Rcpp", quietly = TRUE)) 
       stop("Rcpp required for building this package")
     buildEnv$PKG_LIBS <- Rcpp:::RcppLdFlags()
   }
