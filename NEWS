@@ -1,6 +1,10 @@
 devtools 0.8.0.99
 -----------------
 
+MINOR FEATURES
+
+* `check_cran` now downloads packages from cran.rstudio.com.
+
 BUG FIXES
 
 * Reloading a package that requires a forced-unload of the namespace now works.
@@ -12,6 +16,14 @@ BUG FIXES
 
 * An intermittent error in `clear_topic_index` related to using `rm()` has
   been fixed. (Thanks to Gregory Jefferis)
+
+* `revdep()` now lists "Suggests" packages, in addition to "Depends" and
+  "Imports".
+
+* `revdep_check()` now correctly passes the `recursive` argument to `revdep()`.
+
+* The collection of check results at the end of `check_cran()` previously did
+  not remove existing results, but now it does.
 
 devtools 0.8.0
 --------------
