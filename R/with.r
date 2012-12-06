@@ -7,17 +7,17 @@
 #'   \item \code{with_libpaths}: library paths
 #'   \item \code{with_locale}: any locale setting
 #'   \item \code{with_options}: options
-#'   \item \code{with_path}: PATH environment variable 
+#'   \item \code{with_path}: PATH environment variable
 #'   \item \code{with_par}: graphics parameters
 #' }
 #' @param new values for setting
-#' @param code code to execute in that environment 
+#' @param code code to execute in that environment
 #'
 #' @name with_something
 #' @examples
 #' getwd()
 #' in_dir(tempdir(), getwd())
-#' getwd()                     
+#' getwd()
 #'
 #' Sys.getenv("HADLEY")
 #' with_env(c("HADLEY" = 2), Sys.getenv("HADLEY"))
@@ -25,11 +25,11 @@
 NULL
 
 with_something <- function(set) {
-  function(new, code) { 
+  function(new, code) {
     old <- set(new)
     on.exit(set(old))
     force(code)
-  }  
+  }
 }
 is.named <- function(x) {
   !is.null(names(x)) && all(names(x) != "")
@@ -52,7 +52,7 @@ with_env <- with_something(set_env)
 
 set_locale <- function(cats) {
   stopifnot(is.named(cats), is.character(cats))
-  
+
   old <- vapply(names(cats), Sys.getlocale, character(1))
 
   mapply(Sys.setlocale, names(cats), cats)
@@ -80,7 +80,7 @@ in_dir <- with_something(setwd)
 
 set_libpaths <- function(paths) {
   libpath <- normalizePath(paths, mustWork = TRUE)
-  
+
   old <- .libPaths()
   .libPaths(paths)
   invisible(old)
@@ -107,9 +107,9 @@ with_par <- with_something(par)
 #' @rdname with_something
 #' @export
 #' @param add Combine with existing values? Currently for
-#'   \code{\link{with_path}} only. If \code{FALSE} all existing 
-#'   paths are ovewritten, which don't you usually want. 
-with_path <- function(new, code, add = TRUE) { 
+#'   \code{\link{with_path}} only. If \code{FALSE} all existing
+#'   paths are ovewritten, which don't you usually want.
+with_path <- function(new, code, add = TRUE) {
   if (add) new <- c(get_path(), new)
   old <- set_path(new)
   on.exit(set_path(old))

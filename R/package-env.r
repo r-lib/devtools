@@ -49,7 +49,7 @@ export_ns <- function(pkg = ".") {
 pkg_env <- function(pkg = ".") {
   pkg <- as.package(pkg)
   name <- pkg_env_name(pkg)
-  
+
   if (!is_attached(pkg)) return(NULL)
 
   as.environment(name)

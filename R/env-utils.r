@@ -11,6 +11,6 @@ copy_env <- function(src, dest = new.env(parent = emptyenv()),
   srclist <- as.list(src, all.names = TRUE)
   srclist <- srclist[ !(names(srclist) %in% ignore) ]
   list2env(srclist, envir = dest)
-  
+
   dest
 }

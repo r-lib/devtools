@@ -12,10 +12,10 @@ test <- function(pkg = ".", filter = NULL) {
   pkg <- as.package(pkg)
   load_all(pkg)
   message("Testing ", pkg$package)
-  
+
   path_test <- file.path(pkg$path, "inst", "tests")
   if (!file.exists(path_test)) return()
-  
+
   require(testthat)
   # Run tests in a child of the namespace environment, like testthat::test_package
   env <- new.env(parent = ns_env(pkg))

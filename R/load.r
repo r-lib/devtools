@@ -83,7 +83,7 @@ load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
     msg <- capture.output(tools:::print.check_package_description(check))
     message("Invalid DESCRIPTION:\n", paste(msg, collapse = "\n"))
   }
-  
+
   # If installed version of package loaded, unload it
   if (is_loaded(pkg) && is.null(dev_meta(pkg$package))) {
     unload(pkg)
@@ -91,7 +91,7 @@ load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
 
   # Unload dlls
   unload_dll(pkg)
-  
+
   if (reset) {
     clear_cache()
     if (is_loaded(pkg)) unload(pkg)
@@ -127,11 +127,11 @@ load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
   # Set up the package environment ------------------------------------
   # Create the package environment if needed
   if (!is_attached(pkg)) attach_ns(pkg)
-  
+
   # Copy over objects from the namespace environment
   export_ns(pkg)
 
   run_onattach(pkg)
 
-  invisible(out)  
+  invisible(out)
 }

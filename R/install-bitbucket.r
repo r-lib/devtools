@@ -24,7 +24,7 @@ install_bitbucket <- function(repo, username, ref = "master", branch = NULL, ...
     " from ",
     paste(username, collapse = ", "))
 
-  url <- paste("https://bitbucket.org/", username, "/", repo, "/get/", 
+  url <- paste("https://bitbucket.org/", username, "/", repo, "/get/",
     ref, ".zip", sep = "")
   install_url(url, paste(ref, ".zip", sep = ""), ...)
 }

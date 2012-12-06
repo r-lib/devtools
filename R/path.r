@@ -1,5 +1,5 @@
 #' Get/set the PATH variable.
-#' 
+#'
 #' @param path character vector of paths
 #' @return \code{set_path} invisibly returns the old path.
 #' @name path
@@ -25,7 +25,7 @@ get_path <- function() {
 #' @rdname path
 set_path <- function(path) {
   path <- normalizePath(path, mustWork = FALSE)
-  
+
   old <- get_path()
   path <- paste(path, collapse = .Platform$path.sep)
   Sys.setenv(PATH = path)

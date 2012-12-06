@@ -4,11 +4,11 @@
 # @examples
 # \dontrun{
 # trace_all(
-#   functions_with_arg("na.rm", "package:base"), 
+#   functions_with_arg("na.rm", "package:base"),
 #   quote(if (!na.rm) warning("na.rm = FALSE"))
 # )
 # trace_all(
-#   functions_with_arg("drop", "package:base"), 
+#   functions_with_arg("drop", "package:base"),
 #   quote(if (drop) warning("drop = TRUE"))
 # )
 # }
@@ -27,11 +27,11 @@ trace_all <- function(fs, tracer) {
 # }
 functions_with_arg <- function(arg, pos) {
   fs <- ls(pos=pos)
-  
+
   has_arg <- function(f) {
     (is.function(f) || is.primitive(f)) && !is.null(formals(f)[[arg]])
   }
-  
+
   Filter(function(x) has_arg(get(x)), fs)
 }
 

@@ -1,7 +1,7 @@
 #' Creates a new package, following all devtools package conventions.
 #'
 #' Similar to \code{\link{package.skeleton}}, except that it only creates
-#' the standard devtools directory structures, it doesn't try and create 
+#' the standard devtools directory structures, it doesn't try and create
 #' source code and data files by inspecting the global environment.
 #'
 #' @param path location to create new package.  The last component of the path
@@ -18,7 +18,7 @@
 #'
 #' # Override a description attribute.
 #' path <- file.path(tempdir(), "myCustomPackage")
-#' my_description <- list("Maintainer" = 
+#' my_description <- list("Maintainer" =
 #'   "'Yoni Ben-Meshulam' <yoni@@opower.com>")
 #' create(path, my_description)
 #' }
@@ -47,7 +47,7 @@ create <- function(path, description = list()) {
   )
   description <- modifyList(defaults, description)
   write.dcf(description, file.path(path, 'DESCRIPTION'))
-  
+
   dir.create(file.path(path, "R"))
   dir.create(file.path(path, "man"))
   create_package_doc(path, name)

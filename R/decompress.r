@@ -1,5 +1,5 @@
 decompress <- function(src, target = tempdir()) {
-  
+
   if (grepl("\\.zip$", src)) {
     unzip(src, exdir = target)
     outdir <- getdir(as.character(unzip(src, list = TRUE)$Name[1]))
@@ -14,10 +14,10 @@ decompress <- function(src, target = tempdir()) {
 
   } else {
     ext <- gsub("^[^.]*\\.", "", src)
-    stop("Don't know how to decompress files with extension ", ext, 
+    stop("Don't know how to decompress files with extension ", ext,
       call. = FALSE)
   }
-  
+
   file.path(target, outdir)
 }
 

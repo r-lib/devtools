@@ -2,7 +2,7 @@
 #'
 #' \code{check} automatically builds a package before using \code{R CMD check}
 #' as this is the recommended way to check packages.  Note that this process
-#' runs in an independent realisation of R, so nothing in your current 
+#' runs in an independent realisation of R, so nothing in your current
 #' workspace will affect the process.
 #'
 #' After the \code{R CMD check}, this will run checks that are specific
@@ -22,18 +22,18 @@
 check <- function(pkg = ".", document = TRUE, cleanup = TRUE,
   cran = TRUE, args = NULL) {
   pkg <- as.package(pkg)
-  
+
   if (document) {
     document(pkg, clean = TRUE)
   }
 
-  built_path <- build(pkg, tempdir())  
+  built_path <- build(pkg, tempdir())
   on.exit(unlink(built_path))
 
   r_cmd_check_path <- check_r_cmd(pkg, built_path, cran, args)
 
   check_devtools(pkg, built_path)
-  
+
 
   if (cleanup) {
     unlink(r_cmd_check_path, recursive = TRUE)

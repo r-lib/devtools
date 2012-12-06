@@ -1,6 +1,6 @@
 #' Attempts to install a package directly from github.
 #'
-#' This function is vectorised so you can install multiple packages in 
+#' This function is vectorised so you can install multiple packages in
 #' a single command.
 #'
 #' @param username Github username
@@ -40,7 +40,7 @@ install_github <- function(repo, username = getOption("github.user"),
     username <- pullinfo$username
     ref <- pullinfo$ref
   }
-  
+
   if (!is.null(password)) {
     auth <- authenticate(
       user = auth_user %||% username,
@@ -49,17 +49,17 @@ install_github <- function(repo, username = getOption("github.user"),
   } else {
     auth <- list()
   }
-  
-  message("Installing github repo(s) ", 
+
+  message("Installing github repo(s) ",
     paste(repo, ref, sep = "/", collapse = ", "),
-    " from ", 
+    " from ",
     paste(username, collapse = ", "))
   name <- paste(username, "-", repo, sep = "")
-  
+
   url <- paste("https://api.github.com/repos/", username, "/", repo,
     "/zipball/", ref, sep = "")
 
-  install_url(url, paste(repo, ".zip", sep = ""), subdir = subdir, 
+  install_url(url, paste(repo, ".zip", sep = ""), subdir = subdir,
     config = auth, ...)
 }
 

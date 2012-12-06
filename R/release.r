@@ -34,33 +34,33 @@ release <- function(pkg = ".", check = TRUE) {
 
   if (check) {
     check(pkg)
-    if (yesno("Was package check successful?")) 
+    if (yesno("Was package check successful?"))
       return(invisible())
   }
-  
+
   if (yesno("Have you checked on win-builder (with build_win)?"))
     return(invisible())
-  
+
   try(print(show_news(pkg)))
-  if (yesno("Is package news up-to-date?")) 
+  if (yesno("Is package news up-to-date?"))
     return(invisible())
-  
+
   cat(readLines(file.path(pkg$path, "DESCRIPTION")), sep = "\n")
-  if (yesno("Is DESCRIPTION up-to-date?")) 
+  if (yesno("Is DESCRIPTION up-to-date?"))
     return(invisible())
 
   if (yesno("Have you checked packages that depend on this package?"))
     return(invisible())
-  
-  if (yesno("Ready to upload?")) 
+
+  if (yesno("Ready to upload?"))
     return(invisible())
-  
+
   message("Building and uploading")
   built_path <- build(pkg, tempdir())
 
   ftpUpload(built_path, paste("ftp://cran.R-project.org/incoming/",
     basename(built_path), sep = ""))
-  
+
   message("Preparing email")
   msg <- paste(
     "Dear CRAN maintainers,\n",
@@ -71,17 +71,17 @@ release <- function(pkg = ".", check = TRUE) {
     "INSERT YOUR NAME", "\n\n\n", sep = "")
   subject <- paste("CRAN submission ", pkg$package, " ", pkg$version, sep = "")
   create.post(msg, subject = subject, address = "cran@r-project.org")
-  
+
   invisible(TRUE)
-}  
+}
 
 yesno <- function(question) {
   yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah")
   nos <- c("No way", "Not yet", "I forgot", "No", "Nope")
-  
+
   cat(question)
   qs <- c(sample(yeses, 1), sample(nos, 2))
   rand <- sample(length(qs))
-  
+
   menu(qs[rand]) != which(rand == 1)
 }

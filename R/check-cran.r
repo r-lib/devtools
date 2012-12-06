@@ -1,6 +1,6 @@
 #' Check a package from CRAN.
 #'
-#' This is useful for automatically checking that dependencies of your 
+#' This is useful for automatically checking that dependencies of your
 #' packages work.
 #'
 #' The downloaded package and check directory are only removed if the check is
@@ -63,16 +63,16 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   on.exit(.libPaths(setdiff(.libPaths(), libpath)))
 
   # Make sure existing dependencies are up to date ---------------------------
-  old <- old.packages(libpath, repos = repos, type = type, 
+  old <- old.packages(libpath, repos = repos, type = type,
     available = available_bin)
   if (!is.null(old)) {
     message("Updating ", nrow(old), " existing dependencies")
     install.packages(old[, "Package"], libpath, repos = repos, type = type,
       Ncpus = threads)
   }
-  
+
   # Install missing dependencies
-  deps <- unique(unlist(package_dependencies(pkgs, packages(), 
+  deps <- unique(unlist(package_dependencies(pkgs, packages(),
     which = "all")))
   to_install <- setdiff(deps, installed.packages()[, 1])
   known <- intersect(to_install, rownames(available_bin))
@@ -84,31 +84,31 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       Ncpus = threads)
   }
   if (length(unknown) > 0) {
-    message("No binary packages available for dependenices: ", 
+    message("No binary packages available for dependenices: ",
       paste(unknown, collapse = ", "))
   }
-    
+
   # Download and check each package, parsing output as we go.
   tmp <- tempdir()
   check <- function(i) {
     url <- package_url(pkgs[i], repos, available = available_src)
-    
+
     if (length(url$url) == 0) {
       message("Can't find package source. Skipping...")
       return(NULL)
     }
     local <- file.path(srcpath, url$name)
-    
+
     if (!file.exists(local)) {
       message("Downloading ", pkgs[i])
       download.file(url$url, local, quiet = TRUE)
     }
-    
+
     message("Checking ", i , ": ", pkgs[i])
     cmd <- paste("CMD check --as-cran --no-multiarch --no-manual --no-codoc ",
       local, sep = "")
     try(R(cmd, tmp, stdout = NULL), silent = TRUE)
-    
+
     check_path <- file.path(tmp, gsub("_.*?$", ".Rcheck", url$name))
     results <- parse_check_results(check_path)
     if (length(results) > 0) cat(results, "\n")
@@ -118,7 +118,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     mc.cores = threads)
 
   names(results) <- pkgs
-  
+
   n_problems <- sum(vapply(results, length, integer(1)))
   if (n_problems > 0) {
     warning("Found ", n_problems, call. = FALSE)
@@ -126,7 +126,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
   # Collect the output
   collect_check_results(tmp)
-  
+
   invisible(results)
 }
 
@@ -135,24 +135,24 @@ available_packages <- memoise(function(repos, type) {
 })
 
 package_url <- function(package, repos, available = available.packages(contrib.url(repos, "source"))) {
-  
+
   ok <- (available[, "Package"] == package)
   ok <- ok & !is.na(ok)
-  
+
   vers <- package_version(available[ok, "Version"])
   keep <- vers == max(vers)
   keep[duplicated(keep)] <- FALSE
   ok[ok][!keep] <- FALSE
-  
+
   name <- paste(package, "_", available[ok, "Version"], ".tar.gz", sep = "")
   url <- file.path(available[ok, "Repository"], name)
-  
+
   list(name = name, url = url)
 }
 
 parse_check_results <- function(path) {
   check_path <- file.path(path, "00check.log")
-  
+
   check_log <- paste(readLines(check_path), collapse = "\n")
   pieces <- strsplit(check_log, "\n\\* ")[[1]]
   problems <- grepl("... (WARN|ERROR)", pieces)

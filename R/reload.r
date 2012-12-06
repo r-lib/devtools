@@ -1,8 +1,8 @@
 #' Unload and reload package.
-#' 
+#'
 #' If the package is not loaded already, this does nothing.
-#' 
-#' See the caveats in \code{\link{detach}} for the many reasons why this 
+#'
+#' See the caveats in \code{\link{detach}} for the many reasons why this
 #' might not work. If in doubt, quit R and restart.
 #'
 #' @param pkg package description, can be path or package name.  See
@@ -22,7 +22,7 @@
 #' @export
 reload <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  
+
   if (is_attached(pkg)) {
     message("Reloading installed ", pkg$package)
     unload(pkg)

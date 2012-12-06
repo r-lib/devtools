@@ -8,11 +8,11 @@
 wd <- function(pkg = ".", path = NULL) {
   pkg <- as.package(pkg)
   path <- file.path(pkg$path, path)
-  
+
   if (!file.exists(path)) {
     stop(path, " does not exist", call. = FALSE)
   }
-  
+
   message("Changing working directory to ", path)
   setwd(path)
 }

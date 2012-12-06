@@ -11,17 +11,17 @@ make_cache <- function() {
     paths <- path.expand(paths)
     new_hash <- md5(paths)
     old_hash <- .file_cache[paths]
-  
+
     changed <- is.na(old_hash) | new_hash != old_hash
     .file_cache[paths[changed]] <<- new_hash[changed]
-  
+
     paths[changed]
   }
-  
-  clear <- function() { 
+
+  clear <- function() {
     .file_cache <<- character()
   }
-  
+
   list(make = make, clear = clear)
 }
 .cache <- make_cache()

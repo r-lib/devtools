@@ -1,6 +1,6 @@
 #' Install specified version of a CRAN package.
 #'
-#' If you are installing an package that contains compiled code, you will 
+#' If you are installing an package that contains compiled code, you will
 #' need to have an R development environment installed.  You can check
 #' if you do by running \code{\link{has_devel}}.
 #'
@@ -15,14 +15,14 @@
 #' @inheritParams utils::install.packages
 #' @author Jeremy Stephens
 install_version <- function(package, version = NULL, repos = getOption("repos"), type = getOption("pkgType"), ...) {
-  
+
   contriburl <- contrib.url(repos, type)
   available <- available.packages(contriburl)
-  
+
   if (!is.null(version)) {
     version <- numeric_version(version)
   }
-  
+
   if (package %in% row.names(available)) {
     current.version <- available[package, 'Version']
     if (is.null(version) || version == current.version) {
@@ -52,6 +52,6 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     }
   }
 
-  url <- paste(repos, "/src/contrib/Archive/", package.path, sep = "")  
+  url <- paste(repos, "/src/contrib/Archive/", package.path, sep = "")
   install_url(url, ...)
 }

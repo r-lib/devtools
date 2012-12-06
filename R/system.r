@@ -3,7 +3,7 @@
 system_check <- function(cmd, args = character(), env = character(), ...) {
   full <- paste(cmd, " ", paste(args, collapse = ", "), sep = "")
   message(wrap_command(full))
-  
+
   message()
   with_env(env, {
     res <- system2(cmd, args = args, ...)
@@ -11,16 +11,16 @@ system_check <- function(cmd, args = character(), env = character(), ...) {
   if (res != 0) {
     stop("Command failed (", res, ")", call. = FALSE)
   }
-  
+
   invisible(TRUE)
 }
 
 R <- function(options, path = tempdir(), ...) {
   options <- paste("--vanilla", options)
   r_path <- file.path(R.home("bin"), "R")
-  
+
   env <- c(
-    "LC_ALL" = "C", 
+    "LC_ALL" = "C",
     "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
     "CYGWIN" = "nodosfilewarning",
     "R_TESTS" = "")

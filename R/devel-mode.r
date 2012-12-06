@@ -1,7 +1,7 @@
 #' Activate and deactivate development mode.
 #'
 #' When activated, \code{dev_mode} creates a new library for storing installed
-#' packages. This new library is automatically created when \code{dev_mode} is 
+#' packages. This new library is automatically created when \code{dev_mode} is
 #' activated if it does not already exist.
 #' This allows you to test development packages in a sandbox, without
 #' interfering with the other packages you have installed.
@@ -18,15 +18,15 @@
 #' }
 dev_mode <- local({
   .prompt <- NULL
-  
+
   function(on = NULL, path = getOption("devtools.path")) {
     lib_paths <- .libPaths()
-  
+
     path <- normalizePath(path, winslash = "/", mustWork = FALSE)
     if (is.null(on)) {
       on <- !(path %in% lib_paths)
     }
-  
+
     if (on) {
       if (!file.exists(path)) {
         dir.create(path, recursive = TRUE, showWarnings = FALSE)
@@ -34,27 +34,27 @@ dev_mode <- local({
       if (!file.exists(path)) {
         stop("Failed to create ", path, call. = FALSE)
       }
-      
+
       if (!is_library(path)) {
-        warning(path, " does not appear to be a library. ", 
+        warning(path, " does not appear to be a library. ",
           "Are sure you specified the correct directory?", call. = FALSE)
       }
-  
+
       message("Dev mode: ON")
       options(dev_path = path)
-  
+
       if (is.null(.prompt)) .prompt <<- getOption("prompt")
       options(prompt = paste("d> "))
-      
+
       .libPaths(c(path, lib_paths))
     } else {
-      
+
       message("Dev mode: OFF")
       options(dev_path = NULL)
-  
+
       if (!is.null(.prompt)) options(prompt = .prompt)
       .prompt <<- NULL
-  
+
       .libPaths(setdiff(lib_paths, path))
     }
   }
@@ -63,14 +63,14 @@ dev_mode <- local({
 is_library <- function(path) {
   # empty directories can be libraries
   if (length(dir(path)) == 0) return (TRUE)
-  
+
   # otherwise check that the directories are compiled R directories -
   # i.e. that they contain a Meta directory
   dirs <- dir(path, full.names = TRUE)
   dirs <- dirs[file_test("-d", dirs)]
-  
+
   has_pkg_dir <- function(path) length(dir(path, pattern = "Meta")) > 0
   help_dirs <- vapply(dirs, has_pkg_dir, logical(1))
-  
+
   all(help_dirs)
 }

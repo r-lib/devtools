@@ -26,28 +26,28 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE, run
   load_all(pkg, reset = TRUE, export_all = FALSE)
   on.exit(load_all(pkg, reset = TRUE))
   document(pkg, reload = FALSE)
-  
+
   path_man <- file.path(pkg$path, "man")
   files <- dir(path_man, pattern = "\\.[Rr]d$", full.names = TRUE)
   names(files) <- basename(files)
   files <- with_collate("C", sort(files))
-  
+
   if (!is.null(start)) {
     start_path <- find_pkg_topic(pkg, start)
     if (is.null(start_path)) {
       stop("Couldn't find start position ", start, call. = FALSE)
     }
-    
+
     start_pos <- which(names(files) == start_path)
     if (length(start_pos) == 1) {
       files <- files[- seq(1, start_pos - 1)]
     }
   }
-  
+
   message("Running ", length(files), " example files in ", pkg$package)
   rule()
   lapply(files, run_example, show = show, test = test, run = run)
-  
+
   invisible()
 }
 # If an error occurs, should print out the suspect line of code, and offer

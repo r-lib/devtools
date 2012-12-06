@@ -1,6 +1,6 @@
 #' Load R code.
 #'
-#' Load all R code in the \code{R} directory. The first time the code is 
+#' Load all R code in the \code{R} directory. The first time the code is
 #' loaded, \code{.onLoad} will be run if it exists.
 #'
 #' @param pkg package description, can be path or package name.  See
@@ -15,15 +15,15 @@ load_code <- function(pkg = ".") {
   paths <- changed_files(r_files)
 
   tryCatch(
-    lapply(paths, sys.source, envir = env, chdir = TRUE, 
-      keep.source = TRUE), 
+    lapply(paths, sys.source, envir = env, chdir = TRUE,
+      keep.source = TRUE),
     error = function(e) {
       clear_cache()
       unload(pkg)
       stop(e)
     }
   )
-  
+
   invisible(r_files)
 }
 
@@ -39,13 +39,13 @@ parse_collate <- function(string) {
 #' @keywords internal
 find_code <- function(pkg = ".") {
   path_r <- file.path(pkg$path, "R")
-  
-  code_paths <- dir(path_r, "\\.[Rrq]$", full.names = TRUE)  
+
+  code_paths <- dir(path_r, "\\.[Rrq]$", full.names = TRUE)
   r_files <- with_collate("C", sort(code_paths))
-  
+
   if (!is.null(pkg$collate)) {
     collate <- file.path(path_r, parse_collate(pkg$collate))
-    
+
     missing <- setdiff(collate, r_files)
     files <- function(x) paste(basename(x), collapse = ", ")
     if (length(missing) > 0) {
@@ -57,7 +57,7 @@ find_code <- function(pkg = ".") {
     if (length(extra) > 0) {
       message("Adding files missing in collate: ", files(extra))
     }
-    
+
     r_files <- union(collate, r_files)
   }
   r_files
