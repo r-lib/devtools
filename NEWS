@@ -7,6 +7,8 @@ MINOR FEATURES
 
 BUG FIXES
 
+* Fixed path issue when looking for Rtools on windows when registry entry is not present. (Fixes #201)
+
 * Reloading a package that requires a forced-unload of the namespace now works.
 
 * When reloading a package that another loaded package depends on, if there

@@ -50,7 +50,7 @@ rtools <- function() {
   }
 
   # Look in default location
-  default_path <- normalizePath("c:\\Rtools\\bin", mustWork = FALSE)
+  default_path <- normalizePath("c:\\Rtools", mustWork = FALSE)
   if (file.exists(default_path)) return(default_path)
 
   # Give up
