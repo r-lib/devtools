@@ -1,0 +1,3 @@
+useDynLib(dllrcpp)
+export(rcpp_hello_world)
+export(rcpp_test_attributes)

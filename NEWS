@@ -1,6 +1,10 @@
 devtools 0.8.0.99
 -----------------
 
+NEW FEATURES
+
+* Rcpp attributes are now automatically compiled during build.
+
 MINOR FEATURES
 
 * `check_cran` now downloads packages from cran.rstudio.com.
