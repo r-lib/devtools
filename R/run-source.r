@@ -16,7 +16,7 @@
 source_url <- function(url, ...) {
   request <- GET(url)
   stop_for_status(request)
-  handle <- textConnection(text_content(request))
+  handle <- textConnection(content(request, as = "text"))
   on.exit(close(handle))
   source(handle, ...)
 }
