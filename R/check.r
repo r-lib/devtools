@@ -18,7 +18,11 @@
 #' @param cran if \code{TRUE} (the default), check using the same settings as
 #'   CRAN uses.
 #' @param check_version if \code{TRUE}, check that the new version is greater
-#'   than the current version on CRAN.
+#'   than the current version on CRAN, by setting the
+#'   \code{_R_CHECK_CRAN_INCOMING_} environment variable to \code{TRUE}.
+#' @param force_suggests if \code{FALSE}, don't force suggested packages, by
+#'   setting the \code{_R_CHECK_FORCE_SUGGESTS_} environment variable to
+#'   \code{FALSE}.
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to \code{R CMD check}.
 #' @export
