@@ -15,7 +15,7 @@ system_check <- function(cmd, args = character(), env = character(), ...) {
   invisible(TRUE)
 }
 
-R <- function(options, path = tempdir(), ...) {
+R <- function(options, path = tempdir(), env_vars = NULL, ...) {
   options <- paste("--vanilla", options)
   r_path <- file.path(R.home("bin"), "R")
 
@@ -23,7 +23,8 @@ R <- function(options, path = tempdir(), ...) {
     "LC_ALL" = "C",
     "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
     "CYGWIN" = "nodosfilewarning",
-    "R_TESTS" = "")
+    "R_TESTS" = "",
+    env_vars)
     # When R CMD check runs tests, it sets R_TESTS. When the tests
     # themeselves run R CMD xxxx, as is the case with the tests in
     # devtools, having R_TESTS set causes errors because it confuses
