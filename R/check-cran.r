@@ -111,7 +111,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
     message("Checking ", i , ": ", pkgs[i])
     check_args <- "--no-multiarch --no-manual --no-codoc"
-    try(check_r_cmd(local, cran = TRUE, args = check_args, check_dir = check_dir),
+    try(check_r_cmd(local, cran = TRUE, check_version = FALSE,
+      force_suggests = FALSE, args = check_args, check_dir = check_dir),
       silent = TRUE)
 
     check_path <- file.path(check_dir, gsub("_.*?$", ".Rcheck", url$name))
