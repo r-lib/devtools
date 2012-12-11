@@ -30,7 +30,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE,
   built_path <- build(pkg, tempdir())
   on.exit(unlink(built_path))
 
-  r_cmd_check_path <- check_r_cmd(pkg, built_path, cran, args)
+  r_cmd_check_path <- check_r_cmd(built_path, cran, args)
 
   check_devtools(pkg, built_path)
 
@@ -47,11 +47,9 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE,
 
 # Run R CMD check and return the path for the check
 # @param built_path The path to the built .tar.gz source package.
-check_r_cmd <- function(pkg = ".", built_path = NULL, cran = TRUE,
-  args = NULL) {
+check_r_cmd <- function(built_path = NULL, cran = TRUE, args = NULL) {
 
-  pkg <- as.package(pkg)
-  message("Checking ", pkg$package, " with R CMD check")
+  pkgname <- gsub("_.*?$", "", basename(built_path))
 
   opts <- "--timings"
   if (cran)
@@ -61,5 +59,5 @@ check_r_cmd <- function(pkg = ".", built_path = NULL, cran = TRUE,
   R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), tempdir())
 
   # Return the path to the check output
-  file.path(tempdir(), paste(pkg$package, ".Rcheck", sep = ""))
+  file.path(tempdir(), paste(pkgname, ".Rcheck", sep = ""))
 }
