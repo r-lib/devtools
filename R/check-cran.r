@@ -59,10 +59,9 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   # Create and use temporary library
   if (!file.exists(libpath)) dir.create(libpath)
   libpath <- normalizePath(libpath)
-  libpaths_orig <- .libPaths()
 
   # Add the temoporary library and remove on exit
-  .libPaths(c(libpath, libpaths_orig))
+  libpaths_orig <- set_libpaths(c(libpath, .libPaths()))
   on.exit(.libPaths(libpaths_orig), add = TRUE)
 
   # Make sure existing dependencies are up to date ---------------------------
