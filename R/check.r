@@ -60,20 +60,8 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
 
   env_vars <- NULL
   if (cran) {
-    # These environment variables are from the R Internals document. The only
-    # difference from that document is that here, _R_CHECK_CRAN_INCOMING_ is
-    # not set to TRUE.
-    env_vars <- c(env_vars,
-      "_R_CHECK_VC_DIRS_"                = "TRUE",
-      "_R_CHECK_TIMINGS_"                = "10",
-      "_R_CHECK_INSTALL_DEPENDS_"        = "TRUE",
-      "_R_CHECK_SUGGESTS_ONLY_"          = "TRUE",
-      "_R_CHECK_NO_RECOMMENDED_"         = "TRUE",
-      "_R_CHECK_EXECUTABLES_EXCLUSIONS_" = "FALSE",
-      "_R_CHECK_DOC_SIZES2_"             = "TRUE"
-    )
+    env_vars <- c(env_vars, cran_env())
   }
-
   if (check_version) {
     env_vars <- c(env_vars, "_R_CHECK_CRAN_INCOMING_" = "TRUE")
   }
@@ -83,4 +71,20 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
 
   # Return the path to the check output
   file.path(tempdir(), paste(pkgname, ".Rcheck", sep = ""))
+}
+
+
+# Return the environment variables that are used CRAN when checking packages.
+# These environment variables are from the R Internals document. The only
+# difference from that document is that here, _R_CHECK_CRAN_INCOMING_ is
+# not set to TRUE.
+cran_env <- function() {
+  c("_R_CHECK_VC_DIRS_"                = "TRUE",
+    "_R_CHECK_TIMINGS_"                = "10",
+    "_R_CHECK_INSTALL_DEPENDS_"        = "TRUE",
+    "_R_CHECK_SUGGESTS_ONLY_"          = "TRUE",
+    "_R_CHECK_NO_RECOMMENDED_"         = "TRUE",
+    "_R_CHECK_EXECUTABLES_EXCLUSIONS_" = "FALSE",
+    "_R_CHECK_DOC_SIZES2_"             = "TRUE"
+  )
 }
