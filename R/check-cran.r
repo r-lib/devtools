@@ -88,8 +88,11 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       paste(unknown, collapse = ", "))
   }
 
+  # Create directory for storing results.
+  check_dir <- tempfile("check_cran")
+  dir.create(check_dir)
+
   # Download and check each package, parsing output as we go.
-  tmp <- tempdir()
   check <- function(i) {
     url <- package_url(pkgs[i], repos, available = available_src)
 
@@ -107,9 +110,9 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     message("Checking ", i , ": ", pkgs[i])
     cmd <- paste("CMD check --as-cran --no-multiarch --no-manual --no-codoc ",
       local, sep = "")
-    try(R(cmd, tmp, stdout = NULL), silent = TRUE)
+    try(R(cmd, check_dir, stdout = NULL), silent = TRUE)
 
-    check_path <- file.path(tmp, gsub("_.*?$", ".Rcheck", url$name))
+    check_path <- file.path(check_dir, gsub("_.*?$", ".Rcheck", url$name))
     results <- parse_check_results(check_path)
     if (length(results) > 0) cat(results, "\n")
     results
@@ -125,7 +128,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   }
 
   # Collect the output
-  collect_check_results(tmp)
+  collect_check_results(check_dir)
 
   invisible(results)
 }
@@ -166,7 +169,7 @@ parse_check_results <- function(path) {
 
 # Collects all the results from running check_cran and puts in a
 # directory results/ under the top level tempdir.
-collect_check_results <- function(topdir = tempdir()) {
+collect_check_results <- function(topdir) {
   # Directory for storing results
   rdir <- file.path(topdir, "results")
   if (dir.exists(rdir)) {
