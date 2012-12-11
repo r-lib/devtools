@@ -95,7 +95,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   dir.create(check_dir)
 
   # Download and check each package, parsing output as we go.
-  check <- function(i) {
+  check_pkg <- function(i) {
     url <- package_url(pkgs[i], repos, available = available_src)
 
     if (length(url$url) == 0) {
@@ -110,16 +110,16 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     }
 
     message("Checking ", i , ": ", pkgs[i])
-    cmd <- paste("CMD check --as-cran --no-multiarch --no-manual --no-codoc ",
-      local, sep = "")
-    try(R(cmd, check_dir, stdout = NULL), silent = TRUE)
+    check_args <- "--no-multiarch --no-manual --no-codoc"
+    try(check_r_cmd(local, cran = TRUE, args = check_args, check_dir = check_dir),
+      silent = TRUE)
 
     check_path <- file.path(check_dir, gsub("_.*?$", ".Rcheck", url$name))
     results <- parse_check_results(check_path)
     if (length(results) > 0) cat(results, "\n")
     results
   }
-  results <- mclapply(seq_along(pkgs), check, mc.preschedule = FALSE,
+  results <- mclapply(seq_along(pkgs), check_pkg, mc.preschedule = FALSE,
     mc.cores = threads)
 
   names(results) <- pkgs
