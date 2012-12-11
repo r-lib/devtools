@@ -15,14 +15,15 @@
 #' @param cleanup if \code{TRUE} the check directory is removed if the check
 #'   is successful - this allows you to inspect the results to figure out what
 #'   went wrong. If \code{FALSE} the check directory is never removed.
-#' @param cran if \code{TRUE} (the default), check with CRAN.
+#' @param cran if \code{TRUE} (the default), check using the same settings as
+#'   CRAN uses.
 #' @param check_version if \code{TRUE}, check that the new version is greater
 #'   than the current version on CRAN.
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to \code{R CMD check}.
 #' @export
 check <- function(pkg = ".", document = TRUE, cleanup = TRUE,
-  cran = TRUE, check_version = FALSE, args = NULL) {
+  cran = TRUE, check_version = FALSE, force_suggests = TRUE, args = NULL) {
   pkg <- as.package(pkg)
 
   if (document) {
