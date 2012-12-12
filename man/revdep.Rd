@@ -4,12 +4,13 @@
 \alias{revdep_maintainers}
 \title{Reverese dependency tools.}
 \usage{
-  revdep(pkg = ".", dependencies = c("Depends", "Imports"),
+  revdep(pkg = NULL,
+    dependencies = c("Depends", "Imports", "Suggests"),
     recursive = FALSE)
 
   revdep_maintainers(pkg = ".")
 
-  revdep_check(pkg = ".", ...)
+  revdep_check(pkg = NULL, recursive = FALSE, ...)
 }
 \arguments{
   \item{pkg}{package name}
