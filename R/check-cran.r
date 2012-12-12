@@ -68,7 +68,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   old <- old.packages(libpath, repos = repos, type = type,
     available = available_bin)
   if (!is.null(old)) {
-    message("Updating ", nrow(old), " existing dependencies")
+    message("Updating ", nrow(old), " existing dependencies: ",
+      paste(old[, "Package"], collapse = ", "))
     install.packages(old[, "Package"], libpath, repos = repos, type = type,
       Ncpus = threads)
   }
@@ -81,7 +82,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   unknown <- setdiff(to_install, rownames(available_bin))
 
   if (length(known) > 0) {
-    message("Installing ", length(known), " missing binary dependencies")
+    message("Installing ", length(known), " missing dependencies: ",
+      paste(known, collapse = ", "))
     install.packages(known, lib = libpath, quiet = FALSE, repos = repos,
       Ncpus = threads)
   }
