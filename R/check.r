@@ -18,12 +18,17 @@
 #' @param cran if \code{TRUE} (the default), check using the same settings as
 #'   CRAN uses.
 #' @param check_version if \code{TRUE}, check that the new version is greater
-#'   than the current version on CRAN.
+#'   than the current version on CRAN, by setting the
+#'   \code{_R_CHECK_CRAN_INCOMING_} environment variable to \code{TRUE}.
+#' @param force_suggests if \code{FALSE}, don't force suggested packages, by
+#'   setting the \code{_R_CHECK_FORCE_SUGGESTS_} environment variable to
+#'   \code{FALSE}.
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to \code{R CMD check}.
 #' @export
-check <- function(pkg = ".", document = TRUE, cleanup = TRUE,
-  cran = TRUE, check_version = FALSE, force_suggests = TRUE, args = NULL) {
+check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
+  check_version = FALSE, force_suggests = TRUE, args = NULL) {
+
   pkg <- as.package(pkg)
 
   if (document) {
@@ -33,7 +38,8 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE,
   built_path <- build(pkg, tempdir())
   on.exit(unlink(built_path))
 
-  r_cmd_check_path <- check_r_cmd(built_path, cran, check_version, args)
+  r_cmd_check_path <- check_r_cmd(built_path, cran, check_version,
+    force_suggests, args)
 
   check_devtools(pkg, built_path)
 
@@ -52,7 +58,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE,
 # @param built_path The path to the built .tar.gz source package.
 # @param check_dir The directory to unpack the .tar.gz file to
 check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
-  args = NULL, check_dir = tempdir()) {
+  force_suggests = TRUE, args = NULL, check_dir = tempdir()) {
 
   pkgname <- gsub("_.*?$", "", basename(built_path))
 
@@ -60,12 +66,14 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
 
   env_vars <- NULL
-  if (cran) {
-    env_vars <- c(env_vars, cran_env())
-  }
-  if (check_version) {
-    env_vars <- c(env_vars, "_R_CHECK_CRAN_INCOMING_" = "TRUE")
-  }
+  # Setting these environment variables requires some care because they can be
+  # be TRUE, FALSE, or not set. (And some variables take numeric values.) When
+  # not set, R CMD check will use the defaults as described in R Internals.
+  env_vars <- c(
+    if (cran) cran_env(),
+    if (check_version) c("_R_CHECK_CRAN_INCOMING_" = "TRUE"),
+    if (!force_suggests) c("_R_CHECK_FORCE_SUGGESTS_" = "FALSE")
+  )
 
   R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), check_dir,
     env_vars)
