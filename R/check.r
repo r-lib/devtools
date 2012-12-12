@@ -58,7 +58,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
 # @param built_path The path to the built .tar.gz source package.
 # @param check_dir The directory to unpack the .tar.gz file to
 check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
-  force_suggests = TRUE, args = NULL, check_dir = tempdir()) {
+  force_suggests = TRUE, args = NULL, check_dir = tempdir(), ...) {
 
   pkgname <- gsub("_.*?$", "", basename(built_path))
 
@@ -76,7 +76,7 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
   )
 
   R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), check_dir,
-    env_vars)
+    env_vars, ...)
 
   # Return the path to the check output
   file.path(tempdir(), paste(pkgname, ".Rcheck", sep = ""))
