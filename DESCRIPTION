@@ -81,3 +81,4 @@ Collate:
     'dev-help.r'
     'check_devtools.r'
     'rcpp-attributes.r'
+    'cran.r'
