@@ -36,6 +36,23 @@ release <- function(pkg = ".", check = TRUE) {
     check(pkg, cran = TRUE, check_version = TRUE)
     if (yesno("Was package check successful?"))
       return(invisible())
+
+  } else {
+    # If we don't run the full checks, then check that the package version is
+    # sufficient for submission to CRAN.
+    cran_version <- cran_pkg_version(pkg$package)
+
+    if (is.null(cran_version)) {
+      message("Package ", pkg$package, " not found on CRAN. This is a new package.")
+
+    } else if (as.package_version(pkg$version) > cran_version) {
+      message("Local package ", pkg$package, " ", pkg$version,
+        " is greater than CRAN version ", cran_version, ".")
+
+    } else {
+      stop("Local package ", pkg$package, " ", pkg$version,
+        " must be greater than CRAN version ", cran_version, ".")
+    }
   }
 
   if (yesno("Have you checked on win-builder (with build_win)?"))
