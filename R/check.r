@@ -69,15 +69,11 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
   # Setting these environment variables requires some care because they can be
   # be TRUE, FALSE, or not set. (And some variables take numeric values.) When
   # not set, R CMD check will use the defaults as described in R Internals.
-  if (cran) {
-    env_vars <- c(env_vars, cran_env())
-  }
-  if (check_version) {
-    env_vars <- c(env_vars, "_R_CHECK_CRAN_INCOMING_" = "TRUE")
-  }
-  if (!force_suggests) {
-    env_vars <- c(env_vars, "_R_CHECK_FORCE_SUGGESTS_" = "FALSE")
-  }
+  env_vars <- c(
+    if (cran) cran_env(),
+    if (check_version) c("_R_CHECK_CRAN_INCOMING_" = "TRUE"),
+    if (!force_suggests) c("_R_CHECK_FORCE_SUGGESTS_" = "FALSE")
+  )
 
   R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), check_dir,
     env_vars)
