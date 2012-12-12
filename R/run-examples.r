@@ -27,10 +27,7 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE, run
   on.exit(load_all(pkg, reset = TRUE))
   document(pkg, reload = FALSE)
 
-  path_man <- file.path(pkg$path, "man")
-  files <- dir(path_man, pattern = "\\.[Rr]d$", full.names = TRUE)
-  names(files) <- basename(files)
-  files <- with_collate("C", sort(files))
+  files <- rd_files(pkg)
 
   if (!is.null(start)) {
     start_path <- find_pkg_topic(pkg, start)
@@ -57,3 +54,11 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE, run
 #   * browser
 #   * rerun example and rerun
 #   * reload code and rerun
+
+
+rd_files <- function(pkg) {
+  path_man <- file.path(pkg$path, "man")
+  files <- dir(path_man, pattern = "\\.[Rr]d$", full.names = TRUE)
+  names(files) <- basename(files)
+  with_collate("C", sort(files))
+}

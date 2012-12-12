@@ -61,9 +61,7 @@ clear_topic_index <- function(pkg = ".") {
 #' @importFrom tools parse_Rd
 build_topic_index <- function(pkg = ".") {
   pkg <- as.package(pkg)
-
-  rds <- dir(file.path(pkg, "man"), full.names = TRUE)
-  names(rds) <- basename(rds)
+  rds <- rd_files(pkg)
 
   aliases <- function(path) {
     parsed <- parse_Rd(path)
