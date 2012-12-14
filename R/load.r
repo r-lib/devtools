@@ -110,7 +110,8 @@ load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
 
   out <- list(env = ns_env(pkg))
 
-  # Load dependencies into the imports environment
+  # Load dependencies
+  load_depends(pkg)
   load_imports(pkg)
 
   out$data <- load_data(pkg)
@@ -126,7 +127,7 @@ load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
   # Set up the exports in the namespace metadata (this must happen after
   # the objects are loaded)
   setup_ns_exports(pkg, export_all)
-  
+
   # Set up the package environment ------------------------------------
   # Create the package environment if needed
   if (!is_attached(pkg)) attach_ns(pkg)

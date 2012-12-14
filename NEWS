@@ -5,6 +5,8 @@ NEW FEATURES
 
 * Rcpp attributes are now automatically compiled during build.
 
+* Packages listed in depends are `require()`d (Fixes #161, #178, #192)
+
 MINOR FEATURES
 
 * `check_cran` now downloads packages from cran.rstudio.com.

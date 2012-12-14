@@ -45,13 +45,11 @@ imports_env_name <- function(pkg = ".") {
 #' the dependency packages.
 #'
 #' @keywords internal
-load_imports <- function(pkg = ".", deps = c("depends", "imports")) {
+load_imports <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   # Get data frame of dependency names and versions
-  deps <- lapply(pkg[deps], parse_deps)
-  deps <- Reduce(rbind, deps)
-
+  deps <- parse_deps(pkg$imports)
   if (is.null(deps) || nrow(deps) == 0) return(invisible())
 
   # If we've already loaded imports, don't load again (until load_all
@@ -65,7 +63,6 @@ load_imports <- function(pkg = ".", deps = c("depends", "imports")) {
 
   invisible(deps)
 }
-
 
 # Load imported objects
 # The code in this function is taken from base::loadNamespace

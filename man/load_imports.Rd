@@ -2,7 +2,7 @@
 \alias{load_imports}
 \title{Load all of the imports for a package}
 \usage{
-  load_imports(pkg = ".", deps = c("depends", "imports"))
+  load_imports(pkg = ".")
 }
 \description{
   The imported objects are copied to the imports
