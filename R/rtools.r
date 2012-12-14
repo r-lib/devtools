@@ -10,7 +10,7 @@ scan_path_for_rtools <- function() {
 
   # Find the version path
   version_path <- file.path(install_path, "VERSION.txt")
-  if (!file.exists(verson_path)) return(NULL)
+  if (!file.exists(version_path)) return(NULL)
 
   # Further verify that gcc is in Rtools
   gcc_path <- Sys.which("gcc.exe")
@@ -33,19 +33,22 @@ scan_path_for_rtools <- function() {
   m <- regexec(version_re, contents)
   version <- regmatches(contents, m)[[1]][2]
 
-  rtools_info(numeric_version(version), install_path)
+  rtools_info(version, install_path)
 }
 
 scan_registry_for_rtools <- function() {
   # Look in registry
   keys <- NULL
   try(keys <- utils::readRegistry("SOFTWARE\\R-core\\Rtools",
-    hive = "HLM", view = "32-bit"), silent = TRUE)
+    hive = "HLM", view = "32-bit", maxdepth = 2), silent = TRUE)
   if (is.null(keys)) return(NULL)
 
   for(version in names(keys)) {
-    install_path <- keys[[version]]$InstallPath
-    version <- numeric_version(version)
+    key <- keys[[version]]
+    if (!is.list(key) || is.null(key$InstallPath)) next;
+    install_path <- normalizePath(key$InstallPath,
+      mustWork = FALSE, winslash = "/")
+
     ok <- rtools_ok(version, install_path)
     if (ok) return(rtools_info(version, install_path))
   }
