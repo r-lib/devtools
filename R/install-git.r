@@ -41,16 +41,10 @@ install_git <- function(git_url, name = NULL, subdir = NULL,
 install_git_single <- function(git_url, name = NULL, subdir = NULL, 
                                git_binary = NULL, config = list(), ...) {
   if (is.null(name)) {
-    name <- basename(git_url)
-
-    # Following the feedback from @wch, we remove
-    # the "git" suffix from the name of the clone folder.
-    parts = unlist(strsplit(name, ".", fixed=TRUE))
-
-    if (tail(parts, n=1) == 'git') {
-      name = paste(head(parts, n=-1), collapse=".")
-    }
+    name <- basename(git_url) 
   }
+
+  name <- gsub("\\.git$", "", name)
 
   message("Preparing installation of ", name, " using the Git-URL: ", git_url)
   
