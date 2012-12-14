@@ -113,6 +113,8 @@ load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
   # Load dependencies
   load_depends(pkg)
   load_imports(pkg)
+  # Add shim objects
+  insert_shims(pkg)
 
   out$data <- load_data(pkg)
   out$code <- load_code(pkg)

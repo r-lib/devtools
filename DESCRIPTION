@@ -83,3 +83,4 @@ Collate:
     'rcpp-attributes.r'
     'cran.r'
     'load-depends.r'
+    'shims.r'
