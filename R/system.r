@@ -32,6 +32,11 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
     # devtools, having R_TESTS set causes errors because it confuses
     # the R subprocesses. Unsetting it here avoids those problems.
 
+  if (!is.null(rtools_path)) {
+    old <- add_path(rtools_path, 0)
+    on.exit(set_path(old))
+  }
+
   in_dir(path, system_check(r_path, options, env, ...))
 }
 
