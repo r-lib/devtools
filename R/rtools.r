@@ -57,6 +57,8 @@ scan_registry_for_rtools <- function() {
 }
 
 rtools_ok <- function(version, install_path) {
+  if (!file.exists(install_path)) return(FALSE)
+
   info <- version_info[[version]]
   if (is.null(info)) return(FALSE)
 
