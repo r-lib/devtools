@@ -7,6 +7,12 @@ NEW FEATURES
 
 * Packages listed in depends are `require()`d (Fixes #161, #178, #192)
 
+* `load_all()` now inserts a special version of `system.file` into the package's
+  imports environment. This tries to simulate the behavior of
+  `base::system.file` but gives modified results because the directory structure
+  of installed packages and uninstalled source packages is different. (Fixes
+  #179)
+
 MINOR FEATURES
 
 * `check_cran` now downloads packages from cran.rstudio.com.
