@@ -17,6 +17,8 @@
 #' the imports environment, which has the name attribute
 #' \code{imports:pkgname}. It is in turn is a child of
 #' \code{<namespace:base>}, which is a child of the global environment.
+#' (There is also a copy of the base namespace that is a child of the empty
+#' environment.)
 #'
 #' The package environment \code{<package:pkgname>} is an ancestor of the
 #' global environment. Normally when loading a package, the objects
@@ -30,6 +32,14 @@
 #' \code{export_all=TRUE}. This more closely simulates behavior when
 #' loading an installed package with \code{\link{library}}, and can be
 #' useful for checking for missing exports.
+#'
+#' \code{load_all} also inserts shim functions into the imports environment
+#' of the laded package. It presently adds a replacement version of
+#' \code{system.file} which returns different paths from
+#' \code{base::system.file}. This is needed because installed and uninstalled
+#' package sources have different directory structures. Note that this is not
+#' a perfect replacement for \code{base::system.file}.
+#'
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
