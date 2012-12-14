@@ -1,0 +1,1 @@
+file inst/B.txt
