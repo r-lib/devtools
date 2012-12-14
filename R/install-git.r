@@ -42,6 +42,14 @@ install_git_single <- function(git_url, name = NULL, subdir = NULL,
                                git_binary = NULL, config = list(), ...) {
   if (is.null(name)) {
     name <- basename(git_url)
+
+    # Following the feedback from @wch, we remove
+    # the "git" suffix from the name of the clone folder.
+    parts = unlist(strsplit(name, ".", fixed=TRUE))
+
+    if (tail(parts, n=1) == 'git') {
+      name = paste(head(parts, n=-1), collapse=".")
+    }
   }
 
   message("Preparing installation of ", name, " using the Git-URL: ", git_url)
@@ -57,7 +65,7 @@ install_git_single <- function(git_url, name = NULL, subdir = NULL,
   #        and repositories with the public SSH key set.
   request <- system2(
     git_binary_path, 
-    args = c('clone', git_url, bundle), 
+    args = c('clone', '--depth', '1', '--no-hardlinks', git_url,  bundle), 
     stdout = FALSE, stderr = FALSE
   )
  
@@ -76,16 +84,11 @@ install_git_single <- function(git_url, name = NULL, subdir = NULL,
 
   config_path <- file.path(pkg_path, "configure")
   if (file.exists(config_path)) {
-    Sys.chmod(config_path, "777")
+    Sys.chmod(config_path, "755")
   }
   
   # Install
   install(pkg_path, ...)
-}
-
-#' Retrieve the currently installed git-cli version.
-git_version <- function() {
-  system2(git_path(), args=c('--version'))
 }
 
 
