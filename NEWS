@@ -25,6 +25,10 @@ MINOR FEATURES
 
 * `install_bitbucket()` now always uses lowercase repo names. (Thanks to mnel)
 
+* New function `with_lib()`, which runs an expression code with a library path
+  prepended to the existing libpaths. It differs slightly from
+  `with_libpaths()`, which replaces the existing libpaths.
+
 BUG FIXES
 
 * Fixed path issue when looking for Rtools on windows when registry entry is not present. (Fixes #201)

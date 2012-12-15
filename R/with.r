@@ -4,7 +4,8 @@
 #'   \item \code{in_dir}: working directory
 #'   \item \code{with_collate}: collation order
 #'   \item \code{with_env}: environmental variables
-#'   \item \code{with_libpaths}: library paths
+#'   \item \code{with_libpaths}: library paths, replacing current libpaths
+#'   \item \code{with_lib}: library paths, prepending to current libpaths
 #'   \item \code{with_locale}: any locale setting
 #'   \item \code{with_options}: options
 #'   \item \code{with_path}: PATH environment variable
@@ -93,6 +94,20 @@ set_libpaths <- function(paths) {
 #' @rdname with_something
 #' @export
 with_libpaths <- with_something(set_libpaths)
+
+# lib ------------------------------------------------------------------------
+
+set_lib <- function(paths) {
+  libpath <- normalizePath(paths, mustWork = TRUE)
+
+  old <- .libPaths()
+  .libPaths(c(libpath, .libPaths()))
+  invisible(old)
+}
+
+#' @rdname with_something
+#' @export
+with_lib <- with_something(set_lib)
 
 # options --------------------------------------------------------------------
 
