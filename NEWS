@@ -23,6 +23,8 @@ MINOR FEATURES
 * In `check()`, it is optional to require suggested packages, using the
   `force_suggests` option.
 
+* `install_bitbucket()` now always uses lowercase repo names. (Thanks to mnel)
+
 BUG FIXES
 
 * Fixed path issue when looking for Rtools on windows when registry entry is not present. (Fixes #201)
