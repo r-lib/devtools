@@ -22,8 +22,15 @@ build <- function(pkg = ".", path = NULL, binary = FALSE) {
     cmd <- paste("CMD INSTALL ", shQuote(pkg$path), " --build", sep = "")
     ext <- if (.Platform$OS.type == "windows") "zip" else "tgz"
   } else {
-    cmd <- paste("CMD build ", shQuote(pkg$path),
-      " --no-manual --no-resave-data", sep = "")
+    args <- " --no-manual --no-resave-data"
+
+    if (!nzchar(Sys.which("pdflatex"))) {
+      message("pdflatex not found. Not building PDF vignettes.")
+      args <- paste(args, "--no-vignettes")
+    }
+
+    cmd <- paste("CMD build ", shQuote(pkg$path), args, sep = "")
+
     ext <- "tar.gz"
   }
   R(cmd, path)
