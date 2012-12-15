@@ -47,6 +47,9 @@ BUG FIXES
 * The collection of check results at the end of `check_cran()` previously did
   not remove existing results, but now it does.
 
+* When a package is loaded with `load_all()`, it now passes the name of the
+  package to the `.onLoad()` function. (Thanks to Andrew Redd)
+
 devtools 0.8.0
 --------------
 
