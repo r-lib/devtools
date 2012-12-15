@@ -16,7 +16,7 @@ run_onload <- function(pkg = ".") {
   # Run .onLoad if it's defined. Set a flag 'onLoad' in the metadata
   if (exists(".onLoad", nsenv, inherits = FALSE) &&
      is.null(metadata$onLoad)) {
-    nsenv$.onLoad()
+    nsenv$.onLoad(libname=NULL, pkgname = pkg$package)
     metadata$onLoad <- TRUE
   }
 }
