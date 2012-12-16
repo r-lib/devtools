@@ -32,6 +32,9 @@ MINOR FEATURES
 * New function `install_git()` installs a package directly from a git
   repository. (Thanks to David Coallier)
 
+* If `pdflatex` isn't available, don't try to build vignettes with `install()`
+  or `check()`. (Fixes #173)
+
 BUG FIXES
 
 * Fixed path issue when looking for Rtools on windows when registry entry is not present. (Fixes #201)
