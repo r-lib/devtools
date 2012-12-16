@@ -29,6 +29,9 @@ MINOR FEATURES
   prepended to the existing libpaths. It differs slightly from
   `with_libpaths()`, which replaces the existing libpaths.
 
+* New function `install_git()` installs a package directly from a git
+  repository. (Thanks to David Coallier)
+
 BUG FIXES
 
 * Fixed path issue when looking for Rtools on windows when registry entry is not present. (Fixes #201)
