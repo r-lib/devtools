@@ -2,6 +2,7 @@
 \alias{in_dir}
 \alias{with_collate}
 \alias{with_env}
+\alias{with_lib}
 \alias{with_libpaths}
 \alias{with_locale}
 \alias{with_options}
@@ -19,6 +20,8 @@
   in_dir(new, code)
 
   with_libpaths(new, code)
+
+  with_lib(new, code)
 
   with_options(new, code)
 
@@ -40,11 +43,12 @@
   \itemize{ \item \code{in_dir}: working directory \item
   \code{with_collate}: collation order \item
   \code{with_env}: environmental variables \item
-  \code{with_libpaths}: library paths \item
-  \code{with_locale}: any locale setting \item
-  \code{with_options}: options \item \code{with_path}: PATH
-  environment variable \item \code{with_par}: graphics
-  parameters }
+  \code{with_libpaths}: library paths, replacing current
+  libpaths \item \code{with_lib}: library paths, prepending
+  to current libpaths \item \code{with_locale}: any locale
+  setting \item \code{with_options}: options \item
+  \code{with_path}: PATH environment variable \item
+  \code{with_par}: graphics parameters }
 }
 \examples{
 getwd()
