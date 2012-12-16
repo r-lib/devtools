@@ -5,7 +5,7 @@
 #' @param path path in which to produce package.  If \code{NULL}, defaults to
 #'   the parent directory of the package.
 #' @param binary Produce a binary (\code{--binary}) or source (
-#'   \code{--no-manual --no-vignettes}) version of the package.
+#'   \code{--no-manual --no-resave-data}) version of the package.
 #' @export
 #' @family build functions
 #' @return a string giving the location (including file name) of the built
