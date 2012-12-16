@@ -63,6 +63,12 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
   pkgname <- gsub("_.*?$", "", basename(built_path))
 
   opts <- "--timings"
+  if (!nzchar(Sys.which("pdflatex"))) {
+    message("pdflatex not found! Not building PDF vignettes.\n",
+      "If you are planning to release this package, please run a check with vignettes beforehand.\n")
+    opts <- c(opts, "--no-rebuild-vignettes")
+  }
+
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
 
   env_vars <- NULL
