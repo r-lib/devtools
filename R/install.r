@@ -11,7 +11,7 @@
 #' @param reload if \code{TRUE} (the default), will automatically reload the
 #'   package after installing.
 #' @param quick if \code{TRUE} skips docs, multiple-architectures,
-#'   and demos to make installation as fast as possible.
+#'   demos, and vignettes, to make installation as fast as possible.
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to \code{R CMD install}.
 #' @export
@@ -24,7 +24,8 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, args = NULL) {
   message("Installing ", pkg$package)
   install_deps(pkg)
 
-  built_path <- build(pkg, tempdir())
+  # Build the package. If quick==TRUE, don't build vignettes
+  built_path <- build(pkg, tempdir(), vignettes = !quick)
   on.exit(unlink(built_path))
 
   opts <- c(
