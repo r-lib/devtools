@@ -13,7 +13,7 @@
   package.}
 
   \item{binary}{Produce a binary (\code{--binary}) or
-  source ( \code{--no-manual --no-vignettes}) version of
+  source ( \code{--no-manual --no-resave-data}) version of
   the package.}
 }
 \value{
