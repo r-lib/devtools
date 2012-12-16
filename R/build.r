@@ -5,7 +5,7 @@
 #' @param path path in which to produce package.  If \code{NULL}, defaults to
 #'   the parent directory of the package.
 #' @param binary Produce a binary (\code{--binary}) or source (
-#'   \code{--no-manual --no-vignettes}) version of the package.
+#'   \code{--no-manual --no-resave-data}) version of the package.
 #' @export
 #' @family build functions
 #' @return a string giving the location (including file name) of the built
@@ -22,8 +22,15 @@ build <- function(pkg = ".", path = NULL, binary = FALSE) {
     cmd <- paste("CMD INSTALL ", shQuote(pkg$path), " --build", sep = "")
     ext <- if (.Platform$OS.type == "windows") "zip" else "tgz"
   } else {
-    cmd <- paste("CMD build ", shQuote(pkg$path),
-      " --no-manual --no-resave-data", sep = "")
+    args <- " --no-manual --no-resave-data"
+
+    if (!nzchar(Sys.which("pdflatex"))) {
+      message("pdflatex not found. Not building PDF vignettes.")
+      args <- paste(args, "--no-vignettes")
+    }
+
+    cmd <- paste("CMD build ", shQuote(pkg$path), args, sep = "")
+
     ext <- "tar.gz"
   }
   R(cmd, path)
