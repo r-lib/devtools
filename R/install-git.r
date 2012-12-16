@@ -14,12 +14,11 @@
 #'                contain the package we are interested in installing.
 #' @param git_binary A custom git-binary to use instead of default system's git
 #'                   version.
-#' @param config     Additional configuration argument.
 #' @param ...        Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
 install_git <- function(git_url, name = NULL, subdir = NULL,
-  git_binary = NULL, config = list(), ...) {
+  git_binary = NULL, ...) {
 
   if (is.null(name)) {
     name <- rep(list(NULL), length(git_url))
@@ -27,7 +26,7 @@ install_git <- function(git_url, name = NULL, subdir = NULL,
 
   invisible(mapply(install_git_single, git_url, name,
     MoreArgs = list(
-      subdir = subdir, git_binary = git_binary, config = config, ...
+      subdir = subdir, git_binary = git_binary, ...
     )
   ))
 }
@@ -47,7 +46,7 @@ install_git <- function(git_url, name = NULL, subdir = NULL,
 #' @param git_binary A custom git-binary to use instead of default system's git
 #'                   version.
 install_git_single <- function(git_url, name = NULL, subdir = NULL,
-  git_binary = NULL, config = list(), ...) {
+  git_binary = NULL, ...) {
 
   if (is.null(name)) {
     name <- gsub("\\.git$", "", basename(git_url))
