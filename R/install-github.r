@@ -56,11 +56,17 @@ install_github <- function(repo, username = getOption("github.user"),
     paste(username, collapse = ", "))
   name <- paste(username, "-", repo, sep = "")
 
-  url <- paste("https://api.github.com/repos/", username, "/", repo,
-    "/zipball/", ref, sep = "")
+  url <- paste("https://github.com/", username, "/", repo,
+    "/archive/", ref, ".zip", sep = "")
 
-  install_url(url, paste(repo, ".zip", sep = ""), subdir = subdir,
-    config = auth, ...)
+  # If there are slashes in the ref, the URL will have extra slashes, but the
+  # downloaded file shouldn't have them.
+  # install_github("shiny", "rstudio", "v/0/2/1")
+  #  URL: https://github.com/rstudio/shiny/archive/v/0/2/1.zip
+  #  Output file: v-0-2-1.zip
+  zipfile <- paste(gsub("/", "-", ref), ".zip", sep = "")
+
+  install_url(url, zipfile, subdir = subdir, config = auth, ...)
 }
 
 # Retrieve the username and ref for a pull request
