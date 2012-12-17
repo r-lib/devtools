@@ -63,10 +63,9 @@ install_github <- function(repo, username = getOption("github.user"),
   # downloaded file shouldn't have them.
   # install_github("shiny", "rstudio", "v/0/2/1")
   #  URL: https://github.com/rstudio/shiny/archive/v/0/2/1.zip
-  #  Output file: v-0-2-1.zip
-  zipfile <- paste(gsub("/", "-", ref), ".zip", sep = "")
-
-  install_url(url, zipfile, subdir = subdir, config = auth, ...)
+  #  Output file: shiny.zip
+  install_url(url, name = paste(repo, ".zip", sep=""), subdir = subdir,
+    config = auth, ...)
 }
 
 # Retrieve the username and ref for a pull request
