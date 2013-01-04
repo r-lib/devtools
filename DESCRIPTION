@@ -85,3 +85,4 @@ Collate:
     'cran.r'
     'load-depends.r'
     'shims.r'
+    'remove-s4-class.r'
