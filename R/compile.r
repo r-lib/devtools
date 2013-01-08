@@ -41,7 +41,7 @@ compile_dll <- function(pkg = ".") {
     "--no-multiarch",
     "--no-test-load",
     if (needs_clean(pkg)) "--preclean"
-  ), stdout = NULL, stderr = NULL))
+  )))
 
   dll_name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
   from <- file.path(tempdir(), pkg$package, "libs", .Platform$r_arch, dll_name)
