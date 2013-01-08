@@ -33,6 +33,11 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
   in_dir(path, system_check(r_path, options, env, ...))
 }
 
+RCMD <- function(cmd, options, path = tempdir(), env_vars = NULL, ...) {
+  options <- paste(options, collapse = " ")
+  R(paste("CMD", cmd, options), path = path, env_vars = env_vars, ...)
+}
+
 wrap_command <- function(x) {
   lines <- strwrap(x, getOption("width") - 2, exdent = 2)
   continue <- c(rep(" \\", length(lines) - 1), "")
