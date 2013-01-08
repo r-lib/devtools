@@ -1,25 +1,29 @@
 devtools 0.8.0.99
 -----------------
 
-NEW FEATURES
+IMPROVEMENTS TO PACKAGE LOADING
 
 * Rcpp attributes are now automatically compiled during build.
 
 * Packages listed in depends are `require()`d (Fixes #161, #178, #192)
 
-* `load_all()` now inserts a special version of `system.file` into the package's
+* `load_all` inserts a special version of `system.file` into the package's
   imports environment. This tries to simulate the behavior of
   `base::system.file` but gives modified results because the directory structure
   of installed packages and uninstalled source packages is different. (Fixes
-  #179)
+  #179). In other words, `system.file` should now just work even if the package
+  is loaded with devtools.
 
-* `load_all()` only recompiles source files if they've changed since the last 
-  run, and will perform a clean recompile if any exported header files have
+* Source files are only recompiled if they've changed since the last run, and 
+  the recompile will be clean (`--preclean`) if any exported header files have
   changed. (Closes #224)
 
-* `load_all()` now compiles source files by performing a mock install instead 
-  of using `R CMD SHLIB`.  This means that `load_all` should be a better
-  simulation of install + reload when working with source packages.
+* The compilation process now performs a mock install instead of using 
+  `R CMD SHLIB`. This means that `Makevars` and makefiles will now be respected
+  and generally there should be fewer mismatches between `load_all` and 
+  the regular install and reload process.
+
+* S4 classes are correctly loaded and unloaded.
 
 MINOR FEATURES
 
