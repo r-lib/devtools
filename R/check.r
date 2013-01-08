@@ -100,6 +100,9 @@ cran_env <- function() {
     "_R_CHECK_SUGGESTS_ONLY_"          = "TRUE",
     "_R_CHECK_NO_RECOMMENDED_"         = "TRUE",
     "_R_CHECK_EXECUTABLES_EXCLUSIONS_" = "FALSE",
-    "_R_CHECK_DOC_SIZES2_"             = "TRUE"
+    "_R_CHECK_DOC_SIZES2_"             = "TRUE",
+    "_R_CHECK_CODE_ASSIGN_TO_GLOBALENV_" = "TRUE",
+    "_R_CHECK_CODE_ATTACH_"            = "TRUE",
+    "_R_CHECK_DOT_FIRSTLIB_"           = "TRUE"
   )
 }
