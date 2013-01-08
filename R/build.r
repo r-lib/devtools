@@ -6,11 +6,13 @@
 #'   the parent directory of the package.
 #' @param binary Produce a binary (\code{--binary}) or source (
 #'   \code{--no-manual --no-resave-data}) version of the package.
+#' @param vignettes For source packages: if \code{FALSE}, don't build PDF
+#'   vignettes (\code{--no-vignettes}).
 #' @export
 #' @family build functions
 #' @return a string giving the location (including file name) of the built
 #'  package
-build <- function(pkg = ".", path = NULL, binary = FALSE) {
+build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE) {
   pkg <- as.package(pkg)
   if (is.null(path)) {
     path <- dirname(pkg$path)
@@ -24,7 +26,10 @@ build <- function(pkg = ".", path = NULL, binary = FALSE) {
   } else {
     args <- " --no-manual --no-resave-data"
 
-    if (!nzchar(Sys.which("pdflatex"))) {
+    if (!vignettes) {
+      args <- paste(args, "--no-vignettes")
+
+    } else if (!nzchar(Sys.which("pdflatex"))) {
       message("pdflatex not found. Not building PDF vignettes.")
       args <- paste(args, "--no-vignettes")
     }
