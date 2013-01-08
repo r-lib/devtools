@@ -38,6 +38,11 @@ MINOR FEATURES
 * `install_github()` now downloads from a new URL, to reflect changes on how
   files are hosted on GitHub.
 
+* `build()` now has a `vignettes` option to turn off rebuilding vignettes.
+
+* `install(quick=TRUE)` now builds the package without rebuilding vignettes.
+  (Fixes #167)
+
 BUG FIXES
 
 * Fixed path issue when looking for Rtools on windows when registry entry is not present. (Fixes #201)
