@@ -13,8 +13,8 @@
   automatically reload the package after installing.}
 
   \item{quick}{if \code{TRUE} skips docs,
-  multiple-architectures, and demos to make installation as
-  fast as possible.}
+  multiple-architectures, demos, and vignettes, to make
+  installation as fast as possible.}
 
   \item{args}{An optional character vector of additional
   command line arguments to be passed to \code{R CMD
