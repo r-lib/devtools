@@ -5,11 +5,11 @@
   find_rtools()
 }
 \value{
-  Invisible \code{TRUE} if rtools is found, \code{FALSE}
-  otherwise. If rtools is found, as a side-effect it
-  updates the internal package variable \code{rtools_path}.
-  If not found, an informative message will also be
-  displayed.
+  Either a visible \code{TRUE} if rtools is found, or an
+  invisible \code{FALSE} with a diagnostic
+  \code{\link{message}}.  As a side-effect the internal
+  package variable \code{rtools_path} is updated to the
+  paths to rtools binaries.
 }
 \description{
   To build binary packages on windows, Rtools (found at
