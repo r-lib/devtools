@@ -46,7 +46,8 @@ shim_system.file <- function(pkg_name) {
       # Drop cases where not present in either location
       files <- files[present_inst | present_top]
       if (length(files) > 0) {
-        files
+        # Make sure backslahses are replaced with slashes on Windows
+        normalizePath(files, winslash = "/")
       } else {
         ""
       }
