@@ -34,8 +34,8 @@ find_rtools <- function() {
     return(invisible(TRUE))
   }
 
-  # Not installed
-  if (is.null(from_path) && is.null(from_registry)) {
+  if (is.null(from_path)) {
+    # Not installed
     message("Rtools not installed :(. Please install from ", rtools_url,
       " then run find_rtools()")
   } else {
