@@ -25,9 +25,10 @@
 #'   \code{FALSE}.
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to \code{R CMD check}.
+#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @export
 check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
-  check_version = FALSE, force_suggests = TRUE, args = NULL) {
+  check_version = FALSE, force_suggests = TRUE, args = NULL, quiet = FALSE) {
 
   pkg <- as.package(pkg)
 
@@ -35,11 +36,11 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
     document(pkg, clean = TRUE)
   }
 
-  built_path <- build(pkg, tempdir())
+  built_path <- build(pkg, tempdir(), quiet = quiet)
   on.exit(unlink(built_path))
 
   r_cmd_check_path <- check_r_cmd(built_path, cran, check_version,
-    force_suggests, args)
+    force_suggests, args, quiet = quiet)
 
   check_devtools(pkg, built_path)
 
@@ -47,7 +48,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
   if (cleanup) {
     unlink(r_cmd_check_path, recursive = TRUE)
   } else {
-    message("R CMD check results in ", r_cmd_check_path)
+    if (!quiet) message("R CMD check results in ", r_cmd_check_path)
   }
 
   invisible(TRUE)

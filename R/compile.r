@@ -21,7 +21,7 @@
 #'   \code{\link{as.package}} for more information
 #' @seealso \code{\link{clean_dll}} to delete the compiled files.
 #' @export
-compile_dll <- function(pkg = ".") {
+compile_dll <- function(pkg = ".", quiet = FALSE) {
   pkg <- as.package(pkg)
 
   if (!needs_compile(pkg)) return(invisible())
@@ -41,7 +41,7 @@ compile_dll <- function(pkg = ".") {
     "--no-multiarch",
     "--no-test-load",
     if (needs_clean(pkg)) "--preclean"
-  )))
+  ), quiet = quiet))
 
   dll_name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
   from <- file.path(tempdir(), pkg$package, "libs", .Platform$r_arch, dll_name)

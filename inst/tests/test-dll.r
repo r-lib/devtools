@@ -8,7 +8,7 @@ test_that("unload() unloads DLLs from packages loaded with library()", {
   if (!dir.exists(tmp_libpath)) dir.create(tmp_libpath)
   .libPaths(c(tmp_libpath, .libPaths()))
 
-  install("dll-load")
+  install("dll-load", quiet = TRUE)
   expect_true(require(dllload))
 
   # Check that it's loaded properly, by running a function from the package.
@@ -37,7 +37,7 @@ test_that("load_all() compiles and loads DLLs", {
 
   clean_dll("dll-load")
 
-  load_all("dll-load", reset = TRUE)
+  load_all("dll-load", reset = TRUE, quiet = TRUE)
 
   # Check that it's loaded properly, by running a function from the package.
   # nulltest() calls a C function which returns null.
@@ -56,16 +56,16 @@ test_that("load_all() compiles and loads DLLs", {
 
   # Loading again, and reloading
   # Should not re-compile (don't have a proper test for this)
-  load_all("dll-load")
+  load_all("dll-load", quiet = TRUE)
   expect_true(is.null(nulltest()))
 
   # load_all when already loaded
   # Should not re-compile (don't have a proper test for this)
-  load_all("dll-load")
+  load_all("dll-load", quiet = TRUE)
   expect_true(is.null(nulltest()))
 
   # Should re-compile (don't have a proper test for this)
-  load_all("dll-load", recompile = TRUE)
+  load_all("dll-load", recompile = TRUE, quiet = TRUE)
   expect_true(is.null(nulltest()))
   unload("dll-load")
 
@@ -75,7 +75,7 @@ test_that("load_all() compiles and loads DLLs", {
 
 
 test_that("Specific functions from DLLs listed in NAMESPACE can be called", {
-  load_all("dll-load")
+  load_all("dll-load", quiet = TRUE)
 
   # nulltest() uses the calling convention:
   # .Call("null_test", PACKAGE = "dllload")
@@ -101,13 +101,13 @@ test_that("load_all() can compile and load DLLs linked to Rcpp", {
 
   clean_dll("dll-rcpp")
 
-  load_all("dll-rcpp", reset = TRUE)
+  load_all("dll-rcpp", reset = TRUE, quiet = TRUE)
 
   # Check that it's loaded properly by calling the hello world function
   # which returns a list
   expect_true(is.list(rcpp_hello_world()))
-  
-  # Check whether attribute compilation occurred and that exported 
+
+  # Check whether attribute compilation occurred and that exported
   # names are available from load_all
   expect_true(rcpp_test_attributes())
 

@@ -8,16 +8,18 @@
 #'   \code{--no-manual --no-resave-data}) version of the package.
 #' @param vignettes For source packages: if \code{FALSE}, don't build PDF
 #'   vignettes (\code{--no-vignettes}).
+#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @export
 #' @family build functions
 #' @return a string giving the location (including file name) of the built
 #'  package
-build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE) {
+build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
+                  quiet = FALSE) {
   pkg <- as.package(pkg)
   if (is.null(path)) {
     path <- dirname(pkg$path)
   }
-  
+
   compile_rcpp_attributes(pkg)
 
   if (binary) {
@@ -38,7 +40,7 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE) {
 
     ext <- "tar.gz"
   }
-  R(cmd, path)
+  R(cmd, path, quiet = quiet)
 
   targz <- paste(pkg$package, "_", pkg$version, ".", ext, sep = "")
 
@@ -59,15 +61,16 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE) {
 #'   which version of R is used to build the package. Possible options are
 #'   listed on \url{http://win-builder.r-project.org/}. Defaults to the
 #'   released version of R.
+#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @importFrom RCurl ftpUpload
 #' @export
 #' @family build functions
-build_win <- function(pkg = ".", version = "R-release") {
+build_win <- function(pkg = ".", version = "R-release", quiet = FALSE) {
   pkg <- as.package(pkg)
-  message("Building windows version of ", pkg$package,
+  if (!quiet) message("Building windows version of ", pkg$package,
     " with win-builder.r-project.org.\nCheck your email for link to package.")
 
-  built_path <- build(pkg, tempdir())
+  built_path <- build(pkg, tempdir(), quiet = quiet)
   on.exit(unlink(built_path))
 
   ftpUpload(built_path, paste("ftp://win-builder.r-project.org/", version,

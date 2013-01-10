@@ -71,11 +71,11 @@
 #' }
 #' @export
 load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
-  export_all = TRUE) {
+  export_all = TRUE, quiet = FALSE) {
 
   pkg <- as.package(pkg)
 
-  message("Loading ", pkg$package)
+  if (!quiet) message("Loading ", pkg$package)
 
   # Reloading devtools is a special case. Normally, objects in the
   # namespace become inaccessible if the namespace is unloaded before the
@@ -110,7 +110,7 @@ load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
   if (recompile) clean_dll(pkg)
 
   # Compile dll if it exists
-  compile_dll(pkg)
+  compile_dll(pkg, quiet = quiet)
 
 
   # Set up the namespace environment ----------------------------------

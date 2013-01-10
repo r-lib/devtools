@@ -1,12 +1,17 @@
 # @param arg a vector of command arguments.
 # @param env a named character vector.  Will be quoted
-system_check <- function(cmd, args = character(), env = character(), ...) {
+system_check <- function(cmd, args = character(), env = character(),
+                         quiet = FALSE, ...) {
   full <- paste(cmd, " ", paste(args, collapse = ", "), sep = "")
-  message(wrap_command(full))
 
-  message()
+  if (!quiet) {
+    message(wrap_command(full))
+    message()
+  }
+
+  out <- if (quiet) NULL else ""
   with_env(env, {
-    res <- system2(cmd, args = args, ...)
+    res <- system2(cmd, args = args, stderr = out, stdout = out, ...)
   })
   if (res != 0) {
     stop("Command failed (", res, ")", call. = FALSE)

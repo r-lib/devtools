@@ -20,11 +20,11 @@
 #' reload(inst("ggplot2"))
 #' }
 #' @export
-reload <- function(pkg = ".") {
+reload <- function(pkg = ".", quiet = FALSE) {
   pkg <- as.package(pkg)
 
   if (is_attached(pkg)) {
-    message("Reloading installed ", pkg$package)
+    if (!quiet) message("Reloading installed ", pkg$package)
     unload(pkg)
     require(pkg$package, character.only = TRUE, quietly = TRUE)
   }

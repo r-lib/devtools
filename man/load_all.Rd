@@ -3,7 +3,7 @@
 \title{Load complete package.}
 \usage{
   load_all(pkg = ".", reset = FALSE, recompile = FALSE,
-    export_all = TRUE)
+    export_all = TRUE, quiet = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

@@ -59,7 +59,6 @@ test_that("Replacement system.file returns correct values when used with load_al
   unload("shim")
 })
 
-
 test_that("Replacement system.file returns correct values when installed", {
   # This set of tests is mostly a sanity check - it doesn't use the special
   # version of system.file, but it's useful to make sure we know what to look
@@ -71,7 +70,7 @@ test_that("Replacement system.file returns correct values when installed", {
   if (!dir.exists(tmp_libpath)) dir.create(tmp_libpath)
   .libPaths(c(tmp_libpath, .libPaths()))
 
-  install("shim")
+  install("shim", quiet = TRUE)
   expect_true(require(shim))
 
   # The special version of system.file shouldn't exist - this get() will fall

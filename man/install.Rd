@@ -3,7 +3,7 @@
 \title{Install a local development package.}
 \usage{
   install(pkg = ".", reload = TRUE, quick = FALSE,
-    args = NULL)
+    args = NULL, quiet = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -19,6 +19,9 @@
   \item{args}{An optional character vector of additional
   command line arguments to be passed to \code{R CMD
   install}.}
+
+  \item{quiet}{if \code{TRUE} suppresses output from this
+  function.}
 }
 \description{
   Uses \code{R CMD INSTALL} to install the package. Will

@@ -2,7 +2,8 @@
 \alias{build_win}
 \title{Build windows binary package.}
 \usage{
-  build_win(pkg = ".", version = "R-release")
+  build_win(pkg = ".", version = "R-release",
+    quiet = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -13,6 +14,9 @@
   package. Possible options are listed on
   \url{http://win-builder.r-project.org/}. Defaults to the
   released version of R.}
+
+  \item{quiet}{if \code{TRUE} suppresses output from this
+  function.}
 }
 \description{
   Works by building source package, and then uploading to

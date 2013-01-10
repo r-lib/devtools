@@ -4,7 +4,7 @@
 \usage{
   check(pkg = ".", document = TRUE, cleanup = TRUE,
     cran = TRUE, check_version = FALSE,
-    force_suggests = TRUE, args = NULL)
+    force_suggests = TRUE, args = NULL, quiet = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -34,6 +34,9 @@
   \item{args}{An optional character vector of additional
   command line arguments to be passed to \code{R CMD
   check}.}
+
+  \item{quiet}{if \code{TRUE} suppresses output from this
+  function.}
 }
 \description{
   \code{check} automatically builds a package before using

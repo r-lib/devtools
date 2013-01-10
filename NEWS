@@ -65,6 +65,9 @@ MINOR FEATURES
   `NOT_CRAN` set, so that you can perform tasks when you know your code
   is definitely not running on CRAN. (Closes #227)
 
+* Most devtools functions can a quiet argument that suppresses output. This is
+  particularly useful for testing.
+
 BUG FIXES
 
 * Fixed path issue when looking for Rtools on windows when registry entry is not present. (Fixes #201)

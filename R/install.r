@@ -14,18 +14,21 @@
 #'   demos, and vignettes, to make installation as fast as possible.
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to \code{R CMD install}.
+#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
 #'   set.
 #' @importFrom utils install.packages
-install <- function(pkg = ".", reload = TRUE, quick = FALSE, args = NULL) {
+install <- function(pkg = ".", reload = TRUE, quick = FALSE, args = NULL,
+                    quiet = FALSE) {
   pkg <- as.package(pkg)
-  message("Installing ", pkg$package)
+
+  if (!quiet) message("Installing ", pkg$package)
   install_deps(pkg)
 
   # Build the package. If quick==TRUE, don't build vignettes
-  built_path <- build(pkg, tempdir(), vignettes = !quick)
+  built_path <- build(pkg, tempdir(), vignettes = !quick, quiet = quiet)
   on.exit(unlink(built_path))
 
   opts <- c(
@@ -36,9 +39,10 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, args = NULL) {
   }
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
 
-  R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""))
+  R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""),
+    quiet = quiet)
 
-  if (reload) reload(pkg)
+  if (reload) reload(pkg, quiet = quiet)
   invisible(TRUE)
 }
 
