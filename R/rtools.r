@@ -1,4 +1,14 @@
-rtools_paths <- NULL
+set_rtools_path <- NULL
+get_rtools_path <- NULL
+local({
+  rtools_paths <- NULL
+  set_rtools_path <<- function(path) {
+    rtools_paths <<- path
+  }
+  get_rtools_path <<- function() {
+    rtools_paths
+  }
+})
 
 #' Find rtools.
 #'
@@ -23,7 +33,7 @@ find_rtools <- function() {
   # First try the path
   from_path <- scan_path_for_rtools()
   if (is_compatible(from_path)) {
-    rtools_paths <<- from_path$path
+    set_rtools_paths(from_path$path)
     return(TRUE)
   }
 
@@ -75,7 +85,7 @@ find_rtools <- function() {
   }
 
   # Otherwise it must be ok :)
-  rtools_paths <<- from_registry$path
+  set_rtools_paths(from_registry$path)
   TRUE
 }
 

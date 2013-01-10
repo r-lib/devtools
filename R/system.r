@@ -38,8 +38,8 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
     # the R subprocesses. Unsetting it here avoids those problems.
 
   # If rtools has been detected, add it to the path only when running R...
-  if (!is.null(rtools_paths)) {
-    old <- add_path(rtools_paths, 0)
+  if (!is.null(get_rtools_path())) {
+    old <- add_path(get_rtools_path(), 0)
     on.exit(set_path(old))
   }
 
