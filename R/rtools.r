@@ -40,8 +40,8 @@ find_rtools <- function() {
       " then run find_rtools()")
   } else {
     # Installed, but not compatible
-    message("WARNING: Rtools version ", version, " found at ",
-      from_registry$path, "is not compatible with the version of R",
+    message("WARNING: Rtools version ", from_path$version, " found at ",
+      from_path$path, " is not compatible with the version of R",
       " you are currently running.\n\n",
       "Please download and install the appropriate version of ",
       "Rtools from ", rtools_url, " and then run find_rtools()")
@@ -74,7 +74,6 @@ scan_path_for_rtools <- function() {
   # Check that gcc and ls install paths match
   install_path2 <- dirname(dirname(dirname(gcc_path)))
   if (install_path2 != install_path) return(NULL)
-
 
   # Rtools is in the path -- now crack the VERSION file
   contents <- NULL

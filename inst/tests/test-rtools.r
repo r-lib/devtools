@@ -16,6 +16,13 @@ test_that("rtools found on path if present", {
   })
 })
 
+test_that("out of date rtools is not compatible", {
+  with_rtools_path("rtools-2.15", {
+    rt <- scan_path_for_rtools()
+    expect_false(is_compatible(rt))
+  })
+})
+
 test_that("rtools must be complete to be located", {
   with_rtools_path("rtools-no-gcc", {
     rt <- scan_path_for_rtools()
