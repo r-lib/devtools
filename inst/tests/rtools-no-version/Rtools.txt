@@ -1,0 +1,107 @@
+                      Rtools Collection 2.15.0.1919
+
+This is the Rtools.txt file, which will be installed in the main
+Rtools directory. See also the README.txt file there, which describes
+the origin of some of the tools. The tools installed in the
+Rtools\MinGW directory are from the MinGW distribution.  
+
+                                CYGWIN
+			  
+Some of the R tools use the Cygwin DLLs, which are included.  If you
+already have Cygwin installed, you should not install these (but see
+"EXISTING CYGWIN INSTALLATIONS" below).
+
+                           REMAINING TASKS
+
+This installer doesn't install all of the tools necessary to build R
+or R packages, because of license or size limitations.  The remaining
+tools are all available online (at no charge) as described below.
+
+TO BUILD R PACKAGES, you may optionally want items 1 and 2 below
+(LaTeX and the HTML Help Workshop).
+
+TO BUILD R, you need these plus item 3 below (Inno Setup).
+
+Finally, the Rtools installer will optionally edit your PATH variable as follows:
+
+PATH=c:\Rtools\bin;c:\Rtools\MinGW\bin;c:\R\bin;<others>
+
+(where you will substitute appropriate directories for the ones listed
+above, but please keep the path in the same order as shown. LaTeX and
+the HTML Help Workshop should be installed among the "others".)
+
+                           REMAINING ITEMS
+
+1. You may install LaTeX, available from
+
+  http://www.miktex.org
+  
+LaTeX is used to build .pdf forms of documentation.
+  
+2. You need the Inno Setup installer, available from
+
+  http://www.innosetup.com
+  
+to build the R installer.
+
+                               VERSIONS
+			
+This installer includes the following versions of the MinGW packages, obtained from
+http://sourceforge.net/projects/mingw/files/:
+
+     binutils-2.20.51-1-mingw32-bin.tar.lzma
+     gcc-c++-4.5.0-1-mingw32-bin.tar.lzma
+     gcc-core-4.5.0-1-mingw32-bin.tar.lzma
+     gcc-fortran-4.5.0-1-mingw32-bin.tar.lzma
+     libgcc-4.5.0-1-mingw32-dll-1.tar.lzma
+     libgmp-5.0.1-1-mingw32-dll-10.tar.lzma
+     libgomp-4.5.0-1-mingw32-dll-1.tar.lzma
+     libmpc-0.8.1-1-mingw32-dll-2.tar.lzma
+     libmpfr-2.4.1-1-mingw32-dll-1.tar.lzma
+     libssp-4.5.0-1-mingw32-dll-0.tar.lzma
+     mingwrt-3.18-mingw32-dev.tar.gz
+     mingwrt-3.18-mingw32-dll.tar.gz
+     w32api-3.15-1-mingw32-dev.tar.lzma
+    
+It also includes the MinGW-64 version of gcc pre-4.6.3, compiled by
+Brian Ripley, obtained from his http://www.stats.ox.ac.uk/pub/Rtools/
+web page as multi.zip.
+
+The Cygwin tools and DLLs were updated on March 25, 2011.  They are taken from
+    
+    base-files 4.0-6
+    coreutils 8.10-1
+    cygwin 1.7.8-1
+    diffutils 2.9-1
+    findutils 4.5.9-1
+    gawk 3.1.8-1
+    grep 2.6.3-1
+    gzip 1.4-1
+    texinfo 4.13-3
+    
+The bitmap libraries are based on the following versions:
+
+    jpegsrc.v8c
+    libpng-1.5.8
+    tiff-3.9.1
+    
+Tcl/Tk is version 8.5.8.
+
+tar is a locally modified version of tar version 1.21.
+
+    
+    
+
+                    EXISTING CYGWIN INSTALLATIONS
+		
+If you already have a full Cygwin installation, then you should not
+install our Cygwin DLLs in the Rtools/bin directory.  You should make
+sure your existing cygwin/bin directory is on the path (*after* all
+the other entries listed above) and use the DLLs from there.
+
+However, this may not work if your Cygwin installation is too old.  In
+that case the Rtools utilities will fail to run.  To fix this, you
+should update the Cygwin installation, or (with great care!) replace
+the DLLs with the ones from the Rtools distribution.  Be very careful,
+because if you have incompatible DLLs, your Cygwin tools will stop
+working.
