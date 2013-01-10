@@ -67,6 +67,15 @@ scan_path_for_rtools <- function() {
   version_path <- file.path(install_path, "VERSION.txt")
   if (!file.exists(version_path)) return(NULL)
 
+  # Further verify that gcc is in Rtools
+  gcc_path <- Sys.which("gcc")
+  if (gcc_path == "") return(NULL)
+
+  # Check that gcc and ls install paths match
+  install_path2 <- dirname(dirname(dirname(gcc_path)))
+  if (install_path2 != install_path) return(NULL)
+
+
   # Rtools is in the path -- now crack the VERSION file
   contents <- NULL
   try(contents <- readLines(version_path), silent = TRUE)
