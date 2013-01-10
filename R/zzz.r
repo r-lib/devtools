@@ -1,17 +1,8 @@
-rtools_paths <- NULL
 .onAttach <- function(...) {
-  # Assume that non-windows users have paths set correctly
-  if (.Platform$OS.type != "windows") return()
-
-  rtools_paths <<- scan_path_for_rtools()
-  if (!is.null(rtools_paths)) return()
-
-  rtools_paths <<- scan_registry_for_rtools()
-  if (!is.null(rtools_paths)) return()
+  if (find_rtools()) return()
 
   packageStartupMessage("Rtools not installed :(. Please install from ",
-      rtools_url, " then restart R.")
-
+      rtools_url, " then run find_rtools()")
 
   invisible()
 }

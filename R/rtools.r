@@ -1,7 +1,38 @@
+rtools_paths <- NULL
+
+#' Find rtools.
+#'
+#' To build binary packages on windows, Rtools (found at
+#' \url{http://cran.r-project.org/bin/windows/Rtools/}) needs to be on
+#' the path. The default installation process does not add it, so this
+#' script finds it (looking first on the path, then in the registry).
+#' It also checks that the version of rtools matches the version of R.
+#'
+#' @section Acknowledgements:
+#'   This code borrows heavily from RStudio's code for finding rtools.
+#'   Thanks JJ!
+#' @return \code{TRUE} if rtools is found, \code{FALSE} otherwise. If
+#'   rtools is found, as a side-effect it updates the internal package variable
+#'   \code{rtools_path}
+#' @export
+find_rtools <- function() {
+  # non-windows users don't need rtools
+  if (.Platform$OS.type != "windows") return(TRUE)
+
+  # First look for rtools in the path
+  rtools_paths <<- scan_path_for_rtools()
+  if (!is.null(rtools_paths)) return(TRUE)
+
+  # Next try the registry
+  rtools_paths <<- scan_registry_for_rtools()
+  if (!is.null(rtools_paths)) return(TRUE)
+
+  FALSE
+}
 
 scan_path_for_rtools <- function() {
   # First confirm ls.exe is in Rtools
-  ls_path <- Sys.which("ls.exe")
+  ls_path <- Sys.which("ls")
   if (ls_path == "") return(NULL)
 
   # We have a candidate installPath
@@ -13,9 +44,10 @@ scan_path_for_rtools <- function() {
   if (!file.exists(version_path)) return(NULL)
 
   # Further verify that gcc is in Rtools
-  gcc_path <- Sys.which("gcc.exe")
+  gcc_path <- Sys.which("gcc")
   if (gcc_path == "") return(NULL)
 
+  # Check that gcc and ls install paths match
   install_path2 <- dirname(dirname(dirname(gcc_path)))
   if (install_path2 != install_path) return(NULL)
 
@@ -33,6 +65,10 @@ scan_path_for_rtools <- function() {
   m <- regexec(version_re, contents)
   version <- regmatches(contents, m)[[1]][2]
 
+  # Check that the version is of
+  if (!rtools_ok(version, install_path)) {
+    return(NULL)
+  }
   rtools_info(version, install_path)
 }
 
@@ -80,7 +116,7 @@ rtools_info <- function(version, install_path) {
       " found at ", install_path, "is not compatible with the version of R",
       " you are currently running.\n\n",
       "Please download and install the appropriate version of ",
-      "Rtools from ", rtools_url, sep = ""))
+      "Rtools from ", rtools_url, " and then run find_rtools()", sep = ""))
     return(NULL)
   }
 
