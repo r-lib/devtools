@@ -1,9 +1,5 @@
 .onAttach <- function(...) {
-  if (find_rtools()) return()
-
-  packageStartupMessage("Rtools not installed :(. Please install from ",
-      rtools_url, " then run find_rtools()")
-
+  find_rtools()
   invisible()
 }
 
