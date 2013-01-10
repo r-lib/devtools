@@ -55,6 +55,10 @@ MINOR FEATURES
 * `install(quick=TRUE)` now builds the package without rebuilding vignettes.
   (Fixes #167)
 
+* All R commands called from `devtools` now have the environment variable 
+  `NOT_CRAN` set, so that you can perform tasks when you know your code
+  is definitely not running on CRAN. (Closes #227)
+
 BUG FIXES
 
 * Fixed path issue when looking for Rtools on windows when registry entry is not present. (Fixes #201)

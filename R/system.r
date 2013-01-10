@@ -15,6 +15,7 @@ system_check <- function(cmd, args = character(), env = character(), ...) {
   invisible(TRUE)
 }
 
+# R("-e 'str(as.list(Sys.getenv()))' --slave")
 R <- function(options, path = tempdir(), env_vars = NULL, ...) {
   options <- paste("--vanilla", options)
   r_path <- file.path(R.home("bin"), "R")
@@ -24,6 +25,7 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
     "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
     "CYGWIN" = "nodosfilewarning",
     "R_TESTS" = "",
+    "NOT_CRAN" = "true",
     env_vars)
     # When R CMD check runs tests, it sets R_TESTS. When the tests
     # themeselves run R CMD xxxx, as is the case with the tests in
