@@ -11,69 +11,120 @@ rtools_paths <- NULL
 #' @section Acknowledgements:
 #'   This code borrows heavily from RStudio's code for finding rtools.
 #'   Thanks JJ!
-#' @return Invisible \code{TRUE} if rtools is found, \code{FALSE} otherwise. If
-#'   rtools is found, as a side-effect it updates the internal package variable
-#'   \code{rtools_path}.  If not found, an informative message will also be
-#'   displayed.
+#' @return Either a visible \code{TRUE} if rtools is found, or an invisible
+#'   \code{FALSE} with a diagnostic \code{\link{message}}.
+#'   As a side-effect the internal package variable \code{rtools_path} is
+#'   updated to the paths to rtools binaries.
 #' @export
 find_rtools <- function() {
   # Non-windows users don't need rtools
-  if (.Platform$OS.type != "windows") return(invisible(TRUE))
+  if (.Platform$OS.type != "windows") return(TRUE)
 
-  # First look in path
+  # First try the path
   from_path <- scan_path_for_rtools()
   if (is_compatible(from_path)) {
     rtools_paths <<- from_path$path
-    return(invisible(TRUE))
+    return(TRUE)
   }
 
-  # Then try registry
-  from_registry <- scan_registry_for_rtools()
-  if (!is.null(from_registry)) { # returns single compatible install
-    rtools_paths <<- from_registry$path
-    return(invisible(TRUE))
-  }
-
-  if (is.null(from_path)) {
-    # Not installed
-    message("Rtools not installed :(. Please install from ", rtools_url,
-      " then run find_rtools()")
-  } else {
+  if (!is.null(from_path)) {
     # Installed, but not compatible
-    message("WARNING: Rtools version ", from_path$version, " found at ",
-      from_path$path, " is not compatible with the version of R",
-      " you are currently running.\n\n",
-      "Please download and install the appropriate version of ",
-      "Rtools from ", rtools_url, " and then run find_rtools()")
+    message("WARNING: Rtools ", from_path$version, " found on the path",
+      " at ", from_path$path, " is not compatible with R ", getRversion(), ".\n\n",
+      "Please download and install ", rtools_needed(), " from ", rtools_url,
+      ", remove the incompatible version from your PATH, then run find_rtools().")
+    return(invisible(FALSE))
   }
-  invisible(FALSE)
-}
 
-rtools <- function(path, version) {
-  structure(list(version = version, path = path), class = "rtools")
+  # Not on path, so try registry
+  registry_candidates <- scan_registry_for_rtools()
+
+  if (length(registry_candidates) == 0) {
+    # Not on path or in registry, so not installled
+    message("WARNING: Rtools is required to build R packages, but is not ",
+      "currently installed.\n\n",
+      "Please download and install ", rtools_needed(), " from ", rtools_url,
+      " and then run find_rtools().")
+    return(invisible(FALSE))
+  }
+
+  from_registry <- Find(is_compatible, registry_candidates)
+  if (is.null(from_registry)) {
+    # In registry, but not compatible.
+    versions <- vapply(registry_candidates, function(x) x$version, character(1))
+    message("WARNING: Rtools is required to build R packages, but no version ",
+      "of Rtools compatible with R ", getRversion(), " was found. ",
+      "(Only the following incompatible version(s) of Rtools were found:",
+      paste(versions, collapse = ","), ")\n\n",
+      "Please download and install ", rtools_needed(), " from ", rtools_url,
+      " and then run find_rtools().")
+    return(invisible(FALSE))
+  }
+
+  installed_ver <- installed_version(from_registry$path)
+  if (installed_ver != from_registry$version) {
+    # Installed version doesn't match registry version
+    message("WARNING: Rtools is required to build R packages, but no version ",
+      "of Rtools compatible with R ", getRversion(), " was found. ",
+      "Rtools ", from_registry$version, " was previously installed in ",
+      from_registry$path, " but now that directory contains Rtools ",
+      installed_ver, ".\n\n",
+      "Please download and install ", rtools_needed(), " from ", rtools_url,
+      " and then run find_rtools().")
+    return(invisible(FALSE))
+  }
+
+  # Otherwise it must be ok :)
+  rtools_paths <<- from_registry$path
+  TRUE
 }
-is.rtools <- function(x) inherits(x, "rtools")
 
 scan_path_for_rtools <- function() {
-  # First look for ls.exe
+  # First look for ls and gcc
   ls_path <- Sys.which("ls")
   if (ls_path == "") return(NULL)
 
-  # We have a candidate installPath
-  install_path <- dirname(dirname(ls_path))
-  if (!file.exists(file.path(install_path, "Rtools.txt"))) return(NULL)
-
-  # Find the version path
-  version_path <- file.path(install_path, "VERSION.txt")
-  if (!file.exists(version_path)) return(NULL)
-
-  # Further verify that gcc is in Rtools
   gcc_path <- Sys.which("gcc")
   if (gcc_path == "") return(NULL)
 
-  # Check that gcc and ls install paths match
+  # We have a candidate installPath
+  install_path <- dirname(dirname(ls_path))
   install_path2 <- dirname(dirname(dirname(gcc_path)))
   if (install_path2 != install_path) return(NULL)
+
+  version <- installed_version(install_path)
+  if (is.null(version)) return(NULL)
+
+  rtools(install_path, version)
+}
+
+scan_registry_for_rtools <- function() {
+  keys <- NULL
+  try(keys <- utils::readRegistry("SOFTWARE\\R-core\\Rtools",
+    hive = "HLM", view = "32-bit", maxdepth = 2), silent = TRUE)
+  if (is.null(keys)) return(NULL)
+
+  rts <- vector("list", length(keys))
+
+  for(i in seq_along(keys)) {
+    version <- names(keys)[[i]]
+    key <- keys[[version]]
+    if (!is.list(key) || is.null(key$InstallPath)) next;
+    install_path <- normalizePath(key$InstallPath,
+      mustWork = FALSE, winslash = "/")
+
+    rts[[i]] <- rtools(install_path, version)
+  }
+
+  Filter(Negate(is.null), rts)
+}
+
+installed_version <- function(path) {
+  if (!file.exists(file.path(path, "Rtools.txt"))) return(NULL)
+
+  # Find the version path
+  version_path <- file.path(path, "VERSION.txt")
+  if (!file.exists(version_path)) return(NULL)
 
   # Rtools is in the path -- now crack the VERSION file
   contents <- NULL
@@ -87,28 +138,7 @@ scan_path_for_rtools <- function() {
   if (!grepl(version_re, contents)) return(NULL)
 
   m <- regexec(version_re, contents)
-  version <- regmatches(contents, m)[[1]][2]
-
-  rtools(install_path, version)
-}
-
-scan_registry_for_rtools <- function() {
-  keys <- NULL
-  try(keys <- utils::readRegistry("SOFTWARE\\R-core\\Rtools",
-    hive = "HLM", view = "32-bit", maxdepth = 2), silent = TRUE)
-  if (is.null(keys)) return(NULL)
-
-  for(version in names(keys)) {
-    key <- keys[[version]]
-    if (!is.list(key) || is.null(key$InstallPath)) next;
-    install_path <- normalizePath(key$InstallPath,
-      mustWork = FALSE, winslash = "/")
-
-    rt <- rtools(version, install_path)
-    if (is_compatible(rt)) rt
-  }
-
-  NULL
+  regmatches(contents, m)[[1]][2]
 }
 
 is_compatible <- function(rtools) {
@@ -121,6 +151,11 @@ is_compatible <- function(rtools) {
   r_version <- getRversion()
   r_version >= info$version_min && r_version <= info$version_max
 }
+
+rtools <- function(path, version) {
+  structure(list(version = version, path = path), class = "rtools")
+}
+is.rtools <- function(x) inherits(x, "rtools")
 
 # Rtools metadata --------------------------------------------------------------
 rtools_url <- "http://cran.r-project.org/bin/windows/Rtools/"
@@ -156,3 +191,15 @@ version_info <- list(
     path = c("bin", "gcc-4.6.3/bin")
   )
 )
+
+rtools_needed <- function() {
+  r_version <- getRversion()
+
+  for(i in rev(seq_along(version_info))) {
+    version <- names(version_info)[i]
+    info <- version_info[[i]]
+    ok <- r_version >= info$version_min && r_version <= info$version_max
+    if (ok) return(paste("Rtools", version))
+  }
+  "the appropriate version of Rtools"
+}
