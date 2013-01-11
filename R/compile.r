@@ -28,8 +28,8 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
   compile_rcpp_attributes(pkg)
 
   # Mock install the package to generate the DLL
-  message("Re-compiling ", pkg$package)
-  suppressMessages(RCMD("INSTALL", c(
+  if (!quiet) message("Re-compiling ", pkg$package)
+  RCMD("INSTALL", c(
     shQuote(pkg$path),
     paste("--library=", shQuote(tempdir()), sep = ""),
     "--no-R",
@@ -41,7 +41,7 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
     "--no-multiarch",
     "--no-test-load",
     if (needs_clean(pkg)) "--preclean"
-  ), quiet = quiet))
+  ), quiet = quiet)
 
   dll_name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
   from <- file.path(tempdir(), pkg$package, "libs", .Platform$r_arch, dll_name)
