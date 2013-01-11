@@ -25,11 +25,14 @@ IMPROVEMENTS TO PACKAGE LOADING
 
 * S4 classes are correctly loaded and unloaded.
 
-RTOOLS
+WINDOWS
 
 * Rtools detection on windows has been substantially overhauled and should both
   be more reliable, and when it fails give more information about what is wrong
   with your install.
+
+* If you don't have rtools installed, devtools now automatically sets the TAR
+  environment variable to internal so you can still build packages.
 
 MINOR FEATURES
 

@@ -31,6 +31,7 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
     "CYGWIN" = "nodosfilewarning",
     "R_TESTS" = "",
     "NOT_CRAN" = "true",
+    "TAR" = auto_tar(),
     env_vars)
     # When R CMD check runs tests, it sets R_TESTS. When the tests
     # themeselves run R CMD xxxx, as is the case with the tests in
@@ -44,6 +45,14 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
   }
 
   in_dir(path, system_check(r_path, options, env, ...))
+}
+
+# Determine the best setting for the TAR environmental variable
+auto_tar <- function() {
+  tar <- Sys.getenv("TAR", unset = NA)
+  if (!is.na(tar)) return(tar)
+
+  if (.Platform$OS.type == "windows") "internal" else ""
 }
 
 RCMD <- function(cmd, options, path = tempdir(), env_vars = NULL, ...) {
