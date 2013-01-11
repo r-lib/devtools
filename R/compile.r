@@ -29,7 +29,7 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
 
   # Mock install the package to generate the DLL
   message("Re-compiling ", pkg$package)
-  suppressMessages(RCMD("install", c(
+  suppressMessages(RCMD("INSTALL", c(
     shQuote(pkg$path),
     paste("--library=", shQuote(tempdir()), sep = ""),
     "--no-R",
