@@ -2,18 +2,24 @@
 # @param env a named character vector.  Will be quoted
 system_check <- function(cmd, args = character(), env = character(),
                          quiet = FALSE, ...) {
-  full <- paste(cmd, " ", paste(args, collapse = ", "), sep = "")
+  full <- paste(shQuote(cmd), " ", paste(args, collapse = ", "), sep = "")
 
   if (!quiet) {
     message(wrap_command(full))
     message()
   }
 
-  out <- if (quiet) NULL else ""
-  with_env(env, {
-    res <- system2(cmd, args = args, stderr = out, stdout = out, ...)
-  })
-  if (res != 0) {
+  result <- suppressWarnings(with_env(env,
+    system(full, intern = quiet, ignore.stderr = quiet, ...)
+  ))
+
+  if (quiet) {
+    status <- attr(result, "status") %||% 0
+  } else {
+    status <- result
+  }
+
+  if (!identical(as.character(status), "0")) {
     stop("Command failed (", res, ")", call. = FALSE)
   }
 
