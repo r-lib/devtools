@@ -46,12 +46,19 @@ find_rtools <- function(debug = FALSE) {
   }
 
   if (!is.null(from_path)) {
+    # Installed
+    if (is.null(from_path$version)) {
+      # but not from rtools
+      if (debug) "gcc and ls on path, assuming set up is correct\n"
+      return(TRUE)
+    } else {
     # Installed, but not compatible
-    message("WARNING: Rtools ", from_path$version, " found on the path",
-      " at ", from_path$path, " is not compatible with R ", getRversion(), ".\n\n",
-      "Please download and install ", rtools_needed(), " from ", rtools_url,
-      ", remove the incompatible version from your PATH, then run find_rtools().")
-    return(invisible(FALSE))
+      message("WARNING: Rtools ", from_path$version, " found on the path",
+        " at ", from_path$path, " is not compatible with R ", getRversion(), ".\n\n",
+        "Please download and install ", rtools_needed(), " from ", rtools_url,
+        ", remove the incompatible version from your PATH, then run find_rtools().")
+      return(invisible(FALSE))
+    }
   }
 
   # Not on path, so try registry
@@ -107,17 +114,15 @@ scan_path_for_rtools <- function(debug = FALSE) {
 
   gcc_path <- Sys.which("gcc")
   if (gcc_path == "") return(NULL)
-  if (debug) cat("gcc:", ls_path, "\n")
+  if (debug) cat("gcc:", gcc_path, "\n")
 
   # We have a candidate installPath
   install_path <- dirname(dirname(ls_path))
   install_path2 <- dirname(dirname(dirname(gcc_path)))
   if (install_path2 != install_path) return(NULL)
 
-  version <- installed_version(install_path)
+  version <- installed_version(install_path, debug = debug)
   if (debug) cat("Version:", version, "\n")
-
-  if (is.null(version)) return(NULL)
 
   rtools(install_path, version)
 }
@@ -146,11 +151,15 @@ scan_registry_for_rtools <- function(debug = FALSE) {
   Filter(Negate(is.null), rts)
 }
 
-installed_version <- function(path) {
+installed_version <- function(path, debug) {
   if (!file.exists(file.path(path, "Rtools.txt"))) return(NULL)
 
   # Find the version path
   version_path <- file.path(path, "VERSION.txt")
+  if (debug) {
+    cat("VERSION.txt\n")
+    cat(readLines(version_path), "\n")
+  }
   if (!file.exists(version_path)) return(NULL)
 
   # Rtools is in the path -- now crack the VERSION file
@@ -170,6 +179,7 @@ installed_version <- function(path) {
 
 is_compatible <- function(rtools) {
   if (is.null(rtools)) return(FALSE)
+  if (is.null(rtools$version)) return(FALSE)
 
   stopifnot(is.rtools(rtools))
   info <- version_info[[rtools$version]]

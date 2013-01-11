@@ -28,12 +28,14 @@ test_that("rtools must be complete to be located", {
     rt <- scan_path_for_rtools()
     expect_equal(rt, NULL)
   })
+})
 
-  with_rtools_path("rtools-no-version", {
+test_that("correct path doesn't need fixing", {
+  with_rtools_path("rtools-manual", {
     rt <- scan_path_for_rtools()
-    expect_equal(rt, NULL)
+    expect_equal(rt$version, NULL)
   })
 })
 
-
 }
+
