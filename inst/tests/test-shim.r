@@ -15,7 +15,7 @@ last_n <- function(x, n = 1) {
 
 # Tests -----------------------------------------
 
-test_that("Replacement system.file isn't visible in glabal env", {
+test_that("Replacement system.file isn't visible in global env", {
   load_all("shim")
   expect_identical(get("system.file", pos = globalenv()), base::system.file)
   unload("shim")
