@@ -7,6 +7,7 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @examples
 #' \dontrun{
 #' # Reload package that is in current directory

@@ -45,6 +45,8 @@ install_git <- function(git_url, name = NULL, subdir = NULL,
 #'                contain the package we are interested in installing.
 #' @param git_binary A custom git-binary to use instead of default system's git
 #'                   version.
+#' @param ... passed on to \code{\link{install}}
+#' @keywords internal
 install_git_single <- function(git_url, name = NULL, subdir = NULL,
   git_binary = NULL, ...) {
 

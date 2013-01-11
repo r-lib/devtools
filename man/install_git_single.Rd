@@ -18,6 +18,8 @@
 
   \item{git_binary}{A custom git-binary to use instead of
   default system's git version.}
+
+  \item{...}{passed on to \code{\link{install}}}
 }
 \description{
   This function allows you to install a single package from
@@ -27,4 +29,5 @@
   See \code{\link{install_git}} for more information about
   the paraemeters.
 }
+\keyword{internal}
 

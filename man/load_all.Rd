@@ -18,6 +18,9 @@
   \item{export_all}{If \code{TRUE} (the default), export
   all objects.  If \code{FALSE}, export only the objects
   that are listed as exports in the NAMESPACE file.}
+
+  \item{quiet}{if \code{TRUE} suppresses output from this
+  function.}
 }
 \description{
   \code{load_all} loads a package. It roughly simulates

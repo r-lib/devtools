@@ -19,6 +19,7 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @seealso \code{\link{clean_dll}} to delete the compiled files.
 #' @export
 compile_dll <- function(pkg = ".", quiet = FALSE) {
