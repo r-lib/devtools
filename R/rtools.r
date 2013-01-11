@@ -27,17 +27,19 @@ if (!exists("set_rtools_path")) {
 #' @section Acknowledgements:
 #'   This code borrows heavily from RStudio's code for finding rtools.
 #'   Thanks JJ!
+#' @param debug if \code{TRUE} prints a lot of additional information to
+#'   help in debugging.
 #' @return Either a visible \code{TRUE} if rtools is found, or an invisible
 #'   \code{FALSE} with a diagnostic \code{\link{message}}.
 #'   As a side-effect the internal package variable \code{rtools_path} is
 #'   updated to the paths to rtools binaries.
 #' @export
-find_rtools <- function() {
+find_rtools <- function(debug = FALSE) {
   # Non-windows users don't need rtools
   if (.Platform$OS.type != "windows") return(TRUE)
 
   # First try the path
-  from_path <- scan_path_for_rtools()
+  from_path <- scan_path_for_rtools(debug)
   if (is_compatible(from_path)) {
     set_rtools_path(from_path)
     return(TRUE)
@@ -53,7 +55,7 @@ find_rtools <- function() {
   }
 
   # Not on path, so try registry
-  registry_candidates <- scan_registry_for_rtools()
+  registry_candidates <- scan_registry_for_rtools(debug)
 
   if (length(registry_candidates) == 0) {
     # Not on path or in registry, so not installled
@@ -95,13 +97,17 @@ find_rtools <- function() {
   TRUE
 }
 
-scan_path_for_rtools <- function() {
+scan_path_for_rtools <- function(debug = FALSE) {
+  if (debug) cat("Scanning path...\n")
+
   # First look for ls and gcc
   ls_path <- Sys.which("ls")
   if (ls_path == "") return(NULL)
+  if (debug) cat("ls :", ls_path, "\n")
 
   gcc_path <- Sys.which("gcc")
   if (gcc_path == "") return(NULL)
+  if (debug) cat("gcc:", ls_path, "\n")
 
   # We have a candidate installPath
   install_path <- dirname(dirname(ls_path))
@@ -109,12 +115,16 @@ scan_path_for_rtools <- function() {
   if (install_path2 != install_path) return(NULL)
 
   version <- installed_version(install_path)
+  if (debug) cat("Version:", version, "\n")
+
   if (is.null(version)) return(NULL)
 
   rtools(install_path, version)
 }
 
-scan_registry_for_rtools <- function() {
+scan_registry_for_rtools <- function(debug = FALSE) {
+  if (debug) cat("Scanning registry...\n")
+
   keys <- NULL
   try(keys <- utils::readRegistry("SOFTWARE\\R-core\\Rtools",
     hive = "HLM", view = "32-bit", maxdepth = 2), silent = TRUE)
@@ -129,6 +139,7 @@ scan_registry_for_rtools <- function() {
     install_path <- normalizePath(key$InstallPath,
       mustWork = FALSE, winslash = "/")
 
+    if (debug) cat("Found", install_path, "for", version, "\n")
     rts[[i]] <- rtools(install_path, version)
   }
 

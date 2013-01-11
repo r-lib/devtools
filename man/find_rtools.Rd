@@ -2,7 +2,11 @@
 \alias{find_rtools}
 \title{Find rtools.}
 \usage{
-  find_rtools()
+  find_rtools(debug = FALSE)
+}
+\arguments{
+  \item{debug}{if \code{TRUE} prints a lot of additional
+  information to help in debugging.}
 }
 \value{
   Either a visible \code{TRUE} if rtools is found, or an
