@@ -58,7 +58,9 @@ auto_tar <- function() {
   tar <- Sys.getenv("TAR", unset = NA)
   if (!is.na(tar)) return(tar)
 
-  if (.Platform$OS.type == "windows") "internal" else ""
+  windows <- .Platform$OS.type == "windows"
+  no_rtools <- is.null(get_rtools_path())
+  if (windows && no_rtools) "internal" else ""
 }
 
 RCMD <- function(cmd, options, path = tempdir(), env_vars = NULL, ...) {
