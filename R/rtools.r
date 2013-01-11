@@ -1,17 +1,20 @@
-set_rtools_path <- NULL
-get_rtools_path <- NULL
-local({
-  rtools_paths <- NULL
-  set_rtools_path <<- function(rtools) {
-    stopifnot(is.rtools(rtools))
-    path <- file.path(rtools$path, version_info[[rtools$version]]$path)
+# Need to check for existence so load_all doesn't override known rtools location
+if (!exists("set_rtools_path")) {
+  set_rtools_path <- NULL
+  get_rtools_path <- NULL
+  local({
+    rtools_paths <- NULL
+    set_rtools_path <<- function(rtools) {
+      stopifnot(is.rtools(rtools))
+      path <- file.path(rtools$path, version_info[[rtools$version]]$path)
 
-    rtools_paths <<- path
-  }
-  get_rtools_path <<- function() {
-    rtools_paths
-  }
-})
+      rtools_paths <<- path
+    }
+    get_rtools_path <<- function() {
+      rtools_paths
+    }
+  })
+}
 
 #' Find rtools.
 #'
