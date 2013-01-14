@@ -86,7 +86,7 @@ find_rtools <- function(debug = FALSE) {
     return(invisible(FALSE))
   }
 
-  installed_ver <- installed_version(from_registry$path)
+  installed_ver <- installed_version(from_registry$path, debug = debug)
   if (installed_ver != from_registry$version) {
     # Installed version doesn't match registry version
     message("WARNING: Rtools is required to build R packages, but no version ",
