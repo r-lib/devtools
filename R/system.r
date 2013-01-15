@@ -54,6 +54,9 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
 }
 
 # Determine the best setting for the TAR environmental variable
+# This is needed for R <= 2.15.2 to use internal tar. Later versions don't need
+# this workaround, and they use R_BUILD_TAR instead of TAR, so this has no
+# effect on them.
 auto_tar <- function() {
   tar <- Sys.getenv("TAR", unset = NA)
   if (!is.na(tar)) return(tar)
