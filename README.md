@@ -93,5 +93,5 @@ This will set up R to:
 
 * always install packages from the RStudio CRAN mirror
 * ignore newlines when  `browse()`ing
-* give minimal output from `traceback`
+* give minimal output from `traceback()`
 * automatically load `devtools` in interactive sessions
