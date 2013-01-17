@@ -72,9 +72,11 @@ release <- function(pkg = ".", check = TRUE) {
   if (yesno("Ready to upload?"))
     return(invisible())
 
-  message("Building and uploading")
+  message("Building")
   built_path <- build(pkg, tempdir())
+  message("File size: ", file.info(built_path)$size, " bytes")
 
+  message("Uploading")
   ftpUpload(built_path, paste("ftp://cran.R-project.org/incoming/",
     basename(built_path), sep = ""))
 
