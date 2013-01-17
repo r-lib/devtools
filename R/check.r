@@ -33,7 +33,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
   pkg <- as.package(pkg)
 
   if (document) {
-    document(pkg, clean = TRUE)
+    document(pkg)
   }
 
   built_path <- build(pkg, tempdir(), quiet = quiet)

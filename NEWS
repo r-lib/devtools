@@ -44,6 +44,10 @@ MINOR FEATURES
 * In `check()`, it is optional to require suggested packages, using the
   `force_suggests` option.
 
+* When `check()` is called, the new default behavior is to not delete existing
+  .Rd files from man/. This behavior can be set with the "devtools.cleandoc"
+  option.
+
 * `install_bitbucket()` now always uses lowercase repo names. (Thanks to mnel)
 
 * New function `with_lib()`, which runs an expression code with a library path
