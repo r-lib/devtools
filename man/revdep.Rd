@@ -33,6 +33,6 @@
   package.
 }
 \examples{
-revdep("ggplot2")
+\dontrun{revdep("ggplot2")}
 }
 
