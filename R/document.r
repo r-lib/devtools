@@ -4,15 +4,17 @@
 #'   \code{\link{as.package}} for more information
 #' @param clean if \code{TRUE} will automatically clear all roxygen caches
 #'   and delete current \file{man/} contents to ensure that you have the
-#'   freshest version of the documentation.
-#'   check documentation after running roxygen.
+#'   freshest version of the documentation. The default is to use the value of
+#'   the \code{"devtools.cleandoc"} option.
 #' @param roclets character vector of roclet names to apply to package
 #' @param reload if \code{TRUE} uses \code{load_all} to reload the package
 #'   prior to documenting.  This is important because \pkg{roxygen2} uses
 #'   introspection on the code objects to determine how to document them.
 #' @keywords programming
 #' @export
-document <- function(pkg = ".", clean = FALSE, roclets = c("collate", "namespace", "rd"), reload = TRUE) {
+document <- function(pkg = ".", clean = getOption("devtools.cleandoc"),
+  roclets = c("collate", "namespace", "rd"), reload = TRUE) {
+
   require("roxygen2")
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
