@@ -137,5 +137,5 @@ needs_clean <- function(pkg = ".") {
   # no dll, so needs compile
   if (is.null(dll)) return(TRUE)
 
-  source > dll
+  headers > dll
 }
