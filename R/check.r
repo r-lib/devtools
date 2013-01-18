@@ -17,6 +17,9 @@
 #'   went wrong. If \code{FALSE} the check directory is never removed.
 #' @param cran if \code{TRUE} (the default), check using the same settings as
 #'   CRAN uses.
+#' @param doc_clean If \code{TRUE}, will delete all files in the \code{man}
+#'   directory and regenerate them from scratch with roxygen. The default is
+#'   to use the value of the \code{"devtools.cleandoc"} option.
 #' @param check_version if \code{TRUE}, check that the new version is greater
 #'   than the current version on CRAN, by setting the
 #'   \code{_R_CHECK_CRAN_INCOMING_} environment variable to \code{TRUE}.
@@ -27,13 +30,14 @@
 #'   arguments to be passed to \code{R CMD check}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @export
-check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
-  check_version = FALSE, force_suggests = TRUE, args = NULL, quiet = FALSE) {
+check <- function(pkg = ".", document = TRUE, doc_clean = getOption("devtools.cleandoc"),
+                  cleanup = TRUE, cran = TRUE, check_version = FALSE,
+                  force_suggests = TRUE, args = NULL, quiet = FALSE) {
 
   pkg <- as.package(pkg)
 
   if (document) {
-    document(pkg)
+    document(pkg, clean = doc_clean)
   }
 
   built_path <- build(pkg, tempdir(), quiet = quiet)

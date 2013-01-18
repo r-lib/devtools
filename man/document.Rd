@@ -2,8 +2,7 @@
 \alias{document}
 \title{Use roxygen to make documentation.}
 \usage{
-  document(pkg = ".",
-    clean = getOption("devtools.cleandoc"),
+  document(pkg = ".", clean = FALSE,
     roclets = c("collate", "namespace", "rd"),
     reload = TRUE)
 }
@@ -14,8 +13,7 @@
   \item{clean}{if \code{TRUE} will automatically clear all
   roxygen caches and delete current \file{man/} contents to
   ensure that you have the freshest version of the
-  documentation. The default is to use the value of the
-  \code{"devtools.cleandoc"} option.}
+  documentation.}
 
   \item{roclets}{character vector of roclet names to apply
   to package}
