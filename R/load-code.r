@@ -15,7 +15,7 @@ load_code <- function(pkg = ".") {
   paths <- changed_files(r_files)
 
   tryCatch(
-    lapply(paths, sys.source, envir = env, chdir = TRUE,
+    lapply(paths, sys.source, envir = env, chdir = FALSE,
       keep.source = TRUE),
     error = function(e) {
       clear_cache()
