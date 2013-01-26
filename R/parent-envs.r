@@ -63,8 +63,7 @@ as.envlist <- function(x) {
 
 #' @S3method [ envlist
 `[.envlist` <- function(x, i) {
-  x <- unclass(x)
-  as.envlist(x[i])
+  as.envlist(.subset(x, i))
 }
 
 #' Print an \code{envlist}
