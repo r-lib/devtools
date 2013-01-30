@@ -87,6 +87,16 @@ find_rtools <- function(debug = FALSE) {
   }
 
   installed_ver <- installed_version(from_registry$path, debug = debug)
+  if (is.null(installed_ver)) {
+    # Previously installed version now deleted
+    message("WARNING: Rtools is required to build R packages, but the ",
+      "version of Rtools previously installed in ", from_registry$path,
+      " has been deleted.\n\n",
+      "Please download and install ", rtools_needed(), " from ", rtools_url,
+      " and then run find_rtools().")
+    return(invisible(FALSE))
+  }
+
   if (installed_ver != from_registry$version) {
     # Installed version doesn't match registry version
     message("WARNING: Rtools is required to build R packages, but no version ",
