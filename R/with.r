@@ -3,7 +3,7 @@
 #' \itemize{
 #'   \item \code{in_dir}: working directory
 #'   \item \code{with_collate}: collation order
-#'   \item \code{with_env}: environmental variables
+#'   \item \code{with_envvar}: environmental variables
 #'   \item \code{with_libpaths}: library paths, replacing current libpaths
 #'   \item \code{with_lib}: library paths, prepending to current libpaths
 #'   \item \code{with_locale}: any locale setting
@@ -21,7 +21,7 @@
 #' getwd()
 #'
 #' Sys.getenv("HADLEY")
-#' with_env(c("HADLEY" = 2), Sys.getenv("HADLEY"))
+#' with_envvar(c("HADLEY" = 2), Sys.getenv("HADLEY"))
 #' Sys.getenv("HADLEY")
 NULL
 
@@ -38,7 +38,7 @@ is.named <- function(x) {
 
 # env ------------------------------------------------------------------------
 
-set_env <- function(envs) {
+set_envvar <- function(envs) {
   stopifnot(is.named(envs))
 
   old <- Sys.getenv(names(envs), names = TRUE, unset = NA)
@@ -51,7 +51,11 @@ set_env <- function(envs) {
 }
 #' @rdname with_something
 #' @export
-with_env <- with_something(set_env)
+with_envvar <- with_something(set_envvar)
+
+#' @rdname with_something
+#' @export
+with_env <- with_envvar
 
 # locale ---------------------------------------------------------------------
 
