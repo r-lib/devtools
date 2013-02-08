@@ -42,17 +42,20 @@ source_url <- function(url, ...) {
 #' source_gist(1654919)
 #' source_gist("1654919")
 #' source_gist("https://gist.github.com/1654919")
+#' source_gist("https://gist.github.com/kohske/1654919")
 #' source_gist("gist.github.com/1654919")
 #' source_gist("https://raw.github.com/gist/1654919/8161f74fb0ec26d1ba9fd54473a96f768ed76f56/test2.r")
 #' }
 source_gist <- function(entry, ...) {
   # 1654919 or "1654919"
-  if (is.numeric(entry) ||  grepl("^[[:digit:]]+$", entry)) {
+  if (is.numeric(entry) ||  grepl("^[0-9a-f]+$", entry)) {
     entry <- paste("https://raw.github.com/gist/", entry, sep = "")
   }
-  # https://gist.github.com/1899720 or gist.github.com/1899720
-  else if (grepl("((^https://)|^)gist.github.com/[[:digit:]]+$", entry)) {
-    entry <- paste("https://raw.github.com/gist/", regmatches(entry, regexpr("[[:digit:]]+$", entry)), sep = "")
+  # https://gist.github.com/kohske/1654919, https://gist.github.com/1654919,
+  # or gist.github.com/1654919
+  else if (grepl("((^https://)|^)gist.github.com/([^/]+/)?[0-9a-f]+$", entry)) {
+    entry <- paste("https://raw.github.com/gist/",
+      regmatches(entry, regexpr("[0-9a-f]+$", entry)), sep = "")
   }
   source_url(entry, ...)
 }

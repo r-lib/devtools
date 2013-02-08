@@ -29,6 +29,7 @@
 source_gist(1654919)
 source_gist("1654919")
 source_gist("https://gist.github.com/1654919")
+source_gist("https://gist.github.com/kohske/1654919")
 source_gist("gist.github.com/1654919")
 source_gist("https://raw.github.com/gist/1654919/8161f74fb0ec26d1ba9fd54473a96f768ed76f56/test2.r")
 }
