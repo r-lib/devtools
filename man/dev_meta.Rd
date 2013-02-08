@@ -14,15 +14,14 @@
 \examples{
 dev_meta("stats") # NULL
 
-# Load the test package in directory "load-hooks"
-load_all(devtest("load-hooks"))
+# Load the test package in directory "testLoadHooks"
+load_all(devtest("testLoadHooks"))
 
 # Get metdata for the package
-# (The name of the package in DESCRIPTION is "loadhooks")
-x <- dev_meta("loadhooks")
+x <- dev_meta("testLoadHooks")
 as.list(x)
 
 # Clean up.
-unload(devtest("load-hooks"))
+unload(devtest("testLoadHooks"))
 }
 

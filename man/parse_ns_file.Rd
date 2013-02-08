@@ -12,6 +12,6 @@
   Parses the NAMESPACE file for a package
 }
 \examples{
-parse_ns_file(devtest("load-hooks"))
+parse_ns_file(devtest("testLoadHooks"))
 }
 
