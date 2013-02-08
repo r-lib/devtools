@@ -19,7 +19,8 @@ test <- function(pkg = ".", filter = NULL) {
   require(testthat)
   # Run tests in a child of the namespace environment, like testthat::test_package
   env <- new.env(parent = ns_env(pkg))
-  test_dir(path_test, filter = filter, env = env)
+  # Note that with_env sets environment vars, not the R evaluation environment
+  with_env(r_env_vars(), test_dir(path_test, filter = filter, env = env))
 }
 
 
