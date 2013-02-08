@@ -1,3 +1,15 @@
+devtools 1.0.99
+-----------------
+
+* `source_gist()` has been updated to accept new gist URLs with username.
+  (Fixes #247)
+
+* `test()` and `document()` now set environment variables, including NOT_CRAN.
+
+* Test packages have been renamed to avoid conflicts with existing packages on
+  CRAN. This bug prevented devtools 1.0 from passing check on CRAN for some
+  platforms.
+
 * Catch additional case in `find_rtools()`: previously installed, but directory 
   empty/deleted (Fixes #241)
 
