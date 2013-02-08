@@ -85,6 +85,6 @@ with_debug <- function(code,
     PKG_CFLAGS = PKG_CFLAGS, PKG_CXXFLAGS = PKG_CXXFLAGS,
     PKG_FFLAGS = PKG_FFLAGS, PKG_FCFLAGS = PKG_FCFLAGS)
 
-  with_env(flags, code)
+  with_envvar(flags, code)
 }
 

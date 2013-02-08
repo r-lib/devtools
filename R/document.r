@@ -40,8 +40,7 @@ document <- function(pkg = ".", clean = FALSE,
   roclets <- paste(roclets, "_roclet", sep = "")
   for (roclet in roclets) {
     roc <- match.fun(roclet)()
-    # Note that with_env sets environment vars, not the R evaluation environment
-    with_env(r_env_vars(),
+    with_envvar(r_env_vars(),
       with_collate("C", {
         results <- roxygen2:::roc_process(roc, parsed, pkg$path)
         roxygen2:::roc_output(roc, results, pkg$path)

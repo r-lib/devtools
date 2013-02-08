@@ -9,7 +9,7 @@ system_check <- function(cmd, args = character(), env = character(),
     message()
   }
 
-  result <- suppressWarnings(with_env(env,
+  result <- suppressWarnings(with_envvar(env,
     system(full, intern = quiet, ignore.stderr = quiet, ...)
   ))
 
