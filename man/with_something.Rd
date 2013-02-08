@@ -2,6 +2,7 @@
 \alias{in_dir}
 \alias{with_collate}
 \alias{with_env}
+\alias{with_envvar}
 \alias{with_lib}
 \alias{with_libpaths}
 \alias{with_locale}
@@ -11,6 +12,8 @@
 \alias{with_something}
 \title{Execute code in temporarily altered environment.}
 \usage{
+  with_envvar(new, code)
+
   with_env(new, code)
 
   with_locale(new, code)
@@ -42,7 +45,7 @@
 \description{
   \itemize{ \item \code{in_dir}: working directory \item
   \code{with_collate}: collation order \item
-  \code{with_env}: environmental variables \item
+  \code{with_envvar}: environmental variables \item
   \code{with_libpaths}: library paths, replacing current
   libpaths \item \code{with_lib}: library paths, prepending
   to current libpaths \item \code{with_locale}: any locale
@@ -56,7 +59,7 @@ in_dir(tempdir(), getwd())
 getwd()
 
 Sys.getenv("HADLEY")
-with_env(c("HADLEY" = 2), Sys.getenv("HADLEY"))
+with_envvar(c("HADLEY" = 2), Sys.getenv("HADLEY"))
 Sys.getenv("HADLEY")
 }
 

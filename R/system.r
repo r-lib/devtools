@@ -1,5 +1,5 @@
 # @param arg a vector of command arguments.
-# @param env a named character vector.  Will be quoted
+# @param env a named character vector of environment variables.  Will be quoted
 system_check <- function(cmd, args = character(), env = character(),
                          quiet = FALSE, ...) {
   full <- paste(shQuote(cmd), " ", paste(args, collapse = ", "), sep = "")
@@ -9,7 +9,7 @@ system_check <- function(cmd, args = character(), env = character(),
     message()
   }
 
-  result <- suppressWarnings(with_env(env,
+  result <- suppressWarnings(with_envvar(env,
     system(full, intern = quiet, ignore.stderr = quiet, ...)
   ))
 
@@ -31,26 +31,13 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
   options <- paste("--vanilla", options)
   r_path <- file.path(R.home("bin"), "R")
 
-  env <- c(
-    "LC_ALL" = "C",
-    "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
-    "CYGWIN" = "nodosfilewarning",
-    "R_TESTS" = "",
-    "NOT_CRAN" = "true",
-    "TAR" = auto_tar(),
-    env_vars)
-    # When R CMD check runs tests, it sets R_TESTS. When the tests
-    # themeselves run R CMD xxxx, as is the case with the tests in
-    # devtools, having R_TESTS set causes errors because it confuses
-    # the R subprocesses. Unsetting it here avoids those problems.
-
   # If rtools has been detected, add it to the path only when running R...
   if (!is.null(get_rtools_path())) {
     old <- add_path(get_rtools_path(), 0)
     on.exit(set_path(old))
   }
 
-  in_dir(path, system_check(r_path, options, env, ...))
+  in_dir(path, system_check(r_path, options, c(r_env_vars(), env_vars), ...))
 }
 
 # Determine the best setting for the TAR environmental variable
@@ -75,4 +62,21 @@ wrap_command <- function(x) {
   lines <- strwrap(x, getOption("width") - 2, exdent = 2)
   continue <- c(rep(" \\", length(lines) - 1), "")
   paste(lines, continue, collapse = "\n")
+}
+
+
+# Environment variables to set when calling R
+# This needs to be a function so it can call.libPaths() at runtime (otherwise
+# it causes errors when running R CMD check on devtools)
+r_env_vars <- function() {
+  c("LC_ALL" = "C",
+    "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
+    "CYGWIN" = "nodosfilewarning",
+    "R_TESTS" = "",
+    "NOT_CRAN" = "true",
+    "TAR" = auto_tar())
+    # When R CMD check runs tests, it sets R_TESTS. When the tests
+    # themeselves run R CMD xxxx, as is the case with the tests in
+    # devtools, having R_TESTS set causes errors because it confuses
+    # the R subprocesses. Unsetting it here avoids those problems.
 }
