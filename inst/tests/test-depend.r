@@ -2,8 +2,8 @@ context("Dependencies")
 
 test_that("Warned about dependency versions", {
   # Should give a warning about grid version
-  expect_warning(load_all("import-version"), "Need grid >=")
-  unload("import-version")
+  expect_warning(load_all("testImportVersion"), "Need grid >=")
+  unload("testImportVersion")
 
   # TODO: Add check for NOT giving a warning about compiler version
   # Not possible with testthat?
@@ -11,17 +11,17 @@ test_that("Warned about dependency versions", {
 
 
 test_that("Error on missing dependencies", {
-  # Should give a warning about grid version
-  expect_error(load_all("import-missing"), "missingpackage not available")
+  # Should give a warning about missing package
+  expect_error(load_all("testImportMissing"), "missingpackage not available")
 
   # Loading process will be partially done; unload it
-  unload("import-missing")
+  unload("testImportMissing")
 })
 
 test_that("Packages in depends are required", {
-  load_all("depends")
+  load_all("testDependMissing")
   expect_true("package:MASS" %in% search())
-  unload("depends")
+  unload("testDependMissing")
   detach("package:MASS", unload = TRUE)
 })
 

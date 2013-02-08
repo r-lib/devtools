@@ -1,9 +1,9 @@
 context("Load hooks")
 
 test_that("onLoad and onAttach", {
-  load_all("load-hooks")
-  nsenv <- ns_env("load-hooks")
-  pkgenv <- pkg_env("load-hooks")
+  load_all("testLoadHooks")
+  nsenv <- ns_env("testLoadHooks")
+  pkgenv <- pkg_env("testLoadHooks")
 
   # a: modified by onLoad in namespace env
   # b: modified by onAttach in namespace env
@@ -25,10 +25,10 @@ test_that("onLoad and onAttach", {
   # namespace env, and also shouldn't trigger onload or onattach. But
   # the existing namespace values will be copied over to the package
   # environment
-  load_all("load-hooks")
+  load_all("testLoadHooks")
   # Shouldn't form new environments
-  expect_identical(nsenv, ns_env("load-hooks"))
-  expect_identical(pkgenv, pkg_env("load-hooks"))
+  expect_identical(nsenv, ns_env("testLoadHooks"))
+  expect_identical(pkgenv, pkg_env("testLoadHooks"))
 
   # namespace and package env values should be the same
   expect_equal(nsenv$a, 2)
@@ -43,9 +43,9 @@ test_that("onLoad and onAttach", {
   # With reset=TRUE, there should be new package and namespace
   # environments, and the values should be the same as the first
   # load_all.
-  load_all("load-hooks", reset = TRUE)
-  nsenv2 <- ns_env("load-hooks")
-  pkgenv2 <- pkg_env("load-hooks")
+  load_all("testLoadHooks", reset = TRUE)
+  nsenv2 <- ns_env("testLoadHooks")
+  pkgenv2 <- pkg_env("testLoadHooks")
   # Should form new environments
   expect_false(identical(nsenv, nsenv2))
   expect_false(identical(pkgenv, pkgenv2))
@@ -58,14 +58,14 @@ test_that("onLoad and onAttach", {
   expect_equal(pkgenv2$b, 1)
   expect_equal(pkgenv2$c, 2)
 
-  unload("load-hooks")
+  unload("testLoadHooks")
 
   # ===================================================================
   # Unloading and reloading should create new environments and same
   # values as first time
-  load_all("load-hooks")
-  nsenv3 <- ns_env("load-hooks")
-  pkgenv3 <- pkg_env("load-hooks")
+  load_all("testLoadHooks")
+  nsenv3 <- ns_env("testLoadHooks")
+  pkgenv3 <- pkg_env("testLoadHooks")
 
   # Should form new environments
   expect_false(identical(nsenv, nsenv3))
@@ -79,19 +79,19 @@ test_that("onLoad and onAttach", {
   expect_equal(pkgenv3$b, 1)
   expect_equal(pkgenv3$c, 2)
 
-  unload("load-hooks")
+  unload("testLoadHooks")
 })
 
 
 
 test_that("onUnload", {
-  load_all("load-hooks")
+  load_all("testLoadHooks")
 
-  # The onUnload function in load-hooks increments this variable
-  .GlobalEnv$.__loadhooks__ <- 1
-  unload("load-hooks")
-  expect_equal(.GlobalEnv$.__loadhooks__, 2)
+  # The onUnload function in testLoadHooks increments this variable
+  .GlobalEnv$.__testLoadHooks__ <- 1
+  unload("testLoadHooks")
+  expect_equal(.GlobalEnv$.__testLoadHooks__, 2)
 
   # Clean up
-  rm(".__loadhooks__", envir = .GlobalEnv)
+  rm(".__testLoadHooks__", envir = .GlobalEnv)
 })

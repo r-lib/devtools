@@ -8,8 +8,8 @@ test_that("unload() unloads DLLs from packages loaded with library()", {
   if (!dir.exists(tmp_libpath)) dir.create(tmp_libpath)
   .libPaths(c(tmp_libpath, .libPaths()))
 
-  install("dll-load", quiet = TRUE)
-  expect_true(require(dllload))
+  install("testDllLoad", quiet = TRUE)
+  expect_true(require(testDllLoad))
 
   # Check that it's loaded properly, by running a function from the package.
   # nulltest() calls a C function which returns null.
@@ -17,27 +17,27 @@ test_that("unload() unloads DLLs from packages loaded with library()", {
 
   # DLL should be listed in .dynLibs()
   dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
-  expect_true(any(grepl("dllload", dynlibs)))
+  expect_true(any(grepl("testDllLoad", dynlibs)))
 
-  unload("dll-load")
+  unload("testDllLoad")
 
   # DLL should not be listed in .dynLibs()
   dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
-  expect_false(any(grepl("dllload", dynlibs)))
+  expect_false(any(grepl("testDllLoad", dynlibs)))
 
   # Reset the libpath
   .libPaths(old_libpaths)
 
   # Clean out compiled objects
-  clean_dll("dll-load")
+  clean_dll("testDllLoad")
 })
 
 
 test_that("load_all() compiles and loads DLLs", {
 
-  clean_dll("dll-load")
+  clean_dll("testDllLoad")
 
-  load_all("dll-load", reset = TRUE, quiet = TRUE)
+  load_all("testDllLoad", reset = TRUE, quiet = TRUE)
 
   # Check that it's loaded properly, by running a function from the package.
   # nulltest() calls a C function which returns null.
@@ -45,40 +45,40 @@ test_that("load_all() compiles and loads DLLs", {
 
   # DLL should be listed in .dynLibs()
   dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
-  expect_true(any(grepl("dllload", dynlibs)))
+  expect_true(any(grepl("testDllLoad", dynlibs)))
 
-  unload("dll-load")
+  unload("testDllLoad")
 
   # DLL should not be listed in .dynLibs()
   dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
-  expect_false(any(grepl("dllload", dynlibs)))
+  expect_false(any(grepl("testDllLoad", dynlibs)))
 
 
   # Loading again, and reloading
   # Should not re-compile (don't have a proper test for this)
-  load_all("dll-load", quiet = TRUE)
+  load_all("testDllLoad", quiet = TRUE)
   expect_true(is.null(nulltest()))
 
   # load_all when already loaded
   # Should not re-compile (don't have a proper test for this)
-  load_all("dll-load", quiet = TRUE)
+  load_all("testDllLoad", quiet = TRUE)
   expect_true(is.null(nulltest()))
 
   # Should re-compile (don't have a proper test for this)
-  load_all("dll-load", recompile = TRUE, quiet = TRUE)
+  load_all("testDllLoad", recompile = TRUE, quiet = TRUE)
   expect_true(is.null(nulltest()))
-  unload("dll-load")
+  unload("testDllLoad")
 
   # Clean out compiled objects
-  clean_dll("dll-load")
+  clean_dll("testDllLoad")
 })
 
 
 test_that("Specific functions from DLLs listed in NAMESPACE can be called", {
-  load_all("dll-load", quiet = TRUE)
+  load_all("testDllLoad", quiet = TRUE)
 
   # nulltest() uses the calling convention:
-  # .Call("null_test", PACKAGE = "dllload")
+  # .Call("null_test", PACKAGE = "testDllLoad")
   expect_true(is.null(nulltest()))
 
   # nulltest2() uses a specific C function listed in NAMESPACE, null_test2
@@ -86,22 +86,22 @@ test_that("Specific functions from DLLs listed in NAMESPACE can be called", {
   # It uses this calling convention:
   # .Call(null_test2)
   expect_true(is.null(nulltest2()))
-  nt2 <- ns_env("dll-load")$null_test2
+  nt2 <- ns_env("testDllLoad")$null_test2
   expect_equal(class(nt2), "NativeSymbolInfo")
   expect_equal(nt2$name, "null_test2")
 
-  unload("dll-load")
+  unload("testDllLoad")
 
   # Clean out compiled objects
-  clean_dll("dll-load")
+  clean_dll("testDllLoad")
 })
 
 
 test_that("load_all() can compile and load DLLs linked to Rcpp", {
 
-  clean_dll("dll-rcpp")
+  clean_dll("testDllRcpp")
 
-  load_all("dll-rcpp", reset = TRUE, quiet = TRUE)
+  load_all("testDllRcpp", reset = TRUE, quiet = TRUE)
 
   # Check that it's loaded properly by calling the hello world function
   # which returns a list
@@ -112,6 +112,6 @@ test_that("load_all() can compile and load DLLs linked to Rcpp", {
   expect_true(rcpp_test_attributes())
 
   # Unload and clean out compiled objects
-  unload("dll-rcpp")
-  clean_dll("dll-rcpp")
+  unload("testDllRcpp")
+  clean_dll("testDllRcpp")
 })

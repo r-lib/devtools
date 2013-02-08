@@ -1,0 +1,10 @@
+Package: testDllRcpp
+Title: Test package for compiling DLLs that link to Rcpp
+License: GPL-2
+Description:
+Author: Hadley <h.wickham@gmail.com>
+Maintainer: Hadley <h.wickham@gmail.com>
+Version: 0.1
+Collate: a.r
+Depends: Rcpp (>= 0.10.0)
+LinkingTo: Rcpp

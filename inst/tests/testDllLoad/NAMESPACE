@@ -1,0 +1,4 @@
+useDynLib(testDllLoad)
+useDynLib(testDllLoad,null_test2)
+export(nulltest)
+export(nulltest2)

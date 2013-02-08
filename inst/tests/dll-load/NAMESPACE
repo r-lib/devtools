@@ -1,4 +1,0 @@
-useDynLib(dllload)
-useDynLib(dllload,null_test2)
-export(nulltest)
-export(nulltest2)
