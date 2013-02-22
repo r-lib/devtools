@@ -68,12 +68,14 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
 build_win <- function(pkg = ".", version = "R-release", quiet = FALSE) {
   pkg <- as.package(pkg)
   if (!quiet) message("Building windows version of ", pkg$package,
-    " with win-builder.r-project.org.\nCheck your email for link to package.")
+    " with win-builder.r-project.org.\n")
 
   built_path <- build(pkg, tempdir(), quiet = quiet)
   on.exit(unlink(built_path))
 
   ftpUpload(built_path, paste("ftp://win-builder.r-project.org/", version,
     "/", basename(built_path), sep = ""))
+
+  message("Check your email for a link to the built package in 30-60 mins.")
   invisible()
 }
