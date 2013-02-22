@@ -179,7 +179,7 @@ installed_version <- function(path, debug) {
 
   # Extract the version
   contents <- gsub("^\\s+|\\s+$", "", contents)
-  version_re <- "Rtools version (\\d\\.\\d\\d)[0-9.]+$"
+  version_re <- "Rtools version (\\d\\.\\d+)\\.[0-9.]+$"
 
   if (!grepl(version_re, contents)) return(NULL)
 
