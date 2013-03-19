@@ -46,6 +46,17 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, args = NULL,
   invisible(TRUE)
 }
 
+#' Install all dependencies of a package.
+#'
+#' Uses \code{R CMD INSTALL} to install the package. Will also try to install
+#' dependencies of the package from CRAN, if they're not already installed.
+#' 
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' 
+#' @export 
+#' @family package installation
+#' @importFrom utils install.packages
 install_deps <- function(pkg = ".") {
   pkg <- as.package(pkg)
   deps <- c(parse_deps(pkg$depends)$name, parse_deps(pkg$imports)$name,
