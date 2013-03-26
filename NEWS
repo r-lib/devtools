@@ -1,3 +1,5 @@
+* `check()` now also sets environment variable `_R_CHECK_CODE_DATA_INTO_GLOBALENV_` to TRUE (to match current `--as-cran` behaviour) (Fixes #256)
+
 * Improved default email sent by `release()`, eliminating `create.post()` boilerplate
 
 * `revdep` includes LinkingTo by default.

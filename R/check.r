@@ -99,15 +99,16 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
 # difference from that document is that here, _R_CHECK_CRAN_INCOMING_ is
 # not set to TRUE.
 cran_env <- function() {
-  c("_R_CHECK_VC_DIRS_"                = "TRUE",
-    "_R_CHECK_TIMINGS_"                = "10",
-    "_R_CHECK_INSTALL_DEPENDS_"        = "TRUE",
-    "_R_CHECK_SUGGESTS_ONLY_"          = "TRUE",
-    "_R_CHECK_NO_RECOMMENDED_"         = "TRUE",
-    "_R_CHECK_EXECUTABLES_EXCLUSIONS_" = "FALSE",
-    "_R_CHECK_DOC_SIZES2_"             = "TRUE",
+  c("_R_CHECK_VC_DIRS_"                  = "TRUE",
+    "_R_CHECK_TIMINGS_"                  = "10",
+    "_R_CHECK_INSTALL_DEPENDS_"          = "TRUE",
+    "_R_CHECK_SUGGESTS_ONLY_"            = "TRUE",
+    "_R_CHECK_NO_RECOMMENDED_"           = "TRUE",
+    "_R_CHECK_EXECUTABLES_EXCLUSIONS_"   = "FALSE",
+    "_R_CHECK_DOC_SIZES2_"               = "TRUE",
     "_R_CHECK_CODE_ASSIGN_TO_GLOBALENV_" = "TRUE",
-    "_R_CHECK_CODE_ATTACH_"            = "TRUE",
-    "_R_CHECK_DOT_FIRSTLIB_"           = "TRUE"
+    "_R_CHECK_CODE_ATTACH_"              = "TRUE",
+    "_R_CHECK_DOT_FIRSTLIB_"             = "TRUE",
+    "_R_CHECK_CODE_DATA_INTO_GLOBALENV_" = "TRUE"
   )
 }
