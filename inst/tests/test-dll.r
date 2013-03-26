@@ -8,7 +8,7 @@ test_that("unload() unloads DLLs from packages loaded with library()", {
   if (!dir.exists(tmp_libpath)) dir.create(tmp_libpath)
   .libPaths(c(tmp_libpath, .libPaths()))
 
-  install("testDllLoad", quiet = TRUE)
+  install("testDllLoad", quiet = TRUE, args = "--no-multiarch")
   expect_true(require(testDllLoad))
 
   # Check that it's loaded properly, by running a function from the package.
