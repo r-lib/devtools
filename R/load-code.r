@@ -13,16 +13,18 @@ load_code <- function(pkg = ".") {
 
   r_files <- find_code(pkg)
   paths <- changed_files(r_files)
+  if (length(paths) == 0L) return()
 
-  tryCatch(
-    lapply(paths, sys.source, envir = env, chdir = TRUE,
-      keep.source = TRUE),
-    error = function(e) {
-      clear_cache()
-      unload(pkg)
-      stop(e)
-    }
-  )
+  success <- FALSE
+  cleanup <- function() {
+    if (success) return()
+    clear_cache()
+    unload(pkg)
+  }
+  on.exit(cleanup())
+
+  in_dir(file.path(pkg$path, "R"), source_many(paths, env))
+  success <- TRUE
 
   invisible(r_files)
 }
@@ -61,4 +63,39 @@ find_code <- function(pkg = ".") {
     r_files <- union(collate, r_files)
   }
   r_files
+}
+
+
+source_many <- function(files, envir = parent.frame()) {
+  stopifnot(is.character(files))
+  stopifnot(is.environment(envir))
+
+  oop <- options(
+    keep.source = TRUE,
+    show.error.locations = TRUE,
+    topLevelEnvironment = as.environment(envir))
+  on.exit(options(oop))
+
+  for (file in files) {
+    source_one(file, envir = envir)
+  }
+  invisible()
+}
+
+source_one <- function(file, envir = parent.frame()) {
+  stopifnot(file.exists(file))
+  stopifnot(is.environment(envir))
+
+  lines <- readLines(file, warn = FALSE)
+  srcfile <- srcfilecopy(file, lines, file.info(file)[1, "mtime"],
+    isFile = TRUE)
+  exprs <- parse(text = lines, n = -1)
+
+  n <- length(exprs)
+  if (n == 0L) return(invisible())
+
+  for (i in seq_len(n)) {
+    eval(exprs[i], envir)
+  }
+  invisible()
 }
