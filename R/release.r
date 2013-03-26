@@ -81,7 +81,7 @@ release <- function(pkg = ".", check = TRUE) {
     basename(built_path), sep = ""))
 
   message("Preparing email")
-  msg <- paste(
+  body <- paste(
     "Dear CRAN maintainers,\n",
     "\n",
     "I have just uploaded a new version of ", pkg$package, " to CRAN.\n",
@@ -89,9 +89,7 @@ release <- function(pkg = ".", check = TRUE) {
     "Thanks!\n",
     "INSERT YOUR NAME", "\n\n\n", sep = "")
   subject <- paste("CRAN submission ", pkg$package, " ", pkg$version, sep = "")
-  create.post(msg, subject = subject, address = "cran@r-project.org")
-
-  invisible(TRUE)
+  email("cran@r-project.org", subject, body)
 }
 
 yesno <- function(question) {
@@ -103,4 +101,18 @@ yesno <- function(question) {
   rand <- sample(length(qs))
 
   menu(qs[rand]) != which(rand == 1)
+}
+
+# http://tools.ietf.org/html/rfc2368
+email <- function(address, subject, body) {
+  url <- paste(
+    "mailto:",
+    URLencode(address),
+    "?subject=", URLencode(subject),
+    "&body=", URLencode(body),
+    sep = ""
+  )
+  browseURL(url)
+
+  invisible(TRUE)
 }
