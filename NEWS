@@ -1,3 +1,5 @@
+* `revdep` includes LinkingTo by default.
+
 * Fix regular expression problem that caused RTools 3.0.* to fail to be found on Windows.
 
 devtools 1.1

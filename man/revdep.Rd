@@ -5,7 +5,7 @@
 \title{Reverese dependency tools.}
 \usage{
   revdep(pkg = NULL,
-    dependencies = c("Depends", "Imports", "Suggests"),
+    dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
     recursive = FALSE)
 
   revdep_maintainers(pkg = ".")
