@@ -10,16 +10,20 @@
 #' @export
 test <- function(pkg = ".", filter = NULL) {
   pkg <- as.package(pkg)
-  load_all(pkg)
-  message("Testing ", pkg$package)
 
   path_test <- file.path(pkg$path, "inst", "tests")
   if (!file.exists(path_test)) return()
 
-  require(testthat)
-  # Run tests in a child of the namespace environment, like testthat::test_package
-  env <- new.env(parent = ns_env(pkg))
-  with_envvar(r_env_vars(), test_dir(path_test, filter = filter, env = env))
+  to_run <- bquote({
+    require("devtools", quiet = TRUE)
+    require("testthat", quiet = TRUE)
+
+    load_all(.(pkg$path), quiet = TRUE)
+    test_dir(.(path_test), filter = .(filter))
+  })
+
+  message("Testing ", pkg$package)
+  eval_clean(to_run)
 }
 
 
