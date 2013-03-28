@@ -2,13 +2,15 @@
 \alias{clean_source}
 \title{Sources an R file in a clean environment.}
 \usage{
-  clean_source(path, vanilla = FALSE)
+  clean_source(path, quiet = FALSE)
 }
 \arguments{
   \item{path}{path to R script}
 
-  \item{vanilla}{if \code{TRUE} tells R not to use any
-  system specific settings.}
+  \item{quiet}{If \code{FALSE}, the default, all input and
+  output will be displayed, as if you'd copied and paste
+  the code.  If \code{TRUE} only the final result and the
+  any explicitly printed output will be displayed.}
 }
 \description{
   Opens up a fresh R environment and sources file, ensuring

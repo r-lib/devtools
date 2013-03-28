@@ -1,3 +1,7 @@
+* New functions `eval_clean` and `evalq_clean` make it easy to evaluate code in a clean R session.
+
+* `clean_source` loses the `vanilla` argument (which did not work) and gains a `quiet` argument
+
 * `with_env` will be deprecated in 1.2 and removed in 1.3
 
 * `install` gains a `local` option for installing the package from the local package directory, rather than from a built tar.gz.
