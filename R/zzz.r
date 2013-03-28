@@ -8,6 +8,7 @@
   op.devtools <- list(
     devtools.path = "~/R-dev",
     devtools.cleandoc = FALSE,
+    devtools.install.args = "",
     github.user = "hadley"
   )
   toset <- !(names(op.devtools) %in% names(op))

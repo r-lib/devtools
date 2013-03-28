@@ -13,15 +13,16 @@
 #' @param quick if \code{TRUE} skips docs, multiple-architectures,
 #'   demos, and vignettes, to make installation as fast as possible.
 #' @param args An optional character vector of additional command line
-#'   arguments to be passed to \code{R CMD install}.
+#'   arguments to bew passed to \code{R CMD install}. This defaults to the
+#'   value of the option \code{"devtools.install.args"}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
 #'   set.
 #' @importFrom utils install.packages
-install <- function(pkg = ".", reload = TRUE, quick = FALSE, args = NULL,
-                    quiet = FALSE) {
+install <- function(pkg = ".", reload = TRUE, quick = FALSE,
+                    args = getOption("devtools.install.args"), quiet = FALSE) {
   pkg <- as.package(pkg)
 
   if (!quiet) message("Installing ", pkg$package)

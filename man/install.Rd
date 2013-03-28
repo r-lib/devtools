@@ -3,7 +3,8 @@
 \title{Install a local development package.}
 \usage{
   install(pkg = ".", reload = TRUE, quick = FALSE,
-    args = NULL, quiet = FALSE)
+    args = getOption("devtools.install.args"),
+    quiet = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -17,8 +18,9 @@
   installation as fast as possible.}
 
   \item{args}{An optional character vector of additional
-  command line arguments to be passed to \code{R CMD
-  install}.}
+  command line arguments to bew passed to \code{R CMD
+  install}. This defaults to the value of the option
+  \code{"devtools.install.args"}.}
 
   \item{quiet}{if \code{TRUE} suppresses output from this
   function.}

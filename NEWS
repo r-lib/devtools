@@ -1,3 +1,6 @@
+
+* `install` now uses option `devtools.install.args` for default installation arguments. This allows you to set any useful defaults (e.g. `--no-multiarch`) in your Rprofile.
+
 * `check()` now also sets environment variable `_R_CHECK_CODE_DATA_INTO_GLOBALENV_` to TRUE (to match current `--as-cran` behaviour) (Fixes #256)
 
 * Improved default email sent by `release()`, eliminating `create.post()` boilerplate
