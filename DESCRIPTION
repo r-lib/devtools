@@ -52,7 +52,6 @@ Collate:
     'vignettes.r'
     'zzz.r'
     'wd.r'
-    'source.r'
     'decompress.r'
     'install-github.r'
     'install-url.r'
@@ -88,3 +87,4 @@ Collate:
     'shims.r'
     'remove-s4-class.r'
     'rtools.r'
+    'clean.r'
