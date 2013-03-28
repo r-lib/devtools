@@ -124,7 +124,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   }
 
   if (getRversion() <= '2.15.2' && threads >= length(pkgs)) {
-    threads <- length(pkgs) - 1
+    threads <- max(length(pkgs) - 1L, 1L)
     message("Reducing number of threads to ", threads,
       " (number of packages to check minus one) due to a bug in mclapply in",
       " R <= 2.15.2")
