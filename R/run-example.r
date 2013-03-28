@@ -12,6 +12,8 @@ run_example <- function(path, show = TRUE, test = FALSE, run = TRUE, env = new.e
   code <- paste(code, collapse = "")
   results <- evaluate(code, env)
   replay_stop(results)
+
+  invisible()
 }
 
 process_ex <- function(rd, show = TRUE, test = FALSE, run = TRUE) {

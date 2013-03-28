@@ -23,8 +23,6 @@
 #' @export
 run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE, run = TRUE) {
   pkg <- as.package(pkg)
-  load_all(pkg, reset = TRUE, export_all = FALSE)
-  on.exit(load_all(pkg, reset = TRUE))
   document(pkg, reload = FALSE)
 
   files <- rd_files(pkg)
@@ -43,7 +41,16 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE, run
 
   message("Running ", length(files), " example files in ", pkg$package)
   rule()
-  lapply(files, run_example, show = show, test = test, run = run)
+
+  to_run <- bquote({
+    require("devtools", quiet = TRUE)
+    load_all(.(pkg$path), export_all = FALSE, quiet = TRUE)
+
+    lapply(.(files), devtools:::run_example,
+      show = .(show), test = .(test), run = .(run))
+    invisible()
+  })
+  eval_clean(to_run)
 
   invisible()
 }
