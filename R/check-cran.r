@@ -213,6 +213,11 @@ collect_check_results <- function(topdir) {
   summary_out <- file(summary_filename, "w")
   on.exit(close(summary_out))
 
+  sink(summary_out)
+  print(sessionInfo())
+  cat("\n")
+  sink()
+
   for (i in seq_along(checkresults)) {
     pkgname <- names(checkresults[i])
     linetext <- paste(rep("=", 72 - nchar(pkgname)), collapse = "")

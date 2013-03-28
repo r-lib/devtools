@@ -1,3 +1,5 @@
+* `check_cran` includes `sessionInfo()` in the summary output (Fixes #273)
+
 * New functions `eval_clean` and `evalq_clean` make it easy to evaluate code in a clean R session.
 
 * `clean_source` loses the `vanilla` argument (which did not work) and gains a `quiet` argument
