@@ -53,5 +53,5 @@ install_url_single <- function(url, name = NULL, subdir = NULL, config = list(),
   }
 
   # Install
-  install(pkg_path, ...)
+  install(pkg_path, local = TRUE, ...)
 }

@@ -96,7 +96,7 @@ install_git_single <- function(git_url, name = NULL, subdir = NULL,
   }
 
   # Install
-  install(pkg_path, ...)
+  install(pkg_path, local = TRUE, ...)
 }
 
 
