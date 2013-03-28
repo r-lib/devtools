@@ -3,7 +3,7 @@
 \title{Install a package from a git repository}
 \usage{
   install_git(git_url, name = NULL, subdir = NULL,
-    git_binary = NULL, ...)
+    branch = NULL, git_binary = NULL, ...)
 }
 \arguments{
   \item{git_url}{Location of package. The url should point
@@ -19,6 +19,9 @@
   \item{git_binary}{A custom git-binary to use instead of
   default system's git version.}
 
+  \item{branch}{Name of branch or tag to use, if not
+  master.}
+
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}
 }
@@ -29,6 +32,12 @@
 \details{
   It is vectorised so you can install multiple packages
   with a single command.
+}
+\examples{
+\dontrun{
+install_git("git://github.com/hadley/stringr.git")
+install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
+}
 }
 \seealso{
   Other package installation: \code{\link{install}},

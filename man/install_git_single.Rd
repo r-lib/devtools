@@ -3,7 +3,7 @@
 \title{Install a single package from a git repository}
 \usage{
   install_git_single(git_url, name = NULL, subdir = NULL,
-    git_binary = NULL, ...)
+    branch = NULL, git_binary = NULL, ...)
 }
 \arguments{
   \item{git_url}{Location of package. The url should point
