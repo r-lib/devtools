@@ -1,3 +1,5 @@
+devtools 1.1.99
+-----------------
 
 * `install_git` gains `branch` argument to specify branch or tag (Fixes #255)
 
