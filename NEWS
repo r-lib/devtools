@@ -1,3 +1,4 @@
+* `install` gains a `local` option for installing the package from the local package directory, rather than from a built tar.gz.
 
 * `install` now uses option `devtools.install.args` for default installation arguments. This allows you to set any useful defaults (e.g. `--no-multiarch`) in your Rprofile.
 

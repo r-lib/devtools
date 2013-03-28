@@ -3,6 +3,7 @@
 \title{Install a local development package.}
 \usage{
   install(pkg = ".", reload = TRUE, quick = FALSE,
+    local = quick,
     args = getOption("devtools.install.args"),
     quiet = FALSE)
 }
@@ -16,6 +17,12 @@
   \item{quick}{if \code{TRUE} skips docs,
   multiple-architectures, demos, and vignettes, to make
   installation as fast as possible.}
+
+  \item{local}{if \code{TRUE} does not build the package
+  first, instead installing from the local package
+  directory. This may result in build artefacts in your
+  package directory, but is considerably faster, and does
+  not require a recompile every time you run it.}
 
   \item{args}{An optional character vector of additional
   command line arguments to bew passed to \code{R CMD

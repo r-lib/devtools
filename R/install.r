@@ -12,6 +12,10 @@
 #'   package after installing.
 #' @param quick if \code{TRUE} skips docs, multiple-architectures,
 #'   demos, and vignettes, to make installation as fast as possible.
+#' @param local if \code{TRUE} does not build the package first, instead
+#'   installing from the local package directory. This may result in build
+#'   artefacts in your package directory, but is considerably faster, and does
+#'   not require a recompile every time you run it.
 #' @param args An optional character vector of additional command line
 #'   arguments to bew passed to \code{R CMD install}. This defaults to the
 #'   value of the option \code{"devtools.install.args"}.
@@ -21,7 +25,7 @@
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
 #'   set.
 #' @importFrom utils install.packages
-install <- function(pkg = ".", reload = TRUE, quick = FALSE,
+install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = quick,
                     args = getOption("devtools.install.args"), quiet = FALSE) {
   pkg <- as.package(pkg)
 
@@ -29,8 +33,12 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE,
   install_deps(pkg)
 
   # Build the package. If quick==TRUE, don't build vignettes
-  built_path <- build(pkg, tempdir(), vignettes = !quick, quiet = quiet)
-  on.exit(unlink(built_path))
+  if (local) {
+    built_path <- pkg$path
+  } else {
+    built_path <- build(pkg, tempdir(), vignettes = !quick, quiet = quiet)
+    on.exit(unlink(built_path))
+  }
 
   opts <- c(
     paste("--library=", shQuote(.libPaths()[1]), sep = ""),
