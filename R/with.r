@@ -11,6 +11,10 @@
 #'   \item \code{with_path}: PATH environment variable
 #'   \item \code{with_par}: graphics parameters
 #' }
+#' @section Deprecation:
+#' \code{with_env} will be deprecated in devtools 1.2 and removed in
+#' devtools 1.3
+#'
 #' @param new values for setting
 #' @param code code to execute in that environment
 #'
@@ -42,11 +46,11 @@ set_envvar <- function(envs) {
   stopifnot(is.named(envs))
 
   old <- Sys.getenv(names(envs), names = TRUE, unset = NA)
-  
+
   set <- !is.na(envs)
   if (any(set)) do.call("Sys.setenv", as.list(envs[set]))
   if (any(!set)) Sys.unsetenv(names(envs)[!set])
-  
+
   invisible(old)
 }
 #' @rdname with_something
@@ -55,7 +59,12 @@ with_envvar <- with_something(set_envvar)
 
 #' @rdname with_something
 #' @export
-with_env <- with_envvar
+with_env <- function(new, code) {
+  message(
+    "with_env() will be deprecated in devtools 1.3.\n",
+    "Please use with_envvar() instead")
+  with_envvar(new, code)
+}
 
 # locale ---------------------------------------------------------------------
 

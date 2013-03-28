@@ -53,6 +53,10 @@
   \code{with_path}: PATH environment variable \item
   \code{with_par}: graphics parameters }
 }
+\section{Deprecation}{
+  \code{with_env} will be deprecated in devtools 1.2 and
+  removed in devtools 1.3
+}
 \examples{
 getwd()
 in_dir(tempdir(), getwd())
