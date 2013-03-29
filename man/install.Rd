@@ -3,7 +3,7 @@
 \title{Install a local development package.}
 \usage{
   install(pkg = ".", reload = TRUE, quick = FALSE,
-    local = quick,
+    local = TRUE,
     args = getOption("devtools.install.args"),
     quiet = FALSE)
 }

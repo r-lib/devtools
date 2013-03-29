@@ -25,7 +25,7 @@
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
 #'   set.
 #' @importFrom utils install.packages
-install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = quick,
+install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     args = getOption("devtools.install.args"), quiet = FALSE) {
   pkg <- as.package(pkg)
 

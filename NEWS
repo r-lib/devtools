@@ -11,7 +11,7 @@ devtools 1.1.99
 
 * `with_env` will be deprecated in 1.2 and removed in 1.3
 
-* `install` gains a `local` option for installing the package from the local package directory, rather than from a built tar.gz.  This is used in `install_url` (which powers `install_github` etc) and in `install_git` to avoid a redudant build step.
+* `install` gains a `local` option for installing the package from the local package directory, rather than from a built tar.gz.  This is now used by default for all package installations. If you want to guarantee a clean build, run `local = FALSE`
 
 * `install` now uses option `devtools.install.args` for default installation arguments. This allows you to set any useful defaults (e.g. `--no-multiarch`) in your Rprofile.
 
