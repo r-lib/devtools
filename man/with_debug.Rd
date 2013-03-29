@@ -2,10 +2,9 @@
 \alias{with_debug}
 \title{Temporarily set debugging compilation flags.}
 \usage{
-  with_debug(code,
-    PKG_CFLAGS = "-UNDEBUG -Wall -pedantic -g -O0",
-    PKG_CXXFLAGS = "-UNDEBUG -Wall -pedantic -g -O0",
-    PKG_FFLAGS = "-g -O0", PKG_FCFLAGS = "-g -O0")
+  with_debug(code, PKG_CFLAGS = NULL, PKG_CXXFLAGS = NULL,
+    PKG_FFLAGS = NULL, PKG_FCFLAGS = NULL, debug = TRUE,
+    action = "replace")
 }
 \arguments{
   \item{code}{to execute.}
@@ -17,14 +16,24 @@
   \item{PKG_FFLAGS}{flags for compiling Fortran code.}
 
   \item{PKG_FCFLAGS}{flags for Fortran 9x code.}
+
+  \item{action}{(for \code{with_envvar} only): should new
+  values \code{"replace"}, \code{"suffix"}, \code{"prefix"}
+  existing environmental variables with the same name.}
 }
 \description{
   Temporarily set debugging compilation flags.
 }
 \examples{
+flags <- names(compiler_flags(TRUE))
+with_debug(Sys.getenv(flags))
+
 \dontrun{
 install("mypkg")
 with_debug(install("mypkg"))
 }
+}
+\seealso{
+  Other debugging flags: \code{\link{compiler_flags}}
 }
 

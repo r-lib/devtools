@@ -1,6 +1,6 @@
 \name{compile_dll}
 \alias{compile_dll}
-\title{Compile a .dll/.so from source}
+\title{Compile a .dll/.so from source.}
 \usage{
   compile_dll(pkg = ".", quiet = FALSE)
 }
@@ -12,17 +12,13 @@
   function.}
 }
 \description{
-  Support for compiling C, C++, and Fotran code is
-  experimental, and will probably only work for simple
-  cases where the code is to be compiled into a single DLL.
-  It will work with Makevars files, but not with Makefiles.
+  \code{compile_dll} performs a fake R CMD install so
+  should code that works here should work with a regular
+  install (and vice versa).
 }
 \details{
-  \code{compile_dll} will compile \code{.c}, \code{.cpp},
-  and \code{.f} files, and save the resulting DLL file in
-  the same directory as the source code, \code{/src/}.
-  Depending on the platform, the DLL file will have the
-  extension \code{.dll} or \code{.so}.
+  During compilation, debug flags are set with
+  \code{\link{compiler_flags}(TRUE)}.
 
   Invisibly returns the names of the DLL.
 }

@@ -52,7 +52,10 @@
   workspace will affect the process.
 }
 \details{
-  After the \code{R CMD check}, this will run checks that
-  are specific to devtools.
+  During compilation, debug flags are set with
+  \code{\link{compiler_flags}(FALSE)}.
+
+  Devtools specific checks will be run after the \code{R
+  CMD check}.
 }
 

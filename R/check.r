@@ -5,8 +5,10 @@
 #' runs in an independent realisation of R, so nothing in your current
 #' workspace will affect the process.
 #'
-#' After the \code{R CMD check}, this will run checks that are specific
-#' to devtools.
+#' During compilation, debug flags are set with
+#' \code{\link{compiler_flags}(FALSE)}.
+#'
+#' Devtools specific checks will be run after the \code{R CMD check}.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
@@ -40,14 +42,16 @@ check <- function(pkg = ".", document = TRUE, doc_clean = getOption("devtools.cl
     document(pkg, clean = doc_clean)
   }
 
+  old <- set_envvar(compiler_flags(FALSE), "prefix")
+  on.exit(set_envvar(old))
+
   built_path <- build(pkg, tempdir(), quiet = quiet)
-  on.exit(unlink(built_path))
+  on.exit(unlink(built_path), add = TRUE)
 
   r_cmd_check_path <- check_r_cmd(built_path, cran, check_version,
     force_suggests, args, quiet = quiet)
 
   check_devtools(pkg, built_path)
-
 
   if (cleanup) {
     unlink(r_cmd_check_path, recursive = TRUE)
