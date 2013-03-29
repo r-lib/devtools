@@ -12,7 +12,7 @@
 \alias{with_something}
 \title{Execute code in temporarily altered environment.}
 \usage{
-  with_envvar(new, code)
+  with_envvar(new, code, action = "replace")
 
   with_env(new, code)
 
@@ -36,6 +36,10 @@
   \item{new}{values for setting}
 
   \item{code}{code to execute in that environment}
+
+  \item{action}{(for \code{with_envvar} only): should new
+  values \code{"replace"}, \code{"suffix"}, \code{"prefix"}
+  existing environmental variables with the same name.}
 
   \item{add}{Combine with existing values? Currently for
   \code{\link{with_path}} only. If \code{FALSE} all
@@ -65,5 +69,9 @@ getwd()
 Sys.getenv("HADLEY")
 with_envvar(c("HADLEY" = 2), Sys.getenv("HADLEY"))
 Sys.getenv("HADLEY")
+
+with_envvar(c("A" = 1),
+  with_envvar(c("A" = 2), action = "suffix", Sys.getenv("A"))
+)
 }
 
