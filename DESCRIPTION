@@ -88,3 +88,4 @@ Collate:
     'remove-s4-class.r'
     'rtools.r'
     'clean.r'
+    'with-debug.r'
