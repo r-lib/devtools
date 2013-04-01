@@ -1,6 +1,8 @@
 devtools 1.1.99
 -----------------
 
+* `source_url` and `source_gist` now allow you to specify a sha, so you can make sure that files you source from the internet don't change without you knowing about it. (Fixes #259)
+
 * `build_vignettes` now builds vignettes in `inst/doc` so that latex files can refer to files in subdirectories. This means that latex compilation artefacts will appear in the package, but `clean_vignettes` will now also remove them. (Fixes #231)
 
 * devtools now sets best practice compiler flags: from `check()`, `-Wall -pedantic` and from `load_all()`, `-Wall -pedantic -g -O0 -UNDEBUG`. These are prefixed to existing environment variables so that you can override them if desired. (Fixes #257)
