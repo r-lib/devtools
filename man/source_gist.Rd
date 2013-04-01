@@ -2,15 +2,19 @@
 \alias{source_gist}
 \title{Run a script on gist}
 \usage{
-  source_gist(entry, ...)
+  source_gist(entry, ..., sha1 = NULL)
 }
 \arguments{
   \item{entry}{either full url (character), gist ID
-  (numeric or character of numeric). If only an entry ID is
-  specified and the entry has multiple code block, the
-  first entry is sourced.}
+  (numeric or character of numeric). If a gist ID is
+  specified and the entry has multiple files, only the
+  first file in the gist is sourced.}
 
   \item{...}{other options passed to \code{\link{source}}}
+
+  \item{sha1}{The SHA-1 hash of the file at the remote URL.
+  See \code{\link{source_url}} for more information on
+  using a SHA-1 hash.}
 }
 \description{
   \dQuote{Gist is a simple way to share snippets and pastes
@@ -19,10 +23,9 @@
   repository.} \url{https://gist.github.com/}
 }
 \details{
-  A gist entry can have multiple code blocks (one file for
-  one block). Gist is based on git, which means gist has
-  commit histories (i.e., revisions). You can specify a
-  commit by giving SHA.
+  A gist can have multiple files. Gist is based on git, so
+  a gist has commit histories (i.e., revisions). You can
+  specify a commit by giving a SHA of the commit.
 }
 \examples{
 \dontrun{
