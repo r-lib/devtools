@@ -28,9 +28,17 @@ export_ns <- function(pkg = ".") {
   pkg <- as.package(pkg)
   nsenv <- ns_env(pkg)
   pkgenv <- pkg_env(pkg)
+  nsInfo <- parse_ns_file(pkg)
 
   exports <- getNamespaceExports(nsenv)
   importIntoEnv(pkgenv, exports, nsenv, exports)
+
+  # If lazydata is true, manually copy data objects in $lazydata to package
+  # environment
+  if (!is.null(pkg$lazydata) &&
+      tolower(pkg$lazydata) %in% c("true", "yes")) {
+    copy_env(src = nsenv$.__NAMESPACE__.$lazydata, dest = pkgenv)
+  }
 }
 
 
