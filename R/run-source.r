@@ -57,14 +57,16 @@ source_url <- function(url, ..., sha1 = NULL) {
 #'   forkable and usable as a git repository.}
 #' \url{https://gist.github.com/}
 #'
-#' A gist entry can have multiple code blocks (one file for one block).
-#' Gist is based on git, which means gist has commit histories (i.e., revisions).
-#' You can specify a commit by giving SHA.
+#' A gist can have multiple files.
+#' Gist is based on git, so a gist has commit histories (i.e., revisions).
+#' You can specify a commit by giving a SHA of the commit.
 #'
 #' @param entry either full url (character), gist ID (numeric or character of
-#'   numeric). If only an entry ID is specified and the entry has multiple code
-#'   block, the first entry is sourced.
+#'   numeric). If a gist ID is specified and the entry has multiple files,
+#'   only the first file in the gist is sourced.
 #' @param ... other options passed to \code{\link{source}}
+#' @param sha1 The SHA-1 hash of the file at the remote URL. See
+#'   \code{\link{source_url}} for more information on using a SHA-1 hash.
 #' @export
 #' @examples
 #' \dontrun{
@@ -74,8 +76,12 @@ source_url <- function(url, ..., sha1 = NULL) {
 #' source_gist("https://gist.github.com/kohske/1654919")
 #' source_gist("gist.github.com/1654919")
 #' source_gist("https://raw.github.com/gist/1654919/8161f74fb0ec26d1ba9fd54473a96f768ed76f56/test2.r")
+#'
+#' # With hash to make sure remote file hasn't changed:
+#' source_gist("https://gist.github.com/1654919",
+#'   sha1 = "aa303f6a9608d7ba2cbee3e28a1191b3caf10b59")
 #' }
-source_gist <- function(entry, ...) {
+source_gist <- function(entry, ..., sha1 = NULL) {
   # 1654919 or "1654919"
   if (is.numeric(entry) ||  grepl("^[0-9a-f]+$", entry)) {
     entry <- paste("https://raw.github.com/gist/", entry, sep = "")
@@ -86,5 +92,6 @@ source_gist <- function(entry, ...) {
     entry <- paste("https://raw.github.com/gist/",
       regmatches(entry, regexpr("[0-9a-f]+$", entry)), sep = "")
   }
-  source_url(entry, ...)
+  print(entry)
+  source_url(entry, ..., sha1 = sha1)
 }
