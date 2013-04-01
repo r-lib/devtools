@@ -1,13 +1,16 @@
 context("Vignettes")
 
 test_that("Building process works", {
+  clean_vignettes("testVignettes")
+  expect_false("new.tex" %in% dir("testVignettes/vignettes"))
+  expect_false("new.pdf" %in% dir("testVignettes/inst/doc"))
+
   # Warn about vignette in wrong location
   expect_warning(build_vignettes("testVignettes"), "old.Rnw")
-
-  # Check inst/doc doesn't contain artefacts of complication
-  expect_equal(length(dir("testVignettes/inst/doc")), 3)
+  expect_true("new.tex" %in% dir("testVignettes/vignettes"))
+  expect_true("new.pdf" %in% dir("testVignettes/inst/doc"))
 
   clean_vignettes("testVignettes")
-  # Check new.pdf gone
-  expect_equal(length(dir("testVignettes/inst/doc")), 2)
+  expect_false("new.tex" %in% dir("testVignettes/vignettes"))
+  expect_false("new.pdf" %in% dir("testVignettes/inst/doc"))
 })

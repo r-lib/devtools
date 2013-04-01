@@ -1,8 +1,6 @@
 #' Build package vignettes.
 #'
-#' Sweave and latex package vignettes.  Sweaving and latexing is carried
-#' out in a temporary directory so that compilation artefacts don't pollute
-#' the source package - only the final pdf is copied to \file{inst/doc}.
+#' Sweave and latex package vignettes.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
@@ -10,6 +8,9 @@
 #' @seealso \code{\link{clean_vignettes}} to remove the pdfs in
 #'   \file{inst/doc} created from vignettes
 #' @export
+#' @importFrom tools texi2pdf
+#' @importFrom utils Sweave
+#' @seealso \code{\link{clean_vignettes}} to remove build tex/pdf files.
 build_vignettes <- function(pkg = ".") {
   pkg <- as.package(pkg)
   message("Building ", pkg$package, " vignettes")
@@ -19,28 +20,22 @@ build_vignettes <- function(pkg = ".") {
   # First warn about vignettes in deprecated location
   if (length(vigs$doc_files) > 0) {
     files <- basename(vigs$doc_files)
-    warning("The following vignettes were found (and ignored) in inst/doc:",
+    warning("The following vignettes were found (and ignored) in inst/doc: ",
       paste(files, collapse = ", "), ". Vignettes should now live in ",
-      "vignettes/")
+      "vignettes/", call. = FALSE)
   }
 
   # Next, build all vignettes in /vignette
   if (length(vigs$vig_files) == 0) return()
 
-  # Set up temporary build location
-  temp <- tempfile()
-  dir.create(temp)
-  dir.create(vigs$doc_path, recursive = TRUE, showWarnings = FALSE)
-  on.exit(unlink(temp, recursive = TRUE))
-
-  in_dir(temp, {
+  in_dir(vigs$vig_path, {
     capture.output(lapply(vigs$vig_files, Sweave))
     tex <- dir(pattern = "\\.tex$", full.names = FALSE)
-    lapply(tex, tools::texi2dvi, pdf = TRUE, quiet = TRUE)
+    lapply(tex, texi2pdf, quiet = TRUE, clean = TRUE)
 
-    pdfs <- dir(temp, "\\.pdf$")
-    message("Copying ", paste(pdfs, collapse = ", "), " to inst/doc/")
-    file.copy(pdfs, vigs$doc_path)
+    pdfs <- dir(pattern = "\\.pdf$")
+    message("Moving ", paste(pdfs, collapse = ", "), " to inst/doc/")
+    file.rename(pdfs, file.path(vigs$doc_path, pdfs))
   })
 
   invisible(TRUE)
@@ -50,21 +45,34 @@ build_vignettes <- function(pkg = ".") {
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @param tex if \code{TRUE} also removes the tex file created by Sweave.
 #' @export
-clean_vignettes <- function(pkg = ".") {
+clean_vignettes <- function(pkg = ".", tex = TRUE) {
   pkg <- as.package(pkg)
   message("Cleaning built vignettes from ", pkg$package)
 
   vigs <- find_vignettes(pkg)
-  pdfs <- dir(vigs$doc_path, "\\.pdf$", full.names = TRUE)
 
-  to_remove <- file_name(pdfs) %in% file_name(vigs$vig_files)
-  if (any(to_remove)) {
-    message("Removing ", paste(basename(pdfs[to_remove]), collapse = ", "))
-    file.remove(pdfs[to_remove])
+  pdfs <- ext_variations(vigs$vig_files, "pdf")
+  candidates <- file.path(vigs$doc_path, pdfs)
+
+  if (tex) {
+    build_artefacts <- ext_variations(vigs$vig_files, "tex")
+    candidates <- c(candidates, file.path(vigs$vig_path, build_artefacts))
+  }
+
+  to_remove <- candidates[file.exists(candidates)]
+
+  if (length(to_remove) > 0) {
+    message("Removing ", paste(basename(to_remove), collapse = ", "))
+    file.remove(to_remove)
   }
 
   invisible(TRUE)
+}
+
+ext_variations <- function(path, valid_ext) {
+  c(outer(file_name(path), valid_ext, FUN = paste, sep = "."))
 }
 
 #' @importFrom tools file_path_sans_ext

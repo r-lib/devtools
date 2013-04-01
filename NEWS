@@ -1,6 +1,8 @@
 devtools 1.1.99
 -----------------
 
+* `build_vignettes` now builds vignettes in `inst/doc` so that latex files can refer to files in subdirectories. This means that latex compilation artefacts will appear in the package, but `clean_vignettes` will now also remove them. (Fixes #231)
+
 * devtools now sets best practice compiler flags: from `check()`, `-Wall -pedantic` and from `load_all()`, `-Wall -pedantic -g -O0 -UNDEBUG`. These are prefixed to existing environment variables so that you can override them if desired. (Fixes #257)
 
 * `with_envvar` gains the option to either replace, prefix or suffix existing environmental variables. The default is to replace, which was the previous behaviour.
