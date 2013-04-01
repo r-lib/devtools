@@ -8,8 +8,8 @@
   \item{pkg}{package description, can be path or package
   name.  See \code{\link{as.package}} for more information}
 
-  \item{tex}{if \code{TRUE} also removes all tex build
-  artefacts}
+  \item{tex}{if \code{TRUE} also removes the tex file
+  created by Sweave.}
 }
 \description{
   Clean built vignettes.

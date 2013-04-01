@@ -6,6 +6,7 @@
 #' @param PKG_FFLAGS flags for compiling Fortran code.
 #' @param PKG_FCFLAGS flags for Fortran 9x code.
 #' @inheritParams with_envvar
+#' @inheritParams compiler_flags
 #' @family debugging flags
 #' @export
 #' @examples

@@ -20,6 +20,9 @@
   \item{action}{(for \code{with_envvar} only): should new
   values \code{"replace"}, \code{"suffix"}, \code{"prefix"}
   existing environmental variables with the same name.}
+
+  \item{debug}{If \code{TRUE} adds \code{-g -O0} to all
+  flags (Adding \env{PKG_FFLAGS} and \env{PKG_FCFLAGS}}
 }
 \description{
   Temporarily set debugging compilation flags.

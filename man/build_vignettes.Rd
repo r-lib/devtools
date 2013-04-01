@@ -14,6 +14,9 @@
 \seealso{
   \code{\link{clean_vignettes}} to remove the pdfs in
   \file{inst/doc} created from vignettes
+
+  \code{\link{clean_vignettes}} to remove build tex/pdf
+  files.
 }
 \keyword{programming}
 
