@@ -19,12 +19,15 @@
 #'   out. If \code{FALSE}, code in \code{\\testonly{}} will be commented out.
 #' @param run if \code{TRUE}, code in \code{\\dontrun{}} will be commented
 #'   out.
+#' @param fresh if \code{TRUE}, will be run in a fresh R session. This has
+#'   the advantage that there's no way the examples can depend on anything in
+#'   the current session, but interactive code (like \code{\link{browser}})
+#'   won't work.
 #' @keywords programming
 #' @export
-run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE, run = TRUE) {
+run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
+                         run = TRUE, fresh = FALSE) {
   pkg <- as.package(pkg)
-  load_all(pkg, reset = TRUE, export_all = FALSE)
-  on.exit(load_all(pkg, reset = TRUE))
   document(pkg, reload = FALSE)
 
   files <- rd_files(pkg)
@@ -40,10 +43,27 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE, run
       files <- files[- seq(1, start_pos - 1)]
     }
   }
+  if (length(files) == 0) return()
 
   message("Running ", length(files), " example files in ", pkg$package)
   rule()
-  lapply(files, run_example, show = show, test = test, run = run)
+
+  if (fresh) {
+    to_run <- bquote({
+      require("devtools", quiet = TRUE)
+      load_all(.(pkg$path), export_all = FALSE, quiet = TRUE)
+
+      lapply(.(files), devtools:::run_example,
+        show = .(show), test = .(test), run = .(run))
+      invisible()
+    })
+    eval_clean(to_run)
+  } else {
+    load_all(pkg, reset = TRUE, export_all = FALSE)
+    on.exit(load_all(pkg, reset = TRUE))
+
+    lapply(files, run_example, show = show, test = test, run = run)
+  }
 
   invisible()
 }

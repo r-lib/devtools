@@ -3,7 +3,7 @@
 \title{Run all examples in a package.}
 \usage{
   run_examples(pkg = ".", start = NULL, show = TRUE,
-    test = FALSE, run = TRUE)
+    test = FALSE, run = TRUE, fresh = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -26,6 +26,12 @@
 
   \item{run}{if \code{TRUE}, code in \code{\\dontrun{}}
   will be commented out.}
+
+  \item{fresh}{if \code{TRUE}, will be run in a fresh R
+  session. This has the advantage that there's no way the
+  examples can depend on anything in the current session,
+  but interactive code (like \code{\link{browser}}) won't
+  work.}
 }
 \description{
   One of the most frustrating parts of `R CMD check` is

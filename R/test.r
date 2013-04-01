@@ -7,19 +7,31 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @inheritParams testthat::test_dir
+#' @inheritParams run_examples
 #' @export
-test <- function(pkg = ".", filter = NULL) {
+test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
   pkg <- as.package(pkg)
-  load_all(pkg)
-  message("Testing ", pkg$package)
 
   path_test <- file.path(pkg$path, "inst", "tests")
   if (!file.exists(path_test)) return()
 
-  require(testthat)
-  # Run tests in a child of the namespace environment, like testthat::test_package
-  env <- new.env(parent = ns_env(pkg))
-  with_envvar(r_env_vars(), test_dir(path_test, filter = filter, env = env))
+  message("Testing ", pkg$package)
+  if (fresh) {
+    to_run <- bquote({
+      require("devtools", quiet = TRUE)
+      require("testthat", quiet = TRUE)
+
+      load_all(.(pkg$path), quiet = TRUE)
+      test_dir(.(path_test), filter = .(filter))
+    })
+    eval_clean(to_run)
+  } else {
+    require(testthat)
+    # Run tests in a child of the namespace environment, like testthat::test_package
+    load_all(pkg)
+    env <- new.env(parent = ns_env(pkg))
+    with_envvar(r_env_vars(), test_dir(path_test, filter = filter, env = env))
+  }
 }
 
 
