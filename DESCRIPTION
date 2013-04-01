@@ -89,3 +89,4 @@ Collate:
     'rtools.r'
     'clean.r'
     'with-debug.r'
+    'source.r'
