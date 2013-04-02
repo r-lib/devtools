@@ -1,6 +1,8 @@
 devtools 1.1.99
 -----------------
 
+* `load_data()` got an overhaul and now respects `LazyData` and correctly exports datasets by default (Fixes #242)
+
 * `run_examples` and `test` gain a `fresh` argument which forces them to run in a fresh R session. This completely insulates the examples/tests from your current session but means that interactive code (like `browser()`) won't work. (Fixes #258)
 
 * `source_url` and `source_gist` now allow you to specify a sha, so you can make sure that files you source from the internet don't change without you knowing about it. (Fixes #259)
