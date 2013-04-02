@@ -1,39 +1,71 @@
 devtools 1.1.99
 -----------------
 
-* `load_data()` got an overhaul and now respects `LazyData` and correctly exports datasets by default (Fixes #242)
+BETTER INSTALLATION
 
-* `run_examples` and `test` gain a `fresh` argument which forces them to run in a fresh R session. This completely insulates the examples/tests from your current session but means that interactive code (like `browser()`) won't work. (Fixes #258)
+* `install` gains a `local` option for installing the package from the local
+  package directory, rather than from a built tar.gz.  This is now used by 
+  default for all package installations. If you want to guarantee a clean 
+  build, run `local = FALSE`
 
-* `source_url` and `source_gist` now allow you to specify a sha, so you can make sure that files you source from the internet don't change without you knowing about it. (Fixes #259)
-
-* `build_vignettes` now builds vignettes in `inst/doc` so that latex files can refer to files in subdirectories. This means that latex compilation artefacts will appear in the package, but `clean_vignettes` will now also remove them. (Fixes #231)
-
-* devtools now sets best practice compiler flags: from `check()`, `-Wall -pedantic` and from `load_all()`, `-Wall -pedantic -g -O0 -UNDEBUG`. These are prefixed to existing environment variables so that you can override them if desired. (Fixes #257)
-
-* `with_envvar` gains the option to either replace, prefix or suffix existing environmental variables. The default is to replace, which was the previous behaviour.
+* `install` now uses option `devtools.install.args` for default installation 
+  arguments. This allows you to set any useful defaults (e.g. `--no-multiarch`)
+  in your Rprofile.
 
 * `install_git` gains `branch` argument to specify branch or tag (Fixes #255)
 
-* `check_cran` includes `sessionInfo()` in the summary output (Fixes #273)
+CLEAN SESSIONS
 
-* New functions `eval_clean` and `evalq_clean` make it easy to evaluate code in a clean R session.
+* `run_examples` and `test` gain a `fresh` argument which forces them to run 
+  in a fresh R session. This completely insulates the examples/tests from your 
+  current session but means that interactive code (like `browser()`) won't work.(Fixes #258)
 
-* `clean_source` loses the `vanilla` argument (which did not work) and gains a `quiet` argument
+* New functions `eval_clean` and `evalq_clean` make it easy to evaluate code 
+  in a clean R session.
 
-* `with_env` will be deprecated in 1.2 and removed in 1.3
+* `clean_source` loses the `vanilla` argument (which did not work) and gains 
+  a `quiet` argument
 
-* `install` gains a `local` option for installing the package from the local package directory, rather than from a built tar.gz.  This is now used by default for all package installations. If you want to guarantee a clean build, run `local = FALSE`
+NEW FEATURES
 
-* `install` now uses option `devtools.install.args` for default installation arguments. This allows you to set any useful defaults (e.g. `--no-multiarch`) in your Rprofile.
+* `source_url` and `source_gist` now allow you to specify a sha, so you can
+  make sure that files you source from the internet don't change without you 
+  knowing about it. (Fixes #259)
 
-* `check()` now also sets environment variable `_R_CHECK_CODE_DATA_INTO_GLOBALENV_` to TRUE (to match current `--as-cran` behaviour) (Fixes #256)
+* `build_vignettes` now builds vignettes in `inst/doc` so that latex files can 
+  refer to files in subdirectories. This means that latex compilation artefacts 
+  will appear in the package, but `clean_vignettes` will now also remove them. 
+  (Fixes #231)
 
-* Improved default email sent by `release()`, eliminating `create.post()` boilerplate
+* devtools now sets best practice compiler flags: from `check()`, 
+  `-Wall -pedantic` and from `load_all()`, `-Wall -pedantic -g -O0 -UNDEBUG`. 
+  These are prefixed to existing environment variables so that you can override
+  them if desired. (Fixes #257)
+
+MINOR IMPROVEMENTS
+
+* `check()` now also sets environment variable 
+  `_R_CHECK_CODE_DATA_INTO_GLOBALENV_` to TRUE (to match current `--as-cran` 
+  behaviour) (Fixes #256)
+
+* Improved default email sent by `release()`, eliminating `create.post()` 
+  boilerplate
 
 * `revdep` includes LinkingTo by default.
 
-* Fix regular expression problem that caused RTools 3.0.* to fail to be found on Windows.
+* Fixed regular expression problem that caused RTools 3.0.* to fail to be found 
+  on Windows.
+
+* `load_data()` got an overhaul and now respects `LazyData` and correctly 
+  exports datasets by default (Fixes #242)
+
+* `with_envvar` gains the option to either replace, prefix or suffix existing 
+  environmental variables. The default is to replace, which was the previous 
+  behaviour.
+
+* `check_cran` includes `sessionInfo()` in the summary output (Fixes #273)
+
+* `with_env` will be deprecated in 1.2 and removed in 1.3
 
 devtools 1.1
 -----------------
