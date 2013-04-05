@@ -18,7 +18,7 @@
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}
 
-  \item{repos}{ character vector, the base URLs of the
+  \item{repos}{ character vector, the base URL(s) of the
   repositories to use, e.g., the URL of a CRAN mirror such
   as \code{"http://cran.us.r-project.org"}.
 
