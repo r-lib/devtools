@@ -7,12 +7,6 @@
 #' A variable called \code{onLoad} is created in the package's
 #' devtools metdata to indicate that it's attached.
 #'
-#' When a package is loaded with \code{library()} it calls
-#' \code{.onLoad(libpath, pkg)}, where \code{libpath} is the library path for
-#' package, and \code{pkg} is the name of the package. Because in-development
-#' packages are not installed to a library, this function can't call
-#' \code{.onLoad} with a proper libpath, so it uses \code{NULL} instead.
-#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 run_onload <- function(pkg = ".") {
@@ -23,7 +17,14 @@ run_onload <- function(pkg = ".") {
   # Run .onLoad if it's defined. Set a flag 'onLoad' in the metadata
   if (exists(".onLoad", nsenv, inherits = FALSE) &&
      is.null(metadata$onLoad)) {
-    nsenv$.onLoad(NULL, pkg$package)
+
+    if (basename(pkg$path) != pkg$package) {
+      warning('Calling .onLoad() when the package directory "',
+        basename(pkg$path), '" does not match the package name "', pkg$package,
+        '" can result in problems. Please rename the directory to match the package name.')
+    }
+
+    nsenv$.onLoad(dirname(pkg$path), pkg$package)
     metadata$onLoad <- TRUE
   }
 }
@@ -46,7 +47,13 @@ run_onattach <- function(pkg = ".") {
   # Run .onAttach if it's defined. Set a flag 'onAttach' in the metadata
   if (exists(".onAttach", nsenv, inherits = FALSE) &&
      is.null(metadata$onAttach)) {
-    nsenv$.onAttach()
+
+    if (basename(pkg$path) != pkg$package) {
+      warning('Calling .onAttach() when the package directory "',
+        basename(pkg$path), '" does not match the package name "', pkg$package,
+        '" can result in problems. Please rename the directory to match the package name.')
+    }
+    nsenv$.onAttach(dirname(pkg$path), pkg$package)
     metadata$onAttach <- TRUE
   }
 }
