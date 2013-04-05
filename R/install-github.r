@@ -69,6 +69,7 @@ install_github <- function(repo, username = getOption("github.user"),
 }
 
 # Retrieve the username and ref for a pull request
+#' @importFrom httr parsed_content
 github_pull_info <- function(repo, username, pull) {
   host <- "https://api.github.com"
   # GET /repos/:user/:repo/pulls/:number
