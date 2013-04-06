@@ -29,22 +29,12 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
 
   # Mock install the package to generate the DLL
   if (!quiet) message("Re-compiling ", pkg$package)
-  RCMD("INSTALL", c(
-    shQuote(pkg$path),
-    paste("--library=", shQuote(tempdir()), sep = ""),
-    "--no-R",
-    "--no-data",
-    "--no-help",
-    "--no-demo",
-    "--no-inst",
-    "--no-docs",
-    "--no-multiarch",
-    "--no-test-load",
-    if (needs_clean(pkg)) "--preclean"
-  ), quiet = quiet)
+  inst <- install_min(pkg, tempdir(), components = "libs",
+    args = if (needs_clean(pkg)) "--preclean",
+    quiet = quiet)
 
   dll_name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
-  from <- file.path(tempdir(), pkg$package, "libs", .Platform$r_arch, dll_name)
+  from <- file.path("inst", "libs", .Platform$r_arch, dll_name)
   to <- dll_path(pkg)
   file.copy(from, to)
 

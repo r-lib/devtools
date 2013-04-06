@@ -90,3 +90,4 @@ Collate:
     'clean.r'
     'with-debug.r'
     'source.r'
+    'install-min.r'
