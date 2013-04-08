@@ -8,6 +8,7 @@
 #'   will be used as the package name.
 #' @param description list of description values to override default values or
 #'   add additional values.
+#' @param check if \code{TRUE}, will automatically run \code{\link{check}}
 #' @seealso Text with \code{\link{package.skeleton}}
 #' @export
 #' @examples
@@ -22,7 +23,8 @@
 #'   "'Yoni Ben-Meshulam' <yoni@@opower.com>")
 #' create(path, my_description)
 #' }
-create <- function(path, description = getOption("devtools.desc")) {
+create <- function(path, description = getOption("devtools.desc"),
+                         check = FALSE) {
   name <- basename(path)
   message("Creating package ", name, " in ", dirname(path))
 
@@ -34,12 +36,13 @@ create <- function(path, description = getOption("devtools.desc")) {
   }
 
   dir.create(path)
-  create_description(path, extra = description)
   dir.create(file.path(path, "R"))
   dir.create(file.path(path, "man"))
+  create_description(path, extra = description)
   create_package_doc(path, name)
 
-  check(path)
+  if (check) check(path)
+  invisible(TRUE)
 }
 
 #' @importFrom whisker whisker.render
