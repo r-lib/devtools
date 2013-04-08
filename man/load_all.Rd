@@ -7,7 +7,9 @@
 }
 \arguments{
   \item{pkg}{package description, can be path or package
-  name.  See \code{\link{as.package}} for more information}
+  name.  See \code{\link{as.package}} for more information.
+  If the \code{DESCRIPTION} file does not exist, it is
+  created using \code{\link{create_description}}.}
 
   \item{reset}{clear package environment and reset file
   cache before loading any pieces of the package.}

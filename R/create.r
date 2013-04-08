@@ -22,7 +22,7 @@
 #'   "'Yoni Ben-Meshulam' <yoni@@opower.com>")
 #' create(path, my_description)
 #' }
-create <- function(path, description = list()) {
+create <- function(path, description = getOption("devtools.desc")) {
   name <- basename(path)
   message("Creating package ", name, " in ", dirname(path))
 
@@ -34,20 +34,7 @@ create <- function(path, description = list()) {
   }
 
   dir.create(path)
-
-  defaults <- list(
-    Package = name,
-    Maintainer = "Who to complain to <yourfault@somewhere.net>",
-    Author = Sys.getenv("USER"),
-    Version = "1.0",
-    License = "GPL-3",
-    Title = "",
-    Description = "",
-    Suggests = "\ntestthat,\nroxygen2"
-  )
-  description <- modifyList(defaults, description)
-  write.dcf(description, file.path(path, 'DESCRIPTION'))
-
+  create_description(path, extra = description)
   dir.create(file.path(path, "R"))
   dir.create(file.path(path, "man"))
   create_package_doc(path, name)

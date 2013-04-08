@@ -40,9 +40,9 @@
 #' package sources have different directory structures. Note that this is not
 #' a perfect replacement for \code{base::system.file}.
 #'
-#'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
+#'   \code{\link{as.package}} for more information. If the \code{DESCRIPTION}
+#'   file does not exist, it is created using \code{\link{create_description}}.
 #' @param reset clear package environment and reset file cache before loading
 #'   any pieces of the package.
 #' @param recompile force a recompile of DLL from source code, if present.
@@ -74,7 +74,10 @@
 load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
   export_all = TRUE, quiet = FALSE) {
 
-  pkg <- as.package(pkg)
+  if (!is.package(pkg)) {
+    create_description(pkg)
+    pkg <- as.package(pkg)
+  }
 
   if (!quiet) message("Loading ", pkg$package)
 
@@ -151,4 +154,46 @@ load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
   run_onattach(pkg)
 
   invisible(out)
+}
+
+
+#' Create a default DESCRIPTION file for a package.
+#'
+#' @details
+#' To set the default author and licenses, set \code{options}
+#' \code{devtool.author} and \code{devtool.license}.  I use
+#' \code{options(devtools.author = '"Hadley Wickham <h.wickham@gmail.com> [aut,cre]"',
+#'   devtools.license = "GPL-3")}.
+#' @export
+#' @importFrom whisker whisker.render
+create_description <- function(path, extra = getOption("devtools.desc"),
+                               quiet = FALSE) {
+  path <- find_package(path, FALSE)
+  desc_path <- file.path(path, "DESCRIPTION")
+
+  if (file.exists(desc_path)) return(FALSE)
+  template <- readLines(system.file("templates", "DESCRIPTION",
+    package = "devtools"))
+  out <- whisker.render(template, description_vals(path, extra))
+
+  if (!quiet) {
+    message("No DESCRIPTION found. Creating default:\n" ,
+      paste(out, collapse = "\n"))
+  }
+
+  writeLines(out, desc_path)
+
+  TRUE
+}
+
+description_vals <- function(path, extra = NULL) {
+  list(
+    name = basename(path),
+    author = getOption("devtools.desc.author"),
+    r_version = as.character(getRversion()),
+    license = getOption("devtools.desc.license"),
+    suggests = paste(getOption("devtools.desc.suggests"), collapse = ","),
+    extra = if (length(extra) > 0)
+      paste0(names(extra), ": ", unlist(extra), collapse = "\n")
+  )
 }

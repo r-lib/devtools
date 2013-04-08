@@ -2,7 +2,7 @@
 \alias{create}
 \title{Creates a new package, following all devtools package conventions.}
 \usage{
-  create(path, description = list())
+  create(path, description = getOption("devtools.desc"))
 }
 \arguments{
   \item{path}{location to create new package.  The last
