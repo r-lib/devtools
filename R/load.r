@@ -29,7 +29,7 @@
 #' objects easy to access.
 #'
 #' To export only the objects listed as exports, use
-#' \code{export_all=TRUE}. This more closely simulates behavior when
+#' \code{export_all=FALSE}. This more closely simulates behavior when
 #' loading an installed package with \code{\link{library}}, and can be
 #' useful for checking for missing exports.
 #'
