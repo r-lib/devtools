@@ -2,11 +2,17 @@ a <- 1
 b <- 1
 c <- 1
 
+onload_lib <- ""
+onattach_lib <- ""
+
 .onLoad <- function(lib, pkg) {
+  onload_lib <<- lib
   a <<- a + 1
 }
 
 .onAttach <- function(lib, pkg) {
+  onattach_lib <<- lib
+
   # Attempt to modify b in namespace. This should throw an error
   # in a real install+load because namespace is locked. But with
   # load_all, it will work because the namespace doesn't get locked.
