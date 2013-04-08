@@ -6,10 +6,10 @@ Authors@R: c(
     email = "h.wickham@gmail.com", role = c("aut", "cre")),
     person("Winston", "Chang", role = "aut"),
     person("R Core team", role = "ctb",
-    comment = "Namespace related code extracted out of base R"))
+    comment = "Some namespace and vignette code extracted from base R"))
 Description: Collection of package development tools
 Depends:
-    R (>= 2.15)
+    R (>= 3.0)
 Imports:
     httr,
     RCurl,
@@ -91,3 +91,4 @@ Collate:
     'with-debug.r'
     'source.r'
     'install-min.r'
+    'vignette-r.r'

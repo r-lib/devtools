@@ -1,0 +1,10 @@
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{Test vignette}
+-->
+
+This is a test.
+
+```{r}
+1 + 2
+```

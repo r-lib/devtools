@@ -9,7 +9,10 @@
   name.  See \code{\link{as.package}} for more information}
 }
 \description{
-  Sweave and latex package vignettes.
+  Builds package vignettes using the same algorithm that
+  \code{R CMD build} does. This means includes non-Sweave
+  vignettes, using make files (if present), and copying
+  over extra files.
 }
 \seealso{
   \code{\link{clean_vignettes}} to remove the pdfs in

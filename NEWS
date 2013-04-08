@@ -32,10 +32,11 @@ NEW FEATURES
   make sure that files you source from the internet don't change without you 
   knowing about it. (Fixes #259)
 
-* `build_vignettes` now builds vignettes in `inst/doc` so that latex files can 
-  refer to files in subdirectories. This means that latex compilation artefacts 
-  will appear in the package, but `clean_vignettes` will now also remove them. 
-  (Fixes #231)
+* `build_vignettes` builds using `buildVignette()` and movies/copies outputs
+  using the same algorithm as `R CMD build`. This means that `build_vignettes()`
+  should now exactly mimic R's regular behaviour, including building non-Sweave
+  vignettes (#277), building in the correct directory (#231), using make 
+  files (if present), and copying over extra files.
 
 * devtools now sets best practice compiler flags: from `check()`, 
   `-Wall -pedantic` and from `load_all()`, `-Wall -pedantic -g -O0 -UNDEBUG`. 
