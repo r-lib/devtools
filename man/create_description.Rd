@@ -13,6 +13,7 @@
   \code{options} \code{devtool.author} and
   \code{devtool.license}.  I use
   \code{options(devtools.author = '"Hadley Wickham
-  <h.wickham
+  <h.wickham@gmail.com> [aut,cre]"', devtools.license =
+  "GPL-3")}.
 }
 

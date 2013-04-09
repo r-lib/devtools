@@ -162,7 +162,7 @@ load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
 #' @details
 #' To set the default author and licenses, set \code{options}
 #' \code{devtool.author} and \code{devtool.license}.  I use
-#' \code{options(devtools.author = '"Hadley Wickham <h.wickham@gmail.com> [aut,cre]"',
+#' \code{options(devtools.author = '"Hadley Wickham <h.wickham@@gmail.com> [aut,cre]"',
 #'   devtools.license = "GPL-3")}.
 #' @export
 #' @importFrom whisker whisker.render
