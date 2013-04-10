@@ -43,6 +43,11 @@ NEW FEATURES
   These are prefixed to existing environment variables so that you can override
   them if desired. (Fixes #257)
 
+* If there's no `DESCRIPTION` file present, `load_all()` will automatically 
+  create one using `create_description()`.  You can set options in your 
+  `.Rprofile` to control what it contains: see `package?devtools` for more
+  details.
+
 MINOR IMPROVEMENTS
 
 * `check()` now also sets environment variable 
@@ -65,6 +70,8 @@ MINOR IMPROVEMENTS
   behaviour.
 
 * `check_cran` includes `sessionInfo()` in the summary output (Fixes #273)
+
+* `create()` gains a `check` argument which defaults to FALSE.
 
 * `with_env` will be deprecated in 1.2 and removed in 1.3
 

@@ -1,0 +1,10 @@
+Package: {{{name}}}
+Title: 
+Version: 0.1
+Authors@R: {{{author}}}
+Description: 
+Depends:
+    R (>= {{{r_version}}})
+License: {{{license}}}
+Suggests: {{{suggests}}}
+{{{extra}}}

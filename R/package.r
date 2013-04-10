@@ -20,7 +20,7 @@ as.package <- function(x = NULL) {
 }
 
 
-find_package <- function(x) {
+find_package <- function(x, check_desc = TRUE) {
   if (is.null(x)) return(FALSE)
 
   # Strip trailing slashes (needed only for windows)
@@ -35,7 +35,7 @@ find_package <- function(x) {
   }
 
   desc_path <- file.path(x, "DESCRIPTION")
-  if (!file.exists(desc_path)) {
+  if (check_desc && !file.exists(desc_path)) {
     stop("No DESCRIPTION file found in ", x, call. = FALSE)
   }
 
@@ -58,6 +58,7 @@ load_pkg_description <- function(path) {
 
   structure(desc, class = "package")
 }
+
 
 #' Is the object a package?
 #' @keywords internal
