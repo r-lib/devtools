@@ -2,7 +2,8 @@
 \alias{create}
 \title{Creates a new package, following all devtools package conventions.}
 \usage{
-  create(path, description = list())
+  create(path, description = getOption("devtools.desc"),
+    check = FALSE)
 }
 \arguments{
   \item{path}{location to create new package.  The last
@@ -10,6 +11,9 @@
 
   \item{description}{list of description values to override
   default values or add additional values.}
+
+  \item{check}{if \code{TRUE}, will automatically run
+  \code{\link{check}}}
 }
 \description{
   Similar to \code{\link{package.skeleton}}, except that it
