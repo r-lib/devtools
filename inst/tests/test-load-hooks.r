@@ -5,6 +5,9 @@ test_that("onLoad and onAttach", {
   nsenv <- ns_env("testLoadHooks")
   pkgenv <- pkg_env("testLoadHooks")
 
+  expect_equal(nsenv$onload_lib, getwd())
+  expect_equal(nsenv$onattach_lib, getwd())
+
   # a: modified by onLoad in namespace env
   # b: modified by onAttach in namespace env
   # c: modified by onAttach in package env
