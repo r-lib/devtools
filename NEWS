@@ -33,10 +33,10 @@ NEW FEATURES
   knowing about it. (Fixes #259)
 
 * `build_vignettes` builds using `buildVignette()` and movies/copies outputs
-  using the same algorithm as `R CMD build`. This means that `build_vignettes()`
-  should now exactly mimic R's regular behaviour, including building non-Sweave
-  vignettes (#277), building in the correct directory (#231), using make 
-  files (if present), and copying over extra files.
+  using the same algorithm as `R CMD build`. This means that 
+  `build_vignettes()` now exactly mimics R's regular behaviour, including 
+  building non-Sweave vignettes (#277), building in the correct directory 
+  (#231), using make files (if present), and copying over extra files.
 
 * devtools now sets best practice compiler flags: from `check()`, 
   `-Wall -pedantic` and from `load_all()`, `-Wall -pedantic -g -O0 -UNDEBUG`. 
@@ -59,8 +59,8 @@ MINOR IMPROVEMENTS
 
 * `revdep` includes LinkingTo by default.
 
-* Fixed regular expression problem that caused RTools 3.0.* to fail to be found 
-  on Windows.
+* Fixed regular expression problem that caused RTools 3.0.* to fail to be 
+  found on Windows.
 
 * `load_data()` got an overhaul and now respects `LazyData` and correctly 
   exports datasets by default (Fixes #242)
