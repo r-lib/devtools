@@ -10,7 +10,7 @@
 #' Devtools uses the following \code{\link{options}} to configure behaviour:
 #'
 #' \itemize{
-#'   \item \code{devtools.path}: path to use for \code{\link{devmode}}
+#'   \item \code{devtools.path}: path to use for \code{\link{dev_mode}}
 #'
 #'   \item \code{devtools.cleandoc}: a single logical value determining whether
 #'     the contents of the file{man/} directory are deleted by

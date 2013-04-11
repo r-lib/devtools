@@ -164,6 +164,9 @@ load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
 #' \code{devtool.author} and \code{devtool.license}.  I use
 #' \code{options(devtools.author = '"Hadley Wickham <h.wickham@@gmail.com> [aut,cre]"',
 #'   devtools.license = "GPL-3")}.
+#' @param path path to package root directory
+#' @param extra a named list of extra options to add to \file{DESCRIPTION}
+#' @param quiet if \code{TRUE}, suppresses output from this function.
 #' @export
 #' @importFrom whisker whisker.render
 create_description <- function(path, extra = getOption("devtools.desc"),

@@ -11,7 +11,7 @@
   configure behaviour:
 
   \itemize{ \item \code{devtools.path}: path to use for
-  \code{\link{devmode}}
+  \code{\link{dev_mode}}
 
   \item \code{devtools.cleandoc}: a single logical value
   determining whether the contents of the file{man/}

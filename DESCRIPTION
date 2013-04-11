@@ -24,7 +24,8 @@ Suggests:
     roxygen2,
     BiocInstaller,
     Rcpp (>= 0.10.0),
-    MASS
+    MASS,
+    knitr
 License: GPL (>= 2)
 Collate:
     'bash.r'

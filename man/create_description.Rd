@@ -5,6 +5,15 @@
   create_description(path,
     extra = getOption("devtools.desc"), quiet = FALSE)
 }
+\arguments{
+  \item{path}{path to package root directory}
+
+  \item{extra}{a named list of extra options to add to
+  \file{DESCRIPTION}}
+
+  \item{quiet}{if \code{TRUE}, suppresses output from this
+  function.}
+}
 \description{
   Create a default DESCRIPTION file for a package.
 }
