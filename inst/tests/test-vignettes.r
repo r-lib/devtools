@@ -44,6 +44,11 @@ test_that("Extra files copied and removed", {
   pkg <- as.package("testVignetteExtras")
   doc_path <- file.path(pkg$path, "inst", "doc")
 
+  extras_path <- file.path("testVignetteExtras", "vignettes",
+    ".install_extras")
+  writeLines("a.r", extras_path)
+  on.exit(unlink(extras_path))
+
   clean_vignettes(pkg)
   expect_false("a.r" %in% dir(doc_path))
 
