@@ -6,6 +6,7 @@
 #' @examples
 #' dev_meta("stats") # NULL
 #'
+#' if (has_tests()) {
 #' # Load the test package in directory "testLoadHooks"
 #' load_all(devtest("testLoadHooks"))
 #'
@@ -15,6 +16,7 @@
 #'
 #' # Clean up.
 #' unload(devtest("testLoadHooks"))
+#' }
 #' @export
 dev_meta <- function(name) {
   ns <- get_namespace(as.name(name))

@@ -12,6 +12,8 @@
   This function returns the path to them.
 }
 \examples{
+if (has_tests()) {
 devtest("collate-extra")
+}
 }
 

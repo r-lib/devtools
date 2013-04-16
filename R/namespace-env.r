@@ -117,7 +117,9 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @examples
+#' if (has_tests()) {
 #' parse_ns_file(devtest("testLoadHooks"))
+#' }
 #' @export
 parse_ns_file <- function(pkg = ".") {
   pkg <- as.package(pkg)

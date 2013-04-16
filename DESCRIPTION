@@ -93,3 +93,4 @@ Collate:
     'source.r'
     'install-min.r'
     'vignette-r.r'
+    'has-tests.r'

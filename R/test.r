@@ -42,8 +42,9 @@ test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
 #'
 #' @param package Name of the test package.
 #' @examples
+#' if (has_tests()) {
 #' devtest("collate-extra")
-#'
+#' }
 #' @export
 devtest <- function(package) {
   if (is.null(dev_meta("devtools"))) {
