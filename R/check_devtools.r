@@ -32,7 +32,7 @@ check_pkg_extra_files <- function(pkgname, built_path) {
     "man", "po", "src", "tests")
   # Files that are optional in a source package, according to the doc
   opt_files <- c("INDEX", "NAMESPACE", "configure", "cleanup", "LICENSE",
-    "LICENCE", "NEWS")
+    "LICENCE", "NEWS", ".Rinstignore")
 
   # These are other common files in a source package
   other_files <- c("", "build", "CHANGELOG", "INSTALL", "README",
