@@ -11,6 +11,7 @@ Description: Collection of package development tools
 Depends:
     R (>= 3.0)
 Imports:
+    digest,
     httr,
     RCurl,
     utils,
