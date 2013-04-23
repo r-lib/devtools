@@ -16,6 +16,7 @@
 #' @param url url
 #' @param ... other options passed to \code{\link{source}}
 #' @param sha1 The SHA-1 hash of the file at the remote URL
+#' @import digest
 #' @importFrom httr GET stop_for_status text_content
 #' @export
 #' @examples
