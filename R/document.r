@@ -19,7 +19,7 @@ document <- function(pkg = ".", clean = FALSE,
   message("Updating ", pkg$package, " documentation")
 
   man_path <- file.path(pkg$path, "man")
-  if (!file.exists(pkg$path)) dir.create(man_path)
+  if (!file.exists(man_path)) dir.create(man_path)
 
   if (clean) {
     roxygen2:::clear_caches()

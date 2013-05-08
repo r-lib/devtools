@@ -1,6 +1,8 @@
 devtools 1.2.99
 -----------------
 
+* Fix bug so that `document()` will automatically create `man/` directory
+
 * default `DESCRIPTION` gains `LazyData: true`
 
 * `create_description()` now checks that the directory is probably a package 
