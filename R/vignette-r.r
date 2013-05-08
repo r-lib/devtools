@@ -35,7 +35,7 @@ copy_vignettes <- function(pkg) {
   file.copy(out_mv, doc_dir)
   file.remove(out_mv)
 
-  message("Copy ", paste(basename(out_cp), collapse = ", "), " to inst/doc/")
+  message("Copying ", paste(basename(out_cp), collapse = ", "), " to inst/doc/")
   file.copy(out_cp, doc_dir)
 
   # Copy extra files, if needed
