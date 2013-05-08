@@ -1,6 +1,8 @@
 devtools 1.2.99
 -----------------
 
+* default `DESCRIPTION` gains `LazyData: true`
+
 * `create_description()` now checks that the directory is probably a package 
   by looking for `R/`, `data/` or `src/` directories
 

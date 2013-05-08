@@ -7,4 +7,5 @@ Depends:
     R (>= {{{r_version}}})
 License: {{{license}}}
 Suggests: {{{suggests}}}
+LazyData: true
 {{{extra}}}
