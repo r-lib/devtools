@@ -175,6 +175,13 @@ create_description <- function(path, extra = getOption("devtools.desc"),
   desc_path <- file.path(path, "DESCRIPTION")
 
   if (file.exists(desc_path)) return(FALSE)
+
+  subdir <- file.path(path, c("R", "src", "data"))
+  if (!any(file.exists(subdir))) {
+    stop(path, " does not look like a package: no R/, src/ or data directories",
+      call. = FALSE)
+  }
+
   template <- readLines(system.file("templates", "DESCRIPTION",
     package = "devtools"))
   out <- whisker.render(template, description_vals(path, extra))

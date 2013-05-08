@@ -1,6 +1,8 @@
 devtools 1.2.99
 -----------------
 
+* `create_description()` now checks that the directory is probably a package 
+  by looking for `R/`, `data/` or `src/` directories
 
 devtools 1.2
 -----------------
