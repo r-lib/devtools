@@ -9,7 +9,7 @@ Authors@R: c(
     comment = "Some namespace and vignette code extracted from base R"))
 Description: Collection of package development tools
 Depends:
-    R (>= 3.0)
+    R (>= 2.15)
 Imports:
     httr,
     RCurl,

@@ -8,6 +8,8 @@ devtools 1.2.99
 * `create_description()` now checks that the directory is probably a package 
   by looking for `R/`, `data/` or `src/` directories
 
+* Rolled back required R version from 3.0 to 2.15.
+
 devtools 1.2
 -----------------
 
