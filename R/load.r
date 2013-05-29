@@ -182,16 +182,28 @@ create_description <- function(path, extra = getOption("devtools.desc"),
       call. = FALSE)
   }
 
-  template <- readLines(system.file("templates", "DESCRIPTION",
-    package = "devtools"))
-  out <- whisker.render(template, description_vals(path, extra))
+  desc <- list(
+    Package = basename(path),
+    Title = "",
+    Description = "",
+    Version = "0.1",
+    "Authors@R" = getOption("devtools.desc.author"),
+    Depends = paste0("R (>= ", as.character(getRversion()) ,")"),
+    License = getOption("devtools.desc.license")
+  )
+  suggests <- getOption("devtools.desc.suggests")
+  if (length(suggests) > 0) {
+    desc$Suggests <- paste(getOption("devtools.desc.suggests"), collapse = ",")
+  }
+  desc <- c(desc, extra)
 
+  lines <- paste0(names(desc), ": ", unlist(desc))
   if (!quiet) {
     message("No DESCRIPTION found. Creating default:\n" ,
-      paste(out, collapse = "\n"))
+      paste(lines, collapse = "\n"))
   }
-
-  writeLines(out, desc_path)
+  browser()
+  writeLines(lines, desc_path)
 
   TRUE
 }
