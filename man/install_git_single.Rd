@@ -3,7 +3,8 @@
 \title{Install a single package from a git repository}
 \usage{
   install_git_single(git_url, name = NULL, subdir = NULL,
-    branch = NULL, git_binary = NULL, ...)
+    branch = NULL, git_binary = NULL, recursive = FALSE,
+    ...)
 }
 \arguments{
   \item{git_url}{Location of package. The url should point
@@ -16,8 +17,14 @@
   that may contain the package we are interested in
   installing.}
 
+  \item{branch}{Name of branch or tag to use, if not
+  master.}
+
   \item{git_binary}{A custom git-binary to use instead of
   default system's git version.}
+
+  \item{recursive}{Clone git repository recursively with
+  all submodules.}
 
   \item{...}{passed on to \code{\link{install}}}
 }

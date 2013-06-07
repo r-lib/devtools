@@ -15,7 +15,8 @@
 #' @param git_binary A custom git-binary to use instead of default system's git
 #'                   version.
 #' @param branch  Name of branch or tag to use, if not master.
-#' @param ...        Other arguments passed on to \code{\link{install}}.
+#' @param recursive Clone git repository recursively with all submodules.
+#' @param ...  Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
 #' @examples
@@ -24,7 +25,7 @@
 #' install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
 #'}
 install_git <- function(git_url, name = NULL, subdir = NULL,
-  branch = NULL, git_binary = NULL, ...) {
+  branch = NULL, git_binary = NULL, recursive = FALSE, ...) {
 
   if (is.null(name)) {
     name <- rep(list(NULL), length(git_url))
@@ -49,12 +50,14 @@ install_git <- function(git_url, name = NULL, subdir = NULL,
 #'                messages.
 #' @param subdir  A sub-directory withing a git repository that may
 #'                contain the package we are interested in installing.
+#' @param branch  Name of branch or tag to use, if not master.
 #' @param git_binary A custom git-binary to use instead of default system's git
 #'                   version.
+#' @param recursive Clone git repository recursively with all submodules.
 #' @param ... passed on to \code{\link{install}}
 #' @keywords internal
 install_git_single <- function(git_url, name = NULL, subdir = NULL,
-  branch = NULL, git_binary = NULL, ...) {
+  branch = NULL, git_binary = NULL, recursive = FALSE, ...) {
 
   if (is.null(name)) {
     name <- gsub("\\.git$", "", basename(git_url))
@@ -73,6 +76,7 @@ install_git_single <- function(git_url, name = NULL, subdir = NULL,
   #        and repositories with the public SSH key set.
   args <- c('clone', '--depth', '1', '--no-hardlinks')
   if (!is.null(branch)) args <- c(args, "--branch", branch)
+  if (recursive) args <- c(args, "--recursive")
   args <- c(args, git_url, bundle)
 
   request <- system2(git_binary_path, args, stdout = FALSE, stderr = FALSE)

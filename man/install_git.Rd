@@ -3,7 +3,8 @@
 \title{Install a package from a git repository}
 \usage{
   install_git(git_url, name = NULL, subdir = NULL,
-    branch = NULL, git_binary = NULL, ...)
+    branch = NULL, git_binary = NULL, recursive = FALSE,
+    ...)
 }
 \arguments{
   \item{git_url}{Location of package. The url should point
@@ -21,6 +22,9 @@
 
   \item{branch}{Name of branch or tag to use, if not
   master.}
+
+  \item{recursive}{Clone git repository recursively with
+  all submodules.}
 
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}
