@@ -10,6 +10,8 @@ devtools 1.2.99
 
 * Rolled back required R version from 3.0 to 2.15.
 
+* Add missing import for `digest()`
+
 devtools 1.2
 -----------------
 

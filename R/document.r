@@ -11,6 +11,7 @@
 #'   introspection on the code objects to determine how to document them.
 #' @keywords programming
 #' @export
+#' @importFrom digest digest
 document <- function(pkg = ".", clean = FALSE,
   roclets = c("collate", "namespace", "rd"), reload = TRUE) {
 

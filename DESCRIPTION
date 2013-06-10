@@ -18,7 +18,8 @@ Imports:
     methods,
     memoise,
     whisker,
-    evaluate
+    evaluate,
+    digest
 Suggests:
     testthat,
     roxygen2,
