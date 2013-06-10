@@ -1,6 +1,11 @@
 devtools 1.2.99
 ----------------
 
+* `load_all` now defaults to `reset = TRUE` so that changes to the NAMESPACE
+  etc are incorporated. This makes it slightly slower (but hopefully not 
+  noticeably so), and generally more accurate, and a better simulation of 
+  the install + restart + reload cycle.
+
 * New `install_local` function for installing local package files 
  (as zip, tar, tgz, etc.) (Suggested by landroni)
 

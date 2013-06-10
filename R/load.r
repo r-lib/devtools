@@ -71,7 +71,7 @@
 #' load_all("./", export_all = FALSE)
 #' }
 #' @export
-load_all <- function(pkg = ".", reset = FALSE, recompile = FALSE,
+load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   export_all = TRUE, quiet = FALSE) {
 
   if (!is.package(pkg)) {

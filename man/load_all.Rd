@@ -2,7 +2,7 @@
 \alias{load_all}
 \title{Load complete package.}
 \usage{
-  load_all(pkg = ".", reset = FALSE, recompile = FALSE,
+  load_all(pkg = ".", reset = TRUE, recompile = FALSE,
     export_all = TRUE, quiet = FALSE)
 }
 \arguments{
