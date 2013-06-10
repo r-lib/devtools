@@ -103,26 +103,27 @@ install_git_single <- function(git_url, name = NULL, subdir = NULL,
 #' Retrieve the current running path of the git binary.
 #' @param git_binary_name The name of the binary depending on the OS.
 git_path <- function(git_binary_name = NULL) {
-  os_type     <- .Platform$OS.type
-
+  # Use user supplied path
   if (!is.null(git_binary_name)) {
     if (!file.exists(git_binary_name)) {
-      stop(
-        "The Git binary you specified ",
-        "does not appear to be installed on ",
-        "your system.", call. = FALSE
-      )
+      stop("Path ", git_binary_name, " does not exist", .call = FALSE)
     }
-    git_path <- git_binary_name
-  } else {
-    # Decide on system default.
-    binary_name <- if (.Platform$OS.type == "windows") "git.exe" else "git"
-    git_path    <- unname(Sys.which(binary_name))
-
-    if (git_path == "") {
-      stop("Git does not seem to be installed on your system.", call. = FALSE)
-    }
+    return(git_binary_name)
   }
 
-  git_path
+  # Look on path
+  git_path <- Sys.which("git")[[1]]
+  if (git_path != "") return(git_path)
+
+  # On Windows, look in common locations
+  if (.Platform$OS.type == "windows") {
+    look_in <- c(
+      "C:/Program Files/Git/bin/git.exe",
+      "C:/Program Files (x86)/Git/bin/git.exe"
+    )
+    found <- file.exists(look_in)
+    if (any(found)) return(look_in[found][1])
+  }
+
+  stop("Git does not seem to be installed on your system.", call. = FALSE)
 }

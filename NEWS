@@ -1,5 +1,7 @@
 devtools 1.2.99
------------------
+----------------
+
+* Better git detection on windows (thanks to Mikhail Titov) 
 
 * Fix bug so that `document()` will automatically create `man/` directory
 
