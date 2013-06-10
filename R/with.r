@@ -79,9 +79,6 @@ with_envvar <- function(new, code, action = "replace") {
   force(code)
 }
 
-
-with_something(set_envvar)
-
 #' @rdname with_something
 #' @export
 with_env <- function(new, code) {
