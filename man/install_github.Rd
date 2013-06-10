@@ -23,12 +23,12 @@
 
   \item{branch}{Deprecated. Use \code{ref} instead.}
 
-  \item{auth_user}{your github username if you're
+  \item{auth_user}{your account username if you're
   attempting to install a package hosted in a private
   repository (and your username is different to
   \code{username})}
 
-  \item{password}{your github password}
+  \item{password}{your password}
 
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}

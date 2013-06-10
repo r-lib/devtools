@@ -3,7 +3,7 @@
 \title{Install a package directly from bitbucket}
 \usage{
   install_bitbucket(repo, username, ref = "master",
-    branch = NULL, ...)
+    branch = NULL, auth_user = NULL, password = NULL, ...)
 }
 \arguments{
   \item{username}{bitbucket username}
@@ -15,6 +15,13 @@
 
   \item{branch}{Deprecated. Use \code{ref} instead.}
 
+  \item{auth_user}{your account username if you're
+  attempting to install a package hosted in a private
+  repository (and your username is different to
+  \code{username})}
+
+  \item{password}{your password}
+
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}
 }
@@ -25,10 +32,13 @@
 \examples{
 \dontrun{
 install_bitbucket("paulhiemstra")
-install_bitbucket(c("testrepo", "testrepo2")
+install_bitbucket(c("testrepo", "testrepo2"))
 }
 }
 \seealso{
+  Bitbucket API docs:
+  \url{https://confluence.atlassian.com/display/BITBUCKET/Use+the+Bitbucket+REST+APIs}
+
   Other package installation: \code{\link{install}},
   \code{\link{install_git}}, \code{\link{install_github}},
   \code{\link{install_gitorious}},

@@ -12,10 +12,10 @@
 #'   them must be \code{NULL}.
 #' @param subdir subdirectory within repo that contains the R package.
 #' @param branch Deprecated. Use \code{ref} instead.
-#' @param auth_user your github username if you're attempting to install
+#' @param auth_user your account username if you're attempting to install
 #'   a package hosted in a private repository (and your username is different
 #'   to \code{username})
-#' @param password your github password
+#' @param password your password
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation

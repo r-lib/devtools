@@ -1,6 +1,9 @@
 devtools 1.2.99
 ----------------
 
+* `install_bitbucket` gains `auth_user` and `password` params so that you can
+  install from private repos (thanks to Brian Bolt)
+
 * Better git detection on windows (thanks to Mikhail Titov) 
 
 * Fix bug so that `document()` will automatically create `man/` directory
