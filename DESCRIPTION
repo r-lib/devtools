@@ -95,3 +95,4 @@ Collate:
     'install-min.r'
     'vignette-r.r'
     'has-tests.r'
+    'install-local.r'

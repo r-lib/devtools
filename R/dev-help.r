@@ -38,7 +38,6 @@ dev_help <- function(topic, stage = "render", type = getOption("help_type")) {
 #'   This is particular useful if you're checking macros and want to simulate
 #'   what happens when the package is built (\code{stage = "build"})
 #' @export
-#' @importFrom tools file_ext
 #' @importFrom tools Rd2txt
 show_rd <- function(pkg = ".", file, ...) {
   .Deprecated("dev_help")

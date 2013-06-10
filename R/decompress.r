@@ -1,8 +1,13 @@
 decompress <- function(src, target = tempdir()) {
+  stopifnot(file.exists(src))
 
   if (grepl("\\.zip$", src)) {
     unzip(src, exdir = target)
     outdir <- getdir(as.character(unzip(src, list = TRUE)$Name[1]))
+
+  } else if (grepl("\\.tar$", src)) {
+    untar(src, exdir = target)
+    outdir <- getdir(untar(src, list = TRUE)[1])
 
   } else if (grepl("\\.(tar\\.gz|tgz)$", src)) {
     untar(src, exdir = target, compressed = "gzip")

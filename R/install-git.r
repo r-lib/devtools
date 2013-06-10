@@ -82,21 +82,7 @@ install_git_single <- function(git_url, name = NULL, subdir = NULL,
     stop("There seems to be a problem retrieving this Git-URL.", call. = FALSE)
   }
 
-  pkg_path <- if (is.null(subdir)) bundle else file.path(bundle, subdir)
-  on.exit(unlink(bundle), add = TRUE)
-
-  # Check it's an R package
-  if (!file.exists(file.path(pkg_path, "DESCRIPTION"))) {
-    stop("Does not appear to be an R package", call. = FALSE)
-  }
-
-  config_path <- file.path(pkg_path, "configure")
-  if (file.exists(config_path)) {
-    Sys.chmod(config_path, "755")
-  }
-
-  # Install
-  install(pkg_path, local = TRUE, ...)
+  install_local_single(bundle, subdir = subdir, ...)
 }
 
 

@@ -28,7 +28,7 @@ install_url_single <- function(url, name = NULL, subdir = NULL, config = list(),
     name <- basename(url)
   }
 
-  message("Installing ", name, " from ", url)
+  message("Downloading ", name, " from ", url)
   bundle <- file.path(tempdir(), name)
 
   # Download package file
@@ -37,21 +37,6 @@ install_url_single <- function(url, name = NULL, subdir = NULL, config = list(),
   writeBin(content(request), bundle)
   on.exit(unlink(bundle), add = TRUE)
 
-  unbundle <- decompress(bundle)
-  on.exit(unlink(unbundle), add = TRUE)
-
-  pkg_path <- if (is.null(subdir)) unbundle else file.path(unbundle, subdir)
-
-  # Check it's an R package
-  if (!file.exists(file.path(pkg_path, "DESCRIPTION"))) {
-    stop("Does not appear to be an R package", call. = FALSE)
-  }
-
-  config_path <- file.path(pkg_path, "configure")
-  if (file.exists(config_path)) {
-    Sys.chmod(config_path, "777")
-  }
-
-  # Install
-  install(pkg_path, local = TRUE, ...)
+  # Install local file
+  install_local_single(bundle, subdir = subdir, ...)
 }
