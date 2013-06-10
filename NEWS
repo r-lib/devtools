@@ -12,6 +12,8 @@ devtools 1.2.99
 
 * Add missing import for `digest()`
 
+* Bump max compatible version of R with RTools 3.0
+
 devtools 1.2
 -----------------
 
