@@ -202,7 +202,7 @@ create_description <- function(path, extra = getOption("devtools.desc"),
     message("No DESCRIPTION found. Creating default:\n" ,
       paste(lines, collapse = "\n"))
   }
-  browser()
+
   writeLines(lines, desc_path)
 
   TRUE
