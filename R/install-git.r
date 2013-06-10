@@ -119,6 +119,12 @@ git_path <- function(git_binary_name = NULL) {
     binary_name <- if (.Platform$OS.type == "windows") "git.exe" else "git"
     git_path    <- unname(Sys.which(binary_name))
 
+    if ("" == git_path && "windows" == .Platform$OS.type) {
+      ## check most common locations on Windows
+      ppath <- c("C:/Program Files/Git/bin/git.exe", "C:/Program Files (x86)/Git/bin/git.exe", "")
+      git_path <- ppath[which.max(c(file.exists(ppath[1:2]), TRUE))]
+    }
+
     if (git_path == "") {
       stop("Git does not seem to be installed on your system.", call. = FALSE)
     }
