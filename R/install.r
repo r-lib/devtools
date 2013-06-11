@@ -20,17 +20,22 @@
 #'   arguments to bew passed to \code{R CMD install}. This defaults to the
 #'   value of the option \code{"devtools.install.args"}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
+#' @param dependencies \code{logical} indicating to also install uninstalled
+#'   packages which this \code{pkg} depends on/links to/suggests. See
+#'   argument \code{dependencies} of \code{\link{install.packages}}.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
 #'   set.
 #' @importFrom utils install.packages
 install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
-                    args = getOption("devtools.install.args"), quiet = FALSE) {
+                    args = getOption("devtools.install.args"), quiet = FALSE,
+                    dependencies = NA) {
+
   pkg <- as.package(pkg)
 
   if (!quiet) message("Installing ", pkg$package)
-  install_deps(pkg)
+  install_deps(pkg, dependencies = dependencies)
 
   # Build the package. If quick==TRUE, don't build vignettes
   if (local) {
@@ -55,7 +60,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   invisible(TRUE)
 }
 
-install_deps <- function(pkg = ".") {
+install_deps <- function(pkg = ".", dependencies = NA) {
   pkg <- as.package(pkg)
   deps <- c(parse_deps(pkg$depends)$name, parse_deps(pkg$imports)$name,
     parse_deps(pkg$linkingto)$name)
@@ -68,7 +73,7 @@ install_deps <- function(pkg = ".") {
 
   message("Installing dependencies for ", pkg$package, ":\n",
     paste(deps, collapse = ", "))
-  install.packages(deps)
+  install.packages(deps, dependencies = dependencies)
   invisible(deps)
 }
 

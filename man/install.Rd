@@ -5,7 +5,7 @@
   install(pkg = ".", reload = TRUE, quick = FALSE,
     local = TRUE,
     args = getOption("devtools.install.args"),
-    quiet = FALSE)
+    quiet = FALSE, dependencies = NA)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -31,6 +31,11 @@
 
   \item{quiet}{if \code{TRUE} suppresses output from this
   function.}
+
+  \item{dependencies}{\code{logical} indicating to also
+  install uninstalled packages which this \code{pkg}
+  depends on/links to/suggests. See argument
+  \code{dependencies} of \code{\link{install.packages}}.}
 }
 \description{
   Uses \code{R CMD INSTALL} to install the package. Will
