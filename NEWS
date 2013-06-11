@@ -1,6 +1,8 @@
 devtools 1.2.99
 ----------------
 
+* Added support for installing package dependencies (thanks to Martin Studer)
+
 * `load_all` now defaults to `reset = TRUE` so that changes to the NAMESPACE
   etc are incorporated. This makes it slightly slower (but hopefully not 
   noticeably so), and generally more accurate, and a better simulation of 
