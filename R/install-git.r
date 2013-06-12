@@ -14,18 +14,18 @@
 #'                contain the package we are interested in installing.
 #' @param git_binary A custom git-binary to use instead of default system's git
 #'                   version.
-#' @param branch  Name of branch or tag to use, if not master.
-#' @param recursive Clone git repository recursively with all submodules.
-#' @param ...  Other arguments passed on to \code{\link{install}}.
+#' @param git_args Extra arguments to git.
+#' @param ...        Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
 #' @examples
 #' \dontrun{
 #' install_git("git://github.com/hadley/stringr.git")
-#' install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
+#' install_git("git://github.com/hadley/reshape.git", git_args = c("--branch", "reshape2"))
+#' install_git("git://github.com/mlt/swap2r.git", git_args = "--recursive")
 #'}
 install_git <- function(git_url, name = NULL, subdir = NULL,
-  branch = NULL, git_binary = NULL, recursive = FALSE, ...) {
+  git_binary = NULL, git_args = NULL, ...) {
 
   if (is.null(name)) {
     name <- rep(list(NULL), length(git_url))
@@ -33,7 +33,7 @@ install_git <- function(git_url, name = NULL, subdir = NULL,
 
   invisible(mapply(install_git_single, git_url, name,
     MoreArgs = list(
-      subdir = subdir, git_binary = git_binary, branch = branch, ...
+      subdir = subdir, git_binary = git_binary, git_args = git_args, ...
     )
   ))
 }
@@ -50,14 +50,13 @@ install_git <- function(git_url, name = NULL, subdir = NULL,
 #'                messages.
 #' @param subdir  A sub-directory withing a git repository that may
 #'                contain the package we are interested in installing.
-#' @param branch  Name of branch or tag to use, if not master.
 #' @param git_binary A custom git-binary to use instead of default system's git
 #'                   version.
-#' @param recursive Clone git repository recursively with all submodules.
+#' @param git_args Extra arguments to git.
 #' @param ... passed on to \code{\link{install}}
 #' @keywords internal
 install_git_single <- function(git_url, name = NULL, subdir = NULL,
-  branch = NULL, git_binary = NULL, recursive = FALSE, ...) {
+  git_binary = NULL, git_args = NULL, ...) {
 
   if (is.null(name)) {
     name <- gsub("\\.git$", "", basename(git_url))
@@ -75,8 +74,7 @@ install_git_single <- function(git_url, name = NULL, subdir = NULL,
   # @TODO: Handle configs, this currently only supports public repos
   #        and repositories with the public SSH key set.
   args <- c('clone', '--depth', '1', '--no-hardlinks')
-  if (!is.null(branch)) args <- c(args, "--branch", branch)
-  if (recursive) args <- c(args, "--recursive")
+  if (!is.null(git_args)) args <- c(args, git_args)
   args <- c(args, git_url, bundle)
 
   request <- system2(git_binary_path, args, stdout = FALSE, stderr = FALSE)
