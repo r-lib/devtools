@@ -1,10 +1,18 @@
-#' Parse dependencies.
+#' Parse package dependency strings.
+#'
+#' @param string to parse. Should look like \code{"R (>= 3.0), ggplot2"} etc.
 #' @return list of two character vectors: \code{name} package names,
 #'   and \code{version} package versions. If version is not specified,
 #'   it will be stored as NA.
 #' @keywords internal
+#' @export
+#' @examples
+#' parse_deps("httr (< 2.1),\nRCurl (>= 3)")
+#' # only package dependencies are returned
+#' parse_deps("utils (== 2.12.1),\ntools,\nR (>= 2.10),\nmemoise")
 parse_deps <- function(string) {
   if (is.null(string)) return()
+  stopifnot(is.character(string), length(string) == 1)
 
   pieces <- strsplit(string, ",")[[1]]
 

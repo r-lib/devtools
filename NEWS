@@ -1,6 +1,8 @@
 devtools 1.2.99
 ----------------
 
+* `parse_deps`, which parses R's package dependency strings, is now exported.
+
 * Added support for installing package dependencies (thanks to Martin Studer)
 
 * `load_all` now defaults to `reset = TRUE` so that changes to the NAMESPACE
