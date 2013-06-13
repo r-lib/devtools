@@ -3,10 +3,6 @@
 #' This is useful for automatically checking that dependencies of your
 #' packages work.
 #'
-#' The downloaded package and check directory are only removed if the check is
-#' successful - this allows you to inspect the results to figure out what
-#' went wrong.
-#'
 #' This function does not clean up after itself, but does work in a
 #' session-specific temporary directory, so all files will be removed
 #' when your current R session ends.

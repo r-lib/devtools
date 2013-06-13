@@ -65,18 +65,26 @@ wrap_command <- function(x) {
 }
 
 
-# Environment variables to set when calling R
-# This needs to be a function so it can call.libPaths() at runtime (otherwise
-# it causes errors when running R CMD check on devtools)
+#' Environment variables to set when calling R
+#'
+#' Devtools sets a number of environmental variables to ensure consistent
+#' between the current R session and the new session, and to ensure that
+#' everying behaves the same across systems. It also suppresses a common
+#' warning on windows, and sets \code{NOT_CRAN} so you can tell that your
+#' code is not running on CRAN.
+#'
+#' @keywords internal
+#' @return a named character vector
+#' @export
 r_env_vars <- function() {
   c("LC_ALL" = "C",
     "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
     "CYGWIN" = "nodosfilewarning",
-    "R_TESTS" = "",
-    "NOT_CRAN" = "true",
-    "TAR" = auto_tar())
     # When R CMD check runs tests, it sets R_TESTS. When the tests
     # themeselves run R CMD xxxx, as is the case with the tests in
     # devtools, having R_TESTS set causes errors because it confuses
     # the R subprocesses. Unsetting it here avoids those problems.
+    "R_TESTS" = "",
+    "NOT_CRAN" = "true",
+    "TAR" = auto_tar())
 }
