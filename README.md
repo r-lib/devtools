@@ -82,9 +82,17 @@ if (interactive()) {
 }
 ```
 
+See the complete list in `?devtools`
+
 This will set up R to:
 
 * always install packages from the RStudio CRAN mirror
 * ignore newlines when  `browse()`ing
 * give minimal output from `traceback()`
 * automatically load `devtools` in interactive sessions
+
+There are also a number of options you might want to set to customise the default behaviour when creating packages and drafting emails:
+
+* `devtools.name`: your name, used to sign emails
+* `devtools.desc.author`: your R author string, in the form of `"Hadley Wickham <h.wickham@@gmail.com> [aut, ctb]"`. Used when creating default `DESCRIPTION` files.
+* `devtools.desc.license`: a default license used when creating new packages
