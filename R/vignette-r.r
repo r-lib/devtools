@@ -32,11 +32,11 @@ copy_vignettes <- function(pkg) {
   out_cp <- vigns$docs
 
   message("Moving ", paste(basename(out_mv), collapse = ", "), " to inst/doc/")
-  file.copy(out_mv, doc_dir)
+  file.copy(out_mv, doc_dir, overwrite = TRUE)
   file.remove(out_mv)
 
   message("Copying ", paste(basename(out_cp), collapse = ", "), " to inst/doc/")
-  file.copy(out_cp, doc_dir)
+  file.copy(out_cp, doc_dir, overwrite = TRUE)
 
   # Copy extra files, if needed
   extra_files <- find_vignette_extras(pkg)

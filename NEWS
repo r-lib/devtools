@@ -1,6 +1,9 @@
 devtools 1.2.99
 ----------------
 
+* Fixed bug in `build_vignettes()` which prevented files in `inst/doc` from
+  being updated
+
 * `as.package()` no longer uses the full path, which should make for nicer 
   error messages.
 

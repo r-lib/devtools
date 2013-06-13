@@ -17,6 +17,21 @@ test_that("Sweave vignettes copied into inst/doc", {
   expect_false("new.Rnw" %in% dir("testVignettes/inst/doc"))
 })
 
+test_that("Built files are updated", {
+  clean_vignettes("testVignettes")
+  build_vignettes("testVignettes")
+  on.exit(clean_vignettes("testVignettes"))
+
+  output <- dir("testVignettes/inst/doc", "new", full.names = TRUE)
+  first <- file.info(output)$mtime
+
+  Sys.sleep(1)
+  build_vignettes("testVignettes")
+  second <- file.info(output)$mtime
+
+  expect_true(all(second > first))
+})
+
 if (packageVersion("knitr") >= 1.2) {
   test_that("Rmarkdown vignettes copied into inst/doc", {
     pkg <- as.package("testMarkdownVignettes")
