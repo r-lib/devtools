@@ -1,9 +1,10 @@
 #' Unload and reload package.
 #'
-#' If the package is not loaded already, this does nothing.
-#'
-#' See the caveats in \code{\link{detach}} for the many reasons why this
-#' might not work. If in doubt, quit R and restart.
+#' This attempts to unload and reload a package. If the package is not loaded
+#' already, it does nothing. It's not always possible to cleanly unload a
+#' package: see the caveats in \code{\link{unload}} for the some of the
+#' potential failure points. If in doubt, restart R and reload the package
+#' with \code{\link{library}}.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
@@ -32,6 +33,16 @@ reload <- function(pkg = ".", quiet = FALSE) {
 }
 
 #' Unload a package
+#'
+#' This function attempts to cleanly unload a package, including unloading
+#' it's namespace, deleting S4 class definitions and unloading any loaded
+#' DLLs. Unfortunately S4 classes are not really designed to be cleanly
+#' unloaded, and so we have to manually modify the class dependency graph in
+#' order for it to work - this works on the cases for which we have tested
+#' but there may be others.  Similarly, automated DLL unloading is best tested
+#' for simple scenarios (particularly with \code{useDynLib(pkgname)} and may
+#' fail in other cases. If you do encounter a failure, please file a bug report
+#' at \url{http://github.com/hadley/devtools/issues}.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information

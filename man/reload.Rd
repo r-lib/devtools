@@ -12,12 +12,12 @@
   function.}
 }
 \description{
-  If the package is not loaded already, this does nothing.
-}
-\details{
-  See the caveats in \code{\link{detach}} for the many
-  reasons why this might not work. If in doubt, quit R and
-  restart.
+  This attempts to unload and reload a package. If the
+  package is not loaded already, it does nothing. It's not
+  always possible to cleanly unload a package: see the
+  caveats in \code{\link{unload}} for the some of the
+  potential failure points. If in doubt, restart R and
+  reload the package with \code{\link{library}}.
 }
 \examples{
 \dontrun{
