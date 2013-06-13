@@ -194,7 +194,7 @@ create_description <- function(path, extra = getOption("devtools.desc"),
   }
 
   desc <- list(
-    Package = basename(path),
+    Package = basename(normalizePath(path)),
     Title = "",
     Description = "",
     Version = "0.1",
