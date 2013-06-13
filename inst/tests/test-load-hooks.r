@@ -28,7 +28,7 @@ test_that("onLoad and onAttach", {
   # namespace env, and also shouldn't trigger onload or onattach. But
   # the existing namespace values will be copied over to the package
   # environment
-  load_all("testLoadHooks")
+  load_all("testLoadHooks", reset = FALSE)
   # Shouldn't form new environments
   expect_identical(nsenv, ns_env("testLoadHooks"))
   expect_identical(pkgenv, pkg_env("testLoadHooks"))
