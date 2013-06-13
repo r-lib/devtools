@@ -1,6 +1,10 @@
 devtools 1.2.99
 ----------------
 
+* Files are now loaded in a way that preserves srcreferences - this means
+  that you will get much better locations on error messages, which should
+  considerably aid debugging.
+
 * Fixed bug in `build_vignettes()` which prevented files in `inst/doc` from
   being updated
 
