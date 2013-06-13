@@ -10,33 +10,25 @@
 as.package <- function(x = NULL) {
   if (is.package(x)) return(x)
 
-  if (is.null(x)) {
-    stop("pkg must not be NULL", call. = FALSE)
-  }
-
-  path <- find_package(x)
-
-  pkg <- load_pkg_description(path)
+  x <- check_dir(x)
+  load_pkg_description(x)
 }
 
 
-find_package <- function(x, check_desc = TRUE) {
-  if (is.null(x)) return(FALSE)
+check_dir <- function(x) {
+  if (is.null(x)) {
+    stop("Path is null", call. = FALSE)
+  }
 
   # Normalise path and strip trailing slashes
   x <- gsub("\\\\", "/", x, fixed = TRUE)
-  x <- sub("/[^/]*$", "", x)
+  x <- sub("/*$", "", x)
 
   if (!file.exists(x)) {
     stop("Can't find directory ", x, call. = FALSE)
   }
   if (!file.info(x)$isdir) {
     stop(x, " is not a directory", call. = FALSE)
-  }
-
-  desc_path <- file.path(x, "DESCRIPTION")
-  if (check_desc && !file.exists(desc_path)) {
-    stop("No DESCRIPTION file found in ", x, call. = FALSE)
   }
 
   x
