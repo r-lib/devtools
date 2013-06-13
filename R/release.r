@@ -94,7 +94,9 @@ release <- function(pkg = ".", check = TRUE) {
     "I have just uploaded a new version of ", pkg$package, " to CRAN.\n",
     "\n",
     "Thanks!\n",
-    "INSERT YOUR NAME", "\n\n\n", sep = "")
+    "\n",
+    getOption("devtools.desc.name"), "\n",
+    sep = "")
   subject <- paste("CRAN submission ", pkg$package, " ", pkg$version, sep = "")
   email("cran@r-project.org", subject, body)
 }

@@ -21,6 +21,9 @@
   arguments passed to \code{R CMD install} by
   \code{\link{install}}.
 
+  \item \code{devtools.desc.name}: your name, used when
+  signing draft emails.
+
   \item \code{devtools.desc.author}: a string providing a
   default Authors@R string to be used in new
   \file{DESCRIPTION}s.  Should be a R code, and look like

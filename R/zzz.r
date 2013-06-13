@@ -19,6 +19,9 @@
 #'   \item \code{devtools.install.args}: a string giving extra arguments passed
 #'     to \code{R CMD install} by \code{\link{install}}.
 #'
+#'   \item \code{devtools.desc.name}: your name, used when signing draft
+#'     emails.
+#'
 #'   \item \code{devtools.desc.author}: a string providing a default Authors@@R
 #'     string to be used in new \file{DESCRIPTION}s.  Should be a R code, and
 #'     look like \code{"Hadley Wickham <h.wickham@@gmail.com> [aut, ctb]"}. See
@@ -44,8 +47,9 @@ NULL
     devtools.path = "~/R-dev",
     devtools.cleandoc = FALSE,
     devtools.install.args = "",
-    devtools.desc.author = "",
-    devtools.desc.license = "",
+    devtools.desc.name = "getOptions('devtools.desc.name')",
+    devtools.desc.author = "# getOptions('devtools.desc.author')",
+    devtools.desc.license = "# getOptions('devtools.desc.license')",
     devtools.desc.suggests = NULL,
     devtools.desc = NULL,
     github.user = "hadley"
