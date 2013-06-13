@@ -23,9 +23,9 @@ as.package <- function(x = NULL) {
 find_package <- function(x, check_desc = TRUE) {
   if (is.null(x)) return(FALSE)
 
-  # Strip trailing slashes (needed only for windows)
-  x <- normalizePath(x, mustWork = FALSE)
-  x <- gsub("\\\\$", "", x)
+  # Normalise path and strip trailing slashes
+  x <- gsub("\\\\", "/", x, fixed = TRUE)
+  x <- sub("/[^/]*$", "", x)
 
   if (!file.exists(x)) {
     stop("Can't find directory ", x, call. = FALSE)

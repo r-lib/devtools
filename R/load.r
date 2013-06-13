@@ -178,7 +178,7 @@ create_description <- function(path, extra = getOption("devtools.desc"),
 
   subdir <- file.path(path, c("R", "src", "data"))
   if (!any(file.exists(subdir))) {
-    stop(path, " does not look like a package: no R/, src/ or data directories",
+    stop("'", path, "' does not look like a package: no R/, src/ or data directories",
       call. = FALSE)
   }
 
@@ -200,7 +200,7 @@ create_description <- function(path, extra = getOption("devtools.desc"),
 
   lines <- paste0(names(desc), ": ", unlist(desc))
   if (!quiet) {
-    message("No DESCRIPTION found. Creating default:\n" ,
+    message("No DESCRIPTION found. Creating default:\n\n" ,
       paste(lines, collapse = "\n"))
   }
 
