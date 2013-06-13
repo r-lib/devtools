@@ -12,15 +12,15 @@
 #' \itemize{
 #'   \item \code{devtools.path}: path to use for \code{\link{dev_mode}}
 #'
+#'   \item \code{devtools.name}: your name, used when signing draft
+#'     emails.
+#'
 #'   \item \code{devtools.cleandoc}: a single logical value determining whether
 #'     the contents of the file{man/} directory are deleted by
 #'     \code{\link{check}}
 #'
 #'   \item \code{devtools.install.args}: a string giving extra arguments passed
 #'     to \code{R CMD install} by \code{\link{install}}.
-#'
-#'   \item \code{devtools.desc.name}: your name, used when signing draft
-#'     emails.
 #'
 #'   \item \code{devtools.desc.author}: a string providing a default Authors@@R
 #'     string to be used in new \file{DESCRIPTION}s.  Should be a R code, and
@@ -47,7 +47,7 @@ NULL
     devtools.path = "~/R-dev",
     devtools.cleandoc = FALSE,
     devtools.install.args = "",
-    devtools.desc.name = "getOptions('devtools.desc.name')",
+    devtools.name = "getOptions('devtools.name')",
     devtools.desc.author = "# getOptions('devtools.desc.author')",
     devtools.desc.license = "# getOptions('devtools.desc.license')",
     devtools.desc.suggests = NULL,
