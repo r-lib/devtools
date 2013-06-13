@@ -13,7 +13,17 @@ test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
   pkg <- as.package(pkg)
 
   path_test <- file.path(pkg$path, "inst", "tests")
-  if (!file.exists(path_test)) return()
+  if (!file.exists(path_test)) {
+    message("No tests found: inst/tests not present")
+    return(invisible())
+  }
+
+  test_files <- dir(path_test, "^test.*\\.[rR]$")
+  if (length(test_files) == 0) {
+    message("No tests found: no files matching pattern '^test.*\\.[rR]$'",
+      "found in inst/tests")
+    return(invisible())
+  }
 
   message("Testing ", pkg$package)
   if (fresh) {
