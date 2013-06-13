@@ -189,7 +189,8 @@ create_description <- function(path, extra = getOption("devtools.desc"),
     Version = "0.1",
     "Authors@R" = getOption("devtools.desc.author"),
     Depends = paste0("R (>= ", as.character(getRversion()) ,")"),
-    License = getOption("devtools.desc.license")
+    License = getOption("devtools.desc.license"),
+    LazyData = "true"
   )
   suggests <- getOption("devtools.desc.suggests")
   if (length(suggests) > 0) {
