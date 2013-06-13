@@ -12,10 +12,15 @@
   created using \code{\link{create_description}}.}
 
   \item{reset}{clear package environment and reset file
-  cache before loading any pieces of the package.}
+  cache before loading any pieces of the package. This is
+  equivalent to running \code{\link{unload}} and is the
+  default. Use \code{reset = FALSE} may be faster for large
+  code bases, but is a significantly less accurate
+  approximation.}
 
   \item{recompile}{force a recompile of DLL from source
-  code, if present.}
+  code, if present.  This is equivalent to running
+  \code{\link{clean_dll}} before \code{load_all}}
 
   \item{export_all}{If \code{TRUE} (the default), export
   all objects.  If \code{FALSE}, export only the objects
@@ -30,18 +35,24 @@
   \code{\link{library}}.
 }
 \details{
-  To unload and reload a package, use \code{reset=TRUE}.
-  When reloading a package, A, that another package, B,
-  depends on, \code{load_all} might not be able to cleanly
-  unload and reload A. If this causes problems, try using
-  unloading package B with \code{\link{unload}} before
-  using \code{load_all} on A.
+  Currently \code{load_all}:
 
-  Support for packages with compiled C/C++/Fortran code in
-  the \code{/src/} directory is experimental. See
-  \code{\link{compile_dll}} for more information about
-  compiling code.
+  \itemize{ \item Loads all data files in \code{data/}.
+  See \code{\link{load_data}} for more details.
 
+  \item Sources all R files in the R directory, storing
+  results in environment that behaves like a regular
+  package namespace. See below and \code{\link{load_code}}
+  for more details.
+
+  \item Compiles any C, C++, or Fortran code in the
+  \code{src/} directory and connects the generated DLL into
+  R. See \code{\link{compile_dll}} for more details.
+
+  \item Runs \code{.onAttach()}, \code{.onLoad()} and
+  \code{.onUnload()} functions at the correct times. }
+}
+\section{Namespaces}{
   The namespace environment \code{<namespace:pkgname>}, is
   a child of the imports environment, which has the name
   attribute \code{imports:pkgname}. It is in turn is a
@@ -63,7 +74,9 @@
   behavior when loading an installed package with
   \code{\link{library}}, and can be useful for checking for
   missing exports.
+}
 
+\section{Shim files}{
   \code{load_all} also inserts shim functions into the
   imports environment of the laded package. It presently
   adds a replacement version of \code{system.file} which
@@ -88,13 +101,6 @@ load_all("./", TRUE)
 # are exported
 load_all("./", export_all = FALSE)
 }
-}
-\seealso{
-  \code{\link{unload}}
-
-  \code{\link{compile_dll}}
-
-  \code{\link{clean_dll}}
 }
 \keyword{programming}
 
