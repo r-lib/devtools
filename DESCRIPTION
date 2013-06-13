@@ -33,7 +33,6 @@ Collate:
     'build.r'
     'check.r'
     'check-cran.r'
-    'common-mistakes.r'
     'devel-mode.r'
     'document.r'
     'file-cache.r'
