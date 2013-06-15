@@ -3,8 +3,15 @@
 #' Uses \code{R CMD INSTALL} to install the package. Will also try to install
 #' dependencies of the package from CRAN, if they're not already installed.
 #'
-#' Installation takes place on a copy of the package produced by
-#' \code{R CMD build} to avoid modifying the local directory in any way.
+#' By default, installation takes place using the current package directory.
+#' If you have compiled code, this means that artefacts of compilation will be
+#' created in the \code{src/} directory. If you want to avoid this, you can
+#' use \code{local = FALSE} to first build a package bundle and then install
+#' it from a temporary directory. This is slower, but keeps the source
+#' directory pristine.
+#'
+#' If the package is loaded, it will be reloaded after installation. This is
+#' not always completely possible, see \code{\link{reload}} for caveats.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
@@ -37,7 +44,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   if (!quiet) message("Installing ", pkg$package)
   install_deps(pkg, dependencies = dependencies)
 
-  # Build the package. If quick==TRUE, don't build vignettes
+  # Build the package. If quick, don't build vignettes
   if (local) {
     built_path <- pkg$path
   } else {

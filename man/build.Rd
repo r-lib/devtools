@@ -1,6 +1,6 @@
 \name{build}
 \alias{build}
-\title{Build package in specified directory.}
+\title{Build package.}
 \usage{
   build(pkg = ".", path = NULL, binary = FALSE,
     vignettes = TRUE, quiet = FALSE)
@@ -28,7 +28,16 @@
   built package
 }
 \description{
-  Build package in specified directory.
+  Building converts a package source directory into a
+  single bundled file. If \code{binary = FALSE} this
+  creates a \code{tar.gz} package that can be installed on
+  any platform, provided they have a full development
+  environment (although packages without source code can
+  typically be install out of the box). If \code{binary =
+  TRUE}, the package will have a platform specific
+  extension (e.g. \code{.zip} for windows), and will only
+  be installable on the current platform, but no
+  development environment is needed.
 }
 \seealso{
   Other build functions: \code{\link{build_win}}

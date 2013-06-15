@@ -43,9 +43,17 @@
   CRAN, if they're not already installed.
 }
 \details{
-  Installation takes place on a copy of the package
-  produced by \code{R CMD build} to avoid modifying the
-  local directory in any way.
+  By default, installation takes place using the current
+  package directory. If you have compiled code, this means
+  that artefacts of compilation will be created in the
+  \code{src/} directory. If you want to avoid this, you can
+  use \code{local = FALSE} to first build a package bundle
+  and then install it from a temporary directory. This is
+  slower, but keeps the source directory pristine.
+
+  If the package is loaded, it will be reloaded after
+  installation. This is not always completely possible, see
+  \code{\link{reload}} for caveats.
 }
 \seealso{
   \code{\link{with_debug}} to install packages with

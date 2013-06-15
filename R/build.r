@@ -1,4 +1,13 @@
-#' Build package in specified directory.
+#' Build package.
+#'
+#' Building converts a package source directory into a single bundled file.
+#' If \code{binary = FALSE} this creates a \code{tar.gz} package that can
+#' be installed on any platform, provided they have a full development
+#' environment (although packages without source code can typically be
+#' install out of the box). If \code{binary = TRUE}, the package will have
+#' a platform specific extension (e.g. \code{.zip} for windows), and will
+#' only be installable on the current platform, but no development
+#' environment is needed.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
@@ -50,10 +59,12 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
 
 #' Build windows binary package.
 #'
-#' Works by building source package, and then uploading to
+#' This function works by bundling source package, and then uploading to
 #' \url{http://win-builder.r-project.org/}.  Once building is complete you'll
 #' receive a link to the built package in the email address listed in the
-#' maintainer field.  It usually takes around 30 minutes.
+#' maintainer field.  It usually takes around 30 minutes. As a side effect,
+#' win-build also runs \code{R CMD check} on the package, so \code{build_win}
+#' is also useful to check that your package is ok on windows.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
