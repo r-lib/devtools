@@ -54,7 +54,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
 
   opts <- c(
     paste("--library=", shQuote(.libPaths()[1]), sep = ""),
-    "--with-keep.source")
+    "--with-keep.source", "--install-tests")
   if (quick) {
     opts <- c(opts, "--no-docs", "--no-multiarch", "--no-demo")
   }
