@@ -12,13 +12,8 @@
 test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
   pkg <- as.package(pkg)
 
-  path_test <- file.path(pkg$path, "inst", "tests")
-  if (!file.exists(path_test)) {
-    message("No tests found: inst/tests not present")
-    return(invisible())
-  }
-
-  test_files <- dir(path_test, "^test.*\\.[rR]$")
+  test_path <- find_test_dir(pkg$path)
+  test_files <- dir(test_path, "^test.*\\.[rR]$")
   if (length(test_files) == 0) {
     message("No tests found: no files matching pattern '^test.*\\.[rR]$'",
       "found in inst/tests")
@@ -32,7 +27,7 @@ test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
       require("testthat", quiet = TRUE)
 
       load_all(.(pkg$path), quiet = TRUE)
-      test_dir(.(path_test), filter = .(filter))
+      test_dir(.(test_path), filter = .(filter))
     })
     eval_clean(to_run)
   } else {
@@ -40,8 +35,18 @@ test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
     # Run tests in a child of the namespace environment, like testthat::test_package
     load_all(pkg)
     env <- new.env(parent = ns_env(pkg))
-    with_envvar(r_env_vars(), test_dir(path_test, filter = filter, env = env))
+    with_envvar(r_env_vars(), test_dir(test_path, filter = filter, env = env))
   }
+}
+
+find_test_dir <- function(path) {
+  testthat <- file.path(path, "tests", "testthat")
+  if (file.exists(testthat)) return(testthat)
+
+  inst <- file.path(path, "inst", "tests")
+  if (file.exists(inst)) return(inst)
+
+  stop("No testthat directories found in ", path, call. = FALSE)
 }
 
 

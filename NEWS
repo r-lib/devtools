@@ -1,6 +1,8 @@
 devtools 1.2.99
 ----------------
 
+* `test` now looks in both `inst/test` and `tests/testthat` for unit tests.
+
 * Files are now loaded in a way that preserves srcreferences - this means
   that you will get much better locations on error messages, which should
   considerably aid debugging.
