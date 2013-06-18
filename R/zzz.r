@@ -24,7 +24,7 @@
 #'
 #'   \item \code{devtools.desc.author}: a string providing a default Authors@@R
 #'     string to be used in new \file{DESCRIPTION}s.  Should be a R code, and
-#'     look like \code{"Hadley Wickham <h.wickham@@gmail.com> [aut, ctb]"}. See
+#'     look like \code{"Hadley Wickham <h.wickham@@gmail.com> [aut, cre]"}. See
 #'     \code{\link[utils]{as.person}} for more details.
 #'
 #'   \item \code{devtools.desc.license}: a default license string to use for
