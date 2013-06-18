@@ -1,7 +1,9 @@
 #' Check documentation, as \code{R CMD check} does.
 #'
-#' Currently runs these checks: package parseRd, Rd metadata, Rd xrefs, and
-#' Rd contents.
+#' This function attempts to run the documentation related checks in the
+#' same way that \code{R CMD check} does. Unfortunately it can't run them
+#' all because some tests require the package to be loaded, and the way
+#' they attempt to load the code conflicts with how devtools does it.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information

@@ -29,28 +29,6 @@ dev_help <- function(topic, stage = "render", type = getOption("help_type")) {
   view_rd(path, pkg, stage = stage, type = type)
 }
 
-#' Show an Rd file in a package.
-#'
-#' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
-#' @param file topic or name Rd file to open.
-#' @param ... additional arguments passed onto \code{\link[tools]{Rd2txt}}.
-#'   This is particular useful if you're checking macros and want to simulate
-#'   what happens when the package is built (\code{stage = "build"})
-#' @export
-#' @importFrom tools Rd2txt
-show_rd <- function(pkg = ".", file, ...) {
-  .Deprecated("dev_help")
-  pkg <- as.package(pkg)
-
-  rd <- find_pkg_topic(pkg, file)
-  if (is.null(rd)) {
-    stop("Could not find topic or Rd file ", file, call. = FALSE)
-  }
-
-  path <- file.path(pkg$path, "man", rd)
-  view_rd(path, pkg, ...)
-}
 
 #' @importFrom tools Rd2txt Rd2HTML
 view_rd <- function(path, package, stage = "render", type = getOption("help_type")) {

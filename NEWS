@@ -1,6 +1,8 @@
 devtools 1.2.99
 ----------------
 
+* The deprecated `show_rd` function has now been removed.
+
 * The documentation for many devtools functions has been considerably expanded,
   aiming to give the novice package developer more hints about what they should
   be doing and why.
