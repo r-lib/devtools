@@ -19,4 +19,5 @@
   package's devtools metdata to indicate that it's
   attached.
 }
+\keyword{internal}
 

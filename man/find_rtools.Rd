@@ -27,4 +27,5 @@
   This code borrows heavily from RStudio's code for finding
   rtools.  Thanks JJ!
 }
+\keyword{internal}
 

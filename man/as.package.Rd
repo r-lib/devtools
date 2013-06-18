@@ -11,4 +11,5 @@
   Possible specifications of package: \itemize{ \item path
   \item package object }
 }
+\keyword{internal}
 

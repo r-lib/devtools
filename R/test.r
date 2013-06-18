@@ -56,6 +56,7 @@ find_test_dir <- function(path) {
 #' returns the path to them.
 #'
 #' @param package Name of the test package.
+#' @keywords internal
 #' @examples
 #' if (has_tests()) {
 #' devtest("collate-extra")

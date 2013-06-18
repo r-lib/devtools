@@ -5,6 +5,7 @@
 #' @return TRUE if your development environment is correctly set up, otherwise
 #'   returns an error.
 #' @export
+#' @keywords internal
 #' @examples
 #' has_devel()
 has_devel <- function() {

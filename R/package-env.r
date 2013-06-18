@@ -13,13 +13,13 @@ attach_ns <- function(pkg = ".") {
 }
 
 # Invoke namespace load actions. According to the documentation for setLoadActions
-# these actions should be called at the end of processing of S4 metadata, after 
-# dynamically linking any libraries, the call to .onLoad(), if any, and caching 
+# these actions should be called at the end of processing of S4 metadata, after
+# dynamically linking any libraries, the call to .onLoad(), if any, and caching
 # method and class definitions, but before the namespace is sealed
 run_ns_load_actions <- function(pkg = ".") {
   nsenv <- ns_env(pkg)
   actions <- methods::getLoadActions(nsenv)
-  for (action in actions) 
+  for (action in actions)
     action(nsenv)
 }
 
@@ -58,7 +58,7 @@ export_ns <- function(pkg = ".") {
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @keywords programming
+#' @keywords internal
 #' @seealso \code{\link{ns_env}} for the namespace environment that
 #'   all the objects (exported and not exported).
 #' @seealso \code{\link{imports_env}} for the environment that contains

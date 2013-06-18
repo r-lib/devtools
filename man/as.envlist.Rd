@@ -11,4 +11,5 @@
   Convert a list of environments to an \code{envlist}
   object.
 }
+\keyword{internal}
 

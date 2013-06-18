@@ -53,6 +53,7 @@ parenvs <- function(e = parent.frame(), all = FALSE) {
 #' Convert a list of environments to an \code{envlist} object.
 #'
 #' @param x A list of environments.
+#' @keywords internal
 #' @export
 as.envlist <- function(x) {
   if (!is.list(x) || !all(vapply(x, is.environment, logical(1)))) {
@@ -74,6 +75,7 @@ as.envlist <- function(x) {
 #' @param path If \code{TRUE}, print the \code{path} attribute of
 #'   each environment.
 #' @param ... Other arguments to be passed to \code{print}.
+#' @keywords internal
 #' @export
 #' @method print envlist
 print.envlist <- function(x, name = TRUE, path = FALSE, ...) {

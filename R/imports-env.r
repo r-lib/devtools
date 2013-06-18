@@ -3,7 +3,7 @@
 #' Contains objects imported from other packages. Is the parent of the
 #' package namespace environment, and is a child of <namespace:base>,
 #' which is a child of R_GlobalEnv.
-#' @keywords programming
+#' @keywords internal
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information.
 #' @seealso \code{\link{ns_env}} for the namespace environment that

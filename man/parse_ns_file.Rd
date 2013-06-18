@@ -16,4 +16,5 @@ if (has_tests()) {
 parse_ns_file(devtest("testLoadHooks"))
 }
 }
+\keyword{internal}
 

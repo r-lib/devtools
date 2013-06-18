@@ -16,4 +16,5 @@ if (has_tests()) {
 devtest("collate-extra")
 }
 }
+\keyword{internal}
 

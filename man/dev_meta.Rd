@@ -26,4 +26,5 @@ as.list(x)
 unload(devtest("testLoadHooks"))
 }
 }
+\keyword{internal}
 

@@ -7,6 +7,7 @@
 #' }
 #' @param x object to coerce to a package
 #' @export
+#' @keywords internal
 as.package <- function(x = NULL) {
   if (is.package(x)) return(x)
 
@@ -34,8 +35,7 @@ check_dir <- function(x) {
   x
 }
 
-#' Load package DESCRIPTION into convenient form.
-#' @keywords internal
+# Load package DESCRIPTION into convenient form.
 load_pkg_description <- function(path) {
   path <- normalizePath(path)
   path_desc <- file.path(path, "DESCRIPTION")
@@ -53,6 +53,7 @@ load_pkg_description <- function(path) {
 
 
 #' Is the object a package?
+#'
 #' @keywords internal
 #' @export
 is.package <- function(x) inherits(x, "package")

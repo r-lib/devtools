@@ -22,5 +22,5 @@
   \code{\link{pkg_env}} for the attached environment that
   contains the exported objects.
 }
-\keyword{programming}
+\keyword{internal}
 

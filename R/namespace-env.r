@@ -9,7 +9,7 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @keywords programming
+#' @keywords internal
 #' @seealso \code{\link{pkg_env}} for the attached environment that
 #'   contains the exported objects.
 #' @seealso \code{\link{imports_env}} for the environment that contains
@@ -120,6 +120,7 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
 #' if (has_tests()) {
 #' parse_ns_file(devtest("testLoadHooks"))
 #' }
+#' @keywords internal
 #' @export
 parse_ns_file <- function(pkg = ".") {
   pkg <- as.package(pkg)

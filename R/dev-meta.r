@@ -3,6 +3,7 @@
 #' If the package was not loaded with devtools, returns \code{NULL}.
 #'
 #' @param name The name of a loaded package
+#' @keywords internal
 #' @examples
 #' dev_meta("stats") # NULL
 #'

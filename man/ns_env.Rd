@@ -25,5 +25,5 @@
   \code{\link{imports_env}} for the environment that
   contains imported objects for the package.
 }
-\keyword{programming}
+\keyword{internal}
 

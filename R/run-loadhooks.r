@@ -9,6 +9,7 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @keywords internal
 run_onload <- function(pkg = ".") {
   pkg <- as.package(pkg)
   nsenv <- ns_env(pkg)
@@ -39,6 +40,7 @@ run_onload <- function(pkg = ".") {
 #' devtools metdata to indicate that it's attached.
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @keywords internal
 run_onattach <- function(pkg = ".") {
   pkg <- as.package(pkg)
   nsenv <- ns_env(pkg)

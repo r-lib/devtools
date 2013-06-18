@@ -7,4 +7,5 @@
 \description{
   Return a vector of names of packages loaded by devtools
 }
+\keyword{internal}
 

@@ -33,6 +33,7 @@ if (!exists("set_rtools_path")) {
 #'   \code{FALSE} with a diagnostic \code{\link{message}}.
 #'   As a side-effect the internal package variable \code{rtools_path} is
 #'   updated to the paths to rtools binaries.
+#' @keywords internal
 #' @export
 find_rtools <- function(debug = FALSE) {
   # Non-windows users don't need rtools
