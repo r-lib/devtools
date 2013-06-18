@@ -59,15 +59,9 @@ find_test_dir <- function(path) {
 #' @keywords internal
 #' @examples
 #' if (has_tests()) {
-#' devtest("collate-extra")
+#' devtest("testData")
 #' }
 #' @export
 devtest <- function(package) {
-  if (is.null(dev_meta("devtools"))) {
-    # devtools was loaded the normal way
-    system.file(package = "devtools", "tests", package)
-  } else {
-    # devtools was loaded with load_all
-    system.file(package = "devtools", "inst", "tests", package)
-  }
+  system.file(package = "devtools", "tests", "testthat", package)
 }
