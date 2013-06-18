@@ -1,13 +1,31 @@
 devtools 1.3
 ----------------
 
-* The deprecated `show_rd` function has now been removed.
+CHANGES TO BEST PRACTICES
 
 * The documentation for many devtools functions has been considerably expanded,
   aiming to give the novice package developer more hints about what they should
   be doing and why.
 
-* `test` now looks in both `inst/test` and `tests/testthat` for unit tests.
+* `load_all()` now defaults to `reset = TRUE` so that changes to the NAMESPACE
+  etc are incorporated. This makes it slightly slower (but hopefully not 
+  noticeably so), and generally more accurate, and a better simulation of 
+  the install + restart + reload cycle.
+
+* `test()` now looks in both `inst/test` and `tests/testthat` for unit tests.
+  It is recommended to use `tests/testthat` because it allows users to
+  choose whether or not to install test. If you move your tests from 
+  `inst/tests` to `tests/testthat`, you'll also need to change 
+  `tests/test-all.R` to run `test_check()` instead of `test_package()`
+
+NEW FEATURES
+
+* New `install_local()` function for installing local package files 
+ (as zip, tar, tgz, etc.) (Suggested by landroni)
+
+* `parse_deps()`, which parses R's package dependency strings, is now exported.
+
+MINOR IMPROVEMENTS AND BUG FIXES
 
 * Files are now loaded in a way that preserves srcreferences - this means
   that you will get much better locations on error messages, which should
@@ -19,26 +37,19 @@ devtools 1.3
 * `as.package()` no longer uses the full path, which should make for nicer 
   error messages.
 
-* `parse_deps`, which parses R's package dependency strings, is now exported.
+* More flexibility when installing package dependencies with the 
+ `dependencies` argument to `install_*()` (thanks to Martin Studer)
 
-* Added support for installing package dependencies (thanks to Martin Studer)
+* The deprecated `show_rd()` function has now been removed.
 
-* `load_all` now defaults to `reset = TRUE` so that changes to the NAMESPACE
-  etc are incorporated. This makes it slightly slower (but hopefully not 
-  noticeably so), and generally more accurate, and a better simulation of 
-  the install + restart + reload cycle.
-
-* New `install_local` function for installing local package files 
- (as zip, tar, tgz, etc.) (Suggested by landroni)
-
-* `install_bitbucket` gains `auth_user` and `password` params so that you can
+* `install_bitbucket()` gains `auth_user` and `password` params so that you can
   install from private repos (thanks to Brian Bolt)
 
 * Better git detection on windows (thanks to Mikhail Titov) 
 
 * Fix bug so that `document()` will automatically create `man/` directory
 
-* default `DESCRIPTION` gains `LazyData: true`
+* Default `DESCRIPTION` gains `LazyData: true`
 
 * `create_description()` now checks that the directory is probably a package 
   by looking for `R/`, `data/` or `src/` directories
