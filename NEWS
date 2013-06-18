@@ -18,6 +18,10 @@ CHANGES TO BEST PRACTICES
   `inst/tests` to `tests/testthat`, you'll also need to change 
   `tests/test-all.R` to run `test_check()` instead of `test_package()`
 
+* New devtools guarantee: if because of a devtools bug, a CRAN maintainer yells
+  at you, I'll send you a hand-written apology note. Just forward me the email 
+  and your address.
+
 NEW FEATURES
 
 * New `install_local()` function for installing local package files 
