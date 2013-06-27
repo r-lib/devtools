@@ -20,8 +20,9 @@ source_one <- function(file, envir = parent.frame()) {
 
   lines <- readLines(file, warn = FALSE)
   srcfile <- srcfilecopy(file, lines, file.info(file)[1, "mtime"],
-    isFile = TRUE)
-  exprs <- parse(text = lines, n = -1, srcfile = srcfile)
+                         isFile = TRUE)
+  exprs <- parse(text = lines, n = -1,
+                 srcfile = srcfile, keep.source = TRUE)
 
   n <- length(exprs)
   if (n == 0L) return(invisible())
