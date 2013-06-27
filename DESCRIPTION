@@ -21,7 +21,7 @@ Imports:
     evaluate,
     digest
 Suggests:
-    testthat (>= 0.7.1.99),
+    testthat (>= 0.7),
     roxygen2,
     BiocInstaller,
     Rcpp (>= 0.10.0),

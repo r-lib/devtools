@@ -37,7 +37,11 @@ test_that("loading and reloading s4 classes", {
   expect_equal(getClassDef("mle2")@package, "testS4union")
 
   # Unloading shouldn't result in any errors or warnings
-  expect_that(unload("testS4union"), not(gives_warning()))
+  if (packageVersion("testthat") >= "0.7.1.99") {
+    expect_that(unload("testS4union"), not(gives_warning()))
+  } else {
+    unload("testS4union")
+  }
 
   # Check that classes are unregistered
   # This test on A fails for some bizarre reason - bug in R? But it doesn't
@@ -50,7 +54,11 @@ test_that("loading and reloading s4 classes", {
   # Load again and repeat tests --------------------------------------------
 
   # Loading again shouldn't result in any errors or warnings
-  expect_that(load_all("testS4union", reset = FALSE), not(gives_warning()))
+  if (packageVersion("testthat") >= "0.7.1.99") {
+    expect_that(load_all("testS4union", reset = FALSE), not(gives_warning()))
+  } else {
+    load_all("testS4union", reset = FALSE)
+  }
 
   # Check class hierarchy
   expect_equal(get_superclasses("A"), c("AB", "mle2A", "mleA"))
