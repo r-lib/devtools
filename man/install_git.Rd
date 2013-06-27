@@ -3,7 +3,7 @@
 \title{Install a package from a git repository}
 \usage{
   install_git(git_url, name = NULL, subdir = NULL,
-    branch = NULL, git_binary = NULL, ...)
+    git_binary = NULL, git_args = NULL, ...)
 }
 \arguments{
   \item{git_url}{Location of package. The url should point
@@ -19,8 +19,7 @@
   \item{git_binary}{A custom git-binary to use instead of
   default system's git version.}
 
-  \item{branch}{Name of branch or tag to use, if not
-  master.}
+  \item{git_args}{Extra arguments to git.}
 
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}
@@ -36,7 +35,8 @@
 \examples{
 \dontrun{
 install_git("git://github.com/hadley/stringr.git")
-install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
+install_git("git://github.com/hadley/reshape.git", git_args = c("--branch", "reshape2"))
+install_git("git://github.com/mlt/swap2r.git", git_args = "--recursive")
 }
 }
 \seealso{

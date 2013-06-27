@@ -3,7 +3,7 @@
 \title{Install a single package from a git repository}
 \usage{
   install_git_single(git_url, name = NULL, subdir = NULL,
-    branch = NULL, git_binary = NULL, ...)
+    git_binary = NULL, git_args = NULL, ...)
 }
 \arguments{
   \item{git_url}{Location of package. The url should point
@@ -18,6 +18,8 @@
 
   \item{git_binary}{A custom git-binary to use instead of
   default system's git version.}
+
+  \item{git_args}{Extra arguments to git.}
 
   \item{...}{passed on to \code{\link{install}}}
 }
