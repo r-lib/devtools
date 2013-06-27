@@ -31,6 +31,9 @@ NEW FEATURES
 
 MINOR IMPROVEMENTS AND BUG FIXES
 
+* `install_git` gains `git_arg` parameter allowing you to add arbitrary
+  additional arguments.
+
 * Files are now loaded in a way that preserves srcreferences - this means
   that you will get much better locations on error messages, which should
   considerably aid debugging.
