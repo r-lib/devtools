@@ -1,61 +1,69 @@
-#' Run .onLoad if needed
+#' Run user and package hooks.
 #'
-#' This is run before copying objects from the namespace to the package
-#' environment. In a normal install + load, the namespace would be
-#' locked between these stages, but we don't do that with load_all.
-#'
-#' A variable called \code{onLoad} is created in the package's
-#' devtools metdata to indicate that it's attached.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @param hook hook name: one of "load", "unload", "attach", or "detach"
 #' @keywords internal
-run_onload <- function(pkg = ".") {
+run_pkg_hook <- function(pkg, hook) {
   pkg <- as.package(pkg)
-  nsenv <- ns_env(pkg)
+
+  trans <- c(
+    "load"   = ".onLoad",
+    "unload" = ".onUnload",
+    "attach" = ".onAttach",
+    "detach" = ".onDetach")
+  hook <- match.arg(hook, names(trans))
+  f_name <- trans[hook]
 
   metadata <- dev_meta(pkg$package)
-  # Run .onLoad if it's defined. Set a flag 'onLoad' in the metadata
-  if (exists(".onLoad", nsenv, inherits = FALSE) &&
-     is.null(metadata$onLoad)) {
+  if (isTRUE(metadata[[f_name]])) return(FALSE)
 
-    if (basename(pkg$path) != pkg$package) {
-      warning('Calling .onLoad() when the package directory "',
-        basename(pkg$path), '" does not match the package name "', pkg$package,
-        '" can result in problems. Please rename the directory to match the package name.')
-    }
+  # Run hook function if defined, and not already run
+  nsenv <- ns_env(pkg)
+  if (!exists(f_name, nsenv, inherits = FALSE)) return(FALSE)
 
-    nsenv$.onLoad(dirname(pkg$path), pkg$package)
-    metadata$onLoad <- TRUE
-  }
+  nsenv[[f_name]](dirname(pkg$path), pkg$package)
+  metadata[[f_name]] <- TRUE
+
+  TRUE
 }
 
-#' Run .onAttach if needed
-#'
-#' This is run after copying objects from the namespace to the package
-#' environment. In a normal install + load, the namespace would be
-#' locked between these stages, but we don't do that with load_all.
-#'
-#' A variable called \code{onAttach} is created in the package's
-#' devtools metdata to indicate that it's attached.
-#' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
-#' @keywords internal
-run_onattach <- function(pkg = ".") {
+#' @rdname run_pkg_hook
+run_user_hook <- function(pkg, hook) {
   pkg <- as.package(pkg)
   nsenv <- ns_env(pkg)
 
-  metadata <- dev_meta(pkg$package)
-  # Run .onAttach if it's defined. Set a flag 'onAttach' in the metadata
-  if (exists(".onAttach", nsenv, inherits = FALSE) &&
-     is.null(metadata$onAttach)) {
+  trans <- c(
+    "load"   = "onLoad",
+    "unload" = "onUnload",
+    "attach" = "attach",
+    "detach" = "detach")
+  hook <- match.arg(hook, names(trans))
+  hook_name <- trans[hook]
 
-    if (basename(pkg$path) != pkg$package) {
-      warning('Calling .onAttach() when the package directory "',
-        basename(pkg$path), '" does not match the package name "', pkg$package,
-        '" can result in problems. Please rename the directory to match the package name.')
-    }
-    nsenv$.onAttach(dirname(pkg$path), pkg$package)
-    metadata$onAttach <- TRUE
-  }
+  metadata <- dev_meta(pkg$package)
+  if (isTRUE(metadata[[hook_name]])) return(FALSE)
+
+  hooks <- getHook(packageEvent(pkg$package, hook_name))
+  if (length(hooks) == 0) return(FALSE)
+
+  for(fun in rev(hooks)) try(fun(pkgname, libpath))
+  metadata[[hook_name]] <- TRUE
+  invisible(TRUE)
+}
+
+hook_warning <- function(pkg) {
+  if (basename(pkg$path) == pkg$package) return()
+
+  metadata <- dev_meta(pkg$package)
+  if (isTRUE(metadata$hook_warning)) return()
+
+  metadata$hook_warning <- TRUE
+  warning(
+    'Package path "', basename(pkg$path),
+    '" does not match package name "', pkg$package, '". ',
+    'This can result in problems when calling package hooks. ',
+    'Please rename the directory to match the package name.',
+    call. = FALSE)
 }

@@ -45,11 +45,14 @@ unload <- function(pkg = ".") {
     remove_s4_classes(pkg)
   }
 
+
   if (pkg$package %in% loadedNamespaces()) {
     # unloadNamespace will throw an error if it has trouble unloading.
     # This can happen when there's another package that depends on the
     # namespace.
     # unloadNamespace will also detach the package if it's attached.
+    #
+    # unloadNamespace calls onUnload hook and .onUnload
     try(unloadNamespace(pkg$package), silent = TRUE)
 
   } else {

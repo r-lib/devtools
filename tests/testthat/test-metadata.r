@@ -5,8 +5,8 @@ test_that("devtools metadata for load hooks", {
   # testLoadHooks test package has .onLoad and .onAttach
   load_all("testLoadHooks")
   md <- dev_meta("testLoadHooks")
-  expect_true(md$onLoad)
-  expect_true(md$onAttach)
+  expect_true(md$.onLoad)
+  expect_true(md$.onAttach)
   unload("testLoadHooks")
 
 
