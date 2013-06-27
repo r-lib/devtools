@@ -3,5 +3,5 @@
 #' @keywords internal
 #' @export
 has_tests <- function() {
-  system.file("test", package = "devtools") != ""
+  system.file("tests", package = "devtools") != ""
 }

@@ -63,5 +63,10 @@ find_test_dir <- function(path) {
 #' }
 #' @export
 devtest <- function(package) {
-  system.file(package = "devtools", "tests", "testthat", package)
+  stopifnot(has_tests())
+
+  path <- system.file(package = "devtools", "tests", "testthat", package)
+  if (path == "") stop(package, " not found", call. = FALSE)
+
+  path
 }
