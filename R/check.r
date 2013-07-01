@@ -63,15 +63,16 @@
 #' @param force_suggests if \code{FALSE}, don't force suggested packages, by
 #'   setting the \code{_R_CHECK_FORCE_SUGGESTS_} environment variable to
 #'   \code{FALSE}.
-#' @param args An optional character vector of additional command line
-#'   arguments to be passed to \code{R CMD check}.
+#' @param args,build_args An optional character vector of additional command
+#    line arguments to be passed to \code{R CMD check}/\code{R CMD build}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @seealso \code{\link{release}} if you want to send the checked package to
 #'   CRAN.
 #' @export
 check <- function(pkg = ".", document = TRUE, doc_clean = getOption("devtools.cleandoc"),
                   cleanup = TRUE, cran = TRUE, check_version = FALSE,
-                  force_suggests = TRUE, args = NULL, quiet = FALSE) {
+                  force_suggests = TRUE, args = NULL, build_args = NULL,
+                  quiet = FALSE) {
 
   pkg <- as.package(pkg)
 
@@ -82,7 +83,7 @@ check <- function(pkg = ".", document = TRUE, doc_clean = getOption("devtools.cl
   old <- set_envvar(compiler_flags(FALSE), "prefix")
   on.exit(set_envvar(old))
 
-  built_path <- build(pkg, tempdir(), quiet = quiet)
+  built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args)
   on.exit(unlink(built_path), add = TRUE)
 
   r_cmd_check_path <- check_r_cmd(built_path, cran, check_version,

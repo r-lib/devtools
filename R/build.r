@@ -17,13 +17,16 @@
 #'   \code{--no-manual --no-resave-data}) version of the package.
 #' @param vignettes For source packages: if \code{FALSE}, don't build PDF
 #'   vignettes (\code{--no-vignettes}).
+#' @param args An optional character vector of additional command
+#'   line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},
+#'   or \code{R CMD install} if \code{binary = TRUE}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @export
 #' @family build functions
 #' @return a string giving the location (including file name) of the built
 #'  package
 build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
-                  quiet = FALSE) {
+                  args = NULL, quiet = FALSE) {
   pkg <- as.package(pkg)
   if (is.null(path)) {
     path <- dirname(pkg$path)
@@ -32,26 +35,29 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
   compile_rcpp_attributes(pkg)
 
   if (binary) {
-    cmd <- paste("CMD INSTALL ", shQuote(pkg$path), " --build", sep = "")
+    args <- c("--build", args)
+    cmd <- paste0("CMD INSTALL ", shQuote(pkg$path), " ",
+      paste0(args, collapse = " "))
     ext <- if (.Platform$OS.type == "windows") "zip" else "tgz"
   } else {
-    args <- " --no-manual --no-resave-data"
+    args <- c(args, "--no-manual", "--no-resave-data")
 
     if (!vignettes) {
-      args <- paste(args, "--no-vignettes")
+      args <- c(args, "--no-vignettes")
 
     } else if (!nzchar(Sys.which("pdflatex"))) {
       message("pdflatex not found. Not building PDF vignettes.")
-      args <- paste(args, "--no-vignettes")
+      args <- c(args, "--no-vignettes")
     }
 
-    cmd <- paste("CMD build ", shQuote(pkg$path), args, sep = "")
+    cmd <- paste0("CMD build ", shQuote(pkg$path), " ",
+      paste0(args, collapse = " "))
 
     ext <- "tar.gz"
   }
   R(cmd, path, quiet = quiet)
 
-  targz <- paste(pkg$package, "_", pkg$version, ".", ext, sep = "")
+  targz <- paste0(pkg$package, "_", pkg$version, ".", ext)
 
   file.path(path, targz)
 }

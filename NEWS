@@ -31,6 +31,9 @@ NEW FEATURES
 
 MINOR IMPROVEMENTS AND BUG FIXES
 
+* `build()` gains `args` parameter allowing you to add additional arbitrary
+  arguments, and `check()` gains similar `build_args` parameter.
+
 * `install_git` gains `git_arg` parameter allowing you to add arbitrary
   additional arguments.
 
