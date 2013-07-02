@@ -146,10 +146,10 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   register_s3(pkg)
   out$dll <- load_dll(pkg)
 
-  run_onload(pkg)
-
-  # Invoke namespace load actions
+  # Run namespace load hooks
+  run_pkg_hook(pkg, "load")
   run_ns_load_actions(pkg)
+  run_user_hook(pkg, "load")
 
   # Set up the exports in the namespace metadata (this must happen after
   # the objects are loaded)
@@ -162,7 +162,9 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   # Copy over objects from the namespace environment
   export_ns(pkg)
 
-  run_onattach(pkg)
+  # Run hooks
+  run_pkg_hook(pkg, "attach")
+  run_user_hook(pkg, "attach")
 
   invisible(out)
 }

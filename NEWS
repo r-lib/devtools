@@ -29,6 +29,9 @@ NEW FEATURES
 
 * `parse_deps()`, which parses R's package dependency strings, is now exported.
 
+* All package and user events (e.g. load, unload, attach and detach) are now 
+  called in the correct place.
+
 MINOR IMPROVEMENTS AND BUG FIXES
 
 * `build()` gains `args` parameter allowing you to add additional arbitrary
