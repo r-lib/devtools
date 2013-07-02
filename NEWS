@@ -16,7 +16,8 @@ CHANGES TO BEST PRACTICES
   It is recommended to use `tests/testthat` because it allows users to
   choose whether or not to install test. If you move your tests from 
   `inst/tests` to `tests/testthat`, you'll also need to change 
-  `tests/test-all.R` to run `test_check()` instead of `test_package()`
+  `tests/test-all.R` to run `test_check()` instead of `test_package()`.
+  This change requires testthat 0.8 which will be available on CRAN shortly.
 
 * New devtools guarantee: if because of a devtools bug, a CRAN maintainer yells
   at you, I'll send you a hand-written apology note. Just forward me the email 
