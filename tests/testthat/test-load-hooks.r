@@ -1,5 +1,48 @@
 context("Load hooks")
 
+test_that("hooks called in correct order", {
+  record_use <- function(hook) {
+    function(...) {
+      h <- globalenv()$hooks
+      h$events <- c(h$events, hook)
+    }
+  }
+  reset_events <- function() {
+    assign("hooks", new.env(parent = emptyenv()), env = globalenv())
+    h <- globalenv()$hooks
+    h$events <- character()
+  }
+
+
+  setHook(packageEvent("testHooks", "attach"), record_use("user_attach"))
+  setHook(packageEvent("testHooks", "detach"), record_use("user_detach"))
+  setHook(packageEvent("testHooks", "onLoad"),   record_use("user_load"))
+  setHook(packageEvent("testHooks", "onUnload"), record_use("user_unload"))
+
+  reset_events()
+  load_all("testHooks")
+  expect_equal(globalenv()$hooks$events,
+    c("pkg_load", "user_load", "pkg_attach", "user_attach")
+  )
+
+  reset_events()
+  load_all("testHooks", reset = FALSE)
+  expect_equal(globalenv()$hooks$events, character())
+
+  reset_events()
+  unload("testHooks")
+  expect_equal(globalenv()$hooks$events,
+    c("user_detach", "pkg_detach", "user_unload", "pkg_unload")
+  )
+
+  rm(list = "hooks", envir = globalenv())
+  setHook(packageEvent("testHooks", "attach"), NULL, "replace")
+  setHook(packageEvent("testHooks", "detach"), NULL, "replace")
+  setHook(packageEvent("testHooks", "onLoad"),   NULL, "replace")
+  setHook(packageEvent("testHooks", "onUnload"), NULL, "replace")
+
+})
+
 test_that("onLoad and onAttach", {
   load_all("testLoadHooks")
   nsenv <- ns_env("testLoadHooks")
