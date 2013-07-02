@@ -23,7 +23,11 @@ run_pkg_hook <- function(pkg, hook) {
   nsenv <- ns_env(pkg)
   if (!exists(f_name, nsenv, inherits = FALSE)) return(FALSE)
 
-  nsenv[[f_name]](dirname(pkg$path), pkg$package)
+  if (hook %in% c("load", "attach")) {
+    nsenv[[f_name]](dirname(pkg$path), pkg$package)
+  } else {
+    nsenv[[f_name]](dirname(pkg$path))
+  }
   metadata[[f_name]] <- TRUE
 
   TRUE
