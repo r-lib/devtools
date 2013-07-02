@@ -48,7 +48,7 @@ run_user_hook <- function(pkg, hook) {
   hooks <- getHook(packageEvent(pkg$package, hook_name))
   if (length(hooks) == 0) return(FALSE)
 
-  for(fun in rev(hooks)) try(fun(pkgname, libpath))
+  for(fun in rev(hooks)) try(fun(dirname(pkg$path), pkg$package))
   metadata[[hook_name]] <- TRUE
   invisible(TRUE)
 }
