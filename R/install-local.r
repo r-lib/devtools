@@ -29,12 +29,26 @@ install_local_single <- function(path, subdir = NULL, ..., quiet = FALSE) {
     on.exit(unlink(path), add = TRUE)
   }
 
-  pkg_path <- if (is.null(subdir)) path else file.path(path, subdir)
+  if (is.null(subdir))
+    subdir <- '.'
 
-  # Check it's an R package
-  if (!file.exists(file.path(pkg_path, "DESCRIPTION"))) {
+  description_file <- list.files(path = file.path(path, subdir),
+                                 pattern = '^DESCRIPTION$',
+                                 full.names = TRUE)
+
+  if (length(description_file) == 0) {
     stop("Does not appear to be an R package (no DESCRIPTION)", call. = FALSE)
   }
+  if (length(description_file) > 1) {
+    warning(sprintf("Multiple DESCRIPTION files found in: %s. Using first",
+                    paste(subdir, collapse=", ")))
+    description_file <- description_file[1]
+  }
+
+  pkg_path <- dirname(description_file)
+
+  # Double-check
+  stopifnot(file.exists(file.path(pkg_path, "DESCRIPTION")))
 
   # Check configure is executable if present
   config_path <- file.path(pkg_path, "configure")
