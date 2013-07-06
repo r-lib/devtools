@@ -29,8 +29,9 @@ install_local_single <- function(path, subdir = NULL, ..., quiet = FALSE) {
     on.exit(unlink(path), add = TRUE)
   }
 
+  # Support R-Forge layout by default
   if (is.null(subdir))
-    subdir <- '.'
+    subdir <- c('.', 'pkg')
 
   description_file <- list.files(path = file.path(path, subdir),
                                  pattern = '^DESCRIPTION$',
