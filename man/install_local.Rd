@@ -9,7 +9,9 @@
   (tar, zip, tar.gz tar.bz2, tgz2 or tbz)}
 
   \item{subdir}{subdirectory within url bundle that
-  contains the R package.}
+  contains the R package. Can be a vector. By default, the
+  root directory and the \code{pkg} subdirectory are
+  considered.}
 
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}

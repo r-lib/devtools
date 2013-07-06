@@ -19,7 +19,9 @@
   \code{pull}; one of them must be \code{NULL}.}
 
   \item{subdir}{subdirectory within repo that contains the
-  R package.}
+  R package. Can be a vector. By default, the root
+  directory and the \code{pkg} subdirectory are
+  considered.}
 
   \item{branch}{Deprecated. Use \code{ref} instead.}
 
