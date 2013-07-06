@@ -10,7 +10,9 @@
 #' @param pull Desired pull request. A pull request refers to a branch,
 #'   so you can't specify both \code{branch} and \code{pull}; one of
 #'   them must be \code{NULL}.
-#' @param subdir subdirectory within repo that contains the R package.
+#' @param subdir subdirectory within repo that contains the R package. Can be a
+#'   vector. By default, the root directory and the \code{pkg} subdirectory are
+#'   considered.
 #' @param branch Deprecated. Use \code{ref} instead.
 #' @param auth_user your account username if you're attempting to install
 #'   a package hosted in a private repository (and your username is different

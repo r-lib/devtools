@@ -6,7 +6,9 @@
 #' @param project Gitorious project name
 #' @param repo Repo name
 #' @param ref Desired git ref - defaults to \code{"master"}
-#' @param subdir subdirectory within repo that contains the R package.
+#' @param subdir subdirectory within repo that contains the R package. Can be a
+#'   vector. By default, the root directory and the \code{pkg} subdirectory are
+#'   considered.
 #' @param branch Deprecated. Use \code{ref} instead.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @export

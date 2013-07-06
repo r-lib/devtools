@@ -7,7 +7,9 @@
 #'   zip file, a tar file or a bzipped/gzipped tar file.
 #' @param name optional package name, used to provide more informative
 #'   messages
-#' @param subdir subdirectory within url bundle that contains the R package.
+#' @param subdir subdirectory within url bundle that contains the R package. Can
+#'   be a vector. By default, the root directory and the \code{pkg} subdirectory
+#'   are considered.
 #' @param config additional configuration argument (e.g. proxy,
 #'   authentication) passed on to \code{\link[httr]{GET}}.
 #' @param ... Other arguments passed on to \code{\link{install}}.

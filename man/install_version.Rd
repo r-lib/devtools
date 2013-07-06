@@ -34,7 +34,7 @@
   installed on other platforms.
 
   The default is the appropriate binary type on Windows and
-  on the CRAN binary Mac OS X distribution, otherwise
+  on the CRAN binary OS X distribution, otherwise
   \code{"source"}.  For the platforms where binary packages
   are the default, an alternative is \code{"both"} which
   means \sQuote{try binary if available, otherwise try

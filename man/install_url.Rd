@@ -14,7 +14,9 @@
   informative messages}
 
   \item{subdir}{subdirectory within url bundle that
-  contains the R package.}
+  contains the R package. Can be a vector. By default, the
+  root directory and the \code{pkg} subdirectory are
+  considered.}
 
   \item{config}{additional configuration argument (e.g.
   proxy, authentication) passed on to
