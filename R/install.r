@@ -30,6 +30,7 @@
 #' @param dependencies \code{logical} indicating to also install uninstalled
 #'   packages which this \code{pkg} depends on/links to/suggests. See
 #'   argument \code{dependencies} of \code{\link{install.packages}}.
+#' @param ... Other arguments passed on to \code{\link{R}}.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
@@ -37,7 +38,7 @@
 #' @importFrom utils install.packages
 install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     args = getOption("devtools.install.args"), quiet = FALSE,
-                    dependencies = NA) {
+                    dependencies = NA, ...) {
 
   pkg <- as.package(pkg)
 
@@ -61,7 +62,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
 
   R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""),
-    quiet = quiet)
+    quiet = quiet, ...)
 
   if (reload) reload(pkg, quiet = quiet)
   invisible(TRUE)
