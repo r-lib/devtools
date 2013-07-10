@@ -30,7 +30,7 @@
 #' @param dependencies \code{logical} indicating to also install uninstalled
 #'   packages which this \code{pkg} depends on/links to/suggests. See
 #'   argument \code{dependencies} of \code{\link{install.packages}}.
-#' @param ... Other arguments passed on to \code{\link{R}}.
+#' @param ... Other (platform specific) arguments passed on to \code{\link{system2}}.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags

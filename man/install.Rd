@@ -37,7 +37,8 @@
   depends on/links to/suggests. See argument
   \code{dependencies} of \code{\link{install.packages}}.}
 
-  \item{...}{Other arguments passed on to \code{\link{R}}.}
+  \item{...}{Other (platform specific) arguments passed on
+  to \code{\link{system2}}.}
 }
 \description{
   Uses \code{R CMD INSTALL} to install the package. Will
