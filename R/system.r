@@ -7,7 +7,8 @@ system_check <- function(cmd, args = character(), env = character(),
   winstdout <- identical(.Platform$OS.type, "windows") && is.character(stdout) && nchar(stdout);
   
   if(isTRUE(winstdout)){
-    stdout <- TRUE;
+    outfile <- stdout
+    stdout <- TRUE
   }
                          
   if (quiet) {
@@ -26,7 +27,7 @@ system_check <- function(cmd, args = character(), env = character(),
   
   #workaround for windows
   if(isTRUE(winstdout)){
-    cat(result, file=stdout, sep="\n")
+    cat(result, file=outfile, sep="\n")
   }  
 
   if (stdout == TRUE) {
