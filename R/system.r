@@ -2,6 +2,14 @@
 # @param env a named character vector of environment variables.  Will be quoted
 system_check <- function(cmd, args = character(), env = character(),
                          quiet = FALSE, stdout="", stderr="", ...) {
+  
+  #workaround for windows file stdout
+  winstdout <- identical(.Platform$OS.type, "windows") && is.character(stdout) && nchar(stdout);
+  
+  if(isTRUE(winstdout)){
+    stdout <- TRUE;
+  }
+                         
   if (quiet) {
     #note: stdout=FALSE has issues on rstudio-win
     stdout <- TRUE
@@ -17,9 +25,9 @@ system_check <- function(cmd, args = character(), env = character(),
   ))
   
   #workaround for windows
-  if(identical(.Platform$OS.type, "windows") && is.character(stdout) && nchar(stdout)){
+  if(isTRUE(winstdout)){
     cat(result, file=stdout, sep="\n")
-  }
+  }  
 
   if (stdout == TRUE) {
     status <- attr(result, "status") %||% 0
