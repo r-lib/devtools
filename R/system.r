@@ -15,7 +15,7 @@ system_check <- function(cmd, args = character(), env = character(),
     system2(cmd, args, stdout = stdout, stderr = stderr, ...)
   ))
 
-  if (quiet) {
+  if (stdout == TRUE) {
     status <- attr(result, "status") %||% 0
   } else {
     status <- result
