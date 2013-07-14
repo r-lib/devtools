@@ -3,7 +3,8 @@
 system_check <- function(cmd, args = character(), env = character(),
                          quiet = FALSE, stdout="", stderr="", ...) {
   if (quiet) {
-    stdout <- FALSE
+    #note: stdout=FALSE has issues on rstudio-win
+    stdout <- TRUE
     stderr <- FALSE
   } else {  
     full <- paste(shQuote(cmd), " ", paste(args, collapse = ", "), sep = "")    
@@ -14,6 +15,11 @@ system_check <- function(cmd, args = character(), env = character(),
   result <- suppressWarnings(with_envvar(env,
     system2(cmd, args, stdout = stdout, stderr = stderr, ...)
   ))
+  
+  #workaround for windows
+  if(identical(.Platform$OS.type, "windows") && is.character(stdout) && nchar(stdout)){
+    cat(result, file=stdout, sep="\n")
+  }
 
   if (stdout == TRUE) {
     status <- attr(result, "status") %||% 0
