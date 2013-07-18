@@ -21,9 +21,17 @@ source_one <- function(file, envir = parent.frame()) {
   lines <- readLines(file, warn = FALSE)
   srcfile <- srcfilecopy(file, lines, file.info(file)[1, "mtime"],
                          isFile = TRUE)
-  exprs <- parse(text = lines, n = -1,
-                 srcfile = srcfile, keep.source = TRUE)
 
+  if(R.version$major >= "3"){
+      exprs <- parse(text = lines, n = -1,
+                     srcfile = srcfile, keep.source = TRUE)
+  }else{
+      ## fixme: remove this when 2.15 is no longer supported
+      oopts <- options(keep.source = TRUE)
+      on.exit(options(oopts))
+      exprs <- parse(text = lines, n = -1, srcfile = srcfile)
+  }
+  
   n <- length(exprs)
   if (n == 0L) return(invisible())
 
