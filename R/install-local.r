@@ -43,5 +43,5 @@ install_local_single <- function(path, subdir = NULL, ..., quiet = FALSE) {
   }
 
   # Finally, run install
-  install(pkg_path, local = TRUE, quiet = quiet, ...)
+  install(pkg_path, quiet = quiet, ...)
 }
