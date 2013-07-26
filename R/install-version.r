@@ -19,10 +19,6 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
   contriburl <- contrib.url(repos, type)
   available <- available.packages(contriburl)
 
-  if (!is.null(version)) {
-    version <- numeric_version(version)
-  }
-
   if (package %in% row.names(available)) {
     current.version <- available[package, 'Version']
     if (is.null(version) || version == current.version) {
@@ -31,7 +27,7 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     }
   }
 
-  con <- gzcon(url(sprintf("%s/src/contrib/Archive.rds", repos), "rb"))
+  con <- gzcon(url(sprintf("%s/src/contrib/Meta/archive.rds", repos), "rb"))
   on.exit(close(con))
   archive <- readRDS(con)
 
@@ -46,9 +42,9 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
   } else {
     package.path <- paste(package, "/", package, "_", version, ".tar.gz",
       sep = "")
-    if (!(package.path %in% info)) {
-      stop(sprintf("version '%s' is invalid for package '%s'", package,
-        version))
+    if (!(package.path %in% row.names(info))) {
+      stop(sprintf("version '%s' is invalid for package '%s'", version,
+        package))
     }
   }
 
