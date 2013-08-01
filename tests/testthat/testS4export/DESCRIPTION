@@ -1,0 +1,14 @@
+Package: testS4export
+Title: reproduce S4 export bug with devtools
+Version: 0.1
+Description: reproduce S4 export bug with devtools
+Author: Karl Forner <karl.forner@quartzbio.com>
+Maintainer: Karl Forner <karl.forner@quartzbio.com>
+Depends:
+    R (>= 2.15)
+Imports:
+    methods
+Suggests:
+    testthat (>= 0.7.1.99),
+License: GPL (>= 2)
+Collate: all.r
