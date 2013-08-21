@@ -76,6 +76,21 @@ release <- function(pkg = ".", check = TRUE) {
   if (yesno("Have you checked packages that depend on this package?"))
     return(invisible())
 
+  cat("Is this package a new submission?\n")
+  if (menu(c("No", "Yes")) == 2) {
+    if (yesno(paste("Have you read and agree to the the CRAN policies?\nAvailable here: http://cran.r-project.org/web/packages/policies.html")))
+      return(invisible())
+    new_submission <- "\nThis is a new submission. I have read and agree to the CRAN policies.\n"
+  } else {
+    new_submission <- ""
+  }
+    
+  if (menu("Is this a new submission?"))
+  if (yesno("Is this a new submission?"))
+    return(invisible())
+  else
+    return(invisible())
+  
   if (yesno("Ready to upload?"))
     return(invisible())
 
@@ -92,6 +107,7 @@ release <- function(pkg = ".", check = TRUE) {
     "Dear CRAN maintainers,\n",
     "\n",
     "I have just uploaded a new version of ", pkg$package, " to CRAN.\n",
+    new_submission,
     "\n",
     "Thanks!\n",
     "\n",
