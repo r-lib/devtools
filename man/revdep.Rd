@@ -2,7 +2,7 @@
 \alias{revdep}
 \alias{revdep_check}
 \alias{revdep_maintainers}
-\title{Reverese dependency tools.}
+\title{Reverse dependency tools.}
 \usage{
   revdep(pkg = NULL,
     dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
