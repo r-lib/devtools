@@ -85,12 +85,6 @@ release <- function(pkg = ".", check = TRUE) {
     new_submission <- ""
   }
     
-  if (menu("Is this a new submission?"))
-  if (yesno("Is this a new submission?"))
-    return(invisible())
-  else
-    return(invisible())
-  
   if (yesno("Ready to upload?"))
     return(invisible())
 
