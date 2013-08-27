@@ -36,7 +36,7 @@ check_pkg_extra_files <- function(pkgname, built_path) {
 
   # These are other common files in a source package
   other_files <- c("", "build", "CHANGELOG", "INSTALL", "README",
-    "README.md")
+    "README.md", "vignettes")
 
   # Now remove all the OK paths from the list; what remains are bad paths
   files <- files[!(files %in% c(req_files, opt_files, other_files))]
