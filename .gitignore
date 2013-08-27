@@ -3,3 +3,4 @@
 *.o
 *.dll
 *.Rproj
+.Rproj.user
