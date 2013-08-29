@@ -5,7 +5,7 @@
   install(pkg = ".", reload = TRUE, quick = FALSE,
     local = TRUE,
     args = getOption("devtools.install.args"),
-    quiet = FALSE, dependencies = NA)
+    quiet = FALSE, dependencies = NA, ...)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -36,6 +36,9 @@
   install uninstalled packages which this \code{pkg}
   depends on/links to/suggests. See argument
   \code{dependencies} of \code{\link{install.packages}}.}
+
+  \item{...}{Other (platform specific) arguments passed on
+  to \code{\link{system2}}.}
 }
 \description{
   Uses \code{R CMD INSTALL} to install the package. Will
