@@ -18,15 +18,18 @@ install_local <- function(path, subdir = NULL, ...) {
   invisible(lapply(path, install_local_single, subdir = subdir, ...))
 }
 
-install_local_single <- function(path, subdir = NULL, ..., quiet = FALSE) {
+install_local_single <- function(path, subdir = NULL, before_install = NULL, ..., quiet = FALSE) {
   stopifnot(file.exists(path))
   if (!quiet) {
     message("Installing package from ", path)
   }
 
   if (!file.info(path)$isdir) {
+    bundle <- path
     path <- decompress(path)
     on.exit(unlink(path), add = TRUE)
+  } else {
+    bundle <- NULL
   }
 
   pkg_path <- if (is.null(subdir)) path else file.path(path, subdir)
@@ -41,6 +44,10 @@ install_local_single <- function(path, subdir = NULL, ..., quiet = FALSE) {
   if (file.exists(config_path)) {
     Sys.chmod(config_path, "777")
   }
+  
+  # Call before_install for bundles (if provided)
+  if (!is.null(bundle) && !is.null(before_install))
+    before_install(bundle, pkg_path)
 
   # Finally, run install
   install(pkg_path, quiet = quiet, ...)

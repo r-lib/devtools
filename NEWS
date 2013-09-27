@@ -9,6 +9,8 @@ devtools 1.3.99
 * `check_devtools()` no longer incorrectly complains about a `vignettes/`
   directory
 
+* `install_github()` now adds details on the source of the installed package (e.g. repository, SHA1, etc.) to the package DESCRIPTION file (thanks to JJ Allaire)
+
 devtools 1.3
 ----------------
 
