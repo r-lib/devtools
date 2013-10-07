@@ -2,7 +2,7 @@ decompress <- function(src, target = tempdir()) {
   stopifnot(file.exists(src))
 
   if (grepl("\\.zip$", src)) {
-    unzip(src, exdir = target)
+    unzip(src, exdir = target, unzip = getOption("unzip"))
     outdir <- getdir(as.character(unzip(src, list = TRUE)$Name[1]))
 
   } else if (grepl("\\.tar$", src)) {

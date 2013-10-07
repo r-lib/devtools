@@ -1,6 +1,8 @@
 devtools 1.3.99
 ----------------
 
+* Decompression of zip files now respects `getOption("unzip")` (#326)
+
 * `dev_help` will now use the Rstudio help pane, if you're using a recent
   version of Rstudio (#322)
 
