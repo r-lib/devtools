@@ -23,11 +23,15 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' source_url("https://raw.github.com/gist/1654919/8161f74fb0ec26d1ba9fd54473a96f768ed76f56/test2.r")
+#' source_url("https://gist.github.com/hadley/6872663/raw/c053eafa78e9399f50d8ab5e0bfae314f07637d1/hi.r")
 #'
 #' # With a hash, to make sure the remote file hasn't changed
-#' source_url("https://raw.github.com/gist/1654919/8161f74fb0ec26d1ba9fd54473a96f768ed76f56/test2.r",
-#'   sha1 = "fc6551f13ceddcbe0730ff74c4300f2682c74028")
+#' source_url("https://gist.github.com/hadley/6872663/raw/c053eafa78e9399f50d8ab5e0bfae314f07637d1/hi.r",
+#'   sha1 = "54f1db27e60bb7e0486d785604909b49e8fef9f9")
+#'
+#' # With a truncated hash
+#' source_url("https://gist.github.com/hadley/6872663/raw/c053eafa78e9399f50d8ab5e0bfae314f07637d1/hi.r",
+#'   sha1 = "54f1db27e60")
 #' }
 source_url <- function(url, ..., sha1 = NULL) {
   stopifnot(is.character(url), length(url) == 1)
