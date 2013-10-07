@@ -3,7 +3,7 @@
 \title{Install a package from a url}
 \usage{
   install_url(url, name = NULL, subdir = NULL,
-    config = list(), ...)
+    config = list(), before_install = NULL, ...)
 }
 \arguments{
   \item{url}{location of package on internet. The url
@@ -19,6 +19,13 @@
   \item{config}{additional configuration argument (e.g.
   proxy, authentication) passed on to
   \code{\link[httr]{GET}}.}
+
+  \item{before_install}{a function that can modify the
+  contents of the package source directory prior to
+  installation. Accepts two parameters: bundle (the full
+  path to the downloaded package zip file) and pkg_path
+  (the path where the package source is staged prior to
+  installation)}
 
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}
