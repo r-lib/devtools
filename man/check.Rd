@@ -6,7 +6,7 @@
     doc_clean = getOption("devtools.cleandoc"),
     cleanup = TRUE, cran = TRUE, check_version = FALSE,
     force_suggests = TRUE, args = NULL, build_args = NULL,
-    quiet = FALSE)
+    quiet = FALSE, check_dir = tempdir())
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -43,6 +43,9 @@
 
   \item{quiet}{if \code{TRUE} suppresses output from this
   function.}
+
+  \item{check_dir}{the directory in which the package is
+  checked}
 }
 \description{
   \code{check} automatically builds and checks a source

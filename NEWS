@@ -1,6 +1,9 @@
 devtools 1.3.99
 ----------------
 
+* `check()` gains new `check_dir` argument to control where checking takes
+  place (#337)
+
 * `source_url()` (and `source_gist()`) accept SHA1 prefixes.
 
 * `source_gist()` uses the github api to reliably locate the raw gist.

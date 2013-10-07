@@ -66,13 +66,14 @@
 #' @param args,build_args An optional character vector of additional command
 #    line arguments to be passed to \code{R CMD check}/\code{R CMD build}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
+#' @param check_dir the directory in which the package is checked
 #' @seealso \code{\link{release}} if you want to send the checked package to
 #'   CRAN.
 #' @export
 check <- function(pkg = ".", document = TRUE, doc_clean = getOption("devtools.cleandoc"),
                   cleanup = TRUE, cran = TRUE, check_version = FALSE,
                   force_suggests = TRUE, args = NULL, build_args = NULL,
-                  quiet = FALSE) {
+                  quiet = FALSE, check_dir = tempdir()) {
 
   pkg <- as.package(pkg)
 
@@ -87,7 +88,7 @@ check <- function(pkg = ".", document = TRUE, doc_clean = getOption("devtools.cl
   on.exit(unlink(built_path), add = TRUE)
 
   r_cmd_check_path <- check_r_cmd(built_path, cran, check_version,
-    force_suggests, args, quiet = quiet)
+    force_suggests, args, quiet = quiet, check_dir = check_dir)
 
   check_devtools(pkg, built_path)
 
