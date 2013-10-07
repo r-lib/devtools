@@ -51,7 +51,7 @@ NULL
     devtools.desc.author = "# getOptions('devtools.desc.author')",
     devtools.desc.license = "# getOptions('devtools.desc.license')",
     devtools.desc.suggests = NULL,
-    devtools.desc = NULL,
+    devtools.desc = list(),
     github.user = "hadley"
   )
   toset <- !(names(op.devtools) %in% names(op))

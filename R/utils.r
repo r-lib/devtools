@@ -5,6 +5,9 @@ dir.exists <- function(x) {
   setNames(res, x)
 }
 
+compact <- function(x) {
+  Filter(Negate(is.null), x)
+}
 
 "%||%" <- function(a, b) if (!is.null(a)) a else b
 

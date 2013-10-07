@@ -1,6 +1,9 @@
 devtools 1.3.99
 ----------------
 
+* `create_description()` does a better job of combining defaults and user
+  specified options. (#332)
+
 * `build(binary = TRUE)` now no longer installs the package as a side-effect.
   (#335)
 

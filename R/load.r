@@ -178,7 +178,8 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 #' \code{options(devtools.author = '"Hadley Wickham <h.wickham@@gmail.com> [aut,cre]"',
 #'   devtools.license = "GPL-3")}.
 #' @param path path to package root directory
-#' @param extra a named list of extra options to add to \file{DESCRIPTION}
+#' @param extra a named list of extra options to add to \file{DESCRIPTION}. 
+#'   Arguments that take a list 
 #' @param quiet if \code{TRUE}, suppresses output from this function.
 #' @export
 #' @importFrom whisker whisker.render
@@ -195,25 +196,11 @@ create_description <- function(path, extra = getOption("devtools.desc"),
       call. = FALSE)
   }
 
-  desc <- list(
-    Package = basename(normalizePath(path)),
-    Title = "",
-    Description = "",
-    Version = "0.1",
-    "Authors@R" = getOption("devtools.desc.author"),
-    Depends = paste0("R (>= ", as.character(getRversion()) ,")"),
-    License = getOption("devtools.desc.license"),
-    LazyData = "true"
-  )
-  suggests <- getOption("devtools.desc.suggests")
-  if (length(suggests) > 0) {
-    desc$Suggests <- paste(getOption("devtools.desc.suggests"), collapse = ",")
-  }
-  desc <- c(desc, extra)
-
+  desc <- build_description(basename(normalizePath(path)), extra)
   lines <- paste0(names(desc), ": ", unlist(desc))
+  
   if (!quiet) {
-    message("No DESCRIPTION found. Creating default:\n\n" ,
+    message("No DESCRIPTION found. Creating with values:\n\n" ,
       paste(lines, collapse = "\n"))
   }
 
@@ -222,14 +209,24 @@ create_description <- function(path, extra = getOption("devtools.desc"),
   TRUE
 }
 
-description_vals <- function(path, extra = NULL) {
-  list(
-    name = basename(path),
-    author = getOption("devtools.desc.author"),
-    r_version = as.character(getRversion()),
-    license = getOption("devtools.desc.license"),
-    suggests = paste(getOption("devtools.desc.suggests"), collapse = ","),
-    extra = if (length(extra) > 0)
-      paste0(names(extra), ": ", unlist(extra), collapse = "\n")
-  )
+build_description <- function(name, extra = list()) {
+  
+  defaults <- compact(list(
+    Package = name,
+    Title = "",
+    Description = "",
+    Version = "0.1",
+    "Authors@R" = getOption("devtools.desc.author"),
+    Depends = paste0("R (>= ", as.character(getRversion()) ,")"),
+    License = getOption("devtools.desc.license"),
+    Suggests = getOption("devtools.desc.suggests"),
+    LazyData = "true"
+  ))
+  
+  # Override defaults with user supplied options
+  desc <- modifyList(defaults, extra)
+  # Collapse all vector arguments to single strings
+  desc <- lapply(desc, function(x) paste(x, collapse = ", "))
+  
+  desc
 }
