@@ -38,6 +38,10 @@
 #' @importFrom RCurl ftpUpload
 release <- function(pkg = ".", check = TRUE) {
   pkg <- as.package(pkg)
+  
+  # Figure out if this is a new package
+  cran_version <- cran_pkg_version(pkg$package)
+  new_pkg <- is.null(cran_version)  
 
   if (check) {
     check(pkg, cran = TRUE, check_version = TRUE)
@@ -45,11 +49,10 @@ release <- function(pkg = ".", check = TRUE) {
       return(invisible())
 
   } else {
-    # If we don't run the full checks, then check that the package version is
-    # sufficient for submission to CRAN.
-    cran_version <- cran_pkg_version(pkg$package)
+    # Even if we don't run the full checks, at least check that the package 
+    # version is sufficient for submission to CRAN.
 
-    if (is.null(cran_version)) {
+    if (new_pkg) {
       message("Package ", pkg$package, " not found on CRAN. This is a new package.")
 
     } else if (as.package_version(pkg$version) > cran_version) {
@@ -62,8 +65,19 @@ release <- function(pkg = ".", check = TRUE) {
     }
   }
 
-  if (yesno("Have you checked on win-builder (with build_win)?"))
-    return(invisible())
+  if (new_pkg) {
+    policies <- paste("Have you read and do you agree to the the CRAN policies?", 
+      "\n(http://cran.r-project.org/web/packages/policies.html)")
+
+    if (yesno(policies)) 
+      return(invisible())
+  }
+  
+  has_src <- file.exists(file.path(pkg$path, "src"))
+  if (has_src) {
+    if (yesno("Have you checked on win-builder (with build_win())?"))
+      return(invisible())    
+  }
 
   try(print(show_news(pkg)))
   if (yesno("Is package news up-to-date?"))
@@ -73,8 +87,14 @@ release <- function(pkg = ".", check = TRUE) {
   if (yesno("Is DESCRIPTION up-to-date?"))
     return(invisible())
 
-  if (yesno("Have you checked packages that depend on this package?"))
-    return(invisible())
+  deps <- length(revdep(pkg$package))
+  if (deps > 0) {
+    msg <- paste0("Have you checked the ", deps ," packages that depend on ", 
+      "this package (with check_cran())?")
+    
+    if (yesno(msg)
+      return(invisible())
+  }
 
   if (yesno("Ready to upload?"))
     return(invisible())
@@ -88,17 +108,27 @@ release <- function(pkg = ".", check = TRUE) {
     basename(built_path), sep = ""))
 
   message("Preparing email")
-  body <- paste(
+  body <- release_email(pkg$package, new_pkg)
+  subject <- paste("CRAN submission ", pkg$package, " ", pkg$version, sep = "")
+  email("cran@r-project.org", subject, body)
+}
+
+release_email <- function(name, new_pkg) {
+  paste(
     "Dear CRAN maintainers,\n",
     "\n",
-    "I have just uploaded a new version of ", pkg$package, " to CRAN.\n",
+    if (new_pkg) {
+      paste("I have uploaded a new package, ", name, ", to CRAN. ", 
+        "I have read and agree to the CRAN policies.\n", sep = "")
+    } else {
+      paste("I have just uploaded a new version of ", name, " to CRAN.\n",  
+        sep = "")
+    },
     "\n",
     "Thanks!\n",
     "\n",
     getOption("devtools.name"), "\n",
     sep = "")
-  subject <- paste("CRAN submission ", pkg$package, " ", pkg$version, sep = "")
-  email("cran@r-project.org", subject, body)
 }
 
 yesno <- function(question) {
