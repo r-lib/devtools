@@ -15,11 +15,12 @@
 #' @param srcpath path to directory to store source versions of dependent
 #'   packages - again, this saves a lot of time because you don't need to
 #'   redownload the packages every time you run the package.
+#' @param check_dir 
 #' @param bioconductor include bioconductor packages in checking?
 #' @param type binary package type of test
 #' @param threads number of concurrent threads to use for checking.
+#' @param check_dir the directory in which the package is checked
 #' @return invisible \code{TRUE} if successful and no ERRORs or WARNINGS,
-#' @param ... other parameters passed onto \code{\link{download.packages}}
 #' @importFrom tools package_dependencies
 #' @importFrom parallel mclapply
 #' @export
@@ -32,7 +33,7 @@
 #' }
 check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   srcpath = libpath, bioconductor = FALSE, type = getOption("pkgType"),
-  threads = 1, ...) {
+  threads = 1, check_dir = tempfile("check_cran")) {
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
 
@@ -89,8 +90,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   }
 
   # Create directory for storing results.
-  check_dir <- tempfile("check_cran")
-  dir.create(check_dir)
+  if (!file.exists(check_dir)) dir.create(check_dir)
 
   # Download and check each package, parsing output as we go.
   check_pkg <- function(i) {

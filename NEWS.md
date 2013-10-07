@@ -13,8 +13,8 @@
 * `install()` gains a `build_vignettes` which defaults to TRUE, and ensures 
   that vignettes are built even when doing a local install. (#344)
 
-* `check()` gains new `check_dir` argument to control where checking takes
-  place (#337)
+* `check()` and `check_cran()` gain new `check_dir` argument to control where 
+  checking takes place (#337)
 
 * `source_url()` (and `source_gist()`) accept SHA1 prefixes.
 
