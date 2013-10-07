@@ -79,7 +79,7 @@ source_url <- function(url, ..., sha1 = NULL) {
 #'   recommend as it prevents you from accidentally running code that's not
 #'   what you expect. See \code{\link{source_url}} for more information on 
 #'   using a SHA-1 hash.
-#' @param if \code{FALSE}, the default, prints informative messages.
+#' @param quiet if \code{FALSE}, the default, prints informative messages.
 #' @export
 #' @examples
 #' # You can run gists given their id

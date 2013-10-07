@@ -18,8 +18,8 @@
   \code{\link{source_url}} for more information on using a
   SHA-1 hash.}
 
-  \item{if}{\code{FALSE}, the default, prints informative
-  messages.}
+  \item{quiet}{if \code{FALSE}, the default, prints
+  informative messages.}
 }
 \description{
   \dQuote{Gist is a simple way to share snippets and pastes
