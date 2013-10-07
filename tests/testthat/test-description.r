@@ -1,4 +1,4 @@
-context("Documentation checks")
+context("DESCRIPTION checks")
 
 test_that("invalid DESCRIPTION gives warning", {
   expect_message(load_all("testInvalidDescription"), "Invalid DESCRIPTION")
