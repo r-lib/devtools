@@ -3,8 +3,8 @@
 #' This function is vectorised so you can install multiple packages in
 #' a single command.
 #'
-#' @param username Github username
-#' @param repo Repo name
+#' @param repo,username Repo and user name. Alternatively, you can specify
+#'   repos using the full "username/repo" syntax.
 #' @param ref Desired git reference. Could be a commit, tag, or branch
 #'   name. Defaults to \code{"master"}.
 #' @param pull Desired pull request. A pull request refers to a branch,
@@ -22,11 +22,18 @@
 #' @examples
 #' \dontrun{
 #' install_github("roxygen")
+#' install_github("wch/ggplot2")
 #' }
 #' @importFrom httr authenticate
 install_github <- function(repo, username = getOption("github.user"),
   ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL, password = NULL, ...) {
 
+  if (grepl("/", repo)) {
+    pieces <- strsplit(repo, "/")[[1]]
+    username <- pieces[1]
+    repo <- pieces[2]
+  }
+  
   if (!is.null(branch)) {
     warning("'branch' is deprecated. In the future, please use 'ref' instead.")
     ref <- branch

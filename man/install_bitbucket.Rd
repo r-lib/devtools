@@ -6,9 +6,9 @@
     branch = NULL, auth_user = NULL, password = NULL, ...)
 }
 \arguments{
-  \item{username}{bitbucket username}
+  \item{repo}{repo name}
 
-  \item{repo}{Repo name}
+  \item{username}{bitbucket username}
 
   \item{ref}{Desired git reference. Could be a commit, tag,
   or branch name. Defaults to \code{"master"}.}

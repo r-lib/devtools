@@ -7,9 +7,9 @@
     branch = NULL, auth_user = NULL, password = NULL, ...)
 }
 \arguments{
-  \item{username}{Github username}
-
-  \item{repo}{Repo name}
+  \item{repo,username}{Repo and user name. Alternatively,
+  you can specify repos using the full "username/repo"
+  syntax.}
 
   \item{ref}{Desired git reference. Could be a commit, tag,
   or branch name. Defaults to \code{"master"}.}
@@ -40,6 +40,7 @@
 \examples{
 \dontrun{
 install_github("roxygen")
+install_github("wch/ggplot2")
 }
 }
 \seealso{

@@ -3,6 +3,7 @@
 #' This function is vectorised so you can install multiple packages in
 #' a single command.
 #'
+#' @param repo repo name
 #' @param username  bitbucket username
 #' @seealso Bitbucket API docs:
 #'   \url{https://confluence.atlassian.com/display/BITBUCKET/Use+the+Bitbucket+REST+APIs}
