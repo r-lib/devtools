@@ -19,12 +19,11 @@
 #'   package after installing.
 #' @param quick if \code{TRUE} skips docs, multiple-architectures,
 #'   demos, and vignettes, to make installation as fast as possible.
-#' @param local if \code{TRUE} does not build the package first, instead
-#'   installing from the local package directory. This may result in build
-#'   artefacts in your package directory, but is considerably faster, and does
-#'   not require a recompile every time you run it.
+#' @param local if \code{TRUE} installs the package without building it first.
+#'   This may result in build artefacts in your package directory, but is 
+#'   considerably faster because it does not recompile the package.
 #' @param args An optional character vector of additional command line
-#'   arguments to bew passed to \code{R CMD install}. This defaults to the
+#'   arguments to be passed to \code{R CMD install}. This defaults to the
 #'   value of the option \code{"devtools.install.args"}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @param dependencies \code{logical} indicating to also install uninstalled
