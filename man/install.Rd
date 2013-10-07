@@ -18,11 +18,12 @@
   multiple-architectures, demos, and vignettes, to make
   installation as fast as possible.}
 
-  \item{local}{if \code{TRUE} does not build the package
-  first, instead installing from the local package
-  directory. This may result in build artefacts in your
-  package directory, but is considerably faster, and does
-  not require a recompile every time you run it.}
+  \item{local}{if \code{FALSE} \code{\link{build}}s the
+  package first: this ensures that the installation is
+  completely clean, and prevents any binary artefacts (like
+  \file{.o}, \code{.so}) from appearing in your local
+  package directory, but is considerably slower, because
+  every compile has to start from scratch.}
 
   \item{args}{An optional character vector of additional
   command line arguments to bew passed to \code{R CMD
