@@ -27,11 +27,6 @@
   automatically versioned, forkable and usable as a git
   repository.} \url{https://gist.github.com/}
 }
-\details{
-  Gist is based on git, so a gist has commit histories
-  (i.e., revisions). You can specify a commit by giving a
-  SHA of the commit.
-}
 \examples{
 # You can run gists given their id
 source_gist(6872663)

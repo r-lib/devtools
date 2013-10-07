@@ -61,9 +61,6 @@ source_url <- function(url, ..., sha1 = NULL) {
 #'   forkable and usable as a git repository.}
 #' \url{https://gist.github.com/}
 #'
-#' Gist is based on git, so a gist has commit histories (i.e., revisions).
-#' You can specify a commit by giving a SHA of the commit.
-#'
 #' @param id either full url (character), gist ID (numeric or character of
 #'   numeric). If a gist ID is specified and the entry has multiple files,
 #'   only the first R file in the gist is sourced.
