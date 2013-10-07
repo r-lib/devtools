@@ -10,7 +10,7 @@
   \item{...}{other options passed to \code{\link{source}}}
 
   \item{sha1}{The (prefix of the) SHA-1 hash of the file at
-  the remote URL}
+  the remote URL.}
 }
 \description{
   Internally, \code{source_url} calls \code{\link{getURL}}
@@ -28,7 +28,10 @@
   displaying the hash of the downloaded file. The purpose
   of this is to improve security when running
   remotely-hosted code; if you have a hash of the file, you
-  can be sure that it has not changed.
+  can be sure that it has not changed. For convenience, it
+  is possible to use a truncated SHA1 hash, down to 6
+  characters, but keep in mind that a truncated hash won't
+  be as secure as the full hash.
 }
 \examples{
 \dontrun{

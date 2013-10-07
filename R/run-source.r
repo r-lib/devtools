@@ -11,11 +11,13 @@
 #' SHA-1 hash is not specified, it will print a message displaying the hash of
 #' the downloaded file. The purpose of this is to improve security when running
 #' remotely-hosted code; if you have a hash of the file, you can be sure that
-#' it has not changed.
+#' it has not changed. For convenience, it is possible to use a truncated SHA1
+#' hash, down to 6 characters, but keep in mind that a truncated hash won't be
+#' as secure as the full hash.
 #'
 #' @param url url
 #' @param ... other options passed to \code{\link{source}}
-#' @param sha1 The (prefix of the) SHA-1 hash of the file at the remote URL
+#' @param sha1 The (prefix of the) SHA-1 hash of the file at the remote URL.
 #' @importFrom httr GET stop_for_status text_content
 #' @importFrom digest digest
 #' @export
@@ -42,6 +44,10 @@ source_url <- function(url, ..., sha1 = NULL) {
   if (is.null(sha1)) {
     message("SHA-1 hash of file is ", file_sha1)
   } else {
+    if (nchar(sha1) < 6) {
+      stop("Supplied SHA-1 hash is too short (must be at least 6 characters)")
+    }
+
     # Truncate file_sha1 to length of sha1
     file_sha1 <- substr(file_sha1, 1, nchar(sha1))
     
@@ -84,7 +90,10 @@ source_url <- function(url, ..., sha1 = NULL) {
 #' # sha1 argument - this will throw an error if the file has changed since
 #' # you first ran it
 #' source_gist(6872663, sha1 = "54f1db27e60")
-#' \dontrun{source_gist(6872663, sha1 = "54f1db27e61")}
+#' \dontrun{
+#' # Wrong hash will result in error
+#' source_gist(6872663, sha1 = "54f1db27e61")
+#' }
 source_gist <- function(id, ..., sha1 = NULL, quiet = FALSE) {
   stopifnot(length(id) == 1)
   
