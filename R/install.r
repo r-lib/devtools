@@ -31,6 +31,10 @@
 #' @param dependencies \code{logical} indicating to also install uninstalled
 #'   packages which this \code{pkg} depends on/links to/suggests. See
 #'   argument \code{dependencies} of \code{\link{install.packages}}.
+#' @param build_vignettes if \code{TRUE}, will build vignettes. Normally it is
+#'   \code{build} that's responsible for creating vignettes; this argument makes
+#'   sure vignettes are built even if a build never happens (i.e. because 
+#'   \code{local = TRUE}.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
@@ -38,7 +42,7 @@
 #' @importFrom utils install.packages
 install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     args = getOption("devtools.install.args"), quiet = FALSE,
-                    dependencies = NA) {
+                    dependencies = NA, build_vignettes = !quick) {
 
   pkg <- as.package(pkg)
 
@@ -48,8 +52,9 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   # Build the package. If quick, don't build vignettes
   if (local) {
     built_path <- pkg$path
+    if (build_vignettes) build_vignettes(pkg)
   } else {
-    built_path <- build(pkg, tempdir(), vignettes = !quick, quiet = quiet)
+    built_path <- build(pkg, tempdir(), vignettes = build_vignettes, quiet = quiet)
     on.exit(unlink(built_path))
   }
 
