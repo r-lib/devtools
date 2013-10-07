@@ -225,9 +225,9 @@
 * `load_all` inserts a special version of `system.file` into the package's
   imports environment. This tries to simulate the behavior of
   `base::system.file` but gives modified results because the directory structure
-  of installed packages and uninstalled source packages is different. (Fixes
-  #179). In other words, `system.file` should now just work even if the package
-  is loaded with devtools.
+  of installed packages and uninstalled source packages is different. 
+  (Fixes #179). In other words, `system.file` should now just work even if the 
+  package is loaded with devtools.
 
 * Source files are only recompiled if they've changed since the last run, and 
   the recompile will be clean (`--preclean`) if any exported header files have
@@ -327,8 +327,8 @@
 
 * `install_github` now accepts `auth_user` and `password` arguments if you
   want to install a package in a private github repo. You only need to specify
-  `auth_user` if it's not your package (i.e. it's not your `username`) (Fixes
-  #116)
+  `auth_user` if it's not your package (i.e. it's not your `username`) 
+  (Fixes #116)
 
 * new `dev_help` function replaces `show_rd` and makes it easy to get help on
   any topic in a development package (i.e. a package loaded with `load_all`)
@@ -348,8 +348,8 @@
   LOADING section). It also compiles and loads C/C++/Fortran code.
 
 * `unload()` is now an exported function, which unloads a package, trying
-  harder than just `detach`. It now also unloads DLLs. (Winston Chang. Fixes
-  #119)
+  harder than just `detach`. It now also unloads DLLs. (Winston Chang. 
+  Fixes #119)
 
 * `run_examples` now has parameters `show`, `test`, `run` to control which of
   `\dontrun{}`, `\dontshow{}`, `\donttest{}` and `\testonly{}` are commented
@@ -482,8 +482,8 @@
   errors (Fixes #82).
 
 * `install` has new quick option to make package installation faster, by
-  sacrificing documentation, demos and multi-architecture binaries. (Fixes
-  #77)
+  sacrificing documentation, demos and multi-architecture binaries. 
+  (Fixes #77)
 
 * `install_url`, `install_github` and `install_gitorious` gain a subdir
   argument which makes it possible to install packages that are contained
@@ -630,8 +630,8 @@
   the data directory. (Fixes #45)
 
 * `dev_mode` performs some basic tests to make sure you're not setting your
-  development library to a directory that's not already an R library. (Fixes
-  #25)
+  development library to a directory that's not already an R library. 
+  (Fixes #25)
 
 # devtools 0.5.1
 
