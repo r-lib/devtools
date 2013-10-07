@@ -4,14 +4,22 @@
 #' packages that depend on the specified package.
 #'
 #' @param pkg package name
+#' @param ignore A character vector of package names to ignore. These packages
+#'   will not appear in returned vector.
 #' @inheritParams tools::dependsOnPkgs
 #' @importFrom tools dependsOnPkgs
 #' @export
 #' @examples
-#' \dontrun{revdep("ggplot2")}
+#' \dontrun{
+#' revdep("ggplot2")
+#'
+#' revdep("ggplot2", ignore = c("xkcd", "zoo"))
+#'}
 revdep <- function(pkg = NULL, dependencies = c("Depends", "Imports",
-                    "Suggests", "LinkingTo"), recursive = FALSE) {
-  sort(dependsOnPkgs(pkg, dependencies, recursive, installed = packages()))
+                   "Suggests", "LinkingTo"), recursive = FALSE, ignore = NULL) {
+  deps <- dependsOnPkgs(pkg, dependencies, recursive, installed = packages())
+  deps <- setdiff(deps, ignore)
+  sort(deps)
 }
 
 #' @rdname revdep
@@ -23,8 +31,8 @@ revdep_maintainers <- function(pkg = ".") {
 #' @rdname revdep
 #' @param ... Other parameters passed on to \code{\link{check_cran}}
 #' @export
-revdep_check <- function(pkg = NULL, recursive = FALSE, ...) {
-  pkgs <- revdep(pkg, recursive = recursive)
+revdep_check <- function(pkg = NULL, recursive = FALSE, ignore = NULL, ...) {
+  pkgs <- revdep(pkg, recursive = recursive, ignore = ignore)
   check_cran(pkgs, ...)
 }
 

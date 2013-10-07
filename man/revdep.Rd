@@ -6,14 +6,19 @@
 \usage{
   revdep(pkg = NULL,
     dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
-    recursive = FALSE)
+    recursive = FALSE, ignore = NULL)
 
   revdep_maintainers(pkg = ".")
 
-  revdep_check(pkg = NULL, recursive = FALSE, ...)
+  revdep_check(pkg = NULL, recursive = FALSE,
+    ignore = NULL, ...)
 }
 \arguments{
   \item{pkg}{package name}
+
+  \item{ignore}{A character vector of package names to
+  ignore. These packages will not appear in returned
+  vector.}
 
   \item{...}{Other parameters passed on to
   \code{\link{check_cran}}}
@@ -33,6 +38,10 @@
   package.
 }
 \examples{
-\dontrun{revdep("ggplot2")}
+\dontrun{
+revdep("ggplot2")
+
+revdep("ggplot2", ignore = c("xkcd", "zoo"))
+}
 }
 
