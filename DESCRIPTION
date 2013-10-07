@@ -26,7 +26,8 @@ Suggests:
     BiocInstaller,
     Rcpp (>= 0.10.0),
     MASS,
-    knitr
+    knitr,
+    rstudio
 License: GPL (>= 2)
 Collate:
     'R.r'

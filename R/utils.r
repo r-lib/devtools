@@ -20,3 +20,10 @@ ends_with_newline <- function(path) {
   lastByte <- readBin(conn, "raw", n = 1)
   lastByte == 0x0a
 }
+
+rstudio_has <- function(f = NULL) {
+  if (is.null(f)) return("tools:rstudio" %in% search())
+  
+  exists(as.character(f), asNamespace("rstudio"))
+
+}
