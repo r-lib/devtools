@@ -11,6 +11,11 @@ compact <- function(x) {
 
 "%||%" <- function(a, b) if (!is.null(a)) a else b
 
+"%:::%" <- function(p, f) {
+  ns <- asNamespace(as.character(substitute(p)))
+  eval(substitute(f), ns)
+}
+
 rule <- function() {
   message(paste(rep("-", getOption("width"), collapse = "")))
 }
@@ -28,5 +33,4 @@ rstudio_has <- function(f = NULL) {
   if (is.null(f)) return("tools:rstudio" %in% search())
   
   exists(as.character(f), asNamespace("rstudio"))
-
 }
