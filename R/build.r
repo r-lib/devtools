@@ -55,8 +55,7 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
 
     ext <- "tar.gz"
   }
-  R(cmd, path, quiet = quiet)
-
+  with_libpaths(c(tempdir(), .libPaths()), R(cmd, path, quiet = quiet))
   targz <- paste0(pkg$package, "_", pkg$version, ".", ext)
 
   file.path(path, targz)
