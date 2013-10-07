@@ -12,7 +12,10 @@
   Builds package vignettes using the same algorithm that
   \code{R CMD build} does. This means includes non-Sweave
   vignettes, using make files (if present), and copying
-  over extra files.
+  over extra files. You need to ensure that these files are
+  not included in the built package - ideally they should
+  not be checked into source, or at least excluded with
+  \code{.Rbuildignore}
 }
 \seealso{
   \code{\link{clean_vignettes}} to remove the pdfs in
