@@ -1,5 +1,4 @@
-devtools 1.3.99
-----------------
+# devtools 1.3.99
 
 * `install_github()` now takes repo names of the form `username/repo` - 
   this is now the recommended form for install_github if your username is
@@ -46,10 +45,9 @@ devtools 1.3.99
   (e.g. repository, SHA1, etc.) to the package DESCRIPTION file. (Thanks to JJ 
   Allaire)
 
-devtools 1.3
-----------------
+# devtools 1.3
 
-CHANGES TO BEST PRACTICES
+## Changes to best practices
 
 * The documentation for many devtools functions has been considerably expanded,
   aiming to give the novice package developer more hints about what they should
@@ -71,7 +69,7 @@ CHANGES TO BEST PRACTICES
   at you, I'll send you a hand-written apology note. Just forward me the email 
   and your address.
 
-NEW FEATURES
+## New features
 
 * New `install_local()` function for installing local package files 
  (as zip, tar, tgz, etc.) (Suggested by landroni)
@@ -81,7 +79,7 @@ NEW FEATURES
 * All package and user events (e.g. load, unload, attach and detach) are now 
   called in the correct place.
 
-MINOR IMPROVEMENTS AND BUG FIXES
+## Minor improvements and bug fixes
 
 * `build()` gains `args` parameter allowing you to add additional arbitrary
   arguments, and `check()` gains similar `build_args` parameter.
@@ -123,10 +121,9 @@ MINOR IMPROVEMENTS AND BUG FIXES
 * Bump max compatible version of R with RTools 3.0, and add details for 
   RTools 3.1
 
-devtools 1.2
------------------
+# devtools 1.2
 
-BETTER INSTALLATION
+## Better installation
 
 * `install` gains a `local` option for installing the package from the local
   package directory, rather than from a built tar.gz.  This is now used by 
@@ -139,7 +136,7 @@ BETTER INSTALLATION
 
 * `install_git` gains `branch` argument to specify branch or tag (Fixes #255)
 
-CLEAN SESSIONS
+## Clean sessions
 
 * `run_examples` and `test` gain a `fresh` argument which forces them to run 
   in a fresh R session. This completely insulates the examples/tests from your 
@@ -151,7 +148,7 @@ CLEAN SESSIONS
 * `clean_source` loses the `vanilla` argument (which did not work) and gains 
   a `quiet` argument
 
-NEW FEATURES
+## New features
 
 * `source_url` and `source_gist` now allow you to specify a sha, so you can
   make sure that files you source from the internet don't change without you 
@@ -173,7 +170,7 @@ NEW FEATURES
   `.Rprofile` to control what it contains: see `package?devtools` for more
   details.
 
-MINOR IMPROVEMENTS
+## Minor improvements
 
 * `check()` now also sets environment variable 
   `_R_CHECK_CODE_DATA_INTO_GLOBALENV_` to TRUE (to match current `--as-cran` 
@@ -184,7 +181,7 @@ MINOR IMPROVEMENTS
 
 * `revdep` includes LinkingTo by default.
 
-* Fixed regular expression problem that caused RTools 3.0.* to fail to be 
+* Fixed regular expression problem that caused RTools `3.0.*` to fail to be 
   found on Windows.
 
 * `load_data()` got an overhaul and now respects `LazyData` and correctly 
@@ -203,8 +200,7 @@ MINOR IMPROVEMENTS
 * When `load_all()` calls `.onAttach()` and `.onLoad()`, it now passes the
   lib path to those functions.
 
-devtools 1.1
------------------
+# devtools 1.1
 
 * `source_gist()` has been updated to accept new gist URLs with username.
   (Fixes #247)
@@ -218,10 +214,9 @@ devtools 1.1
 * Catch additional case in `find_rtools()`: previously installed, but directory 
   empty/deleted (Fixes #241)
 
-devtools 1.0
------------------
+# devtools 1.0
 
-IMPROVEMENTS TO PACKAGE LOADING
+## Improvements to package loading
 
 * Rcpp attributes are now automatically compiled during build.
 
@@ -245,7 +240,7 @@ IMPROVEMENTS TO PACKAGE LOADING
 
 * S4 classes are correctly loaded and unloaded.
 
-WINDOWS
+## Windows
 
 * Rtools detection on windows has been substantially overhauled and should both
   be more reliable, and when it fails give more information about what is wrong
@@ -254,7 +249,7 @@ WINDOWS
 * If you don't have rtools installed, devtools now automatically sets the TAR
   environment variable to internal so you can still build packages.
 
-MINOR FEATURES
+## Minor features
 
 * `check_cran` now downloads packages from cran.rstudio.com.
 
@@ -295,7 +290,7 @@ MINOR FEATURES
 * Most devtools functions can a quiet argument that suppresses output. This is
   particularly useful for testing.
 
-BUG FIXES
+## Bug fixes
 
 * Fixed path issue when looking for Rtools on windows when registry entry is not present. (Fixes #201)
 
@@ -320,10 +315,9 @@ BUG FIXES
 * When a package is loaded with `load_all()`, it now passes the name of the
   package to the `.onLoad()` function. (Thanks to Andrew Redd)
 
-devtools 0.8.0
---------------
+# devtools 0.8.0
 
-NEW FEATURES
+## New features
 
 * `create` function makes it easier to create a package skeleton using
   devtools standards.
@@ -371,7 +365,7 @@ NEW FEATURES
 * All system R command now print the full command used to make it easier to
   understand what's going on.
 
-PACKAGE PATHS
+## Package paths
 
 * `as.package` no longer uses `~/.Rpackages`.
 
@@ -386,7 +380,7 @@ PACKAGE PATHS
 * New function `devtest()` returns paths to an internal testing packages
   in devtools.
 
-LOADING
+## Loading
 
 * Development packages are now loaded into a namespace environment,
   <namespace:xxxx>, and then the objects namespace are copied to the
@@ -437,7 +431,7 @@ LOADING
   Fortan source code, and clean up the compiled objects, respectively.
   (Winston Chang. Fixes #131)
 
-BUG FIXES
+## Bug fixes
 
 * `load_code` now properly skips missing files. (Winston Chang)
 
@@ -451,7 +445,7 @@ BUG FIXES
 
 * `build` now builds vignettes because `install` does not. (Fixes #155)
 
-INTROSPECTION
+## Introspection
 
 * New function `loaded_packages()`, which returns the names of packages
   that are loaded and attached.
@@ -469,18 +463,16 @@ INTROSPECTION
 * New function `parenvs()`, which parents the parent environments
   of an object. (Winston Chang)
 
-devtools 0.7.1
---------------
+# devtools 0.7.1
 
 * bump dependency to R 2.15
 
 * `load_code` now also looks for files ending in `.q` - this is not
   recommended, but is needed for some older packages
 
-devtools 0.7
-------------
+# devtools 0.7
 
-INSTALLATION
+## Installation
 
 * `install_bitbucket` installs R packages on bitbucket.
 
@@ -497,7 +489,7 @@ INSTALLATION
   argument which makes it possible to install packages that are contained
   within a sub-directory of a repository or compressed file. (Fixes #64)
 
-CHECKING
+## Checking
 
 * `with_debug` function temporarily sets env vars so that compilation is
   performed with the appropriate debugging flags set. Contributed by Andrew
@@ -514,7 +506,7 @@ CHECKING
 * `check` uses new `--as-cran` option to make checking as close to CRAN as
   possible (fixes #68)
 
-OTHER NEW FEATURES
+## Other new features
 
 * devtools now uses options `devtools.path` to set the default path to use
   with devmode, and `github.user` to set the default user when installing
@@ -545,7 +537,7 @@ OTHER NEW FEATURES
 * If you're on windows, `devtools` now suppresses the unimportant warning from
   CYGWIN about the dos style file paths
 
-BUG FIXES
+## Bug fixes
 
 * `decompress` now uses target directory as defined in the function call
   when expanding a compressed file. (Fixes #84)
@@ -565,10 +557,9 @@ BUG FIXES
 * `load_code` does a better job of reconciling files in DESCRIPTION collate
   with files that actually exist in the R directory. (Fixes #14)
 
-devtools 0.6
-------------
+# devtools 0.6
 
-NEW FEATURES
+## New features
 
 * `test` function takes `filter` argument which allows you to restrict which
   tests are to be run
@@ -601,7 +592,7 @@ NEW FEATURES
   development environment into the search path in a way that fails to recreate
   what happens normally during package loading.
 
-INSTALLATION
+## Installation
 
 * remote installation will ensure the configure file is executable.
 
@@ -615,7 +606,7 @@ INSTALLATION
 * include `install_version` function from Jeremy Stephens for installing a
   specific version of a CRAN package from the archive.
 
-BETTER WINDOWS BEHAVIOUR
+## Better windows behaviour
 
 * better check for OS type (thanks to Brian Ripley)
 
@@ -624,7 +615,7 @@ BETTER WINDOWS BEHAVIOUR
 * check to see if Rtools is already available before trying to mess with the
   paths. (Fixes #55)
 
-BUG FIXES
+## Bug fixes
 
 * if an error occurs when calling loading R files, the cache will be
   automatically cleared so that all files are loaded again next time you try
@@ -642,20 +633,18 @@ BUG FIXES
   development library to a directory that's not already an R library. (Fixes
   #25)
 
-devtools 0.5.1
---------------
+# devtools 0.5.1
 
 * Fix error in that was causing R commands to fail on windows.
 
-devtools 0.5
---------------
+# devtools 0.5
 
-NEW FUNCTIONS
+## New functions
 
 * new `show_rd` function that will show the development version of a help
   file.
 
-IMPROVEMENTS AND BUG FIXES
+## Improvements and bug fixes
 
 * external R commands always run in locale `C`, because that's what the CRAN
   severs do.
@@ -668,10 +657,9 @@ IMPROVEMENTS AND BUG FIXES
 * On windows, `devtools` will also add the path to `mingw` on startup. (Thanks
   to pointer from Dave Lovell)
 
-devtools 0.4
-------------
+# devtools 0.4
 
-NEW FUNCTIONS
+## New functions
 
 * new `wd` function to change the working directory to a package subdirectory.
 
@@ -689,7 +677,7 @@ NEW FUNCTIONS
   make a binary version of your package for windows users if you're using
   linux or a max (if you're using windows already, use `build(binary = T)`)
 
-IMPROVEMENTS AND BUG FIXES
+## Improvements and bug fixes
 
 * if using `.Rpackages` config file, default function is used last, not first.
 
@@ -716,8 +704,7 @@ IMPROVEMENTS AND BUG FIXES
 
 * `test` automatically reloads code so you never run tests on old code 
 
-devtools 0.3
-------------
+# devtools 0.3
 
 * new `bash()` function that starts bash shell in package directory. Useful if
   you want to use git etc.
@@ -733,8 +720,7 @@ devtools 0.3
   themselves - always try to both work in session temporary directory and
   delete any files/directories that they create
 
-devtools 0.2
-------------
+# devtools 0.2
 
 * `install_github` now uses `RCurl` instead of external `wget` to retrieve
   package. This should make it more robust wrt external dependencies.
@@ -745,8 +731,7 @@ devtools 0.2
 
 * Quote the path to R so it works even if there are spaces in the path.
 
-devtools 0.1
-------------
+# devtools 0.1
 
 * Check for presence of `DESCRIPTION` when loading packages to avoid false
   positives
