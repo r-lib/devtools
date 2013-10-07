@@ -92,7 +92,7 @@ release <- function(pkg = ".", check = TRUE) {
     msg <- paste0("Have you checked the ", deps ," packages that depend on ", 
       "this package (with check_cran())?")
     
-    if (yesno(msg)
+    if (yesno(msg))
       return(invisible())
   }
 
