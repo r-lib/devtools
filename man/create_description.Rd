@@ -9,7 +9,7 @@
   \item{path}{path to package root directory}
 
   \item{extra}{a named list of extra options to add to
-  \file{DESCRIPTION}}
+  \file{DESCRIPTION}.  Arguments that take a list}
 
   \item{quiet}{if \code{TRUE}, suppresses output from this
   function.}

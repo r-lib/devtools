@@ -5,7 +5,8 @@
   install(pkg = ".", reload = TRUE, quick = FALSE,
     local = TRUE,
     args = getOption("devtools.install.args"),
-    quiet = FALSE, dependencies = NA)
+    quiet = FALSE, dependencies = NA,
+    build_vignettes = !quick)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -37,6 +38,12 @@
   install uninstalled packages which this \code{pkg}
   depends on/links to/suggests. See argument
   \code{dependencies} of \code{\link{install.packages}}.}
+
+  \item{build_vignettes}{if \code{TRUE}, will build
+  vignettes. Normally it is \code{build} that's responsible
+  for creating vignettes; this argument makes sure
+  vignettes are built even if a build never happens (i.e.
+  because \code{local = TRUE}.}
 }
 \description{
   Uses \code{R CMD INSTALL} to install the package. Will
