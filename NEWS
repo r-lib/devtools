@@ -1,15 +1,18 @@
 devtools 1.3.99
 ----------------
 
-* Adjusted `install_version()` to new meta data structure on CRAN.
+* Adjusted `install_version()` to new meta data structure on CRAN. 
+  (Thanks to Kornelius Rohmeyer)
 
 * Fixed bug so that `install_version()` works with version numbers that 
-  contain hyphens.
+  contain hyphens. (Thanks to Kornelius Rohmeyer)
 
 * `check_devtools()` no longer incorrectly complains about a `vignettes/`
   directory
 
-* `install_github()` now adds details on the source of the installed package (e.g. repository, SHA1, etc.) to the package DESCRIPTION file (thanks to JJ Allaire)
+* `install_github()` now adds details on the source of the installed package 
+  (e.g. repository, SHA1, etc.) to the package DESCRIPTION file. (Thanks to JJ 
+  Allaire)
 
 devtools 1.3
 ----------------
