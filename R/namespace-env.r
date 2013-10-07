@@ -115,11 +115,11 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
 
 # extracted from base::loadNamespace
 add_classes_to_exports <- function(ns, package, exports, nsInfo) {
-  if(.isMethodsDispatchOn() && methods:::.hasS4MetaData(ns) &&
+  if(.isMethodsDispatchOn() && .hasS4MetaData(ns) &&
     !identical(package, "methods") ) {
     ## cache generics, classes in this namespace (but not methods itself,
     ## which pre-cached at install time
-    methods:::cacheMetaData(ns, TRUE, ns)
+    cacheMetaData(ns, TRUE, ns)
     ## load actions may have added objects matching patterns
     for (p in nsInfo$exportPatterns) {
       expp <- ls(ns, pattern = p, all.names = TRUE)
@@ -131,7 +131,7 @@ add_classes_to_exports <- function(ns, package, exports, nsInfo) {
     expClasses <- nsInfo$exportClasses
     ##we take any pattern, but check to see if the matches are classes
     pClasses <- character()
-    aClasses <- methods:::getClasses(ns)
+    aClasses <- getClasses(ns)
     classPatterns <- nsInfo$exportClassPatterns
     ## defaults to exportPatterns
     if(!length(classPatterns))
@@ -141,7 +141,7 @@ add_classes_to_exports <- function(ns, package, exports, nsInfo) {
     }
     pClasses <- unique(pClasses)
     if( length(pClasses) ) {
-      good <- vapply(pClasses, methods:::isClass, NA, where = ns)
+      good <- vapply(pClasses, isClass, NA, where = ns)
       if( !any(good) && length(nsInfo$exportClassPatterns))
         warning(gettextf("'exportClassPattern' specified in 'NAMESPACE' but no matching classes in package %s", sQuote(package)),
           call. = FALSE, domain = NA)
@@ -149,19 +149,19 @@ add_classes_to_exports <- function(ns, package, exports, nsInfo) {
     }
     if(length(expClasses)) {
       missingClasses <-
-        !vapply(expClasses, methods:::isClass, NA, where = ns)
+        !vapply(expClasses, isClass, NA, where = ns)
       if(any(missingClasses))
         stop(gettextf("in package %s classes %s were specified for export but not defined",
             sQuote(package),
             paste(expClasses[missingClasses],
               collapse = ", ")),
           domain = NA)
-      expClasses <- paste0(methods:::classMetaName(""), expClasses)
+      expClasses <- paste0(classMetaName(""), expClasses)
     }
     ## process methods metadata explicitly exported or
     ## implied by exporting the generic function.
-    allGenerics <- unique(c(methods:::.getGenerics(ns),
-        methods:::.getGenerics(parent.env(ns))))
+    allGenerics <- unique(c(.getGenerics(ns),
+        .getGenerics(parent.env(ns))))
     expMethods <- nsInfo$exportMethods
     ## check for generic functions corresponding to exported methods
     addGenerics <- expMethods[is.na(match(expMethods, exports))]
@@ -179,7 +179,7 @@ add_classes_to_exports <- function(ns, package, exports, nsInfo) {
         addGenerics <- addGenerics[sapply(addGenerics, function(what) ! is.primitive(get(what, mode = "function", envir = ns)))]
         ## the rest must be generic functions, implicit or local
         ## or have been cached via a DEPENDS package
-        ok <- sapply(addGenerics, methods:::.findsGeneric, ns)
+        ok <- sapply(addGenerics, .findsGeneric, ns)
         if(!all(ok)) {
           bad <- sort(unique(addGenerics[!ok]))
           msg <-
@@ -216,10 +216,10 @@ add_classes_to_exports <- function(ns, package, exports, nsInfo) {
             paste(expMethods[missingMethods],
               collapse = ", ")),
           domain = NA)
-      tPrefix <- methods:::.TableMetaPrefix()
+      tPrefix <- .TableMetaPrefix()
       allMethodTables <-
-        unique(c(methods:::.getGenerics(ns, tPrefix),
-            methods:::.getGenerics(parent.env(ns), tPrefix)))
+        unique(c(.getGenerics(ns, tPrefix),
+            .getGenerics(parent.env(ns), tPrefix)))
       needMethods <-
         (exports %in% allGenerics) & !(exports %in% expMethods)
       if(any(needMethods))
@@ -232,7 +232,7 @@ add_classes_to_exports <- function(ns, package, exports, nsInfo) {
       if(length(pm)) {
         prim <- logical(length(pm))
         for(i in seq_along(prim)) {
-          f <- methods:::getFunction(pm[[i]], FALSE, FALSE, ns)
+          f <- getFunction(pm[[i]], FALSE, FALSE, ns)
           prim[[i]] <- is.primitive(f)
         }
         expMethods <- c(expMethods, pm[prim])
@@ -269,6 +269,7 @@ add_classes_to_exports <- function(ns, package, exports, nsInfo) {
  
   exports
 }
+environment(add_classes_to_exports) <- asNamespace("methods")
 
 #' Parses the NAMESPACE file for a package
 #'
