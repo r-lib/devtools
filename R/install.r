@@ -35,6 +35,9 @@
 #'   \code{build} that's responsible for creating vignettes; this argument makes
 #'   sure vignettes are built even if a build never happens (i.e. because 
 #'   \code{local = TRUE}.
+#' @param keep_source If \code{TRUE} will keep the srcrefs from an installed 
+#'   package. This is useful for debugging (especially inside of RStudio).
+#'   It defaults to the option \code{"keep.source.pkgs"}.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
@@ -42,7 +45,8 @@
 #' @importFrom utils install.packages
 install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     args = getOption("devtools.install.args"), quiet = FALSE,
-                    dependencies = NA, build_vignettes = !quick) {
+                    dependencies = NA, build_vignettes = !quick,
+                    keep_source = getOption("keep.source.pkgs")) {
 
   pkg <- as.package(pkg)
 
@@ -60,7 +64,9 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
 
   opts <- c(
     paste("--library=", shQuote(.libPaths()[1]), sep = ""),
-    "--with-keep.source", "--install-tests")
+    if (keep_source) "--with-keep.source", 
+    "--install-tests"
+  )
   if (quick) {
     opts <- c(opts, "--no-docs", "--no-multiarch", "--no-demo")
   }

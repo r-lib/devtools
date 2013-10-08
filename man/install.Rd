@@ -6,7 +6,8 @@
     local = TRUE,
     args = getOption("devtools.install.args"),
     quiet = FALSE, dependencies = NA,
-    build_vignettes = !quick)
+    build_vignettes = !quick,
+    keep_source = getOptions("keep.source.pkgs"))
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -44,6 +45,11 @@
   for creating vignettes; this argument makes sure
   vignettes are built even if a build never happens (i.e.
   because \code{local = TRUE}.}
+
+  \item{keep_source}{If \code{TRUE} will keep the srcrefs
+  from an installed package. This is useful for debugging
+  (especially inside of RStudio).  It defaults to the
+  option \code{"keep.source.pkgs"}.}
 }
 \description{
   Uses \code{R CMD INSTALL} to install the package. Will

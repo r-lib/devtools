@@ -1,5 +1,7 @@
 # devtools 1.3.99
 
+* `install()` now respects the global option `keep.source.pkgs`.
+
 * `install_github()` now takes repo names of the form `username/repo` - 
   this is now the recommended form for install_github if your username is
   not hadley ;)
