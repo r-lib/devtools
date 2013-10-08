@@ -28,9 +28,8 @@
   version of Rstudio (#322)
 
 * Release is now a little bit smarter: if it's a new package, it'll ask you
-  to read and agree to the CRAN policies; only if your package has a src 
-  directory will it ask about win-builder; and similarly for checking 
-  dependencies.
+  to read and agree to the CRAN policies; it will only ask about
+  dependencies if it has any.
 
 * Adjusted `install_version()` to new meta data structure on CRAN. 
   (Thanks to Kornelius Rohmeyer)

@@ -73,11 +73,8 @@ release <- function(pkg = ".", check = TRUE) {
       return(invisible())
   }
   
-  has_src <- file.exists(file.path(pkg$path, "src"))
-  if (has_src) {
-    if (yesno("Have you checked on win-builder (with build_win())?"))
-      return(invisible())    
-  }
+  if (yesno("Have you checked on win-builder (with build_win())?"))
+    return(invisible())    
 
   try(print(show_news(pkg)))
   if (yesno("Is package news up-to-date?"))
