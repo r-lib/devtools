@@ -14,5 +14,4 @@
 \examples{
 has_devel()
 }
-\keyword{internal}
 
