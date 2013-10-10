@@ -21,10 +21,10 @@ check_doc <- function(pkg = ".") {
   old <- options(warn = -1)
   on.exit(options(old))
 
-  print_if_not_null((tools%:::%.check_package_parseRd)(dir = pkg$path))
-  print_if_not_null((tools%:::%.check_Rd_metadata)(dir = pkg$path))
-  print_if_not_null((tools%:::%.check_Rd_xrefs)(dir = pkg$path))
-  print_if_not_null((tools%:::%.check_Rd_contents)(dir = pkg$path))
+  print_if_not_null(("tools" %:::% ".check_package_parseRd")(dir = pkg$path))
+  print_if_not_null(("tools" %:::% ".check_Rd_metadata")(dir = pkg$path))
+  print_if_not_null(("tools" %:::% ".check_Rd_xrefs")(dir = pkg$path))
+  print_if_not_null(("tools" %:::% ".check_Rd_contents")(dir = pkg$path))
 
   print_if_not_null(checkDocFiles(dir = pkg$path))
   # Can't run because conflicts with how devtools loads code

@@ -22,8 +22,6 @@
   because you don't need to redownload the packages every
   time you run the package.}
 
-  \item{check_dir}{}
-
   \item{bioconductor}{include bioconductor packages in
   checking?}
 

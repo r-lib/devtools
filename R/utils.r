@@ -12,8 +12,7 @@ compact <- function(x) {
 "%||%" <- function(a, b) if (!is.null(a)) a else b
 
 "%:::%" <- function(p, f) {
-  ns <- asNamespace(as.character(substitute(p)))
-  eval(substitute(f), ns)
+  get(p, envir = asNamespace(p))
 }
 
 rule <- function() {

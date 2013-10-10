@@ -15,7 +15,6 @@
 #' @param srcpath path to directory to store source versions of dependent
 #'   packages - again, this saves a lot of time because you don't need to
 #'   redownload the packages every time you run the package.
-#' @param check_dir 
 #' @param bioconductor include bioconductor packages in checking?
 #' @param type binary package type of test
 #' @param threads number of concurrent threads to use for checking.
