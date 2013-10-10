@@ -7,7 +7,7 @@
     args = getOption("devtools.install.args"),
     quiet = FALSE, dependencies = NA,
     build_vignettes = !quick,
-    keep_source = getOptions("keep.source.pkgs"))
+    keep_source = getOption("keep.source.pkgs"))
 }
 \arguments{
   \item{pkg}{package description, can be path or package
