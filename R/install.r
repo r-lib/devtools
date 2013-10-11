@@ -53,10 +53,10 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   if (!quiet) message("Installing ", pkg$package)
   install_deps(pkg, dependencies = dependencies)
 
-  # Build the package. If quick, don't build vignettes
-  if (local) {
+  # Build the package. Only build locally if it doesn't have vignettes
+  has_vignettes <- length(pkgVignettes(dir = pkg$path)$doc > 0)
+  if (local && !(has_vignettes && build_vignettes)) {
     built_path <- pkg$path
-    if (build_vignettes) build_vignettes(pkg)
   } else {
     built_path <- build(pkg, tempdir(), vignettes = build_vignettes, quiet = quiet)
     on.exit(unlink(built_path))

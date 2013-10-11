@@ -73,3 +73,20 @@ test_that("Extra files copied and removed", {
   clean_vignettes(pkg)
   expect_false("a.r" %in% dir(doc_path))
 })
+
+
+test_that("vignettes built on install", {
+  # Make sure it fails if we build without installing
+  expect_error(build_vignettes("testVignettesBuilt"), 
+    "there is no package called ‘testVignettesBuilt’")
+  
+  install("testVignettesBuilt", reload = FALSE, quiet = TRUE)
+  unlink("testVignettesBuilt/vignettes/new.tex")
+  unlink("testVignettesBuilt/vignettes/.build.timestamp")
+  
+  vigs <- vignette(package = "testVignettesBuilt")$results
+  expect_equal(nrow(vigs), 1)
+  expect_equal(vigs[3], "new")
+  
+  suppressMessages(remove.packages("testVignettesBuilt"))
+})

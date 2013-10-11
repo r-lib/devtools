@@ -13,7 +13,9 @@
   (#335)
 
 * `install()` gains a `build_vignettes` which defaults to TRUE, and ensures 
-  that vignettes are built even when doing a local install. (#344)
+  that vignettes are built even when doing a local install. It does this
+  by forcing `local = FALSE` if the package has vignettes, so `R CMD build`
+  can follow the usual process. (#344) 
 
 * `check()` and `check_cran()` gain new `check_dir` argument to control where 
   checking takes place (#337)

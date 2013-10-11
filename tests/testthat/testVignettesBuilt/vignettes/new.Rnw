@@ -1,0 +1,11 @@
+%\VignetteIndexEntry{New}
+
+\documentclass[oneside]{article}
+\begin{document}
+
+<<>>=
+library(testVignettesBuilt)
+function_with_unusual_name()
+@
+
+\end{document}
