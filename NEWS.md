@@ -1,30 +1,41 @@
 # devtools 1.4
 
+## Installation improvements
+
 * `install()` now respects the global option `keep.source.pkgs`.
-
-* `install_github()` now takes repo names of the form `username/repo` - 
-  this is now the recommended form for install_github if your username is
-  not hadley ;)
-
-* `create_description()` does a better job of combining defaults and user
-  specified options. (#332)
-
-* `build(binary = TRUE)` now no longer installs the package as a side-effect.
-  (#335)
 
 * `install()` gains a `build_vignettes` which defaults to TRUE, and ensures 
   that vignettes are built even when doing a local install. It does this
   by forcing `local = FALSE` if the package has vignettes, so `R CMD build`
   can follow the usual process. (#344) 
 
+* `install_github()` now takes repo names of the form `username/repo` - 
+  this is now the recommended form for install_github if your username is
+  not hadley ;)
+
+* `install_github()` now adds details on the source of the installed package 
+  (e.g. repository, SHA1, etc.) to the package DESCRIPTION file. (Thanks to JJ 
+  Allaire)
+
+* Adjusted `install_version()` to new meta data structure on CRAN. 
+  (Thanks to Kornelius Rohmeyer)
+
+* Fixed bug so that `install_version()` works with version numbers that 
+  contain hyphens. (Thanks to Kornelius Rohmeyer)
+
+## Other minor improvements
+
+* `build(binary = TRUE)` now no longer installs the package as a side-effect.
+  (#335)
+
+* `create_description()` does a better job of combining defaults and user
+  specified options. (#332)
+
 * `check()` and `check_cran()` gain new `check_dir` argument to control where 
   checking takes place (#337)
 
-* `source_url()` (and `source_gist()`) accept SHA1 prefixes.
-
-* `source_gist()` uses the github api to reliably locate the raw gist.
-  Additionally it now only attempts to source files with `.R` or `.r` 
-  extensions, and gains a `quiet` argument. (#348)
+* `check_devtools()` no longer incorrectly complains about a `vignettes/`
+  directory
 
 * Decompression of zip files now respects `getOption("unzip")` (#326)
 
@@ -35,18 +46,12 @@
   to read and agree to the CRAN policies; it will only ask about
   dependencies if it has any.
 
-* Adjusted `install_version()` to new meta data structure on CRAN. 
-  (Thanks to Kornelius Rohmeyer)
+* `source_url()` (and `source_gist()`) accept SHA1 prefixes.
 
-* Fixed bug so that `install_version()` works with version numbers that 
-  contain hyphens. (Thanks to Kornelius Rohmeyer)
+* `source_gist()` uses the github api to reliably locate the raw gist.
+  Additionally it now only attempts to source files with `.R` or `.r` 
+  extensions, and gains a `quiet` argument. (#348)
 
-* `check_devtools()` no longer incorrectly complains about a `vignettes/`
-  directory
-
-* `install_github()` now adds details on the source of the installed package 
-  (e.g. repository, SHA1, etc.) to the package DESCRIPTION file. (Thanks to JJ 
-  Allaire)
 
 # devtools 1.3
 
