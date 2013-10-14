@@ -1,4 +1,4 @@
-# devtools 1.3.99
+# devtools 1.4
 
 * `install()` now respects the global option `keep.source.pkgs`.
 
