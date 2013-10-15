@@ -81,13 +81,9 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
 
 install_deps <- function(pkg = ".", dependencies = NA) {
   pkg <- as.package(pkg)
-  deps <- c(parse_deps(pkg$depends)$name, parse_deps(pkg$imports)$name,
-    parse_deps(pkg$linkingto)$name)
+  info <- parse_deps(paste(c(pkg$depends, pkg$linkingto, pkg$imports), collapse = ','))
 
-  # Remove packages that are already installed
-  not.installed <- function(x) length(find.package(x, quiet = TRUE)) == 0
-  deps <- Filter(not.installed, deps)
-
+  deps <- filter_deps(info$name, info$compare, info$version)
   if (length(deps) == 0) return(invisible())
 
   message("Installing dependencies for ", pkg$package, ":\n",
@@ -96,3 +92,17 @@ install_deps <- function(pkg = ".", dependencies = NA) {
   invisible(deps)
 }
 
+# Packages that are not already installed or without required versions
+filter_deps <- function(pkg, compare, version) {
+  deps <- character(0)
+  for (i in seq_along(pkg)) {
+    if (length(find.package(pkg[i], quiet = TRUE)) == 0) {
+      deps <- c(deps, pkg[i])
+      next
+    }
+    if (is.na(compare[i])) next
+    if (!do.call(compare[i], list(packageVersion(pkg[i]), version[i])))
+      deps <- c(deps, pkg[i])
+  }
+  deps
+}
