@@ -35,6 +35,5 @@ getdir <- function(path)  sub("/[^/]*$", "", path)
 # Given a list of files, returns the root (the topmost folder) 
 # getrootdir(c("path/to/file", "path/to/other/thing")) returns "path/to"
 getrootdir <- function(file_list) {
-  depths <- sapply(file_list, function(file) { nchar(gsub("[^/]", "", file)) })
-  getdir(file_list[which.min(depths)])
+  getdir(file_list[which.min(nchar(gsub("[^/]", "", file_list)))])
 }
