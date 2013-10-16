@@ -88,7 +88,7 @@ install_deps <- function(pkg = ".", dependencies = NA) {
   } else if (identical(dependencies, FALSE)) {
     character(0)
   } else dependencies
-  deps <- unique(unlist(pkg[tolower(deps)], use.names = FALSE))
+  deps <- unlist(pkg[tolower(deps)], use.names = FALSE)
   info <- parse_deps(paste(deps, collapse = ','))
 
   # Packages that are not already installed or without required versions
