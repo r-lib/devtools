@@ -81,7 +81,15 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
 
 install_deps <- function(pkg = ".", dependencies = NA) {
   pkg <- as.package(pkg)
-  info <- parse_deps(paste(c(pkg$depends, pkg$linkingto, pkg$imports), collapse = ','))
+  deps <- if (identical(dependencies, NA)) {
+    c("Depends", "Imports", "LinkingTo")
+  } else if (isTRUE(dependencies)) {
+    c("Depends", "Imports", "LinkingTo", "Suggests")
+  } else if (identical(dependencies, FALSE)) {
+    character(0)
+  } else dependencies
+  deps <- unique(unlist(pkg[tolower(deps)], use.names = FALSE))
+  info <- parse_deps(paste(deps, collapse = ','))
 
   deps <- filter_deps(info$name, info$compare, info$version)
   if (length(deps) == 0) return(invisible())
