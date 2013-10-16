@@ -91,26 +91,20 @@ install_deps <- function(pkg = ".", dependencies = NA) {
   deps <- unique(unlist(pkg[tolower(deps)], use.names = FALSE))
   info <- parse_deps(paste(deps, collapse = ','))
 
-  deps <- filter_deps(info$name, info$compare, info$version)
+  # Packages that are not already installed or without required versions
+  needs_install <- function(pkg, compare, version) {
+    if (length(find.package(pkg, quiet = TRUE)) == 0) return(TRUE)
+    if (is.na(compare)) return(FALSE)
+
+    compare <- match.fun(compare)
+    !compare(packageVersion(pkg), version)
+  }
+  needed <- Map(needs_install, info$name, info$compare, info$version)
+  deps <- info$name[as.logical(needed)]
   if (length(deps) == 0) return(invisible())
 
   message("Installing dependencies for ", pkg$package, ":\n",
     paste(deps, collapse = ", "))
   install.packages(deps, dependencies = dependencies)
   invisible(deps)
-}
-
-# Packages that are not already installed or without required versions
-filter_deps <- function(pkg, compare, version) {
-  deps <- character(0)
-  for (i in seq_along(pkg)) {
-    if (length(find.package(pkg[i], quiet = TRUE)) == 0) {
-      deps <- c(deps, pkg[i])
-      next
-    }
-    if (is.na(compare[i])) next
-    if (!do.call(compare[i], list(packageVersion(pkg[i]), version[i])))
-      deps <- c(deps, pkg[i])
-  }
-  deps
 }
