@@ -66,42 +66,46 @@ install_github <- function(repo, username = getOption("github.user"),
   url <- paste("https://github.com/", username, "/", repo,
     "/archive/", ref, ".zip", sep = "")
 
-  # define before_install function that captures the arguments to 
-  # install_github and appends the to the description file
-  github_before_install <- function(bundle, pkg_path) {
-    
-    # Ensure the DESCRIPTION ends with a newline
-    desc <- file.path(pkg_path, "DESCRIPTION")
-    if (!ends_with_newline(desc))
-      cat("\n", sep="", file = desc, append = TRUE)
-    
-    # Function to append a field to the DESCRIPTION if it's not null
-    append_field <- function(name, value) {
-      if (!is.null(value)) {
-        cat("Github", name, ":", value, "\n", sep = "", file = desc, append = TRUE)
+  # Install each package
+  invisible(mapply(url, repo, FUN = function(url_single, repo_single) {
+
+    # define before_install function that captures the arguments to 
+    # install_github and appends the to the description file
+    github_before_install <- function(bundle, pkg_path) {
+      
+      # Ensure the DESCRIPTION ends with a newline
+      desc <- file.path(pkg_path, "DESCRIPTION")
+      if (!ends_with_newline(desc))
+        cat("\n", sep="", file = desc, append = TRUE)
+      
+      # Function to append a field to the DESCRIPTION if it's not null
+      append_field <- function(name, value) {
+        if (!is.null(value)) {
+          cat("Github", name, ":", value, "\n", sep = "", file = desc, append = TRUE)
+        }
       }
+      
+      # Append fields
+      append_field("Repo", repo_single)
+      append_field("Username", username)
+      append_field("Ref", ref)
+      append_field("SHA1", github_extract_sha1(bundle))
+      append_field("Pull", pull)
+      append_field("Subdir", subdir)
+      append_field("Branch", branch)
+      append_field("AuthUser", auth_user)
+      # Don't record password for security reasons
+      #append_field("Password" password)
     }
     
-    # Append fields
-    append_field("Repo", repo)
-    append_field("Username", username)
-    append_field("Ref", ref)
-    append_field("SHA1", github_extract_sha1(bundle))
-    append_field("Pull", pull)
-    append_field("Subdir", subdir)
-    append_field("Branch", branch)
-    append_field("AuthUser", auth_user)
-    # Don't record password for security reasons
-    #append_field("Password" password)
-  }
-  
-  # If there are slashes in the ref, the URL will have extra slashes, but the
-  # downloaded file shouldn't have them.
-  # install_github("shiny", "rstudio", "v/0/2/1")
-  #  URL: https://github.com/rstudio/shiny/archive/v/0/2/1.zip
-  #  Output file: shiny.zip
-  install_url(url, name = paste(repo, ".zip", sep=""), subdir = subdir,
-    config = auth, before_install = github_before_install, ...)
+    # If there are slashes in the ref, the URL will have extra slashes, but the
+    # downloaded file shouldn't have them.
+    # install_github("shiny", "rstudio", "v/0/2/1")
+    #  URL: https://github.com/rstudio/shiny/archive/v/0/2/1.zip
+    #  Output file: shiny.zip
+    install_url(url_single, name = paste(repo_single, ".zip", sep=""), subdir = subdir,
+      config = auth, before_install = github_before_install, ...)
+  }))
 }
 
 # Retrieve the username and ref for a pull request
