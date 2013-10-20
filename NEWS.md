@@ -17,6 +17,11 @@
   by forcing `local = FALSE` if the package has vignettes, so `R CMD build`
   can follow the usual process. (#344) 
 
+* `install()` also installs the dependencies that do not have the required
+  versions; besides, the argument `dependencies` now works like
+  `install.packages()` (in previous versions, it was essentially
+  `c("Depends", "Imports", "LinkingTo")`) (thanks, Yihui Xie, #355)
+
 * `check()` and `check_cran()` gain new `check_dir` argument to control where 
   checking takes place (#337)
 
