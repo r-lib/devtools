@@ -34,13 +34,14 @@
   \code{\link{install}}.}
 }
 \description{
-  This function is vectorised so you can install multiple
-  packages in a single command.
+  This function is vectorised on \code{repo} so you can
+  install multiple packages in a single command.
 }
 \examples{
 \dontrun{
 install_github("roxygen")
 install_github("wch/ggplot2")
+install_github(c("rstudio/httpuv", "rstudio/shiny"))
 }
 }
 \seealso{

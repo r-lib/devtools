@@ -1,7 +1,7 @@
 #' Attempts to install a package directly from github.
 #'
-#' This function is vectorised so you can install multiple packages in
-#' a single command.
+#' This function is vectorised on \code{repo} so you can install multiple 
+#' packages in a single command.
 #'
 #' @param repo,username Repo and user name. Alternatively, you can specify
 #'   repos using the full "username/repo" syntax.
@@ -23,6 +23,7 @@
 #' \dontrun{
 #' install_github("roxygen")
 #' install_github("wch/ggplot2")
+#' install_github(c("rstudio/httpuv", "rstudio/shiny"))
 #' }
 #' @importFrom httr authenticate
 install_github <- function(repo, username = getOption("github.user"),
