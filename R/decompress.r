@@ -3,19 +3,19 @@ decompress <- function(src, target = tempdir()) {
 
   if (grepl("\\.zip$", src)) {
     unzip(src, exdir = target, unzip = getOption("unzip"))
-    outdir <- getdir(as.character(unzip(src, list = TRUE)$Name[1]))
+    outdir <- getrootdir(as.vector(unzip(src, list = TRUE)$Name))
 
   } else if (grepl("\\.tar$", src)) {
     untar(src, exdir = target)
-    outdir <- getdir(untar(src, list = TRUE)[1])
+    outdir <- getrootdir(untar(src, list = TRUE))
 
   } else if (grepl("\\.(tar\\.gz|tgz)$", src)) {
     untar(src, exdir = target, compressed = "gzip")
-    outdir <- getdir(untar(src, compressed = "gzip", list = TRUE)[1])
+    outdir <- getrootdir(untar(src, compressed = "gzip", list = TRUE))
 
   } else if (grepl("\\.(tar\\.bz2|tbz)$", src)) {
     untar(src, exdir = target, compressed = "bzip2")
-    outdir <- getdir(untar(src, compressed = "bzip2", list = TRUE)[1])
+    outdir <- getrootdir(untar(src, compressed = "bzip2", list = TRUE))
 
   } else {
     ext <- gsub("^[^.]*\\.", "", src)
@@ -31,3 +31,9 @@ decompress <- function(src, target = tempdir()) {
 # getdir("path/to/file") returns "path/to"
 # getdir("path/to/dir/") returns "path/to/dir"
 getdir <- function(path)  sub("/[^/]*$", "", path)
+
+# Given a list of files, returns the root (the topmost folder) 
+# getrootdir(c("path/to/file", "path/to/other/thing")) returns "path/to"
+getrootdir <- function(file_list) {
+  getdir(file_list[which.min(nchar(gsub("[^/]", "", file_list)))])
+}
