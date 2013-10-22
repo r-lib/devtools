@@ -31,6 +31,11 @@
 * `create_description()` does a better job of combining defaults and user
   specified options. (#332)
 
+* `install()` also installs the dependencies that do not have the required
+  versions; besides, the argument `dependencies` now works like
+  `install.packages()` (in previous versions, it was essentially
+  `c("Depends", "Imports", "LinkingTo")`) (thanks, Yihui Xie, #355)
+
 * `check()` and `check_cran()` gain new `check_dir` argument to control where 
   checking takes place (#337)
 

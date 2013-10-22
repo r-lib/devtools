@@ -13,6 +13,7 @@
 parse_deps <- function(string) {
   if (is.null(string)) return()
   stopifnot(is.character(string), length(string) == 1)
+  if (grepl("^\\s*$", string)) return()
 
   pieces <- strsplit(string, ",")[[1]]
 
