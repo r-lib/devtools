@@ -14,7 +14,7 @@ show_news <- function(pkg = ".", latest = TRUE, ...) {
     stop("No NEWS found", call. = FALSE)
   }
 
-  out <- news(..., db = tools:::.news_reader_default(news_path))
+  out <- news(..., db = ("tools" %:::% ".news_reader_default")(news_path))
   if (latest) {
     ver <- numeric_version(out$Version)
     recent <- ver == max(ver)

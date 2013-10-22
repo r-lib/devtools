@@ -102,10 +102,10 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   }
 
   # Check description file is ok
-  check <- tools:::.check_package_description(
+  check <- ("tools" %:::% ".check_package_description")(
     file.path(pkg$path, "DESCRIPTION"))
   if (length(check) > 0) {
-    msg <- capture.output(tools:::print.check_package_description(check))
+    msg <- capture.output(("tools" %:::% "print.check_package_description")(check))
     message("Invalid DESCRIPTION:\n", paste(msg, collapse = "\n"))
   }
 
