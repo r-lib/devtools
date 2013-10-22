@@ -26,7 +26,17 @@
 #' }
 #' @importFrom httr authenticate
 install_github <- function(repo, username = getOption("github.user"),
-  ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL, password = NULL, ...) {
+  ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
+  password = NULL, ...) {
+
+  invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
+    username, ref, pull, subdir, branch, auth_user, password, ...))
+}
+
+
+install_github_single <- function(repo, username = getOption("github.user"),
+  ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
+  password = NULL, ...) {
 
   if (grepl("/", repo)) {
     pieces <- strsplit(repo, "/")[[1]]
@@ -57,7 +67,7 @@ install_github <- function(repo, username = getOption("github.user"),
     auth <- list()
   }
 
-  message("Installing github repo(s) ",
+  message("Installing github repo ",
     paste(repo, ref, sep = "/", collapse = ", "),
     " from ",
     paste(username, collapse = ", "))
