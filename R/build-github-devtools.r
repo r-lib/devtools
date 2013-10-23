@@ -26,7 +26,7 @@
 #'
 #' # Remove the package after installation
 #' unlink("./devtools.zip")
-#'
+#' }
 #' @export
 build_github_devtools <- function(outfile = NULL) {
   ext <- if (.Platform$OS.type == "windows") "zip" else "tgz"
