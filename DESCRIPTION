@@ -99,3 +99,4 @@ Collate:
     'dev-mode.r'
     'reverse-dependencies.r'
     'show-news.r'
+    'build-github-devtools.r'
