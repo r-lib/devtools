@@ -28,6 +28,9 @@
 * `build(binary = TRUE)` now no longer installs the package as a side-effect.
   (#335)
 
+* `build_github_devtools()` is a new function which makes it easy for Windows
+  users to upgrade to the development version of devtools.
+
 * `create_description()` does a better job of combining defaults and user
   specified options. (#332)
 
