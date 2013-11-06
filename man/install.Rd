@@ -28,7 +28,7 @@
   every compile has to start from scratch.}
 
   \item{args}{An optional character vector of additional
-  command line arguments to bew passed to \code{R CMD
+  command line arguments to be passed to \code{R CMD
   install}. This defaults to the value of the option
   \code{"devtools.install.args"}.}
 
