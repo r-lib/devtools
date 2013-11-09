@@ -1,4 +1,4 @@
-decompress <- function(src, target = tempdir()) {
+decompress <- function(src, target) {
   stopifnot(file.exists(src))
 
   if (grepl("\\.zip$", src)) {

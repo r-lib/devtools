@@ -60,6 +60,11 @@
   Additionally it now only attempts to source files with `.R` or `.r` 
   extensions, and gains a `quiet` argument. (#348)
 
+* Safer installation of source packages, which were previously extracted
+  directly into the temp directory; this could be a problem if directory
+  names collide. Instead, source packages are now extracted into unique
+  subdirectories.
+
 
 # devtools 1.3
 

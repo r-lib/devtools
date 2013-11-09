@@ -26,8 +26,11 @@ install_local_single <- function(path, subdir = NULL, before_install = NULL, ...
 
   if (!file.info(path)$isdir) {
     bundle <- path
-    path <- decompress(path)
-    on.exit(unlink(path), add = TRUE)
+    outdir <- tempfile(pattern = "devtools")
+    dir.create(outdir)
+    on.exit(unlink(outdir, recursive = TRUE), add = TRUE)
+
+    path <- decompress(path, outdir)
   } else {
     bundle <- NULL
   }
