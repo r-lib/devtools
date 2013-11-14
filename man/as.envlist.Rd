@@ -2,7 +2,7 @@
 \alias{as.envlist}
 \title{Convert a list of environments to an \code{envlist} object.}
 \usage{
-  as.envlist(x)
+as.envlist(x)
 }
 \arguments{
   \item{x}{A list of environments.}

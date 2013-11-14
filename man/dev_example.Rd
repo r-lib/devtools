@@ -2,7 +2,7 @@
 \alias{dev_example}
 \title{Run a examples for an in-development function.}
 \usage{
-  dev_example(topic)
+dev_example(topic)
 }
 \arguments{
   \item{topic}{Name or topic (or name of Rd) file to run

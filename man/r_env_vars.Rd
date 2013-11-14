@@ -2,7 +2,7 @@
 \alias{r_env_vars}
 \title{Environment variables to set when calling R}
 \usage{
-  r_env_vars()
+r_env_vars()
 }
 \value{
   a named character vector

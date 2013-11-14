@@ -2,7 +2,7 @@
 \alias{clean_dll}
 \title{Remove compiled objects from /src/ directory}
 \usage{
-  clean_dll(pkg = ".")
+clean_dll(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

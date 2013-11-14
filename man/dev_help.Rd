@@ -2,8 +2,7 @@
 \alias{dev_help}
 \title{Read the in-development help for a package loaded with devtools.}
 \usage{
-  dev_help(topic, stage = "render",
-    type = getOption("help_type"))
+dev_help(topic, stage = "render", type = getOption("help_type"))
 }
 \arguments{
   \item{topic}{name of help to search for.}

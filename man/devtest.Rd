@@ -2,7 +2,7 @@
 \alias{devtest}
 \title{Return the path to one of the packages in the devtools test dir}
 \usage{
-  devtest(package)
+devtest(package)
 }
 \arguments{
   \item{package}{Name of the test package.}

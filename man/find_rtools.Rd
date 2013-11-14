@@ -2,7 +2,7 @@
 \alias{find_rtools}
 \title{Find rtools.}
 \usage{
-  find_rtools(debug = FALSE)
+find_rtools(debug = FALSE)
 }
 \arguments{
   \item{debug}{if \code{TRUE} prints a lot of additional

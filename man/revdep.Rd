@@ -4,14 +4,12 @@
 \alias{revdep_maintainers}
 \title{Reverse dependency tools.}
 \usage{
-  revdep(pkg = NULL,
-    dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
-    recursive = FALSE, ignore = NULL)
+revdep(pkg = NULL, dependencies = c("Depends", "Imports", "Suggests",
+  "LinkingTo"), recursive = FALSE, ignore = NULL)
 
-  revdep_maintainers(pkg = ".")
+revdep_maintainers(pkg = ".")
 
-  revdep_check(pkg = NULL, recursive = FALSE,
-    ignore = NULL, ...)
+revdep_check(pkg = NULL, recursive = FALSE, ignore = NULL, ...)
 }
 \arguments{
   \item{pkg}{package name}

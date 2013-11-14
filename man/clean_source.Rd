@@ -2,7 +2,7 @@
 \alias{clean_source}
 \title{Sources an R file in a clean environment.}
 \usage{
-  clean_source(path, quiet = FALSE)
+clean_source(path, quiet = FALSE)
 }
 \arguments{
   \item{path}{path to R script}

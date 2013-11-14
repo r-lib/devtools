@@ -2,9 +2,9 @@
 \alias{install_github}
 \title{Attempts to install a package directly from github.}
 \usage{
-  install_github(repo, username = getOption("github.user"),
-    ref = "master", pull = NULL, subdir = NULL,
-    branch = NULL, auth_user = NULL, password = NULL, ...)
+install_github(repo, username = getOption("github.user"), ref = "master",
+  pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
+  password = NULL, ...)
 }
 \arguments{
   \item{repo,username}{Repo and user name. Alternatively,

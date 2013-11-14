@@ -2,7 +2,7 @@
 \alias{as.package}
 \title{Coerce input to a package.}
 \usage{
-  as.package(x = NULL)
+as.package(x = NULL)
 }
 \arguments{
   \item{x}{object to coerce to a package}

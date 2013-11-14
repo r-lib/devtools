@@ -2,9 +2,8 @@
 \alias{install_git}
 \title{Install a package from a git repository}
 \usage{
-  install_git(git_url, name = NULL, subdir = NULL,
-    branch = NULL, git_args = character(0),
-    git_binary = NULL, ...)
+install_git(git_url, name = NULL, subdir = NULL, branch = NULL,
+  git_args = character(0), git_binary = NULL, ...)
 }
 \arguments{
   \item{branch}{Name of branch or tag to use, if not

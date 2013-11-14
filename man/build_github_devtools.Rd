@@ -2,7 +2,7 @@
 \alias{build_github_devtools}
 \title{Build the development version of devtools from GitHub.}
 \usage{
-  build_github_devtools(outfile = NULL)
+build_github_devtools(outfile = NULL)
 }
 \arguments{
   \item{outfile}{The name of the output file. If NULL (the

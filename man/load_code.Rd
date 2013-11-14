@@ -2,7 +2,7 @@
 \alias{load_code}
 \title{Load R code.}
 \usage{
-  load_code(pkg = ".")
+load_code(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

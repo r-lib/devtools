@@ -2,7 +2,7 @@
 \alias{release}
 \title{Release package to CRAN.}
 \usage{
-  release(pkg = ".", check = TRUE)
+release(pkg = ".", check = TRUE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

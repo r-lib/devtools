@@ -2,7 +2,7 @@
 \alias{pkg_env}
 \title{Return package environment}
 \usage{
-  pkg_env(pkg = ".")
+pkg_env(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

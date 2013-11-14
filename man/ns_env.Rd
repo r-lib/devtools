@@ -2,7 +2,7 @@
 \alias{ns_env}
 \title{Return the namespace environment for a package.}
 \usage{
-  ns_env(pkg = ".")
+ns_env(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

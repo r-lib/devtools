@@ -2,9 +2,8 @@
 \alias{document}
 \title{Use roxygen to make documentation.}
 \usage{
-  document(pkg = ".", clean = FALSE,
-    roclets = c("collate", "namespace", "rd"),
-    reload = TRUE)
+document(pkg = ".", clean = FALSE, roclets = c("collate", "namespace",
+  "rd"), reload = TRUE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

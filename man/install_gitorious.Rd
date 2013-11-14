@@ -2,8 +2,8 @@
 \alias{install_gitorious}
 \title{Attempts to install a package directly from gitorious.}
 \usage{
-  install_gitorious(repo, project = repo, ref = "master",
-    subdir = NULL, branch = NULL, ...)
+install_gitorious(repo, project = repo, ref = "master", subdir = NULL,
+  branch = NULL, ...)
 }
 \arguments{
   \item{project}{Gitorious project name}

@@ -2,8 +2,8 @@
 \alias{build}
 \title{Build package.}
 \usage{
-  build(pkg = ".", path = NULL, binary = FALSE,
-    vignettes = TRUE, args = NULL, quiet = FALSE)
+build(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
+  args = NULL, quiet = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

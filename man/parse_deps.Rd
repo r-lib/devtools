@@ -2,7 +2,7 @@
 \alias{parse_deps}
 \title{Parse package dependency strings.}
 \usage{
-  parse_deps(string)
+parse_deps(string)
 }
 \arguments{
   \item{string}{to parse. Should look like \code{"R (>=

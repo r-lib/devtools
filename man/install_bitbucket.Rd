@@ -2,8 +2,8 @@
 \alias{install_bitbucket}
 \title{Install a package directly from bitbucket}
 \usage{
-  install_bitbucket(repo, username, ref = "master",
-    branch = NULL, auth_user = NULL, password = NULL, ...)
+install_bitbucket(repo, username, ref = "master", branch = NULL,
+  auth_user = NULL, password = NULL, ...)
 }
 \arguments{
   \item{repo}{repo name}

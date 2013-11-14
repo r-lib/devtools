@@ -2,8 +2,7 @@
 \alias{create_description}
 \title{Create a default DESCRIPTION file for a package.}
 \usage{
-  create_description(path,
-    extra = getOption("devtools.desc"), quiet = FALSE)
+create_description(path, extra = getOption("devtools.desc"), quiet = FALSE)
 }
 \arguments{
   \item{path}{path to package root directory}

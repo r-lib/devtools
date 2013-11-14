@@ -2,7 +2,7 @@
 \alias{missing_s3}
 \title{Find missing s3 exports.}
 \usage{
-  missing_s3(pkg = ".")
+missing_s3(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

@@ -2,12 +2,10 @@
 \alias{install}
 \title{Install a local development package.}
 \usage{
-  install(pkg = ".", reload = TRUE, quick = FALSE,
-    local = TRUE,
-    args = getOption("devtools.install.args"),
-    quiet = FALSE, dependencies = NA,
-    build_vignettes = !quick,
-    keep_source = getOption("keep.source.pkgs"))
+install(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
+  args = getOption("devtools.install.args"), quiet = FALSE,
+  dependencies = NA, build_vignettes = !quick,
+  keep_source = getOption("keep.source.pkgs"))
 }
 \arguments{
   \item{pkg}{package description, can be path or package

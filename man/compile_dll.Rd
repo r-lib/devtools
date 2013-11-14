@@ -2,7 +2,7 @@
 \alias{compile_dll}
 \title{Compile a .dll/.so from source.}
 \usage{
-  compile_dll(pkg = ".", quiet = FALSE)
+compile_dll(pkg = ".", quiet = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

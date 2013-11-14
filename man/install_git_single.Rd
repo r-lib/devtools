@@ -2,9 +2,8 @@
 \alias{install_git_single}
 \title{Install a single package from a git repository}
 \usage{
-  install_git_single(git_url, name = NULL, subdir = NULL,
-    branch = NULL, git_args = character(),
-    git_binary = NULL, ...)
+install_git_single(git_url, name = NULL, subdir = NULL, branch = NULL,
+  git_args = character(), git_binary = NULL, ...)
 }
 \arguments{
   \item{git_url}{Location of package. The url should point

@@ -2,7 +2,7 @@
 \alias{dev_meta}
 \title{Return devtools metadata environment}
 \usage{
-  dev_meta(name)
+dev_meta(name)
 }
 \arguments{
   \item{name}{The name of a loaded package}

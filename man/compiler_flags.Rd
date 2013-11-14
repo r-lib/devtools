@@ -2,7 +2,7 @@
 \alias{compiler_flags}
 \title{Default compiler flags used by devtools.}
 \usage{
-  compiler_flags(debug = FALSE)
+compiler_flags(debug = FALSE)
 }
 \arguments{
   \item{debug}{If \code{TRUE} adds \code{-g -O0} to all

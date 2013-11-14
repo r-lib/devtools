@@ -2,7 +2,7 @@
 \alias{source_gist}
 \title{Run a script on gist}
 \usage{
-  source_gist(id, ..., sha1 = NULL, quiet = FALSE)
+source_gist(id, ..., sha1 = NULL, quiet = FALSE)
 }
 \arguments{
   \item{id}{either full url (character), gist ID (numeric

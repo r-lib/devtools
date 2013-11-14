@@ -2,7 +2,7 @@
 \alias{on_path}
 \title{Test if an object is on the path.}
 \usage{
-  on_path(...)
+on_path(...)
 }
 \arguments{
   \item{...}{Strings indicating the executables to check

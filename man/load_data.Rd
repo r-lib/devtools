@@ -2,7 +2,7 @@
 \alias{load_data}
 \title{Load data.}
 \usage{
-  load_data(pkg = ".")
+load_data(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

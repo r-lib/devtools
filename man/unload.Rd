@@ -2,7 +2,7 @@
 \alias{unload}
 \title{Unload a package}
 \usage{
-  unload(pkg = ".")
+unload(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

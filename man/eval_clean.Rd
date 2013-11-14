@@ -3,9 +3,9 @@
 \alias{evalq_clean}
 \title{Evaluate code in a clean R session.}
 \usage{
-  eval_clean(expr, quiet = TRUE)
+eval_clean(expr, quiet = TRUE)
 
-  evalq_clean(expr, quiet = TRUE)
+evalq_clean(expr, quiet = TRUE)
 }
 \arguments{
   \item{expr}{an R expression to evaluate. For

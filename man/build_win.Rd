@@ -2,8 +2,7 @@
 \alias{build_win}
 \title{Build windows binary package.}
 \usage{
-  build_win(pkg = ".", version = "R-release",
-    quiet = FALSE)
+build_win(pkg = ".", version = "R-release", quiet = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

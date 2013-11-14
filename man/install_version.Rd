@@ -2,9 +2,8 @@
 \alias{install_version}
 \title{Install specified version of a CRAN package.}
 \usage{
-  install_version(package, version = NULL,
-    repos = getOption("repos"),
-    type = getOption("pkgType"), ...)
+install_version(package, version = NULL, repos = getOption("repos"),
+  type = getOption("pkgType"), ...)
 }
 \arguments{
   \item{package}{package name}

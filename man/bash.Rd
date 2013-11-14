@@ -2,7 +2,7 @@
 \alias{bash}
 \title{Open bash shell in package directory.}
 \usage{
-  bash(pkg = ".")
+bash(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

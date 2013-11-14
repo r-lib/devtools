@@ -12,25 +12,25 @@
 \alias{with_something}
 \title{Execute code in temporarily altered environment.}
 \usage{
-  with_envvar(new, code, action = "replace")
+with_envvar(new, code, action = "replace")
 
-  with_env(new, code)
+with_env(new, code)
 
-  with_locale(new, code)
+with_locale(new, code)
 
-  with_collate(new, code)
+with_collate(new, code)
 
-  in_dir(new, code)
+in_dir(new, code)
 
-  with_libpaths(new, code)
+with_libpaths(new, code)
 
-  with_lib(new, code)
+with_lib(new, code)
 
-  with_options(new, code)
+with_options(new, code)
 
-  with_par(new, code)
+with_par(new, code)
 
-  with_path(new, code, add = TRUE)
+with_path(new, code, add = TRUE)
 }
 \arguments{
   \item{new}{values for setting}

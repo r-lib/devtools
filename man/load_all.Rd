@@ -2,8 +2,8 @@
 \alias{load_all}
 \title{Load complete package.}
 \usage{
-  load_all(pkg = ".", reset = TRUE, recompile = FALSE,
-    export_all = TRUE, quiet = FALSE)
+load_all(pkg = ".", reset = TRUE, recompile = FALSE, export_all = TRUE,
+  quiet = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

@@ -2,7 +2,7 @@
 \alias{check_doc}
 \title{Check documentation, as \code{R CMD check} does.}
 \usage{
-  check_doc(pkg = ".")
+check_doc(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

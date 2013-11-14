@@ -2,7 +2,7 @@
 \alias{source_url}
 \title{Run a script through some protocols such as http, https, ftp, etc.}
 \usage{
-  source_url(url, ..., sha1 = NULL)
+source_url(url, ..., sha1 = NULL)
 }
 \arguments{
   \item{url}{url}

@@ -2,7 +2,7 @@
 \alias{show_news}
 \title{Show package news}
 \usage{
-  show_news(pkg = ".", latest = TRUE, ...)
+show_news(pkg = ".", latest = TRUE, ...)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

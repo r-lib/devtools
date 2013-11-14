@@ -2,7 +2,7 @@
 \alias{loaded_packages}
 \title{Return a vector of names of attached packages}
 \usage{
-  loaded_packages()
+loaded_packages()
 }
 \description{
   Return a vector of names of attached packages

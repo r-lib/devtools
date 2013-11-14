@@ -3,7 +3,7 @@
 \title{Given an environment or object, return an \code{envlist} of its
 parent environments.}
 \usage{
-  parenvs(e = parent.frame(), all = FALSE)
+parenvs(e = parent.frame(), all = FALSE)
 }
 \arguments{
   \item{e}{An environment or other object.}

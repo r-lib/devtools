@@ -2,7 +2,7 @@
 \alias{inst}
 \title{Get the installation path of a package}
 \usage{
-  inst(name)
+inst(name)
 }
 \arguments{
   \item{name}{the name of a package.}

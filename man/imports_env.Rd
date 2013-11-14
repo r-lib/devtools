@@ -2,7 +2,7 @@
 \alias{imports_env}
 \title{Return imports environment for a package}
 \usage{
-  imports_env(pkg = ".")
+imports_env(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

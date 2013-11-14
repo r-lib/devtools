@@ -5,11 +5,11 @@
 \alias{set_path}
 \title{Get/set the PATH variable.}
 \usage{
-  get_path()
+get_path()
 
-  set_path(path)
+set_path(path)
 
-  add_path(path, after = Inf)
+add_path(path, after = Inf)
 }
 \arguments{
   \item{path}{character vector of paths}

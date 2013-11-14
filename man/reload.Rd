@@ -2,7 +2,7 @@
 \alias{reload}
 \title{Unload and reload package.}
 \usage{
-  reload(pkg = ".", quiet = FALSE)
+reload(pkg = ".", quiet = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package

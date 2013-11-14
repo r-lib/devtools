@@ -2,8 +2,8 @@
 \alias{install_url}
 \title{Install a package from a url}
 \usage{
-  install_url(url, name = NULL, subdir = NULL,
-    config = list(), before_install = NULL, ...)
+install_url(url, name = NULL, subdir = NULL, config = list(),
+  before_install = NULL, ...)
 }
 \arguments{
   \item{url}{location of package on internet. The url

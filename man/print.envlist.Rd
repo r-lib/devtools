@@ -2,8 +2,7 @@
 \alias{print.envlist}
 \title{Print an \code{envlist}}
 \usage{
-  \method{print}{envlist} (x, name = TRUE, path = FALSE,
-    ...)
+\method{print}{envlist}(x, name = TRUE, path = FALSE, ...)
 }
 \arguments{
   \item{x}{An \code{envlist} object to print.}

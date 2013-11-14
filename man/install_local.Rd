@@ -2,7 +2,7 @@
 \alias{install_local}
 \title{Install a package from a local file}
 \usage{
-  install_local(path, subdir = NULL, ...)
+install_local(path, subdir = NULL, ...)
 }
 \arguments{
   \item{path}{path to local directory, or compressed file

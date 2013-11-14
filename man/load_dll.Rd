@@ -2,7 +2,7 @@
 \alias{load_dll}
 \title{Load a compiled DLL}
 \usage{
-  load_dll(pkg = ".")
+load_dll(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

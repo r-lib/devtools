@@ -2,9 +2,9 @@
 \alias{with_debug}
 \title{Temporarily set debugging compilation flags.}
 \usage{
-  with_debug(code, PKG_CFLAGS = NULL, PKG_CXXFLAGS = NULL,
-    PKG_FFLAGS = NULL, PKG_FCFLAGS = NULL, debug = TRUE,
-    action = "replace")
+with_debug(code, PKG_CFLAGS = NULL, PKG_CXXFLAGS = NULL,
+  PKG_FFLAGS = NULL, PKG_FCFLAGS = NULL, debug = TRUE,
+  action = "replace")
 }
 \arguments{
   \item{code}{to execute.}
