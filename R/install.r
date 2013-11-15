@@ -79,6 +79,12 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   invisible(TRUE)
 }
 
+#' Install package dependencies
+#' 
+#' @inheritParams install
+#' @export
+#' @examples
+#' \dontrun{install_deps(".")}
 install_deps <- function(pkg = ".", dependencies = NA) {
   pkg <- as.package(pkg)
   deps <- if (identical(dependencies, NA)) {
