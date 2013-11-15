@@ -1,6 +1,6 @@
-.R*
 *.so
 *.o
 *.dll
 *.Rproj
 .Rproj.user
+.Rhistory
