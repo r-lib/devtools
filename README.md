@@ -1,5 +1,7 @@
 # devtools
 
+[![Build Status](https://travis-ci.org/hadley/devtools.png)](https://travis-ci.org/hadley/devtools)
+
 The aim of `devtools` is to make your life as a package developer easier by providing R functions that simplify many common tasks. R packages are actually really simple, and with the right tools it should be easier to use the package structure than not. Package development in R can feel intimidating, but devtools does every thing it can to make it as welcoming as possible. Devtools comes with a small guarantee: if because of a bug in devtools a member of R-core gets angry with you, I will send you a handwritten apology note. Just forward me the email and your address, and I'll get a card in the mail.
 
 Devtools is opinionated about how to do package development, and requires that you use `roxygen2` for documentation and `testthat` for testing. Not everyone agrees with these opinions, and they are by no means perfect, but they have evolved during the process of writing over 30 R packages. I'm always happy to hear about what doesn't work for you, and any places where devtools gets in your way.Either send an email to the [rdevtools mailing list](http://groups.google.com/group/rdevtools) or file an [issue](http://github.com/hadley/devtools/issues).
