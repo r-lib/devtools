@@ -23,6 +23,9 @@
 * Fixed bug so that `install_version()` works with version numbers that 
   contain hyphens. (Thanks to Kornelius Rohmeyer)
 
+* `install_deps()` is now exported, making it easier to install the dependencies
+  of a package.
+
 ## Other minor improvements
 
 * `build(binary = TRUE)` now no longer installs the package as a side-effect.
