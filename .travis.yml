@@ -13,3 +13,4 @@ notifications:
 env:
   - global:
     - WARNINGS_ARE_ERRORS=1
+    - _R_CHECK_FORCE_SUGGESTS_=1
