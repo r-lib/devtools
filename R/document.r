@@ -23,7 +23,9 @@ document <- function(pkg = ".", clean = FALSE,
   if (!file.exists(man_path)) dir.create(man_path)
 
   if (clean) {
-    roxygen2::clear_caches()
+    if (packageVersion("roxygen2") < 3) {
+      roxygen2::clear_caches()  
+    }
     file.remove(dir(man_path, full.names = TRUE))
   }
 
