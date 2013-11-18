@@ -24,6 +24,11 @@
 #' install_github("roxygen")
 #' install_github("wch/ggplot2")
 #' install_github(c("rstudio/httpuv", "rstudio/shiny"))
+#'
+#' # Update devtools to the latest version, on Linux and Mac
+#' # On Windows, this won't work - see ?build_github_devtools
+#' install_github("hadley/devtools")
+#'
 #' }
 #' @importFrom httr authenticate
 install_github <- function(repo, username = getOption("github.user"),

@@ -6,7 +6,28 @@ The aim of `devtools` is to make your life as a package developer easier by prov
 
 Devtools is opinionated about how to do package development, and requires that you use `roxygen2` for documentation and `testthat` for testing. Not everyone agrees with these opinions, and they are by no means perfect, but they have evolved during the process of writing over 30 R packages. I'm always happy to hear about what doesn't work for you, and any places where devtools gets in your way.Either send an email to the [rdevtools mailing list](http://groups.google.com/group/rdevtools) or file an [issue](http://github.com/hadley/devtools/issues).
 
-You can track (and contribute to) development of devtools at https://github.com/hadley/devtools. To install the development version of devtools, the easiest thing to do is to install devtools from CRAN then run `devtools::install_github("devtools")`.
+## Updating to the latest version of devtools
+
+You can track (and contribute to) development of devtools at https://github.com/hadley/devtools. First, install devtools from CRAN, then follow the instructions below depending on platform.
+
+On Mac and Linux, installing the latest version of devtools from Github is straightfoward:
+
+```
+devtools::install_github("devtools")
+```
+
+On Windows, you can do the following (requires devtools 1.4 or later):
+
+```
+devtools::build_github_devtools()
+
+#### Restart R before continuing ####
+install.packages("devtools.zip", repos = NULL)
+
+# Remove the package after installation
+unlink("devtools.zip")
+```
+
 
 ## Package development tools
 
