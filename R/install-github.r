@@ -24,6 +24,7 @@
 #' install_github("roxygen")
 #' install_github("wch/ggplot2")
 #' install_github(c("rstudio/httpuv", "rstudio/shiny"))
+#' install_github(c("devtools@v1.4-rc", "klutometis/roxygen#142", "mfrasca/r-logging/pkg))
 #' }
 #' @importFrom httr authenticate
 install_github <- function(repo, username = getOption("github.user"),
@@ -39,16 +40,18 @@ install_github_single <- function(repo, username = getOption("github.user"),
   ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
   password = NULL, ...) {
 
-  if (grepl("/", repo)) {
-    pieces <- strsplit(repo, "/")[[1]]
-    username <- pieces[1]
-    repo <- pieces[2]
-  }
-  
   if (!is.null(branch)) {
     warning("'branch' is deprecated. In the future, please use 'ref' instead.")
     ref <- branch
   }
+
+  params <- github_parse_path(repo)
+  username <- params$username %||% username
+  repo <- params$repo
+  ref <- params$ref %||% ref
+  pull <- params$pull %||% pull
+  subdir <- params$subdir %||% subdir
+
   if (!xor(is.null(pull), is.null(ref))) {
     stop("Must specify either a ref or a pull request, not both. ",
      "Perhaps you want to use 'ref=NULL'?")

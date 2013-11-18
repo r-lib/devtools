@@ -9,9 +9,11 @@
   by forcing `local = FALSE` if the package has vignettes, so `R CMD build`
   can follow the usual process. (#344) 
 
-* `install_github()` now takes repo names of the form `username/repo` - 
+* `install_github()` now takes repo names of the form
+  `[username/]repo[/subdir][@ref|#pull]` -
   this is now the recommended form for install_github if your username is
-  not hadley ;)
+  not hadley ;) or if you want to install a package from a subdirectory,
+  a specific reference or pull request. (Thanks to Kirill Müller, #376)
 
 * `install_github()` now adds details on the source of the installed package 
   (e.g. repository, SHA1, etc.) to the package DESCRIPTION file. (Thanks to JJ 
