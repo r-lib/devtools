@@ -153,3 +153,19 @@ github_extract_sha1 <- function(bundle) {
     NULL
   }
 }
+
+# Parse a GitHub path of the form [username/]repo[/subdir][#pull|@ref]
+github_parse_path <- function(path) {
+  username_rx <- "(?:([^/]+)/)?"
+  repo_rx <- "([^/@#]+)"
+  subdir_rx <- "(?:/([^@#]+))?"
+  ref_rx <- "(?:@(.+))"
+  pull_rx <- "(?:#([0-9]+))"
+  ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
+  github_rx <- sprintf("^%s%s%s%s$", username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
+
+  params <- c("username", "repo", "subdir", "ref", "pull")
+  replace <- setNames(sprintf("\\%d", seq_along(params)), params)
+  ret <- lapply(replace, function(r) gsub(github_rx, r, path, perl = TRUE))
+  ret[sapply(ret, nchar) > 0]
+}
