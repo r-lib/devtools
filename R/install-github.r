@@ -24,6 +24,7 @@
 #' install_github("roxygen")
 #' install_github("wch/ggplot2")
 #' install_github(c("rstudio/httpuv", "rstudio/shiny"))
+#' install_github(c("devtools@v1.4-rc", "klutometis/roxygen#142", "mfrasca/r-logging/pkg))
 #' }
 #' @importFrom httr authenticate
 install_github <- function(repo, username = getOption("github.user"),
@@ -39,16 +40,18 @@ install_github_single <- function(repo, username = getOption("github.user"),
   ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
   password = NULL, ...) {
 
-  if (grepl("/", repo)) {
-    pieces <- strsplit(repo, "/")[[1]]
-    username <- pieces[1]
-    repo <- pieces[2]
-  }
-  
   if (!is.null(branch)) {
     warning("'branch' is deprecated. In the future, please use 'ref' instead.")
     ref <- branch
   }
+
+  params <- github_parse_path(repo)
+  username <- params$username %||% username
+  repo <- params$repo
+  ref <- params$ref %||% ref
+  pull <- params$pull %||% pull
+  subdir <- params$subdir %||% subdir
+
   if (!xor(is.null(pull), is.null(ref))) {
     stop("Must specify either a ref or a pull request, not both. ",
      "Perhaps you want to use 'ref=NULL'?")
@@ -152,4 +155,20 @@ github_extract_sha1 <- function(bundle) {
   } else {
     NULL
   }
+}
+
+# Parse a GitHub path of the form [username/]repo[/subdir][#pull|@ref]
+github_parse_path <- function(path) {
+  username_rx <- "(?:([^/]+)/)?"
+  repo_rx <- "([^/@#]+)"
+  subdir_rx <- "(?:/([^@#]+))?"
+  ref_rx <- "(?:@(.+))"
+  pull_rx <- "(?:#([0-9]+))"
+  ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
+  github_rx <- sprintf("^%s%s%s%s$", username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
+
+  params <- c("username", "repo", "subdir", "ref", "pull")
+  replace <- setNames(sprintf("\\%d", seq_along(params)), params)
+  ret <- lapply(replace, function(r) gsub(github_rx, r, path, perl = TRUE))
+  ret[sapply(ret, nchar) > 0]
 }
