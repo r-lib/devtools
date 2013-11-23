@@ -73,6 +73,7 @@ install_bitbucket <- function(repo, username=getOption('bitbucket.user'),
     append_field("Username", username)
     append_field("Ref", ref)
     append_field("SHA1", github_extract_sha1(bundle))
+    append_field("Pull", pull)
     append_field("Branch", branch)
     append_field("AuthUser", auth_user)
     # Don't record password for security reasons
