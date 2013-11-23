@@ -2,16 +2,22 @@
 \alias{install_bitbucket}
 \title{Install a package directly from bitbucket}
 \usage{
-install_bitbucket(repo, username, ref = "master", branch = NULL,
-  auth_user = NULL, password = NULL, ...)
+install_bitbucket(repo, username = getOption("bitbucket.user"),
+  ref = "master", pull = NULL, branch = NULL, auth_user = NULL,
+  password = NULL, ...)
 }
 \arguments{
   \item{repo}{repo name}
 
-  \item{username}{bitbucket username}
+  \item{username}{bitbucket username. Defaults to
+  getOption('bitbucket.user')}
 
   \item{ref}{Desired git reference. Could be a commit, tag,
   or branch name. Defaults to \code{"master"}.}
+
+  \item{pull}{Desired pull request. A pull request refers
+  to a branch, so you can't specify both \code{branch} and
+  \code{pull}; one of them must be \code{NULL}.}
 
   \item{branch}{Deprecated. Use \code{ref} instead.}
 
