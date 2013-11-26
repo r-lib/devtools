@@ -31,9 +31,8 @@ revdep_check(pkg = NULL, recursive = FALSE, ignore = NULL, ...)
   reverse dependencies (and so on) be included?}
 }
 \description{
-  Tools to check and notify maintainers of all all CRAN and
-  bioconductor packages that depend on the specified
-  package.
+Tools to check and notify maintainers of all all CRAN and
+bioconductor packages that depend on the specified package.
 }
 \examples{
 \dontrun{

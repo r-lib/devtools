@@ -9,12 +9,12 @@ parse_deps(string)
   3.0), ggplot2"} etc.}
 }
 \value{
-  list of two character vectors: \code{name} package names,
-  and \code{version} package versions. If version is not
-  specified, it will be stored as NA.
+list of two character vectors: \code{name} package names,
+and \code{version} package versions. If version is not
+specified, it will be stored as NA.
 }
 \description{
-  Parse package dependency strings.
+Parse package dependency strings.
 }
 \examples{
 parse_deps("httr (< 2.1),\\nRCurl (>= 3)")

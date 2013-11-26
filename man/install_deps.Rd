@@ -14,7 +14,7 @@ install_deps(pkg = ".", dependencies = NA)
   \code{dependencies} of \code{\link{install.packages}}.}
 }
 \description{
-  Install package dependencies
+Install package dependencies
 }
 \examples{
 \dontrun{install_deps(".")}

@@ -13,28 +13,28 @@ release(pkg = ".", check = TRUE)
   and you're ready to release it.}
 }
 \description{
-  Run automated and manual tests, then ftp to CRAN.
+Run automated and manual tests, then ftp to CRAN.
 }
 \details{
-  The package release process will:
+The package release process will:
 
-  \itemize{
+\itemize{
 
-  \item Confirm that the package passes \code{R CMD check}
-  \item Ask if you've checked your code on win-builder
-  \item Confirm that news is up-to-date \item Confirm that
-  DESCRIPTION is ok \item Ask if you've checked packages
-  that depend on your package \item Build the package \item
-  Upload the package to CRAN \item Draft an email to the
-  CRAN maintainer. }
+\item Confirm that the package passes \code{R CMD check}
+\item Ask if you've checked your code on win-builder \item
+Confirm that news is up-to-date \item Confirm that
+DESCRIPTION is ok \item Ask if you've checked packages that
+depend on your package \item Build the package \item Upload
+the package to CRAN \item Draft an email to the CRAN
+maintainer. }
 
-  You also need to read the CRAN repository policy at
-  \url{http://cran.r-project.org/web/packages/policies.html}
-  and make sure you're in line with the policies.
-  \code{release} tries to automate as many of polices as
-  possible, but it's impossible to be completely
-  comprehensive, and they do change in between releases of
-  devtools.
+You also need to read the CRAN repository policy at
+\url{http://cran.r-project.org/web/packages/policies.html}
+and make sure you're in line with the policies.
+\code{release} tries to automate as many of polices as
+possible, but it's impossible to be completely
+comprehensive, and they do change in between releases of
+devtools.
 }
 \section{Guarantee}{
   If a devtools bug causes one of the CRAN maintainers to

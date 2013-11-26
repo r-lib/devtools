@@ -16,7 +16,7 @@
   \item{...}{Other arguments to be passed to \code{print}.}
 }
 \description{
-  Print an \code{envlist}
+Print an \code{envlist}
 }
 \keyword{internal}
 

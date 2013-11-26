@@ -18,10 +18,10 @@ evalq_clean(expr, quiet = TRUE)
   displayed, as if you'd copied and paste the code.}
 }
 \value{
-  An invisible \code{TRUE} on success.
+An invisible \code{TRUE} on success.
 }
 \description{
-  Evaluate code in a clean R session.
+Evaluate code in a clean R session.
 }
 \examples{
 x <- 1

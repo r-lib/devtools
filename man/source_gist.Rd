@@ -22,10 +22,10 @@ source_gist(id, ..., sha1 = NULL, quiet = FALSE)
   informative messages.}
 }
 \description{
-  \dQuote{Gist is a simple way to share snippets and pastes
-  with others.  All gists are git repositories, so they are
-  automatically versioned, forkable and usable as a git
-  repository.} \url{https://gist.github.com/}
+\dQuote{Gist is a simple way to share snippets and pastes
+with others.  All gists are git repositories, so they are
+automatically versioned, forkable and usable as a git
+repository.} \url{https://gist.github.com/}
 }
 \examples{
 # You can run gists given their id

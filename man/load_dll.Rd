@@ -9,7 +9,7 @@ load_dll(pkg = ".")
   name.  See \code{\link{as.package}} for more information}
 }
 \description{
-  Load a compiled DLL
+Load a compiled DLL
 }
 \keyword{programming}
 

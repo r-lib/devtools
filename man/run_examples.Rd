@@ -34,15 +34,14 @@ run_examples(pkg = ".", start = NULL, show = TRUE, test = FALSE,
   work.}
 }
 \description{
-  One of the most frustrating parts of `R CMD check` is
-  getting all of your examples to pass - whenever one fails
-  you need to fix the problem and then restart the whole
-  process.  This function makes it a little easier by
-  making it possible to run all examples from an R
-  function.
+One of the most frustrating parts of `R CMD check` is
+getting all of your examples to pass - whenever one fails
+you need to fix the problem and then restart the whole
+process.  This function makes it a little easier by making
+it possible to run all examples from an R function.
 }
 \seealso{
-  Other example functions: \code{\link{dev_example}}
+Other example functions: \code{\link{dev_example}}
 }
 \keyword{programming}
 

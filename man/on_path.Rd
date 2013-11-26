@@ -9,7 +9,7 @@ on_path(...)
   for on the path.}
 }
 \description{
-  Test if an object is on the path.
+Test if an object is on the path.
 }
 \examples{
 on_path("R")
@@ -18,9 +18,8 @@ on_path("foo", "bar")  # FALSE in most cases
 with_path(tempdir(), on_path("gcc"))
 }
 \seealso{
-  Other path: \code{\link{add_path}},
-  \code{\link{get_path}}, \code{\link{path}},
-  \code{\link{set_path}}
+Other path: \code{\link{add_path}}, \code{\link{get_path}},
+\code{\link{path}}, \code{\link{set_path}}
 }
 \keyword{internal}
 

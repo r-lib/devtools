@@ -9,16 +9,15 @@ check_doc(pkg = ".")
   name.  See \code{\link{as.package}} for more information}
 }
 \value{
-  Nothing. This function is called purely for it's side
-  effects: if
+Nothing. This function is called purely for it's side
+effects: if
 }
 \description{
-  This function attempts to run the documentation related
-  checks in the same way that \code{R CMD check} does.
-  Unfortunately it can't run them all because some tests
-  require the package to be loaded, and the way they
-  attempt to load the code conflicts with how devtools does
-  it.
+This function attempts to run the documentation related
+checks in the same way that \code{R CMD check} does.
+Unfortunately it can't run them all because some tests
+require the package to be loaded, and the way they attempt
+to load the code conflicts with how devtools does it.
 }
 \examples{
 \dontrun{

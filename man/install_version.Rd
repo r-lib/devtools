@@ -43,19 +43,18 @@ install_version(package, version = NULL, repos = getOption("repos"),
   install source packages.)  }
 }
 \description{
-  If you are installing an package that contains compiled
-  code, you will need to have an R development environment
-  installed.  You can check if you do by running
-  \code{\link{has_devel}}.
+If you are installing an package that contains compiled
+code, you will need to have an R development environment
+installed.  You can check if you do by running
+\code{\link{has_devel}}.
 }
 \author{
-  Jeremy Stephens
+Jeremy Stephens
 }
 \seealso{
-  Other package installation: \code{\link{install}},
-  \code{\link{install_bitbucket}},
-  \code{\link{install_git}}, \code{\link{install_github}},
-  \code{\link{install_gitorious}},
-  \code{\link{install_url}}
+Other package installation: \code{\link{install}},
+\code{\link{install_bitbucket}}, \code{\link{install_git}},
+\code{\link{install_github}},
+\code{\link{install_gitorious}}, \code{\link{install_url}}
 }
 

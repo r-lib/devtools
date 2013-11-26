@@ -34,8 +34,8 @@ install_github(repo, username = getOption("github.user"), ref = "master",
   \code{\link{install}}.}
 }
 \description{
-  This function is vectorised on \code{repo} so you can
-  install multiple packages in a single command.
+This function is vectorised on \code{repo} so you can
+install multiple packages in a single command.
 }
 \examples{
 \dontrun{
@@ -50,10 +50,9 @@ install_github("hadley/devtools")
 }
 }
 \seealso{
-  Other package installation: \code{\link{install}},
-  \code{\link{install_bitbucket}},
-  \code{\link{install_git}},
-  \code{\link{install_gitorious}},
-  \code{\link{install_url}}, \code{\link{install_version}}
+Other package installation: \code{\link{install}},
+\code{\link{install_bitbucket}}, \code{\link{install_git}},
+\code{\link{install_gitorious}}, \code{\link{install_url}},
+\code{\link{install_version}}
 }
 

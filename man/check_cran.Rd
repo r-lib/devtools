@@ -33,17 +33,17 @@ check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath,
   checked}
 }
 \value{
-  invisible \code{TRUE} if successful and no ERRORs or
-  WARNINGS,
+invisible \code{TRUE} if successful and no ERRORs or
+WARNINGS,
 }
 \description{
-  This is useful for automatically checking that
-  dependencies of your packages work.
+This is useful for automatically checking that dependencies
+of your packages work.
 }
 \details{
-  This function does not clean up after itself, but does
-  work in a session-specific temporary directory, so all
-  files will be removed when your current R session ends.
+This function does not clean up after itself, but does work
+in a session-specific temporary directory, so all files
+will be removed when your current R session ends.
 }
 \examples{
 \dontrun{

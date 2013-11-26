@@ -5,11 +5,11 @@
 has_devel()
 }
 \value{
-  TRUE if your development environment is correctly set up,
-  otherwise returns an error.
+TRUE if your development environment is correctly set up,
+otherwise returns an error.
 }
 \description{
-  Thanks to the suggestion of Simon Urbanek.
+Thanks to the suggestion of Simon Urbanek.
 }
 \examples{
 has_devel()

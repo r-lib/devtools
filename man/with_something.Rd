@@ -47,15 +47,15 @@ with_path(new, code, add = TRUE)
   want.}
 }
 \description{
-  \itemize{ \item \code{in_dir}: working directory \item
-  \code{with_collate}: collation order \item
-  \code{with_envvar}: environmental variables \item
-  \code{with_libpaths}: library paths, replacing current
-  libpaths \item \code{with_lib}: library paths, prepending
-  to current libpaths \item \code{with_locale}: any locale
-  setting \item \code{with_options}: options \item
-  \code{with_path}: PATH environment variable \item
-  \code{with_par}: graphics parameters }
+\itemize{ \item \code{in_dir}: working directory \item
+\code{with_collate}: collation order \item
+\code{with_envvar}: environmental variables \item
+\code{with_libpaths}: library paths, replacing current
+libpaths \item \code{with_lib}: library paths, prepending
+to current libpaths \item \code{with_locale}: any locale
+setting \item \code{with_options}: options \item
+\code{with_path}: PATH environment variable \item
+\code{with_par}: graphics parameters }
 }
 \section{Deprecation}{
   \code{with_env} will be deprecated in devtools 1.2 and

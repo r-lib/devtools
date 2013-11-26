@@ -4,7 +4,7 @@
 \alias{devtools-package}
 \title{Package development tools for R.}
 \description{
-  Package development tools for R.
+Package development tools for R.
 }
 \section{Package options}{
   Devtools uses the following \code{\link{options}} to

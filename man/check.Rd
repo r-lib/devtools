@@ -47,21 +47,20 @@ check(pkg = ".", document = TRUE,
   checked}
 }
 \description{
-  \code{check} automatically builds and checks a source
-  package, using all know best practices. Passing \code{R
-  CMD check} is essential if you want to submit your
-  package to CRAN: you must not have an ERRORs or WARNINGs,
-  and you want to ensure that there are as few NOTEs as
-  possible.  If you are not submitting to CRAN, at least
-  ensure that there are no ERRORs: these typically
-  represent serious problems.
+\code{check} automatically builds and checks a source
+package, using all know best practices. Passing \code{R CMD
+check} is essential if you want to submit your package to
+CRAN: you must not have an ERRORs or WARNINGs, and you want
+to ensure that there are as few NOTEs as possible.  If you
+are not submitting to CRAN, at least ensure that there are
+no ERRORs: these typically represent serious problems.
 }
 \details{
-  \code{check} automatically builds a package before using
-  \code{R CMD check} as this is the recommended way to
-  check packages.  Note that this process runs in an
-  independent realisation of R, so nothing in your current
-  workspace will affect the process.
+\code{check} automatically builds a package before using
+\code{R CMD check} as this is the recommended way to check
+packages.  Note that this process runs in an independent
+realisation of R, so nothing in your current workspace will
+affect the process.
 }
 \section{Environment variables}{
   Devtools does it's best to set up an environment that
@@ -101,7 +100,7 @@ check(pkg = ".", document = TRUE,
   file.
 }
 \seealso{
-  \code{\link{release}} if you want to send the checked
-  package to CRAN.
+\code{\link{release}} if you want to send the checked
+package to CRAN.
 }
 

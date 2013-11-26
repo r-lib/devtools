@@ -9,6 +9,6 @@ bash(pkg = ".")
   name.  See \code{\link{as.package}} for more information}
 }
 \description{
-  Open bash shell in package directory.
+Open bash shell in package directory.
 }
 

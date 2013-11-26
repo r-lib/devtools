@@ -25,7 +25,7 @@ with_debug(code, PKG_CFLAGS = NULL, PKG_CXXFLAGS = NULL,
   flags (Adding \env{PKG_FFLAGS} and \env{PKG_FCFLAGS}}
 }
 \description{
-  Temporarily set debugging compilation flags.
+Temporarily set debugging compilation flags.
 }
 \examples{
 flags <- names(compiler_flags(TRUE))
@@ -37,6 +37,6 @@ with_debug(install("mypkg"))
 }
 }
 \seealso{
-  Other debugging flags: \code{\link{compiler_flags}}
+Other debugging flags: \code{\link{compiler_flags}}
 }
 

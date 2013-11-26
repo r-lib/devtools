@@ -5,7 +5,7 @@
 has_tests()
 }
 \description{
-  Was devtools installed with tests?
+Was devtools installed with tests?
 }
 \keyword{internal}
 

@@ -5,7 +5,7 @@
 loaded_packages()
 }
 \description{
-  Return a vector of names of attached packages
+Return a vector of names of attached packages
 }
 \keyword{internal}
 

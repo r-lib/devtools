@@ -30,27 +30,27 @@ load_all(pkg = ".", reset = TRUE, recompile = FALSE, export_all = TRUE,
   function.}
 }
 \description{
-  \code{load_all} loads a package. It roughly simulates
-  what happens when a package is installed and loaded with
-  \code{\link{library}}.
+\code{load_all} loads a package. It roughly simulates what
+happens when a package is installed and loaded with
+\code{\link{library}}.
 }
 \details{
-  Currently \code{load_all}:
+Currently \code{load_all}:
 
-  \itemize{ \item Loads all data files in \code{data/}.
-  See \code{\link{load_data}} for more details.
+\itemize{ \item Loads all data files in \code{data/}.  See
+\code{\link{load_data}} for more details.
 
-  \item Sources all R files in the R directory, storing
-  results in environment that behaves like a regular
-  package namespace. See below and \code{\link{load_code}}
-  for more details.
+\item Sources all R files in the R directory, storing
+results in environment that behaves like a regular package
+namespace. See below and \code{\link{load_code}} for more
+details.
 
-  \item Compiles any C, C++, or Fortran code in the
-  \code{src/} directory and connects the generated DLL into
-  R. See \code{\link{compile_dll}} for more details.
+\item Compiles any C, C++, or Fortran code in the
+\code{src/} directory and connects the generated DLL into
+R. See \code{\link{compile_dll}} for more details.
 
-  \item Runs \code{.onAttach()}, \code{.onLoad()} and
-  \code{.onUnload()} functions at the correct times. }
+\item Runs \code{.onAttach()}, \code{.onLoad()} and
+\code{.onUnload()} functions at the correct times. }
 }
 \section{Namespaces}{
   The namespace environment \code{<namespace:pkgname>}, is
