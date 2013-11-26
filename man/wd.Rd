@@ -2,7 +2,7 @@
 \alias{wd}
 \title{Set working directory.}
 \usage{
-wd(pkg = ".", path = NULL)
+wd(pkg = ".", path = "")
 }
 \arguments{
   \item{pkg}{package description, can be path or package
