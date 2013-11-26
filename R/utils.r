@@ -29,7 +29,7 @@ ends_with_newline <- function(path) {
 }
 
 rstudio_has <- function(f = NULL) {
-  if ("tools:rstudio" %in% search()) return(FALSE)
+  if (!("tools:rstudio" %in% search())) return(FALSE)
 
   exists(as.character(f), asNamespace("rstudio"))
 }
