@@ -1,5 +1,7 @@
 # devtools 1.4.0.99
 
+* Fixed bug in `wd()` when `path` was ommitted. (#374)
+
 * Fixed bug in `dev_help()` that prevented it from working when not using 
   Rstudio.
 
