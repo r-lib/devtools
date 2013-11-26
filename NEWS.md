@@ -6,6 +6,12 @@
 * `source_gist()` respects new github policy by sending user agent 
   (hadley/devtools)
 
+* `install_github()` now takes repo names of the form
+  `[username/]repo[/subdir][@ref|#pull]` -
+  this is now the recommended form to specify username, subdir, ref and/or
+  pull for install_github. (Thanks to Kirill Müller, #376)
+
+
 # devtools 1.4
 
 ## Installation improvements

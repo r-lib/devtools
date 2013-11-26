@@ -3,8 +3,12 @@
 #' This function is vectorised on \code{repo} so you can install multiple 
 #' packages in a single command.
 #'
-#' @param repo,username Repo and user name. Alternatively, you can specify
-#'   repos using the full "username/repo" syntax.
+#' @param repo Repository address in the format
+#'   \code{[username/]repo[/subdir][@@ref|#pull]}. Alternatively, you can
+#'   specify \code{username}, \code{subdir}, \code{ref} or \code{pull} using the
+#'   respective parameters (see below); if both is specified, the values in
+#'   \code{repo} take precedence.
+#' @param username User name
 #' @param ref Desired git reference. Could be a commit, tag, or branch
 #'   name. Defaults to \code{"master"}.
 #' @param pull Desired pull request. A pull request refers to a branch,
@@ -24,6 +28,7 @@
 #' install_github("roxygen")
 #' install_github("wch/ggplot2")
 #' install_github(c("rstudio/httpuv", "rstudio/shiny"))
+#' install_github(c("devtools@@devtools-1.4", "klutometis/roxygen#142", "mfrasca/r-logging/pkg))
 #'
 #' # Update devtools to the latest version, on Linux and Mac
 #' # On Windows, this won't work - see ?build_github_devtools
@@ -44,16 +49,18 @@ install_github_single <- function(repo, username = getOption("github.user"),
   ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
   password = NULL, ...) {
 
-  if (grepl("/", repo)) {
-    pieces <- strsplit(repo, "/")[[1]]
-    username <- pieces[1]
-    repo <- pieces[2]
-  }
-  
   if (!is.null(branch)) {
     warning("'branch' is deprecated. In the future, please use 'ref' instead.")
     ref <- branch
   }
+
+  params <- github_parse_path(repo)
+  username <- params$username %||% username
+  repo <- params$repo
+  ref <- params$ref %||% ref
+  pull <- params$pull %||% pull
+  subdir <- params$subdir %||% subdir
+
   if (!xor(is.null(pull), is.null(ref))) {
     stop("Must specify either a ref or a pull request, not both. ",
      "Perhaps you want to use 'ref=NULL'?")
@@ -157,4 +164,23 @@ github_extract_sha1 <- function(bundle) {
   } else {
     NULL
   }
+}
+
+# Parse a GitHub path of the form [username/]repo[/subdir][#pull|@ref]
+github_parse_path <- function(path) {
+  username_rx <- "(?:([^/]+)/)?"
+  repo_rx <- "([^/@#]+)"
+  subdir_rx <- "(?:/([^@#]+))?"
+  ref_rx <- "(?:@(.+))"
+  pull_rx <- "(?:#([0-9]+))"
+  ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
+  github_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
+                       username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
+
+  params <- c("username", "repo", "subdir", "ref", "pull", "invalid")
+  replace <- setNames(sprintf("\\%d", seq_along(params)), params)
+  ret <- lapply(replace, function(r) gsub(github_rx, r, path, perl = TRUE))
+  if (ret$invalid != "")
+    stop(sprintf("Invalid GitHub path: %s", path))
+  ret[sapply(ret, nchar) > 0]
 }
