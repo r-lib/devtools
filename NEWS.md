@@ -1,5 +1,10 @@
 # devtools 1.4.0.99
 
+* Fixed bug in `dev_help()` that prevented it from working when not using 
+  Rstudio.
+
+* `source_gist()` respects new github policy by sending user agent 
+  (hadley/devtools)
 
 # devtools 1.4
 
