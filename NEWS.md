@@ -1,4 +1,4 @@
-# devtools 1.4.0.99
+# devtools 1.4.1
 
 * Fixed bug in `wd()` when `path` was ommitted. (#374)
 
@@ -12,7 +12,6 @@
   `[username/]repo[/subdir][@ref|#pull]` -
   this is now the recommended form to specify username, subdir, ref and/or
   pull for install_github. (Thanks to Kirill Müller, #376)
-
 
 # devtools 1.4
 
