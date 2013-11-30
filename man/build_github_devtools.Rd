@@ -10,25 +10,25 @@ build_github_devtools(outfile = NULL)
   ./devtools.zip (Windows).}
 }
 \value{
-  a string giving the location (including file name) of the
-  built package
+a string giving the location (including file name) of the
+built package
 }
 \description{
-  This function is especially useful for Windows users who
-  want to upgrade their version of devtools to the
-  development version hosted on on GitHub. In Windows, it's
-  not possible to upgrade devtools while the package is
-  loaded because there is an open DLL, which in Windows
-  can't be overwritten. This function allows you to build a
-  binary package of the development version of devtools;
-  then you can restart R (so that devtools isn't loaded)
-  and install the package.
+This function is especially useful for Windows users who
+want to upgrade their version of devtools to the
+development version hosted on on GitHub. In Windows, it's
+not possible to upgrade devtools while the package is
+loaded because there is an open DLL, which in Windows can't
+be overwritten. This function allows you to build a binary
+package of the development version of devtools; then you
+can restart R (so that devtools isn't loaded) and install
+the package.
 }
 \details{
-  Mac and Linux users don't need this function; they can
-  use \code{\link{install_github}} to install devtools
-  directly, without going through the separate
-  build-restart-install steps.
+Mac and Linux users don't need this function; they can use
+\code{\link{install_github}} to install devtools directly,
+without going through the separate build-restart-install
+steps.
 }
 \examples{
 \dontrun{

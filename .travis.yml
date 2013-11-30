@@ -4,7 +4,7 @@ before_install:
   - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
-  - ./travis-tool.sh r_binary_install XML
+  - ./travis-tool.sh r_binary_install XML Rcpp knitr brew RUnit inline highlight formatR highr markdown rgl
 install:
   - ./travis-tool.sh install_deps
 notifications:

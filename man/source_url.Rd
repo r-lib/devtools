@@ -13,25 +13,24 @@ source_url(url, ..., sha1 = NULL)
   the remote URL.}
 }
 \description{
-  Internally, \code{source_url} calls \code{\link{getURL}}
-  in \code{RCurl} package and then read the contents by
-  \code{\link{textConnection}}, which is then
-  \code{\link{source}}ed. See \code{?getURL} for the
-  available protocol.
+Internally, \code{source_url} calls \code{\link{getURL}} in
+\code{RCurl} package and then read the contents by
+\code{\link{textConnection}}, which is then
+\code{\link{source}}ed. See \code{?getURL} for the
+available protocol.
 }
 \details{
-  If a SHA-1 hash is specified with the \code{sha1}
-  argument, then this function will check the SHA-1 hash of
-  the downloaded file to make sure it matches the expected
-  value, and throw an error if it does not match. If the
-  SHA-1 hash is not specified, it will print a message
-  displaying the hash of the downloaded file. The purpose
-  of this is to improve security when running
-  remotely-hosted code; if you have a hash of the file, you
-  can be sure that it has not changed. For convenience, it
-  is possible to use a truncated SHA1 hash, down to 6
-  characters, but keep in mind that a truncated hash won't
-  be as secure as the full hash.
+If a SHA-1 hash is specified with the \code{sha1} argument,
+then this function will check the SHA-1 hash of the
+downloaded file to make sure it matches the expected value,
+and throw an error if it does not match. If the SHA-1 hash
+is not specified, it will print a message displaying the
+hash of the downloaded file. The purpose of this is to
+improve security when running remotely-hosted code; if you
+have a hash of the file, you can be sure that it has not
+changed. For convenience, it is possible to use a truncated
+SHA1 hash, down to 6 characters, but keep in mind that a
+truncated hash won't be as secure as the full hash.
 }
 \examples{
 \dontrun{

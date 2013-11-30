@@ -14,8 +14,8 @@ parenvs(e = parent.frame(), all = FALSE)
   empty environment (which is the top-level environment).}
 }
 \description{
-  If \code{e} is not specified, it will start with
-  environment from which the function was called.
+If \code{e} is not specified, it will start with
+environment from which the function was called.
 }
 \examples{
 # Print the current environment and its parents

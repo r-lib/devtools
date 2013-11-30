@@ -8,8 +8,8 @@ dev_meta(name)
   \item{name}{The name of a loaded package}
 }
 \description{
-  If the package was not loaded with devtools, returns
-  \code{NULL}.
+If the package was not loaded with devtools, returns
+\code{NULL}.
 }
 \examples{
 dev_meta("stats") # NULL

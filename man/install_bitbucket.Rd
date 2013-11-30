@@ -32,8 +32,8 @@ install_bitbucket(repo, username = getOption("bitbucket.user"),
   \code{\link{install}}.}
 }
 \description{
-  This function is vectorised so you can install multiple
-  packages in a single command.
+This function is vectorised so you can install multiple
+packages in a single command.
 }
 \examples{
 \dontrun{
@@ -42,12 +42,12 @@ install_bitbucket(c("testrepo", "testrepo2"))
 }
 }
 \seealso{
-  Bitbucket API docs:
-  \url{https://confluence.atlassian.com/display/BITBUCKET/Use+the+Bitbucket+REST+APIs}
+Bitbucket API docs:
+\url{https://confluence.atlassian.com/display/BITBUCKET/Use+the+Bitbucket+REST+APIs}
 
-  Other package installation: \code{\link{install}},
-  \code{\link{install_git}}, \code{\link{install_github}},
-  \code{\link{install_gitorious}},
-  \code{\link{install_url}}, \code{\link{install_version}}
+Other package installation: \code{\link{install}},
+\code{\link{install_git}}, \code{\link{install_github}},
+\code{\link{install_gitorious}}, \code{\link{install_url}},
+\code{\link{install_version}}
 }
 

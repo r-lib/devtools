@@ -13,8 +13,8 @@ clean_source(path, quiet = FALSE)
   any explicitly printed output will be displayed.}
 }
 \description{
-  Opens up a fresh R environment and sources file, ensuring
-  that it works independently of the current working
-  environment.
+Opens up a fresh R environment and sources file, ensuring
+that it works independently of the current working
+environment.
 }
 

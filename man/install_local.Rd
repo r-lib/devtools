@@ -15,8 +15,8 @@ install_local(path, subdir = NULL, ...)
   \code{\link{install}}.}
 }
 \description{
-  This function is vectorised so you can install multiple
-  packages in a single command.
+This function is vectorised so you can install multiple
+packages in a single command.
 }
 \examples{
 \dontrun{

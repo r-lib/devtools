@@ -15,7 +15,7 @@ run_user_hook(pkg, hook)
   or "detach"}
 }
 \description{
-  Run user and package hooks.
+Run user and package hooks.
 }
 \keyword{internal}
 

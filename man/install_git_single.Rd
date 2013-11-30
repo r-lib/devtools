@@ -25,12 +25,12 @@ install_git_single(git_url, name = NULL, subdir = NULL, branch = NULL,
   \item{...}{passed on to \code{\link{install}}}
 }
 \description{
-  This function allows you to install a single package from
-  a git repository.
+This function allows you to install a single package from a
+git repository.
 }
 \details{
-  See \code{\link{install_git}} for more information about
-  the paraemeters.
+See \code{\link{install_git}} for more information about
+the paraemeters.
 }
 \keyword{internal}
 

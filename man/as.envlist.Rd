@@ -8,8 +8,7 @@ as.envlist(x)
   \item{x}{A list of environments.}
 }
 \description{
-  Convert a list of environments to an \code{envlist}
-  object.
+Convert a list of environments to an \code{envlist} object.
 }
 \keyword{internal}
 

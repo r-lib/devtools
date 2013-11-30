@@ -8,8 +8,8 @@ as.package(x = NULL)
   \item{x}{object to coerce to a package}
 }
 \description{
-  Possible specifications of package: \itemize{ \item path
-  \item package object }
+Possible specifications of package: \itemize{ \item path
+\item package object }
 }
 \keyword{internal}
 

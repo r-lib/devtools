@@ -5,7 +5,7 @@
 #' @param path path within package. Leave empty to change working directory
 #'   to package directory.
 #' @export
-wd <- function(pkg = ".", path = NULL) {
+wd <- function(pkg = ".", path = "") {
   pkg <- as.package(pkg)
   path <- file.path(pkg$path, path)
 

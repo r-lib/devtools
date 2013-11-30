@@ -14,6 +14,6 @@ show_news(pkg = ".", latest = TRUE, ...)
   \item{...}{other arguments passed on to \code{news}}
 }
 \description{
-  Show package news
+Show package news
 }
 

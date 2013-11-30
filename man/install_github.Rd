@@ -7,9 +7,14 @@ install_github(repo, username = getOption("github.user"), ref = "master",
   password = NULL, ...)
 }
 \arguments{
-  \item{repo,username}{Repo and user name. Alternatively,
-  you can specify repos using the full "username/repo"
-  syntax.}
+  \item{repo}{Repository address in the format
+  \code{[username/]repo[/subdir][@ref|#pull]}.
+  Alternatively, you can specify \code{username},
+  \code{subdir}, \code{ref} or \code{pull} using the
+  respective parameters (see below); if both is specified,
+  the values in \code{repo} take precedence.}
+
+  \item{username}{User name}
 
   \item{ref}{Desired git reference. Could be a commit, tag,
   or branch name. Defaults to \code{"master"}.}
@@ -34,14 +39,15 @@ install_github(repo, username = getOption("github.user"), ref = "master",
   \code{\link{install}}.}
 }
 \description{
-  This function is vectorised on \code{repo} so you can
-  install multiple packages in a single command.
+This function is vectorised on \code{repo} so you can
+install multiple packages in a single command.
 }
 \examples{
 \dontrun{
 install_github("roxygen")
 install_github("wch/ggplot2")
 install_github(c("rstudio/httpuv", "rstudio/shiny"))
+install_github(c("devtools@devtools-1.4", "klutometis/roxygen#142", "mfrasca/r-logging/pkg))
 
 # Update devtools to the latest version, on Linux and Mac
 # On Windows, this won't work - see ?build_github_devtools
@@ -50,10 +56,9 @@ install_github("hadley/devtools")
 }
 }
 \seealso{
-  Other package installation: \code{\link{install}},
-  \code{\link{install_bitbucket}},
-  \code{\link{install_git}},
-  \code{\link{install_gitorious}},
-  \code{\link{install_url}}, \code{\link{install_version}}
+Other package installation: \code{\link{install}},
+\code{\link{install_bitbucket}}, \code{\link{install_git}},
+\code{\link{install_gitorious}}, \code{\link{install_url}},
+\code{\link{install_version}}
 }
 

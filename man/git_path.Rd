@@ -9,6 +9,6 @@ git_path(git_binary_name = NULL)
   on the OS.}
 }
 \description{
-  Retrieve the current running path of the git binary.
+Retrieve the current running path of the git binary.
 }
 

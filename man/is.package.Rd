@@ -5,7 +5,7 @@
 is.package(x)
 }
 \description{
-  Is the object a package?
+Is the object a package?
 }
 \keyword{internal}
 

@@ -15,10 +15,10 @@ create(path, description = getOption("devtools.desc"), check = FALSE)
   \code{\link{check}}}
 }
 \description{
-  Similar to \code{\link{package.skeleton}}, except that it
-  only creates the standard devtools directory structures,
-  it doesn't try and create source code and data files by
-  inspecting the global environment.
+Similar to \code{\link{package.skeleton}}, except that it
+only creates the standard devtools directory structures, it
+doesn't try and create source code and data files by
+inspecting the global environment.
 }
 \examples{
 \donttest{
@@ -34,6 +34,6 @@ create(path, my_description)
 }
 }
 \seealso{
-  Text with \code{\link{package.skeleton}}
+Text with \code{\link{package.skeleton}}
 }
 

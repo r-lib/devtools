@@ -9,7 +9,7 @@ parse_ns_file(pkg = ".")
   name.  See \code{\link{as.package}} for more information}
 }
 \description{
-  Parses the NAMESPACE file for a package
+Parses the NAMESPACE file for a package
 }
 \examples{
 if (has_tests()) {

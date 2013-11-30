@@ -12,24 +12,24 @@ compile_dll(pkg = ".", quiet = FALSE)
   function.}
 }
 \description{
-  \code{compile_dll} performs a fake R CMD install so
-  should code that works here should work with a regular
-  install (and vice versa).
+\code{compile_dll} performs a fake R CMD install so should
+code that works here should work with a regular install
+(and vice versa).
 }
 \details{
-  During compilation, debug flags are set with
-  \code{\link{compiler_flags}(TRUE)}.
+During compilation, debug flags are set with
+\code{\link{compiler_flags}(TRUE)}.
 
-  Invisibly returns the names of the DLL.
+Invisibly returns the names of the DLL.
 }
 \note{
-  If this is used to compile code that uses Rcpp, you will
-  need to add the following line to your \code{Makevars}
-  file so that it knows where to find the Rcpp headers:
-  \code{PKG_CPPFLAGS=`$(R_HOME)/bin/Rscript -e
-  'Rcpp:::CxxFlags()'`}
+If this is used to compile code that uses Rcpp, you will
+need to add the following line to your \code{Makevars} file
+so that it knows where to find the Rcpp headers:
+\code{PKG_CPPFLAGS=`$(R_HOME)/bin/Rscript -e
+'Rcpp:::CxxFlags()'`}
 }
 \seealso{
-  \code{\link{clean_dll}} to delete the compiled files.
+\code{\link{clean_dll}} to delete the compiled files.
 }
 

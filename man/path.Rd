@@ -18,10 +18,10 @@ add_path(path, after = Inf)
   where the new paths should be added}
 }
 \value{
-  \code{set_path} invisibly returns the old path.
+\code{set_path} invisibly returns the old path.
 }
 \description{
-  Get/set the PATH variable.
+Get/set the PATH variable.
 }
 \examples{
 path <- get_path()
@@ -32,9 +32,9 @@ set_path(old)
 length(get_path())
 }
 \seealso{
-  \code{\link{with_path}} to temporarily set the path for a
-  block of code
+\code{\link{with_path}} to temporarily set the path for a
+block of code
 
-  Other path: \code{\link{on_path}}
+Other path: \code{\link{on_path}}
 }
 

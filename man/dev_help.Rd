@@ -17,9 +17,8 @@ dev_help(topic, stage = "render", type = getOption("help_type"))
   type.}
 }
 \description{
-  Note that this only renders a single documentation file,
-  so that links to other files within the package won't
-  work.
+Note that this only renders a single documentation file, so
+that links to other files within the package won't work.
 }
 \examples{
 \dontrun{

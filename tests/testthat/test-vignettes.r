@@ -78,7 +78,7 @@ test_that("Extra files copied and removed", {
 test_that("vignettes built on install", {
   # Make sure it fails if we build without installing
   expect_error(build_vignettes("testVignettesBuilt"), 
-    "there is no package called ‘testVignettesBuilt’")
+    "there is no package called")
   
   install("testVignettesBuilt", reload = FALSE, quiet = TRUE)
   unlink("testVignettesBuilt/vignettes/new.tex")

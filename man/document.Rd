@@ -23,7 +23,7 @@ document(pkg = ".", clean = FALSE, roclets = c("collate", "namespace",
   the code objects to determine how to document them.}
 }
 \description{
-  Use roxygen to make documentation.
+Use roxygen to make documentation.
 }
 \keyword{programming}
 
