@@ -7,24 +7,22 @@
 #' @return Return a function which will append information related to the source
 #' repository (e.g. GitHub, Bitbucket) to the package \code{DESCRIPTION} file.
 
-update_description <- function (prefix, ...) {  
+update_description <- function (bundle, pkg_path, prefix, ...) {  
   
-  function (bundle, pkg_path) {
-    # Ensure the DESCRIPTION ends with a newline
-    desc <- file.path(pkg_path, "DESCRIPTION")
-    if (!ends_with_newline(desc))
-      cat("\n", sep="", file = desc, append = TRUE)
-    
-    # Function to append a field to the DESCRIPTION if it's not null
-    append_field <- function (name, value) {
-      if (!is.null(value)) {
-        cat(prefix, name, ":", value, "\n", sep = "", file = desc, 
-            append = TRUE)
-      }
+  # Ensure the DESCRIPTION ends with a newline
+  desc <- file.path(pkg_path, "DESCRIPTION")
+  if (!ends_with_newline(desc))
+    cat("\n", sep="", file = desc, append = TRUE)
+  
+  # Function to append a field to the DESCRIPTION if it's not null
+  append_field <- function (name, value) {
+    if (!is.null(value)) {
+      cat(prefix, name, ":", value, "\n", sep = "", file = desc, 
+          append = TRUE)
     }
-    
-    fields <- list(...)
-    Map(append_field, names(fields), fields)    
   }
+  
+  fields <- list(...)
+  Map(append_field, names(fields), fields)    
   
 }

@@ -55,8 +55,10 @@ install_bitbucket <- function(repo, username,
   
   # define before_install function that captures the arguments to 
   # install_bitbucket and appends to the description file
-  bitbucket_before_install <- function(bundle, pkg_path) {
-    update_description('Bitbucket', 
+  bitbucket_before_install <- function(bundle, pkg_path) {    
+    update_description(bundle = bundle,
+                       pkg_path = pkg_path,
+                       prefix = 'Bitbucket', 
                        Repo = repo, 
                        Username = username,
                        Ref = ref,

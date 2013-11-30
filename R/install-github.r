@@ -92,15 +92,17 @@ install_github_single <- function(repo, username = getOption("github.user"),
   # define before_install function that captures the arguments to 
   # install_github and appends the to the description file
   github_before_install <- function(bundle, pkg_path) {
-    update_description('Github', 
-                       Repo = repo, 
-                       Username = username,
-                       Ref = ref,
-                       SHA1 = github_extract_sha1(bundle),
-                       Pull = pull,
-                       Subdir = subdir,
-                       Branch = branch,
-                       AuthUser = auth_user)
+     update_description(bundle = bundle,
+                        pkg_path = pkg_path,
+                        prefix = 'Github', 
+                        Repo = repo, 
+                        Username = username,
+                        Ref = ref,
+                        SHA1 = github_extract_sha1(bundle),
+                        Pull = pull,
+                        Subdir = subdir,
+                        Branch = branch,
+                        AuthUser = auth_user)
   }
   
   # If there are slashes in the ref, the URL will have extra slashes, but the
