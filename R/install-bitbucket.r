@@ -4,7 +4,7 @@
 #' a single command.
 #'
 #' @param repo repo name
-#' @param username  bitbucket username. Defaults to getOption('bitbucket.user')
+#' @param username  bitbucket username.
 #' @seealso Bitbucket API docs:
 #'   \url{https://confluence.atlassian.com/display/BITBUCKET/Use+the+Bitbucket+REST+APIs}
 #' @inheritParams install_github
@@ -15,7 +15,7 @@
 #' install_bitbucket("paulhiemstra")
 #' install_bitbucket(c("testrepo", "testrepo2"))
 #' }
-install_bitbucket <- function(repo, username=getOption('bitbucket.user'), 
+install_bitbucket <- function(repo, username, 
                               ref = "master", pull = NULL, branch = NULL,
                               auth_user = NULL, password = NULL, ...)
 {
