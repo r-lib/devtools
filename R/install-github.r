@@ -54,7 +54,7 @@ install_github_single <- function(repo, username = getOption("github.user"),
     ref <- branch
   }
 
-  params <- github_parse_path(repo)
+  params <- parse_repo_param(repo)
   username <- params$username %||% username
   repo <- params$repo
   ref <- params$ref %||% ref
@@ -98,7 +98,7 @@ install_github_single <- function(repo, username = getOption("github.user"),
                         Repo = repo, 
                         Username = username,
                         Ref = ref,
-                        SHA1 = github_extract_sha1(bundle),
+                        SHA1 = extract_sha1(bundle),
                         Pull = pull,
                         Subdir = subdir,
                         Branch = branch,
@@ -126,48 +126,4 @@ github_pull_info <- function(repo, username, pull) {
 
   list(repo = head$repo$name, username = head$repo$owner$login,
     ref = head$ref)
-}
-
-# Extract the commit hash from a github bundle and append it to the
-# package DESCRIPTION file. Git archives include the SHA1 hash as the 
-# comment field of the zip central directory record 
-# (see https://www.kernel.org/pub/software/scm/git/docs/git-archive.html)
-# Since we know it's 40 characters long we seek that many bytes minus 2 
-# (to confirm the comment is exactly 40 bytes long)
-github_extract_sha1 <- function(bundle) {
-  
-  # open the bundle for reading
-  conn <- file(bundle, open = "rb", raw = TRUE)
-  on.exit(close(conn))
-  
-  # seek to where the comment length field should be recorded
-  seek(conn, where = -0x2a, origin = "end")
-  
-  # verify the comment is length 0x28
-  len <- readBin(conn, "raw", n = 2)
-  if (len[1] == 0x28 && len[2] == 0x00) {
-    # read and return the SHA1
-    rawToChar(readBin(conn, "raw", n = 0x28))
-  } else {
-    NULL
-  }
-}
-
-# Parse a GitHub path of the form [username/]repo[/subdir][#pull|@ref]
-github_parse_path <- function(path) {
-  username_rx <- "(?:([^/]+)/)?"
-  repo_rx <- "([^/@#]+)"
-  subdir_rx <- "(?:/([^@#]+))?"
-  ref_rx <- "(?:@(.+))"
-  pull_rx <- "(?:#([0-9]+))"
-  ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
-  github_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
-                       username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
-
-  params <- c("username", "repo", "subdir", "ref", "pull", "invalid")
-  replace <- setNames(sprintf("\\%d", seq_along(params)), params)
-  ret <- lapply(replace, function(r) gsub(github_rx, r, path, perl = TRUE))
-  if (ret$invalid != "")
-    stop(sprintf("Invalid GitHub path: %s", path))
-  ret[sapply(ret, nchar) > 0]
 }

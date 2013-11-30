@@ -25,6 +25,12 @@ install_bitbucket <- function(repo, username,
     ref <- branch
   }
   
+  params <- parse_repo_param(repo)
+  username <- params$username %||% username
+  repo <- params$repo
+  ref <- params$ref %||% ref
+  pull <- params$pull %||% pull
+  
   if (!xor(is.null(pull), is.null(ref))) {
     stop("Must specify either a ref or a pull request, not both. ",
          "Perhaps you want to use 'ref=NULL'?")
@@ -62,7 +68,7 @@ install_bitbucket <- function(repo, username,
                        Repo = repo, 
                        Username = username,
                        Ref = ref,
-                       SHA1 = github_extract_sha1(bundle),
+                       SHA1 = extract_sha1(bundle),
                        Pull = pull,
                        Branch = branch,
                        AuthUser = auth_user)
