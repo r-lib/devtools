@@ -1,8 +1,12 @@
 #' Appends new fields to DESCRIPTION file
 #' 
-#' This is used by the suite of \code{install_*} functions. 
+#' This is used by the suite of \code{install_*} functions mainly to reduce 
+#' code duplication.
 #' 
-#' @param prefix The repository name (e.g. Github, Bitbucket)
+#' @param bundle the package bundle (zip) location
+#' @param pkg_path the package (unzipped bundle) location
+#' @param prefix The repository name (e.g. Github, Bitbucket). A character 
+#' object
 #' @param ... the fields to append to the \code{DESCRIPTION} file
 #' @return Return a function which will append information related to the source
 #' repository (e.g. GitHub, Bitbucket) to the package \code{DESCRIPTION} file.
