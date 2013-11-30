@@ -55,29 +55,14 @@ install_bitbucket <- function(repo, username=getOption('bitbucket.user'),
   # define before_install function that captures the arguments to 
   # install_bitbucket and appends to the description file
   bitbucket_before_install <- function(bundle, pkg_path) {
-    
-    # Ensure the DESCRIPTION ends with a newline
-    desc <- file.path(pkg_path, "DESCRIPTION")
-    if (!ends_with_newline(desc))
-      cat("\n", sep="", file = desc, append = TRUE)
-    
-    # Function to append a field to the DESCRIPTION if it's not null
-    append_field <- function(name, value) {
-      if (!is.null(value)) {
-        cat("Bitbucket", name, ":", value, "\n", sep = "", file = desc, append = TRUE)
-      }
-    }
-    
-    # Append fields
-    append_field("Repo", repo)
-    append_field("Username", username)
-    append_field("Ref", ref)
-    append_field("SHA1", github_extract_sha1(bundle))
-    append_field("Pull", pull)
-    append_field("Branch", branch)
-    append_field("AuthUser", auth_user)
-    # Don't record password for security reasons
-    #append_field("Password" password)
+    update_description('Bitbucket', 
+                       Repo = repo, 
+                       Username = username,
+                       Ref = ref,
+                       SHA1 = github_extract_sha1(bundle),
+                       Pull = pull,
+                       Branch = branch,
+                       AuthUser = auth_user)
   }
   install_url(url, name = paste(repo, ".zip", sep=""),
               config = auth, before_install = bitbucket_before_install, ...)
