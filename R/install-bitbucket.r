@@ -7,6 +7,7 @@
 #' @param username  bitbucket username.
 #' @seealso Bitbucket API docs:
 #'   \url{https://confluence.atlassian.com/display/BITBUCKET/Use+the+Bitbucket+REST+APIs}
+#'   \url{http://restbrowser.bitbucket.org}
 #' @inheritParams install_github
 #' @family package installation
 #' @export

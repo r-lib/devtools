@@ -2,15 +2,13 @@
 \alias{install_bitbucket}
 \title{Install a package directly from bitbucket}
 \usage{
-install_bitbucket(repo, username = getOption("bitbucket.user"),
-  ref = "master", pull = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, ...)
+install_bitbucket(repo, username, ref = "master", pull = NULL,
+  branch = NULL, auth_user = NULL, password = NULL, ...)
 }
 \arguments{
   \item{repo}{repo name}
 
-  \item{username}{bitbucket username. Defaults to
-  getOption('bitbucket.user')}
+  \item{username}{bitbucket username.}
 
   \item{ref}{Desired git reference. Could be a commit, tag,
   or branch name. Defaults to \code{"master"}.}
@@ -44,6 +42,7 @@ install_bitbucket(c("testrepo", "testrepo2"))
 \seealso{
 Bitbucket API docs:
 \url{https://confluence.atlassian.com/display/BITBUCKET/Use+the+Bitbucket+REST+APIs}
+\url{http://restbrowser.bitbucket.org}
 
 Other package installation: \code{\link{install}},
 \code{\link{install_git}}, \code{\link{install_github}},
