@@ -7,6 +7,8 @@ before_install:
   - ./travis-tool.sh r_binary_install XML Rcpp knitr brew RUnit inline highlight formatR highr markdown rgl
 install:
   - ./travis-tool.sh install_deps
+  # Install testthat after running install_deps, otherwise devtools itself might be installed from CRAN or c2d4u
+  - ./travis-tool.sh install_github hadley/testthat
 notifications:
   email:
     on_success: change
