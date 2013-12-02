@@ -45,7 +45,7 @@ install_github <- function(repo, username = getOption("github.user"),
 }
 
 
-install_github_single <- function(repo, username = getOption("github.user"),
+github_get_conn <- function(repo, username = getOption("github.user"),
   ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
   password = NULL, ...) {
 
@@ -80,13 +80,23 @@ install_github_single <- function(repo, username = getOption("github.user"),
     auth <- list()
   }
 
-  message("Installing github repo ",
+  msg <- paste0("Installing github repo ",
     paste(repo, ref, sep = "/", collapse = ", "),
     " from ",
     paste(username, collapse = ", "))
 
   url <- paste("https://github.com/", username, "/", repo,
     "/archive/", ref, ".zip", sep = "")
+
+  list(url=url, auth=auth, msg=msg)
+}
+
+install_github_single <- function(repo, username = getOption("github.user"),
+                                  ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
+                                  password = NULL, ...) {
+  conn <- github_get_conn(repo, username, ref, pull, subdir, branch, auth_user, password, ...)
+
+  message(conn$msg)
 
   # define before_install function that captures the arguments to 
   # install_github and appends the to the description file
@@ -122,8 +132,8 @@ install_github_single <- function(repo, username = getOption("github.user"),
   # install_github("shiny", "rstudio", "v/0/2/1")
   #  URL: https://github.com/rstudio/shiny/archive/v/0/2/1.zip
   #  Output file: shiny.zip
-  install_url(url, name = paste(repo, ".zip", sep=""), subdir = subdir,
-    config = auth, before_install = github_before_install, ...)
+  install_url(conn$url, name = paste(repo, ".zip", sep=""), subdir = conn$subdir,
+    config = conn$auth, before_install = github_before_install, ...)
 }
 
 # Retrieve the username and ref for a pull request
