@@ -57,8 +57,10 @@ github_get_conn <- function(repo, username = getOption("github.user"),
   params <- github_parse_path(repo)
   username <- params$username %||% username
   repo <- params$repo
-  ref <- params$ref %||% ref
-  pull <- params$pull %||% pull
+  if (!is.null(params$ref %||% params$pull)) {
+    ref <- params$ref
+    pull <- params$pull
+  }
   subdir <- params$subdir %||% subdir
 
   if (!xor(is.null(pull), is.null(ref))) {

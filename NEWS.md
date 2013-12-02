@@ -20,6 +20,9 @@
 
 * `check_cran()` records check times for each package tested.
 
+* Fixed bug in `install_github()` that prevented installing a pull request by
+  supplying `repo = "username/repo#pull"`. (#388)
+
 * explicitly specify user agent when querying user name and ref for pull request
   in `install_github`. (Thanks to Kirill Müller, #405)
 
