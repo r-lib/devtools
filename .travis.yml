@@ -1,5 +1,9 @@
 language: c
 script: ./travis-tool.sh run_tests
+
+after_failure:
+  - ./travis-tool.sh dump_logs
+
 before_install:
   - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
@@ -7,6 +11,8 @@ before_install:
   - ./travis-tool.sh r_binary_install XML Rcpp knitr brew RUnit inline highlight formatR highr markdown rgl
 install:
   - ./travis-tool.sh install_deps
+  # Install testthat after running install_deps, otherwise devtools itself might be installed from CRAN or c2d4u
+  - ./travis-tool.sh install_github hadley/testthat
 notifications:
   email:
     on_success: change
@@ -15,3 +21,4 @@ env:
   - global:
     - WARNINGS_ARE_ERRORS=1
     - _R_CHECK_FORCE_SUGGESTS_=0
+    - BOOTSTRAP_LATEX=1
