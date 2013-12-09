@@ -1,5 +1,7 @@
 # devtools 1.4.1.99
 
+* `check_doc()` now runs `document()` automatically.
+
 # devtools 1.4.1
 
 * Fixed bug in `wd()` when `path` was ommitted. (#374)

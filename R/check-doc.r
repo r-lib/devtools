@@ -13,14 +13,16 @@
 #' @importFrom tools checkDocFiles
 #' @examples
 #' \dontrun{
-#' document("mypkg")
 #' check_doc("mypkg")
 #' }
 check_doc <- function(pkg = ".") {
   pkg <- as.package(pkg)
+  document(pkg, reload = FALSE)
+
   old <- options(warn = -1)
   on.exit(options(old))
 
+  message("Checking documentation")
   print_if_not_null(("tools" %:::% ".check_package_parseRd")(dir = pkg$path))
   print_if_not_null(("tools" %:::% ".check_Rd_metadata")(dir = pkg$path))
   print_if_not_null(("tools" %:::% ".check_Rd_xrefs")(dir = pkg$path))
