@@ -38,6 +38,8 @@
 #' @param keep_source If \code{TRUE} will keep the srcrefs from an installed 
 #'   package. This is useful for debugging (especially inside of RStudio).
 #'   It defaults to the option \code{"keep.source.pkgs"}.
+#' @param threads number of concurrent threads to use for installing 
+#'   dependencies.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
@@ -46,12 +48,13 @@
 install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     args = getOption("devtools.install.args"), quiet = FALSE,
                     dependencies = NA, build_vignettes = !quick,
-                    keep_source = getOption("keep.source.pkgs")) {
+                    keep_source = getOption("keep.source.pkgs"),
+                    threads = 1) {
 
   pkg <- as.package(pkg)
 
   if (!quiet) message("Installing ", pkg$package)
-  install_deps(pkg, dependencies = dependencies)
+  install_deps(pkg, dependencies = dependencies, threads = threads)
 
   # Build the package. Only build locally if it doesn't have vignettes
   has_vignettes <- length(pkgVignettes(dir = pkg$path)$doc > 0)
@@ -85,7 +88,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
 #' @export
 #' @examples
 #' \dontrun{install_deps(".")}
-install_deps <- function(pkg = ".", dependencies = NA) {
+install_deps <- function(pkg = ".", dependencies = NA, threads = 1) {
   pkg <- as.package(pkg)
   deps <- if (identical(dependencies, NA)) {
     c("Depends", "Imports", "LinkingTo")
@@ -111,6 +114,6 @@ install_deps <- function(pkg = ".", dependencies = NA) {
 
   message("Installing dependencies for ", pkg$package, ":\n",
     paste(deps, collapse = ", "))
-  install.packages(deps, dependencies = dependencies)
+  install.packages(deps, dependencies = dependencies, Ncpus=threads)
   invisible(deps)
 }
