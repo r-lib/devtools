@@ -65,7 +65,8 @@ load_imports <- function(pkg = ".") {
 }
 
 # Load imported objects
-# The code in this function is taken from base::loadNamespace
+# The code in this function is taken and adapted from base::loadNamespace in R
+# 2.15.3
 process_imports <- function(pkg = ".") {
   nsInfo <- parse_ns_file(pkg)
   ns <- ns_env(pkg)

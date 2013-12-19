@@ -355,8 +355,9 @@ unregister_namespace <- function(name = NULL) {
 
 # This is similar to getNamespace(), except that getNamespace will load
 # the namespace if it's not already loaded. This function will not.
-# In R 2.16, a function called .getNamespace() will have the same effect
-# and this will no longer be necessary.
+# As of R 3.0, a function called .getNamespace() has the same effect
+# and this is longer be necessary (but it's still needed as long as devtools
+# supports R 2.15).
 get_namespace <- function(name) {
   # Sometimes we'll be passed something like as.name(name), so make sure
   # it's a string
