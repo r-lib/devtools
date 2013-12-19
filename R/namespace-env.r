@@ -43,7 +43,7 @@ create_ns_env <- function(pkg = ".") {
   env
 }
 
-# This is taken directly from base::loadNamespace() in R 2.15.1.
+# This is taken directly from base::loadNamespace() in R 3.0.2
 # Except .Internal(registerNamespace(name, env)) is replaced by
 # register_namespace(name, env)
 makeNamespace <- function(name, version = NULL, lib = NULL) {
@@ -59,11 +59,15 @@ makeNamespace <- function(name, version = NULL, lib = NULL) {
   dimpenv <- new.env(parent = baseenv(), hash = TRUE)
   attr(dimpenv, "name") <- paste("lazydata", name, sep = ":")
   setNamespaceInfo(env, "lazydata", dimpenv)
-  setNamespaceInfo(env, "imports", list(base = TRUE))
-  setNamespaceInfo(env, "path", normalizePath(file.path(lib, name), "/", TRUE))
+  setNamespaceInfo(env, "imports", list("base" = TRUE))
+  ## this should be an absolute path
+  setNamespaceInfo(env, "path",
+                   normalizePath(file.path(lib, name), "/", TRUE))
   setNamespaceInfo(env, "dynlibs", NULL)
   setNamespaceInfo(env, "S3methods", matrix(NA_character_, 0L, 3L))
-  assign(".__S3MethodsTable__.", new.env(hash = TRUE, parent = baseenv()), envir = env)
+  assign(".__S3MethodsTable__.",
+         new.env(hash = TRUE, parent = baseenv()),
+         envir = env)
   register_namespace(name, env)
   env
 }
