@@ -40,6 +40,7 @@
 #'   It defaults to the option \code{"keep.source.pkgs"}.
 #' @param threads number of concurrent threads to use for installing 
 #'   dependencies.
+#'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
@@ -49,7 +50,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     args = getOption("devtools.install.args"), quiet = FALSE,
                     dependencies = NA, build_vignettes = !quick,
                     keep_source = getOption("keep.source.pkgs"),
-                    threads = 1) {
+                    threads = getOptions("Ncpus", 1)) {
 
   pkg <- as.package(pkg)
 
@@ -88,7 +89,8 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
 #' @export
 #' @examples
 #' \dontrun{install_deps(".")}
-install_deps <- function(pkg = ".", dependencies = NA, threads = 1) {
+install_deps <- function(pkg = ".", dependencies = NA, 
+                         threads = getOption("Ncpus", 1)) {
   pkg <- as.package(pkg)
   deps <- if (identical(dependencies, NA)) {
     c("Depends", "Imports", "LinkingTo")
@@ -114,6 +116,6 @@ install_deps <- function(pkg = ".", dependencies = NA, threads = 1) {
 
   message("Installing dependencies for ", pkg$package, ":\n",
     paste(deps, collapse = ", "))
-  install.packages(deps, dependencies = dependencies, Ncpus=threads)
+  install.packages(deps, dependencies = dependencies, Ncpus = threads)
   invisible(deps)
 }

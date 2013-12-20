@@ -3,8 +3,8 @@
 \title{Check a package from CRAN.}
 \usage{
 check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath,
-  bioconductor = FALSE, type = getOption("pkgType"), threads = 1,
-  check_dir = tempfile("check_cran"))
+  bioconductor = FALSE, type = getOption("pkgType"),
+  threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"))
 }
 \arguments{
   \item{pkgs}{Vector of package names - note that unlike
@@ -27,7 +27,8 @@ check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath,
   \item{type}{binary package type of test}
 
   \item{threads}{number of concurrent threads to use for
-  checking.}
+  checking.  It defaults to the option \code{"Ncpus"} or
+  \code{1} if unset.}
 
   \item{check_dir}{the directory in which the package is
   checked}

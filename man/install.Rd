@@ -5,7 +5,8 @@
 install(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   args = getOption("devtools.install.args"), quiet = FALSE,
   dependencies = NA, build_vignettes = !quick,
-  keep_source = getOption("keep.source.pkgs"))
+  keep_source = getOption("keep.source.pkgs"), threads = getOptions("Ncpus",
+  1))
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -48,6 +49,10 @@ install(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   from an installed package. This is useful for debugging
   (especially inside of RStudio).  It defaults to the
   option \code{"keep.source.pkgs"}.}
+
+  \item{threads}{number of concurrent threads to use for
+  installing dependencies.  It defaults to the option
+  \code{"Ncpus"} or \code{1} if unset.}
 }
 \description{
 Uses \code{R CMD INSTALL} to install the package. Will also
