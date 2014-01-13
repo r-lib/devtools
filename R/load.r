@@ -175,7 +175,7 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 #' @details
 #' To set the default author and licenses, set \code{options}
 #' \code{devtools.desc.author} and \code{devtools.desc.license}.  I use
-#' \code{options(devtools.desc.author = '"Hadley Wickham <h.wickham@@gmail.com> [aut,cre]"',
+#' \code{options(devtools.desc.author = '"Hadley Wickham <h.wickham@gmail.com> [aut,cre]"',
 #'   devtools.desc.license = "GPL-3")}.
 #' @param path path to package root directory
 #' @param extra a named list of extra options to add to \file{DESCRIPTION}. 

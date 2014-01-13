@@ -24,7 +24,7 @@
 #'
 #'   \item \code{devtools.desc.author}: a string providing a default Authors@@R
 #'     string to be used in new \file{DESCRIPTION}s.  Should be a R code, and
-#'     look like \code{"Hadley Wickham <h.wickham@@gmail.com> [aut, cre]"}. See
+#'     look like \code{"Hadley Wickham <h.wickham@gmail.com> [aut, cre]"}. See
 #'     \code{\link[utils]{as.person}} for more details.
 #'
 #'   \item \code{devtools.desc.license}: a default license string to use for
@@ -47,9 +47,9 @@ NULL
     devtools.path = "~/R-dev",
     devtools.cleandoc = FALSE,
     devtools.install.args = "",
-    devtools.name = "getOptions('devtools.name')",
-    devtools.desc.author = "# getOptions('devtools.desc.author')",
-    devtools.desc.license = "# getOptions('devtools.desc.license')",
+    devtools.name = "getOption('devtools.name')",
+    devtools.desc.author = "# getOption('devtools.desc.author')",
+    devtools.desc.license = "# getOption('devtools.desc.license')",
     devtools.desc.suggests = NULL,
     devtools.desc = list(),
     github.user = "hadley"
