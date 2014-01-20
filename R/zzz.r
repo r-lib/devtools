@@ -47,7 +47,7 @@ NULL
     devtools.path = "~/R-dev",
     devtools.cleandoc = FALSE,
     devtools.install.args = "",
-    devtools.name = "getOption('devtools.name')",
+    devtools.name = "# getOption('devtools.name')",
     devtools.desc.author = "# getOption('devtools.desc.author')",
     devtools.desc.license = "# getOption('devtools.desc.license')",
     devtools.desc.suggests = NULL,
