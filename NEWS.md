@@ -2,6 +2,8 @@
 
 * `check_doc()` now runs `document()` automatically.
 
+* `check_cran()` records check times for each package tested.
+
 # devtools 1.4.1
 
 * Fixed bug in `wd()` when `path` was ommitted. (#374)
