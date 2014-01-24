@@ -56,9 +56,10 @@ install_github("hadley/devtools")
 }
 }
 \seealso{
-Other package installation: \code{\link{install}},
-\code{\link{install_bitbucket}}, \code{\link{install_git}},
-\code{\link{install_gitorious}}, \code{\link{install_url}},
-\code{\link{install_version}}
+Other package installation:
+\code{\link{install_bitbucket}};
+\code{\link{install_gitorious}}; \code{\link{install_git}};
+\code{\link{install_url}}; \code{\link{install_version}};
+\code{\link{install}}
 }
 

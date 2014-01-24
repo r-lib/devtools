@@ -28,11 +28,11 @@ document <- function(pkg = ".", clean = FALSE,
     }
     file.remove(dir(man_path, full.names = TRUE))
   }
-
-  if (reload) {
-    load_all(pkg, reset = clean)
-  }
   
+  if (!is_loaded(pkg) || (is_loaded(pkg) && reload)) {
+    try(load_all(pkg, reset = clean))
+  }
+
   if (packageVersion("roxygen2") < 3) {
     document_roxygen2(pkg, roclets)
   } else {
@@ -43,7 +43,7 @@ document <- function(pkg = ".", clean = FALSE,
   invisible()
 }
 
-document_roxygen2 <- function(pkg, roclets, reload = TRUE) {  
+document_roxygen2 <- function(pkg, roclets) {  
   # Integrate source and evaluated code
   env <- ns_env(pkg)
   env_hash <- suppressWarnings(digest(env))
@@ -63,7 +63,7 @@ document_roxygen2 <- function(pkg, roclets, reload = TRUE) {
   }
 }
 
-document_roxygen3 <- function(pkg, roclets, reload = TRUE) {
+document_roxygen3 <- function(pkg, roclets) {  
   with_envvar(r_env_vars(), with_collate("C", 
     roxygenise(pkg$path, roclets = roclets, load_code = pkg_env)
   ))

@@ -21,7 +21,6 @@ to load the code conflicts with how devtools does it.
 }
 \examples{
 \dontrun{
-document("mypkg")
 check_doc("mypkg")
 }
 }

@@ -35,10 +35,10 @@ This function is vectorised so you can install multiple
 packages in a single command.
 }
 \seealso{
-Other package installation: \code{\link{install}},
-\code{\link{install_bitbucket}}, \code{\link{install_git}},
-\code{\link{install_github}},
-\code{\link{install_gitorious}},
-\code{\link{install_version}}
+Other package installation:
+\code{\link{install_bitbucket}};
+\code{\link{install_github}};
+\code{\link{install_gitorious}}; \code{\link{install_git}};
+\code{\link{install_version}}; \code{\link{install}}
 }
 

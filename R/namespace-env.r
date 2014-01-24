@@ -43,7 +43,7 @@ create_ns_env <- function(pkg = ".") {
   env
 }
 
-# This is taken directly from base::loadNamespace() in R 2.15.1.
+# This is taken directly from base::loadNamespace() in R 3.0.2
 # Except .Internal(registerNamespace(name, env)) is replaced by
 # register_namespace(name, env)
 makeNamespace <- function(name, version = NULL, lib = NULL) {
@@ -59,11 +59,15 @@ makeNamespace <- function(name, version = NULL, lib = NULL) {
   dimpenv <- new.env(parent = baseenv(), hash = TRUE)
   attr(dimpenv, "name") <- paste("lazydata", name, sep = ":")
   setNamespaceInfo(env, "lazydata", dimpenv)
-  setNamespaceInfo(env, "imports", list(base = TRUE))
-  setNamespaceInfo(env, "path", normalizePath(file.path(lib, name), "/", TRUE))
+  setNamespaceInfo(env, "imports", list("base" = TRUE))
+  ## this should be an absolute path
+  setNamespaceInfo(env, "path",
+                   normalizePath(file.path(lib, name), "/", TRUE))
   setNamespaceInfo(env, "dynlibs", NULL)
   setNamespaceInfo(env, "S3methods", matrix(NA_character_, 0L, 3L))
-  assign(".__S3MethodsTable__.", new.env(hash = TRUE, parent = baseenv()), envir = env)
+  assign(".__S3MethodsTable__.",
+         new.env(hash = TRUE, parent = baseenv()),
+         envir = env)
   register_namespace(name, env)
   env
 }
@@ -351,8 +355,9 @@ unregister_namespace <- function(name = NULL) {
 
 # This is similar to getNamespace(), except that getNamespace will load
 # the namespace if it's not already loaded. This function will not.
-# In R 2.16, a function called .getNamespace() will have the same effect
-# and this will no longer be necessary.
+# As of R 3.0, a function called .getNamespace() has the same effect
+# and this is longer be necessary (but it's still needed as long as devtools
+# supports R 2.15).
 get_namespace <- function(name) {
   # Sometimes we'll be passed something like as.name(name), so make sure
   # it's a string
