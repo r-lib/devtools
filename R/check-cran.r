@@ -96,7 +96,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     url <- package_url(pkgs[i], repos, available = available_src)
 
     if (length(url$url) == 0) {
-      message("Can't find package source. Skipping...")
+      message("Can't find package source for ", i, ": ", pkgs[i],
+        ". Skipping...")
       return(NULL)
     }
     local <- file.path(srcpath, url$name)
