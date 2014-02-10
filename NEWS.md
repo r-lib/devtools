@@ -1,5 +1,7 @@
 # devtools 1.4.1.99
 
+* `add_rstudio_project()` adds an Rstudio project file to your package.
+
 * `add_travis()` adds a basic travis template to your package. `.travis.yml`
   is automatically added to `.Rbuildignore` to avoid including it in the built
   package.
