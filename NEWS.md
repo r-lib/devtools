@@ -4,6 +4,8 @@
 
 * `check_cran()` records check times for each package tested.
 
+* New parameter `args` to `build_win`. (Thanks to Kirill Müller, #421)
+
 # devtools 1.4.1
 
 * Fixed bug in `wd()` when `path` was ommitted. (#374)
