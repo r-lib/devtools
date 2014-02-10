@@ -90,7 +90,9 @@ github_get_conn <- function(repo, username = getOption("github.user"),
   url <- paste("https://github.com/", username, "/", repo,
     "/archive/", ref, ".zip", sep = "")
 
-  list(url=url, auth=auth, msg=msg)
+  list(url=url, auth=auth, msg=msg, repo=repo, username=username, ref=ref,
+       pull=pull, subdir=subdir, branch=branch, auth_user=auth_user,
+       password=password)
 }
 
 install_github_single <- function(repo, username = getOption("github.user"),
@@ -117,16 +119,16 @@ install_github_single <- function(repo, username = getOption("github.user"),
     }
     
     # Append fields
-    append_field("Repo", repo)
-    append_field("Username", username)
-    append_field("Ref", ref)
+    append_field("Repo", conn$repo)
+    append_field("Username", conn$username)
+    append_field("Ref", conn$ref)
     append_field("SHA1", github_extract_sha1(bundle))
-    append_field("Pull", pull)
-    append_field("Subdir", subdir)
-    append_field("Branch", branch)
-    append_field("AuthUser", auth_user)
+    append_field("Pull", conn$pull)
+    append_field("Subdir", conn$subdir)
+    append_field("Branch", conn$branch)
+    append_field("AuthUser", conn$auth_user)
     # Don't record password for security reasons
-    #append_field("Password" password)
+    #append_field("Password", conn$password)
   }
   
   # If there are slashes in the ref, the URL will have extra slashes, but the
