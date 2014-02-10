@@ -2,7 +2,7 @@
 \alias{build_win}
 \title{Build windows binary package.}
 \usage{
-build_win(pkg = ".", version = "R-release", quiet = FALSE)
+build_win(pkg = ".", version = "R-release", args = NULL, quiet = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
@@ -13,6 +13,11 @@ build_win(pkg = ".", version = "R-release", quiet = FALSE)
   package. Possible options are listed on
   \url{http://win-builder.r-project.org/}. Defaults to the
   released version of R.}
+
+  \item{args}{An optional character vector of additional
+  command line arguments to be passed to \code{R CMD build}
+  if \code{binary = FALSE}, or \code{R CMD install} if
+  \code{binary = TRUE}.}
 
   \item{quiet}{if \code{TRUE} suppresses output from this
   function.}
