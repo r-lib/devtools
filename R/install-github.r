@@ -133,7 +133,7 @@ github_pull_info <- function(repo, username, pull) {
   host <- "https://api.github.com"
   # GET /repos/:user/:repo/pulls/:number
   path <- paste("repos", username, repo, "pulls", pull, sep = "/")
-  r <- GET(host, path = path)
+  r <- GET(host, path = path, config = add_headers("User-agent" = "hadley/devtools"))
   stop_for_status(r)
   head <- parsed_content(r)$head
 
