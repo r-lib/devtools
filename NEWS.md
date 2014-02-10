@@ -1,5 +1,9 @@
 # devtools 1.4.1.99
 
+* `add_travis()` adds a basic travis template to your package. `.travis.yml`
+  is automatically added to `.Rbuildignore` to avoid including it in the built
+  package.
+
 * New `add_build_ignore()` makes it easy to add files to `.Rbuildignore`
 
 * `check_doc()` now runs `document()` automatically.

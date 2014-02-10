@@ -21,6 +21,8 @@ Nothing, called for its side effect.
 \code{.Rbuildignore} has a regular expression on each line,
 but it's usually easier to work with specific file names.
 By default, will (crudely) turn a filename into a regular
-expression that will only match that path.
+expression that will only match that path. Repeated entries
+will be silently removed.
 }
+\keyword{internal}
 

@@ -12,6 +12,7 @@
 #'   \code{\\.} and surround with \code{^} and \code{$}.
 #' @return Nothing, called for its side effect.
 #' @export
+#' @keywords internal
 add_build_ignore <- function(pkg = ".", file, escape = TRUE) {
   pkg <- as.package(pkg)
 
