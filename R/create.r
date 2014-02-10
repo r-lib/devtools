@@ -51,9 +51,7 @@ create <- function(path, description = getOption("devtools.desc"),
 
 #' @importFrom whisker whisker.render
 create_package_doc <- function(path, name) {
-  template <- readLines(system.file("templates", "packagename-package.r",
-    package = "devtools"))
-  out <- whisker.render(template, list(name = name))
+  out <- render_template("packagename-package.r", list(name = name))
 
   target <- file.path(path, "R", paste(name, "-package.r", sep = ""))
   writeLines(out, target)

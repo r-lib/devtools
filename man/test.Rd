@@ -6,7 +6,7 @@ test(pkg = ".", filter = NULL, fresh = FALSE)
 }
 \arguments{
   \item{pkg}{package description, can be path or package
-  name.  See \code{\link{as.package}} for more information}
+  name. See \code{\link{as.package}} for more information}
 
   \item{filter}{If not \code{NULL}, only tests with file
   names matching this regular expression will be executed.
@@ -23,5 +23,11 @@ test(pkg = ".", filter = NULL, fresh = FALSE)
 Tests are assumed to be located in a \code{inst/tests/}
 directory. See \code{\link[testthat]{test_dir}} for the
 naming convention of test scripts within that directory.
+}
+\details{
+If no testing infrastructure is present, you'll be asked if
+you want devtools to create it for you (in interactive
+sessions only). See \code{\link{make_test_skeleton}} for
+more details.
 }
 
