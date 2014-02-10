@@ -134,7 +134,7 @@ install_github_single <- function(repo, username = getOption("github.user"),
   # install_github("shiny", "rstudio", "v/0/2/1")
   #  URL: https://github.com/rstudio/shiny/archive/v/0/2/1.zip
   #  Output file: shiny.zip
-  install_url(conn$url, name = paste(repo, ".zip", sep=""), subdir = conn$subdir,
+  install_url(conn$url, subdir = conn$subdir,
     config = conn$auth, before_install = github_before_install, ...)
 }
 
