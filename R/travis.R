@@ -12,6 +12,7 @@ add_travis <- function(pkg = ".") {
   if (file.exists(path)) {
     stop(".travis.yml already exists", call. = FALSE)
   }
+  message("Adding .travis.yml to ", pkg$package)
 
   template_path <- system.file("templates/.travis.yml", package = "devtools")
   file.copy(template_path, path)

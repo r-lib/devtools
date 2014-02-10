@@ -12,6 +12,7 @@ add_rstudio_project <- function(pkg = ".") {
   if (file.exists(path)) {
     stop(pkg$package, ".Rproj already exists", call. = FALSE)
   }
+  message("Adding Rstudio project file to ", pkg$package)
 
   template_path <- system.file("templates/template.Rproj", package = "devtools")
   file.copy(template_path, path)

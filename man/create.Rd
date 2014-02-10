@@ -2,7 +2,8 @@
 \alias{create}
 \title{Creates a new package, following all devtools package conventions.}
 \usage{
-create(path, description = getOption("devtools.desc"), check = FALSE)
+create(path, description = getOption("devtools.desc"), check = FALSE,
+  rstudio = TRUE)
 }
 \arguments{
   \item{path}{location to create new package.  The last
@@ -13,6 +14,9 @@ create(path, description = getOption("devtools.desc"), check = FALSE)
 
   \item{check}{if \code{TRUE}, will automatically run
   \code{\link{check}}}
+
+  \item{rstudio}{Create an Rstudio project file?  (with
+  \code{\link{add_rstudio_project}})}
 }
 \description{
 Similar to \code{\link{package.skeleton}}, except that it

@@ -9,6 +9,8 @@
 #' @param description list of description values to override default values or
 #'   add additional values.
 #' @param check if \code{TRUE}, will automatically run \code{\link{check}}
+#' @param rstudio Create an Rstudio project file?
+#'   (with \code{\link{add_rstudio_project}})
 #' @seealso Text with \code{\link{package.skeleton}}
 #' @export
 #' @examples
@@ -24,7 +26,7 @@
 #' create(path, my_description)
 #' }
 create <- function(path, description = getOption("devtools.desc"),
-                         check = FALSE) {
+                         check = FALSE, rstudio = TRUE) {
   name <- basename(path)
   message("Creating package ", name, " in ", dirname(path))
 
@@ -40,6 +42,8 @@ create <- function(path, description = getOption("devtools.desc"),
   dir.create(file.path(path, "man"))
   create_description(path, extra = description)
   create_package_doc(path, name)
+
+  if (rstudio) add_rstudio_project(path)
 
   if (check) check(path)
   invisible(TRUE)

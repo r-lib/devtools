@@ -1,5 +1,9 @@
 # devtools 1.4.1.99
 
+* `create()` gains an `rstudio` argument which will automatically create
+  an Rstudio project in the package directory. It defaults to `TRUE`:
+  if you don't use Rstudio, just delete the file.
+
 * `add_rstudio_project()` adds an Rstudio project file to your package.
 
 * `add_travis()` adds a basic travis template to your package. `.travis.yml`
