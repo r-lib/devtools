@@ -1,5 +1,9 @@
 # devtools 1.4.1.99
 
+* `add_test_infrastructure()` will create test infrastructure for a new package.
+  It is called automatically from `test()` if no test directories are
+  found, the session is interactive and you agree.
+
 * `create()` gains an `rstudio` argument which will automatically create
   an Rstudio project in the package directory. It defaults to `TRUE`:
   if you don't use Rstudio, just delete the file.

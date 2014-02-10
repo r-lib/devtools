@@ -6,7 +6,7 @@
 #'
 #' If no testing infrastructure is present, you'll be asked if you want
 #' devtools to create it for you (in interactive sessions only). See
-#' \code{\link{make_test_skeleton}} for more details.
+#' \code{\link{add_test_infrastructure}} for more details.
 #'
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information
@@ -20,7 +20,7 @@ test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
   if (!has_tests(pkg) && interactive()) {
     message("No testing infrastructure found. Create it?")
     if (menu(c("Yes", "No")) == 1) {
-      make_test_skeleton(pkg)
+      add_test_infrastructure(pkg)
     }
     return(invisible())
   }
@@ -103,7 +103,7 @@ has_tests <- function(pkg = ".") {
 #'
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
-make_test_skeleton <- function(pkg = ".") {
+add_test_infrastructure <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   check_testthat()

@@ -1,8 +1,8 @@
-\name{make_test_skeleton}
-\alias{make_test_skeleton}
+\name{add_test_infrastructure}
+\alias{add_test_infrastructure}
 \title{Add test skeleton.}
 \usage{
-make_test_skeleton(pkg = ".")
+add_test_infrastructure(pkg = ".")
 }
 \arguments{
   \item{pkg}{package description, can be path or package

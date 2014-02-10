@@ -27,7 +27,7 @@ naming convention of test scripts within that directory.
 \details{
 If no testing infrastructure is present, you'll be asked if
 you want devtools to create it for you (in interactive
-sessions only). See \code{\link{make_test_skeleton}} for
-more details.
+sessions only). See \code{\link{add_test_infrastructure}}
+for more details.
 }
 
