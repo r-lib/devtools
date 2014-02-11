@@ -17,7 +17,7 @@ test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
   check_testthat()
   pkg <- as.package(pkg)
 
-  if (!has_tests(pkg) && interactive()) {
+  if (!uses_testthat(pkg) && interactive()) {
     message("No testing infrastructure found. Create it?")
     if (menu(c("Yes", "No")) == 1) {
       add_test_infrastructure(pkg)
@@ -83,7 +83,7 @@ devtest <- function(package) {
   path
 }
 
-has_tests <- function(pkg = ".") {
+uses_testthat <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   paths <- c(
@@ -108,7 +108,7 @@ add_test_infrastructure <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   check_testthat()
-  if (has_tests(pkg)) {
+  if (uses_testthat(pkg)) {
     stop("Package already has testing infrastructure", call. = FALSE)
   }
 

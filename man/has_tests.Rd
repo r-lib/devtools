@@ -2,7 +2,7 @@
 \alias{has_tests}
 \title{Was devtools installed with tests?}
 \usage{
-has_tests(pkg = ".")
+has_tests()
 }
 \description{
 Was devtools installed with tests?
