@@ -17,7 +17,7 @@ add_travis <- function(pkg = ".") {
     " * Add a travis shield to your README.md"
   )
 
-  template_path <- system.file("templates/.travis.yml", package = "devtools")
+  template_path <- system.file("templates/travis.yml", package = "devtools")
   file.copy(template_path, path)
 
   add_build_ignore(pkg, ".travis.yml")
