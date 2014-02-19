@@ -47,9 +47,9 @@ NULL
     devtools.path = "~/R-dev",
     devtools.cleandoc = FALSE,
     devtools.install.args = "",
-    devtools.name = "getOptions('devtools.name')",
-    devtools.desc.author = "# getOptions('devtools.desc.author')",
-    devtools.desc.license = "# getOptions('devtools.desc.license')",
+    devtools.name = "Your name goes here",
+    devtools.desc.author = '"First Last <first.last@example.com> [aut, cre]"',
+    devtools.desc.license = "What license is it under?",
     devtools.desc.suggests = NULL,
     devtools.desc = list(),
     github.user = "hadley"
