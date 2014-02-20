@@ -81,14 +81,14 @@ replay.error <- function(x) {
 
 
 replay_stop <- function(x) UseMethod("replay_stop", x)
-#' @S3method replay_stop error
+#' @export
 replay_stop.error <- function(x) {
   stop(quiet_error(x$message, x$call))
 }
-#' @S3method replay_stop default
+#' @export
 replay_stop.default <- function(x) replay(x)
 
-#' @S3method replay_stop list
+#' @export
 replay_stop.list <- function(x) {
   invisible(lapply(x, replay_stop))
 }
