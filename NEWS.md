@@ -1,5 +1,8 @@
 # devtools 1.4.1.99
 
+* Improved default `DESCRIPTION` file created by `create_description()`. 
+  (Thanks to @ncarchedi, #428)
+
 * `add_test_infrastructure()` will create test infrastructure for a new package.
   It is called automatically from `test()` if no test directories are
   found, the session is interactive and you agree.
