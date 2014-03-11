@@ -5,6 +5,7 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @export
 add_rstudio_project <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
