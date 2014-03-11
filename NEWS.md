@@ -1,5 +1,9 @@
 # devtools 1.4.1.99
 
+* The `with_options` works as expected, used to throw an error when trying to
+  set an option.
+  (Thanks to @krlmlr, #434)
+
 * Improved default `DESCRIPTION` file created by `create_description()`. 
   (Thanks to @ncarchedi, #428)
 
