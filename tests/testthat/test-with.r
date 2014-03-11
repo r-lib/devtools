@@ -33,6 +33,11 @@ test_that("with_envar respects suffix and prefix", {
 })
 
 test_that("with_options works", {
+  expect_that(getOption("scipen"), not(equals(999)))
   expect_equal(with_options(c(scipen=999), getOption("scipen")), 999)
+  expect_that(getOption("scipen"), not(equals(999)))
+
+  expect_that(getOption("zyxxyzyx"), not(equals("qwrbbl")))
   expect_equal(with_options(c(zyxxyzyx="qwrbbl"), getOption("zyxxyzyx")), "qwrbbl")
+  expect_that(getOption("zyxxyzyx"), not(equals("qwrbbl")))
 })

@@ -146,9 +146,13 @@ with_lib <- with_something(set_lib)
 
 # options --------------------------------------------------------------------
 
+set_options <- function(new_options) {
+  do.call(options, as.list(new_options))
+}
+
 #' @rdname with_something
 #' @export
-with_options <- with_something(options)
+with_options <- with_something(set_options)
 
 # par ------------------------------------------------------------------------
 
