@@ -31,3 +31,8 @@ test_that("with_envar respects suffix and prefix", {
   expect_equal(nested("suffix", "suffix"), c("1 2"))
   expect_equal(nested("suffix", "prefix"), c("2 1"))
 })
+
+test_that("with_options works", {
+  expect_equal(with_options(c(scipen=999), getOption("scipen")), 999)
+  expect_equal(with_options(c(zyxxyzyx="qwrbbl"), getOption("zyxxyzyx")), "qwrbbl")
+})
