@@ -1,5 +1,8 @@
 # devtools 1.4.1.99
 
+* Fixed bug in which `check()` incorrectly reported the location of the `R CMD
+  check` output when called with a custom `check_dir`
+
 * Improved default `DESCRIPTION` file created by `create_description()`. 
   (Thanks to @ncarchedi, #428)
 
