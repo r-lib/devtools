@@ -1,6 +1,8 @@
 # devtools 1.4.1.99
 
-* Improved default `DESCRIPTION` file created by `create_description()`. 
+* Bump R dependency to 3.0.2
+
+* Improved default `DESCRIPTION` file created by `create_description()`.
   (Thanks to @ncarchedi, #428)
 
 * `add_test_infrastructure()` will create test infrastructure for a new package.
