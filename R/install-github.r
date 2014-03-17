@@ -20,6 +20,7 @@
 #'   a package hosted in a private repository (and your username is different
 #'   to \code{username})
 #' @param password your password
+#' @param auth_token personal access token
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
@@ -38,16 +39,16 @@
 #' @importFrom httr authenticate
 install_github <- function(repo, username = getOption("github.user"),
   ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, ...) {
+  password = NULL, auth_token = getOption("github.token"), ...) {
 
   invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
-    username, ref, pull, subdir, branch, auth_user, password, ...))
+    username, ref, pull, subdir, branch, auth_user, password, auth_token, ...))
 }
 
 
 github_get_conn <- function(repo, username = getOption("github.user"),
   ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, ...) {
+  password = NULL, auth_token = NULL, ...) {
 
   if (!is.null(branch)) {
     warning("'branch' is deprecated. In the future, please use 'ref' instead.")
@@ -73,7 +74,13 @@ github_get_conn <- function(repo, username = getOption("github.user"),
     ref <- pullinfo$ref
   }
 
-  if (!is.null(password)) {
+  if (!is.null(auth_token)) {
+    auth <- authenticate(
+      user = auth_token,
+      password = "x-oauth-basic",
+      type = "basic")
+  } else if (!is.null(password)) {
+    warning("Password authentication is deprecated. In the future, please use 'auth_token' instead.")
     auth <- authenticate(
       user = auth_user %||% username,
       password = password,
