@@ -78,6 +78,7 @@ install_github_single <- function(repo, username = getOption("github.user"),
       password = "x-oauth-basic",
       type = "basic")
   } else if (!is.null(password)) {
+    warning("Password authentication is deprecated. In the future, please use 'auth_token' instead.")
     auth <- authenticate(
       user = auth_user %||% username,
       password = password,
