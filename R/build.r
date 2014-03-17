@@ -87,23 +87,24 @@ build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
 
   version <- match.arg(version, several.ok = TRUE)
 
-  if (!quiet) message("Building windows version of ",
-                      pkg$package,
-                      " for ", paste(version, collapse=", "),
-                      " with win-builder.r-project.org.\n"
-                      )
+  if (!quiet) {
+    message("Building windows version of ", pkg$package,
+            " for ", paste(version, collapse=", "),
+            " with win-builder.r-project.org.\n")
+  }
 
   built_path <- build(pkg, tempdir(), args = args, quiet = quiet)
   on.exit(unlink(built_path))
 
-  lapply(version,
-         function(v) {
-           ftpUpload(built_path, paste("ftp://win-builder.r-project.org/",
-                                       v, "/", basename(built_path), sep = ""))
-         })
+  url <- paste0("ftp://win-builder.r-project.org/", version, "/",
+                basename(built_path))
+  lapply(url, ftpUpload, what = built_path)
 
-  message("Check your email for a link to the built package",
-          ifelse(length(version) > 1, "s", ""),
-          " in 30-60 mins.")
+  if (!quiet) {
+    message("Check your email for a link to the built package",
+            if (length(version) > 1) "s" else "",
+            " in 30-60 mins.")
+  }
+
   invisible()
 }
