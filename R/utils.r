@@ -33,3 +33,9 @@ rstudio_has <- function(f = NULL) {
 
   exists(as.character(f), asNamespace("rstudio"))
 }
+
+render_template <- function(name, data) {
+  path <- system.file("templates", name, package = "devtools")
+  template <- readLines(path)
+  whisker.render(template, data)
+}

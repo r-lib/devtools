@@ -1,4 +1,4 @@
-#' {{{ name }}}
+#' {{{ name }}}.
 #'
 #' @name {{{ name }}}
 #' @docType package

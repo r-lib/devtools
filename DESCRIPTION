@@ -9,7 +9,8 @@ Authors@R: c(
     comment = "Some namespace and vignette code extracted from base R"))
 Description: Collection of package development tools
 Depends:
-    R (>= 2.15)
+    R (>= 3.0.2)
+Roxygen: list(wrap = FALSE)
 Imports:
     httr,
     RCurl,

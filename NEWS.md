@@ -1,8 +1,38 @@
 # devtools 1.4.1.99
 
+* In `build()`, use `--no-build-vignettes` (#391).
+
+* Bump R dependency to 3.0.2.
+
+* Improved default `DESCRIPTION` file created by `create_description()`.
+* Fixed bug in which `check()` incorrectly reported the location of the `R CMD
+  check` output when called with a custom `check_dir`. (Thanks to @brentonk)
+
+* Improved default `DESCRIPTION` file created by `create_description()`. 
+  (Thanks to @ncarchedi, #428)
+
+* `add_test_infrastructure()` will create test infrastructure for a new package.
+  It is called automatically from `test()` if no test directories are
+  found, the session is interactive and you agree.
+
+* `create()` gains an `rstudio` argument which will automatically create
+  an Rstudio project in the package directory. It defaults to `TRUE`:
+  if you don't use Rstudio, just delete the file.
+
+* `add_rstudio_project()` adds an Rstudio project file to your package.
+
+* `add_travis()` adds a basic travis template to your package. `.travis.yml`
+  is automatically added to `.Rbuildignore` to avoid including it in the built
+  package.
+
+* New `add_build_ignore()` makes it easy to add files to `.Rbuildignore`
+
 * `check_doc()` now runs `document()` automatically.
 
 * `check_cran()` records check times for each package tested.
+
+* Fixed bug in `install_github()` that prevented installing a pull request by
+  supplying `repo = "username/repo#pull"`. (#388)
 
 * explicitly specify user agent when querying user name and ref for pull request
   in `install_github`. (Thanks to Kirill Müller, #405)
@@ -13,10 +43,10 @@
 
 * Fixed bug in `wd()` when `path` was ommitted. (#374)
 
-* Fixed bug in `dev_help()` that prevented it from working when not using 
+* Fixed bug in `dev_help()` that prevented it from working when not using
   Rstudio.
 
-* `source_gist()` respects new github policy by sending user agent 
+* `source_gist()` respects new github policy by sending user agent
   (hadley/devtools)
 
 * `install_github()` now takes repo names of the form
@@ -30,23 +60,23 @@
 
 * `install()` now respects the global option `keep.source.pkgs`.
 
-* `install()` gains a `build_vignettes` which defaults to TRUE, and ensures 
+* `install()` gains a `build_vignettes` which defaults to TRUE, and ensures
   that vignettes are built even when doing a local install. It does this
   by forcing `local = FALSE` if the package has vignettes, so `R CMD build`
-  can follow the usual process. (#344) 
+  can follow the usual process. (#344)
 
-* `install_github()` now takes repo names of the form `username/repo` - 
+* `install_github()` now takes repo names of the form `username/repo` -
   this is now the recommended form for install_github if your username is
   not hadley ;)
 
-* `install_github()` now adds details on the source of the installed package 
-  (e.g. repository, SHA1, etc.) to the package DESCRIPTION file. (Thanks to JJ 
+* `install_github()` now adds details on the source of the installed package
+  (e.g. repository, SHA1, etc.) to the package DESCRIPTION file. (Thanks to JJ
   Allaire)
 
-* Adjusted `install_version()` to new meta data structure on CRAN. 
+* Adjusted `install_version()` to new meta data structure on CRAN.
   (Thanks to Kornelius Rohmeyer)
 
-* Fixed bug so that `install_version()` works with version numbers that 
+* Fixed bug so that `install_version()` works with version numbers that
   contain hyphens. (Thanks to Kornelius Rohmeyer)
 
 * `install_deps()` is now exported, making it easier to install the dependencies
@@ -68,7 +98,7 @@
   `install.packages()` (in previous versions, it was essentially
   `c("Depends", "Imports", "LinkingTo")`) (thanks, Yihui Xie, #355)
 
-* `check()` and `check_cran()` gain new `check_dir` argument to control where 
+* `check()` and `check_cran()` gain new `check_dir` argument to control where
   checking takes place (#337)
 
 * `check_devtools()` no longer incorrectly complains about a `vignettes/`
@@ -86,7 +116,7 @@
 * `source_url()` (and `source_gist()`) accept SHA1 prefixes.
 
 * `source_gist()` uses the github api to reliably locate the raw gist.
-  Additionally it now only attempts to source files with `.R` or `.r` 
+  Additionally it now only attempts to source files with `.R` or `.r`
   extensions, and gains a `quiet` argument. (#348)
 
 * Safer installation of source packages, which were previously extracted
@@ -104,29 +134,29 @@
   be doing and why.
 
 * `load_all()` now defaults to `reset = TRUE` so that changes to the NAMESPACE
-  etc are incorporated. This makes it slightly slower (but hopefully not 
-  noticeably so), and generally more accurate, and a better simulation of 
+  etc are incorporated. This makes it slightly slower (but hopefully not
+  noticeably so), and generally more accurate, and a better simulation of
   the install + restart + reload cycle.
 
 * `test()` now looks in both `inst/test` and `tests/testthat` for unit tests.
   It is recommended to use `tests/testthat` because it allows users to
-  choose whether or not to install test. If you move your tests from 
-  `inst/tests` to `tests/testthat`, you'll also need to change 
+  choose whether or not to install test. If you move your tests from
+  `inst/tests` to `tests/testthat`, you'll also need to change
   `tests/test-all.R` to run `test_check()` instead of `test_package()`.
   This change requires testthat 0.8 which will be available on CRAN shortly.
 
 * New devtools guarantee: if because of a devtools bug, a CRAN maintainer yells
-  at you, I'll send you a hand-written apology note. Just forward me the email 
+  at you, I'll send you a hand-written apology note. Just forward me the email
   and your address.
 
 ## New features
 
-* New `install_local()` function for installing local package files 
+* New `install_local()` function for installing local package files
  (as zip, tar, tgz, etc.) (Suggested by landroni)
 
 * `parse_deps()`, which parses R's package dependency strings, is now exported.
 
-* All package and user events (e.g. load, unload, attach and detach) are now 
+* All package and user events (e.g. load, unload, attach and detach) are now
   called in the correct place.
 
 ## Minor improvements and bug fixes
@@ -144,10 +174,10 @@
 * Fixed bug in `build_vignettes()` which prevented files in `inst/doc` from
   being updated
 
-* `as.package()` no longer uses the full path, which should make for nicer 
+* `as.package()` no longer uses the full path, which should make for nicer
   error messages.
 
-* More flexibility when installing package dependencies with the 
+* More flexibility when installing package dependencies with the
  `dependencies` argument to `install_*()` (thanks to Martin Studer)
 
 * The deprecated `show_rd()` function has now been removed.
@@ -155,20 +185,20 @@
 * `install_bitbucket()` gains `auth_user` and `password` params so that you can
   install from private repos (thanks to Brian Bolt)
 
-* Better git detection on windows (thanks to Mikhail Titov) 
+* Better git detection on windows (thanks to Mikhail Titov)
 
 * Fix bug so that `document()` will automatically create `man/` directory
 
 * Default `DESCRIPTION` gains `LazyData: true`
 
-* `create_description()` now checks that the directory is probably a package 
+* `create_description()` now checks that the directory is probably a package
   by looking for `R/`, `data/` or `src/` directories
 
 * Rolled back required R version from 3.0 to 2.15.
 
 * Add missing import for `digest()`
 
-* Bump max compatible version of R with RTools 3.0, and add details for 
+* Bump max compatible version of R with RTools 3.0, and add details for
   RTools 3.1
 
 # devtools 1.2
@@ -176,11 +206,11 @@
 ## Better installation
 
 * `install` gains a `local` option for installing the package from the local
-  package directory, rather than from a built tar.gz.  This is now used by 
-  default for all package installations. If you want to guarantee a clean 
+  package directory, rather than from a built tar.gz.  This is now used by
+  default for all package installations. If you want to guarantee a clean
   build, run `local = FALSE`
 
-* `install` now uses option `devtools.install.args` for default installation 
+* `install` now uses option `devtools.install.args` for default installation
   arguments. This allows you to set any useful defaults (e.g. `--no-multiarch`)
   in your Rprofile.
 
@@ -188,57 +218,57 @@
 
 ## Clean sessions
 
-* `run_examples` and `test` gain a `fresh` argument which forces them to run 
-  in a fresh R session. This completely insulates the examples/tests from your 
+* `run_examples` and `test` gain a `fresh` argument which forces them to run
+  in a fresh R session. This completely insulates the examples/tests from your
   current session but means that interactive code (like `browser()`) won't work.(Fixes #258)
 
-* New functions `eval_clean` and `evalq_clean` make it easy to evaluate code 
+* New functions `eval_clean` and `evalq_clean` make it easy to evaluate code
   in a clean R session.
 
-* `clean_source` loses the `vanilla` argument (which did not work) and gains 
+* `clean_source` loses the `vanilla` argument (which did not work) and gains
   a `quiet` argument
 
 ## New features
 
 * `source_url` and `source_gist` now allow you to specify a sha, so you can
-  make sure that files you source from the internet don't change without you 
+  make sure that files you source from the internet don't change without you
   knowing about it. (Fixes #259)
 
 * `build_vignettes` builds using `buildVignette()` and movies/copies outputs
-  using the same algorithm as `R CMD build`. This means that 
-  `build_vignettes()` now exactly mimics R's regular behaviour, including 
-  building non-Sweave vignettes (#277), building in the correct directory 
+  using the same algorithm as `R CMD build`. This means that
+  `build_vignettes()` now exactly mimics R's regular behaviour, including
+  building non-Sweave vignettes (#277), building in the correct directory
   (#231), using make files (if present), and copying over extra files.
 
-* devtools now sets best practice compiler flags: from `check()`, 
-  `-Wall -pedantic` and from `load_all()`, `-Wall -pedantic -g -O0 -UNDEBUG`. 
+* devtools now sets best practice compiler flags: from `check()`,
+  `-Wall -pedantic` and from `load_all()`, `-Wall -pedantic -g -O0 -UNDEBUG`.
   These are prefixed to existing environment variables so that you can override
   them if desired. (Fixes #257)
 
-* If there's no `DESCRIPTION` file present, `load_all()` will automatically 
-  create one using `create_description()`.  You can set options in your 
+* If there's no `DESCRIPTION` file present, `load_all()` will automatically
+  create one using `create_description()`.  You can set options in your
   `.Rprofile` to control what it contains: see `package?devtools` for more
   details.
 
 ## Minor improvements
 
-* `check()` now also sets environment variable 
-  `_R_CHECK_CODE_DATA_INTO_GLOBALENV_` to TRUE (to match current `--as-cran` 
+* `check()` now also sets environment variable
+  `_R_CHECK_CODE_DATA_INTO_GLOBALENV_` to TRUE (to match current `--as-cran`
   behaviour) (Fixes #256)
 
-* Improved default email sent by `release()`, eliminating `create.post()` 
+* Improved default email sent by `release()`, eliminating `create.post()`
   boilerplate
 
 * `revdep` includes LinkingTo by default.
 
-* Fixed regular expression problem that caused RTools `3.0.*` to fail to be 
+* Fixed regular expression problem that caused RTools `3.0.*` to fail to be
   found on Windows.
 
-* `load_data()` got an overhaul and now respects `LazyData` and correctly 
+* `load_data()` got an overhaul and now respects `LazyData` and correctly
   exports datasets by default (Fixes #242)
 
-* `with_envvar` gains the option to either replace, prefix or suffix existing 
-  environmental variables. The default is to replace, which was the previous 
+* `with_envvar` gains the option to either replace, prefix or suffix existing
+  environmental variables. The default is to replace, which was the previous
   behaviour.
 
 * `check_cran` includes `sessionInfo()` in the summary output (Fixes #273)
@@ -261,7 +291,7 @@
   CRAN. This bug prevented devtools 1.0 from passing check on CRAN for some
   platforms.
 
-* Catch additional case in `find_rtools()`: previously installed, but directory 
+* Catch additional case in `find_rtools()`: previously installed, but directory
   empty/deleted (Fixes #241)
 
 # devtools 1.0
@@ -275,17 +305,17 @@
 * `load_all` inserts a special version of `system.file` into the package's
   imports environment. This tries to simulate the behavior of
   `base::system.file` but gives modified results because the directory structure
-  of installed packages and uninstalled source packages is different. 
-  (Fixes #179). In other words, `system.file` should now just work even if the 
+  of installed packages and uninstalled source packages is different.
+  (Fixes #179). In other words, `system.file` should now just work even if the
   package is loaded with devtools.
 
-* Source files are only recompiled if they've changed since the last run, and 
+* Source files are only recompiled if they've changed since the last run, and
   the recompile will be clean (`--preclean`) if any exported header files have
   changed. (Closes #224)
 
-* The compilation process now performs a mock install instead of using 
+* The compilation process now performs a mock install instead of using
   `R CMD SHLIB`. This means that `Makevars` and makefiles will now be respected
-  and generally there should be fewer mismatches between `load_all` and 
+  and generally there should be fewer mismatches between `load_all` and
   the regular install and reload process.
 
 * S4 classes are correctly loaded and unloaded.
@@ -333,7 +363,7 @@
 * `install(quick=TRUE)` now builds the package without rebuilding vignettes.
   (Fixes #167)
 
-* All R commands called from `devtools` now have the environment variable 
+* All R commands called from `devtools` now have the environment variable
   `NOT_CRAN` set, so that you can perform tasks when you know your code
   is definitely not running on CRAN. (Closes #227)
 
@@ -377,7 +407,7 @@
 
 * `install_github` now accepts `auth_user` and `password` arguments if you
   want to install a package in a private github repo. You only need to specify
-  `auth_user` if it's not your package (i.e. it's not your `username`) 
+  `auth_user` if it's not your package (i.e. it's not your `username`)
   (Fixes #116)
 
 * new `dev_help` function replaces `show_rd` and makes it easy to get help on
@@ -386,8 +416,8 @@
 
 * `dev_example` runs the examples for one in-development package. (Fixes #108)
 
-* `build_vignettes` now looks in modern location for vignettes (`vignettes/`) 
-   and warn if vignettes found in old location (`inst/doc`).  Building now 
+* `build_vignettes` now looks in modern location for vignettes (`vignettes/`)
+   and warn if vignettes found in old location (`inst/doc`).  Building now
    occurs in a temporary directory (to avoid polluting the package with
    build artefacts) and only final pdf files are copied over.
 
@@ -398,7 +428,7 @@
   LOADING section). It also compiles and loads C/C++/Fortran code.
 
 * `unload()` is now an exported function, which unloads a package, trying
-  harder than just `detach`. It now also unloads DLLs. (Winston Chang. 
+  harder than just `detach`. It now also unloads DLLs. (Winston Chang.
   Fixes #119)
 
 * `run_examples` now has parameters `show`, `test`, `run` to control which of
@@ -485,7 +515,7 @@
 
 * `load_code` now properly skips missing files. (Winston Chang)
 
-* Add `--no-resave-data` to default build command. 
+* Add `--no-resave-data` to default build command.
 
 * The subject line of the email created by `release` is now "CRAN submission
   [package] [version]", per CRAN repository policy.
@@ -532,7 +562,7 @@
   errors (Fixes #82).
 
 * `install` has new quick option to make package installation faster, by
-  sacrificing documentation, demos and multi-architecture binaries. 
+  sacrificing documentation, demos and multi-architecture binaries.
   (Fixes #77)
 
 * `install_url`, `install_github` and `install_gitorious` gain a subdir
@@ -546,7 +576,7 @@
   Redd.
 
 * `revdep`, `revdep_maintainers` and `revdep_check` for calculating reverse
-  dependencies, finding their maintainers and running `R CMD check`. 
+  dependencies, finding their maintainers and running `R CMD check`.
   (Fixes #78)
 
 * `check_cran` has received a massive overhaul: it now checks multiple
@@ -615,7 +645,7 @@
   tests are to be run
 
 * `check` runs with example timings, as is done on CRAN. Run with new param
-  `cleanup = F` to access the timings. 
+  `cleanup = F` to access the timings.
 
 * `missing_s3` function to help figure out if you've forgotten to export any
   s3 methods
@@ -626,7 +656,7 @@
 
 * `strict` mode for `run_examples` which runs each example in a clean
   environment. This is much slower than the default (running in the current
-  environment), but ensures that each example works standalone. 
+  environment), but ensures that each example works standalone.
 
 * `dev_mode` now updates prompt to indicate that it's active (Thanks to Kohske
   Takahashi)
@@ -680,7 +710,7 @@
   the data directory. (Fixes #45)
 
 * `dev_mode` performs some basic tests to make sure you're not setting your
-  development library to a directory that's not already an R library. 
+  development library to a directory that's not already an R library.
   (Fixes #25)
 
 # devtools 0.5.1
@@ -752,7 +782,7 @@
 * `release` gains `check` parameter that allows you to skip package check (if
   you've just done it.)
 
-* `test` automatically reloads code so you never run tests on old code 
+* `test` automatically reloads code so you never run tests on old code
 
 # devtools 0.3
 

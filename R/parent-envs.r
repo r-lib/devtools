@@ -62,7 +62,7 @@ as.envlist <- function(x) {
   structure(x, class = "envlist")
 }
 
-#' @S3method [ envlist
+#' @export
 `[.envlist` <- function(x, i) {
   as.envlist(.subset(x, i))
 }

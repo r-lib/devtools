@@ -4,19 +4,32 @@
 #' See \code{\link[testthat]{test_dir}} for the naming convention of test
 #' scripts within that directory.
 #'
-#' @param pkg package description, can be path or package name.  See
+#' If no testing infrastructure is present, you'll be asked if you want
+#' devtools to create it for you (in interactive sessions only). See
+#' \code{\link{add_test_infrastructure}} for more details.
+#'
+#' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information
 #' @inheritParams testthat::test_dir
 #' @inheritParams run_examples
 #' @export
 test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
+  check_testthat()
   pkg <- as.package(pkg)
+
+  if (!uses_testthat(pkg) && interactive()) {
+    message("No testing infrastructure found. Create it?")
+    if (menu(c("Yes", "No")) == 1) {
+      add_test_infrastructure(pkg)
+    }
+    return(invisible())
+  }
 
   test_path <- find_test_dir(pkg$path)
   test_files <- dir(test_path, "^test.*\\.[rR]$")
   if (length(test_files) == 0) {
     message("No tests found: no files matching pattern '^test.*\\.[rR]$'",
-      "found in inst/tests")
+      "found in ", test_path)
     return(invisible())
   }
 
@@ -31,8 +44,8 @@ test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
     })
     eval_clean(to_run)
   } else {
-    require(testthat)
-    # Run tests in a child of the namespace environment, like testthat::test_package
+    # Run tests in a child of the namespace environment, like
+    # testthat::test_package
     load_all(pkg)
     env <- new.env(parent = ns_env(pkg))
     with_envvar(r_env_vars(), test_dir(test_path, filter = filter, env = env))
@@ -41,14 +54,13 @@ test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
 
 find_test_dir <- function(path) {
   testthat <- file.path(path, "tests", "testthat")
-  if (file.exists(testthat)) return(testthat)
+  if (dir.exists(testthat)) return(testthat)
 
   inst <- file.path(path, "inst", "tests")
-  if (file.exists(inst)) return(inst)
+  if (dir.exists(inst)) return(inst)
 
   stop("No testthat directories found in ", path, call. = FALSE)
 }
-
 
 #' Return the path to one of the packages in the devtools test dir
 #'
@@ -69,4 +81,71 @@ devtest <- function(package) {
   if (path == "") stop(package, " not found", call. = FALSE)
 
   path
+}
+
+uses_testthat <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  paths <- c(
+    file.path(pkg$path, "inst", "tests"),
+    file.path(pkg$path, "tests", "testthat")
+  )
+
+  any(dir.exists(paths))
+}
+
+#' Add test skeleton.
+#'
+#' Add testing infrastructure to a package that does not already have it.
+#' This will create \file{tests/testthat.R}, \file{tests/testthat/} and
+#' add \pkg{testthat} to the suggested packages. This is called
+#' automatically from \code{\link{test}} if needed.
+#'
+#' @param pkg package description, can be path or package name. See
+#'   \code{\link{as.package}} for more information.
+#' @export
+add_test_infrastructure <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  check_testthat()
+  if (uses_testthat(pkg)) {
+    stop("Package already has testing infrastructure", call. = FALSE)
+  }
+
+  # Create tests/testthat and install file for R CMD CHECK
+  dir.create(file.path(pkg$path, "tests", "testthat"),
+    showWarnings = FALSE, recursive = TRUE)
+  writeLines(render_template("testthat.R", list(name = pkg$package)),
+    file.path(pkg$path, "tests", "testthat.R"))
+
+  add_suggested_package(file.path(pkg$path, "DESCRIPTION"), "testthat")
+
+  invisible(TRUE)
+}
+
+check_testthat <- function() {
+  if (!require("testthat")) {
+    stop("Please install testthat", call. = FALSE)
+  }
+}
+
+add_suggested_package <- function(path, name) {
+  desc <- as.list(read.dcf(path)[1, ])
+  suggests <- desc$Suggests
+  if (is.null(suggests)) {
+    suggests <- name
+    changed <- TRUE
+  } else {
+    if (!grepl(name, suggests)) {
+      suggests <- paste0(suggests, ",\n  ", name)
+      changed <- TRUE
+    } else {
+      changed <- FALSE
+    }
+  }
+  if (changed) {
+    desc$Suggests <- suggests
+    write.dcf(desc, path, keep.white = names(desc))
+  }
+  invisible(changed)
 }
