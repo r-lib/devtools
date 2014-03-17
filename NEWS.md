@@ -5,6 +5,10 @@
 * Bump R dependency to 3.0.2.
 
 * Improved default `DESCRIPTION` file created by `create_description()`.
+* Fixed bug in which `check()` incorrectly reported the location of the `R CMD
+  check` output when called with a custom `check_dir`. (Thanks to @brentonk)
+
+* Improved default `DESCRIPTION` file created by `create_description()`. 
   (Thanks to @ncarchedi, #428)
 
 * `add_test_infrastructure()` will create test infrastructure for a new package.
