@@ -1,5 +1,9 @@
 # devtools 1.4.1.99
 
+* The `with_options` works as expected, used to throw an error when trying to
+  set an option.
+  (Thanks to @krlmlr, #434)
+
 * In `build()`, use `--no-build-vignettes` (#391).
 
 * Bump R dependency to 3.0.2.
