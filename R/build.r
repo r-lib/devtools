@@ -85,11 +85,6 @@ build_win <- function(pkg = ".", version = "R-release", args = NULL,
                       quiet = FALSE) {
   pkg <- as.package(pkg)
 
-  # Maintaining both backward compatibility and same order of arguments as
-  # build()
-  if (is.logical(args) && missing(quiet)) {
-    quiet <- args; args <- NULL }
-
   if (!quiet) message("Building windows version of ", pkg$package,
     " with win-builder.r-project.org.\n")
 
