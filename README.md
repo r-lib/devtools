@@ -35,53 +35,53 @@ All `devtools` functions accept a path as an argument, e.g. `load_all("path/to/p
 
 Frequent development tasks:
 
-* `load_all()` simulates installing and reloading your package, 
-  loading R code in `R/`, compiled shared objects in `src/` and data 
+* `load_all()` simulates installing and reloading your package,
+  loading R code in `R/`, compiled shared objects in `src/` and data
   files in `data/`. During development you usually want to access all functions so `load_all()` ignores the package `NAMESPACE`.
   `load_all()` will automatically create a `DESCRIPTION` if needed.
 
-* `document()` updates documentation, file collation and 
-  `NAMESPACE`. 
+* `document()` updates documentation, file collation and
+  `NAMESPACE`.
 
 * `test()` reloads your code, then runs all `testthat` tests.
 
 Building and installing:
 
-* `install()` reinstalls the package, detaches the currently 
+* `install()` reinstalls the package, detaches the currently
   loaded version then reloads the new version with `library()`. Reloading a package is not guaranteed to work: see the documentation to `unload()` for caveats.
 
-* `build()` builds a package file from package sources. You can 
+* `build()` builds a package file from package sources. You can
   can use it to build a binary version of your package.
 
-* `install_github()` installs an R package from github, 
-  `install_gitorious()` from gitorious, `install_bitbucket()` from 
-  bitbucket, `install_url()` from an arbitrary url and 
-  `install_file()` from a local file on disk. `install_version()` 
+* `install_github()` installs an R package from github,
+  `install_gitorious()` from gitorious, `install_bitbucket()` from
+  bitbucket, `install_url()` from an arbitrary url and
+  `install_file()` from a local file on disk. `install_version()`
   installs a specified version from cran.
 
 Check and release:
 
-* `check()` updates the documentation, then builds and checks 
+* `check()` updates the documentation, then builds and checks
   the package. `build_win()` builds a package using
   [win-builder](http://win-builder.r-project.org/), allowing you to easily check your package on windows.
 
-* `run_examples()` will run all examples to make sure they work. 
+* `run_examples()` will run all examples to make sure they work.
   This is useful because example checking is the last step of `R CMD check`.
 
-* `check_doc()` runs most of the documentation checking components 
+* `check_doc()` runs most of the documentation checking components
   of `R CMD check`
 
-* `release()` makes sure everything is ok with your package 
-  (including asking you a number of questions), then builds and 
-  uploads to CRAN. It also drafts an email to let the CRAN 
+* `release()` makes sure everything is ok with your package
+  (including asking you a number of questions), then builds and
+  uploads to CRAN. It also drafts an email to let the CRAN
   maintainers know that you've uploaded a new package.
 
 Other commands:
 
-* `bash()` opens a bash shell in your package directory so you can 
+* `bash()` opens a bash shell in your package directory so you can
   use git or other command line tools.
 
-* `wd()` changes the working directory to a path relative to the 
+* `wd()` changes the working directory to a path relative to the
   package root.
 
 ## Development mode

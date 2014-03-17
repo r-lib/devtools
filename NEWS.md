@@ -4,6 +4,14 @@
   set an option.
   (Thanks to @krlmlr, #434)
 
+* In `build()`, use `--no-build-vignettes` (#391).
+
+* Bump R dependency to 3.0.2.
+
+* Improved default `DESCRIPTION` file created by `create_description()`.
+* Fixed bug in which `check()` incorrectly reported the location of the `R CMD
+  check` output when called with a custom `check_dir`. (Thanks to @brentonk)
+
 * Improved default `DESCRIPTION` file created by `create_description()`. 
   (Thanks to @ncarchedi, #428)
 
@@ -26,6 +34,9 @@
 * `check_doc()` now runs `document()` automatically.
 
 * `check_cran()` records check times for each package tested.
+
+* Fixed bug in `install_github()` that prevented installing a pull request by
+  supplying `repo = "username/repo#pull"`. (#388)
 
 * explicitly specify user agent when querying user name and ref for pull request
   in `install_github`. (Thanks to Kirill Müller, #405)

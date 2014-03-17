@@ -133,7 +133,7 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
     env_vars, ...)
 
   # Return the path to the check output
-  file.path(tempdir(), paste(pkgname, ".Rcheck", sep = ""))
+  file.path(normalizePath(check_dir), paste(pkgname, ".Rcheck", sep = ""))
 }
 
 
