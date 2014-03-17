@@ -1,6 +1,8 @@
 # devtools 1.4.1.99
 
-* Bump R dependency to 3.0.2
+* In `build()`, use `--no-build-vignettes` (#391).
+
+* Bump R dependency to 3.0.2.
 
 * Improved default `DESCRIPTION` file created by `create_description()`.
   (Thanks to @ncarchedi, #428)
