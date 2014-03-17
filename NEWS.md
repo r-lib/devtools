@@ -1,7 +1,10 @@
 # devtools 1.4.1.99
 
-* The `with_options` works as expected, used to throw an error when trying to
-  set an option.
+* `build_win()` now builds R-release and R-devel by default. (Thanks to @krlmlr,
+  #438.)
+
+* The `with_options()` function works as expected, used to throw an error when
+  trying to set an option.
   (Thanks to @krlmlr, #434)
 
 * In `build()`, use `--no-build-vignettes` (#391).
