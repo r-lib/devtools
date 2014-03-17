@@ -21,8 +21,8 @@
 #'   demos, and vignettes, to make installation as fast as possible.
 #' @param local if \code{FALSE} \code{\link{build}}s the package first:
 #'   this ensures that the installation is completely clean, and prevents any
-#'   binary artefacts (like \file{.o}, \code{.so}) from appearing in your local 
-#'   package directory, but is considerably slower, because every compile has 
+#'   binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
+#'   package directory, but is considerably slower, because every compile has
 #'   to start from scratch.
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to \code{R CMD install}. This defaults to the
@@ -33,9 +33,9 @@
 #'   argument \code{dependencies} of \code{\link{install.packages}}.
 #' @param build_vignettes if \code{TRUE}, will build vignettes. Normally it is
 #'   \code{build} that's responsible for creating vignettes; this argument makes
-#'   sure vignettes are built even if a build never happens (i.e. because 
+#'   sure vignettes are built even if a build never happens (i.e. because
 #'   \code{local = TRUE}.
-#' @param keep_source If \code{TRUE} will keep the srcrefs from an installed 
+#' @param keep_source If \code{TRUE} will keep the srcrefs from an installed
 #'   package. This is useful for debugging (especially inside of RStudio).
 #'   It defaults to the option \code{"keep.source.pkgs"}.
 #' @export
@@ -64,7 +64,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
 
   opts <- c(
     paste("--library=", shQuote(.libPaths()[1]), sep = ""),
-    if (keep_source) "--with-keep.source", 
+    if (keep_source) "--with-keep.source",
     "--install-tests"
   )
   if (quick) {
@@ -80,22 +80,14 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
 }
 
 #' Install package dependencies
-#' 
+#'
 #' @inheritParams install
 #' @export
 #' @examples
 #' \dontrun{install_deps(".")}
 install_deps <- function(pkg = ".", dependencies = NA) {
   pkg <- as.package(pkg)
-  deps <- if (identical(dependencies, NA)) {
-    c("Depends", "Imports", "LinkingTo")
-  } else if (isTRUE(dependencies)) {
-    c("Depends", "Imports", "LinkingTo", "Suggests")
-  } else if (identical(dependencies, FALSE)) {
-    character(0)
-  } else dependencies
-  deps <- unlist(pkg[tolower(deps)], use.names = FALSE)
-  info <- parse_deps(paste(deps, collapse = ','))
+  info <- pkg_deps(pkg, dependencies)
 
   # Packages that are not already installed or without required versions
   needs_install <- function(pkg, compare, version) {
@@ -111,6 +103,22 @@ install_deps <- function(pkg = ".", dependencies = NA) {
 
   message("Installing dependencies for ", pkg$package, ":\n",
     paste(deps, collapse = ", "))
-  install.packages(deps, dependencies = dependencies)
+  install.packages(deps, dependencies = NA)
   invisible(deps)
+}
+
+pkg_deps <- function(pkg = ".", dependencies = NA) {
+  pkg <- as.package(pkg)
+
+  deps <- if (identical(dependencies, NA)) {
+    c("Depends", "Imports", "LinkingTo")
+  } else if (isTRUE(dependencies)) {
+    c("Depends", "Imports", "LinkingTo", "Suggests")
+  } else if (identical(dependencies, FALSE)) {
+    character(0)
+  } else dependencies
+
+  deps <- unlist(pkg[tolower(deps)], use.names = FALSE)
+
+  parse_deps(paste(deps, collapse = ','))
 }
