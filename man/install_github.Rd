@@ -4,7 +4,7 @@
 \usage{
 install_github(repo, username = getOption("github.user"), ref = "master",
   pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, ...)
+  password = NULL, auth_token = getOption("github.token"), ...)
 }
 \arguments{
   \item{repo}{Repository address in the format
@@ -34,6 +34,8 @@ install_github(repo, username = getOption("github.user"), ref = "master",
   \code{username})}
 
   \item{password}{your password}
+
+  \item{auth_token}{personal access token}
 
   \item{...}{Other arguments passed on to
   \code{\link{install}}.}
