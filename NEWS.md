@@ -37,6 +37,8 @@
 * explicitly specify user agent when querying user name and ref for pull request
   in `install_github`. (Thanks to Kirill Müller, #405)
 
+* New parameter `args` to `build_win`. (Thanks to Kirill Müller, #421)
+
 # devtools 1.4.1
 
 * Fixed bug in `wd()` when `path` was ommitted. (#374)

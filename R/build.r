@@ -73,20 +73,22 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @inheritParams build
 #' @param version directory to upload to on the win-builder, controlling
 #'   which version of R is used to build the package. Possible options are
 #'   listed on \url{http://win-builder.r-project.org/}. Defaults to the
 #'   released version of R.
-#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @importFrom RCurl ftpUpload
 #' @export
 #' @family build functions
-build_win <- function(pkg = ".", version = "R-release", quiet = FALSE) {
+build_win <- function(pkg = ".", version = "R-release", args = NULL,
+                      quiet = FALSE) {
   pkg <- as.package(pkg)
+
   if (!quiet) message("Building windows version of ", pkg$package,
     " with win-builder.r-project.org.\n")
 
-  built_path <- build(pkg, tempdir(), quiet = quiet)
+  built_path <- build(pkg, tempdir(), args = args, quiet = quiet)
   on.exit(unlink(built_path))
 
   ftpUpload(built_path, paste("ftp://win-builder.r-project.org/", version,
