@@ -24,7 +24,7 @@ install_bitbucket <- function(repo, username, ref = "master", branch = NULL,
   }
 
   if (!is.null(password)) {
-    auth <- authenticate(
+    auth <- httr::authenticate(
       user = auth_user %||% username,
       password = password,
       type = "basic")
