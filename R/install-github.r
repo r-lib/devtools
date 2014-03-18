@@ -39,18 +39,19 @@
 #' }
 #' @importFrom httr authenticate
 install_github <- function(repo, username = getOption("github.user"),
-  ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, ..., dependencies = TRUE) {
+                           ref = "master", pull = NULL, subdir = NULL,
+                           branch = NULL, auth_user = NULL,
+                           password = NULL, ..., dependencies = TRUE) {
 
   invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
     username, ref, pull, subdir, branch, auth_user, password, ...,
     dependencies = TRUE))
 }
 
-
 github_get_conn <- function(repo, username = getOption("github.user"),
-  ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, ...) {
+                            ref = "master", pull = NULL, subdir = NULL,
+                            branch = NULL, auth_user = NULL,
+                            password = NULL, ...) {
 
   if (!is.null(branch)) {
     warning("'branch' is deprecated. In the future, please use 'ref' instead.")
@@ -68,9 +69,10 @@ github_get_conn <- function(repo, username = getOption("github.user"),
 
   if (!xor(is.null(pull), is.null(ref))) {
     stop("Must specify either a ref or a pull request, not both. ",
-     "Perhaps you want to use 'ref=NULL'?")
+     "Perhaps you want to use 'ref = NULL'?")
   }
-  if(!is.null(pull)) {
+
+  if (!is.null(pull)) {
     pullinfo <- github_pull_info(repo, username, pull)
     username <- pullinfo$username
     ref <- pullinfo$ref
@@ -93,16 +95,19 @@ github_get_conn <- function(repo, username = getOption("github.user"),
   url <- paste("https://github.com/", username, "/", repo,
     "/archive/", ref, ".zip", sep = "")
 
-  list(url=url, auth=auth, msg=msg, repo=repo, username=username, ref=ref,
-       pull=pull, subdir=subdir, branch=branch, auth_user=auth_user,
-       password=password)
+  list(
+    url = url, auth = auth, msg = msg, repo = repo, username = username,
+    ref = ref, pull = pull, subdir = subdir, branch = branch,
+    auth_user = auth_user, password = password
+  )
 }
 
 install_github_single <- function(repo, username = getOption("github.user"),
-                                  ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
+                                  ref = "master", pull = NULL, subdir = NULL,
+                                  branch = NULL, auth_user = NULL,
                                   password = NULL, ...) {
-  conn <- github_get_conn(repo, username, ref, pull, subdir, branch, auth_user, password, ...)
-
+  conn <- github_get_conn(repo, username, ref, pull, subdir, branch,
+    auth_user, password, ...)
   message(conn$msg)
 
   # define before_install function that captures the arguments to
@@ -149,7 +154,8 @@ github_pull_info <- function(repo, username, pull) {
   host <- "https://api.github.com"
   # GET /repos/:user/:repo/pulls/:number
   path <- paste("repos", username, repo, "pulls", pull, sep = "/")
-  r <- GET(host, path = path, config = add_headers("User-agent" = "hadley/devtools"))
+  r <- GET(host, path = path,
+    config = add_headers("User-agent" = "hadley/devtools"))
   stop_for_status(r)
   head <- parsed_content(r)$head
 
@@ -191,7 +197,7 @@ github_parse_path <- function(path) {
   pull_rx <- "(?:#([0-9]+))"
   ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
   github_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
-                       username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
+    username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
 
   params <- c("username", "repo", "subdir", "ref", "pull", "invalid")
   replace <- setNames(sprintf("\\%d", seq_along(params)), params)
