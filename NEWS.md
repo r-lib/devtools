@@ -1,5 +1,8 @@
 # devtools 1.4.1.99
 
+* `release()` does a better job of opening your email client if you're inside
+  of Rstudio (#433).
+
 * `build_win()` now builds R-release and R-devel by default. (Thanks to @krlmlr,
   #438.)
 

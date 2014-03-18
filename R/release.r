@@ -38,10 +38,10 @@
 #' @importFrom RCurl ftpUpload
 release <- function(pkg = ".", check = TRUE) {
   pkg <- as.package(pkg)
-  
+
   # Figure out if this is a new package
   cran_version <- cran_pkg_version(pkg$package)
-  new_pkg <- is.null(cran_version)  
+  new_pkg <- is.null(cran_version)
 
   if (check) {
     check(pkg, cran = TRUE, check_version = TRUE)
@@ -49,7 +49,7 @@ release <- function(pkg = ".", check = TRUE) {
       return(invisible())
 
   } else {
-    # Even if we don't run the full checks, at least check that the package 
+    # Even if we don't run the full checks, at least check that the package
     # version is sufficient for submission to CRAN.
 
     if (new_pkg) {
@@ -66,15 +66,15 @@ release <- function(pkg = ".", check = TRUE) {
   }
 
   if (new_pkg) {
-    policies <- paste("Have you read and do you agree to the the CRAN policies?", 
+    policies <- paste("Have you read and do you agree to the the CRAN policies?",
       "\n(http://cran.r-project.org/web/packages/policies.html)")
 
-    if (yesno(policies)) 
+    if (yesno(policies))
       return(invisible())
   }
-  
+
   if (yesno("Have you checked on win-builder (with build_win())?"))
-    return(invisible())    
+    return(invisible())
 
   try(print(show_news(pkg)))
   if (yesno("Is package news up-to-date?"))
@@ -86,9 +86,9 @@ release <- function(pkg = ".", check = TRUE) {
 
   deps <- length(revdep(pkg$package))
   if (deps > 0) {
-    msg <- paste0("Have you checked the ", deps ," packages that depend on ", 
+    msg <- paste0("Have you checked the ", deps ," packages that depend on ",
       "this package (with check_cran())?")
-    
+
     if (yesno(msg))
       return(invisible())
   }
@@ -108,7 +108,7 @@ release <- function(pkg = ".", check = TRUE) {
   body <- release_email(pkg$package, new_pkg)
   subject <- paste("CRAN submission ", pkg$package, " ", pkg$version, sep = "")
   email("cran@r-project.org", subject, body)
-  
+
   if (file.exists(file.path(pkg$path, ".git"))) {
     message("Don't forget to tag the release when the package is accepted!")
   }
@@ -120,10 +120,10 @@ release_email <- function(name, new_pkg) {
     "Dear CRAN maintainers,\n",
     "\n",
     if (new_pkg) {
-      paste("I have uploaded a new package, ", name, ", to CRAN. ", 
+      paste("I have uploaded a new package, ", name, ", to CRAN. ",
         "I have read and agree to the CRAN policies.\n", sep = "")
     } else {
-      paste("I have just uploaded a new version of ", name, " to CRAN.\n",  
+      paste("I have just uploaded a new version of ", name, " to CRAN.\n",
         sep = "")
     },
     "\n",
@@ -153,7 +153,24 @@ email <- function(address, subject, body) {
     "&body=", URLencode(body),
     sep = ""
   )
-  browseURL(url)
+
+  # Use default browser, even if RStudio running
+  if (identical(.Platform$GUI, "RStudio")) {
+    browser <- if (.Platform$OS.type == "windows") NULL else "/usr/bin/open"
+  } else {
+    browser <- getOption("browser")
+  }
+
+  tryCatch(
+    browseURL(url, browser = browser),
+    error = function(e) {
+      message("Sending failed with error: ", e$message)
+      cat("To: ", address, "\n", sep = "")
+      cat("Subject: ", subject, "\n", sep = "")
+      cat("\n")
+      cat(body, "\n", sep = "")
+    }
+  )
 
   invisible(TRUE)
 }
