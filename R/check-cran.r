@@ -46,8 +46,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     omegahat = "http://www.omegahat.org/R"
   )
   if (bioconductor) {
-    require("BiocInstaller")
-    repos <- c(repos, biocinstallRepos())
+    repos <- c(repos, BiocInstaller::biocinstallRepos())
   }
   available_src <- available_packages(repos, "source")
   available_bin <- available_packages(repos, type)
