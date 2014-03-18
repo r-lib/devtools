@@ -1,6 +1,6 @@
 #' Attempts to install a package directly from github.
 #'
-#' This function is vectorised on \code{repo} so you can install multiple 
+#' This function is vectorised on \code{repo} so you can install multiple
 #' packages in a single command.
 #'
 #' @param repo Repository address in the format
@@ -21,6 +21,8 @@
 #'   to \code{username})
 #' @param password your password
 #' @param ... Other arguments passed on to \code{\link{install}}.
+#' @param dependencies By default, installs all dependencies so that you can
+#'   build vignettes and use all functionality of the package.
 #' @export
 #' @family package installation
 #' @examples
@@ -38,10 +40,11 @@
 #' @importFrom httr authenticate
 install_github <- function(repo, username = getOption("github.user"),
   ref = "master", pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, ...) {
+  password = NULL, ..., dependencies = TRUE) {
 
   invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
-    username, ref, pull, subdir, branch, auth_user, password, ...))
+    username, ref, pull, subdir, branch, auth_user, password, ...,
+    dependencies = TRUE))
 }
 
 
@@ -102,22 +105,22 @@ install_github_single <- function(repo, username = getOption("github.user"),
 
   message(conn$msg)
 
-  # define before_install function that captures the arguments to 
+  # define before_install function that captures the arguments to
   # install_github and appends the to the description file
   github_before_install <- function(bundle, pkg_path) {
-    
+
     # Ensure the DESCRIPTION ends with a newline
     desc <- file.path(pkg_path, "DESCRIPTION")
     if (!ends_with_newline(desc))
       cat("\n", sep="", file = desc, append = TRUE)
-    
+
     # Function to append a field to the DESCRIPTION if it's not null
     append_field <- function(name, value) {
       if (!is.null(value)) {
         cat("Github", name, ":", value, "\n", sep = "", file = desc, append = TRUE)
       }
     }
-    
+
     # Append fields
     append_field("Repo", conn$repo)
     append_field("Username", conn$username)
@@ -130,7 +133,7 @@ install_github_single <- function(repo, username = getOption("github.user"),
     # Don't record password for security reasons
     #append_field("Password", conn$password)
   }
-  
+
   # If there are slashes in the ref, the URL will have extra slashes, but the
   # downloaded file shouldn't have them.
   # install_github("shiny", "rstudio", "v/0/2/1")
@@ -155,20 +158,20 @@ github_pull_info <- function(repo, username, pull) {
 }
 
 # Extract the commit hash from a github bundle and append it to the
-# package DESCRIPTION file. Git archives include the SHA1 hash as the 
-# comment field of the zip central directory record 
+# package DESCRIPTION file. Git archives include the SHA1 hash as the
+# comment field of the zip central directory record
 # (see https://www.kernel.org/pub/software/scm/git/docs/git-archive.html)
-# Since we know it's 40 characters long we seek that many bytes minus 2 
+# Since we know it's 40 characters long we seek that many bytes minus 2
 # (to confirm the comment is exactly 40 bytes long)
 github_extract_sha1 <- function(bundle) {
-  
+
   # open the bundle for reading
   conn <- file(bundle, open = "rb", raw = TRUE)
   on.exit(close(conn))
-  
+
   # seek to where the comment length field should be recorded
   seek(conn, where = -0x2a, origin = "end")
-  
+
   # verify the comment is length 0x28
   len <- readBin(conn, "raw", n = 2)
   if (len[1] == 0x28 && len[2] == 0x00) {

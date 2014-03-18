@@ -113,7 +113,7 @@ pkg_deps <- function(pkg = ".", dependencies = NA) {
   deps <- if (identical(dependencies, NA)) {
     c("Depends", "Imports", "LinkingTo")
   } else if (isTRUE(dependencies)) {
-    c("Depends", "Imports", "LinkingTo", "Suggests")
+    c("Depends", "Imports", "LinkingTo", "Suggests", "VignetteBuilder")
   } else if (identical(dependencies, FALSE)) {
     character(0)
   } else dependencies
