@@ -13,7 +13,7 @@
 #' @export
 document <- function(pkg = ".", clean = FALSE,
   roclets = c("collate", "namespace", "rd"), reload = TRUE) {
-  if (is_installed("roxygen2", 3)) {
+  if (!is_installed("roxygen2", 3)) {
     stop("Please install latest roxygen2", call. = FALSE)
   }
 
