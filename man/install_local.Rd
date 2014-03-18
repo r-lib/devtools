@@ -6,14 +6,12 @@
 install_local(path, subdir = NULL, ...)
 }
 \arguments{
-  \item{path}{path to local directory, or compressed file
-  (tar, zip, tar.gz tar.bz2, tgz2 or tbz)}
+\item{path}{path to local directory, or compressed file (tar, zip, tar.gz
+tar.bz2, tgz2 or tbz)}
 
-  \item{subdir}{subdirectory within url bundle that
-  contains the R package.}
+\item{subdir}{subdirectory within url bundle that contains the R package.}
 
-  \item{...}{Other arguments passed on to
-  \code{\link{install}}.}
+\item{...}{Other arguments passed on to \code{\link{install}}.}
 }
 \description{
 This function is vectorised so you can install multiple packages in

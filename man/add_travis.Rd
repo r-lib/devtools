@@ -6,8 +6,8 @@
 add_travis(pkg = ".")
 }
 \arguments{
-  \item{pkg}{package description, can be path or package
-  name.  See \code{\link{as.package}} for more information}
+\item{pkg}{package description, can be path or package name.  See
+\code{\link{as.package}} for more information}
 }
 \description{
 Also adds \code{.travis.yml} to \code{.Rbuildignore} so it isn't included

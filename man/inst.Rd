@@ -6,7 +6,7 @@
 inst(name)
 }
 \arguments{
-  \item{name}{the name of a package.}
+\item{name}{the name of a package.}
 }
 \description{
 Given the name of a package, this returns a path to the installed

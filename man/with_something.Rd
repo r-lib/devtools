@@ -34,18 +34,17 @@ with_par(new, code)
 with_path(new, code, add = TRUE)
 }
 \arguments{
-  \item{new}{values for setting}
+\item{new}{values for setting}
 
-  \item{code}{code to execute in that environment}
+\item{code}{code to execute in that environment}
 
-  \item{action}{(for \code{with_envvar} only): should new
-  values \code{"replace"}, \code{"suffix"}, \code{"prefix"}
-  existing environmental variables with the same name.}
+\item{action}{(for \code{with_envvar} only): should new values
+\code{"replace"}, \code{"suffix"}, \code{"prefix"} existing environmental
+variables with the same name.}
 
-  \item{add}{Combine with existing values? Currently for
-  \code{\link{with_path}} only. If \code{FALSE} all
-  existing paths are ovewritten, which don't you usually
-  want.}
+\item{add}{Combine with existing values? Currently for
+\code{\link{with_path}} only. If \code{FALSE} all existing
+paths are ovewritten, which don't you usually want.}
 }
 \description{
 \itemize{
@@ -61,8 +60,9 @@ with_path(new, code, add = TRUE)
 }
 }
 \section{Deprecation}{
-  \code{with_env} will be deprecated in devtools 1.2 and
-  removed in devtools 1.3
+
+\code{with_env} will be deprecated in devtools 1.2 and removed in
+devtools 1.3
 }
 \examples{
 getwd()

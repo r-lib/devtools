@@ -6,7 +6,7 @@
 dev_meta(name)
 }
 \arguments{
-  \item{name}{The name of a loaded package}
+\item{name}{The name of a loaded package}
 }
 \description{
 If the package was not loaded with devtools, returns \code{NULL}.

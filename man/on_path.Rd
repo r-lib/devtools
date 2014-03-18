@@ -6,8 +6,7 @@
 on_path(...)
 }
 \arguments{
-  \item{...}{Strings indicating the executables to check
-  for on the path.}
+\item{...}{Strings indicating the executables to check for on the path.}
 }
 \description{
 Test if an object is on the path.

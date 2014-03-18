@@ -6,12 +6,12 @@
 clean_source(path, quiet = FALSE)
 }
 \arguments{
-  \item{path}{path to R script}
+\item{path}{path to R script}
 
-  \item{quiet}{If \code{FALSE}, the default, all input and
-  output will be displayed, as if you'd copied and paste
-  the code.  If \code{TRUE} only the final result and the
-  any explicitly printed output will be displayed.}
+\item{quiet}{If \code{FALSE}, the default, all input and output will be
+displayed, as if you'd copied and paste the code.  If \code{TRUE}
+only the final result and the any explicitly printed output will be
+displayed.}
 }
 \description{
 Opens up a fresh R environment and sources file, ensuring that it works

@@ -6,8 +6,7 @@
 dev_example(topic)
 }
 \arguments{
-  \item{topic}{Name or topic (or name of Rd) file to run
-  examples for}
+\item{topic}{Name or topic (or name of Rd) file to run examples for}
 }
 \description{
 Run a examples for an in-development function.

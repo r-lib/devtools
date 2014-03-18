@@ -8,30 +8,24 @@ check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath,
   check_dir = tempfile("check_cran"))
 }
 \arguments{
-  \item{pkgs}{Vector of package names - note that unlike
-  other \pkg{devtools} functions this is the name of a CRAN
-  package, not a path.}
+\item{pkgs}{Vector of package names - note that unlike other \pkg{devtools}
+functions this is the name of a CRAN package, not a path.}
 
-  \item{libpath}{path to library to store dependencies
-  packages - if you you're doing this a lot it's a good
-  idea to pick a directory and stick with it so you don't
-  have to download all the packages every time.}
+\item{libpath}{path to library to store dependencies packages - if you
+you're doing this a lot it's a good idea to pick a directory and stick
+with it so you don't have to download all the packages every time.}
 
-  \item{srcpath}{path to directory to store source versions
-  of dependent packages - again, this saves a lot of time
-  because you don't need to redownload the packages every
-  time you run the package.}
+\item{srcpath}{path to directory to store source versions of dependent
+packages - again, this saves a lot of time because you don't need to
+redownload the packages every time you run the package.}
 
-  \item{bioconductor}{include bioconductor packages in
-  checking?}
+\item{bioconductor}{include bioconductor packages in checking?}
 
-  \item{type}{binary package type of test}
+\item{type}{binary package type of test}
 
-  \item{threads}{number of concurrent threads to use for
-  checking.}
+\item{threads}{number of concurrent threads to use for checking.}
 
-  \item{check_dir}{the directory in which the package is
-  checked}
+\item{check_dir}{the directory in which the package is checked}
 }
 \value{
 invisible \code{TRUE} if successful and no ERRORs or WARNINGS,

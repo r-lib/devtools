@@ -6,8 +6,8 @@
 build_vignettes(pkg = ".")
 }
 \arguments{
-  \item{pkg}{package description, can be path or package
-  name.  See \code{\link{as.package}} for more information}
+\item{pkg}{package description, can be path or package name.  See
+\code{\link{as.package}} for more information}
 }
 \description{
 Builds package vignettes using the same algorithm that \code{R CMD build}

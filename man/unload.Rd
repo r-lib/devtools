@@ -6,8 +6,8 @@
 unload(pkg = ".")
 }
 \arguments{
-  \item{pkg}{package description, can be path or package
-  name.  See \code{\link{as.package}} for more information}
+\item{pkg}{package description, can be path or package name.  See
+  \code{\link{as.package}} for more information}
 }
 \description{
 This function attempts to cleanly unload a package, including unloading

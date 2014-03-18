@@ -6,11 +6,11 @@
 wd(pkg = ".", path = "")
 }
 \arguments{
-  \item{pkg}{package description, can be path or package
-  name.  See \code{\link{as.package}} for more information}
+\item{pkg}{package description, can be path or package name.  See
+\code{\link{as.package}} for more information}
 
-  \item{path}{path within package. Leave empty to change
-  working directory to package directory.}
+\item{path}{path within package. Leave empty to change working directory
+to package directory.}
 }
 \description{
 Set working directory.

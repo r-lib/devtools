@@ -7,19 +7,17 @@ install_gitorious(repo, project = repo, ref = "master", subdir = NULL,
   branch = NULL, ...)
 }
 \arguments{
-  \item{project}{Gitorious project name}
+\item{project}{Gitorious project name}
 
-  \item{repo}{Repo name}
+\item{repo}{Repo name}
 
-  \item{ref}{Desired git ref - defaults to \code{"master"}}
+\item{ref}{Desired git ref - defaults to \code{"master"}}
 
-  \item{subdir}{subdirectory within repo that contains the
-  R package.}
+\item{subdir}{subdirectory within repo that contains the R package.}
 
-  \item{branch}{Deprecated. Use \code{ref} instead.}
+\item{branch}{Deprecated. Use \code{ref} instead.}
 
-  \item{...}{Other arguments passed on to
-  \code{\link{install}}.}
+\item{...}{Other arguments passed on to \code{\link{install}}.}
 }
 \description{
 This function is vectorised so you can install multiple packages in

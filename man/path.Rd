@@ -13,10 +13,10 @@ set_path(path)
 add_path(path, after = Inf)
 }
 \arguments{
-  \item{path}{character vector of paths}
+\item{path}{character vector of paths}
 
-  \item{after}{for \code{add_path}, the place on the PATH
-  where the new paths should be added}
+\item{after}{for \code{add_path}, the place on the PATH where the new paths
+should be added}
 }
 \value{
 \code{set_path} invisibly returns the old path.

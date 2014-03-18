@@ -6,21 +6,18 @@
 source_gist(id, ..., sha1 = NULL, quiet = FALSE)
 }
 \arguments{
-  \item{id}{either full url (character), gist ID (numeric
-  or character of numeric). If a gist ID is specified and
-  the entry has multiple files, only the first R file in
-  the gist is sourced.}
+\item{id}{either full url (character), gist ID (numeric or character of
+numeric). If a gist ID is specified and the entry has multiple files,
+only the first R file in the gist is sourced.}
 
-  \item{...}{other options passed to \code{\link{source}}}
+\item{...}{other options passed to \code{\link{source}}}
 
-  \item{sha1}{The SHA-1 hash of the file at the remote URL.
-  This is highly recommend as it prevents you from
-  accidentally running code that's not what you expect. See
-  \code{\link{source_url}} for more information on using a
-  SHA-1 hash.}
+\item{sha1}{The SHA-1 hash of the file at the remote URL. This is highly
+recommend as it prevents you from accidentally running code that's not
+what you expect. See \code{\link{source_url}} for more information on
+using a SHA-1 hash.}
 
-  \item{quiet}{if \code{FALSE}, the default, prints
-  informative messages.}
+\item{quiet}{if \code{FALSE}, the default, prints informative messages.}
 }
 \description{
 \dQuote{Gist is a simple way to share snippets and pastes with others.

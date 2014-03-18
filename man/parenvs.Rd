@@ -7,12 +7,12 @@ parent environments.}
 parenvs(e = parent.frame(), all = FALSE)
 }
 \arguments{
-  \item{e}{An environment or other object.}
+\item{e}{An environment or other object.}
 
-  \item{all}{If \code{FALSE} (the default), stop at the
-  global environment or the empty environment. If
-  \code{TRUE}, print all parents, stopping only at the
-  empty environment (which is the top-level environment).}
+\item{all}{If \code{FALSE} (the default), stop at the global
+environment or the empty environment. If \code{TRUE}, print all
+parents, stopping only at the empty environment (which is the
+top-level environment).}
 }
 \description{
 If \code{e} is not specified, it will start with environment from which

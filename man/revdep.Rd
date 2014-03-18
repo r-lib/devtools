@@ -13,23 +13,20 @@ revdep_maintainers(pkg = ".")
 revdep_check(pkg = NULL, recursive = FALSE, ignore = NULL, ...)
 }
 \arguments{
-  \item{pkg}{package name}
+\item{pkg}{package name}
 
-  \item{ignore}{A character vector of package names to
-  ignore. These packages will not appear in returned
-  vector.}
+\item{ignore}{A character vector of package names to ignore. These packages
+will not appear in returned vector.}
 
-  \item{...}{Other parameters passed on to
-  \code{\link{check_cran}}}
+\item{...}{Other parameters passed on to \code{\link{check_cran}}}
 
-  \item{dependencies}{a character vector listing the types
-  of dependencies, a subset of \code{c("Depends",
-  "Imports", "LinkingTo", "Suggests", "Enhances")}.
-  Character string \code{"all"} is shorthand for that
-  vector.}
+\item{dependencies}{a character vector listing the types of
+    dependencies, a subset of
+    \code{c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances")}.
+    Character string \code{"all"} is shorthand for that vector.}
 
-  \item{recursive}{logical: should reverse dependencies of
-  reverse dependencies (and so on) be included?}
+\item{recursive}{logical: should reverse dependencies of reverse
+    dependencies (and so on) be included?}
 }
 \description{
 Tools to check and notify maintainers of all all CRAN and bioconductor

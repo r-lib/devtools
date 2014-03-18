@@ -6,12 +6,12 @@
 release(pkg = ".", check = TRUE)
 }
 \arguments{
-  \item{pkg}{package description, can be path or package
-  name.  See \code{\link{as.package}} for more information}
+\item{pkg}{package description, can be path or package name.  See
+\code{\link{as.package}} for more information}
 
-  \item{check}{if \code{TRUE}, run checking, otherwise omit
-  it.  This is useful if you've just checked your package
-  and you're ready to release it.}
+\item{check}{if \code{TRUE}, run checking, otherwise omit it.  This
+is useful if you've just checked your package and you're ready to
+release it.}
 }
 \description{
 Run automated and manual tests, then ftp to CRAN.
@@ -38,9 +38,11 @@ many of polices as possible, but it's impossible to be completely
 comprehensive, and they do change in between releases of devtools.
 }
 \section{Guarantee}{
-  If a devtools bug causes one of the CRAN maintainers to
-  treat you impolitely, I will personally send you a
-  handwritten apology note. Please forward me the email and
-  your address, and I'll get a card in the mail.
+
+
+If a devtools bug causes one of the CRAN maintainers to treat you
+impolitely, I will personally send you a handwritten apology note.
+Please forward me the email and your address, and I'll get a card in
+the mail.
 }
 

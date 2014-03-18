@@ -6,8 +6,8 @@
 pkg_env(pkg = ".")
 }
 \arguments{
-  \item{pkg}{package description, can be path or package
-  name.  See \code{\link{as.package}} for more information}
+\item{pkg}{package description, can be path or package name.  See
+\code{\link{as.package}} for more information}
 }
 \description{
 This is an environment like \code{<package:pkg>}. The package

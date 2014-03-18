@@ -7,22 +7,19 @@ build_win(pkg = ".", version = c("R-release", "R-devel"), args = NULL,
   quiet = FALSE)
 }
 \arguments{
-  \item{pkg}{package description, can be path or package
-  name.  See \code{\link{as.package}} for more information}
+\item{pkg}{package description, can be path or package name.  See
+\code{\link{as.package}} for more information}
 
-  \item{version}{directory to upload to on the win-builder,
-  controlling which version of R is used to build the
-  package. Possible options are listed on
-  \url{http://win-builder.r-project.org/}. Defaults to the
-  released version of R.}
+\item{version}{directory to upload to on the win-builder, controlling
+which version of R is used to build the package. Possible options are
+listed on \url{http://win-builder.r-project.org/}. Defaults to the
+released version of R.}
 
-  \item{args}{An optional character vector of additional
-  command line arguments to be passed to \code{R CMD build}
-  if \code{binary = FALSE}, or \code{R CMD install} if
-  \code{binary = TRUE}.}
+\item{args}{An optional character vector of additional command
+line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},
+or \code{R CMD install} if \code{binary = TRUE}.}
 
-  \item{quiet}{if \code{TRUE} suppresses output from this
-  function.}
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 }
 \description{
 This function works by bundling source package, and then uploading to

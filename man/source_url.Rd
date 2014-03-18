@@ -6,12 +6,11 @@
 source_url(url, ..., sha1 = NULL)
 }
 \arguments{
-  \item{url}{url}
+\item{url}{url}
 
-  \item{...}{other options passed to \code{\link{source}}}
+\item{...}{other options passed to \code{\link{source}}}
 
-  \item{sha1}{The (prefix of the) SHA-1 hash of the file at
-  the remote URL.}
+\item{sha1}{The (prefix of the) SHA-1 hash of the file at the remote URL.}
 }
 \description{
 Internally, \code{source_url} calls \code{\link{getURL}} in

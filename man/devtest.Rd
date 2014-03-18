@@ -6,7 +6,7 @@
 devtest(package)
 }
 \arguments{
-  \item{package}{Name of the test package.}
+\item{package}{Name of the test package.}
 }
 \description{
 Devtools comes with some simple packages for testing. This function

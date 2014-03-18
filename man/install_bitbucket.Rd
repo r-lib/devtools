@@ -7,24 +7,22 @@ install_bitbucket(repo, username, ref = "master", branch = NULL,
   auth_user = NULL, password = NULL, ...)
 }
 \arguments{
-  \item{repo}{repo name}
+\item{repo}{repo name}
 
-  \item{username}{bitbucket username}
+\item{username}{bitbucket username}
 
-  \item{ref}{Desired git reference. Could be a commit, tag,
-  or branch name. Defaults to \code{"master"}.}
+\item{ref}{Desired git reference. Could be a commit, tag, or branch
+name. Defaults to \code{"master"}.}
 
-  \item{branch}{Deprecated. Use \code{ref} instead.}
+\item{branch}{Deprecated. Use \code{ref} instead.}
 
-  \item{auth_user}{your account username if you're
-  attempting to install a package hosted in a private
-  repository (and your username is different to
-  \code{username})}
+\item{auth_user}{your account username if you're attempting to install
+a package hosted in a private repository (and your username is different
+to \code{username})}
 
-  \item{password}{your password}
+\item{password}{your password}
 
-  \item{...}{Other arguments passed on to
-  \code{\link{install}}.}
+\item{...}{Other arguments passed on to \code{\link{install}}.}
 }
 \description{
 This function is vectorised so you can install multiple packages in

@@ -6,9 +6,8 @@
 build_github_devtools(outfile = NULL)
 }
 \arguments{
-  \item{outfile}{The name of the output file. If NULL (the
-  default), it uses ./devtools.tgz (Mac and Linux), or
-  ./devtools.zip (Windows).}
+\item{outfile}{The name of the output file. If NULL (the default), it uses
+./devtools.tgz (Mac and Linux), or ./devtools.zip (Windows).}
 }
 \value{
 a string giving the location (including file name) of the built

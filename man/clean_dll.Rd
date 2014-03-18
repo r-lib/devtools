@@ -6,8 +6,8 @@
 clean_dll(pkg = ".")
 }
 \arguments{
-  \item{pkg}{package description, can be path or package
-  name.  See \code{\link{as.package}} for more information}
+\item{pkg}{package description, can be path or package name.  See
+\code{\link{as.package}} for more information}
 }
 \description{
 Invisibly returns the names of the deleted files.

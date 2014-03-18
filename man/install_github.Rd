@@ -5,39 +5,38 @@
 \usage{
 install_github(repo, username = getOption("github.user"), ref = "master",
   pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, ...)
+  password = NULL, ..., dependencies = TRUE)
 }
 \arguments{
-  \item{repo}{Repository address in the format
-  \code{[username/]repo[/subdir][@ref|#pull]}.
-  Alternatively, you can specify \code{username},
-  \code{subdir}, \code{ref} or \code{pull} using the
-  respective parameters (see below); if both is specified,
-  the values in \code{repo} take precedence.}
+\item{repo}{Repository address in the format
+\code{[username/]repo[/subdir][@ref|#pull]}. Alternatively, you can
+specify \code{username}, \code{subdir}, \code{ref} or \code{pull} using the
+respective parameters (see below); if both is specified, the values in
+\code{repo} take precedence.}
 
-  \item{username}{User name}
+\item{username}{User name}
 
-  \item{ref}{Desired git reference. Could be a commit, tag,
-  or branch name. Defaults to \code{"master"}.}
+\item{ref}{Desired git reference. Could be a commit, tag, or branch
+name. Defaults to \code{"master"}.}
 
-  \item{pull}{Desired pull request. A pull request refers
-  to a branch, so you can't specify both \code{branch} and
-  \code{pull}; one of them must be \code{NULL}.}
+\item{pull}{Desired pull request. A pull request refers to a branch,
+so you can't specify both \code{branch} and \code{pull}; one of
+them must be \code{NULL}.}
 
-  \item{subdir}{subdirectory within repo that contains the
-  R package.}
+\item{subdir}{subdirectory within repo that contains the R package.}
 
-  \item{branch}{Deprecated. Use \code{ref} instead.}
+\item{branch}{Deprecated. Use \code{ref} instead.}
 
-  \item{auth_user}{your account username if you're
-  attempting to install a package hosted in a private
-  repository (and your username is different to
-  \code{username})}
+\item{auth_user}{your account username if you're attempting to install
+a package hosted in a private repository (and your username is different
+to \code{username})}
 
-  \item{password}{your password}
+\item{password}{your password}
 
-  \item{...}{Other arguments passed on to
-  \code{\link{install}}.}
+\item{...}{Other arguments passed on to \code{\link{install}}.}
+
+\item{dependencies}{By default, installs all dependencies so that you can
+build vignettes and use all functionality of the package.}
 }
 \description{
 This function is vectorised on \code{repo} so you can install multiple

@@ -6,8 +6,8 @@
 compiler_flags(debug = FALSE)
 }
 \arguments{
-  \item{debug}{If \code{TRUE} adds \code{-g -O0} to all
-  flags (Adding \env{PKG_FFLAGS} and \env{PKG_FCFLAGS}}
+\item{debug}{If \code{TRUE} adds \code{-g -O0} to all flags
+(Adding \env{PKG_FFLAGS} and \env{PKG_FCFLAGS}}
 }
 \description{
 These default flags enforce good coding practice by ensuring that

@@ -6,14 +6,13 @@
 add_build_ignore(pkg = ".", file, escape = TRUE)
 }
 \arguments{
-  \item{pkg}{package description, can be path or package
-  name.  See \code{\link{as.package}} for more information}
+\item{pkg}{package description, can be path or package name.  See
+\code{\link{as.package}} for more information}
 
-  \item{file}{Name of file.}
+\item{file}{Name of file.}
 
-  \item{escape}{If \code{TRUE}, the default, will escape
-  \code{.} to \code{\\.} and surround with \code{^} and
-  \code{$}.}
+\item{escape}{If \code{TRUE}, the default, will escape \code{.} to
+\code{\\.} and surround with \code{^} and \code{$}.}
 }
 \value{
 Nothing, called for its side effect.

@@ -7,17 +7,16 @@ create(path, description = getOption("devtools.desc"), check = FALSE,
   rstudio = TRUE)
 }
 \arguments{
-  \item{path}{location to create new package.  The last
-  component of the path will be used as the package name.}
+\item{path}{location to create new package.  The last component of the path
+will be used as the package name.}
 
-  \item{description}{list of description values to override
-  default values or add additional values.}
+\item{description}{list of description values to override default values or
+add additional values.}
 
-  \item{check}{if \code{TRUE}, will automatically run
-  \code{\link{check}}}
+\item{check}{if \code{TRUE}, will automatically run \code{\link{check}}}
 
-  \item{rstudio}{Create an Rstudio project file?  (with
-  \code{\link{add_rstudio_project}})}
+\item{rstudio}{Create an Rstudio project file?
+(with \code{\link{add_rstudio_project}})}
 }
 \description{
 Similar to \code{\link{package.skeleton}}, except that it only creates

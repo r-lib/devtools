@@ -6,7 +6,7 @@
 as.package(x = NULL)
 }
 \arguments{
-  \item{x}{object to coerce to a package}
+\item{x}{object to coerce to a package}
 }
 \description{
 Possible specifications of package:

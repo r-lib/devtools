@@ -6,8 +6,7 @@
 parse_deps(string)
 }
 \arguments{
-  \item{string}{to parse. Should look like \code{"R (>=
-  3.0), ggplot2"} etc.}
+\item{string}{to parse. Should look like \code{"R (>= 3.0), ggplot2"} etc.}
 }
 \value{
 list of two character vectors: \code{name} package names,

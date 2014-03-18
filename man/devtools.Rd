@@ -8,38 +8,36 @@
 Package development tools for R.
 }
 \section{Package options}{
-  Devtools uses the following \code{\link{options}} to
-  configure behaviour:
 
-  \itemize{ \item \code{devtools.path}: path to use for
-  \code{\link{dev_mode}}
 
-  \item \code{devtools.name}: your name, used when signing
-  draft emails.
+Devtools uses the following \code{\link{options}} to configure behaviour:
 
-  \item \code{devtools.cleandoc}: a single logical value
-  determining whether the contents of the file{man/}
-  directory are deleted by \code{\link{check}}
+\itemize{
+  \item \code{devtools.path}: path to use for \code{\link{dev_mode}}
 
-  \item \code{devtools.install.args}: a string giving extra
-  arguments passed to \code{R CMD install} by
-  \code{\link{install}}.
+  \item \code{devtools.name}: your name, used when signing draft
+    emails.
 
-  \item \code{devtools.desc.author}: a string providing a
-  default Authors@R string to be used in new
-  \file{DESCRIPTION}s.  Should be a R code, and look like
-  \code{"Hadley Wickham <h.wickham@gmail.com> [aut, cre]"}.
-  See \code{\link[utils]{as.person}} for more details.
+  \item \code{devtools.cleandoc}: a single logical value determining whether
+    the contents of the file{man/} directory are deleted by
+    \code{\link{check}}
 
-  \item \code{devtools.desc.license}: a default license
-  string to use for new packages.
+  \item \code{devtools.install.args}: a string giving extra arguments passed
+    to \code{R CMD install} by \code{\link{install}}.
 
-  \item \code{devtools.desc.suggests}: a character vector
-  listing packages to to add to suggests by defaults for
-  new packages.  \item \code{devtools.desc}: a named
-  character vector listing any other extra options to add
-  to \file{DESCRIPTION}
+  \item \code{devtools.desc.author}: a string providing a default Authors@R
+    string to be used in new \file{DESCRIPTION}s.  Should be a R code, and
+    look like \code{"Hadley Wickham <h.wickham@gmail.com> [aut, cre]"}. See
+    \code{\link[utils]{as.person}} for more details.
 
-  }
+  \item \code{devtools.desc.license}: a default license string to use for
+    new packages.
+
+  \item \code{devtools.desc.suggests}: a character vector listing packages to
+    to add to suggests by defaults for new packages.
+  \item \code{devtools.desc}: a named character vector listing any other
+    extra options to add to \file{DESCRIPTION}
+
+}
 }
 
