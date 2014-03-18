@@ -1,6 +1,6 @@
 # devtools 1.4.1.99
 
-* No longer checks for `pdftex` when building vignettes, as many modern
+* No longer checks for `pdflatex` when building vignettes, as many modern
   vignettes don't use it (#398).
 
 * `release()` does a better job of opening your email client if you're inside
