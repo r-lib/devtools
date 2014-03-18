@@ -48,8 +48,10 @@ test_that("onLoad and onAttach", {
   nsenv <- ns_env("testLoadHooks")
   pkgenv <- pkg_env("testLoadHooks")
 
-  expect_equal(nsenv$onload_lib, getwd())
-  expect_equal(nsenv$onattach_lib, getwd())
+  # normalizePath is needed so that capitalization differences on
+  # case-insensitive platforms won't cause errors.
+  expect_equal(normalizePath(nsenv$onload_lib), normalizePath(getwd()))
+  expect_equal(normalizePath(nsenv$onattach_lib), normalizePath(getwd()))
 
   # a: modified by onLoad in namespace env
   # b: modified by onAttach in namespace env
