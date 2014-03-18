@@ -130,7 +130,7 @@ scan_path_for_rtools <- function(debug = FALSE) {
   # We have a candidate installPath
   install_path <- dirname(dirname(ls_path))
   install_path2 <- dirname(dirname(dirname(gcc_path)))
-  if (to_lower(install_path2) != tolower(install_path)) return(NULL)
+  if (tolower(install_path2) != tolower(install_path)) return(NULL)
 
   version <- installed_version(install_path, debug = debug)
   if (debug) cat("Version:", version, "\n")
