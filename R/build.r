@@ -44,10 +44,6 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
 
     if (!vignettes) {
       args <- c(args, "--no-build-vignettes")
-
-    } else if (!nzchar(Sys.which("pdflatex"))) {
-      message("pdflatex not found. Not building PDF vignettes.")
-      args <- c(args, "--no-build-vignettes")
     }
 
     cmd <- paste0("CMD build ", shQuote(pkg$path), " ",
