@@ -39,3 +39,7 @@ render_template <- function(name, data) {
   template <- readLines(path)
   whisker.render(template, data)
 }
+
+is_installed <- function(pkg, version = 0) {
+  system.file(package = pkg) != "" && packageVersion(pkg) > version
+}
