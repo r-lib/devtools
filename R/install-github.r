@@ -20,6 +20,10 @@
 #'   a package hosted in a private repository (and your username is different
 #'   to \code{username})
 #' @param password your password
+#' @param auth_token To install from a private repo, generate a personal
+#'   access token (PAT) in \url{https://github.com/settings/applications} and
+#'   supply to this argument. This is safer than using a password because
+#'   you can easily delete a PAT without affecting any others.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @param dependencies By default, installs all dependencies so that you can
 #'   build vignettes and use all functionality of the package.
@@ -36,21 +40,25 @@
 #' # On Windows, this won't work - see ?build_github_devtools
 #' install_github("hadley/devtools")
 #'
+#' # To install from a private repo, use auth_token with a token
+#' # from https://github.com/settings/applications
+#' install_github("hadley/private", auth_token = ")
+#'
 #' }
 install_github <- function(repo, username = getOption("github.user"),
                            ref = "master", pull = NULL, subdir = NULL,
-                           branch = NULL, auth_user = NULL,
-                           password = NULL, ..., dependencies = TRUE) {
+                           branch = NULL, auth_user = NULL, password = NULL,
+                           auth_token = NULL, ..., dependencies = TRUE) {
 
   invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
-    username, ref, pull, subdir, branch, auth_user, password, ...,
+    username, ref, pull, subdir, branch, auth_user, password, auth_token, ...,
     dependencies = TRUE))
 }
 
 github_get_conn <- function(repo, username = getOption("github.user"),
                             ref = "master", pull = NULL, subdir = NULL,
-                            branch = NULL, auth_user = NULL,
-                            password = NULL, ...) {
+                            branch = NULL, auth_user = NULL, password = NULL,
+                            auth_token = NULL, ...) {
 
   if (!is.null(branch)) {
     warning("'branch' is deprecated. In the future, please use 'ref' instead.")
@@ -78,10 +86,19 @@ github_get_conn <- function(repo, username = getOption("github.user"),
   }
 
   if (!is.null(password)) {
+    warning("'password' is deprecrated. Please use 'auth_token' instead",
+      call. = FALSE)
     auth <- httr::authenticate(
       user = auth_user %||% username,
       password = password,
-      type = "basic")
+      type = "basic"
+    )
+  } else if (!is.null(auth_token)) {
+    auth <- httr::authenticate(
+      user = auth_token,
+      password = "x-oauth-basic",
+      type = "basic"
+    )
   } else {
     auth <- list()
   }
@@ -104,7 +121,7 @@ github_get_conn <- function(repo, username = getOption("github.user"),
 install_github_single <- function(repo, username = getOption("github.user"),
                                   ref = "master", pull = NULL, subdir = NULL,
                                   branch = NULL, auth_user = NULL,
-                                  password = NULL, ...) {
+                                  password = NULL, auth_token = NULL, ...) {
   conn <- github_get_conn(repo, username, ref, pull, subdir, branch,
     auth_user, password, ...)
   message(conn$msg)

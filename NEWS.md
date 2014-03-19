@@ -1,5 +1,8 @@
 # devtools 1.4.1.99
 
+* `install_github()` now prefers personal access tokens supplied to
+  `auth_token` rather than passwords (#418, @jeroenooms).
+
 * `document()` now requires at least version 3.0.0 of roxygen2.
 
 * `install_github()` now defaults to `dependencies = TRUE` so you definitely

@@ -5,7 +5,7 @@
 \usage{
 install_github(repo, username = getOption("github.user"), ref = "master",
   pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, ..., dependencies = TRUE)
+  password = NULL, auth_token = NULL, ..., dependencies = TRUE)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -33,6 +33,11 @@ to \code{username})}
 
 \item{password}{your password}
 
+\item{auth_token}{To install from a private repo, generate a personal
+access token (PAT) in \url{https://github.com/settings/applications} and
+supply to this argument. This is safer than using a password because
+you can easily delete a PAT without affecting any others.}
+
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 
 \item{dependencies}{By default, installs all dependencies so that you can
@@ -52,6 +57,10 @@ install_github(c("devtools@devtools-1.4", "klutometis/roxygen#142", "mfrasca/r-l
 # Update devtools to the latest version, on Linux and Mac
 # On Windows, this won't work - see ?build_github_devtools
 install_github("hadley/devtools")
+
+# To install from a private repo, use auth_token with a token
+# from https://github.com/settings/applications
+install_github("hadley/private", auth_token = ")
 
 }
 }
