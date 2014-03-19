@@ -115,18 +115,13 @@ install_github_single <- function(repo, username = getOption("github.user"),
 
     desc <- file.path(pkg_path, "DESCRIPTION")
 
-    # Remove any blank lines from DESCRIPTION
-    DESCRIPTION <- readLines(desc)
+    # Remove any blank lines from DESCRIPTION -- this protects users from
+    # 'Error: contains a blank line' errors thrown by R CMD INSTALL
+    DESCRIPTION <- readLines(desc, warn = FALSE)
     if (any(DESCRIPTION == "")) {
-      warning("Blank lines have been stripped from the package DESCRIPTION file ",
-        "to ensure a successful installation")
+      DESCRIPTION <- DESCRIPTION[DESCRIPTION != ""]
     }
-    DESCRIPTION <- setdiff(DESCRIPTION, "")
-    cat(DESCRIPTION, file=desc, sep="\n")
-    
-    # Ensure the DESCRIPTION ends with a newline
-    if (!ends_with_newline(desc))
-      cat("\n", sep="", file = desc, append = TRUE)
+    cat(DESCRIPTION, file = desc, sep = "\n")
 
     # Function to append a field to the DESCRIPTION if it's not null
     append_field <- function(name, value) {
