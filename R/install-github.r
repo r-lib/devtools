@@ -113,8 +113,18 @@ install_github_single <- function(repo, username = getOption("github.user"),
   # install_github and appends the to the description file
   github_before_install <- function(bundle, pkg_path) {
 
-    # Ensure the DESCRIPTION ends with a newline
     desc <- file.path(pkg_path, "DESCRIPTION")
+
+    # Remove any blank lines from DESCRIPTION
+    DESCRIPTION <- readLines(desc)
+    if (any(DESCRIPTION == "")) {
+      warning("Blank lines have been stripped from the package DESCRIPTION file ",
+        "to ensure a successful installation")
+    }
+    DESCRIPTION <- setdiff(DESCRIPTION, "")
+    cat(DESCRIPTION, file=desc, sep="\n")
+    
+    # Ensure the DESCRIPTION ends with a newline
     if (!ends_with_newline(desc))
       cat("\n", sep="", file = desc, append = TRUE)
 
