@@ -19,8 +19,8 @@
 * `release()` does a better job of opening your email client if you're inside
   of Rstudio (#433).
 
-* `build_win()` now builds R-release and R-devel by default. (Thanks to @krlmlr,
-  #438.)
+* `build_win()` now builds R-release and R-devel by default. 
+  (Thanks to @krlmlr, #438)
 
 * The `with_options()` function works as expected, used to throw an error when
   trying to set an option.
