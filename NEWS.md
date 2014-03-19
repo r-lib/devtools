@@ -1,5 +1,9 @@
 # devtools 1.4.1.99
 
+* `install_github()` now removes blank lines found in a package `DESCRIPTION`
+  file, protecting users from the vague `error: contains a blank line` error. 
+  (#394)
+
 * `document()` now requires at least version 3.0.0 of roxygen2.
 
 * `install_github()` now defaults to `dependencies = TRUE` so you definitely
