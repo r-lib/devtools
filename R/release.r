@@ -154,15 +154,15 @@ email <- function(address, subject, body) {
     sep = ""
   )
 
-  # Use default browser, even if RStudio running
-  if (identical(.Platform$GUI, "RStudio")) {
-    browser <- if (.Platform$OS.type == "windows") NULL else "/usr/bin/open"
-  } else {
-    browser <- getOption("browser")
-  }
-
-  tryCatch(
-    browseURL(url, browser = browser),
+  tryCatch({
+    # Use default browser, even if RStudio running
+    browser <- if (identical(.Platform$GUI, "RStudio")) {
+      if (.Platform$OS.type == "windows") NULL else
+        dir("/usr/bin", pattern = "^(open|xdg-open)$", full.names = TRUE)[[1]]
+    } else {
+      getOption("browser")
+    }
+    browseURL(url, browser = browser)},
     error = function(e) {
       message("Sending failed with error: ", e$message)
       cat("To: ", address, "\n", sep = "")
