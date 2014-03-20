@@ -169,15 +169,13 @@ email <- function(address, subject, body) {
 }
 
 email_browser <- function() {
+  if (!identical(.Platform$GUI, "RStudio"))
+    return (getOption("browser"))
+
   # Use default browser, even if RStudio running
-  if (identical(.Platform$GUI, "RStudio")) {
-    if (.Platform$OS.type == "windows") {
-      NULL
-    } else {
-      browser <- Sys.which(c("xdg-open", "open"))
-      browser[nchar(browser) > 0][[1]]
-    }
-  } else {
-    getOption("browser")
-  }
+  if (.Platform$OS.type == "windows")
+    return (NULL)
+
+  browser <- Sys.which(c("xdg-open", "open"))
+  browser[nchar(browser) > 0][[1]]
 }
