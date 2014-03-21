@@ -123,7 +123,7 @@ install_github_single <- function(repo, username = getOption("github.user"),
                                   branch = NULL, auth_user = NULL,
                                   password = NULL, auth_token = NULL, ...) {
   conn <- github_get_conn(repo, username, ref, pull, subdir, branch,
-    auth_user, password, ...)
+    auth_user, password, auth_token, ...)
   message(conn$msg)
 
   # define before_install function that captures the arguments to

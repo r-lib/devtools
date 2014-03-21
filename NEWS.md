@@ -2,8 +2,9 @@
 
 * `install_github()` now prefers personal access tokens supplied to
   `auth_token` rather than passwords (#418, @jeroenooms).
+
 * `install_github()` now removes blank lines found in a package `DESCRIPTION`
-  file, protecting users from the vague `error: contains a blank line` error. 
+  file, protecting users from the vague `error: contains a blank line` error.
   (#394)
 
 * `document()` now requires at least version 3.0.0 of roxygen2.
