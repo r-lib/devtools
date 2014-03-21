@@ -25,6 +25,7 @@ ns_env <- function(pkg = ".") {
 
 
 # Create the namespace environment for a package
+#' @importFrom methods setPackageName
 create_ns_env <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
