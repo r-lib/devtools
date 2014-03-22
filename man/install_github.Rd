@@ -5,7 +5,7 @@
 \usage{
 install_github(repo, username = getOption("github.user"), ref = "master",
   pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, auth_token = getOption("github.pat"), ...,
+  password = NULL, auth_token = Sys.getenv("github.pat"), ...,
   dependencies = TRUE)
 }
 \arguments{
@@ -38,7 +38,8 @@ to \code{username})}
 access token (PAT) in \url{https://github.com/settings/applications} and
 supply to this argument. This is safer than using a password because
 you can easily delete a PAT without affecting any others. Defaults to
-reading the \code{github.pat} option and if missing, this is set to NULL.}
+reading the \code{github.pat} environment variable and if this
+environment variable is unset, it is set to \code{NULL}.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 
