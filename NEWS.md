@@ -1,4 +1,4 @@
-# devtools 1.4.1.99
+# devtools 1.5
 
 Four new functions make it easier to add useful infrastructure to packages:
 
