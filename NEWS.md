@@ -1,73 +1,72 @@
 # devtools 1.4.1.99
 
-* `check_devtools()` no longer called by `check()` because the relevant
-  functionality is now included in `R CMD CHECK` and it was causing
-  false positives (#446).
-
-* `install()` gains `thread` argument which allows you to install multiple
-  packages in parallel (@mllg, #401). `threads` argument to `check_cran()`
-  now defaults to `getOption("Ncpus")`
-
-* `install_github()` now prefers personal access tokens supplied to
-  `auth_token` rather than passwords (#418, @jeroenooms).
-
-* `install_github()` now removes blank lines found in a package `DESCRIPTION`
-  file, protecting users from the vague `error: contains a blank line` error.
-  (#394)
-
-* `document()` now requires at least version 3.0.0 of roxygen2.
-
-* `install_github()` now defaults to `dependencies = TRUE` so you definitely
-  get all the packages you need to build from source.
-
-* `install_deps(TRUE)` now includes packages listed in `VignetteBuilder` (#396)
-
-* No longer checks for `pdflatex` when building vignettes, as many modern
-  vignettes don't use it (#398).
-
-* `release()` does a better job of opening your email client if you're inside
-  of Rstudio (#433).
-
-* `build_win()` now builds R-release and R-devel by default.
-  (Thanks to @krlmlr, #438)
-
-* The `with_options()` function works as expected, used to throw an error when
-  trying to set an option.
-  (Thanks to @krlmlr, #434)
-
-* In `build()`, use `--no-build-vignettes` (#391).
-
-* Bump R dependency to 3.0.2.
-
-* `install_deps(deps = T)` no longer also installs all dependencies of
-  dependencies (#369).
-
-* Improved default `DESCRIPTION` file created by `create_description()`.
-* Fixed bug in which `check()` incorrectly reported the location of the `R CMD
-  check` output when called with a custom `check_dir`. (Thanks to @brentonk)
-
-* Improved default `DESCRIPTION` file created by `create_description()`.
-  (Thanks to @ncarchedi, #428)
+Four new functions make it easier to add useful infrastructure to packages:
 
 * `add_test_infrastructure()` will create test infrastructure for a new package.
   It is called automatically from `test()` if no test directories are
   found, the session is interactive and you agree.
 
-* `create()` gains an `rstudio` argument which will automatically create
+* `add_rstudio_project()` adds an Rstudio project file to your package.
+  `create()` gains an `rstudio` argument which will automatically create
   an Rstudio project in the package directory. It defaults to `TRUE`:
   if you don't use Rstudio, just delete the file.
-
-* `add_rstudio_project()` adds an Rstudio project file to your package.
 
 * `add_travis()` adds a basic travis template to your package. `.travis.yml`
   is automatically added to `.Rbuildignore` to avoid including it in the built
   package.
 
-* New `add_build_ignore()` makes it easy to add files to `.Rbuildignore`
+* `add_build_ignore()` makes it easy to add files to `.Rbuildignore`,
+  correctly escaping special characters
+
+Two increments to dependencies:
+
+* devtools requires at least R version 3.0.2.
+
+* `document()` requires at least roxygen2 version 3.0.0.
+
+## Minor improvements
+
+* `build_win()` now builds R-release and R-devel by default (@krlmlr, #438).
+  It also gains parameter `args`, which is passed on to `build()`
+  (@krlmlr, #421).
 
 * `check_doc()` now runs `document()` automatically.
 
+* `install()` gains `thread` argument which allows you to install multiple
+  packages in parallel (@mllg, #401). `threads` argument to `check_cran()`
+  now defaults to `getOption("Ncpus")`
+
+* `install_deps(deps = T)` no longer installs all dependencies of
+  dependencies (#369).
+
+* `install_github()` now prefers personal access tokens supplied to
+  `auth_token` rather than passwords (#418, @jeroenooms).
+
+* `install_github()` now defaults to `dependencies = TRUE` so you definitely
+  get all the packages you need to build from source.
+
+## Bug fixes
+
+* `check_devtools()` no longer called by `check()` because the relevant
+  functionality is now included in `R CMD CHECK` and it was causing
+  false positives (#446).
+
+* `install_deps(TRUE)` now includes packages listed in `VignetteBuilder` (#396)
+
+* `build()` no longer checks for `pdflatex` when building vignettes, as
+  many modern vignettes don't need it (#398). It also uses
+  `--no-build-vignettes` for >3.0.0 compatibility (#391).
+
+* `release()` does a better job of opening your email client if you're inside
+  of Rstudio (#433).
+
+* `check()` now correctly reports the location of the `R CMD
+  check` output when called with a custom `check_dir`. (Thanks to @brentonk)
+
 * `check_cran()` records check times for each package tested.
+
+* Improved default `DESCRIPTION` file created by `create_description()`.
+  (Thanks to @ncarchedi, #428)
 
 * Fixed bug in `install_github()` that prevented installing a pull request by
   supplying `repo = "username/repo#pull"`. (#388)
@@ -75,7 +74,12 @@
 * explicitly specify user agent when querying user name and ref for pull request
   in `install_github`. (Thanks to Kirill Müller, #405)
 
-* New parameter `args` to `build_win`. (Thanks to Kirill Müller, #421)
+* `install_github()` now removes blank lines found in a package `DESCRIPTION`
+  file, protecting users from the vague `error: contains a blank line` error.
+  (#394)
+
+* `with_options()` now works, instead of throwing an error (Thanks to
+  @krlmlr, #434)
 
 # devtools 1.4.1
 
