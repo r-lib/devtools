@@ -3,7 +3,8 @@
 \alias{install_deps}
 \title{Install package dependencies}
 \usage{
-install_deps(pkg = ".", dependencies = NA)
+install_deps(pkg = ".", dependencies = NA, threads = getOption("Ncpus",
+  1))
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -12,6 +13,10 @@ install_deps(pkg = ".", dependencies = NA)
 \item{dependencies}{\code{logical} indicating to also install uninstalled
 packages which this \code{pkg} depends on/links to/suggests. See
 argument \code{dependencies} of \code{\link{install.packages}}.}
+
+\item{threads}{number of concurrent threads to use for installing
+dependencies.
+It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 }
 \description{
 Install package dependencies

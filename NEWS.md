@@ -1,5 +1,9 @@
 # devtools 1.4.1.99
 
+* `install()` gains `thread` argument which allows you to install multiple
+  packages in parallel (@mllg, #401). `threads` argument to `check_cran()`
+  now defaults to `getOption("Ncpus")`
+
 * `install_github()` now prefers personal access tokens supplied to
   `auth_token` rather than passwords (#418, @jeroenooms).
 
@@ -20,7 +24,7 @@
 * `release()` does a better job of opening your email client if you're inside
   of Rstudio (#433).
 
-* `build_win()` now builds R-release and R-devel by default. 
+* `build_win()` now builds R-release and R-devel by default.
   (Thanks to @krlmlr, #438)
 
 * The `with_options()` function works as expected, used to throw an error when

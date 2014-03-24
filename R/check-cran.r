@@ -18,6 +18,7 @@
 #' @param bioconductor include bioconductor packages in checking?
 #' @param type binary package type of test
 #' @param threads number of concurrent threads to use for checking.
+#'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
 #' @param check_dir the directory in which the package is checked
 #' @return invisible \code{TRUE} if successful and no ERRORs or WARNINGS,
 #' @importFrom tools package_dependencies
@@ -32,7 +33,7 @@
 #' }
 check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   srcpath = libpath, bioconductor = FALSE, type = getOption("pkgType"),
-  threads = 1, check_dir = tempfile("check_cran")) {
+  threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran")) {
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
 
