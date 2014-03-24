@@ -1,5 +1,9 @@
 # devtools 1.4.1.99
 
+* `check_devtools()` no longer called by `check()` because the relevant
+  functionality is now included in `R CMD CHECK` and it was causing
+  false positives (#446).
+
 * `install()` gains `thread` argument which allows you to install multiple
   packages in parallel (@mllg, #401). `threads` argument to `check_cran()`
   now defaults to `getOption("Ncpus")`

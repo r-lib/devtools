@@ -78,18 +78,6 @@ with how check works on CRAN. This includes:
 
 }
 }
-
-\section{Devtools checks}{
-
-
-Devtools currently provides a few extra checks that \code{R CMD check}
-does not - these are typically things that the CRAN maintainers will
-complain about if you haven't done, but haven't yet included in the formal
-testing process. These are run after \code{R CMD check}
-
-There is currently one test that checks you haven't includes any non-standard
-directories in the top-level R file.
-}
 \seealso{
 \code{\link{release}} if you want to send the checked package to
   CRAN.

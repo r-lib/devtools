@@ -35,16 +35,6 @@
 #'
 #' }
 #'
-#' @section Devtools checks:
-#'
-#' Devtools currently provides a few extra checks that \code{R CMD check}
-#' does not - these are typically things that the CRAN maintainers will
-#' complain about if you haven't done, but haven't yet included in the formal
-#' testing process. These are run after \code{R CMD check}
-#'
-#' There is currently one test that checks you haven't includes any non-standard
-#' directories in the top-level R file.
-#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param document if \code{TRUE} (the default), will update and check
@@ -89,8 +79,6 @@ check <- function(pkg = ".", document = TRUE, doc_clean = getOption("devtools.cl
 
   r_cmd_check_path <- check_r_cmd(built_path, cran, check_version,
     force_suggests, args, quiet = quiet, check_dir = check_dir)
-
-  check_devtools(pkg, built_path)
 
   if (cleanup) {
     unlink(r_cmd_check_path, recursive = TRUE)
