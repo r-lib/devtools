@@ -63,7 +63,10 @@ install_github("hadley/devtools")
 
 # To install from a private repo, use auth_token with a token
 # from https://github.com/settings/applications
-install_github("hadley/private", auth_token = getOption('github.pat'))
+# The PAT scope should be either 'repo' (for use with private repos)
+# or simply 'public_repo' (for use with public repos only). No other
+# scopes need to be enabled for install_github() purposes.
+install_github("hadley/private", auth_token = Sys.getenv('github.pat'))
 
 }
 }
