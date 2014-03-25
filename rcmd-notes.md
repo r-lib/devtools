@@ -1,6 +1,9 @@
+The following notes were generated across my local OS X install, ubuntu running on travis-ci and win builder. Response to NOTEs across three platforms below.
+
 * checking package dependencies ... NOTE
 
-  Note about rstudio package included in DESCRIPTION.
+  Note about rstudio package included in DESCRIPTION. Will be removed
+  once rstudioapi package is accepted.
 
 * checking R code for possible problems ... NOTE
   Found the following calls to attach():
@@ -16,3 +19,4 @@
   This is needed because that function actually generates an external
   file that is run in a fresh R session.
 
+We also ran R CMD check on all reverse dependencies for r-release: https://github.com/wch/devtools-checkresults/blob/master/r-release/00check-summary.txt. The only failure is with NMF - the failing example seems unrelated to devtools, and it's hard to imagine why the package needs devtools at all.
