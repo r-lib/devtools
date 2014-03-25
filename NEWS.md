@@ -18,7 +18,7 @@ Four new functions make it easier to add useful infrastructure to packages:
 * `add_build_ignore()` makes it easy to add files to `.Rbuildignore`,
   correctly escaping special characters
 
-Two increments to dependencies:
+Two dependencies were incremented:
 
 * devtools requires at least R version 3.0.2.
 
