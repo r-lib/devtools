@@ -234,7 +234,7 @@ github_parse_path <- function(path) {
 #'
 #' Looks in env var \code{GITHUB_PAT}.
 #'
-#' @keyword internal
+#' @keywords internal
 #' @export
 github_pat <- function() {
   pat <- Sys.getenv('GITHUB_PAT')
