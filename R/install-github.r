@@ -23,7 +23,9 @@
 #' @param auth_token To install from a private repo, generate a personal
 #'   access token (PAT) in \url{https://github.com/settings/applications} and
 #'   supply to this argument. This is safer than using a password because
-#'   you can easily delete a PAT without affecting any others.
+#'   you can easily delete a PAT without affecting any others. Defaults to
+#'   reading the \code{github.pat} environment variable and if this
+#'   environment variable is unset, it is set to \code{NULL}.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @param dependencies By default, installs all dependencies so that you can
 #'   build vignettes and use all functionality of the package.
@@ -42,14 +44,18 @@
 #'
 #' # To install from a private repo, use auth_token with a token
 #' # from https://github.com/settings/applications
-#' install_github("hadley/private", auth_token = ")
+#' # The PAT scope should be either 'repo' (for use with private repos)
+#' # or simply 'public_repo' (for use with public repos only). No other
+#' # scopes need to be enabled for install_github() purposes.
+#' install_github("hadley/private", auth_token = Sys.getenv('github.pat'))
 #'
 #' }
 install_github <- function(repo, username = getOption("github.user"),
                            ref = "master", pull = NULL, subdir = NULL,
                            branch = NULL, auth_user = NULL, password = NULL,
-                           auth_token = NULL, ..., dependencies = TRUE) {
-
+                           auth_token = Sys.getenv('github.pat'), ...,
+                           dependencies = TRUE) {
+  if (identical(auth_token, '')) auth_token <- NULL
   invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
     username, ref, pull, subdir, branch, auth_user, password, auth_token, ...,
     dependencies = TRUE))

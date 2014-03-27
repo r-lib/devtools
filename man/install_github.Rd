@@ -5,7 +5,8 @@
 \usage{
 install_github(repo, username = getOption("github.user"), ref = "master",
   pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, auth_token = NULL, ..., dependencies = TRUE)
+  password = NULL, auth_token = Sys.getenv("github.pat"), ...,
+  dependencies = TRUE)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -36,7 +37,9 @@ to \code{username})}
 \item{auth_token}{To install from a private repo, generate a personal
 access token (PAT) in \url{https://github.com/settings/applications} and
 supply to this argument. This is safer than using a password because
-you can easily delete a PAT without affecting any others.}
+you can easily delete a PAT without affecting any others. Defaults to
+reading the \code{github.pat} environment variable and if this
+environment variable is unset, it is set to \code{NULL}.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 
@@ -60,7 +63,10 @@ install_github("hadley/devtools")
 
 # To install from a private repo, use auth_token with a token
 # from https://github.com/settings/applications
-install_github("hadley/private", auth_token = ")
+# The PAT scope should be either 'repo' (for use with private repos)
+# or simply 'public_repo' (for use with public repos only). No other
+# scopes need to be enabled for install_github() purposes.
+install_github("hadley/private", auth_token = Sys.getenv('github.pat'))
 
 }
 }
