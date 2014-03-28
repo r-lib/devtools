@@ -215,7 +215,7 @@ github_extract_sha1 <- function(bundle) {
 github_parse_path <- function(path) {
   username_rx <- "(?:([^/]+)/)?"
   repo_rx <- "([^/@#]+)"
-  subdir_rx <- "(?:/([^@#]+))?"
+  subdir_rx <- "(?:/([^@#]*[^@#/]))?"
   ref_rx <- "(?:@(.+))"
   pull_rx <- "(?:#([0-9]+))"
   ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
