@@ -1,3 +1,7 @@
+* devtools supplies its own version of `system.file` so that when the function
+  is called from the R console, it will have special behavior for packages
+  loaded with devtools.
+
 # devtools 1.5
 
 Four new functions make it easier to add useful infrastructure to packages:
