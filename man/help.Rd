@@ -9,6 +9,15 @@ help(topic, package = NULL, ...)
 "?"(e1, e2)
 }
 \arguments{
+\item{topic}{A name or character string specifying the help topic.}
+
+\item{package}{A name or character string specifying the package in which
+to search for the help topic. If NULL, seach all packages.}
+
+\item{e1}{First argument to pass along to \code{utils::`?`}.}
+
+\item{e2}{Second argument to pass along to \code{utils::`?`}.}
+
 \item{...}{Additional arguments to pass to \code{\link[utils]{help}}.}
 }
 \description{

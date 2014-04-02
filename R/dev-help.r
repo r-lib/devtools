@@ -75,6 +75,11 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 #' packages or regular packages, as appropriate.
 #'
 #' @inheritParams utils::help utils::`?`
+#' @param topic A name or character string specifying the help topic.
+#' @param package A name or character string specifying the package in which
+#'   to search for the help topic. If NULL, seach all packages.
+#' @param e1 First argument to pass along to \code{utils::`?`}.
+#' @param e2 Second argument to pass along to \code{utils::`?`}.
 #' @param ... Additional arguments to pass to \code{\link[utils]{help}}.
 #' @export
 #' @examples
