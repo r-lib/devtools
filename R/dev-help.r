@@ -58,18 +58,37 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
   }
 }
 
-#' Drop-in replacement for help function
+
+#' Drop-in replacements for help and ? functions
 #'
-#' This function is a replacement for \code{\link[utils]{help}}. If
-#' \code{package} is not specified, it will search for help in devtools-loaded
-#' packages first, then in regular packages.
+#' The \code{?} and \code{help} are drop-in replacements for functions of the
+#' same name in the utils package.
 #'
-#' If \code{package} is specified, then it will search for help in
-#' devtools-loaded packages or regular packages, as appropriate.
+#' The \code{?} function is a replacement for \code{\link[utils]{?}} from the
+#' utils package. It will search for help in devtools-loaded packages first,
+#' then in regular packages.
 #'
+#' The \code{help} function is a replacement for \code{\link[utils]{help}} from
+#' the utils package. If \code{package} is not specified, it will search for
+#' help in devtools-loaded packages first, then in regular packages. If
+#' \code{package} is specified, then it will search for help in devtools-loaded
+#' packages or regular packages, as appropriate.
+#'
+#' @inheritParams utils::help utils::`?`
 #' @param ... Additional arguments to pass to \code{\link[utils]{help}}.
-#' @inheritParams utils::help
 #' @export
+#' @examples
+#' \dontrun{
+#' # This would load devtools and look at the help for load_all, if currently
+#' # in the devtools source directory.
+#' load_all()
+#' ?load_all
+#' help("load_all")
+#' }
+#'
+#' # To see the help pages for utils::help and utils::`?`:
+#' help("help", "utils")
+#' help("?", "utils")
 help <- function(topic, package = NULL, ...) {
   # Get string versions of topic and package
   if (is.name(substitute(topic))) {
@@ -105,5 +124,31 @@ help <- function(topic, package = NULL, ...) {
   } else {
     call <- as.call(list(utils::help, substitute(topic), substitute(package), ...))
     return(eval(call))
+  }
+}
+
+
+#' @rdname help
+#' @export
+`?` <- function(e1, e2) {
+  # Get string versions of e1 and e2
+  if (is.name(substitute(e1))) {
+    e1_str <- deparse(substitute(e1))
+  } else {
+    e1_str <- e1
+  }
+
+  if (is.name(substitute(e2))) {
+    e2_str <- deparse(substitute(e2))
+  } else {
+    e2_str <- e2
+  }
+
+  # Search for the topic in devtools-loaded packages.
+  # If not found, call utils::`?`.
+  if (!is.null(find_topic(e1_str))) {
+    dev_help(e1_str)
+  } else {
+    eval(as.call(list(utils::`?`, substitute(e1), substitute(e2))))
   }
 }
