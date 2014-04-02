@@ -57,3 +57,53 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
     browseURL(out_path)
   }
 }
+
+#' Drop-in replacement for help function
+#'
+#' This function is a replacement for \code{\link[utils]{help}}. If
+#' \code{package} is not specified, it will search for help in devtools-loaded
+#' packages first, then in regular packages.
+#'
+#' If \code{package} is specified, then it will search for help in
+#' devtools-loaded packages or regular packages, as appropriate.
+#'
+#' @param ... Additional arguments to pass to \code{\link[utils]{help}}.
+#' @inheritParams utils::help
+#' @export
+help <- function(topic, package = NULL, ...) {
+  # Get string versions of topic and package
+  if (is.name(substitute(topic))) {
+    topic_str <- deparse(substitute(topic))
+  } else {
+    topic_str <- topic
+  }
+
+  if (is.name(substitute(package))) {
+    package_str <- deparse(substitute(package))
+  } else if (is.null(substitute(package))) {
+    package_str <- NULL
+  } else {
+    package_str <- package
+  }
+
+
+  # If package is NULL, search for help in devtools-loaded packages, and if that
+  # fails, try utils::help.
+  # If the package was specified, then use dev_help or utils::help as
+  # appropriate.
+  if (is.null(package_str)) {
+    if (!is.null(find_topic(topic_str))) {
+      dev_help(topic_str)
+    } else {
+      call <- as.call(list(utils::help, substitute(topic), substitute(package), ...))
+      return(eval(call))
+    }
+
+  } else if (package_str %in% dev_packages()) {
+    dev_help(topic_str)
+
+  } else {
+    call <- as.call(list(utils::help, substitute(topic), substitute(package), ...))
+    return(eval(call))
+  }
+}
