@@ -26,10 +26,10 @@ dev_help <- function(topic, stage = "render", type = getOption("help_type")) {
   }
 
   pkg <- basename(names(path)[1])
-  if (rstudio_has("previewRd")) {
-    rstudio::previewRd(path)
+  if (rstudioapi::hasFun("previewRd")) {
+    rstudioapi::callFun("previewRd", path)
   } else {
-    view_rd(path, pkg, stage = stage, type = type)  
+    view_rd(path, pkg, stage = stage, type = type)
   }
 
 }

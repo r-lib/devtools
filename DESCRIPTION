@@ -28,5 +28,5 @@ Suggests:
     Rcpp (>= 0.10.0),
     MASS,
     knitr,
-    rstudio
+    rstudioapi
 License: GPL (>= 2)

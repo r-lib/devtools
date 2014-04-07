@@ -28,12 +28,6 @@ ends_with_newline <- function(path) {
   lastByte == 0x0a
 }
 
-rstudio_has <- function(f = NULL) {
-  if (!("tools:rstudio" %in% search())) return(FALSE)
-
-  exists(as.character(f), asNamespace("rstudio"))
-}
-
 render_template <- function(name, data) {
   path <- system.file("templates", name, package = "devtools")
   template <- readLines(path)
