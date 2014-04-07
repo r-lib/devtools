@@ -1,10 +1,3 @@
-* devtools supplies its own version of `system.file` so that when the function
-  is called from the R console, it will have special behavior for packages
-  loaded with devtools.
-
-* devtools supplies its own version of `help` and `?`, which will search
-  devtools-loaded packages as well as normally-loaded packages.
-
 # devtools 1.5
 
 Four new functions make it easier to add useful infrastructure to packages:
@@ -51,6 +44,13 @@ Two dependencies were incremented:
 
 * `install_github()` now defaults to `dependencies = TRUE` so you definitely
   get all the packages you need to build from source.
+
+* devtools supplies its own version of `system.file()` so that when the function
+  is called from the R console, it will have special behavior for packages
+  loaded with devtools.
+
+* devtools supplies its own version of `help` and `?`, which will search
+  devtools-loaded packages as well as normally-loaded packages.
 
 ## Bug fixes
 
