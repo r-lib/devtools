@@ -19,8 +19,7 @@ archived source tarballs and tries to install an older version instead.}
 \item{repos}{
     character vector, the base URL(s) of the repositories
     to use, e.g., the URL of a CRAN mirror such as
-    \code{"http://cran.us.r-project.org"}.  For more details on
-    supported URL schemes see \code{\link{url}}.
+    \code{"http://cran.us.r-project.org"}.
 
     Can be \code{NULL} to install from local files
     (with extension \file{.tar.gz} for source packages).
@@ -29,9 +28,9 @@ archived source tarballs and tries to install an older version instead.}
 \item{type}{character, indicating the type of package to download and
     install.
 
-    Possible values are (currently) \code{"source"}, \code{"mac.binary"}
-    and \code{"win.binary"}: the binary types can be listed and
-    downloaded but not installed on other platforms.
+    Possible values are \code{"source"}, \code{"mac.binary.leopard"} and
+    \code{"win.binary"}: the binary types can be listed and downloaded
+    but not installed on other platforms.
 
     The default is the appropriate binary type on Windows and on the
     CRAN binary OS X distribution, otherwise \code{"source"}.  For
