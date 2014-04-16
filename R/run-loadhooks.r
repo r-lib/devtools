@@ -4,6 +4,7 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param hook hook name: one of "load", "unload", "attach", or "detach"
+#' @param lib location of the R library tree to search the package through.
 #' @keywords internal
 run_pkg_hook <- function(pkg, hook, lib=dirname(pkg$path)) {
   pkg <- as.package(pkg)
