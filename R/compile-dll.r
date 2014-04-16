@@ -33,7 +33,7 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
     args = if (needs_clean(pkg)) "--preclean",
     quiet = quiet)
 
-  dll_name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
+  #dll_name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
   #if (nchar(.Platform$r_arch))
   #  from <- file.path(inst, "libs", .Platform$r_arch, dll_name, )
   #else
@@ -42,7 +42,8 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
   #ok <- file.copy(from, to)
   #if (is.null(ok) || !ok) stop("file.copy(", from, ",", to, ") failed")
 
-  invisible(dll_path(pkg))
+  #invisible(dll_path(pkg))
+  invisible(inst)
 }
 
 #' Remove compiled objects from /src/ directory
