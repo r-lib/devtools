@@ -5,7 +5,7 @@
 #'   \code{\link{as.package}} for more information
 #' @param hook hook name: one of "load", "unload", "attach", or "detach"
 #' @keywords internal
-run_pkg_hook <- function(pkg, hook) {
+run_pkg_hook <- function(pkg, hook, lib=dirname(pkg$path)) {
   pkg <- as.package(pkg)
 
   trans <- c(
@@ -24,9 +24,9 @@ run_pkg_hook <- function(pkg, hook) {
   if (!exists(f_name, nsenv, inherits = FALSE)) return(FALSE)
 
   if (hook %in% c("load", "attach")) {
-    nsenv[[f_name]](dirname(pkg$path), pkg$package)
+    nsenv[[f_name]](lib, pkg$package)
   } else {
-    nsenv[[f_name]](dirname(pkg$path))
+    nsenv[[f_name]](lib)
   }
   metadata[[f_name]] <- TRUE
 
