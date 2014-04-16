@@ -1,3 +1,6 @@
+* `dependencies = TRUE` is not forced anymore in `install_github()` (regression
+  in 1.5)
+
 # devtools 1.5
 
 Four new functions make it easier to add useful infrastructure to packages:
