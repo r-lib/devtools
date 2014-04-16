@@ -6,7 +6,8 @@
 #' During compilation, debug flags are set with
 #' \code{\link{compiler_flags}(TRUE)}.
 #'
-#' Invisibly returns the names of the DLL.
+#' If recompiled, invisibly returns the temporary path where the package 
+#' was installed.
 #'
 #' @note If this is used to compile code that uses Rcpp, you will need to
 #'   add the following line to your \code{Makevars} file so that it
