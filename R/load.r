@@ -147,7 +147,7 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   out$dll <- load_dll(pkg)
 
   # Run namespace load hooks
-  run_pkg_hook(pkg, "load", lib=inst)
+  run_pkg_hook(pkg, "load", lib=dirname(inst))
   run_ns_load_actions(pkg)
   run_user_hook(pkg, "load")
 
