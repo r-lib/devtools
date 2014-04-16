@@ -34,13 +34,13 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
     quiet = quiet)
 
   dll_name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
-  if (nchar(.Platform$r_arch))
-    from <- file.path(inst, "libs", .Platform$r_arch, dll_name)
-  else
-    from <- file.path(inst, "libs", dll_name)
-  to <- dll_path(pkg)
-  ok <- file.copy(from, to)
-  if (is.null(ok) || !ok) stop("file.copy(", from, ",", to, ") failed")
+  #if (nchar(.Platform$r_arch))
+  #  from <- file.path(inst, "libs", .Platform$r_arch, dll_name, )
+  #else
+  #  from <- file.path(inst, "libs", dll_name)
+  #to <- dll_path(pkg)
+  #ok <- file.copy(from, to)
+  #if (is.null(ok) || !ok) stop("file.copy(", from, ",", to, ") failed")
 
   invisible(dll_path(pkg))
 }
