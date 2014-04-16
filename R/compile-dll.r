@@ -39,7 +39,7 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
   else
     from <- file.path(inst, "libs", dll_name)
   to <- dll_path(pkg)
-  ok <- file.copy(from, to, overwrite=TRUE)
+  ok <- file.copy(from, to)
   if (is.null(ok) || !ok) stop("file.copy(", from, ",", to, ") failed")
 
   invisible(dll_path(pkg))
