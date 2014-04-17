@@ -1,5 +1,5 @@
 * `dependencies = TRUE` is not forced anymore in `install_github()` (regression
-  in 1.5)
+  in 1.5) (@krlmlr, #462).
 
 # devtools 1.5
 
