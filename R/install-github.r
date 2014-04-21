@@ -56,7 +56,7 @@ install_github <- function(repo, username = getOption("github.user"),
 
   invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
     username, ref, pull, subdir, branch, auth_user, password, auth_token, ...,
-    dependencies = TRUE))
+    dependencies = dependencies))
 }
 
 github_get_conn <- function(repo, username = getOption("github.user"),
