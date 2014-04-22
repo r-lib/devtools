@@ -150,6 +150,11 @@ cran_env_vars <- function() {
     "_R_CHECK_DEPRECATED_DEFUNCT_"       = "TRUE",
     "_R_CHECK_REPLACING_IMPORTS_"        = "TRUE",
     "_R_CHECK_SCREEN_DEVICE_"            = "stop",
-    "_R_CHECK_TOPLEVEL_FILES_"           = "TRUE"
+    "_R_CHECK_TOPLEVEL_FILES_"           = "TRUE",
+    # The following are used for CRAN incoming checks according to the R
+    # internals doc, but they're not in the list at the bottom of the Tools
+    # section (have to look at the description of the individual env vars).
+    "_R_CHECK_RD_LINE_WIDTHS_"           = "TRUE",
+    "_R_CHECK_LIMIT_CORES_ "             = "TRUE"
   )
 }
