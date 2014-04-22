@@ -10,8 +10,6 @@ help(topic, package = NULL, ...)
 
 ?topic
 type?topic
-
-shim_question(e1, e2)
 }
 \arguments{
 \item{topic}{A name or character string specifying the help topic.}

@@ -88,10 +88,6 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 #' @usage
 #' help(topic, package = NULL, ...)
 #'
-#' ?topic
-#' type?topic
-#'
-#'
 #' @examples
 #' \dontrun{
 #' # This would load devtools and look at the help for load_all, if currently
@@ -143,6 +139,10 @@ shim_help <- function(topic, package = NULL, ...) {
 }
 
 
+#' @usage
+#' ?topic
+#' type?topic
+#'
 #' @rdname help
 #' @name ?
 shim_question <- function(e1, e2) {
