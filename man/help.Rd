@@ -2,11 +2,16 @@
 \name{help}
 \alias{?}
 \alias{help}
+\alias{shim_help}
+\alias{shim_question}
 \title{Drop-in replacements for help and ? functions}
 \usage{
 help(topic, package = NULL, ...)
 
-"?"(e1, e2)
+?topic
+type?topic
+
+shim_question(e1, e2)
 }
 \arguments{
 \item{topic}{A name or character string specifying the help topic.}

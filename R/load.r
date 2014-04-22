@@ -138,8 +138,8 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   # Load dependencies
   load_depends(pkg)
   load_imports(pkg)
-  # Add shim objects
-  insert_shims(pkg)
+  # Add shim objects to imports environment
+  insert_imports_shims(pkg)
 
   out$data <- load_data(pkg)
   out$code <- load_code(pkg)
@@ -165,6 +165,9 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   # Run hooks
   run_pkg_hook(pkg, "attach")
   run_user_hook(pkg, "attach")
+
+  # Replace help and ? in utils package environment
+  insert_global_shims()
 
   invisible(out)
 }

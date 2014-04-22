@@ -81,7 +81,16 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 #' @param e1 First argument to pass along to \code{utils::`?`}.
 #' @param e2 Second argument to pass along to \code{utils::`?`}.
 #' @param ... Additional arguments to pass to \code{\link[utils]{help}}.
-#' @export
+#'
+#' @rdname help
+#' @name help
+#' @usage
+#' help(topic, package = NULL, ...)
+#'
+#' ?topic
+#' type?topic
+#'
+#'
 #' @examples
 #' \dontrun{
 #' # This would load devtools and look at the help for load_all, if currently
@@ -94,7 +103,7 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 #' # To see the help pages for utils::help and utils::`?`:
 #' help("help", "utils")
 #' help("?", "utils")
-help <- function(topic, package = NULL, ...) {
+shim_help <- function(topic, package = NULL, ...) {
   # Get string versions of topic and package
   if (is.name(substitute(topic))) {
     topic_str <- deparse(substitute(topic))
@@ -134,8 +143,8 @@ help <- function(topic, package = NULL, ...) {
 
 
 #' @rdname help
-#' @export
-`?` <- function(e1, e2) {
+#' @name ?
+shim_question <- function(e1, e2) {
   # Get string versions of e1 and e2
   if (is.name(substitute(e1))) {
     e1_str <- deparse(substitute(e1))
