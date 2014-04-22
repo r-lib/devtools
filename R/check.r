@@ -155,6 +155,6 @@ cran_env_vars <- function() {
     # internals doc, but they're not in the list at the bottom of the Tools
     # section (have to look at the description of the individual env vars).
     "_R_CHECK_RD_LINE_WIDTHS_"           = "TRUE",
-    "_R_CHECK_LIMIT_CORES_ "             = "TRUE"
+    "_R_CHECK_LIMIT_CORES_"              = "TRUE"
   )
 }
