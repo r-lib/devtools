@@ -18,10 +18,6 @@ insert_global_shims <- function() {
   e$`?` <- shim_question
   e$system.file <- shim_system.file
 
-  lockBinding("help", e)
-  lockBinding("?", e)
-  lockBinding("system.file", e)
-
   attach(e, 2L, name = "devtools_shims")
 }
 
