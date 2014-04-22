@@ -61,8 +61,9 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 
 #' Drop-in replacements for help and ? functions
 #'
-#' The \code{?} and \code{help} are drop-in replacements for functions of the
-#' same name in the utils package.
+#' The \code{?} and \code{help} functions are replacements for functions of the
+#' same name in the utils package. They are made available when a package is
+#' loaded with \code{\link{load_all}}.
 #'
 #' The \code{?} function is a replacement for \code{\link[utils]{?}} from the
 #' utils package. It will search for help in devtools-loaded packages first,

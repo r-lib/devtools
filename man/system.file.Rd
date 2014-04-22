@@ -22,7 +22,8 @@ system.file(..., package = "base", lib.loc = NULL, mustWork = FALSE)
 }
 \description{
 This function is meant to intercept calls to \code{\link[base]{system.file}},
-so that it behaves well with packages loaded by devtools.
+so that it behaves well with packages loaded by devtools. It is made
+available when a package is loaded with \code{\link{load_all}}.
 }
 \details{
 When \code{system.file} is called from the R console (the global

@@ -28,7 +28,8 @@ insert_global_shims <- function() {
 #' Replacement version of system.file
 #'
 #' This function is meant to intercept calls to \code{\link[base]{system.file}},
-#' so that it behaves well with packages loaded by devtools.
+#' so that it behaves well with packages loaded by devtools. It is made
+#' available when a package is loaded with \code{\link{load_all}}.
 #'
 #' When \code{system.file} is called from the R console (the global
 #' envrironment), this function detects if the target package was loaded with
