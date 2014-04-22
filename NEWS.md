@@ -1,3 +1,6 @@
+* `help()`, `?`, and `system.file()` are now made available when a pacakge is
+  loaded with `load_all()`, even if the devtools package isn't attached.
+
 * `dependencies = TRUE` is not forced anymore in `install_github()` (regression
   in 1.5) (@krlmlr, #462).
 

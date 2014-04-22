@@ -61,8 +61,9 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 
 #' Drop-in replacements for help and ? functions
 #'
-#' The \code{?} and \code{help} are drop-in replacements for functions of the
-#' same name in the utils package.
+#' The \code{?} and \code{help} functions are replacements for functions of the
+#' same name in the utils package. They are made available when a package is
+#' loaded with \code{\link{load_all}}.
 #'
 #' The \code{?} function is a replacement for \code{\link[utils]{?}} from the
 #' utils package. It will search for help in devtools-loaded packages first,
@@ -81,7 +82,12 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 #' @param e1 First argument to pass along to \code{utils::`?`}.
 #' @param e2 Second argument to pass along to \code{utils::`?`}.
 #' @param ... Additional arguments to pass to \code{\link[utils]{help}}.
-#' @export
+#'
+#' @rdname help
+#' @name help
+#' @usage
+#' help(topic, package = NULL, ...)
+#'
 #' @examples
 #' \dontrun{
 #' # This would load devtools and look at the help for load_all, if currently
@@ -94,7 +100,7 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 #' # To see the help pages for utils::help and utils::`?`:
 #' help("help", "utils")
 #' help("?", "utils")
-help <- function(topic, package = NULL, ...) {
+shim_help <- function(topic, package = NULL, ...) {
   # Get string versions of topic and package
   if (is.name(substitute(topic))) {
     topic_str <- deparse(substitute(topic))
@@ -133,9 +139,13 @@ help <- function(topic, package = NULL, ...) {
 }
 
 
+#' @usage
+#' ?topic
+#' type?topic
+#'
 #' @rdname help
-#' @export
-`?` <- function(e1, e2) {
+#' @name ?
+shim_question <- function(e1, e2) {
   # Get string versions of e1 and e2
   if (is.name(substitute(e1))) {
     e1_str <- deparse(substitute(e1))

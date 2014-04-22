@@ -2,11 +2,14 @@
 \name{help}
 \alias{?}
 \alias{help}
+\alias{shim_help}
+\alias{shim_question}
 \title{Drop-in replacements for help and ? functions}
 \usage{
 help(topic, package = NULL, ...)
 
-"?"(e1, e2)
+?topic
+type?topic
 }
 \arguments{
 \item{topic}{A name or character string specifying the help topic.}
@@ -21,8 +24,9 @@ to search for the help topic. If NULL, seach all packages.}
 \item{...}{Additional arguments to pass to \code{\link[utils]{help}}.}
 }
 \description{
-The \code{?} and \code{help} are drop-in replacements for functions of the
-same name in the utils package.
+The \code{?} and \code{help} functions are replacements for functions of the
+same name in the utils package. They are made available when a package is
+loaded with \code{\link{load_all}}.
 }
 \details{
 The \code{?} function is a replacement for \code{\link[utils]{?}} from the

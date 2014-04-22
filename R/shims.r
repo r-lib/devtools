@@ -1,16 +1,31 @@
 # Insert shim objects into a package's imports environment
 #
 # @param pkg A path or package object
-insert_shims <- function(pkg = ".") {
+insert_imports_shims <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  assign("system.file", system.file, pos = imports_env(pkg))
+  assign("system.file", shim_system.file, pos = imports_env(pkg))
 }
 
+# Create a new environment as the parent of global, with devtools versions of
+# help, ?, and system.file.
+insert_global_shims <- function() {
+  # If shims already present, just return
+  if ("devtools_shims" %in% search()) return()
+
+  e <- new.env()
+
+  e$help <- shim_help
+  e$`?` <- shim_question
+  e$system.file <- shim_system.file
+
+  attach(e, 2L, name = "devtools_shims")
+}
 
 #' Replacement version of system.file
 #'
 #' This function is meant to intercept calls to \code{\link[base]{system.file}},
-#' so that it behaves well with packages loaded by devtools.
+#' so that it behaves well with packages loaded by devtools. It is made
+#' available when a package is loaded with \code{\link{load_all}}.
 #'
 #' When \code{system.file} is called from the R console (the global
 #' envrironment), this function detects if the target package was loaded with
@@ -24,9 +39,12 @@ insert_shims <- function(pkg = ".") {
 #' function were not inserted into the imports environment, then the package
 #' would end up calling \code{base::system.file} instead.
 #' @inheritParams base::system.file
-#' @export
-system.file <- function(..., package = "base", lib.loc = NULL,
-                        mustWork = FALSE) {
+#'
+#' @rdname system.file
+#' @name system.file
+#' @usage system.file(..., package = "base", lib.loc = NULL, mustWork = FALSE)
+shim_system.file <- function(..., package = "base", lib.loc = NULL,
+                             mustWork = FALSE) {
 
   # If package wasn't loaded with devtools, pass through to base::system.file.
   # If package was loaded with devtools (the package loaded with load_all)
