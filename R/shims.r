@@ -18,7 +18,7 @@ insert_global_shims <- function() {
   e$`?` <- shim_question
   e$system.file <- shim_system.file
 
-  attach(e, 2L, name = "devtools_shims")
+  attach(e, name = "devtools_shims")
 }
 
 #' Replacement version of system.file
