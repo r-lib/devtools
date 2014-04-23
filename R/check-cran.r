@@ -20,6 +20,9 @@
 #' @param threads number of concurrent threads to use for checking.
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
 #' @param check_dir the directory in which the package is checked
+#' @param revdep_pkg Optional name of a package for which this check is
+#'   checking the reverse dependencies of. This is normally passed in from
+#'   \code{\link{revdep_check}}, and is used only for logging.
 #' @return invisible \code{TRUE} if successful and no ERRORs or WARNINGS,
 #' @importFrom tools package_dependencies
 #' @importFrom parallel mclapply
@@ -33,7 +36,9 @@
 #' }
 check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   srcpath = libpath, bioconductor = FALSE, type = getOption("pkgType"),
-  threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran")) {
+  threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"),
+  revdep_pkg = NULL) {
+
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
 
@@ -145,7 +150,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   }
 
   # Collect the output
-  collect_check_results(check_dir)
+  collect_check_results(check_dir, revdep_pkg)
 
   invisible(results)
 }
@@ -166,7 +171,7 @@ parse_check_results <- function(path) {
 
 # Collects all the results from running check_cran and puts in a
 # directory results/ under the top level tempdir.
-collect_check_results <- function(topdir) {
+collect_check_results <- function(topdir, revdep_pkg) {
   # Directory for storing results
   rdir <- file.path(topdir, "results")
   if (dir.exists(rdir)) {
@@ -217,6 +222,17 @@ collect_check_results <- function(topdir) {
   on.exit(close(summary_out))
 
   sink(summary_out)
+  if (!is.null(revdep_pkg)) {
+    sha <- packageDescription(revdep_pkg)$GithubSHA1
+    if (!is.null(sha)) sha <- paste0("Commit ", sha, "\n")
+
+    cat("=========================================================================\n",
+        "Reverse dependency check for ", revdep_pkg, " ",
+        as.character(packageVersion(revdep_pkg)), "\n",
+        sha,
+        "=========================================================================\n",
+        sep = "")
+  }
   print(sessionInfo())
   cat("\n")
   sink()

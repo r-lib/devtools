@@ -5,7 +5,8 @@
 \usage{
 check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath,
   bioconductor = FALSE, type = getOption("pkgType"),
-  threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"))
+  threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"),
+  revdep_pkg = NULL)
 }
 \arguments{
 \item{pkgs}{Vector of package names - note that unlike other \pkg{devtools}
@@ -27,6 +28,10 @@ redownload the packages every time you run the package.}
 It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 
 \item{check_dir}{the directory in which the package is checked}
+
+\item{revdep_pkg}{Optional name of a package for which this check is
+checking the reverse dependencies of. This is normally passed in from
+\code{\link{revdep_check}}, and is used only for logging.}
 }
 \value{
 invisible \code{TRUE} if successful and no ERRORs or WARNINGS,
