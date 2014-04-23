@@ -85,8 +85,7 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 #'
 #' @rdname help
 #' @name help
-#' @usage
-#' help(topic, package = NULL, ...)
+#' @usage # help(topic, package = NULL, ...)
 #'
 #' @examples
 #' \dontrun{
@@ -140,8 +139,8 @@ shim_help <- function(topic, package = NULL, ...) {
 
 
 #' @usage
-#' ?topic
-#' type?topic
+#' # ?e2
+#' # e1?e2
 #'
 #' @rdname help
 #' @name ?

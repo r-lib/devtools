@@ -40,6 +40,7 @@ insert_global_shims <- function() {
 #' would end up calling \code{base::system.file} instead.
 #' @inheritParams base::system.file
 #'
+#' @usage # system.file(..., package = "base", lib.loc = NULL, mustWork = FALSE)
 #' @rdname system.file
 #' @name system.file
 #' @usage system.file(..., package = "base", lib.loc = NULL, mustWork = FALSE)

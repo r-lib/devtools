@@ -6,10 +6,10 @@
 \alias{shim_question}
 \title{Drop-in replacements for help and ? functions}
 \usage{
-help(topic, package = NULL, ...)
+# help(topic, package = NULL, ...)
 
-?topic
-type?topic
+# ?e2
+# e1?e2
 }
 \arguments{
 \item{topic}{A name or character string specifying the help topic.}
