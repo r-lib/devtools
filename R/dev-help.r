@@ -146,8 +146,10 @@ shim_help <- function(topic, package = NULL, ...) {
 #' @name ?
 shim_question <- function(e1, e2) {
   # Get string versions of e1 and e2
-  if (is.name(substitute(e1))) {
-    e1_str <- deparse(substitute(e1))
+  e1_expr <- substitute(e1)
+  # If it's a bare symbol, or if called with double question mark, like ??foo
+  if (is.name(e1_expr) || (is.call(e1_expr) && e1_expr[[1]] == "?")) {
+    e1_str <- deparse(e1_expr)
   } else {
     e1_str <- e1
   }
