@@ -20,6 +20,7 @@ test_that("shim_help behaves the same as utils::help for nonexistent objects", {
 
 test_that("shim_question behaves the same as utils::? for non-devtools-loaded packages", {
   expect_identical(shim_question(lm)[1], utils::`?`(lm)[1])
+  expect_identical(shim_question(lm(123))[1], utils::`?`(lm(123))[1])
   expect_identical(shim_question(`lm`)[1], utils::`?`(`lm`)[1])
   expect_identical(shim_question('lm')[1], utils::`?`('lm')[1])
 })
@@ -28,6 +29,10 @@ test_that("shim_question behaves the same as utils::? for nonexistent objects", 
   expect_equal(length(shim_question(foofoo)), 0)
   expect_equal(length(shim_question(`foofoo`)), 0)
   expect_equal(length(shim_question("foofoo")), 0)
+
+  # If given a function call with nonexistent function, error
+  expect_error(utils::`?`(foofoo(123)))
+  expect_error(shim_question(foofoo(123)))
 })
 
 

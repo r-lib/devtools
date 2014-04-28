@@ -145,19 +145,24 @@ shim_help <- function(topic, package = NULL, ...) {
 #' @rdname help
 #' @name ?
 shim_question <- function(e1, e2) {
-  # Get string versions of e1 and e2
+  # Get string version of e1, for find_topic
   e1_expr <- substitute(e1)
-  # If it's a bare symbol, or if called with double question mark, like ??foo
-  if (is.name(e1_expr) || (is.call(e1_expr) && e1_expr[[1]] == "?")) {
+  if (is.name(e1_expr)) {
+    # Called with a bare symbol, like ?foo
     e1_str <- deparse(e1_expr)
-  } else {
-    e1_str <- e1
-  }
 
-  if (is.name(substitute(e2))) {
-    e2_str <- deparse(substitute(e2))
+  } else if (is.call(e1_expr)) {
+    if (e1_expr[[1]] == "?") {
+      # Double question mark, like ??foo
+      e1_str <- NULL
+    } else {
+      # Called with function arguments, like ?foo(12)
+      e1_str <- deparse(e1_expr[[1]])
+    }
+
   } else {
-    e2_str <- e2
+    # If we got here, it's probably a string
+    e1_str <- e1
   }
 
   # Search for the topic in devtools-loaded packages.

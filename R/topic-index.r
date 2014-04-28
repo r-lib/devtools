@@ -22,6 +22,8 @@ find_pkg_topic <- function(pkg = ".", topic) {
 
 # @return complete path to man file, with name giving path to package.
 find_topic <- function(topic) {
+  if (is.null(topic) || topic == "") return(NULL)
+
   pieces <- strsplit(topic, "::")[[1]]
   if (length(pieces) == 1) {
     pkgs <- dev_packages()
