@@ -108,7 +108,8 @@ release <- function(pkg = ".", check = TRUE) {
   body <- release_email(pkg$package, new_pkg)
   subject <- paste("CRAN submission ", pkg$package, " ", pkg$version, sep = "")
   email("cran@r-project.org", subject, body)
-
+  message("Remember to send the email as plain text ASCII and not HTML.")
+  
   if (file.exists(file.path(pkg$path, ".git"))) {
     message("Don't forget to tag the release when the package is accepted!")
   }
