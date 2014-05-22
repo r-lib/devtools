@@ -1,14 +1,21 @@
-#' Add test skeleton.
+#' Add useful infrastructure to a package.
 #'
+#'
+#' @param pkg package description, can be path or package name. See
+#'   \code{\link{as.package}} for more information.
+#' @name infrastructure
+#' @aliases add_test_infrastructure
+#' @aliases add_rstudio_project
+NULL
+
+#' @section \code{use_testthat}:
 #' Add testing infrastructure to a package that does not already have it.
 #' This will create \file{tests/testthat.R}, \file{tests/testthat/} and
 #' add \pkg{testthat} to the suggested packages. This is called
 #' automatically from \code{\link{test}} if needed.
-#'
-#' @param pkg package description, can be path or package name. See
-#'   \code{\link{as.package}} for more information.
+#' @rdname infrastructure
 #' @export
-add_test_infrastructure <- function(pkg = ".") {
+use_testthat <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   check_testthat()
@@ -27,15 +34,15 @@ add_test_infrastructure <- function(pkg = ".") {
   invisible(TRUE)
 }
 
-#' Add Rstudio project to a package.
-#'
+#' @export
+add_test_infrastructure <- use_testthat
+
+#' @section \code{use_rstudio}:
 #' Does not modify \code{.Rbuildignore} as Rstudio will do that when
 #' opened for the first time.
-#'
-#' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
 #' @export
-add_rstudio_project <- function(pkg = ".") {
+#' @rdname infrastructure
+use_rstudio <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   path <- file.path(pkg$path, paste0(pkg$package, ".Rproj"))
@@ -52,7 +59,8 @@ add_rstudio_project <- function(pkg = ".") {
   invisible(TRUE)
 }
 
-
+#' @export
+add_rstudio_project <- use_rstudio
 
 add_suggested_package <- function(path, name) {
   desc <- as.list(read.dcf(path)[1, ])

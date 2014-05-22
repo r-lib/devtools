@@ -44,7 +44,7 @@ create <- function(path, description = getOption("devtools.desc"),
   create_namespace(path)
   create_package_doc(path, name)
 
-  if (rstudio) add_rstudio_project(path)
+  if (rstudio) use_rstudio(path)
 
   if (check) check(path)
   invisible(TRUE)
