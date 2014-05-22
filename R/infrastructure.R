@@ -79,6 +79,24 @@ use_knitr <- function(pkg = ".") {
   )
 }
 
+#' @section \code{use_rcpp}:
+#' Creates \code{src/} and adds needed packages to \code{DESCRIPTION}.
+#' @export
+#' @rdname infrastructure
+use_rcpp <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  add_desc_package(pkg, "LinkingTo", "Rcpp")
+  add_desc_package(pkg, "Imports", "Rcpp")
+  dir.create(file.path(pkg$path, "src"), showWarnings = FALSE)
+
+  message(
+    "Include the following roxygen tags somewhere in your package:\n",
+    "#' @useDynLib mypackage\n",
+    "#' @importFrom Rcpp sourceCpp"
+  )
+}
+
 #' @export
 add_rstudio_project <- use_rstudio
 

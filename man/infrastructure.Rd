@@ -3,6 +3,7 @@
 \alias{add_test_infrastructure}
 \alias{infrastructure}
 \alias{use_knitr}
+\alias{use_rcpp}
 \alias{use_rstudio}
 \alias{use_testthat}
 \title{Add useful infrastructure to a package.}
@@ -12,6 +13,8 @@ use_testthat(pkg = ".")
 use_rstudio(pkg = ".")
 
 use_knitr(pkg = ".")
+
+use_rcpp(pkg = ".")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -37,5 +40,10 @@ opened for the first time.
 \section{\code{use_knitr}}{
 
 Creates \code{vignettes/} and adds needed packages to \code{DESCRIPTION}.
+}
+
+\section{\code{use_rcpp}}{
+
+Creates \code{src/} and adds needed packages to \code{DESCRIPTION}.
 }
 

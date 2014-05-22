@@ -1,3 +1,5 @@
+* New `use_rcpp()` sets up a package to use Rcpp.
+
 * New `use_knitr()` sets up a package to use knitr for vignettes.
 
 * Wrote own version of `write.dcf()` that doesn't butcher whitespace and 
