@@ -94,58 +94,9 @@ uses_testthat <- function(pkg = ".") {
   any(dir.exists(paths))
 }
 
-#' Add test skeleton.
-#'
-#' Add testing infrastructure to a package that does not already have it.
-#' This will create \file{tests/testthat.R}, \file{tests/testthat/} and
-#' add \pkg{testthat} to the suggested packages. This is called
-#' automatically from \code{\link{test}} if needed.
-#'
-#' @param pkg package description, can be path or package name. See
-#'   \code{\link{as.package}} for more information.
-#' @export
-add_test_infrastructure <- function(pkg = ".") {
-  pkg <- as.package(pkg)
-
-  check_testthat()
-  if (uses_testthat(pkg)) {
-    stop("Package already has testing infrastructure", call. = FALSE)
-  }
-
-  # Create tests/testthat and install file for R CMD CHECK
-  dir.create(file.path(pkg$path, "tests", "testthat"),
-    showWarnings = FALSE, recursive = TRUE)
-  writeLines(render_template("testthat.R", list(name = pkg$package)),
-    file.path(pkg$path, "tests", "testthat.R"))
-
-  add_suggested_package(file.path(pkg$path, "DESCRIPTION"), "testthat")
-
-  invisible(TRUE)
-}
 
 check_testthat <- function() {
   if (!require("testthat")) {
     stop("Please install testthat", call. = FALSE)
   }
-}
-
-add_suggested_package <- function(path, name) {
-  desc <- as.list(read.dcf(path)[1, ])
-  suggests <- desc$Suggests
-  if (is.null(suggests)) {
-    suggests <- name
-    changed <- TRUE
-  } else {
-    if (!grepl(name, suggests)) {
-      suggests <- paste0(suggests, ",\n  ", name)
-      changed <- TRUE
-    } else {
-      changed <- FALSE
-    }
-  }
-  if (changed) {
-    desc$Suggests <- suggests
-    write.dcf(desc, path, keep.white = names(desc))
-  }
-  invisible(changed)
 }
