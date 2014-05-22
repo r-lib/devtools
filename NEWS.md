@@ -1,3 +1,6 @@
+* `create()` now makes a dummy namespace so that you can build & reload
+  without running `document()` first.
+
 * `help()`, `?`, and `system.file()` are now made available when a pacakge is
   loaded with `load_all()`, even if the devtools package isn't attached.
 

@@ -41,6 +41,7 @@ create <- function(path, description = getOption("devtools.desc"),
   dir.create(file.path(path, "R"))
   dir.create(file.path(path, "man"))
   create_description(path, extra = description)
+  create_namespace(path)
   create_package_doc(path, name)
 
   if (rstudio) add_rstudio_project(path)
@@ -55,4 +56,9 @@ create_package_doc <- function(path, name) {
 
   target <- file.path(path, "R", paste(name, "-package.r", sep = ""))
   writeLines(out, target)
+}
+
+create_namespace <- function(path) {
+  ns_path <- file.path(path, "NAMESPACE")
+  cat('exportPattern("^[^\\\\.]")\n', file = ns_path)
 }
