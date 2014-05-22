@@ -37,3 +37,18 @@ render_template <- function(name, data) {
 is_installed <- function(pkg, version = 0) {
   system.file(package = pkg) != "" && packageVersion(pkg) > version
 }
+
+read_dcf <- function(path) {
+  fields <- colnames(read.dcf(path))
+  as.list(read.dcf(path, keep.white = fields)[1, ])
+}
+
+write_dcf <- function(path, desc) {
+  text <- paste0(names(desc), ": ", desc, collapse = "\n")
+
+  if (substr(text, nchar(text), 1) != "\n") {
+    text <- paste0(text, "\n")
+  }
+
+  cat(text, file = path)
+}

@@ -29,7 +29,7 @@ use_testthat <- function(pkg = ".") {
   writeLines(render_template("testthat.R", list(name = pkg$package)),
     file.path(pkg$path, "tests", "testthat.R"))
 
-  add_suggested_package(file.path(pkg$path, "DESCRIPTION"), "testthat")
+  add_desc_package(file.path(pkg$path, "DESCRIPTION"), "Suggests", "testthat")
 
   invisible(TRUE)
 }
@@ -62,23 +62,23 @@ use_rstudio <- function(pkg = ".") {
 #' @export
 add_rstudio_project <- use_rstudio
 
-add_suggested_package <- function(path, name) {
-  desc <- as.list(read.dcf(path)[1, ])
-  suggests <- desc$Suggests
-  if (is.null(suggests)) {
-    suggests <- name
+add_desc_package <- function(path, field, name) {
+  desc <- read_dcf(path)
+  old <- desc[[field]]
+  if (is.null(old)) {
+    new <- name
     changed <- TRUE
   } else {
-    if (!grepl(name, suggests)) {
-      suggests <- paste0(suggests, ",\n  ", name)
+    if (!grepl(name, old)) {
+      new <- paste0(old, ",\n    ", name)
       changed <- TRUE
     } else {
       changed <- FALSE
     }
   }
   if (changed) {
-    desc$Suggests <- suggests
-    write.dcf(desc, path, keep.white = names(desc))
+    desc[[field]] <- new
+    write_dcf(path, desc)
   }
   invisible(changed)
 }

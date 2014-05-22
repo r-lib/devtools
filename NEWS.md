@@ -1,3 +1,6 @@
+* Wrote own version of `write.dcf()` that doesn't butcher whitespace and 
+  fieldnames.
+
 * rename `add_rstudio_project()` to `use_rstudio()` and 
   `add_test_infrastructure()` to `use_testthat()` (old functions aliased to new)
 
