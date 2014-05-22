@@ -2,6 +2,7 @@
 \name{infrastructure}
 \alias{add_test_infrastructure}
 \alias{infrastructure}
+\alias{use_knitr}
 \alias{use_rstudio}
 \alias{use_testthat}
 \title{Add useful infrastructure to a package.}
@@ -9,6 +10,8 @@
 use_testthat(pkg = ".")
 
 use_rstudio(pkg = ".")
+
+use_knitr(pkg = ".")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -29,5 +32,10 @@ automatically from \code{\link{test}} if needed.
 
 Does not modify \code{.Rbuildignore} as Rstudio will do that when
 opened for the first time.
+}
+
+\section{\code{use_knitr}}{
+
+Creates \code{vignettes/} and adds needed packages to \code{DESCRIPTION}.
 }
 

@@ -29,7 +29,7 @@ use_testthat <- function(pkg = ".") {
   writeLines(render_template("testthat.R", list(name = pkg$package)),
     file.path(pkg$path, "tests", "testthat.R"))
 
-  add_desc_package(file.path(pkg$path, "DESCRIPTION"), "Suggests", "testthat")
+  add_desc_package(pkg, "Suggests", "testthat")
 
   invisible(TRUE)
 }
@@ -59,11 +59,34 @@ use_rstudio <- function(pkg = ".") {
   invisible(TRUE)
 }
 
+#' @section \code{use_knitr}:
+#' Creates \code{vignettes/} and adds needed packages to \code{DESCRIPTION}.
+#' @export
+#' @rdname infrastructure
+use_knitr <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  add_desc_package(pkg, "Suggests", "knitr")
+  add_desc_package(pkg, "VignetteBuilder", "knitr")
+  dir.create(file.path(pkg$path, "vignettes"), showWarnings = FALSE)
+
+  message(
+    "Put .Rmd in vignettes/. Each must include:\n",
+    "<!-- \n",
+    "%\\VignetteEngine{knitr}\n",
+    "%\\VignetteIndexEntry{Vignette title}\n",
+    "-->\n"
+  )
+}
+
 #' @export
 add_rstudio_project <- use_rstudio
 
-add_desc_package <- function(path, field, name) {
-  desc <- read_dcf(path)
+add_desc_package <- function(pkg = ".", field, name) {
+  pkg <- as.package(".")
+  desc_path <- file.path(pkg$path, "DESCRIPTION")
+
+  desc <- read_dcf(desc_path)
   old <- desc[[field]]
   if (is.null(old)) {
     new <- name
@@ -78,7 +101,7 @@ add_desc_package <- function(path, field, name) {
   }
   if (changed) {
     desc[[field]] <- new
-    write_dcf(path, desc)
+    write_dcf(desc_path, desc)
   }
   invisible(changed)
 }
