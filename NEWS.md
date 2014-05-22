@@ -1,3 +1,6 @@
+* `create()` no longer generates `man/` directory - roxygen2 now does
+  this automatically.
+
 * New `use_rcpp()` sets up a package to use Rcpp.
 
 * New `use_knitr()` sets up a package to use knitr for vignettes.

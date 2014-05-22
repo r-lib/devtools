@@ -39,7 +39,6 @@ create <- function(path, description = getOption("devtools.desc"),
 
   dir.create(path)
   dir.create(file.path(path, "R"))
-  dir.create(file.path(path, "man"))
   create_description(path, extra = description)
   create_namespace(path)
   create_package_doc(path, name)
