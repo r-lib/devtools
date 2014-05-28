@@ -60,6 +60,21 @@ find_code <- function(pkg = ".") {
 
     r_files <- union(collate, r_files)
   }
+  
+  ## are any of these in .Rbuildignore?
+  path <- file.path(pkg$path, ".Rbuildignore")
+  if (file.exists(path)) {
+    ignore <- readLines(path, warn = FALSE)
+    ignore <- sub("^\\^","",ignore) # allow partial matching
+    drop <- logical(length(r_files))
+    for(ignore.file in ignore) {
+      m <- grep(ignore.file, r_files)
+      if(length(m))
+        drop[m] <- TRUE
+    }
+    r_files <- r_files[ !drop ]
+  }
+  
   r_files
 }
 
