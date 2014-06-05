@@ -75,6 +75,7 @@ build_topic_index <- function(pkg = ".") {
 }
 
 invert <- function(L) {
+  if (length(L) == 0) return(L)
   t1 <- unlist(L)
   names(t1) <- rep(names(L), lapply(L, length))
   tapply(names(t1), t1, c)
