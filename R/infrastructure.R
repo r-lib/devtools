@@ -73,7 +73,7 @@ use_knitr <- function(pkg = ".") {
   message(
     "Put .Rmd in vignettes/. Each must include:\n",
     "<!-- \n",
-    "%\\VignetteEngine{knitr}\n",
+    "%\\VignetteEngine{knitr::knitr}\n",
     "%\\VignetteIndexEntry{Vignette title}\n",
     "-->\n"
   )
