@@ -8,25 +8,34 @@ The aim of `devtools` is to make your life as a package developer easier by prov
 
 ## Updating to the latest version of devtools
 
-You can track (and contribute to) development of `devtools` at https://github.com/hadley/devtools. First, install `devtools` from CRAN, then follow the instructions below depending on platform.
+You can track (and contribute to) development of `devtools` at https://github.com/hadley/devtools. To install it:
 
-On Mac and Linux, installing the latest version of devtools from Github is straightfoward:
+1. Install the release version of `devtools` from CRAN with `install.packages("devtools")`.
 
-```
-devtools::install_github("devtools")
-```
+2. Make sure you have a working development environment.
+    * **Windows**: Install [Rtools](http://cran.r-project.org/bin/windows/Rtools/).
+    * **Mac**: Install Xcode from the Mac App Store.
+    * **Linux**: Install a compiler and various development libraries (details vary across differnet flavors of Linux).
 
-On Windows, you can do the following (requires devtools 1.4 or later):
+3. Follow the instructions below depending on platform.
 
-```
-devtools::build_github_devtools()
+    * **Mac and Linux**:
 
-#### Restart R before continuing ####
-install.packages("devtools.zip", repos = NULL)
+        ```R
+        devtools::install_github("devtools")
+        ```
 
-# Remove the package after installation
-unlink("devtools.zip")
-```
+    * **Windows**:
+
+        ```R
+        devtools::build_github_devtools()
+
+        #### Restart R before continuing ####
+        install.packages("devtools.zip", repos = NULL)
+
+        # Remove the package after installation
+        unlink("devtools.zip")
+        ```
 
 
 ## Package development tools
