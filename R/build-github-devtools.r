@@ -7,10 +7,13 @@
 #' function allows you to build a binary package of the development version of
 #' devtools; then you can restart R (so that devtools isn't loaded) and install
 #' the package.
-#' 
+#'
 #' Mac and Linux users don't need this function; they can use
 #' \code{\link{install_github}} to install devtools directly, without going
 #' through the separate build-restart-install steps.
+#'
+#' This function requires a working development environment. On Windows, it
+#' needs \url{http://cran.r-project.org/bin/windows/Rtools/}.
 #'
 #' @param outfile The name of the output file. If NULL (the default), it uses
 #'   ./devtools.tgz (Mac and Linux), or ./devtools.zip (Windows).
@@ -29,6 +32,10 @@
 #' }
 #' @export
 build_github_devtools <- function(outfile = NULL) {
+  if (!has_devel()) {
+    stop("This requires a working development environment.")
+  }
+
   ext <- if (.Platform$OS.type == "windows") "zip" else "tgz"
   outfile <- paste0("./devtools.", ext)
 
