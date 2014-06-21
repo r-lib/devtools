@@ -38,7 +38,7 @@ use_testthat <- function(pkg = ".") {
 add_test_infrastructure <- use_testthat
 
 #' @section \code{use_rstudio}:
-#' Does not modify \code{.Rbuildignore} as Rstudio will do that when
+#' Does not modify \code{.Rbuildignore} as RStudio will do that when
 #' opened for the first time.
 #' @export
 #' @rdname infrastructure
@@ -49,7 +49,7 @@ use_rstudio <- function(pkg = ".") {
   if (file.exists(path)) {
     stop(pkg$package, ".Rproj already exists", call. = FALSE)
   }
-  message("Adding Rstudio project file to ", pkg$package)
+  message("Adding RStudio project file to ", pkg$package)
 
   template_path <- system.file("templates/template.Rproj", package = "devtools")
   file.copy(template_path, path)

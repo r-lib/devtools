@@ -33,7 +33,7 @@ automatically from \code{\link{test}} if needed.
 
 \section{\code{use_rstudio}}{
 
-Does not modify \code{.Rbuildignore} as Rstudio will do that when
+Does not modify \code{.Rbuildignore} as RStudio will do that when
 opened for the first time.
 }
 
