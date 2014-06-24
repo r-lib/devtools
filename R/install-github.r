@@ -130,7 +130,7 @@ install_github_single <- function(repo, username = getOption("github.user"),
                                   ref = "master", pull = NULL, subdir = NULL,
                                   branch = NULL, auth_user = NULL,
                                   password = NULL, auth_token = NULL, 
-                                  repo_path="https://github.com/", ...) {
+                                  repo_path=NULL, ...) {
   conn <- github_get_conn(repo, username, ref, pull, subdir, branch,
     auth_user, password, auth_token, repo_path, ...)
   message(conn$msg)
