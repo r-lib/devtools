@@ -101,7 +101,7 @@ use_rcpp <- function(pkg = ".") {
 add_rstudio_project <- use_rstudio
 
 add_desc_package <- function(pkg = ".", field, name) {
-  pkg <- as.package(".")
+  pkg <- as.package(pkg)
   desc_path <- file.path(pkg$path, "DESCRIPTION")
 
   desc <- read_dcf(desc_path)
