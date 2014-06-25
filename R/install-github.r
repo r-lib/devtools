@@ -25,8 +25,8 @@
 #'   supply to this argument. This is safer than using a password because
 #'   you can easily delete a PAT without affecting any others. Defaults to
 #'   the \code{GITHUB_PAT} environment variable.
-#' @param repo_path -- defaults to "https://github.com/", but can be set 
-#'   to Enterprise GitHub SCM path.  
+#' @param github_url Defaults to "https://github.com/". You can set it 
+#'   to your custom Enterprise GitHub URL.  
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @param dependencies By default, installs all dependencies so that you can
 #'   build vignettes and use all functionality of the package.
@@ -54,19 +54,19 @@ install_github <- function(repo, username = getOption("github.user"),
                            ref = "master", pull = NULL, subdir = NULL,
                            branch = NULL, auth_user = NULL, password = NULL,
                            auth_token = github_pat(), 
-                           repo_path="https://github.com/", ...,
+                           github_url="https://github.com/", ...,
                            dependencies = TRUE) {
 
   invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
     username, ref, pull, subdir, branch, auth_user, password, 
-    auth_token, repo_path, ...,
+    auth_token, github_url, ...,
     dependencies = dependencies))
 }
 
 github_get_conn <- function(repo, username = getOption("github.user"),
                             ref = "master", pull = NULL, subdir = NULL,
                             branch = NULL, auth_user = NULL, password = NULL,
-                            auth_token = NULL, repo_path="https://github.com/", ...) {
+                            auth_token = NULL, github_url="https://github.com/", ...) {
 
   if (!is.null(branch)) {
     warning("'branch' is deprecated. In the future, please use 'ref' instead.")
@@ -116,7 +116,7 @@ github_get_conn <- function(repo, username = getOption("github.user"),
     " from ",
     paste(username, collapse = ", "))
 
-  url <- paste(repo_path, username, "/", repo,
+  url <- paste(github_url, username, "/", repo,
     "/archive/", ref, ".zip", sep = "")
 
   list(
@@ -130,9 +130,9 @@ install_github_single <- function(repo, username = getOption("github.user"),
                                   ref = "master", pull = NULL, subdir = NULL,
                                   branch = NULL, auth_user = NULL,
                                   password = NULL, auth_token = NULL, 
-                                  repo_path=NULL, ...) {
+                                  github_url=NULL, ...) {
   conn <- github_get_conn(repo, username, ref, pull, subdir, branch,
-    auth_user, password, auth_token, repo_path, ...)
+    auth_user, password, auth_token, github_url, ...)
   message(conn$msg)
 
   # define before_install function that captures the arguments to
