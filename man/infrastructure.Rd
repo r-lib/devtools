@@ -2,6 +2,7 @@
 \name{infrastructure}
 \alias{add_rstudio_project}
 \alias{add_test_infrastructure}
+\alias{add_travis}
 \alias{infrastructure}
 \alias{use_knitr}
 \alias{use_rcpp}
@@ -18,6 +19,8 @@ add_rstudio_project(pkg = ".")
 use_knitr(pkg = ".")
 
 use_rcpp(pkg = ".")
+
+add_travis(pkg = ".")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See

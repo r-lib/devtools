@@ -8,7 +8,8 @@
 * Wrote own version of `write.dcf()` that doesn't butcher whitespace and 
   fieldnames.
 
-* rename `add_rstudio_project()` to `use_rstudio()` and 
+* renamed `add_rstudio_project()` to `use_rstudio()`,
+  `add_travis()` to `use_travis()` and 
   `add_test_infrastructure()` to `use_testthat()` (old functions aliased to new)
 
 * `create()` now makes a dummy namespace so that you can build & reload
