@@ -23,7 +23,7 @@ Imports:
     digest
 Suggests:
     testthat (>= 0.7),
-    roxygen2 (>= 3.0.0),
+    roxygen2 (>= 4.0.0),
     BiocInstaller,
     Rcpp (>= 0.10.0),
     MASS,

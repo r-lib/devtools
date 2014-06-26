@@ -3,10 +3,9 @@
 \alias{check}
 \title{Build and check a package, cleaning up automatically on success.}
 \usage{
-check(pkg = ".", document = TRUE,
-  doc_clean = getOption("devtools.cleandoc"), cleanup = TRUE, cran = TRUE,
-  check_version = FALSE, force_suggests = TRUE, args = NULL,
-  build_args = NULL, quiet = FALSE, check_dir = tempdir())
+check(pkg = ".", document = TRUE, doc_clean = NULL, cleanup = TRUE,
+  cran = TRUE, check_version = FALSE, force_suggests = TRUE,
+  args = NULL, build_args = NULL, quiet = FALSE, check_dir = tempdir())
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -22,9 +21,7 @@ went wrong. If \code{FALSE} the check directory is never removed.}
 \item{cran}{if \code{TRUE} (the default), check using the same settings as
 CRAN uses.}
 
-\item{doc_clean}{If \code{TRUE}, will delete all files in the \code{man}
-directory and regenerate them from scratch with roxygen. The default is
-to use the value of the \code{"devtools.cleandoc"} option.}
+\item{doc_clean}{Deprecated.}
 
 \item{check_version}{if \code{TRUE}, check that the new version is greater
 than the current version on CRAN, by setting the

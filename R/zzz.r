@@ -15,10 +15,6 @@
 #'   \item \code{devtools.name}: your name, used when signing draft
 #'     emails.
 #'
-#'   \item \code{devtools.cleandoc}: a single logical value determining whether
-#'     the contents of the file{man/} directory are deleted by
-#'     \code{\link{check}}
-#'
 #'   \item \code{devtools.install.args}: a string giving extra arguments passed
 #'     to \code{R CMD install} by \code{\link{install}}.
 #'
@@ -45,7 +41,6 @@ NULL
   op <- options()
   op.devtools <- list(
     devtools.path = "~/R-dev",
-    devtools.cleandoc = FALSE,
     devtools.install.args = "",
     devtools.name = "Your name goes here",
     devtools.desc.author = '"First Last <first.last@example.com> [aut, cre]"',

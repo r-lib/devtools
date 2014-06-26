@@ -17,7 +17,7 @@
 #' }
 check_doc <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  document(pkg, reload = FALSE)
+  document(pkg)
 
   old <- options(warn = -1)
   on.exit(options(old))
