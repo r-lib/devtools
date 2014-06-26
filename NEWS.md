@@ -1,3 +1,7 @@
+# devtools 1.5.0.99
+
+## The release process
+
 * `release()` uses new CRAN submission process, as implemented by 
   `submit_cran()` (#430).
 
@@ -5,11 +9,7 @@
   `release_questions()` in your package. Your `release_questions()` should 
   return a character vector of questions to ask (#451). 
 
-* `rstudioapi` package moved from suggests to imports, since it's always 
-  needed (it's job is to figure out if rstudio is available, #458)
-
-* `loaded_packages()` now returns package name and path it was loaded from. 
-  (#486)
+## Tool templates and `create()`
 
 * `create()` no longer generates `man/` directory - roxygen2 now does
   this automatically.
@@ -28,11 +28,19 @@
 * `create()` now makes a dummy namespace so that you can build & reload
   without running `document()` first.
 
+## Other minor improvements and bug fixes
+
 * `help()`, `?`, and `system.file()` are now made available when a pacakge is
   loaded with `load_all()`, even if the devtools package isn't attached.
 
 * `dependencies = TRUE` is not forced anymore in `install_github()` (regression
   in 1.5) (@krlmlr, #462).
+
+* `loaded_packages()` now returns package name and path it was loaded from. 
+  (#486)
+
+* `rstudioapi` package moved from suggests to imports, since it's always 
+  needed (it's job is to figure out if rstudio is available, #458)
 
 # devtools 1.5
 
