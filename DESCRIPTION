@@ -12,7 +12,7 @@ Depends:
     R (>= 3.0.2)
 Roxygen: list(wrap = FALSE)
 Imports:
-    httr (>= 0.2),
+    httr (>= 0.3),
     RCurl,
     utils,
     tools,
