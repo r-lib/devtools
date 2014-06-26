@@ -30,6 +30,9 @@
 
 ## Other minor improvements and bug fixes
 
+* devtools no longer runs commands with `LC_ALL=C` - this no longer seems
+  to be necessary (#507).
+
 * `help()`, `?`, and `system.file()` are now made available when a pacakge is
   loaded with `load_all()`, even if the devtools package isn't attached.
 
