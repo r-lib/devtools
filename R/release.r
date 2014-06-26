@@ -80,9 +80,11 @@ release <- function(pkg = ".", check = TRUE) {
   if (yesno("Have you checked on win-builder (with build_win())?"))
     return(invisible())
 
-  try(print(show_news(pkg)))
-  if (yesno("Is package news up-to-date?"))
-    return(invisible())
+  if (file.exists("NEWS")) {
+    try(print(show_news(pkg)))
+    if (yesno("Is package news up-to-date?"))
+      return(invisible())
+  }
 
   cat(readLines(file.path(pkg$path, "DESCRIPTION")), sep = "\n")
   if (yesno("Is DESCRIPTION up-to-date?"))
