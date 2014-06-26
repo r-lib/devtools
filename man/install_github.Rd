@@ -4,24 +4,20 @@
 \title{Attempts to install a package directly from github.}
 \usage{
 install_github(repo, username = getOption("github.user"), ref = "master",
-  pull = NULL, subdir = NULL, auth_user = NULL, password = NULL,
+  subdir = NULL, auth_user = NULL, password = NULL,
   auth_token = github_pat(), ..., dependencies = TRUE)
 }
 \arguments{
 \item{repo}{Repository address in the format
 \code{[username/]repo[/subdir][@ref|#pull]}. Alternatively, you can
-specify \code{username}, \code{subdir}, \code{ref} or \code{pull} using the
+specify \code{username}, \code{subdir} and/or \code{ref} using the
 respective parameters (see below); if both is specified, the values in
 \code{repo} take precedence.}
 
 \item{username}{User name}
 
 \item{ref}{Desired git reference. Could be a commit, tag, or branch
-name. Defaults to \code{"master"}.}
-
-\item{pull}{Desired pull request. A pull request refers to a branch,
-so you can't specify both \code{ref} and \code{pull}; one of
-them must be \code{NULL}.}
+name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.}
 
 \item{subdir}{subdirectory within repo that contains the R package.}
 
@@ -66,6 +62,8 @@ install_github("hadley/private", auth_token = "abc")
 }
 }
 \seealso{
+\code{\link{github_pull}}
+
 Other package installation: \code{\link{install_bitbucket}};
   \code{\link{install_gitorious}};
   \code{\link{install_git}}; \code{\link{install_url}};
