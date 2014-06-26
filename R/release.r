@@ -84,7 +84,7 @@ release <- function(pkg = ".", check = TRUE) {
   if (yesno("Is DESCRIPTION up-to-date?"))
     return(invisible())
 
-  deps <- length(revdep(pkg$package))
+  deps <- if (new_pkg) 0 else length(revdep(pkg$package))
   if (deps > 0) {
     msg <- paste0("Have you checked the ", deps ," packages that depend on ",
       "this package (with check_cran())?")
@@ -109,7 +109,7 @@ release <- function(pkg = ".", check = TRUE) {
   subject <- paste("CRAN submission ", pkg$package, " ", pkg$version, sep = "")
   email("cran@r-project.org", subject, body)
   message("Remember to send the email as plain text ASCII and not HTML.")
-  
+
   if (file.exists(file.path(pkg$path, ".git"))) {
     message("Don't forget to tag the release when the package is accepted!")
   }
