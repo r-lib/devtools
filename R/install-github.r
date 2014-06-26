@@ -63,6 +63,34 @@ install_github <- function(repo, username = getOption("github.user"),
     dependencies = dependencies))
 }
 
+#' Convenience wrapper for \code{\link{install_github}}.
+#'
+#' This function allows you to install a package built
+#' with \code{devtools} from a repo with a custom URL.
+#'
+#' @export
+#' @family package installation
+#' @examples
+#' \dontrun{
+#' # To install from a private repo, use auth_token as described
+#' # at \code{\link{install_github}} and either set \code{github_url}
+#' # or let \code{\link{devtools_git_enterprise}} retrieve it from 
+#' # environment variable GITHUB_URL if it is set. 
+#' # Best practice is the latter.
+#' install_github_enterprise("username/packagename", github_url = "https://github.scm.xyz.com")
+#'
+#' }
+install_github_enterprise <- function(repo, username = getOption("github.user"),
+                           ref = "master", pull = NULL, subdir = NULL,
+                           branch = NULL, auth_user = NULL, password = NULL,
+                           auth_token = github_pat(), 
+                           github_url=devtools_git_enterprise(), ...,
+                           dependencies = TRUE) {
+    install_github(repo, username, ref, pull, subdir, branch, auth_user, password, 
+                     auth_token, github_url, ...,
+                     dependencies = dependencies))
+}
+
 github_get_conn <- function(repo, username = getOption("github.user"),
                             ref = "master", pull = NULL, subdir = NULL,
                             branch = NULL, auth_user = NULL, password = NULL,
@@ -233,6 +261,20 @@ github_parse_path <- function(path) {
   if (ret$invalid != "")
     stop(sprintf("Invalid GitHub path: %s", path))
   ret[sapply(ret, nchar) > 0]
+}
+
+#' Retrieve Enterprise Github URL.
+#'
+#' Looks in env var \code{GITHUB_URL}.
+#'
+#' @keywords internal
+#' @export
+devtools_git_enterprise <- function() {
+    url <- Sys.getenv('GITHUB_URL')
+    if (identical(url, "")) return(NULL)
+    
+    message("Using custom GitHub URL from envvar GITHUB_URL")
+    url
 }
 
 #' Retrieve Github personal access token.
