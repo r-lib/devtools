@@ -2,4 +2,4 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^NEWS.md$
-^rcmd-notes.md$
+^cran-notes\.md$
