@@ -4,6 +4,9 @@
 
 * `release()` uses new CRAN submission process, as implemented by 
   `submit_cran()` (#430).
+* `httr` 0.3 required (@krlmlr, #466).
+
+* `install_github()` uses GitHub API to download archive file (@krlmlr, #466).
 
 * You can add arbitrary extra questions to `release()` by defining a function 
   `release_questions()` in your package. Your `release_questions()` should 

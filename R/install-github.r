@@ -112,8 +112,8 @@ github_get_conn <- function(repo, username = getOption("github.user"),
     " from ",
     paste(username, collapse = ", "))
 
-  url <- paste("https://github.com/", username, "/", repo,
-    "/archive/", ref, ".zip", sep = "")
+  url <- paste("https://api.github.com", "repos", username, repo,
+    "zipball", ref, sep = "/")
 
   list(
     url = url, auth = auth, msg = msg, repo = repo, username = username,
@@ -164,12 +164,11 @@ install_github_single <- function(repo, username = getOption("github.user"),
     #append_field("Password", conn$password)
   }
 
-  # If there are slashes in the ref, the URL will have extra slashes, but the
-  # downloaded file shouldn't have them.
+  # The downloaded file is always named by the package's name with extension .zip.
   # install_github("shiny", "rstudio", "v/0/2/1")
-  #  URL: https://github.com/rstudio/shiny/archive/v/0/2/1.zip
+  #  URL: https://api.github.com/repos/rstudio/shiny/zipball/v/0/2/1
   #  Output file: shiny.zip
-  install_url(conn$url, subdir = conn$subdir,
+  install_url(conn$url, name = paste(conn$repo, ".zip", sep = ""), subdir = conn$subdir,
     config = conn$auth, before_install = github_before_install, ...)
 }
 
@@ -178,8 +177,7 @@ github_pull_info <- function(repo, username, pull) {
   host <- "https://api.github.com"
   # GET /repos/:user/:repo/pulls/:number
   path <- paste("repos", username, repo, "pulls", pull, sep = "/")
-  r <- GET(host, path = path,
-    config = add_headers("User-agent" = "hadley/devtools"))
+  r <- GET(host, path = path)
   stop_for_status(r)
   response <- httr::content(r, as = "parsed")
 
