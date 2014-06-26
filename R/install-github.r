@@ -90,7 +90,7 @@ github_get_conn <- function(repo, username = getOption("github.user"),
   }
 
   if (!is.null(password)) {
-    warning("'password' is deprecrated. Please use 'auth_token' instead",
+    warning("'password' is deprecated. Please use 'auth_token' instead",
       call. = FALSE)
     auth <- httr::authenticate(
       user = auth_user %||% username,
