@@ -1,3 +1,6 @@
+* `rstudioapi` package moved from suggests to imports, since it's always 
+  needed (it's job is to figure out if rstudio is available, #458)
+
 * `loaded_packages()` now returns package name and path it was loaded from. 
   (#486)
 
