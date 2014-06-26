@@ -59,6 +59,11 @@ use_rstudio <- function(pkg = ".") {
   invisible(TRUE)
 }
 
+#' @export
+#' @rdname infrastructure
+add_rstudio_project <- use_rstudio
+
+
 #' @section \code{use_knitr}:
 #' Creates \code{vignettes/} and adds needed packages to \code{DESCRIPTION}.
 #' @export
@@ -97,8 +102,6 @@ use_rcpp <- function(pkg = ".") {
   )
 }
 
-#' @export
-add_rstudio_project <- use_rstudio
 
 add_desc_package <- function(pkg = ".", field, name) {
   pkg <- as.package(pkg)
