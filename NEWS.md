@@ -1,3 +1,6 @@
+* `loaded_packages()` now returns package name and path it was loaded from. 
+  (#486)
+
 * `create()` no longer generates `man/` directory - roxygen2 now does
   this automatically.
 
