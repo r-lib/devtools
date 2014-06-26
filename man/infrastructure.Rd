@@ -8,6 +8,7 @@
 \alias{use_rcpp}
 \alias{use_rstudio}
 \alias{use_testthat}
+\alias{use_travis}
 \title{Add useful infrastructure to a package.}
 \usage{
 use_testthat(pkg = ".")
@@ -19,6 +20,8 @@ add_rstudio_project(pkg = ".")
 use_knitr(pkg = ".")
 
 use_rcpp(pkg = ".")
+
+use_travis(pkg = ".")
 
 add_travis(pkg = ".")
 }
@@ -51,5 +54,11 @@ Creates \code{vignettes/} and adds needed packages to \code{DESCRIPTION}.
 \section{\code{use_rcpp}}{
 
 Creates \code{src/} and adds needed packages to \code{DESCRIPTION}.
+}
+
+\section{\code{use_travis}}{
+
+Add basic travis template to a package. Also adds \code{.travis.yml} to
+\code{.Rbuildignore} so it isn't included in the built package.
 }
 
