@@ -73,9 +73,9 @@ install_github <- function(repo, username = getOption("github.user"),
 #' @examples
 #' \dontrun{
 #' # To install from a private repo, use auth_token as described
-#' # at \code{\link{install_github}} and either set \code{github_url}
-#' # or let \code{\link{devtools_git_enterprise}} retrieve it from 
-#' # environment variable GITHUB_URL if it is set. 
+#' # at ?install_github and either set the github_url parameter 
+#' # or let the ?devtools_git_enterprise helper retrieve it from 
+#' # the GITHUB_URL environment variable if it is set. 
 #' # Best practice is the latter.
 #' install_github_enterprise("username/packagename", github_url = "https://github.scm.xyz.com")
 #'
