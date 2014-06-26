@@ -2,10 +2,6 @@
 
 ## The release process
 
-* `release()` uses new CRAN submission process, as implemented by 
-  `submit_cran()` (#430).
-* `httr` 0.3 required (@krlmlr, #466).
-
 * `install_github()` uses GitHub API to download archive file (@krlmlr, #466).
 
 * You can add arbitrary extra questions to `release()` by defining a function 
@@ -44,6 +40,11 @@
 
 * `rstudioapi` package moved from suggests to imports, since it's always 
   needed (it's job is to figure out if rstudio is available, #458)
+
+* `release()` uses new CRAN submission process, as implemented by 
+  `submit_cran()` (#430).
+
+* `httr` 0.3 required (@krlmlr, #466).
 
 # devtools 1.5
 
