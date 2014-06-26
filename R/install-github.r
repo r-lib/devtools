@@ -88,7 +88,7 @@ install_github_enterprise <- function(repo, username = getOption("github.user"),
                            dependencies = TRUE) {
     install_github(repo, username, ref, pull, subdir, branch, auth_user, password, 
                      auth_token, github_url, ...,
-                     dependencies = dependencies))
+                     dependencies = dependencies)
 }
 
 github_get_conn <- function(repo, username = getOption("github.user"),
