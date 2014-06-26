@@ -5,6 +5,7 @@
 #'
 #' @param repo repo name
 #' @param username  bitbucket username
+#' @param branch Deprecated. Use \code{ref} instead.
 #' @seealso Bitbucket API docs:
 #'   \url{https://confluence.atlassian.com/display/BITBUCKET/Use+the+Bitbucket+REST+APIs}
 #' @inheritParams install_github

@@ -12,10 +12,9 @@
 #' @param ref Desired git reference. Could be a commit, tag, or branch
 #'   name. Defaults to \code{"master"}.
 #' @param pull Desired pull request. A pull request refers to a branch,
-#'   so you can't specify both \code{branch} and \code{pull}; one of
+#'   so you can't specify both \code{ref} and \code{pull}; one of
 #'   them must be \code{NULL}.
 #' @param subdir subdirectory within repo that contains the R package.
-#' @param branch Deprecated. Use \code{ref} instead.
 #' @param auth_user your account username if you're attempting to install
 #'   a package hosted in a private repository (and your username is different
 #'   to \code{username})
@@ -50,12 +49,13 @@
 #' }
 install_github <- function(repo, username = getOption("github.user"),
                            ref = "master", pull = NULL, subdir = NULL,
-                           branch = NULL, auth_user = NULL, password = NULL,
+                           auth_user = NULL, password = NULL,
                            auth_token = github_pat(), ...,
                            dependencies = TRUE) {
 
   invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
-    username, ref, pull, subdir, branch, auth_user, password, auth_token, ...,
+    username = username, ref = ref, pull = pull, subdir = subdir,
+    auth_user = auth_user, password = password, auth_token = auth_token, ...,
     dependencies = dependencies))
 }
 

@@ -4,8 +4,8 @@
 \title{Attempts to install a package directly from github.}
 \usage{
 install_github(repo, username = getOption("github.user"), ref = "master",
-  pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, auth_token = github_pat(), ..., dependencies = TRUE)
+  pull = NULL, subdir = NULL, auth_user = NULL, password = NULL,
+  auth_token = github_pat(), ..., dependencies = TRUE)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -20,12 +20,10 @@ respective parameters (see below); if both is specified, the values in
 name. Defaults to \code{"master"}.}
 
 \item{pull}{Desired pull request. A pull request refers to a branch,
-so you can't specify both \code{branch} and \code{pull}; one of
+so you can't specify both \code{ref} and \code{pull}; one of
 them must be \code{NULL}.}
 
 \item{subdir}{subdirectory within repo that contains the R package.}
-
-\item{branch}{Deprecated. Use \code{ref} instead.}
 
 \item{auth_user}{your account username if you're attempting to install
 a package hosted in a private repository (and your username is different
