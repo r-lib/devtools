@@ -145,7 +145,7 @@ release_email <- function(name, new_pkg) {
 
 yesno <- function(...) {
   yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah")
-  nos <- c("No way", "Not yet", "I forgot", "No", "Nope")
+  nos <- c("No way", "Not yet", "I forget", "No", "Nope", "Uhhhh... Maybe?")
 
   cat(paste0(..., collapse = ""))
   qs <- c(sample(yeses, 1), sample(nos, 2))
