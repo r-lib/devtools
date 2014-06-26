@@ -28,6 +28,9 @@
 * `create()` now makes a dummy namespace so that you can build & reload
   without running `document()` first.
 
+* New function `install_svn()` to install an R package from a subversion
+  repository.
+
 ## Other minor improvements and bug fixes
 
 * devtools no longer runs commands with `LC_ALL=C` - this no longer seems
