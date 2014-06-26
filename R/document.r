@@ -1,23 +1,20 @@
 #' Use roxygen to make documentation.
 #'
 #' This function is a wrapper for the \code{\link{roxygenize}} function
-#' from the package \code{roxygen2}. 
+#' from the package \code{roxygen2}.
+#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @param clean if \code{TRUE} will automatically clear all roxygen caches
-#'   and delete current \file{man/} contents to ensure that you have the
-#'   freshest version of the documentation.
-#' @param roclets character vector passed to roxygneise indicating roclets to update
-#' valid arguments include "rd", "collate", and "namespace" 
-#  and Rd files, 
+#' @inheritParams roxygen2::roxygenise
 #' @param reload if \code{TRUE} uses \code{load_all} to reload the package
 #'   prior to documenting.  This is important because \pkg{roxygen2} uses
 #'   introspection on the code objects to determine how to document them.
-#' @seealso \code{\link{roxygenize}}\code{vignette("roxygen2", package = "roxygen2")}
+#' @seealso \code{\link{roxygenize}},
+#'   \code{vignette("roxygen2", package = "roxygen2")}
 #' @keywords programming
 #' @export
 document <- function(pkg = ".", clean = FALSE,
-  roclets = c("collate", "namespace", "rd"), reload = TRUE) {
+                     roclets = c("collate", "namespace", "rd"), reload = TRUE) {
   if (!is_installed("roxygen2", 3)) {
     stop("Please install latest roxygen2", call. = FALSE)
   }

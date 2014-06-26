@@ -10,18 +10,25 @@ document(pkg = ".", clean = FALSE, roclets = c("collate", "namespace",
 \item{pkg}{package description, can be path or package name.  See
 \code{\link{as.package}} for more information}
 
-\item{clean}{if \code{TRUE} will automatically clear all roxygen caches
-and delete current \file{man/} contents to ensure that you have the
-freshest version of the documentation.}
-
-\item{roclets}{character vector of roclet names to apply to package}
-
 \item{reload}{if \code{TRUE} uses \code{load_all} to reload the package
 prior to documenting.  This is important because \pkg{roxygen2} uses
 introspection on the code objects to determine how to document them.}
+
+\item{clean}{If \code{TRUE}, roxygen will delete all files previously
+created by roxygen before running each roclet.}
+
+\item{roclets}{Character vector of roclet names to use with package.
+This defaults to \code{NULL}, which will use the \code{roclets} fields in
+the list provided in the \code{Roxygen} DESCRIPTION field. If none are
+specified, defaults to \code{c("collate", "namespace", "rd")}.}
 }
 \description{
-Use roxygen to make documentation.
+This function is a wrapper for the \code{\link{roxygenize}} function
+from the package \code{roxygen2}.
+}
+\seealso{
+\code{\link{roxygenize}},
+  \code{vignette("roxygen2", package = "roxygen2")}
 }
 \keyword{programming}
 
