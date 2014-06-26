@@ -31,6 +31,10 @@ The package release process will:
   \item Draft an email to the CRAN maintainer.
 }
 
+You can also add arbitrary extra questions by defining an (un-exported)
+function called \code{release_questions()} that returns a character vector
+of additional questions to ask.
+
 You also need to read the CRAN repository policy at
 \url{http://cran.r-project.org/web/packages/policies.html} and make
 sure you're in line with the policies. \code{release} tries to automate as

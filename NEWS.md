@@ -1,3 +1,7 @@
+* You can add arbitrary extra questions to `release()` by defining a function 
+  `release_questions()` in your package. Your `release_questions()` should 
+  return a character vector of questions to ask (#451). 
+
 * `rstudioapi` package moved from suggests to imports, since it's always 
   needed (it's job is to figure out if rstudio is available, #458)
 
