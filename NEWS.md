@@ -49,6 +49,11 @@
 
 * `install_github()` uses GitHub API to download archive file (@krlmlr, #466).
 
+* `install_github()` now supports the new syntax `ref = github_pull(...)` to
+  install a specific pull request. The parameter `pull` is now deprecated,
+  neither `pull` nor `branch` are included in the formal parameters
+  (@krlmlr, #509).
+
 # devtools 1.5
 
 Four new functions make it easier to add useful infrastructure to packages:
