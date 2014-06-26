@@ -15,8 +15,9 @@ compact <- function(x) {
   get(f, envir = asNamespace(p))
 }
 
-rule <- function() {
-  message(paste(rep("-", getOption("width"), collapse = "")))
+rule <- function(title = "") {
+  width <- getOption("width") - nchar(title) - 1
+  message(title, paste(rep("-", width, collapse = "")))
 }
 
 # check whether the specified file ends with newline
