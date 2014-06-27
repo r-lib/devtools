@@ -167,6 +167,14 @@ install_github_single <- function(repo, username = getOption("github.user"),
     config = conn$auth, before_install = github_before_install, ...)
 }
 
+#' Resolve a token to a GitHub reference
+#'
+#' A generic function, for internal use only.
+#'
+#' @param x Reference token
+#' @param param A named list of GitHub parameters
+#' @keywords internal
+#' @export
 github_ref <- function(x, param) UseMethod("github_ref")
 github_ref.default <- function(x, param) list(ref=x)
 github_ref.pull <- function(x, param) {
