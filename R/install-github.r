@@ -68,6 +68,33 @@ install_github <- function(repo, username = getOption("github.user"),
 #' This function allows you to install a package built
 #' with \code{devtools} from a repo with a custom URL.
 #'
+#' @param repo Repository address in the format
+#'   \code{[username/]repo[/subdir][@@ref|#pull]}. Alternatively, you can
+#'   specify \code{username}, \code{subdir}, \code{ref} or \code{pull} using the
+#'   respective parameters (see below); if both is specified, the values in
+#'   \code{repo} take precedence.
+#' @param username User name
+#' @param ref Desired git reference. Could be a commit, tag, or branch
+#'   name. Defaults to \code{"master"}.
+#' @param pull Desired pull request. A pull request refers to a branch,
+#'   so you can't specify both \code{branch} and \code{pull}; one of
+#'   them must be \code{NULL}.
+#' @param subdir subdirectory within repo that contains the R package.
+#' @param branch Deprecated. Use \code{ref} instead.
+#' @param auth_user your account username if you're attempting to install
+#'   a package hosted in a private repository (and your username is different
+#'   to \code{username})
+#' @param password your password
+#' @param auth_token To install from a private repo, generate a personal
+#'   access token (PAT) in \url{https://github.com/settings/applications} and
+#'   supply to this argument. This is safer than using a password because
+#'   you can easily delete a PAT without affecting any others. Defaults to
+#'   the \code{GITHUB_PAT} environment variable.
+#' @param github_url Defaults to NULL, so the default archive URL is served
+#'   from the GitHub API. You can set it to your custom Enterprise GitHub URL.  
+#' @param ... Other arguments passed on to \code{\link{install}}.
+#' @param dependencies By default, installs all dependencies so that you can
+#'   build vignettes and use all functionality of the package.
 #' @export
 #' @family package installation
 #' @examples

@@ -8,6 +8,46 @@ install_github_enterprise(repo, username = getOption("github.user"),
   auth_user = NULL, password = NULL, auth_token = github_pat(),
   github_url = devtools_git_enterprise(), ..., dependencies = TRUE)
 }
+\arguments{
+\item{repo}{Repository address in the format
+\code{[username/]repo[/subdir][@ref|#pull]}. Alternatively, you can
+specify \code{username}, \code{subdir}, \code{ref} or \code{pull} using the
+respective parameters (see below); if both is specified, the values in
+\code{repo} take precedence.}
+
+\item{username}{User name}
+
+\item{ref}{Desired git reference. Could be a commit, tag, or branch
+name. Defaults to \code{"master"}.}
+
+\item{pull}{Desired pull request. A pull request refers to a branch,
+so you can't specify both \code{branch} and \code{pull}; one of
+them must be \code{NULL}.}
+
+\item{subdir}{subdirectory within repo that contains the R package.}
+
+\item{branch}{Deprecated. Use \code{ref} instead.}
+
+\item{auth_user}{your account username if you're attempting to install
+a package hosted in a private repository (and your username is different
+to \code{username})}
+
+\item{password}{your password}
+
+\item{auth_token}{To install from a private repo, generate a personal
+access token (PAT) in \url{https://github.com/settings/applications} and
+supply to this argument. This is safer than using a password because
+you can easily delete a PAT without affecting any others. Defaults to
+the \code{GITHUB_PAT} environment variable.}
+
+\item{github_url}{Defaults to NULL, so the default archive URL is served
+from the GitHub API. You can set it to your custom Enterprise GitHub URL.}
+
+\item{...}{Other arguments passed on to \code{\link{install}}.}
+
+\item{dependencies}{By default, installs all dependencies so that you can
+build vignettes and use all functionality of the package.}
+}
 \description{
 This function allows you to install a package built
 with \code{devtools} from a repo with a custom URL.
