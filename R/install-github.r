@@ -171,9 +171,7 @@ install_github_single <- function(repo, username = getOption("github.user"),
 github_ref <- function(x, param) UseMethod("github_ref")
 github_ref.default <- function(x, param) list(ref=x)
 github_ref.pull <- function(x, param) {
-  #param <-
-    github_pull_info(param$repo, param$username, x)
-  #c(param, list(pull = NULL))
+  github_pull_info(param$repo, param$username, x)
 }
 
 #' Install a specific pull request from GitHub
