@@ -73,7 +73,6 @@ github_get_conn <- function(repo, username = getOption("github.user"),
   }
 
   params <- github_parse_path(repo)
-  params <- github_assign_ref(params)
   username <- params$username %||% username
   repo <- params$repo
   ref <- params$ref %||% ref
@@ -232,15 +231,13 @@ github_parse_path <- function(path) {
   github_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
     username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
 
-  params <- c("username", "repo", "subdir", "ref", "pull", "invalid")
-  replace <- setNames(sprintf("\\%d", seq_along(params)), params)
-  ret <- lapply(replace, function(r) gsub(github_rx, r, path, perl = TRUE))
-  if (ret$invalid != "")
+  param_names <- c("username", "repo", "subdir", "ref", "pull", "invalid")
+  replace <- setNames(sprintf("\\%d", seq_along(param_names)), param_names)
+  params <- lapply(replace, function(r) gsub(github_rx, r, path, perl = TRUE))
+  if (params$invalid != "")
     stop(sprintf("Invalid GitHub path: %s", path))
-  ret[sapply(ret, nchar) > 0]
-}
+  params <- params[sapply(params, nchar) > 0]
 
-github_assign_ref <- function(params) {
   if (!is.null(params$pull)) {
     params$ref <- github_pull(params$pull)
     params$pull <- NULL
