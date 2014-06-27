@@ -176,10 +176,9 @@ install_github_single <- function(repo, username = getOption("github.user"),
 #' @keywords internal
 #' @export
 github_ref <- function(x, param) UseMethod("github_ref")
+
+# Treat the parameter as a named reference
 github_ref.default <- function(x, param) list(ref=x)
-github_ref.pull <- function(x, param) {
-  github_pull_info(param$repo, param$username, x)
-}
 
 #' Install a specific pull request from GitHub
 #'
@@ -188,19 +187,18 @@ github_ref.pull <- function(x, param) {
 #' @param pull The pull request to install
 #' @seealso \code{\link{install_github}}
 #' @export
-github_pull <- function(pull) structure(pull, class = "pull")
-
+github_pull <- function(pull) structure(pull, class = "github_pull")
 
 # Retrieve the username and ref for a pull request
-github_pull_info <- function(repo, username, pull) {
+github_ref.github_pull <- function(x, param) {
   host <- "https://api.github.com"
   # GET /repos/:user/:repo/pulls/:number
-  path <- paste("repos", username, repo, "pulls", pull, sep = "/")
+  path <- paste("repos", param$username, param$repo, "pulls", x, sep = "/")
   r <- GET(host, path = path)
   stop_for_status(r)
   response <- httr::content(r, as = "parsed")
 
-  list(repo = repo, username = response$user$login, ref = response$head$ref)
+  list(repo = param$repo, username = response$user$login, ref = response$head$ref)
 }
 
 # Extract the commit hash from a github bundle and append it to the
