@@ -265,8 +265,8 @@ submit_cran <- function(pkg = ".") {
     upload = "Upload package"
   )
   r <- httr::POST(cran_submission_url, body = body)
-  stop_for_status(r)
-  new_url <- parse_url(r$url)
+  httr::stop_for_status(r)
+  new_url <- httr::parse_url(r$url)
   new_url$query$strErr
 
   # Confirmation -----------
@@ -279,7 +279,8 @@ submit_cran <- function(pkg = ".") {
     submit = "Submit package"
   )
   r <- httr::POST(cran_submission_url, body = body)
-  new_url <- parse_url(r$url)
+  httr::stop_for_status(r)
+  new_url <- httr::parse_url(r$url)
   if (new_url$query$submit == "1") {
     message("Package submission successful.\n",
       "Check your email for confirmation link.")
