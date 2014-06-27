@@ -18,6 +18,9 @@
 
 * New `use_knitr()` sets up a package to use knitr for vignettes.
 
+* New function `install_svn()` to install an R package from a subversion
+  repository.
+
 * Wrote own version of `write.dcf()` that doesn't butcher whitespace and 
   fieldnames.
 
