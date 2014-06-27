@@ -105,17 +105,15 @@ github_get_conn <- function(repo, username = getOption("github.user"),
 
   param <- modifyList(param, github_ref(param$ref, param))
 
-  param$msg <- with(
-    param,
-    paste0("Installing github repo ",
-           paste(repo, ref, sep = "/", collapse = ", "),
-           " from ",
-           paste(username, collapse = ", ")))
+  param$msg <- paste(
+    "Installing github repo",
+    paste(param$repo, param$ref, sep = "/", collapse = ", "),
+    "from",
+    paste(username, collapse = ", "))
 
-  param$url <- with(
-    param,
-    paste("https://api.github.com", "repos", username, repo,
-          "zipball", ref, sep = "/"))
+  param$url <- paste(
+    "https://api.github.com", "repos", param$username, param$repo,
+    "zipball", param$ref, sep = "/")
 
   param
 }
