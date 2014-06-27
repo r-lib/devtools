@@ -25,8 +25,8 @@
 #'   supply to this argument. This is safer than using a password because
 #'   you can easily delete a PAT without affecting any others. Defaults to
 #'   the \code{GITHUB_PAT} environment variable.
-#' @param github_url Defaults to "https://github.com/". You can set it 
-#'   to your custom Enterprise GitHub URL.  
+#' @param github_url Defaults to NULL, so the default archive URL is served
+#'   from the GitHub API. You can set it to your custom Enterprise GitHub URL.  
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @param dependencies By default, installs all dependencies so that you can
 #'   build vignettes and use all functionality of the package.
@@ -54,7 +54,7 @@ install_github <- function(repo, username = getOption("github.user"),
                            ref = "master", pull = NULL, subdir = NULL,
                            branch = NULL, auth_user = NULL, password = NULL,
                            auth_token = github_pat(), 
-                           github_url="https://github.com/", ...,
+                           github_url=NULL, ...,
                            dependencies = TRUE) {
 
   invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
@@ -94,7 +94,7 @@ install_github_enterprise <- function(repo, username = getOption("github.user"),
 github_get_conn <- function(repo, username = getOption("github.user"),
                             ref = "master", pull = NULL, subdir = NULL,
                             branch = NULL, auth_user = NULL, password = NULL,
-                            auth_token = NULL, github_url="https://github.com/", ...) {
+                            auth_token = NULL, github_url=NULL, ...) {
 
   if (!is.null(branch)) {
     warning("'branch' is deprecated. In the future, please use 'ref' instead.")
@@ -122,7 +122,7 @@ github_get_conn <- function(repo, username = getOption("github.user"),
   }
 
   if (!is.null(password)) {
-    warning("'password' is deprecrated. Please use 'auth_token' instead",
+    warning("'password' is deprecated. Please use 'auth_token' instead",
       call. = FALSE)
     auth <- httr::authenticate(
       user = auth_user %||% username,
@@ -144,8 +144,13 @@ github_get_conn <- function(repo, username = getOption("github.user"),
     " from ",
     paste(username, collapse = ", "))
 
-  url <- paste(github_url, username, "/", repo,
-    "/archive/", ref, ".zip", sep = "")
+  if(is.null(github_url)) {
+      url <- paste("https://api.github.com", "repos", 
+                   username, repo,"zipball", ref, sep = "/")
+  } else {
+      url <- paste(github_url, username, "/", repo, 
+                   "/archive/", ref, ".zip", sep = "")
+  }   
 
   list(
     url = url, auth = auth, msg = msg, repo = repo, username = username,
@@ -197,12 +202,11 @@ install_github_single <- function(repo, username = getOption("github.user"),
     #append_field("Password", conn$password)
   }
 
-  # If there are slashes in the ref, the URL will have extra slashes, but the
-  # downloaded file shouldn't have them.
+  # The downloaded file is always named by the package's name with extension .zip.
   # install_github("shiny", "rstudio", "v/0/2/1")
-  #  URL: https://github.com/rstudio/shiny/archive/v/0/2/1.zip
+  #  URL: https://api.github.com/repos/rstudio/shiny/zipball/v/0/2/1
   #  Output file: shiny.zip
-  install_url(conn$url, subdir = conn$subdir,
+  install_url(conn$url, name = paste(conn$repo, ".zip", sep = ""), subdir = conn$subdir,
     config = conn$auth, before_install = github_before_install, ...)
 }
 
@@ -211,8 +215,7 @@ github_pull_info <- function(repo, username, pull) {
   host <- "https://api.github.com"
   # GET /repos/:user/:repo/pulls/:number
   path <- paste("repos", username, repo, "pulls", pull, sep = "/")
-  r <- GET(host, path = path,
-    config = add_headers("User-agent" = "hadley/devtools"))
+  r <- GET(host, path = path)
   stop_for_status(r)
   response <- httr::content(r, as = "parsed")
 

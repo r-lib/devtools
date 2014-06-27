@@ -16,7 +16,7 @@ add additional values.}
 \item{check}{if \code{TRUE}, will automatically run \code{\link{check}}}
 
 \item{rstudio}{Create an Rstudio project file?
-(with \code{\link{add_rstudio_project}})}
+(with \code{\link{use_rstudio}})}
 }
 \description{
 Similar to \code{\link{package.skeleton}}, except that it only creates

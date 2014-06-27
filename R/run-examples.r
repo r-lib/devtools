@@ -28,7 +28,7 @@
 run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
                          run = TRUE, fresh = FALSE) {
   pkg <- as.package(pkg)
-  document(pkg, reload = FALSE)
+  document(pkg)
 
   files <- rd_files(pkg)
 

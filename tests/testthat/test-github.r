@@ -18,13 +18,13 @@ test_that("GitHub URL is constructed correctly", {
   github_get_conn <- devtools:::github_get_conn
   formals(github_get_conn) <- c(formals(github_get_conn), list(github_pull_info=github_pull_info))
   
-  expect_equal(github_get_conn("devtools")$url, "https://github.com/hadley/devtools/archive/master.zip")
-  expect_equal(github_get_conn("krlmlr/kimisc")$url, "https://github.com/krlmlr/kimisc/archive/master.zip")
-  expect_equal(github_get_conn("my/test/pkg")$url, "https://github.com/my/test/archive/master.zip")
-  expect_equal(github_get_conn("devtools@devtools-1.4")$url, "https://github.com/hadley/devtools/archive/devtools-1.4.zip")
-  expect_equal(github_get_conn("yihui/tikzDevice#23", github_pull_info=github_pull_info)$url, "https://github.com/user-23/tikzDevice/archive/pull-23.zip")
-  expect_equal(github_get_conn("my/test/pkg@ref")$url, "https://github.com/my/test/archive/ref.zip")
-  expect_equal(github_get_conn("my/test/pkg#1", github_pull_info=github_pull_info)$url, "https://github.com/user-1/test/archive/pull-1.zip")
+  expect_equal(github_get_conn("devtools")$url, "https://api.github.com/repos/hadley/devtools/zipball/master")
+  expect_equal(github_get_conn("krlmlr/kimisc")$url, "https://api.github.com/repos/krlmlr/kimisc/zipball/master")
+  expect_equal(github_get_conn("my/test/pkg")$url, "https://api.github.com/repos/my/test/zipball/master")
+  expect_equal(github_get_conn("devtools@devtools-1.4")$url, "https://api.github.com/repos/hadley/devtools/zipball/devtools-1.4")
+  expect_equal(github_get_conn("yihui/tikzDevice#23", github_pull_info=github_pull_info)$url, "https://api.github.com/repos/user-23/tikzDevice/zipball/pull-23")
+  expect_equal(github_get_conn("my/test/pkg@ref")$url, "https://api.github.com/repos/my/test/zipball/ref")
+  expect_equal(github_get_conn("my/test/pkg#1", github_pull_info=github_pull_info)$url, "https://api.github.com/repos/user-1/test/zipball/pull-1")
   expect_error(github_get_conn("test#6@123")$url, "Invalid GitHub path")
 })
 

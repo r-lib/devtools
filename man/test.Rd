@@ -20,9 +20,11 @@ the current session, but interactive code (like \code{\link{browser}})
 won't work.}
 }
 \description{
-Tests are assumed to be located in a \code{inst/tests/} directory.
+Tests are assumed to be located in either the \code{inst/tests/} or
+\code{tests/testthat} directory (the latter is recommended).
 See \code{\link[testthat]{test_dir}} for the naming convention of test
-scripts within that directory.
+scripts within one of those directories and
+\code{\link[testthat]{test_check}} for the folder structure conventions.
 }
 \details{
 If no testing infrastructure is present, you'll be asked if you want

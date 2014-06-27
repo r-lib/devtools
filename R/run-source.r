@@ -122,7 +122,7 @@ source_gist <- function(id, ..., sha1 = NULL, quiet = FALSE) {
 #' @importFrom httr GET stop_for_status add_headers
 find_gist <- function(id) {
   url <- sprintf("https://api.github.com/gists/%s", id)
-  req <- GET(url, config = add_headers("User-agent" = "hadley/devtools"))
+  req <- GET(url)
   stop_for_status(req)
   
   # Using regular expression to parse JSON is a bit ick, but it avoid an

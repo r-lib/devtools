@@ -18,10 +18,6 @@ Devtools uses the following \code{\link{options}} to configure behaviour:
   \item \code{devtools.name}: your name, used when signing draft
     emails.
 
-  \item \code{devtools.cleandoc}: a single logical value determining whether
-    the contents of the file{man/} directory are deleted by
-    \code{\link{check}}
-
   \item \code{devtools.install.args}: a string giving extra arguments passed
     to \code{R CMD install} by \code{\link{install}}.
 

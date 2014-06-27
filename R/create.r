@@ -10,7 +10,7 @@
 #'   add additional values.
 #' @param check if \code{TRUE}, will automatically run \code{\link{check}}
 #' @param rstudio Create an Rstudio project file?
-#'   (with \code{\link{add_rstudio_project}})
+#'   (with \code{\link{use_rstudio}})
 #' @seealso Text with \code{\link{package.skeleton}}
 #' @export
 #' @examples

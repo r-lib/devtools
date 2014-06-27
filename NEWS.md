@@ -1,3 +1,16 @@
+# devtools 1.5.0.99
+
+## The release process
+
+* You can add arbitrary extra questions to `release()` by defining a function 
+  `release_questions()` in your package. Your `release_questions()` should 
+  return a character vector of questions to ask (#451). 
+
+* `release()` uses new CRAN submission process, as implemented by 
+  `submit_cran()` (#430).
+
+## Tool templates and `create()`
+
 * `create()` no longer generates `man/` directory - roxygen2 now does
   this automatically.
 
@@ -5,20 +18,39 @@
 
 * New `use_knitr()` sets up a package to use knitr for vignettes.
 
+* New function `install_svn()` to install an R package from a subversion
+  repository.
+
 * Wrote own version of `write.dcf()` that doesn't butcher whitespace and 
   fieldnames.
 
-* rename `add_rstudio_project()` to `use_rstudio()` and 
+* renamed `add_rstudio_project()` to `use_rstudio()`,
+  `add_travis()` to `use_travis()` and 
   `add_test_infrastructure()` to `use_testthat()` (old functions aliased to new)
 
 * `create()` now makes a dummy namespace so that you can build & reload
   without running `document()` first.
+
+## Other minor improvements and bug fixes
+
+* devtools no longer runs commands with `LC_ALL=C` - this no longer seems
+  to be necessary (#507).
 
 * `help()`, `?`, and `system.file()` are now made available when a pacakge is
   loaded with `load_all()`, even if the devtools package isn't attached.
 
 * `dependencies = TRUE` is not forced anymore in `install_github()` (regression
   in 1.5) (@krlmlr, #462).
+
+* `loaded_packages()` now returns package name and path it was loaded from. 
+  (#486)
+
+* `rstudioapi` package moved from suggests to imports, since it's always 
+  needed (it's job is to figure out if rstudio is available, #458)
+
+* `httr` 0.3 required (@krlmlr, #466).
+
+* `install_github()` uses GitHub API to download archive file (@krlmlr, #466).
 
 # devtools 1.5
 

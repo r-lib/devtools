@@ -39,6 +39,7 @@ find_rtools <- function(debug = FALSE) {
   # Non-windows users don't need rtools
   if (.Platform$OS.type != "windows") return(TRUE)
 
+
   # First try the path
   from_path <- scan_path_for_rtools(debug)
   if (is_compatible(from_path)) {

@@ -5,8 +5,8 @@
 \usage{
 install_github(repo, username = getOption("github.user"), ref = "master",
   pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, auth_token = github_pat(),
-  github_url = "https://github.com/", ..., dependencies = TRUE)
+  password = NULL, auth_token = github_pat(), github_url = NULL, ...,
+  dependencies = TRUE)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -40,8 +40,8 @@ supply to this argument. This is safer than using a password because
 you can easily delete a PAT without affecting any others. Defaults to
 the \code{GITHUB_PAT} environment variable.}
 
-\item{github_url}{Defaults to "https://github.com/". You can set it
-to your custom Enterprise GitHub URL.}
+\item{github_url}{Defaults to NULL, so the default archive URL is served
+from the GitHub API. You can set it to your custom Enterprise GitHub URL.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 
@@ -75,7 +75,8 @@ install_github("hadley/private", auth_token = "abc")
 Other package installation: \code{\link{install_bitbucket}};
   \code{\link{install_github_enterprise}};
   \code{\link{install_gitorious}};
-  \code{\link{install_git}}; \code{\link{install_url}};
-  \code{\link{install_version}}; \code{\link{install}}
+  \code{\link{install_git}}; \code{\link{install_svn}};
+  \code{\link{install_url}}; \code{\link{install_version}};
+  \code{\link{install}}
 }
 
