@@ -33,6 +33,10 @@
 
 ## Other minor improvements and bug fixes
 
+* If you're using Rstudio, and you you're trying to build a binary package
+  without the necessary build tools, Rstudio will prompt to download and
+  install the right thing. (#488)
+
 * devtools no longer runs commands with `LC_ALL=C` - this no longer seems
   to be necessary (#507).
 
