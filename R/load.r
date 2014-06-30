@@ -125,7 +125,7 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   if (recompile) clean_dll(pkg)
 
   # Compile dll if it exists
-  compile_dll(pkg, quiet = quiet)
+  inst <- compile_dll(pkg, quiet = quiet)
 
 
   # Set up the namespace environment ----------------------------------
@@ -147,7 +147,10 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   out$dll <- load_dll(pkg)
 
   # Run namespace load hooks
-  run_pkg_hook(pkg, "load")
+  if (!is.null(inst))
+    run_pkg_hook(pkg, "load", lib=dirname(inst))
+  else
+    run_pkg_hook(pkg, "load")
   run_ns_load_actions(pkg)
   run_user_hook(pkg, "load")
 

@@ -4,7 +4,7 @@
 \alias{run_user_hook}
 \title{Run user and package hooks.}
 \usage{
-run_pkg_hook(pkg, hook)
+run_pkg_hook(pkg, hook, lib = dirname(pkg$path))
 
 run_user_hook(pkg, hook)
 }
@@ -13,6 +13,8 @@ run_user_hook(pkg, hook)
 \code{\link{as.package}} for more information}
 
 \item{hook}{hook name: one of "load", "unload", "attach", or "detach"}
+
+\item{lib}{location of the R library tree to search the package through.}
 }
 \description{
 Run user and package hooks.

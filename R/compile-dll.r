@@ -6,7 +6,8 @@
 #' During compilation, debug flags are set with
 #' \code{\link{compiler_flags}(TRUE)}.
 #'
-#' Invisibly returns the names of the DLL.
+#' If recompiled, invisibly returns the temporary path where the package 
+#' was installed.
 #'
 #' @note If this is used to compile code that uses Rcpp, you will need to
 #'   add the following line to your \code{Makevars} file so that it
@@ -33,12 +34,7 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
     args = if (needs_clean(pkg)) "--preclean",
     quiet = quiet)
 
-  dll_name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
-  from <- file.path("inst", "libs", .Platform$r_arch, dll_name)
-  to <- dll_path(pkg)
-  file.copy(from, to)
-
-  invisible(dll_path(pkg))
+  invisible(inst)
 }
 
 #' Remove compiled objects from /src/ directory
