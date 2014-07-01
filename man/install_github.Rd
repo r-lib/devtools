@@ -4,14 +4,8 @@
 \title{Attempts to install a package directly from github.}
 \usage{
 install_github(repo, username = getOption("github.user"), ref = "master",
-<<<<<<< HEAD
-  pull = NULL, subdir = NULL, branch = NULL, auth_user = NULL,
-  password = NULL, auth_token = github_pat(), github_url = NULL, ...,
-  dependencies = TRUE)
-=======
   subdir = NULL, auth_user = NULL, password = NULL,
-  auth_token = github_pat(), ..., dependencies = TRUE)
->>>>>>> upstream/master
+  auth_token = github_pat(), github_url = NULL, ..., dependencies = TRUE)
 }
 \arguments{
 \item{repo}{Repository address in the format
