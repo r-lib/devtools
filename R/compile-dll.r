@@ -37,7 +37,7 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
   from <- file.path(inst, "libs", .Platform$r_arch, dll_name)
   to <- dll_path(pkg)
   if (!file.copy(from, to))
-    stop("failed to copy library", from, "to", to)
+    stop("failed to copy library ", from, " to ", to)
 
   invisible(dll_path(pkg))
 }
