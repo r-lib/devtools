@@ -34,7 +34,7 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
     quiet = quiet)
 
   dll_name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
-  from <- file.path("inst", "libs", .Platform$r_arch, dll_name)
+  from <- file.path(inst, "libs", .Platform$r_arch, dll_name)
   to <- dll_path(pkg)
   file.copy(from, to)
 
