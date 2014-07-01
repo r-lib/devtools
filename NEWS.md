@@ -33,6 +33,10 @@
 
 ## Other minor improvements and bug fixes
 
+* If you're using Rstudio, and you you're trying to build a binary package
+  without the necessary build tools, Rstudio will prompt to download and
+  install the right thing. (#488)
+
 * devtools no longer runs commands with `LC_ALL=C` - this no longer seems
   to be necessary (#507).
 
@@ -51,6 +55,11 @@
 * `httr` 0.3 required (@krlmlr, #466).
 
 * `install_github()` uses GitHub API to download archive file (@krlmlr, #466).
+
+* `install_github()` now supports the new syntax `ref = github_pull(...)` to
+  install a specific pull request. The parameter `pull` is now deprecated,
+  neither `pull` nor `branch` are included in the formal parameters
+  (@krlmlr, #509).
 
 # devtools 1.5
 

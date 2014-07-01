@@ -53,6 +53,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     threads = getOption("Ncpus", 1)) {
 
   pkg <- as.package(pkg)
+  check_build_tools(pkg)
 
   if (!quiet) message("Installing ", pkg$package)
   install_deps(pkg, dependencies = dependencies, threads = threads)
