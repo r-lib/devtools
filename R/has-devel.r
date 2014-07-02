@@ -26,7 +26,7 @@ has_devel <- function() {
 
 check_build_tools <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  if (!file.exists(pkg$path, "src")) return(TRUE)
+  if (!file.exists(file.path(pkg$path, "src"))) return(TRUE)
 
   check <- getOption("buildtools.check", NULL)
   if (!is.null(check)) {
