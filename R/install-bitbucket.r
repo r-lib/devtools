@@ -5,6 +5,9 @@
 #'
 #' @param repo repo name
 #' @param username  bitbucket username
+#' @param ref Desired git reference. Could be a commit, tag, or branch
+#'   name. Defaults to \code{"master"}.
+#' @param branch Deprecated. Use \code{ref} instead.
 #' @seealso Bitbucket API docs:
 #'   \url{https://confluence.atlassian.com/display/BITBUCKET/Use+the+Bitbucket+REST+APIs}
 #' @inheritParams install_github

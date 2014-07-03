@@ -28,6 +28,8 @@
 build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
                   args = NULL, quiet = FALSE) {
   pkg <- as.package(pkg)
+  check_build_tools(pkg)
+
   if (is.null(path)) {
     path <- dirname(pkg$path)
   }
