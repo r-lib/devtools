@@ -39,9 +39,9 @@ setting the \code{_R_CHECK_FORCE_SUGGESTS_} environment variable to
 }
 \description{
 \code{check} automatically builds and checks a source package, using all
-know best practices. Passing \code{R CMD check} is essential if you want to
-submit your package to CRAN: you must not have an ERRORs or WARNINGs, and you
-want to ensure that there are as few NOTEs as possible.  If you are not
+known best practices. Passing \code{R CMD check} is essential if you want to
+submit your package to CRAN: you must not have any ERRORs or WARNINGs, and
+you want to ensure that there are as few NOTEs as possible.  If you are not
 submitting to CRAN, at least ensure that there are no ERRORs: these
 typically represent serious problems.
 }
