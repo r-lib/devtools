@@ -93,6 +93,9 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
 
   if (export_all) {
     exports <- ls(nsenv, all.names = TRUE)
+    # Make sure to re-export objects that are imported from other packages but
+    # not copied.
+    exports <- union(exports, nsInfo$exports)
 
     # List of things to ignore is from loadNamespace. There are also a
     # couple things to ignore from devtools.
@@ -107,7 +110,7 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
     exports <- nsInfo$exports
     for (p in nsInfo$exportPatterns)
       exports <- c(ls(nsenv, pattern = p, all.names = TRUE), exports)
-    exports <- add_classes_to_exports(ns = nsenv, package = pkg$package, 
+    exports <- add_classes_to_exports(ns = nsenv, package = pkg$package,
       exports = exports, nsInfo = nsInfo)
   }
   # Update the exports metadata for the namespace with base::namespaceExport
@@ -270,8 +273,8 @@ add_classes_to_exports <- function(ns, package, exports, nsInfo) {
           paste(expMethods, collapse = ", ")),
         domain = NA)
     exports <- unique(c(exports, expClasses, expTables))
-  }  
- 
+  }
+
   exports
 }
 environment(add_classes_to_exports) <- asNamespace("methods")
