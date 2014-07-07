@@ -1,3 +1,5 @@
 export(a)
+export(polySpline)
 import(compiler)
 importFrom(splines,polySpline)
+importFrom(splines,backSpline)
