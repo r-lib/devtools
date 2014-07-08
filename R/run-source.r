@@ -35,23 +35,24 @@
 #' source_url("https://gist.github.com/hadley/6872663/raw/hi.r",
 #'   sha1 = "54f1db27e60")
 #' }
-source_url <- function(url, type = c("R", "cpp"), ..., sha1 = NULL) {
-  stopifnot(is.character(url), length(url) == 1)
+source_url <- function(url, ..., sha1 = NULL) {
+  stopifnot(is.character(url), length(url) > 0)
 
-  temp_file <- switch(type[1],
-    "R" = tempfile(fileext=".r"),
-    "cpp" = tempfile(fileext=".cpp")
-  )
-  on.exit(unlink(temp_file))
-
-  request <- GET(url)
-  stop_for_status(request)
-  writeBin(content(request, type = "raw"), temp_file)
-
-  file_sha1 <- digest(file = temp_file, algo = "sha1")
+  download.root <- tempfile(pattern="source_url_download")
+  dir.create(download.root)
+  
+  download.target <- character(length(url))
+  for(i in seq_along(url)) {
+    filename <- names(url[i])
+    download.target[i] <- normalizePath(sprintf("%s/%s", download.root, filename), mustWork=FALSE)
+    request <- GET(url[i])
+    stop_for_status(request)
+    writeBin(content(request, type = "raw"), download.target[i])
+  }
+  file_sha1 <- digest(file = download.target[i], algo = "sha1")
 
   if (is.null(sha1)) {
-    message("SHA-1 hash of file is ", file_sha1)
+    message("SHA-1 hash of the first file is ", file_sha1)
   } else {
     if (nchar(sha1) < 6) {
       stop("Supplied SHA-1 hash is too short (must be at least 6 characters)")
@@ -61,15 +62,17 @@ source_url <- function(url, type = c("R", "cpp"), ..., sha1 = NULL) {
     file_sha1 <- substr(file_sha1, 1, nchar(sha1))
     
     if (!identical(file_sha1, sha1)) {
-      stop("SHA-1 hash of downloaded file (", file_sha1,
-        ")\n  does not match expected value (", sha1, ")", call. = FALSE)
+      stop("SHA-1 hash of the first downloaded file (", file_sha1,
+        ")\n does not match expected value (", sha1, ")", call. = FALSE)
     }
   }
-
-  switch(type[1],
-    "R" = source(temp_file, ...),
-    "cpp" = sourceCpp(temp_file, ...)
-  )
+  message(sprintf("Sourcing the first file: %s", names(url)[1]))
+  switch(get_fileext(names(url)[1]), 
+    "r" = source(download.target[1], ...),
+    "R" = source(download.target[1], ...),
+    "cpp" = sourceCpp(download.target[1], ...),
+    "cc" = sourceCpp(download.target[1], ...)
+    )
 }
 
 #' Run a script on gist
@@ -106,9 +109,8 @@ source_url <- function(url, type = c("R", "cpp"), ..., sha1 = NULL) {
 #' # Wrong hash will result in error
 #' source_gist(6872663, sha1 = "54f1db27e61")
 #' }
-source_gist <- function(id, type = c("R", "cpp"), ..., sha1 = NULL, quiet = FALSE) {
+source_gist <- function(id, ..., sha1 = NULL, quiet = FALSE) {
   stopifnot(length(id) == 1)
-  if (type[1] == "cpp") library(Rcpp)
   url_match <- "((^https://)|^)gist.github.com/([^/]+/)?([0-9a-f]+)$"
   if (grepl(url_match, id)) {
     # https://gist.github.com/kohske/1654919, https://gist.github.com/1654919,
@@ -117,17 +119,17 @@ source_gist <- function(id, type = c("R", "cpp"), ..., sha1 = NULL, quiet = FALS
     url <- find_gist(id)
   } else if (is.numeric(id) || grepl("^[0-9a-f]+$", id)) {
     # 1654919 or "1654919"
-    url <- find_gist(id, type)
+    url <- find_gist(id)
   } else {
     stop("Unknown id: ", id)
   }
 
-  if (!quiet) message("Sourcing ", url)
-  source_url(url, type, ..., sha1 = sha1)
+  if (!quiet) sapply(url, function(u) message("Sourcing ", u))
+  source_url(url, ..., sha1 = sha1)
 }
 
 #' @importFrom httr GET stop_for_status add_headers
-find_gist <- function(id, type=c("R", "cpp")) {
+find_gist <- function(id) {
   url <- sprintf("https://api.github.com/gists/%s", id)
   req <- GET(url)
   stop_for_status(req)
@@ -135,21 +137,40 @@ find_gist <- function(id, type=c("R", "cpp")) {
   # Using regular expression to parse JSON is a bit ick, but it avoid an
   # additional dependency on RJSONIO or similar
   text <- content(req, "text")
-  matches <- switch(type[1], 
-    "R" = {
-      url_pos <- regexec('"raw_url": ?"(.*?\\.[rR])"', text)
-      regmatches(text, url_pos)[[1]]
-    },
-    "cpp" = {
-      url_pos <- regexec('"raw_url": ?"(.*?\\.cpp)"', text)
-      regmatches(text, url_pos)[[1]]
-    })
-  
-  if (length(matches) != 2) {
-    switch(type[1],
-      "R" = stop("No R files found in gist", call. = FALSE),
-      "cpp" = stop("No cpp files found in gist", call. = FALSE)
-    )
-  }  
-  matches[2]
+  .parseJSON1(text)
+}
+
+.parseJSON1 <- function(text) {
+  text_line <- strsplit(text, "\n", fixed=TRUE)[[1]]
+  files_head <- grep("\"files\": {", text_line, fixed=TRUE)
+  stopifnot(length(files_head) == 1)
+  # Allocating block of files
+  bracket_count <- 1
+  i <- files_head + 1
+  while(i <= length(text_line)) {
+    is_head <- grepl("\\{\\s*$", text_line[i], perl=TRUE)
+    is_tail <- grepl("^\\s*}", text_line[i], perl=TRUE)
+    stopifnot(!(is_head & is_tail))
+    if (is_head) bracket_count <- bracket_count + 1
+    if (is_tail) bracket_count <- bracket_count - 1
+    if (bracket_count == 0) break
+    i <- i + 1
+  }
+  files_block <- text_line[files_head:(files_tail <- i)]
+  # extract filename and url
+  filename_pos <- regexec('"filename": ?"(.*\\..*)",', files_block)
+  filename <- regmatches(files_block, filename_pos)
+  url_pos <- regexec('"raw_url": ?"(.*?\\.*)"', files_block)
+  url <- regmatches(files_block, url_pos)
+  filename_index <- which(sapply(filename, length) > 0)
+  url_index <- which(sapply(url, length) > 0)
+  stopifnot(length(filename_index) == length(url_index))
+  filename <- sapply(filename[filename_index], function(s) s[2])
+  url <- sapply(url[url_index], function(s) s[2])
+  names(url) <- filename
+  url
+}
+
+get_fileext <- function(filename) {
+  sapply(regmatches(filename, regexec('\\.([0-9a-zA-Z]+)$', filename)), function(s) s[2])
 }
