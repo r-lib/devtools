@@ -2,11 +2,11 @@
 #'
 #' Internally, \code{source_url} calls \code{\link{getURL}} in
 #' \code{RCurl} package and then read the contents by
-#' \code{\link{textConnection}}, which is then \code{\link{source}}ed.
+#' \code{\link{textConnection}}, which is then \code{\link{source}ed or \link{sourceCpp}}ed.
 #' See \code{?getURL} for the available protocol.
 #'
 #' If a SHA-1 hash is specified with the \code{sha1} argument, then this
-#' function will check the SHA-1 hash of the downloaded file to make sure it
+#' function will check the SHA-1 hash of the first downloaded file to make sure it
 #' matches the expected value, and throw an error if it does not match. If the
 #' SHA-1 hash is not specified, it will print a message displaying the hash of
 #' the downloaded file. The purpose of this is to improve security when running
@@ -84,8 +84,8 @@ source_url <- function(url, ..., sha1 = NULL) {
 #'
 #' @param id either full url (character), gist ID (numeric or character of
 #'   numeric). If a gist ID is specified and the entry has multiple files,
-#'   only the first R file in the gist is sourced.
-#' @param ... other options passed to \code{\link{source}}
+#'   only the first R/cpp file in the gist is \code{\link{source}ed or \link{sourceCpp}}ed.
+#' @param ... other options passed to \code{\link{source}} or \code{\link{sourceCpp}}.
 #' @param sha1 The SHA-1 hash of the file at the remote URL. This is highly
 #'   recommend as it prevents you from accidentally running code that's not
 #'   what you expect. See \code{\link{source_url}} for more information on 
