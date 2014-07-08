@@ -70,8 +70,8 @@ source_url <- function(url, ..., sha1 = NULL) {
   switch(get_fileext(names(url)[1]), 
     "r" = source(download.target[1], ...),
     "R" = source(download.target[1], ...),
-    "cpp" = sourceCpp(download.target[1], ...),
-    "cc" = sourceCpp(download.target[1], ...)
+    "cpp" = Rcpp::sourceCpp(download.target[1], ...),
+    "cc" = Rcpp::sourceCpp(download.target[1], ...)
     )
 }
 
