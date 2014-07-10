@@ -7,7 +7,7 @@ test_that("Source Gist Correctly", {
                               file=NULL), 
                "hello")
   expect_equal({
-    source_gist("452874384bdc62ca9ae7")
+    source_gist("452874384bdc62ca9ae7", verbose = TRUE)
     capture.output(hello(), file=NULL)
   }, "hello")
   expect_equal({
