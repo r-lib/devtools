@@ -16,3 +16,4 @@ test_that("Source Gist Correctly", {
   }, "hello")
   expect_error(source_gist("f3fe88494ad49fe9445e", sha1="294673"))
 })
+
