@@ -23,3 +23,23 @@ test_that("Imported objects are copied to package environment", {
   unload(inst("compiler"))
   unload(inst("splines"))
 })
+
+
+test_that("Imported objects are be re-exported", {
+  load_all("testNamespace")
+  # polySpline is imported and re-exported
+  expect_identical(polySpline, splines::polySpline)
+  # backSpline is imported but not re-exported
+  expect_false(exists("backSpline", .GlobalEnv))
+  unload("testNamespace")
+  unload(inst("compiler"))
+  unload(inst("splines"))
+
+  # Same as previous, but with export_all = FALSE
+  load_all("testNamespace", export_all = FALSE)
+  expect_identical(polySpline, splines::polySpline)
+  expect_false(exists("backSpline", .GlobalEnv))
+  unload("testNamespace")
+  unload(inst("compiler"))
+  unload(inst("splines"))
+})
