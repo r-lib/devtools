@@ -85,7 +85,9 @@ install_github <- function(repo, username = getOption("github.user"),
 #'   you can easily delete a PAT without affecting any others. Defaults to
 #'   the \code{GITHUB_PAT} environment variable.
 #' @param github_url Defaults to NULL, so the default archive URL is served
-#'   from the GitHub API. You can set it to your custom Enterprise GitHub URL.  
+#'   from the GitHub API. You can set it to your custom Enterprise GitHub URL,
+#'   but it must point to your own implementation of the archive link server
+#'   API all the way -- e.g. \code{https://github.yourcompany.com/api/v3/repos}  
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @param dependencies By default, installs all dependencies so that you can
 #'   build vignettes and use all functionality of the package.
@@ -171,9 +173,16 @@ github_get_conn <- function(repo, username = getOption("github.user"),
                          param$username, param$repo, 
                          "zipball", param$ref, sep = "/")
   } else {
-      param$url <- paste(github_url, param$username, "/", 
-                         param$repo,"/archive/", 
-                         param$ref, ".zip", sep = "")
+      # GitHub API v3 version
+      param$url <- paste(paste(github_url, "api/v3/repos", 
+                               param$username, param$repo, "legacy.zip", 
+                               param$ref, param$repo, sep = "/"), 
+                         "zip", sep = ".")        
+      # old-school archive/master.zip version
+      param$url <- paste(paste(github_url, param$username, 
+                               param$repo, "archive", 
+                               param$ref, sep="/"), 
+                         "zip", sep = ".")                 
   }   
   param
 }

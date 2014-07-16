@@ -35,7 +35,9 @@ you can easily delete a PAT without affecting any others. Defaults to
 the \code{GITHUB_PAT} environment variable.}
 
 \item{github_url}{Defaults to NULL, so the default archive URL is served
-from the GitHub API. You can set it to your custom Enterprise GitHub URL.}
+from the GitHub API. You can set it to your custom Enterprise GitHub URL,
+but it must point to your own implementation of the archive link server
+API all the way -- e.g. \code{https://github.yourcompany.com/api/v3/repos}}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 
