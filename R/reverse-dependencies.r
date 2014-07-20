@@ -1,6 +1,6 @@
 #' Reverse dependency tools.
 #'
-#' Tools to check and notify maintainers of all all CRAN and bioconductor
+#' Tools to check and notify maintainers of all CRAN and bioconductor
 #' packages that depend on the specified package.
 #'
 #' @param pkg package name
