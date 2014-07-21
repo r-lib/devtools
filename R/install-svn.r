@@ -89,9 +89,6 @@ install_svn_single <- function(svn_url, name = NULL, subdir = "trunk",
   install_local_single(bundle, subdir = subdir, ...)
 }
 
-
-#' Retrieve the current running path of the svn binary.
-#' @param svn_binary_name The name of the binary depending on the OS.
 svn_path <- function(svn_binary_name = NULL) {
   # Use user supplied path
   if (!is.null(svn_binary_name)) {
