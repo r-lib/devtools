@@ -2,10 +2,12 @@ The following notes were generated across my local OS X install, ubuntu running 
 
 * checking R code for possible problems ... NOTE
   Found the following calls to attach():
-    File ‘devtools/R/package-env.r’:
-    attach(NULL, name = pkg_env_name(pkg))
+    File 'devtools/R/package-env.r':
+      attach(NULL, name = pkg_env_name(pkg))
+    File 'devtools/R/shims.r':
+      attach(e, name = "devtools_shims", warn.conflicts = FALSE)
 
-  This is needed because devtools simulates package loading, and hence
+  These are needed because devtools simulates package loading, and hence
   needs to attach environments to the search path.
 
 * There are ::: calls to the package's namespace in its code. A package
