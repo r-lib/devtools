@@ -29,7 +29,7 @@ will not appear in returned vector.}
     dependencies (and so on) be included?}
 }
 \description{
-Tools to check and notify maintainers of all all CRAN and bioconductor
+Tools to check and notify maintainers of all CRAN and bioconductor
 packages that depend on the specified package.
 }
 \examples{

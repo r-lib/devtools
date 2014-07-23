@@ -27,8 +27,7 @@ The package release process will:
   \item Confirm that DESCRIPTION is ok
   \item Ask if you've checked packages that depend on your package
   \item Build the package
-  \item Upload the package to CRAN
-  \item Draft an email to the CRAN maintainer.
+  \item Submit the package to CRAN, using comments in "cran-comments.md"
 }
 
 You can also add arbitrary extra questions by defining an (un-exported)
