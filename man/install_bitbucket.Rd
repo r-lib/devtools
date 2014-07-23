@@ -40,7 +40,8 @@ Bitbucket API docs:
 
 Other package installation: \code{\link{install_github}};
   \code{\link{install_gitorious}};
-  \code{\link{install_git}}; \code{\link{install_url}};
-  \code{\link{install_version}}; \code{\link{install}}
+  \code{\link{install_git}}; \code{\link{install_svn}};
+  \code{\link{install_url}}; \code{\link{install_version}};
+  \code{\link{install}}
 }
 

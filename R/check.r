@@ -1,9 +1,9 @@
 #' Build and check a package, cleaning up automatically on success.
 #'
 #' \code{check} automatically builds and checks a source package, using all
-#' know best practices. Passing \code{R CMD check} is essential if you want to
-#' submit your package to CRAN: you must not have an ERRORs or WARNINGs, and you
-#' want to ensure that there are as few NOTEs as possible.  If you are not
+#' known best practices. Passing \code{R CMD check} is essential if you want to
+#' submit your package to CRAN: you must not have any ERRORs or WARNINGs, and
+#' you want to ensure that there are as few NOTEs as possible.  If you are not
 #' submitting to CRAN, at least ensure that there are no ERRORs: these
 #' typically represent serious problems.
 #'
@@ -14,7 +14,7 @@
 #'
 #' @section Environment variables:
 #'
-#' Devtools does it's best to set up an environment that combines best practices
+#' Devtools does its best to set up an environment that combines best practices
 #' with how check works on CRAN. This includes:
 #'
 #' \itemize{
@@ -104,7 +104,7 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
   if (!nzchar(Sys.which("pdflatex"))) {
     message("pdflatex not found! Not building PDF manual or vignettes.\n",
       "If you are planning to release this package, please run a check with manual and vignettes beforehand.\n")
-    opts <- c(opts, "--no-rebuild-vignettes", "--no-manual")
+    opts <- c(opts, "--no-build-vignettes", "--no-manual")
   }
 
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))

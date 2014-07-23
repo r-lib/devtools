@@ -27,7 +27,7 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
     load_all(pkg)
   }
   with_envvar(r_env_vars(),
-    roxygen2::roxygenise(pkg$path, roclets = roclets, load_code = pkg_env)
+    roxygen2::roxygenise(pkg$path, roclets = roclets, load_code = ns_env)
   )
 
   clear_topic_index(pkg)
