@@ -2,7 +2,8 @@
 #'
 #' Internally, \code{source_url} calls \code{\link{getURL}} in
 #' \code{RCurl} package and then read the contents by
-#' \code{\link{textConnection}}, which is then \code{\link{source}ed or \link{sourceCpp}}ed.
+#' \code{\link{textConnection}}, which is then \code{\link{source}ed 
+#' or \link{sourceCpp}}ed.
 #' See \code{?getURL} for the available protocol.
 #'
 #' If a SHA-1 hash is specified with the \code{sha1} argument, then this
@@ -14,6 +15,10 @@
 #' it has not changed. For convenience, it is possible to use a truncated SHA1
 #' hash, down to 6 characters, but keep in mind that a truncated hash won't be
 #' as secure as the full hash.
+#' 
+#' If there are multiple urls, \code{source_url} will download all of them
+#' and put them into the same temporal directory with their file name. The 
+#' first one will be executed accoring to its file extension.
 #'
 #' @param url url
 #' @param ... other options passed to \code{\link{source}}
@@ -67,7 +72,7 @@ source_url <- function(url, ..., sha1 = NULL) {
     }
   }
   message(sprintf("Sourcing the first file: %s", names(url)[1]))
-  switch(get_fileext(names(url)[1]), 
+  switch(file_ext(names(url)[1]), 
     "r" = source(download.target[1], ...),
     "R" = source(download.target[1], ...),
     "cpp" = Rcpp::sourceCpp(download.target[1], ...),
@@ -171,6 +176,3 @@ find_gist <- function(id) {
   url
 }
 
-get_fileext <- function(filename) {
-  sapply(regmatches(filename, regexec('\\.([0-9a-zA-Z]+)$', filename)), function(s) s[2])
-}
