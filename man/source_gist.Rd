@@ -8,9 +8,9 @@ source_gist(id, ..., sha1 = NULL, quiet = FALSE)
 \arguments{
 \item{id}{either full url (character), gist ID (numeric or character of
 numeric). If a gist ID is specified and the entry has multiple files,
-only the first R file in the gist is sourced.}
+only the first R/cpp file in the gist is \code{\link{source}ed or \link{sourceCpp}}ed.}
 
-\item{...}{other options passed to \code{\link{source}}}
+\item{...}{other options passed to \code{\link{source}} or \code{\link{sourceCpp}}.}
 
 \item{sha1}{The SHA-1 hash of the file at the remote URL. This is highly
 recommend as it prevents you from accidentally running code that's not
