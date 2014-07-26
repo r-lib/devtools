@@ -25,7 +25,7 @@
 #' @param sha1 The (prefix of the) SHA-1 hash of the file at the remote URL.
 #' @importFrom httr GET stop_for_status
 #' @importFrom digest digest
-#' @importFrom Rcpp sourceCpp
+#' @importFrom tools file_ext
 #' @export
 #' @examples
 #' \dontrun{
@@ -72,7 +72,7 @@ source_url <- function(url, ..., sha1 = NULL) {
     }
   }
   message(sprintf("Sourcing the first file: %s", names(url)[1]))
-  switch(file_ext(names(url)[1]), 
+  switch(tools::file_ext(names(url)[1]), 
     "r" = source(download.target[1], ...),
     "R" = source(download.target[1], ...),
     "cpp" = Rcpp::sourceCpp(download.target[1], ...),
