@@ -8,7 +8,7 @@ source_gist(id, ..., sha1 = NULL, quiet = FALSE)
 \arguments{
 \item{id}{either full url (character), gist ID (numeric or character of
 numeric). If a gist ID is specified and the entry has multiple files,
-only the first R/cpp file in the gist is \code{\link{source}ed or \link{sourceCpp}}ed.}
+only the first R/cpp file in the gist is \code{\link{source}}ed or \code{\link{sourceCpp}}ed.}
 
 \item{...}{other options passed to \code{\link{source}} or \code{\link{sourceCpp}}.}
 
