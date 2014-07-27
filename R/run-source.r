@@ -3,7 +3,7 @@
 #' Internally, \code{source_url} calls \code{\link{getURL}} in
 #' \code{RCurl} package and then read the contents by
 #' \code{\link{textConnection}}, which is then \code{\link{source}}ed 
-#' or \code{\link{sourceCpp}}ed.
+#' or \code{\link[Rcpp]{sourceCpp}}ed.
 #' See \code{?getURL} for the available protocol.
 #'
 #' If a SHA-1 hash is specified with the \code{sha1} argument, then this
@@ -89,8 +89,8 @@ source_url <- function(url, ..., sha1 = NULL) {
 #'
 #' @param id either full url (character), gist ID (numeric or character of
 #'   numeric). If a gist ID is specified and the entry has multiple files,
-#'   only the first R/cpp file in the gist is \code{\link{source}}ed or \code{\link{sourceCpp}}ed.
-#' @param ... other options passed to \code{\link{source}} or \code{\link{sourceCpp}}.
+#'   only the first R/cpp file in the gist is \code{\link{source}}ed or \code{\link[Rcpp]{sourceCpp}}ed.
+#' @param ... other options passed to \code{\link{source}} or \code{\link[Rcpp]{sourceCpp}}.
 #' @param sha1 The SHA-1 hash of the file at the remote URL. This is highly
 #'   recommend as it prevents you from accidentally running code that's not
 #'   what you expect. See \code{\link{source_url}} for more information on 

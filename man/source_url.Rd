@@ -16,7 +16,7 @@ source_url(url, ..., sha1 = NULL)
 Internally, \code{source_url} calls \code{\link{getURL}} in
 \code{RCurl} package and then read the contents by
 \code{\link{textConnection}}, which is then \code{\link{source}}ed
-or \code{\link{sourceCpp}}ed.
+or \code{\link[Rcpp]{sourceCpp}}ed.
 See \code{?getURL} for the available protocol.
 }
 \details{
