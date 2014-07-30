@@ -133,6 +133,7 @@ source_gist <- function(id, ..., sha1 = NULL, quiet = FALSE) {
   source_url(url, ..., sha1 = sha1)
 }
 
+#' @importFrom jsonlite fromJSON
 #' @importFrom httr GET stop_for_status add_headers
 find_gist <- function(id) {
   url <- sprintf("https://api.github.com/gists/%s", id)
@@ -142,43 +143,6 @@ find_gist <- function(id) {
   # Using regular expression to parse JSON is a bit ick, but it avoid an
   # additional dependency on RJSONIO or similar
   text <- content(req, "text")
-  if (require(jsonlite)) {
-    .tmp <- jsonlite::fromJSON(text)
-    sapply(.tmp$files, function(obj) obj$raw_url)
-  } else if (require(rjson)) {
-    .tmp <- rjson::fromJSON(text)
-    sapply(.tmp$files, function(obj) obj$raw_url)
-  } else .parseJSON1(text)
+  .tmp <- fromJSON(text)
+  sapply(.tmp$files, function(obj) obj$raw_url)
 }
-
-.parseJSON1 <- function(text) {
-  text_line <- strsplit(text, "\n", fixed=TRUE)[[1]]
-  files_head <- grep("\"files\": {", text_line, fixed=TRUE)
-  stopifnot(length(files_head) == 1)
-  # Allocating block of files
-  bracket_count <- 1
-  i <- files_head + 1
-  while(i <= length(text_line)) {
-    is_head <- grepl("\\{\\s*$", text_line[i], perl=TRUE)
-    is_tail <- grepl("^\\s*}", text_line[i], perl=TRUE)
-    stopifnot(!(is_head & is_tail))
-    if (is_head) bracket_count <- bracket_count + 1
-    if (is_tail) bracket_count <- bracket_count - 1
-    if (bracket_count == 0) break
-    i <- i + 1
-  }
-  files_block <- text_line[files_head:(files_tail <- i)]
-  # extract filename and url
-  filename_pos <- regexec('"filename": ?"(.*\\..*)",', files_block)
-  filename <- regmatches(files_block, filename_pos)
-  url_pos <- regexec('"raw_url": ?"(.*?\\.*)"', files_block)
-  url <- regmatches(files_block, url_pos)
-  filename_index <- which(sapply(filename, length) > 0)
-  url_index <- which(sapply(url, length) > 0)
-  stopifnot(length(filename_index) == length(url_index))
-  filename <- sapply(filename[filename_index], function(s) s[2])
-  url <- sapply(url[url_index], function(s) s[2])
-  names(url) <- filename
-  url
-}
-
