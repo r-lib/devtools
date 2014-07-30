@@ -142,7 +142,13 @@ find_gist <- function(id) {
   # Using regular expression to parse JSON is a bit ick, but it avoid an
   # additional dependency on RJSONIO or similar
   text <- content(req, "text")
-  .parseJSON1(text)
+  if (require(jsonlite)) {
+    .tmp <- jsonlite::fromJSON(text)
+    sapply(.tmp$files, function(obj) obj$raw_url)
+  } else if (require(rjson)) {
+    .tmp <- rjson::fromJSON(text)
+    sapply(.tmp$files, function(obj) obj$raw_url)
+  } else .parseJSON1(text)
 }
 
 .parseJSON1 <- function(text) {
