@@ -14,7 +14,7 @@ find_pkg_topic <- function(pkg = ".", topic) {
   if (topic %in% names(index)) return(index[[topic]])
 
   # Finally, try adding .Rd to name
-  man_rd <- file.path(pkg$path, "man", paste(topic, ".Rd"))
+  man_rd <- file.path(pkg$path, "man", paste0(topic, ".Rd"))
   if (file.exists(man_rd)) return(basename(man_rd))
 
   NULL
