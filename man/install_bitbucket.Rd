@@ -3,8 +3,8 @@
 \alias{install_bitbucket}
 \title{Install a package directly from bitbucket}
 \usage{
-install_bitbucket(repo, username, ref = "master", branch = NULL,
-  auth_user = NULL, password = NULL, ...)
+install_bitbucket(repo, username, ref = "master", auth_user = NULL,
+  password = NULL, ...)
 }
 \arguments{
 \item{repo}{repo name}
@@ -14,7 +14,11 @@ install_bitbucket(repo, username, ref = "master", branch = NULL,
 \item{ref}{Desired git reference. Could be a commit, tag, or branch
 name. Defaults to \code{"master"}.}
 
-\item{branch}{Deprecated. Use \code{ref} instead.}
+\item{auth_user}{your account username if you're attempting to install
+a package hosted in a private repository (and your username is different
+to \code{username})}
+
+\item{password}{your password}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 }
