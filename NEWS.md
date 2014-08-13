@@ -79,6 +79,9 @@
   neither `pull` nor `branch` are included in the formal parameters
   (@krlmlr, #509).
 
+* The `username` paramter of `install_github()` is deprecated - please include
+  in the repo name: `rstudio/shiny`, `hadley/devtools` etc.
+
 # devtools 1.5
 
 Four new functions make it easier to add useful infrastructure to packages:

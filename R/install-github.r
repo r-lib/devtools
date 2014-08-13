@@ -4,11 +4,12 @@
 #' packages in a single command.
 #'
 #' @param repo Repository address in the format
-#'   \code{[username/]repo[/subdir][@@ref|#pull]}. Alternatively, you can
-#'   specify \code{username}, \code{subdir} and/or \code{ref} using the
-#'   respective parameters (see below); if both is specified, the values in
-#'   \code{repo} take precedence.
-#' @param username User name
+#'   \code{username/repo[/subdir][@@ref|#pull]}. Alternatively, you can
+#'   specify \code{subdir} and/or \code{ref} using the respective parameters
+#'   (see below); if both is specified, the values in \code{repo} take
+#'   precedence.
+#' @param username User name. Deprecate: please include username in the
+#'   \code{repo}
 #' @param ref Desired git reference. Could be a commit, tag, or branch
 #'   name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.
 #' @param subdir subdirectory within repo that contains the R package.
@@ -45,7 +46,7 @@
 #' install_github("hadley/private", auth_token = "abc")
 #'
 #' }
-install_github <- function(repo, username = getOption("github.user"),
+install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
                            auth_user = NULL, password = NULL,
                            auth_token = github_pat(), ...,
@@ -57,10 +58,22 @@ install_github <- function(repo, username = getOption("github.user"),
     dependencies = dependencies))
 }
 
-github_get_conn <- function(repo, username = getOption("github.user"),
+github_get_conn <- function(repo, username = NULL,
                             ref = "master", pull = NULL, subdir = NULL,
                             branch = NULL, auth_user = NULL, password = NULL,
                             auth_token = NULL, ...) {
+
+  if (is.null(username)) {
+    default <- getOption("github.user")
+    if (!is.null(default)) {
+      username <- default
+      warning("Relying on default username is deprecated. Please use ",
+        username, "/", repo, call. = FALSE)
+    }
+  } else {
+    warning("username is deprecated. Please use ", username, "/", repo,
+      call. = FALSE)
+  }
 
   if (!is.null(branch)) {
     warning("'branch' is deprecated. In the future, please use 'ref' instead.")
@@ -73,7 +86,8 @@ github_get_conn <- function(repo, username = getOption("github.user"),
   }
 
   params <- github_parse_path(repo)
-  username <- params$username %||% username
+  username <- params$username %||% username %||%
+    stop("Please supply username", call. = FALSE)
   repo <- params$repo
   ref <- params$ref %||% ref
   subdir <- params$subdir %||% subdir
@@ -117,7 +131,7 @@ github_get_conn <- function(repo, username = getOption("github.user"),
   param
 }
 
-install_github_single <- function(repo, username = getOption("github.user"),
+install_github_single <- function(repo, username = NULL,
                                   ref = "master", pull = NULL, subdir = NULL,
                                   branch = NULL, auth_user = NULL,
                                   password = NULL, auth_token = NULL, ...) {

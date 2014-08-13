@@ -3,18 +3,19 @@
 \alias{install_github}
 \title{Attempts to install a package directly from github.}
 \usage{
-install_github(repo, username = getOption("github.user"), ref = "master",
-  subdir = NULL, auth_user = NULL, password = NULL,
-  auth_token = github_pat(), ..., dependencies = TRUE)
+install_github(repo, username = NULL, ref = "master", subdir = NULL,
+  auth_user = NULL, password = NULL, auth_token = github_pat(), ...,
+  dependencies = TRUE)
 }
 \arguments{
 \item{repo}{Repository address in the format
-\code{[username/]repo[/subdir][@ref|#pull]}. Alternatively, you can
-specify \code{username}, \code{subdir} and/or \code{ref} using the
-respective parameters (see below); if both is specified, the values in
-\code{repo} take precedence.}
+\code{username/repo[/subdir][@ref|#pull]}. Alternatively, you can
+specify \code{subdir} and/or \code{ref} using the respective parameters
+(see below); if both is specified, the values in \code{repo} take
+precedence.}
 
-\item{username}{User name}
+\item{username}{User name. Deprecate: please include username in the
+\code{repo}}
 
 \item{ref}{Desired git reference. Could be a commit, tag, or branch
 name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.}
