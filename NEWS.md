@@ -31,6 +31,9 @@
 * renamed `add_rstudio_project()` to `use_rstudio()`,
   `add_travis()` to `use_travis()` and 
   `add_test_infrastructure()` to `use_testthat()` (old functions aliased to new)
+  
+* `use_travis()` now figures out what your github username and repo are so
+  it can construct the markdown build image for you. (#546)
 
 * `create()` now makes a dummy namespace so that you can build & reload
   without running `document()` first.
