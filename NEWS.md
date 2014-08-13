@@ -40,6 +40,10 @@
 
 ## Other minor improvements and bug fixes
 
+* New `session_info()` provides useful information about your R session.
+  It's a little more focussed than `session_info()` and includes where
+  packages where installed from (#526).
+
 * If you're using Rstudio, and you you're trying to build a binary package
   without the necessary build tools, Rstudio will prompt to download and
   install the right thing. (#488)

@@ -2,6 +2,8 @@
 
 S3method("[",envlist)
 S3method(print,envlist)
+S3method(print,packages_info)
+S3method(print,session_info)
 S3method(replay_stop,default)
 S3method(replay_stop,error)
 S3method(replay_stop,list)

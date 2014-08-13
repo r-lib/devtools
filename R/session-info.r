@@ -29,48 +29,103 @@ dev_packages <- function() {
 
 #' Print session information
 #'
-#' This function prints out the same information as
-#' \code{\link[utils]{sessionInfo}()}, with one difference: it also prints out
-#' the GithubSHA1 value of loaded packages, if present.
+#' This is \code{\link{sessionInfo}()} re-written from scratch to both exclude
+#' data that's rarely useful (e.g., the full collate string or base packages
+#' loaded) and include stuff you'd like to know (e.g., where a package was
+#' installed from).
 #'
 #' @export
 session_info <- function() {
+  structure(
+    list(
+      platform = platform_info(),
+      packages = package_info()
+    ),
+    class = "session_info"
+  )
+}
 
-  # This is a modified version of utils:::print.sessionInfo from R 3.1.1. It's
-  # exactly the same except that it also prints out a package's GithubSHA1
-  # value, if present.
-  print_session_info <- function (x, locale = TRUE, ...) {
-      mkLabel <- function(L, n) {
-          vers <- sapply(L[[n]], function(x) {
-              str <- x[["Version"]]
-              if (!is.null(x$GithubSHA1)) {
-                str <- paste0(str, "(", substr(x$GithubSHA1, 1, 7), ")")
-              }
-              str
-          })
-          pkg <- sapply(L[[n]], function(x) x[["Package"]])
-          paste(pkg, vers, sep = "_")
-      }
-      cat(x$R.version$version.string, "\n", sep = "")
-      cat("Platform: ", x$platform, "\n\n", sep = "")
-      if (locale) {
-          cat("locale:\n")
-          print(strsplit(x$locale, ";", fixed = TRUE)[[1]], quote = FALSE,
-              ...)
-          cat("\n")
-      }
-      cat("attached base packages:\n")
-      print(x$basePkgs, quote = FALSE, ...)
-      if (!is.null(x$otherPkgs)) {
-          cat("\nother attached packages:\n")
-          print(mkLabel(x, "otherPkgs"), quote = FALSE, ...)
-      }
-      if (!is.null(x$loadedOnly)) {
-          cat("\nloaded via a namespace (and not attached):\n")
-          print(mkLabel(x, "loadedOnly"), quote = FALSE, ...)
-      }
-      invisible(x)
+#' @export
+print.session_info <- function(x, ...) {
+  rule("Session info")
+  print(x$platform)
+  cat("\n")
+  rule("Packages")
+  print(x$packages)
+}
+
+platform_info <- function() {
+  structure(list(
+    version = R.version.string,
+    system = version$system,
+    language = Sys.getenv("LANGUAGE", "(EN)"),
+    collate = Sys.getlocale("LC_COLLATE"),
+    tz = Sys.timezone()
+  ), class = "platform_info")
+}
+print.platform_info <- function(x, ...) {
+  df <- data.frame(setting = names(x), value = unlist(x), stringsAsFactors = FALSE)
+  print(df, right = FALSE, row.names = FALSE)
+}
+
+package_info <- function(include_base = FALSE) {
+  attached_pkg <- grep("^package:", search(), value = TRUE)
+  attached_pkg <- sub("^package:", "", attached_pkg)
+  loaded_pkg <- setdiff(loadedNamespaces(), attached_pkg)
+  attached <- rep(c(TRUE, FALSE), c(length(loaded_pkg), length(attached_pkg)))
+
+  pkgs <- data.frame(
+    package = c(loaded_pkg, attached_pkg),
+    `*` = ifelse(attached, "", "*"),
+    stringsAsFactors = FALSE,
+    check.names = FALSE
+  )
+  pkgs$version <- vapply(pkgs$package,
+    function(x) as.character(packageVersion(x)),
+    character(1)
+  )
+
+  if (!include_base) {
+    base <- vapply(pkgs$package, pkg_is_base, logical(1))
+    pkgs <- pkgs[!base, , drop = FALSE]
   }
 
-  print_session_info(sessionInfo())
+  pkgs$source <- vapply(pkgs$package, pkg_source, character(1))
+
+  pkgs <- pkgs[order(pkgs$package), ]
+  rownames(pkgs) <- NULL
+  class(pkgs) <- c("packages_info", "data.frame")
+  pkgs[, c("package", "*", "version", "source")]
+}
+
+#' @export
+print.packages_info <- function(x, ...) {
+  print.data.frame(x, right = FALSE, row.names = FALSE)
+}
+
+pkg_is_base <- function(pkg) {
+  desc <- packageDescription(pkg)
+  !is.null(desc$Priority) && desc$Priority == "base"
+}
+
+pkg_source <- function(pkg) {
+  desc <- packageDescription(pkg)
+
+  if (!is.null(desc$GithubSHA1)) {
+    str <- paste0("Github (", substr(desc$GithubSHA1, 1, 7), ")")
+  } else if (!is.null(desc$Repository)) {
+    repo <- desc$Repository
+
+    if (!is.null(desc$Built)) {
+      built <- strsplit(desc$Built, "; ")[[1]]
+      ver <- sub("$R ", "", built[1])
+
+      repo <- paste0(repo, " (", ver, ")")
+    }
+
+    repo
+
+  } else {
+    "local"
+  }
 }

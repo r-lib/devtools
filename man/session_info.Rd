@@ -6,8 +6,9 @@
 session_info()
 }
 \description{
-This function prints out the same information as
-\code{\link[utils]{sessionInfo}()}, with one difference: it also prints out
-the GithubSHA1 value of loaded packages, if present.
+This is \code{\link{sessionInfo}()} re-written from scratch to both exclude
+data that's rarely useful (e.g., the full collate string or base packages
+loaded) and include stuff you'd like to know (e.g., where a package was
+installed from).
 }
 
