@@ -122,7 +122,7 @@ shim_help <- function(topic, package = NULL, ...) {
   if (is_char) {
     topic_str <- topic
     topic_name <- as.name(topic)
-  } else if (is.null(topic)) {
+  } else if (is.null(topic_name)) {
     topic_str <- NULL
     topic_name <- NULL
   } else {
