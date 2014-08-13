@@ -80,7 +80,9 @@
   (@krlmlr, #509).
 
 * The `username` paramter of `install_github()` is deprecated - please include
-  in the repo name: `rstudio/shiny`, `hadley/devtools` etc.
+  in the repo name: `rstudio/shiny`, `hadley/devtools` etc. Deprecated 
+  parameters `auth_user`, `branch`, `pull` and `password` have all been 
+  removed.
 
 # devtools 1.5
 

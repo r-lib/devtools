@@ -13,10 +13,6 @@
 #' @param ref Desired git reference. Could be a commit, tag, or branch
 #'   name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.
 #' @param subdir subdirectory within repo that contains the R package.
-#' @param auth_user your account username if you're attempting to install
-#'   a package hosted in a private repository (and your username is different
-#'   to \code{username})
-#' @param password your password
 #' @param auth_token To install from a private repo, generate a personal
 #'   access token (PAT) in \url{https://github.com/settings/applications} and
 #'   supply to this argument. This is safer than using a password because
@@ -48,20 +44,19 @@
 #' }
 install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
-                           auth_user = NULL, password = NULL,
                            auth_token = github_pat(), ...,
                            dependencies = TRUE) {
 
   invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
-    username = username, ref = ref, subdir = subdir,
-    auth_user = auth_user, password = password, auth_token = auth_token, ...,
-    dependencies = dependencies))
+    username = username, ref = ref, subdir = subdir, auth_token = auth_token,
+    ..., dependencies = dependencies))
 }
 
-github_get_conn <- function(repo, username = NULL,
-                            ref = "master", pull = NULL, subdir = NULL,
-                            branch = NULL, auth_user = NULL, password = NULL,
-                            auth_token = NULL, ...) {
+github_get_conn <- function(repo, username = NULL, ref = "master",
+                            subdir = NULL, auth_token = NULL, ...) {
+
+  params <- github_parse_path(repo)
+  username <- params$username %||% username
 
   if (is.null(username)) {
     default <- getOption("github.user")
@@ -74,33 +69,11 @@ github_get_conn <- function(repo, username = NULL,
     warning("username is deprecated. Please use ", username, "/", repo,
       call. = FALSE)
   }
-
-  if (!is.null(branch)) {
-    warning("'branch' is deprecated. In the future, please use 'ref' instead.")
-    ref <- branch
-  }
-
-  if (!is.null(pull)) {
-    warning("'pull' is deprecated. In the future, please use 'ref = github_pull(...)' instead.")
-    ref <- github_pull(pull)
-  }
-
-  params <- github_parse_path(repo)
-  username <- params$username %||% username %||%
-    stop("Please supply username", call. = FALSE)
   repo <- params$repo
   ref <- params$ref %||% ref
   subdir <- params$subdir %||% subdir
 
-  if (!is.null(password)) {
-    warning("'password' is deprecated. Please use 'auth_token' instead",
-      call. = FALSE)
-    auth <- httr::authenticate(
-      user = auth_user %||% username,
-      password = password,
-      type = "basic"
-    )
-  } else if (!is.null(auth_token)) {
+  if (!is.null(auth_token)) {
     auth <- httr::authenticate(
       user = auth_token,
       password = "x-oauth-basic",
@@ -111,9 +84,11 @@ github_get_conn <- function(repo, username = NULL,
   }
 
   param <- list(
-    auth = auth, repo = repo, username = username,
-    ref = ref, subdir = subdir,
-    auth_user = auth_user, password = password
+    auth = auth,
+    repo = repo,
+    username = username,
+    ref = ref,
+    subdir = subdir
   )
 
   param <- modifyList(param, github_ref(param$ref, param))
@@ -131,12 +106,9 @@ github_get_conn <- function(repo, username = NULL,
   param
 }
 
-install_github_single <- function(repo, username = NULL,
-                                  ref = "master", pull = NULL, subdir = NULL,
-                                  branch = NULL, auth_user = NULL,
-                                  password = NULL, auth_token = NULL, ...) {
-  conn <- github_get_conn(repo, username, ref, pull, subdir, branch,
-    auth_user, password, auth_token, ...)
+install_github_single <- function(repo, username = NULL, ref = "master",
+                                  subdir = NULL, auth_token = NULL, ...) {
+  conn <- github_get_conn(repo, username, ref, subdir, auth_token, ...)
   message(conn$msg)
 
   # define before_install function that captures the arguments to
@@ -165,12 +137,7 @@ install_github_single <- function(repo, username = NULL,
     append_field("Username", conn$username)
     append_field("Ref", conn$ref)
     append_field("SHA1", github_extract_sha1(bundle))
-    append_field("Pull", conn$pull)
     append_field("Subdir", conn$subdir)
-    append_field("Branch", conn$branch)
-    append_field("AuthUser", conn$auth_user)
-    # Don't record password for security reasons
-    #append_field("Password", conn$password)
   }
 
   # The downloaded file is always named by the package's name with extension .zip.
