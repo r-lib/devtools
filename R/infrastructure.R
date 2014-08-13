@@ -145,6 +145,33 @@ use_travis <- function(pkg = ".") {
 add_travis <- use_travis
 
 #' @rdname infrastructure
+#' @section \code{use_appveyor}:
+#' Add basic AppVeyor template to a package. Also adds \code{appveyor.yml} to
+#' \code{.Rbuildignore} so it isn't included in the built package.
+#' @export
+use_appveyor <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  path <- file.path(pkg$path, "appveyor.yml")
+  if (file.exists(path)) {
+    stop("appveyor.yml already exists", call. = FALSE)
+  }
+
+  gh <- github_info(pkg)
+  message("Adding appveyor.yml to ", pkg$package, ". Next: \n",
+          " * Turn on AppVeyor for this repo at https://ci.appveyor.com/projects\n",
+          " * Add an AppVeyor shield to your README.md."
+  )
+
+  template_path <- system.file("templates/appveyor.yml", package = "devtools")
+  file.copy(template_path, path)
+
+  add_build_ignore(pkg, "appveyor.yml")
+
+  invisible(TRUE)
+}
+
+#' @rdname infrastructure
 #' @section \code{use_package_doc}:
 #' Adds a roxygen template for package documentation
 #' @export
