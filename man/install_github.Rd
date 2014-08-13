@@ -4,8 +4,7 @@
 \title{Attempts to install a package directly from github.}
 \usage{
 install_github(repo, username = NULL, ref = "master", subdir = NULL,
-  auth_user = NULL, password = NULL, auth_token = github_pat(), ...,
-  dependencies = TRUE)
+  auth_token = github_pat(), ..., dependencies = TRUE)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -21,12 +20,6 @@ precedence.}
 name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.}
 
 \item{subdir}{subdirectory within repo that contains the R package.}
-
-\item{auth_user}{your account username if you're attempting to install
-a package hosted in a private repository (and your username is different
-to \code{username})}
-
-\item{password}{your password}
 
 \item{auth_token}{To install from a private repo, generate a personal
 access token (PAT) in \url{https://github.com/settings/applications} and
@@ -48,7 +41,8 @@ packages in a single command.
 install_github("roxygen")
 install_github("wch/ggplot2")
 install_github(c("rstudio/httpuv", "rstudio/shiny"))
-install_github(c("devtools@devtools-1.4", "klutometis/roxygen#142", "mfrasca/r-logging/pkg))
+install_github(c("hadley/httr@v0.4", "klutometis/roxygen#142",
+  "mfrasca/r-logging/pkg"))
 
 # Update devtools to the latest version, on Linux and Mac
 # On Windows, this won't work - see ?build_github_devtools

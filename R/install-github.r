@@ -29,7 +29,8 @@
 #' install_github("roxygen")
 #' install_github("wch/ggplot2")
 #' install_github(c("rstudio/httpuv", "rstudio/shiny"))
-#' install_github(c("devtools@@devtools-1.4", "klutometis/roxygen#142", "mfrasca/r-logging/pkg))
+#' install_github(c("hadley/httr@@v0.4", "klutometis/roxygen#142",
+#'   "mfrasca/r-logging/pkg"))
 #'
 #' # Update devtools to the latest version, on Linux and Mac
 #' # On Windows, this won't work - see ?build_github_devtools
@@ -92,7 +93,7 @@ github_get_conn <- function(repo, username = NULL, ref = "master",
 
   param$msg <- paste(
     "Installing github repo",
-    paste(param$repo, param$ref, sep = "/", collapse = ", "),
+    paste0(param$username, "/", param$repo, "@", param$ref, collapse = ", "),
     "from",
     paste(username, collapse = ", "))
 
