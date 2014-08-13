@@ -4,6 +4,7 @@
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
 #' @name infrastructure
+#' @family infrastructure
 NULL
 
 #' @section \code{use_testthat}:
@@ -175,4 +176,70 @@ add_desc_package <- function(pkg = ".", field, name) {
     write_dcf(desc_path, desc)
   }
   invisible(changed)
+}
+
+#' Use data in a package.
+#'
+#' This function makes it easy to save package data in the correct format.
+#'
+#' @param ... Unquoted names of existing objects to save.
+#' @param pkg Package where to store data. Defaults to package in working
+#'   directory.
+#' @param internal If \code{FALSE}, saves each object in individual
+#'   \code{.rda} files in the \code{data/} directory. These are available
+#'   whenever the package is loaded. If \code{TRUE}, stores all objects in
+#'   a single \code{R/sysdata.rda} file. These objects are only available
+#'   within the package.
+#' @param overwrite By default, \code{use_data} will not overwrite existing
+#'   files. If you really want to do so, set this to \code{TRUE}.
+#' @param compress Choose the type of compression used by \code{\link{save}}.
+#'   Should be one of "gzip", "bzip2" or "xz".
+#' @export
+#' @family infrastructure
+#' @examples
+#' \dontrun{
+#' x <- 1:10
+#' y <- 1:100
+#'
+#' use_data(x, y) # For external use
+#' use_data(x, y, internal = TRUE) # For internal use
+#' }
+use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
+                     compress = "bzip2") {
+  pkg <- as.package(pkg)
+
+  to_save <- dots(...)
+  is_name <- vapply(to_save, is.symbol, logical(1))
+  if (any(!is_name)) {
+    stop("Can only save existing named objects", call. = FALSE)
+  }
+  objs <- vapply(to_save, as.character, character(1))
+
+  if (internal) {
+    data_path <- file.path(pkg$path, "R", "sysdata.rda")
+    if (file.exists(data_path) && !overwrite) {
+      stop("R/sysdata.rda exists. Use overwrite = TRUE to overwrite",
+        call. = FALSE)
+    }
+
+    message("Saving ", paste(objs, collapse = ", "), " to R/sysdata.rda")
+    save(..., file = data_path, envir = parent.frame(), compress = compress)
+  } else {
+    data_path <- file.path(pkg$path, "data")
+    if (!file.exists(data_path)) dir.create(data_path)
+
+    paths <- file.path(pkg$path, "data", paste0(objs, ".rda"))
+    if (any(file.exists(paths)) && !overwrite) {
+      stop(paste(basename(paths), collapse = ", "), " already exist. ",
+        "Use overwrite = TRUE to overwrite", call. = FALSE)
+    }
+    message("Saving ", paste(objs, collapse = ", "), " to ",
+      paste0("data/", basename(paths), collapse = ", "))
+    save_one <- function(name, path) {
+      save(list = name, file = path, envir = parent.frame(), compress = compress)
+    }
+    Map(save_one, objs, paths)
+
+  }
+  invisible()
 }

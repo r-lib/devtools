@@ -65,4 +65,7 @@ Add basic travis template to a package. Also adds \code{.travis.yml} to
 
 Adds a roxygen template for package documentation
 }
+\seealso{
+Other infrastructure: \code{\link{use_data}}
+}
 

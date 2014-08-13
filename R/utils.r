@@ -53,3 +53,7 @@ write_dcf <- function(path, desc) {
 
   cat(text, file = path)
 }
+
+dots <- function(...) {
+  eval(substitute(alist(...)))
+}
