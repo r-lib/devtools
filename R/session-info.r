@@ -55,13 +55,22 @@ print.session_info <- function(x, ...) {
 }
 
 platform_info <- function() {
+  if (rstudioapi::isAvailable()) {
+    ver <- rstudioapi::getVersion()
+    ui <- paste0("RStudio (", ver, ")")
+  } else {
+    ui <- .Platform$GUI
+  }
+
   structure(list(
     version = R.version.string,
     system = version$system,
+    ui = ui,
     language = Sys.getenv("LANGUAGE", "(EN)"),
     collate = Sys.getlocale("LC_COLLATE"),
     tz = Sys.timezone()
   ), class = "platform_info")
+
 }
 print.platform_info <- function(x, ...) {
   df <- data.frame(setting = names(x), value = unlist(x), stringsAsFactors = FALSE)
