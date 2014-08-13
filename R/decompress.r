@@ -2,7 +2,7 @@ decompress <- function(src, target) {
   stopifnot(file.exists(src))
 
   if (grepl("\\.zip$", src)) {
-    unzip(src, exdir = target, unzip = getOption("unzip"))
+    my_unzip(src, target)
     outdir <- getrootdir(as.vector(unzip(src, list = TRUE)$Name))
 
   } else if (grepl("\\.tar$", src)) {
@@ -32,8 +32,21 @@ decompress <- function(src, target) {
 # getdir("path/to/dir/") returns "path/to/dir"
 getdir <- function(path)  sub("/[^/]*$", "", path)
 
-# Given a list of files, returns the root (the topmost folder) 
+# Given a list of files, returns the root (the topmost folder)
 # getrootdir(c("path/to/file", "path/to/other/thing")) returns "path/to"
 getrootdir <- function(file_list) {
   getdir(file_list[which.min(nchar(gsub("[^/]", "", file_list)))])
+}
+
+my_unzip <- function(src, target, unzip = getOption("unzip")) {
+  if (unzip == "internal") {
+    unzip(src, exdir = target)
+  }
+
+  args <- paste(
+    "-oq", shQuote(src),
+    "-d", shQuote(target)
+  )
+
+  system_check(unzip, args, quiet = TRUE)
 }
