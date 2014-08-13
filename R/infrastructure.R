@@ -244,3 +244,25 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
   invisible()
 }
 
+#' Use \code{data-raw} to compute package datasets.
+#'
+#' @param pkg Package where to create \code{data-raw}. Defaults to package in
+#'   working directory.
+#' @export
+#' @family infrastructure
+use_data_raw <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  path <- file.path(pkg$path, "data-raw")
+  if (file.exists(path)) {
+    stop("data-raw/ already exists", call. = FALSE)
+  }
+
+  message("Creating data-raw/")
+  dir.create(path)
+  add_build_ignore(pkg, "data-raw")
+
+  message("Next: \n",
+    "* Add data creation scripts in data-raw\n",
+    "* Use devtools::use_data() to add data to package")
+}

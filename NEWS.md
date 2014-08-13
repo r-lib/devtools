@@ -18,6 +18,9 @@
 * New `use_data()` makes it easy to include data in a package, either 
   in `data/` (for exported datasets) or in `R/sysdata.rda` (for internal
   data). (#542)
+  
+* New `use_data_raw()` to create `data-raw/` directory for reproducible
+  generation of `data/` files (#541).
 
 * New `use_rcpp()` sets up a package to use Rcpp.
 
