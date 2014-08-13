@@ -56,19 +56,16 @@ github_get_conn <- function(repo, username = NULL, ref = "master",
                             subdir = NULL, auth_token = NULL, ...) {
 
   params <- github_parse_path(repo)
-  username <- params$username %||% username
 
-  if (is.null(username)) {
-    default <- getOption("github.user")
-    if (!is.null(default)) {
-      username <- default
-      warning("Relying on default username is deprecated. Please use ",
-        username, "/", repo, call. = FALSE)
-    }
+  if (is.null(params$username)) {
+    username <- username %||% getOption("github.user") %||%
+      stop("Repo name should look like username/repo", call. = FALSE)
+    warning("Relying on default username is deprecated. Please use ",
+      username, "/", repo, call. = FALSE)
   } else {
-    warning("username is deprecated. Please use ", username, "/", repo,
-      call. = FALSE)
+    username <- params$username
   }
+
   repo <- params$repo
   ref <- params$ref %||% ref
   subdir <- params$subdir %||% subdir
