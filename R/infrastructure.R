@@ -4,8 +4,6 @@
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
 #' @name infrastructure
-#' @aliases add_test_infrastructure
-#' @aliases add_rstudio_project
 NULL
 
 #' @section \code{use_testthat}:
@@ -14,6 +12,7 @@ NULL
 #' add \pkg{testthat} to the suggested packages. This is called
 #' automatically from \code{\link{test}} if needed.
 #' @rdname infrastructure
+#' @aliases add_test_infrastructure
 #' @export
 use_testthat <- function(pkg = ".") {
   pkg <- as.package(pkg)
@@ -42,6 +41,7 @@ add_test_infrastructure <- use_testthat
 #' opened for the first time.
 #' @export
 #' @rdname infrastructure
+#' @aliases add_rstudio_project
 use_rstudio <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
@@ -60,7 +60,6 @@ use_rstudio <- function(pkg = ".") {
 }
 
 #' @export
-#' @rdname infrastructure
 add_rstudio_project <- use_rstudio
 
 
@@ -107,6 +106,7 @@ use_rcpp <- function(pkg = ".") {
 #' Add basic travis template to a package. Also adds \code{.travis.yml} to
 #' \code{.Rbuildignore} so it isn't included in the built package.
 #' @export
+#' @aliases add_travis
 use_travis <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
@@ -127,7 +127,6 @@ use_travis <- function(pkg = ".") {
   invisible(TRUE)
 }
 
-#' @rdname infrastructure
 #' @export
 add_travis <- use_travis
 

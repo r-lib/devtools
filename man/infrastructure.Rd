@@ -16,17 +16,13 @@ use_testthat(pkg = ".")
 
 use_rstudio(pkg = ".")
 
-add_rstudio_project(pkg = ".")
-
 use_knitr(pkg = ".")
 
 use_rcpp(pkg = ".")
 
 use_travis(pkg = ".")
 
-add_travis(pkg = ".")
-
-use_package_doc(pkg)
+use_package_doc(pkg = ".")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
