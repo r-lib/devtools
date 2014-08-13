@@ -5,6 +5,7 @@
 \alias{add_travis}
 \alias{infrastructure}
 \alias{use_knitr}
+\alias{use_package_doc}
 \alias{use_rcpp}
 \alias{use_rstudio}
 \alias{use_testthat}
@@ -24,6 +25,8 @@ use_rcpp(pkg = ".")
 use_travis(pkg = ".")
 
 add_travis(pkg = ".")
+
+use_package_doc(pkg)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -60,5 +63,10 @@ Creates \code{src/} and adds needed packages to \code{DESCRIPTION}.
 
 Add basic travis template to a package. Also adds \code{.travis.yml} to
 \code{.Rbuildignore} so it isn't included in the built package.
+}
+
+\section{\code{use_package_doc}}{
+
+Adds a roxygen template for package documentation
 }
 

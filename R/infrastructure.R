@@ -131,6 +131,23 @@ use_travis <- function(pkg = ".") {
 #' @export
 add_travis <- use_travis
 
+#' @rdname infrastructure
+#' @section \code{use_package_doc}:
+#' Adds a roxygen template for package documentation
+#' @export
+#' @importFrom whisker whisker.render
+use_package_doc <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  path <- file.path("R", paste(pkg$package, "-package.r", sep = ""))
+  if (file.exists(path)) {
+    stop(path, " already exists", call. = FALSE)
+  }
+
+  message("Creating ", path)
+  out <- render_template("packagename-package.r", list(name = pkg$package))
+  writeLines(out, file.path(pkg$path, path))
+}
 
 add_desc_package <- function(pkg = ".", field, name) {
   pkg <- as.package(pkg)
