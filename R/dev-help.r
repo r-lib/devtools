@@ -100,6 +100,7 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 #' help("help", "utils")
 #' help("?", "utils")
 #'
+#' \dontrun{
 #' # Examples demonstrating the multiple ways of supplying arguments
 #' # NB: you can't do pkg <- "ggplot2"; help("ggplot2", pkg)
 #' shim_help(lm)
@@ -112,6 +113,7 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 #' shim_help(topic)
 #' shim_help(topic, stats)
 #' shim_help(topic, 'stats')
+#' }
 shim_help <- function(topic, package = NULL, ...) {
   # Reproduce help's NSE for topic - try to eval it and see if it's a string
   topic_name <- substitute(topic)

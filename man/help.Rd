@@ -52,6 +52,7 @@ help("load_all")
 help("help", "utils")
 help("?", "utils")
 
+\dontrun{
 # Examples demonstrating the multiple ways of supplying arguments
 # NB: you can't do pkg <- "ggplot2"; help("ggplot2", pkg)
 shim_help(lm)
@@ -64,5 +65,6 @@ topic <- "lm"
 shim_help(topic)
 shim_help(topic, stats)
 shim_help(topic, 'stats')
+}
 }
 
