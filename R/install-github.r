@@ -87,10 +87,8 @@ github_pkg <- function(repo, username = NULL, ref = NULL, subdir = NULL,
   url <- file.path("https://api.github.com", "repos", meta$username,
     meta$repo, "zipball", meta$ref)
 
-  msg <- paste0(
-    "Installing github repo ", meta$repo, " (", meta$ref, ") ",
-    "from ", meta$username
-  )
+  msg <- paste0("Downloading github repo ", meta$username, "/", meta$repo,
+    "@", meta$ref)
 
   list(url = url, name = meta$repo, config = auth, meta = meta, message = msg,
     type = "zip")
