@@ -6,7 +6,7 @@ uses_git <- function(pkg = ".") {
 git <- function(pkg = ".", args, quiet = FALSE) {
   pkg <- as.package(pkg)
 
-  full <- paste(shQuote(git_path()), " ", paste(args, collapse = ", "), sep = "")
+  full <- paste0(shQuote(git_path()), " ", paste(args, collapse = ""))
   result <- in_dir(pkg$path, system(full, intern = TRUE, ignore.stderr = quiet))
 
   status <- attr(result, "status") %||% 0
@@ -16,6 +16,18 @@ git <- function(pkg = ".", args, quiet = FALSE) {
 
   result
 }
+
+git_sha1 <- function(pkg = ".", n = 10) {
+  sha <- git(pkg, c("rev-parse", " --short=", n, " HEAD"))
+  if (uncommitted()) sha <- paste0(sha, "*")
+  sha
+}
+
+uncommitted <- function() {
+  system("git diff-index --quiet --cached HEAD") == 1 ||
+    system("git diff-files --quiet") == 1
+}
+
 
 github_info <- function(pkg = ".") {
   pkg <- as.package(pkg)
