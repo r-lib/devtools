@@ -91,13 +91,17 @@ use_knitr <- function(pkg = ".") {
 use_rcpp <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
+  message("Adding Rcpp to LinkingTo and Imports")
   add_desc_package(pkg, "LinkingTo", "Rcpp")
   add_desc_package(pkg, "Imports", "Rcpp")
+
+  message("Creating src/ and src/.gitignore")
   dir.create(file.path(pkg$path, "src"), showWarnings = FALSE)
+  union_write(file.path(pkg$path, "src", ".gitignore"), c(".o", ".so", ".dll"))
 
   message(
-    "Include the following roxygen tags somewhere in your package:\n",
-    "#' @useDynLib mypackage\n",
+    "Next, include the following roxygen tags somewhere in your package:\n",
+    "#' @useDynLib ", pkg$package, "\n",
     "#' @importFrom Rcpp sourceCpp"
   )
 }
