@@ -55,16 +55,13 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
                        auth_token = github_pat(), sha = NULL) {
 
   meta <- parse_git_repo(repo)
+  meta <- resolve_ref(meta$ref %||% ref, meta)
 
   if (is.null(meta$username)) {
     meta$username <- username %||% getOption("github.user") %||%
       stop("Unknown username.")
     warning("Username parameter is deprecated. Please use ",
       username, "/", repo, call. = FALSE)
-  }
-
-  if (is.null(meta$ref) && !is.null(ref)) {
-    meta <- resolve_ref(ref, meta)
   }
 
   remote("github",
@@ -137,21 +134,26 @@ remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
 #' @export
 github_pull <- function(pull) structure(pull, class = "github_pull")
 
-resolve_ref <- function(x, params) UseMethod("github_ref")
+resolve_ref <- function(x, params) UseMethod("resolve_ref")
 
 resolve_ref.default <- function(x, params) {
   params$ref <- x
   params
 }
 
+resolve_ref.NULL <- function(x, params) {
+  params$ref <- "master"
+  params
+}
+
 resolve_ref.github_pull <- function(x, params) {
   # GET /repos/:user/:repo/pulls/:number
-  path <- file.path("repos", param$username, param$repo, "pulls", x)
+  path <- file.path("repos", params$username, params$repo, "pulls", x)
   response <- github_GET(path)
 
   params$username <- response$user$login
   params$ref <- response$head$ref
-  ref
+  params
 }
 
 
@@ -176,9 +178,6 @@ parse_git_repo <- function(path) {
   if (!is.null(params$pull)) {
     params$ref <- github_pull(params$pull)
     params$pull <- NULL
-  }
-  if (is.null(params$ref)) {
-    params$ref <- "master"
   }
 
   params
