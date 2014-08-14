@@ -12,11 +12,22 @@
 ## Tool templates and `create()`
 
 * `create()` no longer generates `man/` directory - roxygen2 now does
-  this automatically.
+  this automatically. It also no longer generates an package-level doc
+  template, instead call `use_package_doc()`.
+
+* New `use_data()` makes it easy to include data in a package, either 
+  in `data/` (for exported datasets) or in `R/sysdata.rda` (for internal
+  data). (#542)
+  
+* New `use_data_raw()` to create `data-raw/` directory for reproducible
+  generation of `data/` files (#541).
 
 * New `use_rcpp()` sets up a package to use Rcpp.
 
 * New `use_knitr()` sets up a package to use knitr for vignettes.
+
+* New `use_package_doc()` sets up an Roxygen template for package-level
+  docs.
 
 * New function `install_svn()` to install an R package from a subversion
   repository.
@@ -27,11 +38,18 @@
 * renamed `add_rstudio_project()` to `use_rstudio()`,
   `add_travis()` to `use_travis()` and 
   `add_test_infrastructure()` to `use_testthat()` (old functions aliased to new)
+  
+* `use_travis()` now figures out what your github username and repo are so
+  it can construct the markdown build image for you. (#546)
 
 * `create()` now makes a dummy namespace so that you can build & reload
   without running `document()` first.
 
 ## Other minor improvements and bug fixes
+
+* New `session_info()` provides useful information about your R session.
+  It's a little more focussed than `sessionInfo()` and includes where
+  packages where installed from (#526).
 
 * If you're using Rstudio, and you you're trying to build a binary package
   without the necessary build tools, Rstudio will prompt to download and
@@ -40,7 +58,7 @@
 * devtools no longer runs commands with `LC_ALL=C` - this no longer seems
   to be necessary (#507).
 
-* `help()`, `?`, and `system.file()` are now made available when a pacakge is
+* `help()`, `?`, and `system.file()` are now made available when a package is
   loaded with `load_all()`, even if the devtools package isn't attached.
 
 * `dependencies = TRUE` is not forced anymore in `install_github()` (regression
@@ -60,6 +78,14 @@
   install a specific pull request. The parameter `pull` is now deprecated,
   neither `pull` nor `branch` are included in the formal parameters
   (@krlmlr, #509).
+
+* The `username` paramter of `install_github()` is deprecated - please include
+  in the repo name: `rstudio/shiny`, `hadley/devtools` etc. Deprecated 
+  parameters `auth_user`, `branch`, `pull` and `password` have all been 
+  removed.
+
+* Implemented own version `utils::unzip()` that throws error if command
+  fails and doesn't print unneeded messages on non-Windows platforms (#540).
 
 # devtools 1.5
 

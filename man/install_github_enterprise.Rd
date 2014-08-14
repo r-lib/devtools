@@ -3,10 +3,9 @@
 \alias{install_github_enterprise}
 \title{Convenience wrapper for \code{\link{install_github}}.}
 \usage{
-install_github_enterprise(repo, username = getOption("github.user"),
-  ref = "master", subdir = NULL, auth_user = NULL, password = NULL,
-  auth_token = github_pat(), github_url = devtools_git_enterprise(), ...,
-  dependencies = TRUE)
+install_github_enterprise(repo, username = NULL, ref = "master",
+  subdir = NULL, auth_token = github_pat(),
+  github_url = devtools_git_enterprise(), ..., dependencies = TRUE)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -21,12 +20,6 @@ respective parameters (see below); if both is specified, the values in
 name. Defaults to \code{"master"}.}
 
 \item{subdir}{subdirectory within repo that contains the R package.}
-
-\item{auth_user}{your account username if you're attempting to install
-a package hosted in a private repository (and your username is different
-to \code{username})}
-
-\item{password}{your password}
 
 \item{auth_token}{To install from a private repo, generate a personal
 access token (PAT) in \url{https://github.com/settings/applications} and

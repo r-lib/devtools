@@ -41,20 +41,11 @@ create <- function(path, description = getOption("devtools.desc"),
   dir.create(file.path(path, "R"))
   create_description(path, extra = description)
   create_namespace(path)
-  create_package_doc(path, name)
 
   if (rstudio) use_rstudio(path)
 
   if (check) check(path)
   invisible(TRUE)
-}
-
-#' @importFrom whisker whisker.render
-create_package_doc <- function(path, name) {
-  out <- render_template("packagename-package.r", list(name = name))
-
-  target <- file.path(path, "R", paste(name, "-package.r", sep = ""))
-  writeLines(out, target)
 }
 
 create_namespace <- function(path) {

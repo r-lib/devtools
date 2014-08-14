@@ -356,18 +356,3 @@ unregister_namespace <- function(name = NULL) {
   do.call(rm, args = list(name, envir = ns_registry()))
   invisible()
 }
-
-# This is similar to getNamespace(), except that getNamespace will load
-# the namespace if it's not already loaded. This function will not.
-# As of R 3.0, a function called .getNamespace() has the same effect
-# and this is longer be necessary (but it's still needed as long as devtools
-# supports R 2.15).
-get_namespace <- function(name) {
-  # Sometimes we'll be passed something like as.name(name), so make sure
-  # it's a string
-  name <- as.character(name)
-  if (!(name %in% loadedNamespaces()))
-    return(NULL)
-  else
-    return(getNamespace(name))
-}

@@ -7,7 +7,10 @@
 #' @param username  bitbucket username
 #' @param ref Desired git reference. Could be a commit, tag, or branch
 #'   name. Defaults to \code{"master"}.
-#' @param branch Deprecated. Use \code{ref} instead.
+#' @param auth_user your account username if you're attempting to install
+#'   a package hosted in a private repository (and your username is different
+#'   to \code{username})
+#' @param password your password
 #' @seealso Bitbucket API docs:
 #'   \url{https://confluence.atlassian.com/display/BITBUCKET/Use+the+Bitbucket+REST+APIs}
 #' @inheritParams install_github
@@ -18,13 +21,8 @@
 #' install_bitbucket("paulhiemstra")
 #' install_bitbucket(c("testrepo", "testrepo2"))
 #' }
-install_bitbucket <- function(repo, username, ref = "master", branch = NULL,
-                              auth_user = NULL, password = NULL, ...)
-{
-  if (!is.null(branch)) {
-    warning("'branch' is deprecated. In the future, please use 'ref' instead.")
-    ref <- branch
-  }
+install_bitbucket <- function(repo, username, ref = "master",
+                              auth_user = NULL, password = NULL, ...) {
 
   if (!is.null(password)) {
     auth <- httr::authenticate(

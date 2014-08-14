@@ -4,8 +4,7 @@
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
 #' @name infrastructure
-#' @aliases add_test_infrastructure
-#' @aliases add_rstudio_project
+#' @family infrastructure
 NULL
 
 #' @section \code{use_testthat}:
@@ -14,6 +13,7 @@ NULL
 #' add \pkg{testthat} to the suggested packages. This is called
 #' automatically from \code{\link{test}} if needed.
 #' @rdname infrastructure
+#' @aliases add_test_infrastructure
 #' @export
 use_testthat <- function(pkg = ".") {
   pkg <- as.package(pkg)
@@ -42,6 +42,7 @@ add_test_infrastructure <- use_testthat
 #' opened for the first time.
 #' @export
 #' @rdname infrastructure
+#' @aliases add_rstudio_project
 use_rstudio <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
@@ -60,7 +61,6 @@ use_rstudio <- function(pkg = ".") {
 }
 
 #' @export
-#' @rdname infrastructure
 add_rstudio_project <- use_rstudio
 
 
@@ -107,6 +107,7 @@ use_rcpp <- function(pkg = ".") {
 #' Add basic travis template to a package. Also adds \code{.travis.yml} to
 #' \code{.Rbuildignore} so it isn't included in the built package.
 #' @export
+#' @aliases add_travis
 use_travis <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
@@ -114,9 +115,14 @@ use_travis <- function(pkg = ".") {
   if (file.exists(path)) {
     stop(".travis.yml already exists", call. = FALSE)
   }
+
+  gh <- github_info(pkg)
   message("Adding .travis.yml to ", pkg$package, ". Next: \n",
     " * Turn on travis for this repo at https://travis-ci.org/profile\n",
-    " * Add a travis shield to your README.md"
+    " * Add a travis shield to your README.md:\n",
+    "[![Build Status]",
+       "(https://travis-ci.org/", gh$username, "/", gh$repo, ".png?branch=master)]",
+       "(https://travis-ci.org/", gh$username, "/", gh$repo, ")"
   )
 
   template_path <- system.file("templates/travis.yml", package = "devtools")
@@ -127,10 +133,26 @@ use_travis <- function(pkg = ".") {
   invisible(TRUE)
 }
 
-#' @rdname infrastructure
 #' @export
 add_travis <- use_travis
 
+#' @rdname infrastructure
+#' @section \code{use_package_doc}:
+#' Adds a roxygen template for package documentation
+#' @export
+#' @importFrom whisker whisker.render
+use_package_doc <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  path <- file.path("R", paste(pkg$package, "-package.r", sep = ""))
+  if (file.exists(path)) {
+    stop(path, " already exists", call. = FALSE)
+  }
+
+  message("Creating ", path)
+  out <- render_template("packagename-package.r", list(name = pkg$package))
+  writeLines(out, file.path(pkg$path, path))
+}
 
 add_desc_package <- function(pkg = ".", field, name) {
   pkg <- as.package(pkg)
@@ -154,4 +176,93 @@ add_desc_package <- function(pkg = ".", field, name) {
     write_dcf(desc_path, desc)
   }
   invisible(changed)
+}
+
+#' Use data in a package.
+#'
+#' This function makes it easy to save package data in the correct format.
+#'
+#' @param ... Unquoted names of existing objects to save.
+#' @param pkg Package where to store data. Defaults to package in working
+#'   directory.
+#' @param internal If \code{FALSE}, saves each object in individual
+#'   \code{.rda} files in the \code{data/} directory. These are available
+#'   whenever the package is loaded. If \code{TRUE}, stores all objects in
+#'   a single \code{R/sysdata.rda} file. These objects are only available
+#'   within the package.
+#' @param overwrite By default, \code{use_data} will not overwrite existing
+#'   files. If you really want to do so, set this to \code{TRUE}.
+#' @param compress Choose the type of compression used by \code{\link{save}}.
+#'   Should be one of "gzip", "bzip2" or "xz".
+#' @export
+#' @family infrastructure
+#' @examples
+#' \dontrun{
+#' x <- 1:10
+#' y <- 1:100
+#'
+#' use_data(x, y) # For external use
+#' use_data(x, y, internal = TRUE) # For internal use
+#' }
+use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
+                     compress = "bzip2") {
+  pkg <- as.package(pkg)
+
+  to_save <- dots(...)
+  is_name <- vapply(to_save, is.symbol, logical(1))
+  if (any(!is_name)) {
+    stop("Can only save existing named objects", call. = FALSE)
+  }
+  objs <- vapply(to_save, as.character, character(1))
+
+  if (internal) {
+    data_path <- file.path(pkg$path, "R", "sysdata.rda")
+    if (file.exists(data_path) && !overwrite) {
+      stop("R/sysdata.rda exists. Use overwrite = TRUE to overwrite",
+        call. = FALSE)
+    }
+
+    message("Saving ", paste(objs, collapse = ", "), " to R/sysdata.rda")
+    save(..., file = data_path, envir = parent.frame(), compress = compress)
+  } else {
+    data_path <- file.path(pkg$path, "data")
+    if (!file.exists(data_path)) dir.create(data_path)
+
+    paths <- file.path(pkg$path, "data", paste0(objs, ".rda"))
+    if (any(file.exists(paths)) && !overwrite) {
+      stop(paste(basename(paths), collapse = ", "), " already exist. ",
+        "Use overwrite = TRUE to overwrite", call. = FALSE)
+    }
+    message("Saving ", paste(objs, collapse = ", "), " to ",
+      paste0("data/", basename(paths), collapse = ", "))
+    save_one <- function(name, path) {
+      save(list = name, file = path, envir = parent.frame(), compress = compress)
+    }
+    Map(save_one, objs, paths)
+
+  }
+  invisible()
+}
+
+#' Use \code{data-raw} to compute package datasets.
+#'
+#' @param pkg Package where to create \code{data-raw}. Defaults to package in
+#'   working directory.
+#' @export
+#' @family infrastructure
+use_data_raw <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  path <- file.path(pkg$path, "data-raw")
+  if (file.exists(path)) {
+    stop("data-raw/ already exists", call. = FALSE)
+  }
+
+  message("Creating data-raw/")
+  dir.create(path)
+  add_build_ignore(pkg, "data-raw")
+
+  message("Next: \n",
+    "* Add data creation scripts in data-raw\n",
+    "* Use devtools::use_data() to add data to package")
 }

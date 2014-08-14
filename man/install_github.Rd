@@ -3,29 +3,23 @@
 \alias{install_github}
 \title{Attempts to install a package directly from github.}
 \usage{
-install_github(repo, username = getOption("github.user"), ref = "master",
-  subdir = NULL, auth_user = NULL, password = NULL,
+install_github(repo, username = NULL, ref = "master", subdir = NULL,
   auth_token = github_pat(), github_url = NULL, ..., dependencies = TRUE)
 }
 \arguments{
 \item{repo}{Repository address in the format
-\code{[username/]repo[/subdir][@ref|#pull]}. Alternatively, you can
-specify \code{username}, \code{subdir} and/or \code{ref} using the
-respective parameters (see below); if both is specified, the values in
-\code{repo} take precedence.}
+\code{username/repo[/subdir][@ref|#pull]}. Alternatively, you can
+specify \code{subdir} and/or \code{ref} using the respective parameters
+(see below); if both is specified, the values in \code{repo} take
+precedence.}
 
-\item{username}{User name}
+\item{username}{User name. Deprecate: please include username in the
+\code{repo}}
 
 \item{ref}{Desired git reference. Could be a commit, tag, or branch
 name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.}
 
 \item{subdir}{subdirectory within repo that contains the R package.}
-
-\item{auth_user}{your account username if you're attempting to install
-a package hosted in a private repository (and your username is different
-to \code{username})}
-
-\item{password}{your password}
 
 \item{auth_token}{To install from a private repo, generate a personal
 access token (PAT) in \url{https://github.com/settings/applications} and
@@ -50,7 +44,8 @@ packages in a single command.
 install_github("roxygen")
 install_github("wch/ggplot2")
 install_github(c("rstudio/httpuv", "rstudio/shiny"))
-install_github(c("devtools@devtools-1.4", "klutometis/roxygen#142", "mfrasca/r-logging/pkg))
+install_github(c("hadley/httr@v0.4", "klutometis/roxygen#142",
+  "mfrasca/r-logging/pkg"))
 
 # Update devtools to the latest version, on Linux and Mac
 # On Windows, this won't work - see ?build_github_devtools
