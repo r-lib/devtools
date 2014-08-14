@@ -10,6 +10,13 @@ is_ancestor_env <- function(e, x) {
     is_ancestor_env(e, parent.env(x))
 }
 
+# Get parent environment n steps deep
+parent_env <- function(e, n = 1) {
+  if (n == 0)
+    e
+  else
+    parent_env(parent.env(e), n-1)
+}
 
 test_that("Loaded namespaces have correct version", {
   load_all("testNamespace")
@@ -90,9 +97,9 @@ test_that("Namespace, imports, and package environments have correct hierarchy",
   nsenv  <- ns_env("testNamespace")
   impenv <- imports_env("testNamespace")
 
-  expect_identical(parenvs(nsenv)[[2]], impenv)
-  expect_identical(parenvs(nsenv)[[3]], .BaseNamespaceEnv)
-  expect_identical(parenvs(nsenv)[[4]], .GlobalEnv)
+  expect_identical(parent_env(nsenv, 1), impenv)
+  expect_identical(parent_env(nsenv, 2), .BaseNamespaceEnv)
+  expect_identical(parent_env(nsenv, 3), .GlobalEnv)
 
   # pkgenv should be an ancestor of the global environment
   expect_true(is_ancestor_env(pkgenv, .GlobalEnv))
