@@ -23,14 +23,14 @@ test_that("GitHub repo paths are parsed correctly", {
 })
 
 # Mock github_ref.github_pull so that GitHub API is not queried for this test
-mock_resolve_ref.github_pull <- function(x, params) {
+mock_github_resolve_ref.github_pull <- function(x, params) {
   params$username <- sprintf("user-%s", x)
   params$ref <- sprintf("pull-%s", x)
   params
 }
 
 test_that("GitHub parameters are returned correctly", {
-  with_mock("resolve_ref.github_pull", mock_resolve_ref.github_pull, {
+  with_mock("github_resolve_ref.github_pull", mock_github_resolve_ref.github_pull, {
     expect_equal(github_remote("hadley/devtools")$repo, "devtools")
     expect_equal(github_remote("krlmlr/kimisc")$username, "krlmlr")
     expect_equal(github_remote("my/test/pkg")$subdir, "pkg")

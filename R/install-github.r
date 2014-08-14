@@ -55,7 +55,7 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
                        auth_token = github_pat(), sha = NULL) {
 
   meta <- parse_git_repo(repo)
-  meta <- resolve_ref(meta$ref %||% ref, meta)
+  meta <- github_resolve_ref(meta$ref %||% ref, meta)
 
   if (is.null(meta$username)) {
     meta$username <- username %||% getOption("github.user") %||%
@@ -134,19 +134,19 @@ remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
 #' @export
 github_pull <- function(pull) structure(pull, class = "github_pull")
 
-resolve_ref <- function(x, params) UseMethod("resolve_ref")
+github_resolve_ref <- function(x, params) UseMethod("github_resolve_ref")
 
-resolve_ref.default <- function(x, params) {
+github_resolve_ref.default <- function(x, params) {
   params$ref <- x
   params
 }
 
-resolve_ref.NULL <- function(x, params) {
+github_resolve_ref.NULL <- function(x, params) {
   params$ref <- "master"
   params
 }
 
-resolve_ref.github_pull <- function(x, params) {
+github_resolve_ref.github_pull <- function(x, params) {
   # GET /repos/:user/:repo/pulls/:number
   path <- file.path("repos", params$username, params$repo, "pulls", x)
   response <- github_GET(path)
