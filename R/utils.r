@@ -57,3 +57,8 @@ write_dcf <- function(path, desc) {
 dots <- function(...) {
   eval(substitute(alist(...)))
 }
+
+first_upper <- function(x) {
+  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+  x
+}
