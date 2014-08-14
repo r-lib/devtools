@@ -51,7 +51,7 @@ install_github <- function(repo, username = NULL,
   pkgs <- lapply(repo, github_pkg, username = username, ref = ref,
     subdir = subdir, auth_token = auth_token, ..., dependencies = dependencies)
 
-  lapply(pkgs, install_pkg)
+  lapply(pkgs, install_remote)
 
 }
 
@@ -93,35 +93,6 @@ github_pkg <- function(repo, username = NULL, ref = NULL, subdir = NULL,
   list(url = url, name = meta$repo, config = auth, meta = meta, message = msg,
     type = "zip")
 }
-
-install_pkg <- function(pkg, ..., quiet = FALSE) {
-  bundle <- tempfile(fileext = paste0(".", pkg$type))
-  if (!quiet) {
-    message(pkg$message)
-  }
-  download(bundle, pkg$url, pkg$config)
-  on.exit(unlink(bundle), add = TRUE)
-
-  pkg_path <- source_pkg(bundle, subdir = pkg$meta$subdir)
-  on.exit(unlink(pkg_path, recursive = TRUE), add = TRUE)
-
-  meta <- pkg$meta
-  names(meta) <- paste0("Github", first_upper(names(meta)))
-  add_metadata(pkg_path, meta)
-
-  install(pkg_path, ..., quiet = quiet)
-}
-
-# Add metadata
-add_metadata <- function(pkg_path, meta) {
-  path <- file.path(pkg_path, "DESCRIPTION")
-  desc <- read_dcf(path)
-
-  desc <- modifyList(desc, meta)
-
-  write_dcf(path, desc)
-}
-
 
 #' Install a specific pull request from GitHub
 #'
