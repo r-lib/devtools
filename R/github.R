@@ -1,17 +1,17 @@
 github_GET <- function(path, ..., pat = github_pat()) {
   if (!is.null(pat)) {
-    auth <- authenticate(pat, "x-oauth-basic", "basic")
+    auth <- httr::authenticate(pat, "x-oauth-basic", "basic")
   } else {
     auth <- NULL
   }
 
-  req <- GET("https://api.github.com/", path = path, auth, ...)
+  req <- httr::GET("https://api.github.com/", path = path, auth, ...)
 
-  text <- content(req, as = "text")
+  text <- httr::content(req, as = "text")
   parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
 
-  if (status_code(req) >= 400) {
-    stop("Request failed (", status_code(req), ")\n", parsed$message,
+  if (httr::status_code(req) >= 400) {
+    stop("Request failed (", httr::status_code(req), ")\n", parsed$message,
       call. = FALSE)
   }
 
