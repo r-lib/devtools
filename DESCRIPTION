@@ -12,7 +12,7 @@ Depends:
     R (>= 3.0.2)
 Roxygen: list(wrap = FALSE)
 Imports:
-    httr (>= 0.3),
+    httr (>= 0.4),
     RCurl,
     utils,
     tools,
@@ -21,7 +21,8 @@ Imports:
     whisker,
     evaluate,
     digest,
-    rstudioapi
+    rstudioapi,
+    jsonlite
 Suggests:
     testthat (>= 0.7),
     roxygen2 (>= 4.0.0),
