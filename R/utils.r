@@ -62,3 +62,10 @@ first_upper <- function(x) {
   substr(x, 1, 1) <- toupper(substr(x, 1, 1))
   x
 }
+
+download <- function(path, url, ...) {
+  request <- GET(url, ...)
+  stop_for_status(request)
+  writeBin(content(request, "raw"), path)
+  path
+}
