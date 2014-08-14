@@ -2,13 +2,12 @@ context("Namespace")
 
 # Is e an ancestor environment of x?
 is_ancestor_env <- function(e, x) {
-  x_par <- parenvs(x, all = TRUE)
-
-  for (p in x_par) {
-    if (identical(e, p)) return(TRUE)
-  }
-
-  return(FALSE)
+  if (identical(e, x))
+    return(TRUE)
+  else if (identical(x, emptyenv()))
+    return(FALSE)
+  else
+    is_ancestor_env(e, parent.env(x))
 }
 
 
