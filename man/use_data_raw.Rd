@@ -13,7 +13,9 @@ working directory.}
 Use \code{data-raw} to compute package datasets.
 }
 \seealso{
-Other infrastructure: \code{\link{add_rstudio_project}},
+Other infrastructure: \code{\link{add_build_ignore}},
+  \code{\link{use_build_ignore}};
+  \code{\link{add_rstudio_project}},
   \code{\link{add_test_infrastructure}},
   \code{\link{add_travis}}, \code{\link{infrastructure}},
   \code{\link{use_knitr}}, \code{\link{use_package_doc}},

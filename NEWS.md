@@ -35,9 +35,10 @@
 * Wrote own version of `write.dcf()` that doesn't butcher whitespace and 
   fieldnames.
 
-* renamed `add_rstudio_project()` to `use_rstudio()`,
-  `add_travis()` to `use_travis()` and 
-  `add_test_infrastructure()` to `use_testthat()` (old functions aliased to new)
+* renamed `add_rstudio_project()` to `use_rstudio()`, `add_travis()` to 
+  `use_travis()`, `add_build_ignore()` to `use_build_ignore()`, and 
+  `add_test_infrastructure()` to `use_testthat()` (old functions are 
+  aliased to new)
   
 * `use_travis()` now figures out what your github username and repo are so
   it can construct the markdown build image for you. (#546)
