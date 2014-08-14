@@ -21,14 +21,18 @@ add_build_ignore <- function(pkg = ".", file, escape = TRUE) {
   }
 
   path <- file.path(pkg$path, ".Rbuildignore")
+  union_write(path, file)
+
+  invisible(TRUE)
+}
+
+union_write <- function(path, new_lines) {
   if (file.exists(path)) {
-    ignore <- readLines(path, warn = FALSE)
+    lines <- readLines(path, warn = FALSE)
   } else {
-    ignore <- character()
+    lines <- character()
   }
 
-  ignore <- union(ignore, file)
-
-  writeLines(ignore, path)
-  invisible(TRUE)
+  all <- union(lines, new_lines)
+  writeLines(all, path)
 }
