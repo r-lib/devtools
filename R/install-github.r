@@ -95,34 +95,33 @@ github_pkg <- function(repo, username = NULL, ref = NULL, subdir = NULL,
 }
 
 install_pkg <- function(pkg, ..., quiet = FALSE) {
-  # Download package file
   bundle <- tempfile(fileext = paste0(".", pkg$type))
   if (!quiet) {
     message(pkg$message)
   }
-  request <- GET(pkg$url, pkg$config)
-  stop_for_status(request)
-  writeBin(content(request, "raw"), bundle)
+  download(bundle, pkg$url, pkg$config)
   on.exit(unlink(bundle), add = TRUE)
 
-  # Install local file
-  add_metadata <- function(bundle, pkg_path) {
-    path <- file.path(pkg_path, "DESCRIPTION")
-    desc <- read_dcf(path)
-
-    meta <- pkg$meta
-    names(meta) <- paste0("Github", first_upper(names(meta)))
-
-    write_dcf(path, desc)
-  }
-
-  # pull before_install out of source_pkg
-  pkg_path <- source_pkg(bundle, subdir = pkg$meta$subdir,
-    before_install = add_metadata)
+  pkg_path <- source_pkg(bundle, subdir = pkg$meta$subdir)
   on.exit(unlink(pkg_path, recursive = TRUE), add = TRUE)
+
+  meta <- pkg$meta
+  names(meta) <- paste0("Github", first_upper(names(meta)))
+  add_metadata(pkg_path, meta)
 
   install(pkg_path, ..., quiet = quiet)
 }
+
+# Add metadata
+add_metadata <- function(pkg_path, meta) {
+  path <- file.path(pkg_path, "DESCRIPTION")
+  desc <- read_dcf(path)
+
+  desc <- modifyList(desc, meta)
+
+  write_dcf(path, desc)
+}
+
 
 #' Install a specific pull request from GitHub
 #'
