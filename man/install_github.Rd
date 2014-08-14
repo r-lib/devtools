@@ -4,7 +4,7 @@
 \title{Attempts to install a package directly from github.}
 \usage{
 install_github(repo, username = NULL, ref = "master", subdir = NULL,
-  auth_token = github_pat(), ..., dependencies = TRUE)
+  auth_token = github_pat(), ...)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -28,9 +28,6 @@ you can easily delete a PAT without affecting any others. Defaults to
 the \code{GITHUB_PAT} environment variable.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
-
-\item{dependencies}{By default, installs all dependencies so that you can
-build vignettes and use all functionality of the package.}
 }
 \description{
 This function is vectorised on \code{repo} so you can install multiple
