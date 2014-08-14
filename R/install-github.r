@@ -105,6 +105,7 @@ install_pkg <- function(pkg, ..., quiet = FALSE) {
   request <- GET(pkg$url, pkg$config)
   stop_for_status(request)
   writeBin(content(request, "raw"), bundle)
+  on.exit(unlink(bundle), add = TRUE)
 
   # Install local file
   add_metadata <- function(bundle, pkg_path) {
@@ -116,13 +117,13 @@ install_pkg <- function(pkg, ..., quiet = FALSE) {
 
     write_dcf(path, desc)
   }
-  res <- install_local_single(bundle, subdir = pkg$meta$subdir,
-    before_install = add_metadata, ..., quiet = TRUE)
 
-  # Only delete on success
-  unlink(bundle)
+  # pull before_install out of source_pkg
+  pkg_path <- source_pkg(bundle, subdir = pkg$meta$subdir,
+    before_install = add_metadata)
+  on.exit(unlink(pkg_path, recursive = TRUE), add = TRUE)
 
-  invisible(res)
+  install(pkg_path, ..., quiet = quiet)
 }
 
 #' Install a specific pull request from GitHub
