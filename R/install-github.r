@@ -151,15 +151,13 @@ github_get_conn <- function(repo, username = NULL,
     "from",
     paste(username, collapse = ", "))
 
-  if(is.null(github_url)) {
-      param$url <- paste("https://api.github.com", "repos", 
-                         param$username, param$repo, 
-                         "zipball", param$ref, sep = "/")
-  } else {          
-      param$url <- paste(github_url, "api/v3/repos", 
-                          param$username, param$repo, "legacy.zip", 
-                          param$ref, sep = "/")                         
-  }   
+  url <- paste("https://api.github.com", "repos",sep="/")
+  # If github_url is given, a private repo is assumed.
+  if(!is.null(github_url)) {
+      url <- paste(github_url,"api/v3/repos",sep="/")
+  }
+  param$url <- paste(url, param$username, param$repo, 
+                     "zipball", param$ref, sep = "/")   
   param
 }
 
