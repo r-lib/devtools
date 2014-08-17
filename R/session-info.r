@@ -134,6 +134,8 @@ pkg_source <- function(pkg) {
 
     repo
 
+  } else if (!is.null(desc$biocViews)) {
+    "Bioconductor"
   } else {
     "local"
   }
