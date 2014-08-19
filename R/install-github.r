@@ -67,9 +67,10 @@ install_github <- function(repo, username = NULL,
 #'   specify \code{username}, \code{subdir}, \code{ref} or \code{pull} using the
 #'   respective parameters (see below); if both is specified, the values in
 #'   \code{repo} take precedence.
-#' @param username User name
+#' @param username User name. Deprecate: please include username in the
+#'   \code{repo}
 #' @param ref Desired git reference. Could be a commit, tag, or branch
-#'   name. Defaults to \code{"master"}.
+#'   name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.
 #' @param subdir subdirectory within repo that contains the R package.
 #' @param auth_token To install from a private repo, generate a personal
 #'   access token (PAT) in \url{https://github.com/settings/applications} and
@@ -77,9 +78,7 @@ install_github <- function(repo, username = NULL,
 #'   you can easily delete a PAT without affecting any others. Defaults to
 #'   the \code{GITHUB_PAT} environment variable.
 #' @param github_url Defaults to NULL, so the default archive URL is served
-#'   from the GitHub API. You can set it to your custom Enterprise GitHub URL,
-#'   but it must point to your own implementation of the archive link server
-#'   API all the way -- e.g. \code{https://github.yourcompany.com/api/v3/repos}  
+#'   from the GitHub API. You can set it to your custom Enterprise GitHub URL.  
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @param dependencies By default, installs all dependencies so that you can
 #'   build vignettes and use all functionality of the package.
@@ -231,8 +230,8 @@ github_ref.github_pull <- function(x, param) {
   host <- "https://api.github.com"
 
   # resolve to custom URL if set
-  if(!is.null(param$github_url)) {
-    host <- paste(param$github_url,"api/v3",sep="/")
+  if(!is.null(param$url)) {
+    host <- paste(param$url,"api/v3",sep="/")
   } 
   # GET /repos/:user/:repo/pulls/:number
   path <- paste("repos", param$username, param$repo, "pulls", x, sep = "/")
@@ -278,6 +277,7 @@ github_parse_path <- function(path) {
   ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
   github_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
     username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
+
 
   param_names <- c("username", "repo", "subdir", "ref", "pull", "invalid")
   replace <- setNames(sprintf("\\%d", seq_along(param_names)), param_names)
