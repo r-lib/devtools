@@ -121,7 +121,10 @@ pkg_source <- function(pkg) {
   desc <- packageDescription(pkg)
 
   if (!is.null(desc$GithubSHA1)) {
-    str <- paste0("Github (", substr(desc$GithubSHA1, 1, 7), ")")
+    str <- paste0("Github (",
+                  desc$GithubUsername, "/",
+                  desc$GithubRepo, "@",
+                  substr(desc$GithubSHA1, 1, 7), ")")
   } else if (!is.null(desc$Repository)) {
     repo <- desc$Repository
 
