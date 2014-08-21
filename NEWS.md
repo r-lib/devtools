@@ -96,6 +96,9 @@
   
 * `check_dir()` no longer fails on UNC paths (#522).
 
+* `check_devtools()` also checks for dependencies on development versions
+  of packages (#534).
+
 * If you're using Rstudio, and you you're trying to build a binary package
   without the necessary build tools, Rstudio will prompt to download and
   install the right thing. (#488)

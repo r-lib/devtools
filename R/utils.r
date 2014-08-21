@@ -69,3 +69,5 @@ download <- function(path, url, ...) {
   writeBin(httr::content(request, "raw"), path)
   path
 }
+
+last <- function(x) x[length(x)]
