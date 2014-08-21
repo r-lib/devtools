@@ -64,6 +64,9 @@
   this means you can now specify repos with the compact `username/repo@ref`
   syntax. You must now always supply user (project) name and repo.
 
+* `install_svn()` now only downloads the branch that you need, rather than
+  the complete repo.
+
 ## Other minor improvements and bug fixes
 
 * New `session_info()` provides useful information about your R session.
