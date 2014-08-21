@@ -84,6 +84,9 @@
 
 ## Other minor improvements and bug fixes
 
+* `build(binary = TRUE)` creates an even-more-temporary package library
+  avoid conflicts (#557).
+
 * New `session_info()` provides useful information about your R session.
   It's a little more focussed than `sessionInfo()` and includes where
   packages where installed from (#526).
