@@ -64,8 +64,8 @@ first_upper <- function(x) {
 }
 
 download <- function(path, url, ...) {
-  request <- GET(url, ...)
-  stop_for_status(request)
-  writeBin(content(request, "raw"), path)
+  request <- httr::GET(url, ...)
+  httr::stop_for_status(request)
+  writeBin(httr::content(request, "raw"), path)
   path
 }
