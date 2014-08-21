@@ -53,12 +53,16 @@
   but it will allow the development of future tools like generic update
   functions.
   
-* `install_bitbucket()` has been bought into alignment with `install_github`:
+* `install_bitbucket()` has been bought into alignment with `install_github()`:
   this means you can now specify repos with the compact `username/repo@ref`
   syntax. The `username` is now deprecated. 
   
 * `install_git()` has been simplified and many of the arguments have changed 
   names for consistency with metadata for other package installs.
+
+* `install_gitorious()` has been bought into alignment with `install_github()`:
+  this means you can now specify repos with the compact `username/repo@ref`
+  syntax. You must now always supply user (project) name and repo.
 
 ## Other minor improvements and bug fixes
 
