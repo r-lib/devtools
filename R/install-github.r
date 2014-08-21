@@ -18,6 +18,8 @@
 #'   supply to this argument. This is safer than using a password because
 #'   you can easily delete a PAT without affecting any others. Defaults to
 #'   the \code{GITHUB_PAT} environment variable.
+#' @param github_url Defaults to NULL, so the default archive URL is served
+#'   from the GitHub API. You can set it to your custom Enterprise GitHub URL.  
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @param dependencies By default, installs all dependencies so that you can
 #'   build vignettes and use all functionality of the package.
@@ -45,16 +47,66 @@
 #' }
 install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
-                           auth_token = github_pat(), ...,
+                           auth_token = github_pat(), 
+                           github_url=NULL, ...,
                            dependencies = TRUE) {
 
   invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
-    username = username, ref = ref, subdir = subdir, auth_token = auth_token,
-    ..., dependencies = dependencies))
+    username = username, ref = ref, subdir = subdir, 
+    auth_token = auth_token, github_url = github_url, ...,
+    dependencies = dependencies))
 }
 
-github_get_conn <- function(repo, username = NULL, ref = "master",
-                            subdir = NULL, auth_token = NULL, ...) {
+#' Convenience wrapper for \code{\link{install_github}}.
+#'
+#' This function allows you to install a package built
+#' with \code{devtools} from a repo with a custom URL.
+#'
+#' @param repo Repository address in the format
+#'   \code{[username/]repo[/subdir][@@ref|#pull]}. Alternatively, you can
+#'   specify \code{username}, \code{subdir}, \code{ref} or \code{pull} using the
+#'   respective parameters (see below); if both is specified, the values in
+#'   \code{repo} take precedence.
+#' @param username User name. Deprecate: please include username in the
+#'   \code{repo}
+#' @param ref Desired git reference. Could be a commit, tag, or branch
+#'   name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.
+#' @param subdir subdirectory within repo that contains the R package.
+#' @param auth_token To install from a private repo, generate a personal
+#'   access token (PAT) in \url{https://github.com/settings/applications} and
+#'   supply to this argument. This is safer than using a password because
+#'   you can easily delete a PAT without affecting any others. Defaults to
+#'   the \code{GITHUB_PAT} environment variable.
+#' @param github_url Defaults to NULL, so the default archive URL is served
+#'   from the GitHub API. You can set it to your custom Enterprise GitHub URL.  
+#' @param ... Other arguments passed on to \code{\link{install}}.
+#' @param dependencies By default, installs all dependencies so that you can
+#'   build vignettes and use all functionality of the package.
+#' @export
+#' @family package installation
+#' @examples
+#' \dontrun{
+#' # To install from a private repo, use auth_token as described
+#' # at ?install_github and either set the github_url parameter 
+#' # or let the ?devtools_git_enterprise helper retrieve it from 
+#' # the GITHUB_URL environment variable if it is set. 
+#' # Best practice is the latter.
+#' install_github_enterprise("username/packagename", github_url = "https://github.scm.xyz.com")
+#'
+#' }
+install_github_enterprise <- function(repo, username = NULL,
+                           ref = "master", subdir = NULL,
+                           auth_token = github_pat(), 
+                           github_url=devtools_git_enterprise(), ...,
+                           dependencies = TRUE) {
+    install_github(repo, username = username, ref = ref, subdir = subdir, 
+                   auth_token = auth_token, github_url = github_url, ..., 
+                   dependencies = dependencies)
+}
+
+github_get_conn <- function(repo, username = NULL,
+                            ref = "master", subdir = NULL,
+                            auth_token = github_pat(), github_url=NULL, ...) {
 
   params <- github_parse_path(repo)
 
@@ -86,7 +138,8 @@ github_get_conn <- function(repo, username = NULL, ref = "master",
     repo = repo,
     username = username,
     ref = ref,
-    subdir = subdir
+    subdir = subdir,
+    url = github_url
   )
 
   param <- modifyList(param, github_ref(param$ref, param))
@@ -97,16 +150,20 @@ github_get_conn <- function(repo, username = NULL, ref = "master",
     "from",
     paste(username, collapse = ", "))
 
-  param$url <- paste(
-    "https://api.github.com", "repos", param$username, param$repo,
-    "zipball", param$ref, sep = "/")
-
+  url <- paste("https://api.github.com", "repos",sep="/")
+  # If github_url is given, a private repo is assumed.
+  if(!is.null(github_url)) {
+      url <- paste(github_url,"api/v3/repos",sep="/")
+  }
+  param$url <- paste(url, param$username, param$repo, 
+                     "zipball", param$ref, sep = "/")   
   param
 }
 
-install_github_single <- function(repo, username = NULL, ref = "master",
-                                  subdir = NULL, auth_token = NULL, ...) {
-  conn <- github_get_conn(repo, username, ref, subdir, auth_token, ...)
+install_github_single <- function(repo, username = NULL, ref = "master", 
+                                  subdir = NULL, auth_token = NULL, 
+                                  github_url=NULL, ...) {
+  conn <- github_get_conn(repo, username, ref, subdir, auth_token, github_url, ...)
   message(conn$msg)
 
   # define before_install function that captures the arguments to
@@ -137,13 +194,13 @@ install_github_single <- function(repo, username = NULL, ref = "master",
     append_field("SHA1", github_extract_sha1(bundle))
     append_field("Subdir", conn$subdir)
   }
-
+  
   # The downloaded file is always named by the package's name with extension .zip.
   # install_github("shiny", "rstudio", "v/0/2/1")
   #  URL: https://api.github.com/repos/rstudio/shiny/zipball/v/0/2/1
   #  Output file: shiny.zip
   install_url(conn$url, name = paste(conn$repo, ".zip", sep = ""), subdir = conn$subdir,
-    config = conn$auth, before_install = github_before_install, ...)
+                  config = conn$auth, before_install = github_before_install, ...)  
 }
 
 #' Resolve a token to a GitHub reference
@@ -171,6 +228,11 @@ github_pull <- function(pull) structure(pull, class = "github_pull")
 # Retrieve the username and ref for a pull request
 github_ref.github_pull <- function(x, param) {
   host <- "https://api.github.com"
+
+  # resolve to custom URL if set
+  if(!is.null(param$url)) {
+    host <- paste(param$url,"api/v3",sep="/")
+  } 
   # GET /repos/:user/:repo/pulls/:number
   path <- paste("repos", param$username, param$repo, "pulls", x, sep = "/")
   r <- GET(host, path = path)
@@ -216,6 +278,7 @@ github_parse_path <- function(path) {
   github_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
     username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
 
+
   param_names <- c("username", "repo", "subdir", "ref", "pull", "invalid")
   replace <- setNames(sprintf("\\%d", seq_along(param_names)), param_names)
   params <- lapply(replace, function(r) gsub(github_rx, r, path, perl = TRUE))
@@ -229,6 +292,20 @@ github_parse_path <- function(path) {
   }
 
   params
+}
+
+#' Retrieve Enterprise Github URL.
+#'
+#' Looks in env var \code{GITHUB_URL}.
+#'
+#' @keywords internal
+#' @export
+devtools_git_enterprise <- function() {
+    url <- Sys.getenv('GITHUB_URL')
+    if (identical(url, "")) return(NULL)
+    
+    message("Using custom GitHub URL from envvar GITHUB_URL")
+    url
 }
 
 #' Retrieve Github personal access token.

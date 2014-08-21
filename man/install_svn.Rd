@@ -43,6 +43,7 @@ install_svn(c("https://github.com/hadley/devtools", "https://github.com/hadley/s
 }
 \seealso{
 Other package installation: \code{\link{install_bitbucket}};
+  \code{\link{install_github_enterprise}};
   \code{\link{install_github}};
   \code{\link{install_gitorious}};
   \code{\link{install_git}}; \code{\link{install_url}};
