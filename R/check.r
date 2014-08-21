@@ -148,6 +148,7 @@ cran_env_vars <- function() {
     "_R_CHECK_CODE_ASSIGN_TO_GLOBALENV_" = "TRUE",
     "_R_CHECK_CODE_ATTACH_"              = "TRUE",
     "_R_CHECK_CODE_DATA_INTO_GLOBALENV_" = "TRUE",
+    "_R_CHECK_CODE_USAGE_VIA_NAMESPACES_"= "TRUE",
     "_R_CHECK_DOT_FIRSTLIB_"             = "TRUE",
     "_R_CHECK_DEPRECATED_DEFUNCT_"       = "TRUE",
     "_R_CHECK_REPLACING_IMPORTS_"        = "TRUE",
