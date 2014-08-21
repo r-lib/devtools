@@ -5,8 +5,6 @@
 #'
 #' @param url location of package on internet. The url should point to a
 #'   zip file, a tar file or a bzipped/gzipped tar file.
-#' @param name optional package name, used to provide more informative
-#'   messages
 #' @param subdir subdirectory within url bundle that contains the R package.
 #' @param config additional configuration argument (e.g. proxy,
 #'   authentication) passed on to \code{\link[httr]{GET}}.

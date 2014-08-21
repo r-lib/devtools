@@ -23,7 +23,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' 
+#'
 #' source_url("https://gist.github.com/hadley/6872663/raw/hi.r")
 #'
 #' # With a hash, to make sure the remote file hasn't changed
@@ -55,7 +55,7 @@ source_url <- function(url, ..., sha1 = NULL) {
 
     # Truncate file_sha1 to length of sha1
     file_sha1 <- substr(file_sha1, 1, nchar(sha1))
-    
+
     if (!identical(file_sha1, sha1)) {
       stop("SHA-1 hash of downloaded file (", file_sha1,
         ")\n  does not match expected value (", sha1, ")", call. = FALSE)
@@ -78,7 +78,7 @@ source_url <- function(url, ..., sha1 = NULL) {
 #' @param ... other options passed to \code{\link{source}}
 #' @param sha1 The SHA-1 hash of the file at the remote URL. This is highly
 #'   recommend as it prevents you from accidentally running code that's not
-#'   what you expect. See \code{\link{source_url}} for more information on 
+#'   what you expect. See \code{\link{source_url}} for more information on
 #'   using a SHA-1 hash.
 #' @param quiet if \code{FALSE}, the default, prints informative messages.
 #' @export
@@ -86,7 +86,7 @@ source_url <- function(url, ..., sha1 = NULL) {
 #' # You can run gists given their id
 #' source_gist(6872663)
 #' source_gist("6872663")
-#' 
+#'
 #' # Or their html url
 #' source_gist("https://gist.github.com/hadley/6872663")
 #' source_gist("gist.github.com/hadley/6872663")
@@ -101,7 +101,7 @@ source_url <- function(url, ..., sha1 = NULL) {
 #' }
 source_gist <- function(id, ..., sha1 = NULL, quiet = FALSE) {
   stopifnot(length(id) == 1)
-  
+
   url_match <- "((^https://)|^)gist.github.com/([^/]+/)?([0-9a-f]+)$"
   if (grepl(url_match, id)) {
     # https://gist.github.com/kohske/1654919, https://gist.github.com/1654919,
@@ -119,21 +119,21 @@ source_gist <- function(id, ..., sha1 = NULL, quiet = FALSE) {
   source_url(url, ..., sha1 = sha1)
 }
 
-#' @importFrom httr GET stop_for_status add_headers
+#' @importFrom httr GET content stop_for_status add_headers
 find_gist <- function(id) {
   url <- sprintf("https://api.github.com/gists/%s", id)
   req <- GET(url)
   stop_for_status(req)
-  
+
   # Using regular expression to parse JSON is a bit ick, but it avoid an
   # additional dependency on RJSONIO or similar
   text <- content(req, "text")
   url_pos <- regexec('"raw_url": ?"(.*?\\.[rR])"', text)
   matches <- regmatches(text, url_pos)[[1]]
-  
+
   if (length(matches) != 2) {
     stop("No R files found in gist", call. = FALSE)
   }
-  
+
   matches[2]
 }
