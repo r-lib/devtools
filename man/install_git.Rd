@@ -3,33 +3,22 @@
 \alias{install_git}
 \title{Install a package from a git repository}
 \usage{
-install_git(git_url, name = NULL, subdir = NULL, branch = NULL,
-  git_args = character(0), git_binary = NULL, ...)
+install_git(url, subdir = NULL, branch = NULL, args = character(0), ...)
 }
 \arguments{
-\item{branch}{Name of branch or tag to use, if not master.}
-
-\item{...}{Other arguments passed on to \code{\link{install}}}
-
-\item{git_url}{Location of package. The url should point to a public or
+\item{url}{Location of package. The url should point to a public or
 private repository.}
 
-\item{name}{Optional package name, used to provide more informative
-messages.}
+\item{branch}{Name of branch or tag to use, if not master.}
 
 \item{subdir}{A sub-directory withing a git repository that may
 contain the package we are interested in installing.}
 
-\item{git_args}{A character vector providing extra arguments to pass on to}
+\item{args}{A character vector providing extra arguments to pass on to}
 
-\item{git_binary}{A custom git-binary to use instead of default system's git
-version.}
+\item{...}{passed on to \code{\link{install}}}
 }
 \description{
-This function requires \code{git} to be installed on your system in order to
-be used.
-}
-\details{
 It is vectorised so you can install multiple packages with
 a single command.
 }

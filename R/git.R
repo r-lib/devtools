@@ -3,11 +3,13 @@ uses_git <- function(pkg = ".") {
   file.exists(file.path(pkg$path, ".git"))
 }
 
-git <- function(pkg = ".", args, quiet = FALSE) {
-  pkg <- as.package(pkg)
-
+git <- function(args, quiet = TRUE, path = ".") {
   full <- paste0(shQuote(git_path()), " ", paste(args, collapse = ""))
-  result <- in_dir(pkg$path, system(full, intern = TRUE, ignore.stderr = quiet))
+  if (!quiet) {
+    message(full)
+  }
+
+  result <- in_dir(path, system(full, intern = TRUE, ignore.stderr = quiet))
 
   status <- attr(result, "status") %||% 0
   if (!identical(as.character(status), "0")) {
@@ -17,8 +19,8 @@ git <- function(pkg = ".", args, quiet = FALSE) {
   result
 }
 
-git_sha1 <- function(pkg = ".", n = 10) {
-  sha <- git(pkg, c("rev-parse", " --short=", n, " HEAD"))
+git_sha1 <- function(n = 10, path = ".") {
+  sha <- git(c("rev-parse", " --short=", n, " HEAD"), path = path)
   if (uncommitted()) sha <- paste0(sha, "*")
   sha
 }
@@ -33,7 +35,7 @@ github_info <- function(pkg = ".") {
   pkg <- as.package(pkg)
   if (!uses_git(pkg)) return(github_dummy)
 
-  remotes <- git(pkg, "remote -v")
+  remotes <- git("remote -v", path = pkg$path)
   remotes_df <- read.table(text = remotes, stringsAsFactors = FALSE)
   names(remotes_df) <- c("name", "url", "type")
 
