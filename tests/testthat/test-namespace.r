@@ -42,6 +42,15 @@ test_that("Exported objects are visible from global environment", {
   unload("testNamespace")
 })
 
+
+test_that("Missing exports don't result in error", {
+  load_all("testMissingNsObject")
+  nsenv <- ns_env("testMissingNsObject")
+  expect_equal(nsenv$a, 1)
+  unload("testMissingNsObject")
+})
+
+
 test_that("All objects are loaded into namespace environment", {
   load_all("testNamespace")
   nsenv <- ns_env("testNamespace")
