@@ -40,7 +40,7 @@ getrootdir <- function(file_list) {
 
 my_unzip <- function(src, target, unzip = getOption("unzip")) {
   if (unzip == "internal") {
-    unzip(src, exdir = target)
+    return(unzip(src, exdir = target))
   }
 
   args <- paste(
