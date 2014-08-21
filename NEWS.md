@@ -60,6 +60,18 @@
 * `install_github()` gains new `host` argument which allows you to install
   packages from github enterprise (#410, #506). 
   
+* `install_github()` uses GitHub API to download archive file (@krlmlr, #466).
+
+* `install_github()` now supports the new syntax `ref = github_pull(...)` to
+  install a specific pull request. The parameter `pull` is now deprecated,
+  neither `pull` nor `branch` are included in the formal parameters
+  (@krlmlr, #509).
+
+* The `username` paramter of `install_github()` is deprecated - please include
+  in the repo name: `rstudio/shiny`, `hadley/devtools` etc. Deprecated 
+  parameters `auth_user`, `branch`, `pull` and `password` have all been 
+  removed.
+  
 * `install_git()` has been simplified and many of the arguments have changed 
   names for consistency with metadata for other package installs.
 
@@ -99,18 +111,6 @@
   needed (it's job is to figure out if rstudio is available, #458)
 
 * `httr` 0.3 required (@krlmlr, #466).
-
-* `install_github()` uses GitHub API to download archive file (@krlmlr, #466).
-
-* `install_github()` now supports the new syntax `ref = github_pull(...)` to
-  install a specific pull request. The parameter `pull` is now deprecated,
-  neither `pull` nor `branch` are included in the formal parameters
-  (@krlmlr, #509).
-
-* The `username` paramter of `install_github()` is deprecated - please include
-  in the repo name: `rstudio/shiny`, `hadley/devtools` etc. Deprecated 
-  parameters `auth_user`, `branch`, `pull` and `password` have all been 
-  removed.
 
 * Implemented own version `utils::unzip()` that throws error if command
   fails and doesn't print unneeded messages on non-Windows platforms (#540).
