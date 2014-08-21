@@ -18,6 +18,8 @@
 #'   supply to this argument. This is safer than using a password because
 #'   you can easily delete a PAT without affecting any others. Defaults to
 #'   the \code{GITHUB_PAT} environment variable.
+#' @param host Github API host to use. Override with your github enterprise
+#'   hostname.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
@@ -43,16 +45,18 @@
 #' }
 install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
-                           auth_token = github_pat(), ...) {
+                           auth_token = github_pat(),
+                           host = "api.github.com", ...) {
 
   remotes <- lapply(repo, github_remote, username = username, ref = ref,
-    subdir = subdir, auth_token = auth_token)
+    subdir = subdir, auth_token = auth_token, host = host)
 
   install_remotes(remotes, ...)
 }
 
 github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
-                       auth_token = github_pat(), sha = NULL) {
+                       auth_token = github_pat(), sha = NULL,
+                       host = "api.github.com") {
 
   meta <- parse_git_repo(repo)
   meta <- github_resolve_ref(meta$ref %||% ref, meta)
@@ -65,6 +69,7 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
   }
 
   remote("github",
+    host = host,
     repo = meta$repo,
     subdir = meta$subdir %||% subdir,
     username = meta$username,
@@ -80,8 +85,8 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
   }
 
   dest <- tempfile(fileext = paste0(".zip"))
-  src <- file.path("https://api.github.com", "repos", x$username, x$repo,
-    "zipball", x$ref)
+  src <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo,
+    "/zipball/", x$ref)
 
   if (!is.null(x$auth_token)) {
     auth <- httr::authenticate(
@@ -111,6 +116,7 @@ remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
 
   list(
     RemoteType = "github",
+    RemoteHost = x$host,
     RemoteRepo = x$repo,
     RemoteUsername = x$username,
     RemoteRef = x$ref,

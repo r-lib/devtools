@@ -57,6 +57,9 @@
   this means you can now specify repos with the compact `username/repo@ref`
   syntax. The `username` is now deprecated. 
   
+* `install_github()` gains new `host` argument which allows you to install
+  packages from github enterprise (#410, #506). 
+  
 * `install_git()` has been simplified and many of the arguments have changed 
   names for consistency with metadata for other package installs.
 

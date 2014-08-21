@@ -4,7 +4,7 @@
 \title{Attempts to install a package directly from github.}
 \usage{
 install_github(repo, username = NULL, ref = "master", subdir = NULL,
-  auth_token = github_pat(), ...)
+  auth_token = github_pat(), host = "api.github.com", ...)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -26,6 +26,9 @@ access token (PAT) in \url{https://github.com/settings/applications} and
 supply to this argument. This is safer than using a password because
 you can easily delete a PAT without affecting any others. Defaults to
 the \code{GITHUB_PAT} environment variable.}
+
+\item{host}{Github API host to use. Override with your github enterprise
+hostname.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 }
