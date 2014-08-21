@@ -113,6 +113,9 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
     exports <- add_classes_to_exports(ns = nsenv, package = pkg$package,
       exports = exports, nsInfo = nsInfo)
   }
+
+  # Don't try to export objects that are missing from the namespace.
+  exports <- intersect(ls(nsenv, all.names = TRUE), exports)
   # Update the exports metadata for the namespace with base::namespaceExport
   # It will throw warnings if objects are already listed in the exports
   # metadata, so catch those warnings and ignore them.
