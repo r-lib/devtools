@@ -143,6 +143,12 @@ pkg_source <- function(pkg) {
                   desc$GithubUsername, "/",
                   desc$GithubRepo, "@",
                   substr(desc$GithubSHA1, 1, 7), ")")
+  } else if (!is.null(desc$RemoteType)) {
+    str <- paste0(desc$RemoteType, " (",
+      desc$RemoteUsername, "/",
+      desc$RemoteRepo, "@",
+      substr(desc$RemoteSha, 1, 7), ")")
+
   } else if (!is.null(desc$Repository)) {
     repo <- desc$Repository
 

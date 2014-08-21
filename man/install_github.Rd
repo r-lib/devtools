@@ -13,7 +13,7 @@ specify \code{subdir} and/or \code{ref} using the respective parameters
 (see below); if both is specified, the values in \code{repo} take
 precedence.}
 
-\item{username}{User name. Deprecate: please include username in the
+\item{username}{User name. Deprecated: please include username in the
 \code{repo}}
 
 \item{ref}{Desired git reference. Could be a commit, tag, or branch
