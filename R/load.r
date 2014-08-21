@@ -181,8 +181,8 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 #' \code{options(devtools.desc.author = '"Hadley Wickham <h.wickham@@gmail.com> [aut,cre]"',
 #'   devtools.desc.license = "GPL-3")}.
 #' @param path path to package root directory
-#' @param extra a named list of extra options to add to \file{DESCRIPTION}. 
-#'   Arguments that take a list 
+#' @param extra a named list of extra options to add to \file{DESCRIPTION}.
+#'   Arguments that take a list
 #' @param quiet if \code{TRUE}, suppresses output from this function.
 #' @export
 #' @importFrom whisker whisker.render
@@ -200,20 +200,19 @@ create_description <- function(path, extra = getOption("devtools.desc"),
   }
 
   desc <- build_description(basename(normalizePath(path)), extra)
-  lines <- paste0(names(desc), ": ", unlist(desc))
-  
+
   if (!quiet) {
-    message("No DESCRIPTION found. Creating with values:\n\n" ,
-      paste(lines, collapse = "\n"))
+    message("No DESCRIPTION found. Creating with values:\n\n")
+    write_dcf("", desc)
   }
 
-  writeLines(lines, desc_path)
+  write_dcf(desc_path, desc)
 
   TRUE
 }
 
 build_description <- function(name, extra = list()) {
-  
+
   defaults <- compact(list(
     Package = name,
     Title = "What the package does (short line)",
@@ -225,11 +224,11 @@ build_description <- function(name, extra = list()) {
     Suggests = getOption("devtools.desc.suggests"),
     LazyData = "true"
   ))
-  
+
   # Override defaults with user supplied options
   desc <- modifyList(defaults, extra)
   # Collapse all vector arguments to single strings
   desc <- lapply(desc, function(x) paste(x, collapse = ", "))
-  
+
   desc
 }
