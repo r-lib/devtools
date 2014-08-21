@@ -115,7 +115,12 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
   }
 
   # Don't try to export objects that are missing from the namespace.
-  exports <- intersect(ls(nsenv, all.names = TRUE), exports)
+  extra_exports <- setdiff(exports, ls(nsenv, all.names = TRUE))
+  if (length(extra_exports) > 0) {
+    warning("Objects listed as exports, but not present in namespace: ",
+            paste(extra_exports, collapse = ", "))
+    exports <- intersect(ls(nsenv, all.names = TRUE), exports)
+  }
   # Update the exports metadata for the namespace with base::namespaceExport
   # It will throw warnings if objects are already listed in the exports
   # metadata, so catch those warnings and ignore them.
