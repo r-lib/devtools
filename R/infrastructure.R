@@ -292,11 +292,11 @@ use_build_ignore <- function(files, escape = TRUE, pkg = ".") {
   pkg <- as.package(pkg)
 
   if (escape) {
-    file <- paste0("^", gsub("\\.", "\\\\.", file), "$")
+    files <- paste0("^", gsub("\\.", "\\\\.", files), "$")
   }
 
   path <- file.path(pkg$path, ".Rbuildignore")
-  union_write(path, file)
+  union_write(path, files)
 
   invisible(TRUE)
 }
