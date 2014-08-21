@@ -121,19 +121,15 @@ source_gist <- function(id, ..., sha1 = NULL, quiet = FALSE) {
 
 #' @importFrom httr GET content stop_for_status add_headers
 find_gist <- function(id) {
-  url <- sprintf("https://api.github.com/gists/%s", id)
-  req <- GET(url)
-  stop_for_status(req)
+  files <- github_GET(sprintf("gists/%s", id))$files
+  r_files <- files[grepl("\\.[rR]$", names(files))]
 
-  # Using regular expression to parse JSON is a bit ick, but it avoid an
-  # additional dependency on RJSONIO or similar
-  text <- content(req, "text")
-  url_pos <- regexec('"raw_url": ?"(.*?\\.[rR])"', text)
-  matches <- regmatches(text, url_pos)[[1]]
-
-  if (length(matches) != 2) {
+  if (length(r_files) == 0) {
     stop("No R files found in gist", call. = FALSE)
   }
+  if (length(r_files) > 1) {
+    warning("Multiple R files in gist, using first.")
+  }
 
-  matches[2]
+  r_files[[1]]$raw_url
 }
