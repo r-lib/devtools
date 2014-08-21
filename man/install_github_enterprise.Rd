@@ -14,10 +14,11 @@ specify \code{username}, \code{subdir}, \code{ref} or \code{pull} using the
 respective parameters (see below); if both is specified, the values in
 \code{repo} take precedence.}
 
-\item{username}{User name}
+\item{username}{User name. Deprecate: please include username in the
+\code{repo}}
 
 \item{ref}{Desired git reference. Could be a commit, tag, or branch
-name. Defaults to \code{"master"}.}
+name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.}
 
 \item{subdir}{subdirectory within repo that contains the R package.}
 
@@ -28,9 +29,7 @@ you can easily delete a PAT without affecting any others. Defaults to
 the \code{GITHUB_PAT} environment variable.}
 
 \item{github_url}{Defaults to NULL, so the default archive URL is served
-from the GitHub API. You can set it to your custom Enterprise GitHub URL,
-but it must point to your own implementation of the archive link server
-API all the way -- e.g. \code{https://github.yourcompany.com/api/v3/repos}}
+from the GitHub API. You can set it to your custom Enterprise GitHub URL.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 
