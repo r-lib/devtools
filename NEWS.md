@@ -52,6 +52,9 @@
   It's a little more focussed than `sessionInfo()` and includes where
   packages where installed from (#526).
 
+* `load_all()` no longer gives an error when objects listed as exports are
+  missing.
+
 * If you're using Rstudio, and you you're trying to build a binary package
   without the necessary build tools, Rstudio will prompt to download and
   install the right thing. (#488)
