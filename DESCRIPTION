@@ -1,6 +1,6 @@
 Package: devtools
 Title: Tools to make developing R code easier
-Version: 1.5.0.99
+Version: 1.5.0.9000
 Authors@R: c(
     person("Hadley", "Wickham",
     email = "h.wickham@gmail.com", role = c("aut", "cre")),
