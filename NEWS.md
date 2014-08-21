@@ -46,6 +46,20 @@
 * `create()` now makes a dummy namespace so that you can build & reload
   without running `document()` first.
 
+## Package installation
+
+* All `install_*` now use the same code and store much useful metadata.
+  Currently only `session_info()` takes advantage of this information,
+  but it will allow the development of future tools like generic update
+  functions.
+  
+* `install_bitbucket()` has been bought into alignment with `install_github`:
+  this means you can now specify repos with the compact `username/repo@ref`
+  syntax. The `username` is now deprecated. 
+  
+* `install_git()` has been simplified and many of the arguments have changed 
+  names for consistency with metadata for other package installs.
+
 ## Other minor improvements and bug fixes
 
 * New `session_info()` provides useful information about your R session.
