@@ -72,6 +72,8 @@ platform_info <- function() {
   ), class = "platform_info")
 
 }
+
+#' @export
 print.platform_info <- function(x, ...) {
   df <- data.frame(setting = names(x), value = unlist(x), stringsAsFactors = FALSE)
   print(df, right = FALSE, row.names = FALSE)
