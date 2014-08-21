@@ -1,4 +1,5 @@
 uses_git <- function(pkg = ".") {
+  if (!file.info(pkg)$isdir) return(FALSE)
   pkg <- as.package(pkg)
   file.exists(file.path(pkg$path, ".git"))
 }
@@ -21,13 +22,13 @@ git <- function(args, quiet = TRUE, path = ".") {
 
 git_sha1 <- function(n = 10, path = ".") {
   sha <- git(c("rev-parse", " --short=", n, " HEAD"), path = path)
-  if (uncommitted()) sha <- paste0(sha, "*")
+  if (uncommitted(path)) sha <- paste0(sha, "*")
   sha
 }
 
-uncommitted <- function() {
-  system("git diff-index --quiet --cached HEAD") == 1 ||
-    system("git diff-files --quiet") == 1
+uncommitted <- function(path = ".") {
+  in_dir(path, system("git diff-index --quiet --cached HEAD") == 1 ||
+    system("git diff-files --quiet") == 1)
 }
 
 

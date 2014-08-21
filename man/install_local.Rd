@@ -21,7 +21,7 @@ a single command.
 \dontrun{
 dir <- tempfile()
 dir.create(dir)
-pkg <- download.packages("testthat", dir)
+pkg <- download.packages("testthat", dir, type = "source")
 install_local(pkg[, 2])
 }
 }
