@@ -90,6 +90,8 @@
 
 * `load_all()` no longer gives an error when objects listed as exports are
   missing.
+  
+* `check_dir()` no longer fails on UNC paths (#522).
 
 * If you're using Rstudio, and you you're trying to build a binary package
   without the necessary build tools, Rstudio will prompt to download and
