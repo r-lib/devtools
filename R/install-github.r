@@ -97,9 +97,8 @@ github_get_conn <- function(repo, username = NULL, ref = "master",
     "from",
     paste(username, collapse = ", "))
 
-  param$url <- paste(
-    "https://api.github.com", "repos", param$username, param$repo,
-    "zipball", param$ref, sep = "/")
+  param$url <- paste("https://github.com/", param$username, "/", param$repo,
+    "/archive/", param$ref, ".zip", sep = "")
 
   param
 }
@@ -140,7 +139,7 @@ install_github_single <- function(repo, username = NULL, ref = "master",
 
   # The downloaded file is always named by the package's name with extension .zip.
   # install_github("shiny", "rstudio", "v/0/2/1")
-  #  URL: https://api.github.com/repos/rstudio/shiny/zipball/v/0/2/1
+  #  URL: https://github.com/rstudio/shiny/archive/v/0/2/1.zip
   #  Output file: shiny.zip
   install_url(conn$url, name = paste(conn$repo, ".zip", sep = ""), subdir = conn$subdir,
     config = conn$auth, before_install = github_before_install, ...)
