@@ -9,9 +9,6 @@ install_url(url, subdir = NULL, config = list(), ...)
 \item{url}{location of package on internet. The url should point to a
 zip file, a tar file or a bzipped/gzipped tar file.}
 
-\item{name}{optional package name, used to provide more informative
-messages}
-
 \item{subdir}{subdirectory within url bundle that contains the R package.}
 
 \item{config}{additional configuration argument (e.g. proxy,
