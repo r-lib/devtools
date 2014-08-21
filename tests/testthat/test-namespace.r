@@ -44,7 +44,7 @@ test_that("Exported objects are visible from global environment", {
 
 
 test_that("Missing exports don't result in error", {
-  load_all("testMissingNsObject")
+  expect_warning(load_all("testMissingNsObject"))
   nsenv <- ns_env("testMissingNsObject")
   expect_equal(nsenv$a, 1)
   unload("testMissingNsObject")
