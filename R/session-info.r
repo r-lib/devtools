@@ -99,12 +99,13 @@ package_info <- function(include_base = FALSE) {
     pkgs <- pkgs[!base, , drop = FALSE]
   }
 
+  pkgs$date <- vapply(pkgs$package, pkg_date, character(1))
   pkgs$source <- vapply(pkgs$package, pkg_source, character(1))
 
   pkgs <- pkgs[order(pkgs$package), ]
   rownames(pkgs) <- NULL
   class(pkgs) <- c("packages_info", "data.frame")
-  pkgs[, c("package", "*", "version", "source")]
+  pkgs[, c("package", "*", "version", "date", "source")]
 }
 
 #' @export
@@ -115,6 +116,21 @@ print.packages_info <- function(x, ...) {
 pkg_is_base <- function(pkg) {
   desc <- packageDescription(pkg)
   !is.null(desc$Priority) && desc$Priority == "base"
+}
+
+pkg_date <- function(pkg) {
+  desc <- packageDescription(pkg)
+
+  if (!is.null(desc$`Date/Publication`)) {
+    date <- desc$`Date/Publication`
+  } else if (!is.null(desc$Built)) {
+    built <- strsplit(desc$Built, "; ")[[1]]
+    date <- built[3]
+  } else {
+    date <- NA_character_
+  }
+
+  as.character(as.Date(strptime(date, "%Y-%m-%d")))
 }
 
 pkg_source <- function(pkg) {
