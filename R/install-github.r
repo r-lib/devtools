@@ -171,16 +171,15 @@ github_resolve_ref.github_pull <- function(x, params) {
 }
 
 # Retrieve the ref for the latest release
-github_resolve_ref.github_release <- function(x, param) {
+github_resolve_ref.github_release <- function(x, params) {
   # GET /repos/:user/:repo/releases
-  path <- paste("repos", param$username, param$repo, "releases", sep = "/")
-  r <- GET(param$host, path = path)
-  stop_for_status(r)
-  response <- httr::content(r, as = "parsed")
+  path <- paste("repos", params$username, params$repo, "releases", sep = "/")
+  response <- github_GET(path)
   if (length(response) == 0L)
-    stop("No releases found for repo ", param$username, "/", param$repo, ".")
+    stop("No releases found for repo ", params$username, "/", params$repo, ".")
 
-  list(ref = response[[1L]]$tag_name)
+  params$ref <- response[[1L]]$tag_name
+  params
 }
 
 # Parse concise git repo specification: [username/]repo[/subdir][#pull|@ref|@*release]
