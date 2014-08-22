@@ -1,8 +1,3 @@
-.onAttach <- function(...) {
-  find_rtools()
-  invisible()
-}
-
 #' Package development tools for R.
 #'
 #' @section Package options:
@@ -50,6 +45,8 @@ NULL
   )
   toset <- !(names(op.devtools) %in% names(op))
   if(any(toset)) options(op.devtools[toset])
+
+  find_rtools()
 
   invisible()
 }

@@ -133,6 +133,9 @@
 * `install_github()` allows installing the latest GitHub release by
   using the syntax `"user/repo@*release"` (@krlmlr, #350).
 
+* On windows, `find_rtools()` is now run on package load, not package
+  attach.
+
 # devtools 1.5
 
 Four new functions make it easier to add useful infrastructure to packages:
