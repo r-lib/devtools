@@ -140,6 +140,14 @@ remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
 #' @export
 github_pull <- function(pull) structure(pull, class = "github_pull")
 
+#' Install the latest release from GitHub
+#'
+#' Use as \code{ref} parameter to \code{\link{install_github}}.
+#'
+#' @seealso \code{\link{install_github}}, \code{\link{github_pull}}
+#' @export
+github_release <- function() structure(NA_integer_, class = "github_release")
+
 github_resolve_ref <- function(x, params) UseMethod("github_resolve_ref")
 
 github_resolve_ref.default <- function(x, params) {
@@ -150,27 +158,6 @@ github_resolve_ref.default <- function(x, params) {
 github_resolve_ref.NULL <- function(x, params) {
   params$ref <- "master"
   params
-}
-
-#' Install the latest release from GitHub
-#'
-#' Use as \code{ref} parameter to \code{\link{install_github}}.
-#'
-#' @seealso \code{\link{install_github}}, \code{\link{github_pull}}
-#' @export
-github_release <- function() structure(NA_integer_, class = "github_release")
-
-# Retrieve the ref for the latest release
-github_resolve_ref.github_release <- function(x, param) {
-  # GET /repos/:user/:repo/releases
-  path <- paste("repos", param$username, param$repo, "releases", sep = "/")
-  r <- GET(param$host, path = path)
-  stop_for_status(r)
-  response <- httr::content(r, as = "parsed")
-  if (length(response) == 0L)
-    stop("No releases found for repo ", param$username, "/", param$repo, ".")
-
-  list(ref = response[[1L]]$tag_name)
 }
 
 # Extract the commit hash from a github bundle and append it to the
@@ -208,6 +195,18 @@ github_resolve_ref.github_pull <- function(x, params) {
   params
 }
 
+# Retrieve the ref for the latest release
+github_resolve_ref.github_release <- function(x, param) {
+  # GET /repos/:user/:repo/releases
+  path <- paste("repos", param$username, param$repo, "releases", sep = "/")
+  r <- GET(param$host, path = path)
+  stop_for_status(r)
+  response <- httr::content(r, as = "parsed")
+  if (length(response) == 0L)
+    stop("No releases found for repo ", param$username, "/", param$repo, ".")
+
+  list(ref = response[[1L]]$tag_name)
+}
 
 # Parse concise git repo specification: [username/]repo[/subdir][#pull|@ref|*release]
 # (the *release suffix represents the latest release)
