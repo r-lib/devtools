@@ -26,6 +26,8 @@
 
 * New `use_knitr()` sets up a package to use knitr for vignettes.
 
+* New `use_package()` allows you to set dependencies (#559). 
+
 * New `use_package_doc()` sets up an Roxygen template for package-level
   docs.
 

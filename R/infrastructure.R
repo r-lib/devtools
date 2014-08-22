@@ -158,6 +158,66 @@ use_package_doc <- function(pkg = ".") {
   writeLines(out, file.path(pkg$path, path))
 }
 
+#' Use specified package.
+#'
+#' This adds a dependency to DESCRIPTION and offers a little advice
+#' about how to best use it.
+#'
+#' @param package Name of package to depend on.
+#' @param type Type of dependency: must be one of "Imports", "Suggests",
+#'   "Depends", "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)
+#' @param pkg package description, can be path or package name. See
+#'   \code{\link{as.package}} for more information.
+#' @rdname infrastructure
+#' @export
+#' @examples
+#' \dontrun{
+#' use_package("ggplot2")
+#' use_package("dplyr", "suggests")
+#'
+#' }
+use_package <- function(package, type = "Imports", pkg = ".") {
+  stopifnot(is.character(package), length(package) == 1)
+  stopifnot(is.character(type), length(type) == 1)
+
+  if (!is_installed(package)) {
+    stop(package, " must be installed before you can take a dependency on it",
+      call. = FALSE)
+  }
+
+  types <- c("Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
+  names(types) <- tolower(types)
+
+  type <- types[[match.arg(tolower(type), names(types))]]
+
+  message("Adding ", package, " to ", type)
+  add_desc_package(pkg, type, package)
+
+  msg <- switch(type,
+    Imports = paste0("Refer to functions with ", package, "::fun()"),
+    Depends = paste0("Are you sure you want Depends? Imports is almost always",
+      " the better choice."),
+    Suggests = paste0("Use function below to test if package is installed,",
+      " then use ", package, "::fun() to refer to functions.\n\n",
+      "is_installed <- function(pkg) {\n",
+      "  system.file(package = pkg) != \"\"\n",
+      "}"),
+    Enhances = "",
+    LinkingTo = show_includes(package)
+  )
+  message(msg)
+}
+
+show_includes <- function(package) {
+  incl <- system.file("include", package = package)
+  h <- dir(incl, "\\.(h|hpp)$")
+  if (length(h) == 0) return()
+
+  message("Possible includes are:\n",
+    paste0("#include <", h, ">", collapse = "\n"))
+
+}
+
 add_desc_package <- function(pkg = ".", field, name) {
   pkg <- as.package(pkg)
   desc_path <- file.path(pkg$path, "DESCRIPTION")
