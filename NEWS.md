@@ -128,6 +128,8 @@
 * The `parenvs()` function has been removed from devtools, because is now in the
   pryr package.
 
+* Shim added for `library.dynam.unload()`.
+
 * `install_github()` allows installing the latest GitHub release by
   using the syntax `"user/repo@*release"` (@krlmlr, #350).
 
