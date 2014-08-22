@@ -131,20 +131,18 @@ remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
   )
 }
 
-#' Install a specific pull request from GitHub
+#' GitHub references
 #'
 #' Use as \code{ref} parameter to \code{\link{install_github}}.
+#' Allows installing a specific pull request or the latest release.
 #'
 #' @param pull The pull request to install
-#' @seealso \code{\link{install_github}}, \code{\link{github_release}}
+#' @seealso \code{\link{install_github}}
+#' @rdname github_refs
 #' @export
 github_pull <- function(pull) structure(pull, class = "github_pull")
 
-#' Install the latest release from GitHub
-#'
-#' Use as \code{ref} parameter to \code{\link{install_github}}.
-#'
-#' @seealso \code{\link{install_github}}, \code{\link{github_pull}}
+#' @rdname github_refs
 #' @export
 github_release <- function() structure(NA_integer_, class = "github_release")
 
