@@ -22,16 +22,17 @@ test_that("GitHub repo paths are parsed correctly", {
   expect_error(parse_git_repo("Teradata/teradataR/"), "Invalid git repo")
 })
 
-# Mock github_ref.github_pull so that GitHub API is not queried for this test
+# Mock github_resolve_ref.github_pull so that GitHub API is not queried for this test
 mock_github_resolve_ref.github_pull <- function(x, params) {
   params$username <- sprintf("user-%s", x)
   params$ref <- sprintf("pull-%s", x)
   params
 }
 
-# Mock github_ref.github_release so that GitHub API is not queried for this test
-mock_github_ref.github_release <- function(x, param) {
-  list(ref="latest-release")
+# Mock github_resolve_ref.github_release so that GitHub API is not queried for this test
+mock_github_resolve_ref.github_release <- function(x, param) {
+  param$ref="latest-release"
+  param
 }
 
 test_that("GitHub parameters are returned correctly", {
@@ -41,5 +42,10 @@ test_that("GitHub parameters are returned correctly", {
     expect_equal(github_remote("my/test/pkg")$subdir, "pkg")
     expect_equal(github_remote("hadley/devtools@devtools-1.4")$ref, "devtools-1.4")
     expect_equal(github_remote("yihui/tikzDevice#23")$ref, "pull-23")
+  })
+
+  with_mock("github_resolve_ref.github_release", mock_github_resolve_ref.github_release, {
+    expect_equal(github_remote("yihui/tikzDevice@*")$ref, "latest-release")
+    expect_equal(github_remote("my/test/pkg@*")$ref, "latest-release")
   })
 })
