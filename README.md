@@ -22,7 +22,7 @@ You can track (and contribute to) development of `devtools` at https://github.co
     * **Mac and Linux**:
 
         ```R
-        devtools::install_github("devtools")
+        devtools::install_github("hadley/devtools")
         ```
 
     * **Windows**:
