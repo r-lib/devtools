@@ -131,14 +131,20 @@ remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
   )
 }
 
-#' Install a specific pull request from GitHub
+#' GitHub references
 #'
 #' Use as \code{ref} parameter to \code{\link{install_github}}.
+#' Allows installing a specific pull request or the latest release.
 #'
 #' @param pull The pull request to install
 #' @seealso \code{\link{install_github}}
+#' @rdname github_refs
 #' @export
 github_pull <- function(pull) structure(pull, class = "github_pull")
+
+#' @rdname github_refs
+#' @export
+github_release <- function() structure(NA_integer_, class = "github_release")
 
 github_resolve_ref <- function(x, params) UseMethod("github_resolve_ref")
 
@@ -162,19 +168,32 @@ github_resolve_ref.github_pull <- function(x, params) {
   params
 }
 
+# Retrieve the ref for the latest release
+github_resolve_ref.github_release <- function(x, params) {
+  # GET /repos/:user/:repo/releases
+  path <- paste("repos", params$username, params$repo, "releases", sep = "/")
+  response <- github_GET(path)
+  if (length(response) == 0L)
+    stop("No releases found for repo ", params$username, "/", params$repo, ".")
 
-# Parse concise git repo specification: username/repo[/subdir][#pull|@ref]
+  params$ref <- response[[1L]]$tag_name
+  params
+}
+
+# Parse concise git repo specification: [username/]repo[/subdir][#pull|@ref|@*release]
+# (the *release suffix represents the latest release)
 parse_git_repo <- function(path) {
   username_rx <- "(?:([^/]+)/)?"
   repo_rx <- "([^/@#]+)"
   subdir_rx <- "(?:/([^@#]*[^@#/]))?"
-  ref_rx <- "(?:@(.+))"
+  ref_rx <- "(?:@([^*].*))"
   pull_rx <- "(?:#([0-9]+))"
-  ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
+  release_rx <- "(?:@([*]release))"
+  ref_or_pull_or_release_rx <- sprintf("(?:%s|%s|%s)?", ref_rx, pull_rx, release_rx)
   github_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
-    username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
+    username_rx, repo_rx, subdir_rx, ref_or_pull_or_release_rx)
 
-  param_names <- c("username", "repo", "subdir", "ref", "pull", "invalid")
+  param_names <- c("username", "repo", "subdir", "ref", "pull", "release", "invalid")
   replace <- setNames(sprintf("\\%d", seq_along(param_names)), param_names)
   params <- lapply(replace, function(r) gsub(github_rx, r, path, perl = TRUE))
   if (params$invalid != "")
@@ -184,6 +203,11 @@ parse_git_repo <- function(path) {
   if (!is.null(params$pull)) {
     params$ref <- github_pull(params$pull)
     params$pull <- NULL
+  }
+
+  if (!is.null(params$release)) {
+    params$ref <- github_release()
+    params$release <- NULL
   }
 
   params
