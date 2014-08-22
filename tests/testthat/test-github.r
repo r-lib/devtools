@@ -20,6 +20,7 @@ test_that("GitHub repo paths are parsed correctly", {
   expect_equal(parse_git_repo("my/test/pkg#1"), list(username="my", repo="test", subdir="pkg", ref=github_pull("1")))
   expect_error(parse_git_repo("test#6@123"), "Invalid git repo")
   expect_error(parse_git_repo("Teradata/teradataR/"), "Invalid git repo")
+  expect_error(parse_git_repo("test@*unsupported-release"), "Invalid git repo")
 })
 
 # Mock github_resolve_ref.github_pull so that GitHub API is not queried for this test
@@ -45,7 +46,7 @@ test_that("GitHub parameters are returned correctly", {
   })
 
   with_mock("github_resolve_ref.github_release", mock_github_resolve_ref.github_release, {
-    expect_equal(github_remote("yihui/tikzDevice@*")$ref, "latest-release")
-    expect_equal(github_remote("my/test/pkg@*")$ref, "latest-release")
+    expect_equal(github_remote("yihui/tikzDevice@*release")$ref, "latest-release")
+    expect_equal(github_remote("my/test/pkg@*release")$ref, "latest-release")
   })
 })

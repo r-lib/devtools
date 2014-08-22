@@ -216,7 +216,7 @@ parse_git_repo <- function(path) {
   subdir_rx <- "(?:/([^@#]*[^@#/]))?"
   ref_rx <- "(?:@([^*].*))"
   pull_rx <- "(?:#([0-9]+))"
-  release_rx <- "(?:@([*]))"
+  release_rx <- "(?:@([*]release))"
   ref_or_pull_or_release_rx <- sprintf("(?:%s|%s|%s)?", ref_rx, pull_rx, release_rx)
   github_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
     username_rx, repo_rx, subdir_rx, ref_or_pull_or_release_rx)
