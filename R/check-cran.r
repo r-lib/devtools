@@ -216,7 +216,7 @@ collect_check_results <- function(topdir, revdep_pkg) {
 
   sink(summary_out)
   if (!is.null(revdep_pkg)) {
-    sha <- packageDescription(revdep_pkg)$GithubSHA1
+    sha <- packageDescription(revdep_pkg)$RemoteSha
     if (!is.null(sha)) sha <- paste0("Commit ", sha, "\n")
 
     cat("=========================================================================\n",
@@ -226,7 +226,7 @@ collect_check_results <- function(topdir, revdep_pkg) {
         "=========================================================================\n",
         sep = "")
   }
-  print(sessionInfo())
+  print(session_info())
   cat("\n")
   sink()
 
