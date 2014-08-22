@@ -168,7 +168,7 @@ use_package_doc <- function(pkg = ".") {
 #'   "Depends", "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
-#' @rdname infrastructure
+#' @family infrastructure
 #' @export
 #' @examples
 #' \dontrun{

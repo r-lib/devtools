@@ -5,7 +5,6 @@
 \alias{add_travis}
 \alias{infrastructure}
 \alias{use_knitr}
-\alias{use_package}
 \alias{use_package_doc}
 \alias{use_rcpp}
 \alias{use_rstudio}
@@ -24,26 +23,13 @@ use_rcpp(pkg = ".")
 use_travis(pkg = ".")
 
 use_package_doc(pkg = ".")
-
-use_package(package, type = "Imports", pkg = ".")
 }
 \arguments{
-\item{pkg}{package description, can be path or package name. See
-\code{\link{as.package}} for more information.}
-
-\item{package}{Name of package to depend on.}
-
-\item{type}{Type of dependency: must be one of "Imports", "Suggests",
-"Depends", "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)}
-
 \item{pkg}{package description, can be path or package name. See
 \code{\link{as.package}} for more information.}
 }
 \description{
 Add useful infrastructure to a package.
-
-This adds a dependency to DESCRIPTION and offers a little advice
-about how to best use it.
 }
 \section{\code{use_testthat}}{
 
@@ -79,16 +65,10 @@ Add basic travis template to a package. Also adds \code{.travis.yml} to
 
 Adds a roxygen template for package documentation
 }
-\examples{
-\dontrun{
-use_package("ggplot2")
-use_package("dplyr", "suggests")
-
-}
-}
 \seealso{
 Other infrastructure: \code{\link{add_build_ignore}},
   \code{\link{use_build_ignore}};
-  \code{\link{use_data_raw}}; \code{\link{use_data}}
+  \code{\link{use_data_raw}}; \code{\link{use_data}};
+  \code{\link{use_package}}
 }
 
