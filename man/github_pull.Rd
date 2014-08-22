@@ -12,6 +12,6 @@ github_pull(pull)
 Use as \code{ref} parameter to \code{\link{install_github}}.
 }
 \seealso{
-\code{\link{install_github}}
+\code{\link{install_github}}, \code{\link{github_release}}
 }
 

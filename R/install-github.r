@@ -136,7 +136,7 @@ remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
 #' Use as \code{ref} parameter to \code{\link{install_github}}.
 #'
 #' @param pull The pull request to install
-#' @seealso \code{\link{install_github}}
+#' @seealso \code{\link{install_github}}, \code{\link{github_release}}
 #' @export
 github_pull <- function(pull) structure(pull, class = "github_pull")
 
@@ -152,6 +152,52 @@ github_resolve_ref.NULL <- function(x, params) {
   params
 }
 
+#' Install the latest release from GitHub
+#'
+#' Use as \code{ref} parameter to \code{\link{install_github}}.
+#'
+#' @seealso \code{\link{install_github}}, \code{\link{github_pull}}
+#' @export
+github_release <- function() structure(NA_integer_, class = "github_release")
+
+# Retrieve the ref for the latest release
+github_resolve_ref.github_release <- function(x, param) {
+  # GET /repos/:user/:repo/releases
+  path <- paste("repos", param$username, param$repo, "releases", sep = "/")
+  r <- GET(param$host, path = path)
+  stop_for_status(r)
+  response <- httr::content(r, as = "parsed")
+  if (length(response) == 0L)
+    stop("No releases found for repo ", param$username, "/", param$repo, ".")
+
+  list(ref = response[[1L]]$tag_name)
+}
+
+# Extract the commit hash from a github bundle and append it to the
+# package DESCRIPTION file. Git archives include the SHA1 hash as the
+# comment field of the zip central directory record
+# (see https://www.kernel.org/pub/software/scm/git/docs/git-archive.html)
+# Since we know it's 40 characters long we seek that many bytes minus 2
+# (to confirm the comment is exactly 40 bytes long)
+github_extract_sha1 <- function(bundle) {
+
+  # open the bundle for reading
+  conn <- file(bundle, open = "rb", raw = TRUE)
+  on.exit(close(conn))
+
+  # seek to where the comment length field should be recorded
+  seek(conn, where = -0x2a, origin = "end")
+
+  # verify the comment is length 0x28
+  len <- readBin(conn, "raw", n = 2)
+  if (len[1] == 0x28 && len[2] == 0x00) {
+    # read and return the SHA1
+    rawToChar(readBin(conn, "raw", n = 0x28))
+  } else {
+    NULL
+  }
+}
+
 github_resolve_ref.github_pull <- function(x, params) {
   # GET /repos/:user/:repo/pulls/:number
   path <- file.path("repos", params$username, params$repo, "pulls", x)
@@ -163,18 +209,20 @@ github_resolve_ref.github_pull <- function(x, params) {
 }
 
 
-# Parse concise git repo specification: username/repo[/subdir][#pull|@ref]
+# Parse concise git repo specification: [username/]repo[/subdir][#pull|@ref|*release]
+# (the *release suffix represents the latest release)
 parse_git_repo <- function(path) {
   username_rx <- "(?:([^/]+)/)?"
   repo_rx <- "([^/@#]+)"
   subdir_rx <- "(?:/([^@#]*[^@#/]))?"
-  ref_rx <- "(?:@(.+))"
+  ref_rx <- "(?:@([^*].*))"
   pull_rx <- "(?:#([0-9]+))"
-  ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
+  release_rx <- "(?:@([*]))"
+  ref_or_pull_or_release_rx <- sprintf("(?:%s|%s|%s)?", ref_rx, pull_rx, release_rx)
   github_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
-    username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
+    username_rx, repo_rx, subdir_rx, ref_or_pull_or_release_rx)
 
-  param_names <- c("username", "repo", "subdir", "ref", "pull", "invalid")
+  param_names <- c("username", "repo", "subdir", "ref", "pull", "release", "invalid")
   replace <- setNames(sprintf("\\%d", seq_along(param_names)), param_names)
   params <- lapply(replace, function(r) gsub(github_rx, r, path, perl = TRUE))
   if (params$invalid != "")
@@ -184,6 +232,11 @@ parse_git_repo <- function(path) {
   if (!is.null(params$pull)) {
     params$ref <- github_pull(params$pull)
     params$pull <- NULL
+  }
+
+  if (!is.null(params$release)) {
+    params$ref <- github_release()
+    params$release <- NULL
   }
 
   params

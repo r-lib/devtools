@@ -126,6 +126,9 @@
 * The `parenvs()` function has been removed from devtools, because is now in the
   pryr package.
 
+* `install_github()` allows installing the latest GitHub release by passing
+  `ref = github_release()` or using the syntax `"user/repo@*"` (@krlmlr, #350).
+
 # devtools 1.5
 
 Four new functions make it easier to add useful infrastructure to packages:
