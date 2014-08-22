@@ -50,3 +50,22 @@ test_that("GitHub parameters are returned correctly", {
     expect_equal(github_remote("my/test/pkg@*release")$ref, "latest-release")
   })
 })
+
+mock_github_GET <- function(path) {
+  if (grepl("^repos/.*/pulls/.*$", path)) {
+    list(user=list(login="username"), head=list(ref="some-pull-request"))
+  } else if (grepl("^repos/.*/releases$", path)) {
+    list(list(tag_name="some-release"))
+  } else
+    stop("unexpected path: ", path)
+}
+
+test_that("GitHub references are resolved correctly", {
+  default_params <- as.list(setNames(nm=c("repo", "username")))
+  with_mock("github_GET", mock_github_GET, {
+    expect_equal(github_resolve_ref(NULL, list())$ref, "master")
+    expect_equal(github_resolve_ref("some-ref", list())$ref, "some-ref")
+    expect_equal(github_resolve_ref(github_pull(123), default_params)$ref, "some-pull-request")
+    expect_equal(github_resolve_ref(github_release(), default_params)$ref, "some-release")
+  })
+})
