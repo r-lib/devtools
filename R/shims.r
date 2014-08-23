@@ -111,5 +111,5 @@ shim_library.dynam.unload <- function(chname, libpath,
 
   # Should only reach this in the rare case that the devtools-loaded package is
   # trying to unload a different package's DLL.
-  library.dynam.unload(chname, libpath, verbose, file.ext)
+  base::library.dynam.unload(chname, libpath, verbose, file.ext)
 }
