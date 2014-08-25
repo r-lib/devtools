@@ -34,7 +34,7 @@ uncommitted <- function(path = ".") {
 
 github_info <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  if (!uses_git(pkg)) return(github_dummy)
+  if (!uses_git(pkg$path)) return(github_dummy)
 
   remotes <- git("remote -v", path = pkg$path)
   remotes_df <- read.table(text = remotes, stringsAsFactors = FALSE)
