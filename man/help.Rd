@@ -61,6 +61,8 @@ shim_help(lm, 'stats')
 shim_help('lm')
 shim_help('lm', stats)
 shim_help('lm', 'stats')
+shim_help(package = stats)
+shim_help(package = 'stats')
 topic <- "lm"
 shim_help(topic)
 shim_help(topic, stats)

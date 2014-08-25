@@ -109,6 +109,8 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 #' shim_help('lm')
 #' shim_help('lm', stats)
 #' shim_help('lm', 'stats')
+#' shim_help(package = stats)
+#' shim_help(package = 'stats')
 #' topic <- "lm"
 #' shim_help(topic)
 #' shim_help(topic, stats)
@@ -122,6 +124,8 @@ shim_help <- function(topic, package = NULL, ...) {
   if (is_char) {
     topic_str <- topic
     topic_name <- as.name(topic)
+  } else if (missing(topic_name)) {
+    # Leave the vars missing
   } else if (is.null(topic_name)) {
     topic_str <- NULL
     topic_name <- NULL
@@ -145,9 +149,24 @@ shim_help <- function(topic, package = NULL, ...) {
   if (use_dev) {
     dev_help(topic_str)
   } else {
+    # This is similar to list(), except that one of the args is a missing var,
+    # it will replace it with an empty symbol instead of trying to evaluate it.
+    as_list <- function(..., .env = parent.frame()) {
+      dots <- match.call(expand.dots = FALSE)$`...`
+
+      lapply(dots, function(var) {
+        is_missing <- eval(substitute(missing(x), list(x = var)), .env)
+        if (is_missing) {
+          quote(expr=)
+        } else {
+          eval(var, .env)
+        }
+      })
+    }
+
     call <- substitute(
       utils::help(topic, package, ...),
-      list(topic = topic_name, package = package_name)
+      as_list(topic = topic_name, package = package_name)
     )
     eval(call)
   }
