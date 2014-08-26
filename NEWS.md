@@ -83,6 +83,9 @@
 
 * `install_svn()` now only downloads the branch that you need, rather than
   the complete repo.
+  
+* `decompress()` and hence `install_url()` now work when the downloaded
+  file decompresses without additional top-level directory (#537).
 
 ## Other minor improvements and bug fixes
 

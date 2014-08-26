@@ -68,7 +68,10 @@ getdir <- function(path)  sub("/[^/]*$", "", path)
 # Given a list of files, returns the root (the topmost folder)
 # getrootdir(c("path/to/file", "path/to/other/thing")) returns "path/to"
 getrootdir <- function(file_list) {
-  getdir(file_list[which.min(nchar(gsub("[^/]", "", file_list)))])
+  slashes <- nchar(gsub("[^/]", "", file_list))
+  if (min(slashes) == 0) return("")
+
+  getdir(file_list[which.min(slashes)])
 }
 
 my_unzip <- function(src, target, unzip = getOption("unzip")) {

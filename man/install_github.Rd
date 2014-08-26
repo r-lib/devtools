@@ -38,7 +38,7 @@ packages in a single command.
 }
 \examples{
 \dontrun{
-install_github("roxygen")
+install_github("klutometis/roxygen")
 install_github("wch/ggplot2")
 install_github(c("rstudio/httpuv", "rstudio/shiny"))
 install_github(c("hadley/httr@v0.4", "klutometis/roxygen#142",
