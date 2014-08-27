@@ -215,10 +215,10 @@ build_description <- function(name, extra = list()) {
 
   defaults <- compact(list(
     Package = name,
-    Title = "What the package does (short line)",
+    Title = "What the package does (one line)",
     Version = "0.1",
     "Authors@R" = getOption("devtools.desc.author"),
-    Description = "What the package does (paragraph)",
+    Description = "What the package does (one paragraph)",
     Depends = paste0("R (>= ", as.character(getRversion()) ,")"),
     License = getOption("devtools.desc.license"),
     Suggests = getOption("devtools.desc.suggests"),
