@@ -197,11 +197,9 @@ use_package <- function(package, type = "Imports", pkg = ".") {
     Imports = paste0("Refer to functions with ", package, "::fun()"),
     Depends = paste0("Are you sure you want Depends? Imports is almost always",
       " the better choice."),
-    Suggests = paste0("Use function below to test if package is installed,",
-      " then use ", package, "::fun() to refer to functions.\n\n",
-      "  is_installed <- function(pkg, version = 0) {\n",
-      "   system.file(package = pkg) != \"\" && packageVersion(pkg) > version\n",
-      "  }"),
+    Suggests = paste0("Use requireNamespace(\"", pkg, "\", quietly = TRUE)",
+      " to test if package is installed,\n",
+      "then use ", package, "::fun() to refer to functions."),
     Enhances = "",
     LinkingTo = show_includes(package)
   )
