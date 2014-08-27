@@ -199,9 +199,9 @@ use_package <- function(package, type = "Imports", pkg = ".") {
       " the better choice."),
     Suggests = paste0("Use function below to test if package is installed,",
       " then use ", package, "::fun() to refer to functions.\n\n",
-      "is_installed <- function(pkg) {\n",
-      "  system.file(package = pkg) != \"\"\n",
-      "}"),
+      "  is_installed <- function(pkg, version = 0) {\n",
+      "   system.file(package = pkg) != \"\" && packageVersion(pkg) > version\n",
+      "  }"),
     Enhances = "",
     LinkingTo = show_includes(package)
   )
