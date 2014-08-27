@@ -33,11 +33,6 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
     args = if (needs_clean(pkg)) "--preclean",
     quiet = quiet)
 
-  dll_name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
-  from <- file.path("inst", "libs", .Platform$r_arch, dll_name)
-  to <- dll_path(pkg)
-  file.copy(from, to)
-
   invisible(dll_path(pkg))
 }
 
