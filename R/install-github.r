@@ -48,10 +48,26 @@ install_github <- function(repo, username = NULL,
                            auth_token = github_pat(),
                            host = "api.github.com", ...) {
 
-  remotes <- lapply(repo, github_remote, username = username, ref = ref,
-    subdir = subdir, auth_token = auth_token, host = host)
+  tryCatch({
+    remotes <- lapply(repo, github_remote, username = username, ref = ref,
+      subdir = subdir, auth_token = auth_token, host = host)
 
-  install_remotes(remotes, ...)
+    install_remotes(remotes, ...)
+  }, error = function(err){
+    cat(paste("Errors encountered installing repository ", repo, 
+	", falling back to install_git.\n", sep = ""))
+    # Installation has failed, try to fall back to install_git
+    if (is.null(username))
+    {
+      # Username should be first component of repo
+      gitUrl = paste("https://github.com/", repo, ".git", sep = "")       
+    }
+    else{
+      gitUrl = paste("https://github.com/", username , "/",
+        repo, ".git", sep = "")
+    }
+    install_git(gitUrl)
+  }, funally = {})
 }
 
 github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
