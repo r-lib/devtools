@@ -6,12 +6,15 @@
 \alias{infrastructure}
 \alias{use_knitr}
 \alias{use_package_doc}
+\alias{use_qtcreator}
 \alias{use_rcpp}
 \alias{use_rstudio}
 \alias{use_testthat}
 \alias{use_travis}
 \title{Add useful infrastructure to a package.}
 \usage{
+use_qtcreator(pkg = ".")
+
 use_testthat(pkg = ".")
 
 use_rstudio(pkg = ".")
@@ -31,6 +34,15 @@ use_package_doc(pkg = ".")
 \description{
 Add useful infrastructure to a package.
 }
+\section{\code{use_qtcreator}}{
+
+Adds an associated \code{.pro} file to the project, which QtCreator uses
+to identify dependencies. With this, QtCreator will be able to provide
+indexing and autocompletion support for C/C++ files within the `src/`
+directory of a project. Packages within the \code{LinkingTo:} field containing
+\code{include} directories are added and used for autocompletion support as well.
+}
+
 \section{\code{use_testthat}}{
 
 Add testing infrastructure to a package that does not already have it.
