@@ -55,7 +55,7 @@ use_rstudio <- function(pkg = ".") {
   template_path <- system.file("templates/template.Rproj", package = "devtools")
   file.copy(template_path, path)
 
-  add_build_ignore(pkg, ".travis.yml")
+  add_git_ignore(pkg, c(".Rproj.user", ".Rhistory", ".RData"))
 
   invisible(TRUE)
 }
@@ -361,6 +361,15 @@ use_build_ignore <- function(files, escape = TRUE, pkg = ".") {
 
 add_build_ignore <- function(pkg = ".", files, escape = TRUE) {
   use_build_ignore(files, escape = escape, pkg = pkg)
+}
+
+add_git_ignore <- function(pkg = ".", ignores) {
+  pkg <- as.package(pkg)
+
+  path <- file.path(pkg$path, ".gitignore")
+  union_write(path, ignores)
+
+  invisible(TRUE)
 }
 
 union_write <- function(path, new_lines) {
