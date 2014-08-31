@@ -99,41 +99,76 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 #' # To see the help pages for utils::help and utils::`?`:
 #' help("help", "utils")
 #' help("?", "utils")
+#'
+#' \dontrun{
+#' # Examples demonstrating the multiple ways of supplying arguments
+#' # NB: you can't do pkg <- "ggplot2"; help("ggplot2", pkg)
+#' shim_help(lm)
+#' shim_help(lm, stats)
+#' shim_help(lm, 'stats')
+#' shim_help('lm')
+#' shim_help('lm', stats)
+#' shim_help('lm', 'stats')
+#' shim_help(package = stats)
+#' shim_help(package = 'stats')
+#' topic <- "lm"
+#' shim_help(topic)
+#' shim_help(topic, stats)
+#' shim_help(topic, 'stats')
+#' }
 shim_help <- function(topic, package = NULL, ...) {
-  # Get string versions of topic and package
-  if (is.name(substitute(topic))) {
-    topic_str <- deparse(substitute(topic))
-  } else {
+  # Reproduce help's NSE for topic - try to eval it and see if it's a string
+  topic_name <- substitute(topic)
+  is_char <- FALSE
+  try(is_char <- is.character(topic) && length(topic) == 1L, silent = TRUE)
+  if (is_char) {
     topic_str <- topic
+    topic_name <- as.name(topic)
+  } else if (missing(topic_name)) {
+    # Leave the vars missing
+  } else if (is.null(topic_name)) {
+    topic_str <- NULL
+    topic_name <- NULL
+  } else {
+    topic_str <- deparse(substitute(topic))
   }
 
-  if (is.name(substitute(package))) {
-    package_str <- deparse(substitute(package))
-  } else if (is.null(substitute(package))) {
+  # help's NSE for package is slightly simpler
+  package_name <- substitute(package)
+  if (is.name(package_name)) {
+    package_str <- as.character(package_name)
+  } else if (is.null(package_name)) {
     package_str <- NULL
   } else {
     package_str <- package
+    package_name <- as.name(package)
   }
 
+  use_dev <- (!is.null(package_str) && package_str %in% dev_packages()) ||
+    (is.null(package_str) && !is.null(find_topic(topic_str)))
+  if (use_dev) {
+    dev_help(topic_str)
+  } else {
+    # This is similar to list(), except that one of the args is a missing var,
+    # it will replace it with an empty symbol instead of trying to evaluate it.
+    as_list <- function(..., .env = parent.frame()) {
+      dots <- match.call(expand.dots = FALSE)$`...`
 
-  # If package is NULL, search for help in devtools-loaded packages, and if that
-  # fails, try utils::help.
-  # If the package was specified, then use dev_help or utils::help as
-  # appropriate.
-  if (is.null(package_str)) {
-    if (!is.null(find_topic(topic_str))) {
-      dev_help(topic_str)
-    } else {
-      call <- as.call(list(utils::help, substitute(topic), substitute(package), ...))
-      return(eval(call))
+      lapply(dots, function(var) {
+        is_missing <- eval(substitute(missing(x), list(x = var)), .env)
+        if (is_missing) {
+          quote(expr=)
+        } else {
+          eval(var, .env)
+        }
+      })
     }
 
-  } else if (package_str %in% dev_packages()) {
-    dev_help(topic_str)
-
-  } else {
-    call <- as.call(list(utils::help, substitute(topic), substitute(package), ...))
-    return(eval(call))
+    call <- substitute(
+      utils::help(topic, package, ...),
+      as_list(topic = topic_name, package = package_name)
+    )
+    eval(call)
   }
 }
 

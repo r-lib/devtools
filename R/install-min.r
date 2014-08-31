@@ -18,5 +18,5 @@ install_min <- function(pkg = ".", dest, components = NULL, args = NULL, quiet =
     args
   ), quiet = quiet)
 
-  invisible(file.path(dest, pkg$name))
+  invisible(file.path(dest, pkg$package))
 }

@@ -113,6 +113,17 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
     exports <- add_classes_to_exports(ns = nsenv, package = pkg$package,
       exports = exports, nsInfo = nsInfo)
   }
+
+  # Don't try to export objects that are missing from the namespace and imports
+  ns_and_imports <- c(ls(nsenv, all.names = TRUE),
+                      ls(imports_env(pkg), all.names = TRUE))
+  extra_exports <- setdiff(exports, ns_and_imports)
+
+  if (length(extra_exports) > 0) {
+    warning("Objects listed as exports, but not present in namespace: ",
+            paste(extra_exports, collapse = ", "))
+    exports <- intersect(ns_and_imports, exports)
+  }
   # Update the exports metadata for the namespace with base::namespaceExport
   # It will throw warnings if objects are already listed in the exports
   # metadata, so catch those warnings and ignore them.
@@ -355,19 +366,4 @@ unregister_namespace <- function(name = NULL) {
   # Remove the item from the registry
   do.call(rm, args = list(name, envir = ns_registry()))
   invisible()
-}
-
-# This is similar to getNamespace(), except that getNamespace will load
-# the namespace if it's not already loaded. This function will not.
-# As of R 3.0, a function called .getNamespace() has the same effect
-# and this is longer be necessary (but it's still needed as long as devtools
-# supports R 2.15).
-get_namespace <- function(name) {
-  # Sometimes we'll be passed something like as.name(name), so make sure
-  # it's a string
-  name <- as.character(name)
-  if (!(name %in% loadedNamespaces()))
-    return(NULL)
-  else
-    return(getNamespace(name))
 }

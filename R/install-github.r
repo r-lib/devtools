@@ -4,35 +4,33 @@
 #' packages in a single command.
 #'
 #' @param repo Repository address in the format
-#'   \code{[username/]repo[/subdir][@@ref|#pull]}. Alternatively, you can
-#'   specify \code{username}, \code{subdir} and/or \code{ref} using the
-#'   respective parameters (see below); if both is specified, the values in
-#'   \code{repo} take precedence.
-#' @param username User name
+#'   \code{username/repo[/subdir][@@ref|#pull]}. Alternatively, you can
+#'   specify \code{subdir} and/or \code{ref} using the respective parameters
+#'   (see below); if both is specified, the values in \code{repo} take
+#'   precedence.
+#' @param username User name. Deprecated: please include username in the
+#'   \code{repo}
 #' @param ref Desired git reference. Could be a commit, tag, or branch
 #'   name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.
 #' @param subdir subdirectory within repo that contains the R package.
-#' @param auth_user your account username if you're attempting to install
-#'   a package hosted in a private repository (and your username is different
-#'   to \code{username})
-#' @param password your password
 #' @param auth_token To install from a private repo, generate a personal
 #'   access token (PAT) in \url{https://github.com/settings/applications} and
 #'   supply to this argument. This is safer than using a password because
 #'   you can easily delete a PAT without affecting any others. Defaults to
 #'   the \code{GITHUB_PAT} environment variable.
+#' @param host Github API host to use. Override with your github enterprise
+#'   hostname.
 #' @param ... Other arguments passed on to \code{\link{install}}.
-#' @param dependencies By default, installs all dependencies so that you can
-#'   build vignettes and use all functionality of the package.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{github_pull}}
 #' @examples
 #' \dontrun{
-#' install_github("roxygen")
+#' install_github("klutometis/roxygen")
 #' install_github("wch/ggplot2")
 #' install_github(c("rstudio/httpuv", "rstudio/shiny"))
-#' install_github(c("devtools@@devtools-1.4", "klutometis/roxygen#142", "mfrasca/r-logging/pkg))
+#' install_github(c("hadley/httr@@v0.4", "klutometis/roxygen#142",
+#'   "mfrasca/r-logging/pkg"))
 #'
 #' # Update devtools to the latest version, on Linux and Mac
 #' # On Windows, this won't work - see ?build_github_devtools
@@ -45,203 +43,161 @@
 #' install_github("hadley/private", auth_token = "abc")
 #'
 #' }
-install_github <- function(repo, username = getOption("github.user"),
+install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
-                           auth_user = NULL, password = NULL,
-                           auth_token = github_pat(), ...,
-                           dependencies = TRUE) {
+                           auth_token = github_pat(),
+                           host = "api.github.com", ...) {
 
-  invisible(vapply(repo, install_github_single, FUN.VALUE = logical(1),
-    username = username, ref = ref, subdir = subdir,
-    auth_user = auth_user, password = password, auth_token = auth_token, ...,
-    dependencies = dependencies))
+  remotes <- lapply(repo, github_remote, username = username, ref = ref,
+    subdir = subdir, auth_token = auth_token, host = host)
+
+  install_remotes(remotes, ...)
 }
 
-github_get_conn <- function(repo, username = getOption("github.user"),
-                            ref = "master", pull = NULL, subdir = NULL,
-                            branch = NULL, auth_user = NULL, password = NULL,
-                            auth_token = NULL, ...) {
+github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
+                       auth_token = github_pat(), sha = NULL,
+                       host = "api.github.com") {
 
-  if (!is.null(branch)) {
-    warning("'branch' is deprecated. In the future, please use 'ref' instead.")
-    ref <- branch
+  meta <- parse_git_repo(repo)
+  meta <- github_resolve_ref(meta$ref %||% ref, meta)
+
+  if (is.null(meta$username)) {
+    meta$username <- username %||% getOption("github.user") %||%
+      stop("Unknown username.")
+    warning("Username parameter is deprecated. Please use ",
+      username, "/", repo, call. = FALSE)
   }
 
-  if (!is.null(pull)) {
-    warning("'pull' is deprecated. In the future, please use 'ref = github_pull(...)' instead.")
-    ref <- github_pull(pull)
+  remote("github",
+    host = host,
+    repo = meta$repo,
+    subdir = meta$subdir %||% subdir,
+    username = meta$username,
+    ref = meta$ref,
+    sha = sha,
+    auth_token = auth_token
+  )
+}
+
+remote_download.github_remote <- function(x, quiet = FALSE) {
+  if (!quiet) {
+    message("Downloading github repo ", x$username, "/", x$repo, "@", x$ref)
   }
 
-  params <- github_parse_path(repo)
-  username <- params$username %||% username
-  repo <- params$repo
-  ref <- params$ref %||% ref
-  subdir <- params$subdir %||% subdir
+  dest <- tempfile(fileext = paste0(".zip"))
+  src <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo,
+    "/zipball/", x$ref)
 
-  if (!is.null(password)) {
-    warning("'password' is deprecated. Please use 'auth_token' instead",
-      call. = FALSE)
+  if (!is.null(x$auth_token)) {
     auth <- httr::authenticate(
-      user = auth_user %||% username,
-      password = password,
-      type = "basic"
-    )
-  } else if (!is.null(auth_token)) {
-    auth <- httr::authenticate(
-      user = auth_token,
+      user = x$auth_token,
       password = "x-oauth-basic",
       type = "basic"
     )
   } else {
-    auth <- list()
+    auth <- NULL
   }
 
-  param <- list(
-    auth = auth, repo = repo, username = username,
-    ref = ref, subdir = subdir,
-    auth_user = auth_user, password = password
+  download(dest, src, auth)
+}
+
+remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
+  # Determine sha as efficiently as possible
+  if (!is.null(x$sha)) {
+    # Might be cached already (because re-installing)
+    sha <- x$sha
+  } else if (!is.null(bundle)) {
+    # Might be able to get from zip archive
+    sha <- git_extract_sha1(bundle)
+  } else {
+    # Otherwise can use github api
+    sha <- github_commit(x$username, x$repo, x$ref)$sha
+  }
+
+  list(
+    RemoteType = "github",
+    RemoteHost = x$host,
+    RemoteRepo = x$repo,
+    RemoteUsername = x$username,
+    RemoteRef = x$ref,
+    RemoteSha = sha,
+    RemoteSubdir = x$subdir,
+    # Backward compatibility for packrat etc.
+    GithubRepo = x$repo,
+    GithubUsername = x$username,
+    GithubRef = x$ref,
+    GithubSHA1 = sha,
+    GithubSubdir = x$subdir
   )
-
-  param <- modifyList(param, github_ref(param$ref, param))
-
-  param$msg <- paste(
-    "Installing github repo",
-    paste(param$repo, param$ref, sep = "/", collapse = ", "),
-    "from",
-    paste(username, collapse = ", "))
-
-  param$url <- paste(
-    "https://api.github.com", "repos", param$username, param$repo,
-    "zipball", param$ref, sep = "/")
-
-  param
 }
 
-install_github_single <- function(repo, username = getOption("github.user"),
-                                  ref = "master", pull = NULL, subdir = NULL,
-                                  branch = NULL, auth_user = NULL,
-                                  password = NULL, auth_token = NULL, ...) {
-  conn <- github_get_conn(repo, username, ref, pull, subdir, branch,
-    auth_user, password, auth_token, ...)
-  message(conn$msg)
-
-  # define before_install function that captures the arguments to
-  # install_github and appends the to the description file
-  github_before_install <- function(bundle, pkg_path) {
-
-    desc <- file.path(pkg_path, "DESCRIPTION")
-
-    # Remove any blank lines from DESCRIPTION -- this protects users from
-    # 'Error: contains a blank line' errors thrown by R CMD INSTALL
-    DESCRIPTION <- readLines(desc, warn = FALSE)
-    if (any(DESCRIPTION == "")) {
-      DESCRIPTION <- DESCRIPTION[DESCRIPTION != ""]
-    }
-    cat(DESCRIPTION, file = desc, sep = "\n")
-
-    # Function to append a field to the DESCRIPTION if it's not null
-    append_field <- function(name, value) {
-      if (!is.null(value)) {
-        cat("Github", name, ":", value, "\n", sep = "", file = desc, append = TRUE)
-      }
-    }
-
-    # Append fields
-    append_field("Repo", conn$repo)
-    append_field("Username", conn$username)
-    append_field("Ref", conn$ref)
-    append_field("SHA1", github_extract_sha1(bundle))
-    append_field("Pull", conn$pull)
-    append_field("Subdir", conn$subdir)
-    append_field("Branch", conn$branch)
-    append_field("AuthUser", conn$auth_user)
-    # Don't record password for security reasons
-    #append_field("Password", conn$password)
-  }
-
-  # The downloaded file is always named by the package's name with extension .zip.
-  # install_github("shiny", "rstudio", "v/0/2/1")
-  #  URL: https://api.github.com/repos/rstudio/shiny/zipball/v/0/2/1
-  #  Output file: shiny.zip
-  install_url(conn$url, name = paste(conn$repo, ".zip", sep = ""), subdir = conn$subdir,
-    config = conn$auth, before_install = github_before_install, ...)
-}
-
-#' Resolve a token to a GitHub reference
-#'
-#' A generic function, for internal use only.
-#'
-#' @param x Reference token
-#' @param param A named list of GitHub parameters
-#' @keywords internal
-#' @export
-github_ref <- function(x, param) UseMethod("github_ref")
-
-# Treat the parameter as a named reference
-github_ref.default <- function(x, param) list(ref=x)
-
-#' Install a specific pull request from GitHub
+#' GitHub references
 #'
 #' Use as \code{ref} parameter to \code{\link{install_github}}.
+#' Allows installing a specific pull request or the latest release.
 #'
 #' @param pull The pull request to install
 #' @seealso \code{\link{install_github}}
+#' @rdname github_refs
 #' @export
 github_pull <- function(pull) structure(pull, class = "github_pull")
 
-# Retrieve the username and ref for a pull request
-github_ref.github_pull <- function(x, param) {
-  host <- "https://api.github.com"
+#' @rdname github_refs
+#' @export
+github_release <- function() structure(NA_integer_, class = "github_release")
+
+github_resolve_ref <- function(x, params) UseMethod("github_resolve_ref")
+
+github_resolve_ref.default <- function(x, params) {
+  params$ref <- x
+  params
+}
+
+github_resolve_ref.NULL <- function(x, params) {
+  params$ref <- "master"
+  params
+}
+
+github_resolve_ref.github_pull <- function(x, params) {
   # GET /repos/:user/:repo/pulls/:number
-  path <- paste("repos", param$username, param$repo, "pulls", x, sep = "/")
-  r <- GET(host, path = path)
-  stop_for_status(r)
-  response <- httr::content(r, as = "parsed")
+  path <- file.path("repos", params$username, params$repo, "pulls", x)
+  response <- github_GET(path)
 
-  list(repo = param$repo, username = response$user$login, ref = response$head$ref)
+  params$username <- response$user$login
+  params$ref <- response$head$ref
+  params
 }
 
-# Extract the commit hash from a github bundle and append it to the
-# package DESCRIPTION file. Git archives include the SHA1 hash as the
-# comment field of the zip central directory record
-# (see https://www.kernel.org/pub/software/scm/git/docs/git-archive.html)
-# Since we know it's 40 characters long we seek that many bytes minus 2
-# (to confirm the comment is exactly 40 bytes long)
-github_extract_sha1 <- function(bundle) {
+# Retrieve the ref for the latest release
+github_resolve_ref.github_release <- function(x, params) {
+  # GET /repos/:user/:repo/releases
+  path <- paste("repos", params$username, params$repo, "releases", sep = "/")
+  response <- github_GET(path)
+  if (length(response) == 0L)
+    stop("No releases found for repo ", params$username, "/", params$repo, ".")
 
-  # open the bundle for reading
-  conn <- file(bundle, open = "rb", raw = TRUE)
-  on.exit(close(conn))
-
-  # seek to where the comment length field should be recorded
-  seek(conn, where = -0x2a, origin = "end")
-
-  # verify the comment is length 0x28
-  len <- readBin(conn, "raw", n = 2)
-  if (len[1] == 0x28 && len[2] == 0x00) {
-    # read and return the SHA1
-    rawToChar(readBin(conn, "raw", n = 0x28))
-  } else {
-    NULL
-  }
+  params$ref <- response[[1L]]$tag_name
+  params
 }
 
-# Parse a GitHub path of the form [username/]repo[/subdir][#pull|@ref]
-github_parse_path <- function(path) {
+# Parse concise git repo specification: [username/]repo[/subdir][#pull|@ref|@*release]
+# (the *release suffix represents the latest release)
+parse_git_repo <- function(path) {
   username_rx <- "(?:([^/]+)/)?"
   repo_rx <- "([^/@#]+)"
   subdir_rx <- "(?:/([^@#]*[^@#/]))?"
-  ref_rx <- "(?:@(.+))"
+  ref_rx <- "(?:@([^*].*))"
   pull_rx <- "(?:#([0-9]+))"
-  ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
+  release_rx <- "(?:@([*]release))"
+  ref_or_pull_or_release_rx <- sprintf("(?:%s|%s|%s)?", ref_rx, pull_rx, release_rx)
   github_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
-    username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
+    username_rx, repo_rx, subdir_rx, ref_or_pull_or_release_rx)
 
-  param_names <- c("username", "repo", "subdir", "ref", "pull", "invalid")
+  param_names <- c("username", "repo", "subdir", "ref", "pull", "release", "invalid")
   replace <- setNames(sprintf("\\%d", seq_along(param_names)), param_names)
   params <- lapply(replace, function(r) gsub(github_rx, r, path, perl = TRUE))
   if (params$invalid != "")
-    stop(sprintf("Invalid GitHub path: %s", path))
+    stop(sprintf("Invalid git repo: %s", path))
   params <- params[sapply(params, nchar) > 0]
 
   if (!is.null(params$pull)) {
@@ -249,19 +205,11 @@ github_parse_path <- function(path) {
     params$pull <- NULL
   }
 
+  if (!is.null(params$release)) {
+    params$ref <- github_release()
+    params$release <- NULL
+  }
+
   params
 }
 
-#' Retrieve Github personal access token.
-#'
-#' Looks in env var \code{GITHUB_PAT}.
-#'
-#' @keywords internal
-#' @export
-github_pat <- function() {
-  pat <- Sys.getenv('GITHUB_PAT')
-  if (identical(pat, "")) return(NULL)
-
-  message("Using github PAT from envvar GITHUB_PAT")
-  pat
-}

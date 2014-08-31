@@ -47,6 +47,8 @@ is.named <- function(x) {
 # env ------------------------------------------------------------------------
 
 set_envvar <- function(envs, action = "replace") {
+  if (length(envs) == 0) return()
+
   stopifnot(is.named(envs))
   stopifnot(is.character(action), length(action) == 1)
   action <- match.arg(action, c("replace", "prefix", "suffix"))

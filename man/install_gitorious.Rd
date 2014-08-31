@@ -3,19 +3,19 @@
 \alias{install_gitorious}
 \title{Attempts to install a package directly from gitorious.}
 \usage{
-install_gitorious(repo, project = repo, ref = "master", subdir = NULL,
-  branch = NULL, ...)
+install_gitorious(repo, ref = "master", subdir = NULL, ...)
 }
 \arguments{
-\item{project}{Gitorious project name}
+\item{repo}{Repository address in the format
+\code{username/repo[/subdir][@ref|#pull]}. Alternatively, you can
+specify \code{subdir} and/or \code{ref} using the respective parameters
+(see below); if both is specified, the values in \code{repo} take
+precedence.}
 
-\item{repo}{Repo name}
-
-\item{ref}{Desired git ref - defaults to \code{"master"}}
+\item{ref}{Desired git reference. Could be a commit, tag, or branch
+name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.}
 
 \item{subdir}{subdirectory within repo that contains the R package.}
-
-\item{branch}{Deprecated. Use \code{ref} instead.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 }
@@ -25,7 +25,7 @@ a single command.
 }
 \examples{
 \dontrun{
-install_gitorious("r-mpc-package")
+install_gitorious("r-mpc-package/r-mpc-package")
 }
 }
 \seealso{

@@ -51,5 +51,22 @@ help("load_all")
 # To see the help pages for utils::help and utils::`?`:
 help("help", "utils")
 help("?", "utils")
+
+\dontrun{
+# Examples demonstrating the multiple ways of supplying arguments
+# NB: you can't do pkg <- "ggplot2"; help("ggplot2", pkg)
+shim_help(lm)
+shim_help(lm, stats)
+shim_help(lm, 'stats')
+shim_help('lm')
+shim_help('lm', stats)
+shim_help('lm', 'stats')
+shim_help(package = stats)
+shim_help(package = 'stats')
+topic <- "lm"
+shim_help(topic)
+shim_help(topic, stats)
+shim_help(topic, 'stats')
+}
 }
 

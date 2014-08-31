@@ -3,11 +3,14 @@
 # should be run on package source dirs or just built tar.gz files)
 # @pkg A package object
 # @built_path The path to a tar.gz file of the built source package
-check_devtools <- function(pkg = ".", built_path) {
+check_devtools <- function(pkg = ".", built_path = NULL) {
   pkg <- as.package(pkg)
   message("Checking ", pkg$package, " with devtools")
 
-  check_pkg_extra_files(pkg$package, built_path)
+  if (!is.null(built_path)) {
+    check_pkg_extra_files(pkg$package, built_path)
+  }
+  check_dev_versions(pkg)
 }
 
 
@@ -42,14 +45,40 @@ check_pkg_extra_files <- function(pkgname, built_path) {
   files <- files[!(files %in% c(req_files, opt_files, other_files))]
 
   if (length(files) > 0) {
-    message("\n  Non-standard files found:\n    ",
-      paste(files, collapse="\n    "),
+    message(
+      "\n  Non-standard files found:",
+      "\n    ", paste(files, collapse="\n    "),
       "\n  Did you intend to include these files?",
-      "\n  If yes, do nothing. If no, remove them or add them to .Rbuildignore.\n")
+      "\n  If yes, do nothing. If no, remove them or add them to .Rbuildignore."
+    )
 
   } else {
     message("OK")
   }
 
   invisible()
+}
+
+check_dev_versions <- function(pkg = ".") {
+  message("Checking for dependencies on development versions... ",
+    appendLF = FALSE)
+
+  deps <- pkg_deps(pkg, NA)
+  deps <- deps[!is.na(deps$version), , drop = FALSE]
+
+  parsed <- lapply(deps$version, function(x) unlist(numeric_version(x)))
+  patch_ver <- vapply(parsed, function(x) x[[length(x)]], integer(1))
+
+  is_dev <- patch_ver >= 9000
+  if (!any(is_dev)) {
+    message("OK")
+    return(invisible(TRUE))
+  }
+
+  message(
+    "\n  Depends on devel versions of: ",
+    "\n    ", paste0(deps$name[is_dev], collapse = ", "),
+    "\n  Release these packages to CRAN and bump version number.")
+
+  return(invisible(FALSE))
 }

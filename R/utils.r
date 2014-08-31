@@ -53,3 +53,21 @@ write_dcf <- function(path, desc) {
 
   cat(text, file = path)
 }
+
+dots <- function(...) {
+  eval(substitute(alist(...)))
+}
+
+first_upper <- function(x) {
+  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+  x
+}
+
+download <- function(path, url, ...) {
+  request <- httr::GET(url, ...)
+  httr::stop_for_status(request)
+  writeBin(httr::content(request, "raw"), path)
+  path
+}
+
+last <- function(x) x[length(x)]

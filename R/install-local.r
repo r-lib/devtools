@@ -11,47 +11,37 @@
 #' \dontrun{
 #' dir <- tempfile()
 #' dir.create(dir)
-#' pkg <- download.packages("testthat", dir)
+#' pkg <- download.packages("testthat", dir, type = "source")
 #' install_local(pkg[, 2])
 #' }
 install_local <- function(path, subdir = NULL, ...) {
-  invisible(lapply(path, install_local_single, subdir = subdir, ...))
+  remotes <- lapply(path, local_remote, subdir = subdir)
+  install_remotes(remotes, ...)
 }
 
-install_local_single <- function(path, subdir = NULL, before_install = NULL, ..., quiet = FALSE) {
-  stopifnot(file.exists(path))
-  if (!quiet) {
-    message("Installing package from ", path)
-  }
+local_remote <- function(path, subdir = NULL, branch = NULL, args = character(0)) {
+  remote("local",
+    path = path,
+    subdir = subdir
+  )
+}
 
-  if (!file.info(path)$isdir) {
-    bundle <- path
-    outdir <- tempfile(pattern = "devtools")
-    dir.create(outdir)
-    on.exit(unlink(outdir, recursive = TRUE), add = TRUE)
+remote_download.local_remote <- function(x, quiet = FALSE) {
+  # Already downloaded - just need to copy to tempdir()
+  bundle <- tempfile()
+  dir.create(bundle)
+  file.copy(x$path, bundle, recursive = TRUE)
 
-    path <- decompress(path, outdir)
-  } else {
-    bundle <- NULL
-  }
+  # file.copy() creates directory inside of bundle
+  dir(bundle, full.names = TRUE)[1]
+}
 
-  pkg_path <- if (is.null(subdir)) path else file.path(path, subdir)
-
-  # Check it's an R package
-  if (!file.exists(file.path(pkg_path, "DESCRIPTION"))) {
-    stop("Does not appear to be an R package (no DESCRIPTION)", call. = FALSE)
-  }
-
-  # Check configure is executable if present
-  config_path <- file.path(pkg_path, "configure")
-  if (file.exists(config_path)) {
-    Sys.chmod(config_path, "777")
-  }
-  
-  # Call before_install for bundles (if provided)
-  if (!is.null(bundle) && !is.null(before_install))
-    before_install(bundle, pkg_path)
-
-  # Finally, run install
-  install(pkg_path, quiet = quiet, ...)
+remote_metadata.local_remote <- function(x, bundle = NULL, source = NULL) {
+  browser()
+  list(
+    RemoteType = "local",
+    RemoteUrl = x$path,
+    RemoteSubdir = x$subdir,
+    RemoteSha = if (uses_git(x$path)) git_sha1(path = x$path)
+  )
 }

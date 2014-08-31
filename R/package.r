@@ -22,8 +22,7 @@ check_dir <- function(x) {
   }
 
   # Normalise path and strip trailing slashes
-  x <- gsub("\\\\", "/", x, fixed = TRUE)
-  x <- sub("/*$", "", x)
+  x <- normalise_path(x)
 
   if (!file.exists(x)) {
     stop("Can't find directory ", x, call. = FALSE)
@@ -32,6 +31,12 @@ check_dir <- function(x) {
     stop(x, " is not a directory", call. = FALSE)
   }
 
+  x
+}
+
+normalise_path <- function(x) {
+  x <- sub("\\\\+$", "/", x)
+  x <- sub("/*$", "", x)
   x
 }
 

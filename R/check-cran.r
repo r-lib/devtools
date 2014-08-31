@@ -132,13 +132,6 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     results
   }
 
-  if (getRversion() <= '2.15.2' && threads >= length(pkgs)) {
-    threads <- max(length(pkgs) - 1L, 1L)
-    message("Reducing number of threads to ", threads,
-      " (number of packages to check minus one) due to a bug in mclapply in",
-      " R <= 2.15.2")
-  }
-
   results <- mclapply(seq_along(pkgs), check_pkg, mc.preschedule = FALSE,
     mc.cores = threads)
 
@@ -223,7 +216,7 @@ collect_check_results <- function(topdir, revdep_pkg) {
 
   sink(summary_out)
   if (!is.null(revdep_pkg)) {
-    sha <- packageDescription(revdep_pkg)$GithubSHA1
+    sha <- packageDescription(revdep_pkg)$RemoteSha
     if (!is.null(sha)) sha <- paste0("Commit ", sha, "\n")
 
     cat("=========================================================================\n",
@@ -233,7 +226,7 @@ collect_check_results <- function(topdir, revdep_pkg) {
         "=========================================================================\n",
         sep = "")
   }
-  print(sessionInfo())
+  print(session_info())
   cat("\n")
   sink()
 

@@ -3,24 +3,29 @@
 \alias{install_bitbucket}
 \title{Install a package directly from bitbucket}
 \usage{
-install_bitbucket(repo, username, ref = "master", branch = NULL,
+install_bitbucket(repo, username, ref = "master", subdir = NULL,
   auth_user = NULL, password = NULL, ...)
 }
 \arguments{
-\item{repo}{repo name}
-
-\item{username}{bitbucket username}
-
-\item{ref}{Desired git reference. Could be a commit, tag, or branch
-name. Defaults to \code{"master"}.}
-
-\item{branch}{Deprecated. Use \code{ref} instead.}
-
 \item{auth_user}{your account username if you're attempting to install
 a package hosted in a private repository (and your username is different
 to \code{username})}
 
 \item{password}{your password}
+
+\item{ref}{Desired git reference; culd be a commit, tag, or branch name.
+Defaults to master.}
+
+\item{repo}{Repository address in the format
+\code{username/repo[/subdir][@ref|#pull]}. Alternatively, you can
+specify \code{subdir} and/or \code{ref} using the respective parameters
+(see below); if both is specified, the values in \code{repo} take
+precedence.}
+
+\item{username}{User name. Deprecated: please include username in the
+\code{repo}}
+
+\item{subdir}{subdirectory within repo that contains the R package.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 }
@@ -30,8 +35,8 @@ a single command.
 }
 \examples{
 \dontrun{
-install_bitbucket("paulhiemstra")
-install_bitbucket(c("testrepo", "testrepo2"))
+install_bitbucket("sulab/mygene.r@default")
+install_bitbucket("dannavarro/lsr-package")
 }
 }
 \seealso{
