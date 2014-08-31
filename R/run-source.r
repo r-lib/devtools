@@ -2,7 +2,7 @@
 #'
 #' Internally, \code{source_url} calls \code{\link{getURL}} in
 #' \code{RCurl} package and then read the contents by
-#' \code{\link{textConnection}}, which is then \code{\link{source}}ed 
+#' \code{\link{textConnection}}, which is then \code{\link{source}}ed
 #' or \code{\link[Rcpp]{sourceCpp}}ed.
 #' See \code{?getURL} for the available protocol.
 #'
@@ -15,9 +15,9 @@
 #' it has not changed. For convenience, it is possible to use a truncated SHA1
 #' hash, down to 6 characters, but keep in mind that a truncated hash won't be
 #' as secure as the full hash.
-#' 
+#'
 #' If there are multiple urls, \code{source_url} will download all of them
-#' and put them into the same temporal directory with their file name. The 
+#' and put them into the same temporal directory with their file name. The
 #' first one will be executed accoring to its file extension.
 #'
 #' @param url url
@@ -45,7 +45,7 @@ source_url <- function(url, ..., sha1 = NULL) {
 
   download.root <- tempfile(pattern="source_url_download")
   dir.create(download.root)
-  
+
   download.target <- character(length(url))
   for(i in seq_along(url)) {
     filename <- names(url[i])
@@ -72,7 +72,7 @@ source_url <- function(url, ..., sha1 = NULL) {
     }
   }
   message(sprintf("Sourcing the first file: %s", names(url)[1]))
-  switch(tools::file_ext(names(url)[1]), 
+  switch(tools::file_ext(names(url)[1]),
     "r" = source(download.target[1], ...),
     "R" = source(download.target[1], ...),
     "cpp" = Rcpp::sourceCpp(download.target[1], ...),
@@ -134,32 +134,9 @@ source_gist <- function(id, ..., sha1 = NULL, quiet = FALSE) {
   source_url(url, ..., sha1 = sha1)
 }
 
-<<<<<<< HEAD
 #' @importFrom jsonlite fromJSON
-#' @importFrom httr GET stop_for_status add_headers
-find_gist <- function(id) {
-  url <- sprintf("https://api.github.com/gists/%s", id)
-  req <- GET(url)
-  stop_for_status(req)
-  
-  # Using regular expression to parse JSON is a bit ick, but it avoid an
-  # additional dependency on RJSONIO or similar
-  text <- content(req, "text")
-  .tmp <- fromJSON(text)
-  sapply(.tmp$files, function(obj) obj$raw_url)
-=======
 #' @importFrom httr GET content stop_for_status add_headers
 find_gist <- function(id) {
   files <- github_GET(sprintf("gists/%s", id))$files
-  r_files <- files[grepl("\\.[rR]$", names(files))]
-
-  if (length(r_files) == 0) {
-    stop("No R files found in gist", call. = FALSE)
-  }
-  if (length(r_files) > 1) {
-    warning("Multiple R files in gist, using first.")
-  }
-
-  r_files[[1]]$raw_url
->>>>>>> hadley/master
+  sapply(files, function(obj) obj$raw_url)
 }
