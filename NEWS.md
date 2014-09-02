@@ -24,7 +24,7 @@
 
 * New `use_rcpp()` sets up a package to use Rcpp.
 
-* New `use_knitr()` sets up a package to use knitr for vignettes.
+* New `use_vignette()` creates a draft vignette using Rmarkdown (#572).
 
 * New `use_package()` allows you to set dependencies (#559). 
 

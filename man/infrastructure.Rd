@@ -4,19 +4,19 @@
 \alias{add_test_infrastructure}
 \alias{add_travis}
 \alias{infrastructure}
-\alias{use_knitr}
 \alias{use_package_doc}
 \alias{use_rcpp}
 \alias{use_rstudio}
 \alias{use_testthat}
 \alias{use_travis}
+\alias{use_vignette}
 \title{Add useful infrastructure to a package.}
 \usage{
 use_testthat(pkg = ".")
 
 use_rstudio(pkg = ".")
 
-use_knitr(pkg = ".")
+use_vignette(name, pkg = ".")
 
 use_rcpp(pkg = ".")
 
@@ -27,6 +27,9 @@ use_package_doc(pkg = ".")
 \arguments{
 \item{pkg}{package description, can be path or package name. See
 \code{\link{as.package}} for more information.}
+
+\item{name}{File name to use for new vignette. Should consist only of
+numbers, letters, _ and -. I recommend using lower case.}
 }
 \description{
 Add useful infrastructure to a package.
@@ -47,7 +50,8 @@ opened for the first time.
 
 \section{\code{use_knitr}}{
 
-Creates \code{vignettes/} and adds needed packages to \code{DESCRIPTION}.
+Adds needed packages to \code{DESCRIPTION}, and creates draft vignette
+in \code{vignettes/}
 }
 
 \section{\code{use_rcpp}}{

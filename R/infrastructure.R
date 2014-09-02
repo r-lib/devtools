@@ -65,23 +65,24 @@ add_rstudio_project <- use_rstudio
 
 
 #' @section \code{use_knitr}:
-#' Creates \code{vignettes/} and adds needed packages to \code{DESCRIPTION}.
+#' Adds needed packages to \code{DESCRIPTION}, and creates draft vignette
+#' in \code{vignettes/}
+#' @param name File name to use for new vignette. Should consist only of
+#'   numbers, letters, _ and -. I recommend using lower case.
 #' @export
 #' @rdname infrastructure
-use_knitr <- function(pkg = ".") {
+use_vignette <- function(name, pkg = ".") {
   pkg <- as.package(pkg)
 
   add_desc_package(pkg, "Suggests", "knitr")
   add_desc_package(pkg, "VignetteBuilder", "knitr")
   dir.create(file.path(pkg$path, "vignettes"), showWarnings = FALSE)
 
-  message(
-    "Put .Rmd in vignettes/. Each must include:\n",
-    "<!-- \n",
-    "%\\VignetteEngine{knitr::knitr}\n",
-    "%\\VignetteIndexEntry{Vignette title}\n",
-    "-->\n"
-  )
+  path <- file.path(pkg$path, "vignettes", paste0(name, ".Rmd"))
+  rmarkdown::draft(path, "html_vignette", "rmarkdown",
+    create_dir = FALSE, edit = FALSE)
+
+  message("Draft vignette created in ", path)
 }
 
 #' @section \code{use_rcpp}:
