@@ -104,6 +104,9 @@
 * `load_all()` no longer gives an error when objects listed as exports are
   missing.
   
+* `missing_s3()` uses a better heuristic for determining if a function
+  is a S3 method (#393).
+
 * `check_dir()` no longer fails on UNC paths (#522).
 
 * `check_devtools()` also checks for dependencies on development versions

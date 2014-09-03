@@ -25,7 +25,7 @@ Imports:
     jsonlite
 Suggests:
     testthat (>= 0.7),
-    roxygen2 (>= 4.0.0),
+    roxygen2 (>= 4.0.2),
     BiocInstaller,
     Rcpp (>= 0.10.0),
     MASS,
