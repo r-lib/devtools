@@ -70,6 +70,7 @@ remove_tag <- function(x) {
   x
 }
 
+#' @export
 replay.error <- function(x) {
   if (is.null(x$call)) {
     message("Error: ", x$message)
@@ -97,6 +98,7 @@ quiet_error <- function(message, call = NULL) {
   structure(list(message = as.character(message), call = call),
     class = c("quietError", "error", "condition"))
 }
+#' @export
 as.character.quietError <- function(x) {
   if (is.null(x$call)) {
     paste("Error: ", x$message, sep = "")

@@ -28,6 +28,7 @@ gitorious_remote <- function(repo, ref = NULL, subdir = NULL, sha = NULL) {
   )
 }
 
+#' @export
 remote_download.gitorious_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
     message("Downloading gitorious repo ", x$username, "/", x$repo, "@", x$ref)
@@ -41,6 +42,7 @@ remote_download.gitorious_remote <- function(x, quiet = FALSE) {
   download(dest, src)
 }
 
+#' @export
 remote_metadata.gitorious_remote <- function(x, bundle = NULL, source = NULL) {
   if (!is.null(x$sha)) {
     # Might be cached already (because re-installing)

@@ -39,6 +39,7 @@ svn_remote <- function(url, subdir = NULL, branch = NULL, args = character(0)) {
   )
 }
 
+#' @export
 remote_download.svn_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
     message("Downloading svn repo ", x$url)
@@ -66,6 +67,7 @@ remote_download.svn_remote <- function(x, quiet = FALSE) {
   bundle
 }
 
+#' @export
 remote_metadata.svn_remote <- function(x, bundle = NULL, source = NULL) {
   list(
     RemoteType = "svn",

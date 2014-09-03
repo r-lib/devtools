@@ -36,6 +36,7 @@ git_remote <- function(url, subdir = NULL, branch = NULL, args = character(0)) {
   )
 }
 
+#' @export
 remote_download.git_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
     message("Downloading git repo ", x$url)
@@ -51,6 +52,7 @@ remote_download.git_remote <- function(x, quiet = FALSE) {
   bundle
 }
 
+#' @export
 remote_metadata.git_remote <- function(x, bundle = NULL, source = NULL) {
   list(
     RemoteType = "git",

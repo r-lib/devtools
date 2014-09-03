@@ -50,6 +50,7 @@ bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
   )
 }
 
+#' @export
 remote_download.bitbucket_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
     message("Downloading bitbucket repo ", x$username, "/", x$repo, "@", x$ref)
@@ -71,6 +72,7 @@ remote_download.bitbucket_remote <- function(x, quiet = FALSE) {
   download(dest, src, auth)
 }
 
+#' @export
 remote_metadata.bitbucket_remote <- function(x, bundle = NULL, source = NULL) {
   # Determine sha as efficiently as possible
   if (!is.null(x$sha)) {

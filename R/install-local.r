@@ -26,6 +26,7 @@ local_remote <- function(path, subdir = NULL, branch = NULL, args = character(0)
   )
 }
 
+#' @export
 remote_download.local_remote <- function(x, quiet = FALSE) {
   # Already downloaded - just need to copy to tempdir()
   bundle <- tempfile()
@@ -36,6 +37,7 @@ remote_download.local_remote <- function(x, quiet = FALSE) {
   dir(bundle, full.names = TRUE)[1]
 }
 
+#' @export
 remote_metadata.local_remote <- function(x, bundle = NULL, source = NULL) {
   browser()
   list(

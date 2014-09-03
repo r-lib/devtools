@@ -28,6 +28,7 @@ url_remote <- function(url, subdir = NULL, config = list()) {
   )
 }
 
+#' @export
 remote_download.url_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
     message("Downloading package from url: ", x$url)
@@ -37,6 +38,7 @@ remote_download.url_remote <- function(x, quiet = FALSE) {
   download(bundle, x$url, x$config)
 }
 
+#' @export
 remote_metadata.url_remote <- function(x, bundle = NULL, source = NULL) {
   list(
     RemoteType = "url",
