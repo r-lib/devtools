@@ -48,7 +48,7 @@
 #' @importFrom utils install.packages
 install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     args = getOption("devtools.install.args"), quiet = FALSE,
-                    dependencies = NA, build_vignettes = !quick,
+                    dependencies = NA, build_vignettes = FALSE,
                     keep_source = getOption("keep.source.pkgs"),
                     threads = getOption("Ncpus", 1)) {
 
@@ -56,6 +56,11 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   check_build_tools(pkg)
 
   if (!quiet) message("Installing ", pkg$package)
+
+  # If building vignettes, make sure we have all suggested packages too.
+  if (build_vignettes && missing(dependencies)) {
+    dependencies <- TRUE
+  }
   install_deps(pkg, dependencies = dependencies, threads = threads)
 
   # Build the package. Only build locally if it doesn't have vignettes

@@ -55,6 +55,11 @@
   but it will allow the development of future tools like generic update
   functions.
   
+* Vignettes are no longer installed by default because they potentally require 
+  all suggested packages to also be installed. Use 
+  `build_vignettes = TRUE` to force building and to install all suggested
+  packages (#573).
+  
 * `install_bitbucket()` has been bought into alignment with `install_github()`:
   this means you can now specify repos with the compact `username/repo@ref`
   syntax. The `username` is now deprecated. 
