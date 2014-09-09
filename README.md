@@ -28,7 +28,8 @@ You can track (and contribute to) development of `devtools` at https://github.co
     * **Windows**:
 
         ```R
-        devtools::build_github_devtools()
+        library(devtools)
+        build_github_devtools()
 
         #### Restart R before continuing ####
         install.packages("devtools.zip", repos = NULL)
