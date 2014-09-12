@@ -39,7 +39,6 @@ remote_download.local_remote <- function(x, quiet = FALSE) {
 
 #' @export
 remote_metadata.local_remote <- function(x, bundle = NULL, source = NULL) {
-  browser()
   list(
     RemoteType = "local",
     RemoteUrl = x$path,
