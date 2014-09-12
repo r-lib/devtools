@@ -99,7 +99,7 @@ quiet_error <- function(message, call = NULL) {
     class = c("quietError", "error", "condition"))
 }
 #' @export
-as.character.quietError <- function(x) {
+as.character.quietError <- function(x, ...) {
   if (is.null(x$call)) {
     paste("Error: ", x$message, sep = "")
   } else {
