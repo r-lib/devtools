@@ -34,7 +34,7 @@ remote_download.url_remote <- function(x, quiet = FALSE) {
     message("Downloading package from url: ", x$url)
   }
 
-  bundle <- tempfile(fileext = paste0(".", tools::file_ext(x$url)))
+  bundle <- tempfile(fileext = paste0(".", file_ext(x$url)))
   download(bundle, x$url, x$config)
 }
 
