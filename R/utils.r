@@ -71,3 +71,12 @@ download <- function(path, url, ...) {
 }
 
 last <- function(x) x[length(x)]
+
+# Modified version of utils::file_ext. Instead of always returning the text
+# after the last '.', as in "foo.tar.gz" => ".gz", if the text that directly
+# precedes the last '.' is ".tar", it will include also, so
+# "foo.tar.gz" => ".tar.gz"
+file_ext <- function (x) {
+    pos <- regexpr("\\.((tar\\.)?[[:alnum:]]+)$", x)
+    ifelse(pos > -1L, substring(x, pos + 1L), "")
+}
