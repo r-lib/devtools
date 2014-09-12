@@ -198,7 +198,7 @@ use_package <- function(package, type = "Imports", pkg = ".") {
     Imports = paste0("Refer to functions with ", package, "::fun()"),
     Depends = paste0("Are you sure you want Depends? Imports is almost always",
       " the better choice."),
-    Suggests = paste0("Use requireNamespace(\"", pkg, "\", quietly = TRUE)",
+    Suggests = paste0("Use requireNamespace(\"", package, "\", quietly = TRUE)",
       " to test if package is installed,\n",
       "then use ", package, "::fun() to refer to functions."),
     Enhances = "",
