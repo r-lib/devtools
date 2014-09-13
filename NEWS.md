@@ -14,22 +14,22 @@
 * New `use_data_raw()` creates `data-raw/` directory for reproducible
   generation of `data/` files (#541).
 
-* New `use_rcpp()` sets up a package to use Rcpp.
-
-* New `use_vignette()` creates a draft vignette using Rmarkdown (#572).
-
 * New `use_package()` allows you to set dependencies (#559). 
 
 * New `use_package_doc()` sets up an Roxygen template for package-level
   docs.
 
+* New `use_rcpp()` sets up a package to use Rcpp.
+  
+* `use_travis()` now figures out your github username and repo so it can 
+  construct the markdown for the build image. (#546)
+
+* New `use_vignette()` creates a draft vignette using Rmarkdown (#572).
+
 * renamed `add_rstudio_project()` to `use_rstudio()`, `add_travis()` to 
   `use_travis()`, `add_build_ignore()` to `use_build_ignore()`, and 
   `add_test_infrastructure()` to `use_testthat()` (old functions are 
   aliased to new)
-  
-* `use_travis()` now figures out what your github username and repo are so
-  it can construct the markdown build image for you. (#546)
 
 ## The release process
 
