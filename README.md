@@ -60,8 +60,7 @@ Building and installing:
 * `install()` reinstalls the package, detaches the currently
   loaded version then reloads the new version with `library()`. Reloading a package is not guaranteed to work: see the documentation to `unload()` for caveats.
 
-* `build()` builds a package file from package sources. You can
-  can use it to build a binary version of your package.
+* `build()` builds a package file from package sources. You can use it to build a binary version of your package.
 
 * `install_github()` installs an R package from github,
   `install_gitorious()` from gitorious, `install_bitbucket()` from
