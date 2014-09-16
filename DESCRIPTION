@@ -10,7 +10,6 @@ Authors@R: c(
 Description: Collection of package development tools
 Depends:
     R (>= 3.0.2)
-Roxygen: list(wrap = FALSE)
 Imports:
     httr (>= 0.4),
     RCurl,
