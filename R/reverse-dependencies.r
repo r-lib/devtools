@@ -33,7 +33,10 @@ revdep_maintainers <- function(pkg = ".") {
 #' @export
 revdep_check <- function(pkg = NULL, recursive = FALSE, ignore = NULL, ...) {
   pkgs <- revdep(pkg, recursive = recursive, ignore = ignore)
-  check_cran(pkgs, revdep_pkg = pkg, ...)
+  res <- check_cran(pkgs, revdep_pkg = pkg, ...)
+
+  res$revdep_package <- pkg
+  res
 }
 
 
