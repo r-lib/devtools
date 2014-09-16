@@ -1,13 +1,13 @@
 Package: devtools
 Title: Tools to make developing R code easier
 Version: 1.5.0.9001
-Authors@R: c(
-    person("Hadley", "Wickham",
-    email = "h.wickham@gmail.com", role = c("aut", "cre")),
-    person("Winston", "Chang", role = "aut"),
-    person("R Core team", role = "ctb",
-    comment = "Some namespace and vignette code extracted from base R"))
-Description: Collection of package development tools
+Authors@R: as.person(c(
+    "Hadley Wickham <hadley@rstudio.com> [aut, cre]",
+    "Winston Chang [aut]",
+    "RStudio [cph]",
+    "R Core team [ctb] (Some namespace and vignette code extracted from base R)"
+    ))
+Description: Collection of package development tools.
 Depends:
     R (>= 3.0.2)
 Imports:
