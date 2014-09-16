@@ -7,7 +7,8 @@ Authors@R: as.person(c(
     "RStudio [cph]",
     "R Core team [ctb] (Some namespace and vignette code extracted from base R)"
     ))
-Description: Collection of package development tools.
+Description: Collection of package development tools. Download instructions for
+    the rmarkdown package can be found at http://rmarkdown.rstudio.com/.
 Depends:
     R (>= 3.0.2)
 Imports:
