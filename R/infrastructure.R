@@ -66,7 +66,8 @@ add_rstudio_project <- use_rstudio
 
 #' @section \code{use_knitr}:
 #' Adds needed packages to \code{DESCRIPTION}, and creates draft vignette
-#' in \code{vignettes/}
+#' in \code{vignettes/}. It adds \code{inst/doc} to \code{.gitignore}
+#' so you don't accidentally check in the built vignettes.
 #' @param name File name to use for new vignette. Should consist only of
 #'   numbers, letters, _ and -. I recommend using lower case.
 #' @export
@@ -77,6 +78,8 @@ use_vignette <- function(name, pkg = ".") {
   add_desc_package(pkg, "Suggests", "knitr")
   add_desc_package(pkg, "VignetteBuilder", "knitr")
   dir.create(file.path(pkg$path, "vignettes"), showWarnings = FALSE)
+
+  add_git_ignore(pkg, "inst/doc")
 
   path <- file.path(pkg$path, "vignettes", paste0(name, ".Rmd"))
   rmarkdown::draft(path, "html_vignette", "rmarkdown",
