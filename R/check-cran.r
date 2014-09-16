@@ -145,7 +145,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   # Collect the output
   collect_check_results(check_dir, revdep_pkg)
 
-  invisible(results)
+  invisible(list(path = check_dir, results = results))
 }
 
 parse_check_results <- function(path) {
