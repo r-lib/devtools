@@ -15,7 +15,7 @@
 #' @inheritParams testthat::test_dir
 #' @inheritParams run_examples
 #' @export
-test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
+test <- function(pkg = ".", filter = NULL) {
   check_testthat()
   pkg <- as.package(pkg)
 
@@ -30,28 +30,17 @@ test <- function(pkg = ".", filter = NULL, fresh = FALSE) {
   test_path <- find_test_dir(pkg$path)
   test_files <- dir(test_path, "^test.*\\.[rR]$")
   if (length(test_files) == 0) {
-    message("No tests found: no files matching pattern '^test.*\\.[rR]$'",
-      "found in ", test_path)
+    message("No tests: no files in ", test_path, " match '^test.*\\.[rR]$'")
     return(invisible())
   }
 
   message("Testing ", pkg$package)
-  if (fresh) {
-    to_run <- bquote({
-      require("devtools", quiet = TRUE)
-      require("testthat", quiet = TRUE)
 
-      load_all(.(pkg$path), quiet = TRUE)
-      test_dir(.(test_path), filter = .(filter))
-    })
-    eval_clean(to_run)
-  } else {
-    # Run tests in a child of the namespace environment, like
-    # testthat::test_package
-    load_all(pkg)
-    env <- new.env(parent = ns_env(pkg))
-    with_envvar(r_env_vars(), test_dir(test_path, filter = filter, env = env))
-  }
+  # Run tests in a child of the namespace environment, like
+  # testthat::test_package
+  ns_env <- load_all(pkg)$env
+  env <- new.env(parent = ns_env)
+  with_envvar(r_env_vars(), test_dir(test_path, filter = filter, env = env))
 }
 
 find_test_dir <- function(path) {

@@ -141,6 +141,12 @@
 * Wrote own version of `write.dcf()` that doesn't butcher whitespace and 
   fieldnames.
 
+## Removed functionality
+
+* The `fresh` argument to `test()` has been removed - this is best done by 
+  the editor since it can run the tests in a completely clean environment
+  by starting a new R session.
+
 # devtools 1.5
 
 Four new functions make it easier to add useful infrastructure to packages:
