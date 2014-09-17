@@ -17,10 +17,4 @@ The following notes were generated across my local OS X install, ubuntu running 
   These are needed because devtools simulates package loading, and hence
   needs to attach environments to the search path.
 
-* There are ::: calls to the package's namespace in its code. A package
-  almost never needs to use ::: for its own objects.
-
-  This is needed because that function actually generates an external
-  file that is run in a fresh R session.
-
 We also ran R CMD check on all reverse dependencies for r-release: https://github.com/wch/devtools-checkresults/blob/master/r-release/00check-summary.txt. The only failure is with NMF - the failing example seems unrelated to devtools, and it's hard to imagine why the package needs devtools at all.

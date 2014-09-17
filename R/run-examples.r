@@ -49,14 +49,7 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
   rule()
 
   if (fresh) {
-    to_run <- bquote({
-      require("devtools", quiet = TRUE)
-      load_all(.(pkg$path), export_all = FALSE, quiet = TRUE)
-
-      lapply(.(files), devtools:::run_example,
-        show = .(show), test = .(test), run = .(run))
-      invisible()
-    })
+    to_run <- substitute(devtools::run_examples(path), list(path = pkg$path))
     eval_clean(to_run)
   } else {
     load_all(pkg, reset = TRUE, export_all = FALSE)
