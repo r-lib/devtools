@@ -15,7 +15,8 @@ compact <- function(x) {
   get(f, envir = asNamespace(p))
 }
 
-rule <- function(title = "") {
+rule <- function(...) {
+  title <- paste0(...)
   width <- getOption("width") - nchar(title) - 1
   message(title, paste(rep("-", width, collapse = "")))
 }

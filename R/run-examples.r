@@ -45,8 +45,7 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
   }
   if (length(files) == 0) return()
 
-  message("Running ", length(files), " example files in ", pkg$package)
-  rule()
+  rule("Running ", length(files), " example files in ", pkg$package)
 
   if (fresh) {
     to_run <- substitute(devtools::run_examples(path), list(path = pkg$path))

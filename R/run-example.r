@@ -2,12 +2,12 @@
 #' @importFrom tools parse_Rd
 run_example <- function(path, show = TRUE, test = FALSE, run = TRUE, env = new.env(parent = globalenv())) {
   rd <- parse_Rd(path)
+
   ex <- rd[rd_tags(rd) == "examples"]
   code <- process_ex(ex, show = show, test = test, run = run)
   if (is.null(code)) return()
 
-  message("Running examples in ", basename(path))
-  rule()
+  rule("Running examples in ", basename(path))
 
   code <- paste(code, collapse = "")
   results <- evaluate(code, env)
