@@ -87,7 +87,7 @@ uses_testthat <- function(pkg = ".") {
 
 
 check_testthat <- function() {
-  if (!require("testthat")) {
+  if (!requireNamespace("testthat", quietly = TRUE)) {
     stop("Please install testthat", call. = FALSE)
   }
 }

@@ -6,12 +6,12 @@ compile_rcpp_attributes <- function(pkg) {
   # Only scan for attributes in packages explicitly linking to Rcpp
   if (links_to_rcpp(pkg)) {
 
-    if (!require("Rcpp", quietly = TRUE))
+    if (!requireNamespace("Rcpp", quietly = TRUE))
       stop("Rcpp required for building this package")
 
     # Only compile attributes if we know we have the function available
     if (utils::packageVersion("Rcpp") >= "0.10.0")
-      compileAttributes(pkg$path)
+      Rcpp::compileAttributes(pkg$path)
   }
 }
 
