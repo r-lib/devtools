@@ -18,8 +18,6 @@
 #' @param url url
 #' @param ... other options passed to \code{\link{source}}
 #' @param sha1 The (prefix of the) SHA-1 hash of the file at the remote URL.
-#' @importFrom httr GET stop_for_status
-#' @importFrom digest digest
 #' @export
 #' @examples
 #' \dontrun{
@@ -40,11 +38,11 @@ source_url <- function(url, ..., sha1 = NULL) {
   temp_file <- tempfile()
   on.exit(unlink(temp_file))
 
-  request <- GET(url)
-  stop_for_status(request)
-  writeBin(content(request, type = "raw"), temp_file)
+  request <- httr::GET(url)
+  httr::stop_for_status(request)
+  writeBin(httr::content(request, type = "raw"), temp_file)
 
-  file_sha1 <- digest(file = temp_file, algo = "sha1")
+  file_sha1 <- digest::digest(file = temp_file, algo = "sha1")
 
   if (is.null(sha1)) {
     message("SHA-1 hash of file is ", file_sha1)
@@ -119,7 +117,6 @@ source_gist <- function(id, ..., sha1 = NULL, quiet = FALSE) {
   source_url(url, ..., sha1 = sha1)
 }
 
-#' @importFrom httr GET content stop_for_status add_headers
 find_gist <- function(id) {
   files <- github_GET(sprintf("gists/%s", id))$files
   r_files <- files[grepl("\\.[rR]$", names(files))]

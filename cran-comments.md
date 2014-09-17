@@ -7,6 +7,12 @@ The following notes were generated across my local OS X install, ubuntu running 
   available from http://rmarkdown.rstudio.com/. It will be submitted to CRAN
   in the next week or two.
 
+* checking dependencies in R code ... NOTE
+  Namespace in Imports field not imported from: ‘memoise’
+  All declared Imports should be used.
+  
+  memoise is a build-time dependency.
+
 * checking R code for possible problems ... NOTE
   Found the following calls to attach():
     File 'devtools/R/package-env.r':

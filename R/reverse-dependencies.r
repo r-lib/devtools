@@ -7,7 +7,6 @@
 #' @param ignore A character vector of package names to ignore. These packages
 #'   will not appear in returned vector.
 #' @inheritParams tools::dependsOnPkgs
-#' @importFrom tools dependsOnPkgs
 #' @export
 #' @examples
 #' \dontrun{
@@ -17,7 +16,7 @@
 #'}
 revdep <- function(pkg = NULL, dependencies = c("Depends", "Imports",
                    "Suggests", "LinkingTo"), recursive = FALSE, ignore = NULL) {
-  deps <- dependsOnPkgs(pkg, dependencies, recursive, installed = packages())
+  deps <- tools::dependsOnPkgs(pkg, dependencies, recursive, installed = packages())
   deps <- setdiff(deps, ignore)
   sort(deps)
 }
@@ -40,8 +39,7 @@ revdep_check <- function(pkg = NULL, recursive = FALSE, ignore = NULL, ...) {
 }
 
 
-#' @importFrom memoise memoise
-cran_packages <- memoise(function() {
+cran_packages <- memoise::memoise(function() {
   local <- file.path(tempdir(), "packages.rds")
   download.file("http://cran.R-project.org/web/packages/packages.rds", local,
     mode = "wb", quiet = TRUE)
@@ -51,8 +49,7 @@ cran_packages <- memoise(function() {
   cp
 })
 
-#' @importFrom memoise memoise
-bioc_packages <- memoise(function() {
+bioc_packages <- memoise::memoise(function() {
   con <- url("http://bioconductor.org/packages/release/bioc/VIEWS")
   on.exit(close(con))
   bioc <- read.dcf(con)

@@ -1,7 +1,5 @@
-#' @importFrom evaluate evaluate replay
-#' @importFrom tools parse_Rd
 run_example <- function(path, show = TRUE, test = FALSE, run = TRUE, env = new.env(parent = globalenv())) {
-  rd <- parse_Rd(path)
+  rd <- tools::parse_Rd(path)
 
   ex <- rd[rd_tags(rd) == "examples"]
   code <- process_ex(ex, show = show, test = test, run = run)
@@ -10,7 +8,7 @@ run_example <- function(path, show = TRUE, test = FALSE, run = TRUE, env = new.e
   rule("Running examples in ", basename(path))
 
   code <- paste(code, collapse = "")
-  results <- evaluate(code, env)
+  results <- evaluate::evaluate(code, env)
   replay_stop(results)
 }
 
@@ -70,25 +68,13 @@ remove_tag <- function(x) {
   x
 }
 
-#' @export
-replay.error <- function(x) {
-  if (is.null(x$call)) {
-    message("Error: ", x$message)
-  } else {
-    call <- deparse(x$call)
-    message("Error in ", call, ": ", x$message)
-  }
-}
-
-
 replay_stop <- function(x) UseMethod("replay_stop", x)
 #' @export
 replay_stop.error <- function(x) {
   stop(quiet_error(x$message, x$call))
 }
 #' @export
-replay_stop.default <- function(x) replay(x)
-
+replay_stop.default <- function(x) evaluate::replay(x)
 #' @export
 replay_stop.list <- function(x) {
   invisible(lapply(x, replay_stop))

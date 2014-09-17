@@ -1,4 +1,4 @@
-available_packages <- memoise(function(repos, type) {
+available_packages <- memoise::memoise(function(repos, type) {
   suppressWarnings(available.packages(contrib.url(repos, type)))
 })
 

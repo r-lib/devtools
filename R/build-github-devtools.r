@@ -44,9 +44,9 @@ build_github_devtools <- function(outfile = NULL) {
   bundle <- file.path(tempdir(), "devtools-master.zip")
 
   # Download package file
-  request <- GET(url)
-  stop_for_status(request)
-  writeBin(content(request), bundle)
+  request <- httr::GET(url)
+  httr::stop_for_status(request)
+  writeBin(httr::content(request, "raw"), bundle)
   on.exit(unlink(bundle))
 
   unzip(bundle, exdir = tempdir())

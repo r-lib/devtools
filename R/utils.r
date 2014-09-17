@@ -33,7 +33,7 @@ ends_with_newline <- function(path) {
 render_template <- function(name, data) {
   path <- system.file("templates", name, package = "devtools")
   template <- readLines(path)
-  whisker.render(template, data)
+  whisker::whisker.render(template, data)
 }
 
 is_installed <- function(pkg, version = 0) {

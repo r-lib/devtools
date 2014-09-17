@@ -35,7 +35,6 @@ dev_help <- function(topic, stage = "render", type = getOption("help_type")) {
 }
 
 
-#' @importFrom tools Rd2txt Rd2HTML
 view_rd <- function(path, package, stage = "render", type = getOption("help_type")) {
   if (is.null(type)) type <- "text"
   type <- match.arg(type, c("text", "html"))
@@ -43,10 +42,10 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
   out_path <- paste(tempfile("Rtxt"), type, sep = ".")
 
   if (type == "text") {
-    Rd2txt(path, out = out_path, package = package, stages = stage)
+    tools::Rd2txt(path, out = out_path, package = package, stages = stage)
     file.show(out_path, title = paste(package, basename(path), sep = ":"))
   } else if (type == "html") {
-    Rd2HTML(path, out = out_path, package = package, stages = stage,
+    tools::Rd2HTML(path, out = out_path, package = package, stages = stage,
       no_links = TRUE)
 
     css_path <- file.path(tempdir(), "R.css")

@@ -148,7 +148,6 @@ add_travis <- use_travis
 #' @section \code{use_package_doc}:
 #' Adds a roxygen template for package documentation
 #' @export
-#' @importFrom whisker whisker.render
 use_package_doc <- function(pkg = ".") {
   pkg <- as.package(pkg)
 

@@ -60,13 +60,12 @@ clear_topic_index <- function(pkg = ".") {
   invisible(TRUE)
 }
 
-#' @importFrom tools parse_Rd
 build_topic_index <- function(pkg = ".") {
   pkg <- as.package(pkg)
   rds <- rd_files(pkg)
 
   aliases <- function(path) {
-    parsed <- parse_Rd(path)
+    parsed <- tools::parse_Rd(path)
     tags <- vapply(parsed, function(x) attr(x, "Rd_tag")[[1]], character(1))
     unlist(parsed[tags == "\\alias"])
   }

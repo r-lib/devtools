@@ -45,7 +45,6 @@
 #' @family package installation
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
 #'   set.
-#' @importFrom utils install.packages
 install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     args = getOption("devtools.install.args"), quiet = FALSE,
                     dependencies = NA, build_vignettes = FALSE,
@@ -64,7 +63,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   install_deps(pkg, dependencies = dependencies, threads = threads)
 
   # Build the package. Only build locally if it doesn't have vignettes
-  has_vignettes <- length(pkgVignettes(dir = pkg$path)$doc > 0)
+  has_vignettes <- length(tools::pkgVignettes(dir = pkg$path)$doc > 0)
   if (local && !(has_vignettes && build_vignettes)) {
     built_path <- pkg$path
   } else {
@@ -114,7 +113,7 @@ install_deps <- function(pkg = ".", dependencies = NA,
 
   message("Installing dependencies for ", pkg$package, ":\n",
     paste(deps, collapse = ", "))
-  install.packages(deps, dependencies = NA, Ncpus = threads)
+  utils::install.packages(deps, dependencies = NA, Ncpus = threads)
   invisible(deps)
 }
 
