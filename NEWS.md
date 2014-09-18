@@ -1,4 +1,4 @@
-# devtools 1.5.0.9xxx
+# devtools 1.6
 
 ## Tool templates and `create()`
 
