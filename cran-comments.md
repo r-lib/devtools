@@ -1,5 +1,7 @@
 The following notes were generated across my local OS X install, ubuntu running on travis-ci and win builder. Response to NOTEs across three platforms below.
 
+* I'm changing my maintainer email address to hadley@rstudio.com
+
 * checking dependencies in R code ... NOTE
   Namespace in Imports field not imported from: ‘memoise’
   All declared Imports should be used.
