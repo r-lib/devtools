@@ -106,6 +106,9 @@
 * `check_devtools()` also checks for dependencies on development versions
   of packages (#534).
 
+* `load_all()` no longer fails on partial loading of a package containing
+  S4 or RC classes (#577).
+
 * On windows, `find_rtools()` is now run on package load, not package
   attach.
 
