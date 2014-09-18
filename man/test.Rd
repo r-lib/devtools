@@ -9,10 +9,9 @@ test(pkg = ".", filter = NULL)
 \item{pkg}{package description, can be path or package name. See
 \code{\link{as.package}} for more information}
 
-\item{filter}{If not \code{NULL}, only tests with file
-  names matching this regular expression will be executed.
-  Matching will take on the file name after it has been
-  stripped of \code{"test-"} and \code{".r"}.}
+\item{filter}{If not \code{NULL}, only tests with file names matching this
+regular expression will be executed.  Matching will take on the file
+name after it has been stripped of \code{"test-"} and \code{".r"}.}
 }
 \description{
 Tests are assumed to be located in either the \code{inst/tests/} or
