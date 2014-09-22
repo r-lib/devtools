@@ -35,10 +35,12 @@ test <- function(pkg = ".", filter = NULL) {
   }
 
   message("Testing ", pkg$package)
+  # Need to attach testthat so that (e.g.) context() is available
+  library(testthat, quietly = TRUE)
 
   # Run tests in a child of the namespace environment, like
   # testthat::test_package
-  ns_env <- load_all(pkg)$env
+  ns_env <- load_all(pkg, quiet = TRUE)$env
   env <- new.env(parent = ns_env)
   with_envvar(r_env_vars(), test_dir(test_path, filter = filter, env = env))
 }
