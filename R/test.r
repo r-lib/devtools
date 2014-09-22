@@ -42,7 +42,7 @@ test <- function(pkg = ".", filter = NULL) {
   # testthat::test_package
   ns_env <- load_all(pkg, quiet = TRUE)$env
   env <- new.env(parent = ns_env)
-  with_envvar(r_env_vars(), test_dir(test_path, filter = filter, env = env))
+  with_envvar(r_env_vars(), testthat::test_dir(test_path, filter = filter, env = env))
 }
 
 find_test_dir <- function(path) {
