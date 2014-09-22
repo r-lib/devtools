@@ -21,6 +21,10 @@ test_script:
 on_failure:
   - travis-tool.sh dump_logs
 
+environment:
+  WARNINGS_ARE_ERRORS: 1
+  _R_CHECK_FORCE_SUGGESTS_: 0
+
 artifacts:
   - path: '*.Rcheck\**\*.log'
     name: Logs
