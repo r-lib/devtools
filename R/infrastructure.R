@@ -128,7 +128,7 @@ use_travis <- function(pkg = ".") {
   message("Adding .travis.yml to ", pkg$package, ". Next: \n",
     " * Turn on travis for this repo at https://travis-ci.org/profile\n",
     " * Add a travis shield to your README.md:\n",
-    "[![Build Status]",
+    "[![Travis-CI Build Status]",
        "(https://travis-ci.org/", gh$username, "/", gh$repo, ".png?branch=master)]",
        "(https://travis-ci.org/", gh$username, "/", gh$repo, ")"
   )
@@ -160,7 +160,10 @@ use_appveyor <- function(pkg = ".") {
   gh <- github_info(pkg)
   message("Adding appveyor.yml to ", pkg$package, ". Next: \n",
           " * Turn on AppVeyor for this repo at https://ci.appveyor.com/projects\n",
-          " * Add an AppVeyor shield to your README.md."
+          " * Add an AppVeyor shield to your README.md:\n",
+          "[![AppVeyor Build Status]",
+          "(https://ci.appveyor.com/api/projects/status/github/", gh$username, "/", gh$repo, "?branch=master)]",
+          "(https://ci.appveyor.com/project/", gh$username, "/", gh$repo, ")"
   )
 
   template_path <- system.file("templates/appveyor.yml", package = "devtools")
