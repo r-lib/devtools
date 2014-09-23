@@ -1,4 +1,4 @@
-^.*\.Rproj$
+^devtools\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^NEWS.md$
