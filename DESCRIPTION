@@ -1,6 +1,6 @@
 Package: devtools
 Title: Tools to make developing R code easier
-Version: 1.6
+Version: 1.6.0.9000
 Authors@R: as.person(c(
     "Hadley Wickham <hadley@rstudio.com> [aut, cre]",
     "Winston Chang [aut]",
