@@ -5,6 +5,9 @@
 * The file `template.Rproj` is now correctly installed and the function
   `use_rstudio` works as it should. (#595, @hmalmedal)
 
+* The function `use_rcpp` will now create the file `src/.gitignore` with the
+  correct wildcards. (@hmalmedal)
+
 # devtools 1.6
 
 ## Tool templates and `create()`
