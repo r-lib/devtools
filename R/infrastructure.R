@@ -101,7 +101,8 @@ use_rcpp <- function(pkg = ".") {
 
   message("Creating src/ and src/.gitignore")
   dir.create(file.path(pkg$path, "src"), showWarnings = FALSE)
-  union_write(file.path(pkg$path, "src", ".gitignore"), c(".o", ".so", ".dll"))
+  union_write(file.path(pkg$path, "src", ".gitignore"),
+              c("*.o", "*.so", "*.dll"))
 
   message(
     "Next, include the following roxygen tags somewhere in your package:\n",
