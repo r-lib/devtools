@@ -1,6 +1,4 @@
-# devtools 1.X
-
-## Bug fixes
+# devtools 1.6.1
 
 * The file `template.Rproj` is now correctly installed and the function
   `use_rstudio` works as it should. (#595, @hmalmedal)
