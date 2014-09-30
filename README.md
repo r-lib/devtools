@@ -127,5 +127,5 @@ This will set up R to:
 There are also a number of options you might want to set (in `.Rprofile`) to customise the default behaviour when creating packages and drafting emails:
 
 * `devtools.name`: your name, used to sign emails
-* `devtools.desc.author`: your R author string, in the form of `"Hadley Wickham <h.wickham@@gmail.com> [aut, cre]"`. Used when creating default `DESCRIPTION` files.
+* `devtools.desc.author`: your R author string, in the form of `"Hadley Wickham <h.wickham@gmail.com> [aut, cre]"`. Used when creating default `DESCRIPTION` files.
 * `devtools.desc.license`: a default license used when creating new packages
