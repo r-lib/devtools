@@ -13,11 +13,10 @@ release(pkg = ".", check = TRUE, args = NULL, build_args = NULL)
 is useful if you've just checked your package and you're ready to
 release it.}
 
-\item{args}{An optional character vector of additional command
-line arguments to be passed to \code{R CMD check}/\code{R CMD build}.}
+\item{args}{Passed to \link{\code{check}}.}
 
-\item{build_args}{An optional character vector of additional command
-line arguments to be passed to \code{R CMD check}/\code{R CMD build}.}
+\item{build_args}{Passed to \link{\code{check}}, and to \link{\code{build}}
+  as \code{args}.}
 }
 \description{
 Run automated and manual tests, then ftp to CRAN.

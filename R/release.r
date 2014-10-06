@@ -37,7 +37,9 @@
 #' @param check if \code{TRUE}, run checking, otherwise omit it.  This
 #'   is useful if you've just checked your package and you're ready to
 #'   release it.
-#' @inheritParams check
+#' @param args Passed to \link{\code{check}}.
+#' @param build_args Passed to \link{\code{check}}, and to \link{\code{build}}
+#'   as \code{args}.
 #'
 #' @export
 release <- function(pkg = ".", check = TRUE, args = NULL, build_args = NULL) {
@@ -243,7 +245,7 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @inheritParams build
+#' @param args Passed to \link{\code{build}}.
 #'
 #' @export
 #' @keywords internal

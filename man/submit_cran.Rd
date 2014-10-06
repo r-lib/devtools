@@ -9,9 +9,7 @@ submit_cran(pkg = ".", args = NULL)
 \item{pkg}{package description, can be path or package name.  See
 \code{\link{as.package}} for more information}
 
-\item{args}{An optional character vector of additional command
-line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},
-or \code{R CMD install} if \code{binary = TRUE}.}
+\item{args}{Passed to \link{\code{build}}.}
 }
 \description{
 This uses the new CRAN web-form submission process. After submission, you
