@@ -49,7 +49,12 @@ with_debug <- function(code, PKG_CFLAGS = NULL, PKG_CXXFLAGS = NULL,
 #' compiler_flags()
 #' compiler_flags(TRUE)
 compiler_flags <- function(debug = FALSE) {
-  if (debug) {
+  if (Sys.info()[["sysname"]] == "SunOS") {
+    c(
+      PKG_CFLAGS   = "-g",
+      PKG_CXXFLAGS = "-g"
+    )
+  } else if (debug) {
     c(
       PKG_CFLAGS   = "-UNDEBUG -Wall -pedantic -g -O0",
       PKG_CXXFLAGS = "-UNDEBUG -Wall -pedantic -g -O0",

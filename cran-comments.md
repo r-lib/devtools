@@ -1,3 +1,9 @@
+This is a resubmission of devtools 1.6.1, previous notes below. New changes:
+
+* devtools avoids non-portable compiler flags on Solaris.
+
+--------------------------------------------------------------------------------
+
 This is a minor patch release to fix two problems encountered with interactive usage of devtools.
 
 The following notes were generated across my local OS X install, ubuntu running on travis-ci and win builder. Response to NOTEs across three platforms below.

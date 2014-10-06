@@ -1,5 +1,7 @@
 # devtools 1.6.1
 
+* Don't set non-portable compiler flags on Solaris.
+
 * The file `template.Rproj` is now correctly installed and the function
   `use_rstudio` works as it should. (#595, @hmalmedal)
 
