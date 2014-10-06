@@ -37,8 +37,8 @@
 #' @param check if \code{TRUE}, run checking, otherwise omit it.  This
 #'   is useful if you've just checked your package and you're ready to
 #'   release it.
-#' @param args Passed to \link{\code{check}}.
-#' @param build_args Passed to \link{\code{check}}, and to \link{\code{build}}
+#' @param args Passed to \code{\link{check}}.
+#' @param build_args Passed to \code{\link{check}}, and to \code{\link{build}}
 #'   as \code{args}.
 #'
 #' @export
@@ -245,7 +245,7 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @param args Passed to \link{\code{build}}.
+#' @param args Passed to \code{\link{build}}.
 #'
 #' @export
 #' @keywords internal

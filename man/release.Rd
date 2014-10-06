@@ -13,9 +13,9 @@ release(pkg = ".", check = TRUE, args = NULL, build_args = NULL)
 is useful if you've just checked your package and you're ready to
 release it.}
 
-\item{args}{Passed to \link{\code{check}}.}
+\item{args}{Passed to \code{\link{check}}.}
 
-\item{build_args}{Passed to \link{\code{check}}, and to \link{\code{build}}
+\item{build_args}{Passed to \code{\link{check}}, and to \code{\link{build}}
   as \code{args}.}
 }
 \description{

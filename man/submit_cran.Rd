@@ -9,7 +9,7 @@ submit_cran(pkg = ".", args = NULL)
 \item{pkg}{package description, can be path or package name.  See
 \code{\link{as.package}} for more information}
 
-\item{args}{Passed to \link{\code{build}}.}
+\item{args}{Passed to \code{\link{build}}.}
 }
 \description{
 This uses the new CRAN web-form submission process. After submission, you
