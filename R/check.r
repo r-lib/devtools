@@ -52,7 +52,7 @@
 #'   setting the \code{_R_CHECK_FORCE_SUGGESTS_} environment variable to
 #'   \code{FALSE}.
 #' @param args,build_args An optional character vector of additional command
-#    line arguments to be passed to \code{R CMD check}/\code{R CMD build}.
+#'   line arguments to be passed to \code{R CMD check}/\code{R CMD build}/\code{R CMD INSTALL}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @param check_dir the directory in which the package is checked
 #' @seealso \code{\link{release}} if you want to send the checked package to

@@ -31,7 +31,8 @@ than the current version on CRAN, by setting the
 setting the \code{_R_CHECK_FORCE_SUGGESTS_} environment variable to
 \code{FALSE}.}
 
-\item{args,build_args}{An optional character vector of additional command}
+\item{args,build_args}{An optional character vector of additional command
+line arguments to be passed to \code{R CMD check}/\code{R CMD build}/\code{R CMD INSTALL}.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
