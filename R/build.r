@@ -42,7 +42,9 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
       paste0(args, collapse = " "))
     ext <- if (.Platform$OS.type == "windows") "zip" else "tgz"
   } else {
-    args <- c(args, "--no-manual", "--no-resave-data")
+    if (!("--manual" %in% args))
+      args <- c(args, "--no-manual")
+    args <- c(args, "--no-resave-data")
 
     if (!vignettes) {
       args <- c(args, "--no-build-vignettes")
