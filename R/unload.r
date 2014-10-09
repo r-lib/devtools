@@ -28,6 +28,7 @@
 #' }
 #' @export
 unload <- function(pkg = ".") {
+  if (is.in_package(pkg)) pkg <- package_root(pkg)
   pkg <- as.package(pkg)
 
   # This is a hack to work around unloading devtools itself. The unloading

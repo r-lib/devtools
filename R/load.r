@@ -86,8 +86,12 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   export_all = TRUE, quiet = FALSE) {
 
   if (!is.package(pkg)) {
-    create_description(pkg)
-    pkg <- as.package(pkg)
+    if (is.in_package(pkg)) {
+      pkg <- as.package(package_root(pkg))
+    } else {
+      create_description(pkg)
+      pkg <- as.package(pkg)
+    }
   }
 
   if (!quiet) message("Loading ", pkg$package)

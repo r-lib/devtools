@@ -73,6 +73,23 @@ download <- function(path, url, ...) {
 
 last <- function(x) x[length(x)]
 
+is.in_package <- function(pkg) {
+  !is.na(package_root(pkg))
+}
+
+package_root <- memoise::memoise(function(path) {
+  if (is.package(path)) return(path$path)
+  else if (!is.character(path)) return(NA_character_)
+  else if (.Platform$OS.type == 'windows')
+    return(NA_character_) # TODO: (RK) Support this, what is dirname(top_level) in Windows?
+
+  has_description <- function(path) file.exists(file.path(path, 'DESCRIPTION'))
+  path <- suppressWarnings(normalizePath(path))
+  while (!has_description(path) && path != '/' && path != '.') path <- dirname(path)
+  if (path == '/') NA_character_
+  else path
+})
+
 # Modified version of utils::file_ext. Instead of always returning the text
 # after the last '.', as in "foo.tar.gz" => ".gz", if the text that directly
 # precedes the last '.' is ".tar", it will include also, so
