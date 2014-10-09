@@ -24,7 +24,7 @@
 #'   \item \code{devtools.desc.suggests}: a character vector listing packages to
 #'     to add to suggests by defaults for new packages.
 #
-#'   \item \code{devtools.desc}: a named character vector listing any other
+#'   \item \code{devtools.desc}: a named list listing any other
 #'     extra options to add to \file{DESCRIPTION}
 #'
 #' }
