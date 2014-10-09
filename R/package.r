@@ -23,6 +23,7 @@ check_dir <- function(x) {
 
   # Normalise path and strip trailing slashes
   x <- normalise_path(x)
+  x <- package_root(x) %||% x
 
   if (!file.exists(x)) {
     stop("Can't find directory ", x, call. = FALSE)
@@ -32,6 +33,19 @@ check_dir <- function(x) {
   }
 
   x
+}
+
+package_root <- function(path) {
+  if (is.package(path)) return(path$path)
+  else if (!is.character(path)) return(NULL)
+  else if (.Platform$OS.type == 'windows')
+    return(NULL) # TODO: (robertzk) Support this, what is dirname(top_level) in Windows?
+
+  has_description <- function(path) file.exists(file.path(path, 'DESCRIPTION'))
+  path <- suppressWarnings(normalizePath(path))
+  while (!has_description(path) && path != '/' && path != '.') path <- dirname(path)
+  if (path == '/' || path == '.') NULL
+  else path
 }
 
 normalise_path <- function(x) {
