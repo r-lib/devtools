@@ -10,6 +10,10 @@
 * The function `use_rcpp` will now create the file `src/.gitignore` with the
   correct wildcards. (@hmalmedal)
 
+* The functions `test`, `document`, `load_all`, `build`, `check` and any
+  function that applies to some package directory will work from subdirectories
+  of a package (like the "R" or "inst/tests" directories). (#616, @robertzk)
+
 # devtools 1.6
 
 ## Tool templates and `create()`
