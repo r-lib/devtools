@@ -38,7 +38,6 @@
 #'   is useful if you've just checked your package and you're ready to
 #'   release it.
 #' @export
-#' @importFrom RCurl ftpUpload
 release <- function(pkg = ".", check = TRUE) {
   pkg <- as.package(pkg)
 

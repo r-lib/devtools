@@ -79,6 +79,7 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
   )
 }
 
+#' @export
 remote_download.github_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
     message("Downloading github repo ", x$username, "/", x$repo, "@", x$ref)
@@ -101,6 +102,7 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
   download(dest, src, auth)
 }
 
+#' @export
 remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
   # Determine sha as efficiently as possible
   if (!is.null(x$sha)) {
@@ -148,16 +150,19 @@ github_release <- function() structure(NA_integer_, class = "github_release")
 
 github_resolve_ref <- function(x, params) UseMethod("github_resolve_ref")
 
+#' @export
 github_resolve_ref.default <- function(x, params) {
   params$ref <- x
   params
 }
 
+#' @export
 github_resolve_ref.NULL <- function(x, params) {
   params$ref <- "master"
   params
 }
 
+#' @export
 github_resolve_ref.github_pull <- function(x, params) {
   # GET /repos/:user/:repo/pulls/:number
   path <- file.path("repos", params$username, params$repo, "pulls", x)
@@ -169,6 +174,7 @@ github_resolve_ref.github_pull <- function(x, params) {
 }
 
 # Retrieve the ref for the latest release
+#' @export
 github_resolve_ref.github_release <- function(x, params) {
   # GET /repos/:user/:repo/releases
   path <- paste("repos", params$username, params$repo, "releases", sep = "/")

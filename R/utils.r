@@ -15,7 +15,8 @@ compact <- function(x) {
   get(f, envir = asNamespace(p))
 }
 
-rule <- function(title = "") {
+rule <- function(...) {
+  title <- paste0(...)
   width <- getOption("width") - nchar(title) - 1
   message(title, paste(rep("-", width, collapse = "")))
 }
@@ -32,7 +33,7 @@ ends_with_newline <- function(path) {
 render_template <- function(name, data) {
   path <- system.file("templates", name, package = "devtools")
   template <- readLines(path)
-  whisker.render(template, data)
+  whisker::whisker.render(template, data)
 }
 
 is_installed <- function(pkg, version = 0) {
@@ -71,3 +72,12 @@ download <- function(path, url, ...) {
 }
 
 last <- function(x) x[length(x)]
+
+# Modified version of utils::file_ext. Instead of always returning the text
+# after the last '.', as in "foo.tar.gz" => ".gz", if the text that directly
+# precedes the last '.' is ".tar", it will include also, so
+# "foo.tar.gz" => ".tar.gz"
+file_ext <- function (x) {
+    pos <- regexpr("\\.((tar\\.)?[[:alnum:]]+)$", x)
+    ifelse(pos > -1L, substring(x, pos + 1L), "")
+}

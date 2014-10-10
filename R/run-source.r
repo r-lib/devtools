@@ -23,9 +23,6 @@
 #' @param url url
 #' @param ... other options passed to \code{\link{source}}
 #' @param sha1 The (prefix of the) SHA-1 hash of the file at the remote URL.
-#' @importFrom httr GET stop_for_status
-#' @importFrom digest digest
-#' @importFrom tools file_ext
 #' @export
 #' @examples
 #' \dontrun{
@@ -50,11 +47,11 @@ source_url <- function(url, ..., sha1 = NULL) {
   for(i in seq_along(url)) {
     filename <- names(url[i])
     download.target[i] <- normalizePath(sprintf("%s/%s", download.root, filename), mustWork=FALSE)
-    request <- GET(url[i])
-    stop_for_status(request)
-    writeBin(content(request, type = "raw"), download.target[i])
+    request <- httr::GET(url[i])
+    httr::stop_for_status(request)
+    writeBin(httr::content(request, type = "raw"), download.target[i])
   }
-  file_sha1 <- digest(file = download.target[i], algo = "sha1")
+  file_sha1 <- digest::digest(file = download.target[i], algo = "sha1")
 
   if (is.null(sha1)) {
     message("SHA-1 hash of the first file is ", file_sha1)
@@ -134,8 +131,6 @@ source_gist <- function(id, ..., sha1 = NULL, quiet = FALSE) {
   source_url(url, ..., sha1 = sha1)
 }
 
-#' @importFrom jsonlite fromJSON
-#' @importFrom httr GET content stop_for_status add_headers
 find_gist <- function(id) {
   files <- github_GET(sprintf("gists/%s", id))$files
   sapply(files, function(obj) obj$raw_url)

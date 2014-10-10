@@ -65,23 +65,27 @@ add_rstudio_project <- use_rstudio
 
 
 #' @section \code{use_knitr}:
-#' Creates \code{vignettes/} and adds needed packages to \code{DESCRIPTION}.
+#' Adds needed packages to \code{DESCRIPTION}, and creates draft vignette
+#' in \code{vignettes/}. It adds \code{inst/doc} to \code{.gitignore}
+#' so you don't accidentally check in the built vignettes.
+#' @param name File name to use for new vignette. Should consist only of
+#'   numbers, letters, _ and -. I recommend using lower case.
 #' @export
 #' @rdname infrastructure
-use_knitr <- function(pkg = ".") {
+use_vignette <- function(name, pkg = ".") {
   pkg <- as.package(pkg)
 
   add_desc_package(pkg, "Suggests", "knitr")
   add_desc_package(pkg, "VignetteBuilder", "knitr")
   dir.create(file.path(pkg$path, "vignettes"), showWarnings = FALSE)
 
-  message(
-    "Put .Rmd in vignettes/. Each must include:\n",
-    "<!-- \n",
-    "%\\VignetteEngine{knitr::knitr}\n",
-    "%\\VignetteIndexEntry{Vignette title}\n",
-    "-->\n"
-  )
+  add_git_ignore(pkg, "inst/doc")
+
+  path <- file.path(pkg$path, "vignettes", paste0(name, ".Rmd"))
+  rmarkdown::draft(path, "html_vignette", "rmarkdown",
+    create_dir = FALSE, edit = FALSE)
+
+  message("Draft vignette created in ", path)
 }
 
 #' @section \code{use_rcpp}:
@@ -97,7 +101,8 @@ use_rcpp <- function(pkg = ".") {
 
   message("Creating src/ and src/.gitignore")
   dir.create(file.path(pkg$path, "src"), showWarnings = FALSE)
-  union_write(file.path(pkg$path, "src", ".gitignore"), c(".o", ".so", ".dll"))
+  union_write(file.path(pkg$path, "src", ".gitignore"),
+              c("*.o", "*.so", "*.dll"))
 
   message(
     "Next, include the following roxygen tags somewhere in your package:\n",
@@ -144,7 +149,6 @@ add_travis <- use_travis
 #' @section \code{use_package_doc}:
 #' Adds a roxygen template for package documentation
 #' @export
-#' @importFrom whisker whisker.render
 use_package_doc <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
@@ -197,7 +201,7 @@ use_package <- function(package, type = "Imports", pkg = ".") {
     Imports = paste0("Refer to functions with ", package, "::fun()"),
     Depends = paste0("Are you sure you want Depends? Imports is almost always",
       " the better choice."),
-    Suggests = paste0("Use requireNamespace(\"", pkg, "\", quietly = TRUE)",
+    Suggests = paste0("Use requireNamespace(\"", package, "\", quietly = TRUE)",
       " to test if package is installed,\n",
       "then use ", package, "::fun() to refer to functions."),
     Enhances = "",

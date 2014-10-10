@@ -25,7 +25,6 @@ ns_env <- function(pkg = ".") {
 
 
 # Create the namespace environment for a package
-#' @importFrom methods setPackageName
 create_ns_env <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
@@ -34,7 +33,7 @@ create_ns_env <- function(pkg = ".") {
   }
 
   env <- makeNamespace(pkg$package, pkg$version)
-  setPackageName(pkg$package, env)
+  methods::setPackageName(pkg$package, env)
   # Create devtools metadata in namespace
   create_dev_meta(pkg$package)
 

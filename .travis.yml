@@ -9,6 +9,7 @@ before_install:
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
   - ./travis-tool.sh r_binary_install XML Rcpp knitr brew RUnit inline highlight formatR highr markdown rgl
+  - ./travis-tool.sh install_github rstudio/rmarkdown
 install:
   - ./travis-tool.sh install_deps
   # Install testthat after running install_deps, otherwise devtools itself might be installed from CRAN or c2d4u

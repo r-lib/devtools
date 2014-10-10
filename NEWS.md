@@ -1,4 +1,47 @@
-# devtools 1.5.0.99
+# devtools 1.X
+
+# devtools 1.6.1
+
+* Don't set non-portable compiler flags on Solaris.
+
+* The file `template.Rproj` is now correctly installed and the function
+  `use_rstudio` works as it should. (#595, @hmalmedal)
+
+* The function `use_rcpp` will now create the file `src/.gitignore` with the
+  correct wildcards. (@hmalmedal)
+
+# devtools 1.6
+
+## Tool templates and `create()`
+
+* `create()` no longer generates `man/` directory - roxygen2 now does
+  this automatically. It also no longer generates an package-level doc
+  template. If you want this, use `use_package_doc()`. It also makes a dummy 
+  namespace so that you can build & reload without running `document()` first.
+
+* New `use_data()` makes it easy to include data in a package, either 
+  in `data/` (for exported datasets) or in `R/sysdata.rda` (for internal
+  data). (#542)
+  
+* New `use_data_raw()` creates `data-raw/` directory for reproducible
+  generation of `data/` files (#541).
+
+* New `use_package()` allows you to set dependencies (#559). 
+
+* New `use_package_doc()` sets up an Roxygen template for package-level
+  docs.
+
+* New `use_rcpp()` sets up a package to use Rcpp.
+  
+* `use_travis()` now figures out your github username and repo so it can 
+  construct the markdown for the build image. (#546)
+
+* New `use_vignette()` creates a draft vignette using Rmarkdown (#572).
+
+* renamed `add_rstudio_project()` to `use_rstudio()`, `add_travis()` to 
+  `use_travis()`, `add_build_ignore()` to `use_build_ignore()`, and 
+  `add_test_infrastructure()` to `use_testthat()` (old functions are 
+  aliased to new)
 
 ## The release process
 
@@ -9,45 +52,6 @@
 * `release()` uses new CRAN submission process, as implemented by 
   `submit_cran()` (#430).
 
-## Tool templates and `create()`
-
-* `create()` no longer generates `man/` directory - roxygen2 now does
-  this automatically. It also no longer generates an package-level doc
-  template, instead call `use_package_doc()`.
-
-* New `use_data()` makes it easy to include data in a package, either 
-  in `data/` (for exported datasets) or in `R/sysdata.rda` (for internal
-  data). (#542)
-  
-* New `use_data_raw()` to create `data-raw/` directory for reproducible
-  generation of `data/` files (#541).
-
-* New `use_rcpp()` sets up a package to use Rcpp.
-
-* New `use_knitr()` sets up a package to use knitr for vignettes.
-
-* New `use_package()` allows you to set dependencies (#559). 
-
-* New `use_package_doc()` sets up an Roxygen template for package-level
-  docs.
-
-* New function `install_svn()` to install an R package from a subversion
-  repository.
-
-* Wrote own version of `write.dcf()` that doesn't butcher whitespace and 
-  fieldnames.
-
-* renamed `add_rstudio_project()` to `use_rstudio()`, `add_travis()` to 
-  `use_travis()`, `add_build_ignore()` to `use_build_ignore()`, and 
-  `add_test_infrastructure()` to `use_testthat()` (old functions are 
-  aliased to new)
-  
-* `use_travis()` now figures out what your github username and repo are so
-  it can construct the markdown build image for you. (#546)
-
-* `create()` now makes a dummy namespace so that you can build & reload
-  without running `document()` first.
-
 ## Package installation
 
 * All `install_*` now use the same code and store much useful metadata.
@@ -55,89 +59,108 @@
   but it will allow the development of future tools like generic update
   functions.
   
+* Vignettes are no longer installed by default because they potentally require 
+  all suggested packages to also be installed. Use `build_vignettes = TRUE` to 
+  force building and to install all suggested packages (#573).
+  
 * `install_bitbucket()` has been bought into alignment with `install_github()`:
   this means you can now specify repos with the compact `username/repo@ref`
   syntax. The `username` is now deprecated. 
-  
-* `install_github()` gains new `host` argument which allows you to install
-  packages from github enterprise (#410, #506). 
-  
-* `install_github()` uses GitHub API to download archive file (@krlmlr, #466).
-
-* `install_github()` now supports the new syntax `ref = github_pull(...)` to
-  install a specific pull request. The parameter `pull` is now deprecated,
-  neither `pull` nor `branch` are included in the formal parameters
-  (@krlmlr, #509).
-
-* The `username` paramter of `install_github()` is deprecated - please include
-  in the repo name: `rstudio/shiny`, `hadley/devtools` etc. Deprecated 
-  parameters `auth_user`, `branch`, `pull` and `password` have all been 
-  removed.
-  
+    
 * `install_git()` has been simplified and many of the arguments have changed 
   names for consistency with metadata for other package installs.
+
+* `install_github()` has been considerably improved:
+
+    * `username` is deprecated - please include the user in the repo name: 
+      `rstudio/shiny`, `hadley/devtools` etc. 
+      
+    * `dependencies = TRUE` is no longer forced (regression in 1.5) 
+       (@krlmlr, #462).
+      
+    * Deprecated parameters `auth_user`, `branch`, `pull` and `password` have 
+      all been removed.
+  
+    * New `host` argument which allows you to install packages from github 
+      enterprise (#410, #506). 
+    
+    * The GitHub API is used to download archive file (@krlmlr, #466) - this
+      makes it less likely to break in the future.
+  
+    * To download a specified pull request, use `ref = github_pull(...)`
+      (@krlmlr, #509). To install the latest release, use `"user/repo@*release"` 
+      or `ref = github_release()` (@krlmlr, #350).
 
 * `install_gitorious()` has been bought into alignment with `install_github()`:
   this means you can now specify repos with the compact `username/repo@ref`
   syntax. You must now always supply user (project) name and repo.
 
-* `install_svn()` now only downloads the branch that you need, rather than
-  the complete repo.
+* `install_svn()` lets you install an R package from a subversion repository
+  (assuming you have subversion installed).
   
 * `decompress()` and hence `install_url()` now work when the downloaded
   file decompresses without additional top-level directory (#537).
 
 ## Other minor improvements and bug fixes
 
+* If you're using Rstudio, and you you're trying to build a binary package
+  without the necessary build tools, Rstudio will prompt to download and
+  install the right thing. (#488)
+
+* Commands are no longer run with `LC_ALL=C` - this no longer seems 
+  necessary (#507).
+
 * `build(binary = TRUE)` creates an even-more-temporary package library
   avoid conflicts (#557).
 
-* New `session_info()` provides useful information about your R session.
-  It's a little more focussed than `sessionInfo()` and includes where
-  packages where installed from (#526).
-
-* `load_all()` no longer gives an error when objects listed as exports are
-  missing.
-  
 * `check_dir()` no longer fails on UNC paths (#522).
 
 * `check_devtools()` also checks for dependencies on development versions
   of packages (#534).
 
-* If you're using Rstudio, and you you're trying to build a binary package
-  without the necessary build tools, Rstudio will prompt to download and
-  install the right thing. (#488)
+* `load_all()` no longer fails on partial loading of a package containing
+  S4 or RC classes (#577).
 
-* devtools no longer runs commands with `LC_ALL=C` - this no longer seems
-  to be necessary (#507).
+* On windows, `find_rtools()` is now run on package load, not package
+  attach.
 
 * `help()`, `?`, and `system.file()` are now made available when a package is
   loaded with `load_all()`, even if the devtools package isn't attached.
 
-* `dependencies = TRUE` is not forced anymore in `install_github()` (regression
-  in 1.5) (@krlmlr, #462).
+* `httr` 0.3 required (@krlmlr, #466).
+
+* `load_all()` no longer gives an error when objects listed as exports are
+  missing.
+  
+* Shim added for `library.dynam.unload()`.
 
 * `loaded_packages()` now returns package name and path it was loaded from. 
   (#486)
 
+* The `parenvs()` function has been removed from devtools, because is now in the
+  pryr package.
+
+* `missing_s3()` uses a better heuristic for determining if a function
+  is a S3 method (#393).
+
+* New `session_info()` provides useful information about your R session.
+  It's a little more focussed than `sessionInfo()` and includes where
+  packages where installed from (#526).
+
 * `rstudioapi` package moved from suggests to imports, since it's always 
   needed (it's job is to figure out if rstudio is available, #458)
-
-* `httr` 0.3 required (@krlmlr, #466).
 
 * Implemented own version `utils::unzip()` that throws error if command
   fails and doesn't print unneeded messages on non-Windows platforms (#540).
 
-* The `parenvs()` function has been removed from devtools, because is now in the
-  pryr package.
+* Wrote own version of `write.dcf()` that doesn't butcher whitespace and 
+  fieldnames.
 
-* Shim added for `library.dynam.unload()`.
+## Removed functionality
 
-* `install_github()` allows installing the latest GitHub release by
-  using the syntax `"user/repo@*release"` (@krlmlr, #350).
-
-* On windows, `find_rtools()` is now run on package load, not package
-  attach.
+* The `fresh` argument to `test()` has been removed - this is best done by 
+  the editor since it can run the tests in a completely clean environment
+  by starting a new R session.
 
 # devtools 1.5
 

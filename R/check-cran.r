@@ -24,8 +24,6 @@
 #'   checking the reverse dependencies of. This is normally passed in from
 #'   \code{\link{revdep_check}}, and is used only for logging.
 #' @return invisible \code{TRUE} if successful and no ERRORs or WARNINGS,
-#' @importFrom tools package_dependencies
-#' @importFrom parallel mclapply
 #' @export
 #' @examples
 #' \dontrun{
@@ -76,7 +74,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   }
 
   # Install missing dependencies
-  deps <- unique(unlist(package_dependencies(pkgs, packages(),
+  deps <- unique(unlist(tools::package_dependencies(pkgs, packages(),
     which = "all")))
   to_install <- setdiff(deps, installed.packages()[, 1])
   known <- intersect(to_install, rownames(available_bin))
@@ -132,8 +130,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     results
   }
 
-  results <- mclapply(seq_along(pkgs), check_pkg, mc.preschedule = FALSE,
-    mc.cores = threads)
+  results <- parallel::mclapply(seq_along(pkgs), check_pkg,
+    mc.preschedule = FALSE, mc.cores = threads)
 
   names(results) <- pkgs
 
@@ -145,7 +143,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   # Collect the output
   collect_check_results(check_dir, revdep_pkg)
 
-  invisible(results)
+  invisible(list(path = check_dir, results = results))
 }
 
 parse_check_results <- function(path) {

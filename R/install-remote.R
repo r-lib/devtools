@@ -19,6 +19,9 @@ install_remote <- function(remote, ..., quiet = FALSE) {
 
   add_metadata(source, remote_metadata(remote, bundle, source))
 
+  # Because we've modified DESCRIPTION, its original MD5 value is wrong
+  clear_description_md5(source)
+
   install(source, ..., quiet = quiet)
 }
 
@@ -34,6 +37,18 @@ add_metadata <- function(pkg_path, meta) {
   desc <- modifyList(desc, meta)
 
   write_dcf(path, desc)
+}
+
+# Modify the MD5 file - remove the line for DESCRIPTION
+clear_description_md5 <- function(pkg_path) {
+  path <- file.path(pkg_path, "MD5")
+
+  if (file.exists(path)) {
+    text <- readLines(path)
+    text <- text[!grepl(".*\\*DESCRIPTION$", text)]
+
+    writeLines(text, path)
+  }
 }
 
 remote <- function(type, ...) {

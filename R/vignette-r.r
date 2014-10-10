@@ -16,7 +16,6 @@
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
 
-#' @importFrom tools pkgVignettes
 copy_vignettes <- function(pkg) {
   pkg <- as.package(pkg)
 
@@ -25,7 +24,7 @@ copy_vignettes <- function(pkg) {
     dir.create(doc_dir, recursive = TRUE, showWarnings = FALSE)
   }
 
-  vigns <- pkgVignettes(dir = pkg$path, output = TRUE, source = TRUE)
+  vigns <- tools::pkgVignettes(dir = pkg$path, output = TRUE, source = TRUE)
   if (length(vigns$docs) == 0) return(invisible())
 
   out_mv <- c(vigns$outputs, unlist(vigns$sources, use.names = FALSE))

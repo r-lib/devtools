@@ -20,7 +20,17 @@ find_pkg_topic <- function(pkg = ".", topic) {
   NULL
 }
 
-# @return complete path to man file, with name giving path to package.
+#' Find the rd file that documents a topic.
+#'
+#' Only packages loaded by devtools are searched.
+#'
+#' @param topic The topic, a string.
+#' @return A named string. The values gives the path to file; the name gives
+#'   the path to package.
+#' @export
+#' @keywords internal
+#' @examples
+#' find_topic("help")
 find_topic <- function(topic) {
   if (is.null(topic) || topic == "") return(NULL)
 
@@ -60,13 +70,12 @@ clear_topic_index <- function(pkg = ".") {
   invisible(TRUE)
 }
 
-#' @importFrom tools parse_Rd
 build_topic_index <- function(pkg = ".") {
   pkg <- as.package(pkg)
   rds <- rd_files(pkg)
 
   aliases <- function(path) {
-    parsed <- parse_Rd(path)
+    parsed <- tools::parse_Rd(path)
     tags <- vapply(parsed, function(x) attr(x, "Rd_tag")[[1]], character(1))
     unlist(parsed[tags == "\\alias"])
   }
