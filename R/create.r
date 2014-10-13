@@ -1,7 +1,7 @@
 #' Creates a new package, following all devtools package conventions.
 #'
 #' Similar to \code{\link{package.skeleton}}, except that it only creates
-#' the standard devtools directory structures, it doesn't try and create
+#' the standard devtools directory structures; it doesn't try and create
 #' source code and data files by inspecting the global environment.
 #'
 #' @param path location to create new package.  The last component of the path
