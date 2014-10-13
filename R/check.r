@@ -28,7 +28,7 @@
 #'    \code{\link{compiler_flags}(FALSE)}.
 #'
 #'  \item Special environment variables set to the same values that
-#'    CRAN uses when testing packages: \code{cran_env_vars}. Unforutnately
+#'    CRAN uses when testing packages: \code{cran_env_vars}. Unfortunately
 #'    exactly what CRAN does when checking a package is not publicly documented,
 #'    but we do our best to simulate as accurately as possible given what we
 #'    know.
