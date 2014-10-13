@@ -1,6 +1,6 @@
 #' Compile a .dll/.so from source.
 #'
-#' \code{compile_dll} performs a fake R CMD install so should code that
+#' \code{compile_dll} performs a fake R CMD install so code that
 #' works here should work with a regular install (and vice versa).
 #'
 #' During compilation, debug flags are set with
