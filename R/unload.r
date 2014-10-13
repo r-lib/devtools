@@ -1,7 +1,7 @@
 #' Unload a package
 #'
 #' This function attempts to cleanly unload a package, including unloading
-#' it's namespace, deleting S4 class definitions and unloading any loaded
+#' its namespace, deleting S4 class definitions and unloading any loaded
 #' DLLs. Unfortunately S4 classes are not really designed to be cleanly
 #' unloaded, and so we have to manually modify the class dependency graph in
 #' order for it to work - this works on the cases for which we have tested
