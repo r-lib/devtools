@@ -3,11 +3,13 @@
 \alias{submit_cran}
 \title{Submit a package to CRAN.}
 \usage{
-submit_cran(pkg = ".")
+submit_cran(pkg = ".", args = NULL)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
 \code{\link{as.package}} for more information}
+
+\item{args}{Passed to \code{\link{build}}.}
 }
 \description{
 This uses the new CRAN web-form submission process. After submission, you

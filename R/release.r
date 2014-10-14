@@ -37,8 +37,12 @@
 #' @param check if \code{TRUE}, run checking, otherwise omit it.  This
 #'   is useful if you've just checked your package and you're ready to
 #'   release it.
+#' @param args Passed to \code{\link{check}}.
+#' @param build_args Passed to \code{\link{check}}, and to \code{\link{build}}
+#'   as \code{args}.
+#'
 #' @export
-release <- function(pkg = ".", check = TRUE) {
+release <- function(pkg = ".", check = TRUE, args = NULL, build_args = NULL) {
   pkg <- as.package(pkg)
 
   # Figure out if this is a new package
@@ -46,7 +50,7 @@ release <- function(pkg = ".", check = TRUE) {
   new_pkg <- is.null(cran_version)
 
   if (check) {
-    check(pkg, cran = TRUE, check_version = TRUE)
+    check(pkg, cran = TRUE, check_version = TRUE, args = args, build_args = build_args)
     if (yesno("Was package check successful?"))
       return(invisible())
 
@@ -115,7 +119,7 @@ release <- function(pkg = ".", check = TRUE) {
   if (yesno("Ready to submit?"))
     return(invisible())
 
-  submit_cran(pkg)
+  submit_cran(pkg, args = build_args)
 
   if (file.exists(file.path(pkg$path, ".git"))) {
     message("Don't forget to tag the release when the package is accepted!")
@@ -241,15 +245,17 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @param args Passed to \code{\link{build}}.
+#'
 #' @export
 #' @keywords internal
-submit_cran <- function(pkg = ".") {
+submit_cran <- function(pkg = ".", args = NULL) {
   pkg <- as.package(pkg)
   maint <- maintainer(pkg)
   comments <- cran_comments(pkg)
 
   message("Building")
-  built_path <- build(pkg, tempdir())
+  built_path <- build(pkg, tempdir(), args = args)
   message("File size: ", file.info(built_path)$size, " bytes")
 
   # Initial upload ---------
