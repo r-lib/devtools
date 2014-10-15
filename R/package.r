@@ -41,7 +41,7 @@ package_root <- function(path) {
 
   has_description <- function(path) file.exists(file.path(path, 'DESCRIPTION'))
   path <- suppressWarnings(normalizePath(path))
-  while (!has_description(path) && path != '/' && path != '.') path <- dirname(path)
+  while (!has_description(path) && !is_root(path)) path <- dirname(path)
 
   if (is_root(path)) NULL
   else path
