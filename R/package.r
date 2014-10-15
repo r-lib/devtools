@@ -37,9 +37,7 @@ check_dir <- function(x) {
 
 package_root <- function(path) {
   if (is.package(path)) return(path$path)
-  else if (!is.character(path)) return(NULL)
-  else if (.Platform$OS.type == 'windows')
-    return(NULL) # TODO: (robertzk) Support this, what is dirname(top_level) in Windows?
+  stopifnot(is.character(path))
 
   has_description <- function(path) file.exists(file.path(path, 'DESCRIPTION'))
   path <- suppressWarnings(normalizePath(path))
