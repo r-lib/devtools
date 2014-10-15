@@ -29,6 +29,5 @@ Suggests:
     Rcpp (>= 0.10.0),
     MASS,
     rmarkdown,
-    knitr,
-    testthatsomemore
+    knitr
 License: GPL (>= 2)
