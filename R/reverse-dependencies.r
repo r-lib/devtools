@@ -35,7 +35,7 @@ revdep_check <- function(pkg = NULL, recursive = FALSE, ignore = NULL, ...) {
   res <- check_cran(pkgs, revdep_pkg = pkg, ...)
 
   res$revdep_package <- pkg
-  res
+  invisible(res)
 }
 
 
