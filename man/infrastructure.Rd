@@ -74,6 +74,7 @@ Adds a roxygen template for package documentation
 Other infrastructure: \code{\link{add_build_ignore}},
   \code{\link{use_build_ignore}};
   \code{\link{use_data_raw}}; \code{\link{use_data}};
-  \code{\link{use_package}}
+  \code{\link{use_git_hook}}; \code{\link{use_package}};
+  \code{\link{use_readme_rmd}}
 }
 

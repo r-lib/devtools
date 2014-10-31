@@ -1,5 +1,10 @@
 # devtools 1.X
 
+* `use_git_hook()` allows you to easily add a git hook to a package.
+
+* `use_readme_rmd()` makes it easier to generate a `README.md` from 
+  `README.Rmd`.
+
 # devtools 1.6.1
 
 * Don't set non-portable compiler flags on Solaris.

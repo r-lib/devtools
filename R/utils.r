@@ -16,7 +16,11 @@ compact <- function(x) {
 }
 
 rule <- function(...) {
-  title <- paste0(...)
+  if (nargs() == 0) {
+    title <- ""
+  } else {
+    title <- paste0(...)
+  }
   width <- getOption("width") - nchar(title) - 1
   message(title, paste(rep("-", width, collapse = "")))
 }
@@ -30,7 +34,7 @@ ends_with_newline <- function(path) {
   lastByte == 0x0a
 }
 
-render_template <- function(name, data) {
+render_template <- function(name, data = list()) {
   path <- system.file("templates", name, package = "devtools")
   template <- readLines(path)
   whisker::whisker.render(template, data)

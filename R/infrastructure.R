@@ -363,6 +363,70 @@ use_build_ignore <- function(files, escape = TRUE, pkg = ".") {
   invisible(TRUE)
 }
 
+#' Add a git hook.
+#'
+#' @param hook Hook name. One of "pre-commit", "prepare-commit-msg",
+#'   "commit-msg", "post-commit", "applypatch-msg", "pre-applypatch",
+#'   "post-applypatch", "pre-rebase", "post-rewrite", "post-checkout",
+#'   "post-merge", "pre-push", "pre-auto-gc".
+#' @param script Text of script to run
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @export
+#' @family infrastructure
+#' @keywords internal
+use_git_hook <- function(hook, script, pkg = ".") {
+  pkg <- as.package(pkg)
+
+  hook_dir <- file.path(pkg$path, ".git", "hooks")
+  if (!file.exists(hook_dir)) {
+    stop("This project doesn't use git", call. = FALSE)
+  }
+
+  hook_path <- file.path(hook_dir, hook)
+  writeLines(script, hook_path)
+  Sys.chmod(hook_path, "0744")
+}
+
+#' Use README.Rmd
+#'
+#' This creates `README.Rmd` from template and adds to \code{.Rbuildignore}.
+#'
+#' @param hook Hook name. One of "pre-commit", "prepare-commit-msg",
+#'   "commit-msg", "post-commit", "applypatch-msg", "pre-applypatch",
+#'   "post-applypatch", "pre-rebase", "post-rewrite", "post-checkout",
+#'   "post-merge", "pre-push", "pre-auto-gc".
+#' @param script Text of script to run
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @export
+#' @family infrastructure
+#' @keywords internal
+use_readme_rmd <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  readme_path <- file.path(pkg$path, "README.Rmd")
+  template <- render_template("README.Rmd")
+
+  if (!file.exists(readme_path)) {
+    message("Creating README.Rmd")
+    writeLines(template, readme_path)
+  } else {
+    rule("README.Rmd exists. Please check that it starts with:")
+    message(template)
+    rule()
+  }
+  use_build_ignore("README.Rmd", pkg = pkg)
+
+  if (uses_git(pkg) && file.exists(pkg$path, ".git", "hooks", "pre-commit")) {
+    message("Adding pre-commit hook")
+    use_git_hook("pre-commit", render_template("readme-rmd-pre-commit.sh"),
+      pkg = pkg)
+  }
+
+  invisible(TRUE)
+}
+
 add_build_ignore <- function(pkg = ".", files, escape = TRUE) {
   use_build_ignore(files, escape = escape, pkg = pkg)
 }
@@ -386,3 +450,4 @@ union_write <- function(path, new_lines) {
   all <- union(lines, new_lines)
   writeLines(all, path)
 }
+
