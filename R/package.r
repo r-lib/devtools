@@ -43,16 +43,15 @@ package_root <- function(path) {
 
   has_description <- function(path) {
     file.exists(file.path(path, 'DESCRIPTION'))
-  } 
+  }
   path <- normalizePath(path, mustWork = FALSE)
   while (!has_description(path) && !is_root(path)) {
-    path <- dirname(path) 
+    path <- dirname(path)
   }
 
   if (is_root(path)) {
     NULL
-  }
-  else {
+  } else {
     path
   }
 }
