@@ -23,6 +23,7 @@ check_dir <- function(x) {
 
   # Normalise path and strip trailing slashes
   x <- normalise_path(x)
+  x <- package_root(x) %||% x
 
   if (!file.exists(x)) {
     stop("Can't find directory ", x, call. = FALSE)
@@ -32,6 +33,32 @@ check_dir <- function(x) {
   }
 
   x
+}
+
+package_root <- function(path) {
+  if (is.package(path)) {
+    return(path$path)
+  }
+  stopifnot(is.character(path))
+
+  has_description <- function(path) {
+    file.exists(file.path(path, 'DESCRIPTION'))
+  } 
+  path <- normalizePath(path, mustWork = FALSE)
+  while (!has_description(path) && !is_root(path)) {
+    path <- dirname(path) 
+  }
+
+  if (is_root(path)) {
+    NULL
+  }
+  else {
+    path
+  }
+}
+
+is_root <- function(path) {
+  identical(path, dirname(path))
 }
 
 normalise_path <- function(x) {
