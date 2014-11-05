@@ -211,6 +211,7 @@ create_description <- function(path, extra = getOption("devtools.desc"),
 }
 
 build_description <- function(name, extra = list()) {
+  check_package_name(name)
 
   defaults <- compact(list(
     Package = name,
