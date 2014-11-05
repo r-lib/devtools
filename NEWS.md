@@ -1,5 +1,8 @@
 # devtools 1.X
 
+* `revdep_maintainers()` returns output in a way that's easier to 
+  copy and paste into an email (#634).
+
 * Improved documentation for `revdep_check()` (#635)
 
 * `use_git_hook()` allows you to easily add a git hook to a package.

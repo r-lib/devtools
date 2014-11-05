@@ -35,7 +35,16 @@ revdep <- function(pkg, dependencies = c("Depends", "Imports",
 #' @export
 revdep_maintainers <- function(pkg) {
   maintainers <- unique(packages()[revdep(pkg), "Maintainer"])
-  as.person(maintainers)
+  class(maintainers) <- "maintainers"
+
+  maintainers
+}
+
+#' @export
+print.maintainers <- function(x, ...) {
+  x <- gsub("\n", " ", x)
+  cat(x, sep = ",\n")
+  cat("\n")
 }
 
 #' Run R CMD check on all downstream dependencies.
