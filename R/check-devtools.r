@@ -12,10 +12,12 @@ release_checks <- function(pkg = ".", built_path = NULL) {
   pkg <- as.package(pkg)
   message("Running additional devtools checks for ", pkg$package)
 
+  check_version(pkg)
   check_dev_versions(pkg)
 }
 
 check_dev_versions <- function(pkg = ".") {
+  pkg <- as.package(pkg)
   message("Checking for dependencies on development versions... ",
     appendLF = FALSE)
 
@@ -32,9 +34,29 @@ check_dev_versions <- function(pkg = ".") {
   }
 
   message(
+    "WARNING",
     "\n  Depends on devel versions of: ",
     "\n    ", paste0(deps$name[is_dev], collapse = ", "),
     "\n  Release these packages to CRAN and bump version number.")
 
   return(invisible(FALSE))
+}
+
+check_version <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+  message("Checking version number... ",
+    appendLF = FALSE)
+
+  ver <- unlist(numeric_version(pkg$version))
+  if (length(ver) == 3) {
+    message("OK")
+    return(invisible(TRUE))
+  }
+  message(
+    "WARNING",
+    "\n  Version number should have exactly three components"
+  )
+
+  return(invisible(FALSE))
+
 }

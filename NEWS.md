@@ -3,6 +3,8 @@
 * `release(check = TRUE)` now runs some additional custom checks. These include:
   
   * Checking that you don't depend on a development version of a package.
+  
+  * Checking that the version number has exactly three components (#633).
 
 * Removed deprecated `doc_clean` argument to `check()`.
 
