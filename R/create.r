@@ -39,14 +39,14 @@ create <- function(path, description = getOption("devtools.desc"),
   }
 
   dir.create(path)
-  on.exit(unlink(path, recursive = TRUE), add = TRUE)
 
-  # Main worker, directory will be deleted upon failure
-  setup(path = path, description = description, rstudio = rstudio,
-                check = check)
-
-  # Don't delete on success
-  on.exit(NULL, add = FALSE)
+  tryCatch({
+    setup(path = path, description = description, rstudio = rstudio,
+          check = check)
+  }, error = function(e) {
+    unlink(path, recursive = TRUE)
+    stop(e)
+  })
 
   invisible(TRUE)
 }
