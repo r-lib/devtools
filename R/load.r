@@ -185,7 +185,7 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 #'   Arguments that take a list
 #' @param quiet if \code{TRUE}, suppresses output from this function.
 #' @export
-create_description <- function(path, extra = getOption("devtools.desc"),
+create_description <- function(path = ".", extra = getOption("devtools.desc"),
                                quiet = FALSE) {
   path <- check_dir(path)
   desc_path <- file.path(path, "DESCRIPTION")
