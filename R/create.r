@@ -31,6 +31,8 @@
 #' }
 create <- function(path, description = getOption("devtools.desc"),
                    check = FALSE, rstudio = TRUE) {
+  check_package_name(path)
+
   if (file.exists(path)) {
     stop("Directory already exists", call. = FALSE)
   }
@@ -39,14 +41,8 @@ create <- function(path, description = getOption("devtools.desc"),
   }
 
   dir.create(path)
-
-  tryCatch({
-    setup(path = path, description = description, rstudio = rstudio,
-          check = check)
-  }, error = function(e) {
-    unlink(path, recursive = TRUE)
-    stop(e)
-  })
+  setup(path = path, description = description, rstudio = rstudio,
+        check = check)
 
   invisible(TRUE)
 }
@@ -55,18 +51,9 @@ create <- function(path, description = getOption("devtools.desc"),
 #' @export
 setup <- function(path = ".", description = getOption("devtools.desc"),
                   check = FALSE, rstudio = TRUE) {
-  path <- normalizePath(path, mustWork = TRUE)
-  name <- basename(path)
-  if (!valid_name(name)) {
-    stop(
-      name, " is not a valid package name: it should contain only\n",
-      "ASCII letters, numbers and dot, have at least two characters\n",
-      "and start with a letter and not end in a dot.",
-      call. = FALSE
-    )
-  }
+  check_package_name(path)
 
-  message("Creating package ", name, " in ", dirname(path))
+  message("Creating package ", extract_package_name(path), " in ", dirname(path))
 
   dir.create(file.path(path, "R"))
   create_description(path, extra = description)
@@ -77,6 +64,23 @@ setup <- function(path = ".", description = getOption("devtools.desc"),
   if (check) check(path)
   invisible(TRUE)
 }
+
+extract_package_name <- function(path) {
+  basename(normalizePath(path, mustWork = FALSE))
+}
+
+check_package_name <- function(path) {
+  name <- extract_package_name(path)
+  if (!valid_name(name)) {
+    stop(
+      name, " is not a valid package name: it should contain only\n",
+      "ASCII letters, numbers and dot, have at least two characters\n",
+      "and start with a letter and not end in a dot.",
+      call. = FALSE
+    )
+  }
+}
+
 
 valid_name <- function(x) {
   grepl("^[[:alpha:]][[:alnum:].]+$", x) && !grepl("\\.$", x)

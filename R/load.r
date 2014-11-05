@@ -198,7 +198,7 @@ create_description <- function(path, extra = getOption("devtools.desc"),
       call. = FALSE)
   }
 
-  desc <- build_description(basename(normalizePath(path)), extra)
+  desc <- build_description(extract_package_name(path), extra)
 
   if (!quiet) {
     message("No DESCRIPTION found. Creating with values:\n\n")
