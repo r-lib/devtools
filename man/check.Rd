@@ -5,7 +5,7 @@
 \usage{
 check(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
   check_version = FALSE, force_suggests = TRUE, args = NULL,
-  build_args = NULL, quiet = FALSE, check_dir = tempdir())
+  build_args = NULL, quiet = FALSE, check_dir = tempdir(), ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -35,6 +35,8 @@ line arguments to be passed to \code{R CMD check}/\code{R CMD build}/\code{R CMD
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{check_dir}{the directory in which the package is checked}
+
+\item{...}{Additional arguments passed to \code{\link{build}}}
 }
 \description{
 \code{check} automatically builds and checks a source package, using all

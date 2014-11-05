@@ -54,12 +54,14 @@
 #'   line arguments to be passed to \code{R CMD check}/\code{R CMD build}/\code{R CMD INSTALL}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @param check_dir the directory in which the package is checked
+#' @param ... Additional arguments passed to \code{\link{build}}
 #' @seealso \code{\link{release}} if you want to send the checked package to
 #'   CRAN.
 #' @export
 check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
                   check_version = FALSE, force_suggests = TRUE, args = NULL,
-                  build_args = NULL, quiet = FALSE, check_dir = tempdir()) {
+                  build_args = NULL, quiet = FALSE, check_dir = tempdir(),
+                  ...) {
 
   pkg <- as.package(pkg)
 
@@ -70,7 +72,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
   old <- set_envvar(compiler_flags(FALSE), "prefix")
   on.exit(set_envvar(old))
 
-  built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args)
+  built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args, ...)
   on.exit(unlink(built_path), add = TRUE)
 
   r_cmd_check_path <- check_r_cmd(built_path, cran, check_version,

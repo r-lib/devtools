@@ -11,6 +11,13 @@
   
   * Checking that the version number has exactly three components (#633).
 
+* `release()` now builds packages without the `--no-manual` switch, both for
+  checking and for actually building the release package (#603, @krlmlr).
+
+  * `build()` gains an additional argument `manual`, defaults to `FALSE`.
+
+  * `check()` gains an ellipsis `...` which is passed unmodified to `build()`.
+
 * Removed deprecated `doc_clean` argument to `check()`.
 
 * Initial package version in `create()` is now `0.0.0.9000` (#632).

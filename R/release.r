@@ -46,7 +46,7 @@ release <- function(pkg = ".", check = TRUE) {
   new_pkg <- is.null(cran_version)
 
   if (check) {
-    check(pkg, cran = TRUE, check_version = TRUE)
+    check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE)
     release_checks(pkg)
 
     if (yesno("Was package check successful?"))
@@ -251,7 +251,7 @@ submit_cran <- function(pkg = ".") {
   comments <- cran_comments(pkg)
 
   message("Building")
-  built_path <- build(pkg, tempdir())
+  built_path <- build(pkg, tempdir(), manual = TRUE)
   message("File size: ", file.info(built_path)$size, " bytes")
 
   # Initial upload ---------
