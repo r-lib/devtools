@@ -3,9 +3,9 @@
 \alias{check}
 \title{Build and check a package, cleaning up automatically on success.}
 \usage{
-check(pkg = ".", document = TRUE, doc_clean = NULL, cleanup = TRUE,
-  cran = TRUE, check_version = FALSE, force_suggests = TRUE,
-  args = NULL, build_args = NULL, quiet = FALSE, check_dir = tempdir())
+check(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
+  check_version = FALSE, force_suggests = TRUE, args = NULL,
+  build_args = NULL, quiet = FALSE, check_dir = tempdir())
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -13,8 +13,6 @@ check(pkg = ".", document = TRUE, doc_clean = NULL, cleanup = TRUE,
 
 \item{document}{if \code{TRUE} (the default), will update and check
 documentation before running formal check.}
-
-\item{doc_clean}{Deprecated.}
 
 \item{cleanup}{if \code{TRUE} the check directory is removed if the check
 is successful - this allows you to inspect the results to figure out what

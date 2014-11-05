@@ -1,5 +1,7 @@
 # devtools 1.X
 
+* Removed deprecated `doc_clean` argument to `check()`.
+
 * Initial package version in `create()` is now `0.0.0.9000` (#632).
 
 * `revdep_maintainers()` returns output in a way that's easier to 
