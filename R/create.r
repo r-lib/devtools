@@ -5,8 +5,8 @@
 #' source code and data files by inspecting the global environment.
 #'
 #' \code{create} requires that the directory doesn't exist yet; it will be
-#'   created but deleted upon failure. \code{setup} assumes an existing
-#'   directory from which it will infer the package name.
+#' created but deleted upon failure. \code{setup} assumes an existing
+#' directory from which it will infer the package name.
 #'
 #' @param path location to create new package.  The last component of the path
 #'   will be used as the package name.
