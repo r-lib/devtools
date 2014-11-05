@@ -52,6 +52,7 @@ create <- function(path, description = getOption("devtools.desc"),
 }
 
 #' @rdname create
+#' @export
 setup_package <- function(path = ".", description = getOption("devtools.desc"),
                           check = FALSE, rstudio = TRUE) {
   path <- normalizePath(path, mustWork = TRUE)
