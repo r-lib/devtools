@@ -15,6 +15,9 @@ script: ./travis-tool.sh run_tests
 after_failure:
   - ./travis-tool.sh dump_logs
 
+env:
+  - WARNINGS_ARE_ERRORS=1
+
 notifications:
   email:
     on_success: change

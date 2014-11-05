@@ -1,5 +1,8 @@
 # devtools 1.X
 
+* `use_travis()` now sets an environment variable so that any WARNING will
+  also cause the build to fail (#570).
+
 * `create()` now checks that the directory name is a valid package name (#610).
 
 * `release(check = TRUE)` now runs some additional custom checks. These include:
