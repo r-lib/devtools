@@ -5,7 +5,7 @@
 #' source code and data files by inspecting the global environment.
 #'
 #' \code{create} requires that the directory doesn't exist yet; it will be
-#'   created but deleted upon failure. \code{setup_package} assumes an existing
+#'   created but deleted upon failure. \code{setup} assumes an existing
 #'   directory from which it will infer the package name.
 #'
 #' @param path location to create new package.  The last component of the path
@@ -42,7 +42,7 @@ create <- function(path, description = getOption("devtools.desc"),
   on.exit(unlink(path, recursive = TRUE), add = TRUE)
 
   # Main worker, directory will be deleted upon failure
-  setup_package(path = path, description = description, rstudio = rstudio,
+  setup(path = path, description = description, rstudio = rstudio,
                 check = check)
 
   # Don't delete on success
@@ -53,8 +53,8 @@ create <- function(path, description = getOption("devtools.desc"),
 
 #' @rdname create
 #' @export
-setup_package <- function(path = ".", description = getOption("devtools.desc"),
-                          check = FALSE, rstudio = TRUE) {
+setup <- function(path = ".", description = getOption("devtools.desc"),
+                  check = FALSE, rstudio = TRUE) {
   path <- normalizePath(path, mustWork = TRUE)
   name <- basename(path)
   if (!valid_name(name)) {
