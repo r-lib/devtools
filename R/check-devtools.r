@@ -1,9 +1,14 @@
-# Run devtools-specific checks on a built package
-# (Don't export for now, since we'll want to think about whether this
-# should be run on package source dirs or just built tar.gz files)
-# @pkg A package object
-# @built_path The path to a tar.gz file of the built source package
-check_devtools <- function(pkg = ".", built_path = NULL) {
+#' Custom devtools release checks.
+#'
+#' This function performs additional checks prior to release. It is called
+#' automatically by \code{\link{release}()}.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information. If the \code{DESCRIPTION}
+#'   file does not exist, it is created using \code{\link{create_description}}.
+#' @keywords internal
+#' @export
+release_checks <- function(pkg = ".", built_path = NULL) {
   pkg <- as.package(pkg)
   message("Running additional devtools checks for ", pkg$package)
 

@@ -1,5 +1,9 @@
 # devtools 1.X
 
+* `release(check = TRUE)` now runs some additional custom checks. These include:
+  
+  * Checking that you don't depend on a development version of a package.
+
 * Removed deprecated `doc_clean` argument to `check()`.
 
 * Initial package version in `create()` is now `0.0.0.9000` (#632).

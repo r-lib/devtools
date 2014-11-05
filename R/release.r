@@ -47,6 +47,8 @@ release <- function(pkg = ".", check = TRUE) {
 
   if (check) {
     check(pkg, cran = TRUE, check_version = TRUE)
+    release_checks(pkg)
+
     if (yesno("Was package check successful?"))
       return(invisible())
 
