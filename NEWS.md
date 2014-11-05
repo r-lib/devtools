@@ -5,6 +5,9 @@
 
 * `create()` now checks that the directory name is a valid package name (#610).
 
+* New function `setup_package()` that works like `create()` but assumes an
+  existing, not necessarily empty, directory (#627, @krlmlr).
+
 * `release(check = TRUE)` now runs some additional custom checks. These include:
   
   * Checking that you don't depend on a development version of a package.
