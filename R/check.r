@@ -82,6 +82,8 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
     if (!quiet) message("R CMD check results in ", r_cmd_check_path)
   }
 
+  check_devtools(pkg)
+
   invisible(TRUE)
 }
 
