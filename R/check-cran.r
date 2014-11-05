@@ -1,7 +1,6 @@
 #' Check a package from CRAN.
 #'
-#' This is useful for automatically checking that dependencies of your
-#' packages work.
+#' Internal function used to power \code{\link{revdep_check}()}.
 #'
 #' This function does not clean up after itself, but does work in a
 #' session-specific temporary directory, so all files will be removed
@@ -9,38 +8,37 @@
 #'
 #' @param pkgs Vector of package names - note that unlike other \pkg{devtools}
 #'   functions this is the name of a CRAN package, not a path.
-#' @param libpath path to library to store dependencies packages - if you
+#' @param libpath Path to library to store dependencies packages - if you
 #'   you're doing this a lot it's a good idea to pick a directory and stick
 #'   with it so you don't have to download all the packages every time.
-#' @param srcpath path to directory to store source versions of dependent
+#' @param srcpath Path to directory to store source versions of dependent
 #'   packages - again, this saves a lot of time because you don't need to
 #'   redownload the packages every time you run the package.
-#' @param bioconductor include bioconductor packages in checking?
-#' @param type binary package type of test
-#' @param threads number of concurrent threads to use for checking.
+#' @param bioconductor Include bioconductor packages in checking?
+#' @param type binary Package type to test (source, mac.binary etc). Defaults
+#'   to the same type as \code{\link{install.packages}()}.
+#' @param threads Number of concurrent threads to use for checking.
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
-#' @param check_dir the directory in which the package is checked
+#' @param check_dir Directory to store results.
 #' @param revdep_pkg Optional name of a package for which this check is
 #'   checking the reverse dependencies of. This is normally passed in from
 #'   \code{\link{revdep_check}}, and is used only for logging.
-#' @return invisible \code{TRUE} if successful and no ERRORs or WARNINGS,
+#' @return invisible \code{TRUE} if successful and no ERRORs or WARNINGS.
+#' @keywords internal
 #' @export
-#' @examples
-#' \dontrun{
-#' dep <- revdep("ggplot2")
-#' check_cran(dep, "~/documents/ggplot/ggplot-check")
-#' # Or, equivalently:
-#' revdep_check("ggplot2")
-#' }
 check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
-  srcpath = libpath, bioconductor = FALSE, type = getOption("pkgType"),
-  threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"),
-  revdep_pkg = NULL) {
+                       srcpath = libpath, bioconductor = FALSE,
+                       type = getOption("pkgType"),
+                       threads = getOption("Ncpus", 1),
+                       check_dir = tempfile("check_cran"),
+                       revdep_pkg = NULL) {
 
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
 
   message("Checking ", length(pkgs), " CRAN packages")
+  message("Results saved in ", check_dir)
+
   old <- options(warn = 1)
   on.exit(options(old), add = TRUE)
 

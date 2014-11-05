@@ -1,5 +1,7 @@
 # devtools 1.X
 
+* Improved documentation for `revdep_check()` (#635)
+
 * `use_git_hook()` allows you to easily add a git hook to a package.
 
 * `use_readme_rmd()` makes it easier to generate a `README.md` from 
