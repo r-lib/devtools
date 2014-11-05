@@ -28,6 +28,15 @@
 create <- function(path, description = getOption("devtools.desc"),
                          check = FALSE, rstudio = TRUE) {
   name <- basename(path)
+  if (!valid_name(name)) {
+    stop(
+      name, " is not a valid package name: it should contain only\n",
+      "ASCII letters, numbers and dot, have at least two characters\n",
+      "and start with a letter and not end in a dot.",
+      call. = FALSE
+    )
+  }
+
   message("Creating package ", name, " in ", dirname(path))
 
   if (file.exists(path)) {
@@ -46,6 +55,10 @@ create <- function(path, description = getOption("devtools.desc"),
 
   if (check) check(path)
   invisible(TRUE)
+}
+
+valid_name <- function(x) {
+  grepl("^[[:alpha:]][[:alnum:].]+$", x) && !grepl("\\.$", x)
 }
 
 create_namespace <- function(path) {
