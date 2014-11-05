@@ -1,7 +1,7 @@
 #' Use roxygen to document a package.
 #'
 #' This function is a wrapper for the \code{\link[roxygen2]{roxygenize}()}
-#' from the roxygen2 package. See the documentation and vignettes of
+#' function from the roxygen2 package. See the documentation and vignettes of
 #' that package to learn how to use roxygen.
 #'
 #' @param pkg package description, can be path or package name.  See

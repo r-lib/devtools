@@ -12,8 +12,11 @@ install:
 
 script: ./travis-tool.sh run_tests
 
-on_failure:
+after_failure:
   - ./travis-tool.sh dump_logs
+
+env:
+  - WARNINGS_ARE_ERRORS=1
 
 notifications:
   email:

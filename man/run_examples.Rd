@@ -14,7 +14,7 @@ run_examples(pkg = ".", start = NULL, show = TRUE, test = FALSE,
 name of \code{Rd} file to start with (with or without extensions), or
 a topic name. If omitted, will start with the (lexicographically) first
 file. This is useful if you have a lot of examples and don't want to
-rerun them every time when you fix a problem.}
+rerun them every time you fix a problem.}
 
 \item{show}{if \code{TRUE}, code in \code{\\dontshow{}} will be commented
 out}

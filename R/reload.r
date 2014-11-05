@@ -2,7 +2,7 @@
 #'
 #' This attempts to unload and reload a package. If the package is not loaded
 #' already, it does nothing. It's not always possible to cleanly unload a
-#' package: see the caveats in \code{\link{unload}} for the some of the
+#' package: see the caveats in \code{\link{unload}} for some of the
 #' potential failure points. If in doubt, restart R and reload the package
 #' with \code{\link{library}}.
 #'

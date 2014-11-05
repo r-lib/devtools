@@ -28,7 +28,7 @@
 #'    \code{\link{compiler_flags}(FALSE)}.
 #'
 #'  \item Special environment variables set to the same values that
-#'    CRAN uses when testing packages: \code{cran_env_vars}. Unforutnately
+#'    CRAN uses when testing packages: \code{cran_env_vars}. Unfortunately
 #'    exactly what CRAN does when checking a package is not publicly documented,
 #'    but we do our best to simulate as accurately as possible given what we
 #'    know.
@@ -44,7 +44,6 @@
 #'   went wrong. If \code{FALSE} the check directory is never removed.
 #' @param cran if \code{TRUE} (the default), check using the same settings as
 #'   CRAN uses.
-#' @param doc_clean Deprecated.
 #' @param check_version if \code{TRUE}, check that the new version is greater
 #'   than the current version on CRAN, by setting the
 #'   \code{_R_CHECK_CRAN_INCOMING_} environment variable to \code{TRUE}.
@@ -58,18 +57,13 @@
 #' @seealso \code{\link{release}} if you want to send the checked package to
 #'   CRAN.
 #' @export
-check <- function(pkg = ".", document = TRUE, doc_clean = NULL,
-                  cleanup = TRUE, cran = TRUE, check_version = FALSE,
-                  force_suggests = TRUE, args = NULL, build_args = NULL,
-                  quiet = FALSE, check_dir = tempdir()) {
+check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
+                  check_version = FALSE, force_suggests = TRUE, args = NULL,
+                  build_args = NULL, quiet = FALSE, check_dir = tempdir()) {
 
   pkg <- as.package(pkg)
 
   if (document) {
-    if (!missing(doc_clean)) {
-      warning("doc_clean argument deprecated: roxygen2 now cleans up after ",
-        "itself", call. = FALSE)
-    }
     document(pkg)
   }
 

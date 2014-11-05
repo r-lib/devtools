@@ -1,5 +1,30 @@
 # devtools 1.X
 
+* `use_travis()` now sets an environment variable so that any WARNING will
+  also cause the build to fail (#570).
+
+* `create()` now checks that the directory name is a valid package name (#610).
+
+* `release(check = TRUE)` now runs some additional custom checks. These include:
+  
+  * Checking that you don't depend on a development version of a package.
+  
+  * Checking that the version number has exactly three components (#633).
+
+* Removed deprecated `doc_clean` argument to `check()`.
+
+* Initial package version in `create()` is now `0.0.0.9000` (#632).
+
+* `revdep_maintainers()` returns output in a way that's easier to 
+  copy and paste into an email (#634).
+
+* Improved documentation for `revdep_check()` (#635)
+
+* `use_git_hook()` allows you to easily add a git hook to a package.
+
+* `use_readme_rmd()` makes it easier to generate a `README.md` from 
+  `README.Rmd`.
+
 # devtools 1.6.1
 
 * Don't set non-portable compiler flags on Solaris.
@@ -9,6 +34,10 @@
 
 * The function `use_rcpp` will now create the file `src/.gitignore` with the
   correct wildcards. (@hmalmedal)
+
+* The functions `test`, `document`, `load_all`, `build`, `check` and any
+  function that applies to some package directory will work from subdirectories
+  of a package (like the "R" or "inst/tests" directories). (#616, @robertzk)
 
 # devtools 1.6
 

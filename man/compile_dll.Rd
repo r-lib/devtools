@@ -12,7 +12,7 @@ compile_dll(pkg = ".", quiet = FALSE)
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 }
 \description{
-\code{compile_dll} performs a fake R CMD install so should code that
+\code{compile_dll} performs a fake R CMD install so code that
 works here should work with a regular install (and vice versa).
 }
 \details{

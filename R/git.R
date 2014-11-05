@@ -1,5 +1,5 @@
 uses_git <- function(pkg = ".") {
-  if (!file.info(pkg)$isdir) return(FALSE)
+  if (is.character(pkg) && !file.info(pkg)$isdir) return(FALSE)
   pkg <- as.package(pkg)
   file.exists(file.path(pkg$path, ".git"))
 }
