@@ -20,7 +20,7 @@ add additional values.}
 }
 \description{
 Similar to \code{\link{package.skeleton}}, except that it only creates
-the standard devtools directory structures, it doesn't try and create
+the standard devtools directory structures; it doesn't try and create
 source code and data files by inspecting the global environment.
 }
 \examples{

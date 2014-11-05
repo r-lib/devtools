@@ -18,7 +18,7 @@ specified, defaults to \code{c("collate", "namespace", "rd")}.}
 }
 \description{
 This function is a wrapper for the \code{\link[roxygen2]{roxygenize}()}
-from the roxygen2 package. See the documentation and vignettes of
+function from the roxygen2 package. See the documentation and vignettes of
 that package to learn how to use roxygen.
 }
 \seealso{
