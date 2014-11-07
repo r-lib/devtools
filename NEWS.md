@@ -1,5 +1,8 @@
 # devtools 1.X
 
+* `load_code()` now executes the package's code with the package's root as
+  working directory, just like `R CMD build` et al. (#640, @krlmlr).
+
 * `use_travis()` now sets an environment variable so that any WARNING will
   also cause the build to fail (#570).
 
