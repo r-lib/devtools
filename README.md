@@ -15,7 +15,7 @@ You can track (and contribute to) development of `devtools` at https://github.co
 2. Make sure you have a working development environment.
     * **Windows**: Install [Rtools](http://cran.r-project.org/bin/windows/Rtools/).
     * **Mac**: Install Xcode from the Mac App Store.
-    * **Linux**: Install a compiler and various development libraries (details vary across differnet flavors of Linux).
+    * **Linux**: Install a compiler and various development libraries (details vary across different flavors of Linux).
 
 3. Follow the instructions below depending on platform.
 
@@ -41,7 +41,7 @@ You can track (and contribute to) development of `devtools` at https://github.co
 
 ## Package development tools
 
-All `devtools` functions accept a path as an argument, e.g. `load_all("path/to/path/mypkg")`. If you don't specify a path, `devtools` will look in the current working directory - this is recommend practice.
+All `devtools` functions accept a path as an argument, e.g. `load_all("path/to/path/mypkg")`. If you don't specify a path, `devtools` will look in the current working directory - this is the recommended practice.
 
 Frequent development tasks:
 
