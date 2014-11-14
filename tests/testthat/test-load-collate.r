@@ -24,3 +24,22 @@ test_that("Extra files in collate don't error, but warn", {
 
   unload("testCollateExtra")
 })
+
+temp_copy_pkg <- function(pkg) {
+  file.copy(normalizePath(pkg), tempdir(), recursive = TRUE)
+  normalizePath(file.path(tempdir(), pkg))
+}
+
+test_that("Collate field in DESCRIPTION reflects latest @includes", {
+  # Make a temporary copy of the package for this test,
+  # since update_collate (in load_all) may have permanent side effects,
+  # namely changing the collate field in the DESCRIPTION file
+  test_pkg <- temp_copy_pkg('testCollateOrder')
+  on.exit(unlink(test_pkg, recursive = TRUE))
+
+  expect_message(load_all(test_pkg), "Loading testCollateOrder")
+
+  expect_equal(a, 1) #even though b.r set it to 2
+
+  unload(test_pkg)
+})
