@@ -1,5 +1,9 @@
 # devtools 1.X
 
+* `with_debug()` and `compiler_flags()` set `CFLAGS` etc instead of 
+  `PKG_CFLAGS`. `PKG_*` are for packages to use, the raw values are for users
+  to set. (According to http://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Using-Makevars)
+
 * `use_travis()` now sets an environment variable so that any WARNING will
   also cause the build to fail (#570).
 
