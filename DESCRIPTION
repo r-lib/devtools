@@ -1,6 +1,6 @@
 Package: devtools
 Title: Tools to make developing R code easier
-Version: 1.6.0.9000
+Version: 1.6.0.9001
 Authors@R: as.person(c(
     "Hadley Wickham <hadley@rstudio.com> [aut, cre]",
     "Winston Chang [aut]",
@@ -24,7 +24,7 @@ Imports:
     jsonlite
 Suggests:
     testthat (>= 0.7),
-    roxygen2 (>= 4.0.2),
+    roxygen2 (>= 4.0.2.9001),
     BiocInstaller,
     Rcpp (>= 0.10.0),
     MASS,
