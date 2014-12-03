@@ -57,7 +57,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   libpath <- normalizePath(libpath)
 
   # Add the temoporary library and remove on exit
-  libpaths_orig <- set_libpaths(c(libpath, .libPaths()))
+  libpaths_orig <- set_libpaths(libpath)
   on.exit(.libPaths(libpaths_orig), add = TRUE)
 
   # Make sure existing dependencies are up to date ---------------------------
@@ -66,7 +66,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   if (!is.null(old)) {
     message("Updating ", nrow(old), " existing dependencies: ",
       paste(old[, "Package"], collapse = ", "))
-    install.packages(old[, "Package"], libpath, repos = repos, type = type,
+    utils::install.packages(old[, "Package"], libpath, repos = repos, type = type,
       Ncpus = threads, quiet = TRUE)
   }
 
@@ -80,7 +80,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   if (length(known) > 0) {
     message("Installing ", length(known), " missing dependencies: ",
       paste(known, collapse = ", "))
-    install.packages(known, lib = libpath, quiet = TRUE, repos = repos,
+    utils::install.packages(known, lib = libpath, quiet = TRUE, repos = repos,
       Ncpus = threads)
   }
   if (length(unknown) > 0) {
