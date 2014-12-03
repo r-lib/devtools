@@ -78,6 +78,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   }
   deps <- find_deps(pkgs, "most")
   deps <- c(deps, find_deps(deps, c("Depends", "Imports"), recursive = TRUE))
+  deps <- sort(unique(deps))
 
   to_install <- setdiff(deps, installed.packages()[, 1])
   known <- intersect(to_install, rownames(available_bin))
