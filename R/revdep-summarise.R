@@ -35,7 +35,7 @@ revdep_check_summary <- function(res) {
   # Find all dependencies
   deps <- res$pkg[c("imports", "depends", "linkingto", "suggests")]
   pkgs <- unlist(lapply(deps, function(x) parse_deps(x)$name), use.names = FALSE)
-  pkgs <- sort(unique(pkgs))
+  pkgs <- c(res$pkg$package, sort(unique(pkgs)))
   pkgs <- intersect(pkgs, dir(res$libpath))
   pkg_df <- package_info(pkgs, libpath = res$libpath)
 
