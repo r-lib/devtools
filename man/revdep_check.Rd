@@ -5,25 +5,23 @@
 \alias{revdep_check_summary}
 \title{Run R CMD check on all downstream dependencies.}
 \usage{
-revdep_check_save_logs(check_dir, log_dir = "revdep")
+revdep_check_save_logs(res, log_dir = "revdep")
 
-revdep_check_summary(check_dir)
+revdep_check_summary(res)
 
-revdep_check(pkg, recursive = FALSE, ignore = NULL,
+revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
   libpath = getOption("devtools.revdep.libpath"), srcpath = libpath,
   bioconductor = FALSE, type = getOption("pkgType"),
   threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"))
 }
 \arguments{
-\item{check_dir}{Directory to store results.}
+\item{res}{Result of \code{revdep_check}}
 
 \item{log_dir}{Directory in which to save logs}
 
-\item{pkg}{Package name. This is unlike most devtools packages which
-take a path because you might want to determine dependencies for a package
-that you don't have installed. If omitted, defaults to the name of the
-current package.}
+\item{pkg}{package description, can be path or package name.  See
+\code{\link{as.package}} for more information}
 
 \item{recursive}{If \code{TRUE} look for full set of recusive dependencies.}
 
@@ -51,6 +49,8 @@ to the same type as \code{\link{install.packages}()}.}
 
 \item{threads}{Number of concurrent threads to use for checking.
 It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
+
+\item{check_dir}{Directory to store results.}
 }
 \value{
 An invisible list of results. But you'll probably want to look

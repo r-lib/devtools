@@ -29,8 +29,8 @@ source code and data files by inspecting the global environment.
 }
 \details{
 \code{create} requires that the directory doesn't exist yet; it will be
-  created but deleted upon failure. \code{setup} assumes an existing
-  directory from which it will infer the package name.
+created but deleted upon failure. \code{setup} assumes an existing
+directory from which it will infer the package name.
 }
 \examples{
 \donttest{

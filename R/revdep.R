@@ -112,7 +112,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
     srcpath = srcpath, bioconductor = bioconductor, type = type,
     threads = threads, check_dir = check_dir)
 
-  invisible(res)
+  list(check_dir = check_dir, libpath = libpath, pkg = pkg)
 }
 
 cran_packages <- memoise::memoise(function() {

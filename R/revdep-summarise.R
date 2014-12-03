@@ -1,7 +1,8 @@
 #' @export
+#' @param res Result of \code{revdep_check}
 #' @param log_dir Directory in which to save logs
 #' @rdname revdep_check
-revdep_check_save_logs <- function(check_dir, log_dir = "revdep") {
+revdep_check_save_logs <- function(res, log_dir = "revdep") {
   stopifnot(file.exists(log_dir))
 
   save_one <- function(pkg, path) {
@@ -20,28 +21,26 @@ revdep_check_save_logs <- function(check_dir, log_dir = "revdep") {
     write_dcf(file.path(out, "DESCRIPTION"), desc[c("Package", "Version", "Maintainer")])
   }
 
-  pkgs <- check_dirs(check_dir)
+  pkgs <- check_dirs(res$check_dir)
   Map(save_one, names(pkgs), pkgs)
   invisible()
 }
 
 #' @rdname revdep_check
 #' @export
-revdep_check_summary <- function(check_dir, pkgs = NULL) {
-  if (is.null(pkgs)) {
-    pkg <- as.package(".")
-    deps <- pkg[c("imports", "depends", "linkingto", "suggests", "enhances")]
-    pkgs <- unlist(lapply(deps, function(x) parse_deps(x)$name))
-  }
-  pkgs <- sort(unique(pkgs))
-
+revdep_check_summary <- function(res) {
   plat <- platform_info()
   plat_df <- df <- data.frame(setting = names(plat), value = unlist(plat))
 
-  pkg_df <- package_info(pkgs)
+  # Find all dependencies
+  deps <- res$pkg[c("imports", "depends", "linkingto", "suggests")]
+  pkgs <- unlist(lapply(deps, function(x) parse_deps(x)$name), use.names = FALSE)
+  pkgs <- sort(unique(pkgs))
+  pkgs <- intersect(pkgs, dir(res$libpath))
+  pkg_df <- package_info(pkgs, libpath = res$libpath)
 
-  pkgs <- check_dirs(check_dir)
-  summaries <- vapply(pkgs, check_summary_package, character(1))
+  checks <- check_dirs(res$check_dir)
+  summaries <- vapply(checks, check_summary_package, character(1))
 
   paste0(
     "# Setup\n\n",
