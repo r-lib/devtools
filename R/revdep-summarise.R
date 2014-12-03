@@ -27,24 +27,33 @@ revdep_check_save_logs <- function(check_dir, log_dir = "revdep") {
 
 #' @rdname revdep_check
 #' @export
-revdep_check_summary <- function(check_dir) {
-  pkgs <- check_dirs(check_dir)
+revdep_check_summary <- function(check_dir, pkgs = NULL) {
+  if (is.null(pkgs)) {
+    pkg <- as.package(".")
+    deps <- pkg[c("imports", "depends", "linkingto", "suggests", "enhances")]
+    pkgs <- unlist(lapply(deps, function(x) parse_deps(x)$name))
+  }
+  pkgs <- sort(unique(pkgs))
 
   plat <- platform_info()
-  rows <- paste0("|", format(names(plat)), "|", format(unlist(plat)), "|", collapse = "\n")
-  platform <- paste0(
-    "## Platform info\n",
-    "\n",
-    "| Setting | Value |\n",
-    "|---------|-------|\n",
-    rows,
-    "\n",
-    "\n",
-    collapse = ""
-  )
+  plat_df <- df <- data.frame(setting = names(plat), value = unlist(plat))
 
+  pkg_df <- package_info(pkgs)
+
+  pkgs <- check_dirs(check_dir)
   summaries <- vapply(pkgs, check_summary_package, character(1))
-  paste0(platform, paste0(summaries, collapse = "\n"))
+
+  paste0(
+    "# Setup\n\n",
+    "## Platform\n\n",
+    paste(knitr::kable(plat_df), collapse = "\n"),
+    "\n\n",
+    "## Packages\n\n",
+    paste(knitr::kable(pkg_df), collapse = "\n"),
+    "\n\n",
+    "# Check results\n\n",
+    paste0(summaries, collapse = "\n")
+  )
 }
 
 check_summary_package <- function(path) {

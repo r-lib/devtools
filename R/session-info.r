@@ -79,35 +79,33 @@ print.platform_info <- function(x, ...) {
   print(df, right = FALSE, row.names = FALSE)
 }
 
-package_info <- function(include_base = FALSE) {
-  attached_pkg <- grep("^package:", search(), value = TRUE)
-  attached_pkg <- sub("^package:", "", attached_pkg)
-  loaded_pkg <- setdiff(loadedNamespaces(), attached_pkg)
-  attached <- rep(c(TRUE, FALSE), c(length(loaded_pkg), length(attached_pkg)))
+package_info <- function(pkgs = loadedNamespaces(), include_base = FALSE) {
+  attached <- (pkgs %in% sub("^package:", "", search()))
 
-  pkgs <- data.frame(
-    package = c(loaded_pkg, attached_pkg),
+  pkgs_df <- data.frame(
+    package = pkgs,
     `*` = ifelse(attached, "", "*"),
     stringsAsFactors = FALSE,
     check.names = FALSE
   )
-  pkgs$version <- vapply(pkgs$package,
+  pkgs_df$version <- vapply(pkgs,
     function(x) as.character(packageVersion(x)),
     character(1)
   )
 
   if (!include_base) {
-    base <- vapply(pkgs$package, pkg_is_base, logical(1))
-    pkgs <- pkgs[!base, , drop = FALSE]
+    base <- vapply(pkgs, pkg_is_base, logical(1))
+    pkgs_df <- pkgs_df[!base, , drop = FALSE]
+    pkgs <- pkgs[!base]
   }
 
-  pkgs$date <- vapply(pkgs$package, pkg_date, character(1))
-  pkgs$source <- vapply(pkgs$package, pkg_source, character(1))
+  pkgs_df$date <- vapply(pkgs, pkg_date, character(1))
+  pkgs_df$source <- vapply(pkgs, pkg_source, character(1))
 
-  pkgs <- pkgs[order(pkgs$package), ]
+  pkgs_df <- pkgs_df[order(pkgs), , drop = FALSE]
   rownames(pkgs) <- NULL
   class(pkgs) <- c("packages_info", "data.frame")
-  pkgs[, c("package", "*", "version", "date", "source")]
+  pkgs_df[, c("package", "*", "version", "date", "source")]
 }
 
 #' @export
