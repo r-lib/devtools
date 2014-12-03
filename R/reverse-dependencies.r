@@ -9,7 +9,8 @@
 #'
 #' @param pkg Package name. This is unlike most devtools packages which
 #'   take a path because you might want to determine dependencies for a package
-#'   that you don't have installed.
+#'   that you don't have installed. If omitted, defaults to the name of the
+#'   current package.
 #' @param ignore A character vector of package names to ignore. These packages
 #'   will not appear in returned vector. This is used in
 #'   \code{\link{revdep_check}} to avoid packages with installation problems
@@ -26,6 +27,8 @@
 #'}
 revdep <- function(pkg, dependencies = c("Depends", "Imports",
                    "Suggests", "LinkingTo"), recursive = FALSE, ignore = NULL) {
+  if (missing(pkg)) pkg <- as.package(".")$package
+
   deps <- tools::dependsOnPkgs(pkg, dependencies, recursive, installed = packages())
   deps <- setdiff(deps, ignore)
   sort(deps)
@@ -33,7 +36,9 @@ revdep <- function(pkg, dependencies = c("Depends", "Imports",
 
 #' @rdname revdep
 #' @export
-revdep_maintainers <- function(pkg) {
+revdep_maintainers <- function(pkg = ".") {
+  if (missing(pkg)) pkg <- as.package(".")$package
+
   maintainers <- unique(packages()[revdep(pkg), "Maintainer"])
   class(maintainers) <- "maintainers"
 
@@ -78,6 +83,8 @@ revdep_check <- function(pkg, recursive = FALSE, ignore = NULL,
                          type = getOption("pkgType"),
                          threads = getOption("Ncpus", 1),
                          check_dir = tempfile("check_cran")) {
+  if (missing(pkg)) pkg <- as.package(".")$package
+
   pkgs <- revdep(pkg, recursive = recursive, ignore = ignore)
   res <- check_cran(pkgs, revdep_pkg = pkg, libpath = libpath,
     srcpath = srcpath, bioconductor = bioconductor, type = type,

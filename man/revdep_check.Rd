@@ -11,7 +11,8 @@ revdep_check(pkg, recursive = FALSE, ignore = NULL,
 \arguments{
 \item{pkg}{Package name. This is unlike most devtools packages which
 take a path because you might want to determine dependencies for a package
-that you don't have installed.}
+that you don't have installed. If omitted, defaults to the name of the
+current package.}
 
 \item{recursive}{logical: should reverse dependencies of reverse
     dependencies (and so on) be included?}

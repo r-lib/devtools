@@ -7,12 +7,13 @@
 revdep(pkg, dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
   recursive = FALSE, ignore = NULL)
 
-revdep_maintainers(pkg)
+revdep_maintainers(pkg = ".")
 }
 \arguments{
 \item{pkg}{Package name. This is unlike most devtools packages which
 take a path because you might want to determine dependencies for a package
-that you don't have installed.}
+that you don't have installed. If omitted, defaults to the name of the
+current package.}
 
 \item{dependencies}{a character vector listing the types of
     dependencies, a subset of
