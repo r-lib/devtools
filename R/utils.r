@@ -6,7 +6,8 @@ dir.exists <- function(x) {
 }
 
 compact <- function(x) {
-  Filter(Negate(is.null), x)
+  is_empty <- vapply(x, function(x) length(x) == 0, logical(1))
+  x[!is_empty]
 }
 
 "%||%" <- function(a, b) if (!is.null(a)) a else b
