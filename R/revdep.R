@@ -99,6 +99,7 @@ revdep_check <- function(pkg, recursive = FALSE, ignore = NULL,
                          check_dir = tempfile("check_cran")) {
   if (missing(pkg)) pkg <- as.package(".")$package
 
+  rule("Finding reverse dependencies")
   pkgs <- revdep(pkg, recursive = recursive, ignore = ignore,
     bioconductor = bioconductor, dependencies = dependencies)
   res <- check_cran(pkgs, revdep_pkg = pkg, libpath = libpath,
