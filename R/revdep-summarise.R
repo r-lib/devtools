@@ -30,8 +30,21 @@ revdep_check_save_logs <- function(check_dir, log_dir = "revdep") {
 revdep_check_summary <- function(check_dir) {
   pkgs <- check_dirs(check_dir)
 
+  plat <- platform_info()
+  rows <- paste0("|", format(names(plat)), "|", format(unlist(plat)), "|", collapse = "\n")
+  platform <- paste0(
+    "## Platform info\n",
+    "\n",
+    "| Setting | Value |\n",
+    "|---------|-------|\n",
+    rows,
+    "\n",
+    "\n",
+    collapse = ""
+  )
+
   summaries <- vapply(pkgs, check_summary_package, character(1))
-  paste(summaries, collapse = "\n")
+  paste0(platform, paste0(summaries, collapse = "\n"))
 }
 
 check_summary_package <- function(path) {
