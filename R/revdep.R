@@ -15,6 +15,11 @@
 #'   will not appear in returned vector. This is used in
 #'   \code{\link{revdep_check}} to avoid packages with installation problems
 #'   or extremely long check times.
+#' @param dependencies A character vector listing the types of dependencies
+#'   to follow.
+#' @param bioconductor If \code{TRUE} also look for dependencies amongst
+#'   bioconductor packages.
+#' @param recursive If \code{TRUE} look for full set of recusive dependencies.
 #' @inheritParams tools::dependsOnPkgs
 #' @seealso \code{\link{revdep_check}()} to run R CMD check on all reverse
 #'   dependencies.
@@ -25,11 +30,15 @@
 #'
 #' revdep("ggplot2", ignore = c("xkcd", "zoo"))
 #'}
-revdep <- function(pkg, dependencies = c("Depends", "Imports",
-                   "Suggests", "LinkingTo"), recursive = FALSE, ignore = NULL) {
+revdep <- function(pkg,
+                   dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
+                   recursive = FALSE, ignore = NULL,
+                   bioconductor = FALSE) {
   if (missing(pkg)) pkg <- as.package(".")$package
 
-  deps <- tools::dependsOnPkgs(pkg, dependencies, recursive, installed = packages())
+  all <- if (bioconductor) packages() else cran_packages()
+
+  deps <- tools::dependsOnPkgs(pkg, dependencies, recursive, installed = all)
   deps <- setdiff(deps, ignore)
   sort(deps)
 }
@@ -54,14 +63,16 @@ print.maintainers <- function(x, ...) {
 
 #' Run R CMD check on all downstream dependencies.
 #'
-#' This is neeeded when you submit a new version of a package to CRAN.
+#' Use \code{revdep_check()} to run \code{\link{check_cran}()} on all downstream
+#' dependencies. Summarises the results with \code{revdep_check_summary} and
+#' save logs with \code{revdep_check_save_logs}.
 #'
-#' By \code{revdep_check} uses temporary library to store any packages that
-#' are required by the packages being tests. This ensures that they don't
+#' By default \code{revdep_check} uses temporary library to store any packages
+#' that are required by the packages being tested. This ensures that they don't
 #' interfere with your default library, but means that if you restart R
 #' between checks, you'll need to reinstall all the packages. If you're
 #' doing reverse dependency checks frequently, I recommend that you create
-#' a directory for these packages and set \code{libpath}.
+#' a directory for these packages and set \code{option(devtools.libpath)}.
 #'
 #' @inheritParams revdep
 #' @inheritParams check_cran
@@ -75,22 +86,25 @@ print.maintainers <- function(x, ...) {
 #' @examples
 #' \dontrun{
 #' # Run R CMD check on all downstream dependencies of ggplot2
-#' revdep_check("ggplot2")
+#' res <- revdep_check("ggplot2")
+#' revdep_check_summary(res)
+#' revdep_check_save_logs(res)
 #' }
 revdep_check <- function(pkg, recursive = FALSE, ignore = NULL,
-                         libpath = file.path(tempdir(), "R-lib"),
+                         dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
+                         libpath = getOption("devtools.revdep.libpath"),
                          srcpath = libpath, bioconductor = FALSE,
                          type = getOption("pkgType"),
                          threads = getOption("Ncpus", 1),
                          check_dir = tempfile("check_cran")) {
   if (missing(pkg)) pkg <- as.package(".")$package
 
-  pkgs <- revdep(pkg, recursive = recursive, ignore = ignore)
+  pkgs <- revdep(pkg, recursive = recursive, ignore = ignore,
+    bioconductor = bioconductor, dependencies = dependencies)
   res <- check_cran(pkgs, revdep_pkg = pkg, libpath = libpath,
     srcpath = srcpath, bioconductor = bioconductor, type = type,
     threads = threads, check_dir = check_dir)
 
-  res$revdep_package <- pkg
   invisible(res)
 }
 

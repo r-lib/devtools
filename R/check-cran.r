@@ -36,12 +36,14 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
 
-  message("Checking ", length(pkgs), " CRAN packages")
+  rule("Checking ", length(pkgs), " CRAN packages", pad = "=")
+  if (!file.exists(check_dir)) dir.create(check_dir)
   message("Results saved in ", check_dir)
 
   old <- options(warn = 1)
   on.exit(options(old), add = TRUE)
 
+  rule("Installing dependencies")
   message("Determining available packages") # --------------------------------
   repos <- c(CRAN = "http://cran.rstudio.com/")
   if (bioconductor) {
@@ -65,7 +67,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     message("Updating ", nrow(old), " existing dependencies: ",
       paste(old[, "Package"], collapse = ", "))
     install.packages(old[, "Package"], libpath, repos = repos, type = type,
-      Ncpus = threads)
+      Ncpus = threads, quiet = TRUE)
   }
 
   # Install missing dependencies
@@ -78,7 +80,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   if (length(known) > 0) {
     message("Installing ", length(known), " missing dependencies: ",
       paste(known, collapse = ", "))
-    install.packages(known, lib = libpath, quiet = FALSE, repos = repos,
+    install.packages(known, lib = libpath, quiet = TRUE, repos = repos,
       Ncpus = threads)
   }
   if (length(unknown) > 0) {
@@ -86,16 +88,11 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       paste(unknown, collapse = ", "))
   }
 
-  # Create directory for storing results.
-  if (!file.exists(check_dir)) dir.create(check_dir)
-
   # Download and check each package, parsing output as we go.
   check_pkg <- function(i) {
     url <- package_url(pkgs[i], repos, available = available_src)
-
     if (length(url$url) == 0) {
-      message("Can't find package source for ", i, ": ", pkgs[i],
-        ". Skipping...")
+      message("Skipping ", pkgs[i], ": can't find source")
       return(NULL)
     }
     local <- file.path(srcpath, url$name)
@@ -105,136 +102,36 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       download.file(url$url, local, quiet = TRUE)
     }
 
-    message("Checking ", i , ": ", pkgs[i])
+    message("Checking ", pkgs[i])
     start_time <- Sys.time()
-    check_args <- "--no-multiarch --no-manual --no-codoc"
-    try(check_r_cmd(local, cran = TRUE, check_version = FALSE,
-      force_suggests = FALSE, args = check_args, check_dir = check_dir,
-      quiet = TRUE), silent = TRUE)
+    try({
+      check_r_cmd(
+        local,
+        cran = TRUE,
+        check_version = FALSE,
+        args = "--no-multiarch --no-manual --no-codoc",
+        check_dir = check_dir,
+        quiet = TRUE
+      )
+    }, silent = TRUE)
+    end_time <- Sys.time()
 
-    check_path <- file.path(check_dir, gsub("_.*?$", ".Rcheck", url$name))
-    results <- parse_check_results(check_path)
-    if (length(results) > 0) cat(results, "\n")
+    elapsed_time <- as.numeric(end_time - start_time, units = "secs")
+    writeLines(
+      sprintf("%d  %s  %.1f", i, pkgs[i], elapsed_time),
+      file.path(check_dir, paste0(pkgs[i], ".Rcheck"), "check-time.txt")
+    )
 
-    elapsed_time <- as.numeric(Sys.time() - start_time, units = "secs")
-    message("Finished checking ", i , ": ", pkgs[i], " (",
-      round(elapsed_time, 1), " seconds)")
-    writeLines(sprintf("%d  %s  %.1f", i, pkgs[i], elapsed_time),
-      file.path(check_path, "check-time.txt"))
-
-    results
+    NULL
   }
 
-  results <- parallel::mclapply(seq_along(pkgs), check_pkg,
-    mc.preschedule = FALSE, mc.cores = threads)
-
-  names(results) <- pkgs
-
-  n_problems <- sum(vapply(results, length, integer(1)))
-  if (n_problems > 0) {
-    warning("Found ", n_problems, call. = FALSE)
-  }
-
-  # Collect the output
-  collect_check_results(check_dir, revdep_pkg)
-
-  invisible(list(path = check_dir, results = results))
-}
-
-parse_check_results <- function(path) {
-  check_path <- file.path(path, "00check.log")
-
-  check_log <- paste(readLines(check_path), collapse = "\n")
-  pieces <- strsplit(check_log, "\n\\* ")[[1]]
-  problems <- grepl("... (WARN|ERROR)", pieces)
-  cran_version <- grepl("CRAN incoming feasibility", pieces)
-
-  messages <- pieces[problems & !cran_version]
-  if (length(messages)) {
-    paste("* ", messages, collapse = "\n")
-  }
-}
-
-# Collects all the results from running check_cran and puts in a
-# directory results/ under the top level tempdir.
-collect_check_results <- function(topdir, revdep_pkg) {
-  # Directory for storing results
-  rdir <- file.path(topdir, "results")
-  if (dir.exists(rdir)) {
-    # Remove existing results
-    unlink(dir(normalizePath(rdir), include.dirs = TRUE), recursive = TRUE)
+  rule("Checking packages")
+  if (identical(as.integer(threads), 1L)) {
+    lapply(seq_along(pkgs), check_pkg)
   } else {
-    dir.create(rdir)
+    parallel::mclapply(seq_along(pkgs), check_pkg, mc.preschedule = FALSE,
+      mc.cores = threads)
   }
 
-  checkdirs <- list.dirs(topdir, recursive=FALSE)
-  checkdirs <- checkdirs[grepl("\\.Rcheck$", checkdirs)]
-  # Make it a named vector so that the output of lapply below contains names
-  names(checkdirs) <- sub("\\.Rcheck$", "", basename(checkdirs))
-
-  # Copy over all the 00check.log and 00install.out files
-  message("Copying check logs to ", rdir)
-  checklogs <- file.path(checkdirs, "00check.log")
-  checklogs_dest <- file.path(rdir, paste(names(checkdirs), "-check", sep=""))
-  names(checklogs_dest) <- names(checkdirs)
-  file.copy(checklogs, checklogs_dest, overwrite = TRUE)
-
-
-  message("Copying install logs to ", rdir)
-  installlogs <- file.path(checkdirs, "00install.out")
-  installlogs_dest <- file.path(rdir, paste(names(checkdirs), "-install", sep=""))
-  file.copy(installlogs, installlogs_dest, overwrite = TRUE)
-
-
-  checkresults <- lapply(checkdirs, parse_check_results)
-
-  message("Writing warnings and error summary for each package to ", rdir)
-  for (i in seq_along(checkresults)) {
-    pkgname <- names(checkresults[i])
-    result <- checkresults[[i]]
-
-    if (!is.null(result) && nzchar(result)) {
-      err_filename <- file.path(rdir, paste(pkgname, "-error", sep=""))
-      err_out <- file(err_filename, "w")
-
-      cat(pkgname, result, file = err_out)
-      close(err_out)
-    }
-  }
-
-  summary_filename <- file.path(rdir, "00check-summary.txt")
-  message("Creating summary of check warnings and errors in ", summary_filename)
-  summary_out <- file(summary_filename, "w")
-  on.exit(close(summary_out))
-
-  sink(summary_out)
-  if (!is.null(revdep_pkg)) {
-    sha <- packageDescription(revdep_pkg)$RemoteSha
-    if (!is.null(sha)) sha <- paste0("Commit ", sha, "\n")
-
-    cat("=========================================================================\n",
-        "Reverse dependency check for ", revdep_pkg, " ",
-        as.character(packageVersion(revdep_pkg)), "\n",
-        sha,
-        "=========================================================================\n",
-        sep = "")
-  }
-  print(session_info())
-  cat("\n")
-  sink()
-
-  for (i in seq_along(checkresults)) {
-    pkgname <- names(checkresults[i])
-    linetext <- paste(rep("=", 72 - nchar(pkgname)), collapse = "")
-    cat(pkgname, linetext, "\n", checkresults[[i]], "\n\n\n", file = summary_out)
-  }
-
-
-  message("Collecting check times in 00check-times.txt")
-  checktimes <- file.path(checkdirs, "check-time.txt")
-  checktimes_dest <- file.path(rdir, "00check-times.txt")
-  for (i in seq_along(checktimes)) {
-    linetext <- readLines(checktimes[i])
-    cat(linetext, sep = "\n", file = checktimes_dest, append = TRUE)
-  }
+  check_dir
 }

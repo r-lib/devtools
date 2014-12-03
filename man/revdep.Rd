@@ -5,7 +5,7 @@
 \title{Reverse dependency tools.}
 \usage{
 revdep(pkg, dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
-  recursive = FALSE, ignore = NULL)
+  recursive = FALSE, ignore = NULL, bioconductor = FALSE)
 
 revdep_maintainers(pkg = ".")
 }
@@ -15,18 +15,18 @@ take a path because you might want to determine dependencies for a package
 that you don't have installed. If omitted, defaults to the name of the
 current package.}
 
-\item{dependencies}{a character vector listing the types of
-    dependencies, a subset of
-    \code{c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances")}.
-    Character string \code{"all"} is shorthand for that vector.}
+\item{dependencies}{A character vector listing the types of dependencies
+to follow.}
 
-\item{recursive}{logical: should reverse dependencies of reverse
-    dependencies (and so on) be included?}
+\item{recursive}{If \code{TRUE} look for full set of recusive dependencies.}
 
 \item{ignore}{A character vector of package names to ignore. These packages
 will not appear in returned vector. This is used in
 \code{\link{revdep_check}} to avoid packages with installation problems
 or extremely long check times.}
+
+\item{bioconductor}{If \code{TRUE} also look for dependencies amongst
+bioconductor packages.}
 }
 \description{
 Tools to check and notify maintainers of all CRAN and bioconductor
