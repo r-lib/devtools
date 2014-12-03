@@ -67,21 +67,29 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     message("Updating ", nrow(old), " existing dependencies: ",
       paste(old[, "Package"], collapse = ", "))
     utils::install.packages(old[, "Package"], libpath, repos = repos, type = type,
-      Ncpus = threads, quiet = TRUE)
+      Ncpus = threads, quiet = TRUE, dependencies  = FALSE)
   }
 
-  # Install missing dependencies
-  deps <- unique(unlist(tools::package_dependencies(pkgs, packages(),
-    which = "all")))
+  # Install missing dependencies: need suggested packages for the packages
+  # we're checking, but only Depends and Imports for their dependencies.
+  find_deps <- function(pkgs, ...) {
+    all <- tools::package_dependencies(pkgs, db = available_bin, ...)
+    unique(unlist(all))
+  }
+  deps <- find_deps(pkgs, "most")
+  deps <- c(deps, find_deps(deps, c("Depends", "Imports"), recursive = TRUE))
+
   to_install <- setdiff(deps, installed.packages()[, 1])
   known <- intersect(to_install, rownames(available_bin))
   unknown <- setdiff(to_install, rownames(available_bin))
 
   if (length(known) > 0) {
-    message("Installing ", length(known), " missing dependencies: ",
-      paste(known, collapse = ", "))
-    utils::install.packages(known, lib = libpath, quiet = TRUE, repos = repos,
-      Ncpus = threads)
+    message("Installing ", length(known), " missing dependencies")
+    lapply(known, function(pkg) {
+      message("Installing ", pkg)
+      utils::install.packages(pkg, lib = libpath, quiet = TRUE, repos = repos,
+        dependencies = FALSE)
+    })
   }
   if (length(unknown) > 0) {
     message("No binary packages available for dependenices: ",
