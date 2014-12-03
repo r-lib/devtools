@@ -30,7 +30,8 @@ revdep_check_save_logs <- function(res, log_dir = "revdep") {
 #' @export
 revdep_check_summary <- function(res) {
   plat <- platform_info()
-  plat_df <- df <- data.frame(setting = names(plat), value = unlist(plat))
+  plat_df <- data.frame(setting = names(plat), value = unlist(plat))
+  rownames(plat_df) <- NULL
 
   # Find all dependencies
   deps <- res$pkg[c("imports", "depends", "linkingto", "suggests")]

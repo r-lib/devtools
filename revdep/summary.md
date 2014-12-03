@@ -2,14 +2,14 @@
 
 ## Platform
 
-|         |setting  |value                        |
-|:--------|:--------|:----------------------------|
-|version  |version  |R version 3.1.1 (2014-07-10) |
-|system   |system   |x86_64, darwin13.1.0         |
-|ui       |ui       |RStudio (0.99.85)            |
-|language |language |(EN)                         |
-|collate  |collate  |en_US.UTF-8                  |
-|tz       |tz       |America/Chicago              |
+|setting  |value                        |
+|:--------|:----------------------------|
+|version  |R version 3.1.1 (2014-07-10) |
+|system   |x86_64, darwin13.1.0         |
+|ui       |RStudio (0.99.85)            |
+|language |(EN)                         |
+|collate  |en_US.UTF-8                  |
+|tz       |America/Chicago              |
 
 ## Packages
 
