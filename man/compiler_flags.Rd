@@ -7,11 +7,11 @@ compiler_flags(debug = FALSE)
 }
 \arguments{
 \item{debug}{If \code{TRUE} adds \code{-g -O0} to all flags
-(Adding \env{PKG_FFLAGS} and \env{PKG_FCFLAGS}}
+(Adding \env{FFLAGS} and \env{FCFLAGS}}
 }
 \description{
 These default flags enforce good coding practice by ensuring that
-\env{PKG_CFLAGS} and \env{PKG_CXXFLAGS} are set to \code{-Wall -pedantic}.
+\env{CFLAGS} and \env{CXXFLAGS} are set to \code{-Wall -pedantic}.
 These tests are run by cran and are generally considered to be good practice.
 }
 \details{
