@@ -75,6 +75,8 @@ print.maintainers <- function(x, ...) {
 #' a directory for these packages and set \code{option(devtools.libpath)}.
 #'
 #' @inheritParams revdep
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
 #' @inheritParams check_cran
 #' @seealso \code{\link{revdep_maintainers}()} to run R CMD check on all reverse
 #'   dependencies.
@@ -90,19 +92,23 @@ print.maintainers <- function(x, ...) {
 #' revdep_check_summary(res)
 #' revdep_check_save_logs(res)
 #' }
-revdep_check <- function(pkg, recursive = FALSE, ignore = NULL,
+revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
                          libpath = getOption("devtools.revdep.libpath"),
                          srcpath = libpath, bioconductor = FALSE,
                          type = getOption("pkgType"),
                          threads = getOption("Ncpus", 1),
                          check_dir = tempfile("check_cran")) {
-  if (missing(pkg)) pkg <- as.package(".")$package
+  pkg <- as.package(".")
+  rule("Reverse dependency checks for ", pkg$package, pad = "=")
 
-  rule("Finding reverse dependencies")
-  pkgs <- revdep(pkg, recursive = recursive, ignore = ignore,
+  message("Installing ", pkg$package)
+  with_libpaths(libpath, install(pkg, reload = FALSE, quiet = TRUE))
+
+  message("Finding reverse dependencies")
+  pkgs <- revdep(pkg$package, recursive = recursive, ignore = ignore,
     bioconductor = bioconductor, dependencies = dependencies)
-  res <- check_cran(pkgs, revdep_pkg = pkg, libpath = libpath,
+  res <- check_cran(pkgs, revdep_pkg = pkg$package, libpath = libpath,
     srcpath = srcpath, bioconductor = bioconductor, type = type,
     threads = threads, check_dir = check_dir)
 
