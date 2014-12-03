@@ -168,7 +168,7 @@ github_resolve_ref.github_pull <- function(x, params) {
   path <- file.path("repos", params$username, params$repo, "pulls", x)
   response <- github_GET(path)
 
-  params$username <- response$user$login
+  params$username <- response$head$user$login
   params$ref <- response$head$ref
   params
 }
