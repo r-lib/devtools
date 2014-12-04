@@ -20,7 +20,6 @@ system_check <- function(cmd, args = character(), env = character(),
   }
 
   if (!identical(as.character(status), "0")) {
-    if (quiet) message(wrap_command(full))
     stop("Command failed (", status, ")", call. = FALSE)
   }
 
