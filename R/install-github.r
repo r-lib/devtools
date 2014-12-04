@@ -19,7 +19,7 @@
 #'   you can easily delete a PAT without affecting any others. Defaults to
 #'   the \code{GITHUB_PAT} environment variable.
 #' @param host Github API host to use. Override with your github enterprise
-#'   hostname.
+#'   hostname, for example, \code{"github.hostname.com/api/v3"}.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @export
 #' @family package installation
