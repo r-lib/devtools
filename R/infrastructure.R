@@ -428,6 +428,30 @@ use_readme_rmd <- function(pkg = ".") {
   invisible(TRUE)
 }
 
+#' @rdname infrastructure
+#' @section \code{use_travis}:
+#' Add basic travis template to a package. Also adds \code{.travis.yml} to
+#' \code{.Rbuildignore} so it isn't included in the built package.
+#' @export
+#' @aliases add_travis
+use_revdep <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  message("Creating revdep/ & adding to .Rbuildignore")
+  dir.create(file.path(pkg$path, "revdep"), showWarnings = FALSE)
+  use_build_ignore("revdep", pkg = pkg)
+
+  message("Add revdep subdirectories to .gitigore")
+  path <- file.path(pkg$path, "revdep", ".gitignore")
+  union_write(path, "**/")
+
+  if (!file.exists("revdep/check.R")) {
+    message("Adding revdep/check.R template")
+    writeLines(render_template("revdep.R", list(name = pkg$package)),
+      file.path(pkg$path, "revdep", "check.R"))
+  }
+}
+
 add_build_ignore <- function(pkg = ".", files, escape = TRUE) {
   use_build_ignore(files, escape = escape, pkg = pkg)
 }

@@ -6,6 +6,7 @@
 \alias{infrastructure}
 \alias{use_package_doc}
 \alias{use_rcpp}
+\alias{use_revdep}
 \alias{use_rstudio}
 \alias{use_testthat}
 \alias{use_travis}
@@ -23,6 +24,8 @@ use_rcpp(pkg = ".")
 use_travis(pkg = ".")
 
 use_package_doc(pkg = ".")
+
+use_revdep(pkg = ".")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -69,6 +72,12 @@ Add basic travis template to a package. Also adds \code{.travis.yml} to
 \section{\code{use_package_doc}}{
 
 Adds a roxygen template for package documentation
+}
+
+\section{\code{use_travis}}{
+
+Add basic travis template to a package. Also adds \code{.travis.yml} to
+\code{.Rbuildignore} so it isn't included in the built package.
 }
 \seealso{
 Other infrastructure: \code{\link{add_build_ignore}},
