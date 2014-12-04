@@ -111,7 +111,7 @@ check_logs <- function(path) {
   paths[grepl("(fail|out|log)$", paths)]
 }
 
-check_failures <- function(path, error = TRUE, warning = TRUE, note = FALSE) {
+check_failures <- function(path, error = TRUE, warning = TRUE, note = TRUE) {
   check_dir <- file.path(path, "00check.log")
   check_log <- paste(readLines(check_dir), collapse = "\n")
 
