@@ -60,40 +60,39 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   libpaths_orig <- set_libpaths(libpath)
   on.exit(.libPaths(libpaths_orig), add = TRUE)
 
-  # Make sure existing dependencies are up to date ---------------------------
-  old <- old.packages(libpath, repos = repos, type = type,
-    available = available_bin)
-  if (!is.null(old)) {
-    message("Updating ", nrow(old), " existing dependencies: ",
-      paste(old[, "Package"], collapse = ", "))
-    utils::install.packages(old[, "Package"], libpath, repos = repos, type = type,
-      Ncpus = threads, quiet = TRUE, dependencies  = FALSE)
-  }
-
-  # Install missing dependencies: need suggested packages for the packages
-  # we're checking, but only Depends and Imports for their dependencies.
+  # Update/install dependencies ------------------------------------------------
+  # Find all dependencies of reverse dependencies: need suggested packages for
+  # the packages we're checking, but only Depends and Imports for their
+  # dependencies.
   find_deps <- function(pkgs, ...) {
     all <- tools::package_dependencies(pkgs, db = available_bin, ...)
     unique(unlist(all))
   }
   deps <- find_deps(pkgs, "most")
   deps <- c(deps, find_deps(deps, c("Depends", "Imports"), recursive = TRUE))
-  deps <- sort(unique(deps))
 
-  to_install <- setdiff(deps, installed.packages()[, 1])
+  # Install if out of date or not already installed
+  old <- old.packages(repos = repos, type = type,
+    available = available_bin)[, "Package"]
+  inst <- installed.packages()[, "Package"]
+  to_install <- sort(union(
+    intersect(deps, old),
+    setdiff(deps, inst)
+  ))
+
   known <- intersect(to_install, rownames(available_bin))
   unknown <- setdiff(to_install, rownames(available_bin))
 
   if (length(known) > 0) {
-    message("Installing ", length(known), " missing dependencies")
+    message("Installing ", length(known), " missing/outdated dependencies")
     lapply(known, function(pkg) {
       message("Installing ", pkg)
-      utils::install.packages(pkg, lib = libpath, quiet = TRUE, repos = repos,
+      utils::install.packages(pkg, quiet = TRUE, repos = repos,
         dependencies = FALSE)
     })
   }
   if (length(unknown) > 0) {
-    message("No binary packages available for dependenices: ",
+    message("Skipping packages that lack binary version for this platform: \n",
       paste(unknown, collapse = ", "))
   }
 
