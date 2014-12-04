@@ -28,7 +28,7 @@ revdep_check_save_logs <- function(res, log_dir = "revdep") {
 
 #' @rdname revdep_check
 #' @export
-revdep_save_check_summary <- function(res, log_dir) {
+revdep_check_save_summary <- function(res, log_dir = "revdep") {
   writeLines(revdep_check_summary(res), file.path(log_dir, "summary.md"))
 }
 
@@ -57,7 +57,8 @@ revdep_check_summary <- function(res) {
     "## Packages\n\n",
     paste(knitr::kable(pkg_df), collapse = "\n"),
     "\n\n",
-    "# Check results\n\n",
+    "# Check results\n",
+    paste0(length(checks), " out of ", length(res$deps), "\n\n"),
     paste0(summaries, collapse = "\n")
   )
 }
