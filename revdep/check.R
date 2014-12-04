@@ -4,5 +4,5 @@ library("devtools")
 # development, so we're probably save skipping them.
 res <- revdep_check(dependencies = c("Depends", "Imports"))
 
-writeLines(revdep_check_summary(res), "revdep/summary.md")
+revdep_check_save_summary(res)
 revdep_check_save_logs(res)

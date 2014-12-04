@@ -28,6 +28,12 @@ revdep_check_save_logs <- function(res, log_dir = "revdep") {
 
 #' @rdname revdep_check
 #' @export
+revdep_save_check_summary <- function(res, log_dir) {
+  writeLines(revdep_check_summary(res), file.path(log_dir, "summary.md"))
+}
+
+#' @rdname revdep_check
+#' @export
 revdep_check_summary <- function(res) {
   plat <- platform_info()
   plat_df <- data.frame(setting = names(plat), value = unlist(plat))

@@ -3,9 +3,12 @@
 \alias{revdep_check}
 \alias{revdep_check_save_logs}
 \alias{revdep_check_summary}
+\alias{revdep_save_check_summary}
 \title{Run R CMD check on all downstream dependencies.}
 \usage{
 revdep_check_save_logs(res, log_dir = "revdep")
+
+revdep_save_check_summary(res, log_dir)
 
 revdep_check_summary(res)
 
