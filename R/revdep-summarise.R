@@ -58,7 +58,7 @@ revdep_check_summary <- function(res) {
     paste(knitr::kable(pkg_df), collapse = "\n"),
     "\n\n",
     "# Check results\n",
-    paste0(length(checks), " out of ", length(res$deps), "\n\n"),
+    paste0(length(checks), " checked out of ", length(res$deps), " dependencies \n\n"),
     paste0(summaries, collapse = "\n")
   )
 }
