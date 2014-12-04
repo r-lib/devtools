@@ -104,6 +104,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
 
   message("Installing ", pkg$package)
   with_libpaths(libpath, install(pkg, reload = FALSE, quiet = TRUE))
+  on.exit(remove.packages(pkg$package, libpath), add = TRUE)
 
   message("Finding reverse dependencies")
   pkgs <- revdep(pkg$package, recursive = recursive, ignore = ignore,
