@@ -451,6 +451,25 @@ use_revdep <- function(pkg = ".") {
   }
 }
 
+#' @rdname infrastructure
+#' @section \code{use_cran_comments}:
+#' Add \code{cran-comments.md} template.
+#' @export
+#' @aliases add_travis
+use_cran_comments <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  use_build_ignore("cran-comments.md")
+
+  comments <- file.path(pkg$path, "cran-comments.md")
+  if (file.exists(comments))
+    stop("cran-comments.md already exists", call. = FALSE)
+
+  message("Adding cran-comments.md template")
+  writeLines(render_template("cran-comments.md", list()), comments)
+  invisible()
+}
+
 add_build_ignore <- function(pkg = ".", files, escape = TRUE) {
   use_build_ignore(files, escape = escape, pkg = pkg)
 }

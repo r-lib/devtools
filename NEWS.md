@@ -5,6 +5,9 @@
   `revdep_check_summary()`. You can specify a standard libpath to use
   when checking with `options("devtools.revdep.libpath")`. `use_revdep()`
   sets up a standard directory structure for you.
+  
+* `use_cran_comments()` creates a `cran-comments.md` template for you
+  to help with CRAN submissions (#661)
 
 * `with_debug()` and `compiler_flags()` set `CFLAGS` etc instead of 
   `PKG_CFLAGS`. `PKG_*` are for packages to use, the raw values are for users
