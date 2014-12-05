@@ -12,7 +12,7 @@ revdep_check_save_logs <- function(res, log_dir = "revdep") {
     logs <- check_logs(path)
     new_dirs <- setdiff(unique(dirname(logs)), ".")
     if (length(new_dirs) > 0) {
-      dir.create(file.path(out, new_dirs), recursive = TRUE, showWarnings = FALSE)
+      lapply(file.path(out, new_dirs), dir.create, recursive = TRUE, showWarnings = FALSE)
     }
 
     file.copy(file.path(path, logs), file.path(out, logs))
