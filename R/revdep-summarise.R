@@ -68,9 +68,8 @@ check_summary_package <- function(path) {
 
   header <- paste0(
     "## ", pkg$Package, " (", pkg$Version, ")\n",
-    "Maintainer: ", pkg$Maintainer, "\n",
-    if (!is.null(pkg$BugReports)) paste0("Bug reports: ", pkg$BugReports),
-    "\n"
+    "Maintainer: ", pkg$Maintainer, "\n\n",
+    if (!is.null(pkg$BugReports)) paste0("Bug reports: ", pkg$BugReports, "\n\n")
   )
 
 
@@ -99,7 +98,8 @@ check_dirs <- function(path) {
   checkdirs <- checkdirs[grepl("\\.Rcheck$", checkdirs)]
   names(checkdirs) <- sub("\\.Rcheck$", "", basename(checkdirs))
 
-  checkdirs
+  has_src <- file.exists(file.path(checkdirs, "00_pkg_src", names(checkdirs)))
+  checkdirs[has_src]
 }
 
 check_description <- function(path) {

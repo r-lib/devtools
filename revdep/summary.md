@@ -41,13 +41,17 @@ __OK__
 
 ## gender (0.4.2)
 Maintainer: Lincoln Mullen <lincoln@lincolnmullen.com>
+
 Bug reports: https://github.com/ropensci/gender/issues
+
 
 __OK__
 
 ## opencpu (1.4.5)
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
+
 Bug reports: http://github.com/jeroenooms/opencpu/issues
+
 
 ```
 checking package dependencies ... NOTE
