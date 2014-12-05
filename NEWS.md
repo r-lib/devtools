@@ -1,5 +1,7 @@
 # devtools 1.X
 
+* Fixed scoping issues with `unzip()`.
+
 * `revdep_check()` is now quieter, because it's accompanied by two other
   functions for capturing the results, `revdep_check_save_logs()` and 
   `revdep_check_summary()`. You can specify a standard libpath to use
