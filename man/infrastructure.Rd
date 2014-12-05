@@ -4,6 +4,7 @@
 \alias{add_test_infrastructure}
 \alias{add_travis}
 \alias{infrastructure}
+\alias{use_cran_comments}
 \alias{use_package_doc}
 \alias{use_rcpp}
 \alias{use_revdep}
@@ -26,6 +27,8 @@ use_travis(pkg = ".")
 use_package_doc(pkg = ".")
 
 use_revdep(pkg = ".")
+
+use_cran_comments(pkg = ".")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -77,6 +80,11 @@ Adds a roxygen template for package documentation
 \section{\code{use_revdep}}{
 
 Add \code{revdep} directory and basic check template.
+}
+
+\section{\code{use_cran_comments}}{
+
+Add \code{cran-comments.md} template.
 }
 \seealso{
 Other infrastructure: \code{\link{add_build_ignore}},
