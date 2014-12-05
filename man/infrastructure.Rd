@@ -74,10 +74,9 @@ Add basic travis template to a package. Also adds \code{.travis.yml} to
 Adds a roxygen template for package documentation
 }
 
-\section{\code{use_travis}}{
+\section{\code{use_revdep}}{
 
-Add basic travis template to a package. Also adds \code{.travis.yml} to
-\code{.Rbuildignore} so it isn't included in the built package.
+Add \code{revdep} directory and basic check template.
 }
 \seealso{
 Other infrastructure: \code{\link{add_build_ignore}},

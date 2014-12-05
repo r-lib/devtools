@@ -429,9 +429,8 @@ use_readme_rmd <- function(pkg = ".") {
 }
 
 #' @rdname infrastructure
-#' @section \code{use_travis}:
-#' Add basic travis template to a package. Also adds \code{.travis.yml} to
-#' \code{.Rbuildignore} so it isn't included in the built package.
+#' @section \code{use_revdep}:
+#' Add \code{revdep} directory and basic check template.
 #' @export
 #' @aliases add_travis
 use_revdep <- function(pkg = ".") {
