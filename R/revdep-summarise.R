@@ -66,17 +66,22 @@ revdep_check_summary <- function(res) {
 check_summary_package <- function(path) {
   pkg <- check_description(path)
 
-  header <- paste0("## ", pkg$Package, " (", pkg$Version, ")\n")
+  header <- paste0(
+    "## ", pkg$Package, " (", pkg$Version, ")\n",
+    "Maintainer: ", pkg$Maintainer, "\n",
+    if (!is.null(pkg$BugReports)) paste0("Bug reports: ", pkg$BugReports),
+    "\n"
+  )
+
 
   failures <- check_failures(path)
   if (length(failures) == 0) {
     status <- "__OK__\n"
   } else {
     status <- paste0(
-      "* \n",
-      "    ```\n",
-      indent(failures), "\n",
-      "    ```\n", collapse = "")
+      "```\n",
+      failures, "\n",
+      "```\n", collapse = "")
   }
 
   time <- paste0("Completed in ", check_time(path), "s\n")

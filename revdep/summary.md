@@ -34,27 +34,33 @@
 4 checked out of 4 dependencies 
 
 ## bisectr (0.1.0)
+Maintainer: Winston Chang <winston@stdout.org>
+
 
 __OK__
 
 ## gender (0.4.2)
+Maintainer: Lincoln Mullen <lincoln@lincolnmullen.com>
+Bug reports: https://github.com/ropensci/gender/issues
 
 __OK__
 
 ## opencpu (1.4.5)
+Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>
+Bug reports: http://github.com/jeroenooms/opencpu/issues
 
-* 
-    ```
-    checking package dependencies ... NOTE
-    Package suggested but not available for checking: ‘RAppArmor’
-    ```
+```
+checking package dependencies ... NOTE
+Package suggested but not available for checking: ‘RAppArmor’
+```
 
 ## rbundler (0.3.7)
+Maintainer: Yoni Ben-Meshulam <yoni.bmesh@gmail.com>
 
-* 
-    ```
-    checking R code for possible problems ... NOTE
-    install_version: no visible global function definition for
-      ‘install_url’
-    ```
+
+```
+checking R code for possible problems ... NOTE
+install_version: no visible global function definition for
+  ‘install_url’
+```
 
