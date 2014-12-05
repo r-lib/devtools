@@ -66,12 +66,17 @@ revdep_check_summary <- function(res) {
 check_summary_package <- function(path) {
   pkg <- check_description(path)
 
+  meta <- c(
+    "Maintainer" = pkg$Maintainer,
+    "Bug reports" = pkg$BugReports
+  )
+  meta_string <- paste(names(meta), ": ", meta, collapse = "  \n", sep = "")
+
   header <- paste0(
     "## ", pkg$Package, " (", pkg$Version, ")\n",
-    "Maintainer: ", pkg$Maintainer, "\n\n",
-    if (!is.null(pkg$BugReports)) paste0("Bug reports: ", pkg$BugReports, "\n\n")
+    meta_string,
+    "\n"
   )
-
 
   failures <- check_failures(path)
   if (length(failures) == 0) {
