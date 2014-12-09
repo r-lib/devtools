@@ -69,6 +69,11 @@ release <- function(pkg = ".", check = TRUE) {
     }
   }
 
+  rule("cran-comments.md ")
+  cat(cran_comments(pkg), "\n\n")
+  if (yesno("Are the CRAN submission comments correct?"))
+    return(invisible())
+
   policies <- paste("Have you read and do you agree to the CRAN policies?",
     "\n(http://cran.r-project.org/web/packages/policies.html)")
   if (yesno(policies))
@@ -107,11 +112,6 @@ release <- function(pkg = ".", check = TRUE) {
   }
 
   if (yesno("Is your email address ", maintainer(pkg)$email, "?"))
-    return(invisible())
-
-  rule("cran-comments.md ")
-  cat(cran_comments(pkg), "\n\n")
-  if (yesno("Are the CRAN submission comments correct?"))
     return(invisible())
 
   if (yesno("Ready to submit?"))
