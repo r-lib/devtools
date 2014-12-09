@@ -69,7 +69,7 @@ release <- function(pkg = ".", check = TRUE) {
     }
   }
 
-  policies <- paste("Have you read and do you agree to the the CRAN policies?",
+  policies <- paste("Have you read and do you agree to the CRAN policies?",
     "\n(http://cran.r-project.org/web/packages/policies.html)")
   if (yesno(policies))
     return(invisible())
@@ -222,8 +222,10 @@ cran_comments <- function(pkg = ".") {
   path <- file.path(pkg$path, "cran-comments.md")
   if (!file.exists(path)) {
     stop("Can't find cran-comments.md in ", pkg$package, ".\n",
-      "This file for comments for package submission and must exist.\n",
-      "Please create and add to .Rbuildignore (with add_build_ignore())",
+      "This file gives CRAN volunteers comments about the submission,\n"
+      "and it must exist.  Please create it using this guide:\n",
+      "http://r-pkgs.had.co.nz/release.html#release-check",
+      "Then run use_build_ignore('cran-comments.md')",
       call. = FALSE)
   }
 
@@ -235,7 +237,7 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #' Submit a package to CRAN.
 #'
 #' This uses the new CRAN web-form submission process. After submission, you
-#' will recieve an email asking you to confirm submission - this is used
+#' will receive an email asking you to confirm submission - this is used
 #' to check that the package is submitted by the maintainer.
 #'
 #' It's recommend that you use \code{\link{release}()} rather than this
