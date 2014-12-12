@@ -67,6 +67,17 @@ print.maintainers <- function(x, ...) {
 #' dependencies. Summarises the results with \code{revdep_check_summary} and
 #' save logs with \code{revdep_check_save_logs}.
 #'
+#' @section Check process:
+#' \enumerate{
+#' \item Install \code{pkg} (in special library, see below).
+#' \item Find all CRAN packges that dependent on \code{pkg}.
+#' \item Install those packages, along with their dependencies.
+#' \item Run \code{R CMD check} on each package.
+#' \item Uninstall \code{pkg} (so other reverse dependency checks don't
+#'   use the development version instead of the CRAN version)
+#' }
+#'
+#' @section Package library:
 #' By default \code{revdep_check} uses temporary library to store any packages
 #' that are required by the packages being tested. This ensures that they don't
 #' interfere with your default library, but means that if you restart R
@@ -75,8 +86,7 @@ print.maintainers <- function(x, ...) {
 #' a directory for these packages and set \code{option(devtools.libpath)}.
 #'
 #' @inheritParams revdep
-#' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
+#' @param pkg Path to package. Defaults to current directory.
 #' @inheritParams check_cran
 #' @seealso \code{\link{revdep_maintainers}()} to run R CMD check on all reverse
 #'   dependencies.
