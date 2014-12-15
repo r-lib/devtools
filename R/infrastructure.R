@@ -428,6 +428,48 @@ use_readme_rmd <- function(pkg = ".") {
   invisible(TRUE)
 }
 
+#' @rdname infrastructure
+#' @section \code{use_revdep}:
+#' Add \code{revdep} directory and basic check template.
+#' @export
+#' @aliases add_travis
+use_revdep <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  message("Creating revdep/ & adding to .Rbuildignore")
+  dir.create(file.path(pkg$path, "revdep"), showWarnings = FALSE)
+  use_build_ignore("revdep", pkg = pkg)
+
+  message("Add revdep subdirectories to .gitigore")
+  path <- file.path(pkg$path, "revdep", ".gitignore")
+  union_write(path, "**/")
+
+  if (!file.exists("revdep/check.R")) {
+    message("Adding revdep/check.R template")
+    writeLines(render_template("revdep.R", list(name = pkg$package)),
+      file.path(pkg$path, "revdep", "check.R"))
+  }
+}
+
+#' @rdname infrastructure
+#' @section \code{use_cran_comments}:
+#' Add \code{cran-comments.md} template.
+#' @export
+#' @aliases add_travis
+use_cran_comments <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  use_build_ignore("cran-comments.md")
+
+  comments <- file.path(pkg$path, "cran-comments.md")
+  if (file.exists(comments))
+    stop("cran-comments.md already exists", call. = FALSE)
+
+  message("Adding cran-comments.md template")
+  writeLines(render_template("cran-comments.md", list()), comments)
+  invisible()
+}
+
 add_build_ignore <- function(pkg = ".", files, escape = TRUE) {
   use_build_ignore(files, escape = escape, pkg = pkg)
 }
