@@ -93,7 +93,7 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   if (!quiet) message("Loading ", pkg$package)
 
   # Apply any @includes to update the Collate entry in the DESCRIPTION file
-  # Check that the roxygen2 version is oe that has update_collate fixed so it
+  # Check that the roxygen2 version is one that has update_collate fixed so it
   # does nothing if there are no @includes
   roxvc2 <- list(op = '>=', version = '4.1.0')
   roxvc3 <- c(list(name = 'roxygen2'), roxvc2)
