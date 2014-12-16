@@ -93,10 +93,22 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   if (!quiet) message("Loading ", pkg$package)
 
   # Apply any @includes to update the Collate entry in the DESCRIPTION file
-  # Presumes roxygen2::update_collate has been patched
-  # to do nothing if there are no @includes
+  # Check that the roxygen2 version is oe that has update_collate fixed so it
+  # does nothing if there are no @includes
+  roxvc2 <- list(op = '>=', version = '4.1.0')
+  roxvc3 <- c(list(name = 'roxygen2'), roxvc2)
+  # There is a discrepancy between the documentation of the versionCheck argument
+  # and the actual implementation as at R 3.1.2.  The documentation says
+  # versionCheck should have 2 components - the code expects 3.  The discrepancy
+  # will be corrected in a future release of R.  The following code is using
+  # a cautious approach - one of the version checks should be
+  # applied properly (and the other will return TRUE no matter what)!
+  if (! (requireNamespace('roxygen2', versionCheck = roxvc2, quietly = TRUE) &
+         requireNamespace('roxygen2', versionCheck = roxvc3, quietly = TRUE) )
+      ) stop("Please install a version of roxygen2 >= 4.1.0 ", call. = FALSE)
   roxygen2::update_collate(pkg$path)
   # Refresh the pkg structure with any updates to the Collate entry
+  # in the DESCRIPTION file
   pkg <- as.package(pkg$path)
 
 
