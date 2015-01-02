@@ -20,7 +20,7 @@ Imports:
     whisker,
     evaluate,
     digest,
-    rstudioapi,
+    rstudioapi (>= 0.2.0),
     jsonlite
 Suggests:
     testthat (>= 0.7),
