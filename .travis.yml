@@ -1,6 +1,8 @@
 language: c
 script: ./travis-tool.sh run_tests
 
+after_success:
+  - Rscript -e 'covr::coveralls()'
 after_failure:
   - ./travis-tool.sh dump_logs
 
@@ -11,6 +13,7 @@ before_install:
   - ./travis-tool.sh r_binary_install XML Rcpp knitr brew RUnit inline highlight formatR highr markdown rgl
   - ./travis-tool.sh install_github rstudio/rmarkdown
 install:
+  - ./travis-tool.sh github_package jimhester/covr
   - ./travis-tool.sh install_deps
   # Install testthat after running install_deps, otherwise devtools itself might be installed from CRAN or c2d4u
   - ./travis-tool.sh install_github hadley/testthat
