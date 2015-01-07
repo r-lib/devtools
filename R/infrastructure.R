@@ -156,7 +156,7 @@ use_coveralls <- function(pkg = ".") {
 
   travis_content <- readLines(file.path(pkg$path, ".travis.yml"))
 
-  if (any(grepl("covr::coveralls()", travis_content))) {
+  if (any(grepl("coveralls()", travis_content))) {
     stop("coveralls information already added to .travis.yml", call. = FALSE)
   }
 
@@ -175,7 +175,7 @@ use_coveralls <- function(pkg = ".") {
   after_failure_loc <- grep("^after_failure:$", travis_content)
   travis_content <- append(travis_content,
                                           c("after_success:",
-                                            "  - Rscript -e 'covr::coveralls()'"),
+                                            "  - Rscript -e 'library(covr);coveralls()'"),
                            after = after_failure_loc - 1)
   writeLines(travis_content, file.path(pkg$path, ".travis.yml"))
 }

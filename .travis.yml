@@ -2,7 +2,7 @@ language: c
 script: ./travis-tool.sh run_tests
 
 after_success:
-  - Rscript -e 'covr::coveralls()'
+  - Rscript -e 'library(covr);coveralls()'
 after_failure:
   - ./travis-tool.sh dump_logs
 
