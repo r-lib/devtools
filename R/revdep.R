@@ -109,7 +109,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          type = getOption("pkgType"),
                          threads = getOption("Ncpus", 1),
                          check_dir = tempfile("check_cran")) {
-  pkg <- as.package(path)
+  pkg <- as.package(pkg)
   rule("Reverse dependency checks for ", pkg$package, pad = "=")
 
   message("Installing ", pkg$package)
