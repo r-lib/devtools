@@ -18,6 +18,8 @@
 * `use_travis()` now sets an environment variable so that any WARNING will
   also cause the build to fail (#570).
 
+* New function `use_appveyor()` sets up a package for testing with AppVeyor (@krlmlr, #549).
+
 * `create()` now checks that the directory name is a valid package name (#610).
 
 * New function `setup()` that works like `create()` but assumes an
@@ -84,10 +86,6 @@
   
 * `use_travis()` now figures out your github username and repo so it can 
   construct the markdown for the build image. (#546)
-* New `use_appveyor()` sets up a package for testing with AppVeyor (@krlmlr, #549).
-
-* New function `install_svn()` to install an R package from a subversion
-  repository.
 
 * New `use_vignette()` creates a draft vignette using Rmarkdown (#572).
 
