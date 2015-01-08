@@ -24,7 +24,7 @@
 #'   \item \code{devtools.desc.suggests}: a character vector listing packages to
 #'     to add to suggests by defaults for new packages.
 #
-#'   \item \code{devtools.desc}: a named character vector listing any other
+#'   \item \code{devtools.desc}: a named list listing any other
 #'     extra options to add to \file{DESCRIPTION}
 #'
 #' }
@@ -41,7 +41,8 @@ NULL
     devtools.desc.author = '"First Last <first.last@example.com> [aut, cre]"',
     devtools.desc.license = "What license is it under?",
     devtools.desc.suggests = NULL,
-    devtools.desc = list()
+    devtools.desc = list(),
+    devtools.revdep.libpath = file.path(tempdir(), "R-lib")
   )
   toset <- !(names(op.devtools) %in% names(op))
   if(any(toset)) options(op.devtools[toset])

@@ -1,6 +1,12 @@
-The following notes were generated across my local OS X install, ubuntu running on travis-ci and win builder. Response to NOTEs across three platforms below.
+This is a resubmission of devtools 1.6.1, previous notes below. New changes:
 
-* I'm changing my maintainer email address to hadley@rstudio.com
+* devtools avoids non-portable compiler flags on Solaris.
+
+--------------------------------------------------------------------------------
+
+This is a minor patch release to fix two problems encountered with interactive usage of devtools.
+
+The following notes were generated across my local OS X install, ubuntu running on travis-ci and win builder. Response to NOTEs across three platforms below.
 
 * checking dependencies in R code ... NOTE
   Namespace in Imports field not imported from: ‘memoise’
@@ -17,5 +23,3 @@ The following notes were generated across my local OS X install, ubuntu running 
 
   These are needed because devtools simulates package loading, and hence
   needs to attach environments to the search path.
-
-We also ran R CMD check on all reverse dependencies for r-release: https://github.com/wch/checkresults/tree/master/devtools/r-release. There were no failures.
