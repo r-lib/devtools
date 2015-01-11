@@ -1,5 +1,8 @@
 # devtools 1.X
 
+* `check_coverage()` to check the test coverage of a package. (@jimhester,
+  #695)
+
 * Fixed scoping issues with `unzip()`.
 
 * `revdep_check()` is now quieter, because it's accompanied by two other
