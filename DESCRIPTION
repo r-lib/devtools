@@ -29,5 +29,6 @@ Suggests:
     Rcpp (>= 0.10.0),
     MASS,
     rmarkdown,
-    knitr
+    knitr,
+    covr
 License: GPL (>= 2)
