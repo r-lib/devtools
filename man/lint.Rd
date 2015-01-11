@@ -10,7 +10,7 @@ lint(pkg = ".", ...)
 \item{pkg}{package description, can be path or package name. See
 \code{\link{as.package}} for more information}
 
-\item{...}{additional arguments passed to \code{\link{lintr::lint_package}}}
+\item{...}{additional arguments passed to \code{\link[lintr]{lint_package}}}
 }
 \description{
 The default lintings correspond to the style guide at
@@ -18,6 +18,6 @@ The default lintings correspond to the style guide at
 override any or all of them using the \code{linters} parameter.
 }
 \seealso{
-\code{\link{lintr::lint_package}}, \code{\link{lintr::lint}}
+\code{\link[lintr]{lint_package}}, \code{\link[lintr]{lint}}
 }
 

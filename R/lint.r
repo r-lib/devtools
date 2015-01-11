@@ -5,8 +5,8 @@
 #' override any or all of them using the \code{linters} parameter.
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information
-#' @param ... additional arguments passed to \code{\link{lintr::lint_package}}
-#' @seealso \code{\link{lintr::lint_package}}, \code{\link{lintr::lint}}
+#' @param ... additional arguments passed to \code{\link[lintr]{lint_package}}
+#' @seealso \code{\link[lintr]{lint_package}}, \code{\link[lintr]{lint}}
 #' @export
 lint <- function(pkg = ".", ...) {
   check_lintr()
