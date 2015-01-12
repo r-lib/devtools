@@ -83,6 +83,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   }
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
 
+  built_path <- normalizePath(built_path, winslash = "/")
   R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""),
     quiet = quiet)
 
