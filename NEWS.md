@@ -1,5 +1,7 @@
 # devtools 1.X
 
+* `missing_s3()` works once again (#672)
+
 * `session_info()` gains `include_base` argument to also display loaded/attached
   base packages (#646).
 
