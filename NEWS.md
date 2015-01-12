@@ -71,6 +71,10 @@
 * `use_readme_rmd()` makes it easier to generate a `README.md` from 
   `README.Rmd`.
 
+* When installing a pull request, `install_github` now uses the repository
+  associated with the pull request's branch (and not the repository of the user
+  who created the pull request) (#658, @krlmlr).
+
 # devtools 1.6.1
 
 * Don't set non-portable compiler flags on Solaris.
