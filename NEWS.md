@@ -1,9 +1,5 @@
 # devtools 1.X
 
-* `load_code()` now executes the package's code with the package's root as
-  working directory, just like `R CMD build` et al. (#640, @krlmlr).
-
-* `missing_s3()` works once again (#672)
 ## Improve reverse dependency checking
 
 Devtools now supports a new and improved style of revdep checking with `use_revdep()`. This creates a new directory called `revdep` which contains a `check.R` template. Run this template to check all reverse dependencies, and save summarised results to `check/summary.md`. You can then check this file into git, making it much easier to track how reverse dependency results change between versions. The documentation for `revdep_check()` is much improved, and should be more useful (#635)
@@ -78,6 +74,9 @@ I've also tweaked the output of `revdep_maintainers()` so it's easier to copy an
 * `missing_s3()` works once again (#672)
 
 * Fixed scoping issues with `unzip()`.
+
+* `load_code()` now executes the package's code with the package's root as
+  working directory, just like `R CMD build` et al. (#640, @krlmlr).
 
 # devtools 1.6.1
 
