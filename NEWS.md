@@ -3,6 +3,11 @@
 * `release()` no longer asks if you've read the CRAN policies since the 
   CRAN submission process now asks the same question (#692).
 
+* `check_coverage()` to check the test coverage of a package. (@jimhester,
+  #695)
+* `lint()` runs `lintr::lint_package()` to check style consistency and errors
+in a package. (@jimhester, #694)
+
 * Fixed scoping issues with `unzip()`.
 
 * `revdep_check()` is now quieter, because it's accompanied by two other
@@ -33,6 +38,13 @@
   * Checking that you don't depend on a development version of a package.
   
   * Checking that the version number has exactly three components (#633).
+
+* `release()` now builds packages without the `--no-manual` switch, both for
+  checking and for actually building the release package (#603, @krlmlr).
+
+  * `build()` gains an additional argument `manual`, defaults to `FALSE`.
+
+  * `check()` gains an ellipsis `...` which is passed unmodified to `build()`.
 
 * Removed deprecated `doc_clean` argument to `check()`.
 
