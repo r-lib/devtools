@@ -15,8 +15,8 @@
 #'   the parent directory of the package.
 #' @param binary Produce a binary (\code{--binary}) or source (
 #'   \code{--no-manual --no-resave-data}) version of the package.
-#' @param vignettes For source packages: if \code{FALSE}, don't build PDF
-#'   vignettes (\code{--no-vignettes}).
+#' @param vignettes,manual For source packages: if \code{FALSE}, don't build PDF
+#'   vignettes (\code{--no-vignettes}) or manual (\code{--no-manual}).
 #' @param args An optional character vector of additional command
 #'   line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},
 #'   or \code{R CMD install} if \code{binary = TRUE}.
@@ -26,7 +26,7 @@
 #' @return a string giving the location (including file name) of the built
 #'  package
 build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
-                  args = NULL, quiet = FALSE) {
+                  manual = FALSE, args = NULL, quiet = FALSE) {
   pkg <- as.package(pkg)
   check_build_tools(pkg)
 
@@ -42,7 +42,11 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
       paste0(args, collapse = " "))
     ext <- if (.Platform$OS.type == "windows") "zip" else "tgz"
   } else {
-    args <- c(args, "--no-manual", "--no-resave-data")
+    args <- c(args, "--no-resave-data")
+
+    if (!manual) {
+      args <- c(args, "--no-manual")
+    }
 
     if (!vignettes) {
       args <- c(args, "--no-build-vignettes")
@@ -105,7 +109,7 @@ build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
   lapply(url, RCurl::ftpUpload, what = built_path)
 
   if (!quiet) {
-    message("Check your email for a link to the built package",
+    message("Check ", maintainer(pkg)$email, " for a link to the built package",
             if (length(version) > 1) "s" else "",
             " in 30-60 mins.")
   }

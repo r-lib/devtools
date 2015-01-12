@@ -34,12 +34,14 @@ dev_packages <- function() {
 #' loaded) and include stuff you'd like to know (e.g., where a package was
 #' installed from).
 #'
+#' @param include_base Include base packages in summary? By default this is
+#'   false since base packages should always match the R version.
 #' @export
-session_info <- function() {
+session_info <- function(include_base = FALSE) {
   structure(
     list(
       platform = platform_info(),
-      packages = package_info()
+      packages = package_info(include_base = include_base)
     ),
     class = "session_info"
   )
@@ -79,35 +81,33 @@ print.platform_info <- function(x, ...) {
   print(df, right = FALSE, row.names = FALSE)
 }
 
-package_info <- function(include_base = FALSE) {
-  attached_pkg <- grep("^package:", search(), value = TRUE)
-  attached_pkg <- sub("^package:", "", attached_pkg)
-  loaded_pkg <- setdiff(loadedNamespaces(), attached_pkg)
-  attached <- rep(c(TRUE, FALSE), c(length(loaded_pkg), length(attached_pkg)))
+package_info <- function(pkgs = loadedNamespaces(), include_base = FALSE,
+                         libpath = NULL) {
+  if (!include_base) {
+    base <- vapply(pkgs, pkg_is_base, logical(1))
+    pkgs <- pkgs[!base]
+  }
+  pkgs <- sort(pkgs)
+  attached <- pkgs %in% sub("^package:", "", search())
 
-  pkgs <- data.frame(
-    package = c(loaded_pkg, attached_pkg),
+  desc <- lapply(pkgs, packageDescription, lib.loc = libpath)
+  version <- vapply(desc, function(x) x$Version, character(1))
+  date <- vapply(desc, pkg_date, character(1))
+  source <- vapply(desc, pkg_source, character(1))
+
+  pkgs_df <- data.frame(
+    package = pkgs,
     `*` = ifelse(attached, "", "*"),
+    version = version,
+    date = date,
+    source = source,
     stringsAsFactors = FALSE,
     check.names = FALSE
   )
-  pkgs$version <- vapply(pkgs$package,
-    function(x) as.character(packageVersion(x)),
-    character(1)
-  )
+  rownames(pkgs_df) <- NULL
+  class(pkgs_df) <- c("packages_info", "data.frame")
 
-  if (!include_base) {
-    base <- vapply(pkgs$package, pkg_is_base, logical(1))
-    pkgs <- pkgs[!base, , drop = FALSE]
-  }
-
-  pkgs$date <- vapply(pkgs$package, pkg_date, character(1))
-  pkgs$source <- vapply(pkgs$package, pkg_source, character(1))
-
-  pkgs <- pkgs[order(pkgs$package), ]
-  rownames(pkgs) <- NULL
-  class(pkgs) <- c("packages_info", "data.frame")
-  pkgs[, c("package", "*", "version", "date", "source")]
+  pkgs_df
 }
 
 #' @export
@@ -120,9 +120,7 @@ pkg_is_base <- function(pkg) {
   !is.null(desc$Priority) && desc$Priority == "base"
 }
 
-pkg_date <- function(pkg) {
-  desc <- packageDescription(pkg)
-
+pkg_date <- function(desc) {
   if (!is.null(desc$`Date/Publication`)) {
     date <- desc$`Date/Publication`
   } else if (!is.null(desc$Built)) {
@@ -135,9 +133,7 @@ pkg_date <- function(pkg) {
   as.character(as.Date(strptime(date, "%Y-%m-%d")))
 }
 
-pkg_source <- function(pkg) {
-  desc <- packageDescription(pkg)
-
+pkg_source <- function(desc) {
   if (!is.null(desc$GithubSHA1)) {
     str <- paste0("Github (",
                   desc$GithubUsername, "/",

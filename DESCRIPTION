@@ -1,6 +1,6 @@
 Package: devtools
 Title: Tools to make developing R code easier
-Version: 1.6.0.9000
+Version: 1.6.1.9000
 Authors@R: as.person(c(
     "Hadley Wickham <hadley@rstudio.com> [aut, cre]",
     "Winston Chang [aut]",
@@ -20,14 +20,16 @@ Imports:
     whisker,
     evaluate,
     digest,
-    rstudioapi,
-    jsonlite
+    rstudioapi (>= 0.2.0),
+    jsonlite,
+    roxygen2 (>= 4.1.0)
 Suggests:
     testthat (>= 0.7),
-    roxygen2 (>= 4.0.2),
     BiocInstaller,
     Rcpp (>= 0.10.0),
     MASS,
     rmarkdown,
-    knitr
+    knitr,
+    lintr,
+    covr
 License: GPL (>= 2)

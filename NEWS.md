@@ -3,8 +3,44 @@
 * `load_code()` now executes the package's code with the package's root as
   working directory, just like `R CMD build` et al. (#640, @krlmlr).
 
+* `missing_s3()` works once again (#672)
+
+* `session_info()` gains `include_base` argument to also display loaded/attached
+  base packages (#646).
+
+* `load_all()` runs `roxygen2::update_collate()` before loading code. This
+  ensures that files are sourced in the way you expect, as defined by 
+  roxygen `@include` tags. If you don't have any `@include` tags, the
+  collate will be not be touched (#623).
+
+* `release()` no longer asks if you've read the CRAN policies since the 
+  CRAN submission process now asks the same question (#692).
+
+* `check_coverage()` to check the test coverage of a package. (@jimhester,
+  #695)
+
+* `lint()` runs `lintr::lint_package()` to check style consistency and errors
+  in a package. (@jimhester, #694)
+
+* Fixed scoping issues with `unzip()`.
+
+* `revdep_check()` is now quieter, because it's accompanied by two other
+  functions for capturing the results, `revdep_check_save_logs()` and 
+  `revdep_check_summary()`. You can specify a standard libpath to use
+  when checking with `options("devtools.revdep.libpath")`. `use_revdep()`
+  sets up a standard directory structure for you.
+  
+* `use_cran_comments()` creates a `cran-comments.md` template for you
+  to help with CRAN submissions (#661)
+
+* `with_debug()` and `compiler_flags()` set `CFLAGS` etc instead of 
+  `PKG_CFLAGS`. `PKG_*` are for packages to use, the raw values are for users
+  to set. (According to http://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Using-Makevars)
+
 * `use_travis()` now sets an environment variable so that any WARNING will
   also cause the build to fail (#570).
+
+* New function `use_appveyor()` sets up a package for testing with AppVeyor (@krlmlr, #549).
 
 * `create()` now checks that the directory name is a valid package name (#610).
 
@@ -19,6 +55,13 @@
   
   * Checking that the version number has exactly three components (#633).
 
+* `release()` now builds packages without the `--no-manual` switch, both for
+  checking and for actually building the release package (#603, @krlmlr).
+
+  * `build()` gains an additional argument `manual`, defaults to `FALSE`.
+
+  * `check()` gains an ellipsis `...` which is passed unmodified to `build()`.
+
 * Removed deprecated `doc_clean` argument to `check()`.
 
 * Initial package version in `create()` is now `0.0.0.9000` (#632).
@@ -32,6 +75,10 @@
 
 * `use_readme_rmd()` makes it easier to generate a `README.md` from 
   `README.Rmd`.
+
+* When installing a pull request, `install_github` now uses the repository
+  associated with the pull request's branch (and not the repository of the user
+  who created the pull request) (#658, @krlmlr).
 
 # devtools 1.6.1
 
@@ -198,6 +245,9 @@
 * The `fresh` argument to `test()` has been removed - this is best done by 
   the editor since it can run the tests in a completely clean environment
   by starting a new R session.
+
+* `compile_dll()` can now build packages located in R's `tempdir()`
+  directory (@richfitz, #531).
 
 # devtools 1.5
 

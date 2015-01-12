@@ -5,7 +5,7 @@
 remove_s4_classes <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  classes <- getClasses(ns_env(pkg))
+  classes <- methods::getClasses(ns_env(pkg))
   lapply(classes, remove_s4_class, pkg)
 }
 

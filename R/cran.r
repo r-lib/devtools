@@ -1,9 +1,9 @@
 available_packages <- memoise::memoise(function(repos, type) {
-  suppressWarnings(available.packages(contrib.url(repos, type)))
+  suppressWarnings(available.packages(contrib.url(repos, type), type = type))
 })
 
-package_url <- function(package, repos, available = available.packages(contrib.url(repos, "source"))) {
-
+package_url <- function(package, repos,
+                        available = available_packages(repos, "source")) {
   ok <- (available[, "Package"] == package)
   ok <- ok & !is.na(ok)
 
