@@ -39,8 +39,12 @@ github_info <- function(pkg = ".") {
   remotes <- git("remote -v", path = pkg$path)
   remotes_df <- read.table(text = remotes, stringsAsFactors = FALSE)
   names(remotes_df) <- c("name", "url", "type")
+  
+  if ("github" %in% remotes_df$name) remote <- "github"
+  else if ("origin" %in% remotes_df$name) remote <- "origin"
+  else return(github_dummy)
 
-  github_url <- remotes_df[remotes_df$name == "origin", ]$url[[1]]
+  github_url <- remotes_df[remotes_df$name == remote, ]$url[[1]]
   parse_github_remote(github_url)
 }
 
