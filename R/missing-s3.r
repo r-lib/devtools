@@ -6,9 +6,6 @@
 #'   \code{\link{as.package}} for more information
 #' @export
 missing_s3 <- function(pkg = ".") {
-  if (!requireNamespace("roxygen2", quietly = TRUE)) {
-    stop("Please install roxygen2.", call. = FALSE)
-  }
   pkg <- as.package(pkg)
   loaded <- load_all(pkg)
 

@@ -16,9 +16,6 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
     warning("Clean argument deprecated: roxygen2 now automatically cleans up",
       call. = FALSE)
   }
-  if (!is_installed("roxygen2", 4)) {
-    stop("Please install latest roxygen2", call. = FALSE)
-  }
 
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
