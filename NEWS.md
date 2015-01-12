@@ -1,5 +1,8 @@
 # devtools 1.X
 
+* `release()` no longer asks if you've read the CRAN policies since the 
+  CRAN submission process now asks the same question (#692).
+
 * Fixed scoping issues with `unzip()`.
 
 * `revdep_check()` is now quieter, because it's accompanied by two other

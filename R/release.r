@@ -74,11 +74,6 @@ release <- function(pkg = ".", check = TRUE) {
   if (yesno("Are the CRAN submission comments correct?"))
     return(invisible())
 
-  policies <- paste("Have you read and do you agree to the CRAN policies?",
-    "\n(http://cran.r-project.org/web/packages/policies.html)")
-  if (yesno(policies))
-    return(invisible())
-
   if (yesno("Have you checked on win-builder (with build_win())?"))
     return(invisible())
 
