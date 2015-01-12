@@ -30,6 +30,5 @@ Suggests:
     MASS,
     rmarkdown,
     knitr,
-    lintr,
-    covr
+    lintr
 License: GPL (>= 2)

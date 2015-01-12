@@ -14,7 +14,6 @@ install:
   - ./travis-tool.sh install_deps
   # Install testthat after running install_deps, otherwise devtools itself might be installed from CRAN or c2d4u
   - ./travis-tool.sh install_github hadley/testthat
-  - ./travis-tool.sh install_github jimhester/covr
 notifications:
   email:
     on_success: change

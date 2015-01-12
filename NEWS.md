@@ -10,9 +10,6 @@ I've also tweaked the output of `revdep_maintainers()` so it's easier to copy an
 
 ## New helpers
 
-* `check_coverage()` checks the test coverage of a package using covr. 
-  (@jimhester, #695)
-
 * `lint()` runs `lintr::lint_package()` to check style consistency and errors
   in a package. (@jimhester, #694)
 
