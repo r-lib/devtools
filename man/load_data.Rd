@@ -11,7 +11,7 @@ load_data(pkg = ".")
 \code{\link{as.package}} for more information}
 }
 \description{
-Loads all \code{.Rdata} files in the data subdirectory.
+Loads all \code{.RData} files in the data subdirectory.
 }
 \keyword{programming}
 
