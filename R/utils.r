@@ -6,7 +6,8 @@ dir.exists <- function(x) {
 }
 
 compact <- function(x) {
-  Filter(Negate(is.null), x)
+  is_empty <- vapply(x, function(x) length(x) == 0, logical(1))
+  x[!is_empty]
 }
 
 "%||%" <- function(a, b) if (!is.null(a)) a else b
@@ -15,14 +16,14 @@ compact <- function(x) {
   get(f, envir = asNamespace(p))
 }
 
-rule <- function(...) {
+rule <- function(..., pad = "-") {
   if (nargs() == 0) {
     title <- ""
   } else {
     title <- paste0(...)
   }
   width <- getOption("width") - nchar(title) - 1
-  message(title, paste(rep("-", width, collapse = "")))
+  message(title, " ", paste(rep(pad, width, collapse = "")))
 }
 
 # check whether the specified file ends with newline

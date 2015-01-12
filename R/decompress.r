@@ -36,19 +36,19 @@ decompress <- function(src, target) {
 
   if (grepl("\\.zip$", src)) {
     my_unzip(src, target)
-    outdir <- getrootdir(as.vector(unzip(src, list = TRUE)$Name))
+    outdir <- getrootdir(as.vector(utils::unzip(src, list = TRUE)$Name))
 
   } else if (grepl("\\.tar$", src)) {
-    untar(src, exdir = target)
-    outdir <- getrootdir(untar(src, list = TRUE))
+    utils::untar(src, exdir = target)
+    outdir <- getrootdir(utils::untar(src, list = TRUE))
 
   } else if (grepl("\\.(tar\\.gz|tgz)$", src)) {
-    untar(src, exdir = target, compressed = "gzip")
-    outdir <- getrootdir(untar(src, compressed = "gzip", list = TRUE))
+    utils::untar(src, exdir = target, compressed = "gzip")
+    outdir <- getrootdir(utils::untar(src, compressed = "gzip", list = TRUE))
 
   } else if (grepl("\\.(tar\\.bz2|tbz)$", src)) {
-    untar(src, exdir = target, compressed = "bzip2")
-    outdir <- getrootdir(untar(src, compressed = "bzip2", list = TRUE))
+    utils::untar(src, exdir = target, compressed = "bzip2")
+    outdir <- getrootdir(utils::untar(src, compressed = "bzip2", list = TRUE))
 
   } else {
     ext <- gsub("^[^.]*\\.", "", src)
@@ -76,7 +76,7 @@ getrootdir <- function(file_list) {
 
 my_unzip <- function(src, target, unzip = getOption("unzip")) {
   if (unzip == "internal") {
-    return(unzip(src, exdir = target))
+    return(utils::unzip(src, exdir = target))
   }
 
   args <- paste(

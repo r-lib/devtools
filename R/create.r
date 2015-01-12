@@ -4,6 +4,10 @@
 #' the standard devtools directory structures; it doesn't try and create
 #' source code and data files by inspecting the global environment.
 #'
+#' \code{create} requires that the directory doesn't exist yet; it will be
+#' created but deleted upon failure. \code{setup} assumes an existing
+#' directory from which it will infer the package name.
+#'
 #' @param path location to create new package.  The last component of the path
 #'   will be used as the package name.
 #' @param description list of description values to override default values or
@@ -26,18 +30,8 @@
 #' create(path, my_description)
 #' }
 create <- function(path, description = getOption("devtools.desc"),
-                         check = FALSE, rstudio = TRUE) {
-  name <- basename(path)
-  if (!valid_name(name)) {
-    stop(
-      name, " is not a valid package name: it should contain only\n",
-      "ASCII letters, numbers and dot, have at least two characters\n",
-      "and start with a letter and not end in a dot.",
-      call. = FALSE
-    )
-  }
-
-  message("Creating package ", name, " in ", dirname(path))
+                   check = FALSE, rstudio = TRUE) {
+  check_package_name(path)
 
   if (file.exists(path)) {
     stop("Directory already exists", call. = FALSE)
@@ -47,6 +41,20 @@ create <- function(path, description = getOption("devtools.desc"),
   }
 
   dir.create(path)
+  setup(path = path, description = description, rstudio = rstudio,
+        check = check)
+
+  invisible(TRUE)
+}
+
+#' @rdname create
+#' @export
+setup <- function(path = ".", description = getOption("devtools.desc"),
+                  check = FALSE, rstudio = TRUE) {
+  check_package_name(path)
+
+  message("Creating package ", extract_package_name(path), " in ", dirname(path))
+
   dir.create(file.path(path, "R"))
   create_description(path, extra = description)
   create_namespace(path)
@@ -56,6 +64,23 @@ create <- function(path, description = getOption("devtools.desc"),
   if (check) check(path)
   invisible(TRUE)
 }
+
+extract_package_name <- function(path) {
+  basename(normalizePath(path, mustWork = FALSE))
+}
+
+check_package_name <- function(path) {
+  name <- extract_package_name(path)
+  if (!valid_name(name)) {
+    stop(
+      name, " is not a valid package name: it should contain only\n",
+      "ASCII letters, numbers and dot, have at least two characters\n",
+      "and start with a letter and not end in a dot.",
+      call. = FALSE
+    )
+  }
+}
+
 
 valid_name <- function(x) {
   grepl("^[[:alpha:]][[:alnum:].]+$", x) && !grepl("\\.$", x)

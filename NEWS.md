@@ -1,9 +1,32 @@
 # devtools 1.X
 
+* `lint()` runs `lintr::lint_package()` to check style consistency and errors
+in a package. (@jimhester, #694)
+
+* Fixed scoping issues with `unzip()`.
+
+* `revdep_check()` is now quieter, because it's accompanied by two other
+  functions for capturing the results, `revdep_check_save_logs()` and 
+  `revdep_check_summary()`. You can specify a standard libpath to use
+  when checking with `options("devtools.revdep.libpath")`. `use_revdep()`
+  sets up a standard directory structure for you.
+  
+* `use_cran_comments()` creates a `cran-comments.md` template for you
+  to help with CRAN submissions (#661)
+
+* `with_debug()` and `compiler_flags()` set `CFLAGS` etc instead of 
+  `PKG_CFLAGS`. `PKG_*` are for packages to use, the raw values are for users
+  to set. (According to http://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Using-Makevars)
+
 * `use_travis()` now sets an environment variable so that any WARNING will
   also cause the build to fail (#570).
 
 * `create()` now checks that the directory name is a valid package name (#610).
+
+* New function `setup()` that works like `create()` but assumes an
+  existing, not necessarily empty, directory (#627, @krlmlr).
+
+* `create_description()` checks validity of package name.
 
 * `release(check = TRUE)` now runs some additional custom checks. These include:
   
