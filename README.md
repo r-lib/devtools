@@ -63,7 +63,7 @@ Building and installing:
   guaranteed to work: see the documentation to `unload()` for caveats.
 
 * `build()` builds a package file from package sources. You can
-  can use it to build a binary version of your package.
+  use it to build a binary version of your package.
 
 * `install_github()` installs an R package from github,
   `install_gitorious()` from gitorious, `install_bitbucket()` from
