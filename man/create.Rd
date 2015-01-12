@@ -34,7 +34,7 @@ created but deleted upon failure. \code{setup} assumes an existing
 directory from which it will infer the package name.
 }
 \examples{
-\donttest{
+\dontrun{
 # Create a package using all defaults:
 path <- file.path(tempdir(), "myDefaultPackage")
 create(path)
