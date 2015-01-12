@@ -5,8 +5,9 @@
 
 * `check_coverage()` to check the test coverage of a package. (@jimhester,
   #695)
+
 * `lint()` runs `lintr::lint_package()` to check style consistency and errors
-in a package. (@jimhester, #694)
+  in a package. (@jimhester, #694)
 
 * Fixed scoping issues with `unzip()`.
 
