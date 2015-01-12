@@ -4,7 +4,11 @@
 \alias{session_info}
 \title{Print session information}
 \usage{
-session_info()
+session_info(include_base = FALSE)
+}
+\arguments{
+\item{include_base}{Include base packages in summary? By default this is
+false since base packages should always match the R version.}
 }
 \description{
 This is \code{\link{sessionInfo}()} re-written from scratch to both exclude

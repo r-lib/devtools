@@ -1,5 +1,8 @@
 # devtools 1.X
 
+* `session_info()` gains `include_base` argument to also display loaded/attached
+  base packages (#646).
+
 * `load_all()` runs `roxygen2::update_collate()` before loading code. This
   ensures that files are sourced in the way you expect, as defined by 
   roxygen `@include` tags. If you don't have any `@include` tags, the
