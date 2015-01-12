@@ -47,7 +47,8 @@ Frequent development tasks:
 
 * `load_all()` simulates installing and reloading your package,
   loading R code in `R/`, compiled shared objects in `src/` and data
-  files in `data/`. During development you usually want to access all functions so `load_all()` ignores the package `NAMESPACE`.
+  files in `data/`. During development you usually want to access all 
+  functions so `load_all()` ignores the package `NAMESPACE`.
   `load_all()` will automatically create a `DESCRIPTION` if needed.
 
 * `document()` updates documentation, file collation and
@@ -57,8 +58,9 @@ Frequent development tasks:
 
 Building and installing:
 
-* `install()` reinstalls the package, detaches the currently
-  loaded version then reloads the new version with `library()`. Reloading a package is not guaranteed to work: see the documentation to `unload()` for caveats.
+* `install()` reinstalls the package, detaches the currently loaded version 
+  then reloads the new version with `library()`. Reloading a package is not
+  guaranteed to work: see the documentation to `unload()` for caveats.
 
 * `build()` builds a package file from package sources. You can
   can use it to build a binary version of your package.
@@ -71,9 +73,10 @@ Building and installing:
 
 Check and release:
 
-* `check()` updates the documentation, then builds and checks
-  the package. `build_win()` builds a package using
-  [win-builder](http://win-builder.r-project.org/), allowing you to easily check your package on windows.
+* `check()` updates the documentation, then builds and checks the package. 
+  `build_win()` builds a package using 
+  [win-builder](http://win-builder.r-project.org/), allowing you to easily check 
+  your package on windows.
 
 * `run_examples()` will run all examples to make sure they work.
   This is useful because example checking is the last step of `R CMD check`.
