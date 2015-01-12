@@ -37,6 +37,8 @@
 * `use_travis()` now sets an environment variable so that any WARNING will
   also cause the build to fail (#570).
 
+* New function `use_appveyor()` sets up a package for testing with AppVeyor (@krlmlr, #549).
+
 * `create()` now checks that the directory name is a valid package name (#610).
 
 * New function `setup()` that works like `create()` but assumes an
@@ -70,6 +72,10 @@
 
 * `use_readme_rmd()` makes it easier to generate a `README.md` from 
   `README.Rmd`.
+
+* When installing a pull request, `install_github` now uses the repository
+  associated with the pull request's branch (and not the repository of the user
+  who created the pull request) (#658, @krlmlr).
 
 # devtools 1.6.1
 
@@ -236,6 +242,9 @@
 * The `fresh` argument to `test()` has been removed - this is best done by 
   the editor since it can run the tests in a completely clean environment
   by starting a new R session.
+
+* `compile_dll()` can now build packages located in R's `tempdir()`
+  directory (@richfitz, #531).
 
 # devtools 1.5
 

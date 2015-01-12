@@ -5,6 +5,7 @@
 \alias{add_test_infrastructure}
 \alias{add_travis}
 \alias{infrastructure}
+\alias{use_appveyor}
 \alias{use_cran_comments}
 \alias{use_package_doc}
 \alias{use_rcpp}
@@ -24,6 +25,8 @@ use_vignette(name, pkg = ".")
 use_rcpp(pkg = ".")
 
 use_travis(pkg = ".")
+
+use_appveyor(pkg = ".")
 
 use_package_doc(pkg = ".")
 
@@ -70,6 +73,12 @@ Creates \code{src/} and adds needed packages to \code{DESCRIPTION}.
 \section{\code{use_travis}}{
 
 Add basic travis template to a package. Also adds \code{.travis.yml} to
+\code{.Rbuildignore} so it isn't included in the built package.
+}
+
+\section{\code{use_appveyor}}{
+
+Add basic AppVeyor template to a package. Also adds \code{appveyor.yml} to
 \code{.Rbuildignore} so it isn't included in the built package.
 }
 
