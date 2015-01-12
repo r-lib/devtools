@@ -71,6 +71,9 @@
 * `use_readme_rmd()` makes it easier to generate a `README.md` from 
   `README.Rmd`.
 
+* `assignNativeRoutines` also works when `methods` package is not loaded
+  (#652, @krlmlr).
+
 # devtools 1.6.1
 
 * Don't set non-portable compiler flags on Solaris.
