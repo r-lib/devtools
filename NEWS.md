@@ -1,5 +1,10 @@
 # devtools 1.X
 
+* `load_all()` runs `roxygen2::update_collate()` before loading code. This
+  ensures that files are sourced in the way you expect, as defined by 
+  roxygen `@include` tags. If you don't have any `@include` tags, the
+  collate will be not be touched (#623).
+
 * `release()` no longer asks if you've read the CRAN policies since the 
   CRAN submission process now asks the same question (#692).
 
