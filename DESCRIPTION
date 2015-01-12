@@ -21,10 +21,10 @@ Imports:
     evaluate,
     digest,
     rstudioapi (>= 0.2.0),
-    jsonlite
+    jsonlite,
+    roxygen2 (>= 4.0.2)
 Suggests:
     testthat (>= 0.7),
-    roxygen2 (>= 4.0.2),
     BiocInstaller,
     Rcpp (>= 0.10.0),
     MASS,
