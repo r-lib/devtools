@@ -1,5 +1,8 @@
 # devtools 1.X
 
+* `lint()` runs `lintr::lint_package()` to check style consistency and errors
+in a package. (@jimhester, #694)
+
 * Fixed scoping issues with `unzip()`.
 
 * `revdep_check()` is now quieter, because it's accompanied by two other
