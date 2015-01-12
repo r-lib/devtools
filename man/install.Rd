@@ -63,6 +63,8 @@ directory pristine.
 
 If the package is loaded, it will be reloaded after installation. This is
 not always completely possible, see \code{\link{reload}} for caveats.
+
+To install a package in a non-default library, use \code{\link{with_libpaths}}.
 }
 \seealso{
 \code{\link{with_debug}} to install packages with debugging flags
