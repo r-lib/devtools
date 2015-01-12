@@ -243,6 +243,9 @@
   the editor since it can run the tests in a completely clean environment
   by starting a new R session.
 
+* `compile_dll()` can now build packages located in R's `tempdir()`
+  directory (@richfitz, #531).
+
 # devtools 1.5
 
 Four new functions make it easier to add useful infrastructure to packages:
