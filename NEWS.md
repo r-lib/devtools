@@ -4,9 +4,9 @@
 
 Devtools now supports a new and improved style of revdep checking with `use_revdep()`. This creates a new directory called `revdep` which contains a `check.R` template. Run this template to check all reverse dependencies, and save summarised results to `check/summary.md`. You can then check this file into git, making it much easier to track how reverse dependency results change between versions. The documentation for `revdep_check()` is much improved, and should be more useful (#635)
 
-I recommend specify a standard library to use when checking with `options("devtools.revdep.libpath")`. This needs to be distinct from your usual library to keep revdep checking isolated from development packages you might have installed.
+I recommend that you specify a library to use when checking with `options("devtools.revdep.libpath")`. (This should be a directory that already exists). This should be difference from your default library to keep the revdep environment isolated from your development environment.
 
-I've also tweaked the output of `revdep_maintainers()` so it's easier to copy and paste into an email (#634).
+I've also tweaked the output of `revdep_maintainers()` so it's easier to copy and paste into an email (#634). This makes life a little easier pre-release.
 
 ## New helpers
 
@@ -15,13 +15,13 @@ I've also tweaked the output of `revdep_maintainers()` so it's easier to copy an
 
 * `use_appveyor()` sets up a package for testing with AppVeyor (@krlmlr, #549).
 
-* `use_cran_comments()` creates a `cran-comments.md` template for you
-  to help with CRAN submissions (#661)
+* `use_cran_comments()` creates a `cran-comments.md` template and adds it
+  to `.Rbuildignore` to help with CRAN submissions. (#661)
 
 * `use_git_hook()` allows you to easily add a git hook to a package.
 
-* `use_readme_rmd()` makes it easier to generate a `README.md` from 
-  `README.Rmd`.
+* `use_readme_rmd()` sets up a template to generate a `README.md` from a
+  `README.Rmd` with knitr.
 
 ## Minor improvements
 
@@ -41,7 +41,8 @@ I've also tweaked the output of `revdep_maintainers()` so it's easier to copy an
 
 * `release()` no longer asks if you've read the CRAN policies since the 
   CRAN submission process now asks the same question (#692). 
-  `release(check = TRUE)` now runs some additional custom checks. These include:
+  
+    `release(check = TRUE)` now runs some additional custom checks. These include:
     
     * Checking that you don't depend on a development version of a package.
     
