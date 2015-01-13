@@ -46,7 +46,7 @@ release <- function(pkg = ".", check = TRUE) {
   new_pkg <- is.null(cran_version)
 
   if (check) {
-    check(pkg, cran = TRUE, check_version = TRUE)
+    check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE)
     release_checks(pkg)
 
     if (yesno("Was package check successful?"))
@@ -72,11 +72,6 @@ release <- function(pkg = ".", check = TRUE) {
   rule("cran-comments.md ")
   cat(cran_comments(pkg), "\n\n")
   if (yesno("Are the CRAN submission comments correct?"))
-    return(invisible())
-
-  policies <- paste("Have you read and do you agree to the CRAN policies?",
-    "\n(http://cran.r-project.org/web/packages/policies.html)")
-  if (yesno(policies))
     return(invisible())
 
   if (yesno("Have you checked on win-builder (with build_win())?"))
@@ -253,7 +248,7 @@ submit_cran <- function(pkg = ".") {
   comments <- cran_comments(pkg)
 
   message("Building")
-  built_path <- build(pkg, tempdir())
+  built_path <- build(pkg, tempdir(), manual = TRUE)
   message("File size: ", file.info(built_path)$size, " bytes")
 
   # Initial upload ---------

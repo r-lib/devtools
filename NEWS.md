@@ -1,49 +1,77 @@
-# devtools 1.X
+# devtools 1.7.0
 
-* Fixed scoping issues with `unzip()`.
+## Improve reverse dependency checking
 
-* `revdep_check()` is now quieter, because it's accompanied by two other
-  functions for capturing the results, `revdep_check_save_logs()` and 
-  `revdep_check_summary()`. You can specify a standard libpath to use
-  when checking with `options("devtools.revdep.libpath")`. `use_revdep()`
-  sets up a standard directory structure for you.
+Devtools now supports a new and improved style of revdep checking with `use_revdep()`. This creates a new directory called `revdep` which contains a `check.R` template. Run this template to check all reverse dependencies, and save summarised results to `check/summary.md`. You can then check this file into git, making it much easier to track how reverse dependency results change between versions. The documentation for `revdep_check()` is much improved, and should be more useful (#635)
+
+I recommend that you specify a library to use when checking with `options("devtools.revdep.libpath")`. (This should be a directory that already exists). This should be difference from your default library to keep the revdep environment isolated from your development environment.
+
+I've also tweaked the output of `revdep_maintainers()` so it's easier to copy and paste into an email (#634). This makes life a little easier pre-release.
+
+## New helpers
+
+* `lint()` runs `lintr::lint_package()` to check style consistency and errors
+  in a package. (@jimhester, #694)
+
+* `use_appveyor()` sets up a package for testing with AppVeyor (@krlmlr, #549).
+
+* `use_cran_comments()` creates a `cran-comments.md` template and adds it
+  to `.Rbuildignore` to help with CRAN submissions. (#661)
+
+* `use_git_hook()` allows you to easily add a git hook to a package.
+
+* `use_readme_rmd()` sets up a template to generate a `README.md` from a
+  `README.Rmd` with knitr.
+
+## Minor improvements
+
+* Deprecated `doc_clean` argument to `check()` has been removed.
+
+* Initial package version in `create()` is now `0.0.0.9000` (#632).
+ `create()` and `create_description()` checks that the package name is 
+  valid  (#610).
+
+* `load_all()` runs `roxygen2::update_collate()` before loading code. This
+  ensures that files are sourced in the way you expect, as defined by 
+  roxygen `@include` tags. If you don't have any `@include` tags, the
+  collate will be not be touched (#623).
+
+* `session_info()` gains `include_base` argument to also display loaded/attached
+  base packages (#646).
+
+* `release()` no longer asks if you've read the CRAN policies since the 
+  CRAN submission process now asks the same question (#692). 
   
-* `use_cran_comments()` creates a `cran-comments.md` template for you
-  to help with CRAN submissions (#661)
+    `release(check = TRUE)` now runs some additional custom checks. These include:
+    
+    * Checking that you don't depend on a development version of a package.
+    
+    * Checking that the version number has exactly three components (#633).
+    
+    `release()` now builds packages without the `--no-manual` switch, both for
+    checking and for actually building the release package (#603, @krlmlr). 
+    `build()` gains an additional argument `manual`, defaulting to `FALSE`, 
+    and `check()` gains `...` unmodified to `build()`.
+  
+* `use_travis()` now sets an environment variable so that any WARNING will
+  also cause the build to fail (#570).
 
 * `with_debug()` and `compiler_flags()` set `CFLAGS` etc instead of 
   `PKG_CFLAGS`. `PKG_*` are for packages to use, the raw values are for users
   to set. (According to http://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Using-Makevars)
 
-* `use_travis()` now sets an environment variable so that any WARNING will
-  also cause the build to fail (#570).
+* New `setup()` works like `create()` but assumes an existing, not necessarily 
+  empty, directory (#627, @krlmlr).
 
-* `create()` now checks that the directory name is a valid package name (#610).
+## Bug fixes
 
-* New function `setup()` that works like `create()` but assumes an
-  existing, not necessarily empty, directory (#627, @krlmlr).
+* When installing a pull request, `install_github()` now uses the repository
+  associated with the pull request's branch (and not the repository of the user
+  who created the pull request) (#658, @krlmlr).
 
-* `create_description()` checks validity of package name.
+* `missing_s3()` works once again (#672)
 
-* `release(check = TRUE)` now runs some additional custom checks. These include:
-  
-  * Checking that you don't depend on a development version of a package.
-  
-  * Checking that the version number has exactly three components (#633).
-
-* Removed deprecated `doc_clean` argument to `check()`.
-
-* Initial package version in `create()` is now `0.0.0.9000` (#632).
-
-* `revdep_maintainers()` returns output in a way that's easier to 
-  copy and paste into an email (#634).
-
-* Improved documentation for `revdep_check()` (#635)
-
-* `use_git_hook()` allows you to easily add a git hook to a package.
-
-* `use_readme_rmd()` makes it easier to generate a `README.md` from 
-  `README.Rmd`.
+* Fixed scoping issues with `unzip()`.
 
 # devtools 1.6.1
 
@@ -210,6 +238,9 @@
 * The `fresh` argument to `test()` has been removed - this is best done by 
   the editor since it can run the tests in a completely clean environment
   by starting a new R session.
+
+* `compile_dll()` can now build packages located in R's `tempdir()`
+  directory (@richfitz, #531).
 
 # devtools 1.5
 

@@ -1,12 +1,12 @@
-This is a resubmission of devtools 1.6.1, previous notes below. New changes:
+## Test environments
+* local OS X install, R 3.1.2
+* ubuntu 12.04 (on travis-ci), R 3.1.2
+* win-builder (devel and release)
 
-* devtools avoids non-portable compiler flags on Solaris.
+## R CMD check results
+There were no ERRORs or WARNINGs. 
 
---------------------------------------------------------------------------------
-
-This is a minor patch release to fix two problems encountered with interactive usage of devtools.
-
-The following notes were generated across my local OS X install, ubuntu running on travis-ci and win builder. Response to NOTEs across three platforms below.
+There were 2 NOTEs:
 
 * checking dependencies in R code ... NOTE
   Namespace in Imports field not imported from: ‘memoise’
@@ -23,3 +23,9 @@ The following notes were generated across my local OS X install, ubuntu running 
 
   These are needed because devtools simulates package loading, and hence
   needs to attach environments to the search path.
+
+## Downstream dependencies
+I have also run R CMD check on all 5 downstream dependencies of devtools 
+(https://github.com/hadley/devtools/blob/master/revdep/summary.md). All packages 
+passed. I only ran revdep checks on packages that include or depend on devtools, because devtools is supposed to be used interactively for package development, not supply code to other packages.
+

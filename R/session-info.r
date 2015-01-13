@@ -34,12 +34,14 @@ dev_packages <- function() {
 #' loaded) and include stuff you'd like to know (e.g., where a package was
 #' installed from).
 #'
+#' @param include_base Include base packages in summary? By default this is
+#'   false since base packages should always match the R version.
 #' @export
-session_info <- function() {
+session_info <- function(include_base = FALSE) {
   structure(
     list(
       platform = platform_info(),
-      packages = package_info()
+      packages = package_info(include_base = include_base)
     ),
     class = "session_info"
   )

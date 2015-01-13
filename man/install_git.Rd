@@ -10,7 +10,7 @@ install_git(url, subdir = NULL, branch = NULL, args = character(0), ...)
 \item{url}{Location of package. The url should point to a public or
 private repository.}
 
-\item{subdir}{A sub-directory withing a git repository that may
+\item{subdir}{A sub-directory within a git repository that may
 contain the package we are interested in installing.}
 
 \item{branch}{Name of branch or tag to use, if not master.}

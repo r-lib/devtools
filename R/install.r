@@ -13,6 +13,8 @@
 #' If the package is loaded, it will be reloaded after installation. This is
 #' not always completely possible, see \code{\link{reload}} for caveats.
 #'
+#' To install a package in a non-default library, use \code{\link{with_libpaths}}.
+#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param reload if \code{TRUE} (the default), will automatically reload the
@@ -81,6 +83,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   }
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
 
+  built_path <- normalizePath(built_path, winslash = "/")
   R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""),
     quiet = quiet)
 

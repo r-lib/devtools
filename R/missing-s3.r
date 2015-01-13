@@ -6,15 +6,12 @@
 #'   \code{\link{as.package}} for more information
 #' @export
 missing_s3 <- function(pkg = ".") {
-  if (!requireNamespace("roxygen2", quietly = TRUE)) {
-    stop("Please install roxygen2.", call. = FALSE)
-  }
   pkg <- as.package(pkg)
   loaded <- load_all(pkg)
 
   # Find all S3 methods in package
   objs <- ls(envir = loaded$env)
-  is_s3 <- function(x) roxygen2::is_s3_method(x, envir = loaded$env)
+  is_s3 <- function(x) roxygen2::is_s3_method(x, env = loaded$env)
   s3_objs <- Filter(is_s3, objs)
 
   # Find all S3 methods in NAMESPACE

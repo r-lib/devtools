@@ -21,7 +21,7 @@ This allows you to test development packages in a sandbox, without
 interfering with the other packages you have installed.
 }
 \examples{
-\donttest{
+\dontrun{
 dev_mode()
 dev_mode()
 }

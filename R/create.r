@@ -18,7 +18,7 @@
 #' @seealso Text with \code{\link{package.skeleton}}
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Create a package using all defaults:
 #' path <- file.path(tempdir(), "myDefaultPackage")
 #' create(path)

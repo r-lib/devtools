@@ -162,6 +162,8 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   insert_imports_shims(pkg)
 
   out$data <- load_data(pkg)
+
+  roxygen2::update_collate(pkg$path)
   out$code <- load_code(pkg)
   register_s3(pkg)
   out$dll <- load_dll(pkg)

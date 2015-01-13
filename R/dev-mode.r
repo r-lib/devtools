@@ -12,7 +12,7 @@
 #' @param path directory to library.
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' dev_mode()
 #' dev_mode()
 #' }

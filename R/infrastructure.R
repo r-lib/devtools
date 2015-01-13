@@ -129,7 +129,7 @@ use_travis <- function(pkg = ".") {
   message("Adding .travis.yml to ", pkg$package, ". Next: \n",
     " * Turn on travis for this repo at https://travis-ci.org/profile\n",
     " * Add a travis shield to your README.md:\n",
-    "[![Build Status]",
+    "[![Travis-CI Build Status]",
        "(https://travis-ci.org/", gh$username, "/", gh$repo, ".png?branch=master)]",
        "(https://travis-ci.org/", gh$username, "/", gh$repo, ")"
   )
@@ -144,6 +144,36 @@ use_travis <- function(pkg = ".") {
 
 #' @export
 add_travis <- use_travis
+
+#' @rdname infrastructure
+#' @section \code{use_appveyor}:
+#' Add basic AppVeyor template to a package. Also adds \code{appveyor.yml} to
+#' \code{.Rbuildignore} so it isn't included in the built package.
+#' @export
+use_appveyor <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  path <- file.path(pkg$path, "appveyor.yml")
+  if (file.exists(path)) {
+    stop("appveyor.yml already exists", call. = FALSE)
+  }
+
+  gh <- github_info(pkg)
+  message("Adding appveyor.yml to ", pkg$package, ". Next: \n",
+          " * Turn on AppVeyor for this repo at https://ci.appveyor.com/projects\n",
+          " * Add an AppVeyor shield to your README.md:\n",
+          "[![AppVeyor Build Status]",
+          "(https://ci.appveyor.com/api/projects/status/github/", gh$username, "/", gh$repo, "?branch=master)]",
+          "(https://ci.appveyor.com/project/", gh$username, "/", gh$repo, ")"
+  )
+
+  template_path <- system.file("templates/appveyor.yml", package = "devtools")
+  file.copy(template_path, path)
+
+  add_build_ignore(pkg, "appveyor.yml")
+
+  invisible(TRUE)
+}
 
 #' @rdname infrastructure
 #' @section \code{use_package_doc}:

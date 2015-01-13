@@ -15,7 +15,7 @@ You can track (and contribute to) development of `devtools` at https://github.co
 2. Make sure you have a working development environment.
     * **Windows**: Install [Rtools](http://cran.r-project.org/bin/windows/Rtools/).
     * **Mac**: Install Xcode from the Mac App Store.
-    * **Linux**: Install a compiler and various development libraries (details vary across differnet flavors of Linux).
+    * **Linux**: Install a compiler and various development libraries (details vary across different flavors of Linux).
 
 3. Follow the instructions below depending on platform.
 
@@ -41,13 +41,14 @@ You can track (and contribute to) development of `devtools` at https://github.co
 
 ## Package development tools
 
-All `devtools` functions accept a path as an argument, e.g. `load_all("path/to/path/mypkg")`. If you don't specify a path, `devtools` will look in the current working directory - this is recommend practice.
+All `devtools` functions accept a path as an argument, e.g. `load_all("path/to/path/mypkg")`. If you don't specify a path, `devtools` will look in the current working directory - this is recommended practice.
 
 Frequent development tasks:
 
 * `load_all()` simulates installing and reloading your package,
   loading R code in `R/`, compiled shared objects in `src/` and data
-  files in `data/`. During development you usually want to access all functions so `load_all()` ignores the package `NAMESPACE`.
+  files in `data/`. During development you usually want to access all 
+  functions so `load_all()` ignores the package `NAMESPACE`.
   `load_all()` will automatically create a `DESCRIPTION` if needed.
 
 * `document()` updates documentation, file collation and
@@ -57,11 +58,12 @@ Frequent development tasks:
 
 Building and installing:
 
-* `install()` reinstalls the package, detaches the currently
-  loaded version then reloads the new version with `library()`. Reloading a package is not guaranteed to work: see the documentation to `unload()` for caveats.
+* `install()` reinstalls the package, detaches the currently loaded version 
+  then reloads the new version with `library()`. Reloading a package is not
+  guaranteed to work: see the documentation to `unload()` for caveats.
 
 * `build()` builds a package file from package sources. You can
-  can use it to build a binary version of your package.
+  use it to build a binary version of your package.
 
 * `install_github()` installs an R package from github,
   `install_gitorious()` from gitorious, `install_bitbucket()` from
@@ -71,9 +73,10 @@ Building and installing:
 
 Check and release:
 
-* `check()` updates the documentation, then builds and checks
-  the package. `build_win()` builds a package using
-  [win-builder](http://win-builder.r-project.org/), allowing you to easily check your package on windows.
+* `check()` updates the documentation, then builds and checks the package. 
+  `build_win()` builds a package using 
+  [win-builder](http://win-builder.r-project.org/), allowing you to easily check 
+  your package on windows.
 
 * `run_examples()` will run all examples to make sure they work.
   This is useful because example checking is the last step of `R CMD check`.
