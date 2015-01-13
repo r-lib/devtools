@@ -1,4 +1,4 @@
-# devtools 1.X
+# devtools 1.7.0
 
 ## Improve reverse dependency checking
 
