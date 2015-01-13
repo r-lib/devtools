@@ -1,12 +1,13 @@
 Package: devtools
-Title: Tools to make developing R code easier
-Version: 1.6.1.9000
-Authors@R: as.person(c(
-    "Hadley Wickham <hadley@rstudio.com> [aut, cre]",
-    "Winston Chang [aut]",
-    "RStudio [cph]",
-    "R Core team [ctb] (Some namespace and vignette code extracted from base R)"
-    ))
+Title: Tools to Make Developing R Packages Easier
+Version: 1.7.0
+Authors@R: c(
+    person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("aut", "cre")),
+    person("Winston", "Chang", role = "aut"),
+    person("RStudio", role = "cph"),
+    person("R Core team", role = "ctb",
+      comment = "Some namespace and vignette code extracted from base R")
+    )
 Description: Collection of package development tools.
 Depends:
     R (>= 3.0.2)
@@ -20,14 +21,15 @@ Imports:
     whisker,
     evaluate,
     digest,
-    rstudioapi,
-    jsonlite
+    rstudioapi (>= 0.2.0),
+    jsonlite,
+    roxygen2 (>= 4.1.0)
 Suggests:
     testthat (>= 0.7),
-    roxygen2 (>= 4.1.0),
     BiocInstaller,
     Rcpp (>= 0.10.0),
     MASS,
     rmarkdown,
-    knitr
+    knitr,
+    lintr
 License: GPL (>= 2)
