@@ -130,7 +130,7 @@ needs_clean <- function(pkg = ".") {
   }
 
   if (no_auto_clean) {
-    # Still check a Makevars newer than the dll
+    # Run clean compiling when `Makevars` file is modified
     headers <- mtime(makevars)
   } else {
     headers <- mtime(headers(pkg))
