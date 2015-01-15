@@ -12,7 +12,7 @@ a named character vector
 \description{
 Devtools sets a number of environmental variables to ensure consistent
 between the current R session and the new session, and to ensure that
-everying behaves the same across systems. It also suppresses a common
+everything behaves the same across systems. It also suppresses a common
 warning on windows, and sets \code{NOT_CRAN} so you can tell that your
 code is not running on CRAN.
 }
