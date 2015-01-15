@@ -30,7 +30,7 @@ temp_copy_pkg <- function(pkg) {
   normalizePath(file.path(tempdir(), pkg))
 }
 
-test_that("Collate field in DESCRIPTION reflects latest @includes", {
+test_that("DESCRIPTION Collate field, with latest @includes, is recognised by load_all", {
   # Make a temporary copy of the package for this test,
   # since update_collate (in load_all) may have permanent side effects,
   # namely changing the collate field in the DESCRIPTION file
