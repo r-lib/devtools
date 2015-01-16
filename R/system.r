@@ -1,7 +1,7 @@
 #' Run a system command and check if it succeeds.
 #'
 #' @param cmd the command to run.
-#' @param arg a vector of command arguments.
+#' @param args a vector of command arguments.
 #' @param env a named character vector of environment variables.  Will be quoted
 #' @param quiet if \code{FALSE}, the command to be run will be echoed.
 #' @param ... additional arguments passed to \code{\link[base]{system}}
