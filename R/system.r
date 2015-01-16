@@ -7,6 +7,7 @@
 #' @param ... additional arguments passed to \code{\link[base]{system}}
 #' @return \code{TRUE} if the command succeeds, an error will be thrown if the
 #' command fails.
+#' @export
 system_check <- function(cmd, args = character(), env = character(),
                          quiet = FALSE, ...) {
   full <- paste(shQuote(cmd), " ", paste(args, collapse = ", "), sep = "")
