@@ -248,6 +248,11 @@ version_info <- list(
     version_min = "3.0.0",
     version_max = "3.2.99",
     path = c("bin", "gcc-4.6.3/bin")
+  ),
+  "3.2" = list(
+    version_min = "3.1.0",
+    version_max = "3.3.99",
+    path = c("bin", "gcc-4.6.3/bin")
   )
 )
 
