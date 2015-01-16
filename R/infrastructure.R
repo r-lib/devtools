@@ -170,9 +170,15 @@ use_coveralls <- function(pkg = ".") {
   )
 
   install_loc <- grep("^install:$", travis_content)
+  if (length(install_loc) == 0) {
+    stop("no install block found in .travis.yml", call. = FALSE)
+  }
   travis_content <- append(travis_content, "  - ./travis-tool.sh github_package jimhester/covr", after = install_loc)
 
   after_failure_loc <- grep("^after_failure:$", travis_content)
+  if (length(after_failure_loc) == 0) {
+    after_failure_loc <- install_loc
+  }
   travis_content <- append(travis_content,
                                           c("after_success:",
                                             "  - Rscript -e 'library(covr);coveralls()'"),
