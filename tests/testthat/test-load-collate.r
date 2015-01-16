@@ -41,5 +41,6 @@ test_that("DESCRIPTION Collate field, with latest @includes, is recognised by lo
 
   expect_equal(a, 1) #even though b.r set it to 2
 
+  message("Cleaning up after testCollateOrder")
   unload(test_pkg)
 })
