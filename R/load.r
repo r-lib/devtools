@@ -92,12 +92,6 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 
   if (!quiet) message("Loading ", pkg$package)
 
-  # Check that the available roxygen2 version has update_collate fixed so it
-  # really does do nothing if there are no @includes
-  roxvc <- list(name = "roxygen2", op = '>=', version = '4.1.0')
-  if (! requireNamespace('roxygen2', versionCheck = roxvc, quietly = TRUE))
-    stop("Please install a version of roxygen2 >= 4.1.0 ", call. = FALSE)
-
   roxygen2::update_collate(pkg$path)
   # Refresh the pkg structure with any updates to the Collate entry
   # in the DESCRIPTION file
