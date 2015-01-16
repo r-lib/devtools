@@ -93,14 +93,8 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   if (!quiet) message("Loading ", pkg$package)
 
   # Check that the available roxygen2 version has update_collate fixed so it
-  # does nothing if there are no @includes, while working around bug in
-  # requireNamespace version checking arguments (bug will be fixed in a future
-  # release of R)
-  if (getRversion() <= '3.1.2') {
-    roxvc <- list(name = "roxygen2", op = '>=', version = '4.1.0')
-  } else {
-    roxvc <- list(op = '>=', version = '4.1.0')
-  }
+  # really does do nothing if there are no @includes
+  roxvc <- list(name = "roxygen2", op = '>=', version = '4.1.0')
   if (! requireNamespace('roxygen2', versionCheck = roxvc, quietly = TRUE))
     stop("Please install a version of roxygen2 >= 4.1.0 ", call. = FALSE)
 
