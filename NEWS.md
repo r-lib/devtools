@@ -1,5 +1,7 @@
 # devtools 1.7.1.9000
 
+* export functions `RCMD()` and `system_check()` so they can be used by other packages. (@jimhester, #699).
+
 # devtools 1.7.0
 
 ## Improve reverse dependency checking

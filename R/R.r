@@ -12,6 +12,16 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
   in_dir(path, system_check(r_path, options, c(r_env_vars(), env_vars), ...))
 }
 
+#' Run R CMD xxx from within R
+#'
+#' @param cmd one of the R tools available from the R CMD interface.
+#' @param options a charater vector of options to pass to the command
+#' @param path the directory to run the command in.
+#' @param env_vars environment variables to set before running the command.
+#' @param ... additional arguments passed to \code{\link{system_check}}
+#' @return \code{TRUE} if the command succeeds, throws an error if the command
+#' fails.
+#' @export
 RCMD <- function(cmd, options, path = tempdir(), env_vars = NULL, ...) {
   options <- paste(options, collapse = " ")
   R(paste("CMD", cmd, options), path = path, env_vars = env_vars, ...)
@@ -21,7 +31,7 @@ RCMD <- function(cmd, options, path = tempdir(), env_vars = NULL, ...) {
 #'
 #' Devtools sets a number of environmental variables to ensure consistent
 #' between the current R session and the new session, and to ensure that
-#' everying behaves the same across systems. It also suppresses a common
+#' everything behaves the same across systems. It also suppresses a common
 #' warning on windows, and sets \code{NOT_CRAN} so you can tell that your
 #' code is not running on CRAN.
 #'
@@ -32,9 +42,9 @@ r_env_vars <- function() {
   c("R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
     "CYGWIN" = "nodosfilewarning",
     # When R CMD check runs tests, it sets R_TESTS. When the tests
-    # themeselves run R CMD xxxx, as is the case with the tests in
+    # themselves run R CMD xxxx, as is the case with the tests in
     # devtools, having R_TESTS set causes errors because it confuses
-    # the R subprocesses. Unsetting it here avoids those problems.
+    # the R subprocesses. Un-setting it here avoids those problems.
     "R_TESTS" = "",
     "NOT_CRAN" = "true",
     "TAR" = auto_tar())
@@ -52,4 +62,3 @@ auto_tar <- function() {
   no_rtools <- is.null(get_rtools_path())
   if (windows && no_rtools) "internal" else ""
 }
-
