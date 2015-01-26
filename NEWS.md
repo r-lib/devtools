@@ -1,6 +1,10 @@
 # devtools 1.7.1.9000
 
-* export functions `RCMD()` and `system_check()` so they can be used by other packages. (@jimhester, #699).
+* export functions `RCMD()` and `system_check()` so they can be used by other 
+  packages. (@jimhester, #699).
+
+* `dev_help()` now uses `normalizePath()`. Hopefully this will make it more
+  likely to work if you're on windows and have a space in the path.
 
 # devtools 1.7.0
 
