@@ -15,7 +15,7 @@ lint <- function(pkg = ".", cache = TRUE, ...) {
   pkg <- as.package(pkg)
 
   message("Linting ", pkg$package, appendLF = FALSE)
-  lintr::lint_package(pkg$path, cache = TRUE, ...)
+  lintr::lint_package(pkg$path, cache = cache, ...)
 }
 
 check_lintr <- function() {
