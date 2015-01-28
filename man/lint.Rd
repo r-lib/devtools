@@ -4,11 +4,14 @@
 \alias{lint}
 \title{Lint all source files in a package.}
 \usage{
-lint(pkg = ".", ...)
+lint(pkg = ".", cache = TRUE, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
 \code{\link{as.package}} for more information}
+
+\item{cache}{store the lint results so repeated lints of the same content
+use the previous results.}
 
 \item{...}{additional arguments passed to \code{\link[lintr]{lint_package}}}
 }
