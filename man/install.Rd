@@ -8,7 +8,7 @@ install(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   args = getOption("devtools.install.args"), quiet = FALSE,
   dependencies = NA, build_vignettes = FALSE,
   keep_source = getOption("keep.source.pkgs"), threads = getOption("Ncpus",
-  1))
+  1), ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -48,6 +48,8 @@ It defaults to the option \code{"keep.source.pkgs"}.}
 \item{threads}{number of concurrent threads to use for installing
 dependencies.
 It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
+
+\item{...}{additional arguments passed to \code{\link{install.packages}}}
 }
 \description{
 Uses \code{R CMD INSTALL} to install the package. Will also try to install
