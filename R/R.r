@@ -52,7 +52,9 @@ r_env_vars <- function() {
   if(is.na(Sys.getenv("NOT_CRAN", unset = NA))) {
     c(vars, "NOT_CRAN" = "true")
   }
-  else vars
+  else {
+    vars
+  }
 }
 
 # Determine the best setting for the TAR environmental variable
