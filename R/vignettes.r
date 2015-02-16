@@ -16,7 +16,7 @@
 build_vignettes <- function(pkg = ".") {
   pkg <- as.package(pkg)
   vigns <- tools::pkgVignettes(dir = pkg$path)
-  if (length(vigns$doc) == 0) return()
+  if (length(vigns$docs) == 0) return()
 
   message("Building ", pkg$package, " vignettes")
   tools::buildVignettes(dir = pkg$path, tangle = TRUE)
