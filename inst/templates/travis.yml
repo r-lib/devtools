@@ -16,7 +16,9 @@ after_failure:
   - ./travis-tool.sh dump_logs
 
 env:
-  - WARNINGS_ARE_ERRORS=1
+  global:
+    - WARNINGS_ARE_ERRORS=1
+    - R_BUILD_ARGS="--no-manual"
 
 notifications:
   email:
