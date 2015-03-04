@@ -1,6 +1,6 @@
 # devtools
 
-[![Build Status](https://travis-ci.org/hadley/devtools.png?branch=master)](https://travis-ci.org/hadley/devtools)
+[![Build Status](https://travis-ci.org/hadley/devtools.svg?branch=master)](https://travis-ci.org/hadley/devtools)
 
 The aim of `devtools` is to make your life as a package developer easier by providing R functions that simplify many common tasks. R packages are actually really simple, and with the right tools it should be easier to use the package structure than not. Package development in R can feel intimidating, but devtools does every thing it can to make it as welcoming as possible. `devtools` comes with a small guarantee: if because of a bug in devtools a member of R-core gets angry with you, I will send you a handwritten apology note. Just forward me the email and your address, and I'll get a card in the mail.
 
