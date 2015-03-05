@@ -68,7 +68,7 @@ Building and installing:
 * `install_github()` installs an R package from github,
   `install_gitorious()` from gitorious, `install_bitbucket()` from
   bitbucket, `install_url()` from an arbitrary url and
-  `install_file()` from a local file on disk. `install_version()`
+  `install_local()` from a local file on disk. `install_version()`
   installs a specified version from cran.
 
 Check and release:
