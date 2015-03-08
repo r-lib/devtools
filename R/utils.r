@@ -2,7 +2,7 @@
 # whether each exists and is a directory.
 dir.exists <- function(x) {
   res <- file.exists(x) & file.info(x)$isdir
-  setNames(res, x)
+  stats::setNames(res, x)
 }
 
 compact <- function(x) {
