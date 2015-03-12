@@ -4,7 +4,8 @@
 \alias{install_svn}
 \title{Install a package from a SVN repository}
 \usage{
-install_svn(url, subdir = NULL, branch = NULL, args = character(0), ...)
+install_svn(url, subdir = NULL, branch = NULL, args = character(0),
+  revision = NULL, ...)
 }
 \arguments{
 \item{url}{Location of package. The url should point to a public or
@@ -17,6 +18,8 @@ points to the 'trunk' directory.}
 \item{branch}{Name of branch or tag to use, if not trunk.}
 
 \item{args}{A character vector providing extra arguments to pass on to}
+
+\item{revision}{}
 
 \item{...}{Other arguments passed on to \code{\link{install}}}
 }

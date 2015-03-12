@@ -12,7 +12,7 @@
 #'   points to the 'trunk' directory.
 #' @param args A character vector providing extra arguments to pass on to
 #    svn.
-#' @revision revision
+#' @param revision
 #' @param branch Name of branch or tag to use, if not trunk.
 #' @param ... Other arguments passed on to \code{\link{install}}
 #' @export
