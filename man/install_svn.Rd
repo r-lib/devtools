@@ -19,7 +19,7 @@ points to the 'trunk' directory.}
 
 \item{args}{A character vector providing extra arguments to pass on to}
 
-\item{revision}{}
+\item{revision}{svn revision, if omitted updates to latest}
 
 \item{...}{Other arguments passed on to \code{\link{install}}}
 }
