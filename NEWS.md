@@ -9,6 +9,8 @@
 * `NOT_CRAN` is no longer set automatically if it has been set externally to
   allow overriding.
 
+* `install_svn` now optionally accepts revision number
+
 # devtools 1.7.0
 
 ## Improve reverse dependency checking
