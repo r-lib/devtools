@@ -22,19 +22,21 @@
 #' install_svn("https://github.com/hadley/httr", branch = "oauth")
 #'}
 install_svn <- function(url, subdir = NULL, branch = NULL, args = character(0),
-  ...) {
+  revision = NULL, ...) {
 
-  remotes <- lapply(url, svn_remote, subdir = subdir, branch = branch,
-    args = args)
+  remotes <- lapply(url, svn_remote, svn_subdir = subdir, branch = branch,
+    revision = revision, args = args)
 
   install_remotes(remotes, ...)
 }
 
-svn_remote <- function(url, subdir = NULL, branch = NULL, args = character(0)) {
+svn_remote <- function(url, svn_subdir = NULL, branch = NULL, revision = revision,
+  args = character(0)) {
   remote("svn",
     url = url,
-    subdir = subdir,
+    svn_subdir = svn_subdir,
     branch = branch,
+    revision = revision,
     args = args
   )
 }
@@ -54,6 +56,9 @@ remote_download.svn_remote <- function(x, quiet = FALSE) {
   } else {
     url <- file.path(x$url, "trunk")
   }
+  if (!is.null(x$svn_subdir)) {
+    url <- file.path(url, x$svn_subdir);
+  }
   args <- c(args, x$args, url, bundle)
 
   message(shQuote(svn_binary_path), " ", paste0(args, collapse = " "))
@@ -62,6 +67,14 @@ remote_download.svn_remote <- function(x, quiet = FALSE) {
   # This is only looking for an error code above 0-success
   if (request > 0) {
     stop("There seems to be a problem retrieving this SVN-URL.", call. = FALSE)
+  }
+
+  if (!is.null(x$revision)) {
+    pwd <- getwd();
+    tryCatch ({
+      setwd(bundle);
+      request <- system2(svn_binary_path, paste('update -r', x$revision));
+    }, finally = setwd(pwd));
   }
 
   bundle
