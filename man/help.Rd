@@ -3,8 +3,8 @@
 \name{help}
 \alias{?}
 \alias{help}
-\alias{shim_help}
 \alias{shim_question}
+\alias{utils_help}
 \title{Drop-in replacements for help and ? functions}
 \usage{
 # help(topic, package = NULL, ...)

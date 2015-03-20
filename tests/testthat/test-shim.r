@@ -51,14 +51,12 @@ test_that("system.file returns correct values when used with load_all", {
 
 test_that("Shimmed system.file returns correct values when used with load_all", {
   load_all("testShim")
-  shim_ns <- ns_env("testShim")
 
-  # Make sure the version of system.file inserted into the namespace's imports
-  # is the same as devtools::system.file
-  expect_identical(get("system.file", envir = shim_ns), shim_system.file)
+  # Make sure the version of system.file is the same as devtools::system.file
+  expect_equal(get("system.file"), shim_system.file)
 
   # Another check
-  expect_identical(get_system.file(), shim_system.file)
+  expect_equal(get_system.file(), shim_system.file)
 
   unload("testShim")
 })
@@ -98,4 +96,10 @@ test_that("Replacement system.file returns correct values when installed", {
 
   # Reset the libpath
   .libPaths(old_libpaths)
+})
+
+test_that("system.file is replaced in all packages when any package is under development", {
+  install("testShim", quiet = TRUE)
+  load_all("testData")
+  expect_equal(testShim:::get_system.file(), shim_system.file)
 })

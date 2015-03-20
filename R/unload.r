@@ -76,6 +76,12 @@ unload <- function(pkg = ".") {
   # Do this after detach, so that packages that have an .onUnload function
   # which unloads DLLs (like MASS) won't try to unload the DLL twice.
   unload_dll(pkg)
+
+  # if after unloading there are no packages under development, remove the
+  # global shims
+  if (length(dev_packages()) == 0) {
+    remove_global_shims()
+  }
 }
 
 # This unloads dlls loaded by either library() or load_all()

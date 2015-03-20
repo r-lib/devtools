@@ -116,6 +116,7 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
 #' help(topic, stats)
 #' help(topic, 'stats')
 #' }
+utils_help <- utils::help
 shim_help <- function(topic, package = NULL, ...) {
   # Reproduce help's NSE for topic - try to eval it and see if it's a string
   topic_name <- substitute(topic)
@@ -165,7 +166,7 @@ shim_help <- function(topic, package = NULL, ...) {
     }
 
     call <- substitute(
-      utils::help(topic, package, ...),
+      the$shims$help$orig_value(topic, package, ...),
       as_list(topic = topic_name, package = package_name)
     )
     eval(call)
@@ -205,6 +206,6 @@ shim_question <- function(e1, e2) {
   if (!is.null(find_topic(e1_str))) {
     dev_help(e1_str)
   } else {
-    eval(as.call(list(utils::`?`, substitute(e1), substitute(e2))))
+    eval(as.call(list(the$shims$`?`$orig_value, substitute(e1), substitute(e2))))
   }
 }
