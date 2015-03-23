@@ -30,7 +30,7 @@ shim_system.file <- function(..., package = "base", lib.loc = NULL,
   # If package was loaded with devtools (the package loaded with load_all)
   # search for files a bit differently.
   if (!(package %in% dev_packages())) {
-    the$shims$system.file$orig_value(..., package = package, lib.loc = lib.loc,
+    shims$system.file$orig_value(..., package = package, lib.loc = lib.loc,
       mustWork = mustWork)
 
   } else {
@@ -87,7 +87,7 @@ shim_library.dynam.unload <- function(chname, libpath,
 
   # Should only reach this in the rare case that the devtools-loaded package is
   # trying to unload a different package's DLL.
-  the$shims$library.dynam.unload$orig_value(chname, libpath, verbose, file.ext)
+  shims$library.dynam.unload$orig_value(chname, libpath, verbose, file.ext)
 }
 
 #' create a shim object for a given function which contains the original
@@ -118,21 +118,14 @@ reset_shim <- function(shim) {
 # replace existing function with devtools versions of
 # help, ?, system.file and library.dynam.unload.
 insert_global_shims <- function() {
-  if (is.null(the$shims)) {
-    the$shims <- list(
-      system.file = shim("system.file", "base", shim_system.file),
-      "?" = shim("?", "utils", shim_question),
-      "help" = shim("help", "utils", shim_help),
-      library.dynam.unload = shim("library.dynam.unload", "base", shim_library.dynam.unload)
-    )
-
-    lapply(the$shims, set_shim)
-  }
+  lapply(shims, set_shim)
   invisible()
 }
 
 # restore all of the global shims to their original values
 remove_global_shims <- function() {
-  lapply(the$shims, reset_shim)
+  lapply(shims, reset_shim)
   invisible()
 }
+
+shims <- list()

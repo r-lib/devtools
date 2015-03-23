@@ -166,7 +166,7 @@ shim_help <- function(topic, package = NULL, ...) {
     }
 
     call <- substitute(
-      the$shims$help$orig_value(topic, package, ...),
+      shims$help$orig_value(topic, package, ...),
       as_list(topic = topic_name, package = package_name)
     )
     eval(call)
@@ -206,6 +206,6 @@ shim_question <- function(e1, e2) {
   if (!is.null(find_topic(e1_str))) {
     dev_help(e1_str)
   } else {
-    eval(as.call(list(the$shims$`?`$orig_value, substitute(e1), substitute(e2))))
+    eval(as.call(list(shims$`?`$orig_value, substitute(e1), substitute(e2))))
   }
 }
