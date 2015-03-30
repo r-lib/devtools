@@ -107,12 +107,9 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
     auth <- NULL
   }
   ## if repo uses submodules warn user
-  request <- httr::GET(src_submodules, auth)
-  httr::stop_for_status(request)
-  submod <- httr::content(request, "text")
+  submod <- download_text(src_submodules, auth)
   if(grepl("\\.gitmodules", submod))
-      warning("Github repo ", x$username, "/", x$repo, "@", x$ref,
-              " contains submodules and may not function as expected!")
+      warning("Github repo contains submodules, may not function as expected!")
 
   download(dest, src, auth)
 }

@@ -76,6 +76,12 @@ download <- function(path, url, ...) {
   path
 }
 
+download_text <- function(url, ...) {
+  request <- httr::GET(url, ...)
+  httr::stop_for_status(request)
+  httr::content(request, "text")
+}
+
 last <- function(x) x[length(x)]
 
 # Modified version of utils::file_ext. Instead of always returning the text
