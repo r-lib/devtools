@@ -21,6 +21,13 @@
 #' @param host Github API host to use. Override with your github enterprise
 #'   hostname, for example, \code{"github.hostname.com/api/v3"}.
 #' @param ... Other arguments passed on to \code{\link{install}}.
+#' @details
+#' Attempting to install from a source repository that uses submodules
+#' raises a warning. Because the zipped sources provided by GitHub do not
+#' include submodules, this may lead to unexpected behaviour or compilation
+#' failure in source packages. In this case, cloning the repository manually
+#' using \code{git clone --recursive} and installing with \code{\link{install}}
+#' may yield better results.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{github_pull}}
