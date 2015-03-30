@@ -69,7 +69,7 @@ test_that("GitHub references are resolved correctly", {
     expect_equal(github_resolve_ref(github_pull(123), default_params)$ref, "some-pull-request")
     expect_equal(github_resolve_ref(github_release(), default_params)$ref, "some-release")
   })
-}
+})
 
 mock_install_remote <- function(remote, ..., quiet = FALSE) {
     remote_download(remote, quiet = quiet)
