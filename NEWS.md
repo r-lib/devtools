@@ -8,6 +8,9 @@
 * `dev_help()` now uses `normalizePath()`. Hopefully this will make it more
   likely to work if you're on windows and have a space in the path.
 
+* `NOT_CRAN` is no longer set automatically if it has been set externally to
+  allow overriding.
+
 # devtools 1.7.0
 
 ## Improve reverse dependency checking
