@@ -9,6 +9,10 @@
 #' use the previous results.
 #' @param ... additional arguments passed to \code{\link[lintr]{lint_package}}
 #' @seealso \code{\link[lintr]{lint_package}}, \code{\link[lintr]{lint}}
+#' @details
+#' The lintr cache is by default stored in \code{~/.R/lintr_cache/} (this can
+#' be configured by setting \code{options(lintr.cache_directory)}).  It can be
+#' cleared by calling \code{\link[lintr]{clear_cache}}.
 #' @export
 lint <- function(pkg = ".", cache = TRUE, ...) {
   check_lintr()
