@@ -4,6 +4,10 @@ language: r
 warnings_are_errors: true
 sudo: required
 
+env:
+ global:
+   - CRAN: http://cran.rstudio.com
+
 notifications:
   email:
     on_success: change
