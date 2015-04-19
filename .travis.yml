@@ -1,4 +1,6 @@
 language: r
+sudo: required
+bioc_required: true
 warnings_are_errors: true
 
 r_packages:
@@ -25,3 +27,4 @@ notifications:
 env:
   - global:
     - _R_CHECK_FORCE_SUGGESTS_=0
+
