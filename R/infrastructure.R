@@ -64,7 +64,7 @@ use_rstudio <- function(pkg = ".") {
 add_rstudio_project <- use_rstudio
 
 
-#' @section \code{use_knitr}:
+#' @section \code{use_vignette}:
 #' Adds needed packages to \code{DESCRIPTION}, and creates draft vignette
 #' in \code{vignettes/}. It adds \code{inst/doc} to \code{.gitignore}
 #' so you don't accidentally check in the built vignettes.
