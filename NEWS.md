@@ -1,5 +1,7 @@
 # devtools 1.7.1.9000
 
+* `install_version()` now knows how to look in multiple repos (#721).
+
 * Add details for RTools 3.2 (#738)
 
 * `use_travis()` now suggests you link to the svg icon since that looks a 

@@ -27,14 +27,7 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     }
   }
 
-  con <- gzcon(url(sprintf("%s/src/contrib/Meta/archive.rds", repos), "rb"))
-  on.exit(close(con))
-  archive <- readRDS(con)
-
-  info <- archive[[package]]
-  if (is.null(info)) {
-    stop(sprintf("couldn't find package '%s'", package))
-  }
+  info <- package_find_repo(package, repos)
 
   if (is.null(version)) {
     # Grab the latest one: only happens if pulled from CRAN
@@ -50,4 +43,21 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
 
   url <- paste(repos, "/src/contrib/Archive/", package.path, sep = "")
   install_url(url, ...)
+}
+
+package_find_repo <- function(package, repos) {
+  for (repo in repos) {
+    if (length(repos) > 1)
+      message("Trying ", repo)
+
+    con <- gzcon(url(sprintf("%s/src/contrib/Meta/archive.rds", repo), "rb"))
+    on.exit(close(con))
+    archive <- readRDS(con)
+
+    info <- archive[[package]]
+    if (!is.null(info))
+      return(info)
+  }
+
+  stop(sprintf("couldn't find package '%s'", package))
 }
