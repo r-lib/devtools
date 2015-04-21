@@ -11,6 +11,8 @@
 * `NOT_CRAN` is no longer set automatically if it has been set externally to
   allow overriding.
 
+* `use_testthat` adds example test file. (@krlmlr, #758)
+
 # devtools 1.7.0
 
 ## Improve reverse dependency checking

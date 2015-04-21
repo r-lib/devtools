@@ -29,6 +29,9 @@ use_testthat <- function(pkg = ".") {
   writeLines(render_template("testthat.R", list(name = pkg$package)),
     file.path(pkg$path, "tests", "testthat.R"))
 
+  writeLines(render_template("test-example.R", list(name = pkg$package)),
+             file.path(pkg$path, "tests", "testthat", "test-example.R"))
+
   add_desc_package(pkg, "Suggests", "testthat")
 
   invisible(TRUE)
