@@ -9,14 +9,7 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
     on.exit(set_path(old))
   }
 
-  tmp_user_profile <- file.path(tempdir(), "Rprofile-devtools")
-  tmp_user_profile_con <- file(tmp_user_profile, "w")
-  writeLines("options(repos =", tmp_user_profile_con)
-  dput(getOption("repos"), tmp_user_profile_con)
-  writeLines(")", tmp_user_profile_con)
-  close(tmp_user_profile_con)
-
-  in_dir(path, system_check(r_path, options, c(R_PROFILE_USER=tmp_user_profile,
+  in_dir(path, system_check(r_path, options, c(r_create_repos_profile(),
                                                r_env_vars(), env_vars), ...))
 }
 
@@ -62,6 +55,20 @@ r_env_vars <- function() {
   }
 
   vars
+}
+
+# Create a temporary .Rprofile based on the current "repos" option
+# and return a named vector that corresponds to environment variables
+# that need to be set to use this .Rprofile
+r_create_repos_profile <- function() {
+  tmp_user_profile <- file.path(tempdir(), "Rprofile-devtools")
+  tmp_user_profile_con <- file(tmp_user_profile, "w")
+  writeLines("options(repos =", tmp_user_profile_con)
+  dput(getOption("repos"), tmp_user_profile_con)
+  writeLines(")", tmp_user_profile_con)
+  close(tmp_user_profile_con)
+
+  c(R_PROFILE_USER=tmp_user_profile)
 }
 
 # Determine the best setting for the TAR environmental variable
