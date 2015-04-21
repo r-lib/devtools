@@ -36,7 +36,7 @@ checking the reverse dependencies of. This is normally passed in from
 \code{\link{revdep_check}}, and is used only for logging.}
 }
 \value{
-invisible \code{TRUE} if successful and no ERRORs or WARNINGS.
+Returns (invisibly) the directory where check results are stored.
 }
 \description{
 Internal function used to power \code{\link{revdep_check}()}.
