@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* Function shims now are replaced transparently with C code so they function
+  properly even if called from an external package. (@jimhester, #744)
+
 * export functions `RCMD()` and `system_check()` so they can be used by other 
   packages. (@jimhester, #699).
 

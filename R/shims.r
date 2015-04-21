@@ -1,28 +1,4 @@
-# Insert shim objects into a package's imports environment
-#
-# @param pkg A path or package object
-insert_imports_shims <- function(pkg = ".") {
-  pkg <- as.package(pkg)
-
-  imp_env <- imports_env(pkg)
-  imp_env$system.file <- shim_system.file
-  imp_env$library.dynam.unload <- shim_library.dynam.unload
-}
-
-# Create a new environment as the parent of global, with devtools versions of
-# help, ?, and system.file.
-insert_global_shims <- function() {
-  # If shims already present, just return
-  if ("devtools_shims" %in% search()) return()
-
-  e <- new.env()
-
-  e$help <- shim_help
-  e$`?` <- shim_question
-  e$system.file <- shim_system.file
-
-  attach(e, name = "devtools_shims", warn.conflicts = FALSE)
-}
+the <- new.env(parent=emptyenv())
 
 #' Replacement version of system.file
 #'
@@ -54,7 +30,7 @@ shim_system.file <- function(..., package = "base", lib.loc = NULL,
   # If package was loaded with devtools (the package loaded with load_all)
   # search for files a bit differently.
   if (!(package %in% dev_packages())) {
-    base::system.file(..., package = package, lib.loc = lib.loc,
+    shims$system.file$orig_value(..., package = package, lib.loc = lib.loc,
       mustWork = mustWork)
 
   } else {
@@ -111,5 +87,45 @@ shim_library.dynam.unload <- function(chname, libpath,
 
   # Should only reach this in the rare case that the devtools-loaded package is
   # trying to unload a different package's DLL.
-  base::library.dynam.unload(chname, libpath, verbose, file.ext)
+  shims$library.dynam.unload$orig_value(chname, libpath, verbose, file.ext)
 }
+
+#' create a shim object for a given function which contains the original
+#' function definition as well as the replacement.
+#' @useDynLib devtools duplicate_
+shim <- function(name, env, new) {
+  env <- asNamespace(env)
+  target_value <- get(name, envir = env, mode = "function")
+  structure(list(
+    env = env, name = as.name(name),
+    orig_value = .Call(duplicate_, target_value),
+    target_value = target_value,
+    new_value = new), class = "shim")
+}
+
+# replace a given shim object created by \code{shim}
+#' @useDynLib devtools reassign_function
+set_shim <- function(shim) {
+  .Call(reassign_function, shim$name, shim$env, shim$target_value, shim$new_value)
+}
+
+# restore a given shim object created by \code{shim} to its original value
+#' @useDynLib devtools reassign_function
+reset_shim <- function(shim) {
+  .Call(reassign_function, shim$name, shim$env, shim$target_value, shim$orig_value)
+}
+
+# replace existing function with devtools versions of
+# help, ?, system.file and library.dynam.unload.
+insert_global_shims <- function() {
+  lapply(shims, set_shim)
+  invisible()
+}
+
+# restore all of the global shims to their original values
+remove_global_shims <- function() {
+  lapply(shims, reset_shim)
+  invisible()
+}
+
+shims <- list()

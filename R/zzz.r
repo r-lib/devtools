@@ -49,5 +49,12 @@ NULL
 
   find_rtools()
 
+  shims <<- list(
+    system.file = shim("system.file", "base", shim_system.file),
+    "?" = shim("?", "utils", shim_question),
+    "help" = shim("help", "utils", shim_help),
+    library.dynam.unload = shim("library.dynam.unload", "base", shim_library.dynam.unload)
+    )
+
   invisible()
 }
