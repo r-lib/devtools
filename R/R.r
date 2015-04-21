@@ -1,6 +1,6 @@
 # R("-e 'str(as.list(Sys.getenv()))' --slave")
 R <- function(options, path = tempdir(), env_vars = NULL, ...) {
-  options <- paste("--vanilla", options)
+  options <- paste("--no-site-file", "--no-environ", options)
   r_path <- file.path(R.home("bin"), "R")
 
   # If rtools has been detected, add it to the path only when running R...
@@ -9,7 +9,12 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
     on.exit(set_path(old))
   }
 
-  in_dir(path, system_check(r_path, options, c(r_env_vars(), env_vars), ...))
+  tmp_user_profile <- tempfile("Rprofile")
+  writeLines(text = 'options(repos=c(CRAN="http://cran.rstudio.com"))',
+             con = tmp_user_profile)
+
+  in_dir(path, system_check(r_path, options, c(R_PROFILE_USER=tmp_user_profile,
+                                               r_env_vars(), env_vars), ...))
 }
 
 #' Run R CMD xxx from within R
