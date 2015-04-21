@@ -84,6 +84,9 @@ I've also tweaked the output of `revdep_maintainers()` so it's easier to copy an
 
 * Fixed scoping issues with `unzip()`.
 
+* `load_code()` now executes the package's code with the package's root as
+  working directory, just like `R CMD build` et al. (#640, @krlmlr).
+
 # devtools 1.6.1
 
 * Don't set non-portable compiler flags on Solaris.
