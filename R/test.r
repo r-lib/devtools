@@ -12,10 +12,11 @@
 #'
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information
+#' @param ... additional arguments passed to \code{\link[testthat]{test_dir}}
 #' @inheritParams testthat::test_dir
 #' @inheritParams run_examples
 #' @export
-test <- function(pkg = ".", filter = NULL) {
+test <- function(pkg = ".", filter = NULL, ...) {
   check_testthat()
   pkg <- as.package(pkg)
 
@@ -46,7 +47,7 @@ test <- function(pkg = ".", filter = NULL) {
   Sys.sleep(0.05); flush.console() # Avoid misordered output in RStudio
 
   env <- new.env(parent = ns_env)
-  with_envvar(r_env_vars(), testthat::test_dir(test_path, filter = filter, env = env))
+  with_envvar(r_env_vars(), testthat::test_dir(test_path, filter = filter, env = env, ...))
 }
 
 find_test_dir <- function(path) {
