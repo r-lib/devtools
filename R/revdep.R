@@ -119,6 +119,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
   message("Finding reverse dependencies")
   pkgs <- revdep(pkg$package, recursive = recursive, ignore = ignore,
     bioconductor = bioconductor, dependencies = dependencies)
+  install.packages(pkgs, lib = libpath, dependencies = NA)
   res <- check_cran(pkgs, revdep_pkg = pkg$package, libpath = libpath,
     srcpath = srcpath, bioconductor = bioconductor, type = type,
     threads = threads, check_dir = check_dir)
