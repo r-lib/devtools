@@ -10,7 +10,11 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
   }
 
   tmp_user_profile <- file.path(tempdir(), "Rprofile-devtools")
-  dput(getOption("repos"), tmp_user_profile)
+  tmp_user_profile_con <- file(tmp_user_profile, "w")
+  writeLines("options(repos =", tmp_user_profile_con)
+  dput(getOption("repos"), tmp_user_profile_con)
+  writeLines(")", tmp_user_profile_con)
+  close(tmp_user_profile_con)
 
   in_dir(path, system_check(r_path, options, c(R_PROFILE_USER=tmp_user_profile,
                                                r_env_vars(), env_vars), ...))
