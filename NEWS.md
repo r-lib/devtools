@@ -27,6 +27,8 @@
 
 * `CRAN: http://cran.rstudio.com/` is explicitly set in `travis.yml`, enabling cyclic dependency check
 
+* `R()` uses a temporary `.Rprofile` that contains the current setting of the `repos` option.  This enables the cyclic dependency check in `devtools::release` (#602, @krlmlr).
+
 # devtools 1.7.0
 
 ## Improve reverse dependency checking
