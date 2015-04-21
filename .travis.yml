@@ -1,4 +1,6 @@
 language: r
+sudo: required
+bioc_required: true
 warnings_are_errors: true
 
 r_packages:
