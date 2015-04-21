@@ -11,6 +11,8 @@
 * `NOT_CRAN` is no longer set automatically if it has been set externally to
   allow overriding.
 
+* `CRAN: http://cran.rstudio.com/` is explicitly set in `travis.yml`, enabling cyclic dependency check
+
 # devtools 1.7.0
 
 ## Improve reverse dependency checking
