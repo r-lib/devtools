@@ -1,5 +1,7 @@
 # devtools 1.7.1.9000
 
+* Add details for RTools 3.2 (#738)
+
 * `use_travis()` now suggests you link to the svg icon since that looks a 
   little sharper.
 
