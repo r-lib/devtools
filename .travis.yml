@@ -19,6 +19,8 @@ r_binary_packages:
 r_github_packages:
   - rstudio/rmarkdown
   - hadley/testthat
+bioc_packages:
+  - BiocInstaller
 
 notifications:
   email:
