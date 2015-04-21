@@ -132,3 +132,7 @@ There are also a number of options you might want to set (in `.Rprofile`) to cus
 * `devtools.name`: your name, used to sign emails
 * `devtools.desc.author`: your R author string, in the form of `"Hadley Wickham <h.wickham@gmail.com> [aut, cre]"`. Used when creating default `DESCRIPTION` files.
 * `devtools.desc.license`: a default license used when creating new packages
+
+# Code of conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](conduct.md). By participating in this project you agree to abide by its terms.

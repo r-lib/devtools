@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* `use_code_of_conduct()` adds a contributor code of conduct from 
+  http://contributor-covenant.org. (#729)
+
 * `system_check()` combines arguments with ` `, not `, `. (#753)
 
 * `lint()` gains a `cache` argument (@jimhester, #708).

@@ -1,6 +1,5 @@
 #' Add useful infrastructure to a package.
 #'
-#'
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
 #' @name infrastructure
@@ -498,6 +497,31 @@ use_cran_comments <- function(pkg = ".") {
   message("Adding cran-comments.md template")
   writeLines(render_template("cran-comments.md", list()), comments)
   invisible()
+}
+
+#' @rdname infrastructure
+#' @section \code{use_code_of_conduct}:
+#' Add a code of conduct to from \url{http://contributor-covenant.org}.
+#'
+#' @export
+#' @aliases add_travis
+use_code_of_conduct <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  comments <- file.path(pkg$path, "CONDUCT.md")
+  if (file.exists(comments))
+    stop("CONDUCT.md already exists", call. = FALSE)
+
+  message("* Creating CONDUCT.md")
+  writeLines(render_template("CONDUCT.md", list()), comments)
+
+  message("* Adding CONDUCT.md to .Rbuildignore")
+  use_build_ignore("CONDUCT.md")
+
+  message("* Don't forget to describe the code of conduct in your README.md:")
+  message("Please note that this project is released with a ",
+    "[Contributor Code of Conduct](conduct.md). ", "By participating in this ",
+    "project you agree to abide by its terms.")
 }
 
 add_build_ignore <- function(pkg = ".", files, escape = TRUE) {
