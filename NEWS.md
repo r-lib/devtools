@@ -1,5 +1,7 @@
 # devtools 1.7.1.9000
 
+* `system_check()` combines arguments with ` `, not `, `. (#753)
+
 * `lint()` gains a `cache` argument (@jimhester, #708).
 
 * export functions `RCMD()` and `system_check()` so they can be used by other 
