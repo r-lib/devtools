@@ -9,9 +9,8 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
     on.exit(set_path(old))
   }
 
-  tmp_user_profile <- tempfile("Rprofile")
-  writeLines(text = 'options(repos=c(CRAN="http://cran.rstudio.com"))',
-             con = tmp_user_profile)
+  tmp_user_profile <- file.path(tempdir(), "Rprofile-devtools")
+  dput(getOption("repos"), tmp_user_profile)
 
   in_dir(path, system_check(r_path, options, c(R_PROFILE_USER=tmp_user_profile,
                                                r_env_vars(), env_vars), ...))
