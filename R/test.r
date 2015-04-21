@@ -34,13 +34,17 @@ test <- function(pkg = ".", filter = NULL) {
     return(invisible())
   }
 
-  message("Testing ", pkg$package)
   # Need to attach testthat so that (e.g.) context() is available
   library(testthat, quietly = TRUE)
 
   # Run tests in a child of the namespace environment, like
   # testthat::test_package
+  message("Loading ", pkg$package)
   ns_env <- load_all(pkg, quiet = TRUE)$env
+
+  message("Testing ", pkg$package)
+  Sys.sleep(0.05); flush.console() # Avoid misordered output in RStudio
+
   env <- new.env(parent = ns_env)
   with_envvar(r_env_vars(), testthat::test_dir(test_path, filter = filter, env = env))
 }
