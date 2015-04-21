@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* `use_travis()` now suggests you link to the svg icon since that looks a 
+  little sharper.
+
 * `use_code_of_conduct()` adds a contributor code of conduct from 
   http://contributor-covenant.org. (#729)
 

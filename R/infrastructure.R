@@ -129,7 +129,7 @@ use_travis <- function(pkg = ".") {
     " * Turn on travis for this repo at https://travis-ci.org/profile\n",
     " * Add a travis shield to your README.md:\n",
     "[![Travis-CI Build Status]",
-       "(https://travis-ci.org/", gh$username, "/", gh$repo, ".png?branch=master)]",
+       "(https://travis-ci.org/", gh$username, "/", gh$repo, ".svg?branch=master)]",
        "(https://travis-ci.org/", gh$username, "/", gh$repo, ")"
   )
 
