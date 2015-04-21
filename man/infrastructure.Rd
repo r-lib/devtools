@@ -58,7 +58,7 @@ Does not modify \code{.Rbuildignore} as RStudio will do that when
 opened for the first time.
 }
 
-\section{\code{use_knitr}}{
+\section{\code{use_vignette}}{
 
 Adds needed packages to \code{DESCRIPTION}, and creates draft vignette
 in \code{vignettes/}. It adds \code{inst/doc} to \code{.gitignore}
