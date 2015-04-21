@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* `install()` and `install_deps()` gain a `...` argument, so additional
+  arguments can be passed to `utils::install.packages()` (@jimhester, #712).
+
 * `lint()` gains a `cache` argument (@jimhester, #708).
 
 * export functions `RCMD()` and `system_check()` so they can be used by other 
