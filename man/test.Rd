@@ -4,7 +4,7 @@
 \alias{test}
 \title{Execute all \pkg{test_that} tests in a package.}
 \usage{
-test(pkg = ".", filter = NULL)
+test(pkg = ".", filter = NULL, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -13,6 +13,8 @@ test(pkg = ".", filter = NULL)
 \item{filter}{If not \code{NULL}, only tests with file names matching this
 regular expression will be executed.  Matching will take on the file
 name after it has been stripped of \code{"test-"} and \code{".r"}.}
+
+\item{...}{additional arguments passed to \code{\link[testthat]{test_dir}}}
 }
 \description{
 Tests are assumed to be located in either the \code{inst/tests/} or
