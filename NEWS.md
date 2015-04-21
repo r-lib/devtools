@@ -1,5 +1,7 @@
 # devtools 1.7.1.9000
 
+* `lint()` gains a `cache` argument (@jimhester, #708).
+
 * export functions `RCMD()` and `system_check()` so they can be used by other 
   packages. (@jimhester, #699).
 
