@@ -1,6 +1,8 @@
 # R("-e 'str(as.list(Sys.getenv()))' --slave")
 R <- function(options, path = tempdir(), env_vars = NULL, ...) {
-  options <- paste("--no-site-file", "--no-environ", options)
+  options <- paste(
+    "--no-site-file", "--no-environ", "--no-save", "--no-restore",
+    options)
   r_path <- file.path(R.home("bin"), "R")
 
   # If rtools has been detected, add it to the path only when running R...
