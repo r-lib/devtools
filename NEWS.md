@@ -1,5 +1,23 @@
 # devtools 1.7.1.9000
 
+* `install_version()` now knows how to look in multiple repos (#721).
+
+* Add details for RTools 3.2 (#738)
+
+* `use_travis()` now suggests you link to the svg icon since that looks a 
+  little sharper.
+
+* `use_code_of_conduct()` adds a contributor code of conduct from 
+  http://contributor-covenant.org. (#729)
+
+* `use_test()` adds a new test file (#769, @krlmlr).
+
+* `system_check()` combines arguments with ` `, not `, `. (#753)
+
+* `lint()` gains a `cache` argument (@jimhester, #708).
+* `test()` gains an `...` argument so that additional arguments can be passed
+  to `testthat::test_dir` (@jimhester, #747)
+
 * export functions `RCMD()` and `system_check()` so they can be used by other 
   packages. (@jimhester, #699).
 
@@ -8,6 +26,8 @@
 
 * `NOT_CRAN` is no longer set automatically if it has been set externally to
   allow overriding.
+
+* `CRAN: http://cran.rstudio.com/` is explicitly set in `travis.yml`, enabling cyclic dependency check
 
 * `install_svn` now optionally accepts revision number
 
@@ -85,6 +105,9 @@ I've also tweaked the output of `revdep_maintainers()` so it's easier to copy an
 * `missing_s3()` works once again (#672)
 
 * Fixed scoping issues with `unzip()`.
+
+* `load_code()` now executes the package's code with the package's root as
+  working directory, just like `R CMD build` et al. (#640, @krlmlr).
 
 # devtools 1.6.1
 

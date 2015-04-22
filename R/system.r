@@ -10,7 +10,7 @@
 #' @export
 system_check <- function(cmd, args = character(), env = character(),
                          quiet = FALSE, ...) {
-  full <- paste(shQuote(cmd), " ", paste(args, collapse = ", "), sep = "")
+  full <- paste(shQuote(cmd), " ", paste(args, collapse = " "), sep = "")
 
   if (!quiet) {
     message(wrap_command(full))
