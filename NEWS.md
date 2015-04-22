@@ -10,6 +10,8 @@
 * `use_code_of_conduct()` adds a contributor code of conduct from 
   http://contributor-covenant.org. (#729)
 
+* `use_test()` adds a new test file (#769, @krlmlr).
+
 * `system_check()` combines arguments with ` `, not `, `. (#753)
 
 * `lint()` gains a `cache` argument (@jimhester, #708).

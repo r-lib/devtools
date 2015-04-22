@@ -12,12 +12,15 @@
 \alias{use_rcpp}
 \alias{use_revdep}
 \alias{use_rstudio}
+\alias{use_test}
 \alias{use_testthat}
 \alias{use_travis}
 \alias{use_vignette}
 \title{Add useful infrastructure to a package.}
 \usage{
 use_testthat(pkg = ".")
+
+use_test(name, pkg = ".")
 
 use_rstudio(pkg = ".")
 
@@ -53,6 +56,13 @@ Add testing infrastructure to a package that does not already have it.
 This will create \file{tests/testthat.R}, \file{tests/testthat/} and
 add \pkg{testthat} to the suggested packages. This is called
 automatically from \code{\link{test}} if needed.
+}
+
+\section{\code{use_test}}{
+
+Add a test file, also add testing infrastructure if necessary.
+This will create \file{tests/testthat/test-<name>.R} with a user-specified
+name for the test.  Will fail if the file exists.
 }
 
 \section{\code{use_rstudio}}{
