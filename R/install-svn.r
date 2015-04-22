@@ -72,11 +72,11 @@ remote_download.svn_remote <- function(x, quiet = FALSE) {
 
   if (!is.null(x$revision)) {
     pwd <- getwd()
-	on.exit(setwd(pwd))
-	request <- system2(svn_binary_path, paste('update -r', x$revision))
+    on.exit(setwd(pwd))
+    request <- system2(svn_binary_path, paste('update -r', x$revision))
     if (request > 0) {
       stop("There was a problem switching to the requested SVN revision", call. = FALSE)
-	}
+    }
   }
 
   bundle
