@@ -29,7 +29,7 @@
 
 * `CRAN: http://cran.rstudio.com/` is explicitly set in `travis.yml`, enabling cyclic dependency check
 
-* `install_svn` now optionally accepts revision number
+* `install_svn` now optionally accepts revision number (#739, @lev-kuznetsov)
 
 # devtools 1.7.0
 
