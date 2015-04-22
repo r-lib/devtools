@@ -11,7 +11,7 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
     on.exit(set_path(old))
   }
 
-  in_dir(path, system_check(r_path, options, c(r_create_repos_profile(),
+  in_dir(path, system_check(r_path, options, c(r_profile(),
                                                r_env_vars(), env_vars), ...))
 }
 
@@ -62,7 +62,7 @@ r_env_vars <- function() {
 # Create a temporary .Rprofile based on the current "repos" option
 # and return a named vector that corresponds to environment variables
 # that need to be set to use this .Rprofile
-r_create_repos_profile <- function() {
+r_profile <- function() {
   tmp_user_profile <- file.path(tempdir(), "Rprofile-devtools")
   tmp_user_profile_con <- file(tmp_user_profile, "w")
   writeLines("options(repos =", tmp_user_profile_con)
