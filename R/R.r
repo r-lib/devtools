@@ -65,12 +65,12 @@ r_env_vars <- function() {
 r_profile <- function() {
   tmp_user_profile <- file.path(tempdir(), "Rprofile-devtools")
   tmp_user_profile_con <- file(tmp_user_profile, "w")
+  on.exit(close(tmp_user_profile_con), add = TRUE)
   writeLines("options(repos =", tmp_user_profile_con)
   dput(getOption("repos"), tmp_user_profile_con)
   writeLines(")", tmp_user_profile_con)
-  close(tmp_user_profile_con)
 
-  c(R_PROFILE_USER=tmp_user_profile)
+  c(R_PROFILE_USER = tmp_user_profile)
 }
 
 # Determine the best setting for the TAR environmental variable
