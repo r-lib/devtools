@@ -53,7 +53,7 @@ r_env_vars <- function() {
     "TAR" = auto_tar())
 
   if(is.na(Sys.getenv("NOT_CRAN", unset = NA))) {
-    vars <- c(vars, "NOT_CRAN" = "true")
+    vars[["NOT_CRAN"]] <- "true"
   }
 
   vars
