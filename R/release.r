@@ -252,7 +252,8 @@ submit_cran <- function(pkg = ".") {
 build_cran <- function(pkg) {
   message("Building")
   built_path <- build(pkg, tempdir(), manual = TRUE)
-  message("File size: ", file.info(built_path)$size, " bytes")
+  message("File size: ",
+          format(as.object_size(file.info(built_path)$size), units = "auto"))
   built_path
 }
 
@@ -297,3 +298,5 @@ upload_cran <- function(pkg, built_path) {
 
   invisible(TRUE)
 }
+
+as.object_size <- function(x) structure(x, class = "object_size")
