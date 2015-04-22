@@ -27,6 +27,8 @@
 
 * `CRAN: http://cran.rstudio.com/` is explicitly set in `travis.yml`, enabling cyclic dependency check
 
+* `release()` now shows file size before submitting to CRAN (#683, @krlmlr).
+
 # devtools 1.7.0
 
 ## Improve reverse dependency checking
