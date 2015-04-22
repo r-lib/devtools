@@ -109,10 +109,12 @@ release <- function(pkg = ".", check = TRUE) {
   if (yesno("Is your email address ", maintainer(pkg)$email, "?"))
     return(invisible())
 
+  built_path <- build_cran(pkg)
+
   if (yesno("Ready to submit?"))
     return(invisible())
 
-  submit_cran(pkg)
+  upload_cran(pkg, built_path)
 
   if (file.exists(file.path(pkg$path, ".git"))) {
     message("Don't forget to tag the release when the package is accepted!")
@@ -243,13 +245,21 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #' @export
 #' @keywords internal
 submit_cran <- function(pkg = ".") {
-  pkg <- as.package(pkg)
-  maint <- maintainer(pkg)
-  comments <- cran_comments(pkg)
+  built_path <- build_cran(pkg)
+  upload_cran(pkg, built_path)
+}
 
+build_cran <- function(pkg) {
   message("Building")
   built_path <- build(pkg, tempdir(), manual = TRUE)
   message("File size: ", file.info(built_path)$size, " bytes")
+  built_path
+}
+
+upload_cran <- function(pkg, built_path) {
+  pkg <- as.package(pkg)
+  maint <- maintainer(pkg)
+  comments <- cran_comments(pkg)
 
   # Initial upload ---------
   message("Uploading package & comments")
