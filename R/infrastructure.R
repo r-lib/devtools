@@ -51,16 +51,16 @@ use_test <- function(name, pkg = ".") {
     use_testthat(pkg)
   }
 
-  file_name <- sprintf("test-%s.R", name)
-  if (file.exists(file_name)) {
-    stop("File ", file_name, " exists", call. = FALSE)
+  path <- sprintf("test-%s.R", name)
+  if (file.exists(path)) {
+    stop("File ", path, " exists", call. = FALSE)
   }
 
   writeLines(
     render_template("test-example.R", list(test_name = name)),
-    file.path(pkg$path, "tests", "testthat", file_name))
+    file.path(pkg$path, "tests", "testthat", path))
 
-  invisible(TRUE)
+  message("Test file created in ", path)
 }
 
 #' @section \code{use_rstudio}:
