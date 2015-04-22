@@ -29,7 +29,11 @@
 
 * `CRAN: http://cran.rstudio.com/` is explicitly set in `travis.yml`, enabling cyclic dependency check
 
-* `R()` uses a temporary `.Rprofile` that contains the current setting of the `repos` option.  This enables the cyclic dependency check in `devtools::release` (#602, @krlmlr).
+* Previously, `devtools` ran all external R processes with `R --vanilla`.
+  Now it only suppresses user profiles, and constructs a custom `.Rprofile` to
+  override the default.  Currently, this `.Rprofile` sets up the `repos` option.
+  Among others, this enables the cyclic dependency check in `devtools::release`
+  (#602, @krlmlr).
 
 # devtools 1.7.0
 
