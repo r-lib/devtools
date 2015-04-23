@@ -135,4 +135,4 @@ There are also a number of options you might want to set (in `.Rprofile`) to cus
 
 # Code of conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](conduct.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
