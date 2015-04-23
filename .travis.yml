@@ -3,29 +3,14 @@ sudo: required
 bioc_required: true
 warnings_are_errors: true
 
-r_packages:
-  - RUnit
 r_binary_packages:
   - XML
   - Rcpp
   - knitr
-  - brew
-  - inline
-  - highlight
-  - formatR
-  - highr
-  - markdown
-  - rgl
+
 r_github_packages:
   - rstudio/rmarkdown
   - hadley/testthat
+
 bioc_packages:
   - BiocInstaller
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
-env:
-  - global:
-    - _R_CHECK_FORCE_SUGGESTS_=0

@@ -1,6 +1,8 @@
 # R("-e 'str(as.list(Sys.getenv()))' --slave")
 R <- function(options, path = tempdir(), env_vars = NULL, ...) {
-  options <- paste("--vanilla", options)
+  options <- paste(
+    "--no-site-file", "--no-environ", "--no-save", "--no-restore",
+    options)
   r_path <- file.path(R.home("bin"), "R")
 
   # If rtools has been detected, add it to the path only when running R...
@@ -9,7 +11,8 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
     on.exit(set_path(old))
   }
 
-  in_dir(path, system_check(r_path, options, c(r_env_vars(), env_vars), ...))
+  in_dir(path, system_check(r_path, options, c(r_profile(),
+                                               r_env_vars(), env_vars), ...))
 }
 
 #' Run R CMD xxx from within R
@@ -50,10 +53,24 @@ r_env_vars <- function() {
     "TAR" = auto_tar())
 
   if(is.na(Sys.getenv("NOT_CRAN", unset = NA))) {
-    c(vars, "NOT_CRAN" = "true")
-  } else {
-    vars
+    vars[["NOT_CRAN"]] <- "true"
   }
+
+  vars
+}
+
+# Create a temporary .Rprofile based on the current "repos" option
+# and return a named vector that corresponds to environment variables
+# that need to be set to use this .Rprofile
+r_profile <- function() {
+  tmp_user_profile <- file.path(tempdir(), "Rprofile-devtools")
+  tmp_user_profile_con <- file(tmp_user_profile, "w")
+  on.exit(close(tmp_user_profile_con), add = TRUE)
+  writeLines("options(repos =", tmp_user_profile_con)
+  dput(getOption("repos"), tmp_user_profile_con)
+  writeLines(")", tmp_user_profile_con)
+
+  c(R_PROFILE_USER = tmp_user_profile)
 }
 
 # Determine the best setting for the TAR environmental variable

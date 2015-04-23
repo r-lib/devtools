@@ -1,5 +1,7 @@
 # devtools 1.7.1.9000
 
+* `revdep_check()` creates directories if needed (#759).
+
 * `install_version()` now knows how to look in multiple repos (#721).
 
 * Add details for RTools 3.2 (#738)
@@ -30,6 +32,14 @@
 * `CRAN: http://cran.rstudio.com/` is explicitly set in `travis.yml`, enabling cyclic dependency check
 
 * `install_svn` now optionally accepts revision number (#739, @lev-kuznetsov)
+
+* `release()` now shows file size before submitting to CRAN (#683, @krlmlr).
+
+* Previously, `devtools` ran all external R processes with `R --vanilla`.
+  Now it only suppresses user profiles, and constructs a custom `.Rprofile` to
+  override the default.  Currently, this `.Rprofile` sets up the `repos` option.
+  Among others, this enables the cyclic dependency check in `devtools::release`
+  (#602, @krlmlr).
 
 # devtools 1.7.0
 

@@ -112,6 +112,11 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
   pkg <- as.package(pkg)
   rule("Reverse dependency checks for ", pkg$package, pad = "=")
 
+  if (!file.exists(libpath))
+    dir.create(libpath)
+  if (!file.exists(srcpath))
+    dir.create(srcpath)
+
   message("Installing ", pkg$package)
   with_libpaths(libpath, install(pkg, reload = FALSE, quiet = TRUE))
   on.exit(remove.packages(pkg$package, libpath), add = TRUE)
