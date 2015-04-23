@@ -31,6 +31,12 @@
 
 * `release()` now shows file size before submitting to CRAN (#683, @krlmlr).
 
+* Previously, `devtools` ran all external R processes with `R --vanilla`.
+  Now it only suppresses user profiles, and constructs a custom `.Rprofile` to
+  override the default.  Currently, this `.Rprofile` sets up the `repos` option.
+  Among others, this enables the cyclic dependency check in `devtools::release`
+  (#602, @krlmlr).
+
 # devtools 1.7.0
 
 ## Improve reverse dependency checking
