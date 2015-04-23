@@ -36,6 +36,33 @@ use_testthat <- function(pkg = ".") {
 #' @export
 add_test_infrastructure <- use_testthat
 
+#' @section \code{use_test}:
+#' Add a test file, also add testing infrastructure if necessary.
+#' This will create \file{tests/testthat/test-<name>.R} with a user-specified
+#' name for the test.  Will fail if the file exists.
+#' @rdname infrastructure
+#' @aliases add_test_infrastructure
+#' @export
+use_test <- function(name, pkg = ".") {
+  pkg <- as.package(pkg)
+
+  check_testthat()
+  if (!uses_testthat(pkg)) {
+    use_testthat(pkg)
+  }
+
+  path <- sprintf("test-%s.R", name)
+  if (file.exists(path)) {
+    stop("File ", path, " exists", call. = FALSE)
+  }
+
+  writeLines(
+    render_template("test-example.R", list(test_name = name)),
+    file.path(pkg$path, "tests", "testthat", path))
+
+  message("Test file created in ", path)
+}
+
 #' @section \code{use_rstudio}:
 #' Does not modify \code{.Rbuildignore} as RStudio will do that when
 #' opened for the first time.
