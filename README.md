@@ -32,7 +32,7 @@ You can track (and contribute to) development of `devtools` at https://github.co
         build_github_devtools()
 
         #### Restart R before continuing ####
-        install.packages("devtools.zip", repos = NULL)
+        install.packages("devtools.zip", repos = NULL, type = "source")
 
         # Remove the package after installation
         unlink("devtools.zip")
