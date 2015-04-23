@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* `package_deps()` determines all recursive dependencies and whether or not
+  they're up-to-date (#663).
+
 * `revdep_check()` creates directories if needed (#759).
 
 * `install_version()` now knows how to look in multiple repos (#721).
