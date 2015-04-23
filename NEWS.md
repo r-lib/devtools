@@ -1,5 +1,7 @@
 # devtools 1.7.1.9000
 
+* `revdep_check()` creates directories if needed (#759).
+
 * `install_version()` now knows how to look in multiple repos (#721).
 
 * Add details for RTools 3.2 (#738)
