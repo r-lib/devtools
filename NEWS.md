@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* devtools now correctly writes out continuation lines in the `DESCRIPTION`.
+  (#709).
+
 * `package_deps()` determines all recursive dependencies and whether or not
   they're up-to-date (#663).
 
