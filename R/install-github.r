@@ -106,10 +106,12 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
   } else {
     auth <- NULL
   }
-  submod <- download_text(src_submodules, auth)
-  if (grepl("\\.gitmodules", submod))
+
+  x <- httr::HEAD(src_submodules, auth)
+  has_submods <- identical(httr::status_code(x), 200L)
+  if (has_submods)
     warning("Github repo contains submodules, may not function as expected!",
-            call. = FALSE)
+      call. = FALSE)
 
   download(dest, src, auth)
 }
