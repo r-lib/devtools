@@ -585,6 +585,45 @@ use_code_of_conduct <- function(pkg = ".") {
     "project you agree to abide by its terms.")
 }
 
+#' @rdname infrastructure
+#' @section \code{use_wercker}:
+#' Add basic wercker template to a package. Also adds \code{wercker.yml} to
+#' \code{.Rbuildignore} so it isn't included in the built package.
+#' @param coverage if \code{TRUE} track test coverage on wercker builds.
+#' @param lint if \code{TRUE} lint package on wercker builds.
+#' @export
+use_wercker <- function(pkg = ".", coverage = FALSE, lint = FALSE) {
+  pkg <- as.package(pkg)
+
+  path <- file.path(pkg$path, "wercker.yml")
+  if (file.exists(path)) {
+    stop("wercker.yml already exists", call. = FALSE)
+  }
+  message("Adding wercker.yml to ", pkg$package, ". Next: \n",
+          " * Turn on wercker for this repo at https://app.wercker.com\n",
+          " * Add a wercker badge to your README.md (Copy from Application page)\n")
+
+  template_path <- system.file("templates/wercker.yml", package = "devtools")
+  lines <- readLines(template_path)
+
+  if (isTRUE(lint)) {
+    lines <- append(lines, "  - jimhester/r-lint")
+  }
+
+  if (isTRUE(coverage)) {
+    lines <- append(lines, "  - jimhester/r-coverage")
+    message(" * Turn on codecov for this repo at https://codecov.io\n",
+            " * And add the CODECOV_TOKEN protected variable to your Wercker Settings\n")
+  }
+
+  add_build_ignore(pkg, "wercker.yml")
+  wercker <- file.path(pkg$path, "wercker.yml")
+
+  writeLines(lines, con = wercker)
+
+  invisible(TRUE)
+}
+
 add_build_ignore <- function(pkg = ".", files, escape = TRUE) {
   use_build_ignore(files, escape = escape, pkg = pkg)
 }

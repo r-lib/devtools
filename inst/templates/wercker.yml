@@ -1,0 +1,5 @@
+box: rocker/hadleyverse
+build:
+  steps:
+    - jimhester/r-dependencies
+    - jimhester/r-check
