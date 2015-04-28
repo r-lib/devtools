@@ -143,7 +143,10 @@ install_packages <- function(pkgs, repos, type, quiet = FALSE) {
   invisible()
 }
 
-find_deps <- function(pkgs, available, top_dep = TRUE, rec_dep = NA) {
+find_deps <- function(pkgs, available = available.packages(), top_dep = TRUE, rec_dep = NA) {
+  if (identical(top_dep, FALSE))
+    return(pkgs)
+
   top_dep <- standardise_dep(top_dep)
   rec_dep <- standardise_dep(rec_dep)
 

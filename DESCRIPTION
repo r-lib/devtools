@@ -25,7 +25,8 @@ Imports:
     digest,
     rstudioapi (>= 0.2.0),
     jsonlite,
-    roxygen2 (>= 4.1.0)
+    roxygen2 (>= 4.1.0),
+    rversions
 Suggests:
     testthat (>= 0.7),
     BiocInstaller,

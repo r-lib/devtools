@@ -1,5 +1,9 @@
 # devtools 1.7.1.9000
 
+* New `dr_devtools()` runs some common diagnostics. It is run automatically
+  by `release()` to ensure that you have the latest version of devtools and R
+  before submitting to CRAN (#592).
+
 * `release()` now reminds you to check the existing CRAN check results page
   (#613).
 

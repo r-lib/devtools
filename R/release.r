@@ -39,6 +39,10 @@
 #'   release it.
 #' @export
 release <- function(pkg = ".", check = TRUE) {
+  dr_d <- dr_devtools()
+  if (!dr_d)
+    print(dr_d)
+
   pkg <- as.package(pkg)
 
   # Figure out if this is a new package
