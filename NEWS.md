@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* warn users of `install_github()` if repository contains submodules
+  that install may not function as expected (@ashander, #751).
+
 * export functions `RCMD()` and `system_check()` so they can be used by other 
   packages. (@jimhester, #699).
 
