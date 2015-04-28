@@ -36,6 +36,9 @@
 * `test()` gains an `...` argument so that additional arguments can be passed
   to `testthat::test_dir` (@jimhester, #747)
 
+* warn users of `install_github()` if repository contains submodules
+  that install may not function as expected (@ashander, #751).
+
 * export functions `RCMD()` and `system_check()` so they can be used by other 
   packages. (@jimhester, #699).
 

@@ -21,6 +21,13 @@
 #' @param host Github API host to use. Override with your github enterprise
 #'   hostname, for example, \code{"github.hostname.com/api/v3"}.
 #' @param ... Other arguments passed on to \code{\link{install}}.
+#' @details
+#' Attempting to install from a source repository that uses submodules
+#' raises a warning. Because the zipped sources provided by GitHub do not
+#' include submodules, this may lead to unexpected behaviour or compilation
+#' failure in source packages. In this case, cloning the repository manually
+#' using \code{\link{install_git}} with \code{args="--recursive"} may yield
+#' better results.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{github_pull}}
@@ -86,8 +93,9 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
   }
 
   dest <- tempfile(fileext = paste0(".zip"))
-  src <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo,
-    "/zipball/", x$ref)
+  src_root <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo)
+  src_submodules <- paste0(src_root, "/contents/.gitmodules?ref=", x$ref)
+  src <- paste0(src_root, "/zipball/", x$ref)
 
   if (!is.null(x$auth_token)) {
     auth <- httr::authenticate(
@@ -98,6 +106,10 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
   } else {
     auth <- NULL
   }
+  submod <- download_text(src_submodules, auth)
+  if (grepl("\\.gitmodules", submod))
+    warning("Github repo contains submodules, may not function as expected!",
+            call. = FALSE)
 
   download(dest, src, auth)
 }
