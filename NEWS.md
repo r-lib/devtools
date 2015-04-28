@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* `use_coveralls()` function to print instructions on adding coveralls test
+  coverage to a project (@jimhester, #681).
+
 * devtools now correctly writes out continuation lines in the `DESCRIPTION`.
   (#709).
 
