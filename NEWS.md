@@ -37,6 +37,8 @@
 
 * `CRAN: http://cran.rstudio.com/` is explicitly set in `travis.yml`, enabling cyclic dependency check
 
+* `install_svn` now optionally accepts revision number (#739, @lev-kuznetsov)
+
 * `release()` now shows file size before submitting to CRAN (#683, @krlmlr).
 
 * Previously, `devtools` ran all external R processes with `R --vanilla`.
