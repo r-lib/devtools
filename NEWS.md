@@ -7,6 +7,9 @@
 * `release()` now reminds you to check the existing CRAN check results page
   (#613).
 
+* `use_coveralls()` function to print instructions on adding coveralls test
+  coverage to a project (@jimhester, #681).
+
 * devtools now correctly writes out continuation lines in the `DESCRIPTION`.
   (#709).
 
@@ -63,6 +66,9 @@
 # devtools 1.7.0
 
 ## Improve reverse dependency checking
+* `use_coveralls()` allows you to easily add coveralls support to a package. (#680, @jimhester)
+
+* Fixed scoping issues with `unzip()`.
 
 Devtools now supports a new and improved style of revdep checking with `use_revdep()`. This creates a new directory called `revdep` which contains a `check.R` template. Run this template to check all reverse dependencies, and save summarised results to `check/summary.md`. You can then check this file into git, making it much easier to track how reverse dependency results change between versions. The documentation for `revdep_check()` is much improved, and should be more useful (#635)
 
