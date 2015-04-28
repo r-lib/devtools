@@ -92,6 +92,11 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 
   if (!quiet) message("Loading ", pkg$package)
 
+  roxygen2::update_collate(pkg$path)
+  # Refresh the pkg structure with any updates to the Collate entry
+  # in the DESCRIPTION file
+  pkg <- as.package(pkg$path)
+
   # Reloading devtools is a special case. Normally, objects in the
   # namespace become inaccessible if the namespace is unloaded before the
   # the object has been accessed. This is kind of a hack - using as.list
@@ -143,7 +148,6 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 
   out$data <- load_data(pkg)
 
-  roxygen2::update_collate(pkg$path)
   out$code <- load_code(pkg)
   register_s3(pkg)
   out$dll <- load_dll(pkg)

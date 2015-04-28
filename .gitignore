@@ -3,3 +3,5 @@
 *.dll
 .Rproj.user
 .Rhistory
+.project
+.settings/

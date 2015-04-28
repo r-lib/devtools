@@ -1,6 +1,5 @@
 #' Add useful infrastructure to a package.
 #'
-#'
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
 #' @name infrastructure
@@ -37,6 +36,33 @@ use_testthat <- function(pkg = ".") {
 #' @export
 add_test_infrastructure <- use_testthat
 
+#' @section \code{use_test}:
+#' Add a test file, also add testing infrastructure if necessary.
+#' This will create \file{tests/testthat/test-<name>.R} with a user-specified
+#' name for the test.  Will fail if the file exists.
+#' @rdname infrastructure
+#' @aliases add_test_infrastructure
+#' @export
+use_test <- function(name, pkg = ".") {
+  pkg <- as.package(pkg)
+
+  check_testthat()
+  if (!uses_testthat(pkg)) {
+    use_testthat(pkg)
+  }
+
+  path <- sprintf("test-%s.R", name)
+  if (file.exists(path)) {
+    stop("File ", path, " exists", call. = FALSE)
+  }
+
+  writeLines(
+    render_template("test-example.R", list(test_name = name)),
+    file.path(pkg$path, "tests", "testthat", path))
+
+  message("Test file created in ", path)
+}
+
 #' @section \code{use_rstudio}:
 #' Does not modify \code{.Rbuildignore} as RStudio will do that when
 #' opened for the first time.
@@ -64,7 +90,7 @@ use_rstudio <- function(pkg = ".") {
 add_rstudio_project <- use_rstudio
 
 
-#' @section \code{use_knitr}:
+#' @section \code{use_vignette}:
 #' Adds needed packages to \code{DESCRIPTION}, and creates draft vignette
 #' in \code{vignettes/}. It adds \code{inst/doc} to \code{.gitignore}
 #' so you don't accidentally check in the built vignettes.
@@ -130,7 +156,7 @@ use_travis <- function(pkg = ".") {
     " * Turn on travis for this repo at https://travis-ci.org/profile\n",
     " * Add a travis shield to your README.md:\n",
     "[![Travis-CI Build Status]",
-       "(https://travis-ci.org/", gh$username, "/", gh$repo, ".png?branch=master)]",
+       "(https://travis-ci.org/", gh$username, "/", gh$repo, ".svg?branch=master)]",
        "(https://travis-ci.org/", gh$username, "/", gh$repo, ")"
   )
 
@@ -481,7 +507,7 @@ use_readme_rmd <- function(pkg = ".") {
     rule()
   }
   use_build_ignore("README.Rmd", pkg = pkg)
-  use_build_ignore("^README-*\\.png$", escape = FALSE, pkg = pkg)
+  use_build_ignore("^README-.*\\.png$", escape = FALSE, pkg = pkg)
 
   if (uses_git(pkg) && file.exists(pkg$path, ".git", "hooks", "pre-commit")) {
     message("Adding pre-commit hook")
@@ -532,6 +558,31 @@ use_cran_comments <- function(pkg = ".") {
   message("Adding cran-comments.md template")
   writeLines(render_template("cran-comments.md", list()), comments)
   invisible()
+}
+
+#' @rdname infrastructure
+#' @section \code{use_code_of_conduct}:
+#' Add a code of conduct to from \url{http://contributor-covenant.org}.
+#'
+#' @export
+#' @aliases add_travis
+use_code_of_conduct <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  comments <- file.path(pkg$path, "CONDUCT.md")
+  if (file.exists(comments))
+    stop("CONDUCT.md already exists", call. = FALSE)
+
+  message("* Creating CONDUCT.md")
+  writeLines(render_template("CONDUCT.md", list()), comments)
+
+  message("* Adding CONDUCT.md to .Rbuildignore")
+  use_build_ignore("CONDUCT.md")
+
+  message("* Don't forget to describe the code of conduct in your README.md:")
+  message("Please note that this project is released with a ",
+    "[Contributor Code of Conduct](CONDUCT.md). ", "By participating in this ",
+    "project you agree to abide by its terms.")
 }
 
 add_build_ignore <- function(pkg = ".", files, escape = TRUE) {

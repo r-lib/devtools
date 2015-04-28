@@ -1,8 +1,16 @@
-# @param arg a vector of command arguments.
-# @param env a named character vector of environment variables.  Will be quoted
+#' Run a system command and check if it succeeds.
+#'
+#' @param cmd the command to run.
+#' @param args a vector of command arguments.
+#' @param env a named character vector of environment variables.  Will be quoted
+#' @param quiet if \code{FALSE}, the command to be run will be echoed.
+#' @param ... additional arguments passed to \code{\link[base]{system}}
+#' @return \code{TRUE} if the command succeeds, an error will be thrown if the
+#' command fails.
+#' @export
 system_check <- function(cmd, args = character(), env = character(),
                          quiet = FALSE, ...) {
-  full <- paste(shQuote(cmd), " ", paste(args, collapse = ", "), sep = "")
+  full <- paste(shQuote(cmd), " ", paste(args, collapse = " "), sep = "")
 
   if (!quiet) {
     message(wrap_command(full))
@@ -32,4 +40,3 @@ wrap_command <- function(x) {
   continue <- c(rep(" \\", length(lines) - 1), "")
   paste(lines, continue, collapse = "\n")
 }
-

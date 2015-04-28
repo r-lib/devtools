@@ -26,6 +26,7 @@ dev_help <- function(topic, stage = "render", type = getOption("help_type")) {
   }
 
   pkg <- basename(names(path)[1])
+  path <- normalizePath(path, winslash = "/")
   if (rstudioapi::hasFun("previewRd")) {
     rstudioapi::callFun("previewRd", path)
   } else {

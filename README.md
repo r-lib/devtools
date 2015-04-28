@@ -1,6 +1,6 @@
 # devtools
 
-[![Build Status](https://travis-ci.org/hadley/devtools.png?branch=master)](https://travis-ci.org/hadley/devtools)
+[![Build Status](https://travis-ci.org/hadley/devtools.svg?branch=master)](https://travis-ci.org/hadley/devtools)
 [![Coverage Status](https://img.shields.io/coveralls/hadley/devtools.svg)](https://coveralls.io/r/hadley/devtools?branch=master)
 
 The aim of `devtools` is to make your life as a package developer easier by providing R functions that simplify many common tasks. R packages are actually really simple, and with the right tools it should be easier to use the package structure than not. Package development in R can feel intimidating, but devtools does every thing it can to make it as welcoming as possible. `devtools` comes with a small guarantee: if because of a bug in devtools a member of R-core gets angry with you, I will send you a handwritten apology note. Just forward me the email and your address, and I'll get a card in the mail.
@@ -33,7 +33,7 @@ You can track (and contribute to) development of `devtools` at https://github.co
         build_github_devtools()
 
         #### Restart R before continuing ####
-        install.packages("devtools.zip", repos = NULL)
+        install.packages("devtools.zip", repos = NULL, type = "source")
 
         # Remove the package after installation
         unlink("devtools.zip")
@@ -69,7 +69,7 @@ Building and installing:
 * `install_github()` installs an R package from github,
   `install_gitorious()` from gitorious, `install_bitbucket()` from
   bitbucket, `install_url()` from an arbitrary url and
-  `install_file()` from a local file on disk. `install_version()`
+  `install_local()` from a local file on disk. `install_version()`
   installs a specified version from cran.
 
 Check and release:
@@ -133,3 +133,7 @@ There are also a number of options you might want to set (in `.Rprofile`) to cus
 * `devtools.name`: your name, used to sign emails
 * `devtools.desc.author`: your R author string, in the form of `"Hadley Wickham <h.wickham@gmail.com> [aut, cre]"`. Used when creating default `DESCRIPTION` files.
 * `devtools.desc.license`: a default license used when creating new packages
+
+# Code of conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

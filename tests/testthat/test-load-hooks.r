@@ -8,7 +8,7 @@ test_that("hooks called in correct order", {
     }
   }
   reset_events <- function() {
-    assign("hooks", new.env(parent = emptyenv()), env = globalenv())
+    assign("hooks", new.env(parent = emptyenv()), envir = globalenv())
     h <- globalenv()$hooks
     h$events <- character()
   }

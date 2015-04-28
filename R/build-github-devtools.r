@@ -49,7 +49,7 @@ build_github_devtools <- function(outfile = NULL) {
   writeBin(httr::content(request, "raw"), bundle)
   on.exit(unlink(bundle))
 
-  unzip(bundle, exdir = tempdir())
+  utils::unzip(bundle, exdir = tempdir())
 
   # Build binary package
   pkgdir <- file.path(tempdir(), "devtools-master")

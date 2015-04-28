@@ -23,7 +23,7 @@
 #' @param revdep_pkg Optional name of a package for which this check is
 #'   checking the reverse dependencies of. This is normally passed in from
 #'   \code{\link{revdep_check}}, and is used only for logging.
-#' @return invisible \code{TRUE} if successful and no ERRORs or WARNINGS.
+#' @return Returns (invisibly) the directory where check results are stored.
 #' @keywords internal
 #' @export
 check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
@@ -141,5 +141,5 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       mc.cores = threads)
   }
 
-  check_dir
+  invisible(check_dir)
 }

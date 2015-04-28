@@ -82,6 +82,10 @@ unload <- function(pkg = ".") {
 unload_dll <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
+  # Always run garbage collector to force any deleted external pointers to
+  # finalise
+  gc()
+
   # Special case for devtools - don't unload DLL because we need to be able
   # to access nsreg() in the DLL in order to run makeNamespace. This means
   # that changes to compiled code in devtools can't be reloaded with

@@ -1,28 +1,20 @@
-language: c
-script: ./travis-tool.sh run_tests
+language: r
+sudo: required
+bioc_required: true
+warnings_are_errors: true
+
+r_binary_packages:
+  - XML
+  - Rcpp
+  - knitr
+
+r_github_packages:
+  - rstudio/rmarkdown
+  - hadley/testthat
+  - jimhester/covr
+
+bioc_packages:
+  - BiocInstaller
 
 after_success:
   - Rscript -e 'library(covr);coveralls()'
-after_failure:
-  - ./travis-tool.sh dump_logs
-
-before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
-  - ./travis-tool.sh r_binary_install XML Rcpp knitr brew RUnit inline highlight formatR highr markdown rgl
-  - ./travis-tool.sh install_github rstudio/rmarkdown
-install:
-  - ./travis-tool.sh github_package jimhester/covr
-  - ./travis-tool.sh install_deps
-  # Install testthat after running install_deps, otherwise devtools itself might be installed from CRAN or c2d4u
-  - ./travis-tool.sh install_github hadley/testthat
-notifications:
-  email:
-    on_success: change
-    on_failure: change
-env:
-  - global:
-    - WARNINGS_ARE_ERRORS=1
-    - _R_CHECK_FORCE_SUGGESTS_=0
-    - BOOTSTRAP_LATEX=1
