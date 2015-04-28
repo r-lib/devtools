@@ -166,24 +166,14 @@ use_coveralls <- function(pkg = ".") {
     " * Add a coveralls shield to your README.md:\n",
     "[![Coverage Status]",
       "(https://img.shields.io/coveralls/", gh$username, "/", gh$repo, ".svg)]",
-      "(https://coveralls.io/r/", gh$username, "/", gh$repo, "?branch=master)"
-  )
+      "(https://coveralls.io/r/", gh$username, "/", gh$repo, "?branch=master)\n",
+    " * Add the following to .travis.yml:\n",
+    "r_github_packages:\n",
+    "  - jimhester/covr\n",
+    "after_success:\n",
+    "  - Rscript -e 'library(covr);coveralls()'")
 
-  install_loc <- grep("^install:$", travis_content)
-  if (length(install_loc) == 0) {
-    stop("no install block found in .travis.yml", call. = FALSE)
-  }
-  travis_content <- append(travis_content, "  - ./travis-tool.sh github_package jimhester/covr", after = install_loc)
-
-  after_failure_loc <- grep("^after_failure:$", travis_content)
-  if (length(after_failure_loc) == 0) {
-    after_failure_loc <- install_loc
-  }
-  travis_content <- append(travis_content,
-                                          c("after_success:",
-                                            "  - Rscript -e 'library(covr);coveralls()'"),
-                           after = after_failure_loc - 1)
-  writeLines(travis_content, file.path(pkg$path, ".travis.yml"))
+  invisible(TRUE)
 }
 
 #' @export
