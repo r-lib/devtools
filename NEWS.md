@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* `release()` now reminds you to check the existing CRAN check results page
+  (#613).
+
 * devtools now correctly writes out continuation lines in the `DESCRIPTION`.
   (#709).
 

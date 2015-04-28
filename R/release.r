@@ -77,6 +77,13 @@ release <- function(pkg = ".", check = TRUE) {
   if (yesno("Have you checked on win-builder (with build_win())?"))
     return(invisible())
 
+  if (!new_pkg) {
+    cran_url <- paste0("http://cran.rstudio.com/web/checks/check_results_",
+      pkg$package, ".html")
+    if (yesno("Have you fixed all existing problems at \n", cran_url, " ?"))
+      return(invisible())
+  }
+
   if (file.exists("NEWS")) {
     try(print(show_news(pkg)))
     if (yesno("Is package news up-to-date?"))
