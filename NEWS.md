@@ -22,6 +22,9 @@
 
 * `system_check()` combines arguments with ` `, not `, `. (#753)
 
+* `install()` and `install_deps()` gain a `...` argument, so additional
+  arguments can be passed to `utils::install.packages()` (@jimhester, #712).
+
 * `lint()` gains a `cache` argument (@jimhester, #708).
 * `test()` gains an `...` argument so that additional arguments can be passed
   to `testthat::test_dir` (@jimhester, #747)

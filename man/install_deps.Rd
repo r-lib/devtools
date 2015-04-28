@@ -5,7 +5,7 @@
 \title{Install package dependencies}
 \usage{
 install_deps(pkg = ".", dependencies = NA, threads = getOption("Ncpus",
-  1))
+  1), ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -18,6 +18,8 @@ argument \code{dependencies} of \code{\link{install.packages}}.}
 \item{threads}{number of concurrent threads to use for installing
 dependencies.
 It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
+
+\item{...}{additional arguments passed to \code{\link{install.packages}}}
 }
 \description{
 Install package dependencies
