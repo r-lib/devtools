@@ -70,3 +70,25 @@ test_that("GitHub references are resolved correctly", {
     expect_equal(github_resolve_ref(github_release(), default_params)$ref, "some-release")
   })
 })
+
+mock_install_remote <- function(remote, ..., quiet = FALSE) {
+  remote_download(remote, quiet = quiet)
+  return(TRUE)
+}
+mock_download <- function(dest, src, ...)
+  return("")
+mock_download_text_true <- function(url, auth, ...)
+  return(".gitmodules")
+mock_download_text_false <- function(url, auth, ...)
+  return("{resource:  not located}")
+test_that("GitHub repos that contain submodules raise warning", {
+  with_mock("install_remote", mock_install_remote, {
+    with_mock("download", mock_download, {
+      with_mock("download_text", mock_download_text_false,
+                expect_that(install_github("hadley/devtools"), not(gives_warning())))
+      with_mock("download_text", mock_download_text_true,
+                expect_that(install_github("hadley/devtools"),
+                            gives_warning("Github repo contains submodules, may not function as expected!")))
+        })
+    })
+})
