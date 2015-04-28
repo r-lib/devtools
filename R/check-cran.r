@@ -45,6 +45,10 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
   rule("Installing dependencies")
   message("Determining available packages") # --------------------------------
+  if (identical(type, "both")) {
+    type <- "binary"
+  }
+
   repos <- c(CRAN = "http://cran.rstudio.com/")
   if (bioconductor) {
     repos <- c(repos, BiocInstaller::biocinstallRepos())
