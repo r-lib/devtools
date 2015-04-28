@@ -168,6 +168,40 @@ use_travis <- function(pkg = ".") {
   invisible(TRUE)
 }
 
+#' @rdname infrastructure
+#' @section \code{use_coveralls}:
+#' Add coveralls to basic travis template to a package.
+#' @export
+use_coveralls <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  path <- file.path(pkg$path, ".travis.yml")
+  if (!file.exists(path)) {
+    stop(".travis.yml does not exist, please run `use_travis()` to create it", call. = FALSE)
+  }
+
+  travis_content <- readLines(file.path(pkg$path, ".travis.yml"))
+
+  if (any(grepl("coveralls()", travis_content))) {
+    stop("coveralls information already added to .travis.yml", call. = FALSE)
+  }
+
+  gh <- github_info(pkg)
+  message("Adding coveralls information into .travis.yml for ", pkg$package, ". Next: \n",
+    " * Turn on coveralls for this repo at https://coveralls.io/repos/new\n",
+    " * Add a coveralls shield to your README.md:\n",
+    "[![Coverage Status]",
+      "(https://img.shields.io/coveralls/", gh$username, "/", gh$repo, ".svg)]",
+      "(https://coveralls.io/r/", gh$username, "/", gh$repo, "?branch=master)\n",
+    " * Add the following to .travis.yml:\n",
+    "r_github_packages:\n",
+    "  - jimhester/covr\n",
+    "after_success:\n",
+    "  - Rscript -e 'library(covr);coveralls()'")
+
+  invisible(TRUE)
+}
+
 #' @export
 add_travis <- use_travis
 

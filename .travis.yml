@@ -11,6 +11,10 @@ r_binary_packages:
 r_github_packages:
   - rstudio/rmarkdown
   - hadley/testthat
+  - jimhester/covr
 
 bioc_packages:
   - BiocInstaller
+
+after_success:
+  - Rscript -e 'library(covr);coveralls()'

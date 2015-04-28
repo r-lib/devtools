@@ -7,6 +7,7 @@
 \alias{infrastructure}
 \alias{use_appveyor}
 \alias{use_code_of_conduct}
+\alias{use_coveralls}
 \alias{use_cran_comments}
 \alias{use_package_doc}
 \alias{use_rcpp}
@@ -29,6 +30,8 @@ use_vignette(name, pkg = ".")
 use_rcpp(pkg = ".")
 
 use_travis(pkg = ".")
+
+use_coveralls(pkg = ".")
 
 use_appveyor(pkg = ".")
 
@@ -87,6 +90,11 @@ Creates \code{src/} and adds needed packages to \code{DESCRIPTION}.
 
 Add basic travis template to a package. Also adds \code{.travis.yml} to
 \code{.Rbuildignore} so it isn't included in the built package.
+}
+
+\section{\code{use_coveralls}}{
+
+Add coveralls to basic travis template to a package.
 }
 
 \section{\code{use_appveyor}}{
