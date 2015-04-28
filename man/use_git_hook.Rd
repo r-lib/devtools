@@ -35,9 +35,10 @@ Other infrastructure: \code{\link{add_build_ignore}},
   \code{\link{use_package_doc}}, \code{\link{use_rcpp}},
   \code{\link{use_revdep}}, \code{\link{use_rstudio}},
   \code{\link{use_test}}, \code{\link{use_testthat}},
-  \code{\link{use_travis}}, \code{\link{use_vignette}};
-  \code{\link{use_data_raw}}; \code{\link{use_data}};
-  \code{\link{use_package}}; \code{\link{use_readme_rmd}}
+  \code{\link{use_travis}}, \code{\link{use_vignette}},
+  \code{\link{use_wercker}}; \code{\link{use_data_raw}};
+  \code{\link{use_data}}; \code{\link{use_package}};
+  \code{\link{use_readme_rmd}}
 }
 \keyword{internal}
 

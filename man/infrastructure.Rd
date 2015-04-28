@@ -17,6 +17,7 @@
 \alias{use_testthat}
 \alias{use_travis}
 \alias{use_vignette}
+\alias{use_wercker}
 \title{Add useful infrastructure to a package.}
 \usage{
 use_testthat(pkg = ".")
@@ -42,6 +43,8 @@ use_revdep(pkg = ".")
 use_cran_comments(pkg = ".")
 
 use_code_of_conduct(pkg = ".")
+
+use_wercker(pkg = ".", coverage = FALSE, lint = FALSE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -49,6 +52,10 @@ use_code_of_conduct(pkg = ".")
 
 \item{name}{File name to use for new vignette. Should consist only of
 numbers, letters, _ and -. I recommend using lower case.}
+
+\item{coverage}{if \code{TRUE} track test coverage on wercker builds.}
+
+\item{lint}{if \code{TRUE} lint package on wercker builds.}
 }
 \description{
 Add useful infrastructure to a package.
@@ -121,6 +128,12 @@ Add \code{cran-comments.md} template.
 \section{\code{use_code_of_conduct}}{
 
 Add a code of conduct to from \url{http://contributor-covenant.org}.
+}
+
+\section{\code{use_wercker}}{
+
+Add basic wercker template to a package. Also adds \code{wercker.yml} to
+\code{.Rbuildignore} so it isn't included in the built package.
 }
 \seealso{
 Other infrastructure: \code{\link{add_build_ignore}},

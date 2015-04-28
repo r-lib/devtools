@@ -1,5 +1,9 @@
 # devtools 1.7.1.9000
 
+* `use_wercker()` adds a basic wercker template to your package. `wercker.yml`
+  is automatically added to `.Rbuildignore` to avoid including it in the built
+  package. (@jimhester, #777)
+
 * Explicitly refer to `stats::setNames()` to avoid problems (#734, #772) when
   using devtools inside another package.
 
