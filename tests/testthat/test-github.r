@@ -61,7 +61,7 @@ mock_github_GET <- function(path) {
 }
 
 test_that("GitHub references are resolved correctly", {
-  default_params <- as.list(setNames(nm=c("repo", "username")))
+  default_params <- as.list(stats::setNames(nm=c("repo", "username")))
   with_mock("github_GET", mock_github_GET, {
     expect_equal(github_resolve_ref(NULL, list())$ref, "master")
     expect_equal(github_resolve_ref("some-ref", list())$ref, "some-ref")

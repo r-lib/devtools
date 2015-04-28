@@ -45,7 +45,7 @@ find_topic <- function(topic) {
   for (pkg in pkgs) {
     path <- getNamespaceInfo(pkg, "path")
     rd <- find_pkg_topic(path, topic)
-    if (!is.null(rd)) return(setNames(file.path(path, "man", rd), path))
+    if (!is.null(rd)) return(stats::setNames(file.path(path, "man", rd), path))
   }
 
   NULL

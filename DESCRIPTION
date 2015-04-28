@@ -26,7 +26,8 @@ Imports:
     rstudioapi (>= 0.2.0),
     jsonlite,
     roxygen2 (>= 4.1.0),
-    rversions
+    rversions,
+    stats
 Suggests:
     testthat (>= 0.7),
     BiocInstaller,
