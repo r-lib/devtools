@@ -57,6 +57,9 @@ release <- function(pkg = ".", check = TRUE) {
       return(invisible())
 
   } else {
+    if (yesno("Does R CMD check pass with no ERRORs or WARNINGs?"))
+      return(invisible())
+
     # Even if we don't run the full checks, at least check that the package
     # version is sufficient for submission to CRAN.
 
