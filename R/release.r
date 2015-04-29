@@ -49,6 +49,14 @@ release <- function(pkg = ".", check = TRUE) {
   cran_version <- cran_pkg_version(pkg$package)
   new_pkg <- is.null(cran_version)
 
+  if (uses_git(pkg$path)) {
+    if (git_uncommitted(pkg$path))
+      warning("Uncommited changes in git.", immediate. = TRUE, call. = FALSE)
+
+    if (git_sync_status(pkg$path))
+      warning("Git not synched with remote.", immediate. = TRUE, call. = FALSE)
+  }
+
   if (check) {
     check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE)
     release_checks(pkg)

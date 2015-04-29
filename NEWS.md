@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* If you use git, `release()` now warns you if you have uncommited changes,
+  or if you've forgotten to synchronise with the remote (#691).
+
 * Devtools now uses the git2r package to inspect git properties and install
   remote git packages with `install_git()`. This should be considerably
   more reliable than the previous strategy which involves calling the 

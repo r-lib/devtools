@@ -22,10 +22,10 @@ git_sync_status <- function(path = ".") {
     git2r::branch_target(git2r::branch_get_upstream(head(r))))
   ab <- git2r::ahead_behind(c1, c2)
 
-  if (ab[1] > 0)
-    message(ab[1], " ahead of remote")
-  if (ab[2] > 0)
-    message(ab[2], " behind remote")
+#   if (ab[1] > 0)
+#     message(ab[1], " ahead of remote")
+#   if (ab[2] > 0)
+#     message(ab[2], " behind remote")
 
   invisible(any(ab != 0))
 }
