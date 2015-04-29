@@ -1,5 +1,7 @@
 # devtools 1.7.1.9000
 
+* New `dr_github()` checks for common problems with git/github setup (#643).
+
 * If you use git, `release()` now warns you if you have uncommited changes,
   or if you've forgotten to synchronise with the remote (#691).
 

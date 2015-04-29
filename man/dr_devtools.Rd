@@ -16,4 +16,7 @@ and the latest version of devtools and its dependencies.
 dr_devtools()
 }
 }
+\seealso{
+Other doctors: \code{\link{dr_github}}
+}
 

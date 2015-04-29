@@ -7,12 +7,14 @@ r_release <- memoise::memoise(function() {
   R_system_version(rversions::r_release()$version)
 })
 
+
 #' Diagnose potential devtools issues
 #'
 #' This checks to make sure you're using the latest release of R,
 #' the released version of RStudio (if you're using it as your gui),
 #' and the latest version of devtools and its dependencies.
 #'
+#' @family doctors
 #' @export
 #' @examples
 #' \donttest{
@@ -48,6 +50,42 @@ dr_devtools <- function() {
   }
 
   doctor("devtools", msg)
+}
+
+#' Diagnose potential github issues
+#'
+#' @param path Path to repository to check. Defaults to current working
+#'   directory
+#' @family doctors
+#' @export
+#' @examples
+#' \donttest{
+#' dr_github()
+#' }
+dr_github <- function(path = ".") {
+  if (!uses_git(path)) {
+    return(doctor("github", "Current path is not a git repository"))
+  }
+
+  msg <- character()
+  r <- git2r::repository(path, discover = TRUE)
+
+  capture.output(config <- git2r::config(r))
+  config_names <- names(modifyList(config$global, config$local))
+
+  if (!("user.name" %in% config_names))
+    msg[["name"]] <- "* user.name config option not set"
+  if (!("user.email" %in% config_names))
+    msg[["user"]] <- "* user.email config option not set"
+
+  if (!file.exists("~/.ssh/id_rsa"))
+    msg[["ssh"]] <- "* SSH private key not found"
+
+  if (identical(Sys.getenv("GITHUB_PAT"), ""))
+    msg[["PAT"]] <- paste("* GITHUB_PAT environment variable not set",
+      "(this is not critical unless you want to install private repos)")
+
+  doctor("github", msg)
 }
 
 # Doctor class ------------------------------------------------------------
