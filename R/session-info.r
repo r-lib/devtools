@@ -34,14 +34,26 @@ dev_packages <- function() {
 #' loaded) and include stuff you'd like to know (e.g., where a package was
 #' installed from).
 #'
+#' @param pkgs Either a vector of package names or NULL. If \code{NULL},
+#'   displays all loaded packages. If a character vector, also, includes
+#'   all dependencies of the package.
 #' @param include_base Include base packages in summary? By default this is
 #'   false since base packages should always match the R version.
 #' @export
-session_info <- function(include_base = FALSE) {
+#' @examples
+#' session_info()
+#' session_info("devtools")
+session_info <- function(pkgs = NULL, include_base = FALSE) {
+  if (is.null(pkgs)) {
+    pkgs <- loadedNamespaces()
+  } else {
+    pkgs <- find_deps(pkgs, installed.packages(), top_dep = NA)
+  }
+
   structure(
     list(
       platform = platform_info(),
-      packages = package_info(include_base = include_base)
+      packages = package_info(pkgs, include_base = include_base)
     ),
     class = "session_info"
   )
@@ -97,7 +109,7 @@ package_info <- function(pkgs = loadedNamespaces(), include_base = FALSE,
 
   pkgs_df <- data.frame(
     package = pkgs,
-    `*` = ifelse(attached, "", "*"),
+    `*` = ifelse(attached, "*", ""),
     version = version,
     date = date,
     source = source,

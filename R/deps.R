@@ -29,7 +29,7 @@
 #' }
 package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
                          type = getOption("pkgType")) {
-  cran <- available_packages(repos, type)
+  cran <- installed.packages()
 
   if (missing(pkg)) {
     pkg <- as.package(".")$package
@@ -152,6 +152,9 @@ find_deps <- function(pkgs, available = available.packages(), top_dep = TRUE, re
 
   top <- tools::package_dependencies(pkgs, db = available, which = top_dep)
   top_flat <- unlist(top, use.names = FALSE)
+
+  if (length(rec_dep) == 0)
+    return(top_flat)
 
   rec <- tools::package_dependencies(top_flat, db = available, which = rec_dep,
     recursive = TRUE)

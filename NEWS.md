@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* `session_info()` can now take a vector of package names, in which case it
+  will print the version of those packages and their dependencies (#664).
+
 * `use_git()` sets up a package to use git, initialising the repo and
   checking the existing files.
 
