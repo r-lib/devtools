@@ -1,5 +1,11 @@
 # devtools 1.7.1.9000
 
+* Devtools now uses the git2r package to inspect git properties and install
+  remote git packages with `install_git()`. This should be considerably
+  more reliable than the previous strategy which involves calling the 
+  command line `git` client. It has one small downside: `install_git()`
+  no longer accepts additional `args`.
+
 * Explicitly refer to `stats::setNames()` to avoid problems (#734, #772) when
   using devtools inside another package.
 

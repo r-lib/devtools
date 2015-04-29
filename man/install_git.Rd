@@ -15,13 +15,14 @@ contain the package we are interested in installing.}
 
 \item{branch}{Name of branch or tag to use, if not master.}
 
-\item{args}{A character vector providing extra arguments to pass on to}
+\item{args}{DEPRECATED. A character vector providing extra arguments to
+pass on to git.}
 
 \item{...}{passed on to \code{\link{install}}}
 }
 \description{
 It is vectorised so you can install multiple packages with
-a single command.
+a single command. You do not need to have git installed.
 }
 \examples{
 \dontrun{

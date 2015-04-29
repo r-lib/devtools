@@ -27,7 +27,8 @@ Imports:
     jsonlite,
     roxygen2 (>= 4.1.0),
     rversions,
-    stats
+    stats,
+    git2r
 Suggests:
     testthat (>= 0.7),
     BiocInstaller,

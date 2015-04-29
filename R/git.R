@@ -1,68 +1,30 @@
-uses_git <- function(pkg = ".") {
-  if (is.character(pkg) && !file.info(pkg)$isdir) return(FALSE)
-  pkg <- as.package(pkg)
-  file.exists(file.path(pkg$path, ".git"))
-}
-
-git <- function(args, quiet = TRUE, path = ".") {
-  full <- paste0(shQuote(git_path()), " ", paste(args, collapse = ""))
-  if (!quiet) {
-    message(full)
-  }
-
-  result <- in_dir(path, system(full, intern = TRUE, ignore.stderr = quiet))
-
-  status <- attr(result, "status") %||% 0
-  if (!identical(as.character(status), "0")) {
-    stop("Command failed (", status, ")", call. = FALSE)
-  }
-
-  result
+uses_git <- function(path = ".") {
+  !is.null(git2r::discover_repository(path))
 }
 
 git_sha1 <- function(n = 10, path = ".") {
-  sha <- git(c("rev-parse", " --short=", n, " HEAD"), path = path)
-  if (uncommitted(path)) sha <- paste0(sha, "*")
-  sha
+  r <- git2r::repository(path)
+  sha <- git2r::commits(r)[[1]]@sha # sha of most recent commit
+  substr(sha, 1, n)
 }
 
-uncommitted <- function(path = ".") {
-  in_dir(path, system("git diff-index --quiet --cached HEAD") == 1 ||
-    system("git diff-files --quiet") == 1)
+git_uncommitted <- function(path = ".") {
+  r <- git2r::repository(path)
+  st <- vapply(git2r::status(r, verbose = FALSE), length, integer(1))
+  any(st != 0)
 }
 
+git_sync_status <- function(path = ".") {
+  r <- git2r::repository(path)
+  c1 <- git2r::commits(r)[[1]]
+  c2 <- git2r::lookup(r,
+    git2r::branch_target(git2r::branch_get_upstream(head(r))))
+  ab <- git2r::ahead_behind(c1, c2)
 
-github_info <- function(pkg = ".") {
-  pkg <- as.package(pkg)
-  if (!uses_git(pkg$path)) return(github_dummy)
-
-  remotes <- git("remote -v", path = pkg$path)
-  remotes_df <- read.table(text = remotes, stringsAsFactors = FALSE)
-  names(remotes_df) <- c("name", "url", "type")
-
-  github_url <- remotes_df[remotes_df$name == "origin", ]$url[[1]]
-  parse_github_remote(github_url)
-}
-
-github_dummy <- list(username = "<USERNAME>", repo = "<REPO>")
-
-parse_github_remote <- function(x) {
-  if (length(x) == 0) return(github_dummy)
-  if (!grepl("github", x)) return(github_dummy)
-
-  if (grepl("^https", x)) {
-    # https://github.com/hadley/devtools.git
-    re <- "github.com/(.*?)/(.*)\\.git"
-  } else if (grepl("^git", x)) {
-    # git@github.com:hadley/devtools.git
-    re <- "github.com:(.*?)/(.*)\\.git"
-  } else {
-    stop("Unknown github repo format", call. = FALSE)
-  }
-
-  m <- regexec(re, x)
-  match <- regmatches(x, m)[[1]]
-  list(username = match[2], repo = match[3])
+  if (ab[1] > 0)
+    message(ab[1], " ahead of remote")
+  if (ab[2] > 0)
+    message(ab[2], " behind of remote")
 }
 
 # Retrieve the current running path of the git binary.
@@ -91,6 +53,41 @@ git_path <- function(git_binary_name = NULL) {
   }
 
   stop("Git does not seem to be installed on your system.", call. = FALSE)
+}
+
+
+# GitHub ------------------------------------------------------------------
+
+github_info <- function(path = ".") {
+  if (!uses_git(path))
+    return(github_dummy)
+
+  r <- git2r::repository(path)
+  if (!("origin" %in% git2r::remotes(r)))
+    return(github_dummy)
+
+  github_remote_parse(git2r::remote_url(r, "origin"))
+}
+
+github_dummy <- list(username = "<USERNAME>", repo = "<REPO>")
+
+github_remote_parse <- function(x) {
+  if (length(x) == 0) return(github_dummy)
+  if (!grepl("github", x)) return(github_dummy)
+
+  if (grepl("^https", x)) {
+    # https://github.com/hadley/devtools.git
+    re <- "github.com/(.*?)/(.*)\\.git"
+  } else if (grepl("^git", x)) {
+    # git@github.com:hadley/devtools.git
+    re <- "github.com:(.*?)/(.*)\\.git"
+  } else {
+    stop("Unknown github repo format", call. = FALSE)
+  }
+
+  m <- regexec(re, x)
+  match <- regmatches(x, m)[[1]]
+  list(username = match[2], repo = match[3])
 }
 
 # Extract the commit hash from a git archive. Git archives include the SHA1

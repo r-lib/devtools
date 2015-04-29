@@ -151,7 +151,7 @@ use_travis <- function(pkg = ".") {
     stop(".travis.yml already exists", call. = FALSE)
   }
 
-  gh <- github_info(pkg)
+  gh <- github_info(pkg$path)
   message("Adding .travis.yml to ", pkg$package, ". Next: \n",
     " * Turn on travis for this repo at https://travis-ci.org/profile\n",
     " * Add a travis shield to your README.md:\n",
@@ -186,7 +186,7 @@ use_coveralls <- function(pkg = ".") {
     stop("coveralls information already added to .travis.yml", call. = FALSE)
   }
 
-  gh <- github_info(pkg)
+  gh <- github_info(pkg$path)
   message("Adding coveralls information into .travis.yml for ", pkg$package, ". Next: \n",
     " * Turn on coveralls for this repo at https://coveralls.io/repos/new\n",
     " * Add a coveralls shield to your README.md:\n",
@@ -218,7 +218,7 @@ use_appveyor <- function(pkg = ".") {
     stop("appveyor.yml already exists", call. = FALSE)
   }
 
-  gh <- github_info(pkg)
+  gh <- github_info(pkg$path)
   message("Adding appveyor.yml to ", pkg$package, ". Next: \n",
           " * Turn on AppVeyor for this repo at https://ci.appveyor.com/projects\n",
           " * Add an AppVeyor shield to your README.md:\n",
