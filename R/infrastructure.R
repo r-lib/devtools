@@ -82,6 +82,7 @@ use_rstudio <- function(pkg = ".") {
   file.copy(template_path, path)
 
   add_git_ignore(pkg, c(".Rproj.user", ".Rhistory", ".RData"))
+  add_build_ignore(pkg, c("^.*\\.Rproj$", "^\\.Rproj\\.user$"), escape = FALSE)
 
   invisible(TRUE)
 }

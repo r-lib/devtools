@@ -19,6 +19,7 @@ Initialise a git repository.
 \dontrun{use_git()}
 }
 \seealso{
-Other git infrastructure: \code{\link{use_git_hook}}
+Other git infrastructure: \code{\link{use_git_hook}};
+  \code{\link{use_github}}
 }
 

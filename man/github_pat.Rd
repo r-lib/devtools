@@ -7,7 +7,8 @@
 github_pat()
 }
 \description{
-Looks in env var \code{GITHUB_PAT}.
+A github personal access token
+Looks in env var \code{GITHUB_PAT}
 }
 \keyword{internal}
 
