@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* `use_git()` sets up a package to use git, initialising the repo and
+  checking the existing files.
+
 * New `dr_github()` checks for common problems with git/github setup (#643).
 
 * If you use git, `release()` now warns you if you have uncommited changes,

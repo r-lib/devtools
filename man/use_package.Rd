@@ -43,6 +43,6 @@ Other infrastructure: \code{\link{add_build_ignore}},
   \code{\link{use_test}}, \code{\link{use_testthat}},
   \code{\link{use_travis}}, \code{\link{use_vignette}};
   \code{\link{use_data_raw}}; \code{\link{use_data}};
-  \code{\link{use_git_hook}}; \code{\link{use_readme_rmd}}
+  \code{\link{use_readme_rmd}}
 }
 
