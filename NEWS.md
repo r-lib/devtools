@@ -34,7 +34,8 @@
   (#709).
 
 * `package_deps()` determines all recursive dependencies and whether or not
-  they're up-to-date (#663).
+  they're up-to-date (#663). Use `update(package_deps("xyz"))` to update
+  out of date dependencies.
 
 * `revdep_check()` creates directories if needed (#759).
 
