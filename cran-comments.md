@@ -9,11 +9,6 @@ There were no ERRORs or WARNINGs.
 There were 2 NOTEs:
 
 * checking dependencies in R code ... NOTE
-  Namespace in Imports field not imported from: ‘memoise’
-  All declared Imports should be used.
-  
-  memoise is a build-time dependency.
-  
   'library' or 'require' call to ‘testthat’ in package code.
   
   devtools::test() calls library(testthat) because testthat must be 

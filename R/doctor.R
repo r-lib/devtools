@@ -1,7 +1,13 @@
+# Supress R CMD check note
+#' @importFrom memoise memoise
+#' @importFrom rversions r_release
+NULL
+
 rstudio_release <- memoise::memoise(function() {
   url <- "http://s3.amazonaws.com/rstudio-server/current.ver"
   numeric_version(readLines(url, warn = FALSE))
 })
+
 
 r_release <- memoise::memoise(function() {
   R_system_version(rversions::r_release()$version)
