@@ -14,6 +14,7 @@ git_uncommitted <- function(path = ".") {
   any(st != 0)
 }
 
+#' @importMethodsFrom git2r head
 git_sync_status <- function(path = ".") {
   r <- git2r::repository(path)
   c1 <- git2r::commits(r)[[1]]
@@ -24,7 +25,9 @@ git_sync_status <- function(path = ".") {
   if (ab[1] > 0)
     message(ab[1], " ahead of remote")
   if (ab[2] > 0)
-    message(ab[2], " behind of remote")
+    message(ab[2], " behind remote")
+
+  invisible(any(ab != 0))
 }
 
 # Retrieve the current running path of the git binary.
