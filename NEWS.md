@@ -1,43 +1,31 @@
 # devtools 1.7.1.9000
 
-* `build_vignettes()` automatically installs the VignetteBuilder package,
-  if necessary (#736).
+## Helpers
 
-* `update_packages()` will install a package (and its dependencies) only if
-  they are missing or out of date (#675).
+* New `dr_devtools()` runs some common diagnostics: are you using the 
+  latest version of R  and devtools? It is run automatically by 
+  `release()` (#592).
 
-* `session_info()` can now take a vector of package names, in which case it
-  will print the version of those packages and their dependencies (#664).
+* `use_code_of_conduct()` adds a contributor code of conduct from 
+  http://contributor-covenant.org. (#729)
 
+* `use_coveralls()` allows you to easily add test coverage with coveralls
+  (@jimhester, #680, #681).
+  
 * `use_git()` sets up a package to use git, initialising the repo and
   checking the existing files.
 
-* New `dr_github()` checks for common problems with git/github setup (#643).
+* `use_test()` adds a new test file (#769, @krlmlr).
 
-* If you use git, `release()` now warns you if you have uncommited changes,
-  or if you've forgotten to synchronise with the remote (#691).
+## Package installation and info
 
-* Devtools now uses the git2r package to inspect git properties and install
-  remote git packages with `install_git()`. This should be considerably
-  more reliable than the previous strategy which involves calling the 
-  command line `git` client. It has one small downside: `install_git()`
-  no longer accepts additional `args`.
+* `build_vignettes()` automatically installs the VignetteBuilder package,
+  if necessary (#736).
 
-* Explicitly refer to `stats::setNames()` to avoid problems (#734, #772) when
-  using devtools inside another package.
-
-* New `dr_devtools()` runs some common diagnostics. It is run automatically
-  by `release()` to ensure that you have the latest version of devtools and R
-  before submitting to CRAN (#592).
-
-* `release()` now reminds you to check the existing CRAN check results page
-  (#613).
-
-* `use_coveralls()` function to print instructions on adding coveralls test
-  coverage to a project (@jimhester, #681).
-
-* devtools now correctly writes out continuation lines in the `DESCRIPTION`.
-  (#709).
+* `install()` and `install_deps()` gain a `...` argument, so additional
+  arguments can be passed to `utils::install.packages()` (@jimhester, #712).
+  `install_svn()` optionally accepts a revision (@lev-kuznetsov, #739).
+  `install_version()` now knows how to look in multiple repos (#721).
 
 * `package_deps()` (and `dev_package_deps()`) determines all recursive 
   dependencies and whether or not they're up-to-date (#663). Use
@@ -46,48 +34,29 @@
   aggressive than previous code (i.e. it forces you to use the latest version), 
   which should avoid problems when you go to submit to CRAN.
 
-* `revdep_check()` creates directories if needed (#759).
+* New `update_packages()` will install a package (and its dependencies) only if
+  they are missing or out of date (#675).
 
-* `install_version()` now knows how to look in multiple repos (#721).
+* `session_info()` can now take a vector of package names, in which case it
+  will print the version of those packages and their dependencies (#664).
 
-* Add details for RTools 3.2 (#738)
+## Git and github
 
-* `use_travis()` now suggests you link to the svg icon since that looks a 
-  little sharper.
+* Devtools now uses the git2r package to inspect git properties and install
+  remote git packages with `install_git()`. This should be considerably
+  more reliable than the previous strategy which involves calling the 
+  command line `git` client. It has two small downsides: `install_git()`
+  no longer accepts additional `args`, and must do a deep clone when
+  installing.
 
-* `use_code_of_conduct()` adds a contributor code of conduct from 
-  http://contributor-covenant.org. (#729)
+* `dr_github()` checks for common problems with git/github setup (#643).
 
-* `use_test()` adds a new test file (#769, @krlmlr).
+* If you use git, `release()` now warns you if you have uncommited changes,
+  or if you've forgotten to synchronise with the remote (#691).
 
-* `system_check()` combines arguments with ` `, not `, `. (#753)
+* `install_github()` warns if repository contains submodules (@ashander, #751).
 
-* `install()` and `install_deps()` gain a `...` argument, so additional
-  arguments can be passed to `utils::install.packages()` (@jimhester, #712).
-
-* `lint()` gains a `cache` argument (@jimhester, #708).
-
-* `test()` gains an `...` argument so that additional arguments can be passed
-  to `testthat::test_dir` (@jimhester, #747)
-
-* warn users of `install_github()` if repository contains submodules
-  that install may not function as expected (@ashander, #751).
-
-* export functions `RCMD()` and `system_check()` so they can be used by other 
-  packages. (@jimhester, #699).
-
-* `dev_help()` now uses `normalizePath()`. Hopefully this will make it more
-  likely to work if you're on windows and have a space in the path.
-
-* `NOT_CRAN` is no longer set automatically if it has been set externally to
-  allow overriding.
-
-* `CRAN: http://cran.rstudio.com/` is explicitly set in `travis.yml`, enabling 
-  cyclic dependency check
-
-* `install_svn()` now optionally accepts revision number (#739, @lev-kuznetsov)
-
-* `release()` now shows file size before submitting to CRAN (#683, @krlmlr).
+## Bug fixes and minor improvements
 
 * Previously, devtools ran all external R processes with `R --vanilla`.
   Now it only suppresses user profiles, and constructs a custom `.Rprofile` to
@@ -95,11 +64,35 @@
   Among others, this enables the cyclic dependency check in `devtools::release`
   (#602, @krlmlr).
 
-* `use_coveralls()` allows you to easily add coveralls support to a package. 
-  (#680, @jimhester)
+* Devtools correctly identifies RTools 3.1 and 3.2 (#738), and
+  preserves continuation lines in the `DESCRIPTION` (#709).
 
-* Fixed scoping issues with `unzip()`.
+* `dev_help()` now uses `normalizePath()`. Hopefully this will make it more
+  likely to work if you're on windows and have a space in the path.
 
+* `lint()` gains a `cache` argument (@jimhester, #708).
+
+* Fixed namespace issues related to `stats::setNames()` (#734, #772) and 
+  `utils::unzip()` (#761, @robertzk).
+
+* `release()` now reminds you to check the existing CRAN check results page
+  (#613) ands shows file size before uploading to CRAN (#683, @krlmlr).
+
+* `RCMD()` and `system_check()` are now exported so they can be used by other 
+  packages. (@jimhester, #699).
+
+* `revdep_check()` creates directories if needed (#759).
+
+* `system_check()` combines arguments with ` `, not `, `. (#753)
+
+* `test()` gains an `...` argument so that additional arguments can be passed
+  to `testthat::test_dir` (@jimhester, #747)
+
+* `use_travis()` now suggests you link to the svg icon since that looks a 
+  little sharper. Default template sets `CRAN: http://cran.rstudio.com/` to 
+  enable the cyclic dependency check.
+
+* `NOT_CRAN` envvar no longer overrides externally set variable.
 
 # devtools 1.7.0
 
