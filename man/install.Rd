@@ -49,7 +49,9 @@ It defaults to the option \code{"keep.source.pkgs"}.}
 dependencies.
 It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 
-\item{...}{additional arguments passed to \code{\link{install.packages}}}
+\item{...}{additional arguments passed to \code{\link{install.packages}}
+when installing dependencies. \code{pkg} is installed with
+\code{R CMD INSTALL}.}
 }
 \description{
 Uses \code{R CMD INSTALL} to install the package. Will also try to install

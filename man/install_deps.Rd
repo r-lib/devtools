@@ -19,7 +19,7 @@ argument \code{dependencies} of \code{\link{install.packages}}.}
 dependencies.
 It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 
-\item{...}{additional arguments passed to \code{\link{install.packages}}}
+\item{...}{additional arguments passed to \code{\link{install.packages}}.}
 }
 \description{
 Install package dependencies if needed.
