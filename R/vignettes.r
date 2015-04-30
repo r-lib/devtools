@@ -18,6 +18,8 @@ build_vignettes <- function(pkg = ".") {
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (length(vigns$docs) == 0) return()
 
+  install_deps(pkg, "VignetteBuilder")
+
   message("Building ", pkg$package, " vignettes")
   tools::buildVignettes(dir = pkg$path, tangle = TRUE)
   copy_vignettes(pkg)

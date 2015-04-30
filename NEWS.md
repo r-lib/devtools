@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* `build_vignettes()` automatically installs the vignette builder package
+  if necessary (#736).
+
 * `update_packages()` will install a package (and its dependencies) only if
   they are missing or out of date (#675).
 
