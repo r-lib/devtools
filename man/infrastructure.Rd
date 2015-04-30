@@ -8,6 +8,7 @@
 \alias{use_appveyor}
 \alias{use_code_of_conduct}
 \alias{use_coveralls}
+\alias{use_cran_badge}
 \alias{use_cran_comments}
 \alias{use_package_doc}
 \alias{use_rcpp}
@@ -42,6 +43,8 @@ use_revdep(pkg = ".")
 use_cran_comments(pkg = ".")
 
 use_code_of_conduct(pkg = ".")
+
+use_cran_badge(pkg = ".")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -121,6 +124,11 @@ Add \code{cran-comments.md} template.
 \section{\code{use_code_of_conduct}}{
 
 Add a code of conduct to from \url{http://contributor-covenant.org}.
+}
+
+\section{\code{use_cran_badge}}{
+
+Add a badge to show CRAN status and version number on the README
 }
 \seealso{
 Other infrastructure: \code{\link{add_build_ignore}},
