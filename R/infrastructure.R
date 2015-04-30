@@ -51,14 +51,14 @@ use_test <- function(name, pkg = ".") {
     use_testthat(pkg)
   }
 
-  path <- sprintf("test-%s.R", name)
+  path <- sprintf("tests/testthat/test-%s.R", name)
   if (file.exists(path)) {
     stop("File ", path, " exists", call. = FALSE)
   }
 
   writeLines(
     render_template("test-example.R", list(test_name = name)),
-    file.path(pkg$path, "tests", "testthat", path))
+    file.path(pkg$path, path))
 
   message("Test file created in ", path)
 }
