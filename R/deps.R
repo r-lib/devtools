@@ -1,4 +1,4 @@
-#' Find all dependencies of a package.
+#' Find all dependencies of a CRAN or dev package.
 #'
 #' Find all the dependencies of a package and determine whether they ahead
 #' or behind cran. A \code{print()} method focusses on mismatches between local
@@ -17,7 +17,9 @@
 #'   just check this package, not its dependencies).
 #' @param quiet If \code{TRUE}, supress output
 #' @param repos A character vector giving repositories to use.
-#' @param type Type of package to \code{update}.
+#' @param type Type of package to \code{update}.  If "both", will switch
+#'   automatically to "binary" to avoid interactive prompts during package
+#'   installation.
 #' @param object,... Arguments ot
 #' @return A data frame with additional.
 #' @export
@@ -29,6 +31,13 @@
 #' }
 package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
                          type = getOption("pkgType")) {
+  if (identical(type, "both")) {
+    type <- "binary"
+  }
+
+  if (repos[["CRAN"]] == "@CRAN@") {
+    repos[["CRAN"]] <- "http://cran.rstudio.com"
+  }
   cran <- available_packages(repos, type)
 
   if (missing(pkg)) {
@@ -59,6 +68,22 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
   )
 }
 
+#' @export
+#' @rdname package_deps
+dev_package_deps <- function(pkg = ".", dependencies = NA,
+                             repos = getOption("repos"),
+                             type = getOption("pkgType")) {
+  pkg <- as.package(pkg)
+
+  dependencies <- tolower(standardise_dep(dependencies))
+  dependencies <- intersect(dependencies, names(pkg))
+
+  parsed <- lapply(pkg[tolower(dependencies)], parse_deps)
+  deps <- unlist(lapply(parsed, `[[`, "name"), use.names = FALSE)
+
+  package_deps(deps, repos = repos, type = type)
+}
+
 compare_versions <- function(a, b) {
   stopifnot(length(a) == length(b))
 
@@ -87,7 +112,7 @@ print.package_deps <- function(x, show_ok = FALSE, ...) {
 
   ahead <- x$diff > 0L
   behind <- x$diff < 0L
-  same_ver <- x$xidff == 0L
+  same_ver <- x$diff == 0L
 
   x$diff <- NULL
   x[] <- lapply(x, format)
@@ -113,7 +138,7 @@ print.package_deps <- function(x, show_ok = FALSE, ...) {
 update.package_deps <- function(object, ..., quiet = FALSE) {
   ahead <- object$package[object$diff == 2L]
   if (length(ahead) > 0 && !quiet) {
-    message("Skipping ", length(ahead), " packages not on CRAN: ",
+    message("Skipping ", length(ahead), " packages not available: ",
       paste(ahead, collapse = ", "))
   }
 
@@ -124,28 +149,28 @@ update.package_deps <- function(object, ..., quiet = FALSE) {
   }
 
   behind <- object$package[object$diff < 0L]
-  if (length(behind) > 0L) {
-    if (!quiet)
-      message("Installing ", length(behind), " missing dependencies")
-    install_packages(behind, attr(object, "repos"), ..., attr(object, "type"),
-      quiet = quiet)
-  }
+  if (length(behind) > 0L)
+    install_packages(behind, attr(object, "repos"), attr(object, "type"), ...)
 
 }
 
-install_packages <- function(pkgs, repos, type, quiet = FALSE) {
-  for (pkg in pkgs) {
-    if (!quiet)
-      message("Installing ", pkg)
-    utils::install.packages(pkg, quiet = TRUE, repos = repos, type = type,
-      dependencies = FALSE)
-  }
-  invisible()
+install_packages <- function(pkgs, repos = getOption("repos"),
+                             type = getOption("pkgType"), ...,
+                             dependencies = FALSE, quiet = NULL) {
+  if (identical(type, "both"))
+    type <- "binary"
+  if (is.null(quiet))
+    quiet <- !identical(type, "source")
+
+  message("Installing ", length(pkgs), " packages: ",
+    paste(pkgs, collapse = ", "))
+  utils::install.packages(pkgs, repos = repos, type = type, ...,
+    dependencies = dependencies, quiet = quiet)
 }
 
 find_deps <- function(pkgs, available = available.packages(), top_dep = TRUE, rec_dep = NA) {
-  if (identical(top_dep, FALSE))
-    return(pkgs)
+  if (length(pkgs) == 0 || identical(top_dep, FALSE))
+    return(character())
 
   top_dep <- standardise_dep(top_dep)
   rec_dep <- standardise_dep(rec_dep)

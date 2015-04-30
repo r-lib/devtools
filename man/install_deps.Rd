@@ -2,7 +2,7 @@
 % Please edit documentation in R/install.r
 \name{install_deps}
 \alias{install_deps}
-\title{Install package dependencies}
+\title{Install package dependencies if needed.}
 \usage{
 install_deps(pkg = ".", dependencies = NA, threads = getOption("Ncpus",
   1), ...)
@@ -22,7 +22,7 @@ It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 \item{...}{additional arguments passed to \code{\link{install.packages}}}
 }
 \description{
-Install package dependencies
+Install package dependencies if needed.
 }
 \examples{
 \dontrun{install_deps(".")}

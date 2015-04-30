@@ -93,7 +93,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   invisible(TRUE)
 }
 
-#' Install package dependencies
+#' Install package dependencies if needed.
 #'
 #' @inheritParams install
 #' @export
@@ -102,39 +102,6 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
 install_deps <- function(pkg = ".", dependencies = NA,
                          threads = getOption("Ncpus", 1),
                          ...) {
-  pkg <- as.package(pkg)
-  info <- pkg_deps(pkg, dependencies)
-
-  # Packages that are not already installed or without required versions
-  needs_install <- function(pkg, compare, version) {
-    if (length(find.package(pkg, quiet = TRUE)) == 0) return(TRUE)
-    if (is.na(compare)) return(FALSE)
-
-    compare <- match.fun(compare)
-    !compare(packageVersion(pkg), version)
-  }
-  needed <- Map(needs_install, info$name, info$compare, info$version)
-  deps <- info$name[as.logical(needed)]
-  if (length(deps) == 0) return(invisible())
-
-  message("Installing dependencies for ", pkg$package, ":\n",
-    paste(deps, collapse = ", "))
-  utils::install.packages(deps, dependencies = NA, Ncpus = threads, ...)
-  invisible(deps)
-}
-
-pkg_deps <- function(pkg = ".", dependencies = NA) {
-  pkg <- as.package(pkg)
-
-  deps <- if (identical(dependencies, NA)) {
-    c("Depends", "Imports", "LinkingTo")
-  } else if (isTRUE(dependencies)) {
-    c("Depends", "Imports", "LinkingTo", "Suggests", "VignetteBuilder")
-  } else if (identical(dependencies, FALSE)) {
-    character(0)
-  } else dependencies
-
-  deps <- unlist(pkg[tolower(deps)], use.names = FALSE)
-
-  parse_deps(paste(deps, collapse = ','))
+  pkg <- dev_package_deps(pkg, dependencies = dependencies)
+  update(pkg, Ncpus = threads, ...)
 }

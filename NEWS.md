@@ -39,9 +39,12 @@
 * devtools now correctly writes out continuation lines in the `DESCRIPTION`.
   (#709).
 
-* `package_deps()` determines all recursive dependencies and whether or not
-  they're up-to-date (#663). Use `update(package_deps("xyz"))` to update
-  out of date dependencies.
+* `package_deps()` (and `dev_package_deps()`) determines all recursive 
+  dependencies and whether or not they're up-to-date (#663). Use
+  `update(package_deps("xyz"))` to update out of date dependencies. This code 
+  is used in `install_deps()` and `revdep_check()` - it's slightly more 
+  aggressive than previous code (i.e. it forces you to use the latest version), 
+  which should avoid problems when you go to submit to CRAN.
 
 * `revdep_check()` creates directories if needed (#759).
 
