@@ -35,6 +35,8 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
     type <- "binary"
   }
 
+  if (length(repos) == 0)
+    repos <- character()
   if (repos[["CRAN"]] == "@CRAN@") {
     repos[["CRAN"]] <- "http://cran.rstudio.com"
   }
