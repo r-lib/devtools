@@ -43,16 +43,19 @@ RCMD <- function(cmd, options, path = tempdir(), env_vars = NULL, ...) {
 #' @return a named character vector
 #' @export
 r_env_vars <- function() {
-  vars <- c("R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
+  vars <- c(
+    "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
     "CYGWIN" = "nodosfilewarning",
     # When R CMD check runs tests, it sets R_TESTS. When the tests
     # themselves run R CMD xxxx, as is the case with the tests in
     # devtools, having R_TESTS set causes errors because it confuses
     # the R subprocesses. Un-setting it here avoids those problems.
     "R_TESTS" = "",
+    "R_BROWSER" = "false",
+    "R_PDFVIEWER" = "false",
     "TAR" = auto_tar())
 
-  if(is.na(Sys.getenv("NOT_CRAN", unset = NA))) {
+  if (is.na(Sys.getenv("NOT_CRAN", unset = NA))) {
     vars[["NOT_CRAN"]] <- "true"
   }
 

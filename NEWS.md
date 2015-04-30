@@ -64,6 +64,9 @@
   Among others, this enables the cyclic dependency check in `devtools::release`
   (#602, @krlmlr).
 
+* `R_BROWSER` and `R_PDFVIEWER` environment variables are set to "false" to 
+  suppress random windows opening during checks.
+
 * Devtools correctly identifies RTools 3.1 and 3.2 (#738), and
   preserves continuation lines in the `DESCRIPTION` (#709).
 
