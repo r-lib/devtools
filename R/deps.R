@@ -29,7 +29,7 @@
 #' }
 package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
                          type = getOption("pkgType")) {
-  cran <- installed.packages()
+  cran <- available_packages(repos, type)
 
   if (missing(pkg)) {
     pkg <- as.package(".")$package
@@ -63,8 +63,8 @@ compare_versions <- function(a, b) {
   stopifnot(length(a) == length(b))
 
   compare_var <- function(x, y) {
-    if (is.na(x)) return(-2L)
     if (is.na(y)) return(2L)
+    if (is.na(x)) return(-2L)
 
     x <- package_version(x)
     y <- package_version(y)
@@ -98,7 +98,7 @@ print.package_deps <- function(x, show_ok = FALSE, ...) {
   }
 
   if (any(ahead)) {
-    cat("Ahead of CRAN ----------------------------\n")
+    cat("Not on CRAN ----------------------------\n")
     print(x[ahead, , drop = FALSE], row.names = FALSE, right = FALSE)
   }
 
@@ -113,13 +113,13 @@ print.package_deps <- function(x, show_ok = FALSE, ...) {
 update.package_deps <- function(object, ..., quiet = FALSE) {
   ahead <- object$package[object$diff == 2L]
   if (length(ahead) > 0 && !quiet) {
-    message("Skipping ", length(ahead), " dependencies ahead of CRAN: ",
+    message("Skipping ", length(ahead), " packages not on CRAN: ",
       paste(ahead, collapse = ", "))
   }
 
   missing <- object$package[object$diff == 1L]
   if (length(missing) > 0 && !quiet) {
-    message("Skipping ", length(missing), " dependencies ahead not on CRAN: ",
+    message("Skipping ", length(missing), " packages ahead of CRAN: ",
       paste(missing, collapse = ", "))
   }
 
@@ -127,7 +127,7 @@ update.package_deps <- function(object, ..., quiet = FALSE) {
   if (length(behind) > 0L) {
     if (!quiet)
       message("Installing ", length(behind), " missing dependencies")
-    install_packages(behind, attr(object, "repos"), attr(object, "type"),
+    install_packages(behind, attr(object, "repos"), ..., attr(object, "type"),
       quiet = quiet)
   }
 
@@ -153,11 +153,12 @@ find_deps <- function(pkgs, available = available.packages(), top_dep = TRUE, re
   top <- tools::package_dependencies(pkgs, db = available, which = top_dep)
   top_flat <- unlist(top, use.names = FALSE)
 
-  if (length(rec_dep) == 0)
-    return(top_flat)
-
-  rec <- tools::package_dependencies(top_flat, db = available, which = rec_dep,
-    recursive = TRUE)
+  if (length(rec_dep) != 0 && length(top_flat) > 0) {
+    rec <- tools::package_dependencies(top_flat, db = available, which = rec_dep,
+      recursive = TRUE)
+  } else {
+    rec <- character()
+  }
 
   unique(unlist(c(pkgs, top, rec), use.names = FALSE))
 }
@@ -175,4 +176,26 @@ standardise_dep <- function(x) {
   } else {
     stop("Dependencies must be a boolean or a character vector", call. = FALSE)
   }
+}
+
+#' Update packages that are missing or out-of-date.
+#'
+#' Works similarly to \code{install.packages()} but doesn't install packages
+#' that are already installed, and also upgrades out dated dependencies.
+#'
+#' @param pkgs Character vector of packages to update.
+#' @inheritParams package_deps
+#' @seealso \code{\link{package_deps}} to see which packages are out of date/
+#'   missing.
+#' @export
+#' @examples
+#' \dontrun{
+#' update_packages("ggplot2")
+#' update_packages(c("plyr", "ggplot2"))
+#' }
+update_packages <- function(pkgs, dependencies = NA,
+                            repos = getOption("repos"),
+                            type = getOption("pkgType")) {
+  pkgs <- package_deps(pkgs, repos = repos, type = type)
+  update(pkgs)
 }

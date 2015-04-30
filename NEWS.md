@@ -1,5 +1,8 @@
 # devtools 1.7.1.9000
 
+* `update_packages()` will install a package (and its dependencies) only if
+  they are missing or out of date (#675).
+
 * `session_info()` can now take a vector of package names, in which case it
   will print the version of those packages and their dependencies (#664).
 
