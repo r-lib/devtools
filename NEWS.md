@@ -1,6 +1,6 @@
 # devtools 1.7.1.9000
 
-* `build_vignettes()` automatically installs the vignette builder package
+* `build_vignettes()` automatically installs the VignetteBuilder package,
   if necessary (#736).
 
 * `update_packages()` will install a package (and its dependencies) only if
@@ -66,6 +66,7 @@
   arguments can be passed to `utils::install.packages()` (@jimhester, #712).
 
 * `lint()` gains a `cache` argument (@jimhester, #708).
+
 * `test()` gains an `...` argument so that additional arguments can be passed
   to `testthat::test_dir` (@jimhester, #747)
 
@@ -81,24 +82,28 @@
 * `NOT_CRAN` is no longer set automatically if it has been set externally to
   allow overriding.
 
-* `CRAN: http://cran.rstudio.com/` is explicitly set in `travis.yml`, enabling cyclic dependency check
+* `CRAN: http://cran.rstudio.com/` is explicitly set in `travis.yml`, enabling 
+  cyclic dependency check
 
-* `install_svn` now optionally accepts revision number (#739, @lev-kuznetsov)
+* `install_svn()` now optionally accepts revision number (#739, @lev-kuznetsov)
 
 * `release()` now shows file size before submitting to CRAN (#683, @krlmlr).
 
-* Previously, `devtools` ran all external R processes with `R --vanilla`.
+* Previously, devtools ran all external R processes with `R --vanilla`.
   Now it only suppresses user profiles, and constructs a custom `.Rprofile` to
   override the default.  Currently, this `.Rprofile` sets up the `repos` option.
   Among others, this enables the cyclic dependency check in `devtools::release`
   (#602, @krlmlr).
 
+* `use_coveralls()` allows you to easily add coveralls support to a package. 
+  (#680, @jimhester)
+
+* Fixed scoping issues with `unzip()`.
+
+
 # devtools 1.7.0
 
 ## Improve reverse dependency checking
-* `use_coveralls()` allows you to easily add coveralls support to a package. (#680, @jimhester)
-
-* Fixed scoping issues with `unzip()`.
 
 Devtools now supports a new and improved style of revdep checking with `use_revdep()`. This creates a new directory called `revdep` which contains a `check.R` template. Run this template to check all reverse dependencies, and save summarised results to `check/summary.md`. You can then check this file into git, making it much easier to track how reverse dependency results change between versions. The documentation for `revdep_check()` is much improved, and should be more useful (#635)
 
