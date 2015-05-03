@@ -21,7 +21,7 @@ check_dev_versions <- function(pkg = ".") {
   message("Checking for dependencies on development versions... ",
     appendLF = FALSE)
 
-  deps <- pkg_deps(pkg, NA)
+  deps <- dev_package_deps(pkg, NA)
   deps <- deps[!is.na(deps$version), , drop = FALSE]
 
   parsed <- lapply(deps$version, function(x) unlist(numeric_version(x)))
