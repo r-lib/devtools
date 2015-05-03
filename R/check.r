@@ -168,7 +168,7 @@ aspell_env_var <- function() {
       c("_R_CHECK_CRAN_INCOMING_USE_ASPELL_" = "TRUE")
     },
     error = function(e) {
-      warning(e$message, call. = FALSE)
+      warning("Skipping spell check: ", e$message, call. = FALSE)
       NULL
     }
   )
