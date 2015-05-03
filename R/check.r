@@ -152,6 +152,7 @@ cran_env_vars <- function() {
     "_R_CHECK_TOPLEVEL_FILES_"           = "TRUE",
     "_R_CHECK_S3_METHODS_NOT_REGISTERED_"= "TRUE",
     "_R_CHECK_OVERWRITE_REGISTERED_S3_METHODS_" = "TRUE",
+    "_R_CHECK_CRAN_INCOMING_USE_ASPELL_" = "TRUE",
     # The following are used for CRAN incoming checks according to the R
     # internals doc, but they're not in the list at the bottom of the Tools
     # section (have to look at the description of the individual env vars).
