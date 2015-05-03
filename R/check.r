@@ -111,7 +111,7 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
   # not set, R CMD check will use the defaults as described in R Internals.
   env_vars <- c(
     if (cran) cran_env_vars(),
-    if (check_version) c("_R_CHECK_CRAN_INCOMING_" = "TRUE"),
+    if (check_version) c("_R_CHECK_CRAN_INCOMING_" = "TRUE", aspell_env_var()),
     if (!force_suggests) c("_R_CHECK_FORCE_SUGGESTS_" = "FALSE")
   )
 
@@ -152,7 +152,6 @@ cran_env_vars <- function() {
     "_R_CHECK_TOPLEVEL_FILES_"           = "TRUE",
     "_R_CHECK_S3_METHODS_NOT_REGISTERED_"= "TRUE",
     "_R_CHECK_OVERWRITE_REGISTERED_S3_METHODS_" = "TRUE",
-    aspell_env_var(),
     # The following are used for CRAN incoming checks according to the R
     # internals doc, but they're not in the list at the bottom of the Tools
     # section (have to look at the description of the individual env vars).
