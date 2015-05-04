@@ -97,6 +97,9 @@
 
 * `NOT_CRAN` envvar no longer overrides externally set variable.
 
+* `check(check_version = TRUE)` also checks spelling of the `DESCRIPTION`; if no
+  spell checker is installed, a warning is given (#784, @krlmlr).
+
 # devtools 1.7.0
 
 ## Improve reverse dependency checking
