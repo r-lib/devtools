@@ -52,7 +52,7 @@ use_test <- function(name, pkg = ".") {
   }
 
   path <- sprintf("tests/testthat/test-%s.R", name)
-  if (file.exists(path)) {
+  if (file.exists(file.path(pkg$path, path))) {
     stop("File ", path, " exists", call. = FALSE)
   }
 
@@ -244,7 +244,7 @@ use_package_doc <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   path <- file.path("R", paste(pkg$package, "-package.r", sep = ""))
-  if (file.exists(path)) {
+  if (file.exists(file.path(pkg$path, path))) {
     stop(path, " already exists", call. = FALSE)
   }
 
@@ -506,11 +506,11 @@ use_revdep <- function(pkg = ".") {
   dir.create(file.path(pkg$path, "revdep"), showWarnings = FALSE)
   use_build_ignore("revdep", pkg = pkg)
 
-  message("Add revdep subdirectories to .gitigore")
+  message("Add revdep subdirectories to .gitignore")
   path <- file.path(pkg$path, "revdep", ".gitignore")
   union_write(path, "**/")
 
-  if (!file.exists("revdep/check.R")) {
+  if (!file.exists(file.path(pkg$path, "revdep/check.R"))) {
     message("Adding revdep/check.R template")
     writeLines(render_template("revdep.R", list(name = pkg$package)),
       file.path(pkg$path, "revdep", "check.R"))
