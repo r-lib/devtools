@@ -94,7 +94,6 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
 
   dest <- tempfile(fileext = paste0(".zip"))
   src_root <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo)
-  src_submodules <- paste0(src_root, "/contents/.gitmodules?ref=", x$ref)
   src <- paste0(src_root, "/zipball/", x$ref)
 
   if (!is.null(x$auth_token)) {
@@ -107,13 +106,18 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
     auth <- NULL
   }
 
-  x <- httr::HEAD(src_submodules, , auth)
-  has_submods <- identical(httr::status_code(x), 200L)
-  if (has_submods)
+  if (github_has_remotes(x, auth))
     warning("Github repo contains submodules, may not function as expected!",
       call. = FALSE)
 
   download(dest, src, auth)
+}
+
+github_has_remotes <- function(x, auth = NULL) {
+  src_root <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo)
+  src_submodules <- paste0(src_root, "/contents/.gitmodules?ref=", x$ref)
+  response <- httr::HEAD(src_submodules, , auth)
+  identical(httr::status_code(response), 200L)
 }
 
 #' @export
