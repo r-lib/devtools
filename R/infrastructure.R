@@ -576,3 +576,18 @@ union_write <- function(path, new_lines) {
   writeLines(all, path)
 }
 
+
+#' @rdname infrastructure
+#' @section \code{use_cran_badge}:
+#' Add a badge to show CRAN status and version number on the README
+#' @export
+use_cran_badge <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  gh <- github_info(pkg$path)
+  message(
+    " * Add a CRAN status shield by adding the following line to your README:\n",
+    "[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/", gh$repo, ")](http://cran.r-project.org/web/packages/", gh$repo, ")"
+  )
+  invisible(TRUE)
+}
