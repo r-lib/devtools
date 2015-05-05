@@ -60,6 +60,10 @@
 
 ## Bug fixes and minor improvements
 
+* `with_debug()` now uses `with_makevars()` rather than `with_env()`, because R
+  reads compilation variables from the Makevars rather than the environment
+  (@jimhester, #788).
+
 * Previously, devtools ran all external R processes with `R --vanilla`.
   Now it only suppresses user profiles, and constructs a custom `.Rprofile` to
   override the default.  Currently, this `.Rprofile` sets up the `repos` option.
