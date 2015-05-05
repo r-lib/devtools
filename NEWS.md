@@ -1,6 +1,5 @@
 # devtools 1.8.0
-* New `use_cran_badge()` adds a CRAN status badge that you can copy into a README file. Green indicates package is on CRAN. Packages not yet submitted or accepted to CRAN get a red badge.
-* 
+ 
 ## Helpers
 
 * New `dr_devtools()` runs some common diagnostics: are you using the 
@@ -17,6 +16,8 @@
   checking the existing files.
 
 * `use_test()` adds a new test file (#769, @krlmlr).
+
+* New `use_cran_badge()` adds a CRAN status badge that you can copy into a README file. Green indicates package is on CRAN. Packages not yet submitted or accepted to CRAN get a red badge.
 
 ## Package installation and info
 
