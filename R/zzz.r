@@ -38,7 +38,7 @@ NULL
     devtools.path = "~/R-dev",
     devtools.install.args = "",
     devtools.name = "Your name goes here",
-    devtools.desc.author = 'person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))',
+    devtools.desc.author = 'person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))',
     devtools.desc.license = "What license is it under?",
     devtools.desc.suggests = NULL,
     devtools.desc = list(),
