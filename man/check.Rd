@@ -24,7 +24,11 @@ CRAN uses.}
 
 \item{check_version}{if \code{TRUE}, check that the new version is greater
 than the current version on CRAN, by setting the
-\code{_R_CHECK_CRAN_INCOMING_} environment variable to \code{TRUE}.}
+\code{_R_CHECK_CRAN_INCOMING_} environment variable to \code{TRUE}.
+(This also enables spell checking of the package's \code{DESCRIPTION}
+by setting the \code{_R_CHECK_CRAN_INCOMING_USE_ASPELL_} environment
+variable to \code{TRUE}; if no spell checker is installed, a warning is
+issued.)}
 
 \item{force_suggests}{if \code{FALSE}, don't force suggested packages, by
 setting the \code{_R_CHECK_FORCE_SUGGESTS_} environment variable to
