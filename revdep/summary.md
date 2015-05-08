@@ -6,7 +6,7 @@
 |:--------|:----------------------------|
 |version  |R version 3.2.0 (2015-04-16) |
 |system   |x86_64, darwin13.4.0         |
-|ui       |RStudio (0.99.423)           |
+|ui       |RStudio (0.99.430)           |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Chicago              |
@@ -17,13 +17,13 @@
 |:----------|:--|:--------|:----------|:--------------|
 |digest     |   |0.6.8    |2014-12-31 |CRAN (R 3.2.0) |
 |evaluate   |   |0.7      |2015-04-21 |CRAN (R 3.2.0) |
-|git2r      |   |0.7      |2015-02-23 |CRAN (R 3.2.0) |
+|git2r      |   |0.10.1   |2015-05-07 |CRAN (R 3.2.0) |
 |httr       |   |0.6.1    |2015-01-01 |CRAN (R 3.2.0) |
 |jsonlite   |   |0.9.16   |2015-04-11 |CRAN (R 3.2.0) |
-|knitr      |   |1.10     |2015-04-23 |CRAN (R 3.2.0) |
+|knitr      |   |1.10.5   |2015-05-06 |CRAN (R 3.2.0) |
 |lintr      |   |0.2.0    |2014-12-01 |CRAN (R 3.2.0) |
 |memoise    |   |0.2.1    |2014-04-22 |CRAN (R 3.2.0) |
-|Rcpp       |   |0.11.5   |2015-03-06 |CRAN (R 3.2.0) |
+|Rcpp       |   |0.11.6   |2015-05-01 |CRAN (R 3.2.0) |
 |RCurl      |   |1.95-4.6 |2015-04-24 |CRAN (R 3.2.0) |
 |rmarkdown  |   |0.5.1    |2015-01-26 |CRAN (R 3.2.0) |
 |roxygen2   |   |4.1.1    |2015-04-15 |CRAN (R 3.2.0) |
@@ -33,7 +33,7 @@
 |whisker    |   |0.3-2    |2013-04-28 |CRAN (R 3.2.0) |
 
 # Check results
-27 checked out of 28 dependencies 
+28 checked out of 29 dependencies 
 
 ## aRxiv (0.5.8)
 Maintainer: Karl Broman <kbroman@biostat.wisc.edu>  
@@ -72,7 +72,7 @@ Maintainer: Sten Ilmjarv <sten.ilmjarv@gmail.com>
 
 ```
 checking package dependencies ... ERROR
-Packages required but not available: ‘R.utils’ ‘affxparser’ ‘affy’ ‘oligo’
+Packages required but not available: ‘affxparser’ ‘affy’ ‘oligo’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -106,6 +106,11 @@ Execution halted
 DONE
 Status: 3 NOTEs
 ```
+
+## FedData (1.1.0)
+Maintainer: R. Kyle Bocinsky <bocinsky@gmail.com>
+
+__OK__
 
 ## gender (0.4.3)
 Maintainer: Lincoln Mullen <lincoln@lincolnmullen.com>  
@@ -164,14 +169,10 @@ Maintainer: Sean C. Anderson <sean@seananderson.ca>
 Bug reports: http://github.com/seananderson/metafolio/issues
 
 ```
-checking package dependencies ... NOTE
-Package suggested but not available for checking: ‘TeachingDemos’
-```
-```
 checking whether package ‘metafolio’ can be installed ... ERROR
 Installation failed.
-See ‘/private/tmp/Rtmpm9ZW8z/check_cranea40497c6391/metafolio.Rcheck/00install.out’ for details.
-Status: 1 ERROR, 1 NOTE
+See ‘/private/tmp/RtmpwEmZkv/check_cran34e757c9c63b/metafolio.Rcheck/00install.out’ for details.
+Status: 1 ERROR
 ```
 
 ## myTAI (0.0.2)
@@ -256,16 +257,11 @@ Running examples in ‘NMF-Ex.R’ failed
 The error most likely occurred in:
 
 > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: nmfModel
-> ### Title: Factory Methods NMF Models
-> ### Aliases: nmfModel nmfModel,data.frame,data.frame-method
-> ###   nmfModel,formula,ANY-method nmfModel,matrix,ANY-method
-> ###   nmfModel,matrix,matrix-method nmfModel-methods
-> ###   nmfModel,missing,ANY-method nmfModel,missing,missing-method
-> ###   nmfModel,NULL,ANY-method nmfModel,numeric,matrix-method
-> ###   nmfModel,numeric,missing-method nmfModel,numeric,numeric-method
-> ###   nmfModels
-> ### Keywords: methods
+> ### Name: NMF-package
+> ### Title: Algorithms and framework for Nonnegative Matrix Factorization
+> ###   (NMF).
+> ### Aliases: NMF NMF-package
+> ### Keywords: package
 > 
 > ### ** Examples
 > 
@@ -274,224 +270,17 @@ The error most likely occurred in:
 > options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
 > ## End(Don't show)
 > 
-> #----------
-> # nmfModel,numeric,numeric-method
-> #----------
-> # data
-> n <- 20; r <- 3; p <- 10
-> V <- rmatrix(n, p) # some target matrix
+> # generate a synthetic dataset with known classes
+> n <- 50; counts <- c(5, 5, 8);
+> V <- syntheticNMF(n, counts)
 > 
-> # create a r-ranked NMF model with a given target dimensions n x p as a 2-length vector
-> nmfModel(r, c(n,p)) # directly
-<Object of class:NMFstd>
-features: 20 
-basis/rank: 3 
-samples: 10 
-> nmfModel(r, dim(V)) # or from an existing matrix <=> nmfModel(r, V)
-<Object of class:NMFstd>
-features: 20 
-basis/rank: 3 
-samples: 10 
-> # or alternatively passing each dimension separately
-> nmfModel(r, n, p)
-<Object of class:NMFstd>
-features: 20 
-basis/rank: 3 
-samples: 10 
+> # perform a 3-rank NMF using the default algorithm
+> res <- nmf(V, 3)
 > 
-> # trying to create a NMF object based on incompatible matrices generates an error
-> w <- rmatrix(n, r)
-> h <- rmatrix(r+1, p)
-> try( new('NMFstd', W=w, H=h) )
-Error in validObject(.Object) : 
-  invalid class “NMFstd” object: Dimensions of W and H are not compatible [ncol(W)= 3 != nrow(H)= 4 ]
-> try( nmfModel(w, h) )
-Error in .local(rank, target, ...) : 
-  nmfModel - Invalid number of columns in the basis matrix [3]: it should match the number of rows in the mixture coefficient matrix [4]
-> try( nmfModel(r+1, W=w, H=h) )
-Error in .local(rank, target, ...) : 
-  nmfModel - Objective rank [4] is greater than the number of columns in W [3]
-> # The factory method can be force the model to match some target dimensions
-> # but warnings are thrown
-> nmfModel(r, W=w, H=h)
-Warning in .local(rank, target, ...) :
-  nmfModel - Objective rank [3] is lower than the number of rows in H [4]: only the first 3 rows of H  will be used
-<Object of class:NMFstd>
-features: 20 
-basis/rank: 3 
-samples: 10 
-> nmfModel(r, n-1, W=w, H=h)
-Warning in .local(rank, target, ...) :
-  nmfModel - Number of rows in target is lower than the number of rows in W [20]: only the first 19 rows of W will be used
-Warning in .local(rank, target, ...) :
-  nmfModel - Objective rank [3] is lower than the number of rows in H [4]: only the first 3 rows of H  will be used
-<Object of class:NMFstd>
-features: 19 
-basis/rank: 3 
-samples: 10 
-> 
-> #----------
-> # nmfModel,numeric,missing-method
-> #----------
-> ## Empty model of given rank
-> nmfModel(3)
-<Object of class:NMFstd>
-features: 0 
-basis/rank: 3 
-samples: 0 
-> 
-> #----------
-> # nmfModel,missing,ANY-method
-> #----------
-> nmfModel(target=10) #square
-<Object of class:NMFstd>
-features: 10 
-basis/rank: 0 
-samples: 10 
-> nmfModel(target=c(10, 5))
-<Object of class:NMFstd>
-features: 10 
-basis/rank: 0 
-samples: 5 
-> 
-> #----------
-> # nmfModel,missing,missing-method
-> #----------
-> # Build an empty NMF model
-> nmfModel()
-<Object of class:NMFstd>
-features: 0 
-basis/rank: 0 
-samples: 0 
-> 
-> # create a NMF object based on one random matrix: the missing matrix is deduced
-> # Note this only works when using factory method NMF
-> n <- 50; r <- 3;
-> w <- rmatrix(n, r)
-> nmfModel(W=w)
-<Object of class:NMFstd>
-features: 50 
-basis/rank: 3 
-samples: 0 
-> 
-> # create a NMF object based on random (compatible) matrices
-> p <- 20
-> h <- rmatrix(r, p)
-> nmfModel(H=h)
-<Object of class:NMFstd>
-features: 0 
-basis/rank: 3 
-samples: 20 
-> 
-> # specifies two compatible matrices
-> nmfModel(W=w, H=h)
-<Object of class:NMFstd>
-features: 50 
-basis/rank: 3 
-samples: 20 
-> # error if not compatible
-> try( nmfModel(W=w, H=h[-1,]) )
-Error in .local(rank, target, ...) : 
-  nmfModel - Invalid number of columns in the basis matrix [3]: it should match the number of rows in the mixture coefficient matrix [2]
-> 
-> #----------
-> # nmfModel,numeric,matrix-method
-> #----------
-> # create a r-ranked NMF model compatible with a given target matrix
-> obj <- nmfModel(r, V)
-> all(is.na(basis(obj)))
-[1] TRUE
-> 
-> #----------
-> # nmfModel,matrix,matrix-method
-> #----------
-> ## From two existing factors
-> 
-> # allows a convenient call without argument names
-> w <- rmatrix(n, 3); h <- rmatrix(3, p)
-> nmfModel(w, h)
-<Object of class:NMFstd>
-features: 50 
-basis/rank: 3 
-samples: 20 
-> 
-> # Specify the type of NMF model (e.g. 'NMFns' for non-smooth NMF)
-> mod <- nmfModel(w, h, model='NMFns')
-> mod
-<Object of class:NMFns>
-features: 50 
-basis/rank: 3 
-samples: 20 
-theta: 0.5 
-> 
-> # One can use such an NMF model as a seed when fitting a target matrix with nmf()
-> V <- rmatrix(mod)
-> res <- nmf(V, mod)
-> nmf.equal(res, nmf(V, mod))
-[1] TRUE
-> 
-> # NB: when called only with such a seed, the rank and the NMF algorithm
-> # are selected based on the input NMF model.
-> # e.g. here rank was 3 and the algorithm "nsNMF" is used, because it is the default
-> # algorithm to fit "NMFns" models (See ?nmf).
-> 
-> #----------
-> # nmfModel,matrix,ANY-method
-> #----------
-> ## swapped arguments `rank` and `target`
-> V <- rmatrix(20, 10)
-> nmfModel(V) # equivalent to nmfModel(target=V)
-<Object of class:NMFstd>
-features: 20 
-basis/rank: 0 
-samples: 10 
-> nmfModel(V, 3) # equivalent to nmfModel(3, V)
-<Object of class:NMFstd>
-features: 20 
-basis/rank: 3 
-samples: 10 
-> 
-> #----------
-> # nmfModel,formula,ANY-method
-> #----------
-> # empty 3-rank model
-> nmfModel(~ 3)
-<Object of class:NMFstd>
-features: 0 
-basis/rank: 3 
-samples: 0 
-> 
-> # 3-rank model that fits a given data matrix
-> x <- rmatrix(20,10)
-> nmfModel(x ~ 3)
-<Object of class:NMFstd>
-features: 20 
-basis/rank: 3 
-samples: 10 
-> 
-> # add fixed coefficient term defined by a factor
-> gr <- gl(2, 5)
-> nmfModel(x ~ 3 + gr)
-<Object of class:NMFstd>
-features: 20 
-basis/rank: 5 
-samples: 10 
-fixed coef [2]:
-  gr = <1, 2>
-> 
-> # add fixed coefficient term defined by a numeric covariate
-> nmfModel(x ~ 3 + gr + b, data=list(b=runif(10)))
-<Object of class:NMFstd>
-features: 20 
-basis/rank: 6 
-samples: 10 
-fixed coef [3]:
-  gr = <1, 2>
-  b = 0.0101301828399301, 0.21454192395322, ..., 0.767450851621106
-> 
-> # 3-rank model that fits a given ExpressionSet (with fixed coef terms)
-> e <- ExpressionSet(x)
-Error: could not find function "ExpressionSet"
+> basismap(res)
+Error in process_tracks(x, tracks, annRow, annCol) : 
+  Invalid special annotation track name ['basis']. Should partially match one of 'basis', ':basis', 'basis:'.
+Calls: basismap -> basismap -> .local -> process_tracks
 Execution halted
 ```
 ```
