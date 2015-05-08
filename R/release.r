@@ -65,6 +65,7 @@ release <- function(pkg = ".", check = TRUE) {
       return(invisible())
 
   } else {
+    release_checks(pkg)
     if (yesno("Does R CMD check pass with no ERRORs or WARNINGs?"))
       return(invisible())
 

@@ -21,13 +21,15 @@ check_dev_versions <- function(pkg = ".") {
   message("Checking for dependencies on development versions... ",
     appendLF = FALSE)
 
-  deps <- pkg_deps(pkg, NA)
-  deps <- deps[!is.na(deps$version), , drop = FALSE]
+  deps <- package_deps(pkg$package, NA)
+  deps <- deps[!is.na(deps$installed), , drop = FALSE]
 
-  parsed <- lapply(deps$version, function(x) unlist(numeric_version(x)))
-  patch_ver <- vapply(parsed, function(x) x[[length(x)]], integer(1))
+  parsed <- lapply(deps$installed, function(x) unlist(numeric_version(x)))
 
-  is_dev <- patch_ver >= 9000
+  lengths <- vapply(parsed, length, integer(1))
+  last_ver <- vapply(parsed, function(x) x[[length(x)]], integer(1))
+
+  is_dev <- lengths == 4 && last_ver >= 9000
   if (!any(is_dev)) {
     message("OK")
     return(invisible(TRUE))
