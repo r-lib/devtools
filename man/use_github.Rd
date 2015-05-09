@@ -2,7 +2,7 @@
 % Please edit documentation in R/infrastructure-git.R
 \name{use_github}
 \alias{use_github}
-\title{Connect a local repo with github.}
+\title{Connect a local repo with GitHub.}
 \usage{
 use_github(auth_token = github_pat(), private = FALSE, pkg = ".")
 }
