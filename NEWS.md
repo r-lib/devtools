@@ -1,5 +1,7 @@
 # devtools 1.8.0.9000
 
+* Fix use of `uses_git()` in `use_readme_rmd()` (#793).
+
 # devtools 1.8.0
  
 ## Helpers
