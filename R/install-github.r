@@ -1,4 +1,4 @@
-#' Attempts to install a package directly from github.
+#' Attempts to install a package directly from GitHub.
 #'
 #' This function is vectorised on \code{repo} so you can install multiple
 #' packages in a single command.
@@ -18,7 +18,7 @@
 #'   supply to this argument. This is safer than using a password because
 #'   you can easily delete a PAT without affecting any others. Defaults to
 #'   the \code{GITHUB_PAT} environment variable.
-#' @param host Github API host to use. Override with your github enterprise
+#' @param host GitHub API host to use. Override with your GitHub enterprise
 #'   hostname, for example, \code{"github.hostname.com/api/v3"}.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @details
@@ -89,7 +89,7 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
 #' @export
 remote_download.github_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
-    message("Downloading github repo ", x$username, "/", x$repo, "@", x$ref)
+    message("Downloading GitHub repo ", x$username, "/", x$repo, "@", x$ref)
   }
 
   dest <- tempfile(fileext = paste0(".zip"))
@@ -107,7 +107,7 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
   }
 
   if (github_has_remotes(x, auth))
-    warning("Github repo contains submodules, may not function as expected!",
+    warning("GitHub repo contains submodules, may not function as expected!",
       call. = FALSE)
 
   download(dest, src, auth)
