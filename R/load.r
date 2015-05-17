@@ -193,7 +193,6 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 #' @export
 create_description <- function(path = ".", extra = getOption("devtools.desc"),
                                quiet = FALSE) {
-  path <- check_dir(path)
   desc_path <- file.path(path, "DESCRIPTION")
 
   if (file.exists(desc_path)) return(FALSE)
