@@ -15,7 +15,7 @@
 #'   "Suggests". \code{NA} is shorthand for "Depends", "Imports" and "LinkingTo"
 #'   and is the default. \code{FALSE} is shorthand for no dependencies (i.e.
 #'   just check this package, not its dependencies).
-#' @param quiet If \code{TRUE}, supress output
+#' @param quiet If \code{TRUE}, suppress output
 #' @param repos A character vector giving repositories to use.
 #' @param type Type of package to \code{update}.  If "both", will switch
 #'   automatically to "binary" to avoid interactive prompts during package
