@@ -88,7 +88,7 @@ github_remote_parse <- function(x) {
     # git@github.com:hadley/devtools.git
     re <- "github.com:(.*?)/(.*)\\.git"
   } else {
-    stop("Unknown github repo format", call. = FALSE)
+    stop("Unknown GitHub repo format", call. = FALSE)
   }
 
   m <- regexec(re, x)

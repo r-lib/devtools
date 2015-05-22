@@ -58,7 +58,7 @@ dr_devtools <- function() {
   doctor("devtools", msg)
 }
 
-#' Diagnose potential github issues
+#' Diagnose potential GitHub issues
 #'
 #' @param path Path to repository to check. Defaults to current working
 #'   directory

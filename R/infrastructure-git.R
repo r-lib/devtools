@@ -27,7 +27,7 @@ use_git <- function(message = "Initial commit", pkg = ".") {
   invisible()
 }
 
-#' Connect a local repo with github.
+#' Connect a local repo with GitHub.
 #'
 #' If the current repo does not use git, calls \code{use_git} automatically.
 #'
@@ -49,7 +49,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".") {
   if ("origin" %in% git2r::remotes(r))
     return(invisible())
 
-  message("Creating github repository")
+  message("Creating GitHub repository")
 
   create <- github_POST("user/repos", pat = auth_token, body = list(
     name = jsonlite::unbox(pkg$package),
@@ -57,7 +57,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".") {
     private = jsonlite::unbox(private)
   ))
 
-  message("Adding remote to github")
+  message("Adding remote to GitHub")
   git2r::remote_add(r, "origin", create$ssh_url)
   # git2r::branch_set_upstream(head(r), "origin/master")
   # git2r::push(r, "origin", "refs/heads/master")
