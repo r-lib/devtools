@@ -10,7 +10,7 @@ git_sha1 <- function(n = 10, path = ".") {
 
 git_uncommitted <- function(path = ".") {
   r <- git2r::repository(path)
-  st <- vapply(git2r::status(r, verbose = FALSE), length, integer(1))
+  st <- vapply(git2r::status(r), length, integer(1))
   any(st != 0)
 }
 

@@ -28,7 +28,7 @@ Imports:
     roxygen2 (>= 4.1.0),
     rversions,
     stats,
-    git2r
+    git2r (0.10.1)
 Suggests:
     testthat (>= 0.7),
     BiocInstaller,
