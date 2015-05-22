@@ -4,7 +4,7 @@ uses_git <- function(path = ".") {
 
 git_sha1 <- function(n = 10, path = ".") {
   r <- git2r::repository(path)
-  sha <- git2r::commits(r)[[1]]@sha # sha of most recent commit
+  sha <- git2r::commits(r, n = 1)[[1]]@sha # sha of most recent commit
   substr(sha, 1, n)
 }
 
