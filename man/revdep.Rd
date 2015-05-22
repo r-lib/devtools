@@ -19,7 +19,7 @@ current package.}
 \item{dependencies}{A character vector listing the types of dependencies
 to follow.}
 
-\item{recursive}{If \code{TRUE} look for full set of recusive dependencies.}
+\item{recursive}{If \code{TRUE} look for full set of recursive dependencies.}
 
 \item{ignore}{A character vector of package names to ignore. These packages
 will not appear in returned vector. This is used in

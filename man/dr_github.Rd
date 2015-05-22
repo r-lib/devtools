@@ -2,7 +2,7 @@
 % Please edit documentation in R/doctor.R
 \name{dr_github}
 \alias{dr_github}
-\title{Diagnose potential github issues}
+\title{Diagnose potential GitHub issues}
 \usage{
 dr_github(path = ".")
 }
@@ -11,7 +11,7 @@ dr_github(path = ".")
 directory}
 }
 \description{
-Diagnose potential github issues
+Diagnose potential GitHub issues
 }
 \examples{
 \donttest{

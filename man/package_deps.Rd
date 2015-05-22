@@ -35,7 +35,7 @@ installation.}
 
 \item{object,...}{Arguments ot}
 
-\item{quiet}{If \code{TRUE}, supress output}
+\item{quiet}{If \code{TRUE}, suppress output}
 }
 \value{
 A data frame with additional.
