@@ -17,6 +17,8 @@
 
 * `uses_testthat()` and `check_failures()` are now exported (#824, #839, @krlmlr).
 
+* Remove explicit `library(testthat)` call in `test()` (#798, @krlmlr)
+
 # devtools 1.8.0
  
 ## Helpers
