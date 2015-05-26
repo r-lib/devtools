@@ -1,4 +1,4 @@
 library(testthat)
-library(testTest)
+library(testTestWithDepends)
 
-test_check("testTest")
+test_check("testTestWithDepends")
