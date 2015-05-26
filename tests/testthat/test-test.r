@@ -8,4 +8,5 @@ test_that("Package can be tested with testthat not on search path", {
   }
 
   test("testTest")
+  test("testTestWithDepends")
 })
