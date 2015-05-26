@@ -38,8 +38,8 @@ test <- function(pkg = ".", filter = NULL, ...) {
 
   # Need to attach testthat so that (e.g.) context() is available
   # Update package dependency to avoid explicit require() call
-  pkg$depends <- paste0(pkg$depends, ", testthat")
-  if (grepl("^ *, testthat$", pkg$depends))
+  pkg$depends <- paste0("testthat, ", pkg$depends)
+  if (grepl("^testthat, *$", pkg$depends))
     pkg$depends <- "testthat"
 
   # Run tests in a child of the namespace environment, like
