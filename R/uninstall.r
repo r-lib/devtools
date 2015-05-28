@@ -16,9 +16,13 @@ uninstall <- function(pkg = ".", unload = TRUE, quiet = FALSE, ...) {
 
   pkg <- as.package(pkg)
 
-  if (unload && pkg$package %in% loaded_packages()$package) unload(pkg)
+  if (unload && pkg$package %in% loaded_packages()$package) {
+    unload(pkg)
+  }
 
-  if (!quiet) message("Uninstalling ", pkg$package)
+  if (!quiet) {
+    message("Uninstalling ", pkg$package)
+  }
 
   remove.packages(pkg$package)
 
