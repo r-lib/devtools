@@ -12,6 +12,7 @@ r_github_packages:
   - rstudio/rmarkdown
   - hadley/testthat
   - jimhester/covr
+  - jimhester/lintr
 
 bioc_packages:
   - BiocInstaller
