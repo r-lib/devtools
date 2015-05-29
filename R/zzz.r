@@ -32,6 +32,13 @@
 #' @name devtools
 NULL
 
+#' Deprecated Functions
+#'
+#' These functions are Deprecated in this release of devtools, they will be
+#' marked as Defunct and removed in a future version.
+#' @name devtools-deprecated
+NULL
+
 .onLoad <- function(libname, pkgname) {
   op <- options()
   op.devtools <- list(

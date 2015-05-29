@@ -5,6 +5,8 @@
 * New `uninstall()` removes installed package (#820, @krlmlr).
 
 * `build_vignettes()` gains dependencies argument (#825, @krlmlr).
+* Add `use_coverage()` function to add codecov.io or coveralls.io to a project,
+  deprecate `use_coveralls()` (@jimhester, #822, #818).
 
 # devtools 1.8.0
  

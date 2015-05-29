@@ -169,11 +169,20 @@ use_travis <- function(pkg = ".") {
   invisible(TRUE)
 }
 
-#' @rdname infrastructure
+#' @rdname devtools-deprecated
 #' @section \code{use_coveralls}:
 #' Add coveralls to basic travis template to a package.
 #' @export
 use_coveralls <- function(pkg = ".") {
+  .Deprecated("use_coverage(type = \"coveralls\")")
+  use_coverage(pkg, type = "coveralls")
+}
+
+#' @rdname infrastructure
+#' @section \code{use_coverage}:
+#' Add test code coverage to basic travis template to a package.
+#' @export
+use_coverage <- function(pkg = ".", type = c("codecov", "coveralls")) {
   pkg <- as.package(pkg)
 
   path <- file.path(pkg$path, ".travis.yml")
@@ -183,22 +192,44 @@ use_coveralls <- function(pkg = ".") {
 
   travis_content <- readLines(file.path(pkg$path, ".travis.yml"))
 
-  if (any(grepl("coveralls()", travis_content))) {
-    stop("coveralls information already added to .travis.yml", call. = FALSE)
-  }
+  type <- match.arg(type)
 
-  gh <- github_info(pkg$path)
-  message("Adding coveralls information into .travis.yml for ", pkg$package, ". Next: \n",
-    " * Turn on coveralls for this repo at https://coveralls.io/repos/new\n",
-    " * Add a coveralls shield to your README.md:\n",
-    "[![Coverage Status]",
-      "(https://img.shields.io/coveralls/", gh$username, "/", gh$repo, ".svg)]",
-      "(https://coveralls.io/r/", gh$username, "/", gh$repo, "?branch=master)\n",
-    " * Add the following to .travis.yml:\n",
-    "r_github_packages:\n",
-    "  - jimhester/covr\n",
-    "after_success:\n",
-    "  - Rscript -e 'library(covr);coveralls()'")
+  switch(type,
+    codecov = {
+      if (any(grepl("codecov", travis_content))) {
+        stop("codecov information already added to .travis.yml", call. = FALSE)
+      }
+
+      gh <- github_info(pkg$path)
+      message("Adding codecov information into .travis.yml for ", pkg$package, ". Next: \n",
+        "[![Coverage Status]",
+        "(https://img.shields.io/codecov/c/github/", gh$username, "/", gh$repo, "/master.svg)]",
+        "(https://codecov.io/github/", gh$username, "/", gh$repo, "?branch=master)\n",
+        " * Add the following to .travis.yml:\n",
+        "r_github_packages:\n",
+        "  - jimhester/covr\n",
+        "after_success:\n",
+        "  - Rscript -e 'covr::codecov()'")
+    },
+
+    coveralls = {
+      if (any(grepl("coveralls", travis_content))) {
+        stop("coveralls information already added to .travis.yml", call. = FALSE)
+      }
+
+      gh <- github_info(pkg$path)
+      message("Adding coveralls information into .travis.yml for ", pkg$package, ". Next: \n",
+        " * Turn on coveralls for this repo at https://coveralls.io/repos/new\n",
+        " * Add a coveralls shield to your README.md:\n",
+        "[![Coverage Status]",
+        "(https://img.shields.io/coveralls/", gh$username, "/", gh$repo, ".svg)]",
+        "(https://coveralls.io/r/", gh$username, "/", gh$repo, "?branch=master)\n",
+        " * Add the following to .travis.yml:\n",
+        "r_github_packages:\n",
+        "  - jimhester/covr\n",
+        "after_success:\n",
+        "  - Rscript -e 'covr::coveralls()'")
+    })
 
   invisible(TRUE)
 }

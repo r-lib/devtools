@@ -7,7 +7,7 @@
 \alias{infrastructure}
 \alias{use_appveyor}
 \alias{use_code_of_conduct}
-\alias{use_coveralls}
+\alias{use_coverage}
 \alias{use_cran_badge}
 \alias{use_cran_comments}
 \alias{use_package_doc}
@@ -32,7 +32,7 @@ use_rcpp(pkg = ".")
 
 use_travis(pkg = ".")
 
-use_coveralls(pkg = ".")
+use_coverage(pkg = ".", type = c("codecov", "coveralls"))
 
 use_appveyor(pkg = ".")
 
@@ -95,9 +95,9 @@ Add basic travis template to a package. Also adds \code{.travis.yml} to
 \code{.Rbuildignore} so it isn't included in the built package.
 }
 
-\section{\code{use_coveralls}}{
+\section{\code{use_coverage}}{
 
-Add coveralls to basic travis template to a package.
+Add test code coverage to basic travis template to a package.
 }
 
 \section{\code{use_appveyor}}{
