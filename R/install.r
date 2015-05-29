@@ -60,7 +60,9 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   pkg <- as.package(pkg)
   check_build_tools(pkg)
 
-  if (!quiet) message("Installing ", pkg$package)
+  if (!quiet) {
+    message("Installing ", pkg$package)
+  }
 
   # If building vignettes, make sure we have all suggested packages too.
   if (build_vignettes && missing(dependencies)) {
@@ -91,7 +93,9 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""),
     quiet = quiet)
 
-  if (reload) reload(pkg, quiet = quiet)
+  if (reload) {
+    reload(pkg, quiet = quiet)
+  }
   invisible(TRUE)
 }
 

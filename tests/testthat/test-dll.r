@@ -8,6 +8,10 @@ test_that("unload() unloads DLLs from packages loaded with library()", {
   if (!dir.exists(tmp_libpath)) dir.create(tmp_libpath)
   .libPaths(c(tmp_libpath, .libPaths()))
 
+  # Reset the libpath on exit
+  on.exit(.libPaths(old_libpaths), add = TRUE)
+
+  # Install package
   install("testDllLoad", quiet = TRUE, args = "--no-multiarch")
   expect_true(require(testDllLoad))
 
@@ -25,8 +29,7 @@ test_that("unload() unloads DLLs from packages loaded with library()", {
   dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
   expect_false(any(grepl("testDllLoad", dynlibs)))
 
-  # Reset the libpath
-  .libPaths(old_libpaths)
+
 
   # Clean out compiled objects
   clean_dll("testDllLoad")
