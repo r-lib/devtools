@@ -8,17 +8,18 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @inheritParams install_deps
 #' @keywords programming
 #' @seealso \code{\link{clean_vignettes}} to remove the pdfs in
 #'   \file{inst/doc} created from vignettes
 #' @export
 #' @seealso \code{\link{clean_vignettes}} to remove build tex/pdf files.
-build_vignettes <- function(pkg = ".") {
+build_vignettes <- function(pkg = ".", dependencies = "VignetteBuilder") {
   pkg <- as.package(pkg)
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (length(vigns$docs) == 0) return()
 
-  install_deps(pkg, "VignetteBuilder")
+  install_deps(pkg, dependencies)
 
   message("Building ", pkg$package, " vignettes")
   tools::buildVignettes(dir = pkg$path, tangle = TRUE)
