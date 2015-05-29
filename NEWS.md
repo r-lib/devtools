@@ -4,6 +4,8 @@
 
 * New `uninstall()` removes installed package (#820, @krlmlr).
 
+* `build_vignettes()` gains dependencies argument (#825, @krlmlr).
+
 # devtools 1.8.0
  
 ## Helpers
