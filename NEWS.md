@@ -2,6 +2,8 @@
 
 * Fix use of `uses_git()` in `use_readme_rmd()` (#793).
 
+* `build_vignettes()` gains dependencies argument (#825, @krlmlr).
+
 # devtools 1.8.0
  
 ## Helpers
