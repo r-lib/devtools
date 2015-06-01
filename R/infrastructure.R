@@ -423,8 +423,9 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
     }
     message("Saving ", paste(objs, collapse = ", "), " to ",
       paste0("data/", basename(paths), collapse = ", "))
+    envir <- parent.frame()
     save_one <- function(name, path) {
-      save(list = name, file = path, envir = parent.frame(), compress = compress)
+      save(list = name, file = path, envir = envir, compress = compress)
     }
     Map(save_one, objs, paths)
 
