@@ -172,6 +172,7 @@ use_travis <- function(pkg = ".") {
 #' @rdname devtools-deprecated
 #' @section \code{use_coveralls}:
 #' Add coveralls to basic travis template to a package.
+#' @inheritParams infrastructure
 #' @export
 use_coveralls <- function(pkg = ".") {
   .Deprecated("use_coverage(type = \"coveralls\")")
@@ -181,6 +182,7 @@ use_coveralls <- function(pkg = ".") {
 #' @rdname infrastructure
 #' @section \code{use_coverage}:
 #' Add test code coverage to basic travis template to a package.
+#' @param type coverage service to use
 #' @export
 use_coverage <- function(pkg = ".", type = c("codecov", "coveralls")) {
   pkg <- as.package(pkg)
