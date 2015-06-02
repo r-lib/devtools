@@ -8,6 +8,8 @@
 * Add `use_coverage()` function to add codecov.io or coveralls.io to a project,
   deprecate `use_coveralls()` (@jimhester, #822, #818).
 
+* `uses_testthat()` is now exported (#824, @krlmlr).
+
 # devtools 1.8.0
  
 ## Helpers
