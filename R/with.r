@@ -34,6 +34,7 @@
 NULL
 
 with_something <- function(set) {
+  force(set)
   function(new, code) {
     old <- set(new)
     on.exit(set(old))
