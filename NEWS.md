@@ -8,6 +8,10 @@
 * Add `use_coverage()` function to add codecov.io or coveralls.io to a project,
   deprecate `use_coveralls()` (@jimhester, #822, #818).
 
+* New functions `with_temp_lib()` and `with_temp_libpaths()` (#826, @krlmlr).
+
+* Properly reset library path after `with_lib()` (#833, @krlmlr).
+
 # devtools 1.8.0
  
 ## Helpers
