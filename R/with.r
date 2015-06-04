@@ -33,11 +33,12 @@
 #' )
 NULL
 
-with_something <- function(set) {
+with_something <- function(set, reset = set) {
   force(set)
+  force(reset)
   function(new, code) {
     old <- set(new)
-    on.exit(set(old))
+    on.exit(reset(old))
     force(code)
   }
 }
