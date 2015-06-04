@@ -61,3 +61,19 @@ test_that("with_libpaths works and resets library", {
   )
   expect_equal(lib, .libPaths())
 })
+
+test_that("with_temp_lib works and resets library", {
+  lib <- .libPaths()
+  with_temp_lib(
+    expect_true(dirname(.libPaths()[[1]]) == tempdir())
+  )
+  expect_equal(lib, .libPaths())
+})
+
+test_that("with_temp_libpaths works and resets library", {
+  lib <- .libPaths()
+  with_temp_libpaths(
+    expect_true(dirname(.libPaths()[[1]]) == tempdir())
+  )
+  expect_equal(lib, .libPaths())
+})

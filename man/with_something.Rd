@@ -12,6 +12,8 @@
 \alias{with_par}
 \alias{with_path}
 \alias{with_something}
+\alias{with_temp_lib}
+\alias{with_temp_libpaths}
 \title{Execute code in temporarily altered environment.}
 \usage{
 with_envvar(new, code, action = "replace")
@@ -27,6 +29,10 @@ in_dir(new, code)
 with_libpaths(new, code)
 
 with_lib(new, code)
+
+with_temp_lib(code)
+
+with_temp_libpaths(code)
 
 with_options(new, code)
 

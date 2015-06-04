@@ -42,6 +42,17 @@ with_something <- function(set, reset = set) {
     force(code)
   }
 }
+
+with_auto <- function(set, reset) {
+  force(set)
+  force(reset)
+  function(code) {
+    old <- set()
+    on.exit(reset(old))
+    force(code)
+  }
+}
+
 is.named <- function(x) {
   !is.null(names(x)) && all(names(x) != "")
 }
@@ -147,6 +158,32 @@ set_lib <- function(paths) {
 #' @rdname with_something
 #' @export
 with_lib <- with_something(set_lib, .libPaths)
+
+# temp_lib -------------------------------------------------------------------
+
+temp_lib <- function() {
+  libdir <- tempfile(pattern = "devtools_", fileext = ".lib")
+  dir.create(libdir)
+  libdir
+}
+
+set_temp_lib <- function() {
+  set_lib(temp_lib())
+}
+
+#' @rdname with_something
+#' @export
+with_temp_lib <- with_auto(set_temp_lib, .libPaths)
+
+# temp_libpaths --------------------------------------------------------------
+
+set_temp_libpaths <- function() {
+  set_libpaths(temp_lib())
+}
+
+#' @rdname with_something
+#' @export
+with_temp_libpaths <- with_auto(set_temp_libpaths, .libPaths)
 
 # options --------------------------------------------------------------------
 
