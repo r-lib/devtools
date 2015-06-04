@@ -130,9 +130,13 @@ set_libpaths <- function(paths) {
   invisible(old)
 }
 
+reset_libpaths <- function(paths) {
+  .libPaths(paths)
+}
+
 #' @rdname with_something
 #' @export
-with_libpaths <- with_something(set_libpaths)
+with_libpaths <- with_something(set_libpaths, reset_libpaths)
 
 # lib ------------------------------------------------------------------------
 
@@ -146,7 +150,7 @@ set_lib <- function(paths) {
 
 #' @rdname with_something
 #' @export
-with_lib <- with_something(set_lib)
+with_lib <- with_something(set_lib, reset_libpaths)
 
 # options --------------------------------------------------------------------
 
