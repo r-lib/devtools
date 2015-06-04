@@ -146,7 +146,7 @@ set_lib <- function(paths) {
 
 #' @rdname with_something
 #' @export
-with_lib <- with_something(set_lib, set_libpaths)
+with_lib <- with_something(set_lib, .libPaths)
 
 # options --------------------------------------------------------------------
 
