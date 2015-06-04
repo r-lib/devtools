@@ -60,6 +60,8 @@ paths are ovewritten, which don't you usually want.}
   \item \code{with_envvar}: environmental variables
   \item \code{with_libpaths}: library paths, replacing current libpaths
   \item \code{with_lib}: library paths, prepending to current libpaths
+  \item \code{with_temp_libpaths}: a temporary library path, replacing current libpaths
+  \item \code{with_temp_lib}: a temporary library path, prepending to current libpaths
   \item \code{with_locale}: any locale setting
   \item \code{with_options}: options
   \item \code{with_path}: PATH environment variable
