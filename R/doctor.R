@@ -2,15 +2,18 @@
 #' @importFrom memoise memoise
 NULL
 
-rstudio_release <- memoise::memoise(function() {
+.rstudio_release <- function() {
   url <- "http://s3.amazonaws.com/rstudio-server/current.ver"
   numeric_version(readLines(url, warn = FALSE))
-})
+}
 
+rstudio_release <- memoise::memoise(.rstudio_release)
 
-r_release <- memoise::memoise(function() {
+.r_release <- function() {
   R_system_version(rversions::r_release()$version)
-})
+}
+
+r_release <- memoise::memoise(.r_release)
 
 
 #' Diagnose potential devtools issues
