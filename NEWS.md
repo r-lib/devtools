@@ -13,6 +13,8 @@
 
 * Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
 
+* `use_data()` also works with data from the parent frame (#829, @krlmlr).
+
 # devtools 1.8.0
  
 ## Helpers
