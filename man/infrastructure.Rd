@@ -52,6 +52,8 @@ use_cran_badge(pkg = ".")
 
 \item{name}{File name to use for new vignette. Should consist only of
 numbers, letters, _ and -. I recommend using lower case.}
+
+\item{type}{CI tool to use. Currently supports codecov and coverall.}
 }
 \description{
 Add useful infrastructure to a package.

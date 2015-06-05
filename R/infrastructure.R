@@ -179,6 +179,7 @@ use_coveralls <- function(pkg = ".") {
 }
 
 #' @rdname infrastructure
+#' @param type CI tool to use. Currently supports codecov and coverall.
 #' @section \code{use_coverage}:
 #' Add test code coverage to basic travis template to a package.
 #' @export
@@ -423,8 +424,9 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
     }
     message("Saving ", paste(objs, collapse = ", "), " to ",
       paste0("data/", basename(paths), collapse = ", "))
+    envir <- parent.frame()
     save_one <- function(name, path) {
-      save(list = name, file = path, envir = parent.frame(), compress = compress)
+      save(list = name, file = path, envir = envir, compress = compress)
     }
     Map(save_one, objs, paths)
 

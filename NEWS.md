@@ -1,16 +1,25 @@
 # devtools 1.8.0.9000
 
+* Install suggested packages during `revdep_check()` (#808).
+
 * Fix use of `uses_git()` in `use_readme_rmd()` (#793).
 
 * New `uninstall()` removes installed package (#820, @krlmlr).
 
 * `build_vignettes()` gains dependencies argument (#825, @krlmlr).
+
 * Add `use_coverage()` function to add codecov.io or coveralls.io to a project,
   deprecate `use_coveralls()` (@jimhester, #822, #818).
 
 * New functions `with_temp_lib()` and `with_temp_libpaths()` (#826, @krlmlr).
 
 * Properly reset library path after `with_lib()` (#833, @krlmlr).
+
+* Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
+
+* `use_data()` also works with data from the parent frame (#829, @krlmlr).
+
+* `uses_testthat()` is now exported (#824, @krlmlr).
 
 # devtools 1.8.0
  

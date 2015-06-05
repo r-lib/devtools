@@ -2,9 +2,12 @@
 % Please edit documentation in R/test.r
 \name{test}
 \alias{test}
+\alias{uses_testthat}
 \title{Execute all \pkg{test_that} tests in a package.}
 \usage{
 test(pkg = ".", filter = NULL, ...)
+
+uses_testthat(pkg = ".")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -24,7 +27,8 @@ scripts within one of those directories and
 \code{\link[testthat]{test_check}} for the folder structure conventions.
 }
 \details{
-If no testing infrastructure is present, you'll be asked if you want
+If no testing infrastructure is present
+(detected by the \code{uses_testthat} function), you'll be asked if you want
 devtools to create it for you (in interactive sessions only). See
 \code{\link{add_test_infrastructure}} for more details.
 }
