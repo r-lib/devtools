@@ -53,6 +53,8 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information. If the \code{DESCRIPTION}
 #'   file does not exist, it is created using \code{\link{create_description}}.
+#'   (This means that only the precise path to the package, but not to a
+#'   subdirectory in the package, are accepted here.)
 #' @param reset clear package environment and reset file cache before loading
 #'   any pieces of the package. This is equivalent to running
 #'   \code{\link{unload}} and is the default. Use \code{reset = FALSE} may be
