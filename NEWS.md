@@ -1,5 +1,7 @@
 # devtools 1.8.0.9000
 
+* Install suggested packages during `revdep_check()` (#808).
+
 * Fix use of `uses_git()` in `use_readme_rmd()` (#793).
 
 * New `uninstall()` removes installed package (#820, @krlmlr).
