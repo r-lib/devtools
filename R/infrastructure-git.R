@@ -59,7 +59,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".") {
 
   message("Adding remote to GitHub")
   git2r::remote_add(r, "origin", create$ssh_url)
-  # git2r::branch_set_upstream(head(r), "origin/master")
+  # git2r::branch_set_upstream(git2r::head(r), "origin/master")
   # git2r::push(r, "origin", "refs/heads/master")
 }
 

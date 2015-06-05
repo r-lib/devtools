@@ -1,6 +1,5 @@
 # Supress R CMD check note
 #' @importFrom memoise memoise
-#' @importFrom rversions r_release
 NULL
 
 rstudio_release <- memoise::memoise(function() {

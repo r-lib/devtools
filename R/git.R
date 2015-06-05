@@ -14,11 +14,10 @@ git_uncommitted <- function(path = ".") {
   any(st != 0)
 }
 
-#' @importMethodsFrom git2r head
 git_sync_status <- function(path = ".") {
   r <- git2r::repository(path)
 
-  upstream <- git2r::branch_get_upstream(head(r))
+  upstream <- git2r::branch_get_upstream(git2r::head(r))
   # fetch(r, branch_remote_name(upstream))
 
   c1 <- git2r::commits(r)[[1]]
