@@ -37,6 +37,7 @@ NULL
 #' These functions are Deprecated in this release of devtools, they will be
 #' marked as Defunct and removed in a future version.
 #' @name devtools-deprecated
+#' @keywords internal
 NULL
 
 .onLoad <- function(libname, pkgname) {

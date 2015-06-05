@@ -179,6 +179,7 @@ use_coveralls <- function(pkg = ".") {
 }
 
 #' @rdname infrastructure
+#' @param type CI tool to use. Currently supports codecov and coverall.
 #' @section \code{use_coverage}:
 #' Add test code coverage to basic travis template to a package.
 #' @export
