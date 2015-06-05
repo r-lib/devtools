@@ -212,8 +212,9 @@ with_par <- with_something(par)
 #' @rdname with_something
 #' @export
 #' @param add Combine with existing values? Currently for
-#'   \code{\link{with_path}} only. If \code{FALSE} all existing
-#'   paths are ovewritten, which don't you usually want.
+#'   \code{\link{with_path}} and \code{\link{with_lib}} only.
+#'   If \code{FALSE} all existing paths are ovewritten, which you don't usually
+#'   want.
 with_path <- function(new, code, add = TRUE) {
   if (add) new <- c(get_path(), new)
   old <- set_path(new)
