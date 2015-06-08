@@ -15,7 +15,7 @@
 
 * `use_data()` also works with data from the parent frame (#829, @krlmlr).
 
-* `uses_testthat()` is now exported (#824, @krlmlr).
+* `uses_testthat()` and `check_failures()` are now exported (#824, #839, @krlmlr).
 
 # devtools 1.8.0
  
