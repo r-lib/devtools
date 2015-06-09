@@ -106,7 +106,7 @@ build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
 
   url <- paste0("ftp://win-builder.r-project.org/", version, "/",
                 basename(built_path))
-  lapply(url, RCurl::ftpUpload, what = built_path)
+  lapply(url, upload_ftp, file = built_path)
 
   if (!quiet) {
     message("Check ", maintainer(pkg)$email, " for a link to the built package",
