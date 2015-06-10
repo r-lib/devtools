@@ -1,5 +1,7 @@
 # devtools 1.8.0.9000
 
+* `build_win()` now uses `curl` instead of `RCurl` for ftp upload.
+
 * Install suggested packages during `revdep_check()` (#808).
 
 * Fix use of `uses_git()` in `use_readme_rmd()` (#793).
