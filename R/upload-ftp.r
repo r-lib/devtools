@@ -1,5 +1,3 @@
-#' @param file path to file on disk
-#' @param url full path of the ftp destination, including the filename
 upload_ftp <- function(file, url, verbose = FALSE){
   stopifnot(file.exists(file))
   stopifnot(is.character(url))
