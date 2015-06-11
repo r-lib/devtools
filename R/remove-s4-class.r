@@ -6,7 +6,7 @@ remove_s4_classes <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   classes <- methods::getClasses(ns_env(pkg))
-  lapply(classes, remove_s4_class, pkg)
+  lapply(rev(classes), remove_s4_class, pkg)
 }
 
 # Remove an s4 class from a package loaded by devtools
