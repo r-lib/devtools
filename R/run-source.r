@@ -1,10 +1,5 @@
 #' Run a script through some protocols such as http, https, ftp, etc.
 #'
-#' Internally, \code{source_url} calls \code{\link{getURL}} in
-#' \code{RCurl} package and then read the contents by
-#' \code{\link{textConnection}}, which is then \code{\link{source}}ed.
-#' See \code{?getURL} for the available protocol.
-#'
 #' If a SHA-1 hash is specified with the \code{sha1} argument, then this
 #' function will check the SHA-1 hash of the downloaded file to make sure it
 #' matches the expected value, and throw an error if it does not match. If the
