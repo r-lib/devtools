@@ -6,7 +6,28 @@ remove_s4_classes <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   classes <- methods::getClasses(ns_env(pkg))
-  lapply(rev(classes), remove_s4_class, pkg)
+  lapply(sort_s4classes(classes), remove_s4_class, pkg)
+}
+
+# Sort S4 classes for hierarchical removal
+# Derived classes must be removed **after** their parents.
+sort_s4classes <- function(classes) {
+  for (x in classes) {
+
+    ## classes extended by x
+    ext <- extends(x)
+
+    ## from those, take only defined by the package (i.e. in classes)
+    ## (i.e. leaves out classes like 'oldClass', which are not to be removed)
+    own_ext <- ext[ext %in% classes]
+
+    ## make sure the extended classes are first in the classes vector
+    ## by reversing the order of the extended classes
+    if (length(own_ext) > 1)
+      classes[classes %in% ext] <- rev(own_ext)
+  }
+
+  return(classes)
 }
 
 # Remove an s4 class from a package loaded by devtools
