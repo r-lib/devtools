@@ -37,7 +37,7 @@ test <- function(pkg = ".", filter = NULL, ...) {
   }
 
   # Need to attach testthat so that (e.g.) context() is available
-  # Update package dependency to avoid explicit require() call
+  # Update package dependency to avoid explicit require() call (#798)
   pkg$depends <- paste0("testthat, ", pkg$depends)
   if (grepl("^testthat, *$", pkg$depends))
     pkg$depends <- "testthat"
