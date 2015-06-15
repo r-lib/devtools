@@ -11,23 +11,48 @@ remove_s4_classes <- function(pkg = ".") {
 
 # Sort S4 classes for hierarchical removal
 # Derived classes must be removed **after** their parents.
+# This reduces to a topological sorting on the S4 dependency class
+# https://en.wikipedia.org/wiki/Topological_sorting
 sort_s4classes <- function(classes) {
-  for (x in classes) {
 
-    ## classes extended by x
+  sorted_classes <- vector(mode = 'character', length = 0)
+
+  ## classes extended by x which are within the domestic set of classes
+  ## and are not x itself
+  extends_domestic <- function(x, classes) {
     ext <- extends(x)
-
-    ## from those, take only defined by the package (i.e. in classes)
-    ## (i.e. leaves out classes like 'oldClass', which are not to be removed)
-    own_ext <- ext[ext %in% classes]
-
-    ## make sure the extended classes are first in the classes vector
-    ## by reversing the order of the extended classes
-    if (length(own_ext) > 1)
-      classes[classes %in% ext] <- rev(own_ext)
+    classes %in% ext & classes != x
   }
 
-  return(classes)
+  extended_classes <- vapply(classes,
+                             extends_domestic,
+                             rep(TRUE, length(classes)),
+                             classes)
+
+  start_idx <- which(apply(extended_classes, 2, sum) == 0)
+
+  for (i in start_idx) {
+
+    ## add node to sorted list
+    sorted_classes <- c(sorted_classes, classes[i])
+
+    ## check its derived classes if any
+    for (j in which(extended_classes[i,])) {
+      extended_classes[i, j] <- FALSE
+      if (sum(extended_classes[, j]) == 0) {
+        sorted_classes <- c(sorted_classes, classes[j])
+      }
+    }
+  }
+
+  if (any(extended_classes)) {
+    ## Graph has a cycle. This should not happen
+    ## Stop or try to continue?
+    idx <- !classes %in% sorted_classes
+    sorted_classes <- c(sorted_classes, classes[idx])
+  }
+
+  return(sorted_classes)
 }
 
 # Remove an s4 class from a package loaded by devtools
