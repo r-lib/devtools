@@ -1,5 +1,18 @@
 # devtools 1.8.0.9000
 
+* `find_rtools()` now looks for registry keys in both HKCU (user) and 
+  HKLM (admin) locations (@Kevin-Jin, #844)
+
+* `with_debug()` now uses `with_makevars()` rather than `with_env()`, because R
+  reads compilation variables from the Makevars rather than the environment
+  (@jimhester, #788).
+
+* `load_all()` no longer fails if a `useDynLib()` entry in the NAMESPACE 
+  is incorrect. This should make it easy to recover from an incorrect
+  `@useDynLib`, because re-documenting() should now succeed
+
+* `build_win()` now uses `curl` instead of `RCurl` for ftp upload.
+
 * Install suggested packages during `revdep_check()` (#808).
 
 * Fix use of `uses_git()` in `use_readme_rmd()` (#793).

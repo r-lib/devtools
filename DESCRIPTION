@@ -15,7 +15,7 @@ Depends:
     R (>= 3.0.2)
 Imports:
     httr (>= 0.4),
-    RCurl,
+    curl (>= 0.6),
     utils,
     tools,
     methods,
