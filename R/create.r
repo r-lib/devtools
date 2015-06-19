@@ -55,7 +55,7 @@ setup <- function(path = ".", description = getOption("devtools.desc"),
 
   message("Creating package ", extract_package_name(path), " in ", dirname(path))
 
-  dir.create(file.path(path, "R"))
+  dir.create(file.path(path, "R"), showWarnings = FALSE)
   create_description(path, extra = description)
   create_namespace(path)
 
@@ -88,5 +88,7 @@ valid_name <- function(x) {
 
 create_namespace <- function(path) {
   ns_path <- file.path(path, "NAMESPACE")
+  if (file.exists(ns_path)) return()
+
   cat('exportPattern("^[^\\\\.]")\n', file = ns_path)
 }
