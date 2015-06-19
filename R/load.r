@@ -97,7 +97,7 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   roxygen2::update_collate(pkg$path)
   # Refresh the pkg structure with any updates to the Collate entry
   # in the DESCRIPTION file
-  pkg <- as.package(pkg$path)
+  pkg$collate <- as.package(pkg$path)$collate
 
   # Reloading devtools is a special case. Normally, objects in the
   # namespace become inaccessible if the namespace is unloaded before the

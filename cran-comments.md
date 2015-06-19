@@ -6,13 +6,7 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs. 
 
-There were 2 NOTEs:
-
-* checking dependencies in R code ... NOTE
-  'library' or 'require' call to ‘testthat’ in package code.
-  
-  devtools::test() calls library(testthat) because testthat must be 
-  attached to the search path for testthat unit tests to work.
+There was 1 NOTE:
 
 * checking R code for possible problems ... NOTE
   Found the following calls to attach():

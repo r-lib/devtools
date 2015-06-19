@@ -37,7 +37,10 @@ test <- function(pkg = ".", filter = NULL, ...) {
   }
 
   # Need to attach testthat so that (e.g.) context() is available
-  library(testthat, quietly = TRUE)
+  # Update package dependency to avoid explicit require() call (#798)
+  pkg$depends <- paste0("testthat, ", pkg$depends)
+  if (grepl("^testthat, *$", pkg$depends))
+    pkg$depends <- "testthat"
 
   # Run tests in a child of the namespace environment, like
   # testthat::test_package
