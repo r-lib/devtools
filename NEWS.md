@@ -36,6 +36,8 @@
 
 * Remove explicit `library(testthat)` call in `test()` (#798, @krlmlr)
 
+* Allow release() for packages not located at root of git repository (#845, #846, @mbjones)
+
 # devtools 1.8.0
  
 ## Helpers
