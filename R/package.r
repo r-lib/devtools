@@ -6,13 +6,16 @@
 #'   \item package object
 #' }
 #' @param x object to coerce to a package
+#' @param create only relevant if a package structure does not exist yet: if
+#'   \code{TRUE}, create a package structure; if \code{NA}, ask the user
+#'   (in interactive mode only)
 #' @export
 #' @keywords internal
-as.package <- function(x = NULL) {
+as.package <- function(x = NULL, create = NA) {
   if (is.package(x)) return(x)
 
   x <- check_dir(x)
-  load_pkg_description(x)
+  load_pkg_description(x, create = create)
 }
 
 
@@ -67,12 +70,21 @@ normalise_path <- function(x) {
 }
 
 # Load package DESCRIPTION into convenient form.
-load_pkg_description <- function(path) {
+load_pkg_description <- function(path, create) {
   path <- normalizePath(path)
   path_desc <- file.path(path, "DESCRIPTION")
 
   if (!file.exists(path_desc)) {
-    stop("No description at ", path_desc, call. = FALSE)
+    if (is.na(create) && interactive()) {
+      message("No package infrastructure found in ", path, ". Create it?")
+      create <- (menu(c("Yes", "No")) == 1)
+    }
+
+    if (create) {
+      setup(path = path)
+    } else {
+      stop("No description at ", path_desc, call. = FALSE)
+    }
   }
 
   desc <- as.list(read.dcf(path_desc)[1, ])
