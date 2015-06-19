@@ -7,6 +7,7 @@ test_that("Package root and subdirectory is working directory when loading", {
 
 test_that("user is queried if no package structure present", {
   with_mock(
+    `devtools::interactive` = function() TRUE,
     `utils::menu` = function(...) stop("menu() called"),
     `devtools::setup` = function(...) stop("setup() called"),
     `devtools::check_dir` = function(x) x,
