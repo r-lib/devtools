@@ -115,7 +115,7 @@ release <- function(pkg = ".", check = TRUE) {
   deps <- if (new_pkg) 0 else length(revdep(pkg$package))
   if (deps > 0) {
     msg <- paste0("Have you checked the ", deps ," packages that depend on ",
-      "this package (with check_cran())?")
+      "this package (with revdep_check())?")
 
     if (yesno(msg))
       return(invisible())
