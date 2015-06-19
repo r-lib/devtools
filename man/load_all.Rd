@@ -5,14 +5,11 @@
 \title{Load complete package.}
 \usage{
 load_all(pkg = ".", reset = TRUE, recompile = FALSE, export_all = TRUE,
-  quiet = FALSE)
+  quiet = FALSE, create = NA)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information. If the \code{DESCRIPTION}
-file does not exist, it is created using \code{\link{create_description}}.
-(This means that only the precise path to the package, but not to a
-subdirectory in the package, are accepted here.)}
+\code{\link{as.package}} for more information.}
 
 \item{reset}{clear package environment and reset file cache before loading
 any pieces of the package. This is equivalent to running
@@ -29,6 +26,10 @@ If \code{FALSE}, export only the objects that are listed as exports
 in the NAMESPACE file.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
+
+\item{create}{only relevant if a package structure does not exist yet: if
+\code{TRUE}, create a package structure; if \code{NA}, ask the user
+(in interactive mode only)}
 }
 \description{
 \code{load_all} loads a package. It roughly simulates what happens
