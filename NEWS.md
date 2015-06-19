@@ -1,5 +1,9 @@
 # devtools 1.8.0.9000
 
+* `with_debug()` now uses `with_makevars()` rather than `with_env()`, because R
+  reads compilation variables from the Makevars rather than the environment
+  (@jimhester, #788).
+
 * `load_all()` no longer fails if a `useDynLib()` entry in the NAMESPACE 
   is incorrect. This should make it easy to recover from an incorrect
   `@useDynLib`, because re-documenting() should now succeed
@@ -84,10 +88,6 @@
 * `install_github()` warns if repository contains submodules (@ashander, #751).
 
 ## Bug fixes and minor improvements
-
-* `with_debug()` now uses `with_makevars()` rather than `with_env()`, because R
-  reads compilation variables from the Makevars rather than the environment
-  (@jimhester, #788).
 
 * Previously, devtools ran all external R processes with `R --vanilla`.
   Now it only suppresses user profiles, and constructs a custom `.Rprofile` to
