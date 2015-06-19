@@ -8,7 +8,7 @@
 #'   a package hosted in a private repository (and your username is different
 #'   to \code{username})
 #' @param password your password
-#' @param ref Desired git reference; culd be a commit, tag, or branch name.
+#' @param ref Desired git reference; could be a commit, tag, or branch name.
 #'   Defaults to master.
 #' @seealso Bitbucket API docs:
 #'   \url{https://confluence.atlassian.com/display/BITBUCKET/Use+the+Bitbucket+REST+APIs}

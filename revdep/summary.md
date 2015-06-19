@@ -4,38 +4,38 @@
 
 |setting  |value                        |
 |:--------|:----------------------------|
-|version  |R version 3.2.0 (2015-04-16) |
+|version  |R version 3.2.1 (2015-06-18) |
 |system   |x86_64, darwin13.4.0         |
-|ui       |RStudio (0.99.430)           |
+|ui       |RStudio (0.99.598)           |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Chicago              |
 
 ## Packages
 
-|package    |*  |version  |date       |source         |
-|:----------|:--|:--------|:----------|:--------------|
-|digest     |   |0.6.8    |2014-12-31 |CRAN (R 3.2.0) |
-|evaluate   |   |0.7      |2015-04-21 |CRAN (R 3.2.0) |
-|git2r      |   |0.10.1   |2015-05-07 |CRAN (R 3.2.0) |
-|httr       |   |0.6.1    |2015-01-01 |CRAN (R 3.2.0) |
-|jsonlite   |   |0.9.16   |2015-04-11 |CRAN (R 3.2.0) |
-|knitr      |   |1.10.5   |2015-05-06 |CRAN (R 3.2.0) |
-|lintr      |   |0.2.0    |2014-12-01 |CRAN (R 3.2.0) |
-|memoise    |   |0.2.1    |2014-04-22 |CRAN (R 3.2.0) |
-|Rcpp       |   |0.11.6   |2015-05-01 |CRAN (R 3.2.0) |
-|RCurl      |   |1.95-4.6 |2015-04-24 |CRAN (R 3.2.0) |
-|rmarkdown  |   |0.5.1    |2015-01-26 |CRAN (R 3.2.0) |
-|roxygen2   |   |4.1.1    |2015-04-15 |CRAN (R 3.2.0) |
-|rstudioapi |   |0.3.1    |2015-04-07 |CRAN (R 3.2.0) |
-|rversions  |   |1.0.0    |2015-04-22 |CRAN (R 3.2.0) |
-|testthat   |*  |0.9.1    |2014-10-01 |CRAN (R 3.2.0) |
-|whisker    |   |0.3-2    |2013-04-28 |CRAN (R 3.2.0) |
+|package    |*  |version |date       |source         |
+|:----------|:--|:-------|:----------|:--------------|
+|curl       |   |0.8     |2015-06-06 |CRAN (R 3.2.0) |
+|digest     |   |0.6.8   |2014-12-31 |CRAN (R 3.2.0) |
+|evaluate   |   |0.7     |2015-04-21 |CRAN (R 3.2.0) |
+|git2r      |   |0.10.1  |2015-05-07 |CRAN (R 3.2.0) |
+|httr       |   |0.6.1   |2015-01-01 |CRAN (R 3.2.0) |
+|jsonlite   |   |0.9.16  |2015-04-11 |CRAN (R 3.2.0) |
+|knitr      |   |1.10.5  |2015-05-06 |CRAN (R 3.2.0) |
+|lintr      |   |0.2.0   |2014-12-01 |CRAN (R 3.2.0) |
+|memoise    |   |0.2.1   |2014-04-22 |CRAN (R 3.2.0) |
+|Rcpp       |   |0.11.6  |2015-05-01 |CRAN (R 3.2.0) |
+|rmarkdown  |   |0.7     |2015-06-13 |CRAN (R 3.2.0) |
+|roxygen2   |   |4.1.1   |2015-04-15 |CRAN (R 3.2.0) |
+|rstudioapi |   |0.3.1   |2015-04-07 |CRAN (R 3.2.0) |
+|rversions  |   |1.0.1   |2015-06-06 |CRAN (R 3.2.0) |
+|testthat   |*  |0.10.0  |2015-05-22 |CRAN (R 3.2.0) |
+|whisker    |   |0.3-2   |2013-04-28 |CRAN (R 3.2.0) |
 
 # Check results
-28 checked out of 29 dependencies 
+31 checked out of 33 dependencies 
 
-## aRxiv (0.5.8)
+## aRxiv (0.5.10)
 Maintainer: Karl Broman <kbroman@biostat.wisc.edu>  
 Bug reports: https://github.com/ropensci/aRxiv/issues
 
@@ -61,6 +61,20 @@ DONE
 Status: 1 NOTE
 ```
 
+## covr (1.0.0)
+Maintainer: Jim Hester <james.f.hester@gmail.com>
+
+```
+checking dependencies in R code ... NOTE
+There are ::: calls to the package's namespace in its code. A package
+  almost never needs to use ::: for its own objects:
+  ‘count’
+```
+```
+DONE
+Status: 1 NOTE
+```
+
 ## DataCombine (0.2.9)
 Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>  
 Bug reports: https://github.com/christophergandrud/DataCombine/issues
@@ -76,6 +90,9 @@ Packages required but not available: ‘affxparser’ ‘affy’ ‘oligo’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
+```
+```
+DONE
 Status: 1 ERROR
 ```
 
@@ -85,30 +102,20 @@ Bug reports: http://github.com/renozao/doRNG/issues
 
 ```
 checking package dependencies ... NOTE
-Packages suggested but not available for checking:
-  ‘doMPI’ ‘doRedis’ ‘rbenchmark’
+Package suggested but not available for checking: ‘doMPI’
 ```
 ```
 checking Rd cross-references ... NOTE
 Package unavailable to check Rd xrefs: ‘doMPI’
 ```
 ```
-checking re-building of vignette outputs ... NOTE
-Error in re-building vignettes:
-  ...
-Quitting from lines 554-571 (doRNG.Rnw) 
-Error: processing vignette 'doRNG.Rnw' failed with diagnostics:
-there is no package called 'rbenchmark'
-Execution halted
-
-```
-```
 DONE
-Status: 3 NOTEs
+Status: 2 NOTEs
 ```
 
-## FedData (1.1.0)
-Maintainer: R. Kyle Bocinsky <bocinsky@gmail.com>
+## dpmr (0.1.7-1)
+Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>  
+Bug reports: https://github.com/christophergandrud/dpmr/issues
 
 __OK__
 
@@ -118,14 +125,24 @@ Bug reports: https://github.com/ropensci/gender/issues
 
 __OK__
 
+## h2o (3.0.0.22)
+Maintainer: Tom Kraljevic <tomk@0xdata.com>
+
+```
+checking installed package size ... NOTE
+  installed size is 45.2Mb
+  sub-directories of 1Mb or more:
+    java  44.3Mb
+```
+```
+DONE
+Status: 1 NOTE
+```
+
 ## icd9 (1.2)
 Maintainer: Jack O. Wasey <jack@jackwasey.com>  
 Bug reports: https://github.com/jackwasey/icd9/issues
 
-```
-checking package dependencies ... NOTE
-Packages suggested but not available for checking: ‘microbenchmark’ ‘profr’
-```
 ```
 checking data for non-ASCII characters ... NOTE
   Note: found 14 marked Latin-1 strings
@@ -133,7 +150,7 @@ checking data for non-ASCII characters ... NOTE
 ```
 ```
 DONE
-Status: 2 NOTEs
+Status: 1 NOTE
 ```
 
 ## likert (1.2)
@@ -169,23 +186,20 @@ Maintainer: Sean C. Anderson <sean@seananderson.ca>
 Bug reports: http://github.com/seananderson/metafolio/issues
 
 ```
-checking whether package ‘metafolio’ can be installed ... ERROR
+checking whether package ‘metafolio’ can be installed ... [10s/10s] ERROR
 Installation failed.
-See ‘/private/tmp/RtmpwEmZkv/check_cran34e757c9c63b/metafolio.Rcheck/00install.out’ for details.
-Status: 1 ERROR
-```
-
-## myTAI (0.0.2)
-Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>
-
-```
-checking DESCRIPTION meta-information ... NOTE
-Malformed Description field: should contain one or more complete sentences.
+See ‘/private/tmp/Rtmp013qS9/check_cran397c2ccb43fd/metafolio.Rcheck/00install.out’ for details.
 ```
 ```
 DONE
-Status: 1 NOTE
+Status: 1 ERROR
 ```
+
+## myTAI (0.1.0)
+Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>  
+Bug reports: https://github.com/HajkD/myTAI/issues
+
+__OK__
 
 ## NlsyLinks (1.302)
 Maintainer: Will Beasley <wibeasley@hotmail.com>
@@ -212,7 +226,7 @@ DONE
 Status: 3 NOTEs
 ```
 
-## NMF (0.20.5)
+## NMF (0.20.6)
 Maintainer: Renaud Gaujoux <renaud@tx.technion.ac.il>  
 Bug reports: http://github.com/renozao/NMF/issues
 
@@ -222,23 +236,8 @@ Packages suggested but not available for checking:
   ‘RcppOctave’ ‘doMPI’ ‘Biobase’
 ```
 ```
-checking dependencies in R code ... NOTE
-'library' or 'require' calls in package code:
-  ‘Biobase’ ‘bigmemory’ ‘devtools’ ‘knitr’ ‘synchronicity’
-  Please use :: or requireNamespace() instead.
-  See section 'Suggested packages' in the 'Writing R Extensions' manual.
-```
-```
 checking R code for possible problems ... NOTE
 .wrapResult: no visible global function definition for ‘exprs’
-devnmf: no visible global function definition for ‘load_all’
-nmfReport: no visible global function definition for ‘knit2html’
-posICA: no visible binding for global variable ‘fastICA’
-posICA: no visible global function definition for ‘fastICA’
-runit.lsnmf: no visible global function definition for ‘checkTrue’
-setupLibPaths: no visible global function definition for ‘load_all’
-test.match_atrack : .check: no visible global function definition for
-  ‘checkEquals’
 ```
 ```
 checking Rd cross-references ... NOTE
@@ -257,11 +256,16 @@ Running examples in ‘NMF-Ex.R’ failed
 The error most likely occurred in:
 
 > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: NMF-package
-> ### Title: Algorithms and framework for Nonnegative Matrix Factorization
-> ###   (NMF).
-> ### Aliases: NMF NMF-package
-> ### Keywords: package
+> ### Name: nmfModel
+> ### Title: Factory Methods NMF Models
+> ### Aliases: nmfModel nmfModel,data.frame,data.frame-method
+> ###   nmfModel,formula,ANY-method nmfModel,matrix,ANY-method
+> ###   nmfModel,matrix,matrix-method nmfModel-methods
+> ###   nmfModel,missing,ANY-method nmfModel,missing,missing-method
+> ###   nmfModel,NULL,ANY-method nmfModel,numeric,matrix-method
+> ###   nmfModel,numeric,missing-method nmfModel,numeric,numeric-method
+> ###   nmfModels
+> ### Keywords: methods
 > 
 > ### ** Examples
 > 
@@ -270,17 +274,224 @@ The error most likely occurred in:
 > options(R_CHECK_RUNNING_EXAMPLES_=TRUE)
 > ## End(Don't show)
 > 
-> # generate a synthetic dataset with known classes
-> n <- 50; counts <- c(5, 5, 8);
-> V <- syntheticNMF(n, counts)
+> #----------
+> # nmfModel,numeric,numeric-method
+> #----------
+> # data
+> n <- 20; r <- 3; p <- 10
+> V <- rmatrix(n, p) # some target matrix
 > 
-> # perform a 3-rank NMF using the default algorithm
-> res <- nmf(V, 3)
+> # create a r-ranked NMF model with a given target dimensions n x p as a 2-length vector
+> nmfModel(r, c(n,p)) # directly
+<Object of class:NMFstd>
+features: 20 
+basis/rank: 3 
+samples: 10 
+> nmfModel(r, dim(V)) # or from an existing matrix <=> nmfModel(r, V)
+<Object of class:NMFstd>
+features: 20 
+basis/rank: 3 
+samples: 10 
+> # or alternatively passing each dimension separately
+> nmfModel(r, n, p)
+<Object of class:NMFstd>
+features: 20 
+basis/rank: 3 
+samples: 10 
 > 
-> basismap(res)
-Error in process_tracks(x, tracks, annRow, annCol) : 
-  Invalid special annotation track name ['basis']. Should partially match one of 'basis', ':basis', 'basis:'.
-Calls: basismap -> basismap -> .local -> process_tracks
+> # trying to create a NMF object based on incompatible matrices generates an error
+> w <- rmatrix(n, r)
+> h <- rmatrix(r+1, p)
+> try( new('NMFstd', W=w, H=h) )
+Error in validObject(.Object) : 
+  invalid class “NMFstd” object: Dimensions of W and H are not compatible [ncol(W)= 3 != nrow(H)= 4 ]
+> try( nmfModel(w, h) )
+Error in .local(rank, target, ...) : 
+  nmfModel - Invalid number of columns in the basis matrix [3]: it should match the number of rows in the mixture coefficient matrix [4]
+> try( nmfModel(r+1, W=w, H=h) )
+Error in .local(rank, target, ...) : 
+  nmfModel - Objective rank [4] is greater than the number of columns in W [3]
+> # The factory method can be force the model to match some target dimensions
+> # but warnings are thrown
+> nmfModel(r, W=w, H=h)
+Warning in .local(rank, target, ...) :
+  nmfModel - Objective rank [3] is lower than the number of rows in H [4]: only the first 3 rows of H  will be used
+<Object of class:NMFstd>
+features: 20 
+basis/rank: 3 
+samples: 10 
+> nmfModel(r, n-1, W=w, H=h)
+Warning in .local(rank, target, ...) :
+  nmfModel - Number of rows in target is lower than the number of rows in W [20]: only the first 19 rows of W will be used
+Warning in .local(rank, target, ...) :
+  nmfModel - Objective rank [3] is lower than the number of rows in H [4]: only the first 3 rows of H  will be used
+<Object of class:NMFstd>
+features: 19 
+basis/rank: 3 
+samples: 10 
+> 
+> #----------
+> # nmfModel,numeric,missing-method
+> #----------
+> ## Empty model of given rank
+> nmfModel(3)
+<Object of class:NMFstd>
+features: 0 
+basis/rank: 3 
+samples: 0 
+> 
+> #----------
+> # nmfModel,missing,ANY-method
+> #----------
+> nmfModel(target=10) #square
+<Object of class:NMFstd>
+features: 10 
+basis/rank: 0 
+samples: 10 
+> nmfModel(target=c(10, 5))
+<Object of class:NMFstd>
+features: 10 
+basis/rank: 0 
+samples: 5 
+> 
+> #----------
+> # nmfModel,missing,missing-method
+> #----------
+> # Build an empty NMF model
+> nmfModel()
+<Object of class:NMFstd>
+features: 0 
+basis/rank: 0 
+samples: 0 
+> 
+> # create a NMF object based on one random matrix: the missing matrix is deduced
+> # Note this only works when using factory method NMF
+> n <- 50; r <- 3;
+> w <- rmatrix(n, r)
+> nmfModel(W=w)
+<Object of class:NMFstd>
+features: 50 
+basis/rank: 3 
+samples: 0 
+> 
+> # create a NMF object based on random (compatible) matrices
+> p <- 20
+> h <- rmatrix(r, p)
+> nmfModel(H=h)
+<Object of class:NMFstd>
+features: 0 
+basis/rank: 3 
+samples: 20 
+> 
+> # specifies two compatible matrices
+> nmfModel(W=w, H=h)
+<Object of class:NMFstd>
+features: 50 
+basis/rank: 3 
+samples: 20 
+> # error if not compatible
+> try( nmfModel(W=w, H=h[-1,]) )
+Error in .local(rank, target, ...) : 
+  nmfModel - Invalid number of columns in the basis matrix [3]: it should match the number of rows in the mixture coefficient matrix [2]
+> 
+> #----------
+> # nmfModel,numeric,matrix-method
+> #----------
+> # create a r-ranked NMF model compatible with a given target matrix
+> obj <- nmfModel(r, V)
+> all(is.na(basis(obj)))
+[1] TRUE
+> 
+> #----------
+> # nmfModel,matrix,matrix-method
+> #----------
+> ## From two existing factors
+> 
+> # allows a convenient call without argument names
+> w <- rmatrix(n, 3); h <- rmatrix(3, p)
+> nmfModel(w, h)
+<Object of class:NMFstd>
+features: 50 
+basis/rank: 3 
+samples: 20 
+> 
+> # Specify the type of NMF model (e.g. 'NMFns' for non-smooth NMF)
+> mod <- nmfModel(w, h, model='NMFns')
+> mod
+<Object of class:NMFns>
+features: 50 
+basis/rank: 3 
+samples: 20 
+theta: 0.5 
+> 
+> # One can use such an NMF model as a seed when fitting a target matrix with nmf()
+> V <- rmatrix(mod)
+> res <- nmf(V, mod)
+> nmf.equal(res, nmf(V, mod))
+[1] TRUE
+> 
+> # NB: when called only with such a seed, the rank and the NMF algorithm
+> # are selected based on the input NMF model.
+> # e.g. here rank was 3 and the algorithm "nsNMF" is used, because it is the default
+> # algorithm to fit "NMFns" models (See ?nmf).
+> 
+> #----------
+> # nmfModel,matrix,ANY-method
+> #----------
+> ## swapped arguments `rank` and `target`
+> V <- rmatrix(20, 10)
+> nmfModel(V) # equivalent to nmfModel(target=V)
+<Object of class:NMFstd>
+features: 20 
+basis/rank: 0 
+samples: 10 
+> nmfModel(V, 3) # equivalent to nmfModel(3, V)
+<Object of class:NMFstd>
+features: 20 
+basis/rank: 3 
+samples: 10 
+> 
+> #----------
+> # nmfModel,formula,ANY-method
+> #----------
+> # empty 3-rank model
+> nmfModel(~ 3)
+<Object of class:NMFstd>
+features: 0 
+basis/rank: 3 
+samples: 0 
+> 
+> # 3-rank model that fits a given data matrix
+> x <- rmatrix(20,10)
+> nmfModel(x ~ 3)
+<Object of class:NMFstd>
+features: 20 
+basis/rank: 3 
+samples: 10 
+> 
+> # add fixed coefficient term defined by a factor
+> gr <- gl(2, 5)
+> nmfModel(x ~ 3 + gr)
+<Object of class:NMFstd>
+features: 20 
+basis/rank: 5 
+samples: 10 
+fixed coef [2]:
+  gr = <1, 2>
+> 
+> # add fixed coefficient term defined by a numeric covariate
+> nmfModel(x ~ 3 + gr + b, data=list(b=runif(10)))
+<Object of class:NMFstd>
+features: 20 
+basis/rank: 6 
+samples: 10 
+fixed coef [3]:
+  gr = <1, 2>
+  b = 0.0101301828399301, 0.21454192395322, ..., 0.767450851621106
+> 
+> # 3-rank model that fits a given ExpressionSet (with fixed coef terms)
+> e <- ExpressionSet(x)
+Error: could not find function "ExpressionSet"
 Execution halted
 ```
 ```
@@ -295,16 +506,12 @@ Execution halted
 ```
 ```
 DONE
-Status: 1 ERROR, 6 NOTEs
+Status: 1 ERROR, 5 NOTEs
 ```
 
 ## npsm (0.5)
 Maintainer: John Kloke <kloke@biostat.wisc.edu>
 
-```
-checking package dependencies ... NOTE
-Packages suggested but not available for checking: ‘sm’ ‘HSAUR2’
-```
 ```
 checking S3 generic/method consistency ... NOTE
 Found the following apparent S3 methods exported but not registered:
@@ -314,7 +521,7 @@ manual.
 ```
 ```
 DONE
-Status: 2 NOTEs
+Status: 1 NOTE
 ```
 
 ## opencpu (1.4.6)
@@ -323,15 +530,14 @@ Bug reports: https://github.com/jeroenooms/opencpu/issues
 
 ```
 checking package dependencies ... NOTE
-Packages suggested but not available for checking:
-  ‘RAppArmor’ ‘RProtoBuf’ ‘pander’
+Package suggested but not available for checking: ‘RAppArmor’
 ```
 ```
 DONE
 Status: 1 NOTE
 ```
 
-## packrat (0.4.3)
+## packrat (0.4.4)
 Maintainer: Kevin Ushey <kevin@rstudio.com>  
 Bug reports: https://github.com/rstudio/packrat/issues
 
@@ -467,26 +673,8 @@ checking dependencies in R code ... NOTE
   See section 'Suggested packages' in the 'Writing R Extensions' manual.
 ```
 ```
-checking tests ... ERROR
-Running the tests in ‘tests/test-all.R’ failed.
-Last 13 lines of output:
-             else names(CURLcodeValues)[i]
-         }
-         typeName = gsub("^CURLE_", "", typeName)
-         fun = (if (asError) 
-             stop
-         else warning)
-         fun(structure(list(message = msg, call = sys.call()), class = c(typeName, "GenericCurlError", 
-             "error", "condition")))
-     }(35L, "SSL peer handshake failed, the server most likely requires a client certificate to connect", 
-         TRUE)
-  
-  Error: Test failures
-  Execution halted
-```
-```
 DONE
-Status: 1 ERROR, 2 NOTEs
+Status: 2 NOTEs
 ```
 
 ## smss (1.0-1)
@@ -494,7 +682,7 @@ Maintainer: Jeffrey B. Arnold <jeffrey.arnold@gmail.com>
 
 __OK__
 
-## testthat (0.9.1)
+## testthat (0.10.0)
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
 Bug reports: https://github.com/hadley/testthat/issues
 
@@ -504,25 +692,25 @@ __OK__
 Maintainer: Will Beasley <wibeasley@hotmail.com>
 
 ```
-checking package dependencies ... NOTE
-Package suggested but not available for checking: ‘BayesSingleSub’
-```
-```
 checking DESCRIPTION meta-information ... NOTE
 Malformed Description field: should contain one or more complete sentences.
 ```
 ```
-checking re-building of vignette outputs ... NOTE
-Error in re-building vignettes:
-  ...
-Quitting from lines 281-301 (OkFertilityWithIntercensalEstimates.Rmd) 
-Error: processing vignette 'OkFertilityWithIntercensalEstimates.Rmd' failed with diagnostics:
-there is no package called 'BayesSingleSub'
-Execution halted
+DONE
+Status: 1 NOTE
+```
 
+## wikipediatrend (1.1.4)
+Maintainer: Peter Meissner <retep.meissner@gmail.com>  
+Bug reports: https://github.com/petermeissner/wikipediatrend/issues
+
+```
+checking package dependencies ... NOTE
+Packages suggested but not available for checking:
+  ‘AnomalyDetection’ ‘BreakoutDetection’
 ```
 ```
 DONE
-Status: 3 NOTEs
+Status: 1 NOTE
 ```
 

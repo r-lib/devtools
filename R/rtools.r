@@ -144,7 +144,10 @@ scan_registry_for_rtools <- function(debug = FALSE) {
 
   keys <- NULL
   try(keys <- utils::readRegistry("SOFTWARE\\R-core\\Rtools",
-    hive = "HLM", view = "32-bit", maxdepth = 2), silent = TRUE)
+    hive = "HCU", view = "32-bit", maxdepth = 2), silent = TRUE)
+  if (is.null(keys))
+    try(keys <- utils::readRegistry("SOFTWARE\\R-core\\Rtools",
+      hive = "HLM", view = "32-bit", maxdepth = 2), silent = TRUE)
   if (is.null(keys)) return(NULL)
 
   rts <- vector("list", length(keys))

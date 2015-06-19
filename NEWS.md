@@ -1,5 +1,22 @@
 # devtools 1.8.0.9000
 
+* `revdep_check()` now sets `NOT_CRAN` env var to `false` so that tests etc
+  that are not run on CRAN are not run during revdep checks. Typically these
+  tests require local setup not available during revdep testing (#809).
+
+* `find_rtools()` now looks for registry keys in both HKCU (user) and 
+  HKLM (admin) locations (@Kevin-Jin, #844)
+
+* `with_debug()` now uses `with_makevars()` rather than `with_env()`, because R
+  reads compilation variables from the Makevars rather than the environment
+  (@jimhester, #788).
+
+* `load_all()` no longer fails if a `useDynLib()` entry in the NAMESPACE 
+  is incorrect. This should make it easy to recover from an incorrect
+  `@useDynLib`, because re-documenting() should now succeed
+
+* `build_win()` now uses `curl` instead of `RCurl` for ftp upload.
+
 * Install suggested packages during `revdep_check()` (#808).
 
 * Fix use of `uses_git()` in `use_readme_rmd()` (#793).
@@ -16,6 +33,8 @@
 * `use_data()` also works with data from the parent frame (#829, @krlmlr).
 
 * `uses_testthat()` and `check_failures()` are now exported (#824, #839, @krlmlr).
+
+* Remove explicit `library(testthat)` call in `test()` (#798, @krlmlr)
 
 # devtools 1.8.0
  
