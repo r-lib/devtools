@@ -2,7 +2,11 @@ context("Check")
 
 test_that("return messages", {
   on.exit(unlink("testHelp.Rcheck", recursive = TRUE), add = TRUE)
-  check("testHelp", document = FALSE, check_dir = ".", cleanup = FALSE, quiet = TRUE)
+  with_envvar(
+    list("_R_CHECK_RD_XREFS_"="FALSE"),
+    check("testHelp", document = FALSE, check_dir = ".", cleanup = FALSE,
+          quiet = TRUE)
+  )
 
   failures <- check_failures("testHelp.Rcheck", error = TRUE,
                              warning = TRUE, note = TRUE)
