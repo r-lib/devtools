@@ -1,5 +1,9 @@
 # devtools 1.8.0.9000
 
+* `load_all()` no longer fails if a `useDynLib()` entry in the NAMESPACE 
+  is incorrect. This should make it easy to recover from an incorrect
+  `@useDynLib`, because re-documenting() should now succeed
+
 * Install suggested packages during `revdep_check()` (#808).
 
 * Fix use of `uses_git()` in `use_readme_rmd()` (#793).
