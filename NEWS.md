@@ -28,6 +28,10 @@
 * Add `use_coverage()` function to add codecov.io or coveralls.io to a project,
   deprecate `use_coveralls()` (@jimhester, #822, #818).
 
+* New functions `with_temp_lib()` and `with_temp_libpaths()` (#826, @krlmlr).
+
+* Properly reset library path after `with_lib()` (#833, @krlmlr).
+
 * Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
 
 * `use_data()` also works with data from the parent frame (#829, @krlmlr).

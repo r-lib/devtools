@@ -13,6 +13,8 @@
 \alias{with_par}
 \alias{with_path}
 \alias{with_something}
+\alias{with_temp_lib}
+\alias{with_temp_libpaths}
 \title{Execute code in temporarily altered environment.}
 \usage{
 with_envvar(new, code, action = "replace")
@@ -28,6 +30,10 @@ in_dir(new, code)
 with_libpaths(new, code)
 
 with_lib(new, code)
+
+with_temp_lib(code)
+
+with_temp_libpaths(code)
 
 with_options(new, code)
 
@@ -59,6 +65,8 @@ paths are ovewritten, which don't you usually want.}
   \item \code{with_envvar}: environmental variables
   \item \code{with_libpaths}: library paths, replacing current libpaths
   \item \code{with_lib}: library paths, prepending to current libpaths
+  \item \code{with_temp_libpaths}: a temporary library path, replacing current libpaths
+  \item \code{with_temp_lib}: a temporary library path, prepending to current libpaths
   \item \code{with_locale}: any locale setting
   \item \code{with_options}: options
   \item \code{with_path}: PATH environment variable

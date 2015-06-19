@@ -68,34 +68,27 @@ test_that("Replacement system.file returns correct values when installed", {
   # version of system.file, but it's useful to make sure we know what to look
   # for in the other tests.
 
-  # Make a temp lib directory to install test package into
-  old_libpaths <- .libPaths()
-  tmp_libpath = file.path(tempdir(), "devtools_test")
-  if (!dir.exists(tmp_libpath)) dir.create(tmp_libpath)
-  .libPaths(c(tmp_libpath, .libPaths()))
+  with_temp_libpaths({
+    install("testShim", quiet = TRUE)
+    expect_true(require(testShim))
+    on.exit(detach("package:testShim", unload = TRUE))
 
-  install("testShim", quiet = TRUE)
-  expect_true(require(testShim))
+    # The special version of system.file shouldn't exist - this get() will fall
+    # through to the base namespace
+    expect_identical(get("system.file", pos = asNamespace("testShim")),
+      base::system.file)
 
-  # The special version of system.file shouldn't exist - this get() will fall
-  # through to the base namespace
-  expect_identical(get("system.file", pos = asNamespace("testShim")),
-    base::system.file)
+    # Test within package testShim
+    files <- get_system.file()(c("A.txt", "B.txt", "C.txt", "D.txt"),
+      package = "testShim")
+    files <- expand_path(files)
+    expect_true(all(last_n(files[[1]], 2) == c("testShim", "A.txt")))
+    expect_true(all(last_n(files[[2]], 2) == c("testShim", "B.txt")))
+    expect_equal(length(files), 2)  # Third and fourth should be dropped
 
-  # Test within package testShim
-  files <- get_system.file()(c("A.txt", "B.txt", "C.txt", "D.txt"),
-    package = "testShim")
-  files <- expand_path(files)
-  expect_true(all(last_n(files[[1]], 2) == c("testShim", "A.txt")))
-  expect_true(all(last_n(files[[2]], 2) == c("testShim", "B.txt")))
-  expect_equal(length(files), 2)  # Third and fourth should be dropped
+    # If all files are not present, return ""
+    files <- get_system.file()("nonexistent", package = "testShim")
+    expect_equal(files, "")
+  })
 
-  # If all files are not present, return ""
-  files <- get_system.file()("nonexistent", package = "testShim")
-  expect_equal(files, "")
-
-  detach("package:testShim", unload = TRUE)
-
-  # Reset the libpath
-  .libPaths(old_libpaths)
 })

@@ -6,6 +6,8 @@
 #'   \item \code{with_envvar}: environmental variables
 #'   \item \code{with_libpaths}: library paths, replacing current libpaths
 #'   \item \code{with_lib}: library paths, prepending to current libpaths
+#'   \item \code{with_temp_libpaths}: a temporary library path, replacing current libpaths
+#'   \item \code{with_temp_lib}: a temporary library path, prepending to current libpaths
 #'   \item \code{with_locale}: any locale setting
 #'   \item \code{with_options}: options
 #'   \item \code{with_path}: PATH environment variable
@@ -33,13 +35,26 @@
 #' )
 NULL
 
-with_something <- function(set) {
+with_something <- function(set, reset = set) {
+  force(set)
+  force(reset)
   function(new, code) {
     old <- set(new)
-    on.exit(set(old))
+    on.exit(reset(old))
     force(code)
   }
 }
+
+with_auto <- function(set, reset) {
+  force(set)
+  force(reset)
+  function(code) {
+    old <- set()
+    on.exit(reset(old))
+    force(code)
+  }
+}
+
 is.named <- function(x) {
   !is.null(names(x)) && all(names(x) != "")
 }
@@ -128,9 +143,13 @@ set_libpaths <- function(paths) {
   invisible(old)
 }
 
+reset_libpaths <- function(paths) {
+  .libPaths(paths)
+}
+
 #' @rdname with_something
 #' @export
-with_libpaths <- with_something(set_libpaths)
+with_libpaths <- with_something(set_libpaths, reset_libpaths)
 
 # lib ------------------------------------------------------------------------
 
@@ -144,7 +163,33 @@ set_lib <- function(paths) {
 
 #' @rdname with_something
 #' @export
-with_lib <- with_something(set_lib)
+with_lib <- with_something(set_lib, reset_libpaths)
+
+# temp_lib -------------------------------------------------------------------
+
+temp_lib <- function() {
+  libdir <- tempfile(pattern = "devtools_", fileext = ".lib")
+  dir.create(libdir)
+  libdir
+}
+
+set_temp_lib <- function() {
+  set_lib(temp_lib())
+}
+
+#' @rdname with_something
+#' @export
+with_temp_lib <- with_auto(set_temp_lib, reset_libpaths)
+
+# temp_libpaths --------------------------------------------------------------
+
+set_temp_libpaths <- function() {
+  set_libpaths(temp_lib())
+}
+
+#' @rdname with_something
+#' @export
+with_temp_libpaths <- with_auto(set_temp_libpaths, reset_libpaths)
 
 # options --------------------------------------------------------------------
 
@@ -167,8 +212,9 @@ with_par <- with_something(par)
 #' @rdname with_something
 #' @export
 #' @param add Combine with existing values? Currently for
-#'   \code{\link{with_path}} only. If \code{FALSE} all existing
-#'   paths are ovewritten, which don't you usually want.
+#'   \code{\link{with_path}} and \code{\link{with_lib}} only.
+#'   If \code{FALSE} all existing paths are ovewritten, which you don't usually
+#'   want.
 with_path <- function(new, code, add = TRUE) {
   if (add) new <- c(get_path(), new)
   old <- set_path(new)

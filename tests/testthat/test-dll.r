@@ -2,37 +2,30 @@ context("Compiled DLLs")
 
 test_that("unload() unloads DLLs from packages loaded with library()", {
 
-  # Make a temp lib directory to install test package into
-  old_libpaths <- .libPaths()
-  tmp_libpath = file.path(tempdir(), "devtools_test")
-  if (!dir.exists(tmp_libpath)) dir.create(tmp_libpath)
-  .libPaths(c(tmp_libpath, .libPaths()))
+  with_temp_libpaths({
+    # Install package
+    install("testDllLoad", quiet = TRUE, args = "--no-multiarch")
+    expect_true(require(testDllLoad))
 
-  # Reset the libpath on exit
-  on.exit(.libPaths(old_libpaths), add = TRUE)
+    # Check that it's loaded properly, by running a function from the package.
+    # nulltest() calls a C function which returns null.
+    expect_true(is.null(nulltest()))
 
-  # Install package
-  install("testDllLoad", quiet = TRUE, args = "--no-multiarch")
-  expect_true(require(testDllLoad))
+    # DLL should be listed in .dynLibs()
+    dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
+    expect_true(any(grepl("testDllLoad", dynlibs)))
 
-  # Check that it's loaded properly, by running a function from the package.
-  # nulltest() calls a C function which returns null.
-  expect_true(is.null(nulltest()))
+    unload("testDllLoad")
 
-  # DLL should be listed in .dynLibs()
-  dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
-  expect_true(any(grepl("testDllLoad", dynlibs)))
-
-  unload("testDllLoad")
-
-  # DLL should not be listed in .dynLibs()
-  dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
-  expect_false(any(grepl("testDllLoad", dynlibs)))
+    # DLL should not be listed in .dynLibs()
+    dynlibs <- vapply(.dynLibs(), `[[`, "name", FUN.VALUE = character(1))
+    expect_false(any(grepl("testDllLoad", dynlibs)))
 
 
 
-  # Clean out compiled objects
-  clean_dll("testDllLoad")
+    # Clean out compiled objects
+    clean_dll("testDllLoad")
+  })
 })
 
 
