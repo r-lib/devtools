@@ -101,4 +101,5 @@ load_pkg_description <- function(path, create) {
 #' @export
 is.package <- function(x) inherits(x, "package")
 
-
+# Mockable variant of interactive
+interactive <- function() .Primitive("interactive")()
