@@ -1,5 +1,8 @@
 # devtools 1.8.0.9000
 
+* `find_rtools()` now looks for registry keys in both HKCU (user) and 
+  HKLM (admin) locations (@Kevin-Jin, #844)
+
 * `with_debug()` now uses `with_makevars()` rather than `with_env()`, because R
   reads compilation variables from the Makevars rather than the environment
   (@jimhester, #788).
