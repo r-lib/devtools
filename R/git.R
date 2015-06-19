@@ -3,19 +3,19 @@ uses_git <- function(path = ".") {
 }
 
 git_sha1 <- function(n = 10, path = ".") {
-  r <- git2r::repository(path, discover=T)
+  r <- git2r::repository(path, discover=TRUE)
   sha <- git2r::commits(r, n = 1)[[1]]@sha # sha of most recent commit
   substr(sha, 1, n)
 }
 
 git_uncommitted <- function(path = ".") {
-  r <- git2r::repository(path, discover=T)
+  r <- git2r::repository(path, discover=TRUE)
   st <- vapply(git2r::status(r), length, integer(1))
   any(st != 0)
 }
 
 git_sync_status <- function(path = ".") {
-  r <- git2r::repository(path, discover=T)
+  r <- git2r::repository(path, discover=TRUE)
 
   upstream <- git2r::branch_get_upstream(git2r::head(r))
   # fetch(r, branch_remote_name(upstream))
@@ -67,7 +67,7 @@ github_info <- function(path = ".") {
   if (!uses_git(path))
     return(github_dummy)
 
-  r <- git2r::repository(path, discover=T)
+  r <- git2r::repository(path, discover=TRUE)
   if (!("origin" %in% git2r::remotes(r)))
     return(github_dummy)
 
