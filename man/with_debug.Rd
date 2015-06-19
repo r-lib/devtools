@@ -5,7 +5,7 @@
 \title{Temporarily set debugging compilation flags.}
 \usage{
 with_debug(code, CFLAGS = NULL, CXXFLAGS = NULL, FFLAGS = NULL,
-  FCFLAGS = NULL, debug = TRUE, action = "replace")
+  FCFLAGS = NULL, debug = TRUE)
 }
 \arguments{
 \item{code}{to execute.}
@@ -20,10 +20,6 @@ with_debug(code, CFLAGS = NULL, CXXFLAGS = NULL, FFLAGS = NULL,
 
 \item{debug}{If \code{TRUE} adds \code{-g -O0} to all flags
 (Adding \env{FFLAGS} and \env{FCFLAGS}}
-
-\item{action}{(for \code{with_envvar} only): should new values
-\code{"replace"}, \code{"suffix"}, \code{"prefix"} existing environmental
-variables with the same name.}
 }
 \description{
 Temporarily set debugging compilation flags.

@@ -226,7 +226,7 @@ build_description <- function(name, extra = list()) {
     Title = "What the Package Does (one line, title case)",
     Version = "0.0.0.9000",
     "Authors@R" = getOption("devtools.desc.author"),
-    Description = "What the package does (one paragraph)",
+    Description = "What the package does (one paragraph).",
     Depends = paste0("R (>= ", as.character(getRversion()) ,")"),
     License = getOption("devtools.desc.license"),
     Suggests = getOption("devtools.desc.suggests"),

@@ -8,6 +8,7 @@
 \alias{with_lib}
 \alias{with_libpaths}
 \alias{with_locale}
+\alias{with_makevars}
 \alias{with_options}
 \alias{with_par}
 \alias{with_path}
@@ -33,6 +34,8 @@ with_options(new, code)
 with_par(new, code)
 
 with_path(new, code, add = TRUE)
+
+with_makevars(new, code, path = file.path("~", ".R", "Makevars"))
 }
 \arguments{
 \item{new}{values for setting}
@@ -46,6 +49,8 @@ variables with the same name.}
 \item{add}{Combine with existing values? Currently for
 \code{\link{with_path}} only. If \code{FALSE} all existing
 paths are ovewritten, which don't you usually want.}
+
+\item{path}{location of existing makevars to modify.}
 }
 \description{
 \itemize{
@@ -59,6 +64,13 @@ paths are ovewritten, which don't you usually want.}
   \item \code{with_path}: PATH environment variable
   \item \code{with_par}: graphics parameters
 }
+}
+\details{
+If no existing makevars file exists or the fields in \code{new} do
+not exist in the existing \code{Makevars} file then the fields are added to
+the new file.  Existing fields which are not included in \code{new} are
+appended unchanged.  Fields which exist in \code{Makevars} and in \code{new}
+are modified to use the value in \code{new}.
 }
 \section{Deprecation}{
 

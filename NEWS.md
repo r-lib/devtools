@@ -4,6 +4,8 @@
   is incorrect. This should make it easy to recover from an incorrect
   `@useDynLib`, because re-documenting() should now succeed
 
+* `build_win()` now uses `curl` instead of `RCurl` for ftp upload.
+
 * Install suggested packages during `revdep_check()` (#808).
 
 * Fix use of `uses_git()` in `use_readme_rmd()` (#793).
@@ -19,7 +21,7 @@
 
 * `use_data()` also works with data from the parent frame (#829, @krlmlr).
 
-* `uses_testthat()` is now exported (#824, @krlmlr).
+* `uses_testthat()` and `check_failures()` are now exported (#824, #839, @krlmlr).
 
 # devtools 1.8.0
  
@@ -82,6 +84,10 @@
 * `install_github()` warns if repository contains submodules (@ashander, #751).
 
 ## Bug fixes and minor improvements
+
+* `with_debug()` now uses `with_makevars()` rather than `with_env()`, because R
+  reads compilation variables from the Makevars rather than the environment
+  (@jimhester, #788).
 
 * Previously, devtools ran all external R processes with `R --vanilla`.
   Now it only suppresses user profiles, and constructs a custom `.Rprofile` to
