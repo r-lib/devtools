@@ -34,7 +34,9 @@
 
 * `uses_testthat()` and `check_failures()` are now exported (#824, #839, @krlmlr).
 
-* Remove explicit `library(testthat)` call in `test()` (#798, @krlmlr)
+* Remove explicit `library(testthat)` call in `test()` (#798, @krlmlr).
+
+* `as.package` and `load_all` gain new argument `create`. Like other functions with a `pkg` argument, `load_all` looks for a `DESCRIPTION` file in parent directories (#852, @krlmlr).
 
 * Allow release() for packages not located at root of git repository (#845, #846, @mbjones)
 

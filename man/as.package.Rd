@@ -4,10 +4,14 @@
 \alias{as.package}
 \title{Coerce input to a package.}
 \usage{
-as.package(x = NULL)
+as.package(x = NULL, create = NA)
 }
 \arguments{
 \item{x}{object to coerce to a package}
+
+\item{create}{only relevant if a package structure does not exist yet: if
+\code{TRUE}, create a package structure; if \code{NA}, ask the user
+(in interactive mode only)}
 }
 \description{
 Possible specifications of package:

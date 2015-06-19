@@ -51,10 +51,7 @@
 #' a perfect replacement for \code{base::system.file}.
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information. If the \code{DESCRIPTION}
-#'   file does not exist, it is created using \code{\link{create_description}}.
-#'   (This means that only the precise path to the package, but not to a
-#'   subdirectory in the package, are accepted here.)
+#'   \code{\link{as.package}} for more information.
 #' @param reset clear package environment and reset file cache before loading
 #'   any pieces of the package. This is equivalent to running
 #'   \code{\link{unload}} and is the default. Use \code{reset = FALSE} may be
@@ -67,6 +64,7 @@
 #'   If \code{FALSE}, export only the objects that are listed as exports
 #'   in the NAMESPACE file.
 #' @param quiet if \code{TRUE} suppresses output from this function.
+#' @inheritParams as.package
 #' @keywords programming
 #' @examples
 #' \dontrun{
@@ -85,12 +83,9 @@
 #' }
 #' @export
 load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
-  export_all = TRUE, quiet = FALSE) {
+  export_all = TRUE, quiet = FALSE, create = NA) {
 
-  if (!is.package(pkg)) {
-    create_description(pkg)
-    pkg <- as.package(pkg)
-  }
+  pkg <- as.package(pkg, create = create)
 
   if (!quiet) message("Loading ", pkg$package)
 
