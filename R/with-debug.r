@@ -18,8 +18,7 @@
 #' with_debug(install("mypkg"))
 #' }
 with_debug <- function(code, CFLAGS = NULL, CXXFLAGS = NULL,
-                       FFLAGS = NULL, FCFLAGS = NULL, debug = TRUE,
-                       action = "replace") {
+                       FFLAGS = NULL, FCFLAGS = NULL, debug = TRUE) {
 
   defaults <- compiler_flags(debug = debug)
   flags <- c(
@@ -29,7 +28,7 @@ with_debug <- function(code, CFLAGS = NULL, CXXFLAGS = NULL,
 
   flags <- unlist(modifyList(as.list(defaults), as.list(flags)))
 
-  with_envvar(flags, code, action = action)
+  with_makevars(flags, code)
 }
 
 #' Default compiler flags used by devtools.
