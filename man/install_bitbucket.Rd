@@ -17,7 +17,7 @@ precedence.}
 \item{username}{User name. Deprecated: please include username in the
 \code{repo}}
 
-\item{ref}{Desired git reference; culd be a commit, tag, or branch name.
+\item{ref}{Desired git reference; could be a commit, tag, or branch name.
 Defaults to master.}
 
 \item{subdir}{subdirectory within repo that contains the R package.}
