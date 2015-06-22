@@ -1,5 +1,7 @@
 # devtools 1.8.0.9000
 
+* Default travis script leaves notifications on default settings.
+
 * `revdep_check()` now sets `NOT_CRAN` env var to `false` so that tests etc
   that are not run on CRAN are not run during revdep checks. Typically these
   tests require local setup not available during revdep testing (#809).
