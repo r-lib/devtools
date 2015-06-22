@@ -17,42 +17,44 @@ sort_s4classes <- function(classes) {
 
   sorted_classes <- vector(mode = 'character', length = 0)
 
-  ## classes extended by x which are within the domestic set of classes
-  ## and are not x itself
-  extends_domestic <- function(x, classes) {
+  ## Return the parent class, if any within domestic classes
+  extends_first <- function(x, classes) {
     ext <- extends(x)
-    classes %in% ext & classes != x
+    parent <- ext[2]
+    classes %in% parent
   }
 
+  ## Matrix of classes in columns, extending classes in rows
   extended_classes <- vapply(classes,
-                             extends_domestic,
+                             extends_first,
                              rep(TRUE, length(classes)),
                              classes)
 
+  ## Dynamic set of orphan classes (safe to remove)
   start_idx <- which(apply(extended_classes, 2, sum) == 0)
 
-  for (i in start_idx) {
-
-    ## add node to sorted list
+  while (length(start_idx) > 0) {
+    ## add node to sorted list (and remove from pending list)
+    i <- start_idx[1]
+    start_idx <- tail(start_idx, -1)
     sorted_classes <- c(sorted_classes, classes[i])
 
     ## check its derived classes if any
-    for (j in which(extended_classes[i,])) {
+    for (j in which(extended_classes[i, ])) {
       extended_classes[i, j] <- FALSE
       if (sum(extended_classes[, j]) == 0) {
-        sorted_classes <- c(sorted_classes, classes[j])
+        start_idx <- c(start_idx, j)
       }
     }
   }
-
   if (any(extended_classes)) {
     ## Graph has a cycle. This should not happen
     ## Stop or try to continue?
     idx <- !classes %in% sorted_classes
     sorted_classes <- c(sorted_classes, classes[idx])
   }
-
   return(sorted_classes)
+
 }
 
 # Remove an s4 class from a package loaded by devtools
