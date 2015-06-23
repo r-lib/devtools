@@ -618,7 +618,7 @@ use_cran_badge <- function(pkg = ".") {
   pkg <- as.package(pkg)
   message(
     " * Add a CRAN status shield by adding the following line to your README:\n",
-    "[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/", pkg$package, ")](http://cran.r-project.org/web/packages/", pkg$package, ")"
+    "[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/", pkg$package, ")](http://cran.r-project.org/package=", pkg$package, ")"
   )
   invisible(TRUE)
 }

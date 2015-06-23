@@ -31,6 +31,8 @@
 
 * Add `use_coverage()` function to add codecov.io or coveralls.io to a project,
   deprecate `use_coveralls()` (@jimhester, #822, #818).
+  
+* `use_cran_badge()` uses canonical url form preferred by CRAN.
 
 * `use_data()` also works with data from the parent frame (#829, @krlmlr).
 
