@@ -10,7 +10,7 @@ test_that("return messages", {
 
   failures <- check_failures("testHelp.Rcheck", error = TRUE,
                              warning = TRUE, note = TRUE)
-  expect_equal(failures, character())
+  expect_equal(failures, character(), info = paste(failures, collapse = "\n"))
 })
 
 test_that("aspell environment variables", {
