@@ -16,7 +16,7 @@ will receive an email asking you to confirm submission - this is used
 to check that the package is submitted by the maintainer.
 }
 \details{
-It's recommend that you use \code{\link{release}()} rather than this
+It's recommended that you use \code{\link{release}()} rather than this
 function as it performs more checks prior to submission.
 }
 \keyword{internal}
