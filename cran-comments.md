@@ -6,7 +6,13 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs. 
 
-There was 1 NOTE:
+There were 2 NOTEs:
+
+* Found the following (possibly) invalid URLs.
+
+  This appears to be a false position: 
+  http://cran.r-project.org/web/packages/policies.html is not a URL to
+  a package, and hence is not in the canonical form.
 
 * checking R code for possible problems ... NOTE
   Found the following calls to attach():
