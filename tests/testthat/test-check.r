@@ -6,7 +6,10 @@ test_that("return messages", {
 
   on.exit(unlink(check_dir_name, recursive = TRUE), add = TRUE)
   with_envvar(
-    list("_R_CHECK_RD_XREFS_"="FALSE"),
+    list(
+      "_R_CHECK_RD_XREFS_"="FALSE",
+      "_R_CHECK_CRAN_INCOMING_"="FALSE"
+    ),
     check(pkg_name, document = FALSE, cran = FALSE,
           check_dir = ".", cleanup = FALSE, quiet = TRUE)
   )
