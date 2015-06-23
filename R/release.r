@@ -260,7 +260,7 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #' will receive an email asking you to confirm submission - this is used
 #' to check that the package is submitted by the maintainer.
 #'
-#' It's recommend that you use \code{\link{release}()} rather than this
+#' It's recommended that you use \code{\link{release}()} rather than this
 #' function as it performs more checks prior to submission.
 #'
 #' @param pkg package description, can be path or package name.  See
