@@ -1,46 +1,50 @@
 # devtools 1.8.0.9000
 
-* Default travis script leaves notifications on default settings.
+* Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
 
-* `revdep_check()` now sets `NOT_CRAN` env var to `false` so that tests etc
-  that are not run on CRAN are not run during revdep checks. Typically these
-  tests require local setup not available during revdep testing (#809).
+* Remove explicit `library(testthat)` call in `test()` (#798, @krlmlr).
+
+* `as.package()` and `load_all()` gain new argument `create`. Like other 
+  functions with a `pkg` argument, `load_all()` looks for a `DESCRIPTION` file 
+  in parent directories - if `create = TRUE` it will be automatically
+  created if there's a `R/` or `data/` directory (#852, @krlmlr).
+
+* `build_vignettes()` gains dependencies argument (#825, @krlmlr).
+
+* `build_win()` now uses `curl` instead of `RCurl` for ftp upload.
 
 * `find_rtools()` now looks for registry keys in both HKCU (user) and 
   HKLM (admin) locations (@Kevin-Jin, #844)
 
-* `with_debug()` now uses `with_makevars()` rather than `with_env()`, because R
-  reads compilation variables from the Makevars rather than the environment
-  (@jimhester, #788).
-
 * `load_all()` no longer fails if a `useDynLib()` entry in the NAMESPACE 
   is incorrect. This should make it easy to recover from an incorrect
-  `@useDynLib`, because re-documenting() should now succeed
+  `@useDynLib`, because re-documenting() should now succeed.
 
-* `build_win()` now uses `curl` instead of `RCurl` for ftp upload.
+* `release()` works for packages not located at root of git repository 
+  (#845, #846, @mbjones).
 
-* Install suggested packages during `revdep_check()` (#808).
-
-* Fix use of `uses_git()` in `use_readme_rmd()` (#793).
-
+* `revdep_check()` now installed _suggested_ packages by default (#808), and 
+  sets `NOT_CRAN` env var to `false` (#809). This makes testing more similar to
+  CRAN so that more packages should pass cleanly.
+  
 * New `uninstall()` removes installed package (#820, @krlmlr).
-
-* `build_vignettes()` gains dependencies argument (#825, @krlmlr).
 
 * Add `use_coverage()` function to add codecov.io or coveralls.io to a project,
   deprecate `use_coveralls()` (@jimhester, #822, #818).
 
-* Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
-
 * `use_data()` also works with data from the parent frame (#829, @krlmlr).
 
-* `uses_testthat()` and `check_failures()` are now exported (#824, #839, @krlmlr).
+* `use_travis()`: Default travis script leaves notifications on default 
+  settings.
 
-* Remove explicit `library(testthat)` call in `test()` (#798, @krlmlr).
+* `uses_testthat()` and `check_failures()` are now exported (#824, #839, 
+  @krlmlr).
 
-* `as.package` and `load_all` gain new argument `create`. Like other functions with a `pkg` argument, `load_all` looks for a `DESCRIPTION` file in parent directories (#852, @krlmlr).
+* `use_readme_rmd()` uses `uses_git()` correctly  (#793).
 
-* Allow release() for packages not located at root of git repository (#845, #846, @mbjones)
+* `with_debug()` now uses `with_makevars()` rather than `with_env()`, because R
+  reads compilation variables from the Makevars rather than the environment
+  (@jimhester, #788).
 
 # devtools 1.8.0
  
