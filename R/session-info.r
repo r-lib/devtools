@@ -82,7 +82,8 @@ platform_info <- function() {
     ui = ui,
     language = Sys.getenv("LANGUAGE", "(EN)"),
     collate = Sys.getlocale("LC_COLLATE"),
-    tz = Sys.timezone()
+    tz = Sys.timezone(),
+    date = format(Sys.Date())
   ), class = "platform_info")
 
 }
