@@ -6,16 +6,17 @@
 |:--------|:----------------------------|
 |version  |R version 3.2.1 (2015-06-18) |
 |system   |x86_64, darwin13.4.0         |
-|ui       |RStudio (0.99.598)           |
+|ui       |RStudio (0.99.601)           |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
-|tz       |America/Chicago              |
+|tz       |Europe/Zurich                |
+|date     |2015-06-25                   |
 
 ## Packages
 
 |package    |*  |version |date       |source         |
 |:----------|:--|:-------|:----------|:--------------|
-|curl       |   |0.8     |2015-06-06 |CRAN (R 3.2.0) |
+|curl       |   |0.9     |2015-06-19 |CRAN (R 3.2.0) |
 |digest     |   |0.6.8   |2014-12-31 |CRAN (R 3.2.0) |
 |evaluate   |   |0.7     |2015-04-21 |CRAN (R 3.2.0) |
 |git2r      |   |0.10.1  |2015-05-07 |CRAN (R 3.2.0) |
@@ -33,11 +34,16 @@
 |whisker    |   |0.3-2   |2013-04-28 |CRAN (R 3.2.0) |
 
 # Check results
-31 checked out of 33 dependencies 
+32 checked out of 34 dependencies 
 
 ## aRxiv (0.5.10)
 Maintainer: Karl Broman <kbroman@biostat.wisc.edu>  
 Bug reports: https://github.com/ropensci/aRxiv/issues
+
+__OK__
+
+## assertive (0.2-6)
+Maintainer: Richard Cotton <richierocks@gmail.com>
 
 __OK__
 
@@ -186,9 +192,9 @@ Maintainer: Sean C. Anderson <sean@seananderson.ca>
 Bug reports: http://github.com/seananderson/metafolio/issues
 
 ```
-checking whether package ‘metafolio’ can be installed ... [10s/10s] ERROR
+checking whether package ‘metafolio’ can be installed ... ERROR
 Installation failed.
-See ‘/private/tmp/Rtmp013qS9/check_cran397c2ccb43fd/metafolio.Rcheck/00install.out’ for details.
+See ‘/private/tmp/Rtmp9Gfxhv/check_cran4018202f649d/metafolio.Rcheck/00install.out’ for details.
 ```
 ```
 DONE
