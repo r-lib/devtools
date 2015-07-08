@@ -103,6 +103,7 @@ use_vignette <- function(name, pkg = ".") {
   pkg <- as.package(pkg)
 
   add_desc_package(pkg, "Suggests", "knitr")
+  add_desc_package(pkg, "Suggests", "rmarkdown")
   add_desc_package(pkg, "VignetteBuilder", "knitr")
   dir.create(file.path(pkg$path, "vignettes"), showWarnings = FALSE)
 
