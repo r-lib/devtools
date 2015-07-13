@@ -23,5 +23,17 @@ test_that("topological sorting s4 classes", {
   }
 
 })
+
+test_that("sorting extreme cases", {
+
+  ## no classes to sort
+  classes <- vector('character', 0)
+  expect_identical(classes, sort_s4classes(classes, 'testS4sort'))
+
+  ## only one class to sort
+  classes <- "A"
+  expect_identical(classes, sort_s4classes(classes, 'testS4sort'))
+})
+
 # cleanup
 unload('testS4sort')

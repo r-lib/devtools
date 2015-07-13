@@ -32,6 +32,9 @@ sort_s4classes <- function(classes, pkg) {
                              rep(TRUE, length(classes)),
                              classes)
 
+  if (!is.matrix(extended_classes))
+    extended_classes <- as.matrix(extended_classes)
+
   ## Dynamic set of orphan classes (safe to remove)
   start_idx <- which(apply(extended_classes, 2, sum) == 0)
 
