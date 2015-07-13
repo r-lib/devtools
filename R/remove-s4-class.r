@@ -6,20 +6,22 @@ remove_s4_classes <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   classes <- methods::getClasses(ns_env(pkg))
-  lapply(sort_s4classes(classes), remove_s4_class, pkg)
+  lapply(sort_s4classes(classes, pkg), remove_s4_class, pkg)
 }
 
 # Sort S4 classes for hierarchical removal
 # Derived classes must be removed **after** their parents.
 # This reduces to a topological sorting on the S4 dependency class
 # https://en.wikipedia.org/wiki/Topological_sorting
-sort_s4classes <- function(classes) {
+sort_s4classes <- function(classes, pkg) {
+  pkg <- as.package(pkg)
+  nsenv <- ns_env(pkg)
 
   sorted_classes <- vector(mode = 'character', length = 0)
 
   ## Return the parent class, if any within domestic classes
   extends_first <- function(x, classes) {
-    ext <- extends(x)
+    ext <- extends(getClass(x, where = nsenv))
     parent <- ext[2]
     classes %in% parent
   }
