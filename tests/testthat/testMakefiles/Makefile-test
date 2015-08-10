@@ -1,0 +1,22 @@
+NAME = package
+DIR = pkg/$(NAME)
+SRC := $(DIR)/R/*.R
+
+all: ../*.R
+	@echo all
+
+.PHONY: # special target
+	@echo "always run .PHONY targets"
+
+echo:
+	@echo echo
+
+www/README-$(NAME).md:
+	@echo $@
+
+%.md: %.Rmd
+	@echo knit $@
+
+../%.R: .PHONY
+	@echo $@
+
