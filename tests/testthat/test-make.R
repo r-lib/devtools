@@ -1,7 +1,6 @@
 context ("make")
 
-makefile <- file.path (system.file("tests/testthat/testMakefiles", package="devtools"),
-											 "Makefile-test")
+makefile <- file.path ("testMakefiles/Makefile-test")
 
 test_that("make_gettargets", {
 
