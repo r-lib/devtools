@@ -23,6 +23,8 @@
 #' @param revdep_pkg Optional name of a package for which this check is
 #'   checking the reverse dependencies of. This is normally passed in from
 #'   \code{\link{revdep_check}}, and is used only for logging.
+#' @param env_vars Optional additional environment variables to set.  Values
+#'   set here will override the defaults set by \code{\link{cran_env_vars}()}.
 #' @return Returns (invisibly) the directory where check results are stored.
 #' @keywords internal
 #' @export
@@ -31,7 +33,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
                        type = getOption("pkgType"),
                        threads = getOption("Ncpus", 1),
                        check_dir = tempfile("check_cran"),
-                       revdep_pkg = NULL) {
+                       revdep_pkg = NULL,
+                       env_vars = NULL) {
 
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
@@ -90,7 +93,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       check_r_cmd(pkgs[i], local_urls[i],
         args = "--no-multiarch --no-manual --no-codoc",
         check_dir = check_dir,
-        quiet = TRUE
+        quiet = TRUE,
+        env_vars = env_vars
       )
     }, error = function(e) {
       message("Check failed: ", e$message)

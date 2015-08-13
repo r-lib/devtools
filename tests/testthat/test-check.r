@@ -20,3 +20,16 @@ test_that("return messages", {
                              warning = TRUE, note = TRUE)
   expect_equal(failures, character(), info = paste(failures, collapse = "\n"))
 })
+
+test_that("setting env_vars overrides defaults", {
+  R_call <- tryCatch(
+    with_mock(
+      `devtools:::R` = function(...) stop(structure(list(...), class=c("error", "condition"))),
+      check_r_cmd(
+        "testTest",
+        cran = TRUE,
+        env_vars = list("_R_CHECK_LIMIT_CORES_" = "warn"))),
+    error = function(e) e)
+
+  expect_equal(R_call[[3]]$`_R_CHECK_LIMIT_CORES_`, "warn")
+})

@@ -55,6 +55,7 @@
 #'   line arguments to be passed to \code{R CMD check}/\code{R CMD build}/\code{R CMD INSTALL}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @param check_dir the directory in which the package is checked
+#' @param env_vars environment variables to set or modify during check
 #' @param ... Additional arguments passed to \code{\link{build}}
 #' @seealso \code{\link{release}} if you want to send the checked package to
 #'   CRAN.
@@ -62,7 +63,7 @@
 check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
                   check_version = FALSE, force_suggests = FALSE, args = NULL,
                   build_args = NULL, quiet = FALSE, check_dir = tempdir(),
-                  ...) {
+                  env_vars = NULL, ...) {
 
   pkg <- as.package(pkg)
 
@@ -78,8 +79,9 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
   built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args, ...)
   on.exit(unlink(built_path), add = TRUE)
 
-  r_cmd_check_path <- check_r_cmd(pkg$package, built_path, cran, check_version,
-    force_suggests, args, quiet = quiet, check_dir = check_dir)
+  r_cmd_check_path <- check_r_cmd(built_path, cran, check_version,
+    force_suggests, args, quiet = quiet, check_dir = check_dir,
+    env_vars = env_vars)
 
   if (cleanup) {
     unlink(r_cmd_check_path, recursive = TRUE)
@@ -94,9 +96,16 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
 # Run R CMD check and return the path for the check
 # @param built_path The path to the built .tar.gz source package.
 # @param check_dir The directory to unpack the .tar.gz file to
+<<<<<<< HEAD
 check_r_cmd <- function(name, built_path = NULL, cran = TRUE,
                         check_version = FALSE, force_suggests = FALSE,
                         args = NULL, check_dir = tempdir(), quiet = FALSE, ...) {
+=======
+# @param env_vars Optional additional environment variables to set.  Values
+#   set here will override the defaults set by \code{\link{cran_env_vars}()}.
+check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
+  force_suggests = TRUE, args = NULL, check_dir = tempdir(), env_vars = NULL, ...) {
+>>>>>>> Add env_var argument to check()
 
   pkgname <- gsub("_.*?$", "", basename(built_path))
 
@@ -110,6 +119,7 @@ check_r_cmd <- function(name, built_path = NULL, cran = TRUE,
     opts <- c("--as-cran", opts)
   }
 
+<<<<<<< HEAD
   env_vars <- check_env_vars(cran, check_version, force_suggests)
   if (!quiet)
     show_env_vars(env_vars)
@@ -117,6 +127,22 @@ check_r_cmd <- function(name, built_path = NULL, cran = TRUE,
   if (!quiet)
     rule("Checking ", name)
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
+=======
+  opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
+
+  # Setting these environment variables requires some care because they can be
+  # be TRUE, FALSE, or not set. (And some variables take numeric values.) When
+  # not set, R CMD check will use the defaults as described in R Internals.
+  env_vars <- c(env_vars,
+    if (cran) cran_env_vars(),
+    if (check_version) c("_R_CHECK_CRAN_INCOMING_" = "TRUE", aspell_env_var()),
+    if (!force_suggests) c("_R_CHECK_FORCE_SUGGESTS_" = "FALSE")
+  )
+
+  # remove duplicated vars, keeping only the first instance
+  env_vars <- env_vars[!duplicated(names(env_vars))]
+
+>>>>>>> Add env_var argument to check()
   R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), check_dir,
     env_vars, quiet = quiet, ...)
 

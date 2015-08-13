@@ -7,7 +7,7 @@
 check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath,
   bioconductor = FALSE, type = getOption("pkgType"),
   threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"),
-  revdep_pkg = NULL)
+  revdep_pkg = NULL, env_vars = NULL)
 }
 \arguments{
 \item{pkgs}{Vector of package names - note that unlike other \pkg{devtools}
@@ -34,6 +34,9 @@ It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 \item{revdep_pkg}{Optional name of a package for which this check is
 checking the reverse dependencies of. This is normally passed in from
 \code{\link{revdep_check}}, and is used only for logging.}
+
+\item{env_vars}{Optional additional environment variables to set.  Values
+set here will override the defaults set by \code{\link{cran_env_vars}()}.}
 }
 \value{
 Returns (invisibly) the directory where check results are stored.

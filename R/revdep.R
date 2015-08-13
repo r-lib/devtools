@@ -87,6 +87,7 @@ print.maintainers <- function(x, ...) {
 #'
 #' @inheritParams revdep
 #' @param pkg Path to package. Defaults to current directory.
+#' @param ... Additional arguments passed to \code{\link{check_cran}()}
 #' @inheritParams check_cran
 #' @seealso \code{\link{revdep_maintainers}()} to run R CMD check on all reverse
 #'   dependencies.
@@ -108,7 +109,8 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          srcpath = libpath, bioconductor = FALSE,
                          type = getOption("pkgType"),
                          threads = getOption("Ncpus", 1),
-                         check_dir = tempfile("check_cran")) {
+                         check_dir = tempfile("check_cran"),
+                         ...) {
   pkg <- as.package(pkg)
   rule("Reverse dependency checks for ", pkg$package, pad = "=")
 
@@ -132,7 +134,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
     bioconductor = bioconductor, dependencies = dependencies)
   check_cran(pkgs, revdep_pkg = pkg$package, libpath = libpath,
     srcpath = srcpath, bioconductor = bioconductor, type = type,
-    threads = threads, check_dir = check_dir)
+    threads = threads, check_dir = check_dir, ...)
 
   list(check_dir = check_dir, libpath = libpath, pkg = pkg, deps = pkgs)
 }

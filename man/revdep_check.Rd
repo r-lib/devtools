@@ -17,7 +17,7 @@ revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
   libpath = getOption("devtools.revdep.libpath"), srcpath = libpath,
   bioconductor = FALSE, type = getOption("pkgType"),
-  threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"))
+  threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"), ...)
 }
 \arguments{
 \item{res}{Result of \code{revdep_check}}
@@ -54,6 +54,8 @@ to the same type as \code{\link{install.packages}()}.}
 It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 
 \item{check_dir}{Directory to store results.}
+
+\item{...}{Additional arguments passed to \code{\link{check_cran}()}}
 }
 \value{
 An invisible list of results. But you'll probably want to look
