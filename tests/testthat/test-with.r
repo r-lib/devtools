@@ -61,3 +61,16 @@ test_that("with_libpaths works and resets library", {
   )
   expect_equal(lib, .libPaths())
 })
+
+test_that("with_something works", {
+  res <- NULL
+  set <- function(new) {
+    res <<- c(res, 1L)
+  }
+  reset <- function(old) {
+    res <<- c(res, 3L)
+  }
+  with_res <- with_something(set, reset)
+  with_res(NULL, res <- c(res, 2L))
+  expect_equal(res, 1L:3L)
+})
