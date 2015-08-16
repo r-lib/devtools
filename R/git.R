@@ -63,18 +63,52 @@ git_path <- function(git_binary_name = NULL) {
 
 # GitHub ------------------------------------------------------------------
 
-github_info <- function(path = ".") {
+uses_github <- function(path = ".") {
+  if (!uses_git(path))
+    return(FALSE)
+
+  r <- git2r::repository(path, discover = TRUE)
+  r_remote_urls <- remote_urls(r)
+
+  any(grepl("github", r_remote_urls))
+
+  ## or require ALSO that name of matching remote be in github_remote_names?
+  #any(grepl("github", r_remote_urls) &
+  #      names(r_remote_urls) %in% github_remote_names)
+}
+
+github_info <- function(path = ".", remote_name = NULL) {
   if (!uses_git(path))
     return(github_dummy)
 
-  r <- git2r::repository(path, discover = TRUE)
-  if (!("origin" %in% git2r::remotes(r)))
+  if (!uses_github(path))
     return(github_dummy)
 
-  github_remote_parse(git2r::remote_url(r, "origin"))
+  r <- git2r::repository(path, discover = TRUE)
+  r_remote_urls <- grep("github", remote_urls(r), value = TRUE)
+
+  x <- r_remote_urls[remote_name]
+
+  if (length(x) == 0 || is.na(x)) {
+    found <- match(github_remote_names, names(r_remote_urls))
+    if (all(is.na(found))) {
+      pick_me <- 1L
+    } else {
+      pick_me <- found[!is.na(found)][1]
+    }
+    x <- r_remote_urls[pick_me]
+  }
+
+  github_remote_parse(x)
 }
 
 github_dummy <- list(username = "<USERNAME>", repo = "<REPO>")
+github_remote_names <- c("origin", "github", "upstream")
+
+remote_urls <- function(r) {
+  remotes <- git2r::remotes(r)
+  setNames(git2r::remote_url(r, remotes), remotes)
+}
 
 github_remote_parse <- function(x) {
   if (length(x) == 0) return(github_dummy)

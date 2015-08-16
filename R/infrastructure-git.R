@@ -45,8 +45,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".") {
   pkg <- as.package(pkg)
   use_git(pkg = pkg)
 
-  r <- git2r::repository(pkg$path)
-  if ("origin" %in% git2r::remotes(r))
+  if (uses_github(pkg$path))
     return(invisible())
 
   message("Creating GitHub repository")
@@ -58,6 +57,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".") {
   ))
 
   message("Adding remote to GitHub")
+  r <- git2r::repository(pkg$path)
   git2r::remote_add(r, "origin", create$ssh_url)
   # git2r::branch_set_upstream(git2r::head(r), "origin/master")
   # git2r::push(r, "origin", "refs/heads/master")
