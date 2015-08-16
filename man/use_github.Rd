@@ -4,7 +4,8 @@
 \alias{use_github}
 \title{Connect a local repo with GitHub.}
 \usage{
-use_github(auth_token = github_pat(), private = FALSE, pkg = ".")
+use_github(auth_token = github_pat(), private = FALSE, pkg = ".",
+  protocol = c("ssh", "https"))
 }
 \arguments{
 \item{auth_token}{To install from a private repo, generate a personal
@@ -17,6 +18,8 @@ the \code{GITHUB_PAT} environment variable.}
 
 \item{pkg}{Path to package. See \code{\link{as.package}} for more
 information.}
+
+\item{protocol}{transfer protocol, either ssh (the default) or https}
 }
 \description{
 If the current repo does not use git, calls \code{use_git} automatically.

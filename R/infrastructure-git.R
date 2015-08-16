@@ -34,13 +34,17 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' @inheritParams install_github
 #' @inheritParams use_git
 #' @param private If \code{TRUE}, creates a private repository.
+#' @param protocol transfer protocol, either ssh (the default) or https
 #' @family git infrastructure
 #' @keywords internal
 #' @export
-use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".") {
+use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
+                       protocol = c("ssh", "https")) {
   if (is.null(auth_token)) {
     stop("GITHUB_PAT required to create new repo")
   }
+
+  protocol <- match.arg(protocol)
 
   pkg <- as.package(pkg)
   use_git(pkg = pkg)
@@ -58,7 +62,12 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".") {
 
   message("Adding remote to GitHub")
   r <- git2r::repository(pkg$path)
-  git2r::remote_add(r, "origin", create$ssh_url)
+  if(protocol == "ssh") {
+    git2r::remote_add(r, "origin", create$ssh_url)
+  } else { # protocol == "https"
+    git2r::remote_add(r, "origin", create$clone_url)
+  }
+
   # git2r::branch_set_upstream(git2r::head(r), "origin/master")
   # git2r::push(r, "origin", "refs/heads/master")
 }
