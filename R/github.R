@@ -8,7 +8,9 @@ github_auth <- function(token) {
 
 github_response <- function(req) {
   text <- httr::content(req, as = "text")
-  parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
+  parsed <-
+    if (identical(text, '')) text else
+      jsonlite::fromJSON(text, simplifyVector = FALSE)
 
   if (httr::status_code(req) >= 400) {
     errors <- vapply(parsed$errors, `[[`, "message", FUN.VALUE = character(1))
@@ -51,6 +53,13 @@ github_commit <- function(username, repo, ref = "master") {
 
 github_tag <- function(username, repo, ref = "master") {
   github_GET(file.path("repos", username, repo, "tags", ref))
+}
+
+github_delete_repo <- function(username, repo, pat = github_pat()) {
+  auth <- github_auth(pat)
+  path <- file.path("repos", username, repo)
+  req <- httr::DELETE("https://api.github.com/", path = path, auth)
+  github_response(req)
 }
 
 #' Retrieve Github personal access token.
