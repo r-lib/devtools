@@ -68,13 +68,9 @@ uses_github <- function(path = ".") {
     return(FALSE)
 
   r <- git2r::repository(path, discover = TRUE)
-  r_remote_urls <- remote_urls(r)
+  r_remote_urls <- git2r::remote_url(r)
 
   any(grepl("github", r_remote_urls))
-
-  ## or require ALSO that name of matching remote be in github_remote_names?
-  #any(grepl("github", r_remote_urls) &
-  #      names(r_remote_urls) %in% github_remote_names)
 }
 
 github_info <- function(path = ".", remote_name = NULL) {
