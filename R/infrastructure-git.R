@@ -60,16 +60,24 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
     private = jsonlite::unbox(private)
   ))
 
-  message("Adding remote to GitHub")
+  message("Adding GitHub remote and creating a remote tracking branch")
   r <- git2r::repository(pkg$path)
   if(protocol == "ssh") {
     git2r::remote_add(r, "origin", create$ssh_url)
+    cred <- git2r::cred_ssh_key("~/.ssh/id_rsa.pub", "~/.ssh/id_rsa")
   } else { # protocol == "https"
     git2r::remote_add(r, "origin", create$clone_url)
+    cred <- git2r::cred_env("DUMMY_EMAIL", "GITHUB_PAT")
   }
+  ## in https case, if PAT passed as password, the username is immaterial
+  with_envvar(c("DUMMY_EMAIL" = "whatever"),
+              git2r::push(r, "origin", "refs/heads/master", credentials = cred))
+  git2r::branch_set_upstream(git2r::head(r), "origin/master")
 
-  # git2r::branch_set_upstream(git2r::head(r), "origin/master")
-  # git2r::push(r, "origin", "refs/heads/master")
+  message("Adding GitHub links to DESCRIPTION")
+  use_github_links(pkg$path)
+
+  invisible(NULL)
 }
 
 
@@ -107,3 +115,37 @@ add_git_ignore <- function(pkg = ".", ignores) {
   invisible(TRUE)
 }
 
+#' Add GitHub links to DESCRIPTION.
+#'
+#' Populates the URL and BugReports fields of DESCRIPTION with
+#' \code{https://github.com/USERNAME/PKG} AND
+#' \code{https://github.com/USERNAME/PKG/issues}, respectively. If package does
+#' not already use GitHub (and therefore git), nothing will be done.
+#'
+#' @inheritParams use_git
+#' @family git infrastructure
+#' @keywords internal
+#' @export
+use_github_links <- function(pkg = ".") {
+
+  if (!uses_github(pkg)) {
+    message(paste("Cannot detect that package already uses GitHub.",
+                  "Try use_github() first."))
+    return(invisible(NULL))
+  }
+
+
+  gh_info <- github_info(pkg)
+  pkg <- as.package(pkg)
+
+  desc_path <- file.path(pkg$path, "DESCRIPTION")
+  desc <- read_dcf(desc_path)
+
+  desc[["URL"]] <-
+    paste("https://github.com", gh_info$username, gh_info$repo, sep = "/")
+  desc[["BugReports"]] <- paste(desc[["URL"]], "issues", sep = "/")
+
+  write_dcf(desc_path, desc)
+
+  desc[c("URL", "BugReports")]
+}

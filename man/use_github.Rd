@@ -26,7 +26,7 @@ If the current repo does not use git, calls \code{use_git} automatically.
 }
 \seealso{
 Other git infrastructure: \code{\link{use_git_hook}};
-  \code{\link{use_git}}
+  \code{\link{use_github_links}}; \code{\link{use_git}}
 }
 \keyword{internal}
 
