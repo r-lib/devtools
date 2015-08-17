@@ -8,9 +8,11 @@ github_auth <- function(token) {
 
 github_response <- function(req) {
   text <- httr::content(req, as = "text")
-  parsed <-
-    if (identical(text, '')) text else
-      jsonlite::fromJSON(text, simplifyVector = FALSE)
+  parsed <- if (httr::has_content(req)) {
+    jsonlite::fromJSON(text, simplifyVector = FALSE)
+  } else {
+    text
+  }
 
   if (httr::status_code(req) >= 400) {
     errors <- vapply(parsed$errors, `[[`, "message", FUN.VALUE = character(1))
