@@ -74,9 +74,6 @@ uses_github <- function(path = ".") {
 }
 
 github_info <- function(path = ".", remote_name = NULL) {
-  if (!uses_git(path))
-    return(github_dummy)
-
   if (!uses_github(path))
     return(github_dummy)
 
