@@ -111,7 +111,7 @@ I recommend adding the following code to your `.Rprofile`:
 ```R
 .First <- function() {
   options(
-    repos = c(CRAN = "http://cran.rstudio.com/"),
+    repos = c(CRAN = "https://cran.rstudio.com/"),
     browserNLdisabled = TRUE,
     deparse.max.lines = 2)
 }
