@@ -81,6 +81,8 @@ dr_github <- function(path = ".") {
   capture.output(config <- git2r::config(r))
   config_names <- names(modifyList(config$global, config$local))
 
+  if (!uses_github(path))
+    msg[["github"]] <- " * cannot detect that this repo is connected to GitHub"
   if (!("user.name" %in% config_names))
     msg[["name"]] <- "* user.name config option not set"
   if (!("user.email" %in% config_names))
@@ -91,7 +93,21 @@ dr_github <- function(path = ".") {
 
   if (identical(Sys.getenv("GITHUB_PAT"), ""))
     msg[["PAT"]] <- paste("* GITHUB_PAT environment variable not set",
-      "(this is not critical unless you want to install private repos)")
+      "(this is not necessary unless you want to install private repos",
+      "or connect local repos to GitHub)")
+
+  pkg <- as.package(path)
+  desc_path <- file.path(pkg$path, "DESCRIPTION")
+  desc <- read_dcf(desc_path)
+  desc <- compact(desc[c("URL", "BugReports")])
+  if (length(desc) > 0) {
+    desc_dummies <-
+      vapply(desc, function(x) grepl("<USERNAME>/<REPO>", x), logical(1))
+    if (any(desc_dummies)) {
+      msg[["links"]] <- paste("* <USERNAME>/<REPO> placeholder found in URL",
+                              "and/or BugReports field of DESCRIPTION")
+    }
+  }
 
   doctor("github", msg)
 }
