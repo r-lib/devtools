@@ -84,7 +84,8 @@ github_info <- function(path = ".", remote_name = NULL) {
     stop("no github-related remote named ", remote_name, " exists")
 
   remote_name <- c(remote_name, "origin", names(r_remote_urls))
-  x <- r_remote_urls[remote_name][1]
+  x <- r_remote_urls[remote_name]
+  x <- x[!is.na(x)][1]
 
   github_remote_parse(x)
 }
