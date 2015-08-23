@@ -14,8 +14,7 @@ information.}
 Populates the URL and BugReports fields of DESCRIPTION with
 \code{https://github.com/<USERNAME>/<REPO>} AND
 \code{https://github.com/<USERNAME>/<REPO>/issues}, respectively. If package
-does not already use GitHub (and therefore git), the above links will be used
-quite literally.
+does not already use GitHub, the above links will be used quite literally.
 }
 \seealso{
 Other git infrastructure: \code{\link{use_git_hook}};
