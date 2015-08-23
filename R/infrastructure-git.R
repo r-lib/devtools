@@ -91,7 +91,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   git2r::remote_add(r, "origin", create$clone_url)
 
   message("* Adding GitHub links to DESCRIPTION")
-  suppressMessages(use_github_links(pkg$path))
+  use_github_links(pkg$path)
   git2r::add(r, "DESCRIPTION")
   git2r::commit(r, "Add GitHub links to DESCRIPTION")
 

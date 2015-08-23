@@ -23,18 +23,25 @@ create_test_pkg <- function(pkg_name = "testpkg") {
   path
 }
 
-erase_test_pkg <- function(pkg_path) {
-  capture.output( # necessary because github_request() returns parsed content
-    suppressMessages({
-      gh_info <- github_info(pkg_path)
-      unlink(pkg_path, recursive = TRUE)
-      github_delete_repo(gh_info$username, gh_info$repo)
-    })
-  )
+erase_test_pkg <- function(pkg_path) unlink(pkg_path, recursive = TRUE)
+
+delete_from_github <- function(pkg_path) {
+  gh_info <- github_dummy
+  if (exists(pkg_path) && uses_git(pkg_path)) {
+    r <- git2r::repository(pkg_path, discover = TRUE)
+    gh_info <- github_info(r)
+  }
+  if (gh_info$username == "<USERNAME>")
+    gh_info$username <- system("git config --global --get user.name",
+                               intern = TRUE)
+  if (gh_info$repo == "<REPO>")
+    gh_info$repo <- basename(pkg_path)
+  suppressMessages(github_delete_repo(gh_info$username, gh_info$repo))
   return(invisible())
 }
 
 test_pkg <- create_test_pkg("testGithub")
+delete_from_github(test_pkg)
 
 test_that("git non-usage is detected", {
   expect_false(uses_git(test_pkg))
@@ -98,26 +105,31 @@ test_that("github_info() prefers, but does not require, remote named 'origin'", 
   skip_no_auth()
 
   r <- git2r::repository(test_pkg, discover = TRUE)
-
   git2r::remote_add(r, "anomaly", "https://github.com/twitter/AnomalyDetection.git")
-  expect_identical(list(username = "twitter", repo = "AnomalyDetection"),
-                   github_info(test_pkg, remote_name = "anomaly"))
+
+  ## defaults to "origin"
   expect_identical(list(username = git2r::config(r)[["global"]][["user.name"]],
                         repo = "testGithub"),
                    github_info(test_pkg))
-  expect_error(github_info(test_pkg, remote_name = "nope"))
 
+  ## another remote will be used if no "origin"
+  git2r::remote_rename(r, "origin", "zzz")
+  expect_identical(list(username = "twitter", repo = "AnomalyDetection"),
+                   github_info(test_pkg))
+  git2r::remote_rename(r, "zzz", "origin")
+
+  ## another remote can be requested by name
+  expect_identical(list(username = "twitter", repo = "AnomalyDetection"),
+                   github_info(test_pkg, remote_name = "anomaly"))
 })
 
-test_that("github_info() errors on specific request for nonexistent remote", {
+test_that("github_info() errors if nonexistent remote requested by name", {
+
+  skip_no_auth()
 
   r <- git2r::repository(test_pkg, discover = TRUE)
-  if (uses_github(test_pkg)) {
-    # if skip_no_auth() in force, test_pkg is not GitHub'd
-    expect_error(github_info(test_pkg, remote_name = "nope"))
-  }
-
-
+  expect_error(github_info(test_pkg, remote_name = "nope"))
 })
 
+delete_from_github(test_pkg)
 erase_test_pkg(test_pkg)
