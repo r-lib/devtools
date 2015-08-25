@@ -93,8 +93,10 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
 
   message("* Adding GitHub links to DESCRIPTION")
   use_github_links(pkg$path)
-  git2r::add(r, "DESCRIPTION")
-  git2r::commit(r, "Add GitHub links to DESCRIPTION")
+  if (git_uncommitted(pkg$path)) {
+    git2r::add(r, "DESCRIPTION")
+    git2r::commit(r, "Add GitHub links to DESCRIPTION")
+  }
 
   message("* Pushing to GitHub and setting remote tracking branch")
   ## in https case, when GITHUB_PAT is passed as password,
