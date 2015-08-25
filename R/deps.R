@@ -75,6 +75,7 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
                              repos = getOption("repos"),
                              type = getOption("pkgType")) {
   pkg <- as.package(pkg)
+  install_dev_packages(pkg)
 
   dependencies <- tolower(standardise_dep(dependencies))
   dependencies <- intersect(dependencies, names(pkg))
@@ -114,6 +115,37 @@ compare_versions <- function(a, b) {
   }
 
   vapply(seq_along(a), function(i) compare_var(a[[i]], b[[i]]), integer(1))
+}
+
+install_dev_packages <- function(pkg, ...) {
+  pkg <- as.package(pkg)
+
+  if (is.null(pkg$devpackage)) {
+    return()
+  }
+  dev_packages <- trimws(unlist(strsplit(pkg$devpackage, ",[[:space:]]*")))
+
+  lapply(dev_packages, install_type)
+}
+
+install_type <- function(package, ...) {
+  pieces <- strsplit(package, "|", fixed = TRUE)[[1]]
+  type <- if (length(pieces) == 2) {
+    tolower(pieces[1])
+  } else {
+    "github"
+  }
+
+  fun <- switch(type,
+         bitbucket = install_bitbucket,
+         git = install_git,
+         github = install_github,
+         gitorious = install_gitorious,
+         local = install_local,
+         svn = install_svn,
+         stop("There are no remotes of type ", sQuote(type), call. = FALSE))
+
+  fun(pieces[length(pieces)])
 }
 
 #' @export
