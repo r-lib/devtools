@@ -69,7 +69,9 @@ github_pat <- function() {
 }
 
 github_DESCRIPTION <- function(username, repo, ref = "master") {
-  response <- github_GET(file.path("repos", username, repo, "contents", "DESCRIPTION"), httr::write_memory())
+  response <- github_GET(
+    file.path("repos", username, repo, "contents", "DESCRIPTION"),
+    httr::write_memory())
 
   content <- rawToChar(base64enc::base64decode(response$content))
   tmp <- tempfile()
