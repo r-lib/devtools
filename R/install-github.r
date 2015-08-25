@@ -21,6 +21,8 @@
 #' @param host GitHub API host to use. Override with your GitHub enterprise
 #'   hostname, for example, \code{"github.hostname.com/api/v3"}.
 #' @param ... Other arguments passed on to \code{\link{install}}.
+#' @param skip_same skip the install if the sha has not changed since the
+#' previous install.
 #' @details
 #' Attempting to install from a source repository that uses submodules
 #' raises a warning. Because the zipped sources provided by GitHub do not
@@ -53,12 +55,35 @@
 install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
                            auth_token = github_pat(),
-                           host = "api.github.com", ...) {
+                           host = "api.github.com",
+                           skip_same = TRUE, ...) {
 
   remotes <- lapply(repo, github_remote, username = username, ref = ref,
     subdir = subdir, auth_token = auth_token, host = host)
 
+  if (isTRUE(skip_same)) {
+    remotes <- Filter(is_same_sha, remotes)
+  }
+
   install_remotes(remotes, ...)
+}
+
+is_same_sha <- function(x) {
+
+  github_sha <- github_commit(x$username, x$repo, x$ref)$sha
+
+  # download DESCRIPTION from GitHub
+  github_description <- github_DESCRIPTION(x$username, x$repo, github_sha)
+
+  # retrieve DESCRIPTION of installed package
+  # We need to use the package name from the GitHub DESCRIPTION in case the
+  # GitHub repository name differs from that of the package name.
+  local_description <-
+    suppressWarnings(packageDescription(github_description$Package))
+
+  not_installed <- is.na(local_description)
+
+  not_installed || github_sha != local_description$RemoteSha
 }
 
 github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
