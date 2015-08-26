@@ -62,13 +62,13 @@ install_github <- function(repo, username = NULL,
     subdir = subdir, auth_token = auth_token, host = host)
 
   if (isTRUE(skip_same)) {
-    remotes <- Filter(is_same_sha, remotes)
+    remotes <- Filter(different_sha, remotes)
   }
 
   install_remotes(remotes, ...)
 }
 
-is_same_sha <- function(x) {
+different_sha <- function(x) {
 
   github_sha <- github_commit(x$username, x$repo, x$ref)$sha
 
@@ -81,9 +81,20 @@ is_same_sha <- function(x) {
   local_description <-
     suppressWarnings(packageDescription(github_description$Package))
 
+  # Package not installed
   not_installed <- is.na(local_description)
+  if (isTRUE(not_installed)) {
+    return(TRUE)
+  }
 
-  not_installed || github_sha != local_description$RemoteSha
+  remote_sha <- local_description$RemoteSha
+
+  non_git_install <- is.null(remote_sha)
+  if (non_git_install) {
+    return(TRUE)
+  }
+
+  github_sha != remote_sha
 }
 
 github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
