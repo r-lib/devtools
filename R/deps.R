@@ -75,7 +75,7 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
                              repos = getOption("repos"),
                              type = getOption("pkgType")) {
   pkg <- as.package(pkg)
-  install_dev_packages(pkg)
+  install_dev_remotes(pkg)
 
   dependencies <- tolower(standardise_dep(dependencies))
   dependencies <- intersect(dependencies, names(pkg))
@@ -117,35 +117,33 @@ compare_versions <- function(a, b) {
   vapply(seq_along(a), function(i) compare_var(a[[i]], b[[i]]), integer(1))
 }
 
-install_dev_packages <- function(pkg, ...) {
+install_dev_remotes <- function(pkg, ...) {
   pkg <- as.package(pkg)
 
-  if (is.null(pkg$devpackage)) {
+  if (is.null(pkg$remotes)) {
     return()
   }
-  dev_packages <- trimws(unlist(strsplit(pkg$devpackage, ",[[:space:]]*")))
 
-  lapply(dev_packages, install_type)
+  types <- lapply(pkg$remotes, dev_remote_type)
+
+  lapply(types, function(type) type$fun(type$repository, ...))
 }
 
-install_type <- function(package, ...) {
-  pieces <- strsplit(package, "|", fixed = TRUE)[[1]]
-  type <- if (length(pieces) == 2) {
-    tolower(pieces[1])
-  } else {
-    "github"
-  }
+# Parse the remotes field split into pieces and get install_ functions for each
+# remote type
+dev_remote_type <- function(remotes) {
 
-  fun <- switch(type,
-         bitbucket = install_bitbucket,
-         git = install_git,
-         github = install_github,
-         gitorious = install_gitorious,
-         local = install_local,
-         svn = install_svn,
-         stop("There are no remotes of type ", sQuote(type), call. = FALSE))
+  dev_packages <- trimws(unlist(strsplit(remotes, ",[[:space:]]*")))
 
-  fun(pieces[length(pieces)])
+  pieces <- strsplit(dev_packages, "|", fixed = TRUE)
+
+  repositories <- mapply(`[`, pieces, lengths(pieces), SIMPLIFY = FALSE)
+
+  types <- lapply(pieces, function(x) if (length(x) == 1) "github" else tolower(x[[1]]))
+
+  functions <- lapply(paste0("install_", types), match.fun)
+
+  Map(list, repository = repositories, type = types, fun = functions)
 }
 
 #' @export
