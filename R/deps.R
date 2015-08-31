@@ -137,7 +137,7 @@ dev_remote_type <- function(remotes) {
 
   pieces <- strsplit(dev_packages, "|", fixed = TRUE)
 
-  repositories <- mapply(`[`, pieces, lengths(pieces), SIMPLIFY = FALSE)
+  repositories <- Map(`[`, pieces, lengths(pieces))
 
   types <- lapply(pieces, function(x) if (length(x) == 1) "github" else tolower(x[[1]]))
 
