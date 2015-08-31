@@ -4,6 +4,9 @@
   include the Bioconductor repositories if they are not already set (#895,
   @jimhester).
 
+* `install()` can now install dependencies from remote repositories by
+  specifying them as `Remotes` in the `DESCRIPTION` file (#902, @jimhester).
+
 * Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
 
 * Remove explicit `library(testthat)` call in `test()` (#798, @krlmlr).
