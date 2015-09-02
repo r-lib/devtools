@@ -1,6 +1,8 @@
 context("Check")
 
 test_that("return messages", {
+  skip_on_cran()
+
   pkg_name <- "testTest"
   check_dir_name <- sprintf("%s.Rcheck", pkg_name)
 
