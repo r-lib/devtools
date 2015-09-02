@@ -6,6 +6,7 @@
 
 * `install()` can now install dependencies from remote repositories by
   specifying them as `Remotes` in the `DESCRIPTION` file (#902, @jimhester).
+  See `vignette("dependencies")` for more details.
 
 * Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
 
