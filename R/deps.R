@@ -120,11 +120,11 @@ compare_versions <- function(a, b) {
 install_dev_remotes <- function(pkg, ...) {
   pkg <- as.package(pkg)
 
-  if (is.null(pkg$remotes)) {
+  if (is.null(pkg[["remotes"]])) {
     return()
   }
 
-  types <- lapply(pkg$remotes, dev_remote_type)
+  types <- lapply(pkg[["remotes"]], dev_remote_type)
 
   lapply(types, function(type) type$fun(type$repository, ...))
 }
