@@ -102,6 +102,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
 #' Install package dependencies if needed.
 #'
 #' @inheritParams install
+#' @inheritParams package_deps
 #' @param ... additional arguments passed to \code{\link{install.packages}}.
 #' @export
 #' @examples
