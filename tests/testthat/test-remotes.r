@@ -18,6 +18,17 @@ test_that("dev_remote_type works with implicit types", {
   expect_equal(dev_remote_type("hadley/testthat,\n\tklutometis/roxygen"), simple_github)
 })
 
+test_that("dev_remote_type errors", {
+  expect_equal(dev_remote_type(""), NULL)
+
+  expect_error(dev_remote_type("git|testthat|blah"),
+    "Malformed remote specification 'git|testthat|blah'")
+  expect_error(dev_remote_type("hadley|testthat"),
+    "Function 'install_hadley' does not exist")
+  expect_error(dev_remote_type("SVN2|testthat"),
+    "Function 'install_svn2' does not exist")
+})
+
 test_that("dev_remote_type works with explicit types", {
   expect_equal(dev_remote_type("github|hadley/testthat"),
     list(list(repository = "hadley/testthat", type = "github", fun = install_github)))
