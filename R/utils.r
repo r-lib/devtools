@@ -101,3 +101,7 @@ file_ext <- function (x) {
 is_bioconductor <- function(x) {
   !is.null(x$biocviews)
 }
+
+trim_ws <- function(x) {
+  gsub("^[[:space:]]+|[[:space:]]+$", "", x)
+}

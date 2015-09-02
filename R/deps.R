@@ -131,20 +131,46 @@ install_dev_remotes <- function(pkg, ...) {
 
 # Parse the remotes field split into pieces and get install_ functions for each
 # remote type
-dev_remote_type <- function(remotes) {
+dev_remote_type <- function(remotes = "") {
+
+  if (!nchar(remotes)) {
+    return()
+  }
 
   dev_packages <- trimws(unlist(strsplit(remotes, ",[[:space:]]*")))
 
   pieces <- strsplit(dev_packages, "|", fixed = TRUE)
 
-  repositories <- Map(`[`, pieces, lengths(pieces))
+  lengths <- vapply(pieces, length, integer(1))
 
-  types <- lapply(pieces, function(x) if (length(x) == 1) "github" else tolower(x[[1]]))
+  repositories <- Map(`[`, pieces, lengths)
 
-  functions <- lapply(paste0("install_", types), match.fun)
+  parse_type <- function(x) {
+    if (length(x) > 2) {
+      stop("Malformed remote specification '",
+        paste(x, collapse = "|"),
+        "'", call. = FALSE)
+    }
+    if (length(x) == 1) {
+      "github"
+    } else {
+      tolower(x[[1]])
+    }
+  }
+  types <- lapply(pieces, parse_type)
+
+  try_match_fun <- function(x) {
+    tryCatch(match.fun(x),
+      error = function(e) {
+        stop("Function '",
+          x, "' does not exist", call. = FALSE)
+    })
+  }
+  functions <- lapply(paste0("install_", types), try_match_fun)
 
   Map(list, repository = repositories, type = types, fun = functions)
 }
+
 
 #' @export
 print.package_deps <- function(x, show_ok = FALSE, ...) {
