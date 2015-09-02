@@ -1,5 +1,9 @@
 # devtools 1.9.0
 
+* Detect if `install_` commands are called on a Bioconductor package and
+  include the Bioconductor repositories if they are not already set (#895,
+  @jimhester).
+
 * Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
 
 * Remove explicit `library(testthat)` call in `test()` (#798, @krlmlr).
