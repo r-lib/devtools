@@ -36,5 +36,6 @@ Suggests:
     MASS,
     rmarkdown,
     knitr,
-    lintr (>= 0.2.1)
+    lintr (>= 0.2.1),
+    bitops
 License: GPL (>= 2)
