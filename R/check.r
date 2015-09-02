@@ -27,11 +27,12 @@
 #'  \item Debugging flags for the compiler, set by
 #'    \code{\link{compiler_flags}(FALSE)}.
 #'
-#'  \item Special environment variables set to the same values that
-#'    CRAN uses when testing packages: \code{cran_env_vars}. Unfortunately
-#'    exactly what CRAN does when checking a package is not publicly documented,
-#'    but we do our best to simulate as accurately as possible given what we
-#'    know.
+#'  \item If \code{aspell} is found \code{_R_CHECK_CRAN_INCOMING_USE_ASPELL_}
+#'   is set to \code{TRUE}. If no spell checker is installed, a warning is
+#'   issued.)
+#'
+#'  \item env vars set by arguments \code{check_version} and
+#'    \code{force_suggests}
 #'
 #' }
 #'
@@ -44,16 +45,12 @@
 #'   went wrong. If \code{FALSE} the check directory is never removed.
 #' @param cran if \code{TRUE} (the default), check using the same settings as
 #'   CRAN uses.
-#' @param check_version if \code{TRUE}, check that the new version is greater
-#'   than the current version on CRAN, by setting the
-#'   \code{_R_CHECK_CRAN_INCOMING_} environment variable to \code{TRUE}.
-#'   (This also enables spell checking of the package's \code{DESCRIPTION}
-#'   by setting the \code{_R_CHECK_CRAN_INCOMING_USE_ASPELL_} environment
-#'   variable to \code{TRUE}; if no spell checker is installed, a warning is
-#'   issued.)
-#' @param force_suggests if \code{FALSE}, don't force suggested packages, by
-#'   setting the \code{_R_CHECK_FORCE_SUGGESTS_} environment variable to
-#'   \code{FALSE}.
+#' @param check_version Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
+#'   If \code{TRUE}, performns a number of checked related
+#'   to version numbers of packages on CRAN.
+#' @param force_suggests Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
+#'   \code{TRUE} (the default), check will proceed even if all suggested
+#'   packages aren't found.
 #' @param args,build_args An optional character vector of additional command
 #'   line arguments to be passed to \code{R CMD check}/\code{R CMD build}/\code{R CMD INSTALL}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
@@ -73,6 +70,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
     document(pkg)
   }
 
+  show_env_vars(compiler_flags(FALSE))
   old <- set_envvar(compiler_flags(FALSE), "prefix")
   on.exit(set_envvar(old))
 
@@ -80,7 +78,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
   built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args, ...)
   on.exit(unlink(built_path), add = TRUE)
 
-  r_cmd_check_path <- check_r_cmd(built_path, cran, check_version,
+  r_cmd_check_path <- check_r_cmd(pkg, built_path, cran, check_version,
     force_suggests, args, quiet = quiet, check_dir = check_dir)
 
   if (cleanup) {
@@ -96,7 +94,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
 # Run R CMD check and return the path for the check
 # @param built_path The path to the built .tar.gz source package.
 # @param check_dir The directory to unpack the .tar.gz file to
-check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
+check_r_cmd <- function(pkg, built_path = NULL, cran = TRUE, check_version = FALSE,
   force_suggests = TRUE, args = NULL, check_dir = tempdir(), ...) {
 
   pkgname <- gsub("_.*?$", "", basename(built_path))
@@ -107,11 +105,12 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
       "If you are planning to release this package, please run a check with manual and vignettes beforehand.\n")
     opts <- c(opts, "--no-build-vignettes", "--no-manual")
   }
+  if (cran) {
+    opts <- c("--as-cran", opts)
+  }
 
   env_vars <- check_env_vars(cran, check_version, force_suggests)
-  rule("Using env vars")
-  message(paste(format(names(env_vars)), ": ", unname(env_vars), collapse = "\n"))
-  rule()
+  show_env_vars(env_vars)
 
   rule("Checking ", pkg$package)
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
@@ -128,48 +127,9 @@ check_env_vars <- function(cran = FALSE, check_version = FALSE,
   # be TRUE, FALSE, or not set. (And some variables take numeric values.) When
   # not set, R CMD check will use the defaults as described in R Internals.
   c(
-    character(),
-    if (cran) cran_env_vars(),
-    if (check_version) c("_R_CHECK_CRAN_INCOMING_" = "TRUE", aspell_env_var()),
-    if (!force_suggests) c("_R_CHECK_FORCE_SUGGESTS_" = "FALSE")
-  )
-}
-
-
-#' Cran environmental variables.
-#
-#' The environment variables that are used CRAN when checking packages.
-#' These environment variables are from the R Internals document. The only
-#' difference from that document is that here, \code{_R_CHECK_CRAN_INCOMING_}
-#' is not set to \code{TRUE} because it is so slow.
-#'
-#' @keywords internal
-#' @return a named character vector
-#' @export
-cran_env_vars <- function() {
-  c("_R_CHECK_VC_DIRS_"                  = "TRUE",
-    "_R_CHECK_TIMINGS_"                  = "10",
-    "_R_CHECK_INSTALL_DEPENDS_"          = "TRUE",
-    "_R_CHECK_SUGGESTS_ONLY_"            = "TRUE",
-    "_R_CHECK_NO_RECOMMENDED_"           = "TRUE",
-    "_R_CHECK_EXECUTABLES_EXCLUSIONS_"   = "FALSE",
-    "_R_CHECK_DOC_SIZES2_"               = "TRUE",
-    "_R_CHECK_CODE_ASSIGN_TO_GLOBALENV_" = "TRUE",
-    "_R_CHECK_CODE_ATTACH_"              = "TRUE",
-    "_R_CHECK_CODE_DATA_INTO_GLOBALENV_" = "TRUE",
-    "_R_CHECK_CODE_USAGE_VIA_NAMESPACES_"= "TRUE",
-    "_R_CHECK_DOT_FIRSTLIB_"             = "TRUE",
-    "_R_CHECK_DEPRECATED_DEFUNCT_"       = "TRUE",
-    "_R_CHECK_REPLACING_IMPORTS_"        = "TRUE",
-    "_R_CHECK_SCREEN_DEVICE_"            = "stop",
-    "_R_CHECK_TOPLEVEL_FILES_"           = "TRUE",
-    "_R_CHECK_S3_METHODS_NOT_REGISTERED_"= "TRUE",
-    "_R_CHECK_OVERWRITE_REGISTERED_S3_METHODS_" = "TRUE",
-    # The following are used for CRAN incoming checks according to the R
-    # internals doc, but they're not in the list at the bottom of the Tools
-    # section (have to look at the description of the individual env vars).
-    "_R_CHECK_RD_LINE_WIDTHS_"           = "TRUE",
-    "_R_CHECK_LIMIT_CORES_"              = "TRUE"
+    aspell_env_var(),
+    "_R_CHECK_CRAN_INCOMING_" = as.character(check_version),
+    "_R_CHECK_FORCE_SUGGESTS_" = as.character(force_suggests)
   )
 }
 
@@ -180,8 +140,13 @@ aspell_env_var <- function() {
       c("_R_CHECK_CRAN_INCOMING_USE_ASPELL_" = "TRUE")
     },
     error = function(e) {
-      warning("Skipping spell check: ", e$message, call. = FALSE)
-      NULL
+      warning("Skipping spell check: ", e$message, call. = FALSE, immediate. = TRUE)
+      character()
     }
   )
+}
+
+show_env_vars <- function(env_vars) {
+  rule("Setting env vars")
+  message(paste0(format(names(env_vars)), ": ", unname(env_vars), collapse = "\n"))
 }

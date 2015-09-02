@@ -17,6 +17,11 @@
 
 * `build_win()` now uses `curl` instead of `RCurl` for ftp upload.
 
+* `check()` now uses a better strategy when `cran = TRUE`. Instead of 
+  attempting to simulate `--as-cran` behaviour by turning on certain env vars,
+  it now uses `--as-cran` and turns off problematic checks with env vars (#866).
+  The problematic `cran_env_vars()` function has been removed.
+
 * `find_rtools()` now looks for registry keys in both HKCU (user) and 
   HKLM (admin) locations (@Kevin-Jin, #844)
 

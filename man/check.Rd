@@ -22,17 +22,13 @@ went wrong. If \code{FALSE} the check directory is never removed.}
 \item{cran}{if \code{TRUE} (the default), check using the same settings as
 CRAN uses.}
 
-\item{check_version}{if \code{TRUE}, check that the new version is greater
-than the current version on CRAN, by setting the
-\code{_R_CHECK_CRAN_INCOMING_} environment variable to \code{TRUE}.
-(This also enables spell checking of the package's \code{DESCRIPTION}
-by setting the \code{_R_CHECK_CRAN_INCOMING_USE_ASPELL_} environment
-variable to \code{TRUE}; if no spell checker is installed, a warning is
-issued.)}
+\item{check_version}{Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
+If \code{TRUE}, performns a number of checked related
+to version numbers of packages on CRAN.}
 
-\item{force_suggests}{if \code{FALSE}, don't force suggested packages, by
-setting the \code{_R_CHECK_FORCE_SUGGESTS_} environment variable to
-\code{FALSE}.}
+\item{force_suggests}{Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
+\code{TRUE} (the default), check will proceed even if all suggested
+packages aren't found.}
 
 \item{args,build_args}{An optional character vector of additional command
 line arguments to be passed to \code{R CMD check}/\code{R CMD build}/\code{R CMD INSTALL}.}
@@ -73,11 +69,12 @@ with how check works on CRAN. This includes:
  \item Debugging flags for the compiler, set by
    \code{\link{compiler_flags}(FALSE)}.
 
- \item Special environment variables set to the same values that
-   CRAN uses when testing packages: \code{cran_env_vars}. Unfortunately
-   exactly what CRAN does when checking a package is not publicly documented,
-   but we do our best to simulate as accurately as possible given what we
-   know.
+ \item If \code{aspell} is found \code{_R_CHECK_CRAN_INCOMING_USE_ASPELL_}
+  is set to \code{TRUE}. If no spell checker is installed, a warning is
+  issued.)
+
+ \item env vars set by arguments \code{check_version} and
+   \code{force_suggests}
 
 }
 }
