@@ -7,6 +7,10 @@ package_url <- function(package, repos,
   ok <- (available[, "Package"] == package)
   ok <- ok & !is.na(ok)
 
+  if (!any(ok)) {
+    return(list(name = NA_character_, url = NA_character_))
+  }
+
   vers <- package_version(available[ok, "Version"])
   keep <- vers == max(vers)
   keep[duplicated(keep)] <- FALSE

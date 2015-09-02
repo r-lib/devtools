@@ -58,31 +58,37 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   }
   available_src <- available_packages(repos, "source")
 
-  message("Determining available packages")
+  message("Determining available packages") # ----------------------------------
   deps <- package_deps(pkgs, repos = repos, type = type, dependencies = TRUE)
   update(deps, Ncpus = threads)
+
+  message("Downloading source packages for checking") #-------------------------
+  urls <- lapply(pkgs, package_url, repos = repos, available = available_src)
+  ok <- vapply(urls, function(x) !is.na(x$name), logical(1))
+  if (any(!ok)) {
+    message("Couldn't find source for: ", paste(pkgs[!ok], collapse = ", "))
+    urls <- urls[ok]
+    pkgs <- pkgs[ok]
+  }
+
+  local_urls <- file.path(srcpath, vapply(urls, `[[`, "name", FUN.VALUE = character(1)))
+  remote_urls <- vapply(urls, `[[`, "url", FUN.VALUE = character(1))
+
+  needs_download <- !file.exists(local_urls)
+  if (any(needs_download)) {
+    message("Downloading ", sum(needs_download), " packages")
+    Map(download.file, remote_urls[needs_download], local_urls[needs_download], quiet = TRUE)
+  }
 
   rule("Checking packages") # --------------------------------------------------
 
   # Download and check each package, parsing output as we go.
   check_pkg <- function(i) {
-    url <- package_url(pkgs[i], repos, available = available_src)
-    if (length(url$url) == 0) {
-      message("Skipping ", pkgs[i], ": can't find source")
-      return(NULL)
-    }
-    local <- file.path(srcpath, url$name)
-
-    if (!file.exists(local)) {
-      message("Downloading ", pkgs[i])
-      download.file(url$url, local, quiet = TRUE)
-    }
-
     message("Checking ", pkgs[i])
     start_time <- Sys.time()
     try({
       check_r_cmd(
-        local,
+        local_urls[i],
         cran = TRUE,
         check_version = FALSE,
         args = "--no-multiarch --no-manual --no-codoc",
