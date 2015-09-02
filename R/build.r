@@ -15,8 +15,18 @@
 #'   the parent directory of the package.
 #' @param binary Produce a binary (\code{--binary}) or source (
 #'   \code{--no-manual --no-resave-data}) version of the package.
-#' @param vignettes,manual For source packages: if \code{FALSE}, don't build PDF
-#'   vignettes (\code{--no-vignettes}) or manual (\code{--no-manual}).
+#' @param vignettes For source packages: determines if a vignette should be
+#'   built, and what to do with already existing files
+#'   in \code{inst/doc}. If \code{"stash"} (the default), existing files will
+#'   be moved away during build and restored afterwards; if \code{"clean"}
+#'   they will be removed by \code{\link{clean_vignettes}}; if \code{"update"}
+#'   they will be stashed and updated with vignettes from the source archive;
+#'   if \code{"keep"} they will not be changed (not recommended); if
+#'   \code{"ignore"} no vignettes will be built (\code{--no-vignettes}).  For
+#'   compatibility reasons, \code{TRUE} translates to \code{"keep"} and
+#'   \code{FALSE} translates to \code{"ignore"}.
+#' @param manual For source packages: if \code{FALSE}, don't build manual
+#'   (\code{--no-manual}).
 #' @param args An optional character vector of additional command
 #'   line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},
 #'   or \code{R CMD install} if \code{binary = TRUE}.
@@ -25,7 +35,8 @@
 #' @family build functions
 #' @return a string giving the location (including file name) of the built
 #'  package
-build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
+build <- function(pkg = ".", path = NULL, binary = FALSE,
+                  vignettes = c("stash", "clean", "update", "keep", "ignore"),
                   manual = FALSE, args = NULL, quiet = FALSE) {
   pkg <- as.package(pkg)
   check_build_tools(pkg)
