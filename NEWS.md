@@ -16,6 +16,9 @@
 * `find_rtools()` now looks for registry keys in both HKCU (user) and 
   HKLM (admin) locations (@Kevin-Jin, #844)
 
+* `install_deps()` is more careful with `...` - this means additional 
+  arguments to `install_*` are more likely to work (#870).
+
 * `load_all()` no longer fails if a `useDynLib()` entry in the NAMESPACE 
   is incorrect. This should make it easy to recover from an incorrect
   `@useDynLib`, because re-documenting() should now succeed.

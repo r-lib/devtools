@@ -108,7 +108,10 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
 #' \dontrun{install_deps(".")}
 install_deps <- function(pkg = ".", dependencies = NA,
                          threads = getOption("Ncpus", 1),
+                         repos = getOption("repos"),
+                         type = getOption("pkgType"),
                          ...) {
-  pkg <- dev_package_deps(pkg, dependencies = dependencies)
+  pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
+    type = type)
   update(pkg, Ncpus = threads, ...)
 }

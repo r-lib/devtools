@@ -150,8 +150,10 @@ update.package_deps <- function(object, ..., quiet = FALSE) {
   }
 
   behind <- object$package[object$diff < 0L]
-  if (length(behind) > 0L)
-    install_packages(behind, attr(object, "repos"), attr(object, "type"), ...)
+  if (length(behind) > 0L) {
+    install_packages(behind, repos = attr(object, "repos"),
+      type = attr(object, "type"), ...)
+  }
 
 }
 
