@@ -57,6 +57,11 @@ release <- function(pkg = ".", check = TRUE) {
       warning("Git not synched with remote.", immediate. = TRUE, call. = FALSE)
   }
 
+  if (has_dev_remotes(pkg)) {
+    warning("Package ", pkg$package, "has a 'Remotes:' entry.  This should be
+      removed before CRAN submission.", immediate. = TRUE, call. = FALSE)
+  }
+
   if (check) {
     check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE)
     release_checks(pkg)
