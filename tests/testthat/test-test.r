@@ -7,6 +7,8 @@ test_that("Package can be tested with testthat not on search path", {
     on.exit(attach(testthat_env, testthat_pos), add = TRUE)
   }
 
-  test("testTest")
-  test("testTestWithDepends")
+  test("testTest", reporter = "stop")
+  expect_true(TRUE)
+  test("testTestWithDepends", reporter = "stop")
+  expect_true(TRUE)
 })

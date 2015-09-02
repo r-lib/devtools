@@ -1,5 +1,9 @@
 # devtools 1.9.0.9000
 
+* Detect if `install_` commands are called on a Bioconductor package and
+  include the Bioconductor repositories if they are not already set (#895,
+  @jimhester).
+
 * Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
 
 * Remove explicit `library(testthat)` call in `test()` (#798, @krlmlr).
@@ -50,6 +54,8 @@
 * `with_debug()` now uses `with_makevars()` rather than `with_env()`, because R
   reads compilation variables from the Makevars rather than the environment
   (@jimhester, #788).
+
+* Properly reset library path after `with_lib()` (#836, @krlmlr).
 
 # devtools 1.8.0
  
