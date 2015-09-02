@@ -21,16 +21,16 @@ test_that("dev_remote_type works with implicit types", {
 test_that("dev_remote_type errors", {
   expect_equal(dev_remote_type(""), NULL)
 
-  expect_error(dev_remote_type("git|testthat|blah"),
-    "Malformed remote specification 'git|testthat|blah'")
-  expect_error(dev_remote_type("hadley|testthat"),
-    "Function 'install_hadley' does not exist")
-  expect_error(dev_remote_type("SVN2|testthat"),
-    "Function 'install_svn2' does not exist")
+  expect_error(dev_remote_type("git::testthat::blah"),
+    "Malformed remote specification 'git::testthat::blah'")
+  expect_error(dev_remote_type("hadley::testthat"),
+    "Malformed remote specification 'hadley::testthat'")
+  expect_error(dev_remote_type("SVN2::testthat"),
+    "Malformed remote specification 'SVN2::testthat'")
 })
 
 test_that("dev_remote_type works with explicit types", {
-  expect_equal(dev_remote_type("github|hadley/testthat"),
+  expect_equal(dev_remote_type("github::hadley/testthat"),
     list(list(repository = "hadley/testthat", type = "github", fun = install_github)))
 
   simple_github <-
@@ -39,11 +39,11 @@ test_that("dev_remote_type works with explicit types", {
       list(repository = "klutometis/roxygen", type = "github", fun = install_github)
     )
 
-  expect_equal(dev_remote_type("github|hadley/testthat,klutometis/roxygen"), simple_github)
-  expect_equal(dev_remote_type("hadley/testthat,github|klutometis/roxygen"), simple_github)
-  expect_equal(dev_remote_type("github|hadley/testthat,github|klutometis/roxygen"), simple_github)
+  expect_equal(dev_remote_type("github::hadley/testthat,klutometis/roxygen"), simple_github)
+  expect_equal(dev_remote_type("hadley/testthat,github::klutometis/roxygen"), simple_github)
+  expect_equal(dev_remote_type("github::hadley/testthat,github::klutometis/roxygen"), simple_github)
 
-  expect_equal(dev_remote_type("svn|https://github.com/hadley/testthat,\n  git|https://github.com/klutometis/roxygen.git"),
+  expect_equal(dev_remote_type("svn::https://github.com/hadley/testthat,\n  git::https://github.com/klutometis/roxygen.git"),
     list(
       list(repository = "https://github.com/hadley/testthat", type = "svn", fun = install_svn),
       list(repository = "https://github.com/klutometis/roxygen.git", type = "git", fun = install_git)

@@ -120,7 +120,7 @@ compare_versions <- function(a, b) {
 install_dev_remotes <- function(pkg, ...) {
   pkg <- as.package(pkg)
 
-  if (is.null(pkg[["remotes"]])) {
+  if (!has_dev_remotes(pkg)) {
     return()
   }
 
@@ -139,36 +139,32 @@ dev_remote_type <- function(remotes = "") {
 
   dev_packages <- trim_ws(unlist(strsplit(remotes, ",[[:space:]]*")))
 
-  pieces <- strsplit(dev_packages, "|", fixed = TRUE)
+  parse_one <- function(x) {
+    pieces <- strsplit(x, "::", fixed = TRUE)[[1]]
 
-  lengths <- vapply(pieces, length, integer(1))
-
-  repositories <- Map(`[`, pieces, lengths)
-
-  parse_type <- function(x) {
-    if (length(x) > 2) {
-      stop("Malformed remote specification '",
-        paste(x, collapse = "|"),
-        "'", call. = FALSE)
-    }
-    if (length(x) == 1) {
-      "github"
+    if (length(pieces) == 1) {
+      type <- "github"
+      repo <- pieces
+    } else if (length(pieces) == 2) {
+      type <- pieces[1]
+      repo <- pieces[2]
     } else {
-      tolower(x[[1]])
+      stop("Malformed remote specification '", x, "'", call. = FALSE)
     }
-  }
-  types <- lapply(pieces, parse_type)
-
-  try_match_fun <- function(x) {
-    tryCatch(match.fun(x),
+    tryCatch(fun <- match.fun(paste0("install_", tolower(type))),
       error = function(e) {
-        stop("Function '",
-          x, "' does not exist", call. = FALSE)
-    })
+        stop("Malformed remote specification '", x, "'", call. = FALSE)
+      })
+    list(repository = repo, type = type, fun = fun)
   }
-  functions <- lapply(paste0("install_", types), try_match_fun)
 
-  Map(list, repository = repositories, type = types, fun = functions)
+  lapply(dev_packages, parse_one)
+}
+
+has_dev_remotes <- function(pkg) {
+  pkg <- as.package(pkg)
+
+  !is.null(pkg[["remotes"]])
 }
 
 

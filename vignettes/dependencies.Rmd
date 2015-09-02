@@ -23,7 +23,7 @@ cause devtools to download and install them prior to installing your package.
 The remote dependencies specified in `Remotes` should be described in the following form.
 
 ```
-Remotes: [type|]<Repository>, [type2|]<Repository2>
+Remotes: [type::]<Repository>, [type2::]<Repository2>
 ```
 Where the `type` is an optional parameter.  If the type is missing the default is
 to install from GitHub. Additional remote dependencies should be separated by
@@ -48,41 +48,41 @@ Remotes: hadley/httr@v0.4,
 ```
 A type of 'github' can be specified, but is not required
 ```
-Remotes: github|hadley/ggplot2
+Remotes: github::hadley/ggplot2
 ```
 
 - Git
 Specify a git repository using `install_git()`.
 ```
-Remotes: git|https://github.com/hadley/ggplot2.git
+Remotes: git::https://github.com/hadley/ggplot2.git
 ```
 
 - Bitbucket
 Specify a Bitbucket repository using `install_bitbucket()`.
 ```
-Remotes: bitbucket|sulab/mygene.r@default, dannavarro/lsr-package
+Remotes: bitbucket::sulab/mygene.r@default, dannavarro/lsr-package
 ```
 
 - SVN
 Specify a Subversion repository using `install_svn()`.
 ```
-Remotes: svn|https://github.com/hadley/stringr
+Remotes: svn::https://github.com/hadley/stringr
 ```
 
 - URL
 Specify a URL repository using `install_url()`.
 ```
-Remotes: url|https://github.com/hadley/stringr/archive/master.zip
+Remotes: url::https://github.com/hadley/stringr/archive/master.zip
 ```
 
 - Local
 Specify a local repository using `install_local()`.
 ```
-Remotes: local|/pkgs/testthat
+Remotes: local::/pkgs/testthat
 ```
 
 - Gitorious
 Specify a Gitorious repository using `install_gitorious()`.
 ```
-Remotes: gitorious|r-mpc-package/r-mpc-package
+Remotes: gitorious::r-mpc-package/r-mpc-package
 ```
