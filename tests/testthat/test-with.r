@@ -47,7 +47,10 @@ test_that("with_lib works and resets library", {
   new_lib <- "."
   with_lib(
     new_lib,
-    expect_true(normalizePath(new_lib) %in% .libPaths())
+    {
+      expect_equal(normalizePath(new_lib), normalizePath(.libPaths()[[1L]]))
+      expect_equal(length(.libPaths()), length(lib) + 1L)
+    }
   )
   expect_equal(lib, .libPaths())
 })
@@ -57,7 +60,9 @@ test_that("with_libpaths works and resets library", {
   new_lib <- "."
   with_libpaths(
     new_lib,
-    expect_true(normalizePath(new_lib) %in% .libPaths())
+    {
+      expect_equal(normalizePath(new_lib), normalizePath(.libPaths()[[1L]]))
+    }
   )
   expect_equal(lib, .libPaths())
 })
