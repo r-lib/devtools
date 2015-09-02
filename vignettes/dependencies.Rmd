@@ -1,13 +1,15 @@
 ---
-title: "Devtools Remote Dependencies"
+title: "Devtools dependencies"
 author: "Jim Hester"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Devtools dependency Resolution}
+  %\VignetteIndexEntry{Devtools dependencies}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+# Remote versions #
 
 Devtools version 1.9 supports package dependency installation for packages not
 yet in a standard package repository such as [CRAN](http://cran.r-project.org)
@@ -32,7 +34,7 @@ Also' section in `?install` for a complete list.
 
 Here are some examples for each of the backends.
 
-### GitHub ###
+- GitHub
 ```
 Remotes: hadley/testthat
 ```
@@ -49,37 +51,37 @@ A type of 'github' can be specified, but is not required
 Remotes: github|hadley/ggplot2
 ```
 
-### Git ###
+- Git
 Specify a git repository using `install_git()`.
 ```
 Remotes: git|https://github.com/hadley/ggplot2.git
 ```
 
-### Bitbucket ###
+- Bitbucket
 Specify a Bitbucket repository using `install_bitbucket()`.
 ```
 Remotes: bitbucket|sulab/mygene.r@default, dannavarro/lsr-package
 ```
 
-### SVN ###
+- SVN
 Specify a Subversion repository using `install_svn()`.
 ```
 Remotes: svn|https://github.com/hadley/stringr
 ```
 
-### URL ###
+- URL
 Specify a URL repository using `install_url()`.
 ```
 Remotes: url|https://github.com/hadley/stringr/archive/master.zip
 ```
 
-### Local ###
+- Local
 Specify a local repository using `install_local()`.
 ```
 Remotes: local|/pkgs/testthat
 ```
 
-### Gitorious ###
+- Gitorious
 Specify a Gitorious repository using `install_gitorious()`.
 ```
 Remotes: gitorious|r-mpc-package/r-mpc-package
