@@ -36,7 +36,7 @@ remove_s4_class <- function(classname, pkg) {
   nsenv <- ns_env(pkg)
 
   # Make a copy of the class
-  class <- getClassDef(classname, package = pkg$package, inherits = FALSE)
+  class <- methods::getClassDef(classname, package = pkg$package, inherits = FALSE)
 
   # Find all the references to classes that (this one contains/extends AND
   # have backreferences to this class) so that R doesn't try to modify them.
@@ -44,10 +44,10 @@ remove_s4_class <- function(classname, pkg) {
   class@contains <- class@contains[keep_idx]
 
   # Assign the modified class back into the package
-  assignClassDef(classname, class, where = nsenv)
+  methods::assignClassDef(classname, class, where = nsenv)
 
   # Remove the class.
-  removeClass(classname, where = nsenv)
+  methods::removeClass(classname, where = nsenv)
 }
 
 
@@ -59,12 +59,12 @@ contains_backrefs <- function(classname, pkgname, contains) {
   # If class_a in pkg_a has class_b in pkg_b as a subclass, return TRUE,
   # otherwise FALSE.
   has_subclass_ref <- function(class_a, pkg_a, class_b, pkg_b) {
-    x <- getClassDef(class_a, package = pkg_a)
+    x <- methods::getClassDef(class_a, package = pkg_a)
     if (is.null(x)) return(FALSE)
 
     subclass_ref <- x@subclasses[[class_b]]
 
-    if(!is.null(subclass_ref) && subclass_ref@package == pkg_b) {
+    if (!is.null(subclass_ref) && subclass_ref@package == pkg_b) {
       return(TRUE)
     }
 

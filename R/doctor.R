@@ -78,7 +78,7 @@ dr_github <- function(path = ".") {
   msg <- character()
   r <- git2r::repository(path, discover = TRUE)
 
-  capture.output(config <- git2r::config(r))
+  config <- git2r::config(r)
   config_names <- names(modifyList(config$global, config$local))
 
   if (!("user.name" %in% config_names))

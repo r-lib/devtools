@@ -1,3 +1,8 @@
+#' @importFrom utils available.packages contrib.url install.packages
+#'   installed.packages menu modifyList packageDescription
+#'   packageVersion remove.packages
+NULL
+
 #' Package development tools for R.
 #'
 #' @section Package options:

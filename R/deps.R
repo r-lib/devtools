@@ -145,6 +145,7 @@ print.package_deps <- function(x, show_ok = FALSE, ...) {
 
 #' @export
 #' @rdname package_deps
+#' @importFrom stats update
 update.package_deps <- function(object, ..., quiet = FALSE) {
   ahead <- object$package[object$diff == 2L]
   if (length(ahead) > 0 && !quiet) {

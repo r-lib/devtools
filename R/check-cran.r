@@ -77,7 +77,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   needs_download <- !file.exists(local_urls)
   if (any(needs_download)) {
     message("Downloading ", sum(needs_download), " packages")
-    Map(download.file, remote_urls[needs_download], local_urls[needs_download], quiet = TRUE)
+    Map(utils::download.file, remote_urls[needs_download],
+      local_urls[needs_download], quiet = TRUE)
   }
 
   rule("Checking packages") # --------------------------------------------------

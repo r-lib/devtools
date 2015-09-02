@@ -139,7 +139,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
 
 cran_packages <- memoise::memoise(function() {
   local <- file.path(tempdir(), "packages.rds")
-  download.file("http://cran.R-project.org/web/packages/packages.rds", local,
+  utils::download.file("http://cran.R-project.org/web/packages/packages.rds", local,
     mode = "wb", quiet = TRUE)
   on.exit(unlink(local))
   cp <- readRDS(local)

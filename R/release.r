@@ -178,14 +178,14 @@ yesno <- function(...) {
 email <- function(address, subject, body) {
   url <- paste(
     "mailto:",
-    URLencode(address),
-    "?subject=", URLencode(subject),
-    "&body=", URLencode(body),
+    utils::URLencode(address),
+    "?subject=", utils::URLencode(subject),
+    "&body=", utils::URLencode(body),
     sep = ""
   )
 
   tryCatch({
-    browseURL(url, browser = email_browser())},
+    utils::browseURL(url, browser = email_browser())},
     error = function(e) {
       message("Sending failed with error: ", e$message)
       cat("To: ", address, "\n", sep = "")
@@ -218,7 +218,7 @@ maintainer <- function(pkg = ".") {
   if (!is.null(authors)) {
     people <- eval(parse(text = authors))
     if (is.character(people)) {
-      maintainer <- as.person(people)
+      maintainer <- utils::as.person(people)
     } else {
       maintainer <- Find(function(x) "cre" %in% x$role, people)
     }
@@ -227,7 +227,7 @@ maintainer <- function(pkg = ".") {
     if (is.null(maintainer)) {
       stop("No maintainer defined in package.", call. = FALSE)
     }
-    maintainer <- as.person(maintainer)
+    maintainer <- utils::as.person(maintainer)
   }
 
   list(
