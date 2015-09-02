@@ -17,9 +17,7 @@
 #'   just check this package, not its dependencies).
 #' @param quiet If \code{TRUE}, suppress output
 #' @param repos A character vector giving repositories to use.
-#' @param type Type of package to \code{update}.  If "both", will switch
-#'   automatically to "binary" to avoid interactive prompts during package
-#'   installation.
+#' @param type Type of package to \code{update}.
 #' @param object,... Arguments ot
 #' @return A data frame with additional.
 #' @export
@@ -31,10 +29,6 @@
 #' }
 package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
                          type = getOption("pkgType")) {
-  if (identical(type, "both")) {
-    type <- "binary"
-  }
-
   if (length(repos) == 0)
     repos <- character()
 
@@ -170,15 +164,17 @@ update.package_deps <- function(object, ..., quiet = FALSE) {
 install_packages <- function(pkgs, repos = getOption("repos"),
                              type = getOption("pkgType"), ...,
                              dependencies = FALSE, quiet = NULL) {
-  if (identical(type, "both"))
-    type <- "binary"
   if (is.null(quiet))
     quiet <- !identical(type, "source")
 
   message("Installing ", length(pkgs), " packages: ",
     paste(pkgs, collapse = ", "))
-  utils::install.packages(pkgs, repos = repos, type = type, ...,
-    dependencies = dependencies, quiet = quiet)
+
+  with_options(
+    list(install.packages.compile.from.source = "always"),
+    utils::install.packages(pkgs, repos = repos, type = type, ...,
+      dependencies = dependencies, quiet = quiet)
+  )
 }
 
 find_deps <- function(pkgs, available = available.packages(), top_dep = TRUE, rec_dep = NA) {

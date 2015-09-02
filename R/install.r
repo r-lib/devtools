@@ -112,7 +112,17 @@ install_deps <- function(pkg = ".", dependencies = NA,
                          repos = getOption("repos"),
                          type = getOption("pkgType"),
                          ...) {
+  pkg <- as.package(pkg)
+  repos <- c(repos, parse_repos(pkg$additional_repositories))
+
   pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
     type = type)
   update(pkg, Ncpus = threads, ...)
+}
+
+parse_repos <- function(x) {
+  if (is.null(x)) return(character())
+
+  repos <- strsplit(x, ",")[[1]]
+  gsub("^\\s+|\\s+$", "", repos)
 }
