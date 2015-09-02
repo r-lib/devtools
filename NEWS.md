@@ -32,7 +32,8 @@
 
 * `revdep_check()` now installed _suggested_ packages by default (#808), and 
   sets `NOT_CRAN` env var to `false` (#809). This makes testing more similar to
-  CRAN so that more packages should pass cleanly.
+  CRAN so that more packages should pass cleanly. It also sets `RGL_USE_NULL`
+  to `true` to stop rgl windows from popping up during testing (#897).
   
 * New `uninstall()` removes installed package (#820, @krlmlr).
 

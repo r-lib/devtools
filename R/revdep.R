@@ -121,7 +121,10 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
   with_libpaths(libpath, install(pkg, reload = FALSE, quiet = TRUE))
   on.exit(remove.packages(pkg$package, libpath), add = TRUE)
 
-  old <- set_envvar(c(NOT_CRAN = "false"))
+  old <- set_envvar(c(
+    NOT_CRAN = "false",
+    RGL_USE_NULL = "true"
+  ))
   on.exit(set_envvar(old), add = TRUE)
 
   message("Finding reverse dependencies")
