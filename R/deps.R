@@ -137,7 +137,7 @@ dev_remote_type <- function(remotes = "") {
     return()
   }
 
-  dev_packages <- trimws(unlist(strsplit(remotes, ",[[:space:]]*")))
+  dev_packages <- trim_ws(unlist(strsplit(remotes, ",[[:space:]]*")))
 
   pieces <- strsplit(dev_packages, "|", fixed = TRUE)
 
