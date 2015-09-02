@@ -76,6 +76,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
   old <- set_envvar(compiler_flags(FALSE), "prefix")
   on.exit(set_envvar(old))
 
+  rule("Building ", pkg$package)
   built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args, ...)
   on.exit(unlink(built_path), add = TRUE)
 
@@ -107,23 +108,31 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
     opts <- c(opts, "--no-build-vignettes", "--no-manual")
   }
 
+  env_vars <- check_env_vars(cran, check_version, force_suggests)
+  rule("Using env vars")
+  message(paste(format(names(env_vars)), ": ", unname(env_vars), collapse = "\n"))
+  rule()
+
+  rule("Checking ", pkg$package)
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
-
-  env_vars <- NULL
-  # Setting these environment variables requires some care because they can be
-  # be TRUE, FALSE, or not set. (And some variables take numeric values.) When
-  # not set, R CMD check will use the defaults as described in R Internals.
-  env_vars <- c(
-    if (cran) cran_env_vars(),
-    if (check_version) c("_R_CHECK_CRAN_INCOMING_" = "TRUE", aspell_env_var()),
-    if (!force_suggests) c("_R_CHECK_FORCE_SUGGESTS_" = "FALSE")
-  )
-
   R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), check_dir,
     env_vars, ...)
 
   # Return the path to the check output
   file.path(normalizePath(check_dir), paste(pkgname, ".Rcheck", sep = ""))
+}
+
+check_env_vars <- function(cran = FALSE, check_version = FALSE,
+                           force_suggests = TRUE) {
+  # Setting these environment variables requires some care because they can be
+  # be TRUE, FALSE, or not set. (And some variables take numeric values.) When
+  # not set, R CMD check will use the defaults as described in R Internals.
+  c(
+    character(),
+    if (cran) cran_env_vars(),
+    if (check_version) c("_R_CHECK_CRAN_INCOMING_" = "TRUE", aspell_env_var()),
+    if (!force_suggests) c("_R_CHECK_FORCE_SUGGESTS_" = "FALSE")
+  )
 }
 
 
