@@ -39,7 +39,7 @@
 * `release()` works for packages not located at root of git repository 
   (#845, #846, @mbjones).
 
-* `revdep_check()` now installed _suggested_ packages by default (#808), and 
+* `revdep_check()` now installs _suggested_ packages by default (#808), and 
   sets `NOT_CRAN` env var to `false` (#809). This makes testing more similar to
   CRAN so that more packages should pass cleanly. It also sets `RGL_USE_NULL`
   to `true` to stop rgl windows from popping up during testing (#897). It
