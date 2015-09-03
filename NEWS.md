@@ -55,6 +55,8 @@
 
 * `use_data()` also works with data from the parent frame (#829, @krlmlr).
 
+* `use_git_hook()` now creates `.git/hooks` if needed (#888)
+
 * `use_travis()`: Default travis script leaves notifications on default 
   settings.
 

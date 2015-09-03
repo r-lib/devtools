@@ -78,9 +78,14 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".") {
 use_git_hook <- function(hook, script, pkg = ".") {
   pkg <- as.package(pkg)
 
-  hook_dir <- file.path(pkg$path, ".git", "hooks")
-  if (!file.exists(hook_dir)) {
+  git_dir <- file.path(pkg$path, ".git")
+  if (!file.exists(git_dir)) {
     stop("This project doesn't use git", call. = FALSE)
+  }
+
+  hook_dir <- file.path(git_dir, "hooks")
+  if (!file.exists(hook_dir)) {
+    dir.create(hook_dir)
   }
 
   hook_path <- file.path(hook_dir, hook)
