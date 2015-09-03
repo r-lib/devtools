@@ -49,7 +49,7 @@
 #'   If \code{TRUE}, performns a number of checked related
 #'   to version numbers of packages on CRAN.
 #' @param force_suggests Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
-#'   \code{TRUE} (the default), check will proceed even if all suggested
+#'   \code{FALSE} (the default), check will proceed even if all suggested
 #'   packages aren't found.
 #' @param args,build_args An optional character vector of additional command
 #'   line arguments to be passed to \code{R CMD check}/\code{R CMD build}/\code{R CMD INSTALL}.
@@ -60,7 +60,7 @@
 #'   CRAN.
 #' @export
 check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
-                  check_version = FALSE, force_suggests = TRUE, args = NULL,
+                  check_version = FALSE, force_suggests = FALSE, args = NULL,
                   build_args = NULL, quiet = FALSE, check_dir = tempdir(),
                   ...) {
 
@@ -78,7 +78,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
   built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args, ...)
   on.exit(unlink(built_path), add = TRUE)
 
-  r_cmd_check_path <- check_r_cmd(pkg, built_path, cran, check_version,
+  r_cmd_check_path <- check_r_cmd(pkg$package, built_path, cran, check_version,
     force_suggests, args, quiet = quiet, check_dir = check_dir)
 
   if (cleanup) {
@@ -94,8 +94,9 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
 # Run R CMD check and return the path for the check
 # @param built_path The path to the built .tar.gz source package.
 # @param check_dir The directory to unpack the .tar.gz file to
-check_r_cmd <- function(pkg, built_path = NULL, cran = TRUE, check_version = FALSE,
-  force_suggests = TRUE, args = NULL, check_dir = tempdir(), ...) {
+check_r_cmd <- function(name, built_path = NULL, cran = TRUE,
+                        check_version = FALSE, force_suggests = FALSE,
+                        args = NULL, check_dir = tempdir(), quiet = FALSE, ...) {
 
   pkgname <- gsub("_.*?$", "", basename(built_path))
 
@@ -110,12 +111,14 @@ check_r_cmd <- function(pkg, built_path = NULL, cran = TRUE, check_version = FAL
   }
 
   env_vars <- check_env_vars(cran, check_version, force_suggests)
-  show_env_vars(env_vars)
+  if (!quiet)
+    show_env_vars(env_vars)
 
-  rule("Checking ", pkg$package)
+  if (!quiet)
+    rule("Checking ", name)
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
   R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), check_dir,
-    env_vars, ...)
+    env_vars, quiet = quiet, ...)
 
   # Return the path to the check output
   file.path(normalizePath(check_dir), paste(pkgname, ".Rcheck", sep = ""))
@@ -123,9 +126,6 @@ check_r_cmd <- function(pkg, built_path = NULL, cran = TRUE, check_version = FAL
 
 check_env_vars <- function(cran = FALSE, check_version = FALSE,
                            force_suggests = TRUE) {
-  # Setting these environment variables requires some care because they can be
-  # be TRUE, FALSE, or not set. (And some variables take numeric values.) When
-  # not set, R CMD check will use the defaults as described in R Internals.
   c(
     aspell_env_var(),
     "_R_CHECK_CRAN_INCOMING_" = as.character(check_version),
@@ -134,16 +134,10 @@ check_env_vars <- function(cran = FALSE, check_version = FALSE,
 }
 
 aspell_env_var <- function() {
-  tryCatch(
-    {
-      utils::aspell(NULL)
-      c("_R_CHECK_CRAN_INCOMING_USE_ASPELL_" = "TRUE")
-    },
-    error = function(e) {
-      warning("Skipping spell check: ", e$message, call. = FALSE, immediate. = TRUE)
-      character()
-    }
-  )
+  tryCatch({
+    utils::aspell(NULL)
+    c("_R_CHECK_CRAN_INCOMING_USE_ASPELL_" = "TRUE")
+  }, error = function(e) character())
 }
 
 show_env_vars <- function(env_vars) {

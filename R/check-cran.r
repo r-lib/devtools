@@ -82,21 +82,20 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   }
 
   rule("Checking packages") # --------------------------------------------------
-
-  # Download and check each package, parsing output as we go.
   check_pkg <- function(i) {
     message("Checking ", pkgs[i])
+
     start_time <- Sys.time()
-    try({
-      check_r_cmd(
-        local_urls[i],
-        cran = TRUE,
-        check_version = FALSE,
+    check_out <- tryCatch({
+      check_r_cmd(pkgs[i], local_urls[i],
         args = "--no-multiarch --no-manual --no-codoc",
         check_dir = check_dir,
         quiet = TRUE
       )
-    }, silent = TRUE)
+    }, error = function(e) {
+      message("Check failed: ", e$message)
+      NULL
+    })
     end_time <- Sys.time()
 
     elapsed_time <- as.numeric(end_time - start_time, units = "secs")

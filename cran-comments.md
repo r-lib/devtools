@@ -27,8 +27,9 @@ There were 2 NOTEs:
 (I also get an error on winbuilder R-release, but that looks like a problem with the stringi installation on that machine.)
 
 ## Downstream dependencies
-I have also run R CMD check on all 34 downstream dependencies of devtools 
-(https://github.com/hadley/devtools/blob/master/revdep/summary.md):
+
+* I ran R CMD check on all 34 downstream dependencies of devtools.
+  Summary at: https://github.com/hadley/devtools/blob/master/revdep/summary.md
 
 * There were 2 failures: 
   

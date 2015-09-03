@@ -114,7 +114,12 @@ check_description <- function(path) {
 
 check_time <- function(path) {
   checktimes <- file.path(path, "check-time.txt")
-  scan(checktimes, list(1L, "", 1), quiet = TRUE)[[3]]
+  if (file.exists(checktimes)) {
+    scan(checktimes, list(1L, "", 1), quiet = TRUE)[[3]]
+  } else {
+    c(NA, NA, NA)
+  }
+
 }
 
 check_logs <- function(path) {

@@ -6,35 +6,36 @@
 |:--------|:----------------------------|
 |version  |R version 3.2.1 (2015-06-18) |
 |system   |x86_64, darwin13.4.0         |
-|ui       |RStudio (0.99.601)           |
+|ui       |RStudio (0.99.673)           |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
-|tz       |Europe/Zurich                |
-|date     |2015-06-25                   |
+|tz       |America/Chicago              |
+|date     |2015-09-03                   |
 
 ## Packages
 
 |package    |*  |version |date       |source         |
 |:----------|:--|:-------|:----------|:--------------|
-|curl       |   |0.9     |2015-06-19 |CRAN (R 3.2.0) |
+|bitops     |   |1.0-6   |2013-08-17 |CRAN (R 3.2.0) |
+|curl       |   |0.9.3   |2015-08-25 |CRAN (R 3.2.0) |
 |digest     |   |0.6.8   |2014-12-31 |CRAN (R 3.2.0) |
-|evaluate   |   |0.7     |2015-04-21 |CRAN (R 3.2.0) |
-|git2r      |   |0.10.1  |2015-05-07 |CRAN (R 3.2.0) |
-|httr       |   |0.6.1   |2015-01-01 |CRAN (R 3.2.0) |
+|evaluate   |   |0.7.2   |2015-08-13 |CRAN (R 3.2.0) |
+|git2r      |   |0.11.0  |2015-08-12 |CRAN (R 3.2.0) |
+|httr       |   |1.0.0   |2015-06-25 |CRAN (R 3.2.0) |
 |jsonlite   |   |0.9.16  |2015-04-11 |CRAN (R 3.2.0) |
 |knitr      |   |1.10.5  |2015-05-06 |CRAN (R 3.2.0) |
 |lintr      |   |0.2.0   |2014-12-01 |CRAN (R 3.2.0) |
 |memoise    |   |0.2.1   |2014-04-22 |CRAN (R 3.2.0) |
-|Rcpp       |   |0.11.6  |2015-05-01 |CRAN (R 3.2.0) |
+|Rcpp       |   |0.12.0  |2015-07-25 |CRAN (R 3.2.0) |
 |rmarkdown  |   |0.7     |2015-06-13 |CRAN (R 3.2.0) |
 |roxygen2   |   |4.1.1   |2015-04-15 |CRAN (R 3.2.0) |
 |rstudioapi |   |0.3.1   |2015-04-07 |CRAN (R 3.2.0) |
-|rversions  |   |1.0.1   |2015-06-06 |CRAN (R 3.2.0) |
+|rversions  |   |1.0.2   |2015-07-13 |CRAN (R 3.2.0) |
 |testthat   |*  |0.10.0  |2015-05-22 |CRAN (R 3.2.0) |
 |whisker    |   |0.3-2   |2013-04-28 |CRAN (R 3.2.0) |
 
 # Check results
-32 checked out of 34 dependencies 
+42 checked out of 44 dependencies 
 
 ## aRxiv (0.5.10)
 Maintainer: Karl Broman <kbroman@biostat.wisc.edu>  
@@ -42,17 +43,43 @@ Bug reports: https://github.com/ropensci/aRxiv/issues
 
 __OK__
 
-## assertive (0.2-6)
+## assertive.base (0.0-1)
 Maintainer: Richard Cotton <richierocks@gmail.com>
 
 __OK__
+
+## assertive (0.3-0)
+Maintainer: Richard Cotton <richierocks@gmail.com>
+
+__OK__
+
+## biomartr (0.0.2)
+Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>  
+Bug reports: https://github.com/HajkD/biomartr/issues
+
+```
+checking package dependencies ... ERROR
+Packages required but not available: ‘biomaRt’ ‘Biostrings’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+```
+```
+DONE
+Status: 1 ERROR
+```
 
 ## bisectr (0.1.0)
 Maintainer: Winston Chang <winston@stdout.org>
 
 __OK__
 
-## broman (0.55-2)
+## BrailleR (0.22.0)
+Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>
+
+__OK__
+
+## broman (0.59-5)
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 
 ```
@@ -67,8 +94,9 @@ DONE
 Status: 1 NOTE
 ```
 
-## covr (1.0.0)
-Maintainer: Jim Hester <james.f.hester@gmail.com>
+## covr (1.2.0)
+Maintainer: Jim Hester <james.f.hester@gmail.com>  
+Bug reports: https://github.com/jimhester/covr/issues
 
 ```
 checking dependencies in R code ... NOTE
@@ -80,6 +108,11 @@ There are ::: calls to the package's namespace in its code. A package
 DONE
 Status: 1 NOTE
 ```
+
+## creditr (0.6.1)
+Maintainer: Yuanchu Dang <yuanchu.dang@gmail.com>
+
+__OK__
 
 ## DataCombine (0.2.9)
 Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>  
@@ -125,25 +158,43 @@ Bug reports: https://github.com/christophergandrud/dpmr/issues
 
 __OK__
 
-## gender (0.4.3)
-Maintainer: Lincoln Mullen <lincoln@lincolnmullen.com>  
-Bug reports: https://github.com/ropensci/gender/issues
-
-__OK__
-
-## h2o (3.0.0.22)
-Maintainer: Tom Kraljevic <tomk@0xdata.com>
+## FedData (2.0.0)
+Maintainer: R. Kyle Bocinsky <bocinsky@gmail.com>
 
 ```
-checking installed package size ... NOTE
-  installed size is 45.2Mb
-  sub-directories of 1Mb or more:
-    java  44.3Mb
+checking package dependencies ... NOTE
+Packages suggested but not available for checking: ‘SSOAP’ ‘XMLSchema’
 ```
 ```
 DONE
 Status: 1 NOTE
 ```
+
+## graticule (0.1.0)
+Maintainer: Michael D. Sumner <mdsumner@gmail.com>  
+Bug reports: https://github.com/mdsumner/graticule/issues
+
+__OK__
+
+## h2o (3.0.0.30)
+Maintainer: Tom Kraljevic <tomk@0xdata.com>
+
+```
+checking installed package size ... NOTE
+  installed size is 45.9Mb
+  sub-directories of 1Mb or more:
+    java  45.0Mb
+```
+```
+DONE
+Status: 1 NOTE
+```
+
+## IalsaSynthesis (0.1.6)
+Maintainer: Will Beasley <wibeasley@hotmail.com>  
+Bug reports: https://github.com/IALSA/IalsaSynthesis/issues
+
+__OK__
 
 ## icd9 (1.2)
 Maintainer: Jack O. Wasey <jack@jackwasey.com>  
@@ -182,6 +233,17 @@ DONE
 Status: 3 NOTEs
 ```
 
+## lineup (0.37-6)
+Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
+
+__OK__
+
+## manifestoR (1.0-4)
+Maintainer: Jirka Lewandowski <jirka.lewandowski@wzb.eu>  
+Bug reports: https://github.com/ManifestoProject/manifestoR/issues
+
+__OK__
+
 ## metacom (1.4.3)
 Maintainer: Tad Dallas <tdallas@uga.edu>
 
@@ -194,42 +256,43 @@ Bug reports: http://github.com/seananderson/metafolio/issues
 ```
 checking whether package ‘metafolio’ can be installed ... ERROR
 Installation failed.
-See ‘/private/tmp/Rtmp9Gfxhv/check_cran4018202f649d/metafolio.Rcheck/00install.out’ for details.
+See ‘/private/tmp/RtmpP7YMe2/check_cran60d336209243/metafolio.Rcheck/00install.out’ for details.
 ```
 ```
 DONE
 Status: 1 ERROR
 ```
 
-## myTAI (0.1.0)
+## myTAI (0.3.0)
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>  
 Bug reports: https://github.com/HajkD/myTAI/issues
 
-__OK__
+```
+checking package dependencies ... ERROR
+Package required but not available: ‘edgeR’
 
-## NlsyLinks (1.302)
-Maintainer: Will Beasley <wibeasley@hotmail.com>
-
-```
-checking DESCRIPTION meta-information ... NOTE
-Malformed Title field: should not end in a period.
-Malformed Description field: should contain one or more complete sentences.
-```
-```
-checking dependencies in R code ... NOTE
-Namespace in Imports field not imported from: ‘methods’
-  All declared Imports should be used.
-```
-```
-checking R code for possible problems ... NOTE
-ReadCsvNlsy79Gen1: no visible binding for global variable
-  ‘SubjectDetails79’
-ReadCsvNlsy79Gen2: no visible binding for global variable
-  ‘SubjectDetails79’
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
 ```
 ```
 DONE
-Status: 3 NOTEs
+Status: 1 ERROR
+```
+
+## NlsyLinks (2.0.1)
+Maintainer: Will Beasley <wibeasley@hotmail.com>  
+Bug reports: https://github.com/LiveOak/NlsyLinks/issues
+
+```
+checking installed package size ... NOTE
+  installed size is  6.3Mb
+  sub-directories of 1Mb or more:
+    data   4.3Mb
+    doc    1.0Mb
+```
+```
+DONE
+Status: 1 NOTE
 ```
 
 ## NMF (0.20.6)
@@ -618,6 +681,12 @@ Maintainer: Jason Bryer <jason@bryer.org>
 Bug reports: https://github.com/jbryer/PSAboot/issues
 
 ```
+checking whether package ‘PSAboot’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: replacing previous import by ‘party::show’ when loading ‘PSAboot’
+See ‘/private/tmp/RtmpP7YMe2/check_cran60d336209243/PSAboot.Rcheck/00install.out’ for details.
+```
+```
 checking dependencies in R code ... NOTE
 'library' or 'require' call to ‘ggthemes’ in package code.
   Please use :: or requireNamespace() instead.
@@ -634,7 +703,7 @@ checking data for non-ASCII characters ... NOTE
 ```
 ```
 DONE
-Status: 3 NOTEs
+Status: 1 WARNING, 3 NOTEs
 ```
 
 ## rbundler (0.3.7)
@@ -664,24 +733,30 @@ Maintainer: Gerrit-Jan Schutten <phonixor@gmail.com>
 
 __OK__
 
-## REDCapR (0.7-1)
-Maintainer: Will Beasley <wibeasley@hotmail.com>
+## REDCapR (0.9.3)
+Maintainer: Will Beasley <wibeasley@hotmail.com>  
+Bug reports: https://github.com/OuhscBbmc/REDCapR/issues
 
 ```
 checking package dependencies ... NOTE
 Package suggested but not available for checking: ‘RODBC’
 ```
 ```
-checking dependencies in R code ... NOTE
-'library' or 'require' calls in package code:
-  ‘RODBC’ ‘testthat’
-  Please use :: or requireNamespace() instead.
-  See section 'Suggested packages' in the 'Writing R Extensions' manual.
-```
-```
 DONE
-Status: 2 NOTEs
+Status: 1 NOTE
 ```
+
+## rfishbase (2.0.2)
+Maintainer: Carl Boettiger <cboettig@ropensci.org>  
+Bug reports: https://github.com/ropensci/rfishbase/issues
+
+__OK__
+
+## satellite (0.1.0)
+Maintainer: Tim Appelhans
+ <admin@environmentalinformatics-marburg.de>
+
+__OK__
 
 ## smss (1.0-1)
 Maintainer: Jeffrey B. Arnold <jeffrey.arnold@gmail.com>
@@ -694,19 +769,12 @@ Bug reports: https://github.com/hadley/testthat/issues
 
 __OK__
 
-## Wats (0.2-16)
+## Wats (0.10.1)
 Maintainer: Will Beasley <wibeasley@hotmail.com>
 
-```
-checking DESCRIPTION meta-information ... NOTE
-Malformed Description field: should contain one or more complete sentences.
-```
-```
-DONE
-Status: 1 NOTE
-```
+__OK__
 
-## wikipediatrend (1.1.4)
+## wikipediatrend (1.1.6)
 Maintainer: Peter Meissner <retep.meissner@gmail.com>  
 Bug reports: https://github.com/petermeissner/wikipediatrend/issues
 
