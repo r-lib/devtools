@@ -17,6 +17,9 @@
 
 * `uses_testthat()` and `check_failures()` are now exported (#824, #839, @krlmlr).
 
+* `remove_s4classes()` performs a topological sort of the classes
+  (#848, #849, @famuvie).
+
 # devtools 1.8.0
  
 ## Helpers

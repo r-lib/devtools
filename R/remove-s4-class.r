@@ -27,10 +27,12 @@ sort_s4classes <- function(classes, pkg) {
   }
 
   ## Matrix of classes in columns, extending classes in rows
-  extended_classes <- vapply(classes,
-                             extends_first,
-                             rep(TRUE, length(classes)),
-                             classes)
+  extended_classes <- vapply(
+    classes,
+    extends_first,
+    rep(TRUE, length(classes)),
+    classes
+  )
 
   if (!is.matrix(extended_classes))
     extended_classes <- as.matrix(extended_classes)

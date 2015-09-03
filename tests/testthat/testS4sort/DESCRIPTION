@@ -1,7 +1,7 @@
 Package: testS4sort
 Title: Test package for sorting S4 classes
-License: GPL-3
-Description: 
+License: GPL (>= 2)
+Description:
 Author: Facundo Muñoz <facundo.munoz@orleans.inra.fr>
 Maintainer: Facundo Muñoz <facundo.munoz@orleans.inra.fr>
 Version: 0.1
