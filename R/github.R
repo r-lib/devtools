@@ -67,15 +67,3 @@ github_pat <- function() {
   message("Using github PAT from envvar GITHUB_PAT")
   pat
 }
-
-github_DESCRIPTION <- function(username, repo, ref = "master") {
-  response <- github_GET(
-    file.path("repos", username, repo, "contents", "DESCRIPTION"),
-    httr::write_memory())
-
-  content <- rawToChar(base64enc::base64decode(response$content))
-  tmp <- tempfile()
-  cat(content, file = tmp)
-  res <- read_dcf(tmp)
-  res
-}

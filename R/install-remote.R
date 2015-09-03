@@ -58,3 +58,27 @@ is.remote <- function(x) inherits(x, "remote")
 
 remote_download <- function(x, quiet = FALSE) UseMethod("remote_download")
 remote_metadata <- function(x, bundle = NULL, source = NULL) UseMethod("remote_metadata")
+
+different_sha <- function(x) {
+
+  new_sha <- remote_sha(x)
+
+  name <- remote_package_name(x)
+
+  if (!is_installed(name)) {
+    return(TRUE)
+  }
+
+  current_sha <- packageDescription(name)$RemoteSha
+
+  non_git_install <- is.null(remote_sha)
+  if (non_git_install) {
+    return(TRUE)
+  }
+
+  new_sha != current_sha
+}
+
+remote_package_name <- function(remote, ...) UseMethod("remote_package_name")
+
+remote_sha <- function(remote, ...) UseMethod("remote_sha")

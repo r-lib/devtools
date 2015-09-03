@@ -21,8 +21,8 @@
 #' @param host GitHub API host to use. Override with your GitHub enterprise
 #'   hostname, for example, \code{"github.hostname.com/api/v3"}.
 #' @param ... Other arguments passed on to \code{\link{install}}.
-#' @param skip_same skip the install if the sha has not changed since the
-#' previous install.
+#' @param force Force installation even if the git sha has not changed since
+#'   the previous install.
 #' @details
 #' Attempting to install from a source repository that uses submodules
 #' raises a warning. Because the zipped sources provided by GitHub do not
@@ -56,45 +56,16 @@ install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
                            auth_token = github_pat(),
                            host = "api.github.com",
-                           skip_same = TRUE, ...) {
+                           force = FALSE, ...) {
 
   remotes <- lapply(repo, github_remote, username = username, ref = ref,
     subdir = subdir, auth_token = auth_token, host = host)
 
-  if (isTRUE(skip_same)) {
+  if (!isTRUE(force)) {
     remotes <- Filter(different_sha, remotes)
   }
 
   install_remotes(remotes, ...)
-}
-
-different_sha <- function(x) {
-
-  github_sha <- github_commit(x$username, x$repo, x$ref)$sha
-
-  # download DESCRIPTION from GitHub
-  github_description <- github_DESCRIPTION(x$username, x$repo, github_sha)
-
-  # retrieve DESCRIPTION of installed package
-  # We need to use the package name from the GitHub DESCRIPTION in case the
-  # GitHub repository name differs from that of the package name.
-  local_description <-
-    suppressWarnings(packageDescription(github_description$Package))
-
-  # Package not installed
-  not_installed <- is.na(local_description)
-  if (isTRUE(not_installed)) {
-    return(TRUE)
-  }
-
-  remote_sha <- local_description$RemoteSha
-
-  non_git_install <- is.null(remote_sha)
-  if (non_git_install) {
-    return(TRUE)
-  }
-
-  github_sha != remote_sha
 }
 
 github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
@@ -271,5 +242,45 @@ parse_git_repo <- function(path) {
   }
 
   params
+}
+#' @export
+remote_package_name.github_remote <- function(remote, url = "https://github.com", ...) {
+
+  tmp <- tempfile()
+  path <- paste(c(
+      remote$username,
+      remote$repo,
+      "raw",
+      remote$ref,
+      remote$subdir,
+      "DESCRIPTION"), collapse = "/")
+
+  req <- httr::GET(url, path = path, httr::write_disk(path = tmp))
+
+  if (httr::status_code(req) >= 400) {
+    return()
+  } else {
+    read_dcf(tmp)$Package
+  }
+}
+
+#' @export
+remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
+  if (!is.null(remote$sha)) {
+    remote$sha
+  } else {
+    res <- system(
+      paste(
+        git_path(),
+        "ls-remote",
+        paste0(url, "/", remote$username, "/", remote$repo, ".git"),
+        remote$ref),
+      intern = TRUE)
+
+    if (length(res) == 0) {
+      return(NULL)
+    }
+    strsplit(res, "\t", fixed = TRUE)[[1]][1]
+  }
 }
 
