@@ -71,6 +71,9 @@
 
 * Properly reset library path after `with_lib()` (#836, @krlmlr).
 
+* `remove_s4classes()` performs a topological sort of the classes
+  (#848, #849, @famuvie).
+
 # devtools 1.8.0
  
 ## Helpers
