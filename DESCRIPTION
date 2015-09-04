@@ -28,11 +28,11 @@ Imports:
     roxygen2 (>= 4.1.0),
     rversions,
     stats,
-    git2r (>= 0.10.1)
+    git2r (>= 0.11.0)
 Suggests:
     testthat (>= 0.7),
     BiocInstaller,
-    Rcpp (>= 0.11.0),
+    Rcpp (>= 0.10.0),
     MASS,
     rmarkdown,
     knitr,
