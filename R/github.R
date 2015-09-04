@@ -57,17 +57,6 @@ github_tag <- function(username, repo, ref = "master") {
   github_GET(file.path("repos", username, repo, "tags", ref))
 }
 
-github_delete_repo <- function(username, repo, pat = github_pat()) {
-  auth <- github_auth(pat)
-  path <- file.path("repos", username, repo)
-  req <- httr::DELETE("https://api.github.com/", path = path, auth)
-  if (httr::status_code(req) == 404) {
-    message(paste0("repo ", username, "/", repo, " not found on GitHub"))
-  } else {
-    github_response(req)
-  }
-}
-
 #' Retrieve Github personal access token.
 #'
 #' A github personal access token

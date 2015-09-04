@@ -25,7 +25,7 @@ create_test_pkg <- function(pkg_name = "testpkg") {
 
 erase_test_pkg <- function(pkg_path) unlink(pkg_path, recursive = TRUE)
 
-delete_from_github <- function(pkg_path) {
+github_delete_repo <- function(pkg_path) {
   gh_info <- github_dummy
   if (exists(pkg_path) && uses_git(pkg_path)) {
     r <- git2r::repository(pkg_path, discover = TRUE)
@@ -36,12 +36,39 @@ delete_from_github <- function(pkg_path) {
                                intern = TRUE)
   if (gh_info$repo == "<REPO>")
     gh_info$repo <- basename(pkg_path)
-  suppressMessages(github_delete_repo(gh_info$username, gh_info$repo))
-  return(invisible())
+
+  auth <- github_auth(github_pat())
+
+  search_term <- paste0("repo:", gh_info$username, "/", gh_info$repo)
+  req <- httr::GET("https://api.github.com/",
+                   path = file.path("search", "repositories"), auth,
+                   query = list(q = search_term))
+  if (httr::status_code(req) != 200) {
+    httr::http_status(req)
+    return(invisible(FALSE))
+  }
+
+  ## now that this is exists only here, I have disabled this
+#   if (confirm) {
+#     are_you_sure <- paste0("Are you absolutely sure you want to delete ",
+#                            username, "/", repo, " from GitHub?")
+#     if (!identical(1L, menu(c("Yes", "No"), title = are_you_sure)))
+#       return(invisible(FALSE))
+#   }
+
+  req <- httr::DELETE("https://api.github.com/", auth,
+                      path = file.path("repos", gh_info$username, gh_info$repo))
+  if (httr::status_code(req) == 204) {
+    return(invisible(TRUE))
+  } else {
+    github_response(req)
+    return(invisible(FALSE))
+  }
+
 }
 
 test_pkg <- create_test_pkg("testGithub")
-delete_from_github(test_pkg)
+github_delete_repo(test_pkg)
 
 test_that("git non-usage is detected", {
   expect_false(uses_git(test_pkg))
@@ -131,5 +158,5 @@ test_that("github_info() errors if nonexistent remote requested by name", {
   expect_error(github_info(test_pkg, remote_name = "nope"))
 })
 
-delete_from_github(test_pkg)
+github_delete_repo(test_pkg)
 erase_test_pkg(test_pkg)
