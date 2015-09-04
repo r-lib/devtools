@@ -7,12 +7,8 @@ github_auth <- function(token) {
 }
 
 github_response <- function(req) {
-  if (length(httr::content(req)) > 0) {
-    text <- httr::content(req, as = "text")
-    parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
-  } else {
-    parsed <- ''
-  }
+  text <- httr::content(req, as = "text")
+  parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
 
   if (httr::status_code(req) >= 400) {
     errors <- vapply(parsed$errors, `[[`, "message", FUN.VALUE = character(1))
