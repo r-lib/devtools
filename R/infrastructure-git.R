@@ -176,13 +176,23 @@ use_github_links <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   desc_path <- file.path(pkg$path, "DESCRIPTION")
-  desc <- read_dcf(desc_path)
+  desc <- new_desc <- read_dcf(desc_path)
 
-  desc[["URL"]] <-
+  github_URL <-
     paste("https://github.com", gh_info$username, gh_info$repo, sep = "/")
-  desc[["BugReports"]] <- paste(desc[["URL"]], "issues", sep = "/")
+  fill <- function(d, f, filler) {
+    if (is.null(d[[f]]) || identical(d[[f]], "")) {
+      d[[f]] <- filler
+    } else {
+      message("Existing ", f, " field found and preserved")
+    }
+    d
+  }
+  new_desc <- fill(new_desc, "URL", github_URL)
+  new_desc <- fill(new_desc, "BugReports", file.path(github_URL, "issues"))
 
-  write_dcf(desc_path, desc)
+  if (!identical(desc, new_desc))
+    write_dcf(desc_path, new_desc)
 
-  desc[c("URL", "BugReports")]
+  new_desc[c("URL", "BugReports")]
 }

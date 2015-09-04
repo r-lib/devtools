@@ -2,7 +2,7 @@ context("GitHub connections")
 
 ## set auth to TRUE if env var GITHUB_PAT is available (eg local testing)
 ## set auth to FALSE otherwise (eg on travis, at this point)
-auth <- FALSE
+auth <- TRUE
 skip_no_auth <- function() if (!exists("auth") || !auth) skip("no auth")
 
 ## why create a temporary test package & repo?
@@ -49,12 +49,12 @@ github_delete_repo <- function(pkg_path) {
   }
 
   ## now that this is exists only here, I have disabled this
-#   if (confirm) {
-#     are_you_sure <- paste0("Are you absolutely sure you want to delete ",
-#                            username, "/", repo, " from GitHub?")
-#     if (!identical(1L, menu(c("Yes", "No"), title = are_you_sure)))
-#       return(invisible(FALSE))
-#   }
+  #   if (confirm) {
+  #     are_you_sure <- paste0("Are you absolutely sure you want to delete ",
+  #                            username, "/", repo, " from GitHub?")
+  #     if (!identical(1L, menu(c("Yes", "No"), title = are_you_sure)))
+  #       return(invisible(FALSE))
+  #   }
 
   req <- httr::DELETE("https://api.github.com/", auth,
                       path = file.path("repos", gh_info$username, gh_info$repo))
@@ -68,7 +68,7 @@ github_delete_repo <- function(pkg_path) {
 }
 
 test_pkg <- create_test_pkg("testGithub")
-github_delete_repo(test_pkg)
+suppressMessages(github_delete_repo(test_pkg))
 
 test_that("git non-usage is detected", {
   expect_false(uses_git(test_pkg))
@@ -80,7 +80,7 @@ test_that("git usage can be added, then detected", {
   expect_true(uses_git(test_pkg))
 })
 
-test_that("github non-usage is detected", {
+test_that("github non-usage is detected and diagnosed", {
   expect_false(uses_github(test_pkg))
   expect_message(print(dr_github(test_pkg)), "cannot detect .* GitHub")
 })
@@ -89,7 +89,7 @@ test_that("dummy github info is returned when no github usage", {
   expect_identical(github_dummy, github_info(test_pkg))
 })
 
-test_that("github links are NOT added if no github usage", {
+test_that("github links are not added if no github usage", {
   expect_error(use_github_links(test_pkg), "Cannot detect .* GitHub")
 })
 
@@ -119,12 +119,25 @@ test_that("github links are created when adding github connection", {
                            gh_info$username, gh_info$repo))
 })
 
-test_that("github_info() prefers, but does not require, remote named 'origin'", {
+test_that("pre-existing URL and BugReports are not clobbered", {
+
+  skip_no_auth()
+
+  desc_path <- file.path(test_pkg, "DESCRIPTION")
+  mtime_before <- file.mtime(desc_path)
+  expect_message(use_github_links(test_pkg), "found and preserved")
+  mtime_after <- file.mtime(desc_path)
+  expect_identical(mtime_before, mtime_after)
+
+})
+
+test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
 
   skip_no_auth()
 
   r <- git2r::repository(test_pkg, discover = TRUE)
-  git2r::remote_add(r, "anomaly", "https://github.com/twitter/AnomalyDetection.git")
+  git2r::remote_add(r, "anomaly",
+                    "https://github.com/twitter/AnomalyDetection.git")
 
   ## defaults to "origin"
   expect_identical(list(username = git2r::config(r)[["global"]][["user.name"]],
@@ -150,5 +163,5 @@ test_that("github_info() errors if nonexistent remote requested by name", {
   expect_error(github_info(test_pkg, remote_name = "nope"))
 })
 
-github_delete_repo(test_pkg)
+suppressMessages(github_delete_repo(test_pkg))
 erase_test_pkg(test_pkg)
