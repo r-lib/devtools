@@ -269,18 +269,14 @@ remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
   if (!is.null(remote$sha)) {
     remote$sha
   } else {
-    res <- system(
-      paste(
-        git_path(),
-        "ls-remote",
-        paste0(url, "/", remote$username, "/", remote$repo, ".git"),
-        remote$ref),
-      intern = TRUE)
+    res <- git2r::ls_remote(paste0(url, "/", remote$username, "/", remote$repo, ".git"))
 
-    if (length(res) == 0) {
+    found <- grep(pattern = paste0("/", remote$ref), x = names(res))
+
+    if (length(found) == 0) {
       return(NULL)
     }
-    strsplit(res, "\t", fixed = TRUE)[[1]][1]
+
+    unname(res[found[1]])
   }
 }
-

@@ -39,6 +39,8 @@ Suggests:
     roxygen2 (>= 4.1.1.9001),
     evaluate,
     rversions
+Remotes:
+    ropensci/git2r#172
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1

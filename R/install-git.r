@@ -78,19 +78,21 @@ remote_metadata.git_remote <- function(x, bundle = NULL, source = NULL) {
 }
 
 remote_sha.git_remote <- function(remote, ...) {
-  res <- system(
-    paste(
-      git_path(),
-      "ls-remote",
-      remote$subdir,
-      remote$branch),
-    ignore.stderr = TRUE,
-    intern = TRUE)
+  if (!is.null(remote$sha)) {
+    remote$sha
+  } else {
+    res <- git2r::ls_remote(paste(c(remote$url, remote$subdir), collapse = "/"))
 
-  if (length(res) == 0) {
-    return(NULL)
+    branch <- remote$branch %||% "master"
+
+    found <- grep(pattern = paste0("/", branch), x = names(res))
+
+    if (length(found) == 0) {
+      return(NULL)
+    }
+
+    unname(res[found[1]])
   }
-  strsplit(res, "\t", fixed = TRUE)[[1]][1]
 }
 
 remote_package_name.git_remote <- function(remote, ...) {
