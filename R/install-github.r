@@ -137,8 +137,8 @@ remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
     # Might be able to get from zip archive
     sha <- git_extract_sha1(bundle)
   } else {
-    # Otherwise can use github api
-    sha <- github_commit(x$username, x$repo, x$ref)$sha
+    # Otherwise can lookup with remote_ls
+    sha <- remote_sha(x)
   }
 
   list(
