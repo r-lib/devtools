@@ -124,7 +124,7 @@ install_dev_remotes <- function(pkg, ...) {
     return()
   }
 
-  types <- lapply(pkg[["remotes"]], dev_remote_type)
+  types <- dev_remote_type(pkg[["remotes"]])
 
   lapply(types, function(type) type$fun(type$repository, ...))
 }
