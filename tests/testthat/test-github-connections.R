@@ -2,7 +2,7 @@ context("GitHub connections")
 
 ## set auth to TRUE if env var GITHUB_PAT is available (eg local testing)
 ## set auth to FALSE otherwise (eg on travis, at this point)
-auth <- TRUE
+auth <- FALSE
 skip_no_auth <- function() if (!exists("auth") || !auth) skip("no auth")
 
 ## why create a temporary test package & repo?
