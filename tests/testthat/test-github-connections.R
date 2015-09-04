@@ -89,16 +89,8 @@ test_that("dummy github info is returned when no github usage", {
   expect_identical(github_dummy, github_info(test_pkg))
 })
 
-test_that("dummy github links are created, messaged, diagnosed", {
-  DESCRIPTION_safe <- readLines(file.path(test_pkg, "DESCRIPTION"))
-  expect_message(use_github_links(test_pkg), "Cannot detect .* GitHub")
-  DESCRIPTION_new <- readLines(file.path(test_pkg, "DESCRIPTION"))
-  expect_identical(grep("URL", DESCRIPTION_new, value = TRUE),
-                   "URL: https://github.com/<USERNAME>/<REPO>")
-  expect_identical(grep("BugReports", DESCRIPTION_new, value = TRUE),
-                   "BugReports: https://github.com/<USERNAME>/<REPO>/issues")
-  expect_message(print(dr_github(test_pkg)), "placeholder found")
-  writeLines(DESCRIPTION_safe, file.path(test_pkg, "DESCRIPTION"))
+test_that("github links are NOT added if no github usage", {
+  expect_error(use_github_links(test_pkg), "Cannot detect .* GitHub")
 })
 
 test_that("github usage can be added and detected", {

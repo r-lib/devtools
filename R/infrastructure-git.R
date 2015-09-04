@@ -168,9 +168,8 @@ add_git_ignore <- function(pkg = ".", ignores) {
 use_github_links <- function(pkg = ".") {
 
   if (!uses_github(pkg)) {
-    message(paste("Cannot detect that package already uses GitHub.",
-                  "You might want to run use_github().",
-                  "Adding the links to DESCRIPTION anyway."))
+    stop("Cannot detect that package already uses GitHub.\n",
+         "You might want to run use_github().")
   }
 
   gh_info <- github_info(pkg)
