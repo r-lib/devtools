@@ -11,9 +11,9 @@ Authors@R: c(
 Description: Collection of package development tools.
 URL: http://github.com/hadley/devtools
 BugReports: http://github.com/hadley/devtools/issues
-Depends: 
+Depends:
     R (>= 3.0.2)
-Imports: 
+Imports:
     httr (>= 0.4),
     curl (>= 0.9),
     utils,
@@ -29,10 +29,10 @@ Imports:
     rversions,
     stats,
     git2r (>= 0.10.1)
-Suggests: 
+Suggests:
     testthat (>= 0.7),
     BiocInstaller,
-    Rcpp (>= 0.10.0),
+    Rcpp (>= 0.11.0),
     MASS,
     rmarkdown,
     knitr,
