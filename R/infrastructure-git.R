@@ -81,8 +81,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   message("* Creating GitHub repository")
   create <- github_POST("user/repos", pat = auth_token, body = list(
     name = jsonlite::unbox(pkg$package),
-    #description = jsonlite::unbox(gsub("\n", " ", pkg$description)),
-    description = jsonlite::unbox(pkg$title),
+    description = jsonlite::unbox(gsub("\n", " ", pkg$title)),
     private = jsonlite::unbox(private)
   ))
 
