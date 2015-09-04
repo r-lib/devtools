@@ -98,12 +98,14 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   message("* Pushing to GitHub and setting remote tracking branch")
   ## in https case, when GITHUB_PAT is passed as password,
   ## the username is immaterial, but git2r doesn't know that
-  cred <- git2r::cred_env("DUMMY_EMAIL", "PAT")
-  with_envvar(c("DUMMY_EMAIL" = "whatever", "PAT" = auth_token),
+  ## switch to git2r::cred_token() when CRAN version > v0.11.0
+  cred <- git2r::cred_env("EMAIL", "PAT")
+  with_envvar(c("EMAIL" = "EMAIL", "PAT" = auth_token),
               git2r::push(r, "origin", "refs/heads/master", credentials = cred))
   ## now change remote URL if user requested ssh
   if(protocol == "ssh") {
-    git2r::remote_remove(r, "origin") # git2r doesn't expose URL modification :(
+    ## switch to git2r::remote_set_url() when CRAN version > v0.11.0
+    git2r::remote_remove(r, "origin")
     git2r::remote_add(r, "origin", create$ssh_url)
   }
 
