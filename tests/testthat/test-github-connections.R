@@ -85,6 +85,11 @@ test_that("github non-usage is detected and diagnosed", {
   expect_message(print(dr_github(test_pkg)), "cannot detect .* GitHub")
 })
 
+test_that("empty URL and BugReports is diagnosed", {
+  expect_message(print(dr_github(test_pkg)), "empty URL field")
+  expect_message(print(dr_github(test_pkg)), "empty BugReports field")
+})
+
 test_that("dummy github info is returned when no github usage", {
   expect_identical(github_dummy, github_info(test_pkg))
 })
@@ -109,14 +114,14 @@ test_that("github links are created when adding github connection", {
 
   skip_no_auth()
 
-  DESCRIPTION <- readLines(file.path(test_pkg, "DESCRIPTION"))
+  desc <- read_dcf(file.path(test_pkg, "DESCRIPTION"))
   gh_info <- github_info(test_pkg)
-  expect_identical(grep("URL", DESCRIPTION, value = TRUE),
-                   sprintf("URL: https://github.com/%s/%s",
-                           gh_info$username, gh_info$repo))
-  expect_identical(grep("BugReports", DESCRIPTION, value = TRUE),
-                   sprintf("BugReports: https://github.com/%s/%s/issues",
-                           gh_info$username, gh_info$repo))
+  expect_identical(desc[["URL"]],
+                  file.path("https://github.com",
+                            gh_info$username, gh_info$repo))
+  expect_identical(desc[["BugReports"]],
+                   file.path("https://github.com",
+                             gh_info$username, gh_info$repo, "issues"))
 })
 
 test_that("pre-existing URL and BugReports are not clobbered", {
@@ -128,6 +133,21 @@ test_that("pre-existing URL and BugReports are not clobbered", {
   expect_message(use_github_links(test_pkg), "found and preserved")
   mtime_after <- file.mtime(desc_path)
   expect_identical(mtime_before, mtime_after)
+
+})
+
+test_that("lack of GitHub links is diagnosed", {
+
+  skip_no_auth()
+
+  desc_path <- file.path(test_pkg, "DESCRIPTION")
+  desc <- new_desc <- read_dcf(desc_path)
+  new_desc$URL <- "http://www.example.com"
+  new_desc$BugReports <- "http://www.example.com/issues"
+  write_dcf(desc_path, new_desc)
+  expect_message(print(dr_github(test_pkg)), "no GitHub repo link")
+  expect_message(print(dr_github(test_pkg)), "no GitHub Issues")
+  write_dcf(desc_path, desc)
 
 })
 

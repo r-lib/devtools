@@ -96,17 +96,23 @@ dr_github <- function(path = ".") {
       "(this is not necessary unless you want to install private repos",
       "or connect local repos to GitHub)")
 
-  pkg <- as.package(path)
-  desc_path <- file.path(pkg$path, "DESCRIPTION")
+  desc_path <- file.path(path, "DESCRIPTION")
   desc <- read_dcf(desc_path)
-  desc <- compact(desc[c("URL", "BugReports")])
-  if (length(desc) > 0) {
-    desc_dummies <-
-      vapply(desc, function(x) grepl("<USERNAME>/<REPO>", x), logical(1))
-    if (any(desc_dummies)) {
-      msg[["links"]] <- paste("* <USERNAME>/<REPO> placeholder found in URL",
-                              "and/or BugReports field of DESCRIPTION")
-    }
+  field_empty <- function(d, f) is.null(d[[f]]) || identical(d[[f]], "")
+  field_no_re <- function(d, f, re) !grepl(re, d[[f]])
+
+  re <- "https://github.com/(.*?)/(.*)"
+  if (field_empty(desc, "URL")) {
+    msg[["URL_empty"]] <-"* empty URL field in DESCRIPTION"
+  } else if (field_no_re(desc, "URL", re)) {
+    msg[["URL"]] <-"* no GitHub repo link in URL field in DESCRIPTION"
+  }
+
+  re <- paste0(re, "/issues")
+  if (field_empty(desc, "BugReports")) {
+    msg[["BugReports_empty"]] <-"* empty BugReports field in DESCRIPTION"
+  } else if (field_no_re(desc, "BugReports", re)) {
+    msg[["BugReports"]] <-"* no GitHub Issues link in URL field in DESCRIPTION"
   }
 
   doctor("github", msg)
