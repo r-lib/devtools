@@ -5,7 +5,7 @@
 \title{Build and check a package, cleaning up automatically on success.}
 \usage{
 check(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
-  check_version = FALSE, force_suggests = TRUE, args = NULL,
+  check_version = FALSE, force_suggests = FALSE, args = NULL,
   build_args = NULL, quiet = FALSE, check_dir = tempdir(), ...)
 }
 \arguments{
@@ -27,7 +27,7 @@ If \code{TRUE}, performns a number of checked related
 to version numbers of packages on CRAN.}
 
 \item{force_suggests}{Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
-\code{TRUE} (the default), check will proceed even if all suggested
+\code{FALSE} (the default), check will proceed even if all suggested
 packages aren't found.}
 
 \item{args,build_args}{An optional character vector of additional command
