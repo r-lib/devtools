@@ -47,7 +47,7 @@ automatically. \code{\link{use_github_links}} is called to populate the
 \examples{
 \dontrun{
 create("testpkg")
-use_github(pkg = "testpkg", protocol = "https", private = TRUE)
+use_github(pkg = "testpkg", private = TRUE)
 }
 }
 \seealso{

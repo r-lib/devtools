@@ -60,7 +60,7 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' @examples
 #' \dontrun{
 #' create("testpkg")
-#' use_github(pkg = "testpkg", protocol = "https", private = TRUE)
+#' use_github(pkg = "testpkg", private = TRUE)
 #' }
 use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
                        protocol = c("ssh", "https")) {
