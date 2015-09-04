@@ -44,9 +44,7 @@ test_that("loading and reloading s4 classes", {
   }
 
   # Check that classes are unregistered
-  # This test on A fails for some bizarre reason - bug in R? But it doesn't
-  # to cause any practical problems.
-  # expect_true(is.null(getClassDef("A")))
+  expect_true(is.null(getClassDef("A")))
   expect_true(is.null(getClassDef("B")))
   expect_true(is.null(getClassDef("AB")))
 

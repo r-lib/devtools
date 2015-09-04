@@ -13,16 +13,18 @@
 #' @export
 document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
   if (!missing(clean)) {
-    warning("Clean argument deprecated: roxygen2 now automatically cleans up",
+    warning("`clean` is deprecated: roxygen2 now automatically cleans up",
       call. = FALSE)
+  }
+  if (!missing(reload)) {
+    warning("`reload` is deprecated: code is now always reloaded", call. = FALSE)
   }
 
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
 
-  if (!is_loaded(pkg) || (is_loaded(pkg) && reload)) {
-    load_all(pkg)
-  }
+  load_all(pkg)
+
   with_envvar(r_env_vars(),
     roxygen2::roxygenise(pkg$path, roclets = roclets, load_code = ns_env)
   )

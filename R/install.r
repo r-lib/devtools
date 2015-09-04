@@ -36,7 +36,7 @@
 #' @param build_vignettes if \code{TRUE}, will build vignettes. Normally it is
 #'   \code{build} that's responsible for creating vignettes; this argument makes
 #'   sure vignettes are built even if a build never happens (i.e. because
-#'   \code{local = TRUE}.
+#'   \code{local = TRUE}).
 #' @param keep_source If \code{TRUE} will keep the srcrefs from an installed
 #'   package. This is useful for debugging (especially inside of RStudio).
 #'   It defaults to the option \code{"keep.source.pkgs"}.
@@ -102,13 +102,17 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
 #' Install package dependencies if needed.
 #'
 #' @inheritParams install
+#' @inheritParams package_deps
 #' @param ... additional arguments passed to \code{\link{install.packages}}.
 #' @export
 #' @examples
 #' \dontrun{install_deps(".")}
 install_deps <- function(pkg = ".", dependencies = NA,
                          threads = getOption("Ncpus", 1),
+                         repos = getOption("repos"),
+                         type = getOption("pkgType"),
                          ...) {
-  pkg <- dev_package_deps(pkg, dependencies = dependencies)
+  pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
+    type = type)
   update(pkg, Ncpus = threads, ...)
 }

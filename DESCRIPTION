@@ -1,6 +1,6 @@
 Package: devtools
 Title: Tools to Make Developing R Packages Easier
-Version: 1.9.0
+Version: 1.9.0.9000
 Authors@R: c(
     person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("aut", "cre")),
     person("Winston", "Chang", role = "aut"),
@@ -11,9 +11,9 @@ Authors@R: c(
 Description: Collection of package development tools.
 URL: http://github.com/hadley/devtools
 BugReports: http://github.com/hadley/devtools/issues
-Depends:
+Depends: 
     R (>= 3.0.2)
-Imports:
+Imports: 
     httr (>= 0.4),
     curl (>= 0.9),
     utils,
@@ -29,12 +29,14 @@ Imports:
     rversions,
     stats,
     git2r (>= 0.10.1)
-Suggests:
+Suggests: 
     testthat (>= 0.7),
     BiocInstaller,
     Rcpp (>= 0.10.0),
     MASS,
     rmarkdown,
     knitr,
-    lintr (>= 0.2.1)
+    lintr (>= 0.2.1),
+    bitops
 License: GPL (>= 2)
+VignetteBuilder: knitr

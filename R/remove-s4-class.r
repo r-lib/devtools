@@ -6,7 +6,62 @@ remove_s4_classes <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   classes <- methods::getClasses(ns_env(pkg))
-  lapply(classes, remove_s4_class, pkg)
+  lapply(sort_s4classes(classes, pkg), remove_s4_class, pkg)
+}
+
+# Sort S4 classes for hierarchical removal
+# Derived classes must be removed **after** their parents.
+# This reduces to a topological sorting on the S4 dependency class
+# https://en.wikipedia.org/wiki/Topological_sorting
+sort_s4classes <- function(classes, pkg) {
+  pkg <- as.package(pkg)
+  nsenv <- ns_env(pkg)
+
+  sorted_classes <- vector(mode = 'character', length = 0)
+
+  ## Return the parent class, if any within domestic classes
+  extends_first <- function(x, classes) {
+    ext <- extends(getClass(x, where = nsenv))
+    parent <- ext[2]
+    classes %in% parent
+  }
+
+  ## Matrix of classes in columns, extending classes in rows
+  extended_classes <- vapply(
+    classes,
+    extends_first,
+    rep(TRUE, length(classes)),
+    classes
+  )
+
+  if (!is.matrix(extended_classes))
+    extended_classes <- as.matrix(extended_classes)
+
+  ## Dynamic set of orphan classes (safe to remove)
+  start_idx <- which(apply(extended_classes, 2, sum) == 0)
+
+  while (length(start_idx) > 0) {
+    ## add node to sorted list (and remove from pending list)
+    i <- start_idx[1]
+    start_idx <- tail(start_idx, -1)
+    sorted_classes <- c(sorted_classes, classes[i])
+
+    ## check its derived classes if any
+    for (j in which(extended_classes[i, ])) {
+      extended_classes[i, j] <- FALSE
+      if (sum(extended_classes[, j]) == 0) {
+        start_idx <- c(start_idx, j)
+      }
+    }
+  }
+  if (any(extended_classes)) {
+    ## Graph has a cycle. This should not happen
+    ## Stop or try to continue?
+    idx <- !classes %in% sorted_classes
+    sorted_classes <- c(sorted_classes, classes[idx])
+  }
+  return(sorted_classes)
+
 }
 
 # Remove an s4 class from a package loaded by devtools
@@ -36,7 +91,7 @@ remove_s4_class <- function(classname, pkg) {
   nsenv <- ns_env(pkg)
 
   # Make a copy of the class
-  class <- getClassDef(classname, package = pkg$package, inherits = FALSE)
+  class <- methods::getClassDef(classname, package = pkg$package, inherits = FALSE)
 
   # Find all the references to classes that (this one contains/extends AND
   # have backreferences to this class) so that R doesn't try to modify them.
@@ -44,10 +99,10 @@ remove_s4_class <- function(classname, pkg) {
   class@contains <- class@contains[keep_idx]
 
   # Assign the modified class back into the package
-  assignClassDef(classname, class, where = nsenv)
+  methods::assignClassDef(classname, class, where = nsenv)
 
   # Remove the class.
-  removeClass(classname, where = nsenv)
+  methods::removeClass(classname, where = nsenv)
 }
 
 
@@ -59,12 +114,12 @@ contains_backrefs <- function(classname, pkgname, contains) {
   # If class_a in pkg_a has class_b in pkg_b as a subclass, return TRUE,
   # otherwise FALSE.
   has_subclass_ref <- function(class_a, pkg_a, class_b, pkg_b) {
-    x <- getClassDef(class_a, package = pkg_a)
+    x <- methods::getClassDef(class_a, package = pkg_a)
     if (is.null(x)) return(FALSE)
 
     subclass_ref <- x@subclasses[[class_b]]
 
-    if(!is.null(subclass_ref) && subclass_ref@package == pkg_b) {
+    if (!is.null(subclass_ref) && subclass_ref@package == pkg_b) {
       return(TRUE)
     }
 

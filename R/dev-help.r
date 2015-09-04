@@ -54,7 +54,7 @@ view_rd <- function(path, package, stage = "render", type = getOption("help_type
       file.copy(file.path(R.home("doc"), "html", "R.css"), css_path)
     }
 
-    browseURL(out_path)
+    utils::browseURL(out_path)
   }
 }
 

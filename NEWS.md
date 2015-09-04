@@ -1,4 +1,12 @@
-# devtools 1.9.0
+# devtools 1.9.0.9000
+
+* Detect if `install_` commands are called on a Bioconductor package and
+  include the Bioconductor repositories if they are not already set (#895,
+  @jimhester).
+
+* `install()` can now install dependencies from remote repositories by
+  specifying them as `Remotes` in the `DESCRIPTION` file (#902, @jimhester).
+  See `vignette("dependencies")` for more details.
 
 * Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
 
@@ -13,8 +21,16 @@
 
 * `build_win()` now uses `curl` instead of `RCurl` for ftp upload.
 
+* `check()` now uses a better strategy when `cran = TRUE`. Instead of 
+  attempting to simulate `--as-cran` behaviour by turning on certain env vars,
+  it now uses `--as-cran` and turns off problematic checks with env vars (#866).
+  The problematic `cran_env_vars()` function has been removed.
+
 * `find_rtools()` now looks for registry keys in both HKCU (user) and 
   HKLM (admin) locations (@Kevin-Jin, #844)
+
+* `install_deps()` is more careful with `...` - this means additional 
+  arguments to `install_*` are more likely to work (#870).
 
 * `load_all()` no longer fails if a `useDynLib()` entry in the NAMESPACE 
   is incorrect. This should make it easy to recover from an incorrect
@@ -23,9 +39,12 @@
 * `release()` works for packages not located at root of git repository 
   (#845, #846, @mbjones).
 
-* `revdep_check()` now installed _suggested_ packages by default (#808), and 
+* `revdep_check()` now installs _suggested_ packages by default (#808), and 
   sets `NOT_CRAN` env var to `false` (#809). This makes testing more similar to
-  CRAN so that more packages should pass cleanly.
+  CRAN so that more packages should pass cleanly. It also sets `RGL_USE_NULL`
+  to `true` to stop rgl windows from popping up during testing (#897). It
+  also downloads all source packages at the beginning - this makes life a 
+  bit easier if you're on a flaky internet connection (#906).
   
 * New `uninstall()` removes installed package (#820, @krlmlr).
 
@@ -35,6 +54,8 @@
 * `use_cran_badge()` uses canonical url form preferred by CRAN.
 
 * `use_data()` also works with data from the parent frame (#829, @krlmlr).
+
+* `use_git_hook()` now creates `.git/hooks` if needed (#888)
 
 * `use_travis()`: Default travis script leaves notifications on default 
   settings.
@@ -47,6 +68,11 @@
 * `with_debug()` now uses `with_makevars()` rather than `with_env()`, because R
   reads compilation variables from the Makevars rather than the environment
   (@jimhester, #788).
+
+* Properly reset library path after `with_lib()` (#836, @krlmlr).
+
+* `remove_s4classes()` performs a topological sort of the classes
+  (#848, #849, @famuvie).
 
 # devtools 1.8.0
  

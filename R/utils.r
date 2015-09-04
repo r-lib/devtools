@@ -97,3 +97,11 @@ file_ext <- function (x) {
     pos <- regexpr("\\.((tar\\.)?[[:alnum:]]+)$", x)
     ifelse(pos > -1L, substring(x, pos + 1L), "")
 }
+
+is_bioconductor <- function(x) {
+  !is.null(x$biocviews)
+}
+
+trim_ws <- function(x) {
+  gsub("^[[:space:]]+|[[:space:]]+$", "", x)
+}
