@@ -10,7 +10,7 @@ package_deps(pkg, dependencies = NA, repos = getOption("repos"),
   type = getOption("pkgType"))
 
 dev_package_deps(pkg = ".", dependencies = NA, repos = getOption("repos"),
-  type = getOption("pkgType"))
+  type = getOption("pkgType"), force = FALSE)
 
 \method{update}{package_deps}(object, ..., quiet = FALSE, upgrade = TRUE)
 }

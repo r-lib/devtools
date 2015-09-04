@@ -127,6 +127,6 @@ install_deps <- function(pkg = ".", dependencies = NA,
                          quiet = FALSE) {
 
   pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
-    type = type)
+    type = type, force = force)
   update(pkg, ..., Ncpus = threads, quiet = quiet, upgrade = upgrade)
 }

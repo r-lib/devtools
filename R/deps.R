@@ -89,9 +89,10 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
 #' @rdname package_deps
 dev_package_deps <- function(pkg = ".", dependencies = NA,
                              repos = getOption("repos"),
-                             type = getOption("pkgType")) {
+                             type = getOption("pkgType"),
+                             force = FALSE) {
   pkg <- as.package(pkg)
-  install_dev_remotes(pkg)
+  install_dev_remotes(pkg, force = force)
 
   dependencies <- tolower(standardise_dep(dependencies))
   dependencies <- intersect(dependencies, names(pkg))
@@ -151,7 +152,7 @@ install_dev_remotes <- function(pkg, ...) {
 dev_remote_type <- function(remotes = "") {
 
   if (!nchar(remotes)) {
-    return()
+    return(NULL)
   }
 
   dev_packages <- trim_ws(unlist(strsplit(remotes, ",[[:space:]]*")))
