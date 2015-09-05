@@ -103,7 +103,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   with_envvar(c("EMAIL" = "EMAIL", "PAT" = auth_token),
               git2r::push(r, "origin", "refs/heads/master", credentials = cred))
   ## now change remote URL if user requested ssh
-  if(protocol == "ssh") {
+  if (protocol == "ssh") {
     ## switch to git2r::remote_set_url() when CRAN version > v0.11.0
     git2r::remote_remove(r, "origin")
     git2r::remote_add(r, "origin", create$ssh_url)
