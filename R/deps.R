@@ -44,7 +44,7 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
   if (missing(pkg)) {
     pkg <- as.package(".")$package
   }
-  deps <- sort(find_deps(pkg, cran, top_dep = dependencies))
+  deps <- sort(find_deps(pkg, cran, top_dep = dependencies, include_pkgs = FALSE))
 
   # Remove base packages
   inst <- installed.packages()
@@ -233,7 +233,8 @@ install_packages <- function(pkgs, repos = getOption("repos"),
     dependencies = dependencies, quiet = quiet)
 }
 
-find_deps <- function(pkgs, available = available.packages(), top_dep = TRUE, rec_dep = NA) {
+find_deps <- function(pkgs, available = available.packages(), top_dep = TRUE,
+                      rec_dep = NA, include_pkgs = TRUE) {
   if (length(pkgs) == 0 || identical(top_dep, FALSE))
     return(character())
 
@@ -250,7 +251,8 @@ find_deps <- function(pkgs, available = available.packages(), top_dep = TRUE, re
     rec <- character()
   }
 
-  unique(unlist(c(pkgs, top, rec), use.names = FALSE))
+  all <- c(if (include_pkgs) pkgs, top, rec)
+  unique(unlist(all, use.names = FALSE))
 }
 
 
