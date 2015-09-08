@@ -63,6 +63,8 @@
 
 * `use_git_hook()` now creates `.git/hooks` if needed (#888)
 
+* GitHub integration extended: `use_github()` gains a `protocol` argument (ssh or https), populates URL and BugReports fields of DESCRIPTION (only if non-existent or empty), pushes to the newly created GitHub repo, and sets a remote tracking branch. `use_github_links()` is a new exported function. `dr_github()` diagnoses more possible problems. (#642, @jennybc).
+
 * `use_travis()`: Default travis script leaves notifications on default 
   settings.
 
