@@ -116,8 +116,6 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
 
   env_vars <- c(check_env_vars(cran, check_version, force_suggests), env_vars)
 
-  # remove duplicated vars, keeping only the last instance
-  env_vars <- env_vars[!duplicated(names(env_vars), fromLast = TRUE)]
   if (!quiet)
     show_env_vars(env_vars)
 

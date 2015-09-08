@@ -21,7 +21,7 @@ test_that("return messages", {
   expect_equal(failures, character(), info = paste(failures, collapse = "\n"))
 })
 
-test_that("setting env_vars overrides defaults", {
+test_that("setting env_vars works as expected", {
   R_call <- tryCatch(
     with_mock(
       `R` = function(...) stop(structure(list(...), class=c("error", "condition"))),
