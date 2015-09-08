@@ -96,16 +96,11 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
 # Run R CMD check and return the path for the check
 # @param built_path The path to the built .tar.gz source package.
 # @param check_dir The directory to unpack the .tar.gz file to
-<<<<<<< HEAD
-check_r_cmd <- function(name, built_path = NULL, cran = TRUE,
-                        check_version = FALSE, force_suggests = FALSE,
-                        args = NULL, check_dir = tempdir(), quiet = FALSE, ...) {
-=======
 # @param env_vars Optional additional environment variables to set.  Values
 #   set here will override the defaults set by \code{\link{cran_env_vars}()}.
 check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
-  force_suggests = TRUE, args = NULL, check_dir = tempdir(), env_vars = NULL, ...) {
->>>>>>> Add env_var argument to check()
+  force_suggests = TRUE, args = NULL, check_dir = tempdir(), quiet = FALSE,
+  env_vars = NULL, ...) {
 
   pkgname <- gsub("_.*?$", "", basename(built_path))
 
@@ -119,30 +114,16 @@ check_r_cmd <- function(built_path = NULL, cran = TRUE, check_version = FALSE,
     opts <- c("--as-cran", opts)
   }
 
-<<<<<<< HEAD
-  env_vars <- check_env_vars(cran, check_version, force_suggests)
+  env_vars <- c(check_env_vars(cran, check_version, force_suggests), env_vars)
+
+  # remove duplicated vars, keeping only the last instance
+  env_vars <- env_vars[!duplicated(names(env_vars), fromLast = TRUE)]
   if (!quiet)
     show_env_vars(env_vars)
 
   if (!quiet)
-    rule("Checking ", name)
+    rule("Checking ", pkgname)
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
-=======
-  opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
-
-  # Setting these environment variables requires some care because they can be
-  # be TRUE, FALSE, or not set. (And some variables take numeric values.) When
-  # not set, R CMD check will use the defaults as described in R Internals.
-  env_vars <- c(env_vars,
-    if (cran) cran_env_vars(),
-    if (check_version) c("_R_CHECK_CRAN_INCOMING_" = "TRUE", aspell_env_var()),
-    if (!force_suggests) c("_R_CHECK_FORCE_SUGGESTS_" = "FALSE")
-  )
-
-  # remove duplicated vars, keeping only the first instance
-  env_vars <- env_vars[!duplicated(names(env_vars))]
-
->>>>>>> Add env_var argument to check()
   R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), check_dir,
     env_vars, quiet = quiet, ...)
 

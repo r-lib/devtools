@@ -24,7 +24,7 @@ test_that("return messages", {
 test_that("setting env_vars overrides defaults", {
   R_call <- tryCatch(
     with_mock(
-      `devtools:::R` = function(...) stop(structure(list(...), class=c("error", "condition"))),
+      `R` = function(...) stop(structure(list(...), class=c("error", "condition"))),
       check_r_cmd(
         "testTest",
         cran = TRUE,
