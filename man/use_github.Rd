@@ -4,7 +4,8 @@
 \alias{use_github}
 \title{Connect a local repo with GitHub.}
 \usage{
-use_github(auth_token = github_pat(), private = FALSE, pkg = ".")
+use_github(auth_token = github_pat(), private = FALSE, pkg = ".",
+  protocol = c("ssh", "https"))
 }
 \arguments{
 \item{auth_token}{To install from a private repo, generate a personal
@@ -17,13 +18,41 @@ the \code{GITHUB_PAT} environment variable.}
 
 \item{pkg}{Path to package. See \code{\link{as.package}} for more
 information.}
+
+\item{protocol}{transfer protocol, either "ssh" (the default) or "https"}
 }
 \description{
-If the current repo does not use git, calls \code{use_git} automatically.
+If the current repo does not use git, calls \code{\link{use_git}}
+automatically. \code{\link{use_github_links}} is called to populate the
+\code{URL} and \code{BugReports} fields of DESCRIPTION.
+}
+\section{Authentication}{
+
+
+  A new GitHub repo will be created via the GitHub API, therefore you must
+  provide a GitHub personal access token via the argument \code{auth_token},
+  which defaults to the value of the \code{GITHUB_PAT} environment variable.
+  Obtain a personal access token from
+  \url{https://github.com/settings/applications}.
+
+  The argument \code{protocol} reflects how you wish to authenticate with
+  GitHub for this repo in the long run. For either \code{protocol}, a remote
+  named "origin" is created, an initial push is made using \code{auth_token}
+  for authentication, and a remote tracking branch is set. The URL of the
+  "origin" remote has the form \code{git@github.com:<USERNAME>/<REPO>.git}
+  (\code{protocol = "ssh"}, the default) or
+  \code{https://github.com/<USERNAME>/<REPO>.git} (\code{protocol =
+  "https"}).
+}
+\examples{
+\dontrun{
+create("testpkg")
+use_github(pkg = "testpkg", private = TRUE)
+}
 }
 \seealso{
 Other git infrastructure: \code{\link{use_git_hook}};
-  \code{\link{use_git}}
+  \code{\link{use_github_links}}; \code{\link{use_git}}
 }
 \keyword{internal}
 
