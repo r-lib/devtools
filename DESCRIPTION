@@ -40,7 +40,7 @@ Suggests:
     evaluate,
     rversions
 Remotes:
-    ropensci/git2r#172
+    ropensci/git2r
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
