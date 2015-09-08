@@ -56,29 +56,29 @@ remote <- function(type, ...) {
 }
 is.remote <- function(x) inherits(x, "remote")
 
-remote_download <- function(x, quiet = FALSE) UseMethod("remote_download")
-remote_metadata <- function(x, bundle = NULL, source = NULL) UseMethod("remote_metadata")
-
-different_sha <- function(x) {
-
-  new_sha <- remote_sha(x)
-
-  name <- remote_package_name(x)
-
-  if (!is_installed(name)) {
-    return(TRUE)
+different_sha <- function(remote = NULL,
+                          remote_sha = NULL,
+                          local_sha = NULL) {
+  if (is.null(remote_sha)) {
+    remote_sha <- remote_sha(remote)
   }
 
-  current_sha <- packageDescription(name)$RemoteSha
-
-  non_git_install <- is.null(remote_sha)
-  if (non_git_install) {
-    return(TRUE)
+  if (is.null(local_sha)) {
+    local_sha <- local_sha(remote_package_name(remote))
   }
 
-  new_sha != current_sha
+  different <- remote_sha != local_sha
+  isTRUE(different) || is.na(different)
 }
 
-remote_package_name <- function(remote, ...) UseMethod("remote_package_name")
+local_sha <- function(name) {
+  if (!is_installed(name)) {
+    return(NA)
+  }
+  packageDescription(name)$RemoteSha
+}
 
+remote_download <- function(x, quiet = FALSE) UseMethod("remote_download")
+remote_metadata <- function(x, bundle = NULL, source = NULL) UseMethod("remote_metadata")
+remote_package_name <- function(remote, ...) UseMethod("remote_package_name")
 remote_sha <- function(remote, ...) UseMethod("remote_sha")

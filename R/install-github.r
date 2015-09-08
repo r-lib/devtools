@@ -243,6 +243,7 @@ parse_git_repo <- function(path) {
 
   params
 }
+
 #' @export
 remote_package_name.github_remote <- function(remote, url = "https://github.com", ...) {
 
@@ -258,10 +259,10 @@ remote_package_name.github_remote <- function(remote, url = "https://github.com"
   req <- httr::GET(url, path = path, httr::write_disk(path = tmp))
 
   if (httr::status_code(req) >= 400) {
-    NULL
-  } else {
-    read_dcf(tmp)$Package
+    return(NA)
   }
+
+  read_dcf(tmp)$Package
 }
 
 #' @export
@@ -269,12 +270,19 @@ remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
   if (!is.null(remote$sha)) {
     remote$sha
   } else {
-    res <- git2r::ls_remote(paste0(url, "/", remote$username, "/", remote$repo, ".git"))
+    res <- try(silent = TRUE,
+      git2r::remote_ls(
+        paste0(url, "/", remote$username, "/", remote$repo, ".git"),
+        ...))
+
+    if (inherits(res, "try-error")) {
+      return(NA)
+    }
 
     found <- grep(pattern = paste0("/", remote$ref), x = names(res))
 
     if (length(found) == 0) {
-      return(NULL)
+      return(NA)
     }
 
     unname(res[found[1]])

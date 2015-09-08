@@ -77,24 +77,7 @@ remote_metadata.git_remote <- function(x, bundle = NULL, source = NULL) {
   )
 }
 
-remote_sha.git_remote <- function(remote, ...) {
-  if (!is.null(remote$sha)) {
-    remote$sha
-  } else {
-    res <- git2r::ls_remote(paste(c(remote$url, remote$subdir), collapse = "/"))
-
-    branch <- remote$branch %||% "master"
-
-    found <- grep(pattern = paste0("/", branch), x = names(res))
-
-    if (length(found) == 0) {
-      return(NULL)
-    }
-
-    unname(res[found[1]])
-  }
-}
-
+#' @export
 remote_package_name.git_remote <- function(remote, ...) {
 
   tmp <- tempfile()
@@ -111,11 +94,34 @@ remote_package_name.git_remote <- function(remote, ...) {
       quiet = TRUE))
 
   if (inherits(res, "try-error")) {
-    return(NULL)
+    return(NA)
   }
 
   # git archive return a tar file, so extract it to tempdir and read the DCF
   untar(tmp, files = description_path, exdir = tempdir())
 
   read_dcf(file.path(tempdir(), description_path))$Package
+}
+
+#' @export
+remote_sha.git_remote <- function(remote, ...) {
+  if (!is.null(remote$sha)) {
+    remote$sha
+  } else {
+    res <- try(silent = TRUE, git2r::remote_ls(remote$url, ...))
+
+    if (inherits(res, "try-error")) {
+      return(NA)
+    }
+
+    branch <- remote$branch %||% "master"
+
+    found <- grep(pattern = paste0("/", branch), x = names(res))
+
+    if (length(found) == 0) {
+      return(NA)
+    }
+
+    unname(res[found[1]])
+  }
 }
