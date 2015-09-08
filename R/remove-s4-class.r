@@ -21,7 +21,7 @@ sort_s4classes <- function(classes, pkg) {
 
   ## Return the parent class, if any within domestic classes
   extends_first <- function(x, classes) {
-    ext <- extends(getClass(x, where = nsenv))
+    ext <- methods::extends(methods::getClass(x, where = nsenv))
     parent <- ext[2]
     classes %in% parent
   }
@@ -43,7 +43,7 @@ sort_s4classes <- function(classes, pkg) {
   while (length(start_idx) > 0) {
     ## add node to sorted list (and remove from pending list)
     i <- start_idx[1]
-    start_idx <- tail(start_idx, -1)
+    start_idx <- utils::tail(start_idx, -1)
     sorted_classes <- c(sorted_classes, classes[i])
 
     ## check its derived classes if any

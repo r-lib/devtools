@@ -94,7 +94,7 @@ github_dummy <- list(username = "<USERNAME>", repo = "<REPO>")
 
 remote_urls <- function(r) {
   remotes <- git2r::remotes(r)
-  setNames(git2r::remote_url(r, remotes), remotes)
+  stats::setNames(git2r::remote_url(r, remotes), remotes)
 }
 
 github_remote_parse <- function(x) {
