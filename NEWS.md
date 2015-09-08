@@ -1,13 +1,5 @@
 # devtools 1.9.0.9000
 
-* Detect if `install_` commands are called on a Bioconductor package and
-  include the Bioconductor repositories if they are not already set (#895,
-  @jimhester).
-
-* `install()` can now install dependencies from remote repositories by
-  specifying them as `Remotes` in the `DESCRIPTION` file (#902, @jimhester).
-  See `vignette("dependencies")` for more details.
-
 * Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
 
 * Remove explicit `library(testthat)` call in `test()` (#798, @krlmlr).
@@ -28,6 +20,14 @@
 
 * `find_rtools()` now looks for registry keys in both HKCU (user) and 
   HKLM (admin) locations (@Kevin-Jin, #844)
+
+* `install()` can now install dependencies from remote repositories by
+  specifying them as `Remotes` in the `DESCRIPTION` file (#902, @jimhester).
+  See `vignette("dependencies")` for more details.
+
+* `install_*()` detects if called on a Bioconductor package and if so,
+  automatically includes the Bioconductor repositories if needed (#895,
+  @jimhester).
 
 * `install_deps()` now automatically upgrades out of date dependencies. This
   is typically what you want when you're working on a development version of a 

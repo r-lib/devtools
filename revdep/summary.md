@@ -6,11 +6,11 @@
 |:--------|:----------------------------|
 |version  |R version 3.2.1 (2015-06-18) |
 |system   |x86_64, darwin13.4.0         |
-|ui       |RStudio (0.99.673)           |
+|ui       |RStudio (0.99.674)           |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Chicago              |
-|date     |2015-09-03                   |
+|date     |2015-09-08                   |
 
 ## Packages
 
@@ -22,7 +22,7 @@
 |evaluate   |   |0.7.2   |2015-08-13 |CRAN (R 3.2.0) |
 |git2r      |   |0.11.0  |2015-08-12 |CRAN (R 3.2.0) |
 |httr       |   |1.0.0   |2015-06-25 |CRAN (R 3.2.0) |
-|jsonlite   |   |0.9.16  |2015-04-11 |CRAN (R 3.2.0) |
+|jsonlite   |   |0.9.17  |2015-09-06 |CRAN (R 3.2.0) |
 |knitr      |   |1.10.5  |2015-05-06 |CRAN (R 3.2.0) |
 |lintr      |   |0.2.0   |2014-12-01 |CRAN (R 3.2.0) |
 |memoise    |   |0.2.1   |2014-04-22 |CRAN (R 3.2.0) |
@@ -196,7 +196,7 @@ Bug reports: https://github.com/IALSA/IalsaSynthesis/issues
 
 __OK__
 
-## icd9 (1.2)
+## icd9 (1.2.2)
 Maintainer: Jack O. Wasey <jack@jackwasey.com>  
 Bug reports: https://github.com/jackwasey/icd9/issues
 
@@ -256,7 +256,7 @@ Bug reports: http://github.com/seananderson/metafolio/issues
 ```
 checking whether package ‘metafolio’ can be installed ... ERROR
 Installation failed.
-See ‘/private/tmp/RtmpP7YMe2/check_cran60d336209243/metafolio.Rcheck/00install.out’ for details.
+See ‘/private/tmp/RtmpbElJT3/check_cran15b289771237/metafolio.Rcheck/00install.out’ for details.
 ```
 ```
 DONE
@@ -684,7 +684,7 @@ Bug reports: https://github.com/jbryer/PSAboot/issues
 checking whether package ‘PSAboot’ can be installed ... WARNING
 Found the following significant warnings:
   Warning: replacing previous import by ‘party::show’ when loading ‘PSAboot’
-See ‘/private/tmp/RtmpP7YMe2/check_cran60d336209243/PSAboot.Rcheck/00install.out’ for details.
+See ‘/private/tmp/RtmpbElJT3/check_cran15b289771237/PSAboot.Rcheck/00install.out’ for details.
 ```
 ```
 checking dependencies in R code ... NOTE

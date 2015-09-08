@@ -1,6 +1,13 @@
+## Release summary
+
+* `check()` now uses `--as-cran`, suppressing off `_R_CHECK_CRAN_INCOMING_`
+  (except during `release()`)
+  
+* Many other bug fixes and small new features
+
 ## Test environments
 * local OS X install, R 3.2.1
-* ubuntu 12.04 (on travis-ci), R 3.2.1
+* ubuntu 12.04 (on travis-ci), R 3.2.2
 * win-builder (devel and release)
 
 ## R CMD check results
@@ -8,11 +15,11 @@ There were no ERRORs or WARNINGs.
 
 There were 2 NOTEs:
 
-* Found the following (possibly) invalid URLs.
-
-  This appears to be a false position: 
-  http://cran.r-project.org/web/packages/policies.html is not a URL to
-  a package, and hence is not in the canonical form.
+* checking foreign function calls ... NOTE
+  Evaluating ‘dll$foo’ during check gives error
+  
+  This is part of a dynamic check to see if the user can compile packages
+  so `dll` does not exist during checking.
 
 * checking R code for possible problems ... NOTE
   Found the following calls to attach():
@@ -24,11 +31,9 @@ There were 2 NOTEs:
   These are needed because devtools simulates package loading, and hence
   needs to attach environments to the search path.
 
-(I also get an error on winbuilder R-release, but that looks like a problem with the stringi installation on that machine.)
-
 ## Downstream dependencies
 
-* I ran R CMD check on all 34 downstream dependencies of devtools.
+* I ran R CMD check on all 44 downstream dependencies of devtools.
   Summary at: https://github.com/hadley/devtools/blob/master/revdep/summary.md
 
 * There were 2 failures: 
@@ -38,4 +43,3 @@ There were 2 NOTEs:
 
 * As far as I can tell, there were no new failures related to changes in 
   devtools.
-  
