@@ -1,5 +1,8 @@
 # devtools 1.9.0.9000
 
+* `check()` gains a `env_vars` argument to allow the user to set the
+  environment variables used in the check (#894, @jimhester).
+
 * Detect if `install_` commands are called on a Bioconductor package and
   include the Bioconductor repositories if they are not already set (#895,
   @jimhester).
