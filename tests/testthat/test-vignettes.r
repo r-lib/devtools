@@ -1,6 +1,10 @@
 context("Vignettes")
 
 test_that("Sweave vignettes copied into inst/doc", {
+  if (Sys.which("pdflatex") == "") {
+    skip("pdflatex not available")
+  }
+
   clean_vignettes("testVignettes")
   expect_false("new.pdf" %in% dir("testVignettes/inst/doc"))
   expect_false("new.R" %in% dir("testVignettes/inst/doc"))
@@ -18,6 +22,10 @@ test_that("Sweave vignettes copied into inst/doc", {
 })
 
 test_that("Built files are updated", {
+  if (Sys.which("pdflatex") == "") {
+    skip("pdflatex not available")
+  }
+
   clean_vignettes("testVignettes")
   build_vignettes("testVignettes")
   on.exit(clean_vignettes("testVignettes"))
@@ -70,6 +78,10 @@ if (packageVersion("knitr") >= 1.2) {
 
 
 test_that("Extra files copied and removed", {
+  if (Sys.which("pdflatex") == "") {
+    skip("pdflatex not available")
+  }
+
   pkg <- as.package("testVignetteExtras")
   doc_path <- file.path(pkg$path, "inst", "doc")
 
@@ -90,6 +102,10 @@ test_that("Extra files copied and removed", {
 
 
 test_that("vignettes built on install", {
+  if (Sys.which("pdflatex") == "") {
+    skip("pdflatex not available")
+  }
+
   # Make sure it fails if we build without installing
   expect_error(build_vignettes("testVignettesBuilt"),
     "there is no package called")
