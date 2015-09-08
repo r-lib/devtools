@@ -81,6 +81,8 @@ dr_github <- function(path = ".") {
   config <- git2r::config(r)
   config_names <- names(modifyList(config$global, config$local))
 
+  if (!uses_github(path))
+    msg[["github"]] <- " * cannot detect that this repo is connected to GitHub"
   if (!("user.name" %in% config_names))
     msg[["name"]] <- "* user.name config option not set"
   if (!("user.email" %in% config_names))
@@ -91,7 +93,27 @@ dr_github <- function(path = ".") {
 
   if (identical(Sys.getenv("GITHUB_PAT"), ""))
     msg[["PAT"]] <- paste("* GITHUB_PAT environment variable not set",
-      "(this is not critical unless you want to install private repos)")
+      "(this is not necessary unless you want to install private repos",
+      "or connect local repos to GitHub)")
+
+  desc_path <- file.path(path, "DESCRIPTION")
+  desc <- read_dcf(desc_path)
+  field_empty <- function(d, f) is.null(d[[f]]) || identical(d[[f]], "")
+  field_no_re <- function(d, f, re) !grepl(re, d[[f]])
+
+  re <- "https://github.com/(.*?)/(.*)"
+  if (field_empty(desc, "URL")) {
+    msg[["URL_empty"]] <-"* empty URL field in DESCRIPTION"
+  } else if (field_no_re(desc, "URL", re)) {
+    msg[["URL"]] <-"* no GitHub repo link in URL field in DESCRIPTION"
+  }
+
+  re <- paste0(re, "/issues")
+  if (field_empty(desc, "BugReports")) {
+    msg[["BugReports_empty"]] <-"* empty BugReports field in DESCRIPTION"
+  } else if (field_no_re(desc, "BugReports", re)) {
+    msg[["BugReports"]] <-"* no GitHub Issues link in URL field in DESCRIPTION"
+  }
 
   doctor("github", msg)
 }
