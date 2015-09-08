@@ -208,8 +208,8 @@ use_coverage <- function(pkg = ".", type = c("codecov", "coveralls")) {
         "(https://img.shields.io/codecov/c/github/", gh$username, "/", gh$repo, "/master.svg)]",
         "(https://codecov.io/github/", gh$username, "/", gh$repo, "?branch=master)\n",
         " * Add the following to .travis.yml:\n",
-        "r_github_packages:\n",
-        "  - jimhester/covr\n",
+        "r_packages:\n",
+        "  - covr\n",
         "after_success:\n",
         "  - Rscript -e 'covr::codecov()'")
     },
