@@ -22,6 +22,7 @@ mock_use_github <- function(pkg) {
 }
 
 test_that("git (non-)usage is detected, diagnosed, and can be added", {
+  skip_on_cran()
 
   test_pkg <- create_in_temp("testNoGit")
 
@@ -36,6 +37,7 @@ test_that("git (non-)usage is detected, diagnosed, and can be added", {
 })
 
 test_that("GitHub non-usage is handled", {
+  skip_on_cran()
 
   test_pkg <- create_in_temp("testNoGitHub")
   use_git(pkg = test_pkg)
@@ -60,6 +62,7 @@ test_that("GitHub non-usage is handled", {
 ## As it stands, that function is not under automated testing.
 
 test_that("github info and links can be queried and manipulated", {
+  skip_on_cran()
 
   test_pkg <- create_in_temp("testGitHub")
   mock_use_github(test_pkg)
@@ -98,6 +101,7 @@ test_that("github info and links can be queried and manipulated", {
 })
 
 test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
+  skip_on_cran()
 
   test_pkg <- create_in_temp("testGitHubInfo")
   mock_use_github(test_pkg)
