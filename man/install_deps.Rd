@@ -5,7 +5,8 @@
 \title{Install package dependencies if needed.}
 \usage{
 install_deps(pkg = ".", dependencies = NA, threads = getOption("Ncpus",
-  1), repos = getOption("repos"), type = getOption("pkgType"), ...)
+  1), repos = getOption("repos"), type = getOption("pkgType"), ...,
+  upgrade = TRUE, quiet = FALSE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -26,6 +27,10 @@ automatically to "binary" to avoid interactive prompts during package
 installation.}
 
 \item{...}{additional arguments passed to \code{\link{install.packages}}.}
+
+\item{upgrade}{If \code{TRUE}, also upgrade any of out date dependencies.}
+
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 }
 \description{
 Install package dependencies if needed.

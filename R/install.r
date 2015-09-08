@@ -33,6 +33,8 @@
 #' @param dependencies \code{logical} indicating to also install uninstalled
 #'   packages which this \code{pkg} depends on/links to/suggests. See
 #'   argument \code{dependencies} of \code{\link{install.packages}}.
+#' @param upgrade_dependencies If \code{TRUE}, the default, will also update
+#'   any out of date dependencies.
 #' @param build_vignettes if \code{TRUE}, will build vignettes. Normally it is
 #'   \code{build} that's responsible for creating vignettes; this argument makes
 #'   sure vignettes are built even if a build never happens (i.e. because
@@ -52,7 +54,8 @@
 #'   set.
 install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     args = getOption("devtools.install.args"), quiet = FALSE,
-                    dependencies = NA, build_vignettes = FALSE,
+                    dependencies = NA, upgrade_dependencies = TRUE,
+                    build_vignettes = FALSE,
                     keep_source = getOption("keep.source.pkgs"),
                     threads = getOption("Ncpus", 1),
                     ...) {
@@ -68,7 +71,8 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   if (build_vignettes && missing(dependencies)) {
     dependencies <- TRUE
   }
-  install_deps(pkg, dependencies = dependencies, threads = threads, ...)
+  install_deps(pkg, dependencies = dependencies, upgrade = upgrade_dependencies,
+    threads = threads, ...)
 
   # Build the package. Only build locally if it doesn't have vignettes
   has_vignettes <- length(tools::pkgVignettes(dir = pkg$path)$docs > 0)
@@ -111,8 +115,11 @@ install_deps <- function(pkg = ".", dependencies = NA,
                          threads = getOption("Ncpus", 1),
                          repos = getOption("repos"),
                          type = getOption("pkgType"),
-                         ...) {
+                         ...,
+                         upgrade = TRUE,
+                         quiet = FALSE) {
+
   pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
     type = type)
-  update(pkg, Ncpus = threads, ...)
+  update(pkg, ..., Ncpus = threads, quiet = quiet, upgrade = upgrade)
 }

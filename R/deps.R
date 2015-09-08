@@ -16,6 +16,7 @@
 #'   and is the default. \code{FALSE} is shorthand for no dependencies (i.e.
 #'   just check this package, not its dependencies).
 #' @param quiet If \code{TRUE}, suppress output
+#' @param upgrade If \code{TRUE}, also upgrade any of out date dependencies.
 #' @param repos A character vector giving repositories to use.
 #' @param type Type of package to \code{update}.  If "both", will switch
 #'   automatically to "binary" to avoid interactive prompts during package
@@ -198,7 +199,7 @@ print.package_deps <- function(x, show_ok = FALSE, ...) {
 #' @export
 #' @rdname package_deps
 #' @importFrom stats update
-update.package_deps <- function(object, ..., quiet = FALSE) {
+update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
   ahead <- object$package[object$diff == 2L]
   if (length(ahead) > 0 && !quiet) {
     message("Skipping ", length(ahead), " packages not available: ",
@@ -211,7 +212,11 @@ update.package_deps <- function(object, ..., quiet = FALSE) {
       paste(missing, collapse = ", "))
   }
 
-  behind <- object$package[object$diff < 0L]
+  if (upgrade) {
+    behind <- object$package[object$diff < 0L]
+  } else {
+    behind <- object$package[is.na(object$available)]
+  }
   if (length(behind) > 0L) {
     install_packages(behind, repos = attr(object, "repos"),
       type = attr(object, "type"), ...)

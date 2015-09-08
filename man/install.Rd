@@ -6,7 +6,7 @@
 \usage{
 install(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   args = getOption("devtools.install.args"), quiet = FALSE,
-  dependencies = NA, build_vignettes = FALSE,
+  dependencies = NA, upgrade_dependencies = TRUE, build_vignettes = FALSE,
   keep_source = getOption("keep.source.pkgs"), threads = getOption("Ncpus",
   1), ...)
 }
@@ -35,6 +35,9 @@ value of the option \code{"devtools.install.args"}.}
 \item{dependencies}{\code{logical} indicating to also install uninstalled
 packages which this \code{pkg} depends on/links to/suggests. See
 argument \code{dependencies} of \code{\link{install.packages}}.}
+
+\item{upgrade_dependencies}{If \code{TRUE}, the default, will also update
+any out of date dependencies.}
 
 \item{build_vignettes}{if \code{TRUE}, will build vignettes. Normally it is
 \code{build} that's responsible for creating vignettes; this argument makes

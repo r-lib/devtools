@@ -29,7 +29,10 @@
 * `find_rtools()` now looks for registry keys in both HKCU (user) and 
   HKLM (admin) locations (@Kevin-Jin, #844)
 
-* `install_deps()` is more careful with `...` - this means additional 
+* `install_deps()` now automatically upgrades out of date dependencies. This
+  is typically what you want when you're working on a development version of a 
+  package. To suppress this behaviour, set `upgrade_dependencies = FALSE` 
+  (#863). `install_deps()` is more careful with `...` - this means additional
   arguments to `install_*` are more likely to work (#870).
 
 * `install_gitorious()` has been removed since gitorious no longer exists
