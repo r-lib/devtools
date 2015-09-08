@@ -75,10 +75,8 @@ To install a package in a non-default library, use \code{\link{with_libpaths}}.
   set.
 
 Other package installation: \code{\link{install_bitbucket}};
-  \code{\link{install_github}};
-  \code{\link{install_gitorious}};
-  \code{\link{install_git}}; \code{\link{install_svn}};
-  \code{\link{install_url}}; \code{\link{install_version}};
-  \code{\link{uninstall}}
+  \code{\link{install_github}}; \code{\link{install_git}};
+  \code{\link{install_svn}}; \code{\link{install_url}};
+  \code{\link{install_version}}; \code{\link{uninstall}}
 }
 

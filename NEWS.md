@@ -32,6 +32,9 @@
 * `install_deps()` is more careful with `...` - this means additional 
   arguments to `install_*` are more likely to work (#870).
 
+* `install_gitorious()` has been removed since gitorious no longer exists
+  (#913).
+
 * `load_all()` no longer fails if a `useDynLib()` entry in the NAMESPACE 
   is incorrect. This should make it easy to recover from an incorrect
   `@useDynLib`, because re-documenting() should now succeed.
