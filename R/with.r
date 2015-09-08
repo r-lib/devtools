@@ -164,7 +164,7 @@ with_options <- with_something(set_options)
 
 #' @rdname with_something
 #' @export
-with_par <- with_something(par)
+with_par <- with_something(graphics::par)
 
 # path -----------------------------------------------------------------------
 
