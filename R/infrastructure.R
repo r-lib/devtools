@@ -257,7 +257,7 @@ use_appveyor <- function(pkg = ".") {
           " * Turn on AppVeyor for this repo at https://ci.appveyor.com/projects\n",
           " * Add an AppVeyor shield to your README.md:\n",
           "[![AppVeyor Build Status]",
-          "(https://ci.appveyor.com/api/projects/status/github/", gh$username, "/", gh$repo, "?branch=master)]",
+          "(https://ci.appveyor.com/api/projects/status/github/", gh$username, "/", gh$repo, "?branch=master&svg=true)]",
           "(https://ci.appveyor.com/project/", gh$username, "/", gh$repo, ")"
   )
 
