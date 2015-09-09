@@ -1,7 +1,7 @@
 # devtools
 
 [![Build Status](https://travis-ci.org/hadley/devtools.svg?branch=master)](https://travis-ci.org/hadley/devtools)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hadley/devtools?branch=master)](https://ci.appveyor.com/project/hadley/devtools)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hadley/devtools?branch=master&svg=true)](https://ci.appveyor.com/project/hadley/devtools)
 [![Coverage Status](https://img.shields.io/coveralls/hadley/devtools.svg)](https://coveralls.io/r/hadley/devtools?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/devtools)](http://cran.r-project.org/package=devtools)
 
