@@ -45,7 +45,7 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
   if (missing(pkg)) {
     pkg <- as.package(".")$package
   }
-  deps <- sort(find_deps(pkg, cran, top_dep = dependencies, include_pkgs = FALSE))
+  deps <- sort(find_deps(pkg, cran, top_dep = dependencies))
 
   # Remove base packages
   inst <- installed.packages()
