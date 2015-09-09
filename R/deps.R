@@ -252,12 +252,12 @@ find_deps <- function(pkgs, available = available.packages(), top_dep = TRUE,
   if (length(rec_dep) != 0 && length(top_flat) > 0) {
     rec <- tools::package_dependencies(top_flat, db = available, which = rec_dep,
       recursive = TRUE)
+    rec_flat <- unlist(rec, use.names = FALSE)
   } else {
-    rec <- character()
+    rec_flat <- character()
   }
 
-  all <- c(if (include_pkgs) pkgs, top, rec)
-  unique(unlist(all, use.names = FALSE))
+  unique(c(if (include_pkgs) pkgs, top_flat, rec_flat))
 }
 
 
