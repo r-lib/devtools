@@ -82,6 +82,9 @@
 * `remove_s4classes()` performs a topological sort of the classes
   (#848, #849, @famuvie).
 
+* `load_all()` warns (instead of failing) if importing symbols, methods, or classes
+   from `NAMESPACE` fails (@krlmlr, #921).
+
 # devtools 1.8.0
  
 ## Helpers
