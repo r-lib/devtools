@@ -43,12 +43,15 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #'
 #'   The argument \code{protocol} reflects how you wish to authenticate with
 #'   GitHub for this repo in the long run. For either \code{protocol}, a remote
-#'   named "origin" is created, an initial push is made using \code{auth_token}
-#'   for authentication, and a remote tracking branch is set. The URL of the
+#'   named "origin" is created, an initial push is made using the specified
+#'   \code{protocol}, and a remote tracking branch is set. The URL of the
 #'   "origin" remote has the form \code{git@@github.com:<USERNAME>/<REPO>.git}
 #'   (\code{protocol = "ssh"}, the default) or
 #'   \code{https://github.com/<USERNAME>/<REPO>.git} (\code{protocol =
-#'   "https"}).
+#'   "https"}). For \code{protocol = "ssh"}, it is assumed that public and
+#'   private keys are in the default locations, \code{~/.ssh/id_rsa.pub} and
+#'   \code{~/.ssh/id_rsa}, respectively, and that \code{ssh-agent} is configured
+#'   to manage any associated passphrase.
 #'
 #' @inheritParams install_github
 #' @inheritParams use_git
@@ -59,8 +62,13 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' @export
 #' @examples
 #' \dontrun{
+#' ## to use default ssh protocol
 #' create("testpkg")
-#' use_github(pkg = "testpkg", private = TRUE)
+#' use_github(pkg = "testpkg")
+#'
+#' ## or use https
+#' create("testpkg2")
+#' use_github(pkg = "testpkg2", protocol = "https")
 #' }
 use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
                        protocol = c("ssh", "https")) {
@@ -85,8 +93,8 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
 
   message("* Adding GitHub remote")
   r <- git2r::repository(pkg$path)
-  ## use https universally at this point! we deal with ssh case below
-  git2r::remote_add(r, "origin", create$clone_url)
+  origin_url <- switch(protocol, https = create$clone_url, ssh = create$ssh_url)
+  git2r::remote_add(r, "origin", origin_url)
 
   message("* Adding GitHub links to DESCRIPTION")
   use_github_links(pkg$path)
@@ -96,16 +104,16 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   }
 
   message("* Pushing to GitHub and setting remote tracking branch")
-  ## in https case, when GITHUB_PAT is passed as password,
-  ## the username is immaterial, but git2r doesn't know that
-  ## switch to git2r::cred_token() when CRAN version > v0.11.0
-  cred <- git2r::cred_user_pass("EMAIL", auth_token)
-  git2r::push(r, "origin", "refs/heads/master", credentials = cred)
-  ## now change remote URL if user requested ssh
   if (protocol == "ssh") {
-    ## switch to git2r::remote_set_url() when CRAN version > v0.11.0
-    git2r::remote_remove(r, "origin")
-    git2r::remote_add(r, "origin", create$ssh_url)
+    ## [1] push via ssh required for success setting remote tracking branch
+    ## [2] to get passphrase from ssh-agent, you must use NULL credentials
+    git2r::push(r, "origin", "refs/heads/master")
+  } else { ## protocol == "https"
+    ## in https case, when GITHUB_PAT is passed as password,
+    ## the username is immaterial, but git2r doesn't know that
+    ## switch to git2r::cred_token() when CRAN version > v0.11.0
+    cred <- git2r::cred_user_pass("EMAIL", auth_token)
+    git2r::push(r, "origin", "refs/heads/master", credentials = cred)
   }
 
   git2r::branch_set_upstream(git2r::head(r), "origin/master")
