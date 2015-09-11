@@ -1,3 +1,9 @@
+This is a resubmission:
+
+* http -> https in link to CRAN policies.
+
+---
+
 ## Release summary
 
 * `check()` now uses `--as-cran`, suppressing just `_R_CHECK_CRAN_INCOMING_`
@@ -18,13 +24,7 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs. 
 
-There were 3 NOTEs:
-
-* checking CRAN incoming feasibility ... NOTE
-  Found the following (possibly) invalid URLs:
-  URL: http://cran.r-project.org/web/packages/policies.html
-  
-  This is a false positive - that's not a package URL.
+There were 2 NOTEs:
 
 * checking foreign function calls ... NOTE
   Evaluating ‘dll$foo’ during check gives error

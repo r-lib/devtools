@@ -36,7 +36,7 @@ function called \code{release_questions()} that returns a character vector
 of additional questions to ask.
 
 You also need to read the CRAN repository policy at
-\url{http://cran.r-project.org/web/packages/policies.html} and make
+\url{https://cran.r-project.org/web/packages/policies.html} and make
 sure you're in line with the policies. \code{release} tries to automate as
 many of polices as possible, but it's impossible to be completely
 comprehensive, and they do change in between releases of devtools.
