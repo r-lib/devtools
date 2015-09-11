@@ -1,7 +1,12 @@
 ## Release summary
 
-* `check()` now uses `--as-cran`, suppressing off `_R_CHECK_CRAN_INCOMING_`
-  (except during `release()`)
+* `check()` now uses `--as-cran`, suppressing just `_R_CHECK_CRAN_INCOMING_`
+  (except during `release()`). Hopefully this will improve the quality of
+  devtools mediated submissions.
+  
+* Imports needed functions from base packages, eliminating a NOTE.
+
+* Removes a library() call, eliminating a NOTE.
   
 * Many other bug fixes and small new features
 
@@ -13,7 +18,13 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs. 
 
-There were 2 NOTEs:
+There were 3 NOTEs:
+
+* checking CRAN incoming feasibility ... NOTE
+  Found the following (possibly) invalid URLs:
+  URL: http://cran.r-project.org/web/packages/policies.html
+  
+  This is a false positive - that's not a package URL.
 
 * checking foreign function calls ... NOTE
   Evaluating ‘dll$foo’ during check gives error
@@ -33,7 +44,7 @@ There were 2 NOTEs:
 
 ## Downstream dependencies
 
-* I ran R CMD check on all 44 downstream dependencies of devtools.
+* I ran R CMD check on all 45 downstream dependencies of devtools.
   Summary at: https://github.com/hadley/devtools/blob/master/revdep/summary.md
 
 * There was 1 failure: 

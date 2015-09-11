@@ -10,7 +10,7 @@
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Chicago              |
-|date     |2015-09-08                   |
+|date     |2015-09-10                   |
 
 ## Packages
 
@@ -35,7 +35,12 @@
 |whisker    |   |0.3-2   |2013-04-28 |CRAN (R 3.2.0) |
 
 # Check results
-42 checked out of 44 dependencies 
+43 checked out of 45 dependencies 
+
+## acmeR (1.1.0)
+Maintainer: Robert Wolpert <wolpert@stat.duke.edu>
+
+__OK__
 
 ## aRxiv (0.5.10)
 Maintainer: Karl Broman <kbroman@biostat.wisc.edu>  
@@ -256,7 +261,7 @@ Bug reports: http://github.com/seananderson/metafolio/issues
 ```
 checking whether package ‘metafolio’ can be installed ... ERROR
 Installation failed.
-See ‘/private/tmp/RtmpbElJT3/check_cran15b289771237/metafolio.Rcheck/00install.out’ for details.
+See ‘/private/tmp/RtmpGK5EfP/check_cran4b37d09338a/metafolio.Rcheck/00install.out’ for details.
 ```
 ```
 DONE
@@ -684,7 +689,7 @@ Bug reports: https://github.com/jbryer/PSAboot/issues
 checking whether package ‘PSAboot’ can be installed ... WARNING
 Found the following significant warnings:
   Warning: replacing previous import by ‘party::show’ when loading ‘PSAboot’
-See ‘/private/tmp/RtmpbElJT3/check_cran15b289771237/PSAboot.Rcheck/00install.out’ for details.
+See ‘/private/tmp/RtmpGK5EfP/check_cran4b37d09338a/PSAboot.Rcheck/00install.out’ for details.
 ```
 ```
 checking dependencies in R code ... NOTE
@@ -746,13 +751,13 @@ DONE
 Status: 1 NOTE
 ```
 
-## rfishbase (2.0.2)
+## rfishbase (2.0.3)
 Maintainer: Carl Boettiger <cboettig@ropensci.org>  
 Bug reports: https://github.com/ropensci/rfishbase/issues
 
 __OK__
 
-## satellite (0.1.0)
+## satellite (0.2.0)
 Maintainer: Tim Appelhans
  <admin@environmentalinformatics-marburg.de>
 

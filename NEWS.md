@@ -1,4 +1,4 @@
-# devtools 1.9.0.9000
+# devtools 1.9.1
 
 * Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
 
