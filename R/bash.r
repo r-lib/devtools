@@ -6,5 +6,5 @@
 bash <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  in_dir(pkg$path, system("bash"))
+  withr::in_dir(pkg$path, system("bash"))
 }

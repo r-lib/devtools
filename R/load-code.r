@@ -23,7 +23,7 @@ load_code <- function(pkg = ".") {
   }
   on.exit(cleanup())
 
-  in_dir(file.path(pkg$path), source_many(paths, env))
+  withr::in_dir(file.path(pkg$path), source_many(paths, env))
   success <- TRUE
 
   invisible(r_files)
