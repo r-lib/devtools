@@ -21,21 +21,21 @@
 compile_dll <- function(pkg = ".", quiet = FALSE) {
   pkg <- as.package(pkg)
 
-  old <- set_envvar(compiler_flags(TRUE), "prefix")
-  on.exit(set_envvar(old))
+  old <- withr::with_envvar(compiler_flags(TRUE), "prefix", {
 
-  if (!needs_compile(pkg)) return(invisible())
-  compile_rcpp_attributes(pkg)
+    if (!needs_compile(pkg)) return(invisible())
+    compile_rcpp_attributes(pkg)
 
-  # Mock install the package to generate the DLL
-  if (!quiet) message("Re-compiling ", pkg$package)
-  install_dir <- tempfile("devtools_install_")
-  dir.create(install_dir)
-  inst <- install_min(pkg, install_dir, components = "libs",
-    args = if (needs_clean(pkg)) "--preclean",
-    quiet = quiet)
+    # Mock install the package to generate the DLL
+    if (!quiet) message("Re-compiling ", pkg$package)
+    install_dir <- tempfile("devtools_install_")
+    dir.create(install_dir)
+    inst <- install_min(pkg, install_dir, components = "libs",
+      args = if (needs_clean(pkg)) "--preclean",
+      quiet = quiet)
 
-  invisible(dll_path(pkg))
+    invisible(dll_path(pkg))
+  })
 }
 
 #' Remove compiled objects from /src/ directory

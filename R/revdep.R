@@ -121,20 +121,20 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
   withr::with_libpaths(libpath, install(pkg, reload = FALSE, quiet = TRUE))
   on.exit(remove.packages(pkg$package, libpath), add = TRUE)
 
-  old <- set_envvar(c(
+  old <- withr::with_envvar(c(
     NOT_CRAN = "false",
     RGL_USE_NULL = "true"
-  ))
-  on.exit(set_envvar(old), add = TRUE)
+  ), {
 
-  message("Finding reverse dependencies")
-  pkgs <- revdep(pkg$package, recursive = recursive, ignore = ignore,
-    bioconductor = bioconductor, dependencies = dependencies)
-  check_cran(pkgs, revdep_pkg = pkg$package, libpath = libpath,
-    srcpath = srcpath, bioconductor = bioconductor, type = type,
-    threads = threads, check_dir = check_dir)
+    message("Finding reverse dependencies")
+    pkgs <- revdep(pkg$package, recursive = recursive, ignore = ignore,
+      bioconductor = bioconductor, dependencies = dependencies)
+    check_cran(pkgs, revdep_pkg = pkg$package, libpath = libpath,
+      srcpath = srcpath, bioconductor = bioconductor, type = type,
+      threads = threads, check_dir = check_dir)
 
-  list(check_dir = check_dir, libpath = libpath, pkg = pkg, deps = pkgs)
+    list(check_dir = check_dir, libpath = libpath, pkg = pkg, deps = pkgs)
+  })
 }
 
 cran_packages <- memoise::memoise(function() {
