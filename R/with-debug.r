@@ -5,7 +5,7 @@
 #' @param CXXFLAGS flags for compiling C++ code
 #' @param FFLAGS flags for compiling Fortran code.
 #' @param FCFLAGS flags for Fortran 9x code.
-#' @inheritParams with_envvar
+#' @inheritParams withr::with_envvar
 #' @inheritParams compiler_flags
 #' @family debugging flags
 #' @export
@@ -28,7 +28,7 @@ with_debug <- function(code, CFLAGS = NULL, CXXFLAGS = NULL,
 
   flags <- unlist(modifyList(as.list(defaults), as.list(flags)))
 
-  with_makevars(flags, code)
+  withr::with_makevars(flags, code)
 }
 
 #' Default compiler flags used by devtools.

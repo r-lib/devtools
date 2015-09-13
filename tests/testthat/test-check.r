@@ -7,7 +7,7 @@ test_that("return messages", {
   check_dir_name <- sprintf("%s.Rcheck", pkg_name)
 
   on.exit(unlink(check_dir_name, recursive = TRUE), add = TRUE)
-  with_envvar(
+  withr::with_envvar(
     list(
       "_R_CHECK_RD_XREFS_"="FALSE",
       "_R_CHECK_CRAN_INCOMING_"="FALSE"
