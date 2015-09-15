@@ -75,9 +75,13 @@ load_pkg_description <- function(path, create) {
   path_desc <- file.path(path, "DESCRIPTION")
 
   if (!file.exists(path_desc)) {
-    if (is.na(create) && interactive()) {
-      message("No package infrastructure found in ", path, ". Create it?")
-      create <- (menu(c("Yes", "No")) == 1)
+    if (is.na(create)) {
+      if (interactive()) {
+        message("No package infrastructure found in ", path, ". Create it?")
+        create <- (menu(c("Yes", "No")) == 1)
+      } else {
+        create <- FALSE
+      }
     }
 
     if (create) {
