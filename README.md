@@ -69,11 +69,13 @@ Building and installing:
 * `build()` builds a package file from package sources. You can
   use it to build a binary version of your package.
 
-* `install_github()` installs an R package from github,
-  `install_gitorious()` from gitorious, `install_bitbucket()` from
-  bitbucket, `install_url()` from an arbitrary url and
-  `install_local()` from a local file on disk. `install_version()`
-  installs a specified version from cran.
+* `install_*` functions install an R package:
+   * `install_github()` from github,
+   * `install_gitorious()` from gitorious, 
+   * `install_bitbucket()` from bitbucket, 
+   * `install_url()` from an arbitrary url and
+   * `install_local()` from a local file on disk. 
+   * `install_version()` installs a specified version from cran.
 
 Check and release:
 
