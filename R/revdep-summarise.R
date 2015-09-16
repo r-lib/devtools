@@ -17,8 +17,10 @@ revdep_check_save_logs <- function(res, log_dir = "revdep") {
 
     file.copy(file.path(path, logs), file.path(out, logs))
 
-    desc <- check_description(path)
-    write_dcf(file.path(out, "DESCRIPTION"), desc[c("Package", "Version", "Maintainer")])
+    try({
+      desc <- check_description(path)
+      write_dcf(file.path(out, "DESCRIPTION"), desc[c("Package", "Version", "Maintainer")])
+    })
   }
 
   pkgs <- check_dirs(res$check_dir)
