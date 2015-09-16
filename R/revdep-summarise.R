@@ -48,7 +48,7 @@ revdep_check_summary <- function(res) {
   pkg_df <- package_info(pkgs, libpath = res$libpath)
 
   checks <- check_dirs(res$check_dir)
-  summaries <- vapply(checks, check_summary_package, character(1))
+  summaries <- vapply(checks, try_check_summary_package, character(1))
 
   paste0(
     "# Setup\n\n",
@@ -62,6 +62,14 @@ revdep_check_summary <- function(res) {
     paste0(length(checks), " checked out of ", length(res$deps), " dependencies \n\n"),
     paste0(summaries, collapse = "\n")
   )
+}
+
+try_check_summary_package <- function(path) {
+  res <- try(check_summary_package(path), silent = TRUE)
+  if (inherits(res, "try-error")) {
+    res <- as.character(res)
+  }
+  res
 }
 
 check_summary_package <- function(path) {
