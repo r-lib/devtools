@@ -71,7 +71,6 @@ Building and installing:
 
 * `install_*` functions install an R package:
    * `install_github()` from github,
-   * `install_gitorious()` from gitorious, 
    * `install_bitbucket()` from bitbucket, 
    * `install_url()` from an arbitrary url and
    * `install_local()` from a local file on disk. 
