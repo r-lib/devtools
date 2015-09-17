@@ -59,7 +59,7 @@ read_dcf <- function(path, recode = FALSE) {
   dcf <- read.dcf(path, all = FALSE, keep.white = fields)[1, ]
   if (recode && encoding != "ASCII") {
     dcf <- iconv(from = encoding, dcf)
-    dcf$Encoding <- "UTF-8"
+    dcf[["Encoding"]] <- "UTF-8"
   }
   as.list(dcf)
 }
