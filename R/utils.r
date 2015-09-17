@@ -46,8 +46,14 @@ is_installed <- function(pkg, version = 0) {
 }
 
 read_dcf <- function(path) {
-  fields <- colnames(read.dcf(path))
-  as.list(read.dcf(path, keep.white = fields)[1, ])
+  dcf <- read.dcf(path)
+  fields <- colnames(dcf)
+  if ("Encoding" %in% fields) {
+    encoding <- dcf[1L, "Encoding"]
+  } else {
+    encoding <- "UTF-8"
+  }
+  as.list(iconv(from = encoding, read.dcf(path, keep.white = fields)[1, ]))
 }
 
 write_dcf <- function(path, desc) {
