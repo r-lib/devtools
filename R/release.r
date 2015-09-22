@@ -249,7 +249,7 @@ cran_comments <- function(pkg = ".") {
     stop("Can't find cran-comments.md in ", pkg$package, ".\n",
       "This file gives CRAN volunteers comments about the submission,\n",
       "and it must exist.  Please create it using this guide:\n",
-      "http://r-pkgs.had.co.nz/release.html#release-check",
+      "http://r-pkgs.had.co.nz/release.html#release-check\n",
       "Then run use_build_ignore('cran-comments.md')",
       call. = FALSE)
   }
