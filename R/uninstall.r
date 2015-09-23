@@ -10,7 +10,7 @@
 #' @param ... additional arguments passed to \code{\link{remove.packages}}.
 #' @export
 #' @family package installation
-#' @seealso \code{\link[withr]{with_debug}} to install packages with debugging flags
+#' @seealso \code{\link{with_debug}} to install packages with debugging flags
 #'   set.
 uninstall <- function(pkg = ".", unload = TRUE, quiet = FALSE, ...) {
 

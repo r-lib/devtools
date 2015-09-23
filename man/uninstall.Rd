@@ -23,7 +23,7 @@ To uninstall a package from a non-default library,
 use \code{\link[withr]{with_libpaths}}.
 }
 \seealso{
-\code{\link[withr]{with_debug}} to install packages with debugging flags
+\code{\link{with_debug}} to install packages with debugging flags
   set.
 
 Other package installation: \code{\link{install_bitbucket}};
