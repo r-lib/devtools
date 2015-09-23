@@ -152,9 +152,10 @@ dev_remote_type <- function(remotes = "") {
     } else {
       stop("Malformed remote specification '", x, "'", call. = FALSE)
     }
-    tryCatch(fun <- get(x = paste0("install_", tolower(type)),
-                        envir = asNamespace("devtools"),
-                        mode = "function"),
+    tryCatch(
+      fun <- get(x = paste0("install_", tolower(type)),
+        envir = asNamespace("devtools"),
+        mode = "function"),
       error = function(e) {
         stop("Malformed remote specification '", x, "'", call. = FALSE)
       })
