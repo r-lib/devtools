@@ -148,7 +148,8 @@ cran_packages <- memoise::memoise(function() {
 })
 
 bioc_packages <- memoise::memoise(function() {
-  con <- url("http://bioconductor.org/packages/release/bioc/VIEWS")
+  views <- paste(BiocInstaller::biocinstallRepos()[["BioCsoft"]], "VIEWS", sep = "/")
+  con <- url(views)
   on.exit(close(con))
   bioc <- read.dcf(con)
   rownames(bioc) <- bioc[, 1]
