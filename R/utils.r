@@ -56,7 +56,9 @@ write_dcf <- function(path, desc) {
   desc <- gsub("\n[ \t]*\n", "\n .\n ", desc, perl = TRUE, useBytes = TRUE)
   desc <- gsub("\n \\.([^\n])", "\n  .\\1", desc, perl = TRUE, useBytes = TRUE)
 
-  text <- paste0(names(desc), ": ", desc, collapse = "\n")
+  starts_with_whitespace <- grepl("^\\s", desc, perl = TRUE, useBytes = TRUE)
+  delimiters <- ifelse(starts_with_whitespace, ":", ": ")
+  text <- paste0(names(desc), delimiters, desc, collapse = "\n")
 
   if (substr(text, nchar(text), 1) != "\n") {
     text <- paste0(text, "\n")
