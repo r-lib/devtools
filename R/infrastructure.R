@@ -399,10 +399,8 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
   pkg <- as.package(pkg)
 
   to_save <- dots(...)
-  is_name <- vapply(to_save, is.symbol, logical(1))
-  if (any(!is_name)) {
-    stop("Can only save existing named objects", call. = FALSE)
-  }
+  check_to_save(to_save)
+
   objs <- vapply(to_save, as.character, character(1))
 
   if (internal) {
@@ -433,6 +431,13 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
 
   }
   invisible()
+}
+
+check_to_save <- function(to_save) {
+  is_name <- vapply(to_save, is.symbol, logical(1))
+  if (any(!is_name)) {
+    stop("Can only save existing named objects", call. = FALSE)
+  }
 }
 
 #' Use \code{data-raw} to compute package datasets.
