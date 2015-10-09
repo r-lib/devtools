@@ -418,6 +418,10 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
 }
 
 check_to_save <- function(to_save) {
+  if (length(to_save) == 0L) {
+    stop("Nothing to save", call. = FALSE)
+  }
+
   is_name <- vapply(to_save, is.symbol, logical(1))
   if (any(!is_name)) {
     stop("Can only save existing named objects", call. = FALSE)
