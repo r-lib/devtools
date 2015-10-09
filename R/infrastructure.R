@@ -401,7 +401,7 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
   to_save <- dots(...)
   check_to_save(to_save)
 
-  objs <- vapply(to_save, as.character, character(1))
+  objs <- get_objs_from_to_save(to_save)
 
   if (internal) {
     data_path <- file.path(pkg$path, "R", "sysdata.rda")
@@ -438,6 +438,11 @@ check_to_save <- function(to_save) {
   if (any(!is_name)) {
     stop("Can only save existing named objects", call. = FALSE)
   }
+}
+
+get_objs_from_to_save <- function(to_save) {
+  objs <- vapply(to_save, as.character, character(1))
+  objs
 }
 
 #' Use \code{data-raw} to compute package datasets.
