@@ -403,16 +403,15 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
 
   objs <- get_objs_from_to_save(to_save)
 
-  paths <- get_paths_for_objs(pkg, internal, objs)
-  check_data_paths(paths, overwrite)
+  save_info <- get_save_info_for_objs(pkg, internal, objs)
+  check_data_paths(save_info$paths, overwrite)
 
-  message("Saving ", paste(objs, collapse = ", "), " to ",
-    unique(paths))
+  message("Saving ", paste(objs, collapse = ", "),
+          " as ", paste(basename(save_info$paths), collapse = ", "),
+          " to ", save_info$dir_name)
   envir <- parent.frame()
-  save_one <- function(name, path) {
-    save(list = name, file = path, envir = envir, compress = compress)
-  }
-  Map(save_one, objs, paths)
+  mapply(save, list = save_info$objs, file = save_info$paths,
+         MoreArgs = list(envir = envir, compress = compress))
 
   invisible()
 }
@@ -440,15 +439,17 @@ get_objs_from_to_save <- function(to_save) {
   objs
 }
 
-get_paths_for_objs <- function(pkg, internal, objs) {
+get_save_info_for_objs <- function(pkg, internal, objs) {
   if (internal) {
-    paths <- file.path(pkg$path, "R", "sysdata.rda")
-    paths <- rep(paths, length(objs))
+    dir_name <- file.path(pkg$path, "R")
+    paths <- file.path(dir_name, "sysdata.rda")
+    objs <- list(objs)
   } else {
-    paths <- file.path(pkg$path, "data", paste0(objs, ".rda"))
+    dir_name <- file.path(pkg$path, "data")
+    paths <- file.path(dir_name, paste0(objs, ".rda"))
   }
 
-  paths
+  list(dir_name = dir_name, paths = paths, objs = objs)
 }
 
 check_data_paths <- function(paths, overwrite) {
