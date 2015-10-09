@@ -403,33 +403,17 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
 
   objs <- get_objs_from_to_save(to_save)
 
-  if (internal) {
-    data_path <- file.path(pkg$path, "R", "sysdata.rda")
-    if (file.exists(data_path) && !overwrite) {
-      stop("R/sysdata.rda exists. Use overwrite = TRUE to overwrite",
-        call. = FALSE)
-    }
+  paths <- get_paths_for_objs(pkg, internal, objs)
+  check_data_paths(paths, overwrite)
 
-    message("Saving ", paste(objs, collapse = ", "), " to R/sysdata.rda")
-    save(..., file = data_path, envir = parent.frame(), compress = compress)
-  } else {
-    data_path <- file.path(pkg$path, "data")
-    if (!file.exists(data_path)) dir.create(data_path)
-
-    paths <- file.path(pkg$path, "data", paste0(objs, ".rda"))
-    if (any(file.exists(paths)) && !overwrite) {
-      stop(paste(basename(paths), collapse = ", "), " already exist. ",
-        "Use overwrite = TRUE to overwrite", call. = FALSE)
-    }
-    message("Saving ", paste(objs, collapse = ", "), " to ",
-      paste0("data/", basename(paths), collapse = ", "))
-    envir <- parent.frame()
-    save_one <- function(name, path) {
-      save(list = name, file = path, envir = envir, compress = compress)
-    }
-    Map(save_one, objs, paths)
-
+  message("Saving ", paste(objs, collapse = ", "), " to ",
+    unique(paths))
+  envir <- parent.frame()
+  save_one <- function(name, path) {
+    save(list = name, file = path, envir = envir, compress = compress)
   }
+  Map(save_one, objs, paths)
+
   invisible()
 }
 
@@ -443,6 +427,35 @@ check_to_save <- function(to_save) {
 get_objs_from_to_save <- function(to_save) {
   objs <- vapply(to_save, as.character, character(1))
   objs
+}
+
+get_paths_for_objs <- function(pkg, internal, objs) {
+  if (internal) {
+    paths <- file.path(pkg$path, "R", "sysdata.rda")
+    paths <- rep(paths, length(objs))
+  } else {
+    paths <- file.path(pkg$path, "data", paste0(objs, ".rda"))
+  }
+
+  paths
+}
+
+check_data_paths <- function(paths, overwrite) {
+  data_path <- dirname(paths[[1]])
+  if (!file.exists(data_path)) dir.create(data_path)
+
+  if (!overwrite) {
+    paths_exist <- which(setNames(file.exists(paths), paths))
+
+    if (length(paths_exist) > 0L) {
+      paths_exist <- unique(names(paths_exist))
+      existing_names <- basename(paths_exist)
+      stop(paste(existing_names, collapse = ", "), " already exists in ",
+           dirname(paths_exist[[1L]]),
+           ". ",
+           "Use overwrite = TRUE to overwrite", call. = FALSE)
+    }
+  }
 }
 
 #' Use \code{data-raw} to compute package datasets.
