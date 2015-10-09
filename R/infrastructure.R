@@ -430,6 +430,13 @@ check_to_save <- function(to_save) {
 
 get_objs_from_to_save <- function(to_save) {
   objs <- vapply(to_save, as.character, character(1))
+  duplicated_objs <- which(setNames(duplicated(objs), objs))
+  if (length(duplicated_objs) > 0L) {
+    objs <- unique(objs)
+    warning("Saving duplicates only once: ",
+            paste(names(duplicated_objs), collapse = ", "),
+            call. = FALSE)
+  }
   objs
 }
 
