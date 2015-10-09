@@ -25,7 +25,7 @@ Imports:
     digest,
     rstudioapi (>= 0.2.0),
     jsonlite,
-    roxygen2 (>= 4.1.0),
+    roxygen2 (>= 4.1.1.9001),
     rversions,
     stats,
     git2r (>= 0.11.0)
