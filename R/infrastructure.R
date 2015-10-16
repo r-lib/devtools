@@ -420,7 +420,7 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
 
     paths <- file.path(pkg$path, "data", paste0(objs, ".rda"))
     if (any(file.exists(paths)) && !overwrite) {
-      stop(paste(basename(paths), collapse = ", "), " already exist. ",
+      stop(paste(basename(paths), collapse = ", "), " already exists. ",
         "Use overwrite = TRUE to overwrite", call. = FALSE)
     }
     message("Saving ", paste(objs, collapse = ", "), " to ",
