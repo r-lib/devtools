@@ -71,7 +71,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
   }
 
   show_env_vars(compiler_flags(FALSE))
-  withr::with_envvar(compiler_flags(FALSE), "prefix", {
+  withr::with_envvar(compiler_flags(FALSE), {
 
     rule("Building ", pkg$package)
     built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args, ...)
@@ -87,7 +87,7 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
     }
 
     invisible(TRUE)
-  })
+  }, "prefix")
 }
 
 

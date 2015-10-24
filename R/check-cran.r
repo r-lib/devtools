@@ -48,7 +48,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   libpath <- normalizePath(libpath)
 
   # Add the temoporary library and remove on exit
-  libpaths_orig <- set_libpaths(libpath)
+  libpaths_orig <- withr::set_libpaths(libpath)
   on.exit(.libPaths(libpaths_orig), add = TRUE)
 
   rule("Installing dependencies") # --------------------------------------------

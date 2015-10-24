@@ -21,7 +21,7 @@
 compile_dll <- function(pkg = ".", quiet = FALSE) {
   pkg <- as.package(pkg)
 
-  old <- withr::with_envvar(compiler_flags(TRUE), "prefix", {
+  old <- withr::with_envvar(compiler_flags(TRUE), {
 
     if (!needs_compile(pkg)) return(invisible())
     compile_rcpp_attributes(pkg)
@@ -35,7 +35,7 @@ compile_dll <- function(pkg = ".", quiet = FALSE) {
       quiet = quiet)
 
     invisible(dll_path(pkg))
-  })
+  }, "prefix")
 }
 
 #' Remove compiled objects from /src/ directory

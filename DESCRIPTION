@@ -39,7 +39,5 @@ Suggests:
     knitr,
     lintr (>= 0.2.1),
     bitops
-Remotes:
-    jimhester/withr
 License: GPL (>= 2)
 VignetteBuilder: knitr
