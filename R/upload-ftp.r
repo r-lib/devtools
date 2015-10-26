@@ -1,4 +1,8 @@
 upload_ftp <- function(file, url, verbose = FALSE){
+  if (packageVersion("curl") < "0.9") {
+    stop("package 'curl' must be >= 0.9")
+  }
+
   stopifnot(file.exists(file))
   stopifnot(is.character(url))
   con <- file(file, open = "rb")

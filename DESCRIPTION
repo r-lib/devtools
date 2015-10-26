@@ -15,7 +15,6 @@ Depends:
     R (>= 3.0.2)
 Imports:
     httr (>= 0.4),
-    curl (>= 0.9),
     utils,
     tools,
     methods,
@@ -30,6 +29,7 @@ Imports:
     stats,
     git2r (>= 0.11.0)
 Suggests:
+    curl (>= 0.9),
     testthat (>= 0.7),
     BiocInstaller,
     Rcpp (>= 0.10.0),
