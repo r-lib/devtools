@@ -78,7 +78,7 @@ any locale setting
 
 \section{\code{with_makevars}}{
 
-Temporarily change contents of an existing ‘Makevars’ file.
+Temporarily change contents of an existing Makevars file.
 }
 
 \section{\code{with_options}}{

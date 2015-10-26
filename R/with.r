@@ -54,7 +54,7 @@ with_locale <- function(new, code) {
 
 #' @rdname devtools-deprecated
 #' @section \code{with_makevars}:
-#' Temporarily change contents of an existing ‘Makevars’ file.
+#' Temporarily change contents of an existing Makevars file.
 #' @export
 with_makevars <- function(new, code, path = file.path("~", ".R", "Makevars")) {
   .Deprecated(new = "withr::with_makevars", package = "devtools")
