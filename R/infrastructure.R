@@ -175,7 +175,7 @@ use_travis <- function(pkg = ".") {
 #' Add coveralls to basic travis template to a package.
 #' @export
 use_coveralls <- function(pkg = ".") {
-  .Deprecated("use_coverage(type = \"coveralls\")")
+  .Deprecated("use_coverage(type = \"coveralls\")", package = "devtools")
   use_coverage(pkg, type = "coveralls")
 }
 
