@@ -34,7 +34,7 @@ set_path(old)
 length(get_path())
 }
 \seealso{
-\code{\link{with_path}} to temporarily set the path for a block
+\code{\link[withr]{with_path}} to temporarily set the path for a block
   of code
 
 Other path: \code{\link{on_path}}

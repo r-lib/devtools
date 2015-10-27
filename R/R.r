@@ -11,7 +11,7 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
     on.exit(set_path(old))
   }
 
-  in_dir(path, system_check(r_path, options, c(r_profile(),
+  withr::with_dir(path, system_check(r_path, options, c(r_profile(),
                                                r_env_vars(), env_vars), ...))
 }
 
