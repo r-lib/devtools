@@ -1,4 +1,5 @@
 run_example <- function(path, show = TRUE, test = FALSE, run = TRUE, env = new.env(parent = globalenv())) {
+  check_suggsted("evaluate")
   rd <- tools::parse_Rd(path)
 
   ex <- rd[rd_tags(rd) == "examples"]
