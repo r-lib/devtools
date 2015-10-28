@@ -48,9 +48,18 @@ is_installed <- function(pkg, version = 0) {
 
 check_suggested <- function(pkg, version = 0) {
   if (!is_installed(pkg, version)) {
-    stop(sQuote(pkg),
-         if (version == 0) "" else paste0(" >= ", version),
-         " must be installed for this functionality", call. = FALSE)
+    msg <- paste0(sQuote(pkg),
+      if (version == 0) "" else paste0(" >= ", version),
+      " must be installed for this functionality.")
+
+    if (interactive()) {
+      message(msg, "\nWould you like to install it?")
+      if (menu(c("Yes", "No")) == 1) {
+        install.packages(pkg)
+      }
+    } else {
+      stop(msg, call. = FALSE)
+    }
   }
 }
 
