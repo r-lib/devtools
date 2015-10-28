@@ -21,12 +21,9 @@ Imports:
     methods,
     memoise,
     whisker,
-    evaluate,
     digest,
     rstudioapi (>= 0.2.0),
     jsonlite,
-    roxygen2 (>= 4.1.1.9001),
-    rversions,
     stats,
     git2r (>= 0.11.0),
     withr
@@ -38,7 +35,10 @@ Suggests:
     rmarkdown,
     knitr,
     lintr (>= 0.2.1),
-    bitops
+    bitops,
+    roxygen2 (>= 4.1.1.9001),
+    evaluate,
+    rversions
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.0

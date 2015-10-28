@@ -101,6 +101,7 @@ add_rstudio_project <- use_rstudio
 #' @rdname infrastructure
 use_vignette <- function(name, pkg = ".") {
   pkg <- as.package(pkg)
+  check_suggested("rmarkdown")
 
   add_desc_package(pkg, "Suggests", "knitr")
   add_desc_package(pkg, "Suggests", "rmarkdown")
@@ -122,6 +123,7 @@ use_vignette <- function(name, pkg = ".") {
 #' @rdname infrastructure
 use_rcpp <- function(pkg = ".") {
   pkg <- as.package(pkg)
+  check_suggested("Rcpp", "0.10.0")
 
   message("Adding Rcpp to LinkingTo and Imports")
   add_desc_package(pkg, "LinkingTo", "Rcpp")

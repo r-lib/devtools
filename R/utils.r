@@ -42,7 +42,16 @@ render_template <- function(name, data = list()) {
 }
 
 is_installed <- function(pkg, version = 0) {
-  system.file(package = pkg) != "" && packageVersion(pkg) > version
+  installed_version <- tryCatch(utils::packageVersion(pkg), error = function(e) NA)
+  !is.na(installed_version) && installed_version >= version
+}
+
+check_suggested <- function(pkg, version = 0) {
+  if (!is_installed(pkg, version)) {
+    stop(sQuote(pkg),
+         if (version == 0) "" else paste0(" >= ", version),
+         " must be installed for this functionality", call. = FALSE)
+  }
 }
 
 read_dcf <- function(path) {

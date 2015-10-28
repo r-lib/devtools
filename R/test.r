@@ -18,7 +18,7 @@
 #' @inheritParams run_examples
 #' @export
 test <- function(pkg = ".", filter = NULL, ...) {
-  check_testthat()
+  check_suggested("testthat", "0.7")
   pkg <- as.package(pkg)
 
   if (!uses_testthat(pkg) && interactive()) {
@@ -99,11 +99,4 @@ uses_testthat <- function(pkg = ".") {
   )
 
   any(dir.exists(paths))
-}
-
-
-check_testthat <- function() {
-  if (!requireNamespace("testthat", quietly = TRUE)) {
-    stop("Please install testthat", call. = FALSE)
-  }
 }
