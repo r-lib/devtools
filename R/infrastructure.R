@@ -17,7 +17,7 @@ NULL
 use_testthat <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  check_testthat()
+  check_suggested("testthat", "0.7")
   if (uses_testthat(pkg)) {
     stop("Package already has testing infrastructure", call. = FALSE)
   }
@@ -46,7 +46,7 @@ add_test_infrastructure <- use_testthat
 use_test <- function(name, pkg = ".") {
   pkg <- as.package(pkg)
 
-  check_testthat()
+  check_suggested("testthat", "0.7")
   if (!uses_testthat(pkg)) {
     use_testthat(pkg)
   }
