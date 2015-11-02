@@ -64,7 +64,7 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
   dir.create(temp_lib)
   on.exit(unlink(temp_lib, recursive = TRUE), add = TRUE)
 
-  with_libpaths(c(temp_lib, .libPaths()), R(cmd, path, quiet = quiet))
+  withr::with_libpaths(c(temp_lib, .libPaths()), R(cmd, path, quiet = quiet))
   targz <- paste0(pkg$package, "_", pkg$version, ".", ext)
 
   file.path(path, targz)

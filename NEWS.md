@@ -3,6 +3,9 @@
 * Bugfix for `Remotes: ` feature that prevented it from working if devtools was
   not attached as is done in travis-r (#936, @jimhester).
 
+* The `with_*()` functions split into the withr package, prior devtools
+  functions deprecated (#925, @jimhester).
+
 # devtools 1.9.1
 
 * Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
