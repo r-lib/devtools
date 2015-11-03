@@ -57,6 +57,7 @@ write_dcf <- function(path, desc) {
   desc <- gsub("\n \\.([^\n])", "\n  .\\1", desc, perl = TRUE, useBytes = TRUE)
 
   text <- paste0(names(desc), ": ", desc, collapse = "\n")
+  text <- gsub(" +\n", "\n", text)
 
   if (substr(text, nchar(text), 1) != "\n") {
     text <- paste0(text, "\n")
