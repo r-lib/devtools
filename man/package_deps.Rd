@@ -35,7 +35,7 @@ installation.}
 
 \item{object}{A \code{package_deps} object.}
 
-\item{...}{Additional arguments passed to \code{\link{install.packages}}.}
+\item{...}{Additional arguments passed to \code{install_packages}.}
 
 \item{quiet}{If \code{TRUE}, suppress output.}
 

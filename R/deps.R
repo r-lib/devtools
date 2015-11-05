@@ -23,7 +23,7 @@
 #'   installation.
 #'
 #' @param object A \code{package_deps} object.
-#' @param ... Additional arguments passed to \code{\link{install.packages}}.
+#' @param ... Additional arguments passed to \code{install_packages}.
 #'
 #' @return
 #'
