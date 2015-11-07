@@ -11,7 +11,7 @@ install_github(repo, username = NULL, ref = "master", subdir = NULL,
 \item{repo}{Repository address in the format
 \code{username/repo[/subdir][@ref|#pull]}. Alternatively, you can
 specify \code{subdir} and/or \code{ref} using the respective parameters
-(see below); if both is specified, the values in \code{repo} take
+(see below); if both are specified, the values in \code{repo} take
 precedence.}
 
 \item{username}{User name. Deprecated: please include username in the
@@ -23,7 +23,7 @@ name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.}
 \item{subdir}{subdirectory within repo that contains the R package.}
 
 \item{auth_token}{To install from a private repo, generate a personal
-access token (PAT) in \url{https://github.com/settings/applications} and
+access token (PAT) in \url{https://github.com/settings/tokens} and
 supply to this argument. This is safer than using a password because
 you can easily delete a PAT without affecting any others. Defaults to
 the \code{GITHUB_PAT} environment variable.}
@@ -58,7 +58,7 @@ install_github(c("hadley/httr@v0.4", "klutometis/roxygen#142",
 install_github("hadley/devtools")
 
 # To install from a private repo, use auth_token with a token
-# from https://github.com/settings/applications. You only need the
+# from https://github.com/settings/tokens. You only need the
 # repo scope. Best practice is to save your PAT in env var called
 # GITHUB_PAT.
 install_github("hadley/private", auth_token = "abc")
