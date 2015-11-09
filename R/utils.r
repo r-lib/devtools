@@ -105,3 +105,56 @@ is_bioconductor <- function(x) {
 trim_ws <- function(x) {
   gsub("^[[:space:]]+|[[:space:]]+$", "", x)
 }
+
+# For update_remotes:
+get_local_info <- function(packages) {
+  safe_strsplit <- function(x) {
+    if (length(x) == 0) {
+      return(NULL)
+    }
+    return(strsplit(x, ': ')[[1]][2])
+  }
+  message("Getting remote metadata from installed packages' DESCRIPTIONs.")
+  temp <- t(sapply(packages, function(package) {
+    remote_info <- readLines(file.path(find.package(package), 'DESCRIPTION'))
+    type <- suppressWarnings(safe_strsplit(grep('RemoteType', remote_info, value = TRUE)))
+    # Note: there might be a warning "input string # is invalid in this locale"
+    #       when running update_packages without specifying packages and it
+    #       starts going through all the installed packages.
+    if (length(type) == 0) {
+      return(c("non-remote", NA, NA, NA))
+    }
+    # The user may have listed packages that
+    # weren't installed from a remote git repo:
+    if (!(type %in% c('git', 'github'))) {
+      return(c("non-git", NA, NA, NA))
+    }
+    url <- safe_strsplit(grep('RemoteUrl', remote_info, value = TRUE))
+    repo <- safe_strsplit(grep('RemoteRepo', remote_info, value = TRUE))
+    username <- safe_strsplit(grep('RemoteUsername', remote_info, value = TRUE))
+    ref <- safe_strsplit(grep('RemoteRef', remote_info, value = TRUE))
+    sha <- safe_strsplit(grep('RemoteSha', remote_info, value = TRUE))
+    if (length(url) == 0 & type == 'github') {
+      url <- paste('https://github.com', username, repo, sep = '/')
+    }
+    if (length(ref) == 0 || is.na(ref)) {
+      ref <- 'master'
+    }
+    return(c(type, url, ref, sha))
+  }))
+  df <- as.data.frame(temp, stringsAsFactors = FALSE)
+  names(df) <- c('git', 'url', 'ref', 'sha1')
+  df$git <- df$git %in% c('git', 'github')
+  return(df)
+}
+
+get_remote_sha1 <- function(urls, refs = "master") {
+  message("Fetching remote SHA-1 hashes.")
+  temp <- unname(apply(data.frame(url = urls, ref = refs), 1, function(repo) {
+    sha1 <- grep(paste0('refs/heads/', repo['ref']),
+                 system(paste('git ls-remote -h', repo['url']), intern = TRUE),
+                 value = TRUE)
+    return(strsplit(sha1, '\t')[[1]][1])
+  }))
+  return(temp)
+}
