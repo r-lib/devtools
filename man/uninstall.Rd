@@ -20,7 +20,7 @@ package prior to uninstalling.}
 \description{
 Uses \code{remove.package} to uninstall the package.
 To uninstall a package from a non-default library,
-use \code{\link{with_libpaths}}.
+use \code{\link[withr]{with_libpaths}}.
 }
 \seealso{
 \code{\link{with_debug}} to install packages with debugging flags

@@ -1,9 +1,9 @@
 #' Find all dependencies of a CRAN or dev package.
 #'
-#' Find all the dependencies of a package and determine whether they ahead
-#' or behind cran. A \code{print()} method focusses on mismatches between local
-#' and CRAN version; a \code{update()} method installs outdated or missing
-#' packages from CRAN.
+#' Find all the dependencies of a package and determine whether they are ahead
+#' or behind CRAN. A \code{print()} method identifies mismatches (if any)
+#' between local and CRAN versions of each dependent package; an
+#' \code{update()} method installs outdated or missing packages from CRAN.
 #'
 #' @param pkg A character vector of package names. If missing, defaults to
 #'   the name of the package in the current directory.
@@ -15,19 +15,34 @@
 #'   "Suggests". \code{NA} is shorthand for "Depends", "Imports" and "LinkingTo"
 #'   and is the default. \code{FALSE} is shorthand for no dependencies (i.e.
 #'   just check this package, not its dependencies).
-#' @param quiet If \code{TRUE}, suppress output
+#' @param quiet If \code{TRUE}, suppress output.
 #' @param upgrade If \code{TRUE}, also upgrade any of out date dependencies.
 #' @param repos A character vector giving repositories to use.
 #' @param type Type of package to \code{update}.  If "both", will switch
 #'   automatically to "binary" to avoid interactive prompts during package
 #'   installation.
-#' @param object,... Arguments ot
-#' @return A data frame with additional.
+#'
+#' @param object A \code{package_deps} object.
+#' @param ... Additional arguments passed to \code{\link{install_packages}}.
+#'
+#' @return
+#'
+#' A \code{data.frame} with columns:
+#'
+#' \tabular{ll}{
+#' \code{package} \tab The dependent package's name,\cr
+#' \code{installed} \tab The currently installed version,\cr
+#' \code{available} \tab The version available on CRAN,\cr
+#' \code{diff} \tab An integer denoting whether the locally installed version
+#'   of the package is newer (1), the same (0) or older (-1) than the version
+#'   currently available on CRAN.\cr
+#' }
+#'
 #' @export
 #' @examples
 #' \dontrun{
 #' package_deps("devtools")
-#' # Use update to update any updated/
+#' # Use update to update any out-of-date dependencies
 #' update(package_deps("devtools"))
 #' }
 package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
@@ -152,7 +167,11 @@ dev_remote_type <- function(remotes = "") {
     } else {
       stop("Malformed remote specification '", x, "'", call. = FALSE)
     }
-    tryCatch(fun <- match.fun(paste0("install_", tolower(type))),
+    tryCatch(
+      fun <- get(x = paste0("install_", tolower(type)),
+        envir = asNamespace("devtools"),
+        mode = "function",
+        inherits = FALSE),
       error = function(e) {
         stop("Malformed remote specification '", x, "'", call. = FALSE)
       })

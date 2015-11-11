@@ -2,7 +2,7 @@
 #'
 #' Uses \code{remove.package} to uninstall the package.
 #' To uninstall a package from a non-default library,
-#' use \code{\link{with_libpaths}}.
+#' use \code{\link[withr]{with_libpaths}}.
 #'
 #' @inheritParams install
 #' @param unload if \code{TRUE} (the default), will automatically unload the

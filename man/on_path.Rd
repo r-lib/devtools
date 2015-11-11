@@ -16,7 +16,7 @@ Test if an object is on the path.
 on_path("R")
 on_path("gcc")
 on_path("foo", "bar")  # FALSE in most cases
-with_path(tempdir(), on_path("gcc"))
+withr::with_path(tempdir(), on_path("gcc"))
 }
 \seealso{
 Other path: \code{\link{path}}

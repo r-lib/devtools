@@ -57,7 +57,7 @@ find_vignette_extras <- function(pkg = ".") {
   extras <- readLines(extras_file, warn = FALSE)
   if (length(extras) == 0) return(character())
 
-  in_dir(vig_path, {
+  withr::with_dir(vig_path, {
     allfiles <- dir(all.files = TRUE, full.names = TRUE, recursive = TRUE,
       include.dirs = TRUE)
   })

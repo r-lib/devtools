@@ -4,7 +4,7 @@
 #' @return \code{set_path} invisibly returns the old path.
 #' @name path
 #' @family path
-#' @seealso \code{\link{with_path}} to temporarily set the path for a block
+#' @seealso \code{\link[withr]{with_path}} to temporarily set the path for a block
 #'   of code
 #' @examples
 #' path <- get_path()
@@ -51,7 +51,7 @@ add_path <- function(path, after = Inf) {
 #' on_path("R")
 #' on_path("gcc")
 #' on_path("foo", "bar")  # FALSE in most cases
-#' with_path(tempdir(), on_path("gcc"))
+#' withr::with_path(tempdir(), on_path("gcc"))
 on_path <- function(...) {
   commands <- c(...)
   stopifnot(is.character(commands))

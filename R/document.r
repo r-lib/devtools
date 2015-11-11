@@ -31,7 +31,7 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
     roclets <- setdiff(roclets, "collate")
   }
 
-  with_envvar(r_env_vars(),
+  withr::with_envvar(r_env_vars(),
     roxygen2::roxygenise(pkg$path, roclets = roclets, load_code = ns_env)
   )
 
