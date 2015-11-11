@@ -76,7 +76,6 @@ save logs with \code{revdep_check_save_logs}.
 \item Uninstall \code{pkg} (so other reverse dependency checks don't
   use the development version instead of the CRAN version)
 }
-
 }
 
 \section{Package library}{
@@ -87,7 +86,6 @@ interfere with your default library, but means that if you restart R
 between checks, you'll need to reinstall all the packages. If you're
 doing reverse dependency checks frequently, I recommend that you create
 a directory for these packages and set \code{options(devtools.revdep.libpath)}.
-
 }
 \examples{
 \dontrun{

@@ -19,7 +19,6 @@ Arguments that take a list}
 Create a default DESCRIPTION file for a package.
 }
 \details{
-
 To set the default author and licenses, set \code{options}
 \code{devtools.desc.author} and \code{devtools.desc.license}.  I use
 \code{options(devtools.desc.author = '"Hadley Wickham <h.wickham@gmail.com> [aut,cre]"',

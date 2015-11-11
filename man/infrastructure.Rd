@@ -126,7 +126,6 @@ Add \code{cran-comments.md} template.
 \section{\code{use_code_of_conduct}}{
 
 Add a code of conduct to from \url{http://contributor-covenant.org}.
-
 }
 
 \section{\code{use_cran_badge}}{

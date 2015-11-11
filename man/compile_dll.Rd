@@ -27,7 +27,6 @@ If this is used to compile code that uses Rcpp, you will need to
   add the following line to your \code{Makevars} file so that it
   knows where to find the Rcpp headers:
   \code{PKG_CPPFLAGS=`$(R_HOME)/bin/Rscript -e 'Rcpp:::CxxFlags()'`}
-
 }
 \seealso{
 \code{\link{clean_dll}} to delete the compiled files.

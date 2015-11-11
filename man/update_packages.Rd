@@ -22,8 +22,8 @@ update_packages(pkgs, dependencies = NA, repos = getOption("repos"),
 \item{repos}{A character vector giving repositories to use.}
 
 \item{type}{Type of package to \code{update}.  If "both", will switch
-  automatically to "binary" to avoid interactive prompts during package
-  installation.}
+automatically to "binary" to avoid interactive prompts during package
+installation.}
 }
 \description{
 Works similarly to \code{install.packages()} but doesn't install packages

@@ -46,7 +46,6 @@ automatically. \code{\link{use_github_links}} is called to populate the
   private keys are in the default locations, \code{~/.ssh/id_rsa.pub} and
   \code{~/.ssh/id_rsa}, respectively, and that \code{ssh-agent} is configured
   to manage any associated passphrase.
-
 }
 \examples{
 \dontrun{

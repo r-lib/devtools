@@ -75,7 +75,6 @@ To export only the objects listed as exports, use
 \code{export_all=FALSE}. This more closely simulates behavior when
 loading an installed package with \code{\link{library}}, and can be
 useful for checking for missing exports.
-
 }
 
 \section{Shim files}{
@@ -86,7 +85,6 @@ of the laded package. It presently adds a replacement version of
 \code{base::system.file}. This is needed because installed and uninstalled
 package sources have different directory structures. Note that this is not
 a perfect replacement for \code{base::system.file}.
-
 }
 \examples{
 \dontrun{

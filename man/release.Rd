@@ -48,6 +48,5 @@ If a devtools bug causes one of the CRAN maintainers to treat you
 impolitely, I will personally send you a handwritten apology note.
 Please forward me the email and your address, and I'll get a card in
 the mail.
-
 }
 

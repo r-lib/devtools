@@ -21,7 +21,6 @@ The default lintings correspond to the style guide at
 override any or all of them using the \code{linters} parameter.
 }
 \details{
-
 The lintr cache is by default stored in \code{~/.R/lintr_cache/} (this can
 be configured by setting \code{options(lintr.cache_directory)}).  It can be
 cleared by calling \code{\link[lintr]{clear_cache}}.

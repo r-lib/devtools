@@ -38,7 +38,6 @@ This function is vectorised on \code{repo} so you can install multiple
 packages in a single command.
 }
 \details{
-
 Attempting to install from a source repository that uses submodules
 raises a warning. Because the zipped sources provided by GitHub do not
 include submodules, this may lead to unexpected behaviour or compilation
