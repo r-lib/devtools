@@ -1,5 +1,8 @@
 # devtools 1.9.1.9000
 
+* `release()` and `build_win()` use `--compact-vignettes=both`
+   to avoid NOTEs with the built package (#981, @krlmlr).
+
 * `document()` now only runs `update_collate()` once.
 
 * Bugfix for `Remotes: ` feature that prevented it from working if devtools was
