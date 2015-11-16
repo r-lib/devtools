@@ -90,7 +90,7 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
 #' @export
 #' @family build functions
 build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
-                      args = NULL, quiet = FALSE) {
+                      args = build_cran_args, quiet = FALSE) {
   pkg <- as.package(pkg)
 
   version <- match.arg(version, several.ok = TRUE)
