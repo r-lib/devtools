@@ -8,6 +8,8 @@
 #' @param branch Name of branch or tag to use, if not master.
 #' @param subdir A sub-directory within a git repository that may
 #'   contain the package we are interested in installing.
+#' @param credentials A git2r credentials object passed through 
+#'   to \code{\link{git2r::clone}}
 #' @param args DEPRECATED. A character vector providing extra arguments to
 #'   pass on to git.
 #' @param ... passed on to \code{\link{install}}
@@ -18,20 +20,21 @@
 #' install_git("git://github.com/hadley/stringr.git")
 #' install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
 #'}
-install_git <- function(url, subdir = NULL, branch = NULL, args = character(0),
+install_git <- function(url, subdir = NULL, branch = NULL, credentials=NULL, args = character(0),
                         ...) {
   if (!missing(args))
     warning("`args` is deprecated", call. = FALSE)
 
-  remotes <- lapply(url, git_remote, subdir = subdir, branch = branch)
+  remotes <- lapply(url, git_remote, subdir = subdir, branch = branch, credentials=credentials)
   install_remotes(remotes, ...)
 }
 
-git_remote <- function(url, subdir = NULL, branch = NULL) {
+git_remote <- function(url, subdir = NULL, branch = NULL, credentials=NULL) {
   remote("git",
     url = url,
     subdir = subdir,
-    branch = branch
+    branch = branch,
+    credentials = credentials
   )
 }
 
@@ -42,7 +45,7 @@ remote_download.git_remote <- function(x, quiet = FALSE) {
   }
 
   bundle <- tempfile()
-  git2r::clone(x$url, bundle, progress = FALSE)
+  git2r::clone(x$url, bundle, credentials=x$credentials, progress = FALSE)
 
   if (!is.null(x$branch)) {
     r <- git2r::repository(bundle)
