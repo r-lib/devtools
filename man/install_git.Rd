@@ -17,7 +17,7 @@ contain the package we are interested in installing.}
 \item{branch}{Name of branch or tag to use, if not master.}
 
 \item{credentials}{A git2r credentials object passed through 
-to \code{\link{git2r::clone}}}
+to \code{\link[git2r]{clone}}.}
 
 \item{args}{DEPRECATED. A character vector providing extra arguments to
 pass on to git.}
