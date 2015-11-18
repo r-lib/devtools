@@ -5,11 +5,11 @@
 #'
 #' @param url Location of package. The url should point to a public or
 #'   private repository.
-#' @param branch Name of branch or tag to use, if not master.
 #' @param subdir A sub-directory within a git repository that may
 #'   contain the package we are interested in installing.
+#' @param branch Name of branch or tag to use, if not master.
 #' @param credentials A git2r credentials object passed through
-#'   to \code{\link{git2r::clone}}
+#'   to \code{\link[git2r]{clone}}
 #' @param args DEPRECATED. A character vector providing extra arguments to
 #'   pass on to git.
 #' @param force Force installation even if the git SHA1 has not changed since
