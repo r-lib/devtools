@@ -53,7 +53,9 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #'   "https"}). For \code{protocol = "ssh"}, it is assumed that public and
 #'   private keys are in the default locations, \code{~/.ssh/id_rsa.pub} and
 #'   \code{~/.ssh/id_rsa}, respectively, and that \code{ssh-agent} is configured
-#'   to manage any associated passphrase.
+#'   to manage any associated passphrase.  Alternatively, specify a
+#'   \code{\link[git2r]{cred_ssh_key}} object via the \code{credentials}
+#'   parameter.
 #'
 #' @inheritParams use_git
 #' @param auth_token Provide a personal access token (PAT) from
@@ -61,6 +63,9 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #'   environment variable.
 #' @param private If \code{TRUE}, creates a private repository.
 #' @param protocol transfer protocol, either "ssh" (the default) or "https"
+#' @param credentials A \code{\link[git2r]{cred_ssh_key}} specifying specific
+#' ssh credentials or NULL for default ssh key and ssh-agent behaviour.
+#' Default is NULL.
 #' @family git infrastructure
 #' @export
 #' @examples
@@ -74,7 +79,7 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' use_github(pkg = "testpkg2", protocol = "https")
 #' }
 use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
-                       protocol = c("ssh", "https")) {
+                       protocol = c("ssh", "https"), credentials = NULL) {
   if (is.null(auth_token)) {
     stop("GITHUB_PAT required to create new repo")
   }
@@ -119,7 +124,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   if (protocol == "ssh") {
     ## [1] push via ssh required for success setting remote tracking branch
     ## [2] to get passphrase from ssh-agent, you must use NULL credentials
-    git2r::push(r, "origin", "refs/heads/master")
+    git2r::push(r, "origin", "refs/heads/master", credentials = credentials)
   } else { ## protocol == "https"
     ## in https case, when GITHUB_PAT is passed as password,
     ## the username is immaterial, but git2r doesn't know that
