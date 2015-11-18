@@ -41,4 +41,4 @@ Suggests:
     bitops
 License: GPL (>= 2)
 VignetteBuilder: knitr
-RoxygenNote: 5.0.0
+RoxygenNote: 5.0.1
