@@ -1,6 +1,6 @@
 #' Install a package from a git repository
 #'
-#' It is vectorised so you can install multiple packages with
+#' It is vectorised so you can install multiple packages with 
 #' a single command. You do not need to have git installed.
 #'
 #' @param url Location of package. The url should point to a public or
