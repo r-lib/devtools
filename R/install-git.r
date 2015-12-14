@@ -36,13 +36,13 @@ git_remote <- function(url, subdir = NULL, branch = NULL) {
 }
 
 #' @export
-remote_download.git_remote <- function(x, quiet = FALSE) {
+remote_download.git_remote <- function(x, c = NULL, quiet = FALSE) {
   if (!quiet) {
     message("Downloading git repo ", x$url)
   }
 
   bundle <- tempfile()
-  git2r::clone(x$url, bundle, progress = FALSE)
+  git2r::clone(x$url, bundle, credentials = c, progress = FALSE)
 
   if (!is.null(x$branch)) {
     r <- git2r::repository(bundle)
