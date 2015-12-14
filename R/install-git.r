@@ -67,7 +67,6 @@ remote_metadata.git_remote <- function(x, bundle = NULL, source = NULL) {
     RemoteUrl = x$url,
     RemoteSubdir = x$subdir,
     RemoteRef = x$ref,
-    RemoteSha = sha,
-    RemoteCredentials = x$credentials
+    RemoteSha = sha
   )
 }
