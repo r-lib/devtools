@@ -27,22 +27,23 @@ install_git <- function(url, subdir = NULL, branch = NULL, args = character(0),
   install_remotes(remotes, ...)
 }
 
-git_remote <- function(url, subdir = NULL, branch = NULL) {
+git_remote <- function(url, subdir = NULL, branch = NULL, credentials = NULL) {
   remote("git",
     url = url,
     subdir = subdir,
-    branch = branch
+    branch = branch,
+    credentials = credentials
   )
 }
 
 #' @export
-remote_download.git_remote <- function(x, c = NULL, quiet = FALSE) {
+remote_download.git_remote <- function(x, credentials = NULL, quiet = FALSE) {
   if (!quiet) {
     message("Downloading git repo ", x$url)
   }
 
   bundle <- tempfile()
-  git2r::clone(x$url, bundle, credentials = c, progress = FALSE)
+  git2r::clone(x$url, bundle, credentials = credentials, progress = FALSE)
 
   if (!is.null(x$branch)) {
     r <- git2r::repository(bundle)
@@ -66,6 +67,7 @@ remote_metadata.git_remote <- function(x, bundle = NULL, source = NULL) {
     RemoteUrl = x$url,
     RemoteSubdir = x$subdir,
     RemoteRef = x$ref,
-    RemoteSha = sha
+    RemoteSha = sha,
+    RemoteCredentials = x$credentials
   )
 }
