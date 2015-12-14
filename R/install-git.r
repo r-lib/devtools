@@ -18,12 +18,12 @@
 #' install_git("git://github.com/hadley/stringr.git")
 #' install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
 #'}
-install_git <- function(url, subdir = NULL, branch = NULL, args = character(0),
+install_git <- function(url, subdir = NULL, branch = NULL, credentials = NULL, args = character(0),
                         ...) {
   if (!missing(args))
     warning("`args` is deprecated", call. = FALSE)
 
-  remotes <- lapply(url, git_remote, subdir = subdir, branch = branch)
+  remotes <- lapply(url, git_remote, subdir = subdir, branch = branch, credentials = credentials)
   install_remotes(remotes, ...)
 }
 
