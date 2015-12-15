@@ -8,6 +8,7 @@
 #' @param branch Name of branch or tag to use, if not master.
 #' @param subdir A sub-directory within a git repository that may
 #'   contain the package we are interested in installing.
+#' @param credentials Credentials for git cloning operation.
 #' @param args DEPRECATED. A character vector providing extra arguments to
 #'   pass on to git.
 #' @param ... passed on to \code{\link{install}}
