@@ -63,6 +63,10 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   pkg <- as.package(pkg)
   check_build_tools(pkg)
 
+  if (is_loaded(pkg)) {
+    eapply(ns_env(pkg), force, all.names = TRUE)
+  }
+
   if (!quiet) {
     message("Installing ", pkg$package)
   }

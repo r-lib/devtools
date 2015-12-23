@@ -30,9 +30,14 @@
 unload <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  ns <- asNamespace(pkg$package)
-
-  unregister_S3_methods(ns)
+  # This is a hack to work around unloading devtools itself. The unloading
+  # process normally makes other devtools functions inaccessible,
+  # resulting in "Error in unload(pkg) : internal error -3 in R_decompress1".
+  # If we simply force them first, then they will remain available for use
+  # later.
+  if (pkg$package == "devtools") {
+    eapply(ns_env(pkg), force, all.names = TRUE)
+  }
 
   # If the package was loaded with devtools, any s4 classes that were created
   # by the package need to be removed in a special way.
@@ -71,38 +76,6 @@ unload <- function(pkg = ".") {
   # Do this after detach, so that packages that have an .onUnload function
   # which unloads DLLs (like MASS) won't try to unload the DLL twice.
   unload_dll(pkg)
-}
-
-unregister_S3_methods <- function(ns) {
-  S3_methods <- getNamespaceInfo(ns, "S3methods")
-
-  unregister <- function(name, class, method) {
-    # This code was adapted from the .registerS3method internal function of
-    # base::registerS3methods
-    # https://github.com/wch/r-source/blob/05b76baa411afd3e9d0f3fc3c09a9a252a0a9100/src/library/base/R/namespace.R#L1398-L1426
-    env <-
-      if (!is.na(x <- .knownS3Generics[name])) {
-        asNamespace(x)
-      } else {
-        if(is.null(genfun <- get0(name, envir = ns))) {
-          stop(sprintf("object '%s' not found while unloading namespace '%s'",
-               name, getNamespaceName(ns)), call. = FALSE)
-        }
-        if(.isMethodsDispatchOn() && methods::is(genfun, "genericFunction")) {
-          genfun <- genfun@default  # nearly always, the S3 generic
-        }
-        if (typeof(genfun) == "closure") {
-          environment(genfun)
-        } else {
-          baseenv()
-        }
-      }
-    table <- get(".__S3MethodsTable__.", envir = env, inherits = FALSE)
-    rm(list = method, envir = table)
-  }
-  for (i in seq_len(NROW(S3_methods))) {
-    unregister(S3_methods[i, 1], S3_methods[i, 2], S3_methods[i, 3])
-  }
 }
 
 # This unloads dlls loaded by either library() or load_all()
