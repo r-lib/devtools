@@ -95,7 +95,7 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   pkg$collate <- as.package(pkg$path)$collate
 
   # Forcing all of the promises for the loaded namespace now will avoid lazy-load
-  # errors when the new package is installed overtop the old one.
+  # errors when the new package is loaded overtop the old one.
   #
   # Reloading devtools is a special case. Normally, objects in the
   # namespace become inaccessible if the namespace is unloaded before the
