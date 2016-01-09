@@ -151,10 +151,8 @@ get_local_info <- function(packages) {
 get_remote_sha1 <- function(urls, refs = "master") {
   message("Fetching remote SHA-1 hashes.")
   temp <- unname(apply(data.frame(url = urls, ref = refs), 1, function(repo) {
-    sha1 <- grep(paste0('refs/heads/', repo['ref']),
-                 system(paste('git ls-remote -h', repo['url']), intern = TRUE),
-                 value = TRUE)
-    return(strsplit(sha1, '\t')[[1]][1])
+    sha1 <- git2r::remote_ls(as.character(repo['url']))
+    return(sha1[paste0('refs/heads/', as.character(repo['ref']))])
   }))
   return(temp)
 }

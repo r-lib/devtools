@@ -4,15 +4,14 @@
 #' that are already installed, and also upgrades out dated dependencies. Can
 #' also update packages installed from remote repositories. Currently only
 #' works with packages installed from git and GitHub repositories. This feature
-#' currently requires git to be installed.
+#' does not require git to be installed.
 #'
 #' @param pkgs Character vector of packages to update. Leave out to update all
 #'   installed packages.
-#' @inheritParams package_deps
+#' @param repos character vector, the base URL(s) of the repositories to use.
+#' @param type character, indicating the type of package to download and install.
 #' @param include_remote A logical flag to update packages installed from git
 #'   and GitHub repositories.
-#' @param ask A logical flag. If true, forces \code{update_remotes} to ask the
-#'   user for confirmation before proceeding.
 #' @param ... Additional parameters to pass to \code{update_remotes}
 #'   (e.g. \code{ask}).
 #' @seealso \code{\link{package_deps}} to see which packages are out of date/
@@ -29,7 +28,6 @@
 #' }
 #' @export
 update_packages <- function(pkgs = NULL,
-                            dependencies = NA,
                             repos = getOption("repos"),
                             type = getOption("pkgType"),
                             include_remote = FALSE,
@@ -41,14 +39,14 @@ update_packages <- function(pkgs = NULL,
   pkgs <- package_deps(pkgs, repos = repos, type = type)
   status <- update(pkgs)
   if (include_remote) {
-    update_remotes(subset(pkgs, is.na(available))$package, ...)
+    update_remotes(pkgs$package[is.na(pkgs$available)], ...)
   }
 }
 
 #' @title Update packages installed from remote repositories.
 #' @description It is vectorised so you can update multiple packages
 #'   with a single command. Currently only works with packages
-#'   installed from git and GitHub. You need to have git installed.
+#'   installed from git and GitHub. You do not need to have git installed.
 #' @param pkgs Character vector of package names. If omitted,
 #'   will find all packages installed from remote repositories.
 #' @param ask Forces the process to ask the user for confirmation.
@@ -74,21 +72,22 @@ update_remotes <- function(pkgs = NULL, ask = TRUE) {
   }
 
   message("Acquiring local and remote metadata.")
-  local_info <- subset(get_local_info(pkgs), git)
+  local_info <- get_local_info(pkgs)
+  local_info <- local_info[local_info$git, ]
   local_info$remote_sha1 <- get_remote_sha1(local_info$url)
-  local_info$sha1_different <- local_info$sha1 != local_info$remote_sha1
+  sha1_different <- local_info$sha1 != local_info$remote_sha1
 
-  if (!any(local_info$sha1_different)) {
+  if (!any(sha1_different)) {
     message("None of the packages need to be updated.")
     return(invisible())
   }
 
-  if (sum(local_info$sha1_different) == 1) {
+  if (sum(sha1_different) == 1) {
     message(paste("1 package has a different SHA-1 and will be reinstalled from its remote repository:",
-                  rownames(subset(local_info, sha1_different))))
+                  rownames(local_info)[sha1_different]))
   } else {
-    message(sum(local_info$sha1_different), " packages have different SHA-1's and will be reinstalled from their remote repositories: ",
-            paste0(rownames(subset(local_info, sha1_different)), collapse =', '))
+    message(sum(sha1_different), " packages have different SHA-1's and will be reinstalled from their remote repositories: ",
+            paste0(rownames(local_info)[sha1_different], collapse =', '))
   }
 
   if (ask) {
@@ -98,7 +97,7 @@ update_remotes <- function(pkgs = NULL, ask = TRUE) {
     }
   }
 
-  temp <- apply(subset(local_info, sha1_different), 1, function(package) {
+  temp <- apply(local_info[sha1_different, ], 1, function(package) {
     if (grepl('github', package['url'])) {
       return(tryCatch(install_github(sub('https://github.com/', '', package['url']), ref = package['ref']),
                       error = function(e) { return(FALSE) }))

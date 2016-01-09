@@ -25,6 +25,12 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
 
   load_all(pkg)
 
+  if (packageVersion("roxygen2") > "4.1.1") {
+    roclets <- roclets %||% roxygen2::load_options(pkg$path)$roclets
+    # collate updated by load_all()
+    roclets <- setdiff(roclets, "collate")
+  }
+
   withr::with_envvar(r_env_vars(),
     roxygen2::roxygenise(pkg$path, roclets = roclets, load_code = ns_env)
   )

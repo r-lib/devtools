@@ -96,11 +96,10 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 
   # Reloading devtools is a special case. Normally, objects in the
   # namespace become inaccessible if the namespace is unloaded before the
-  # the object has been accessed. This is kind of a hack - using as.list
-  # on the namespace accesses each object, making the objects accessible
-  # later, after the namespace is unloaded.
+  # object has been accessed. Instead we force the object so they will still be
+  # accessible.
   if (pkg$package == "devtools") {
-    as.list(ns_env(pkg))
+    eapply(ns_env(pkg), force, all.names = TRUE)
   }
 
   # Check description file is ok

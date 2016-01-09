@@ -1,5 +1,10 @@
 # devtools 1.9.1.9000
 
+* Fix longstanding lazy load database corruption issues when reloading packages
+  which define S3 methods on generics from base or other packages (#1001, @jimhester).
+
+* `document()` now only runs `update_collate()` once.
+
 * Bugfix for `Remotes: ` feature that prevented it from working if devtools was
   not attached as is done in travis-r (#936, @jimhester).
 

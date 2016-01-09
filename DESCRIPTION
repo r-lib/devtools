@@ -25,10 +25,10 @@ Imports:
     digest,
     rstudioapi (>= 0.2.0),
     jsonlite,
-    roxygen2 (>= 4.1.0),
+    roxygen2 (>= 4.1.1.9001),
     rversions,
     stats,
-    git2r (>= 0.11.0),
+    git2r (>= 0.13.1),
     withr
 Suggests:
     testthat (>= 0.7),
@@ -41,3 +41,4 @@ Suggests:
     bitops
 License: GPL (>= 2)
 VignetteBuilder: knitr
+RoxygenNote: 5.0.1

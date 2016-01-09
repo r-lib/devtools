@@ -4,44 +4,29 @@
 \alias{update_packages}
 \title{Update packages that are missing or out-of-date.}
 \usage{
-update_packages(pkgs = NULL, dependencies = NA,
-  repos = getOption("repos"), type = getOption("pkgType"),
-  include_remote = FALSE, ...)
+update_packages(pkgs = NULL, repos = getOption("repos"),
+  type = getOption("pkgType"), include_remote = FALSE, ...)
 }
 \arguments{
 \item{pkgs}{Character vector of packages to update. Leave out to update all
 installed packages.}
 
-\item{dependencies}{Which dependencies do you want to check?
-  Can be a character vector (selecting from "Depends", "Imports",
-   "LinkingTo", "Suggests", or "Enhances"), or a logical vector.
+\item{repos}{character vector, the base URL(s) of the repositories to use.}
 
-  \code{TRUE} is shorthand for "Depends", "Imports", "LinkingTo" and
-  "Suggests". \code{NA} is shorthand for "Depends", "Imports" and "LinkingTo"
-  and is the default. \code{FALSE} is shorthand for no dependencies (i.e.
-  just check this package, not its dependencies).}
-
-\item{repos}{A character vector giving repositories to use.}
-
-\item{type}{Type of package to \code{update}.  If "both", will switch
-automatically to "binary" to avoid interactive prompts during package
-installation.}
+\item{type}{character, indicating the type of package to download and install.}
 
 \item{include_remote}{A logical flag to update packages installed from git
 and GitHub repositories.}
 
 \item{...}{Additional parameters to pass to \code{update_remotes}
 (e.g. \code{ask}).}
-
-\item{ask}{A logical flag. If true, forces \code{update_remotes} to ask the
-user for confirmation before proceeding.}
 }
 \description{
 Works similarly to \code{install.packages()} but doesn't install packages
 that are already installed, and also upgrades out dated dependencies. Can
 also update packages installed from remote repositories. Currently only
 works with packages installed from git and GitHub repositories. This feature
-currently requires git to be installed.
+does not require git to be installed.
 }
 \examples{
 \dontrun{

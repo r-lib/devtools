@@ -15,7 +15,7 @@ will find all packages installed from remote repositories.}
 \description{
 It is vectorised so you can update multiple packages
   with a single command. Currently only works with packages
-  installed from git and GitHub. You need to have git installed.
+  installed from git and GitHub. You do not need to have git installed.
 }
 \examples{
 \dontrun{
