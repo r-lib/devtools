@@ -4,7 +4,7 @@
   which define S3 methods on generics from base or other packages (#1001, @jimhester).
 
 * `document()` now only runs `update_collate()` once.
-* Move `evaluate`, `roxygen2` and `rversions` to `Suggests:` to lighten the dependency
+* Move `curl`, `evaluate`, `roxygen2` and `rversions` to `Suggests:` to lighten the dependency
   load of devtools. If a user runs a function using these packages and
   they are not installed the user is prompted to install them (#962, @jimhester).
 
