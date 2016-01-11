@@ -33,6 +33,9 @@ the name of the package in the current directory.}
 automatically to "binary" to avoid interactive prompts during package
 installation.}
 
+\item{force}{Whether to force installation of package dependencies for
+\code{dev_package_deps}.}
+
 \item{object}{A \code{package_deps} object.}
 
 \item{...}{Additional arguments passed to \code{install_packages}.}

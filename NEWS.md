@@ -28,6 +28,7 @@
 
 * Fix longstanding lazy load database corruption issues when reloading packages
   which define S3 methods on generics from base or other packages (#1001, @jimhester).
+
 * Packages installed from `install_github()` and `install_git()` are only
   downloaded and installed if the remote SHA1 reference differs from the
   currently installed reference (#903, @jimhester).
