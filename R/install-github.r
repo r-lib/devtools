@@ -110,6 +110,10 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
     warning("GitHub repo contains submodules, may not function as expected!",
       call. = FALSE)
 
+  if (!quiet) {
+    message("Source: ", src)
+  }
+
   download(dest, src, auth)
 }
 
