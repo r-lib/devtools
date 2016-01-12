@@ -1,5 +1,9 @@
 # devtools 1.9.1.9000
 
+* 'Check failed:' now includes the package name for when Ncpus>1 so you
+   know which package has failed and can start looking at the output without
+   needing to wait for all packages to finish (@mattdowle).
+
 * `check_dev_versions()` checks only package dependencies (#983).
 
 * `package_file()` lets you find files inside a package. It always first locates

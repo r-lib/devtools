@@ -93,7 +93,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
           quiet = TRUE
         )
       }, error = function(e) {
-        message("Check failed: ", e$message)
+        message(pkgs[i], " failed : ", check_dir, "/", pkgs[i],
+          ".Rcheck/00check.log")
         NULL
       })
       end_time <- Sys.time()
