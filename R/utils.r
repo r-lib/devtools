@@ -46,8 +46,21 @@ is_installed <- function(pkg, version = 0) {
   !is.na(installed_version) && installed_version >= version
 }
 
-check_suggested <- function(pkg, version = 0) {
-  if (!is_installed(pkg, version)) {
+check_suggested <- function(pkg, version = NULL, compare = NA) {
+
+  if (is.null(version)) {
+    if (!is.na(compare)) {
+      stop("Cannot set ", sQuote(compare), " without setting ",
+           sQuote(version), call. = FALSE)
+    }
+
+    dep <- suggests_dep(pkg)
+
+    version <- dep$version
+    compare <- dep$compare
+  }
+
+  if (!check_dep_version(pkg, version, compare)) {
     msg <- paste0(sQuote(pkg),
       if (version == 0) "" else paste0(" >= ", version),
       " must be installed for this functionality.")
@@ -61,6 +74,19 @@ check_suggested <- function(pkg, version = 0) {
       stop(msg, call. = FALSE)
     }
   }
+}
+
+suggests_dep <- function(pkg) {
+
+  suggests <- read_dcf(system.file("DESCRIPTION", package = "devtools"))$Suggests
+  deps <- parse_deps(suggests)
+
+  found <- which(deps$name == pkg)[1L]
+
+  if (!length(found)) {
+     stop(sQuote(pkg), " is not in Suggests: for devtools!", call. = FALSE)
+  }
+  deps[found, ]
 }
 
 read_dcf <- function(path) {

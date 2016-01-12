@@ -15,7 +15,7 @@
 #' cleared by calling \code{\link[lintr]{clear_cache}}.
 #' @export
 lint <- function(pkg = ".", cache = TRUE, ...) {
-  check_suggested("lintr", "0.2.1")
+  check_suggested("lintr")
   pkg <- as.package(pkg)
 
   message("Linting ", pkg$package, appendLF = FALSE)

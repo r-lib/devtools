@@ -17,7 +17,7 @@ NULL
 use_testthat <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  check_suggested("testthat", "0.7")
+  check_suggested("testthat")
   if (uses_testthat(pkg)) {
     stop("Package already has testing infrastructure", call. = FALSE)
   }
@@ -46,7 +46,7 @@ add_test_infrastructure <- use_testthat
 use_test <- function(name, pkg = ".") {
   pkg <- as.package(pkg)
 
-  check_suggested("testthat", "0.7")
+  check_suggested("testthat")
   if (!uses_testthat(pkg)) {
     use_testthat(pkg)
   }
@@ -123,7 +123,7 @@ use_vignette <- function(name, pkg = ".") {
 #' @rdname infrastructure
 use_rcpp <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  check_suggested("Rcpp", "0.10.0")
+  check_suggested("Rcpp")
 
   message("Adding Rcpp to LinkingTo and Imports")
   add_desc_package(pkg, "LinkingTo", "Rcpp")

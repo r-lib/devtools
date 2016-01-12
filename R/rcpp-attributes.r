@@ -5,7 +5,7 @@ compile_rcpp_attributes <- function(pkg) {
 
   # Only scan for attributes in packages explicitly linking to Rcpp
   if (links_to_rcpp(pkg)) {
-    check_suggested("Rcpp", "0.10.0")
+    check_suggested("Rcpp")
     Rcpp::compileAttributes(pkg$path)
   }
 }

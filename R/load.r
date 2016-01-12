@@ -85,7 +85,7 @@
 load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   export_all = TRUE, quiet = FALSE, create = NA) {
   pkg <- as.package(pkg, create = create)
-  check_suggested("roxygen2", "4.1.0")
+  check_suggested("roxygen2")
 
   if (!quiet) message("Loading ", pkg$package)
 

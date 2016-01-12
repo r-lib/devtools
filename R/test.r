@@ -18,7 +18,7 @@
 #' @inheritParams run_examples
 #' @export
 test <- function(pkg = ".", filter = NULL, ...) {
-  check_suggested("testthat", "0.7")
+  check_suggested("testthat")
   pkg <- as.package(pkg)
 
   if (!uses_testthat(pkg) && interactive()) {
