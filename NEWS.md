@@ -1,5 +1,8 @@
 # devtools 1.9.1.9000
 
+* `check(cran = TRUE)` also adds `--run-donttest` since you do need to test
+  code in `\dontest()` for CRAN submission (#1002).
+
 * `use_revdep_check()` no longer includes `revdep_check_save_logs` in 
   default template. I found I never used the logs and they just cluttered up
   the package directory (#1003).
