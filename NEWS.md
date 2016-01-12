@@ -1,5 +1,7 @@
 # devtools 1.9.1.9000
 
+* `check_dev_versions()` checks only package dependencies (#983).
+
 * `package_file()` lets you find files inside a package. It always first locates
   the root directory of the package (i.e. the directory that contains 
   `DESCRIPTION`) (#985).
