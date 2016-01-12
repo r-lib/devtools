@@ -88,8 +88,8 @@ print.maintainers <- function(x, ...) {
 #' @inheritParams revdep
 #' @param pkg Path to package. Defaults to current directory.
 #' @inheritParams check_cran
-#' @seealso \code{\link{revdep_maintainers}()} to run R CMD check on all reverse
-#'   dependencies.
+#' @seealso \code{\link{revdep_maintainers}()} to get a list of all revdep
+#'   maintainers.
 #' @export
 #' @return An invisible list of results. But you'll probably want to look
 #'   at the check results on disk, which are saved in \code{check_dir}.
