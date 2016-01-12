@@ -49,6 +49,9 @@
 
 * `build_win()` now uses `curl` instead of `RCurl` for ftp upload.
 
+* `build_win()` asks for consent to receive e-mail at maintainer address
+  in interactive mode (#800, @krlmlr).
+
 * `check()` now uses a better strategy when `cran = TRUE`. Instead of 
   attempting to simulate `--as-cran` behaviour by turning on certain env vars,
   it now uses `--as-cran` and turns off problematic checks with env vars (#866).
