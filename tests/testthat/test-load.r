@@ -10,7 +10,7 @@ test_that("user is queried if no package structure present", {
     `devtools::interactive` = function() TRUE,
     `utils::menu` = function(...) stop("menu() called"),
     `devtools::setup` = function(...) stop("setup() called"),
-    `devtools::check_dir` = function(x) x,
+    `devtools::package_file` = function(..., path) file.path(path, ...),
     expect_error(load_all(file.path("testLoadDir", "R")),
                  "menu[(][)] called")
   )
@@ -21,7 +21,7 @@ test_that("setup is called upon user consent if no package structure present", {
     `devtools::interactive` = function() TRUE,
     `utils::menu` = function(choices, ...) match("Yes", choices),
     `devtools::setup` = function(...) stop("setup() called"),
-    `devtools::check_dir` = function(x) x,
+    `devtools::package_file` = function(..., path) file.path(path, ...),
     expect_error(load_all(file.path("testLoadDir", "R")),
                  "setup[(][)] called")
   )
@@ -31,7 +31,7 @@ test_that("setup is called if no package structure present", {
   with_mock(
     `utils::menu` = function(...) stop("menu() called"),
     `devtools::setup` = function(...) stop("setup() called"),
-    `devtools::check_dir` = function(x) x,
+    `devtools::package_file` = function(..., path) file.path(path, ...),
     expect_error(load_all(file.path("testLoadDir", "R"), create = TRUE),
                "setup[(][)] called")
   )
@@ -41,7 +41,7 @@ test_that("error is thrown if no package structure present", {
   with_mock(
     `utils::menu` = function(...) stop("menu() called"),
     `devtools::setup` = function(...) stop("setup() called"),
-    `devtools::check_dir` = function(x) x,
+    `devtools::package_file` = function(..., path) file.path(path, ...),
     expect_error(load_all(file.path("testLoadDir", "R"), create = FALSE),
                  "No description at")
   )

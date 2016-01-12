@@ -1,5 +1,9 @@
 # devtools 1.9.1.9000
 
+* `package_file()` lets you find files inside a package. It always first locates
+  the root directory of the package (i.e. the directory that contains 
+  `DESCRIPTION`) (#985).
+
 * `check(cran = TRUE)` also adds `--run-donttest` since you do need to test
   code in `\dontest()` for CRAN submission (#1002).
 

@@ -14,64 +14,63 @@
 as.package <- function(x = NULL, create = NA) {
   if (is.package(x)) return(x)
 
-  x <- check_dir(x)
+  x <- package_file(path = x)
   load_pkg_description(x, create = create)
 }
 
-
-check_dir <- function(x) {
-  if (is.null(x)) {
-    stop("Path is null", call. = FALSE)
+#' Find file in a package.
+#'
+#' It always starts by finding by walking up the path until it finds the
+#' root directory, i.e. a directory containing \code{DESCRIPTION}. If it
+#' cannot find the root directory, or it can't find the specified path, it
+#' will throw an error.
+#'
+#' @param ... Components of the path.
+#' @param path Place to start search for package directory.
+#' @export
+#' @examples
+#' \dontrun{
+#' package_file("figures", "figure_1")
+#' }
+package_file <- function(..., path = ".") {
+  if (!is.character(path) || length(path) != 1) {
+    stop("`path` must be a string.", call. = FALSE)
+  }
+  if (!file.exists(path)) {
+    stop("Can't find '", path, "'.", call. = FALSE)
+  }
+  if (!file.info(path)$isdir) {
+    stop("'", path, "' is not a directory.", call. = FALSE)
   }
 
-  # Normalise path and strip trailing slashes
-  x <- normalise_path(x)
-  x <- package_root(x) %||% x
+  # Walk up to root directory
+  path <- strip_slashes(normalizePath(path))
+  while (!has_description(path)) {
+    path <- dirname(path)
 
-  if (!file.exists(x)) {
-    stop("Can't find directory ", x, call. = FALSE)
-  }
-  if (!file.info(x)$isdir) {
-    stop(x, " is not a directory", call. = FALSE)
+    if (is_root(path)) {
+      stop("Could not find package root.", call. = FALSE)
+    }
   }
 
-  x
+  file.path(path, ...)
 }
 
-package_root <- function(path) {
-  if (is.package(path)) {
-    return(path$path)
-  }
-  stopifnot(is.character(path))
-
-  has_description <- function(path) {
-    file.exists(file.path(path, 'DESCRIPTION'))
-  }
-  path <- normalizePath(path, mustWork = FALSE)
-  while (!has_description(path) && !is_root(path)) {
-    path <- dirname(path)
-  }
-
-  if (is_root(path)) {
-    NULL
-  } else {
-    path
-  }
+has_description <- function(path) {
+  file.exists(file.path(path, 'DESCRIPTION'))
 }
 
 is_root <- function(path) {
   identical(path, dirname(path))
 }
 
-normalise_path <- function(x) {
-  x <- sub("\\\\+$", "/", x)
+strip_slashes <- function(x) {
   x <- sub("/*$", "", x)
   x
 }
 
 # Load package DESCRIPTION into convenient form.
 load_pkg_description <- function(path, create) {
-  path <- normalizePath(path)
   path_desc <- file.path(path, "DESCRIPTION")
 
   if (!file.exists(path_desc)) {
