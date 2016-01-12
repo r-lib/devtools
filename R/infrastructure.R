@@ -74,7 +74,7 @@ use_rstudio <- function(pkg = ".") {
 
   path <- file.path(pkg$path, paste0(pkg$package, ".Rproj"))
   if (file.exists(path)) {
-    stop(pkg$package, ".Rproj already exists", call. = FALSE)
+    return(invisible(TRUE))
   }
   message("Adding RStudio project file to ", pkg$package)
 
