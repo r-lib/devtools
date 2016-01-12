@@ -1,5 +1,8 @@
 # devtools 1.9.1.9000
 
+* Use proper repository when checking reverse dependencies when
+  `BiocInstaller::useDevel(TRUE)` (#937, @jimhester).
+
 * Fix longstanding lazy load database corruption issues when reloading packages
   which define S3 methods on generics from base or other packages (#1001, @jimhester).
 
