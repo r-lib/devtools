@@ -69,6 +69,8 @@ check_suggested <- function(pkg, version = NULL, compare = NA) {
       message(msg, "\nWould you like to install it?")
       if (menu(c("Yes", "No")) == 1) {
         install.packages(pkg)
+      } else {
+        stop(msg, call. = FALSE)
       }
     } else {
       stop(msg, call. = FALSE)
