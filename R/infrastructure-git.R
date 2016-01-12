@@ -86,8 +86,10 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   pkg <- as.package(pkg)
   use_git(pkg = pkg)
 
-  if (uses_github(pkg$path))
+  if (uses_github(pkg$path)) {
+    message("* GitHub is already initialized")
     return(invisible())
+  }
 
   message("* Creating GitHub repository")
   create <- github_POST("user/repos", pat = auth_token, body = list(
