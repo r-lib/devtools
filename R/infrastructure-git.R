@@ -36,10 +36,11 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' @section Authentication:
 #'
 #'   A new GitHub repo will be created via the GitHub API, therefore you must
-#'   provide a GitHub personal access token via the argument \code{auth_token},
-#'   which defaults to the value of the \code{GITHUB_PAT} environment variable.
-#'   Obtain a personal access token from
-#'   \url{https://github.com/settings/applications}.
+#'   provide a GitHub personal access token (PAT) via the argument
+#'   \code{auth_token}, which defaults to the value of the \code{GITHUB_PAT}
+#'   environment variable. Obtain a PAT from
+#'   \url{https://github.com/settings/tokens}. The "repo" scope is required
+#'   which is one of the default scopes for a new PAT.
 #'
 #'   The argument \code{protocol} reflects how you wish to authenticate with
 #'   GitHub for this repo in the long run. For either \code{protocol}, a remote
@@ -53,8 +54,10 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #'   \code{~/.ssh/id_rsa}, respectively, and that \code{ssh-agent} is configured
 #'   to manage any associated passphrase.
 #'
-#' @inheritParams install_github
 #' @inheritParams use_git
+#' @param auth_token Provide a personal access token (PAT) from
+#'   \url{https://github.com/settings/tokens}. Defaults to the \code{GITHUB_PAT}
+#'   environment variable.
 #' @param private If \code{TRUE}, creates a private repository.
 #' @param protocol transfer protocol, either "ssh" (the default) or "https"
 #' @family git infrastructure
