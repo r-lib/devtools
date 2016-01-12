@@ -12,6 +12,7 @@
 #'   \code{browseVignettes("roxygen2")}
 #' @export
 document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
+  check_suggested("roxygen2")
   if (!missing(clean)) {
     warning("`clean` is deprecated: roxygen2 now automatically cleans up",
       call. = FALSE)
