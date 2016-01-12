@@ -10,8 +10,10 @@
 use_git <- function(message = "Initial commit", pkg = ".") {
   pkg <- as.package(pkg)
 
-  if (uses_git(pkg$path))
+  if (uses_git(pkg$path)) {
+    message("* Git is already initialized")
     return(invisible())
+  }
 
   message("* Initialising repo")
   r <- git2r::init(pkg$path)
