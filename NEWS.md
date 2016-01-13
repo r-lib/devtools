@@ -5,6 +5,8 @@
 
 * `use_appveyor()` template now creates `failure.zip` artifact instead of
   polluting the logs with `R CMD check` output (#1017, @krlmlr, @HenrikBengtsson).
+* Fix a bug in the installers (`install_github`, etc.), when upgrades are
+  not requested (#1013, @gaborcsardi).
 
 * 'Check failed:' now includes the package name for when Ncpus>1 so you
    know which package has failed and can start looking at the output without
