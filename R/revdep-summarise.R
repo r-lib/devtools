@@ -110,7 +110,7 @@ check_dirs <- function(path) {
 
 check_description <- function(path) {
   pkgname <- gsub("\\.Rcheck$", "", basename(path))
-  read_dcf(file.path(path, "00_pkg_src", pkgname, "DESCRIPTION"))
+  read_dcf(file.path(path, "00_pkg_src", pkgname, "DESCRIPTION"), recode = TRUE)
 }
 
 check_time <- function(path) {
