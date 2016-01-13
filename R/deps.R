@@ -23,7 +23,7 @@
 #'   installation.
 #'
 #' @param object A \code{package_deps} object.
-#' @param ... Additional arguments passed to \code{\link{install_packages}}.
+#' @param ... Additional arguments passed to \code{install_packages}.
 #'
 #' @return
 #'
@@ -100,6 +100,7 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
   deps <- unlist(lapply(parsed, `[[`, "name"), use.names = FALSE)
 
   if (is_bioconductor(pkg)) {
+    check_suggested("BiocInstaller")
     bioc_repos <- BiocInstaller::biocinstallRepos()
 
     missing_repos <- setdiff(names(bioc_repos), names(repos))

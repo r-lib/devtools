@@ -10,6 +10,7 @@ NULL
 rstudio_release <- memoise::memoise(.rstudio_release)
 
 .r_release <- function() {
+  check_suggested("rversions")
   R_system_version(rversions::r_release()$version)
 }
 

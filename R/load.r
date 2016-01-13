@@ -84,8 +84,8 @@
 #' @export
 load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   export_all = TRUE, quiet = FALSE, create = NA) {
-
   pkg <- as.package(pkg, create = create)
+  check_suggested("roxygen2")
 
   if (!quiet) message("Loading ", pkg$package)
 
@@ -94,13 +94,15 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   # in the DESCRIPTION file
   pkg$collate <- as.package(pkg$path)$collate
 
+  # Forcing all of the promises for the loaded namespace now will avoid lazy-load
+  # errors when the new package is loaded overtop the old one.
+  #
   # Reloading devtools is a special case. Normally, objects in the
   # namespace become inaccessible if the namespace is unloaded before the
-  # the object has been accessed. This is kind of a hack - using as.list
-  # on the namespace accesses each object, making the objects accessible
-  # later, after the namespace is unloaded.
-  if (pkg$package == "devtools") {
-    as.list(ns_env(pkg))
+  # object has been accessed. Instead we force the object so they will still be
+  # accessible.
+  if (is_loaded(pkg)) {
+    eapply(ns_env(pkg), force, all.names = TRUE)
   }
 
   # Check description file is ok

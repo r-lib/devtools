@@ -48,71 +48,73 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   libpath <- normalizePath(libpath)
 
   # Add the temoporary library and remove on exit
-  libpaths_orig <- withr::set_libpaths(libpath)
-  on.exit(.libPaths(libpaths_orig), add = TRUE)
+  libpaths_orig <- withr::with_libpaths(libpath, {
 
-  rule("Installing dependencies") # --------------------------------------------
-  repos <- c(CRAN = "http://cran.rstudio.com/")
-  if (bioconductor) {
-    repos <- c(repos, BiocInstaller::biocinstallRepos())
-  }
-  available_src <- available_packages(repos, "source")
+    rule("Installing dependencies") # --------------------------------------------
+    repos <- c(CRAN = "http://cran.rstudio.com/")
+    if (bioconductor) {
+      check_suggested("BiocInstaller")
+      repos <- c(repos, BiocInstaller::biocinstallRepos())
+    }
+    available_src <- available_packages(repos, "source")
 
-  message("Determining available packages") # ----------------------------------
-  deps <- package_deps(pkgs, repos = repos, type = type, dependencies = TRUE)
-  update(deps, Ncpus = threads)
+    message("Determining available packages") # ----------------------------------
+    deps <- package_deps(pkgs, repos = repos, type = type, dependencies = TRUE)
+    update(deps, Ncpus = threads)
 
-  message("Downloading source packages for checking") #-------------------------
-  urls <- lapply(pkgs, package_url, repos = repos, available = available_src)
-  ok <- vapply(urls, function(x) !is.na(x$name), logical(1))
-  if (any(!ok)) {
-    message("Couldn't find source for: ", paste(pkgs[!ok], collapse = ", "))
-    urls <- urls[ok]
-    pkgs <- pkgs[ok]
-  }
+    message("Downloading source packages for checking") #-------------------------
+    urls <- lapply(pkgs, package_url, repos = repos, available = available_src)
+    ok <- vapply(urls, function(x) !is.na(x$name), logical(1))
+    if (any(!ok)) {
+      message("Couldn't find source for: ", paste(pkgs[!ok], collapse = ", "))
+      urls <- urls[ok]
+      pkgs <- pkgs[ok]
+    }
 
-  local_urls <- file.path(srcpath, vapply(urls, `[[`, "name", FUN.VALUE = character(1)))
-  remote_urls <- vapply(urls, `[[`, "url", FUN.VALUE = character(1))
+    local_urls <- file.path(srcpath, vapply(urls, `[[`, "name", FUN.VALUE = character(1)))
+    remote_urls <- vapply(urls, `[[`, "url", FUN.VALUE = character(1))
 
-  needs_download <- !file.exists(local_urls)
-  if (any(needs_download)) {
-    message("Downloading ", sum(needs_download), " packages")
-    Map(utils::download.file, remote_urls[needs_download],
-      local_urls[needs_download], quiet = TRUE)
-  }
+    needs_download <- !file.exists(local_urls)
+    if (any(needs_download)) {
+      message("Downloading ", sum(needs_download), " packages")
+      Map(utils::download.file, remote_urls[needs_download],
+        local_urls[needs_download], quiet = TRUE)
+    }
 
-  rule("Checking packages") # --------------------------------------------------
-  check_pkg <- function(i) {
-    message("Checking ", pkgs[i])
+    rule("Checking packages") # --------------------------------------------------
+    check_pkg <- function(i) {
+      message("Checking ", pkgs[i])
 
-    start_time <- Sys.time()
-    check_out <- tryCatch({
-      check_r_cmd(pkgs[i], local_urls[i],
-        args = "--no-multiarch --no-manual --no-codoc",
-        check_dir = check_dir,
-        quiet = TRUE
+      start_time <- Sys.time()
+      check_out <- tryCatch({
+        check_r_cmd(pkgs[i], local_urls[i],
+          args = "--no-multiarch --no-manual --no-codoc",
+          check_dir = check_dir,
+          quiet = TRUE
+        )
+      }, error = function(e) {
+        message(pkgs[i], " failed : ", check_dir, "/", pkgs[i],
+          ".Rcheck/00check.log")
+        NULL
+      })
+      end_time <- Sys.time()
+
+      elapsed_time <- as.numeric(end_time - start_time, units = "secs")
+      writeLines(
+        sprintf("%d  %s  %.1f", i, pkgs[i], elapsed_time),
+        file.path(check_dir, paste0(pkgs[i], ".Rcheck"), "check-time.txt")
       )
-    }, error = function(e) {
-      message("Check failed: ", e$message)
+
       NULL
-    })
-    end_time <- Sys.time()
+    }
 
-    elapsed_time <- as.numeric(end_time - start_time, units = "secs")
-    writeLines(
-      sprintf("%d  %s  %.1f", i, pkgs[i], elapsed_time),
-      file.path(check_dir, paste0(pkgs[i], ".Rcheck"), "check-time.txt")
-    )
+    if (identical(as.integer(threads), 1L)) {
+      lapply(seq_along(pkgs), check_pkg)
+    } else {
+      parallel::mclapply(seq_along(pkgs), check_pkg, mc.preschedule = FALSE,
+        mc.cores = threads)
+    }
 
-    NULL
-  }
-
-  if (identical(as.integer(threads), 1L)) {
-    lapply(seq_along(pkgs), check_pkg)
-  } else {
-    parallel::mclapply(seq_along(pkgs), check_pkg, mc.preschedule = FALSE,
-      mc.cores = threads)
-  }
-
-  invisible(check_dir)
+    invisible(check_dir)
+  })
 }

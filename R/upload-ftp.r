@@ -1,4 +1,6 @@
 upload_ftp <- function(file, url, verbose = FALSE){
+  check_suggested("curl")
+
   stopifnot(file.exists(file))
   stopifnot(is.character(url))
   con <- file(file, open = "rb")
