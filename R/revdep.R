@@ -117,7 +117,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
   if (!file.exists(srcpath))
     dir.create(srcpath)
 
-  message("Installing ", pkg$package)
+  message("Installing ", pkg$package, " in version ", pkg$version, " from ", pkg$path)
   withr::with_libpaths(libpath, install(pkg, reload = FALSE, quiet = TRUE))
   on.exit(remove.packages(pkg$package, libpath), add = TRUE)
 
