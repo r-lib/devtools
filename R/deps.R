@@ -112,26 +112,34 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
   package_deps(deps, repos = repos, type = type)
 }
 
-compare_versions <- function(a, b) {
-  stopifnot(length(a) == length(b))
+## -2 = not installed, but available on CRAN
+## -1 = installed, but out of date
+##  0 = installed, most recent version
+##  1 = installed, version ahead of CRAN
+##  2 = package not on CRAN
 
-  compare_var <- function(x, y) {
-    if (is.na(y)) return(2L)
-    if (is.na(x)) return(-2L)
+compare_versions <- function(inst, cran) {
+  stopifnot(length(inst) == length(cran))
 
-    x <- package_version(x)
-    y <- package_version(y)
+  compare_var <- function(i, c) {
+    if (is.na(c)) return(2L)            # not on CRAN
+    if (is.na(i)) return(-2L)           # not installed, but on CRAN
 
-    if (x < y) {
-      -1L
-    } else if (x > y) {
-      1L
+    i <- package_version(i)
+    c <- package_version(c)
+
+    if (i < c) {
+      -1L                               # out of date
+    } else if (i > c) {
+      1L                                # ahead of CRAN
     } else {
-      0L
+      0L                                # most recent CRAN version
     }
   }
 
-  vapply(seq_along(a), function(i) compare_var(a[[i]], b[[i]]), integer(1))
+  vapply(seq_along(inst),
+    function(i) compare_var(inst[[i]], cran[[i]]),
+    integer(1))
 }
 
 install_dev_remotes <- function(pkg, ...) {
@@ -215,6 +223,12 @@ print.package_deps <- function(x, show_ok = FALSE, ...) {
     print(x[same_ver, , drop = FALSE], row.names = FALSE, right = FALSE)
   }
 }
+
+## -2 = not installed, but available on CRAN
+## -1 = installed, but out of date
+##  0 = installed, most recent version
+##  1 = installed, version ahead of CRAN
+##  2 = package not on CRAN
 
 #' @export
 #' @rdname package_deps
