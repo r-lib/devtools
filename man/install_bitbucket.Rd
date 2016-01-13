@@ -28,7 +28,7 @@ to \code{username})}
 
 \item{password}{your password}
 
-\item{force}{Force installation even if the git sha has not changed since
+\item{force}{Force installation even if the git SHA1 has not changed since
 the previous install.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}

@@ -8,7 +8,7 @@ install(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   args = getOption("devtools.install.args"), quiet = FALSE,
   dependencies = NA, upgrade_dependencies = TRUE, build_vignettes = FALSE,
   keep_source = getOption("keep.source.pkgs"), threads = getOption("Ncpus",
-  1), force = FALSE, ...)
+  1), force_deps = FALSE, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -52,8 +52,8 @@ It defaults to the option \code{"keep.source.pkgs"}.}
 dependencies.
 It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 
-\item{force}{whether to force installation even if the reference hasn't
-changed.}
+\item{force_deps}{whether to force installation of dependencies even if their
+SHA1 reference hasn't changed from the currently installed version.}
 
 \item{...}{additional arguments passed to \code{\link{install.packages}}
 when installing dependencies. \code{pkg} is installed with

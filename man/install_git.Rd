@@ -19,7 +19,7 @@ contain the package we are interested in installing.}
 \item{args}{DEPRECATED. A character vector providing extra arguments to
 pass on to git.}
 
-\item{force}{Force installation even if the git sha has not changed since
+\item{force}{Force installation even if the git SHA1 has not changed since
 the previous install.}
 
 \item{...}{passed on to \code{\link{install}}}

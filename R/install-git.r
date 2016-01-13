@@ -10,7 +10,7 @@
 #'   contain the package we are interested in installing.
 #' @param args DEPRECATED. A character vector providing extra arguments to
 #'   pass on to git.
-#' @param force Force installation even if the git sha has not changed since
+#' @param force Force installation even if the git SHA1 has not changed since
 #'   the previous install.
 #' @param ... passed on to \code{\link{install}}
 #' @export

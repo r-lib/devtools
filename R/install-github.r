@@ -20,9 +20,9 @@
 #'   the \code{GITHUB_PAT} environment variable.
 #' @param host GitHub API host to use. Override with your GitHub enterprise
 #'   hostname, for example, \code{"github.hostname.com/api/v3"}.
-#' @param ... Other arguments passed on to \code{\link{install}}.
-#' @param force Force installation even if the git sha has not changed since
+#' @param force Force installation even if the git SHA1 has not changed since
 #'   the previous install.
+#' @param ... Other arguments passed on to \code{\link{install}}.
 #' @details
 #' Attempting to install from a source repository that uses submodules
 #' raises a warning. Because the zipped sources provided by GitHub do not

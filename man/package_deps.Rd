@@ -10,7 +10,7 @@ package_deps(pkg, dependencies = NA, repos = getOption("repos"),
   type = getOption("pkgType"))
 
 dev_package_deps(pkg = ".", dependencies = NA, repos = getOption("repos"),
-  type = getOption("pkgType"), force = FALSE)
+  type = getOption("pkgType"), force_deps = FALSE)
 
 \method{update}{package_deps}(object, ..., quiet = FALSE, upgrade = TRUE)
 }
@@ -33,8 +33,8 @@ the name of the package in the current directory.}
 automatically to "binary" to avoid interactive prompts during package
 installation.}
 
-\item{force}{Whether to force installation of package dependencies for
-\code{dev_package_deps}.}
+\item{force_deps}{whether to force installation of dependencies even if their
+SHA1 reference hasn't changed from the currently installed version.}
 
 \item{object}{A \code{package_deps} object.}
 
