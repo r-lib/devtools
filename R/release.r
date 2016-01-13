@@ -63,7 +63,8 @@ release <- function(pkg = ".", check = TRUE) {
   }
 
   if (check) {
-    check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE)
+    check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE,
+          build_args = build_cran_args)
     release_checks(pkg)
 
     if (yesno("Was package check successful?"))
@@ -277,9 +278,11 @@ submit_cran <- function(pkg = ".") {
   upload_cran(pkg, built_path)
 }
 
+build_cran_args <- "--compact-vignettes=both"
+
 build_cran <- function(pkg) {
   message("Building")
-  built_path <- build(pkg, tempdir(), manual = TRUE)
+  built_path <- build(pkg, tempdir(), manual = TRUE, args = build_cran_args)
   message("File size: ",
           format(as.object_size(file.info(built_path)$size), units = "auto"))
   built_path
