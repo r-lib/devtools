@@ -167,13 +167,14 @@ dev_remote_type <- function(remotes = "") {
     } else {
       stop("Malformed remote specification '", x, "'", call. = FALSE)
     }
+    fun_nme <- paste0("install_", tolower(type))
     tryCatch(
-      fun <- get(x = paste0("install_", tolower(type)),
+      fun <- get(x = fun_nme,
         envir = asNamespace("devtools"),
         mode = "function",
         inherits = FALSE),
       error = function(e) {
-        stop("Malformed remote specification '", x, "'", call. = FALSE)
+        stop("Malformed remote specification '", x, "', 'devtools:::", fun_nme, "' does not exist", call. = FALSE)
       })
     list(repository = repo, type = type, fun = fun)
   }

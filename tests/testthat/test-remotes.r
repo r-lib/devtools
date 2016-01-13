@@ -26,7 +26,7 @@ test_that("dev_remote_type errors", {
   expect_error(dev_remote_type("hadley::testthat"),
     "Malformed remote specification 'hadley::testthat'")
   expect_error(dev_remote_type("SVN2::testthat"),
-    "Malformed remote specification 'SVN2::testthat'")
+    "Malformed remote specification 'SVN2::testthat', 'devtools:::install_svn2' does not exist")
 })
 
 test_that("dev_remote_type works with explicit types", {
