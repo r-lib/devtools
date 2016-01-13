@@ -1,7 +1,7 @@
 # devtools 1.9.1.9000
 
 * `release()` and `build_win()` use `--compact-vignettes=both`
-   to avoid NOTEs with the built package (#981, @krlmlr).
+   to avoid WARNINGs with the built package (#981, @krlmlr).
 
 * 'Check failed:' now includes the package name for when Ncpus>1 so you
    know which package has failed and can start looking at the output without
