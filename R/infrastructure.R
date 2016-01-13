@@ -19,7 +19,8 @@ use_testthat <- function(pkg = ".") {
 
   check_suggested("testthat")
   if (uses_testthat(pkg)) {
-    stop("Package already has testing infrastructure", call. = FALSE)
+    message("* testthat is already initialized")
+    return(invisible(TRUE))
   }
 
   # Create tests/testthat and install file for R CMD CHECK
@@ -74,8 +75,10 @@ use_rstudio <- function(pkg = ".") {
 
   path <- file.path(pkg$path, paste0(pkg$package, ".Rproj"))
   if (file.exists(path)) {
+    message("* RStudio infrastructure already initialized")
     return(invisible(TRUE))
   }
+
   message("Adding RStudio project file to ", pkg$package)
 
   template_path <- system.file("templates/template.Rproj", package = "devtools")
