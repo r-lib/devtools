@@ -25,6 +25,8 @@ on_failure:
 environment:
   WARNINGS_ARE_ERRORS: 1
   _R_CHECK_FORCE_SUGGESTS_: 0
+  GITHUB_PAT:
+    secure: 1WIIHQ7ce5IPmeRC2f/L0ze87IJi6jTFIWgX68mSFH5jym+QxZK2HLHQ85ImdkIU
 
 artifacts:
   - path: '*.Rcheck\**\*.log'
