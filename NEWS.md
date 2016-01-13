@@ -5,6 +5,7 @@
 
 * `use_appveyor()` template now creates `failure.zip` artifact instead of
   polluting the logs with `R CMD check` output (#1017, @krlmlr, @HenrikBengtsson).
+
 * Fix a bug in the installers (`install_github`, etc.), when upgrades are
   not requested (#1013, @gaborcsardi).
 
