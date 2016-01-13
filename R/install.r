@@ -63,6 +63,13 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   pkg <- as.package(pkg)
   check_build_tools(pkg)
 
+  # Forcing all of the promises for the current namespace now will avoid lazy-load
+  # errors when the new package is installed overtop the old one.
+  # https://stat.ethz.ch/pipermail/r-devel/2015-December/072150.html
+  if (is_loaded(pkg)) {
+    eapply(ns_env(pkg), force, all.names = TRUE)
+  }
+
   if (!quiet) {
     message("Installing ", pkg$package)
   }

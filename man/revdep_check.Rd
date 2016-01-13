@@ -96,7 +96,7 @@ revdep_check_save_logs(res)
 }
 }
 \seealso{
-\code{\link{revdep_maintainers}()} to run R CMD check on all reverse
-  dependencies.
+\code{\link{revdep_maintainers}()} to get a list of all revdep
+  maintainers.
 }
 

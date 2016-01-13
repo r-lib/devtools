@@ -107,7 +107,7 @@ check_r_cmd <- function(name, built_path = NULL, cran = TRUE,
     opts <- c(opts, "--no-build-vignettes", "--no-manual")
   }
   if (cran) {
-    opts <- c("--as-cran", opts)
+    opts <- c("--as-cran", "--run-donttest", opts)
   }
 
   env_vars <- check_env_vars(cran, check_version, force_suggests)

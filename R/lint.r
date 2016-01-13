@@ -15,15 +15,9 @@
 #' cleared by calling \code{\link[lintr]{clear_cache}}.
 #' @export
 lint <- function(pkg = ".", cache = TRUE, ...) {
-  check_lintr()
+  check_suggested("lintr")
   pkg <- as.package(pkg)
 
   message("Linting ", pkg$package, appendLF = FALSE)
   lintr::lint_package(pkg$path, cache = cache, ...)
-}
-
-check_lintr <- function() {
-  if (!requireNamespace("lintr", quietly = TRUE)) {
-    stop("Please install lintr", call. = FALSE)
-  }
 }

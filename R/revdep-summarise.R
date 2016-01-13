@@ -35,6 +35,7 @@ revdep_check_save_summary <- function(res, log_dir = "revdep") {
 #' @rdname revdep_check
 #' @export
 revdep_check_summary <- function(res) {
+  check_suggested("knitr")
   plat <- platform_info()
   plat_df <- data.frame(setting = names(plat), value = unlist(plat))
   rownames(plat_df) <- NULL

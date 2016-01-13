@@ -53,6 +53,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     rule("Installing dependencies") # --------------------------------------------
     repos <- c(CRAN = "http://cran.rstudio.com/")
     if (bioconductor) {
+      check_suggested("BiocInstaller")
       repos <- c(repos, BiocInstaller::biocinstallRepos())
     }
     available_src <- available_packages(repos, "source")
@@ -92,7 +93,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
           quiet = TRUE
         )
       }, error = function(e) {
-        message("Check failed: ", e$message)
+        message(pkgs[i], " failed : ", check_dir, "/", pkgs[i],
+          ".Rcheck/00check.log")
         NULL
       })
       end_time <- Sys.time()

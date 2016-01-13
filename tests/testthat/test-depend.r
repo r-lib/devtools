@@ -46,3 +46,8 @@ test_that("Parse dependencies", {
   expect_equal(deps$compare, c("<", "=="))
   expect_equal(deps$version, c("2.1", "3.0.1"))
 })
+
+test_that("Dependencies of development package include direct dependencies", {
+  deps <- dev_package_deps("testNamespace")
+  expect_equal(deps$package, "bitops")
+})
