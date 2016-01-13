@@ -174,7 +174,7 @@ dev_remote_type <- function(remotes = "") {
         mode = "function",
         inherits = FALSE),
       error = function(e) {
-        stop("Malformed remote specification '", x, "', 'devtools:::", fun_nme, "' does not exist", call. = FALSE)
+        stop("Unknown remote type", call. = FALSE)
       })
     list(repository = repo, type = type, fun = fun)
   }
