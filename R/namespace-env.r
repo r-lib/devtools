@@ -149,20 +149,48 @@ extract_lang <- function(x, f, ...) {
   NULL
 }
 
-search_method_dispatch_on <- function(x) {
-  is.call(x) && x[[1]] == as.name("if") &&
-    identical(x[[2]],
-      quote(.isMethodsDispatchOn() && methods:::.hasS4MetaData(ns) && !identical(package, "methods")))
+modify_lang <- function(x, f, ...) {
+  recurse <- function(x) {
+    lapply(x, modify_lang, f = f, ...)
+  }
+
+  x <- f(x, ...)
+
+  if (is.call(x)) {
+    as.call(recurse(x))
+  } else if (is.function(x)) {
+     formals(x) <- modify_lang(formals(x), f, ...)
+     body(x) <- modify_lang(body(x), f, ...)
+  } else {
+    x
+  }
 }
 
+strip_internal_calls <- function(x) {
+  if (is.call(x) && identical(x[[1L]], as.name(":::")) && identical(x[[2L]], as.name("methods"))) {
+    x[[3L]]
+  } else {
+    x
+  }
+}
+
+search_method_dispatch_on <- function(x) {
+  is.call(x) && identical(x[[1L]], as.symbol("if")) &&
+    identical(x[[2]], quote(.isMethodsDispatchOn() && .hasS4MetaData(ns) && !identical(package, "methods")))
+}
 
 #' Lookup S4 classes for export
 #'
 #' This function uses code from base::loadNamespace. Previously this code was
-#' copied directly, not it is dynamtically looked up instead, to prevent drift as
+#' copied directly, now it is dynamically looked up instead, to prevent drift as
 #' base::loadNamespace changes.
 add_classes_to_exports <- function(ns, package, exports, nsInfo) { }
-body(add_classes_to_exports) <- call("{", extract_lang(body(loadNamespace), search_method_dispatch_on)[[1L]], quote(exports))
+body(add_classes_to_exports) <- call(
+  "{",
+  extract_lang(
+    modify_lang(body(loadNamespace), strip_internal_calls),
+    search_method_dispatch_on)[[1L]],
+  quote(exports))
 environment(add_classes_to_exports) <- asNamespace("methods")
 
 #' Parses the NAMESPACE file for a package
