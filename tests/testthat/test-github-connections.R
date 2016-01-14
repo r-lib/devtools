@@ -168,7 +168,8 @@ test_that("add_sha options work for git directories", {
   test_pkg <- create_in_temp("testLocalRight")
   mock_use_github(test_pkg)
 
-  install_local(test_pkg)
+  install_local(test_pkg, quiet = TRUE)
+  library("testLocalRight")
   pkg_info <- session_info()$packages
   pkg_source <- pkg_info[pkg_info[, "package"] %in% "testLocalRight", "source"]
   r <- git2r::repository(test_pkg)
