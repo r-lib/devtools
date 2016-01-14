@@ -36,7 +36,21 @@ git_uncommitted <- function(path = ".") {
 #' @export
 #' @return nothing. Used for it's side effect
 #'
-#'
+git_wd_clean <- function(path = ".", level = "warn") {
+  # want TRUE if the wd is clean, makes reasoning easier
+  is_wd_clean <- uses_git(path) && !git_uncommitted(path)
+
+  if (is_wd_clean) {
+    return()
+  } else {
+    warn_string <- paste(path, "has uncommitted changes!",
+                         sep = "")
+    switch(level,
+           warn = warning(warn_string, call. = TRUE),
+           die = stop(warn_string, call. = TRUE)
+           }
+  }
+}
 
 git_sync_status <- function(path = ".") {
   r <- git2r::repository(path, discover = TRUE)
