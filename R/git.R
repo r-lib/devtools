@@ -36,7 +36,11 @@ git_uncommitted <- function(path = ".") {
 #' @export
 #' @return nothing. Used for it's side effect
 #'
-git_wd_clean <- function(path = ".", level = "warn") {
+git_wd_clean <- function(path = ".", level = getOption("devtools.git.wd.clean")) {
+
+  if (is.null(level)) {
+    level <- "warn"
+  }
   # want TRUE if the wd is clean, makes reasoning easier
   if (!uses_git(path)) {
     return()
