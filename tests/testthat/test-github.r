@@ -72,6 +72,10 @@ test_that("GitHub references are resolved correctly", {
 })
 
 test_that("Github repos with submodules are identified correctly", {
+  # Appveyor has a very low GitHub rate limit which causes this to fail often, so
+  # skip these tests
+  skip_on_appveyor()
+
   expect_equal(github_has_remotes(github_remote("hadley/devtools")), FALSE)
   ## a r package repo known to use submodules
   expect_equal(github_has_remotes(github_remote("armstrtw/rzmq")), TRUE)
