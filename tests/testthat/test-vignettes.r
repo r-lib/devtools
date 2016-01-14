@@ -111,7 +111,7 @@ test_that("vignettes built on install", {
     "there is no package called")
 
   install("testVignettesBuilt", reload = FALSE, quiet = TRUE,
-    build_vignettes = TRUE)
+    build_vignettes = TRUE, add_sha = FALSE)
   unlink("testVignettesBuilt/vignettes/new.tex")
   unlink("testVignettesBuilt/vignettes/.build.timestamp")
 
