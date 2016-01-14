@@ -38,7 +38,11 @@ git_uncommitted <- function(path = ".") {
 #'
 git_wd_clean <- function(path = ".", level = "warn") {
   # want TRUE if the wd is clean, makes reasoning easier
-  is_wd_clean <- uses_git(path) && !git_uncommitted(path)
+  if (!uses_git(path)) {
+    return()
+  } else {
+    is_wd_clean <- !git_uncommitted(path)
+  }
 
   if (is_wd_clean) {
     return()
