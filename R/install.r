@@ -60,6 +60,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     build_vignettes = FALSE,
                     keep_source = getOption("keep.source.pkgs"),
                     threads = getOption("Ncpus", 1),
+                    add_sha = TRUE,
                     ...) {
 
   pkg <- as.package(pkg)
@@ -82,6 +83,11 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   }
   install_deps(pkg, dependencies = dependencies, upgrade = upgrade_dependencies,
     threads = threads, ...)
+
+  # add the SHA to the DESCRIPTION file before building and installing
+  if (add_sha) {
+    add_metadata(pkg$path, remote_metadata(pkg))
+  }
 
   # Build the package. Only build locally if it doesn't have vignettes
   has_vignettes <- length(tools::pkgVignettes(dir = pkg$path)$docs > 0)
