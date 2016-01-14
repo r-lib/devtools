@@ -147,11 +147,20 @@ test_that("add_sha options work for git directories", {
   mock_use_github(test_pkg)
 
   # first do add_sha = FALSE
-  install(test_pkg, add_sha = FALSE)
+  install(test_pkg, add_sha = FALSE, quiet = TRUE)
   library("testAddSHAInstall")
 
   pkg_info <- session_info()$packages
   expect_equal(pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"], "local")
+
+  # then add_sha = TRUE
+  install(test_pkg, quiet = TRUE)
+  library("testAddSHAInstall")
+  pkg_info <- session_info()$packages
+  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"]
+  r <- git2r::repository(test_pkg)
+  pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
+  expect_match(pkg_source, pkg_sha)
 
   erase(test_pkg)
 })
