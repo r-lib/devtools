@@ -131,6 +131,31 @@ test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
 
 })
 
+test_that("git_wd_clean works properly", {
+  skip_on_cran()
+
+  test_pkg <- create_in_temp("testGitWD")
+
+  # test that nothing is returned if it is not a git repo
+  expect_silent(git_wd_clean(test_pkg))
+
+  # add git to it
+  mock_use_github(test_pkg)
+
+  # initial creation should have no uncommitted files
+  expect_silent(git_wd_clean(test_pkg))
+  expect_silent(git_wd_clean(test_pkg, level = "warn"))
+  expect_silent(git_wd_clean(test_pkg, level = "die"))
+
+  # make a change and don't commit it
+  r <- git2r::repository(test_pkg, discover = TRUE)
+  cat("just some test files", file = file.path(test_pkg, "test.txt"))
+
+  expect_silent(git_wd_clean(test_pkg, level = "none"))
+  expect_warning(git_wd_clean(test_pkg))
+  expect_error(git_wd_clean(test_pkg, level = "die"))
+})
+
 test_that("add_sha options work for git directories", {
   skip_on_cran()
 
