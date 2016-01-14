@@ -163,4 +163,17 @@ test_that("add_sha options work for git directories", {
   expect_match(pkg_source, pkg_sha)
 
   erase(test_pkg)
+
+  # and check that install_local still does correct thing
+  test_pkg <- create_in_temp("testLocalRight")
+  mock_use_github(test_pkg)
+
+  install_local(test_pkg)
+  pkg_info <- session_info()$packages
+  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testLocalRight", "source"]
+  r <- git2r::repository(test_pkg)
+  pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
+  expect_match(pkg_source, pkg_sha)
+
+  erase(test_pkg)
 })
