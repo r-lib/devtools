@@ -182,8 +182,6 @@ test_that("add_sha options work for git directories", {
 
   # commit first so that the test passes
   r <- git2r::repository(test_pkg)
-  git2r::add(r, "DESCRIPTION")
-  git2r::commit(r, "commit old DESCRIPTION")
 
   # then use add_sha
   install(test_pkg, quiet = TRUE)
