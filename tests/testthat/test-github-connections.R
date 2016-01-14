@@ -155,6 +155,13 @@ test_that("git_wd_clean works properly", {
   expect_warning(git_wd_clean(test_pkg))
   expect_error(git_wd_clean(test_pkg, level = "die"))
 
+  options(devtools.git.wd.clean = "none")
+  expect_silent(git_wd_clean(test_pkg))
+  options(devtools.git.wd.clean = "warn")
+  expect_warning(git_wd_clean(test_pkg))
+  options(devtools.git.wd.clean = "die")
+  expect_error(git_wd_clean(test_pkg))
+
   erase(test_pkg)
 })
 
