@@ -130,3 +130,26 @@ test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
   erase(test_pkg)
 
 })
+
+test_that("add_sha options work for git directories", {
+  skip_on_cran()
+
+  # Make a temp lib directory to install test package into
+  old_libpaths <- .libPaths()
+  tmp_libpath = file.path(tempdir(), "devtools_test")
+  if (!dir.exists(tmp_libpath)) dir.create(tmp_libpath)
+  .libPaths(c(tmp_libpath, .libPaths()))
+
+  # Reset the libpath on exit
+  on.exit(.libPaths(old_libpaths), add = TRUE)
+
+  test_pkg <- create_in_temp("testAddSHAInstall1")
+  mock_use_github(test_pkg)
+
+  # first do add_sha = FALSE
+  install(test_pkg, add_sha = FALSE)
+  library("testAddSHAInstall")
+
+  pkg_info <- session_info()$packages
+  expect_equal(pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"], "local")
+})
