@@ -45,8 +45,8 @@
 #' @param threads number of concurrent threads to use for installing
 #'   dependencies.
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
-#' @param add_sha if \code{TRUE}, checks if the package is a in a git repo, and
-#'   if it is, adds the SHA to the DESCRIPTION file before installing
+#' @param add_sha default is to use \code{git_wd_clean(pkg, level='warn')} to
+#'   check that the package is a git repository and add the SHA to DESCRIPTION.
 #' @param ... additional arguments passed to \code{\link{install.packages}}
 #'   when installing dependencies. \code{pkg} is installed with
 #'   \code{R CMD INSTALL}.
@@ -60,7 +60,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     build_vignettes = FALSE,
                     keep_source = getOption("keep.source.pkgs"),
                     threads = getOption("Ncpus", 1),
-                    add_sha = TRUE,
+                    add_sha = git_wd_clean(pkg, level = "warn"),
                     ...) {
 
   pkg <- as.package(pkg)
@@ -85,7 +85,8 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
     threads = threads, ...)
 
   # add the SHA to the DESCRIPTION file before building and installing
-  if (add_sha) {
+  if (is.function(add_sha)) {
+    add_sha(pkg$path)
     add_metadata(pkg$path, remote_metadata(pkg))
   }
 

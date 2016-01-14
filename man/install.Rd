@@ -8,7 +8,7 @@ install(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   args = getOption("devtools.install.args"), quiet = FALSE,
   dependencies = NA, upgrade_dependencies = TRUE, build_vignettes = FALSE,
   keep_source = getOption("keep.source.pkgs"), threads = getOption("Ncpus",
-  1), ...)
+  1), add_sha = git_wd_clean(pkg, level = "warn"), ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -51,6 +51,9 @@ It defaults to the option \code{"keep.source.pkgs"}.}
 \item{threads}{number of concurrent threads to use for installing
 dependencies.
 It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
+
+\item{add_sha}{default is to use \code{git_wd_clean(pkg, level='warn')} to
+check that the package is a git repository and add the SHA to DESCRIPTION.}
 
 \item{...}{additional arguments passed to \code{\link{install.packages}}
 when installing dependencies. \code{pkg} is installed with
