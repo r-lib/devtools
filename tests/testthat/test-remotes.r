@@ -1,6 +1,6 @@
 context("install_dev_remotes")
 test_that("install_dev_remotes returns if no remotes specified", {
-  expect_equal(install_dev_remotes("testTest/"), NULL)
+  expect_equal(install_dev_remotes("testTest"), NULL)
 })
 
 test_that("dev_remote_type works with implicit types", {
