@@ -180,12 +180,16 @@ test_that("add_sha options work for git directories", {
   pkg_info <- session_info()$packages
   expect_equal(pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"], "local")
 
-  # then add_sha = TRUE
+  # commit first so that the test passes
+  r <- git2r::repository(test_pkg)
+  git2r::add(r, "DESCRIPTION")
+  git2r::commit(r, "commit old DESCRIPTION")
+
+  # then use add_sha
   install(test_pkg, quiet = TRUE)
   library("testAddSHAInstall")
   pkg_info <- session_info()$packages
   pkg_source <- pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"]
-  r <- git2r::repository(test_pkg)
   pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
   expect_match(pkg_source, pkg_sha)
 
