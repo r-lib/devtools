@@ -12,7 +12,7 @@ test_that("uninstall() unloads and removes from library", {
   on.exit(.libPaths(old_libpaths), add = TRUE)
 
   # Install package
-  install("testHelp", quiet = TRUE)
+  install("testHelp", quiet = TRUE, add_sha = FALSE)
   expect_true(require(testHelp))
   expect_true("testHelp" %in% loaded_packages()$package)
 

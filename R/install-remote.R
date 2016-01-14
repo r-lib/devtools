@@ -22,7 +22,7 @@ install_remote <- function(remote, ..., quiet = FALSE) {
   # Because we've modified DESCRIPTION, its original MD5 value is wrong
   clear_description_md5(source)
 
-  install(source, ..., quiet = quiet)
+  install(source, ..., add_sha = FALSE, quiet = quiet)
 }
 
 install_remotes <- function(remotes, ...) {

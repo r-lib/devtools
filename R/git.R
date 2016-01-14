@@ -14,6 +14,53 @@ git_uncommitted <- function(path = ".") {
   any(st != 0)
 }
 
+#' git_wd_clean
+#'
+#' checks that the working directory (wd) is clean, i.e. the last SHA in commits
+#' represents the current package structure.
+#'
+#' @param path the path to the package directory
+#' @param level how should this behave if wd is not clean (see details)
+#'
+#' @details
+#' This function controls behavior for calling functions on a \emph{git repo}.
+#' The \code{level} parameter decides how fussy the function is about seeing
+#' a git repo that has \emph{uncommitted} changes.
+#'
+#' \describe{
+#'   \item{none}{The function doesn't care at all}
+#'   \item{warn}{A warning that the wd is not clean is displayed}
+#'   \item{die}{An error is thrown, stopping all further functions}
+#'  }
+#'
+#' @export
+#' @return nothing. Used for it's side effect
+#'
+git_wd_clean <- function(path = ".", level = getOption("devtools.git.wd.clean")) {
+
+  if (is.null(level)) {
+    level <- "warn"
+  }
+  # want TRUE if the wd is clean, makes reasoning easier
+  if (!uses_git(path)) {
+    return()
+  } else {
+    is_wd_clean <- !git_uncommitted(path)
+  }
+
+  if (is_wd_clean) {
+    return()
+  } else {
+    warn_string <- paste(path, "has uncommitted changes!",
+                         sep = "")
+    switch(level,
+           warn = warning(warn_string, call. = TRUE),
+           die = stop(warn_string, call. = TRUE),
+           none = return()
+    )
+  }
+}
+
 git_sync_status <- function(path = ".") {
   r <- git2r::repository(path, discover = TRUE)
 

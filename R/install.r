@@ -45,6 +45,8 @@
 #' @param threads number of concurrent threads to use for installing
 #'   dependencies.
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
+#' @param add_sha default is to use \code{git_wd_clean(pkg, level='warn')} to
+#'   check that the package is a git repository and add the SHA to DESCRIPTION.
 #' @param ... additional arguments passed to \code{\link{install.packages}}
 #'   when installing dependencies. \code{pkg} is installed with
 #'   \code{R CMD INSTALL}.
@@ -58,6 +60,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     build_vignettes = FALSE,
                     keep_source = getOption("keep.source.pkgs"),
                     threads = getOption("Ncpus", 1),
+                    add_sha = git_wd_clean,
                     ...) {
 
   pkg <- as.package(pkg)
@@ -80,6 +83,12 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   }
   install_deps(pkg, dependencies = dependencies, upgrade = upgrade_dependencies,
     threads = threads, ...)
+
+  # add the SHA to the DESCRIPTION file before building and installing
+  if (is.function(add_sha)) {
+    add_sha(pkg$path, level = getOption("devtools.git.wd.clean"))
+    add_metadata(pkg$path, remote_metadata(pkg))
+  }
 
   # Build the package. Only build locally if it doesn't have vignettes
   has_vignettes <- length(tools::pkgVignettes(dir = pkg$path)$docs > 0)
