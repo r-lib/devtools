@@ -46,3 +46,13 @@ remote_metadata.local_remote <- function(x, bundle = NULL, source = NULL) {
     RemoteSha = if (uses_git(x$path)) git_sha1(path = x$path)
   )
 }
+
+#' @export
+remote_metadata.package <- function(x, bundle = NULL, source = NULL) {
+  list(
+    RemoteType = "local",
+    RemoteUrl = x$path,
+    RemoteSubdir = NULL,
+    RemoteSha = if (uses_git(x$path)) git_sha1(path = x$path)
+  )
+}
