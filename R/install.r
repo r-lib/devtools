@@ -45,6 +45,8 @@
 #' @param threads number of concurrent threads to use for installing
 #'   dependencies.
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
+#' @param add_sha if \code{TRUE}, checks if the package is a in a git repo, and
+#'   if it is, adds the SHA to the DESCRIPTION file before installing
 #' @param ... additional arguments passed to \code{\link{install.packages}}
 #'   when installing dependencies. \code{pkg} is installed with
 #'   \code{R CMD INSTALL}.
