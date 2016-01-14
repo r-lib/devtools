@@ -52,7 +52,7 @@ git_wd_clean <- function(path = ".", level = "warn") {
     switch(level,
            warn = warning(warn_string, call. = TRUE),
            die = stop(warn_string, call. = TRUE)
-           }
+    )
   }
 }
 
