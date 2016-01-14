@@ -55,7 +55,8 @@ git_wd_clean <- function(path = ".", level = getOption("devtools.git.wd.clean"))
                          sep = "")
     switch(level,
            warn = warning(warn_string, call. = TRUE),
-           die = stop(warn_string, call. = TRUE)
+           die = stop(warn_string, call. = TRUE),
+           none = return()
     )
   }
 }
