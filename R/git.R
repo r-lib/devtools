@@ -14,6 +14,10 @@ git_uncommitted <- function(path = ".") {
   any(st != 0)
 }
 
+git_committed <- function(path = ".") {
+  uses_git(path) && !git_uncommitted(path)
+}
+
 git_sync_status <- function(path = ".") {
   r <- git2r::repository(path, discover = TRUE)
 
