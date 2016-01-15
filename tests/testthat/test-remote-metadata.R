@@ -60,6 +60,6 @@ test_that("install on packages adds metadata", {
   install(test_pkg, quiet = TRUE)
   pkg_info <- session_info()$packages
   pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
-  expect_equal(pkg_source, "package (/@)")
+  expect_match(pkg_source, "package")
 
 })

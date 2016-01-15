@@ -153,10 +153,27 @@ pkg_source <- function(desc) {
                   desc$GithubRepo, "@",
                   substr(desc$GithubSHA1, 1, 7), ")")
   } else if (!is.null(desc$RemoteType)) {
-    str <- paste0(desc$RemoteType, " (",
-      desc$RemoteUsername, "/",
-      desc$RemoteRepo, "@",
-      substr(desc$RemoteSha, 1, 7), ")")
+    remote_type <- desc$RemoteType
+
+    user_repo <- character(0)
+
+    # in current definitions these should always be together
+    if (!is.null(desc$RemoteUsername) && (!is.null(desc$RemoteRepo))) {
+      user_repo <- paste0(desc$RemoteUsername, "/", desc$RemoteRepo)
+    }
+
+    sha <- character(0)
+
+    if (!is.null(desc$RemoteSha)) {
+      sha <- paste0("@", substr(desc$RemoteSha, 1, 7))
+    }
+
+    user_sha <- character(0)
+    if (length(user_repo) || (length(sha))) {
+      user_sha <- paste0(" (", user_repo, sha, ")")
+    }
+
+    str <- paste0(remote_type, user_sha)
 
   } else if (!is.null(desc$Repository)) {
     repo <- desc$Repository
