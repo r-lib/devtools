@@ -132,7 +132,7 @@ test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
 })
 
 
-test_that("add_sha options work for git directories", {
+test_that("metadata works for packages", {
   skip_on_cran()
 
   # # Make a temp lib directory to install test package into
@@ -144,24 +144,25 @@ test_that("add_sha options work for git directories", {
   # Reset the libpath on exit
   on.exit(.libPaths(old_libpaths), add = TRUE)
 
-  test_pkg <- create_in_temp("testAddSHAInstall")
+  test_pkg <- create_in_temp("testMetadataInstall")
   mock_use_github(test_pkg)
 
-  # first do add_sha = FALSE
-  install(test_pkg, add_sha = FALSE, quiet = TRUE)
-  library("testAddSHAInstall")
+  # first do metadata = NULL
+  install(test_pkg, quiet = TRUE, metadata = NULL)
+  library("testMetadataInstall")
 
   pkg_info <- session_info()$packages
-  expect_equal(pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"], "local")
+  expect_equal(pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"],
+               "local")
 
   # now use default
   r <- git2r::repository(test_pkg)
 
   # then use add_sha
   install(test_pkg, quiet = TRUE)
-  library("testAddSHAInstall")
+  library("testMetadataInstall")
   pkg_info <- session_info()$packages
-  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"]
+  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
   pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
   expect_match(pkg_source, pkg_sha)
 
@@ -169,12 +170,7 @@ test_that("add_sha options work for git directories", {
   cat("just a test", file = file.path(test_pkg, "test.txt"))
   install(test_pkg, quiet = TRUE)
   pkg_info <- session_info()$packages
-  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"]
+  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
   expect_equal(pkg_source, "local")
-
-  install(test_pkg, add_sha = TRUE, quiet = TRUE)
-  pkg_info <- session_info()$packages
-  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"]
-  expect_match(pkg_source, pkg_sha)
 
 })
