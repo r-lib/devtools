@@ -39,12 +39,20 @@ remote_download.local_remote <- function(x, quiet = FALSE) {
 
 #' @export
 remote_metadata.local_remote <- function(x, bundle = NULL, source = NULL) {
-  list(
+  res <- list(
     RemoteType = "local",
-    RemoteUrl = x$path,
-    RemoteSubdir = x$subdir,
-    RemoteSha = if (uses_git(x$path)) git_sha1(path = x$path)
+    RemoteUrl = x$path
   )
+
+  if (git_committed(x$path)) {
+    res$RemoteSha <- git_sha1(path = x$path)
+  }
+  if (uses_github(x$path)) {
+    info <- github_info(x$path)
+    res$RemoteUsername <- info$username
+    res$RemoteRepo <- info$repo
+  }
+  res
 }
 
 #' @export
