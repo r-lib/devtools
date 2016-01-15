@@ -1,5 +1,8 @@
 # devtools 1.9.1.9000
 
+* Devtools now installs packages specified in the `Additional_repositories`
+  field, such as drat repositories. (#907, #1028, @jimhester).
+
 * Be more verbose about which package is installed for revdep check
   (#926, @krlmlr).
 
