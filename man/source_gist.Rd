@@ -27,6 +27,7 @@ using a SHA-1 hash.}
 \url{https://gist.github.com/}
 }
 \examples{
+\dontrun{
 # You can run gists given their id
 source_gist(6872663)
 source_gist("6872663")
@@ -39,7 +40,6 @@ source_gist("gist.github.com/hadley/6872663")
 # sha1 argument - this will throw an error if the file has changed since
 # you first ran it
 source_gist(6872663, sha1 = "54f1db27e60")
-\dontrun{
 # Wrong hash will result in error
 source_gist(6872663, sha1 = "54f1db27e61")
 }
