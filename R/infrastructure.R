@@ -625,3 +625,36 @@ use_cran_badge <- function(pkg = ".") {
   )
   invisible(TRUE)
 }
+
+#' @rdname infrastructure
+#' @section \code{use_mit_license}:
+#' Adds the necessary infrastructure to declare your package as
+#' distributed under the MIT license.
+#' @param copyright_holder The copyright holder for this package. Defaults to
+#'   \code{getOption("devtools.name")}.
+#' @export
+use_mit_license <- function(pkg = ".", copyright_holder = getOption("devtools.name", "<Author>")) {
+  pkg <- as.package(pkg)
+
+  # Update the DESCRIPTION
+  descPath <- file.path(pkg$path, "DESCRIPTION")
+  DESCRIPTION <- read_dcf(descPath)
+  DESCRIPTION$License <- "MIT + file LICENSE"
+  write_dcf(descPath, DESCRIPTION)
+
+  # Update the license
+  licensePath <- file.path(pkg$path, "LICENSE")
+  if (file.exists(licensePath))
+    if (!file.remove(licensePath))
+      stop("Failed to remove license file '", licensePath, "'", call. = FALSE)
+
+  # Write the MIT template
+  template <- c(
+    paste("YEAR:", format(Sys.Date(), "%Y")),
+    paste("COPYRIGHT HOLDER:", copyright_holder)
+  )
+
+  writeLines(template, con = licensePath)
+  message("* Added infrastructure for MIT license")
+  licensePath
+}
