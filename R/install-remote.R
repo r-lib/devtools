@@ -32,11 +32,23 @@ install_remotes <- function(remotes, ...) {
 # Add metadata
 add_metadata <- function(pkg_path, meta) {
   path <- file.path(pkg_path, "DESCRIPTION")
-  desc <- read_dcf(path)
+  if (file.exists(path)) {
+    desc <- read_dcf(path)
 
-  desc <- modifyList(desc, meta)
+    desc <- modifyList(desc, meta)
 
-  write_dcf(path, desc)
+    write_dcf(path, desc)
+  }
+
+  path <- file.path(pkg_path, "Meta", "package.rds")
+  if (file.exists(path)) {
+    pkg_desc <- base::readRDS(path)
+    desc <- as.list(pkg_desc$DESCRIPTION)
+    desc <- modifyList(desc, meta)
+    pkg_desc$DESCRIPTION <- setNames(as.character(desc), names(desc))
+    base::saveRDS(pkg_desc, path)
+  }
+
 }
 
 # Modify the MD5 file - remove the line for DESCRIPTION
