@@ -17,12 +17,12 @@ install_remote <- function(remote, ..., quiet = FALSE) {
   source <- source_pkg(bundle, subdir = remote$subdir)
   on.exit(unlink(source, recursive = TRUE), add = TRUE)
 
-  add_metadata(source, remote_metadata(remote, bundle, source))
+  metadata <- remote_metadata(remote, bundle, source)
 
   # Because we've modified DESCRIPTION, its original MD5 value is wrong
   clear_description_md5(source)
 
-  install(source, ..., quiet = quiet, add_sha = FALSE)
+  install(source, ..., quiet = quiet, metadata = metadata)
 }
 
 install_remotes <- function(remotes, ...) {
