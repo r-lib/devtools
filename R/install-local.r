@@ -49,10 +49,18 @@ remote_metadata.local_remote <- function(x, bundle = NULL, source = NULL) {
 
 #' @export
 remote_metadata.package <- function(x, bundle = NULL, source = NULL) {
-  list(
-    RemoteType = "package",
-    RemoteUrl = x$path,
-    RemoteSubdir = x$subdir,
-    RemoteSha = if (git_committed(x$path)) git_sha1(path = x$path)
+  res <- list(
+    RemoteType = "local",
+    RemoteUrl = x$path
   )
+
+  if (git_committed(x$path)) {
+    res$RemoteSha <- git_sha1(path = x$path)
+  }
+  if (uses_github(x$path)) {
+    info <- github_info(x$path)
+    res$RemoteUsername <- info$username
+    res$RemoteRepo <- info$repo
+  }
+  res
 }
