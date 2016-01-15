@@ -92,7 +92,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   }
 
   if (add_sha) {
-    install_local(pkg$path)
+    install_local(pkg$path, ..., quiet = quiet)
     return()
   }
 
