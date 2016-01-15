@@ -24,7 +24,7 @@ Imports:
     rstudioapi (>= 0.2.0),
     jsonlite,
     stats,
-    git2r (>= 0.11.0),
+    git2r (>= 0.13.1),
     withr
 Suggests:
     curl (>= 0.9),
