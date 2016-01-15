@@ -12,7 +12,7 @@ test_that("unload() unloads DLLs from packages loaded with library()", {
   on.exit(.libPaths(old_libpaths), add = TRUE)
 
   # Install package
-  install("testDllLoad", quiet = TRUE, args = "--no-multiarch")
+  install("testDllLoad", quiet = TRUE, add_sha = FALSE, args = "--no-multiarch")
   expect_true(require(testDllLoad))
 
   # Check that it's loaded properly, by running a function from the package.

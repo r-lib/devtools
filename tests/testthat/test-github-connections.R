@@ -177,4 +177,4 @@ test_that("add_sha options work for git directories", {
   pkg_source <- pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"]
   expect_match(pkg_source, pkg_sha)
 
-}
+})
