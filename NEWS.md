@@ -1,5 +1,8 @@
 # devtools 1.9.1.9000
 
+* `install_version()` now more robust when handling multiple repos (#943, #1030,
+  @jimhester).
+
 * Be more verbose about which package is installed for revdep check
   (#926, @krlmlr).
 
