@@ -130,3 +130,51 @@ test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
   erase(test_pkg)
 
 })
+
+
+test_that("add_sha options work for git directories", {
+  skip_on_cran()
+
+  # # Make a temp lib directory to install test package into
+  old_libpaths <- .libPaths()
+  tmp_libpath = file.path(tempdir(), "devtools_test")
+  if (!dir.exists(tmp_libpath)) dir.create(tmp_libpath)
+  .libPaths(c(tmp_libpath, .libPaths()))
+
+  # Reset the libpath on exit
+  on.exit(.libPaths(old_libpaths), add = TRUE)
+
+  test_pkg <- create_in_temp("testAddSHAInstall")
+  mock_use_github(test_pkg)
+
+  # first do add_sha = FALSE
+  install(test_pkg, add_sha = FALSE, quiet = TRUE)
+  library("testAddSHAInstall")
+
+  pkg_info <- session_info()$packages
+  expect_equal(pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"], "local")
+
+  # now use default
+  r <- git2r::repository(test_pkg)
+
+  # then use add_sha
+  install(test_pkg, quiet = TRUE)
+  library("testAddSHAInstall")
+  pkg_info <- session_info()$packages
+  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"]
+  pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
+  expect_match(pkg_source, pkg_sha)
+
+  # dirty the repo
+  cat("just a test", file = file.path(test_pkg, "test.txt"))
+  install(test_pkg, quiet = TRUE)
+  pkg_info <- session_info()$packages
+  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"]
+  expect_equal(pkg_source, "local")
+
+  install(test_pkg, add_sha = TRUE, quiet = TRUE)
+  pkg_info <- session_info()$packages
+  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testAddSHAInstall", "source"]
+  expect_match(pkg_source, pkg_sha)
+
+}
