@@ -36,6 +36,8 @@ package_file <- function(..., path = ".") {
   if (!is.character(path) || length(path) != 1) {
     stop("`path` must be a string.", call. = FALSE)
   }
+  path <- strip_slashes(normalizePath(path, mustWork = FALSE))
+
   if (!file.exists(path)) {
     stop("Can't find '", path, "'.", call. = FALSE)
   }
@@ -44,7 +46,6 @@ package_file <- function(..., path = ".") {
   }
 
   # Walk up to root directory
-  path <- strip_slashes(normalizePath(path))
   while (!has_description(path)) {
     path <- dirname(path)
 

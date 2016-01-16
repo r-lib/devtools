@@ -76,6 +76,7 @@ source_url <- function(url, ..., sha1 = NULL) {
 #' @param quiet if \code{FALSE}, the default, prints informative messages.
 #' @export
 #' @examples
+#' \dontrun{
 #' # You can run gists given their id
 #' source_gist(6872663)
 #' source_gist("6872663")
@@ -88,7 +89,6 @@ source_url <- function(url, ..., sha1 = NULL) {
 #' # sha1 argument - this will throw an error if the file has changed since
 #' # you first ran it
 #' source_gist(6872663, sha1 = "54f1db27e60")
-#' \dontrun{
 #' # Wrong hash will result in error
 #' source_gist(6872663, sha1 = "54f1db27e61")
 #' }

@@ -4,7 +4,7 @@ test_that("use_data", {
   on.exit(unlink(c("testUseData/data", "testUseData/R/sysdata.rda"),
                  recursive = TRUE, force = TRUE), add = TRUE)
 
-  # Add data to pacakge
+  # Add data to package
   local({
     expect_false(exists("global_test_data_item_to_save", .GlobalEnv))
     .GlobalEnv$global_test_data_item_to_save <- 42L
@@ -44,7 +44,9 @@ test_that("use_data", {
     expect_false(exists("local_test_data_item_to_save"))
     expect_false(exists("system_test_data_item_to_save"))
 
-    load_all("testUseData")
+    expect_warning(load_all("testUseData"),
+      "Objects listed as exports, but not present in namespace: sysdata_export")
+
     on.exit(unload("testUseData"), add = TRUE)
 
     expect_false(exists("global_test_data_item_to_save"))
