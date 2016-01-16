@@ -3,6 +3,10 @@
 * Devtools now installs packages specified in the `Additional_repositories`
   field, such as drat repositories. (#907, #1028, @jimhester).
 
+* Added `use_mit_license()`, which writes the necessary infrastructure to
+  declare and release an R package under the MIT license in a CRAN-compliant
+  way. (#995, @kevinushey)
+
 * Be more verbose about which package is installed for revdep check
   (#926, @krlmlr).
 

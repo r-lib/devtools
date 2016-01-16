@@ -10,6 +10,7 @@
 \alias{use_coverage}
 \alias{use_cran_badge}
 \alias{use_cran_comments}
+\alias{use_mit_license}
 \alias{use_package_doc}
 \alias{use_rcpp}
 \alias{use_revdep}
@@ -45,6 +46,9 @@ use_cran_comments(pkg = ".")
 use_code_of_conduct(pkg = ".")
 
 use_cran_badge(pkg = ".")
+
+use_mit_license(pkg = ".", copyright_holder = getOption("devtools.name",
+  "<Author>"))
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -54,6 +58,9 @@ use_cran_badge(pkg = ".")
 numbers, letters, _ and -. I recommend using lower case.}
 
 \item{type}{CI tool to use. Currently supports codecov and coverall.}
+
+\item{copyright_holder}{The copyright holder for this package. Defaults to
+\code{getOption("devtools.name")}.}
 }
 \description{
 Add useful infrastructure to a package.
@@ -131,6 +138,12 @@ Add a code of conduct to from \url{http://contributor-covenant.org}.
 \section{\code{use_cran_badge}}{
 
 Add a badge to show CRAN status and version number on the README
+}
+
+\section{\code{use_mit_license}}{
+
+Adds the necessary infrastructure to declare your package as
+distributed under the MIT license.
 }
 \seealso{
 Other infrastructure: \code{\link{use_build_ignore}},
