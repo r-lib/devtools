@@ -41,7 +41,7 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     }
   }
 
-  url <- paste(repos, "/src/contrib/Archive/", package.path, sep = "")
+  url <- paste(info$repo[1L], "/src/contrib/Archive/", package.path, sep = "")
   install_url(url, ...)
 }
 
@@ -50,13 +50,20 @@ package_find_repo <- function(package, repos) {
     if (length(repos) > 1)
       message("Trying ", repo)
 
-    con <- gzcon(url(sprintf("%s/src/contrib/Meta/archive.rds", repo), "rb"))
-    on.exit(close(con))
-    archive <- readRDS(con)
+    archive <-
+      tryCatch({
+        con <- gzcon(url(sprintf("%s/src/contrib/Meta/archive.rds", repo), "rb"))
+        on.exit(close(con))
+        readRDS(con)
+      },
+      warning = function(e) list(),
+      error = function(e) list())
 
     info <- archive[[package]]
-    if (!is.null(info))
+    if (!is.null(info)) {
+      info$repo <- repo
       return(info)
+    }
   }
 
   stop(sprintf("couldn't find package '%s'", package))
