@@ -7,6 +7,9 @@
   declare and release an R package under the MIT license in a CRAN-compliant
   way. (#995, @kevinushey)
 
+* `install_version()` now more robust when handling multiple repos (#943, #1030,
+  @jimhester).
+
 * Be more verbose about which package is installed for revdep check
   (#926, @krlmlr).
 
