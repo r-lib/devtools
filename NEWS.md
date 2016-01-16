@@ -1,5 +1,9 @@
 # devtools 1.9.1.9000
 
+* Added `use_mit_license()`, which writes the necessary infrastructure to
+  declare and release an R package under the MIT license in a CRAN-compliant
+  way. (#995, @kevinushey)
+
 * Be more verbose about which package is installed for revdep check
   (#926, @krlmlr).
 
