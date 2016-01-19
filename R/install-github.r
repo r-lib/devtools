@@ -268,7 +268,7 @@ remote_package_name.github_remote <- function(remote, url = "https://github.com"
 #' @export
 remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
   if (!is.null(remote$sha)) {
-    remote$sha
+    return(remote$sha)
   } else {
     res <- try(silent = TRUE,
       git2r::remote_ls(
