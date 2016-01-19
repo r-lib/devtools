@@ -6,7 +6,7 @@
 \usage{
 install_deps(pkg = ".", dependencies = NA, threads = getOption("Ncpus",
   1), repos = getOption("repos"), type = getOption("pkgType"), ...,
-  upgrade = TRUE, quiet = FALSE)
+  upgrade = TRUE, quiet = FALSE, force_deps = FALSE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -31,6 +31,9 @@ installation.}
 \item{upgrade}{If \code{TRUE}, also upgrade any of out date dependencies.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
+
+\item{force_deps}{whether to force installation of dependencies even if their
+SHA1 reference hasn't changed from the currently installed version.}
 }
 \description{
 Install package dependencies if needed.

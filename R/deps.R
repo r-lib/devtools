@@ -23,6 +23,8 @@
 #'   installation.
 #'
 #' @param object A \code{package_deps} object.
+#' @param force_deps whether to force installation of dependencies even if their
+#'   SHA1 reference hasn't changed from the currently installed version.
 #' @param ... Additional arguments passed to \code{install_packages}.
 #'
 #' @return
@@ -89,9 +91,10 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
 #' @rdname package_deps
 dev_package_deps <- function(pkg = ".", dependencies = NA,
                              repos = getOption("repos"),
-                             type = getOption("pkgType")) {
+                             type = getOption("pkgType"),
+                             force_deps = FALSE) {
   pkg <- as.package(pkg)
-  install_dev_remotes(pkg)
+  install_dev_remotes(pkg, force = force_deps)
 
   repos <- c(repos, parse_additional_repositories(pkg))
 
@@ -153,7 +156,7 @@ install_dev_remotes <- function(pkg, ...) {
 dev_remote_type <- function(remotes = "") {
 
   if (!nchar(remotes)) {
-    return()
+    return(NULL)
   }
 
   dev_packages <- trim_ws(unlist(strsplit(remotes, ",[[:space:]]*")))
