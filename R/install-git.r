@@ -107,12 +107,9 @@ remote_package_name.git_remote <- function(remote, ...) {
 remote_sha.git_remote <- function(remote, ...) {
   if (!is.null(remote$sha)) {
     return(remote$sha)
-  } else {
-    res <- try(silent = TRUE, git2r::remote_ls(remote$url, ...))
-
-    if (inherits(res, "try-error")) {
-      return(NA)
-    }
+  }
+  tryCatch({
+    res <- git2r::remote_ls(remote$url, ...)
 
     branch <- remote$branch %||% "master"
 
@@ -123,5 +120,5 @@ remote_sha.git_remote <- function(remote, ...) {
     }
 
     unname(res[found[1]])
-  }
+  }, error = function(e) NA)
 }

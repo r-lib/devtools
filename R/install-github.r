@@ -269,15 +269,11 @@ remote_package_name.github_remote <- function(remote, url = "https://github.com"
 remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
   if (!is.null(remote$sha)) {
     return(remote$sha)
-  } else {
-    res <- try(silent = TRUE,
-      git2r::remote_ls(
-        paste0(url, "/", remote$username, "/", remote$repo, ".git"),
-        ...))
-
-    if (inherits(res, "try-error")) {
-      return(NA)
-    }
+  }
+  tryCatch({
+    res <- git2r::remote_ls(
+      paste0(url, "/", remote$username, "/", remote$repo, ".git"),
+      ...)
 
     found <- grep(pattern = paste0("/", remote$ref), x = names(res))
 
@@ -286,5 +282,5 @@ remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
     }
 
     unname(res[found[1]])
-  }
+  }, error = function(e) NA)
 }
