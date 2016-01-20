@@ -1,5 +1,8 @@
 # devtools 1.9.1.9000
 
+* Shimmed `system.file()` now respects `mustWork = TRUE` and throws an error
+  if the file does not exist (#1034).
+
 * Devtools now installs packages specified in the `Additional_repositories`
   field, such as drat repositories. (#907, #1028, @jimhester).
 

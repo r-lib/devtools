@@ -85,7 +85,11 @@ shim_system.file <- function(..., package = "base", lib.loc = NULL,
       # Make sure backslahses are replaced with slashes on Windows
       normalizePath(files, winslash = "/")
     } else {
-      ""
+      if (mustWork) {
+        stop("No file found", call. = FALSE)
+      } else {
+        ""
+      }
     }
     # Note that the behavior isn't exactly the same as base::system.file with an
     # installed package; in that case, C and D would not be installed and so
