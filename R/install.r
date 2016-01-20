@@ -62,7 +62,6 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     keep_source = getOption("keep.source.pkgs"),
                     threads = getOption("Ncpus", 1),
                     force_deps = FALSE,
-                    add_sha = git_committed,
                     metadata = remote_metadata(as.package(pkg)),
                     ...) {
 
