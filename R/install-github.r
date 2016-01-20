@@ -88,13 +88,14 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
 
 #' @export
 remote_download.github_remote <- function(x, quiet = FALSE) {
-  if (!quiet) {
-    message("Downloading GitHub repo ", x$username, "/", x$repo, "@", x$ref)
-  }
-
   dest <- tempfile(fileext = paste0(".zip"))
   src_root <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo)
   src <- paste0(src_root, "/zipball/", x$ref)
+
+  if (!quiet) {
+    message("Downloading GitHub repo ", x$username, "/", x$repo, "@", x$ref,
+            "\nfrom URL ", src)
+  }
 
   if (!is.null(x$auth_token)) {
     auth <- httr::authenticate(
@@ -109,10 +110,6 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
   if (github_has_remotes(x, auth))
     warning("GitHub repo contains submodules, may not function as expected!",
       call. = FALSE)
-
-  if (!quiet) {
-    message("Source: ", src)
-  }
 
   download(dest, src, auth)
 }
