@@ -17,12 +17,9 @@ install_remote <- function(remote, ..., quiet = FALSE) {
   source <- source_pkg(bundle, subdir = remote$subdir)
   on.exit(unlink(source, recursive = TRUE), add = TRUE)
 
-  add_metadata(source, remote_metadata(remote, bundle, source))
+  metadata <- remote_metadata(remote, bundle, source)
 
-  # Because we've modified DESCRIPTION, its original MD5 value is wrong
-  clear_description_md5(source)
-
-  install(source, ..., quiet = quiet)
+  install(source, ..., quiet = quiet, metadata = metadata)
 }
 
 install_remotes <- function(remotes, ...) {
@@ -31,12 +28,33 @@ install_remotes <- function(remotes, ...) {
 
 # Add metadata
 add_metadata <- function(pkg_path, meta) {
-  path <- file.path(pkg_path, "DESCRIPTION")
-  desc <- read_dcf(path)
+  # During installation, the DESCRIPTION file is read and an package.rds file
+  # created with most of the information from the DESCRIPTION file. Functions
+  # that read package metadata may use either the DESCRIPTION file or the
+  # package.rds file, therefore we attempt to modify both of them, and return an
+  # error if neither one exists.
+  source_desc <- file.path(pkg_path, "DESCRIPTION")
+  binary_desc <- file.path(pkg_path, "Meta", "package.rds")
+  if (file.exists(source_desc)) {
+    desc <- read_dcf(source_desc)
 
-  desc <- modifyList(desc, meta)
+    desc <- modifyList(desc, meta)
 
-  write_dcf(path, desc)
+    write_dcf(source_desc, desc)
+  }
+
+  if (file.exists(binary_desc)) {
+    pkg_desc <- base::readRDS(binary_desc)
+    desc <- as.list(pkg_desc$DESCRIPTION)
+    desc <- modifyList(desc, meta)
+    pkg_desc$DESCRIPTION <- setNames(as.character(desc), names(desc))
+    base::saveRDS(pkg_desc, binary_desc)
+  }
+
+  if (!file.exists(source_desc) && !file.exists(binary_desc)) {
+    stop("No DESCRIPTION found!", call. = FALSE)
+  }
+
 }
 
 # Modify the MD5 file - remove the line for DESCRIPTION

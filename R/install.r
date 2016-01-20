@@ -47,6 +47,8 @@
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
 #' @param force_deps whether to force installation of dependencies even if their
 #'   SHA1 reference hasn't changed from the currently installed version.
+#' @param metadata Named list of metadata entries to be added to the
+#'   \code{DESCRIPTION} after installation.
 #' @param ... additional arguments passed to \code{\link{install.packages}}
 #'   when installing dependencies. \code{pkg} is installed with
 #'   \code{R CMD INSTALL}.
@@ -61,6 +63,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     keep_source = getOption("keep.source.pkgs"),
                     threads = getOption("Ncpus", 1),
                     force_deps = FALSE,
+                    metadata = remote_metadata(as.package(pkg)),
                     ...) {
 
   pkg <- as.package(pkg)
@@ -106,6 +109,10 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   built_path <- normalizePath(built_path, winslash = "/")
   R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""),
     quiet = quiet)
+
+  if (length(metadata) > 0) {
+    add_metadata(base::find.package(pkg$package), metadata)
+  }
 
   if (reload) {
     reload(pkg, quiet = quiet)
