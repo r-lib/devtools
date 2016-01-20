@@ -19,9 +19,6 @@ install_remote <- function(remote, ..., quiet = FALSE) {
 
   metadata <- remote_metadata(remote, bundle, source)
 
-  # Because we've modified DESCRIPTION, its original MD5 value is wrong
-  clear_description_md5(source)
-
   install(source, ..., quiet = quiet, metadata = metadata)
 }
 
