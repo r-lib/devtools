@@ -40,7 +40,13 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
     args <- c("--build", args)
     cmd <- paste0("CMD INSTALL ", shQuote(pkg$path), " ",
       paste0(args, collapse = " "))
-    ext <- if (.Platform$OS.type == "windows") "zip" else "tgz"
+    if (.Platform$OS.type == "windows") {
+      ext <- ".zip"
+    } else if (grepl("darwin", R.version$os)) {
+      ext <- ".tgz"
+    } else {
+      ext <- paste0("_R_", Sys.getenv("R_PLATFORM"), ".tar.gz")
+    }
   } else {
     args <- c(args, "--no-resave-data")
 
@@ -55,7 +61,7 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
     cmd <- paste0("CMD build ", shQuote(pkg$path), " ",
       paste0(args, collapse = " "))
 
-    ext <- "tar.gz"
+    ext <- ".tar.gz"
   }
 
   # Create temporary library to ensure that default library doesn't get
@@ -65,7 +71,7 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
   on.exit(unlink(temp_lib, recursive = TRUE), add = TRUE)
 
   withr::with_libpaths(c(temp_lib, .libPaths()), R(cmd, path, quiet = quiet))
-  targz <- paste0(pkg$package, "_", pkg$version, ".", ext)
+  targz <- paste0(pkg$package, "_", pkg$version, ext)
 
   file.path(path, targz)
 }
