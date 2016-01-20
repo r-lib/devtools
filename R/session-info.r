@@ -153,27 +153,35 @@ pkg_source <- function(desc) {
                   desc$GithubRepo, "@",
                   substr(desc$GithubSHA1, 1, 7), ")")
   } else if (!is.null(desc$RemoteType)) {
+    # want to generate these:
+    # remoteType (username/repo@commit)
+    # remoteType (username/repo)
+    # remoteType (@commit)
+    # remoteType
     remote_type <- desc$RemoteType
 
-    user_repo <- character(0)
-
-    # in current definitions these should always be together
+    # RemoteUsername and RemoteRepo should always be present together
     if (!is.null(desc$RemoteUsername) && (!is.null(desc$RemoteRepo))) {
       user_repo <- paste0(desc$RemoteUsername, "/", desc$RemoteRepo)
+    } else {
+      user_repo <- NULL
     }
-
-    sha <- character(0)
 
     if (!is.null(desc$RemoteSha)) {
       sha <- paste0("@", substr(desc$RemoteSha, 1, 7))
+    } else {
+      sha <- NULL
     }
 
-    user_sha <- character(0)
-    if (length(user_repo) || (length(sha))) {
-      user_sha <- paste0(" (", user_repo, sha, ")")
+    # in order to fulfill the expectation of formatting, we paste the user_repo
+    # and sha together
+    if (!is.null(user_repo) || !is.null(sha)) {
+      user_repo_and_sha <- paste0(" (", user_repo, sha, ")")
+    } else {
+      user_repo_and_sha <- NULL
     }
 
-    str <- paste0(remote_type, user_sha)
+    str <- paste0(remote_type, user_repo_and_sha)
 
   } else if (!is.null(desc$Repository)) {
     repo <- desc$Repository
