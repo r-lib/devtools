@@ -241,14 +241,18 @@ print.package_deps <- function(x, show_ok = FALSE, ...) {
 update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
   unavailable <- object$package[object$diff == UNAVAILABLE]
   if (length(unavailable) > 0 && !quiet) {
-    message("Skipping ", length(unavailable), " packages not available: ",
-      paste(unavailable, collapse = ", "))
+    message(sprintf(ngettext(length(unavailable),
+      "Skipping %d unavailable package: %s",
+      "Skipping %d unavailable packages: %s"
+    ), length(unavailable), paste(unavailable, collapse = ", ")))
   }
 
   ahead <- object$package[object$diff == AHEAD]
   if (length(ahead) > 0 && !quiet) {
-    message("Skipping ", length(ahead), " packages ahead of CRAN: ",
-      paste(ahead, collapse = ", "))
+    message(sprintf(ngettext(length(ahead),
+      "Skipping %d package ahead of CRAN: %s",
+      "Skipping %d packages ahead of CRAN: %s"
+    ), length(ahead), paste(ahead, collapse = ", ")))
   }
 
   if (upgrade) {
@@ -271,8 +275,10 @@ install_packages <- function(pkgs, repos = getOption("repos"),
   if (is.null(quiet))
     quiet <- !identical(type, "source")
 
-  message("Installing ", length(pkgs), " packages: ",
-    paste(pkgs, collapse = ", "))
+    message(sprintf(ngettext(length(pkgs),
+      "Installing %d package: %s",
+      "Installing %d packages: %s"
+    ), length(pkgs), paste(pkgs, collapse = ", ")))
   utils::install.packages(pkgs, repos = repos, type = type, ...,
     dependencies = dependencies, quiet = quiet)
 }
