@@ -117,26 +117,40 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
   package_deps(deps, repos = repos, type = type)
 }
 
-compare_versions <- function(a, b) {
-  stopifnot(length(a) == length(b))
+## -2 = not installed, but available on CRAN
+## -1 = installed, but out of date
+##  0 = installed, most recent version
+##  1 = installed, version ahead of CRAN
+##  2 = package not on CRAN
 
-  compare_var <- function(x, y) {
-    if (is.na(y)) return(2L)
-    if (is.na(x)) return(-2L)
+UNINSTALLED <- -2L
+BEHIND <- -1L
+CURRENT <- 0L
+AHEAD <- 1L
+UNAVAILABLE <- 2L
 
-    x <- package_version(x)
-    y <- package_version(y)
+compare_versions <- function(inst, cran) {
+  stopifnot(length(inst) == length(cran))
 
-    if (x < y) {
-      -1L
-    } else if (x > y) {
-      1L
+  compare_var <- function(i, c) {
+    if (is.na(c)) return(UNAVAILABLE)           # not on CRAN
+    if (is.na(i)) return(UNINSTALLED)           # not installed, but on CRAN
+
+    i <- package_version(i)
+    c <- package_version(c)
+
+    if (i < c) {
+      BEHIND                               # out of date
+    } else if (i > c) {
+      AHEAD                                # ahead of CRAN
     } else {
-      0L
+      CURRENT                              # most recent CRAN version
     }
   }
 
-  vapply(seq_along(a), function(i) compare_var(a[[i]], b[[i]]), integer(1))
+  vapply(seq_along(inst),
+    function(i) compare_var(inst[[i]], cran[[i]]),
+    integer(1))
 }
 
 install_dev_remotes <- function(pkg, ...) {
@@ -198,9 +212,9 @@ has_dev_remotes <- function(pkg) {
 print.package_deps <- function(x, show_ok = FALSE, ...) {
   class(x) <- "data.frame"
 
-  ahead <- x$diff > 0L
-  behind <- x$diff < 0L
-  same_ver <- x$diff == 0L
+  ahead <- x$diff > CURRENT
+  behind <- x$diff < CURRENT
+  same_ver <- x$diff == CURRENT
 
   x$diff <- NULL
   x[] <- lapply(x, format)
@@ -225,22 +239,22 @@ print.package_deps <- function(x, show_ok = FALSE, ...) {
 #' @rdname package_deps
 #' @importFrom stats update
 update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
-  ahead <- object$package[object$diff == 2L]
+  unavailable <- object$package[object$diff == UNAVAILABLE]
+  if (length(unavailable) > 0 && !quiet) {
+    message("Skipping ", length(unavailable), " packages not available: ",
+      paste(unavailable, collapse = ", "))
+  }
+
+  ahead <- object$package[object$diff == AHEAD]
   if (length(ahead) > 0 && !quiet) {
-    message("Skipping ", length(ahead), " packages not available: ",
+    message("Skipping ", length(ahead), " packages ahead of CRAN: ",
       paste(ahead, collapse = ", "))
   }
 
-  missing <- object$package[object$diff == 1L]
-  if (length(missing) > 0 && !quiet) {
-    message("Skipping ", length(missing), " packages ahead of CRAN: ",
-      paste(missing, collapse = ", "))
-  }
-
   if (upgrade) {
-    behind <- object$package[object$diff < 0L]
+    behind <- object$package[object$diff < CURRENT]
   } else {
-    behind <- object$package[is.na(object$available)]
+    behind <- object$package[is.na(object$installed)]
   }
   if (length(behind) > 0L) {
     install_packages(behind, repos = attr(object, "repos"),
