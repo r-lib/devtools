@@ -45,6 +45,8 @@
 #' @param threads number of concurrent threads to use for installing
 #'   dependencies.
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
+#' @param force_deps whether to force installation of dependencies even if their
+#'   SHA1 reference hasn't changed from the currently installed version.
 #' @param ... additional arguments passed to \code{\link{install.packages}}
 #'   when installing dependencies. \code{pkg} is installed with
 #'   \code{R CMD INSTALL}.
@@ -58,6 +60,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     build_vignettes = FALSE,
                     keep_source = getOption("keep.source.pkgs"),
                     threads = getOption("Ncpus", 1),
+                    force_deps = FALSE,
                     ...) {
 
   pkg <- as.package(pkg)
@@ -79,7 +82,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
     dependencies <- TRUE
   }
   install_deps(pkg, dependencies = dependencies, upgrade = upgrade_dependencies,
-    threads = threads, ...)
+    threads = threads, force_deps = force_deps, ...)
 
   # Build the package. Only build locally if it doesn't have vignettes
   has_vignettes <- length(tools::pkgVignettes(dir = pkg$path)$docs > 0)
@@ -124,9 +127,10 @@ install_deps <- function(pkg = ".", dependencies = NA,
                          type = getOption("pkgType"),
                          ...,
                          upgrade = TRUE,
-                         quiet = FALSE) {
+                         quiet = FALSE,
+                         force_deps = FALSE) {
 
   pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
-    type = type)
+    type = type, force_deps = force_deps)
   update(pkg, ..., Ncpus = threads, quiet = quiet, upgrade = upgrade)
 }

@@ -42,6 +42,14 @@
 * Fix longstanding lazy load database corruption issues when reloading packages
   which define S3 methods on generics from base or other packages (#1001, @jimhester).
 
+* Packages installed from `install_github()` and `install_git()` are only
+  downloaded and installed if the remote SHA1 reference differs from the
+  currently installed reference (#903, @jimhester).
+
+* Detect if `install_` commands are called on a Bioconductor package and
+  include the Bioconductor repositories if they are not already set (#895,
+  @jimhester).
+
 * `document()` now only runs `update_collate()` once.
 * Move `curl`, `evaluate`, `roxygen2` and `rversions` to `Suggests:` to lighten the dependency
   load of devtools. If a user runs a function using these packages and
