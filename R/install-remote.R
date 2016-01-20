@@ -28,6 +28,11 @@ install_remotes <- function(remotes, ...) {
 
 # Add metadata
 add_metadata <- function(pkg_path, meta) {
+  # During installation, the DESCRIPTION file is read and an package.rds file
+  # created with most of the information from the DESCRIPTION file. Functions
+  # that read package metadata may use either the DESCRIPTION file or the
+  # package.rds file, therefore we attempt to modify both of them, and return an
+  # error if neither one exists.
   source_desc <- file.path(pkg_path, "DESCRIPTION")
   binary_desc <- file.path(pkg_path, "Meta", "package.rds")
   if (file.exists(source_desc)) {
