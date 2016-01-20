@@ -533,6 +533,30 @@ use_readme_rmd <- function(pkg = ".") {
   invisible(TRUE)
 }
 
+#' Use NEWS.md
+#'
+#' This creates \code{NEWS.md} from a template.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @export
+#' @family infrastructure
+use_news_md <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  news_path <- file.path(pkg$path, "NEWS.md")
+  template <- render_template("NEWS.md", pkg)
+
+  if (!file.exists(news_path)) {
+    message("Creating NEWS.md")
+    writeLines(template, news_path)
+  } else {
+    stop("NEWS.md already exists", call. = FALSE)
+  }
+
+  invisible(TRUE)
+}
+
 #' @rdname infrastructure
 #' @section \code{use_revdep}:
 #' Add \code{revdep} directory and basic check template.

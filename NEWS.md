@@ -1,5 +1,7 @@
 # devtools 1.9.1.9000
 
+* `use_news_md()` adds a basic `NEWS.md` template (#957).
+
 * `check_man()` replaces `check_doc()` (since most other functions are
   named after the corresponding directory). `check_doc()` will hang around
   as an alias for the forseeable future (#958).
