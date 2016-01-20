@@ -10,6 +10,9 @@
 * `install_version()` now more robust when handling multiple repos (#943, #1030,
   @jimhester).
 
+* `create()` and `setup()` are more permissive -- they now accept a path to
+  either a new directory or empty directory. (#966, @kevinushey)
+
 * Be more verbose about which package is installed for revdep check
   (#926, @krlmlr).
 

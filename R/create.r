@@ -33,14 +33,31 @@ create <- function(path, description = getOption("devtools.desc"),
                    check = FALSE, rstudio = TRUE) {
   check_package_name(path)
 
-  if (file.exists(path)) {
-    stop("Directory already exists", call. = FALSE)
-  }
-  if (!file.exists(dirname(path))) {
-    stop("Parent directory does not exist.", call. = FALSE)
+  # ensure the parent directory exists
+  parent_dir <- normalizePath(dirname(path), winslash = "/", mustWork = FALSE)
+  if (!file.exists(parent_dir)) {
+    stop("Parent directory '", parent, "' does not exist", call. = FALSE)
   }
 
-  dir.create(path)
+  # allow 'create' to create a new directory, or populate
+  # an empty directory, as long as the parent directory exists
+  if (!file.exists(path)) {
+    if (!dir.create(path)) {
+      stop("Failed to create package directory '", basename(path), "'",
+           call. = FALSE)
+    }
+  }
+
+  # if the directory exists but is not empty, bail
+  files <- list.files(path)
+  if (length(files)) {
+
+    valid <- length(files) == 1 && tools::file_ext(files) == "Rproj"
+    if (!valid)
+      stop("Directory exists and is not empty", call. = FALSE)
+  }
+
+  path <- normalizePath(path, winslash = "/", mustWork = TRUE)
   setup(path = path, description = description, rstudio = rstudio,
         check = check)
 
@@ -53,7 +70,8 @@ setup <- function(path = ".", description = getOption("devtools.desc"),
                   check = FALSE, rstudio = TRUE) {
   check_package_name(path)
 
-  message("Creating package ", extract_package_name(path), " in ", dirname(path))
+  parent_dir <- normalizePath(dirname(path), winslash = "/", mustWork = TRUE)
+  message("Creating package '", extract_package_name(path), "' in '", parent_dir, "'")
 
   dir.create(file.path(path, "R"), showWarnings = FALSE)
   create_description(path, extra = description)
