@@ -47,7 +47,7 @@ test_that("install on packages adds metadata", {
   # now use default
   r <- git2r::repository(test_pkg)
 
-  # then use add_sha
+  # then use metadata
   install(test_pkg, quiet = TRUE)
   library("testMetadataInstall")
   pkg_info <- session_info()$packages

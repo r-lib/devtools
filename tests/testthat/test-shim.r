@@ -74,7 +74,7 @@ test_that("Replacement system.file returns correct values when installed", {
   if (!dir.exists(tmp_libpath)) dir.create(tmp_libpath)
   .libPaths(c(tmp_libpath, .libPaths()))
 
-  install("testShim", quiet = TRUE, add_sha = FALSE)
+  install("testShim", quiet = TRUE)
   expect_true(require(testShim))
 
   # The special version of system.file shouldn't exist - this get() will fall
