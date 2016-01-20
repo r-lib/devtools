@@ -1,5 +1,9 @@
 # devtools 1.9.1.9000
 
+* `check_man()` replaces `check_doc()` (since most other functions are
+  named after the corresponding directory). `check_doc()` will hang around
+  as an alias for the forseeable future (#958).
+
 * Dummy namespace now includes comments so roxygen2 will overwrite silently
   (#1016).
 

@@ -86,7 +86,7 @@ Check and release:
 * `run_examples()` will run all examples to make sure they work.
   This is useful because example checking is the last step of `R CMD check`.
 
-* `check_doc()` runs most of the documentation checking components
+* `check_man()` runs most of the documentation checking components
   of `R CMD check`
 
 * `release()` makes sure everything is ok with your package
