@@ -193,7 +193,7 @@ dev_remote_type <- function(remotes = "") {
         mode = "function",
         inherits = FALSE),
       error = function(e) {
-        stop("Malformed remote specification '", x, "'", call. = FALSE)
+        stop("Unknown remote type: ", type, call. = FALSE)
       })
     list(repository = repo, type = type, fun = fun)
   }

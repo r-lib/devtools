@@ -24,9 +24,9 @@ test_that("dev_remote_type errors", {
   expect_error(dev_remote_type("git::testthat::blah"),
     "Malformed remote specification 'git::testthat::blah'")
   expect_error(dev_remote_type("hadley::testthat"),
-    "Malformed remote specification 'hadley::testthat'")
+    "Unknown remote type: hadley")
   expect_error(dev_remote_type("SVN2::testthat"),
-    "Malformed remote specification 'SVN2::testthat'")
+    "Unknown remote type: SVN2")
 })
 
 test_that("dev_remote_type works with explicit types", {
