@@ -28,12 +28,11 @@
 build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
                   manual = FALSE, args = NULL, quiet = FALSE) {
   pkg <- as.package(pkg)
-  check_build_tools(pkg)
-
   if (is.null(path)) {
     path <- dirname(pkg$path)
   }
 
+  check_build_tools(pkg)
   compile_rcpp_attributes(pkg)
 
   if (binary) {

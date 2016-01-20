@@ -1,5 +1,10 @@
 # devtools 1.9.1.9000
 
+* New strategy for detecting RTools on windows: devtools now only looks
+  for Rtools if you need to `load_all()` or `build()` a package with
+  compiled code. This should make it easier to work with devtools if
+  you're developing pure R packages (#947).
+
 * `use_news_md()` adds a basic `NEWS.md` template (#957).
 
 * `check_man()` replaces `check_doc()` (since most other functions are
