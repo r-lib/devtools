@@ -1,5 +1,8 @@
 # devtools 1.9.1.9000
 
+* Dummy namespace now includes comments so roxygen2 will overwrite silently
+  (#1016).
+
 * Shimmed `system.file()` now respects `mustWork = TRUE` and throws an error
   if the file does not exist (#1034).
 
