@@ -31,22 +31,26 @@ install_remotes <- function(remotes, ...) {
 
 # Add metadata
 add_metadata <- function(pkg_path, meta) {
-  path <- file.path(pkg_path, "DESCRIPTION")
-  if (file.exists(path)) {
-    desc <- read_dcf(path)
+  source_desc <- file.path(pkg_path, "DESCRIPTION")
+  binary_desc <- file.path(pkg_path, "Meta", "package.rds")
+  if (file.exists(source_desc)) {
+    desc <- read_dcf(source_desc)
 
     desc <- modifyList(desc, meta)
 
-    write_dcf(path, desc)
+    write_dcf(source_desc, desc)
   }
 
-  path <- file.path(pkg_path, "Meta", "package.rds")
-  if (file.exists(path)) {
-    pkg_desc <- base::readRDS(path)
+  if (file.exists(binary_desc)) {
+    pkg_desc <- base::readRDS(binary_desc)
     desc <- as.list(pkg_desc$DESCRIPTION)
     desc <- modifyList(desc, meta)
     pkg_desc$DESCRIPTION <- setNames(as.character(desc), names(desc))
-    base::saveRDS(pkg_desc, path)
+    base::saveRDS(pkg_desc, binary_desc)
+  }
+
+  if (!file.exists(source_desc) && !file.exists(binary_desc)) {
+    stop("No DESCRIPTION found!", call. = FALSE)
   }
 
 }
