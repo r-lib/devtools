@@ -21,7 +21,7 @@ test_that("update.package_deps", {
     `devtools::install_packages` = function(...) { },
     expect_message(
       update(object, quiet = FALSE),
-      "Skipping 1 packages? not available: falsy"
+      "Skipping 1 unavailable package: falsy"
     )
   )
 
@@ -38,7 +38,7 @@ test_that("update.package_deps", {
     `devtools::install_packages` = function(...) { },
     expect_message(
       update(object, quiet = FALSE),
-      "Skipping 1 packages? ahead of CRAN: falsy"
+      "Skipping 1 package ahead of CRAN: falsy"
     )
   )
 
