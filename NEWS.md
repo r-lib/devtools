@@ -16,6 +16,9 @@
 * `use_appveyor()` template now creates `failure.zip` artifact instead of
   polluting the logs with `R CMD check` output (#1017, @krlmlr, @HenrikBengtsson).
 
+* Checking reverse dependencies is now more tolerant of errors when
+  retrieving the summary for a checked package (#929, @krlmlr).
+
 * 'Check failed:' now includes the package name for when Ncpus>1 so you
    know which package has failed and can start looking at the output without
    needing to wait for all packages to finish (@mattdowle).
