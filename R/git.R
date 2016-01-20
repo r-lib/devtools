@@ -20,6 +20,10 @@ git_sync_status <- function(path = ".") {
   upstream <- git2r::branch_get_upstream(git2r::head(r))
   # fetch(r, branch_remote_name(upstream))
 
+  if (is.null(upstream)) {
+    return(invisible(FALSE))
+  }
+
   c1 <- git2r::commits(r)[[1]]
   c2 <- git2r::lookup(r, git2r::branch_target(upstream))
   ab <- git2r::ahead_behind(c1, c2)
