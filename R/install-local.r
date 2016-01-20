@@ -44,7 +44,7 @@ remote_metadata.local_remote <- function(x, bundle = NULL, source = NULL) {
     RemoteUrl = x$path
   )
 
-  if (git_committed(x$path)) {
+  if (uses_git(x$path) && !git_uncommitted(x$path)) {
     res$RemoteSha <- git_sha1(path = x$path)
   }
   if (uses_github(x$path)) {
