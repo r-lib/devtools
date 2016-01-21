@@ -2,6 +2,9 @@
 
 * The template for `use_cran_comments()` has been improved (#1038).
 
+* `use_data()` now warns when trying to save the same object twice,
+  and stops if there is no object to save (#948, @krlmlr).
+
 * New strategy for detecting RTools on windows: devtools now only looks
   for Rtools if you need to `load_all()` or `build()` a package with
   compiled code. This should make it easier to work with devtools if
@@ -43,6 +46,9 @@
 
 * Fix a bug in the installers (`install_github`, etc.), when upgrades are
   not requested (#1013, @gaborcsardi).
+
+* Verify integrity of already downloaded package archives in `revdep_check`
+  (#930, @krlmlr).
 
 * 'Check failed:' now includes the package name for when Ncpus>1 so you
    know which package has failed and can start looking at the output without

@@ -1,5 +1,5 @@
 # Decompress pkg, if needed
-source_pkg <- function(path, subdir = NULL, before_install = NULL) {
+source_pkg_info <- function(path, subdir = NULL) {
   if (!file.info(path)$isdir) {
     bundle <- path
     outdir <- tempfile(pattern = "devtools")
@@ -17,17 +17,30 @@ source_pkg <- function(path, subdir = NULL, before_install = NULL) {
     stop("Does not appear to be an R package (no DESCRIPTION)", call. = FALSE)
   }
 
+  list(pkg_path = pkg_path, bundle = bundle)
+}
+
+is_source_pkg <- function(path, subdir = NULL) {
+  tryCatch({
+    source_pkg_info(path = path, subdir = subdir)
+    TRUE
+  }, error = function(e) return(FALSE))
+}
+
+source_pkg <- function(path, subdir = NULL, before_install = NULL) {
+  info <- source_pkg_info(path = path, subdir = subdir)
+
   # Check configure is executable if present
-  config_path <- file.path(pkg_path, "configure")
+  config_path <- file.path(info$pkg_path, "configure")
   if (file.exists(config_path)) {
     Sys.chmod(config_path, "777")
   }
 
   # Call before_install for bundles (if provided)
-  if (!is.null(bundle) && !is.null(before_install))
-    before_install(bundle, pkg_path)
+  if (!is.null(info$bundle) && !is.null(before_install))
+    before_install(info$bundle, info$pkg_path)
 
-  pkg_path
+  info$pkg_path
 }
 
 
