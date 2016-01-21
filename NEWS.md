@@ -1,5 +1,9 @@
 # devtools 1.9.1.9000
 
+* Added the named List `metadata` argument to `install()` for adding metadata
+  to the `DESCRIPTION` file upon install. Makes the behavior of `install` on a 
+  local package consistent with the other `install_` functions. (#1027, @rmflight).
+
 * Devtools now installs packages specified in the `Additional_repositories`
   field, such as drat repositories. (#907, #1028, @jimhester).
 
