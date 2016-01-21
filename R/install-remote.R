@@ -67,8 +67,15 @@ different_sha <- function(remote = NULL,
     local_sha <- local_sha(remote_package_name(remote))
   }
 
-  different <- remote_sha != local_sha
-  isTRUE(different) || is.na(different)
+  different <- isTRUE(remote_sha != local_sha)
+  different <- different || is.na(different)
+  if (!different) {
+     message(
+       "Skipping install for ", sub("_remote", "", class(remote)[1L]), " remote,",
+       " the SHA1 has not changed since last install.\n",
+       "  Use `force = TRUE` to force installation")
+  }
+  different
 }
 
 local_sha <- function(name) {
