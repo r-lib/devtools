@@ -411,7 +411,7 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
 
   check_data_paths(paths, overwrite)
 
-  message("Saving ", paste(objs, collapse = ", "),
+  message("Saving ", paste(unlist(objs), collapse = ", "),
           " as ", paste(basename(paths), collapse = ", "),
           " to ", dir_name)
   envir <- parent.frame()
