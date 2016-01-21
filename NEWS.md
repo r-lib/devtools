@@ -1,5 +1,8 @@
 # devtools 1.9.1.9000
 
+* `use_data()` now warns when trying to save the same object twice,
+  and stops if there is no object to save (#948, @krlmlr).
+
 * New strategy for detecting RTools on windows: devtools now only looks
   for Rtools if you need to `load_all()` or `build()` a package with
   compiled code. This should make it easier to work with devtools if
