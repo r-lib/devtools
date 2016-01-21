@@ -17,9 +17,10 @@ NULL
 use_testthat <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  check_testthat()
+  check_suggested("testthat")
   if (uses_testthat(pkg)) {
-    stop("Package already has testing infrastructure", call. = FALSE)
+    message("* testthat is already initialized")
+    return(invisible(TRUE))
   }
 
   # Create tests/testthat and install file for R CMD CHECK
@@ -46,7 +47,7 @@ add_test_infrastructure <- use_testthat
 use_test <- function(name, pkg = ".") {
   pkg <- as.package(pkg)
 
-  check_testthat()
+  check_suggested("testthat")
   if (!uses_testthat(pkg)) {
     use_testthat(pkg)
   }
@@ -74,8 +75,10 @@ use_rstudio <- function(pkg = ".") {
 
   path <- file.path(pkg$path, paste0(pkg$package, ".Rproj"))
   if (file.exists(path)) {
-    stop(pkg$package, ".Rproj already exists", call. = FALSE)
+    message("* RStudio infrastructure already initialized")
+    return(invisible(TRUE))
   }
+
   message("Adding RStudio project file to ", pkg$package)
 
   template_path <- system.file("templates/template.Rproj", package = "devtools")
@@ -101,6 +104,7 @@ add_rstudio_project <- use_rstudio
 #' @rdname infrastructure
 use_vignette <- function(name, pkg = ".") {
   pkg <- as.package(pkg)
+  check_suggested("rmarkdown")
 
   add_desc_package(pkg, "Suggests", "knitr")
   add_desc_package(pkg, "Suggests", "rmarkdown")
@@ -122,6 +126,7 @@ use_vignette <- function(name, pkg = ".") {
 #' @rdname infrastructure
 use_rcpp <- function(pkg = ".") {
   pkg <- as.package(pkg)
+  check_suggested("Rcpp")
 
   message("Adding Rcpp to LinkingTo and Imports")
   add_desc_package(pkg, "LinkingTo", "Rcpp")
@@ -175,7 +180,7 @@ use_travis <- function(pkg = ".") {
 #' Add coveralls to basic travis template to a package.
 #' @export
 use_coveralls <- function(pkg = ".") {
-  .Deprecated("use_coverage(type = \"coveralls\")")
+  .Deprecated("use_coverage(type = \"coveralls\")", package = "devtools")
   use_coverage(pkg, type = "coveralls")
 }
 
@@ -553,6 +558,30 @@ use_readme_rmd <- function(pkg = ".") {
   invisible(TRUE)
 }
 
+#' Use NEWS.md
+#'
+#' This creates \code{NEWS.md} from a template.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @export
+#' @family infrastructure
+use_news_md <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  news_path <- file.path(pkg$path, "NEWS.md")
+  template <- render_template("NEWS.md", pkg)
+
+  if (!file.exists(news_path)) {
+    message("Creating NEWS.md")
+    writeLines(template, news_path)
+  } else {
+    stop("NEWS.md already exists", call. = FALSE)
+  }
+
+  invisible(TRUE)
+}
+
 #' @rdname infrastructure
 #' @section \code{use_revdep}:
 #' Add \code{revdep} directory and basic check template.
@@ -647,4 +676,37 @@ use_cran_badge <- function(pkg = ".") {
     "[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/", pkg$package, ")](http://cran.r-project.org/package=", pkg$package, ")"
   )
   invisible(TRUE)
+}
+
+#' @rdname infrastructure
+#' @section \code{use_mit_license}:
+#' Adds the necessary infrastructure to declare your package as
+#' distributed under the MIT license.
+#' @param copyright_holder The copyright holder for this package. Defaults to
+#'   \code{getOption("devtools.name")}.
+#' @export
+use_mit_license <- function(pkg = ".", copyright_holder = getOption("devtools.name", "<Author>")) {
+  pkg <- as.package(pkg)
+
+  # Update the DESCRIPTION
+  descPath <- file.path(pkg$path, "DESCRIPTION")
+  DESCRIPTION <- read_dcf(descPath)
+  DESCRIPTION$License <- "MIT + file LICENSE"
+  write_dcf(descPath, DESCRIPTION)
+
+  # Update the license
+  licensePath <- file.path(pkg$path, "LICENSE")
+  if (file.exists(licensePath))
+    if (!file.remove(licensePath))
+      stop("Failed to remove license file '", licensePath, "'", call. = FALSE)
+
+  # Write the MIT template
+  template <- c(
+    paste("YEAR:", format(Sys.Date(), "%Y")),
+    paste("COPYRIGHT HOLDER:", copyright_holder)
+  )
+
+  writeLines(template, con = licensePath)
+  message("* Added infrastructure for MIT license")
+  licensePath
 }

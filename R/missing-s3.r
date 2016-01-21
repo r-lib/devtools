@@ -7,6 +7,7 @@
 #' @export
 missing_s3 <- function(pkg = ".") {
   pkg <- as.package(pkg)
+  check_suggested("roxygen2")
   loaded <- load_all(pkg)
 
   # Find all S3 methods in package

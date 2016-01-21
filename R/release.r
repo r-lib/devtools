@@ -90,6 +90,11 @@ release <- function(pkg = ".", check = TRUE) {
     }
   }
 
+  if (has_src(pkg)) {
+    if (yesno("Have you run R CMD check with valgrind?"))
+      return(invisible())
+  }
+
   rule("cran-comments.md ")
   cat(cran_comments(pkg), "\n\n")
   if (yesno("Are the CRAN submission comments correct?"))

@@ -12,9 +12,9 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' check_doc("mypkg")
+#' check_man("mypkg")
 #' }
-check_doc <- function(pkg = ".") {
+check_man <- function(pkg = ".") {
   pkg <- as.package(pkg)
   document(pkg)
 
@@ -35,6 +35,12 @@ check_doc <- function(pkg = ".") {
   # print(undoc(dir = pkg$path))
 
   invisible()
+}
+
+#' @rdname check_man
+#' @usage NULL
+check_doc <- function(...) {
+  check_man(...)
 }
 
 print_if_not_null <- function(x) {

@@ -48,6 +48,16 @@ test_that("system.file returns correct values when used with load_all", {
   unload("testShim")
 })
 
+test_that("shimmed system.file respects mustWork", {
+  load_all("testShim")
+  find_missing <- function(mustWork) {
+    shim_system.file("missing.txt", package = "testShim", mustWork = mustWork)
+  }
+
+  expect_equal(find_missing(FALSE), "")
+  expect_error(find_missing(TRUE), "No file found")
+})
+
 
 test_that("Shimmed system.file returns correct values when used with load_all", {
   load_all("testShim")

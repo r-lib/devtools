@@ -23,16 +23,3 @@ has_devel <- function() {
   stopifnot(.C(dll$foo, 0L)[[1]] == 1L)
   TRUE
 }
-
-check_build_tools <- function(pkg = ".") {
-  pkg <- as.package(pkg)
-  if (!file.exists(file.path(pkg$path, "src"))) return(TRUE)
-
-  check <- getOption("buildtools.check", NULL)
-  if (!is.null(check)) {
-    check("Installing R package from source")
-  } else {
-    # Outside of Rstudio and don't have good heuristic
-    TRUE
-  }
-}

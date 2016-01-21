@@ -1,7 +1,7 @@
 context("Vignettes")
 
 test_that("Sweave vignettes copied into inst/doc", {
-  if (Sys.which("pdflatex") == "") {
+  if (!has_latex()) {
     skip("pdflatex not available")
   }
 
@@ -22,7 +22,7 @@ test_that("Sweave vignettes copied into inst/doc", {
 })
 
 test_that("Built files are updated", {
-  if (Sys.which("pdflatex") == "") {
+  if (!has_latex()) {
     skip("pdflatex not available")
   }
 
@@ -78,7 +78,7 @@ if (packageVersion("knitr") >= 1.2) {
 
 
 test_that("Extra files copied and removed", {
-  if (Sys.which("pdflatex") == "") {
+  if (!has_latex()) {
     skip("pdflatex not available")
   }
 
@@ -102,7 +102,7 @@ test_that("Extra files copied and removed", {
 
 
 test_that("vignettes built on install", {
-  if (Sys.which("pdflatex") == "") {
+  if (!has_latex()) {
     skip("pdflatex not available")
   }
 

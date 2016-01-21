@@ -5,6 +5,11 @@ if (!exists("set_rtools_path")) {
   local({
     rtools_paths <- NULL
     set_rtools_path <<- function(rtools) {
+      if (is.null(rtools)) {
+        rtools_paths <<- NULL
+        return()
+      }
+
       stopifnot(is.rtools(rtools))
       path <- file.path(rtools$path, version_info[[rtools$version]]$path)
 
@@ -27,6 +32,7 @@ if (!exists("set_rtools_path")) {
 #' @section Acknowledgements:
 #'   This code borrows heavily from RStudio's code for finding rtools.
 #'   Thanks JJ!
+#' @param cache if \code{TRUE} will used cached version of RTools.
 #' @param debug if \code{TRUE} prints a lot of additional information to
 #'   help in debugging.
 #' @return Either a visible \code{TRUE} if rtools is found, or an invisible
@@ -35,10 +41,15 @@ if (!exists("set_rtools_path")) {
 #'   updated to the paths to rtools binaries.
 #' @keywords internal
 #' @export
-find_rtools <- function(debug = FALSE) {
+setup_rtools <- function(cache = TRUE, debug = FALSE) {
   # Non-windows users don't need rtools
   if (.Platform$OS.type != "windows") return(TRUE)
+  # Don't look again, if we've already found it
 
+  if (!cache) {
+    set_rtools_path(NULL)
+  }
+  if (!is.null(get_rtools_path())) return(TRUE)
 
   # First try the path
   from_path <- scan_path_for_rtools(debug)
@@ -58,7 +69,7 @@ find_rtools <- function(debug = FALSE) {
       message("WARNING: Rtools ", from_path$version, " found on the path",
         " at ", from_path$path, " is not compatible with R ", getRversion(), ".\n\n",
         "Please download and install ", rtools_needed(), " from ", rtools_url,
-        ", remove the incompatible version from your PATH, then run find_rtools().")
+        ", remove the incompatible version from your PATH.")
       return(invisible(FALSE))
     }
   }
@@ -70,8 +81,7 @@ find_rtools <- function(debug = FALSE) {
     # Not on path or in registry, so not installled
     message("WARNING: Rtools is required to build R packages, but is not ",
       "currently installed.\n\n",
-      "Please download and install ", rtools_needed(), " from ", rtools_url,
-      " and then run find_rtools().")
+      "Please download and install ", rtools_needed(), " from ", rtools_url, ".")
     return(invisible(FALSE))
   }
 
@@ -83,8 +93,7 @@ find_rtools <- function(debug = FALSE) {
       "of Rtools compatible with R ", getRversion(), " was found. ",
       "(Only the following incompatible version(s) of Rtools were found:",
       paste(versions, collapse = ","), ")\n\n",
-      "Please download and install ", rtools_needed(), " from ", rtools_url,
-      " and then run find_rtools().")
+      "Please download and install ", rtools_needed(), " from ", rtools_url, ".")
     return(invisible(FALSE))
   }
 
@@ -94,8 +103,7 @@ find_rtools <- function(debug = FALSE) {
     message("WARNING: Rtools is required to build R packages, but the ",
       "version of Rtools previously installed in ", from_registry$path,
       " has been deleted.\n\n",
-      "Please download and install ", rtools_needed(), " from ", rtools_url,
-      " and then run find_rtools().")
+      "Please download and install ", rtools_needed(), " from ", rtools_url, ".")
     return(invisible(FALSE))
   }
 
@@ -106,8 +114,7 @@ find_rtools <- function(debug = FALSE) {
       "Rtools ", from_registry$version, " was previously installed in ",
       from_registry$path, " but now that directory contains Rtools ",
       installed_ver, ".\n\n",
-      "Please download and install ", rtools_needed(), " from ", rtools_url,
-      " and then run find_rtools().")
+      "Please download and install ", rtools_needed(), " from ", rtools_url, ".")
     return(invisible(FALSE))
   }
 
@@ -275,3 +282,8 @@ rtools_needed <- function() {
   }
   "the appropriate version of Rtools"
 }
+
+#' @rdname setup_rtools
+#' @usage NULL
+#' @export
+find_rtools <- setup_rtools

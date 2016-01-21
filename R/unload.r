@@ -33,10 +33,10 @@ unload <- function(pkg = ".") {
   # This is a hack to work around unloading devtools itself. The unloading
   # process normally makes other devtools functions inaccessible,
   # resulting in "Error in unload(pkg) : internal error -3 in R_decompress1".
-  # If we simply access them here using as.list (without calling them), then
-  # they will remain available for use later.
+  # If we simply force them first, then they will remain available for use
+  # later.
   if (pkg$package == "devtools") {
-    as.list(ns_env(pkg))
+    eapply(ns_env(pkg), force, all.names = TRUE)
   }
 
   # If the package was loaded with devtools, any s4 classes that were created

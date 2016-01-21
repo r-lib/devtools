@@ -17,8 +17,12 @@ revdep_check_save_logs <- function(res, log_dir = "revdep") {
 
     file.copy(file.path(path, logs), file.path(out, logs))
 
-    desc <- check_description(path)
-    write_dcf(file.path(out, "DESCRIPTION"), desc[c("Package", "Version", "Maintainer")])
+    tryCatch({
+      desc <- check_description(path)
+      write_dcf(file.path(out, "DESCRIPTION"), desc[c("Package", "Version", "Maintainer")])
+    }, error = function(e) {
+      message("Error checking DESCRIPTION for ", pkg, ": ", e$message)
+    })
   }
 
   pkgs <- check_dirs(res$check_dir)
@@ -35,6 +39,7 @@ revdep_check_save_summary <- function(res, log_dir = "revdep") {
 #' @rdname revdep_check
 #' @export
 revdep_check_summary <- function(res) {
+  check_suggested("knitr")
   plat <- platform_info()
   plat_df <- data.frame(setting = names(plat), value = unlist(plat))
   rownames(plat_df) <- NULL
@@ -47,7 +52,7 @@ revdep_check_summary <- function(res) {
   pkg_df <- package_info(pkgs, libpath = res$libpath)
 
   checks <- check_dirs(res$check_dir)
-  summaries <- vapply(checks, check_summary_package, character(1))
+  summaries <- vapply(checks, try_check_summary_package, character(1))
 
   paste0(
     "# Setup\n\n",
@@ -60,6 +65,13 @@ revdep_check_summary <- function(res) {
     "# Check results\n",
     paste0(length(checks), " checked out of ", length(res$deps), " dependencies \n\n"),
     paste0(summaries, collapse = "\n")
+  )
+}
+
+try_check_summary_package <- function(path) {
+  res <- tryCatch(
+    check_summary_package(path),
+    error = function(e) e$message
   )
 }
 

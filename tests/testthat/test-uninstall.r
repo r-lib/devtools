@@ -19,5 +19,6 @@ test_that("uninstall() unloads and removes from library", {
   # Uninstall package
   uninstall("testHelp", quiet = TRUE)
   expect_false("testHelp" %in% loaded_packages()$package)
-  expect_false(require(testHelp, quiet = TRUE))
+  expect_warning(expect_false(require(testHelp, quietly = TRUE)),
+                 paste0("there is no package called ", sQuote("testHelp") ))
 })

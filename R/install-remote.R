@@ -56,5 +56,29 @@ remote <- function(type, ...) {
 }
 is.remote <- function(x) inherits(x, "remote")
 
+different_sha <- function(remote = NULL,
+                          remote_sha = NULL,
+                          local_sha = NULL) {
+  if (is.null(remote_sha)) {
+    remote_sha <- remote_sha(remote)
+  }
+
+  if (is.null(local_sha)) {
+    local_sha <- local_sha(remote_package_name(remote))
+  }
+
+  different <- remote_sha != local_sha
+  isTRUE(different) || is.na(different)
+}
+
+local_sha <- function(name) {
+  if (!is_installed(name)) {
+    return(NA)
+  }
+  packageDescription(name)$RemoteSha
+}
+
 remote_download <- function(x, quiet = FALSE) UseMethod("remote_download")
 remote_metadata <- function(x, bundle = NULL, source = NULL) UseMethod("remote_metadata")
+remote_package_name <- function(remote, ...) UseMethod("remote_package_name")
+remote_sha <- function(remote, ...) UseMethod("remote_sha")

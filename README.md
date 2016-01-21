@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/hadley/devtools.svg?branch=master)](https://travis-ci.org/hadley/devtools)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hadley/devtools?branch=master&svg=true)](https://ci.appveyor.com/project/hadley/devtools)
-[![Coverage Status](https://img.shields.io/coveralls/hadley/devtools.svg)](https://coveralls.io/r/hadley/devtools?branch=master)
+[![Coverage Status](https://codecov.io/github/hadley/devtools/coverage.svg?branch=master)](https://codecov.io/github/hadley/devtools?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/devtools)](http://cran.r-project.org/package=devtools)
 
 
@@ -69,11 +69,12 @@ Building and installing:
 * `build()` builds a package file from package sources. You can
   use it to build a binary version of your package.
 
-* `install_github()` installs an R package from github,
-  `install_gitorious()` from gitorious, `install_bitbucket()` from
-  bitbucket, `install_url()` from an arbitrary url and
-  `install_local()` from a local file on disk. `install_version()`
-  installs a specified version from cran.
+* `install_*` functions install an R package:
+   * `install_github()` from github,
+   * `install_bitbucket()` from bitbucket, 
+   * `install_url()` from an arbitrary url and
+   * `install_local()` from a local file on disk. 
+   * `install_version()` installs a specified version from cran.
 
 Check and release:
 
@@ -85,7 +86,7 @@ Check and release:
 * `run_examples()` will run all examples to make sure they work.
   This is useful because example checking is the last step of `R CMD check`.
 
-* `check_doc()` runs most of the documentation checking components
+* `check_man()` runs most of the documentation checking components
   of `R CMD check`
 
 * `release()` makes sure everything is ok with your package

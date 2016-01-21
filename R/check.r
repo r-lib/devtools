@@ -101,13 +101,13 @@ check_r_cmd <- function(name, built_path = NULL, cran = TRUE,
   pkgname <- gsub("_.*?$", "", basename(built_path))
 
   opts <- "--timings"
-  if (!nzchar(Sys.which("pdflatex"))) {
+  if (!has_latex()) {
     message("pdflatex not found! Not building PDF manual or vignettes.\n",
       "If you are planning to release this package, please run a check with manual and vignettes beforehand.\n")
     opts <- c(opts, "--no-build-vignettes", "--no-manual")
   }
   if (cran) {
-    opts <- c("--as-cran", opts)
+    opts <- c("--as-cran", "--run-donttest", opts)
   }
 
   env_vars <- check_env_vars(cran, check_version, force_suggests)

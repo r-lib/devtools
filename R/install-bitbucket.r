@@ -20,10 +20,14 @@
 #' install_bitbucket("dannavarro/lsr-package")
 #' }
 install_bitbucket <- function(repo, username, ref = "master", subdir = NULL,
-                              auth_user = NULL, password = NULL, ...) {
+                              auth_user = NULL, password = NULL, force = FALSE, ...) {
 
   remotes <- lapply(repo, bitbucket_remote, username = username, ref = ref,
     subdir = subdir, auth_user = auth_user, password = password)
+
+  if (!isTRUE(force)) {
+    remotes <- Filter(different_sha, remotes)
+  }
 
   install_remotes(remotes, ...)
 }
@@ -32,6 +36,7 @@ bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
                               auth_user = NULL, password = NULL, sha = NULL) {
 
   meta <- parse_git_repo(repo)
+  meta$ref <- meta$ref %||% ref %||% "master"
 
   if (is.null(meta$username)) {
     meta$username <- username %||% stop("Unknown username.")
@@ -96,3 +101,12 @@ remote_metadata.bitbucket_remote <- function(x, bundle = NULL, source = NULL) {
   )
 }
 
+#' @export
+remote_package_name.bitbucket_remote <- function(remote, ...) {
+  remote_package_name.github_remote(remote, url = "https://bitbucket.org", ...)
+}
+
+#' @export
+remote_sha.bitbucket_remote <-function(remote, ...) {
+  remote_sha.github_remote(remote, url = "https://bitbucket.org", ...)
+}

@@ -6,7 +6,7 @@
 #' @param repo Repository address in the format
 #'   \code{username/repo[/subdir][@@ref|#pull]}. Alternatively, you can
 #'   specify \code{subdir} and/or \code{ref} using the respective parameters
-#'   (see below); if both is specified, the values in \code{repo} take
+#'   (see below); if both are specified, the values in \code{repo} take
 #'   precedence.
 #' @param username User name. Deprecated: please include username in the
 #'   \code{repo}
@@ -14,12 +14,14 @@
 #'   name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.
 #' @param subdir subdirectory within repo that contains the R package.
 #' @param auth_token To install from a private repo, generate a personal
-#'   access token (PAT) in \url{https://github.com/settings/applications} and
+#'   access token (PAT) in \url{https://github.com/settings/tokens} and
 #'   supply to this argument. This is safer than using a password because
 #'   you can easily delete a PAT without affecting any others. Defaults to
 #'   the \code{GITHUB_PAT} environment variable.
 #' @param host GitHub API host to use. Override with your GitHub enterprise
 #'   hostname, for example, \code{"github.hostname.com/api/v3"}.
+#' @param force Force installation even if the git SHA1 has not changed since
+#'   the previous install.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @details
 #' Attempting to install from a source repository that uses submodules
@@ -44,7 +46,7 @@
 #' install_github("hadley/devtools")
 #'
 #' # To install from a private repo, use auth_token with a token
-#' # from https://github.com/settings/applications. You only need the
+#' # from https://github.com/settings/tokens. You only need the
 #' # repo scope. Best practice is to save your PAT in env var called
 #' # GITHUB_PAT.
 #' install_github("hadley/private", auth_token = "abc")
@@ -53,10 +55,15 @@
 install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
                            auth_token = github_pat(),
-                           host = "api.github.com", ...) {
+                           host = "api.github.com",
+                           force = FALSE, ...) {
 
   remotes <- lapply(repo, github_remote, username = username, ref = ref,
     subdir = subdir, auth_token = auth_token, host = host)
+
+  if (!isTRUE(force)) {
+    remotes <- Filter(different_sha, remotes)
+  }
 
   install_remotes(remotes, ...)
 }
@@ -88,13 +95,14 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
 
 #' @export
 remote_download.github_remote <- function(x, quiet = FALSE) {
-  if (!quiet) {
-    message("Downloading GitHub repo ", x$username, "/", x$repo, "@", x$ref)
-  }
-
   dest <- tempfile(fileext = paste0(".zip"))
   src_root <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo)
   src <- paste0(src_root, "/zipball/", x$ref)
+
+  if (!quiet) {
+    message("Downloading GitHub repo ", x$username, "/", x$repo, "@", x$ref,
+            "\nfrom URL ", src)
+  }
 
   if (!is.null(x$auth_token)) {
     auth <- httr::authenticate(
@@ -130,8 +138,8 @@ remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
     # Might be able to get from zip archive
     sha <- git_extract_sha1(bundle)
   } else {
-    # Otherwise can use github api
-    sha <- github_commit(x$username, x$repo, x$ref)$sha
+    # Otherwise can lookup with remote_ls
+    sha <- remote_sha(x)
   }
 
   list(
@@ -237,3 +245,43 @@ parse_git_repo <- function(path) {
   params
 }
 
+#' @export
+remote_package_name.github_remote <- function(remote, url = "https://github.com", ...) {
+
+  tmp <- tempfile()
+  path <- paste(c(
+      remote$username,
+      remote$repo,
+      "raw",
+      remote$ref,
+      remote$subdir,
+      "DESCRIPTION"), collapse = "/")
+
+  req <- httr::GET(url, path = path, httr::write_disk(path = tmp))
+
+  if (httr::status_code(req) >= 400) {
+    return(NA)
+  }
+
+  read_dcf(tmp)$Package
+}
+
+#' @export
+remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
+  if (!is.null(remote$sha)) {
+    return(remote$sha)
+  }
+  tryCatch({
+    res <- git2r::remote_ls(
+      paste0(url, "/", remote$username, "/", remote$repo, ".git"),
+      ...)
+
+    found <- grep(pattern = paste0("/", remote$ref), x = names(res))
+
+    if (length(found) == 0) {
+      return(NA)
+    }
+
+    unname(res[found[1]])
+  }, error = function(e) NA)
+}

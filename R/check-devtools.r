@@ -21,10 +21,11 @@ check_dev_versions <- function(pkg = ".") {
   message("Checking for dependencies on development versions... ",
     appendLF = FALSE)
 
-  deps <- package_deps(pkg$package, NA)
-  deps <- deps[!is.na(deps$installed), , drop = FALSE]
+  dep_list <- pkg[tolower(standardise_dep(TRUE))]
+  deps <- do.call("rbind", unname(compact(lapply(dep_list, parse_deps))))
+  deps <- deps[!is.na(deps$version), , drop = FALSE]
 
-  parsed <- lapply(deps$installed, function(x) unlist(numeric_version(x)))
+  parsed <- lapply(deps$version, function(x) unlist(numeric_version(x)))
 
   lengths <- vapply(parsed, length, integer(1))
   last_ver <- vapply(parsed, function(x) x[[length(x)]], integer(1))
@@ -38,7 +39,7 @@ check_dev_versions <- function(pkg = ".") {
   message(
     "WARNING",
     "\n  Depends on devel versions of: ",
-    "\n    ", paste0(deps$package[is_dev], collapse = ", "),
+    "\n    ", paste0(deps$name[is_dev], collapse = ", "),
     "\n  Release these packages to CRAN and bump version number.")
 
   return(invisible(FALSE))

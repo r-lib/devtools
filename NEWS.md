@@ -1,5 +1,83 @@
 # devtools 1.9.1.9000
 
+* New strategy for detecting RTools on windows: devtools now only looks
+  for Rtools if you need to `load_all()` or `build()` a package with
+  compiled code. This should make it easier to work with devtools if
+  you're developing pure R packages (#947).
+
+* `use_news_md()` adds a basic `NEWS.md` template (#957).
+
+* `check_man()` replaces `check_doc()` (since most other functions are
+  named after the corresponding directory). `check_doc()` will hang around
+  as an alias for the forseeable future (#958).
+
+* Dummy namespace now includes comments so roxygen2 will overwrite silently
+  (#1016).
+
+* Shimmed `system.file()` now respects `mustWork = TRUE` and throws an error
+  if the file does not exist (#1034).
+
+* Devtools now installs packages specified in the `Additional_repositories`
+  field, such as drat repositories. (#907, #1028, @jimhester).
+
+* Added `use_mit_license()`, which writes the necessary infrastructure to
+  declare and release an R package under the MIT license in a CRAN-compliant
+  way. (#995, @kevinushey)
+
+* `install_version()` now more robust when handling multiple repos (#943, #1030,
+  @jimhester).
+
+* `create()` and `setup()` are more permissive -- they now accept a path to
+  either a new directory or empty directory. (#966, @kevinushey)
+
+* Be more verbose about which package is installed for revdep check
+  (#926, @krlmlr).
+
+* `use_appveyor()` template now creates `failure.zip` artifact instead of
+  polluting the logs with `R CMD check` output (#1017, @krlmlr, @HenrikBengtsson).
+
+* Checking reverse dependencies is now more tolerant of errors when
+  retrieving the summary for a checked package (#929, @krlmlr).
+
+* Fix a bug in the installers (`install_github`, etc.), when upgrades are
+  not requested (#1013, @gaborcsardi).
+
+* 'Check failed:' now includes the package name for when Ncpus>1 so you
+   know which package has failed and can start looking at the output without
+   needing to wait for all packages to finish (@mattdowle).
+
+* `check_dev_versions()` checks only package dependencies (#983).
+
+* `package_file()` lets you find files inside a package. It always first locates
+  the root directory of the package (i.e. the directory that contains 
+  `DESCRIPTION`) (#985).
+
+* `check(cran = TRUE)` also adds `--run-donttest` since you do need to test
+  code in `\dontest()` for CRAN submission (#1002).
+
+* `use_revdep_check()` no longer includes `revdep_check_save_logs` in 
+  default template. I found I never used the logs and they just cluttered up
+  the package directory (#1003).
+
+* Use proper repository when checking reverse dependencies when
+  `BiocInstaller::useDevel(TRUE)` (#937, @jimhester).
+
+* Fix longstanding lazy load database corruption issues when reloading packages
+  which define S3 methods on generics from base or other packages (#1001, @jimhester).
+
+* Packages installed from `install_github()` and `install_git()` are only
+  downloaded and installed if the remote SHA1 reference differs from the
+  currently installed reference (#903, @jimhester).
+
+* Detect if `install_` commands are called on a Bioconductor package and
+  include the Bioconductor repositories if they are not already set (#895,
+  @jimhester).
+
+* `document()` now only runs `update_collate()` once.
+* Move `curl`, `evaluate`, `roxygen2` and `rversions` to `Suggests:` to lighten the dependency
+  load of devtools. If a user runs a function using these packages and
+  they are not installed the user is prompted to install them (#962, @jimhester).
+
 * Bugfix for `Remotes: ` feature that prevented it from working if devtools was
   not attached as is done in travis-r (#936, @jimhester).
 
@@ -20,6 +98,9 @@
 * `build_vignettes()` gains dependencies argument (#825, @krlmlr).
 
 * `build_win()` now uses `curl` instead of `RCurl` for ftp upload.
+
+* `build_win()` asks for consent to receive e-mail at maintainer address
+  in interactive mode (#800, @krlmlr).
 
 * `check()` now uses a better strategy when `cran = TRUE`. Instead of 
   attempting to simulate `--as-cran` behaviour by turning on certain env vars,
