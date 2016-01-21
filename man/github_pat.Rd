@@ -4,7 +4,7 @@
 \alias{github_pat}
 \title{Retrieve Github personal access token.}
 \usage{
-github_pat()
+github_pat(quiet = FALSE)
 }
 \description{
 A github personal access token

@@ -5,7 +5,7 @@
 \title{Install a package directly from bitbucket}
 \usage{
 install_bitbucket(repo, username, ref = "master", subdir = NULL,
-  auth_user = NULL, password = NULL, force = FALSE, ...)
+  auth_user = NULL, password = NULL, force = FALSE, quiet = FALSE, ...)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -30,6 +30,8 @@ to \code{username})}
 
 \item{force}{Force installation even if the git SHA1 has not changed since
 the previous install.}
+
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 }

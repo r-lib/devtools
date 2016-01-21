@@ -22,6 +22,7 @@
 #'   hostname, for example, \code{"github.hostname.com/api/v3"}.
 #' @param force Force installation even if the git SHA1 has not changed since
 #'   the previous install.
+#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @details
 #' Attempting to install from a source repository that uses submodules
@@ -54,18 +55,19 @@
 #' }
 install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
-                           auth_token = github_pat(),
+                           auth_token = github_pat(quiet),
                            host = "api.github.com",
-                           force = FALSE, ...) {
+                           force = FALSE, quiet = FALSE,
+                           ...) {
 
   remotes <- lapply(repo, github_remote, username = username, ref = ref,
     subdir = subdir, auth_token = auth_token, host = host)
 
   if (!isTRUE(force)) {
-    remotes <- Filter(different_sha, remotes)
+    remotes <- Filter(function(x) different_sha(x, quiet = quiet), remotes)
   }
 
-  install_remotes(remotes, ...)
+  install_remotes(remotes, quiet = quiet, ...)
 }
 
 github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
