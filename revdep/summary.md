@@ -4,38 +4,39 @@
 
 |setting  |value                        |
 |:--------|:----------------------------|
-|version  |R version 3.2.1 (2015-06-18) |
+|version  |R version 3.2.2 (2015-08-14) |
 |system   |x86_64, darwin13.4.0         |
-|ui       |RStudio (0.99.674)           |
+|ui       |RStudio (0.99.863)           |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Chicago              |
-|date     |2015-09-10                   |
+|date     |2016-01-21                   |
 
 ## Packages
 
 |package    |*  |version |date       |source         |
 |:----------|:--|:-------|:----------|:--------------|
 |bitops     |   |1.0-6   |2013-08-17 |CRAN (R 3.2.0) |
-|curl       |   |0.9.3   |2015-08-25 |CRAN (R 3.2.0) |
-|digest     |   |0.6.8   |2014-12-31 |CRAN (R 3.2.0) |
-|evaluate   |   |0.7.2   |2015-08-13 |CRAN (R 3.2.0) |
-|git2r      |   |0.11.0  |2015-08-12 |CRAN (R 3.2.0) |
+|curl       |   |0.9.4   |2015-11-20 |CRAN (R 3.2.2) |
+|digest     |   |0.6.9   |2016-01-08 |CRAN (R 3.2.3) |
+|evaluate   |   |0.8     |2015-09-18 |CRAN (R 3.2.0) |
+|git2r      |   |0.13.1  |2015-12-10 |CRAN (R 3.2.3) |
 |httr       |   |1.0.0   |2015-06-25 |CRAN (R 3.2.0) |
-|jsonlite   |   |0.9.17  |2015-09-06 |CRAN (R 3.2.0) |
-|knitr      |   |1.10.5  |2015-05-06 |CRAN (R 3.2.0) |
-|lintr      |   |0.2.0   |2014-12-01 |CRAN (R 3.2.0) |
+|jsonlite   |   |0.9.19  |2015-11-28 |CRAN (R 3.2.2) |
+|knitr      |   |1.12    |2016-01-07 |CRAN (R 3.2.3) |
+|lintr      |   |0.3.3   |2015-09-15 |CRAN (R 3.2.0) |
 |memoise    |   |0.2.1   |2014-04-22 |CRAN (R 3.2.0) |
-|Rcpp       |   |0.12.0  |2015-07-25 |CRAN (R 3.2.0) |
-|rmarkdown  |   |0.7     |2015-06-13 |CRAN (R 3.2.0) |
-|roxygen2   |   |4.1.1   |2015-04-15 |CRAN (R 3.2.0) |
-|rstudioapi |   |0.3.1   |2015-04-07 |CRAN (R 3.2.0) |
+|Rcpp       |   |0.12.3  |2016-01-10 |CRAN (R 3.2.3) |
+|rmarkdown  |   |0.9.2   |2016-01-01 |CRAN (R 3.2.3) |
+|roxygen2   |   |5.0.1   |2015-11-11 |CRAN (R 3.2.2) |
+|rstudioapi |   |0.4.0   |2015-12-09 |CRAN (R 3.2.3) |
 |rversions  |   |1.0.2   |2015-07-13 |CRAN (R 3.2.0) |
-|testthat   |*  |0.10.0  |2015-05-22 |CRAN (R 3.2.0) |
+|testthat   |*  |0.11.0  |2015-10-14 |CRAN (R 3.2.0) |
 |whisker    |   |0.3-2   |2013-04-28 |CRAN (R 3.2.0) |
+|withr      |   |1.0.0   |2015-09-23 |CRAN (R 3.2.0) |
 
 # Check results
-43 checked out of 45 dependencies 
+74 checked out of 75 dependencies 
 
 ## acmeR (1.1.0)
 Maintainer: Robert Wolpert <wolpert@stat.duke.edu>
@@ -48,31 +49,127 @@ Bug reports: https://github.com/ropensci/aRxiv/issues
 
 __OK__
 
-## assertive.base (0.0-1)
+## assertive.base (0.0-3)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: https://bitbucket.org/richierocks/assertive.base/issues
+
+__OK__
+
+## assertive.code (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: https://bitbucket.org/richierocks/assertive.code/issues
+
+__OK__
+
+## assertive.data (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: https://bitbucket.org/richierocks/assertive.data/issues
+
+__OK__
+
+## assertive.data.uk (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: https://bitbucket.org/richierocks/assertive.data.uk/issues
+
+__OK__
+
+## assertive.data.us (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: https://bitbucket.org/richierocks/assertive.data.us/issues
+
+__OK__
+
+## assertive.datetimes (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: 
+        https://bitbucket.org/richierocks/assertive.datetimes/issues
+
+__OK__
+
+## assertive.files (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: https://bitbucket.org/richierocks/assertive.files/issues
+
+__OK__
+
+## assertive.matrices (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: https://bitbucket.org/richierocks/assertive.matrices/issues
+
+__OK__
+
+## assertive.models (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: https://bitbucket.org/richierocks/assertive.models/issues
+
+__OK__
+
+## assertive.numbers (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: https://bitbucket.org/richierocks/assertive.numbers/issues
+
+__OK__
+
+## assertive.properties (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: 
+        https://bitbucket.org/richierocks/assertive.properties/issues
+
+__OK__
+
+## assertive (0.3-1)
 Maintainer: Richard Cotton <richierocks@gmail.com>
 
 __OK__
 
-## assertive (0.3-0)
-Maintainer: Richard Cotton <richierocks@gmail.com>
-
-__OK__
-
-## biomartr (0.0.2)
-Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>  
-Bug reports: https://github.com/HajkD/biomartr/issues
+## assertive.reflection (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: 
+        https://bitbucket.org/richierocks/assertive.reflection/issues
 
 ```
-checking package dependencies ... ERROR
-Packages required but not available: ‘biomaRt’ ‘Biostrings’
+checking examples ... ERROR
+Running examples in ‘assertive.reflection-Ex.R’ failed
+The error most likely occurred in:
 
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: assert_is_package_current
+> ### Title: Is the installed version of a package current?
+> ### Aliases: assert_is_package_current is_package_current
+> 
+> ### ** Examples
+> 
+> ## No test: 
+> # This test is marked "dont-test" since it involves a connection to
+> # repositories which is potentially long running.
+> is_package_current("assertive")
+Error in installed.packages()[x, , drop = FALSE] : 
+  subscript out of bounds
+Calls: is_package_current
+Execution halted
 ```
 ```
 DONE
 Status: 1 ERROR
 ```
+
+## assertive.sets (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: https://bitbucket.org/richierocks/assertive.sets/issues
+
+__OK__
+
+## assertive.strings (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: https://bitbucket.org/richierocks/assertive.strings/issues
+
+__OK__
+
+## assertive.types (0.0-1)
+Maintainer: Richard Cotton <richierocks@gmail.com>  
+Bug reports: https://bitbucket.org/richierocks/assertive.types/issues
+
+__OK__
 
 ## bisectr (0.1.0)
 Maintainer: Winston Chang <winston@stdout.org>
@@ -82,22 +179,27 @@ __OK__
 ## BrailleR (0.22.0)
 Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>
 
-__OK__
-
-## broman (0.59-5)
-Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
-
 ```
-checking R code for possible problems ... NOTE
-Found the following calls to attach():
-File ‘broman/R/loadfile.R’:
-  attach(file)
-See section ‘Good practice’ in ‘?attach’.
+checking whether package ‘BrailleR’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: package ‘knitr’ was built under R version 3.2.3
+See ‘/private/tmp/RtmptM0N0n/check_cran8960201aed55/BrailleR.Rcheck/00install.out’ for details.
 ```
 ```
 DONE
-Status: 1 NOTE
+Status: 1 WARNING
 ```
+
+## broman (0.62-1)
+Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
+
+__OK__
+
+## codyn (1.0.1)
+Maintainer: Matthew B. Jones <jones@nceas.ucsb.edu>  
+Bug reports: https://github.com/laurenmh/codyn/issues
+
+__OK__
 
 ## covr (1.2.0)
 Maintainer: Jim Hester <james.f.hester@gmail.com>  
@@ -119,7 +221,7 @@ Maintainer: Yuanchu Dang <yuanchu.dang@gmail.com>
 
 __OK__
 
-## DataCombine (0.2.9)
+## DataCombine (0.2.18)
 Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>  
 Bug reports: https://github.com/christophergandrud/DataCombine/issues
 
@@ -163,7 +265,13 @@ Bug reports: https://github.com/christophergandrud/dpmr/issues
 
 __OK__
 
-## FedData (2.0.0)
+## eurostat (1.2.13)
+Maintainer: Lahti Leo <louhos@googlegroups.com>  
+Bug reports: https://github.com/ropengov/eurostat/issues
+
+__OK__
+
+## FedData (2.0.3)
 Maintainer: R. Kyle Bocinsky <bocinsky@gmail.com>
 
 ```
@@ -175,24 +283,67 @@ DONE
 Status: 1 NOTE
 ```
 
+## flacco (1.1)
+Maintainer: Pascal Kerschke <kerschke@uni-muenster.de>  
+Bug reports: https://github.com/kerschke/flacco/issues
+
+__OK__
+
+## forestFloor (1.9.1)
+Maintainer: Soeren Havelund Welling <SOWE@DTU.DK>
+
+__OK__
+
+## gitlabr (0.6.2)
+Maintainer: Jirka Lewandowski <jirka.lewandowski@wzb.eu>  
+Bug reports: 
+        http://gitlab.points-of-interest.cc/points-of-interest/gitlabr/
+        issues/
+
+__OK__
+
+## gmwm (1.0.0)
+Maintainer: Stephane Guerrier <stephane@illinois.edu>  
+Bug reports: https://github.com/SMAC-Group/gmwm/issues
+
+```
+checking whether package ‘gmwm’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: package ‘ggplot2’ was built under R version 3.2.3
+  Warning: replacing previous import by ‘grid::arrow’ when loading ‘gmwm’
+  Warning: replacing previous import by ‘grid::unit’ when loading ‘gmwm’
+  Warning: replacing previous import by ‘scales::alpha’ when loading ‘gmwm’
+See ‘/private/tmp/RtmptM0N0n/check_cran8960201aed55/gmwm.Rcheck/00install.out’ for details.
+```
+```
+DONE
+Status: 1 WARNING
+```
+
 ## graticule (0.1.0)
 Maintainer: Michael D. Sumner <mdsumner@gmail.com>  
 Bug reports: https://github.com/mdsumner/graticule/issues
 
 __OK__
 
-## h2o (3.0.0.30)
+## h2o (3.6.0.8)
 Maintainer: Tom Kraljevic <tomk@0xdata.com>
 
 ```
+checking whether package ‘h2o’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: package ‘statmod’ was built under R version 3.2.3
+See ‘/private/tmp/RtmptM0N0n/check_cran8960201aed55/h2o.Rcheck/00install.out’ for details.
+```
+```
 checking installed package size ... NOTE
-  installed size is 45.9Mb
+  installed size is 48.9Mb
   sub-directories of 1Mb or more:
-    java  45.0Mb
+    java  48.0Mb
 ```
 ```
 DONE
-Status: 1 NOTE
+Status: 1 WARNING, 1 NOTE
 ```
 
 ## IalsaSynthesis (0.1.6)
@@ -201,7 +352,7 @@ Bug reports: https://github.com/IALSA/IalsaSynthesis/issues
 
 __OK__
 
-## icd9 (1.2.2)
+## icd9 (1.3)
 Maintainer: Jack O. Wasey <jack@jackwasey.com>  
 Bug reports: https://github.com/jackwasey/icd9/issues
 
@@ -215,19 +366,48 @@ DONE
 Status: 1 NOTE
 ```
 
-## likert (1.2)
+## iLaplace (1.0.0)
+Maintainer: Erlis Ruli <erlisr@yahoo.it>  
+Bug reports: https://github.com/erlisR/iLaplace/issues
+
+__OK__
+
+## jiebaR (0.7)
+Maintainer: Qin Wenfeng <mail@qinwenfeng.com>  
+Bug reports: https://github.com/qinwf/jiebaR/issues
+
+```
+checking tests ... ERROR
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  12: test("./CPP_API")
+  13: load_all(pkg, quiet = TRUE) at /Users/hadley/Documents/devtools/devtools/R/test.r:50
+  14: check_suggested("roxygen2") at /Users/hadley/Documents/devtools/devtools/R/load.r:88
+  15: check_dep_version(pkg, version, compare) at /Users/hadley/Documents/devtools/devtools/R/utils.r:63
+  16: stop("Dependency package ", dep_name, " not available.") at /Users/hadley/Documents/devtools/devtools/R/package-deps.r:56
+  
+  testthat results ================================================================
+  OK: 14 SKIPPED: 0 FAILED: 2
+  1. Error: C_API 
+  2. Error: CPP_API 
+  
+  Error: testthat unit tests failed
+  Execution halted
+```
+```
+DONE
+Status: 1 ERROR
+```
+
+## likert (1.3.3)
 Maintainer: Jason Bryer <jason@bryer.org>  
 Bug reports: https://github.com/jbryer/likert/issues
 
 ```
-checking DESCRIPTION meta-information ... NOTE
-Malformed Description field: should contain one or more complete sentences.
-```
-```
-checking dependencies in R code ... NOTE
-'library' or 'require' call to ‘shiny’ in package code.
-  Please use :: or requireNamespace() instead.
-  See section 'Suggested packages' in the 'Writing R Extensions' manual.
+checking whether package ‘likert’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: package ‘ggplot2’ was built under R version 3.2.3
+See ‘/private/tmp/RtmptM0N0n/check_cran8960201aed55/likert.Rcheck/00install.out’ for details.
 ```
 ```
 checking data for non-ASCII characters ... NOTE
@@ -235,7 +415,7 @@ checking data for non-ASCII characters ... NOTE
 ```
 ```
 DONE
-Status: 3 NOTEs
+Status: 1 WARNING, 1 NOTE
 ```
 
 ## lineup (0.37-6)
@@ -243,7 +423,7 @@ Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 
 __OK__
 
-## manifestoR (1.0-4)
+## manifestoR (1.1-1)
 Maintainer: Jirka Lewandowski <jirka.lewandowski@wzb.eu>  
 Bug reports: https://github.com/ManifestoProject/manifestoR/issues
 
@@ -258,15 +438,13 @@ __OK__
 Maintainer: Sean C. Anderson <sean@seananderson.ca>  
 Bug reports: http://github.com/seananderson/metafolio/issues
 
-```
-checking whether package ‘metafolio’ can be installed ... ERROR
-Installation failed.
-See ‘/private/tmp/RtmpGK5EfP/check_cran4b37d09338a/metafolio.Rcheck/00install.out’ for details.
-```
-```
-DONE
-Status: 1 ERROR
-```
+__OK__
+
+## modules (0.2.0)
+Maintainer: Sebastian Warnholz <wahani@gmail.com>  
+Bug reports: https://github.com/wahani/modules/issues
+
+__OK__
 
 ## myTAI (0.3.0)
 Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>  
@@ -310,8 +488,27 @@ Packages suggested but not available for checking:
   ‘RcppOctave’ ‘doMPI’ ‘Biobase’
 ```
 ```
+checking whether package ‘NMF’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: replacing previous import by ‘ggplot2::unit’ when loading ‘NMF’
+  Warning: replacing previous import by ‘ggplot2::arrow’ when loading ‘NMF’
+See ‘/private/tmp/RtmptM0N0n/check_cran8960201aed55/NMF.Rcheck/00install.out’ for details.
+```
+```
 checking R code for possible problems ... NOTE
 .wrapResult: no visible global function definition for ‘exprs’
+algorithm,NMFStrategyOctave : .local: no visible global function
+  definition for ‘fstop’
+evar,ANY : .local: no visible binding for global variable ‘Biobase’
+nmf,matrix-numeric-NMFStrategy : .local : run.all: no visible binding
+  for global variable ‘n’
+nmf,matrix-numeric-NMFStrategy : .local : run.all: no visible binding
+  for global variable ‘RNGobj’
+nmfModel,formula-ANY : .local : merge_pdata: no visible global function
+  definition for ‘pData’
+nmfModel,formula-ANY : .local: no visible global function definition
+  for ‘exprs’
+rss,matrix : .local: no visible binding for global variable ‘Biobase’
 ```
 ```
 checking Rd cross-references ... NOTE
@@ -580,7 +777,7 @@ Execution halted
 ```
 ```
 DONE
-Status: 1 ERROR, 5 NOTEs
+Status: 1 ERROR, 1 WARNING, 5 NOTEs
 ```
 
 ## npsm (0.5)
@@ -598,7 +795,7 @@ DONE
 Status: 1 NOTE
 ```
 
-## opencpu (1.4.6)
+## opencpu (1.5.1)
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>  
 Bug reports: https://github.com/jeroenooms/opencpu/issues
 
@@ -611,7 +808,7 @@ DONE
 Status: 1 NOTE
 ```
 
-## packrat (0.4.4)
+## packrat (0.4.6-1)
 Maintainer: Kevin Ushey <kevin@rstudio.com>  
 Bug reports: https://github.com/rstudio/packrat/issues
 
@@ -627,6 +824,11 @@ Status: 1 NOTE
 ## pacman (0.3.0)
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>  
 Bug reports: https://github.com/trinker/pacman/issues?state=open
+
+__OK__
+
+## Perc (0.1.1)
+Maintainer: Jian Jin <jinjian.pku@gmail.com>
 
 __OK__
 
@@ -675,41 +877,118 @@ write_PACKAGES_index: no visible global function definition for
   ‘knit2html’
 write_PACKAGES_index: no visible global function definition for
   ‘finish’
+utest,RUnitTestSuite : .local: no visible global function definition
+  for ‘runTestSuite’
+utest,RUnitTestSuite : .local: no visible global function definition
+  for ‘printTextProtocol’
+utest,RUnitTestSuite : .local: no visible global function definition
+  for ‘printHTMLProtocol’
+utest,RUnitTestSuite : .local: no visible global function definition
+  for ‘getErrors’
+utest,character : .local: no visible binding for global variable
+  ‘devtools’
+utest,character : .local: no visible global function definition for
+  ‘is.package’
+utest,character : .local: no visible global function definition for
+  ‘load_all’
+utest,character : .local: no visible global function definition for
+  ‘defineTestSuite’
+utest,character : .local: no visible global function definition for
+  ‘test_dir’
+utest,character : .local: no visible global function definition for
+  ‘runTestFile’
+utest,character : .local: no visible global function definition for
+  ‘test_file’
 ```
 ```
 DONE
 Status: 3 NOTEs
 ```
 
-## PSAboot (1.1)
+## plotly (2.0.16)
+Maintainer: Carson Sievert <cpsievert1@gmail.com>  
+Bug reports: https://github.com/ropensci/plotly/issues
+
+```
+checking whether package ‘plotly’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: package ‘ggplot2’ was built under R version 3.2.3
+See ‘/private/tmp/RtmptM0N0n/check_cran8960201aed55/plotly.Rcheck/00install.out’ for details.
+```
+```
+DONE
+Status: 1 WARNING
+```
+
+## PSAboot (1.1.3)
 Maintainer: Jason Bryer <jason@bryer.org>  
 Bug reports: https://github.com/jbryer/PSAboot/issues
 
 ```
 checking whether package ‘PSAboot’ can be installed ... WARNING
 Found the following significant warnings:
-  Warning: replacing previous import by ‘party::show’ when loading ‘PSAboot’
-See ‘/private/tmp/RtmpGK5EfP/check_cran4b37d09338a/PSAboot.Rcheck/00install.out’ for details.
-```
-```
-checking dependencies in R code ... NOTE
-'library' or 'require' call to ‘ggthemes’ in package code.
-  Please use :: or requireNamespace() instead.
-  See section 'Suggested packages' in the 'Writing R Extensions' manual.
-```
-```
-checking R code for possible problems ... NOTE
-boxplot.PSAboot: no visible global function definition for
-  ‘geom_tufteboxplot’
+  Warning: package ‘ggplot2’ was built under R version 3.2.3
+See ‘/private/tmp/RtmptM0N0n/check_cran8960201aed55/PSAboot.Rcheck/00install.out’ for details.
 ```
 ```
 checking data for non-ASCII characters ... NOTE
   Note: found 4 marked UTF-8 strings
 ```
 ```
-DONE
-Status: 1 WARNING, 3 NOTEs
+checking re-building of vignette outputs ... NOTE
+Error in re-building vignettes:
+  ...
+  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
+Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
+  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
+Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
+  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
+Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
+  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
+Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
+  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
+Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
+  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
+Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
+  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
+Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
+  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
+Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
+  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
+Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
+  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
+Loading required package: knitr
+Warning: package 'knitr' was built under R version 3.2.3
+Quitting from lines 135-136 (PSAboot.Rmd) 
+Error: processing vignette 'PSAboot.Rmd' failed with diagnostics:
+Unknown parameters: alhpa
+Execution halted
+
 ```
+```
+DONE
+Status: 1 WARNING, 2 NOTEs
+```
+
+## qtlcharts (0.5-25)
+Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
+
+```
+checking installed package size ... NOTE
+  installed size is  5.5Mb
+  sub-directories of 1Mb or more:
+    doc           3.8Mb
+    htmlwidgets   1.3Mb
+```
+```
+DONE
+Status: 1 NOTE
+```
+
+## radiomics (0.1.1)
+Maintainer: Joel Carlson <jnkcarlson@gmail.com>
+
+__OK__
 
 ## rbundler (0.3.7)
 Maintainer: Yoni Ben-Meshulam <yoni.bmesh@gmail.com>
@@ -727,6 +1006,11 @@ install_version: no visible global function definition for
 DONE
 Status: 2 NOTEs
 ```
+
+## Rcereal (1.1.2)
+Maintainer: Wush Wu <wush978@gmail.com>
+
+__OK__
 
 ## rclinicaltrials (1.4.1)
 Maintainer: Michael C Sachs <sachsmc@gmail.com>
@@ -751,9 +1035,56 @@ DONE
 Status: 1 NOTE
 ```
 
-## rfishbase (2.0.3)
+## rfishbase (2.1.0)
 Maintainer: Carl Boettiger <cboettig@ropensci.org>  
 Bug reports: https://github.com/ropensci/rfishbase/issues
+
+```
+checking data for non-ASCII characters ... NOTE
+  Note: found 33 marked UTF-8 strings
+```
+```
+DONE
+Status: 1 NOTE
+```
+
+## roxygen2 (5.0.1)
+Maintainer: Hadley Wickham <hadley@rstudio.com>
+
+__OK__
+
+## rpdo (0.1.1)
+Maintainer: Joe Thorley <joe@poissonconsulting.ca>
+
+```
+checking package dependencies ... NOTE
+Package suggested but not available for checking: ‘datacheckr’
+```
+```
+checking tests ... ERROR
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  
+  R is a collaborative project with many contributors.
+  Type 'contributors()' for more information and
+  'citation()' on how to cite R or R packages in publications.
+  
+  Type 'demo()' for some demos, 'help()' for on-line help, or
+  'help.start()' for an HTML browser interface to help.
+  Type 'q()' to quit R.
+  
+  > library(testthat)
+  > library(datacheckr)
+  Error in library(datacheckr) : there is no package called 'datacheckr'
+  Execution halted
+```
+```
+DONE
+Status: 1 ERROR, 1 NOTE
+```
+
+## rpivotTable (0.1.5.7)
+Maintainer: Enzo Martoglio  <enzo@smartinsightsfromdata.com>
 
 __OK__
 
@@ -761,25 +1092,35 @@ __OK__
 Maintainer: Tim Appelhans
  <admin@environmentalinformatics-marburg.de>
 
-__OK__
+```
+checking whether package ‘satellite’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: package ‘Rcpp’ was built under R version 3.2.3
+See ‘/private/tmp/RtmptM0N0n/check_cran8960201aed55/satellite.Rcheck/00install.out’ for details.
+```
+```
+DONE
+Status: 1 WARNING
+```
 
-## smss (1.0-1)
+## smss (1.0-2)
 Maintainer: Jeffrey B. Arnold <jeffrey.arnold@gmail.com>
 
 __OK__
 
-## testthat (0.10.0)
+## testthat (0.11.0)
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
 Bug reports: https://github.com/hadley/testthat/issues
 
 __OK__
 
-## Wats (0.10.1)
-Maintainer: Will Beasley <wibeasley@hotmail.com>
+## Wats (0.10.3)
+Maintainer: Will Beasley <wibeasley@hotmail.com>  
+Bug reports: https://github.com/OuhscBbmc/Wats/issues
 
 __OK__
 
-## wikipediatrend (1.1.6)
+## wikipediatrend (1.1.7)
 Maintainer: Peter Meissner <retep.meissner@gmail.com>  
 Bug reports: https://github.com/petermeissner/wikipediatrend/issues
 
@@ -791,5 +1132,19 @@ Packages suggested but not available for checking:
 ```
 DONE
 Status: 1 NOTE
+```
+
+## xoi (0.66-9)
+Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
+
+```
+checking whether package ‘xoi’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: package ‘qtl’ was built under R version 3.2.3
+See ‘/private/tmp/RtmptM0N0n/check_cran8960201aed55/xoi.Rcheck/00install.out’ for details.
+```
+```
+DONE
+Status: 1 WARNING
 ```
 

@@ -1,21 +1,3 @@
-This is a resubmission:
-
-* http -> https in link to CRAN policies.
-
----
-
-## Release summary
-
-* `check()` now uses `--as-cran`, suppressing just `_R_CHECK_CRAN_INCOMING_`
-  (except during `release()`). Hopefully this will improve the quality of
-  devtools mediated submissions.
-  
-* Imports needed functions from base packages, eliminating a NOTE.
-
-* Removes a library() call, eliminating a NOTE.
-  
-* Many other bug fixes and small new features
-
 ## Test environments
 * local OS X install, R 3.2.1
 * ubuntu 12.04 (on travis-ci), R 3.2.2
@@ -32,6 +14,11 @@ There were 2 NOTEs:
   This is part of a dynamic check to see if the user can compile packages
   so `dll` does not exist during checking.
 
+* Found the following (possibly) invalid URLs: 
+  URL: https://cran.r-project.org/web/packages/policies.html
+  
+  This is a false positive as this isn't a url to a package.
+
 * checking R code for possible problems ... NOTE
   Found the following calls to attach():
     File 'devtools/R/package-env.r':
@@ -44,13 +31,18 @@ There were 2 NOTEs:
 
 ## Downstream dependencies
 
-* I ran R CMD check on all 45 downstream dependencies of devtools.
+* I ran R CMD check on all 75 downstream dependencies of devtools.
   Summary at: https://github.com/hadley/devtools/blob/master/revdep/summary.md
 
 * There was 1 failure: 
+
+  * assertive.reflection: due to error in \donttest().
+  * jiebaR: 
   
   * NMF: this failed in the same way previously. I have reported the issue
     to the maintainer, but I'm reasonably certain it's not related to devtools.
 
 * As far as I can tell, there were no new failures related to changes in 
   devtools.
+
+assertive.reflection
