@@ -74,7 +74,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     local_urls <- file.path(srcpath, vapply(urls, `[[`, "name", FUN.VALUE = character(1)))
     remote_urls <- vapply(urls, `[[`, "url", FUN.VALUE = character(1))
 
-    needs_download <- !file.exists(local_urls)
+    needs_download <- !vapply(local_urls, is_source_pkg, logical(1))
     if (any(needs_download)) {
       message("Downloading ", sum(needs_download), " packages")
       Map(utils::download.file, remote_urls[needs_download],

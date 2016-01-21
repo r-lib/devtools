@@ -45,6 +45,9 @@
 * Fix a bug in the installers (`install_github`, etc.), when upgrades are
   not requested (#1013, @gaborcsardi).
 
+* Verify integrity of already downloaded package archives in `revdep_check`
+  (#930, @krlmlr).
+
 * 'Check failed:' now includes the package name for when Ncpus>1 so you
    know which package has failed and can start looking at the output without
    needing to wait for all packages to finish (@mattdowle).
