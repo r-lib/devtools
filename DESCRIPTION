@@ -36,7 +36,7 @@ Suggests:
     knitr,
     lintr (>= 0.2.1),
     bitops,
-    roxygen2 (>= 4.1.1.9001),
+    roxygen2 (>= 5.0.0),
     evaluate,
     rversions
 License: GPL (>= 2)
