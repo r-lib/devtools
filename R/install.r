@@ -111,7 +111,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
     quiet = quiet)
 
   if (length(metadata) > 0) {
-    add_metadata(base::find.package(pkg$package), metadata)
+    add_metadata(inst(pkg$package), metadata)
   }
 
   if (reload) {

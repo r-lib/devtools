@@ -62,4 +62,14 @@ test_that("install on packages adds metadata", {
   pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
   expect_match(pkg_source, "local")
 
+  # use load_all() and reinstall
+  git2r::add(r, file.path(test_pkg, "test.txt"))
+  git2r::commit(r, "adding test.txt")
+  load_all(test_pkg, quiet = TRUE)
+  install(test_pkg, quiet = TRUE)
+  pkg_info <- session_info()$packages
+  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
+  pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
+  expect_match(pkg_source, pkg_sha)
+
 })
