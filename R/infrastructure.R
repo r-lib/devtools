@@ -398,48 +398,8 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
                      compress = "bzip2") {
   pkg <- as.package(pkg)
 
-  to_save <- dots(...)
-  check_to_save(to_save)
+  objs <- get_objs_from_dots(dots(...))
 
-  objs <- get_objs_from_to_save(to_save)
-
-  save_info <- get_save_info_for_objs(pkg, internal, objs)
-  check_data_paths(save_info$paths, overwrite)
-
-  message("Saving ", paste(objs, collapse = ", "),
-          " as ", paste(basename(save_info$paths), collapse = ", "),
-          " to ", save_info$dir_name)
-  envir <- parent.frame()
-  mapply(save, list = save_info$objs, file = save_info$paths,
-         MoreArgs = list(envir = envir, compress = compress))
-
-  invisible()
-}
-
-check_to_save <- function(to_save) {
-  if (length(to_save) == 0L) {
-    stop("Nothing to save", call. = FALSE)
-  }
-
-  is_name <- vapply(to_save, is.symbol, logical(1))
-  if (any(!is_name)) {
-    stop("Can only save existing named objects", call. = FALSE)
-  }
-}
-
-get_objs_from_to_save <- function(to_save) {
-  objs <- vapply(to_save, as.character, character(1))
-  duplicated_objs <- which(setNames(duplicated(objs), objs))
-  if (length(duplicated_objs) > 0L) {
-    objs <- unique(objs)
-    warning("Saving duplicates only once: ",
-            paste(names(duplicated_objs), collapse = ", "),
-            call. = FALSE)
-  }
-  objs
-}
-
-get_save_info_for_objs <- function(pkg, internal, objs) {
   if (internal) {
     dir_name <- file.path(pkg$path, "R")
     paths <- file.path(dir_name, "sysdata.rda")
@@ -449,7 +409,37 @@ get_save_info_for_objs <- function(pkg, internal, objs) {
     paths <- file.path(dir_name, paste0(objs, ".rda"))
   }
 
-  list(dir_name = dir_name, paths = paths, objs = objs)
+  check_data_paths(paths, overwrite)
+
+  message("Saving ", paste(objs, collapse = ", "),
+          " as ", paste(basename(paths), collapse = ", "),
+          " to ", dir_name)
+  envir <- parent.frame()
+  mapply(save, list = objs, file = paths,
+         MoreArgs = list(envir = envir, compress = compress))
+
+  invisible()
+}
+
+get_objs_from_dots <- function(.dots) {
+  if (length(.dots) == 0L) {
+    stop("Nothing to save", call. = FALSE)
+  }
+
+  is_name <- vapply(.dots, is.symbol, logical(1))
+  if (any(!is_name)) {
+    stop("Can only save existing named objects", call. = FALSE)
+  }
+
+  objs <- vapply(.dots, as.character, character(1))
+  duplicated_objs <- which(setNames(duplicated(objs), objs))
+  if (length(duplicated_objs) > 0L) {
+    objs <- unique(objs)
+    warning("Saving duplicates only once: ",
+            paste(names(duplicated_objs), collapse = ", "),
+            call. = FALSE)
+  }
+  objs
 }
 
 check_data_paths <- function(paths, overwrite) {
