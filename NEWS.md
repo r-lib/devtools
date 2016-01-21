@@ -1,5 +1,7 @@
 # devtools 1.9.1.9000
 
+* The template for `use_cran_comments()` has been improved (#1038).
+
 * New strategy for detecting RTools on windows: devtools now only looks
   for Rtools if you need to `load_all()` or `build()` a package with
   compiled code. This should make it easier to work with devtools if

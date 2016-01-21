@@ -1,21 +1,23 @@
 ## Test environments
-* local OS X install, R 3.1.2
-* ubuntu 12.04 (on travis-ci), R 3.1.2
+* local OS X install, R {{{ rversion }}}
+* ubuntu 12.04 (on travis-ci), R {{{ rversion }}}
 * win-builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. 
 
-There was 1 NOTE:
+0 errors | 0 warnings | 1 note
 
-* checking dependencies in R code ... NOTE
-  Namespace in Imports field not imported from: 'R6'
+* This is a new release.
 
-  R6 is a build-time dependency.
+## Reverse dependencies
 
-## Downstream dependencies
-I have also run R CMD check on downstream dependencies of httr 
-(https://github.com/wch/checkresults/blob/master/httr/r-release). All packages 
-that I could install passed except:
+This is a new release, so there are no reverse dependencies.
 
-* XYZ:...
+---
+
+* I have run R CMD check on the NUMBER downstream dependencies.
+  (Summary at ...). 
+  
+* FAILURE SUMMARY
+
+* All revdep maintainers were notified of the release on RELEASE DATE.

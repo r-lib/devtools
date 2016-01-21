@@ -595,7 +595,11 @@ use_cran_comments <- function(pkg = ".") {
     stop("cran-comments.md already exists", call. = FALSE)
 
   message("Adding cran-comments.md template")
-  writeLines(render_template("cran-comments.md", list()), comments)
+  data <- list(
+    rversion = paste0(version$major, ".", version$minor)
+  )
+
+  writeLines(render_template("cran-comments.md", data), comments)
   invisible()
 }
 
