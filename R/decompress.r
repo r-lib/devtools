@@ -21,8 +21,10 @@ source_pkg_info <- function(path, subdir = NULL) {
 }
 
 is_source_pkg <- function(path, subdir = NULL) {
-  res <- try(source_pkg_info(path = path, subdir = subdir), silent = TRUE)
-  !inherits(res, "try-error")
+  tryCatch({
+    source_pkg_info(path = path, subdir = subdir)
+    TRUE
+  }, error = function(e) return(FALSE))
 }
 
 source_pkg <- function(path, subdir = NULL, before_install = NULL) {
