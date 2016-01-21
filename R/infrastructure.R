@@ -403,41 +403,66 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
                      compress = "bzip2") {
   pkg <- as.package(pkg)
 
-  to_save <- dots(...)
-  is_name <- vapply(to_save, is.symbol, logical(1))
+  objs <- get_objs_from_dots(dots(...))
+
+  if (internal) {
+    dir_name <- file.path(pkg$path, "R")
+    paths <- file.path(dir_name, "sysdata.rda")
+    objs <- list(objs)
+  } else {
+    dir_name <- file.path(pkg$path, "data")
+    paths <- file.path(dir_name, paste0(objs, ".rda"))
+  }
+
+  check_data_paths(paths, overwrite)
+
+  message("Saving ", paste(unlist(objs), collapse = ", "),
+          " as ", paste(basename(paths), collapse = ", "),
+          " to ", dir_name)
+  envir <- parent.frame()
+  mapply(save, list = objs, file = paths,
+         MoreArgs = list(envir = envir, compress = compress))
+
+  invisible()
+}
+
+get_objs_from_dots <- function(.dots) {
+  if (length(.dots) == 0L) {
+    stop("Nothing to save", call. = FALSE)
+  }
+
+  is_name <- vapply(.dots, is.symbol, logical(1))
   if (any(!is_name)) {
     stop("Can only save existing named objects", call. = FALSE)
   }
-  objs <- vapply(to_save, as.character, character(1))
 
-  if (internal) {
-    data_path <- file.path(pkg$path, "R", "sysdata.rda")
-    if (file.exists(data_path) && !overwrite) {
-      stop("R/sysdata.rda exists. Use overwrite = TRUE to overwrite",
-        call. = FALSE)
-    }
-
-    message("Saving ", paste(objs, collapse = ", "), " to R/sysdata.rda")
-    save(..., file = data_path, envir = parent.frame(), compress = compress)
-  } else {
-    data_path <- file.path(pkg$path, "data")
-    if (!file.exists(data_path)) dir.create(data_path)
-
-    paths <- file.path(pkg$path, "data", paste0(objs, ".rda"))
-    if (any(file.exists(paths)) && !overwrite) {
-      stop(paste(basename(paths), collapse = ", "), " already exist. ",
-        "Use overwrite = TRUE to overwrite", call. = FALSE)
-    }
-    message("Saving ", paste(objs, collapse = ", "), " to ",
-      paste0("data/", basename(paths), collapse = ", "))
-    envir <- parent.frame()
-    save_one <- function(name, path) {
-      save(list = name, file = path, envir = envir, compress = compress)
-    }
-    Map(save_one, objs, paths)
-
+  objs <- vapply(.dots, as.character, character(1))
+  duplicated_objs <- which(setNames(duplicated(objs), objs))
+  if (length(duplicated_objs) > 0L) {
+    objs <- unique(objs)
+    warning("Saving duplicates only once: ",
+            paste(names(duplicated_objs), collapse = ", "),
+            call. = FALSE)
   }
-  invisible()
+  objs
+}
+
+check_data_paths <- function(paths, overwrite) {
+  data_path <- dirname(paths[[1]])
+  if (!file.exists(data_path)) dir.create(data_path)
+
+  if (!overwrite) {
+    paths_exist <- which(setNames(file.exists(paths), paths))
+
+    if (length(paths_exist) > 0L) {
+      paths_exist <- unique(names(paths_exist))
+      existing_names <- basename(paths_exist)
+      stop(paste(existing_names, collapse = ", "), " already exists in ",
+           dirname(paths_exist[[1L]]),
+           ". ",
+           "Use overwrite = TRUE to overwrite", call. = FALSE)
+    }
+  }
 }
 
 #' Use \code{data-raw} to compute package datasets.
