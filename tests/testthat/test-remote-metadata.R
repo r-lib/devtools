@@ -38,6 +38,11 @@ test_that("install on packages adds metadata", {
 
   # first do metadata = NULL
   install(test_pkg, quiet = TRUE, metadata = NULL)
+
+  # unload the package after we are all done testing
+  on.exit(unload(test_pkg), add = TRUE)
+
+  # first time loading the package
   library("testMetadataInstall")
 
   pkg_info <- session_info()$packages
@@ -71,5 +76,7 @@ test_that("install on packages adds metadata", {
   pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
   pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
   expect_match(pkg_source, pkg_sha)
+
+  erase(test_pkg)
 
 })
