@@ -24,57 +24,53 @@ mock_use_github <- function(pkg) {
 test_that("install on packages adds metadata", {
   skip_on_cran()
 
-  # # Make a temp lib directory to install test package into
-  old_libpaths <- .libPaths()
-  tmp_libpath = file.path(tempdir(), "devtools_test")
-  if (!dir.exists(tmp_libpath)) dir.create(tmp_libpath)
-  .libPaths(c(tmp_libpath, .libPaths()))
+  # temp libPaths
+  withr::with_temp_libpaths({
+    test_pkg <- create_in_temp("testMetadataInstall")
+    mock_use_github(test_pkg)
 
-  test_pkg <- create_in_temp("testMetadataInstall")
-  mock_use_github(test_pkg)
+    # first do metadata = NULL
+    install(test_pkg, quiet = TRUE, metadata = NULL)
 
-  # first do metadata = NULL
-  install(test_pkg, quiet = TRUE, metadata = NULL)
 
-  # cleanup code for when we are all finished
-  on.exit(unload(test_pkg), add = TRUE)
-  on.exit(.libPaths(old_libpaths), add = TRUE)
-  on.exit(erase(test_pkg), add = TRUE)
+    # cleanup code for when we are all finished
+    on.exit(unload(test_pkg), add = TRUE)
+    on.exit(erase(test_pkg), add = TRUE)
 
-  #browser()
-  # first time loading the package
-  library("testMetadataInstall")
+    # first time loading the package
+    library("testMetadataInstall")
 
-  pkg_info <- session_info()$packages
-  expect_equal(pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"],
-               "local")
+    pkg_info <- session_info()$packages
+    expect_equal(pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"],
+                 "local")
 
-  # now use default
-  r <- git2r::repository(test_pkg)
+    # now use default
+    r <- git2r::repository(test_pkg)
 
-  # then use metadata
-  install(test_pkg, quiet = TRUE)
-  library("testMetadataInstall")
-  pkg_info <- session_info()$packages
-  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
-  pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
-  expect_match(pkg_source, pkg_sha)
+    # then use metadata
+    install(test_pkg, quiet = TRUE)
+    library("testMetadataInstall")
+    pkg_info <- session_info()$packages
+    pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
+    pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
+    expect_match(pkg_source, pkg_sha)
 
-  # dirty the repo
-  cat("just a test", file = file.path(test_pkg, "test.txt"))
-  install(test_pkg, quiet = TRUE)
-  pkg_info <- session_info()$packages
-  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
-  expect_match(pkg_source, "local")
+    # dirty the repo
+    cat("just a test", file = file.path(test_pkg, "test.txt"))
+    install(test_pkg, quiet = TRUE)
+    pkg_info <- session_info()$packages
+    pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
+    expect_match(pkg_source, "local")
 
-  # use load_all() and reinstall
-  git2r::add(r, file.path(test_pkg, "test.txt"))
-  git2r::commit(r, "adding test.txt")
-  load_all(test_pkg, quiet = TRUE)
-  install(test_pkg, quiet = TRUE)
-  pkg_info <- session_info()$packages
-  pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
-  pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
-  expect_match(pkg_source, pkg_sha)
+    # use load_all() and reinstall
+    git2r::add(r, file.path(test_pkg, "test.txt"))
+    git2r::commit(r, "adding test.txt")
+    load_all(test_pkg, quiet = TRUE)
+    install(test_pkg, quiet = TRUE)
+    pkg_info <- session_info()$packages
+    pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
+    pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
+    expect_match(pkg_source, pkg_sha)
 
+  })
 })
