@@ -30,18 +30,18 @@ test_that("install on packages adds metadata", {
   if (!dir.exists(tmp_libpath)) dir.create(tmp_libpath)
   .libPaths(c(tmp_libpath, .libPaths()))
 
-  # Reset the libpath on exit
-  on.exit(.libPaths(old_libpaths), add = TRUE)
-
   test_pkg <- create_in_temp("testMetadataInstall")
   mock_use_github(test_pkg)
 
   # first do metadata = NULL
   install(test_pkg, quiet = TRUE, metadata = NULL)
 
-  # unload the package after we are all done testing
+  # cleanup code for when we are all finished
   on.exit(unload(test_pkg), add = TRUE)
+  on.exit(.libPaths(old_libpaths), add = TRUE)
+  on.exit(erase(test_pkg), add = TRUE)
 
+  #browser()
   # first time loading the package
   library("testMetadataInstall")
 
@@ -76,7 +76,5 @@ test_that("install on packages adds metadata", {
   pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
   pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
   expect_match(pkg_source, pkg_sha)
-
-  erase(test_pkg)
 
 })
