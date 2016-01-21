@@ -12,6 +12,7 @@
 #'   pass on to git.
 #' @param force Force installation even if the git SHA1 has not changed since
 #'   the previous install.
+#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @param ... passed on to \code{\link{install}}
 #' @export
 #' @family package installation
@@ -21,17 +22,17 @@
 #' install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
 #'}
 install_git <- function(url, subdir = NULL, branch = NULL, args = character(0),
-                        force = FALSE, ...) {
+                        force = FALSE, quiet = FALSE, ...) {
   if (!missing(args))
     warning("`args` is deprecated", call. = FALSE)
 
   remotes <- lapply(url, git_remote, subdir = subdir, branch = branch)
 
   if (!isTRUE(force)) {
-    remotes <- Filter(different_sha, remotes)
+    remotes <- Filter(function(x) different_sha(x, quiet = quiet), remotes)
   }
 
-  install_remotes(remotes, ...)
+  install_remotes(remotes, quiet = quiet, ...)
 }
 
 git_remote <- function(url, subdir = NULL, branch = NULL) {
