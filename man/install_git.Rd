@@ -5,7 +5,7 @@
 \title{Install a package from a git repository}
 \usage{
 install_git(url, subdir = NULL, branch = NULL, args = character(0),
-  force = FALSE, ...)
+  force = FALSE, quiet = FALSE, ...)
 }
 \arguments{
 \item{url}{Location of package. The url should point to a public or
@@ -21,6 +21,8 @@ pass on to git.}
 
 \item{force}{Force installation even if the git SHA1 has not changed since
 the previous install.}
+
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{...}{passed on to \code{\link{install}}}
 }
