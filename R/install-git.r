@@ -30,7 +30,7 @@ install_git <- function(url, subdir = NULL, branch = NULL, credentials = NULL,
     warning("`args` is deprecated", call. = FALSE)
 
   remotes <- lapply(url, git_remote, subdir = subdir,
-                    branch = branch, credentials=credentials)
+                    branch = branch, credentials = credentials)
 
   if (!isTRUE(force)) {
     remotes <- Filter(function(x) different_sha(x, quiet = quiet), remotes)
