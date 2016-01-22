@@ -8,8 +8,7 @@ release_checks(pkg = ".", built_path = NULL)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information. If the \code{DESCRIPTION}
-file does not exist, it is created using \code{\link{create_description}}.}
+\code{\link{as.package}} for more information.}
 }
 \description{
 This function performs additional checks prior to release. It is called

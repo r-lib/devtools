@@ -53,8 +53,6 @@
 
 * `check_dev_versions()` checks only package dependencies (#983).
 
-* `check_vignette_titles()` added to flag vignettes entitled "Vignette Title" (#960, @jennybc). 
-
 * `check_man()` replaces `check_doc()` (since most other functions are
   named after the corresponding directory). `check_doc()` will hang around
   as an alias for the forseeable future (#958).
@@ -70,6 +68,14 @@
 * `load_all()` resolves a longstanding lazy load database corruption issue when 
   reloading packages which define S3 methods on generics from base or other 
   packages (#1001, @jimhester).
+
+* `release_checks()` gains two new checks:
+
+  * `check_vignette_titles()` checks that your vignette titles aren't the 
+    default "Vignette Title" (#960, @jennybc). 
+  
+  * `check_news_md()` checks that `NEWS.md` isn't in your `.Rbuildignore`
+    (since it's now supported by CRAN, #1042).
 
 * `revdep_check()`:
 

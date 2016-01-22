@@ -4,8 +4,7 @@
 #' automatically by \code{\link{release}()}.
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information. If the \code{DESCRIPTION}
-#'   file does not exist, it is created using \code{\link{create_description}}.
+#'   \code{\link{as.package}} for more information.
 #' @keywords internal
 #' @export
 release_checks <- function(pkg = ".", built_path = NULL) {
@@ -15,6 +14,7 @@ release_checks <- function(pkg = ".", built_path = NULL) {
   check_version(pkg)
   check_dev_versions(pkg)
   check_vignette_titles(pkg)
+  check_news_md(pkg)
 }
 
 check_dev_versions <- function(pkg = ".") {
@@ -71,8 +71,7 @@ check_vignette_titles <- function(pkg = ".") {
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (length(vigns$docs) == 0) return()
 
-  message("Checking vignette titles... ",
-          appendLF = FALSE)
+  message("Checking vignette titles... ", appendLF = FALSE)
   has_Vignette_Title <- function(v, n) {
     h <- readLines(v, n = n)
     any(grepl("Vignette Title", h))
@@ -90,6 +89,40 @@ check_vignette_titles <- function(pkg = ".") {
     "\n  placeholder 'Vignette Title' detected in 'title' field and/or ",
     "\n  'VignetteIndexEntry' for these vignettes:\n",
     paste(" ", names(has_VT)[has_VT], collapse = "\n")
+  )
+
+  return(invisible(FALSE))
+
+}
+
+check_news_md <- function(pkg) {
+  pkg <- as.package(pkg)
+
+  news_path <- file.path(pkg$path, "NEWS.md")
+  if (!file.exists(news_path))
+    return()
+
+  message("Checking that NEWS.md is not ignored... ", appendLF = FALSE)
+
+  ignore_path <- file.path(pkg$path, ".Rbuildignore")
+  if (!file.exists(ignore_path)) {
+    ignore_lines <- character()
+  } else {
+    ignore_lines <- readLines(ignore_path)
+  }
+
+  has_news <- grepl("NEWS\\.md", ignore_lines, fixed = TRUE) |
+              grepl("NEWS.md", ignore_lines, fixed = TRUE)
+
+  if (!any(has_news)) {
+    message("OK")
+    return(invisible(TRUE))
+  }
+
+  message(
+    "WARNING",
+    "\n  NEWS.md is in .Rbuildignore. It is now supported by CRAN ",
+    "\n  so can be included in the package."
   )
 
   return(invisible(FALSE))
