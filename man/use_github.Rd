@@ -5,7 +5,7 @@
 \title{Connect a local repo with GitHub.}
 \usage{
 use_github(auth_token = github_pat(), private = FALSE, pkg = ".",
-  protocol = c("ssh", "https"))
+  protocol = c("ssh", "https"), credentials = NULL)
 }
 \arguments{
 \item{auth_token}{Provide a personal access token (PAT) from
@@ -18,6 +18,8 @@ environment variable.}
 information.}
 
 \item{protocol}{transfer protocol, either "ssh" (the default) or "https"}
+\item{credentials}{optional \code{\link[git2r]{cred_ssh_key}} object to override
+default ssh key behaviour}
 }
 \description{
 If the current repo does not use git, calls \code{\link{use_git}}
