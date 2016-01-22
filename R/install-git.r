@@ -1,6 +1,6 @@
 #' Install a package from a git repository
 #'
-#' It is vectorised so you can install multiple packages with 
+#' It is vectorised so you can install multiple packages with
 #' a single command. You do not need to have git installed.
 #'
 #' @param url Location of package. The url should point to a public or
@@ -23,7 +23,7 @@
 #' install_git("git://github.com/hadley/stringr.git")
 #' install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
 #'}
-install_git <- function(url, subdir = NULL, branch = NULL, credentials=NULL,
+install_git <- function(url, subdir = NULL, branch = NULL, credentials = NULL,
                         args = character(0),
                         force = FALSE, quiet = FALSE, ...) {
   if (!missing(args))
