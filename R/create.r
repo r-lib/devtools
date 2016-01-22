@@ -36,7 +36,7 @@ create <- function(path, description = getOption("devtools.desc"),
   # ensure the parent directory exists
   parent_dir <- normalizePath(dirname(path), winslash = "/", mustWork = FALSE)
   if (!file.exists(parent_dir)) {
-    stop("Parent directory '", parent, "' does not exist", call. = FALSE)
+    stop("Parent directory '", parent_dir, "' does not exist", call. = FALSE)
   }
 
   # allow 'create' to create a new directory, or populate

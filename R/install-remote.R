@@ -47,7 +47,7 @@ add_metadata <- function(pkg_path, meta) {
     pkg_desc <- base::readRDS(binary_desc)
     desc <- as.list(pkg_desc$DESCRIPTION)
     desc <- modifyList(desc, meta)
-    pkg_desc$DESCRIPTION <- setNames(as.character(desc), names(desc))
+    pkg_desc$DESCRIPTION <- stats::setNames(as.character(desc), names(desc))
     base::saveRDS(pkg_desc, binary_desc)
   }
 

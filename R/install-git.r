@@ -99,7 +99,7 @@ remote_package_name.git_remote <- function(remote, ...) {
   }
 
   # git archive return a tar file, so extract it to tempdir and read the DCF
-  untar(tmp, files = description_path, exdir = tempdir())
+  utils::untar(tmp, files = description_path, exdir = tempdir())
 
   read_dcf(file.path(tempdir(), description_path))$Package
 }

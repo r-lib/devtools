@@ -34,15 +34,10 @@ There were 2 NOTEs:
 * I ran R CMD check on all 75 downstream dependencies of devtools.
   Summary at: https://github.com/hadley/devtools/blob/master/revdep/summary.md
 
-* There was 1 failure: 
+* There were 2 ERRORs: 
 
-  * assertive.reflection: due to error in \donttest().
-  * jiebaR: 
-  
-  * NMF: this failed in the same way previously. I have reported the issue
-    to the maintainer, but I'm reasonably certain it's not related to devtools.
+  * assertive.reflection: this is an error in `\donttest()` which is 
+    now found by devtools (since it always does `--run-donttest`.
 
-* As far as I can tell, there were no new failures related to changes in 
-  devtools.
-
-assertive.reflection
+  * jiebaR: this looks like a problem caused by the moving of roxygen2 from
+    imports to suggests. I've notified the author.

@@ -437,7 +437,7 @@ get_objs_from_dots <- function(.dots) {
   }
 
   objs <- vapply(.dots, as.character, character(1))
-  duplicated_objs <- which(setNames(duplicated(objs), objs))
+  duplicated_objs <- which(stats::setNames(duplicated(objs), objs))
   if (length(duplicated_objs) > 0L) {
     objs <- unique(objs)
     warning("Saving duplicates only once: ",
@@ -452,7 +452,7 @@ check_data_paths <- function(paths, overwrite) {
   if (!file.exists(data_path)) dir.create(data_path)
 
   if (!overwrite) {
-    paths_exist <- which(setNames(file.exists(paths), paths))
+    paths_exist <- which(stats::setNames(file.exists(paths), paths))
 
     if (length(paths_exist) > 0L) {
       paths_exist <- unique(names(paths_exist))
