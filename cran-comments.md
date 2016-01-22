@@ -40,4 +40,5 @@ There were 2 NOTEs:
     now found by devtools (since it always does `--run-donttest`.
 
   * jiebaR: this looks like a problem caused by the moving of roxygen2 from
-    imports to suggests. I've notified the author.
+    imports to suggests. I'm working with the authors to get a updated version 
+    to CRAN ASAP.
