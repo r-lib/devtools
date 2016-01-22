@@ -18,8 +18,10 @@ environment variable.}
 information.}
 
 \item{protocol}{transfer protocol, either "ssh" (the default) or "https"}
-\item{credentials}{optional \code{\link[git2r]{cred_ssh_key}} object to override
-default ssh key behaviour}
+
+\item{credentials}{A \code{\link[git2r]{cred_ssh_key}} specifying specific
+ssh credentials or NULL for default ssh key and ssh-agent behaviour.
+Default is NULL.}
 }
 \description{
 If the current repo does not use git, calls \code{\link{use_git}}
@@ -46,7 +48,9 @@ automatically. \code{\link{use_github_links}} is called to populate the
   "https"}). For \code{protocol = "ssh"}, it is assumed that public and
   private keys are in the default locations, \code{~/.ssh/id_rsa.pub} and
   \code{~/.ssh/id_rsa}, respectively, and that \code{ssh-agent} is configured
-  to manage any associated passphrase.
+  to manage any associated passphrase.  Alternatively, specify a
+  \code{\link[git2r]{cred_ssh_key}} object via the \code{credentials}
+  parameter.
 }
 \examples{
 \dontrun{

@@ -26,21 +26,8 @@ archived source tarballs and tries to install an older version instead.}
   }
 
 \item{type}{character, indicating the type of package to download and
-    install.
-
-    Possible values are (currently) \code{"source"},
-    \code{"mac.binary"}, \code{"mac.binary.mavericks"} and
-    \code{"win.binary"}: the binary types can be listed and downloaded
-    but not installed on other platforms.
-
-    The default is the appropriate binary type on Windows and on the
-    CRAN binary OS X distributions, otherwise \code{"source"}.  For the
-    platforms where binary packages are the default, an alternative is
-    \code{"both"} which means \sQuote{try binary if available and
-    current, otherwise try source}.  (This will only choose the binary
-    package if its version number is no older than the source version.
-    In interactive use it will ask before attempting to install source
-    packages.)
+    install.  Will be \code{"source"} except on Windows and some OS X
+    builds: see the section on \sQuote{Binary packages} for those.
   }
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}

@@ -55,7 +55,7 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #'   private keys are in the default locations, \code{~/.ssh/id_rsa.pub} and
 #'   \code{~/.ssh/id_rsa}, respectively, and that \code{ssh-agent} is configured
 #'   to manage any associated passphrase.  Alternatively, specify a
-#'   \code{\link[git2r]{cred_ssh_key} object via the \code{credentials}
+#'   \code{\link[git2r]{cred_ssh_key}} object via the \code{credentials}
 #'   parameter.
 #'
 #' @inheritParams use_git
@@ -64,7 +64,7 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #'   environment variable.
 #' @param private If \code{TRUE}, creates a private repository.
 #' @param protocol transfer protocol, either "ssh" (the default) or "https"
-#' @param credentials A \code{\link[git2r]{cred_ssh_key} specifying specific
+#' @param credentials A \code{\link[git2r]{cred_ssh_key}} specifying specific
 #' ssh credentials or NULL for default ssh key and ssh-agent behaviour.
 #' Default is NULL.
 #' @family git infrastructure
