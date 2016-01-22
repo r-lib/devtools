@@ -53,6 +53,8 @@
 
 * `check_dev_versions()` checks only package dependencies (#983).
 
+* `check_vignette_titles()` added to flag vignettes entitled "Vignette Title" (#960, @jennybc). 
+
 * `check_man()` replaces `check_doc()` (since most other functions are
   named after the corresponding directory). `check_doc()` will hang around
   as an alias for the forseeable future (#958).

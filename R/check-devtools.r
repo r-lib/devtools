@@ -14,6 +14,7 @@ release_checks <- function(pkg = ".", built_path = NULL) {
 
   check_version(pkg)
   check_dev_versions(pkg)
+  check_vignette_titles(pkg)
 }
 
 check_dev_versions <- function(pkg = ".") {
@@ -58,6 +59,37 @@ check_version <- function(pkg = ".") {
   message(
     "WARNING",
     "\n  Version (", pkg$version, ") should have exactly three components"
+  )
+
+  return(invisible(FALSE))
+
+}
+
+check_vignette_titles <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  vigns <- tools::pkgVignettes(dir = pkg$path)
+  if (length(vigns$docs) == 0) return()
+
+  message("Checking vignette titles... ",
+          appendLF = FALSE)
+  has_Vignette_Title <- function(v, n) {
+    h <- readLines(v, n = n)
+    any(grepl("Vignette Title", h))
+  }
+  v <- stats::setNames(vigns$docs, basename(vigns$docs))
+  has_VT <- vapply(v, has_Vignette_Title, logical(1), n = 30)
+
+  if (!any(has_VT)) {
+    message("OK")
+    return(invisible(TRUE))
+  }
+
+  message(
+    "WARNING",
+    "\n  placeholder 'Vignette Title' detected in 'title' field and/or ",
+    "\n  'VignetteIndexEntry' for these vignettes:\n",
+    paste(" ", names(has_VT)[has_VT], collapse = "\n")
   )
 
   return(invisible(FALSE))
