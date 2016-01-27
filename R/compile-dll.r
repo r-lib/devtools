@@ -17,11 +17,12 @@
 #'   \code{\link{as.package}} for more information
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @seealso \code{\link{clean_dll}} to delete the compiled files.
+#' @importFrom withr with_envvar
 #' @export
 compile_dll <- function(pkg = ".", quiet = FALSE) {
   pkg <- as.package(pkg)
 
-  old <- withr::with_envvar(compiler_flags(TRUE), {
+  old <- with_envvar(compiler_flags(TRUE), {
 
     if (!needs_compile(pkg)) return(invisible())
     compile_rcpp_attributes(pkg)

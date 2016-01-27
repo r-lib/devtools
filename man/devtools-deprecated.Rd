@@ -4,8 +4,6 @@
 \alias{devtools-deprecated}
 \alias{in_dir}
 \alias{use_coveralls}
-\alias{with_collate}
-\alias{with_envvar}
 \alias{with_lib}
 \alias{with_libpaths}
 \alias{with_locale}
@@ -18,10 +16,6 @@
 use_coveralls(pkg = ".")
 
 in_dir(new, code)
-
-with_collate(new, code)
-
-with_envvar(new, code, action = "replace")
 
 with_lib(new, code)
 
@@ -49,16 +43,6 @@ Add coveralls to basic travis template to a package.
 \section{\code{in_dir}}{
 
 working directory
-}
-
-\section{\code{with_collate}}{
-
-collation order
-}
-
-\section{\code{with_envvar}}{
-
-environmental variables
 }
 
 \section{\code{with_lib}}{

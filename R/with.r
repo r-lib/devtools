@@ -8,24 +8,6 @@ in_dir <- function(new, code) {
 }
 
 #' @rdname devtools-deprecated
-#' @section \code{with_collate}:
-#' collation order
-#' @export
-with_collate <- function(new, code) {
-  .Deprecated(new = "withr::with_collate", package = "devtools")
-  withr::with_collate(new = new, code = code)
-}
-
-#' @rdname devtools-deprecated
-#' @section \code{with_envvar}:
-#' environmental variables
-#' @export
-with_envvar <- function(new, code, action = "replace") {
-  .Deprecated(new = "withr::with_envvar", package = "devtools")
-  withr::with_envvar(new = new, code = code, action = action)
-}
-
-#' @rdname devtools-deprecated
 #' @section \code{with_lib}:
 #' library paths, prepending to current libpaths
 #' @export
