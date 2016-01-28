@@ -301,15 +301,18 @@ use_package_doc <- function(pkg = ".") {
 #'   "Depends", "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
+#' @param version Type of comparison for the version of \code{package}: must be
+#'  one of "minimum", "exact", or "none".
 #' @family infrastructure
 #' @export
 #' @examples
 #' \dontrun{
 #' use_package("ggplot2")
 #' use_package("dplyr", "suggests")
+#' use_package("stringr", "suggests", version="min")
 #'
 #' }
-use_package <- function(package, type = "Imports", pkg = ".") {
+use_package <- function(package, type = "Imports", pkg = ".", version = "none")  {
   stopifnot(is.character(package), length(package) == 1)
   stopifnot(is.character(type), length(type) == 1)
 
@@ -318,13 +321,26 @@ use_package <- function(package, type = "Imports", pkg = ".") {
       call. = FALSE)
   }
 
+  versions <- c("none", 'minimum', 'exact')
+  names(versions) <- versions
+
+  version <- versions[[match.arg(tolower(version), names(versions))]]
+
+  dependency <- switch(version,
+         minimum = paste0(" (>= ", packageVersion(package), ")"),
+         exact = paste0(" (== ", packageVersion(package), ")"),
+         NULL)
+
   types <- c("Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
   names(types) <- tolower(types)
 
   type <- types[[match.arg(tolower(type), names(types))]]
 
-  message("Adding ", package, " to ", type)
-  add_desc_package(pkg, type, package)
+  # update modification to DESCRIPTION to include version
+  packageAndDependency <- paste0(package, dependency)
+
+  message("Adding ", packageAndDependency, " to ", type)
+  add_desc_package(pkg, type, packageAndDependency)
 
   msg <- switch(type,
     Imports = paste0("Refer to functions with ", package, "::fun()"),
