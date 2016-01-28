@@ -375,7 +375,9 @@ add_desc_package <- function(pkg = ".", field, name) {
     new <- name
     changed <- TRUE
   } else {
-    if (!grepl(name, old)) {
+    # used fixed regexp pattern to account for
+    # name == 'package (>= packageVersion)'
+    if (!grepl(name, old, fixed = TRUE)) {
       new <- paste0(old, ",\n    ", name)
       changed <- TRUE
     } else {
