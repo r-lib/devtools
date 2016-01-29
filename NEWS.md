@@ -1,5 +1,7 @@
 # devtools 1.10.0.9000
 
+# devtools 1.10.0
+
 ## New features
 
 * `curl`, `evaluate`, `roxygen2` and `rversions` have been moved from Imports
