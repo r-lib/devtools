@@ -31,7 +31,7 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
 
   if (is.null(version)) {
     # Grab the latest one: only happens if pulled from CRAN
-    package.path <- info[length(info)]
+    package.path <- info$path[NROW(info)]
   } else {
     package.path <- paste(package, "/", package, "_", version, ".tar.gz",
       sep = "")
@@ -46,25 +46,37 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
 }
 
 package_find_repo <- function(package, repos) {
-  for (repo in repos) {
-    if (length(repos) > 1)
-      message("Trying ", repo)
+  res <- do.call(rbind.data.frame,
+    c(list(make.row.names = FALSE), lapply(repos,
+      function(repo) {
+        if (length(repos) > 1)
+          message("Trying ", repo)
 
-    archive <-
-      tryCatch({
-        con <- gzcon(url(sprintf("%s/src/contrib/Meta/archive.rds", repo), "rb"))
-        on.exit(close(con))
-        readRDS(con)
-      },
-      warning = function(e) list(),
-      error = function(e) list())
+        archive <-
+          tryCatch({
+            con <- gzcon(url(sprintf("%s/src/contrib/Meta/archive.rds", repo), "rb"))
+            on.exit(close(con))
+            readRDS(con)
+          },
+          warning = function(e) list(),
+          error = function(e) list())
 
-    info <- archive[[package]]
-    if (!is.null(info)) {
-      info$repo <- repo
-      return(info)
-    }
+        info <- archive[[package]]
+        info$path <- rownames(info)
+        if (!is.null(info)) {
+          info$repo <- repo
+          info
+        }
+      })))
+
+  # order by the path (which contains the version) and then by modified time.
+  # This needs to be done in case the same package is available from multiple
+  # repositories.
+  res <- res[order(res$path, res$mtime), ]
+
+  if (NROW(res) == 0) {
+    stop(sprintf("couldn't find package '%s'", package))
   }
 
-  stop(sprintf("couldn't find package '%s'", package))
+  res
 }
