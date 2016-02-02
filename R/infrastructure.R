@@ -304,7 +304,8 @@ use_package_doc <- function(pkg = ".") {
 #' @param version Value indicating whether \code{package}'s version should be included
 #'   in \code{pkg}'s DESCRIPTION. Either \code{NULL}, \code{TRUE}, or a valid version
 #'   string. If \code{version} is \code{TRUE}, \code{package}'s current version
-#'   will be used. See examples.
+#'   will be used (see examples). If \code{version} is a string that is not a
+#'   valid version, an error will be thrown.
 #' @param compare The comparator used for \code{package}'s version. All valid
 #'   CRAN comparators (i.e. \code{==}, \code{>=}, \code{<=}, \code{>}, and
 #'   \code{<}) are accepted, but not considered unless \code{version} is
@@ -335,6 +336,9 @@ use_package <- function(package, type = "Imports", pkg = ".", version = NULL,
     # add a version dependency
     if (isTRUE(version)) {
       version <- packageVersion(package)
+    } else {
+      # check that version is a valid version string
+      version <- package_version(version)
     }
     compare <- match.arg(compare)
     package_txt <- paste0(package, " (", compare, " ", version, ")")

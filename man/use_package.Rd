@@ -19,7 +19,8 @@ use_package(package, type = "Imports", pkg = ".", version = NULL,
 \item{version}{Value indicating whether \code{package}'s version should be included
 in \code{pkg}'s DESCRIPTION. Either \code{NULL}, \code{TRUE}, or a valid version
 string. If \code{version} is \code{TRUE}, \code{package}'s current version
-will be used. See examples.}
+will be used (see examples). If \code{version} is a string that is not a
+valid version, an error will be thrown.}
 
 \item{compare}{The comparator used for \code{package}'s version. All valid
 CRAN comparators (i.e. \code{==}, \code{>=}, \code{<=}, \code{>}, and
