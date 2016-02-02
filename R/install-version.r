@@ -69,14 +69,12 @@ package_find_repo <- function(package, repos) {
         }
       })))
 
-  # order by the path (which contains the version) and then by modified time.
-  # This needs to be done in case the same package is available from multiple
-  # repositories.
-  res <- res[order(res$path, res$mtime), ]
-
   if (NROW(res) == 0) {
     stop(sprintf("couldn't find package '%s'", package))
   }
 
-  res
+  # order by the path (which contains the version) and then by modified time.
+  # This needs to be done in case the same package is available from multiple
+  # repositories.
+  res[order(res$path, res$mtime), ]
 }

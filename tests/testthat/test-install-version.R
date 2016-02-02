@@ -15,11 +15,11 @@ test_that("package_find_repo() works correctly with multiple repos", {
 test_that("package_find_repo() works correctly with archived packages", {
   # Issue 1033
 
-  repos <- c(CRAN = "https://cran.rstudio.com")
+  repos <- c(CRAN = "http://cran.rstudio.com")
   package <- "igraph0"
   res <- package_find_repo(package, repos = repos)
 
   expect_gte(NROW(res), 8L)
-  expect_true(all(res$repo == "https://cran.rstudio.com"))
+  expect_true(all(res$repo == "http://cran.rstudio.com"))
   expect_true(all(grepl("^igraph0", res$path)))
 })
