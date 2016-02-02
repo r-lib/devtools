@@ -301,46 +301,54 @@ use_package_doc <- function(pkg = ".") {
 #'   "Depends", "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
-#' @param version Type of comparison for the version of \code{package}: must be
-#'  one of "minimum", "exact", or "none".
+#' @param version Value indicating whether \code{package}'s version should be included
+#'   in \code{pkg}'s DESCRIPTION. Either \code{NULL}, \code{TRUE}, or a valid version
+#'   string. If \code{version} is \code{TRUE}, \code{package}'s current version
+#'   will be used. See examples.
+#' @param compare The comparator used for \code{package}'s version. All valid
+#'   CRAN comparators (i.e. \code{==}, \code{>=}, \code{<=}, \code{>}, and
+#'   \code{<}) are accepted, but not considered unless \code{version} is
+#'   non-\code{NULL}.
 #' @family infrastructure
 #' @export
 #' @examples
 #' \dontrun{
 #' use_package("ggplot2")
 #' use_package("dplyr", "suggests")
-#' use_package("stringr", "suggests", version="min")
-#'
+#' use_package("devtools", version = TRUE) # "devtools (>= 1.10.0.9000)"
+#' use_package("devtools", version = TRUE, compare = "==") # "devtools (== 1.10.0.9000)"
+#' use_package("devtools", version = "1.10") # "devtools (>= 1.10)"
+#' use_package("devtools", version = "1.10", compare = ">") # "devtools (> 1.10)"
 #' }
-use_package <- function(package, type = "Imports", pkg = ".", version = "none")  {
+use_package <- function(package, type = "Imports", pkg = ".", version = NULL,
+                        compare =  c(">=", ">", "==", "<=", "<")) {
+
   stopifnot(is.character(package), length(package) == 1)
   stopifnot(is.character(type), length(type) == 1)
 
   if (!is_installed(package)) {
     stop(package, " must be installed before you can take a dependency on it",
-      call. = FALSE)
+         call. = FALSE)
   }
 
-  versions <- c("none", 'minimum', 'exact')
-  names(versions) <- versions
-
-  version <- versions[[match.arg(tolower(version), names(versions))]]
-
-  dependency <- switch(version,
-         minimum = paste0(" (>= ", packageVersion(package), ")"),
-         exact = paste0(" (== ", packageVersion(package), ")"),
-         NULL)
+  if (!is.null(version)) {
+    # add a version dependency
+    if (isTRUE(version)) {
+      version <- packageVersion(package)
+    }
+    compare <- match.arg(compare)
+    package_txt <- paste0(package, " (", compare, " ", version, ")")
+  } else {
+    package_txt <- package
+  }
 
   types <- c("Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
   names(types) <- tolower(types)
 
   type <- types[[match.arg(tolower(type), names(types))]]
 
-  # update modification to DESCRIPTION to include version
-  packageAndDependency <- paste0(package, dependency)
-
-  message("Adding ", packageAndDependency, " to ", type)
-  add_desc_package(pkg, type, packageAndDependency)
+  message("Adding ", package_txt, " to ", type)
+  add_desc_package(pkg, type, package_txt)
 
   msg <- switch(type,
     Imports = paste0("Refer to functions with ", package, "::fun()"),

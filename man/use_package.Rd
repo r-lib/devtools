@@ -4,7 +4,8 @@
 \alias{use_package}
 \title{Use specified package.}
 \usage{
-use_package(package, type = "Imports", pkg = ".", version = "none")
+use_package(package, type = "Imports", pkg = ".", version = NULL,
+  compare = c(">=", ">", "==", "<=", "<"))
 }
 \arguments{
 \item{package}{Name of package to depend on.}
@@ -15,8 +16,15 @@ use_package(package, type = "Imports", pkg = ".", version = "none")
 \item{pkg}{package description, can be path or package name. See
 \code{\link{as.package}} for more information.}
 
-\item{version}{Type of comparison for the version of \code{package}: must be
-one of "minimum", "exact", or "none".}
+\item{version}{Value indicating whether \code{package}'s version should be included
+in \code{pkg}'s DESCRIPTION. Either \code{NULL}, \code{TRUE}, or a valid version
+string. If \code{version} is \code{TRUE}, \code{package}'s current version
+will be used. See examples.}
+
+\item{compare}{The comparator used for \code{package}'s version. All valid
+CRAN comparators (i.e. \code{==}, \code{>=}, \code{<=}, \code{>}, and
+\code{<}) are accepted, but not considered unless \code{version} is
+non-\code{NULL}.}
 }
 \description{
 This adds a dependency to DESCRIPTION and offers a little advice
@@ -26,8 +34,10 @@ about how to best use it.
 \dontrun{
 use_package("ggplot2")
 use_package("dplyr", "suggests")
-use_package("stringr", "suggests", version="min")
-
+use_package("devtools", version = TRUE) # "devtools (>= 1.10.0.9000)"
+use_package("devtools", version = TRUE, compare = "==") # "devtools (== 1.10.0.9000)"
+use_package("devtools", version = "1.10") # "devtools (>= 1.10)"
+use_package("devtools", version = "1.10", compare = ">") # "devtools (> 1.10)"
 }
 }
 \seealso{
