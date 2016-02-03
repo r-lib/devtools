@@ -270,9 +270,6 @@ remote_package_name.github_remote <- function(remote, url = "https://github.com"
 
 #' @export
 remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
-  if (!is.null(remote$sha)) {
-    return(remote$sha)
-  }
   tryCatch({
     res <- git2r::remote_ls(
       paste0(url, "/", remote$username, "/", remote$repo, ".git"),

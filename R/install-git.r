@@ -110,9 +110,6 @@ remote_package_name.git_remote <- function(remote, ...) {
 
 #' @export
 remote_sha.git_remote <- function(remote, ...) {
-  if (!is.null(remote$sha)) {
-    return(remote$sha)
-  }
   tryCatch({
     res <- git2r::remote_ls(remote$url, ...)
 
