@@ -135,6 +135,7 @@ packageDescription2remote <- function(x, ...) {
       svn_subdir = x$RemoteSvnSubdir,
       branch = x$RemoteBranch,
       revision = x$RemoteRevision,
+      sha = x$RemoteRevision, # set this as well for local_sha
       args = x$RemoteArgs),
     local = remote("local",
       path = x$RemoteUrl,

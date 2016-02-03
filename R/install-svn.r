@@ -51,7 +51,7 @@ remote_download.svn_remote <- function(x, quiet = FALSE) {
   bundle <- tempfile()
   svn_binary_path <- svn_path()
 
-  args <- c(args, x$args, full_svn_url(x), bundle)
+  args <- c("co", x$args, full_svn_url(x), bundle)
 
   message(shQuote(svn_binary_path), " ", paste0(args, collapse = " "))
   request <- system2(svn_binary_path, args, stdout = FALSE, stderr = FALSE)
@@ -63,7 +63,7 @@ remote_download.svn_remote <- function(x, quiet = FALSE) {
 
   withr::with_dir(bundle, {
     if (!is.null(x$revision)) {
-      request <- system2(svn_binary_path, paste('update -r', x$revision))
+      request <- system2(svn_binary_path, paste("update -r", x$revision))
       if (request > 0) {
         stop("There was a problem switching to the requested SVN revision", call. = FALSE)
       }
@@ -71,19 +71,6 @@ remote_download.svn_remote <- function(x, quiet = FALSE) {
   })
 
   bundle
-}
-
-full_svn_url <- function(x) {
-  if (!is.null(x$branch)) {
-    url <- file.path(x$url, "branches", x$branch)
-  } else {
-    url <- file.path(x$url, "trunk")
-  }
-  if (!is.null(x$svn_subdir)) {
-    url <- file.path(url, x$svn_subdir)
-  }
-
-  url
 }
 
 #' @export
@@ -103,7 +90,8 @@ remote_metadata.svn_remote <- function(x, bundle = NULL, source = NULL) {
     RemoteSvnSubdir = x$svn_subdir,
     RemoteBranch = x$branch,
     RemoteArgs = if (length(x$args) > 0) paste0(deparse(x$args), collapse = " "),
-    RemoteRevision = revision
+    RemoteRevision = revision,
+    RemoteSha = revision # for compatibility with other remotes
   )
 }
 
@@ -133,6 +121,7 @@ svn_path <- function(svn_binary_name = NULL) {
   stop("SVN does not seem to be installed on your system.", call. = FALSE)
 }
 
+#' @export
 remote_package_name.svn_remote <- function(remote, ...) {
   description_url <- file.path(full_svn_url(remote), "DESCRIPTION")
   tmp_file <- tempfile()
@@ -144,8 +133,9 @@ remote_package_name.svn_remote <- function(remote, ...) {
   read_dcf(tmp_file)$Package
 }
 
+#' @export
 remote_sha.svn_remote <- function(remote, ...) {
-  svn_revision(remote$url)
+  svn_revision(full_svn_url(remote))
 }
 
 svn_revision <- function(url = NULL, svn_binary_path = svn_path()) {
@@ -154,4 +144,17 @@ svn_revision <- function(url = NULL, svn_binary_path = svn_path()) {
     stop("There was a problem retrieving the current SVN revision", call. = FALSE)
   }
   gsub(".*<commit[[:space:]]+revision=\"([[:digit:]]+)\">.*", "\\1", paste(collapse = "\n", request))
+}
+
+full_svn_url <- function(x) {
+  if (!is.null(x$branch)) {
+    url <- file.path(x$url, "branches", x$branch)
+  } else {
+    url <- file.path(x$url, "trunk")
+  }
+  if (!is.null(x$svn_subdir)) {
+    url <- file.path(url, x$svn_subdir)
+  }
+
+  url
 }
