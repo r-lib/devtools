@@ -108,3 +108,39 @@ remote_download <- function(x, quiet = FALSE) UseMethod("remote_download")
 remote_metadata <- function(x, bundle = NULL, source = NULL) UseMethod("remote_metadata")
 remote_package_name <- function(remote, ...) UseMethod("remote_package_name")
 remote_sha <- function(remote, ...) UseMethod("remote_sha")
+
+packageDescription2remote <- function(x, ...) {
+  switch(x$RemoteType,
+    github = remote("github",
+      host = x$RemoteHost,
+      repo = x$RemoteRepo,
+      username = x$RemoteUsername,
+      ref = x$RemoteRef,
+      sha = x$RemoteSha,
+      subdir = x$RemoteSubdir),
+    git = remote("git",
+      url = x$RemoteUrl,
+      ref = x$RemoteRef,
+      sha = x$RemoteSha,
+      subdir = x$RemoteSubdir),
+    bitbucket = remote("bitbucket",
+      host = x$RemoteHost,
+      repo = x$RemoteRepo,
+      username = x$RemoteUsername,
+      ref = x$RemoteRef,
+      sha = x$RemoteSha,
+      subdir = x$RemoteSubdir),
+    svn = remote("svn",
+      url = x$RemoteUrl,
+      svn_subdir = x$RemoteSvnSubdir,
+      branch = x$RemoteBranch,
+      revision = x$RemoteRevision,
+      args = x$RemoteArgs),
+    local = remote("local",
+      path = x$RemoteUrl,
+      subdir = x$Reomte,
+      sha = x$RemoteSha,
+      username = x$RemoteUsername,
+      repo = x$RemoteRepo),
+  )
+}
