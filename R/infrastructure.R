@@ -291,6 +291,27 @@ use_package_doc <- function(pkg = ".") {
   writeLines(out, file.path(pkg$path, path))
 }
 
+# help function for use_package
+# takes the same arguments as use_package
+build_package_txt <- function(package, version = NULL,
+                              compare =  c(">=", ">", "==", "<=", "<")) {
+  if (!is.null(version)) {
+    # add a version dependency
+    if (isTRUE(version)) {
+      version <- packageVersion(package)
+    } else {
+      # check that version is a valid version string
+      version <- package_version(version)
+    }
+    compare <- match.arg(compare)
+    package_txt <- paste0(package, " (", compare, " ", version, ")")
+  } else {
+    package_txt <- package
+  }
+
+  return(package_txt)
+}
+
 #' Use specified package.
 #'
 #' This adds a dependency to DESCRIPTION and offers a little advice
@@ -332,19 +353,7 @@ use_package <- function(package, type = "Imports", pkg = ".", version = NULL,
          call. = FALSE)
   }
 
-  if (!is.null(version)) {
-    # add a version dependency
-    if (isTRUE(version)) {
-      version <- packageVersion(package)
-    } else {
-      # check that version is a valid version string
-      version <- package_version(version)
-    }
-    compare <- match.arg(compare)
-    package_txt <- paste0(package, " (", compare, " ", version, ")")
-  } else {
-    package_txt <- package
-  }
+  package_txt <- build_package_txt(package, version, compare)
 
   types <- c("Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
   names(types) <- tolower(types)
