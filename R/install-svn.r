@@ -31,7 +31,7 @@ install_svn <- function(url, subdir = NULL, branch = NULL, args = character(0),
   install_remotes(remotes, ...)
 }
 
-svn_remote <- function(url, svn_subdir = NULL, branch = NULL, revision = revision,
+svn_remote <- function(url, svn_subdir = NULL, branch = NULL, revision = NULL,
   args = character(0)) {
   remote("svn",
     url = url,
@@ -70,26 +70,36 @@ remote_download.svn_remote <- function(x, quiet = FALSE) {
     stop("There seems to be a problem retrieving this SVN-URL.", call. = FALSE)
   }
 
-  if (!is.null(x$revision)) {
-    pwd <- setwd(bundle)
-    on.exit(setwd(pwd))
-
-    request <- system2(svn_binary_path, paste('update -r', x$revision))
-    if (request > 0) {
-      stop("There was a problem switching to the requested SVN revision", call. = FALSE)
+  withr::with_dir(bundle, {
+    if (!is.null(x$revision)) {
+      request <- system2(svn_binary_path, paste('update -r', x$revision))
+      if (request > 0) {
+        stop("There was a problem switching to the requested SVN revision", call. = FALSE)
+      }
     }
-  }
+  })
 
   bundle
 }
 
 #' @export
 remote_metadata.svn_remote <- function(x, bundle = NULL, source = NULL) {
+
+  if (!is.null(bundle)) {
+    withr::with_dir(bundle, {
+      revision <- svn_revision()
+    })
+  } else {
+    revision <- NULL
+  }
+
   list(
     RemoteType = "svn",
     RemoteUrl = x$url,
-    RemoteSubdir = x$subdir,
-    RemoteArgs = if (length(x$args) > 0) paste0(deparse(x$args), collapse = " ")
+    RemoteSvnSubdir = x$svn_subdir,
+    RemoteBranch = x$branch,
+    RemoteArgs = if (length(x$args) > 0) paste0(deparse(x$args), collapse = " "),
+    RemoteRevision = revision
   )
 }
 
@@ -117,4 +127,16 @@ svn_path <- function(svn_binary_name = NULL) {
   }
 
   stop("SVN does not seem to be installed on your system.", call. = FALSE)
+}
+
+remote_sha.svn_remote <- function(remote, ...) {
+  svn_revision(remote$url)
+}
+
+svn_revision <- function(url = NULL, svn_binary_path = svn_path()) {
+  request <- system2(svn_binary_path, paste("info --xml", url), stdout = TRUE)
+  if (!is.null(attr(request, "status")) || identical(attr(request, "status"), 0L)) {
+    stop("There was a problem retrieving the current SVN revision", call. = FALSE)
+  }
+  gsub(".*<commit[[:space:]]+revision=\"([[:digit:]]+)\">.*", "\\1", paste(collapse = "\n", request))
 }
