@@ -144,9 +144,10 @@ package2remote <- function(x, ...) {
       args = x$RemoteArgs),
     local = remote("local",
       path = x$RemoteUrl,
-      subdir = x$Reomte,
+      branch = x$RemoteBranch,
+      subdir = x$RemoteSubdir,
       sha = x$RemoteSha,
       username = x$RemoteUsername,
-      repo = x$RemoteRepo),
+      repo = x$RemoteRepo)
   )
 }
