@@ -21,16 +21,12 @@
 #' }
 install_bitbucket <- function(repo, username, ref = "master", subdir = NULL,
                               auth_user = NULL, password = NULL, force = FALSE,
-                              quiet = FALSE, ...) {
+                              ...) {
 
   remotes <- lapply(repo, bitbucket_remote, username = username, ref = ref,
     subdir = subdir, auth_user = auth_user, password = password)
 
-  if (!isTRUE(force)) {
-    remotes <- Filter(function(x) different_sha(x, quiet = quiet), remotes)
-  }
-
-  install_remotes(remotes, quiet = quiet, ...)
+  install_remotes(remotes, ...)
 }
 
 bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,

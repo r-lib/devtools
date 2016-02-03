@@ -8,8 +8,18 @@
 #'   \item calls install
 #' }
 #' @noRd
-install_remote <- function(remote, ..., quiet = FALSE) {
+install_remote <- function(remote, ..., force = FALSE, quiet = FALSE) {
   stopifnot(is.remote(remote))
+
+  if (!isTRUE(force) && !different_sha(remote)) {
+    if (!quiet) {
+      message(
+        "Skipping install for ", sub("_remote", "", class(remote)[1L]), " remote,",
+        " the SHA1 (", substr(local_sha, 1L, 8L), ") has not changed since last install.\n",
+        "  Use `force = TRUE` to force installation")
+    }
+    return()
+  }
 
   bundle <- remote_download(remote, quiet = quiet)
   on.exit(unlink(bundle), add = TRUE)
@@ -76,8 +86,7 @@ is.remote <- function(x) inherits(x, "remote")
 
 different_sha <- function(remote = NULL,
                           remote_sha = NULL,
-                          local_sha = NULL,
-                          quiet = FALSE, ...) {
+                          local_sha = NULL) {
   if (is.null(remote_sha)) {
     remote_sha <- remote_sha(remote)
   }
@@ -88,12 +97,6 @@ different_sha <- function(remote = NULL,
 
   same <- remote_sha == local_sha
   same <- isTRUE(same) && !is.na(same)
-  if (!quiet && same) {
-     message(
-       "Skipping install for ", sub("_remote", "", class(remote)[1L]), " remote,",
-       " the SHA1 (", substr(local_sha, 1L, 8L), ") has not changed since last install.\n",
-       "  Use `force = TRUE` to force installation")
-  }
   !same
 }
 

@@ -5,8 +5,8 @@
 \title{Attempts to install a package directly from GitHub.}
 \usage{
 install_github(repo, username = NULL, ref = "master", subdir = NULL,
-  auth_token = github_pat(quiet), host = "api.github.com", force = FALSE,
-  quiet = FALSE, ...)
+  auth_token = github_pat(quiet), host = "api.github.com", quiet = FALSE,
+  ...)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -32,12 +32,12 @@ the \code{GITHUB_PAT} environment variable.}
 \item{host}{GitHub API host to use. Override with your GitHub enterprise
 hostname, for example, \code{"github.hostname.com/api/v3"}.}
 
-\item{force}{Force installation even if the git SHA1 has not changed since
-the previous install.}
-
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
+
+\item{force}{Force installation even if the git SHA1 has not changed since
+the previous install.}
 }
 \description{
 This function is vectorised on \code{repo} so you can install multiple

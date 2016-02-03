@@ -3,13 +3,10 @@
 \name{update_remotes}
 \alias{update_remotes}
 \usage{
-update_remotes(pkgs = NULL, force = FALSE, quiet = FALSE, ...)
+update_remotes(pkgs = NULL, ...)
 }
 \arguments{
 \item{pkgs}{Package names to update}
-
-\item{force}{Force installation even if the git SHA1 has not changed since
-the previous install.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 }

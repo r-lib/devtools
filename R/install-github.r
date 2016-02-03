@@ -56,16 +56,11 @@
 install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
                            auth_token = github_pat(quiet),
-                           host = "api.github.com",
-                           force = FALSE, quiet = FALSE,
+                           host = "api.github.com", quiet = FALSE,
                            ...) {
 
   remotes <- lapply(repo, github_remote, username = username, ref = ref,
     subdir = subdir, auth_token = auth_token, host = host)
-
-  if (!isTRUE(force)) {
-    remotes <- Filter(function(x) different_sha(x, quiet = quiet), remotes)
-  }
 
   install_remotes(remotes, quiet = quiet, ...)
 }
