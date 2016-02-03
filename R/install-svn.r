@@ -51,16 +51,7 @@ remote_download.svn_remote <- function(x, quiet = FALSE) {
   bundle <- tempfile()
   svn_binary_path <- svn_path()
 
-  args <- c('co')
-  if (!is.null(x$branch)) {
-    url <- file.path(x$url, "branches", x$branch)
-  } else {
-    url <- file.path(x$url, "trunk")
-  }
-  if (!is.null(x$svn_subdir)) {
-    url <- file.path(url, x$svn_subdir);
-  }
-  args <- c(args, x$args, url, bundle)
+  args <- c(args, x$args, full_svn_url(x), bundle)
 
   message(shQuote(svn_binary_path), " ", paste0(args, collapse = " "))
   request <- system2(svn_binary_path, args, stdout = FALSE, stderr = FALSE)
@@ -80,6 +71,19 @@ remote_download.svn_remote <- function(x, quiet = FALSE) {
   })
 
   bundle
+}
+
+full_svn_url <- function(x) {
+  if (!is.null(x$branch)) {
+    url <- file.path(x$url, "branches", x$branch)
+  } else {
+    url <- file.path(x$url, "trunk")
+  }
+  if (!is.null(x$svn_subdir)) {
+    url <- file.path(url, x$svn_subdir)
+  }
+
+  url
 }
 
 #' @export
@@ -129,13 +133,24 @@ svn_path <- function(svn_binary_name = NULL) {
   stop("SVN does not seem to be installed on your system.", call. = FALSE)
 }
 
+remote_package_name.svn_remote <- function(remote, ...) {
+  description_url <- file.path(full_svn_url(remote), "DESCRIPTION")
+  tmp_file <- tempfile()
+  on.exit(rm(tmp_file))
+  response <- system2(svn_path(), paste("cat", description_url), stdout = tmp_file)
+  if (!identical(response, 0L)) {
+    stop("There was a problem retrieving the current SVN revision", call. = FALSE)
+  }
+  read_dcf(tmp_file)$Package
+}
+
 remote_sha.svn_remote <- function(remote, ...) {
   svn_revision(remote$url)
 }
 
 svn_revision <- function(url = NULL, svn_binary_path = svn_path()) {
   request <- system2(svn_binary_path, paste("info --xml", url), stdout = TRUE)
-  if (!is.null(attr(request, "status")) || identical(attr(request, "status"), 0L)) {
+  if (!is.null(attr(request, "status")) && !identical(attr(request, "status"), 0L)) {
     stop("There was a problem retrieving the current SVN revision", call. = FALSE)
   }
   gsub(".*<commit[[:space:]]+revision=\"([[:digit:]]+)\">.*", "\\1", paste(collapse = "\n", request))
