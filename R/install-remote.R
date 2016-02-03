@@ -109,7 +109,12 @@ remote_metadata <- function(x, bundle = NULL, source = NULL) UseMethod("remote_m
 remote_package_name <- function(remote, ...) UseMethod("remote_package_name")
 remote_sha <- function(remote, ...) UseMethod("remote_sha")
 
-packageDescription2remote <- function(x, ...) {
+package2remote <- function(x, ...) {
+  x <- packageDescription(x)
+  if (is.null(x$RemoteType)) {
+    return(NULL)
+  }
+
   switch(x$RemoteType,
     github = remote("github",
       host = x$RemoteHost,
