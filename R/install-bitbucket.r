@@ -80,16 +80,12 @@ remote_download.bitbucket_remote <- function(x, quiet = FALSE) {
 
 #' @export
 remote_metadata.bitbucket_remote <- function(x, bundle = NULL, source = NULL) {
-  # Determine sha as efficiently as possible
-  if (!is.null(x$sha)) {
-    # Might be cached already (because re-installing)
-    sha <- x$sha
-  } else if (!is.null(bundle)) {
+  if (!is.null(bundle)) {
     # Might be able to get from zip archive
     sha <- git_extract_sha1(bundle)
   } else {
-    # Don't know
-    sha <- NULL
+    # Otherwise can lookup with remote_ls
+    sha <- remote_sha(x)
   }
 
   list(
