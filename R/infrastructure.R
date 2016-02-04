@@ -138,9 +138,11 @@ use_rcpp <- function(pkg = ".") {
               c("*.o", "*.so", "*.dll"))
 
   message(
-    "Next, include the following roxygen tags somewhere in your package:\n",
+    "Next, include the following roxygen tags somewhere in your package:\n\n",
     "#' @useDynLib ", pkg$package, "\n",
-    "#' @importFrom Rcpp sourceCpp"
+    "#' @importFrom Rcpp sourceCpp\n",
+    "NULL\n\n",
+    "Then run document()"
   )
 }
 
