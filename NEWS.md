@@ -73,6 +73,9 @@
 
 * `use_readme_md()` creates a basic `README.md` template (#1064).
 
+* `revdep_check()` doesn't complain about missing `git2r` package anymore
+  (#1068, @krlmlr).
+
 # devtools 1.10.0
 
 ## New features
