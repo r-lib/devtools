@@ -37,8 +37,10 @@
 #' @param check if \code{TRUE}, run checking, otherwise omit it.  This
 #'   is useful if you've just checked your package and you're ready to
 #'   release it.
+#' @param args An optional character vector of additional command
+#'   line arguments to be passed to \code{R CMD build}.
 #' @export
-release <- function(pkg = ".", check = TRUE) {
+release <- function(pkg = ".", check = TRUE, args = NULL) {
   dr_d <- dr_devtools()
   if (!dr_d)
     print(dr_d)
@@ -63,7 +65,8 @@ release <- function(pkg = ".", check = TRUE) {
   }
 
   if (check) {
-    check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE)
+    check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE,
+          build_args = args)
     release_checks(pkg)
 
     if (yesno("Was package check successful?"))
@@ -142,7 +145,7 @@ release <- function(pkg = ".", check = TRUE) {
   if (yesno("Is your email address ", maintainer(pkg)$email, "?"))
     return(invisible())
 
-  built_path <- build_cran(pkg)
+  built_path <- build_cran(pkg, args = args)
 
   if (yesno("Ready to submit?"))
     return(invisible())
@@ -275,16 +278,17 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @inheritParams release
 #' @export
 #' @keywords internal
-submit_cran <- function(pkg = ".") {
-  built_path <- build_cran(pkg)
+submit_cran <- function(pkg = ".", args = NULL) {
+  built_path <- build_cran(pkg, args = args)
   upload_cran(pkg, built_path)
 }
 
-build_cran <- function(pkg) {
+build_cran <- function(pkg, args) {
   message("Building")
-  built_path <- build(pkg, tempdir(), manual = TRUE)
+  built_path <- build(pkg, tempdir(), manual = TRUE, args = args)
   message("File size: ",
           format(as.object_size(file.info(built_path)$size), units = "auto"))
   built_path
