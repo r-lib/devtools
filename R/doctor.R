@@ -75,6 +75,9 @@ dr_github <- function(path = ".") {
   if (!uses_git(path)) {
     return(doctor("github", "Current path is not a git repository"))
   }
+  if (!uses_github(path)) {
+    return(doctor("github", "Current path is not a GitHub repository"))
+  }
 
   msg <- character()
   r <- git2r::repository(path, discover = TRUE)
