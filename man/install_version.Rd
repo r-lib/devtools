@@ -41,7 +41,8 @@ if you do by running \code{\link{has_devel}}.
 Jeremy Stephens
 }
 \seealso{
-Other package installation: \code{\link{install_bitbucket}},
+Other package installation: \code{\link{install_CRAN}},
+  \code{\link{install_bitbucket}},
   \code{\link{install_github}}, \code{\link{install_git}},
   \code{\link{install_svn}}, \code{\link{install_url}},
   \code{\link{install}}, \code{\link{uninstall}}

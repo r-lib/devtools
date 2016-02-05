@@ -275,10 +275,15 @@ update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
     behind <- object$package[is.na(object$installed)]
   }
   if (length(behind) > 0L) {
-    install_packages(behind, repos = attr(object, "repos"),
-      type = attr(object, "type"), quiet = quiet, ...)
+    if (upgrade) {
+      remotes <- compact(lapply(behind, package2remote))
+
+      install_remotes(remotes, repos = attr(object, "repos"),
+        type = attr(object, "type"), quiet = quiet, ...)
+    }
   }
-  behind
+
+  invisible(behind)
 }
 
 install_packages <- function(pkgs, repos = getOption("repos"),

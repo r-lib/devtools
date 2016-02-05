@@ -117,10 +117,18 @@ remote_metadata <- function(x, bundle = NULL, source = NULL) UseMethod("remote_m
 remote_package_name <- function(remote, ...) UseMethod("remote_package_name")
 remote_sha <- function(remote, ...) UseMethod("remote_sha")
 
-package2remote <- function(x, ...) {
+package2remote <- function(x, repos = getOption("repos"), type = getOption("pkgType")) {
   x <- packageDescription(x)
   if (is.null(x$RemoteType)) {
-    return(NULL)
+    if (!is.null(x$Repository) && x$Repository == "CRAN") {
+      remote("CRAN",
+        name = x$Package,
+      repos = repos,
+      pkg_type = type,
+      sha = x$Version)
+    } else {
+      return(NULL)
+    }
   }
 
   switch(x$RemoteType,
@@ -147,8 +155,7 @@ package2remote <- function(x, ...) {
       url = x$RemoteUrl,
       svn_subdir = x$RemoteSvnSubdir,
       branch = x$RemoteBranch,
-      revision = x$RemoteRevision,
-      sha = x$RemoteRevision, # set this as well for local_sha
+      sha = x$RemoteRevision,
       args = x$RemoteArgs),
     local = remote("local",
       path = x$RemoteUrl,
@@ -156,6 +163,12 @@ package2remote <- function(x, ...) {
       subdir = x$RemoteSubdir,
       sha = x$RemoteSha,
       username = x$RemoteUsername,
-      repo = x$RemoteRepo)
-  )
+      repo = x$RemoteRepo),
+    CRAN = remote("CRAN",
+      name = x$RemoteName,
+      repos = eval(parse(text = x$RemoteRepos)),
+      pkg_type = x$RemotePkgType,
+      sha = x$RemoteSha
+      )
+    )
 }
