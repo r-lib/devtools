@@ -148,13 +148,16 @@ check_logs <- function(path) {
 #'   call to \code{\link{check}}
 #' @param error,warning,note logical, indicates if errors, warnings and/or
 #'   notes should be returned
+#' @param print print the result before returning.
+#' @param fail Signal an error if the given class of error is (or worse) occurred.
 #' @return a character vector with the relevant messages, can have length zero
 #'   if no messages are found
 #'
 #' @seealso \code{\link{check}}, \code{\link{revdep_check}}
 #'
 #' @export
-check_failures <- function(path, error = TRUE, warning = TRUE, note = TRUE) {
+check_failures <- function(path, error = TRUE, warning = TRUE, note = TRUE,
+  print = FALSE, fail = c("none", "error", "warning", "note")) {
   check_dir <- file.path(path, "00check.log")
   check_log <- paste(readLines(check_dir), collapse = "\n")
 
@@ -164,13 +167,26 @@ check_failures <- function(path, error = TRUE, warning = TRUE, note = TRUE) {
 
   pieces <- strsplit(check_log, "\n\\* ")[[1]]
 
-  is_error <- grepl("... ERROR", pieces)
-  is_warn  <- grepl("... WARN", pieces)
-  is_note  <- grepl("... NOTE", pieces)
+  is_error <- grepl("... ERROR", pieces, fixed = TRUE)
+  is_warn  <- grepl("... WARN", pieces, fixed = TRUE)
+  is_note  <- grepl("... NOTE", pieces, fixed = TRUE)
   is_problem <- (error & is_error) | (warning & is_warn) | (note & is_note)
 
-  problems <- grepl("... (WARN|ERROR|NOTE)", pieces)
+  problems <- grepl("[.][.][.] (WARN|ERROR|NOTE)", pieces)
   cran_version <- grepl("CRAN incoming feasibility", pieces)
 
-  pieces[is_problem & !cran_version]
+  res <- pieces[is_problem & !cran_version]
+
+  if (print) {
+    cat(res, "\n")
+  }
+
+  fail <- match.arg(fail)
+  if (fail == "error" && any(is_error) ||
+    fail == "warning" && (any(is_error) || any(is_warning)) ||
+    fail == "note" && (any(is_error) || any(is_warning) || any(is_note))) {
+    stop("\n", call. = FALSE)
+  }
+
+  res
 }

@@ -4,7 +4,8 @@
 \alias{check_failures}
 \title{Parses R CMD check log file for ERRORs, WARNINGs and NOTEs}
 \usage{
-check_failures(path, error = TRUE, warning = TRUE, note = TRUE)
+check_failures(path, error = TRUE, warning = TRUE, note = TRUE,
+  print = FALSE, fail = c("none", "error", "warning", "note"))
 }
 \arguments{
 \item{path}{check path, e.g., value of the \code{check_dir} argument in a
@@ -12,6 +13,10 @@ call to \code{\link{check}}}
 
 \item{error, warning, note}{logical, indicates if errors, warnings and/or
 notes should be returned}
+
+\item{print}{print the result before returning.}
+
+\item{fail}{Signal an error if the given class of error is (or worse) occurred.}
 }
 \value{
 a character vector with the relevant messages, can have length zero
