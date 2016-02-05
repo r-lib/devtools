@@ -1,5 +1,7 @@
 # devtools 1.10.0.9000
 
+* `use_travis()` generates a template compatible with the newest R-travis.
+
 * `build_win()` defaults to only R-devel, since this is most commonly
   what you want.
 
