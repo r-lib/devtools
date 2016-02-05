@@ -120,12 +120,14 @@ remote_sha <- function(remote, ...) UseMethod("remote_sha")
 package2remote <- function(x, repos = getOption("repos"), type = getOption("pkgType")) {
   x <- packageDescription(x)
   if (is.null(x$RemoteType)) {
+
+    # Packages installed with install.packages()
     if (!is.null(x$Repository) && x$Repository == "CRAN") {
       remote("CRAN",
         name = x$Package,
-      repos = repos,
-      pkg_type = type,
-      sha = x$Version)
+        repos = repos,
+        pkg_type = type,
+        sha = x$Version)
     } else {
       return(NULL)
     }
@@ -164,6 +166,8 @@ package2remote <- function(x, repos = getOption("repos"), type = getOption("pkgT
       sha = x$RemoteSha,
       username = x$RemoteUsername,
       repo = x$RemoteRepo),
+
+    # packages installed with install_CRAN
     CRAN = remote("CRAN",
       name = x$RemoteName,
       repos = eval(parse(text = x$RemoteRepos)),
