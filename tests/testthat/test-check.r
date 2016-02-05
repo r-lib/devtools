@@ -1,22 +1,28 @@
 context("Check")
 
-test_that("return messages", {
+test_that("sucessful check doesn't trigger error", {
+  skip_on_cran()
+  path <- check("testTest", quiet = TRUE)
+
+  results <- parse_check_results(file.path(path, "00check.log"))
+
+  expect_error(signal_check_results(results), NA)
+  expect_equal(
+    summarise_check_results(results),
+    "0 errors | 0 warnings | 0 notes",
+    fixed = TRUE
+  )
+})
+
+test_that("check with NOTES captured", {
   skip_on_cran()
 
-  pkg_name <- "testTest"
-  check_dir_name <- sprintf("%s.Rcheck", pkg_name)
+  results <- parse_check_results("check-results-note.log")
 
-  on.exit(unlink(check_dir_name, recursive = TRUE), add = TRUE)
-  withr::with_envvar(
-    list(
-      "_R_CHECK_RD_XREFS_"="FALSE",
-      "_R_CHECK_CRAN_INCOMING_"="FALSE"
-    ),
-    check(pkg_name, document = FALSE, cran = FALSE,
-          check_dir = ".", quiet = TRUE)
+  expect_error(signal_check_results(results), NA)
+  expect_error(
+    signal_check_results(results, "note"),
+    "0 errors | 0 warnings | 2 notes",
+    fixed = TRUE
   )
-
-  failures <- check_failures(check_dir_name, error = TRUE,
-                             warning = TRUE, note = TRUE)
-  expect_equal(failures, character(), info = paste(failures, collapse = "\n"))
 })

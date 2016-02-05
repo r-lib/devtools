@@ -94,6 +94,12 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
     check_dir = check_dir
   )
 
+  if (!quiet) {
+    rule("Check summary")
+    results <- parse_check_results(file.path(check_path, "00check.log"))
+    print(results)
+  }
+
   invisible(check_path)
 }
 
