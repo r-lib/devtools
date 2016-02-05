@@ -72,7 +72,7 @@ check_vignette_titles <- function(pkg = ".") {
     paste0(
       "placeholder 'Vignette Title' detected in 'title' field and/or ",
       "'VignetteIndexEntry' for: ",
-      paste(names(has_VT)[has_VT], collapse = ",")
+      paste(names(has_vt)[has_vt], collapse = ",")
     )
   )
 }
