@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* Help shims now inform you that you're using development documentation 
+  (#1049).
+
 * `use_github()` prints the url of the repo (#1063).
 
 * `use_testthat()` tells you what it's doing (#1056).  

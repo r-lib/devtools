@@ -19,6 +19,7 @@
 #' dev_help("ggplot") # loads development documentation for ggplot
 #' }
 dev_help <- function(topic, stage = "render", type = getOption("help_type")) {
+  message("Using development documentation for ", topic)
   path <- find_topic(topic)
   if (is.null(path)) {
     dev <- paste(dev_packages(), collapse = ", ")
