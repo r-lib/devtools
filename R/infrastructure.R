@@ -600,12 +600,14 @@ use_news_md <- function(pkg = ".") {
   template <- render_template("NEWS.md", pkg)
 
   if (!file.exists(news_path)) {
-    message("Creating NEWS.md")
+    message("* Creating NEWS.md")
     writeLines(template, news_path)
   } else {
     stop("NEWS.md already exists", call. = FALSE)
   }
 
+  open_in_rstudio("NEWS.md")
+  message("* Modify the template")
   invisible(TRUE)
 }
 
@@ -646,12 +648,15 @@ use_cran_comments <- function(pkg = ".") {
   if (file.exists(comments))
     stop("cran-comments.md already exists", call. = FALSE)
 
-  message("Adding cran-comments.md template")
+  message("* Adding cran-comments.md template")
   data <- list(
     rversion = paste0(version$major, ".", version$minor)
   )
-
   writeLines(render_template("cran-comments.md", data), comments)
+
+  message("* Modify the template")
+  open_in_rstudio("cran-comments.md")
+
   invisible()
 }
 
