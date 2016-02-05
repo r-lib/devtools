@@ -66,7 +66,8 @@ release <- function(pkg = ".", check = TRUE) {
 
   if (check) {
     rule("Buiding and checking ", pkg$package, pad = "=")
-    check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE)
+    check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE,
+      run_dont_test = TRUE)
   }
   if (yesno("Was R CMD check successful?"))
     return(invisible())

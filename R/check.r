@@ -43,6 +43,9 @@
 #' @param cleanup Deprecated.
 #' @param cran if \code{TRUE} (the default), check using the same settings as
 #'   CRAN uses.
+#' @param run_dont_test Sets \code{--run-donttest} so that tests surrounded in
+#'   \code{\\dontest\{\}} are also tested. This is important for CRAN
+#'   submission.
 #' @param check_version Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
 #'   If \code{TRUE}, performns a number of checked related
 #'   to version numbers of packages on CRAN.
@@ -58,9 +61,9 @@
 #'   CRAN.
 #' @export
 check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
-                  check_version = FALSE, force_suggests = FALSE, args = NULL,
-                  build_args = NULL, quiet = FALSE, check_dir = tempdir(),
-                  ...) {
+                  check_version = FALSE, force_suggests = FALSE,
+                  run_dont_test = FALSE, args = NULL, build_args = NULL,
+                  quiet = FALSE, check_dir = tempdir(), ...) {
   pkg <- as.package(pkg)
   if (!missing(cleanup)) {
     warning("`cleanup` is deprecated", call. = FALSE)
@@ -79,10 +82,19 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
     on.exit(unlink(built_path), add = TRUE)
   })
 
-  r_cmd_check_path <- check_r_cmd(pkg$package, built_path, cran, check_version,
-    force_suggests, args, quiet = quiet, check_dir = check_dir)
+  check_path <- check_r_cmd(
+    pkg$package,
+    built_path = built_path,
+    cran = cran,
+    check_version = check_version,
+    force_suggests = force_suggests,
+    run_dont_test = run_dont_test,
+    args = args,
+    quiet = quiet,
+    check_dir = check_dir
+  )
 
-  invisible(r_cmd_check_path)
+  invisible(check_path)
 }
 
 
@@ -91,7 +103,8 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
 # @param check_dir The directory to unpack the .tar.gz file to
 check_r_cmd <- function(name, built_path = NULL, cran = TRUE,
                         check_version = FALSE, force_suggests = FALSE,
-                        args = NULL, check_dir = tempdir(), quiet = FALSE, ...) {
+                        run_dont_test = FALSE, args = NULL,
+                        check_dir = tempdir(), quiet = FALSE, ...) {
 
   pkgname <- gsub("_.*?$", "", basename(built_path))
 
@@ -102,7 +115,10 @@ check_r_cmd <- function(name, built_path = NULL, cran = TRUE,
     opts <- c(opts, "--no-build-vignettes", "--no-manual")
   }
   if (cran) {
-    opts <- c("--as-cran", "--run-donttest", opts)
+    opts <- c("--as-cran", opts)
+  }
+  if (run_dont_test) {
+    opts <- c("--run-donttest", opts)
   }
 
   env_vars <- check_env_vars(cran, check_version, force_suggests)

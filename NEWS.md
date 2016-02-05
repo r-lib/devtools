@@ -1,5 +1,9 @@
 # devtools 1.10.0.9000
 
+* `check()` gains a `run_dont_test` argument to control whether or not
+  `\donttest{}` tests are tested. This defaults to `FALSE`, but `release()`
+  runs check with it set to `TRUE` (#1071).
+
 * The `cleanup` argument to `check()` is deprecated: it now always returns
   the path to the check directory.
 

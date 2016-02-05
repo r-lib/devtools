@@ -5,8 +5,9 @@
 \title{Build and check a package, cleaning up automatically on success.}
 \usage{
 check(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
-  check_version = FALSE, force_suggests = FALSE, args = NULL,
-  build_args = NULL, quiet = FALSE, check_dir = tempdir(), ...)
+  check_version = FALSE, force_suggests = FALSE, run_dont_test = FALSE,
+  args = NULL, build_args = NULL, quiet = FALSE, check_dir = tempdir(),
+  ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -27,6 +28,10 @@ to version numbers of packages on CRAN.}
 \item{force_suggests}{Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
 \code{FALSE} (the default), check will proceed even if all suggested
 packages aren't found.}
+
+\item{run_dont_test}{Sets \code{--run-donttest} so that tests surrounded in
+\code{\\dontest\{\}} are also tested. This is important for CRAN
+submission.}
 
 \item{args, build_args}{An optional character vector of additional command
 line arguments to be passed to \code{R CMD check}/\code{R CMD build}/\code{R CMD INSTALL}.}
