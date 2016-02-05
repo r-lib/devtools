@@ -103,6 +103,13 @@ remote_package_name.git_remote <- function(remote, ...) {
 
 #' @export
 remote_sha.git_remote <- function(remote, ...) {
+  # If the remote ref is the same as the sha it is a pinned commit so just
+  # return that.
+  if (!is.null(remote$ref) &&
+    grepl(paste0("^", remote$ref), remote$sha)) {
+    return(remote$sha)
+  }
+
   tryCatch({
     res <- git2r::remote_ls(remote$url, ...)
 

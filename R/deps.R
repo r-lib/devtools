@@ -241,19 +241,32 @@ print.package_deps <- function(x, show_ok = FALSE, ...) {
 #' @importFrom stats update
 update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
   unavailable <- object$package[object$diff == UNAVAILABLE]
-  if (length(unavailable) > 0 && !quiet) {
-    message(sprintf(ngettext(length(unavailable),
-      "Skipping %d unavailable package: %s",
-      "Skipping %d unavailable packages: %s"
-    ), length(unavailable), paste(unavailable, collapse = ", ")))
+  if (length(unavailable) > 0) {
+    if (upgrade) {
+      remotes <- compact(lapply(unavailable, package2remote))
+      install_remotes(remotes, ..., repos = attr(object, "repos"),
+        type = attr(object, "type"), quiet = quiet)
+    } else if (!quiet) {
+      message(sprintf(ngettext(length(unavailable),
+            "Skipping %d unavailable package: %s",
+            "Skipping %d unavailable packages: %s"
+            ), length(unavailable), paste(unavailable, collapse = ", ")))
+    }
   }
 
   ahead <- object$package[object$diff == AHEAD]
-  if (length(ahead) > 0 && !quiet) {
-    message(sprintf(ngettext(length(ahead),
-      "Skipping %d package ahead of CRAN: %s",
-      "Skipping %d packages ahead of CRAN: %s"
-    ), length(ahead), paste(ahead, collapse = ", ")))
+  if (length(ahead) > 0) {
+    if (upgrade) {
+      remotes <- compact(lapply(ahead, package2remote))
+
+      install_remotes(remotes, ..., repos = attr(object, "repos"),
+        type = attr(object, "type"), quiet = quiet)
+    } else if (!quiet) {
+      message(sprintf(ngettext(length(ahead),
+            "Skipping %d package ahead of CRAN: %s",
+            "Skipping %d packages ahead of CRAN: %s"
+            ), length(ahead), paste(ahead, collapse = ", ")))
+    }
   }
 
   if (upgrade) {
@@ -265,7 +278,7 @@ update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
     install_packages(behind, repos = attr(object, "repos"),
       type = attr(object, "type"), quiet = quiet, ...)
   }
-
+  behind
 }
 
 install_packages <- function(pkgs, repos = getOption("repos"),
@@ -332,7 +345,8 @@ standardise_dep <- function(x) {
 #' Works similarly to \code{install.packages()} but doesn't install packages
 #' that are already installed, and also upgrades out dated dependencies.
 #'
-#' @param pkgs Character vector of packages to update.
+#' @param pkgs Character vector of packages to update. If \code{NULL} all
+#'   installed packages are updated.
 #' @inheritParams package_deps
 #' @seealso \code{\link{package_deps}} to see which packages are out of date/
 #'   missing.
@@ -342,9 +356,18 @@ standardise_dep <- function(x) {
 #' update_packages("ggplot2")
 #' update_packages(c("plyr", "ggplot2"))
 #' }
-update_packages <- function(pkgs, dependencies = NA,
+update_packages <- function(pkgs = NULL, dependencies = NA,
                             repos = getOption("repos"),
                             type = getOption("pkgType")) {
+
+  if (is.null(pkgs)) {
+    if (!yesno("Are you sure you want to update all installed packages?")) {
+      pkgs <- installed.packages()[, "Package"]
+    } else {
+      return(invisible())
+    }
+  }
+
   pkgs <- package_deps(pkgs, repos = repos, type = type)
   update(pkgs)
 }

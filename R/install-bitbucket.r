@@ -20,8 +20,7 @@
 #' install_bitbucket("dannavarro/lsr-package")
 #' }
 install_bitbucket <- function(repo, username, ref = "master", subdir = NULL,
-                              auth_user = NULL, password = NULL, force = FALSE,
-                              ...) {
+                              auth_user = NULL, password = NULL, ...) {
 
   remotes <- lapply(repo, bitbucket_remote, username = username, ref = ref,
     subdir = subdir, auth_user = auth_user, password = password)

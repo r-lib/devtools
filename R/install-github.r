@@ -20,8 +20,6 @@
 #'   the \code{GITHUB_PAT} environment variable.
 #' @param host GitHub API host to use. Override with your GitHub enterprise
 #'   hostname, for example, \code{"github.hostname.com/api/v3"}.
-#' @param force Force installation even if the git SHA1 has not changed since
-#'   the previous install.
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @details
@@ -262,6 +260,13 @@ remote_package_name.github_remote <- function(remote, url = "https://github.com"
 
 #' @export
 remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
+  # If the remote ref is the same as the sha it is a pinned commit so just
+  # return that.
+  if (!is.null(remote$ref) && !is.null(remote$sha) &&
+    grepl(paste0("^", remote$ref), remote$sha)) {
+    return(remote$sha)
+  }
+
   tryCatch({
     res <- git2r::remote_ls(
       paste0(url, "/", remote$username, "/", remote$repo, ".git"),

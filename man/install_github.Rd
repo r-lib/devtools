@@ -35,9 +35,6 @@ hostname, for example, \code{"github.hostname.com/api/v3"}.}
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
-
-\item{force}{Force installation even if the git SHA1 has not changed since
-the previous install.}
 }
 \description{
 This function is vectorised on \code{repo} so you can install multiple
