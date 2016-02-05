@@ -756,7 +756,7 @@ use_mit_license <- function(pkg = ".", copyright_holder = getOption("devtools.na
 
 
 open_in_rstudio <- function(path) {
-  if (!requireNamespace("rstudio", quietly = TRUE))
+  if (!requireNamespace("rstudioapi", quietly = TRUE))
     return()
 
   if (!rstudioapi::hasFun("navigateToFile"))
