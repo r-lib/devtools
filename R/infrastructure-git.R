@@ -63,7 +63,6 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' @param private If \code{TRUE}, creates a private repository.
 #' @param protocol transfer protocol, either "ssh" (the default) or "https"
 #' @family git infrastructure
-#' @keywords internal
 #' @export
 #' @examples
 #' \dontrun{

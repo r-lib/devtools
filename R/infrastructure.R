@@ -533,16 +533,10 @@ use_build_ignore <- function(files, escape = TRUE, pkg = ".") {
 #' \code{md} for a basic README. \code{README.Rmd} will be automatically
 #' added to \code{.Rbuildignore}.
 #'
-#' @param hook Hook name. One of "pre-commit", "prepare-commit-msg",
-#'   "commit-msg", "post-commit", "applypatch-msg", "pre-applypatch",
-#'   "post-applypatch", "pre-rebase", "post-rewrite", "post-checkout",
-#'   "post-merge", "pre-push", "pre-auto-gc".
-#' @param script Text of script to run
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @export
 #' @family infrastructure
-#' @keywords internal
 use_readme_rmd <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
@@ -756,7 +750,7 @@ use_mit_license <- function(pkg = ".", copyright_holder = getOption("devtools.na
 
 
 open_in_rstudio <- function(path) {
-  if (!requireNamespace("rstudioapi", quietly = TRUE))
+  if (!rstudioapi::isAvailable())
     return()
 
   if (!rstudioapi::hasFun("navigateToFile"))

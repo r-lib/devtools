@@ -38,8 +38,7 @@ Suggests:
     bitops,
     roxygen2 (>= 5.0.0),
     evaluate,
-    rversions,
-    rstudioapi
+    rversions
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
