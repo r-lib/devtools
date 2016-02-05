@@ -29,7 +29,7 @@ package_url <- function(package, repos,
 cran_pkg_version <- function(package, available = available.packages()) {
 
   idx <- available[, "Package"] == package
-  if(any(idx)) {
+  if (any(idx)) {
     as.package_version(available[package, "Version"])
   } else {
     NULL

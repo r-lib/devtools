@@ -15,6 +15,7 @@ release_checks <- function(pkg = ".", built_path = NULL) {
   check_dev_versions(pkg)
   check_vignette_titles(pkg)
   check_news_md(pkg)
+  check_remotes(pkg)
 }
 
 check_dev_versions <- function(pkg = ".") {
@@ -127,4 +128,20 @@ check_news_md <- function(pkg) {
 
   return(invisible(FALSE))
 
+}
+
+check_remotes <- function(pkg) {
+  pkg <- as.package(pkg)
+
+  message("Checking that DESCRIPTION doesn't have Remotes... ", appendLF = FALSE)
+
+  if (!has_dev_remotes(pkg)) {
+    message("OK")
+    return(invisible(TRUE))
+  } else {
+    message(
+      "WARNING",
+      "\n  Remotes field should be removed before CRAN submission."
+    )
+  }
 }

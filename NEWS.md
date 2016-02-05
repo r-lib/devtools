@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* `release()` has been tweaked to improve the order of the questions, 
+  and ensure that you're ok with problems.
+
 * Help shims now inform you that you're using development documentation 
   (#1049).
 

@@ -36,7 +36,6 @@ dev_help <- function(topic, stage = "render", type = getOption("help_type")) {
 
 }
 
-
 view_rd <- function(path, package, stage = "render", type = getOption("help_type")) {
   if (is.null(type)) type <- "text"
   type <- match.arg(type, c("text", "html"))
