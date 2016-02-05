@@ -1,5 +1,10 @@
 # devtools 1.10.0.9000
 
+* `use_testthat()` tells you what it's doing (#1056).  
+
+* `use_news()`, and `use_test()` open the files in RStudio (if you're using
+  it and have rstudioapi installed).
+
 * `use_readme_md()` creates a basic `README.md` template (#1064).
 
 # devtools 1.10.0

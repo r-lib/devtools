@@ -24,11 +24,15 @@ use_testthat <- function(pkg = ".") {
   }
 
   # Create tests/testthat and install file for R CMD CHECK
+  message("* Creating tests/testthat/")
   dir.create(file.path(pkg$path, "tests", "testthat"),
     showWarnings = FALSE, recursive = TRUE)
+
+  message("* Creating tests/testthat.R")
   writeLines(render_template("testthat.R", list(name = pkg$package)),
     file.path(pkg$path, "tests", "testthat.R"))
 
+  message("* Adding testthat to Suggests")
   add_desc_package(pkg, "Suggests", "testthat")
 
   invisible(TRUE)
@@ -61,7 +65,10 @@ use_test <- function(name, pkg = ".") {
     render_template("test-example.R", list(test_name = name)),
     file.path(pkg$path, path))
 
-  message("Test file created in ", path)
+  message("* Creating test file", path)
+  open_in_rstudio(path)
+
+  invisible(TRUE)
 }
 
 #' @section \code{use_rstudio}:
