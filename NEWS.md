@@ -1,5 +1,7 @@
 # devtools 1.10.0.9000
 
+* `use_readme_md()` creates a basic `README.md` template (#1064).
+
 # devtools 1.10.0
 
 ## New features

@@ -520,9 +520,11 @@ use_build_ignore <- function(files, escape = TRUE, pkg = ".") {
   invisible(TRUE)
 }
 
-#' Use README.Rmd
+#' Create README files.
 #'
-#' This creates `README.Rmd` from template and adds to \code{.Rbuildignore}.
+#' Use \code{Rmd} if you want a rich intermingling of code and data. Use
+#' \code{md} for a basic README. \code{README.Rmd} will be automatically
+#' added to \code{.Rbuildignore}.
 #'
 #' @param hook Hook name. One of "pre-commit", "prepare-commit-msg",
 #'   "commit-msg", "post-commit", "applypatch-msg", "pre-applypatch",
@@ -557,6 +559,29 @@ use_readme_rmd <- function(pkg = ".") {
       pkg = pkg)
   }
 
+  invisible(TRUE)
+}
+
+#' @rdname use_readme_rmd
+use_readme_md <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  if (uses_github(pkg$path)) {
+    pkg$github <- github_info(pkg$path)
+  }
+
+  news_path <- file.path(pkg$path, "README.md")
+  template <- render_template("README.md", pkg)
+
+  if (!file.exists(news_path)) {
+    message("* Creating README.md")
+    writeLines(template, news_path)
+  } else {
+    stop("NEWS.md already exists", call. = FALSE)
+  }
+
+  open_in_rstudio("README.md")
+  message("* Modify the template")
   invisible(TRUE)
 }
 
@@ -715,4 +740,16 @@ use_mit_license <- function(pkg = ".", copyright_holder = getOption("devtools.na
   writeLines(template, con = licensePath)
   message("* Added infrastructure for MIT license")
   licensePath
+}
+
+
+open_in_rstudio <- function(path) {
+  if (!requireNamespace("rstudio", quietly = TRUE))
+    return()
+
+  if (!rstudioapi::hasFun("navigateToFile"))
+    return()
+
+  rstudioapi::navigateToFile(path)
+
 }
