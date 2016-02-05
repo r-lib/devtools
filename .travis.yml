@@ -1,15 +1,10 @@
-language: r
-sudo: required
+language: R
+cache: packages
 bioc_required: true
 warnings_are_errors: true
 before_script:
     - git config --global user.name "travis"
     - git config --global user.email "travis@example.org"
-
-r_binary_packages:
-  - XML
-  - Rcpp
-  - knitr
 
 r_github_packages:
   - rstudio/rmarkdown
