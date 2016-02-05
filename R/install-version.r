@@ -46,28 +46,29 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
 }
 
 package_find_repo <- function(package, repos) {
+  archive_info <- function(repo) {
+    if (length(repos) > 1)
+      message("Trying ", repo)
+
+    archive <-
+      tryCatch({
+        con <- gzcon(url(sprintf("%s/src/contrib/Meta/archive.rds", repo), "rb"))
+        on.exit(close(con))
+        readRDS(con)
+      },
+      warning = function(e) list(),
+      error = function(e) list())
+
+    info <- archive[[package]]
+    info$path <- rownames(info)
+    if (!is.null(info)) {
+      info$repo <- repo
+      info
+    }
+  }
+
   res <- do.call(rbind.data.frame,
-    c(list(make.row.names = FALSE), lapply(repos,
-      function(repo) {
-        if (length(repos) > 1)
-          message("Trying ", repo)
-
-        archive <-
-          tryCatch({
-            con <- gzcon(url(sprintf("%s/src/contrib/Meta/archive.rds", repo), "rb"))
-            on.exit(close(con))
-            readRDS(con)
-          },
-          warning = function(e) list(),
-          error = function(e) list())
-
-        info <- archive[[package]]
-        info$path <- rownames(info)
-        if (!is.null(info)) {
-          info$repo <- repo
-          info
-        }
-      })))
+    c(lapply(repos, archive_info), list(make.row.names = FALSE)))
 
   if (NROW(res) == 0) {
     stop(sprintf("couldn't find package '%s'", package))
