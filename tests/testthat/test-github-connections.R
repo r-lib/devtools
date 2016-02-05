@@ -44,10 +44,7 @@ test_that("GitHub non-usage is handled", {
 
   expect_true(uses_git(test_pkg))
   expect_false(uses_github(test_pkg))
-  expect_message(print(dr_github(test_pkg)), "cannot detect .* GitHub")
-
-  expect_message(print(dr_github(test_pkg)), "empty URL field")
-  expect_message(print(dr_github(test_pkg)), "empty BugReports field")
+  expect_message(print(dr_github(test_pkg)), "not a GitHub repository")
 
   expect_identical(github_dummy, github_info(test_pkg))
 
