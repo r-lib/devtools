@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* `build_win()` defaults to only R-devel, since this is most commonly
+  what you want.
+
 * `release()` has been tweaked to improve the order of the questions, 
   and ensure that you're ok with problems.
 

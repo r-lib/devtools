@@ -90,15 +90,18 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
 #' @inheritParams build
 #' @param version directory to upload to on the win-builder, controlling
 #'   which version of R is used to build the package. Possible options are
-#'   listed on \url{http://win-builder.r-project.org/}. Defaults to the
-#'   released version of R.
+#'   listed on \url{http://win-builder.r-project.org/}. Defaults to R-devel.
 #' @export
 #' @family build functions
 build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
                       args = NULL, quiet = FALSE) {
   pkg <- as.package(pkg)
 
-  version <- match.arg(version, several.ok = TRUE)
+  if (missing(version)) {
+    version <- "R-devel"
+  } else {
+    version <- match.arg(version, several.ok = TRUE)
+  }
 
   if (!quiet) {
     message("Building windows version of ", pkg$package,
