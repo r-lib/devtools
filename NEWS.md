@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* The `cleanup` argument to `check()` is deprecated: it now always returns
+  the path to the check directory.
+
 * `use_travis()` generates a template compatible with the newest R-travis.
 
 * `build_win()` defaults to only R-devel, since this is most commonly

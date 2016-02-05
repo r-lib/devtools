@@ -40,9 +40,7 @@
 #'   \code{\link{as.package}} for more information
 #' @param document if \code{TRUE} (the default), will update and check
 #'   documentation before running formal check.
-#' @param cleanup if \code{TRUE} the check directory is removed if the check
-#'   is successful - this allows you to inspect the results to figure out what
-#'   went wrong. If \code{FALSE} the check directory is never removed.
+#' @param cleanup Deprecated.
 #' @param cran if \code{TRUE} (the default), check using the same settings as
 #'   CRAN uses.
 #' @param check_version Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
@@ -63,31 +61,28 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
                   check_version = FALSE, force_suggests = FALSE, args = NULL,
                   build_args = NULL, quiet = FALSE, check_dir = tempdir(),
                   ...) {
-
   pkg <- as.package(pkg)
+  if (!missing(cleanup)) {
+    warning("`cleanup` is deprecated", call. = FALSE)
+  }
 
   if (document) {
     document(pkg)
   }
 
-  show_env_vars(compiler_flags(FALSE))
-  withr::with_envvar(compiler_flags(FALSE), {
-
+  if (!quiet) {
+    show_env_vars(compiler_flags(FALSE))
     rule("Building ", pkg$package)
+  }
+  withr::with_envvar(compiler_flags(FALSE), action = "prefix", {
     built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args, ...)
     on.exit(unlink(built_path), add = TRUE)
+  })
 
-    r_cmd_check_path <- check_r_cmd(pkg$package, built_path, cran, check_version,
-      force_suggests, args, quiet = quiet, check_dir = check_dir)
+  r_cmd_check_path <- check_r_cmd(pkg$package, built_path, cran, check_version,
+    force_suggests, args, quiet = quiet, check_dir = check_dir)
 
-    if (cleanup) {
-      unlink(r_cmd_check_path, recursive = TRUE)
-    } else {
-      if (!quiet) message("R CMD check results in ", r_cmd_check_path)
-    }
-
-    invisible(TRUE)
-  }, "prefix")
+  invisible(r_cmd_check_path)
 }
 
 
@@ -111,11 +106,11 @@ check_r_cmd <- function(name, built_path = NULL, cran = TRUE,
   }
 
   env_vars <- check_env_vars(cran, check_version, force_suggests)
-  if (!quiet)
+  if (!quiet) {
     show_env_vars(env_vars)
-
-  if (!quiet)
     rule("Checking ", name)
+  }
+
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
   R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), check_dir,
     env_vars, quiet = quiet, ...)

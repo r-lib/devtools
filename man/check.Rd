@@ -15,9 +15,7 @@ check(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
 \item{document}{if \code{TRUE} (the default), will update and check
 documentation before running formal check.}
 
-\item{cleanup}{if \code{TRUE} the check directory is removed if the check
-is successful - this allows you to inspect the results to figure out what
-went wrong. If \code{FALSE} the check directory is never removed.}
+\item{cleanup}{Deprecated.}
 
 \item{cran}{if \code{TRUE} (the default), check using the same settings as
 CRAN uses.}

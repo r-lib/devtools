@@ -13,7 +13,7 @@ test_that("return messages", {
       "_R_CHECK_CRAN_INCOMING_"="FALSE"
     ),
     check(pkg_name, document = FALSE, cran = FALSE,
-          check_dir = ".", cleanup = FALSE, quiet = TRUE)
+          check_dir = ".", quiet = TRUE)
   )
 
   failures <- check_failures(check_dir_name, error = TRUE,
