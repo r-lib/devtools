@@ -325,8 +325,8 @@ build_package_txt <- function(package, version = NULL,
 #' @param version Value indicating whether \code{package}'s version should be included
 #'   in \code{pkg}'s DESCRIPTION. Either \code{NULL}, \code{TRUE}, or a valid version
 #'   string. If \code{version} is \code{TRUE}, \code{package}'s current version
-#'   will be used (see examples). If \code{version} is a string that is not a
-#'   valid version, an error will be thrown.
+#'   will be used (see examples).
+#'
 #' @param compare The comparator used for \code{package}'s version. All valid
 #'   CRAN comparators (i.e. \code{==}, \code{>=}, \code{<=}, \code{>}, and
 #'   \code{<}) are accepted, but not considered unless \code{version} is
@@ -350,16 +350,15 @@ use_package <- function(package, type = "Imports", pkg = ".", version = NULL,
 
   if (!is_installed(package)) {
     stop(package, " must be installed before you can take a dependency on it",
-         call. = FALSE)
+      call. = FALSE)
   }
-
-  package_txt <- build_package_txt(package, version, compare)
 
   types <- c("Imports", "Depends", "Suggests", "Enhances", "LinkingTo")
   names(types) <- tolower(types)
 
   type <- types[[match.arg(tolower(type), names(types))]]
 
+  package_txt <- build_package_txt(package, version, compare)
   message("Adding ", package_txt, " to ", type)
   add_desc_package(pkg, type, package_txt)
 
