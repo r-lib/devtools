@@ -1,5 +1,7 @@
 # devtools 1.10.0.9000
 
+* `use_github()` prints the url of the repo (#1063).
+
 * `use_testthat()` tells you what it's doing (#1056).  
 
 * `use_news()`, and `use_test()` open the files in RStudio (if you're using

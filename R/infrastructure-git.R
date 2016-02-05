@@ -125,6 +125,9 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
 
   git2r::branch_set_upstream(git2r::head(r), "origin/master")
 
+  info <- github_info(pkg$path)
+  message("* View repo at ", "https://github.com/", info$username, "/", info$repo)
+
   invisible(NULL)
 }
 
