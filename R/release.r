@@ -41,69 +41,41 @@
 #'   line arguments to be passed to \code{R CMD build}.
 #' @export
 release <- function(pkg = ".", check = TRUE, args = NULL) {
-  dr_d <- dr_devtools()
-  if (!dr_d)
-    print(dr_d)
-
   pkg <- as.package(pkg)
-
   # Figure out if this is a new package
   cran_version <- cran_pkg_version(pkg$package)
   new_pkg <- is.null(cran_version)
 
+  dr_d <- dr_devtools()
+  if (!dr_d) {
+    print(dr_d)
+
+    if (yesno("Proceed anyway?"))
+      return()
+  }
+
   if (uses_git(pkg$path)) {
-    if (git_uncommitted(pkg$path))
-      warning("Uncommited changes in git.", immediate. = TRUE, call. = FALSE)
+    if (git_uncommitted(pkg$path)) {
+      if (yesno("Uncommited changes in git. Proceed anyway?"))
+        return()
+    }
 
-    if (git_sync_status(pkg$path))
-      warning("Git not synched with remote.", immediate. = TRUE, call. = FALSE)
-  }
-
-  if (has_dev_remotes(pkg)) {
-    warning("Package ", pkg$package, "has a 'Remotes:' entry.  This should be
-      removed before CRAN submission.", immediate. = TRUE, call. = FALSE)
-  }
-
-  if (check) {
-    check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE,
-          build_args = args)
-    release_checks(pkg)
-
-    if (yesno("Was package check successful?"))
-      return(invisible())
-
-  } else {
-    release_checks(pkg)
-    if (yesno("Does R CMD check pass with no ERRORs or WARNINGs?"))
-      return(invisible())
-
-    # Even if we don't run the full checks, at least check that the package
-    # version is sufficient for submission to CRAN.
-
-    if (new_pkg) {
-      message("Package ", pkg$package, " not found on CRAN. This is a new package.")
-
-    } else if (as.package_version(pkg$version) > cran_version) {
-      message("Local package ", pkg$package, " ", pkg$version,
-        " is greater than CRAN version ", cran_version, ".")
-
-    } else {
-      stop("Local package ", pkg$package, " ", pkg$version,
-        " must be greater than CRAN version ", cran_version, ".")
+    if (git_sync_status(pkg$path)) {
+      if (yesno("Git not synched with remote. Proceed anyway?"))
+        return()
     }
   }
 
-  if (has_src(pkg)) {
-    if (yesno("Have you run R CMD check with valgrind?"))
-      return(invisible())
+  if (check) {
+    rule("Buiding and checking ", pkg$package, pad = "=")
+    check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE,
+          build_args = args, run_dont_test = TRUE)
   }
-
-  rule("cran-comments.md ")
-  cat(cran_comments(pkg), "\n\n")
-  if (yesno("Are the CRAN submission comments correct?"))
+  if (yesno("Was R CMD check successful?"))
     return(invisible())
 
-  if (yesno("Have you checked on win-builder (with build_win())?"))
+  release_checks(pkg)
+  if (yesno("Were devtool's checks successful?"))
     return(invisible())
 
   if (!new_pkg) {
@@ -113,17 +85,10 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
       return(invisible())
   }
 
-  if (file.exists("NEWS")) {
-    try(print(show_news(pkg)))
-    if (yesno("Is package news up-to-date?"))
+  if (has_src(pkg)) {
+    if (yesno("Have you run R CMD check with valgrind?"))
       return(invisible())
   }
-
-  rule("DESCRIPTION")
-  cat(readLines(file.path(pkg$path, "DESCRIPTION")), sep = "\n")
-  cat("\n")
-  if (yesno("Is DESCRIPTION up-to-date?"))
-    return(invisible())
 
   deps <- if (new_pkg) 0 else length(revdep(pkg$package))
   if (deps > 0) {
@@ -134,6 +99,18 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
       return(invisible())
   }
 
+  if (yesno("Have you checked on win-builder (with build_win())?"))
+    return(invisible())
+
+  if (yesno("Have you updated your NEWS file?"))
+    return(invisible())
+
+  rule("DESCRIPTION")
+  cat(readLines(file.path(pkg$path, "DESCRIPTION")), sep = "\n")
+  cat("\n")
+  if (yesno("Is DESCRIPTION up-to-date?"))
+    return(invisible())
+
   release_questions <- pkg_env(pkg)$release_questions
   if (!is.null(release_questions)) {
     questions <- release_questions()
@@ -142,17 +119,21 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
     }
   }
 
+  rule("cran-comments.md")
+  cat(cran_comments(pkg), "\n\n")
+  if (yesno("Are the CRAN submission comments correct?"))
+    return(invisible())
+
   if (yesno("Is your email address ", maintainer(pkg)$email, "?"))
     return(invisible())
 
   built_path <- build_cran(pkg, args = args)
-
   if (yesno("Ready to submit?"))
     return(invisible())
 
   upload_cran(pkg, built_path)
 
-  if (file.exists(file.path(pkg$path, ".git"))) {
+  if (uses_git(pkg$path)) {
     message("Don't forget to tag the release when the package is accepted!")
   }
   invisible(TRUE)
@@ -177,7 +158,7 @@ release_email <- function(name, new_pkg) {
 }
 
 yesno <- function(...) {
-  yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah")
+  yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "I agree", "Absolutely")
   nos <- c("No way", "Not yet", "I forget", "No", "Nope", "Uhhhh... Maybe?")
 
   cat(paste0(..., collapse = ""))
@@ -254,12 +235,11 @@ cran_comments <- function(pkg = ".") {
 
   path <- file.path(pkg$path, "cran-comments.md")
   if (!file.exists(path)) {
-    stop("Can't find cran-comments.md in ", pkg$package, ".\n",
+    warning("Can't find cran-comments.md.\n",
       "This file gives CRAN volunteers comments about the submission,\n",
-      "and it must exist.  Please create it using this guide:\n",
-      "http://r-pkgs.had.co.nz/release.html#release-check\n",
-      "Then run use_build_ignore('cran-comments.md')",
+      "and it must exist. Create it with use_cran_comments().\n",
       call. = FALSE)
+    return(character())
   }
 
   paste0(readLines(path, warn = FALSE), collapse = "\n")

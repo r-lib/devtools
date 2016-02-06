@@ -15,12 +15,11 @@ release_checks <- function(pkg = ".", built_path = NULL) {
   check_dev_versions(pkg)
   check_vignette_titles(pkg)
   check_news_md(pkg)
+  check_remotes(pkg)
 }
 
 check_dev_versions <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  message("Checking for dependencies on development versions... ",
-    appendLF = FALSE)
 
   dep_list <- pkg[tolower(standardise_dep(TRUE))]
   deps <- do.call("rbind", unname(compact(lapply(dep_list, parse_deps))))
@@ -32,67 +31,50 @@ check_dev_versions <- function(pkg = ".") {
   last_ver <- vapply(parsed, function(x) x[[length(x)]], integer(1))
 
   is_dev <- lengths == 4 & last_ver >= 9000
-  if (!any(is_dev)) {
-    message("OK")
-    return(invisible(TRUE))
-  }
 
-  message(
-    "WARNING",
-    "\n  Depends on devel versions of: ",
-    "\n    ", paste0(deps$name[is_dev], collapse = ", "),
-    "\n  Release these packages to CRAN and bump version number.")
+  check_status(
+    !any(is_dev),
+    "dependencies don't rely on dev versions",
+    paste(
+      "depends on devel versions of: ",
+      paste0(deps$name[is_dev], collapse = ", ")
+    )
+  )
 
   return(invisible(FALSE))
 }
 
 check_version <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  message("Checking version number... ",
-    appendLF = FALSE)
-
   ver <- unlist(numeric_version(pkg$version))
-  if (length(ver) == 3) {
-    message("OK")
-    return(invisible(TRUE))
-  }
-  message(
-    "WARNING",
-    "\n  Version (", pkg$version, ") should have exactly three components"
+
+  check_status(length(ver) == 3,
+    "version number has three components",
+    paste0("version (", pkg$version, ") should have exactly three components")
   )
-
-  return(invisible(FALSE))
-
 }
 
 check_vignette_titles <- function(pkg = ".") {
   pkg <- as.package(pkg)
-
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (length(vigns$docs) == 0) return()
 
-  message("Checking vignette titles... ", appendLF = FALSE)
-  has_Vignette_Title <- function(v, n) {
+  has_vignette_title <- function(v, n) {
     h <- readLines(v, n = n)
     any(grepl("Vignette Title", h))
   }
   v <- stats::setNames(vigns$docs, basename(vigns$docs))
-  has_VT <- vapply(v, has_Vignette_Title, logical(1), n = 30)
+  has_vt <- vapply(v, has_vignette_title, logical(1), n = 30)
 
-  if (!any(has_VT)) {
-    message("OK")
-    return(invisible(TRUE))
-  }
-
-  message(
-    "WARNING",
-    "\n  placeholder 'Vignette Title' detected in 'title' field and/or ",
-    "\n  'VignetteIndexEntry' for these vignettes:\n",
-    paste(" ", names(has_VT)[has_VT], collapse = "\n")
+  check_status(
+    !any(has_vt),
+    "vignette titles are not placeholders",
+    paste0(
+      "placeholder 'Vignette Title' detected in 'title' field and/or ",
+      "'VignetteIndexEntry' for: ",
+      paste(names(has_vt)[has_vt], collapse = ",")
+    )
   )
-
-  return(invisible(FALSE))
-
 }
 
 check_news_md <- function(pkg) {
@@ -101,8 +83,6 @@ check_news_md <- function(pkg) {
   news_path <- file.path(pkg$path, "NEWS.md")
   if (!file.exists(news_path))
     return()
-
-  message("Checking that NEWS.md is not ignored... ", appendLF = FALSE)
 
   ignore_path <- file.path(pkg$path, ".Rbuildignore")
   if (!file.exists(ignore_path)) {
@@ -114,17 +94,25 @@ check_news_md <- function(pkg) {
   has_news <- grepl("NEWS\\.md", ignore_lines, fixed = TRUE) |
               grepl("NEWS.md", ignore_lines, fixed = TRUE)
 
-  if (!any(has_news)) {
-    message("OK")
-    return(invisible(TRUE))
-  }
-
-  message(
-    "WARNING",
-    "\n  NEWS.md is in .Rbuildignore. It is now supported by CRAN ",
-    "\n  so can be included in the package."
+  check_status(!any(has_news),
+    "NEWS.md is not ignored",
+    "NEWS.md now supported by CRAN and doesn't need to be ignored."
   )
+}
 
-  return(invisible(FALSE))
+check_remotes <- function(pkg) {
+  check_status(!has_dev_remotes(pkg),
+    "DESCRIPTION doesn't have Remotes field",
+    "Remotes field should be removed before CRAN submission."
+  )
+}
 
+check_status <- function(status, name, warning) {
+  if (status) {
+    cat("Checking ", name, "... OK", "\n", sep = "")
+  } else {
+    cat("Checking ", name, "...\n", sep = "")
+    message("WARNING: ", warning)
+  }
+  invisible(status)
 }

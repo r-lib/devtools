@@ -31,7 +31,7 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
 
   if (is.null(version)) {
     # Grab the latest one: only happens if pulled from CRAN
-    package.path <- info[length(info)]
+    package.path <- info$path[NROW(info)]
   } else {
     package.path <- paste(package, "/", package, "_", version, ".tar.gz",
       sep = "")
@@ -46,7 +46,7 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
 }
 
 package_find_repo <- function(package, repos) {
-  for (repo in repos) {
+  archive_info <- function(repo) {
     if (length(repos) > 1)
       message("Trying ", repo)
 
@@ -60,11 +60,22 @@ package_find_repo <- function(package, repos) {
       error = function(e) list())
 
     info <- archive[[package]]
+    info$path <- rownames(info)
     if (!is.null(info)) {
       info$repo <- repo
-      return(info)
+      info
     }
   }
 
-  stop(sprintf("couldn't find package '%s'", package))
+  res <- do.call(rbind.data.frame,
+    c(lapply(repos, archive_info), list(make.row.names = FALSE)))
+
+  if (NROW(res) == 0) {
+    stop(sprintf("couldn't find package '%s'", package))
+  }
+
+  # order by the path (which contains the version) and then by modified time.
+  # This needs to be done in case the same package is available from multiple
+  # repositories.
+  res[order(res$path, res$mtime), ]
 }

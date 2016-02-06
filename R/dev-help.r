@@ -19,6 +19,7 @@
 #' dev_help("ggplot") # loads development documentation for ggplot
 #' }
 dev_help <- function(topic, stage = "render", type = getOption("help_type")) {
+  message("Using development documentation for ", topic)
   path <- find_topic(topic)
   if (is.null(path)) {
     dev <- paste(dev_packages(), collapse = ", ")
@@ -34,7 +35,6 @@ dev_help <- function(topic, stage = "render", type = getOption("help_type")) {
   }
 
 }
-
 
 view_rd <- function(path, package, stage = "render", type = getOption("help_type")) {
   if (is.null(type)) type <- "text"

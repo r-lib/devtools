@@ -24,11 +24,15 @@ use_testthat <- function(pkg = ".") {
   }
 
   # Create tests/testthat and install file for R CMD CHECK
+  message("* Creating tests/testthat/")
   dir.create(file.path(pkg$path, "tests", "testthat"),
     showWarnings = FALSE, recursive = TRUE)
+
+  message("* Creating tests/testthat.R")
   writeLines(render_template("testthat.R", list(name = pkg$package)),
     file.path(pkg$path, "tests", "testthat.R"))
 
+  message("* Adding testthat to Suggests")
   add_desc_package(pkg, "Suggests", "testthat")
 
   invisible(TRUE)
@@ -61,7 +65,10 @@ use_test <- function(name, pkg = ".") {
     render_template("test-example.R", list(test_name = name)),
     file.path(pkg$path, path))
 
-  message("Test file created in ", path)
+  message("* Creating test file", path)
+  open_in_rstudio(path)
+
+  invisible(TRUE)
 }
 
 #' @section \code{use_rstudio}:
@@ -138,9 +145,11 @@ use_rcpp <- function(pkg = ".") {
               c("*.o", "*.so", "*.dll"))
 
   message(
-    "Next, include the following roxygen tags somewhere in your package:\n",
+    "Next, include the following roxygen tags somewhere in your package:\n\n",
     "#' @useDynLib ", pkg$package, "\n",
-    "#' @importFrom Rcpp sourceCpp"
+    "#' @importFrom Rcpp sourceCpp\n",
+    "NULL\n\n",
+    "Then run document()"
   )
 }
 
@@ -518,20 +527,16 @@ use_build_ignore <- function(files, escape = TRUE, pkg = ".") {
   invisible(TRUE)
 }
 
-#' Use README.Rmd
+#' Create README files.
 #'
-#' This creates `README.Rmd` from template and adds to \code{.Rbuildignore}.
+#' Use \code{Rmd} if you want a rich intermingling of code and data. Use
+#' \code{md} for a basic README. \code{README.Rmd} will be automatically
+#' added to \code{.Rbuildignore}.
 #'
-#' @param hook Hook name. One of "pre-commit", "prepare-commit-msg",
-#'   "commit-msg", "post-commit", "applypatch-msg", "pre-applypatch",
-#'   "post-applypatch", "pre-rebase", "post-rewrite", "post-checkout",
-#'   "post-merge", "pre-push", "pre-auto-gc".
-#' @param script Text of script to run
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @export
 #' @family infrastructure
-#' @keywords internal
 use_readme_rmd <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
@@ -558,6 +563,29 @@ use_readme_rmd <- function(pkg = ".") {
   invisible(TRUE)
 }
 
+#' @rdname use_readme_rmd
+use_readme_md <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  if (uses_github(pkg$path)) {
+    pkg$github <- github_info(pkg$path)
+  }
+
+  news_path <- file.path(pkg$path, "README.md")
+  template <- render_template("README.md", pkg)
+
+  if (!file.exists(news_path)) {
+    message("* Creating README.md")
+    writeLines(template, news_path)
+  } else {
+    stop("NEWS.md already exists", call. = FALSE)
+  }
+
+  open_in_rstudio("README.md")
+  message("* Modify the template")
+  invisible(TRUE)
+}
+
 #' Use NEWS.md
 #'
 #' This creates \code{NEWS.md} from a template.
@@ -573,12 +601,14 @@ use_news_md <- function(pkg = ".") {
   template <- render_template("NEWS.md", pkg)
 
   if (!file.exists(news_path)) {
-    message("Creating NEWS.md")
+    message("* Creating NEWS.md")
     writeLines(template, news_path)
   } else {
     stop("NEWS.md already exists", call. = FALSE)
   }
 
+  open_in_rstudio("NEWS.md")
+  message("* Modify the template")
   invisible(TRUE)
 }
 
@@ -619,12 +649,15 @@ use_cran_comments <- function(pkg = ".") {
   if (file.exists(comments))
     stop("cran-comments.md already exists", call. = FALSE)
 
-  message("Adding cran-comments.md template")
+  message("* Adding cran-comments.md template")
   data <- list(
     rversion = paste0(version$major, ".", version$minor)
   )
-
   writeLines(render_template("cran-comments.md", data), comments)
+
+  message("* Modify the template")
+  open_in_rstudio("cran-comments.md")
+
   invisible()
 }
 
@@ -713,4 +746,16 @@ use_mit_license <- function(pkg = ".", copyright_holder = getOption("devtools.na
   writeLines(template, con = licensePath)
   message("* Added infrastructure for MIT license")
   licensePath
+}
+
+
+open_in_rstudio <- function(path) {
+  if (!rstudioapi::isAvailable())
+    return()
+
+  if (!rstudioapi::hasFun("navigateToFile"))
+    return()
+
+  rstudioapi::navigateToFile(path)
+
 }

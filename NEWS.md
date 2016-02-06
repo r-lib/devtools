@@ -1,5 +1,32 @@
 # devtools 1.10.0.9000
 
+* `check()` gains a `run_dont_test` argument to control whether or not
+  `\donttest{}` tests are tested. This defaults to `FALSE`, but `release()`
+  runs check with it set to `TRUE` (#1071).
+
+* The `cleanup` argument to `check()` is deprecated: it now always returns
+  the path to the check directory.
+
+* `use_travis()` generates a template compatible with the newest R-travis.
+
+* `build_win()` defaults to only R-devel, since this is most commonly
+  what you want.
+
+* `release()` has been tweaked to improve the order of the questions, 
+  and ensure that you're ok with problems.
+
+* Help shims now inform you that you're using development documentation 
+  (#1049).
+
+* `use_github()` prints the url of the repo (#1063).
+
+* `use_testthat()` tells you what it's doing (#1056).  
+
+* `use_news()`, and `use_test()` open the files in RStudio (if you're using
+  it and have rstudioapi installed).
+
+* `use_readme_md()` creates a basic `README.md` template (#1064).
+
 # devtools 1.10.0
 
 ## New features

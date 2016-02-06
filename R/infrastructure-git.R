@@ -63,7 +63,6 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' @param private If \code{TRUE}, creates a private repository.
 #' @param protocol transfer protocol, either "ssh" (the default) or "https"
 #' @family git infrastructure
-#' @keywords internal
 #' @export
 #' @examples
 #' \dontrun{
@@ -122,8 +121,9 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
     cred <- git2r::cred_user_pass("EMAIL", auth_token)
     git2r::push(r, "origin", "refs/heads/master", credentials = cred)
   }
-
   git2r::branch_set_upstream(git2r::head(r), "origin/master")
+
+  message("* View repo at ", create$html_url)
 
   invisible(NULL)
 }

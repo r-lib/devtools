@@ -73,7 +73,10 @@ dr_devtools <- function() {
 #' }
 dr_github <- function(path = ".") {
   if (!uses_git(path)) {
-    return(doctor("github", "Current path is not a git repository"))
+    return(doctor("github", "Path is not a git repository"))
+  }
+  if (!uses_github(path)) {
+    return(doctor("github", "Path is not a GitHub repository"))
   }
 
   msg <- character()

@@ -13,8 +13,7 @@ build_win(pkg = ".", version = c("R-release", "R-devel"), args = NULL,
 
 \item{version}{directory to upload to on the win-builder, controlling
 which version of R is used to build the package. Possible options are
-listed on \url{http://win-builder.r-project.org/}. Defaults to the
-released version of R.}
+listed on \url{http://win-builder.r-project.org/}. Defaults to R-devel.}
 
 \item{args}{An optional character vector of additional command
 line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},
