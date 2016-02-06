@@ -1,5 +1,9 @@
 # devtools 1.10.0.9000
 
+* `release()` gains an `args` argument to control build options, e.g.
+  to allow passing `args = "--compact-vignettes=both"` for packages with
+  heavy PDF vignettes (@krlmlr, #1077).
+
 * `check()` gains a `run_dont_test` argument to control whether or not
   `\donttest{}` tests are tested. This defaults to `FALSE`, but `release()`
   runs check with it set to `TRUE` (#1071).
