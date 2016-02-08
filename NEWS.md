@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* `revdep_check_save_summary()` now creates `index.md` to save one level
+  of clicking in github.
+
 * `use_coverage()` now adds covr to suggests, rather than recommending you
   install it explicitly in `.travis.yml`.
 

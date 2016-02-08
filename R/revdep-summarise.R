@@ -33,7 +33,7 @@ revdep_check_save_logs <- function(res, log_dir = "revdep") {
 #' @rdname revdep_check
 #' @export
 revdep_check_save_summary <- function(res, log_dir = "revdep") {
-  writeLines(revdep_check_summary(res), file.path(log_dir, "summary.md"))
+  writeLines(revdep_check_summary(res), file.path(log_dir, "index.md"))
 }
 
 #' @rdname revdep_check
