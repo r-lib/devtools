@@ -12,94 +12,70 @@ NULL
 #' add \pkg{testthat} to the suggested packages. This is called
 #' automatically from \code{\link{test}} if needed.
 #' @rdname infrastructure
-#' @aliases add_test_infrastructure
 #' @export
 use_testthat <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   check_suggested("testthat")
-  if (uses_testthat(pkg)) {
+  if (uses_testthat(pkg = pkg)) {
     message("* testthat is already initialized")
     return(invisible(TRUE))
   }
 
-  # Create tests/testthat and install file for R CMD CHECK
-  message("* Creating tests/testthat/")
-  dir.create(file.path(pkg$path, "tests", "testthat"),
-    showWarnings = FALSE, recursive = TRUE)
-
-  message("* Creating tests/testthat.R")
-  writeLines(render_template("testthat.R", list(name = pkg$package)),
-    file.path(pkg$path, "tests", "testthat.R"))
-
   message("* Adding testthat to Suggests")
   add_desc_package(pkg, "Suggests", "testthat")
 
+  use_directory("tests/testthat", pkg = pkg)
+  use_template(
+    "testthat.R",
+    "tests/testthat.R",
+    data = list(name = pkg$package),
+    pkg = pkg
+  )
+
   invisible(TRUE)
 }
-
-#' @export
-add_test_infrastructure <- use_testthat
 
 #' @section \code{use_test}:
 #' Add a test file, also add testing infrastructure if necessary.
 #' This will create \file{tests/testthat/test-<name>.R} with a user-specified
 #' name for the test.  Will fail if the file exists.
 #' @rdname infrastructure
-#' @aliases add_test_infrastructure
 #' @export
 use_test <- function(name, pkg = ".") {
   pkg <- as.package(pkg)
 
   check_suggested("testthat")
-  if (!uses_testthat(pkg)) {
-    use_testthat(pkg)
+  if (!uses_testthat(pkg = pkg)) {
+    use_testthat(pkg = pkg)
   }
 
-  path <- sprintf("tests/testthat/test-%s.R", name)
-  if (file.exists(file.path(pkg$path, path))) {
-    stop("File ", path, " exists", call. = FALSE)
-  }
-
-  writeLines(
-    render_template("test-example.R", list(test_name = name)),
-    file.path(pkg$path, path))
-
-  message("* Creating test file", path)
-  open_in_rstudio(path)
+  use_template("test-example.R",
+    sprintf("tests/testthat/test-%s.R", name),
+    data = list(test_name = name),
+    open = TRUE,
+    pkg = pkg
+  )
 
   invisible(TRUE)
 }
 
-#' @section \code{use_rstudio}:
-#' Does not modify \code{.Rbuildignore} as RStudio will do that when
-#' opened for the first time.
 #' @export
 #' @rdname infrastructure
-#' @aliases add_rstudio_project
 use_rstudio <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  path <- file.path(pkg$path, paste0(pkg$package, ".Rproj"))
-  if (file.exists(path)) {
-    message("* RStudio infrastructure already initialized")
-    return(invisible(TRUE))
-  }
+  use_template(
+    "template.Rproj",
+    paste0(pkg$package, ".Rproj"),
+    pkg = pkg
+  )
 
-  message("Adding RStudio project file to ", pkg$package)
-
-  template_path <- system.file("templates/template.Rproj", package = "devtools")
-  file.copy(template_path, path)
-
-  add_git_ignore(pkg, c(".Rproj.user", ".Rhistory", ".RData"))
-  add_build_ignore(pkg, c("^.*\\.Rproj$", "^\\.Rproj\\.user$"), escape = FALSE)
+  use_git_ignore(c(".Rproj.user", ".Rhistory", ".RData"), pkg = pkg)
+  use_build_ignore(c("^.*\\.Rproj$", "^\\.Rproj\\.user$"), escape = FALSE, pkg = pkg)
 
   invisible(TRUE)
 }
-
-#' @export
-add_rstudio_project <- use_rstudio
-
 
 #' @section \code{use_vignette}:
 #' Adds needed packages to \code{DESCRIPTION}, and creates draft vignette
@@ -116,15 +92,15 @@ use_vignette <- function(name, pkg = ".") {
   add_desc_package(pkg, "Suggests", "knitr")
   add_desc_package(pkg, "Suggests", "rmarkdown")
   add_desc_package(pkg, "VignetteBuilder", "knitr")
-  dir.create(file.path(pkg$path, "vignettes"), showWarnings = FALSE)
 
-  add_git_ignore(pkg, "inst/doc")
+  use_directory("vignettes", pkg = pkg)
+  use_git_ignore("inst/doc", pkg = pkg)
 
   path <- file.path(pkg$path, "vignettes", paste0(name, ".Rmd"))
   rmarkdown::draft(path, "html_vignette", "rmarkdown",
     create_dir = FALSE, edit = FALSE)
 
-  message("Draft vignette created in ", path)
+  open_in_rstudio(path)
 }
 
 #' @section \code{use_rcpp}:
@@ -139,10 +115,11 @@ use_rcpp <- function(pkg = ".") {
   add_desc_package(pkg, "LinkingTo", "Rcpp")
   add_desc_package(pkg, "Imports", "Rcpp")
 
-  message("Creating src/ and src/.gitignore")
-  dir.create(file.path(pkg$path, "src"), showWarnings = FALSE)
-  union_write(file.path(pkg$path, "src", ".gitignore"),
-              c("*.o", "*.so", "*.dll"))
+  use_directory("src/", pkg = pkg)
+
+  message("* Ignoring generated binary files.")
+  ignore_path <- file.path(pkg$path, "src", ".gitignore")
+  union_write(ignore_path, c("*.o", "*.so", "*.dll"))
 
   message(
     "Next, include the following roxygen tags somewhere in your package:\n\n",
@@ -162,35 +139,18 @@ use_rcpp <- function(pkg = ".") {
 use_travis <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  path <- file.path(pkg$path, ".travis.yml")
-  if (file.exists(path)) {
-    stop(".travis.yml already exists", call. = FALSE)
-  }
+  use_template("travis.yml", ".travis.yml", ignore = TRUE, pkg = pkg)
 
   gh <- github_info(pkg$path)
-  message("Adding .travis.yml to ", pkg$package, ". Next: \n",
+  message("Next: \n",
     " * Turn on travis for this repo at https://travis-ci.org/profile\n",
     " * Add a travis shield to your README.md:\n",
     "[![Travis-CI Build Status]",
-       "(https://travis-ci.org/", gh$username, "/", gh$repo, ".svg?branch=master)]",
-       "(https://travis-ci.org/", gh$username, "/", gh$repo, ")"
+       "(https://travis-ci.org/", gh$fullname, ".svg?branch=master)]",
+       "(https://travis-ci.org/", gh$fullname, ")"
   )
 
-  template_path <- system.file("templates/travis.yml", package = "devtools")
-  file.copy(template_path, path)
-
-  add_build_ignore(pkg, ".travis.yml")
-
   invisible(TRUE)
-}
-
-#' @rdname devtools-deprecated
-#' @section \code{use_coveralls}:
-#' Add coveralls to basic travis template to a package.
-#' @export
-use_coveralls <- function(pkg = ".") {
-  .Deprecated("use_coverage(type = \"coveralls\")", package = "devtools")
-  use_coverage(pkg, type = "coveralls")
 }
 
 #' @rdname infrastructure
@@ -200,22 +160,20 @@ use_coveralls <- function(pkg = ".") {
 #' @export
 use_coverage <- function(pkg = ".", type = c("codecov", "coveralls")) {
   pkg <- as.package(pkg)
+  check_suggested("covr")
 
   path <- file.path(pkg$path, ".travis.yml")
   if (!file.exists(path)) {
-    stop(".travis.yml does not exist, please run `use_travis()` to create it", call. = FALSE)
+    use_travis()
   }
 
   message("* Adding covr to Suggests")
-  use_package("covr", "Suggests", quiet = TRUE, pkg = pkg)
-
-  travis_content <- readLines(file.path(pkg$path, ".travis.yml"))
-
-  message("Next:")
+  add_desc_package(pkg, "Suggests", "covr")
 
   gh <- github_info(pkg$path)
   type <- match.arg(type)
 
+  message("Next:")
   switch(type,
     codecov = {
       message("* Add to `README.md`: \n",
@@ -245,9 +203,6 @@ use_coverage <- function(pkg = ".", type = c("codecov", "coveralls")) {
   invisible(TRUE)
 }
 
-#' @export
-add_travis <- use_travis
-
 #' @rdname infrastructure
 #' @section \code{use_appveyor}:
 #' Add basic AppVeyor template to a package. Also adds \code{appveyor.yml} to
@@ -256,24 +211,16 @@ add_travis <- use_travis
 use_appveyor <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  path <- file.path(pkg$path, "appveyor.yml")
-  if (file.exists(path)) {
-    stop("appveyor.yml already exists", call. = FALSE)
-  }
+  use_template("appveyor.yml", ignore = TRUE, pkg = pkg)
 
   gh <- github_info(pkg$path)
-  message("Adding appveyor.yml to ", pkg$package, ". Next: \n",
+  message("Next: \n",
           " * Turn on AppVeyor for this repo at https://ci.appveyor.com/projects\n",
           " * Add an AppVeyor shield to your README.md:\n",
           "[![AppVeyor Build Status]",
           "(https://ci.appveyor.com/api/projects/status/github/", gh$username, "/", gh$repo, "?branch=master&svg=true)]",
           "(https://ci.appveyor.com/project/", gh$username, "/", gh$repo, ")"
   )
-
-  template_path <- system.file("templates/appveyor.yml", package = "devtools")
-  file.copy(template_path, path)
-
-  add_build_ignore(pkg, "appveyor.yml")
 
   invisible(TRUE)
 }
@@ -285,14 +232,13 @@ use_appveyor <- function(pkg = ".") {
 use_package_doc <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  path <- file.path("R", paste(pkg$package, "-package.r", sep = ""))
-  if (file.exists(file.path(pkg$path, path))) {
-    stop(path, " already exists", call. = FALSE)
-  }
-
-  message("Creating ", path)
-  out <- render_template("packagename-package.r", list(name = pkg$package))
-  writeLines(out, file.path(pkg$path, path))
+  use_template(
+    "packagename-package.r",
+    file.path("R", paste(pkg$package, "-package.r", sep = "")),
+    data = list(name = pkg$package),
+    open = TRUE,
+    pkg = pkg
+  )
 }
 
 #' Use specified package.
@@ -303,7 +249,6 @@ use_package_doc <- function(pkg = ".") {
 #' @param package Name of package to depend on.
 #' @param type Type of dependency: must be one of "Imports", "Suggests",
 #'   "Depends", "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)
-#' @param quiet If \code{TRUE}, supresses output.
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
 #' @family infrastructure
@@ -314,7 +259,7 @@ use_package_doc <- function(pkg = ".") {
 #' use_package("dplyr", "suggests")
 #'
 #' }
-use_package <- function(package, type = "Imports", quiet = FALSE, pkg = ".") {
+use_package <- function(package, type = "Imports", pkg = ".") {
   stopifnot(is.character(package), length(package) == 1)
   stopifnot(is.character(type), length(type) == 1)
 
@@ -328,9 +273,7 @@ use_package <- function(package, type = "Imports", quiet = FALSE, pkg = ".") {
 
   type <- types[[match.arg(tolower(type), names(types))]]
 
-  if (!quiet) {
-    message("Adding ", package, " to ", type)
-  }
+  message("* Adding ", package, " to ", type)
   add_desc_package(pkg, type, package)
 
   msg <- switch(type,
@@ -343,9 +286,8 @@ use_package <- function(package, type = "Imports", quiet = FALSE, pkg = ".") {
     Enhances = "",
     LinkingTo = show_includes(package)
   )
-  if (!quiet) {
-    message(msg)
-  }
+  message("Next: ")
+  message(msg)
   invisible()
 }
 
@@ -484,14 +426,7 @@ check_data_paths <- function(paths, overwrite) {
 use_data_raw <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  path <- file.path(pkg$path, "data-raw")
-  if (file.exists(path)) {
-    stop("data-raw/ already exists", call. = FALSE)
-  }
-
-  message("Creating data-raw/")
-  dir.create(path)
-  add_build_ignore(pkg, "data-raw")
+  use_directory("data-raw", ignore = TRUE, pkg = pkg)
 
   message("Next: \n",
     "* Add data creation scripts in data-raw\n",
@@ -541,22 +476,11 @@ use_build_ignore <- function(files, escape = TRUE, pkg = ".") {
 use_readme_rmd <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  readme_path <- file.path(pkg$path, "README.Rmd")
-  template <- render_template("README.Rmd")
-
-  if (!file.exists(readme_path)) {
-    message("Creating README.Rmd")
-    writeLines(template, readme_path)
-  } else {
-    rule("README.Rmd exists. Please check that it starts with:")
-    message(template)
-    rule()
-  }
-  use_build_ignore("README.Rmd", pkg = pkg)
+  use_template("README.Rmd", ignore = TRUE, open = TRUE, pkg = pkg)
   use_build_ignore("^README-.*\\.png$", escape = FALSE, pkg = pkg)
 
-  if (uses_git(pkg$path) && file.exists(pkg$path, ".git", "hooks", "pre-commit")) {
-    message("Adding pre-commit hook")
+  if (uses_git(pkg$path) && !file.exists(pkg$path, ".git", "hooks", "pre-commit")) {
+    message("* Adding pre-commit hook")
     use_git_hook("pre-commit", render_template("readme-rmd-pre-commit.sh"),
       pkg = pkg)
   }
@@ -567,24 +491,11 @@ use_readme_rmd <- function(pkg = ".") {
 #' @rdname use_readme_rmd
 use_readme_md <- function(pkg = ".") {
   pkg <- as.package(pkg)
-
   if (uses_github(pkg$path)) {
     pkg$github <- github_info(pkg$path)
   }
 
-  news_path <- file.path(pkg$path, "README.md")
-  template <- render_template("README.md", pkg)
-
-  if (!file.exists(news_path)) {
-    message("* Creating README.md")
-    writeLines(template, news_path)
-  } else {
-    stop("NEWS.md already exists", call. = FALSE)
-  }
-
-  open_in_rstudio("README.md")
-  message("* Modify the template")
-  invisible(TRUE)
+  use_template("README.md", data = pkg, open = TRUE, pkg = pkg)
 }
 
 #' Use NEWS.md
@@ -598,19 +509,7 @@ use_readme_md <- function(pkg = ".") {
 use_news_md <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  news_path <- file.path(pkg$path, "NEWS.md")
-  template <- render_template("NEWS.md", pkg)
-
-  if (!file.exists(news_path)) {
-    message("* Creating NEWS.md")
-    writeLines(template, news_path)
-  } else {
-    stop("NEWS.md already exists", call. = FALSE)
-  }
-
-  open_in_rstudio("NEWS.md")
-  message("* Modify the template")
-  invisible(TRUE)
+  use_template("NEWS.md", data = pkg, open = TRUE, pkg = pkg)
 }
 
 #' @rdname infrastructure
@@ -621,19 +520,13 @@ use_news_md <- function(pkg = ".") {
 use_revdep <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  message("Creating revdep/ & adding to .Rbuildignore")
-  dir.create(file.path(pkg$path, "revdep"), showWarnings = FALSE)
-  use_build_ignore("revdep", pkg = pkg)
-
-  message("Add revdep subdirectories to .gitignore")
-  path <- file.path(pkg$path, "revdep", ".gitignore")
-  union_write(path, "**/")
-
-  if (!file.exists(file.path(pkg$path, "revdep/check.R"))) {
-    message("Adding revdep/check.R template")
-    writeLines(render_template("revdep.R", list(name = pkg$package)),
-      file.path(pkg$path, "revdep", "check.R"))
-  }
+  use_directory("revdep", ignore = TRUE, pkg = pkg)
+  use_template(
+    "revdep.R",
+    "revdep/check.R",
+    data = list(name = pkg$package),
+    pkg = pkg
+  )
 }
 
 #' @rdname infrastructure
@@ -644,20 +537,13 @@ use_revdep <- function(pkg = ".") {
 use_cran_comments <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  use_build_ignore("cran-comments.md")
-
-  comments <- file.path(pkg$path, "cran-comments.md")
-  if (file.exists(comments))
-    stop("cran-comments.md already exists", call. = FALSE)
-
-  message("* Adding cran-comments.md template")
-  data <- list(
-    rversion = paste0(version$major, ".", version$minor)
+  use_template(
+    "cran-comments.md",
+    data = list(rversion = paste0(version$major, ".", version$minor)),
+    ignore = TRUE,
+    open = TRUE,
+    pkg = pkg
   )
-  writeLines(render_template("cran-comments.md", data), comments)
-
-  message("* Modify the template")
-  open_in_rstudio("cran-comments.md")
 
   invisible()
 }
@@ -671,15 +557,11 @@ use_cran_comments <- function(pkg = ".") {
 use_code_of_conduct <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  comments <- file.path(pkg$path, "CONDUCT.md")
-  if (file.exists(comments))
-    stop("CONDUCT.md already exists", call. = FALSE)
-
-  message("* Creating CONDUCT.md")
-  writeLines(render_template("CONDUCT.md", list()), comments)
-
-  message("* Adding CONDUCT.md to .Rbuildignore")
-  use_build_ignore("CONDUCT.md")
+  use_template(
+    "CONDUCT.md",
+    ignore = TRUE,
+    pkg = pkg
+  )
 
   message("* Don't forget to describe the code of conduct in your README.md:")
   message("Please note that this project is released with a ",
@@ -727,28 +609,73 @@ use_mit_license <- function(pkg = ".", copyright_holder = getOption("devtools.na
   pkg <- as.package(pkg)
 
   # Update the DESCRIPTION
+  message("* Updating license field in DESCRIPTION.")
   descPath <- file.path(pkg$path, "DESCRIPTION")
   DESCRIPTION <- read_dcf(descPath)
   DESCRIPTION$License <- "MIT + file LICENSE"
   write_dcf(descPath, DESCRIPTION)
 
-  # Update the license
-  licensePath <- file.path(pkg$path, "LICENSE")
-  if (file.exists(licensePath))
-    if (!file.remove(licensePath))
-      stop("Failed to remove license file '", licensePath, "'", call. = FALSE)
-
-  # Write the MIT template
-  template <- c(
-    paste("YEAR:", format(Sys.Date(), "%Y")),
-    paste("COPYRIGHT HOLDER:", copyright_holder)
+  use_template(
+    "mit-license.TXT",
+    "LICENSE",
+    data = list(
+      year = format(Sys.Date(), "%Y"),
+      copyright_holder = copyright_holder
+    ),
+    open = identical(copyright_holder, "<Author>"),
+    pkg = pkg
   )
-
-  writeLines(template, con = licensePath)
-  message("* Added infrastructure for MIT license")
-  licensePath
 }
 
+use_directory <- function(path, ignore = FALSE, pkg = ".") {
+  pkg <- as.package(pkg)
+  pkg_path <- file.path(pkg$path, path)
+
+  if (file.exists(pkg_path)) {
+    if (!is_dir(pkg_path)) {
+      stop("`", path, "` exists but is not a directory.", call. = FALSE)
+    }
+  } else {
+    message("* Creating `", path, "`.")
+    dir.create(pkg_path, showWarnings = FALSE, recursive = TRUE)
+  }
+
+  if (ignore) {
+    message("* Adding `", path, "` to `.Rbuildignore`.")
+    use_build_ignore(path, pkg = pkg)
+  }
+
+  invisible(TRUE)
+}
+
+use_template <- function(template, save_as = template, data = list(),
+                         ignore = FALSE, open = FALSE, pkg = ".") {
+  pkg <- as.package(pkg)
+
+  path <- file.path(pkg$path, save_as)
+  if (!can_overwrite(path)) {
+    stop("`", path, "` already exists.", call. = FALSE)
+  }
+
+  template_path <- system.file("templates", template, package = "devtools",
+    mustWork = TRUE)
+  template_out <- whisker::whisker.render(readLines(template_path), data)
+
+  message("* Creating `", save_as, "` from template.")
+  writeLines(template_out, path)
+
+  if (ignore) {
+    message("* Adding `", save_as, "` to `.Rbuildignore`.")
+    use_build_ignore(path, pkg = pkg)
+  }
+
+  if (open) {
+    message("* Modify `", save_as, "`.")
+    open_in_rstudio(path)
+  }
+
+  invisible(TRUE)
+}
 
 open_in_rstudio <- function(path) {
   if (!rstudioapi::isAvailable())
@@ -760,3 +687,17 @@ open_in_rstudio <- function(path) {
   rstudioapi::navigateToFile(path)
 
 }
+
+can_overwrite <- function(path) {
+  name <- basename(path)
+
+  if (!file.exists(path)) {
+    TRUE
+  } else if (interactive() && !yesno("Overwrite `", name, "`?")) {
+    TRUE
+  } else {
+    FALSE
+  }
+}
+
+

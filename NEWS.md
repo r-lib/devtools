@@ -1,5 +1,12 @@
 # devtools 1.10.0.9000
 
+* All `use_` function have been overhauled to be more consistent. This
+  includes more consistent output. Most functions now also ask to overwrite
+  if a file already exists (#29).
+
+* Deprecated `use_coveralls()`, `add_rstudio_project()`, 
+  `add_test_infrastructure()`, and `add_travis()` have been removed.
+
 * `revdep_check_save_summary()` now creates `index.md` to save one level
   of clicking in github.
 

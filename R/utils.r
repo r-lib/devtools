@@ -153,3 +153,5 @@ is_bioconductor <- function(x) {
 trim_ws <- function(x) {
   gsub("^[[:space:]]+|[[:space:]]+$", "", x)
 }
+
+is_dir <- function(x) file.info(x)$isdir

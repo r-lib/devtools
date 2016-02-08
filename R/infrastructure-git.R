@@ -18,8 +18,7 @@ use_git <- function(message = "Initial commit", pkg = ".") {
   message("* Initialising repo")
   r <- git2r::init(pkg$path)
 
-  message("* Adding .Rproj.user, .Rhistory, and .RData to .gitignore")
-  add_git_ignore(pkg, c(".Rproj.user", ".Rhistory", ".RData"))
+  use_git_ignore(c(".Rproj.user", ".Rhistory", ".RData"), pkg = pkg)
 
   message("* Adding files and committing")
   paths <- unlist(git2r::status(r))
@@ -159,10 +158,13 @@ use_git_hook <- function(hook, script, pkg = ".") {
 }
 
 
-add_git_ignore <- function(pkg = ".", ignores) {
+use_git_ignore <- function(ignores, directory = ".", pkg = ".") {
   pkg <- as.package(pkg)
 
-  path <- file.path(pkg$path, ".gitignore")
+  paths <- paste0("`", ignores, "`", collapse = ", ")
+  message("* Adding ", paths, " to ", file.path(directory, ".gitignore"))
+
+  path <- file.path(pkg$path, directory, ".gitignore")
   union_write(path, ignores)
 
   invisible(TRUE)
