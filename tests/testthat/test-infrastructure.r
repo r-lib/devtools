@@ -59,3 +59,68 @@ test_that("use_data", {
     expect_equal(local_test_data_item_to_save, 42L)
   })
 })
+
+test_that("use_package", {
+  # use tests/testthat/testData as testing package
+  path_to_test_desc <- file.path("testData", "DESCRIPTION")
+  old_desc <- read_dcf(path_to_test_desc)
+
+  # be sure to return the description to original state on exit
+  on.exit(write_dcf(path_to_test_desc, old_desc))
+
+  # create all possible input scenarios
+  types <- c("Imports", "Suggests", "Depends")
+  package <- "utils"
+  versions <- c("default", "true", "other")
+  comparators <- c(">=", ">", "==", "<=", "<")
+  pkg <- "testData"
+
+  test_cases <-
+    expand.grid(
+      package = package,
+      type = types,
+      pkg = pkg,
+      version = versions,
+      compare = comparators,
+      stringsAsFactors = FALSE
+    )
+
+  # for each test case, we expect:
+  # 1. calls to use_package to be idempotent
+  # 2. the DESCRIPTION to only be modified in the appropriate place
+  apply(
+    X = test_cases, MARGIN = 1, FUN = function(x) {
+      x <- as.list(x)
+      x$version <- switch(x$version,
+                          default = NULL,
+                          true = TRUE,
+                          other = "3.0.0")
+
+      on.exit(write_dcf(path_to_test_desc, old_desc))
+
+      # expect a message with all calls, but don't specify what the message says
+      # perform twice so that we can check for idempotency
+      replicate(2, expect_message(do.call(use_package, x), regexp = NULL))
+
+      new_desc <- read_dcf(path_to_test_desc)
+
+      # DESCRIPTION file doesn't have the typical "Depends: R (>= x.y.z)" so
+      # we don't have to exclude it from the intersection
+      new_desc_names <- names(new_desc)
+      overlapping_fields <-
+        intersect(new_desc_names, names(old_desc))
+      expect_equal(new_desc[overlapping_fields], old_desc[overlapping_fields])
+
+      # check the new field:
+      modified_field <- setdiff(new_desc_names, overlapping_fields)
+      expect_equal(modified_field, x$type) # implicitly checks type and length
+
+      # check field value:
+      expect_equal(new_desc[[x$type]],
+                   build_package_txt(x$package, x$version, x$compare))
+    }
+  )
+
+  # test error is thrown with invalid `version`:
+  expect_error(use_package(package, types[1], pkg, "invalid", ">="))
+})

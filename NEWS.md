@@ -1,3 +1,9 @@
+* `use_package()` has gotten its signature extended to include arguments `version`,
+  and `compare` which allow users to insert more fine-grained dependency 
+  specifications in their DESCRIPTION files (e.g. `utils (>= 3.2.0)`).
+* unit tests for `use_package()` have been implemented (these include checks for
+  idempotency).
+
 # devtools 1.10.0.9000
 
 * `check_built()` allows you to run `R CMD check` on an already built package.

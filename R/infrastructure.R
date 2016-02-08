@@ -300,6 +300,27 @@ use_package_doc <- function(pkg = ".") {
   writeLines(out, file.path(pkg$path, path))
 }
 
+# help function for use_package
+# takes the same arguments as use_package
+build_package_txt <- function(package, version = NULL,
+                              compare =  c(">=", ">", "==", "<=", "<")) {
+  if (!is.null(version)) {
+    # add a version dependency
+    if (isTRUE(version)) {
+      version <- packageVersion(package)
+    } else {
+      # check that version is a valid version string
+      version <- package_version(version)
+    }
+    compare <- match.arg(compare)
+    package_txt <- paste0(package, " (", compare, " ", version, ")")
+  } else {
+    package_txt <- package
+  }
+
+  return(package_txt)
+}
+
 #' Use specified package.
 #'
 #' This adds a dependency to DESCRIPTION and offers a little advice
@@ -310,15 +331,29 @@ use_package_doc <- function(pkg = ".") {
 #'   "Depends", "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
+#' @param version Value indicating whether \code{package}'s version should be included
+#'   in \code{pkg}'s DESCRIPTION. Either \code{NULL}, \code{TRUE}, or a valid version
+#'   string. If \code{version} is \code{TRUE}, \code{package}'s current version
+#'   will be used (see examples).
+#'
+#' @param compare The comparator used for \code{package}'s version. All valid
+#'   CRAN comparators (i.e. \code{==}, \code{>=}, \code{<=}, \code{>}, and
+#'   \code{<}) are accepted, but not considered unless \code{version} is
+#'   non-\code{NULL}.
 #' @family infrastructure
 #' @export
 #' @examples
 #' \dontrun{
 #' use_package("ggplot2")
 #' use_package("dplyr", "suggests")
-#'
+#' use_package("devtools", version = TRUE) # "devtools (>= 1.10.0.9000)"
+#' use_package("devtools", version = TRUE, compare = "==") # "devtools (== 1.10.0.9000)"
+#' use_package("devtools", version = "1.10") # "devtools (>= 1.10)"
+#' use_package("devtools", version = "1.10", compare = ">") # "devtools (> 1.10)"
 #' }
-use_package <- function(package, type = "Imports", pkg = ".") {
+use_package <- function(package, type = "Imports", pkg = ".", version = NULL,
+                        compare =  c(">=", ">", "==", "<=", "<")) {
+
   stopifnot(is.character(package), length(package) == 1)
   stopifnot(is.character(type), length(type) == 1)
 
@@ -332,8 +367,9 @@ use_package <- function(package, type = "Imports", pkg = ".") {
 
   type <- types[[match.arg(tolower(type), names(types))]]
 
-  message("Adding ", package, " to ", type)
-  add_desc_package(pkg, type, package)
+  package_txt <- build_package_txt(package, version, compare)
+  message("Adding ", package_txt, " to ", type)
+  add_desc_package(pkg, type, package_txt)
 
   msg <- switch(type,
     Imports = paste0("Refer to functions with ", package, "::fun()"),
@@ -368,7 +404,9 @@ add_desc_package <- function(pkg = ".", field, name) {
     new <- name
     changed <- TRUE
   } else {
-    if (!grepl(name, old)) {
+    # used fixed regexp pattern to account for
+    # name == 'package (>= packageVersion)'
+    if (!grepl(name, old, fixed = TRUE)) {
       new <- paste0(old, ",\n    ", name)
       changed <- TRUE
     } else {
