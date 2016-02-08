@@ -2,7 +2,7 @@
 
 * All `use_` function have been overhauled to be more consistent. This
   includes more consistent output. Most functions now also ask to overwrite
-  if a file already exists (#29).
+  if a file already exists (#1074).
 
 * Deprecated `use_coveralls()`, `add_rstudio_project()`, 
   `add_test_infrastructure()`, and `add_travis()` have been removed.
