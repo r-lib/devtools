@@ -4,13 +4,15 @@
 \alias{use_package}
 \title{Use specified package.}
 \usage{
-use_package(package, type = "Imports", pkg = ".")
+use_package(package, type = "Imports", quiet = FALSE, pkg = ".")
 }
 \arguments{
 \item{package}{Name of package to depend on.}
 
 \item{type}{Type of dependency: must be one of "Imports", "Suggests",
 "Depends", "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)}
+
+\item{quiet}{If \code{TRUE}, supresses output.}
 
 \item{pkg}{package description, can be path or package name. See
 \code{\link{as.package}} for more information.}

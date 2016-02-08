@@ -38,7 +38,8 @@ Suggests:
     bitops,
     roxygen2 (>= 5.0.0),
     evaluate,
-    rversions
+    rversions,
+    covr
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1

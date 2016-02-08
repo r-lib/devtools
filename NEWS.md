@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* `use_coverage()` now adds covr to suggests, rather than recommending you
+  install it explicitly in `.travis.yml`.
+
 * `check_built()` allows you to run `R CMD check` on an already built package.
 
 * `system_check()` gains new arguments `path` to controls the working directory

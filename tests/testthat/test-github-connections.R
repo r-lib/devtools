@@ -67,7 +67,8 @@ test_that("github info and links can be queried and manipulated", {
   expect_true(uses_github(test_pkg))
 
   gh_info <- github_info(test_pkg)
-  expect_identical(gh_info, list(username = "hadley", repo = "devtools"))
+  expect_equal(gh_info$username, "hadley")
+  expect_equal(gh_info$repo, "devtools")
 
   desc_path <- file.path(test_pkg, "DESCRIPTION")
   desc <- read_dcf(desc_path)
@@ -105,21 +106,23 @@ test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
 
   r <- git2r::repository(test_pkg, discover = TRUE)
   git2r::remote_add(r, "anomaly",
-                    "https://github.com/twitter/AnomalyDetection.git")
+    "https://github.com/twitter/AnomalyDetection.git")
 
   ## defaults to "origin"
-  expect_identical(list(username = "hadley", repo = "devtools"),
-                   github_info(test_pkg))
+  expect_equal(github_info(test_pkg)$username, "hadley")
+  expect_equal(github_info(test_pkg)$repo, "devtools")
 
   ## another remote will be used if no "origin"
   git2r::remote_rename(r, "origin", "zzz")
-  expect_identical(list(username = "twitter", repo = "AnomalyDetection"),
-                   github_info(test_pkg))
+  gh_info <- github_info(test_pkg)
+  expect_equal(gh_info$username, "twitter")
+  expect_equal(gh_info$repo, "AnomalyDetection")
   git2r::remote_rename(r, "zzz", "origin")
 
   ## another remote can be requested by name
-  expect_identical(list(username = "twitter", repo = "AnomalyDetection"),
-                   github_info(test_pkg, remote_name = "anomaly"))
+  gh_info <- github_info(test_pkg, remote_name = "anomaly")
+  expect_equal(gh_info$username, "twitter")
+  expect_equal(gh_info$repo, "AnomalyDetection")
 
   ## error if nonexistent remote requested by name
   expect_error(github_info(test_pkg, remote_name = "nope"))

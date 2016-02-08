@@ -117,7 +117,11 @@ github_remote_parse <- function(x) {
 
   m <- regexec(re, x)
   match <- regmatches(x, m)[[1]]
-  list(username = match[2], repo = match[3])
+  list(
+    username = match[2],
+    repo = match[3],
+    fullname = paste0(match[2], "/", match[3])
+  )
 }
 
 # Extract the commit hash from a git archive. Git archives include the SHA1

@@ -206,45 +206,40 @@ use_coverage <- function(pkg = ".", type = c("codecov", "coveralls")) {
     stop(".travis.yml does not exist, please run `use_travis()` to create it", call. = FALSE)
   }
 
+  message("* Adding covr to Suggests")
+  use_package("covr", "Suggests", quiet = TRUE, pkg = pkg)
+
   travis_content <- readLines(file.path(pkg$path, ".travis.yml"))
 
+  message("Next:")
+
+  gh <- github_info(pkg$path)
   type <- match.arg(type)
 
   switch(type,
     codecov = {
-      if (any(grepl("codecov", travis_content))) {
-        stop("codecov information already added to .travis.yml", call. = FALSE)
-      }
-
-      gh <- github_info(pkg$path)
-      message("Adding codecov information into .travis.yml for ", pkg$package, ". Next: \n",
+      message("* Add to `README.md`: \n",
         "[![Coverage Status]",
-        "(https://img.shields.io/codecov/c/github/", gh$username, "/", gh$repo, "/master.svg)]",
-        "(https://codecov.io/github/", gh$username, "/", gh$repo, "?branch=master)\n",
-        " * Add the following to .travis.yml:\n",
-        "r_packages:\n",
-        "  - covr\n",
+        "(https://img.shields.io/codecov/c/github/", gh$fullname, "/master.svg)]",
+        "(https://codecov.io/github/", gh$fullname, "?branch=master)"
+      )
+      message("* Add to `.travis.yml`:\n",
         "after_success:\n",
-        "  - Rscript -e 'covr::codecov()'")
+        "  - Rscript -e 'covr::codecov()'"
+      )
     },
 
     coveralls = {
-      if (any(grepl("coveralls", travis_content))) {
-        stop("coveralls information already added to .travis.yml", call. = FALSE)
-      }
-
-      gh <- github_info(pkg$path)
-      message("Adding coveralls information into .travis.yml for ", pkg$package, ". Next: \n",
-        " * Turn on coveralls for this repo at https://coveralls.io/repos/new\n",
-        " * Add a coveralls shield to your README.md:\n",
+      message("* Turn on coveralls for this repo at https://coveralls.io/repos/new")
+      message("* Add to `README.md`: \n",
         "[![Coverage Status]",
-        "(https://img.shields.io/coveralls/", gh$username, "/", gh$repo, ".svg)]",
-        "(https://coveralls.io/r/", gh$username, "/", gh$repo, "?branch=master)\n",
-        " * Add the following to .travis.yml:\n",
-        "r_github_packages:\n",
-        "  - jimhester/covr\n",
+        "(https://img.shields.io/coveralls/", gh$fullname, ".svg)]",
+        "(https://coveralls.io/r/", gh$fullname, "?branch=master)"
+      )
+      message("* Add to `.travis.yml`:\n",
         "after_success:\n",
-        "  - Rscript -e 'covr::coveralls()'")
+        "  - Rscript -e 'covr::coveralls()'"
+      )
     })
 
   invisible(TRUE)
@@ -308,6 +303,7 @@ use_package_doc <- function(pkg = ".") {
 #' @param package Name of package to depend on.
 #' @param type Type of dependency: must be one of "Imports", "Suggests",
 #'   "Depends", "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)
+#' @param quiet If \code{TRUE}, supresses output.
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
 #' @family infrastructure
@@ -318,7 +314,7 @@ use_package_doc <- function(pkg = ".") {
 #' use_package("dplyr", "suggests")
 #'
 #' }
-use_package <- function(package, type = "Imports", pkg = ".") {
+use_package <- function(package, type = "Imports", quiet = FALSE, pkg = ".") {
   stopifnot(is.character(package), length(package) == 1)
   stopifnot(is.character(type), length(type) == 1)
 
@@ -332,7 +328,9 @@ use_package <- function(package, type = "Imports", pkg = ".") {
 
   type <- types[[match.arg(tolower(type), names(types))]]
 
-  message("Adding ", package, " to ", type)
+  if (!quiet) {
+    message("Adding ", package, " to ", type)
+  }
   add_desc_package(pkg, type, package)
 
   msg <- switch(type,
@@ -345,7 +343,10 @@ use_package <- function(package, type = "Imports", pkg = ".") {
     Enhances = "",
     LinkingTo = show_includes(package)
   )
-  message(msg)
+  if (!quiet) {
+    message(msg)
+  }
+  invisible()
 }
 
 show_includes <- function(package) {
