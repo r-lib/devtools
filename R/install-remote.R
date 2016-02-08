@@ -123,7 +123,7 @@ package2remote <- function(x, repos = getOption("repos"), type = getOption("pkgT
 
     # Packages installed with install.packages()
     if (!is.null(x$Repository) && x$Repository == "CRAN") {
-      remote("CRAN",
+      remote("cran",
         name = x$Package,
         repos = repos,
         pkg_type = type,
@@ -168,7 +168,7 @@ package2remote <- function(x, repos = getOption("repos"), type = getOption("pkgT
       repo = x$RemoteRepo),
 
     # packages installed with install_CRAN
-    CRAN = remote("CRAN",
+    cran = remote("cran",
       name = x$RemoteName,
       repos = eval(parse(text = x$RemoteRepos)),
       pkg_type = x$RemotePkgType,

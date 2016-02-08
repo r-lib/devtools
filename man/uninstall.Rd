@@ -26,10 +26,10 @@ use \code{\link[withr]{with_libpaths}}.
 \code{\link{with_debug}} to install packages with debugging flags
   set.
 
-Other package installation: \code{\link{install_CRAN}},
-  \code{\link{install_bitbucket}},
-  \code{\link{install_github}}, \code{\link{install_git}},
-  \code{\link{install_svn}}, \code{\link{install_url}},
-  \code{\link{install_version}}, \code{\link{install}}
+Other package installation: \code{\link{install_bitbucket}},
+  \code{\link{install_cran}}, \code{\link{install_github}},
+  \code{\link{install_git}}, \code{\link{install_svn}},
+  \code{\link{install_url}}, \code{\link{install_version}},
+  \code{\link{install}}
 }
 

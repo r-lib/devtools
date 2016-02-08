@@ -71,10 +71,10 @@ install_github("hadley/private", auth_token = "abc")
 \seealso{
 \code{\link{github_pull}}
 
-Other package installation: \code{\link{install_CRAN}},
-  \code{\link{install_bitbucket}},
-  \code{\link{install_git}}, \code{\link{install_svn}},
-  \code{\link{install_url}}, \code{\link{install_version}},
-  \code{\link{install}}, \code{\link{uninstall}}
+Other package installation: \code{\link{install_bitbucket}},
+  \code{\link{install_cran}}, \code{\link{install_git}},
+  \code{\link{install_svn}}, \code{\link{install_url}},
+  \code{\link{install_version}}, \code{\link{install}},
+  \code{\link{uninstall}}
 }
 

@@ -9,19 +9,19 @@
 #' @family package installation
 #' @examples
 #' \dontrun{
-#' install_CRAN("ggplot2")
-#' install_CRAN(c("httpuv", "shiny")
+#' install_cran("ggplot2")
+#' install_cran(c("httpuv", "shiny")
 #' }
-install_CRAN <- function(pkgs, repos = getOption("repos"), type = getOption("pkgType"), ..., quiet = FALSE) {
+install_cran <- function(pkgs, repos = getOption("repos"), type = getOption("pkgType"), ..., quiet = FALSE) {
 
-  remotes <- lapply(pkgs, CRAN_remote, repos = repos, type = type)
+  remotes <- lapply(pkgs, cran_remote, repos = repos, type = type)
 
   install_remotes(remotes, quiet = quiet, ...)
 }
 
-CRAN_remote <- function(pkg, repos, type) {
+cran_remote <- function(pkg, repos, type) {
 
-  remote("CRAN",
+  remote("cran",
     name = pkg,
     repos = repos,
     pkg_type = type)
@@ -29,16 +29,16 @@ CRAN_remote <- function(pkg, repos, type) {
 
 
 #' @export
-remote_download.CRAN_remote <- function(x, quiet = FALSE) {
+remote_download.cran_remote <- function(x, quiet = FALSE) {
   dest_dir <- tempdir()
   download.packages(x$name, destdir = dest_dir, repos = x$repos, type = x$pkg_type)[1, 2]
 }
 
 #' @export
-remote_metadata.CRAN_remote <- function(x, bundle = NULL, source = NULL) {
+remote_metadata.cran_remote <- function(x, bundle = NULL, source = NULL) {
   version <- read_dcf(file.path(source, "DESCRIPTION"))$Version
   list(
-    RemoteType = "CRAN",
+    RemoteType = "cran",
     RemoteSha = version,
     RemoteRepos = deparse(x$repos),
     RemotePkgType = x$pkg_type
@@ -46,12 +46,12 @@ remote_metadata.CRAN_remote <- function(x, bundle = NULL, source = NULL) {
 }
 
 #' @export
-remote_package_name.CRAN_remote <- function(remote, ...) {
+remote_package_name.cran_remote <- function(remote, ...) {
   remote$name
 }
 
 #' @export
-remote_sha.CRAN_remote <- function(remote, url = "https://github.com", ...) {
+remote_sha.cran_remote <- function(remote, url = "https://github.com", ...) {
   cran <- available_packages(remote$repos, remote$pkg_type)
 
   tryCatch(cran[remote$name, "Version"], error = function(e) NA)
