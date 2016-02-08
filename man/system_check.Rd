@@ -4,25 +4,30 @@
 \alias{system_check}
 \title{Run a system command and check if it succeeds.}
 \usage{
-system_check(cmd, args = character(), env = character(), quiet = FALSE,
-  ...)
+system_check(cmd, args = character(), env_vars = character(), path = ".",
+  quiet = FALSE, throw = TRUE, ...)
 }
 \arguments{
-\item{cmd}{the command to run.}
+\item{cmd}{Command to run. Will be quoted by \code{\link{shQuote}()}.}
 
-\item{args}{a vector of command arguments.}
+\item{args}{A character vector of arguments.}
 
-\item{env}{a named character vector of environment variables.  Will be quoted}
+\item{path}{Path in which to execute the command}
 
-\item{quiet}{if \code{FALSE}, the command to be run will be echoed.}
+\item{quiet}{If \code{FALSE}, the command to be run will be echoed.}
+
+\item{throw}{If \code{TRUE}, will throw an error if the command fails
+(i.e. the return value is not 0).}
 
 \item{...}{additional arguments passed to \code{\link[base]{system}}}
+
+\item{env}{A named character vector of environment variables.}
 }
 \value{
-\code{TRUE} if the command succeeds, an error will be thrown if the
-command fails.
+(Invisibly) the return value of the function.
 }
 \description{
 Run a system command and check if it succeeds.
 }
+\keyword{internal}
 

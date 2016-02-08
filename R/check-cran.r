@@ -47,7 +47,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   if (!file.exists(libpath)) dir.create(libpath)
   libpath <- normalizePath(libpath)
 
-  # Add the temoporary library and remove on exit
+  # Add the temporary library and remove on exit
   libpaths_orig <- withr::with_libpaths(libpath, {
 
     rule("Installing dependencies") # --------------------------------------------
@@ -82,23 +82,20 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     }
 
     rule("Checking packages") # --------------------------------------------------
+    pkg_names <- format(pkgs)
     check_pkg <- function(i) {
-      message("Checking ", pkgs[i])
+      message("Checking ", pkg_names[i])
 
       start_time <- Sys.time()
-      check_out <- tryCatch({
-        check_r_cmd(pkgs[i], local_urls[i],
-          args = "--no-multiarch --no-manual --no-codoc",
-          check_dir = check_dir,
-          quiet = TRUE
-        )
-      }, error = function(e) {
-        message(pkgs[i], " failed : ", check_dir, "/", pkgs[i],
-          ".Rcheck/00check.log")
-        NULL
-      })
+      res <- check_built(
+        local_urls[i],
+        args = "--no-multiarch --no-manual --no-codoc",
+        check_dir = check_dir,
+        quiet = TRUE
+      )
       end_time <- Sys.time()
 
+      message("Checked  ", pkg_names[i], ": ", summarise_check_results(res))
       elapsed_time <- as.numeric(end_time - start_time, units = "secs")
       writeLines(
         sprintf("%d  %s  %.1f", i, pkgs[i], elapsed_time),

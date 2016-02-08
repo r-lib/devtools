@@ -52,9 +52,9 @@ format.check_results <- function(x, ...) {
 summarise_check_results <- function(x) {
   n <- lapply(x, length)
   paste0(
-    n$errors, " ", ngettext(n$errors, "error", "errors"), " | ",
-    n$warnings, " ", ngettext(n$warnings, "warning", "warnings"), " | ",
-    n$notes, " ", ngettext(n$notes, "note", "notes")
+    n$errors, " ", ngettext(n$errors, "error ", "errors"), " | ",
+    n$warnings, " ", ngettext(n$warnings, "warning ", "warnings"), " | ",
+    n$notes, " ", ngettext(n$notes, "note ", "notes")
   )
 }
 

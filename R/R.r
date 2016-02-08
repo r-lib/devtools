@@ -1,9 +1,19 @@
 # R("-e 'str(as.list(Sys.getenv()))' --slave")
-R <- function(options, path = tempdir(), env_vars = NULL, ...) {
-  options <- paste(
-    "--no-site-file", "--no-environ", "--no-save", "--no-restore",
-    options)
-  r_path <- file.path(R.home("bin"), "R")
+R <- function(args, path = tempdir(), env_vars = character(), ...) {
+  r <- file.path(R.home("bin"), "R")
+
+  stopifnot(is.character(args))
+  args <- c(
+    "--no-site-file",
+    "--no-environ",
+    "--no-save",
+    "--no-restore",
+    "--quiet",
+    args
+  )
+
+  stopifnot(is.character(env_vars))
+  env_vars <- c(r_profile(), r_env_vars(), env_vars)
 
   # If rtools has been detected, add it to the path only when running R...
   if (!is.null(get_rtools_path())) {
@@ -11,8 +21,7 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
     on.exit(set_path(old))
   }
 
-  withr::with_dir(path, system_check(r_path, options, c(r_profile(),
-                                               r_env_vars(), env_vars), ...))
+  system_check(r, args = args, env_vars = env_vars, path = path, ...)
 }
 
 #' Run R CMD xxx from within R
@@ -25,7 +34,7 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
 #' @return \code{TRUE} if the command succeeds, throws an error if the command
 #' fails.
 #' @export
-RCMD <- function(cmd, options, path = tempdir(), env_vars = NULL, ...) {
+RCMD <- function(cmd, options, path = tempdir(), env_vars = character(), ...) {
   options <- paste(options, collapse = " ")
   R(paste("CMD", cmd, options), path = path, env_vars = env_vars, ...)
 }

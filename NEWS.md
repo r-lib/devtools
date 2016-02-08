@@ -1,5 +1,17 @@
 # devtools 1.10.0.9000
 
+* `check_built()` allows you to run `R CMD check` on an already built package.
+
+* `system_check()` gains new arguments `path` to controls the working directory
+  of the command, and `throw` to control whether or not it throws an error
+  on command failure. `env` has been renamed to the more explicit `env_vars`.
+
+* `revdep_check()` now reports summary results as they come in.
+
+* `check()` now always succeeds (instead of throwing an error when 
+  `R CMD check` finds an `ERROR`), returning an object that summarises
+  the check failures.
+
 * `check()` gains a `run_dont_test` argument to control whether or not
   `\donttest{}` tests are tested. This defaults to `FALSE`, but `release()`
   runs check with it set to `TRUE` (#1071).

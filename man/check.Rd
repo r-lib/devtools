@@ -2,12 +2,16 @@
 % Please edit documentation in R/check.r
 \name{check}
 \alias{check}
+\alias{check_built}
 \title{Build and check a package, cleaning up automatically on success.}
 \usage{
-check(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
+check(pkg = ".", document = TRUE, build_args = NULL, ..., cran = TRUE,
   check_version = FALSE, force_suggests = FALSE, run_dont_test = FALSE,
-  args = NULL, build_args = NULL, quiet = FALSE, check_dir = tempdir(),
-  ...)
+  args = NULL, quiet = FALSE, check_dir = tempdir(), cleanup = TRUE)
+
+check_built(path = NULL, cran = TRUE, check_version = FALSE,
+  force_suggests = FALSE, run_dont_test = FALSE, args = NULL,
+  check_dir = tempdir(), quiet = FALSE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -16,7 +20,9 @@ check(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
 \item{document}{if \code{TRUE} (the default), will update and check
 documentation before running formal check.}
 
-\item{cleanup}{Deprecated.}
+\item{build_args}{Additional arguments passed to \code{R CMD build}}
+
+\item{...}{Additional arguments passed on to \code{\link{build}()}.}
 
 \item{cran}{if \code{TRUE} (the default), check using the same settings as
 CRAN uses.}
@@ -33,25 +39,31 @@ packages aren't found.}
 \code{\\dontest\{\}} are also tested. This is important for CRAN
 submission.}
 
-\item{args, build_args}{An optional character vector of additional command
-line arguments to be passed to \code{R CMD check}/\code{R CMD build}/\code{R CMD INSTALL}.}
+\item{args}{Additional arguments passed to \code{R CMD check}}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{check_dir}{the directory in which the package is checked}
 
-\item{...}{Additional arguments passed to \code{\link{build}}}
+\item{cleanup}{Deprecated.}
+
+\item{path}{Path to built package.}
+}
+\value{
+An object containing errors, warnings, and notes.
 }
 \description{
 \code{check} automatically builds and checks a source package, using all
-known best practices. Passing \code{R CMD check} is essential if you want to
-submit your package to CRAN: you must not have any ERRORs or WARNINGs, and
-you want to ensure that there are as few NOTEs as possible.  If you are not
-submitting to CRAN, at least ensure that there are no ERRORs: these
-typically represent serious problems.
+known best practices. \code{check_built} checks an already built package.
 }
 \details{
-\code{check} automatically builds a package before using \code{R CMD check}
+Passing \code{R CMD check} is essential if you want to submit your package
+to CRAN: you must not have any ERRORs or WARNINGs, and you want to ensure
+that there are as few NOTEs as possible.  If you are not submitting to CRAN,
+at least ensure that there are no ERRORs or WARNINGs: these typically
+represent serious problems.
+
+\code{check} automatically builds a package before calling \code{check_built}
 as this is the recommended way to check packages.  Note that this process
 runs in an independent realisation of R, so nothing in your current
 workspace will affect the process.
@@ -78,7 +90,6 @@ with how check works on CRAN. This includes:
 
  \item env vars set by arguments \code{check_version} and
    \code{force_suggests}
-
 }
 }
 \seealso{

@@ -2,9 +2,7 @@ context("Check")
 
 test_that("sucessful check doesn't trigger error", {
   skip_on_cran()
-  path <- check("testTest", quiet = TRUE)
-
-  results <- parse_check_results(file.path(path, "00check.log"))
+  results <- check("testTest", quiet = TRUE)
 
   expect_error(signal_check_results(results), NA)
   expect_equal(

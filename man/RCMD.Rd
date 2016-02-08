@@ -4,7 +4,7 @@
 \alias{RCMD}
 \title{Run R CMD xxx from within R}
 \usage{
-RCMD(cmd, options, path = tempdir(), env_vars = NULL, ...)
+RCMD(cmd, options, path = tempdir(), env_vars = character(), ...)
 }
 \arguments{
 \item{cmd}{one of the R tools available from the R CMD interface.}

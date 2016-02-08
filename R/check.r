@@ -1,13 +1,15 @@
 #' Build and check a package, cleaning up automatically on success.
 #'
 #' \code{check} automatically builds and checks a source package, using all
-#' known best practices. Passing \code{R CMD check} is essential if you want to
-#' submit your package to CRAN: you must not have any ERRORs or WARNINGs, and
-#' you want to ensure that there are as few NOTEs as possible.  If you are not
-#' submitting to CRAN, at least ensure that there are no ERRORs: these
-#' typically represent serious problems.
+#' known best practices. \code{check_built} checks an already built package.
 #'
-#' \code{check} automatically builds a package before using \code{R CMD check}
+#' Passing \code{R CMD check} is essential if you want to submit your package
+#' to CRAN: you must not have any ERRORs or WARNINGs, and you want to ensure
+#' that there are as few NOTEs as possible.  If you are not submitting to CRAN,
+#' at least ensure that there are no ERRORs or WARNINGs: these typically
+#' represent serious problems.
+#'
+#' \code{check} automatically builds a package before calling \code{check_built}
 #' as this is the recommended way to check packages.  Note that this process
 #' runs in an independent realisation of R, so nothing in your current
 #' workspace will affect the process.
@@ -33,37 +35,32 @@
 #'
 #'  \item env vars set by arguments \code{check_version} and
 #'    \code{force_suggests}
-#'
 #' }
 #'
+#' @return An object containing errors, warnings, and notes.
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param document if \code{TRUE} (the default), will update and check
 #'   documentation before running formal check.
 #' @param cleanup Deprecated.
-#' @param cran if \code{TRUE} (the default), check using the same settings as
-#'   CRAN uses.
-#' @param run_dont_test Sets \code{--run-donttest} so that tests surrounded in
-#'   \code{\\dontest\{\}} are also tested. This is important for CRAN
-#'   submission.
-#' @param check_version Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
-#'   If \code{TRUE}, performns a number of checked related
-#'   to version numbers of packages on CRAN.
-#' @param force_suggests Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
-#'   \code{FALSE} (the default), check will proceed even if all suggested
-#'   packages aren't found.
-#' @param args,build_args An optional character vector of additional command
-#'   line arguments to be passed to \code{R CMD check}/\code{R CMD build}/\code{R CMD INSTALL}.
+#' @param build_args Additional arguments passed to \code{R CMD build}
+#' @param ... Additional arguments passed on to \code{\link{build}()}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
-#' @param check_dir the directory in which the package is checked
-#' @param ... Additional arguments passed to \code{\link{build}}
 #' @seealso \code{\link{release}} if you want to send the checked package to
 #'   CRAN.
 #' @export
-check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
-                  check_version = FALSE, force_suggests = FALSE,
-                  run_dont_test = FALSE, args = NULL, build_args = NULL,
-                  quiet = FALSE, check_dir = tempdir(), ...) {
+check <- function(pkg = ".",
+                  document = TRUE,
+                  build_args = NULL,
+                  ...,
+                  cran = TRUE,
+                  check_version = FALSE,
+                  force_suggests = FALSE,
+                  run_dont_test = FALSE,
+                  args = NULL,
+                  quiet = FALSE,
+                  check_dir = tempdir(),
+                  cleanup = TRUE) {
   pkg <- as.package(pkg)
   if (!missing(cleanup)) {
     warning("`cleanup` is deprecated", call. = FALSE)
@@ -77,14 +74,14 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
     show_env_vars(compiler_flags(FALSE))
     rule("Building ", pkg$package)
   }
+
   withr::with_envvar(compiler_flags(FALSE), action = "prefix", {
     built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args, ...)
     on.exit(unlink(built_path), add = TRUE)
   })
 
-  check_path <- check_r_cmd(
-    pkg$package,
-    built_path = built_path,
+  check_built(
+    built_path,
     cran = cran,
     check_version = check_version,
     force_suggests = force_suggests,
@@ -93,52 +90,58 @@ check <- function(pkg = ".", document = TRUE, cleanup = TRUE, cran = TRUE,
     quiet = quiet,
     check_dir = check_dir
   )
-
-  if (!quiet) {
-    rule("Check summary")
-    results <- parse_check_results(file.path(check_path, "00check.log"))
-    print(results)
-  }
-
-  invisible(check_path)
 }
 
-
-# Run R CMD check and return the path for the check
-# @param built_path The path to the built .tar.gz source package.
-# @param check_dir The directory to unpack the .tar.gz file to
-check_r_cmd <- function(name, built_path = NULL, cran = TRUE,
+#' @export
+#' @rdname check
+#' @param path Path to built package.
+#' @param cran if \code{TRUE} (the default), check using the same settings as
+#'   CRAN uses.
+#' @param run_dont_test Sets \code{--run-donttest} so that tests surrounded in
+#'   \code{\\dontest\{\}} are also tested. This is important for CRAN
+#'   submission.
+#' @param check_version Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
+#'   If \code{TRUE}, performns a number of checked related
+#'   to version numbers of packages on CRAN.
+#' @param force_suggests Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
+#'   \code{FALSE} (the default), check will proceed even if all suggested
+#'   packages aren't found.
+#' @param check_dir the directory in which the package is checked
+#' @param args Additional arguments passed to \code{R CMD check}
+check_built <- function(path = NULL, cran = TRUE,
                         check_version = FALSE, force_suggests = FALSE,
                         run_dont_test = FALSE, args = NULL,
-                        check_dir = tempdir(), quiet = FALSE, ...) {
+                        check_dir = tempdir(), quiet = FALSE) {
 
-  pkgname <- gsub("_.*?$", "", basename(built_path))
+  pkgname <- gsub("_.*?$", "", basename(path))
 
-  opts <- "--timings"
-  if (!has_latex()) {
-    message("pdflatex not found! Not building PDF manual or vignettes.\n",
-      "If you are planning to release this package, please run a check with manual and vignettes beforehand.\n")
-    opts <- c(opts, "--no-build-vignettes", "--no-manual")
-  }
+  args <- c("--timings", args)
   if (cran) {
-    opts <- c("--as-cran", opts)
+    args <- c("--as-cran", args)
   }
   if (run_dont_test) {
-    opts <- c("--run-donttest", opts)
+    args <- c("--run-donttest", args)
   }
 
   env_vars <- check_env_vars(cran, check_version, force_suggests)
   if (!quiet) {
     show_env_vars(env_vars)
-    rule("Checking ", name)
+    rule("Checking ", pkgname)
   }
 
-  opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
-  R(paste("CMD check ", shQuote(built_path), " ", opts, sep = ""), check_dir,
-    env_vars, quiet = quiet, ...)
+  R(c(paste("CMD check", shQuote(path)), args),
+    path = check_dir,
+    env_vars = env_vars,
+    quiet = quiet,
+    throw = FALSE
+  )
 
-  # Return the path to the check output
-  file.path(normalizePath(check_dir), paste(pkgname, ".Rcheck", sep = ""))
+  results_path <- file.path(
+    normalizePath(check_dir),
+    paste(pkgname, ".Rcheck", sep = ""),
+    "00check.log"
+  )
+  parse_check_results(results_path)
 }
 
 check_env_vars <- function(cran = FALSE, check_version = FALSE,

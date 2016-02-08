@@ -1,15 +1,19 @@
 #' Run a system command and check if it succeeds.
 #'
-#' @param cmd the command to run.
-#' @param args a vector of command arguments.
-#' @param env a named character vector of environment variables.  Will be quoted
-#' @param quiet if \code{FALSE}, the command to be run will be echoed.
+#' @param cmd Command to run. Will be quoted by \code{\link{shQuote}()}.
+#' @param args A character vector of arguments.
+#' @param env A named character vector of environment variables.
+#' @param path Path in which to execute the command
+#' @param quiet If \code{FALSE}, the command to be run will be echoed.
+#' @param throw If \code{TRUE}, will throw an error if the command fails
+#'   (i.e. the return value is not 0).
 #' @param ... additional arguments passed to \code{\link[base]{system}}
-#' @return \code{TRUE} if the command succeeds, an error will be thrown if the
-#' command fails.
+#' @keywords internal
 #' @export
-system_check <- function(cmd, args = character(), env = character(),
-                         quiet = FALSE, ...) {
+#' @return (Invisibly) the return value of the function.
+system_check <- function(cmd, args = character(), env_vars = character(),
+                         path = ".", quiet = FALSE, throw = TRUE,
+                         ...) {
   full <- paste(shQuote(cmd), " ", paste(args, collapse = " "), sep = "")
 
   if (!quiet) {
@@ -17,21 +21,22 @@ system_check <- function(cmd, args = character(), env = character(),
     message()
   }
 
-  result <- suppressWarnings(withr::with_envvar(env,
+  result <- suppressWarnings(withr::with_dir(path, withr::with_envvar(env_vars,
     system(full, intern = quiet, ignore.stderr = quiet, ...)
-  ))
+  )))
 
   if (quiet) {
-    status <- attr(result, "status") %||% 0
+    status <- attr(result, "status") %||% 0L
   } else {
     status <- result
   }
 
-  if (!identical(as.character(status), "0")) {
+  ok <- identical(as.character(status), "0")
+  if (throw && !ok) {
     stop("Command failed (", status, ")", call. = FALSE)
   }
 
-  invisible(TRUE)
+  invisible(status)
 }
 
 
