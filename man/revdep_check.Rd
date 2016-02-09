@@ -4,14 +4,11 @@
 \alias{revdep_check}
 \alias{revdep_check_save_logs}
 \alias{revdep_check_save_summary}
-\alias{revdep_check_summary}
 \title{Run R CMD check on all downstream dependencies.}
 \usage{
 revdep_check_save_logs(res, log_dir = "revdep")
 
-revdep_check_save_summary(res, log_dir = "revdep")
-
-revdep_check_summary(res)
+revdep_check_save_summary(res, log_dir = "revdep", pkg = ".")
 
 revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),

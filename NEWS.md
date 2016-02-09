@@ -1,5 +1,14 @@
 # devtools 1.10.0.9000
 
+* `revdep_check_summary()` has been removed - it never should have been
+  part of the exported API.
+  
+* `revdep_check_save_summary()` now truncates individual problems to at
+  most 25 lines - this avoids length output for very length example errors.
+
+* `revdep_check_save_summary()` saves a parsed version of the results as
+  `check.rds`.
+
 * All `use_` function have been overhauled to be more consistent. This
   includes more consistent output. Most functions now also ask to overwrite
   if a file already exists (#1074).
