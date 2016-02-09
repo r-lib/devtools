@@ -9,7 +9,7 @@
 #' If no testing infrastructure is present
 #' (detected by the \code{uses_testthat} function), you'll be asked if you want
 #' devtools to create it for you (in interactive sessions only). See
-#' \code{\link{add_test_infrastructure}} for more details.
+#' \code{\link{use_test}} for more details.
 #'
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information
@@ -24,7 +24,7 @@ test <- function(pkg = ".", filter = NULL, ...) {
   if (!uses_testthat(pkg) && interactive()) {
     message("No testing infrastructure found. Create it?")
     if (menu(c("Yes", "No")) == 1) {
-      add_test_infrastructure(pkg)
+      use_testthat(pkg)
     }
     return(invisible())
   }

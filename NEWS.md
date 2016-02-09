@@ -4,6 +4,52 @@
   to allow passing `args = "--compact-vignettes=both"` for packages with
   heavy PDF vignettes (@krlmlr, #1077).
 
+* Experimental `revdep_email()` to individual email each maintainer with
+  `R CMD check` summary results (#1014).
+
+* All `revdep_` functions now work like other devtools functions, taking
+  a path to the package as the first argument. `revdep_check()` now saves
+  its results to disk (so you can't accidentally lose them), and the other
+  functions read from that cache. You will need to update your revdep
+  check codes.
+
+* `revdep_check_print_problems()` prints a bulleted list of problems, 
+  suitable for including in your `cran-comments.md`.
+
+* `revdep_check_summary()` has been removed - it never should have been
+  part of the exported API.
+  
+* `revdep_check_save_summary()` now truncates individual problems to at
+  most 25 lines - this avoids length output for very length example errors.
+
+* `revdep_check_save_summary()` saves a parsed version of the results as
+  `check.rds`.
+
+* All `use_` function have been overhauled to be more consistent. This
+  includes more consistent output. Most functions now also ask to overwrite
+  if a file already exists (#1074).
+
+* Deprecated `use_coveralls()`, `add_rstudio_project()`, 
+  `add_test_infrastructure()`, and `add_travis()` have been removed.
+
+* `revdep_check_save_summary()` now creates `index.md` to save one level
+  of clicking in github.
+
+* `use_coverage()` now adds covr to suggests, rather than recommending you
+  install it explicitly in `.travis.yml`.
+
+* `check_built()` allows you to run `R CMD check` on an already built package.
+
+* `system_check()` gains new arguments `path` to controls the working directory
+  of the command, and `throw` to control whether or not it throws an error
+  on command failure. `env` has been renamed to the more explicit `env_vars`.
+
+* `revdep_check()` now reports summary results as they come in.
+
+* `check()` now always succeeds (instead of throwing an error when 
+  `R CMD check` finds an `ERROR`), returning an object that summarises
+  the check failures.
+
 * `check()` gains a `run_dont_test` argument to control whether or not
   `\donttest{}` tests are tested. This defaults to `FALSE`, but `release()`
   runs check with it set to `TRUE` (#1071).

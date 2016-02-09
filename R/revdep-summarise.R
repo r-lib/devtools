@@ -1,12 +1,10 @@
 #' @export
-#' @param res Result of \code{revdep_check}
-#' @param log_dir Directory in which to save logs
 #' @rdname revdep_check
-revdep_check_save_logs <- function(res, log_dir = "revdep") {
-  stopifnot(file.exists(log_dir))
+revdep_check_save_logs <- function(pkg = ".") {
+  pkg <- as.package(".")
 
   save_one <- function(pkg, path) {
-    out <- file.path(log_dir, pkg)
+    out <- file.path("revdep", pkg)
     dir.create(out, showWarnings = FALSE)
 
     logs <- check_logs(path)
@@ -25,6 +23,7 @@ revdep_check_save_logs <- function(res, log_dir = "revdep") {
     })
   }
 
+  res <- readRDS(revdep_check_path(pkg))
   pkgs <- check_dirs(res$check_dir)
   Map(save_one, names(pkgs), pkgs)
   invisible()
@@ -32,13 +31,34 @@ revdep_check_save_logs <- function(res, log_dir = "revdep") {
 
 #' @rdname revdep_check
 #' @export
-revdep_check_save_summary <- function(res, log_dir = "revdep") {
-  writeLines(revdep_check_summary(res), file.path(log_dir, "summary.md"))
+revdep_check_print_problems <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  summaries <- readRDS(revdep_check_path(pkg))$results
+
+  problems <- vapply(summaries, function(x) first_problem(x$results), character(1))
+  problems <- problems[!is.na(problems)]
+
+  if (length(problems) > 0) {
+    cat(paste0("* ", names(problems), ": ", problems, "\n"), sep = "")
+  } else {
+    cat("No ERRORs or WARNINGs found :)\n")
+  }
 }
+
 
 #' @rdname revdep_check
 #' @export
-revdep_check_summary <- function(res) {
+revdep_check_save_summary <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  res <- readRDS(revdep_check_path(pkg))
+
+  md <- revdep_check_summary_md(res)
+  writeLines(md, file.path(pkg$path, "revdep", "index.md"))
+}
+
+revdep_check_summary_md <- function(res) {
   check_suggested("knitr")
   plat <- platform_info()
   plat_df <- data.frame(setting = names(plat), value = unlist(plat))
@@ -51,8 +71,7 @@ revdep_check_summary <- function(res) {
   pkgs <- intersect(pkgs, dir(res$libpath))
   pkg_df <- package_info(pkgs, libpath = res$libpath)
 
-  checks <- check_dirs(res$check_dir)
-  summaries <- vapply(checks, try_check_summary_package, character(1))
+  summaries <- vapply(res$results, format, character(1))
 
   paste0(
     "# Setup\n\n",
@@ -63,43 +82,53 @@ revdep_check_summary <- function(res) {
     paste(knitr::kable(pkg_df), collapse = "\n"),
     "\n\n",
     "# Check results\n",
-    paste0(length(checks), " checked out of ", length(res$deps), " dependencies \n\n"),
+    paste0(length(summaries), " checked out of ", length(res$deps), " dependencies \n\n"),
     paste0(summaries, collapse = "\n")
   )
 }
 
-try_check_summary_package <- function(path) {
-  res <- tryCatch(
-    check_summary_package(path),
-    error = function(e) e$message
+parse_package_check <- function(path) {
+  pkg <- check_description(path)
+
+  structure(
+    list(
+      maintainer = pkg$Maintainer,
+      bug_reports = pkg$BugReports,
+      package = pkg$Package,
+      version = pkg$Version,
+      results = parse_check_results(file.path(path, "00check.log"))
+    ),
+    class = "revdep_check_result"
   )
 }
 
-check_summary_package <- function(path) {
-  pkg <- check_description(path)
-
+#' @export
+format.revdep_check_result <- function(x, ...) {
   meta <- c(
-    "Maintainer" = pkg$Maintainer,
-    "Bug reports" = pkg$BugReports
+    "Maintainer" = x$maintainer,
+    "Bug reports" = x$bug_reports
   )
   meta_string <- paste(names(meta), ": ", meta, collapse = "  \n", sep = "")
 
   header <- paste0(
-    "## ", pkg$Package, " (", pkg$Version, ")\n",
+    "## ", x$package, " (", x$version, ")\n",
     meta_string,
     "\n"
   )
 
-  results <- parse_check_results(file.path(path, "00check.log"))
-
-  summary <- summarise_check_results(results)
-  if (length(unlist(results)) > 0) {
-    checks <- paste0("\n```\n", format(results), "\n```\n")
+  summary <- summarise_check_results(x$results)
+  if (length(unlist(x$results)) > 0) {
+    checks <- paste0("\n```\n", format(x$results), "\n```\n")
   } else {
     checks <- ""
   }
 
   paste0(header, "\n", summary, "\n", checks)
+}
+
+#' @export
+print.revdep_check_result <- function(x, ...) {
+  cat(format(x, ...), "\n", sep = "")
 }
 
 indent <- function(x, spaces = 4) {

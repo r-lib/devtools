@@ -2,16 +2,16 @@
 % Please edit documentation in R/revdep-summarise.R, R/revdep.R
 \name{revdep_check_save_logs}
 \alias{revdep_check}
+\alias{revdep_check_print_problems}
 \alias{revdep_check_save_logs}
 \alias{revdep_check_save_summary}
-\alias{revdep_check_summary}
 \title{Run R CMD check on all downstream dependencies.}
 \usage{
-revdep_check_save_logs(res, log_dir = "revdep")
+revdep_check_save_logs(pkg = ".")
 
-revdep_check_save_summary(res, log_dir = "revdep")
+revdep_check_print_problems(pkg = ".")
 
-revdep_check_summary(res)
+revdep_check_save_summary(pkg = ".")
 
 revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
@@ -20,10 +20,6 @@ revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"))
 }
 \arguments{
-\item{res}{Result of \code{revdep_check}}
-
-\item{log_dir}{Directory in which to save logs}
-
 \item{pkg}{Path to package. Defaults to current directory.}
 
 \item{recursive}{If \code{TRUE} look for full set of recursive dependencies.}

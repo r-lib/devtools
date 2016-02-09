@@ -18,7 +18,7 @@ the parent directory of the package.}
 \code{--no-manual --no-resave-data}) version of the package.}
 
 \item{vignettes, manual}{For source packages: if \code{FALSE}, don't build PDF
-vignettes (\code{--no-vignettes}) or manual (\code{--no-manual}).}
+vignettes (\code{--no-build-vignettes}) or manual (\code{--no-manual}).}
 
 \item{args}{An optional character vector of additional command
 line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},

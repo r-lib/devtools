@@ -5,3 +5,5 @@
 ^revdep$
 ^CONDUCT\.md$
 ^appveyor\.yml$
+^CONTRIBUTING\.md$
+^\.httr-oauth$

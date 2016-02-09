@@ -30,6 +30,6 @@ scripts within one of those directories and
 If no testing infrastructure is present
 (detected by the \code{uses_testthat} function), you'll be asked if you want
 devtools to create it for you (in interactive sessions only). See
-\code{\link{add_test_infrastructure}} for more details.
+\code{\link{use_test}} for more details.
 }
 

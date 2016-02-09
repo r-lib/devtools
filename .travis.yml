@@ -1,14 +1,14 @@
 language: R
-cache: packages
 sudo: false
+cache: packages
+
 bioc_required: true
-warnings_are_errors: true
+bioc_packages:
+  - BiocInstaller
+
 before_script:
     - git config --global user.name "travis"
     - git config --global user.email "travis@example.org"
-
-bioc_packages:
-  - BiocInstaller
 
 after_success:
   - Rscript -e 'covr::codecov()'

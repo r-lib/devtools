@@ -16,7 +16,7 @@
 #' @param binary Produce a binary (\code{--binary}) or source (
 #'   \code{--no-manual --no-resave-data}) version of the package.
 #' @param vignettes,manual For source packages: if \code{FALSE}, don't build PDF
-#'   vignettes (\code{--no-vignettes}) or manual (\code{--no-manual}).
+#'   vignettes (\code{--no-build-vignettes}) or manual (\code{--no-manual}).
 #' @param args An optional character vector of additional command
 #'   line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},
 #'   or \code{R CMD install} if \code{binary = TRUE}.
@@ -48,6 +48,13 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
     }
   } else {
     args <- c(args, "--no-resave-data")
+
+    if (manual && !has_latex()) {
+      message("pdflatex not found! Not building PDF manual or vignettes.\n",
+        "If you are planning to release this package, please run a check with ",
+        "manual and vignettes beforehand.\n")
+      manual <- FALSE
+    }
 
     if (!manual) {
       args <- c(args, "--no-manual")

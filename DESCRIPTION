@@ -38,7 +38,11 @@ Suggests:
     bitops,
     roxygen2 (>= 5.0.0),
     evaluate,
-    rversions
+    rversions,
+    covr,
+    gmailr (> 0.7.0)
+Remotes:
+    jimhester/gmailr
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1

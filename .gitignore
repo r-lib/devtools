@@ -6,3 +6,4 @@
 .project
 .settings/
 inst/doc
+.httr-oauth

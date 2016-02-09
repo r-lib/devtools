@@ -1,5 +1,5 @@
 parse_check_results <- function(path) {
-  lines <- paste(readLines(path), collapse = "\n")
+  lines <- paste(readLines(path, warn = FALSE), collapse = "\n")
 
   # Strip off trailing NOTE and WARNING messages
   lines <- gsub("^NOTE: There was .*\n$", "", lines)
@@ -46,16 +46,48 @@ print.check_results <- function(x, ...) {
 
 #' @export
 format.check_results <- function(x, ...) {
-  paste0(unlist(x), collapse = "\n\n")
+  checks <- trunc_middle(unlist(x))
+
+  paste0(checks, collapse = "\n\n")
 }
 
 summarise_check_results <- function(x) {
   n <- lapply(x, length)
   paste0(
-    n$errors, " ", ngettext(n$errors, "error", "errors"), " | ",
-    n$warnings, " ", ngettext(n$warnings, "warning", "warnings"), " | ",
-    n$notes, " ", ngettext(n$notes, "note", "notes")
+    n$errors, " ", ngettext(n$errors, "error ", "errors"), " | ",
+    n$warnings, " ", ngettext(n$warnings, "warning ", "warnings"), " | ",
+    n$notes, " ", ngettext(n$notes, "note ", "notes")
   )
+}
+
+first_problem <- function(x) {
+  if (length(x$errors) > 0) {
+    problem <- x$errors[[1]]
+  } else if (length(x$warnings) > 0) {
+    problem <- x$warnings[[1]]
+  } else {
+    return(NA_character_)
+  }
+
+  strsplit(problem, "\n", fixed = TRUE)[[1]][1]
+}
+
+trunc_middle <- function(x, n_max = 25, n_top = 10, n_bottom = 10) {
+  trunc_middle_one <- function(x) {
+    lines <- strsplit(x, "\n", fixed = TRUE)[[1]]
+    nlines <- length(lines)
+
+    if (nlines <= n_max)
+      return(x)
+
+    paste(c(
+      lines[1:n_top],
+      paste0("... ", length(lines) - n_top - n_bottom, " lines ..."),
+      lines[(nlines - n_bottom):nlines]
+    ), collapse = "\n")
+  }
+
+  vapply(x, trunc_middle_one, character(1), USE.NAMES = FALSE)
 }
 
 #' Parses R CMD check log file for ERRORs, WARNINGs and NOTEs

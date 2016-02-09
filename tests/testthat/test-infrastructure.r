@@ -1,5 +1,38 @@
 context("Infrastructure")
 
+test_that("use_* functions consistently", {
+  pkg <- "infrastructure"
+  unlink(pkg, recursive = TRUE)
+  create(pkg)
+
+  use_test("test1", pkg = pkg)
+  use_package_doc(pkg = pkg)
+  use_vignette("test2", pkg = pkg)
+
+  use_rcpp(pkg = pkg)
+  use_travis(pkg = pkg)
+  use_coverage(pkg = pkg)
+  use_appveyor(pkg = pkg)
+
+  x <- 1:100
+  use_data(x, pkg = pkg)
+  use_data_raw(pkg = pkg)
+
+  use_readme_rmd(pkg = pkg)
+  use_readme_md(pkg = pkg)
+  use_news_md(pkg = pkg)
+
+  use_revdep(pkg = pkg)
+  use_cran_comments(pkg = pkg)
+  use_code_of_conduct(pkg = pkg)
+
+  use_mit_license(pkg = pkg)
+
+  # Suppress R CMD check note
+  file.rename("infrastructure/.travis.yml", "infrastructure/travis.yml")
+  file.rename("infrastructure/.Rbuildignore", "infrastructure/Rbuildignore")
+})
+
 test_that("use_data", {
   on.exit(unlink(c("testUseData/data", "testUseData/R/sysdata.rda"),
                  recursive = TRUE, force = TRUE), add = TRUE)
