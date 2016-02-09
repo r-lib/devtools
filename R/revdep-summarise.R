@@ -1,12 +1,10 @@
 #' @export
-#' @param res Result of \code{revdep_check}
-#' @param log_dir Directory in which to save logs
 #' @rdname revdep_check
 revdep_check_save_logs <- function(pkg = ".") {
   pkg <- as.package(".")
 
   save_one <- function(pkg, path) {
-    out <- file.path(log_dir, pkg)
+    out <- file.path("revdep", pkg)
     dir.create(out, showWarnings = FALSE)
 
     logs <- check_logs(path)

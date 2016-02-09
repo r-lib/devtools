@@ -136,6 +136,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
     list(check_dir = check_dir, libpath = libpath, pkg = pkg, deps = pkgs)
   })
 
+  rule("Saving check results to `revdep/check.rds`")
   res$results <- lapply(check_dirs(res$check_dir), parse_package_check)
   saveRDS(res, revdep_check_path(pkg))
 
