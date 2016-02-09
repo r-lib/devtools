@@ -40,7 +40,9 @@ Suggests:
     evaluate,
     rversions,
     covr,
-    gmailr
+    gmailr (> 0.7.0)
+Remotes:
+    jimhester/gmailr
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1

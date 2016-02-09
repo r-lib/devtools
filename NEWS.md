@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* Experimental `revdep_email()` to individual email each maintainer with
+  `R CMD check` summary results (#1014).
+
 * All `revdep_` functions now work like other devtools functions, taking
   a path to the package as the first argument. `revdep_check()` now saves
   its results to disk (so you can't accidentally lose them), and the other

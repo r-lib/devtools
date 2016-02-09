@@ -1,21 +1,41 @@
+#' Experimental email notification system.
+#'
+#' This currently assumes that you use github and gmail, and you have a
+#' \code{revdep/email.md} email template.
+#'
+#' @inheritParams revdep_check
+#' @param date Date package will be submitted to CRAN
+#' @param author Name used to sign email
+#' @param draft If \code{TRUE}, creates as draft email; if \code{FALSE},
+#'   sends immediately.
+#' @param unsent If some emails fail to send, in a previous
+#' @keywords internal
 #' @export
-#' @rdname revdep_check
-#' @usage NULL
 revdep_email <- function(pkg = ".", date, author = getOption("devtools.name"),
-                         draft = TRUE) {
+                         draft = TRUE, unsent = NULL) {
   pkg <- as.package(pkg)
-
+  force(date)
   if (is.null(author)) {
-    stop("Must supply a name", call. = FALSE)
+    stop("Please supply `author`", call. = FALSE)
   }
+
+  if (is.null(unsent)) {
+    results <- readRDS(revdep_check_path(pkg))$results
+  } else {
+    results <- unsent
+  }
+
+  if (length(results) == 0) {
+    message("No emails to send")
+    return(list())
+  }
+
+  if (yesno("Is `revdep/email.md` ready for mail merge?"))
+    return()
+
 
   template_path <- file.path(pkg$path, "revdep", "email.md")
-  if (!file.exists(template_path)) {
-    stop("Can't find template `revdep/email.md`", call. = FALSE)
-  }
   template <- readLines(template_path)
-
-  results <- readRDS(revdep_check_path(pkg))$results
 
   maintainers <- vapply(results, function(x) x$maintainer, character(1))
   orphaned <- grepl("ORPHAN", maintainers)
@@ -35,24 +55,44 @@ revdep_email <- function(pkg = ".", date, author = getOption("devtools.name"),
     paste0(x$your_package, " and " , x$my_package, " release")
   })
 
-  emails <- Map(maintainer_email, bodies, maintainers, subjects)
+  emails <- Map(maintainer_email, maintainers, bodies, subjects)
+  sent <- vapply(emails, send_email, draft = draft, FUN.VALUE = logical(1))
 
-  if (draft) {
-    httr::with_verbose(lapply(emails, gmailr::create_draft), data_in = TRUE)
+  if (all(sent)) {
+    message("All emails successfully sent")
   } else {
-    lapply(emails, gmailr::send_message)
+    message(sum(!sent), " failed. Call again with unsent = .Last.value")
   }
 
-  invisible(TRUE)
+  results <- results[!sent]
+  invisible(results)
+}
+
+send_email <- function(email, draft = TRUE) {
+  send <- if (draft) gmailr::create_draft else gmailr::send_message
+  msg <- if (draft) "Drafting" else "Sending"
+  tryCatch(
+    {
+      message(msg, ": ", gmailr::subject(email))
+      send(email)
+      TRUE
+    },
+    error = function(e) {
+      message("Failed")
+      FALSE
+    }
+  )
 }
 
 maintainer_data <- function(result, pkg, gh, date, author) {
   problems <- result$results
+
+  summary <- indent(paste(trunc_middle(unlist(problems)), collapse = "\n\n"))
   list(
     your_package = result$package,
     your_version = result$version,
     your_summary = summarise_check_results(problems),
-    your_results = indent(trunc_middle(unlist(problems))),
+    your_results = summary,
 
     you_have_problems = length(unlist(problems)) > 0,
 
@@ -64,8 +104,5 @@ maintainer_data <- function(result, pkg, gh, date, author) {
 }
 
 maintainer_email <- function(to, body, subject) {
-  email <- gmailr::mime()
-  email <- gmailr::to(email, to)
-  email <- gmailr::text_body(email, body)
-  gmailr::subject(email, subject)
+  gmailr::mime(To = to, Subject = subject, body = body)
 }

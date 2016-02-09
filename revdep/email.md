@@ -9,6 +9,8 @@ To check for potential problems, I ran `R CMD check` on your package {{{your_pac
 
 Please submit an update to fix any ERRORs or WARNINGs. They may not be caused by the update to {{{my_package}}}, but it really makes life easier if you also fix any other problems that may have accumulated over time. Please also try to minimise the NOTEs. It's not essential you do this, but the fewer the false positives the more likely I am to detect a real problem with your package. 
 
+(If I couldn't install your package, I'd recommend you check it yourself. Unfortunately I don't have the resources to manually fix installation failures.)
+
 To get the development version of {{{ my_package }}} so you can run the checks yourself, you can run:
 
     # install.packages("devtools")
