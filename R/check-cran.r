@@ -84,8 +84,6 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     rule("Checking packages") # --------------------------------------------------
     pkg_names <- format(pkgs)
     check_pkg <- function(i) {
-      message("Checking ", pkg_names[i])
-
       start_time <- Sys.time()
       res <- check_built(
         local_urls[i],
@@ -95,7 +93,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       )
       end_time <- Sys.time()
 
-      message("Checked  ", pkg_names[i], ": ", summarise_check_results(res))
+      message("Checked ", pkg_names[i], ": ", summarise_check_results(res))
       elapsed_time <- as.numeric(end_time - start_time, units = "secs")
       writeLines(
         sprintf("%d  %s  %.1f", i, pkgs[i], elapsed_time),
