@@ -60,6 +60,18 @@ summarise_check_results <- function(x) {
   )
 }
 
+first_problem <- function(x) {
+  if (length(x$errors) > 0) {
+    problem <- x$errors[[1]]
+  } else if (length(x$warnings) > 0) {
+    problem <- x$warnings[[1]]
+  } else {
+    return(NA_character_)
+  }
+
+  strsplit(problem, "\n", fixed = TRUE)[[1]][1]
+}
+
 trunc_middle <- function(x, n_max = 25, n_top = 10, n_bottom = 10) {
   trunc_middle_one <- function(x) {
     lines <- strsplit(x, "\n", fixed = TRUE)[[1]]

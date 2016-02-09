@@ -1,5 +1,14 @@
 # devtools 1.10.0.9000
 
+* All `revdep_` functions now work like other devtools functions, taking
+  a path to the package as the first argument. `revdep_check()` now saves
+  its results to disk (so you can't accidentally lose them), and the other
+  functions read from that cache. You will need to update your revdep
+  check codes.
+
+* `revdep_check_print_problems()` prints a bulleted list of problems, 
+  suitable for including in your `cran-comments.md`.
+
 * `revdep_check_summary()` has been removed - it never should have been
   part of the exported API.
   

@@ -2,8 +2,8 @@
 #' @param res Result of \code{revdep_check}
 #' @param log_dir Directory in which to save logs
 #' @rdname revdep_check
-revdep_check_save_logs <- function(res, log_dir = "revdep") {
-  stopifnot(file.exists(log_dir))
+revdep_check_save_logs <- function(pkg = ".") {
+  pkg <- as.package(".")
 
   save_one <- function(pkg, path) {
     out <- file.path(log_dir, pkg)
@@ -25,6 +25,7 @@ revdep_check_save_logs <- function(res, log_dir = "revdep") {
     })
   }
 
+  res <- readRDS(revdep_check_path(pkg))
   pkgs <- check_dirs(res$check_dir)
   Map(save_one, names(pkgs), pkgs)
   invisible()
@@ -32,18 +33,34 @@ revdep_check_save_logs <- function(res, log_dir = "revdep") {
 
 #' @rdname revdep_check
 #' @export
-revdep_check_save_summary <- function(res, log_dir = "revdep", pkg = ".") {
+revdep_check_print_problems <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  checks <- check_dirs(res$check_dir)
-  summaries <- lapply(checks, parse_package_check)
-  saveRDS(summaries, file.path(pkg$path, log_dir, "checks.rds"))
+  summaries <- readRDS(revdep_check_path(pkg))$results
 
-  md <- revdep_check_summary_md(res, summaries)
-  writeLines(md, file.path(pkg$path, log_dir, "index.md"))
+  problems <- vapply(summaries, function(x) first_problem(x$results), character(1))
+  problems <- problems[!is.na(problems)]
+
+  if (length(problems) > 0) {
+    cat(paste0("* ", names(problems), ": ", problems, "\n"), sep = "")
+  } else {
+    cat("No ERRORs or WARNINGs found :)\n")
+  }
 }
 
-revdep_check_summary_md <- function(res, package_summaries) {
+
+#' @rdname revdep_check
+#' @export
+revdep_check_save_summary <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  res <- readRDS(revdep_check_path(pkg))
+
+  md <- revdep_check_summary_md(res)
+  writeLines(md, file.path(pkg$path, "revdep", "index.md"))
+}
+
+revdep_check_summary_md <- function(res) {
   check_suggested("knitr")
   plat <- platform_info()
   plat_df <- data.frame(setting = names(plat), value = unlist(plat))
@@ -56,7 +73,7 @@ revdep_check_summary_md <- function(res, package_summaries) {
   pkgs <- intersect(pkgs, dir(res$libpath))
   pkg_df <- package_info(pkgs, libpath = res$libpath)
 
-  summaries <- vapply(package_summaries, format, character(1))
+  summaries <- vapply(res$results, format, character(1))
 
   paste0(
     "# Setup\n\n",
