@@ -28,6 +28,9 @@ test_that("use_* functions consistently", {
 
   use_mit_license(pkg = pkg)
 
+  # Suppress R CMD check note
+  file.rename("infrastructure/.travis.yml", "infrastructure/travis.yml")
+  file.rename("infrastructure/.Rbuildignore", "infrastructure/Rbuildignore")
 })
 
 test_that("use_data", {
