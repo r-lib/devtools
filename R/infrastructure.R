@@ -616,7 +616,7 @@ use_mit_license <- function(pkg = ".", copyright_holder = getOption("devtools.na
   write_dcf(descPath, DESCRIPTION)
 
   use_template(
-    "mit-license.TXT",
+    "mit-license.txt",
     "LICENSE",
     data = list(
       year = format(Sys.Date(), "%Y"),
