@@ -60,6 +60,8 @@ summarise_check_results <- function(x) {
   )
 }
 
+has_problems <- function(x) length(unlist(x$results)) > 0
+
 first_problem <- function(x) {
   if (length(x$errors) > 0) {
     problem <- x$errors[[1]]

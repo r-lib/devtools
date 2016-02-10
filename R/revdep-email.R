@@ -8,11 +8,18 @@
 #' @param author Name used to sign email
 #' @param draft If \code{TRUE}, creates as draft email; if \code{FALSE},
 #'   sends immediately.
+#' @param template Path of template to use
+#' @param only_problems Only inform authors with problems?
 #' @param unsent If some emails fail to send, in a previous
 #' @keywords internal
 #' @export
-revdep_email <- function(pkg = ".", date, author = getOption("devtools.name"),
-                         draft = TRUE, unsent = NULL) {
+revdep_email <- function(pkg = ".", date,
+                         author = getOption("devtools.name"),
+                         draft = TRUE,
+                         unsent = NULL,
+                         template = "revdep/email.md",
+                         only_problems = FALSE) {
+
   pkg <- as.package(pkg)
   force(date)
   if (is.null(author)) {
@@ -25,16 +32,23 @@ revdep_email <- function(pkg = ".", date, author = getOption("devtools.name"),
     results <- unsent
   }
 
+  if (only_problems) {
+    results <- Filter(has_problems, results)
+  }
+
   if (length(results) == 0) {
     message("No emails to send")
     return(list())
   }
 
-  if (yesno("Is `revdep/email.md` ready for mail merge?"))
+  if (yesno("Is `", template, "` ready for mail merge?"))
     return()
 
 
-  template_path <- file.path(pkg$path, "revdep", "email.md")
+  template_path <- file.path(pkg$path, template)
+  if (!file.exists(template_path)) {
+    stop("`", template, "` does not exist", call. = FALSE)
+  }
   template <- readLines(template_path)
 
   maintainers <- vapply(results, function(x) x$maintainer, character(1))
