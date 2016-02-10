@@ -2,12 +2,12 @@ language: R
 sudo: false
 cache: packages
 
+r_github_packages:
+  - hadley/devtools
+
 bioc_required: true
 bioc_packages:
   - BiocInstaller
-
-before_install:
-  R CMD INSTALL .
 
 before_script:
     - git config --global user.name "travis"
