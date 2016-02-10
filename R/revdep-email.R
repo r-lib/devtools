@@ -55,7 +55,7 @@ revdep_email <- function(pkg = ".", date,
   orphaned <- grepl("ORPHAN", maintainers)
   if (any(orphaned)) {
     orphans <- paste(names(results)[orphaned], collapse = ", ")
-    message("Dropping ", sum(orphaned), " packages: ", orphans)
+    message("Dropping ", sum(orphaned), " orphaned packages: ", orphans)
 
     results <- results[!orphaned]
     maintainers <- maintainers[!orphaned]
