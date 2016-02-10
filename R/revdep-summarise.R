@@ -39,8 +39,22 @@ revdep_check_print_problems <- function(pkg = ".") {
   problems <- vapply(summaries, function(x) first_problem(x$results), character(1))
   problems <- problems[!is.na(problems)]
 
+  dep_fail <- grepl("checking package dependencies", problems, fixed = TRUE)
+  inst_fail <- grepl("checking whether package ‘[^']+’ can be installed", problems)
+
+  pkgs <- names(problems)
+  if (any(dep_fail)) {
+    bad <- paste(pkgs[dep_fail], collapse = ", ")
+    cat("* Failed to install dependencies for: ", bad, "\n", sep = "")
+  }
+  if (any(inst_fail)) {
+    bad <- paste(pkgs[inst_fail], collapse = ", ")
+    cat("* Failed to install: ", bad, "\n", sep = "")
+  }
+
   if (length(problems) > 0) {
-    cat(paste0("* ", names(problems), ": ", problems, "\n"), sep = "")
+    other <- problems[!inst_fail & !dep_fail]
+    cat(paste0("* ", names(other), ": ", other, "\n"), sep = "")
   } else {
     cat("No ERRORs or WARNINGs found :)\n")
   }
