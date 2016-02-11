@@ -10,7 +10,7 @@ package_deps(pkg, dependencies = NA, repos = getOption("repos"),
   type = getOption("pkgType"))
 
 dev_package_deps(pkg = ".", dependencies = NA, repos = getOption("repos"),
-  type = getOption("pkgType"), force_deps = FALSE)
+  type = getOption("pkgType"), force_deps = FALSE, quiet = FALSE)
 
 \method{update}{package_deps}(object, ..., quiet = FALSE, upgrade = TRUE)
 }
@@ -36,11 +36,11 @@ installation.}
 \item{force_deps}{whether to force installation of dependencies even if their
 SHA1 reference hasn't changed from the currently installed version.}
 
+\item{quiet}{If \code{TRUE}, suppress output.}
+
 \item{object}{A \code{package_deps} object.}
 
 \item{...}{Additional arguments passed to \code{install_packages}.}
-
-\item{quiet}{If \code{TRUE}, suppress output.}
 
 \item{upgrade}{If \code{TRUE}, also upgrade any of out date dependencies.}
 }

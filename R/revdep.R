@@ -108,6 +108,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          srcpath = libpath, bioconductor = FALSE,
                          type = getOption("pkgType"),
                          threads = getOption("Ncpus", 1),
+                         env_vars = NULL,
                          check_dir = tempfile("check_cran")) {
   pkg <- as.package(pkg)
   rule("Reverse dependency checks for ", pkg$package, pad = "=")
@@ -117,24 +118,35 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
   if (!file.exists(srcpath))
     dir.create(srcpath)
 
-  message("Installing ", pkg$package, " ", pkg$version, " from ", pkg$path)
+  message(
+    "Installing ", pkg$package, " ", pkg$version,
+    " and dependencies to ", libpath
+  )
   withr::with_libpaths(libpath, action = "prefix", {
     install(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE)
   })
   on.exit(remove.packages(pkg$package, libpath), add = TRUE)
 
-  message("Finding reverse dependencies")
+  message("Computing reverse dependencies")
   revdeps <- revdep(pkg$package, recursive = recursive, ignore = ignore,
     bioconductor = bioconductor, dependencies = dependencies)
 
-  withr::with_envvar(c(
+  env_vars <- c(
     NOT_CRAN = "false",
-    RGL_USE_NULL = "true"
-  ), {
-    check_cran(revdeps, revdep_pkg = pkg$package, libpath = libpath,
-      srcpath = srcpath, bioconductor = bioconductor, type = type,
-      threads = threads, check_dir = check_dir)
-  })
+    RGL_USE_NULL = "true",
+    env_vars
+  )
+  show_env_vars(env_vars)
+
+  check_cran(revdeps,
+    libpath = libpath,
+    srcpath = srcpath,
+    bioconductor = bioconductor,
+    type = type,
+    threads = threads,
+    check_dir = check_dir,
+    env_vars = env_vars
+  )
 
   revdep_check_save(pkg, revdeps, check_dir, libpath)
   invisible()

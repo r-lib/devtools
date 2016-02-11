@@ -92,9 +92,10 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
 dev_package_deps <- function(pkg = ".", dependencies = NA,
                              repos = getOption("repos"),
                              type = getOption("pkgType"),
-                             force_deps = FALSE) {
+                             force_deps = FALSE,
+                             quiet = FALSE) {
   pkg <- as.package(pkg)
-  install_dev_remotes(pkg, force = force_deps)
+  install_dev_remotes(pkg, force = force_deps, quiet = quiet)
 
   repos <- c(repos, parse_additional_repositories(pkg))
 
@@ -153,7 +154,7 @@ compare_versions <- function(inst, cran) {
     integer(1))
 }
 
-install_dev_remotes <- function(pkg, ...) {
+install_dev_remotes <- function(pkg, ..., quiet = FALSE) {
   pkg <- as.package(pkg)
 
   if (!has_dev_remotes(pkg)) {
@@ -162,7 +163,7 @@ install_dev_remotes <- function(pkg, ...) {
 
   types <- dev_remote_type(pkg[["remotes"]])
 
-  lapply(types, function(type) type$fun(type$repository, ...))
+  lapply(types, function(type) type$fun(type$repository, ..., quiet = quiet))
 }
 
 # Parse the remotes field split into pieces and get install_ functions for each
@@ -262,7 +263,7 @@ update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
   }
   if (length(behind) > 0L) {
     install_packages(behind, repos = attr(object, "repos"),
-      type = attr(object, "type"), ...)
+      type = attr(object, "type"), quiet = quiet, ...)
   }
 
 }

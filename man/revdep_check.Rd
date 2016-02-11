@@ -14,7 +14,8 @@ revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
   libpath = getOption("devtools.revdep.libpath"), srcpath = libpath,
   bioconductor = FALSE, type = getOption("pkgType"),
-  threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"))
+  threads = getOption("Ncpus", 1), env_vars = NULL,
+  check_dir = tempfile("check_cran"))
 }
 \arguments{
 \item{pkg}{Path to package. Defaults to current directory.}
@@ -45,6 +46,8 @@ to the same type as \code{\link{install.packages}()}.}
 
 \item{threads}{Number of concurrent threads to use for checking.
 It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
+
+\item{env_vars}{Environment variables set during \code{R CMD check}}
 
 \item{check_dir}{Directory to store results.}
 }

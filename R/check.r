@@ -58,6 +58,7 @@ check <- function(pkg = ".",
                   force_suggests = FALSE,
                   run_dont_test = FALSE,
                   args = NULL,
+                  env_vars = NULL,
                   quiet = FALSE,
                   check_dir = tempdir(),
                   cleanup = TRUE) {
@@ -87,6 +88,7 @@ check <- function(pkg = ".",
     force_suggests = force_suggests,
     run_dont_test = run_dont_test,
     args = args,
+    env_vars = env_vars,
     quiet = quiet,
     check_dir = check_dir
   )
@@ -108,9 +110,10 @@ check <- function(pkg = ".",
 #'   packages aren't found.
 #' @param check_dir the directory in which the package is checked
 #' @param args Additional arguments passed to \code{R CMD check}
+#' @param env_vars Environment variables set during \code{R CMD check}
 check_built <- function(path = NULL, cran = TRUE,
                         check_version = FALSE, force_suggests = FALSE,
-                        run_dont_test = FALSE, args = NULL,
+                        run_dont_test = FALSE, args = NULL, env_vars = NULL,
                         check_dir = tempdir(), quiet = FALSE) {
 
   pkgname <- gsub("_.*?$", "", basename(path))
@@ -123,7 +126,7 @@ check_built <- function(path = NULL, cran = TRUE,
     args <- c("--run-donttest", args)
   }
 
-  env_vars <- check_env_vars(cran, check_version, force_suggests)
+  env_vars <- check_env_vars(cran, check_version, force_suggests, env_vars)
   if (!quiet) {
     show_env_vars(env_vars)
     rule("Checking ", pkgname)
@@ -145,11 +148,12 @@ check_built <- function(path = NULL, cran = TRUE,
 }
 
 check_env_vars <- function(cran = FALSE, check_version = FALSE,
-                           force_suggests = TRUE) {
+                           force_suggests = TRUE, env_vars) {
   c(
     aspell_env_var(),
     "_R_CHECK_CRAN_INCOMING_" = as.character(check_version),
-    "_R_CHECK_FORCE_SUGGESTS_" = as.character(force_suggests)
+    "_R_CHECK_FORCE_SUGGESTS_" = as.character(force_suggests),
+    env_vars
   )
 }
 

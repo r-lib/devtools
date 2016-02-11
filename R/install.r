@@ -85,7 +85,7 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
     dependencies <- TRUE
   }
   install_deps(pkg, dependencies = dependencies, upgrade = upgrade_dependencies,
-    threads = threads, force_deps = force_deps, ...)
+    threads = threads, force_deps = force_deps, quiet = quiet, ...)
 
   # Build the package. Only build locally if it doesn't have vignettes
   has_vignettes <- length(tools::pkgVignettes(dir = pkg$path)$docs > 0)
@@ -138,6 +138,6 @@ install_deps <- function(pkg = ".", dependencies = NA,
                          force_deps = FALSE) {
 
   pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
-    type = type, force_deps = force_deps)
+    type = type, force_deps = force_deps, quiet = quiet)
   update(pkg, ..., Ncpus = threads, quiet = quiet, upgrade = upgrade)
 }

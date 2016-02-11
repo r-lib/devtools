@@ -7,11 +7,12 @@
 \usage{
 check(pkg = ".", document = TRUE, build_args = NULL, ..., cran = TRUE,
   check_version = FALSE, force_suggests = FALSE, run_dont_test = FALSE,
-  args = NULL, quiet = FALSE, check_dir = tempdir(), cleanup = TRUE)
+  args = NULL, env_vars = NULL, quiet = FALSE, check_dir = tempdir(),
+  cleanup = TRUE)
 
 check_built(path = NULL, cran = TRUE, check_version = FALSE,
   force_suggests = FALSE, run_dont_test = FALSE, args = NULL,
-  check_dir = tempdir(), quiet = FALSE)
+  env_vars = NULL, check_dir = tempdir(), quiet = FALSE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -40,6 +41,8 @@ packages aren't found.}
 submission.}
 
 \item{args}{Additional arguments passed to \code{R CMD check}}
+
+\item{env_vars}{Environment variables set during \code{R CMD check}}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 

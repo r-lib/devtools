@@ -20,18 +20,16 @@
 #' @param threads Number of concurrent threads to use for checking.
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
 #' @param check_dir Directory to store results.
-#' @param revdep_pkg Optional name of a package for which this check is
-#'   checking the reverse dependencies of. This is normally passed in from
-#'   \code{\link{revdep_check}}, and is used only for logging.
 #' @return Returns (invisibly) the directory where check results are stored.
 #' @keywords internal
+#' @inheritParams check
 #' @export
 check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
                        srcpath = libpath, bioconductor = FALSE,
                        type = getOption("pkgType"),
                        threads = getOption("Ncpus", 1),
                        check_dir = tempfile("check_cran"),
-                       revdep_pkg = NULL) {
+                       env_vars = NULL) {
 
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
@@ -88,6 +86,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       res <- check_built(
         local_urls[i],
         args = "--no-multiarch --no-manual --no-codoc",
+        env_vars = env_vars,
         check_dir = check_dir,
         quiet = TRUE
       )
