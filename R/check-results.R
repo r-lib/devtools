@@ -54,11 +54,20 @@ format.check_results <- function(x, ...) {
 summarise_check_results <- function(x) {
   n <- lapply(x, length)
   paste0(
-    n$errors, " ", ngettext(n$errors, "error ", "errors"), " | ",
-    n$warnings, " ", ngettext(n$warnings, "warning ", "warnings"), " | ",
-    n$notes, " ", ngettext(n$notes, "note ", "notes")
+    show_count(n$errors, "error ", "errors", n$errors > 0), " | ",
+    show_count(n$warnings, "warning ", "warnings", n$warnings > 0), " | ",
+    show_count(n$notes, "note ", "notes")
   )
 }
+
+show_count <- function(n, singular, plural, is_error = FALSE) {
+  out <- paste0(n, " ", ngettext(n, singular, plural))
+  if (is_error && requireNamespace("crayon", quietly = TRUE)) {
+    out <- crayon::red(out)
+  }
+  out
+}
+
 
 has_problems <- function(x) {
   length(x$results$errors) > 0 || length(x$results$warnings) > 0

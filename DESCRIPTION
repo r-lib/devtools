@@ -28,6 +28,7 @@ Imports:
     withr
 Suggests:
     curl (>= 0.9),
+    crayon,
     testthat (>= 0.7),
     BiocInstaller,
     Rcpp (>= 0.10.0),
