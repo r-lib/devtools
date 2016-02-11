@@ -38,12 +38,8 @@ revdep_email <- function(pkg = ".", date,
 
   if (length(results) == 0) {
     message("No emails to send")
-    return(list())
+    return(invisible())
   }
-
-  if (yesno("Is `", template, "` ready for mail merge?"))
-    return()
-
 
   template_path <- file.path(pkg$path, template)
   if (!file.exists(template_path)) {
@@ -70,6 +66,13 @@ revdep_email <- function(pkg = ".", date,
   })
 
   emails <- Map(maintainer_email, maintainers, bodies, subjects)
+
+  message("Testing first email")
+  send_email(emails[[1]], draft = TRUE)
+
+  if (yesno("Did first draft email look ok?"))
+    return(invisible())
+
   sent <- vapply(emails, send_email, draft = draft, FUN.VALUE = logical(1))
 
   if (all(sent)) {
