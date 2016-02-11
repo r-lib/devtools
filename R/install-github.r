@@ -120,7 +120,7 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
     warning("GitHub repo contains submodules, may not function as expected!",
       call. = FALSE)
 
-  download(dest, src, auth)
+  download_github(dest, src, auth)
 }
 
 github_has_remotes <- function(x, auth = NULL) {
@@ -286,4 +286,15 @@ remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
 
     unname(res[found[1]])
   }, error = function(e) NA)
+}
+
+download_github <- function(path, url, ...) {
+  request <- httr::GET(url, ...)
+
+  if (httr::status_code(request) >= 400) {
+     stop(github_error(request))
+  }
+
+  writeBin(httr::content(request, "raw"), path)
+  path
 }

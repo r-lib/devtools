@@ -11,16 +11,22 @@ github_response <- function(req) {
   parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
 
   if (httr::status_code(req) >= 400) {
-    errors <- vapply(parsed$errors, `[[`, "message", FUN.VALUE = character(1))
-
-    stop(
-      parsed$message, " (", httr::status_code(req), ")\n",
-      paste("* ", errors, collapse = "\n"),
-      call. = FALSE
-    )
+    stop(github_error(req))
   }
 
   parsed
+}
+
+github_error <- function(req) {
+  text <- httr::content(req, as = "text")
+  parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
+  errors <- vapply(parsed$errors, `[[`, "message", FUN.VALUE = character(1))
+
+  structure(list(
+      call = sys.call(-1),
+      message = paste0(parsed$message, " (", httr::status_code(req), ")\n",
+        paste("* ", errors, collapse = "\n")),
+      class = c("condition", "error", "github_error")))
 }
 
 github_GET <- function(path, ..., pat = github_pat()) {
