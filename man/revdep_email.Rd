@@ -5,7 +5,8 @@
 \title{Experimental email notification system.}
 \usage{
 revdep_email(pkg = ".", date, author = getOption("devtools.name"),
-  draft = TRUE, unsent = NULL)
+  draft = TRUE, unsent = NULL, template = "revdep/email.md",
+  only_problems = FALSE)
 }
 \arguments{
 \item{pkg}{Path to package. Defaults to current directory.}
@@ -14,9 +15,14 @@ revdep_email(pkg = ".", date, author = getOption("devtools.name"),
 
 \item{author}{Name used to sign email}
 
-\item{draft}{If \code{TRUE}, creates as draft email; if \code{FALSE}, sends.}
+\item{draft}{If \code{TRUE}, creates as draft email; if \code{FALSE},
+sends immediately.}
 
 \item{unsent}{If some emails fail to send, in a previous}
+
+\item{template}{Path of template to use}
+
+\item{only_problems}{Only inform authors with problems?}
 }
 \description{
 This currently assumes that you use github and gmail, and you have a
