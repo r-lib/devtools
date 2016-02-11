@@ -92,7 +92,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       )
       end_time <- Sys.time()
 
-      message("Checked ", pkg_names[i], ": ", summarise_check_results(res))
+      message("Checked ", pkg_names[i], ": ", summarise_check_results(res, colour = TRUE))
       elapsed_time <- as.numeric(end_time - start_time, units = "secs")
       writeLines(
         sprintf("%d  %s  %.1f", i, pkgs[i], elapsed_time),
@@ -101,6 +101,9 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
       NULL
     }
+
+    if (length(pkgs) == 0)
+      return()
 
     if (identical(as.integer(threads), 1L)) {
       lapply(seq_along(pkgs), check_pkg)

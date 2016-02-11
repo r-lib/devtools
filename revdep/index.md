@@ -6,7 +6,7 @@
 |:--------|:----------------------------|
 |version  |R version 3.2.3 (2015-12-10) |
 |system   |x86_64, darwin13.4.0         |
-|ui       |X11                          |
+|ui       |RStudio (0.99.875)           |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Chicago              |
@@ -18,8 +18,9 @@
 |:----------|:--|:-----------|:----------|:---------------------------------|
 |bitops     |   |1.0-6       |2013-08-17 |CRAN (R 3.2.0)                    |
 |covr       |   |1.2.0       |2015-06-25 |CRAN (R 3.2.0)                    |
+|crayon     |   |1.3.1       |2015-07-13 |CRAN (R 3.2.0)                    |
 |curl       |   |0.9.5       |2016-01-23 |CRAN (R 3.2.3)                    |
-|devtools   |*  |1.10.0.9000 |2016-02-11 |local (hadley/devtools@6ed3444)   |
+|devtools   |*  |1.10.0.9000 |2016-02-11 |local (hadley/devtools)           |
 |digest     |   |0.6.9       |2016-01-08 |CRAN (R 3.2.3)                    |
 |evaluate   |   |0.8         |2015-09-18 |CRAN (R 3.2.0)                    |
 |git2r      |   |0.13.1      |2015-12-10 |CRAN (R 3.2.3)                    |
@@ -38,7 +39,7 @@
 |withr      |   |1.0.1       |2016-02-04 |CRAN (R 3.2.3)                    |
 
 # Check results
-75 checked out of 76 dependencies 
+75 checked out of 1 dependencies 
 
 ## acmeR (1.1.0)
 Maintainer: Robert Wolpert <wolpert@stat.duke.edu>
@@ -135,12 +136,7 @@ Bug reports:
 Maintainer: Richard Cotton <richierocks@gmail.com>  
 Bug reports: https://bitbucket.org/richierocks/assertive.sets/issues
 
-0 errors | 0 warnings | 1 note 
-
-```
-checking Rd cross-references ... NOTE
-Package unavailable to check Rd xrefs: ‘sets’
-```
+0 errors | 0 warnings | 0 notes
 
 ## assertive.strings (0.0-1)
 Maintainer: Richard Cotton <richierocks@gmail.com>  
@@ -318,15 +314,7 @@ checking data for non-ASCII characters ... NOTE
 Maintainer: Erlis Ruli <erlisr@yahoo.it>  
 Bug reports: https://github.com/erlisR/iLaplace/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘RcppArmadillo’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
+0 errors | 0 warnings | 0 notes
 
 ## jiebaR (0.8)
 Maintainer: Qin Wenfeng <mail@qinwenfeng.com>  
@@ -348,7 +336,18 @@ checking data for non-ASCII characters ... NOTE
 ## lineup (0.37-6)
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note 
+
+```
+checking re-building of vignette outputs ... NOTE
+Error in re-building vignettes:
+  ...
+Warning in find.gene.pseudomarker(f2cross, pmap, genepos) :
+  10 genes differ from pseudomarker pos by > 2 Mbp, with gaps as big as 2.4 Mbp
+
+Execution halted
+
+```
 
 ## manifestoR (1.1-1)
 Maintainer: Jirka Lewandowski <jirka.lewandowski@wzb.eu>  
@@ -365,15 +364,7 @@ Maintainer: Tad Dallas <tdallas@uga.edu>
 Maintainer: Sean C. Anderson <sean@seananderson.ca>  
 Bug reports: http://github.com/seananderson/metafolio/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘RcppArmadillo’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
+0 errors | 0 warnings | 0 notes
 
 ## modules (0.2.0)
 Maintainer: Sebastian Warnholz <wahani@gmail.com>  
@@ -443,7 +434,7 @@ checking whether package ‘NMF’ can be installed ... WARNING
 Found the following significant warnings:
   Warning: replacing previous import by ‘ggplot2::unit’ when loading ‘NMF’
   Warning: replacing previous import by ‘ggplot2::arrow’ when loading ‘NMF’
-See ‘/private/tmp/RtmpgrYwPl/check_cran11cfe4a63e06c/NMF.Rcheck/00install.out’ for details.
+See ‘/Users/hadley/Documents/devtools/devtools/revdep/checks/NMF.Rcheck/00install.out’ for details.
 
 checking package dependencies ... NOTE
 Packages suggested but not available for checking:
@@ -573,7 +564,26 @@ utest,character : .local: no visible global function definition for
 Maintainer: Carson Sievert <cpsievert1@gmail.com>  
 Bug reports: https://github.com/ropensci/plotly/issues
 
-0 errors | 0 warnings | 0 notes
+1 error  | 0 warnings | 0 notes
+
+```
+checking tests ... ERROR
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  [1] "Running test: histogram-density"
+  [1] "Running test: histogram-fill"
+  [1] "Running test: histogram-fixed-fill-color"
+  [1] "Running test: histogram-density-binwidth"
+  [1] "Running test: histogram-fill-factor"
+  [1] "Running test: histogram-fill-factor-identity"
+  [1] "Running test: histogram-fill-factor-dodge"
+  [1] "Running test: histogram-fill-factor-facets"
+  [1] "Running test: histogram-vline"
+  [1] "Running test: histogram-dates"
+  
+  There were 50 or more warnings (use warnings() to see the first 50)
+  Execution halted
+```
 
 ## PSAboot (1.1.3)
 Maintainer: Jason Bryer <jason@bryer.org>  

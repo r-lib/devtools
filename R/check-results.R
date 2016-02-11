@@ -51,11 +51,11 @@ format.check_results <- function(x, ...) {
   paste0(checks, collapse = "\n\n")
 }
 
-summarise_check_results <- function(x) {
+summarise_check_results <- function(x, colour = FALSE) {
   n <- lapply(x, length)
   paste0(
-    show_count(n$errors, "error ", "errors", n$errors > 0), " | ",
-    show_count(n$warnings, "warning ", "warnings", n$warnings > 0), " | ",
+    show_count(n$errors, "error ", "errors", colour && n$errors > 0), " | ",
+    show_count(n$warnings, "warning ", "warnings", colour && n$warnings > 0), " | ",
     show_count(n$notes, "note ", "notes")
   )
 }

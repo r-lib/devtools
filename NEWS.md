@@ -1,5 +1,10 @@
 # devtools 1.10.0.9000
 
+* `revdep_check()` is can now be resumed after a failure - this should be a 
+  big time saver if something goes unexpected wrong in the middle of the checks.
+  You can resume a partial check with `revdep_check_resume()` or blow away the
+  cache so you can start afresh with `revdep_check_reset()`.
+
 * Package index caches for `revdep_check()` now time out after 30 minutes.
 
 * `revdep_check_save_logs()` has been removed.

@@ -3,6 +3,8 @@
 \name{revdep_check_save_summary}
 \alias{revdep_check}
 \alias{revdep_check_print_problems}
+\alias{revdep_check_reset}
+\alias{revdep_check_resume}
 \alias{revdep_check_save_summary}
 \title{Run R CMD check on all downstream dependencies.}
 \usage{
@@ -14,8 +16,11 @@ revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
   libpath = getOption("devtools.revdep.libpath"), srcpath = libpath,
   bioconductor = FALSE, type = getOption("pkgType"),
-  threads = getOption("Ncpus", 1), env_vars = NULL,
-  check_dir = tempfile("check_cran"))
+  threads = getOption("Ncpus", 1), env_vars = NULL, check_dir = NULL)
+
+revdep_check_resume(pkg = ".")
+
+revdep_check_reset(pkg = ".")
 }
 \arguments{
 \item{pkg}{Path to package. Defaults to current directory.}
@@ -49,7 +54,9 @@ It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 
 \item{env_vars}{Environment variables set during \code{R CMD check}}
 
-\item{check_dir}{Directory to store results.}
+\item{check_dir}{A temporary directory to hold the results of the package
+checks. This should not exist as after the revdep checks complete
+successfully this directory is blown away.}
 }
 \value{
 An invisible list of results. But you'll probably want to look
@@ -59,8 +66,15 @@ An invisible list of results. But you'll probably want to look
 }
 \description{
 Use \code{revdep_check()} to run \code{\link{check_cran}()} on all downstream
-dependencies. Summarises the results with \code{revdep_check_summary} and
-save logs with \code{revdep_check_save_logs}.
+dependencies. Summarises the results with \code{revdep_check_summary()} and
+see problems with \code{revdep_check_print_problems()}.
+}
+\details{
+Revdep checks are resumably - this is very helpful if somethings goes
+wrong (like you run out of power or you lose your internet connection) in
+the middle of a check. You can resume a partially completed check with
+\code{revdep_check_resume()}, or blow away the cached result so you can
+start afresh with \code{revdep_check_reset()}.
 }
 \section{Check process}{
 

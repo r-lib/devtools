@@ -139,12 +139,16 @@ check_built <- function(path = NULL, cran = TRUE,
     throw = FALSE
   )
 
-  results_path <- file.path(
+  package_path <- file.path(
     normalizePath(check_dir),
-    paste(pkgname, ".Rcheck", sep = ""),
-    "00check.log"
+    paste(pkgname, ".Rcheck", sep = "")
   )
-  parse_check_results(results_path)
+
+  # Record successful completion
+  writeLines("OK", file.path(package_path, "COMPLETE"))
+
+  log_path <- file.path(package_path, "00check.log")
+  parse_check_results(log_path)
 }
 
 check_env_vars <- function(cran = FALSE, check_version = FALSE,
