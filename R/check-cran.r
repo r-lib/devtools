@@ -58,7 +58,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
     message("Determining available packages") # ----------------------------------
     deps <- package_deps(pkgs, repos = repos, type = type, dependencies = TRUE)
-    update(deps, Ncpus = threads)
+    update(deps, Ncpus = threads, quiet = TRUE)
 
     message("Downloading source packages for checking") #-------------------------
     urls <- lapply(pkgs, package_url, repos = repos, available = available_src)

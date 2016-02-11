@@ -6,35 +6,36 @@
 |:--------|:----------------------------|
 |version  |R version 3.2.3 (2015-12-10) |
 |system   |x86_64, darwin13.4.0         |
-|ui       |RStudio (0.99.875)           |
+|ui       |X11                          |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Chicago              |
-|date     |2016-02-10                   |
+|date     |2016-02-11                   |
 
 ## Packages
 
-|package    |*  |version    |date       |source                            |
-|:----------|:--|:----------|:----------|:---------------------------------|
-|bitops     |   |1.0-6      |2013-08-17 |CRAN (R 3.2.0)                    |
-|covr       |   |1.2.0      |2015-06-25 |CRAN (R 3.2.0)                    |
-|curl       |   |0.9.5      |2016-01-23 |CRAN (R 3.2.3)                    |
-|digest     |   |0.6.9      |2016-01-08 |CRAN (R 3.2.3)                    |
-|evaluate   |   |0.8        |2015-09-18 |CRAN (R 3.2.0)                    |
-|git2r      |   |0.13.1     |2015-12-10 |CRAN (R 3.2.3)                    |
-|gmailr     |   |0.7.0.9000 |2016-02-10 |Github (jimhester/gmailr@5ae820f) |
-|httr       |   |1.1.0      |2016-01-28 |CRAN (R 3.2.3)                    |
-|jsonlite   |   |0.9.19     |2015-11-28 |CRAN (R 3.2.2)                    |
-|knitr      |   |1.12.3     |2016-01-22 |CRAN (R 3.2.3)                    |
-|lintr      |   |0.3.3      |2015-09-15 |CRAN (R 3.2.0)                    |
-|memoise    |   |1.0.0      |2016-01-29 |CRAN (R 3.2.3)                    |
-|Rcpp       |   |0.12.3     |2016-01-10 |CRAN (R 3.2.3)                    |
-|rmarkdown  |   |0.9.2      |2016-01-01 |CRAN (R 3.2.3)                    |
-|roxygen2   |   |5.0.1      |2015-11-11 |CRAN (R 3.2.2)                    |
-|rstudioapi |   |0.5        |2016-01-24 |CRAN (R 3.2.3)                    |
-|testthat   |*  |0.11.0     |2015-10-14 |CRAN (R 3.2.0)                    |
-|whisker    |   |0.3-2      |2013-04-28 |CRAN (R 3.2.0)                    |
-|withr      |   |1.0.1      |2016-02-04 |CRAN (R 3.2.3)                    |
+|package    |*  |version     |date       |source                            |
+|:----------|:--|:-----------|:----------|:---------------------------------|
+|bitops     |   |1.0-6       |2013-08-17 |CRAN (R 3.2.0)                    |
+|covr       |   |1.2.0       |2015-06-25 |CRAN (R 3.2.0)                    |
+|curl       |   |0.9.5       |2016-01-23 |CRAN (R 3.2.3)                    |
+|devtools   |*  |1.10.0.9000 |2016-02-11 |local (hadley/devtools@6ed3444)   |
+|digest     |   |0.6.9       |2016-01-08 |CRAN (R 3.2.3)                    |
+|evaluate   |   |0.8         |2015-09-18 |CRAN (R 3.2.0)                    |
+|git2r      |   |0.13.1      |2015-12-10 |CRAN (R 3.2.3)                    |
+|gmailr     |   |0.7.0.9000  |2016-02-11 |Github (jimhester/gmailr@5ae820f) |
+|httr       |   |1.1.0       |2016-01-28 |CRAN (R 3.2.3)                    |
+|jsonlite   |   |0.9.19      |2015-11-28 |CRAN (R 3.2.2)                    |
+|knitr      |   |1.12.3      |2016-01-22 |CRAN (R 3.2.3)                    |
+|lintr      |   |0.3.3       |2015-09-15 |CRAN (R 3.2.0)                    |
+|memoise    |   |1.0.0       |2016-01-29 |CRAN (R 3.2.3)                    |
+|Rcpp       |   |0.12.3      |2016-01-10 |CRAN (R 3.2.3)                    |
+|rmarkdown  |   |0.9.2       |2016-01-01 |CRAN (R 3.2.3)                    |
+|roxygen2   |   |5.0.1       |2015-11-11 |CRAN (R 3.2.2)                    |
+|rstudioapi |   |0.5         |2016-01-24 |CRAN (R 3.2.3)                    |
+|testthat   |*  |0.11.0      |2015-10-14 |CRAN (R 3.2.0)                    |
+|whisker    |   |0.3-2       |2013-04-28 |CRAN (R 3.2.0)                    |
+|withr      |   |1.0.1       |2016-02-04 |CRAN (R 3.2.3)                    |
 
 # Check results
 75 checked out of 76 dependencies 
@@ -442,7 +443,7 @@ checking whether package ‘NMF’ can be installed ... WARNING
 Found the following significant warnings:
   Warning: replacing previous import by ‘ggplot2::unit’ when loading ‘NMF’
   Warning: replacing previous import by ‘ggplot2::arrow’ when loading ‘NMF’
-See ‘/private/tmp/RtmpFbm5pI/check_cran810c7e2caf82/NMF.Rcheck/00install.out’ for details.
+See ‘/private/tmp/RtmpgrYwPl/check_cran11cfe4a63e06c/NMF.Rcheck/00install.out’ for details.
 
 checking package dependencies ... NOTE
 Packages suggested but not available for checking:

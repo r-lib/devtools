@@ -161,7 +161,7 @@ revdep_check_save <- function(pkg, revdeps, check_path, lib_path) {
   # Find all dependencies
   deps <- pkg[c("imports", "depends", "linkingto", "suggests")]
   pkgs <- unlist(lapply(deps, function(x) parse_deps(x)$name), use.names = FALSE)
-  pkgs <- c(pkg$package, sort(unique(pkgs)))
+  pkgs <- c(pkg$package, unique(pkgs))
   pkgs <- intersect(pkgs, dir(lib_path))
   dependencies <- package_info(pkgs, libpath = lib_path)
 
