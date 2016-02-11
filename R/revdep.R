@@ -217,7 +217,7 @@ cran_packages <- memoise::memoise(
     rownames(cp) <- unname(cp[, 1])
     cp
   },
-  ~timeout(30 * 60)
+  ~memoise::timeout(30 * 60)
 )
 
 bioc_packages <- memoise::memoise(
@@ -228,7 +228,7 @@ bioc_packages <- memoise::memoise(
     rownames(bioc) <- bioc[, 1]
     bioc
   },
-  ~timeout(30 * 60)
+  ~memoise::timeout(30 * 60)
 )
 
 packages <- function() {
