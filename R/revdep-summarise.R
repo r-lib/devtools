@@ -74,7 +74,7 @@ revdep_check_print_problems <- function(pkg = ".") {
   problems <- problems[!is.na(problems)]
 
   dep_fail <- grepl("checking package dependencies", problems, fixed = TRUE)
-  inst_fail <- grepl("checking whether package .[^']+. can be installed", problems)
+  inst_fail <- grepl("checking whether package .+ can be installed", problems)
 
   pkgs <- names(problems)
   if (any(dep_fail)) {
