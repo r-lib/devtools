@@ -118,10 +118,11 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
     dir.create(srcpath)
 
   message("Installing ", pkg$package, " ", pkg$version, " from ", pkg$path)
-  withr::with_libpaths(libpath, install(pkg, reload = FALSE, quiet = TRUE))
+  withr::with_libpaths(libpath, action = "prefix",
+                       install(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE))
   on.exit(remove.packages(pkg$package, libpath), add = TRUE)
 
-  res <- withr::with_envvar(c(
+  withr::with_envvar(c(
     NOT_CRAN = "false",
     RGL_USE_NULL = "true"
   ), {
