@@ -1,5 +1,7 @@
 # devtools 1.10.0.9000
 
+* Package index caches for `revdep_check()` now time out after 30 minutes.
+
 * `revdep_check_save_logs()` has been removed.
 
 * Experimental `revdep_email()` to individual email each maintainer with

@@ -207,15 +207,18 @@ check_dirs <- function(path) {
 
 # Package caches ----------------------------------------------------------
 
-cran_packages <- memoise::memoise(function() {
-  local <- file.path(tempdir(), "packages.rds")
-  utils::download.file("http://cran.R-project.org/web/packages/packages.rds", local,
-    mode = "wb", quiet = TRUE)
-  on.exit(unlink(local))
-  cp <- readRDS(local)
-  rownames(cp) <- unname(cp[, 1])
-  cp
-})
+cran_packages <- memoise::memoise(
+  function() {
+    local <- file.path(tempdir(), "packages.rds")
+    utils::download.file("http://cran.R-project.org/web/packages/packages.rds", local,
+      mode = "wb", quiet = TRUE)
+    on.exit(unlink(local))
+    cp <- readRDS(local)
+    rownames(cp) <- unname(cp[, 1])
+    cp
+  },
+  ~timeout(30 * 60)
+)
 
 bioc_packages <- memoise::memoise(
   function(views = paste(BiocInstaller::biocinstallRepos()[["BioCsoft"]], "VIEWS", sep = "/")) {
@@ -224,7 +227,9 @@ bioc_packages <- memoise::memoise(
     bioc <- read.dcf(con)
     rownames(bioc) <- bioc[, 1]
     bioc
-  })
+  },
+  ~timeout(30 * 60)
+)
 
 packages <- function() {
   cran <- cran_packages()
