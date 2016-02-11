@@ -70,13 +70,9 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
     ext <- ".tar.gz"
   }
 
-  # Create temporary library to ensure that default library doesn't get
+  # Run in temporary library to ensure that default library doesn't get
   # contaminated
-  temp_lib <- tempfile()
-  dir.create(temp_lib)
-  on.exit(unlink(temp_lib, recursive = TRUE), add = TRUE)
-
-  withr::with_libpaths(c(temp_lib, .libPaths()), R(cmd, path, quiet = quiet))
+  withr::with_temp_libpaths(R(cmd, path, quiet = quiet))
   targz <- paste0(pkg$package, "_", pkg$version, ext)
 
   file.path(path, targz)
