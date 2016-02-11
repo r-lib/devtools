@@ -119,7 +119,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
 
   message("Installing ", pkg$package, " ", pkg$version, " from ", pkg$path)
   withr::with_libpaths(libpath, action = "prefix",
-                       install(pkg, reload = FALSE, quiet = TRUE))
+                       install(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE))
   on.exit(remove.packages(pkg$package, libpath), add = TRUE)
 
   withr::with_envvar(c(
