@@ -91,6 +91,10 @@ send_email <- function(email, draft = TRUE) {
       send(email)
       TRUE
     },
+    interrupt = function(e) {
+      message("Aborted by user")
+      invokeRestart("abort")
+    },
     error = function(e) {
       message("Failed")
       FALSE
