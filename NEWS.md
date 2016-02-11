@@ -1,5 +1,7 @@
 # devtools 1.10.0.9000
 
+* `revdep_check_save_logs()` has been removed.
+
 * Experimental `revdep_email()` to individual email each maintainer with
   `R CMD check` summary results (#1014).
 

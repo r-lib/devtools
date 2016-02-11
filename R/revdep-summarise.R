@@ -1,91 +1,24 @@
-#' @export
-#' @rdname revdep_check
-revdep_check_save_logs <- function(pkg = ".") {
-  pkg <- as.package(".")
-
-  save_one <- function(pkg, path) {
-    out <- file.path("revdep", pkg)
-    dir.create(out, showWarnings = FALSE)
-
-    logs <- check_logs(path)
-    new_dirs <- setdiff(unique(dirname(logs)), ".")
-    if (length(new_dirs) > 0) {
-      lapply(file.path(out, new_dirs), dir.create, recursive = TRUE, showWarnings = FALSE)
-    }
-
-    file.copy(file.path(path, logs), file.path(out, logs))
-
-    tryCatch({
-      desc <- check_description(path)
-      write_dcf(file.path(out, "DESCRIPTION"), desc[c("Package", "Version", "Maintainer")])
-    }, error = function(e) {
-      message("Error checking DESCRIPTION for ", pkg, ": ", e$message)
-    })
-  }
-
-  res <- readRDS(revdep_check_path(pkg))
-  pkgs <- check_dirs(res$check_dir)
-  Map(save_one, names(pkgs), pkgs)
-  invisible()
-}
-
-#' @rdname revdep_check
-#' @export
-revdep_check_print_problems <- function(pkg = ".") {
-  pkg <- as.package(pkg)
-
-  summaries <- readRDS(revdep_check_path(pkg))$results
-
-  problems <- vapply(summaries, function(x) first_problem(x$results), character(1))
-  problems <- problems[!is.na(problems)]
-
-  dep_fail <- grepl("checking package dependencies", problems, fixed = TRUE)
-  inst_fail <- grepl("checking whether package ‘[^']+’ can be installed", problems)
-
-  pkgs <- names(problems)
-  if (any(dep_fail)) {
-    bad <- paste(pkgs[dep_fail], collapse = ", ")
-    cat("* Failed to install dependencies for: ", bad, "\n", sep = "")
-  }
-  if (any(inst_fail)) {
-    bad <- paste(pkgs[inst_fail], collapse = ", ")
-    cat("* Failed to install: ", bad, "\n", sep = "")
-  }
-
-  if (length(problems) > 0) {
-    other <- problems[!inst_fail & !dep_fail]
-    cat(paste0("* ", names(other), ": ", other, "\n"), sep = "")
-  } else {
-    cat("No ERRORs or WARNINGs found :)\n")
-  }
-}
-
-
 #' @rdname revdep_check
 #' @export
 revdep_check_save_summary <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  res <- readRDS(revdep_check_path(pkg))
-
-  md <- revdep_check_summary_md(res)
+  md <- revdep_check_summary_md(pkg)
   writeLines(md, file.path(pkg$path, "revdep", "index.md"))
 }
 
-revdep_check_summary_md <- function(res) {
+revdep_check_summary_md <- function(pkg) {
   check_suggested("knitr")
-  plat <- platform_info()
-  plat_df <- data.frame(setting = names(plat), value = unlist(plat))
+
+  check <- readRDS(revdep_check_path(pkg))
+
+  plat_df <- data.frame(
+    setting = names(check$platform),
+    value = unlist(check$platform)
+  )
   rownames(plat_df) <- NULL
 
-  # Find all dependencies
-  deps <- res$pkg[c("imports", "depends", "linkingto", "suggests")]
-  pkgs <- unlist(lapply(deps, function(x) parse_deps(x)$name), use.names = FALSE)
-  pkgs <- c(res$pkg$package, sort(unique(pkgs)))
-  pkgs <- intersect(pkgs, dir(res$libpath))
-  pkg_df <- package_info(pkgs, libpath = res$libpath)
-
-  summaries <- vapply(res$results, format, character(1))
+  summaries <- vapply(check$results, format, character(1))
 
   paste0(
     "# Setup\n\n",
@@ -93,26 +26,11 @@ revdep_check_summary_md <- function(res) {
     paste(knitr::kable(plat_df), collapse = "\n"),
     "\n\n",
     "## Packages\n\n",
-    paste(knitr::kable(pkg_df), collapse = "\n"),
+    paste(knitr::kable(check$dependencies), collapse = "\n"),
     "\n\n",
     "# Check results\n",
-    paste0(length(summaries), " checked out of ", length(res$deps), " dependencies \n\n"),
+    paste0(length(summaries), " checked out of ", length(check$revdeps), " dependencies \n\n"),
     paste0(summaries, collapse = "\n")
-  )
-}
-
-parse_package_check <- function(path) {
-  pkg <- check_description(path)
-
-  structure(
-    list(
-      maintainer = pkg$Maintainer,
-      bug_reports = pkg$BugReports,
-      package = pkg$Package,
-      version = pkg$Version,
-      results = parse_check_results(file.path(path, "00check.log"))
-    ),
-    class = "revdep_check_result"
   )
 }
 
@@ -145,36 +63,33 @@ print.revdep_check_result <- function(x, ...) {
   cat(format(x, ...), "\n", sep = "")
 }
 
-indent <- function(x, spaces = 4) {
-  ind <- paste(rep(" ", spaces), collapse = "")
-  paste0(ind, gsub("\n", paste0("\n", ind), x, fixed = TRUE))
-}
+#' @rdname revdep_check
+#' @export
+revdep_check_print_problems <- function(pkg = ".") {
+  pkg <- as.package(pkg)
 
-check_dirs <- function(path) {
-  checkdirs <- list.dirs(path, recursive = FALSE, full.names = TRUE)
-  checkdirs <- checkdirs[grepl("\\.Rcheck$", checkdirs)]
-  names(checkdirs) <- sub("\\.Rcheck$", "", basename(checkdirs))
+  summaries <- readRDS(revdep_check_path(pkg))$results
 
-  has_src <- file.exists(file.path(checkdirs, "00_pkg_src", names(checkdirs)))
-  checkdirs[has_src]
-}
+  problems <- vapply(summaries, function(x) first_problem(x$results), character(1))
+  problems <- problems[!is.na(problems)]
 
-check_description <- function(path) {
-  pkgname <- gsub("\\.Rcheck$", "", basename(path))
-  read_dcf(file.path(path, "00_pkg_src", pkgname, "DESCRIPTION"))
-}
+  dep_fail <- grepl("checking package dependencies", problems, fixed = TRUE)
+  inst_fail <- grepl("checking whether package ‘[^']+’ can be installed", problems)
 
-check_time <- function(path) {
-  checktimes <- file.path(path, "check-time.txt")
-  if (file.exists(checktimes)) {
-    scan(checktimes, list(1L, "", 1), quiet = TRUE)[[3]]
-  } else {
-    c(NA, NA, NA)
+  pkgs <- names(problems)
+  if (any(dep_fail)) {
+    bad <- paste(pkgs[dep_fail], collapse = ", ")
+    cat("* Failed to install dependencies for: ", bad, "\n", sep = "")
+  }
+  if (any(inst_fail)) {
+    bad <- paste(pkgs[inst_fail], collapse = ", ")
+    cat("* Failed to install: ", bad, "\n", sep = "")
   }
 
-}
-
-check_logs <- function(path) {
-  paths <- dir(path, recursive = TRUE)
-  paths[grepl("(fail|out|log)$", paths)]
+  if (length(problems) > 0) {
+    other <- problems[!inst_fail & !dep_fail]
+    cat(paste0("* ", names(other), ": ", other, "\n"), sep = "")
+  } else {
+    cat("No ERRORs or WARNINGs found :)\n")
+  }
 }

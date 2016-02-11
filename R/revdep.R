@@ -118,36 +118,82 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
     dir.create(srcpath)
 
   message("Installing ", pkg$package, " ", pkg$version, " from ", pkg$path)
-  withr::with_libpaths(libpath, action = "prefix",
-                       install(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE))
+  withr::with_libpaths(libpath, action = "prefix", {
+    install(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE)
+  })
   on.exit(remove.packages(pkg$package, libpath), add = TRUE)
+
+  message("Finding reverse dependencies")
+  revdeps <- revdep(pkg$package, recursive = recursive, ignore = ignore,
+    bioconductor = bioconductor, dependencies = dependencies)
 
   withr::with_envvar(c(
     NOT_CRAN = "false",
     RGL_USE_NULL = "true"
   ), {
-
-    message("Finding reverse dependencies")
-    pkgs <- revdep(pkg$package, recursive = recursive, ignore = ignore,
-      bioconductor = bioconductor, dependencies = dependencies)
-    check_cran(pkgs, revdep_pkg = pkg$package, libpath = libpath,
+    check_cran(revdeps, revdep_pkg = pkg$package, libpath = libpath,
       srcpath = srcpath, bioconductor = bioconductor, type = type,
       threads = threads, check_dir = check_dir)
-
-    list(check_dir = check_dir, libpath = libpath, pkg = pkg, deps = pkgs)
   })
 
-  rule("Saving check results to `revdep/check.rds`")
-  res$results <- lapply(check_dirs(res$check_dir), parse_package_check)
-  saveRDS(res, revdep_check_path(pkg))
+  revdep_check_save(pkg, revdeps, check_dir, libpath)
+  invisible()
+}
 
-  invisible(res)
+revdep_check_save <- function(pkg, revdeps, check_path, lib_path) {
+  platform <- platform_info()
+
+  # Revdep results
+  results <- lapply(check_dirs(check_path), parse_package_check)
+
+  # Find all dependencies
+  deps <- pkg[c("imports", "depends", "linkingto", "suggests")]
+  pkgs <- unlist(lapply(deps, function(x) parse_deps(x)$name), use.names = FALSE)
+  pkgs <- c(pkg$package, sort(unique(pkgs)))
+  pkgs <- intersect(pkgs, dir(lib_path))
+  dependencies <- package_info(pkgs, libpath = lib_path)
+
+  rule("Saving check results to `revdep/check.rds`")
+  out <- list(
+    revdeps = revdeps,
+    platform = platform,
+    dependencies = dependencies,
+    results = results
+  )
+  saveRDS(out, revdep_check_path(pkg))
+}
+
+parse_package_check <- function(path) {
+  pkgname <- gsub("\\.Rcheck$", "", basename(path))
+  desc <- read_dcf(file.path(path, "00_pkg_src", pkgname, "DESCRIPTION"))
+
+  structure(
+    list(
+      maintainer = desc$Maintainer,
+      bug_reports = desc$BugReports,
+      package = desc$Package,
+      version = desc$Version,
+      results = parse_check_results(file.path(path, "00check.log"))
+    ),
+    class = "revdep_check_result"
+  )
 }
 
 revdep_check_path <- function(pkg) {
   file.path(pkg$path, "revdep", "checks.rds")
 }
 
+check_dirs <- function(path) {
+  checkdirs <- list.dirs(path, recursive = FALSE, full.names = TRUE)
+  checkdirs <- checkdirs[grepl("\\.Rcheck$", checkdirs)]
+  names(checkdirs) <- sub("\\.Rcheck$", "", basename(checkdirs))
+
+  has_src <- file.exists(file.path(checkdirs, "00_pkg_src", names(checkdirs)))
+  checkdirs[has_src]
+}
+
+
+# Package caches ----------------------------------------------------------
 
 cran_packages <- memoise::memoise(function() {
   local <- file.path(tempdir(), "packages.rds")
@@ -166,7 +212,7 @@ bioc_packages <- memoise::memoise(
     bioc <- read.dcf(con)
     rownames(bioc) <- bioc[, 1]
     bioc
-})
+  })
 
 packages <- function() {
   cran <- cran_packages()
