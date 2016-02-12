@@ -18,7 +18,7 @@ Imports:
     utils,
     tools,
     methods,
-    memoise,
+    memoise (>= 1.0.0),
     whisker,
     digest,
     rstudioapi (>= 0.2.0),
@@ -28,6 +28,7 @@ Imports:
     withr
 Suggests:
     curl (>= 0.9),
+    crayon,
     testthat (>= 0.7),
     BiocInstaller,
     Rcpp (>= 0.10.0),

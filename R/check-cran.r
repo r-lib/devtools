@@ -20,18 +20,16 @@
 #' @param threads Number of concurrent threads to use for checking.
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
 #' @param check_dir Directory to store results.
-#' @param revdep_pkg Optional name of a package for which this check is
-#'   checking the reverse dependencies of. This is normally passed in from
-#'   \code{\link{revdep_check}}, and is used only for logging.
 #' @return Returns (invisibly) the directory where check results are stored.
 #' @keywords internal
+#' @inheritParams check
 #' @export
 check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
                        srcpath = libpath, bioconductor = FALSE,
                        type = getOption("pkgType"),
                        threads = getOption("Ncpus", 1),
                        check_dir = tempfile("check_cran"),
-                       revdep_pkg = NULL) {
+                       env_vars = NULL) {
 
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
@@ -60,7 +58,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
     message("Determining available packages") # ----------------------------------
     deps <- package_deps(pkgs, repos = repos, type = type, dependencies = TRUE)
-    update(deps, Ncpus = threads)
+    update(deps, Ncpus = threads, quiet = TRUE)
 
     message("Downloading source packages for checking") #-------------------------
     urls <- lapply(pkgs, package_url, repos = repos, available = available_src)
@@ -84,18 +82,17 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     rule("Checking packages") # --------------------------------------------------
     pkg_names <- format(pkgs)
     check_pkg <- function(i) {
-      message("Checking ", pkg_names[i])
-
       start_time <- Sys.time()
       res <- check_built(
         local_urls[i],
         args = "--no-multiarch --no-manual --no-codoc",
+        env_vars = env_vars,
         check_dir = check_dir,
         quiet = TRUE
       )
       end_time <- Sys.time()
 
-      message("Checked  ", pkg_names[i], ": ", summarise_check_results(res))
+      message("Checked ", pkg_names[i], ": ", summarise_check_results(res, colour = TRUE))
       elapsed_time <- as.numeric(end_time - start_time, units = "secs")
       writeLines(
         sprintf("%d  %s  %.1f", i, pkgs[i], elapsed_time),
@@ -104,6 +101,9 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
       NULL
     }
+
+    if (length(pkgs) == 0)
+      return()
 
     if (identical(as.integer(threads), 1L)) {
       lapply(seq_along(pkgs), check_pkg)

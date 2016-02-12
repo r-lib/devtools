@@ -4,6 +4,15 @@
   to allow passing `args = "--compact-vignettes=both"` for packages with
   heavy PDF vignettes (@krlmlr, #1077).
 
+* `revdep_check()` is can now be resumed after a failure - this should be a 
+  big time saver if something goes unexpected wrong in the middle of the checks.
+  You can resume a partial check with `revdep_check_resume()` or blow away the
+  cache so you can start afresh with `revdep_check_reset()`.
+
+* Package index caches for `revdep_check()` now time out after 30 minutes.
+
+* `revdep_check_save_logs()` has been removed.
+
 * Experimental `revdep_email()` to individual email each maintainer with
   `R CMD check` summary results (#1014).
 
@@ -76,6 +85,9 @@
   it and have rstudioapi installed).
 
 * `use_readme_md()` creates a basic `README.md` template (#1064).
+
+* `revdep_check()` doesn't complain about missing `git2r` package anymore
+  (#1068, @krlmlr).
 
 # devtools 1.10.0
 

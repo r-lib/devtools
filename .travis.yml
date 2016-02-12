@@ -2,6 +2,9 @@ language: R
 sudo: false
 cache: packages
 
+r_github_packages:
+  - hadley/devtools
+
 bioc_required: true
 bioc_packages:
   - BiocInstaller

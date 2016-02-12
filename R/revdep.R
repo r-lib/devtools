@@ -64,8 +64,14 @@ print.maintainers <- function(x, ...) {
 #' Run R CMD check on all downstream dependencies.
 #'
 #' Use \code{revdep_check()} to run \code{\link{check_cran}()} on all downstream
-#' dependencies. Summarises the results with \code{revdep_check_summary} and
-#' save logs with \code{revdep_check_save_logs}.
+#' dependencies. Summarises the results with \code{revdep_check_summary()} and
+#' see problems with \code{revdep_check_print_problems()}.
+#'
+#' Revdep checks are resumably - this is very helpful if somethings goes
+#' wrong (like you run out of power or you lose your internet connection) in
+#' the middle of a check. You can resume a partially completed check with
+#' \code{revdep_check_resume()}, or blow away the cached result so you can
+#' start afresh with \code{revdep_check_reset()}.
 #'
 #' @section Check process:
 #' \enumerate{
@@ -88,6 +94,9 @@ print.maintainers <- function(x, ...) {
 #' @inheritParams revdep
 #' @param pkg Path to package. Defaults to current directory.
 #' @inheritParams check_cran
+#' @param check_dir A temporary directory to hold the results of the package
+#'   checks. This should not exist as after the revdep checks complete
+#'   successfully this directory is blown away.
 #' @seealso \code{\link{revdep_maintainers}()} to get a list of all revdep
 #'   maintainers.
 #' @export
@@ -108,55 +117,194 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          srcpath = libpath, bioconductor = FALSE,
                          type = getOption("pkgType"),
                          threads = getOption("Ncpus", 1),
-                         check_dir = tempfile("check_cran")) {
+                         env_vars = NULL,
+                         check_dir = NULL) {
+
   pkg <- as.package(pkg)
+  if (file.exists(revdep_cache_path(pkg))) {
+    stop("Cache file `revdep/.cache.rds` exists.\n",
+      "Use `revdep_check_resume()` to resume\n",
+      "Use `revdep_check_reset()` to start afresh.",
+      call. = FALSE)
+  }
+
   rule("Reverse dependency checks for ", pkg$package, pad = "=")
 
-  if (!file.exists(libpath))
-    dir.create(libpath)
-  if (!file.exists(srcpath))
-    dir.create(srcpath)
+  if (is.null(check_dir)) {
+    check_dir <- file.path(pkg$path, "revdep", "checks")
+    message("Saving check results in `revdep/checks/`")
+  }
+  if (file.exists(check_dir)) {
+    stop("`check_dir()` must not already exist: it is deleted after a successful run",
+      call. = FALSE)
+  }
 
-  message("Installing ", pkg$package, " ", pkg$version, " from ", pkg$path)
-  withr::with_libpaths(libpath, install(pkg, reload = FALSE, quiet = TRUE))
-  on.exit(remove.packages(pkg$package, libpath), add = TRUE)
+  message("Computing reverse dependencies")
+  revdeps <- revdep(pkg$package, recursive = recursive, ignore = ignore,
+    bioconductor = bioconductor, dependencies = dependencies)
 
-  res <- withr::with_envvar(c(
-    NOT_CRAN = "false",
-    RGL_USE_NULL = "true"
-  ), {
+  # Save arguments and revdeps to a cache
+  cache <- list(
+    pkgs = revdeps,
+    libpath = libpath,
+    srcpath = srcpath,
+    bioconductor = bioconductor,
+    type = type,
+    threads = threads,
+    check_dir = check_dir,
+    env_vars = env_vars
+  )
+  saveRDS(cache, revdep_cache_path(pkg))
 
-    message("Finding reverse dependencies")
-    pkgs <- revdep(pkg$package, recursive = recursive, ignore = ignore,
-      bioconductor = bioconductor, dependencies = dependencies)
-    check_cran(pkgs, revdep_pkg = pkg$package, libpath = libpath,
-      srcpath = srcpath, bioconductor = bioconductor, type = type,
-      threads = threads, check_dir = check_dir)
+  revdep_check_from_cache(pkg, cache)
+}
 
-    list(check_dir = check_dir, libpath = libpath, pkg = pkg, deps = pkgs)
+#' @export
+#' @rdname revdep_check
+revdep_check_resume <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  cache_path <- revdep_cache_path(pkg)
+  if (!file.exists(cache_path)) {
+    message("Previous run completed successfully")
+    return(invisible())
+  }
+
+  cache <- readRDS(cache_path)
+
+  # Don't need to check packages that we've already checked.
+  check_dirs <- dir(cache$check_dir, full.names = TRUE)
+  completed <- file.exists(file.path(check_dirs, "COMPLETE"))
+
+  completed_pkgs <- gsub("\\.Rcheck$", "", basename(check_dirs)[completed])
+  cache$pkgs <- setdiff(cache$pkgs, completed_pkgs)
+
+  revdep_check_from_cache(pkg, cache)
+}
+
+#' @rdname revdep_check
+#' @export
+revdep_check_reset <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  cache_path <- revdep_cache_path(pkg)
+  if (!file.exists(cache_path)) {
+    return(invisible(FALSE))
+  }
+
+  cache <- readRDS(cache_path)
+
+  unlink(cache_path)
+  unlink(cache$check_dir, recursive = TRUE)
+  invisible(TRUE)
+}
+
+revdep_check_from_cache <- function(pkg, cache) {
+  # Install this package into revdep library -----------------------------------
+  if (!file.exists(cache$libpath)) {
+    dir.create(cache$libpath, recursive = TRUE, showWarnings = FALSE)
+  }
+  message(
+    "Installing ", pkg$package, " ", pkg$version,
+    " and dependencies to ", cache$libpath
+  )
+  withr::with_libpaths(cache$libpath, action = "prefix", {
+    install(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE)
   })
+  on.exit(remove.packages(pkg$package, cache$libpath), add = TRUE)
+
+  cache$env_vars <- c(
+    NOT_CRAN = "false",
+    RGL_USE_NULL = "true",
+    cache$env_vars
+  )
+  show_env_vars(cache$env_vars)
+
+  do.call(check_cran, cache)
 
   rule("Saving check results to `revdep/check.rds`")
-  res$results <- lapply(check_dirs(res$check_dir), parse_package_check)
-  saveRDS(res, revdep_check_path(pkg))
+  revdep_check_save(pkg, cache$revdeps, cache$check_dir, cache$libpath)
 
-  invisible(res)
+  # Delete cache and check_dir on successful run
+  rule("Cleaning up")
+  revdep_check_reset(pkg)
+  unlink(revdep_cache_path(pkg))
+  unlink(cache$check_dir, recursive = TRUE)
+
+  invisible()
+}
+
+
+revdep_check_save <- function(pkg, revdeps, check_path, lib_path) {
+  platform <- platform_info()
+
+  # Revdep results
+  results <- lapply(check_dirs(check_path), parse_package_check)
+
+  # Find all dependencies
+  deps <- pkg[c("imports", "depends", "linkingto", "suggests")]
+  pkgs <- unlist(lapply(deps, function(x) parse_deps(x)$name), use.names = FALSE)
+  pkgs <- c(pkg$package, unique(pkgs))
+  pkgs <- intersect(pkgs, dir(lib_path))
+  dependencies <- package_info(pkgs, libpath = lib_path)
+
+  out <- list(
+    revdeps = revdeps,
+    platform = platform,
+    dependencies = dependencies,
+    results = results
+  )
+  saveRDS(out, revdep_check_path(pkg))
+}
+
+parse_package_check <- function(path) {
+  pkgname <- gsub("\\.Rcheck$", "", basename(path))
+  desc <- read_dcf(file.path(path, "00_pkg_src", pkgname, "DESCRIPTION"))
+
+  structure(
+    list(
+      maintainer = desc$Maintainer,
+      bug_reports = desc$BugReports,
+      package = desc$Package,
+      version = desc$Version,
+      results = parse_check_results(file.path(path, "00check.log"))
+    ),
+    class = "revdep_check_result"
+  )
 }
 
 revdep_check_path <- function(pkg) {
   file.path(pkg$path, "revdep", "checks.rds")
 }
 
+revdep_cache_path <- function(pkg) {
+  file.path(pkg$path, "revdep", ".cache.rds")
+}
 
-cran_packages <- memoise::memoise(function() {
-  local <- file.path(tempdir(), "packages.rds")
-  utils::download.file("http://cran.R-project.org/web/packages/packages.rds", local,
-    mode = "wb", quiet = TRUE)
-  on.exit(unlink(local))
-  cp <- readRDS(local)
-  rownames(cp) <- unname(cp[, 1])
-  cp
-})
+check_dirs <- function(path) {
+  checkdirs <- list.dirs(path, recursive = FALSE, full.names = TRUE)
+  checkdirs <- checkdirs[grepl("\\.Rcheck$", checkdirs)]
+  names(checkdirs) <- sub("\\.Rcheck$", "", basename(checkdirs))
+
+  has_src <- file.exists(file.path(checkdirs, "00_pkg_src", names(checkdirs)))
+  checkdirs[has_src]
+}
+
+
+# Package caches ----------------------------------------------------------
+
+cran_packages <- memoise::memoise(
+  function() {
+    local <- file.path(tempdir(), "packages.rds")
+    utils::download.file("http://cran.R-project.org/web/packages/packages.rds", local,
+      mode = "wb", quiet = TRUE)
+    on.exit(unlink(local))
+    cp <- readRDS(local)
+    rownames(cp) <- unname(cp[, 1])
+    cp
+  },
+  ~memoise::timeout(30 * 60)
+)
 
 bioc_packages <- memoise::memoise(
   function(views = paste(BiocInstaller::biocinstallRepos()[["BioCsoft"]], "VIEWS", sep = "/")) {
@@ -165,7 +313,9 @@ bioc_packages <- memoise::memoise(
     bioc <- read.dcf(con)
     rownames(bioc) <- bioc[, 1]
     bioc
-})
+  },
+  ~memoise::timeout(30 * 60)
+)
 
 packages <- function() {
   cran <- cran_packages()
