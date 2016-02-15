@@ -42,10 +42,9 @@
 #'   \code{\link{as.package}} for more information
 #' @param document if \code{TRUE} (the default), will update and check
 #'   documentation before running formal check.
-#' @param cleanup Deprecated.
 #' @param build_args Additional arguments passed to \code{R CMD build}
 #' @param ... Additional arguments passed on to \code{\link{build}()}.
-#' @param quiet if \code{TRUE} suppresses output from this function.
+#' @param cleanup Deprecated.
 #' @seealso \code{\link{release}} if you want to send the checked package to
 #'   CRAN.
 #' @export
@@ -53,6 +52,7 @@ check <- function(pkg = ".",
                   document = TRUE,
                   build_args = NULL,
                   ...,
+                  manual = FALSE,
                   cran = TRUE,
                   check_version = FALSE,
                   force_suggests = FALSE,
@@ -77,7 +77,8 @@ check <- function(pkg = ".",
   }
 
   withr::with_envvar(compiler_flags(FALSE), action = "prefix", {
-    built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args, ...)
+    built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args,
+                        manual = manual, ...)
     on.exit(unlink(built_path), add = TRUE)
   })
 
@@ -87,6 +88,7 @@ check <- function(pkg = ".",
     check_version = check_version,
     force_suggests = force_suggests,
     run_dont_test = run_dont_test,
+    manual = manual,
     args = args,
     env_vars = env_vars,
     quiet = quiet,
@@ -99,21 +101,25 @@ check <- function(pkg = ".",
 #' @param path Path to built package.
 #' @param cran if \code{TRUE} (the default), check using the same settings as
 #'   CRAN uses.
-#' @param run_dont_test Sets \code{--run-donttest} so that tests surrounded in
-#'   \code{\\dontest\{\}} are also tested. This is important for CRAN
-#'   submission.
 #' @param check_version Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
 #'   If \code{TRUE}, performns a number of checked related
 #'   to version numbers of packages on CRAN.
 #' @param force_suggests Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
 #'   \code{FALSE} (the default), check will proceed even if all suggested
 #'   packages aren't found.
-#' @param check_dir the directory in which the package is checked
+#' @param run_dont_test Sets \code{--run-donttest} so that tests surrounded in
+#'   \code{\\dontest\{\}} are also tested. This is important for CRAN
+#'   submission.
+#' @param manual If \code{FALSE}, don't build and check manual
+#'   (\code{--no-manual}).
 #' @param args Additional arguments passed to \code{R CMD check}
 #' @param env_vars Environment variables set during \code{R CMD check}
+#' @param check_dir the directory in which the package is checked
+#' @param quiet if \code{TRUE} suppresses output from this function.
 check_built <- function(path = NULL, cran = TRUE,
                         check_version = FALSE, force_suggests = FALSE,
-                        run_dont_test = FALSE, args = NULL, env_vars = NULL,
+                        run_dont_test = FALSE, manual = FALSE, args = NULL,
+                        env_vars = NULL,
                         check_dir = tempdir(), quiet = FALSE) {
 
   pkgname <- gsub("_.*?$", "", basename(path))
@@ -124,6 +130,14 @@ check_built <- function(path = NULL, cran = TRUE,
   }
   if (run_dont_test) {
     args <- c("--run-donttest", args)
+  }
+
+  if (manual && !has_latex(verbose = TRUE)) {
+    manual <- FALSE
+  }
+
+  if (!manual) {
+    args <- c(args, "--no-manual")
   }
 
   env_vars <- check_env_vars(cran, check_version, force_suggests, env_vars)
