@@ -488,6 +488,7 @@ use_readme_rmd <- function(pkg = ".") {
   invisible(TRUE)
 }
 
+#' @export
 #' @rdname use_readme_rmd
 use_readme_md <- function(pkg = ".") {
   pkg <- as.package(pkg)
