@@ -86,7 +86,7 @@ A pull request is a process, and unless you're a practiced contributor it's unli
     
 1.  We'll take a closer look at the code and give you feedback.
 
-1.  You respond to our feedback, update the pull request and add a comment like
+1.  You respond to our feedback, update the pull request and add a comment 
     like "PTAL" (please take a look). Adding the comment is important,
     otherwise we don't get any notification that your pull request is
     ready for review.
