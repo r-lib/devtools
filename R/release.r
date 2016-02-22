@@ -269,6 +269,7 @@ submit_cran <- function(pkg = ".", args = NULL) {
 build_cran <- function(pkg, args) {
   message("Building")
   built_path <- build(pkg, tempdir(), manual = TRUE, args = args)
+  message("Submitting file: ", built_path)
   message("File size: ",
           format(as.object_size(file.info(built_path)$size), units = "auto"))
   built_path
