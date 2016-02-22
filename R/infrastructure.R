@@ -666,7 +666,7 @@ use_template <- function(template, save_as = template, data = list(),
 
   if (ignore) {
     message("* Adding `", save_as, "` to `.Rbuildignore`.")
-    use_build_ignore(path, pkg = pkg)
+    use_build_ignore(save_as, pkg = pkg)
   }
 
   if (open) {
