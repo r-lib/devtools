@@ -69,5 +69,10 @@ remote_package_name.local_remote <- function(remote, ...) {
 remote_sha.local_remote <- function(remote, ...) {
   tryCatch({
     git_sha1(path = remote$path)
-  }, error = function(e) NA)
+  }, error = function(e) NA_character_)
+}
+
+#' @export
+format.local_remote <- function(x, ...) {
+  "local"
 }

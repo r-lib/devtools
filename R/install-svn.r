@@ -158,3 +158,7 @@ full_svn_url <- function(x) {
 
   url
 }
+
+format.svn_remote <- function(x, ...) {
+  "SVN"
+}

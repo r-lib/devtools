@@ -275,11 +275,16 @@ remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
     found <- grep(pattern = paste0("/", remote$ref), x = names(res))
 
     if (length(found) == 0) {
-      return(NA)
+      return(NA_character_)
     }
 
     unname(res[found[1]])
-  }, error = function(e) NA)
+  }, error = function(e) NA_character_)
+}
+
+#' @export
+format.github_remote <- function(x, ...) {
+  "GitHub"
 }
 
 download_github <- function(path, url, ...) {

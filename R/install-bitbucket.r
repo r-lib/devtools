@@ -102,3 +102,8 @@ remote_package_name.bitbucket_remote <- function(remote, ...) {
 remote_sha.bitbucket_remote <-function(remote, ...) {
   remote_sha.github_remote(remote, url = "https://bitbucket.org", ...)
 }
+
+#' @export
+format.bitbucket_remote <- function(x, ...) {
+  "Bitbucket"
+}

@@ -56,3 +56,8 @@ remote_sha.cran_remote <- function(remote, url = "https://github.com", ...) {
 
   tryCatch(cran[remote$name, "Version"], error = function(e) NA)
 }
+
+#' @export
+format.cran_remote <- function(x, ...) {
+  "CRAN"
+}

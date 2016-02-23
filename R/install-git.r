@@ -122,5 +122,10 @@ remote_sha.git_remote <- function(remote, ...) {
     }
 
     unname(res[found[1]])
-  }, error = function(e) NA)
+  }, error = function(e) NA_character_)
+}
+
+#' @export
+format.git_remote <- function(x, ...) {
+  "Git"
 }

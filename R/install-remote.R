@@ -107,7 +107,7 @@ different_sha <- function(remote_sha = NULL,
 
 local_sha <- function(name) {
   if (!is_installed(name)) {
-    return(NA)
+    return(NA_character_)
   }
   packageDescription(name)$RemoteSha
 }
@@ -118,7 +118,14 @@ remote_package_name <- function(remote, ...) UseMethod("remote_package_name")
 remote_sha <- function(remote, ...) UseMethod("remote_sha")
 
 package2remote <- function(x, repos = getOption("repos"), type = getOption("pkgType")) {
-  x <- packageDescription(x)
+
+  x <- tryCatch(packageDescription(x), error = function(e) NA, warning = function(e) NA)
+
+  # will be NA if not installed
+  if (identical(x, NA)) {
+    return(NULL)
+  }
+
   if (is.null(x$RemoteType)) {
 
     # Packages installed with install.packages()
@@ -137,10 +144,10 @@ package2remote <- function(x, repos = getOption("repos"), type = getOption("pkgT
     github = remote("github",
       host = x$RemoteHost,
       repo = x$RemoteRepo,
+      subdir = x$RemoteSubdir,
       username = x$RemoteUsername,
       ref = x$RemoteRef,
-      sha = x$RemoteSha,
-      subdir = x$RemoteSubdir),
+      sha = x$RemoteSha),
     git = remote("git",
       url = x$RemoteUrl,
       ref = x$RemoteRef,
@@ -166,8 +173,12 @@ package2remote <- function(x, repos = getOption("repos"), type = getOption("pkgT
       sha = x$RemoteSha,
       username = x$RemoteUsername,
       repo = x$RemoteRepo),
+    url = remote("url",
+      url = x$RemoteUrl,
+      subdir = x$RemoteSubdir,
+      config = x$RemoteConfig),
 
-    # packages installed with install_CRAN
+    # packages installed with install_cran
     cran = remote("cran",
       name = x$RemoteName,
       repos = eval(parse(text = x$RemoteRepos)),
@@ -175,4 +186,9 @@ package2remote <- function(x, repos = getOption("repos"), type = getOption("pkgT
       sha = x$RemoteSha
       )
     )
+}
+
+#' @export
+format.remotes <- function(x, ...) {
+  vapply(x, format, character(1))
 }

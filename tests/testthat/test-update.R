@@ -41,12 +41,13 @@ test_that("update.package_deps", {
     package = c("dotenv", "falsy", "magrittr"),
     installed = c("1.0", "1.0", NA),
     available = c("1.0", "1.1", "1.0"),
-    diff = c(0L, 1L, -2L)
+    diff = c(0L, 1L, -2L),
+    remote = c("dotenv", "falsy", "magrittr") # these are not actual remotes, but we aren't testing that
   )
   class(object) <- c("package_deps", "data.frame")
 
   with_mock(
-    `devtools::install_packages` = function(packages, ...) packages,
+    `devtools::install_remotes` = function(packages, ...) packages,
     expect_equal(
       update(object, upgrade = FALSE),
       "magrittr"
