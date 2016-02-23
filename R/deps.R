@@ -251,7 +251,8 @@ print.package_deps <- function(x, show_ok = FALSE, ...) {
 #' @rdname package_deps
 #' @importFrom stats update
 update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
-  unavailable <- object$diff == UNAVAILABLE
+  non_cran <- !vapply(object$remote, inherits, logical(1), "cran_remote")
+  unavailable <- object$diff == UNAVAILABLE & non_cran
   if (any(unavailable)) {
     if (upgrade) {
       install_remotes(object$remote[unavailable], ..., quiet = quiet)
@@ -263,7 +264,7 @@ update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
     }
   }
 
-  ahead <- object$diff == AHEAD
+  ahead <- object$diff == AHEAD & non_cran
   if (any(ahead)) {
     if (upgrade) {
       install_remotes(object$remote[ahead], ..., quiet = quiet)
