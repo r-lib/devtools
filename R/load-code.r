@@ -23,7 +23,7 @@ load_code <- function(pkg = ".") {
   }
   on.exit(cleanup())
 
-  withr::with_dir(file.path(pkg$path), source_many(paths, env))
+  withr_with_dir(file.path(pkg$path), source_many(paths, env))
   success <- TRUE
 
   invisible(r_files)
@@ -41,7 +41,7 @@ find_code <- function(pkg = ".") {
   path_r <- file.path(pkg$path, "R")
 
   code_paths <- dir(path_r, "\\.[Rrq]$", full.names = TRUE)
-  r_files <- withr::with_collate("C", sort(code_paths))
+  r_files <- withr_with_collate("C", sort(code_paths))
 
   if (!is.null(pkg$collate)) {
     collate <- file.path(path_r, parse_collate(pkg$collate))
@@ -62,5 +62,3 @@ find_code <- function(pkg = ".") {
   }
   r_files
 }
-
-
