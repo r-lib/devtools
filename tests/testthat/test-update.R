@@ -13,7 +13,8 @@ test_that("update.package_deps", {
     package = c("dotenv", "falsy", "magrittr"),
     installed = c("1.0", "1.0", "1.0"),
     available = c("1.0", NA, "1.0"),
-    diff = c(0L, 2L, 0L)
+    diff = c(0L, 2L, 0L),
+    remote = c("dotenv", "falsy", "magrittr") # these are not actual remotes
   )
   class(object) <- c("package_deps", "data.frame")
 
@@ -27,7 +28,8 @@ test_that("update.package_deps", {
     package = c("dotenv", "falsy", "magrittr"),
     installed = c("1.0", "1.1", "1.0"),
     available = c("1.0", "1.0", "1.0"),
-    diff = c(0L, 1L, 0L)
+    diff = c(0L, 1L, 0L),
+    remote = c("dotenv", "falsy", "magrittr") # these are not actual remotes
   )
   class(object) <- c("package_deps", "data.frame")
 
@@ -42,7 +44,7 @@ test_that("update.package_deps", {
     installed = c("1.0", "1.0", NA),
     available = c("1.0", "1.1", "1.0"),
     diff = c(0L, 1L, -2L),
-    remote = c("dotenv", "falsy", "magrittr") # these are not actual remotes, but we aren't testing that
+    remote = c("dotenv", "falsy", "magrittr") # these are not actual remotes
   )
   class(object) <- c("package_deps", "data.frame")
 
