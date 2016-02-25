@@ -40,7 +40,7 @@
 * Deprecated `use_coveralls()`, `add_rstudio_project()`, 
   `add_test_infrastructure()`, and `add_travis()` have been removed.
 
-* `revdep_check_save_summary()` now creates `index.md` to save one level
+* `revdep_check_save_summary()` now creates `README.md` to save one level
   of clicking in github.
 
 * `use_coverage()` now adds covr to suggests, rather than recommending you
