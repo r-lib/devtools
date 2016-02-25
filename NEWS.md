@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* `revdep_check()` outputs a status message giving elapsed and estimated 
+  remaining time every 10 packages.
+ 
 * `revdep_check()` is can now be resumed after a failure - this should be a 
   big time saver if something goes unexpected wrong in the middle of the checks.
   You can resume a partial check with `revdep_check_resume()` or blow away the

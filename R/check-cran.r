@@ -80,6 +80,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     }
 
     rule("Checking packages") # --------------------------------------------------
+    check_start <- Sys.time()
     pkg_names <- format(pkgs)
     check_pkg <- function(i) {
       start_time <- Sys.time()
@@ -93,6 +94,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       end_time <- Sys.time()
 
       message("Checked ", pkg_names[i], ": ", summarise_check_results(res, colour = TRUE))
+      status_update(i, length(pkgs), check_start)
+
       elapsed_time <- as.numeric(end_time - start_time, units = "secs")
       writeLines(
         sprintf("%d  %s  %.1f", i, pkgs[i], elapsed_time),
@@ -114,4 +117,22 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
     invisible(check_dir)
   })
+}
+
+status_update <- function(i, n, start_time) {
+  if (i %% 10 != 0)
+    return()
+
+  hm <- function(x) {
+    sprintf("%02i:%02i", x %/% 3600, x %% 3600 %/% 60)
+  }
+
+  elapsed <- as.numeric(Sys.time() - start_time, units = "secs")
+  estimated <- elapsed / i * (n - i)
+
+  msg <- sprintf(
+    "Checked %i/%i. Elapsed %s. Remaining ~%s",
+    i, n, hm(elapsed), hm(estimated)
+  )
+  message(msg)
 }
