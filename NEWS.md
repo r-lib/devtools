@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* `load_all()` correctly handles `unix` and `windows` subdirectories
+  within `R` (@gaborcsardi, #1102)
+
 * `revdep_check()` outputs a status message giving elapsed and estimated 
   remaining time every 10 packages.
  
