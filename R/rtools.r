@@ -275,10 +275,10 @@ version_info <- list(
   "3.3" = list(
     version_min = "3.2.0",
     version_max = "3.3.99",
-    if (using_gcc49()) {
-      path = "bin"
+    path = if (using_gcc49()) {
+      "bin"
     } else {
-      path = c("bin", "gcc-4.6.3/bin")
+      c("bin", "gcc-4.6.3/bin")
     }
   )
 )
