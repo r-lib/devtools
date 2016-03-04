@@ -143,6 +143,9 @@ check_built <- function(path = NULL, cran = TRUE,
     normalizePath(check_dir),
     paste(pkgname, ".Rcheck", sep = "")
   )
+  if (!file.exists(package_path)) {
+    stop("Check failed: '", package_path, "' doesn't exist", call. = FALSE)
+  }
 
   # Record successful completion
   writeLines("OK", file.path(package_path, "COMPLETE"))
