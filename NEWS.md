@@ -1,5 +1,7 @@
 # devtools 1.10.0.9000
 
+* `check_cran()` suppresses X11 with `DISPLAY = ""`.
+
 * `revdep_check()` outputs a status message giving elapsed and estimated 
   remaining time every 10 packages.
  

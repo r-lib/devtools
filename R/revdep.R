@@ -216,6 +216,7 @@ revdep_check_from_cache <- function(pkg, cache) {
   cache$env_vars <- c(
     NOT_CRAN = "false",
     RGL_USE_NULL = "true",
+    DISPLAY = "",
     cache$env_vars
   )
   show_env_vars(cache$env_vars)
