@@ -15,34 +15,84 @@
 #' @inheritParams utils::install.packages
 #' @author Jeremy Stephens
 install_version <- function(package, version = NULL, repos = getOption("repos"), type = getOption("pkgType"), ...) {
+  numeric_ver <- .standard_regexps()$valid_numeric_version
+  package_ver <- .standard_regexps()$valid_package_version
 
-  contriburl <- contrib.url(repos, type)
-  available <- available.packages(contriburl)
+  spec <- if(is.null(version) || is.na(version)) package else
+    ifelse(grepl(paste0("^", numeric_ver, "$"), version),
+           paste0(package, "(== ", version, ")"),
+           paste0(package, "(", version, ")"))
 
-  if (package %in% row.names(available)) {
-    current.version <- available[package, 'Version']
-    if (is.null(version) || version == current.version) {
-      return(install.packages(package, repos = repos, contriburl = contriburl,
-        type = type, ...))
+  required <- parse_deps(paste(spec, collapse=", "))
+
+  ## returns TRUE if version 'to.check' satisfies version criteria for 'package'
+  satisfies <- function(to.check) {
+    to.check <- package_version(to.check)
+    result <- apply(required, 1, function(r) {
+      if(is.na(r['compare'])) TRUE
+      else get(r['compare'], mode='function')(to.check, r['version'])
+    })
+    all(result)
+  }
+
+  install_version_deps <- function(deps) {
+    ## TODO How to exclude 'base', 'stats', etc.?
+    for (dep in unique(deps$package)) {
+      lines <- subset(deps, package==dep)
+      if (!have(dep, lines))
+        install_version(dep, paste(lines$compare, lines$version), repos, type, ...)
     }
   }
 
-  info <- package_find_repo(package, repos)
+  ## TODO write have()
+  have <- function(...) stop("Not implemented yet")
 
-  if (is.null(version)) {
-    # Grab the latest one: only happens if pulled from CRAN
-    package.path <- info$path[NROW(info)]
-  } else {
-    package.path <- paste(package, "/", package, "_", version, ".tar.gz",
-      sep = "")
-    if (!(package.path %in% info$path)) {
-      stop(sprintf("version '%s' is invalid for package '%s'", version,
-        package))
+  ## First search for currently-published package
+  for (repo in repos) {
+    contriburl <- contrib.url(repo, type)
+    available <- available.packages(contriburl)
+
+    if (package %in% row.names(available) && satisfies(available[package, 'Version'])) {
+      deps <- parse_deps(available[package, 'Dependencies'])
+      install_version_deps(deps)
+      return(install.packages(package, repos = repos, contriburl = contriburl, type = type, ...))
     }
   }
 
-  url <- paste(info$repo[1L], "/src/contrib/Archive/", package.path, sep = "")
-  install_url(url, ...)
+  ## Next search for archived package
+  for (repo in repos) {
+    info <- package_find_repo(package, repo)
+
+    package.path <- NULL
+    if (is.null(version)) {
+      package.path <- info$path[NROW(info)] # Grab the latest one
+    } else {
+      for (i in seq_len(nrow(info))) {
+        r <- info[i,]
+        archive.version <- sub(paste0(".+/.+_(", package_ver, ")\\.tar\\.gz$"), "\\1", r$path)
+        if (satisfies(archive.version)) {
+          package.path <- r$path
+          break
+        }
+      }
+    }
+    if (!is.null(package.path)) {
+      bundle <- remote_download(url_remote(file.path(r$repo, "/src/contrib/Archive/", package.path)))
+      on.exit(unlink(bundle), add = TRUE)
+
+      source <- source_pkg(bundle)
+      on.exit(unlink(source, recursive = TRUE), add = TRUE)
+
+      pkg <- as.package(source)
+      dep_list <- pkg[tolower(standardise_dep(TRUE))]
+      deps <- do.call("rbind", unname(compact(lapply(dep_list, parse_deps))))
+      install_version_deps(deps)
+
+      return(install_local(source, ...))
+    }
+  }
+
+  stop(sprintf("Couldn't find appropriate version of '%s' package", package))
 }
 
 read_archive <- function(repo) {
