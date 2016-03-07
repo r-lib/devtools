@@ -15,6 +15,10 @@
 #' @inheritParams utils::install.packages
 #' @author Jeremy Stephens
 install_version <- function(package, version = NULL, repos = getOption("repos"), type = getOption("pkgType"), ...) {
+  if (length(package) < 1) return()
+  if (length(package) > 1)
+    stop("install_version() must be called with a single 'package' argument - multiple packages given")
+
   numeric_ver <- .standard_regexps()$valid_numeric_version
   package_ver <- .standard_regexps()$valid_package_version
 
