@@ -488,6 +488,7 @@ use_readme_rmd <- function(pkg = ".") {
   invisible(TRUE)
 }
 
+#' @export
 #' @rdname use_readme_rmd
 use_readme_md <- function(pkg = ".") {
   pkg <- as.package(pkg)
@@ -654,7 +655,7 @@ use_template <- function(template, save_as = template, data = list(),
 
   path <- file.path(pkg$path, save_as)
   if (!can_overwrite(path)) {
-    stop("`", path, "` already exists.", call. = FALSE)
+    stop("`", save_as, "` already exists.", call. = FALSE)
   }
 
   template_path <- system.file("templates", template, package = "devtools",
@@ -666,12 +667,12 @@ use_template <- function(template, save_as = template, data = list(),
 
   if (ignore) {
     message("* Adding `", save_as, "` to `.Rbuildignore`.")
-    use_build_ignore(path, pkg = pkg)
+    use_build_ignore(save_as, pkg = pkg)
   }
 
   if (open) {
     message("* Modify `", save_as, "`.")
-    open_in_rstudio(path)
+    open_in_rstudio(save_as)
   }
 
   invisible(TRUE)

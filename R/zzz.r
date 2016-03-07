@@ -60,5 +60,13 @@ NULL
   toset <- !(names(op.devtools) %in% names(op))
   if(any(toset)) options(op.devtools[toset])
 
+  # These withr functions are used in load_all() so need to exist in the
+  # devtools namespace so the withr namespace is not prematurly loaded by `::`
+  # during a load_all() call
+  env <- asNamespace(pkgname)
+  assign("withr_with_dir", withr::with_dir, envir = env)
+  assign("withr_with_collate", withr::with_collate, envir = env)
+  assign("withr_with_envvar", withr::with_envvar, envir = env)
+
   invisible()
 }

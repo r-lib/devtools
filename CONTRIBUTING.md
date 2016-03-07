@@ -1,11 +1,24 @@
 ## Contributing to devtools
 
-The goal of this guide is to help you contributing to devtools as quickly and easily. The guide is divided into two main pieces:
+The goal of this guide is to help you contribute to devtools as quickly and as easily possible. The guide is divided into two main pieces:
 
 1. Filing a bug report or feature request in an issue.
 1. Suggesting a change via a pull request.
 
 ## Issues
+
+Before you file an issue:
+
+1.  Check that you're using the latest version of devtools. It's quite
+    possible that the problem you're experiencing has already been fixed.
+    
+1.  Spend a few minutes looking at the existing issues. It's possible that
+    your issue has already been filed. But it's almost always better to open 
+    a new issue instead of commenting on an existing issue. The only exception 
+    is that you are confident that your issue is identical to an existing 
+    problem, and your contribution will help us better understand the general 
+    case. It's generally a bad idea to comment on a closed issue or a commit. 
+    Those comments don't show up in the issue tracker and are easily misplaced.
 
 When filing an issue, the most important thing is to include a minimal reproducible example so that we can quickly verify the problem, and then figure out how to fix it. There are three things you need to include to make your example reproducible: required packages, data, code.
 
@@ -41,16 +54,12 @@ When filing an issue, the most important thing is to include a minimal reproduci
     and ```` ``` ```` so it's syntax highlighted (which makes it easier to 
     read).
 
-1.  Check that you've actually made a reproducible example by starting up a 
-    fresh R session and pasting your code in.
-
-It's almost always better to open a new issue instead of commenting on an existing issue. The only exception is that you are confident that the two issues are examples of the same underlying phenomenon, and your contribution will help us better understand the general cases. It's generally a bad idea to comment on a closed issue or a commit. Those comments don't show up in the issue tracker and are easily misplaced.
+1.  Check that you've actually made a reproducible example by using
+    the [reprex package](https://github.com/jennybc/reprex).
 
 ## Pull requests
 
-I understand that it's frustrating that I will ignore your PR for months, and then request a whole bunch on changes within a short time period. Don't worry - if your PR doesn't make it for this release, it will for the next one.
-
-*   Your pull request will be easiest for me to read if you use a common
+*   Your pull request will be easiest for us to read if you use a common
     style: <http://r-pkgs.had.co.nz/r.html#style>. Please pay particular
     attention to whitespace.
 
@@ -58,6 +67,10 @@ I understand that it's frustrating that I will ignore your PR for months, and th
     It should look like "This is what changed (@yourusername, #issuenumber)".
     Please don't add headings like "bug fix" or "new features" - these are 
     added during the release process.
+
+*   If you can, also write a test. Testing devtools is particularly difficult
+    because most devtools functions are called for their side-effects, but do
+    the best you can.
 
 *   If you're adding new parameters or a new function, you'll also need
     to document them with [roxygen2](http://r-pkgs.had.co.nz/man.html).
@@ -73,11 +86,13 @@ A pull request is a process, and unless you're a practiced contributor it's unli
     
 1.  We'll take a closer look at the code and give you feedback.
 
-1.  You respond to our feedback, update the pull request and add a comment like
+1.  You respond to our feedback, update the pull request and add a comment 
     like "PTAL" (please take a look). Adding the comment is important,
     otherwise we don't get any notification that your pull request is
     ready for review.
 
 Don't worry if your pull request isn't perfect. It's a learning process and we'll be hand to help you out. 
+
+It can be frustrating that your PR is ignored for months, and then we request a whole bunch on changes within a short time period. Don't worry - if your PR doesn't make it for this release, it will for the next one.
 
 [markdown]: https://help.github.com/articles/basic-writing-and-formatting-syntax/

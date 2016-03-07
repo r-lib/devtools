@@ -49,10 +49,7 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
   } else {
     args <- c(args, "--no-resave-data")
 
-    if (manual && !has_latex()) {
-      message("pdflatex not found! Not building PDF manual or vignettes.\n",
-        "If you are planning to release this package, please run a check with ",
-        "manual and vignettes beforehand.\n")
+    if (manual && !has_latex(verbose = TRUE)) {
       manual <- FALSE
     }
 

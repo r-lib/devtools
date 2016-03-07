@@ -5,10 +5,6 @@ has_src <- function(pkg = ".") {
   file.exists(src_path)
 }
 
-has_latex <- function() {
-  nzchar(Sys.which("pdflatex"))
-}
-
 check_build_tools <- function(pkg = ".") {
   if (!has_src(pkg)) {
     return(TRUE)
@@ -30,3 +26,12 @@ check_build_tools <- function(pkg = ".") {
   }
 }
 
+has_latex <- function(verbose = FALSE) {
+  has <- nzchar(Sys.which("pdflatex"))
+  if (!has && verbose) {
+    message("pdflatex not found! Not building PDF manual or vignettes.\n",
+            "If you are planning to release this package, please run a check with ",
+            "manual and vignettes beforehand.\n")
+  }
+  has
+}

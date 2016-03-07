@@ -4,6 +4,9 @@
   to allow passing `args = "--compact-vignettes=both"` for packages with
   heavy PDF vignettes (@krlmlr, #1077).
 
+* `revdep_check()` outputs a status message giving elapsed and estimated 
+  remaining time every 10 packages.
+ 
 * `revdep_check()` is can now be resumed after a failure - this should be a 
   big time saver if something goes unexpected wrong in the middle of the checks.
   You can resume a partial check with `revdep_check_resume()` or blow away the
@@ -41,7 +44,7 @@
 * Deprecated `use_coveralls()`, `add_rstudio_project()`, 
   `add_test_infrastructure()`, and `add_travis()` have been removed.
 
-* `revdep_check_save_summary()` now creates `index.md` to save one level
+* `revdep_check_save_summary()` now creates `README.md` to save one level
   of clicking in github.
 
 * `use_coverage()` now adds covr to suggests, rather than recommending you

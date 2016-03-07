@@ -21,7 +21,7 @@
 compile_dll <- function(pkg = ".", quiet = FALSE) {
   pkg <- as.package(pkg)
 
-  old <- withr::with_envvar(compiler_flags(TRUE), {
+  old <- withr_with_envvar(compiler_flags(TRUE), {
 
     if (!needs_compile(pkg)) return(invisible())
     compile_rcpp_attributes(pkg)

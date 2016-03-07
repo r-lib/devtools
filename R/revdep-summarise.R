@@ -4,7 +4,7 @@ revdep_check_save_summary <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   md <- revdep_check_summary_md(pkg)
-  writeLines(md, file.path(pkg$path, "revdep", "index.md"))
+  writeLines(md, file.path(pkg$path, "revdep", "README.md"))
 }
 
 revdep_check_summary_md <- function(pkg) {
