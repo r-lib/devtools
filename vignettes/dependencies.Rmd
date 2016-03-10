@@ -75,6 +75,9 @@ Remotes: local::/pkgs/testthat
 
 # Gitorious
 Remotes: gitorious::r-mpc-package/r-mpc-package
+
+# drat
+Remotes: drat::markvanderloo/stringdist
 ```
 
 ### CRAN submission
