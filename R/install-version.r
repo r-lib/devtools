@@ -29,10 +29,10 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
 
   required <- parse_deps(paste(spec, collapse=", "))
 
-  ## returns TRUE if version 'to.check' satisfies version criteria for 'package'
-  satisfies <- function(to.check) {
+  ## returns TRUE if version 'to.check' satisfies version criteria 'criteria'
+  satisfies <- function(to.check, criteria) {
     to.check <- package_version(to.check)
-    result <- apply(required, 1, function(r) {
+    result <- apply(criteria, 1, function(r) {
       if(is.na(r['compare'])) TRUE
       else get(r['compare'], mode='function')(to.check, r['version'])
     })
@@ -48,15 +48,23 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     }
   }
 
-  ## TODO write have()
-  have <- function(...) stop("Not implemented yet")
+  have <- function(pkg, criteria) {
+    v <- suppressWarnings(packageDescription(pkg, fields = "Version"))
+    if (is.na(v)) return(FALSE)
+    satisfies(v, criteria)
+  }
+
+
+  ## TODO should we do for(r in repos) { for (t in c('published','archive')) {...}}, or
+  ## for (t in c('published','archive')) { for(r in repos) {...}} ? Right now it's the latter.  It
+  ## only comes up if required version is satisfied by both an early repo in archive/ and a late repo
 
   ## First search for currently-published package
   for (repo in repos) {
     contriburl <- contrib.url(repo, type)
     available <- available.packages(contriburl)
 
-    if (package %in% row.names(available) && satisfies(available[package, 'Version'])) {
+    if (package %in% row.names(available) && satisfies(available[package, 'Version'], required)) {
       deps <- parse_deps(available[package, 'Dependencies'])
       install_version_deps(deps)
       return(install.packages(package, repos = repos, contriburl = contriburl, type = type, ...))
@@ -74,7 +82,7 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
       for (i in seq_len(nrow(info))) {
         r <- info[i,]
         archive.version <- sub(paste0(".+/.+_(", package_ver, ")\\.tar\\.gz$"), "\\1", r$path)
-        if (satisfies(archive.version)) {
+        if (satisfies(archive.version, required)) {
           package.path <- r$path
           break
         }
