@@ -19,16 +19,6 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
   if (length(package) > 1)
     stop("install_version() must be called with a single 'package' argument - multiple packages given")
 
-  numeric_ver <- .standard_regexps()$valid_numeric_version
-  package_ver <- .standard_regexps()$valid_package_version
-
-  spec <- if(is.null(version) || is.na(version)) package else
-    ifelse(grepl(paste0("^", numeric_ver, "$"), version),
-           paste0(package, "(== ", version, ")"),
-           paste0(package, "(", version, ")"))
-
-  required <- parse_deps(paste(spec, collapse=", "))
-
   ## returns TRUE if version 'to.check' satisfies version criteria 'criteria'
   satisfies <- function(to.check, criteria) {
     to.check <- package_version(to.check)
@@ -53,6 +43,16 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     if (is.na(v)) return(FALSE)
     satisfies(v, criteria)
   }
+
+  numeric_ver <- .standard_regexps()$valid_numeric_version
+  package_ver <- .standard_regexps()$valid_package_version
+
+  spec <- if(is.null(version) || is.na(version)) package else
+    ifelse(grepl(paste0("^", numeric_ver, "$"), version),
+           paste0(package, "(== ", version, ")"),
+           paste0(package, "(", version, ")"))
+
+  required <- parse_deps(paste(spec, collapse=", "))
 
 
   ## TODO should we do for(r in repos) { for (t in c('published','archive')) {...}}, or
