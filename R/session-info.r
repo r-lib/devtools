@@ -76,7 +76,7 @@ platform_info <- function() {
     ui <- .Platform$GUI
   }
 
-  libs <- normalizePath(.libPaths())
+  libs <- unique(normalizePath(.libPaths()))
   libs <- sapply(libs, function (x) length(list.files(x)))
   libs <- paste0(names(libs), " (", libs, ")")
 
