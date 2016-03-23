@@ -27,8 +27,9 @@
 * All `revdep_` functions now work like other devtools functions, taking
   a path to the package as the first argument. `revdep_check()` now saves
   its results to disk (so you can't accidentally lose them), and the other
-  functions read from that cache. You will need to update your revdep
-  check codes.
+  functions read from that cache. The template used by `use_revdep()` has
+  been updated (#1090, @krlmlr), but you will need to update your existing
+  revdep check codes.
 
 * `revdep_check_print_problems()` prints a bulleted list of problems, 
   suitable for including in your `cran-comments.md`.
@@ -68,9 +69,9 @@
   `R CMD check` finds an `ERROR`), returning an object that summarises
   the check failures.
 
-* `check()` gains a `run_dont_test` argument to control whether or not
-  `\donttest{}` tests are tested. This defaults to `FALSE`, but `release()`
-  runs check with it set to `TRUE` (#1071).
+* `check()` gains `run_dont_test` and `manual` arguments to control whether or not
+  `\donttest{}` tests are tested, or manuals are built. This defaults to `FALSE`, but `release()`
+  runs check with it set to `TRUE` (#1071; #1087, @krlmlr).
 
 * The `cleanup` argument to `check()` is deprecated: it now always returns
   the path to the check directory.
