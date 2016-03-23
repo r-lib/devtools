@@ -65,9 +65,9 @@
   `R CMD check` finds an `ERROR`), returning an object that summarises
   the check failures.
 
-* `check()` gains a `run_dont_test` argument to control whether or not
-  `\donttest{}` tests are tested. This defaults to `FALSE`, but `release()`
-  runs check with it set to `TRUE` (#1071).
+* `check()` gains `run_dont_test` and `manual` arguments to control whether or not
+  `\donttest{}` tests are tested, or manuals are built. This defaults to `FALSE`, but `release()`
+  runs check with it set to `TRUE` (#1071; #1087, @krlmlr).
 
 * The `cleanup` argument to `check()` is deprecated: it now always returns
   the path to the check directory.
