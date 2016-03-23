@@ -105,9 +105,9 @@ build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
 
   if (!quiet) {
     message("Building windows version of ", pkg$package,
-            " for ", paste(version, collapse=", "),
+            " for ", paste(version, collapse = ", "),
             " with win-builder.r-project.org.\n")
-    if (interactive() && yesno("E-mail will be delivered to ", maintainer(pkg)$email, ".")) {
+    if (interactive() && yesno("Email results to ", maintainer(pkg)$email, "?")) {
       return(invisible())
     }
   }
