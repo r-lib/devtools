@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* `uses_github()` now confirms that you've picked a good title and description
+  (#1092).
+
 * `load_all()` now sources all test helpers if you use testthat. This makes it 
   much easier to interactively run tests (#1125).
 
