@@ -15,7 +15,7 @@ uses_testthat(pkg = ".")
 
 \item{filter}{If not \code{NULL}, only tests with file names matching this
 regular expression will be executed.  Matching will take on the file
-name after it has been stripped of \code{"test-"} and \code{".r"}.}
+name after it has been stripped of \code{"test-"} and \code{".R"}.}
 
 \item{...}{additional arguments passed to \code{\link[testthat]{test_dir}}}
 }
