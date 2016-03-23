@@ -35,6 +35,7 @@ Suggests:
     MASS,
     rmarkdown,
     knitr,
+    hunspell (>= 1.2),
     lintr (>= 0.2.1),
     bitops,
     roxygen2 (>= 5.0.0),

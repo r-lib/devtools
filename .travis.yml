@@ -2,6 +2,11 @@ language: R
 sudo: false
 cache: packages
 
+addons:
+  apt:
+    packages:
+      - libhunspell-dev
+
 r_github_packages:
   - hadley/devtools
 
