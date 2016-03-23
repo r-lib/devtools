@@ -4,7 +4,7 @@
 \alias{release}
 \title{Release package to CRAN.}
 \usage{
-release(pkg = ".", check = TRUE)
+release(pkg = ".", check = TRUE, args = NULL)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -13,6 +13,9 @@ release(pkg = ".", check = TRUE)
 \item{check}{if \code{TRUE}, run checking, otherwise omit it.  This
 is useful if you've just checked your package and you're ready to
 release it.}
+
+\item{args}{An optional character vector of additional command
+line arguments to be passed to \code{R CMD build}.}
 }
 \description{
 Run automated and manual tests, then ftp to CRAN.

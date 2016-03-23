@@ -5,6 +5,10 @@
 * `load_all()` correctly handles `unix` and `windows` subdirectories
   within `R` (@gaborcsardi, #1102)
 
+* `release()` gains an `args` argument to control build options, e.g.
+  to allow passing `args = "--compact-vignettes=both"` for packages with
+  heavy PDF vignettes (@krlmlr, #1077).
+
 * `revdep_check()` outputs a status message giving elapsed and estimated 
   remaining time every 10 packages.
  
