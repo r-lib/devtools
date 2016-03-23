@@ -40,8 +40,10 @@ parse_collate <- function(string) {
 find_code <- function(pkg = ".") {
   path_r <- file.path(pkg$path, "R")
 
-  code_paths <- dir(path_r, "\\.[Rrq]$", full.names = TRUE)
-  r_files <- withr_with_collate("C", sort(code_paths))
+  r_files <- withr_with_collate(
+    "C",
+    tools::list_files_with_type(path_r, "code", full.names = TRUE)
+  )
 
   if (!is.null(pkg$collate)) {
     collate <- file.path(path_r, parse_collate(pkg$collate))

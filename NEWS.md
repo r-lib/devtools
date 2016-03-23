@@ -2,6 +2,9 @@
 
 * `check_cran()` suppresses X11 with `DISPLAY = ""`.
 
+* `load_all()` correctly handles `unix` and `windows` subdirectories
+  within `R` (@gaborcsardi, #1102)
+
 * `revdep_check()` outputs a status message giving elapsed and estimated 
   remaining time every 10 packages.
  
