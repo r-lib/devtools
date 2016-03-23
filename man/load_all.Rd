@@ -50,6 +50,9 @@ Currently \code{load_all}:
     and connects the generated DLL into R. See \code{\link{compile_dll}}
     for more details.
 
+\item If you use \pkg{testthat}, will load all test helpers so you
+    can access them interactively.
+
 \item Runs \code{.onAttach()}, \code{.onLoad()} and \code{.onUnload()}
     functions at the correct times.
 }

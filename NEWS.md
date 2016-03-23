@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* `load_all()` now sources all test helpers if you use testthat. This makes it 
+  much easier to interactively run tests (#1125).
+
 * `check_cran()` suppresses X11 with `DISPLAY = ""`.
 
 * `load_all()` correctly handles `unix` and `windows` subdirectories
