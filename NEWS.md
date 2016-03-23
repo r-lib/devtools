@@ -32,7 +32,7 @@
 * `revdep_check_save_summary()` now truncates individual problems to at
   most 25 lines - this avoids length output for very length example errors.
 
-* `revdep_check_save_summary()` saves a parsed version of the results as
+* `revdep_check()` saves a parsed version of the results as
   `check.rds`.
 
 * All `use_` function have been overhauled to be more consistent. This
@@ -43,7 +43,8 @@
   `add_test_infrastructure()`, and `add_travis()` have been removed.
 
 * `revdep_check_save_summary()` now creates `README.md` to save one level
-  of clicking in github.
+  of clicking in github. It also creates a `problems.md` that contains only
+  results for only packages that had warnings or errors.
 
 * `use_coverage()` now adds covr to suggests, rather than recommending you
   install it explicitly in `.travis.yml`.

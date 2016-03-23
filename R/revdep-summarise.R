@@ -3,14 +3,26 @@
 revdep_check_save_summary <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  md <- revdep_check_summary_md(pkg)
-  writeLines(md, file.path(pkg$path, "revdep", "README.md"))
+  md_all <- revdep_check_summary_md(pkg)
+  writeLines(md_all, file.path(pkg$path, "revdep", "README.md"))
+
+  md_bad <- revdep_check_summary_md(pkg, has_problem = TRUE)
+  writeLines(md_bad, file.path(pkg$path, "revdep", "problems.md"))
+
 }
 
-revdep_check_summary_md <- function(pkg) {
+revdep_check_summary_md <- function(pkg, has_problem = FALSE) {
   check_suggested("knitr")
 
   check <- readRDS(revdep_check_path(pkg))
+
+  if (has_problem) {
+    problems <- vapply(check$results, has_problems, logical(1))
+    check$results <- check$results[problems]
+    msg <- "packages with problems"
+  } else {
+    msg <- "packages"
+  }
 
   plat_df <- data.frame(
     setting = names(check$platform),
@@ -29,7 +41,7 @@ revdep_check_summary_md <- function(pkg) {
     paste(knitr::kable(check$dependencies), collapse = "\n"),
     "\n\n",
     "# Check results\n",
-    paste0(length(summaries), " checked out of ", length(check$revdeps), " dependencies \n\n"),
+    paste0(length(summaries), " ", msg, "\n\n"),
     paste0(summaries, collapse = "\n")
   )
 }
