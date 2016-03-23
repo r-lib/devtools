@@ -37,8 +37,10 @@
 #' @param check if \code{TRUE}, run checking, otherwise omit it.  This
 #'   is useful if you've just checked your package and you're ready to
 #'   release it.
+#' @param args An optional character vector of additional command
+#'   line arguments to be passed to \code{R CMD build}.
 #' @export
-release <- function(pkg = ".", check = TRUE) {
+release <- function(pkg = ".", check = TRUE, args = NULL) {
   pkg <- as.package(pkg)
   # Figure out if this is a new package
   cran_version <- cran_pkg_version(pkg$package)
@@ -67,7 +69,7 @@ release <- function(pkg = ".", check = TRUE) {
   if (check) {
     rule("Buiding and checking ", pkg$package, pad = "=")
     check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE,
-      run_dont_test = TRUE)
+          build_args = args, run_dont_test = TRUE)
   }
   if (yesno("Was R CMD check successful?"))
     return(invisible())
@@ -125,7 +127,7 @@ release <- function(pkg = ".", check = TRUE) {
   if (yesno("Is your email address ", maintainer(pkg)$email, "?"))
     return(invisible())
 
-  built_path <- build_cran(pkg)
+  built_path <- build_cran(pkg, args = args)
   if (yesno("Ready to submit?"))
     return(invisible())
 
@@ -256,16 +258,18 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @inheritParams release
 #' @export
 #' @keywords internal
-submit_cran <- function(pkg = ".") {
-  built_path <- build_cran(pkg)
+submit_cran <- function(pkg = ".", args = NULL) {
+  built_path <- build_cran(pkg, args = args)
   upload_cran(pkg, built_path)
 }
 
-build_cran <- function(pkg) {
+build_cran <- function(pkg, args) {
   message("Building")
-  built_path <- build(pkg, tempdir(), manual = TRUE)
+  built_path <- build(pkg, tempdir(), manual = TRUE, args = args)
+  message("Submitting file: ", built_path)
   message("File size: ",
           format(as.object_size(file.info(built_path)$size), units = "auto"))
   built_path
