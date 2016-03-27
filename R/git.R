@@ -17,7 +17,12 @@ git_uncommitted <- function(path = ".") {
 git_sync_status <- function(path = ".") {
   r <- git2r::repository(path, discover = TRUE)
 
-  upstream <- git2r::branch_get_upstream(git2r::head(r))
+  r_head <- git2r::head(r)
+  if (!methods::is(r_head, "git_branch")) {
+    return(invisible(FALSE))
+  }
+
+  upstream <- git2r::branch_get_upstream(r_head)
   # fetch(r, branch_remote_name(upstream))
 
   if (is.null(upstream)) {
