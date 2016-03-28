@@ -1,5 +1,5 @@
 using_gcc49 <- function() {
-  isTRUE(sub("^gcc[^[:digit:]]+", "", Sys.getenv("R_COMPILED_BY")) >= "4.9.3")
+  isTRUE(sub("^gcc[^[:digit:]]+", "", Sys.getenv("COMPILED_BY")) >= "4.9.3")
 }
 
 # Need to check for existence so load_all doesn't override known rtools location
@@ -274,7 +274,7 @@ version_info <- list(
   ),
   "3.3" = list(
     version_min = "3.2.0",
-    version_max = "3.3.99",
+    version_max = "3.4.99",
     path = if (using_gcc49()) {
       "bin"
     } else {
