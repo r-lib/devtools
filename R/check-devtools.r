@@ -102,7 +102,7 @@ check_news_md <- function(pkg) {
   news_rd_path <- file.path(pkg$path, "inst/NEWS.Rd")
   check_status(
     !file.exists(news_rd_path),
-    "NEWS.Rd removed",
+    "NEWS.Rd does not exist",
     "NEWS.md now supported by CRAN, NEWS.Rd can be removed."
   )
 }
