@@ -29,7 +29,7 @@ git_sync_status <- function(path = ".") {
     return(invisible(FALSE))
   }
 
-  c1 <- git2r::commits(r)[[1]]
+  c1 <- git2r::lookup(r, git2r::branch_target(r_head))
   c2 <- git2r::lookup(r, git2r::branch_target(upstream))
   ab <- git2r::ahead_behind(c1, c2)
 
