@@ -235,6 +235,7 @@ build_description <- function(name, extra = list()) {
     Depends = paste0("R (>= ", as.character(getRversion()) ,")"),
     License = getOption("devtools.desc.license"),
     Suggests = getOption("devtools.desc.suggests"),
+    Encoding = "UTF-8",
     LazyData = "true"
   ))
 

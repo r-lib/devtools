@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* `create_description()` now sets `Encoding: UTF-8`. This helps non-English
+  package authors (#1123).
+
 * `uses_github()` now confirms that you've picked a good title and description
   (#1092).
 
