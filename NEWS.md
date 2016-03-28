@@ -8,6 +8,12 @@
 * `create_description()` now sets `Encoding: UTF-8`. This helps non-English
   package authors (#1123).
 
+* `release()` warns if both `inst/NEWS.Rd` and `NEWS.md` exist (@krlmlr, #1135).
+
+* `release()` doesn't throw error if Git head is detached (@krlmlr, #1136).
+
+* `use_cran_badge()` now uses HTTPS URL (@krlmlr, #1124).
+
 * `uses_github()` now confirms that you've picked a good title and description
   (#1092).
 
