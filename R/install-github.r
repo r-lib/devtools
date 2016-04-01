@@ -99,7 +99,7 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
 remote_download.github_remote <- function(x, quiet = FALSE) {
   dest <- tempfile(fileext = paste0(".zip"))
   if (!grepl("^http",x$host))
-    x$host <- paste0("https://",x$host)
+    x$host <- paste0("https://",x$host) #default to https:// only if user has not specified explicitly
   src_root <- paste0(x$host, "/repos/", x$username, "/", x$repo)
   src <- paste0(src_root, "/zipball/", x$ref)
 
