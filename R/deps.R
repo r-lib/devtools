@@ -197,7 +197,8 @@ remote_deps <- function(pkg) {
   package <- vapply(remotes, remote_package_name, character(1))
   installed <- vapply(package, local_sha, character(1))
   available <- vapply(remotes, remote_sha, character(1))
-  diff <- ifelse(installed == available, CURRENT, BEHIND)
+  diff <- installed == available
+  diff <- ifelse(!is.na(diff) & diff, CURRENT, BEHIND)
 
   res <- structure(
     data.frame(
