@@ -61,6 +61,8 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' @param auth_token Provide a personal access token (PAT) from
 #'   \url{https://github.com/settings/tokens}. Defaults to the \code{GITHUB_PAT}
 #'   environment variable.
+#' @param host GitHub API host to use. Override with your GitHub enterprise
+#'   hostname, for example, "github.hostname.com/api/v3".
 #' @param private If \code{TRUE}, creates a private repository.
 #' @param protocol transfer protocol, either "ssh" (the default) or "https"
 #' @param credentials A \code{\link[git2r]{cred_ssh_key}} specifying specific
@@ -78,8 +80,10 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' create("testpkg2")
 #' use_github(pkg = "testpkg2", protocol = "https")
 #' }
-use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
+use_github <- function(auth_token = github_pat(), host = "api.github.com",
+                       private = FALSE, pkg = ".",
                        protocol = c("ssh", "https"), credentials = NULL) {
+
   if (is.null(auth_token)) {
     stop("GITHUB_PAT required to create new repo")
   }
@@ -106,7 +110,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
     name = jsonlite::unbox(pkg$package),
     description = jsonlite::unbox(gsub("\n", " ", pkg$title)),
     private = jsonlite::unbox(private)
-  ))
+  ), host = host)
 
   message("* Adding GitHub remote")
   r <- git2r::repository(pkg$path)
@@ -114,7 +118,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   git2r::remote_add(r, "origin", origin_url)
 
   message("* Adding GitHub links to DESCRIPTION")
-  use_github_links(pkg$path)
+  use_github_links(pkg$path, host = host)
   if (git_uncommitted(pkg$path)) {
     git2r::add(r, "DESCRIPTION")
     git2r::commit(r, "Add GitHub links to DESCRIPTION")
@@ -213,7 +217,7 @@ use_github_links <- function(pkg = ".", host = "api.github.com") {
   if (identical(host, "api.github.com")){
     url <- "https://github.com"
   } else{
-    url <- paste0("https://", strsplit(host)[[1]][1])
+    url <- paste0("https://", strsplit(host, split = "/")[[1]][1])
   }
 
   github_URL <-
