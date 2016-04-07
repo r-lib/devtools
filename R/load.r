@@ -172,7 +172,7 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 
   # Source test helpers into package environment
   if (uses_testthat(pkg)) {
-    testthat::source_test_helpers(env = pkg_env(pkg))
+    testthat::source_test_helpers(find_test_dir(pkg$path), env = pkg_env(pkg))
   }
 
   # Run hooks
@@ -235,6 +235,7 @@ build_description <- function(name, extra = list()) {
     Depends = paste0("R (>= ", as.character(getRversion()) ,")"),
     License = getOption("devtools.desc.license"),
     Suggests = getOption("devtools.desc.suggests"),
+    Encoding = "UTF-8",
     LazyData = "true"
   ))
 

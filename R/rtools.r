@@ -1,3 +1,7 @@
+using_gcc49 <- function() {
+  isTRUE(sub("^gcc[^[:digit:]]+", "", Sys.getenv("COMPILED_BY")) >= "4.9.3")
+}
+
 # Need to check for existence so load_all doesn't override known rtools location
 if (!exists("set_rtools_path")) {
   set_rtools_path <- NULL
@@ -13,8 +17,12 @@ if (!exists("set_rtools_path")) {
       stopifnot(is.rtools(rtools))
       path <- file.path(rtools$path, version_info[[rtools$version]]$path)
 
+      if (using_gcc49()) {
+        Sys.setenv(BINPREF = file.path(rtools$path, "mingw_$(WIN)", "bin", "/"))
+      }
       rtools_paths <<- path
     }
+
     get_rtools_path <<- function() {
       rtools_paths
     }
@@ -266,8 +274,12 @@ version_info <- list(
   ),
   "3.3" = list(
     version_min = "3.2.0",
-    version_max = "3.3.99",
-    path = c("bin", "gcc-4.6.3/bin")
+    version_max = "3.4.99",
+    path = if (using_gcc49()) {
+      "bin"
+    } else {
+      c("bin", "gcc-4.6.3/bin")
+    }
   )
 )
 
