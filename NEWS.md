@@ -4,6 +4,7 @@
   version number by tweaking the `DESCRIPTION`, adding a heading to
   `NEWS.md` (if present), and checking into git (if you use it) (#1076.)
 * `use_github()` accepts a host argument, similar to `install_guthub()` (@ijlyttle, #1101)
+* `use_github()` accepts a host argument, similar to `install_github()` (@ijlyttle, #1101)
 
 * Devtools now uses new gcc toolchain on windows, if installed (@jimhester).
 
