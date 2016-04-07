@@ -23,16 +23,21 @@ github_response <- function(req) {
   parsed
 }
 
-github_GET <- function(path, ..., pat = github_pat()) {
+github_GET <- function(path, ..., pat = github_pat(),
+                       host = "api.github.com") {
+
+  url <- paste0("https://", host, "/")
   auth <- github_auth(pat)
-  req <- httr::GET("https://api.github.com/", path = path, auth, ...)
+  req <- httr::GET(url, path = path, auth, ...)
   github_response(req)
 }
 
-github_POST <- function(path, body, ..., pat = github_pat()) {
+github_POST <- function(path, body, ..., pat = github_pat(),
+                        host = "api.github.com") {
+
+  url <- paste0("https://", host, "/")
   auth <- github_auth(pat)
-  req <- httr::POST("https://api.github.com/", path = path, body = body, auth,
-    encode = "json", ...)
+  req <- httr::POST(url, path = path, body = body, auth, encode = "json", ...)
   github_response(req)
 }
 
