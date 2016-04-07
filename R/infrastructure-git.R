@@ -190,10 +190,12 @@ use_git_ignore <- function(ignores, directory = ".", pkg = ".") {
 #' those fields already exist.
 #'
 #' @inheritParams use_git
+#' @param host GitHub API host to use. Override with your GitHub enterprise
+#'    hostname, for example, "github.hostname.com/api/v3".
 #' @family git infrastructure
 #' @keywords internal
 #' @export
-use_github_links <- function(pkg = ".") {
+use_github_links <- function(pkg = ".", host = "api.github.com") {
 
   if (!uses_github(pkg)) {
     stop("Cannot detect that package already uses GitHub.\n",
@@ -206,8 +208,16 @@ use_github_links <- function(pkg = ".") {
   desc_path <- file.path(pkg$path, "DESCRIPTION")
   desc <- new_desc <- read_dcf(desc_path)
 
+  # if using GitHub enterprise, we want to map the host (i.e.)
+  #   "github.hostname.com/api/v3" to "https://github.hostname.com"
+  if (identical(host, "api.github.com")){
+    url <- "https://github.com"
+  } else{
+    url <- paste0("https://", strsplit(host)[[1]][1])
+  }
+
   github_URL <-
-    paste("https://github.com", gh_info$username, gh_info$repo, sep = "/")
+    paste(url, gh_info$username, gh_info$repo, sep = "/")
   fill <- function(d, f, filler) {
     if (is.null(d[[f]]) || identical(d[[f]], "")) {
       d[[f]] <- filler

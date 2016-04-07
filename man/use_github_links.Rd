@@ -4,11 +4,14 @@
 \alias{use_github_links}
 \title{Add GitHub links to DESCRIPTION.}
 \usage{
-use_github_links(pkg = ".")
+use_github_links(pkg = ".", host = "api.github.com")
 }
 \arguments{
 \item{pkg}{Path to package. See \code{\link{as.package}} for more
 information.}
+
+\item{host}{GitHub API host to use. Override with your GitHub enterprise
+hostname, for example, "github.hostname.com/api/v3".}
 }
 \description{
 Populates the URL and BugReports fields of DESCRIPTION with
