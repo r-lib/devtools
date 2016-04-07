@@ -1,6 +1,6 @@
 # devtools 1.10.0.9000
 
-* `use_github()` accepts a host argument, similar to `install_guthub()` (@ijlyttle, #1101)
+* `use_github()` accepts a host argument, similar to `install_github()` (@ijlyttle, #1101)
 
 * Devtools now uses new gcc toolchain on windows, if installed (@jimhester).
 
