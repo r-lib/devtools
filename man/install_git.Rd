@@ -4,8 +4,8 @@
 \alias{install_git}
 \title{Install a package from a git repository}
 \usage{
-install_git(url, subdir = NULL, branch = NULL, args = character(0),
-  force = FALSE, quiet = FALSE, ...)
+install_git(url, subdir = NULL, branch = NULL, credentials = NULL,
+  args = character(0), force = FALSE, quiet = FALSE, ...)
 }
 \arguments{
 \item{url}{Location of package. The url should point to a public or
@@ -15,6 +15,9 @@ private repository.}
 contain the package we are interested in installing.}
 
 \item{branch}{Name of branch or tag to use, if not master.}
+
+\item{credentials}{A git2r credentials object passed through
+to \code{\link[git2r]{clone}}.}
 
 \item{args}{DEPRECATED. A character vector providing extra arguments to
 pass on to git.}
