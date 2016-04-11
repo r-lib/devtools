@@ -21,6 +21,14 @@ mock_use_github <- function(pkg) {
   invisible(NULL)
 }
 
+test_that("pkg_sha metadata from shallow clone", {
+
+    pkg_sha <- git_sha1(path='shallowRepo')
+    expect_equal(pkg_sha, '21d5d94011')
+
+})
+
+
 test_that("install on packages adds metadata", {
   skip_on_cran()
 
