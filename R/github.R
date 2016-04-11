@@ -61,7 +61,7 @@ github_tag <- function(username, repo, ref = "master") {
 #' @keywords internal
 #' @export
 github_pat <- function(quiet = FALSE) {
-  pat <- Sys.getenv('GITHUB_PAT')
+  pat <- Sys.getenv("GITHUB_PAT")
   if (nzchar(pat)) {
     if (!quiet) {
       message("Using GitHub PAT from envvar GITHUB_PAT")
