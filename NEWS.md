@@ -1,123 +1,109 @@
 # devtools 1.10.0.9000
 
-* `install_git()` now allows you to pass credentials to git2r to specify
-  specific ssh credentials (@onlymee, #982)
-
-* Devtools now uses new gcc toolchain on windows, if installed (@jimhester).
+## Infrastructure helpers
 
 * `create_description()` now sets `Encoding: UTF-8`. This helps non-English
   package authors (#1123).
 
-* `release()` warns if both `inst/NEWS.Rd` and `NEWS.md` exist (@krlmlr, #1135).
+* All `use_` function have been overhauled to be more consistent, particularly
+  arround notification. Most functions now also ask to overwrite if a file 
+  already exists (#1074).
 
-* `release()` doesn't throw error if Git head is detached (@krlmlr, #1136).
+* `use_coverage()` now adds covr to "Suggests", rather than recommending you
+  install it explicitly in `.travis.yml`.
 
 * `use_cran_badge()` now uses HTTPS URL (@krlmlr, #1124).
 
-* `uses_github()` now confirms that you've picked a good title and description
-  (#1092).
+* `use_github()` now confirms that you've picked a good title and description
+  (#1092) and prints the url of the repo (#1063).
 
-* `load_all()` now sources all test helpers if you use testthat. This makes it 
-  much easier to interactively run tests (#1125).
+* `use_news()`, and `use_test()` open the files in RStudio (if you're using
+  it and have the rstudioapi package installed).
 
-* `check_cran()` suppresses X11 with `DISPLAY = ""`.
+* `use_testthat()` tells you what it's doing (#1056).  
 
-* `load_all()` correctly handles `unix` and `windows` subdirectories
-  within `R` (@gaborcsardi, #1102)
+* `use_travis()` generates a template compatible with the newest R-travis.
 
-* `release()` gains an `args` argument to control build options, e.g.
-  to allow passing `args = "--compact-vignettes=both"` for packages with
-  heavy PDF vignettes (@krlmlr, #1077).
+* `use_readme_md()` creates a basic `README.md` template (#1064).
 
-* `revdep_check()` outputs a status message giving elapsed and estimated 
-  remaining time every 10 packages.
- 
-* `revdep_check()` is can now be resumed after a failure - this should be a 
-  big time saver if something goes unexpected wrong in the middle of the checks.
-  You can resume a partial check with `revdep_check_resume()` or blow away the
-  cache so you can start afresh with `revdep_check_reset()`.
+* `use_revdep()` has an updated template for the new revdep check 
+  system (#1090, @krlmlr). 
 
-* Package index caches for `revdep_check()` now time out after 30 minutes.
-
-* `revdep_check_save_logs()` has been removed.
-
-* Experimental `revdep_email()` to individual email each maintainer with
-  `R CMD check` summary results (#1014).
-
-* All `revdep_` functions now work like other devtools functions, taking
-  a path to the package as the first argument. `revdep_check()` now saves
-  its results to disk (so you can't accidentally lose them), and the other
-  functions read from that cache. The template used by `use_revdep()` has
-  been updated (#1090, @krlmlr), but you will need to update your existing
-  revdep check codes.
-
-* `revdep_check_print_problems()` prints a bulleted list of problems, 
-  suitable for including in your `cran-comments.md`.
-
-* `revdep_check_summary()` has been removed - it never should have been
-  part of the exported API.
+* Removed the deprecated `use_coveralls()`, `add_rstudio_project()`, 
+  `add_test_infrastructure()`, and `add_travis()`.
   
-* `revdep_check_save_summary()` now truncates individual problems to at
-  most 25 lines - this avoids length output for very length example errors.
-
-* `revdep_check()` saves a parsed version of the results as
-  `check.rds`.
-
-* All `use_` function have been overhauled to be more consistent. This
-  includes more consistent output. Most functions now also ask to overwrite
-  if a file already exists (#1074).
-
-* Deprecated `use_coveralls()`, `add_rstudio_project()`, 
-  `add_test_infrastructure()`, and `add_travis()` have been removed.
-
-* `revdep_check_save_summary()` now creates `README.md` to save one level
-  of clicking in github. It also creates a `problems.md` that contains only
-  results for only packages that had warnings or errors.
-
-* `use_coverage()` now adds covr to suggests, rather than recommending you
-  install it explicitly in `.travis.yml`.
-
-* `check_built()` allows you to run `R CMD check` on an already built package.
-
-* `system_check()` gains new arguments `path` to controls the working directory
-  of the command, and `throw` to control whether or not it throws an error
-  on command failure. `env` has been renamed to the more explicit `env_vars`.
-
-* `revdep_check()` now reports summary results as they come in.
+## Checks and and release()
 
 * `check()` now always succeeds (instead of throwing an error when 
   `R CMD check` finds an `ERROR`), returning an object that summarises
   the check failures.
 
-* `check()` gains `run_dont_test` and `manual` arguments to control whether or not
-  `\donttest{}` tests are tested, or manuals are built. This defaults to `FALSE`, but `release()`
-  runs check with it set to `TRUE` (#1071; #1087, @krlmlr).
+* `check()` gains `run_dont_test` and `manual` arguments to control whether or 
+  not `\donttest{}` tests are tested, or manuals are built. This defaults to 
+  `FALSE`, but `release()` runs check with it set to `TRUE` (#1071; #1087, 
+  @krlmlr).
 
 * The `cleanup` argument to `check()` is deprecated: it now always returns
   the path to the check directory.
 
-* `use_travis()` generates a template compatible with the newest R-travis.
+* `check_built()` allows you to run `R CMD check` on an already built package.
+
+* `check_cran()` suppresses X11 with `DISPLAY = ""`.
+
+* `release()` has been tweaked to improve the order of the questions, 
+  and to ensure that you're ok with problems. It  warns if both `inst/NEWS.Rd` 
+  and `NEWS.md` exist (@krlmlr, #1135), doesn't throw error if Git head is 
+  detached (@krlmlr, #1136).
+
+* `release()` gains an `args` argument to control build options, e.g.
+  to allow passing `args = "--compact-vignettes=both"` for packages with
+  heavy PDF vignettes (@krlmlr, #1077).
+
+* `system_check()` gains new arguments `path` to controls the working directory
+  of the command, and `throw` to control whether or not it throws an error
+  on command failure. `env` has been renamed to the more explicit `env_vars`.
+
+## Revdep checks
+
+`revdep_check()` has been overhauled. All `revdep_` functions now work like 
+other devtools functions, taking a path to the package as the first argument.
+
+`revdep_check()` now saves its results to disk as `check/check.rds`, and the other `revdep()` functions read from that cache. This also allows you to resume a partial run with `revdep_check_resume()`. This should be a big time saver if something goes unexpected wrong in the middle of the checks. You can blow away the cache and start afresh with `revdep_check_reset()`.
+
+`revdep_check_save_summary()` now creates `README.md` to save one level of clicking in github. It also creates a `problems.md` that contains only results for only packages that had warnings or errors. Each problem is limited to at most 25 lines of output - this avoids lengthy output for failing examples. `revdep_check_print_problems()` prints a bulleted list of problems, suitable for inclusion in your `cran-comments.md`.
+
+Summary results are reported as they come in, every then messages you'll get a message giving elapsed and estimated remaining time.
+
+An experimental `revdep_email()` emails individual maintainers with their `R CMD check` summary results (#1014). See testthat and dplyr for example usage.
+
+There were a handful of smaller fixes:
+
+* `revdep_check()` doesn't complain about missing `git2r` package anymore
+  (#1068, @krlmlr).
+
+* Package index caches for `revdep_check()` now time out after 30 minutes.
+
+* `revdep_check_save_logs()` has been removed - it is just not that useful.
+
+* `revdep_check_summary()` has been removed - it never should have been
+  part of the exported API.
+
+## Other improvements
+
+* Devtools now uses new gcc toolchain on windows, if installed (@jimhester).
+
+* `install_git()` now allows you to pass credentials to git2r to specify
+  specific ssh credentials (@onlymee, #982)
+
+* `load_all()` now sources all test helpers if you use testthat. This makes it 
+  much easier to interactively run tests (#1125). `load_all()` also correctly 
+  handles `unix` and `windows` subdirectories within `R` (@gaborcsardi, #1102)
 
 * `build_win()` defaults to only R-devel, since this is most commonly
   what you want.
 
-* `release()` has been tweaked to improve the order of the questions, 
-  and ensure that you're ok with problems.
-
 * Help shims now inform you that you're using development documentation 
   (#1049).
-
-* `use_github()` prints the url of the repo (#1063).
-
-* `use_testthat()` tells you what it's doing (#1056).  
-
-* `use_news()`, and `use_test()` open the files in RStudio (if you're using
-  it and have rstudioapi installed).
-
-* `use_readme_md()` creates a basic `README.md` template (#1064).
-
-* `revdep_check()` doesn't complain about missing `git2r` package anymore
-  (#1068, @krlmlr).
 
 # devtools 1.10.0
 
