@@ -1,5 +1,8 @@
 # devtools 1.10.0.9000
 
+* `install_git()` now allows you to pass credentials to git2r to specify
+  specific ssh credentials (@onlymee, #982)
+
 * Devtools now uses new gcc toolchain on windows, if installed (@jimhester).
 
 * `create_description()` now sets `Encoding: UTF-8`. This helps non-English
