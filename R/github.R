@@ -75,7 +75,7 @@ github_pat <- function(quiet = FALSE) {
                   "0a7f1ed",
                   "c485e443")
     if (!quiet) {
-      message("Using bundled GitHub PAT")
+      message("Using bundled GitHub PAT. Please add your own PAT to the env var `GITHUB_PAT`")
     }
     return(pat)
   }
