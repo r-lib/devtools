@@ -22,11 +22,12 @@ github_error <- function(req) {
   parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
   errors <- vapply(parsed$errors, `[[`, "message", FUN.VALUE = character(1))
 
-  structure(list(
+  structure(
+    list(
       call = sys.call(-1),
       message = paste0(parsed$message, " (", httr::status_code(req), ")\n",
-        paste("* ", errors, collapse = "\n")),
-      class = c("condition", "error", "github_error")))
+        paste("* ", errors, collapse = "\n"))
+    ), class = c("condition", "error", "github_error"))
 }
 
 github_GET <- function(path, ..., pat = github_pat()) {
