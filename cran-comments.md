@@ -1,44 +1,27 @@
 ## Test environments
-* local OS X install, R 3.2.1
-* ubuntu 12.04 (on travis-ci), R 3.2.2
+* local OS X install, R 3.2.4
+* ubuntu 12.04 (on travis-ci), R 3.2.4
 * win-builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. 
-
-There were 2 NOTEs:
-
-* checking foreign function calls ... NOTE
-  Evaluating ‘dll$foo’ during check gives error
-  
-  This is part of a dynamic check to see if the user can compile packages
-  so `dll` does not exist during checking.
+There were no ERRORs, WARNINGs, and 1 NOTES. 
 
 * Found the following (possibly) invalid URLs: 
   URL: https://cran.r-project.org/web/packages/policies.html
   
   This is a false positive as this isn't a url to a package.
 
-* checking R code for possible problems ... NOTE
-  Found the following calls to attach():
-    File 'devtools/R/package-env.r':
-      attach(NULL, name = pkg_env_name(pkg))
-    File 'devtools/R/shims.r':
-      attach(e, name = "devtools_shims", warn.conflicts = FALSE)
-
-  These are needed because devtools simulates package loading, and hence
-  needs to attach environments to the search path.
+(Note that devtools requires >=0.7.0 of the suggested package gmailr, but the current CRAN version is 0.6.0. This isn't flagged as a problem, but the maintainer is preparing a release in the very near future.)
 
 ## Downstream dependencies
 
-* I ran R CMD check on all 75 downstream dependencies of devtools.
-  Summary at: https://github.com/hadley/devtools/blob/master/revdep/summary.md
+* I ran R CMD check on all 77 downstream dependencies of devtools.
+  Summary at: https://github.com/hadley/devtools/blob/master/revdep/
 
-* There were 2 ERRORs: 
+* There was 1 ERROR: 
 
-  * assertive.reflection: this is an error in `\donttest()` which is 
-    now found by devtools (since it always does `--run-donttest`.
+    * BrailleR: checking examples ... ERROR
+      
+      Appears to be graphics related, so unlikely to be related to devtools.
 
-  * jiebaR: this looks like a problem caused by the moving of roxygen2 from
-    imports to suggests. I'm working with the authors to get a updated version 
-    to CRAN ASAP.
+* I failed to install dependencies for: biomartr, demi, FedData, myTAI, NMF

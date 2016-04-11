@@ -4,57 +4,59 @@
 
 |setting  |value                        |
 |:--------|:----------------------------|
-|version  |R version 3.2.3 (2015-12-10) |
+|version  |R version 3.2.4 (2016-03-10) |
 |system   |x86_64, darwin13.4.0         |
-|ui       |RStudio (0.99.875)           |
+|ui       |X11                          |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Chicago              |
-|date     |2016-02-11                   |
+|date     |2016-04-11                   |
 
 ## Packages
 
 |package    |*  |version     |date       |source                            |
 |:----------|:--|:-----------|:----------|:---------------------------------|
 |bitops     |   |1.0-6       |2013-08-17 |CRAN (R 3.2.0)                    |
-|covr       |   |1.2.0       |2015-06-25 |CRAN (R 3.2.0)                    |
+|covr       |   |2.0.1       |2016-04-06 |CRAN (R 3.2.4)                    |
 |crayon     |   |1.3.1       |2015-07-13 |CRAN (R 3.2.0)                    |
-|curl       |   |0.9.5       |2016-01-23 |CRAN (R 3.2.3)                    |
-|devtools   |*  |1.10.0.9000 |2016-02-11 |local (hadley/devtools)           |
+|curl       |   |0.9.7       |2016-04-10 |CRAN (R 3.2.4)                    |
+|devtools   |*  |1.10.0.9000 |2016-04-11 |local (hadley/devtools@00ba600)   |
 |digest     |   |0.6.9       |2016-01-08 |CRAN (R 3.2.3)                    |
-|evaluate   |   |0.8         |2015-09-18 |CRAN (R 3.2.0)                    |
-|git2r      |   |0.13.1      |2015-12-10 |CRAN (R 3.2.3)                    |
-|gmailr     |   |0.7.0.9000  |2016-02-11 |Github (jimhester/gmailr@5ae820f) |
+|evaluate   |   |0.8.3       |2016-03-05 |CRAN (R 3.2.4)                    |
+|git2r      |   |0.14.0      |2016-03-13 |CRAN (R 3.2.4)                    |
+|gmailr     |   |0.7.0.9000  |2016-04-11 |Github (jimhester/gmailr@2a5833b) |
 |httr       |   |1.1.0       |2016-01-28 |CRAN (R 3.2.3)                    |
+|hunspell   |   |1.2         |2016-03-19 |CRAN (R 3.2.4)                    |
 |jsonlite   |   |0.9.19      |2015-11-28 |CRAN (R 3.2.2)                    |
 |knitr      |   |1.12.3      |2016-01-22 |CRAN (R 3.2.3)                    |
 |lintr      |   |0.3.3       |2015-09-15 |CRAN (R 3.2.0)                    |
 |memoise    |   |1.0.0       |2016-01-29 |CRAN (R 3.2.3)                    |
-|Rcpp       |   |0.12.3      |2016-01-10 |CRAN (R 3.2.3)                    |
-|rmarkdown  |   |0.9.2       |2016-01-01 |CRAN (R 3.2.3)                    |
+|Rcpp       |   |0.12.4      |2016-03-26 |CRAN (R 3.2.4)                    |
+|rmarkdown  |   |0.9.5       |2016-02-22 |CRAN (R 3.2.3)                    |
 |roxygen2   |   |5.0.1       |2015-11-11 |CRAN (R 3.2.2)                    |
 |rstudioapi |   |0.5         |2016-01-24 |CRAN (R 3.2.3)                    |
+|rversions  |   |1.0.2       |2015-07-13 |CRAN (R 3.2.0)                    |
 |testthat   |*  |0.11.0      |2015-10-14 |CRAN (R 3.2.0)                    |
 |whisker    |   |0.3-2       |2013-04-28 |CRAN (R 3.2.0)                    |
 |withr      |   |1.0.1       |2016-02-04 |CRAN (R 3.2.3)                    |
 
 # Check results
-75 packages
+76 packages
 
 ## acmeR (1.1.0)
 Maintainer: Robert Wolpert <wolpert@stat.duke.edu>
 
 0 errors | 0 warnings | 0 notes
 
-## aRxiv (0.5.10)
-Maintainer: Karl Broman <kbroman@biostat.wisc.edu>  
-Bug reports: https://github.com/ropensci/aRxiv/issues
+## archivist (2.0.3)
+Maintainer: Przemyslaw Biecek <przemyslaw.biecek@gmail.com>  
+Bug reports: https://github.com/pbiecek/archivist/issues
 
 0 errors | 0 warnings | 0 notes
 
-## assertive.base (0.0-3)
-Maintainer: Richard Cotton <richierocks@gmail.com>  
-Bug reports: https://bitbucket.org/richierocks/assertive.base/issues
+## aRxiv (0.5.10)
+Maintainer: Karl Broman <kbroman@biostat.wisc.edu>  
+Bug reports: https://github.com/ropensci/aRxiv/issues
 
 0 errors | 0 warnings | 0 notes
 
@@ -113,59 +115,58 @@ Bug reports: https://bitbucket.org/richierocks/assertive.numbers/issues
 
 0 errors | 0 warnings | 0 notes
 
-## assertive.properties (0.0-1)
-Maintainer: Richard Cotton <richierocks@gmail.com>  
-Bug reports: 
-        https://bitbucket.org/richierocks/assertive.properties/issues
+## biomartr (0.0.3)
+Maintainer: Hajk-Georg Drost <hgd23@cam.ac.uk>  
+Bug reports: https://github.com/HajkD/biomartr/issues
 
-0 errors | 0 warnings | 0 notes
+1 error  | 0 warnings | 0 notes
 
-## assertive (0.3-1)
-Maintainer: Richard Cotton <richierocks@gmail.com>
+```
+checking package dependencies ... ERROR
+Packages required but not available: ‘biomaRt’ ‘Biostrings’
 
-0 errors | 0 warnings | 0 notes
-
-## assertive.reflection (0.0-1)
-Maintainer: Richard Cotton <richierocks@gmail.com>  
-Bug reports: 
-        https://bitbucket.org/richierocks/assertive.reflection/issues
-
-0 errors | 0 warnings | 0 notes
-
-## assertive.sets (0.0-1)
-Maintainer: Richard Cotton <richierocks@gmail.com>  
-Bug reports: https://bitbucket.org/richierocks/assertive.sets/issues
-
-0 errors | 0 warnings | 0 notes
-
-## assertive.strings (0.0-1)
-Maintainer: Richard Cotton <richierocks@gmail.com>  
-Bug reports: https://bitbucket.org/richierocks/assertive.strings/issues
-
-0 errors | 0 warnings | 0 notes
-
-## assertive.types (0.0-1)
-Maintainer: Richard Cotton <richierocks@gmail.com>  
-Bug reports: https://bitbucket.org/richierocks/assertive.types/issues
-
-0 errors | 0 warnings | 0 notes
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+```
 
 ## bisectr (0.1.0)
 Maintainer: Winston Chang <winston@stdout.org>
 
 0 errors | 0 warnings | 0 notes
 
-## BrailleR (0.22.0)
-Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>
+## BrailleR (0.24.2)
+Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>  
+Bug reports: http://github.com/ajrgodfrey/BrailleR/issues
 
-0 errors | 0 warnings | 0 notes
+1 error  | 0 warnings | 0 notes
+
+```
+checking examples ... ERROR
+Running examples in ‘BrailleR-Ex.R’ failed
+The error most likely occurred in:
+
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: WTF
+> ### Title: What's this figure?
+> ### Aliases: WTF
+> 
+> ### ** Examples
+> 
+> hist(rnorm(1000))
+> WTF()
+Error in grid.echo.recordedplot(recordPlot(), newpage, prefix) : 
+  No graphics to replay
+Calls: WTF ... grid.echo.default -> grid.echo -> grid.echo.recordedplot
+Execution halted
+** found \donttest examples: check also with --run-donttest
+```
 
 ## broman (0.62-1)
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 
 0 errors | 0 warnings | 0 notes
 
-## checkmate (1.7.1)
+## checkmate (1.7.4)
 Maintainer: Michel Lang <michellang@gmail.com>  
 Bug reports: https://github.com/mllg/checkmate/issues
 
@@ -177,7 +178,7 @@ Bug reports: https://github.com/laurenmh/codyn/issues
 
 0 errors | 0 warnings | 0 notes
 
-## covr (1.2.0)
+## covr (2.0.1)
 Maintainer: Jim Hester <james.f.hester@gmail.com>  
 Bug reports: https://github.com/jimhester/covr/issues
 
@@ -195,7 +196,7 @@ Maintainer: Yuanchu Dang <yuanchu.dang@gmail.com>
 
 0 errors | 0 warnings | 0 notes
 
-## DataCombine (0.2.18)
+## DataCombine (0.2.20)
 Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>  
 Bug reports: https://github.com/christophergandrud/DataCombine/issues
 
@@ -228,7 +229,7 @@ checking Rd cross-references ... NOTE
 Package unavailable to check Rd xrefs: ‘doMPI’
 ```
 
-## dpmr (0.1.7-1)
+## dpmr (0.1.9)
 Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>  
 Bug reports: https://github.com/christophergandrud/dpmr/issues
 
@@ -239,20 +240,23 @@ Maintainer: Jake Sherman <jake@jakesherman.com>
 
 0 errors | 0 warnings | 0 notes
 
-## eurostat (1.2.13)
+## eurostat (1.2.21)
 Maintainer: Lahti Leo <louhos@googlegroups.com>  
 Bug reports: https://github.com/ropengov/eurostat/issues
 
 0 errors | 0 warnings | 0 notes
 
-## FedData (2.0.4)
+## FedData (2.0.8)
 Maintainer: R. Kyle Bocinsky <bocinsky@gmail.com>
 
-0 errors | 0 warnings | 1 note 
+1 error  | 0 warnings | 0 notes
 
 ```
-checking package dependencies ... NOTE
-Packages suggested but not available for checking: ‘SSOAP’ ‘XMLSchema’
+checking package dependencies ... ERROR
+Package required and available but unsuitable version: ‘rgdal’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
 ```
 
 ## flacco (1.2)
@@ -261,7 +265,7 @@ Bug reports: https://github.com/kerschke/flacco/issues
 
 0 errors | 0 warnings | 0 notes
 
-## forestFloor (1.9.1)
+## forestFloor (1.9.3)
 Maintainer: Soeren Havelund Welling <SOWE@DTU.DK>
 
 0 errors | 0 warnings | 0 notes
@@ -280,17 +284,23 @@ Bug reports: https://github.com/mdsumner/graticule/issues
 
 0 errors | 0 warnings | 0 notes
 
-## h2o (3.6.0.8)
+## h2o (3.8.1.3)
 Maintainer: Tom Kraljevic <tomk@0xdata.com>
 
 0 errors | 0 warnings | 1 note 
 
 ```
 checking installed package size ... NOTE
-  installed size is 48.9Mb
+  installed size is 55.3Mb
   sub-directories of 1Mb or more:
-    java  48.0Mb
+    java  54.4Mb
 ```
+
+## hashmap (0.1.0)
+Maintainer: Nathan Russell <russell.nr2012@gmail.com>  
+Bug reports: https://github.com/nathan-russell/hashmap/issues
+
+0 errors | 0 warnings | 0 notes
 
 ## IalsaSynthesis (0.1.6)
 Maintainer: Will Beasley <wibeasley@hotmail.com>  
@@ -336,20 +346,9 @@ checking data for non-ASCII characters ... NOTE
 ## lineup (0.37-6)
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 
-0 errors | 0 warnings | 1 note 
+0 errors | 0 warnings | 0 notes
 
-```
-checking re-building of vignette outputs ... NOTE
-Error in re-building vignettes:
-  ...
-Warning in find.gene.pseudomarker(f2cross, pmap, genepos) :
-  10 genes differ from pseudomarker pos by > 2 Mbp, with gaps as big as 2.4 Mbp
-
-Execution halted
-
-```
-
-## manifestoR (1.1-1)
+## manifestoR (1.2)
 Maintainer: Jirka Lewandowski <jirka.lewandowski@wzb.eu>  
 Bug reports: https://github.com/ManifestoProject/manifestoR/issues
 
@@ -366,9 +365,26 @@ Bug reports: http://github.com/seananderson/metafolio/issues
 
 0 errors | 0 warnings | 0 notes
 
-## modules (0.2.0)
+## mgarchBEKK (0.0.2)
+Maintainer: Vehbi Sinan Tunalioglu <vst@vsthost.com>
+
+0 errors | 0 warnings | 0 notes
+
+## modules (0.4.0)
 Maintainer: Sebastian Warnholz <wahani@gmail.com>  
 Bug reports: https://github.com/wahani/modules/issues
+
+0 errors | 0 warnings | 0 notes
+
+## Momocs (1.0.0)
+Maintainer: Vincent Bonhomme <bonhomme.vincent@gmail.com>  
+Bug reports: https://github.com/vbonhomme/Momocs/issues
+
+0 errors | 0 warnings | 0 notes
+
+## mptools (1.0.1)
+Maintainer: John Baumgartner <johnbaums@gmail.com>  
+Bug reports: https://github.com/johnbaums/mptools/issues
 
 0 errors | 0 warnings | 0 notes
 
@@ -385,6 +401,11 @@ Package required but not available: ‘edgeR’
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 ```
+
+## nima (0.3.0)
+Maintainer: Nima Hejazi <nhejazi@berkeley.edu>
+
+0 errors | 0 warnings | 0 notes
 
 ## NlsyLinks (2.0.1)
 Maintainer: Will Beasley <wibeasley@hotmail.com>  
@@ -404,7 +425,7 @@ checking installed package size ... NOTE
 Maintainer: Renaud Gaujoux <renaud@tx.technion.ac.il>  
 Bug reports: http://github.com/renozao/NMF/issues
 
-1 error  | 1 warning  | 5 notes
+1 error  | 0 warnings | 5 notes
 
 ```
 checking examples ... ERROR
@@ -429,12 +450,6 @@ fixed coef [3]:
 > e <- ExpressionSet(x)
 Error: could not find function "ExpressionSet"
 Execution halted
-
-checking whether package ‘NMF’ can be installed ... WARNING
-Found the following significant warnings:
-  Warning: replacing previous import by ‘ggplot2::unit’ when loading ‘NMF’
-  Warning: replacing previous import by ‘ggplot2::arrow’ when loading ‘NMF’
-See ‘/Users/hadley/Documents/devtools/devtools/revdep/checks/NMF.Rcheck/00install.out’ for details.
 
 checking package dependencies ... NOTE
 Packages suggested but not available for checking:
@@ -487,7 +502,7 @@ See section ‘Registering S3 methods’ in the ‘Writing R Extensions’
 manual.
 ```
 
-## opencpu (1.5.1)
+## opencpu (1.5.4)
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>  
 Bug reports: https://github.com/jeroenooms/opencpu/issues
 
@@ -498,7 +513,12 @@ checking package dependencies ... NOTE
 Package suggested but not available for checking: ‘RAppArmor’
 ```
 
-## packrat (0.4.6-1)
+## osmplotr (0.1-3)
+Maintainer: Mark Padgham <mark.padgham@email.com>
+
+0 errors | 0 warnings | 0 notes
+
+## packrat (0.4.7-1)
 Maintainer: Kevin Ushey <kevin@rstudio.com>  
 Bug reports: https://github.com/rstudio/packrat/issues
 
@@ -509,7 +529,7 @@ checking package dependencies ... NOTE
 Package which this enhances but not available for checking: ‘BiocInstaller’
 ```
 
-## pacman (0.3.0)
+## pacman (0.4.1)
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>  
 Bug reports: https://github.com/trinker/pacman/issues?state=open
 
@@ -560,63 +580,21 @@ utest,character : .local: no visible global function definition for
   ‘test_file’
 ```
 
-## plotly (2.0.16)
+## plotly (3.4.1)
 Maintainer: Carson Sievert <cpsievert1@gmail.com>  
 Bug reports: https://github.com/ropensci/plotly/issues
 
-1 error  | 0 warnings | 0 notes
+0 errors | 0 warnings | 0 notes
 
-```
-checking tests ... ERROR
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  [1] "Running test: histogram-density"
-  [1] "Running test: histogram-fill"
-  [1] "Running test: histogram-fixed-fill-color"
-  [1] "Running test: histogram-density-binwidth"
-  [1] "Running test: histogram-fill-factor"
-  [1] "Running test: histogram-fill-factor-identity"
-  [1] "Running test: histogram-fill-factor-dodge"
-  [1] "Running test: histogram-fill-factor-facets"
-  [1] "Running test: histogram-vline"
-  [1] "Running test: histogram-dates"
-  
-  There were 50 or more warnings (use warnings() to see the first 50)
-  Execution halted
-```
-
-## PSAboot (1.1.3)
+## PSAboot (1.1.4)
 Maintainer: Jason Bryer <jason@bryer.org>  
 Bug reports: https://github.com/jbryer/PSAboot/issues
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 1 note 
 
 ```
 checking data for non-ASCII characters ... NOTE
   Note: found 4 marked UTF-8 strings
-
-checking re-building of vignette outputs ... NOTE
-Error in re-building vignettes:
-  ...
-Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
-  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
-Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
-  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
-Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
-  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
-Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
-... 8 lines ...
-Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
-  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
-Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
-  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
-Warning in Matching::Match(Y = Y, Tr = Tr, X = ps, estimand = estimand,  :
-  replace==FALSE, but there are more (weighted) control obs than treated obs.  Some control obs will not be matched.  You may want to estimate ATT instead.
-Loading required package: knitr
-Quitting from lines 135-136 (PSAboot.Rmd) 
-Error: processing vignette 'PSAboot.Rmd' failed with diagnostics:
-Unknown parameters: alhpa
-Execution halted
 ```
 
 ## qtlcharts (0.5-25)
@@ -661,11 +639,6 @@ Maintainer: Michael C Sachs <sachsmc@gmail.com>
 
 0 errors | 0 warnings | 0 notes
 
-## readODS (1.4)
-Maintainer: Gerrit-Jan Schutten <phonixor@gmail.com>
-
-0 errors | 0 warnings | 0 notes
-
 ## REDCapR (0.9.3)
 Maintainer: Will Beasley <wibeasley@hotmail.com>  
 Bug reports: https://github.com/OuhscBbmc/REDCapR/issues
@@ -693,7 +666,7 @@ Maintainer: Hadley Wickham <hadley@rstudio.com>
 
 0 errors | 0 warnings | 0 notes
 
-## rpdo (0.1.1)
+## rpdo (0.1.2)
 Maintainer: Joe Thorley <joe@poissonconsulting.ca>
 
 0 errors | 0 warnings | 0 notes
@@ -724,9 +697,20 @@ Bug reports: https://github.com/hadley/testthat/issues
 Maintainer: Will Beasley <wibeasley@hotmail.com>  
 Bug reports: https://github.com/OuhscBbmc/Wats/issues
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note 
 
-## wikipediatrend (1.1.7)
+```
+checking re-building of vignette outputs ... NOTE
+Error in re-building vignettes:
+  ...
+Quitting from lines 282-302 (OkFertilityWithIntercensalEstimates.Rmd) 
+Error: processing vignette 'OkFertilityWithIntercensalEstimates.Rmd' failed with diagnostics:
+there is no package called 'graph'
+Execution halted
+
+```
+
+## wikipediatrend (1.1.10)
 Maintainer: Peter Meissner <retep.meissner@gmail.com>  
 Bug reports: https://github.com/petermeissner/wikipediatrend/issues
 
@@ -737,6 +721,11 @@ checking package dependencies ... NOTE
 Packages suggested but not available for checking:
   ‘AnomalyDetection’ ‘BreakoutDetection’
 ```
+
+## wru (0.0-2)
+Maintainer: Kabir Khanna <kkhanna@princeton.edu>
+
+0 errors | 0 warnings | 0 notes
 
 ## xoi (0.66-9)
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
