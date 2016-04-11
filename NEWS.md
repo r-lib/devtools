@@ -105,6 +105,10 @@ There were a handful of smaller fixes:
 * Help shims now inform you that you're using development documentation 
   (#1049).
 
+* `git_sha1()` Fix fetching the latest git commit so that it also works
+  for shallow git clones, i.e. git clones which make use of depth.
+  (#1048, #1046, @nparley)
+
 # devtools 1.10.0
 
 ## New features
