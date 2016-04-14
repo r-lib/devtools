@@ -4,7 +4,7 @@
 \alias{install_git}
 \title{Install a package from a git repository}
 \usage{
-install_git <- function(url, subdir = NULL, branch = NULL, credentials = NULL,
+install_git(url, subdir = NULL, branch = NULL, credentials = NULL,
   args = character(0), ...)
 }
 \arguments{
