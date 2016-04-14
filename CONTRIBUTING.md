@@ -91,7 +91,7 @@ A pull request is a process, and unless you're a practiced contributor it's unli
     otherwise we don't get any notification that your pull request is
     ready for review.
 
-Don't worry if your pull request isn't perfect. It's a learning process and we'll be hand to help you out. 
+Don't worry if your pull request isn't perfect. It's a learning process and we'll be handy to help you out. 
 
 It can be frustrating that your PR is ignored for months, and then we request a whole bunch on changes within a short time period. Don't worry - if your PR doesn't make it for this release, it will for the next one.
 
