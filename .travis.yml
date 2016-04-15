@@ -1,6 +1,13 @@
-language: R
+language: r
 sudo: false
 cache: packages
+r:
+  - oldrel
+  - release
+  - devel
+
+after_success:
+  - test $TRAVIS_R_VERSION = "3.2.4" && Rscript -e 'covr::codecov()'
 
 addons:
   apt:
@@ -19,4 +26,4 @@ before_script:
     - git config --global user.email "travis@example.org"
 
 after_success:
-  - Rscript -e 'covr::codecov()'
+  - test $TRAVIS_R_VERSION = "3.2.4" && Rscript -e 'covr::codecov()'
