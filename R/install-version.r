@@ -35,7 +35,7 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
   } else {
     package.path <- paste(package, "/", package, "_", version, ".tar.gz",
       sep = "")
-    if (!(package.path %in% row.names(info))) {
+    if (!(package.path %in% info$path)) {
       stop(sprintf("version '%s' is invalid for package '%s'", version,
         package))
     }
