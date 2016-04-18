@@ -2,6 +2,8 @@ using_gcc49 <- function() {
   isTRUE(sub("^gcc[^[:digit:]]+", "", Sys.getenv("COMPILED_BY")) >= "4.9.3")
 }
 
+gcc_arch <- function() if (Sys.getenv("R_ARCH") == "/i386") "32" else "64"
+
 # Need to check for existence so load_all doesn't override known rtools location
 if (!exists("set_rtools_path")) {
   set_rtools_path <- NULL
@@ -49,7 +51,7 @@ if (!exists("set_rtools_path")) {
 #'   updated to the paths to rtools binaries.
 #' @keywords internal
 #' @export
-setup_rtools <- function(cache = TRUE, debug = FALSE) {
+setup_rtools <- function(cache = TRUE, debug = TRUE) {
   # Non-windows users don't need rtools
   if (.Platform$OS.type != "windows") return(TRUE)
   # Don't look again, if we've already found it
@@ -131,7 +133,10 @@ setup_rtools <- function(cache = TRUE, debug = FALSE) {
   TRUE
 }
 
-scan_path_for_rtools <- function(debug = FALSE) {
+scan_path_for_rtools <- function(
+  debug = FALSE,
+  gcc49 = using_gcc49(),
+  arch = gcc_arch()) {
   if (debug) cat("Scanning path...\n")
 
   # First look for ls and gcc
@@ -139,15 +144,16 @@ scan_path_for_rtools <- function(debug = FALSE) {
   if (ls_path == "") return(NULL)
   if (debug) cat("ls :", ls_path, "\n")
 
-  if (using_gcc49()) {
-    gcc_arch <- if (Sys.getenv("R_ARCH") == "/i386") "32" else "64"
+  if (gcc49) {
 
     # gcc should be located in Rtools/mingw_{32,64}/bin/gcc.exe
-    gcc_path <- file.path(dirname(dirname(ls_path)), paste0("mingw_", gcc_arch), "bin", "gcc.exe")
+    gcc_path <- file.path(dirname(dirname(ls_path)), paste0("mingw_", arch), "bin", "gcc.exe")
+    if (debug) cat("gcc:", gcc_path, "\n")
     file_info <- file.info(gcc_path)
+    if (debug) str(file_info)
 
     # file_info$exe should be win32 or win64 respectively
-    if (!file.exists(gcc_path) || file_info$exe != paste0("win", gcc_arch)) {
+    if (!file.exists(gcc_path) || file_info$exe != paste0("win", arch)) {
       return(NULL)
     }
   } else {
