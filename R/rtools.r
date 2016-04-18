@@ -139,8 +139,21 @@ scan_path_for_rtools <- function(debug = FALSE) {
   if (ls_path == "") return(NULL)
   if (debug) cat("ls :", ls_path, "\n")
 
-  gcc_path <- Sys.which("gcc")
-  if (gcc_path == "") return(NULL)
+  if (using_gcc49()) {
+    gcc_arch <- if (Sys.getenv("R_ARCH") == "/i386") "32" else "64"
+
+    # gcc should be located in Rtools/mingw_{32,64}/bin/gcc.exe
+    gcc_path <- file.path(dirname(dirname(ls_path)), paste0("mingw_", gcc_arch), "bin", "gcc.exe")
+    file_info <- file.info(gcc_path)
+
+    # file_info$exe should be win32 or win64 respectively
+    if (!file.exists(gcc_path) || file_info$exe != paste0("win", gcc_arch)) {
+      return(NULL)
+    }
+  } else {
+    gcc_path <- Sys.which("gcc")
+    if (gcc_path == "") return(NULL)
+  }
   if (debug) cat("gcc:", gcc_path, "\n")
 
   # We have a candidate installPath
