@@ -1,4 +1,4 @@
-# devtools 1.11.0.9000
+# devtools 1.11.1
 
 * Bug fix in `search_path_for_rtools()` using the gcc-4.9.3 toolchain when
   there is no rtools setting in the windows registry. (@jimhester, #1155)
