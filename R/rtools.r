@@ -154,7 +154,7 @@ scan_path_for_rtools <- function(
 
       # file_info$exe should be win32 or win64 respectively
       if (!file.exists(gcc_path) || file_info$exe != paste0("win", arch)) {
-        return(character())
+        return(character(1))
       }
       gcc_path
     }
