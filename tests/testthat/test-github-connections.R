@@ -82,9 +82,9 @@ test_that("github info and links can be queried and manipulated", {
                              gh_info$username, gh_info$repo, "issues"))
 
   ## make sure we don't clobber existing links
-  mtime_before <- file.mtime(desc_path)
+  mtime_before <- file.info(desc_path)$mtime
   expect_message(use_github_links(test_pkg), "found and preserved")
-  mtime_after <- file.mtime(desc_path)
+  mtime_after <- file.info(desc_path)$mtime
   expect_identical(mtime_before, mtime_after)
 
   ## make sure we diagnose lack of GitHub links
