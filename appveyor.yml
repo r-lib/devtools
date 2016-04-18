@@ -13,7 +13,7 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
-  - Rscript -e "source('https://bioconductor.org/biocLite.R')"
+  - Rscript -e "setInternet2(TRUE);source('https://bioconductor.org/biocLite.R')"
   - travis-tool.sh install_deps
 
 test_script:
