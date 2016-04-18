@@ -13,7 +13,7 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
-  - Rscript -e "source('https://bioconductor.org/biocLite.R')"
+  - Rscript -e "source('http://bioconductor.org/biocLite.R')"
   - travis-tool.sh install_deps
 
 test_script:
@@ -30,6 +30,9 @@ environment:
 
   matrix:
     - R_VERSION: oldrel
+      RTOOLS_VERSION: 32
+      CRAN: http://cran.rstudio.com
+
     - R_VERSION: release
     - R_VERSION: devel
 
@@ -51,3 +54,6 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
+
+cache:
+  - C:\RLibrary

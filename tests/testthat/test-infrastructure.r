@@ -3,7 +3,7 @@ context("Infrastructure")
 test_that("use_* functions consistently", {
   pkg <- "infrastructure"
   unlink(pkg, recursive = TRUE)
-  create(pkg)
+  withr::with_output_sink(tempfile(), create(pkg))
 
   use_test("test1", pkg = pkg)
   use_package_doc(pkg = pkg)

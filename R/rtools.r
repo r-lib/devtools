@@ -1,6 +1,8 @@
 using_gcc49 <- function() {
-  isTRUE(sub("^gcc[^[:digit:]]+", "", Sys.getenv("COMPILED_BY")) >= "4.9.3")
+  isTRUE(sub("^gcc[^[:digit:]]+", "", Sys.getenv("R_COMPILED_BY")) >= "4.9.3")
 }
+
+gcc_arch <- function() if (Sys.getenv("R_ARCH") == "/i386") "32" else "64"
 
 # Need to check for existence so load_all doesn't override known rtools location
 if (!exists("set_rtools_path")) {
@@ -131,7 +133,9 @@ setup_rtools <- function(cache = TRUE, debug = FALSE) {
   TRUE
 }
 
-scan_path_for_rtools <- function(debug = FALSE) {
+scan_path_for_rtools <- function(debug = FALSE,
+                                 gcc49 = using_gcc49(),
+                                 arch = gcc_arch()) {
   if (debug) cat("Scanning path...\n")
 
   # First look for ls and gcc
@@ -139,13 +143,42 @@ scan_path_for_rtools <- function(debug = FALSE) {
   if (ls_path == "") return(NULL)
   if (debug) cat("ls :", ls_path, "\n")
 
-  gcc_path <- Sys.which("gcc")
-  if (gcc_path == "") return(NULL)
-  if (debug) cat("gcc:", gcc_path, "\n")
-
   # We have a candidate installPath
   install_path <- dirname(dirname(ls_path))
-  install_path2 <- dirname(dirname(dirname(gcc_path)))
+
+  if (gcc49) {
+    find_gcc49 <- function(path) {
+      gcc_path <- file.path(path, paste0("mingw_", arch), "bin", "gcc.exe")
+      file_info <- file.info(gcc_path)
+
+      # file_info$exe should be win32 or win64 respectively
+      if (!file.exists(gcc_path) || file_info$exe != paste0("win", arch)) {
+        return(character())
+      }
+      gcc_path
+    }
+
+    # gcc should be located in Rtools/mingw_{32,64}/bin/gcc.exe
+    gcc_path <- find_gcc49(dirname(dirname(ls_path)))
+    install_path2 <- dirname(dirname(dirname(gcc_path)))
+    if (!nzchar(gcc_path)) {
+
+      # win-builder has gcc at Rtools/gcc-4.9.3/mingw_{32,64}/bin.gcc.exe
+      gcc_path <- find_gcc49(file.path(dirname(dirname(ls_path)), "gcc-4.9.3"))
+      install_path2 <- dirname(dirname(dirname(dirname(gcc_path))))
+    }
+
+    if (is.null(gcc_path)) {
+      return(NULL)
+    }
+  } else {
+    gcc_path <- Sys.which("gcc")
+    if (gcc_path == "") return(NULL)
+    install_path2 <- dirname(dirname(dirname(gcc_path)))
+  }
+  if (debug) cat("gcc:", gcc_path, "\n")
+
+  # If both install_paths are not equal
   if (tolower(install_path2) != tolower(install_path)) return(NULL)
 
   version <- installed_version(install_path, debug = debug)
