@@ -133,10 +133,9 @@ setup_rtools <- function(cache = TRUE, debug = FALSE) {
   TRUE
 }
 
-scan_path_for_rtools <- function(
-  debug = FALSE,
-  gcc49 = using_gcc49(),
-  arch = gcc_arch()) {
+scan_path_for_rtools <- function(debug = FALSE,
+                                 gcc49 = using_gcc49(),
+                                 arch = gcc_arch()) {
   if (debug) cat("Scanning path...\n")
 
   # First look for ls and gcc
@@ -154,7 +153,7 @@ scan_path_for_rtools <- function(
 
       # file_info$exe should be win32 or win64 respectively
       if (!file.exists(gcc_path) || file_info$exe != paste0("win", arch)) {
-        return(character(1))
+        return(character())
       }
       gcc_path
     }
