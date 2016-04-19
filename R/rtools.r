@@ -163,7 +163,12 @@ scan_path_for_rtools <- function(debug = FALSE,
 
 
     # First check if gcc set by BINPREF/CC is valid and use that is so
-      gcc_path <- find_gcc49(RCMD("config", "CC", fun = system_output, quiet = !debug))
+    cc_path <- RCMD("config", "CC", fun = system_output, quiet = !debug)
+
+    # remove '-m64' from tail if it exists
+    cc_path <- sub("[[:space:]]+-m[[:digit:]]+$", "", cc_path)
+
+    gcc_path <- find_gcc49(cc_path)
     if (nzchar(gcc_path)) {
       return(rtools(install_path, NULL, valid_binpref = TRUE))
     }
@@ -203,7 +208,7 @@ scan_registry_for_rtools <- function(debug = FALSE) {
 
   rts <- vector("list", length(keys))
 
-  for(i in seq_along(keys)) {
+  for (i in seq_along(keys)) {
     version <- names(keys)[[i]]
     key <- keys[[version]]
     if (!is.list(key) || is.null(key$InstallPath)) next;
