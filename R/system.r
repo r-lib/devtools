@@ -2,7 +2,7 @@
 #'
 #' @param cmd Command to run. Will be quoted by \code{\link{shQuote}()}.
 #' @param args A character vector of arguments.
-#' @param env A named character vector of environment variables.
+#' @param env_vars A named character vector of environment variables.
 #' @param path Path in which to execute the command
 #' @param quiet If \code{FALSE}, the command to be run will be echoed.
 #' @param throw If \code{TRUE}, will throw an error if the command fails
@@ -39,6 +39,28 @@ system_check <- function(cmd, args = character(), env_vars = character(),
   invisible(status)
 }
 
+#' Run a system command and capture the output.
+#'
+#' @inheritParams system_check
+#' @return command output if the command succeeds, an error will be thrown if
+#' the command fails.
+#' @keywords internal
+#' @export
+system_output <- function(cmd, args = character(), env_vars = character(),
+                          path = ".", quiet = FALSE, ...) {
+  full <- paste(shQuote(cmd), " ", paste(args, collapse = " "), sep = "")
+
+  if (!quiet) {
+    message(wrap_command(full), "\n")
+  }
+
+  result <- withCallingHandlers(withr::with_dir(path,
+      withr::with_envvar(env_vars,
+        system(full, intern = TRUE, ignore.stderr = quiet, ...)
+        )), warning = function(w) stop(w))
+
+  result
+}
 
 wrap_command <- function(x) {
   lines <- strwrap(x, getOption("width") - 2, exdent = 2)
