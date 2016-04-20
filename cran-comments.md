@@ -1,6 +1,6 @@
 ## Release summary
 
-This is a minor release to fix the logic that devtools uses for detecting RTools (specifically for the new toolchain, without registry settings)
+This is another minor release to fix the logic that devtools uses for detecting RTools (specifically for the new toolchain, without registry settings).  I think this time we have all the cases covered - thanks for the help, Uwe!
 
 ## Test environments
 * local OS X install, R 3.2.4
