@@ -19,7 +19,8 @@ if (!exists("set_rtools_path")) {
       stopifnot(is.rtools(rtools))
       path <- file.path(rtools$path, version_info[[rtools$version]]$path)
 
-      if (using_gcc49()) {
+      # If using gcc49 and _without_ a valid BINPREF already set
+      if (using_gcc49() && is.null(rtools$valid_binpref)) {
         Sys.setenv(BINPREF = file.path(rtools$path, "mingw_$(WIN)", "bin", "/"))
       }
       rtools_paths <<- path
@@ -148,35 +149,42 @@ scan_path_for_rtools <- function(debug = FALSE,
 
   if (gcc49) {
     find_gcc49 <- function(path) {
-      gcc_path <- file.path(path, paste0("mingw_", arch), "bin", "gcc.exe")
-      file_info <- file.info(gcc_path)
+      if (!file.exists(path)) {
+        path <- paste0(path, ".exe")
+      }
+      file_info <- file.info(path)
 
       # file_info$exe should be win32 or win64 respectively
-      if (!file.exists(gcc_path) || file_info$exe != paste0("win", arch)) {
-        return(character())
+      if (!file.exists(path) || file_info$exe != paste0("win", arch)) {
+        return(character(1))
       }
-      gcc_path
+      path
     }
 
-    # gcc should be located in Rtools/mingw_{32,64}/bin/gcc.exe
-    gcc_path <- find_gcc49(dirname(dirname(ls_path)))
-    install_path2 <- dirname(dirname(dirname(gcc_path)))
+
+    # First check if gcc set by BINPREF/CC is valid and use that is so
+    cc_path <- RCMD("config", "CC", fun = system_output, quiet = !debug)
+
+    # remove '-m64' from tail if it exists
+    cc_path <- sub("[[:space:]]+-m[[:digit:]]+$", "", cc_path)
+
+    gcc_path <- find_gcc49(cc_path)
+    if (nzchar(gcc_path)) {
+      return(rtools(install_path, NULL, valid_binpref = TRUE))
+    }
+
+    # if not check default location Rtools/mingw_{32,64}/bin/gcc.exe
+    gcc_path <- find_gcc49(file.path(install_path, paste0("mingw_", arch), "bin", "gcc.exe"))
     if (!nzchar(gcc_path)) {
-
-      # win-builder has gcc at Rtools/gcc-4.9.3/mingw_{32,64}/bin.gcc.exe
-      gcc_path <- find_gcc49(file.path(dirname(dirname(ls_path)), "gcc-4.9.3"))
-      install_path2 <- dirname(dirname(dirname(dirname(gcc_path))))
-    }
-
-    if (is.null(gcc_path)) {
       return(NULL)
     }
   } else {
     gcc_path <- Sys.which("gcc")
     if (gcc_path == "") return(NULL)
-    install_path2 <- dirname(dirname(dirname(gcc_path)))
   }
   if (debug) cat("gcc:", gcc_path, "\n")
+
+  install_path2 <- dirname(dirname(dirname(gcc_path)))
 
   # If both install_paths are not equal
   if (tolower(install_path2) != tolower(install_path)) return(NULL)
@@ -200,7 +208,7 @@ scan_registry_for_rtools <- function(debug = FALSE) {
 
   rts <- vector("list", length(keys))
 
-  for(i in seq_along(keys)) {
+  for (i in seq_along(keys)) {
     version <- names(keys)[[i]]
     key <- keys[[version]]
     if (!is.list(key) || is.null(key$InstallPath)) next;
@@ -252,8 +260,8 @@ is_compatible <- function(rtools) {
   r_version >= info$version_min && r_version <= info$version_max
 }
 
-rtools <- function(path, version) {
-  structure(list(version = version, path = path), class = "rtools")
+rtools <- function(path, version, ...) {
+  structure(list(version = version, path = path, ...), class = "rtools")
 }
 is.rtools <- function(x) inherits(x, "rtools")
 

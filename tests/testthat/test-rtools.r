@@ -37,24 +37,28 @@ test_that("correct path doesn't need fixing", {
   })
 })
 
-test_that("gcc-493 directory structure is found on 32 bit", {
-  withr::with_path(file.path("rtools-gcc493", "bin"), {
-    rt <- scan_path_for_rtools(gcc49 = TRUE, arch = "32")
-    expect_equal(rt$version, "3.3")
-  })
-})
+with_mock(
+  `devtools:::RCMD` = function(...) "invalid_path",
+  `base::file.info` = function(x) data.frame(exe = if (grepl("32", x)) "win32" else "win64"), {
 
-test_that("gcc-493 directory structure is found on 64 bit", {
-  withr::with_path(file.path("rtools-gcc493", "bin"), {
-    rt <- scan_path_for_rtools(gcc49 = TRUE, arch = "64")
-    expect_equal(rt$version, "3.3")
+  test_that("gcc-493 directory structure is found on 32 bit", {
+    withr::with_path(file.path("rtools-gcc493", "bin"), {
+      rt <- scan_path_for_rtools(gcc49 = TRUE, arch = "32")
+      expect_equal(rt$version, "3.3")
+    })
   })
-})
 
-test_that("gcc-493 directory structure like winbuilder is found on 32 bit", {
-  withr::with_path(file.path("rtools-gcc493-winbuilder", "bin"), {
-    rt <- scan_path_for_rtools(gcc49 = TRUE, arch = "32")
-    expect_equal(rt$version, "3.3")
+  test_that("gcc-493 directory structure is found on 64 bit", {
+    withr::with_path(file.path("rtools-gcc493", "bin"), {
+      rt <- scan_path_for_rtools(gcc49 = TRUE, arch = "64")
+      expect_equal(rt$version, "3.3")
+    })
   })
-})
-}
+
+  test_that("gcc-493 directory structure like winbuilder is found on 32 bit", {
+    withr::with_path(file.path("rtools-gcc493-winbuilder", "bin"), {
+      rt <- scan_path_for_rtools(gcc49 = TRUE, arch = "32")
+      expect_equal(rt$version, "3.3")
+    })
+  })
+})}

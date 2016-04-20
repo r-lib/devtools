@@ -27,6 +27,7 @@ environment:
   global:
     WARNINGS_ARE_ERRORS: 1
     _R_CHECK_FORCE_SUGGESTS_: 0
+    R_ARCH: x64
 
   matrix:
     - R_VERSION: oldrel
