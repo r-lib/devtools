@@ -1,5 +1,5 @@
 # R("-e 'str(as.list(Sys.getenv()))' --slave")
-R <- function(args, path = tempdir(), env_vars = character(), ...) {
+R <- function(args, path = tempdir(), env_vars = character(), fun = system_check, ...) {
   r <- file.path(R.home("bin"), "R")
 
   stopifnot(is.character(args))
@@ -21,7 +21,8 @@ R <- function(args, path = tempdir(), env_vars = character(), ...) {
     on.exit(set_path(old))
   }
 
-  system_check(r, args = args, env_vars = env_vars, path = path, ...)
+  fun <- match.fun(fun)
+  fun(r, args = args, env_vars = env_vars, path = path, ...)
 }
 
 #' Run R CMD xxx from within R
