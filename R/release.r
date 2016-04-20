@@ -67,7 +67,7 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
   }
 
   if (check) {
-    rule("Buiding and checking ", pkg$package, pad = "=")
+    rule("Building and checking ", pkg$package, pad = "=")
     check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE,
           build_args = args, run_dont_test = TRUE)
   }
