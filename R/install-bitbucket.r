@@ -19,7 +19,7 @@
 #' install_bitbucket("sulab/mygene.r@@default")
 #' install_bitbucket("dannavarro/lsr-package")
 #' }
-install_bitbucket <- function(repo, username, ref = "master", subdir = NULL,
+install_bitbucket <- function(repo, username = NULL, ref = "master", subdir = NULL,
                               auth_user = NULL, password = NULL, force = FALSE,
                               quiet = FALSE, ...) {
 
