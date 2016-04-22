@@ -1,42 +1,83 @@
 context("GitHub")
 
+with_mock <- function(name, value, code) {
+  env <- asNamespace("devtools")
+  orig_value <- env[[name]]
+  unlockBinding(name, env)
+  env[[name]] <- value
+  on.exit(env[[name]] <- orig_value)
+
+  force(code)
+}
+
 test_that("GitHub repo paths are parsed correctly", {
-  expect_equal(github_parse_path("devtools"), list(repo="devtools"))
-  expect_equal(github_parse_path("krlmlr/kimisc"), list(username="krlmlr", repo="kimisc"))
-  expect_equal(github_parse_path("my/test/pkg"), list(username="my", repo="test", subdir="pkg"))
-  expect_equal(github_parse_path("devtools@devtools-1.4"), list(repo="devtools", ref="devtools-1.4"))
-  expect_equal(github_parse_path("yihui/tikzDevice#23"), list(username="yihui", repo="tikzDevice", pull="23"))
-  expect_equal(github_parse_path("my/test/pkg@ref"), list(username="my", repo="test", subdir="pkg", ref="ref"))
-  expect_equal(github_parse_path("my/test/pkg#1"), list(username="my", repo="test", subdir="pkg", pull="1"))
-  expect_error(github_parse_path("test#6@123"), "Invalid GitHub path")
-  expect_error(github_parse_path("Teradata/teradataR/"), "Invalid GitHub path")
+  expect_equal(parse_git_repo("devtools"), list(repo="devtools"))
+  expect_equal(parse_git_repo("krlmlr/kimisc"), list(username="krlmlr", repo="kimisc"))
+  expect_equal(parse_git_repo("my/test/pkg"), list(username="my", repo="test", subdir="pkg"))
+  expect_equal(parse_git_repo("devtools@devtools-1.4"), list(repo="devtools", ref="devtools-1.4"))
+  expect_equal(parse_git_repo("yihui/tikzDevice#23"), list(username="yihui", repo="tikzDevice", ref=github_pull("23")))
+  expect_equal(parse_git_repo("my/test/pkg@ref"), list(username="my", repo="test", subdir="pkg", ref="ref"))
+  expect_equal(parse_git_repo("my/test/pkg#1"), list(username="my", repo="test", subdir="pkg", ref=github_pull("1")))
+  expect_error(parse_git_repo("test#6@123"), "Invalid git repo")
+  expect_error(parse_git_repo("Teradata/teradataR/"), "Invalid git repo")
+  expect_error(parse_git_repo("test@*unsupported-release"), "Invalid git repo")
 })
 
-test_that("GitHub URL is constructed correctly", {
-  # Mock github_pull_info() in a copy of github_get_conn() so that GitHub API is not queried for this test
-  github_pull_info <- function(repo, username, pull) { list(username=sprintf("user-%s", pull), ref=sprintf("pull-%s", pull)) }
-  github_get_conn <- devtools:::github_get_conn
-  formals(github_get_conn) <- c(formals(github_get_conn), list(github_pull_info=github_pull_info))
-  
-  expect_equal(github_get_conn("devtools")$url, "https://github.com/hadley/devtools/archive/master.zip")
-  expect_equal(github_get_conn("krlmlr/kimisc")$url, "https://github.com/krlmlr/kimisc/archive/master.zip")
-  expect_equal(github_get_conn("my/test/pkg")$url, "https://github.com/my/test/archive/master.zip")
-  expect_equal(github_get_conn("devtools@devtools-1.4")$url, "https://github.com/hadley/devtools/archive/devtools-1.4.zip")
-  expect_equal(github_get_conn("yihui/tikzDevice#23", github_pull_info=github_pull_info)$url, "https://github.com/user-23/tikzDevice/archive/pull-23.zip")
-  expect_equal(github_get_conn("my/test/pkg@ref")$url, "https://github.com/my/test/archive/ref.zip")
-  expect_equal(github_get_conn("my/test/pkg#1", github_pull_info=github_pull_info)$url, "https://github.com/user-1/test/archive/pull-1.zip")
-  expect_error(github_get_conn("test#6@123")$url, "Invalid GitHub path")
-})
+# Mock github_resolve_ref.github_pull so that GitHub API is not queried for this test
+mock_github_resolve_ref.github_pull <- function(x, params) {
+  params$username <- sprintf("user-%s", x)
+  params$ref <- sprintf("pull-%s", x)
+  params
+}
+
+# Mock github_resolve_ref.github_release so that GitHub API is not queried for this test
+mock_github_resolve_ref.github_release <- function(x, param) {
+  param$ref="latest-release"
+  param
+}
 
 test_that("GitHub parameters are returned correctly", {
-  # Mock github_pull_info() in a copy of github_get_conn() so that GitHub API is not queried for this test
-  github_pull_info <- function(repo, username, pull) { list(username=sprintf("user-%s", pull), ref=sprintf("pull-%s", pull)) }
-  github_get_conn <- devtools:::github_get_conn
-  formals(github_get_conn) <- c(formals(github_get_conn), list(github_pull_info=github_pull_info))
-  
-  expect_equal(github_get_conn("devtools")$repo, "devtools")
-  expect_equal(github_get_conn("krlmlr/kimisc")$username, "krlmlr")
-  expect_equal(github_get_conn("my/test/pkg")$subdir, "pkg")
-  expect_equal(github_get_conn("devtools@devtools-1.4")$ref, "devtools-1.4")
-  expect_equal(github_get_conn("yihui/tikzDevice#23", github_pull_info=github_pull_info)$pull, "23")
+  with_mock("github_resolve_ref.github_pull", mock_github_resolve_ref.github_pull, {
+    expect_equal(github_remote("hadley/devtools")$repo, "devtools")
+    expect_equal(github_remote("krlmlr/kimisc")$username, "krlmlr")
+    expect_equal(github_remote("my/test/pkg")$subdir, "pkg")
+    expect_equal(github_remote("hadley/devtools@devtools-1.4")$ref, "devtools-1.4")
+    expect_equal(github_remote("yihui/tikzDevice#23")$ref, "pull-23")
+  })
+
+  with_mock("github_resolve_ref.github_release", mock_github_resolve_ref.github_release, {
+    expect_equal(github_remote("yihui/tikzDevice@*release")$ref, "latest-release")
+    expect_equal(github_remote("my/test/pkg@*release")$ref, "latest-release")
+  })
+})
+
+mock_github_GET <- function(path) {
+  if (grepl("^repos/.*/pulls/.*$", path)) {
+    list(head=list(user=list(login="username"), ref="some-pull-request"))
+  } else if (grepl("^repos/.*/releases$", path)) {
+    list(list(tag_name="some-release"))
+  } else
+    stop("unexpected path: ", path)
+}
+
+test_that("GitHub references are resolved correctly", {
+  default_params <- as.list(stats::setNames(nm=c("repo", "username")))
+  with_mock("github_GET", mock_github_GET, {
+    expect_equal(github_resolve_ref(NULL, list())$ref, "master")
+    expect_equal(github_resolve_ref("some-ref", list())$ref, "some-ref")
+    expect_equal(github_resolve_ref(github_pull(123), default_params)$username, "username")
+    expect_equal(github_resolve_ref(github_pull(123), default_params)$ref, "some-pull-request")
+    expect_equal(github_resolve_ref(github_release(), default_params)$ref, "some-release")
+  })
+})
+
+test_that("Github repos with submodules are identified correctly", {
+  # Appveyor has a very low GitHub rate limit which causes this to fail often, so
+  # skip these tests
+  skip_on_appveyor()
+  skip_on_travis()
+
+  expect_equal(github_has_remotes(github_remote("hadley/devtools")), FALSE)
+  ## a r package repo known to use submodules
+  expect_equal(github_has_remotes(github_remote("armstrtw/rzmq")), TRUE)
 })

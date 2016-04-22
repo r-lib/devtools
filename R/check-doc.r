@@ -10,14 +10,13 @@
 #' @return Nothing. This function is called purely for it's side effects: if
 #   no errors there will be no output.
 #' @export
-#' @importFrom tools checkDocFiles
 #' @examples
 #' \dontrun{
-#' check_doc("mypkg")
+#' check_man("mypkg")
 #' }
-check_doc <- function(pkg = ".") {
+check_man <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  document(pkg, reload = FALSE)
+  document(pkg)
 
   old <- options(warn = -1)
   on.exit(options(old))
@@ -28,7 +27,7 @@ check_doc <- function(pkg = ".") {
   print_if_not_null(("tools" %:::% ".check_Rd_xrefs")(dir = pkg$path))
   print_if_not_null(("tools" %:::% ".check_Rd_contents")(dir = pkg$path))
 
-  print_if_not_null(checkDocFiles(dir = pkg$path))
+  print_if_not_null(tools::checkDocFiles(dir = pkg$path))
   # Can't run because conflicts with how devtools loads code
   # print_if_not_null(checkDocStyle(dir = pkg$path))
   # print_if_not_null(checkReplaceFuns(dir = pkg$path))
@@ -36,6 +35,12 @@ check_doc <- function(pkg = ".") {
   # print(undoc(dir = pkg$path))
 
   invisible()
+}
+
+#' @rdname check_man
+#' @usage NULL
+check_doc <- function(...) {
+  check_man(...)
 }
 
 print_if_not_null <- function(x) {

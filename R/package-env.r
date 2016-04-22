@@ -8,7 +8,7 @@ attach_ns <- function(pkg = ".") {
   }
 
   # This should be similar to attachNamespace
-  pkgenv <- attach(NULL, name = pkg_env_name(pkg))
+  pkgenv <- base::attach(NULL, name = pkg_env_name(pkg))
   attr(pkgenv, "path") <- getNamespaceInfo(nsenv, "path")
 }
 

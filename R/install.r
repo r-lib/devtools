@@ -13,6 +13,8 @@
 #' If the package is loaded, it will be reloaded after installation. This is
 #' not always completely possible, see \code{\link{reload}} for caveats.
 #'
+#' To install a package in a non-default library, use \code{\link[withr]{with_libpaths}}.
+#'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param reload if \code{TRUE} (the default), will automatically reload the
@@ -31,34 +33,62 @@
 #' @param dependencies \code{logical} indicating to also install uninstalled
 #'   packages which this \code{pkg} depends on/links to/suggests. See
 #'   argument \code{dependencies} of \code{\link{install.packages}}.
+#' @param upgrade_dependencies If \code{TRUE}, the default, will also update
+#'   any out of date dependencies.
 #' @param build_vignettes if \code{TRUE}, will build vignettes. Normally it is
 #'   \code{build} that's responsible for creating vignettes; this argument makes
 #'   sure vignettes are built even if a build never happens (i.e. because
-#'   \code{local = TRUE}.
+#'   \code{local = TRUE}).
 #' @param keep_source If \code{TRUE} will keep the srcrefs from an installed
 #'   package. This is useful for debugging (especially inside of RStudio).
 #'   It defaults to the option \code{"keep.source.pkgs"}.
 #' @param threads number of concurrent threads to use for installing
 #'   dependencies.
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
+#' @param force_deps whether to force installation of dependencies even if their
+#'   SHA1 reference hasn't changed from the currently installed version.
+#' @param metadata Named list of metadata entries to be added to the
+#'   \code{DESCRIPTION} after installation.
+#' @param ... additional arguments passed to \code{\link{install.packages}}
+#'   when installing dependencies. \code{pkg} is installed with
+#'   \code{R CMD INSTALL}.
 #' @export
 #' @family package installation
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
 #'   set.
-#' @importFrom utils install.packages
 install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     args = getOption("devtools.install.args"), quiet = FALSE,
-                    dependencies = NA, build_vignettes = !quick,
+                    dependencies = NA, upgrade_dependencies = TRUE,
+                    build_vignettes = FALSE,
                     keep_source = getOption("keep.source.pkgs"),
-                    threads = getOption("Ncpus", 1)) {
+                    threads = getOption("Ncpus", 1),
+                    force_deps = FALSE,
+                    metadata = remote_metadata(as.package(pkg)),
+                    ...) {
 
   pkg <- as.package(pkg)
+  check_build_tools(pkg)
 
-  if (!quiet) message("Installing ", pkg$package)
-  install_deps(pkg, dependencies = dependencies, threads = threads)
+  # Forcing all of the promises for the current namespace now will avoid lazy-load
+  # errors when the new package is installed overtop the old one.
+  # https://stat.ethz.ch/pipermail/r-devel/2015-December/072150.html
+  if (is_loaded(pkg)) {
+    eapply(ns_env(pkg), force, all.names = TRUE)
+  }
+
+  if (!quiet) {
+    message("Installing ", pkg$package)
+  }
+
+  # If building vignettes, make sure we have all suggested packages too.
+  if (build_vignettes && missing(dependencies)) {
+    dependencies <- TRUE
+  }
+  install_deps(pkg, dependencies = dependencies, upgrade = upgrade_dependencies,
+    threads = threads, force_deps = force_deps, quiet = quiet, ...)
 
   # Build the package. Only build locally if it doesn't have vignettes
-  has_vignettes <- length(pkgVignettes(dir = pkg$path)$doc > 0)
+  has_vignettes <- length(tools::pkgVignettes(dir = pkg$path)$docs > 0)
   if (local && !(has_vignettes && build_vignettes)) {
     built_path <- pkg$path
   } else {
@@ -76,54 +106,38 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   }
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
 
+  built_path <- normalizePath(built_path, winslash = "/")
   R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""),
     quiet = quiet)
 
-  if (reload) reload(pkg, quiet = quiet)
+  if (length(metadata) > 0) {
+    add_metadata(inst(pkg$package), metadata)
+  }
+
+  if (reload) {
+    reload(pkg, quiet = quiet)
+  }
   invisible(TRUE)
 }
 
-#' Install package dependencies
+#' Install package dependencies if needed.
 #'
 #' @inheritParams install
+#' @inheritParams package_deps
+#' @param ... additional arguments passed to \code{\link{install.packages}}.
 #' @export
 #' @examples
 #' \dontrun{install_deps(".")}
 install_deps <- function(pkg = ".", dependencies = NA,
-                         threads = getOption("Ncpus", 1)) {
-  pkg <- as.package(pkg)
-  info <- pkg_deps(pkg, dependencies)
+                         threads = getOption("Ncpus", 1),
+                         repos = getOption("repos"),
+                         type = getOption("pkgType"),
+                         ...,
+                         upgrade = TRUE,
+                         quiet = FALSE,
+                         force_deps = FALSE) {
 
-  # Packages that are not already installed or without required versions
-  needs_install <- function(pkg, compare, version) {
-    if (length(find.package(pkg, quiet = TRUE)) == 0) return(TRUE)
-    if (is.na(compare)) return(FALSE)
-
-    compare <- match.fun(compare)
-    !compare(packageVersion(pkg), version)
-  }
-  needed <- Map(needs_install, info$name, info$compare, info$version)
-  deps <- info$name[as.logical(needed)]
-  if (length(deps) == 0) return(invisible())
-
-  message("Installing dependencies for ", pkg$package, ":\n",
-    paste(deps, collapse = ", "))
-  install.packages(deps, dependencies = NA, Ncpus = threads)
-  invisible(deps)
-}
-
-pkg_deps <- function(pkg = ".", dependencies = NA) {
-  pkg <- as.package(pkg)
-
-  deps <- if (identical(dependencies, NA)) {
-    c("Depends", "Imports", "LinkingTo")
-  } else if (isTRUE(dependencies)) {
-    c("Depends", "Imports", "LinkingTo", "Suggests", "VignetteBuilder")
-  } else if (identical(dependencies, FALSE)) {
-    character(0)
-  } else dependencies
-
-  deps <- unlist(pkg[tolower(deps)], use.names = FALSE)
-
-  parse_deps(paste(deps, collapse = ','))
+  pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
+    type = type, force_deps = force_deps, quiet = quiet)
+  update(pkg, ..., Ncpus = threads, quiet = quiet, upgrade = upgrade)
 }

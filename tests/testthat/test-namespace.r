@@ -2,15 +2,21 @@ context("Namespace")
 
 # Is e an ancestor environment of x?
 is_ancestor_env <- function(e, x) {
-  x_par <- parenvs(x, all = TRUE)
-
-  for (p in x_par) {
-    if (identical(e, p)) return(TRUE)
-  }
-
-  return(FALSE)
+  if (identical(e, x))
+    return(TRUE)
+  else if (identical(x, emptyenv()))
+    return(FALSE)
+  else
+    is_ancestor_env(e, parent.env(x))
 }
 
+# Get parent environment n steps deep
+parent_env <- function(e, n = 1) {
+  if (n == 0)
+    e
+  else
+    parent_env(parent.env(e), n-1)
+}
 
 test_that("Loaded namespaces have correct version", {
   load_all("testNamespace")
@@ -35,6 +41,15 @@ test_that("Exported objects are visible from global environment", {
   expect_false(exists("b"))
   unload("testNamespace")
 })
+
+
+test_that("Missing exports don't result in error", {
+  expect_warning(load_all("testMissingNsObject"))
+  nsenv <- ns_env("testMissingNsObject")
+  expect_equal(nsenv$a, 1)
+  unload("testMissingNsObject")
+})
+
 
 test_that("All objects are loaded into namespace environment", {
   load_all("testNamespace")
@@ -91,9 +106,9 @@ test_that("Namespace, imports, and package environments have correct hierarchy",
   nsenv  <- ns_env("testNamespace")
   impenv <- imports_env("testNamespace")
 
-  expect_identical(parenvs(nsenv)[[2]], impenv)
-  expect_identical(parenvs(nsenv)[[3]], .BaseNamespaceEnv)
-  expect_identical(parenvs(nsenv)[[4]], .GlobalEnv)
+  expect_identical(parent_env(nsenv, 1), impenv)
+  expect_identical(parent_env(nsenv, 2), .BaseNamespaceEnv)
+  expect_identical(parent_env(nsenv, 3), .GlobalEnv)
 
   # pkgenv should be an ancestor of the global environment
   expect_true(is_ancestor_env(pkgenv, .GlobalEnv))
@@ -108,7 +123,7 @@ test_that("unload() removes package environments from search", {
   nsenv   <- ns_env("testNamespace")
   unload("testNamespace")
   unload(inst("compiler"))
-  unload(inst("splines"))
+  unload(inst("bitops"))
 
   # Should report not loaded for package and namespace environments
   expect_false(is_attached("testNamespace"))

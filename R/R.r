@@ -1,7 +1,19 @@
 # R("-e 'str(as.list(Sys.getenv()))' --slave")
-R <- function(options, path = tempdir(), env_vars = NULL, ...) {
-  options <- paste("--vanilla", options)
-  r_path <- file.path(R.home("bin"), "R")
+R <- function(args, path = tempdir(), env_vars = character(), fun = system_check, ...) {
+  r <- file.path(R.home("bin"), "R")
+
+  stopifnot(is.character(args))
+  args <- c(
+    "--no-site-file",
+    "--no-environ",
+    "--no-save",
+    "--no-restore",
+    "--quiet",
+    args
+  )
+
+  stopifnot(is.character(env_vars))
+  env_vars <- c(r_profile(), r_env_vars(), env_vars)
 
   # If rtools has been detected, add it to the path only when running R...
   if (!is.null(get_rtools_path())) {
@@ -9,10 +21,21 @@ R <- function(options, path = tempdir(), env_vars = NULL, ...) {
     on.exit(set_path(old))
   }
 
-  in_dir(path, system_check(r_path, options, c(r_env_vars(), env_vars), ...))
+  fun <- match.fun(fun)
+  fun(r, args = args, env_vars = env_vars, path = path, ...)
 }
 
-RCMD <- function(cmd, options, path = tempdir(), env_vars = NULL, ...) {
+#' Run R CMD xxx from within R
+#'
+#' @param cmd one of the R tools available from the R CMD interface.
+#' @param options a charater vector of options to pass to the command
+#' @param path the directory to run the command in.
+#' @param env_vars environment variables to set before running the command.
+#' @param ... additional arguments passed to \code{\link{system_check}}
+#' @return \code{TRUE} if the command succeeds, throws an error if the command
+#' fails.
+#' @export
+RCMD <- function(cmd, options, path = tempdir(), env_vars = character(), ...) {
   options <- paste(options, collapse = " ")
   R(paste("CMD", cmd, options), path = path, env_vars = env_vars, ...)
 }
@@ -21,24 +44,46 @@ RCMD <- function(cmd, options, path = tempdir(), env_vars = NULL, ...) {
 #'
 #' Devtools sets a number of environmental variables to ensure consistent
 #' between the current R session and the new session, and to ensure that
-#' everying behaves the same across systems. It also suppresses a common
+#' everything behaves the same across systems. It also suppresses a common
 #' warning on windows, and sets \code{NOT_CRAN} so you can tell that your
-#' code is not running on CRAN.
+#' code is not running on CRAN. If \code{NOT_CRAN} has been set externally, it
+#' is not overwritten.
 #'
 #' @keywords internal
 #' @return a named character vector
 #' @export
 r_env_vars <- function() {
-  c("LC_ALL" = "C",
+  vars <- c(
     "R_LIBS" = paste(.libPaths(), collapse = .Platform$path.sep),
     "CYGWIN" = "nodosfilewarning",
     # When R CMD check runs tests, it sets R_TESTS. When the tests
-    # themeselves run R CMD xxxx, as is the case with the tests in
+    # themselves run R CMD xxxx, as is the case with the tests in
     # devtools, having R_TESTS set causes errors because it confuses
-    # the R subprocesses. Unsetting it here avoids those problems.
+    # the R subprocesses. Un-setting it here avoids those problems.
     "R_TESTS" = "",
-    "NOT_CRAN" = "true",
+    "R_BROWSER" = "false",
+    "R_PDFVIEWER" = "false",
     "TAR" = auto_tar())
+
+  if (is.na(Sys.getenv("NOT_CRAN", unset = NA))) {
+    vars[["NOT_CRAN"]] <- "true"
+  }
+
+  vars
+}
+
+# Create a temporary .Rprofile based on the current "repos" option
+# and return a named vector that corresponds to environment variables
+# that need to be set to use this .Rprofile
+r_profile <- function() {
+  tmp_user_profile <- file.path(tempdir(), "Rprofile-devtools")
+  tmp_user_profile_con <- file(tmp_user_profile, "w")
+  on.exit(close(tmp_user_profile_con), add = TRUE)
+  writeLines("options(repos =", tmp_user_profile_con)
+  dput(getOption("repos"), tmp_user_profile_con)
+  writeLines(")", tmp_user_profile_con)
+
+  c(R_PROFILE_USER = tmp_user_profile)
 }
 
 # Determine the best setting for the TAR environmental variable
@@ -53,4 +98,3 @@ auto_tar <- function() {
   no_rtools <- is.null(get_rtools_path())
   if (windows && no_rtools) "internal" else ""
 }
-

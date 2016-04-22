@@ -15,8 +15,8 @@
 #'   the parent directory of the package.
 #' @param binary Produce a binary (\code{--binary}) or source (
 #'   \code{--no-manual --no-resave-data}) version of the package.
-#' @param vignettes For source packages: if \code{FALSE}, don't build PDF
-#'   vignettes (\code{--no-vignettes}).
+#' @param vignettes,manual For source packages: if \code{FALSE}, don't build PDF
+#'   vignettes (\code{--no-build-vignettes}) or manual (\code{--no-manual}).
 #' @param args An optional character vector of additional command
 #'   line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},
 #'   or \code{R CMD install} if \code{binary = TRUE}.
@@ -26,21 +26,36 @@
 #' @return a string giving the location (including file name) of the built
 #'  package
 build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
-                  args = NULL, quiet = FALSE) {
+                  manual = FALSE, args = NULL, quiet = FALSE) {
   pkg <- as.package(pkg)
   if (is.null(path)) {
     path <- dirname(pkg$path)
   }
 
+  check_build_tools(pkg)
   compile_rcpp_attributes(pkg)
 
   if (binary) {
     args <- c("--build", args)
     cmd <- paste0("CMD INSTALL ", shQuote(pkg$path), " ",
       paste0(args, collapse = " "))
-    ext <- if (.Platform$OS.type == "windows") "zip" else "tgz"
+    if (.Platform$OS.type == "windows") {
+      ext <- ".zip"
+    } else if (grepl("darwin", R.version$os)) {
+      ext <- ".tgz"
+    } else {
+      ext <- paste0("_R_", Sys.getenv("R_PLATFORM"), ".tar.gz")
+    }
   } else {
-    args <- c(args, "--no-manual", "--no-resave-data")
+    args <- c(args, "--no-resave-data")
+
+    if (manual && !has_latex(verbose = TRUE)) {
+      manual <- FALSE
+    }
+
+    if (!manual) {
+      args <- c(args, "--no-manual")
+    }
 
     if (!vignettes) {
       args <- c(args, "--no-build-vignettes")
@@ -49,10 +64,13 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
     cmd <- paste0("CMD build ", shQuote(pkg$path), " ",
       paste0(args, collapse = " "))
 
-    ext <- "tar.gz"
+    ext <- ".tar.gz"
   }
-  with_libpaths(c(tempdir(), .libPaths()), R(cmd, path, quiet = quiet))
-  targz <- paste0(pkg$package, "_", pkg$version, ".", ext)
+
+  # Run in temporary library to ensure that default library doesn't get
+  # contaminated
+  withr::with_temp_libpaths(R(cmd, path, quiet = quiet))
+  targz <- paste0(pkg$package, "_", pkg$version, ext)
 
   file.path(path, targz)
 }
@@ -72,21 +90,26 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
 #' @inheritParams build
 #' @param version directory to upload to on the win-builder, controlling
 #'   which version of R is used to build the package. Possible options are
-#'   listed on \url{http://win-builder.r-project.org/}. Defaults to the
-#'   released version of R.
-#' @importFrom RCurl ftpUpload
+#'   listed on \url{http://win-builder.r-project.org/}. Defaults to R-devel.
 #' @export
 #' @family build functions
 build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
                       args = NULL, quiet = FALSE) {
   pkg <- as.package(pkg)
 
-  version <- match.arg(version, several.ok = TRUE)
+  if (missing(version)) {
+    version <- "R-devel"
+  } else {
+    version <- match.arg(version, several.ok = TRUE)
+  }
 
   if (!quiet) {
     message("Building windows version of ", pkg$package,
-            " for ", paste(version, collapse=", "),
+            " for ", paste(version, collapse = ", "),
             " with win-builder.r-project.org.\n")
+    if (interactive() && yesno("Email results to ", maintainer(pkg)$email, "?")) {
+      return(invisible())
+    }
   }
 
   built_path <- build(pkg, tempdir(), args = args, quiet = quiet)
@@ -94,10 +117,10 @@ build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
 
   url <- paste0("ftp://win-builder.r-project.org/", version, "/",
                 basename(built_path))
-  lapply(url, ftpUpload, what = built_path)
+  lapply(url, upload_ftp, file = built_path)
 
   if (!quiet) {
-    message("Check your email for a link to the built package",
+    message("Check ", maintainer(pkg)$email, " for a link to the built package",
             if (length(version) > 1) "s" else "",
             " in 30-60 mins.")
   }

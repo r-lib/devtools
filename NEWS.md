@@ -1,24 +1,675 @@
+# devtools 1.11.1.9000
+
+# devtools 1.11.1
+
+* Bug fix in `search_path_for_rtools()` using the gcc-4.9.3 toolchain when
+  there is no rtools setting in the windows registry. (@jimhester, #1155)
+
+# devtools 1.11.0
+
+## Infrastructure helpers
+
+* `create_description()` now sets `Encoding: UTF-8`. This helps non-English
+  package authors (#1123).
+
+* All `use_` function have been overhauled to be more consistent, particularly
+  arround notification. Most functions now also ask to overwrite if a file 
+  already exists (#1074).
+
+* `use_coverage()` now adds covr to "Suggests", rather than recommending you
+  install it explicitly in `.travis.yml`.
+
+* `use_cran_badge()` now uses HTTPS URL (@krlmlr, #1124).
+
+* `use_github()` now confirms that you've picked a good title and description
+  (#1092) and prints the url of the repo (#1063).
+
+* `use_news()`, and `use_test()` open the files in RStudio (if you're using
+  it and have the rstudioapi package installed).
+
+* `use_testthat()` tells you what it's doing (#1056).  
+
+* `use_travis()` generates a template compatible with the newest R-travis.
+
+* `use_readme_md()` creates a basic `README.md` template (#1064).
+
+* `use_revdep()` has an updated template for the new revdep check 
+  system (#1090, @krlmlr). 
+
+* Removed the deprecated `use_coveralls()`, `add_rstudio_project()`, 
+  `add_test_infrastructure()`, and `add_travis()`.
+  
+## Checks and and release()
+
+* `check()` now always succeeds (instead of throwing an error when 
+  `R CMD check` finds an `ERROR`), returning an object that summarises
+  the check failures.
+
+* `check()` gains `run_dont_test` and `manual` arguments to control whether or 
+  not `\donttest{}` tests are tested, or manuals are built. This defaults to 
+  `FALSE`, but `release()` runs check with it set to `TRUE` (#1071; #1087, 
+  @krlmlr).
+
+* The `cleanup` argument to `check()` is deprecated: it now always returns
+  the path to the check directory.
+
+* `check_built()` allows you to run `R CMD check` on an already built package.
+
+* `check_cran()` suppresses X11 with `DISPLAY = ""`.
+
+* `release()` has been tweaked to improve the order of the questions, 
+  and to ensure that you're ok with problems. It  warns if both `inst/NEWS.Rd` 
+  and `NEWS.md` exist (@krlmlr, #1135), doesn't throw error if Git head is 
+  detached (@krlmlr, #1136).
+
+* `release()` gains an `args` argument to control build options, e.g.
+  to allow passing `args = "--compact-vignettes=both"` for packages with
+  heavy PDF vignettes (@krlmlr, #1077).
+
+* `system_check()` gains new arguments `path` to controls the working directory
+  of the command, and `throw` to control whether or not it throws an error
+  on command failure. `env` has been renamed to the more explicit `env_vars`.
+
+## Revdep checks
+
+`revdep_check()` has been overhauled. All `revdep_` functions now work like 
+other devtools functions, taking a path to the package as the first argument.
+
+`revdep_check()` now saves its results to disk as `check/check.rds`, and the other `revdep()` functions read from that cache. This also allows you to resume a partial run with `revdep_check_resume()`. This should be a big time saver if something goes unexpected wrong in the middle of the checks. You can blow away the cache and start afresh with `revdep_check_reset()`.
+
+`revdep_check_save_summary()` now creates `README.md` to save one level of clicking in github. It also creates a `problems.md` that contains only results for only packages that had warnings or errors. Each problem is limited to at most 25 lines of output - this avoids lengthy output for failing examples. `revdep_check_print_problems()` prints a bulleted list of problems, suitable for inclusion in your `cran-comments.md`.
+
+Summary results are reported as they come in, every then messages you'll get a message giving elapsed and estimated remaining time.
+
+An experimental `revdep_email()` emails individual maintainers with their `R CMD check` summary results (#1014). See testthat and dplyr for example usage.
+
+There were a handful of smaller fixes:
+
+* `revdep_check()` doesn't complain about missing `git2r` package anymore
+  (#1068, @krlmlr).
+
+* Package index caches for `revdep_check()` now time out after 30 minutes.
+
+* `revdep_check_save_logs()` has been removed - it is just not that useful.
+
+* `revdep_check_summary()` has been removed - it never should have been
+  part of the exported API.
+
+## Other improvements
+
+* Devtools now uses new gcc toolchain on windows, if installed (@jimhester).
+
+* `install_git()` now allows you to pass credentials to git2r to specify
+  specific ssh credentials (@onlymee, #982)
+
+* `load_all()` now sources all test helpers if you use testthat. This makes it 
+  much easier to interactively run tests (#1125). `load_all()` also correctly 
+  handles `unix` and `windows` subdirectories within `R` (@gaborcsardi, #1102)
+
+* `build_win()` defaults to only R-devel, since this is most commonly
+  what you want.
+
+* Help shims now inform you that you're using development documentation 
+  (#1049).
+
+* `git_sha1()` Fix fetching the latest git commit so that it also works
+  for shallow git clones, i.e. git clones which make use of depth.
+  (#1048, #1046, @nparley)
+
+# devtools 1.10.0
+
+## New features
+
+* `curl`, `evaluate`, `roxygen2` and `rversions` have been moved from Imports
+  to Suggests to lighten the dependency load of devtools. If you run a 
+  function that needs one of the packages, you'll prompted to install it
+  (#962, @jimhester).
+
+* Devtools uses a new strategy for detecting RTools on windows: it now only 
+  looks for Rtools if you need to `load_all()` or `build()` a package with
+  compiled code. This should make it easier to work with devtools if
+  you're developing pure R packages (#947).
+
+* `package_file()` lets you find files inside a package. It starts by 
+  finding the root directory of the package (i.e. the directory that contains 
+  `DESCRIPTION`) (#985).
+
+* `use_news_md()` adds a basic `NEWS.md` template (#957).
+
+* `use_mit_license()` writes the necessary infrastructure to declare and 
+  release an R package under the MIT license in a CRAN-compliant way. 
+  (#995, @kevinushey)
+
+* `check(cran = TRUE)` adds `--run-donttest` since you do need to test
+  code in `\dontest()` for CRAN submission (#1002).
+
+## Package installation
+
+* `install()` installs packages specified in the `Additional_repositories`
+  field, such as drat repositories. (#907, #1028, @jimhester). It 
+  correctly installs missing dependencies (#1013, @gaborcsardi). If called on a
+  Bioconductor package, include the Bioconductor repositories if they are not 
+  already set (#895, @jimhester).
+  
+* `install()` gains a `metadata` argument which lets you add extra fields to
+  the `DESCRIPTION` on install. (#1027, @rmflight)
+  
+* `install_github()` and `install_git()` only downloads and installs the
+  package if the remote SHA1 reference differs from the currently installed 
+  reference (#903, @jimhester).
+
+* `install_local()` captures git and github information and stores it in the
+  `DESCRIPTION` (#1027, @rmflight).
+
+* `install_version()` is more robust when handling multiple repos (#943, #1030,
+  @jimhester).
+
+* Bugfix for `Remotes: ` feature that prevented it from working if devtools was
+  not attached as is done in travis-r (#936, @jimhester).
+
+## Bug fixes and minor improvements
+
+* `check_dev_versions()` checks only package dependencies (#983).
+
+* `check_man()` replaces `check_doc()` (since most other functions are
+  named after the corresponding directory). `check_doc()` will hang around
+  as an alias for the forseeable future (#958).
+
+* `create()` produces a dummy namespace will fake comment so roxygen2 will 
+  overwrite silently (#1016).
+
+* `create()` and `setup()` are more permissive -- they now accept a path to
+  either a new directory or empty directory. (#966, @kevinushey)
+
+* `document()` now only runs `update_collate()` once.
+
+* `load_all()` resolves a longstanding lazy load database corruption issue when 
+  reloading packages which define S3 methods on generics from base or other 
+  packages (#1001, @jimhester).
+
+* `release_checks()` gains two new checks:
+
+  * `check_vignette_titles()` checks that your vignette titles aren't the 
+    default "Vignette Title" (#960, @jennybc). 
+  
+  * `check_news_md()` checks that `NEWS.md` isn't in your `.Rbuildignore`
+    (since it's now supported by CRAN, #1042).
+
+* `revdep_check()`:
+
+    * More verbose about which package is installed (#926, @krlmlr)
+
+    * Verifies the integrity of already downloaded package archives 
+      (#930, @krlmlr)
+
+    * Is now more tolerant of errors when retrieving the summary for a
+      checked package (#929, @krlmlr). 
+
+    * When `ncpus > 1`, it includes the package name for when so you know 
+      which package has failed and can start looking at the output without 
+      needing to wait for all packages to finish (@mattdowle).
+
+    * Uses proper repository when `BiocInstaller::useDevel(TRUE)` 
+      (#937, @jimhester).
+
+* Shimmed `system.file()` now respects `mustWork = TRUE` and throws an error
+  if the file does not exist (#1034).
+
+* `use_appveyor()` template now creates `failure.zip` artifact instead of
+  polluting the logs with `R CMD check` output (#1017, @krlmlr, @HenrikBengtsson).
+
+* `use_cran_comments()` template has been improved (#1038).
+
+* `use_data()` now warns when trying to save the same object twice,
+  and stops if there is no object to save (#948, @krlmlr).
+
+* `use_revdep_check()` no longer includes `revdep_check_save_logs` in 
+  default template. I found I never used the logs and they just cluttered up
+  the package directory (#1003).
+
+* `with_*()` functions have moved into the withr package, and devtools
+  functions have been deprecated (#925, @jimhester).
+
+# devtools 1.9.1
+
+* Avoid importing heavy dependencies to speed up loading (#830, @krlmlr).
+
+* Remove explicit `library(testthat)` call in `test()` (#798, @krlmlr).
+
+* `as.package()` and `load_all()` gain new argument `create`. Like other 
+  functions with a `pkg` argument, `load_all()` looks for a `DESCRIPTION` file 
+  in parent directories - if `create = TRUE` it will be automatically
+  created if there's a `R/` or `data/` directory (#852, @krlmlr).
+
+* `build_vignettes()` gains dependencies argument (#825, @krlmlr).
+
+* `build_win()` now uses `curl` instead of `RCurl` for ftp upload.
+
+* `build_win()` asks for consent to receive e-mail at maintainer address
+  in interactive mode (#800, @krlmlr).
+
+* `check()` now uses a better strategy when `cran = TRUE`. Instead of 
+  attempting to simulate `--as-cran` behaviour by turning on certain env vars,
+  it now uses `--as-cran` and turns off problematic checks with env vars (#866).
+  The problematic `cran_env_vars()` function has been removed.
+
+* `find_rtools()` now looks for registry keys in both HKCU (user) and 
+  HKLM (admin) locations (@Kevin-Jin, #844)
+
+* `install()` can now install dependencies from remote repositories by
+  specifying them as `Remotes` in the `DESCRIPTION` file (#902, @jimhester).
+  See `vignette("dependencies")` for more details.
+
+* `install_*()` detects if called on a Bioconductor package and if so,
+  automatically includes the Bioconductor repositories if needed (#895,
+  @jimhester).
+
+* `install_deps()` now automatically upgrades out of date dependencies. This
+  is typically what you want when you're working on a development version of a 
+  package. To suppress this behaviour, set `upgrade_dependencies = FALSE` 
+  (#863). `install_deps()` is more careful with `...` - this means additional
+  arguments to `install_*` are more likely to work (#870).
+
+* `install_gitorious()` has been removed since gitorious no longer exists
+  (#913).
+
+* `load_all()` no longer fails if a `useDynLib()` entry in the NAMESPACE 
+  is incorrect. This should make it easy to recover from an incorrect
+  `@useDynLib`, because re-documenting() should now succeed.
+
+* `release()` works for packages not located at root of git repository 
+  (#845, #846, @mbjones).
+
+* `revdep_check()` now installs _suggested_ packages by default (#808), and 
+  sets `NOT_CRAN` env var to `false` (#809). This makes testing more similar to
+  CRAN so that more packages should pass cleanly. It also sets `RGL_USE_NULL`
+  to `true` to stop rgl windows from popping up during testing (#897). It
+  also downloads all source packages at the beginning - this makes life a 
+  bit easier if you're on a flaky internet connection (#906).
+  
+* New `uninstall()` removes installed package (#820, @krlmlr).
+
+* Add `use_coverage()` function to add codecov.io or coveralls.io to a project,
+  deprecate `use_coveralls()` (@jimhester, #822, #818).
+  
+* `use_cran_badge()` uses canonical url form preferred by CRAN.
+
+* `use_data()` also works with data from the parent frame (#829, @krlmlr).
+
+* `use_git_hook()` now creates `.git/hooks` if needed (#888)
+
+* GitHub integration extended: `use_github()` gains a `protocol` argument (ssh or https), populates URL and BugReports fields of DESCRIPTION (only if non-existent or empty), pushes to the newly created GitHub repo, and sets a remote tracking branch. `use_github_links()` is a new exported function. `dr_github()` diagnoses more possible problems. (#642, @jennybc).
+
+* `use_travis()`: Default travis script leaves notifications on default 
+  settings.
+
+* `uses_testthat()` and `check_failures()` are now exported (#824, #839, 
+  @krlmlr).
+
+* `use_readme_rmd()` uses `uses_git()` correctly  (#793).
+
+* `with_debug()` now uses `with_makevars()` rather than `with_env()`, because R
+  reads compilation variables from the Makevars rather than the environment
+  (@jimhester, #788).
+
+* Properly reset library path after `with_lib()` (#836, @krlmlr).
+
+* `remove_s4classes()` performs a topological sort of the classes
+  (#848, #849, @famuvie).
+
+* `load_all()` warns (instead of failing) if importing symbols, methods, or classes
+   from `NAMESPACE` fails (@krlmlr, #921).
+
+# devtools 1.8.0
+ 
+## Helpers
+
+* New `dr_devtools()` runs some common diagnostics: are you using the 
+  latest version of R  and devtools? It is run automatically by 
+  `release()` (#592).
+
+* `use_code_of_conduct()` adds a contributor code of conduct from 
+  http://contributor-covenant.org. (#729)
+
+* `use_coveralls()` allows you to easily add test coverage with coveralls
+  (@jimhester, #680, #681).
+  
+* `use_git()` sets up a package to use git, initialising the repo and
+  checking the existing files.
+
+* `use_test()` adds a new test file (#769, @krlmlr).
+
+* New `use_cran_badge()` adds a CRAN status badge that you can copy into a README file. Green indicates package is on CRAN. Packages not yet submitted or accepted to CRAN get a red badge.
+
+## Package installation and info
+
+* `build_vignettes()` automatically installs the VignetteBuilder package,
+  if necessary (#736).
+
+* `install()` and `install_deps()` gain a `...` argument, so additional
+  arguments can be passed to `utils::install.packages()` (@jimhester, #712).
+  `install_svn()` optionally accepts a revision (@lev-kuznetsov, #739).
+  `install_version()` now knows how to look in multiple repos (#721).
+
+* `package_deps()` (and `dev_package_deps()`) determines all recursive 
+  dependencies and whether or not they're up-to-date (#663). Use
+  `update(package_deps("xyz"))` to update out of date dependencies. This code 
+  is used in `install_deps()` and `revdep_check()` - it's slightly more 
+  aggressive than previous code (i.e. it forces you to use the latest version), 
+  which should avoid problems when you go to submit to CRAN.
+
+* New `update_packages()` will install a package (and its dependencies) only if
+  they are missing or out of date (#675).
+
+* `session_info()` can now take a vector of package names, in which case it
+  will print the version of those packages and their dependencies (#664).
+
+## Git and github
+
+* Devtools now uses the git2r package to inspect git properties and install
+  remote git packages with `install_git()`. This should be considerably
+  more reliable than the previous strategy which involves calling the 
+  command line `git` client. It has two small downsides: `install_git()`
+  no longer accepts additional `args`, and must do a deep clone when
+  installing.
+
+* `dr_github()` checks for common problems with git/github setup (#643).
+
+* If you use git, `release()` now warns you if you have uncommited changes,
+  or if you've forgotten to synchronise with the remote (#691).
+
+* `install_github()` warns if repository contains submodules (@ashander, #751).
+
+## Bug fixes and minor improvements
+
+* Previously, devtools ran all external R processes with `R --vanilla`.
+  Now it only suppresses user profiles, and constructs a custom `.Rprofile` to
+  override the default.  Currently, this `.Rprofile` sets up the `repos` option.
+  Among others, this enables the cyclic dependency check in `devtools::release`
+  (#602, @krlmlr).
+
+* `R_BROWSER` and `R_PDFVIEWER` environment variables are set to "false" to 
+  suppress random windows opening during checks.
+
+* Devtools correctly identifies RTools 3.1 and 3.2 (#738), and
+  preserves continuation lines in the `DESCRIPTION` (#709).
+
+* `dev_help()` now uses `normalizePath()`. Hopefully this will make it more
+  likely to work if you're on windows and have a space in the path.
+
+* `lint()` gains a `cache` argument (@jimhester, #708).
+
+* Fixed namespace issues related to `stats::setNames()` (#734, #772) and 
+  `utils::unzip()` (#761, @robertzk).
+
+* `release()` now reminds you to check the existing CRAN check results page
+  (#613) ands shows file size before uploading to CRAN (#683, @krlmlr).
+
+* `RCMD()` and `system_check()` are now exported so they can be used by other 
+  packages. (@jimhester, #699).
+
+* `revdep_check()` creates directories if needed (#759).
+
+* `system_check()` combines arguments with ` `, not `, `. (#753)
+
+* `test()` gains an `...` argument so that additional arguments can be passed
+  to `testthat::test_dir` (@jimhester, #747)
+
+* `use_travis()` now suggests you link to the svg icon since that looks a 
+  little sharper. Default template sets `CRAN: http://cran.rstudio.com/` to 
+  enable the cyclic dependency check.
+
+* `NOT_CRAN` envvar no longer overrides externally set variable.
+
+* `check(check_version = TRUE)` also checks spelling of the `DESCRIPTION`; if no
+  spell checker is installed, a warning is given (#784, @krlmlr).
+
+# devtools 1.7.0
+
+## Improve reverse dependency checking
+
+Devtools now supports a new and improved style of revdep checking with `use_revdep()`. This creates a new directory called `revdep` which contains a `check.R` template. Run this template to check all reverse dependencies, and save summarised results to `check/summary.md`. You can then check this file into git, making it much easier to track how reverse dependency results change between versions. The documentation for `revdep_check()` is much improved, and should be more useful (#635)
+
+I recommend that you specify a library to use when checking with `options("devtools.revdep.libpath")`. (This should be a directory that already exists). This should be difference from your default library to keep the revdep environment isolated from your development environment.
+
+I've also tweaked the output of `revdep_maintainers()` so it's easier to copy and paste into an email (#634). This makes life a little easier pre-release.
+
+## New helpers
+
+* `lint()` runs `lintr::lint_package()` to check style consistency and errors
+  in a package. (@jimhester, #694)
+
+* `use_appveyor()` sets up a package for testing with AppVeyor (@krlmlr, #549).
+
+* `use_cran_comments()` creates a `cran-comments.md` template and adds it
+  to `.Rbuildignore` to help with CRAN submissions. (#661)
+
+* `use_git_hook()` allows you to easily add a git hook to a package.
+
+* `use_readme_rmd()` sets up a template to generate a `README.md` from a
+  `README.Rmd` with knitr.
+
+## Minor improvements
+
+* Deprecated `doc_clean` argument to `check()` has been removed.
+
+* Initial package version in `create()` is now `0.0.0.9000` (#632).
+ `create()` and `create_description()` checks that the package name is 
+  valid  (#610).
+
+* `load_all()` runs `roxygen2::update_collate()` before loading code. This
+  ensures that files are sourced in the way you expect, as defined by 
+  roxygen `@include` tags. If you don't have any `@include` tags, the
+  collate will be not be touched (#623).
+
+* `session_info()` gains `include_base` argument to also display loaded/attached
+  base packages (#646).
+
+* `release()` no longer asks if you've read the CRAN policies since the 
+  CRAN submission process now asks the same question (#692). 
+  
+    `release(check = TRUE)` now runs some additional custom checks. These include:
+    
+    * Checking that you don't depend on a development version of a package.
+    
+    * Checking that the version number has exactly three components (#633).
+    
+    `release()` now builds packages without the `--no-manual` switch, both for
+    checking and for actually building the release package (#603, @krlmlr). 
+    `build()` gains an additional argument `manual`, defaulting to `FALSE`, 
+    and `check()` gains `...` unmodified to `build()`.
+  
+* `use_travis()` now sets an environment variable so that any WARNING will
+  also cause the build to fail (#570).
+
+* `with_debug()` and `compiler_flags()` set `CFLAGS` etc instead of 
+  `PKG_CFLAGS`. `PKG_*` are for packages to use, the raw values are for users
+  to set. (According to http://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Using-Makevars)
+
+* New `setup()` works like `create()` but assumes an existing, not necessarily 
+  empty, directory (#627, @krlmlr).
+
+## Bug fixes
+
+* When installing a pull request, `install_github()` now uses the repository
+  associated with the pull request's branch (and not the repository of the user
+  who created the pull request) (#658, @krlmlr).
+
+* `missing_s3()` works once again (#672)
+
+* Fixed scoping issues with `unzip()`.
+
+* `load_code()` now executes the package's code with the package's root as
+  working directory, just like `R CMD build` et al. (#640, @krlmlr).
+
+# devtools 1.6.1
+
+* Don't set non-portable compiler flags on Solaris.
+
+* The file `template.Rproj` is now correctly installed and the function
+  `use_rstudio` works as it should. (#595, @hmalmedal)
+
+* The function `use_rcpp` will now create the file `src/.gitignore` with the
+  correct wildcards. (@hmalmedal)
+
+* The functions `test`, `document`, `load_all`, `build`, `check` and any
+  function that applies to some package directory will work from subdirectories
+  of a package (like the "R" or "inst/tests" directories). (#616, @robertzk)
+
+# devtools 1.6
+
+## Tool templates and `create()`
+
 * `create()` no longer generates `man/` directory - roxygen2 now does
-  this automatically.
+  this automatically. It also no longer generates an package-level doc
+  template. If you want this, use `use_package_doc()`. It also makes a dummy 
+  namespace so that you can build & reload without running `document()` first.
+
+* New `use_data()` makes it easy to include data in a package, either 
+  in `data/` (for exported datasets) or in `R/sysdata.rda` (for internal
+  data). (#542)
+  
+* New `use_data_raw()` creates `data-raw/` directory for reproducible
+  generation of `data/` files (#541).
+
+* New `use_package()` allows you to set dependencies (#559). 
+
+* New `use_package_doc()` sets up an Roxygen template for package-level
+  docs.
 
 * New `use_rcpp()` sets up a package to use Rcpp.
+  
+* `use_travis()` now figures out your github username and repo so it can 
+  construct the markdown for the build image. (#546)
 
-* New `use_knitr()` sets up a package to use knitr for vignettes.
+* New `use_vignette()` creates a draft vignette using Rmarkdown (#572).
+
+* renamed `add_rstudio_project()` to `use_rstudio()`, `add_travis()` to 
+  `use_travis()`, `add_build_ignore()` to `use_build_ignore()`, and 
+  `add_test_infrastructure()` to `use_testthat()` (old functions are 
+  aliased to new)
+
+## The release process
+
+* You can add arbitrary extra questions to `release()` by defining a function 
+  `release_questions()` in your package. Your `release_questions()` should 
+  return a character vector of questions to ask (#451). 
+
+* `release()` uses new CRAN submission process, as implemented by 
+  `submit_cran()` (#430).
+
+## Package installation
+
+* All `install_*` now use the same code and store much useful metadata.
+  Currently only `session_info()` takes advantage of this information,
+  but it will allow the development of future tools like generic update
+  functions.
+  
+* Vignettes are no longer installed by default because they potentally require 
+  all suggested packages to also be installed. Use `build_vignettes = TRUE` to 
+  force building and to install all suggested packages (#573).
+  
+* `install_bitbucket()` has been bought into alignment with `install_github()`:
+  this means you can now specify repos with the compact `username/repo@ref`
+  syntax. The `username` is now deprecated. 
+    
+* `install_git()` has been simplified and many of the arguments have changed 
+  names for consistency with metadata for other package installs.
+
+* `install_github()` has been considerably improved:
+
+    * `username` is deprecated - please include the user in the repo name: 
+      `rstudio/shiny`, `hadley/devtools` etc. 
+      
+    * `dependencies = TRUE` is no longer forced (regression in 1.5) 
+       (@krlmlr, #462).
+      
+    * Deprecated parameters `auth_user`, `branch`, `pull` and `password` have 
+      all been removed.
+  
+    * New `host` argument which allows you to install packages from github 
+      enterprise (#410, #506). 
+    
+    * The GitHub API is used to download archive file (@krlmlr, #466) - this
+      makes it less likely to break in the future.
+  
+    * To download a specified pull request, use `ref = github_pull(...)`
+      (@krlmlr, #509). To install the latest release, use `"user/repo@*release"` 
+      or `ref = github_release()` (@krlmlr, #350).
+
+* `install_gitorious()` has been bought into alignment with `install_github()`:
+  this means you can now specify repos with the compact `username/repo@ref`
+  syntax. You must now always supply user (project) name and repo.
+
+* `install_svn()` lets you install an R package from a subversion repository
+  (assuming you have subversion installed).
+  
+* `decompress()` and hence `install_url()` now work when the downloaded
+  file decompresses without additional top-level directory (#537).
+
+## Other minor improvements and bug fixes
+
+* If you're using Rstudio, and you you're trying to build a binary package
+  without the necessary build tools, Rstudio will prompt to download and
+  install the right thing. (#488)
+
+* Commands are no longer run with `LC_ALL=C` - this no longer seems 
+  necessary (#507).
+
+* `build(binary = TRUE)` creates an even-more-temporary package library
+  avoid conflicts (#557).
+
+* `check_dir()` no longer fails on UNC paths (#522).
+
+* `check_devtools()` also checks for dependencies on development versions
+  of packages (#534).
+
+* `load_all()` no longer fails on partial loading of a package containing
+  S4 or RC classes (#577).
+
+* On windows, `find_rtools()` is now run on package load, not package
+  attach.
+
+* `help()`, `?`, and `system.file()` are now made available when a package is
+  loaded with `load_all()`, even if the devtools package isn't attached.
+
+* `httr` 0.3 required (@krlmlr, #466).
+
+* `load_all()` no longer gives an error when objects listed as exports are
+  missing.
+  
+* Shim added for `library.dynam.unload()`.
+
+* `loaded_packages()` now returns package name and path it was loaded from. 
+  (#486)
+
+* The `parenvs()` function has been removed from devtools, because is now in the
+  pryr package.
+
+* `missing_s3()` uses a better heuristic for determining if a function
+  is a S3 method (#393).
+
+* New `session_info()` provides useful information about your R session.
+  It's a little more focussed than `sessionInfo()` and includes where
+  packages where installed from (#526).
+
+* `rstudioapi` package moved from suggests to imports, since it's always 
+  needed (it's job is to figure out if rstudio is available, #458)
+
+* Implemented own version `utils::unzip()` that throws error if command
+  fails and doesn't print unneeded messages on non-Windows platforms (#540).
 
 * Wrote own version of `write.dcf()` that doesn't butcher whitespace and 
   fieldnames.
 
-* rename `add_rstudio_project()` to `use_rstudio()` and 
-  `add_test_infrastructure()` to `use_testthat()` (old functions aliased to new)
+## Removed functionality
 
-* `create()` now makes a dummy namespace so that you can build & reload
-  without running `document()` first.
+* The `fresh` argument to `test()` has been removed - this is best done by 
+  the editor since it can run the tests in a completely clean environment
+  by starting a new R session.
 
-* `help()`, `?`, and `system.file()` are now made available when a pacakge is
-  loaded with `load_all()`, even if the devtools package isn't attached.
-
-* `dependencies = TRUE` is not forced anymore in `install_github()` (regression
-  in 1.5) (@krlmlr, #462).
+* `compile_dll()` can now build packages located in R's `tempdir()`
+  directory (@richfitz, #531).
 
 # devtools 1.5
 

@@ -3,7 +3,10 @@
 # @param pkg A path or package object
 insert_imports_shims <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  assign("system.file", shim_system.file, pos = imports_env(pkg))
+
+  imp_env <- imports_env(pkg)
+  imp_env$system.file <- shim_system.file
+  imp_env$library.dynam.unload <- shim_library.dynam.unload
 }
 
 # Create a new environment as the parent of global, with devtools versions of
@@ -18,7 +21,7 @@ insert_global_shims <- function() {
   e$`?` <- shim_question
   e$system.file <- shim_system.file
 
-  attach(e, name = "devtools_shims", warn.conflicts = FALSE)
+  base::attach(e, name = "devtools_shims", warn.conflicts = FALSE)
 }
 
 #' Replacement version of system.file
@@ -82,7 +85,11 @@ shim_system.file <- function(..., package = "base", lib.loc = NULL,
       # Make sure backslahses are replaced with slashes on Windows
       normalizePath(files, winslash = "/")
     } else {
-      ""
+      if (mustWork) {
+        stop("No file found", call. = FALSE)
+      } else {
+        ""
+      }
     }
     # Note that the behavior isn't exactly the same as base::system.file with an
     # installed package; in that case, C and D would not be installed and so
@@ -90,4 +97,23 @@ shim_system.file <- function(..., package = "base", lib.loc = NULL,
     # be installed. To fully duplicate R's package-building and installation
     # behavior would be complicated, so we'll just use this simple method.
   }
+}
+
+shim_library.dynam.unload <- function(chname, libpath,
+                                      verbose = getOption("verbose"),
+                                      file.ext = .Platform$dynlib.ext) {
+
+  # If package was loaded by devtools, we need to unload the dll ourselves
+  # because libpath works differently from installed packages.
+  if (!is.null(dev_meta(chname))) {
+    try({
+      pkg <- as.package(libpath)
+      unload_dll(pkg)
+    })
+    return()
+  }
+
+  # Should only reach this in the rare case that the devtools-loaded package is
+  # trying to unload a different package's DLL.
+  base::library.dynam.unload(chname, libpath, verbose, file.ext)
 }

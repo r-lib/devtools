@@ -1,24 +1,29 @@
-language: c
-script: ./travis-tool.sh run_tests
+language: r
+sudo: false
+cache: packages
+r:
+  - oldrel
+  - release
+  - devel
 
-after_failure:
-  - ./travis-tool.sh dump_logs
+after_success:
+  - test $TRAVIS_R_VERSION = "3.2.4" && Rscript -e 'covr::codecov()'
 
-before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
-  - ./travis-tool.sh r_binary_install XML Rcpp knitr brew RUnit inline highlight formatR highr markdown rgl
-install:
-  - ./travis-tool.sh install_deps
-  # Install testthat after running install_deps, otherwise devtools itself might be installed from CRAN or c2d4u
-  - ./travis-tool.sh install_github hadley/testthat
-notifications:
-  email:
-    on_success: change
-    on_failure: change
-env:
-  - global:
-    - WARNINGS_ARE_ERRORS=1
-    - _R_CHECK_FORCE_SUGGESTS_=0
-    - BOOTSTRAP_LATEX=1
+addons:
+  apt:
+    packages:
+      - libhunspell-dev
+
+r_github_packages:
+  - hadley/devtools
+
+bioc_required: true
+bioc_packages:
+  - BiocInstaller
+
+before_script:
+    - git config --global user.name "travis"
+    - git config --global user.email "travis@example.org"
+
+after_success:
+  - test $TRAVIS_R_VERSION = "3.2.4" && Rscript -e 'covr::codecov()'
