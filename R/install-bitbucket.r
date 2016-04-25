@@ -185,10 +185,15 @@ bitbucket_api_prefix <- function (host = NULL) {
   host %||% "api.bitbucket.org"
 }
 
-bitbucket_GET <- function(path, ..., host = NULL, api_version = "2.0") {
+bitbucket_GET <- function(path, ..., host = NULL, api_version = "2.0",
+  process_content = TRUE) {
   req <- httr::GET(paste0("https://", bitbucket_api_prefix(host)),
     path = file.path(api_version, path), ...)
-  bitbucket_response(req)
+  if (process_content) {
+    bitbucket_response(req)
+  } else {
+    req
+  }
 }
 
 
