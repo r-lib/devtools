@@ -129,8 +129,7 @@ remote_metadata.bitbucket_remote <- function(x, bundle = NULL, source = NULL) {
 }
 
 #' @export
-remote_package_name.bitbucket_remote <- function(remote, host = NULL,
-  api_version = "1.0", ...) {
+remote_package_name.bitbucket_remote <- function(remote, api_version = "1.0", ...) {
   # Downloading specific file is unsupported in version 2.0 of API but is
   # supported in version 1.0 (25 April 2016)
   # https://api.bitbucket.org/1.0/repositories/{accountname}/{repo_slug}/raw/{revision}/{path}
