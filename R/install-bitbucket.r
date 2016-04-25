@@ -129,8 +129,22 @@ remote_metadata.bitbucket_remote <- function(x, bundle = NULL, source = NULL) {
 }
 
 #' @export
-remote_package_name.bitbucket_remote <- function(remote, ...) {
-  remote_package_name.github_remote(remote, url = "https://bitbucket.org", ...)
+remote_package_name.bitbucket_remote <- function(remote, host = NULL,
+  api_version = "1.0", ...) {
+  # Downloading specific file is unsupported in version 2.0 of API but is
+  # supported in version 1.0 (25 April 2016)
+  # https://api.bitbucket.org/1.0/repositories/{accountname}/{repo_slug}/raw/{revision}/{path}
+  tmp <- tempfile()
+  # Use paste and not file.path as elements of this can be NULL and file.path
+  # will barf on NULL
+  path <- paste(c("repositories", remote$username, remote$repo, "raw", remote$ref,
+    remote$subdir, "DESCRIPTION"), collapse = "/")
+  req <- bitbucket_GET(path = path, httr::write_disk(path = tmp),
+    api_version = api_version, process_content = FALSE)
+  if (httr::status_code(req) >= 400) {
+    return(NA)
+  }
+  read_dcf(tmp)$Package
 }
 
 #' @export
