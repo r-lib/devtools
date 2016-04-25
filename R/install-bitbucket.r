@@ -128,6 +128,7 @@ remote_metadata.bitbucket_remote <- function(x, bundle = NULL, source = NULL) {
   )
 }
 
+
 #' @export
 remote_package_name.bitbucket_remote <- function(remote, api_version = "1.0", ...) {
   # Downloading specific file is unsupported in version 2.0 of API but is
