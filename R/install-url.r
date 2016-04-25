@@ -46,3 +46,18 @@ remote_metadata.url_remote <- function(x, bundle = NULL, source = NULL) {
     RemoteSubdir = x$subdir
   )
 }
+
+#' @export
+remote_package_name.url_remote <- function(remote, ...) {
+  NA_character_
+}
+
+#' @export
+remote_sha.url_remote <- function(remote, ...) {
+  NA_character_
+}
+
+#' @export
+format.url_remote <- function(x, ...) {
+  "URL"
+}

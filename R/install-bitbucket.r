@@ -20,17 +20,12 @@
 #' install_bitbucket("dannavarro/lsr-package")
 #' }
 install_bitbucket <- function(repo, username, ref = "master", subdir = NULL,
-                              auth_user = NULL, password = NULL, force = FALSE,
-                              quiet = FALSE, ...) {
+                              auth_user = NULL, password = NULL, ...) {
 
   remotes <- lapply(repo, bitbucket_remote, username = username, ref = ref,
     subdir = subdir, auth_user = auth_user, password = password)
 
-  if (!isTRUE(force)) {
-    remotes <- Filter(function(x) different_sha(x, quiet = quiet), remotes)
-  }
-
-  install_remotes(remotes, quiet = quiet, ...)
+  install_remotes(remotes, ...)
 }
 
 bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
@@ -80,16 +75,12 @@ remote_download.bitbucket_remote <- function(x, quiet = FALSE) {
 
 #' @export
 remote_metadata.bitbucket_remote <- function(x, bundle = NULL, source = NULL) {
-  # Determine sha as efficiently as possible
-  if (!is.null(x$sha)) {
-    # Might be cached already (because re-installing)
-    sha <- x$sha
-  } else if (!is.null(bundle)) {
+  if (!is.null(bundle)) {
     # Might be able to get from zip archive
     sha <- git_extract_sha1(bundle)
   } else {
-    # Don't know
-    sha <- NULL
+    # Otherwise can lookup with remote_ls
+    sha <- remote_sha(x)
   }
 
   list(
@@ -110,4 +101,9 @@ remote_package_name.bitbucket_remote <- function(remote, ...) {
 #' @export
 remote_sha.bitbucket_remote <-function(remote, ...) {
   remote_sha.github_remote(remote, url = "https://bitbucket.org", ...)
+}
+
+#' @export
+format.bitbucket_remote <- function(x, ...) {
+  "Bitbucket"
 }

@@ -12,9 +12,6 @@
 #'   to \code{\link[git2r]{clone}}.
 #' @param args DEPRECATED. A character vector providing extra arguments to
 #'   pass on to git.
-#' @param force Force installation even if the git SHA1 has not changed since
-#'   the previous install.
-#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @param ... passed on to \code{\link{install}}
 #' @export
 #' @family package installation
@@ -24,18 +21,14 @@
 #' install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
 #'}
 install_git <- function(url, subdir = NULL, branch = NULL, credentials = NULL,
-  args = character(0), force = FALSE, quiet = FALSE, ...) {
+  args = character(0), ...) {
   if (!missing(args))
     warning("`args` is deprecated", call. = FALSE)
 
   remotes <- lapply(url, git_remote, subdir = subdir,
                     branch = branch, credentials=credentials)
 
-  if (!isTRUE(force)) {
-    remotes <- Filter(function(x) different_sha(x, quiet = quiet), remotes)
-  }
-
-  install_remotes(remotes, quiet = quiet, ...)
+  install_remotes(remotes, ...)
 }
 
 git_remote <- function(url, subdir = NULL, branch = NULL, credentials=NULL) {
@@ -110,9 +103,13 @@ remote_package_name.git_remote <- function(remote, ...) {
 
 #' @export
 remote_sha.git_remote <- function(remote, ...) {
-  if (!is.null(remote$sha)) {
+  # If the remote ref is the same as the sha it is a pinned commit so just
+  # return that.
+  if (!is.null(remote$ref) &&
+    grepl(paste0("^", remote$ref), remote$sha)) {
     return(remote$sha)
   }
+
   tryCatch({
     res <- git2r::remote_ls(remote$url, ...)
 
@@ -125,5 +122,10 @@ remote_sha.git_remote <- function(remote, ...) {
     }
 
     unname(res[found[1]])
-  }, error = function(e) NA)
+  }, error = function(e) NA_character_)
+}
+
+#' @export
+format.git_remote <- function(x, ...) {
+  "Git"
 }

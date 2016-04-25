@@ -5,7 +5,7 @@
 \title{Install a package directly from bitbucket}
 \usage{
 install_bitbucket(repo, username, ref = "master", subdir = NULL,
-  auth_user = NULL, password = NULL, force = FALSE, quiet = FALSE, ...)
+  auth_user = NULL, password = NULL, ...)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -28,11 +28,6 @@ to \code{username})}
 
 \item{password}{your password}
 
-\item{force}{Force installation even if the git SHA1 has not changed since
-the previous install.}
-
-\item{quiet}{if \code{TRUE} suppresses output from this function.}
-
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 }
 \description{
@@ -49,9 +44,10 @@ install_bitbucket("dannavarro/lsr-package")
 Bitbucket API docs:
   \url{https://confluence.atlassian.com/bitbucket/use-the-bitbucket-cloud-rest-apis-222724129.html}
 
-Other package installation: \code{\link{install_github}},
-  \code{\link{install_git}}, \code{\link{install_svn}},
-  \code{\link{install_url}}, \code{\link{install_version}},
-  \code{\link{install}}, \code{\link{uninstall}}
+Other package installation: \code{\link{install_cran}},
+  \code{\link{install_github}}, \code{\link{install_git}},
+  \code{\link{install_svn}}, \code{\link{install_url}},
+  \code{\link{install_version}}, \code{\link{install}},
+  \code{\link{uninstall}}
 }
 

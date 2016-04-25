@@ -5,7 +5,7 @@
 \title{Install a package from a git repository}
 \usage{
 install_git(url, subdir = NULL, branch = NULL, credentials = NULL,
-  args = character(0), force = FALSE, quiet = FALSE, ...)
+  args = character(0), ...)
 }
 \arguments{
 \item{url}{Location of package. The url should point to a public or
@@ -22,11 +22,6 @@ to \code{\link[git2r]{clone}}.}
 \item{args}{DEPRECATED. A character vector providing extra arguments to
 pass on to git.}
 
-\item{force}{Force installation even if the git SHA1 has not changed since
-the previous install.}
-
-\item{quiet}{if \code{TRUE} suppresses output from this function.}
-
 \item{...}{passed on to \code{\link{install}}}
 }
 \description{
@@ -41,8 +36,9 @@ install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
 }
 \seealso{
 Other package installation: \code{\link{install_bitbucket}},
-  \code{\link{install_github}}, \code{\link{install_svn}},
-  \code{\link{install_url}}, \code{\link{install_version}},
-  \code{\link{install}}, \code{\link{uninstall}}
+  \code{\link{install_cran}}, \code{\link{install_github}},
+  \code{\link{install_svn}}, \code{\link{install_url}},
+  \code{\link{install_version}}, \code{\link{install}},
+  \code{\link{uninstall}}
 }
 
