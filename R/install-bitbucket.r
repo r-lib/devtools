@@ -16,7 +16,6 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' install_bitbucket("sulab/mygene.r@@default")
 #' install_bitbucket("dannavarro/lsr-package")
 #' }
 install_bitbucket <- function(repo, username = NULL, ref = "master", subdir = NULL,
