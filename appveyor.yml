@@ -30,12 +30,7 @@ environment:
     R_ARCH: x64
 
   matrix:
-    - R_VERSION: oldrel
-      RTOOLS_VERSION: 32
-      CRAN: http://cran.rstudio.com
-
     - R_VERSION: release
-    - R_VERSION: devel
 
 artifacts:
   - path: '*.Rcheck\**\*.log'
