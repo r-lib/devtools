@@ -32,7 +32,8 @@ install_bitbucket <- function(repo, username = NULL, ref = "master", subdir = NU
   install_remotes(remotes, quiet = quiet, ...)
 }
 
-# Copy of code from install_github.R
+# Copy of code from install_github.R.
+# release tag is not supported by Bitbucket
 parse_bitbucket_repo <- function(path) {
   username_rx <- "(?:([^/]+)/)?"
   repo_rx <- "([^/@#]+)"
