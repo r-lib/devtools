@@ -148,8 +148,19 @@ remote_package_name.bitbucket_remote <- function(remote, api_version = "1.0", ..
 }
 
 #' @export
-remote_sha.bitbucket_remote <-function(remote, ...) {
-  remote_sha.github_remote(remote, url = "https://bitbucket.org", ...)
+remote_sha.bitbucket_remote <-function(remote, url = "https://bitbucket.org") {
+  if (!is.null(remote$sha)) {
+    return(remote$sha)
+  }
+  tryCatch({
+    git_url <- paste0(url, "/", remote$username, "/", remote$repo, ".git")
+    res <- git2r::remote_ls(git_url, ...)
+    found <- grep(pattern = paste0("/", remote$ref), x = names(res))
+    if (length(found) == 0) {
+      return(NA)
+    }
+    unname(res[found[1]])
+  }, error = function(e) NA)
 }
 
 #' Bitbucket references
