@@ -51,7 +51,7 @@ clean_dll <- function(pkg = ".") {
 
   # Clean out the /src/ directory
   files <- dir(file.path(pkg$path, "src"),
-    pattern = "\\.(o|sl|so|dylib|a|dll|def)$",
+    pattern = sprintf("\\.(o|sl|so|dylib|a|dll)$|(%s\\.def)$", pkg$package),
     full.names = TRUE)
   unlink(files)
 
