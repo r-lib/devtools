@@ -148,7 +148,7 @@ remote_package_name.bitbucket_remote <- function(remote, api_version = "1.0", ..
 }
 
 #' @export
-remote_sha.bitbucket_remote <-function(remote, url = "https://bitbucket.org") {
+remote_sha.bitbucket_remote <- function(remote, url = "https://bitbucket.org", ...) {
   if (!is.null(remote$sha)) {
     return(remote$sha)
   }
