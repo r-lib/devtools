@@ -1,9 +1,8 @@
 context("Bitbucket")
 
 test_that("Bitbucket API prefix is correct", {
-  expect_equal(bitbucket_api_prefix(), "api.bitbucket.org")
-  expect_equal(bitbucket_api_prefix("api.corpbitbucket.org"),
-    "api.corpbitbucket.org")
+  expect_equal(bitbucket_host(), "api.bitbucket.org")
+  expect_equal(bitbucket_host("api.corpbitbucket.org"), "api.corpbitbucket.org")
 })
 
 test_that("Bitbucket repos parsed correctly", {
