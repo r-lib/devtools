@@ -56,33 +56,6 @@ install_bitbucket <- function(repo, username = NULL, ref = "master", subdir = NU
   install_remotes(remotes, quiet = quiet, ...)
 }
 
-# Copy of code from install_github.R.
-# release tag is not supported by Bitbucket
-parse_bitbucket_repo <- function(path) {
-  username_rx <- "(?:([^/]+)/)?"
-  repo_rx <- "([^/@#]+)"
-  subdir_rx <- "(?:/([^@#]*[^@#/]))?"
-  ref_rx <- "(?:@([^*].*))"
-  pull_rx <- "(?:#([0-9]+))"
-  ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
-  bitbucket_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
-    username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
-
-  param_names <- c("username", "repo", "subdir", "ref", "pull", "invalid")
-  replace <- stats::setNames(sprintf("\\%d", seq_along(param_names)), param_names)
-  params <- lapply(replace, function(r) gsub(bitbucket_rx, r, path, perl = TRUE))
-  if (params$invalid != "")
-    stop(sprintf("Invalid Bitbucket repo: %s", path))
-  params <- params[sapply(params, nchar) > 0]
-
-  if (!is.null(params$pull)) {
-    params$ref <- bitbucket_pull(params$pull)
-    params$pull <- NULL
-  }
-
-  params
-}
-
 bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
                               auth_user = NULL, password = NULL, sha = NULL) {
 
@@ -185,6 +158,34 @@ remote_sha.bitbucket_remote <- function(remote, url = "https://bitbucket.org", .
     }
     unname(res[found[1]])
   }, error = function(e) NA)
+}
+
+
+# Copy of code from install_github.R.
+# release tag is not supported by Bitbucket
+parse_bitbucket_repo <- function(path) {
+  username_rx <- "(?:([^/]+)/)?"
+  repo_rx <- "([^/@#]+)"
+  subdir_rx <- "(?:/([^@#]*[^@#/]))?"
+  ref_rx <- "(?:@([^*].*))"
+  pull_rx <- "(?:#([0-9]+))"
+  ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
+  bitbucket_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
+    username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
+
+  param_names <- c("username", "repo", "subdir", "ref", "pull", "invalid")
+  replace <- stats::setNames(sprintf("\\%d", seq_along(param_names)), param_names)
+  params <- lapply(replace, function(r) gsub(bitbucket_rx, r, path, perl = TRUE))
+  if (params$invalid != "")
+    stop(sprintf("Invalid Bitbucket repo: %s", path))
+  params <- params[sapply(params, nchar) > 0]
+
+  if (!is.null(params$pull)) {
+    params$ref <- bitbucket_pull(params$pull)
+    params$pull <- NULL
+  }
+
+  params
 }
 
 #' Bitbucket references
