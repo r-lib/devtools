@@ -3,17 +3,39 @@
 #' This function is vectorised so you can install multiple packages in
 #' a single command.
 #'
+#' To install from a private repo, you will need to get an access token using
+#' Bitbucket's OAuth protocol. To set up the OAuth protocol dance, you will
+#' need to:
+#'
+#' \enumerate{
+#' \item Add an OAuth consumer key at
+#' \code{https://bitbucket.org/account/user/<USERNAME>/api}, substituting your
+#' Bitbucket user name for \code{<USERNAME>}. The consumer key \strong{Name}
+#' can be anything you like (e.g. \code{RBitbucket}), the \strong{Callback URL}
+#' must be \code{http://localhost:1410} and the \strong{URL} should be
+#' something like \code{https://github.com/hadley/devtools}. Ensure that the
+#' consumer key is private and that its \strong{scope} or \strong{Permissions}
+#' only extends to "Read" access of "Repositories".
+#' \item Store the resulting consumer key and secret in the environment variables
+#' \code{BITBUCKET_CONSUMER_KEY} and \code{BITBUCKET_CONSUMER_SECRET} respectively.
+#' See \code{\link{Startup}} for how to set up environment variables for use by
+#' R. The appendix to the "httr" package's "api-packages" vignette has more
+#' detailed instructions.
+#' }
+#'
+#' The OAuth dance to get an access token will be performed When
+#' \code{bitbucket_pat()} is first called and with the token cached to the
+#' \code{~/.httr-oauth} file. Refreshes of this access token is performed
+#' automatically.
+#'
 #' @inheritParams install_github
-#' @param auth_user your account username if you're attempting to install
-#'   a package hosted in a private repository (and your username is different
-#'   to \code{username})
-#' @param password your password
-#' @param ref Desired git reference; could be a commit, tag, or branch name.
-#'   Defaults to master.
-#' @seealso Bitbucket API docs:
-#'   \url{https://confluence.atlassian.com/bitbucket/use-the-bitbucket-cloud-rest-apis-222724129.html}
+#' @param ref Desired git reference. Could be a commit, tag, or branch
+#'   name, or a call to \code{\link{bitbucket_pull}}. Defaults to \code{"master"}.
 #' @family package installation
 #' @export
+#' @seealso
+#' \href{https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html}{Bitbucket OAuth}
+#' \href{https://confluence.atlassian.com/bitbucket/version-2-423626329.html}{Bitbucket API v2.0}
 #' @examples
 #' \dontrun{
 #' install_bitbucket("dannavarro/lsr-package")
