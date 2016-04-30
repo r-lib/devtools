@@ -17,9 +17,9 @@ bitbucket_pat <- function (key = bitbucket_consumer_key()) {
     httr::oauth2.0_token(bitbucket_oauth_endpoint(),
       bitbucket_oauth_app(), cache = "~/.httr-oauth")
   } else {
-    current_wd <- getwd()
+    message("Caching access token in ~/.httr-oauth")
+    on.exit(setwd(getwd()))
     setwd("~/")
-    on.exit(setwd(current_wd))
     httr::oauth2.0_token(bitbucket_oauth_endpoint(), bitbucket_oauth_app())
   }
 }
