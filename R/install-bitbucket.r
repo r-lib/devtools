@@ -225,21 +225,21 @@ bitbucket_GET <- function(path, ..., host = NULL, api_version = "2.0",
 bitbucket_response <- function(req) {
   text <- httr::content(req, as = "text")
   parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
-  # if (httr::status_code(req) >= 400) {
-  #   stop(github_error(req))
-  # }
+  if (httr::status_code(req) >= 400) {
+    stop(bitbucket_error(req))
+  }
   parsed
 }
 
 bitbucket_error <- function(req) {
-  # text <- httr::content(req, as = "text")
-  # parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
-  # errors <- vapply(parsed$errors, `[[`, "message", FUN.VALUE = character(1))
-  #
-  # structure(
-  #   list(
-  #     call = sys.call(-1),
-  #     message = paste0(parsed$message, " (", httr::status_code(req), ")\n",
-  #       paste("* ", errors, collapse = "\n"))
-  #   ), class = c("condition", "error", "github_error"))
+  text <- httr::content(req, as = "text")
+  parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
+  errors <- vapply(parsed, `[[`, "message", FUN.VALUE = character(1))
+
+  structure(
+    list(
+      call = sys.call(-1),
+      message = paste0("(", httr::status_code(req), ")\n",
+        paste("* ", errors, collapse = "\n"))
+    ), class = c("condition", "error", "bitbucket_error"))
 }
