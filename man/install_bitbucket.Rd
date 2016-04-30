@@ -4,8 +4,9 @@
 \alias{install_bitbucket}
 \title{Install a package directly from bitbucket}
 \usage{
-install_bitbucket(repo, username, ref = "master", subdir = NULL,
-  auth_user = NULL, password = NULL, force = FALSE, quiet = FALSE, ...)
+install_bitbucket(repo, username = NULL, ref = "master", subdir = NULL,
+  auth_token = bitbucket_pat(), host = bitbucket_host(), force = FALSE,
+  quiet = FALSE, ...)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -17,16 +18,15 @@ precedence.}
 \item{username}{User name. Deprecated: please include username in the
 \code{repo}}
 
-\item{ref}{Desired git reference; could be a commit, tag, or branch name.
-Defaults to master.}
+\item{ref}{Desired git reference. Could be a commit, tag, or branch
+name, or a call to \code{\link{bitbucket_pull}}. Defaults to \code{"master"}.}
 
 \item{subdir}{subdirectory within repo that contains the R package.}
 
-\item{auth_user}{your account username if you're attempting to install
-a package hosted in a private repository (and your username is different
-to \code{username})}
+\item{auth_token}{see \code{Details} section.}
 
-\item{password}{your password}
+\item{host}{GitHub API host to use. Override with your GitHub enterprise
+hostname, for example, \code{"github.hostname.com/api/v3"}.}
 
 \item{force}{Force installation even if the git SHA1 has not changed since
 the previous install.}
@@ -39,15 +39,41 @@ the previous install.}
 This function is vectorised so you can install multiple packages in
 a single command.
 }
+\details{
+To install from a private repo, or more generally, access the Bitbucket API
+with your own credentials, you will need to get an access token using
+Bitbucket's OAuth protocol. To set up the OAuth protocol dance, you will
+need to:
+
+\enumerate{
+\item Add an OAuth consumer key at
+\code{https://bitbucket.org/account/user/<USERNAME>/api}, substituting your
+Bitbucket user name for \code{<USERNAME>}. The consumer key \strong{Name}
+can be anything you like (e.g. \code{RBitbucket}), the \strong{Callback URL}
+must be \code{http://localhost:1410} and the \strong{URL} should be
+something like \code{https://github.com/hadley/devtools}. Ensure that the
+consumer key is private and that its \strong{scope} or \strong{Permissions}
+only extends to "Read" access of "Repositories".
+\item Store the resulting consumer key and secret in the environment variables
+\code{BITBUCKET_CONSUMER_KEY} and \code{BITBUCKET_CONSUMER_SECRET} respectively.
+See \code{\link{Startup}} for how to set up environment variables for use by
+R. The appendix to the "httr" package's "api-packages" vignette has more
+detailed instructions.
+}
+
+The OAuth dance to get an access token will be performed When
+\code{bitbucket_pat()} is first called and with the token cached to the
+\code{~/.httr-oauth} file. Refreshes of this access token are performed
+automatically.
+}
 \examples{
 \dontrun{
-install_bitbucket("sulab/mygene.r@default")
 install_bitbucket("dannavarro/lsr-package")
 }
 }
 \seealso{
-Bitbucket API docs:
-  \url{https://confluence.atlassian.com/bitbucket/use-the-bitbucket-cloud-rest-apis-222724129.html}
+\href{https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html}{Bitbucket OAuth}
+\href{https://confluence.atlassian.com/bitbucket/version-2-423626329.html}{Bitbucket API v2.0}
 
 Other package installation: \code{\link{install_github}},
   \code{\link{install_git}}, \code{\link{install_svn}},

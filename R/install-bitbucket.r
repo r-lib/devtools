@@ -3,7 +3,8 @@
 #' This function is vectorised so you can install multiple packages in
 #' a single command.
 #'
-#' To install from a private repo, you will need to get an access token using
+#' To install from a private repo, or more generally, access the Bitbucket API
+#' with your own credentials, you will need to get an access token using
 #' Bitbucket's OAuth protocol. To set up the OAuth protocol dance, you will
 #' need to:
 #'
@@ -25,10 +26,11 @@
 #'
 #' The OAuth dance to get an access token will be performed When
 #' \code{bitbucket_pat()} is first called and with the token cached to the
-#' \code{~/.httr-oauth} file. Refreshes of this access token is performed
+#' \code{~/.httr-oauth} file. Refreshes of this access token are performed
 #' automatically.
 #'
 #' @inheritParams install_github
+#' @param auth_token see \code{Details} section.
 #' @param ref Desired git reference. Could be a commit, tag, or branch
 #'   name, or a call to \code{\link{bitbucket_pull}}. Defaults to \code{"master"}.
 #' @family package installation
