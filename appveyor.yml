@@ -15,6 +15,7 @@ install:
 build_script:
   - Rscript -e "source('http://bioconductor.org/biocLite.R')"
   - travis-tool.sh install_deps
+  - travis-tool.sh github_package jimhester/covr
 
 test_script:
   - travis-tool.sh run_tests
@@ -23,6 +24,9 @@ on_failure:
   - 7z a failure.zip *.Rcheck\*
   - appveyor PushArtifact failure.zip
 
+on_success:
+  - Rscript -e 'covr::codecov()'
+
 environment:
   global:
     WARNINGS_ARE_ERRORS: 1
@@ -30,12 +34,7 @@ environment:
     R_ARCH: x64
 
   matrix:
-    - R_VERSION: oldrel
-      RTOOLS_VERSION: 32
-      CRAN: http://cran.rstudio.com
-
     - R_VERSION: release
-    - R_VERSION: devel
 
 artifacts:
   - path: '*.Rcheck\**\*.log'

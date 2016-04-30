@@ -26,4 +26,4 @@ before_script:
     - git config --global user.email "travis@example.org"
 
 after_success:
-  - test $TRAVIS_R_VERSION = "3.2.4" && Rscript -e 'covr::codecov()'
+  - Rscript -e 'covr::codecov()'

@@ -13,16 +13,14 @@ test_that("update.package_deps", {
     package = c("dotenv", "falsy", "magrittr"),
     installed = c("1.0", "1.0", "1.0"),
     available = c("1.0", NA, "1.0"),
-    diff = c(0L, 2L, 0L)
+    diff = c(0L, 2L, 0L),
+    remote = c("dotenv", "falsy", "magrittr") # these are not actual remotes
   )
   class(object) <- c("package_deps", "data.frame")
 
-  with_mock(
-    `devtools::install_packages` = function(...) { },
-    expect_message(
-      update(object, quiet = FALSE),
-      "Skipping 1 unavailable package: falsy"
-    )
+  expect_message(
+    update(object, quiet = FALSE, upgrade = FALSE),
+    "Skipping 1 unavailable package: falsy"
   )
 
   object <- data.frame(
@@ -30,16 +28,14 @@ test_that("update.package_deps", {
     package = c("dotenv", "falsy", "magrittr"),
     installed = c("1.0", "1.1", "1.0"),
     available = c("1.0", "1.0", "1.0"),
-    diff = c(0L, 1L, 0L)
+    diff = c(0L, 1L, 0L),
+    remote = c("dotenv", "falsy", "magrittr") # these are not actual remotes
   )
   class(object) <- c("package_deps", "data.frame")
 
-  with_mock(
-    `devtools::install_packages` = function(...) { },
-    expect_message(
-      update(object, quiet = FALSE),
-      "Skipping 1 package ahead of CRAN: falsy"
-    )
+  expect_message(
+    update(object, quiet = FALSE, upgrade = FALSE),
+    "Skipping 1 package ahead of CRAN: falsy"
   )
 
   object <- data.frame(
@@ -47,12 +43,13 @@ test_that("update.package_deps", {
     package = c("dotenv", "falsy", "magrittr"),
     installed = c("1.0", "1.0", NA),
     available = c("1.0", "1.1", "1.0"),
-    diff = c(0L, 2L, 0L)
+    diff = c(0L, 1L, -2L),
+    remote = c("dotenv", "falsy", "magrittr") # these are not actual remotes
   )
   class(object) <- c("package_deps", "data.frame")
 
   with_mock(
-    `devtools::install_packages` = function(packages, ...) packages,
+    `devtools::install_remotes` = function(packages, ...) packages,
     expect_equal(
       update(object, upgrade = FALSE),
       "magrittr"

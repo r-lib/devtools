@@ -1,53 +1,62 @@
-context("install_dev_remotes")
-test_that("install_dev_remotes returns if no remotes specified", {
-  expect_equal(install_dev_remotes("testTest"), NULL)
+context("remote_deps")
+with_temp_libpaths <- function(code) {
+  path <- tempfile("temp_libpath")
+  dir.create(path)
+  old <- .libPaths(path)
+  on.exit(.libPaths(old))
+  force(code)
+}
+
+test_that("remote_deps returns NULL if no remotes specified", {
+  expect_equal(remote_deps("testTest"), NULL)
 })
 
-test_that("dev_remote_type works with implicit types", {
-  expect_equal(dev_remote_type("hadley/testthat"),
-    list(list(repository = "hadley/testthat", type = "github", fun = install_github)))
 
-  simple_github <-
-    list(
-      list(repository = "hadley/testthat", type = "github", fun = install_github),
-      list(repository = "klutometis/roxygen", type = "github", fun = install_github)
-    )
+test_that("remote_deps returns works with implicit types", {
+  with_mock(`devtools::package2remote` = function(...) NULL, {
+    expect_equal(parse_one_remote("hadley/testthat"),
+      github_remote("hadley/testthat"))
 
-  expect_equal(dev_remote_type("hadley/testthat,klutometis/roxygen"), simple_github)
-  expect_equal(dev_remote_type("hadley/testthat,\n  klutometis/roxygen"), simple_github)
-  expect_equal(dev_remote_type("hadley/testthat,\n\tklutometis/roxygen"), simple_github)
+    expect_equal(parse_one_remote("klutometis/roxygen"),
+      github_remote("klutometis/roxygen"))
+  })
+
+  expect_equal(split_remotes("hadley/testthat,klutometis/roxygen"),
+      c("hadley/testthat", "klutometis/roxygen"))
+
+  expect_equal(split_remotes("hadley/testthat,\n  klutometis/roxygen"),
+    c("hadley/testthat", "klutometis/roxygen"))
+
+  expect_equal(split_remotes("hadley/testthat,\n\t klutometis/roxygen"),
+    c("hadley/testthat", "klutometis/roxygen"))
 })
 
 test_that("dev_remote_type errors", {
-  expect_equal(dev_remote_type(""), NULL)
+  expect_error(parse_one_remote(""),
+    "Malformed remote specification ''")
 
-  expect_error(dev_remote_type("git::testthat::blah"),
+  expect_error(parse_one_remote("git::testthat::blah"),
     "Malformed remote specification 'git::testthat::blah'")
-  expect_error(dev_remote_type("hadley::testthat"),
+  expect_error(parse_one_remote("hadley::testthat"),
     "Unknown remote type: hadley")
-  expect_error(dev_remote_type("SVN2::testthat"),
+  expect_error(parse_one_remote("SVN2::testthat"),
     "Unknown remote type: SVN2")
 })
 
 test_that("dev_remote_type works with explicit types", {
-  expect_equal(dev_remote_type("github::hadley/testthat"),
-    list(list(repository = "hadley/testthat", type = "github", fun = install_github)))
+  with_mock(`devtools::package2remote` = function(...) NULL, {
+    expect_equal(parse_one_remote("github::hadley/testthat"),
+      github_remote("hadley/testthat"))
+  })
 
-  simple_github <-
-    list(
-      list(repository = "hadley/testthat", type = "github", fun = install_github),
-      list(repository = "klutometis/roxygen", type = "github", fun = install_github)
-    )
+  expect_equal(split_remotes("github::hadley/testthat,klutometis/roxygen"),
+    c("github::hadley/testthat", "klutometis/roxygen"))
 
-  expect_equal(dev_remote_type("github::hadley/testthat,klutometis/roxygen"), simple_github)
-  expect_equal(dev_remote_type("hadley/testthat,github::klutometis/roxygen"), simple_github)
-  expect_equal(dev_remote_type("github::hadley/testthat,github::klutometis/roxygen"), simple_github)
+  expect_equal(split_remotes("hadley/testthat,github::klutometis/roxygen"),
+    c("hadley/testthat", "github::klutometis/roxygen"))
 
-  expect_equal(dev_remote_type("svn::https://github.com/hadley/testthat,\n  git::https://github.com/klutometis/roxygen.git"),
-    list(
-      list(repository = "https://github.com/hadley/testthat", type = "svn", fun = install_svn),
-      list(repository = "https://github.com/klutometis/roxygen.git", type = "git", fun = install_git)
-    ))
+  expect_equal(split_remotes("github::hadley/testthat,github::klutometis/roxygen"),
+    c("github::hadley/testthat", "github::klutometis/roxygen"))
 })
 
 test_that("different_sha returns TRUE if remote or local sha is NA not found", {
@@ -62,10 +71,10 @@ test_that("different_sha returns FALSE if remote_sha and local_sha are the same"
   expect_false(different_sha(remote_sha = "4a2ea2", local_sha = "4a2ea2"))
 })
 test_that("local_sha returns NA if package is not installed", {
-  expect_equal(local_sha("tsrtarst"), NA)
+  expect_equal(local_sha("tsrtarst"), NA_character_)
 })
 test_that("remote_sha.github_remote returns NA if remote doesn't exist", {
-  expect_equal(remote_sha(github_remote("arst/arst")), NA)
+  expect_equal(remote_sha(github_remote("arst/arst")), NA_character_)
 })
 test_that("remote_sha.github_remote returns expected value if remote does exist", {
   expect_equal(remote_sha(github_remote("hadley/devtools@v1.8.0")), "ad9aac7b9a522354e1ff363a86f389e32cec181b")

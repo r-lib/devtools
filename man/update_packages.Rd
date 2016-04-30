@@ -4,11 +4,12 @@
 \alias{update_packages}
 \title{Update packages that are missing or out-of-date.}
 \usage{
-update_packages(pkgs, dependencies = NA, repos = getOption("repos"),
-  type = getOption("pkgType"))
+update_packages(pkgs = NULL, dependencies = NA,
+  repos = getOption("repos"), type = getOption("pkgType"))
 }
 \arguments{
-\item{pkgs}{Character vector of packages to update.}
+\item{pkgs}{Character vector of packages to update. If \code{NULL} all
+installed packages are updated.}
 
 \item{dependencies}{Which dependencies do you want to check?
   Can be a character vector (selecting from "Depends", "Imports",

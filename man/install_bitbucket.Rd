@@ -28,9 +28,6 @@ name, or a call to \code{\link{bitbucket_pull}}. Defaults to \code{"master"}.}
 \item{host}{GitHub API host to use. Override with your GitHub enterprise
 hostname, for example, \code{"github.hostname.com/api/v3"}.}
 
-\item{force}{Force installation even if the git SHA1 has not changed since
-the previous install.}
-
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
@@ -75,9 +72,10 @@ install_bitbucket("dannavarro/lsr-package")
 \href{https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html}{Bitbucket OAuth}
 \href{https://confluence.atlassian.com/bitbucket/version-2-423626329.html}{Bitbucket API v2.0}
 
-Other package installation: \code{\link{install_github}},
-  \code{\link{install_git}}, \code{\link{install_svn}},
-  \code{\link{install_url}}, \code{\link{install_version}},
-  \code{\link{install}}, \code{\link{uninstall}}
+Other package installation: \code{\link{install_cran}},
+  \code{\link{install_github}}, \code{\link{install_git}},
+  \code{\link{install_svn}}, \code{\link{install_url}},
+  \code{\link{install_version}}, \code{\link{install}},
+  \code{\link{uninstall}}
 }
 

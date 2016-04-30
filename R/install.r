@@ -56,7 +56,8 @@
 #' @family package installation
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
 #'   set.
-install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
+install <-
+  function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
                     args = getOption("devtools.install.args"), quiet = FALSE,
                     dependencies = NA, upgrade_dependencies = TRUE,
                     build_vignettes = FALSE,
@@ -76,6 +77,19 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
     eapply(ns_env(pkg), force, all.names = TRUE)
   }
 
+  root_install <- is.null(installing$packages)
+  if (root_install) {
+    on.exit(installing$packages <- NULL)
+  }
+
+  if (pkg$package %in% installing$packages) {
+    if (!quiet) {
+      message("Skipping ", pkg$package, ", it is already being installed.")
+    }
+    return(invisible(FALSE))
+  }
+
+  installing$packages <- c(installing$packages, pkg$package)
   if (!quiet) {
     message("Installing ", pkg$package)
   }
@@ -120,6 +134,10 @@ install <- function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   invisible(TRUE)
 }
 
+# A environment to hold which packages are being installed so packages with
+# circular dependencies can be skipped the second time.
+installing <- new.env(parent = emptyenv())
+
 #' Install package dependencies if needed.
 #'
 #' @inheritParams install
@@ -138,6 +156,7 @@ install_deps <- function(pkg = ".", dependencies = NA,
                          force_deps = FALSE) {
 
   pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
-    type = type, force_deps = force_deps, quiet = quiet)
+    type = type)
   update(pkg, ..., Ncpus = threads, quiet = quiet, upgrade = upgrade)
+  invisible()
 }

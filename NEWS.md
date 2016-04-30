@@ -1,5 +1,8 @@
 # devtools 1.11.1.9000
 
+* `install_*` functions and `update_packages()` refactored to allow updating of
+  packages installed using any of the install methods. (@jimhester, #1067)
+
 # devtools 1.11.1
 
 * Bug fix in `search_path_for_rtools()` using the gcc-4.9.3 toolchain when
