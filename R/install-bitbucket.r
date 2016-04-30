@@ -42,12 +42,12 @@
 #' \dontrun{
 #' install_bitbucket("dannavarro/lsr-package")
 #' }
-install_bitbucket <- function(repo, username = NULL, ref = "master", subdir = NULL,
-                              auth_user = NULL, password = NULL, force = FALSE,
-                              quiet = FALSE, ...) {
+install_bitbucket <- function(repo, username = NULL, ref = "master",
+  subdir = NULL, auth_token = bitbucket_pat(), host = bitbucket_host(),
+  force = FALSE, quiet = FALSE, ...) {
 
   remotes <- lapply(repo, bitbucket_remote, username = username, ref = ref,
-    subdir = subdir, auth_user = auth_user, password = password)
+    subdir = subdir, auth_token = auth_token, host = host)
 
   if (!isTRUE(force)) {
     remotes <- Filter(function(x) different_sha(x, quiet = quiet), remotes)
@@ -57,7 +57,7 @@ install_bitbucket <- function(repo, username = NULL, ref = "master", subdir = NU
 }
 
 bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
-                              auth_user = NULL, password = NULL, sha = NULL) {
+  auth_token = bitbucket_pat(), host = bitbucket_host(), sha = NULL) {
 
   meta <- parse_bitbucket_repo(repo)
   meta <- bitbucket_resolve_ref(meta$ref %||% ref, meta)
@@ -69,13 +69,13 @@ bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
   }
 
   remote("bitbucket",
+    host = host,
     repo = meta$repo,
     subdir = meta$subdir %||% subdir,
     username = meta$username,
     ref = meta$ref %||% ref,
     sha = sha,
-    auth_user = auth_user,
-    password = password
+    auth_token = auth_token
   )
 }
 
@@ -84,20 +84,10 @@ remote_download.bitbucket_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
     message("Downloading bitbucket repo ", x$username, "/", x$repo, "@", x$ref)
   }
-
   dest <- tempfile(fileext = paste0(".zip"))
   src <- paste("https://bitbucket.org/", x$username, "/", tolower(x$repo), "/get/",
     x$ref, ".zip", sep = "")
-
-  if (!is.null(x$password)) {
-    auth <- httr::authenticate(
-      user = x$auth_user %||% x$username,
-      password = x$password,
-      type = "basic")
-  } else {
-    auth <- NULL
-  }
-
+  auth <- x$auth_token %||% NULL
   download(dest, src, auth)
 }
 
@@ -117,6 +107,7 @@ remote_metadata.bitbucket_remote <- function(x, bundle = NULL, source = NULL) {
 
   list(
     RemoteType = "bitbucket",
+    RemoteHost = x$host,
     RemoteRepo = x$repo,
     RemoteUsername = x$username,
     RemoteRef = x$ref,
@@ -226,7 +217,7 @@ bitbucket_resolve_ref.bitbucket_pull <- function(x, params, ..., api_version) {
   params
 }
 
-bitbucket_api_prefix <- function (host = NULL) {
+bitbucket_host <- function (host = NULL) {
   # https://confluence.atlassian.com/bitbucket/use-the-bitbucket-cloud-rest-apis-222724129.html
   # NB: GET seems to strip out the version suffix to host e.g. GET removes
   # 2.0 from end of api.bitbucket.org/2.0 prior to requesting. So need to
@@ -237,7 +228,7 @@ bitbucket_api_prefix <- function (host = NULL) {
 
 bitbucket_GET <- function(path, ..., host = NULL, api_version = "2.0",
   process_content = TRUE) {
-  req <- httr::GET(paste0("https://", bitbucket_api_prefix(host)),
+  req <- httr::GET(paste0("https://", bitbucket_host(host)),
     path = file.path(api_version, path), ...)
   if (process_content) {
     bitbucket_response(req)
