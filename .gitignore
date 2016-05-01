@@ -3,3 +3,7 @@
 *.dll
 .Rproj.user
 .Rhistory
+.project
+.settings/
+inst/doc
+.httr-oauth

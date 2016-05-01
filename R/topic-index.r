@@ -14,13 +14,23 @@ find_pkg_topic <- function(pkg = ".", topic) {
   if (topic %in% names(index)) return(index[[topic]])
 
   # Finally, try adding .Rd to name
-  man_rd <- file.path(pkg$path, "man", paste(topic, ".Rd"))
+  man_rd <- file.path(pkg$path, "man", paste0(topic, ".Rd"))
   if (file.exists(man_rd)) return(basename(man_rd))
 
   NULL
 }
 
-# @return complete path to man file, with name giving path to package.
+#' Find the rd file that documents a topic.
+#'
+#' Only packages loaded by devtools are searched.
+#'
+#' @param topic The topic, a string.
+#' @return A named string. The values gives the path to file; the name gives
+#'   the path to package.
+#' @export
+#' @keywords internal
+#' @examples
+#' find_topic("help")
 find_topic <- function(topic) {
   if (is.null(topic) || topic == "") return(NULL)
 
@@ -35,7 +45,7 @@ find_topic <- function(topic) {
   for (pkg in pkgs) {
     path <- getNamespaceInfo(pkg, "path")
     rd <- find_pkg_topic(path, topic)
-    if (!is.null(rd)) return(setNames(file.path(path, "man", rd), path))
+    if (!is.null(rd)) return(stats::setNames(file.path(path, "man", rd), path))
   }
 
   NULL
@@ -60,13 +70,12 @@ clear_topic_index <- function(pkg = ".") {
   invisible(TRUE)
 }
 
-#' @importFrom tools parse_Rd
 build_topic_index <- function(pkg = ".") {
   pkg <- as.package(pkg)
   rds <- rd_files(pkg)
 
   aliases <- function(path) {
-    parsed <- parse_Rd(path)
+    parsed <- tools::parse_Rd(path)
     tags <- vapply(parsed, function(x) attr(x, "Rd_tag")[[1]], character(1))
     unlist(parsed[tags == "\\alias"])
   }

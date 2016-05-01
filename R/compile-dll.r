@@ -1,6 +1,6 @@
 #' Compile a .dll/.so from source.
 #'
-#' \code{compile_dll} performs a fake R CMD install so should code that
+#' \code{compile_dll} performs a fake R CMD install so code that
 #' works here should work with a regular install (and vice versa).
 #'
 #' During compilation, debug flags are set with
@@ -21,24 +21,21 @@
 compile_dll <- function(pkg = ".", quiet = FALSE) {
   pkg <- as.package(pkg)
 
-  old <- set_envvar(compiler_flags(TRUE), "prefix")
-  on.exit(set_envvar(old))
+  old <- withr_with_envvar(compiler_flags(TRUE), {
 
-  if (!needs_compile(pkg)) return(invisible())
-  compile_rcpp_attributes(pkg)
+    if (!needs_compile(pkg)) return(invisible())
+    compile_rcpp_attributes(pkg)
 
-  # Mock install the package to generate the DLL
-  if (!quiet) message("Re-compiling ", pkg$package)
-  inst <- install_min(pkg, tempdir(), components = "libs",
-    args = if (needs_clean(pkg)) "--preclean",
-    quiet = quiet)
+    # Mock install the package to generate the DLL
+    if (!quiet) message("Re-compiling ", pkg$package)
+    install_dir <- tempfile("devtools_install_")
+    dir.create(install_dir)
+    inst <- install_min(pkg, install_dir, components = "libs",
+      args = if (needs_clean(pkg)) "--preclean",
+      quiet = quiet)
 
-  dll_name <- paste(pkg$package, .Platform$dynlib.ext, sep = "")
-  from <- file.path("inst", "libs", .Platform$r_arch, dll_name)
-  to <- dll_path(pkg)
-  file.copy(from, to)
-
-  invisible(dll_path(pkg))
+    invisible(dll_path(pkg))
+  }, "prefix")
 }
 
 #' Remove compiled objects from /src/ directory

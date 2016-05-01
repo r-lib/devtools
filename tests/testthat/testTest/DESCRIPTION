@@ -1,0 +1,10 @@
+Package: testTest
+Title: Tools to make developing R code easier
+License: GPL-2
+Description: Package description.
+Author: Hadley <h.wickham@gmail.com>
+Maintainer: Hadley <h.wickham@gmail.com>
+Version: 0.1
+Suggests:
+    testthat
+RoxygenNote: 5.0.1

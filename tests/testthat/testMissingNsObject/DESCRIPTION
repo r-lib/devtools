@@ -1,0 +1,6 @@
+Package: testMissingNsObject
+Title: Tools to make developing R code easier. This package lists 'b' as an
+    export in NAMESPACE, but the 'b' object doesn't exist.
+License: GPL-2
+Description:
+Version: 0.1

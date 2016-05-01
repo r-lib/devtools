@@ -1,7 +1,7 @@
 #' Unload a package
 #'
 #' This function attempts to cleanly unload a package, including unloading
-#' it's namespace, deleting S4 class definitions and unloading any loaded
+#' its namespace, deleting S4 class definitions and unloading any loaded
 #' DLLs. Unfortunately S4 classes are not really designed to be cleanly
 #' unloaded, and so we have to manually modify the class dependency graph in
 #' order for it to work - this works on the cases for which we have tested
@@ -33,10 +33,10 @@ unload <- function(pkg = ".") {
   # This is a hack to work around unloading devtools itself. The unloading
   # process normally makes other devtools functions inaccessible,
   # resulting in "Error in unload(pkg) : internal error -3 in R_decompress1".
-  # If we simply access them here using as.list (without calling them), then
-  # they will remain available for use later.
+  # If we simply force them first, then they will remain available for use
+  # later.
   if (pkg$package == "devtools") {
-    as.list(ns_env(pkg))
+    eapply(ns_env(pkg), force, all.names = TRUE)
   }
 
   # If the package was loaded with devtools, any s4 classes that were created
@@ -64,7 +64,7 @@ unload <- function(pkg = ".") {
   # to go away.
   # loadedNamespaces() and unloadNamespace() often don't work here
   # because things can be in a weird state.
-  if (!is.null(get_namespace(pkg$package))) {
+  if (!is.null(.getNamespace(pkg$package))) {
     message("unloadNamespace(\"", pkg$package,
       "\") not successful. Forcing unload.")
     unregister_namespace(pkg$package)
@@ -81,6 +81,10 @@ unload <- function(pkg = ".") {
 # This unloads dlls loaded by either library() or load_all()
 unload_dll <- function(pkg = ".") {
   pkg <- as.package(pkg)
+
+  # Always run garbage collector to force any deleted external pointers to
+  # finalise
+  gc()
 
   # Special case for devtools - don't unload DLL because we need to be able
   # to access nsreg() in the DLL in order to run makeNamespace. This means

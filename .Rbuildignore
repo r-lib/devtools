@@ -1,5 +1,9 @@
-^.*\.Rproj$
+^devtools\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
-^NEWS.md$
-^rcmd-notes.md$
+^cran-comments\.md$
+^revdep$
+^CONDUCT\.md$
+^appveyor\.yml$
+^CONTRIBUTING\.md$
+^\.httr-oauth$

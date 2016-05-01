@@ -81,7 +81,7 @@ addNamespaceDynLibs <- function(ns, newlibs) {
 # This is taken directly from base::loadNamespace in R 2.15.1
 # The only change is the line used get the package name
 assignNativeRoutines <- function(dll, lib, env, nativeRoutines) {
-  package <- getPackageName(env)
+  package <- methods::getPackageName(env)
 
   if(length(nativeRoutines) == 0L)
     return(NULL)
@@ -113,8 +113,14 @@ assignNativeRoutines <- function(dll, lib, env, nativeRoutines) {
   if(length(symNames) == 0L)
     return(NULL)
 
-  symbols <- getNativeSymbolInfo(symNames, dll, unlist = FALSE,
-                                     withRegistrationInfo = TRUE)
+
+  symbols <- tryCatch(
+    getNativeSymbolInfo(symNames, dll, unlist = FALSE, withRegistrationInfo = TRUE),
+    error = function(.) {
+      warning("Failed to load native symbol info", call. = FALSE)
+      list()
+    }
+  )
   lapply(seq_along(symNames),
     function(i) {
       ## could vectorize this outside of the loop

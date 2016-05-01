@@ -1,27 +1,28 @@
 #' Build package vignettes.
 #'
 #' Builds package vignettes using the same algorithm that \code{R CMD build}
-#' does. This means includes non-Sweave vignettes, using make  files (if
+#' does. This means including non-Sweave vignettes, using makefiles (if
 #' present), and copying over extra files. You need to ensure that these
 #' files are not included in the built package - ideally they should not
 #' be checked into source, or at least excluded with \code{.Rbuildignore}
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
+#' @inheritParams install_deps
 #' @keywords programming
 #' @seealso \code{\link{clean_vignettes}} to remove the pdfs in
 #'   \file{inst/doc} created from vignettes
 #' @export
-#' @importFrom tools buildVignettes
-#' @importFrom utils Sweave
 #' @seealso \code{\link{clean_vignettes}} to remove build tex/pdf files.
-build_vignettes <- function(pkg = ".") {
+build_vignettes <- function(pkg = ".", dependencies = "VignetteBuilder") {
   pkg <- as.package(pkg)
-  vigns <- pkgVignettes(dir = pkg$path)
-  if (length(vigns$doc) == 0) return()
+  vigns <- tools::pkgVignettes(dir = pkg$path)
+  if (length(vigns$docs) == 0) return()
+
+  install_deps(pkg, dependencies)
 
   message("Building ", pkg$package, " vignettes")
-  buildVignettes(dir = pkg$path, tangle = TRUE)
+  tools::buildVignettes(dir = pkg$path, tangle = TRUE)
   copy_vignettes(pkg)
 
   invisible(TRUE)
@@ -37,7 +38,7 @@ build_vignettes <- function(pkg = ".") {
 #' @export
 clean_vignettes <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  vigns <- pkgVignettes(dir = pkg$path)
+  vigns <- tools::pkgVignettes(dir = pkg$path)
   if (basename(vigns$dir) != "vignettes") return()
 
   message("Cleaning built vignettes from ", pkg$package)
@@ -63,8 +64,7 @@ ext_variations <- function(path, valid_ext) {
   unique(c(outer(file_name(path), valid_ext, FUN = paste, sep = ".")))
 }
 
-#' @importFrom tools file_path_sans_ext
 file_name <- function(x) {
   if (length(x) == 0) return(NULL)
-  file_path_sans_ext(basename(x))
+  tools::file_path_sans_ext(basename(x))
 }

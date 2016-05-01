@@ -11,7 +11,7 @@
 #'   name of \code{Rd} file to start with (with or without extensions), or
 #'   a topic name. If omitted, will start with the (lexicographically) first
 #'   file. This is useful if you have a lot of examples and don't want to
-#'   rerun them every time when you fix a problem.
+#'   rerun them every time you fix a problem.
 #' @family example functions
 #' @param show if \code{TRUE}, code in \code{\\dontshow{}} will be commented
 #'   out
@@ -28,7 +28,7 @@
 run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
                          run = TRUE, fresh = FALSE) {
   pkg <- as.package(pkg)
-  document(pkg, reload = FALSE)
+  document(pkg)
 
   files <- rd_files(pkg)
 
@@ -45,18 +45,10 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
   }
   if (length(files) == 0) return()
 
-  message("Running ", length(files), " example files in ", pkg$package)
-  rule()
+  rule("Running ", length(files), " example files in ", pkg$package)
 
   if (fresh) {
-    to_run <- bquote({
-      require("devtools", quiet = TRUE)
-      load_all(.(pkg$path), export_all = FALSE, quiet = TRUE)
-
-      lapply(.(files), devtools:::run_example,
-        show = .(show), test = .(test), run = .(run))
-      invisible()
-    })
+    to_run <- substitute(devtools::run_examples(path), list(path = pkg$path))
     eval_clean(to_run)
   } else {
     load_all(pkg, reset = TRUE, export_all = FALSE)
@@ -80,5 +72,5 @@ rd_files <- function(pkg) {
   path_man <- file.path(pkg$path, "man")
   files <- dir(path_man, pattern = "\\.[Rr]d$", full.names = TRUE)
   names(files) <- basename(files)
-  with_collate("C", sort(files))
+  withr::with_collate("C", sort(files))
 }

@@ -74,13 +74,24 @@ process_imports <- function(pkg = ".") {
 
   ## process imports
   for (i in nsInfo$imports) {
-    if (is.character(i))
-      namespaceImport(ns, loadNamespace(i))
-    else
-      namespaceImportFrom(ns, loadNamespace(i[[1L]]), i[[2L]])
+    tryCatch(
+      if (is.character(i))
+        namespaceImport(ns, loadNamespace(i))
+      else
+        namespaceImportFrom(ns, loadNamespace(i[[1L]]), i[[2L]]),
+      error = warning
+    )
   }
-  for(imp in nsInfo$importClasses)
-    namespaceImportClasses(ns, loadNamespace(imp[[1L]]), imp[[2L]])
-  for(imp in nsInfo$importMethods)
-    namespaceImportMethods(ns, loadNamespace(imp[[1L]]), imp[[2L]])
+  for(imp in nsInfo$importClasses) {
+    tryCatch(
+      namespaceImportClasses(ns, loadNamespace(imp[[1L]]), imp[[2L]]),
+      error = warning
+    )
+  }
+  for(imp in nsInfo$importMethods) {
+    tryCatch(
+      namespaceImportMethods(ns, loadNamespace(imp[[1L]]), imp[[2L]]),
+      error = warning
+    )
+  }
 }

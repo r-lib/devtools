@@ -1,7 +1,7 @@
-.onAttach <- function(...) {
-  find_rtools()
-  invisible()
-}
+#' @importFrom utils available.packages contrib.url install.packages
+#'   installed.packages menu modifyList packageDescription
+#'   packageVersion remove.packages
+NULL
 
 #' Package development tools for R.
 #'
@@ -14,10 +14,6 @@
 #'
 #'   \item \code{devtools.name}: your name, used when signing draft
 #'     emails.
-#'
-#'   \item \code{devtools.cleandoc}: a single logical value determining whether
-#'     the contents of the file{man/} directory are deleted by
-#'     \code{\link{check}}
 #'
 #'   \item \code{devtools.install.args}: a string giving extra arguments passed
 #'     to \code{R CMD install} by \code{\link{install}}.
@@ -33,7 +29,7 @@
 #'   \item \code{devtools.desc.suggests}: a character vector listing packages to
 #'     to add to suggests by defaults for new packages.
 #
-#'   \item \code{devtools.desc}: a named character vector listing any other
+#'   \item \code{devtools.desc}: a named list listing any other
 #'     extra options to add to \file{DESCRIPTION}
 #'
 #' }
@@ -41,21 +37,36 @@
 #' @name devtools
 NULL
 
+#' Deprecated Functions
+#'
+#' These functions are Deprecated in this release of devtools, they will be
+#' marked as Defunct and removed in a future version.
+#' @name devtools-deprecated
+#' @keywords internal
+NULL
+
 .onLoad <- function(libname, pkgname) {
   op <- options()
   op.devtools <- list(
     devtools.path = "~/R-dev",
-    devtools.cleandoc = FALSE,
     devtools.install.args = "",
     devtools.name = "Your name goes here",
-    devtools.desc.author = '"First Last <first.last@example.com> [aut, cre]"',
+    devtools.desc.author = 'person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))',
     devtools.desc.license = "What license is it under?",
     devtools.desc.suggests = NULL,
     devtools.desc = list(),
-    github.user = "hadley"
+    devtools.revdep.libpath = file.path(tempdir(), "R-lib")
   )
   toset <- !(names(op.devtools) %in% names(op))
   if(any(toset)) options(op.devtools[toset])
+
+  # These withr functions are used in load_all() so need to exist in the
+  # devtools namespace so the withr namespace is not prematurly loaded by `::`
+  # during a load_all() call
+  env <- asNamespace(pkgname)
+  assign("withr_with_dir", withr::with_dir, envir = env)
+  assign("withr_with_collate", withr::with_collate, envir = env)
+  assign("withr_with_envvar", withr::with_envvar, envir = env)
 
   invisible()
 }

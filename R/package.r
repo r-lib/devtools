@@ -6,42 +6,89 @@
 #'   \item package object
 #' }
 #' @param x object to coerce to a package
+#' @param create only relevant if a package structure does not exist yet: if
+#'   \code{TRUE}, create a package structure; if \code{NA}, ask the user
+#'   (in interactive mode only)
 #' @export
 #' @keywords internal
-as.package <- function(x = NULL) {
+as.package <- function(x = NULL, create = NA) {
   if (is.package(x)) return(x)
 
-  x <- check_dir(x)
-  load_pkg_description(x)
+  x <- package_file(path = x)
+  load_pkg_description(x, create = create)
 }
 
+#' Find file in a package.
+#'
+#' It always starts by finding by walking up the path until it finds the
+#' root directory, i.e. a directory containing \code{DESCRIPTION}. If it
+#' cannot find the root directory, or it can't find the specified path, it
+#' will throw an error.
+#'
+#' @param ... Components of the path.
+#' @param path Place to start search for package directory.
+#' @export
+#' @examples
+#' \dontrun{
+#' package_file("figures", "figure_1")
+#' }
+package_file <- function(..., path = ".") {
+  if (!is.character(path) || length(path) != 1) {
+    stop("`path` must be a string.", call. = FALSE)
+  }
+  path <- strip_slashes(normalizePath(path, mustWork = FALSE))
 
-check_dir <- function(x) {
-  if (is.null(x)) {
-    stop("Path is null", call. = FALSE)
+  if (!file.exists(path)) {
+    stop("Can't find '", path, "'.", call. = FALSE)
+  }
+  if (!file.info(path)$isdir) {
+    stop("'", path, "' is not a directory.", call. = FALSE)
   }
 
-  # Normalise path and strip trailing slashes
-  x <- gsub("\\\\", "/", x, fixed = TRUE)
+  # Walk up to root directory
+  while (!has_description(path)) {
+    path <- dirname(path)
+
+    if (is_root(path)) {
+      stop("Could not find package root.", call. = FALSE)
+    }
+  }
+
+  file.path(path, ...)
+}
+
+has_description <- function(path) {
+  file.exists(file.path(path, 'DESCRIPTION'))
+}
+
+is_root <- function(path) {
+  identical(path, dirname(path))
+}
+
+strip_slashes <- function(x) {
   x <- sub("/*$", "", x)
-
-  if (!file.exists(x)) {
-    stop("Can't find directory ", x, call. = FALSE)
-  }
-  if (!file.info(x)$isdir) {
-    stop(x, " is not a directory", call. = FALSE)
-  }
-
   x
 }
 
 # Load package DESCRIPTION into convenient form.
-load_pkg_description <- function(path) {
-  path <- normalizePath(path)
+load_pkg_description <- function(path, create) {
   path_desc <- file.path(path, "DESCRIPTION")
 
   if (!file.exists(path_desc)) {
-    stop("No description at ", path_desc, call. = FALSE)
+    if (is.na(create)) {
+      if (interactive()) {
+        message("No package infrastructure found in ", path, ". Create it?")
+        create <- (menu(c("Yes", "No")) == 1)
+      } else {
+        create <- FALSE
+      }
+    }
+
+    if (create) {
+      setup(path = path)
+    } else {
+      stop("No description at ", path_desc, call. = FALSE)
+    }
   }
 
   desc <- as.list(read.dcf(path_desc)[1, ])
@@ -58,4 +105,5 @@ load_pkg_description <- function(path) {
 #' @export
 is.package <- function(x) inherits(x, "package")
 
-
+# Mockable variant of interactive
+interactive <- function() .Primitive("interactive")()

@@ -17,6 +17,9 @@
 #'     and connects the generated DLL into R. See \code{\link{compile_dll}}
 #'     for more details.
 #'
+#'   \item If you use \pkg{testthat}, will load all test helpers so you
+#'     can access them interactively.
+#'
 #'   \item Runs \code{.onAttach()}, \code{.onLoad()} and \code{.onUnload()}
 #'     functions at the correct times.
 #' }
@@ -51,8 +54,7 @@
 #' a perfect replacement for \code{base::system.file}.
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information. If the \code{DESCRIPTION}
-#'   file does not exist, it is created using \code{\link{create_description}}.
+#'   \code{\link{as.package}} for more information.
 #' @param reset clear package environment and reset file cache before loading
 #'   any pieces of the package. This is equivalent to running
 #'   \code{\link{unload}} and is the default. Use \code{reset = FALSE} may be
@@ -65,6 +67,7 @@
 #'   If \code{FALSE}, export only the objects that are listed as exports
 #'   in the NAMESPACE file.
 #' @param quiet if \code{TRUE} suppresses output from this function.
+#' @inheritParams as.package
 #' @keywords programming
 #' @examples
 #' \dontrun{
@@ -83,29 +86,33 @@
 #' }
 #' @export
 load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
-  export_all = TRUE, quiet = FALSE) {
-
-  if (!is.package(pkg)) {
-    create_description(pkg)
-    pkg <- as.package(pkg)
-  }
+  export_all = TRUE, quiet = FALSE, create = NA) {
+  pkg <- as.package(pkg, create = create)
+  check_suggested("roxygen2")
 
   if (!quiet) message("Loading ", pkg$package)
 
+  roxygen2::update_collate(pkg$path)
+  # Refresh the pkg structure with any updates to the Collate entry
+  # in the DESCRIPTION file
+  pkg$collate <- as.package(pkg$path)$collate
+
+  # Forcing all of the promises for the loaded namespace now will avoid lazy-load
+  # errors when the new package is loaded overtop the old one.
+  #
   # Reloading devtools is a special case. Normally, objects in the
   # namespace become inaccessible if the namespace is unloaded before the
-  # the object has been accessed. This is kind of a hack - using as.list
-  # on the namespace accesses each object, making the objects accessible
-  # later, after the namespace is unloaded.
-  if (pkg$package == "devtools") {
-    as.list(ns_env(pkg))
+  # object has been accessed. Instead we force the object so they will still be
+  # accessible.
+  if (is_loaded(pkg)) {
+    eapply(ns_env(pkg), force, all.names = TRUE)
   }
 
   # Check description file is ok
   check <- ("tools" %:::% ".check_package_description")(
     file.path(pkg$path, "DESCRIPTION"))
   if (length(check) > 0) {
-    msg <- capture.output(("tools" %:::% "print.check_package_description")(check))
+    msg <- utils::capture.output(("tools" %:::% "print.check_package_description")(check))
     message("Invalid DESCRIPTION:\n", paste(msg, collapse = "\n"))
   }
 
@@ -142,6 +149,7 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   insert_imports_shims(pkg)
 
   out$data <- load_data(pkg)
+
   out$code <- load_code(pkg)
   register_s3(pkg)
   out$dll <- load_dll(pkg)
@@ -162,6 +170,11 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   # Copy over objects from the namespace environment
   export_ns(pkg)
 
+  # Source test helpers into package environment
+  if (uses_testthat(pkg)) {
+    testthat::source_test_helpers(find_test_dir(pkg$path), env = pkg_env(pkg))
+  }
+
   # Run hooks
   run_pkg_hook(pkg, "attach")
   run_user_hook(pkg, "attach")
@@ -181,14 +194,13 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 #' \code{options(devtools.desc.author = '"Hadley Wickham <h.wickham@@gmail.com> [aut,cre]"',
 #'   devtools.desc.license = "GPL-3")}.
 #' @param path path to package root directory
-#' @param extra a named list of extra options to add to \file{DESCRIPTION}. 
-#'   Arguments that take a list 
+#' @param extra a named list of extra options to add to \file{DESCRIPTION}.
+#'   Arguments that take a list
 #' @param quiet if \code{TRUE}, suppresses output from this function.
 #' @export
-#' @importFrom whisker whisker.render
-create_description <- function(path, extra = getOption("devtools.desc"),
+create_description <- function(path = ".", extra = getOption("devtools.desc"),
                                quiet = FALSE) {
-  path <- check_dir(path)
+  # Don't call check_dir(path) here (#803)
   desc_path <- file.path(path, "DESCRIPTION")
 
   if (file.exists(desc_path)) return(FALSE)
@@ -199,37 +211,38 @@ create_description <- function(path, extra = getOption("devtools.desc"),
       call. = FALSE)
   }
 
-  desc <- build_description(basename(normalizePath(path)), extra)
-  lines <- paste0(names(desc), ": ", unlist(desc))
-  
+  desc <- build_description(extract_package_name(path), extra)
+
   if (!quiet) {
-    message("No DESCRIPTION found. Creating with values:\n\n" ,
-      paste(lines, collapse = "\n"))
+    message("No DESCRIPTION found. Creating with values:\n\n")
+    write_dcf("", desc)
   }
 
-  writeLines(lines, desc_path)
+  write_dcf(desc_path, desc)
 
   TRUE
 }
 
 build_description <- function(name, extra = list()) {
-  
+  check_package_name(name)
+
   defaults <- compact(list(
     Package = name,
-    Title = "What the package does (short line)",
-    Version = "0.1",
+    Title = "What the Package Does (one line, title case)",
+    Version = "0.0.0.9000",
     "Authors@R" = getOption("devtools.desc.author"),
-    Description = "What the package does (paragraph)",
+    Description = "What the package does (one paragraph).",
     Depends = paste0("R (>= ", as.character(getRversion()) ,")"),
     License = getOption("devtools.desc.license"),
     Suggests = getOption("devtools.desc.suggests"),
+    Encoding = "UTF-8",
     LazyData = "true"
   ))
-  
+
   # Override defaults with user supplied options
   desc <- modifyList(defaults, extra)
   # Collapse all vector arguments to single strings
   desc <- lapply(desc, function(x) paste(x, collapse = ", "))
-  
+
   desc
 }
