@@ -5,8 +5,8 @@
 \title{Install a package directly from bitbucket}
 \usage{
 install_bitbucket(repo, username = NULL, ref = "master", subdir = NULL,
-  auth_token = bitbucket_pat(), host = bitbucket_host(), force = FALSE,
-  quiet = FALSE, ...)
+  auth_token = bitbucket_pat(), host = bitbucket_host(), quiet = FALSE,
+  ...)
 }
 \arguments{
 \item{repo}{Repository address in the format

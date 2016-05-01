@@ -5,8 +5,8 @@
 * Bitbucket authenticates over the OAuth protocol rather than using a username 
   and password combination. Access token thus obtained are cached and refreshed
   automatically. (@imanuelcostigan, #1157)
-* Bitbucket references are now resolved in `install_bitbucket()` in a manner 
-  more consistent with `install_github()`. (@imanuelcostigan, #1157)
+* Bitbucket `refs` are now resolved in `install_bitbucket()` in a manner 
+  more consistent with `install_github()` (@imanuelcostigan, #1157)
 * Bitbucket `remote_package_name()` and `remote_sha()` methods no longer call
   github_remote class methods, but are now specifically defined for Bitbucket.
   (@imanuelcostigan, #1157)

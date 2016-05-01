@@ -44,7 +44,7 @@
 #' }
 install_bitbucket <- function(repo, username = NULL, ref = "master",
   subdir = NULL, auth_token = bitbucket_pat(), host = bitbucket_host(),
-  force = FALSE, quiet = FALSE, ...) {
+  quiet = FALSE, ...) {
 
   remotes <- lapply(repo, bitbucket_remote, username = username, ref = ref,
     subdir = subdir, auth_token = auth_token, host = host)
