@@ -170,14 +170,15 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   # Copy over objects from the namespace environment
   export_ns(pkg)
 
+  # Run hooks
+  run_pkg_hook(pkg, "attach")
+  run_user_hook(pkg, "attach")
+
   # Source test helpers into package environment
   if (uses_testthat(pkg)) {
     testthat::source_test_helpers(find_test_dir(pkg$path), env = pkg_env(pkg))
   }
 
-  # Run hooks
-  run_pkg_hook(pkg, "attach")
-  run_user_hook(pkg, "attach")
 
   # Replace help and ? in utils package environment
   insert_global_shims()
