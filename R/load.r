@@ -66,6 +66,7 @@
 #' @param export_all If \code{TRUE} (the default), export all objects.
 #'   If \code{FALSE}, export only the objects that are listed as exports
 #'   in the NAMESPACE file.
+#' @param helpers load \pkg{testthat} test helpers. 
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @inheritParams as.package
 #' @keywords programming
@@ -86,7 +87,7 @@
 #' }
 #' @export
 load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
-  export_all = TRUE, quiet = FALSE, create = NA) {
+  export_all = TRUE, helpers=TRUE, quiet = FALSE, create = NA) {
   pkg <- as.package(pkg, create = create)
   check_suggested("roxygen2")
 
@@ -171,7 +172,7 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   export_ns(pkg)
 
   # Source test helpers into package environment
-  if (uses_testthat(pkg)) {
+  if (uses_testthat(pkg) && helpers) {
     testthat::source_test_helpers(find_test_dir(pkg$path), env = pkg_env(pkg))
   }
 
