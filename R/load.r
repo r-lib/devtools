@@ -66,7 +66,7 @@
 #' @param export_all If \code{TRUE} (the default), export all objects.
 #'   If \code{FALSE}, export only the objects that are listed as exports
 #'   in the NAMESPACE file.
-#' @param helpers load \pkg{testthat} test helpers. 
+#' @param helpers if \code{TRUE} loads \pkg{testthat} test helpers.
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @inheritParams as.package
 #' @keywords programming

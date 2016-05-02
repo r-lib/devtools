@@ -25,7 +25,7 @@ This is equivalent to running \code{\link{clean_dll}} before
 If \code{FALSE}, export only the objects that are listed as exports
 in the NAMESPACE file.}
 
-\item{helpers}{load \pkg{testthat} test helpers.}
+\item{helpers}{if \code{TRUE} loads \pkg{testthat} test helpers.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
