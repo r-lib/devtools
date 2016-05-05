@@ -2,6 +2,9 @@
 
 * `install_*` functions and `update_packages()` refactored to allow updating of
   packages installed using any of the install methods. (@jimhester, #1067)
+  
+* `source_gist()` gains a `filename` argument to specify a particular file to
+  source from a GitHub gist. (@ateucher, #)
 
 # devtools 1.11.1
 
