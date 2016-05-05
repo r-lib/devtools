@@ -4,7 +4,7 @@
   packages installed using any of the install methods. (@jimhester, #1067)
   
 * `source_gist()` gains a `filename` argument to specify a particular file to
-  source from a GitHub gist. (@ateucher, #)
+  source from a GitHub gist. (@ateucher, #1172)
 
 # devtools 1.11.1
 
