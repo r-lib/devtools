@@ -67,10 +67,10 @@ source_url <- function(url, ..., sha1 = NULL) {
 #'
 #' @param id either full url (character), gist ID (numeric or character of
 #'   numeric).
-#' @param which if there is more than one R file in the gist, which one to
-#' source (filename ending in '.R')? Default \code{NULL} will source only the
-#' first file.
 #' @param ... other options passed to \code{\link{source}}
+#' @param filename if there is more than one R file in the gist, which one to
+#' source (filename ending in '.R')? Default \code{NULL} will source the
+#' first file.
 #' @param sha1 The SHA-1 hash of the file at the remote URL. This is highly
 #'   recommend as it prevents you from accidentally running code that's not
 #'   what you expect. See \code{\link{source_url}} for more information on
@@ -93,8 +93,12 @@ source_url <- function(url, ..., sha1 = NULL) {
 #' source_gist(6872663, sha1 = "54f1db27e60")
 #' # Wrong hash will result in error
 #' source_gist(6872663, sha1 = "54f1db27e61")
+#'
+#' #' # You can speficy a particular R file in the gist
+#' source_gist(6872663, filename = "hi.r")
+#' source_gist(6872663, filename = "hi.r", sha1 = "54f1db27e60")
 #' }
-source_gist <- function(id, ..., which = NULL, sha1 = NULL, quiet = FALSE) {
+source_gist <- function(id, ..., filename = NULL, sha1 = NULL, quiet = FALSE) {
   stopifnot(length(id) == 1)
 
   url_match <- "((^https://)|^)gist.github.com/([^/]+/)?([0-9a-f]+)$"
@@ -102,10 +106,10 @@ source_gist <- function(id, ..., which = NULL, sha1 = NULL, quiet = FALSE) {
     # https://gist.github.com/kohske/1654919, https://gist.github.com/1654919,
     # or gist.github.com/1654919
     id <- regmatches(id, regexec(url_match, id))[[1]][5]
-    url <- find_gist(id, which)
+    url <- find_gist(id, filename)
   } else if (is.numeric(id) || grepl("^[0-9a-f]+$", id)) {
     # 1654919 or "1654919"
-    url <- find_gist(id, which)
+    url <- find_gist(id, filename)
   } else {
     stop("Unknown id: ", id)
   }
@@ -114,7 +118,7 @@ source_gist <- function(id, ..., which = NULL, sha1 = NULL, quiet = FALSE) {
   source_url(url, ..., sha1 = sha1)
 }
 
-find_gist <- function(id, which) {
+find_gist <- function(id, filename) {
   files <- github_GET(sprintf("gists/%s", id))$files
   r_files <- files[grepl("\\.[rR]$", names(files))]
 
@@ -122,17 +126,19 @@ find_gist <- function(id, which) {
     stop("No R files found in gist", call. = FALSE)
   }
 
-
-  if (!is.null(which)) {
-    if (!is.character(which) || length(which) > 1 || !grepl("\\.[rR]$", which)) {
-      stop("which must be NULL, or a filename ending in .R")
+  if (!is.null(filename)) {
+    if (!is.character(filename) || length(filename) > 1 || !grepl("\\.[rR]$", filename)) {
+      stop("'filename' must be NULL, or a single filename ending in .R")
     }
-    if (!(which %in% names(r_files))) {
+
+    which <- match(tolower(filename), tolower(names(r_files)))
+    if (is.na(which)) {
       stop("You have speficied a file that is not in this gist")
     }
+
   } else {
     if (length(r_files) > 1) {
-      warning("Multiple R files in gist, using first.")
+      warning("Multiple R files in gist, using first. You can specify one using the 'filename' argument.")
       which <- 1
     }
   }
