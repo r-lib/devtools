@@ -4,14 +4,17 @@
 \alias{source_gist}
 \title{Run a script on gist}
 \usage{
-source_gist(id, ..., sha1 = NULL, quiet = FALSE)
+source_gist(id, ..., which = NULL, sha1 = NULL, quiet = FALSE)
 }
 \arguments{
 \item{id}{either full url (character), gist ID (numeric or character of
-numeric). If a gist ID is specified and the entry has multiple files,
-only the first R file in the gist is sourced.}
+numeric).}
 
 \item{...}{other options passed to \code{\link{source}}}
+
+\item{which}{if there is more than one R file in the gist, which one to
+source (filename ending in '.R')? Default \code{NULL} will source only the
+first file.}
 
 \item{sha1}{The SHA-1 hash of the file at the remote URL. This is highly
 recommend as it prevents you from accidentally running code that's not
