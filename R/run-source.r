@@ -128,17 +128,17 @@ find_gist <- function(id, filename) {
 
   if (!is.null(filename)) {
     if (!is.character(filename) || length(filename) > 1 || !grepl("\\.[rR]$", filename)) {
-      stop("'filename' must be NULL, or a single filename ending in .R")
+      stop("'filename' must be NULL, or a single filename ending in .R/.r")
     }
 
     which <- match(tolower(filename), tolower(names(r_files)))
     if (is.na(which)) {
-      stop("You have speficied a file that is not in this gist")
+      stop("You have speficied a file that is not in this gist.")
     }
 
   } else {
     if (length(r_files) > 1) {
-      warning("Multiple R files in gist, using first. You can specify one using the 'filename' argument.")
+      warning("Multiple R files in gist, using first.")
       which <- 1
     }
   }
