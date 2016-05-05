@@ -1,0 +1,11 @@
+citHeader("To cite {{{pkgshort}}} in publications use:")
+
+citEntry(entry = "Manual",
+  key          = "{{{year}}}{{{pkgshort}}}",
+  title        = "{{{pkgtitle}}}",
+  author       = {{{authors}}},
+  year         = "{{{year}}}",
+  textVersion  =
+  paste("{{{author_text}}} ({{{year}}}).",
+        "{{{pkgtitle}}}")
+)

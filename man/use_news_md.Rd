@@ -16,7 +16,8 @@ This creates \code{NEWS.md} from a template.
 \seealso{
 Other infrastructure: \code{\link{infrastructure}},
   \code{\link{use_build_ignore}},
-  \code{\link{use_data_raw}}, \code{\link{use_data}},
-  \code{\link{use_package}}, \code{\link{use_readme_rmd}}
+  \code{\link{use_citation}}, \code{\link{use_data_raw}},
+  \code{\link{use_data}}, \code{\link{use_package}},
+  \code{\link{use_readme_rmd}}
 }
 
