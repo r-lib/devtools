@@ -57,7 +57,7 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
 
   ## TODO should we do for(r in repos) { for (t in c('published','archive')) {...}}, or
   ## for (t in c('published','archive')) { for(r in repos) {...}} ? Right now it's the latter.  It
-  ## only comes up if required version is satisfied by both an early repo in archive/ and a late repo
+  ## only matters if required version is satisfied by both an early repo in archive/ and a late repo
 
   ## First search for currently-published package
   for (repo in repos) {
