@@ -1,5 +1,8 @@
 # devtools 1.11.1.9000
 
+* Always unload package DLLs before installation (including devtools) so new
+  DLLs can be copied properly on Windows. (@jimhester)
+
 * `install_*` functions and `update_packages()` refactored to allow updating of
   packages installed using any of the install methods. (@jimhester, #1067)
 
