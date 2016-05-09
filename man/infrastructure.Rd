@@ -19,7 +19,7 @@
 \alias{use_vignette}
 \title{Add useful infrastructure to a package.}
 \usage{
-use_testthat(pkg = ".")
+use_testthat(pkg = ".", use_catch = FALSE)
 
 use_test(name, pkg = ".")
 
@@ -52,6 +52,9 @@ use_mit_license(pkg = ".", copyright_holder = getOption("devtools.name",
 \item{pkg}{package description, can be path or package name. See
 \code{\link{as.package}} for more information.}
 
+\item{use_catch}{Whether to also integrate the 'Catch' unit testing library
+for testing C++. FALSE by default.}
+
 \item{name}{File name to use for new vignette. Should consist only of
 numbers, letters, _ and -. I recommend using lower case.}
 
@@ -68,7 +71,9 @@ Add useful infrastructure to a package.
 Add testing infrastructure to a package that does not already have it.
 This will create \file{tests/testthat.R}, \file{tests/testthat/} and
 add \pkg{testthat} to the suggested packages. This is called
-automatically from \code{\link{test}} if needed.
+automatically from \code{\link{test}} if needed. Optionally
+(if \code{use_catch} is TRUE) it will also integrate the "catch"
+C++ testing library, included in newer versions of testthat.
 }
 
 \section{\code{use_test}}{

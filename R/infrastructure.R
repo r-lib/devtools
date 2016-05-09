@@ -10,10 +10,16 @@ NULL
 #' Add testing infrastructure to a package that does not already have it.
 #' This will create \file{tests/testthat.R}, \file{tests/testthat/} and
 #' add \pkg{testthat} to the suggested packages. This is called
-#' automatically from \code{\link{test}} if needed.
+#' automatically from \code{\link{test}} if needed. Optionally
+#' (if \code{use_catch} is TRUE) it will also integrate the "catch"
+#' C++ testing library, included in newer versions of testthat.
+#'
+#' @param use_catch Whether to also integrate the 'Catch' unit testing library
+#' for testing C++. FALSE by default.
+#'
 #' @rdname infrastructure
 #' @export
-use_testthat <- function(pkg = ".") {
+use_testthat <- function(pkg = ".", use_catch = FALSE) {
   pkg <- as.package(pkg)
 
   check_suggested("testthat")
@@ -33,6 +39,12 @@ use_testthat <- function(pkg = ".") {
     pkg = pkg
   )
 
+  if (use_catch) {
+    message("* Adding testthat to LinkingTo")
+    add_desc_package(pkg, "LinkingTo", "testthat")
+    use_template("test-example.cpp", "src/test-example.cpp")
+    use_template("test-runner", "src/test-runner.cpp")
+  }
   invisible(TRUE)
 }
 
