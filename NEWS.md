@@ -3,6 +3,12 @@
 * `install_*` functions and `update_packages()` refactored to allow updating of
   packages installed using any of the install methods. (@jimhester, #1067)
 
+* `use_testthat()` now (optionally) initialises the "catch" framework for
+  unit-testing package C++ code.
+
+* `use_rcpp()` optionally adds an `/inst/include` directory for users writing
+  Rcpp code they expect other packages to directly depend on.
+  
 # devtools 1.11.1
 
 * Bug fix in `search_path_for_rtools()` using the gcc-4.9.3 toolchain when

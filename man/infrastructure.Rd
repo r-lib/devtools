@@ -27,7 +27,7 @@ use_rstudio(pkg = ".")
 
 use_vignette(name, pkg = ".")
 
-use_rcpp(pkg = ".")
+use_rcpp(pkg = ".", use_inst = FALSE)
 
 use_travis(pkg = ".")
 
@@ -62,6 +62,10 @@ numbers, letters, _ and -. I recommend using lower case.}
 
 \item{copyright_holder}{The copyright holder for this package. Defaults to
 \code{getOption("devtools.name")}.}
+
+\item{whether}{to also initialise \code{/inst/include} (a common directory for
+hosting C++ code you expect to be directly-depended on by other R packages)
+and associated flags.}
 }
 \description{
 Add useful infrastructure to a package.
@@ -92,7 +96,11 @@ so you don't accidentally check in the built vignettes.
 
 \section{\code{use_rcpp}}{
 
-Creates \code{src/} and adds needed packages to \code{DESCRIPTION}.
+Creates \code{src/} and adds needed packages to \code{DESCRIPTION}. Optionally,
+if \code{use_inst} is TRUE, creates an \code{/inst/include} directory (and
+links to it in the \code{Makevars} file, so you can access the code stored there
+from within your package) for Rcpp code you expect to be directly depended-on by
+other R packages.
 }
 
 \section{\code{use_travis}}{
