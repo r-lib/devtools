@@ -4,7 +4,16 @@ uses_git <- function(path = ".") {
 
 # sha of most recent commit
 git_repo_sha1 <- function(r) {
-  git2r::commits(r, time = FALSE, topological = FALSE, n = 1)[[1]]@sha
+  rev <- git2r::head(r)
+  if (is.null(rev)) {
+    return(NULL)
+  }
+
+  if (git2r::is_commit(rev)) {
+    rev@sha
+  } else {
+    git2r::branch_target(rev)
+  }
 }
 
 git_sha1 <- function(n = 10, path = ".") {
