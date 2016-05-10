@@ -109,7 +109,7 @@ local_sha <- function(name) {
   if (!is_installed(name)) {
     return(NA_character_)
   }
-  packageDescription(name)$RemoteSha %||% NA_character_
+  package2remote(name)$sha %||% NA_character_
 }
 
 remote_download <- function(x, quiet = FALSE) UseMethod("remote_download")
