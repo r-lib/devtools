@@ -113,12 +113,13 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
 
   filter_duplicate_deps(
     package_deps(deps, repos = repos, type = type),
-    remote_deps(pkg))
+    remote_deps(pkg, deps))
 }
 
-filter_duplicate_deps <- function(cran_deps, remote_deps) {
+filter_duplicate_deps <- function(cran_deps, remote_deps, dependencies) {
   deps <- rbind(cran_deps, remote_deps)
 
+  # Only keep the remotes that are specified in the cran_deps
   # Keep only the Non-CRAN remotes if there are duplicates as we want to install
   # the development version rather than the CRAN version. The remotes will
   # always be specified after the CRAN dependencies, so using fromLast will
@@ -185,7 +186,7 @@ split_remotes <- function(x) {
   trim_ws(unlist(strsplit(x, ",[[:space:]]*")))
 }
 
-remote_deps <- function(pkg) {
+remote_deps <- function(pkg, deps) {
   pkg <- as.package(pkg)
 
   if (!has_dev_remotes(pkg)) {
@@ -212,7 +213,7 @@ remote_deps <- function(pkg) {
     class = c("package_deps", "data.frame"))
   res$remote <- structure(remotes, class = "remotes")
 
-  res
+  res[res$package %in% deps, ]
 }
 
 has_dev_remotes <- function(pkg) {
