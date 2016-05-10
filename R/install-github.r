@@ -252,7 +252,7 @@ remote_package_name.github_remote <- function(remote, url = "https://github.com"
   req <- httr::GET(url, path = path, httr::write_disk(path = tmp))
 
   if (httr::status_code(req) >= 400) {
-    return(NA)
+    return(NA_character_)
   }
 
   read_dcf(tmp)$Package
