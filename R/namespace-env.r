@@ -345,7 +345,7 @@ register_namespace <- function(name = NULL, env = NULL) {
     stop("Namespace ", name, " is already registered.")
 
   # Add the environment to the registry
-  nsr <- ns_registry
+  nsr <- ns_registry()
   nsr[[name]] <- env
 
   env
@@ -363,6 +363,6 @@ unregister_namespace <- function(name = NULL) {
     stop(name, " is not a registered namespace.")
 
   # Remove the item from the registry
-  do.call(rm, args = list(name, envir = ns_registry))
+  do.call(rm, args = list(name, envir = ns_registry()))
   invisible()
 }

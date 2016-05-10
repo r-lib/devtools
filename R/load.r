@@ -121,6 +121,9 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
     unload(pkg)
   }
 
+  # Unload dlls
+  unload_dll(pkg)
+
   if (reset) {
     clear_cache()
     if (is_loaded(pkg)) unload(pkg)

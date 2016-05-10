@@ -70,6 +70,13 @@ install <-
   pkg <- as.package(pkg)
   check_build_tools(pkg)
 
+  # Forcing all of the promises for the current namespace now will avoid lazy-load
+  # errors when the new package is installed overtop the old one.
+  # https://stat.ethz.ch/pipermail/r-devel/2015-December/072150.html
+  if (is_loaded(pkg)) {
+    eapply(ns_env(pkg), force, all.names = TRUE)
+  }
+
   root_install <- is.null(installing$packages)
   if (root_install) {
     on.exit(installing$packages <- NULL)
@@ -86,14 +93,6 @@ install <-
   if (!quiet) {
     message("Installing ", pkg$package)
   }
-  # Forcing all of the promises for the current namespace now will avoid lazy-load
-  # errors when the new package is installed overtop the old one.
-  # https://stat.ethz.ch/pipermail/r-devel/2015-December/072150.html
-  if (is_loaded(pkg)) {
-    eapply(ns_env(pkg), force, all.names = TRUE)
-    unload(pkg$path)
-  }
-
 
   # If building vignettes, make sure we have all suggested packages too.
   if (build_vignettes && missing(dependencies)) {

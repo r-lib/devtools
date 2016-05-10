@@ -67,7 +67,6 @@ NULL
   assign("withr_with_dir", withr::with_dir, envir = env)
   assign("withr_with_collate", withr::with_collate, envir = env)
   assign("withr_with_envvar", withr::with_envvar, envir = env)
-  assign("ns_registry", ns_registry(), envir = env)
 
   invisible()
 }
