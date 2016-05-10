@@ -59,6 +59,7 @@ remote_metadata.local_remote <- function(x, bundle = NULL, source = NULL) {
 #' @export
 remote_metadata.package <- remote_metadata.local_remote
 
+#' @export
 remote_package_name.local_remote <- function(remote, ...) {
   description_path <- file.path(remote$path, "DESCRIPTION")
 

@@ -167,17 +167,7 @@ parse_one_remote <- function(x) {
       envir = asNamespace("devtools"), mode = "function", inherits = FALSE),
     error = function(e) stop("Unknown remote type: ", type, call. = FALSE))
 
-  simple_remote <- fun(repo)
-  detailed_remote <- package2remote(remote_package_name(simple_remote))
-
-  # if package is not installed simply return the simple remote
-  if (is.null(detailed_remote)) {
-    remote <- simple_remote
-  }  # if package is installed return the detailed remote
-  else {
-    remote <- detailed_remote
-  }
-  remote
+  fun(repo)
 }
 
 split_remotes <- function(x) {
