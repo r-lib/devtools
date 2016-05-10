@@ -61,7 +61,7 @@ remote_download.git_remote <- function(x, quiet = FALSE) {
 remote_metadata.git_remote <- function(x, bundle = NULL, source = NULL) {
   if (!is.null(bundle)) {
     r <- git2r::repository(bundle)
-    sha <- git2r::commits(r)[[1]]@sha
+    sha <- git_repo_sha1(r)
   } else {
     sha <- NULL
   }
