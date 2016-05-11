@@ -104,6 +104,11 @@ install <-
   initial_deps <- dependencies[dependencies != "Suggests"]
   final_deps <- dependencies[dependencies == "Suggests"]
 
+  # cache the Remote: dependencies here so we don't have to query them each
+  # time we call install_deps
+  installing$remote_deps <- remote_deps(pkg)
+  on.exit(installing$remote_deps <- NULL, add = TRUE)
+
   install_deps(pkg, dependencies = initial_deps, upgrade = upgrade_dependencies,
     threads = threads, force_deps = force_deps, quiet = quiet, ...)
 
@@ -113,7 +118,7 @@ install <-
     built_path <- pkg$path
   } else {
     built_path <- build(pkg, tempdir(), vignettes = build_vignettes, quiet = quiet)
-    on.exit(unlink(built_path))
+    on.exit(unlink(built_path), add = TRUE)
   }
 
   opts <- c(

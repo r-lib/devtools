@@ -111,9 +111,15 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
       repos[missing_repos] <- bioc_repos[missing_repos]
   }
 
-  filter_duplicate_deps(
+  res <- filter_duplicate_deps(
     package_deps(deps, repos = repos, type = type),
-    remote_deps(pkg, deps))
+
+    # We set this cache in install() so we can run install_deps() twice without
+    # having to re-query the remotes
+    installing$remote_deps %||% remote_deps(pkg))
+
+  # Only keep dependencies we actually want to use
+  res[res$package %in% deps, ]
 }
 
 filter_duplicate_deps <- function(cran_deps, remote_deps, dependencies) {
@@ -186,7 +192,7 @@ split_remotes <- function(x) {
   trim_ws(unlist(strsplit(x, ",[[:space:]]*")))
 }
 
-remote_deps <- function(pkg, deps) {
+remote_deps <- function(pkg) {
   pkg <- as.package(pkg)
 
   if (!has_dev_remotes(pkg)) {
@@ -213,7 +219,7 @@ remote_deps <- function(pkg, deps) {
     class = c("package_deps", "data.frame"))
   res$remote <- structure(remotes, class = "remotes")
 
-  res[res$package %in% deps, ]
+  res
 }
 
 has_dev_remotes <- function(pkg) {
