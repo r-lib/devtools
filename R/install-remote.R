@@ -109,7 +109,7 @@ local_sha <- function(name) {
   if (!is_installed(name)) {
     return(NA_character_)
   }
-  packageDescription(name)$RemoteSha %||% NA_character_
+  package2remote(name)$sha %||% NA_character_
 }
 
 remote_download <- function(x, quiet = FALSE) UseMethod("remote_download")
@@ -130,11 +130,11 @@ package2remote <- function(x, repos = getOption("repos"), type = getOption("pkgT
 
     # Packages installed with install.packages()
     if (!is.null(x$Repository) && x$Repository == "CRAN") {
-      remote("cran",
+      return(remote("cran",
         name = x$Package,
         repos = repos,
         pkg_type = type,
-        sha = x$Version)
+        sha = x$Version))
     } else {
       return(NULL)
     }

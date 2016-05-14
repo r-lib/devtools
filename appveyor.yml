@@ -13,6 +13,8 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
+  - git config --global user.name "travis"
+  - git config --global user.email "travis@example.org"
   - Rscript -e "source('http://bioconductor.org/biocLite.R')"
   - travis-tool.sh install_deps
   - travis-tool.sh github_package jimhester/covr
