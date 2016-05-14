@@ -6,9 +6,15 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/devtools)](http://cran.r-project.org/package=devtools)
 
 
-The aim of `devtools` is to make your life as a package developer easier by providing R functions that simplify many common tasks. R packages are actually really simple, and with the right tools it should be easier to use the package structure than not. Package development in R can feel intimidating, but devtools does every thing it can to make it as welcoming as possible. `devtools` comes with a small guarantee: if because of a bug in devtools a member of R-core gets angry with you, I will send you a handwritten apology note. Just forward me the email and your address, and I'll get a card in the mail.
+The aim of `devtools` is to make package development easier by providing R functions that simplify common tasks.
 
-`devtools` is opinionated about how to do package development, and requires that you use `roxygen2` for documentation and `testthat` for testing. Not everyone agrees with these opinions, and they are by no means perfect, but they have evolved during the process of writing over 30 R packages. I'm always happy to hear about what doesn't work for you, and any places where devtools gets in your way. Either send an email to the [rdevtools mailing list](http://groups.google.com/group/rdevtools) or file an [issue](http://github.com/hadley/devtools/issues).
+An R package is actually quite simple. A package is a template or set of conventions that structures your code. This not only makes sharing code easy, it reduces the time and effort required to complete you project: following a template removes the need to have to think about how to organize things and paves the way for the creation of standardised tools that can further accelerate your progress.
+
+While package development in R can feel intimidating, `devtools` does every thing it can to make it less so. In fact, `devtools` comes with a small guarantee: if you get an angry e-mail from an R-core member because of a bug in `devtools`, forward me the email and your address and I'll mail you a card with a handwritten apology.
+
+`devtools` is opinionated about package development. It requires that you use `roxygen2` for documentation and `testthat` for testing. Not everyone would agree with this approach, and they are by no means perfect. But they have evolved out of the experience of writing over 30 R packages.
+
+I'm always happy to hear about what doesn't work for you and where `devtools` gets in your way. Either send an email to the [rdevtools mailing list](http://groups.google.com/group/rdevtools) or file an [issue at the GitHub repository](http://github.com/hadley/devtools/issues).
 
 ## Updating to the latest version of devtools
 
