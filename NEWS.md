@@ -1,5 +1,6 @@
 # devtools 1.11.1.9000
 
+* Added `use_citation()` and a template file to create the CITATION in `/inst` (@coatless, #1173) 
 * `install_*` functions and `update_packages()` refactored to allow updating of
   packages installed using any of the install methods. (@jimhester, #1067)
 

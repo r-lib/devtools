@@ -6,6 +6,56 @@
 #' @family infrastructure
 NULL
 
+#' Use CITATION
+#'
+#' This creates a \code{CITATION} file from a template.
+#'
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#' @export
+#' @family infrastructure
+use_citation <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  use_directory("inst", pkg = pkg)
+
+  # Transform person object to be parseable
+  person_obj <- eval(parse(text=pkg$`authors@r`))
+
+  # Chain authors together
+  author_text <- ""
+
+  nauthors <- length(person_obj)
+
+  i <- 1
+  while(i < nauthors){
+
+    active_author <- person_obj[i]
+
+    text_active <- paste0(active_author$given, if(!is.null(active_author$family)){paste0(" ", active_author$family)})
+    if(i != (nauthors-1)){
+      author_text <- paste0(author_text, text_active, ", ")
+    }else{
+      author_text <- paste0(author_text, text_active, " & ")
+    }
+
+    i <- i+1
+  }
+
+  active_author <- person_obj[nauthors]
+  author_text <- paste0(author_text, paste0(active_author$given, if(!is.null(active_author$family)){paste0(" ", active_author$family)})              )
+
+  # Generate citation
+
+  use_template("CITATION",
+               "inst/CITATION",
+               data = list(pkgshort = pkg$package, pkgtitle = pkg$title,
+                           year = format(Sys.time(),"%Y"),
+                           authors = pkg$`authors@r`, author_text = author_text),
+               open = TRUE, pkg = pkg)
+
+}
+
 #' @section \code{use_testthat}:
 #' Add testing infrastructure to a package that does not already have it.
 #' This will create \file{tests/testthat.R}, \file{tests/testthat/} and
