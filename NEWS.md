@@ -1,5 +1,8 @@
 # devtools 1.11.1.9000
 
+* bug fix for installation of binary packages on windows, they must be
+  installed directly from a zip file. (@jimhester, #1191, #1192)
+
 * `install_*` functions and `update_packages()` refactored to allow updating of
   packages installed using any of the install methods. (@jimhester, #1067)
 
