@@ -1,5 +1,10 @@
 # devtools 1.11.1.9000
 
+* Suggested packages, including those specified as `Remotes:` are now installed
+  after package installation. This allows you to use circular `Remotes:`
+  dependencies for two related packages as long as one of the dependencies is a
+  Suggested package. (@jimhester, #1184, hadley/dplyr#1809)
+
 * `install_*` functions and `update_packages()` refactored to allow updating of
   packages installed using any of the install methods. (@jimhester, #1067)
 
