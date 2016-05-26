@@ -96,9 +96,20 @@ install <-
 
   # If building vignettes, make sure we have all suggested packages too.
   if (build_vignettes && missing(dependencies)) {
-    dependencies <- TRUE
+    dependencies <- standardise_dep(TRUE)
+  } else {
+    dependencies <- standardise_dep(dependencies)
   }
-  install_deps(pkg, dependencies = dependencies, upgrade = upgrade_dependencies,
+
+  initial_deps <- dependencies[dependencies != "Suggests"]
+  final_deps <- dependencies[dependencies == "Suggests"]
+
+  # cache the Remote: dependencies here so we don't have to query them each
+  # time we call install_deps
+  installing$remote_deps <- remote_deps(pkg)
+  on.exit(installing$remote_deps <- NULL, add = TRUE)
+
+  install_deps(pkg, dependencies = initial_deps, upgrade = upgrade_dependencies,
     threads = threads, force_deps = force_deps, quiet = quiet, ...)
 
   # Build the package. Only build locally if it doesn't have vignettes
@@ -107,7 +118,7 @@ install <-
     built_path <- pkg$path
   } else {
     built_path <- build(pkg, tempdir(), vignettes = build_vignettes, quiet = quiet)
-    on.exit(unlink(built_path))
+    on.exit(unlink(built_path), add = TRUE)
   }
 
   opts <- c(
@@ -123,6 +134,9 @@ install <-
   built_path <- normalizePath(built_path, winslash = "/")
   R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""),
     quiet = quiet)
+
+  install_deps(pkg, dependencies = final_deps, upgrade = upgrade_dependencies,
+    threads = threads, force_deps = force_deps, quiet = quiet, ...)
 
   if (length(metadata) > 0) {
     add_metadata(inst(pkg$package), metadata)

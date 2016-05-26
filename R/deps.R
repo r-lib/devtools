@@ -111,14 +111,21 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
       repos[missing_repos] <- bioc_repos[missing_repos]
   }
 
-  filter_duplicate_deps(
+  res <- filter_duplicate_deps(
     package_deps(deps, repos = repos, type = type),
-    remote_deps(pkg))
+
+    # We set this cache in install() so we can run install_deps() twice without
+    # having to re-query the remotes
+    installing$remote_deps %||% remote_deps(pkg))
+
+  # Only keep dependencies we actually want to use
+  res[res$package %in% deps, ]
 }
 
-filter_duplicate_deps <- function(cran_deps, remote_deps) {
+filter_duplicate_deps <- function(cran_deps, remote_deps, dependencies) {
   deps <- rbind(cran_deps, remote_deps)
 
+  # Only keep the remotes that are specified in the cran_deps
   # Keep only the Non-CRAN remotes if there are duplicates as we want to install
   # the development version rather than the CRAN version. The remotes will
   # always be specified after the CRAN dependencies, so using fromLast will
