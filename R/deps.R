@@ -67,9 +67,17 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
   base <- unname(inst[inst[, "Priority"] %in% c("base", "recommended"), "Package"])
   deps <- setdiff(deps, base)
 
-  inst_ver <- unname(inst[, "Version"][match(deps, rownames(inst))])
-  cran_ver <- unname(cran[, "Version"][match(deps, rownames(cran))])
-  diff <- compare_versions(inst_ver, cran_ver)
+  # get remote types
+  remote <- structure(lapply(deps, package2remote, repos = repos, type = type), class = "remotes")
+
+  inst_ver <- vapply(deps, local_sha, character(1))
+  cran_ver <- vapply(remote, remote_sha, character(1))
+
+  cran_remote <- vapply(remote, inherits, logical(1), "cran_remote")
+  diff <- logical()
+  diff[cran_remote] <- compare_versions(inst_ver[cran_remote], cran_ver[cran_remote])
+  diff[!cran_remote] <- inst_ver[!cran_remote] == cran_ver[!cran_remote]
+  diff[!cran_remote] <- ifelse(!is.na(diff[!cran_remote]) & diff[!cran_remote], CURRENT, BEHIND)
 
   res <- structure(
     data.frame(
@@ -81,8 +89,8 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
     ),
     class = c("package_deps", "data.frame")
   )
+  res$remote <- remote
 
-  res$remote <- structure(lapply(res$package, cran_remote, repos = repos, type = type), class = "remotes")
   res
 }
 
@@ -200,11 +208,11 @@ remote_deps <- function(pkg) {
   }
 
   dev_packages <- split_remotes(pkg[["remotes"]])
-  remotes <- lapply(dev_packages, parse_one_remote)
+  remote <- lapply(dev_packages, parse_one_remote)
 
-  package <- vapply(remotes, remote_package_name, character(1))
+  package <- vapply(remote, remote_package_name, character(1))
   installed <- vapply(package, local_sha, character(1))
-  available <- vapply(remotes, remote_sha, character(1))
+  available <- vapply(remote, remote_sha, character(1))
   diff <- installed == available
   diff <- ifelse(!is.na(diff) & diff, CURRENT, BEHIND)
 
@@ -217,7 +225,7 @@ remote_deps <- function(pkg) {
       stringsAsFactors = FALSE
       ),
     class = c("package_deps", "data.frame"))
-  res$remote <- structure(remotes, class = "remotes")
+  res$remote <- structure(remote, class = "remotes")
 
   res
 }
@@ -381,7 +389,11 @@ update_packages <- function(pkgs = NULL, dependencies = NA,
     }
   }
 
-  pkgs <- package_deps(pkgs, repos = repos, type = type)
+  pkgs <- package_deps(pkgs,
+    dependencies = dependencies,
+    repos = repos,
+    type = type)
+
   update(pkgs)
 }
 
@@ -397,4 +409,11 @@ parse_additional_repositories <- function(pkg) {
   if (has_additional_repositories(pkg)) {
     strsplit(pkg[["additional_repositories"]], "[,[:space:]]+")[[1]]
   }
+}
+
+#' @export
+`[.remotes` <- function(x,i,...) {
+  r <- NextMethod("[")
+  mostattributes(r) <- attributes(x)
+  r
 }

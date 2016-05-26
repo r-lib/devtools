@@ -44,15 +44,7 @@ remote_metadata.local_remote <- function(x, bundle = NULL, source = NULL) {
     RemoteUrl = x$path
   )
 
-  if (uses_git(x$path) && !git_uncommitted(x$path)) {
-    res$RemoteSha <- git_sha1(path = x$path)
-    res$RemoteBranch <- git_branch(path = x$path)
-  }
-  if (uses_github(x$path)) {
-    info <- github_info(x$path)
-    res$RemoteUsername <- info$username
-    res$RemoteRepo <- info$repo
-  }
+  res$RemoteSha <- as.package(x$path)$version
   res
 }
 
@@ -69,7 +61,7 @@ remote_package_name.local_remote <- function(remote, ...) {
 #' @export
 remote_sha.local_remote <- function(remote, ...) {
   tryCatch({
-    git_sha1(path = remote$path)
+    read_dcf(file.path(remote$path, "DESCRIPTION"))$Version
   }, error = function(e) NA_character_)
 }
 
