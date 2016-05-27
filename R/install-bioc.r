@@ -136,13 +136,16 @@ remote_sha.bioc_remote <- function(remote, ...) {
 
 bioc_args <- function(x) {
   args <- c(
-  if (!is.null(x$revision)) {
-    c("--revision", x$revision)
-  },
-  "--username", x$username,
-  if (!is.null(x$password)) {
-    c("--password", x$password)
-  })
+    if (!interactive()) {
+      "--non-interactive",
+    }
+    if (!is.null(x$revision)) {
+      c("--revision", x$revision)
+    },
+    "--username", x$username,
+    if (!is.null(x$password)) {
+      c("--password", x$password)
+    })
 }
 
 bioc_url <- function(x) {
