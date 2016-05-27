@@ -137,8 +137,8 @@ remote_sha.bioc_remote <- function(remote, ...) {
 bioc_args <- function(x) {
   args <- c(
     if (!interactive()) {
-      "--non-interactive",
-    }
+      "--non-interactive"
+    },
     if (!is.null(x$revision)) {
       c("--revision", x$revision)
     },
