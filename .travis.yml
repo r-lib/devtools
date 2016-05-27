@@ -19,6 +19,7 @@ bioc_required: true
 before_script:
     - git config --global user.name "travis"
     - git config --global user.email "travis@example.org"
+    - mkdir -p ~/.subversion/ && echo "[global]\nstore-plaintext-passwords = yes" >> ~/.subversion/servers
 
 # Only report coverage for the release version
 after_success:
