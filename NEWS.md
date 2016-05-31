@@ -1,5 +1,7 @@
 # devtools 1.11.1.9000
 
+* `install_github()` now downloads tarballs rather than zipballs. (@kevinushey)
+
 * Suggested packages, including those specified as `Remotes:` are now installed
   after package installation. This allows you to use circular `Remotes:`
   dependencies for two related packages as long as one of the dependencies is a
