@@ -1,5 +1,8 @@
 # devtools 1.11.1.9000
 
+* Add a default codecov.yml file to turn off commenting with `use_coverage()`
+  (@jimhester, #1188)
+
 * Suggested packages, including those specified as `Remotes:` are now installed
   after package installation. This allows you to use circular `Remotes:`
   dependencies for two related packages as long as one of the dependencies is a
