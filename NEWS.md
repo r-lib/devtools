@@ -7,6 +7,8 @@
 
 * `install_*` functions and `update_packages()` refactored to allow updating of
   packages installed using any of the install methods. (@jimhester, #1067)
+* `clean_dll()` Only removes package_name.def files and now operates
+  recursively. (@jimhester, #1175, #1159, #1161)
 
 # devtools 1.11.1
 
