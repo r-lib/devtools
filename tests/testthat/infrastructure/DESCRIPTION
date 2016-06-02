@@ -4,12 +4,12 @@ Version: 0.0.0.9000
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
 Depends: R (>= 3.2.3)
-License: MIT + file LICENSE
+License: What license is it under?
+Encoding: UTF-8
 LazyData: true
 Suggests: testthat,
     knitr,
-    rmarkdown,
-    covr
+    rmarkdown
 VignetteBuilder: knitr
 LinkingTo: Rcpp
 Imports: Rcpp

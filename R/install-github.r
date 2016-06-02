@@ -91,7 +91,9 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
 #' @export
 remote_download.github_remote <- function(x, quiet = FALSE) {
   dest <- tempfile(fileext = paste0(".zip"))
-  src_root <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo)
+  if (!grepl("^http", x$host))
+    x$host <- paste0("https://", x$host)
+  src_root <- paste0(x$host, "/repos/", x$username, "/", x$repo)
   src <- paste0(src_root, "/zipball/", x$ref)
 
   if (!quiet) {
@@ -117,7 +119,9 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
 }
 
 github_has_remotes <- function(x, auth = NULL) {
-  src_root <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo)
+  if (!grepl("^http", x$host))
+    x$host <- paste0("https://", x$host)
+  src_root <- paste0(x$host, "/repos/", x$username, "/", x$repo)
   src_submodules <- paste0(src_root, "/contents/.gitmodules?ref=", x$ref)
   response <- httr::HEAD(src_submodules, , auth)
   identical(httr::status_code(response), 200L)
