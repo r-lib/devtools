@@ -13,6 +13,9 @@
   
 * `clean_dll()` Only removes package_name.def files and now operates
   recursively. (@jimhester, #1175, #1159, #1161)
+  
+* `source_gist()` gains a `filename` argument to specify a particular file to
+  source from a GitHub gist. (@ateucher, #1172)
 
 # devtools 1.11.1
 
