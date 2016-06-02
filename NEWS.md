@@ -1,5 +1,8 @@
 # devtools 1.11.1.9000
 
+* `revdep_check()` will now create the `revdep/` directory if it does not
+  already exist (#1178).
+
 * `check_man()` now prints a message if not problems are found (#1187).
 
 * `install_dev_deps()` gets everything you need to start development on source

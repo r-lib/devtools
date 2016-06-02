@@ -121,6 +121,12 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          check_dir = NULL) {
 
   pkg <- as.package(pkg)
+
+  revdep_path <- file.path(pkg$path, "revdep")
+  if (!file.exists(revdep_path)) {
+    dir.create(revdep_path)
+  }
+
   if (file.exists(revdep_cache_path(pkg))) {
     stop("Cache file `revdep/.cache.rds` exists.\n",
       "Use `revdep_check_resume()` to resume\n",
