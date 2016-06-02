@@ -1,5 +1,8 @@
 # devtools 1.11.1.9000
 
+* `build_vignette()` will now only install the "VignetteBuilder" if it's 
+  not present, not try and upgrade it if it is (#1139).
+
 * Add a default codecov.yml file to turn off commenting with `use_coverage()`
   (@jimhester, #1188)
 
