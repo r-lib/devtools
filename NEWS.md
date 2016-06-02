@@ -1,5 +1,7 @@
 # devtools 1.11.1.9000
 
+* `check_man()` now prints a message if not problems are found (#1187).
+
 * `install_dev_deps()` gets everything you need to start development on source
   package - it installs all dependencies, and roxygen2 (#1193).
 
