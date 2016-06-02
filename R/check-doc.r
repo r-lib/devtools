@@ -41,12 +41,6 @@ check_man <- function(pkg = ".") {
   invisible()
 }
 
-#' @rdname check_man
-#' @usage NULL
-check_doc <- function(...) {
-  check_man(...)
-}
-
 man_message <- function(x) {
   if ("bad" %in% names(x) && length(x$bad) == 0) {
     # Returned by check_Rd_xrefs()
