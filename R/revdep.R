@@ -107,9 +107,9 @@ print.maintainers <- function(x, ...) {
 #' @examples
 #' \dontrun{
 #' # Run R CMD check on all downstream dependencies of ggplot2
-#' res <- revdep_check("ggplot2")
-#' revdep_check_summary(res)
-#' revdep_check_save_logs(res)
+#' res <- revdep_check()
+#' revdep_check_summary()
+#' revdep_check_save_logs()
 #' }
 revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
