@@ -102,10 +102,6 @@ Other commands:
 * `wd()` changes the working directory to a path relative to the
   package root.
 
-## Development mode
-
-Calling `dev_mode()` will switch your version of R into "development mode". In this mode, R will install packages to `~/R-dev`. This is useful to avoid clobbering the existing versions of CRAN packages that you need for other tasks. Calling `dev_mode()` again will turn development mode off, and return you to your default library setup.
-
 ## Other tips
 
 I recommend adding the following code to your `.Rprofile`:
