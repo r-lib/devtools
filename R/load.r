@@ -92,6 +92,15 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 
   if (!quiet) message("Loading ", pkg$package)
 
+  if (pkg$package == "compiler") {
+    # Disable JIT while loading the compiler package to avoid interference
+    # (otherwise the compiler package would be loaded as a side effect of
+    # JIT compilation and it would be locked before we can insert shims into
+    # it).
+    oldEnabled <- compiler::enableJIT(0)
+    on.exit(compiler::enableJIT(oldEnabled), TRUE)
+  }
+
   roxygen2::update_collate(pkg$path)
   # Refresh the pkg structure with any updates to the Collate entry
   # in the DESCRIPTION file
