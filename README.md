@@ -94,14 +94,6 @@ Check and release:
   uploads to CRAN. It also drafts an email to let the CRAN
   maintainers know that you've uploaded a new package.
 
-Other commands:
-
-* `bash()` opens a bash shell in your package directory so you can
-  use git or other command line tools.
-
-* `wd()` changes the working directory to a path relative to the
-  package root.
-
 ## Other tips
 
 I recommend adding the following code to your `.Rprofile`:
