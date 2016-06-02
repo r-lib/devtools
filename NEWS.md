@@ -1,5 +1,8 @@
 # devtools 1.11.1.9000
 
+* `install_dev_deps()` gets everything you need to start development on source
+  package - it installs all dependencies, and roxygen2 (#1193).
+
 * `build_vignette()` will now only install the "VignetteBuilder" if it's 
   not present, not try and upgrade it if it is (#1139).
 

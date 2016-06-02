@@ -154,6 +154,12 @@ installing <- new.env(parent = emptyenv())
 
 #' Install package dependencies if needed.
 #'
+#' \code{install_deps} is used by \code{install_*} to make sure you have
+#' all the dependencies for a package. \code{install_dev_deps()} is useful
+#' if you have a source version of the package and want to be able to
+#' develop with it: it installs all dependencies of the package, and it
+#' also installs roxygen2.
+#'
 #' @inheritParams install
 #' @inheritParams package_deps
 #' @param ... additional arguments passed to \code{\link{install.packages}}.
@@ -173,4 +179,12 @@ install_deps <- function(pkg = ".", dependencies = NA,
     type = type)
   update(pkg, ..., Ncpus = threads, quiet = quiet, upgrade = upgrade)
   invisible()
+}
+
+#' @rdname install_deps
+#' @export
+install_dev_deps <- function(pkg = ".", ...) {
+  update_packages("roxygen2")
+  install_deps(pkg, ..., dependencies = TRUE, upgrade = FALSE,
+    bioc_packages = TRUE)
 }
