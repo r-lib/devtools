@@ -44,7 +44,7 @@ remote_metadata.local_remote <- function(x, bundle = NULL, source = NULL) {
     RemoteUrl = x$path
   )
 
-  res$RemoteSha <- remote_sha(x)
+  res$RemoteSha <- remote_sha.local_remote(x)
   if (uses_git(x$path)) {
     res$RemoteBranch <- git_branch(path = x$path)
   }

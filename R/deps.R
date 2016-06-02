@@ -74,10 +74,7 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
   cran_ver <- vapply(remote, remote_sha, character(1))
 
   cran_remote <- vapply(remote, inherits, logical(1), "cran_remote")
-  diff <- logical()
-  diff[cran_remote] <- compare_versions(inst_ver[cran_remote], cran_ver[cran_remote])
-  diff[!cran_remote] <- inst_ver[!cran_remote] == cran_ver[!cran_remote]
-  diff[!cran_remote] <- ifelse(!is.na(diff[!cran_remote]) & diff[!cran_remote], CURRENT, BEHIND)
+  diff <- compare_versions(inst_ver, cran_ver, cran_remote)
 
   res <- structure(
     data.frame(
@@ -153,10 +150,17 @@ CURRENT <- 0L
 AHEAD <- 1L
 UNAVAILABLE <- 2L
 
-compare_versions <- function(inst, cran) {
-  stopifnot(length(inst) == length(cran))
+compare_versions <- function(inst, remote, is_cran) {
+  stopifnot(length(inst) == length(remote) && length(inst) == length(is_cran))
 
-  compare_var <- function(i, c) {
+  compare_var <- function(i, c, cran) {
+    if (!cran) {
+      if (identical(i, c)) {
+        return(CURRENT)
+      } else {
+        return(BEHIND)
+      }
+    }
     if (is.na(c)) return(UNAVAILABLE)           # not on CRAN
     if (is.na(i)) return(UNINSTALLED)           # not installed, but on CRAN
 
@@ -173,7 +177,7 @@ compare_versions <- function(inst, cran) {
   }
 
   vapply(seq_along(inst),
-    function(i) compare_var(inst[[i]], cran[[i]]),
+    function(i) compare_var(inst[[i]], remote[[i]], is_cran[[i]]),
     integer(1))
 }
 
