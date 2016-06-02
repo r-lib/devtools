@@ -176,6 +176,7 @@ use_coverage <- function(pkg = ".", type = c("codecov", "coveralls")) {
   message("Next:")
   switch(type,
     codecov = {
+      use_template("codecov.yml", "codecov.yml", ignore = TRUE, pkg = pkg)
       message("* Add to `README.md`: \n",
         "[![Coverage Status]",
         "(https://img.shields.io/codecov/c/github/", gh$fullname, "/master.svg)]",
