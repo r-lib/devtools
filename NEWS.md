@@ -7,6 +7,9 @@
 * devtools now uses https to access the RStudio CRAN mirror if it will work
   on your system (#1060)
 
+* devtools now uses https to access the RStudio CRAN mirror if it will work
+  on your system (#1060)
+
 * `revdep_check()` will now create the `revdep/` directory if it does not
   already exist (#1178).
 
