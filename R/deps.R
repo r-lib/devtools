@@ -54,7 +54,7 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
   if (length(repos) == 0)
     repos <- character()
 
-  repos[repos == "@CRAN@"] <- "http://cran.rstudio.com"
+  repos[repos == "@CRAN@"] <- "https://cran.rstudio.com"
   cran <- available_packages(repos, type)
 
   if (missing(pkg)) {
