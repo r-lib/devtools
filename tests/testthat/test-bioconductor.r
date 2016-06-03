@@ -25,7 +25,12 @@ test_that("install_bioc", {
   on.exit(.libPaths(libpath), add = TRUE)
   .libPaths(lib)
 
-  # Install BiocInstaller first
+  # unload BiocInstaller if it is already loaded, unload it after this function
+  # finishes as well
+  unloadNamespace("BiocInstaller")
+  on.exit(unloadNamespace("BiocInstaller"), add = TRUE)
+
+  # Install BiocInstaller to the new library
   source("https://bioconductor.org/biocLite.R")
 
   # This package has no dependencies or compiled code and is old

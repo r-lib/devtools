@@ -30,7 +30,6 @@ test_that("pkg_sha metadata from shallow clone", {
 
 
 test_that("install on packages adds metadata", {
-  skip("testing")
   skip_on_cran()
 
   # temp libPaths
