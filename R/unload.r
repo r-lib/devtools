@@ -28,7 +28,20 @@
 #' }
 #' @export
 unload <- function(pkg = ".") {
+
   pkg <- as.package(pkg)
+
+  if (pkg$package == "compiler") {
+    # Disable JIT compilation as it could interfere with the compiler
+    # unloading. Also, if the JIT was kept enabled, it would cause the
+    # compiler package to be loaded again soon, anyway. Note if we
+    # restored the JIT level after the unloading, the call to
+    # enableJIT itself would load the compiler again.
+    oldEnable <- compiler::enableJIT(0)
+    if (oldEnable != 0) {
+      warning("JIT automatically disabled when unloading the compiler.")
+    }
+  }
 
   # This is a hack to work around unloading devtools itself. The unloading
   # process normally makes other devtools functions inaccessible,
@@ -66,7 +79,8 @@ unload <- function(pkg = ".") {
   # because things can be in a weird state.
   if (!is.null(.getNamespace(pkg$package))) {
     message("unloadNamespace(\"", pkg$package,
-      "\") not successful. Forcing unload.")
+      "\") not successful, probably because another loaded package depends on it.",
+      "Forcing unload. If you encounter problems, please restart R.")
     unregister_namespace(pkg$package)
   }
 

@@ -64,6 +64,9 @@ Remotes: git::https://github.com/hadley/ggplot2.git
 # Bitbucket
 Remotes: bitbucket::sulab/mygene.r@default, dannavarro/lsr-package
 
+# Bioconductor
+Remotes: bioc::3.3/SummarizedExperiment#117513, bioc::release/Biobase
+
 # SVN
 Remotes: svn::https://github.com/hadley/stringr
 

@@ -69,7 +69,7 @@ if (packageVersion("knitr") >= 1.2) {
     on.exit(clean_vignettes(pkg), add = TRUE)
     installed_deps <- NULL
     with_mock(
-      install_deps = function(pkg, dependencies) installed_deps <<- dependencies,
+      install_deps = function(pkg, dependencies, ...) installed_deps <<- dependencies,
       build_vignettes(pkg, FALSE)
     )
     expect_false(installed_deps)

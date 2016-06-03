@@ -7,3 +7,4 @@
 ^appveyor\.yml$
 ^CONTRIBUTING\.md$
 ^\.httr-oauth$
+^codecov\.yml$

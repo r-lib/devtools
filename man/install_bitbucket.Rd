@@ -44,10 +44,10 @@ install_bitbucket("dannavarro/lsr-package")
 Bitbucket API docs:
   \url{https://confluence.atlassian.com/bitbucket/use-the-bitbucket-cloud-rest-apis-222724129.html}
 
-Other package installation: \code{\link{install_cran}},
-  \code{\link{install_github}}, \code{\link{install_git}},
-  \code{\link{install_svn}}, \code{\link{install_url}},
-  \code{\link{install_version}}, \code{\link{install}},
-  \code{\link{uninstall}}
+Other package installation: \code{\link{install_bioc}},
+  \code{\link{install_cran}}, \code{\link{install_github}},
+  \code{\link{install_git}}, \code{\link{install_svn}},
+  \code{\link{install_url}}, \code{\link{install_version}},
+  \code{\link{install}}, \code{\link{uninstall}}
 }
 

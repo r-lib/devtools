@@ -27,6 +27,11 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE) {
     return(invisible(FALSE))
   }
 
+  if (is_windows && inherits(remote, "cran_remote")) {
+    install_packages(package_name, repos = remote$repos, type = remote$pkg_type, ..., quiet = quiet)
+    return(invisible(TRUE))
+  }
+
   bundle <- remote_download(remote, quiet = quiet)
   on.exit(unlink(bundle), add = TRUE)
 
@@ -109,7 +114,7 @@ local_sha <- function(name) {
   if (!is_installed(name)) {
     return(NA_character_)
   }
-  packageDescription(name)$RemoteSha
+  package2remote(name)$sha %||% NA_character_
 }
 
 remote_download <- function(x, quiet = FALSE) UseMethod("remote_download")
@@ -117,27 +122,27 @@ remote_metadata <- function(x, bundle = NULL, source = NULL) UseMethod("remote_m
 remote_package_name <- function(remote, ...) UseMethod("remote_package_name")
 remote_sha <- function(remote, ...) UseMethod("remote_sha")
 
-package2remote <- function(x, repos = getOption("repos"), type = getOption("pkgType")) {
+package2remote <- function(name, repos = getOption("repos"), type = getOption("pkgType")) {
 
-  x <- tryCatch(packageDescription(x), error = function(e) NA, warning = function(e) NA)
+  x <- tryCatch(packageDescription(name), error = function(e) NA, warning = function(e) NA)
 
   # will be NA if not installed
   if (identical(x, NA)) {
-    return(NULL)
+    return(remote("cran",
+        name = name,
+        repos = repos,
+        pkg_type = type,
+        sha = NA))
   }
 
   if (is.null(x$RemoteType)) {
 
-    # Packages installed with install.packages()
-    if (!is.null(x$Repository) && x$Repository == "CRAN") {
-      remote("cran",
+    # Packages installed with install.packages() or locally without devtools
+    return(remote("cran",
         name = x$Package,
         repos = repos,
         pkg_type = type,
-        sha = x$Version)
-    } else {
-      return(NULL)
-    }
+        sha = x$Version))
   }
 
   switch(x$RemoteType,
@@ -170,22 +175,28 @@ package2remote <- function(x, repos = getOption("repos"), type = getOption("pkgT
       path = x$RemoteUrl,
       branch = x$RemoteBranch,
       subdir = x$RemoteSubdir,
-      sha = x$RemoteSha,
+      sha = x$RemoteSha %||% x$Version,
       username = x$RemoteUsername,
       repo = x$RemoteRepo),
     url = remote("url",
       url = x$RemoteUrl,
       subdir = x$RemoteSubdir,
       config = x$RemoteConfig),
+    bioc = remote("bioc",
+      repo = x$RemoteRepo,
+      mirror = x$RemoteMirror,
+      release = x$RemoteRelease,
+      username = x$RemoteUsername,
+      password = x$RemotePassword,
+      revision = x$RemoteRevision,
+      sha = x$RemoteSha),
 
     # packages installed with install_cran
     cran = remote("cran",
-      name = x$RemoteName,
+      name = x$Package,
       repos = eval(parse(text = x$RemoteRepos)),
       pkg_type = x$RemotePkgType,
-      sha = x$RemoteSha
-      )
-    )
+      sha = x$RemoteSha))
 }
 
 #' @export

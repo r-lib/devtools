@@ -19,7 +19,7 @@ build_vignettes <- function(pkg = ".", dependencies = "VignetteBuilder") {
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (length(vigns$docs) == 0) return()
 
-  install_deps(pkg, dependencies)
+  install_deps(pkg, dependencies, upgrade = FALSE)
 
   message("Building ", pkg$package, " vignettes")
   tools::buildVignettes(dir = pkg$path, tangle = TRUE)
