@@ -22,7 +22,9 @@ download_method <- function(x) {
 }
 
 auto_download_method <- function() {
-  if (capabilities("http/ftp")) {
+  if (capabilities("libcurl")) {
+    "libcurl"
+  } else if (capabilities("http/ftp")) {
     "internal"
   } else if (nzchar(Sys.which("wget"))) {
     "wget"
