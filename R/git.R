@@ -33,15 +33,15 @@ git_sync_status <- function(path = ".") {
 
   r_head <- git2r::head(r)
   if (!methods::is(r_head, "git_branch")) {
-    return(invisible(FALSE))
+    stop("HEAD is not a branch", call. = FALSE)
   }
 
   upstream <- git2r::branch_get_upstream(r_head)
-  # fetch(r, branch_remote_name(upstream))
-
   if (is.null(upstream)) {
-    return(invisible(FALSE))
+    stop("No upstream branch", call. = FALSE)
   }
+
+  git2r::fetch(r, git2r::branch_remote_name(upstream))
 
   c1 <- git2r::lookup(r, git2r::branch_target(r_head))
   c2 <- git2r::lookup(r, git2r::branch_target(upstream))
