@@ -4,39 +4,41 @@
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
 #' @export
-load_dll <- function(pkg = ".") {
-  pkg <- as.package(pkg)
-  env <- ns_env(pkg)
-  nsInfo <- parse_ns_file(pkg)
+onload_assign("load_dll",
+  make_function(alist(pkg = "."),
+    bquote({
+      pkg <- as.package(pkg)
+      env <- ns_env(pkg)
+      nsInfo <- parse_ns_file(pkg)
 
-  # The code below taken directly from base::loadNamespace, except for
-  # library.dynam2, which is a special version of library.dynam
+      dlls <- list()
+      dynLibs <- nsInfo$dynlibs
 
-  ## load any dynamic libraries
-  dlls <- list()
-  dynLibs <- nsInfo$dynlibs
-  for (i in seq_along(dynLibs)) {
-    lib <- dynLibs[i]
-    # NOTE: replaced library.dynam with devtools replacement, library.dynam2
-    dlls[[lib]]  <- library.dynam2(pkg, lib)
-    assignNativeRoutines(dlls[[lib]], lib, env,
-                         nsInfo$nativeRoutines[[lib]])
+      ## The code below taken directly from base::loadNamespace
+      ## https://github.com/wch/r-source/blob/tags/R-3-3-0/src/library/base/R/namespace.R#L466-L485
+      ## except for the call to library.dynam2, which is a special version of
+      ## library.dynam
+      .(for_loop)
+      addNamespaceDynLibs(env, nsInfo$dynlibs)
 
-    ## If the DLL has a name as in useDynLib(alias = foo),
-    ## then assign DLL reference to alias.  Check if
-    ## names() is NULL to handle case that the nsInfo.rds
-    ## file was created before the names were added to the
-    ## dynlibs vector.
-    if(!is.null(names(nsInfo$dynlibs))
-       && names(nsInfo$dynlibs)[i] != "")
-      assign(names(nsInfo$dynlibs)[i], dlls[[lib]], envir = env)
-    setNamespaceInfo(env, "DLLs", dlls)
-  }
-  addNamespaceDynLibs(env, nsInfo$dynlibs)
+      invisible(dlls)
+    },
+    list(for_loop =
+      modify_lang(
+        f = function(x)
+          if (is.call(x) && identical(x[1], quote(library.dynam()))) {
+            quote(library.dynam2(pkg, lib))
+          } else {
+            x
+          },
 
-  invisible(dlls)
-}
-
+        extract_lang(
+          f = function(x) {
+            length(x) > 3 && identical(x[1:3], quote(for (i in seq_along(dynLibs)) NULL)[1:3])[[1]]
+          },
+          body(loadNamespace)
+        )[[1]]
+      )))))
 
 # Return a list of currently loaded DLLs from the package
 loaded_dlls <- function(pkg = ".") {
