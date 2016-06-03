@@ -37,6 +37,9 @@
 
 * `install_*` functions and `update_packages()` refactored to allow updating of
   packages installed using any of the install methods. (@jimhester, #1067)
+* `load_all()` runs package hooks before sourcing test helper files 
+  allowing test helper to make use of objects created when a package is loaded 
+  or attached. (@imanuelcostigan, #1146) 
   
 * `clean_dll()` Only removes package_name.def files and now operates
   recursively. (@jimhester, #1175, #1159, #1161)
