@@ -43,35 +43,12 @@ create_ns_env <- function(pkg = ".") {
   env
 }
 
-# This is taken directly from base::loadNamespace() in R 3.0.2
-# Except .Internal(registerNamespace(name, env)) is replaced by
-# register_namespace(name, env)
-makeNamespace <- function(name, version = NULL, lib = NULL) {
-  impenv <- new.env(parent = .BaseNamespaceEnv, hash = TRUE)
-  attr(impenv, "name") <- paste("imports", name, sep = ":")
-  env <- new.env(parent = impenv, hash = TRUE)
-  name <- as.character(as.name(name))
-  version <- as.character(version)
-  info <- new.env(hash = TRUE, parent = baseenv())
-  assign(".__NAMESPACE__.", info, envir = env)
-  assign("spec", c(name = name, version = version), envir = info)
-  setNamespaceInfo(env, "exports", new.env(hash = TRUE, parent = baseenv()))
-  dimpenv <- new.env(parent = baseenv(), hash = TRUE)
-  attr(dimpenv, "name") <- paste("lazydata", name, sep = ":")
-  setNamespaceInfo(env, "lazydata", dimpenv)
-  setNamespaceInfo(env, "imports", list("base" = TRUE))
-  ## this should be an absolute path
-  setNamespaceInfo(env, "path",
-                   normalizePath(file.path(lib, name), "/", TRUE))
-  setNamespaceInfo(env, "dynlibs", NULL)
-  setNamespaceInfo(env, "S3methods", matrix(NA_character_, 0L, 3L))
-  assign(".__S3MethodsTable__.",
-         new.env(hash = TRUE, parent = baseenv()),
-         envir = env)
-  register_namespace(name, env)
-  env
-}
-
+# This is taken directly from base::loadNamespace()
+delayedAssign("makeNamespace",
+  eval(
+    extract_lang(body(loadNamespace),
+    function(x) length(x) > 2 && identical(x[1:2], quote(makeNamespace <- NULL)[1:2]))[[c(1, 3)]])
+)
 
 # Read the NAMESPACE file and set up the imports metdata.
 # (which is stored in .__NAMESPACE__.)
