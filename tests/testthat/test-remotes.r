@@ -57,6 +57,9 @@ test_that("dev_remote_type works with explicit types", {
 
   expect_equal(split_remotes("github::hadley/testthat,github::klutometis/roxygen"),
     c("github::hadley/testthat", "github::klutometis/roxygen"))
+
+  expect_equal(split_remotes("bioc::user:password@release/Biobase#12345,github::klutometis/roxygen"),
+    c("bioc::user:password@release/Biobase#12345", "github::klutometis/roxygen"))
 })
 
 test_that("different_sha returns TRUE if remote or local sha is NA not found", {

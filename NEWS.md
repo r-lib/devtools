@@ -1,5 +1,40 @@
 # devtools 1.11.1.9000
 
+* `use_dev_version()` automates the process of switching from a release
+  version number by tweaking the `DESCRIPTION`, adding a heading to
+  `NEWS.md` (if present), and checking into git (if you use it) (#1076.)
+
+* devtools now uses https to access the RStudio CRAN mirror if it will work
+  on your system (#1059)
+
+* `revdep_check()` will now create the `revdep/` directory if it does not
+  already exist (#1178).
+
+* `check_man()` now prints a message if not problems are found (#1187).
+
+* `install_dev_deps()` gets everything you need to start development on source
+  package - it installs all dependencies, and roxygen2 (#1193).
+* `install_github()` now uses `https://api.github.com` as the host argument, so
+  users can specify 'http:' or other protocols if needed. (@jimhester, #1131, #1200)
+
+* `build_vignette()` will now only install the "VignetteBuilder" if it's 
+  not present, not try and upgrade it if it is (#1139).
+
+* Add a default codecov.yml file to turn off commenting with `use_coverage()`
+  (@jimhester, #1188)
+
+* `install_github()` now downloads tarballs rather than zipballs. (@kevinushey)
+* New `install_bioc()` function and bioc remote to install Bioconductor
+  packages from their SVN repository.
+
+* Suggested packages, including those specified as `Remotes:` are now installed
+  after package installation. This allows you to use circular `Remotes:`
+  dependencies for two related packages as long as one of the dependencies is a
+  Suggested package. (@jimhester, #1184, hadley/dplyr#1809)
+
+* bug fix for installation of binary packages on windows, they must be
+  installed directly from a zip file. (@jimhester, #1191, #1192)
+
 * `install_*` functions and `update_packages()` refactored to allow updating of
   packages installed using any of the install methods. (@jimhester, #1067)
 * Bitbucket authenticates over the OAuth protocol rather than using a username 
@@ -10,6 +45,12 @@
 * Bitbucket `remote_package_name()` and `remote_sha()` methods no longer call
   github_remote class methods, but are now specifically defined for Bitbucket.
   (@imanuelcostigan, #1157)
+  
+* `clean_dll()` Only removes package_name.def files and now operates
+  recursively. (@jimhester, #1175, #1159, #1161)
+  
+* `source_gist()` gains a `filename` argument to specify a particular file to
+  source from a GitHub gist. (@ateucher, #1172)
 
 # devtools 1.11.1
 

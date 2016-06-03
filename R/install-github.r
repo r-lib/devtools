@@ -54,7 +54,7 @@
 install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
                            auth_token = github_pat(quiet),
-                           host = "api.github.com", quiet = FALSE,
+                           host = "https://api.github.com", quiet = FALSE,
                            ...) {
 
   remotes <- lapply(repo, github_remote, username = username, ref = ref,
@@ -65,7 +65,7 @@ install_github <- function(repo, username = NULL,
 
 github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
                        auth_token = github_pat(), sha = NULL,
-                       host = "api.github.com") {
+                       host = "https://api.github.com") {
 
   meta <- parse_git_repo(repo)
   meta <- github_resolve_ref(meta$ref %||% ref, meta)
@@ -90,9 +90,9 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
 
 #' @export
 remote_download.github_remote <- function(x, quiet = FALSE) {
-  dest <- tempfile(fileext = paste0(".zip"))
-  src_root <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo)
-  src <- paste0(src_root, "/zipball/", x$ref)
+  dest <- tempfile(fileext = paste0(".tar.gz"))
+  src_root <- paste0(x$host, "/repos/", x$username, "/", x$repo)
+  src <- paste0(src_root, "/tarball/", x$ref)
 
   if (!quiet) {
     message("Downloading GitHub repo ", x$username, "/", x$repo, "@", x$ref,
@@ -117,7 +117,7 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
 }
 
 github_has_remotes <- function(x, auth = NULL) {
-  src_root <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo)
+  src_root <- paste0(x$host, "/repos/", x$username, "/", x$repo)
   src_submodules <- paste0(src_root, "/contents/.gitmodules?ref=", x$ref)
   response <- httr::HEAD(src_submodules, , auth)
   identical(httr::status_code(response), 200L)

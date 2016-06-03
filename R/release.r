@@ -51,23 +51,23 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
     print(dr_d)
 
     if (yesno("Proceed anyway?"))
-      return()
+      return(invisible())
   }
 
   if (uses_git(pkg$path)) {
     if (git_uncommitted(pkg$path)) {
       if (yesno("Uncommited changes in git. Proceed anyway?"))
-        return()
+        return(invisible())
     }
 
     if (git_sync_status(pkg$path)) {
       if (yesno("Git not synched with remote. Proceed anyway?"))
-        return()
+        return(invisible())
     }
   }
 
   if (check) {
-    rule("Buiding and checking ", pkg$package, pad = "=")
+    rule("Building and checking ", pkg$package, pad = "=")
     check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE,
           build_args = args, run_dont_test = TRUE)
   }
@@ -79,7 +79,7 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
     return(invisible())
 
   if (!new_pkg) {
-    cran_url <- paste0("http://cran.rstudio.com/web/checks/check_results_",
+    cran_url <- paste0(cran_mirror(), "/web/checks/check_results_",
       pkg$package, ".html")
     if (yesno("Have you fixed all existing problems at \n", cran_url, " ?"))
       return(invisible())

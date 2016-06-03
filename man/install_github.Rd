@@ -5,8 +5,8 @@
 \title{Attempts to install a package directly from GitHub.}
 \usage{
 install_github(repo, username = NULL, ref = "master", subdir = NULL,
-  auth_token = github_pat(quiet), host = "api.github.com", quiet = FALSE,
-  ...)
+  auth_token = github_pat(quiet), host = "https://api.github.com",
+  quiet = FALSE, ...)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -71,7 +71,8 @@ install_github("hadley/private", auth_token = "abc")
 \seealso{
 \code{\link{github_pull}}
 
-Other package installation: \code{\link{install_bitbucket}},
+Other package installation: \code{\link{install_bioc}},
+  \code{\link{install_bitbucket}},
   \code{\link{install_cran}}, \code{\link{install_git}},
   \code{\link{install_svn}}, \code{\link{install_url}},
   \code{\link{install_version}}, \code{\link{install}},

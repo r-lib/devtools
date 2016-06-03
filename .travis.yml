@@ -1,29 +1,30 @@
 language: r
 sudo: false
 cache: packages
-r:
-  - oldrel
-  - release
-  - devel
 
-after_success:
-  - test $TRAVIS_R_VERSION = "3.2.4" && Rscript -e 'covr::codecov()'
+r:
+ - oldrel
+ - release
+ - devel
 
 addons:
   apt:
     packages:
       - libhunspell-dev
 
+# We want to use devel devtools to load packages so we can catch package
+# installation issues sooner rather than later.
 r_github_packages:
   - hadley/devtools
 
+# We need to install BiocInstaller for testing Bioconductor packages
 bioc_required: true
-bioc_packages:
-  - BiocInstaller
 
+# The git config settings are not setup on travis by default
 before_script:
     - git config --global user.name "travis"
     - git config --global user.email "travis@example.org"
 
+# Only report coverage for the release version
 after_success:
-  - Rscript -e 'covr::codecov()'
+  - test $TRAVIS_R_VERSION_STRING = "release" && Rscript -e 'covr::codecov()'

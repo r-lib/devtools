@@ -2,11 +2,14 @@
 % Please edit documentation in R/install.r
 \name{install_deps}
 \alias{install_deps}
+\alias{install_dev_deps}
 \title{Install package dependencies if needed.}
 \usage{
 install_deps(pkg = ".", dependencies = NA, threads = getOption("Ncpus",
   1), repos = getOption("repos"), type = getOption("pkgType"), ...,
   upgrade = TRUE, quiet = FALSE, force_deps = FALSE)
+
+install_dev_deps(pkg = ".", ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -36,7 +39,11 @@ installation.}
 SHA1 reference hasn't changed from the currently installed version.}
 }
 \description{
-Install package dependencies if needed.
+\code{install_deps} is used by \code{install_*} to make sure you have
+all the dependencies for a package. \code{install_dev_deps()} is useful
+if you have a source version of the package and want to be able to
+develop with it: it installs all dependencies of the package, and it
+also installs roxygen2.
 }
 \examples{
 \dontrun{install_deps(".")}

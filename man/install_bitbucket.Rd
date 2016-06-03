@@ -72,10 +72,10 @@ install_bitbucket("dannavarro/lsr-package")
 \href{https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html}{Bitbucket OAuth}
 \href{https://confluence.atlassian.com/bitbucket/version-2-423626329.html}{Bitbucket API v2.0}
 
-Other package installation: \code{\link{install_cran}},
-  \code{\link{install_github}}, \code{\link{install_git}},
-  \code{\link{install_svn}}, \code{\link{install_url}},
-  \code{\link{install_version}}, \code{\link{install}},
-  \code{\link{uninstall}}
+Other package installation: \code{\link{install_bioc}},
+  \code{\link{install_cran}}, \code{\link{install_github}},
+  \code{\link{install_git}}, \code{\link{install_svn}},
+  \code{\link{install_url}}, \code{\link{install_version}},
+  \code{\link{install}}, \code{\link{uninstall}}
 }
 

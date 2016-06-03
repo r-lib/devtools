@@ -54,7 +54,7 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
   if (length(repos) == 0)
     repos <- character()
 
-  repos[repos == "@CRAN@"] <- "http://cran.rstudio.com"
+  repos[repos == "@CRAN@"] <- cran_mirror()
   cran <- available_packages(repos, type)
 
   if (missing(pkg)) {
@@ -67,9 +67,14 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
   base <- unname(inst[inst[, "Priority"] %in% c("base", "recommended"), "Package"])
   deps <- setdiff(deps, base)
 
-  inst_ver <- unname(inst[, "Version"][match(deps, rownames(inst))])
-  cran_ver <- unname(cran[, "Version"][match(deps, rownames(cran))])
-  diff <- compare_versions(inst_ver, cran_ver)
+  # get remote types
+  remote <- structure(lapply(deps, package2remote, repos = repos, type = type), class = "remotes")
+
+  inst_ver <- vapply(deps, local_sha, character(1))
+  cran_ver <- vapply(remote, remote_sha, character(1))
+
+  cran_remote <- vapply(remote, inherits, logical(1), "cran_remote")
+  diff <- compare_versions(inst_ver, cran_ver, cran_remote)
 
   res <- structure(
     data.frame(
@@ -81,8 +86,8 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
     ),
     class = c("package_deps", "data.frame")
   )
+  res$remote <- remote
 
-  res$remote <- structure(lapply(res$package, cran_remote, repos = repos, type = type), class = "remotes")
   res
 }
 
@@ -111,14 +116,21 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
       repos[missing_repos] <- bioc_repos[missing_repos]
   }
 
-  filter_duplicate_deps(
+  res <- filter_duplicate_deps(
     package_deps(deps, repos = repos, type = type),
-    remote_deps(pkg))
+
+    # We set this cache in install() so we can run install_deps() twice without
+    # having to re-query the remotes
+    installing$remote_deps %||% remote_deps(pkg))
+
+  # Only keep dependencies we actually want to use
+  res[res$package %in% deps, ]
 }
 
-filter_duplicate_deps <- function(cran_deps, remote_deps) {
+filter_duplicate_deps <- function(cran_deps, remote_deps, dependencies) {
   deps <- rbind(cran_deps, remote_deps)
 
+  # Only keep the remotes that are specified in the cran_deps
   # Keep only the Non-CRAN remotes if there are duplicates as we want to install
   # the development version rather than the CRAN version. The remotes will
   # always be specified after the CRAN dependencies, so using fromLast will
@@ -138,10 +150,17 @@ CURRENT <- 0L
 AHEAD <- 1L
 UNAVAILABLE <- 2L
 
-compare_versions <- function(inst, cran) {
-  stopifnot(length(inst) == length(cran))
+compare_versions <- function(inst, remote, is_cran) {
+  stopifnot(length(inst) == length(remote) && length(inst) == length(is_cran))
 
-  compare_var <- function(i, c) {
+  compare_var <- function(i, c, cran) {
+    if (!cran) {
+      if (identical(i, c)) {
+        return(CURRENT)
+      } else {
+        return(BEHIND)
+      }
+    }
     if (is.na(c)) return(UNAVAILABLE)           # not on CRAN
     if (is.na(i)) return(UNINSTALLED)           # not installed, but on CRAN
 
@@ -158,7 +177,7 @@ compare_versions <- function(inst, cran) {
   }
 
   vapply(seq_along(inst),
-    function(i) compare_var(inst[[i]], cran[[i]]),
+    function(i) compare_var(inst[[i]], remote[[i]], is_cran[[i]]),
     integer(1))
 }
 
@@ -193,11 +212,11 @@ remote_deps <- function(pkg) {
   }
 
   dev_packages <- split_remotes(pkg[["remotes"]])
-  remotes <- lapply(dev_packages, parse_one_remote)
+  remote <- lapply(dev_packages, parse_one_remote)
 
-  package <- vapply(remotes, remote_package_name, character(1))
+  package <- vapply(remote, remote_package_name, character(1))
   installed <- vapply(package, local_sha, character(1))
-  available <- vapply(remotes, remote_sha, character(1))
+  available <- vapply(remote, remote_sha, character(1))
   diff <- installed == available
   diff <- ifelse(!is.na(diff) & diff, CURRENT, BEHIND)
 
@@ -210,7 +229,7 @@ remote_deps <- function(pkg) {
       stringsAsFactors = FALSE
       ),
     class = c("package_deps", "data.frame"))
-  res$remote <- structure(remotes, class = "remotes")
+  res$remote <- structure(remote, class = "remotes")
 
   res
 }
@@ -374,7 +393,11 @@ update_packages <- function(pkgs = NULL, dependencies = NA,
     }
   }
 
-  pkgs <- package_deps(pkgs, repos = repos, type = type)
+  pkgs <- package_deps(pkgs,
+    dependencies = dependencies,
+    repos = repos,
+    type = type)
+
   update(pkgs)
 }
 
@@ -390,4 +413,11 @@ parse_additional_repositories <- function(pkg) {
   if (has_additional_repositories(pkg)) {
     strsplit(pkg[["additional_repositories"]], "[,[:space:]]+")[[1]]
   }
+}
+
+#' @export
+`[.remotes` <- function(x,i,...) {
+  r <- NextMethod("[")
+  mostattributes(r) <- attributes(x)
+  r
 }
