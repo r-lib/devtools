@@ -65,33 +65,30 @@ load_imports <- function(pkg = ".") {
 }
 
 # Load imported objects
-# The code in this function is taken and adapted from base::loadNamespace in R
-# 2.15.3
-process_imports <- function(pkg = ".") {
-  nsInfo <- parse_ns_file(pkg)
-  ns <- ns_env(pkg)
-  lib.loc <- NULL
+# The code in this function is taken and adapted from base::loadNamespace
+# Setup variables were added and the for loops put in a tryCatch block
+# https://github.com/wch/r-source/blob/tags/R-3-3-0/src/library/base/R/namespace.R#L397-L427
+onload_assign("process_imports", {
+  make_function(alist(pkg = "."),
+    bquote({
+      package <- pkg$name
+      vI <- .split_description(.read_description(file.path(pkg$path, "DESCRIPTION")))$Imports
+      nsInfo <- devtools::parse_ns_file(pkg)
+      ns <- devtools::ns_env(pkg)
+      lib.loc <- NULL
+      tryCatch(error = warning, {
+        .(for1)
+        .(for2)
+        .(for3)
+      })
+    }, list(
+        for1 = extract_lang(body(loadNamespace),
+          function(x) length(x) > 2 && identical(x[1:3], quote(for(i in nsInfo$imports) NULL)[1:3]))[[1]],
 
-  ## process imports
-  for (i in nsInfo$imports) {
-    tryCatch(
-      if (is.character(i))
-        namespaceImport(ns, loadNamespace(i))
-      else
-        namespaceImportFrom(ns, loadNamespace(i[[1L]]), i[[2L]]),
-      error = warning
-    )
-  }
-  for(imp in nsInfo$importClasses) {
-    tryCatch(
-      namespaceImportClasses(ns, loadNamespace(imp[[1L]]), imp[[2L]]),
-      error = warning
-    )
-  }
-  for(imp in nsInfo$importMethods) {
-    tryCatch(
-      namespaceImportMethods(ns, loadNamespace(imp[[1L]]), imp[[2L]]),
-      error = warning
-    )
-  }
-}
+        for2 = extract_lang(body(loadNamespace),
+          function(x) length(x) > 2 && identical(x[1:3], quote(for(imp in nsInfo$importClasses) NULL)[1:3]))[[1]],
+
+        for3 = extract_lang(body(loadNamespace),
+          function(x) length(x) > 2 && identical(x[1:3], quote(for(imp in nsInfo$importMethods) NULL)[1:3]))[[1]]
+        )), asNamespace("tools"))
+})
