@@ -131,49 +131,6 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
   invisible()
 }
 
-# extracted from base::loadNamespace
-extract_lang <- function(x, f, ...) {
-  recurse <- function(y) {
-    unlist(lapply(y, extract_lang, f = f, ...), recursive = TRUE)
-  }
-
-  # if x matches predicate return it
-  if (isTRUE(f(x, ...))) {
-    return(x)
-  }
-
-  if (is.call(x)) {
-    return(recurse(x))
-  }
-
-  NULL
-}
-
-modify_lang <- function(x, f, ...) {
-  recurse <- function(x) {
-    lapply(x, modify_lang, f = f, ...)
-  }
-
-  x <- f(x, ...)
-
-  if (is.call(x)) {
-    as.call(recurse(x))
-  } else if (is.function(x)) {
-     formals(x) <- modify_lang(formals(x), f, ...)
-     body(x) <- modify_lang(body(x), f, ...)
-  } else {
-    x
-  }
-}
-
-strip_internal_calls <- function(x) {
-  if (is.call(x) && identical(x[[1L]], as.name(":::")) && identical(x[[2L]], as.name("methods"))) {
-    x[[3L]]
-  } else {
-    x
-  }
-}
-
 search_method_dispatch_on <- function(x) {
   is.call(x) && identical(x[[1L]], as.symbol("if")) &&
     identical(x[[2]], quote(.isMethodsDispatchOn() && .hasS4MetaData(ns) && !identical(package, "methods")))
@@ -184,14 +141,14 @@ search_method_dispatch_on <- function(x) {
 #' This function uses code from base::loadNamespace. Previously this code was
 #' copied directly, now it is dynamically looked up instead, to prevent drift as
 #' base::loadNamespace changes.
-add_classes_to_exports <- function(ns, package, exports, nsInfo) { }
-body(add_classes_to_exports) <- call(
-  "{",
-  extract_lang(
-    modify_lang(body(loadNamespace), strip_internal_calls),
-    search_method_dispatch_on)[[1L]],
-  quote(exports))
-environment(add_classes_to_exports) <- asNamespace("methods")
+delayedAssign("add_classes_to_exports",
+  make_function(alist(ns =, package =, exports =, nsInfo =),
+    call("{",
+      extract_lang(
+        modify_lang(body(base::loadNamespace), strip_internal_calls, "methods"),
+        search_method_dispatch_on)[[1]],
+      quote(exports)),
+    asNamespace("methods")))
 
 #' Parses the NAMESPACE file for a package
 #'

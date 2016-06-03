@@ -162,3 +162,56 @@ indent <- function(x, spaces = 4) {
 }
 
 is_windows <- isTRUE(.Platform$OS.type == "windows")
+
+all_named <- function (x) {
+  if (length(x) == 0) return(TRUE)
+  !is.null(names(x)) && all(names(x) != "")
+}
+
+make_function <- function (args, body, env = parent.frame()) {
+  args <- as.pairlist(args)
+  stopifnot(all_named(args), is.language(body))
+  eval(call("function", args, body), env)
+}
+
+extract_lang <- function(x, f, ...) {
+  recurse <- function(y) {
+    unlist(lapply(y, extract_lang, f = f, ...), recursive = TRUE)
+  }
+
+  # if x matches predicate return it
+  if (isTRUE(f(x, ...))) {
+    return(x)
+  }
+
+  if (is.call(x)) {
+    return(recurse(x))
+  }
+
+  NULL
+}
+
+modify_lang <- function(x, f, ...) {
+  recurse <- function(x) {
+    lapply(x, modify_lang, f = f, ...)
+  }
+
+  x <- f(x, ...)
+
+  if (is.call(x)) {
+    as.call(recurse(x))
+  } else if (is.function(x)) {
+     formals(x) <- modify_lang(formals(x), f, ...)
+     body(x) <- modify_lang(body(x), f, ...)
+  } else {
+    x
+  }
+}
+
+strip_internal_calls <- function(x, package) {
+  if (is.call(x) && identical(x[[1L]], as.name(":::")) && identical(x[[2L]], as.name(package))) {
+    x[[3L]]
+  } else {
+    x
+  }
+}
