@@ -79,7 +79,7 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
     return(invisible())
 
   if (!new_pkg) {
-    cran_url <- paste0("http://cran.rstudio.com/web/checks/check_results_",
+    cran_url <- paste0(cran_mirror(), "/web/checks/check_results_",
       pkg$package, ".html")
     if (yesno("Have you fixed all existing problems at \n", cran_url, " ?"))
       return(invisible())
