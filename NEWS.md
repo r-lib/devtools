@@ -37,6 +37,14 @@
 
 * `install_*` functions and `update_packages()` refactored to allow updating of
   packages installed using any of the install methods. (@jimhester, #1067)
+* Bitbucket authenticates over the OAuth protocol rather than using a username 
+  and password combination. Access token thus obtained are cached and refreshed
+  automatically. (@imanuelcostigan, #1157)
+* Bitbucket `refs` are now resolved in `install_bitbucket()` in a manner 
+  more consistent with `install_github()` (@imanuelcostigan, #1157)
+* Bitbucket `remote_package_name()` and `remote_sha()` methods no longer call
+  github_remote class methods, but are now specifically defined for Bitbucket.
+  (@imanuelcostigan, #1157)
   
 * `clean_dll()` Only removes package_name.def files and now operates
   recursively. (@jimhester, #1175, #1159, #1161)
