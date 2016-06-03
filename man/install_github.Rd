@@ -5,8 +5,8 @@
 \title{Attempts to install a package directly from GitHub.}
 \usage{
 install_github(repo, username = NULL, ref = "master", subdir = NULL,
-  auth_token = github_pat(quiet), host = "api.github.com", quiet = FALSE,
-  ...)
+  auth_token = github_pat(quiet), host = "https://api.github.com",
+  quiet = FALSE, ...)
 }
 \arguments{
 \item{repo}{Repository address in the format
