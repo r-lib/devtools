@@ -71,12 +71,12 @@ library.dynam2 <- function(pkg = ".", lib = "") {
 }
 
 
-# This is taken directly from base::loadNamespace() in R 2.15.1
-addNamespaceDynLibs <- function(ns, newlibs) {
-  dynlibs <- getNamespaceInfo(ns, "dynlibs")
-  setNamespaceInfo(ns, "dynlibs", c(dynlibs, newlibs))
-}
-
+# This is taken directly from base::loadNamespace()
+delayedAssign("addNamespaceDynLibs",
+  eval(
+    extract_lang(body(loadNamespace),
+    function(x) length(x) > 2 && identical(x[1:2], quote(addNamespaceDynLibs <- NULL)[1:2]))[[c(1, 3)]])
+)
 
 # This is taken directly from base::loadNamespace in R 2.15.1
 # The only change is the line used get the package name
