@@ -122,11 +122,6 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
   invisible()
 }
 
-search_method_dispatch_on <- function(x) {
-  is.call(x) && identical(x[[1L]], as.symbol("if")) &&
-    identical(x[[2]], quote(.isMethodsDispatchOn() && .hasS4MetaData(ns) && !identical(package, "methods")))
-}
-
 #' Lookup S4 classes for export
 #'
 #' This function uses code from base::loadNamespace. Previously this code was
@@ -135,9 +130,13 @@ search_method_dispatch_on <- function(x) {
 onload_assign("add_classes_to_exports",
   make_function(alist(ns =, package =, exports =, nsInfo =),
     call("{",
-      extract_lang(
-        modify_lang(body(base::loadNamespace), strip_internal_calls, "methods"),
-        search_method_dispatch_on)[[1]],
+      extract_lang(f =
+        function(x) {
+          length(x) > 2 &&
+            identical(x[1:2],
+              quote(if (.isMethodsDispatchOn() && .hasS4MetaData(ns) && !identical(package, "methods")) NULL)[1:2])
+        },
+        modify_lang(body(base::loadNamespace), strip_internal_calls, "methods"))[[1]],
       quote(exports)),
     asNamespace("methods")))
 
