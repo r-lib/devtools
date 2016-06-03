@@ -629,6 +629,9 @@ use_mit_license <- function(pkg = ".", copyright_holder = getOption("devtools.na
   )
 }
 
+
+# Utilities ---------------------------------------------------------------
+
 use_directory <- function(path, ignore = FALSE, pkg = ".") {
   pkg <- as.package(pkg)
   pkg_path <- file.path(pkg$path, path)
