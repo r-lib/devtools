@@ -14,6 +14,7 @@
 
 * `install_dev_deps()` gets everything you need to start development on source
   package - it installs all dependencies, and roxygen2 (#1193).
+  
 * `install_github()` now uses `https://api.github.com` as the host argument, so
   users can specify 'http:' or other protocols if needed. (@jimhester, #1131, #1200)
 
@@ -24,6 +25,7 @@
   (@jimhester, #1188)
 
 * `install_github()` now downloads tarballs rather than zipballs. (@kevinushey)
+
 * New `install_bioc()` function and bioc remote to install Bioconductor
   packages from their SVN repository.
 
