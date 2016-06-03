@@ -192,14 +192,11 @@ package2remote <- function(name, repos = getOption("repos"), type = getOption("p
       sha = x$RemoteSha),
 
     # packages installed with install_cran
-    cran = {
-      remote("cran",
+    cran = remote("cran",
       name = x$Package,
       repos = eval(parse(text = x$RemoteRepos)),
       pkg_type = x$RemotePkgType,
-      sha = x$RemoteSha
-      )}
-    )
+      sha = x$RemoteSha))
 }
 
 #' @export
