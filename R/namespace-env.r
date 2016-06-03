@@ -44,10 +44,24 @@ create_ns_env <- function(pkg = ".") {
 }
 
 # This is taken directly from base::loadNamespace()
-delayedAssign("makeNamespace",
+# https://github.com/wch/r-source/blob/tags/R-3-3-0/src/library/base/R/namespace.R#L235-L258
+onload_assign("makeNamespace",
   eval(
-    extract_lang(body(loadNamespace),
-    function(x) length(x) > 2 && identical(x[1:2], quote(makeNamespace <- NULL)[1:2]))[[c(1, 3)]])
+    modify_lang(
+      extract_lang(body(loadNamespace),
+
+        # Find makeNamespace definition
+        function(x) length(x) > 2 && identical(x[1:2], quote(makeNamespace <- NULL)[1:2]))[[c(1, 3)]],
+
+      # Replace call to .Internal(registerNamespace()) is replaced by a call to
+      # register_namespace
+      function(x) {
+        if (identical(x, quote(.Internal(registerNamespace(name, env))))) {
+          quote(register_namespace(name, env))
+        } else {
+          x
+        }
+      }))
 )
 
 # Read the NAMESPACE file and set up the imports metdata.
@@ -118,7 +132,7 @@ search_method_dispatch_on <- function(x) {
 #' This function uses code from base::loadNamespace. Previously this code was
 #' copied directly, now it is dynamically looked up instead, to prevent drift as
 #' base::loadNamespace changes.
-delayedAssign("add_classes_to_exports",
+onload_assign("add_classes_to_exports",
   make_function(alist(ns =, package =, exports =, nsInfo =),
     call("{",
       extract_lang(

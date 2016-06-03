@@ -68,5 +68,11 @@ NULL
   assign("withr_with_collate", withr::with_collate, envir = env)
   assign("withr_with_envvar", withr::with_envvar, envir = env)
 
+  nms <- environment(onload_assign)$names
+  funs <- environment(onload_assign)$funs
+  for (i in seq_along(nms)) {
+    assign(nms[[i]], eval(funs[[i]], envir = env), envir = env)
+  }
+
   invisible()
 }

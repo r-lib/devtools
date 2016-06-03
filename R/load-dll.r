@@ -72,7 +72,7 @@ library.dynam2 <- function(pkg = ".", lib = "") {
 
 
 # This is taken directly from base::loadNamespace()
-delayedAssign("addNamespaceDynLibs",
+onload_assign("addNamespaceDynLibs",
   eval(
     extract_lang(body(loadNamespace),
     function(x) length(x) > 2 && identical(x[1:2], quote(addNamespaceDynLibs <- NULL)[1:2]))[[c(1, 3)]])
