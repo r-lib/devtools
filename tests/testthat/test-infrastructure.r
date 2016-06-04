@@ -60,7 +60,63 @@ test_that("use_data", {
   })
 })
 
-test_that("use_package", {
+test_that("add_desc_package only modifies 'field' section of DESCRIPTION", {
+  # use tests/testthat/testData as testing package
+  path_to_test_desc <- file.path("testData", "DESCRIPTION")
+  old_desc <- read_dcf(path_to_test_desc)
+
+  # be sure to return the description to original state on exit
+  on.exit(write_dcf(path_to_test_desc, old_desc))
+
+  # add testPackage to the "Imports" of the testData package
+  import_text <- "testPackage (>= 1.0.0)"
+  output <- add_desc_package("testData", "Imports", import_text)
+  new_desc <- read_dcf(path_to_test_desc)
+
+  expect_true(output) # check that add_desc_package still returns boolean
+  expect_equal(old_desc, new_desc[which(names(new_desc) != "Imports")]) # make sure only Imports section is modified
+  expect_equal(new_desc[["Imports"]], import_text) # make sure Import section is properly modified
+})
+
+test_that("add_desc_package is idempotent", {
+  # use tests/testthat/testData as testing package
+  path_to_test_desc <- file.path("testData", "DESCRIPTION")
+  old_desc <- read_dcf(path_to_test_desc)
+
+  # be sure to return the description to original state on exit
+  on.exit(write_dcf(path_to_test_desc, old_desc))
+
+  # add testPackage to the Imports: of the testData package;
+  # do it twice and check that the description file is the same as in
+  # the second time.
+  import_text <- "testPackage (>= 1.0.0)"
+  descriptions <- lapply(c(1,2), function(call_repetition) {
+    if (call_repetition == 1) {
+      # first time function is being called... It should return TRUE.
+      expect_true(add_desc_package("testData", "Imports", import_text))
+    } else {
+      # function should report that nothing changed
+      expect_false(add_desc_package("testData", "Imports", import_text))
+    }
+
+    return(read_dcf(path_to_test_desc))
+    })
+
+  # finally, check for idempotency.
+  expect_equal(descriptions[1], descriptions[2])
+})
+
+test_that("use_package throws error with invalid 'version' argument", {
+  # test error is thrown with invalid `version`;
+  # use the tests/testthat/testData/ as test package.
+  expect_error(use_package("utils", "Imports", "testData", "invalid"))
+})
+
+# Set up a grid of the potential inputs to use_package and individual test
+# them for correctness and behaviour. These are only partial tests, since the
+# checks for idempotency, error-throwing, and making sure *only* the indicated
+# fields are affected, are all handled above.
+test_that("use_package can modify Imports, Suggests and Depends", {
   # use tests/testthat/testData as testing package
   path_to_test_desc <- file.path("testData", "DESCRIPTION")
   old_desc <- read_dcf(path_to_test_desc)
@@ -71,56 +127,28 @@ test_that("use_package", {
   # create all possible input scenarios
   types <- c("Imports", "Suggests", "Depends")
   package <- "utils"
-  versions <- c("default", "true", "other")
-  comparators <- c(">=", ">", "==", "<=", "<")
   pkg <- "testData"
+  versions <- list(NULL, TRUE, "3.0.0")
 
-  test_cases <-
-    expand.grid(
-      package = package,
-      type = types,
-      pkg = pkg,
-      version = versions,
-      compare = comparators,
-      stringsAsFactors = FALSE
-    )
-
-  # for each test case, we expect:
-  # 1. calls to use_package to be idempotent
-  # 2. the DESCRIPTION to only be modified in the appropriate place
-  apply(
-    X = test_cases, MARGIN = 1, FUN = function(x) {
-      x <- as.list(x)
-      x$version <- switch(x$version,
-                          default = NULL,
-                          true = TRUE,
-                          other = "3.0.0")
+  # we expect use_package to be able to add:
+  # utils, utils (>= 3.2.3) and utils (>= 3.0.0) to
+  # Imports, Suggests, and Depends DESCRIPTION sections:
+  sapply(types, function(type) {
+    sapply(versions, function(version) {
 
       on.exit(write_dcf(path_to_test_desc, old_desc))
 
-      # expect a message with all calls, but don't specify what the message says
-      # perform twice so that we can check for idempotency
-      replicate(2, expect_message(do.call(use_package, x), regexp = NULL))
+      # expect a message with each call
+      expect_message(use_package(package, type, pkg, version), regexp = NULL)
 
+      # check that section was properly modified; note, that we don't have
+      # to check that other sections are NOT being modified since we assume
+      # that this behaviour is being preserved by add_desc_package().
       new_desc <- read_dcf(path_to_test_desc)
-
-      # DESCRIPTION file doesn't have the typical "Depends: R (>= x.y.z)" so
-      # we don't have to exclude it from the intersection
-      new_desc_names <- names(new_desc)
-      overlapping_fields <-
-        intersect(new_desc_names, names(old_desc))
-      expect_equal(new_desc[overlapping_fields], old_desc[overlapping_fields])
-
-      # check the new field:
-      modified_field <- setdiff(new_desc_names, overlapping_fields)
-      expect_equal(modified_field, x$type) # implicitly checks type and length
-
-      # check field value:
-      expect_equal(new_desc[[x$type]],
-                   build_package_txt(x$package, x$version, x$compare))
-    }
-  )
-
-  # test error is thrown with invalid `version`:
-  expect_error(use_package(package, types[1], pkg, "invalid", ">="))
+      expect_equal(new_desc[[type]], build_package_txt(package, version))
+    })
+  })
 })
+
+
+
