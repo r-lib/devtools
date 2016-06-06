@@ -174,9 +174,19 @@ make_function <- function (args, body, env = parent.frame()) {
   eval(call("function", args, body), env)
 }
 
+comp_lang <- function(x, y, idx = seq_along(y)) {
+  if (is.symbol(x)) {
+    return(identical(x, y))
+  }
+
+  if (length(x) < length(idx)) return(FALSE)
+
+  identical(x[idx], y[idx])
+}
+
 extract_lang <- function(x, f, ...) {
   recurse <- function(y) {
-    unlist(lapply(y, extract_lang, f = f, ...), recursive = TRUE)
+    unlist(compact(lapply(y, extract_lang, f = f, ...)), recursive = FALSE)
   }
 
   # if x matches predicate return it
@@ -185,7 +195,7 @@ extract_lang <- function(x, f, ...) {
   }
 
   if (is.call(x)) {
-    return(recurse(x))
+    return(recurse(x)[[1]])
   }
 
   NULL

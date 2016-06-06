@@ -51,12 +51,12 @@ onload_assign("makeNamespace",
       extract_lang(body(loadNamespace),
 
         # Find makeNamespace definition
-        function(x) length(x) > 2 && identical(x[1:2], quote(makeNamespace <- NULL)[1:2]))[[c(1, 3)]],
+        comp_lang, y = quote(makeNamespace <- NULL), idx = 1:2)[[3]],
 
       # Replace call to .Internal(registerNamespace()) is replaced by a call to
       # register_namespace
       function(x) {
-        if (identical(x, quote(.Internal(registerNamespace(name, env))))) {
+        if (comp_lang(x, quote(.Internal(registerNamespace(name, env))))) {
           quote(register_namespace(name, env))
         } else {
           x
@@ -130,13 +130,11 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
 onload_assign("add_classes_to_exports",
   make_function(alist(ns =, package =, exports =, nsInfo =),
     call("{",
-      extract_lang(f =
-        function(x) {
-          length(x) > 2 &&
-            identical(x[1:2],
-              quote(if (.isMethodsDispatchOn() && .hasS4MetaData(ns) && !identical(package, "methods")) NULL)[1:2])
-        },
-        modify_lang(body(base::loadNamespace), strip_internal_calls, "methods"))[[1]],
+      extract_lang(
+        f = comp_lang,
+        y = quote(if (.isMethodsDispatchOn() && .hasS4MetaData(ns) && !identical(package, "methods")) NULL),
+        idx = 1:2,
+        modify_lang(body(base::loadNamespace), strip_internal_calls, "methods")),
       quote(exports)),
     asNamespace("methods")))
 

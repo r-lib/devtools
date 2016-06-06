@@ -68,6 +68,14 @@ load_imports <- function(pkg = ".") {
 # The code in this function is taken and adapted from base::loadNamespace
 # Setup variables were added and the for loops put in a tryCatch block
 # https://github.com/wch/r-source/blob/tags/R-3-3-0/src/library/base/R/namespace.R#L397-L427
+
+# This wraps the inner for loop iterations in a tryCatch
+wrap_inner_loop <- function(x) {
+  inner <- x[[4]]
+  x[[4]] <- call("tryCatch", error = quote(warning), inner)
+  x
+}
+
 onload_assign("process_imports", {
   make_function(alist(pkg = "."),
     bquote({
@@ -76,19 +84,17 @@ onload_assign("process_imports", {
       nsInfo <- devtools::parse_ns_file(pkg)
       ns <- devtools::ns_env(pkg)
       lib.loc <- NULL
-      tryCatch(error = warning, {
-        .(for1)
-        .(for2)
-        .(for3)
-      })
+      .(for1)
+      .(for2)
+      .(for3)
     }, list(
-        for1 = extract_lang(body(loadNamespace),
-          function(x) length(x) > 2 && identical(x[1:3], quote(for(i in nsInfo$imports) NULL)[1:3]))[[1]],
+        for1 = wrap_inner_loop(
+          extract_lang(body(loadNamespace), comp_lang, y = quote(for(i in nsInfo$imports) NULL), idx = 1:3)),
 
-        for2 = extract_lang(body(loadNamespace),
-          function(x) length(x) > 2 && identical(x[1:3], quote(for(imp in nsInfo$importClasses) NULL)[1:3]))[[1]],
+        for2 = wrap_inner_loop(extract_lang(body(loadNamespace),
+          comp_lang, y = quote(for(imp in nsInfo$importClasses) NULL), idx = 1:3)),
 
-        for3 = extract_lang(body(loadNamespace),
-          function(x) length(x) > 2 && identical(x[1:3], quote(for(imp in nsInfo$importMethods) NULL)[1:3]))[[1]]
+        for3 = wrap_inner_loop(extract_lang(body(loadNamespace),
+          comp_lang, y = quote(for(imp in nsInfo$importMethods) NULL), idx = 1:3))
         )), asNamespace("tools"))
 })
