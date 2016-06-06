@@ -17,7 +17,6 @@ github_response <- function(req) {
   parsed
 }
 
-<<<<<<< HEAD
 github_error <- function(req) {
   text <- httr::content(req, as = "text")
   parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
@@ -31,8 +30,6 @@ github_error <- function(req) {
     ), class = c("condition", "error", "github_error"))
 }
 
-=======
->>>>>>> 8f1b784aa1239020bf0a7e03f0a4dd26c1dcb097
 github_GET <- function(path, ..., pat = github_pat(),
                        host = "api.github.com") {
 
