@@ -18,16 +18,21 @@ github_response <- function(req) {
 }
 
 github_error <- function(req) {
-  text <- httr::content(req, as = "text")
-  parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
+  text <- httr::content(req, as = "text", encoding = "UTF-8")
+  parsed <- tryCatch(jsonlite::fromJSON(text, simplifyVector = FALSE),
+    error = function(e) {
+      list(message = text)
+    })
   errors <- vapply(parsed$errors, `[[`, "message", FUN.VALUE = character(1))
 
   structure(
     list(
       call = sys.call(-1),
       message = paste0(parsed$message, " (", httr::status_code(req), ")\n",
-        paste("* ", errors, collapse = "\n"))
-    ), class = c("condition", "error", "github_error"))
+        if (length(errors) > 0) {
+          paste("* ", errors, collapse = "\n")
+        })
+      ), class = c("condition", "error", "github_error"))
 }
 
 github_GET <- function(path, ..., pat = github_pat()) {
