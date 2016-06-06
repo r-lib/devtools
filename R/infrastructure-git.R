@@ -107,11 +107,15 @@ use_github <- function(auth_token = github_pat(), host = "https://api.github.com
   }
 
   message("* Creating GitHub repository")
-  # If you are using enterprise github, you have sent a value for host that
-  # looks like "https://github.hostname.com/api/v3".
+  # The default value for host is "https://api.github.com". In this case,
+  # the value of host will not change and the value for path will be
+  # "user/repos".
   #
-  # In this case, we need to extract the path - then append "user/repos"
-  # to the path.
+  # If you are using enterprise github, you have sent a value for host that
+  # looks like "https://github.hostname.com/api/v3". In this case, the value of host
+  # will be "https://github.hostname.com", and the value of path will be
+  # "api/v3/user/repos".
+  #
   url <- httr::parse_url(host)
   path_prefix <- url$path
   url$path <- ""
@@ -232,7 +236,7 @@ use_github_links <- function(pkg = ".", host = "https://api.github.com") {
   desc_path <- file.path(pkg$path, "DESCRIPTION")
   desc <- new_desc <- read_dcf(desc_path)
 
-  # Our default host is "https://api.github.com", in this case the
+  # If the hostname is "api.github.com" (as ) in this case the
   # github_URL should begin with "https://github.com".
   #
   # If you supply a host with a path included, typical for enterprise github
@@ -241,10 +245,9 @@ use_github_links <- function(pkg = ".", host = "https://api.github.com") {
   #
   # In all cases, the path will be "<user>/<repo>".
   #
-  if (identical(host, "https://api.github.com")){
-    url <- httr::parse_url("https://github.com")
-  } else{
-    url <- httr::parse_url(host)
+  url <- httr::parse_url(host)
+  if (identical(url$hostname, "api.github.com")){
+    url$hostname <- "github.com"
   }
   url$path <- file.path(gh_info$username, gh_info$repo)
   github_URL <- httr::build_url(url)
