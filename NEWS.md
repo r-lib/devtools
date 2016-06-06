@@ -1,5 +1,8 @@
 # devtools 1.11.1.9000
 
+* Handle case when a GitHub request returns a non-JSON error response.
+  (@jimhester, #1204, #1211)
+
 * `use_dev_version()` automates the process of switching from a release
   version number by tweaking the `DESCRIPTION`, adding a heading to
   `NEWS.md` (if present), and checking into git (if you use it) (#1076.)
