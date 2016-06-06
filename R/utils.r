@@ -175,7 +175,7 @@ make_function <- function (args, body, env = parent.frame()) {
 }
 
 comp_lang <- function(x, y, idx = seq_along(y)) {
-  if (is.symbol(x)) {
+  if (is.symbol(x) || is.symbol(y)) {
     return(identical(x, y))
   }
 
