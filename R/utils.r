@@ -195,7 +195,12 @@ extract_lang <- function(x, f, ...) {
   }
 
   if (is.call(x)) {
-    return(recurse(x)[[1]])
+    res <- recurse(x)[[1]]
+    if (top_level_call <- identical(sys.call()[[1]], as.symbol("extract_lang"))
+        && is.null(res)) {
+      warning("Devtools is incompatible with the current version of R. `load_all()` may function incorrectly.")
+    }
+    return(res)
   }
 
   NULL
