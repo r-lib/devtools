@@ -107,9 +107,22 @@ use_github <- function(auth_token = github_pat(), host = "https://api.github.com
   }
 
   message("* Creating GitHub repository")
+  # If you are using enterprise github, you have sent a value for host that
+  # looks like "https://github.hostname.com/api/v3".
+  #
+  # In this case, we need to extract the path - then append "user/repos"
+  # to the path.
+  url <- httr::parse_url(host)
+  path_prefix <- url$path
+  url$path <- ""
+  host <- httr::build_url(url)
+  path <- "user/repos"
+  if (!identical(path_prefix, "")){
+    path <- file.path(path_prefix, path)
+  }
   create <-
     github_POST(
-      "user/repos",
+      path,
       pat = auth_token,
       body = list(
         name = jsonlite::unbox(pkg$package),
