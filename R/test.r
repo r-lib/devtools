@@ -47,7 +47,22 @@ test <- function(pkg = ".", filter = NULL, ...) {
   # Run tests in a child of the namespace environment, like
   # testthat::test_package
   message("Loading ", pkg$package)
-  ns_env <- load_all(pkg, quiet = TRUE, export_all = FALSE)$env
+
+  # Preserve prior export status, if the library was previously loaded with
+  # devtools::load_all(export_all = TRUE) then call load_all(export_all=TRUE)
+  # else use FALSE
+  all_exported <- function(pkg = ".") {
+    pkg <- as.package(pkg)
+
+    if (!is_loaded(pkg)) {
+      return(FALSE)
+    }
+    !identical(
+      sort(parse_ns_file(pkg)$exports),
+      sort(getNamespaceExports(pkg$package)))
+  }
+
+  ns_env <- load_all(pkg, quiet = TRUE, export_all = all_exported(pkg))$env
 
   message("Testing ", pkg$package)
   Sys.sleep(0.05); utils::flush.console() # Avoid misordered output in RStudio
