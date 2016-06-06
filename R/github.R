@@ -31,50 +31,16 @@ github_error <- function(req) {
 }
 
 github_GET <- function(path, ..., pat = github_pat(),
-                       host = "api.github.com") {
-
-  url <- paste0("https://", host, "/")
-
-  # if the host contains a path, i.e. "github.hostname.com/api/v3",
-  # we want to strip out the path, then prepend it to the path supplied
-  # as an argument to this function
-
-  url_parsed <- httr::parse_url(url)
-  if (!is.null(url_parsed$path)){
-
-    path_prepend <- url_parsed$path
-    url_parsed$path <- NULL
-
-    url <- httr::build_url(url_parsed)
-    path <- paste0(path_prepend, path)
-  }
-
+                       host = "https://api.github.com") {
   auth <- github_auth(pat)
-  req <- httr::GET(url, path = path, auth, ...)
+  req <- httr::GET(host, path = path, auth, ...)
   github_response(req)
 }
 
 github_POST <- function(path, body, ..., pat = github_pat(),
-                        host = "api.github.com") {
-
-  url <- paste0("https://", host, "/")
-
-  # if the host contains a path, i.e. "github.hostname.com/api/v3",
-  # we want to strip out the path, then prepend it to the path supplied
-  # as an argument to this function
-
-  url_parsed <- httr::parse_url(url)
-  if (!is.null(url_parsed$path)){
-
-    path_prepend <- url_parsed$path
-    url_parsed$path <- NULL
-
-    url <- httr::build_url(url_parsed)
-    path <- paste0(path_prepend, path)
-  }
-
+                        host = "https://api.github.com") {
   auth <- github_auth(pat)
-  req <- httr::POST(url, path = path, body = body, auth, encode = "json", ...)
+  req <- httr::POST(host, path = path, body = body, auth, encode = "json", ...)
   github_response(req)
 }
 
