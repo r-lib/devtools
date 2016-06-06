@@ -232,15 +232,23 @@ use_github_links <- function(pkg = ".", host = "https://api.github.com") {
   desc_path <- file.path(pkg$path, "DESCRIPTION")
   desc <- new_desc <- read_dcf(desc_path)
 
-  # Need to map "api.github.com" to "github.com"
+  # Our default host is "https://api.github.com", in this case the
+  # github_URL should begin with "https://github.com".
+  #
+  # If you supply a host with a path included, typical for enterprise github
+  # (a host value might be "https://github.hostname.com/api/v3"),
+  # then github_URL should begin with "https://github.hostname.com".
+  #
+  # In all cases, the path will be "<user>/<repo>".
+  #
   if (identical(host, "https://api.github.com")){
     url <- httr::parse_url("https://github.com")
   } else{
     url <- httr::parse_url(host)
   }
-
   url$path <- file.path(gh_info$username, gh_info$repo)
   github_URL <- httr::build_url(url)
+
   fill <- function(d, f, filler) {
     if (is.null(d[[f]]) || identical(d[[f]], "")) {
       d[[f]] <- filler
