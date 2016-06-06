@@ -1,5 +1,9 @@
 # devtools 1.11.1.9000
 
+* `test()` now calls `load_all()` with `export_all=FALSE`, so functions are not
+  automatically exported to the users environment after running tests.
+  (@jimhester, #1201, #1210).
+
 * `use_dev_version()` automates the process of switching from a release
   version number by tweaking the `DESCRIPTION`, adding a heading to
   `NEWS.md` (if present), and checking into git (if you use it) (#1076.)
