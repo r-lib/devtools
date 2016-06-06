@@ -82,7 +82,7 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' use_github(pkg = "testpkg2", protocol = "https")
 #' }
 use_github <- function(auth_token = github_pat(), host = "https://api.github.com",
-                       path = NULL, private = FALSE, pkg = ".",
+                       private = FALSE, pkg = ".",
                        protocol = c("ssh", "https"), credentials = NULL) {
 
   if (is.null(auth_token)) {
