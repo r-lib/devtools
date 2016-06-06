@@ -91,6 +91,11 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
 #' @export
 remote_download.github_remote <- function(x, quiet = FALSE) {
   dest <- tempfile(fileext = paste0(".tar.gz"))
+
+  if (missing_protocol <- !grepl("^[^:]+?://", x$host)) {
+    x$host <- paste0("https://", x$host)
+  }
+
   src_root <- paste0(x$host, "/repos/", x$username, "/", x$repo)
   src <- paste0(src_root, "/tarball/", x$ref)
 
