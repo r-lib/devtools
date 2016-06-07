@@ -30,6 +30,41 @@ github_error <- function(req) {
     ), class = c("condition", "error", "github_error"))
 }
 
+# Regularize the host and path
+#
+# github_POST (and possible github_GET) might be sent a host argument that
+# includes a path, so we want to regularize host and path.
+#
+# In the default case, the supplied value for host is
+# "https://api.github.com". In this case, the host
+# will not change and path will be "user/repos".
+#
+# If you are using enterprise github, you may have supplied a host that
+# looks like "https://github.hostname.com/api/v3". In this case,
+# the host will be "https://github.hostname.com", and path will be
+# "api/v3/user/repos".
+#
+# @param host character, describing hostname at api endpoint-root
+# @param path character, path to api endpoint from endpoint-root
+#
+# @return list with members: host, path (each regularized)
+#
+github_reg_host_path <- function(host, path = ""){
+
+  url <- httr::parse_url(host)
+  path_prefix <- url$path
+  url$path <- ""
+
+  host <- httr::build_url(url)
+
+  if (!identical(path_prefix, "")){
+    path <- file.path(path_prefix, path)
+  }
+
+  list(host = host, path = path)
+}
+
+
 github_GET <- function(path, ..., pat = github_pat(),
                        host = "https://api.github.com") {
   auth <- github_auth(pat)

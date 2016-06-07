@@ -81,3 +81,17 @@ test_that("Github repos with submodules are identified correctly", {
   ## a r package repo known to use submodules
   expect_equal(github_has_remotes(github_remote("armstrtw/rzmq")), TRUE)
 })
+
+test_that("Github host and path are regularized", {
+  github_in <-
+    list(host = "https://api.github.com", path = "user/repos")
+  github_out <-
+    list(host = "https://api.github.com/", path = "user/repos")
+  ghent_in <-
+    list(host = "https://github.hostname.com/api/v3", path = "foo/bar")
+  ghent_out <-
+    list(host = "https://github.hostname.com/", path = "api/v3/foo/bar")
+
+  expect_identical(do.call(github_reg_host_path, github_in), github_out)
+  expect_identical(do.call(github_reg_host_path, ghent_in), ghent_out)
+})
