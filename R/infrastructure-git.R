@@ -243,7 +243,7 @@ use_github_links <- function(pkg = ".", host = "https://api.github.com") {
   # (a host value might be "https://github.hostname.com/api/v3"),
   # then github_URL should begin with "https://github.hostname.com".
   #
-  # In all cases, the path will be "<user>/<repo>".
+  # In all cases, the path will be "<USERNAME>/<REPO>".
   #
   url <- httr::parse_url(host)
   if (identical(url$hostname, "api.github.com")){
