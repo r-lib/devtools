@@ -107,13 +107,15 @@ use_github <- function(auth_token = github_pat(), host = "https://api.github.com
   }
 
   message("* Creating GitHub repository")
-  # The default value for host is "https://api.github.com". In this case,
-  # the value of host will not change and the value for path will be
-  # "user/repos".
+  # github_POST() needs a path and a host (protocol and hostname)
   #
-  # If you are using enterprise github, you have sent a value for host that
-  # looks like "https://github.hostname.com/api/v3". In this case, the value of host
-  # will be "https://github.hostname.com", and the value of path will be
+  # In the default case, the supplied value for host is
+  # "https://api.github.com". For github_POST(), the host
+  # will not change and path will be "user/repos".
+  #
+  # If you are using enterprise github, you may have supplied a host that
+  # looks like "https://github.hostname.com/api/v3". For github_POST(),
+  # the host will be "https://github.hostname.com", and path will be
   # "api/v3/user/repos".
   #
   url <- httr::parse_url(host)
@@ -124,6 +126,7 @@ use_github <- function(auth_token = github_pat(), host = "https://api.github.com
   if (!identical(path_prefix, "")){
     path <- file.path(path_prefix, path)
   }
+
   create <-
     github_POST(
       path,
@@ -142,8 +145,14 @@ use_github <- function(auth_token = github_pat(), host = "https://api.github.com
   git2r::remote_add(r, "origin", origin_url)
 
   message("* Adding GitHub links to DESCRIPTION")
-  # If the hostname is "api.github.com", hostname becomes "github.com"
-  # Other hostnames are not changed.
+  # use_github_links() expects a host (protocol and hostname)
+  #
+  # In the default case, for use_github_links(), the host is
+  # "https://github.com". However in this function, the default host is
+  # "https://api.github.com" - so we have to make the translation.
+  #
+  # If the hostname is "api.github.com", hostname becomes "github.com";
+  # other hostnames are not changed. The protocol is preserved.
   #
   # Any path in the url is removed.
   #
