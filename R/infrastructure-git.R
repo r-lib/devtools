@@ -61,6 +61,9 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' @param auth_token Provide a personal access token (PAT) from
 #'   \url{https://github.com/settings/tokens}. Defaults to the \code{GITHUB_PAT}
 #'   environment variable.
+#' @param host GitHub API host to use. Override with the endpoint-root for your
+#'   GitHub enterprise instance, for example,
+#'   "https://github.hostname.com/api/v3".
 #' @param private If \code{TRUE}, creates a private repository.
 #' @param protocol transfer protocol, either "ssh" (the default) or "https"
 #' @param credentials A \code{\link[git2r]{cred_ssh_key}} specifying specific
@@ -78,8 +81,10 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' create("testpkg2")
 #' use_github(pkg = "testpkg2", protocol = "https")
 #' }
-use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
+use_github <- function(auth_token = github_pat(), host = "https://api.github.com",
+                       private = FALSE, pkg = ".",
                        protocol = c("ssh", "https"), credentials = NULL) {
+
   if (is.null(auth_token)) {
     stop("GITHUB_PAT required to create new repo")
   }
@@ -102,11 +107,37 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   }
 
   message("* Creating GitHub repository")
-  create <- github_POST("user/repos", pat = auth_token, body = list(
-    name = jsonlite::unbox(pkg$package),
-    description = jsonlite::unbox(gsub("\n", " ", pkg$title)),
-    private = jsonlite::unbox(private)
-  ))
+  # github_POST() needs a path and a host (protocol and hostname)
+  #
+  # In the default case, the supplied value for host is
+  # "https://api.github.com". For github_POST(), the host
+  # will not change and path will be "user/repos".
+  #
+  # If you are using enterprise github, you may have supplied a host that
+  # looks like "https://github.hostname.com/api/v3". For github_POST(),
+  # the host will be "https://github.hostname.com", and path will be
+  # "api/v3/user/repos".
+  #
+  url <- httr::parse_url(host)
+  path_prefix <- url$path
+  url$path <- ""
+  host <- httr::build_url(url)
+  path <- "user/repos"
+  if (!identical(path_prefix, "")){
+    path <- file.path(path_prefix, path)
+  }
+
+  create <-
+    github_POST(
+      path,
+      pat = auth_token,
+      body = list(
+        name = jsonlite::unbox(pkg$package),
+        description = jsonlite::unbox(gsub("\n", " ", pkg$title)),
+        private = jsonlite::unbox(private)
+      ),
+      host = host
+    )
 
   message("* Adding GitHub remote")
   r <- git2r::repository(pkg$path)
@@ -114,7 +145,27 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   git2r::remote_add(r, "origin", origin_url)
 
   message("* Adding GitHub links to DESCRIPTION")
-  use_github_links(pkg$path)
+  # use_github_links() expects a host (protocol and hostname)
+  #
+  # In the default case, for use_github_links(), the host is
+  # "https://github.com". However in this function, the default host is
+  # "https://api.github.com" - so we have to make the translation.
+  #
+  # If the hostname is "api.github.com", hostname becomes "github.com";
+  # other hostnames are not changed. The protocol is preserved.
+  #
+  # Any path in the url is removed.
+  #
+  # The resulting url, which should have only a protocol and hostname, is
+  # rebuilt and sent to use_github_links()
+  #
+  url <- httr::parse_url(host)
+  if (identical(url$hostname, "api.github.com")){
+    url$hostname <- "github.com"
+  }
+  url$path <- ""
+  host_links <- httr::build_url(url)
+  use_github_links(pkg$path, host = host_links)
   if (git_uncommitted(pkg$path)) {
     git2r::add(r, "DESCRIPTION")
     git2r::commit(r, "Add GitHub links to DESCRIPTION")
@@ -190,10 +241,12 @@ use_git_ignore <- function(ignores, directory = ".", pkg = ".") {
 #' those fields already exist.
 #'
 #' @inheritParams use_git
+#' @param host GitHub host to use. Override with your GitHub enterprise
+#'    hostname, for example, "https://github.hostname.com".
 #' @family git infrastructure
 #' @keywords internal
 #' @export
-use_github_links <- function(pkg = ".") {
+use_github_links <- function(pkg = ".", host = "https://github.com") {
 
   if (!uses_github(pkg)) {
     stop("Cannot detect that package already uses GitHub.\n",
@@ -206,8 +259,10 @@ use_github_links <- function(pkg = ".") {
   desc_path <- file.path(pkg$path, "DESCRIPTION")
   desc <- new_desc <- read_dcf(desc_path)
 
-  github_URL <-
-    paste("https://github.com", gh_info$username, gh_info$repo, sep = "/")
+  url <- httr::parse_url(host)
+  url$path <- file.path(gh_info$username, gh_info$repo)
+  github_URL <- httr::build_url(url)
+
   fill <- function(d, f, filler) {
     if (is.null(d[[f]]) || identical(d[[f]], "")) {
       d[[f]] <- filler

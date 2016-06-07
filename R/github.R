@@ -35,16 +35,17 @@ github_error <- function(req) {
       ), class = c("condition", "error", "github_error"))
 }
 
-github_GET <- function(path, ..., pat = github_pat()) {
+github_GET <- function(path, ..., pat = github_pat(),
+                       host = "https://api.github.com") {
   auth <- github_auth(pat)
-  req <- httr::GET("https://api.github.com/", path = path, auth, ...)
+  req <- httr::GET(host, path = path, auth, ...)
   github_response(req)
 }
 
-github_POST <- function(path, body, ..., pat = github_pat()) {
+github_POST <- function(path, body, ..., pat = github_pat(),
+                        host = "https://api.github.com") {
   auth <- github_auth(pat)
-  req <- httr::POST("https://api.github.com/", path = path, body = body, auth,
-    encode = "json", ...)
+  req <- httr::POST(host, path = path, body = body, auth, encode = "json", ...)
   github_response(req)
 }
 

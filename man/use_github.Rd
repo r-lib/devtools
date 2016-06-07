@@ -4,13 +4,18 @@
 \alias{use_github}
 \title{Connect a local repo with GitHub.}
 \usage{
-use_github(auth_token = github_pat(), private = FALSE, pkg = ".",
-  protocol = c("ssh", "https"), credentials = NULL)
+use_github(auth_token = github_pat(), host = "https://api.github.com",
+  private = FALSE, pkg = ".", protocol = c("ssh", "https"),
+  credentials = NULL)
 }
 \arguments{
 \item{auth_token}{Provide a personal access token (PAT) from
 \url{https://github.com/settings/tokens}. Defaults to the \code{GITHUB_PAT}
 environment variable.}
+
+\item{host}{GitHub API host to use. Override with the endpoint-root for your
+GitHub enterprise instance, for example,
+"https://github.hostname.com/api/v3".}
 
 \item{private}{If \code{TRUE}, creates a private repository.}
 
