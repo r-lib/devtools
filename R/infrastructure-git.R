@@ -125,27 +125,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   git2r::remote_add(r, "origin", origin_url)
 
   message("* Adding GitHub links to DESCRIPTION")
-  # use_github_links() expects a host (protocol and hostname)
-  #
-  # In the default case, for use_github_links(), the host is
-  # "https://github.com". However in this function, the default host is
-  # "https://api.github.com" - so we have to make the translation.
-  #
-  # If the hostname is "api.github.com", hostname becomes "github.com";
-  # other hostnames are not changed. The protocol is preserved.
-  #
-  # Any path in the url is removed.
-  #
-  # The resulting url, which should have only a protocol and hostname, is
-  # rebuilt and sent to use_github_links()
-  #
-  url <- httr::parse_url(host)
-  if (identical(url$hostname, "api.github.com")){
-    url$hostname <- "github.com"
-  }
-  url$path <- ""
-  host_links <- httr::build_url(url)
-  use_github_links(pkg$path, host = host_links)
+  use_github_links(pkg$path, host = github_url_from_host(host))
   if (git_uncommitted(pkg$path)) {
     git2r::add(r, "DESCRIPTION")
     git2r::commit(r, "Add GitHub links to DESCRIPTION")
@@ -211,6 +191,48 @@ use_git_ignore <- function(ignores, directory = ".", pkg = ".") {
   union_write(path, ignores)
 
   invisible(TRUE)
+}
+
+# Translate a host into a github-links url.
+#
+# In this package, the default API host is "https://api.github.com", but
+# the default host for use_github_links() is "https://github.com/" -
+# so we have to make a translation.
+#
+# Furthermore, if you are using an instance of enterprise github, the API host
+# may be "https://github.hostname.com/api/v3". In this case, we will want to
+# send "https://github.hostname.com/" to use_github_links().
+#
+# To do this, the host argument is parsed into its components. If the hostname
+# is "api.github.com", it becomes "github.com"; other hostnames are not
+# changed.
+#
+# The protocol is preserved; the path is removed.
+#
+# The resulting url, which should have only a protocol and hostname, is
+# rebuilt and returned.
+#
+# @param host character, GitHub API host to use.
+#
+# @return character string for url
+#
+github_url_from_host <- function(host){
+
+  # parse into components
+  url <- httr::parse_url(host)
+
+  # translate for github.com case
+  if (identical(url$hostname, "api.github.com")){
+    url$hostname <- "github.com"
+  }
+
+  # supress the path
+  url$path <- ""
+
+  # rebuild the url
+  url_link <- httr::build_url(url)
+
+  url_link
 }
 
 #' Add GitHub links to DESCRIPTION.

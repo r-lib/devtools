@@ -138,3 +138,13 @@ test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
   erase(test_pkg)
 
 })
+
+test_that("We get the correct url to send to use_github_links()", {
+  gh_in <- "https://api.github.com"
+  gh_out <- "https://github.com/"
+  ghent_in <- "https://github.hostname.com/api/v3"
+  ghent_out <- "https://github.hostname.com/"
+
+  expect_identical(github_url_from_host(gh_in), gh_out)
+  expect_identical(github_url_from_host(ghent_in), ghent_out)
+})
