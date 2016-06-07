@@ -107,29 +107,9 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   }
 
   message("* Creating GitHub repository")
-  # github_POST() needs a path and a host (protocol and hostname)
-  #
-  # In the default case, the supplied value for host is
-  # "https://api.github.com". For github_POST(), the host
-  # will not change and path will be "user/repos".
-  #
-  # If you are using enterprise github, you may have supplied a host that
-  # looks like "https://github.hostname.com/api/v3". For github_POST(),
-  # the host will be "https://github.hostname.com", and path will be
-  # "api/v3/user/repos".
-  #
-  url <- httr::parse_url(host)
-  path_prefix <- url$path
-  url$path <- ""
-  host <- httr::build_url(url)
-  path <- "user/repos"
-  if (!identical(path_prefix, "")){
-    path <- file.path(path_prefix, path)
-  }
-
   create <-
     github_POST(
-      path,
+      "user/repos",
       pat = auth_token,
       body = list(
         name = jsonlite::unbox(pkg$package),

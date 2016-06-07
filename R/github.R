@@ -67,15 +67,22 @@ github_reg_host_path <- function(host, path = ""){
 
 github_GET <- function(path, ..., pat = github_pat(),
                        host = "https://api.github.com") {
+  # regularize the host and path
+  reg <- github_reg_host_path(host = host, path = path)
+
   auth <- github_auth(pat)
-  req <- httr::GET(host, path = path, auth, ...)
+  req <- httr::GET(reg$host, path = reg$path, auth, ...)
   github_response(req)
 }
 
 github_POST <- function(path, body, ..., pat = github_pat(),
                         host = "https://api.github.com") {
+  # regularize the host and path
+  reg <- github_reg_host_path(host = host, path = path)
+
   auth <- github_auth(pat)
-  req <- httr::POST(host, path = path, body = body, auth, encode = "json", ...)
+  req <- httr::POST(reg$host, path = reg$path,
+                    body = body, auth, encode = "json", ...)
   github_response(req)
 }
 
