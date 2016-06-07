@@ -241,7 +241,7 @@ use_git_ignore <- function(ignores, directory = ".", pkg = ".") {
 #' those fields already exist.
 #'
 #' @inheritParams use_git
-#' @param host GitHub API host to use. Override with your GitHub enterprise
+#' @param host GitHub host to use. Override with your GitHub enterprise
 #'    hostname, for example, "https://github.hostname.com".
 #' @family git infrastructure
 #' @keywords internal
