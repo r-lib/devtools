@@ -142,7 +142,21 @@ use_github <- function(auth_token = github_pat(), host = "https://api.github.com
   git2r::remote_add(r, "origin", origin_url)
 
   message("* Adding GitHub links to DESCRIPTION")
-  use_github_links(pkg$path, host = host)
+  # If the hostname is "api.github.com", hostname becomes "github.com"
+  # Other hostnames are not changed.
+  #
+  # Any path in the url is removed.
+  #
+  # The resulting url, which should have only a protocol and hostname, is
+  # rebuilt and sent to use_github_links()
+  #
+  url <- httr::parse_url(host)
+  if (identical(url$hostname, "api.github.com")){
+    url$hostname <- "github.com"
+  }
+  url$path <- ""
+  host_links <- httr::build_url(url)
+  use_github_links(pkg$path, host = host_links)
   if (git_uncommitted(pkg$path)) {
     git2r::add(r, "DESCRIPTION")
     git2r::commit(r, "Add GitHub links to DESCRIPTION")
@@ -223,7 +237,7 @@ use_git_ignore <- function(ignores, directory = ".", pkg = ".") {
 #' @family git infrastructure
 #' @keywords internal
 #' @export
-use_github_links <- function(pkg = ".", host = "https://api.github.com") {
+use_github_links <- function(pkg = ".", host = "https://github.com") {
 
   if (!uses_github(pkg)) {
     stop("Cannot detect that package already uses GitHub.\n",
@@ -236,19 +250,7 @@ use_github_links <- function(pkg = ".", host = "https://api.github.com") {
   desc_path <- file.path(pkg$path, "DESCRIPTION")
   desc <- new_desc <- read_dcf(desc_path)
 
-  # If the hostname is "api.github.com" (as ) in this case the
-  # github_URL should begin with "https://github.com".
-  #
-  # If you supply a host with a path included, typical for enterprise github
-  # (a host value might be "https://github.hostname.com/api/v3"),
-  # then github_URL should begin with "https://github.hostname.com".
-  #
-  # In all cases, the path will be "<USERNAME>/<REPO>".
-  #
   url <- httr::parse_url(host)
-  if (identical(url$hostname, "api.github.com")){
-    url$hostname <- "github.com"
-  }
   url$path <- file.path(gh_info$username, gh_info$repo)
   github_URL <- httr::build_url(url)
 
