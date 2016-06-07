@@ -61,10 +61,10 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' @param auth_token Provide a personal access token (PAT) from
 #'   \url{https://github.com/settings/tokens}. Defaults to the \code{GITHUB_PAT}
 #'   environment variable.
+#' @param private If \code{TRUE}, creates a private repository.
 #' @param host GitHub API host to use. Override with the endpoint-root for your
 #'   GitHub enterprise instance, for example,
 #'   "https://github.hostname.com/api/v3".
-#' @param private If \code{TRUE}, creates a private repository.
 #' @param protocol transfer protocol, either "ssh" (the default) or "https"
 #' @param credentials A \code{\link[git2r]{cred_ssh_key}} specifying specific
 #' ssh credentials or NULL for default ssh key and ssh-agent behaviour.
@@ -81,8 +81,8 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' create("testpkg2")
 #' use_github(pkg = "testpkg2", protocol = "https")
 #' }
-use_github <- function(auth_token = github_pat(), host = "https://api.github.com",
-                       private = FALSE, pkg = ".",
+use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
+                       host = "https://api.github.com",
                        protocol = c("ssh", "https"), credentials = NULL) {
 
   if (is.null(auth_token)) {
