@@ -18,7 +18,7 @@ I'm always happy to hear about what doesn't work for you and where `devtools` ge
 
 ## Updating to the latest version of devtools
 
-You can track (and contribute to) development of `devtools` at https://github.com/hadley/devtools. To install it:
+You can track (and contribute to) the development of `devtools` at https://github.com/hadley/devtools. To install it:
 
 1. Install the release version of `devtools` from CRAN with `install.packages("devtools")`.
 
