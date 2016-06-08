@@ -32,11 +32,11 @@ github_error <- function(req) {
 
 # Regularize the host and path
 #
-# github_POST (and possible github_GET) might be sent a host argument that
+# github_POST(), and possibly github_GET(), might be sent a host argument that
 # includes a path, so we want to regularize host and path.
 #
 # In a standard case, the supplied value for host is
-# "https://api.github.com", and the path may be "user/repos". In this case,
+# "https://api.github.com", the path may be "user/repos". In this case,
 # the returned host will change slightly to "https://api.github.com/",
 # and path will remain "user/repos".
 #

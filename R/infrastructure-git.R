@@ -193,28 +193,26 @@ use_git_ignore <- function(ignores, directory = ".", pkg = ".") {
   invisible(TRUE)
 }
 
-# Translate a host into a github-links url.
+# Translate an API-host into a github-links url.
 #
-# In this package, the default API host is "https://api.github.com", but
-# the default host for use_github_links() is "https://github.com/" -
+# In this package, the default host is "https://api.github.com", but
+# the default host used by use_github_links() is "https://github.com/" -
 # so we have to make a translation.
 #
-# Furthermore, if you are using an instance of enterprise github, the API host
+# Furthermore, if you are using an instance of enterprise github, the host
 # may be "https://github.hostname.com/api/v3". In this case, we will want to
 # send "https://github.hostname.com/" to use_github_links().
 #
 # To do this, the host argument is parsed into its components. If the hostname
 # is "api.github.com", it becomes "github.com"; other hostnames are not
-# changed.
-#
-# The protocol is preserved; the path is removed.
+# changed. The protocol is preserved; the path is removed.
 #
 # The resulting url, which should have only a protocol and hostname, is
 # rebuilt and returned.
 #
 # @param host character, GitHub API host to use.
 #
-# @return character string for url
+# @return character, url used by use_github_links()
 #
 github_url_from_host <- function(host){
 
