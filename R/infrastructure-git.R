@@ -212,7 +212,7 @@ use_git_ignore <- function(ignores, directory = ".", pkg = ".") {
 #
 # @param host character, GitHub API host to use.
 #
-# @return character, url used by use_github_links()
+# @return character, url used by use_github_links().
 #
 github_url_from_host <- function(host){
 
