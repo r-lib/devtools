@@ -32,57 +32,44 @@ github_error <- function(req) {
 
 # Regularize the host and path
 #
-# github_POST(), and possibly github_GET(), might be sent a host argument that
-# includes a path, so we want to regularize host and path.
-#
-# In a standard case, the supplied value for host is
-# "https://api.github.com", the path may be "user/repos". In this case,
-# the returned host will change slightly to "https://api.github.com/",
-# and path will remain "user/repos".
-#
-# If you are using enterprise github, you may have supplied a host that
-# looks like "https://github.hostname.com/api/v3". In this case,
-# the host will be "https://github.hostname.com/", and path will be
-# "api/v3/user/repos".
+# github_POST() and github_GET() might be sent a host argument that
+# includes a path (i.e., "https://github.hostname.com/api/v3"),
+# so we need to take some care to compose the url.
 #
 # @param host character, describing hostname at api endpoint-root
 # @param path character, path to api endpoint from endpoint-root
 #
-# @return list with members: host, path (each regularized)
+# @return httr url object
 #
-github_reg_host_path <- function(host, path = ""){
+github_compose_url <- function(host, path = ""){
 
   url <- httr::parse_url(host)
-  path_prefix <- url$path
-  url$path <- ""
 
-  host <- httr::build_url(url)
-
-  if (!identical(path_prefix, "")){
-    path <- file.path(path_prefix, path)
+  # we can't do a simple paste because if url$path is the empty string,
+  # we get an unwanted leading "/"
+  if (identical(url$path, "")){
+    url$path <- path
+  } else {
+    url$path <- paste(url$path, path, sep = "/")
   }
 
-  list(host = host, path = path)
+  url
 }
 
 github_GET <- function(path, ..., pat = github_pat(),
                        host = "https://api.github.com") {
-  # regularize the host and path
-  reg <- github_reg_host_path(host = host, path = path)
 
-  auth <- github_auth(pat)
-  req <- httr::GET(reg$host, path = reg$path, auth, ...)
+  url <- github_compose_url(host = host, path = path)
+  req <- httr::GET(url, auth = github_auth(pat), ...)
   github_response(req)
 }
 
 github_POST <- function(path, body, ..., pat = github_pat(),
                         host = "https://api.github.com") {
-  # regularize the host and path
-  reg <- github_reg_host_path(host = host, path = path)
 
-  auth <- github_auth(pat)
-  req <- httr::POST(reg$host, path = reg$path,
-                    body = body, auth, encode = "json", ...)
+  url <- github_compose_url(host = host, path = path)
+  req <-
+    httr::POST(url, body = body, auth = github_auth(pat), encode = "json", ...)
   github_response(req)
 }
 
