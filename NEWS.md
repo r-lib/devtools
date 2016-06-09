@@ -29,8 +29,6 @@
 * Add a default codecov.yml file to turn off commenting with `use_coverage()`
   (@jimhester, #1188)
 
-* `install_github()` now downloads tarballs rather than zipballs. (@kevinushey)
-
 * New `install_bioc()` function and bioc remote to install Bioconductor
   packages from their SVN repository.
 
