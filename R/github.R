@@ -30,46 +30,27 @@ github_error <- function(req) {
     ), class = c("condition", "error", "github_error"))
 }
 
-# Regularize the host and path
-#
-# github_POST() and github_GET() might be sent a host argument that
-# includes a path (i.e., "https://github.hostname.com/api/v3"),
-# so we need to take some care to compose the url.
-#
-# @param host character, describing hostname at api endpoint-root
-# @param path character, path to api endpoint from endpoint-root
-#
-# @return httr url object
-#
-github_compose_url <- function(host, path = ""){
-
-  url <- httr::parse_url(host)
-
-  # we can't do a simple paste because if url$path is the empty string,
-  # we get an unwanted leading "/"
-  if (identical(url$path, "")){
-    url$path <- path
-  } else {
-    url$path <- paste(url$path, path, sep = "/")
-  }
-
-  url
-}
-
 github_GET <- function(path, ..., pat = github_pat(),
                        host = "https://api.github.com") {
 
-  url <- github_compose_url(host = host, path = path)
-  req <- httr::GET(url, auth = github_auth(pat), ...)
+  url <- httr::parse_url(host)
+  url$path <- paste(url$path, path, sep = "/")
+  ## May remove line below at release of httr > 1.1.0
+  url$path <- gsub("^/", "", url$path)
+  ##
+  req <- httr::GET(url, github_auth(pat), ...)
   github_response(req)
 }
 
 github_POST <- function(path, body, ..., pat = github_pat(),
                         host = "https://api.github.com") {
 
-  url <- github_compose_url(host = host, path = path)
-  req <-
-    httr::POST(url, body = body, auth = github_auth(pat), encode = "json", ...)
+  url <- httr::parse_url(host)
+  url$path <- paste(url$path, path, sep = "/")
+  ## May remove line below at release of httr > 1.1.0
+  url$path <- gsub("^/", "", url$path)
+  ##
+  req <- httr::POST(url, body = body, github_auth(pat), encode = "json", ...)
   github_response(req)
 }
 

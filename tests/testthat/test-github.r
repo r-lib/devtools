@@ -81,20 +81,3 @@ test_that("Github repos with submodules are identified correctly", {
   ## a r package repo known to use submodules
   expect_equal(github_has_remotes(github_remote("armstrtw/rzmq")), TRUE)
 })
-
-test_that("Github urls are composed using host and path", {
-
-  path <- "foo/bar"
-
-  gh_host <- "https://api.github.com"
-  gh_url <- "https://api.github.com/foo/bar"
-
-  ghent_host <- "https://github.hostname.com/api/v3"
-  ghent_url <- "https://github.hostname.com/api/v3/foo/bar"
-
-  expect_identical(httr::build_url(github_compose_url(gh_host, path)), gh_url)
-  expect_identical(
-    httr::build_url(github_compose_url(ghent_host, path)),
-    ghent_url
-  )
-})
