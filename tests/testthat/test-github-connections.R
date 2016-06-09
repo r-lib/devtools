@@ -27,7 +27,9 @@ test_that("git (non-)usage is detected, diagnosed, and can be added", {
   test_pkg <- create_in_temp("testNoGit")
 
   expect_false(uses_git(test_pkg))
-  expect_message(print(dr_github(test_pkg)), "not a git repository")
+  expect_warning(expect_message(print(dr_github(test_pkg)),
+                                "not a git repository"),
+                 'DR_GITHUB FOUND PROBLEMS')
 
   expect_message(use_git(pkg = test_pkg), "Initialising repo")
   expect_true(uses_git(test_pkg))
@@ -44,7 +46,9 @@ test_that("GitHub non-usage is handled", {
 
   expect_true(uses_git(test_pkg))
   expect_false(uses_github(test_pkg))
-  expect_message(print(dr_github(test_pkg)), "not a GitHub repository")
+  expect_warning(expect_message(print(dr_github(test_pkg)),
+                                "not a GitHub repository"),
+                 "DR_GITHUB FOUND PROBLEMS")
 
   expect_identical(github_dummy, github_info(test_pkg))
 
@@ -91,8 +95,12 @@ test_that("github info and links can be queried and manipulated", {
   desc$URL <- "http://www.example.com"
   desc$BugReports <- "http://www.example.com/issues"
   write_dcf(desc_path, desc)
-  expect_message(print(dr_github(test_pkg)), "no GitHub repo link")
-  expect_message(print(dr_github(test_pkg)), "no GitHub Issues")
+  expect_warning(expect_message(print(dr_github(test_pkg)),
+                                "no GitHub repo link"),
+                 "DR_GITHUB FOUND PROBLEMS")
+  expect_warning(expect_message(print(dr_github(test_pkg)),
+                                "no GitHub Issues"),
+                 "DR_GITHUB FOUND PROBLEMS")
 
   erase(test_pkg)
 
@@ -130,3 +138,4 @@ test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
   erase(test_pkg)
 
 })
+
