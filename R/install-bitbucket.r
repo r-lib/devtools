@@ -76,6 +76,7 @@ remote_metadata.bitbucket_remote <- function(x, bundle = NULL, source = NULL) {
 
   list(
     RemoteType = "bitbucket",
+    RemoteHost = x$host,
     RemoteRepo = x$repo,
     RemoteUsername = x$username,
     RemoteRef = x$ref,
