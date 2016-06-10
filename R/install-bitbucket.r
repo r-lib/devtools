@@ -19,17 +19,18 @@
 #' install_bitbucket("sulab/mygene.r@@default")
 #' install_bitbucket("dannavarro/lsr-package")
 #' }
-install_bitbucket <- function(repo, username, ref = "master", subdir = NULL,
-                              auth_user = NULL, password = NULL, ...) {
+install_bitbucket <- function(repo, username = NULL, ref = "master",
+  subdir = NULL, auth_token = bitbucket_pat(),
+  host = "https://api.bitbucket.org", quiet = FALSE, ...) {
 
   remotes <- lapply(repo, bitbucket_remote, username = username, ref = ref,
-    subdir = subdir, auth_user = auth_user, password = password)
+    subdir = subdir, auth_token = auth_token, host = host)
 
-  install_remotes(remotes, ...)
+  install_remotes(remotes, quiet = quiet, ...)
 }
 
 bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
-                              auth_user = NULL, password = NULL, sha = NULL) {
+  auth_token = bitbucket_pat(), sha = NULL, host = "https://api.bitbucket.org") {
 
   meta <- parse_git_repo(repo)
   meta$ref <- meta$ref %||% ref %||% "master"
