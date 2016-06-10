@@ -23,21 +23,21 @@ test_that("GitHub repo paths are parsed correctly", {
   expect_error(parse_git_repo("test@*unsupported-release"), "Invalid git repo")
 })
 
-# Mock github_resolve_ref.github_pull so that GitHub API is not queried for this test
-mock_github_resolve_ref.github_pull <- function(x, params) {
+# Mock resolve_ref.github_pull so that GitHub API is not queried for this test
+mock_resolve_ref.github_pull <- function(x, params) {
   params$username <- sprintf("user-%s", x)
   params$ref <- sprintf("pull-%s", x)
   params
 }
 
-# Mock github_resolve_ref.github_release so that GitHub API is not queried for this test
-mock_github_resolve_ref.github_release <- function(x, param) {
+# Mock resolve_ref.github_release so that GitHub API is not queried for this test
+mock_resolve_ref.github_release <- function(x, param) {
   param$ref="latest-release"
   param
 }
 
 test_that("GitHub parameters are returned correctly", {
-  with_mock("github_resolve_ref.github_pull", mock_github_resolve_ref.github_pull, {
+  with_mock("resolve_ref.github_pull", mock_resolve_ref.github_pull, {
     expect_equal(github_remote("hadley/devtools")$repo, "devtools")
     expect_equal(github_remote("krlmlr/kimisc")$username, "krlmlr")
     expect_equal(github_remote("my/test/pkg")$subdir, "pkg")
@@ -45,7 +45,7 @@ test_that("GitHub parameters are returned correctly", {
     expect_equal(github_remote("yihui/tikzDevice#23")$ref, "pull-23")
   })
 
-  with_mock("github_resolve_ref.github_release", mock_github_resolve_ref.github_release, {
+  with_mock("resolve_ref.github_release", mock_resolve_ref.github_release, {
     expect_equal(github_remote("yihui/tikzDevice@*release")$ref, "latest-release")
     expect_equal(github_remote("my/test/pkg@*release")$ref, "latest-release")
   })
@@ -63,11 +63,11 @@ mock_github_GET <- function(path) {
 test_that("GitHub references are resolved correctly", {
   default_params <- as.list(stats::setNames(nm=c("repo", "username")))
   with_mock("github_GET", mock_github_GET, {
-    expect_equal(github_resolve_ref(NULL, list())$ref, "master")
-    expect_equal(github_resolve_ref("some-ref", list())$ref, "some-ref")
-    expect_equal(github_resolve_ref(github_pull(123), default_params)$username, "username")
-    expect_equal(github_resolve_ref(github_pull(123), default_params)$ref, "some-pull-request")
-    expect_equal(github_resolve_ref(github_release(), default_params)$ref, "some-release")
+    expect_equal(resolve_ref(NULL, list())$ref, "master")
+    expect_equal(resolve_ref("some-ref", list())$ref, "some-ref")
+    expect_equal(resolve_ref(github_pull(123), default_params)$username, "username")
+    expect_equal(resolve_ref(github_pull(123), default_params)$ref, "some-pull-request")
+    expect_equal(resolve_ref(github_release(), default_params)$ref, "some-release")
   })
 })
 
