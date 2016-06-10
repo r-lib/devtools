@@ -29,7 +29,7 @@ bitbucket_error <- function(req) {
     ), class = c("condition", "error", "bitbucket_error"))
 }
 
-bitbucket_pat <- function () {
+bitbucket_pat <- function (quiet = FALSE) {
   pat <- Sys.getenv("BITBUCKET_PAT")
   if (nzchar(pat)) {
     if (!quiet) {
