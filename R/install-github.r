@@ -54,7 +54,7 @@
 install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
                            auth_token = github_pat(quiet),
-                           host = "api.github.com", quiet = FALSE,
+                           host = "https://api.github.com", quiet = FALSE,
                            ...) {
 
   remotes <- lapply(repo, github_remote, username = username, ref = ref,
@@ -65,7 +65,7 @@ install_github <- function(repo, username = NULL,
 
 github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
                        auth_token = github_pat(), sha = NULL,
-                       host = "api.github.com") {
+                       host = "https://api.github.com") {
 
   meta <- parse_git_repo(repo)
   meta <- github_resolve_ref(meta$ref %||% ref, meta)
@@ -91,7 +91,12 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
 #' @export
 remote_download.github_remote <- function(x, quiet = FALSE) {
   dest <- tempfile(fileext = paste0(".zip"))
-  src_root <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo)
+
+  if (missing_protocol <- !grepl("^[^:]+?://", x$host)) {
+    x$host <- paste0("https://", x$host)
+  }
+
+  src_root <- paste0(x$host, "/repos/", x$username, "/", x$repo)
   src <- paste0(src_root, "/zipball/", x$ref)
 
   if (!quiet) {
@@ -117,7 +122,7 @@ remote_download.github_remote <- function(x, quiet = FALSE) {
 }
 
 github_has_remotes <- function(x, auth = NULL) {
-  src_root <- paste0("https://", x$host, "/repos/", x$username, "/", x$repo)
+  src_root <- paste0(x$host, "/repos/", x$username, "/", x$repo)
   src_submodules <- paste0(src_root, "/contents/.gitmodules?ref=", x$ref)
   response <- httr::HEAD(src_submodules, , auth)
   identical(httr::status_code(response), 200L)
@@ -252,7 +257,7 @@ remote_package_name.github_remote <- function(remote, url = "https://github.com"
   req <- httr::GET(url, path = path, httr::write_disk(path = tmp))
 
   if (httr::status_code(req) >= 400) {
-    return(NA)
+    return(NA_character_)
   }
 
   read_dcf(tmp)$Package

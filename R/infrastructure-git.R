@@ -62,6 +62,9 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #'   \url{https://github.com/settings/tokens}. Defaults to the \code{GITHUB_PAT}
 #'   environment variable.
 #' @param private If \code{TRUE}, creates a private repository.
+#' @param host GitHub API host to use. Override with the endpoint-root for your
+#'   GitHub enterprise instance, for example,
+#'   "https://github.hostname.com/api/v3".
 #' @param protocol transfer protocol, either "ssh" (the default) or "https"
 #' @param credentials A \code{\link[git2r]{cred_ssh_key}} specifying specific
 #' ssh credentials or NULL for default ssh key and ssh-agent behaviour.
@@ -79,7 +82,9 @@ use_git <- function(message = "Initial commit", pkg = ".") {
 #' use_github(pkg = "testpkg2", protocol = "https")
 #' }
 use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
+                       host = "https://api.github.com",
                        protocol = c("ssh", "https"), credentials = NULL) {
+
   if (is.null(auth_token)) {
     stop("GITHUB_PAT required to create new repo")
   }
@@ -102,11 +107,17 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   }
 
   message("* Creating GitHub repository")
-  create <- github_POST("user/repos", pat = auth_token, body = list(
-    name = jsonlite::unbox(pkg$package),
-    description = jsonlite::unbox(gsub("\n", " ", pkg$title)),
-    private = jsonlite::unbox(private)
-  ))
+  create <-
+    github_POST(
+      "user/repos",
+      pat = auth_token,
+      body = list(
+        name = jsonlite::unbox(pkg$package),
+        description = jsonlite::unbox(gsub("\n", " ", pkg$title)),
+        private = jsonlite::unbox(private)
+      ),
+      host = host
+    )
 
   message("* Adding GitHub remote")
   r <- git2r::repository(pkg$path)
@@ -114,7 +125,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   git2r::remote_add(r, "origin", origin_url)
 
   message("* Adding GitHub links to DESCRIPTION")
-  use_github_links(pkg$path)
+  use_github_links(pkg$path, auth_token = auth_token, host = host)
   if (git_uncommitted(pkg$path)) {
     git2r::add(r, "DESCRIPTION")
     git2r::commit(r, "Add GitHub links to DESCRIPTION")
@@ -128,7 +139,6 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   } else { ## protocol == "https"
     ## in https case, when GITHUB_PAT is passed as password,
     ## the username is immaterial, but git2r doesn't know that
-    ## switch to git2r::cred_token() when CRAN version > v0.11.0
     cred <- git2r::cred_user_pass("EMAIL", auth_token)
     git2r::push(r, "origin", "refs/heads/master", credentials = cred)
   }
@@ -190,10 +200,17 @@ use_git_ignore <- function(ignores, directory = ".", pkg = ".") {
 #' those fields already exist.
 #'
 #' @inheritParams use_git
+#' @param auth_token Provide a personal access token (PAT) from
+#'   \url{https://github.com/settings/tokens}. Defaults to the \code{GITHUB_PAT}
+#'   environment variable.
+#' @param host GitHub API host to use. Override with the endpoint-root for your
+#'   GitHub enterprise instance, for example,
+#'   "https://github.hostname.com/api/v3".
 #' @family git infrastructure
 #' @keywords internal
 #' @export
-use_github_links <- function(pkg = ".") {
+use_github_links <- function(pkg = ".", auth_token = github_pat(),
+                             host = "https://api.github.com") {
 
   if (!uses_github(pkg)) {
     stop("Cannot detect that package already uses GitHub.\n",
@@ -206,8 +223,10 @@ use_github_links <- function(pkg = ".") {
   desc_path <- file.path(pkg$path, "DESCRIPTION")
   desc <- new_desc <- read_dcf(desc_path)
 
-  github_URL <-
-    paste("https://github.com", gh_info$username, gh_info$repo, sep = "/")
+  path_to_repo <- paste("repos", gh_info$fullname, sep = "/")
+  res <- github_GET(path = path_to_repo, pat = auth_token, host = host)
+  github_URL <- res$html_url
+
   fill <- function(d, f, filler) {
     if (is.null(d[[f]]) || identical(d[[f]], "")) {
       d[[f]] <- filler

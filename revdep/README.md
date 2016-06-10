@@ -4,51 +4,57 @@
 
 |setting  |value                        |
 |:--------|:----------------------------|
-|version  |R version 3.2.4 (2016-03-10) |
+|version  |R version 3.3.0 (2016-05-03) |
 |system   |x86_64, darwin13.4.0         |
 |ui       |X11                          |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Chicago              |
-|date     |2016-04-11                   |
+|date     |2016-06-06                   |
 
 ## Packages
 
-|package    |*  |version     |date       |source                            |
-|:----------|:--|:-----------|:----------|:---------------------------------|
-|bitops     |   |1.0-6       |2013-08-17 |CRAN (R 3.2.0)                    |
-|covr       |   |2.0.1       |2016-04-06 |CRAN (R 3.2.4)                    |
-|crayon     |   |1.3.1       |2015-07-13 |CRAN (R 3.2.0)                    |
-|curl       |   |0.9.7       |2016-04-10 |CRAN (R 3.2.4)                    |
-|devtools   |*  |1.10.0.9000 |2016-04-11 |local (hadley/devtools@00ba600)   |
-|digest     |   |0.6.9       |2016-01-08 |CRAN (R 3.2.3)                    |
-|evaluate   |   |0.8.3       |2016-03-05 |CRAN (R 3.2.4)                    |
-|git2r      |   |0.14.0      |2016-03-13 |CRAN (R 3.2.4)                    |
-|gmailr     |   |0.7.0.9000  |2016-04-11 |Github (jimhester/gmailr@2a5833b) |
-|httr       |   |1.1.0       |2016-01-28 |CRAN (R 3.2.3)                    |
-|hunspell   |   |1.2         |2016-03-19 |CRAN (R 3.2.4)                    |
-|jsonlite   |   |0.9.19      |2015-11-28 |CRAN (R 3.2.2)                    |
-|knitr      |   |1.12.3      |2016-01-22 |CRAN (R 3.2.3)                    |
-|lintr      |   |0.3.3       |2015-09-15 |CRAN (R 3.2.0)                    |
-|memoise    |   |1.0.0       |2016-01-29 |CRAN (R 3.2.3)                    |
-|Rcpp       |   |0.12.4      |2016-03-26 |CRAN (R 3.2.4)                    |
-|rmarkdown  |   |0.9.5       |2016-02-22 |CRAN (R 3.2.3)                    |
-|roxygen2   |   |5.0.1       |2015-11-11 |CRAN (R 3.2.2)                    |
-|rstudioapi |   |0.5         |2016-01-24 |CRAN (R 3.2.3)                    |
-|rversions  |   |1.0.2       |2015-07-13 |CRAN (R 3.2.0)                    |
-|testthat   |*  |0.11.0      |2015-10-14 |CRAN (R 3.2.0)                    |
-|whisker    |   |0.3-2       |2013-04-28 |CRAN (R 3.2.0)                    |
-|withr      |   |1.0.1       |2016-02-04 |CRAN (R 3.2.3)                    |
+|package    |*  |version     |date       |source                          |
+|:----------|:--|:-----------|:----------|:-------------------------------|
+|bitops     |   |1.0-6       |2013-08-17 |CRAN (R 3.3.0)                  |
+|covr       |   |2.0.1       |2016-04-06 |CRAN (R 3.3.0)                  |
+|crayon     |   |1.3.1       |2015-07-13 |CRAN (R 3.3.0)                  |
+|curl       |   |0.9.7       |2016-04-10 |CRAN (R 3.3.0)                  |
+|devtools   |*  |1.11.1.9000 |2016-06-06 |local (hadley/devtools@2a8c73b) |
+|digest     |   |0.6.9       |2016-01-08 |CRAN (R 3.3.0)                  |
+|evaluate   |   |0.9         |2016-04-29 |CRAN (R 3.3.0)                  |
+|git2r      |   |0.15.0      |2016-05-11 |CRAN (R 3.3.0)                  |
+|gmailr     |   |0.7.1       |2016-04-12 |CRAN (R 3.3.0)                  |
+|httr       |   |1.1.0       |2016-01-28 |CRAN (R 3.3.0)                  |
+|hunspell   |   |1.2         |2016-03-19 |CRAN (R 3.3.0)                  |
+|jsonlite   |   |0.9.21      |2016-06-04 |cran (@0.9.21)                  |
+|knitr      |   |1.13        |2016-05-09 |CRAN (R 3.3.0)                  |
+|lintr      |   |1.0.0       |2016-04-16 |CRAN (R 3.3.0)                  |
+|memoise    |   |1.0.0       |2016-01-29 |CRAN (R 3.3.0)                  |
+|Rcpp       |   |0.12.5      |2016-05-14 |CRAN (R 3.3.0)                  |
+|rmarkdown  |   |0.9.6       |2016-05-01 |CRAN (R 3.3.0)                  |
+|roxygen2   |   |5.0.1       |2015-11-11 |CRAN (R 3.3.0)                  |
+|rstudioapi |   |0.5         |2016-01-24 |CRAN (R 3.3.0)                  |
+|rversions  |   |1.0.2       |2015-07-13 |CRAN (R 3.3.0)                  |
+|testthat   |*  |1.0.2       |2016-04-23 |CRAN (R 3.3.0)                  |
+|whisker    |   |0.3-2       |2013-04-28 |CRAN (R 3.3.0)                  |
+|withr      |   |1.0.1       |2016-02-04 |CRAN (R 3.3.0)                  |
 
 # Check results
-76 packages
+77 packages
 
 ## acmeR (1.1.0)
 Maintainer: Robert Wolpert <wolpert@stat.duke.edu>
 
 0 errors | 0 warnings | 0 notes
 
-## archivist (2.0.3)
+## addinslist (0.1)
+Maintainer: Dean Attali <daattali@gmail.com>  
+Bug reports: https://github.com/daattali/addinslist/issues
+
+0 errors | 0 warnings | 0 notes
+
+## archivist (2.0.4)
 Maintainer: Przemyslaw Biecek <przemyslaw.biecek@gmail.com>  
 Bug reports: https://github.com/pbiecek/archivist/issues
 
@@ -84,19 +90,6 @@ Bug reports: https://bitbucket.org/richierocks/assertive.data.us/issues
 
 0 errors | 0 warnings | 0 notes
 
-## assertive.datetimes (0.0-1)
-Maintainer: Richard Cotton <richierocks@gmail.com>  
-Bug reports: 
-        https://bitbucket.org/richierocks/assertive.datetimes/issues
-
-0 errors | 0 warnings | 0 notes
-
-## assertive.files (0.0-1)
-Maintainer: Richard Cotton <richierocks@gmail.com>  
-Bug reports: https://bitbucket.org/richierocks/assertive.files/issues
-
-0 errors | 0 warnings | 0 notes
-
 ## assertive.matrices (0.0-1)
 Maintainer: Richard Cotton <richierocks@gmail.com>  
 Bug reports: https://bitbucket.org/richierocks/assertive.matrices/issues
@@ -106,12 +99,6 @@ Bug reports: https://bitbucket.org/richierocks/assertive.matrices/issues
 ## assertive.models (0.0-1)
 Maintainer: Richard Cotton <richierocks@gmail.com>  
 Bug reports: https://bitbucket.org/richierocks/assertive.models/issues
-
-0 errors | 0 warnings | 0 notes
-
-## assertive.numbers (0.0-1)
-Maintainer: Richard Cotton <richierocks@gmail.com>  
-Bug reports: https://bitbucket.org/richierocks/assertive.numbers/issues
 
 0 errors | 0 warnings | 0 notes
 
@@ -138,28 +125,7 @@ Maintainer: Winston Chang <winston@stdout.org>
 Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>  
 Bug reports: http://github.com/ajrgodfrey/BrailleR/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking examples ... ERROR
-Running examples in ‘BrailleR-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: WTF
-> ### Title: What's this figure?
-> ### Aliases: WTF
-> 
-> ### ** Examples
-> 
-> hist(rnorm(1000))
-> WTF()
-Error in grid.echo.recordedplot(recordPlot(), newpage, prefix) : 
-  No graphics to replay
-Calls: WTF ... grid.echo.default -> grid.echo -> grid.echo.recordedplot
-Execution halted
-** found \donttest examples: check also with --run-donttest
-```
+0 errors | 0 warnings | 0 notes
 
 ## broman (0.62-1)
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
@@ -172,7 +138,7 @@ Bug reports: https://github.com/mllg/checkmate/issues
 
 0 errors | 0 warnings | 0 notes
 
-## codyn (1.0.1)
+## codyn (1.1.0)
 Maintainer: Matthew B. Jones <jones@nceas.ucsb.edu>  
 Bug reports: https://github.com/laurenmh/codyn/issues
 
@@ -196,9 +162,15 @@ Maintainer: Yuanchu Dang <yuanchu.dang@gmail.com>
 
 0 errors | 0 warnings | 0 notes
 
-## DataCombine (0.2.20)
+## DataCombine (0.2.21)
 Maintainer: Christopher Gandrud <christopher.gandrud@gmail.com>  
 Bug reports: https://github.com/christophergandrud/DataCombine/issues
+
+0 errors | 0 warnings | 0 notes
+
+## DBItest (1.2)
+Maintainer: Kirill Müller <krlmlr+r@mailbox.org>  
+Bug reports: https://github.com/rstats-db/DBItest/issues
 
 0 errors | 0 warnings | 0 notes
 
@@ -219,11 +191,19 @@ manual.
 Maintainer: Renaud Gaujoux <renaud@tx.technion.ac.il>  
 Bug reports: http://github.com/renozao/doRNG/issues
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 3 notes
 
 ```
 checking package dependencies ... NOTE
 Package suggested but not available for checking: ‘doMPI’
+
+checking R code for possible problems ... NOTE
+.collapse: no visible global function definition for ‘head’
+Undefined global functions or variables:
+  head
+Consider adding
+  importFrom("utils", "head")
+to your NAMESPACE file.
 
 checking Rd cross-references ... NOTE
 Package unavailable to check Rd xrefs: ‘doMPI’
@@ -249,23 +229,15 @@ Bug reports: https://github.com/ropengov/eurostat/issues
 ## FedData (2.0.8)
 Maintainer: R. Kyle Bocinsky <bocinsky@gmail.com>
 
-1 error  | 0 warnings | 0 notes
+0 errors | 0 warnings | 0 notes
 
-```
-checking package dependencies ... ERROR
-Package required and available but unsuitable version: ‘rgdal’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
-
-## flacco (1.2)
+## flacco (1.3)
 Maintainer: Pascal Kerschke <kerschke@uni-muenster.de>  
 Bug reports: https://github.com/kerschke/flacco/issues
 
 0 errors | 0 warnings | 0 notes
 
-## forestFloor (1.9.3)
+## forestFloor (1.9.5)
 Maintainer: Soeren Havelund Welling <SOWE@DTU.DK>
 
 0 errors | 0 warnings | 0 notes
@@ -284,16 +256,33 @@ Bug reports: https://github.com/mdsumner/graticule/issues
 
 0 errors | 0 warnings | 0 notes
 
-## h2o (3.8.1.3)
+## gsrc (1.0.1)
+Maintainer: Fabian Grandke <grafabian@gmail.com>  
+Bug reports: http://github.com/grafab/gsrc/issues
+
+1 error  | 0 warnings | 0 notes
+
+```
+checking package dependencies ... ERROR
+Packages required but not available: ‘illuminaio’ ‘limma’ ‘preprocessCore’
+
+Packages suggested but not available for checking:
+  ‘DNAcopy’ ‘Ckmeans.1d.dp’ ‘brassicaData’ ‘mixtools’ ‘dbscan’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+```
+
+## h2o (3.8.2.6)
 Maintainer: Tom Kraljevic <tomk@0xdata.com>
 
 0 errors | 0 warnings | 1 note 
 
 ```
 checking installed package size ... NOTE
-  installed size is 55.3Mb
+  installed size is 57.1Mb
   sub-directories of 1Mb or more:
-    java  54.4Mb
+    java  56.1Mb
 ```
 
 ## hashmap (0.1.0)
@@ -308,17 +297,11 @@ Bug reports: https://github.com/IALSA/IalsaSynthesis/issues
 
 0 errors | 0 warnings | 0 notes
 
-## icd9 (1.3)
+## icd9 (1.3.1)
 Maintainer: Jack O. Wasey <jack@jackwasey.com>  
 Bug reports: https://github.com/jackwasey/icd9/issues
 
-0 errors | 0 warnings | 1 note 
-
-```
-checking data for non-ASCII characters ... NOTE
-  Note: found 14 marked Latin-1 strings
-  Note: found 39 marked UTF-8 strings
-```
+0 errors | 0 warnings | 0 notes
 
 ## iLaplace (1.0.0)
 Maintainer: Erlis Ruli <erlisr@yahoo.it>  
@@ -326,7 +309,7 @@ Bug reports: https://github.com/erlisR/iLaplace/issues
 
 0 errors | 0 warnings | 0 notes
 
-## jiebaR (0.8)
+## jiebaR (0.8.1)
 Maintainer: Qin Wenfeng <mail@qinwenfeng.com>  
 Bug reports: https://github.com/qinwf/jiebaR/issues
 
@@ -336,12 +319,7 @@ Bug reports: https://github.com/qinwf/jiebaR/issues
 Maintainer: Jason Bryer <jason@bryer.org>  
 Bug reports: https://github.com/jbryer/likert/issues
 
-0 errors | 0 warnings | 1 note 
-
-```
-checking data for non-ASCII characters ... NOTE
-  Note: found 7 marked UTF-8 strings
-```
+0 errors | 0 warnings | 0 notes
 
 ## lineup (0.37-6)
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
@@ -354,16 +332,36 @@ Bug reports: https://github.com/ManifestoProject/manifestoR/issues
 
 0 errors | 0 warnings | 0 notes
 
-## metacom (1.4.3)
-Maintainer: Tad Dallas <tdallas@uga.edu>
-
-0 errors | 0 warnings | 0 notes
-
 ## metafolio (0.1.0)
 Maintainer: Sean C. Anderson <sean@seananderson.ca>  
 Bug reports: http://github.com/seananderson/metafolio/issues
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note 
+
+```
+checking R code for possible problems ... NOTE
+VaR: no visible global function definition for ‘quantile’
+add_dens_polygon: no visible global function definition for ‘na.omit’
+add_dens_polygon: no visible global function definition for ‘polygon’
+add_dens_polygon: no visible global function definition for ‘points’
+annotate: no visible global function definition for ‘par’
+annotate: no visible global function definition for ‘text’
+create_asset_weights: no visible global function definition for ‘runif’
+custom_bw: no visible global function definition for ‘quantile’
+custom_bw: no visible global function definition for ‘var’
+... 65 lines ...
+  abline axTicks axis barplot box chull contourLines hcl integrate
+  legend lines lm matplot mtext na.omit optimize par plot plot.default
+  points polygon quantile rect rnorm runif text uniroot var
+Consider adding
+  importFrom("grDevices", "chull", "contourLines", "hcl")
+  importFrom("graphics", "abline", "axTicks", "axis", "barplot", "box",
+             "legend", "lines", "matplot", "mtext", "par", "plot",
+             "plot.default", "points", "polygon", "rect", "text")
+  importFrom("stats", "integrate", "lm", "na.omit", "optimize",
+             "quantile", "rnorm", "runif", "uniroot", "var")
+to your NAMESPACE file.
+```
 
 ## mgarchBEKK (0.0.2)
 Maintainer: Vehbi Sinan Tunalioglu <vst@vsthost.com>
@@ -388,8 +386,8 @@ Bug reports: https://github.com/johnbaums/mptools/issues
 
 0 errors | 0 warnings | 0 notes
 
-## myTAI (0.3.0)
-Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>  
+## myTAI (0.4.0)
+Maintainer: Hajk-Georg Drost <hgd23@cam.ac.uk>  
 Bug reports: https://github.com/HajkD/myTAI/issues
 
 1 error  | 0 warnings | 0 notes
@@ -407,7 +405,7 @@ Maintainer: Nima Hejazi <nhejazi@berkeley.edu>
 
 0 errors | 0 warnings | 0 notes
 
-## NlsyLinks (2.0.1)
+## NlsyLinks (2.0.6)
 Maintainer: Will Beasley <wibeasley@hotmail.com>  
 Bug reports: https://github.com/LiveOak/NlsyLinks/issues
 
@@ -415,17 +413,17 @@ Bug reports: https://github.com/LiveOak/NlsyLinks/issues
 
 ```
 checking installed package size ... NOTE
-  installed size is  6.3Mb
+  installed size is  8.5Mb
   sub-directories of 1Mb or more:
-    data   4.3Mb
-    doc    1.0Mb
+    data      4.3Mb
+    reports   2.2Mb
 ```
 
 ## NMF (0.20.6)
 Maintainer: Renaud Gaujoux <renaud@tx.technion.ac.il>  
 Bug reports: http://github.com/renozao/NMF/issues
 
-1 error  | 0 warnings | 5 notes
+1 error  | 1 warning  | 4 notes
 
 ```
 checking examples ... ERROR
@@ -451,24 +449,34 @@ fixed coef [3]:
 Error: could not find function "ExpressionSet"
 Execution halted
 
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+Quitting from lines 385-398 (NMF-vignette.Rnw) 
+Error: processing vignette 'NMF-vignette.Rnw' failed with diagnostics:
+unable to find required package 'Biobase'
+Execution halted
+
+
 checking package dependencies ... NOTE
 Packages suggested but not available for checking:
   ‘RcppOctave’ ‘doMPI’ ‘Biobase’
 
 checking R code for possible problems ... NOTE
 .wrapResult: no visible global function definition for ‘exprs’
-algorithm,NMFStrategyOctave : .local: no visible global function
-  definition for ‘fstop’
-evar,ANY : .local: no visible binding for global variable ‘Biobase’
-nmf,matrix-numeric-NMFStrategy : .local : run.all: no visible binding
-  for global variable ‘n’
-nmf,matrix-numeric-NMFStrategy : .local : run.all: no visible binding
-  for global variable ‘RNGobj’
-nmfModel,formula-ANY : .local : merge_pdata: no visible global function
+algorithm,NMFStrategyOctave: no visible global function definition for
+  ‘fstop’
+evar,ANY: no visible binding for global variable ‘Biobase’
+nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
+  variable ‘n’
+nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
+  variable ‘RNGobj’
+nmfModel,formula-ANY : merge_pdata: no visible global function
   definition for ‘pData’
-nmfModel,formula-ANY : .local: no visible global function definition
-  for ‘exprs’
-rss,matrix : .local: no visible binding for global variable ‘Biobase’
+nmfModel,formula-ANY: no visible global function definition for ‘exprs’
+rss,matrix: no visible binding for global variable ‘Biobase’
+Undefined global functions or variables:
+  Biobase RNGobj exprs fstop n pData
 
 checking Rd cross-references ... NOTE
 Packages unavailable to check Rd xrefs: ‘RcppOctave’, ‘Biobase’
@@ -478,21 +486,12 @@ checking data for non-ASCII characters ... NOTE
     unable to find required package 'Biobase'
   Calls: <Anonymous> ... .extendsForS3 -> extends -> getClassDef -> .requirePackage
   Execution halted
-
-checking re-building of vignette outputs ... NOTE
-Error in re-building vignettes:
-  ...
-Quitting from lines 385-398 (NMF-vignette.Rnw) 
-Error: processing vignette 'NMF-vignette.Rnw' failed with diagnostics:
-unable to find required package 'Biobase'
-Execution halted
-
 ```
 
 ## npsm (0.5)
 Maintainer: John Kloke <kloke@biostat.wisc.edu>
 
-0 errors | 0 warnings | 1 note 
+0 errors | 0 warnings | 2 notes
 
 ```
 checking S3 generic/method consistency ... NOTE
@@ -500,9 +499,32 @@ Found the following apparent S3 methods exported but not registered:
   print.fkk.test print.hogg.test print.rank.test
 See section ‘Registering S3 methods’ in the ‘Writing R Extensions’
 manual.
+
+checking R code for possible problems ... NOTE
+aligned.test: no visible global function definition for ‘model.matrix’
+aligned.test: no visible global function definition for ‘resid’
+aligned.test: no visible global function definition for ‘pchisq’
+cor.boot.ci: no visible global function definition for ‘quantile’
+cor.boot.ci : <anonymous>: no visible global function definition for
+  ‘cor’
+fk.test: no visible global function definition for ‘new’
+fk.test : <anonymous>: no visible global function definition for
+  ‘qnorm’
+... 33 lines ...
+vanElteren.test: no visible global function definition for ‘pnorm’
+Undefined global functions or variables:
+  coef cor dnorm median model.matrix new pchisq pf pnorm qnorm qt
+  quantile resid rnorm var
+Consider adding
+  importFrom("methods", "new")
+  importFrom("stats", "coef", "cor", "dnorm", "median", "model.matrix",
+             "pchisq", "pf", "pnorm", "qnorm", "qt", "quantile", "resid",
+             "rnorm", "var")
+to your NAMESPACE file (and ensure that your DESCRIPTION Imports field
+contains 'methods').
 ```
 
-## opencpu (1.5.4)
+## opencpu (1.6.1)
 Maintainer: Jeroen Ooms <jeroen.ooms@stat.ucla.edu>  
 Bug reports: https://github.com/jeroenooms/opencpu/issues
 
@@ -513,8 +535,9 @@ checking package dependencies ... NOTE
 Package suggested but not available for checking: ‘RAppArmor’
 ```
 
-## osmplotr (0.1-3)
-Maintainer: Mark Padgham <mark.padgham@email.com>
+## osmplotr (0.2.1)
+Maintainer: Mark Padgham <mark.padgham@email.com>  
+Bug reports: https://github.com/ropenscilabs/osmplotr/issues
 
 0 errors | 0 warnings | 0 notes
 
@@ -535,7 +558,7 @@ Bug reports: https://github.com/trinker/pacman/issues?state=open
 
 0 errors | 0 warnings | 0 notes
 
-## Perc (0.1.1)
+## Perc (0.1.2)
 Maintainer: Jian Jin <jinjian.pku@gmail.com>
 
 0 errors | 0 warnings | 0 notes
@@ -558,29 +581,29 @@ checking dependencies in R code ... NOTE
 
 checking R code for possible problems ... NOTE
 .existsTestLogger: no visible binding for global variable ‘.testLogger’
+.silenceF : <anonymous>: no visible global function definition for
+  ‘capture.output’
 CLIArgumentParser: no visible global function definition for
   ‘ArgumentParser’
 CLIArgumentParser: no visible global function definition for ‘proto’
-chunkOutputHook : <anonymous> : <anonymous>: no visible binding for
-  global variable ‘knit_hooks’
-cite_pkg: no visible global function definition for ‘read.bib’
-hook_backspace : <anonymous>: no visible binding for global variable
-  ‘knit_hooks’
-... 31 lines ...
-  ‘is.package’
-utest,character : .local: no visible global function definition for
-  ‘load_all’
-utest,character : .local: no visible global function definition for
-  ‘defineTestSuite’
-utest,character : .local: no visible global function definition for
-  ‘test_dir’
-utest,character : .local: no visible global function definition for
-  ‘runTestFile’
-utest,character : .local: no visible global function definition for
-  ‘test_file’
+CLIArgumentParser : <anonymous>: no visible global function definition
+  for ‘capture.output’
+RdSection2latex: no visible global function definition for
+... 96 lines ...
+  runTestFile runTestSuite sessionInfo str tail test_dir test_file
+  toBibtex toLatex untar
+Consider adding
+  importFrom("grDevices", "dev.off", "png")
+  importFrom("graphics", "par")
+  importFrom("utils", "RweaveLatex", "Sweave", "available.packages",
+             "browseURL", "capture.output", "citation", "compareVersion",
+             "contrib.url", "data", "file_test", "head",
+             "installed.packages", "packageDescription", "sessionInfo",
+             "str", "tail", "toBibtex", "toLatex", "untar")
+to your NAMESPACE file.
 ```
 
-## plotly (3.4.1)
+## plotly (3.6.0)
 Maintainer: Carson Sievert <cpsievert1@gmail.com>  
 Bug reports: https://github.com/ropensci/plotly/issues
 
@@ -590,14 +613,9 @@ Bug reports: https://github.com/ropensci/plotly/issues
 Maintainer: Jason Bryer <jason@bryer.org>  
 Bug reports: https://github.com/jbryer/PSAboot/issues
 
-0 errors | 0 warnings | 1 note 
+0 errors | 0 warnings | 0 notes
 
-```
-checking data for non-ASCII characters ... NOTE
-  Note: found 4 marked UTF-8 strings
-```
-
-## qtlcharts (0.5-25)
+## qtlcharts (0.6-6)
 Maintainer: Karl W Broman <kbroman@biostat.wisc.edu>
 
 0 errors | 0 warnings | 1 note 
@@ -610,7 +628,7 @@ checking installed package size ... NOTE
     htmlwidgets   1.3Mb
 ```
 
-## radiomics (0.1.1)
+## radiomics (0.1.2)
 Maintainer: Joel Carlson <jnkcarlson@gmail.com>
 
 0 errors | 0 warnings | 0 notes
@@ -625,8 +643,26 @@ checking DESCRIPTION meta-information ... NOTE
 Malformed Title field: should not end in a period.
 
 checking R code for possible problems ... NOTE
+find_available_versions: no visible global function definition for
+  ‘contrib.url’
+find_available_versions: no visible global function definition for
+  ‘available.packages’
+install_version: no visible global function definition for
+  ‘contrib.url’
+install_version: no visible global function definition for
+  ‘available.packages’
 install_version: no visible global function definition for
   ‘install_url’
+load_available_packages: no visible global function definition for
+  ‘contrib.url’
+validate_installed_package: no visible global function definition for
+  ‘installed.packages’
+Undefined global functions or variables:
+  available.packages contrib.url install_url installed.packages
+Consider adding
+  importFrom("utils", "available.packages", "contrib.url",
+             "installed.packages")
+to your NAMESPACE file.
 ```
 
 ## Rcereal (1.1.2)
@@ -637,7 +673,18 @@ Maintainer: Wush Wu <wush978@gmail.com>
 ## rclinicaltrials (1.4.1)
 Maintainer: Michael C Sachs <sachsmc@gmail.com>
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note 
+
+```
+checking R code for possible problems ... NOTE
+clinicaltrials_download: no visible global function definition for
+  ‘unzip’
+Undefined global functions or variables:
+  unzip
+Consider adding
+  importFrom("utils", "unzip")
+to your NAMESPACE file.
+```
 
 ## REDCapR (0.9.3)
 Maintainer: Will Beasley <wibeasley@hotmail.com>  
@@ -654,27 +701,36 @@ Package suggested but not available for checking: ‘RODBC’
 Maintainer: Carl Boettiger <cboettig@ropensci.org>  
 Bug reports: https://github.com/ropensci/rfishbase/issues
 
-0 errors | 0 warnings | 1 note 
-
-```
-checking data for non-ASCII characters ... NOTE
-  Note: found 33 marked UTF-8 strings
-```
+0 errors | 0 warnings | 0 notes
 
 ## roxygen2 (5.0.1)
 Maintainer: Hadley Wickham <hadley@rstudio.com>
 
 0 errors | 0 warnings | 0 notes
 
-## rpdo (0.1.2)
+## rpdo (0.2.0)
 Maintainer: Joe Thorley <joe@poissonconsulting.ca>
 
 0 errors | 0 warnings | 0 notes
 
-## rpivotTable (0.1.5.7)
+## rpivotTable (0.1.5.20)
 Maintainer: Enzo Martoglio  <enzo@smartinsightsfromdata.com>
 
 0 errors | 0 warnings | 0 notes
+
+## Ryacas (0.3-1)
+Maintainer: G. Grothendieck <ggrothendieck@gmail.com>  
+Bug reports: https://github.com/ggrothendieck/ryacas/issues
+
+0 errors | 1 warning  | 0 notes
+
+```
+checking whether package ‘Ryacas’ can be installed ... WARNING
+Found the following significant warnings:
+  yacas/include/yacas/utf8/core.h:309:55: warning: multiple unsequenced modifications to 'it' [-Wunsequenced]
+  yacas/include/yacas/utf8/core.h:320:39: warning: multiple unsequenced modifications to 'it' [-Wunsequenced]
+See ‘/Users/hadley/Documents/devtools/devtools/revdep/checks/Ryacas.Rcheck/00install.out’ for details.
+```
 
 ## satellite (0.2.0)
 Maintainer: Tim Appelhans
@@ -687,28 +743,28 @@ Maintainer: Jeffrey B. Arnold <jeffrey.arnold@gmail.com>
 
 0 errors | 0 warnings | 0 notes
 
-## testthat (0.11.0)
+## testthat (1.0.2)
 Maintainer: Hadley Wickham <hadley@rstudio.com>  
 Bug reports: https://github.com/hadley/testthat/issues
 
 0 errors | 0 warnings | 0 notes
 
-## Wats (0.10.3)
-Maintainer: Will Beasley <wibeasley@hotmail.com>  
-Bug reports: https://github.com/OuhscBbmc/Wats/issues
+## umx (1.2.7)
+Maintainer: Timothy C Bates <timothy.c.bates@gmail.com>  
+Bug reports: http://github.com/tbates/umx/issues
 
 0 errors | 0 warnings | 1 note 
 
 ```
-checking re-building of vignette outputs ... NOTE
-Error in re-building vignettes:
-  ...
-Quitting from lines 282-302 (OkFertilityWithIntercensalEstimates.Rmd) 
-Error: processing vignette 'OkFertilityWithIntercensalEstimates.Rmd' failed with diagnostics:
-there is no package called 'graph'
-Execution halted
-
+checking Rd cross-references ... NOTE
+Package unavailable to check Rd xrefs: ‘sem’
 ```
+
+## Wats (0.10.3)
+Maintainer: Will Beasley <wibeasley@hotmail.com>  
+Bug reports: https://github.com/OuhscBbmc/Wats/issues
+
+0 errors | 0 warnings | 0 notes
 
 ## wikipediatrend (1.1.10)
 Maintainer: Peter Meissner <retep.meissner@gmail.com>  

@@ -4,41 +4,41 @@
 
 |setting  |value                        |
 |:--------|:----------------------------|
-|version  |R version 3.2.4 (2016-03-10) |
+|version  |R version 3.3.0 (2016-05-03) |
 |system   |x86_64, darwin13.4.0         |
 |ui       |X11                          |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
 |tz       |America/Chicago              |
-|date     |2016-04-11                   |
+|date     |2016-06-06                   |
 
 ## Packages
 
-|package    |*  |version     |date       |source                            |
-|:----------|:--|:-----------|:----------|:---------------------------------|
-|bitops     |   |1.0-6       |2013-08-17 |CRAN (R 3.2.0)                    |
-|covr       |   |2.0.1       |2016-04-06 |CRAN (R 3.2.4)                    |
-|crayon     |   |1.3.1       |2015-07-13 |CRAN (R 3.2.0)                    |
-|curl       |   |0.9.7       |2016-04-10 |CRAN (R 3.2.4)                    |
-|devtools   |*  |1.10.0.9000 |2016-04-11 |local (hadley/devtools@00ba600)   |
-|digest     |   |0.6.9       |2016-01-08 |CRAN (R 3.2.3)                    |
-|evaluate   |   |0.8.3       |2016-03-05 |CRAN (R 3.2.4)                    |
-|git2r      |   |0.14.0      |2016-03-13 |CRAN (R 3.2.4)                    |
-|gmailr     |   |0.7.0.9000  |2016-04-11 |Github (jimhester/gmailr@2a5833b) |
-|httr       |   |1.1.0       |2016-01-28 |CRAN (R 3.2.3)                    |
-|hunspell   |   |1.2         |2016-03-19 |CRAN (R 3.2.4)                    |
-|jsonlite   |   |0.9.19      |2015-11-28 |CRAN (R 3.2.2)                    |
-|knitr      |   |1.12.3      |2016-01-22 |CRAN (R 3.2.3)                    |
-|lintr      |   |0.3.3       |2015-09-15 |CRAN (R 3.2.0)                    |
-|memoise    |   |1.0.0       |2016-01-29 |CRAN (R 3.2.3)                    |
-|Rcpp       |   |0.12.4      |2016-03-26 |CRAN (R 3.2.4)                    |
-|rmarkdown  |   |0.9.5       |2016-02-22 |CRAN (R 3.2.3)                    |
-|roxygen2   |   |5.0.1       |2015-11-11 |CRAN (R 3.2.2)                    |
-|rstudioapi |   |0.5         |2016-01-24 |CRAN (R 3.2.3)                    |
-|rversions  |   |1.0.2       |2015-07-13 |CRAN (R 3.2.0)                    |
-|testthat   |*  |0.11.0      |2015-10-14 |CRAN (R 3.2.0)                    |
-|whisker    |   |0.3-2       |2013-04-28 |CRAN (R 3.2.0)                    |
-|withr      |   |1.0.1       |2016-02-04 |CRAN (R 3.2.3)                    |
+|package    |*  |version     |date       |source                          |
+|:----------|:--|:-----------|:----------|:-------------------------------|
+|bitops     |   |1.0-6       |2013-08-17 |CRAN (R 3.3.0)                  |
+|covr       |   |2.0.1       |2016-04-06 |CRAN (R 3.3.0)                  |
+|crayon     |   |1.3.1       |2015-07-13 |CRAN (R 3.3.0)                  |
+|curl       |   |0.9.7       |2016-04-10 |CRAN (R 3.3.0)                  |
+|devtools   |*  |1.11.1.9000 |2016-06-06 |local (hadley/devtools@2a8c73b) |
+|digest     |   |0.6.9       |2016-01-08 |CRAN (R 3.3.0)                  |
+|evaluate   |   |0.9         |2016-04-29 |CRAN (R 3.3.0)                  |
+|git2r      |   |0.15.0      |2016-05-11 |CRAN (R 3.3.0)                  |
+|gmailr     |   |0.7.1       |2016-04-12 |CRAN (R 3.3.0)                  |
+|httr       |   |1.1.0       |2016-01-28 |CRAN (R 3.3.0)                  |
+|hunspell   |   |1.2         |2016-03-19 |CRAN (R 3.3.0)                  |
+|jsonlite   |   |0.9.21      |2016-06-04 |cran (@0.9.21)                  |
+|knitr      |   |1.13        |2016-05-09 |CRAN (R 3.3.0)                  |
+|lintr      |   |1.0.0       |2016-04-16 |CRAN (R 3.3.0)                  |
+|memoise    |   |1.0.0       |2016-01-29 |CRAN (R 3.3.0)                  |
+|Rcpp       |   |0.12.5      |2016-05-14 |CRAN (R 3.3.0)                  |
+|rmarkdown  |   |0.9.6       |2016-05-01 |CRAN (R 3.3.0)                  |
+|roxygen2   |   |5.0.1       |2015-11-11 |CRAN (R 3.3.0)                  |
+|rstudioapi |   |0.5         |2016-01-24 |CRAN (R 3.3.0)                  |
+|rversions  |   |1.0.2       |2015-07-13 |CRAN (R 3.3.0)                  |
+|testthat   |*  |1.0.2       |2016-04-23 |CRAN (R 3.3.0)                  |
+|whisker    |   |0.3-2       |2013-04-28 |CRAN (R 3.3.0)                  |
+|withr      |   |1.0.1       |2016-02-04 |CRAN (R 3.3.0)                  |
 
 # Check results
 6 packages with problems
@@ -57,33 +57,6 @@ See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 ```
 
-## BrailleR (0.24.2)
-Maintainer: A. Jonathan R. Godfrey <a.j.godfrey@massey.ac.nz>  
-Bug reports: http://github.com/ajrgodfrey/BrailleR/issues
-
-1 error  | 0 warnings | 0 notes
-
-```
-checking examples ... ERROR
-Running examples in ‘BrailleR-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: WTF
-> ### Title: What's this figure?
-> ### Aliases: WTF
-> 
-> ### ** Examples
-> 
-> hist(rnorm(1000))
-> WTF()
-Error in grid.echo.recordedplot(recordPlot(), newpage, prefix) : 
-  No graphics to replay
-Calls: WTF ... grid.echo.default -> grid.echo -> grid.echo.recordedplot
-Execution halted
-** found \donttest examples: check also with --run-donttest
-```
-
 ## demi (1.1.2)
 Maintainer: Sten Ilmjarv <sten.ilmjarv@gmail.com>
 
@@ -97,21 +70,25 @@ See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 ```
 
-## FedData (2.0.8)
-Maintainer: R. Kyle Bocinsky <bocinsky@gmail.com>
+## gsrc (1.0.1)
+Maintainer: Fabian Grandke <grafabian@gmail.com>  
+Bug reports: http://github.com/grafab/gsrc/issues
 
 1 error  | 0 warnings | 0 notes
 
 ```
 checking package dependencies ... ERROR
-Package required and available but unsuitable version: ‘rgdal’
+Packages required but not available: ‘illuminaio’ ‘limma’ ‘preprocessCore’
+
+Packages suggested but not available for checking:
+  ‘DNAcopy’ ‘Ckmeans.1d.dp’ ‘brassicaData’ ‘mixtools’ ‘dbscan’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 ```
 
-## myTAI (0.3.0)
-Maintainer: Hajk-Georg Drost <hajk-georg.drost@informatik.uni-halle.de>  
+## myTAI (0.4.0)
+Maintainer: Hajk-Georg Drost <hgd23@cam.ac.uk>  
 Bug reports: https://github.com/HajkD/myTAI/issues
 
 1 error  | 0 warnings | 0 notes
@@ -128,7 +105,7 @@ manual.
 Maintainer: Renaud Gaujoux <renaud@tx.technion.ac.il>  
 Bug reports: http://github.com/renozao/NMF/issues
 
-1 error  | 0 warnings | 5 notes
+1 error  | 1 warning  | 4 notes
 
 ```
 checking examples ... ERROR
@@ -154,24 +131,34 @@ fixed coef [3]:
 Error: could not find function "ExpressionSet"
 Execution halted
 
+checking re-building of vignette outputs ... WARNING
+Error in re-building vignettes:
+  ...
+Quitting from lines 385-398 (NMF-vignette.Rnw) 
+Error: processing vignette 'NMF-vignette.Rnw' failed with diagnostics:
+unable to find required package 'Biobase'
+Execution halted
+
+
 checking package dependencies ... NOTE
 Packages suggested but not available for checking:
   ‘RcppOctave’ ‘doMPI’ ‘Biobase’
 
 checking R code for possible problems ... NOTE
 .wrapResult: no visible global function definition for ‘exprs’
-algorithm,NMFStrategyOctave : .local: no visible global function
-  definition for ‘fstop’
-evar,ANY : .local: no visible binding for global variable ‘Biobase’
-nmf,matrix-numeric-NMFStrategy : .local : run.all: no visible binding
-  for global variable ‘n’
-nmf,matrix-numeric-NMFStrategy : .local : run.all: no visible binding
-  for global variable ‘RNGobj’
-nmfModel,formula-ANY : .local : merge_pdata: no visible global function
+algorithm,NMFStrategyOctave: no visible global function definition for
+  ‘fstop’
+evar,ANY: no visible binding for global variable ‘Biobase’
+nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
+  variable ‘n’
+nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
+  variable ‘RNGobj’
+nmfModel,formula-ANY : merge_pdata: no visible global function
   definition for ‘pData’
-nmfModel,formula-ANY : .local: no visible global function definition
-  for ‘exprs’
-rss,matrix : .local: no visible binding for global variable ‘Biobase’
+nmfModel,formula-ANY: no visible global function definition for ‘exprs’
+rss,matrix: no visible binding for global variable ‘Biobase’
+Undefined global functions or variables:
+  Biobase RNGobj exprs fstop n pData
 
 checking Rd cross-references ... NOTE
 Packages unavailable to check Rd xrefs: ‘RcppOctave’, ‘Biobase’
@@ -181,14 +168,19 @@ checking data for non-ASCII characters ... NOTE
     unable to find required package 'Biobase'
   Calls: <Anonymous> ... .extendsForS3 -> extends -> getClassDef -> .requirePackage
   Execution halted
+```
 
-checking re-building of vignette outputs ... NOTE
-Error in re-building vignettes:
-  ...
-Quitting from lines 385-398 (NMF-vignette.Rnw) 
-Error: processing vignette 'NMF-vignette.Rnw' failed with diagnostics:
-unable to find required package 'Biobase'
-Execution halted
+## Ryacas (0.3-1)
+Maintainer: G. Grothendieck <ggrothendieck@gmail.com>  
+Bug reports: https://github.com/ggrothendieck/ryacas/issues
 
+0 errors | 1 warning  | 0 notes
+
+```
+checking whether package ‘Ryacas’ can be installed ... WARNING
+Found the following significant warnings:
+  yacas/include/yacas/utf8/core.h:309:55: warning: multiple unsequenced modifications to 'it' [-Wunsequenced]
+  yacas/include/yacas/utf8/core.h:320:39: warning: multiple unsequenced modifications to 'it' [-Wunsequenced]
+See ‘/Users/hadley/Documents/devtools/devtools/revdep/checks/Ryacas.Rcheck/00install.out’ for details.
 ```
 

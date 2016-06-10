@@ -65,33 +65,36 @@ load_imports <- function(pkg = ".") {
 }
 
 # Load imported objects
-# The code in this function is taken and adapted from base::loadNamespace in R
-# 2.15.3
-process_imports <- function(pkg = ".") {
-  nsInfo <- parse_ns_file(pkg)
-  ns <- ns_env(pkg)
-  lib.loc <- NULL
+# The code in this function is taken and adapted from base::loadNamespace
+# Setup variables were added and the for loops put in a tryCatch block
+# https://github.com/wch/r-source/blob/tags/R-3-3-0/src/library/base/R/namespace.R#L397-L427
 
-  ## process imports
-  for (i in nsInfo$imports) {
-    tryCatch(
-      if (is.character(i))
-        namespaceImport(ns, loadNamespace(i))
-      else
-        namespaceImportFrom(ns, loadNamespace(i[[1L]]), i[[2L]]),
-      error = warning
-    )
-  }
-  for(imp in nsInfo$importClasses) {
-    tryCatch(
-      namespaceImportClasses(ns, loadNamespace(imp[[1L]]), imp[[2L]]),
-      error = warning
-    )
-  }
-  for(imp in nsInfo$importMethods) {
-    tryCatch(
-      namespaceImportMethods(ns, loadNamespace(imp[[1L]]), imp[[2L]]),
-      error = warning
-    )
-  }
+# This wraps the inner for loop iterations in a tryCatch
+wrap_inner_loop <- function(x) {
+  inner <- x[[4]]
+  x[[4]] <- call("tryCatch", error = quote(warning), inner)
+  x
 }
+
+onload_assign("process_imports", {
+  make_function(alist(pkg = "."),
+    bquote({
+      package <- pkg$name
+      vI <- .split_description(.read_description(file.path(pkg$path, "DESCRIPTION")))$Imports
+      nsInfo <- devtools::parse_ns_file(pkg)
+      ns <- devtools::ns_env(pkg)
+      lib.loc <- NULL
+      .(for1)
+      .(for2)
+      .(for3)
+    }, list(
+        for1 = wrap_inner_loop(
+          extract_lang(body(loadNamespace), comp_lang, y = quote(for(i in nsInfo$imports) NULL), idx = 1:3)),
+
+        for2 = wrap_inner_loop(extract_lang(body(loadNamespace),
+          comp_lang, y = quote(for(imp in nsInfo$importClasses) NULL), idx = 1:3)),
+
+        for3 = wrap_inner_loop(extract_lang(body(loadNamespace),
+          comp_lang, y = quote(for(imp in nsInfo$importMethods) NULL), idx = 1:3))
+        )), asNamespace("tools"))
+})

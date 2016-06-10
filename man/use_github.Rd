@@ -5,7 +5,8 @@
 \title{Connect a local repo with GitHub.}
 \usage{
 use_github(auth_token = github_pat(), private = FALSE, pkg = ".",
-  protocol = c("ssh", "https"), credentials = NULL)
+  host = "https://api.github.com", protocol = c("ssh", "https"),
+  credentials = NULL)
 }
 \arguments{
 \item{auth_token}{Provide a personal access token (PAT) from
@@ -16,6 +17,10 @@ environment variable.}
 
 \item{pkg}{Path to package. See \code{\link{as.package}} for more
 information.}
+
+\item{host}{GitHub API host to use. Override with the endpoint-root for your
+GitHub enterprise instance, for example,
+"https://github.hostname.com/api/v3".}
 
 \item{protocol}{transfer protocol, either "ssh" (the default) or "https"}
 

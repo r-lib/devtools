@@ -8,6 +8,7 @@
 \alias{use_coverage}
 \alias{use_cran_badge}
 \alias{use_cran_comments}
+\alias{use_dev_version}
 \alias{use_mit_license}
 \alias{use_package_doc}
 \alias{use_rcpp}
@@ -47,6 +48,8 @@ use_cran_badge(pkg = ".")
 
 use_mit_license(pkg = ".", copyright_holder = getOption("devtools.name",
   "<Author>"))
+
+use_dev_version(pkg = ".")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -136,6 +139,12 @@ Add a badge to show CRAN status and version number on the README
 
 Adds the necessary infrastructure to declare your package as
 distributed under the MIT license.
+}
+
+\section{\code{use_dev_version}}{
+
+This adds ".9000" to the package \code{DESCRIPTION}, adds a new heading to
+\code{NEWS.md} (if it exists), and then checks the result into git.
 }
 \seealso{
 Other infrastructure: \code{\link{use_build_ignore}},

@@ -2,9 +2,23 @@ uses_git <- function(path = ".") {
   !is.null(git2r::discover_repository(path))
 }
 
+# sha of most recent commit
+git_repo_sha1 <- function(r) {
+  rev <- git2r::head(r)
+  if (is.null(rev)) {
+    return(NULL)
+  }
+
+  if (git2r::is_commit(rev)) {
+    rev@sha
+  } else {
+    git2r::branch_target(rev)
+  }
+}
+
 git_sha1 <- function(n = 10, path = ".") {
   r <- git2r::repository(path, discover = TRUE)
-  sha <- git2r::branch_target(git2r::head(r)) # sha of most recent commit
+  sha <- git_repo_sha1(r)
   substr(sha, 1, n)
 }
 
@@ -119,12 +133,10 @@ github_remote_parse <- function(x) {
   if (length(x) == 0) return(github_dummy)
   if (!grepl("github", x)) return(github_dummy)
 
-  if (grepl("^https", x)) {
+  if (grepl("^(https|git)", x)) {
     # https://github.com/hadley/devtools.git
-    re <- "github.com/(.*?)/(.*)\\.git"
-  } else if (grepl("^git", x)) {
     # git@github.com:hadley/devtools.git
-    re <- "github.com:(.*?)/(.*)\\.git"
+    re <- "github[^/:]*[/:](.*?)/(.*)\\.git"
   } else {
     stop("Unknown GitHub repo format", call. = FALSE)
   }

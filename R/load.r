@@ -17,11 +17,12 @@
 #'     and connects the generated DLL into R. See \code{\link{compile_dll}}
 #'     for more details.
 #'
+#'   \item Runs \code{.onAttach()}, \code{.onLoad()} and \code{.onUnload()}
+#'     functions at the correct times.
+#'
 #'   \item If you use \pkg{testthat}, will load all test helpers so you
 #'     can access them interactively.
 #'
-#'   \item Runs \code{.onAttach()}, \code{.onLoad()} and \code{.onUnload()}
-#'     functions at the correct times.
 #' }
 #'
 #' @section Namespaces:
@@ -91,6 +92,15 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   check_suggested("roxygen2")
 
   if (!quiet) message("Loading ", pkg$package)
+
+  if (pkg$package == "compiler") {
+    # Disable JIT while loading the compiler package to avoid interference
+    # (otherwise the compiler package would be loaded as a side effect of
+    # JIT compilation and it would be locked before we can insert shims into
+    # it).
+    oldEnabled <- compiler::enableJIT(0)
+    on.exit(compiler::enableJIT(oldEnabled), TRUE)
+  }
 
   roxygen2::update_collate(pkg$path)
   # Refresh the pkg structure with any updates to the Collate entry
@@ -170,14 +180,15 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
   # Copy over objects from the namespace environment
   export_ns(pkg)
 
+  # Run hooks
+  run_pkg_hook(pkg, "attach")
+  run_user_hook(pkg, "attach")
+
   # Source test helpers into package environment
   if (uses_testthat(pkg)) {
     testthat::source_test_helpers(find_test_dir(pkg$path), env = pkg_env(pkg))
   }
 
-  # Run hooks
-  run_pkg_hook(pkg, "attach")
-  run_user_hook(pkg, "attach")
 
   # Replace help and ? in utils package environment
   insert_global_shims()

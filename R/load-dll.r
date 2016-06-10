@@ -4,39 +4,37 @@
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
 #' @export
-load_dll <- function(pkg = ".") {
-  pkg <- as.package(pkg)
-  env <- ns_env(pkg)
-  nsInfo <- parse_ns_file(pkg)
+onload_assign("load_dll",
+  make_function(alist(pkg = "."),
+    bquote({
+      pkg <- as.package(pkg)
+      env <- ns_env(pkg)
+      nsInfo <- parse_ns_file(pkg)
 
-  # The code below taken directly from base::loadNamespace, except for
-  # library.dynam2, which is a special version of library.dynam
+      dlls <- list()
+      dynLibs <- nsInfo$dynlibs
 
-  ## load any dynamic libraries
-  dlls <- list()
-  dynLibs <- nsInfo$dynlibs
-  for (i in seq_along(dynLibs)) {
-    lib <- dynLibs[i]
-    # NOTE: replaced library.dynam with devtools replacement, library.dynam2
-    dlls[[lib]]  <- library.dynam2(pkg, lib)
-    assignNativeRoutines(dlls[[lib]], lib, env,
-                         nsInfo$nativeRoutines[[lib]])
+      ## The code below taken directly from base::loadNamespace
+      ## https://github.com/wch/r-source/blob/tags/R-3-3-0/src/library/base/R/namespace.R#L466-L485
+      ## except for the call to library.dynam2, which is a special version of
+      ## library.dynam
+      .(for_loop)
+      addNamespaceDynLibs(env, nsInfo$dynlibs)
 
-    ## If the DLL has a name as in useDynLib(alias = foo),
-    ## then assign DLL reference to alias.  Check if
-    ## names() is NULL to handle case that the nsInfo.rds
-    ## file was created before the names were added to the
-    ## dynlibs vector.
-    if(!is.null(names(nsInfo$dynlibs))
-       && names(nsInfo$dynlibs)[i] != "")
-      assign(names(nsInfo$dynlibs)[i], dlls[[lib]], envir = env)
-    setNamespaceInfo(env, "DLLs", dlls)
-  }
-  addNamespaceDynLibs(env, nsInfo$dynlibs)
+      invisible(dlls)
+    },
+    list(for_loop =
+      modify_lang(
+        f = function(x)
+          if (comp_lang(x, quote(library.dynam()), 1)) {
+            quote(library.dynam2(pkg, lib))
+          } else {
+            x
+          },
 
-  invisible(dlls)
-}
-
+          extract_lang(body(loadNamespace),
+            comp_lang, y = quote(for (i in seq_along(dynLibs)) NULL), idx = 1:3)
+      )))))
 
 # Return a list of currently loaded DLLs from the package
 loaded_dlls <- function(pkg = ".") {
@@ -71,80 +69,21 @@ library.dynam2 <- function(pkg = ".", lib = "") {
 }
 
 
-# This is taken directly from base::loadNamespace() in R 2.15.1
-addNamespaceDynLibs <- function(ns, newlibs) {
-  dynlibs <- getNamespaceInfo(ns, "dynlibs")
-  setNamespaceInfo(ns, "dynlibs", c(dynlibs, newlibs))
-}
+# This is taken directly from base::loadNamespace()
+# https://github.com/wch/r-source/blob/tags/R-3-3-0/src/library/base/R/namespace.R#L270-L273
+onload_assign("addNamespaceDynLibs",
+  eval(extract_lang(body(loadNamespace),
+      comp_lang, y = quote(addNamespaceDynLibs <- NULL), idx = 1:2)[[3]]))
 
-
-# This is taken directly from base::loadNamespace in R 2.15.1
+# This is taken directly from base::loadNamespace
+# https://github.com/wch/r-source/blob/tags/R-3-3-0/src/library/base/R/namespace.R#L287-L308
 # The only change is the line used get the package name
-assignNativeRoutines <- function(dll, lib, env, nativeRoutines) {
-  package <- methods::getPackageName(env)
-
-  if(length(nativeRoutines) == 0L)
-    return(NULL)
-
-  if(nativeRoutines$useRegistration) {
-    ## Use the registration information to register ALL the symbols
-    fixes <- nativeRoutines$registrationFixes
-    routines <- getDLLRegisteredRoutines.DLLInfo(dll, addNames = FALSE)
-    lapply(routines,
-      function(type) {
-        lapply(type,
-               function(sym) {
-                   varName <- paste0(fixes[1L], sym$name, fixes[2L])
-                   if(exists(varName, envir = env))
-                     warning("failed to assign RegisteredNativeSymbol for ",
-                             sym$name,
-                             paste(" to", varName),
-                             " since ", varName,
-                             " is already defined in the ", package,
-                             " namespace")
-                   else
-                     assign(varName, sym, envir = env)
-               })
-      })
-
-   }
-
-  symNames <- nativeRoutines$symbolNames
-  if(length(symNames) == 0L)
-    return(NULL)
-
-
-  symbols <- tryCatch(
-    getNativeSymbolInfo(symNames, dll, unlist = FALSE, withRegistrationInfo = TRUE),
-    error = function(.) {
-      warning("Failed to load native symbol info", call. = FALSE)
-      list()
-    }
-  )
-  lapply(seq_along(symNames),
-    function(i) {
-      ## could vectorize this outside of the loop
-      ## and assign to different variable to
-      ## maintain the original names.
-      varName <- names(symNames)[i]
-      origVarName <- symNames[i]
-      # DEVTOOLS: Following block commented out because it raises unneeded
-      #           warnings with load_all(reset=FALSE).
-      # if(exists(varName, envir = env))
-      #    warning("failed to assign NativeSymbolInfo for ",
-      #            origVarName,
-      #            ifelse(origVarName != varName,
-      #                       paste(" to", varName), ""),
-      #            " since ", varName,
-      #            " is already defined in the ", package,
-      #            " namespace")
-      # else
-        assign(varName, symbols[[origVarName]],
-               envir = env)
-
-    })
-
-
-
-  symbols
-}
+onload_assign("assignNativeRoutines", {
+  f <- eval(
+    extract_lang(body(loadNamespace),
+      comp_lang, y = quote(assignNativeRoutines <- NULL), idx = 1:2)[[3]])
+  body(f) <- as.call(append(after = 1,
+      as.list(body(f)),
+      quote(package <- methods::getPackageName(env))))
+  f
+})

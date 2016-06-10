@@ -21,29 +21,34 @@ check_man <- function(pkg = ".") {
   old <- options(warn = -1)
   on.exit(options(old))
 
-  message("Checking documentation")
-  print_if_not_null(("tools" %:::% ".check_package_parseRd")(dir = pkg$path))
-  print_if_not_null(("tools" %:::% ".check_Rd_metadata")(dir = pkg$path))
-  print_if_not_null(("tools" %:::% ".check_Rd_xrefs")(dir = pkg$path))
-  print_if_not_null(("tools" %:::% ".check_Rd_contents")(dir = pkg$path))
-
-  print_if_not_null(tools::checkDocFiles(dir = pkg$path))
+  message("Checking documentation...")
+  ok <-
+    man_message(("tools" %:::% ".check_package_parseRd")(dir = pkg$path)) &&
+    man_message(("tools" %:::% ".check_Rd_metadata")(dir = pkg$path)) &&
+    man_message(("tools" %:::% ".check_Rd_xrefs")(dir = pkg$path)) &&
+    man_message(("tools" %:::% ".check_Rd_contents")(dir = pkg$path)) &&
+    man_message(tools::checkDocFiles(dir = pkg$path))
   # Can't run because conflicts with how devtools loads code
   # print_if_not_null(checkDocStyle(dir = pkg$path))
   # print_if_not_null(checkReplaceFuns(dir = pkg$path))
   # print_if_not_null(checkS3methods(dir = pkg$path))
   # print(undoc(dir = pkg$path))
 
+  if (ok) {
+    message("No issues detected")
+  }
+
   invisible()
 }
 
-#' @rdname check_man
-#' @usage NULL
-check_doc <- function(...) {
-  check_man(...)
-}
-
-print_if_not_null <- function(x) {
-  if (is.null(x)) return(invisible())
-  print(x)
+man_message <- function(x) {
+  if ("bad" %in% names(x) && length(x$bad) == 0) {
+    # Returned by check_Rd_xrefs()
+    TRUE
+  } else if (length(x) == 0) {
+    TRUE
+  } else {
+    print(x)
+    FALSE
+  }
 }
