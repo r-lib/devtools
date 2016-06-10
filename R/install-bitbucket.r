@@ -58,21 +58,10 @@ remote_download.bitbucket_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
     message("Downloading bitbucket repo ", x$username, "/", x$repo, "@", x$ref)
   }
-
   dest <- tempfile(fileext = paste0(".zip"))
   src <- paste("https://bitbucket.org/", x$username, "/", tolower(x$repo), "/get/",
     x$ref, ".zip", sep = "")
-
-  if (!is.null(x$password)) {
-    auth <- httr::authenticate(
-      user = x$auth_user %||% x$username,
-      password = x$password,
-      type = "basic")
-  } else {
-    auth <- NULL
-  }
-
-  download(dest, src, auth)
+  download(dest, src, x$auth_token)
 }
 
 #' @export
