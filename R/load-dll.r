@@ -3,6 +3,8 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @keywords programming
+#' @name load_dll
+#' @usage load_dll(pkg = ".")
 #' @export
 onload_assign("load_dll",
   make_function(alist(pkg = "."),

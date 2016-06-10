@@ -122,11 +122,11 @@ setup_ns_exports <- function(pkg = ".", export_all = FALSE) {
   invisible()
 }
 
-#' Lookup S4 classes for export
-#'
-#' This function uses code from base::loadNamespace. Previously this code was
-#' copied directly, now it is dynamically looked up instead, to prevent drift as
-#' base::loadNamespace changes.
+# Lookup S4 classes for export
+#
+# This function uses code from base::loadNamespace. Previously this code was
+# copied directly, now it is dynamically looked up instead, to prevent drift as
+# base::loadNamespace changes.
 onload_assign("add_classes_to_exports",
   make_function(alist(ns =, package =, exports =, nsInfo =),
     call("{",
