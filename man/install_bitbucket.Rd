@@ -4,8 +4,9 @@
 \alias{install_bitbucket}
 \title{Install a package directly from bitbucket}
 \usage{
-install_bitbucket(repo, username, ref = "master", subdir = NULL,
-  auth_user = NULL, password = NULL, ...)
+install_bitbucket(repo, username = NULL, ref = "master", subdir = NULL,
+  auth_token = bitbucket_pat(), host = "https://api.bitbucket.org",
+  quiet = FALSE, ...)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -17,16 +18,18 @@ precedence.}
 \item{username}{User name. Deprecated: please include username in the
 \code{repo}}
 
-\item{ref}{Desired git reference; could be a commit, tag, or branch name.
-Defaults to master.}
+\item{ref}{Desired git reference. Could be a commit, tag, or branch
+name, or a call to \code{\link{bitbucket_pull}}. Defaults to \code{"master"}.}
 
 \item{subdir}{subdirectory within repo that contains the R package.}
 
-\item{auth_user}{your account username if you're attempting to install
-a package hosted in a private repository (and your username is different
-to \code{username})}
+\item{auth_token}{see \code{Details} section. PATs can be created at
+\url{https://bitbucket.org/account/admin/app-passwords}}
 
-\item{password}{your password}
+\item{host}{GitHub API host to use. Override with your GitHub enterprise
+hostname, for example, \code{"github.hostname.com/api/v3"}.}
+
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 }
@@ -34,16 +37,19 @@ to \code{username})}
 This function is vectorised so you can install multiple packages in
 a single command.
 }
+\details{
+To install from a private repo, or more generally, access the Bitbucket API
+with your own credentials, you will need to get an access token. You can
+create an access token following the instructions found in the
+\href{https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html}{Bitbucket App Passwords documentation}.
+This PAT requires read-only access to your repositories and pull requests.
+}
 \examples{
 \dontrun{
-install_bitbucket("sulab/mygene.r@default")
 install_bitbucket("dannavarro/lsr-package")
 }
 }
 \seealso{
-Bitbucket API docs:
-  \url{https://confluence.atlassian.com/bitbucket/use-the-bitbucket-cloud-rest-apis-222724129.html}
-
 Other package installation: \code{\link{install_bioc}},
   \code{\link{install_cran}}, \code{\link{install_github}},
   \code{\link{install_git}}, \code{\link{install_svn}},
