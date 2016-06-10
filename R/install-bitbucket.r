@@ -3,20 +3,21 @@
 #' This function is vectorised so you can install multiple packages in
 #' a single command.
 #'
+#' To install from a private repo, or more generally, access the Bitbucket API
+#' with your own credentials, you will need to get an access token. You can
+#' create an access token following the instructions found in the
+#' \href{https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html}{Bitbucket App Passwords documentation}.
+#' This PAT requires read-only access to your repositories and pull requests.
+#'
 #' @inheritParams install_github
-#' @param auth_user your account username if you're attempting to install
-#'   a package hosted in a private repository (and your username is different
-#'   to \code{username})
-#' @param password your password
-#' @param ref Desired git reference; could be a commit, tag, or branch name.
-#'   Defaults to master.
-#' @seealso Bitbucket API docs:
-#'   \url{https://confluence.atlassian.com/bitbucket/use-the-bitbucket-cloud-rest-apis-222724129.html}
+#' @param auth_token see \code{Details} section. PATs can be created at
+#'   \url{https://bitbucket.org/account/admin/app-passwords}
+#' @param ref Desired git reference. Could be a commit, tag, or branch
+#'   name, or a call to \code{\link{bitbucket_pull}}. Defaults to \code{"master"}.
 #' @family package installation
 #' @export
 #' @examples
 #' \dontrun{
-#' install_bitbucket("sulab/mygene.r@@default")
 #' install_bitbucket("dannavarro/lsr-package")
 #' }
 install_bitbucket <- function(repo, username = NULL, ref = "master",
