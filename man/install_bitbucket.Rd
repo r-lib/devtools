@@ -5,7 +5,7 @@
 \title{Install a package directly from bitbucket}
 \usage{
 install_bitbucket(repo, username = NULL, ref = "master", subdir = NULL,
-  auth_token = bitbucket_pat(quiet), host = "https://api.bitbucket.org",
+  auth_token = bitbucket_auth(quiet), host = "https://api.bitbucket.org",
   quiet = FALSE, ...)
 }
 \arguments{
@@ -23,8 +23,9 @@ name, or a call to \code{\link{bitbucket_pull}}. Defaults to \code{"master"}.}
 
 \item{subdir}{subdirectory within repo that contains the R package.}
 
-\item{auth_token}{see \code{Details} section. PATs can be created at
-\url{https://bitbucket.org/account/admin/app-passwords}}
+\item{auth_token}{see \code{Details} section for more information. PATs can
+be created at \url{https://bitbucket.org/account/admin/app-passwords} and
+\code{auth_token} should be a string of the form \code{username:pat}.}
 
 \item{host}{GitHub API host to use. Override with your GitHub enterprise
 hostname, for example, \code{"github.hostname.com/api/v3"}.}
@@ -41,8 +42,11 @@ a single command.
 To install from a private repo, or more generally, access the Bitbucket API
 with your own credentials, you will need to get an access token. You can
 create an access token following the instructions found in the
-\href{https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html}{Bitbucket App Passwords documentation}.
-This PAT requires read-only access to your repositories and pull requests.
+\href{https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html}{Bitbucket
+App Passwords documentation}. This PAT requires read-only access to your
+repositories and pull requests. Then store your Bitbucket user name and PAT
+separated by a colon in the environment variable \code{BITBUCKET_AUTH} (e.g.
+\code{evelynwaugh:swordofhonour})
 }
 \examples{
 \dontrun{

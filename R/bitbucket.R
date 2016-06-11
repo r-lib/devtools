@@ -29,13 +29,13 @@ bitbucket_error <- function(req) {
     ), class = c("condition", "error", "bitbucket_error"))
 }
 
-bitbucket_pat <- function (quiet = FALSE) {
-  pat <- Sys.getenv("BITBUCKET_PAT")
-  if (nzchar(pat)) {
+bitbucket_auth <- function (quiet = FALSE) {
+  userpwd <- Sys.getenv("BITBUCKET_AUTH")
+  if (nzchar(userpwd)) {
     if (!quiet) {
-      message("Using Bitbucket PAT from envvar BITBUCKET_PAT")
+      message("Using user:password from envvar BITBUCKET_AUTH")
     }
-    return(pat)
+    return(userpwd)
   } else {
     return(NULL)
   }

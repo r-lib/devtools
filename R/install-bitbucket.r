@@ -6,12 +6,16 @@
 #' To install from a private repo, or more generally, access the Bitbucket API
 #' with your own credentials, you will need to get an access token. You can
 #' create an access token following the instructions found in the
-#' \href{https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html}{Bitbucket App Passwords documentation}.
-#' This PAT requires read-only access to your repositories and pull requests.
+#' \href{https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html}{Bitbucket
+#' App Passwords documentation}. This PAT requires read-only access to your
+#' repositories and pull requests. Then store your Bitbucket user name and PAT
+#' separated by a colon in the environment variable \code{BITBUCKET_AUTH} (e.g.
+#' \code{evelynwaugh:swordofhonour})
 #'
 #' @inheritParams install_github
-#' @param auth_token see \code{Details} section. PATs can be created at
-#'   \url{https://bitbucket.org/account/admin/app-passwords}
+#' @param auth_token see \code{Details} section for more information. PATs can
+#'   be created at \url{https://bitbucket.org/account/admin/app-passwords} and
+#'   \code{auth_token} should be a string of the form \code{username:pat}.
 #' @param ref Desired git reference. Could be a commit, tag, or branch
 #'   name, or a call to \code{\link{bitbucket_pull}}. Defaults to \code{"master"}.
 #' @family package installation
@@ -21,8 +25,8 @@
 #' install_bitbucket("dannavarro/lsr-package")
 #' }
 install_bitbucket <- function(repo, username = NULL, ref = "master",
-  subdir = NULL, auth_token = bitbucket_pat(quiet),
-  host = "https://api.bitbucket.org", quiet = FALSE, ...) {
+  subdir = NULL, auth_token = bitbucket_auth(quiet), host = "https://api.bitbucket.org",
+  quiet = FALSE, ...) {
 
   remotes <- lapply(repo, bitbucket_remote, username = username, ref = ref,
     subdir = subdir, auth_token = auth_token, host = host)
@@ -31,7 +35,7 @@ install_bitbucket <- function(repo, username = NULL, ref = "master",
 }
 
 bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
-  auth_token = bitbucket_pat(), sha = NULL, host = "https://api.bitbucket.org") {
+  auth_token = bitbucket_auth(), sha = NULL, host = "https://api.bitbucket.org") {
 
   meta <- parse_bitbucket_repo(repo)
   meta <- resolve_ref(meta$ref %||% ref, meta)
@@ -61,7 +65,18 @@ remote_download.bitbucket_remote <- function(x, quiet = FALSE) {
   dest <- tempfile(fileext = paste0(".zip"))
   src <- paste("https://bitbucket.org/", x$username, "/", tolower(x$repo), "/get/",
     x$ref, ".zip", sep = "")
-  download(dest, src, x$auth_token)
+  if (!is.null(x$auth_token)) {
+    userpwd <- strsplit(x$auth_token, ":")[[1]]
+    stopifnot(!is.na(userpwd[2])) # stop if no colon in auth_token
+    auth <- httr::authenticate(
+      user = userpwd[1],
+      password = userpwd[2],
+      type = "basic"
+    )
+  } else {
+    auth <- NULL
+  }
+  download(dest, src, auth)
 }
 
 #' @export
