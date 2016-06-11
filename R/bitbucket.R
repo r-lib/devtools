@@ -52,7 +52,7 @@ bitbucket_pat <- function (quiet = FALSE) {
 bitbucket_pull <- function(pull) structure(pull, class = "bitbucket_pull")
 
 #' @export
-bitbucket_resolve_ref.bitbucket_pull <- function(x, params, ..., api_version) {
+resolve_ref.bitbucket_pull <- function(x, params, ..., api_version) {
   # GET /repositories/{owner}/{repo_slug}/pullrequests/{id}
   # https://confluence.atlassian.com/bitbucket/pullrequests-resource-423626332.html#pullrequestsResource-GETaspecificpullrequest
   path <- file.path("repositories", params$username, params$repo,
