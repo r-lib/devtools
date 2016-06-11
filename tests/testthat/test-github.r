@@ -11,16 +11,16 @@ with_mock <- function(name, value, code) {
 }
 
 test_that("GitHub repo paths are parsed correctly", {
-  expect_equal(parse_git_repo("devtools"), list(repo="devtools"))
-  expect_equal(parse_git_repo("krlmlr/kimisc"), list(username="krlmlr", repo="kimisc"))
-  expect_equal(parse_git_repo("my/test/pkg"), list(username="my", repo="test", subdir="pkg"))
-  expect_equal(parse_git_repo("devtools@devtools-1.4"), list(repo="devtools", ref="devtools-1.4"))
-  expect_equal(parse_git_repo("yihui/tikzDevice#23"), list(username="yihui", repo="tikzDevice", ref=github_pull("23")))
-  expect_equal(parse_git_repo("my/test/pkg@ref"), list(username="my", repo="test", subdir="pkg", ref="ref"))
-  expect_equal(parse_git_repo("my/test/pkg#1"), list(username="my", repo="test", subdir="pkg", ref=github_pull("1")))
-  expect_error(parse_git_repo("test#6@123"), "Invalid git repo")
-  expect_error(parse_git_repo("Teradata/teradataR/"), "Invalid git repo")
-  expect_error(parse_git_repo("test@*unsupported-release"), "Invalid git repo")
+  expect_equal(parse_github_repo("devtools"), list(repo="devtools"))
+  expect_equal(parse_github_repo("krlmlr/kimisc"), list(username="krlmlr", repo="kimisc"))
+  expect_equal(parse_github_repo("my/test/pkg"), list(username="my", repo="test", subdir="pkg"))
+  expect_equal(parse_github_repo("devtools@devtools-1.4"), list(repo="devtools", ref="devtools-1.4"))
+  expect_equal(parse_github_repo("yihui/tikzDevice#23"), list(username="yihui", repo="tikzDevice", ref=github_pull("23")))
+  expect_equal(parse_github_repo("my/test/pkg@ref"), list(username="my", repo="test", subdir="pkg", ref="ref"))
+  expect_equal(parse_github_repo("my/test/pkg#1"), list(username="my", repo="test", subdir="pkg", ref=github_pull("1")))
+  expect_error(parse_github_repo("test#6@123"), "Invalid repo")
+  expect_error(parse_github_repo("Teradata/teradataR/"), "Invalid repo")
+  expect_error(parse_github_repo("test@*unsupported-release"), "Invalid repo")
 })
 
 # Mock resolve_ref.github_pull so that GitHub API is not queried for this test

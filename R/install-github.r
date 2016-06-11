@@ -67,7 +67,7 @@ github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
                        auth_token = github_pat(), sha = NULL,
                        host = "https://api.github.com") {
 
-  meta <- parse_git_repo(repo)
+  meta <- parse_github_repo(repo)
   meta <- resolve_ref(meta$ref %||% ref, meta)
 
   if (is.null(meta$username)) {
@@ -211,7 +211,7 @@ resolve_ref.github_release <- function(x, params) {
 
 # Parse concise git repo specification: [username/]repo[/subdir][#pull|@ref|@*release]
 # (the *release suffix represents the latest release)
-parse_git_repo <- function(path) {
+parse_github_repo <- function(path) {
   username_rx <- "(?:([^/]+)/)?"
   repo_rx <- "([^/@#]+)"
   subdir_rx <- "(?:/([^@#]*[^@#/]))?"
@@ -223,11 +223,8 @@ parse_git_repo <- function(path) {
     username_rx, repo_rx, subdir_rx, ref_or_pull_or_release_rx)
 
   param_names <- c("username", "repo", "subdir", "ref", "pull", "release", "invalid")
-  replace <- stats::setNames(sprintf("\\%d", seq_along(param_names)), param_names)
-  params <- lapply(replace, function(r) gsub(github_rx, r, path, perl = TRUE))
-  if (params$invalid != "")
-    stop(sprintf("Invalid git repo: %s", path))
-  params <- params[sapply(params, nchar) > 0]
+
+  params <- parse_repo(path, github_rx, param_names)
 
   if (!is.null(params$pull)) {
     params$ref <- github_pull(params$pull)

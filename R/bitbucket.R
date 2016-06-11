@@ -41,6 +41,33 @@ bitbucket_pat <- function (quiet = FALSE) {
   }
 }
 
+parse_repo <- function(path, rx, nms) {
+  replace <- stats::setNames(sprintf("\\%d", seq_along(nms)), nms)
+  params <- lapply(replace, function(r) gsub(rx, r, path, perl = TRUE))
+  if (params$invalid != "")
+    stop(sprintf("Invalid repo: %s", path))
+  params <- params[sapply(params, nchar) > 0]
+  params
+}
+
+parse_bitbucket_repo <- function(path) {
+  username_rx <- "(?:([^/]+)/)?"
+  repo_rx <- "([^/@#]+)"
+  subdir_rx <- "(?:/([^@#]*[^@#/]))?"
+  ref_rx <- "(?:@([^*].*))"
+  pull_rx <- "(?:#([0-9]+))"
+  ref_or_pull_rx <- sprintf("(?:%s|%s)?", ref_rx, pull_rx)
+  bitbucket_rx <- sprintf("^(?:%s%s%s%s|(.*))$",
+    username_rx, repo_rx, subdir_rx, ref_or_pull_rx)
+  param_names <- c("username", "repo", "subdir", "ref", "pull", "invalid")
+  params <- parse_repo(path, bitbucket_rx, param_names)
+  if (!is.null(params$pull)) {
+    params$ref <- bitbucket_pull(params$pull)
+    params$pull <- NULL
+  }
+  params
+}
+
 #' Bitbucket references
 #'
 #' Use as \code{ref} parameter to \code{\link{install_bitbucket}}.
