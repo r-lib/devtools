@@ -5,7 +5,7 @@
 \title{Install a package from a git repository}
 \usage{
 install_git(url, subdir = NULL, branch = NULL, credentials = NULL,
-  args = character(0), ...)
+  submodules = FALSE, args = character(0), ...)
 }
 \arguments{
 \item{url}{Location of package. The url should point to a public or
@@ -18,6 +18,8 @@ contain the package we are interested in installing.}
 
 \item{credentials}{A git2r credentials object passed through
 to \code{\link[git2r]{clone}}.}
+
+\item{submodules}{if \code{TRUE} download submodules before installing.}
 
 \item{args}{DEPRECATED. A character vector providing extra arguments to
 pass on to git.}

@@ -38,6 +38,13 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE) {
   source <- source_pkg(bundle, subdir = remote$subdir)
   on.exit(unlink(source, recursive = TRUE), add = TRUE)
 
+  # check if there are submodules, download them if there are.
+  if (file.exists(file.path(source, ".gitmodules")) &&
+      inherits(remote, "git_remote") && remote$submodules) {
+    submodules <- read_gitmodules(file.path(source, ".gitmodules"))
+    download_modules(submodules, source=source)
+  }
+
   metadata <- remote_metadata(remote, bundle, source)
 
   install(source, ..., quiet = quiet, metadata = metadata)
