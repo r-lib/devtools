@@ -1,5 +1,9 @@
 # devtools 1.11.1.9000
 
+* Added a `submodules` option to `install_git` to download the submodules if there
+  is a `.gitmodules` in the repository. Updated the documentation for `install_github()`
+  to reflect this option. (@jonkeane, #1163, #751)
+
 * Handle case when a GitHub request returns a non-JSON error response.
   (@jimhester, #1204, #1211)
 
