@@ -5,7 +5,7 @@
 \title{Install a package directly from bitbucket}
 \usage{
 install_bitbucket(repo, username = NULL, ref = "master", subdir = NULL,
-  auth_token = bitbucket_auth(quiet), host = "https://api.bitbucket.org",
+  auth_token = bitbucket_pat(quiet), host = "https://api.bitbucket.org",
   quiet = FALSE, ...)
 }
 \arguments{
@@ -45,7 +45,7 @@ create an access token following the instructions found in the
 \href{https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html}{Bitbucket
 App Passwords documentation}. This PAT requires read-only access to your
 repositories and pull requests. Then store your Bitbucket user name and PAT
-separated by a colon in the environment variable \code{BITBUCKET_AUTH} (e.g.
+separated by a colon in the environment variable \code{BITBUCKET_PAT} (e.g.
 \code{evelynwaugh:swordofhonour})
 }
 \examples{

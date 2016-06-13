@@ -9,7 +9,7 @@
 #' \href{https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html}{Bitbucket
 #' App Passwords documentation}. This PAT requires read-only access to your
 #' repositories and pull requests. Then store your Bitbucket user name and PAT
-#' separated by a colon in the environment variable \code{BITBUCKET_AUTH} (e.g.
+#' separated by a colon in the environment variable \code{BITBUCKET_PAT} (e.g.
 #' \code{evelynwaugh:swordofhonour})
 #'
 #' @inheritParams install_github
@@ -25,8 +25,8 @@
 #' install_bitbucket("dannavarro/lsr-package")
 #' }
 install_bitbucket <- function(repo, username = NULL, ref = "master",
-  subdir = NULL, auth_token = bitbucket_auth(quiet), host = "https://api.bitbucket.org",
-  quiet = FALSE, ...) {
+  subdir = NULL, auth_token = bitbucket_pat(quiet),
+  host = "https://api.bitbucket.org", quiet = FALSE, ...) {
 
   remotes <- lapply(repo, bitbucket_remote, username = username, ref = ref,
     subdir = subdir, auth_token = auth_token, host = host)
@@ -35,7 +35,7 @@ install_bitbucket <- function(repo, username = NULL, ref = "master",
 }
 
 bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
-  auth_token = bitbucket_auth(), sha = NULL, host = "https://api.bitbucket.org") {
+  auth_token = bitbucket_pat(), sha = NULL, host = "https://api.bitbucket.org") {
 
   meta <- parse_bitbucket_repo(repo)
   meta <- resolve_ref(meta$ref %||% ref, meta)
