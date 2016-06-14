@@ -75,7 +75,7 @@ test_that("remote_sha.github_remote returns expected value if remote does exist"
   expect_equal(remote_sha(github_remote("hadley/devtools@v1.8.0")), "ad9aac7b9a522354e1ff363a86f389e32cec181b")
 })
 
-test_that("packade2remotes looks for the DESCRIPTION in .libPaths", {
+test_that("package2remotes looks for the DESCRIPTION in .libPaths", {
    expect_equal(package2remote("testTest")$sha, NA_character_)
    withr::with_temp_libpaths({
      expect_equal(package2remote("testTest")$sha, NA_character_)
