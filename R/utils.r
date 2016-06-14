@@ -106,6 +106,12 @@ write_dcf <- function(path, desc) {
   delimiters <- ifelse(starts_with_whitespace, ":", ": ")
   text <- paste0(names(desc), delimiters, desc, collapse = "\n")
 
+  # If the description file has a declared encoding, set it so nchar() works
+  # properly.
+  if ("Encoding" %in% names(desc)) {
+    Encoding(text) <- desc[["Encoding"]]
+  }
+
   if (substr(text, nchar(text), 1) != "\n") {
     text <- paste0(text, "\n")
   }
