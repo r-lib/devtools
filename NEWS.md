@@ -2,6 +2,7 @@
 
 * Bug fix for 'nchar(text) : invalid multibyte string' errors when running
   `write_dcf()` on DESCRIPTION files with non-ASCII encodings (#1224, @jimhester).
+* Update with Rtools-3.4 information, (@jimhester)
 
 * Handle case when a GitHub request returns a non-JSON error response.
   (@jimhester, #1204, #1211)
