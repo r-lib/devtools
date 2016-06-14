@@ -124,7 +124,7 @@ remote_sha <- function(remote, ...) UseMethod("remote_sha")
 
 package2remote <- function(name, repos = getOption("repos"), type = getOption("pkgType")) {
 
-  x <- tryCatch(packageDescription(name), error = function(e) NA, warning = function(e) NA)
+  x <- tryCatch(packageDescription(name, lib.loc = .libPaths()), error = function(e) NA, warning = function(e) NA)
 
   # will be NA if not installed
   if (identical(x, NA)) {
@@ -132,7 +132,7 @@ package2remote <- function(name, repos = getOption("repos"), type = getOption("p
         name = name,
         repos = repos,
         pkg_type = type,
-        sha = NA))
+        sha = NA_character_))
   }
 
   if (is.null(x$RemoteType)) {
