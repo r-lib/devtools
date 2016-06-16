@@ -80,9 +80,9 @@ onload_assign("process_imports", {
   make_function(alist(pkg = "."),
     bquote({
       package <- pkg$name
-      vI <- .split_description(.read_description(file.path(pkg$path, "DESCRIPTION")))$Imports
-      nsInfo <- devtools::parse_ns_file(pkg)
-      ns <- devtools::ns_env(pkg)
+      vI <- ("tools" %:::% ".split_description")(("tools" %:::% ".read_description")(file.path(pkg$path, "DESCRIPTION")))$Imports
+      nsInfo <- parse_ns_file(pkg)
+      ns <- ns_env(pkg)
       lib.loc <- NULL
       .(for1)
       .(for2)
@@ -96,5 +96,5 @@ onload_assign("process_imports", {
 
         for3 = wrap_inner_loop(extract_lang(body(loadNamespace),
           comp_lang, y = quote(for(imp in nsInfo$importMethods) NULL), idx = 1:3))
-        )), asNamespace("tools"))
+        )), asNamespace("devtools"))
 })
