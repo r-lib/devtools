@@ -20,7 +20,7 @@
 \alias{use_vignette}
 \title{Add useful infrastructure to a package.}
 \usage{
-use_testthat(pkg = ".")
+use_testthat(pkg = ".", use_catch = FALSE)
 
 use_test(name, pkg = ".")
 
@@ -28,7 +28,7 @@ use_rstudio(pkg = ".")
 
 use_vignette(name, pkg = ".")
 
-use_rcpp(pkg = ".")
+use_rcpp(pkg = ".", use_inst = FALSE)
 
 use_travis(pkg = ".")
 
@@ -55,6 +55,9 @@ use_dev_version(pkg = ".")
 \item{pkg}{package description, can be path or package name. See
 \code{\link{as.package}} for more information.}
 
+\item{use_catch}{Whether to also integrate the 'Catch' unit testing library
+for testing C++. FALSE by default.}
+
 \item{name}{File name to use for new vignette. Should consist only of
 numbers, letters, _ and -. I recommend using lower case.}
 
@@ -62,6 +65,10 @@ numbers, letters, _ and -. I recommend using lower case.}
 
 \item{copyright_holder}{The copyright holder for this package. Defaults to
 \code{getOption("devtools.name")}.}
+
+\item{whether}{to also initialise \code{/inst/include} (a common directory for
+hosting C++ code you expect to be directly-depended on by other R packages)
+and associated flags.}
 }
 \description{
 Add useful infrastructure to a package.
@@ -71,7 +78,9 @@ Add useful infrastructure to a package.
 Add testing infrastructure to a package that does not already have it.
 This will create \file{tests/testthat.R}, \file{tests/testthat/} and
 add \pkg{testthat} to the suggested packages. This is called
-automatically from \code{\link{test}} if needed.
+automatically from \code{\link{test}} if needed. Optionally
+(if \code{use_catch} is TRUE) it will also integrate the "catch"
+C++ testing library, included in newer versions of testthat.
 }
 
 \section{\code{use_test}}{
@@ -90,7 +99,11 @@ so you don't accidentally check in the built vignettes.
 
 \section{\code{use_rcpp}}{
 
-Creates \code{src/} and adds needed packages to \code{DESCRIPTION}.
+Creates \code{src/} and adds needed packages to \code{DESCRIPTION}. Optionally,
+if \code{use_inst} is TRUE, creates an \code{/inst/include} directory (and
+links to it in the \code{Makevars} file, so you can access the code stored there
+from within your package) for Rcpp code you expect to be directly depended-on by
+other R packages.
 }
 
 \section{\code{use_travis}}{

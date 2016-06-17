@@ -56,6 +56,12 @@
 * `source_gist()` gains a `filename` argument to specify a particular file to
   source from a GitHub gist. (@ateucher, #1172)
 
+* `use_testthat()` now (optionally) initialises the "catch" framework for
+  unit-testing package C++ code.
+
+* `use_rcpp()` optionally adds an `/inst/include` directory for users writing
+  Rcpp code they expect other packages to directly depend on.
+  
 # devtools 1.11.1
 
 * Bug fix in `search_path_for_rtools()` using the gcc-4.9.3 toolchain when

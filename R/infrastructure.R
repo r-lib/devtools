@@ -10,10 +10,16 @@ NULL
 #' Add testing infrastructure to a package that does not already have it.
 #' This will create \file{tests/testthat.R}, \file{tests/testthat/} and
 #' add \pkg{testthat} to the suggested packages. This is called
-#' automatically from \code{\link{test}} if needed.
+#' automatically from \code{\link{test}} if needed. Optionally
+#' (if \code{use_catch} is TRUE) it will also integrate the "catch"
+#' C++ testing library, included in newer versions of testthat.
+#'
+#' @param use_catch Whether to also integrate the 'Catch' unit testing library
+#' for testing C++. FALSE by default.
+#'
 #' @rdname infrastructure
 #' @export
-use_testthat <- function(pkg = ".") {
+use_testthat <- function(pkg = ".", use_catch = FALSE) {
   pkg <- as.package(pkg)
 
   check_suggested("testthat")
@@ -33,6 +39,12 @@ use_testthat <- function(pkg = ".") {
     pkg = pkg
   )
 
+  if (use_catch) {
+    message("Adding framework for Catch unit tests")
+    add_desc_package(pkg, "LinkingTo", "testthat")
+    use_template("test-example.cpp", "src/test-example.cpp")
+    use_template("test-runner", "src/test-runner.cpp")
+  }
   invisible(TRUE)
 }
 
@@ -104,10 +116,19 @@ use_vignette <- function(name, pkg = ".") {
 }
 
 #' @section \code{use_rcpp}:
-#' Creates \code{src/} and adds needed packages to \code{DESCRIPTION}.
+#' Creates \code{src/} and adds needed packages to \code{DESCRIPTION}. Optionally,
+#' if \code{use_inst} is TRUE, creates an \code{/inst/include} directory (and
+#' links to it in the \code{Makevars} file, so you can access the code stored there
+#' from within your package) for Rcpp code you expect to be directly depended-on by
+#' other R packages.
+#'
+#' @param whether to also initialise \code{/inst/include} (a common directory for
+#' hosting C++ code you expect to be directly-depended on by other R packages)
+#' and associated flags.
+#'
 #' @export
 #' @rdname infrastructure
-use_rcpp <- function(pkg = ".") {
+use_rcpp <- function(pkg = ".", use_inst = FALSE) {
   pkg <- as.package(pkg)
   check_suggested("Rcpp")
 
@@ -120,6 +141,11 @@ use_rcpp <- function(pkg = ".") {
   message("* Ignoring generated binary files.")
   ignore_path <- file.path(pkg$path, "src", ".gitignore")
   union_write(ignore_path, c("*.o", "*.so", "*.dll"))
+
+  if (use_inst) {
+    use_directory("inst/include/", pkg = pkg)
+    use_template("inst_include_template", "/src/Makevars")
+  }
 
   message(
     "Next, include the following roxygen tags somewhere in your package:\n\n",

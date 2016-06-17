@@ -38,7 +38,7 @@ test_that("loading and reloading s4 classes", {
 
   # Unloading shouldn't result in any errors or warnings
   if (packageVersion("testthat") >= "0.7.1.99") {
-    expect_that(unload("testS4union"), not(gives_warning()))
+    expect_silent(unload("testS4union"))
   } else {
     unload("testS4union")
   }
@@ -53,7 +53,7 @@ test_that("loading and reloading s4 classes", {
 
   # Loading again shouldn't result in any errors or warnings
   if (packageVersion("testthat") >= "0.7.1.99") {
-    expect_that(load_all("testS4union", reset = FALSE), not(gives_warning()))
+    expect_message(load_all("testS4union", reset = FALSE))
   } else {
     load_all("testS4union", reset = FALSE)
   }
