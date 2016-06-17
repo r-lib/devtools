@@ -60,9 +60,9 @@ check_suggested <- function(pkg, version = NULL, compare = NA) {
     compare <- dep$compare
   }
 
-  if (!check_dep_version(pkg, version, compare)) {
+  if (!is_installed(pkg) || !check_dep_version(pkg, version, compare)) {
     msg <- paste0(sQuote(pkg),
-      if (version == 0) "" else paste0(" >= ", version),
+      if (is.na(version)) "" else paste0(" >= ", version),
       " must be installed for this functionality.")
 
     if (interactive()) {
