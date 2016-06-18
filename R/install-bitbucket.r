@@ -38,6 +38,7 @@ bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
   auth_token = bitbucket_pat(), sha = NULL, host = "https://api.bitbucket.org") {
 
   meta <- parse_bitbucket_repo(repo)
+  meta$host <- host
   meta <- resolve_ref(meta$ref %||% ref, meta)
 
   if (is.null(meta$username)) {
