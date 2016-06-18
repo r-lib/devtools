@@ -99,10 +99,10 @@ a directory for these packages and set \code{options(devtools.revdep.libpath)}.
 }
 \examples{
 \dontrun{
-# Run R CMD check on all downstream dependencies of ggplot2
-res <- revdep_check()
-revdep_check_summary()
-revdep_check_save_logs()
+# Run R CMD check on all downstream dependencies
+revdep_check()
+revdep_check_save_summary()
+revdep_check_print_problems()
 }
 }
 \seealso{

@@ -106,10 +106,10 @@ print.maintainers <- function(x, ...) {
 #'   \code{check_dir/00check-summary.txt}.
 #' @examples
 #' \dontrun{
-#' # Run R CMD check on all downstream dependencies of ggplot2
-#' res <- revdep_check()
-#' revdep_check_summary()
-#' revdep_check_save_logs()
+#' # Run R CMD check on all downstream dependencies
+#' revdep_check()
+#' revdep_check_save_summary()
+#' revdep_check_print_problems()
 #' }
 revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),

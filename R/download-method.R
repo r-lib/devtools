@@ -33,7 +33,7 @@ download_method_secure <- function(method = getOption("download.file.method", "a
     TRUE
   } else if (identical(method, "internal")) {
     # if internal then see if were using windows internal with inet2
-    identical(Sys.info()[['sysname']], "Windows") && setInternet2(NA)
+    identical(Sys.info()[["sysname"]], "Windows") && utils::setInternet2(NA)
   } else {
     # method with unknown properties (e.g. "lynx") or unresolved auto
     FALSE
