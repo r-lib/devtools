@@ -29,5 +29,3 @@ check_max_r_version <- function(pkg){
     write_dcf(desc_path, desc)
   }
 }
-
-
