@@ -1,0 +1,15 @@
+Package: testMaxR
+Title: Tools to make developing R code easier
+License: GPL-2
+Description:
+Author: Hadley <h.wickham@gmail.com>
+Maintainer: Hadley <h.wickham@gmail.com>
+Version: 0.1
+Depends:
+    R (>= 2.0.0),
+    graphics,
+    stats,
+    utils
+Imports:
+    devtools (>= 1.11.1),
+    survival

@@ -1,6 +1,8 @@
 #' Parse package dependency strings.
 #'
 #' @param string to parse. Should look like \code{"R (>= 3.0), ggplot2"} etc.
+#' @param remove_r If \code{TRUE} R itself will be removed from the parsed
+#'   dependency string.
 #' @return list of two character vectors: \code{name} package names,
 #'   and \code{version} package versions. If version is not specified,
 #'   it will be stored as NA.
@@ -10,7 +12,9 @@
 #' parse_deps("httr (< 2.1),\nRCurl (>= 3)")
 #' # only package dependencies are returned
 #' parse_deps("utils (== 2.12.1),\ntools,\nR (>= 2.10),\nmemoise")
-parse_deps <- function(string) {
+#' # package dependencies and R version is returned
+#' parse_deps("utils (== 2.12.1),\ntools,\nR (>= 2.10),\nmemoise", remove_r = FALSE)
+parse_deps <- function(string, remove_r = TRUE) {
   if (is.null(string)) return()
   stopifnot(is.character(string), length(string) == 1)
   if (grepl("^\\s*$", string)) return()
@@ -40,8 +44,12 @@ parse_deps <- function(string) {
   deps <- data.frame(name = names, compare = compare,
     version = versions, stringsAsFactors = FALSE)
 
-  # Remove R dependency
-  deps[names != "R", ]
+  if(remove_r) {
+    # Remove R dependency
+    return(deps[names != "R", ])
+  } else {
+    return(deps)
+  }
 }
 
 
@@ -72,4 +80,15 @@ check_dep_version <- function(dep_name, dep_ver = NA, dep_compare = NA) {
     }
   }
   return(TRUE)
+}
+
+# devtools:::unparse_deps(parse_deps("utils (== 2.12.1),\ntools,\nR (>= 2.10),\nmemoise"))
+unparse_deps <- function(deps) {
+  paste(apply(deps, 1, function(x){
+    if(!is.na(x["compare"]) && !is.na(x["version"])){
+      return(paste0("\n    ", x["name"], " (", x["compare"], " ", x["version"], ")"))
+    } else {
+      return(paste0("\n    ", x["name"]))
+    }
+  }), collapse = ",")
 }
