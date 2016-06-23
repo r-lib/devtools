@@ -1,4 +1,4 @@
-# devtools 1.11.1.9000
+# devtools 1.12.0
 
 ## New features
 
