@@ -12,7 +12,7 @@ the released version of RStudio (if you're using it as your gui),
 and the latest version of devtools and its dependencies.
 }
 \examples{
-\donttest{
+\dontrun{
 dr_devtools()
 }
 }

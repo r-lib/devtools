@@ -1,40 +1,31 @@
-# devtools 1.11.1.9000
+# devtools 1.12.0.9000
 
-* Bug fix for 'nchar(text) : invalid multibyte string' errors when running
-  `write_dcf()` on DESCRIPTION files with non-ASCII encodings (#1224, @jimhester).
-* Update with Rtools-3.4 information, (@jimhester)
+# devtools 1.12.0
 
-* Handle case when a GitHub request returns a non-JSON error response.
-  (@jimhester, #1204, #1211)
+## New features
+
+* New `install_bioc()` function and bioc remote to install Bioconductor
+  packages from their SVN repository.
+
+* `install_dev_deps()` gets everything you need to start development on source
+  package - it installs all dependencies, and roxygen2 (#1193).
 
 * `use_dev_version()` automates the process of switching from a release
   version number by tweaking the `DESCRIPTION`, adding a heading to
   `NEWS.md` (if present), and checking into git (if you use it) (#1076.)
 
-* `use_github()` accepts a host argument, similar to `install_github()` (@ijlyttle, #1101)
+* `use_github()` accepts a host argument, similar to `install_github()` 
+  (@ijlyttle, #1101)
+  
+## Bug fixes and minor improvements
+
+* Update with Rtools-3.4 information, (@jimhester)
 
 * devtools now uses https to access the RStudio CRAN mirror if it will work
   on your system (#1059)
 
-* `revdep_check()` will now create the `revdep/` directory if it does not
-  already exist (#1178).
-
-* `check_man()` now prints a message if no problems are found (#1187).
-
-* `install_dev_deps()` gets everything you need to start development on source
-  package - it installs all dependencies, and roxygen2 (#1193).
-  
-* `install_github()` now uses `https://api.github.com` as the host argument, so
-  users can specify 'http:' or other protocols if needed. (@jimhester, #1131, #1200)
-
-* `build_vignette()` will now only install the "VignetteBuilder" if it's 
-  not present, not try and upgrade it if it is (#1139).
-
-* Add a default codecov.yml file to turn off commenting with `use_coverage()`
-  (@jimhester, #1188)
-
-* New `install_bioc()` function and bioc remote to install Bioconductor
-  packages from their SVN repository.
+* Handle case when a GitHub request returns a non-JSON error response.
+  (@jimhester, #1204, #1211)
 
 * Suggested packages, including those specified as `Remotes:` are now installed
   after package installation. This allows you to use circular `Remotes:`
@@ -44,15 +35,27 @@
 * bug fix for installation of binary packages on windows, they must be
   installed directly from a zip file. (@jimhester, #1191, #1192)
 
-* `install_*` functions and `update_packages()` refactored to allow updating of
-  packages installed using any of the install methods. (@jimhester, #1067)
-* `load_all()` runs package hooks before sourcing test helper files 
-  allowing test helper to make use of objects created when a package is loaded 
-  or attached. (@imanuelcostigan, #1146) 
-  
+* `build_vignette()` will now only install the "VignetteBuilder" if it's 
+  not present, not try and upgrade it if it is (#1139).
+
 * `clean_dll()` Only removes package_name.def files and now operates
   recursively. (@jimhester, #1175, #1159, #1161)
   
+* `check_man()` now prints a message if no problems are found (#1187).
+
+* `install_*` functions and `update_packages()` refactored to allow updating of
+  packages installed using any of the install methods. (@jimhester, #1067)
+
+* `install_github()` now uses `https://api.github.com` as the host argument, so
+  users can specify 'http:' or other protocols if needed. (@jimhester, #1131, #1200)
+
+* `load_all()` runs package hooks before sourcing test helper files 
+  allowing test helper to make use of objects created when a package is loaded 
+  or attached. (@imanuelcostigan, #1146) 
+
+* `revdep_check()` will now create the `revdep/` directory if it does not
+  already exist (#1178).
+
 * `source_gist()` gains a `filename` argument to specify a particular file to
   source from a GitHub gist. (@ateucher, #1172)
   
@@ -70,6 +73,12 @@
 
 * `github_resolve_ref()` renamed to `resolve_ref()` to make method name more 
   generic for use with other remotes (e.g. Bitbucket) (@imanuelcostigan)
+
+* Add a default codecov.yml file to turn off commenting with `use_coverage()`
+  (@jimhester, #1188)
+  
+* Bug fix for 'nchar(text) : invalid multibyte string' errors when running
+  `write_dcf()` on DESCRIPTION files with non-ASCII encodings (#1224, @jimhester).
 
 # devtools 1.11.1
 

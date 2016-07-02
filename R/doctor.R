@@ -26,7 +26,7 @@ r_release <- memoise::memoise(.r_release)
 #' @family doctors
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' dr_devtools()
 #' }
 dr_devtools <- function() {

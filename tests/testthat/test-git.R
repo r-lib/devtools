@@ -1,6 +1,8 @@
-#context("git")
+context("git")
 
 git_test_repo <- function() {
+  skip_on_cran()
+
   d <- tempfile("")
   dir.create(d)
   r <- git2r::init(d)
@@ -18,6 +20,8 @@ test_that("SHA for regular repository", {
 })
 
 test_that("SHA for detached head", {
+  skip_on_cran()
+
   r <- git_test_repo()
   commit <- git2r::commits(r)[[1]]
   git2r::checkout(commit)
