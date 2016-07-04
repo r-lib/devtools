@@ -12,9 +12,9 @@ download_method <- function(x) {
 }
 
 auto_download_method <- function() {
-  if (length(capabilities("libcurl")) && capabilities("libcurl")) {
+  if (isTRUE(capabilities("libcurl"))) {
     "libcurl"
-  } else if (length(capabilities("http/ftp")) && capabilities("http/ftp")) {
+  } else if (isTRUE(capabilities("http/ftp"))) {
     "internal"
   } else if (nzchar(Sys.which("wget"))) {
     "wget"
