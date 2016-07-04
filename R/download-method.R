@@ -12,9 +12,16 @@ download_method <- function(x) {
 }
 
 auto_download_method <- function() {
-  if (capabilities("libcurl")) {
-    "libcurl"
-  } else if (capabilities("http/ftp")) {
+
+  # in R 3.2.0 libcurl capability was added
+  # prior versions of R capabilities does not know about libcurl
+  if (length(capabilities("libcurl")) > 0) {
+    if (capabilities("libcurl")) {
+      return("libcurl")
+    }
+  }
+  
+  if (capabilities("http/ftp")) {
     "internal"
   } else if (nzchar(Sys.which("wget"))) {
     "wget"
