@@ -1,5 +1,8 @@
 # devtools 1.12.0.9000
 
+* fix auto download method selection for `install_github()` on R 3.1 which
+  lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)
+
 # devtools 1.12.0
 
 ## New features
