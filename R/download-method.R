@@ -1,4 +1,4 @@
-# Adapated from:
+# Adapted from:
 # https://github.com/rstudio/rstudio/blob/master/src/cpp/session/modules/SessionPackages.R
 #
 # Copyright (C) 2009-12 by RStudio, Inc.
@@ -12,9 +12,9 @@ download_method <- function(x) {
 }
 
 auto_download_method <- function() {
-  if (capabilities("libcurl")) {
+  if (length(capabilities("libcurl")) && capabilities("libcurl")) {
     "libcurl"
-  } else if (capabilities("http/ftp")) {
+  } else if (length(capabilities("http/ftp")) && capabilities("http/ftp")) {
     "internal"
   } else if (nzchar(Sys.which("wget"))) {
     "wget"
