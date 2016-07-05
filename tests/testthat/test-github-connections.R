@@ -119,3 +119,10 @@ test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
 
 })
 
+test_that("username and repo are extracted from github remote URL", {
+  gh_info <- list(username = "hadley", repo = "devtools",
+                  fullname = "hadley/devtools")
+  expect_identical(github_remote_parse("https://github.com/hadley/devtools.git"), gh_info)
+  expect_identical(github_remote_parse("https://github.com/hadley/devtools"), gh_info)
+  expect_identical(github_remote_parse("git@github.com:hadley/devtools.git"), gh_info)
+})
