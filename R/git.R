@@ -138,8 +138,9 @@ github_remote_parse <- function(x) {
 
   if (grepl("^(https|git)", x)) {
     # https://github.com/hadley/devtools.git
+    # https://github.com/hadley/devtools
     # git@github.com:hadley/devtools.git
-    re <- "github[^/:]*[/:](.*?)/(.*)\\.git"
+    re <- "github[^/:]*[/:]([^/]+)/(.*?)(?:\\.git)?$"
   } else {
     stop("Unknown GitHub repo format", call. = FALSE)
   }
