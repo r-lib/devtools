@@ -145,9 +145,11 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
       call. = FALSE)
   }
 
-  message("Computing reverse dependencies")
+  message("Computing reverse dependencies... ", appendLF = FALSE)
   revdeps <- revdep(pkg$package, recursive = recursive, ignore = ignore,
     bioconductor = bioconductor, dependencies = dependencies)
+
+  message(paste(revdeps, collapse = ", "))
 
   # Save arguments and revdeps to a cache
   cache <- list(
