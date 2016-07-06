@@ -43,8 +43,15 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE) {
   install(source, ..., quiet = quiet, metadata = metadata)
 }
 
+try_install_remote <- function(...) {
+  tryCatch(
+    install_remote(...),
+    error = function(e) FALSE
+  )
+}
+
 install_remotes <- function(remotes, ...) {
-  invisible(vapply(remotes, install_remote, ..., FUN.VALUE = logical(1)))
+  invisible(vapply(remotes, try_install_remote, ..., FUN.VALUE = logical(1)))
 }
 
 # Add metadata
