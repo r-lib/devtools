@@ -140,7 +140,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
     check_dir <- file.path(pkg$path, "revdep", "checks")
     message("Saving check results in `revdep/checks/`")
   }
-  if (file.exists(check_dir)) {
+  if (dir.exists(check_dir) && length(dir(check_dir, all.files = TRUE, no.. = TRUE)) > 0) {
     stop("`check_dir()` must not already exist: it is deleted after a successful run",
       call. = FALSE)
   }
