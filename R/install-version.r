@@ -49,6 +49,12 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
     all(result)
   }
 
+  ## returns TRUE if 'pkg' is already installed and satisfies all version criteria 'criteria'
+  have <- function(pkg, criteria) {
+    v <- suppressWarnings(packageDescription(pkg, fields = "Version"))
+    !is.na(v) && satisfies(v, criteria)
+  }
+
   install_version_deps <- function(deps) {
     ## TODO How to exclude 'base', 'stats', etc.?
     for (dep in unique(deps$package)) {
@@ -56,12 +62,6 @@ install_version <- function(package, version = NULL, repos = getOption("repos"),
       if (!have(dep, lines))
         install_version(dep, paste(lines$compare, lines$version), repos, type, ...)
     }
-  }
-
-  have <- function(pkg, criteria) {
-    v <- suppressWarnings(packageDescription(pkg, fields = "Version"))
-    if (is.na(v)) return(FALSE)
-    satisfies(v, criteria)
   }
 
   numeric_ver <- .standard_regexps()$valid_numeric_version
