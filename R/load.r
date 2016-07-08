@@ -87,7 +87,7 @@
 #' }
 #' @export
 load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
-  export_all = TRUE, helpers=TRUE, quiet = FALSE, create = NA) {
+  export_all = TRUE, helpers = TRUE, quiet = FALSE, create = NA) {
   pkg <- as.package(pkg, create = create)
   check_suggested("roxygen2")
 
