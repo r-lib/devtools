@@ -1,5 +1,7 @@
 # devtools 1.12.0.9000
 
+* `test()` doesn't load helpers twice anymre (@krlmlr, #1256).
+
 * fix auto download method selection for `install_github()` on R 3.1 which
   lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)
 
