@@ -1,25 +1,45 @@
-#' Install specified version of a CRAN package.
+#' Install specific version of a package.
 #'
-#' If you are installing an package that contains compiled code, you will
-#' need to have an R development environment installed.  You can check
-#' if you do by running \code{\link[pkgbuild]{has_build_tools}}.
+#' This function knows how to look in multiple CRAN-like package repositories, and in their
+#' \code{archive} directories, in order to find specific versions of the requested package.
+#'
+#' The repositories are searched in the order specified by the \code{repos} argument.  This enables
+#' teams to maintain multiple in-house repositories with different policies - for instance, one repo
+#' for development snapshots and one for official releases.  A common setup would be to first search
+#' the official release repo, then the dev snapshot repo, then a public CRAN mirror.
+#'
+#' Older versions of packages on CRAN are usually only available in source form.  If your requested
+#' package contains compiled code, you will need to have an R development environment installed. You
+#' can check if you do by running \code{\link[pkgbuild]{has_devel}}.
 #'
 #' @export
 #' @family package installation
-#' @param package package name
-#' @param version If the specified version is NULL or the same as the most
-#'   recent version of the package, this function simply calls
-#'   \code{\link{install}}. Otherwise, it looks at the list of
-#'   archived source tarballs and tries to install an older version instead.
+#' @param package Name of the package to install.
+#' @param version Version of the package to install.  Can either be a string giving the exact
+#'   version required, or a specification in the same format as the parenthesized expressions used
+#'   in package dependencies (see \code{\link{parse_deps}} and/or
+#'   \url{https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-Dependencies}).
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @inheritParams utils::install.packages
-#' @author Jeremy Stephens
+#' @author Jeremy Stephens and Ken Williams
+#' @examples
+#' \dontrun{
+#' install_version('devtools', '1.11.0')
+#' install_version('devtools', '>= 1.12.0')
+#'
+#' ## Specify search order (e.g. in ~/.Rprofile)
+#' options(repos=c(prod = 'http://mycompany.example.com/r-repo',
+#'                 dev  = 'http://mycompany.example.com/r-repo-dev',
+#'                 CRAN = 'https://cran.revolutionanalytics.com'))
+#' install_version('mypackage', '1.15')        # finds in 'prod'
+#' install_version('mypackage', '1.16-39487')  # finds in 'dev'
+#' }
 install_version <- function(package, version = NULL, repos = getOption("repos"), type = getOption("pkgType"), ...) {
   if (length(package) < 1) return()
   if (length(package) > 1)
     stop("install_version() must be called with a single 'package' argument - multiple packages given")
 
-  ## returns TRUE if version 'to.check' satisfies version criteria 'criteria'
+  ## returns TRUE if version 'to.check' satisfies all version criteria 'criteria'
   satisfies <- function(to.check, criteria) {
     to.check <- package_version(to.check)
     result <- apply(criteria, 1, function(r) {
