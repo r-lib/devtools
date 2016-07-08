@@ -15,7 +15,7 @@ parse_deps <- function(string) {
   stopifnot(is.character(string), length(string) == 1)
   if (grepl("^\\s*$", string)) return()
 
-  pieces <- strsplit(string, ",")[[1]]
+  pieces <- strsplit(string, "[ ]*,[ ]*")[[1]]
 
   # Get the names
   names <- gsub("\\s*\\(.*?\\)", "", pieces)
