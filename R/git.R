@@ -140,12 +140,12 @@ github_remote_parse <- function(x) {
     # https://github.com/hadley/devtools.git
     # https://github.com/hadley/devtools
     # git@github.com:hadley/devtools.git
-    re <- "github[^/:]*[/:](.*?)/((?:(?!\\.git).)*)(\\.git)?"
+    re <- "github[^/:]*[/:]([^/]+)/(.*?)(?:\\.git)?$"
   } else {
     stop("Unknown GitHub repo format", call. = FALSE)
   }
 
-  m <- regexec(re, x, perl = TRUE)
+  m <- regexec(re, x)
   match <- regmatches(x, m)[[1]]
   list(
     username = match[2],
