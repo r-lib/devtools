@@ -219,9 +219,9 @@ remote_deps <- function(pkg) {
   dev_packages <- split_remotes(pkg[["remotes"]])
   remote <- lapply(dev_packages, parse_one_remote)
 
-  package <- vapply(remote, remote_package_name, character(1))
-  installed <- vapply(package, local_sha, character(1))
-  available <- vapply(remote, remote_sha, character(1))
+  package <- vapply(remote, remote_package_name, character(1), USE.NAMES = FALSE)
+  installed <- vapply(package, local_sha, character(1), USE.NAMES = FALSE)
+  available <- vapply(remote, remote_sha, character(1), USE.NAMES = FALSE)
   diff <- installed == available
   diff <- ifelse(!is.na(diff) & diff, CURRENT, BEHIND)
 
