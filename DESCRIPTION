@@ -44,6 +44,8 @@ Suggests:
     rversions,
     covr,
     gmailr (> 0.7.0)
+Remotes:
+  hadley/testthat
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
