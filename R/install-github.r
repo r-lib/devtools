@@ -311,4 +311,3 @@ download_github <- function(path, url, ...) {
   writeBin(httr::content(request, "raw"), path)
   path
 }
-
