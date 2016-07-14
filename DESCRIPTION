@@ -30,7 +30,7 @@ Imports:
 Suggests:
     curl (>= 0.9),
     crayon,
-    testthat (>= 1.0.3),
+    testthat (>= 1.0.2.9000),
     BiocInstaller,
     Rcpp (>= 0.10.0),
     MASS,
