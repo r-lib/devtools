@@ -51,7 +51,13 @@ remote_download.git_remote <- function(x, quiet = FALSE) {
 
   if (!is.null(x$branch)) {
     r <- git2r::repository(bundle)
-    git2r::checkout(r, x$branch)
+
+    if(x$branch %in% names(git2r::tags(r))) {
+      git2r::checkout(git2r::tags(r)[[x$branch]])
+    } else {
+      git2r::checkout(r, x$branch)
+    }
+
   }
 
   bundle
