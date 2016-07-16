@@ -1,5 +1,7 @@
 # devtools 1.13.0
 
+* `update_packages()` allows for override of interactive prompt (#1260, @pkq).
+
 * `use_test()` template no longer includes useless comments (#1349)
 
 * Add encoding support in `test_dir()` call by adding reference to pkg$encoding (#1306, @hansharhoff)

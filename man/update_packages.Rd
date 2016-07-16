@@ -8,8 +8,9 @@ update_packages(pkgs = NULL, dependencies = NA,
   repos = getOption("repos"), type = getOption("pkgType"))
 }
 \arguments{
-\item{pkgs}{Character vector of packages to update. If \code{NULL} all
-installed packages are updated.}
+\item{pkgs}{Character vector of packages to update. IF \code{TRUE} all
+installed packages are updated. If \code{NULL} user is prompted to
+confirm update of all installed packages.}
 
 \item{dependencies}{Which dependencies do you want to check?
   Can be a character vector (selecting from "Depends", "Imports",
@@ -40,4 +41,3 @@ update_packages(c("plyr", "ggplot2"))
 \code{\link{package_deps}} to see which packages are out of date/
   missing.
 }
-
