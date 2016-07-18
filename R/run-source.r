@@ -137,8 +137,8 @@ find_gist <- function(id, filename) {
     }
 
   } else {
-    if (length(r_files) > 1) {
-      warning("Multiple R files in gist, using first.")
+    if (length(r_files) >= 1) {
+      if (length(r_files) > 1) warning("Multiple R files in gist, using first.")
       which <- 1
     }
   }
