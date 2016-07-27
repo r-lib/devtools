@@ -9,6 +9,7 @@
 #'   \item Confirm that the package passes \code{R CMD check}
 #'   \item Ask if you've checked your code on win-builder
 #'   \item Confirm that news is up-to-date
+#'   \item Confirm that you've inspected your vignettes
 #'   \item Confirm that DESCRIPTION is ok
 #'   \item Ask if you've checked packages that depend on your package
 #'   \item Build the package
@@ -104,6 +105,11 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
 
   if (yesno("Have you updated your NEWS file?"))
     return(invisible())
+
+  if (has_vignettes(pkg)) {
+   if (yesno("Have you inspected your rendered vignettes?"))
+     return(invisible())
+  }
 
   rule("DESCRIPTION")
   cat(readLines(file.path(pkg$path, "DESCRIPTION")), sep = "\n")
@@ -318,3 +324,9 @@ upload_cran <- function(pkg, built_path) {
 }
 
 as.object_size <- function(x) structure(x, class = "object_size")
+
+has_vignettes <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+  vignette_path <- file.path(pkg$path, "vignettes")
+  file.exists(vignette_path)
+}
