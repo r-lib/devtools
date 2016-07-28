@@ -50,6 +50,9 @@ remote_download.git_remote <- function(x, quiet = FALSE) {
   git2r::clone(x$url, bundle, credentials=x$credentials, progress = FALSE)
 
   if (!is.null(x$branch)) {
+    if (!quiet) {
+    message("Checking out branch ", x$branch)
+    }
     r <- git2r::repository(bundle)
     git2r::checkout(r, x$branch)
   }
