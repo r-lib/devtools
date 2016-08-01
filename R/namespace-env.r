@@ -175,11 +175,11 @@ is_loaded <- function(pkg = ".") {
 
 
 # Returns the namespace registry
-#' @useDynLib devtools nsreg
 ns_registry <- function() {
-  .Call(nsreg)
+  (get(".Internal", envir = baseenv(), mode = "function"))(getNamespaceRegistry())
 }
-
+# To avoid a note about getNamespaceRegistry being missing
+utils::globalVariables("getNamespaceRegistry")
 
 # Register a namespace
 register_namespace <- function(name = NULL, env = NULL) {
