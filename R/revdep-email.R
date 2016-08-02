@@ -116,6 +116,7 @@ maintainer_data <- function(result, pkg, gh, date, author) {
     your_results = summary,
 
     you_have_problems = length(unlist(problems)) > 0,
+    you_cant_install = any(grepl("Rcheck/00install[.]out", problems$errors)),
 
     me = author,
     date = date,
