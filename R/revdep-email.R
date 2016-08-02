@@ -62,7 +62,7 @@ revdep_email <- function(pkg = ".", date,
     author = author)
   bodies <- lapply(data, whisker::whisker.render, template = template)
   subjects <- lapply(data, function(x) {
-    paste0(x$your_package, " and " , x$my_package, " release")
+    paste0(x$your_package, " and " , x$my_package, " ", x$my_version, " release")
   })
 
   emails <- Map(maintainer_email, maintainers, bodies, subjects)
@@ -120,6 +120,7 @@ maintainer_data <- function(result, pkg, gh, date, author) {
     me = author,
     date = date,
     my_package = pkg$package,
+    my_version = pkg$version,
     my_github = gh$fullname
   )
 }
