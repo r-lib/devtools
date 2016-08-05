@@ -724,7 +724,7 @@ use_template <- function(template, save_as = template, data = list(),
 
   if (open) {
     message("* Modify `", save_as, "`.")
-    open_in_rstudio(save_as)
+    open_in_rstudio(path)
   }
 
   invisible(TRUE)
