@@ -6,6 +6,7 @@ The goal of infrastructure is to ...
 
 This is a basic example which shows you how to solve a common problem:
 
-```R
-...
+
+``` r
+## basic example code
 ```
