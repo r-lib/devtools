@@ -1,5 +1,7 @@
 # devtools 1.12.0.9000
 
+* `use_readme_rmd()` and `use_readme()` share a common template with sections for package overview, GitHub installation (if applicable), and an example (@jennybc, #1287).
+
 * `test()` doesn't load helpers twice anymre (@krlmlr, #1256).
 
 * fix auto download method selection for `install_github()` on R 3.1 which
