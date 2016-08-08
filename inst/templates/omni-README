@@ -37,7 +37,7 @@ You can install {{{ package }}} from github with:
 ``` r
 {{/Rmd}}
 # install.packages("devtools")
-devtools::install_github("{{{repo}}}/{{{username}}}")
+devtools::install_github("{{{username}}}/{{{repo}}}")
 ```
 
 {{/github}}
