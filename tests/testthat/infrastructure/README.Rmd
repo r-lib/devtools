@@ -1,5 +1,7 @@
 ---
-output: github_document
+output:
+  md_document:
+    variant: markdown_github
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -10,4 +12,16 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "README-"
 )
+```
+
+# infrastructure
+
+The goal of infrastructure is to ...
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+## basic example code
 ```
