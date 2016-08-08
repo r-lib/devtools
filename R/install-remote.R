@@ -28,7 +28,7 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE) {
   }
 
   if (is_windows && inherits(remote, "cran_remote")) {
-    install_packages(package_name, repos = remote$repos, type = remote$pkg_type, ..., quiet = quiet)
+    install_packages(package_name, repos = remote$repos, type = remote$pkg_type, dependencies = NA, ..., quiet = quiet)
     return(invisible(TRUE))
   }
 
