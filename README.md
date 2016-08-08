@@ -27,27 +27,11 @@ You can track (and contribute to) the development of `devtools` at https://githu
     * **Mac**: Install Xcode from the Mac App Store.
     * **Linux**: Install a compiler and various development libraries (details vary across different flavors of Linux).
 
-3. Follow the instructions below depending on platform.
-
-    * **Mac and Linux**:
+3. Install the development version of devtools.
 
         ```R
         devtools::install_github("hadley/devtools")
         ```
-
-    * **Windows**:
-
-        ```R
-        library(devtools)
-        build_github_devtools()
-
-        #### Restart R before continuing ####
-        install.packages("devtools.zip", repos = NULL, type = "source")
-
-        # Remove the package after installation
-        unlink("devtools.zip")
-        ```
-
 
 ## Package development tools
 
