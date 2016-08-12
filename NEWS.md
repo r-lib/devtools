@@ -1,5 +1,8 @@
 # devtools 1.12.0.9000
 
+* `use_travis()` now opens a webpage in your browser to more easily activate
+  a repo.
+
 * `use_readme_rmd()` and `use_readme()` share a common template with sections for package overview, GitHub installation (if applicable), and an example (@jennybc, #1287).
 
 * `test()` doesn't load helpers twice anymre (@krlmlr, #1256).

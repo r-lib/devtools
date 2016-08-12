@@ -142,13 +142,16 @@ use_travis <- function(pkg = ".") {
   use_template("travis.yml", ".travis.yml", ignore = TRUE, pkg = pkg)
 
   gh <- github_info(pkg$path)
+  travis_url <- file.path("https://travis-ci.org", gh$fullname)
+
   message("Next: \n",
-    " * Turn on travis for this repo at https://travis-ci.org/profile\n",
     " * Add a travis shield to your README.md:\n",
     "[![Travis-CI Build Status]",
        "(https://travis-ci.org/", gh$fullname, ".svg?branch=master)]",
-       "(https://travis-ci.org/", gh$fullname, ")"
+       "(https://travis-ci.org/", gh$fullname, ")\n",
+    " * Turn on travis for your repo at ", travis_url, "\n"
   )
+  browseURL(travis_url)
 
   invisible(TRUE)
 }
