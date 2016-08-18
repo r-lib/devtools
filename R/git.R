@@ -122,7 +122,7 @@ github_info <- function(path = ".", remote_name = NULL) {
   github_remote_parse(x)
 }
 
-github_dummy <- list(username = "<USERNAME>", repo = "<REPO>")
+github_dummy <- list(username = "<USERNAME>", repo = "<REPO>", fullname = "<USERNAME>/<REPO>")
 
 remote_urls <- function(r) {
   remotes <- git2r::remotes(r)
