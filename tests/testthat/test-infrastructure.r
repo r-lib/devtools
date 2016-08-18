@@ -10,7 +10,7 @@ test_that("use_* functions consistently", {
   use_vignette("test2", pkg = pkg)
 
   use_rcpp(pkg = pkg)
-  use_travis(pkg = pkg)
+  use_travis(pkg = pkg, browse = FALSE)
   use_coverage(pkg = pkg)
   use_appveyor(pkg = pkg)
 

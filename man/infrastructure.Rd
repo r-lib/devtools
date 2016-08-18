@@ -30,7 +30,7 @@ use_vignette(name, pkg = ".")
 
 use_rcpp(pkg = ".")
 
-use_travis(pkg = ".")
+use_travis(pkg = ".", browse = interactive())
 
 use_coverage(pkg = ".", type = c("codecov", "coveralls"))
 
@@ -57,6 +57,9 @@ use_dev_version(pkg = ".")
 
 \item{name}{File name to use for new vignette. Should consist only of
 numbers, letters, _ and -. I recommend using lower case.}
+
+\item{browse}{open a browser window to enable Travis builds for the package
+automatically.}
 
 \item{type}{CI tool to use. Currently supports codecov and coverall.}
 

@@ -134,9 +134,11 @@ use_rcpp <- function(pkg = ".") {
 #' @section \code{use_travis}:
 #' Add basic travis template to a package. Also adds \code{.travis.yml} to
 #' \code{.Rbuildignore} so it isn't included in the built package.
+#' @param browse open a browser window to enable Travis builds for the package
+#' automatically.
 #' @export
 #' @aliases add_travis
-use_travis <- function(pkg = ".") {
+use_travis <- function(pkg = ".", browse = interactive()) {
   pkg <- as.package(pkg)
 
   use_template("travis.yml", ".travis.yml", ignore = TRUE, pkg = pkg)
@@ -151,7 +153,9 @@ use_travis <- function(pkg = ".") {
        "(https://travis-ci.org/", gh$fullname, ")\n",
     " * Turn on travis for your repo at ", travis_url, "\n"
   )
-  browseURL(travis_url)
+  if (browse) {
+    browseURL(travis_url)
+  }
 
   invisible(TRUE)
 }
