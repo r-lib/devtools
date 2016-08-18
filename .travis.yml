@@ -20,6 +20,11 @@ r_github_packages:
 # We need to install BiocInstaller for testing Bioconductor packages
 bioc_required: true
 
+# Set CXX1X for R-devel, as R-devel does not detect CXX1X support for gcc 4.6.3,
+# this was causing hunspell installation to fail
+before_install:
+  - test $TRAVIS_R_VERSION_STRING = 'devel' && mkdir ~/.R && echo 'CXX1X=g++ -std=c++0x -g -O2 -fPIC' > ~/.R/Makevars
+
 # The git config settings are not setup on travis by default
 before_script:
     - git config --global user.name "travis"
@@ -27,4 +32,4 @@ before_script:
 
 # Only report coverage for the release version
 after_success:
-  - test $TRAVIS_R_VERSION_STRING = "release" && Rscript -e 'covr::codecov()'
+  - test $TRAVIS_R_VERSION_STRING = 'release' && Rscript -e 'covr::codecov()'
