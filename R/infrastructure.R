@@ -154,7 +154,7 @@ use_travis <- function(pkg = ".", browse = interactive()) {
     " * Turn on travis for your repo at ", travis_url, "\n"
   )
   if (browse) {
-    browseURL(travis_url)
+    utils::browseURL(travis_url)
   }
 
   invisible(TRUE)
