@@ -32,6 +32,7 @@
 #' }
 #' @export
 build_github_devtools <- function(outfile = NULL) {
+  .Deprecated(msg = "`build_github_devtools()` is deprecated, you can simply use `install_github(\"hadley/devtools\")`")
   if (!has_devel()) {
     stop("This requires a working development environment.")
   }
