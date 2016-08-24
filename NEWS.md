@@ -1,5 +1,22 @@
 # devtools 1.12.0.9000
 
+* Various minor improvements around checking of reverse dependencies
+  (#1284, @krlmlr). All packages involved are listed at the start,
+  the whole process is now more resilient against package
+  installation failures.
+
+* Improved handling of local `file://` repositories in `install()` (#1284, @krlmlr).
+
+* `setup()` and `create()` gain new `quiet` argument (#1284, @krlmlr).
+
+* Print summary table in README.md and problems.md (#1284, @krlmlr).Revdep check improvements (#1284)
+
+* Avoid unnecessary query of `available_packages()` (#1269, @krlmlr).
+
+* Add cache setting to AppVeyor template (#1290, @krlmlr).
+
+* Fix AppVeyor test by manually installing `curl` (#1301).
+
 * `install(dependencies = FALSE)` doesn't query the available packages anymore (@krlmlr, #1269).
 
 * `use_travis()` now opens a webpage in your browser to more easily activate
