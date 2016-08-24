@@ -32,7 +32,22 @@ cran_remote <- function(pkg, repos, type) {
 #' @importFrom utils download.packages
 remote_download.cran_remote <- function(x, quiet = FALSE) {
   dest_dir <- tempdir()
-  download.packages(x$name, destdir = dest_dir, repos = x$repos, type = x$pkg_type)[1, 2]
+
+  # download.packages() doesn't fully respect "quiet" argument
+  if (quiet) {
+    sink_file <- tempfile()
+    path <- withr::with_message_sink(
+      sink_file,
+      download_cran(x, quiet, dest_dir)
+    )
+  } else {
+    path <- download_cran(x, quiet, dest_dir)
+  }
+  path
+}
+
+download_cran <- function(x, quiet, dest_dir) {
+  download.packages(x$name, destdir = dest_dir, repos = x$repos, type = x$pkg_type, quiet = quiet)[1, 2]
 }
 
 #' @export
