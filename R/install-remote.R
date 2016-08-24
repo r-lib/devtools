@@ -43,10 +43,15 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE) {
   install(source, ..., quiet = quiet, metadata = metadata)
 }
 
-try_install_remote <- function(...) {
+try_install_remote <- function(..., quiet) {
   tryCatch(
-    install_remote(...),
-    error = function(e) FALSE
+    install_remote(..., quiet = quiet),
+    error = function(e) {
+      if (!quiet) {
+        message("Installation failed: ", conditionMessage(e))
+      }
+      FALSE
+    }
   )
 }
 
