@@ -15,6 +15,7 @@
 #' @param check if \code{TRUE}, will automatically run \code{\link{check}}
 #' @param rstudio Create an Rstudio project file?
 #'   (with \code{\link{use_rstudio}})
+#' @param quiet if \code{FALSE}, the default, prints informative messages.
 #' @seealso Text with \code{\link{package.skeleton}}
 #' @export
 #' @examples
@@ -30,7 +31,7 @@
 #' create(path, my_description)
 #' }
 create <- function(path, description = getOption("devtools.desc"),
-                   check = FALSE, rstudio = TRUE) {
+                   check = FALSE, rstudio = TRUE, quiet = FALSE) {
   check_package_name(path)
 
   # ensure the parent directory exists
@@ -59,7 +60,7 @@ create <- function(path, description = getOption("devtools.desc"),
 
   path <- normalizePath(path, winslash = "/", mustWork = TRUE)
   setup(path = path, description = description, rstudio = rstudio,
-        check = check)
+        check = check, quiet = quiet)
 
   invisible(TRUE)
 }
@@ -67,14 +68,16 @@ create <- function(path, description = getOption("devtools.desc"),
 #' @rdname create
 #' @export
 setup <- function(path = ".", description = getOption("devtools.desc"),
-                  check = FALSE, rstudio = TRUE) {
+                  check = FALSE, rstudio = TRUE, quiet = FALSE) {
   check_package_name(path)
 
   parent_dir <- normalizePath(dirname(path), winslash = "/", mustWork = TRUE)
-  message("Creating package '", extract_package_name(path), "' in '", parent_dir, "'")
+  if (!quiet) {
+    message("Creating package '", extract_package_name(path), "' in '", parent_dir, "'")
+  }
 
   dir.create(file.path(path, "R"), showWarnings = FALSE)
-  create_description(path, extra = description)
+  create_description(path, extra = description, quiet = quiet)
   create_namespace(path)
 
   if (rstudio) use_rstudio(path)
