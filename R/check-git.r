@@ -18,13 +18,13 @@ git_checks <- function(pkg = ".") {
 check_uncommitted <- function(pkg) {
   check_status(!git_uncommitted(pkg$path),
                "uncommitted files",
-               "All files should be committed before release."
+               "All files should be committed before release. Please add and commit."
   )
 }
 
 check_sync_status <- function(pkg) {
   check_status(!git_sync_status(pkg$path, check_ahead = FALSE),
                "if synched with remote branch",
-               "Remote and local branches should be in sync before release."
+               "Local branch should contain all commits of remote branch before release. Please pull."
   )
 }
