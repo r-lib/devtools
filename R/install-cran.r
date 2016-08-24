@@ -32,7 +32,30 @@ cran_remote <- function(pkg, repos, type) {
 #' @importFrom utils download.packages
 remote_download.cran_remote <- function(x, quiet = FALSE) {
   dest_dir <- tempdir()
-  download.packages(x$name, destdir = dest_dir, repos = x$repos, type = x$pkg_type)[1, 2]
+
+  # download.packages() doesn't fully respect "quiet" argument
+  if (quiet) {
+    sink_file <- tempfile()
+    path <- withr::with_message_sink(
+      sink_file,
+      download_cran(x, quiet, dest_dir)
+    )
+  } else {
+    path <- download_cran(x, quiet, dest_dir)
+  }
+
+  # Make sure we return a copy which can be deleted later on
+  # (e.g., for local repositories)
+  if (dirname(normalizePath(path)) != normalizePath(dest_dir)) {
+    file.copy(path, dest_dir)
+    path <- file.path(dest_dir, basename(path))
+  }
+
+  path
+}
+
+download_cran <- function(x, quiet, dest_dir) {
+  download.packages(x$name, destdir = dest_dir, repos = x$repos, type = x$pkg_type, quiet = quiet)[1, 2]
 }
 
 #' @export
@@ -40,7 +63,7 @@ remote_metadata.cran_remote <- function(x, bundle = NULL, source = NULL) {
   version <- read_dcf(file.path(source, "DESCRIPTION"))$Version
   list(
     RemoteType = "cran",
-    RemoteSha = version,
+    RemoteSha = trimws(version),
     RemoteRepos = paste0(deparse(x$repos), collapse = ""),
     RemotePkgType = x$pkg_type
   )
@@ -55,7 +78,7 @@ remote_package_name.cran_remote <- function(remote, ...) {
 remote_sha.cran_remote <- function(remote, url = "https://github.com", ...) {
   cran <- available_packages(remote$repos, remote$pkg_type)
 
-  unname(cran[, "Version"][match(remote$name, rownames(cran))])
+  trimws(unname(cran[, "Version"][match(remote$name, rownames(cran))]))
 }
 
 #' @export

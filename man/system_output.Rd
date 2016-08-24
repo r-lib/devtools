@@ -22,7 +22,7 @@ system_output(cmd, args = character(), env_vars = character(), path = ".",
 }
 \value{
 command output if the command succeeds, an error will be thrown if
-the command fails.
+  the command fails.
 }
 \description{
 Run a system command and capture the output.

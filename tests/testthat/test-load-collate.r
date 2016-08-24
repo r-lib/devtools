@@ -37,7 +37,10 @@ test_that("DESCRIPTION Collate field, with latest @includes, is recognised by lo
   test_pkg <- temp_copy_pkg('testCollateOrder')
   on.exit(unlink(test_pkg, recursive = TRUE))
 
-  expect_message(load_all(test_pkg), "Loading testCollateOrder")
+  expect_output(
+    expect_message(load_all(test_pkg), "Loading testCollateOrder"),
+    "Updating collate directive"
+  )
 
   expect_equal(a, 1) #even though b.r set it to 2
 

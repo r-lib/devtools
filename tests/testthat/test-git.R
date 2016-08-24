@@ -1,11 +1,10 @@
 context("git")
 
 git_test_repo <- function() {
-  skip_on_cran()
-
   d <- tempfile("")
   dir.create(d)
   r <- git2r::init(d)
+  git2r::config(r, user.name = "user", user.email = "user@email.com")
   writeLines(character(), file.path(d, ".gitignore"))
   git2r::add(r, ".gitignore")
   git2r::commit(r, "initial")

@@ -79,7 +79,7 @@ install <-
 
   root_install <- is.null(installing$packages)
   if (root_install) {
-    on.exit(installing$packages <- NULL)
+    on.exit(installing$packages <- NULL, add = TRUE)
   }
 
   if (pkg$package %in% installing$packages) {
