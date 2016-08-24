@@ -43,6 +43,14 @@ remote_download.cran_remote <- function(x, quiet = FALSE) {
   } else {
     path <- download_cran(x, quiet, dest_dir)
   }
+
+  # Make sure we return a copy which can be deleted later on
+  # (e.g., for local repositories)
+  if (dirname(normalizePath(path)) != normalizePath(dest_dir)) {
+    file.copy(path, dest_dir)
+    path <- file.path(dest_dir, basename(path))
+  }
+
   path
 }
 
