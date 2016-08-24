@@ -27,7 +27,6 @@ revdep_setup_md <- function(check) {
   paste0(
     "# Setup\n\n",
     revdep_platform_md(check$platform),
-    "\n\n",
     revdep_packages_md(check$dependencies)
   )
 }
@@ -35,7 +34,8 @@ revdep_setup_md <- function(check) {
 revdep_platform_md <- function(platform) {
   paste0(
     "## Platform\n\n",
-    paste(revdep_platform_kable(platform), collapse = "\n")
+    paste(revdep_platform_kable(platform), collapse = "\n"),
+    "\n\n"
   )
 }
 
