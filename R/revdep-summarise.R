@@ -33,16 +33,19 @@ revdep_setup_md <- function(check) {
 }
 
 revdep_platform_md <- function(platform) {
+  paste0(
+    "## Platform\n\n",
+    paste(revdep_platform_kable(platform), collapse = "\n")
+  )
+}
+
+revdep_platform_kable <- function(platform) {
   plat_df <- data.frame(
     setting = names(platform),
     value = unlist(platform)
   )
   rownames(plat_df) <- NULL
-
-  paste0(
-    "## Platform\n\n",
-    paste(knitr::kable(plat_df), collapse = "\n")
-  )
+  knitr::kable(plat_df)
 }
 
 revdep_packages_md <- function(dependencies) {
