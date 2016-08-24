@@ -76,6 +76,8 @@ revdep_check_results_md <- function(results, has_problem) {
 }
 
 revdep_check_results_kable <- function(results) {
+  if (length(results) == 0) return(character())
+
   summary_df <- data.frame(
     package = I(names(results)),
     version = I(vapply(results, function(x) x$version, character(1))),
