@@ -16,30 +16,54 @@ revdep_check_summary_md <- function(pkg, has_problem = FALSE) {
 
   check <- readRDS(revdep_check_path(pkg))
 
+  paste0(
+    revdep_setup_md(check),
+    "\n\n",
+    revdep_check_results_md(check$results, has_problem)
+  )
+}
+
+revdep_setup_md <- function(check) {
+  paste0(
+    "# Setup\n\n",
+    revdep_platform_md(check$platform),
+    "\n\n",
+    revdep_packages_md(check$dependencies)
+  )
+}
+
+revdep_platform_md <- function(platform) {
+  plat_df <- data.frame(
+    setting = names(platform),
+    value = unlist(platform)
+  )
+  rownames(plat_df) <- NULL
+
+  paste0(
+    "## Platform\n\n",
+    paste(knitr::kable(plat_df), collapse = "\n")
+  )
+}
+
+revdep_packages_md <- function(dependencies) {
+  paste0(
+    "## Packages\n\n",
+    paste(knitr::kable(dependencies), collapse = "\n")
+  )
+}
+
+revdep_check_results_md <- function(results, has_problem) {
   if (has_problem) {
-    problems <- vapply(check$results, has_problems, logical(1))
-    check$results <- check$results[problems]
+    problems <- vapply(results, has_problems, logical(1))
+    results <- results[problems]
     msg <- "packages with problems"
   } else {
     msg <- "packages"
   }
 
-  plat_df <- data.frame(
-    setting = names(check$platform),
-    value = unlist(check$platform)
-  )
-  rownames(plat_df) <- NULL
-
-  summaries <- vapply(check$results, format, character(1))
+  summaries <- vapply(results, format, character(1))
 
   paste0(
-    "# Setup\n\n",
-    "## Platform\n\n",
-    paste(knitr::kable(plat_df), collapse = "\n"),
-    "\n\n",
-    "## Packages\n\n",
-    paste(knitr::kable(check$dependencies), collapse = "\n"),
-    "\n\n",
     "# Check results\n",
     paste0(length(summaries), " ", msg, "\n\n"),
     paste0(summaries, collapse = "\n")
