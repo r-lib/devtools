@@ -23,7 +23,7 @@ check_uncommitted <- function(pkg) {
 }
 
 check_sync_status <- function(pkg) {
-  check_status(!git_sync_status(pkg$path),
+  check_status(!git_sync_status(pkg$path, check_ahead = FALSE),
                "if synched with remote branch",
                "Remote and local branches should be in sync before release."
   )
