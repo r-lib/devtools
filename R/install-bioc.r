@@ -125,8 +125,15 @@ remote_metadata.bioc_remote <- function(x, bundle = NULL, source = NULL) {
 }
 
 #' @export
+remote_package_info.bioc_remote <- function(remote, ...) {
+  list(Package = remote$repo,
+       Version = NA_character_) # need to fix this
+}
+
+#' @export
 remote_package_name.bioc_remote <- function(remote, ...) {
-  remote$repo
+  res = remote_package_info(remote, ...)
+  res$Package
 }
 
 #' @export

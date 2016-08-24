@@ -47,8 +47,17 @@ remote_metadata.cran_remote <- function(x, bundle = NULL, source = NULL) {
 }
 
 #' @export
+remote_package_info.cran_remote <- function(remote, ...) {
+  # read_dcf(file.path(source, "DESCRIPTION"))
+  res = list(Package = remote$name,
+       Version = NA_character_)
+  res
+}
+
+#' @export
 remote_package_name.cran_remote <- function(remote, ...) {
-  remote$name
+  res = remote_package_info(remote, ...)
+  res$Package
 }
 
 #' @export

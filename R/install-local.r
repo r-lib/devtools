@@ -60,10 +60,16 @@ remote_metadata.local_remote <- function(x, bundle = NULL, source = NULL) {
 remote_metadata.package <- remote_metadata.local_remote
 
 #' @export
-remote_package_name.local_remote <- function(remote, ...) {
+remote_package_info.local_remote <- function(remote, ...) {
   description_path <- file.path(remote$path, "DESCRIPTION")
 
-  read_dcf(description_path)$Package
+  read_dcf(description_path)
+}
+
+#' @export
+remote_package_name.local_remote <- function(remote, ...) {
+  res = remote_package_info(remote, ...)
+  res$Package
 }
 
 #' @export
