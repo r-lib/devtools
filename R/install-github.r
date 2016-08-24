@@ -257,7 +257,7 @@ remote_package_info.github_remote <- function(remote, url = "https://github.com"
   req <- httr::GET(url, path = path, httr::write_disk(path = tmp))
 
   if (httr::status_code(req) >= 400) {
-    L = list(Package = NA_character_,
+    L <- list(Package = NA_character_,
              Version = NA_character_)
     return(L)
   }
@@ -267,7 +267,7 @@ remote_package_info.github_remote <- function(remote, url = "https://github.com"
 
 #' @export
 remote_package_name.github_remote <- function(remote, url = "https://github.com", ...) {
-  res = remote_package_info(remote, url = url, ...)
+  res <- remote_package_info(remote, url = url, ...)
   res$Package
 }
 

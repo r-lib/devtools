@@ -135,7 +135,7 @@ remote_package_info.svn_remote <- function(remote, ...) {
 
 #' @export
 remote_package_name.svn_remote <- function(remote, ...) {
-  res = remote_package_info(remote, ...)
+  res <- remote_package_info(remote, ...)
   res$Package
 }
 

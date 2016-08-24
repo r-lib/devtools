@@ -68,7 +68,7 @@ remote_package_info.local_remote <- function(remote, ...) {
 
 #' @export
 remote_package_name.local_remote <- function(remote, ...) {
-  res = remote_package_info(remote, ...)
+  res <- remote_package_info(remote, ...)
   res$Package
 }
 

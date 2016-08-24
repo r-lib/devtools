@@ -132,7 +132,7 @@ remote_package_info.bioc_remote <- function(remote, ...) {
 
 #' @export
 remote_package_name.bioc_remote <- function(remote, ...) {
-  res = remote_package_info(remote, ...)
+  res <- remote_package_info(remote, ...)
   res$Package
 }
 

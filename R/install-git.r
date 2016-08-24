@@ -92,7 +92,8 @@ remote_package_info.git_remote <- function(remote, ...) {
       quiet = TRUE))
 
   if (inherits(res, "try-error")) {
-    return(NA)
+    return(list(Package = NA_character_,
+                Version = NA_character_))
   }
 
   # git archive return a tar file, so extract it to tempdir and read the DCF
@@ -103,7 +104,7 @@ remote_package_info.git_remote <- function(remote, ...) {
 
 #' @export
 remote_package_name.git_remote <- function(remote, ...) {
-  res = remote_package_info(remote, ...)
+  res <- remote_package_info(remote, ...)
   res$Package
 }
 
