@@ -69,8 +69,23 @@ revdep_check_results_md <- function(results, has_problem) {
   paste0(
     "# Check results\n",
     paste0(length(summaries), " ", msg, "\n\n"),
+    paste0(revdep_check_results_kable(results), collapse = "\n"),
+    "\n\n",
     paste0(summaries, collapse = "\n")
   )
+}
+
+revdep_check_results_kable <- function(results) {
+  summary_df <- data.frame(
+    package = I(names(results)),
+    version = I(vapply(results, function(x) x$version, character(1))),
+    errors = vapply(results, function(x) length(x$results$errors), integer(1)),
+    warnings = vapply(results, function(x) length(x$results$warnings), integer(1)),
+    notes = vapply(results, function(x) length(x$results$notes), integer(1))
+  )
+  rownames(summary_df) <- NULL
+
+  knitr::kable(summary_df)
 }
 
 #' @export
