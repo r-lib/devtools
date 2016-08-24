@@ -97,7 +97,7 @@ print.platform_info <- function(x, ...) {
 package_info <- function(pkgs = loadedNamespaces(), include_base = FALSE,
                          libpath = NULL) {
   if (!include_base) {
-    base <- vapply(pkgs, pkg_is_base, logical(1))
+    base <- vapply(pkgs, pkg_is_base, libpath = libpath, logical(1))
     pkgs <- pkgs[!base]
   }
   pkgs <- sort(pkgs)
@@ -128,8 +128,8 @@ print.packages_info <- function(x, ...) {
   print.data.frame(x, right = FALSE, row.names = FALSE)
 }
 
-pkg_is_base <- function(pkg) {
-  desc <- packageDescription(pkg)
+pkg_is_base <- function(pkg, libpath) {
+  desc <- packageDescription(pkg, lib.loc = libpath)
   !is.null(desc$Priority) && desc$Priority == "base"
 }
 

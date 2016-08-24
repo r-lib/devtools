@@ -55,12 +55,14 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
     repos <- character()
 
   repos[repos == "@CRAN@"] <- cran_mirror()
-  cran <- available_packages(repos, type)
 
   if (missing(pkg)) {
     pkg <- as.package(".")$package
   }
-  deps <- sort(find_deps(pkg, cran, top_dep = dependencies))
+
+  # It is important to not extract available_packages() to a variable,
+  # for the case when pkg is empty (e.g., install(dependencies = FALSE) ).
+  deps <- sort(find_deps(pkg, available_packages(repos, type), top_dep = dependencies))
 
   # Remove base packages
   inst <- installed.packages()
