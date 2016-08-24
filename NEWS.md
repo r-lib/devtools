@@ -10,7 +10,7 @@
 * fix auto download method selection for `install_github()` on R 3.1 which
   lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)
   
-* Added `remote_package_info` for more information about package (such as version).
+* Added `remote_package_info` for more information about package (such as version). (@muschellij2)
 
 # devtools 1.12.0
 
