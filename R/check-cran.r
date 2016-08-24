@@ -19,7 +19,8 @@
 #'   to the same type as \code{\link{install.packages}()}.
 #' @param threads Number of concurrent threads to use for checking.
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
-#' @param check_dir Directory to store results.
+#' @param check_dir,install_dir Directory to store check and installation
+#'   results.
 #' @return Returns (invisibly) the directory where check results are stored.
 #' @keywords internal
 #' @inheritParams check
@@ -29,6 +30,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
                        type = getOption("pkgType"),
                        threads = getOption("Ncpus", 1),
                        check_dir = tempfile("check_cran"),
+                       install_dir = tempfile("check_cran_install"),
                        env_vars = NULL) {
 
   stopifnot(is.character(pkgs))
@@ -59,7 +61,10 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
     message("Determining packages to update... ", appendLF = FALSE) # ------------
     deps <- package_deps(pkgs, repos = repos, type = type, dependencies = TRUE)
     message(paste(deps$package, collapse = ", "))
-    update(deps, Ncpus = threads, quiet = TRUE)
+
+    dir.create(install_dir, showWarnings = FALSE, recursive = TRUE)
+    update(deps, Ncpus = threads, quiet = FALSE,
+           out_dir = install_dir, skip_if_log_exists = TRUE)
 
     message("Downloading source packages for checking") #-------------------------
     urls <- lapply(pkgs, package_url, repos = repos, available = available_src)
