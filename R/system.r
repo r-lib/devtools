@@ -8,7 +8,6 @@
 #' @param throw If \code{TRUE}, will throw an error if the command fails
 #'   (i.e. the return value is not 0).
 #' @param ... additional arguments passed to \code{\link[base]{system}}
-#'   or \code{\link[base]{system2}}
 #' @keywords internal
 #' @export
 #' @return The exit status of the command, invisibly.
@@ -44,7 +43,6 @@ system_check <- function(cmd, args = character(), env_vars = character(),
 #' @param out_file Path of file to which output is written if \code{quiet} is
 #'   \code{TRUE}
 #' @keywords internal
-#' @export
 system2_check <- function(cmd, args = character(), env_vars = character(),
                           path = ".", quiet = FALSE, throw = TRUE,
                           out_file = NULL, ...) {

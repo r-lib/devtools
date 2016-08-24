@@ -25,8 +25,7 @@ system2_check(cmd, args = character(), env_vars = character(), path = ".",
 \item{throw}{If \code{TRUE}, will throw an error if the command fails
 (i.e. the return value is not 0).}
 
-\item{...}{additional arguments passed to \code{\link[base]{system}}
-or \code{\link[base]{system2}}}
+\item{...}{additional arguments passed to \code{\link[base]{system}}}
 
 \item{out_file}{Path of file to which output is written if \code{quiet} is
 \code{TRUE}}
