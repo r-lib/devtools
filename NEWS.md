@@ -1,11 +1,13 @@
 # devtools 1.12.0.9000
 
+* `install(dependencies = FALSE)` doesn't query the available packages anymore (@krlmlr, #1269).
+
 * `use_travis()` now opens a webpage in your browser to more easily activate
   a repo.
 
 * `use_readme_rmd()` and `use_readme()` share a common template with sections for package overview, GitHub installation (if applicable), and an example (@jennybc, #1287).
 
-* `test()` doesn't load helpers twice anymre (@krlmlr, #1256).
+* `test()` doesn't load helpers twice anymore (@krlmlr, #1256).
 
 * fix auto download method selection for `install_github()` on R 3.1 which
   lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)
