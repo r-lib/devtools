@@ -1,5 +1,7 @@
 # devtools 1.12.0.9000
 
+* Improve Git status checks used in `release()` (#1205, @krlmlr).
+
 * `use_travis()` now opens a webpage in your browser to more easily activate
   a repo.
 
