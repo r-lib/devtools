@@ -39,10 +39,9 @@ system_check <- function(cmd, args = character(), env_vars = character(),
   invisible(status)
 }
 
-#' @rdname system_check
+#' @noRd
 #' @param out_file Path of file to which output is written if \code{quiet} is
 #'   \code{TRUE}
-#' @keywords internal
 system2_check <- function(cmd, args = character(), env_vars = character(),
                           path = ".", quiet = FALSE, throw = TRUE,
                           out_file = NULL, ...) {
