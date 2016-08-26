@@ -9,16 +9,6 @@ install_cran(pkgs, repos = getOption("repos"), type = getOption("pkgType"),
 }
 \arguments{
 \item{pkgs}{Character vector of packages to install.}
-
-\item{repos}{A character vector giving repositories to use.}
-
-\item{type}{Type of package to \code{update}.  If "both", will switch
-automatically to "binary" to avoid interactive prompts during package
-installation.}
-
-\item{...}{Additional arguments passed to \code{install_packages}.}
-
-\item{quiet}{If \code{TRUE}, suppress output.}
 }
 \description{
 This function is vectorised on \code{pkgs} so you can install multiple
@@ -32,10 +22,6 @@ install_cran(c("httpuv", "shiny")
 }
 \seealso{
 Other package installation: \code{\link{install_bioc}},
-  \code{\link{install_bitbucket}},
-  \code{\link{install_github}}, \code{\link{install_git}},
-  \code{\link{install_svn}}, \code{\link{install_url}},
-  \code{\link{install_version}}, \code{\link{install}},
-  \code{\link{uninstall}}
+  \code{\link{install}}, \code{\link{uninstall}}
 }
 

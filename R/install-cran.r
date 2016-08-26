@@ -4,7 +4,6 @@
 #' packages in a single command.
 #'
 #' @param pkgs Character vector of packages to install.
-#' @inheritParams package_deps
 #' @export
 #' @family package installation
 #' @examples

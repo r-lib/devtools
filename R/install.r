@@ -161,7 +161,6 @@ installing <- new.env(parent = emptyenv())
 #' also installs roxygen2.
 #'
 #' @inheritParams install
-#' @inheritParams package_deps
 #' @param ... additional arguments passed to \code{\link{install.packages}}.
 #' @export
 #' @examples
@@ -174,11 +173,14 @@ install_deps <- function(pkg = ".", dependencies = NA,
                          upgrade = TRUE,
                          quiet = FALSE,
                          force_deps = FALSE) {
+  if (force_deps) {
+    warning("force_deps not supported.", call. = FALSE)
+  }
 
-  pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
-    type = type)
-  update(pkg, ..., Ncpus = threads, quiet = quiet, upgrade = upgrade)
-  invisible()
+  pkg <- as.package(pkg)
+  remotes::install_deps(pkg$path, dependencies = dependencies,
+                        threads = threads, repos = repos,
+                        type = type, ..., upgrade = upgrade, quiet = quiet)
 }
 
 #' @rdname install_deps
