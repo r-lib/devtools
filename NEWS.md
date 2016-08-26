@@ -1,5 +1,7 @@
 # devtools 1.12.0.9000
 
+* Improve Git status checks used in `release()` (#1205, @krlmlr).
+
 * Various minor improvements around checking of reverse dependencies
   (#1284, @krlmlr). All packages involved are listed at the start,
   the whole process is now more resilient against package

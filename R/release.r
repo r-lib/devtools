@@ -55,15 +55,9 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
   }
 
   if (uses_git(pkg$path)) {
-    if (git_uncommitted(pkg$path)) {
-      if (yesno("Uncommited changes in git. Proceed anyway?"))
-        return(invisible())
-    }
-
-    if (git_sync_status(pkg$path)) {
-      if (yesno("Git not synched with remote. Proceed anyway?"))
-        return(invisible())
-    }
+    git_checks(pkg)
+    if (yesno("Were Git checks successful?"))
+      return(invisible())
   }
 
   if (check) {
