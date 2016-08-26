@@ -5,14 +5,6 @@ test_that("remote_deps returns NULL if no remotes specified", {
 
 
 test_that("remote_deps returns works with implicit types", {
-  with_mock(`devtools::package2remote` = function(...) NULL, {
-    expect_equal(parse_one_remote("hadley/testthat"),
-      github_remote("hadley/testthat"))
-
-    expect_equal(parse_one_remote("klutometis/roxygen"),
-      github_remote("klutometis/roxygen"))
-  })
-
   expect_equal(split_remotes("hadley/testthat,klutometis/roxygen"),
       c("hadley/testthat", "klutometis/roxygen"))
 
@@ -36,11 +28,6 @@ test_that("dev_remote_type errors", {
 })
 
 test_that("dev_remote_type works with explicit types", {
-  with_mock(`devtools::package2remote` = function(...) NULL, {
-    expect_equal(parse_one_remote("github::hadley/testthat"),
-      github_remote("hadley/testthat"))
-  })
-
   expect_equal(split_remotes("github::hadley/testthat,klutometis/roxygen"),
     c("github::hadley/testthat", "klutometis/roxygen"))
 
@@ -67,12 +54,6 @@ test_that("different_sha returns FALSE if remote_sha and local_sha are the same"
 })
 test_that("local_sha returns NA if package is not installed", {
   expect_equal(local_sha("tsrtarst"), NA_character_)
-})
-test_that("remote_sha.github_remote returns NA if remote doesn't exist", {
-  expect_equal(remote_sha(github_remote("arst/arst")), NA_character_)
-})
-test_that("remote_sha.github_remote returns expected value if remote does exist", {
-  expect_equal(remote_sha(github_remote("hadley/devtools@v1.8.0")), "ad9aac7b9a522354e1ff363a86f389e32cec181b")
 })
 
 test_that("package2remotes looks for the DESCRIPTION in .libPaths", {
