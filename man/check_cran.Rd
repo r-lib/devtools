@@ -7,7 +7,7 @@
 check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath,
   bioconductor = FALSE, type = getOption("pkgType"),
   threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"),
-  env_vars = NULL)
+  install_dir = tempfile("check_cran_install"), env_vars = NULL)
 }
 \arguments{
 \item{pkgs}{Vector of package names - note that unlike other \pkg{devtools}
@@ -29,7 +29,8 @@ to the same type as \code{\link{install.packages}()}.}
 \item{threads}{Number of concurrent threads to use for checking.
 It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 
-\item{check_dir}{Directory to store results.}
+\item{check_dir, install_dir}{Directory to store check and installation
+results.}
 
 \item{env_vars}{Environment variables set during \code{R CMD check}}
 }

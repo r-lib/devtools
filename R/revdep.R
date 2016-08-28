@@ -118,7 +118,8 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          type = getOption("pkgType"),
                          threads = getOption("Ncpus", 1),
                          env_vars = NULL,
-                         check_dir = NULL) {
+                         check_dir = NULL,
+                         install_dir = NULL) {
 
   pkg <- as.package(pkg)
 
@@ -145,6 +146,11 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
       call. = FALSE)
   }
 
+  if (is.null(install_dir)) {
+    install_dir <- file.path(pkg$path, "revdep", "install")
+    message("Saving install results in `revdep/install/`")
+  }
+
   message("Computing reverse dependencies... ", appendLF = FALSE)
   revdeps <- revdep(pkg$package, recursive = recursive, ignore = ignore,
     bioconductor = bioconductor, dependencies = dependencies)
@@ -160,6 +166,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
     type = type,
     threads = threads,
     check_dir = check_dir,
+    install_dir = install_dir,
     env_vars = env_vars
   )
   saveRDS(cache, revdep_cache_path(pkg))
