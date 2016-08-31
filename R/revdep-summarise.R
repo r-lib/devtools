@@ -81,7 +81,7 @@ revdep_check_results_md <- function(results, has_problem) {
   summaries <- vapply(results, format, character(1))
 
   paste0(
-    "# Check results\n",
+    "# Check results\n\n",
     paste0(length(summaries), " ", msg, "\n\n"),
     summary_table,
     timing,
