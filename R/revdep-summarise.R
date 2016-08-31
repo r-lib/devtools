@@ -64,13 +64,27 @@ revdep_check_results_md <- function(results, has_problem) {
     msg <- "packages"
   }
 
+  summary_table <- paste0(
+    paste0(revdep_check_results_kable(results), collapse = "\n"),
+    "\n\n")
+
+  if (has_problem) {
+    timing <- ""
+  } else {
+    timing <- paste0(
+      "Slowest checks\n\n",
+      paste0(revdep_check_timing_kable(results), collapse = "\n"),
+      "\n\n"
+    )
+  }
+
   summaries <- vapply(results, format, character(1))
 
   paste0(
-    "# Check results\n",
+    "# Check results\n\n",
     paste0(length(summaries), " ", msg, "\n\n"),
-    paste0(revdep_check_results_kable(results), collapse = "\n"),
-    "\n\n",
+    summary_table,
+    timing,
     paste0(summaries, collapse = "\n")
   )
 }
@@ -88,6 +102,20 @@ revdep_check_results_kable <- function(results) {
   rownames(summary_df) <- NULL
 
   knitr::kable(summary_df)
+}
+
+revdep_check_timing_kable <- function(results) {
+  if (length(results) == 0) return(character())
+
+  timing_df <- data.frame(
+    package = I(names(results)),
+    check_time = I(vapply(results, function(x) x$check_time, numeric(1)))
+  )
+  rownames(timing_df) <- NULL
+
+  timing_df <- utils::head(timing_df[order(-timing_df$check_time), ])
+
+  knitr::kable(timing_df)
 }
 
 #' @export

@@ -97,11 +97,9 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       message("Checked ", pkg_names[i], ": ", summarise_check_results(res, colour = TRUE))
       status_update(i, length(pkgs), check_start)
 
-      elapsed_time <- as.numeric(end_time - start_time, units = "secs")
-      writeLines(
-        sprintf("%d  %s  %.1f", i, pkgs[i], elapsed_time),
-        file.path(check_dir, paste0(pkgs[i], ".Rcheck"), "check-time.txt")
-      )
+      write_check_time(
+        i, pkgs[i], elapsed_time = as.numeric(end_time - start_time, units = "secs"),
+        file.path(check_dir, paste0(pkgs[i], ".Rcheck"), "check-time.txt"))
 
       NULL
     }
@@ -136,4 +134,12 @@ status_update <- function(i, n, start_time) {
     i, n, hm(elapsed), hm(estimated)
   )
   message(msg)
+}
+
+write_check_time <- function(i, pkgs, elapsed_time, path) {
+  writeLines(sprintf("%d  %s  %.1f", i, pkgs, elapsed_time), path)
+}
+
+parse_check_time <- function(path) {
+  read.table(file = path, header = FALSE)[[3]]
 }
