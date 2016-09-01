@@ -11,7 +11,7 @@ use_git <- function(message = "Initial commit", pkg = ".") {
   use_git_with_config(message = message, pkg = pkg)
 }
 
-use_git_with_config <- function(message, pkg, config_user = FALSE) {
+use_git_with_config <- function(message, pkg, config_user = FALSE, quiet = FALSE) {
   pkg <- as.package(pkg)
 
   if (uses_git(pkg$path)) {
@@ -19,16 +19,20 @@ use_git_with_config <- function(message, pkg, config_user = FALSE) {
     return(invisible())
   }
 
-  message("* Initialising repo")
+  if (!quiet) {
+    message("* Initialising repo")
+  }
   r <- git2r::init(pkg$path)
 
   if (config_user) {
     git2r::config(r, global = FALSE, user.name = "user", user.email = "user@email.xx")
   }
 
-  use_git_ignore(c(".Rproj.user", ".Rhistory", ".RData"), pkg = pkg)
+  use_git_ignore(c(".Rproj.user", ".Rhistory", ".RData"), pkg = pkg, quiet = quiet)
 
-  message("* Adding files and committing")
+  if (!quiet) {
+    message("* Adding files and committing")
+  }
   paths <- unlist(git2r::status(r))
   git2r::add(r, paths)
   git2r::commit(r, message)
@@ -188,11 +192,13 @@ use_git_hook <- function(hook, script, pkg = ".") {
 }
 
 
-use_git_ignore <- function(ignores, directory = ".", pkg = ".") {
+use_git_ignore <- function(ignores, directory = ".", pkg = ".", quiet = FALSE) {
   pkg <- as.package(pkg)
 
   paths <- paste0("`", ignores, "`", collapse = ", ")
-  message("* Adding ", paths, " to ", file.path(directory, ".gitignore"))
+  if (!quiet) {
+    message("* Adding ", paths, " to ", file.path(directory, ".gitignore"))
+  }
 
   path <- file.path(pkg$path, directory, ".gitignore")
   union_write(path, ignores)
