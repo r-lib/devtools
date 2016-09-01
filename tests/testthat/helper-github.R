@@ -3,7 +3,7 @@ create_in_temp <- function(pkg) {
   temp_path <- tempfile(pattern="devtools-test-")
   dir.create(temp_path)
   test_pkg <- file.path(temp_path, pkg)
-  capture.output(suppressMessages(create(test_pkg)))
+  capture.output(suppressMessages(create(test_pkg, description = list())))
   test_pkg
 }
 
