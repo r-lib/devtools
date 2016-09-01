@@ -9,16 +9,9 @@ create_in_temp <- function(pkg) {
 
 erase <- function(path) unlink(path, recursive = TRUE)
 
-skip_if_no_user_config <- function() {
-  if (is.null(git2r::config()$global$user.name) || is.null(git2r::config()$global$user.email)) {
-    skip("Need globally set user name and e-mail for this test")
-  }
-}
-
 ## fake GitHub connectivity: set a GitHub remote and add GitHub links
 mock_use_github <- function(pkg) {
-  skip_if_no_user_config()
-  use_git(pkg = pkg)
+  use_git_with_config(message = "initial", pkg = pkg, config_user = TRUE, quiet = TRUE)
   r <- git2r::repository(pkg)
   git2r::remote_add(r, "origin", "https://github.com/hadley/devtools.git")
   use_github_links(pkg)
