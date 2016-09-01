@@ -287,7 +287,11 @@ revdep_check_path <- function(pkg) {
 }
 
 revdep_cache_path <- function(pkg) {
-  file.path(pkg$path, "revdep", ".cache.rds")
+  if (!is.package(pkg))
+    path <- pkg
+  else
+    path <- pkg$path
+  file.path(path, "revdep", ".cache.rds")
 }
 
 check_dirs <- function(path) {
