@@ -100,7 +100,7 @@ package_info <- function(pkgs = loadedNamespaces(), include_base = FALSE,
     base <- vapply(pkgs, pkg_is_base, libpath = libpath, logical(1))
     pkgs <- pkgs[!base]
   }
-  pkgs <- sort(pkgs)
+  pkgs <- sort_ci(pkgs)
   attached <- pkgs %in% sub("^package:", "", search())
 
   desc <- lapply(pkgs, packageDescription, lib.loc = libpath)

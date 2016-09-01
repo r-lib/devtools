@@ -40,7 +40,7 @@ revdep <- function(pkg,
 
   deps <- tools::dependsOnPkgs(pkg, dependencies, recursive, installed = all)
   deps <- setdiff(deps, ignore)
-  sort(deps)
+  sort_ci(deps)
 }
 
 #' @rdname revdep
