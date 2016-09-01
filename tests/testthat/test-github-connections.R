@@ -10,7 +10,7 @@ test_that("git (non-)usage is detected, diagnosed, and can be added", {
                                 "not a git repository"),
                  'DR_GITHUB FOUND PROBLEMS')
 
-  expect_message(use_git_with_config(message = "initial", pkg = test_pkg, config_user = TRUE),
+  expect_message(use_git_with_config(message = "initial", pkg = test_pkg, add_user_config = TRUE),
                  "Initialising repo")
   expect_true(uses_git(test_pkg))
 
@@ -22,7 +22,7 @@ test_that("GitHub non-usage is handled", {
   skip_on_cran()
 
   test_pkg <- create_in_temp("testNoGitHub")
-  use_git_with_config(message = "initial", pkg = test_pkg, config_user = TRUE, quiet = TRUE)
+  use_git_with_config(message = "initial", pkg = test_pkg, add_user_config = TRUE, quiet = TRUE)
 
   expect_true(uses_git(test_pkg))
   expect_false(uses_github(test_pkg))

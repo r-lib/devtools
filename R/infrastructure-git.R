@@ -11,7 +11,7 @@ use_git <- function(message = "Initial commit", pkg = ".") {
   use_git_with_config(message = message, pkg = pkg)
 }
 
-use_git_with_config <- function(message, pkg, config_user = FALSE, quiet = FALSE) {
+use_git_with_config <- function(message, pkg, add_user_config = FALSE, quiet = FALSE) {
   pkg <- as.package(pkg)
 
   if (uses_git(pkg$path)) {
@@ -24,7 +24,7 @@ use_git_with_config <- function(message, pkg, config_user = FALSE, quiet = FALSE
   }
   r <- git2r::init(pkg$path)
 
-  if (config_user) {
+  if (add_user_config) {
     git2r::config(r, global = FALSE, user.name = "user", user.email = "user@email.xx")
   }
 
