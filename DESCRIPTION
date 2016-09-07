@@ -47,7 +47,7 @@ Suggests:
     gmailr (> 0.7.0)
 Remotes:
   hadley/testthat,
-  MangoTheCat,remotes
+  MangoTheCat/remotes
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
