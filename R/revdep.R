@@ -287,7 +287,7 @@ revdep_check_path <- function(pkg) {
 }
 
 revdep_cache_path <- function(pkg) {
-  revdep_cache_path(pkg$path)
+  revdep_cache_path_raw(pkg$path)
 }
 
 revdep_cache_path_raw <- function(path) {
