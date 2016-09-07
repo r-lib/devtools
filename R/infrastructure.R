@@ -555,7 +555,7 @@ use_revdep <- function(pkg = ".") {
     data = list(name = pkg$package),
     pkg = pkg
   )
-  use_git_ignore(revdep_cache_path(""), pkg = pkg)
+  use_git_ignore(revdep_cache_path_raw(""), pkg = pkg)
 }
 
 #' @rdname infrastructure
