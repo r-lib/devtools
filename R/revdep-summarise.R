@@ -3,12 +3,18 @@
 revdep_check_save_summary <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
+  revdep_check_save_readme(pkg)
+  revdep_check_save_problems(pkg)
+}
+
+revdep_check_save_readme <- function(pkg) {
   md_all <- revdep_check_summary_md(pkg)
   writeLines(md_all, file.path(pkg$path, "revdep", "README.md"))
+}
 
+revdep_check_save_problems <- function(pkg) {
   md_bad <- revdep_check_summary_md(pkg, has_problem = TRUE)
   writeLines(md_bad, file.path(pkg$path, "revdep", "problems.md"))
-
 }
 
 revdep_check_summary_md <- function(pkg, has_problem = FALSE) {
