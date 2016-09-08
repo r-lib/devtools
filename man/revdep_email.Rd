@@ -6,7 +6,7 @@
 \usage{
 revdep_email(pkg = ".", date, version, author = getOption("devtools.name"),
   draft = TRUE, unsent = NULL, template = "revdep/email.md",
-  only_problems = FALSE)
+  only_problems = TRUE)
 }
 \arguments{
 \item{pkg}{Path to package. Defaults to current directory.}

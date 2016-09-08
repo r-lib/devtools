@@ -21,7 +21,7 @@ revdep_email <- function(pkg = ".", date,
                          draft = TRUE,
                          unsent = NULL,
                          template = "revdep/email.md",
-                         only_problems = FALSE) {
+                         only_problems = TRUE) {
 
   pkg <- as.package(pkg)
   force(date)
