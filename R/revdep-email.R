@@ -5,6 +5,8 @@
 #'
 #' @inheritParams revdep_check
 #' @param date Date package will be submitted to CRAN
+#' @param version Version which will be used for the CRAN submission (usually
+#'   different from the current package version)
 #' @param author Name used to sign email
 #' @param draft If \code{TRUE}, creates as draft email; if \code{FALSE},
 #'   sends immediately.
@@ -14,6 +16,7 @@
 #' @keywords internal
 #' @export
 revdep_email <- function(pkg = ".", date,
+                         version,
                          author = getOption("devtools.name"),
                          draft = TRUE,
                          unsent = NULL,
@@ -22,6 +25,8 @@ revdep_email <- function(pkg = ".", date,
 
   pkg <- as.package(pkg)
   force(date)
+  force(version)
+
   if (is.null(author)) {
     stop("Please supply `author`", call. = FALSE)
   }
@@ -58,8 +63,8 @@ revdep_email <- function(pkg = ".", date,
   }
 
   gh <- github_info(pkg$path)
-  data <- lapply(results, maintainer_data, pkg = pkg, gh = gh, date = date,
-    author = author)
+  data <- lapply(results, maintainer_data, pkg = pkg, version = version,
+                 gh = gh, date = date, author = author)
   bodies <- lapply(data, whisker::whisker.render, template = template)
   subjects <- lapply(data, function(x) {
     paste0(x$your_package, " and " , x$my_package, " ", x$my_version, " release")
@@ -105,7 +110,7 @@ send_email <- function(email, draft = TRUE) {
   )
 }
 
-maintainer_data <- function(result, pkg, gh, date, author) {
+maintainer_data <- function(result, pkg, version, gh, date, author) {
   problems <- result$results
 
   summary <- indent(paste(trunc_middle(unlist(problems)), collapse = "\n\n"))
@@ -121,7 +126,7 @@ maintainer_data <- function(result, pkg, gh, date, author) {
     me = author,
     date = date,
     my_package = pkg$package,
-    my_version = pkg$version,
+    my_version = version,
     my_github = gh$fullname
   )
 }

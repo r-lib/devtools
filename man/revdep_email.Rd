@@ -4,7 +4,7 @@
 \alias{revdep_email}
 \title{Experimental email notification system.}
 \usage{
-revdep_email(pkg = ".", date, author = getOption("devtools.name"),
+revdep_email(pkg = ".", date, version, author = getOption("devtools.name"),
   draft = TRUE, unsent = NULL, template = "revdep/email.md",
   only_problems = FALSE)
 }
@@ -12,6 +12,9 @@ revdep_email(pkg = ".", date, author = getOption("devtools.name"),
 \item{pkg}{Path to package. Defaults to current directory.}
 
 \item{date}{Date package will be submitted to CRAN}
+
+\item{version}{Version which will be used for the CRAN submission (usually
+different from the current package version)}
 
 \item{author}{Name used to sign email}
 
