@@ -7,11 +7,6 @@ r:
  - release
  - devel
 
-addons:
-  apt:
-    packages:
-      - libhunspell-dev
-
 # We want to use devel devtools to load packages so we can catch package
 # installation issues sooner rather than later.
 r_github_packages:
