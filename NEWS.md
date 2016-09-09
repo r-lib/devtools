@@ -103,6 +103,8 @@
   (@ijlyttle, #1101)
   
 * `spell_check` gains a `dict` argument to set a custom language or dictionary
+
+* `release()` now checks documentation for spelling errors by default. 
   
 ## Bug fixes and minor improvements
 
