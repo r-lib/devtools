@@ -45,7 +45,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   on.exit(options(old), add = TRUE)
 
   # Create and use temporary library
-  dir.create(libpath, showWarnings = FALSE, recursive = TRUE)
+  lapply(libpath, dir.create, showWarnings = FALSE, recursive = TRUE)
   libpath <- normalizePath(libpath)
 
   # Add the temporary library and remove on exit
