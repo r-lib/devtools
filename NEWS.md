@@ -48,6 +48,8 @@
 * `use_github()` accepts a host argument, similar to `install_github()` 
   (@ijlyttle, #1101)
   
+* `spell_check` gains a `dict` argument to set a custom language or dictionary
+  
 ## Bug fixes and minor improvements
 
 * Update with Rtools-3.4 information, (@jimhester)
