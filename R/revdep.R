@@ -208,18 +208,19 @@ revdep_check_reset <- function(pkg = ".") {
 }
 
 revdep_check_from_cache <- function(pkg, cache) {
-  # Install this package into revdep library -----------------------------------
-  if (!file.exists(cache$libpath)) {
-    dir.create(cache$libpath, recursive = TRUE, showWarnings = FALSE)
-  }
+  # Always install this package into temporary library, to allow parallel ------
+  # revdep checks --------------------------------------------------------------
+  temp_libpath <- tempfile("revdep")
+  dir.create(temp_libpath)
+
   message(
     "Installing ", pkg$package, " ", pkg$version,
-    " and dependencies to ", cache$libpath
+    " and dependencies to ", temp_libpath
   )
-  withr::with_libpaths(cache$libpath, action = "prefix", {
+  withr::with_libpaths(temp_libpath, action = "prefix", {
     install(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE)
   })
-  on.exit(remove.packages(pkg$package, cache$libpath), add = TRUE)
+  on.exit(unlink(temp_libpath, recursive = TRUE), add = TRUE)
 
   cache$env_vars <- c(
     NOT_CRAN = "false",
@@ -228,6 +229,10 @@ revdep_check_from_cache <- function(pkg, cache) {
     cache$env_vars
   )
   show_env_vars(cache$env_vars)
+
+  # Use combination of temporary path (with own package) and cached libpath
+  # (for everything else) as check path
+  cache$check_libpath <- c(temp_libpath, cache$libpath)
 
   do.call(check_cran, cache)
 
