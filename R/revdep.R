@@ -40,7 +40,7 @@ revdep <- function(pkg,
 
   deps <- tools::dependsOnPkgs(pkg, dependencies, recursive, installed = all)
   deps <- setdiff(deps, ignore)
-  sort(deps)
+  sort_ci(deps)
 }
 
 #' @rdname revdep
@@ -287,7 +287,11 @@ revdep_check_path <- function(pkg) {
 }
 
 revdep_cache_path <- function(pkg) {
-  file.path(pkg$path, "revdep", ".cache.rds")
+  revdep_cache_path_raw(pkg$path)
+}
+
+revdep_cache_path_raw <- function(path) {
+  file.path(path, "revdep", ".cache.rds")
 }
 
 check_dirs <- function(path) {
