@@ -224,6 +224,7 @@ revdep_check_from_cache <- function(pkg, cache) {
   # revdep checks --------------------------------------------------------------
   temp_libpath <- tempfile("revdep")
   dir.create(temp_libpath)
+  on.exit(unlink(temp_libpath, recursive = TRUE), add = TRUE)
 
   message(
     "Installing ", pkg$package, " ", pkg$version, " to ", temp_libpath
@@ -231,7 +232,6 @@ revdep_check_from_cache <- function(pkg, cache) {
   withr::with_libpaths(c(temp_libpath, cache$libpath), {
     install(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE)
   })
-  on.exit(unlink(temp_libpath, recursive = TRUE), add = TRUE)
 
   cache$env_vars <- c(
     NOT_CRAN = "false",
