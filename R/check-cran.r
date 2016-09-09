@@ -52,6 +52,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   withr::with_libpaths(libpath, {
 
     rule("Installing dependencies") # --------------------------------------------
+    message("Package library: ", paste(.libPaths(), collapse = ", "))
+
     repos <- c(CRAN = cran_mirror())
     if (bioconductor) {
       check_suggested("BiocInstaller")
@@ -88,6 +90,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   withr::with_libpaths(check_libpath, {
 
     rule("Checking packages") # --------------------------------------------------
+    message("Package library: ", paste(.libPaths(), collapse = ", "))
+
     check_start <- Sys.time()
     pkg_names <- format(pkgs)
     check_pkg <- function(i) {
