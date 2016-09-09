@@ -230,7 +230,7 @@ revdep_check_from_cache <- function(pkg, cache) {
     "Installing ", pkg$package, " ", pkg$version, " to ", temp_libpath
   )
   withr::with_libpaths(c(temp_libpath, cache$libpath), {
-    install(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE)
+    install(pkg, reload = FALSE, quiet = TRUE, dependencies = FALSE)
   })
 
   cache$env_vars <- c(
