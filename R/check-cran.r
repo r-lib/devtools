@@ -46,7 +46,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   libpath <- normalizePath(libpath)
 
   # Add the temporary library and remove on exit
-  libpaths_orig <- withr::with_libpaths(libpath, {
+  withr::with_libpaths(libpath, {
 
     rule("Installing dependencies") # --------------------------------------------
     repos <- c(CRAN = cran_mirror())
@@ -115,9 +115,9 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       parallel::mclapply(seq_along(pkgs), check_pkg, mc.preschedule = FALSE,
         mc.cores = threads)
     }
-
-    invisible(check_dir)
   })
+
+  invisible(check_dir)
 }
 
 status_update <- function(i, n, start_time) {
