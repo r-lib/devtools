@@ -72,5 +72,5 @@ rd_files <- function(pkg) {
   path_man <- file.path(pkg$path, "man")
   files <- dir(path_man, pattern = "\\.[Rr]d$", full.names = TRUE)
   names(files) <- basename(files)
-  withr::with_collate("C", sort(files))
+  sort_ci(files)
 }
