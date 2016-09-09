@@ -1,5 +1,11 @@
 # devtools 1.12.0.9000
 
+* Package names and examples are sorted in case-insensitive C collation (#1322, @krlmlr).
+
+* `use_revdep()` adds `.gitignore` entry for check database (#1321, @krlmlr).
+
+* Improve Git integration. `use_git_ignore()` and `use_git_config()` gain `quiet` argument, tests work without setting `user.name` and `user.email` Git configuration settings (#1320, @krlmlr).
+
 * Improve Git status checks used in `release()` (#1205, @krlmlr).
 
 * Various minor improvements around checking of reverse dependencies
