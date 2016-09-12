@@ -1,4 +1,6 @@
 # devtools 1.12.0.9000
+* Bugfix for installation of dependencies in CRAN-like repositories such as
+  those created by drat (@jimhester, #1243, #1339).
 
 * Improve Git status checks used in `release()` (#1205, @krlmlr).
 
