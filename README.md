@@ -29,9 +29,9 @@ You can track (and contribute to) the development of `devtools` at https://githu
 
 3. Install the development version of devtools.
 
-        ```R
-        devtools::install_github("hadley/devtools")
-        ```
+   ```R
+   devtools::install_github("hadley/devtools")
+   ```
 
 ## Package development tools
 
