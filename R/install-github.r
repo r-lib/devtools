@@ -63,6 +63,7 @@ install_github <- function(repo, username = NULL,
   install_remotes(remotes, quiet = quiet, ...)
 }
 
+#' @export
 github_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
                        auth_token = github_pat(), sha = NULL,
                        host = "https://api.github.com") {
