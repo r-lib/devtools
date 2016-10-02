@@ -16,6 +16,7 @@ release_checks <- function(pkg = ".", built_path = NULL) {
   check_vignette_titles(pkg)
   check_news_md(pkg)
   check_remotes(pkg)
+  check_doc_files(pkg)
 }
 
 check_dev_versions <- function(pkg = ".") {
@@ -132,4 +133,14 @@ check_status <- function(status, name, warning) {
   )
 
   invisible(status)
+}
+
+check_doc_files <- function(pkg) {
+  pkg <- as.package(pkg)
+  doc_path <- file.path(pkg$path, "inst", "doc")
+
+  check_status(length(dir(doc_path)) == 0,
+               "/inst/doc does not contain errant files",
+               "Vignette testing files should be removed with clean_vignettes"
+  )
 }
