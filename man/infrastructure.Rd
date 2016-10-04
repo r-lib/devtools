@@ -9,6 +9,7 @@
 \alias{use_cran_badge}
 \alias{use_cran_comments}
 \alias{use_dev_version}
+\alias{use_gpl3_license}
 \alias{use_mit_license}
 \alias{use_package_doc}
 \alias{use_rcpp}
@@ -49,6 +50,8 @@ use_cran_badge(pkg = ".")
 use_mit_license(pkg = ".", copyright_holder = getOption("devtools.name",
   "<Author>"))
 
+use_gpl3_license(pkg = ".")
+
 use_dev_version(pkg = ".")
 }
 \arguments{
@@ -62,6 +65,9 @@ numbers, letters, _ and -. I recommend using lower case.}
 automatically.}
 
 \item{type}{CI tool to use. Currently supports codecov and coverall.}
+
+\item{copyright_holder}{The copyright holder for this package. Defaults to
+\code{getOption("devtools.name")}.}
 
 \item{copyright_holder}{The copyright holder for this package. Defaults to
 \code{getOption("devtools.name")}.}
@@ -142,6 +148,12 @@ Add a badge to show CRAN status and version number on the README
 
 Adds the necessary infrastructure to declare your package as
 distributed under the MIT license.
+}
+
+\section{\code{use_gpl3_license}}{
+
+Adds the necessary infrastructure to declare your package as
+distributed under the GPL v3.
 }
 
 \section{\code{use_dev_version}}{

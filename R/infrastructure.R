@@ -656,6 +656,26 @@ use_mit_license <- function(pkg = ".", copyright_holder = getOption("devtools.na
 }
 
 
+#' @rdname infrastructure
+#' @section \code{use_gpl3_license}:
+#' Adds the necessary infrastructure to declare your package as
+#' distributed under the GPL v3.
+#' @param copyright_holder The copyright holder for this package. Defaults to
+#'   \code{getOption("devtools.name")}.
+#' @export
+use_gpl3_license <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  # Update the DESCRIPTION
+  message("* Updating license field in DESCRIPTION.")
+  descPath <- file.path(pkg$path, "DESCRIPTION")
+  DESCRIPTION <- read_dcf(descPath)
+  DESCRIPTION$License <- "GPL-3 + file LICENSE"
+  write_dcf(descPath, DESCRIPTION)
+
+  use_template("gpl-v3.md", "LICENSE", pkg = pkg)
+}
+
 #' @section \code{use_dev_version}:
 #' This adds ".9000" to the package \code{DESCRIPTION}, adds a new heading to
 #' \code{NEWS.md} (if it exists), and then checks the result into git.
