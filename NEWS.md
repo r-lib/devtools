@@ -1,20 +1,5 @@
 # devtools 1.12.0.9000
 
-* More tweaks to `revdep_check()` and friends to make debugging easier when
-  something goes wrong. This includes:
-  
-    * `revdep_check()` and `revdep_check_resume()` gain a skip argument
-      which takes a character vector of packages to skip.
-      
-    * `revdep_check()` and `check_cran()` gain a `quiet_check` argument.
-      You can use `quiet_check = FALSE` to see the actual text of R CMD
-      check as it runs (not recommending with multiple threads).
-  
-    * `revdep_check_resume()` now takes `...` which can be used to 
-      override settings from `revdep_check()`. For debugging a problem
-      with package checks, try 
-      `revdep_check(threads = 1, quiet_check = FALSE)`
-
 * New `use_gpl3_license()` sets the license field in `DESCRIPTION` and
   includes a copy of the license in `LICENSE`.
 

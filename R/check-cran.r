@@ -20,9 +20,6 @@
 #' @param threads Number of concurrent threads to use for checking.
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
 #' @param check_dir Directory to store results.
-#' @param quiet_check If \code{TRUE}, suppresses individual \code{R CMD
-#'   check} output and only prints summaries. Set to \code{FALSE} for
-#'   debugging.
 #' @return Returns (invisibly) the directory where check results are stored.
 #' @keywords internal
 #' @inheritParams check
@@ -32,8 +29,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
                        type = getOption("pkgType"),
                        threads = getOption("Ncpus", 1),
                        check_dir = tempfile("check_cran"),
-                       env_vars = NULL,
-                       quiet_check = TRUE) {
+                       env_vars = NULL) {
 
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
@@ -51,30 +47,25 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
   # Add the temporary library and remove on exit
   libpaths_orig <- withr::with_libpaths(libpath, {
+
+    rule("Installing dependencies") # --------------------------------------------
     repos <- c(CRAN = cran_mirror())
     if (bioconductor) {
       check_suggested("BiocInstaller")
       repos <- c(repos, BiocInstaller::biocinstallRepos())
     }
-
-    rule("Installing dependencies") # ------------------------------------------
-
-    deps <- package_deps(pkgs, repos = repos, type = type, dependencies = TRUE)
-    needed <- deps$diff != CURRENT
-    if (any(needed)) {
-      message("Installing ", sum(needed), " packages: ", comma(pkgs))
-      update(deps, Ncpus = threads, quiet = TRUE)
-    }
-
-    # Download source packages
     available_src <- available_packages(repos, "source")
+
+    message("Determining packages to update... ", appendLF = FALSE) # ------------
+    deps <- package_deps(pkgs, repos = repos, type = type, dependencies = TRUE)
+    message(paste(deps$package, collapse = ", "))
+    update(deps, Ncpus = threads, quiet = TRUE)
+
+    message("Downloading source packages for checking") #-------------------------
     urls <- lapply(pkgs, package_url, repos = repos, available = available_src)
     ok <- vapply(urls, function(x) !is.na(x$name), logical(1))
     if (any(!ok)) {
-      message(
-        "Skipping ", sum(!ok), " packages without source:",
-        comma(pkgs[!ok])
-      )
+      message("Couldn't find source for: ", paste(pkgs[!ok], collapse = ", "))
       urls <- urls[ok]
       pkgs <- pkgs[ok]
     }
@@ -84,17 +75,12 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
     needs_download <- !vapply(local_urls, is_source_pkg, logical(1))
     if (any(needs_download)) {
-      message(
-        "Downloading ", sum(needs_download), " source packages: ",
-        comma(pkgs[needs_download])
-      )
+      message("Downloading ", sum(needs_download), " packages")
       Map(utils::download.file, remote_urls[needs_download],
         local_urls[needs_download], quiet = TRUE)
     }
 
-    rule("Checking packages") # ------------------------------------------------
-    message("Checking ", length(pkgs), " packages: ", comma(pkgs))
-
+    rule("Checking packages") # --------------------------------------------------
     check_start <- Sys.time()
     pkg_names <- format(pkgs)
     check_pkg <- function(i) {
@@ -104,7 +90,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
         args = "--no-multiarch --no-manual --no-codoc",
         env_vars = env_vars,
         check_dir = check_dir,
-        quiet = quiet_check
+        quiet = TRUE
       )
       end_time <- Sys.time()
 
