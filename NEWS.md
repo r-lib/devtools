@@ -1,5 +1,9 @@
 # devtools 1.12.0.9000
 
+* Automated revdep check e-mails now can use the new `my_version` and
+  `you_cant_install` variables. The e-mail template has been updated
+  to use these variables (#1285, @krlmlr).
+
 * Various minor improvements around checking of reverse dependencies
   (#1284, @krlmlr). All packages involved are listed at the start,
   the whole process is now more resilient against package
