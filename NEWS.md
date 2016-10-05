@@ -1,5 +1,7 @@
 # devtools 1.12.0.9000
 
+* Own package is installed in temporary library for revdep checking (#1338, @krlmlr).
+
 * Improve Git status checks used in `release()` (#1205, @krlmlr).
 
 * Various minor improvements around checking of reverse dependencies
