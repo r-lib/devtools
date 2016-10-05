@@ -159,11 +159,6 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
   revdeps <- revdep(pkg$package, recursive = recursive, ignore = ignore,
     bioconductor = bioconductor, dependencies = dependencies)
 
-  if (length(skip) > 0) {
-    message("Skipping: ", comma(skip))
-    revdeps <- setdiff(revdeps, skip)
-  }
-
   # Save arguments and revdeps to a cache
   cache <- list(
     pkgs = revdeps,
@@ -187,7 +182,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
 #' @rdname revdep_check
 #' @param ... Optionally, override original value of arguments to
 #'   \code{revdep_check}. Use with care.
-revdep_check_resume <- function(pkg = ".", ..., skip = character()) {
+revdep_check_resume <- function(pkg = ".", ...) {
   pkg <- as.package(pkg)
 
   cache_path <- revdep_cache_path(pkg)
@@ -198,11 +193,6 @@ revdep_check_resume <- function(pkg = ".", ..., skip = character()) {
 
   cache <- readRDS(cache_path)
   cache <- utils::modifyList(cache, list(...))
-
-  if (length(cache$pkgs) > 0) {
-    message("Skipping: ", comma(skip))
-    cache$pkgs <- setdiff(cache$pkgs, skip)
-  }
 
   # Don't need to check packages that we've already checked.
   check_dirs <- dir(cache$check_dir, full.names = TRUE)
@@ -272,6 +262,11 @@ revdep_check_from_cache <- function(pkg, cache) {
   # Append temporary path to libpath to avoid duplicate installation of this
   # package
   cache$libpath <- c(cache$libpath, temp_libpath)
+
+  if (length(cache$skip) > 0) {
+    message("Skipping: ", comma(cache$skip))
+    cache$pkgs <- setdiff(cache$pkgs, cache$skip)
+  }
 
   do.call(check_cran, cache)
 

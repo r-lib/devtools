@@ -19,7 +19,7 @@ revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   threads = getOption("Ncpus", 1), env_vars = NULL, check_dir = NULL,
   install_dir = NULL, quiet_check = TRUE)
 
-revdep_check_resume(pkg = ".", ..., skip = character())
+revdep_check_resume(pkg = ".", ...)
 
 revdep_check_reset(pkg = ".")
 }
