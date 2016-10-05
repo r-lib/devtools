@@ -8,7 +8,8 @@ check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath,
   check_libpath = libpath, bioconductor = FALSE,
   type = getOption("pkgType"), threads = getOption("Ncpus", 1),
   check_dir = tempfile("check_cran"),
-  install_dir = tempfile("check_cran_install"), env_vars = NULL)
+  install_dir = tempfile("check_cran_install"), env_vars = NULL,
+  quiet_check = TRUE)
 }
 \arguments{
 \item{pkgs}{Vector of package names - note that unlike other \pkg{devtools}
@@ -37,6 +38,10 @@ It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 results.}
 
 \item{env_vars}{Environment variables set during \code{R CMD check}}
+
+\item{quiet_check}{If \code{TRUE}, suppresses individual \code{R CMD
+check} output and only prints summaries. Set to \code{FALSE} for
+debugging.}
 }
 \value{
 Returns (invisibly) the directory where check results are stored.
