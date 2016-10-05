@@ -93,6 +93,8 @@ print.maintainers <- function(x, ...) {
 #'
 #' @inheritParams revdep
 #' @param pkg Path to package. Defaults to current directory.
+#' @param skip A character vector of package names to exclude from the
+#'   checks.
 #' @inheritParams check_cran
 #' @param check_dir A temporary directory to hold the results of the package
 #'   checks. This should not exist as after the revdep checks complete
@@ -113,12 +115,14 @@ print.maintainers <- function(x, ...) {
 #' }
 revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
+                         skip = character(),
                          libpath = getOption("devtools.revdep.libpath"),
                          srcpath = libpath, bioconductor = FALSE,
                          type = getOption("pkgType"),
                          threads = getOption("Ncpus", 1),
                          env_vars = NULL,
-                         check_dir = NULL) {
+                         check_dir = NULL,
+                         quiet_check = TRUE) {
 
   pkg <- as.package(pkg)
 
@@ -145,22 +149,27 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
       call. = FALSE)
   }
 
-  message("Computing reverse dependencies... ", appendLF = FALSE)
+  message("Computing reverse dependencies... ")
   revdeps <- revdep(pkg$package, recursive = recursive, ignore = ignore,
     bioconductor = bioconductor, dependencies = dependencies)
 
-  message(paste(revdeps, collapse = ", "))
+  if (length(skip) > 0) {
+    message("Skipping: ", comma(skip))
+    revdeps <- setdiff(revdeps, skip)
+  }
 
   # Save arguments and revdeps to a cache
   cache <- list(
     pkgs = revdeps,
+    skip = skip,
     libpath = libpath,
     srcpath = srcpath,
     bioconductor = bioconductor,
     type = type,
     threads = threads,
     check_dir = check_dir,
-    env_vars = env_vars
+    env_vars = env_vars,
+    quiet_check = quiet_check
   )
   saveRDS(cache, revdep_cache_path(pkg))
 
@@ -169,7 +178,9 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
 
 #' @export
 #' @rdname revdep_check
-revdep_check_resume <- function(pkg = ".") {
+#' @param ... Optionally, override original value of arguments to
+#'   \code{revdep_check}. Use with care.
+revdep_check_resume <- function(pkg = ".", ..., skip = character()) {
   pkg <- as.package(pkg)
 
   cache_path <- revdep_cache_path(pkg)
@@ -179,6 +190,12 @@ revdep_check_resume <- function(pkg = ".") {
   }
 
   cache <- readRDS(cache_path)
+  cache <- utils::modifyList(cache, list(...))
+
+  if (length(cache$pkgs) > 0) {
+    message("Skipping: ", comma(skip))
+    cache$pkgs <- setdiff(cache$pkgs, skip)
+  }
 
   # Don't need to check packages that we've already checked.
   check_dirs <- dir(cache$check_dir, full.names = TRUE)
