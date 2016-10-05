@@ -1,5 +1,7 @@
 # devtools 1.12.0.9000
 
+* `revdep_check()` collects timing information in `timing.md` (#1319, @krlmlr).
+
 * Improve Git status checks used in `release()` (#1205, @krlmlr).
 
 * Various minor improvements around checking of reverse dependencies
