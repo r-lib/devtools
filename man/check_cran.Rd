@@ -5,8 +5,9 @@
 \title{Check a package from CRAN.}
 \usage{
 check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath,
-  bioconductor = FALSE, type = getOption("pkgType"),
-  threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"),
+  check_libpath = libpath, bioconductor = FALSE,
+  type = getOption("pkgType"), threads = getOption("Ncpus", 1),
+  check_dir = tempfile("check_cran"),
   install_dir = tempfile("check_cran_install"), env_vars = NULL)
 }
 \arguments{
@@ -20,6 +21,9 @@ with it so you don't have to download all the packages every time.}
 \item{srcpath}{Path to directory to store source versions of dependent
 packages - again, this saves a lot of time because you don't need to
 redownload the packages every time you run the package.}
+
+\item{check_libpath}{Path to library used for checking, should contain
+the top-level library from \code{libpath}.}
 
 \item{bioconductor}{Include bioconductor packages in checking?}
 

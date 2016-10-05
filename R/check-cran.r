@@ -14,6 +14,8 @@
 #' @param srcpath Path to directory to store source versions of dependent
 #'   packages - again, this saves a lot of time because you don't need to
 #'   redownload the packages every time you run the package.
+#' @param check_libpath Path to library used for checking, should contain
+#'   the top-level library from \code{libpath}.
 #' @param bioconductor Include bioconductor packages in checking?
 #' @param type binary Package type to test (source, mac.binary etc). Defaults
 #'   to the same type as \code{\link{install.packages}()}.
@@ -26,7 +28,8 @@
 #' @inheritParams check
 #' @export
 check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
-                       srcpath = libpath, bioconductor = FALSE,
+                       srcpath = libpath, check_libpath = libpath,
+                       bioconductor = FALSE,
                        type = getOption("pkgType"),
                        threads = getOption("Ncpus", 1),
                        check_dir = tempfile("check_cran"),
@@ -44,13 +47,15 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   on.exit(options(old), add = TRUE)
 
   # Create and use temporary library
-  if (!file.exists(libpath)) dir.create(libpath)
+  lapply(libpath, dir.create, showWarnings = FALSE, recursive = TRUE)
   libpath <- normalizePath(libpath)
 
   # Add the temporary library and remove on exit
-  libpaths_orig <- withr::with_libpaths(libpath, {
+  withr::with_libpaths(libpath, {
 
     rule("Installing dependencies") # --------------------------------------------
+    message("Package library: ", paste(.libPaths(), collapse = ", "))
+
     repos <- c(CRAN = cran_mirror())
     if (bioconductor) {
       check_suggested("BiocInstaller")
@@ -84,8 +89,14 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       Map(utils::download.file, remote_urls[needs_download],
         local_urls[needs_download], quiet = TRUE)
     }
+  })
+
+  # Add the temporary library and remove on exit
+  withr::with_libpaths(check_libpath, {
 
     rule("Checking packages") # --------------------------------------------------
+    message("Package library: ", paste(.libPaths(), collapse = ", "))
+
     check_start <- Sys.time()
     pkg_names <- format(pkgs)
     check_pkg <- function(i) {
@@ -118,9 +129,9 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
       parallel::mclapply(seq_along(pkgs), check_pkg, mc.preschedule = FALSE,
         mc.cores = threads)
     }
-
-    invisible(check_dir)
   })
+
+  invisible(check_dir)
 }
 
 status_update <- function(i, n, start_time) {

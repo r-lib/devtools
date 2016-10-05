@@ -11,6 +11,8 @@
 
 * Improve Git integration. `use_git_ignore()` and `use_git_config()` gain `quiet` argument, tests work without setting `user.name` and `user.email` Git configuration settings (#1320, @krlmlr).
 
+* Own package is installed in temporary library for revdep checking (#1338, @krlmlr).
+
 * Improve Git status checks used in `release()` (#1205, @krlmlr).
 
 * Automated revdep check e-mails now can use the new `my_version` and
