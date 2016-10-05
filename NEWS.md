@@ -1,5 +1,8 @@
 # devtools 1.12.0.9000
 
+* Add a `check_bioconductor()` internal function to automatically install
+  BiocInstaller() if it is not installed and the user wants to do so.
+
 * More tweaks to `revdep_check()` and friends to make debugging easier when
   something goes wrong. This includes:
   

@@ -109,7 +109,7 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
   deps <- unlist(lapply(parsed, `[[`, "name"), use.names = FALSE)
 
   if (is_bioconductor(pkg)) {
-    check_suggested("BiocInstaller")
+    check_bioconductor()
     bioc_repos <- BiocInstaller::biocinstallRepos()
 
     missing_repos <- setdiff(names(bioc_repos), names(repos))
