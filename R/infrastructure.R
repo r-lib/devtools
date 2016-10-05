@@ -660,8 +660,6 @@ use_mit_license <- function(pkg = ".", copyright_holder = getOption("devtools.na
 #' @section \code{use_gpl3_license}:
 #' Adds the necessary infrastructure to declare your package as
 #' distributed under the GPL v3.
-#' @param copyright_holder The copyright holder for this package. Defaults to
-#'   \code{getOption("devtools.name")}.
 #' @export
 use_gpl3_license <- function(pkg = ".") {
   pkg <- as.package(pkg)

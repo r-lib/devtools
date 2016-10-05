@@ -68,9 +68,6 @@ automatically.}
 
 \item{copyright_holder}{The copyright holder for this package. Defaults to
 \code{getOption("devtools.name")}.}
-
-\item{copyright_holder}{The copyright holder for this package. Defaults to
-\code{getOption("devtools.name")}.}
 }
 \description{
 Add useful infrastructure to a package.
