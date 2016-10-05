@@ -46,6 +46,7 @@ is_installed <- function(pkg, version = 0) {
   !is.na(installed_version) && installed_version >= version
 }
 
+utils::globalVariables("biocLite")
 check_bioconductor <- function() {
   if (!is_installed("BiocInstaller")) {
     msg <- paste0("'BiocInstaller' must be installed to install Bioconductor packages")
