@@ -18,7 +18,25 @@
 * New `use_gpl3_license()` sets the license field in `DESCRIPTION` and
   includes a copy of the license in `LICENSE`.
 
+* `revdep_check()` collects timing information in `timing.md` (#1319, @krlmlr).
+
+* Package names and examples are sorted in case-insensitive C collation (#1322, @krlmlr).
+
+* `use_revdep()` adds `.gitignore` entry for check database (#1321, @krlmlr).
+
+* Improve Git integration. `use_git_ignore()` and `use_git_config()` gain `quiet` argument, tests work without setting `user.name` and `user.email` Git configuration settings (#1320, @krlmlr).
+
+* Own package is installed in temporary library for revdep checking (#1338, @krlmlr).
+
 * Improve Git status checks used in `release()` (#1205, @krlmlr).
+
+* Automated revdep check e-mails now can use the new `my_version` and
+  `you_cant_install` variables. The e-mail template has been updated
+  to use these variables (#1285, @krlmlr).
+
+* Installation failures are logged during revdep checking, by default in
+  `revdep/install`. Once an installation has failed, it is not attempted
+  a second time (#1300, @krlmlr).
 
 * Various minor improvements around checking of reverse dependencies
   (#1284, @krlmlr). All packages involved are listed at the start,

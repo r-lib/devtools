@@ -237,6 +237,10 @@ strip_internal_calls <- function(x, package) {
   }
 }
 
+sort_ci <- function(x) {
+  withr::with_collate("C", x[order(tolower(x), x)])
+}
+
 comma <- function(x, at_most = 20) {
   if (length(x) > at_most) {
     x <- c(x[seq_len(at_most)], "...")

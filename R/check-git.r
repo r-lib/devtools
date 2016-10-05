@@ -6,7 +6,6 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information.
 #' @keywords internal
-#' @export
 git_checks <- function(pkg = ".") {
   pkg <- as.package(pkg)
   message("Running Git checks for ", pkg$package)

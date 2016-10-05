@@ -25,11 +25,6 @@ bioc_required: true
 before_install:
   - if [[ "$TRAVIS_R_VERSION_STRING" = 'devel' ]]; then mkdir ~/.R && echo 'CXX1X=g++ -std=c++0x -g -O2 -fPIC' > ~/.R/Makevars; fi
 
-# The git config settings are not setup on travis by default
-before_script:
-    - git config --global user.name "travis"
-    - git config --global user.email "travis@example.org"
-
 # Only report coverage for the release version
 after_success:
   - test $TRAVIS_R_VERSION_STRING = 'release' && Rscript -e 'covr::codecov()'

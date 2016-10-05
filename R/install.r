@@ -49,6 +49,9 @@
 #'   SHA1 reference hasn't changed from the currently installed version.
 #' @param metadata Named list of metadata entries to be added to the
 #'   \code{DESCRIPTION} after installation.
+#' @param out_dir Directory to store installation output in case of failure.
+#' @param skip_if_log_exists If the \code{out_dir} is defined and contains
+#'   a file named \code{package.out}, no installation is attempted.
 #' @param ... additional arguments passed to \code{\link{install.packages}}
 #'   when installing dependencies. \code{pkg} is installed with
 #'   \code{R CMD INSTALL}.
@@ -58,14 +61,16 @@
 #'   set.
 install <-
   function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
-                    args = getOption("devtools.install.args"), quiet = FALSE,
-                    dependencies = NA, upgrade_dependencies = TRUE,
-                    build_vignettes = FALSE,
-                    keep_source = getOption("keep.source.pkgs"),
-                    threads = getOption("Ncpus", 1),
-                    force_deps = FALSE,
-                    metadata = remote_metadata(as.package(pkg)),
-                    ...) {
+           args = getOption("devtools.install.args"), quiet = FALSE,
+           dependencies = NA, upgrade_dependencies = TRUE,
+           build_vignettes = FALSE,
+           keep_source = getOption("keep.source.pkgs"),
+           threads = getOption("Ncpus", 1),
+           force_deps = FALSE,
+           metadata = remote_metadata(as.package(pkg)),
+           out_dir = NULL,
+           skip_if_log_exists = FALSE,
+           ...) {
 
   pkg <- as.package(pkg)
   check_build_tools(pkg)
@@ -89,6 +94,16 @@ install <-
     return(invisible(FALSE))
   }
 
+  if (!is.null(out_dir)) {
+    out_file <- file.path(out_dir, paste0(pkg$package, ".out"))
+    if (skip_if_log_exists && file.exists(out_file)) {
+      message("Skipping ", pkg$package, ", installation failed before, see log in ", out_file)
+      return(invisible(FALSE))
+    }
+  } else {
+    out_file <- NULL
+  }
+
   installing$packages <- c(installing$packages, pkg$package)
   if (!quiet) {
     message("Installing ", pkg$package)
@@ -110,7 +125,8 @@ install <-
   on.exit(installing$remote_deps <- NULL, add = TRUE)
 
   install_deps(pkg, dependencies = initial_deps, upgrade = upgrade_dependencies,
-    threads = threads, force_deps = force_deps, quiet = quiet, ...)
+    threads = threads, force_deps = force_deps, quiet = quiet, ...,
+    out_dir = out_dir, skip_if_log_exists = skip_if_log_exists)
 
   # Build the package. Only build locally if it doesn't have vignettes
   has_vignettes <- length(tools::pkgVignettes(dir = pkg$path)$docs > 0)
@@ -133,10 +149,15 @@ install <-
 
   built_path <- normalizePath(built_path, winslash = "/")
   R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""),
-    quiet = quiet)
+    fun = system2_check,
+    quiet = quiet || !is.null(out_file), out_file = out_file)
+
+  # Remove immediately upon success
+  unlink(out_file)
 
   install_deps(pkg, dependencies = final_deps, upgrade = upgrade_dependencies,
-    threads = threads, force_deps = force_deps, quiet = quiet, ...)
+    threads = threads, force_deps = force_deps, quiet = quiet, ...,
+    out_dir = out_dir, skip_if_log_exists = skip_if_log_exists)
 
   if (length(metadata) > 0) {
     add_metadata(inst(pkg$package), metadata)
