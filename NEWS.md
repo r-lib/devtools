@@ -9,6 +9,10 @@
   `you_cant_install` variables. The e-mail template has been updated
   to use these variables (#1285, @krlmlr).
 
+* Installation failures are logged during revdep checking, by default in
+  `revdep/install`. Once an installation has failed, it is not attempted
+  a second time (#1300, @krlmlr).
+
 * Various minor improvements around checking of reverse dependencies
   (#1284, @krlmlr). All packages involved are listed at the start,
   the whole process is now more resilient against package

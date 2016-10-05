@@ -8,7 +8,8 @@ install(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   args = getOption("devtools.install.args"), quiet = FALSE,
   dependencies = NA, upgrade_dependencies = TRUE, build_vignettes = FALSE,
   keep_source = getOption("keep.source.pkgs"), threads = getOption("Ncpus",
-  1), force_deps = FALSE, metadata = remote_metadata(as.package(pkg)), ...)
+  1), force_deps = FALSE, metadata = remote_metadata(as.package(pkg)),
+  out_dir = NULL, skip_if_log_exists = FALSE, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -57,6 +58,11 @@ SHA1 reference hasn't changed from the currently installed version.}
 
 \item{metadata}{Named list of metadata entries to be added to the
 \code{DESCRIPTION} after installation.}
+
+\item{out_dir}{Directory to store installation output in case of failure.}
+
+\item{skip_if_log_exists}{If the \code{out_dir} is defined and contains
+a file named \code{package.out}, no installation is attempted.}
 
 \item{...}{additional arguments passed to \code{\link{install.packages}}
 when installing dependencies. \code{pkg} is installed with

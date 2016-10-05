@@ -16,7 +16,8 @@ revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
   libpath = getOption("devtools.revdep.libpath"), srcpath = libpath,
   bioconductor = FALSE, type = getOption("pkgType"),
-  threads = getOption("Ncpus", 1), env_vars = NULL, check_dir = NULL)
+  threads = getOption("Ncpus", 1), env_vars = NULL, check_dir = NULL,
+  install_dir = NULL)
 
 revdep_check_resume(pkg = ".")
 
@@ -57,6 +58,9 @@ It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 \item{check_dir}{A temporary directory to hold the results of the package
 checks. This should not exist as after the revdep checks complete
 successfully this directory is blown away.}
+
+\item{install_dir}{Directory to store check and installation
+results.}
 }
 \value{
 An invisible list of results. But you'll probably want to look
