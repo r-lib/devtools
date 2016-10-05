@@ -49,7 +49,7 @@
 * fix auto download method selection for `install_github()` on R 3.1 which
   lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)
 
-* add timestamp to messages in `build_win()` (@achubaty, #1366).  
+* add timestamp to messages in `build_win()` (@achubaty, #1367).  
 
 # devtools 1.12.0
 
