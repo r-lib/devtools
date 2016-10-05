@@ -8,7 +8,6 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @inheritParams install_deps
 #' @keywords programming
 #' @seealso \code{\link{clean_vignettes}} to remove the pdfs in
 #'   \file{inst/doc} created from vignettes

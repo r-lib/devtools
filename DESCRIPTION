@@ -25,6 +25,7 @@ Imports:
     rstudioapi (>= 0.2.0),
     jsonlite,
     stats,
+    remotes,
     git2r (>= 0.11.0),
     withr
 Suggests:
@@ -45,7 +46,8 @@ Suggests:
     covr,
     gmailr (> 0.7.0)
 Remotes:
-  hadley/testthat
+  hadley/testthat,
+  MangoTheCat/remotes
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
