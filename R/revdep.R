@@ -293,6 +293,7 @@ parse_package_check <- function(path) {
       bug_reports = desc$BugReports,
       package = desc$Package,
       version = desc$Version,
+      check_time = parse_check_time(file.path(path, "check-time.txt")),
       results = parse_check_results(file.path(path, "00check.log"))
     ),
     class = "revdep_check_result"
