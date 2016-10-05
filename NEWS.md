@@ -3,6 +3,8 @@
 * New `use_gpl3_license()` sets the license field in `DESCRIPTION` and
   includes a copy of the license in `LICENSE`.
 
+* `revdep_check()` collects timing information in `timing.md` (#1319, @krlmlr).
+
 * Improve Git status checks used in `release()` (#1205, @krlmlr).
 
 * Automated revdep check e-mails now can use the new `my_version` and
