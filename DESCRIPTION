@@ -27,7 +27,6 @@ Imports:
     stats,
     git2r (>= 0.11.0),
     withr,
-    rhub
 Suggests:
     curl (>= 0.9),
     crayon,
@@ -44,7 +43,8 @@ Suggests:
     evaluate,
     rversions,
     covr,
-    gmailr (> 0.7.0)
+    gmailr (> 0.7.0),
+    rhub
 Remotes:
   hadley/testthat,
   r-hub/rhub

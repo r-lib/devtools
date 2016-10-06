@@ -33,6 +33,8 @@
 rhub_check <- function(pkg = ".", platform = NULL, email = NULL,
                        interactive = FALSE, ...) {
 
+  check_suggested("rhub")
+
   pkg <- as.package(pkg)
   email <- email %||% maintainer(pkg)$email
 
@@ -66,5 +68,6 @@ rhub_check <- function(pkg = ".", platform = NULL, email = NULL,
 #' @export
 
 rhub_check_status <- function(handle) {
+  check_suggested("rhub")
   rhub::status(handle)
 }
