@@ -5,7 +5,7 @@
 \title{Load complete package.}
 \usage{
 load_all(pkg = ".", reset = TRUE, recompile = FALSE, export_all = TRUE,
-  quiet = FALSE, create = NA)
+  helpers = TRUE, quiet = FALSE, create = NA)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -24,6 +24,8 @@ This is equivalent to running \code{\link{clean_dll}} before
 \item{export_all}{If \code{TRUE} (the default), export all objects.
 If \code{FALSE}, export only the objects that are listed as exports
 in the NAMESPACE file.}
+
+\item{helpers}{if \code{TRUE} loads \pkg{testthat} test helpers.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
