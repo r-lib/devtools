@@ -46,20 +46,29 @@ is_installed <- function(pkg, version = 0) {
   !is.na(installed_version) && installed_version >= version
 }
 
-utils::globalVariables("biocLite")
 check_bioconductor <- function() {
-  if (!is_installed("BiocInstaller")) {
-    msg <- paste0("'BiocInstaller' must be installed to install Bioconductor packages")
-    if (interactive()) {
-      message(msg, "\nWould you like to install it?\n(This will source https://bioconductor.org/biocLite.R)")
-      if (menu(c("Yes", "No")) == 1) {
-        source("https://bioconductor.org/biocLite.R")
-        biocLite()
-      }
-    } else {
-    stop(msg, call. = FALSE)
-    }
+  if (is_installed("BiocInstaller")) {
+    return()
   }
+
+  msg <- paste0("'BiocInstaller' must be installed to install Bioconductor packages")
+  if (!interactive()) {
+    stop(msg, call. = FALSE)
+  }
+
+  message(
+    msg, ".\n",
+    "Would you like to install it? ",
+    "This will source <https://bioconductor.org/biocLite.R>."
+  )
+
+  if (menu(c("Yes", "No")) != 1) {
+    stop("'BiocInstaller' not installed", call. = FALSE)
+  }
+
+  suppressMessages(
+    source("https://bioconductor.org/biocLite.R")
+  )
 }
 
 check_suggested <- function(pkg, version = NULL, compare = NA) {
