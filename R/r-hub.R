@@ -1,5 +1,5 @@
 
-#' Build and check packag on r-hub
+#' Build and check package on r-hub
 #'
 #' It runs \code{\link{build}} on the package, with the arguments specified
 #' in \code{args}, and then submits it to the r-hub builder at
