@@ -267,6 +267,7 @@ revdep_check_from_cache <- function(pkg, cache) {
     message("Skipping: ", comma(cache$skip))
     cache$pkgs <- setdiff(cache$pkgs, cache$skip)
   }
+  cache$skip <- NULL
 
   do.call(check_cran, cache)
 
