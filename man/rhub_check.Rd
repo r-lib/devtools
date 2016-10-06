@@ -4,7 +4,8 @@
 \alias{rhub_check}
 \title{Build and check package on r-hub}
 \usage{
-rhub_check(pkg = ".", platform = NULL, interactive = FALSE, ...)
+rhub_check(pkg = ".", platform = NULL, email = NULL,
+  interactive = FALSE, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -14,6 +15,9 @@ rhub_check(pkg = ".", platform = NULL, interactive = FALSE, ...)
 \code{\link[rhub]{platforms}} for the current platform list.
 if \code{NULL}, then the desired platform can be selected
 interactively.}
+
+\item{email}{email address to notify, defaults to the maintainer
+address in the package.}
 
 \item{interactive}{whether to show the status of the build
 interactively. R-hub will send an email to the package maintainer's
