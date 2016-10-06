@@ -230,6 +230,9 @@ revdep_check_from_cache <- function(pkg, cache) {
     "Installing dependencies for ", pkg$package, " to ", cache$libpath
   )
 
+  # For installing from GitHub, if git2r is not installed in the cache$libpath
+  requireNamespace("git2r", quietly = TRUE)
+
   withr::with_libpaths(cache$libpath, {
     install_deps(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE)
   })
