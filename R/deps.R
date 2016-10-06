@@ -23,6 +23,8 @@
 #'   installation.
 #'
 #' @param object A \code{package_deps} object.
+#' @param bioconductor Install Bioconductor dependencies if the package has a
+#' BiocViews field in the DESCRIPTION.
 #' @param ... Additional arguments passed to \code{install_packages}.
 #'
 #' @return
@@ -97,7 +99,8 @@ package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
 #' @rdname package_deps
 dev_package_deps <- function(pkg = ".", dependencies = NA,
                              repos = getOption("repos"),
-                             type = getOption("pkgType")) {
+                             type = getOption("pkgType"),
+                             bioconductor = TRUE) {
   pkg <- as.package(pkg)
 
   repos <- c(repos, parse_additional_repositories(pkg))
@@ -108,8 +111,8 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
   parsed <- lapply(pkg[tolower(dependencies)], parse_deps)
   deps <- unlist(lapply(parsed, `[[`, "name"), use.names = FALSE)
 
-  if (is_bioconductor(pkg)) {
-    check_suggested("BiocInstaller")
+  if (isTRUE(bioconductor) && is_bioconductor(pkg)) {
+    check_bioconductor()
     bioc_repos <- BiocInstaller::biocinstallRepos()
 
     missing_repos <- setdiff(names(bioc_repos), names(repos))

@@ -64,7 +64,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
     repos <- c(CRAN = cran_mirror())
     if (bioconductor) {
-      check_suggested("BiocInstaller")
+      check_bioconductor()
       repos <- c(repos, BiocInstaller::biocinstallRepos())
     }
 
