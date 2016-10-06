@@ -17,6 +17,8 @@
 #'   \code{\link[rhub]{platforms}} for the current platform list.
 #'   if \code{NULL}, then the desired platform can be selected
 #'   interactively.
+#' @param email email address to notify, defaults to the maintainer
+#'   address in the package.
 #' @param interactive whether to show the status of the build
 #'   interactively. R-hub will send an email to the package maintainer's
 #'   email address, regardless of whether the check is interactive or not.
@@ -28,17 +30,18 @@
 #'
 #' @export
 
-rhub_check <- function(pkg = ".", platform = NULL,
+rhub_check <- function(pkg = ".", platform = NULL, email = NULL,
                        interactive = FALSE, ...) {
 
   pkg <- as.package(pkg)
+  email <- email %||% maintainer(pkg)$email
 
   built_path <- build(pkg, tempdir(), quiet = !interactive, ...)
   on.exit(unlink(built_path), add = TRUE)
 
   status <- rhub::check(
     built_path,
-    email = maintainer(pkg)$email,
+    email = email,
     platform = platform,
     show_status = interactive
   )
