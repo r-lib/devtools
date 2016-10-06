@@ -43,6 +43,9 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
   stopifnot(is.character(pkgs))
   if (length(pkgs) == 0) return()
 
+  # For installing from GitHub, if git2r is not installed in the check_libpath
+  requireNamespace("git2r", quietly = TRUE)
+
   rule("Checking ", length(pkgs), " CRAN packages", pad = "=")
   if (!file.exists(check_dir)) dir.create(check_dir)
   message("Results saved in ", check_dir)
