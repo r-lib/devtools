@@ -2,7 +2,7 @@
 % Please edit documentation in R/r-hub.R
 \name{rhub_check}
 \alias{rhub_check}
-\title{Build and check packag on r-hub}
+\title{Build and check package on r-hub}
 \usage{
 rhub_check(pkg = ".", platform = NULL, interactive = FALSE, ...)
 }
