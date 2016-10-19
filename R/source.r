@@ -18,7 +18,8 @@ source_one <- function(file, envir = parent.frame()) {
   stopifnot(file.exists(file))
   stopifnot(is.environment(envir))
 
-  lines <- readLines(file, warn = FALSE)
+  lines <- readLines(file, warn = FALSE, encoding = "UTF-8")
+  lines <- enc2native(lines)
   srcfile <- srcfilecopy(file, lines, file.info(file)[1, "mtime"],
     isFile = TRUE)
   exprs <- parse(text = lines, n = -1, srcfile = srcfile)
