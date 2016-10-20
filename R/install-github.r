@@ -243,48 +243,67 @@ parse_git_repo <- function(path) {
 }
 
 #' @export
-remote_package_name.github_remote <- function(remote, url = "https://github.com", ...) {
-
+remote_package_name.github_remote <- function(remote, ...) {
   tmp <- tempfile()
-  path <- paste(c(
-      remote$username,
-      remote$repo,
-      "raw",
-      remote$ref,
-      remote$subdir,
-      "DESCRIPTION"), collapse = "/")
-
-  req <- httr::GET(url, path = path, httr::write_disk(path = tmp))
-
-  if (httr::status_code(req) >= 400) {
-    return(NA_character_)
-  }
+  on.exit(unlink(tmp))
+  get_contents_using_github_api(remote,
+                                content_path = "DESCRIPTION",
+                                path_to_save = tmp)
 
   read_dcf(tmp)$Package
 }
 
+#' @references https://developer.github.com/v3/repos/contents/#get-contents
+get_contents_using_github_api <-
+  function(remote, content_path, path_to_save) {
+    owner <- remote$username
+    repo <- remote$repo
+    target_path <-
+      file.path("repos", owner, repo, "contents", content_path)
+    response <- github_GET(path = target_path)
+
+    download_file_using_wget(url = response$download_url,
+                             destfile = path_to_save)
+  }
+
+download_file_using_wget <- function(url, destfile) {
+  utils::download.file(
+    url = url,
+    destfile = destfile,
+    cacheOK = TRUE,
+    method = "wget",
+    quiet = TRUE,
+    extra = "--continue"
+  )
+}
+
 #' @export
-remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
-  # If the remote ref is the same as the sha it is a pinned commit so just
-  # return that.
-  if (!is.null(remote$ref) && !is.null(remote$sha) &&
-    grepl(paste0("^", remote$ref), remote$sha)) {
+#' @references https://developer.github.com/v3/repos/commits/#get-the-sha-1-of-a-commit-reference
+remote_sha.github_remote <- function(remote, ...) {
+  if (has_sha.github_remote(remote)) {
     return(remote$sha)
   }
 
-  tryCatch({
-    res <- git2r::remote_ls(
-      paste0(url, "/", remote$username, "/", remote$repo, ".git"),
-      ...)
+  owner <- remote$username
+  repo <- remote$repo
+  ref <- remote$ref
+  target_path <- file.path("repos", owner, repo, "commits", ref)
 
-    found <- grep(pattern = paste0("/", remote$ref), x = names(res))
-
-    if (length(found) == 0) {
+  tryCatch(
+    expr = {
+      response <- github_GET(path = target_path)
+      return(response$sha)
+    },
+    error = function(e) {
       return(NA_character_)
     }
+  )
+}
 
-    unname(res[found[1]])
-  }, error = function(e) NA_character_)
+has_sha.github_remote <- function(remote) {
+  return(!is.null(remote$ref) &&
+           !is.null(remote$sha) &&
+           grepl(paste0("^", remote$ref), remote$sha))
 }
 
 #' @export
