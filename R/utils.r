@@ -46,6 +46,31 @@ is_installed <- function(pkg, version = 0) {
   !is.na(installed_version) && installed_version >= version
 }
 
+check_bioconductor <- function() {
+  if (is_installed("BiocInstaller")) {
+    return()
+  }
+
+  msg <- paste0("'BiocInstaller' must be installed to install Bioconductor packages")
+  if (!interactive()) {
+    stop(msg, call. = FALSE)
+  }
+
+  message(
+    msg, ".\n",
+    "Would you like to install it? ",
+    "This will source <https://bioconductor.org/biocLite.R>."
+  )
+
+  if (menu(c("Yes", "No")) != 1) {
+    stop("'BiocInstaller' not installed", call. = FALSE)
+  }
+
+  suppressMessages(
+    source("https://bioconductor.org/biocLite.R")
+  )
+}
+
 check_suggested <- function(pkg, version = NULL, compare = NA) {
 
   if (is.null(version)) {
@@ -235,4 +260,15 @@ strip_internal_calls <- function(x, package) {
   } else {
     x
   }
+}
+
+sort_ci <- function(x) {
+  withr::with_collate("C", x[order(tolower(x), x)])
+}
+
+comma <- function(x, at_most = 20) {
+  if (length(x) > at_most) {
+    x <- c(x[seq_len(at_most)], "...")
+  }
+  paste(x, collapse = ", ")
 }

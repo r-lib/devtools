@@ -14,11 +14,12 @@ revdep_check_print_problems(pkg = ".")
 
 revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
-  libpath = getOption("devtools.revdep.libpath"), srcpath = libpath,
-  bioconductor = FALSE, type = getOption("pkgType"),
-  threads = getOption("Ncpus", 1), env_vars = NULL, check_dir = NULL)
+  skip = character(), libpath = getOption("devtools.revdep.libpath"),
+  srcpath = libpath, bioconductor = FALSE, type = getOption("pkgType"),
+  threads = getOption("Ncpus", 1), env_vars = NULL, check_dir = NULL,
+  install_dir = NULL, quiet_check = TRUE)
 
-revdep_check_resume(pkg = ".")
+revdep_check_resume(pkg = ".", ...)
 
 revdep_check_reset(pkg = ".")
 }
@@ -34,6 +35,9 @@ or extremely long check times.}
 
 \item{dependencies}{A character vector listing the types of dependencies
 to follow.}
+
+\item{skip}{A character vector of package names to exclude from the
+checks.}
 
 \item{libpath}{Path to library to store dependencies packages - if you
 you're doing this a lot it's a good idea to pick a directory and stick
@@ -57,6 +61,16 @@ It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 \item{check_dir}{A temporary directory to hold the results of the package
 checks. This should not exist as after the revdep checks complete
 successfully this directory is blown away.}
+
+\item{install_dir}{Directory to store check and installation
+results.}
+
+\item{quiet_check}{If \code{TRUE}, suppresses individual \code{R CMD
+check} output and only prints summaries. Set to \code{FALSE} for
+debugging.}
+
+\item{...}{Optionally, override original value of arguments to
+\code{revdep_check}. Use with care.}
 }
 \value{
 An invisible list of results. But you'll probably want to look

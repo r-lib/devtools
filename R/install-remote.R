@@ -2,13 +2,16 @@
 #'
 #' This:
 #' \enumerate{
+#'   \item checks if source bundle is different from installed version
+#'   \item checks if log of a past installation failure exists
 #'   \item downloads source bundle
 #'   \item decompresses & checks that it's a package
 #'   \item adds metadata to DESCRIPTION
 #'   \item calls install
 #' }
 #' @noRd
-install_remote <- function(remote, ..., force = FALSE, quiet = FALSE) {
+install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
+                           out_dir = NULL, skip_if_log_exists = FALSE) {
   stopifnot(is.remote(remote))
 
   remote_sha <- remote_sha(remote)
@@ -27,8 +30,17 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE) {
     return(invisible(FALSE))
   }
 
+  if (!is.null(out_dir)) {
+    out_file <- file.path(out_dir, paste0(package_name, ".out"))
+    if (skip_if_log_exists && file.exists(out_file)) {
+      message("Skipping ", package_name, ", installation failed before, see log in ", out_file)
+      return(invisible(FALSE))
+    }
+  }
+
   if (is_windows && inherits(remote, "cran_remote")) {
-    install_packages(package_name, repos = remote$repos, type = remote$pkg_type, dependencies = NA, ..., quiet = quiet)
+    install_packages(package_name, repos = remote$repos, type = remote$pkg_type, dependencies = NA, ..., quiet = quiet,
+                     out_dir = out_dir, skip_if_log_exists = skip_if_log_exists)
     return(invisible(TRUE))
   }
 
@@ -40,7 +52,8 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE) {
 
   metadata <- remote_metadata(remote, bundle, source)
 
-  install(source, ..., quiet = quiet, metadata = metadata)
+  install(source, ..., quiet = quiet, metadata = metadata,
+          out_dir = out_dir, skip_if_log_exists = skip_if_log_exists)
 }
 
 try_install_remote <- function(..., quiet) {

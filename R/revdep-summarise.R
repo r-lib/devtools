@@ -3,12 +3,24 @@
 revdep_check_save_summary <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
+  revdep_check_save_readme(pkg)
+  revdep_check_save_problems(pkg)
+  revdep_check_save_timing(pkg)
+}
+
+revdep_check_save_readme <- function(pkg) {
   md_all <- revdep_check_summary_md(pkg)
   writeLines(md_all, file.path(pkg$path, "revdep", "README.md"))
+}
 
+revdep_check_save_problems <- function(pkg) {
   md_bad <- revdep_check_summary_md(pkg, has_problem = TRUE)
   writeLines(md_bad, file.path(pkg$path, "revdep", "problems.md"))
+}
 
+revdep_check_save_timing <- function(pkg) {
+  md_timing <- revdep_check_timing_md(pkg)
+  writeLines(md_timing, file.path(pkg$path, "revdep", "timing.md"))
 }
 
 revdep_check_summary_md <- function(pkg, has_problem = FALSE) {
@@ -64,13 +76,16 @@ revdep_check_results_md <- function(results, has_problem) {
     msg <- "packages"
   }
 
+  summary_table <- paste0(
+    paste0(revdep_check_results_kable(results), collapse = "\n"),
+    "\n\n")
+
   summaries <- vapply(results, format, character(1))
 
   paste0(
-    "# Check results\n",
+    "# Check results\n\n",
     paste0(length(summaries), " ", msg, "\n\n"),
-    paste0(revdep_check_results_kable(results), collapse = "\n"),
-    "\n\n",
+    summary_table,
     paste0(summaries, collapse = "\n")
   )
 }
@@ -88,6 +103,33 @@ revdep_check_results_kable <- function(results) {
   rownames(summary_df) <- NULL
 
   knitr::kable(summary_df)
+}
+
+revdep_check_timing_md <- function(pkg) {
+  check_suggested("knitr")
+
+  check <- readRDS(revdep_check_path(pkg))
+
+  paste0(
+    "# Check times\n\n",
+    paste0(revdep_check_timing_kable(check$results), collapse = "\n"),
+    "\n\n"
+  )
+}
+
+revdep_check_timing_kable <- function(results) {
+  if (length(results) == 0) return(character())
+
+  timing_df <- data.frame(
+    package = I(names(results)),
+    version = I(vapply(results, function(x) x$version, character(1))),
+    check_time = I(vapply(results, function(x) x$check_time, numeric(1)))
+  )
+  rownames(timing_df) <- NULL
+
+  timing_df <- timing_df[order(-timing_df$check_time), ]
+
+  knitr::kable(timing_df)
 }
 
 #' @export
