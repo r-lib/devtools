@@ -1,5 +1,8 @@
 # devtools 1.12.0.9000
 
+* added a `quiet` argument to `install_bitbucket()`, with a default value
+  of `FALSE` (fixes issue #1345, @plantarum).
+
 * Improve Git status checks used in `release()` (#1205, @krlmlr).
 
 * Various minor improvements around checking of reverse dependencies
