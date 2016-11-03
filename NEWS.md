@@ -1,5 +1,8 @@
 # devtools 1.13.0
 
+* added a `quiet` argument to `install_bitbucket()`, with a default value
+  of `FALSE` (fixes issue #1345, @plantarum).
+
 * `update_packages()` allows for override of interactive prompt (#1260, @pkq).
 
 * `use_test()` template no longer includes useless comments (#1349)
