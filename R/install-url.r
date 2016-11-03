@@ -48,8 +48,15 @@ remote_metadata.url_remote <- function(x, bundle = NULL, source = NULL) {
 }
 
 #' @export
+remote_package_info.url_remote <- function(remote, ...) {
+  list(Package = NA_character_,
+       version = NA_character_)
+}
+
+#' @export
 remote_package_name.url_remote <- function(remote, ...) {
-  NA_character_
+  res <- remote_package_info(remote, ...)
+  res$Package
 }
 
 #' @export

@@ -145,6 +145,7 @@ local_sha <- function(name) {
 remote_download <- function(x, quiet = FALSE) UseMethod("remote_download")
 remote_metadata <- function(x, bundle = NULL, source = NULL) UseMethod("remote_metadata")
 remote_package_name <- function(remote, ...) UseMethod("remote_package_name")
+remote_package_info <- function(remote, ...) UseMethod("remote_package_info")
 remote_sha <- function(remote, ...) UseMethod("remote_sha")
 
 package2remote <- function(name, repos = getOption("repos"), type = getOption("pkgType")) {
