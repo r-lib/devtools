@@ -17,9 +17,9 @@ revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   skip = character(), libpath = getOption("devtools.revdep.libpath"),
   srcpath = libpath, bioconductor = FALSE, type = getOption("pkgType"),
   threads = getOption("Ncpus", 1), env_vars = NULL, check_dir = NULL,
-  quiet_check = TRUE)
+  install_dir = NULL, quiet_check = TRUE)
 
-revdep_check_resume(pkg = ".", ..., skip = character())
+revdep_check_resume(pkg = ".", ...)
 
 revdep_check_reset(pkg = ".")
 }
@@ -61,6 +61,9 @@ It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 \item{check_dir}{A temporary directory to hold the results of the package
 checks. This should not exist as after the revdep checks complete
 successfully this directory is blown away.}
+
+\item{install_dir}{Directory to store check and installation
+results.}
 
 \item{quiet_check}{If \code{TRUE}, suppresses individual \code{R CMD
 check} output and only prints summaries. Set to \code{FALSE} for
