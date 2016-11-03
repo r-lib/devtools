@@ -36,6 +36,7 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
     roxygen2::roxygenise(pkg$path, roclets = roclets, load_code = ns_env)
   )
 
+  check_max_r_version(pkg)
   clear_topic_index(pkg)
   invisible()
 }

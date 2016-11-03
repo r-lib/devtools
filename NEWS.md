@@ -128,6 +128,12 @@
 
 * `source_gist()` gains a `filename` argument to specify a particular file to
   source from a GitHub gist. (@ateucher, #1172)
+  
+* `document()` now checks that the maximum version of R required by imported
+  packages is the minimum version listed in the DESCRIPTION. (@seankross, #1232)
+  
+* `parse_deps()` has a new argument: `remove_r` which returns the depended upon
+  R version along with other dependencies when set to TRUE. (@seankross, #1232)
 
 * Add a default codecov.yml file to turn off commenting with `use_coverage()`
   (@jimhester, #1188)

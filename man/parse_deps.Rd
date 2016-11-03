@@ -4,10 +4,13 @@
 \alias{parse_deps}
 \title{Parse package dependency strings.}
 \usage{
-parse_deps(string)
+parse_deps(string, remove_r = TRUE)
 }
 \arguments{
 \item{string}{to parse. Should look like \code{"R (>= 3.0), ggplot2"} etc.}
+
+\item{remove_r}{If \code{TRUE} R itself will be removed from the parsed
+dependency string.}
 }
 \value{
 list of two character vectors: \code{name} package names,
@@ -21,6 +24,8 @@ Parse package dependency strings.
 parse_deps("httr (< 2.1),\\nRCurl (>= 3)")
 # only package dependencies are returned
 parse_deps("utils (== 2.12.1),\\ntools,\\nR (>= 2.10),\\nmemoise")
+# package dependencies and R version is returned
+parse_deps("utils (== 2.12.1),\\ntools,\\nR (>= 2.10),\\nmemoise", remove_r = FALSE)
 }
 \keyword{internal}
 
