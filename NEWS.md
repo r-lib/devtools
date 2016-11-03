@@ -1,5 +1,7 @@
 # devtools 1.12.0.9000
 
+* Parse valid Git remote URLs that lack trailing `.git`, e.g. GitHub browser URLs (#1253, @jennybc).
+
 * Add a `check_bioconductor()` internal function to automatically install
   BiocInstaller() if it is not installed and the user wants to do so.
 
