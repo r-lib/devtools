@@ -40,7 +40,7 @@ revdep <- function(pkg,
 
   deps <- tools::dependsOnPkgs(pkg, dependencies, recursive, installed = all)
   deps <- setdiff(deps, ignore)
-  sort(deps)
+  sort_ci(deps)
 }
 
 #' @rdname revdep
@@ -93,6 +93,8 @@ print.maintainers <- function(x, ...) {
 #'
 #' @inheritParams revdep
 #' @param pkg Path to package. Defaults to current directory.
+#' @param skip A character vector of package names to exclude from the
+#'   checks.
 #' @inheritParams check_cran
 #' @param check_dir A temporary directory to hold the results of the package
 #'   checks. This should not exist as after the revdep checks complete
@@ -113,12 +115,15 @@ print.maintainers <- function(x, ...) {
 #' }
 revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
+                         skip = character(),
                          libpath = getOption("devtools.revdep.libpath"),
                          srcpath = libpath, bioconductor = FALSE,
                          type = getOption("pkgType"),
                          threads = getOption("Ncpus", 1),
                          env_vars = NULL,
-                         check_dir = NULL) {
+                         check_dir = NULL,
+                         install_dir = NULL,
+                         quiet_check = TRUE) {
 
   pkg <- as.package(pkg)
 
@@ -145,22 +150,28 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
       call. = FALSE)
   }
 
-  message("Computing reverse dependencies... ", appendLF = FALSE)
+  if (is.null(install_dir)) {
+    install_dir <- file.path(pkg$path, "revdep", "install")
+    message("Saving install results in `revdep/install/`")
+  }
+
+  message("Computing reverse dependencies... ")
   revdeps <- revdep(pkg$package, recursive = recursive, ignore = ignore,
     bioconductor = bioconductor, dependencies = dependencies)
-
-  message(paste(revdeps, collapse = ", "))
 
   # Save arguments and revdeps to a cache
   cache <- list(
     pkgs = revdeps,
+    skip = skip,
     libpath = libpath,
     srcpath = srcpath,
     bioconductor = bioconductor,
     type = type,
     threads = threads,
     check_dir = check_dir,
-    env_vars = env_vars
+    install_dir = install_dir,
+    env_vars = env_vars,
+    quiet_check = quiet_check
   )
   saveRDS(cache, revdep_cache_path(pkg))
 
@@ -169,7 +180,9 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
 
 #' @export
 #' @rdname revdep_check
-revdep_check_resume <- function(pkg = ".") {
+#' @param ... Optionally, override original value of arguments to
+#'   \code{revdep_check}. Use with care.
+revdep_check_resume <- function(pkg = ".", ...) {
   pkg <- as.package(pkg)
 
   cache_path <- revdep_cache_path(pkg)
@@ -179,6 +192,7 @@ revdep_check_resume <- function(pkg = ".") {
   }
 
   cache <- readRDS(cache_path)
+  cache <- utils::modifyList(cache, list(...))
 
   # Don't need to check packages that we've already checked.
   check_dirs <- dir(cache$check_dir, full.names = TRUE)
@@ -208,18 +222,33 @@ revdep_check_reset <- function(pkg = ".") {
 }
 
 revdep_check_from_cache <- function(pkg, cache) {
-  # Install this package into revdep library -----------------------------------
+  # Install all dependencies for this package into revdep library --------------
   if (!file.exists(cache$libpath)) {
     dir.create(cache$libpath, recursive = TRUE, showWarnings = FALSE)
   }
   message(
-    "Installing ", pkg$package, " ", pkg$version,
-    " and dependencies to ", cache$libpath
+    "Installing dependencies for ", pkg$package, " to ", cache$libpath
   )
-  withr::with_libpaths(cache$libpath, action = "prefix", {
-    install(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE)
+
+  # For installing from GitHub, if git2r is not installed in the cache$libpath
+  requireNamespace("git2r", quietly = TRUE)
+
+  withr::with_libpaths(cache$libpath, {
+    install_deps(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE)
   })
-  on.exit(remove.packages(pkg$package, cache$libpath), add = TRUE)
+
+  # Always install this package into temporary library, to allow parallel ------
+  # revdep checks --------------------------------------------------------------
+  temp_libpath <- tempfile("revdep")
+  dir.create(temp_libpath)
+  on.exit(unlink(temp_libpath, recursive = TRUE), add = TRUE)
+
+  message(
+    "Installing ", pkg$package, " ", pkg$version, " to ", temp_libpath
+  )
+  withr::with_libpaths(c(temp_libpath, cache$libpath), {
+    install(pkg, reload = FALSE, quiet = TRUE, dependencies = FALSE)
+  })
 
   cache$env_vars <- c(
     NOT_CRAN = "false",
@@ -228,6 +257,20 @@ revdep_check_from_cache <- function(pkg, cache) {
     cache$env_vars
   )
   show_env_vars(cache$env_vars)
+
+  # Use combination of temporary path (with own package) and cached libpath
+  # (for everything else) as check path
+  cache$check_libpath <- c(temp_libpath, cache$libpath)
+
+  # Append temporary path to libpath to avoid duplicate installation of this
+  # package
+  cache$libpath <- c(cache$libpath, temp_libpath)
+
+  if (length(cache$skip) > 0) {
+    message("Skipping: ", comma(cache$skip))
+    cache$pkgs <- setdiff(cache$pkgs, cache$skip)
+  }
+  cache$skip <- NULL
 
   do.call(check_cran, cache)
 
@@ -276,6 +319,7 @@ parse_package_check <- function(path) {
       bug_reports = desc$BugReports,
       package = desc$Package,
       version = desc$Version,
+      check_time = parse_check_time(file.path(path, "check-time.txt")),
       results = parse_check_results(file.path(path, "00check.log"))
     ),
     class = "revdep_check_result"
@@ -287,7 +331,11 @@ revdep_check_path <- function(pkg) {
 }
 
 revdep_cache_path <- function(pkg) {
-  file.path(pkg$path, "revdep", ".cache.rds")
+  revdep_cache_path_raw(pkg$path)
+}
+
+revdep_cache_path_raw <- function(path) {
+  file.path(path, "revdep", ".cache.rds")
 }
 
 check_dirs <- function(path) {
