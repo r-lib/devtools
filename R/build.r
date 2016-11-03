@@ -104,7 +104,7 @@ build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
   }
 
   if (!quiet) {
-    message("[", date(), "]", "Building windows version of ", pkg$package,
+    message("Building windows version of ", pkg$package,
             " for ", paste(version, collapse = ", "),
             " with win-builder.r-project.org.\n")
     if (interactive() && yesno("Email results to ", maintainer(pkg)$email, "?")) {
@@ -120,9 +120,10 @@ build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
   lapply(url, upload_ftp, file = built_path)
 
   if (!quiet) {
-    message("[", date(), "]", "Check ", maintainer(pkg)$email, " for a link to the built package",
+    message("[", strftime(Sys.time(), "%I:%M %p (%Y-%m-%d)"), "] ",
+            "Check ", maintainer(pkg)$email, " for a link to the built package",
             if (length(version) > 1) "s" else "",
-            " in 30-60 mins.")
+            " in 15-30 mins.")
   }
 
   invisible()
