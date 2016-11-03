@@ -75,8 +75,10 @@
 
 * `test()` doesn't load helpers twice anymore (@krlmlr, #1256).
 
-* fix auto download method selection for `install_github()` on R 3.1 which
+* Fix auto download method selection for `install_github()` on R 3.1 which
   lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)
+
+* Fix removal of vignette files by not trying to remove files twice anymore (#1291)
 
 # devtools 1.12.0
 
