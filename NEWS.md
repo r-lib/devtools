@@ -2,6 +2,7 @@
 
 * added a `quiet` argument to `install_bitbucket()`, with a default value
   of `FALSE` (fixes issue #1345, @plantarum).
+
 * Add a `check_bioconductor()` internal function to automatically install
   BiocInstaller() if it is not installed and the user wants to do so.
 
