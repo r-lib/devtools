@@ -1,5 +1,7 @@
 # devtools 1.13.0
 
+* Remove deprecated `args` argument from `install_git()` to allow passthrough to `install` (#1373, @ReportMort).
+
 * added a `quiet` argument to `install_bitbucket()`, with a default value
   of `FALSE` (fixes issue #1345, @plantarum).
 
