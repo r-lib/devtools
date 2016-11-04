@@ -2,6 +2,11 @@
 
 * added a `quiet` argument to `install_bitbucket()`, with a default value
   of `FALSE` (fixes issue #1345, @plantarum).
+* `use_test()` template no longer includes useless comments (#1349)
+
+* Add encoding support in `test_dir()` call by adding reference to pkg$encoding (#1306, @hansharhoff)
+
+* Parse valid Git remote URLs that lack trailing `.git`, e.g. GitHub browser URLs (#1253, @jennybc).
 
 * Add a `check_bioconductor()` internal function to automatically install
   BiocInstaller() if it is not installed and the user wants to do so.

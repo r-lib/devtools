@@ -175,5 +175,5 @@ write_check_time <- function(i, pkgs, elapsed_time, path) {
 }
 
 parse_check_time <- function(path) {
-  read.table(file = path, header = FALSE)[[3]]
+  utils::read.table(file = path, header = FALSE)[[3]]
 }
