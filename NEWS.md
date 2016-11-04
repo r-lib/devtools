@@ -1,5 +1,7 @@
 # devtools 1.12.0.9000
 
+* `use_test()` template no longer includes useless comments (#1349)
+
 * Add encoding support in `test_dir()` call by adding reference to pkg$encoding (#1306, @hansharhoff)
 
 * Parse valid Git remote URLs that lack trailing `.git`, e.g. GitHub browser URLs (#1253, @jennybc).
