@@ -4,7 +4,8 @@
 \alias{install_git}
 \title{Install a package from a git repository}
 \usage{
-install_git(url, subdir = NULL, branch = NULL, credentials = NULL, ...)
+install_git(url, subdir = NULL, branch = NULL, credentials = NULL,
+  quiet = FALSE, ...)
 }
 \arguments{
 \item{url}{Location of package. The url should point to a public or
@@ -17,6 +18,8 @@ contain the package we are interested in installing.}
 
 \item{credentials}{A git2r credentials object passed through
 to \code{\link[git2r]{clone}}.}
+
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{...}{passed on to \code{\link{install}}}
 }
