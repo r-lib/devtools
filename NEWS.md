@@ -1,5 +1,7 @@
 # devtools 1.12.0.9000
 
+* Add encoding support in `test_dir()` call by adding reference to pkg$encoding (#1306, @hansharhoff)
+
 * Add a `check_bioconductor()` internal function to automatically install
   BiocInstaller() if it is not installed and the user wants to do so.
 
