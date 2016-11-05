@@ -18,10 +18,7 @@
 #' @param quiet If \code{TRUE}, suppress output.
 #' @param upgrade If \code{TRUE}, also upgrade any of out date dependencies.
 #' @param repos A character vector giving repositories to use.
-#' @param type Type of package to \code{update}.  If "both", will switch
-#'   automatically to "binary" to avoid interactive prompts during package
-#'   installation.
-#'
+#' @param type Type of package to \code{update}.
 #' @param object A \code{package_deps} object.
 #' @param bioconductor Install Bioconductor dependencies if the package has a
 #' BiocViews field in the DESCRIPTION.
@@ -49,9 +46,6 @@
 #' }
 package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
                          type = getOption("pkgType")) {
-  if (identical(type, "both")) {
-    type <- "binary"
-  }
 
   if (length(repos) == 0)
     repos <- character()
@@ -314,8 +308,6 @@ update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
 install_packages <- function(pkgs, repos = getOption("repos"),
                              type = getOption("pkgType"), ...,
                              dependencies = FALSE, quiet = NULL) {
-  if (identical(type, "both"))
-    type <- "binary"
   if (is.null(quiet))
     quiet <- !identical(type, "source")
 
@@ -330,8 +322,9 @@ install_packages <- function(pkgs, repos = getOption("repos"),
     old <- add_path(get_rtools_path(), 0)
     on.exit(set_path(old))
   }
-  utils::install.packages(pkgs, repos = repos, type = type,
-    dependencies = dependencies, quiet = quiet)
+  withr::with_options("install.packages.compile.from.source" = "never",
+    utils::install.packages(pkgs, repos = repos, type = type,
+      dependencies = dependencies, quiet = quiet))
 }
 
 find_deps <- function(pkgs, available = available.packages(), top_dep = TRUE,

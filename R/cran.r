@@ -1,5 +1,5 @@
 available_packages <- memoise::memoise(function(repos, type) {
-  suppressWarnings(available.packages(contrib.url(repos, type), type = type))
+  available.packages(contrib.url(repos, type), type = type)
 })
 
 package_url <- function(package, repos,

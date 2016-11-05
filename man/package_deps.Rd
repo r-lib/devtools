@@ -29,9 +29,7 @@ the name of the package in the current directory.}
 
 \item{repos}{A character vector giving repositories to use.}
 
-\item{type}{Type of package to \code{update}.  If "both", will switch
-automatically to "binary" to avoid interactive prompts during package
-installation.}
+\item{type}{Type of package to \code{update}.}
 
 \item{bioconductor}{Install Bioconductor dependencies if the package has a
 BiocViews field in the DESCRIPTION.}
