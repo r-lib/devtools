@@ -20,8 +20,10 @@
 #'   \item Runs \code{.onAttach()}, \code{.onLoad()} and \code{.onUnload()}
 #'     functions at the correct times.
 #'
-#'   \item If you use \pkg{testthat}, will load all test helpers so you
-#'     can access them interactively.
+#'   \item If you use \pkg{testthat}, will load all test helpers so
+#'     you can access them interactively. Devtools sets the
+#'     \code{DEVTOOLS_LOAD} environment variable to \code{"true"} to
+#'     let you check whether the helpers are run during package loading.
 #'
 #' }
 #'
@@ -186,7 +188,9 @@ load_all <- function(pkg = ".", reset = TRUE, recompile = FALSE,
 
   # Source test helpers into package environment
   if (uses_testthat(pkg)) {
-    testthat::source_test_helpers(find_test_dir(pkg$path), env = pkg_env(pkg))
+    withr::with_envvar(c(NOT_CRAN = "true", DEVTOOLS_LOAD = "true"),
+      testthat::source_test_helpers(find_test_dir(pkg$path), env = pkg_env(pkg))
+    )
   }
 
 
