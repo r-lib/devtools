@@ -78,6 +78,10 @@
 * fix auto download method selection for `install_github()` on R 3.1 which
   lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)
 
+* `load_all()` now sets the `NOT_CRAN` environment variable when it
+  sources testthat helpers. It also sets `DEVTOOLS_LOAD` to "true" so
+  that you can check whether they are run during package loading.
+
 # devtools 1.12.0
 
 ## New features
