@@ -120,9 +120,10 @@ build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
   lapply(url, upload_ftp, file = built_path)
 
   if (!quiet) {
-    message("Check ", maintainer(pkg)$email, " for a link to the built package",
+    message("[", strftime(Sys.time(), "%I:%M %p (%Y-%m-%d)"), "] ",
+            "Check ", maintainer(pkg)$email, " for a link to the built package",
             if (length(version) > 1) "s" else "",
-            " in 30-60 mins.")
+            " in 15-30 mins.")
   }
 
   invisible()
