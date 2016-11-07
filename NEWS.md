@@ -136,6 +136,21 @@
 
 * `source_gist()` gains a `filename` argument to specify a particular file to
   source from a GitHub gist. (@ateucher, #1172)
+  
+* `install_bitbucket()` makes use of Bitbucket App Passwords (a.k.a. Personal 
+  Access Tokens or PATs) making this function's interface consistent with
+  `install_github()`. NB: this change is **not** backward compatible.
+  (@imanuelcostigan, #1157)
+
+* Bitbucket `refs` are now resolved in `install_bitbucket()` in a manner 
+  more consistent with `install_github()` (@imanuelcostigan, #1157)
+  
+* Bitbucket `remote_package_name()` and `remote_sha()` methods no longer call
+  github_remote class methods, but are now specifically defined for Bitbucket.
+  (@imanuelcostigan, #1157)
+
+* `github_resolve_ref()` renamed to `resolve_ref()` to make method name more 
+  generic for use with other remotes (e.g. Bitbucket) (@imanuelcostigan)
 
 * Add a default codecov.yml file to turn off commenting with `use_coverage()`
   (@jimhester, #1188)

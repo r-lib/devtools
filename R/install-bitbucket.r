@@ -3,36 +3,43 @@
 #' This function is vectorised so you can install multiple packages in
 #' a single command.
 #'
+#' To install from a private repo, or more generally, access the Bitbucket API
+#' with your own credentials, you will need to get an access token. You can
+#' create an access token following the instructions found in the
+#' \href{https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html}{Bitbucket
+#' App Passwords documentation}. This PAT requires read-only access to your
+#' repositories and pull requests. Then store your Bitbucket user name and PAT
+#' separated by a colon in the environment variable \code{BITBUCKET_PAT} (e.g.
+#' \code{evelynwaugh:swordofhonour})
+#'
 #' @inheritParams install_github
-#' @param auth_user your account username if you're attempting to install
-#'   a package hosted in a private repository (and your username is different
-#'   to \code{username})
-#' @param password your password
-#' @param ref Desired git reference; could be a commit, tag, or branch name.
-#'   Defaults to master.
-#' @seealso Bitbucket API docs:
-#'   \url{https://confluence.atlassian.com/bitbucket/use-the-bitbucket-cloud-rest-apis-222724129.html}
+#' @param auth_token see \code{Details} section for more information. PATs can
+#'   be created at \url{https://bitbucket.org/account/admin/app-passwords} and
+#'   \code{auth_token} should be a string of the form \code{username:pat}.
+#' @param ref Desired git reference. Could be a commit, tag, or branch
+#'   name, or a call to \code{\link{bitbucket_pull}}. Defaults to \code{"master"}.
 #' @family package installation
 #' @export
 #' @examples
 #' \dontrun{
-#' install_bitbucket("sulab/mygene.r@@default")
 #' install_bitbucket("dannavarro/lsr-package")
 #' }
-install_bitbucket <- function(repo, username, ref = "master", subdir = NULL,
-                              auth_user = NULL, password = NULL, ...) {
+install_bitbucket <- function(repo, username = NULL, ref = "master",
+  subdir = NULL, auth_token = bitbucket_pat(quiet),
+  host = "https://api.bitbucket.org", quiet = FALSE, ...) {
 
   remotes <- lapply(repo, bitbucket_remote, username = username, ref = ref,
-    subdir = subdir, auth_user = auth_user, password = password)
+    subdir = subdir, auth_token = auth_token, host = host)
 
-  install_remotes(remotes, ...)
+  install_remotes(remotes, quiet = quiet, ...)
 }
 
 bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
-                              auth_user = NULL, password = NULL, sha = NULL) {
+  auth_token = bitbucket_pat(), sha = NULL, host = "https://api.bitbucket.org") {
 
-  meta <- parse_git_repo(repo)
-  meta$ref <- meta$ref %||% ref %||% "master"
+  meta <- parse_bitbucket_repo(repo)
+  meta$host <- host
+  meta <- resolve_ref(meta$ref %||% ref, meta)
 
   if (is.null(meta$username)) {
     meta$username <- username %||% stop("Unknown username.")
@@ -41,13 +48,13 @@ bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
   }
 
   remote("bitbucket",
+    host = host,
     repo = meta$repo,
     subdir = meta$subdir %||% subdir,
     username = meta$username,
-    ref = meta$ref %||% ref,
+    ref = meta$ref,
     sha = sha,
-    auth_user = auth_user,
-    password = password
+    auth_token = auth_token
   )
 }
 
@@ -56,20 +63,24 @@ remote_download.bitbucket_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
     message("Downloading bitbucket repo ", x$username, "/", x$repo, "@", x$ref)
   }
-
   dest <- tempfile(fileext = paste0(".zip"))
   src <- paste("https://bitbucket.org/", x$username, "/", tolower(x$repo), "/get/",
     x$ref, ".zip", sep = "")
-
-  if (!is.null(x$password)) {
+  if (!is.null(x$auth_token)) {
+    user_pwd <- strsplit(x$auth_token, ":")[[1]]
+    if (length(user_pwd) != 2) {
+      # stop if no colon in auth_token
+      stop("`auth_token` needs a username and password separated by a colon",
+        call. = FALSE)
+    }
     auth <- httr::authenticate(
-      user = x$auth_user %||% x$username,
-      password = x$password,
-      type = "basic")
+      user = user_pwd[1],
+      password = user_pwd[2],
+      type = "basic"
+    )
   } else {
     auth <- NULL
   }
-
   download(dest, src, auth)
 }
 
@@ -85,6 +96,7 @@ remote_metadata.bitbucket_remote <- function(x, bundle = NULL, source = NULL) {
 
   list(
     RemoteType = "bitbucket",
+    RemoteHost = x$host,
     RemoteRepo = x$repo,
     RemoteUsername = x$username,
     RemoteRef = x$ref,
@@ -94,13 +106,37 @@ remote_metadata.bitbucket_remote <- function(x, bundle = NULL, source = NULL) {
 }
 
 #' @export
-remote_package_name.bitbucket_remote <- function(remote, ...) {
-  remote_package_name.github_remote(remote, url = "https://bitbucket.org", ...)
+remote_package_name.bitbucket_remote <- function(remote, api_version = "1.0", ...) {
+  # Downloading specific file is unsupported in version 2.0 of API but is
+  # supported in version 1.0 (25 April 2016)
+  # https://api.bitbucket.org/1.0/repositories/{accountname}/{repo_slug}/raw/{revision}/{path}
+  tmp <- tempfile()
+  # Use paste and not file.path as elements of this can be NULL and file.path
+  # will barf on NULL
+  path <- paste(c("repositories", remote$username, remote$repo, "raw", remote$ref,
+    remote$subdir, "DESCRIPTION"), collapse = "/")
+  req <- bitbucket_GET(path = path, httr::write_disk(path = tmp),
+    api_version = api_version, process_content = FALSE)
+  if (httr::status_code(req) >= 400) {
+    return(NA)
+  }
+  read_dcf(tmp)$Package
 }
 
 #' @export
-remote_sha.bitbucket_remote <-function(remote, ...) {
-  remote_sha.github_remote(remote, url = "https://bitbucket.org", ...)
+remote_sha.bitbucket_remote <- function(remote, url = "https://bitbucket.org", ...) {
+  if (!is.null(remote$sha)) {
+    return(remote$sha)
+  }
+  tryCatch({
+    git_url <- paste0(url, "/", remote$username, "/", remote$repo, ".git")
+    res <- git2r::remote_ls(git_url, ...)
+    found <- grep(pattern = paste0("/", remote$ref), x = names(res))
+    if (length(found) == 0) {
+      return(NA)
+    }
+    unname(res[found[1]])
+  }, error = function(e) NA)
 }
 
 #' @export
