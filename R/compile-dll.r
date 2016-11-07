@@ -111,12 +111,33 @@ needs_compile <- function(pkg = ".") {
   source > dll
 }
 
+makevars <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+  srcdir <- file.path(pkg$path, "src")
+  dir(srcdir, "^Makevars.*$", recursive = TRUE, full.names = TRUE)
+}
+
 # Does the package need a clean compile?
 # (i.e. is there a header or Makevars newer than the dll)
+# If the file Makevars includes a commented line like `# DEVTOOLS_NO_AUTO_CLEAN`,
+# then return FALSE and trust the Makevars to handle dependencies of
+# header files.
 needs_clean <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  headers <- mtime(headers(pkg))
+  makevars <- makevars(pkg)
+  no_auto_clean <- FALSE
+  for (f in makevars) {
+    if (length(grep("^#+\\s*DEVTOOLS_NO_AUTO_CLEAN\\s*$", readLines(f, warn = FALSE))))
+    no_auto_clean <- TRUE
+  }
+
+  if (no_auto_clean) {
+    # Run clean compiling when `Makevars` file is modified
+    headers <- mtime(makevars)
+  } else {
+    headers <- mtime(headers(pkg))
+  }
   # no headers, so never needs clean compile
   if (is.null(headers)) return(FALSE)
 
