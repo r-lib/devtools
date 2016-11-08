@@ -19,7 +19,7 @@
 #'
 #' # Can use inst() to find the package path
 #' # This will reload the installed ggplot2 package
-#' reload(inst("ggplot2"))
+#' reload(pkgload::inst("ggplot2"))
 #' }
 #' @export
 reload <- function(pkg = ".", quiet = FALSE) {
@@ -27,7 +27,7 @@ reload <- function(pkg = ".", quiet = FALSE) {
 
   if (is_attached(pkg)) {
     if (!quiet) message("Reloading installed ", pkg$package)
-    unload(pkg)
+    pkgload::unload(pkg)
     require(pkg$package, character.only = TRUE, quietly = TRUE)
   }
 }

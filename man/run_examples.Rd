@@ -17,8 +17,7 @@ a topic name. If omitted, will start with the (lexicographically) first
 file. This is useful if you have a lot of examples and don't want to
 rerun them every time you fix a problem.}
 
-\item{show}{if \code{TRUE}, code in \code{\\dontshow{}} will be commented
-out}
+\item{show}{DEPRECATED.}
 
 \item{test}{if \code{TRUE}, code in \code{\\donttest{}} will be commented
 out. If \code{FALSE}, code in \code{\\testonly{}} will be commented out.}
@@ -36,9 +35,6 @@ One of the most frustrating parts of `R CMD check` is getting all of your
 examples to pass - whenever one fails you need to fix the problem and then
 restart the whole process.  This function makes it a little easier by
 making it possible to run all examples from an R function.
-}
-\seealso{
-Other example functions: \code{\link{dev_example}}
 }
 \keyword{programming}
 

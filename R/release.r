@@ -105,7 +105,7 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
   if (yesno("Is DESCRIPTION up-to-date?"))
     return(invisible())
 
-  release_questions <- pkg_env(pkg)$release_questions
+  release_questions <- pkgload::pkg_env(pkg)$release_questions
   if (!is.null(release_questions)) {
     questions <- release_questions()
     for (question in questions) {

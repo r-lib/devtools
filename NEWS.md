@@ -2,6 +2,18 @@
 * Bugfix for installation of dependencies in CRAN-like repositories such as
   those created by drat (@jimhester, #1243, #1339).
 
+* Code related to simulating package loading has been pulled out into a 
+  separate package, pkgload. The following functions have been moved to 
+  pkgload without a shim: `clean_dll()`, `compile_dll()`, `dev_example()`, 
+  `dev_help()`, `dev_meta()`, `find_topic()`, `imports_env()`, `inst()`, 
+  `load_code()`, `load_dll()`, `ns_env()`, `parse_ns_file()`, `pkg_env()`. 
+  These functions are primarily for internal use.
+  
+    `load_all()` and `unload()` have been moved to pkgload, but devtools
+    provides shims since these are commonly used.
+
+* `load_all()` no longer automatically creates a description for you.
+
 * `use_test()` template no longer includes useless comments (#1349)
 
 * Add encoding support in `test_dir()` call by adding reference to pkg$encoding (#1306, @hansharhoff)

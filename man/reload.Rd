@@ -29,7 +29,7 @@ reload("ggplot2/")
 
 # Can use inst() to find the package path
 # This will reload the installed ggplot2 package
-reload(inst("ggplot2"))
+reload(pkgload::inst("ggplot2"))
 }
 }
 

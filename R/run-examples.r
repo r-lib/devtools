@@ -13,8 +13,7 @@
 #'   file. This is useful if you have a lot of examples and don't want to
 #'   rerun them every time you fix a problem.
 #' @family example functions
-#' @param show if \code{TRUE}, code in \code{\\dontshow{}} will be commented
-#'   out
+#' @param show DEPRECATED.
 #' @param test if \code{TRUE}, code in \code{\\donttest{}} will be commented
 #'   out. If \code{FALSE}, code in \code{\\testonly{}} will be commented out.
 #' @param run if \code{TRUE}, code in \code{\\dontrun{}} will be commented
@@ -30,20 +29,13 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
   pkg <- as.package(pkg)
   document(pkg)
 
-  files <- rd_files(pkg)
-
-  if (!is.null(start)) {
-    start_path <- find_pkg_topic(pkg, start)
-    if (is.null(start_path)) {
-      stop("Couldn't find start position ", start, call. = FALSE)
-    }
-
-    start_pos <- which(names(files) == start_path)
-    if (length(start_pos) == 1) {
-      files <- files[- seq(1, start_pos - 1)]
-    }
+  if (!missing(show)) {
+    warning("`show` is deprecated", call. = FALSE)
   }
-  if (length(files) == 0) return()
+
+  files <- rd_files(pkg, start = start)
+  if (length(files) == 0)
+    return()
 
   rule("Running ", length(files), " example files in ", pkg$package)
 
@@ -54,7 +46,7 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
     load_all(pkg, reset = TRUE, export_all = FALSE)
     on.exit(load_all(pkg, reset = TRUE))
 
-    lapply(files, run_example, show = show, test = test, run = run)
+    lapply(files, pkgload::run_example, show = show, test = test, run = run)
   }
 
   invisible()
@@ -68,9 +60,23 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
 #   * reload code and rerun
 
 
-rd_files <- function(pkg) {
+rd_files <- function(pkg = ".", start = NULL) {
+  pkg <- as.package(pkg)
+
   path_man <- file.path(pkg$path, "man")
   files <- dir(path_man, pattern = "\\.[Rr]d$", full.names = TRUE)
   names(files) <- basename(files)
-  sort_ci(files)
+  files <- sort_ci(files)
+
+  if (!is.null(start)) {
+    topic <- pkgload::dev_help(start, dev_packages = pkg$package)
+    start_path <- basename(topic$path)
+
+    start_pos <- which(names(files) == start_path)
+    if (length(start_pos) == 1) {
+      files <- files[-seq(1, start_pos - 1)]
+    }
+  }
+
+  files
 }

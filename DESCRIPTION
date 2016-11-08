@@ -26,7 +26,8 @@ Imports:
     jsonlite,
     stats,
     git2r (>= 0.11.0),
-    withr
+    withr,
+    pkgload
 Suggests:
     curl (>= 0.9),
     crayon,
@@ -45,7 +46,8 @@ Suggests:
     covr,
     gmailr (> 0.7.0)
 Remotes:
-  hadley/testthat
+  hadley/testthat,
+  r-pkgs/pkgload
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
