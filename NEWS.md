@@ -1,4 +1,7 @@
 # devtools 1.12.0.9000
+* Added release_check for files in inst/doc/ that could prevent 
+vignettes from building. (@wmurphyrd, #1361)
+
 * Bugfix for installation of dependencies in CRAN-like repositories such as
   those created by drat (@jimhester, #1243, #1339).
 
