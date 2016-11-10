@@ -41,7 +41,6 @@
 #'   "mfrasca/r-logging/pkg"))
 #'
 #' # Update devtools to the latest version, on Linux and Mac
-#' # On Windows, this won't work - see ?build_github_devtools
 #' install_github("hadley/devtools")
 #'
 #' # To install from a private repo, use auth_token with a token

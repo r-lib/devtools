@@ -1,4 +1,7 @@
 # devtools 1.12.0.9000
+
+* Deprecated `build_github_devtools()` has been removed.
+
 * Bugfix for installation of dependencies in CRAN-like repositories such as
   those created by drat (@jimhester, #1243, #1339).
 
