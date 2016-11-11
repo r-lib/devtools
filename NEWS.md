@@ -1,5 +1,13 @@
 # devtools 1.12.0.9000
 
+* `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
+  removed. These functions never worked terribly well, and have been replaced 
+  by the much better functions in callr.
+  
+* `find_rtools()`, `setup_rtools()`, `has_devel()`, `compiler_flags()`,
+  `build()` and `with_debug()` have moved to the new pkgbuild package.
+  `build()` and `with_debug()` are re-exported by devtools.
+
 * Deprecated `build_github_devtools()` has been removed.
 
 * Bugfix for installation of dependencies in CRAN-like repositories such as

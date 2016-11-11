@@ -73,7 +73,6 @@ install <-
            ...) {
 
   pkg <- as.package(pkg)
-  check_build_tools(pkg)
 
   # Forcing all of the promises for the current namespace now will avoid lazy-load
   # errors when the new package is installed overtop the old one.
@@ -133,7 +132,12 @@ install <-
   if (local && !(has_vignettes && build_vignettes)) {
     built_path <- pkg$path
   } else {
-    built_path <- build(pkg, tempdir(), vignettes = build_vignettes, quiet = quiet)
+    built_path <- pkgbuild::build(
+      pkg$path,
+      tempdir(),
+      vignettes = build_vignettes,
+      quiet = quiet
+    )
     on.exit(unlink(built_path), add = TRUE)
   }
 
@@ -148,12 +152,15 @@ install <-
   opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
 
   built_path <- normalizePath(built_path, winslash = "/")
-  R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""),
-    fun = system2_check,
-    quiet = quiet || !is.null(out_file), out_file = out_file)
 
-  # Remove immediately upon success
-  unlink(out_file)
+  pkgbuild::rcmd_build_tools(
+    "INSTALL",
+    c(shQuote(built_path), args),
+    echo = !quiet,
+    show = !quiet,
+    fail_on_status = TRUE,
+    required = FALSE
+  )
 
   install_deps(pkg, dependencies = final_deps, upgrade = upgrade_dependencies,
     threads = threads, force_deps = force_deps, quiet = quiet, ...,

@@ -40,8 +40,8 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
   rule("Running ", length(files), " example files in ", pkg$package)
 
   if (fresh) {
-    to_run <- substitute(devtools::run_examples(path), list(path = pkg$path))
-    eval_clean(to_run)
+    to_run <- eval(substitute(function() devtools::run_examples(path), list(path = pkg$path)))
+    callr::r(to_run, show = TRUE)
   } else {
     load_all(pkg, reset = TRUE, export_all = FALSE)
     on.exit(load_all(pkg, reset = TRUE))

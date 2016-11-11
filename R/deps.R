@@ -316,15 +316,14 @@ install_packages <- function(pkgs, repos = getOption("repos"),
       "Installing %d packages: %s"
     ), length(pkgs), paste(pkgs, collapse = ", ")))
 
-  # if type is 'source' and on windows add Rtools to the path this assumes
-  # setup_rtools() has already run and set the rtools path
-  if (type == "source" && !is.null(get_rtools_path())) {
-    old <- add_path(get_rtools_path(), 0)
-    on.exit(set_path(old))
-  }
-  withr::with_options("install.packages.compile.from.source" = "never",
-    utils::install.packages(pkgs, repos = repos, type = type,
-      dependencies = dependencies, quiet = quiet))
+  pkgbuild::with_build_tools(
+    withr::with_options("install.packages.compile.from.source" = "never",
+      utils::install.packages(pkgs, repos = repos, type = type,
+        dependencies = dependencies, quiet = quiet
+      )
+    ),
+    required = FALSE
+  )
 }
 
 find_deps <- function(pkgs, available = available.packages(), top_dep = TRUE,
