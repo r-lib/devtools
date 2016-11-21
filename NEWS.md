@@ -775,8 +775,8 @@ I've also tweaked the output of `revdep_maintainers()` so it's easier to copy an
 
 ## Other minor improvements and bug fixes
 
-* If you're using Rstudio, and you you're trying to build a binary package
-  without the necessary build tools, Rstudio will prompt to download and
+* If you're using RStudio, and you you're trying to build a binary package
+  without the necessary build tools, RStudio will prompt to download and
   install the right thing. (#488)
 
 * Commands are no longer run with `LC_ALL=C` - this no longer seems 
@@ -845,10 +845,10 @@ Four new functions make it easier to add useful infrastructure to packages:
   It is called automatically from `test()` if no test directories are
   found, the session is interactive and you agree.
 
-* `add_rstudio_project()` adds an Rstudio project file to your package.
+* `add_rstudio_project()` adds an RStudio project file to your package.
   `create()` gains an `rstudio` argument which will automatically create
-  an Rstudio project in the package directory. It defaults to `TRUE`:
-  if you don't use Rstudio, just delete the file.
+  an RStudio project in the package directory. It defaults to `TRUE`:
+  if you don't use RStudio, just delete the file.
 
 * `add_travis()` adds a basic travis template to your package. `.travis.yml`
   is automatically added to `.Rbuildignore` to avoid including it in the built
@@ -904,7 +904,7 @@ Two dependencies were incremented:
   `--no-build-vignettes` for >3.0.0 compatibility (#391).
 
 * `release()` does a better job of opening your email client if you're inside
-  of Rstudio (#433).
+  of RStudio (#433).
 
 * `check()` now correctly reports the location of the `R CMD
   check` output when called with a custom `check_dir`. (Thanks to @brentonk)
@@ -932,7 +932,7 @@ Two dependencies were incremented:
 * Fixed bug in `wd()` when `path` was ommitted. (#374)
 
 * Fixed bug in `dev_help()` that prevented it from working when not using
-  Rstudio.
+  RStudio.
 
 * `source_gist()` respects new github policy by sending user agent
   (hadley/devtools)
@@ -994,8 +994,8 @@ Two dependencies were incremented:
 
 * Decompression of zip files now respects `getOption("unzip")` (#326)
 
-* `dev_help` will now use the Rstudio help pane, if you're using a recent
-  version of Rstudio (#322)
+* `dev_help` will now use the RStudio help pane, if you're using a recent
+  version of RStudio (#322)
 
 * Release is now a little bit smarter: if it's a new package, it'll ask you
   to read and agree to the CRAN policies; it will only ask about
