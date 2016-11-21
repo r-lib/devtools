@@ -13,7 +13,7 @@
 #' @param description list of description values to override default values or
 #'   add additional values.
 #' @param check if \code{TRUE}, will automatically run \code{\link{check}}
-#' @param rstudio Create an Rstudio project file?
+#' @param rstudio Create an RStudio project file?
 #'   (with \code{\link{use_rstudio}})
 #' @param quiet if \code{FALSE}, the default, prints informative messages.
 #' @seealso Text with \code{\link{package.skeleton}}
