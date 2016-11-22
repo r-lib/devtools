@@ -17,6 +17,8 @@ test_that("bioc repo paths are parsed correctly", {
 
 test_that("install_bioc", {
   skip_on_cran()
+  skip_on_travis()
+  skip_on_appveyor()
 
   lib <- tempfile()
   on.exit(unlink(lib, recursive = TRUE), add = TRUE)
@@ -32,9 +34,6 @@ test_that("install_bioc", {
 
   # Install BiocInstaller to the new library
   source("https://bioconductor.org/biocLite.R")
-
-  # Update if necessary
-  biocLite("BiocUpgrade")
 
   # This package has no dependencies or compiled code and is old
   install_bioc("MeasurementError.cor", quiet = TRUE)
