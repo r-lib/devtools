@@ -100,6 +100,8 @@
 
 * fix auto download method selection for `install_github()` on R 3.1 which
   lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)
+  
+* fix `load_all()` for UTF-8 scripts under windows. (@shrektan, #1378)
 
 # devtools 1.12.0
 
