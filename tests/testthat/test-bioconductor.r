@@ -33,6 +33,9 @@ test_that("install_bioc", {
   # Install BiocInstaller to the new library
   source("https://bioconductor.org/biocLite.R")
 
+  # Update if necessary
+  biocLite("BiocUpgrade")
+
   # This package has no dependencies or compiled code and is old
   install_bioc("MeasurementError.cor", quiet = TRUE)
 
