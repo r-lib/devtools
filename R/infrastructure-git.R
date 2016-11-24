@@ -114,7 +114,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
   message("* Checking title and description")
   message("  Title: ", pkg$title)
   message("  Description: ", pkg$description)
-  if (yesno("Are title and description ok?")) {
+  if (interactive() && yesno("Are title and description ok?")) {
     return(invisible())
   }
 
