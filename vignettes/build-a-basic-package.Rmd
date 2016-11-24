@@ -88,6 +88,9 @@ ff_path <-
   normalizePath(file.path("~", "tmp", "foofactors"), mustWork = FALSE)
 ## delete any previous version
 unlink(ff_path, recursive = TRUE)
+if (!dir.exists(file.path("~", "tmp"))) {
+  dir.create(file.path("~", "tmp"))
+}
 ```
 
 Create a new package in a new directory with `create()`:
