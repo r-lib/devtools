@@ -1,0 +1,8 @@
+Package: testNonASCII
+Title: Test no change to Collate when there are no @includes
+License: GPL-2
+Description:
+Author: Shrektan <shrektan@126.com>
+Maintainer: Shrektan <shrektan@126.com>
+Encoding: GB2312
+Version: 0.1

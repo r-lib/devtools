@@ -1,4 +1,4 @@
-source_many <- function(files, envir = parent.frame()) {
+source_many <- function(files, envir = parent.frame(), fileEncoding = "UTF-8") {
   stopifnot(is.character(files))
   stopifnot(is.environment(envir))
 
@@ -9,16 +9,18 @@ source_many <- function(files, envir = parent.frame()) {
   on.exit(options(oop))
 
   for (file in files) {
-    source_one(file, envir = envir)
+    source_one(file, envir = envir, fileEncoding = fileEncoding)
   }
   invisible()
 }
 
-source_one <- function(file, envir = parent.frame()) {
+source_one <- function(file, envir = parent.frame(), fileEncoding = "UTF-8") {
   stopifnot(file.exists(file))
   stopifnot(is.environment(envir))
 
-  lines <- readLines(file, warn = FALSE, encoding = "UTF-8")
+  con <- file(file, encoding = fileEncoding)
+  on.exit(close(con), add = TRUE)
+  lines <- readLines(con, warn = FALSE, encoding = fileEncoding)
   lines <- enc2native(lines)
   srcfile <- srcfilecopy(file, lines, file.info(file)[1, "mtime"],
     isFile = TRUE)
