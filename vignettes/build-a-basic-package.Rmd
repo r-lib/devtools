@@ -32,7 +32,7 @@ Load the devtools package.
 library(devtools)
 ```
 
-Since devtools is a workflow package, you can consider loading it automatically in all of your interactive R sessions. In general, it's not a great idea to load packages this way, as it invites you to create R scripts that don't reflect all of their dependencies via explicit calls to `library(foo)`. But devtools is meant to smooth the process of package development and is, therefore, unlikely to get baked into any analysis scripts. The pros may outweigh the cons in this case.
+Since devtools is a workflow package, you may consider loading it automatically in all of your interactive R sessions. In general, it's not a great idea to load packages this way, as it invites you to create R scripts that don't reflect all of their dependencies via explicit calls to `library(foo)`. But devtools is meant to smooth the process of package development and is, therefore, unlikely to get baked into any analysis scripts. The pros may outweigh the cons in this case.
 
 You can do this by adding these lines to your `.Rprofile`:
 
@@ -44,13 +44,20 @@ if (interactive()) {
 
 ## Toy package: foofactors
 
-We're going to use multiple functions in devtools to build a small toy package from scratch, with all the major moving parts.
+We use multiple functions from devtools to build a small toy package from scratch, with features commonly seen in released packages:
 
-It will be called foofactors and have a couple functions for handling factors. Please note that these functions are super simple and definitely not the point! For a proper package in this space, please see [forcats](https://cran.r-project.org/package=forcats).
+  * Developed under version control (Git, in this case) and in the open (GitHub, in this case). *optional, but shown*
+  * Documentation for individual functions, using convenience wrappers in devtools to call [roxygen2](https://CRAN.R-project.org/package=roxygen2).
+  * Unit testing, using convenience wrappers in devtools to exploit [testthat](https://CRAN.R-project.org/package=testthat).
+  * Documentation for the package as a whole, via a package-level help file, a vignette, and `README.Rmd`.
+
+We call the package **foofactors** and it will consist of a couple functions for handling factors. Please note that these functions are super simple and definitely not the point! For a proper package in this space, please see [forcats](https://cran.r-project.org/package=forcats).
+
+The foofactors package itself is not the only purpose of this vignette. It is also meant to demonstrate a typical workflow for package development with devtools.
 
 ## Peek at the finished product
 
-The foofactors package will be tracked during its development with the Git version control system. This is purely optional and you can certainly follow along without implementing this. A nice side benefit is that we eventually connect it to a remote repository on GitHub, which means you can see the glorious result we are working towards by visiting foofactors on GitHub: <https://github.com/jennybc/foofactors>. By inspecting the [commit history](https://github.com/jennybc/foofactors/commits/master) and especially the diffs, you can see exactly what changes at each step of the process laid out below.
+The foofactors package is tracked during its development with the Git version control system. This is purely optional and you can certainly follow along without implementing this. A nice side benefit is that we eventually connect it to a remote repository on GitHub, which means you can see the glorious result we are working towards by visiting foofactors on GitHub: <https://github.com/jennybc/foofactors>. By inspecting the [commit history](https://github.com/jennybc/foofactors/commits/master) and especially the diffs, you can see exactly what changes at each step of the process laid out below.
 
  *Obviously some similar repo could exist under the [r-pkgs](https://github.com/r-pkgs) GitHub Organization.* 
 
@@ -66,7 +73,7 @@ Maybe this can be skipped if the immediate goal is to build a pure R package?
 
 ## `create()` the package
 
-The `create()` function initializes a new package in a new directory on your computer. The new package will comply with all devtools conventions and will immediately pass `R CMD check`. Ideally, your package will always be in this happy state and is something you should verify often.
+The `create()` function initializes a new package in a new directory on your computer. The new package will comply with all devtools conventions and will immediately pass `R CMD check`. Ideally, your package will always be in this happy state and it is something you should verify often.
 
 Make a deliberate choice about where to create this package on your computer. It should probably be in your home directory, alongside your other R projects. It should not be in, for example, an R package library, which holds packages that have already been built and installed. The conversion of the source package we are creating here into an installed package is part of what devtools facilitates. Don't try to do devtools' job for it.
 
@@ -74,8 +81,9 @@ Make a deliberate choice about where to create this package on your computer. It
 ## Plan A: let's put the package in session temp file!
 #ff_path <- normalizePath(tempfile("foofactors-"), mustWork = FALSE)
 #dir.create(ff_path)
-## nope ... it is useful for it to be less perishable and easier to visit
-## NOTE: for devtools / CRAN, this might be the best bet
+## nope ... it is useful for it to be less perishable, for post mortem
+## inspection
+## NOTE: for devtools / CRAN, however, this might be the best bet
 
 ## Plan B: let's put the package in this repo!
 #ff_path <- "packages99"
@@ -135,7 +143,7 @@ cbind(listing_1 <- list.files(all.files = TRUE, no.. = TRUE))
 
 *This is optional, but a recommended practice in the long-term. If you don't use Git, simply ignore this and subsequent instructions related to version control.*
 
-Let's make this directory, which is already an RStudio Project and an R source package, into a Git repository, with `devtools::use_git()`.
+The foofactors directory is an R source package and an RStudio Project. Now we make it also a Git repository, with `devtools::use_git()`.
 
 ```{r use-git}
 use_git()
@@ -149,12 +157,12 @@ discover_repository(ff_path)
 
 What's new? Only the creation of a `.git` directory, which is hidden in most contexts, including the RStudio file browser. Its existence is evidence that we have indeed initialized a Git repo here.
 
-```{r post-git-list-files}
+```{r post-git-init-list-files}
 listing_2 <- dir(all.files = TRUE, no.. = TRUE)
 cbind(setdiff(listing_2, listing_1))
 ```
 
-If you use RStudio, quit and relaunch this Project, by double clicking on `foofactors.Rproj`. Now, in addition to package development support, you have access to a basic Git client in the *Git* tab of the *Environment/History/Build* pane. Click on History (the clock icon) and you should see evidence of the initial commit made by `use_git()`:
+If you use RStudio, quit and relaunch this Project, by double clicking on `foofactors.Rproj`. Now, in addition to package development support, you have access to a basic Git client in the *Git* tab of the *Environment/History/Build* pane. Click on History (the clock icon) and you should see the initial commit made by `use_git()`:
 
 ```{r inspect-first-commit, echo = FALSE}
 repo <- repository(getwd())
@@ -163,7 +171,7 @@ commits(repo)[[1]]
 
 FYI RStudio can initialize a Git repository, in any Project, even if it's not an R package: *Tools > Version Control > Project Setup*. Then choose *Version control system: Git* and *initialize a new git repository for this project*.
 
-## First function and `load_all()`
+## Define the first function
 
 It is not too hard to find a puzzling operation involving factors. Let's see what happens when we catenate two factors.
 
@@ -187,9 +195,11 @@ writeLines(fbind_fodder, file.path("R", "fbind.R"))
 cat(fbind_fodder, sep = "\n")
 ```
 
-Where do you put this function definition? Save it in a `.R` file, in the `R/` subdirectory of your package. A reasonable default is to make a new `.R` file for each function definition and name the file after the function. This implies you should save the above definition of `fbind()` in the file `R/fbind.R`. The file should consist solely of this function definition, i.e. it should NOT contain other top-level code such as `library(devtools)` or `use_git()`.
+Where do you put this function definition? Save it in a `.R` file, in the `R/` subdirectory of your package. A reasonable default is to make a new `.R` file for each function in your package and name the file after the function. So we save the above definition of `fbind()` in the file `R/fbind.R`. The file should consist solely of this function definition, i.e. it should NOT contain other top-level code we have recently run, such as `library(devtools)` or `use_git()`. Package code should *never* contain a call to `library()`.
 
-How do we test drive `fbind()`? If this were a regular R script, we might use Rstudio or Emacs/ESS to send the function definition to the R Console, thereby defining `fbind()` in the global workspace. In package development, we want to approach this differently.
+How do we test drive `fbind()`? If this were a regular R script, we might use Rstudio or Emacs/ESS to send the function definition to the R Console, thereby defining `fbind()` in the global workspace. For package development, we want to approach this differently.
+
+## `load_all()` to test drive
 
 Call `devtools::load_all()`:
 
@@ -816,7 +826,6 @@ file.copy(file.path(owd, "foofactors-README.Rmd"),
 ```{r cat-readme-rmd, as.is = TRUE, echo = FALSE, comment = NA}
 cat(readLines("README.Rmd"), sep = "\n")
 ```
-
 
 Don't forget to render it to make `README.md`! The pre-commit hook should remind you if you try to commit `README.Rmd` but not `README.md` and also when `README.md` appears to be out-of-date.
 
