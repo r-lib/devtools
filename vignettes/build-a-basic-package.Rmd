@@ -59,7 +59,7 @@ The foofactors package itself is not the only purpose of this vignette. It is al
 
 The foofactors package is tracked during its development with the Git version control system. This is purely optional and you can certainly follow along without implementing this. A nice side benefit is that we eventually connect it to a remote repository on GitHub, which means you can see the glorious result we are working towards by visiting foofactors on GitHub: <https://github.com/jennybc/foofactors>. By inspecting the [commit history](https://github.com/jennybc/foofactors/commits/master) and especially the diffs, you can see exactly what changes at each step of the process laid out below.
 
- *Obviously some similar repo could exist under the [r-pkgs](https://github.com/r-pkgs) GitHub Organization.* 
+ *Obviously some similar repo could exist under the [r-pkgs](https://github.com/r-pkgs) GitHub Organization.*
 
 ## System prep
 
@@ -68,7 +68,7 @@ In STAT 545, I link out to a page that gives instructions for:
   * Windows: Rtools
   * Mac: Xcode CLT
   * Linux: ?I wave my hands here ... is `r-devel` or `r-base-dev` needed?
-  
+
 Maybe this can be skipped if the immediate goal is to build a pure R package?
 
 ## `create()` the package
@@ -108,19 +108,23 @@ create("~/tmp/foofactors")
 ```
 
 ```{r set-root-dir, include = params$debug}
+(owd <- getwd()) # a kindness during development
+
 ## I normally am not this masochistic, but there is little choice
-## I would love to use rprojroot here!
-(owd <- getwd()) # I assume this will be devtools/vignettes
 knitr::opts_knit$set(root.dir = ff_path)
-## during interactive dev:
-## setwd(ff_path)
+
+# more kindness during development
+if (is.null(getOption("knitr.in.progress"))) {
+  setwd(ff_path)
+}
+
 getwd()
 knitr::opts_knit$get("root.dir")
 ```
 
 ```{r check-wd, include = params$debug}
 ## make sure new, correct wd is in effect
-## due to knitr, needs to be in a separate chunk from above
+## needs to be in a separate chunk, because knitr
 getwd()
 ```
 
@@ -185,7 +189,7 @@ Huh? Many people do not expect the result of catenating two factors to be an int
 
 Here's `fbind()`, a function that creates a new factor from two factors, a potentially less surprising result:
 
-```{r fbind-fodder, as.is = TRUE, echo = FALSE, comment = NA}
+```{r fbind-fodder, asis = TRUE, echo = FALSE, comment = NA}
 fbind_fodder <- c(
   "fbind <- function(a, b) {",
   "  factor(c(as.character(a), as.character(b)))",
@@ -207,7 +211,7 @@ Call `devtools::load_all()`:
 load_all()
 ```
 
-This simulates the process of building and installing the foofactors package and makes the functions within available for use. In the long run, as your package accumulates more functions, some exported, some not, some of which call each other, `load_all()` gives you a more accurate sense of how the package is developing.
+This simulates the process of building and installing the foofactors package and makes the functions within available for use. In the long run, as your package accumulates more functions, some exported, some not, some of which call each other, `load_all()` gives you an accurate sense of how the package is developing.
 
 Call `fbind(a, b)` to see how it works.
 
@@ -239,27 +243,32 @@ You may want to learn the RStudio keyboard and menu shortcuts for `load_all()`:
 
 If you're using Git, use your preferred method to commit the new `R/fbind.R` file.
 
-```{r commit-fbind, include = params$debug}
+```{r fbind-init, include = params$debug}
 add(repo, path = file.path("R", "fbind.R"))
 commit(repo, message = "Add fbind()")
-## if the git(hub) aspects persists, tags will be a nice way to link to
-## evolutionary stages, vs SHA
-tag(repo, "fbind-init", "initial creation of fbind()")
+## tags might be useful for making stable links to the package at specific
+## evolutionary stages
+## possible convention: tag name = chunk label
+#tag_name <- knitr::opts_current$get("label")
+#tag(repo, tag_name, "initial creation of fbind()")
+#tag(repo, "fbind-init", "initial creation of fbind()")
+#sha <- (commits(repo)[[1]])@sha
 ```
 
+<!--
 The diff associated with this commit should look something like this, though you may have a nicer way of inspecting it:
+-->
 
-```{r echo = FALSE, as.is = TRUE}
+```{r ugly-diff, include = FALSE, echo = FALSE, asis = TRUE}
 commits(repo)[[1]]
 tree_1 <- tree(commits(repo)[[2]])
 tree_2 <- tree(commits(repo)[[1]])
-jdiff <- diff(tree_1, tree_2)
 cat(diff(tree_1, tree_2, as_char = TRUE))
 ```
 
-From this point on, we make commits after each step, but will not comment on it. Remember [these commits](https://github.com/jennybc/foofactors/commits/master) are available in the public repository.
+From this point on, we make commits after each step, indicated by a brief comment. Remember [these commits](https://github.com/jennybc/foofactors/commits/master) are available in the public repository.
 
-## Check, Build, Install
+## `check()` and `install()`
 
 We have solid evidence that `fbind()` works. But how can we be sure that all the moving parts of the package still work? This may seem silly to check, after such a small step, but it's good to establish the habit of checking this often.
 
@@ -276,7 +285,7 @@ devtools wraps the base utilities for package management, but in a way favorable
   * [`R CMD build`](https://stat.ethz.ch/R-manual/R-patched/library/utils/html/PkgUtils.html) converts a source package to a bundle or tarball
   * [`R CMD INSTALL`](https://stat.ethz.ch/R-manual/R-patched/library/utils/html/INSTALL.html) installs a package bundle into a library
   * [`R CMD check`](https://stat.ethz.ch/R-manual/R-patched/library/utils/html/PkgUtils.html) runs all sorts of checks. Even if you don't plan to submit your package to CRAN, it's a very good idea to make this part of your own quality standard.
-  
+
 In a shell, with working directory set to the parent of `foofactors`, here's what usage might look like:
 
 ``` shell
@@ -308,7 +317,7 @@ At this point, we expect 2 warnings (and 0 errors, 0 notes):
 
   * `Invalid license file pointers: LICENSE`
   * `Undocumented code objects: 'fbind'`
-  
+
 We'll address both soon.
 
 Since we've already made respectable interim progress, let's install the foofactors package into your library and load it via `devtools::install()`:
@@ -322,10 +331,10 @@ Now we can load and use foofactors like any other package.
 A shortcut for "build, install, and reload" is offered in the RStudio Build pane:
 
   * *Build > Build & Reload*
-  
+
 ## Installation test
 
-Now that we've installed foofactors properly, let's revisit our small example from the top. This is a good time to restart your R session and ensure you have a clean workspace. 
+Now that we've installed foofactors properly, let's revisit our small example from the top. This is a good time to restart your R session and ensure you have a clean workspace.
 
 Is foofactors indeed available for loading?
 
@@ -359,7 +368,7 @@ Make these edits:
 
 When you're done, `DESCRIPTION` should look similar to this:
 
-```{r description-fodder, as.is = TRUE, echo = FALSE, comment = NA}
+```{r description-fodder, asis = TRUE, echo = FALSE, comment = NA}
 DESCRIPTION_fodder <- c(
   "Package: foofactors",
   "Title: Make Factors Less Annoying",
@@ -384,13 +393,19 @@ add(repo, path = "DESCRIPTION")
 commit(repo, message = "Edit DESCRIPTION")
 ```
 
-## Add `LICENSE`
+## `use_mit_license()`
 
 > [Pick a License, Any License. -- Jeff Atwood](http://blog.codinghorror.com/pick-a-license-any-license/)
 
-For foofactors, we use the MIT license. This requires specification in `DESCRIPTION`, done above, and a file called `LICENSE`. We create that now. It should look like this, but with the current year and your name:
+For foofactors, we use the MIT license. This requires specification in `DESCRIPTION`, done above, and a file called `LICENSE`. We create that now via the helper function `devtools::use_mit_license()`.
 
-```{r license-fodder, as.is = TRUE, echo = FALSE, comment = NA}
+```{r use-mit-license}
+use_mit_license()
+```
+
+Open the newly created `LICENSE` file and, if necessary, edit it to make sure it has the current year and your name:
+
+```{r license-fodder, asis = TRUE, echo = FALSE, comment = NA}
 LICENSE_fodder <- trimws("
 YEAR: 2016
 COPYRIGHT HOLDER: Jennifer Bryan
@@ -410,9 +425,9 @@ For future projects, there is more guidance on licenses in these sources:
   * [Writing R Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Licensing)
   * GitHub's guide at <http://choosealicense.com>
 
-## Document `fbind()`
+## `document()`
 
-Wouldn't it be nice to get help on `fbind()`, just like we do with other R functions? This requires that your package have a special R documentation file, `man/fbind.Rd`, written in an R-specific markup language that is quite similar to LaTeX. Luckily we don't necessarily have to go about it this way.
+Wouldn't it be nice to get help on `fbind()`, just like we do with other R functions? This requires that your package have a special R documentation file, `man/fbind.Rd`, written in an R-specific markup language that is sort of like LaTeX. Luckily we don't necessarily have to author that directly.
 
 We write a specially formatted comment right above `fbind()`, in its source file, and then let a package called [roxygen2](https://CRAN.R-project.org/package=roxygen2) handle the creation of `man/fbind.Rd`.  To read more about the motivation and mechanics of roxygen2, read [the documentation chapter](http://r-pkgs.had.co.nz/man.html) of R Packages.
 
@@ -420,7 +435,7 @@ If you use RStudio, open `R/fbind.R` in the source editor and put the cursor som
 
 If you don't use RStudio, create the comment yourself along these lines:
 
-```{r fbind-roxygen-header, as.is = TRUE, echo = FALSE, comment = NA}
+```{r fbind-roxygen-header, asis = TRUE, echo = FALSE, comment = NA}
 fbind_roxygen_header <- c(
   "#' Bind two factors",
   "#'",
@@ -472,15 +487,15 @@ The RStudio [Package Development with devtools Cheat Sheet](https://www.rstudio.
 
 ### `NAMESPACE` changes
 
-In addition to converting `fbind()`'s special comment into `man/fbind.Rd`, roxygen2 updates the `NAMESPACE` file. Open it for editing. It should look like so:
+In addition to converting `fbind()`'s special comment into `man/fbind.Rd`, by default, `devtools::document()` updates the `NAMESPACE` file, based on `@export` directives found in roxygen comments. Open `NAMESPACE` for inspection. It should look like so:
 
-```{r as.is = TRUE, echo = FALSE, comment = NA}
+```{r asis = TRUE, echo = FALSE, comment = NA}
 cat(readLines("NAMESPACE"), sep = "\n")
 ```
 
-It no longer has the placeholder directive that basically said "export everything". Instead, there is now an explicit directive to export the `fbind()` function.
+It no longer has the placeholder content saying "export everything". Instead, there is now an explicit directive to export the `fbind()` function.
 
-The export directive in `NAMESPACE` is what's meant by the phrase "export a function" and it's what makes `fbind()` available to a user after loading foofactors via `library(foofactors)`. Just as it is entirely possible to author `.Rd` files "by hand", you can manage `NAMESPACE` explicitly yourself. But we are opting to delegate this to devtools and roxygen2.
+The export directive in `NAMESPACE` is what's required to "export a function" and it's what makes `fbind()` available to a user after loading foofactors via `library(foofactors)`. Just as it is entirely possible to author `.Rd` files "by hand", you can manage `NAMESPACE` explicitly yourself. But we are opting to delegate this to devtools and roxygen2.
 
 ```{r commit-namespace, include = params$debug}
 add(repo, path = c("DESCRIPTION", "NAMESPACE", file.path("man", "fbind.Rd")))
@@ -488,13 +503,15 @@ commit(repo, message = "Run document()")
 tag(repo, "pass-check", "first pass R CMD check")
 ```
 
+## `check()`
+
 foofactors should pass `R CMD check` cleanly now and forever more: 0 errors, 0 warnings, 0 notes.
 
 ```{r first-check-success}
 check()
 ```
 
-## Add unit tests
+## `use_testthat()`
 
 We've tested `fbind()` informally, in a single example. We can formalize and expand this with some unit tests. This means we express a few concrete expectations about the correct `fbind()` result for various inputs.
 
@@ -516,7 +533,7 @@ However, it's still up to YOU to write the actual tests!
 
 Create a new R script in `tests/testthat/test_fbind.R` consisting of this:
 
-```{r test-fodder, as.is = TRUE, echo = FALSE, comment = NA}
+```{r test-fodder, asis = TRUE, echo = FALSE, comment = NA}
 test_fodder <- c(
   "context(\"Binding factors\")",
   "",
@@ -543,7 +560,7 @@ add(repo, path = paths)
 commit(repo, message = "Test fbind()")
 ```
 
-You should probably first run this test interactively, as you will when you write your own. Note you'll have to load testthat via `library(testthat)` in your R session first.
+Run this test interactively, as you will when you write your own. Note you'll have to load testthat via `library(testthat)` in your R session first and you'll probably want to `load_all()`.
 
 Going forward, your tests will mostly run *en masse* and at arms's length:
 
@@ -555,12 +572,12 @@ Going forward, your tests will mostly run *en masse* and at arms's length:
 ```{r test}
 test()
 ```
-   
+
 Your tests are also run whenever you `check()` the package. In this way, you basically augment the standard checks with some of your own, that are specific to your package.
 
-For much more guidance, read the [testing chapter](http://r-pkgs.had.co.nz/tests.html) in R Packages. 
+For much more guidance, read the [testing chapter](http://r-pkgs.had.co.nz/tests.html) in R Packages.
 
-## Use a function from another package
+## `use_package()`
 
 *I have some regrets about using `dplyr` as an example. It invites tricky questions about importing `%>%` and non-standard evalution as the students extend the package in homework. Seek an alternative external package? Maybe I should use forcats::fct::count()?*
 
@@ -586,7 +603,7 @@ Now we add a new function to foofactors that does, indeed, use a function from d
 
 Create a new file `R/freq_out.R` with this function definition:
 
-```{r freq-out-fodder, as.is = TRUE, echo = FALSE, comment = NA}
+```{r freq-out-fodder, asis = TRUE, echo = FALSE, comment = NA}
 freq_out_fodder <- c(
   "#' Make a frequency table for a factor",
   "#'",
@@ -611,6 +628,13 @@ add(repo, path = paths)
 commit(repo, message = "Add freq_out()")
 ```
 
+Try out the new function.
+
+```{r freq-out-test-drive}
+load_all()
+freq_out(iris$Species)
+```
+
 Generate the associated help file via `document()` or *Build > Document*.
 
 ```{r document-freq-out}
@@ -623,7 +647,7 @@ add(repo, path = paths)
 commit(repo, message = "Document freq_out()")
 ```
 
-## Document the package as a whole
+## `use_package_doc()`
 
 *Update to use the new sentinel and describe it accurately? Maybe devtools should be updated to do that too?*
 
@@ -639,7 +663,7 @@ This creates a peculiar dummy file `R/foofactors-package.R` with a roxygen heade
 
 Edit `R/foofactors-package.R` to look something like this. I just copied info from `DESCRIPTION` but you can add more info here and possibly should in real life.  This file isn't subject to the same CRAN checks as `DESCRIPTION`, so you have much more freedom.
 
-```{r pkg-doc-fodder, as.is = TRUE, echo = FALSE, comment = NA}
+```{r pkg-doc-fodder, asis = TRUE, echo = FALSE, comment = NA}
 pkg_doc_fodder <- trimws("
 #' foofactors: Make factors less annoying
 #'
@@ -674,7 +698,13 @@ add(repo, path = paths)
 commit(repo, message = "Run document()")
 ```
 
-## Add a vignette
+Have a look at your new package-level docs:
+
+```{r eval = FALSE}
+?foofactors
+```
+
+## `use_vignette()`
 
 A piece of package-level documentation that's probably familiar to you is the vignette. This is a great place to put a fully developed example that calls multiple functions from your package to do something useful and realistic. See the [vignettes chapter](http://r-pkgs.had.co.nz/vignettes.html) of R Packages for more.
 
@@ -686,10 +716,11 @@ use_vignette("hello-foofactors")
 
 Here's what happens:
 
-  * Adds knitr and rmarkdown to `Suggests` in `DESCRIPTION`
-  * Creates a new file with boilerplate vignette content, `vignettes/hello-foofactors.Rmd`
-  * Adds `inst/doc` to `.gitignore`
-`
+  * Adds knitr and rmarkdown to `Suggests` in `DESCRIPTION`.
+  * Creates a new file with boilerplate vignette content, `vignettes/hello-foofactors.Rmd`.
+  * Adds `inst/doc` to `.gitignore`.
+  * If using RStudio, open `vignettes/hello-foofactors.Rmd` for editing.
+
 ```{r commit-boilerplate-vignette, include = params$debug}
 paths <- unlist(status(repo))
 add(repo, path = paths)
@@ -701,10 +732,10 @@ Now you need to edit `vignettes/hello-foofactors.Rmd`. At the very least, do thi
   * Replace **both instances** of "Vignette Title" in the YAML with an actual title and with the same title.
   * List yourself as author or remove that line.
   * Remove the boilerplate content and throw in some usage. Even early on, just mine your examples or tests for something to throw in here. It is better than nothing.
-  
+
 The vignette source can be seen here: [vignettes/hello-foofactors.Rmd](https://raw.githubusercontent.com/jennybc/foofactors/master/vignettes/hello-foofactors.Rmd)
 
-```{r copy-vignette, as.is = TRUE, echo = FALSE, comment = NA, include = params$debug}
+```{r copy-vignette, asis = TRUE, echo = FALSE, comment = NA, include = params$debug}
 vignette_path <- file.path("vignettes", "hello-foofactors.Rmd")
 file.copy(file.path(owd, "foofactors-vignette.Rmd"),
           vignette_path, overwrite = TRUE)
@@ -747,9 +778,9 @@ Which means vignette `.md` would be left behind in `vignettes/` and therefore po
 
 *I'm really not sure what to advise here?*
 
-## `use_github()`: connect to GitHub
+## `use_github()`
 
-This creates a remote companion repository on GitHub and will get things hooked up so your Push and Pull buttons work in RStudio. If you prefer, you can always create the GitHub repo in the browser and use command line Git to add the GitHub remote and set an upstream tracking branch for `master`.
+This creates a remote companion repository on GitHub, sets an upstream tracking branch for `master`, and makes an initial push. If you use RStudio, this means your Push and Pull buttons will work. If you prefer, you can always create the GitHub repo in the browser and use command line Git to add the GitHub remote and set an upstream tracking branch for `master`.
 
 To connect to GitHub, under the hood devtools calls the GitHub API. This means you'll need to use your GitHub account to get a personal access token (PAT).
 
@@ -769,46 +800,57 @@ Sys.getenv("GITHUB_PAT")
 
 You should see your PAT print to screen.
 
-Connect your package to a new, public GitHub repo using the https protocol like so:
+Submit the appropriate line below to use `devtools::use_github()` to connect the local foofactors Git repo to a new GitHub repo:
 
 ```{r eval = FALSE}
+## public repo using https
 use_github(protocol = "https")
+
+## private repo using https
+use_github(protocol = "https", private = TRUE)
+
+## public repo using ssh
+use_github()
+
+## private repo using ssh
+use_github(private = TRUE)
+
 ```
 
 ```{r use-github, echo = FALSE, eval = params$github}
-use_github(protocol = "https")
-#use_github(protocol = "https", private = TRUE)
+#use_github(protocol = "https")
+use_github(protocol = "https", private = TRUE)
 ```
 
-If you have a private repo to spare, feel free to add `private = TRUE`.
+Go look at your package's repo on GitHub! It should look very similar to the package created by this vignette <https://github.com/jennybc/foofactors>. If you use RStudio, your Pull and Push buttons should now work.
 
-If you use SSH, remove `protocol = "https"` (SSH is the default).
+## `use_readme_rmd()`
 
-Go look at your package's repo on GitHub! You should also be able to use the Pull and Push buttons from RStudio now.
+Now that your package is on GitHub, the `README.md` file matters. It is the package's home page and welcome mat.
 
-## Use `README.Rmd`
-
-*Update this, in light of new README.Rmd template*
-
-Now that your package is on GitHub, the `README.md` file matters. It is the package's home page.
-
-Provide code to install your package, explain what it's for, and show a bit of usage. Copy stuff liberally from `DESCRIPTION`, `R/foofactors-package.R`, examples, and the vignette. Anything is better than nothing. Otherwise ... do you expect people to install your package and comb through individual help files to figure out how to use it?
-
-It is best to write your `README` in R markdown, so it can show some actual usage. It will load the currently installed version of your package, so this is a good time to do "Build & Reload" in RStudio. Or do this in R Console:
-
-```{r pre-readme-install}
-install()
-```
-
-This devtools function will set things up for `README.Rmd`:
+The `devtools::use_readme_rmd()` function initializes a basic, executable `README.Rmd` ready for you to edit:
 
 ```{r use-readme-rmd}
 use_readme_rmd()
 ```
 
-This inserts a boilerplate `README.Rmd` file, adds some lines to `.Rbuildignore`, and creates a Git pre-commit hook to help you keep `README.Rmd` and `README.md` in sync.
+In addition to creating `README.Rmd`, this adds some lines to `.Rbuildignore`, and creates a Git pre-commit hook to help you keep `README.Rmd` and `README.md` in sync.
 
-You should edit this file to include, for example, some usage of `fbind()` and/or `freq_out()`.
+`README.Rmd` already has sections that:
+
+  * Prompt you to describe the purpose of the package.
+  * Provide code to install your package.
+  * Prompt you to show a bit of usage.
+
+How to populate this skeleton? Copy stuff liberally from `DESCRIPTION`, `R/foofactors-package.R`, examples, and the vignette. Anything is better than nothing. Otherwise ... do you expect people to install your package and comb through individual help files to figure out how to use it?
+
+We write the `README` in R markdown, so it can feature actual usage. It will load the currently installed version of your package, so this is a good time to do "Build & Reload" in RStudio. Or do this in R Console:
+
+```{r pre-readme-install}
+install()
+```
+
+If RStudio has not already done so, open `README.Rmd` for editing. Make sure it shows some usage of `fbind()` and/or `freq_out()`, for example.
 
 ```{r commit-readme-rmd, include = params$debug}
 paths <- unlist(status(repo))
@@ -823,7 +865,7 @@ file.copy(file.path(owd, "foofactors-README.Rmd"),
           "README.Rmd", overwrite = TRUE)
 ```
 
-```{r cat-readme-rmd, as.is = TRUE, echo = FALSE, comment = NA}
+```{r cat-readme-rmd, asis = TRUE, echo = FALSE, comment = NA, include = FALSE}
 cat(readLines("README.Rmd"), sep = "\n")
 ```
 
@@ -851,6 +893,11 @@ commit(repo, message = "Write README.Rmd and render")
 ```{r final-push, eval = params$github, include = params$debug}
 push(repo, credentials = cred_user_pass("EMAIL",
                                         Sys.getenv("GITHUB_PAT")))
+## if tags become useful, here's how to push one
+## push(repo, "origin", "refs/tags/fbind-init",
+##      credentials = cred_user_pass("EMAIL", Sys.getenv("GITHUB_PAT")))
+## not clear if git2r has easy way to push all tags
+## https://github.com/ropensci/git2r/issues/265
 ```
 
 ## The End
