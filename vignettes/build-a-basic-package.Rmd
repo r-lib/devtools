@@ -47,11 +47,11 @@ if (interactive()) {
 We use multiple functions from devtools to build a small toy package from scratch, with features commonly seen in released packages:
 
   * Developed under version control (Git, in this case) and in the open (GitHub, in this case). *optional, but shown*
-  * Documentation for individual functions, using convenience wrappers in devtools to call [roxygen2](https://CRAN.R-project.org/package=roxygen2).
-  * Unit testing, using convenience wrappers in devtools to exploit [testthat](https://CRAN.R-project.org/package=testthat).
-  * Documentation for the package as a whole, via a package-level help file, a vignette, and `README.Rmd`.
+  * Documentation for individual functions, using convenience functions in devtools that call [roxygen2](https://CRAN.R-project.org/package=roxygen2).
+  * Unit testing, using convenience functions in devtools to exploit [testthat](https://CRAN.R-project.org/package=testthat).
+  * Documentation for the package as a whole, via a package-level help file, a vignette, and an executable `README.Rmd`.
 
-We call the package **foofactors** and it will consist of a couple functions for handling factors. Please note that these functions are super simple and definitely not the point! For a proper package in this space, please see [forcats](https://cran.r-project.org/package=forcats).
+We call the package **foofactors** and it will consist of a couple functions for handling factors. Please note that these functions are super simple and definitely not the point! For a proper package for factor handling, please see [forcats](https://cran.r-project.org/package=forcats).
 
 The foofactors package itself is not the only purpose of this vignette. It is also meant to demonstrate a typical workflow for package development with devtools.
 
@@ -199,9 +199,9 @@ writeLines(fbind_fodder, file.path("R", "fbind.R"))
 cat(fbind_fodder, sep = "\n")
 ```
 
-Where do you put this function definition? Save it in a `.R` file, in the `R/` subdirectory of your package. A reasonable default is to make a new `.R` file for each function in your package and name the file after the function. So we save the above definition of `fbind()` in the file `R/fbind.R`. The file should consist solely of this function definition, i.e. it should NOT contain other top-level code we have recently run, such as `library(devtools)` or `use_git()`. Package code should *never* contain a call to `library()`.
+Where do you put this function definition? Save it in a `.R` file, in the `R/` subdirectory of your package. A reasonable default is to make a new `.R` file for each function in your package and name the file after the function. So we save the above definition of `fbind()` in the file `R/fbind.R`. The file should consist solely of this function definition, i.e. it should NOT contain other top-level code we have recently executed, such as `library(devtools)` or `use_git()`. Package code should *never* contain a call to `library()`.
 
-How do we test drive `fbind()`? If this were a regular R script, we might use Rstudio or Emacs/ESS to send the function definition to the R Console, thereby defining `fbind()` in the global workspace. For package development, we want to approach this differently.
+How do we test drive `fbind()`? If this were a regular R script, we might use Rstudio or Emacs/ESS to send the function definition to the R Console, thereby defining `fbind()` in the global workspace. Or we might do so via `source("R/fbind.R")`. For package development, however, devtools offers a more robust approach.
 
 ## `load_all()` to test drive
 
@@ -211,7 +211,7 @@ Call `devtools::load_all()`:
 load_all()
 ```
 
-This simulates the process of building and installing the foofactors package and makes the functions within available for use. In the long run, as your package accumulates more functions, some exported, some not, some of which call each other, `load_all()` gives you an accurate sense of how the package is developing.
+This simulates the process of building, installing, and loading the foofactors package. In the long run, as your package accumulates more functions, some exported, some not, some of which call each other, `load_all()` gives you the most accurate sense of how the package is developing.
 
 Call `fbind(a, b)` to see how it works.
 
@@ -243,7 +243,7 @@ You may want to learn the RStudio keyboard and menu shortcuts for `load_all()`:
 
 If you're using Git, use your preferred method to commit the new `R/fbind.R` file.
 
-```{r fbind-init, include = params$debug}
+```{r fbind-init, echo = params$debug, comment = NA}
 add(repo, path = file.path("R", "fbind.R"))
 commit(repo, message = "Add fbind()")
 ## tags might be useful for making stable links to the package at specific
@@ -259,18 +259,18 @@ commit(repo, message = "Add fbind()")
 The diff associated with this commit should look something like this, though you may have a nicer way of inspecting it:
 -->
 
-```{r ugly-diff, include = FALSE, echo = FALSE, asis = TRUE}
+```{r ugly-diff, include = FALSE, eval = FALSE, asis = TRUE}
 commits(repo)[[1]]
 tree_1 <- tree(commits(repo)[[2]])
 tree_2 <- tree(commits(repo)[[1]])
 cat(diff(tree_1, tree_2, as_char = TRUE))
 ```
 
-From this point on, we make commits after each step, indicated by a brief comment. Remember [these commits](https://github.com/jennybc/foofactors/commits/master) are available in the public repository.
+From this point on, we make commits after each step, indicated by a brief message like that above. Remember [these commits](https://github.com/jennybc/foofactors/commits/master) are available in the public repository.
 
 ## `check()` and `install()`
 
-We have solid evidence that `fbind()` works. But how can we be sure that all the moving parts of the package still work? This may seem silly to check, after such a small step, but it's good to establish the habit of checking this often.
+We have solid evidence that `fbind()` works. But how can we be sure that all the moving parts of the package still work? This may seem silly to check, after such a small addition, but it's good to establish the habit of checking this often.
 
 How do we move our local source package through the necessary stages to get it properly installed? (Figure from [R Packages](http://r-pkgs.had.co.nz/package.html#package).)
 
@@ -388,7 +388,7 @@ writeLines(DESCRIPTION_fodder, "DESCRIPTION")
 cat(DESCRIPTION_fodder, sep = "\n")
 ```
 
-```{r commit-description, include = params$debug}
+```{r commit-description, echo = params$debug, comment = NA}
 add(repo, path = "DESCRIPTION")
 commit(repo, message = "Edit DESCRIPTION")
 ```
@@ -414,7 +414,7 @@ writeLines(LICENSE_fodder, "LICENSE")
 cat(LICENSE_fodder, sep = "\n")
 ```
 
-```{r commit-license, include = params$debug}
+```{r commit-license, echo = params$debug, comment = NA}
 add(repo, path = "LICENSE")
 commit(repo, message = "Add LICENSE")
 ```
@@ -456,7 +456,7 @@ writeLines(c(fbind_roxygen_header, paste(fbind_safe, collapse = "\n")),
 cat(fbind_roxygen_header, sep = "\n")
 ```
 
-```{r commit-fbind-roxygen-header, include = params$debug}
+```{r commit-fbind-roxygen-header, echo = params$debug, comment = NA}
 add(repo, path = file.path("R", "fbind.R"))
 commit(repo, message = "Add roxygen header to document fbind()")
 ```
@@ -497,8 +497,9 @@ It no longer has the placeholder content saying "export everything". Instead, th
 
 The export directive in `NAMESPACE` is what's required to "export a function" and it's what makes `fbind()` available to a user after loading foofactors via `library(foofactors)`. Just as it is entirely possible to author `.Rd` files "by hand", you can manage `NAMESPACE` explicitly yourself. But we are opting to delegate this to devtools and roxygen2.
 
-```{r commit-namespace, include = params$debug}
-add(repo, path = c("DESCRIPTION", "NAMESPACE", file.path("man", "fbind.Rd")))
+```{r commit-namespace, echo = params$debug, comment = NA}
+add(repo, path = c("DESCRIPTION", "NAMESPACE",
+                   file.path("man", "fbind.Rd")))
 commit(repo, message = "Run document()")
 tag(repo, "pass-check", "first pass R CMD check")
 ```
@@ -523,7 +524,7 @@ use_testthat()
 
 This initializes the unit testing machinery for your package. It adds `Suggests: testthat` to `DESCRIPTION`, creates the directory `tests/testthat`, and adds the script `test/testthat.R`.
 
-```{r commit-testthat-init, include = params$debug}
+```{r commit-testthat-init, echo = params$debug, comment = NA}
 paths <- unlist(status(repo))
 add(repo, path = paths)
 commit(repo, message = "Add testing infrastructure")
@@ -554,7 +555,7 @@ cat(test_fodder, sep = "\n")
 
 This tests that `fbind()` gives an expected result when combining two factors and a character vector and a factor.
 
-```{r commit-fbind-test, include = params$debug}
+```{r commit-fbind-test, echo = params$debug, comment = NA}
 paths <- unlist(status(repo))
 add(repo, path = paths)
 commit(repo, message = "Test fbind()")
@@ -591,7 +592,7 @@ First, declare your general intent to use some functions from the dplyr namespac
 use_package("dplyr")
 ```
 
-```{r commit-dplyr-imports, include = params$debug}
+```{r commit-dplyr-imports, echo = params$debug, comment = NA}
 paths <- unlist(status(repo))
 add(repo, path = paths)
 commit(repo, message = "Declare we will use dplyr")
@@ -622,7 +623,7 @@ writeLines(freq_out_fodder, file.path("R", "freq_out.R"))
 cat(freq_out_fodder, sep = "\n")
 ```
 
-```{r commit-freq-out, include = params$debug}
+```{r commit-freq-out, echo = params$debug, comment = NA}
 paths <- unlist(status(repo))
 add(repo, path = paths)
 commit(repo, message = "Add freq_out()")
@@ -641,7 +642,7 @@ Generate the associated help file via `document()` or *Build > Document*.
 document()
 ```
 
-```{r commit-freq-out-rd, include = params$debug}
+```{r commit-freq-out-rd, echo = params$debug, comment = NA}
 paths <- unlist(status(repo))
 add(repo, path = paths)
 commit(repo, message = "Document freq_out()")
@@ -680,7 +681,7 @@ writeLines(pkg_doc_fodder, file.path("R", "foofactors-package.R"))
 cat(pkg_doc_fodder, sep = "\n")
 ```
 
-```{r commit-package-doc, include = params$debug}
+```{r commit-package-doc, echo = params$debug, comment = NA}
 paths <- unlist(status(repo))
 add(repo, path = paths)
 commit(repo, message = "Add package-level doc")
@@ -692,7 +693,7 @@ Don't forget to run `document()`!
 document()
 ```
 
-```{r commit-package-Rd, include = params$debug}
+```{r commit-package-Rd, echo = params$debug, comment = NA}
 paths <- unlist(status(repo))
 add(repo, path = paths)
 commit(repo, message = "Run document()")
@@ -721,7 +722,7 @@ Here's what happens:
   * Adds `inst/doc` to `.gitignore`.
   * If using RStudio, open `vignettes/hello-foofactors.Rmd` for editing.
 
-```{r commit-boilerplate-vignette, include = params$debug}
+```{r commit-boilerplate-vignette, echo = params$debug, comment = NA}
 paths <- unlist(status(repo))
 add(repo, path = paths)
 commit(repo, message = "Init vignette")
@@ -742,7 +743,7 @@ file.copy(file.path(owd, "foofactors-vignette.Rmd"),
 #cat(readLines(vignette_path), sep = "\n")
 ```
 
-```{r commit-vignette, include = params$debug}
+```{r commit-vignette, echo = params$debug, comment = NA}
 paths <- unlist(status(repo))
 add(repo, path = paths)
 commit(repo, message = "Write vignette")
@@ -852,7 +853,7 @@ install()
 
 If RStudio has not already done so, open `README.Rmd` for editing. Make sure it shows some usage of `fbind()` and/or `freq_out()`, for example.
 
-```{r commit-readme-rmd, include = params$debug}
+```{r commit-readme-rmd, echo = params$debug, comment = NA}
 paths <- unlist(status(repo))
 add(repo, path = paths)
 commit(repo, message = "Set up README.Rmd")
@@ -884,7 +885,7 @@ You can see the rendered `README.md` simply by [visiting foofactors on GitHub](h
 
 Finally, don't forget to do one last commit. And push!
 
-```{r commit-rendered-readme, include = params$debug}
+```{r commit-rendered-readme, echo = params$debug, comment = NA}
 paths <- unlist(status(repo))
 add(repo, path = paths)
 commit(repo, message = "Write README.Rmd and render")

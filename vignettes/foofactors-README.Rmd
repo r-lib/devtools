@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-**NOTE: This is a toy package created in a [devtools](https://cran.r-project.org/package=devtools) vignette for documentation purposes. It is not meant to actually be useful. If you want a package for factor handling, please see [forcats](https://cran.r-project.org/package=forcats).**
+**NOTE: This is a toy package created for expository purposes. It is not meant to actually be useful. If you want a package for factor handling, please see [forcats](https://cran.r-project.org/package=forcats).**
 
 ### foofactors
 
