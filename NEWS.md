@@ -1,5 +1,7 @@
 # devtools 1.12.0.9000
 
+* Bugfix for installation of dependencies of dependencies (@jimhester, #1409).
+
 * `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
   removed. These functions never worked terribly well, and have been replaced 
   by the much better functions in callr.
