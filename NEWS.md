@@ -83,7 +83,9 @@
 
 * `setup()` and `create()` gain new `quiet` argument (#1284, @krlmlr).
 
-* Print summary table in README.md and problems.md (#1284, @krlmlr).Revdep check improvements (#1284)
+* Print summary table in README.md and problems.md (#1284, @krlmlr).
+
+* Revdep check improvements (#1284).
 
 * Avoid unnecessary query of `available_packages()` (#1269, @krlmlr).
 
