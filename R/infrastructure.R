@@ -255,8 +255,8 @@ use_package_doc <- function(pkg = ".") {
 #' about how to best use it.
 #'
 #' @param package Name of package to depend on.
-#' @param type Type of dependency: must be one of "Imports", "Suggests",
-#'   "Depends", "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)
+#' @param type Type of dependency: must be one of "Imports", "Depends", 
+#'   "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
 #' @family infrastructure
