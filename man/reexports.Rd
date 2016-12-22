@@ -2,12 +2,16 @@
 % Please edit documentation in R/pkgbuild.R, R/pkgload.R
 \docType{import}
 \name{reexports}
+\alias{reexports}
 \alias{build}
+\alias{reexports}
+\alias{with_debug}
+\alias{reexports}
 \alias{load_all}
 \alias{reexports}
 \alias{unload}
-\alias{with_debug}
 \title{Objects exported from other packages}
+\keyword{internal}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.
@@ -17,5 +21,4 @@ below to see their documentation.
 
   \item{pkgload}{\code{\link[pkgload]{load_all}}, \code{\link[pkgload]{unload}}}
 }}
-\keyword{internal}
 
