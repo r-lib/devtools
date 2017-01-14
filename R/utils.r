@@ -154,10 +154,11 @@ first_upper <- function(x) {
 }
 
 download <- function(path, url, ...) {
-  request <- httr::GET(url, ...)
-  httr::stop_for_status(request)
-  writeBin(httr::content(request, "raw"), path)
-  path
+  if (utils::download.file(url, path, mode = "wb") == 0) {
+    path
+  } else {
+    error()
+  }
 }
 
 download_text <- function(url, ...) {
