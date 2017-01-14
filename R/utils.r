@@ -157,7 +157,7 @@ download <- function(path, url, ...) {
   if (utils::download.file(url, path, mode = "wb") == 0) {
     path
   } else {
-    error()
+    stop()
   }
 }
 
