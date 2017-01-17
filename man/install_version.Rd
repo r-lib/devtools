@@ -2,23 +2,23 @@
 % Please edit documentation in R/install-version.r
 \name{install_version}
 \alias{install_version}
-\title{Install specified version of a CRAN package.}
+\title{Install specific version of a package.}
 \usage{
 install_version(package, version = NULL, repos = getOption("repos"),
   type = getOption("pkgType"), ...)
 }
 \arguments{
-\item{package}{package name}
+\item{package}{Name of the package to install.}
 
-\item{version}{If the specified version is NULL or the same as the most
-recent version of the package, this function simply calls
-\code{\link{install}}. Otherwise, it looks at the list of
-archived source tarballs and tries to install an older version instead.}
+\item{version}{Version of the package to install.  Can either be a string giving the exact
+version required, or a specification in the same format as the parenthesized expressions used
+in package dependencies (see \code{\link{parse_deps}} and/or
+\url{https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-Dependencies}).}
 
 \item{repos}{
     character vector, the base URL(s) of the repositories
     to use, e.g., the URL of a CRAN mirror such as
-    \code{"http://cran.us.r-project.org"}.  For more details on
+    \code{"https://cloud.r-project.org"}.  For more details on
     supported URL schemes see \code{\link{url}}.
 
     Can be \code{NULL} to install from local files, directories or URLs:
@@ -26,19 +26,41 @@ archived source tarballs and tries to install an older version instead.}
   }
 
 \item{type}{character, indicating the type of package to download and
-    install.  Will be \code{"source"} except on Windows and some OS X
+    install.  Will be \code{"source"} except on Windows and some macOS
     builds: see the section on \sQuote{Binary packages} for those.
   }
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
 }
 \description{
-If you are installing an package that contains compiled code, you will
-need to have an R development environment installed.  You can check
-if you do by running \code{\link[pkgbuild]{has_build_tools}}.
+This function knows how to look in multiple CRAN-like package repositories, and in their
+\code{archive} directories, in order to find specific versions of the requested package.
+}
+\details{
+The repositories are searched in the order specified by the \code{repos} argument.  This enables
+teams to maintain multiple in-house repositories with different policies - for instance, one repo
+for development snapshots and one for official releases.  A common setup would be to first search
+the official release repo, then the dev snapshot repo, then a public CRAN mirror.
+
+Older versions of packages on CRAN are usually only available in source form.  If your requested
+package contains compiled code, you will need to have an R development environment installed. You
+can check if you do by running \code{\link[pkgbuild]{has_devel}}.
+}
+\examples{
+\dontrun{
+install_version('devtools', '1.11.0')
+install_version('devtools', '>= 1.12.0')
+
+## Specify search order (e.g. in ~/.Rprofile)
+options(repos=c(prod = 'http://mycompany.example.com/r-repo',
+                dev  = 'http://mycompany.example.com/r-repo-dev',
+                CRAN = 'https://cran.revolutionanalytics.com'))
+install_version('mypackage', '1.15')        # finds in 'prod'
+install_version('mypackage', '1.16-39487')  # finds in 'dev'
+}
 }
 \author{
-Jeremy Stephens
+Jeremy Stephens and Ken Williams
 }
 \seealso{
 Other package installation: \code{\link{install_bioc}},
