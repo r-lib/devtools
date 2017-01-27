@@ -1,5 +1,8 @@
 # devtools 1.12.0.9000
 
+* `run_examples` was mistakenly passing `show` to
+  `pkgload::run_example`, causing it to fail (@amcdavid, #1449)
+
 * Bugfix for installation of dependencies of dependencies (@jimhester, #1409).
 
 * `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
