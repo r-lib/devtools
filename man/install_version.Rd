@@ -18,7 +18,7 @@ archived source tarballs and tries to install an older version instead.}
 \item{repos}{
     character vector, the base URL(s) of the repositories
     to use, e.g., the URL of a CRAN mirror such as
-    \code{"http://cran.us.r-project.org"}.  For more details on
+    \code{"https://cloud.r-project.org"}.  For more details on
     supported URL schemes see \code{\link{url}}.
 
     Can be \code{NULL} to install from local files, directories or URLs:
@@ -26,7 +26,7 @@ archived source tarballs and tries to install an older version instead.}
   }
 
 \item{type}{character, indicating the type of package to download and
-    install.  Will be \code{"source"} except on Windows and some OS X
+    install.  Will be \code{"source"} except on Windows and some macOS
     builds: see the section on \sQuote{Binary packages} for those.
   }
 
