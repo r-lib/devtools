@@ -4,7 +4,7 @@
 \alias{spell_check}
 \title{Spell checking}
 \usage{
-spell_check(pkg = ".", ignore = character())
+spell_check(pkg = ".", ignore = character(), ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -12,6 +12,8 @@ spell_check(pkg = ".", ignore = character())
 
 \item{ignore}{character vector with words to ignore. See
 \code{\link[hunspell:hunspell]{hunspell}} for more information}
+
+\item{...}{additional arguments passed to \code{\link[hunspell:hunspell]{hunspell}}}
 }
 \description{
 Runs a spell check on text fields in the package description file and
