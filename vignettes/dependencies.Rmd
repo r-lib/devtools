@@ -52,9 +52,8 @@ A type of 'github' can be specified, but is not required
 Remotes: github::hadley/ggplot2
 ```
 
-Remember that the `Remotes:` field only specifies the *source* of a package, but it does not actually make it available to the R session.
-You still also have to call the package in `Imports:`, `Suggests:` `Depends:` or  `LinkingTo:`.
-In the above example, where the *package name* and the *repo name* are identical, you still need `Imports: ggplot2` in your `DESCRIPTION`.
+Remember that `Remotes:` specifies the *source* of a development package, so the package still needs to be listed in `Imports:`, `Suggests:` `Depends:` or `LinkingTo:`.
+For example, the above `DESCRIPTION` would also require an `Imports: ggplot2` line for `ggplot2` to actually be imported.
 
 
 ### Other sources
