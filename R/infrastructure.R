@@ -319,7 +319,7 @@ add_desc_package <- function(pkg = ".", field, name) {
     new <- name
     changed <- TRUE
   } else {
-    if (!grepl(paste0('\\W', name, '(,|$|\\s)'), old)) {
+    if (!grepl(paste0('\\b', name, '\\b'), old)) {
       new <- paste0(old, ",\n    ", name)
       changed <- TRUE
     } else {
