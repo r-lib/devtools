@@ -15,6 +15,7 @@ BugReports: https://github.com/hadley/devtools/issues
 Depends:
     R (>= 3.0.2)
 Imports:
+    callr,
     httr (>= 0.4),
     utils,
     tools,
@@ -26,7 +27,9 @@ Imports:
     jsonlite,
     stats,
     git2r (>= 0.11.0),
-    withr
+    withr,
+    pkgbuild,
+    pkgload
 Suggests:
     curl (>= 0.9),
     crayon,
@@ -44,7 +47,10 @@ Suggests:
     rversions,
     covr,
     gmailr (> 0.7.0)
-Remotes: hadley/testthat
+Remotes:
+  hadley/testthat,
+  r-pkgs/pkgload,
+  mangothecat/callr
 License: GPL (>= 2)
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 5.0.1.9000

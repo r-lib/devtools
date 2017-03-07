@@ -20,10 +20,10 @@ rule <- function(..., pad = "-") {
   if (nargs() == 0) {
     title <- ""
   } else {
-    title <- paste0(...)
+    title <- paste0(..., " ")
   }
-  width <- getOption("width") - nchar(title) - 1
-  message(title, " ", paste(rep(pad, width, collapse = "")))
+  width <- max(getOption("width") - nchar(title) - 1, 0)
+  message(title, paste(rep(pad, width, collapse = "")))
 }
 
 # check whether the specified file ends with newline
@@ -44,6 +44,31 @@ render_template <- function(name, data = list()) {
 is_installed <- function(pkg, version = 0) {
   installed_version <- tryCatch(utils::packageVersion(pkg), error = function(e) NA)
   !is.na(installed_version) && installed_version >= version
+}
+
+check_bioconductor <- function() {
+  if (is_installed("BiocInstaller")) {
+    return()
+  }
+
+  msg <- paste0("'BiocInstaller' must be installed to install Bioconductor packages")
+  if (!interactive()) {
+    stop(msg, call. = FALSE)
+  }
+
+  message(
+    msg, ".\n",
+    "Would you like to install it? ",
+    "This will source <https://bioconductor.org/biocLite.R>."
+  )
+
+  if (menu(c("Yes", "No")) != 1) {
+    stop("'BiocInstaller' not installed", call. = FALSE)
+  }
+
+  suppressMessages(
+    source("https://bioconductor.org/biocLite.R")
+  )
 }
 
 check_suggested <- function(pkg, version = NULL, compare = NA) {
@@ -174,65 +199,22 @@ all_named <- function (x) {
   !is.null(names(x)) && all(names(x) != "")
 }
 
-make_function <- function (args, body, env = parent.frame()) {
-  args <- as.pairlist(args)
-  stopifnot(all_named(args), is.language(body))
-  eval(call("function", args, body), env)
+sort_ci <- function(x) {
+  withr::with_collate("C", x[order(tolower(x), x)])
 }
 
-comp_lang <- function(x, y, idx = seq_along(y)) {
-  if (is.symbol(x) || is.symbol(y)) {
-    return(identical(x, y))
+comma <- function(x, at_most = 20) {
+  if (length(x) > at_most) {
+    x <- c(x[seq_len(at_most)], "...")
   }
-
-  if (length(x) < length(idx)) return(FALSE)
-
-  identical(x[idx], y[idx])
+  paste(x, collapse = ", ")
 }
 
-extract_lang <- function(x, f, ...) {
-  recurse <- function(y) {
-    unlist(compact(lapply(y, extract_lang, f = f, ...)), recursive = FALSE)
-  }
-
-  # if x matches predicate return it
-  if (isTRUE(f(x, ...))) {
-    return(x)
-  }
-
-  if (is.call(x)) {
-    res <- recurse(x)[[1]]
-    if (top_level_call <- identical(sys.call()[[1]], as.symbol("extract_lang"))
-        && is.null(res)) {
-      warning("Devtools is incompatible with the current version of R. `load_all()` may function incorrectly.")
-    }
-    return(res)
-  }
-
-  NULL
+is_loaded <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+  pkg$package %in% loadedNamespaces()
 }
 
-modify_lang <- function(x, f, ...) {
-  recurse <- function(x) {
-    lapply(x, modify_lang, f = f, ...)
-  }
-
-  x <- f(x, ...)
-
-  if (is.call(x)) {
-    as.call(recurse(x))
-  } else if (is.function(x)) {
-     formals(x) <- modify_lang(formals(x), f, ...)
-     body(x) <- modify_lang(body(x), f, ...)
-  } else {
-    x
-  }
-}
-
-strip_internal_calls <- function(x, package) {
-  if (is.call(x) && identical(x[[1L]], as.name(":::")) && identical(x[[2L]], as.name(package))) {
-    x[[3L]]
-  } else {
-    x
-  }
+is_attached <- function(pkg = ".") {
+  !is.null(pkgload::pkg_env(pkg))
 }

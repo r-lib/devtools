@@ -28,20 +28,20 @@ git_uncommitted <- function(path = ".") {
   any(st != 0)
 }
 
-git_sync_status <- function(path = ".") {
+git_sync_status <- function(path = ".", check_ahead = TRUE, check_behind = TRUE) {
   r <- git2r::repository(path, discover = TRUE)
 
   r_head <- git2r::head(r)
   if (!methods::is(r_head, "git_branch")) {
-    return(invisible(FALSE))
+    stop("HEAD is not a branch", call. = FALSE)
   }
 
   upstream <- git2r::branch_get_upstream(r_head)
-  # fetch(r, branch_remote_name(upstream))
-
   if (is.null(upstream)) {
-    return(invisible(FALSE))
+    stop("No upstream branch", call. = FALSE)
   }
+
+  git2r::fetch(r, git2r::branch_remote_name(upstream))
 
   c1 <- git2r::lookup(r, git2r::branch_target(r_head))
   c2 <- git2r::lookup(r, git2r::branch_target(upstream))
@@ -52,7 +52,10 @@ git_sync_status <- function(path = ".") {
 #   if (ab[2] > 0)
 #     message(ab[2], " behind remote")
 
-  invisible(any(ab != 0))
+  is_ahead <- ab[[1]] != 0
+  is_behind <- ab[[2]] != 0
+  check <- (check_ahead && is_ahead) || (check_behind && is_behind)
+  check
 }
 
 # Retrieve the current running path of the git binary.
@@ -135,8 +138,9 @@ github_remote_parse <- function(x) {
 
   if (grepl("^(https|git)", x)) {
     # https://github.com/hadley/devtools.git
+    # https://github.com/hadley/devtools
     # git@github.com:hadley/devtools.git
-    re <- "github[^/:]*[/:](.*?)/(.*)\\.git"
+    re <- "github[^/:]*[/:]([^/]+)/(.*?)(?:\\.git)?$"
   } else {
     stop("Unknown GitHub repo format", call. = FALSE)
   }

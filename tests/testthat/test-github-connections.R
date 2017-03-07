@@ -1,26 +1,5 @@
 context("git usage and GitHub connections")
 
-## set-up and tear-down
-create_in_temp <- function(pkg) {
-  temp_path <- tempfile(pattern="devtools-test-")
-  dir.create(temp_path)
-  test_pkg <- file.path(temp_path, pkg)
-  capture.output(suppressMessages(create(test_pkg)))
-  test_pkg
-}
-erase <- function(path) unlink(path, recursive = TRUE)
-
-## fake GitHub connectivity: set a GitHub remote and add GitHub links
-mock_use_github <- function(pkg) {
-  use_git(pkg = pkg)
-  r <- git2r::repository(pkg)
-  git2r::remote_add(r, "origin", "https://github.com/hadley/devtools.git")
-  use_github_links(pkg)
-  git2r::add(r, "DESCRIPTION")
-  git2r::commit(r, "Add GitHub links to DESCRIPTION")
-  invisible(NULL)
-}
-
 test_that("git (non-)usage is detected, diagnosed, and can be added", {
   skip_on_cran()
 
@@ -31,7 +10,8 @@ test_that("git (non-)usage is detected, diagnosed, and can be added", {
                                 "not a git repository"),
                  'DR_GITHUB FOUND PROBLEMS')
 
-  expect_message(use_git(pkg = test_pkg), "Initialising repo")
+  expect_message(use_git_with_config(message = "initial", pkg = test_pkg, add_user_config = TRUE),
+                 "Initialising repo")
   expect_true(uses_git(test_pkg))
 
   erase(test_pkg)
@@ -42,7 +22,7 @@ test_that("GitHub non-usage is handled", {
   skip_on_cran()
 
   test_pkg <- create_in_temp("testNoGitHub")
-  use_git(pkg = test_pkg)
+  use_git_with_config(message = "initial", pkg = test_pkg, add_user_config = TRUE, quiet = TRUE)
 
   expect_true(uses_git(test_pkg))
   expect_false(uses_github(test_pkg))
@@ -139,3 +119,10 @@ test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
 
 })
 
+test_that("username and repo are extracted from github remote URL", {
+  gh_info <- list(username = "hadley", repo = "devtools",
+                  fullname = "hadley/devtools")
+  expect_identical(github_remote_parse("https://github.com/hadley/devtools.git"), gh_info)
+  expect_identical(github_remote_parse("https://github.com/hadley/devtools"), gh_info)
+  expect_identical(github_remote_parse("git@github.com:hadley/devtools.git"), gh_info)
+})

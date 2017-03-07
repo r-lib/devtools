@@ -43,7 +43,7 @@
 #' @param document if \code{TRUE} (the default), will update and check
 #'   documentation before running formal check.
 #' @param build_args Additional arguments passed to \code{R CMD build}
-#' @param ... Additional arguments passed on to \code{\link{build}()}.
+#' @param ... Additional arguments passed on to \code{\link[pkgbuild]{build}()}.
 #' @param cleanup Deprecated.
 #' @seealso \code{\link{release}} if you want to send the checked package to
 #'   CRAN.
@@ -72,13 +72,19 @@ check <- function(pkg = ".",
   }
 
   if (!quiet) {
-    show_env_vars(compiler_flags(FALSE))
+    show_env_vars(pkgbuild::compiler_flags(FALSE))
     rule("Building ", pkg$package)
   }
 
-  withr::with_envvar(compiler_flags(FALSE), action = "prefix", {
-    built_path <- build(pkg, tempdir(), quiet = quiet, args = build_args,
-                        manual = manual, ...)
+  withr::with_envvar(pkgbuild::compiler_flags(FALSE), action = "prefix", {
+    built_path <- pkgbuild::build(
+      pkg$path,
+      tempdir(),
+      quiet = quiet,
+      args = build_args,
+      manual = manual,
+      ...
+    )
     on.exit(unlink(built_path), add = TRUE)
   })
 
@@ -92,7 +98,8 @@ check <- function(pkg = ".",
     args = args,
     env_vars = env_vars,
     quiet = quiet,
-    check_dir = check_dir
+    check_dir = check_dir,
+    needs_build_tools = pkgbuild::pkg_has_src(pkg$path)
   )
 }
 
@@ -114,12 +121,14 @@ check <- function(pkg = ".",
 #'   (\code{--no-manual}).
 #' @param args Additional arguments passed to \code{R CMD check}
 #' @param env_vars Environment variables set during \code{R CMD check}
+#' @param needs_build_tools If \code{TRUE}, will ensure build tools are
+#'   available when checking the package.
 #' @param check_dir the directory in which the package is checked
 #' @param quiet if \code{TRUE} suppresses output from this function.
 check_built <- function(path = NULL, cran = TRUE,
                         check_version = FALSE, force_suggests = FALSE,
                         run_dont_test = FALSE, manual = FALSE, args = NULL,
-                        env_vars = NULL,
+                        env_vars = NULL, needs_build_tools = TRUE,
                         check_dir = tempdir(), quiet = FALSE) {
 
   pkgname <- gsub("_.*?$", "", basename(path))
@@ -132,7 +141,12 @@ check_built <- function(path = NULL, cran = TRUE,
     args <- c("--run-donttest", args)
   }
 
-  if (manual && !has_latex(verbose = TRUE)) {
+  if (manual && !pkgbuild::has_latex()) {
+    message(
+      "pdflatex not found! Not building PDF manual or vignettes.\n",
+      "If you are planning to release this package, please run a check with ",
+      "manual and vignettes beforehand."
+    )
     manual <- FALSE
   }
 
@@ -146,11 +160,14 @@ check_built <- function(path = NULL, cran = TRUE,
     rule("Checking ", pkgname)
   }
 
-  R(c(paste("CMD check", shQuote(path)), args),
-    path = check_dir,
-    env_vars = env_vars,
-    quiet = quiet,
-    throw = FALSE
+  pkgbuild::rcmd_build_tools(
+    "check",
+    c(shQuote(path), args),
+    wd = check_dir,
+    env = env_vars,
+    echo = !quiet,
+    show = !quiet,
+    required = needs_build_tools
   )
 
   package_path <- file.path(

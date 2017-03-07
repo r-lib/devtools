@@ -1,11 +1,104 @@
 # devtools 1.12.0.9000
 
+* Bugfix for installation of dependencies of dependencies (@jimhester, #1409).
+
+* `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
+  removed. These functions never worked terribly well, and have been replaced 
+  by the much better functions in callr.
+  
+* `find_rtools()`, `setup_rtools()`, `has_devel()`, `compiler_flags()`,
+  `build()` and `with_debug()` have moved to the new pkgbuild package.
+  `build()` and `with_debug()` are re-exported by devtools.
+
+* Deprecated `build_github_devtools()` has been removed.
+
+* Bugfix for installation of dependencies in CRAN-like repositories such as
+  those created by drat (@jimhester, #1243, #1339).
+
+* Code related to simulating package loading has been pulled out into a 
+  separate package, pkgload. The following functions have been moved to 
+  pkgload without a shim: `clean_dll()`, `compile_dll()`, `dev_example()`, 
+  `dev_help()`, `dev_meta()`, `find_topic()`, `imports_env()`, `inst()`, 
+  `load_code()`, `load_dll()`, `ns_env()`, `parse_ns_file()`, `pkg_env()`. 
+  These functions are primarily for internal use.
+  
+    `load_all()` and `unload()` have been moved to pkgload, but devtools
+    provides shims since these are commonly used.
+
+* `load_all()` no longer automatically creates a description for you.
+
+* `use_test()` template no longer includes useless comments (#1349)
+
+* Add encoding support in `test_dir()` call by adding reference to pkg$encoding (#1306, @hansharhoff)
+
+* Parse valid Git remote URLs that lack trailing `.git`, e.g. GitHub browser URLs (#1253, @jennybc).
+
+* Add a `check_bioconductor()` internal function to automatically install
+  BiocInstaller() if it is not installed and the user wants to do so.
+
+* More tweaks to `revdep_check()` and friends to make debugging easier when
+  something goes wrong. This includes:
+  
+    * `revdep_check()` and `revdep_check_resume()` gain a skip argument
+      which takes a character vector of packages to skip.
+      
+    * `revdep_check()` and `check_cran()` gain a `quiet_check` argument.
+      You can use `quiet_check = FALSE` to see the actual text of R CMD
+      check as it runs (not recommending with multiple threads).
+  
+    * `revdep_check_resume()` now takes `...` which can be used to 
+      override settings from `revdep_check()`. For debugging a problem
+      with package checks, try 
+      `revdep_check(threads = 1, quiet_check = FALSE)`
+
+* New `use_gpl3_license()` sets the license field in `DESCRIPTION` and
+  includes a copy of the license in `LICENSE`.
+
+* `revdep_check()` collects timing information in `timing.md` (#1319, @krlmlr).
+
+* Package names and examples are sorted in case-insensitive C collation (#1322, @krlmlr).
+
+* `use_revdep()` adds `.gitignore` entry for check database (#1321, @krlmlr).
+
+* Improve Git integration. `use_git_ignore()` and `use_git_config()` gain `quiet` argument, tests work without setting `user.name` and `user.email` Git configuration settings (#1320, @krlmlr).
+
+* Own package is installed in temporary library for revdep checking (#1338, @krlmlr).
+
+* Improve Git status checks used in `release()` (#1205, @krlmlr).
+
+* Automated revdep check e-mails now can use the new `my_version` and
+  `you_cant_install` variables. The e-mail template has been updated
+  to use these variables (#1285, @krlmlr).
+
+* Installation failures are logged during revdep checking, by default in
+  `revdep/install`. Once an installation has failed, it is not attempted
+  a second time (#1300, @krlmlr).
+
+* Various minor improvements around checking of reverse dependencies
+  (#1284, @krlmlr). All packages involved are listed at the start,
+  the whole process is now more resilient against package
+  installation failures.
+
+* Improved handling of local `file://` repositories in `install()` (#1284, @krlmlr).
+
+* `setup()` and `create()` gain new `quiet` argument (#1284, @krlmlr).
+
+* Print summary table in README.md and problems.md (#1284, @krlmlr).Revdep check improvements (#1284)
+
+* Avoid unnecessary query of `available_packages()` (#1269, @krlmlr).
+
+* Add cache setting to AppVeyor template (#1290, @krlmlr).
+
+* Fix AppVeyor test by manually installing `curl` (#1301).
+
+* `install(dependencies = FALSE)` doesn't query the available packages anymore (@krlmlr, #1269).
+
 * `use_travis()` now opens a webpage in your browser to more easily activate
   a repo.
 
 * `use_readme_rmd()` and `use_readme()` share a common template with sections for package overview, GitHub installation (if applicable), and an example (@jennybc, #1287).
 
-* `test()` doesn't load helpers twice anymre (@krlmlr, #1256).
+* `test()` doesn't load helpers twice anymore (@krlmlr, #1256).
 
 * fix auto download method selection for `install_github()` on R 3.1 which
   lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)

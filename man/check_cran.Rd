@@ -5,9 +5,11 @@
 \title{Check a package from CRAN.}
 \usage{
 check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath,
-  bioconductor = FALSE, type = getOption("pkgType"),
-  threads = getOption("Ncpus", 1), check_dir = tempfile("check_cran"),
-  env_vars = NULL)
+  check_libpath = libpath, bioconductor = FALSE,
+  type = getOption("pkgType"), threads = getOption("Ncpus", 1),
+  check_dir = tempfile("check_cran"),
+  install_dir = tempfile("check_cran_install"), env_vars = NULL,
+  quiet_check = TRUE)
 }
 \arguments{
 \item{pkgs}{Vector of package names - note that unlike other \pkg{devtools}
@@ -21,6 +23,9 @@ with it so you don't have to download all the packages every time.}
 packages - again, this saves a lot of time because you don't need to
 redownload the packages every time you run the package.}
 
+\item{check_libpath}{Path to library used for checking, should contain
+the top-level library from \code{libpath}.}
+
 \item{bioconductor}{Include bioconductor packages in checking?}
 
 \item{type}{binary Package type to test (source, mac.binary etc). Defaults
@@ -29,9 +34,14 @@ to the same type as \code{\link{install.packages}()}.}
 \item{threads}{Number of concurrent threads to use for checking.
 It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 
-\item{check_dir}{Directory to store results.}
+\item{check_dir, install_dir}{Directory to store check and installation
+results.}
 
 \item{env_vars}{Environment variables set during \code{R CMD check}}
+
+\item{quiet_check}{If \code{TRUE}, suppresses individual \code{R CMD
+check} output and only prints summaries. Set to \code{FALSE} for
+debugging.}
 }
 \value{
 Returns (invisibly) the directory where check results are stored.

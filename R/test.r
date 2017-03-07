@@ -53,7 +53,12 @@ test <- function(pkg = ".", filter = NULL, ...) {
   Sys.sleep(0.05); utils::flush.console() # Avoid misordered output in RStudio
 
   env <- new.env(parent = ns_env)
-  withr::with_envvar(r_env_vars(), testthat::test_dir(test_path, filter = filter, env = env, ..., load_helpers = FALSE))
+  withr::with_envvar(r_env_vars(), testthat::test_dir(test_path, filter = filter,
+                                                      env = env,
+                                                      ...,
+                                                      load_helpers = FALSE,
+                                                      encoding = pkg$encoding %||% "unknown")
+                                                      )
 }
 
 find_test_dir <- function(path) {

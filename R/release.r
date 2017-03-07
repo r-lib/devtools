@@ -55,15 +55,9 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
   }
 
   if (uses_git(pkg$path)) {
-    if (git_uncommitted(pkg$path)) {
-      if (yesno("Uncommited changes in git. Proceed anyway?"))
-        return(invisible())
-    }
-
-    if (git_sync_status(pkg$path)) {
-      if (yesno("Git not synched with remote. Proceed anyway?"))
-        return(invisible())
-    }
+    git_checks(pkg)
+    if (yesno("Were Git checks successful?"))
+      return(invisible())
   }
 
   if (check) {
@@ -85,7 +79,7 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
       return(invisible())
   }
 
-  if (has_src(pkg)) {
+  if (pkgbuild::pkg_has_src(pkg$path)) {
     if (yesno("Have you run R CMD check with valgrind?"))
       return(invisible())
   }
@@ -111,7 +105,7 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
   if (yesno("Is DESCRIPTION up-to-date?"))
     return(invisible())
 
-  release_questions <- pkg_env(pkg)$release_questions
+  release_questions <- pkgload::pkg_env(pkg)$release_questions
   if (!is.null(release_questions)) {
     questions <- release_questions()
     for (question in questions) {
@@ -268,7 +262,7 @@ submit_cran <- function(pkg = ".", args = NULL) {
 
 build_cran <- function(pkg, args) {
   message("Building")
-  built_path <- build(pkg, tempdir(), manual = TRUE, args = args)
+  built_path <- pkgbuild::build(pkg$path, tempdir(), manual = TRUE, args = args)
   message("Submitting file: ", built_path)
   message("File size: ",
           format(as.object_size(file.info(built_path)$size), units = "auto"))

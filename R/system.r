@@ -10,7 +10,7 @@
 #' @param ... additional arguments passed to \code{\link[base]{system}}
 #' @keywords internal
 #' @export
-#' @return (Invisibly) the return value of the function.
+#' @return The exit status of the command, invisibly.
 system_check <- function(cmd, args = character(), env_vars = character(),
                          path = ".", quiet = FALSE, throw = TRUE,
                          ...) {
@@ -39,11 +39,52 @@ system_check <- function(cmd, args = character(), env_vars = character(),
   invisible(status)
 }
 
+#' @noRd
+#' @param out_file Path of file to which output is written if \code{quiet} is
+#'   \code{TRUE}
+system2_check <- function(cmd, args = character(), env_vars = character(),
+                          path = ".", quiet = FALSE, throw = TRUE,
+                          out_file = NULL, ...) {
+  full <- paste(shQuote(cmd), " ", paste(args, collapse = " "), sep = "")
+
+  if (!quiet) {
+    message(wrap_command(full))
+    message()
+  }
+
+  if (quiet)
+    std <- TRUE
+  else
+    std <- ""
+
+  result <- suppressWarnings(withr::with_dir(path, withr::with_envvar(env_vars,
+    system2(cmd, args, stdout = std, stderr = std, ...)
+  )))
+
+  if (quiet) {
+    if (!is.null(out_file)) {
+      writeLines(result, out_file)
+    }
+
+    status <- attr(result, "status") %||% 0L
+  } else {
+    status <- result
+  }
+
+  ok <- identical(as.character(status), "0")
+  if (throw && !ok) {
+    stop("Command failed (", status, ")", call. = FALSE)
+  }
+
+  invisible(status)
+}
+
 #' Run a system command and capture the output.
 #'
 #' @inheritParams system_check
+#' @param ... additional arguments passed to \code{\link[base]{system}}
 #' @return command output if the command succeeds, an error will be thrown if
-#' the command fails.
+#'   the command fails.
 #' @keywords internal
 #' @export
 system_output <- function(cmd, args = character(), env_vars = character(),

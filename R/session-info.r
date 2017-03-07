@@ -22,7 +22,7 @@ loaded_packages <- function() {
 #' @keywords internal
 dev_packages <- function() {
   packages <- vapply(loadedNamespaces(),
-    function(x) !is.null(dev_meta(x)), logical(1))
+    function(x) !is.null(pkgload::dev_meta(x)), logical(1))
 
   names(packages)[packages]
 }
@@ -97,10 +97,10 @@ print.platform_info <- function(x, ...) {
 package_info <- function(pkgs = loadedNamespaces(), include_base = FALSE,
                          libpath = NULL) {
   if (!include_base) {
-    base <- vapply(pkgs, pkg_is_base, logical(1))
+    base <- vapply(pkgs, pkg_is_base, libpath = libpath, logical(1))
     pkgs <- pkgs[!base]
   }
-  pkgs <- sort(pkgs)
+  pkgs <- sort_ci(pkgs)
   attached <- pkgs %in% sub("^package:", "", search())
 
   desc <- lapply(pkgs, packageDescription, lib.loc = libpath)
@@ -128,8 +128,8 @@ print.packages_info <- function(x, ...) {
   print.data.frame(x, right = FALSE, row.names = FALSE)
 }
 
-pkg_is_base <- function(pkg) {
-  desc <- packageDescription(pkg)
+pkg_is_base <- function(pkg, libpath) {
+  desc <- packageDescription(pkg, lib.loc = libpath)
   !is.null(desc$Priority) && desc$Priority == "base"
 }
 

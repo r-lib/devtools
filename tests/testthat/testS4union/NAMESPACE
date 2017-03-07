@@ -1,2 +1,0 @@
-exportClass(A, B, AB, mle2, mleA, mle2A)
-importClassesFrom(stats4, mle)

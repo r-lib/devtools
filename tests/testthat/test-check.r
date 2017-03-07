@@ -2,7 +2,7 @@ context("Check")
 
 test_that("sucessful check doesn't trigger error", {
   skip_on_cran()
-  results <- check("testTest", quiet = TRUE)
+  results <- check("testTest", document = FALSE, quiet = TRUE)
 
   expect_error(signal_check_results(results), NA)
   expect_equal(

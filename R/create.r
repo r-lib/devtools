@@ -15,6 +15,7 @@
 #' @param check if \code{TRUE}, will automatically run \code{\link{check}}
 #' @param rstudio Create an Rstudio project file?
 #'   (with \code{\link{use_rstudio}})
+#' @param quiet if \code{FALSE}, the default, prints informative messages.
 #' @seealso Text with \code{\link{package.skeleton}}
 #' @export
 #' @examples
@@ -30,7 +31,7 @@
 #' create(path, my_description)
 #' }
 create <- function(path, description = getOption("devtools.desc"),
-                   check = FALSE, rstudio = TRUE) {
+                   check = FALSE, rstudio = TRUE, quiet = FALSE) {
   check_package_name(path)
 
   # ensure the parent directory exists
@@ -59,7 +60,7 @@ create <- function(path, description = getOption("devtools.desc"),
 
   path <- normalizePath(path, winslash = "/", mustWork = TRUE)
   setup(path = path, description = description, rstudio = rstudio,
-        check = check)
+        check = check, quiet = quiet)
 
   invisible(TRUE)
 }
@@ -67,14 +68,16 @@ create <- function(path, description = getOption("devtools.desc"),
 #' @rdname create
 #' @export
 setup <- function(path = ".", description = getOption("devtools.desc"),
-                  check = FALSE, rstudio = TRUE) {
+                  check = FALSE, rstudio = TRUE, quiet = FALSE) {
   check_package_name(path)
 
   parent_dir <- normalizePath(dirname(path), winslash = "/", mustWork = TRUE)
-  message("Creating package '", extract_package_name(path), "' in '", parent_dir, "'")
+  if (!quiet) {
+    message("Creating package '", extract_package_name(path), "' in '", parent_dir, "'")
+  }
 
   dir.create(file.path(path, "R"), showWarnings = FALSE)
-  create_description(path, extra = description)
+  create_description(path, extra = description, quiet = quiet)
   create_namespace(path)
 
   if (rstudio) use_rstudio(path)
@@ -82,6 +85,68 @@ setup <- function(path = ".", description = getOption("devtools.desc"),
   if (check) check(path)
   invisible(TRUE)
 }
+
+#' Create a default DESCRIPTION file for a package.
+#'
+#' @details
+#' To set the default author and licenses, set \code{options}
+#' \code{devtools.desc.author} and \code{devtools.desc.license}.  I use
+#' \code{options(devtools.desc.author = '"Hadley Wickham <h.wickham@@gmail.com> [aut,cre]"',
+#'   devtools.desc.license = "GPL-3")}.
+#' @param path path to package root directory
+#' @param extra a named list of extra options to add to \file{DESCRIPTION}.
+#'   Arguments that take a list
+#' @param quiet if \code{TRUE}, suppresses output from this function.
+#' @export
+create_description <- function(path = ".", extra = getOption("devtools.desc"),
+                               quiet = FALSE) {
+  # Don't call check_dir(path) here (#803)
+  desc_path <- file.path(path, "DESCRIPTION")
+
+  if (file.exists(desc_path)) return(FALSE)
+
+  subdir <- file.path(path, c("R", "src", "data"))
+  if (!any(file.exists(subdir))) {
+    stop("'", path, "' does not look like a package: no R/, src/ or data directories",
+      call. = FALSE)
+  }
+
+  desc <- build_description(extract_package_name(path), extra)
+
+  if (!quiet) {
+    message("No DESCRIPTION found. Creating with values:\n\n")
+    write_dcf("", desc)
+  }
+
+  write_dcf(desc_path, desc)
+
+  TRUE
+}
+
+build_description <- function(name, extra = list()) {
+  check_package_name(name)
+
+  defaults <- compact(list(
+    Package = name,
+    Title = "What the Package Does (one line, title case)",
+    Version = "0.0.0.9000",
+    "Authors@R" = getOption("devtools.desc.author"),
+    Description = "What the package does (one paragraph).",
+    Depends = paste0("R (>= ", as.character(getRversion()) ,")"),
+    License = getOption("devtools.desc.license"),
+    Suggests = getOption("devtools.desc.suggests"),
+    Encoding = "UTF-8",
+    LazyData = "true"
+  ))
+
+  # Override defaults with user supplied options
+  desc <- modifyList(defaults, extra)
+  # Collapse all vector arguments to single strings
+  desc <- lapply(desc, function(x) paste(x, collapse = ", "))
+
+  desc
+}
+
 
 extract_package_name <- function(path) {
   basename(normalizePath(path, mustWork = FALSE))

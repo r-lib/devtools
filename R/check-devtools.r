@@ -115,11 +115,21 @@ check_remotes <- function(pkg) {
 }
 
 check_status <- function(status, name, warning) {
-  if (status) {
-    cat("Checking ", name, "... OK", "\n", sep = "")
-  } else {
-    cat("Checking ", name, "...\n", sep = "")
-    message("WARNING: ", warning)
-  }
+  cat("Checking ", name, "...", sep = "")
+
+  status <- tryCatch(
+    if (status) {
+      cat(" OK\n")
+    } else {
+      cat("\n")
+      message("WARNING: ", warning)
+    },
+    error = function(e) {
+      cat("\n")
+      message("ERROR: ", conditionMessage(e))
+      FALSE
+    }
+  )
+
   invisible(status)
 }
