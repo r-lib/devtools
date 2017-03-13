@@ -127,8 +127,6 @@ github_contents <- function(remote, content_path, path_to_save) {
   utils::download.file(
     url = response$download_url,
     destfile = path_to_save,
-    cacheOK = TRUE,
-    quiet = TRUE,
-    extra = "--continue"
+    quiet = TRUE
   )
 }
