@@ -8,7 +8,12 @@ github_auth <- function(token) {
 
 github_response <- function(req) {
   text <- httr::content(req, as = "text")
-  parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
+  if (jsonlite::validate(text)) {
+    parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
+  } else {
+    # Allow non-JSON, plan text content (ex. SHA-1)
+    parsed <- text
+  }
 
   if (httr::status_code(req) >= 400) {
     stop(github_error(req))
