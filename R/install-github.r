@@ -278,8 +278,10 @@ remote_sha.github_remote <- function(remote, ...) {
 
   tryCatch(
     expr = {
-      response <- github_GET(path = target_path)
-      return(response$sha)
+      remote_sha <-
+        github_GET(path = target_path,
+                   httr::add_headers(Accept = "application/vnd.github.VERSION.sha"))
+      return(remote_sha)
     },
     error = function(e) {
       return(NA_character_)
