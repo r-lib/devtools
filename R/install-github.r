@@ -253,17 +253,6 @@ remote_package_name.github_remote <- function(remote, ...) {
   read_dcf(tmp)$Package
 }
 
-download_file_using_wget <- function(url, destfile) {
-  utils::download.file(
-    url = url,
-    destfile = destfile,
-    cacheOK = TRUE,
-    method = "wget",
-    quiet = TRUE,
-    extra = "--continue"
-  )
-}
-
 #' @export
 #' @references https://developer.github.com/v3/repos/commits/#get-the-sha-1-of-a-commit-reference
 remote_sha.github_remote <- function(remote, ...) {
