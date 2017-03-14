@@ -12,10 +12,7 @@
 spell_check <- function(pkg = ".", ignore = character()){
   
   # You need the suggested hunspell package for this function 
-  if (!requireNamespace("hunspell", quietly = TRUE)) {
-    stop("hunspell needed for this function to work. Please install it.",
-      call. = FALSE)
-  }
+  check_suggested("hunspell")
   
   pkg <- as.package(pkg)
   ignore <- c(pkg$package, hunspell::en_stats, ignore)
