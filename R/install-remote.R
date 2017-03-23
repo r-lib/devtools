@@ -14,28 +14,8 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
                            out_dir = NULL, skip_if_log_exists = FALSE) {
   stopifnot(is.remote(remote))
 
-  remote_sha <- remote_sha(remote)
-  package_name <- remote_package_name(remote)
-  local_sha <- local_sha(package_name)
-
-  if (!isTRUE(force) &&
-    !different_sha(remote_sha = remote_sha, local_sha = local_sha)) {
-
-    if (!quiet) {
-      message(
-        "Skipping install of '", package_name, "' from a ", sub("_remote", "", class(remote)[1L]), " remote,",
-        " the SHA1 (", substr(remote_sha, 1L, 8L), ") has not changed since last install.\n",
-        "  Use `force = TRUE` to force installation")
-    }
+  if (check_if_skip_install_remote(remote, force, out_dir, skip_if_log_exists)) {
     return(invisible(FALSE))
-  }
-
-  if (!is.null(out_dir)) {
-    out_file <- file.path(out_dir, paste0(package_name, ".out"))
-    if (skip_if_log_exists && file.exists(out_file)) {
-      message("Skipping ", package_name, ", installation failed before, see log in ", out_file)
-      return(invisible(FALSE))
-    }
   }
 
   if (is_windows && inherits(remote, "cran_remote")) {
@@ -227,4 +207,72 @@ package2remote <- function(name, repos = getOption("repos"), type = getOption("p
 #' @export
 format.remotes <- function(x, ...) {
   vapply(x, format, character(1))
+}
+
+check_if_skip_install_remote <- function(remote,
+                                         force,
+                                         out_dir,
+                                         skip_if_log_exists) {
+  package_name <- remote_package_name(remote)
+
+  if (skip_since_equal_sha(remote, package_name, force)) {
+    return(TRUE)
+  }
+
+  if (skip_since_log_exists(package_name, out_dir, skip_if_log_exists)) {
+    return(TRUE)
+  }
+
+  return(FALSE)
+}
+
+skip_since_equal_sha <- function(remote, package_name, force) {
+  remote_sha <- remote_sha(remote)
+  local_sha <- local_sha(package_name)
+
+  if (!isTRUE(force) &&
+      !different_sha(remote_sha, local_sha)) {
+    message(
+      "Skipping install of '",
+      package_name,
+      "' from a ",
+      sub("_remote", "", class(remote)[1L]),
+      " remote,",
+      " the SHA1 (",
+      substr(remote_sha, 1L, 8L),
+      ") has not changed since last install.\n",
+      "  Use `force = TRUE` to force installation"
+    )
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
+skip_since_log_exists <- function(package_name,
+                                  out_dir,
+                                  skip_if_log_exists) {
+  out_file <- get_install_out_file_path(package_name, out_dir)
+  if (is.null(out_file)) {
+    return(FALSE)
+  }
+
+  if (skip_if_log_exists && file.exists(out_file)) {
+    message("Skipping ",
+            package_name,
+            ", installation failed before, see log in ",
+            out_file)
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
+get_install_out_file_path <- function(package_name, out_dir) {
+  if (!is.null(out_dir)) {
+    out_file <- file.path(out_dir, paste0(package_name, ".out"))
+  } else {
+    out_file <- NULL
+  }
+  return(out_file)
 }
