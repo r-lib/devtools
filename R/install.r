@@ -93,14 +93,8 @@ install <-
     return(invisible(FALSE))
   }
 
-  if (!is.null(out_dir)) {
-    out_file <- file.path(out_dir, paste0(pkg$package, ".out"))
-    if (skip_if_log_exists && file.exists(out_file)) {
-      message("Skipping ", pkg$package, ", installation failed before, see log in ", out_file)
-      return(invisible(FALSE))
-    }
-  } else {
-    out_file <- NULL
+  if (skip_since_log_exists(pkg$package, out_dir, skip_if_log_exists)) {
+    return(invisible(FALSE))
   }
 
   installing$packages <- c(installing$packages, pkg$package)
