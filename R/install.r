@@ -155,7 +155,7 @@ install <-
 
   pkgbuild::rcmd_build_tools(
     "INSTALL",
-    c(shQuote(built_path), args),
+    c(built_path, opts),
     echo = !quiet,
     show = !quiet,
     fail_on_status = TRUE,

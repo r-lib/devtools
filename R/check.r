@@ -162,7 +162,7 @@ check_built <- function(path = NULL, cran = TRUE,
 
   pkgbuild::rcmd_build_tools(
     "check",
-    c(shQuote(path), args),
+    c(path, args),
     wd = check_dir,
     env = env_vars,
     echo = !quiet,

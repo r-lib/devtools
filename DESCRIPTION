@@ -50,6 +50,7 @@ Suggests:
 Remotes:
   hadley/testthat,
   r-pkgs/pkgload,
+  r-pkgs/pkgbuild@HEAD,
   mangothecat/callr
 License: GPL (>= 2)
 VignetteBuilder: knitr
