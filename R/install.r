@@ -142,14 +142,14 @@ install <-
   }
 
   opts <- c(
-    paste("--library=", shQuote(.libPaths()[1]), sep = ""),
+    paste("--library=", .libPaths()[1], sep = ""),
     if (keep_source) "--with-keep.source",
     "--install-tests"
   )
   if (quick) {
     opts <- c(opts, "--no-docs", "--no-multiarch", "--no-demo")
   }
-  opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
+  opts <- c(opts, args)
 
   built_path <- normalizePath(built_path, winslash = "/")
 
