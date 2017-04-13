@@ -192,7 +192,7 @@ github_resolve_ref.github_pull <- function(x, params) {
   response <- github_GET(path)
 
   params$username <- response$head$user$login
-  params$ref <- response$head$ref
+  params$ref <- curl::curl_escape(response$head$ref)
   params
 }
 
@@ -205,7 +205,7 @@ github_resolve_ref.github_release <- function(x, params) {
   if (length(response) == 0L)
     stop("No releases found for repo ", params$username, "/", params$repo, ".")
 
-  params$ref <- response[[1L]]$tag_name
+  params$ref <- curl::curl_escape(response[[1L]]$tag_name)
   params
 }
 
