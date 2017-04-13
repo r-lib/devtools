@@ -174,7 +174,8 @@ github_resolve_ref <- function(x, params) UseMethod("github_resolve_ref")
 
 #' @export
 github_resolve_ref.default <- function(x, params) {
-  params$ref <- x
+  # ref can contain special characters like "#"
+  params$ref <- curl::curl_escape(x)
   params
 }
 
