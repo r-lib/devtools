@@ -117,8 +117,23 @@ suggests_dep <- function(pkg) {
 }
 
 read_dcf <- function(path) {
-  fields <- colnames(read.dcf(path))
-  as.list(read.dcf(path, keep.white = fields)[1, ])
+    # Before parsing the DESCRIPTION file with the overly strict
+    # native read.dcf(), remove blank lines and comments.
+    raw_lines <- readLines(path)
+    cleaned_lines <- raw_lines[-grep("(^\\s*$|^#)", raw_lines)]
+
+    # Convert the cleaned data into a connection so read.dcf()
+    # can read it. However a textConnection doesn't seek, so
+    # to reset it to the beginning we have to close it and
+    # re-open it.
+    conn <- textConnection(cleaned_lines, local = TRUE)
+    fields <- colnames(read.dcf(conn))
+    close(conn)
+    conn <- textConnection(cleaned_lines, local = TRUE)
+    parsed <- as.list(read.dcf(conn, keep.white = fields)[1, ])
+    close(conn)
+
+    return(parsed)
 }
 
 write_dcf <- function(path, desc) {
