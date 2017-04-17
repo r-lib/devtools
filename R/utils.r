@@ -130,6 +130,7 @@ write_dcf <- function(path, desc) {
   starts_with_whitespace <- grepl("^\\s", desc, perl = TRUE, useBytes = TRUE)
   delimiters <- ifelse(starts_with_whitespace, ":", ": ")
   text <- paste0(names(desc), delimiters, desc, collapse = "\n")
+  text <- gsub(" +\n", "\n", text)
 
   # If the description file has a declared encoding, set it so nchar() works
   # properly.
