@@ -76,9 +76,14 @@ platform_info <- function() {
     ui <- .Platform$GUI
   }
 
+  libs <- unique(normalizePath(.libPaths()))
+  libs <- sapply(libs, function (x) length(list.files(x)))
+  libs <- paste0(names(libs), " (", libs, ")")
+
   structure(list(
     version = R.version.string,
     system = version$system,
+    library = libs,
     ui = ui,
     language = Sys.getenv("LANGUAGE", "(EN)"),
     collate = Sys.getlocale("LC_COLLATE"),
@@ -90,7 +95,8 @@ platform_info <- function() {
 
 #' @export
 print.platform_info <- function(x, ...) {
-  df <- data.frame(setting = names(x), value = unlist(x), stringsAsFactors = FALSE)
+  x <- unlist(x)
+  df <- data.frame(setting = names(x), value = x, stringsAsFactors = FALSE)
   print(df, right = FALSE, row.names = FALSE)
 }
 
