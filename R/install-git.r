@@ -10,8 +10,7 @@
 #' @param branch Name of branch or tag to use, if not master.
 #' @param credentials A git2r credentials object passed through
 #'   to \code{\link[git2r]{clone}}.
-#' @param args DEPRECATED. A character vector providing extra arguments to
-#'   pass on to git.
+#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @param ... passed on to \code{\link{install}}
 #' @export
 #' @family package installation
@@ -20,15 +19,12 @@
 #' install_git("git://github.com/hadley/stringr.git")
 #' install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
 #'}
-install_git <- function(url, subdir = NULL, branch = NULL, credentials = NULL,
-  args = character(0), ...) {
-  if (!missing(args))
-    warning("`args` is deprecated", call. = FALSE)
+install_git <- function(url, subdir = NULL, branch = NULL, credentials = NULL, quiet=FALSE, ...) {
 
   remotes <- lapply(url, git_remote, subdir = subdir,
                     branch = branch, credentials=credentials)
 
-  install_remotes(remotes, ...)
+  install_remotes(remotes, quiet = quiet, ...)
 }
 
 git_remote <- function(url, subdir = NULL, branch = NULL, credentials=NULL) {
