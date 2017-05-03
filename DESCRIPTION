@@ -30,7 +30,7 @@ Imports:
 Suggests:
     curl (>= 0.9),
     crayon,
-    testthat (>= 1.0.2.9000),
+    testthat (>= 1.0.2),
     BiocInstaller,
     Rcpp (>= 0.10.0),
     MASS,
@@ -44,8 +44,6 @@ Suggests:
     rversions,
     covr,
     gmailr (> 0.7.0)
-Remotes:
-  hadley/testthat
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
