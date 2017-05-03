@@ -1,5 +1,13 @@
 # devtools 1.13.0
 
+* Handle case of un-installed package being passed to session_info (#1281).
+
+* using authenticate to access Github package name. (#1262, @eriknil).
+
+* `spell_check()` checks for hunspell before running (#1475, @jimvine).
+
+* `add_desc_package()` checks for package dependencies correctly (#1463, @thomasp85).
+
 * Remove deprecated `args` argument from `install_git()` to allow passthrough to `install` (#1373, @ReportMort).
 
 * added a `quiet` argument to `install_bitbucket()`, with a default value
