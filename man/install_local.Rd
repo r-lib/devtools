@@ -26,4 +26,3 @@ pkg <- download.packages("testthat", dir, type = "source")
 install_local(pkg[, 2])
 }
 }
-

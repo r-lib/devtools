@@ -10,4 +10,3 @@ is.package(x)
 Is the object a package?
 }
 \keyword{internal}
-

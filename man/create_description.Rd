@@ -24,4 +24,3 @@ To set the default author and licenses, set \code{options}
 \code{options(devtools.desc.author = '"Hadley Wickham <h.wickham@gmail.com> [aut,cre]"',
   devtools.desc.license = "GPL-3")}.
 }
-

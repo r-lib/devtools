@@ -15,4 +15,3 @@ This function performs additional checks prior to release. It is called
 automatically by \code{\link{release}()}.
 }
 \keyword{internal}
-

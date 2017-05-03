@@ -23,4 +23,3 @@ by default. Other languages require installation of a custom dictionary, see
 the \href{https://cran.r-project.org/web/packages/hunspell/vignettes/intro.html#system_dictionaries}{hunspell vignette}
 for details.
 }
-

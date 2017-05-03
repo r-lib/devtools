@@ -41,4 +41,3 @@ making it possible to run all examples from an R function.
 Other example functions: \code{\link{dev_example}}
 }
 \keyword{programming}
-

@@ -27,4 +27,3 @@ If the package is not loaded, this function returns \code{NULL}.
   imported objects for the package.
 }
 \keyword{internal}
-

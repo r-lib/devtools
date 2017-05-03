@@ -20,4 +20,3 @@ Only packages loaded by devtools are searched.
 find_topic("help")
 }
 \keyword{internal}
-

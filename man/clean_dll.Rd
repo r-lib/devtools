@@ -16,4 +16,3 @@ Invisibly returns the names of the deleted files.
 \seealso{
 \code{\link{compile_dll}}
 }
-

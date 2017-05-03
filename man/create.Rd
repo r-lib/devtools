@@ -51,4 +51,3 @@ create(path, my_description)
 \seealso{
 Text with \code{\link{package.skeleton}}
 }
-

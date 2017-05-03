@@ -23,4 +23,3 @@ which is a child of R_GlobalEnv.
   the exported objects.
 }
 \keyword{internal}
-

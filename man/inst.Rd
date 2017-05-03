@@ -25,4 +25,3 @@ inst("grid")
 unload(inst("ggplot2"))
 }
 }
-

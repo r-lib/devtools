@@ -29,4 +29,3 @@ load_all("ggplot2")
 dev_help("ggplot") # loads development documentation for ggplot
 }
 }
-

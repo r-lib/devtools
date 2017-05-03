@@ -28,4 +28,3 @@ unload(devtest("testLoadHooks"))
 }
 }
 \keyword{internal}
-

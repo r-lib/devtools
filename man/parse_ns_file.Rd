@@ -19,4 +19,3 @@ parse_ns_file(devtest("testLoadHooks"))
 }
 }
 \keyword{internal}
-

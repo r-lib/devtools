@@ -14,4 +14,3 @@ load_data(pkg = ".")
 Loads all \code{.RData} files in the data subdirectory.
 }
 \keyword{programming}
-

@@ -55,4 +55,3 @@ session-specific temporary directory, so all files will be removed
 when your current R session ends.
 }
 \keyword{internal}
-

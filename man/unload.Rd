@@ -35,4 +35,3 @@ library(ggplot2)
 unload(inst("ggplot2"))
 }
 }
-

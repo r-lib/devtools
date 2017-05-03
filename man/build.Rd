@@ -43,4 +43,3 @@ environment is needed.
 \seealso{
 Other build functions: \code{\link{build_win}}
 }
-

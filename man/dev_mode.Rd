@@ -26,4 +26,3 @@ dev_mode()
 dev_mode()
 }
 }
-

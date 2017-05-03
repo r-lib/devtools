@@ -13,4 +13,3 @@ bash(pkg = ".")
 \description{
 Open bash shell in package directory.
 }
-

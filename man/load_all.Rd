@@ -90,6 +90,7 @@ of the laded package. It presently adds a replacement version of
 package sources have different directory structures. Note that this is not
 a perfect replacement for \code{base::system.file}.
 }
+
 \examples{
 \dontrun{
 # Load the package in the current directory
@@ -107,4 +108,3 @@ load_all("./", export_all = FALSE)
 }
 }
 \keyword{programming}
-

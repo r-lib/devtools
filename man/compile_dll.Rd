@@ -31,4 +31,3 @@ If this is used to compile code that uses Rcpp, you will need to
 \seealso{
 \code{\link{clean_dll}} to delete the compiled files.
 }
-

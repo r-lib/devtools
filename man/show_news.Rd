@@ -18,4 +18,3 @@ version.}
 \description{
 Show package news
 }
-

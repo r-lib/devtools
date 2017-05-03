@@ -32,4 +32,3 @@ is also useful to check that your package is ok on windows.
 \seealso{
 Other build functions: \code{\link{build}}
 }
-

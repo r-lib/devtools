@@ -18,4 +18,3 @@ displayed.}
 Opens up a fresh R environment and sources file, ensuring that it works
 independently of the current working environment.
 }
-

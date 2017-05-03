@@ -98,8 +98,8 @@ with how check works on CRAN. This includes:
    \code{force_suggests}
 }
 }
+
 \seealso{
 \code{\link{release}} if you want to send the checked package to
   CRAN.
 }
-

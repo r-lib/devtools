@@ -24,4 +24,3 @@ fails.
 \description{
 Run R CMD xxx from within R
 }
-

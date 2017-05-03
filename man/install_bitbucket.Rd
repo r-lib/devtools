@@ -25,8 +25,7 @@ Defaults to master.}
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{auth_user}{your account username if you're attempting to install
-a package hosted in a private repository (and your username is
-different 
+a package hosted in a private repository (and your username is different
 to \code{username})}
 
 \item{password}{your password}
@@ -53,4 +52,3 @@ Other package installation: \code{\link{install_bioc}},
   \code{\link{install_url}}, \code{\link{install_version}},
   \code{\link{install}}, \code{\link{uninstall}}
 }
-

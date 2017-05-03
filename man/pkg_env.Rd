@@ -32,4 +32,3 @@ If the package is not attached, this function returns \code{NULL}.
   imported objects for the package.
 }
 \keyword{internal}
-

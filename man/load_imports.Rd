@@ -12,4 +12,3 @@ visible from R_GlobalEnv. This will automatically load (but not attach)
 the dependency packages.
 }
 \keyword{internal}
-

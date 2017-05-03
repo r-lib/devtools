@@ -32,4 +32,3 @@ reload("ggplot2/")
 reload(inst("ggplot2"))
 }
 }
-

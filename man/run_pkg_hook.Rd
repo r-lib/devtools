@@ -19,4 +19,3 @@ run_user_hook(pkg, hook)
 Run user and package hooks.
 }
 \keyword{internal}
-

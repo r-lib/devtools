@@ -26,4 +26,3 @@ dev_example("ggplot")
 \seealso{
 Other example functions: \code{\link{run_examples}}
 }
-

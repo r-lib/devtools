@@ -16,4 +16,3 @@ Thanks to the suggestion of Simon Urbanek.
 \examples{
 has_devel()
 }
-

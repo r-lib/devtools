@@ -14,4 +14,3 @@ load_dll(pkg = ".")
 Load a compiled DLL
 }
 \keyword{programming}
-
