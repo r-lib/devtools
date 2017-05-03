@@ -1,4 +1,4 @@
-# devtools 1.12.0.9000
+# devtools 1.13.0
 
 * `use_test()` template no longer includes useless comments (#1349)
 
