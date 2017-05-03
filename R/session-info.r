@@ -105,7 +105,7 @@ package_info <- function(pkgs = loadedNamespaces(), include_base = FALSE,
       " are not installed", call. = FALSE)
   }
   if (!include_base) {
-    base <- vapply(pkgs, pkg_is_base, libpath = libpath, logical(1))
+    base <- vapply(pkgs, pkg_is_base, logical(1))
     pkgs <- pkgs[!base]
   }
   pkgs <- sort_ci(pkgs)
