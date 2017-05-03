@@ -3,7 +3,7 @@
 #' Runs a spell check on text fields in the package description file and
 #' manual pages. Hunspell includes dictionaries for \code{en_US} and \code{en_GB}
 #' by default. Other languages require installation of a custom dictionary, see
-#' the \href{https://cran.r-project.org/web/packages/hunspell/vignettes/intro.html#system_dictionaries}{hunspell vignette}
+#' the \href{https://cran.r-project.org/package=hunspell/vignettes/intro.html#system_dictionaries}{hunspell vignette}
 #' for details.
 #'
 #' @export
