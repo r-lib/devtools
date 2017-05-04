@@ -16,7 +16,7 @@
 \item{topic}{A name or character string specifying the help topic.}
 
 \item{package}{A name or character string specifying the package in which
-to search for the help topic. If NULL, seach all packages.}
+to search for the help topic. If NULL, search all packages.}
 
 \item{...}{Additional arguments to pass to \code{\link[utils]{help}}.}
 

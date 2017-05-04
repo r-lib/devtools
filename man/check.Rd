@@ -32,7 +32,7 @@ documentation before running formal check.}
 CRAN uses.}
 
 \item{check_version}{Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
-If \code{TRUE}, performns a number of checked related
+If \code{TRUE}, performs a number of checked related
 to version numbers of packages on CRAN.}
 
 \item{force_suggests}{Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If

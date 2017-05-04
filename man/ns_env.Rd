@@ -12,7 +12,7 @@ ns_env(pkg = ".")
 }
 \description{
 Contains all (exported and non-exported) objects, and is a descendent of
-\code{R_GlobalEnv}. The hieararchy is \code{<namespace:pkg>},
+\code{R_GlobalEnv}. The hierarchy is \code{<namespace:pkg>},
 \code{<imports:pkg>}, \code{<namespace:base>}, and then
 \code{R_GlobalEnv}.
 }

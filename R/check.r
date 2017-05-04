@@ -102,7 +102,7 @@ check <- function(pkg = ".",
 #' @param cran if \code{TRUE} (the default), check using the same settings as
 #'   CRAN uses.
 #' @param check_version Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
-#'   If \code{TRUE}, performns a number of checked related
+#'   If \code{TRUE}, performs a number of checked related
 #'   to version numbers of packages on CRAN.
 #' @param force_suggests Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
 #'   \code{FALSE} (the default), check will proceed even if all suggested

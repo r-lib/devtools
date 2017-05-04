@@ -28,7 +28,7 @@ R <- function(args, path = tempdir(), env_vars = character(), fun = system_check
 #' Run R CMD xxx from within R
 #'
 #' @param cmd one of the R tools available from the R CMD interface.
-#' @param options a charater vector of options to pass to the command
+#' @param options a character vector of options to pass to the command
 #' @param path the directory to run the command in.
 #' @param env_vars environment variables to set before running the command.
 #' @param ... additional arguments passed to \code{\link{system_check}}

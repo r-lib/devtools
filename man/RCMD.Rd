@@ -9,7 +9,7 @@ RCMD(cmd, options, path = tempdir(), env_vars = character(), ...)
 \arguments{
 \item{cmd}{one of the R tools available from the R CMD interface.}
 
-\item{options}{a charater vector of options to pass to the command}
+\item{options}{a character vector of options to pass to the command}
 
 \item{path}{the directory to run the command in.}
 
