@@ -102,6 +102,8 @@ test_that("Specific functions from DLLs listed in NAMESPACE can be called", {
 
 test_that("load_all() can compile and load DLLs linked to Rcpp", {
 
+  skip_on_os("solaris")
+
   clean_dll("testDllRcpp")
 
   load_all("testDllRcpp", reset = TRUE, quiet = TRUE)
