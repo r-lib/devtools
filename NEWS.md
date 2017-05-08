@@ -1,5 +1,7 @@
 # devtools 1.12.0.9000
 
+* Bugfix for installing from git remote and not passing git2r credentials (@james-atkins, ##1498)
+
 * Bugfix for installation of dependencies of dependencies (@jimhester, #1409).
 
 * `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
