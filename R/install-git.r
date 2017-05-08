@@ -107,7 +107,7 @@ remote_sha.git_remote <- function(remote, ...) {
   }
 
   tryCatch({
-    res <- git2r::remote_ls(remote$url, ...)
+    res <- git2r::remote_ls(remote$url, credentials=remote$credentials, ...)
 
     branch <- remote$branch %||% "master"
 
