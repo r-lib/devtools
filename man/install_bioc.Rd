@@ -5,7 +5,7 @@
 \title{Install a package from a Bioconductor repository}
 \usage{
 install_bioc(repo, mirror = getOption("BioC_svn",
-  "https://hedgehog.fhcrc.org/bioconductor"), ...)
+  "https://hedgehog.fhcrc.org/bioconductor"), ..., quiet = FALSE)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -16,6 +16,8 @@ the release are \sQuote{devel} (the default if none specified),
 \item{mirror}{The bioconductor SVN mirror to use}
 
 \item{...}{Other arguments passed on to \code{\link{install}}}
+
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 }
 \description{
 This function requires \code{svn} to be installed on your system in order to

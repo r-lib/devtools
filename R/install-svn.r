@@ -23,12 +23,12 @@
 #' install_svn("https://github.com/hadley/httr", branch = "oauth")
 #'}
 install_svn <- function(url, subdir = NULL, branch = NULL, args = character(0),
-  ..., revision = NULL) {
+  ..., revision = NULL, quiet = FALSE) {
 
   remotes <- lapply(url, svn_remote, svn_subdir = subdir, branch = branch,
     revision = revision, args = args)
 
-  install_remotes(remotes, ...)
+  install_remotes(remotes, ..., quiet = quiet)
 }
 
 svn_remote <- function(url, svn_subdir = NULL, branch = NULL, revision = NULL,

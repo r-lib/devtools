@@ -4,7 +4,7 @@
 \alias{install_url}
 \title{Install a package from a url}
 \usage{
-install_url(url, subdir = NULL, config = list(), ...)
+install_url(url, subdir = NULL, config = list(), ..., quiet = FALSE)
 }
 \arguments{
 \item{url}{location of package on internet. The url should point to a
@@ -16,6 +16,8 @@ zip file, a tar file or a bzipped/gzipped tar file.}
 authentication) passed on to \code{\link[httr]{GET}}.}
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
+
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 }
 \description{
 This function is vectorised so you can install multiple packages in

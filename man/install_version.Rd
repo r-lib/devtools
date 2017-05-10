@@ -5,7 +5,7 @@
 \title{Install specified version of a CRAN package.}
 \usage{
 install_version(package, version = NULL, repos = getOption("repos"),
-  type = getOption("pkgType"), ...)
+  type = getOption("pkgType"), ..., quiet = FALSE)
 }
 \arguments{
 \item{package}{package name}
@@ -31,6 +31,10 @@ archived source tarballs and tries to install an older version instead.}
   }
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
+
+\item{quiet}{
+    logical: if true, reduce the amount of output.
+  }
 }
 \description{
 If you are installing an package that contains compiled code, you will

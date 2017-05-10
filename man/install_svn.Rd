@@ -5,7 +5,7 @@
 \title{Install a package from a SVN repository}
 \usage{
 install_svn(url, subdir = NULL, branch = NULL, args = character(0), ...,
-  revision = NULL)
+  revision = NULL, quiet = FALSE)
 }
 \arguments{
 \item{url}{Location of package. The url should point to a public or
@@ -22,6 +22,8 @@ points to the 'trunk' directory.}
 \item{...}{Other arguments passed on to \code{\link{install}}}
 
 \item{revision}{svn revision, if omitted updates to latest}
+
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 }
 \description{
 This function requires \code{svn} to be installed on your system in order to

@@ -10,8 +10,8 @@
 #' @param branch Name of branch or tag to use, if not master.
 #' @param credentials A git2r credentials object passed through
 #'   to \code{\link[git2r]{clone}}.
-#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @param ... passed on to \code{\link{install}}
+#' @inheritParams install_url
 #' @export
 #' @family package installation
 #' @examples
