@@ -26,7 +26,7 @@ install_bitbucket <- function(repo, username, ref = "master",
   remotes <- lapply(repo, bitbucket_remote, username = username, ref = ref,
     subdir = subdir, auth_user = auth_user, password = password)
 
-  install_remotes(remotes, ...)
+  install_remotes(remotes, ..., quiet = quiet)
 }
 
 bitbucket_remote <- function(repo, username = NULL, ref = NULL, subdir = NULL,
