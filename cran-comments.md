@@ -1,3 +1,6 @@
+This is a point release fixing a significant bug in the last release. We
+apologize for the short release cycle.
+
 ## Test environments
 
 * local OS X install, R 3.4.0
@@ -19,11 +22,8 @@
 
   This is a false positive as this isn't a url to a package.
 
-We believe we have fixed the test ERROR for Solaris and `Found no calls to:
-‘R_registerRoutines’, ‘R_useDynamicSymbols’` NOTE seen on the CRAN check page.
-
 ## Downstream dependencies
 
-* We ran R CMD check on all 135 reverse dependencies
+* We ran R CMD check on all 136 reverse dependencies
   Results at https://github.com/hadley/devtools/tree/1.13.0/revdep. As far as we
   can tell, there are no new problems related to this version of devtools.
