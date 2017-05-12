@@ -1,3 +1,7 @@
+# devtools 1.13.1
+
+* Fix `test()` compatibility with testthat versions 1.0.2 (#1503).
+
 # devtools 1.13.0
 
 ## New Features
