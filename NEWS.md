@@ -1,6 +1,8 @@
 # devtools 1.13.1
-
 * Fix `test()` compatibility with testthat versions 1.0.2 (#1503).
+* Fix `install_version()`, `install_bitbucket()`, `install_local()`,
+`install_url()`, `install_svn()`, `install_bioc()` gain `quiet` arguments and
+properly pass them to internal functions. (#1502)
 
 # devtools 1.13.0
 
