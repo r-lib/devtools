@@ -4,31 +4,45 @@
 
 |setting  |value                                       |
 |:--------|:-------------------------------------------|
-|version  |R version 3.4.0 Patched (2017-04-27 r72634) |
+|version  |R version 3.4.0 Patched (2017-05-10 r72669) |
 |system   |x86_64, darwin15.6.0                        |
 |ui       |X11                                         |
 |language |(EN)                                        |
 |collate  |en_US.UTF-8                                 |
 |tz       |America/New_York                            |
-|date     |2017-05-03                                  |
+|date     |2017-05-12                                  |
 
 ## Packages
 
-|package   |*  |version    |date       |source                           |
-|:---------|:--|:----------|:----------|:--------------------------------|
-|curl      |   |2.6        |2017-04-27 |cran (@2.6)                      |
-|devtools  |*  |1.13.0     |2017-05-03 |local (jimhester/devtools@NA)    |
-|git2r     |   |0.18.0     |2017-01-01 |cran (@0.18.0)                   |
-|hunspell  |   |2.4        |2017-04-30 |cran (@2.4)                      |
-|jsonlite  |   |1.4        |2017-04-08 |cran (@1.4)                      |
-|memoise   |   |1.1.0      |2017-04-21 |cran (@1.1.0)                    |
-|Rcpp      |   |0.12.10.2  |2017-05-03 |Github (RcppCore/Rcpp@c57b754)   |
-|rmarkdown |   |1.5        |2017-04-26 |cran (@1.5)                      |
-|testthat  |   |1.0.2.9000 |2017-05-03 |Github (hadley/testthat@b72a228) |
+|package    |*  |version |date       |source          |
+|:----------|:--|:-------|:----------|:---------------|
+|bitops     |   |1.0-6   |2013-08-17 |cran (@1.0-6)   |
+|covr       |   |2.2.2   |2017-01-05 |cran (@2.2.2)   |
+|crayon     |   |1.3.2   |2016-06-28 |cran (@1.3.2)   |
+|curl       |   |2.6     |2017-04-27 |CRAN (R 3.4.0)  |
+|devtools   |*  |1.13.0  |2017-05-08 |CRAN (R 3.4.0)  |
+|digest     |   |0.6.12  |2017-01-27 |CRAN (R 3.4.0)  |
+|evaluate   |   |0.10    |2016-10-11 |cran (@0.10)    |
+|git2r      |   |0.18.0  |2017-01-01 |CRAN (R 3.4.0)  |
+|gmailr     |   |0.7.1   |2016-04-12 |cran (@0.7.1)   |
+|httr       |   |1.2.1   |2016-07-03 |CRAN (R 3.4.0)  |
+|hunspell   |   |2.4     |2017-04-30 |cran (@2.4)     |
+|jsonlite   |   |1.4     |2017-04-08 |CRAN (R 3.4.0)  |
+|knitr      |   |1.15.1  |2016-11-22 |cran (@1.15.1)  |
+|lintr      |   |1.0.0   |2016-04-16 |cran (@1.0.0)   |
+|memoise    |   |1.1.0   |2017-04-21 |CRAN (R 3.4.0)  |
+|Rcpp       |   |0.12.10 |2017-03-19 |cran (@0.12.10) |
+|rmarkdown  |   |1.5     |2017-04-26 |cran (@1.5)     |
+|roxygen2   |   |6.0.1   |2017-02-06 |cran (@6.0.1)   |
+|rstudioapi |   |0.6     |2016-06-27 |CRAN (R 3.4.0)  |
+|rversions  |   |1.0.3   |2016-08-02 |cran (@1.0.3)   |
+|testthat   |   |1.0.2   |2016-04-23 |cran (@1.0.2)   |
+|whisker    |   |0.3-2   |2013-04-28 |CRAN (R 3.4.0)  |
+|withr      |   |1.0.2   |2016-06-20 |CRAN (R 3.4.0)  |
 
 # Check results
 
-135 packages
+136 packages
 
 |package               |version | errors| warnings| notes|
 |:---------------------|:-------|------:|--------:|-----:|
@@ -37,7 +51,7 @@
 |adapr                 |1.0.2   |      0|        0|     0|
 |addinslist            |0.2     |      0|        0|     0|
 |alluvial              |0.1-2   |      0|        0|     0|
-|archivist             |2.1.2   |      1|        0|     2|
+|archivist             |2.1.2   |      0|        0|     2|
 |aRxiv                 |0.5.16  |      0|        0|     0|
 |assertive.code        |0.0-1   |      0|        0|     0|
 |assertive.data        |0.0-1   |      0|        0|     0|
@@ -66,14 +80,15 @@
 |deBInfer              |0.4.1   |      0|        0|     0|
 |demi                  |1.1.2   |      1|        0|     0|
 |docstring             |1.0.0   |      0|        0|     0|
+|document              |1.0.0   |      0|        0|     0|
 |doRNG                 |1.6.6   |      0|        0|     2|
 |dparser               |0.1.3   |      0|        0|     0|
 |dpmr                  |0.1.9   |      0|        0|     0|
 |easypackages          |0.1.0   |      0|        0|     0|
 |elementR              |1.3.1   |      1|        0|     1|
-|exampletestr          |0.4.0   |      1|        0|     0|
+|exampletestr          |0.4.0   |      0|        0|     0|
 |FedData               |2.4.5   |      0|        0|     0|
-|flacco                |1.5     |      0|        0|     0|
+|flacco                |1.6     |      0|        0|     0|
 |flippant              |1.1.0   |      0|        0|     1|
 |forestFloor           |1.9.5   |      0|        0|     1|
 |ggforce               |0.1.1   |      0|        0|     1|
@@ -83,7 +98,7 @@
 |googleComputeEngineR  |0.1.0   |      0|        0|     0|
 |graticule             |0.1.2   |      0|        0|     0|
 |gsrc                  |1.1     |      1|        0|     0|
-|hashmap               |0.2.0   |      0|        0|     1|
+|hashmap               |0.2.0   |      0|        0|     0|
 |heuristica            |1.0.1   |      0|        0|     0|
 |hunspell              |2.4     |      0|        0|     0|
 |huxtable              |0.2.2   |      0|        0|     0|
@@ -97,7 +112,7 @@
 |likert                |1.3.5   |      0|        0|     0|
 |lineup                |0.37-6  |      0|        0|     1|
 |Luminescence          |0.7.4   |      0|        0|     1|
-|manifestoR            |1.2.3   |      0|        0|     0|
+|manifestoR            |1.2.4   |      0|        0|     0|
 |mcglm                 |0.3.0   |      0|        0|     0|
 |metafolio             |0.1.0   |      0|        0|     2|
 |mgarchBEKK            |0.0.2   |      0|        0|     1|
@@ -113,13 +128,13 @@
 |NMF                   |0.20.6  |      0|        0|     5|
 |npsm                  |0.5     |      0|        0|     2|
 |opencpu               |1.6.1   |      0|        0|     1|
-|OpenMx                |2.7.10  |      1|        0|     3|
+|OpenMx                |2.7.11  |      0|        0|     3|
 |osmplotr              |0.2.3   |      0|        0|     0|
 |packagedocs           |0.4.0   |      0|        0|     0|
-|packrat               |0.4.8-1 |      0|        0|     0|
+|packrat               |0.4.8-1 |      0|        0|     1|
 |pacman                |0.4.5   |      1|        0|     0|
-|parlitools            |0.0.2   |      1|        0|     0|
-|Perc                  |0.1.2   |      1|        0|     0|
+|parlitools            |0.0.2   |      0|        0|     0|
+|Perc                  |0.1.2   |      0|        0|     0|
 |performanceEstimation |1.1.0   |      0|        0|     0|
 |pkgmaker              |0.22    |      0|        0|     3|
 |plotly                |4.6.0   |      1|        0|     1|
@@ -133,7 +148,7 @@
 |rbundler              |0.3.7   |      0|        0|     2|
 |Rcereal               |1.2.1   |      0|        0|     0|
 |recexcavAAR           |0.3.0   |      0|        0|     0|
-|REDCapR               |0.9.7   |      0|        1|     1|
+|REDCapR               |0.9.7   |      0|        1|     0|
 |reprex                |0.1.1   |      0|        0|     0|
 |revdbayes             |1.1.0   |      0|        0|     0|
 |rfishbase             |2.1.2   |      0|        0|     0|
@@ -142,10 +157,10 @@
 |roxygen2              |6.0.1   |      0|        0|     1|
 |rpdo                  |0.2.2   |      0|        0|     0|
 |rpivotTable           |0.2.0   |      0|        0|     0|
-|rsoi                  |0.2.1   |      0|        0|     0|
+|rsoi                  |0.2.1   |      1|        0|     0|
 |rust                  |1.1.0   |      0|        0|     0|
 |Ryacas                |0.3-1   |      0|        0|     1|
-|satellite             |0.2.0   |      1|        0|     1|
+|satellite             |0.2.0   |      0|        0|     1|
 |SciencesPo            |1.4.1   |      0|        0|     2|
 |smss                  |1.0-2   |      0|        0|     0|
 |soilcarbon            |1.0.0   |      0|        0|     0|
@@ -156,7 +171,7 @@
 |tidyquant             |0.5.1   |      0|        0|     1|
 |timekit               |0.2.0   |      0|        0|     0|
 |umx                   |1.7.5   |      2|        0|     0|
-|unitizer              |1.4.2   |      1|        0|     0|
+|unitizer              |1.4.2   |      0|        0|     0|
 |unvotes               |0.1.0   |      0|        0|     0|
 |vaersvax              |1.0.4   |      0|        0|     1|
 |vdiffr                |0.1.1   |      0|        0|     1|
@@ -164,7 +179,7 @@
 |wallace               |0.6.3   |      0|        0|     0|
 |Wats                  |0.10.3  |      0|        0|     1|
 |wikipediatrend        |1.1.10  |      0|        0|     1|
-|wru                   |0.1-3   |      0|        0|     1|
+|wru                   |0.1-4   |      0|        0|     1|
 |xoi                   |0.66-9  |      0|        0|     1|
 |zebu                  |0.1.1   |      0|        0|     0|
 
@@ -221,32 +236,9 @@ Bug reports: https://github.com/mbojan/alluvial/issues
 Maintainer: Przemyslaw Biecek <przemyslaw.biecek@gmail.com>  
 Bug reports: https://github.com/pbiecek/archivist/issues
 
-1 error  | 0 warnings | 2 notes
+0 errors | 0 warnings | 2 notes
 
 ```
-checking examples ... ERROR
-Running examples in ‘archivist-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: ahistory
-> ### Title: Show Artifact's History
-> ### Aliases: ahistory
-> 
-> ### ** Examples
-... 16 lines ...
-> iris %a%
-+ filter(Sepal.Length < 6) %a%
-+  lm(Petal.Length~Species, data=.) %a%
-+  summary() -> artifact
-
- *** caught segfault ***
-address 0x0, cause 'unknown'
-
-Traceback:
- 1: iris %a% filter(Sepal.Length < 6) %a% lm(Petal.Length ~ Species,     data = .) %a% summary()
-An irrecoverable exception occurred. R is aborting now ...
-
 checking package dependencies ... NOTE
 Package which this enhances but not available for checking: ‘archivist.github’
 
@@ -551,6 +543,11 @@ Bug reports: https://github.com/dasonk/docstring/issues?state=open
 
 0 errors | 0 warnings | 0 notes
 
+## document (1.0.0)
+Maintainer: Andreas Dominik Cullmann <adc-r@arcor.de>
+
+0 errors | 0 warnings | 0 notes
+
 ## doRNG (1.6.6)
 Maintainer: Renaud Gaujoux <renaud@tx.technion.ac.il>  
 Bug reports: http://github.com/renozao/doRNG/issues
@@ -611,9 +608,9 @@ Calls: <Anonymous> ... tktoplevel -> tkwidget -> tcl -> .Tcl.objv -> structure
 Execution halted
 
 checking installed package size ... NOTE
-  installed size is  6.3Mb
+  installed size is  6.2Mb
   sub-directories of 1Mb or more:
-    R         1.8Mb
+    R         1.7Mb
     Results   3.2Mb
 ```
 
@@ -621,29 +618,7 @@ checking installed package size ... NOTE
 Maintainer: Rory Nolan <rorynoolan@gmail.com>  
 Bug reports: https://www.github.com/rorynolan/autothresholdr/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  Traceback:
-   1: test_code(NULL, exprs, env)
-   2: source_file(path, new.env(parent = env), chdir = TRUE, encoding = encoding,     wrap = wrap)
-   3: force(code)
-   4: with_reporter(reporter = reporter, start_end_reporter = start_end_reporter,     {        lister$start_file(basename(path))        source_file(path, new.env(parent = env), chdir = TRUE,             encoding = encoding, wrap = wrap)        end_context()    })
-   5: FUN(X[[i]], ...)
-   6: lapply(paths, test_file, env = env, reporter = current_reporter,     start_end_reporter = FALSE, load_helpers = FALSE, encoding = encoding,     wrap = TRUE)
-   7: force(code)
-   8: with_reporter(reporter = current_reporter, results <- lapply(paths,     test_file, env = env, reporter = current_reporter, start_end_reporter = FALSE,     load_helpers = FALSE, encoding = encoding, wrap = TRUE))
-   9: test_files(paths, reporter = reporter, env = env, encoding = encoding)
-  10: test_dir(test_path, reporter = reporter, env = env, filter = filter,     ...)
-  11: with_top_env(env, {    test_dir(test_path, reporter = reporter, env = env, filter = filter,         ...)})
-  12: run_tests(package, test_path, filter, reporter, ...)
-  13: test_check("exampletestr")
-  An irrecoverable exception occurred. R is aborting now ...
-```
+0 errors | 0 warnings | 0 notes
 
 ## FedData (2.4.5)
 Maintainer: R. Kyle Bocinsky <bocinsky@gmail.com>  
@@ -651,7 +626,7 @@ Bug reports: https://github.com/bocinsky/FedData/issues
 
 0 errors | 0 warnings | 0 notes
 
-## flacco (1.5)
+## flacco (1.6)
 Maintainer: Pascal Kerschke <kerschke@uni-muenster.de>  
 Bug reports: https://github.com/kerschke/flacco/issues
 
@@ -738,8 +713,7 @@ Bug reports: http://github.com/grafab/gsrc/issues
 ```
 checking package dependencies ... ERROR
 Packages required but not available:
-  ‘illuminaio’ ‘limma’ ‘preprocessCore’ ‘dbscan’ ‘Ckmeans.1d.dp’
-  ‘DNAcopy’
+  ‘illuminaio’ ‘limma’ ‘preprocessCore’ ‘Ckmeans.1d.dp’ ‘DNAcopy’
 
 Packages suggested but not available for checking:
   ‘brassicaData’ ‘mixtools’
@@ -752,14 +726,7 @@ manual.
 Maintainer: Nathan Russell <russell.nr2012@gmail.com>  
 Bug reports: https://github.com/nathan-russell/hashmap/issues
 
-0 errors | 0 warnings | 1 note 
-
-```
-checking installed package size ... NOTE
-  installed size is 10.1Mb
-  sub-directories of 1Mb or more:
-    libs   9.8Mb
-```
+0 errors | 0 warnings | 0 notes
 
 ## heuristica (1.0.1)
 Maintainer: Jean Whitmore <jeanimal@gmail.com>  
@@ -878,12 +845,12 @@ Bug reports: https://github.com/R-Lum/Luminescence/issues
 
 ```
 checking installed package size ... NOTE
-  installed size is  6.9Mb
+  installed size is  6.5Mb
   sub-directories of 1Mb or more:
-    R   4.5Mb
+    R   4.4Mb
 ```
 
-## manifestoR (1.2.3)
+## manifestoR (1.2.4)
 Maintainer: Jirka Lewandowski <jirka.lewandowski@wzb.eu>  
 Bug reports: https://github.com/ManifestoProject/manifestoR/issues
 
@@ -965,7 +932,7 @@ Bug reports: https://github.com/wahani/modules/issues
 
 ```
 checking tests ... ERROR
-  Running ‘testthat.R’ [42s/52s]
+  Running ‘testthat.R’ [38s/40s]
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
                                            ~^~
@@ -1054,7 +1021,7 @@ The error most likely occurred in:
 sh: msgfmt: command not found
 Warning in install_translations(pkg = pkg) :
   running msgfmt on R-es.po failed
-Updating the PO-Revision-Date to ‘2017-05-03 13:41:35-0400’.
+Updating the PO-Revision-Date to ‘2017-05-12 15:55:01-0400’.
 Updating the Language-Team to ‘’.
 sh: msgconv: command not found
 Error in install_translations(pkg = pkg) : 
@@ -1126,9 +1093,9 @@ checking package dependencies ... NOTE
 Packages suggested but not available for checking: ‘RcppOctave’ ‘doMPI’
 
 checking installed package size ... NOTE
-  installed size is  5.4Mb
+  installed size is  5.1Mb
   sub-directories of 1Mb or more:
-    R     3.0Mb
+    R     2.6Mb
     doc   1.1Mb
 
 checking R code for possible problems ... NOTE
@@ -1214,45 +1181,22 @@ checking package dependencies ... NOTE
 Package suggested but not available for checking: ‘RAppArmor’
 ```
 
-## OpenMx (2.7.10)
+## OpenMx (2.7.11)
 Maintainer: Joshua N. Pritikin <jpritikin@pobox.com>  
 Bug reports: http://openmx.ssri.psu.edu/forums
 
-1 error  | 0 warnings | 3 notes
+0 errors | 0 warnings | 3 notes
 
 ```
-checking examples ... ERROR
-Running examples in ‘OpenMx-Ex.R’ failed
-The error most likely occurred in:
-
-> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-> ### Name: mxDataWLS
-> ### Title: Create MxData Object for Least Squares (WLS, DLS, ULS) Analyses
-> ### Aliases: mxDataWLS
-> 
-> ### ** Examples
-... 34 lines ...
-> # Define the model
-> 
-> tmpModel <- mxModel(model="exampleModel", S, A, I, expCov, expFunction, fitFunction, 
-+                     wdata)
-> 
-> # Fit the model and print a summary
-> 
-> tmpModelOut <- mxRun(tmpModel)
-Running exampleModel with 3 parameters
-Error: The following error occurred while evaluating the subexpression 'solve(exampleModel.I - exampleModel.A)' during the evaluation of 'expCov' in model 'exampleModel' : system is computationally singular: reciprocal condition number = 4.087e-32
-Execution halted
-
 checking package dependencies ... NOTE
 Package suggested but not available for checking: ‘Rmpi’
 
 checking installed package size ... NOTE
-  installed size is 15.0Mb
+  installed size is 15.1Mb
   sub-directories of 1Mb or more:
     R        4.4Mb
     libs     3.4Mb
-    models   4.5Mb
+    models   4.6Mb
 
 checking Rd cross-references ... NOTE
 Package unavailable to check Rd xrefs: ‘ifaTools’
@@ -1274,7 +1218,12 @@ Bug reports: https://github.com/hafen/packagedocs/issues
 Maintainer: Kevin Ushey <kevin@rstudio.com>  
 Bug reports: https://github.com/rstudio/packrat/issues
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note 
+
+```
+checking package dependencies ... NOTE
+Package which this enhances but not available for checking: ‘BiocInstaller’
+```
 
 ## pacman (0.4.5)
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>  
@@ -1297,7 +1246,7 @@ Last 13 lines of output:
   
   
   testthat results ================================================================
-  OK: 55 SKIPPED: 3 FAILED: 1
+  OK: 55 SKIPPED: 1 FAILED: 1
   1. Failure: p_install_gh works (@test-p_install_gh.R#5) 
   
   Error: testthat unit tests failed
@@ -1308,44 +1257,12 @@ Last 13 lines of output:
 Maintainer: Evan Odell <evanodell91@gmail.com>  
 Bug reports: https://github.com/EvanOdell/parlitools/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking package dependencies ... ERROR
-Packages required but not available: ‘mnis’ ‘hansard’
-
-Package suggested but not available for checking: ‘cartogram’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
+0 errors | 0 warnings | 0 notes
 
 ## Perc (0.1.2)
 Maintainer: Jian Jin <jinjian.pku@gmail.com>
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘testthat.R’
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  Traceback:
-   1: test_code(NULL, exprs, env)
-   2: source_file(path, new.env(parent = env), chdir = TRUE, encoding = encoding,     wrap = wrap)
-   3: force(code)
-   4: with_reporter(reporter = reporter, start_end_reporter = start_end_reporter,     {        lister$start_file(basename(path))        source_file(path, new.env(parent = env), chdir = TRUE,             encoding = encoding, wrap = wrap)        end_context()    })
-   5: FUN(X[[i]], ...)
-   6: lapply(paths, test_file, env = env, reporter = current_reporter,     start_end_reporter = FALSE, load_helpers = FALSE, encoding = encoding,     wrap = TRUE)
-   7: force(code)
-   8: with_reporter(reporter = current_reporter, results <- lapply(paths,     test_file, env = env, reporter = current_reporter, start_end_reporter = FALSE,     load_helpers = FALSE, encoding = encoding, wrap = TRUE))
-   9: test_files(paths, reporter = reporter, env = env, encoding = encoding)
-  10: test_dir(test_path, reporter = reporter, env = env, filter = filter,     ...)
-  11: with_top_env(env, {    test_dir(test_path, reporter = reporter, env = env, filter = filter,         ...)})
-  12: run_tests(package, test_path, filter, reporter, ...)
-  13: test_check("Perc")
-  An irrecoverable exception occurred. R is aborting now ...
-```
+0 errors | 0 warnings | 0 notes
 
 ## performanceEstimation (1.1.0)
 Maintainer: Luis Torgo <ltorgo@dcc.fc.up.pt>  
@@ -1528,7 +1445,7 @@ Maintainer: Clemens Schmid <clemens@nevrome.de>
 Maintainer: Will Beasley <wibeasley@hotmail.com>  
 Bug reports: https://github.com/OuhscBbmc/REDCapR/issues
 
-0 errors | 1 warning  | 1 note 
+0 errors | 1 warning  | 0 notes
 
 ```
 checking re-building of vignette outputs ... WARNING
@@ -1539,9 +1456,6 @@ Error: processing vignette 'BasicREDCapROperations.Rmd' failed with diagnostics:
 object 'ds' not found
 Execution halted
 
-
-checking package dependencies ... NOTE
-Package suggested but not available for checking: ‘RODBCext’
 ```
 
 ## reprex (0.1.1)
@@ -1609,7 +1523,29 @@ Maintainer: Enzo Martoglio  <enzo@smartinsightsfromdata.com>
 ## rsoi (0.2.1)
 Maintainer: Sam Albers <sam.albers@gmail.com>
 
-0 errors | 0 warnings | 0 notes
+1 error  | 0 warnings | 0 notes
+
+```
+checking tests ... ERROR
+  Running ‘testthat.R’
+Running the tests in ‘tests/testthat.R’ failed.
+Last 13 lines of output:
+  > 
+  > test_check("rsoi")
+  1. Failure: Test whether ONI values have not changed from February 2017. (@test_download_soi.R#29) 
+  enso_df_current$ONI not equal to enso$ONI.
+  2/807 mismatches (average diff: 0.0633)
+  [806] -0.123 - -0.187 == 0.0633
+  [807]  0.143 -     NA ==     NA
+  
+  
+  testthat results ================================================================
+  OK: 2 SKIPPED: 1 FAILED: 1
+  1. Failure: Test whether ONI values have not changed from February 2017. (@test_download_soi.R#29) 
+  
+  Error: testthat unit tests failed
+  Execution halted
+```
 
 ## rust (1.1.0)
 Maintainer: Paul J. Northrop <p.northrop@ucl.ac.uk>  
@@ -1638,29 +1574,9 @@ See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
 Maintainer: Tim Appelhans
  <admin@environmentalinformatics-marburg.de>
 
-1 error  | 0 warnings | 1 note 
+0 errors | 0 warnings | 1 note 
 
 ```
-checking tests ... ERROR
-  Running ‘testthat.R’ [10s/14s]
-Running the tests in ‘tests/testthat.R’ failed.
-Last 13 lines of output:
-  Traceback:
-   1: test_code(NULL, exprs, env)
-   2: source_file(path, new.env(parent = env), chdir = TRUE, encoding = encoding,     wrap = wrap)
-   3: force(code)
-   4: with_reporter(reporter = reporter, start_end_reporter = start_end_reporter,     {        lister$start_file(basename(path))        source_file(path, new.env(parent = env), chdir = TRUE,             encoding = encoding, wrap = wrap)        end_context()    })
-   5: FUN(X[[i]], ...)
-   6: lapply(paths, test_file, env = env, reporter = current_reporter,     start_end_reporter = FALSE, load_helpers = FALSE, encoding = encoding,     wrap = TRUE)
-   7: force(code)
-   8: with_reporter(reporter = current_reporter, results <- lapply(paths,     test_file, env = env, reporter = current_reporter, start_end_reporter = FALSE,     load_helpers = FALSE, encoding = encoding, wrap = TRUE))
-   9: test_files(paths, reporter = reporter, env = env, encoding = encoding)
-  10: test_dir(test_path, reporter = reporter, env = env, filter = filter,     ...)
-  11: with_top_env(env, {    test_dir(test_path, reporter = reporter, env = env, filter = filter,         ...)})
-  12: run_tests(package, test_path, filter, reporter, ...)
-  13: test_check("satellite")
-  An irrecoverable exception occurred. R is aborting now ...
-
 checking compiled code ... NOTE
 File ‘satellite/libs/satellite.so’:
   Found no calls to: ‘R_registerRoutines’, ‘R_useDynamicSymbols’
@@ -1807,23 +1723,23 @@ Calls: umxRun -> mxRun -> runHelper
 Execution halted
 
 checking tests ... ERROR
-  Running ‘testthat.R’ [13s/13s]
+  Running ‘testthat.R’
 Running the tests in ‘tests/testthat.R’ failed.
 Last 13 lines of output:
+  Attaching package: 'umx'
   
-  3. Error: (unknown) (@test_umx_is_RAM.r#28) ------------------------------------
-  c++ exception (unknown reason)
-  1: mxRun(m2) at testthat/test_umx_is_RAM.r:28
-  2: runHelper(model, frontendStart, intervals, silent, suppressWarnings, unsafe, checkpoint, 
-         useSocket, onlyFrontend, useOptimizer)
+  The following object is masked from 'package:stats':
   
+      loadings
+  
+  > 
+  > test_check("umx")
+  Running One Factor with 10 parameters
+  Error in runHelper(model, frontendStart, intervals, silent, suppressWarnings,  : 
+    c++ exception (unknown reason)
+  Calls: test_check ... eval -> eval -> umxRun -> mxRun -> runHelper -> .Call
   testthat results ================================================================
-  OK: 37 SKIPPED: 0 FAILED: 3
-  1. Error: (unknown) (@test_residuals.MxModel.r#23) 
-  2. Error: (unknown) (@test_umx_has_CI.r#41) 
-  3. Error: (unknown) (@test_umx_is_RAM.r#28) 
-  
-  Error: testthat unit tests failed
+  OK: 0 SKIPPED: 0 FAILED: 0
   Execution halted
 ```
 
@@ -1831,30 +1747,7 @@ Last 13 lines of output:
 Maintainer: Brodie Gaslam <brodie.gaslam@yahoo.com>  
 Bug reports: https://github.com/brodieG/unitizer/issues
 
-1 error  | 0 warnings | 0 notes
-
-```
-checking tests ... ERROR
-  Running ‘aunitizer.R’
-  Running ‘runtt.R’ [40s/45s]
-Running the tests in ‘tests/runtt.R’ failed.
-Last 13 lines of output:
-  1. Error: (unknown) (@testthat.browse.R#5) 
-  2. Error: (unknown) (@testthat.demo.R#4) 
-  3. Failure: Show Test Error (@testthat.error.R#28) 
-  4. Error: (unknown) (@testthat.exec.R#11) 
-  5. Error: (unknown) (@testthat.inpkg.R#11) 
-  6. Error: (unknown) (@testthat.item.R#4) 
-  7. Error: (unknown) (@testthat.parse.R#5) 
-  8. Failure: simple tests (@testthat.section.R#13) 
-  9. Error: (unknown) (@testthat.section.R#5) 
-  1. ...
-  
-  Error: testthat unit tests failed
-  Removing packages from '/private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpOwlZIM/RLIBS_c1aa3e835b14'
-  (as 'lib' is unspecified)
-  Execution halted
-```
+0 errors | 0 warnings | 0 notes
 
 ## unvotes (0.1.0)
 Maintainer: David Robinson <admiral.david@gmail.com>  
@@ -1931,7 +1824,7 @@ Packages suggested but not available for checking:
   ‘AnomalyDetection’ ‘BreakoutDetection’
 ```
 
-## wru (0.1-3)
+## wru (0.1-4)
 Maintainer: Kabir Khanna <kkhanna@princeton.edu>  
 Bug reports: https://github.com/kosukeimai/wru/issues
 
