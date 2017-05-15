@@ -10,6 +10,10 @@
 #' @param ignore character vector with words to ignore. See
 #'   \code{\link[hunspell:hunspell]{hunspell}} for more information
 spell_check <- function(pkg = ".", ignore = character()){
+  
+  # You need the suggested hunspell package for this function 
+  check_suggested("hunspell")
+  
   pkg <- as.package(pkg)
   ignore <- c(pkg$package, hunspell::en_stats, ignore)
 
