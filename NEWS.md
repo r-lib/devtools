@@ -1,5 +1,7 @@
 # devtools 1.12.0.9000
 
+* `update_packages()` allows for override of interactive prompt (#1260, @pkq).
+
 * Bugfix for installation of dependencies of dependencies (@jimhester, #1409).
 
 * `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
