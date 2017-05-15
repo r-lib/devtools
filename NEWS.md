@@ -103,6 +103,8 @@
 * fix auto download method selection for `install_github()` on R 3.1 which
   lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)
 
+* Remove deprecated `args` argument from `install_git()` to allow passthrough to `install` (#1373, @ReportMort).
+
 # devtools 1.12.0
 
 ## New features
