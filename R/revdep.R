@@ -64,10 +64,10 @@ print.maintainers <- function(x, ...) {
 #' Run R CMD check on all downstream dependencies.
 #'
 #' Use \code{revdep_check()} to run \code{\link{check_cran}()} on all downstream
-#' dependencies. Summarises the results with \code{revdep_check_summary()} and
+#' dependencies. Summarise the results with \code{revdep_check_summary()} and
 #' see problems with \code{revdep_check_print_problems()}.
 #'
-#' Revdep checks are resumably - this is very helpful if somethings goes
+#' Revdep checks are resumable - this is very helpful if something goes
 #' wrong (like you run out of power or you lose your internet connection) in
 #' the middle of a check. You can resume a partially completed check with
 #' \code{revdep_check_resume()}, or blow away the cached result so you can
