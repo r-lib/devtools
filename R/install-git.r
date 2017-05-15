@@ -77,7 +77,6 @@ remote_metadata.git_remote <- function(x, bundle = NULL, source = NULL) {
 
 #' @export
 remote_package_name.git_remote <- function(remote, ...) {
-
   tmp <- tempfile()
   on.exit(unlink(tmp))
   description_path <- paste0(collapse = "/", c(remote$subdir, "DESCRIPTION"))

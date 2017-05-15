@@ -8,7 +8,12 @@ github_auth <- function(token) {
 
 github_response <- function(req) {
   text <- httr::content(req, as = "text")
-  parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
+  if (jsonlite::validate(text)) {
+    parsed <- jsonlite::fromJSON(text, simplifyVector = FALSE)
+  } else {
+    # Allow non-JSON, plan text content (ex. SHA-1)
+    parsed <- text
+  }
 
   if (httr::status_code(req) >= 400) {
     stop(github_error(req))
@@ -107,4 +112,21 @@ github_pat <- function(quiet = FALSE) {
 
 in_ci <- function() {
   nzchar(Sys.getenv("CI"))
+}
+
+#' @references https://developer.github.com/v3/repos/contents/#get-contents
+github_contents <- function(remote, content_path, path_to_save) {
+  owner <- remote$username
+  repo <- remote$repo
+  parameters <- paste0(content_path, "?ref=", remote$ref)
+
+  target_path <-
+    file.path("repos", owner, repo, "contents", parameters)
+  response <- github_GET(path = target_path)
+
+  utils::download.file(
+    url = response$download_url,
+    destfile = path_to_save,
+    quiet = TRUE
+  )
 }
