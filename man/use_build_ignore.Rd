@@ -32,4 +32,3 @@ Other infrastructure: \code{\link{infrastructure}},
   \code{\link{use_readme_rmd}}
 }
 \keyword{internal}
-

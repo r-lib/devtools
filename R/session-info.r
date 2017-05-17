@@ -96,8 +96,16 @@ print.platform_info <- function(x, ...) {
 
 package_info <- function(pkgs = loadedNamespaces(), include_base = FALSE,
                          libpath = NULL) {
+  desc <- suppressWarnings(lapply(pkgs, packageDescription, lib.loc = libpath))
+
+  # Filter out packages that are not installed
+  not_installed <- vapply(desc, identical, logical(1), NA)
+  if (any(not_installed)) {
+    stop("`pkgs` ", paste0("'", pkgs[not_installed], "'", collapse = ", "),
+      " are not installed", call. = FALSE)
+  }
   if (!include_base) {
-    base <- vapply(pkgs, pkg_is_base, libpath = libpath, logical(1))
+    base <- vapply(pkgs, pkg_is_base, logical(1))
     pkgs <- pkgs[!base]
   }
   pkgs <- sort_ci(pkgs)
@@ -128,9 +136,8 @@ print.packages_info <- function(x, ...) {
   print.data.frame(x, right = FALSE, row.names = FALSE)
 }
 
-pkg_is_base <- function(pkg, libpath) {
-  desc <- packageDescription(pkg, lib.loc = libpath)
-  !is.null(desc$Priority) && desc$Priority == "base"
+pkg_is_base <- function(desc) {
+  is.list(desc) && !is.null(desc$Priority) && desc$Priority == "base"
 }
 
 pkg_date <- function(desc) {

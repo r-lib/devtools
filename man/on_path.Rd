@@ -22,4 +22,3 @@ withr::with_path(tempdir(), on_path("gcc"))
 Other path: \code{\link{path}}
 }
 \keyword{internal}
-

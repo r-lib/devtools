@@ -24,4 +24,3 @@ they attempt to load the code conflicts with how devtools does it.
 check_man("mypkg")
 }
 }
-

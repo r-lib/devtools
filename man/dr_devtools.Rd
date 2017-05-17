@@ -19,4 +19,3 @@ dr_devtools()
 \seealso{
 Other doctors: \code{\link{dr_github}}
 }
-

@@ -37,4 +37,3 @@ restart the whole process.  This function makes it a little easier by
 making it possible to run all examples from an R function.
 }
 \keyword{programming}
-

@@ -16,4 +16,3 @@ to package directory.}
 \description{
 Set working directory.
 }
-

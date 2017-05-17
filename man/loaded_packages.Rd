@@ -14,4 +14,3 @@ A data frame with columns package and path, giving the name of
 Return a vector of names of attached packages
 }
 \keyword{internal}
-

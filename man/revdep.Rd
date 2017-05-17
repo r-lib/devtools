@@ -49,4 +49,3 @@ revdep("ggplot2", ignore = c("xkcd", "zoo"))
 \code{\link{revdep_check}()} to run R CMD check on all reverse
   dependencies.
 }
-

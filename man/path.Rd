@@ -39,4 +39,3 @@ length(get_path())
 
 Other path: \code{\link{on_path}}
 }
-

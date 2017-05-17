@@ -20,7 +20,7 @@ add additional values.}
 
 \item{check}{if \code{TRUE}, will automatically run \code{\link{check}}}
 
-\item{rstudio}{Create an Rstudio project file?
+\item{rstudio}{Create an RStudio project file?
 (with \code{\link{use_rstudio}})}
 
 \item{quiet}{if \code{FALSE}, the default, prints informative messages.}
@@ -51,4 +51,3 @@ create(path, my_description)
 \seealso{
 Text with \code{\link{package.skeleton}}
 }
-

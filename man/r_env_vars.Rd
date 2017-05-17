@@ -18,4 +18,3 @@ code is not running on CRAN. If \code{NOT_CRAN} has been set externally, it
 is not overwritten.
 }
 \keyword{internal}
-

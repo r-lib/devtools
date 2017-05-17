@@ -33,7 +33,7 @@ documentation before running formal check.}
 CRAN uses.}
 
 \item{check_version}{Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
-If \code{TRUE}, performns a number of checked related
+If \code{TRUE}, performs a number of checked related
 to version numbers of packages on CRAN.}
 
 \item{force_suggests}{Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
@@ -102,8 +102,8 @@ with how check works on CRAN. This includes:
    \code{force_suggests}
 }
 }
+
 \seealso{
 \code{\link{release}} if you want to send the checked package to
   CRAN.
 }
-

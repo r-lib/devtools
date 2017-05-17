@@ -24,4 +24,3 @@ installed from).
 session_info()
 session_info("devtools")
 }
-

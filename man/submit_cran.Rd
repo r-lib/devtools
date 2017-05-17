@@ -23,4 +23,3 @@ It's recommended that you use \code{\link{release}()} rather than this
 function as it performs more checks prior to submission.
 }
 \keyword{internal}
-

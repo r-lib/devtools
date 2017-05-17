@@ -13,8 +13,10 @@
 #'   archived source tarballs and tries to install an older version instead.
 #' @param ... Other arguments passed on to \code{\link{install}}.
 #' @inheritParams utils::install.packages
+#' @inheritParams install_url
 #' @author Jeremy Stephens
-install_version <- function(package, version = NULL, repos = getOption("repos"), type = getOption("pkgType"), ...) {
+install_version <- function(package, version = NULL,
+  repos = getOption("repos"), type = getOption("pkgType"), ..., quiet = FALSE) {
 
   contriburl <- contrib.url(repos, type)
   available <- available.packages(contriburl)
