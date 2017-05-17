@@ -9,4 +9,6 @@ foofoo()
 The purpose of this function is to test out \code{help} and \code{?} from
 devtools.
 }
-
+\examples{
+a <- 101
+}

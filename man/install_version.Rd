@@ -39,7 +39,7 @@ archived source tarballs and tries to install an older version instead.}
 \description{
 If you are installing an package that contains compiled code, you will
 need to have an R development environment installed.  You can check
-if you do by running \code{\link{has_devel}}.
+if you do by running \code{\link[pkgbuild]{has_build_tools}}.
 }
 \seealso{
 Other package installation: \code{\link{install_bioc}},
