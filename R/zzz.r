@@ -60,5 +60,17 @@ NULL
   toset <- !(names(op.devtools) %in% names(op))
   if(any(toset)) options(op.devtools[toset])
 
+  if (utils::packageVersion("base") < "3.2.0") {
+    import_backport("trimws")
+  }
+
   invisible()
+}
+
+# `backports` decides which functions to export at build time so we
+# have to pluck into its namespace
+import_backport <- function(nm) {
+  backport <- get(nm, envir = asNamespace("backports"))
+  pkg_env <- parent.env(environment())
+  assign(nm, backport, envir = pkg_env)
 }
