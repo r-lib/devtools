@@ -67,10 +67,19 @@ NULL
   invisible()
 }
 
-# `backports` decides which functions to export at build time so we
-# have to pluck into its namespace
+backports <- local({
+  trimws <- function(x, which = c("both", "left", "right")) {
+    switch(match.arg(which),
+      left = sub("^[ \t\r\n]+", "", x, perl = TRUE),
+      right = sub("[ \t\r\n]+$", "", x, perl = TRUE),
+      both = trimws(trimws(x, "left"), "right")
+    )
+  }
+
+  environment()
+})
+
 import_backport <- function(nm) {
-  backport <- get(nm, envir = asNamespace("backports"))
   pkg_env <- parent.env(environment())
-  assign(nm, backport, envir = pkg_env)
+  assign(nm, backports[[nm]], envir = pkg_env)
 }

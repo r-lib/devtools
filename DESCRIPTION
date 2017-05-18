@@ -15,7 +15,6 @@ BugReports: https://github.com/hadley/devtools/issues
 Depends:
     R (>= 3.0.2)
 Imports:
-    backports,
     callr,
     httr (>= 0.4),
     utils,
