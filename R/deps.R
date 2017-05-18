@@ -197,7 +197,11 @@ parse_one_remote <- function(x) {
 }
 
 split_remotes <- function(x) {
-  trim_ws(unlist(strsplit(x, ",[[:space:]]*")))
+  pkgs <- trim_ws(unlist(strsplit(x, ",[[:space:]]*")))
+  if (any(grepl("\n", pkgs, fixed = TRUE))) {
+    stop("Use commas to separate entries in remote specification '", x, "'", call. = FALSE)
+  }
+  pkgs
 }
 
 remote_deps <- function(pkg) {
