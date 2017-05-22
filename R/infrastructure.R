@@ -505,7 +505,8 @@ use_readme_rmd <- function(pkg = ".") {
                ignore = TRUE, open = TRUE, pkg = pkg)
   use_build_ignore("^README-.*\\.png$", escape = FALSE, pkg = pkg)
 
-  if (uses_git(pkg$path) && !file.exists(pkg$path, ".git", "hooks", "pre-commit")) {
+  if (uses_git(pkg$path) &&
+      !file.exists(file.path(pkg$path, ".git", "hooks", "pre-commit"))) {
     message("* Adding pre-commit hook")
     use_git_hook("pre-commit", render_template("readme-rmd-pre-commit.sh"),
       pkg = pkg)
