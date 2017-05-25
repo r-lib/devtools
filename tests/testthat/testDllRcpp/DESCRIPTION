@@ -5,6 +5,6 @@ Description:
 Author: Hadley <h.wickham@gmail.com>
 Maintainer: Hadley <h.wickham@gmail.com>
 Version: 0.1
-Collate: a.r
 Depends: Rcpp (>= 0.10.0)
 LinkingTo: Rcpp
+RoxygenNote: 6.0.1

@@ -1,5 +1,5 @@
 
 rcpp_hello_world <- function(){
-	.Call( "rcpp_hello_world", PACKAGE = "testDllRcpp" )
+	.Call("testDllRcpp_rcpp_hello_world", PACKAGE = "testDllRcpp" )
 }
 
