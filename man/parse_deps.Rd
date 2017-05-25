@@ -23,4 +23,3 @@ parse_deps("httr (< 2.1),\\nRCurl (>= 3)")
 parse_deps("utils (== 2.12.1),\\ntools,\\nR (>= 2.10),\\nmemoise")
 }
 \keyword{internal}
-

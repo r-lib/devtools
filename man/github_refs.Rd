@@ -19,4 +19,3 @@ Allows installing a specific pull request or the latest release.
 \seealso{
 \code{\link{install_github}}
 }
-

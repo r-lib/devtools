@@ -28,4 +28,3 @@ command output if the command succeeds, an error will be thrown if
 Run a system command and capture the output.
 }
 \keyword{internal}
-

@@ -32,4 +32,3 @@ This currently assumes that you use github and gmail, and you have a
 \code{revdep/email.md} email template.
 }
 \keyword{internal}
-

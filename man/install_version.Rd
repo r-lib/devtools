@@ -5,7 +5,7 @@
 \title{Install specified version of a CRAN package.}
 \usage{
 install_version(package, version = NULL, repos = getOption("repos"),
-  type = getOption("pkgType"), ...)
+  type = getOption("pkgType"), ..., quiet = FALSE)
 }
 \arguments{
 \item{package}{package name}
@@ -18,7 +18,7 @@ archived source tarballs and tries to install an older version instead.}
 \item{repos}{
     character vector, the base URL(s) of the repositories
     to use, e.g., the URL of a CRAN mirror such as
-    \code{"http://cran.us.r-project.org"}.  For more details on
+    \code{"https://cloud.r-project.org"}.  For more details on
     supported URL schemes see \code{\link{url}}.
 
     Can be \code{NULL} to install from local files, directories or URLs:
@@ -26,19 +26,20 @@ archived source tarballs and tries to install an older version instead.}
   }
 
 \item{type}{character, indicating the type of package to download and
-    install.  Will be \code{"source"} except on Windows and some OS X
+    install.  Will be \code{"source"} except on Windows and some macOS
     builds: see the section on \sQuote{Binary packages} for those.
   }
 
 \item{...}{Other arguments passed on to \code{\link{install}}.}
+
+\item{quiet}{
+    logical: if true, reduce the amount of output.
+  }
 }
 \description{
 If you are installing an package that contains compiled code, you will
 need to have an R development environment installed.  You can check
 if you do by running \code{\link[pkgbuild]{has_build_tools}}.
-}
-\author{
-Jeremy Stephens
 }
 \seealso{
 Other package installation: \code{\link{install_bioc}},
@@ -48,4 +49,6 @@ Other package installation: \code{\link{install_bioc}},
   \code{\link{install_url}}, \code{\link{install}},
   \code{\link{uninstall}}
 }
-
+\author{
+Jeremy Stephens
+}

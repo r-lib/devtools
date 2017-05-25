@@ -12,3 +12,8 @@ test_that("Package can be tested with testthat not on search path", {
   test("testTestWithDepends", reporter = "stop")
   expect_true(TRUE)
 })
+
+test_that("Filtering works with devtools::test", {
+  test("testTest", filter = "dummy", reporter = "stop")
+  expect_true(TRUE)
+})

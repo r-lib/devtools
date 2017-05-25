@@ -28,4 +28,3 @@ be checked into source, or at least excluded with \code{.Rbuildignore}
 \code{\link{clean_vignettes}} to remove build tex/pdf files.
 }
 \keyword{programming}
-

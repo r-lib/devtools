@@ -22,4 +22,3 @@ will throw an error.
 package_file("figures", "figure_1")
 }
 }
-

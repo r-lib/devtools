@@ -1,6 +1,6 @@
 Package: devtools
 Title: Tools to Make Developing R Packages Easier
-Version: 1.12.0.9000
+Version: 1.13.1.9000
 Authors@R: c(
     person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("aut", "cre")),
     person("Winston", "Chang", role = "aut"),
@@ -33,13 +33,13 @@ Imports:
 Suggests:
     curl (>= 0.9),
     crayon,
-    testthat (>= 1.0.2.9000),
+    testthat (>= 1.0.2),
     BiocInstaller,
     Rcpp (>= 0.10.0),
     MASS,
     rmarkdown,
     knitr,
-    hunspell (>= 1.2),
+    hunspell (>= 2.0),
     lintr (>= 0.2.1),
     bitops,
     roxygen2 (>= 5.0.0),
@@ -50,7 +50,8 @@ Suggests:
 Remotes:
   hadley/testthat,
   r-pkgs/pkgload,
+  r-pkgs/pkgbuild@HEAD,
   mangothecat/callr
 License: GPL (>= 2)
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

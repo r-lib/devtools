@@ -38,6 +38,6 @@ test_that("install_bioc", {
   # This package has no dependencies or compiled code and is old
   install_bioc("MeasurementError.cor", quiet = TRUE)
 
-  expect_silent(packageDescription("MeasurementError.cor"))
-  expect_equal(packageDescription("MeasurementError.cor")$RemoteType, "bioc")
+  expect_silent(packageDescription("MeasurementError.cor", lib.loc = .libPaths()))
+  expect_equal(packageDescription("MeasurementError.cor", lib.loc = .libPaths())$RemoteType, "bioc")
 })

@@ -10,4 +10,3 @@ has_tests()
 Was devtools installed with tests?
 }
 \keyword{internal}
-

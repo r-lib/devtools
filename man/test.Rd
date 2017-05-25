@@ -32,4 +32,3 @@ If no testing infrastructure is present
 devtools to create it for you (in interactive sessions only). See
 \code{\link{use_test}} for more details.
 }
-

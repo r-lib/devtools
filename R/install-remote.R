@@ -56,12 +56,12 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
           out_dir = out_dir, skip_if_log_exists = skip_if_log_exists)
 }
 
-try_install_remote <- function(..., quiet) {
+try_install_remote <- function(..., quiet = FALSE) {
   tryCatch(
     install_remote(..., quiet = quiet),
     error = function(e) {
       if (!quiet) {
-        message("Installation failed: ", conditionMessage(e))
+        message("Installation failed: ", paste(deparse(conditionCall(e)), collapse = " "), " : ", conditionMessage(e))
       }
       FALSE
     }
@@ -149,7 +149,7 @@ remote_sha <- function(remote, ...) UseMethod("remote_sha")
 
 package2remote <- function(name, repos = getOption("repos"), type = getOption("pkgType")) {
 
-  x <- tryCatch(packageDescription(name, lib.loc = .libPaths()), error = function(e) NA, warning = function(e) NA)
+  x <- tryCatch(packageDescription(name, lib.loc = .libPaths()[[1]]), error = function(e) NA, warning = function(e) NA)
 
   # will be NA if not installed
   if (identical(x, NA)) {

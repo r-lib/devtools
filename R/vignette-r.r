@@ -27,7 +27,7 @@ copy_vignettes <- function(pkg) {
   vigns <- tools::pkgVignettes(dir = pkg$path, output = TRUE, source = TRUE)
   if (length(vigns$docs) == 0) return(invisible())
 
-  out_mv <- c(vigns$outputs, unlist(vigns$sources, use.names = FALSE))
+  out_mv <- c(vigns$outputs, unique(unlist(vigns$sources, use.names = FALSE)))
   out_cp <- vigns$docs
 
   message("Moving ", paste(basename(out_mv), collapse = ", "), " to inst/doc/")

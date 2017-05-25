@@ -17,4 +17,3 @@ check_dep_version(dep_name, dep_ver = NA, dep_compare = NA)
 Check that the version of an imported package satisfies the requirements
 }
 \keyword{internal}
-

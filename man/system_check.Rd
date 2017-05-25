@@ -30,4 +30,3 @@ The exit status of the command, invisibly.
 Run a system command and check if it succeeds.
 }
 \keyword{internal}
-

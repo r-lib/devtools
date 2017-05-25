@@ -9,15 +9,16 @@
 #' @param config additional configuration argument (e.g. proxy,
 #'   authentication) passed on to \code{\link[httr]{GET}}.
 #' @param ... Other arguments passed on to \code{\link{install}}.
+#' @param quiet if \code{TRUE} suppresses output from this function.
 #' @export
 #' @family package installation
 #' @examples
 #' \dontrun{
 #' install_url("https://github.com/hadley/stringr/archive/master.zip")
 #' }
-install_url <- function(url, subdir = NULL, config = list(), ...) {
+install_url <- function(url, subdir = NULL, config = list(), ..., quiet = FALSE) {
   remotes <- lapply(url, url_remote, subdir = subdir, config = config)
-  install_remotes(remotes, ...)
+  install_remotes(remotes, ..., quiet = quiet)
 }
 
 url_remote <- function(url, subdir = NULL, config = list()) {
