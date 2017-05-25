@@ -99,6 +99,8 @@ print.maintainers <- function(x, ...) {
 #' @param check_dir A temporary directory to hold the results of the package
 #'   checks. This should not exist as after the revdep checks complete
 #'   successfully this directory is blown away.
+#' @param reset If \code{TRUE}, the packages' check directories will be removed
+#'   when all packages have been checked, otherwise not.
 #' @seealso \code{\link{revdep_maintainers}()} to get a list of all revdep
 #'   maintainers.
 #' @export
@@ -123,7 +125,8 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          env_vars = NULL,
                          check_dir = NULL,
                          install_dir = NULL,
-                         quiet_check = TRUE) {
+                         quiet_check = TRUE,
+                         reset = TRUE) {
 
   pkg <- as.package(pkg)
 
@@ -171,7 +174,8 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
     check_dir = check_dir,
     install_dir = install_dir,
     env_vars = env_vars,
-    quiet_check = quiet_check
+    quiet_check = quiet_check,
+    reset = reset
   )
   saveRDS(cache, revdep_cache_path(pkg))
 
@@ -271,17 +275,19 @@ revdep_check_from_cache <- function(pkg, cache) {
     cache$pkgs <- setdiff(cache$pkgs, cache$skip)
   }
   cache$skip <- NULL
-
+  reset <- cache$reset
+  cache$reset <- NULL
+ 
   do.call(check_cran, cache)
 
   rule("Saving check results to `revdep/check.rds`")
   revdep_check_save(pkg, cache$revdeps, cache$check_dir, cache$libpath)
 
   # Delete cache and check_dir on successful run
-  rule("Cleaning up")
-  revdep_check_reset(pkg)
-  unlink(revdep_cache_path(pkg))
-  unlink(cache$check_dir, recursive = TRUE)
+  if (reset) {
+    rule("Cleaning up")
+    revdep_check_reset(pkg)
+  }
 
   invisible()
 }
