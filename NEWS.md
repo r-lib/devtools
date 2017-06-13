@@ -1,3 +1,7 @@
+# devtools 1.13.2
+Workaround a regression in Rcpp::compileAttributes.
+Add trimws implementation for R 3.1 support.
+
 # devtools 1.13.1
 
 * Bugfix for installing from git remote and not passing git2r credentials

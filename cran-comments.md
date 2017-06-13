@@ -1,5 +1,5 @@
-This is a point release fixing a significant bug in the last release. We
-apologize for the short release cycle.
+This is a point release working around a Rcpp regression that broke devtools
+tests (https://github.com/RcppCore/Rcpp/pull/697).
 
 ## Test environments
 
@@ -24,6 +24,5 @@ apologize for the short release cycle.
 
 ## Downstream dependencies
 
-* We ran R CMD check on all 136 reverse dependencies
-  Results at https://github.com/hadley/devtools/tree/1.13.0/revdep. As far as we
-  can tell, there are no new problems related to this version of devtools.
+* We did not run R CMD check as there was a recent release, however we do not
+  anticipate any issues with this change.

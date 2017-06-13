@@ -45,6 +45,20 @@ NULL
 #' @keywords internal
 NULL
 
+onload_assign("trimws",
+  if (getRversion() < "3.2.0") {
+    function(x, which = c("both", "left", "right")) {
+      switch(match.arg(which),
+        left = sub("^[ \t\r\n]+", "", x, perl = TRUE),
+        right = sub("[ \t\r\n]+$", "", x, perl = TRUE),
+        both = trimws(trimws(x, "left"), "right")
+        )
+    }
+  } else {
+    base::trimws
+  }
+)
+
 .onLoad <- function(libname, pkgname) {
   op <- options()
   op.devtools <- list(
