@@ -60,5 +60,26 @@ NULL
   toset <- !(names(op.devtools) %in% names(op))
   if(any(toset)) options(op.devtools[toset])
 
+  if (utils::packageVersion("base") < "3.2.0") {
+    import_backport("trimws")
+  }
+
   invisible()
+}
+
+backports <- local({
+  trimws <- function(x, which = c("both", "left", "right")) {
+    switch(match.arg(which),
+      left = sub("^[ \t\r\n]+", "", x, perl = TRUE),
+      right = sub("[ \t\r\n]+$", "", x, perl = TRUE),
+      both = trimws(trimws(x, "left"), "right")
+    )
+  }
+
+  environment()
+})
+
+import_backport <- function(nm) {
+  pkg_env <- parent.env(environment())
+  assign(nm, backports[[nm]], envir = pkg_env)
 }
