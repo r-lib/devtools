@@ -175,7 +175,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
   )
   saveRDS(cache, revdep_cache_path(pkg))
 
-  revdep_check_from_cache(pkg, cache)
+  revdep_check_from_cache(pkg, cache, quiet = quiet_check)
 }
 
 #' @export
@@ -221,20 +221,20 @@ revdep_check_reset <- function(pkg = ".") {
   invisible(TRUE)
 }
 
-revdep_check_from_cache <- function(pkg, cache) {
+revdep_check_from_cache <- function(pkg, cache, quiet = TRUE) {
   # Install all dependencies for this package into revdep library --------------
   if (!file.exists(cache$libpath)) {
-    dir.create(cache$libpath, recursive = TRUE, showWarnings = FALSE)
+    dir.create(cache$libpath, recursive = TRUE, showWarnings = !quiet)
   }
   message(
     "Installing dependencies for ", pkg$package, " to ", cache$libpath
   )
 
   # For installing from GitHub, if git2r is not installed in the cache$libpath
-  requireNamespace("git2r", quietly = TRUE)
+  requireNamespace("git2r", quietly = quiet)
 
   withr::with_libpaths(cache$libpath, {
-    install_deps(pkg, reload = FALSE, quiet = TRUE, dependencies = TRUE)
+    install_deps(pkg, reload = FALSE, quiet = quiet, dependencies = TRUE)
   })
 
   # Always install this package into temporary library, to allow parallel ------
@@ -247,7 +247,7 @@ revdep_check_from_cache <- function(pkg, cache) {
     "Installing ", pkg$package, " ", pkg$version, " to ", temp_libpath
   )
   withr::with_libpaths(c(temp_libpath, cache$libpath), {
-    install(pkg, reload = FALSE, quiet = TRUE, dependencies = FALSE)
+    install(pkg, reload = FALSE, quiet = quiet, dependencies = FALSE)
   })
 
   cache$env_vars <- c(
