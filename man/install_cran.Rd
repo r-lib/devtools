@@ -12,9 +12,7 @@ install_cran(pkgs, repos = getOption("repos"), type = getOption("pkgType"),
 
 \item{repos}{A character vector giving repositories to use.}
 
-\item{type}{Type of package to \code{update}.  If "both", will switch
-automatically to "binary" to avoid interactive prompts during package
-installation.}
+\item{type}{Type of package to \code{update}.}
 
 \item{...}{Additional arguments passed to \code{install_packages}.}
 

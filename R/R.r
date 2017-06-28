@@ -1,45 +1,3 @@
-# R("-e 'str(as.list(Sys.getenv()))' --slave")
-R <- function(args, path = tempdir(), env_vars = character(), fun = system_check, ...) {
-  r <- file.path(R.home("bin"), "R")
-
-  stopifnot(is.character(args))
-  args <- c(
-    "--no-site-file",
-    "--no-environ",
-    "--no-save",
-    "--no-restore",
-    "--quiet",
-    args
-  )
-
-  stopifnot(is.character(env_vars))
-  env_vars <- c(r_profile(), r_env_vars(), env_vars)
-
-  # If rtools has been detected, add it to the path only when running R...
-  if (!is.null(get_rtools_path())) {
-    old <- add_path(get_rtools_path(), 0)
-    on.exit(set_path(old))
-  }
-
-  fun <- match.fun(fun)
-  fun(r, args = args, env_vars = env_vars, path = path, ...)
-}
-
-#' Run R CMD xxx from within R
-#'
-#' @param cmd one of the R tools available from the R CMD interface.
-#' @param options a character vector of options to pass to the command
-#' @param path the directory to run the command in.
-#' @param env_vars environment variables to set before running the command.
-#' @param ... additional arguments passed to \code{\link{system_check}}
-#' @return \code{TRUE} if the command succeeds, throws an error if the command
-#' fails.
-#' @export
-RCMD <- function(cmd, options, path = tempdir(), env_vars = character(), ...) {
-  options <- paste(options, collapse = " ")
-  R(paste("CMD", cmd, options), path = path, env_vars = env_vars, ...)
-}
-
 #' Environment variables to set when calling R
 #'
 #' Devtools sets a number of environmental variables to ensure consistent
@@ -62,8 +20,8 @@ r_env_vars <- function() {
     # the R subprocesses. Un-setting it here avoids those problems.
     "R_TESTS" = "",
     "R_BROWSER" = "false",
-    "R_PDFVIEWER" = "false",
-    "TAR" = auto_tar())
+    "R_PDFVIEWER" = "false"
+  )
 
   if (is.na(Sys.getenv("NOT_CRAN", unset = NA))) {
     vars[["NOT_CRAN"]] <- "true"
@@ -84,17 +42,4 @@ r_profile <- function() {
   writeLines(")", tmp_user_profile_con)
 
   c(R_PROFILE_USER = tmp_user_profile)
-}
-
-# Determine the best setting for the TAR environmental variable
-# This is needed for R <= 2.15.2 to use internal tar. Later versions don't need
-# this workaround, and they use R_BUILD_TAR instead of TAR, so this has no
-# effect on them.
-auto_tar <- function() {
-  tar <- Sys.getenv("TAR", unset = NA)
-  if (!is.na(tar)) return(tar)
-
-  windows <- .Platform$OS.type == "windows"
-  no_rtools <- is.null(get_rtools_path())
-  if (windows && no_rtools) "internal" else ""
 }

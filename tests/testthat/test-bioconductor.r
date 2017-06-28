@@ -17,6 +17,8 @@ test_that("bioc repo paths are parsed correctly", {
 
 test_that("install_bioc", {
   skip_on_cran()
+  skip_on_travis()
+  skip_on_appveyor()
 
   lib <- tempfile()
   on.exit(unlink(lib, recursive = TRUE), add = TRUE)
@@ -36,6 +38,6 @@ test_that("install_bioc", {
   # This package has no dependencies or compiled code and is old
   install_bioc("MeasurementError.cor", quiet = TRUE)
 
-  expect_silent(packageDescription("MeasurementError.cor"))
-  expect_equal(packageDescription("MeasurementError.cor")$RemoteType, "bioc")
+  expect_silent(packageDescription("MeasurementError.cor", lib.loc = .libPaths()))
+  expect_equal(packageDescription("MeasurementError.cor", lib.loc = .libPaths())$RemoteType, "bioc")
 })

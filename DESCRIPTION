@@ -1,6 +1,6 @@
 Package: devtools
 Title: Tools to Make Developing R Packages Easier
-Version: 1.13.1
+Version: 1.13.2.9000
 Authors@R: c(
     person("Hadley", "Wickham", , "hadley@rstudio.com", role = c("aut", "cre")),
     person("Winston", "Chang", role = "aut"),
@@ -15,6 +15,7 @@ BugReports: https://github.com/hadley/devtools/issues
 Depends:
     R (>= 3.0.2)
 Imports:
+    callr,
     httr (>= 0.4),
     utils,
     tools,
@@ -26,7 +27,9 @@ Imports:
     jsonlite,
     stats,
     git2r (>= 0.11.0),
-    withr
+    withr,
+    pkgbuild,
+    pkgload
 Suggests:
     curl (>= 0.9),
     crayon,
@@ -44,6 +47,11 @@ Suggests:
     rversions,
     covr,
     gmailr (> 0.7.0)
+Remotes:
+  hadley/testthat,
+  r-pkgs/pkgload,
+  r-pkgs/pkgbuild@HEAD,
+  mangothecat/callr
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

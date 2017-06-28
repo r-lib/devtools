@@ -18,10 +18,7 @@
 #' @param quiet If \code{TRUE}, suppress output.
 #' @param upgrade If \code{TRUE}, also upgrade any of out date dependencies.
 #' @param repos A character vector giving repositories to use.
-#' @param type Type of package to \code{update}.  If "both", will switch
-#'   automatically to "binary" to avoid interactive prompts during package
-#'   installation.
-#'
+#' @param type Type of package to \code{update}.
 #' @param object A \code{package_deps} object.
 #' @param bioconductor Install Bioconductor dependencies if the package has a
 #' BiocViews field in the DESCRIPTION.
@@ -49,9 +46,6 @@
 #' }
 package_deps <- function(pkg, dependencies = NA, repos = getOption("repos"),
                          type = getOption("pkgType")) {
-  if (identical(type, "both")) {
-    type <- "binary"
-  }
 
   if (length(repos) == 0)
     repos <- character()
@@ -121,15 +115,12 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
       repos[missing_repos] <- bioc_repos[missing_repos]
   }
 
-  res <- filter_duplicate_deps(
+  filter_duplicate_deps(
     package_deps(deps, repos = repos, type = type),
 
     # We set this cache in install() so we can run install_deps() twice without
     # having to re-query the remotes
     installing$remote_deps %||% remote_deps(pkg))
-
-  # Only keep dependencies we actually want to use
-  res[res$package %in% deps, ]
 }
 
 filter_duplicate_deps <- function(cran_deps, remote_deps, dependencies) {
@@ -314,8 +305,6 @@ update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
 install_packages <- function(pkgs, repos = getOption("repos"),
                              type = getOption("pkgType"), ...,
                              dependencies = FALSE, quiet = NULL) {
-  if (identical(type, "both"))
-    type <- "binary"
   if (is.null(quiet))
     quiet <- !identical(type, "source")
 
@@ -324,14 +313,14 @@ install_packages <- function(pkgs, repos = getOption("repos"),
       "Installing %d packages: %s"
     ), length(pkgs), paste(pkgs, collapse = ", ")))
 
-  # if type is 'source' and on windows add Rtools to the path this assumes
-  # setup_rtools() has already run and set the rtools path
-  if (type == "source" && !is.null(get_rtools_path())) {
-    old <- add_path(get_rtools_path(), 0)
-    on.exit(set_path(old))
-  }
-  utils::install.packages(pkgs, repos = repos, type = type,
-    dependencies = dependencies, quiet = quiet)
+  pkgbuild::with_build_tools(
+    withr::with_options("install.packages.compile.from.source" = "never",
+      utils::install.packages(pkgs, repos = repos, type = type,
+        dependencies = dependencies, quiet = quiet
+      )
+    ),
+    required = FALSE
+  )
 }
 
 find_deps <- function(pkgs, available = available.packages(), top_dep = TRUE,

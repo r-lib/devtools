@@ -22,7 +22,7 @@ loaded_packages <- function() {
 #' @keywords internal
 dev_packages <- function() {
   packages <- vapply(loadedNamespaces(),
-    function(x) !is.null(dev_meta(x)), logical(1))
+    function(x) !is.null(pkgload::dev_meta(x)), logical(1))
 
   names(packages)[packages]
 }

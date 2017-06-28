@@ -73,13 +73,12 @@ install <-
            ...) {
 
   pkg <- as.package(pkg)
-  check_build_tools(pkg)
 
   # Forcing all of the promises for the current namespace now will avoid lazy-load
   # errors when the new package is installed overtop the old one.
   # https://stat.ethz.ch/pipermail/r-devel/2015-December/072150.html
   if (is_loaded(pkg)) {
-    eapply(ns_env(pkg), force, all.names = TRUE)
+    eapply(pkgload::ns_env(pkg), force, all.names = TRUE)
   }
 
   root_install <- is.null(installing$packages)
@@ -133,34 +132,42 @@ install <-
   if (local && !(has_vignettes && build_vignettes)) {
     built_path <- pkg$path
   } else {
-    built_path <- build(pkg, tempdir(), vignettes = build_vignettes, quiet = quiet)
+    built_path <- pkgbuild::build(
+      pkg$path,
+      tempdir(),
+      vignettes = build_vignettes,
+      quiet = quiet
+    )
     on.exit(unlink(built_path), add = TRUE)
   }
 
   opts <- c(
-    paste("--library=", shQuote(.libPaths()[1]), sep = ""),
+    paste("--library=", .libPaths()[1], sep = ""),
     if (keep_source) "--with-keep.source",
     "--install-tests"
   )
   if (quick) {
     opts <- c(opts, "--no-docs", "--no-multiarch", "--no-demo")
   }
-  opts <- paste(paste(opts, collapse = " "), paste(args, collapse = " "))
+  opts <- c(opts, args)
 
   built_path <- normalizePath(built_path, winslash = "/")
-  R(paste("CMD INSTALL ", shQuote(built_path), " ", opts, sep = ""),
-    fun = system2_check,
-    quiet = quiet || !is.null(out_file), out_file = out_file)
 
-  # Remove immediately upon success
-  unlink(out_file)
+  pkgbuild::rcmd_build_tools(
+    "INSTALL",
+    c(built_path, opts),
+    echo = !quiet,
+    show = !quiet,
+    fail_on_status = TRUE,
+    required = FALSE
+  )
 
   install_deps(pkg, dependencies = final_deps, upgrade = upgrade_dependencies,
     threads = threads, force_deps = force_deps, quiet = quiet, ...,
     out_dir = out_dir, skip_if_log_exists = skip_if_log_exists)
 
   if (length(metadata) > 0) {
-    add_metadata(inst(pkg$package), metadata)
+    add_metadata(pkgload::inst(pkg$package), metadata)
   }
 
   if (reload) {
@@ -198,7 +205,7 @@ install_deps <- function(pkg = ".", dependencies = NA,
 
   pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
     type = type)
-  update(pkg, ..., Ncpus = threads, quiet = quiet, upgrade = upgrade)
+  update(pkg, ..., repos = repos, Ncpus = threads, quiet = quiet, upgrade = upgrade)
   invisible()
 }
 

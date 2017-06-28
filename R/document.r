@@ -33,9 +33,9 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
   }
 
   withr::with_envvar(r_env_vars(),
-    roxygen2::roxygenise(pkg$path, roclets = roclets, load_code = ns_env)
+    roxygen2::roxygenise(pkg$path, roclets = roclets, load_code = pkgload::ns_env)
   )
 
-  clear_topic_index(pkg)
+  pkgload::dev_topic_index_reset(pkg$package)
   invisible()
 }

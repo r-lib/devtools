@@ -13,30 +13,28 @@
 #' @param args A character vector providing extra arguments to pass on to
 #    svn.
 #' @param revision svn revision, if omitted updates to latest
-#' @param branch Name of branch or tag to use, if not trunk.
 #' @param ... Other arguments passed on to \code{\link{install}}
 #' @export
 #' @family package installation
 #' @examples
 #' \dontrun{
 #' install_svn("https://github.com/hadley/stringr")
-#' install_svn("https://github.com/hadley/httr", branch = "oauth")
+#' install_svn("https://github.com/hadley/httr")
 #'}
-install_svn <- function(url, subdir = NULL, branch = NULL, args = character(0),
+install_svn <- function(url, subdir = NULL, args = character(0),
   ..., revision = NULL, quiet = FALSE) {
 
-  remotes <- lapply(url, svn_remote, svn_subdir = subdir, branch = branch,
+  remotes <- lapply(url, svn_remote, svn_subdir = subdir,
     revision = revision, args = args)
 
   install_remotes(remotes, ..., quiet = quiet)
 }
 
-svn_remote <- function(url, svn_subdir = NULL, branch = NULL, revision = NULL,
+svn_remote <- function(url, svn_subdir = NULL, revision = NULL,
   args = character(0)) {
   remote("svn",
     url = url,
     svn_subdir = svn_subdir,
-    branch = branch,
     revision = revision,
     args = args
   )
@@ -51,7 +49,12 @@ remote_download.svn_remote <- function(x, quiet = FALSE) {
   bundle <- tempfile()
   svn_binary_path <- svn_path()
 
-  args <- c("co", x$args, full_svn_url(x), bundle)
+  args <- "co"
+  if (!is.null(x$revision)) {
+    args <- c(args, "-r", x$revision)
+  }
+
+  args <- c(args, x$args, full_svn_url(x), bundle)
 
   message(shQuote(svn_binary_path), " ", paste0(args, collapse = " "))
   request <- system2(svn_binary_path, args, stdout = FALSE, stderr = FALSE)
@@ -88,7 +91,6 @@ remote_metadata.svn_remote <- function(x, bundle = NULL, source = NULL) {
     RemoteType = "svn",
     RemoteUrl = x$url,
     RemoteSvnSubdir = x$svn_subdir,
-    RemoteBranch = x$branch,
     RemoteArgs = if (length(x$args) > 0) paste0(deparse(x$args), collapse = " "),
     RemoteRevision = revision,
     RemoteSha = revision # for compatibility with other remotes
@@ -147,11 +149,7 @@ svn_revision <- function(url = NULL, svn_binary_path = svn_path()) {
 }
 
 full_svn_url <- function(x) {
-  if (!is.null(x$branch)) {
-    url <- file.path(x$url, "branches", x$branch)
-  } else {
-    url <- file.path(x$url, "trunk")
-  }
+  url <- x$url
   if (!is.null(x$svn_subdir)) {
     url <- file.path(url, x$svn_subdir)
   }

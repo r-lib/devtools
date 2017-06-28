@@ -59,7 +59,7 @@ Also' section in `?install` for a complete list.
 
 ```yaml
 # Git
-Remotes: git::https://github.com/hadley/ggplot2.git
+Remotes: git::git@bitbucket.org:dannavarro/lsr-package.git
 
 # Bitbucket
 Remotes: bitbucket::sulab/mygene.r@default, dannavarro/lsr-package

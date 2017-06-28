@@ -199,69 +199,6 @@ all_named <- function (x) {
   !is.null(names(x)) && all(names(x) != "")
 }
 
-make_function <- function (args, body, env = parent.frame()) {
-  args <- as.pairlist(args)
-  stopifnot(all_named(args), is.language(body))
-  eval(call("function", args, body), env)
-}
-
-comp_lang <- function(x, y, idx = seq_along(y)) {
-  if (is.symbol(x) || is.symbol(y)) {
-    return(identical(x, y))
-  }
-
-  if (length(x) < length(idx)) return(FALSE)
-
-  identical(x[idx], y[idx])
-}
-
-extract_lang <- function(x, f, ...) {
-  recurse <- function(y) {
-    unlist(compact(lapply(y, extract_lang, f = f, ...)), recursive = FALSE)
-  }
-
-  # if x matches predicate return it
-  if (isTRUE(f(x, ...))) {
-    return(x)
-  }
-
-  if (is.call(x)) {
-    res <- recurse(x)[[1]]
-    if (top_level_call <- identical(sys.call()[[1]], as.symbol("extract_lang"))
-        && is.null(res)) {
-      warning("Devtools is incompatible with the current version of R. `load_all()` may function incorrectly.")
-    }
-    return(res)
-  }
-
-  NULL
-}
-
-modify_lang <- function(x, f, ...) {
-  recurse <- function(x) {
-    lapply(x, modify_lang, f = f, ...)
-  }
-
-  x <- f(x, ...)
-
-  if (is.call(x)) {
-    as.call(recurse(x))
-  } else if (is.function(x)) {
-     formals(x) <- modify_lang(formals(x), f, ...)
-     body(x) <- modify_lang(body(x), f, ...)
-  } else {
-    x
-  }
-}
-
-strip_internal_calls <- function(x, package) {
-  if (is.call(x) && identical(x[[1L]], as.name(":::")) && identical(x[[2L]], as.name(package))) {
-    x[[3L]]
-  } else {
-    x
-  }
-}
-
 sort_ci <- function(x) {
   withr::with_collate("C", x[order(tolower(x), x)])
 }
@@ -271,4 +208,13 @@ comma <- function(x, at_most = 20) {
     x <- c(x[seq_len(at_most)], "...")
   }
   paste(x, collapse = ", ")
+}
+
+is_loaded <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+  pkg$package %in% loadedNamespaces()
+}
+
+is_attached <- function(pkg = ".") {
+  !is.null(pkgload::pkg_env(pkg))
 }

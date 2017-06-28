@@ -1,7 +1,39 @@
+# devtools 1.13.2
+Workaround a regression in Rcpp::compileAttributes.
+Add trimws implementation for R 3.1 support.
+
 # devtools 1.13.1
 
 * Bugfix for installing from git remote and not passing git2r credentials
   (@james-atkins, #1498)
+* Bugfix for installation of dependencies of dependencies (@jimhester, #1409).
+
+* `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
+  removed. These functions never worked terribly well, and have been replaced 
+  by the much better functions in callr.
+  
+* `find_rtools()`, `setup_rtools()`, `has_devel()`, `compiler_flags()`,
+  `build()` and `with_debug()` have moved to the new pkgbuild package.
+  `build()` and `with_debug()` are re-exported by devtools.
+
+* Deprecated `build_github_devtools()` has been removed.
+
+* Bugfix for installation of dependencies in CRAN-like repositories such as
+  those created by drat (@jimhester, #1243, #1339).
+
+* Code related to simulating package loading has been pulled out into a 
+  separate package, pkgload. The following functions have been moved to 
+  pkgload without a shim: `clean_dll()`, `compile_dll()`, `dev_example()`, 
+  `dev_help()`, `dev_meta()`, `find_topic()`, `imports_env()`, `inst()`, 
+  `load_code()`, `load_dll()`, `ns_env()`, `parse_ns_file()`, `pkg_env()`. 
+  These functions are primarily for internal use.
+  
+    `load_all()` and `unload()` have been moved to pkgload, but devtools
+    provides shims since these are commonly used.
+
+* `load_all()` no longer automatically creates a description for you.
+
+* `use_test()` template no longer includes useless comments (#1349)
 
 * Fix `test()` compatibility with testthat versions 1.0.2 (#1503).
 

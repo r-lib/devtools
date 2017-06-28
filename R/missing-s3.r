@@ -16,7 +16,7 @@ missing_s3 <- function(pkg = ".") {
   s3_objs <- Filter(is_s3, objs)
 
   # Find all S3 methods in NAMESPACE
-  ns <- parse_ns_file(pkg)
+  ns <- pkgload::parse_ns_file(pkg)
   exports <- paste(ns$S3methods[, 1], ns$S3methods[, 2], sep = ".")
 
   setdiff(s3_objs, exports)
