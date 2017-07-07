@@ -255,7 +255,7 @@ use_package_doc <- function(pkg = ".") {
 #' about how to best use it.
 #'
 #' @param package Name of package to depend on.
-#' @param type Type of dependency: must be one of "Imports", "Depends",
+#' @param type Type of dependency: must be one of "Imports", "Depends", 
 #'   "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
@@ -622,7 +622,7 @@ use_cran_badge <- function(pkg = ".") {
   pkg <- as.package(pkg)
   message(
     " * Add a CRAN status shield by adding the following line to your README:\n",
-    "[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/", pkg$package, ")](https://cran.r-project.org/package=", pkg$package, ")"
+    "[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/", pkg$package, ")](https://cran.r-project.org/package=", pkg$package, ")"
   )
   invisible(TRUE)
 }
