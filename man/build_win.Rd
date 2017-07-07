@@ -27,6 +27,3 @@ maintainer field.  It usually takes around 30 minutes. As a side effect,
 win-build also runs \code{R CMD check} on the package, so \code{build_win}
 is also useful to check that your package is ok on windows.
 }
-\seealso{
-Other build functions: \code{\link{build}}
-}
