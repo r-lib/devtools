@@ -1,8 +1,8 @@
 # Decompress pkg, if needed
-source_pkg_info <- function(path, subdir = NULL) {
+source_pkg_info <- function(path, subdir = NULL, tmpdir = tempdir()) {
   if (!file.info(path)$isdir) {
     bundle <- path
-    outdir <- tempfile(pattern = "devtools")
+    outdir <- tempfile(pattern = "devtools", tmpdir = tmpdir)
     dir.create(outdir)
 
     path <- decompress(path, outdir)
@@ -20,15 +20,18 @@ source_pkg_info <- function(path, subdir = NULL) {
   list(pkg_path = pkg_path, bundle = bundle)
 }
 
-is_source_pkg <- function(path, subdir = NULL) {
+is_source_pkg <- function(path, subdir = NULL, tmpdir = tempdir()) {
   tryCatch({
-    source_pkg_info(path = path, subdir = subdir)
+    source_pkg_info(path = path, subdir = subdir,
+                    tmpdir = tmpdir)
     TRUE
   }, error = function(e) return(FALSE))
 }
 
-source_pkg <- function(path, subdir = NULL, before_install = NULL) {
-  info <- source_pkg_info(path = path, subdir = subdir)
+source_pkg <- function(path, subdir = NULL, before_install = NULL,
+                       tmpdir = tempdir()) {
+  info <- source_pkg_info(path = path, subdir = subdir,
+                          tmpdir = tmpdir)
 
   # Check configure is executable if present
   config_path <- file.path(info$pkg_path, "configure")

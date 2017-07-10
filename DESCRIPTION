@@ -54,4 +54,4 @@ Remotes:
   mangothecat/callr
 License: GPL (>= 2)
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
