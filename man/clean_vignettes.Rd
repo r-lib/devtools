@@ -14,4 +14,3 @@ clean_vignettes(pkg = ".")
 This uses a fairly rudimentary algorithm where any files in \file{inst/doc}
 with a name that exists in \file{vignettes} are removed.
 }
-

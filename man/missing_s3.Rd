@@ -13,4 +13,3 @@ missing_s3(pkg = ".")
 \description{
 The method is heuristic - looking for objs with a period in their name.
 }
-

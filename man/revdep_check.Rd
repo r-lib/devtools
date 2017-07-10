@@ -84,7 +84,7 @@ dependencies. Summarises the results with \code{revdep_check_summary()} and
 see problems with \code{revdep_check_print_problems()}.
 }
 \details{
-Revdep checks are resumably - this is very helpful if somethings goes
+Revdep checks are resumable - this is very helpful if somethings goes
 wrong (like you run out of power or you lose your internet connection) in
 the middle of a check. You can resume a partially completed check with
 \code{revdep_check_resume()}, or blow away the cached result so you can
@@ -111,6 +111,7 @@ between checks, you'll need to reinstall all the packages. If you're
 doing reverse dependency checks frequently, I recommend that you create
 a directory for these packages and set \code{options(devtools.revdep.libpath)}.
 }
+
 \examples{
 \dontrun{
 # Run R CMD check on all downstream dependencies
@@ -123,4 +124,3 @@ revdep_check_print_problems()
 \code{\link{revdep_maintainers}()} to get a list of all revdep
   maintainers.
 }
-

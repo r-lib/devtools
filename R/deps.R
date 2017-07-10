@@ -210,9 +210,9 @@ remote_deps <- function(pkg) {
   dev_packages <- split_remotes(pkg[["remotes"]])
   remote <- lapply(dev_packages, parse_one_remote)
 
-  package <- vapply(remote, remote_package_name, character(1))
-  installed <- vapply(package, local_sha, character(1))
-  available <- vapply(remote, remote_sha, character(1))
+  package <- vapply(remote, remote_package_name, character(1), USE.NAMES = FALSE)
+  installed <- vapply(package, local_sha, character(1), USE.NAMES = FALSE)
+  available <- vapply(remote, remote_sha, character(1), USE.NAMES = FALSE)
   diff <- installed == available
   diff <- ifelse(!is.na(diff) & diff, CURRENT, BEHIND)
 
@@ -364,8 +364,9 @@ standardise_dep <- function(x) {
 #' Works similarly to \code{install.packages()} but doesn't install packages
 #' that are already installed, and also upgrades out dated dependencies.
 #'
-#' @param pkgs Character vector of packages to update. If \code{NULL} all
-#'   installed packages are updated.
+#' @param pkgs Character vector of packages to update. IF \code{TRUE} all
+#'   installed packages are updated. If \code{NULL} user is prompted to
+#'   confirm update of all installed packages.
 #' @inheritParams package_deps
 #' @seealso \code{\link{package_deps}} to see which packages are out of date/
 #'   missing.
@@ -379,7 +380,10 @@ update_packages <- function(pkgs = NULL, dependencies = NA,
                             repos = getOption("repos"),
                             type = getOption("pkgType")) {
 
-  if (is.null(pkgs)) {
+  if (isTRUE(pkgs)) {
+    pkgs <- installed.packages()[, "Package"]
+  }
+  else if (is.null(pkgs)) {
     if (!yesno("Are you sure you want to update all installed packages?")) {
       pkgs <- installed.packages()[, "Package"]
     } else {

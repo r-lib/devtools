@@ -32,4 +32,3 @@ reload("ggplot2/")
 reload(pkgload::inst("ggplot2"))
 }
 }
-

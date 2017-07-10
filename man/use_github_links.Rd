@@ -30,4 +30,3 @@ Other git infrastructure: \code{\link{use_git_hook}},
   \code{\link{use_github}}, \code{\link{use_git}}
 }
 \keyword{internal}
-

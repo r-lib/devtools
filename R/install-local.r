@@ -14,9 +14,9 @@
 #' pkg <- download.packages("testthat", dir, type = "source")
 #' install_local(pkg[, 2])
 #' }
-install_local <- function(path, subdir = NULL, ...) {
+install_local <- function(path, subdir = NULL, ..., quiet = FALSE) {
   remotes <- lapply(path, local_remote, subdir = subdir)
-  install_remotes(remotes, ...)
+  install_remotes(remotes, ..., quiet = quiet)
 }
 
 local_remote <- function(path, subdir = NULL, branch = NULL, args = character(0)) {

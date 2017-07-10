@@ -242,32 +242,33 @@ parse_git_repo <- function(path) {
 }
 
 #' @export
-remote_package_info.github_remote <- function(remote, url = "https://github.com", ...) {
+remote_package_name.github_remote <- function(remote, url = "https://raw.githubusercontent.com", ...) {
 
   tmp <- tempfile()
   path <- paste(c(
-    remote$username,
-    remote$repo,
-    "raw",
-    remote$ref,
-    remote$subdir,
-    "DESCRIPTION"), collapse = "/")
+      remote$username,
+      remote$repo,
+      remote$ref,
+      remote$subdir,
+      "DESCRIPTION"), collapse = "/")
 
-  req <- httr::GET(url, path = path, httr::write_disk(path = tmp))
-
-  if (httr::status_code(req) >= 400) {
-    L <- list(Package = NA_character_,
-             Version = NA_character_)
-    return(L)
+  if (!is.null(remote$auth_token)) {
+    auth <- httr::authenticate(
+      user = remote$auth_token,
+      password = "x-oauth-basic",
+      type = "basic"
+    )
+  } else {
+    auth <- NULL
   }
 
-  read_dcf(tmp)
-}
+  req <- httr::GET(url, path = path, httr::write_disk(path = tmp), auth)
 
-#' @export
-remote_package_name.github_remote <- function(remote, url = "https://github.com", ...) {
-  res <- remote_package_info(remote, url = url, ...)
-  res$Package
+  if (httr::status_code(req) >= 400) {
+    return(NA_character_)
+  }
+
+  read_dcf(tmp)$Package
 }
 
 #' @export

@@ -5,7 +5,7 @@
 \title{Install a package directly from bitbucket}
 \usage{
 install_bitbucket(repo, username, ref = "master", subdir = NULL,
-  auth_user = NULL, password = NULL, ...)
+  quiet = FALSE, auth_user = NULL, password = NULL, ...)
 }
 \arguments{
 \item{repo}{Repository address in the format
@@ -21,6 +21,8 @@ precedence.}
 Defaults to master.}
 
 \item{subdir}{subdirectory within repo that contains the R package.}
+
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{auth_user}{your account username if you're attempting to install
 a package hosted in a private repository (and your username is different
@@ -50,4 +52,3 @@ Other package installation: \code{\link{install_bioc}},
   \code{\link{install_url}}, \code{\link{install_version}},
   \code{\link{install}}, \code{\link{uninstall}}
 }
-

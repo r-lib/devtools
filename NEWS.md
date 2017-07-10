@@ -1,5 +1,11 @@
-# devtools 1.12.0.9000
+# devtools 1.13.2
+Workaround a regression in Rcpp::compileAttributes.
+Add trimws implementation for R 3.1 support.
 
+# devtools 1.13.1
+
+* Bugfix for installing from git remote and not passing git2r credentials
+  (@james-atkins, #1498)
 * Bugfix for installation of dependencies of dependencies (@jimhester, #1409).
 
 * `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
@@ -29,30 +35,41 @@
 
 * `use_test()` template no longer includes useless comments (#1349)
 
-* Add encoding support in `test_dir()` call by adding reference to pkg$encoding (#1306, @hansharhoff)
+* Fix `test()` compatibility with testthat versions 1.0.2 (#1503).
 
-* Parse valid Git remote URLs that lack trailing `.git`, e.g. GitHub browser URLs (#1253, @jennybc).
+* Fix `install_version()`, `install_bitbucket()`, `install_local()`,
+`install_url()`, `install_svn()`, `install_bioc()` gain `quiet` arguments and
+properly pass them to internal functions. (#1502)
 
-* Add a `check_bioconductor()` internal function to automatically install
-  BiocInstaller() if it is not installed and the user wants to do so.
+# devtools 1.13.0
 
-* More tweaks to `revdep_check()` and friends to make debugging easier when
-  something goes wrong. This includes:
-  
-    * `revdep_check()` and `revdep_check_resume()` gain a skip argument
-      which takes a character vector of packages to skip.
-      
-    * `revdep_check()` and `check_cran()` gain a `quiet_check` argument.
-      You can use `quiet_check = FALSE` to see the actual text of R CMD
-      check as it runs (not recommending with multiple threads).
-  
-    * `revdep_check_resume()` now takes `...` which can be used to 
-      override settings from `revdep_check()`. For debugging a problem
-      with package checks, try 
-      `revdep_check(threads = 1, quiet_check = FALSE)`
+## New Features
+
+* `spell_check` gains a `dict` argument to set a custom language or dictionary
+
+* `release()` now checks documentation for spelling errors by default.
 
 * New `use_gpl3_license()` sets the license field in `DESCRIPTION` and
   includes a copy of the license in `LICENSE`.
+
+## Revdep check improvements
+
+* Various minor improvements around checking of reverse dependencies
+  (#1284, @krlmlr). All packages involved are listed at the start,
+  the whole process is now more resilient against package
+  installation failures.
+
+* `revdep_check()` and `revdep_check_resume()` gain a skip argument
+  which takes a character vector of packages to skip.
+
+* `revdep_check()` and `check_cran()` gain a `quiet_check` argument.
+  You can use `quiet_check = FALSE` to see the actual text of R CMD
+  check as it runs (not recommending with multiple threads).
+
+* `revdep_check_resume()` now takes `...` which can be used to
+  override settings from `revdep_check()`. For debugging a problem
+  with package checks, try
+  `revdep_check(threads = 1, quiet_check = FALSE)`
 
 * `revdep_check()` collects timing information in `timing.md` (#1319, @krlmlr).
 
@@ -60,11 +77,7 @@
 
 * `use_revdep()` adds `.gitignore` entry for check database (#1321, @krlmlr).
 
-* Improve Git integration. `use_git_ignore()` and `use_git_config()` gain `quiet` argument, tests work without setting `user.name` and `user.email` Git configuration settings (#1320, @krlmlr).
-
 * Own package is installed in temporary library for revdep checking (#1338, @krlmlr).
-
-* Improve Git status checks used in `release()` (#1205, @krlmlr).
 
 * Automated revdep check e-mails now can use the new `my_version` and
   `you_cant_install` variables. The e-mail template has been updated
@@ -74,16 +87,44 @@
   `revdep/install`. Once an installation has failed, it is not attempted
   a second time (#1300, @krlmlr).
 
-* Various minor improvements around checking of reverse dependencies
-  (#1284, @krlmlr). All packages involved are listed at the start,
-  the whole process is now more resilient against package
-  installation failures.
+* Print summary table in README.md and problems.md (#1284, @krlmlr).Revdep
+  check improvements (#1284)
+
+## Bug fixes and minor improvements
+
+* Handle case of un-installed package being passed to session_info (#1281).
+
+* Using authentication to access Github package name. (#1262, @eriknil).
+
+* `spell_check()` checks for hunspell before running (#1475, @jimvine).
+
+* `add_desc_package()` checks for package dependencies correctly (#1463, @thomasp85).
+
+* Remove deprecated `args` argument from `install_git()` to allow passthrough to `install` (#1373, @ReportMort).
+
+* added a `quiet` argument to `install_bitbucket()`, with a default value
+  of `FALSE` (fixes issue #1345, @plantarum).
+
+* `update_packages()` allows for override of interactive prompt (#1260, @pkq).
+
+* `use_test()` template no longer includes useless comments (#1349)
+
+* Add encoding support in `test_dir()` call by adding reference to pkg$encoding (#1306, @hansharhoff)
+
+* Parse valid Git remote URLs that lack trailing `.git`, e.g. GitHub browser URLs (#1253, @jennybc).
+
+* Add a `check_bioconductor()` internal function to automatically install
+  BiocInstaller() if it is not installed and the user wants to do so.
+
+* Improve Git integration. `use_git_ignore()` and `use_git_config()` gain
+  `quiet` argument, tests work without setting `user.name` and `user.email` Git
+  configuration settings (#1320, @krlmlr).
+
+* Improve Git status checks used in `release()` (#1205, @krlmlr).
 
 * Improved handling of local `file://` repositories in `install()` (#1284, @krlmlr).
 
 * `setup()` and `create()` gain new `quiet` argument (#1284, @krlmlr).
-
-* Print summary table in README.md and problems.md (#1284, @krlmlr).Revdep check improvements (#1284)
 
 * Avoid unnecessary query of `available_packages()` (#1269, @krlmlr).
 
@@ -96,14 +137,18 @@
 * `use_travis()` now opens a webpage in your browser to more easily activate
   a repo.
 
-* `use_readme_rmd()` and `use_readme()` share a common template with sections for package overview, GitHub installation (if applicable), and an example (@jennybc, #1287).
+* `use_readme_rmd()` and `use_readme()` share a common template with sections
+  for package overview, GitHub installation (if applicable), and an example
+  (@jennybc, #1287).
 
 * `test()` doesn't load helpers twice anymore (@krlmlr, #1256).
 
-* fix auto download method selection for `install_github()` on R 3.1 which
+* Fix auto download method selection for `install_github()` on R 3.1 which
   lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)
   
 * Added `remote_package_info` for more information about package (such as version). (@muschellij2)
+
+* Fix removal of vignette files by not trying to remove files twice anymore (#1291)
 
 # devtools 1.12.0
 
@@ -779,8 +824,8 @@ I've also tweaked the output of `revdep_maintainers()` so it's easier to copy an
 
 ## Other minor improvements and bug fixes
 
-* If you're using Rstudio, and you you're trying to build a binary package
-  without the necessary build tools, Rstudio will prompt to download and
+* If you're using RStudio, and you you're trying to build a binary package
+  without the necessary build tools, RStudio will prompt to download and
   install the right thing. (#488)
 
 * Commands are no longer run with `LC_ALL=C` - this no longer seems 
@@ -849,10 +894,10 @@ Four new functions make it easier to add useful infrastructure to packages:
   It is called automatically from `test()` if no test directories are
   found, the session is interactive and you agree.
 
-* `add_rstudio_project()` adds an Rstudio project file to your package.
+* `add_rstudio_project()` adds an RStudio project file to your package.
   `create()` gains an `rstudio` argument which will automatically create
-  an Rstudio project in the package directory. It defaults to `TRUE`:
-  if you don't use Rstudio, just delete the file.
+  an RStudio project in the package directory. It defaults to `TRUE`:
+  if you don't use RStudio, just delete the file.
 
 * `add_travis()` adds a basic travis template to your package. `.travis.yml`
   is automatically added to `.Rbuildignore` to avoid including it in the built
@@ -908,7 +953,7 @@ Two dependencies were incremented:
   `--no-build-vignettes` for >3.0.0 compatibility (#391).
 
 * `release()` does a better job of opening your email client if you're inside
-  of Rstudio (#433).
+  of RStudio (#433).
 
 * `check()` now correctly reports the location of the `R CMD
   check` output when called with a custom `check_dir`. (Thanks to @brentonk)
@@ -936,7 +981,7 @@ Two dependencies were incremented:
 * Fixed bug in `wd()` when `path` was ommitted. (#374)
 
 * Fixed bug in `dev_help()` that prevented it from working when not using
-  Rstudio.
+  RStudio.
 
 * `source_gist()` respects new github policy by sending user agent
   (hadley/devtools)
@@ -998,8 +1043,8 @@ Two dependencies were incremented:
 
 * Decompression of zip files now respects `getOption("unzip")` (#326)
 
-* `dev_help` will now use the Rstudio help pane, if you're using a recent
-  version of Rstudio (#322)
+* `dev_help` will now use the RStudio help pane, if you're using a recent
+  version of RStudio (#322)
 
 * Release is now a little bit smarter: if it's a new package, it'll ask you
   to read and agree to the CRAN policies; it will only ask about
