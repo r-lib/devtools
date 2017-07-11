@@ -12,7 +12,8 @@
 #' @noRd
 install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
                            out_dir = NULL, skip_if_log_exists = FALSE,
-                           tmpdir = tempdir()) {
+                           tmpdir = tempdir(),
+                           pattern = "devtools") {
   stopifnot(is.remote(remote))
 
   remote_sha <- remote_sha(remote)
@@ -49,7 +50,8 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
   on.exit(unlink(bundle), add = TRUE)
 
   source <- source_pkg(bundle, subdir = remote$subdir,
-                       tmpdir = tmpdir)
+                       tmpdir = tmpdir,
+                       pattern = pattern)
   on.exit(unlink(source, recursive = TRUE), add = TRUE)
 
   metadata <- remote_metadata(remote, bundle, source)
