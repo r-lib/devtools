@@ -1,6 +1,7 @@
 # devtools 1.13.2
 Workaround a regression in Rcpp::compileAttributes.
 Add trimws implementation for R 3.1 support.
+* Fix arcane error message in `spell_check` when package has no spelling errors (@hughparsonage)
 
 # devtools 1.13.1
 
