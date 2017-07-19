@@ -67,7 +67,7 @@ print.maintainers <- function(x, ...) {
 #' dependencies. Summarises the results with \code{revdep_check_summary()} and
 #' see problems with \code{revdep_check_print_problems()}.
 #'
-#' Revdep checks are resumably - this is very helpful if somethings goes
+#' Revdep checks are resumable - this is very helpful if somethings goes
 #' wrong (like you run out of power or you lose your internet connection) in
 #' the middle of a check. You can resume a partially completed check with
 #' \code{revdep_check_resume()}, or blow away the cached result so you can

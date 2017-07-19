@@ -38,4 +38,3 @@ source_url("https://gist.github.com/hadley/6872663/raw/hi.r",
   sha1 = "54f1db27e60")
 }
 }
-

@@ -24,11 +24,11 @@
 #' install_bioc("user:password@3.3/SummarizedExperiment")
 #' install_bioc("user:password@3.3/SummarizedExperiment#117513")
 #'}
-install_bioc <- function(repo, mirror = getOption("BioC_svn", "https://hedgehog.fhcrc.org/bioconductor"), ...) {
+install_bioc <- function(repo, mirror = getOption("BioC_svn", "https://hedgehog.fhcrc.org/bioconductor"), ..., quiet = FALSE) {
 
   remotes <- lapply(repo, bioc_remote, mirror = mirror)
 
-  install_remotes(remotes, ...)
+  install_remotes(remotes, ..., quiet = quiet)
 }
 
 # Parse concise SVN repo specification: [username[:password]@][branch/]repo[#revision]

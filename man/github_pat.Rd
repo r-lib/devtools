@@ -11,4 +11,3 @@ A github personal access token
 Looks in env var \code{GITHUB_PAT}
 }
 \keyword{internal}
-

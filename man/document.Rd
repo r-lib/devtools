@@ -26,4 +26,3 @@ that package to learn how to use roxygen.
 \code{\link[roxygen2]{roxygenize}},
   \code{browseVignettes("roxygen2")}
 }
-

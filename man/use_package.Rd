@@ -9,8 +9,8 @@ use_package(package, type = "Imports", pkg = ".")
 \arguments{
 \item{package}{Name of package to depend on.}
 
-\item{type}{Type of dependency: must be one of "Imports", "Suggests",
-"Depends", "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)}
+\item{type}{Type of dependency: must be one of "Imports", "Depends", 
+"Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)}
 
 \item{pkg}{package description, can be path or package name. See
 \code{\link{as.package}} for more information.}
@@ -32,4 +32,3 @@ Other infrastructure: \code{\link{infrastructure}},
   \code{\link{use_data_raw}}, \code{\link{use_data}},
   \code{\link{use_news_md}}, \code{\link{use_readme_rmd}}
 }
-

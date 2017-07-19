@@ -39,8 +39,10 @@
 #'   release it.
 #' @param args An optional character vector of additional command
 #'   line arguments to be passed to \code{R CMD build}.
+#' @param spelling language or dictionary file to spell check documentation.
+#' See \code{\link{spell_check}}. Set to \code{NULL} to skip spell checking.
 #' @export
-release <- function(pkg = ".", check = TRUE, args = NULL) {
+release <- function(pkg = ".", check = TRUE, args = NULL, spelling = "en_US") {
   pkg <- as.package(pkg)
   # Figure out if this is a new package
   cran_version <- cran_pkg_version(pkg$package)
@@ -57,6 +59,14 @@ release <- function(pkg = ".", check = TRUE, args = NULL) {
   if (uses_git(pkg$path)) {
     git_checks(pkg)
     if (yesno("Were Git checks successful?"))
+      return(invisible())
+  }
+
+  if (length(spelling)) {
+    cat("Spell checking documentation...\n")
+    print(spell_check(pkg, dict = spelling))
+    cat("\n")
+    if (yesno("Is documentation free of spelling errors? (you can ignore false positives)"))
       return(invisible())
   }
 

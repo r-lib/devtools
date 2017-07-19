@@ -12,7 +12,7 @@ vignette: >
 # Package remotes
 
 Devtools version 1.9 supports package dependency installation for packages not
-yet in a standard package repository such as [CRAN](http://cran.r-project.org)
+yet in a standard package repository such as [CRAN](https://cran.r-project.org)
 or [Bioconductor](http://bioconductor.org).
 
 You can mark any regular dependency defined in the `Depends`, `Imports`,

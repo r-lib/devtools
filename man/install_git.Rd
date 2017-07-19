@@ -5,7 +5,7 @@
 \title{Install a package from a git repository}
 \usage{
 install_git(url, subdir = NULL, branch = NULL, credentials = NULL,
-  args = character(0), ...)
+  quiet = FALSE, ...)
 }
 \arguments{
 \item{url}{Location of package. The url should point to a public or
@@ -19,8 +19,7 @@ contain the package we are interested in installing.}
 \item{credentials}{A git2r credentials object passed through
 to \code{\link[git2r]{clone}}.}
 
-\item{args}{DEPRECATED. A character vector providing extra arguments to
-pass on to git.}
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{...}{passed on to \code{\link{install}}}
 }
@@ -42,4 +41,3 @@ Other package installation: \code{\link{install_bioc}},
   \code{\link{install_version}}, \code{\link{install}},
   \code{\link{uninstall}}
 }
-

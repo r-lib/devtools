@@ -46,4 +46,3 @@ also installs roxygen2.
 \examples{
 \dontrun{install_deps(".")}
 }
-
