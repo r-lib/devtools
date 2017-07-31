@@ -1,5 +1,5 @@
 This is a point release working around a Rcpp regression that broke devtools
-tests (https://github.com/RcppCore/Rcpp/pull/697).
+tests (https://github.com/RcppCore/Rcpp/pull/725).
 
 ## Test environments
 
@@ -24,5 +24,6 @@ tests (https://github.com/RcppCore/Rcpp/pull/697).
 
 ## Downstream dependencies
 
-* We did not run R CMD check as there was a recent release, however we do not
-  anticipate any issues with this change.
+* This change differs from the previous release only in a example package used
+  by the tests. Nonetheless I ran reverse dependency checks on all 190
+  dependencies. There were no new failures introduced by these changes.
