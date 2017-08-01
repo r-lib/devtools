@@ -31,7 +31,8 @@ Imports:
     withr,
     pkgbuild,
     pkgload,
-    sessioninfo
+    sessioninfo,
+    rcmdcheck
 Suggests:
     curl (>= 0.9),
     crayon,
