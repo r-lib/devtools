@@ -76,7 +76,8 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
 
     needed <- deps$diff != CURRENT
     if (any(needed)) {
-      message("Installing ", sum(needed), " packages: ", comma(pkgs))
+      message("Installing ", sum(needed), " packages: ",
+              comma(deps$package[needed]))
       update(deps, Ncpus = threads, quiet = FALSE,
              out_dir = install_dir, skip_if_log_exists = TRUE)
     }
