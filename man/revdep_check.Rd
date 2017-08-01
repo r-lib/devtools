@@ -17,7 +17,7 @@ revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   skip = character(), libpath = getOption("devtools.revdep.libpath"),
   srcpath = libpath, bioconductor = FALSE, type = getOption("pkgType"),
   threads = getOption("Ncpus", 1), env_vars = NULL, check_dir = NULL,
-  install_dir = NULL, quiet_check = TRUE)
+  install_dir = NULL, quiet_check = TRUE, reset = TRUE)
 
 revdep_check_resume(pkg = ".", ...)
 
@@ -68,6 +68,9 @@ results.}
 \item{quiet_check}{If \code{TRUE}, suppresses individual \code{R CMD
 check} output and only prints summaries. Set to \code{FALSE} for
 debugging.}
+
+\item{reset}{If \code{TRUE}, the packages' check directories will be removed
+when all packages have been checked, otherwise not.}
 
 \item{...}{Optionally, override original value of arguments to
 \code{revdep_check}. Use with care.}

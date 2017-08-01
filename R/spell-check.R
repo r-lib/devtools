@@ -50,7 +50,7 @@ spell_check <- function(pkg = ".", ignore = character(), dict = "en_US"){
 #' @export
 print.spellcheck <- function(x, ...){
   words <- names(x)
-  fmt <- paste0("%-", max(nchar(words)) + 3, "s")
+  fmt <- paste0("%-", max(nchar(words), 0) + 3, "s")
   pretty_names <- sprintf(fmt, words)
   cat(sprintf(fmt, "  WORD"), "  FOUND IN\n", sep = "")
   for(i in seq_along(x)){
@@ -58,6 +58,7 @@ print.spellcheck <- function(x, ...){
     cat(paste(x[[i]], collapse = ", "))
     cat("\n")
   }
+  invisible(x)
 }
 
 spell_check_text <- function(text, ignore, dict){
