@@ -30,7 +30,8 @@ Imports:
     withr,
     pkgbuild,
     pkgload,
-    sessioninfo
+    sessioninfo,
+    usethis
 Suggests:
     curl (>= 0.9),
     crayon,
@@ -53,7 +54,8 @@ Remotes:
   r-pkgs/pkgload,
   r-pkgs/pkgbuild@HEAD,
   mangothecat/callr,
-  r-lib/sessioninfo#4
+  r-lib/sessioninfo#4,
+  r-lib/usethis#34
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1

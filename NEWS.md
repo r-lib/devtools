@@ -29,6 +29,7 @@
 
 * `source_gist()` works once more when there is only a single file
   in the gist (#1266).
+* Infrastructure functions (`use_*`) now use the implementations in **usethis**.
 
 # devtools 1.13.2
 Workaround a regression in Rcpp::compileAttributes.
