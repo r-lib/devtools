@@ -52,6 +52,10 @@ A type of 'github' can be specified, but is not required
 Remotes: github::hadley/ggplot2
 ```
 
+Remember that `Remotes:` specifies the *source* of a development package, so the package still needs to be listed in `Imports:`, `Suggests:` `Depends:` or `LinkingTo:`.
+For example, the above `DESCRIPTION` would also require an `Imports: ggplot2` line for `ggplot2` to actually be imported.
+
+
 ### Other sources
 
 All of the currently supported install sources are available, see the 'See
