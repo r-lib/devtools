@@ -95,12 +95,18 @@ remote_metadata.bitbucket_remote <- function(x, bundle = NULL, source = NULL) {
 }
 
 #' @export
+remote_package_info.bitbucket_remote <- function(remote, ...) {
+  remote_package_info.github_remote(remote, url = "https://bitbucket.org", ...)
+}
+
+
+#' @export
 remote_package_name.bitbucket_remote <- function(remote, ...) {
   remote_package_name.github_remote(remote, url = "https://bitbucket.org", ...)
 }
 
 #' @export
-remote_sha.bitbucket_remote <-function(remote, ...) {
+remote_sha.bitbucket_remote <- function(remote, ...) {
   remote_sha.github_remote(remote, url = "https://bitbucket.org", ...)
 }
 

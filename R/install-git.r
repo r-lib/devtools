@@ -72,7 +72,7 @@ remote_metadata.git_remote <- function(x, bundle = NULL, source = NULL) {
 }
 
 #' @export
-remote_package_name.git_remote <- function(remote, ...) {
+remote_package_info.git_remote <- function(remote, ...) {
 
   tmp <- tempfile()
   on.exit(unlink(tmp))
@@ -88,13 +88,20 @@ remote_package_name.git_remote <- function(remote, ...) {
       quiet = TRUE))
 
   if (inherits(res, "try-error")) {
-    return(NA)
+    return(list(Package = NA_character_,
+                Version = NA_character_))
   }
 
   # git archive return a tar file, so extract it to tempdir and read the DCF
   utils::untar(tmp, files = description_path, exdir = tempdir())
 
-  read_dcf(file.path(tempdir(), description_path))$Package
+  read_dcf(file.path(tempdir(), description_path))
+}
+
+#' @export
+remote_package_name.git_remote <- function(remote, ...) {
+  res <- remote_package_info(remote, ...)
+  res$Package
 }
 
 #' @export

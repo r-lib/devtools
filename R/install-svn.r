@@ -124,7 +124,7 @@ svn_path <- function(svn_binary_name = NULL) {
 }
 
 #' @export
-remote_package_name.svn_remote <- function(remote, ...) {
+remote_package_info.svn_remote <- function(remote, ...) {
   description_url <- file.path(full_svn_url(remote), "DESCRIPTION")
   tmp_file <- tempfile()
   on.exit(rm(tmp_file))
@@ -132,7 +132,13 @@ remote_package_name.svn_remote <- function(remote, ...) {
   if (!identical(response, 0L)) {
     stop("There was a problem retrieving the current SVN revision", call. = FALSE)
   }
-  read_dcf(tmp_file)$Package
+  read_dcf(tmp_file)
+}
+
+#' @export
+remote_package_name.svn_remote <- function(remote, ...) {
+  res <- remote_package_info(remote, ...)
+  res$Package
 }
 
 #' @export

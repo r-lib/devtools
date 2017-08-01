@@ -150,6 +150,8 @@ properly pass them to internal functions. (#1502)
 
 * Fix auto download method selection for `install_github()` on R 3.1 which
   lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)
+  
+* Added `remote_package_info` for more information about package (such as version). (@muschellij2)
 
 * Fix removal of vignette files by not trying to remove files twice anymore (#1291)
 

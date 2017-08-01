@@ -11,7 +11,9 @@
 #' }
 #' @noRd
 install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
-                           out_dir = NULL, skip_if_log_exists = FALSE) {
+                           out_dir = NULL, skip_if_log_exists = FALSE,
+                           tmpdir = tempdir(),
+                           pattern = "devtools") {
   stopifnot(is.remote(remote))
 
   remote_sha <- remote_sha(remote)
@@ -47,7 +49,9 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
   bundle <- remote_download(remote, quiet = quiet)
   on.exit(unlink(bundle), add = TRUE)
 
-  source <- source_pkg(bundle, subdir = remote$subdir)
+  source <- source_pkg(bundle, subdir = remote$subdir,
+                       tmpdir = tmpdir,
+                       pattern = pattern)
   on.exit(unlink(source, recursive = TRUE), add = TRUE)
 
   metadata <- remote_metadata(remote, bundle, source)
@@ -145,6 +149,7 @@ local_sha <- function(name) {
 remote_download <- function(x, quiet = FALSE) UseMethod("remote_download")
 remote_metadata <- function(x, bundle = NULL, source = NULL) UseMethod("remote_metadata")
 remote_package_name <- function(remote, ...) UseMethod("remote_package_name")
+remote_package_info <- function(remote, ...) UseMethod("remote_package_info")
 remote_sha <- function(remote, ...) UseMethod("remote_sha")
 
 package2remote <- function(name, repos = getOption("repos"), type = getOption("pkgType")) {
