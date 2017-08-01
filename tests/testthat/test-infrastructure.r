@@ -4,6 +4,7 @@ test_that("use_* functions consistently", {
   pkg <- "infrastructure"
   unlink(pkg, recursive = TRUE)
   withr::with_output_sink(tempfile(), create(pkg))
+  mock_use_github(pkg = pkg)
 
   use_test("test1", pkg = pkg)
   use_package_doc(pkg = pkg)
@@ -19,6 +20,7 @@ test_that("use_* functions consistently", {
   use_data_raw(pkg = pkg)
 
   use_readme_rmd(pkg = pkg)
+  expect_true(file.exists(file.path(pkg, ".git", "hooks", "pre-commit")))
   use_readme_md(pkg = pkg)
   use_news_md(pkg = pkg)
 
