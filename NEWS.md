@@ -1,3 +1,5 @@
+# devtools 1.13.3.9000
+
 # devtools 1.13.2
 Workaround a regression in Rcpp::compileAttributes.
 Add trimws implementation for R 3.1 support.
