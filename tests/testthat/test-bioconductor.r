@@ -16,9 +16,7 @@ test_that("bioc repo paths are parsed correctly", {
 })
 
 test_that("install_bioc", {
-  skip_on_cran()
-  skip_on_travis()
-  skip_on_appveyor()
+  skip_if_not(nzchar(Sys.getenv("DEVTOOLS_TEST_BIOC", "")))
 
   lib <- tempfile()
   on.exit(unlink(lib, recursive = TRUE), add = TRUE)
