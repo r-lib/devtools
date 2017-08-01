@@ -8,7 +8,7 @@
 check(pkg = ".", document = NA, build_args = NULL, ..., manual = FALSE,
   cran = TRUE, check_version = FALSE, force_suggests = FALSE,
   run_dont_test = FALSE, args = NULL, env_vars = NULL, quiet = FALSE,
-  check_dir = tempdir(), cleanup = TRUE)
+  check_dir = tempdir())
 
 check_built(path = NULL, cran = TRUE, check_version = FALSE,
   force_suggests = FALSE, run_dont_test = FALSE, manual = FALSE,
@@ -52,8 +52,6 @@ submission.}
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{check_dir}{the directory in which the package is checked}
-
-\item{cleanup}{Deprecated.}
 
 \item{path}{Path to built package.}
 

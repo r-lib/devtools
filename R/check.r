@@ -45,7 +45,6 @@
 #'   and \code{FALSE} to override this default.
 #' @param build_args Additional arguments passed to \code{R CMD build}
 #' @param ... Additional arguments passed on to \code{\link[pkgbuild]{build}()}.
-#' @param cleanup Deprecated.
 #' @seealso \code{\link{release}} if you want to send the checked package to
 #'   CRAN.
 #' @export
@@ -61,12 +60,8 @@ check <- function(pkg = ".",
                   args = NULL,
                   env_vars = NULL,
                   quiet = FALSE,
-                  check_dir = tempdir(),
-                  cleanup = TRUE) {
+                  check_dir = tempdir()) {
   pkg <- as.package(pkg)
-  if (!missing(cleanup)) {
-    warning("`cleanup` is deprecated", call. = FALSE)
-  }
 
   # document only if package uses roxygen, i.e. has RoxygenNote field
   if (identical(document, NA)) {
