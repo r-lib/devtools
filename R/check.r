@@ -59,8 +59,7 @@ check <- function(pkg = ".",
                   run_dont_test = FALSE,
                   args = NULL,
                   env_vars = NULL,
-                  quiet = FALSE,
-                  check_dir = tempdir()) {
+                  quiet = FALSE) {
   pkg <- as.package(pkg)
 
   # document only if package uses roxygen, i.e. has RoxygenNote field
@@ -97,9 +96,7 @@ check <- function(pkg = ".",
     manual = manual,
     args = args,
     env_vars = env_vars,
-    quiet = quiet,
-    check_dir = check_dir,
-    needs_build_tools = pkgbuild::pkg_has_src(pkg$path)
+    quiet = quiet
   )
 }
 
@@ -121,15 +118,11 @@ check <- function(pkg = ".",
 #'   (\code{--no-manual}).
 #' @param args Additional arguments passed to \code{R CMD check}
 #' @param env_vars Environment variables set during \code{R CMD check}
-#' @param needs_build_tools If \code{TRUE}, will ensure build tools are
-#'   available when checking the package.
-#' @param check_dir the directory in which the package is checked
 #' @param quiet if \code{TRUE} suppresses output from this function.
 check_built <- function(path = NULL, cran = TRUE,
                         check_version = FALSE, force_suggests = FALSE,
                         run_dont_test = FALSE, manual = FALSE, args = NULL,
-                        env_vars = NULL, needs_build_tools = TRUE,
-                        check_dir = tempdir(), quiet = FALSE) {
+                        env_vars = NULL, quiet = FALSE) {
 
   pkgname <- gsub("_.*?$", "", basename(path))
 
@@ -160,29 +153,9 @@ check_built <- function(path = NULL, cran = TRUE,
     rule("Checking ", pkgname)
   }
 
-  pkgbuild::rcmd_build_tools(
-    "check",
-    c(path, args),
-    wd = check_dir,
-    env = env_vars,
-    echo = !quiet,
-    show = !quiet,
-    required = needs_build_tools
-  )
-
-  package_path <- file.path(
-    normalizePath(check_dir),
-    paste(pkgname, ".Rcheck", sep = "")
-  )
-  if (!file.exists(package_path)) {
-    stop("Check failed: '", package_path, "' doesn't exist", call. = FALSE)
-  }
-
-  # Record successful completion
-  writeLines("OK", file.path(package_path, "COMPLETE"))
-
-  log_path <- file.path(package_path, "00check.log")
-  parse_check_results(log_path)
+  withr::with_envvar(env_vars, action = "prefix", {
+    rcmdcheck::rcmdcheck(path, quiet = quiet, args = args)
+  })
 }
 
 check_env_vars <- function(cran = FALSE, check_version = FALSE,
