@@ -1,8 +1,12 @@
 context("Infrastructure")
 
 test_that("use_* functions consistently", {
+  old <- options(devtools_default_options)
+  on.exit(options(old))
+
   pkg <- "infrastructure"
   unlink(pkg, recursive = TRUE)
+
   withr::with_output_sink(tempfile(), create(pkg))
 
   use_test("test1", pkg = pkg)
