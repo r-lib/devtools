@@ -137,7 +137,6 @@ use_rcpp <- function(pkg = ".") {
 #' @param browse open a browser window to enable Travis builds for the package
 #' automatically.
 #' @export
-#' @aliases add_travis
 use_travis <- function(pkg = ".", browse = interactive()) {
   pkg <- as.package(pkg)
 
@@ -255,7 +254,7 @@ use_package_doc <- function(pkg = ".") {
 #' about how to best use it.
 #'
 #' @param package Name of package to depend on.
-#' @param type Type of dependency: must be one of "Imports", "Depends", 
+#' @param type Type of dependency: must be one of "Imports", "Depends",
 #'   "Suggests", "Enhances", or "LinkingTo" (or unique abbreviation)
 #' @param pkg package description, can be path or package name. See
 #'   \code{\link{as.package}} for more information.
@@ -544,7 +543,6 @@ use_news_md <- function(pkg = ".") {
 #' @section \code{use_revdep}:
 #' Add \code{revdep} directory and basic check template.
 #' @export
-#' @aliases add_travis
 use_revdep <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
@@ -562,7 +560,6 @@ use_revdep <- function(pkg = ".") {
 #' @section \code{use_cran_comments}:
 #' Add \code{cran-comments.md} template.
 #' @export
-#' @aliases add_travis
 use_cran_comments <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
@@ -582,7 +579,6 @@ use_cran_comments <- function(pkg = ".") {
 #' Add a code of conduct to from \url{http://contributor-covenant.org}.
 #'
 #' @export
-#' @aliases add_travis
 use_code_of_conduct <- function(pkg = ".") {
   pkg <- as.package(pkg)
 

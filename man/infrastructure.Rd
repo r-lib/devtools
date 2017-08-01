@@ -8,16 +8,12 @@
 \alias{use_vignette}
 \alias{use_rcpp}
 \alias{use_travis}
-\alias{add_travis}
 \alias{use_coverage}
 \alias{use_appveyor}
 \alias{use_package_doc}
 \alias{use_revdep}
-\alias{add_travis}
 \alias{use_cran_comments}
-\alias{add_travis}
 \alias{use_code_of_conduct}
-\alias{add_travis}
 \alias{use_cran_badge}
 \alias{use_mit_license}
 \alias{use_gpl3_license}
