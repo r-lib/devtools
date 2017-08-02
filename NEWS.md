@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* `build_vignettes()` gains a quiet argument (#1543).
+
 * `session_info()` now uses the implementation in the **sessioninfo** package.
 
 * The previously deprecated `with_` functions have now been removed. The

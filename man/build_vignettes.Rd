@@ -4,7 +4,7 @@
 \alias{build_vignettes}
 \title{Build package vignettes.}
 \usage{
-build_vignettes(pkg = ".", dependencies = "VignetteBuilder")
+build_vignettes(pkg = ".", dependencies = "VignetteBuilder", quiet = TRUE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -13,6 +13,9 @@ build_vignettes(pkg = ".", dependencies = "VignetteBuilder")
 \item{dependencies}{\code{logical} indicating to also install uninstalled
 packages which this \code{pkg} depends on/links to/suggests. See
 argument \code{dependencies} of \code{\link{install.packages}}.}
+
+\item{quiet}{If \code{TRUE}, suppresses most output. Set to \code{FALSE}
+if you need to debug.}
 }
 \description{
 Builds package vignettes using the same algorithm that \code{R CMD build}
