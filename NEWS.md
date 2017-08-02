@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* `session_info()` now uses the implementation in the **sessioninfo** package.
+
 * The previously deprecated `with_` functions have now been removed. The
   functionality has been moved to the **withr** package.
 

@@ -29,7 +29,8 @@ Imports:
     git2r (>= 0.11.0),
     withr,
     pkgbuild,
-    pkgload
+    pkgload,
+    sessioninfo
 Suggests:
     curl (>= 0.9),
     crayon,
