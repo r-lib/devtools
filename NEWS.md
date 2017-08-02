@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `release()` once again looks for additional release questions in the 
+  correct environment (#1434).
+
 * `submit_cran()` now checks that you're ready to submit, since this is a
   potentially expensive operation (#1228)
 
