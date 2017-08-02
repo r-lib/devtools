@@ -92,8 +92,9 @@ properly pass them to internal functions. (#1502)
   `revdep/install`. Once an installation has failed, it is not attempted
   a second time (#1300, @krlmlr).
 
-* Print summary table in README.md and problems.md (#1284, @krlmlr).Revdep
-  check improvements (#1284)
+* Print summary table in README.md and problems.md (#1284, @krlmlr).
+
+* Revdep check improvements (#1284)
 
 ## Bug fixes and minor improvements
 
