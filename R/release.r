@@ -131,11 +131,7 @@ release <- function(pkg = ".", check = TRUE, args = NULL, spelling = "en_US") {
   if (yesno("Is your email address ", maintainer(pkg)$email, "?"))
     return(invisible())
 
-  built_path <- build_cran(pkg, args = args)
-  if (yesno("Ready to submit?"))
-    return(invisible())
-
-  upload_cran(pkg, built_path)
+  submit_cran(pkg, args = args)
 
   if (uses_git(pkg$path)) {
     message("Don't forget to tag the release when the package is accepted!")
@@ -266,6 +262,10 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #' @export
 #' @keywords internal
 submit_cran <- function(pkg = ".", args = NULL) {
+  if (yesno("Ready to submit to CRAN?"))
+    return(invisible())
+
+  pkg <- as.package(pkg)
   built_path <- build_cran(pkg, args = args)
   upload_cran(pkg, built_path)
 }

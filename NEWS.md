@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `submit_cran()` now checks that you're ready to submit, since this is a
+  potentially expensive operation (#1228)
+
 * `check()` defaults to running `document()` only if you have used
   roxygen previously (#1437).
 
