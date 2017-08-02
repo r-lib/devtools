@@ -84,6 +84,31 @@ Check and release:
   uploads to CRAN. It also drafts an email to let the CRAN
   maintainers know that you've uploaded a new package.
 
+## Diaspora
+
+devtools started off as a lean-and-mean package to facilitate local package development, but over the years it accumulated more and more functionality. Currently devtools is under going a diaspora to split out functionality into smaller, more tightly focussed packages. The diaspora includes:
+
+* [pkgbuild](https://github.com/r-lib/pkgbuild): Building binary packages
+  (including checking if build tools are available).
+
+* [pkgload](https://github.com/r-lib/pkgload): Simulating package loading 
+  (i.e. `load_all()`)
+
+* [rcmdcheck](https://github.com/r-lib/rcmdcheck): Running R CMD check
+  and reporting the results.
+
+* [revdepcheck](https://github.com/r-lib/revdepcheck): Running R CMD check
+  on all reverse dependencies, and figuring out what's changed since the 
+  last CRAN release.
+
+* [remotes](https://github.com/r-lib/remotes): Installing packages.
+
+* [sessioninfo](https://github.com/r-lib/sessioninfo): Session info.
+
+* [usethis](https://github.com/r-lib/usethis): Automating package setup.
+
+Generally, you should not need to worry about these different packages, because devtools installs them all automatically. You will need to care, however, if you're filing a bug because reporting it at the correct place will lead to a speedier resolution.
+
 ## Other tips
 
 I recommend adding the following code to your `.Rprofile`:

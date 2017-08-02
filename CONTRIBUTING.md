@@ -12,6 +12,27 @@ Before you file an issue:
 1.  Check that you're using the latest version of devtools. It's quite
     possible that the problem you're experiencing has already been fixed.
     
+1.  Check that the issue belongs in devtools. Much functionality now lives in 
+    separate packages. Please read the list below and check if you should be
+    submitting your issue on another repo:
+
+      * Building binary packages or anything related to finding R tools:
+        [pkgbuild](https://github.com/r-lib/pkgbuild):
+      
+      * Anything related to the operation of `load_all()`:
+        [pkgload](https://github.com/r-lib/pkgload).
+      
+      * Running R CMD check on one package: 
+        [rcmdcheck](https://github.com/r-lib/rcmdcheck).
+        Running R CMD check on all reverse dependencies:
+        [revdepcheck](https://github.com/r-lib/revdepcheck)
+      
+      * Installing packages: [remotes](https://github.com/r-lib/remotes)
+      
+      * Session info: [sessioninfo](https://github.com/r-lib/sessioninfo)
+      
+      * Any function that starts with `use_`: [usethis](https://github.com/r-lib/usethis)
+    
 1.  Spend a few minutes looking at the existing issues. It's possible that
     your issue has already been filed. But it's almost always better to open 
     a new issue instead of commenting on an existing issue. The only exception 
