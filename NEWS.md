@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* If you use git `release()` now generates a file called `CRAN-RELEASE`
+  that reminds you to tag the commit that you submitted to CRAN (#1198).
+
 * `release()` once again looks for additional release questions in the 
   correct environment (#1434).
 

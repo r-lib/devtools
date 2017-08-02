@@ -133,9 +133,8 @@ release <- function(pkg = ".", check = TRUE, args = NULL, spelling = "en_US") {
 
   submit_cran(pkg, args = args)
 
-  if (uses_git(pkg$path)) {
-    message("Don't forget to tag the release when the package is accepted!")
-  }
+  flag_release(pkg)
+
   invisible(TRUE)
 }
 
@@ -322,3 +321,22 @@ upload_cran <- function(pkg, built_path) {
 }
 
 as.object_size <- function(x) structure(x, class = "object_size")
+
+flag_release <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+  if (!uses_git(pkg$path)) {
+    return(invisible())
+  }
+
+  message("Don't forget to tag this release once accepted by CRAN")
+
+  date <- Sys.Date()
+  commit <- git2r::commits(git2r::init(pkg$path), n = 1)[[1]]
+  sha <- substr(commit@sha, 1, 10)
+
+  msg <- paste0(
+    "This package was submitted to CRAN on ", date, ".\n",
+    "Once it is accepted, delete this file and tag the release (commit ", sha, ")."
+  )
+  writeLines(msg, file.path(pkg$path, "CRAN-RELEASE"))
+}
