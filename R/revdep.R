@@ -61,58 +61,11 @@ print.maintainers <- function(x, ...) {
   cat("\n")
 }
 
-#' Run R CMD check on all downstream dependencies.
-#'
-#' Use \code{revdep_check()} to run \code{\link{check_cran}()} on all downstream
-#' dependencies. Summarises the results with \code{revdep_check_summary()} and
-#' see problems with \code{revdep_check_print_problems()}.
-#'
-#' Revdep checks are resumable - this is very helpful if somethings goes
-#' wrong (like you run out of power or you lose your internet connection) in
-#' the middle of a check. You can resume a partially completed check with
-#' \code{revdep_check_resume()}, or blow away the cached result so you can
-#' start afresh with \code{revdep_check_reset()}.
-#'
-#' @section Check process:
-#' \enumerate{
-#' \item Install \code{pkg} (in special library, see below).
-#' \item Find all CRAN packages that depend on \code{pkg}.
-#' \item Install those packages, along with their dependencies.
-#' \item Run \code{R CMD check} on each package.
-#' \item Uninstall \code{pkg} (so other reverse dependency checks don't
-#'   use the development version instead of the CRAN version)
-#' }
-#'
-#' @section Package library:
-#' By default \code{revdep_check} uses a temporary library to store any packages
-#' that are required by the packages being tested. This ensures that they don't
-#' interfere with your default library, but means that if you restart R
-#' between checks, you'll need to reinstall all the packages. If you're
-#' doing reverse dependency checks frequently, I recommend that you create
-#' a directory for these packages and set \code{options(devtools.revdep.libpath)}.
-#'
-#' @inheritParams revdep
-#' @param pkg Path to package. Defaults to current directory.
-#' @param skip A character vector of package names to exclude from the
-#'   checks.
-#' @inheritParams check_cran
-#' @param check_dir A temporary directory to hold the results of the package
-#'   checks. This should not exist as after the revdep checks complete
-#'   successfully this directory is blown away.
-#' @seealso \code{\link{revdep_maintainers}()} to get a list of all revdep
-#'   maintainers.
+#' @details
+#' Instead of the revdep functions in devtools a better alternative is
+#' \link[pkg:revdepcheck]{revdepcheck::revdep_check}.
+#' @rdname devtools-deprecated
 #' @export
-#' @return An invisible list of results. But you'll probably want to look
-#'   at the check results on disk, which are saved in \code{check_dir}.
-#'   Summaries of all ERRORs and WARNINGs will be stored in
-#'   \code{check_dir/00check-summary.txt}.
-#' @examples
-#' \dontrun{
-#' # Run R CMD check on all downstream dependencies
-#' revdep_check()
-#' revdep_check_save_summary()
-#' revdep_check_print_problems()
-#' }
 revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
                          skip = character(),
@@ -124,6 +77,7 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
                          check_dir = NULL,
                          install_dir = NULL,
                          quiet_check = TRUE) {
+  .Deprecated("revdepcheck::revdep_check()", package = "devtools")
 
   pkg <- as.package(pkg)
 
@@ -178,11 +132,10 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
   revdep_check_from_cache(pkg, cache)
 }
 
+#' @rdname devtools-deprecated
 #' @export
-#' @rdname revdep_check
-#' @param ... Optionally, override original value of arguments to
-#'   \code{revdep_check}. Use with care.
 revdep_check_resume <- function(pkg = ".", ...) {
+  .Deprecated("revdepcheck::revdep_check()", package = "devtools")
   pkg <- as.package(pkg)
 
   cache_path <- revdep_cache_path(pkg)
@@ -204,9 +157,10 @@ revdep_check_resume <- function(pkg = ".", ...) {
   revdep_check_from_cache(pkg, cache)
 }
 
-#' @rdname revdep_check
+#' @rdname devtools-deprecated
 #' @export
 revdep_check_reset <- function(pkg = ".") {
+  .Deprecated("revdepcheck::revdep_reset()", package = "devtools")
   pkg <- as.package(pkg)
 
   cache_path <- revdep_cache_path(pkg)
