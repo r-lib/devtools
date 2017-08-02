@@ -52,7 +52,8 @@ Remotes:
   hadley/testthat,
   r-pkgs/pkgload,
   r-pkgs/pkgbuild@HEAD,
-  mangothecat/callr
+  mangothecat/callr,
+  r-lib/sessioninfo#4
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
