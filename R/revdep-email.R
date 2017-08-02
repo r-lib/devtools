@@ -1,20 +1,6 @@
-#' Experimental email notification system.
-#'
-#' This currently assumes that you use github and gmail, and you have a
-#' \code{revdep/email.md} email template.
-#'
-#' @inheritParams revdep_check
-#' @param date Date package will be submitted to CRAN
-#' @param version Version which will be used for the CRAN submission (usually
-#'   different from the current package version)
-#' @param author Name used to sign email
-#' @param draft If \code{TRUE}, creates as draft email; if \code{FALSE},
-#'   sends immediately.
-#' @param template Path of template to use
-#' @param only_problems Only inform authors with problems?
-#' @param unsent If some emails fail to send, in a previous
 #' @keywords internal
 #' @export
+#' @rdname devtools-deprecated
 revdep_email <- function(pkg = ".", date,
                          version,
                          author = getOption("devtools.name"),
@@ -22,6 +8,7 @@ revdep_email <- function(pkg = ".", date,
                          unsent = NULL,
                          template = "revdep/email.md",
                          only_problems = TRUE) {
+  .Deprecated("revdepcheck::revdep_email()", package = "devtools")
 
   pkg <- as.package(pkg)
   force(date)

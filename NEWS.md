@@ -24,6 +24,9 @@
 * The previously deprecated `with_` functions have now been removed. The
   functionality has been moved to the **withr** package.
 
+* The `revdep_check_*` functions have been deprecated in favor of the
+  **revdepcheck** package.
+
 * `source_gist()` works once more when there is only a single file
   in the gist (#1266).
 

@@ -1,6 +1,7 @@
-#' @rdname revdep_check
+#' @rdname devtools-deprecated
 #' @export
 revdep_check_save_summary <- function(pkg = ".") {
+  .Deprecated("revdepcheck::revdep_check_report_summary()", package = "devtools")
   pkg <- as.package(pkg)
 
   revdep_check_save_readme(pkg)
@@ -161,9 +162,10 @@ print.revdep_check_result <- function(x, ...) {
   cat(format(x, ...), "\n", sep = "")
 }
 
-#' @rdname revdep_check
+#' @rdname devtools-deprecated
 #' @export
 revdep_check_print_problems <- function(pkg = ".") {
+  .Deprecated("revdepcheck::revdep_check_report_problems()", package = "devtools")
   pkg <- as.package(pkg)
 
   summaries <- readRDS(revdep_check_path(pkg))$results
