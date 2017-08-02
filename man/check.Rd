@@ -5,10 +5,10 @@
 \alias{check_built}
 \title{Build and check a package, cleaning up automatically on success.}
 \usage{
-check(pkg = ".", document = TRUE, build_args = NULL, ...,
-  manual = FALSE, cran = TRUE, check_version = FALSE,
-  force_suggests = FALSE, run_dont_test = FALSE, args = NULL,
-  env_vars = NULL, quiet = FALSE, check_dir = tempdir(), cleanup = TRUE)
+check(pkg = ".", document = NA, build_args = NULL, ..., manual = FALSE,
+  cran = TRUE, check_version = FALSE, force_suggests = FALSE,
+  run_dont_test = FALSE, args = NULL, env_vars = NULL, quiet = FALSE,
+  check_dir = tempdir(), cleanup = TRUE)
 
 check_built(path = NULL, cran = TRUE, check_version = FALSE,
   force_suggests = FALSE, run_dont_test = FALSE, manual = FALSE,
@@ -19,8 +19,9 @@ check_built(path = NULL, cran = TRUE, check_version = FALSE,
 \item{pkg}{package description, can be path or package name.  See
 \code{\link{as.package}} for more information}
 
-\item{document}{if \code{TRUE} (the default), will update and check
-documentation before running formal check.}
+\item{document}{If \code{NA} and the package uses roxygen2, will
+rerun \code{\link{document}} prior to checking. Use \code{TRUE}
+and \code{FALSE} to override this default.}
 
 \item{build_args}{Additional arguments passed to \code{R CMD build}}
 

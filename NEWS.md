@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `check()` defaults to running `document()` only if you have used
+  roxygen previously (#1437).
+
 * `build_vignettes()` gains a quiet argument (#1543).
 
 * `session_info()` now uses the implementation in the **sessioninfo** package.
