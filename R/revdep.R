@@ -288,7 +288,7 @@ revdep_check_from_cache <- function(pkg, cache) {
 
 
 revdep_check_save <- function(pkg, revdeps, check_path, lib_path) {
-  platform <- platform_info()
+  platform <- sessioninfo::platform_info()
 
   # Revdep results
   results <- lapply(check_dirs(check_path), parse_package_check)
@@ -298,7 +298,7 @@ revdep_check_save <- function(pkg, revdeps, check_path, lib_path) {
   pkgs <- unlist(lapply(deps, function(x) parse_deps(x)$name), use.names = FALSE)
   pkgs <- c(pkg$package, unique(pkgs))
   pkgs <- intersect(pkgs, dir(lib_path))
-  dependencies <- package_info(pkgs, libpath = lib_path)
+  dependencies <- sessioninfo::package_info(pkgs, libpath = lib_path)
 
   out <- list(
     revdeps = revdeps,
