@@ -8,7 +8,7 @@
 #' @param subdir subdirectory within url bundle that contains the R package.
 #' @param config additional configuration argument (e.g. proxy,
 #'   authentication) passed on to \code{\link[httr]{GET}}.
-#' @param ... Other arguments passed on to \code{\link{install}}.
+#' @param ... Other arguments passed on to \code{\link{install.packages}}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @export
 #' @family package installation

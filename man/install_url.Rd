@@ -15,7 +15,7 @@ zip file, a tar file or a bzipped/gzipped tar file.}
 \item{config}{additional configuration argument (e.g. proxy,
 authentication) passed on to \code{\link[httr]{GET}}.}
 
-\item{...}{Other arguments passed on to \code{\link{install}}.}
+\item{...}{Other arguments passed on to \code{\link{install.packages}}.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 }

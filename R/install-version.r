@@ -11,7 +11,7 @@
 #'   recent version of the package, this function simply calls
 #'   \code{\link{install}}. Otherwise, it looks at the list of
 #'   archived source tarballs and tries to install an older version instead.
-#' @param ... Other arguments passed on to \code{\link{install}}.
+#' @param ... Other arguments passed on to \code{\link{install.packages}}.
 #' @inheritParams utils::install.packages
 #' @inheritParams install_url
 #' @author Jeremy Stephens

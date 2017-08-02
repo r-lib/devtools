@@ -30,7 +30,7 @@ archived source tarballs and tries to install an older version instead.}
     builds: see the section on \sQuote{Binary packages} for those.
   }
 
-\item{...}{Other arguments passed on to \code{\link{install}}.}
+\item{...}{Other arguments passed on to \code{\link{install.packages}}.}
 
 \item{quiet}{
     logical: if true, reduce the amount of output.
