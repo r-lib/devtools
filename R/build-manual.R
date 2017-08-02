@@ -6,7 +6,7 @@
 #' @param path path in which to produce package manual.
 #'   If \code{NULL}, defaults to the parent directory of the package.
 #'
-#' @seealso \code{\link{RdUtils}}
+#' @seealso \code{\link{Rd2pdf}}
 #' @export
 
 build_manual <- function(pkg = ".", path = NULL) {

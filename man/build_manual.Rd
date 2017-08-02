@@ -17,5 +17,5 @@ If \code{NULL}, defaults to the parent directory of the package.}
 Create package pdf manual
 }
 \seealso{
-\code{\link{RdUtils}}
+\code{\link{Rd2pdf}}
 }
