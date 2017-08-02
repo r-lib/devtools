@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* The previously deprecated `with_` functions have now been removed. The
+  functionality has been moved to the **withr** package.
+
 * `source_gist()` works once more when there is only a single file
   in the gist (#1266).
 
