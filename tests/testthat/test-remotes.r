@@ -23,6 +23,12 @@ test_that("remote_deps returns works with implicit types", {
     c("hadley/testthat", "klutometis/roxygen"))
 })
 
+test_that("split_remotes errors with missing commas", {
+  expect_error(split_remotes("hadley/testthat hadley/ggplot2"), "Missing commas")
+  expect_error(split_remotes("hadley/testthat\n  hadley/ggplot2"), "Missing commas")
+  expect_error(split_remotes("hadley/testthat, hadley/ggplot2, klutometis/roxygen hadley/devtools"), "Missing commas.*'klutometis")
+})
+
 test_that("dev_remote_type errors", {
   expect_error(parse_one_remote(""),
     "Malformed remote specification ''")
