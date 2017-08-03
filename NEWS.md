@@ -177,6 +177,7 @@ properly pass them to internal functions. (#1502)
   lacks "libcurl" in `capabilities()`. (@kiwiroy, #1244)
 
 * Fix removal of vignette files by not trying to remove files twice anymore (#1291)
+* add timestamp to messages in `build_win()` (@achubaty, #1367).  
 
 # devtools 1.12.0
 
