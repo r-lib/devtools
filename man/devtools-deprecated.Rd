@@ -38,59 +38,64 @@
 \alias{devtools-deprecated}
 \title{Deprecated Functions}
 \usage{
-use_git(..., pkg = ".")
+use_git(message = "Initial commit", pkg = ".")
 
-use_github(..., pkg = ".")
+use_github(auth_token = github_pat(), private = FALSE, pkg = ".",
+  host = "https://api.github.com", protocol = c("ssh", "https"),
+  credentials = NULL, ...)
 
-use_git_hook(..., pkg = ".")
+use_git_hook(hook, script, pkg = ".")
 
-use_github_links(..., pkg = ".")
+use_github_links(pkg = ".", auth_token = github_pat(),
+  host = "https://api.github.com")
 
-use_testthat(..., pkg = ".")
+use_testthat(pkg = ".")
 
-use_test(..., pkg = ".")
+use_test(name, pkg = ".")
 
-use_rstudio(..., pkg = ".")
+use_rstudio(pkg = ".")
 
-use_vignette(..., pkg = ".")
+use_vignette(name, pkg = ".")
 
-use_rcpp(..., pkg = ".")
+use_rcpp(pkg = ".")
 
-use_travis(..., pkg = ".")
+use_travis(pkg = ".", browse = interactive())
 
-use_coverage(..., pkg = ".")
+use_coverage(pkg = ".", type = c("codecov", "coveralls"))
 
-use_appveyor(..., pkg = ".")
+use_appveyor(pkg = ".")
 
-use_package_doc(..., pkg = ".")
+use_package_doc(pkg = ".")
 
-use_package(..., pkg = ".")
+use_package(package, type = "Imports", pkg = ".")
 
-use_data(..., pkg = ".")
+use_data(..., internal = FALSE, overwrite = FALSE, compress = "bzip2",
+  base_path = ".")
 
-use_data_raw(..., pkg = ".")
+use_data_raw(pkg = ".")
 
-use_build_ignore(..., pkg = ".")
+use_build_ignore(files, escape = TRUE, pkg = ".")
 
-use_readme_rmd(..., pkg = ".")
+use_readme_rmd(pkg = ".")
 
-use_readme_md(..., pkg = ".")
+use_readme_md(pkg = ".")
 
-use_news_md(..., pkg = ".")
+use_news_md(pkg = ".")
 
-use_revdep(..., pkg = ".")
+use_revdep(pkg = ".")
 
-use_cran_comments(..., pkg = ".")
+use_cran_comments(pkg = ".")
 
-use_code_of_conduct(..., pkg = ".")
+use_code_of_conduct(pkg = ".")
 
-use_cran_badge(..., pkg = ".")
+use_cran_badge(pkg = ".")
 
-use_mit_license(..., pkg = ".")
+use_mit_license(pkg = ".", copyright_holder = getOption("devtools.name",
+  "<Author>"))
 
-use_gpl3_license(..., pkg = ".")
+use_gpl3_license(pkg = ".")
 
-use_dev_version(..., pkg = ".")
+use_dev_version(pkg = ".")
 
 revdep_email(pkg = ".", date, version, author = getOption("devtools.name"),
   draft = TRUE, unsent = NULL, template = "revdep/email.md",
@@ -116,7 +121,7 @@ These functions are Deprecated in this release of devtools, they will be
 marked as Defunct and removed in a future version.
 }
 \details{
-Instead of the use_xyz functions from devtools use \link[pkg:usethis]{use_testthat}.
+Instead of the use_xyz functions from devtools use \link[usethis]{use_testthat}.
 
 Instead of the revdep functions in devtools a better alternative is
 \link[revdepcheck]{revdep_check}.

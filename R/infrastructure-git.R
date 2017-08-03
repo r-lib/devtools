@@ -1,8 +1,8 @@
 #' @rdname devtools-deprecated
 #' @export
-use_git <- function(..., pkg = ".") {
+use_git <- function(message = "Initial commit", pkg = ".") {
   .Deprecated("usethis::use_git()", package = "devtools")
-  usethis::use_git(..., base_path = pkg)
+  usethis::use_git(message = message, base_path = pkg)
 }
 
 # This is still used internally in the devtools tests
@@ -37,16 +37,19 @@ use_git_with_config <- function(message, pkg, add_user_config = FALSE, quiet = F
 
 #' @rdname devtools-deprecated
 #' @export
-use_github <- function(..., pkg = ".") {
+use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
+                       host = "https://api.github.com",
+                       protocol = c("ssh", "https"), credentials = NULL, ...) {
   .Deprecated("usethis::use_github()", package = "devtools")
-  usethis::use_github(..., base_path = pkg)
+  usethis::use_github(auth_token = auth_token, private = private, host = host,
+                      protocol = protocol, credentials = credentials, base_path = pkg, ...)
 }
 
 #' @rdname devtools-deprecated
 #' @export
-use_git_hook <- function(..., pkg = ".") {
+use_git_hook <- function(hook, script, pkg = ".") {
   .Deprecated("usethis::use_git_hook()", package = "devtools")
-  usethis::use_git_hook(..., base_path = pkg)
+  usethis::use_git_hook(hook = hook, script = script, base_path = pkg)
 }
 
 # This is still used internally in the devtools tests
@@ -66,7 +69,8 @@ use_git_ignore <- function(ignores, directory = ".", pkg = ".", quiet = FALSE) {
 
 #' @rdname devtools-deprecated
 #' @export
-use_github_links <- function(..., pkg = ".") {
+use_github_links <- function(pkg = ".", auth_token = github_pat(),
+                             host = "https://api.github.com") {
   .Deprecated("usethis::use_github_links()", package = "devtools")
-  usethis::use_github_links(..., base_path = pkg)
+  usethis::use_github_links(auth_token = auth_token, host = host, base_path = pkg)
 }

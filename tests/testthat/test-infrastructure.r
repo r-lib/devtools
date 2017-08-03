@@ -14,12 +14,13 @@ test_that("use_* functions consistently", {
   use_vignette("test2", pkg = pkg)
 
   use_rcpp(pkg = pkg)
-  use_travis(pkg = pkg, browse = FALSE)
-  use_coverage(pkg = pkg)
-  use_appveyor(pkg = pkg)
+  # These now require using_github, so we will not test them.
+  #use_travis(pkg = pkg, browse = FALSE)
+  #use_coverage(pkg = pkg)
+  #use_appveyor(pkg = pkg)
 
   x <- 1:100
-  use_data(x, pkg = pkg)
+  use_data(x, base_path = pkg)
   use_data_raw(pkg = pkg)
 
   use_readme_rmd(pkg = pkg)
@@ -50,27 +51,27 @@ test_that("use_data", {
     local_test_data_item_to_save <- global_test_data_item_to_save
     system_test_data_item_to_save <- global_test_data_item_to_save
 
-    expect_message(use_data(global_test_data_item_to_save, pkg = "testUseData"),
+    expect_message(use_data(global_test_data_item_to_save, base_path = "testUseData"),
                    "Saving")
-    expect_message(use_data(local_test_data_item_to_save, pkg = "testUseData"),
+    expect_message(use_data(local_test_data_item_to_save, base_path = "testUseData"),
                    "Saving")
-    expect_message(use_data(system_test_data_item_to_save, pkg = "testUseData",
+    expect_message(use_data(system_test_data_item_to_save, base_path = "testUseData",
                             internal = TRUE),
                    "Saving")
-    expect_error(use_data(global_test_data_item_to_save, pkg = "testUseData"),
+    expect_error(use_data(global_test_data_item_to_save, base_path = "testUseData"),
                  "overwrite = TRUE")
-    expect_error(use_data(local_test_data_item_to_save, pkg = "testUseData"),
+    expect_error(use_data(local_test_data_item_to_save, base_path = "testUseData"),
                  "overwrite = TRUE")
-    expect_error(use_data(system_test_data_item_to_save, pkg = "testUseData", internal = TRUE),
+    expect_error(use_data(system_test_data_item_to_save, base_path = "testUseData", internal = TRUE),
                  "overwrite = TRUE")
 
-    expect_message(use_data(global_test_data_item_to_save, pkg = "testUseData",
+    expect_message(use_data(global_test_data_item_to_save, base_path = "testUseData",
                             overwrite = TRUE),
                    "Saving")
-    expect_message(use_data(local_test_data_item_to_save, pkg = "testUseData",
+    expect_message(use_data(local_test_data_item_to_save, base_path = "testUseData",
                             overwrite = TRUE),
                    "Saving")
-    expect_message(use_data(system_test_data_item_to_save, pkg = "testUseData",
+    expect_message(use_data(system_test_data_item_to_save, base_path = "testUseData",
                             internal = TRUE, overwrite = TRUE),
                    "Saving")
   })
