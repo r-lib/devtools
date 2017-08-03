@@ -1,101 +1,165 @@
-#' Add useful infrastructure to a package.
-#'
-#' @param pkg package description, can be path or package name. See
-#'   \code{\link{as.package}} for more information.
-#' @name infrastructure
-#' @family infrastructure
-NULL
+#' @details
+#' Instead of the use_xyz functions from devtools use \link[pkg:usethis]{use_testthat}.
+#' @rdname devtools-deprecated
+#' @export
+use_testthat <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_testthat()", package = "devtools")
+  usethis::use_testthat(..., base_path = pkg)
+}
 
-#' @importFrom usethis use_testthat
+#' @rdname devtools-deprecated
 #' @export
-usethis::use_testthat
+use_test <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_test()", package = "devtools")
+  usethis::use_test(..., base_path = pkg)
+}
 
-#' @importFrom usethis use_test
+#' @rdname devtools-deprecated
 #' @export
-usethis::use_test
+use_rstudio <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_rstudio()", package = "devtools")
+  usethis::use_rstudio(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_rstudio
-usethis::use_rstudio
+use_vignette <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_vignette()", package = "devtools")
+  usethis::use_vignette(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_vignette
-usethis::use_vignette
+use_rcpp <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_rcpp()", package = "devtools")
+  usethis::use_rcpp(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_rcpp
-usethis::use_rcpp
+use_travis <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_travis()", package = "devtools")
+  usethis::use_travis(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_travis
-usethis::use_travis
-#' @export
-#' @importFrom usethis use_coverage
-usethis::use_coverage
+use_coverage <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_coverage()", package = "devtools")
+  usethis::use_coverage(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_appveyor
-usethis::use_appveyor
+use_appveyor <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_appveyor()", package = "devtools")
+  usethis::use_appveyor(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_package_doc
-usethis::use_package_doc
+use_package_doc <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_package_doc()", package = "devtools")
+  usethis::use_package_doc(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_package
-usethis::use_package
+use_package <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_package()", package = "devtools")
+  usethis::use_package(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_data
-usethis::use_data
+use_data <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_data()", package = "devtools")
+  usethis::use_data(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_data_raw
-usethis::use_data_raw
+use_data_raw <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_data_raw()", package = "devtools")
+  usethis::use_data_raw(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_build_ignore
-usethis::use_build_ignore
+use_build_ignore <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_build_ignore()", package = "devtools")
+  usethis::use_build_ignore(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_readme_rmd
-usethis::use_readme_rmd
+use_readme_rmd <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_readme_rmd()", package = "devtools")
+  usethis::use_readme_rmd(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_readme_md
-usethis::use_readme_md
+use_readme_md <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_readme_md()", package = "devtools")
+  usethis::use_readme_md(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_news_md
-usethis::use_news_md
+use_news_md <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_news_md()", package = "devtools")
+  usethis::use_news_md(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_revdep
-usethis::use_revdep
+use_revdep <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_revdep()", package = "devtools")
+  usethis::use_revdep(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_cran_comments
-usethis::use_cran_comments
+use_cran_comments <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_cran_comments()", package = "devtools")
+  usethis::use_cran_comments(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_code_of_conduct
-usethis::use_code_of_conduct
+use_code_of_conduct <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_code_of_conduct()", package = "devtools")
+  usethis::use_code_of_conduct(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_cran_badge
-usethis::use_cran_badge
+use_cran_badge <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_cran_badge()", package = "devtools")
+  usethis::use_cran_badge(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_mit_license
-usethis::use_mit_license
+use_mit_license <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_mit_license()", package = "devtools")
+  usethis::use_mit_license(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_gpl3_license
-usethis::use_gpl3_license
+use_gpl3_license <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_gpl3_license()", package = "devtools")
+  usethis::use_gpl3_license(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_dev_version
-usethis::use_dev_version
+use_dev_version <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_dev_version()", package = "devtools")
+  usethis::use_dev_version(..., base_path = pkg)
+}
 
 # Needed for tests
 union_write <- function(path, new_lines) {

@@ -1,6 +1,9 @@
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_git
-usethis::use_git
+use_git <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_git()", package = "devtools")
+  usethis::use_git(..., base_path = pkg)
+}
 
 # This is still used internally in the devtools tests
 use_git_with_config <- function(message, pkg, add_user_config = FALSE, quiet = FALSE) {
@@ -32,13 +35,19 @@ use_git_with_config <- function(message, pkg, add_user_config = FALSE, quiet = F
   invisible()
 }
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_github
-usethis::use_github
+use_github <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_github()", package = "devtools")
+  usethis::use_github(..., base_path = pkg)
+}
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_git_hook
-usethis::use_git_hook
+use_git_hook <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_git_hook()", package = "devtools")
+  usethis::use_git_hook(..., base_path = pkg)
+}
 
 # This is still used internally in the devtools tests
 use_git_ignore <- function(ignores, directory = ".", pkg = ".", quiet = FALSE) {
@@ -55,8 +64,9 @@ use_git_ignore <- function(ignores, directory = ".", pkg = ".", quiet = FALSE) {
   invisible(TRUE)
 }
 
+#' @rdname devtools-deprecated
 #' @export
-#' @importFrom usethis use_github_links
-usethis::use_github_links
-
-use_git_with_config
+use_github_links <- function(..., pkg = ".") {
+  .Deprecated("usethis::use_github_links()", package = "devtools")
+  usethis::use_github_links(..., base_path = pkg)
+}
