@@ -3,6 +3,18 @@
 * New `build_manual()` function that produces pdf manual for the package
   (@twolodzko, #1238).
 
+* If you use git `release()` now generates a file called `CRAN-RELEASE`
+  that reminds you to tag the commit that you submitted to CRAN (#1198).
+
+* `release()` once again looks for additional release questions in the 
+  correct environment (#1434).
+
+* `submit_cran()` now checks that you're ready to submit, since this is a
+  potentially expensive operation (#1228)
+
+* `check()` defaults to running `document()` only if you have used
+  roxygen previously (#1437).
+
 * `build_vignettes()` gains a quiet argument (#1543).
 
 * `session_info()` now uses the implementation in the **sessioninfo** package.

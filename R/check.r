@@ -40,8 +40,9 @@
 #' @return An object containing errors, warnings, and notes.
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @param document if \code{TRUE} (the default), will update and check
-#'   documentation before running formal check.
+#' @param document If \code{NA} and the package uses roxygen2, will
+#'   rerun \code{\link{document}} prior to checking. Use \code{TRUE}
+#'   and \code{FALSE} to override this default.
 #' @param build_args Additional arguments passed to \code{R CMD build}
 #' @param ... Additional arguments passed on to \code{\link[pkgbuild]{build}()}.
 #' @param cleanup Deprecated.
@@ -49,7 +50,7 @@
 #'   CRAN.
 #' @export
 check <- function(pkg = ".",
-                  document = TRUE,
+                  document = NA,
                   build_args = NULL,
                   ...,
                   manual = FALSE,
@@ -67,6 +68,10 @@ check <- function(pkg = ".",
     warning("`cleanup` is deprecated", call. = FALSE)
   }
 
+  # document only if package uses roxygen, i.e. has RoxygenNote field
+  if (identical(document, NA)) {
+    document <- !is.null(pkg$roxygennote)
+  }
   if (document) {
     document(pkg)
   }

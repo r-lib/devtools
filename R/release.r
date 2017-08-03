@@ -115,7 +115,7 @@ release <- function(pkg = ".", check = TRUE, args = NULL, spelling = "en_US") {
   if (yesno("Is DESCRIPTION up-to-date?"))
     return(invisible())
 
-  release_questions <- pkgload::pkg_env(pkg)$release_questions
+  release_questions <- pkgload::ns_env(pkg)$release_questions
   if (!is.null(release_questions)) {
     questions <- release_questions()
     for (question in questions) {
@@ -131,15 +131,10 @@ release <- function(pkg = ".", check = TRUE, args = NULL, spelling = "en_US") {
   if (yesno("Is your email address ", maintainer(pkg)$email, "?"))
     return(invisible())
 
-  built_path <- build_cran(pkg, args = args)
-  if (yesno("Ready to submit?"))
-    return(invisible())
+  submit_cran(pkg, args = args)
 
-  upload_cran(pkg, built_path)
+  flag_release(pkg)
 
-  if (uses_git(pkg$path)) {
-    message("Don't forget to tag the release when the package is accepted!")
-  }
   invisible(TRUE)
 }
 
@@ -266,6 +261,10 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #' @export
 #' @keywords internal
 submit_cran <- function(pkg = ".", args = NULL) {
+  if (yesno("Ready to submit to CRAN?"))
+    return(invisible())
+
+  pkg <- as.package(pkg)
   built_path <- build_cran(pkg, args = args)
   upload_cran(pkg, built_path)
 }
@@ -322,3 +321,22 @@ upload_cran <- function(pkg, built_path) {
 }
 
 as.object_size <- function(x) structure(x, class = "object_size")
+
+flag_release <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+  if (!uses_git(pkg$path)) {
+    return(invisible())
+  }
+
+  message("Don't forget to tag this release once accepted by CRAN")
+
+  date <- Sys.Date()
+  commit <- git2r::commits(git2r::init(pkg$path), n = 1)[[1]]
+  sha <- substr(commit@sha, 1, 10)
+
+  msg <- paste0(
+    "This package was submitted to CRAN on ", date, ".\n",
+    "Once it is accepted, delete this file and tag the release (commit ", sha, ")."
+  )
+  writeLines(msg, file.path(pkg$path, "CRAN-RELEASE"))
+}
