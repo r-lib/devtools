@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* New `build_manual()` function that produces pdf manual for the package
+  (@twolodzko, #1238).
+
 * If you use git `release()` now generates a file called `CRAN-RELEASE`
   that reminds you to tag the commit that you submitted to CRAN (#1198).
 
