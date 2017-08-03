@@ -198,8 +198,8 @@ parse_one_remote <- function(x) {
 
 split_remotes <- function(x) {
   pkgs <- trim_ws(unlist(strsplit(x, ",[[:space:]]*")))
-  if (any(grepl("\n", pkgs, fixed = TRUE))) {
-    stop("Missing commas separating remotes: '", x, "'", call. = FALSE)
+  if (any((res <- grep("[[:space:]]+", pkgs)) != -1)) {
+    stop("Missing commas separating Remotes: '", pkgs[res], "'", call. = FALSE)
   }
   pkgs
 }
