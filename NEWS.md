@@ -14,6 +14,8 @@
 
 * `check()` defaults to running `document()` only if you have used
   roxygen previously (#1437).
+* Signal an error if commas are missing in between remote entries (#1511,
+  @ianmcook).
 
 * `build_vignettes()` gains a quiet argument (#1543).
 
