@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* New `build_manual()` function that produces pdf manual for the package
+  (@twolodzko, #1238).
+
 * `build_vignettes()` gains a quiet argument (#1543).
 
 * `session_info()` now uses the implementation in the **sessioninfo** package.
