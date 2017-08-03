@@ -11,5 +11,11 @@ build_manual <- function(pkg = ".", path = NULL) {
   pkg <- as.package(pkg)
   path <- path %||% dirname(pkg$path)
   name <- paste0(pkg$package, "_", pkg$version, ".pdf", collapse = " ")
-  system(paste0("R CMD Rd2pdf --force --output=", path, "/", name, " ", shQuote(pkg$path), collapse = " "))
+  msg <- callr::rcmd("Rd2pdf", cmdargs = c(
+    "--force",
+    paste0("--output=", path, "/", name),
+    pkg$path
+  ))
+  cat(msg$stdout)
+  invisible(msg)
 }
