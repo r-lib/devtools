@@ -63,3 +63,11 @@ devtools_default_options <- list(
 
   invisible()
 }
+
+# Workaround for silencing object masking messages
+# TODO: This should be removed when use_test and friends are removed from
+# devtools.
+.onAttach <- function(libname, pkgname) {
+  env <- as.environment(paste0("package:", pkgname))
+  env[[".conflicts.OK"]] <- TRUE
+}

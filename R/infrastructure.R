@@ -1,6 +1,7 @@
 #' @details
 #' Instead of the use_xyz functions from devtools use \link[usethis]{use_testthat}.
 #' @rdname devtools-deprecated
+#' @importFrom usethis use_testthat
 #' @export
 use_testthat <- function(pkg = ".") {
   .Deprecated("usethis::use_testthat()", package = "devtools")
