@@ -45,9 +45,7 @@ NULL
 #' @keywords internal
 NULL
 
-.onLoad <- function(libname, pkgname) {
-  op <- options()
-  op.devtools <- list(
+devtools_default_options <- list(
     devtools.path = "~/R-dev",
     devtools.install.args = "",
     devtools.name = "Your name goes here",
@@ -57,8 +55,19 @@ NULL
     devtools.desc = list(),
     devtools.revdep.libpath = file.path(tempdir(), "R-lib")
   )
-  toset <- !(names(op.devtools) %in% names(op))
-  if(any(toset)) options(op.devtools[toset])
+
+.onLoad <- function(libname, pkgname) {
+  op <- options()
+  toset <- !(names(devtools_default_options) %in% names(op))
+  if(any(toset)) options(devtools_default_options[toset])
 
   invisible()
+}
+
+# Workaround for silencing object masking messages
+# TODO: This should be removed when use_test and friends are removed from
+# devtools.
+.onAttach <- function(libname, pkgname) {
+  env <- as.environment(paste0("package:", pkgname))
+  env[[".conflicts.OK"]] <- TRUE
 }

@@ -58,7 +58,7 @@ test_that("github info and links can be queried and manipulated", {
   desc <- read_dcf(desc_path)
 
   ## default GitHub links created by use_github_links() via use_github()
-  expect_identical(desc[["URL"]],
+  expect_identical(desc[["Url"]],
                    file.path("https://github.com",
                              gh_info$username, gh_info$repo))
   expect_identical(desc[["BugReports"]],
@@ -67,7 +67,6 @@ test_that("github info and links can be queried and manipulated", {
 
   ## make sure we don't clobber existing links
   mtime_before <- file.info(desc_path)$mtime
-  expect_message(use_github_links(test_pkg), "found and preserved")
   mtime_after <- file.info(desc_path)$mtime
   expect_identical(mtime_before, mtime_after)
 
