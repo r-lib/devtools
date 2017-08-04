@@ -63,7 +63,7 @@ print.maintainers <- function(x, ...) {
 
 #' @details
 #' Instead of the revdep functions in devtools a better alternative is
-#' \link[revdepcheck]{revdep_check}.
+#' \sQuote{revdepcheck::revdep_check()}.
 #' @rdname devtools-deprecated
 #' @export
 revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,

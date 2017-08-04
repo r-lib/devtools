@@ -36,6 +36,6 @@ marked as Defunct and removed in a future version.
 }
 \details{
 Instead of the revdep functions in devtools a better alternative is
-\link[revdepcheck]{revdep_check}.
+\sQuote{revdepcheck::revdep_check()}.
 }
 \keyword{internal}
