@@ -1,5 +1,5 @@
 uses_git <- function(path = ".") {
-  !is.null(git2r::discover_repository(path, ceiling = 0))
+  !is.null(git2r::discover_repository(path))
 }
 
 # sha of most recent commit
