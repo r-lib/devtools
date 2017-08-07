@@ -46,7 +46,7 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
     load_all(pkg, reset = TRUE, export_all = FALSE)
     on.exit(load_all(pkg, reset = TRUE))
 
-    lapply(files, pkgload::run_example, show = show, test = test, run = run)
+    lapply(files, pkgload::run_example, test = test, run = run)
   }
 
   invisible()
