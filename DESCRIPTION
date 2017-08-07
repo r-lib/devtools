@@ -27,7 +27,7 @@ Imports:
     rstudioapi (>= 0.2.0),
     jsonlite,
     stats,
-    git2r (>= 0.11.0),
+    git2r (>= 0.12.1),
     withr,
     pkgbuild,
     pkgload,
