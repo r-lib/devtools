@@ -24,7 +24,7 @@
 #'   won't work.
 #' @keywords programming
 #' @export
-run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
+run_examples <- function(pkg = ".", start = NULL, show, test = FALSE,
                          run = TRUE, fresh = FALSE) {
   pkg <- as.package(pkg)
   document(pkg)
