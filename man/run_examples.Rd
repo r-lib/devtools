@@ -4,8 +4,8 @@
 \alias{run_examples}
 \title{Run all examples in a package.}
 \usage{
-run_examples(pkg = ".", start = NULL, show = TRUE, test = FALSE,
-  run = TRUE, fresh = FALSE)
+run_examples(pkg = ".", start = NULL, show, test = FALSE, run = TRUE,
+  fresh = FALSE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
