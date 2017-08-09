@@ -32,8 +32,10 @@ run_examples <- function(pkg = ".", start = NULL, show, test = FALSE,
   }
 
   if (fresh) {
-    to_run <- eval(substitute(function() devtools::run_examples(path), list(path = pkg$path)))
-    callr::r(to_run, show = TRUE)
+    to_run <- eval(substitute(
+      function() devtools::run_examples(path, start, test, run)
+      , list(path = pkg$path, start = start, test = test, run = run)))
+    callr::r(to_run, show = TRUE, spinner = FALSE)
   } else {
     document(pkg)
 
