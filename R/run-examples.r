@@ -27,22 +27,22 @@
 run_examples <- function(pkg = ".", start = NULL, show, test = FALSE,
                          run = TRUE, fresh = FALSE) {
   pkg <- as.package(pkg)
-  document(pkg)
-
   if (!missing(show)) {
     warning("`show` is deprecated", call. = FALSE)
   }
-
-  files <- rd_files(pkg, start = start)
-  if (length(files) == 0)
-    return()
-
-  rule("Running ", length(files), " example files in ", pkg$package)
 
   if (fresh) {
     to_run <- eval(substitute(function() devtools::run_examples(path), list(path = pkg$path)))
     callr::r(to_run, show = TRUE)
   } else {
+    document(pkg)
+
+    files <- rd_files(pkg, start = start)
+    if (length(files) == 0)
+      return()
+
+    rule("Running ", length(files), " example files in ", pkg$package)
+
     load_all(pkg, reset = TRUE, export_all = FALSE)
     on.exit(load_all(pkg, reset = TRUE))
 
