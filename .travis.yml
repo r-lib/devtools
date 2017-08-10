@@ -3,7 +3,6 @@ sudo: false
 cache: packages
 
 r:
- - 3.0
  - 3.1
  - oldrel
  - release
