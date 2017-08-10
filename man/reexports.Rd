@@ -7,6 +7,8 @@
 \alias{reexports}
 \alias{with_debug}
 \alias{reexports}
+\alias{clean_dll}
+\alias{reexports}
 \alias{load_all}
 \alias{reexports}
 \alias{unload}
@@ -17,7 +19,7 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{pkgbuild}{\code{\link[pkgbuild]{build}}, \code{\link[pkgbuild]{with_debug}}}
+  \item{pkgbuild}{\code{\link[pkgbuild]{build}}, \code{\link[pkgbuild]{with_debug}}, \code{\link[pkgbuild]{clean_dll}}}
 
   \item{pkgload}{\code{\link[pkgload]{load_all}}, \code{\link[pkgload]{unload}}}
 }}
