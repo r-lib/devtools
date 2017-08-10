@@ -63,7 +63,7 @@ remote_metadata.cran_remote <- function(x, bundle = NULL, source = NULL) {
   version <- read_dcf(file.path(source, "DESCRIPTION"))$Version
   list(
     RemoteType = "cran",
-    RemoteSha = trimws(version),
+    RemoteSha = trim_ws(version),
     RemoteRepos = paste0(deparse(x$repos), collapse = ""),
     RemotePkgType = x$pkg_type
   )
@@ -78,7 +78,7 @@ remote_package_name.cran_remote <- function(remote, ...) {
 remote_sha.cran_remote <- function(remote, url = "https://github.com", ...) {
   cran <- available_packages(remote$repos, remote$pkg_type)
 
-  trimws(unname(cran[, "Version"][match(remote$name, rownames(cran))]))
+  trim_ws(unname(cran[, "Version"][match(remote$name, rownames(cran))]))
 }
 
 #' @export
