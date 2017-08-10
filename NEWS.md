@@ -35,6 +35,9 @@
 Workaround a regression in Rcpp::compileAttributes.
 Add trimws implementation for R 3.1 support.
 
+* `run_examples` was mistakenly passing `show` to
+  `pkgload::run_example`, causing it to fail (@amcdavid, #1449)
+
 # devtools 1.13.1
 
 * Bugfix for installing from git remote and not passing git2r credentials
