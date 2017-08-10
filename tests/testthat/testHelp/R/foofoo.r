@@ -4,6 +4,6 @@
 #' devtools.
 #'
 #' @examples
-#' stopifnot(foofoo()=='You called foofoo.')
+#' stopifnot(foofoo() == 'You called foofoo.')
 #' @export
 foofoo <- function() "You called foofoo."
