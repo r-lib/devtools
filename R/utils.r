@@ -218,3 +218,14 @@ is_loaded <- function(pkg = ".") {
 is_attached <- function(pkg = ".") {
   !is.null(pkgload::pkg_env(pkg))
 }
+
+# This is base::trimws from 3.2 on
+trim_ws <- function (x, which = c("both", "left", "right")) {
+    which <- match.arg(which)
+    mysub <- function(re, x) sub(re, "", x, perl = TRUE)
+    if (which == "left")
+        return(mysub("^[ \t\r\n]+", x))
+    if (which == "right")
+        return(mysub("[ \t\r\n]+$", x))
+    mysub("[ \t\r\n]+$", mysub("^[ \t\r\n]+", x))
+}
