@@ -9,11 +9,6 @@ r:
  - release
  - devel
 
-# We want to use devel devtools to load packages so we can catch package
-# installation issues sooner rather than later.
-r_github_packages:
-  - hadley/devtools
-
 # We need to install BiocInstaller for testing Bioconductor packages
 bioc_required: true
 
