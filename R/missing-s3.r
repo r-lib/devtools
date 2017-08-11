@@ -8,7 +8,7 @@
 missing_s3 <- function(pkg = ".") {
   pkg <- as.package(pkg)
   check_suggested("roxygen2")
-  loaded <- load_all(pkg)
+  loaded <- load_all(pkg$path)
 
   # Find all S3 methods in package
   objs <- ls(envir = loaded$env)
@@ -16,7 +16,7 @@ missing_s3 <- function(pkg = ".") {
   s3_objs <- Filter(is_s3, objs)
 
   # Find all S3 methods in NAMESPACE
-  ns <- pkgload::parse_ns_file(pkg)
+  ns <- pkgload::parse_ns_file(pkg$path)
   exports <- paste(ns$S3methods[, 1], ns$S3methods[, 2], sep = ".")
 
   setdiff(s3_objs, exports)

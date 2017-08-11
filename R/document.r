@@ -24,7 +24,7 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
 
-  load_all(pkg)
+  load_all(pkg$path)
 
   if (packageVersion("roxygen2") > "4.1.1") {
     roclets <- roclets %||% roxygen2::load_options(pkg$path)$roclets
@@ -33,7 +33,7 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
   }
 
   withr::with_envvar(r_env_vars(),
-    roxygen2::roxygenise(pkg$path, roclets = roclets, load_code = pkgload::ns_env)
+    roxygen2::roxygenise(pkg$path, roclets = roclets, load_code = pkgload::pkg_ns)
   )
 
   pkgload::dev_topic_index_reset(pkg$package)
