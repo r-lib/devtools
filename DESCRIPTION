@@ -51,7 +51,7 @@ Suggests:
     gmailr (> 0.7.0)
 Remotes:
   hadley/testthat,
-  r-pkgs/pkgload,
+  r-pkgs/pkgload#49,
   r-pkgs/pkgbuild@HEAD,
   mangothecat/callr,
   r-lib/sessioninfo#4,

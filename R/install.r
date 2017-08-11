@@ -78,7 +78,7 @@ install <-
   # errors when the new package is installed overtop the old one.
   # https://stat.ethz.ch/pipermail/r-devel/2015-December/072150.html
   if (is_loaded(pkg)) {
-    eapply(pkgload::ns_env(pkg), force, all.names = TRUE)
+    eapply(pkgload::ns_env(pkg$package), force, all.names = TRUE)
   }
 
   root_install <- is.null(installing$packages)
