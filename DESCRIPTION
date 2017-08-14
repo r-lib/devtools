@@ -54,7 +54,7 @@ Remotes:
   r-pkgs/pkgload,
   r-pkgs/pkgbuild@HEAD,
   mangothecat/callr,
-  r-lib/sessioninfo#4,
+  r-lib/sessioninfo,
   r-lib/usethis
 License: GPL (>= 2)
 VignetteBuilder: knitr
