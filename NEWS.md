@@ -1,7 +1,6 @@
 # devtools 1.13.3.9000
 
-* New `rhub_check()` and `rhub_check_status()` functions to check packages
-  using <https://builder.r-hub.io/>.
+* New `rhub_check()` function to check packages using <https://builder.r-hub.io/>.
 
 * `run_examples` was mistakenly passing `show` to
   `pkgload::run_example`, causing it to fail (@amcdavid, #1449)
