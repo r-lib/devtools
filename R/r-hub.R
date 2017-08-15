@@ -37,7 +37,7 @@ rhub_check <- function(pkg = ".", platform = NULL, email = NULL,
   pkg <- as.package(pkg)
   email <- email %||% maintainer(pkg)$email
 
-  built_path <- build(pkg, tempdir(), quiet = !interactive, ...)
+  built_path <- build(pkg$path, tempdir(), quiet = !interactive, ...)
   on.exit(unlink(built_path), add = TRUE)
 
   status <- rhub::check(

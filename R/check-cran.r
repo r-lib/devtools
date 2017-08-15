@@ -123,7 +123,6 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
         local_urls[i],
         args = "--no-multiarch --no-manual --no-codoc",
         env_vars = env_vars,
-        check_dir = check_dir,
         quiet = quiet_check
       )
       end_time <- Sys.time()
