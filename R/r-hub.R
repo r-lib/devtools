@@ -22,11 +22,10 @@
 #' @param interactive whether to show the status of the build
 #'   interactively. R-hub will send an email to the package maintainer's
 #'   email address, regardless of whether the check is interactive or not.
-#' @param ... extra arguments, passed to \code{\link{build}}.
-#' @inheritParams build
+#' @param ... extra arguments, passed to \code{\link[pkgbuild]{build}}.
+#' @inheritParams check
 #' @family build functions, rhub functions
-#' @return a handle that can be used to query the build status
-#'   with \code{\link{rhub_check_status}}.
+#' @return a \code{rhub_check} object.
 #'
 #' @export
 
@@ -54,20 +53,4 @@ rhub_check <- function(pkg = ".", platform = NULL, email = NULL,
   } else {
     invisible(status)
   }
-}
-
-#' Check status of an r-hub check submission
-#'
-#' @param handle the handle returned by \code{\link{rhub_check}},
-#'   or an r-hub job status URL, as printed by \code{\link{rhub_check}}.
-#' @family rhub functions
-#' @return A list containing the status of the build, which can be
-#'   \sQuote{preparing}, \sQuote{in progress}, \sQuote{success} and
-#'   \sQuote{error}.
-#'
-#' @export
-
-rhub_check_status <- function(handle) {
-  check_suggested("rhub")
-  rhub::status(handle)
 }

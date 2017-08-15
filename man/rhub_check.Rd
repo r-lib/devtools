@@ -23,11 +23,10 @@ address in the package.}
 interactively. R-hub will send an email to the package maintainer's
 email address, regardless of whether the check is interactive or not.}
 
-\item{...}{extra arguments, passed to \code{\link{build}}.}
+\item{...}{extra arguments, passed to \code{\link[pkgbuild]{build}}.}
 }
 \value{
-a handle that can be used to query the build status
-  with \code{\link{rhub_check_status}}.
+a \code{rhub_check} object.
 }
 \description{
 It runs \code{\link{build}} on the package, with the arguments specified
