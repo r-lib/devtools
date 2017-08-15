@@ -51,6 +51,6 @@ rhub_check <- function(pkg = ".", platform = NULL, email = NULL,
     message("r-hub check for package ", sQuote(pkg$package), " submitted.")
     status
   } else {
-    invisible(status)
+    status
   }
 }
