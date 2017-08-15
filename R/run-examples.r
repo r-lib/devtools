@@ -24,32 +24,35 @@
 #'   won't work.
 #' @keywords programming
 #' @export
-run_examples <- function(pkg = ".", start = NULL, show, test = FALSE,
+run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
                          run = TRUE, fresh = FALSE) {
   pkg <- as.package(pkg)
+
+  if (fresh) {
+    to_run <-
+      eval(substitute(
+          function() devtools::run_examples(pkg = path, start = start, test = test, run = run, fresh = FALSE),
+          list(path = pkg$path, start = start, test = test, run = run)))
+    callr::r(to_run, show = TRUE, spinner = FALSE)
+    return(invisible())
+  }
+
+  document(pkg)
+
   if (!missing(show)) {
     warning("`show` is deprecated", call. = FALSE)
   }
 
-  if (fresh) {
-    to_run <- eval(substitute(
-      function() devtools::run_examples(path, start, test, run)
-      , list(path = pkg$path, start = start, test = test, run = run)))
-    callr::r(to_run, show = TRUE, spinner = FALSE)
-  } else {
-    document(pkg)
+  files <- rd_files(pkg$path, start = start)
+  if (length(files) == 0)
+    return()
 
-    files <- rd_files(pkg$path, start = start)
-    if (length(files) == 0)
-      return()
+  rule("Running ", length(files), " example files in ", pkg$package)
 
-    rule("Running ", length(files), " example files in ", pkg$package)
+  load_all(pkg$path, reset = TRUE, export_all = FALSE)
+  on.exit(load_all(pkg$path, reset = TRUE))
 
-    load_all(pkg$path, reset = TRUE, export_all = FALSE)
-    on.exit(load_all(pkg$path, reset = TRUE))
-
-    lapply(files, pkgload::run_example, test = test, run = run)
-  }
+  lapply(files, pkgload::run_example, test = test, run = run)
 
   invisible()
 }
