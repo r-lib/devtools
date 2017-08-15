@@ -21,6 +21,10 @@ spell_check <- function(pkg = ".", ignore = character(), dict = "en_US"){
   pkg <- as.package(pkg)
   ignore <- c(pkg$package, hunspell::en_stats, ignore)
 
+  # Check R files
+  r_files <- list.files(file.path(pkg$path, "R"), "[.][rR]$", full.names = TRUE)
+  r_lines <- lapply(sort(r_files), spell_check_r, ignore = ignore, dict = dict)
+
   # Check Rd manual files
   rd_files <- list.files(file.path(pkg$path, "man"), "\\.Rd$", full.names = TRUE)
   rd_lines <- lapply(sort(rd_files), spell_check_rd, ignore = ignore, dict = dict)
@@ -32,8 +36,8 @@ spell_check <- function(pkg = ".", ignore = character(), dict = "en_US"){
   })
 
   # Combine
-  all_sources <- c(rd_files, pkg_fields)
-  all_lines <- c(rd_lines, pkg_lines)
+  all_sources <- c(r_files, rd_files, pkg_fields)
+  all_lines <- c(r_lines, rd_lines, pkg_lines)
   words_by_file <- lapply(all_lines, names)
   bad_words <- sort(unique(unlist(words_by_file)))
 
@@ -76,4 +80,45 @@ spell_check_file <- function(file, ignore, dict){
 spell_check_rd <- function(rdfile, ignore, dict){
   text <- tools::RdTextFilter(rdfile)
   spell_check_text(text, ignore = ignore, dict = dict)
+}
+
+spell_check_r <- function(file, ignore, dict) {
+  lines <- readLines(file)
+  non_rd <- which(!grepl("^[[:space:]]*#'", lines))
+  lines[non_rd] <- ""
+
+  # need to ignore examples blocks as well
+  empty_lines <- which(lines == "")
+  tags <- which(grepl("^[[:space:]]*#'[[:space:]]*@", lines))
+  examples <- which(grepl("^[[:space:]]*#'[[:space:]]*@examples?", lines))
+
+  # for each example ignore lines until the next tag, empty line or end of lines
+  for (i in examples) {
+    until <- min(tags[tags > i], empty_lines[empty_lines > i], length(lines))
+    lines[i:until] <- ""
+  }
+
+  # remove words within macros
+  lines <- blank_matches(gregexpr("[\\][[:alnum:]]+[{][^}]+[}]+?", lines), lines)
+
+  # remove @param name pairs
+  lines <- blank_matches(gregexpr("^[[:space:]]*#'[[:space:]]*@param[[:space:]]+[[:alnum:]_.]+", lines), lines)
+
+  # remove all other tags
+  lines <- blank_matches(gregexpr("^[[:space:]]*#'[[:space:]]*@[[:alnum:]]+", lines), lines)
+
+  spell_check_text(lines, ignore = ignore, dict = dict)
+}
+
+blank_matches <- function(m, lines) {
+  non_na <- !is.na(m)
+
+  blanks <- function(n) {
+    vapply(Map(rep.int, rep.int(" ", length(n)), n, USE.NAMES = FALSE),
+      paste, "", collapse = "")
+  }
+
+  regmatches(lines[non_na], m[non_na]) <-
+    Map(blanks, lapply(regmatches(lines[non_na], m[non_na]), nchar))
+  lines
 }
