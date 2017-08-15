@@ -21,7 +21,7 @@ test_that("install on packages adds metadata", {
 
 
     # cleanup code for when we are all finished
-    on.exit(unload(test_pkg), add = TRUE)
+    on.exit(unload(pkgload::pkg_name(test_pkg)), add = TRUE)
     on.exit(erase(test_pkg), add = TRUE)
 
     # first time loading the package

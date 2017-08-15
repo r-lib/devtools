@@ -47,7 +47,7 @@ test <- function(pkg = ".", filter = NULL, ...) {
   # Run tests in a child of the namespace environment, like
   # testthat::test_package
   message("Loading ", pkg$package)
-  ns_env <- load_all(pkg, quiet = TRUE)$env
+  ns_env <- load_all(pkg$path, quiet = TRUE)$env
 
   message("Testing ", pkg$package)
   Sys.sleep(0.05); utils::flush.console() # Avoid misordered output in RStudio

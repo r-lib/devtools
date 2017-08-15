@@ -39,14 +39,14 @@ run_examples <- function(pkg = ".", start = NULL, show, test = FALSE,
   } else {
     document(pkg)
 
-    files <- rd_files(pkg, start = start)
+    files <- rd_files(pkg$path, start = start)
     if (length(files) == 0)
       return()
 
     rule("Running ", length(files), " example files in ", pkg$package)
 
-    load_all(pkg, reset = TRUE, export_all = FALSE)
-    on.exit(load_all(pkg, reset = TRUE))
+    load_all(pkg$path, reset = TRUE, export_all = FALSE)
+    on.exit(load_all(pkg$path, reset = TRUE))
 
     lapply(files, pkgload::run_example, test = test, run = run)
   }

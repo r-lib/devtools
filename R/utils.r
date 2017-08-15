@@ -216,7 +216,7 @@ is_loaded <- function(pkg = ".") {
 }
 
 is_attached <- function(pkg = ".") {
-  !is.null(pkgload::pkg_env(pkg))
+  !is.null(pkgload::pkg_env(pkg$package))
 }
 
 # This is base::trimws from 3.2 on
