@@ -82,7 +82,7 @@ find_test_dir <- function(path) {
 #' @keywords internal
 #' @examples
 #' if (has_tests()) {
-#' devtest("testData")
+#' devtest("testUseData")
 #' }
 #' @export
 devtest <- function(package) {

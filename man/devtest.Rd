@@ -15,7 +15,7 @@ returns the path to them.
 }
 \examples{
 if (has_tests()) {
-devtest("testData")
+devtest("testUseData")
 }
 }
 \keyword{internal}
