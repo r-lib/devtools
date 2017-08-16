@@ -7,13 +7,9 @@
 \alias{reexports}
 \alias{check_dep_version}
 \alias{reexports}
-\alias{build}
-\alias{reexports}
 \alias{with_debug}
 \alias{reexports}
 \alias{clean_dll}
-\alias{reexports}
-\alias{load_all}
 \alias{reexports}
 \alias{unload}
 \alias{reexports}
@@ -25,8 +21,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{pkgbuild}{\code{\link[pkgbuild]{build}}, \code{\link[pkgbuild]{with_debug}}, \code{\link[pkgbuild]{clean_dll}}}
+  \item{pkgbuild}{\code{\link[pkgbuild]{with_debug}}, \code{\link[pkgbuild]{clean_dll}}}
 
-  \item{pkgload}{\code{\link[pkgload]{parse_deps}}, \code{\link[pkgload]{check_dep_version}}, \code{\link[pkgload]{load_all}}, \code{\link[pkgload]{unload}}, \code{\link[pkgload]{check_suggested}}}
+  \item{pkgload}{\code{\link[pkgload]{parse_deps}}, \code{\link[pkgload]{check_dep_version}}, \code{\link[pkgload]{unload}}, \code{\link[pkgload]{check_suggested}}}
 }}
 

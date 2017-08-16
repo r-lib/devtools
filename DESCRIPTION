@@ -24,7 +24,7 @@ Imports:
     memoise (>= 1.0.0),
     whisker,
     digest,
-    rstudioapi (>= 0.2.0),
+    rstudioapi (>= 0.6.0.9000),
     jsonlite,
     stats,
     git2r (>= 0.12.1),
@@ -58,7 +58,8 @@ Remotes:
   mangothecat/callr,
   r-lib/sessioninfo,
   r-lib/usethis,
-  r-hub/rhub
+  r-hub/rhub,
+  rstudio/rstudioapi
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
