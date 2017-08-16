@@ -53,7 +53,7 @@ parse_deps <- function(string) {
 #' @keywords internal
 check_dep_version <- function(dep_name, dep_ver = NA, dep_compare = NA) {
   if (!requireNamespace(dep_name, quietly = TRUE)) {
-    stop("Dependency package ", dep_name, " not available.")
+    stop("Dependency package ", sQuote(dep_name), " not available.")
   }
 
   if (xor(is.na(dep_ver), is.na(dep_compare))) {
