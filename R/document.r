@@ -24,6 +24,10 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
 
+  if (rstudioapi::isAvailable()) {
+    rstudioapi::documentSaveAll()
+  }
+
   load_all(pkg$path)
 
   if (packageVersion("roxygen2") > "4.1.1") {

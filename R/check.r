@@ -62,6 +62,10 @@ check <- function(pkg = ".",
                   quiet = FALSE) {
   pkg <- as.package(pkg)
 
+  if (rstudioapi::isAvailable()) {
+    rstudioapi::documentSaveAll()
+  }
+
   # document only if package uses roxygen, i.e. has RoxygenNote field
   if (identical(document, NA)) {
     document <- !is.null(pkg$roxygennote)

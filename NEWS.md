@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `document()`, `load_all()`, `check()`, `build()` and `test()` now
+  automatically save open files when they are run inside the RStudio IDE. (#1576)
+
 * New `rhub_check()` function to check packages using <https://builder.r-hub.io/>.
 
 * `run_examples` was mistakenly passing `show` to

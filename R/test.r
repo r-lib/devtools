@@ -19,6 +19,11 @@
 #' @export
 test <- function(pkg = ".", filter = NULL, ...) {
   check_suggested("testthat")
+
+  if (rstudioapi::isAvailable()) {
+    rstudioapi::documentSaveAll()
+  }
+
   pkg <- as.package(pkg)
 
   if (!uses_testthat(pkg) && interactive()) {
