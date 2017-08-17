@@ -5,3 +5,6 @@ pkgload::load_all
 #' @importFrom pkgload unload
 #' @export
 pkgload::unload
+
+#' @importFrom pkgload check_suggested
+pkgload::check_suggested
