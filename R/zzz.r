@@ -61,6 +61,7 @@ devtools_default_options <- list(
   toset <- !(names(devtools_default_options) %in% names(op))
   if(any(toset)) options(devtools_default_options[toset])
 
+  completeme::register_completion("devtools::install_github" = install_github_completer)
   invisible()
 }
 

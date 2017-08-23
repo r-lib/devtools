@@ -59,7 +59,8 @@ Remotes:
   r-lib/sessioninfo,
   r-lib/usethis,
   r-hub/rhub,
-  rstudio/rstudioapi
+  rstudio/rstudioapi,
+  jimhester/completeme
 License: GPL (>= 2)
 VignetteBuilder: knitr
 RoxygenNote: 6.0.1
