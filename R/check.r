@@ -62,7 +62,7 @@ check <- function(pkg = ".",
                   quiet = FALSE) {
   pkg <- as.package(pkg)
 
-  if (rstudioapi::isAvailable()) {
+  if (rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
 

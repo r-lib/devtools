@@ -4,7 +4,7 @@
 load_all <- function(path = ".", reset = TRUE, recompile = FALSE,
                      export_all = TRUE, helpers = TRUE, recollate = FALSE,
                      quiet = FALSE, ...) {
-  if (rstudioapi::isAvailable()) {
+  if (rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
 

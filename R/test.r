@@ -20,7 +20,7 @@
 test <- function(pkg = ".", filter = NULL, ...) {
   check_suggested("testthat")
 
-  if (rstudioapi::isAvailable()) {
+  if (rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
 
