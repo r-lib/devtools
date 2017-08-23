@@ -13,17 +13,18 @@
 #' @param quiet If \code{TRUE}, suppresses outut.
 #' @param version directory to upload to on the win-builder, controlling
 #'   which version of R is used to build the package. Possible options are
-#'   listed on \url{http://win-builder.r-project.org/}. Defaults to R-devel.
+#'   \code{'R-devel'} and \code{'R-release'} (see 
+#'   \url{http://win-builder.r-project.org/}). Multiple options are allowed.
 #' @export
 #' @family build functions
-build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
+build_win <- function(pkg = ".", version = "R-devel",
                       args = NULL, quiet = FALSE) {
   pkg <- as.package(pkg)
 
-  if (missing(version)) {
-    version <- "R-devel"
-  } else {
-    version <- match.arg(version, several.ok = TRUE)
+  available_versions <- c("R-devel", "R-release")
+  if (!all(version %in% available_versions)) {
+    stop("'version' should be one or more of ", 
+      paste0("'", available_versions, "'", collapse=", "), ".")
   }
 
   if (!quiet) {
