@@ -1,37 +1,8 @@
-#' Creates a new package, following all devtools package conventions.
-#'
-#' Similar to \code{\link{package.skeleton}}, except that it only creates
-#' the standard devtools directory structures; it doesn't try and create
-#' source code and data files by inspecting the global environment.
-#'
-#' \code{create} requires that the directory doesn't exist yet; it will be
-#' created but deleted upon failure. \code{setup} assumes an existing
-#' directory from which it will infer the package name.
-#'
-#' @param path location to create new package.  The last component of the path
-#'   will be used as the package name.
-#' @param description list of description values to override default values or
-#'   add additional values.
-#' @param check if \code{TRUE}, will automatically run \code{\link{check}}
-#' @param rstudio Create an RStudio project file?
-#'   (with \code{\link{use_rstudio}})
-#' @param quiet if \code{FALSE}, the default, prints informative messages.
-#' @seealso Text with \code{\link{package.skeleton}}
+#' @rdname devtools-deprecated
 #' @export
-#' @examples
-#' \dontrun{
-#' # Create a package using all defaults:
-#' path <- file.path(tempdir(), "myDefaultPackage")
-#' create(path)
-#'
-#' # Override a description attribute.
-#' path <- file.path(tempdir(), "myCustomPackage")
-#' my_description <- list("Maintainer" =
-#'   "'Yoni Ben-Meshulam' <yoni@@opower.com>")
-#' create(path, my_description)
-#' }
 create <- function(path, description = getOption("devtools.desc"),
                    check = FALSE, rstudio = TRUE, quiet = FALSE) {
+  .Deprecated("usethis::create_package()", package = "devtools")
   check_package_name(path)
 
   # ensure the parent directory exists
@@ -65,10 +36,11 @@ create <- function(path, description = getOption("devtools.desc"),
   invisible(TRUE)
 }
 
-#' @rdname create
+#' @rdname devtools-deprecated
 #' @export
 setup <- function(path = ".", description = getOption("devtools.desc"),
                   check = FALSE, rstudio = TRUE, quiet = FALSE) {
+  .Deprecated("usethis::create_package()", package = "devtools")
   check_package_name(path)
 
   parent_dir <- normalizePath(dirname(path), winslash = "/", mustWork = TRUE)
@@ -86,20 +58,11 @@ setup <- function(path = ".", description = getOption("devtools.desc"),
   invisible(TRUE)
 }
 
-#' Create a default DESCRIPTION file for a package.
-#'
-#' @details
-#' To set the default author and licenses, set \code{options}
-#' \code{devtools.desc.author} and \code{devtools.desc.license}.  I use
-#' \code{options(devtools.desc.author = '"Hadley Wickham <h.wickham@@gmail.com> [aut,cre]"',
-#'   devtools.desc.license = "GPL-3")}.
-#' @param path path to package root directory
-#' @param extra a named list of extra options to add to \file{DESCRIPTION}.
-#'   Arguments that take a list
-#' @param quiet if \code{TRUE}, suppresses output from this function.
+#' @rdname devtools-deprecated
 #' @export
 create_description <- function(path = ".", extra = getOption("devtools.desc"),
                                quiet = FALSE) {
+  .Deprecated("usethis::use_description()", package = "devtools")
   # Don't call check_dir(path) here (#803)
   desc_path <- file.path(path, "DESCRIPTION")
 
