@@ -1,6 +1,9 @@
 install_github_completer <- function(env) {
-  if (completeme::current_function(env) != "install_github" ||
-    !completeme::inside_quotes(env)) {
+  if (!(
+      completeme::current_function(env) == "install_github" &&
+        completeme::inside_quotes(env) &&
+        (completeme::is_first_argument(env) ||
+          completeme::current_argument(env) == "repo"))) {
     return()
   }
 
