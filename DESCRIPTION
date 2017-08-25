@@ -32,7 +32,8 @@ Imports:
     pkgbuild,
     pkgload,
     sessioninfo,
-    rcmdcheck
+    rcmdcheck,
+    completeme
 Suggests:
     curl (>= 0.9),
     crayon,
