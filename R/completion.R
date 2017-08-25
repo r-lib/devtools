@@ -1,11 +1,8 @@
+#' @importFrom completeme return_unless current_function inside_quotes is_first_argument current_argument
 install_github_completer <- function(env) {
-  if (!(
-      completeme::current_function(env) == "install_github" &&
-        completeme::inside_quotes(env) &&
-        (completeme::is_first_argument(env) ||
-          completeme::current_argument(env) == "repo"))) {
-    return()
-  }
+  return_unless(
+    current_function(env) == "install_github" && inside_quotes(env) &&
+    (is_first_argument(env) || current_argument(env) == "repo"))
 
   res <- tryCatch(
     httr::content(as = "parsed", simplifyVector = TRUE,
