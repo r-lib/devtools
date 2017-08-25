@@ -18,7 +18,7 @@ install_github_completer <- function(env) {
   }
 
   # The query searches the description as well, so return only packages that actually contain the current token
-  pkg_names <- grep(paste0("^", env$token), res$pkg_name, value = TRUE)
+  pkg_names <- grep(env$token, res$pkg_name, value = TRUE)
   if (length(pkg_names) > 0) {
     return(pkg_names)
   }
