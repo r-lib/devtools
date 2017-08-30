@@ -42,7 +42,7 @@ Suggests:
     MASS,
     rmarkdown,
     knitr,
-    hunspell (>= 2.0),
+    spelling,
     lintr (>= 0.2.1),
     bitops,
     roxygen2 (>= 5.0.0),

@@ -4,20 +4,22 @@
 \alias{spell_check}
 \title{Spell checking}
 \usage{
-spell_check(pkg = ".", ignore = character(), dict = "en_US")
+spell_check(pkg = ".", vignettes = TRUE, lang = "en_US")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
 \code{\link{as.package}} for more information}
 
-\item{ignore}{character vector with words to ignore. See
-\code{\link[hunspell:hunspell]{hunspell}} for more information}
+\item{vignettes}{include vignettes in the spell check; passed to
+\link[spelling:spell_check_package]{spelling::spell_check_package}}
 
-\item{dict}{a dictionary object or language string. See
-\code{\link[hunspell:hunspell]{hunspell}} for more information}
+\item{lang}{a dictionary object or language string; passed to
+\link[spelling:spell_check_package]{spelling::spell_check_package}}
 }
 \description{
-Runs a spell check on text fields in the package description file and
+Runs a spell check on text fields in the package description file, manual
+pages, and optionally vignettes. Wraps the \link[spelling:spell_check_package]{spelling}
+package.
 manual pages. Hunspell includes dictionaries for \code{en_US} and \code{en_GB}
 by default. Other languages require installation of a custom dictionary, see
 the \href{https://cran.r-project.org/package=hunspell/vignettes/intro.html#system_dictionaries}{hunspell vignette}
