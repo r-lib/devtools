@@ -40,7 +40,8 @@
 #' @param args An optional character vector of additional command
 #'   line arguments to be passed to \code{R CMD build}.
 #' @param spelling language or dictionary file to spell check documentation.
-#' See \code{\link{spell_check}}. Set to \code{NULL} to skip spell checking.
+#' See \code{\link[spelling:spell_check_package]{spelling}} package. Set to
+#' \code{NULL} to skip spell checking.
 #' @export
 release <- function(pkg = ".", check = TRUE, args = NULL, spelling = "en_US") {
   pkg <- as.package(pkg)
@@ -64,7 +65,7 @@ release <- function(pkg = ".", check = TRUE, args = NULL, spelling = "en_US") {
 
   if (length(spelling)) {
     cat("Spell checking documentation...\n")
-    print(spell_check(pkg, dict = spelling))
+    print(spell_check(pkg, lang = spelling))
     cat("\n")
     if (yesno("Is documentation free of spelling errors? (you can ignore false positives)"))
       return(invisible())

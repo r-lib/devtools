@@ -40,6 +40,10 @@
 * Infrastructure functions (`use_*`) now use the implementations in **usethis**.
 * Use rcmdcheck to run and parse R CMD check output (#1153).
 
+* The `spell_check()` code has been moved into the new **spelling** package and
+  has thereby gained support for vignettes and package wordlists. The devtools 
+  function now wraps `spelling::spell_check_package()`.
+
 # devtools 1.13.2
 Workaround a regression in Rcpp::compileAttributes.
 Add trimws implementation for R 3.1 support.

@@ -18,7 +18,8 @@ release it.}
 line arguments to be passed to \code{R CMD build}.}
 
 \item{spelling}{language or dictionary file to spell check documentation.
-See \code{\link{spell_check}}. Set to \code{NULL} to skip spell checking.}
+See \code{\link[spelling:spell_check_package]{spelling}} package. Set to
+\code{NULL} to skip spell checking.}
 }
 \description{
 Run automated and manual tests, then ftp to CRAN.
