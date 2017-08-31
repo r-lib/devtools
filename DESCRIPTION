@@ -53,9 +53,9 @@ Suggests:
     rhub
 Remotes:
   hadley/testthat,
-  r-pkgs/pkgload,
-  r-pkgs/pkgbuild@HEAD,
-  mangothecat/callr,
+  r-lib/pkgload,
+  r-lib/pkgbuild,
+  r-lib/callr,
   r-lib/sessioninfo,
   r-lib/usethis,
   r-hub/rhub,
