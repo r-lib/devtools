@@ -12,8 +12,6 @@
 \alias{clean_dll}
 \alias{reexports}
 \alias{unload}
-\alias{reexports}
-\alias{check_suggested}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -23,6 +21,6 @@ below to see their documentation.
 \describe{
   \item{pkgbuild}{\code{\link[pkgbuild]{with_debug}}, \code{\link[pkgbuild]{clean_dll}}}
 
-  \item{pkgload}{\code{\link[pkgload]{parse_deps}}, \code{\link[pkgload]{check_dep_version}}, \code{\link[pkgload]{unload}}, \code{\link[pkgload]{check_suggested}}}
+  \item{pkgload}{\code{\link[pkgload]{parse_deps}}, \code{\link[pkgload]{check_dep_version}}, \code{\link[pkgload]{unload}}}
 }}
 

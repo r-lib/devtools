@@ -18,4 +18,7 @@ load_all <- function(path = ".", reset = TRUE, recompile = FALSE,
 pkgload::unload
 
 #' @importFrom pkgload check_suggested
-pkgload::check_suggested
+# This is just check_suggested from pkgload with a different default path
+check_suggested <- function(package, version = NULL, compare = NA, path = pkgload::inst("devtools")) {
+  pkgload::check_suggested(package = package, version = version, compare = compare, path = path)
+}
