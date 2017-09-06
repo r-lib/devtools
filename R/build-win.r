@@ -16,7 +16,8 @@
 #'   listed on \url{http://win-builder.r-project.org/}. Defaults to R-devel.
 #' @export
 #' @family build functions
-build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
+build_win <- function(pkg = ".",
+                      version = c("R-oldrelease", "R-release", "R-devel"),
                       args = NULL, quiet = FALSE) {
   pkg <- as.package(pkg)
 
