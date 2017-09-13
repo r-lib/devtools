@@ -135,6 +135,10 @@ different_sha <- function(remote_sha = NULL,
   !same
 }
 
+#' Get the local SHA of a package.
+#'
+#' @param name name of a package
+#' @export
 local_sha <- function(name) {
   if (!is_installed(name)) {
     return(NA_character_)
