@@ -29,7 +29,7 @@
 #'
 #' @export
 
-rhub_check <- function(pkg = ".", platform = NULL, email = NULL,
+check_rhub <- function(pkg = ".", platform = NULL, email = NULL,
                        interactive = FALSE, ...) {
 
   check_suggested("rhub")
