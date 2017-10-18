@@ -10,21 +10,34 @@
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
 #' @param args Any additional arguments to pass to \code{\link[pkgbuild]{build}}
-#' @param quiet If \code{TRUE}, suppresses outut.
-#' @param version directory to upload to on the win-builder, controlling
-#'   which version of R is used to build the package. Possible options are
-#'   listed on \url{http://win-builder.r-project.org/}. Defaults to R-devel.
+#' @param quiet If \code{TRUE}, suppresses output.
 #' @export
 #' @family build functions
-build_win <- function(pkg = ".", version = c("R-release", "R-devel"),
-                      args = NULL, quiet = FALSE) {
-  pkg <- as.package(pkg)
+#' @name check_win
+NULL
 
-  if (missing(version)) {
-    version <- "R-devel"
-  } else {
-    version <- match.arg(version, several.ok = TRUE)
-  }
+#' @describeIn check_win Check package on the development version of R.
+#' @export
+check_win_devel <- function(pkg = ".", args = NULL, quiet = FALSE) {
+  check_win(pkg = pkg, version = "R-devel", args = args, quiet = quiet)
+}
+
+#' @describeIn check_win Check package on the release version of R.
+#' @export
+check_win_release <- function(pkg = ".", args = NULL, quiet = FALSE) {
+  check_win(pkg = pkg, version = "R-release", args = args, quiet = quiet)
+}
+
+#' @describeIn check_win Check package on the previous major release version of R.
+#' @export
+check_win_oldrelease <- function(pkg = ".", args = NULL, quiet = FALSE) {
+  check_win(pkg = pkg, version = "R-oldrelease", args = args, quiet = quiet)
+}
+
+check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelease"),
+                      args = NULL, quiet = FALSE) {
+
+  version <- match.arg(version, several.ok = TRUE)
 
   if (!quiet) {
     message("Building windows version of ", pkg$package,
