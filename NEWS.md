@@ -1,9 +1,12 @@
 # devtools 1.13.3.9000
 
+* `build_win()` has been renamed to `check_win_release()`, `check_win_devel()`,
+  `check_win_oldrelease()` (#1598).
+
 * `document()`, `load_all()`, `check()`, `build()` and `test()` now
   automatically save open files when they are run inside the RStudio IDE. (#1576)
 
-* New `rhub_check()` function to check packages using <https://builder.r-hub.io/>.
+* New `check_rhub()` function to check packages using <https://builder.r-hub.io/>.
 
 * `run_examples` was mistakenly passing `show` to
   `pkgload::run_example`, causing it to fail (@amcdavid, #1449)
