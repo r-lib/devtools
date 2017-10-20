@@ -8,58 +8,57 @@ Authors@R: c(
     person("R Core team", role = "ctb",
       comment = "Some namespace and vignette code extracted from base R")
     )
-Encoding: UTF-8
 Description: Collection of package development tools.
+License: GPL (>= 2)
 URL: https://github.com/hadley/devtools
 BugReports: https://github.com/hadley/devtools/issues
-Depends:
+Depends: 
     R (>= 3.0.2)
-Imports:
+Imports: 
     callr,
-    httr (>= 0.4),
-    utils,
-    tools,
-    methods,
-    memoise (>= 1.0.0),
-    whisker,
     digest,
-    rstudioapi (>= 0.6.0.9000),
-    jsonlite,
-    stats,
     git2r (>= 0.12.1),
-    withr,
+    httr (>= 0.4),
+    jsonlite,
+    memoise (>= 1.0.0),
+    methods,
     pkgbuild,
     pkgload,
-    sessioninfo,
     rcmdcheck,
-    usethis
-Suggests:
-    curl (>= 0.9),
-    crayon,
-    testthat (>= 1.0.2),
+    rstudioapi (>= 0.6.0.9000),
+    sessioninfo,
+    stats,
+    tools,
+    usethis,
+    utils,
+    whisker,
+    withr
+Suggests: 
     BiocInstaller,
-    Rcpp (>= 0.10.0),
-    MASS,
-    rmarkdown,
-    knitr,
-    spelling,
-    lintr (>= 0.2.1),
     bitops,
-    roxygen2 (>= 5.0.0),
-    evaluate,
-    rversions,
     covr,
+    crayon,
+    curl (>= 0.9),
+    evaluate,
     gmailr (> 0.7.0),
-    rhub
-Remotes:
-  hadley/testthat,
-  r-lib/pkgload,
-  r-lib/pkgbuild,
-  r-lib/callr,
-  r-lib/sessioninfo,
-  r-lib/usethis,
-  r-hub/rhub,
-  rstudio/rstudioapi
-License: GPL (>= 2)
+    knitr,
+    lintr (>= 0.2.1),
+    MASS,
+    Rcpp (>= 0.10.0),
+    rhub,
+    rmarkdown,
+    roxygen2 (>= 5.0.0),
+    rversions,
+    spelling,
+    testthat (>= 1.0.2)
 VignetteBuilder: knitr
+Encoding: UTF-8
+Remotes: hadley/testthat,
+    r-hub/rhub,
+    r-lib/callr,
+    r-lib/pkgbuild,
+    r-lib/pkgload,
+    r-lib/sessioninfo,
+    r-lib/usethis,
+    rstudio/rstudioapi
 RoxygenNote: 6.0.1
