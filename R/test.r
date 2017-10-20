@@ -70,7 +70,7 @@ test_coverage <- function(pkg = ".", ...) {
   check_suggested("covr")
 
   coverage <- covr::package_coverage(pkg$path, ...)
-  covr::shine(coverage)
+  covr::report(coverage)
 
   invisible(coverage)
 }
