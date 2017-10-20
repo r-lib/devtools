@@ -2,33 +2,28 @@
 % Please edit documentation in R/test.r
 \name{test}
 \alias{test}
+\alias{test_coverage}
 \alias{uses_testthat}
 \title{Execute all \pkg{test_that} tests in a package.}
 \usage{
 test(pkg = ".", filter = NULL, ...)
 
+test_coverage(pkg = ".", ...)
+
 uses_testthat(pkg = ".")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{filter}{If not \code{NULL}, only tests with file names matching this
 regular expression will be executed.  Matching will take on the file
 name after it has been stripped of \code{"test-"} and \code{".R"}.}
 
-\item{...}{additional arguments passed to \code{\link[testthat]{test_dir}}}
+\item{...}{additional arguments passed to \code{\link[testthat:test_dir]{testthat::test_dir()}} and
+\code{\link[covr:package_coverage]{covr::package_coverage()}}}
 }
 \description{
-Tests are assumed to be located in either the \code{inst/tests/} or
-\code{tests/testthat} directory (the latter is recommended).
-See \code{\link[testthat]{test_dir}} for the naming convention of test
-scripts within one of those directories and
-\code{\link[testthat]{test_check}} for the folder structure conventions.
-}
-\details{
-If no testing infrastructure is present
-(detected by the \code{uses_testthat} function), you'll be asked if you want
-devtools to create it for you (in interactive sessions only). See
-\code{\link{use_test}} for more details.
+\code{test()} is a shortcut for \code{\link[testthat:test_dir]{testthat::test_dir()}}.
+\code{test_coverage()} is a shortcut for \code{\link[covr:package_coverage]{covr::package_coverage()}}.
 }
