@@ -65,5 +65,5 @@ devtools_default_options <- list(
 }
 
 .onAttach <- function(libname, pkgname) {
-  suppressPackageStartupMessages(library("usethis"))
+  suppressPackageStartupMessages((get("library", baseenv()))("usethis"))
 }
