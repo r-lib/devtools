@@ -44,6 +44,9 @@
 #'   rerun \code{\link{document}} prior to checking. Use \code{TRUE}
 #'   and \code{FALSE} to override this default.
 #' @param build_args Additional arguments passed to \code{R CMD build}
+#' @param check_dir This argument is ignored, and exists only for backwards
+#'   compatibility. \code{args = "--output=/foo/bar"} can be used to change the
+#'   check directory.
 #' @param ... Additional arguments passed on to \code{\link[pkgbuild]{build}()}.
 #' @seealso \code{\link{release}} if you want to send the checked package to
 #'   CRAN.
@@ -59,7 +62,8 @@ check <- function(pkg = ".",
                   run_dont_test = FALSE,
                   args = NULL,
                   env_vars = NULL,
-                  quiet = FALSE) {
+                  quiet = FALSE,
+                  check_dir) {
   pkg <- as.package(pkg)
 
   if (rstudioapi::hasFun("documentSaveAll")) {
