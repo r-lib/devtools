@@ -63,7 +63,7 @@ release <- function(pkg = ".", check = TRUE, args = NULL, spelling = "en_US") {
       return(invisible())
   }
 
-  if (length(spelling)) {
+  if (length(spelling) && is_installed("spelling")) {
     cat("Spell checking documentation...\n")
     print(spell_check(pkg, lang = spelling))
     cat("\n")
