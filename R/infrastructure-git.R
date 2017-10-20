@@ -2,6 +2,7 @@
 #' @export
 use_git <- function(message = "Initial commit", pkg = ".") {
   .Deprecated("usethis::use_git()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_git(message = message)
 }
 
@@ -41,6 +42,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
                        host = "https://api.github.com",
                        protocol = c("ssh", "https"), credentials = NULL, ...) {
   .Deprecated("usethis::use_github()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_github(auth_token = auth_token, private = private, host = host,
                       protocol = protocol, credentials = credentials, ...)
 }
@@ -49,6 +51,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
 #' @export
 use_git_hook <- function(hook, script, pkg = ".") {
   .Deprecated("usethis::use_git_hook()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_git_hook(hook = hook, script = script)
 }
 
@@ -72,5 +75,6 @@ use_git_ignore <- function(ignores, directory = ".", pkg = ".", quiet = FALSE) {
 use_github_links <- function(pkg = ".", auth_token = github_pat(),
                              host = "https://api.github.com") {
   .Deprecated("usethis::use_github_links()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_github_links(auth_token = auth_token, host = host)
 }

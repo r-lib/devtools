@@ -5,6 +5,7 @@
 #' @export
 use_testthat <- function(pkg = ".") {
   .Deprecated("usethis::use_testthat()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_testthat()
 }
 
@@ -12,6 +13,7 @@ use_testthat <- function(pkg = ".") {
 #' @export
 use_test <- function(name, pkg = ".") {
   .Deprecated("usethis::use_test()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_test(name = name)
 }
 
@@ -19,6 +21,7 @@ use_test <- function(name, pkg = ".") {
 #' @export
 use_rstudio <- function(pkg = ".") {
   .Deprecated("usethis::use_rstudio()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_rstudio()
 }
 
@@ -26,6 +29,7 @@ use_rstudio <- function(pkg = ".") {
 #' @export
 use_vignette <- function(name, pkg = ".") {
   .Deprecated("usethis::use_vignette()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_vignette(name = name)
 }
 
@@ -33,6 +37,7 @@ use_vignette <- function(name, pkg = ".") {
 #' @export
 use_rcpp <- function(pkg = ".") {
   .Deprecated("usethis::use_rcpp()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_rcpp()
 }
 
@@ -40,6 +45,7 @@ use_rcpp <- function(pkg = ".") {
 #' @export
 use_travis <- function(pkg = ".", browse = interactive()) {
   .Deprecated("usethis::use_travis()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_travis(browse = browse)
 }
 
@@ -47,6 +53,7 @@ use_travis <- function(pkg = ".", browse = interactive()) {
 #' @export
 use_coverage <- function(pkg = ".", type = c("codecov", "coveralls")) {
   .Deprecated("usethis::use_coverage()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_coverage(type = type)
 }
 
@@ -54,6 +61,7 @@ use_coverage <- function(pkg = ".", type = c("codecov", "coveralls")) {
 #' @export
 use_appveyor <- function(pkg = ".") {
   .Deprecated("usethis::use_appveyor()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_appveyor()
 }
 
@@ -61,6 +69,7 @@ use_appveyor <- function(pkg = ".") {
 #' @export
 use_package_doc <- function(pkg = ".") {
   .Deprecated("usethis::use_package_doc()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_package_doc()
 }
 
@@ -68,6 +77,7 @@ use_package_doc <- function(pkg = ".") {
 #' @export
 use_package <- function(package, type = "Imports", pkg = ".") {
   .Deprecated("usethis::use_package()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_package(package = package, type = type)
 }
 
@@ -88,6 +98,7 @@ use_data <- usethis::use_data
 #' @export
 use_data_raw <- function(pkg = ".") {
   .Deprecated("usethis::use_data_raw()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_data_raw()
 }
 
@@ -95,6 +106,7 @@ use_data_raw <- function(pkg = ".") {
 #' @export
 use_build_ignore <- function(files, escape = TRUE, pkg = ".") {
   .Deprecated("usethis::use_build_ignore()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_build_ignore(files, escape = TRUE)
 }
 
@@ -102,6 +114,7 @@ use_build_ignore <- function(files, escape = TRUE, pkg = ".") {
 #' @export
 use_readme_rmd <- function(pkg = ".") {
   .Deprecated("usethis::use_readme_rmd()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_readme_rmd()
 }
 
@@ -109,6 +122,7 @@ use_readme_rmd <- function(pkg = ".") {
 #' @export
 use_readme_md <- function(pkg = ".") {
   .Deprecated("usethis::use_readme_md()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_readme_md()
 }
 
@@ -116,6 +130,7 @@ use_readme_md <- function(pkg = ".") {
 #' @export
 use_news_md <- function(pkg = ".") {
   .Deprecated("usethis::use_news_md()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_news_md()
 }
 
@@ -123,6 +138,7 @@ use_news_md <- function(pkg = ".") {
 #' @export
 use_revdep <- function(pkg = ".") {
   .Deprecated("usethis::use_revdep()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_revdep()
 }
 
@@ -130,6 +146,7 @@ use_revdep <- function(pkg = ".") {
 #' @export
 use_cran_comments <- function(pkg = ".") {
   .Deprecated("usethis::use_cran_comments()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_cran_comments()
 }
 
@@ -137,6 +154,7 @@ use_cran_comments <- function(pkg = ".") {
 #' @export
 use_code_of_conduct <- function(pkg = ".") {
   .Deprecated("usethis::use_code_of_conduct()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_code_of_conduct()
 }
 
@@ -144,6 +162,7 @@ use_code_of_conduct <- function(pkg = ".") {
 #' @export
 use_cran_badge <- function(pkg = ".") {
   .Deprecated("usethis::use_cran_badge()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_cran_badge()
 }
 
@@ -152,6 +171,7 @@ use_cran_badge <- function(pkg = ".") {
 use_mit_license <- function(pkg = ".",
                            copyright_holder = getOption("devtools.name", "<Author>")) {
   .Deprecated("usethis::use_mit_license()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_mit_license(copyright_holder = copyright_holder)
 }
 
@@ -159,6 +179,7 @@ use_mit_license <- function(pkg = ".",
 #' @export
 use_gpl3_license <- function(pkg = ".") {
   .Deprecated("usethis::use_gpl3_license()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_gpl3_license()
 }
 
@@ -166,6 +187,7 @@ use_gpl3_license <- function(pkg = ".") {
 #' @export
 use_dev_version <- function(pkg = ".") {
   .Deprecated("usethis::use_dev_version()", package = "devtools")
+  warn_unless_current_dir(pkg)
   usethis::use_dev_version()
 }
 
