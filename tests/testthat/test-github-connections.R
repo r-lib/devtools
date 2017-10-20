@@ -32,7 +32,7 @@ test_that("GitHub non-usage is handled", {
 
   expect_identical(github_dummy, github_info(test_pkg))
 
-  expect_error(use_github_links(test_pkg), "Cannot detect .* GitHub")
+  expect_error(usethis::use_github_links(), "Cannot detect .* GitHub")
 
   erase(test_pkg)
 
@@ -58,7 +58,7 @@ test_that("github info and links can be queried and manipulated", {
   desc <- read_dcf(desc_path)
 
   ## default GitHub links created by use_github_links() via use_github()
-  expect_identical(desc[["Url"]],
+  expect_identical(desc[["URL"]],
                    file.path("https://github.com",
                              gh_info$username, gh_info$repo))
   expect_identical(desc[["BugReports"]],
