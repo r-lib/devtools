@@ -1,19 +1,13 @@
 #' Execute all \pkg{test_that} tests in a package.
 #'
-#' Tests are assumed to be located in either the \code{inst/tests/} or
-#' \code{tests/testthat} directory (the latter is recommended).
-#' See \code{\link[testthat]{test_dir}} for the naming convention of test
-#' scripts within one of those directories and
-#' \code{\link[testthat]{test_check}} for the folder structure conventions.
+#' `test()` is a shortcut for [testthat::test_dir()].
+#' `test_coverage()` is a shortcut for [covr::package_coverage()].
 #'
-#' If no testing infrastructure is present
-#' (detected by the \code{uses_testthat} function), you'll be asked if you want
-#' devtools to create it for you (in interactive sessions only). See
-#' \code{\link{use_test}} for more details.
-#'
+#' @md
 #' @param pkg package description, can be path or package name. See
-#'   \code{\link{as.package}} for more information
-#' @param ... additional arguments passed to \code{\link[testthat]{test_dir}}
+#'   [as.package()] for more information
+#' @param ... additional arguments passed to [testthat::test_dir()] and
+#'   [covr::package_coverage()]
 #' @inheritParams testthat::test_dir
 #' @inheritParams run_examples
 #' @export
@@ -66,6 +60,19 @@ test <- function(pkg = ".", filter = NULL, ...) {
 
   withr::with_envvar(r_env_vars(),
     do.call(testthat::test_dir, testthat_args))
+}
+
+#' @export
+#' @rdname test
+test_coverage <- function(pkg = ".", ...) {
+  pkg <- as.package(pkg)
+
+  check_suggested("covr")
+
+  coverage <- covr::package_coverage(pkg$path, ...)
+  covr::report(coverage)
+
+  invisible(coverage)
 }
 
 find_test_dir <- function(path) {

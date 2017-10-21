@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* New `test_coverage()` provides helper to compute test coverage using covr
+  (#1628).
+
 * `build_win()` has been renamed to `check_win_release()`, `check_win_devel()`,
   `check_win_oldrelease()` (#1598).
 
