@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `release()` has been tweaked to reflect modern submission workflow and to 
+  ask questions rather than running code for you (#1632). 
+
 * New `test_coverage()` provides helper to compute test coverage using covr
   (#1628).
 

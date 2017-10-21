@@ -8,10 +8,11 @@
 #' @keywords internal
 git_checks <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  message("Running Git checks for ", pkg$package)
+  rule("Running Git checks for ", pkg$package)
 
   git_check_uncommitted(pkg)
   git_check_sync_status(pkg)
+  rule()
 }
 
 git_check_uncommitted <- function(pkg) {

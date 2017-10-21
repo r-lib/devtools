@@ -4,7 +4,7 @@
 \alias{release}
 \title{Release package to CRAN.}
 \usage{
-release(pkg = ".", check = TRUE, args = NULL, spelling = "en_US")
+release(pkg = ".", check = FALSE, args = NULL, spelling = "en_US")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -28,18 +28,14 @@ Run automated and manual tests, then ftp to CRAN.
 The package release process will:
 
 \itemize{
-
-\item Confirm that the package passes \code{R CMD check}
-  \item Ask if you've checked your code on win-builder
-  \item Confirm that news is up-to-date
-  \item Confirm that DESCRIPTION is ok
-  \item Ask if you've checked packages that depend on your package
+  \item Confirm that the package passes \code{R CMD check} on relevant platoforms
+  \item Confirm that important files are up-to-date
   \item Build the package
   \item Submit the package to CRAN, using comments in "cran-comments.md"
 }
 
-You can also add arbitrary extra questions by defining an (un-exported)
-function called \code{release_questions()} that returns a character vector
+You can add arbitrary extra questions by defining an (un-exported) function
+called \code{release_questions()} that returns a character vector
 of additional questions to ask.
 
 You also need to read the CRAN repository policy at

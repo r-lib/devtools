@@ -9,13 +9,15 @@
 #' @export
 release_checks <- function(pkg = ".", built_path = NULL) {
   pkg <- as.package(pkg)
-  message("Running additional devtools checks for ", pkg$package)
+  rule("Running additional devtools checks for ", pkg$package)
 
   check_version(pkg)
   check_dev_versions(pkg)
   check_vignette_titles(pkg)
   check_news_md(pkg)
   check_remotes(pkg)
+
+  rule()
 }
 
 check_dev_versions <- function(pkg = ".") {

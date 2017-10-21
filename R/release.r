@@ -5,18 +5,14 @@
 #' The package release process will:
 #'
 #' \itemize{
-#'
-#'   \item Confirm that the package passes \code{R CMD check}
-#'   \item Ask if you've checked your code on win-builder
-#'   \item Confirm that news is up-to-date
-#'   \item Confirm that DESCRIPTION is ok
-#'   \item Ask if you've checked packages that depend on your package
+#'   \item Confirm that the package passes \code{R CMD check} on relevant platoforms
+#'   \item Confirm that important files are up-to-date
 #'   \item Build the package
 #'   \item Submit the package to CRAN, using comments in "cran-comments.md"
 #' }
 #'
-#' You can also add arbitrary extra questions by defining an (un-exported)
-#' function called \code{release_questions()} that returns a character vector
+#' You can add arbitrary extra questions by defining an (un-exported) function
+#' called \code{release_questions()} that returns a character vector
 #' of additional questions to ask.
 #'
 #' You also need to read the CRAN repository policy at
@@ -43,7 +39,7 @@
 #' See \code{\link[spelling:spell_check_package]{spelling}} package. Set to
 #' \code{NULL} to skip spell checking.
 #' @export
-release <- function(pkg = ".", check = TRUE, args = NULL, spelling = "en_US") {
+release <- function(pkg = ".", check = FALSE, args = NULL, spelling = "en_US") {
   pkg <- as.package(pkg)
   # Figure out if this is a new package
   cran_version <- cran_pkg_version(pkg$package)
@@ -57,26 +53,12 @@ release <- function(pkg = ".", check = TRUE, args = NULL, spelling = "en_US") {
       return(invisible())
   }
 
-  if (uses_git(pkg$path)) {
-    git_checks(pkg)
-    if (yesno("Were Git checks successful?"))
-      return(invisible())
-  }
-
-  if (length(spelling) && is_installed("spelling")) {
-    cat("Spell checking documentation...\n")
-    print(spell_check(pkg, lang = spelling))
-    cat("\n")
-    if (yesno("Is documentation free of spelling errors? (you can ignore false positives)"))
-      return(invisible())
-  }
-
   if (check) {
     rule("Building and checking ", pkg$package, pad = "=")
     check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE,
           build_args = args, run_dont_test = TRUE)
   }
-  if (yesno("Was R CMD check successful?"))
+  if (yesno("Have you run `R CMD check` locally?"))
     return(invisible())
 
   release_checks(pkg)
@@ -90,53 +72,52 @@ release <- function(pkg = ".", check = TRUE, args = NULL, spelling = "en_US") {
       return(invisible())
   }
 
-  if (pkgbuild::pkg_has_src(pkg$path)) {
-    if (yesno("Have you run R CMD check with valgrind?"))
-      return(invisible())
-  }
+  if (yesno("Have you checked on R-hub (with `check_rhub()`)?"))
+    return(invisible())
+
+  if (yesno("Have you checked on win-builder (with `check_win_devel()`)?"))
+    return(invisible())
 
   deps <- if (new_pkg) 0 else length(revdep(pkg$package))
   if (deps > 0) {
-    msg <- paste0("Have you checked the ", deps ," packages that depend on ",
-      "this package (with revdep_check())?")
-
+    msg <- paste0(
+      "Have you checked the ", deps , " reverse dependencies ",
+      "(with the revdepcheck package)?"
+    )
     if (yesno(msg))
       return(invisible())
   }
 
-  if (yesno("Have you checked on win-builder (with build_win())?"))
-    return(invisible())
-
-  if (yesno("Have you updated your NEWS file?"))
-    return(invisible())
-
-  rule("DESCRIPTION")
-  cat(readLines(file.path(pkg$path, "DESCRIPTION")), sep = "\n")
-  cat("\n")
-  if (yesno("Is DESCRIPTION up-to-date?"))
-    return(invisible())
-
-  release_questions <- pkgload::ns_env(pkg$package)$release_questions
-  if (!is.null(release_questions)) {
-    questions <- release_questions()
-    for (question in questions) {
-      if (yesno(question)) return(invisible())
-    }
+  questions <- c(
+    "Have you updated `NEWS.md` file?",
+    "Have you updated `DESCRIPTION`?",
+    "Have you updated `cran-comments.md?`",
+    find_release_questions()
+  )
+  for (question in questions) {
+    if (yesno(question)) return(invisible())
   }
 
-  rule("cran-comments.md")
-  cat(cran_comments(pkg), "\n\n")
-  if (yesno("Are the CRAN submission comments correct?"))
-    return(invisible())
-
-  if (yesno("Is your email address ", maintainer(pkg)$email, "?"))
-    return(invisible())
+  if (uses_git(pkg$path)) {
+    git_checks(pkg)
+    if (yesno("Were Git checks successful?"))
+      return(invisible())
+  }
 
   submit_cran(pkg, args = args)
 
-  flag_release(pkg)
-
   invisible(TRUE)
+}
+
+find_release_questions <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  q_fun <- pkgload::ns_env(pkg$package)$release_questions
+  if (is.null(q_fun)) {
+    character()
+  } else {
+    q_fun()
+  }
 }
 
 release_email <- function(name, new_pkg) {
@@ -262,12 +243,17 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #' @export
 #' @keywords internal
 submit_cran <- function(pkg = ".", args = NULL) {
+  if (yesno("Is your email address ", maintainer(pkg)$email, "?"))
+    return(invisible())
+
   if (yesno("Ready to submit to CRAN?"))
     return(invisible())
 
   pkg <- as.package(pkg)
   built_path <- build_cran(pkg, args = args)
   upload_cran(pkg, built_path)
+
+  flag_release(pkg)
 }
 
 build_cran <- function(pkg, args) {
