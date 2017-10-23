@@ -2,19 +2,19 @@
 % Please edit documentation in R/r-hub.R
 \name{check_rhub}
 \alias{check_rhub}
-\title{Build and check package on r-hub}
+\title{Run CRAN checks for package on r-hub}
 \usage{
-check_rhub(pkg = ".", platform = NULL, email = NULL,
-  interactive = FALSE, ...)
+check_rhub(pkg = ".", platforms = NULL, email = NULL,
+  interactive = TRUE, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
 \code{\link{as.package}} for more information}
 
-\item{platform}{the r-hub platform to run the check on. See
-\code{\link[rhub]{platforms}} for the current platform list.
-if \code{NULL}, then the desired platform can be selected
-interactively.}
+\item{platforms}{R-hub platforms to run the check on. If \code{NULL}
+uses default list of CRAN checkers (one for each major platform, and
+one with extra checks if you have compiled code). You can also specify
+your own, see \code{\link[rhub]{platforms}} for a complete list.}
 
 \item{email}{email address to notify, defaults to the maintainer
 address in the package.}

@@ -1,5 +1,5 @@
 
-#' Build and check package on r-hub
+#' Run CRAN checks for package on r-hub
 #'
 #' It runs \code{\link{build}} on the package, with the arguments specified
 #' in \code{args}, and then submits it to the r-hub builder at
@@ -13,10 +13,10 @@
 #' email address. This is because r-hub sends out emails about build
 #' results. See more at \code{\link[rhub]{validate_email}}.
 #'
-#' @param platform the r-hub platform to run the check on. See
-#'   \code{\link[rhub]{platforms}} for the current platform list.
-#'   if \code{NULL}, then the desired platform can be selected
-#'   interactively.
+#' @param platforms R-hub platforms to run the check on. If \code{NULL}
+#'   uses default list of CRAN checkers (one for each major platform, and
+#'   one with extra checks if you have compiled code). You can also specify
+#'   your own, see \code{\link[rhub]{platforms}} for a complete list.
 #' @param email email address to notify, defaults to the maintainer
 #'   address in the package.
 #' @param interactive whether to show the status of the build
@@ -29,21 +29,22 @@
 #'
 #' @export
 
-check_rhub <- function(pkg = ".", platform = NULL, email = NULL,
-                       interactive = FALSE, ...) {
+check_rhub <- function(pkg = ".",
+                       platforms = NULL,
+                       email = NULL,
+                       interactive = TRUE,
+                       ...) {
 
   check_suggested("rhub")
-
   pkg <- as.package(pkg)
-  email <- email %||% maintainer(pkg)$email
 
   built_path <- build(pkg$path, tempdir(), quiet = !interactive, ...)
   on.exit(unlink(built_path), add = TRUE)
 
-  status <- rhub::check(
-    built_path,
+  status <- rhub::check_for_cran(
+    path = built_path,
     email = email,
-    platform = platform,
+    platforms = platforms,
     show_status = interactive
   )
 
