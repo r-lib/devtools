@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* Now use cli package to draw rules - they are more aesthetically pleasing
+  and the correct width in the RStudio build pane (#1627).
+
 * `release()` has been tweaked to reflect modern submission workflow and to 
   ask questions rather than running code for you (#1632). 
 

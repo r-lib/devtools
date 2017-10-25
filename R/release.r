@@ -54,7 +54,11 @@ release <- function(pkg = ".", check = FALSE, args = NULL, spelling = "en_US") {
   }
 
   if (check) {
-    rule("Building and checking ", pkg$package, pad = "=")
+    cat_rule(
+      left = "Building and checking",
+      right = pkg$package,
+      line = 2
+    )
     check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE,
           build_args = args, run_dont_test = TRUE)
   }

@@ -93,7 +93,11 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
       call. = FALSE)
   }
 
-  rule("Reverse dependency checks for ", pkg$package, pad = "=")
+  cat_rule(
+    left = "Reverse dependency checks",
+    right = pkg$package,
+    line = 2
+  )
 
   if (is.null(check_dir)) {
     check_dir <- file.path(pkg$path, "revdep", "checks")
@@ -228,11 +232,11 @@ revdep_check_from_cache <- function(pkg, cache) {
 
   do.call(check_cran, cache)
 
-  rule("Saving check results to `revdep/check.rds`")
+  cat_rule("Saving check results to `revdep/check.rds`")
   revdep_check_save(pkg, cache$revdeps, cache$check_dir, cache$libpath)
 
   # Delete cache and check_dir on successful run
-  rule("Cleaning up")
+  cat_rule("Cleaning up")
   revdep_check_reset(pkg)
   unlink(revdep_cache_path(pkg))
   unlink(cache$check_dir, recursive = TRUE)

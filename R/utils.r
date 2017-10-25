@@ -16,16 +16,6 @@ compact <- function(x) {
   get(f, envir = asNamespace(p))
 }
 
-rule <- function(..., pad = "-") {
-  if (nargs() == 0) {
-    title <- ""
-  } else {
-    title <- paste0(..., " ")
-  }
-  width <- max(getOption("width") - nchar(title) - 1, 0)
-  message(title, paste(rep(pad, width, collapse = "")))
-}
-
 # check whether the specified file ends with newline
 ends_with_newline <- function(path) {
   conn <- file(path, open = "rb", raw = TRUE)

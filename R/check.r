@@ -81,7 +81,10 @@ check <- function(pkg = ".",
 
   if (!quiet) {
     show_env_vars(pkgbuild::compiler_flags(FALSE))
-    rule("Building ", pkg$package)
+    cat_rule(
+      left = "Building",
+      right = pkg$package
+    )
   }
 
   withr::with_envvar(pkgbuild::compiler_flags(FALSE), action = "prefix", {
@@ -159,7 +162,10 @@ check_built <- function(path = NULL, cran = TRUE,
   env_vars <- check_env_vars(cran, check_version, force_suggests, env_vars)
   if (!quiet) {
     show_env_vars(env_vars)
-    rule("Checking ", pkgname)
+    cat_rule(
+      left = "Checking",
+      right = pkgname
+    )
   }
 
   withr::with_envvar(env_vars, action = "prefix", {
@@ -168,7 +174,7 @@ check_built <- function(path = NULL, cran = TRUE,
 }
 
 check_env_vars <- function(cran = FALSE, check_version = FALSE,
-                           force_suggests = TRUE, env_vars) {
+                           force_suggests = TRUE, env_vars = character()) {
   c(
     aspell_env_var(),
     "_R_CHECK_CRAN_INCOMING_" = as.character(check_version),
@@ -185,6 +191,6 @@ aspell_env_var <- function() {
 }
 
 show_env_vars <- function(env_vars) {
-  rule("Setting env vars")
-  message(paste0(format(names(env_vars)), ": ", unname(env_vars), collapse = "\n"))
+  cat_rule("Setting env vars", line = 2)
+  cat_bullet(paste0(format(names(env_vars)), ": ", unname(env_vars)))
 }

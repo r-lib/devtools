@@ -16,6 +16,7 @@ Depends:
     R (>= 3.0.2)
 Imports: 
     callr,
+    cli,
     digest,
     git2r (>= 0.12.1),
     httr (>= 0.4),
@@ -56,6 +57,7 @@ Encoding: UTF-8
 Remotes: hadley/testthat,
     r-hub/rhub,
     r-lib/callr,
+    r-lib/cli,
     r-lib/pkgbuild,
     r-lib/pkgload,
     r-lib/sessioninfo,

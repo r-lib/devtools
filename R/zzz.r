@@ -1,6 +1,7 @@
 #' @importFrom utils available.packages contrib.url install.packages
 #'   installed.packages menu modifyList packageDescription
 #'   packageVersion remove.packages
+#' @importFrom cli cat_rule cat_line cat_bullet
 NULL
 
 #' Package development tools for R.

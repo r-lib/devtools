@@ -47,7 +47,10 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
   if (length(files) == 0)
     return()
 
-  rule("Running ", length(files), " example files in ", pkg$package)
+  cat_rule(
+    left = paste0("Running ", length(files), " example files"),
+    right = pkg$package
+  )
 
   load_all(pkg$path, reset = TRUE, export_all = FALSE)
   on.exit(load_all(pkg$path, reset = TRUE))
