@@ -5,7 +5,7 @@
 \title{Load complete package.}
 \usage{
 load_all(path = ".", reset = TRUE, recompile = FALSE, export_all = TRUE,
-  helpers = TRUE, recollate = FALSE, quiet = FALSE, ...)
+  helpers = TRUE, quiet = FALSE, ...)
 }
 \arguments{
 \item{path}{Path to a package, or within a package.}
@@ -25,8 +25,6 @@ If \code{FALSE}, export only the objects that are listed as exports
 in the NAMESPACE file.}
 
 \item{helpers}{if \code{TRUE} loads \pkg{testthat} test helpers.}
-
-\item{recollate}{if \code{TRUE}, run \code{\link[roxygen2:update_collate]{roxygen2::update_collate()}} before loading.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
