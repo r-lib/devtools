@@ -37,6 +37,7 @@ check_win_oldrelease <- function(pkg = ".", args = NULL, quiet = FALSE) {
 check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelease"),
                       args = NULL, quiet = FALSE) {
 
+  pkg <- as.package(pkg)
   version <- match.arg(version, several.ok = TRUE)
 
   if (!quiet) {
