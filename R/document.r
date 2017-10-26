@@ -31,7 +31,7 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
 
   # Refresh the pkg structure with any updates to the Collate entry
   # in the DESCRIPTION file
-  roxygen2::update_collate(path)
+  roxygen2::update_collate(pkg$path)
 
   load_all(pkg$path)
 
