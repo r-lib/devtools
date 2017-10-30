@@ -80,11 +80,13 @@ check <- function(pkg = ".",
   }
 
   if (!quiet) {
-    show_env_vars(pkgbuild::compiler_flags(FALSE))
     cat_rule(
       left = "Building",
-      right = pkg$package
+      right = pkg$package,
+      background_col = "blue",
+      col = "white"
     )
+    show_env_vars(pkgbuild::compiler_flags(FALSE))
   }
 
   withr::with_envvar(pkgbuild::compiler_flags(FALSE), action = "prefix", {
@@ -161,11 +163,13 @@ check_built <- function(path = NULL, cran = TRUE,
 
   env_vars <- check_env_vars(cran, check_version, force_suggests, env_vars)
   if (!quiet) {
-    show_env_vars(env_vars)
     cat_rule(
       left = "Checking",
-      right = pkgname
+      right = pkgname,
+      background_col = "blue",
+      col = "white"
     )
+    show_env_vars(env_vars)
   }
 
   withr::with_envvar(env_vars, action = "prefix", {
@@ -191,6 +195,7 @@ aspell_env_var <- function() {
 }
 
 show_env_vars <- function(env_vars) {
-  cat_rule("Setting env vars", line = 2)
-  cat_bullet(paste0(format(names(env_vars)), ": ", unname(env_vars)))
+  cat_line("Setting env vars:", col = "darkgrey")
+  cat_bullet(paste0(format(names(env_vars)), ": ", unname(env_vars)), col = "darkgrey")
+  cat_rule(col = "darkgrey")
 }
