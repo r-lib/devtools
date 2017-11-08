@@ -1,5 +1,5 @@
 #' @importFrom utils available.packages contrib.url install.packages
-#'   installed.packages menu modifyList packageDescription
+#'   installed.packages modifyList packageDescription
 #'   packageVersion remove.packages
 NULL
 

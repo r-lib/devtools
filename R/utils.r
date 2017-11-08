@@ -272,3 +272,7 @@ comma <- function(x, at_most = 20) {
   }
   paste(x, collapse = ", ")
 }
+
+menu <- function(...) {
+  utils::menu(...)
+}
