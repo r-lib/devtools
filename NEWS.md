@@ -2,12 +2,12 @@
 * Fix test errors for upcoming testthat release.
 
 # devtools 1.13.3
-Workaround a change in how Rcpp::compileAttributes stores the symbol names that
-broke tests.
+* Workaround a change in how Rcpp::compileAttributes stores the symbol names
+  that broke tests.
 
 # devtools 1.13.2
-Workaround a regression in Rcpp::compileAttributes.
-Add trimws implementation for R 3.1 support.
+* Workaround a regression in Rcpp::compileAttributes. Add trimws implementation
+  for R 3.1 support.
 
 # devtools 1.13.1
 
