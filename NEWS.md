@@ -1,3 +1,6 @@
+# devtools 1.13.4
+* Fix test errors for upcoming testthat release.
+
 # devtools 1.13.3
 Workaround a change in how Rcpp::compileAttributes stores the symbol names that
 broke tests.
