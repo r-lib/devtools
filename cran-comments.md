@@ -1,11 +1,10 @@
-This is a point release working around a Rcpp regression that broke devtools
-tests (https://github.com/RcppCore/Rcpp/pull/725).
+This is a point release fixing tests which fill fail in the upcoming testthat release.
 
 ## Test environments
 
-* local OS X install, R 3.4.0
+* local OS X install, R 3.4.2
 * Ubuntu 12.04 (on travis-ci), R-oldrel, R-release, R-devel
-* Windows Server 2012 R2 (x64), R 3.4.0
+* Windows Server 2012 R2 (x64), R 3.4.2
 * Rhub
   * Windows Server 2008 R2 SP1, R-devel, 32/64 bit
   * Debian Linux, R-devel, GCC ASAN/UBSAN
@@ -15,15 +14,10 @@ tests (https://github.com/RcppCore/Rcpp/pull/725).
 
 ## R CMD check results
 
-0 ERRORs | 0 WARNINGs | 1 NOTES.
-
-* Found the following (possibly) invalid URLs:
-  URL: https://cran.r-project.org/web/packages/policies.html
-
-  This is a false positive as this isn't a url to a package.
+0 ERRORs | 0 WARNINGs | 0 NOTES.
 
 ## Downstream dependencies
 
-* This change differs from the previous release only in a example package used
-  by the tests. Nonetheless I ran reverse dependency checks on all 190
-  dependencies. There were no new failures introduced by these changes.
+* This change differs from the previous release only by changes to the tests.
+  Nonetheless I ran reverse dependency checks on all 222
+  dependencies. There were no failures caused by these changes.
