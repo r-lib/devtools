@@ -24,7 +24,7 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
 
-  if (rstudioapi::isAvailable() && rstudioapi::hasFun("documentSaveAll")) {
+  if (rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
 
