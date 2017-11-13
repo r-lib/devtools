@@ -2,15 +2,13 @@
 #' @param ... Additional arguments passed to [pkgload::load].
 #' @export
 load_all <- function(path = ".", reset = TRUE, recompile = FALSE,
-                     export_all = TRUE, helpers = TRUE, recollate = FALSE,
-                     quiet = FALSE, ...) {
+                     export_all = TRUE, helpers = TRUE, quiet = FALSE, ...) {
   if (rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
   }
 
   pkgload::load_all(path = path, reset = reset, recompile = recompile,
-    export_all = export_all, helpers = helpers, recollate = recollate,
-    quiet = quiet, ...)
+    export_all = export_all, helpers = helpers, quiet = quiet, ...)
 }
 
 #' @importFrom pkgload unload
