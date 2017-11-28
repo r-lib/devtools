@@ -1,6 +1,6 @@
 #' Install a package from a Bioconductor repository
 #'
-#' This function requires \code{svn} to be installed on your system in order to
+#' This function requires \code{git} to be installed on your system in order to
 #' be used.
 #'
 #' It is vectorised so you can install multiple packages with
@@ -9,93 +9,87 @@
 #' '
 #' @inheritParams install_git
 #' @param repo Repository address in the format
-#'   \code{[username:password@@][release/]repo[#revision]}. Valid values for
+#'   \code{[release/]repo[#revision]}. Valid values for
 #'   the release are \sQuote{devel} (the default if none specified),
 #'   \sQuote{release} or numeric release numbers (e.g. \sQuote{3.3}).
-#' @param mirror The bioconductor SVN mirror to use
+#' @param mirror The bioconductor git mirror to use
 #' @param ... Other arguments passed on to \code{\link{install}}
 #' @export
 #' @family package installation
 #' @examples
 #' \dontrun{
 #' install_bioc("SummarizedExperiment")
-#' install_bioc("user@SummarizedExperiment")
-#' install_bioc("user:password@release/SummarizedExperiment")
-#' install_bioc("user:password@3.3/SummarizedExperiment")
-#' install_bioc("user:password@3.3/SummarizedExperiment#117513")
+#' install_bioc("release/SummarizedExperiment")
+#' install_bioc("3.3/SummarizedExperiment")
+#' install_bioc("3.3/SummarizedExperiment#117513")
 #'}
-install_bioc <- function(repo, mirror = getOption("BioC_svn", "https://hedgehog.fhcrc.org/bioconductor"), ..., quiet = FALSE) {
+install_bioc <- function(repo, mirror = getOption("BioC_git", "https://git.bioconductor.org/packages"), ..., quiet = FALSE) {
 
   remotes <- lapply(repo, bioc_remote, mirror = mirror)
 
   install_remotes(remotes, ..., quiet = quiet)
 }
 
-# Parse concise SVN repo specification: [username[:password]@][branch/]repo[#revision]
+# Parse concise git repo specification: [branch/]repo[#revision]
 parse_bioc_repo <- function(path) {
-  user_pass_rx <- "(?:(?:([^:]+):)?([^:@]+)@)?"
   release_rx <- "(?:(devel|release|[0-9.]+)/)?"
   repo_rx <- "([^/@#]+)"
   revision_rx <- "(?:[#][Rr]?([0-9]+))?"
-  bioc_rx <- sprintf("^(?:%s%s%s%s|(.*))$", user_pass_rx, release_rx, repo_rx, revision_rx)
+  bioc_rx <- sprintf("^(?:%s%s%s|(.*))$", release_rx, repo_rx, revision_rx)
 
-  param_names <- c("username", "password", "release", "repo", "revision", "invalid")
+  param_names <- c("release", "repo", "revision", "invalid")
   replace <- stats::setNames(sprintf("\\%d", seq_along(param_names)), param_names)
   params <- lapply(replace, function(r) gsub(bioc_rx, r, path, perl = TRUE))
   if (params$invalid != "")
     stop(sprintf("Invalid bioc repo: %s", path))
+
   params <- params[sapply(params, nchar) > 0]
 
-  if (!is.null(params$password) && is.null(params$username)) {
-    params$username <- params$password
-    params$password <- NULL
+  if (!is.null(params$release) && !is.null(params$revision)) {
+    stop("release and revision should not both be specified")
+  }
+
+  if (!is.null(params$release)) {
+    params$branch <- switch(
+      tolower(x$release),
+      devel = "master",
+      release = paste0("release_", bioconductor_release()),
+      master = "master",
+      paste0("release_", x$release)
+    )
+  }
+  if (!is.null(params$revision)) {
+    params$branch <- params$revision
   }
 
   params
 }
 
-bioc_remote <- function(repo, mirror = getOption("BioC_svn", "https://hedgehog.fhcrc.org/bioconductor")) {
+bioc_remote <- function(repo, mirror = getOption("BioC_git", "https://git.bioconductor.org/packages")) {
   meta <- parse_bioc_repo(repo)
-
-  meta$username <- meta$username %||% "readonly"
-
-  if (meta$username == "readonly") {
-    meta$password <- "readonly"
-  }
 
   remote("bioc",
     mirror = mirror,
-    username = meta$username,
-    password = meta$password,
     repo = meta$repo,
-    release = meta$release %||% "devel",
-    revision = meta$revision
+    url = paste0(mirror, "/", meta$repo),
+    release = meta$release %||% "master",
+    revision = meta$revision,
+    branch = meta$branch
   )
 }
 
 #' @export
 remote_download.bioc_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
-    message("Downloading Bioconductor repo ", x$repo)
+    message("Downloading git repo ", x$url)
   }
 
   bundle <- tempfile()
-  svn_binary_path <- svn_path()
+  git2r::clone(x$url, bundle, progress = FALSE)
 
-  args <- c(
-    "co",
-    bioc_args(x),
-    bioc_url(x),
-    bundle)
-
-  if (!quiet) {
-    message(svn_binary_path, " ", paste0(args, collapse = " "))
-  }
-  request <- system2(svn_binary_path, args, stdout = FALSE, stderr = FALSE)
-
-  # This is only looking for an error code above 0-success
-  if (request > 0) {
-    stop("Error retrieving Bioc Remote `", x$repo, "`", call. = FALSE)
+  if (!is.null(x$branch)) {
+    r <- git2r::repository(bundle)
+    git2r::checkout(r, x$branch)
   }
 
   bundle
@@ -103,24 +97,18 @@ remote_download.bioc_remote <- function(x, quiet = FALSE) {
 
 #' @export
 remote_metadata.bioc_remote <- function(x, bundle = NULL, source = NULL) {
-
   if (!is.null(bundle)) {
-    withr::with_dir(bundle, {
-      revision <- svn_revision()
-    })
+    r <- git2r::repository(bundle)
+    sha <- git_repo_sha1(r)
   } else {
-    revision <- NULL
+    sha <- NULL
   }
 
   list(
-    RemoteType = "bioc",
-    RemoteRepo = x$repo,
-    RemoteMirror = x$mirror,
-    RemoteRelease = x$release,
-    RemoteUsername = x$username,
-    RemotePassword = x$password,
-    RemoteRevision = revision,
-    RemoteSha = revision # for compatibility with other remotes
+    RemoteType = "git",
+    RemoteUrl = x$url,
+    RemoteRef = x$ref,
+    RemoteSha = sha
   )
 }
 
@@ -131,33 +119,28 @@ remote_package_name.bioc_remote <- function(remote, ...) {
 
 #' @export
 remote_sha.bioc_remote <- function(remote, ...) {
-  svn_revision(paste(c(bioc_args(remote), bioc_url(remote)), collapse = " "))
-}
-
-bioc_args <- function(x) {
-  args <- c(
-    if (!interactive()) {
-      "--non-interactive"
-    },
-    if (!is.null(x$revision)) {
-      c("--revision", x$revision)
-    },
-    "--username", x$username,
-    if (!is.null(x$password)) {
-      c("--password", x$password)
-    })
-}
-
-bioc_url <- function(x) {
-  to_svn_release <- function(x) {
-    sprintf("RELEASE_%s", sub("[.]", "_", x))
+  # If the remote ref is the same as the sha it is a pinned commit so just
+  # return that.
+  if (!is.null(remote$ref) &&
+      grepl(paste0("^", remote$ref), remote$sha)) {
+    return(remote$sha)
   }
 
-  switch(tolower(x$release),
-    devel = file.path(x$mirror, "trunk", "madman", "Rpacks", x$repo),
-    release = file.path(x$mirror, "branches", to_svn_release(bioconductor_release()), "madman", "Rpacks", x$repo),
-    file.path(x$mirror, "branches", to_svn_release(x$release), "madman", "Rpacks", x$repo))
+  tryCatch({
+    res <- git2r::remote_ls(remote$url, ...)
+
+    branch <- remote$branch %||% "master"
+
+    found <- grep(pattern = paste0("/", branch), x = names(res))
+
+    if (length(found) == 0) {
+      return(NA)
+    }
+
+    unname(res[found[1]])
+  }, error = function(e) NA_character_)
 }
+
 
 bioconductor_release <- memoise::memoise(function() {
   tmp <- tempfile()
