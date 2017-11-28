@@ -86,7 +86,7 @@ Check and release:
 
 ## Diaspora
 
-devtools started off as a lean-and-mean package to facilitate local package development, but over the years it accumulated more and more functionality. Currently devtools is under going a diaspora to split out functionality into smaller, more tightly focussed packages. The diaspora includes:
+devtools started off as a lean-and-mean package to facilitate local package development, but over the years it accumulated more and more functionality. Currently devtools is undergoing a diaspora to split out functionality into smaller, more tightly focussed packages. The diaspora includes:
 
 * [pkgbuild](https://github.com/r-lib/pkgbuild): Building binary packages
   (including checking if build tools are available).
