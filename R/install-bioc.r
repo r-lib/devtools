@@ -48,6 +48,9 @@ parse_bioc_repo <- function(path) {
   if (!is.null(params$release) && !is.null(params$revision)) {
     stop("release and revision should not both be specified")
   }
+  if (is.null(params$release) && is.null(params$revision)) {
+    params$release <- "release"
+  }
 
   if (!is.null(params$release)) {
     params$branch <- switch(
