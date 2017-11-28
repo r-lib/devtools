@@ -51,11 +51,11 @@ parse_bioc_repo <- function(path) {
 
   if (!is.null(params$release)) {
     params$branch <- switch(
-      tolower(x$release),
+      tolower(params$release),
       devel = "master",
-      release = paste0("release_", bioconductor_release()),
+      release = paste0("release-", bioconductor_release()),
       master = "master",
-      paste0("release_", x$release)
+      paste0("release-", params$release)
     )
   }
   if (!is.null(params$revision)) {
