@@ -140,7 +140,10 @@ bioconductor_branch <- function(release, revision) {
   if (!is.null(revision)) {
     revision
   } else {
-    if (is.null(release) || release == "release") {
+    if (is.null(release)) {
+      release <- "devel"
+    }
+    if (release == "release") {
       release <- bioconductor_release()
     }
     switch(
