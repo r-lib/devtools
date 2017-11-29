@@ -9,7 +9,7 @@ install_bioc(repo, mirror = getOption("BioC_git",
 }
 \arguments{
 \item{repo}{Repository address in the format
-\code{[release/]repo[#revision]}. Valid values for
+\code{[username:password@][release/]repo[#revision]}. Valid values for
 the release are \sQuote{devel} (the default if none specified),
 \sQuote{release} or numeric release numbers (e.g. \sQuote{3.3}).}
 
@@ -34,7 +34,10 @@ a single command.
 install_bioc("SummarizedExperiment")
 install_bioc("release/SummarizedExperiment")
 install_bioc("3.3/SummarizedExperiment")
-install_bioc("3.3/SummarizedExperiment#117513")
+install_bioc("3.3/SummarizedExperiment#abc123")
+install_bioc("user:password@release/SummarizedExperiment")
+install_bioc("user:password@devel/SummarizedExperiment")
+install_bioc("user:password@SummarizedExperiment#abc123")
 }
 }
 \seealso{
