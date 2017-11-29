@@ -21,7 +21,7 @@
 #' install_bioc("SummarizedExperiment")
 #' install_bioc("release/SummarizedExperiment")
 #' install_bioc("3.3/SummarizedExperiment")
-#' install_bioc("3.3/SummarizedExperiment#abc123")
+#' install_bioc("SummarizedExperiment#abc123")
 #' install_bioc("user:password@release/SummarizedExperiment")
 #' install_bioc("user:password@devel/SummarizedExperiment")
 #' install_bioc("user:password@SummarizedExperiment#abc123")
