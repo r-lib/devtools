@@ -65,13 +65,13 @@ bioc_remote <- function(repo, mirror = getOption("BioC_git", "https://git.biocon
   }
 
   remote("bioc",
-    mirror = mirror,
-    repo = meta$repo,
-    url = paste0(mirror, "/", meta$repo),
-    release = meta$release %||% "release",
-    revision = meta$revision,
-    branch = branch,
-    credentials = meta$credentials
+         mirror = mirror,
+         repo = meta$repo,
+         url = paste0(mirror, "/", meta$repo),
+         release = meta$release %||% "release",
+         revision = meta$revision,
+         branch = branch,
+         credentials = meta$credentials
   )
 }
 
@@ -126,7 +126,7 @@ remote_sha.bioc_remote <- function(remote, ...) {
   tryCatch({
     res <- git2r::remote_ls(remote$url, credentials=remote$credentials, ...)
 
-    found <- grep(pattern = paste0("/", gsub("[-\\.]", "_", toupper(branch))), x = names(res))
+    found <- grep(pattern = paste0("/", renote$branch), x = names(res))
 
     if (length(found) == 0) {
       return(NA)
@@ -140,15 +140,13 @@ bioconductor_branch <- function(release, revision) {
   if (!is.null(revision)) {
     revision
   } else {
-    if (is.null(release)) {
-      release <- "release"
+    if (is.null(release) || release == "release") {
+      release <- bioconductor_release()
     }
     switch(
       tolower(release),
       devel = "master",
-      master = "master",
-      release = paste0("release-", bioconductor_release()),
-      paste0("release-", release)
+      paste0("RELEASE_",  gsub("\\.", "_", release))
     )
   }
 }
@@ -158,7 +156,7 @@ bioconductor_release <- memoise::memoise(function() {
   download.file("http://bioconductor.org/config.yaml", tmp, quiet = TRUE)
 
   gsub("release_version:[[:space:]]+\"([[:digit:].]+)\"", "\\1",
-    grep("release_version:", readLines(tmp), value = TRUE))
+       grep("release_version:", readLines(tmp), value = TRUE))
 })
 
 format.bioc_remote <- function(x, ...) {
