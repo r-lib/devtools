@@ -58,6 +58,10 @@ parse_bioc_repo <- function(path) {
 bioc_remote <- function(repo, mirror = getOption("BioC_git", "https://git.bioconductor.org/packages")) {
   meta <- parse_bioc_repo(repo)
 
+  if (is.null(meta$release) && is.null(meta$revision)) {
+    meta$branch <- "release"
+  }
+
   if (!is.null(meta$release)) {
     meta$branch <- switch(
       tolower(meta$release),
