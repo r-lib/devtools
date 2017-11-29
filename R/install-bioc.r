@@ -134,7 +134,7 @@ remote_sha.bioc_remote <- function(remote, ...) {
   }
 
   tryCatch({
-    res <- git2r::remote_ls(remote$url, credentials=x$credentials, ...)
+    res <- git2r::remote_ls(remote$url, credentials=remote$credentials, ...)
 
     branch <- remote$branch %||% "master"
 
