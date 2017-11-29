@@ -78,7 +78,7 @@ bioc_remote <- function(repo, mirror = getOption("BioC_git", "https://git.biocon
 #' @export
 remote_download.bioc_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
-    message("Downloading git repo ", x$url)
+    message("Downloading Bioconductor repo ", x$url)
   }
 
   bundle <- tempfile()
