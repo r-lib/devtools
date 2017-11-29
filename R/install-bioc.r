@@ -58,21 +58,7 @@ parse_bioc_repo <- function(path) {
 bioc_remote <- function(repo, mirror = getOption("BioC_git", "https://git.bioconductor.org/packages")) {
   meta <- parse_bioc_repo(repo)
 
-  if (is.null(meta$release) && is.null(meta$revision)) {
-    meta$branch <- "release"
-  }
-
-  if (!is.null(meta$release)) {
-    meta$branch <- switch(
-      tolower(meta$release),
-      devel = "master",
-      master = "master",
-      release = paste0("release-", bioconductor_release()),
-      paste0("release-", meta$release)
-    )
-  } else if (!is.null(meta$revision)) {
-    meta$branch <- meta$revision
-  }
+  branch <- bioconductor_branch(meta$release, meta$revision)
 
   if (!is.null(meta$username) && !is.null(meta$password)) {
     meta$credentials <- git2r::cred_user_pass(meta$username, meta$password)
@@ -82,9 +68,9 @@ bioc_remote <- function(repo, mirror = getOption("BioC_git", "https://git.biocon
     mirror = mirror,
     repo = meta$repo,
     url = paste0(mirror, "/", meta$repo),
-    release = meta$release %||% "master",
+    release = meta$release %||% "release",
     revision = meta$revision,
-    branch = meta$branch,
+    branch = branch,
     credentials = meta$credentials
   )
 }
@@ -140,9 +126,7 @@ remote_sha.bioc_remote <- function(remote, ...) {
   tryCatch({
     res <- git2r::remote_ls(remote$url, credentials=remote$credentials, ...)
 
-    branch <- remote$branch %||% "master"
-
-    found <- grep(pattern = paste0("/", branch), x = names(res))
+    found <- grep(pattern = paste0("/", gsub("[-\\.]", "_", toupper(branch))), x = names(res))
 
     if (length(found) == 0) {
       return(NA)
@@ -152,6 +136,22 @@ remote_sha.bioc_remote <- function(remote, ...) {
   }, error = function(e) NA_character_)
 }
 
+bioconductor_branch <- function(release, revision) {
+  if (!is.null(revision)) {
+    revision
+  } else {
+    if (is.null(release)) {
+      release <- "release"
+    }
+    switch(
+      tolower(release),
+      devel = "master",
+      master = "master",
+      release = paste0("release-", bioconductor_release()),
+      paste0("release-", release)
+    )
+  }
+}
 
 bioconductor_release <- memoise::memoise(function() {
   tmp <- tempfile()
