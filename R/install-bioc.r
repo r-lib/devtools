@@ -9,7 +9,7 @@
 #' '
 #' @inheritParams install_git
 #' @param repo Repository address in the format
-#'   \code{[release/]repo[#revision]}. Valid values for
+#'   \code{[username:password@@][release/]repo[#revision]}. Valid values for
 #'   the release are \sQuote{devel} (the default if none specified),
 #'   \sQuote{release} or numeric release numbers (e.g. \sQuote{3.3}).
 #' @param mirror The bioconductor git mirror to use
@@ -21,23 +21,26 @@
 #' install_bioc("SummarizedExperiment")
 #' install_bioc("release/SummarizedExperiment")
 #' install_bioc("3.3/SummarizedExperiment")
-#' install_bioc("3.3/SummarizedExperiment#117513")
+#' install_bioc("SummarizedExperiment#abc123")
+#' install_bioc("user:password@release/SummarizedExperiment")
+#' install_bioc("user:password@devel/SummarizedExperiment")
+#' install_bioc("user:password@SummarizedExperiment#abc123")
 #'}
 install_bioc <- function(repo, mirror = getOption("BioC_git", "https://git.bioconductor.org/packages"), ..., quiet = FALSE) {
-
   remotes <- lapply(repo, bioc_remote, mirror = mirror)
 
   install_remotes(remotes, ..., quiet = quiet)
 }
 
-# Parse concise git repo specification: [branch/]repo[#revision]
+# Parse concise git repo specification: [username:password@][branch/]repo[#revision]
 parse_bioc_repo <- function(path) {
+  user_pass_rx <- "(?:([^:]+):([^:@]+)@)?"
   release_rx <- "(?:(devel|release|[0-9.]+)/)?"
   repo_rx <- "([^/@#]+)"
-  revision_rx <- "(?:[#][Rr]?([0-9]+))?"
-  bioc_rx <- sprintf("^(?:%s%s%s|(.*))$", release_rx, repo_rx, revision_rx)
+  revision_rx <- "(?:[#]([a-zA-Z0-9]+))?"
+  bioc_rx <- sprintf("^(?:%s%s%s%s|(.*))$", user_pass_rx, release_rx, repo_rx, revision_rx)
 
-  param_names <- c("release", "repo", "revision", "invalid")
+  param_names <- c("username", "password", "release", "repo", "revision", "invalid")
   replace <- stats::setNames(sprintf("\\%d", seq_along(param_names)), param_names)
   params <- lapply(replace, function(r) gsub(bioc_rx, r, path, perl = TRUE))
   if (params$invalid != "")
@@ -52,43 +55,37 @@ parse_bioc_repo <- function(path) {
     params$release <- "release"
   }
 
-  if (!is.null(params$release)) {
-    params$branch <- switch(
-      tolower(params$release),
-      devel = "master",
-      release = paste0("release-", bioconductor_release()),
-      master = "master",
-      paste0("release-", params$release)
-    )
-  }
-  if (!is.null(params$revision)) {
-    params$branch <- params$revision
-  }
-
   params
 }
 
 bioc_remote <- function(repo, mirror = getOption("BioC_git", "https://git.bioconductor.org/packages")) {
   meta <- parse_bioc_repo(repo)
 
+  branch <- bioconductor_branch(meta$release, meta$revision)
+
+  if (!is.null(meta$username) && !is.null(meta$password)) {
+    meta$credentials <- git2r::cred_user_pass(meta$username, meta$password)
+  }
+
   remote("bioc",
-    mirror = mirror,
-    repo = meta$repo,
-    url = paste0(mirror, "/", meta$repo),
-    release = meta$release %||% "master",
-    revision = meta$revision,
-    branch = meta$branch
+         mirror = mirror,
+         repo = meta$repo,
+         url = paste0(mirror, "/", meta$repo),
+         release = meta$release %||% "release",
+         revision = meta$revision,
+         branch = branch,
+         credentials = meta$credentials
   )
 }
 
 #' @export
 remote_download.bioc_remote <- function(x, quiet = FALSE) {
   if (!quiet) {
-    message("Downloading git repo ", x$url)
+    message("Downloading Bioconductor repo ", x$url)
   }
 
   bundle <- tempfile()
-  git2r::clone(x$url, bundle, progress = FALSE)
+  git2r::clone(x$url, bundle, credentials=x$credentials, progress = FALSE)
 
   if (!is.null(x$branch)) {
     r <- git2r::repository(bundle)
@@ -130,11 +127,9 @@ remote_sha.bioc_remote <- function(remote, ...) {
   }
 
   tryCatch({
-    res <- git2r::remote_ls(remote$url, ...)
+    res <- git2r::remote_ls(remote$url, credentials=remote$credentials, ...)
 
-    branch <- remote$branch %||% "master"
-
-    found <- grep(pattern = paste0("/", branch), x = names(res))
+    found <- grep(pattern = paste0("/", remote$branch), x = names(res))
 
     if (length(found) == 0) {
       return(NA)
@@ -144,13 +139,30 @@ remote_sha.bioc_remote <- function(remote, ...) {
   }, error = function(e) NA_character_)
 }
 
+bioconductor_branch <- function(release, revision) {
+  if (!is.null(revision)) {
+    revision
+  } else {
+    if (is.null(release)) {
+      release <- "devel"
+    }
+    if (release == "release") {
+      release <- bioconductor_release()
+    }
+    switch(
+      tolower(release),
+      devel = "master",
+      paste0("RELEASE_",  gsub("\\.", "_", release))
+    )
+  }
+}
 
 bioconductor_release <- memoise::memoise(function() {
   tmp <- tempfile()
   download.file("http://bioconductor.org/config.yaml", tmp, quiet = TRUE)
 
   gsub("release_version:[[:space:]]+\"([[:digit:].]+)\"", "\\1",
-    grep("release_version:", readLines(tmp), value = TRUE))
+       grep("release_version:", readLines(tmp), value = TRUE))
 })
 
 format.bioc_remote <- function(x, ...) {
