@@ -82,6 +82,7 @@ github_tag <- function(username, repo, ref = "master") {
 #' Looks in env var \code{GITHUB_PAT}
 #'
 #' @keywords internal
+#' @rdname github_pat
 #' @export
 github_pat <- function(quiet = FALSE) {
   pat <- Sys.getenv("GITHUB_PAT")
@@ -107,4 +108,17 @@ github_pat <- function(quiet = FALSE) {
 
 in_ci <- function() {
   nzchar(Sys.getenv("CI"))
+}
+
+#' @export
+#' @rdname github_pat
+#' @param scopes token permissions. These are only defaults, you can select the final values
+#' on the Github page.
+#' @description The \link{create_github_pat} function opens a browser window which sends you
+#' directly to the Github page where you can generate such a token.
+create_github_pat <- function(scopes = c("gist", "public_repo")){
+  scopes <- paste(scopes, collapse = ",")
+  url <- sprintf("https://github.com/settings/tokens/new?scopes=%s&description=R:GITHUB_PAT", scopes)
+  message("If your browser does not open please navigate to:\n", url)
+  utils::browseURL(url)
 }

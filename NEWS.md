@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* Added function `create_github_pat()` to reduce the last bit of friction
+  in using access tokens.
+
 * Now use cli package to draw rules - they are more aesthetically pleasing
   and the correct width in the RStudio build pane (#1627).
 
