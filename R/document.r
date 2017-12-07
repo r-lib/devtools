@@ -33,7 +33,7 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
   # in the DESCRIPTION file
   roxygen2::update_collate(pkg$path)
 
-  load_all(pkg$path)
+  load_all(pkg$path, helpers = FALSE)
 
   if (packageVersion("roxygen2") > "4.1.1") {
     roclets <- roclets %||% roxygen2::load_options(pkg$path)$roclets
