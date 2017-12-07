@@ -55,6 +55,9 @@
 * The `spell_check()` code has been moved into the new **spelling** package and
   has thereby gained support for vignettes and package wordlists. The devtools 
   function now wraps `spelling::spell_check_package()`.
+  
+* In order to not run test helpers in `document()`, the `helpers` argument of
+  `load_all()` is set to `FALSE` (@nbenn, #1669)
 
 # devtools 1.13.2
 Workaround a regression in Rcpp::compileAttributes.
