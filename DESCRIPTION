@@ -19,6 +19,7 @@ Imports:
     callr,
     cli,
     digest,
+    foghorn (>= 1.0.0),
     git2r (>= 0.12.1),
     httr (>= 0.4),
     jsonlite,
