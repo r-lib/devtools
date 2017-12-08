@@ -70,8 +70,7 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
   if (yesno("Were devtool's checks successful?"))
     return(invisible())
 
-  if (!new_pkg) {
-    if (has_cran_results(pkg$package)) {
+  if (!new_pkg && has_cran_results(pkg$package)) {
       cat_rule(paste0("Details of the CRAN check results for ", pkg$package))
       foghorn::summary_cran_details(pkg = pkg$package)
       cat_rule()
@@ -80,7 +79,6 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
       if (yesno("Have you fixed all existing problems at \n", cran_url,
                 "\n shown above?"))
         return(invisible())
-    }
   }
 
   if (yesno("Have you checked on R-hub (with `check_rhub()`)?"))
