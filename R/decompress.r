@@ -88,7 +88,7 @@ getrootdir <- function(file_list) {
 }
 
 my_unzip <- function(src, target, unzip = getOption("unzip")) {
-  if (unzip == "internal") {
+  if (unzip == "internal" || unzip == "") {
     return(utils::unzip(src, exdir = target))
   }
 
