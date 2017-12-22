@@ -59,6 +59,8 @@
 * In order to not run test helpers in `document()`, the `helpers` argument of
   `load_all()` is set to `FALSE` (@nbenn, #1669)
 
+* The `my_unzip()` function is now able to use the `utils::unzip` fallback when R is compiled from source with no *unzip* package present (@theGreatWhiteShark, #1678)
+
 # devtools 1.13.2
 Workaround a regression in Rcpp::compileAttributes.
 Add trimws implementation for R 3.1 support.
