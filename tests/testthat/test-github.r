@@ -76,6 +76,7 @@ test_that("Github repos with submodules are identified correctly", {
   # skip these tests
   skip_on_appveyor()
   skip_on_travis()
+  skip_on_cran()
 
   expect_equal(github_has_remotes(github_remote("hadley/devtools")), FALSE)
   ## a r package repo known to use submodules
