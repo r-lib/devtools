@@ -276,3 +276,7 @@ comma <- function(x, at_most = 20) {
 menu <- function(...) {
   utils::menu(...)
 }
+
+file.info <- function(...) {
+  base::file.info(...)
+}

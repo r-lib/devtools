@@ -39,7 +39,7 @@ test_that("correct path doesn't need fixing", {
 
 with_mock(
   `devtools:::RCMD` = function(...) "invalid_path",
-  `base::file.info` = function(x) data.frame(exe = if (grepl("32", x)) "win32" else "win64"), {
+  `file.info` = function(x) data.frame(exe = if (grepl("32", x)) "win32" else "win64"), {
 
   test_that("gcc-493 directory structure is found on 32 bit", {
     withr::with_path(file.path("rtools-gcc493", "bin"), {
