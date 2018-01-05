@@ -1,5 +1,8 @@
 This is a point release fixing failing tests on CRAN.
 
+This release also makes Jim Hester the new maintainer of devtools. Hadley
+Wickham will need to approve the change <hadley@rstudio.com>.
+
 ## Test environments
 
 * local OS X install, R 3.4.3
