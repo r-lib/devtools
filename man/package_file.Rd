@@ -12,10 +12,9 @@ package_file(..., path = ".")
 \item{path}{Place to start search for package directory.}
 }
 \description{
-It always starts by finding by walking up the path until it finds the
-root directory, i.e. a directory containing \code{DESCRIPTION}. If it
-cannot find the root directory, or it can't find the specified path, it
-will throw an error.
+It always starts by walking up the path until it finds the root directory,
+i.e. a directory containing \code{DESCRIPTION}. If it cannot find the root
+directory, or it can't find the specified path, it will throw an error.
 }
 \examples{
 \dontrun{
