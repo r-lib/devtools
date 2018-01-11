@@ -20,10 +20,9 @@ as.package <- function(x = NULL, create = NA) {
 
 #' Find file in a package.
 #'
-#' It always starts by finding by walking up the path until it finds the
-#' root directory, i.e. a directory containing \code{DESCRIPTION}. If it
-#' cannot find the root directory, or it can't find the specified path, it
-#' will throw an error.
+#' It always starts by walking up the path until it finds the root directory,
+#' i.e. a directory containing \code{DESCRIPTION}. If it cannot find the root
+#' directory, or it can't find the specified path, it will throw an error.
 #'
 #' @param ... Components of the path.
 #' @param path Place to start search for package directory.
