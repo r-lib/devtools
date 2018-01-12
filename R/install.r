@@ -4,7 +4,7 @@
 #' dependencies of the package from CRAN, if they're not already installed.
 #'
 #' By default, installation takes place using the current package directory.
-#' If you have compiled code, this means that artefacts of compilation will be
+#' If you have compiled code, this means that artifacts of compilation will be
 #' created in the \code{src/} directory. If you want to avoid this, you can
 #' use \code{local = FALSE} to first build a package bundle and then install
 #' it from a temporary directory. This is slower, but keeps the source
@@ -23,7 +23,7 @@
 #'   demos, and vignettes, to make installation as fast as possible.
 #' @param local if \code{FALSE} \code{\link{build}}s the package first:
 #'   this ensures that the installation is completely clean, and prevents any
-#'   binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
+#'   binary artifacts (like \file{.o}, \code{.so}) from appearing in your local
 #'   package directory, but is considerably slower, because every compile has
 #'   to start from scratch.
 #' @param args An optional character vector of additional command line
