@@ -69,7 +69,7 @@ Building and installing:
 Check and release:
 
 * `check()` updates the documentation, then builds and checks the package. 
-  `build_win()` builds a package using 
+  `check_win()` builds a package using 
   [win-builder](http://win-builder.r-project.org/), allowing you to easily check 
   your package on windows.
 
