@@ -2,12 +2,22 @@
 % Please edit documentation in R/github.R
 \name{github_pat}
 \alias{github_pat}
+\alias{create_github_pat}
 \title{Retrieve Github personal access token.}
 \usage{
 github_pat(quiet = FALSE)
+
+create_github_pat(scopes = c("gist", "public_repo"))
+}
+\arguments{
+\item{scopes}{token permissions. These are only defaults, you can select the final values
+on the Github page.}
 }
 \description{
 A github personal access token
 Looks in env var \code{GITHUB_PAT}
+
+The \link{create_github_pat} function opens a browser window which sends you
+directly to the Github page where you can generate such a token.
 }
 \keyword{internal}
