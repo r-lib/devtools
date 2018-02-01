@@ -4,23 +4,23 @@
 \alias{install_bioc}
 \title{Install a package from a Bioconductor repository}
 \usage{
-install_bioc(repo, mirror = getOption("BioC_svn",
-  "https://hedgehog.fhcrc.org/bioconductor"), ..., quiet = FALSE)
+install_bioc(repo, mirror = getOption("BioC_git",
+  "https://git.bioconductor.org/packages"), ..., quiet = FALSE)
 }
 \arguments{
 \item{repo}{Repository address in the format
-\code{[username:password@][release/]repo[#revision]}. Valid values for
+\code{[username:password@][release/]repo[#commit]}. Valid values for
 the release are \sQuote{devel} (the default if none specified),
 \sQuote{release} or numeric release numbers (e.g. \sQuote{3.3}).}
 
-\item{mirror}{The bioconductor SVN mirror to use}
+\item{mirror}{The bioconductor git mirror to use}
 
 \item{...}{Other arguments passed on to \code{\link{install}}}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 }
 \description{
-This function requires \code{svn} to be installed on your system in order to
+This function requires \code{git} to be installed on your system in order to
 be used.
 }
 \details{
@@ -32,10 +32,12 @@ a single command.
 \examples{
 \dontrun{
 install_bioc("SummarizedExperiment")
-install_bioc("user@SummarizedExperiment")
+install_bioc("release/SummarizedExperiment")
+install_bioc("3.3/SummarizedExperiment")
+install_bioc("SummarizedExperiment#abc123")
 install_bioc("user:password@release/SummarizedExperiment")
-install_bioc("user:password@3.3/SummarizedExperiment")
-install_bioc("user:password@3.3/SummarizedExperiment#117513")
+install_bioc("user:password@devel/SummarizedExperiment")
+install_bioc("user:password@SummarizedExperiment#abc123")
 }
 }
 \seealso{
