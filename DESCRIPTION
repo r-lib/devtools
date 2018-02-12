@@ -54,13 +54,7 @@ Suggests:
     testthat (>= 1.0.2)
 VignetteBuilder: knitr
 Encoding: UTF-8
-Remotes: hadley/testthat,
-    r-hub/rhub,
-    r-lib/callr,
-    r-lib/cli,
-    r-lib/pkgbuild,
+Remotes:
+    r-lib/pkgbuild
     r-lib/pkgload,
-    r-lib/sessioninfo,
-    r-lib/usethis,
-    rstudio/rstudioapi
 RoxygenNote: 6.0.1
