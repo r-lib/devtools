@@ -55,6 +55,6 @@ Suggests:
 VignetteBuilder: knitr
 Encoding: UTF-8
 Remotes:
-    r-lib/pkgbuild
-    r-lib/pkgload,
+    r-lib/pkgbuild,
+    r-lib/pkgload
 RoxygenNote: 6.0.1
