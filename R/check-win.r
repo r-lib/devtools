@@ -16,6 +16,13 @@
 #' @name check_win
 NULL
 
+#' @rdname devtools-deprecated
+#' @export
+build_win <- function(pkg = ".", version = c("R-devel", "R-release")) {
+  .Deprecated("check_win_*()", package = "devtools")
+  check_win(pkg = pkg, version = match.arg(version))
+}
+
 #' @describeIn check_win Check package on the development version of R.
 #' @export
 check_win_devel <- function(pkg = ".", args = NULL, quiet = FALSE) {
