@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* `install_local()` now works for package tarballs as documented (#1656).
+
 * `check()` now sets `_R_CHECK_CRAN_INCOMING_REMOTE_` instead of
   `_R_CHECK_CRAN_INCOMING_`on R versions which support the former option
   (#1271, #1276, #1702).
