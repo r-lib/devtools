@@ -220,7 +220,7 @@ cran_comments <- function(pkg = ".") {
   if (!file.exists(path)) {
     warning("Can't find cran-comments.md.\n",
       "This file gives CRAN volunteers comments about the submission,\n",
-      "and it must exist. Create it with use_cran_comments().\n",
+      "Create it with use_cran_comments().\n",
       call. = FALSE)
     return(character())
   }
