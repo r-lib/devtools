@@ -4,7 +4,7 @@
 \alias{release}
 \title{Release package to CRAN.}
 \usage{
-release(pkg = ".", check = FALSE, args = NULL, spelling = "en_US")
+release(pkg = ".", check = FALSE, args = NULL)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -16,10 +16,6 @@ release it.}
 
 \item{args}{An optional character vector of additional command
 line arguments to be passed to \code{R CMD build}.}
-
-\item{spelling}{language or dictionary file to spell check documentation.
-See \code{\link[spelling:spell_check_package]{spelling}} package. Set to
-\code{NULL} to skip spell checking.}
 }
 \description{
 Run automated and manual tests, then ftp to CRAN.

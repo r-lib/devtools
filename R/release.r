@@ -35,11 +35,8 @@
 #'   release it.
 #' @param args An optional character vector of additional command
 #'   line arguments to be passed to \code{R CMD build}.
-#' @param spelling language or dictionary file to spell check documentation.
-#' See \code{\link[spelling:spell_check_package]{spelling}} package. Set to
-#' \code{NULL} to skip spell checking.
 #' @export
-release <- function(pkg = ".", check = FALSE, args = NULL, spelling = "en_US") {
+release <- function(pkg = ".", check = FALSE, args = NULL) {
   pkg <- as.package(pkg)
   # Figure out if this is a new package
   cran_version <- cran_pkg_version(pkg$package)
