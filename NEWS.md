@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `install()` functions now work with git Remotes when the remote git server
+  does not support `git archive`. (#1689)
+
 * `install_local()` now works for package tarballs as documented (#1656).
 
 * `check()` now sets `_R_CHECK_CRAN_INCOMING_REMOTE_` instead of
