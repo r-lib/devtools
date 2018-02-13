@@ -5,7 +5,7 @@
 \title{Run all examples in a package.}
 \usage{
 run_examples(pkg = ".", start = NULL, show = TRUE, test = FALSE,
-  run = TRUE, fresh = FALSE)
+  run = TRUE, fresh = FALSE, document = TRUE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -29,6 +29,9 @@ out.}
 the advantage that there's no way the examples can depend on anything in
 the current session, but interactive code (like \code{\link{browser}})
 won't work.}
+
+\item{document}{if \code{TRUE}, \code{\link{document}} will be run to ensure
+examples are updated before running them.}
 }
 \description{
 One of the most frustrating parts of `R CMD check` is getting all of your
