@@ -35,11 +35,8 @@
 #'   release it.
 #' @param args An optional character vector of additional command
 #'   line arguments to be passed to \code{R CMD build}.
-#' @param spelling language or dictionary file to spell check documentation.
-#' See \code{\link[spelling:spell_check_package]{spelling}} package. Set to
-#' \code{NULL} to skip spell checking.
 #' @export
-release <- function(pkg = ".", check = FALSE, args = NULL, spelling = "en_US") {
+release <- function(pkg = ".", check = FALSE, args = NULL) {
   pkg <- as.package(pkg)
   # Figure out if this is a new package
   cran_version <- cran_pkg_version(pkg$package)
@@ -96,6 +93,7 @@ release <- function(pkg = ".", check = FALSE, args = NULL, spelling = "en_US") {
     "Have you updated `NEWS.md` file?",
     "Have you updated `DESCRIPTION`?",
     "Have you updated `cran-comments.md?`",
+    if (dir.exists("docs/")) "Have use updated website in `docs/`?",
     find_release_questions()
   )
   for (question in questions) {
@@ -222,7 +220,7 @@ cran_comments <- function(pkg = ".") {
   if (!file.exists(path)) {
     warning("Can't find cran-comments.md.\n",
       "This file gives CRAN volunteers comments about the submission,\n",
-      "and it must exist. Create it with use_cran_comments().\n",
+      "Create it with use_cran_comments().\n",
       call. = FALSE)
     return(character())
   }

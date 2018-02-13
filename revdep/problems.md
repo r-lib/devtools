@@ -68,16 +68,16 @@ Version: 1.2.1
 *   checking R code for possible problems ... NOTE
     ```
     plot_coannotations: no visible binding for global variable ‘.’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:176-178)
+      (.../revdep/checks/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:176-178)
     plot_numerical_coannotations: no visible binding for global variable
       ‘.’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:412-429)
+      (.../revdep/checks/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:412-429)
     plot_numerical_coannotations: no visible binding for global variable
       ‘.’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:415-420)
+      (.../revdep/checks/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:415-420)
     plot_numerical_coannotations: no visible binding for global variable
       ‘.’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:422-427)
+      (.../revdep/checks/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:422-427)
     Undefined global functions or variables:
       .
     ```
@@ -341,7 +341,7 @@ Version: 1.12.0
     ```
     checkValidDevelopmentURL: no visible global function definition for
       ‘url.exists’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/BiocCheck/new/BiocCheck.Rcheck/00_pkg_src/BiocCheck/R/checks.R:33-35)
+      (.../revdep/checks/BiocCheck/new/BiocCheck.Rcheck/00_pkg_src/BiocCheck/R/checks.R:33-35)
     Undefined global functions or variables:
       url.exists
     ```
@@ -447,7 +447,7 @@ Version: 2.0.1
 *   checking whether package ‘chipenrich’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/chipenrich/new/chipenrich.Rcheck/00install.out’ for details.
+    See ‘.../revdep/checks/chipenrich/new/chipenrich.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -462,7 +462,7 @@ Version: 2.0.1
 Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
   there is no package called ‘data.table’
 ERROR: lazy loading failed for package ‘chipenrich’
-* removing ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/chipenrich/new/chipenrich.Rcheck/chipenrich’
+* removing ‘.../revdep/checks/chipenrich/new/chipenrich.Rcheck/chipenrich’
 
 ```
 ### CRAN
@@ -475,7 +475,7 @@ ERROR: lazy loading failed for package ‘chipenrich’
 Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
   there is no package called ‘data.table’
 ERROR: lazy loading failed for package ‘chipenrich’
-* removing ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/chipenrich/old/chipenrich.Rcheck/chipenrich’
+* removing ‘.../revdep/checks/chipenrich/old/chipenrich.Rcheck/chipenrich’
 
 ```
 # chipenrich.data
@@ -532,7 +532,7 @@ Version: 1.10.0
     ```
     Found the following significant warnings:
       Warning: replacing previous import ‘class::somgrid’ by ‘kohonen::somgrid’ when loading ‘cogena’
-    See ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/cogena/new/cogena.Rcheck/00install.out’ for details.
+    See ‘.../revdep/checks/cogena/new/cogena.Rcheck/00install.out’ for details.
     ```
 
 *   checking installed package size ... NOTE
@@ -547,13 +547,13 @@ Version: 1.10.0
     ```
     ...
       ‘legend’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/cogena/new/cogena.Rcheck/00_pkg_src/cogena/R/heatmapCluster.R:151-153)
+      (.../revdep/checks/cogena/new/cogena.Rcheck/00_pkg_src/cogena/R/heatmapCluster.R:151-153)
     heatmapCluster,cogena: no visible global function definition for
       ‘legend’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/cogena/new/cogena.Rcheck/00_pkg_src/cogena/R/heatmapCluster.R:155-157)
+      (.../revdep/checks/cogena/new/cogena.Rcheck/00_pkg_src/cogena/R/heatmapCluster.R:155-157)
     heatmapCluster,cogena: no visible global function definition for
       ‘legend’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/cogena/new/cogena.Rcheck/00_pkg_src/cogena/R/heatmapCluster.R:159-160)
+      (.../revdep/checks/cogena/new/cogena.Rcheck/00_pkg_src/cogena/R/heatmapCluster.R:159-160)
     Undefined global functions or variables:
       abline as.dist axis cor data density dist hist image layout legend
       lines median mtext order.dendrogram p.adjust par phyper plot.new
@@ -583,7 +583,7 @@ Version: 1.14.0
 *   checking whether package ‘COMPASS’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/COMPASS/new/COMPASS.Rcheck/00install.out’ for details.
+    See ‘.../revdep/checks/COMPASS/new/COMPASS.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -593,34 +593,34 @@ Version: 1.14.0
 ```
 * installing *source* package ‘COMPASS’ ...
 ** libs
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c COMPASS_init.c -o COMPASS_init.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts.cpp -o CellCounts.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts_character.cpp -o CellCounts_character.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c digamma.c -o digamma.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c mat2vec.c -o mat2vec.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_dataframe.c -o melt_dataframe.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_matrix.c -o melt_matrix.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c samplePuPs.cpp -o samplePuPs.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c transpose_list.c -o transpose_list.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphas_Exp.cpp -o updatealphas_Exp.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau.cpp -o updatealphau.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau_noPu_Exp.cpp -o updatealphau_noPu_Exp.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatebeta_RW.cpp -o updatebeta_RW.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c COMPASS_init.c -o COMPASS_init.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts.cpp -o CellCounts.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts_character.cpp -o CellCounts_character.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c digamma.c -o digamma.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c mat2vec.c -o mat2vec.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_dataframe.c -o melt_dataframe.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_matrix.c -o melt_matrix.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c samplePuPs.cpp -o samplePuPs.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c transpose_list.c -o transpose_list.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphas_Exp.cpp -o updatealphas_Exp.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau.cpp -o updatealphau.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau_noPu_Exp.cpp -o updatealphau_noPu_Exp.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatebeta_RW.cpp -o updatebeta_RW.o
 CellCounts.cpp:40:35: error: no matching function for call to 'sapply'
       IntegerVector c_combo_abs = sapply(c_combo, ::abs);
                                   ^~~~~~
-/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include/Rcpp/sugar/functions/sapply.h:126:1: note: candidate template ignored: couldn't infer template argument 'Function'
+.../revdep/library/devtools/new/Rcpp/include/Rcpp/sugar/functions/sapply.h:126:1: note: candidate template ignored: couldn't infer template argument 'Function'
 sapply( const Rcpp::VectorBase<RTYPE,NA,T>& t, Function fun ){
 ^
-/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include/Rcpp/vector/ListOf.h:134:3: note: candidate template ignored: could not match 'ListOf' against 'Vector'
+.../revdep/library/devtools/new/Rcpp/include/Rcpp/vector/ListOf.h:134:3: note: candidate template ignored: could not match 'ListOf' against 'Vector'
 T sapply(const ListOf<T>& t, Function fun) {
   ^
 1 error generated.
 make: *** [CellCounts.o] Error 1
 make: *** Waiting for unfinished jobs....
 ERROR: compilation failed for package ‘COMPASS’
-* removing ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/COMPASS/new/COMPASS.Rcheck/COMPASS’
+* removing ‘.../revdep/checks/COMPASS/new/COMPASS.Rcheck/COMPASS’
 
 ```
 ### CRAN
@@ -628,34 +628,34 @@ ERROR: compilation failed for package ‘COMPASS’
 ```
 * installing *source* package ‘COMPASS’ ...
 ** libs
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c COMPASS_init.c -o COMPASS_init.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts.cpp -o CellCounts.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts_character.cpp -o CellCounts_character.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c digamma.c -o digamma.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c mat2vec.c -o mat2vec.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_dataframe.c -o melt_dataframe.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_matrix.c -o melt_matrix.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c samplePuPs.cpp -o samplePuPs.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c transpose_list.c -o transpose_list.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphas_Exp.cpp -o updatealphas_Exp.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau.cpp -o updatealphau.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau_noPu_Exp.cpp -o updatealphau_noPu_Exp.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatebeta_RW.cpp -o updatebeta_RW.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c COMPASS_init.c -o COMPASS_init.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts.cpp -o CellCounts.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts_character.cpp -o CellCounts_character.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c digamma.c -o digamma.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c mat2vec.c -o mat2vec.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_dataframe.c -o melt_dataframe.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_matrix.c -o melt_matrix.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c samplePuPs.cpp -o samplePuPs.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c transpose_list.c -o transpose_list.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphas_Exp.cpp -o updatealphas_Exp.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau.cpp -o updatealphau.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau_noPu_Exp.cpp -o updatealphau_noPu_Exp.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatebeta_RW.cpp -o updatebeta_RW.o
 CellCounts.cpp:40:35: error: no matching function for call to 'sapply'
       IntegerVector c_combo_abs = sapply(c_combo, ::abs);
                                   ^~~~~~
-/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include/Rcpp/sugar/functions/sapply.h:126:1: note: candidate template ignored: couldn't infer template argument 'Function'
+.../revdep/library/COMPASS/Rcpp/include/Rcpp/sugar/functions/sapply.h:126:1: note: candidate template ignored: couldn't infer template argument 'Function'
 sapply( const Rcpp::VectorBase<RTYPE,NA,T>& t, Function fun ){
 ^
-/Users/jhester/Dropbox/projects/devtools/revdep/library/COMPASS/Rcpp/include/Rcpp/vector/ListOf.h:134:3: note: candidate template ignored: could not match 'ListOf' against 'Vector'
+.../revdep/library/COMPASS/Rcpp/include/Rcpp/vector/ListOf.h:134:3: note: candidate template ignored: could not match 'ListOf' against 'Vector'
 T sapply(const ListOf<T>& t, Function fun) {
   ^
 1 error generated.
 make: *** [CellCounts.o] Error 1
 make: *** Waiting for unfinished jobs....
 ERROR: compilation failed for package ‘COMPASS’
-* removing ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/COMPASS/old/COMPASS.Rcheck/COMPASS’
+* removing ‘.../revdep/checks/COMPASS/old/COMPASS.Rcheck/COMPASS’
 
 ```
 # congressbr
@@ -709,7 +709,7 @@ Version: 1.3.0
 *   checking whether package ‘CountClust’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/CountClust/new/CountClust.Rcheck/00install.out’ for details.
+    See ‘.../revdep/checks/CountClust/new/CountClust.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -725,7 +725,7 @@ Version: 1.3.0
 ** preparing package for lazy loading
 Error : object ‘switch_axis_position’ is not exported by 'namespace:cowplot'
 ERROR: lazy loading failed for package ‘CountClust’
-* removing ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/CountClust/new/CountClust.Rcheck/CountClust’
+* removing ‘.../revdep/checks/CountClust/new/CountClust.Rcheck/CountClust’
 
 ```
 ### CRAN
@@ -739,7 +739,7 @@ ERROR: lazy loading failed for package ‘CountClust’
 ** preparing package for lazy loading
 Error : object ‘switch_axis_position’ is not exported by 'namespace:cowplot'
 ERROR: lazy loading failed for package ‘CountClust’
-* removing ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/CountClust/old/CountClust.Rcheck/CountClust’
+* removing ‘.../revdep/checks/CountClust/old/CountClust.Rcheck/CountClust’
 
 ```
 # covr
@@ -840,13 +840,13 @@ Version: 1.2.2
     ```
     ExpressionSet2MRexperiment: no visible global function definition for
       ‘AnnotatedDataFrame’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/curatedMetagenomicData/new/curatedMetagenomicData.Rcheck/00_pkg_src/curatedMetagenomicData/R/ExpressionSet2MRexperiment.R:45)
+      (.../revdep/checks/curatedMetagenomicData/new/curatedMetagenomicData.Rcheck/00_pkg_src/curatedMetagenomicData/R/ExpressionSet2MRexperiment.R:45)
     ExpressionSet2MRexperiment: no visible global function definition for
       ‘phenoData’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/curatedMetagenomicData/new/curatedMetagenomicData.Rcheck/00_pkg_src/curatedMetagenomicData/R/ExpressionSet2MRexperiment.R:46-47)
+      (.../revdep/checks/curatedMetagenomicData/new/curatedMetagenomicData.Rcheck/00_pkg_src/curatedMetagenomicData/R/ExpressionSet2MRexperiment.R:46-47)
     curatedMetagenomicData : <anonymous>: no visible global function
       definition for ‘exprs<-’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/curatedMetagenomicData/new/curatedMetagenomicData.Rcheck/00_pkg_src/curatedMetagenomicData/R/curatedMetagenomicData.R:57-58)
+      (.../revdep/checks/curatedMetagenomicData/new/curatedMetagenomicData.Rcheck/00_pkg_src/curatedMetagenomicData/R/curatedMetagenomicData.R:57-58)
     Undefined global functions or variables:
       AnnotatedDataFrame exprs<- phenoData
     ```
@@ -877,7 +877,7 @@ Version: 1.4.5
 *   checking whether package ‘debrowser’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/debrowser/new/debrowser.Rcheck/00install.out’ for details.
+    See ‘.../revdep/checks/debrowser/new/debrowser.Rcheck/00install.out’ for details.
     ```
 
 ## Newly fixed
@@ -903,21 +903,21 @@ Version: 1.4.5
     ```
     ...
     volcanoPlot: no visible binding for global variable ‘fillOpacity.hover’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
+      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
     volcanoPlot: no visible binding for global variable ‘fill.brush’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
+      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
     volcanoPlot: no visible binding for global variable ‘opacity’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
+      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
     volcanoPlot: no visible binding for global variable ‘key’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
+      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
     volcanoZoom: no visible global function definition for ‘:=’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
+      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
     volcanoZoom: no visible binding for global variable ‘size’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
+      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
     volcanoZoom: no visible binding for global variable ‘size.hover’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
+      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
     volcanoZoom: no visible binding for global variable ‘key’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
+      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
     Undefined global functions or variables:
       .startdebrowser.called := NUL align baseline biocLite conds debrowser
       demodata fill fill.brush fillOpacity fillOpacity.hover fit fontSize
@@ -936,7 +936,7 @@ Version: 1.4.5
 ** preparing package for lazy loading
 Error : object ‘load_data’ is not exported by 'namespace:devtools'
 ERROR: lazy loading failed for package ‘debrowser’
-* removing ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/debrowser/new/debrowser.Rcheck/debrowser’
+* removing ‘.../revdep/checks/debrowser/new/debrowser.Rcheck/debrowser’
 
 ```
 ### CRAN
@@ -968,19 +968,19 @@ Version: 1.1.2
     ```
     ...
     diffexp,DEMIDiff: no visible global function definition for ‘p.adjust’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIDiff-methods.R:352)
+      (.../revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIDiff-methods.R:352)
     loadAnnotation,DEMIExperiment-environment: no visible global function
       definition for ‘data’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:549)
+      (.../revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:549)
     loadBlat,DEMIExperiment-environment: no visible global function
       definition for ‘data’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:598)
+      (.../revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:598)
     loadCytoband,DEMIExperiment-environment: no visible global function
       definition for ‘data’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:700)
+      (.../revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:700)
     loadPathway,DEMIExperiment-environment: no visible global function
       definition for ‘data’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:735)
+      (.../revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:735)
     Undefined global functions or variables:
       combn data dhyper median p.adjust t.test wilcox.test write.table
     Consider adding
@@ -1067,8 +1067,8 @@ Version: 2.1.0
       R CMD check failed, read the above log and fix.
       1: document(file_name, check_package = TRUE, runit = TRUE) at testthat/test_basic.R:13
       2: check_package(package_directory = package_directory, working_directory = working_directory, 
-             check_as_cran = check_as_cran, debug = debug, stop_on_check_not_passing = stop_on_check_not_passing) at /Users/jhester/Dropbox/projects/devtools/revdep/checks/document/new/document.Rcheck/00_pkg_src/document/R/document.R:80
-      3: throw("R CMD check failed, read the above log and fix.") at /Users/jhester/Dropbox/projects/devtools/revdep/checks/document/new/document.Rcheck/00_pkg_src/document/R/package_functions.R:119
+             check_as_cran = check_as_cran, debug = debug, stop_on_check_not_passing = stop_on_check_not_passing) at .../revdep/checks/document/new/document.Rcheck/00_pkg_src/document/R/document.R:80
+      3: throw("R CMD check failed, read the above log and fix.") at .../revdep/checks/document/new/document.Rcheck/00_pkg_src/document/R/package_functions.R:119
       
       testthat results ================================================================
       OK: 0 SKIPPED: 0 FAILED: 1
@@ -1188,19 +1188,19 @@ Version: 1.0.1
     ```
     ...
     plot.epiSim: no visible global function definition for ‘axis’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:375-377)
+      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:375-377)
     plot.epiSim: no visible global function definition for ‘boxplot’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:403-405)
+      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:403-405)
     plot.epiSim: no visible global function definition for ‘abline’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:407)
+      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:407)
     plot.epiSim: no visible global function definition for ‘axis’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:409-411)
+      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:409-411)
     plot.epiSim: no visible global function definition for ‘boxplot’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:413-415)
+      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:413-415)
     plot.epiSim: no visible global function definition for ‘abline’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:417)
+      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:417)
     plot.epiSim: no visible global function definition for ‘axis’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:419-421)
+      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:419-421)
     Undefined global functions or variables:
       abline absorption adj axis bnem boxplot computeFc dnf2adj
       dummyCNOlist epiNEM2Bg layout popSize preprocessing readSIF sim
@@ -1473,20 +1473,20 @@ Version: 1.4.0
 *   checking R code for possible problems ... NOTE
     ```
     ...
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:101)
+      (.../revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:101)
     plot_decisionboundary: no visible binding for global variable
       ‘covariate’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:110-112)
+      (.../revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:110-112)
     plot_decisionboundary: no visible binding for global variable ‘pvalue’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:110-112)
+      (.../revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:110-112)
     plot_decisionboundary: no visible binding for global variable ‘fold’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:110-112)
+      (.../revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:110-112)
     thresholds_ihwResult: no visible global function definition for
       ‘na.exclude’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/ihw_class.R:96-97)
+      (.../revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/ihw_class.R:96-97)
     thresholds,ihwResult: no visible global function definition for
       ‘na.exclude’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/ihw_class.R:96-97)
+      (.../revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/ihw_class.R:96-97)
     Undefined global functions or variables:
       covariate fold gurobi mcols mcols<- metadata metadata<- na.exclude
       p.adjust pvalue runif str stratum
@@ -1618,14 +1618,14 @@ Version: 0.1.0
     ```
     ...
     plot_sp_A_ts: no visible global function definition for ‘axis’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/plot_sp_A_ts.R:90-91)
+      (.../revdep/checks/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/plot_sp_A_ts.R:90-91)
     run_cons_plans: no visible binding for global variable ‘var’
     thermal_area: no visible global function definition for ‘uniroot’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/thermal_integration.R:19-21)
+      (.../revdep/checks/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/thermal_integration.R:19-21)
     thermal_area: no visible global function definition for ‘uniroot’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/thermal_integration.R:22-24)
+      (.../revdep/checks/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/thermal_integration.R:22-24)
     thermal_area: no visible global function definition for ‘integrate’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/thermal_integration.R:26-28)
+      (.../revdep/checks/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/thermal_integration.R:26-28)
     Undefined global functions or variables:
       abline axTicks axis barplot box chull contourLines hcl integrate
       legend lines lm matplot mtext na.omit optimize par plot plot.default
@@ -1885,24 +1885,24 @@ Version: 0.20.6
     ```
     ...
       variable ‘n’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1584)
+      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1584)
     nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
       variable ‘n’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1590-1592)
+      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1590-1592)
     nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
       variable ‘n’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1597-1599)
+      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1597-1599)
     nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
       variable ‘n’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1618-1621)
+      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1618-1621)
     nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
       variable ‘n’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1653)
+      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1653)
     nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
       variable ‘n’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1666-1676)
+      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1666-1676)
     rss,matrix: no visible binding for global variable ‘Biobase’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/NMF-class.R:2263-2264)
+      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/NMF-class.R:2263-2264)
     Undefined global functions or variables:
       Biobase RNGobj fstop n
     ```
@@ -1922,16 +1922,16 @@ Version: 0.5
     ```
     ...
     onecovahomog: no visible global function definition for ‘pf’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/racov.r:53)
+      (.../revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/racov.r:53)
     rank.test: no visible global function definition for ‘pnorm’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/rank.test.r:12-16)
+      (.../revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/rank.test.r:12-16)
     rank.test: no visible global function definition for ‘coef’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/rank.test.r:21)
+      (.../revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/rank.test.r:21)
     rank.test: no visible global function definition for ‘qt’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/rank.test.r:24-28)
+      (.../revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/rank.test.r:24-28)
     rcn: no visible global function definition for ‘rnorm’
     vanElteren.test: no visible global function definition for ‘pnorm’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/vanElteren.test.r:23)
+      (.../revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/vanElteren.test.r:23)
     Undefined global functions or variables:
       coef cor dnorm median model.matrix new pchisq pf pnorm qnorm qt
       quantile resid rnorm var
@@ -2067,9 +2067,9 @@ Version: 0.22
 *   checking R code for possible problems ... NOTE
     ```
     ...
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/pkgmaker/new/pkgmaker.Rcheck/00_pkg_src/pkgmaker/R/unitTests.R:792)
+      (.../revdep/checks/pkgmaker/new/pkgmaker.Rcheck/00_pkg_src/pkgmaker/R/unitTests.R:792)
     utest,character: no visible global function definition for ‘test_file’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/pkgmaker/new/pkgmaker.Rcheck/00_pkg_src/pkgmaker/R/unitTests.R:797)
+      (.../revdep/checks/pkgmaker/new/pkgmaker.Rcheck/00_pkg_src/pkgmaker/R/unitTests.R:797)
     Undefined global functions or variables:
       .testLogger ArgumentParser HTMLReport RweaveLatex Sweave
       available.packages browseURL capture.output citation compareVersion
@@ -2188,7 +2188,7 @@ Version: 0.1.0
 *   checking whether package ‘pulver’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/pulver/new/pulver.Rcheck/00install.out’ for details.
+    See ‘.../revdep/checks/pulver/new/pulver.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -2199,11 +2199,11 @@ Version: 0.1.0
 * installing *source* package ‘pulver’ ...
 ** package ‘pulver’ successfully unpacked and MD5 sums checked
 ** libs
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c partial_result.cpp -o partial_result.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c pulver.cpp -o pulver.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c result.cpp -o result.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c storage.cpp -o storage.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c partial_result.cpp -o partial_result.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c pulver.cpp -o pulver.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c result.cpp -o result.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c storage.cpp -o storage.o
 clang: error: unsupported option '-fopenmp'
 clang: error: unsupported option '-fopenmp'
 clang: error: unsupported option '-fopenmp'
@@ -2216,7 +2216,7 @@ make: *** [result.o] Error 1
 clang: error: unsupported option '-fopenmp'
 make: *** [storage.o] Error 1
 ERROR: compilation failed for package ‘pulver’
-* removing ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/pulver/new/pulver.Rcheck/pulver’
+* removing ‘.../revdep/checks/pulver/new/pulver.Rcheck/pulver’
 
 ```
 ### CRAN
@@ -2225,11 +2225,11 @@ ERROR: compilation failed for package ‘pulver’
 * installing *source* package ‘pulver’ ...
 ** package ‘pulver’ successfully unpacked and MD5 sums checked
 ** libs
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c partial_result.cpp -o partial_result.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c pulver.cpp -o pulver.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c result.cpp -o result.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c storage.cpp -o storage.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c partial_result.cpp -o partial_result.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c pulver.cpp -o pulver.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c result.cpp -o result.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c storage.cpp -o storage.o
 clang: errorclang: error: unsupported option '-fopenmp'
 : unsupported option '-fopenmp'
 clang: error: clang: error: unsupported option '-fopenmp'unsupported option '-fopenmp'
@@ -2242,7 +2242,7 @@ make: *** [partial_result.o] Error 1
 clang: error: unsupported option '-fopenmp'
 make: *** [RcppExports.o] Error 1
 ERROR: compilation failed for package ‘pulver’
-* removing ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/pulver/old/pulver.Rcheck/pulver’
+* removing ‘.../revdep/checks/pulver/old/pulver.Rcheck/pulver’
 
 ```
 # rbundler
@@ -2271,19 +2271,19 @@ Version: 0.3.7
     ...
     install_version: no visible global function definition for
       ‘contrib.url’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:25)
+      (.../revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:25)
     install_version: no visible global function definition for
       ‘available.packages’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:26)
+      (.../revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:26)
     install_version: no visible global function definition for
       ‘install_url’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:37)
+      (.../revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:37)
     load_available_packages: no visible global function definition for
       ‘contrib.url’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/load_available_packages.r:5)
+      (.../revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/load_available_packages.r:5)
     validate_installed_package: no visible global function definition for
       ‘installed.packages’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:55)
+      (.../revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:55)
     Undefined global functions or variables:
       available.packages contrib.url install_url installed.packages
     Consider adding
@@ -2313,13 +2313,13 @@ Version: 1.2.3
     ```
     add_predictions: no visible binding for global variable
       ‘PredictedPhenotypes’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/recount/new/recount.Rcheck/00_pkg_src/recount/R/add_predictions.R:80)
+      (.../revdep/checks/recount/new/recount.Rcheck/00_pkg_src/recount/R/add_predictions.R:80)
     add_predictions: no visible binding for global variable
       ‘PredictedPhenotypes’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/recount/new/recount.Rcheck/00_pkg_src/recount/R/add_predictions.R:82)
+      (.../revdep/checks/recount/new/recount.Rcheck/00_pkg_src/recount/R/add_predictions.R:82)
     add_predictions: no visible binding for global variable
       ‘PredictedPhenotypes’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/recount/new/recount.Rcheck/00_pkg_src/recount/R/add_predictions.R:84-85)
+      (.../revdep/checks/recount/new/recount.Rcheck/00_pkg_src/recount/R/add_predictions.R:84-85)
     Undefined global functions or variables:
       PredictedPhenotypes
     ```
@@ -2509,25 +2509,25 @@ Version: 1.6.0
 *   checking R code for possible problems ... NOTE
     ```
     ...
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
+      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
     ggbiplot: no visible binding for global variable ‘xvar’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
+      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
     ggbiplot: no visible binding for global variable ‘yvar’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
+      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
     ggbiplot: no visible binding for global variable ‘angle’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
+      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
     ggbiplot: no visible binding for global variable ‘hjust’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
+      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
     read.mutations: no visible binding for global variable ‘.’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/readTCGA.R:383)
+      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/readTCGA.R:383)
     read.mutations: no visible binding for global variable ‘.’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/readTCGA.R:386)
+      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/readTCGA.R:386)
     read.rnaseq: no visible binding for global variable ‘.’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/readTCGA.R:372-375)
+      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/readTCGA.R:372-375)
     survivalTCGA: no visible binding for global variable ‘times’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/survivalTCGA.R:101-137)
+      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/survivalTCGA.R:101-137)
     whichDateToUse: no visible binding for global variable ‘.’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/downloadTCGA.R:167-168)
+      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/downloadTCGA.R:167-168)
     Undefined global functions or variables:
       . angle hjust muted times varname xvar yvar
     ```
@@ -2610,7 +2610,7 @@ Version: 0.0.2
     ```
     Found the following significant warnings:
       Warning: 'devtools::use_package' is deprecated.
-    See ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/spectrolab/new/spectrolab.Rcheck/00install.out’ for details.
+    See ‘.../revdep/checks/spectrolab/new/spectrolab.Rcheck/00install.out’ for details.
     ```
 
 ## In both
@@ -2637,13 +2637,13 @@ Version: 1.7.4
     .SpidermiRvisualize_gene: possible error in simpleNetwork(NetworkData,
       linkColour = "gray", textColour = "black", zoom = TRUE): unused
       argument (textColour = "black")
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/SpidermiR/new/SpidermiR.Rcheck/00_pkg_src/SpidermiR/R/SpidermiRInternal.R:31)
+      (.../revdep/checks/SpidermiR/new/SpidermiR.Rcheck/00_pkg_src/SpidermiR/R/SpidermiRInternal.R:31)
     SpidermiRvisualize_plot_target: no visible binding for global variable
       ‘miRNAs’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/SpidermiR/new/SpidermiR.Rcheck/00_pkg_src/SpidermiR/R/SpidermiRvisualize.R:143-145)
+      (.../revdep/checks/SpidermiR/new/SpidermiR.Rcheck/00_pkg_src/SpidermiR/R/SpidermiRvisualize.R:143-145)
     SpidermiRvisualize_plot_target: no visible binding for global variable
       ‘mRNA_target’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/SpidermiR/new/SpidermiR.Rcheck/00_pkg_src/SpidermiR/R/SpidermiRvisualize.R:143-145)
+      (.../revdep/checks/SpidermiR/new/SpidermiR.Rcheck/00_pkg_src/SpidermiR/R/SpidermiRvisualize.R:143-145)
     Undefined global functions or variables:
       mRNA_target miRNAs
     ```
@@ -2665,19 +2665,19 @@ Version: 1.2.1
 *   checking R code for possible problems ... NOTE
     ```
     ...
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/getdata.R:108)
+      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/getdata.R:108)
     getKEGGdata: no visible binding for global variable ‘Nervous_system’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/getdata.R:113)
+      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/getdata.R:113)
     getKEGGdata: no visible binding for global variable ‘Sensory_system’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/getdata.R:118)
+      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/getdata.R:118)
     matrix_plot: no visible binding for global variable ‘path’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/path_star.R:132)
+      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/path_star.R:132)
     plotting_cross_talk: no visible binding for global variable ‘path’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/path_star.R:179)
+      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/path_star.R:179)
     svm_classification: no visible binding for global variable ‘Target’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/path_star.R:441)
+      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/path_star.R:441)
     svm_classification: no visible binding for global variable ‘Target’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/path_star.R:444)
+      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/path_star.R:444)
     Undefined global functions or variables:
       Aminoacid Carbohydrate Cell_growth_and_death Cellular_community
       Circulatory_system Cofa_vita_met Digestive_system Endocrine_system
@@ -2759,23 +2759,23 @@ Version: 2.5.9
 *   checking R code for possible problems ... NOTE
     ```
     ...
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/analyze.R:1131)
+      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/analyze.R:1131)
     TCGAvisualize_SurvivalCoxNET: no visible global function definition for
       ‘dNetInduce’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:156-157)
+      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:156-157)
     TCGAvisualize_SurvivalCoxNET: no visible global function definition for
       ‘dNetPipeline’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:161-162)
+      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:161-162)
     TCGAvisualize_SurvivalCoxNET: no visible global function definition for
       ‘dCommSignif’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:174)
+      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:174)
     TCGAvisualize_SurvivalCoxNET: no visible global function definition for
       ‘visNet’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:184-189)
+      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:184-189)
     TCGAvisualize_oncoprint: no visible binding for global variable ‘value’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:933)
+      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:933)
     getTSS: no visible global function definition for ‘promoters’
-      (/Users/jhester/Dropbox/projects/devtools/revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/methylation.R:1745-1746)
+      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/methylation.R:1745-1746)
     Undefined global functions or variables:
       c3net dCommSignif dNetInduce dNetPipeline knnmi.cross
       limmacontrasts.fit limmamakeContrasts minet portions promoters value
@@ -2842,7 +2842,7 @@ Version: 1.0.2
 *   checking whether package ‘teachingApps’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/teachingApps/new/teachingApps.Rcheck/00install.out’ for details.
+    See ‘.../revdep/checks/teachingApps/new/teachingApps.Rcheck/00install.out’ for details.
     ```
 
 ## Newly fixed
@@ -2862,20 +2862,20 @@ Version: 1.0.2
 * installing *source* package ‘teachingApps’ ...
 ** package ‘teachingApps’ successfully unpacked and MD5 sums checked
 ** libs
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c bisa.cpp -o bisa.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c lev.cpp -o lev.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c likely.cpp -o likely.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c rcpp_hello_world.cpp -o rcpp_hello_world.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c sev.cpp -o sev.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c bisa.cpp -o bisa.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c lev.cpp -o lev.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c likely.cpp -o likely.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c rcpp_hello_world.cpp -o rcpp_hello_world.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c sev.cpp -o sev.o
 clang++ -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o teachingApps.so RcppExports.o bisa.o lev.o likely.o rcpp_hello_world.o sev.o -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
-installing to /Users/jhester/Dropbox/projects/devtools/revdep/checks/teachingApps/new/teachingApps.Rcheck/teachingApps/libs
+installing to .../revdep/checks/teachingApps/new/teachingApps.Rcheck/teachingApps/libs
 ** R
 ** inst
 ** preparing package for lazy loading
 Error : object ‘inst’ is not exported by 'namespace:devtools'
 ERROR: lazy loading failed for package ‘teachingApps’
-* removing ‘/Users/jhester/Dropbox/projects/devtools/revdep/checks/teachingApps/new/teachingApps.Rcheck/teachingApps’
+* removing ‘.../revdep/checks/teachingApps/new/teachingApps.Rcheck/teachingApps’
 
 ```
 ### CRAN
@@ -2884,14 +2884,14 @@ ERROR: lazy loading failed for package ‘teachingApps’
 * installing *source* package ‘teachingApps’ ...
 ** package ‘teachingApps’ successfully unpacked and MD5 sums checked
 ** libs
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c bisa.cpp -o bisa.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c lev.cpp -o lev.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c likely.cpp -o likely.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c rcpp_hello_world.cpp -o rcpp_hello_world.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I"/Users/jhester/Dropbox/projects/devtools/revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c sev.cpp -o sev.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c bisa.cpp -o bisa.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c lev.cpp -o lev.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c likely.cpp -o likely.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c rcpp_hello_world.cpp -o rcpp_hello_world.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c sev.cpp -o sev.o
 clang++ -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o teachingApps.so RcppExports.o bisa.o lev.o likely.o rcpp_hello_world.o sev.o -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
-installing to /Users/jhester/Dropbox/projects/devtools/revdep/checks/teachingApps/old/teachingApps.Rcheck/teachingApps/libs
+installing to .../revdep/checks/teachingApps/old/teachingApps.Rcheck/teachingApps/libs
 ** R
 ** inst
 ** preparing package for lazy loading
@@ -3074,7 +3074,7 @@ Version: 1.4.4
       1. ...
       
       Error: testthat unit tests failed
-      Removing packages from '/Users/jhester/Dropbox/projects/devtools/revdep/checks/unitizer/new/unitizer.Rcheck'
+      Removing packages from '.../revdep/checks/unitizer/new/unitizer.Rcheck'
       (as 'lib' is unspecified)
       Execution halted
     ```

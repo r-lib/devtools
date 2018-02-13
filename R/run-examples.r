@@ -22,10 +22,12 @@
 #'   the advantage that there's no way the examples can depend on anything in
 #'   the current session, but interactive code (like \code{\link{browser}})
 #'   won't work.
+#' @param document if \code{TRUE}, \code{\link{document}} will be run to ensure
+#'   examples are updated before running them.
 #' @keywords programming
 #' @export
 run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
-                         run = TRUE, fresh = FALSE) {
+                         run = TRUE, fresh = FALSE, document = TRUE) {
   pkg <- as.package(pkg)
 
   if (fresh) {
@@ -37,7 +39,9 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
     return(invisible())
   }
 
-  document(pkg)
+  if (document) {
+    document(pkg)
+  }
 
   if (!missing(show)) {
     warning("`show` is deprecated", call. = FALSE)
