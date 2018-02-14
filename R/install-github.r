@@ -161,7 +161,6 @@ remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
 #' Allows installing a specific pull request or the latest release.
 #'
 #' @param pull The pull request to install
-#' @param auth_token The personal access token (PAT)
 #' @seealso \code{\link{install_github}}
 #' @rdname github_refs
 #' @export
