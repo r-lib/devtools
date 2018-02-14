@@ -1,4 +1,5 @@
 # devtools
+
 [![Build Status](https://travis-ci.org/r-lib/devtools.svg?branch=master)](https://travis-ci.org/r-lib/devtools)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/hadley/devtools?branch=master&svg=true)](https://ci.appveyor.com/project/hadley/devtools)
 [![Coverage Status](https://codecov.io/github/r-lib/devtools/coverage.svg?branch=master)](https://codecov.io/github/r-lib/devtools?branch=master)
