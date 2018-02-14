@@ -50,6 +50,9 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
       return(invisible())
   }
 
+  if (yesno("Have you checked for spelling errors (with `spell_check()`)?"))
+    return(invisible())
+
   if (check) {
     cat_rule(
       left = "Building and checking",
