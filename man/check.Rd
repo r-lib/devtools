@@ -8,11 +8,11 @@
 check(pkg = ".", document = NA, build_args = NULL, ..., manual = FALSE,
   cran = TRUE, check_version = FALSE, force_suggests = FALSE,
   run_dont_test = FALSE, args = NULL, env_vars = NULL, quiet = FALSE,
-  check_dir)
+  check_dir = tempdir())
 
 check_built(path = NULL, cran = TRUE, check_version = FALSE,
   force_suggests = FALSE, run_dont_test = FALSE, manual = FALSE,
-  args = NULL, env_vars = NULL, quiet = FALSE)
+  args = NULL, env_vars = NULL, check_dir = tempdir(), quiet = FALSE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -50,7 +50,7 @@ submission.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
-\item{check_dir}{This argument is ignored, and exists only for backwards
+\item{check_dir}{the directory in which the package is checked
 compatibility. \code{args = "--output=/foo/bar"} can be used to change the
 check directory.}
 
