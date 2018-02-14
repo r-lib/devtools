@@ -11,6 +11,8 @@ github_release()
 }
 \arguments{
 \item{pull}{The pull request to install}
+
+\item{auth_token}{The personal access token (PAT)}
 }
 \description{
 Use as \code{ref} parameter to \code{\link{install_github}}.

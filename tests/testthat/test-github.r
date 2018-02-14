@@ -24,16 +24,16 @@ test_that("GitHub repo paths are parsed correctly", {
 })
 
 # Mock github_resolve_ref.github_pull so that GitHub API is not queried for this test
-mock_github_resolve_ref.github_pull <- function(x, params) {
+mock_github_resolve_ref.github_pull <- function(x, params, ...) {
   params$username <- sprintf("user-%s", x)
   params$ref <- sprintf("pull-%s", x)
   params
 }
 
 # Mock github_resolve_ref.github_release so that GitHub API is not queried for this test
-mock_github_resolve_ref.github_release <- function(x, param) {
-  param$ref="latest-release"
-  param
+mock_github_resolve_ref.github_release <- function(x, params, ...) {
+  params$ref="latest-release"
+  params
 }
 
 test_that("GitHub parameters are returned correctly", {
@@ -51,7 +51,7 @@ test_that("GitHub parameters are returned correctly", {
   })
 })
 
-mock_github_GET <- function(path) {
+mock_github_GET <- function(path, pat, host) {
   if (grepl("^repos/.*/pulls/.*$", path)) {
     list(head=list(user=list(login="username"), ref="some-pull-request"))
   } else if (grepl("^repos/.*/releases$", path)) {
