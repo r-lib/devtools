@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `install_bioc()` has been updated to use git repositories instead of svn 
+  (@rcannood, #1649, #1705).
+
 * `install()` functions now work with git Remotes when the remote git server
   does not support `git archive`. (#1689)
 
