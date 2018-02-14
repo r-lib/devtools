@@ -38,10 +38,10 @@ mock_github_resolve_ref.github_release <- function(x, params, ...) {
 
 test_that("GitHub parameters are returned correctly", {
   with_mock("github_resolve_ref.github_pull", mock_github_resolve_ref.github_pull, {
-    expect_equal(github_remote("hadley/devtools")$repo, "devtools")
+    expect_equal(github_remote("r-lib/devtools")$repo, "devtools")
     expect_equal(github_remote("krlmlr/kimisc")$username, "krlmlr")
     expect_equal(github_remote("my/test/pkg")$subdir, "pkg")
-    expect_equal(github_remote("hadley/devtools@devtools-1.4")$ref, "devtools-1.4")
+    expect_equal(github_remote("r-lib/devtools@devtools-1.4")$ref, "devtools-1.4")
     expect_equal(github_remote("yihui/tikzDevice#23")$ref, "pull-23")
   })
 
@@ -77,7 +77,7 @@ test_that("Github repos with submodules are identified correctly", {
   skip_on_appveyor()
   skip_on_travis()
 
-  expect_equal(github_has_remotes(github_remote("hadley/devtools")), FALSE)
+  expect_equal(github_has_remotes(github_remote("r-lib/devtools")), FALSE)
   ## a r package repo known to use submodules
   expect_equal(github_has_remotes(github_remote("armstrtw/rzmq")), TRUE)
 })

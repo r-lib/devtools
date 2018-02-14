@@ -182,7 +182,7 @@ check_env_vars <- function(cran = FALSE, check_version = FALSE,
   c(
     aspell_env_var(),
     # Switch off expensive check for package version
-    # https://github.com/hadley/devtools/issues/1271
+    # https://github.com/r-lib/devtools/issues/1271
     if (getRversion() >= "3.4.0" && as.numeric(R.version[["svn rev"]]) >= 70944) {
       c("_R_CHECK_CRAN_INCOMING_REMOTE_" = as.character(check_version))
     } else {

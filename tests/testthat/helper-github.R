@@ -15,7 +15,7 @@ erase <- function(path) unlink(path, recursive = TRUE)
 mock_use_github <- function(pkg) {
   use_git_with_config(message = "initial", pkg = pkg, add_user_config = TRUE, quiet = TRUE)
   r <- git2r::repository(pkg)
-  git2r::remote_add(r, "origin", "https://github.com/hadley/devtools.git")
+  git2r::remote_add(r, "origin", "https://github.com/r-lib/devtools.git")
 
   # TODO:(jimhester) Remove withr::with_dir once
   # https://github.com/r-lib/usethis/commit/9d91022aab2d5f58952cb7852000500dd22a07a0

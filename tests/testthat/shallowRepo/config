@@ -3,4 +3,4 @@
 	filemode = true
 	bare = true
 [remote "origin"]
-	url = https://github.com/hadley/devtools.git
+	url = https://github.com/r-lib/devtools.git
