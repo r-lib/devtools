@@ -5,6 +5,7 @@
 [![Coverage Status](https://codecov.io/github/r-lib/devtools/coverage.svg?branch=master)](https://codecov.io/github/r-lib/devtools?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools)
 
+[![Join the chat at https://gitter.im/r-lib/devtools](https://badges.gitter.im/r-lib/devtools.svg)](https://gitter.im/r-lib/devtools?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 The aim of `devtools` is to make package development easier by providing R functions that simplify common tasks.
 
