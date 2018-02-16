@@ -74,6 +74,10 @@ test_coverage <- function(pkg = ".", ...) {
 
   check_suggested("covr")
 
+  if (rstudioapi::hasFun("documentSaveAll")) {
+    rstudioapi::documentSaveAll()
+  }
+
   coverage <- covr::package_coverage(pkg$path, ...)
   covr::report(coverage)
 
