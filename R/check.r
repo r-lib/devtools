@@ -48,6 +48,7 @@
 #'   compatibility. \code{args = "--output=/foo/bar"} can be used to change the
 #'   check directory.
 #' @param ... Additional arguments passed on to \code{\link[pkgbuild]{build}()}.
+#' @param cleanup Deprecated.
 #' @seealso \code{\link{release}} if you want to send the checked package to
 #'   CRAN.
 #' @export
@@ -63,12 +64,17 @@ check <- function(pkg = ".",
                   args = NULL,
                   env_vars = NULL,
                   quiet = FALSE,
-                  check_dir = tempdir()) {
+                  check_dir = tempdir(),
+                  cleanup = TRUE) {
   pkg <- as.package(pkg)
   withr::local_options(list(warn = 1))
 
   if (rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
+  }
+
+  if (!missing(cleanup)) {
+    warning("`cleanup` is deprecated", call. = FALSE)
   }
 
   # document only if package uses roxygen, i.e. has RoxygenNote field

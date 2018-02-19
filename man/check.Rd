@@ -8,7 +8,7 @@
 check(pkg = ".", document = NA, build_args = NULL, ..., manual = FALSE,
   cran = TRUE, check_version = FALSE, force_suggests = FALSE,
   run_dont_test = FALSE, args = NULL, env_vars = NULL, quiet = FALSE,
-  check_dir = tempdir())
+  check_dir = tempdir(), cleanup = TRUE)
 
 check_built(path = NULL, cran = TRUE, check_version = FALSE,
   force_suggests = FALSE, run_dont_test = FALSE, manual = FALSE,
@@ -53,6 +53,8 @@ submission.}
 \item{check_dir}{the directory in which the package is checked
 compatibility. \code{args = "--output=/foo/bar"} can be used to change the
 check directory.}
+
+\item{cleanup}{Deprecated.}
 
 \item{path}{Path to built package.}
 }
