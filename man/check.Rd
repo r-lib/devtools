@@ -8,11 +8,13 @@
 check(pkg = ".", document = NA, build_args = NULL, ..., manual = FALSE,
   cran = TRUE, check_version = FALSE, force_suggests = FALSE,
   run_dont_test = FALSE, args = NULL, env_vars = NULL, quiet = FALSE,
-  check_dir = tempdir(), cleanup = TRUE)
+  check_dir = tempdir(), cleanup = TRUE, error_on = c("never", "error",
+  "warning", "note"))
 
 check_built(path = NULL, cran = TRUE, check_version = FALSE,
   force_suggests = FALSE, run_dont_test = FALSE, manual = FALSE,
-  args = NULL, env_vars = NULL, check_dir = tempdir(), quiet = FALSE)
+  args = NULL, env_vars = NULL, check_dir = tempdir(), quiet = FALSE,
+  error_on = c("never", "error", "warning", "note"))
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -55,6 +57,14 @@ compatibility. \code{args = "--output=/foo/bar"} can be used to change the
 check directory.}
 
 \item{cleanup}{Deprecated.}
+
+\item{error_on}{Whether to throw an error on \code{R CMD check} failures.
+Note that the check is always completed (unless a timeout happens),
+and the error is only thrown after completion. If \code{"never"}, then
+no errors are thrown. If \code{"error"}, then only \code{ERROR} failures
+generate errors. If \code{"warning"}, then \code{WARNING} failures generate
+errors as well. If \code{"note"}, then any check failure generated an
+error.}
 
 \item{path}{Path to built package.}
 }

@@ -1,5 +1,9 @@
 # devtools 1.13.3.9000
 
+* `check()` and `check_built()` now have an `error_on` argument to specify if
+  they should throw an error on check failures. When run non-interactively this
+  is set to "warnings" unless specified.
+
 * `install_bioc()` has been updated to use git repositories instead of svn 
   (@rcannood, #1649, #1705).
 
