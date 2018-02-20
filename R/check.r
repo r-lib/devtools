@@ -65,7 +65,9 @@ check <- function(pkg = ".",
                   env_vars = NULL,
                   quiet = FALSE,
                   check_dir = tempdir(),
-                  cleanup = TRUE) {
+                  cleanup = TRUE,
+                  error_on = c("never", "error", "warning", "note")) {
+
   pkg <- as.package(pkg)
   withr::local_options(list(warn = 1))
 
@@ -76,6 +78,11 @@ check <- function(pkg = ".",
   if (!missing(cleanup)) {
     warning("`cleanup` is deprecated", call. = FALSE)
   }
+
+  if (missing(error_on) && !interactive()) {
+    error_on <- "warning"
+  }
+  error_on <- match.arg(error_on)
 
   # document only if package uses roxygen, i.e. has RoxygenNote field
   if (identical(document, NA)) {
@@ -117,7 +124,8 @@ check <- function(pkg = ".",
     args = args,
     env_vars = env_vars,
     quiet = quiet,
-    check_dir = check_dir
+    check_dir = check_dir,
+    error_on = error_on
   )
 }
 
@@ -140,10 +148,17 @@ check <- function(pkg = ".",
 #' @param args Additional arguments passed to \code{R CMD check}
 #' @param env_vars Environment variables set during \code{R CMD check}
 #' @param quiet if \code{TRUE} suppresses output from this function.
+#' @inheritParams rcmdcheck::rcmdcheck
 check_built <- function(path = NULL, cran = TRUE,
                         check_version = FALSE, force_suggests = FALSE,
                         run_dont_test = FALSE, manual = FALSE, args = NULL,
-                        env_vars = NULL,  check_dir = tempdir(), quiet = FALSE) {
+                        env_vars = NULL,  check_dir = tempdir(), quiet = FALSE,
+                        error_on = c("never", "error", "warning", "note")) {
+
+  if (missing(error_on) && !interactive()) {
+    error_on <- "warning"
+  }
+  error_on <- match.arg(error_on)
 
   pkgname <- gsub("_.*?$", "", basename(path))
 
@@ -181,7 +196,7 @@ check_built <- function(path = NULL, cran = TRUE,
   }
 
   withr::with_envvar(env_vars, action = "prefix", {
-    rcmdcheck::rcmdcheck(path, quiet = quiet, args = args)
+    rcmdcheck::rcmdcheck(path, quiet = quiet, args = args, error_on = error_on)
   })
 }
 

@@ -88,7 +88,7 @@ useful for checking for missing exports.
 
 
 \code{load_all} also inserts shim functions into the imports environment
-of the laded package. It presently adds a replacement version of
+of the loaded package. It presently adds a replacement version of
 \code{system.file} which returns different paths from
 \code{base::system.file}. This is needed because installed and uninstalled
 package sources have different directory structures. Note that this is not
