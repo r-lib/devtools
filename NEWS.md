@@ -72,10 +72,19 @@
   `load_all()` is set to `FALSE` (@nbenn, #1669)
 
 * The `my_unzip()` function is now able to use the `utils::unzip` fallback when R is compiled from source with no *unzip* package present (@theGreatWhiteShark, #1678)
+# devtools 1.13.5
+* Fix two test errors related to GitHub rate limiting and mocking base functions.
+
+# devtools 1.13.4
+* Fix test errors for upcoming testthat release.
+
+# devtools 1.13.3
+* Workaround a change in how Rcpp::compileAttributes stores the symbol names
+  that broke tests.
 
 # devtools 1.13.2
-Workaround a regression in Rcpp::compileAttributes.
-Add trimws implementation for R 3.1 support.
+* Workaround a regression in Rcpp::compileAttributes. Add trimws implementation
+  for R 3.1 support.
 
 # devtools 1.13.1
 

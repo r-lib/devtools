@@ -181,3 +181,11 @@ warn_unless_current_dir <- function(pkg) {
     warning("`pkg` is not `.`, which is now unsupported.\n  Please use `usethis::proj_set()` to set the project directory.", immediate. = TRUE)
   }
 }
+
+menu <- function(...) {
+  utils::menu(...)
+}
+
+file.info <- function(...) {
+  base::file.info(...)
+}

@@ -9,11 +9,11 @@ Version: 0.0.1
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      4. Failure: rm_accent is the converted version of a string with all non-ASCII characters removed. (@test-rm_accent.R#34) 
       rm_accent(umlaut) not equal to `nudeUmlaut`.
       1/1 mismatches
       x[1]: "\"a\"e\"i\"o\"u\"A\"E\"I\"O\"U\"y"
       y[1]: "aeiouAEIOUy"
+      
       
       testthat results ================================================================
       OK: 10 SKIPPED: 0 FAILED: 4
@@ -44,7 +44,6 @@ Version: 1.0.2
     Namespaces in Imports field not imported from:
       ‘plotly’ ‘shinydashboard’
       All declared Imports should be used.
-    Missing or unexported object: ‘devtools::clean_source’
     ```
 
 # alphavantager
@@ -64,6 +63,9 @@ Version: 0.1.0
 Version: 1.2.1
 
 ## In both
+
+*   R CMD check timed out
+    
 
 *   checking R code for possible problems ... NOTE
     ```
@@ -98,145 +100,9 @@ Version: 2.1.2
     Package unavailable to check Rd xrefs: ‘archivist.github’
     ```
 
-# assertive.code
-
-Version: 0.0-1
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      Attaching package: 'assertive.base'
-      
-      The following objects are masked from 'package:testthat':
-      
-          is_false, is_true
-      
-      > library(assertive.code)
-      > 
-      > with_envvar(
-      +   c(LANG = "en_US"),
-      +   test_check("assertive.code")
-      + )
-      Error in with_envvar(c(LANG = "en_US"), test_check("assertive.code")) : 
-        could not find function "with_envvar"
-      Execution halted
-    ```
-
-# assertive.data
-
-Version: 0.0-1
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-          use_travis, use_vignette
-      
-      The following object is masked from 'package:testthat':
-      
-          setup
-      
-      > library(assertive.data)
-      > 
-      > with_envvar(
-      +   c(LANG = "en_US"),
-      +   test_check("assertive.data")
-      + )
-      Error in with_envvar(c(LANG = "en_US"), test_check("assertive.data")) : 
-        could not find function "with_envvar"
-      Execution halted
-    ```
-
-# assertive.data.uk
-
-Version: 0.0-1
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-          use_travis, use_vignette
-      
-      The following object is masked from 'package:testthat':
-      
-          setup
-      
-      > library(assertive.data.uk)
-      > 
-      > with_envvar(
-      +   c(LANG = "en_US"),
-      +   test_check("assertive.data.uk")
-      + )
-      Error in with_envvar(c(LANG = "en_US"), test_check("assertive.data.uk")) : 
-        could not find function "with_envvar"
-      Execution halted
-    ```
-
-# assertive.data.us
-
-Version: 0.0-1
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-          use_travis, use_vignette
-      
-      The following object is masked from 'package:testthat':
-      
-          setup
-      
-      > library(assertive.data.us)
-      > 
-      > with_envvar(
-      +   c(LANG = "en_US"),
-      +   test_check("assertive.data.us")
-      + )
-      Error in with_envvar(c(LANG = "en_US"), test_check("assertive.data.us")) : 
-        could not find function "with_envvar"
-      Execution halted
-    ```
-
 # assertive.matrices
 
 Version: 0.0-1
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-          use_travis, use_vignette
-      
-      The following object is masked from 'package:testthat':
-      
-          setup
-      
-      > library(assertive.matrices)
-      > 
-      > with_envvar(
-      +   c(LANG = "en_US"),
-      +   test_check("assertive.matrices")
-      + )
-      Error in with_envvar(c(LANG = "en_US"), test_check("assertive.matrices")) : 
-        could not find function "with_envvar"
-      Execution halted
-    ```
 
 ## In both
 
@@ -244,34 +110,6 @@ Version: 0.0-1
     ```
     ':::' call which should be '::': ‘assertive.base:::print_and_capture’
       See the note in ?`:::` about the use of this operator.
-    ```
-
-# assertive.models
-
-Version: 0.0-1
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-          use_travis, use_vignette
-      
-      The following object is masked from 'package:testthat':
-      
-          setup
-      
-      > library(assertive.models)
-      > 
-      > with_envvar(
-      +   c(LANG = "en_US"),
-      +   test_check("assertive.models")
-      + )
-      Error in with_envvar(c(LANG = "en_US"), test_check("assertive.models")) : 
-        could not find function "with_envvar"
-      Execution halted
     ```
 
 # BEACH
@@ -289,30 +127,6 @@ Version: 1.1.2
 # BiocCheck
 
 Version: 1.12.0
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/runTests.R’ failed.
-    Last 13 lines of output:
-      Use 'usethis::create_package()' instead.
-      See help("Deprecated") and help("devtools-deprecated"). 
-      6: 'create_description' is deprecated.
-      Use 'usethis::use_description()' instead.
-      See help("Deprecated") and help("devtools-deprecated"). 
-      7: 'devtools::create' is deprecated.
-      Use 'usethis::create_package()' instead.
-      See help("Deprecated") and help("devtools-deprecated"). 
-      8: 'setup' is deprecated.
-      Use 'usethis::create_package()' instead.
-      See help("Deprecated") and help("devtools-deprecated"). 
-      9: 'create_description' is deprecated.
-      Use 'usethis::use_description()' instead.
-      See help("Deprecated") and help("devtools-deprecated"). 
-      Execution halted
-    ```
 
 ## In both
 
@@ -366,7 +180,7 @@ Version: 1.26.1
 
 # BioInstaller
 
-Version: 0.2.1
+Version: 0.2.2
 
 ## Newly broken
 
@@ -444,43 +258,17 @@ Version: 2.0.1
 
 ## In both
 
-*   checking whether package ‘chipenrich’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘.../revdep/checks/chipenrich/new/chipenrich.Rcheck/00install.out’ for details.
-    ```
+*   R CMD check timed out
+    
 
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘chipenrich’ ...
-** R
-** inst
-** preparing package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘data.table’
-ERROR: lazy loading failed for package ‘chipenrich’
-* removing ‘.../revdep/checks/chipenrich/new/chipenrich.Rcheck/chipenrich’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘chipenrich’ ...
-** R
-** inst
-** preparing package for lazy loading
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘data.table’
-ERROR: lazy loading failed for package ‘chipenrich’
-* removing ‘.../revdep/checks/chipenrich/old/chipenrich.Rcheck/chipenrich’
-
-```
 # chipenrich.data
 
 Version: 2.0.0
+
+## Newly broken
+
+*   R CMD check timed out
+    
 
 ## In both
 
@@ -489,34 +277,6 @@ Version: 2.0.0
       installed size is 147.8Mb
       sub-directories of 1Mb or more:
         data  147.0Mb
-    ```
-
-# civis
-
-Version: 1.0.2
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      testthat results ================================================================
-      OK: 742 SKIPPED: 4 FAILED: 17
-      1. Error: calls scripts_post_custom (@test_civis_ml.R#24) 
-      2. Error: calls civis_ml.data.frame for local df (@test_civis_ml.R#103) 
-      3. Error: calls scripts_post_custom (@test_civis_ml.R#326) 
-      4. Error: uploads local df and passes a file_id (@test_civis_ml.R#400) 
-      5. Error: uses the correct template_id (@test_civis_ml.R#547) 
-      6. Error: converts parameters arg to JSON string (@test_civis_ml.R#564) 
-      7. Error: converts cross_validation_parameters to JSON string (@test_civis_ml.R#581) 
-      8. Error: converts fit_params to JSON string (@test_civis_ml.R#600) 
-      9. Error: space separates excluded_columns (@test_civis_ml.R#618) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Execution halted
     ```
 
 # cogena
@@ -537,7 +297,7 @@ Version: 1.10.0
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.3Mb
+      installed size is  6.4Mb
       sub-directories of 1Mb or more:
         doc       1.9Mb
         extdata   3.1Mb
@@ -593,27 +353,27 @@ Version: 1.14.0
 ```
 * installing *source* package ‘COMPASS’ ...
 ** libs
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c COMPASS_init.c -o COMPASS_init.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts.cpp -o CellCounts.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts_character.cpp -o CellCounts_character.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c digamma.c -o digamma.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c mat2vec.c -o mat2vec.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_dataframe.c -o melt_dataframe.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_matrix.c -o melt_matrix.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c samplePuPs.cpp -o samplePuPs.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c transpose_list.c -o transpose_list.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphas_Exp.cpp -o updatealphas_Exp.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau.cpp -o updatealphau.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau_noPu_Exp.cpp -o updatealphau_noPu_Exp.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatebeta_RW.cpp -o updatebeta_RW.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c COMPASS_init.c -o COMPASS_init.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts.cpp -o CellCounts.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts_character.cpp -o CellCounts_character.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c digamma.c -o digamma.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c mat2vec.c -o mat2vec.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_dataframe.c -o melt_dataframe.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_matrix.c -o melt_matrix.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c samplePuPs.cpp -o samplePuPs.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c transpose_list.c -o transpose_list.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphas_Exp.cpp -o updatealphas_Exp.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau.cpp -o updatealphau.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau_noPu_Exp.cpp -o updatealphau_noPu_Exp.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatebeta_RW.cpp -o updatebeta_RW.o
 CellCounts.cpp:40:35: error: no matching function for call to 'sapply'
       IntegerVector c_combo_abs = sapply(c_combo, ::abs);
                                   ^~~~~~
-.../revdep/library/devtools/new/Rcpp/include/Rcpp/sugar/functions/sapply.h:126:1: note: candidate template ignored: couldn't infer template argument 'Function'
+.../revdep/library/COMPASS/Rcpp/include/Rcpp/sugar/functions/sapply.h:126:1: note: candidate template ignored: couldn't infer template argument 'Function'
 sapply( const Rcpp::VectorBase<RTYPE,NA,T>& t, Function fun ){
 ^
-.../revdep/library/devtools/new/Rcpp/include/Rcpp/vector/ListOf.h:134:3: note: candidate template ignored: could not match 'ListOf' against 'Vector'
+.../revdep/library/COMPASS/Rcpp/include/Rcpp/vector/ListOf.h:134:3: note: candidate template ignored: could not match 'ListOf' against 'Vector'
 T sapply(const ListOf<T>& t, Function fun) {
   ^
 1 error generated.
@@ -642,6 +402,8 @@ clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../re
 clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau.cpp -o updatealphau.o
 clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau_noPu_Exp.cpp -o updatealphau_noPu_Exp.o
 clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatebeta_RW.cpp -o updatebeta_RW.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updategammak_noPu.cpp -o updategammak_noPu.o
+clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c utils.c -o utils.o
 CellCounts.cpp:40:35: error: no matching function for call to 'sapply'
       IntegerVector c_combo_abs = sapply(c_combo, ::abs);
                                   ^~~~~~
@@ -661,37 +423,6 @@ ERROR: compilation failed for package ‘COMPASS’
 # congressbr
 
 Version: 0.1.1
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘congressbr-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: cham_bill_info
-    > ### Title: Downloads details of a specific bill by providing type, number
-    > ###   and year
-    > ### Aliases: cham_bill_info
-    > 
-    > ### ** Examples
-    > 
-    > cham_bill_info(type = "PL", number = "3962", year = "2008")
-    Error in mutate_impl(.data, dots) : 
-      Evaluation error: object 'x' not found.
-    Calls: cham_bill_info ... <Anonymous> -> mutate -> mutate.tbl_df -> mutate_impl -> .Call
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 31-32 (chamber.Rmd) 
-    Error: processing vignette 'chamber.Rmd' failed with diagnostics:
-    Evaluation error: object 'x' not found.
-    Execution halted
-    ```
 
 ## In both
 
@@ -742,62 +473,6 @@ ERROR: lazy loading failed for package ‘CountClust’
 * removing ‘.../revdep/checks/CountClust/old/CountClust.Rcheck/CountClust’
 
 ```
-# covr
-
-Version: 3.0.0
-
-## In both
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      x[115]: isplay\\\">\\n  <thead>\\n    <tr>\\n      <th>Coverage<\\/th>\\n      ...
-      y[115]: "          <script type=\"application/json\" data-for=\"htmlwidget-eaef49d
-      y[115]: 4a484bc22a8b4\">{\"x\":{\"filter\":\"none\",\"data\":[[\"<div class=\\\"co
-      y[115]: verage-box coverage-high\\\">100.00\\u003c/div>\"],[\"<a href=\\\"#\\\">R/
-      y[115]: TestS4.R\\u003c/a>\"],[38],[6],[6],[0],[\"2\"]],\"container\":\"<table cla
-      y[115]: ss=\\\"display\\\">\\n  <thead>\\n    <tr>\\n      <th>Coverage\\u003c/...
-      
-      testthat results ================================================================
-      OK: 232 SKIPPED: 0 FAILED: 3
-      1. Error: parse_gcov parses files properly (@test-gcov.R#3) 
-      2. Error: clean_gcov correctly clears files (@test-gcov.R#63) 
-      3. Failure: it works with coverage objects (@test-report.R#28) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# crunch
-
-Version: 1.18.4
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      testthat results ================================================================
-      OK: 1442 SKIPPED: 10 FAILED: 151
-      1. Error: Adding a variable with all the same values gets sent more concisely (@test-add-variable.R#103) 
-      2. Error: crunch.debug does not print if disabled (@test-api.R#12) 
-      3. Error: crunch.debug logging if enabled (@test-api.R#19) 
-      4. Error: If no filtering, 'where' and 'filter' are omitted (@test-append-subset.R#7) 
-      5. Error: Append with filter (@test-append-subset.R#13) 
-      6. Error: Append with variable selection (@test-append-subset.R#20) 
-      7. Error: Append with variable selection and filter (@test-append-subset.R#27) 
-      8. Error: append DELETEs the pk (@test-appending.R#22) 
-      9. Error: appendDataset shows deprecation warnings (@test-appending.R#27) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 # curatedMetagenomicData
 
 Version: 1.2.2
@@ -874,11 +549,8 @@ Version: 1.4.5
 
 ## Newly broken
 
-*   checking whether package ‘debrowser’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘.../revdep/checks/debrowser/new/debrowser.Rcheck/00install.out’ for details.
-    ```
+*   R CMD check timed out
+    
 
 ## Newly fixed
 
@@ -890,6 +562,8 @@ Version: 1.4.5
     there is no package called ‘BiocStyle’
     Execution halted
     ```
+
+## In both
 
 *   checking installed package size ... NOTE
     ```
@@ -903,21 +577,21 @@ Version: 1.4.5
     ```
     ...
     volcanoPlot: no visible binding for global variable ‘fillOpacity.hover’
-      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
+      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
     volcanoPlot: no visible binding for global variable ‘fill.brush’
-      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
+      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
     volcanoPlot: no visible binding for global variable ‘opacity’
-      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
+      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
     volcanoPlot: no visible binding for global variable ‘key’
-      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
+      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
     volcanoZoom: no visible global function definition for ‘:=’
-      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
+      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
     volcanoZoom: no visible binding for global variable ‘size’
-      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
+      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
     volcanoZoom: no visible binding for global variable ‘size.hover’
-      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
+      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
     volcanoZoom: no visible binding for global variable ‘key’
-      (.../revdep/checks/debrowser/old/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
+      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
     Undefined global functions or variables:
       .startdebrowser.called := NUL align baseline biocLite conds debrowser
       demodata fill fill.brush fillOpacity fillOpacity.hover fit fontSize
@@ -925,39 +599,6 @@ Version: 1.4.5
       searched size size.hover stroke updateStore with_shiny
     ```
 
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘debrowser’ ...
-** R
-** inst
-** preparing package for lazy loading
-Error : object ‘load_data’ is not exported by 'namespace:devtools'
-ERROR: lazy loading failed for package ‘debrowser’
-* removing ‘.../revdep/checks/debrowser/new/debrowser.Rcheck/debrowser’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘debrowser’ ...
-** R
-** inst
-** preparing package for lazy loading
-No methods found in "S4Vectors" for requests: rowMeans
-No methods found in "S4Vectors" for requests: rowSums
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded
-No methods found in "S4Vectors" for requests: rowMeans
-No methods found in "S4Vectors" for requests: rowSums
-* DONE (debrowser)
-
-```
 # demi
 
 Version: 1.1.2
@@ -1061,26 +702,26 @@ Version: 2.1.0
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      > library("document")
-      > test_check("document")
-      1. Error: (unknown) (@test_basic.R#13) -----------------------------------------
-      R CMD check failed, read the above log and fix.
-      1: document(file_name, check_package = TRUE, runit = TRUE) at testthat/test_basic.R:13
-      2: check_package(package_directory = package_directory, working_directory = working_directory, 
-             check_as_cran = check_as_cran, debug = debug, stop_on_check_not_passing = stop_on_check_not_passing) at .../revdep/checks/document/new/document.Rcheck/00_pkg_src/document/R/document.R:80
-      3: throw("R CMD check failed, read the above log and fix.") at .../revdep/checks/document/new/document.Rcheck/00_pkg_src/document/R/package_functions.R:119
-      
+      .../revdep/checks/document/new/document.Rcheck
+      .../revdep/library/devtools/new
+      .../revdep/library/document
+      /Library/Frameworks/R.framework/Versions/3.4/Resources/library
+      Sys.info:
+      Jamess-MacBook-Pro-2.local
+      Darwin Kernel Version 16.7.0: Thu Jun 15 17:36:27 PDT 2017; root:xnu-3789.70.16~2/RELEASE_X86_64
+      Path: /var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmpgTYkas/document_922d1ae4d77e/mini.mal
+      ###
+      Error in check_package(package_directory = package_directory, working_directory = working_directory,  : 
+        R CMD check failed, read the above log and fix.
+      Calls: test_check ... source_file -> eval -> eval -> document -> check_package -> throw
       testthat results ================================================================
-      OK: 0 SKIPPED: 0 FAILED: 1
-      1. Error: (unknown) (@test_basic.R#13) 
-      
-      Error: testthat unit tests failed
+      OK: 0 SKIPPED: 0 FAILED: 0
       Execution halted
     ```
 
 # dodgr
 
-Version: 0.0.1
+Version: 0.0.3
 
 ## In both
 
@@ -1089,7 +730,7 @@ Version: 0.0.1
     Error in re-building vignettes:
       ...
     Loading dodgr
-    Quitting from lines 119-131 (benchmark.Rmd) 
+    Quitting from lines 117-144 (benchmark.Rmd) 
     Error: processing vignette 'benchmark.Rmd' failed with diagnostics:
     polygon edge not found
     Execution halted
@@ -1126,7 +767,7 @@ Version: 1.0.0
 
 # elementR
 
-Version: 1.3.2
+Version: 1.3.3
 
 ## In both
 
@@ -1158,7 +799,7 @@ Version: 1.3.2
       installed size is  5.6Mb
       sub-directories of 1Mb or more:
         R         1.8Mb
-        Results   2.4Mb
+        Results   2.3Mb
     ```
 
 # epiNEM
@@ -1210,70 +851,6 @@ Version: 1.0.1
     to your NAMESPACE file.
     ```
 
-# exampletestr
-
-Version: 1.0.1
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    See help("Deprecated") and help("devtools-deprecated").
-    No DESCRIPTION found. Creating with values:
-    
-    
-    Package: tempkg
-    Title: What the Package Does (one line, title case)
-    Version: 0.0.0.9000
-    Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-    Description: What the package does (one paragraph).
-    Depends: R (>= 3.4.2)
-    License: What license is it under?
-    Encoding: UTF-8
-    LazyData: true
-    Warning: 'use_rstudio' is deprecated.
-    Use 'usethis::use_rstudio()' instead.
-    See help("Deprecated") and help("devtools-deprecated").
-    Warning in warn_unless_current_dir(pkg) :
-      `pkg` is not `.`, which is now unsupported.
-      Please use `usethis::proj_set()` to set the project directory.
-    Error: Current working directory, '/private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpqHEKVb',  does not appear to be inside a project or package.
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      1: expect_true(devtools::create("tempkg")) at testthat/test_exemplar.R:140
-      2: quasi_label(enquo(object), label) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/remotes96f838157a80/r-lib-testthat-1faa32f/R/expect-logical.R:32
-      3: eval_bare(get_expr(quo), get_env(quo)) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/remotes96f838157a80/r-lib-testthat-1faa32f/R/expectation.R:90
-      4: devtools::create("tempkg") at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/remotes96f8300192cd/tidyverse-rlang-cbdc3f3/R/eval.R:66
-      5: stop("Directory exists and is not empty", call. = FALSE) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/file96f832690f52/devtools/R/create.r:28
-      
-      testthat results ================================================================
-      OK: 15 SKIPPED: 0 FAILED: 4
-      1. Error: extract_examples works (@test_exemplar.R#5) 
-      2. Failure: make_test_shell works (@test_exemplar.R#93) 
-      3. Error: make_test_shell works (@test_exemplar.R#94) 
-      4. Error: make_tests_shells_file works (@test_exemplar.R#140) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 23-30 (exampletestr.Rmd) 
-    Error: processing vignette 'exampletestr.Rmd' failed with diagnostics:
-    Current working directory, '/private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpPHiRQV',  does not appear to be inside a project or package.
-    Execution halted
-    ```
-
 # ggExtra
 
 Version: 0.7
@@ -1284,34 +861,6 @@ Version: 0.7
     ```
     Namespace in Imports field not imported from: ‘grDevices’
       All declared Imports should be used.
-    ```
-
-# githubinstall
-
-Version: 0.2.1
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      testthat results ================================================================
-      OK: 34 SKIPPED: 0 FAILED: 12
-      1. Error: Install: ask no (@test-gh_install_packages.R#27) 
-      2. Error: Install: ask yes (@test-gh_install_packages.R#37) 
-      3. Error: recommend_dependencies: ask = TRUE (@test-utils_for_install.R#49) 
-      4. Error: select_repository: multi candidates (@test-utils_for_install.R#130) 
-      5. Error: select_repository: cancel (@test-utils_for_install.R#142) 
-      6. Error: remove_conflict_repos: no installed (@test-utils_for_install.R#169) 
-      7. Error: remove_conflict_repos: not conflict (@test-utils_for_install.R#183) 
-      8. Error: remove_conflict_repos: conflict GitHub, ask yes (@test-utils_for_install.R#198) 
-      9. Error: remove_conflict_repos: conflict GitHub, ask no (@test-utils_for_install.R#213) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Execution halted
     ```
 
 # googleAuthR
@@ -1376,18 +925,18 @@ Version: 1.1.0
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
+             message = handle_message))
+      4: withCallingHandlers(withVisible(code), warning = handle_warning, message = handle_message)
+      5: withVisible(code)
+      6: rmarkdown::render("table-tester-2.Rmd", quiet = TRUE, output_format = "pdf_document")
+      7: convert(output_file, run_citeproc)
+      8: pandoc_convert(utf8_input, pandoc_to, output_format$pandoc$from, output, citeproc, 
+             output_format$pandoc$args, !quiet)
+      9: stop("pandoc document conversion failed with error ", result, call. = FALSE)
+      
       testthat results ================================================================
-      OK: 290 SKIPPED: 2 FAILED: 47
-      1. Error: Cell property attr align examples unchanged (@test-attributes.R#14) 
-      2. Error: Cell property attr valign examples unchanged (@test-attributes.R#14) 
-      3. Error: Cell property attr rowspan examples unchanged (@test-attributes.R#14) 
-      4. Error: Cell property attr colspan examples unchanged (@test-attributes.R#14) 
-      5. Error: Cell property attr background_color examples unchanged (@test-attributes.R#14) 
-      6. Error: Cell property attr text_color examples unchanged (@test-attributes.R#14) 
-      7. Error: Cell property attr top_border examples unchanged (@test-attributes.R#14) 
-      8. Error: Cell property attr left_border examples unchanged (@test-attributes.R#14) 
-      9. Error: Cell property attr right_border examples unchanged (@test-attributes.R#14) 
-      1. ...
+      OK: 290 SKIPPED: 48 FAILED: 1
+      1. Error: table-tester-2.Rmd renders without errors in LaTeX (@test-with-pandoc.R#27) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -1417,44 +966,9 @@ Version: 0.99-20171005
     Warning: local assignments to syntactic functions: ~
     ```
 
-# IalsaSynthesis
-
-Version: 0.1.6
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      1: base::file.path(devtools::inst(name = "IalsaSynthesis"), "test_data/2015-portland") at testthat/test-validate.R:28
-      2: devtools::inst
-      3: getExportedValue(pkg, name)
-      4: stop(gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns)), 
-             call. = FALSE, domain = NA)
-      
-      testthat results ================================================================
-      OK: 1 SKIPPED: 0 FAILED: 4
-      1. Error: (unknown) (@test-extract.R#5) 
-      2. Error: validate_filename_output -good (@test-validate.R#7) 
-      3. Error: validate_filename_output -missing (@test-validate.R#19) 
-      4. Error: validate_filename_output -bad extension (@test-validate.R#28) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 # icd9
 
 Version: 1.3.1
-
-## Newly broken
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Missing or unexported object: ‘devtools::load_data’
-    ```
 
 ## In both
 
@@ -1567,20 +1081,20 @@ Version: 0.7.5
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
+      	 >> 2 records have been read successfully!
+      
+      testthat results ================================================================
+      OK: 488 SKIPPED: 0 FAILED: 1
+      1. Failure: Full check of analyse_baSAR function (@test_analyse_baSAR.R#48) 
+      
       Error: testthat unit tests failed
       In addition: Warning messages:
-      1: In .Internal(gc(verbose, reset)) :
-        closing unused connection 8 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmpnjWeBc/read_BIN2R_FILEfc9339e39)
-      2: In .Internal(gc(verbose, reset)) :
-        closing unused connection 7 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmpnjWeBc/read_BIN2R_FILEfc935deb412b)
-      3: In .Internal(gc(verbose, reset)) :
-        closing unused connection 6 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmpnjWeBc/read_BIN2R_FILEfc93298cd8c4)
-      4: In .Internal(gc(verbose, reset)) :
-        closing unused connection 5 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmpnjWeBc/read_BIN2R_FILEfc93283cb4f7)
-      5: In .Internal(gc(verbose, reset)) :
-        closing unused connection 4 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmpnjWeBc/read_BIN2R_FILEfc9353ea024b)
-      6: In .Internal(gc(verbose, reset)) :
-        closing unused connection 3 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmpnjWeBc/read_BIN2R_FILEfc93688483d0)
+      1: closing unused connection 8 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmprDjKyh/read_BIN2R_FILEa9bd5d84fabe) 
+      2: closing unused connection 7 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmprDjKyh/read_BIN2R_FILEa9bd1dce7583) 
+      3: closing unused connection 6 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmprDjKyh/read_BIN2R_FILEa9bd6824283f) 
+      4: closing unused connection 5 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmprDjKyh/read_BIN2R_FILEa9bd6634200c) 
+      5: closing unused connection 4 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmprDjKyh/read_BIN2R_FILEa9bd6c0f57a) 
+      6: closing unused connection 3 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmprDjKyh/read_BIN2R_FILEa9bd6718b3bf) 
       Execution halted
     ```
 
@@ -1640,15 +1154,6 @@ Version: 0.1.0
     to your NAMESPACE file.
     ```
 
-# miniCRAN
-
-Version: 0.2.10
-
-## In both
-
-*   R CMD check timed out
-    
-
 # MODIS
 
 Version: 1.1.0
@@ -1674,17 +1179,17 @@ Version: 0.6.0
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-        expect_warning(source_gist("605a984e764f9ed358556b4ce48cbd08", local = environment()), "using first")
-      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-      tests/testthat/test-uninstall.r:7:15: style: Use <-, not =, for assignment.
-        tmp_libpath = file.path(tempdir(), "devtools_test")
-                    ^
+                                               ~^~
+      tests/testthat/testS4import/R/all.r:1:29: style: Put spaces around all infix operators.
+      setClass('derived', contains='class_to_export')
+                                 ~^~
       tests/testthat/testVignettesBuilt/R/code.r:1:1: style: Variable and function names should not be longer than 20 characters.
       function_with_unusual_name <- function() {
       ^~~~~~~~~~~~~~~~~~~~~~~~~~
       
+      
       testthat results ================================================================
-      OK: 64 SKIPPED: 0 FAILED: 1
+      OK: 72 SKIPPED: 0 FAILED: 1
       1. Failure: Package Style (@test-lintr.R#3) 
       
       Error: testthat unit tests failed
@@ -1712,8 +1217,27 @@ Version: 0.4.1
 
 ## In both
 
-*   R CMD check timed out
-    
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      1: In .Internal(gc(verbose, reset)) :
+        Connection is garbage-collected, use dbDisconnect() to avoid this.
+      2: In .Internal(gc(verbose, reset)) :
+        Connection is garbage-collected, use dbDisconnect() to avoid this.
+      3: In .Internal(gc(verbose, reset)) :
+        Connection is garbage-collected, use dbDisconnect() to avoid this.
+      4: In .Internal(gc(verbose, reset)) :
+        Connection is garbage-collected, use dbDisconnect() to avoid this.
+      5: In .Internal(gc(verbose, reset)) :
+        Connection is garbage-collected, use dbDisconnect() to avoid this.
+      6: Connection is garbage-collected, use dbDisconnect() to avoid this. 
+      7: Connection is garbage-collected, use dbDisconnect() to avoid this. 
+      8: In .Internal(gc(verbose, reset)) :
+        Connection is garbage-collected, use dbDisconnect() to avoid this.
+      Execution halted
+    ```
 
 *   checking installed package size ... NOTE
     ```
@@ -1750,7 +1274,7 @@ Version: 0.2.7
     ...
     >   # make a translation
     >   tran <- make_translation("es", translator = "Some Person <example@examle.com>", pkg = pkg)
-    Updating the PO-Revision-Date to ‘2017-10-26 15:23:53-0400’.
+    Updating the PO-Revision-Date to ‘2017-11-08 12:38:02-0500’.
     Updating the Language-Team to ‘’.
     >   write_translation(tran, pkg = pkg)
     > 
@@ -1763,7 +1287,7 @@ Version: 0.2.7
     sh: msgfmt: command not found
     Warning in install_translations(pkg = pkg) :
       running msgfmt on R-es.po failed
-    Updating the PO-Revision-Date to ‘2017-10-26 15:23:54-0400’.
+    Updating the PO-Revision-Date to ‘2017-11-08 12:38:03-0500’.
     Updating the Language-Team to ‘’.
     sh: msgconv: command not found
     Error in install_translations(pkg = pkg) : 
@@ -1800,6 +1324,19 @@ Version: 0.6.0
         doc    2.7Mb
     ```
 
+# NetworkToolbox
+
+Version: 0.0.1.0
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘devtools’ ‘qdap’
+      All declared Imports should be used.
+    ```
+
 # networktools
 
 Version: 1.1.0
@@ -1828,30 +1365,6 @@ Version: 0.4.5
 
 Version: 2.0.6
 
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
-      3: getExportedValue(pkg, name)
-      4: stop(gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns)), 
-             call. = FALSE, domain = NA)
-      
-      testthat results ================================================================
-      OK: 198 SKIPPED: 0 FAILED: 6
-      1. Error: Nlsy79Gen2 (@test-column-utilities.R#89) 
-      2. Error: RenameNlsyColumn (@test-column-utilities.R#103) 
-      3. Error: Nlsy79Gen1Path (@test-read-csv.R#21) 
-      4. Error: Nlsy79Gen1DataFrame (@test-read-csv.R#32) 
-      5. Error: Nlsy79Gen2Path (@test-read-csv.R#45) 
-      6. Error: Nlsy79Gen2DataFrame (@test-read-csv.R#58) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 ## In both
 
 *   checking installed package size ... NOTE
@@ -1867,6 +1380,14 @@ Version: 2.0.6
 Version: 0.20.6
 
 ## In both
+
+*   R CMD check timed out
+    
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Unknown package ‘RcppOctave’ in Rd xrefs
+    ```
 
 *   checking package dependencies ... NOTE
     ```
@@ -1905,11 +1426,6 @@ Version: 0.20.6
       (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/NMF-class.R:2263-2264)
     Undefined global functions or variables:
       Biobase RNGobj fstop n
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Package unavailable to check Rd xrefs: ‘RcppOctave’
     ```
 
 # npsm
@@ -1957,7 +1473,7 @@ Version: 2.0.5
 
 # OpenMx
 
-Version: 2.7.18
+Version: 2.8.3
 
 ## In both
 
@@ -1968,9 +1484,9 @@ Version: 2.7.18
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 15.2Mb
+      installed size is 17.0Mb
       sub-directories of 1Mb or more:
-        R        4.3Mb
+        R        6.1Mb
         libs     3.5Mb
         models   4.6Mb
     ```
@@ -2005,7 +1521,7 @@ Version: 0.4.8-1
     Running the tests in ‘tests/test-all.R’ failed.
     Last 13 lines of output:
       testthat results ================================================================
-      OK: 47 SKIPPED: 2 FAILED: 11
+      OK: 47 SKIPPED: 1 FAILED: 11
       1. Error: Bundle works when using R's internal tar (@test-bundle.R#14) 
       2. Error: Bundle works when omitting CRAN packages (@test-bundle.R#36) 
       3. Error: init creates project structure and installs dependencies (@test-packrat.R#19) 
@@ -2122,30 +1638,6 @@ Version: 0.0-3
 
 Version: 0.3.0
 
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      13: suppressMessages(devtools::create(proj_path))
-      14: withCallingHandlers(expr, message = function(c) invokeRestart("muffleMessage"))
-      15: devtools::create(proj_path)
-      16: stop("Directory exists and is not empty", call. = FALSE) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/file96f832690f52/devtools/R/create.r:28
-      
-      testthat results ================================================================
-      OK: 18 SKIPPED: 0 FAILED: 5
-      1. Error: (current version) project directory and files created (default) (@test-projects.R#129) 
-      2. Error: (current version) project directory and files created (using name) (@test-projects.R#137) 
-      3. Error: (current version) project directory and files created (using strobe) (@test-projects.R#145) 
-      4. Error: (current version) project directory and files created (using license) (@test-projects.R#153) 
-      5. Error: (current version) project directory and files created (using figshare) (@test-projects.R#161) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
 ## In both
 
 *   checking dependencies in R code ... NOTE
@@ -2199,19 +1691,19 @@ Version: 0.1.0
 * installing *source* package ‘pulver’ ...
 ** package ‘pulver’ successfully unpacked and MD5 sums checked
 ** libs
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c partial_result.cpp -o partial_result.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c pulver.cpp -o pulver.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c result.cpp -o result.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c storage.cpp -o storage.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c partial_result.cpp -o partial_result.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c pulver.cpp -o pulver.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c result.cpp -o result.o
+clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c storage.cpp -o storage.o
 clang: error: unsupported option '-fopenmp'
 clang: error: unsupported option '-fopenmp'
 clang: error: unsupported option '-fopenmp'
-make: *** [partial_result.o] Error 1
-make: *** Waiting for unfinished jobs....
-make: *** [pulver.o] Error 1
 clang: error: unsupported option '-fopenmp'
 make: *** [RcppExports.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [pulver.o] Error 1
+make: *** [partial_result.o] Error 1
 make: *** [result.o] Error 1
 clang: error: unsupported option '-fopenmp'
 make: *** [storage.o] Error 1
@@ -2230,16 +1722,16 @@ clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../re
 clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c pulver.cpp -o pulver.o
 clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c result.cpp -o result.o
 clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c storage.cpp -o storage.o
-clang: errorclang: error: unsupported option '-fopenmp'
-: unsupported option '-fopenmp'
-clang: error: clang: error: unsupported option '-fopenmp'unsupported option '-fopenmp'
-
-make: *** [result.o] Error 1
-make: *** Waiting for unfinished jobs....
+clang: clangclang: : errorerror: : clangerrorclangunsupported option '-fopenmp'
+: : : unsupported option '-fopenmp'unsupported option '-fopenmp'
+error: error: 
+unsupported option '-fopenmp'
+unsupported option '-fopenmp'
 make: *** [storage.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [result.o] Error 1
 make: *** [pulver.o] Error 1
 make: *** [partial_result.o] Error 1
-clang: error: unsupported option '-fopenmp'
 make: *** [RcppExports.o] Error 1
 ERROR: compilation failed for package ‘pulver’
 * removing ‘.../revdep/checks/pulver/old/pulver.Rcheck/pulver’
@@ -2248,16 +1740,6 @@ ERROR: compilation failed for package ‘pulver’
 # rbundler
 
 Version: 0.3.7
-
-## Newly broken
-
-*   checking Rd cross-references ... WARNING
-    ```
-    Missing link or links in documentation object 'install_version.Rd':
-      ‘has_devel’
-    
-    See section 'Cross-references' in the 'Writing R Extensions' manual.
-    ```
 
 ## In both
 
@@ -2333,13 +1815,6 @@ Version: 1.2.3
 
 Version: 0.9.8
 
-## Newly broken
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Missing or unexported object: ‘devtools::inst’
-    ```
-
 ## In both
 
 *   checking tests ...
@@ -2347,18 +1822,18 @@ Version: 0.9.8
      ERROR
     Running the tests in ‘tests/test-all.R’ failed.
     Last 13 lines of output:
+      
+      3. Error: Write Batch -Update Two Fields (@test-write-batch.R#138) -------------
+      wrong sign in 'by' argument
+      1: REDCapR::redcap_write(ds = returned_object1$data, redcap_uri = project$redcap_uri, 
+             token = project$token) at testthat/test-write-batch.R:138
+      2: REDCapR::create_batch_glossary(row_count = base::nrow(ds_to_write), batch_size = batch_size) at .../revdep/checks/REDCapR/new/REDCapR.Rcheck/00_pkg_src/REDCapR/R/redcap-write.R:95
+      
       testthat results ================================================================
-      OK: 120 SKIPPED: 0 FAILED: 25
-      1. Error: NameComesFromREDCap (@test-file-oneshot.R#11) 
-      2. Error: FullPathSpecified (@test-file-oneshot.R#63) 
-      3. Error: RelativePath (@test-file-oneshot.R#114) 
-      4. Error: Full Directory Specific (@test-file-oneshot.R#165) 
-      5. Error: (unknown) (@test-metadata-read.R#4) 
-      6. Error: Smoke Test (@test-project.R#6) 
-      7. Error: Read, Insert, and Update (@test-project.R#12) 
-      8. Error: (unknown) (@test-read-batch-longitudinal.R#4) 
-      9. Error: (unknown) (@test-read-batch-simple.R#4) 
-      1. ...
+      OK: 574 SKIPPED: 0 FAILED: 3
+      1. Failure: Write Batch -Update One Field (@test-write-batch.R#112) 
+      2. Failure: Write Batch -Update Two Fields (@test-write-batch.R#127) 
+      3. Error: Write Batch -Update Two Fields (@test-write-batch.R#138) 
       
       Error: testthat unit tests failed
       Execution halted
@@ -2396,6 +1871,9 @@ Version: 1.10.2
 Version: 2.1.2
 
 ## In both
+
+*   R CMD check timed out
+    
 
 *   checking data for non-ASCII characters ... NOTE
     ```
@@ -2543,26 +2021,14 @@ Version: 0.6-1
 
 ## Newly broken
 
-*   checking tests ...
+*   checking re-building of vignette outputs ... WARNING
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      7: eval(substitute(expr), envir = parent.frame(1))
-      8: devtools::create("tmp") at testthat/test-issue-4.R:49
-      9: setup(path = path, description = description, rstudio = rstudio, check = check, quiet = quiet) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/file96f832690f52/devtools/R/create.r:33
-      10: use_rstudio(path) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/file96f832690f52/devtools/R/create.r:55
-      11: usethis::use_rstudio() at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/file96f832690f52/devtools/R/infrastructure.R:25
-      12: use_template("template.Rproj", paste0(project_name(), ".Rproj")) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/remotes96f8688f4b75/r-lib-usethis-b093d9c/R/rstudio.R:9
-      13: write_over(proj_get(), save_as, template_contents) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/remotes96f8688f4b75/r-lib-usethis-b093d9c/R/helpers.R:17
-      14: stop(value(path), " already exists.", call. = FALSE) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/remotes96f8688f4b75/r-lib-usethis-b093d9c/R/write.R:33
-      
-      testthat results ================================================================
-      OK: 406 SKIPPED: 1 FAILED: 1
-      1. Error: (unknown) (@test-issue-4.R#26) 
-      
-      Error: testthat unit tests failed
-      Execution halted
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 380-382 (RxODE-intro.Rmd) 
+    Error: processing vignette 'RxODE-intro.Rmd' failed with diagnostics:
+    Tried both LSODA and DOP853, but could not solve the system.
+    Execution halted
     ```
 
 # SciencesPo
@@ -2604,15 +2070,6 @@ Version: 0.1.0
 
 Version: 0.0.2
 
-## Newly broken
-
-*   checking whether package ‘spectrolab’ can be installed ... WARNING
-    ```
-    Found the following significant warnings:
-      Warning: 'devtools::use_package' is deprecated.
-    See ‘.../revdep/checks/spectrolab/new/spectrolab.Rcheck/00install.out’ for details.
-    ```
-
 ## In both
 
 *   checking dependencies in R code ... NOTE
@@ -2621,14 +2078,41 @@ Version: 0.0.2
       All declared Imports should be used.
     ```
 
+# spew
+
+Version: 1.3.0
+
+## In both
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Loading required package: sp
+    Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y,  :
+      no font could be found for family "10"
+    Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y,  :
+      no font could be found for family "10"
+    Quitting from lines 45-64 (spew-quickstart.Rmd) 
+    Error: processing vignette 'spew-quickstart.Rmd' failed with diagnostics:
+    polygon edge not found
+    Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘Rmpi’
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘maptools’
+      All declared Imports should be used.
+    ```
+
 # SpidermiR
 
 Version: 1.7.4
-
-## Newly fixed
-
-*   R CMD check timed out
-    
 
 ## In both
 
@@ -2688,6 +2172,15 @@ Version: 1.2.1
       Transport_and_catabolism path
     ```
 
+# SuperLearner
+
+Version: 2.0-22
+
+## In both
+
+*   R CMD check timed out
+    
+
 # sweep
 
 Version: 0.2.0
@@ -2704,6 +2197,27 @@ Version: 0.2.0
 # taxlist
 
 Version: 0.1.2
+
+## Newly fixed
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    This is taxlist 0.1.2
+    
+    Attaching package: 'taxlist'
+    
+    The following object is masked from 'package:base':
+    
+        levels
+    
+    Calling http://taxosaurus.org/retrieve/9e960e5dacf3c865aa9bcdf341441d44
+    Quitting from lines 105-108 (taxlist-intro.Rmd) 
+    Error: processing vignette 'taxlist-intro.Rmd' failed with diagnostics:
+    HTTP status 502 - Bad Gateway
+    Execution halted
+    ```
 
 ## In both
 
@@ -2837,15 +2351,7 @@ Version: 1.2.1
 
 Version: 1.0.2
 
-## Newly broken
-
-*   checking whether package ‘teachingApps’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘.../revdep/checks/teachingApps/new/teachingApps.Rcheck/00install.out’ for details.
-    ```
-
-## Newly fixed
+## In both
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -2854,57 +2360,21 @@ Version: 1.0.2
       All declared Imports should be used.
     ```
 
-## Installation
+# testthis
 
-### Devel
+Version: 1.0.2
 
-```
-* installing *source* package ‘teachingApps’ ...
-** package ‘teachingApps’ successfully unpacked and MD5 sums checked
-** libs
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c bisa.cpp -o bisa.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c lev.cpp -o lev.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c likely.cpp -o likely.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c rcpp_hello_world.cpp -o rcpp_hello_world.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/devtools/new/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c sev.cpp -o sev.o
-clang++ -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o teachingApps.so RcppExports.o bisa.o lev.o likely.o rcpp_hello_world.o sev.o -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
-installing to .../revdep/checks/teachingApps/new/teachingApps.Rcheck/teachingApps/libs
-** R
-** inst
-** preparing package for lazy loading
-Error : object ‘inst’ is not exported by 'namespace:devtools'
-ERROR: lazy loading failed for package ‘teachingApps’
-* removing ‘.../revdep/checks/teachingApps/new/teachingApps.Rcheck/teachingApps’
+## In both
 
-```
-### CRAN
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘rprojroot’
+      All declared Imports should be used.
+    ```
 
-```
-* installing *source* package ‘teachingApps’ ...
-** package ‘teachingApps’ successfully unpacked and MD5 sums checked
-** libs
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c bisa.cpp -o bisa.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c lev.cpp -o lev.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c likely.cpp -o likely.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c rcpp_hello_world.cpp -o rcpp_hello_world.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/teachingApps/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c sev.cpp -o sev.o
-clang++ -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o teachingApps.so RcppExports.o bisa.o lev.o likely.o rcpp_hello_world.o sev.o -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
-installing to .../revdep/checks/teachingApps/old/teachingApps.Rcheck/teachingApps/libs
-** R
-** inst
-** preparing package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded
-* DONE (teachingApps)
-
-```
 # TeXCheckR
 
-Version: 0.4.1
+Version: 0.4.4
 
 ## In both
 
@@ -2922,8 +2392,8 @@ Version: 0.4.1
       ✖ 28: 
       Ensure the entries above are used with consistent case so ibid/idem's are respected.
       testthat results ================================================================
-      OK: 203 SKIPPED: 1 FAILED: 2
-      1. Error: No misspelled words (@test-zzz-check-pkgs-spelling.R#19) 
+      OK: 207 SKIPPED: 0 FAILED: 2
+      1. Error: No misspelled words (@test-zzz-check-pkgs-spelling.R#36) 
       2. Failure: Couldn't find an entry for (@test_check_biber.R#10) 
       
       Error: testthat unit tests failed
@@ -2943,31 +2413,55 @@ Version: 2.3
 
 Version: 0.5.3
 
-## Newly broken
+## In both
 
 *   checking tests ...
     ```
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-             while (!is_null(x)) {
-                 quo_splice(node_car(x), x, warn = warn)
-                 x <- node_cdr(x)
-             }
-         }) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/remotes96f8300192cd/tidyverse-rlang-cbdc3f3/R/quo.R:464
-      9: expr_type_of(.x) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/remotes96f8300192cd/tidyverse-rlang-cbdc3f3/R/expr.R:355
-      10: duplicate(quo) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmpd4pGKb/remotes96f8300192cd/tidyverse-rlang-cbdc3f3/R/quo.R:445
+      
       
       testthat results ================================================================
-      OK: 174 SKIPPED: 0 FAILED: 2
-      1. Error: Test error on invalid data inputs. (@test_tq_mutate.R#142) 
-      2. Error: Test error on invalid data inputs. (@test_tq_transmute.R#121) 
+      OK: 179 SKIPPED: 0 FAILED: 3
+      1. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#15) 
+      2. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#17) 
+      3. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#19) 
       
       Error: testthat unit tests failed
+      In addition: Warning messages:
+      1: In download.file(url, destfile = tmp, quiet = TRUE) :
+        cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
+      2: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+       
       Execution halted
     ```
 
-## In both
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
+      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
+    Warning: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+    
+    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
+      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
+    Warning: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+     Removing AAPL.
+    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
+      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=FB&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
+    Warning: x = 'FB', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=FB&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+     Removing FB.
+    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
+      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
+    Warning: x = 'GOOG', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
+     Removing GOOG.
+    Warning in value[[3L]](cond) : Returning as nested data frame.
+    Quitting from lines 211-214 (TQ01-core-functions-in-tidyquant.Rmd) 
+    Error: processing vignette 'TQ01-core-functions-in-tidyquant.Rmd' failed with diagnostics:
+    object 'Ask' not found
+    Execution halted
+    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -3035,48 +2529,13 @@ Version: 0.5.1
 
 # umx
 
-Version: 1.7.5
-
-## Newly broken
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Missing or unexported object: ‘devtools::build_win’
-    ```
+Version: 1.9.1
 
 ## In both
 
 *   checking Rd cross-references ... NOTE
     ```
     Package unavailable to check Rd xrefs: ‘sem’
-    ```
-
-# unitizer
-
-Version: 1.4.4
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/runtt.R’ failed.
-    Last 13 lines of output:
-      1. Error: (unknown) (@testthat.browse.R#5) 
-      2. Error: (unknown) (@testthat.demo.R#4) 
-      3. Failure: Show Test Error (@testthat.error.R#28) 
-      4. Error: (unknown) (@testthat.exec.R#11) 
-      5. Error: (unknown) (@testthat.inpkg.R#11) 
-      6. Error: (unknown) (@testthat.item.R#4) 
-      7. Error: (unknown) (@testthat.parse.R#5) 
-      8. Failure: simple tests (@testthat.section.R#13) 
-      9. Error: (unknown) (@testthat.section.R#5) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Removing packages from '.../revdep/checks/unitizer/new/unitizer.Rcheck'
-      (as 'lib' is unspecified)
-      Execution halted
     ```
 
 # unvotes
