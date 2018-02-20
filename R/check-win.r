@@ -20,7 +20,7 @@ NULL
 #' @export
 build_win <- function(pkg = ".", version = c("R-devel", "R-release")) {
   .Deprecated("check_win_*()", package = "devtools")
-  check_win(pkg = pkg, version = match.arg(version))
+  check_win(pkg = pkg, version = match.arg(version, several.ok = TRUE))
 }
 
 #' @describeIn check_win Check package on the development version of R.
