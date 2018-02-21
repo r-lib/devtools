@@ -285,7 +285,7 @@ remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
       paste0(url, "/", remote$username, "/", remote$repo, ".git"),
       ...)
 
-    found <- grep(pattern = paste0("/", remote$ref), x = names(res))
+    found <- grep(pattern = paste0("\\b", remote$ref), x = names(res), perl = TRUE)
 
     if (length(found) == 0) {
       return(NA_character_)
