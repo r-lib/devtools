@@ -17,3 +17,7 @@ pkgbuild::with_debug
 #' @importFrom pkgbuild clean_dll
 #' @export
 pkgbuild::clean_dll
+
+#' @importFrom pkgbuild has_devel
+#' @export
+pkgbuild::has_devel

@@ -14,6 +14,8 @@
 \alias{reexports}
 \alias{clean_dll}
 \alias{reexports}
+\alias{has_devel}
+\alias{reexports}
 \alias{unload}
 \title{Objects exported from other packages}
 \keyword{internal}
@@ -22,7 +24,7 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{pkgbuild}{\code{\link[pkgbuild]{with_debug}}, \code{\link[pkgbuild]{clean_dll}}}
+  \item{pkgbuild}{\code{\link[pkgbuild]{with_debug}}, \code{\link[pkgbuild]{clean_dll}}, \code{\link[pkgbuild]{has_devel}}}
 
   \item{pkgload}{\code{\link[pkgload]{inst}}, \code{\link[pkgload]{parse_deps}}, \code{\link[pkgload]{check_dep_version}}, \code{\link[pkgload]{unload}}}
 }}
