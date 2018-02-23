@@ -72,6 +72,27 @@
   `load_all()` is set to `FALSE` (@nbenn, #1669)
 
 * The `my_unzip()` function is now able to use the `utils::unzip` fallback when R is compiled from source with no *unzip* package present (@theGreatWhiteShark, #1678)
+
+* Code related to simulating package loading has been pulled out into a 
+  separate package, pkgload. The following functions have been moved to 
+  pkgload without a shim: `clean_dll()`, `compile_dll()`, `dev_example()`, 
+  `dev_help()`, `dev_meta()`, `find_topic()`, `imports_env()`, `inst()`, 
+  `load_code()`, `load_dll()`, `ns_env()`, `parse_ns_file()`, `pkg_env()`. 
+  These functions are primarily for internal use.
+
+    `load_all()` and `unload()` have been moved to pkgload, but devtools
+    provides shims since these are commonly used.
+
+* `find_rtools()`, `setup_rtools()`, `has_devel()`, `compiler_flags()`,
+  `build()` and `with_debug()` have moved to the new pkgbuild package.
+  `build()` and `with_debug()` are re-exported by devtools.
+
+* `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
+  removed. These functions never worked terribly well, and have been replaced 
+  by the much better functions in callr.
+
+* Deprecated `build_github_devtools()` has been removed.
+
 # devtools 1.13.5
 * Fix two test errors related to GitHub rate limiting and mocking base functions.
 
@@ -93,28 +114,8 @@
 
 * Bugfix for installation of dependencies of dependencies (@jimhester, #1409).
 
-* `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
-  removed. These functions never worked terribly well, and have been replaced 
-  by the much better functions in callr.
-  
-* `find_rtools()`, `setup_rtools()`, `has_devel()`, `compiler_flags()`,
-  `build()` and `with_debug()` have moved to the new pkgbuild package.
-  `build()` and `with_debug()` are re-exported by devtools.
-
-* Deprecated `build_github_devtools()` has been removed.
-
 * Bugfix for installation of dependencies in CRAN-like repositories such as
   those created by drat (@jimhester, #1243, #1339).
-
-* Code related to simulating package loading has been pulled out into a 
-  separate package, pkgload. The following functions have been moved to 
-  pkgload without a shim: `clean_dll()`, `compile_dll()`, `dev_example()`, 
-  `dev_help()`, `dev_meta()`, `find_topic()`, `imports_env()`, `inst()`, 
-  `load_code()`, `load_dll()`, `ns_env()`, `parse_ns_file()`, `pkg_env()`. 
-  These functions are primarily for internal use.
-  
-    `load_all()` and `unload()` have been moved to pkgload, but devtools
-    provides shims since these are commonly used.
 
 * `load_all()` no longer automatically creates a description for you.
 
