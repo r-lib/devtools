@@ -70,15 +70,27 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
   if (yesno("Were devtool's checks successful?"))
     return(invisible())
 
-  if (!new_pkg && has_cran_results(pkg$package)) {
-      cat_rule(paste0("Details of the CRAN check results for ", pkg$package))
-      foghorn::summary_cran_details(pkg = pkg$package)
-      cat_rule()
-      cran_url <- paste0(cran_mirror(), "/web/checks/check_results_",
-                         pkg$package, ".html")
-      if (yesno("Have you fixed all existing problems at \n", cran_url,
-                "\n shown above?"))
-        return(invisible())
+  if (!new_pkg) {
+      show_cran_check <- TRUE
+      cran_details <- NULL
+      end_sentence <- " ?"
+      if (requireNamespace("foghorn", quietly = TRUE)) {
+          show_cran_check <- has_cran_results(pkg$package)
+          cran_details <- foghorn::cran_details(pkg = pkg$package)
+      }
+      if (show_cran_check) {
+          if (!is.null(cran_details)) {
+              end_sentence <- "\n shown above?"
+              cat_rule(paste0("Details of the CRAN check results for ", pkg$package))
+              summary(cran_details)
+              cat_rule()
+          }
+          cran_url <- paste0(cran_mirror(), "/web/checks/check_results_",
+                             pkg$package, ".html")
+          if (yesno("Have you fixed all existing problems at \n", cran_url,
+                    end_sentence))
+              return(invisible())
+      }
   }
 
   if (yesno("Have you checked on R-hub (with `check_rhub()`)?"))
