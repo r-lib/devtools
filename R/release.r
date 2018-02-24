@@ -324,7 +324,7 @@ flag_release <- function(pkg = ".") {
 
   date <- Sys.Date()
   commit <- git2r::commits(git2r::init(pkg$path), n = 1)[[1]]
-  sha <- substr(commit@sha, 1, 10)
+  sha <- substr(as.data.frame(commit)$sha, 1, 10)
 
   msg <- paste0(
     "This package was submitted to CRAN on ", date, ".\n",
