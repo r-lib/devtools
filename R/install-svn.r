@@ -8,8 +8,7 @@
 #'
 #' @inheritParams install_git
 #' @param subdir A sub-directory withing a svn repository that may contain the
-#'   package we are interested in installing. By default, this
-#'   points to the 'trunk' directory.
+#'   package we are interested in installing.
 #' @param args A character vector providing extra arguments to pass on to
 #    svn.
 #' @param revision svn revision, if omitted updates to latest

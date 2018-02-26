@@ -12,8 +12,7 @@ install_svn(url, subdir = NULL, args = character(0), ..., revision = NULL,
 private repository.}
 
 \item{subdir}{A sub-directory withing a svn repository that may contain the
-package we are interested in installing. By default, this
-points to the 'trunk' directory.}
+package we are interested in installing.}
 
 \item{args}{A character vector providing extra arguments to pass on to}
 
