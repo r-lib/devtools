@@ -97,6 +97,9 @@
 
 * Deprecated `build_github_devtools()` has been removed.
 
+* If the **foghorn** package is installed, `release()` displays the results
+  of the CRAN checks (#1672, @fmichonneau).
+
 # devtools 1.13.5
 * Fix two test errors related to GitHub rate limiting and mocking base functions.
 

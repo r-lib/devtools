@@ -35,6 +35,7 @@
 #'   release it.
 #' @param args An optional character vector of additional command
 #'   line arguments to be passed to \code{R CMD build}.
+#' @importFrom foghorn summary_cran_details
 #' @export
 release <- function(pkg = ".", check = FALSE, args = NULL) {
   pkg <- as.package(pkg)
@@ -70,10 +71,26 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
     return(invisible())
 
   if (!new_pkg) {
-    cran_url <- paste0(cran_mirror(), "/web/checks/check_results_",
-      pkg$package, ".html")
-    if (yesno("Have you fixed all existing problems at \n", cran_url, " ?"))
-      return(invisible())
+      show_cran_check <- TRUE
+      cran_details <- NULL
+      end_sentence <- " ?"
+      if (requireNamespace("foghorn", quietly = TRUE)) {
+          show_cran_check <- has_cran_results(pkg$package)
+          cran_details <- foghorn::cran_details(pkg = pkg$package)
+      }
+      if (show_cran_check) {
+          if (!is.null(cran_details)) {
+              end_sentence <- "\n shown above?"
+              cat_rule(paste0("Details of the CRAN check results for ", pkg$package))
+              summary(cran_details)
+              cat_rule()
+          }
+          cran_url <- paste0(cran_mirror(), "/web/checks/check_results_",
+                             pkg$package, ".html")
+          if (yesno("Have you fixed all existing problems at \n", cran_url,
+                    end_sentence))
+              return(invisible())
+      }
   }
 
   if (yesno("Have you checked on R-hub (with `check_rhub()`)?"))
@@ -112,6 +129,15 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
   submit_cran(pkg, args = args)
 
   invisible(TRUE)
+}
+
+#' @importFrom foghorn cran_results
+has_cran_results <- function(pkg) {
+  cran_res <- foghorn::cran_results(
+    pkg = pkg,
+    show = c("error", "fail", "warn", "note")
+  )
+  sum(cran_res[, -1]) > 0
 }
 
 find_release_questions <- function(pkg = ".") {
