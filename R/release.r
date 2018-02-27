@@ -357,4 +357,5 @@ flag_release <- function(pkg = ".") {
     "Once it is accepted, delete this file and tag the release (commit ", sha, ")."
   )
   writeLines(msg, file.path(pkg$path, "CRAN-RELEASE"))
+  usethis::use_build_ignore("CRAN-RELEASE")
 }

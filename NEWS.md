@@ -1,7 +1,9 @@
 # devtools 1.13.3.9000
 
+* The CRAN-RELEASE file is now added to .Rbuildignore (#1711)
+
 * The `lang` argument to `spell_check()` was removed, for compatibility with
-  [spelling](https://CRAN.R-project.org/package=spelling) v1.1.
+  [spelling](https://CRAN.R-project.org/package=spelling) v1.1. (#1715)
 
 * `check()` and `check_built()` now have an `error_on` argument to specify if
   they should throw an error on check failures. When run non-interactively this
