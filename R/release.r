@@ -35,7 +35,6 @@
 #'   release it.
 #' @param args An optional character vector of additional command
 #'   line arguments to be passed to \code{R CMD build}.
-#' @importFrom foghorn summary_cran_details
 #' @export
 release <- function(pkg = ".", check = FALSE, args = NULL) {
   pkg <- as.package(pkg)
@@ -131,7 +130,6 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
   invisible(TRUE)
 }
 
-#' @importFrom foghorn cran_results
 has_cran_results <- function(pkg) {
   cran_res <- foghorn::cran_results(
     pkg = pkg,
