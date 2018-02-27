@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* The `lang` argument to `spell_check()` was removed, for compatibility with
+  [spelling](https://CRAN.R-project.org/package=spelling) v1.1.
+
 * `check()` and `check_built()` now have an `error_on` argument to specify if
   they should throw an error on check failures. When run non-interactively this
   is set to "warnings" unless specified.

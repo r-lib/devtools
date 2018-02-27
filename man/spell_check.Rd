@@ -4,16 +4,13 @@
 \alias{spell_check}
 \title{Spell checking}
 \usage{
-spell_check(pkg = ".", vignettes = TRUE, lang = "en_US")
+spell_check(pkg = ".", vignettes = TRUE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
 \code{\link{as.package}} for more information}
 
 \item{vignettes}{include vignettes in the spell check; passed to
-\link[spelling:spell_check_package]{spelling::spell_check_package}}
-
-\item{lang}{a dictionary object or language string; passed to
 \link[spelling:spell_check_package]{spelling::spell_check_package}}
 }
 \description{

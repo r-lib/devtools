@@ -52,7 +52,7 @@ Suggests:
     rmarkdown,
     roxygen2 (>= 5.0.0),
     rversions,
-    spelling,
+    spelling (>= 1.1),
     testthat (>= 1.0.2)
 VignetteBuilder: knitr
 Encoding: UTF-8
