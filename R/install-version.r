@@ -24,8 +24,7 @@ install_version <- function(package, version = NULL,
   if (package %in% row.names(available)) {
     current.version <- available[package, 'Version']
     if (is.null(version) || version == current.version) {
-      return(install.packages(package, repos = repos, contriburl = contriburl,
-        type = type, ...))
+      return(install.packages(package, repos = repos, type = type, ...))
     }
   }
 
