@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `install_version()` can now install current version of CRAN package on Windows
+  and macOS (@jdblischak, #1730)
+
 * The CRAN-RELEASE file is now added to .Rbuildignore (#1711)
 
 * The `lang` argument to `spell_check()` was removed, for compatibility with
