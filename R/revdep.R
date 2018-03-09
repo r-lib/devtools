@@ -232,7 +232,7 @@ revdep_check_from_cache <- function(pkg, cache) {
 
   do.call(check_cran, cache)
 
-  cat_rule("Saving check results to `revdep/check.rds`")
+  cat_rule("Saving check results to `revdep/checks.rds`")
   revdep_check_save(pkg, cache$revdeps, cache$check_dir, cache$libpath)
 
   # Delete cache and check_dir on successful run
