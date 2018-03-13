@@ -4,13 +4,13 @@ uses_git <- function(path = ".") {
 
 # sha of most recent commit
 git_repo_sha1 <- function(r) {
-  rev <- git2r::head(r)
+  rev <- utils::head(r)
   if (is.null(rev)) {
     return(NULL)
   }
 
   if (git2r::is_commit(rev)) {
-    rev@sha
+    as.data.frame(rev)$sha
   } else {
     git2r::branch_target(rev)
   }
@@ -31,7 +31,7 @@ git_uncommitted <- function(path = ".") {
 git_sync_status <- function(path = ".", check_ahead = TRUE, check_behind = TRUE) {
   r <- git2r::repository(path, discover = TRUE)
 
-  r_head <- git2r::head(r)
+  r_head <- utils::head(r)
   if (!methods::is(r_head, "git_branch")) {
     stop("HEAD is not a branch", call. = FALSE)
   }
@@ -93,7 +93,8 @@ git_branch <- function(path = ".") {
      return(NULL)
   }
 
-  git2r::head(r)@name
+  ## this `@name` is going to be a problem but it's not an easy fix
+  utils::head(r)@name
 }
 
 # GitHub ------------------------------------------------------------------
