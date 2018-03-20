@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `check()` now emits a warning if `cran-comments.md` contains a link to
+  ephemeral `win-builder` results (@hughparsonage)
+
 * `install_version()` can now install current version of CRAN package on Windows
   and macOS (@jdblischak, #1730)
 
