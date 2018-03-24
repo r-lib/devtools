@@ -48,7 +48,7 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   version <- match.arg(version, several.ok = TRUE)
 
   if (!quiet) {
-    message("Building windows version of ", pkg$package,
+    message("Building windows version of ", pkg$package, " (", pkg$version, ")",
             " for ", paste(version, collapse = ", "),
             " with win-builder.r-project.org.\n")
     if (interactive() && yesno("Email results to ", maintainer(pkg)$email, "?")) {
