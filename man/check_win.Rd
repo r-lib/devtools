@@ -7,11 +7,12 @@
 \alias{check_win_oldrelease}
 \title{Build windows binary package.}
 \usage{
-check_win_devel(pkg = ".", args = NULL, quiet = FALSE)
+check_win_devel(pkg = ".", args = NULL, quiet = FALSE, manual = FALSE)
 
-check_win_release(pkg = ".", args = NULL, quiet = FALSE)
+check_win_release(pkg = ".", args = NULL, quiet = FALSE, manual = FALSE)
 
-check_win_oldrelease(pkg = ".", args = NULL, quiet = FALSE)
+check_win_oldrelease(pkg = ".", args = NULL, quiet = FALSE,
+  manual = FALSE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -20,6 +21,9 @@ check_win_oldrelease(pkg = ".", args = NULL, quiet = FALSE)
 \item{args}{Any additional arguments to pass to \code{\link[pkgbuild]{build}}}
 
 \item{quiet}{If \code{TRUE}, suppresses output.}
+
+\item{manual}{If \code{TRUE}, build manual. Required e.g. for dynamic
+documentation using \code{\\}\code{Sexpr{}}.}
 }
 \description{
 This function works by bundling source package, and then uploading to
