@@ -7,19 +7,23 @@
 \alias{check_win_oldrelease}
 \title{Build windows binary package.}
 \usage{
-check_win_devel(pkg = ".", args = NULL, quiet = FALSE)
+check_win_devel(pkg = ".", args = NULL, quiet = FALSE, ...)
 
-check_win_release(pkg = ".", args = NULL, quiet = FALSE)
+check_win_release(pkg = ".", args = NULL, quiet = FALSE, ...)
 
-check_win_oldrelease(pkg = ".", args = NULL, quiet = FALSE)
+check_win_oldrelease(pkg = ".", args = NULL, quiet = FALSE, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
 \code{\link{as.package}} for more information}
 
-\item{args}{Any additional arguments to pass to \code{\link[pkgbuild]{build}}}
+\item{args}{An optional character vector of additional command
+line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},
+or \code{R CMD install} if \code{binary = TRUE}.}
 
 \item{quiet}{If \code{TRUE}, suppresses output.}
+
+\item{...}{Additional arguments passed to \code{\link[pkgbuild]{build}}.}
 }
 \description{
 This function works by bundling source package, and then uploading to
