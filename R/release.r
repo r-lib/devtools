@@ -252,7 +252,15 @@ cran_comments <- function(pkg = ".") {
     return(character())
   }
 
-  paste0(readLines(path, warn = FALSE), collapse = "\n")
+  comments <- readLines(path, warn = FALSE)
+  # e.g. https://win-builder.r-project.org/goBi3K29QiuZ/00check.log
+  #  but https://win-builder.r-project.org/ by itself is ok.
+  if (any(grepl("https?://win-builder\\.r-project\\.org/[A-Za-z0-9]", comments))) {
+    warning("Links to win-builder results are ephemeral and so are not permitted in your release.\n",
+            "Remove this link from cran-comments.md and resubmit.\n")
+  }
+
+  paste0(comments, collapse = "\n")
 }
 
 cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
