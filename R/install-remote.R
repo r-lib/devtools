@@ -39,8 +39,16 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
   }
 
   if (is_windows && inherits(remote, "cran_remote")) {
-    install_packages(package_name, repos = remote$repos, type = remote$pkg_type, dependencies = NA, ..., quiet = quiet,
-                     out_dir = out_dir, skip_if_log_exists = skip_if_log_exists)
+    # merge repos arguments
+    args <- list(...)
+    args[['repos']] <- unique(c(remote$repos, args[['repos']]))
+    # build argument list for install_packages call 
+    args <- c(list(pkgs = package_name,
+                    type = remote$pkg_type, dependencies = NA, quiet = quiet,
+                    out_dir = out_dir, skip_if_log_exists = skip_if_log_exists), 
+              args)
+    do.call(install_packages, args) 
+    
     return(invisible(TRUE))
   }
 
