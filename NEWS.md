@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* `install_packages()` now correctly passes a list of options to `withr::with_options()` (@renozao, #1749).
+
 * `install_version()` can now install current version of CRAN package on Windows
   and macOS (@jdblischak, #1730)
 
