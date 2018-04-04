@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `install_remote()` now uses the repo and type arguments from the remote
+  rather than using the argument passed to `...` (#1747).
+
 * `install_packages()` now correctly passes a list of options to `withr::with_options()` (@renozao, #1749).
 
 * `install_version()` can now install current version of CRAN package on Windows

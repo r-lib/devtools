@@ -11,7 +11,8 @@
 #' }
 #' @noRd
 install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
-                           out_dir = NULL, skip_if_log_exists = FALSE) {
+                           out_dir = NULL, skip_if_log_exists = FALSE,
+                           repos = getOption("repos"), type = getOption("pkgType")) {
   stopifnot(is.remote(remote))
 
   remote_sha <- remote_sha(remote)
@@ -39,8 +40,10 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
   }
 
   if (is_windows && inherits(remote, "cran_remote")) {
-    install_packages(package_name, repos = remote$repos, type = remote$pkg_type, dependencies = NA, ..., quiet = quiet,
-                     out_dir = out_dir, skip_if_log_exists = skip_if_log_exists)
+    install_packages(
+      package_name, repos = remote$repos, type = remote$pkg_type,
+      dependencies = NA, ..., quiet = quiet, out_dir = out_dir,
+      skip_if_log_exists = skip_if_log_exists)
     return(invisible(TRUE))
   }
 
@@ -53,7 +56,8 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
   metadata <- remote_metadata(remote, bundle, source)
 
   install(source, ..., quiet = quiet, metadata = metadata,
-          out_dir = out_dir, skip_if_log_exists = skip_if_log_exists)
+          out_dir = out_dir, skip_if_log_exists = skip_if_log_exists,
+          repos = repos, type = type)
 }
 
 try_install_remote <- function(..., quiet = FALSE) {
