@@ -17,3 +17,9 @@ test_that("Filtering works with devtools::test", {
   test("testTest", filter = "dummy", reporter = "stop")
   expect_true(TRUE)
 })
+
+test_that("devtools::test_file works", {
+  test_file("testTest/tests/testthat/test-dummy.R", pkg = "testTest", reporter = "stop")
+  test_file("testTest/R/dummy.R", pkg = "testTest", reporter = "stop")
+  expect_true(TRUE)
+})
