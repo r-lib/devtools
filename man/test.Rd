@@ -5,6 +5,7 @@
 \alias{test_coverage}
 \alias{uses_testthat}
 \alias{test_file}
+\alias{test_coverage_file}
 \title{Execute \pkg{test_that} tests in a package.}
 \usage{
 test(pkg = ".", filter = NULL, ...)
@@ -14,6 +15,8 @@ test_coverage(pkg = ".", ...)
 uses_testthat(pkg = ".")
 
 test_file(file = find_active_file(), ...)
+
+test_coverage_file(file = find_active_file(), ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -31,7 +34,11 @@ corresponding test file will be run. The default is to use the active file
 in RStudio (if available).}
 }
 \description{
-\code{test()} is a shortcut for \code{\link[testthat:test_dir]{testthat::test_dir()}}.
-\code{test_file} runs \code{test()} on one or more test files files.
-\code{test_coverage()} is a shortcut for \code{\link[covr:report]{covr::report()}}.
+\code{test()} is a shortcut for \code{\link[testthat:test_dir]{testthat::test_dir()}}, it runs all of a
+package's tests.
+\code{test_file} runs \code{test()} on the active file.
+\code{test_coverage()} computes test coverage for your package. It is a shortcut
+for \code{\link[covr:package_coverage]{covr::package_coverage()}} and \code{\link[covr:report]{covr::report()}}.
+\code{test_coverage_file()} computes test coverage for the active file. Is a
+shortcut for \code{\link[covr:file_coverage]{covr::file_coverage()}} and \code{\link[covr:report]{covr::report()}}.
 }
