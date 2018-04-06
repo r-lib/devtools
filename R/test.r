@@ -1,13 +1,17 @@
-#' Execute all \pkg{test_that} tests in a package.
+#' Execute \pkg{test_that} tests in a package.
 #'
 #' `test()` is a shortcut for [testthat::test_dir()].
-#' `test_coverage()` is a shortcut for [covr::package_coverage()].
+#' `test_file` runs `test()` on one or more test files files.
+#' `test_coverage()` is a shortcut for [covr::report()].
 #'
 #' @md
 #' @param pkg package description, can be path or package name. See
 #'   [as.package()] for more information
 #' @param ... additional arguments passed to [testthat::test_dir()] and
 #'   [covr::package_coverage()]
+#' @param file One or more source or test files. If a source file the
+#'   corresponding test file will be run. The default is to use the active file
+#'   in RStudio (if available).
 #' @inheritParams testthat::test_dir
 #' @inheritParams run_examples
 #' @export
@@ -127,4 +131,46 @@ uses_testthat <- function(pkg = ".") {
   )
 
   any(dir.exists(paths))
+}
+
+#' @export
+#' @rdname test
+test_file <- function(file = find_active_file(), ...) {
+  is_source_file <- basename(dirname(file)) == "R"
+
+  has_r_ext <- grepl("\\.[rR]$", file)
+  if (any(!has_r_ext)) {
+    stop("file(s): ",
+         paste0("'", file[!has_r_ext], "'", collapse = ", "),
+         " are not R files", call. = FALSE)
+  }
+
+  file <- basename(file)
+  file[!is_source_file] <- sub("^test-?", "", file[!is_source_file])
+
+  file <- sub("\\.[rR]$", "", file)
+
+  regex <- paste0("^", escape_special_regex(file), "$", collapse = "|")
+
+  test(filter = regex, ...)
+}
+
+find_active_file <- function(arg = "file") {
+  if (!rstudioapi::isAvailable()) {
+    stop("Argument `", arg, "` is missing, with no default", call. = FALSE)
+  }
+  rstudioapi::getSourceEditorContext()$path
+}
+
+find_test_file <- function(file) {
+  dir <- basename(dirname(file))
+  if (dir != "R") {
+    stop("Open file not in `R/` directory", call. = FALSE)
+  }
+
+  if (!grepl("\\.[Rr]$", file)) {
+    stop("Open file is does not end in `.R`", call. = FALSE)
+  }
+
+  file
 }

@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `test_file()` function added to test one or more files from a package
+  (#1755).
+
 * `install_remote()` now uses the repo and type arguments from the remote
   rather than using the argument passed to `...` (#1747).
 

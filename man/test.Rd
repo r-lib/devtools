@@ -4,13 +4,16 @@
 \alias{test}
 \alias{test_coverage}
 \alias{uses_testthat}
-\title{Execute all \pkg{test_that} tests in a package.}
+\alias{test_file}
+\title{Execute \pkg{test_that} tests in a package.}
 \usage{
 test(pkg = ".", filter = NULL, ...)
 
 test_coverage(pkg = ".", ...)
 
 uses_testthat(pkg = ".")
+
+test_file(file = find_active_file(), ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -22,8 +25,13 @@ name after it has been stripped of \code{"test-"} and \code{".R"}.}
 
 \item{...}{additional arguments passed to \code{\link[testthat:test_dir]{testthat::test_dir()}} and
 \code{\link[covr:package_coverage]{covr::package_coverage()}}}
+
+\item{file}{One or more source or test files. If a source file the
+corresponding test file will be run. The default is to use the active file
+in RStudio (if available).}
 }
 \description{
 \code{test()} is a shortcut for \code{\link[testthat:test_dir]{testthat::test_dir()}}.
-\code{test_coverage()} is a shortcut for \code{\link[covr:package_coverage]{covr::package_coverage()}}.
+\code{test_file} runs \code{test()} on one or more test files files.
+\code{test_coverage()} is a shortcut for \code{\link[covr:report]{covr::report()}}.
 }
