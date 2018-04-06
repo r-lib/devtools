@@ -138,15 +138,16 @@ uses_testthat <- function(pkg = ".") {
 test_file <- function(file = find_active_file(), ...) {
   is_source_file <- basename(dirname(file)) == "R"
 
+  has_r_ext <- grepl("\\.[rR]$", file)
+  if (any(!has_r_ext)) {
+    stop("file(s): ",
+         paste0("'", file[!has_r_ext], "'", collapse = ", "),
+         " are not R files", call. = FALSE)
+  }
+
   file <- basename(file)
   file[!is_source_file] <- sub("^test-?", "", file[!is_source_file])
 
-  has_r_ext <- grepl("\\.[rR]$", file)
-  if (any(!has_r_ext)) {
-    stop("`file(s)`: ",
-         paste0("`", file[!has_r_ext], "`", collapse = ", "),
-         " are not R files")
-  }
   file <- sub("\\.[rR]$", "", file)
 
   regex <- paste0("^", escape_special_regex(file), "$", collapse = "|")
