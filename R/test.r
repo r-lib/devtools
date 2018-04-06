@@ -1,8 +1,12 @@
 #' Execute \pkg{test_that} tests in a package.
 #'
-#' `test()` is a shortcut for [testthat::test_dir()].
-#' `test_file` runs `test()` on one or more test files files.
-#' `test_coverage()` is a shortcut for [covr::report()].
+#' `test()` is a shortcut for [testthat::test_dir()], it runs all of a
+#'   package's tests.
+#' `test_file` runs `test()` on the active file.
+#' `test_coverage()` computes test coverage for your package. It is a shortcut
+#'   for [covr::package_coverage()] and [covr::report()].
+#' `test_coverage_file()` computes test coverage for the active file. Is a
+#'   shortcut for [covr::file_coverage()] and [covr::report()].
 #'
 #' @md
 #' @param pkg package description, can be path or package name. See
@@ -172,5 +176,47 @@ find_test_file <- function(file) {
     stop("Open file is does not end in `.R`", call. = FALSE)
   }
 
-  file
+  file.path("tests", "testthat", paste0("test-", basename(file)))
+}
+
+find_source_file <- function(file) {
+  dir <- basename(dirname(file))
+
+  if (dir != "testthat") {
+    stop("Open file not in `tests/testthat/` directory", call. = FALSE)
+  }
+
+  if (!grepl("\\.[Rr]$", file)) {
+    stop("Open file is does not end in `.R`", call. = FALSE)
+  }
+
+  file.path("R", gsub("^test-", "", basename(file)))
+}
+
+#' @rdname test
+#' @export
+test_coverage_file <- function(file = find_active_file(), ...) {
+  is_source_file <- basename(dirname(file)) == "R"
+
+  source_files <- normalizePath(winslash = "/", c(
+    vapply(file[!is_source_file], find_source_file, character(1)),
+    file[is_source_file]))
+
+  test_files <- normalizePath(winslash = "/", c(
+    vapply(file[is_source_file], find_test_file, character(1)),
+    file[!is_source_file]))
+
+  pkg <- as.package(dirname(file)[[1]])
+
+  env <- load_all(pkg$path, quiet = TRUE)$env
+  coverage <- withr::with_dir("tests/testthat",
+    covr::file_coverage(source_files, test_files, ..., parent_env = env))
+
+  # Use relative paths
+  attr(coverage, "relative") <- TRUE
+  attr(coverage, "package") <- pkg
+
+  covr::report(coverage)
+
+  invisible(coverage)
 }

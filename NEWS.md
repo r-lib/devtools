@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `test_file_coverage()` function added to show the test coverage of one or
+  more files from a package. (#1755).
+
 * `test_file()` function added to test one or more files from a package
   (#1755).
 
