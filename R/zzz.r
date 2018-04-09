@@ -70,3 +70,10 @@ devtools_default_options <- list(
   env[[".conflicts.OK"]] <- TRUE
   suppressPackageStartupMessages((get("library", baseenv()))("usethis"))
 }
+
+message_release_reminders <- function(pkg){
+  # add pkgdown reminder
+  if(file.exists(file.path(pkg, "docs", "pkgdown.yml"))){
+    message("Don't forget to update the pkgdown website of your package") # nolint
+  }
+}

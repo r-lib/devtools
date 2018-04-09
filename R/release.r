@@ -346,6 +346,9 @@ flag_release <- function(pkg = ".") {
 
   message("Don't forget to tag this release once accepted by CRAN")
 
+  message_release_reminders(pkg)
+
+
   date <- Sys.Date()
   commit <- git2r::commits(git2r::init(pkg$path), n = 1)[[1]]
   sha <- substr(as.data.frame(commit)$sha, 1, 10)
