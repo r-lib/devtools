@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* internal `message_release_reminders()` function added to add reminders to `release()` (@maelle, #1753)
+
 * `test_file()` function added to test one or more files from a package
   (#1755).
 
