@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* add pkgdown site (https://devtools.r-lib.org) (#1779, @jayhesselberth)
+
 * `test_file_coverage()` function added to show the test coverage of one or
   more files from a package. (#1755).
 
