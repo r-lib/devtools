@@ -25,7 +25,7 @@ packages in a single command.
 \examples{
 \dontrun{
 install_cran("ggplot2")
-install_cran(c("httpuv", "shiny")
+install_cran(c("httpuv", "shiny"))
 }
 }
 \seealso{
