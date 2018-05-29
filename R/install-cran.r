@@ -10,7 +10,7 @@
 #' @examples
 #' \dontrun{
 #' install_cran("ggplot2")
-#' install_cran(c("httpuv", "shiny")
+#' install_cran(c("httpuv", "shiny"))
 #' }
 install_cran <- function(pkgs, repos = getOption("repos"), type = getOption("pkgType"), ..., quiet = FALSE) {
 
