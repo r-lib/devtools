@@ -58,6 +58,9 @@ All of the currently supported install sources are available, see the 'See
 Also' section in `?install` for a complete list.
 
 ```yaml
+# GitLab
+Remotes: gitlab::jimhester/covr
+
 # Git
 Remotes: git::git@bitbucket.org:dannavarro/lsr-package.git
 
