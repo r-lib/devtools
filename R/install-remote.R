@@ -60,20 +60,8 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
           repos = repos, type = type)
 }
 
-try_install_remote <- function(..., quiet = FALSE) {
-  tryCatch(
-    install_remote(..., quiet = quiet),
-    error = function(e) {
-      if (!quiet) {
-        message("Installation failed: ", paste(deparse(conditionCall(e)), collapse = " "), " : ", conditionMessage(e))
-      }
-      FALSE
-    }
-  )
-}
-
 install_remotes <- function(remotes, ...) {
-  invisible(vapply(remotes, try_install_remote, ..., FUN.VALUE = logical(1)))
+  invisible(vapply(remotes, install_remote, ..., FUN.VALUE = logical(1)))
 }
 
 # Add metadata
@@ -176,6 +164,13 @@ package2remote <- function(name, repos = getOption("repos"), type = getOption("p
 
   switch(x$RemoteType,
     github = remote("github",
+      host = x$RemoteHost,
+      repo = x$RemoteRepo,
+      subdir = x$RemoteSubdir,
+      username = x$RemoteUsername,
+      ref = x$RemoteRef,
+      sha = x$RemoteSha),
+    gitlab = remote("gitlab",
       host = x$RemoteHost,
       repo = x$RemoteRepo,
       subdir = x$RemoteSubdir,

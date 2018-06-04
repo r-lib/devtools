@@ -46,6 +46,8 @@ Suggests:
     gmailr (> 0.7.0),
     knitr,
     lintr (>= 0.2.1),
+    mockery,
+    pingr,
     MASS,
     Rcpp (>= 0.10.0),
     rhub,
