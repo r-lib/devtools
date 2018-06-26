@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* Fixed an issue where dependencies installed from a local source
+  would always be reinstalled.
+
 * `install_gitlab()` function added to install repositories from GitLab,
   (#1249, #716).
 
