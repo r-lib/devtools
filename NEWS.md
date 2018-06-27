@@ -1,5 +1,9 @@
 # devtools 1.13.3.9000
 
+* local remotes now use the package version as the RemoteSha unless they were installed from a git commit
+  with a clean working directory. This prevents unwanted reinstalls for development packages in possibly 
+  undesired states (@lionel-, #1804).
+
 * `install_gitlab()` function added to install repositories from GitLab,
   (#1249, #716).
 
