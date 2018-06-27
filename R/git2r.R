@@ -9,8 +9,8 @@ git2r_attrib <- function(x, name) {
 
 git2r_head <- function(x) {
   if (utils::packageVersion("git2r") > "0.21.0") {
-    git2r::repository_head(x)
+    (utils::getFromNamespace("repository_head", "git2r"))(x)
   } else {
-    git2r::head(x)
+    (utils::getFromNamespace("head", "git2r"))(x)
   }
 }
