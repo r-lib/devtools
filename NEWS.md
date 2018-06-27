@@ -1,3 +1,6 @@
+# devtools 1.13.5
+* Fix two test errors related to GitHub rate limiting and mocking base functions.
+
 # devtools 1.13.4
 * Fix test errors for upcoming testthat release.
 
