@@ -154,7 +154,7 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
     cred <- git2r::cred_user_pass("EMAIL", auth_token)
     git2r::push(r, "origin", "refs/heads/master", credentials = cred)
   }
-  git2r::branch_set_upstream(git2r::head(r), "origin/master")
+  git2r::branch_set_upstream(git2r_head(r), "origin/master")
 
   message("* View repo at ", create$html_url)
 

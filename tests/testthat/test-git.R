@@ -14,8 +14,8 @@ git_test_repo <- function() {
 test_that("SHA for regular repository", {
   r <- git_test_repo()
   commit <- git2r::commits(r)[[1]]
-  expect_false(git2r::is_commit(git2r::head(r)))
-  expect_equal(git_repo_sha1(r), commit@sha)
+  expect_false(git2r::is_commit(git2r_head(r)))
+  expect_equal(git_repo_sha1(r), git2r_attrib(commit, "sha"))
 })
 
 test_that("SHA for detached head", {
@@ -24,6 +24,6 @@ test_that("SHA for detached head", {
   r <- git_test_repo()
   commit <- git2r::commits(r)[[1]]
   git2r::checkout(commit)
-  expect_true(git2r::is_commit(git2r::head(r)))
-  expect_equal(git_repo_sha1(r), commit@sha)
+  expect_true(git2r::is_commit(git2r_head(r)))
+  expect_equal(git_repo_sha1(r), git2r_attrib(commit, "sha"))
 })

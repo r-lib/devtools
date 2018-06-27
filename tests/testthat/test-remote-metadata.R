@@ -39,7 +39,7 @@ test_that("install on packages adds metadata", {
     library("testMetadataInstall")
     pkg_info <- session_info()$packages
     pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
-    pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
+    pkg_sha <- substring(git2r_attrib(git2r::commits(r)[[1]], "sha"), 1, 7)
     expect_match(pkg_source, pkg_sha)
 
     # dirty the repo
@@ -56,7 +56,7 @@ test_that("install on packages adds metadata", {
     install(test_pkg, quiet = TRUE)
     pkg_info <- session_info()$packages
     pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
-    pkg_sha <- substring(git2r::commits(r)[[1]]@sha, 1, 7)
+    pkg_sha <- substring(git2r_attrib(git2r::commits(r)[[1]], "sha"), 1, 7)
     expect_match(pkg_source, pkg_sha)
 
   })
