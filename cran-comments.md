@@ -1,13 +1,11 @@
-This is a point release fixing failing tests on CRAN.
-
-This release also makes Jim Hester the new maintainer of devtools. Hadley
-Wickham will need to approve the change <hadley@rstudio.com>.
+This is a point release fixing failing tests on CRAN and adding support for the
+upcoming git2r version 0.22.0
 
 ## Test environments
 
 * local OS X install, R 3.4.3
 * Ubuntu 12.04 (on travis-ci), R-oldrel, R-release, R-devel
-* Windows Server 2012 R2 (x64), R 3.4.3
+* Windows Server 2012 R2 (x64), R 3.5.0
 * Rhub
   * Windows Server 2008 R2 SP1, R-devel, 32/64 bit
   * Debian Linux, R-devel, GCC ASAN/UBSAN
