@@ -72,6 +72,7 @@ test_that("remote_sha.github_remote returns NA if remote doesn't exist", {
   expect_equal(remote_sha(github_remote("arst/arst")), NA_character_)
 })
 test_that("remote_sha.github_remote returns expected value if remote does exist", {
+  skip_on_cran()
   expect_equal(remote_sha(github_remote("hadley/devtools@v1.8.0")), "ad9aac7b9a522354e1ff363a86f389e32cec181b")
 })
 
