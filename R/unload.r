@@ -8,7 +8,7 @@
 #' but there may be others.  Similarly, automated DLL unloading is best tested
 #' for simple scenarios (particularly with \code{useDynLib(pkgname)} and may
 #' fail in other cases. If you do encounter a failure, please file a bug report
-#' at \url{http://github.com/hadley/devtools/issues}.
+#' at \url{http://github.com/r-lib/devtools/issues}.
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information

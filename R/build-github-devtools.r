@@ -32,7 +32,7 @@
 #' }
 #' @export
 build_github_devtools <- function(outfile = NULL) {
-  .Deprecated(msg = "`build_github_devtools()` is deprecated, you can simply use `install_github(\"hadley/devtools\")`")
+  .Deprecated(msg = "`build_github_devtools()` is deprecated, you can simply use `install_github(\"r-lib/devtools\")`")
   if (!has_devel()) {
     stop("This requires a working development environment.")
   }
@@ -40,7 +40,7 @@ build_github_devtools <- function(outfile = NULL) {
   ext <- if (.Platform$OS.type == "windows") "zip" else "tgz"
   outfile <- paste0("./devtools.", ext)
 
-  url <- "https://github.com/hadley/devtools/archive/master.zip"
+  url <- "https://github.com/r-lib/devtools/archive/master.zip"
   message("Downloading devtools from ", url)
   bundle <- file.path(tempdir(), "devtools-master.zip")
 
