@@ -1,3 +1,8 @@
+# devtools 1.13.6
+
+* Compatibility for git2r versions 0.22.0+
+* Fix test errors related to GitHub SSLv1 changes with git2r versions =< 0.21.0.
+
 # devtools 1.13.5
 * Fix two test errors related to GitHub rate limiting and mocking base functions.
 
