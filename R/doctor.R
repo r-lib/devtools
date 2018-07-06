@@ -4,7 +4,11 @@ NULL
 
 .rstudio_release <- function() {
   url <- "http://s3.amazonaws.com/rstudio-server/current.ver"
-  numeric_version(readLines(url, warn = FALSE))
+  res <- readLines(url, warn = FALSE)
+  if (length(res) != 1) {
+    return(0)
+  }
+  numeric_version(res)
 }
 
 rstudio_release <- memoise::memoise(.rstudio_release)

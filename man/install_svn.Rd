@@ -40,7 +40,7 @@ install_svn("https://github.com/hadley/httr")
 Other package installation: \code{\link{install_bioc}},
   \code{\link{install_bitbucket}},
   \code{\link{install_cran}}, \code{\link{install_github}},
-  \code{\link{install_git}}, \code{\link{install_url}},
-  \code{\link{install_version}}, \code{\link{install}},
-  \code{\link{uninstall}}
+  \code{\link{install_gitlab}}, \code{\link{install_git}},
+  \code{\link{install_url}}, \code{\link{install_version}},
+  \code{\link{install}}, \code{\link{uninstall}}
 }

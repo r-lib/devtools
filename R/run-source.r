@@ -14,6 +14,7 @@
 #' @param ... other options passed to \code{\link{source}}
 #' @param sha1 The (prefix of the) SHA-1 hash of the file at the remote URL.
 #' @export
+#' @seealso \code{\link{source_gist}}
 #' @examples
 #' \dontrun{
 #'
@@ -77,6 +78,7 @@ source_url <- function(url, ..., sha1 = NULL) {
 #'   using a SHA-1 hash.
 #' @param quiet if \code{FALSE}, the default, prints informative messages.
 #' @export
+#' @seealso \code{\link{source_url}}
 #' @examples
 #' \dontrun{
 #' # You can run gists given their id

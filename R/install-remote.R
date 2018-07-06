@@ -12,7 +12,8 @@
 #' @noRd
 install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
                            out_dir = NULL, skip_if_log_exists = FALSE,
-                           repos = getOption("repos"), type = getOption("pkgType")) {
+                           repos = getOption("repos"), type = getOption("pkgType"),
+                           dependencies = NA) {
   stopifnot(is.remote(remote))
 
   remote_sha <- remote_sha(remote)
@@ -42,7 +43,7 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
   if (is_windows && inherits(remote, "cran_remote")) {
     install_packages(
       package_name, repos = remote$repos, type = remote$pkg_type,
-      dependencies = NA, ..., quiet = quiet, out_dir = out_dir,
+      dependencies = dependencies, ..., quiet = quiet, out_dir = out_dir,
       skip_if_log_exists = skip_if_log_exists)
     return(invisible(TRUE))
   }
@@ -57,23 +58,11 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
 
   install(source, ..., quiet = quiet, metadata = metadata,
           out_dir = out_dir, skip_if_log_exists = skip_if_log_exists,
-          repos = repos, type = type)
-}
-
-try_install_remote <- function(..., quiet = FALSE) {
-  tryCatch(
-    install_remote(..., quiet = quiet),
-    error = function(e) {
-      if (!quiet) {
-        message("Installation failed: ", paste(deparse(conditionCall(e)), collapse = " "), " : ", conditionMessage(e))
-      }
-      FALSE
-    }
-  )
+          repos = repos, type = type, dependencies = dependencies)
 }
 
 install_remotes <- function(remotes, ...) {
-  invisible(vapply(remotes, try_install_remote, ..., FUN.VALUE = logical(1)))
+  invisible(vapply(remotes, install_remote, ..., FUN.VALUE = logical(1)))
 }
 
 # Add metadata
@@ -182,6 +171,13 @@ package2remote <- function(name, repos = getOption("repos"), type = getOption("p
       username = x$RemoteUsername,
       ref = x$RemoteRef,
       sha = x$RemoteSha),
+    gitlab = remote("gitlab",
+      host = x$RemoteHost,
+      repo = x$RemoteRepo,
+      subdir = x$RemoteSubdir,
+      username = x$RemoteUsername,
+      ref = x$RemoteRef,
+      sha = x$RemoteSha),
     git = remote("git",
       url = x$RemoteUrl,
       ref = x$RemoteRef,
@@ -204,7 +200,14 @@ package2remote <- function(name, repos = getOption("repos"), type = getOption("p
       path = x$RemoteUrl,
       branch = x$RemoteBranch,
       subdir = x$RemoteSubdir,
-      sha = x$RemoteSha %||% x$Version,
+      sha = {
+        # Packages installed locally might have RemoteSha == NA_character_
+        sha <- x$RemoteSha
+        if (is.null(sha) || (length(sha) == 1 && is.na(sha))) {
+          sha <- x$Version
+        }
+        sha
+      },
       username = x$RemoteUsername,
       repo = x$RemoteRepo),
     url = remote("url",

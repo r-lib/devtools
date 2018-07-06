@@ -25,13 +25,14 @@ packages in a single command.
 \examples{
 \dontrun{
 install_cran("ggplot2")
-install_cran(c("httpuv", "shiny")
+install_cran(c("httpuv", "shiny"))
 }
 }
 \seealso{
 Other package installation: \code{\link{install_bioc}},
   \code{\link{install_bitbucket}},
-  \code{\link{install_github}}, \code{\link{install_git}},
+  \code{\link{install_github}},
+  \code{\link{install_gitlab}}, \code{\link{install_git}},
   \code{\link{install_svn}}, \code{\link{install_url}},
   \code{\link{install_version}}, \code{\link{install}},
   \code{\link{uninstall}}
