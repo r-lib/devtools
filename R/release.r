@@ -1,6 +1,6 @@
 #' Release package to CRAN.
 #'
-#' Run automated and manual tests, then ftp to CRAN.
+#' Run automated and manual tests, then post package to CRAN.
 #'
 #' The package release process will:
 #'
@@ -312,7 +312,6 @@ upload_cran <- function(pkg, built_path) {
   r <- httr::POST(cran_submission_url, body = body)
   httr::stop_for_status(r)
   new_url <- httr::parse_url(r$url)
-  new_url$query$strErr
 
   # Confirmation -----------
   message("Confirming submission")
