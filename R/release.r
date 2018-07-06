@@ -1,6 +1,6 @@
 #' Release package to CRAN.
 #'
-#' Run automated and manual tests, then ftp to CRAN.
+#' Run automated and manual tests, then post package to CRAN.
 #'
 #' The package release process will:
 #'
