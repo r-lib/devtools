@@ -1,0 +1,6 @@
+pandoc: '2.2'
+pkgdown: 1.0.0.9000
+pkgdown_sha: ~
+articles:
+  dependencies: dependencies.html
+

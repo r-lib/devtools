@@ -1,11 +1,14 @@
 # devtools 1.13.3.9000
 
+* add pkgdown site (https://devtools.r-lib.org) (#1779, @jayhesselberth)
+
 * local remotes now use the package version as the RemoteSha unless they were installed from a git commit
   with a clean working directory. This prevents unwanted reinstalls for development packages in possibly 
   undesired states (@lionel-, #1804).
 
 * `install_gitlab()` function added to install repositories from GitLab,
   (#1249, #716).
+
 
 * `test_file_coverage()` function added to show the test coverage of one or
   more files from a package. (#1755).

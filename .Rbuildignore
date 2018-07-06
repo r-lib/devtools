@@ -8,3 +8,6 @@
 ^CONTRIBUTING\.md$
 ^\.httr-oauth$
 ^codecov\.yml$
+^_pkgdown\.yml$
+^docs$
+
