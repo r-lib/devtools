@@ -294,23 +294,29 @@ build_cran <- function(pkg, args) {
   built_path
 }
 
+upload_to <- function(dest, pkg, built_path) {
+    pkg <- as.packge(pkg)
+    maint <- maintainer(pkg)
+    body <- list(
+        pkg_id = "",
+        name = main$name,
+        email = maint$email,
+        uploaded_file = httr::upload_file(built_path, "application/x-gzip"),
+        comments = cran_comments(pkg),
+        upload = "Upload package"
+    )
+    resp <- httr::POST(dest, body = body)
+    httr::stop_for_status(resp)
+    resp
+}
+
 upload_cran <- function(pkg, built_path) {
   pkg <- as.package(pkg)
   maint <- maintainer(pkg)
-  comments <- cran_comments(pkg)
 
   # Initial upload ---------
   message("Uploading package & comments")
-  body <- list(
-    pkg_id = "",
-    name = maint$name,
-    email = maint$email,
-    uploaded_file = httr::upload_file(built_path, "application/x-gzip"),
-    comment = comments,
-    upload = "Upload package"
-  )
-  r <- httr::POST(cran_submission_url, body = body)
-  httr::stop_for_status(r)
+  r <- upload_to(cran_submission_url(), pkg, built_path)
   new_url <- httr::parse_url(r$url)
 
   # Confirmation -----------
