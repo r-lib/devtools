@@ -295,11 +295,11 @@ build_cran <- function(pkg, args) {
 }
 
 upload_to <- function(dest, pkg, built_path) {
-    pkg <- as.packge(pkg)
+    pkg <- as.package(pkg)
     maint <- maintainer(pkg)
     body <- list(
         pkg_id = "",
-        name = main$name,
+        name = maint$name,
         email = maint$email,
         uploaded_file = httr::upload_file(built_path, "application/x-gzip"),
         comments = cran_comments(pkg),
@@ -361,4 +361,28 @@ flag_release <- function(pkg = ".") {
   )
   writeLines(msg, file.path(pkg$path, "CRAN-RELEASE"))
   usethis::use_build_ignore("CRAN-RELEASE")
+}
+
+#' Submit a package to a specified location.
+#'
+#' This function is like \code{\link{submit_cran}()} but allows you to specify a
+#' location to submit the package to. It's recommended that you use
+#' \code{\link{release_to}()} rather than this function as it performs more checks
+#' prior to submission.
+#'
+#' @param dest location to submit to as a URL.
+#' @param pkg package description, can be path or package name.  See
+#'   \code{\link{as.package}} for more information
+#'
+#' @export
+submit_to <- function(dest, pkg = ".", args = NULL) {
+  if (yesno("Is your email address ", maintainer(pkg)$email, "?"))
+    return(invisible())
+
+  if (yesno("Ready to submit package to ", dest, "?"))
+    return(invisible())
+
+  pkg <- as.package(pkg)
+  built_path <- build_cran(pkg, args = args)
+  upload_to(dest, pkg, built_path)
 }
