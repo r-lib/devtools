@@ -22,7 +22,7 @@ build_site <- function(path = ".", ...) {
   pkg <- as.package(path)
 
   withr::with_temp_libpaths(action = "prefix", code = {
-    devtools::install(pkg = pkg$path, reload = FALSE)
+    install(pkg = pkg$path, reload = FALSE)
     pkgdown::build_site(pkg = pkg$path, ...)
   })
 }
