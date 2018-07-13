@@ -25,6 +25,7 @@ Imports:
     memoise (>= 1.0.0),
     methods,
     pkgbuild,
+    pkgdown,
     pkgload,
     rcmdcheck,
     rstudioapi (>= 0.6.0.9000),
