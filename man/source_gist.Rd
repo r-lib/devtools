@@ -51,3 +51,6 @@ source_gist(6872663, filename = "hi.r")
 source_gist(6872663, filename = "hi.r", sha1 = "54f1db27e60")
 }
 }
+\seealso{
+\code{\link{source_url}}
+}

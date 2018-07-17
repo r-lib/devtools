@@ -15,12 +15,13 @@ specify \code{subdir} and/or \code{ref} using the respective parameters
 precedence.}
 
 \item{username}{User name. Deprecated: please include username in the
-\code{repo}}
+\code{repo} instead.}
 
 \item{ref}{Desired git reference; could be a commit, tag, or branch name.
 Defaults to master.}
 
-\item{subdir}{subdirectory within repo that contains the R package.}
+\item{subdir}{subdirectory within repo that contains the R package.
+Deprecated: please include subdir in \code{repo} instead.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 

@@ -18,7 +18,7 @@ release it.}
 line arguments to be passed to \code{R CMD build}.}
 }
 \description{
-Run automated and manual tests, then ftp to CRAN.
+Run automated and manual tests, then post package to CRAN.
 }
 \details{
 The package release process will:

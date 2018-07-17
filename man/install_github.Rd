@@ -16,12 +16,13 @@ specify \code{subdir} and/or \code{ref} using the respective parameters
 precedence.}
 
 \item{username}{User name. Deprecated: please include username in the
-\code{repo}}
+\code{repo} instead.}
 
-\item{ref}{Desired git reference. Could be a commit, tag, or branch
-name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.}
+\item{ref}{Desired git reference. Deprecated: please include ref in
+\code{repo} instead.}
 
-\item{subdir}{subdirectory within repo that contains the R package.}
+\item{subdir}{subdirectory within repo that contains the R package.
+Deprecated: please include subdir in \code{repo} instead.}
 
 \item{auth_token}{To install from a private repo, generate a personal
 access token (PAT) in \url{https://github.com/settings/tokens} and

@@ -9,10 +9,11 @@
 #'   (see below); if both are specified, the values in \code{repo} take
 #'   precedence.
 #' @param username User name. Deprecated: please include username in the
-#'   \code{repo}
-#' @param ref Desired git reference. Could be a commit, tag, or branch
-#'   name, or a call to \code{\link{github_pull}}. Defaults to \code{"master"}.
+#'   \code{repo} instead.
+#' @param ref Desired git reference. Deprecated: please include ref in
+#'   \code{repo} instead.
 #' @param subdir subdirectory within repo that contains the R package.
+#'   Deprecated: please include subdir in \code{repo} instead.
 #' @param auth_token To install from a private repo, generate a personal
 #'   access token (PAT) in \url{https://github.com/settings/tokens} and
 #'   supply to this argument. This is safer than using a password because
