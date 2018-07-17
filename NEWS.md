@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* `test()` no longer passes encoding argument to `testthat::test_dir()` (#1776)
+
 * `install_url()` can now install package binaries on windows (#1765)
 
 * Fix skipping when installing from a full SHA (#1624)

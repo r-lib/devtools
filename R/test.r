@@ -65,10 +65,7 @@ test <- function(pkg = ".", filter = NULL, ...) {
   if (packageVersion("testthat") >= "1.0.2.9000") { # 2.0.0
     testthat_args <- c(testthat_args, load_helpers = FALSE)
   } else if (packageVersion("testthat") > "1.0.2") {
-    testthat_args <- c(testthat_args,
-      load_helpers = FALSE,
-      encoding = pkg$encoding %||% "unknown"
-    )
+    testthat_args <- c(testthat_args, load_helpers = FALSE)
   }
 
   withr::with_envvar(r_env_vars(),
