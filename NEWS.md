@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* `install_url()` can now install package binaries on windows (#1765)
+
 * Fix skipping when installing from a full SHA (#1624)
 
 * add `pkgdown::build_site()` wrapper (@kiwiroy, #1777)

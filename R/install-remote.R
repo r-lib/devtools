@@ -51,6 +51,12 @@ install_remote <- function(remote, ..., force = FALSE, quiet = FALSE,
   bundle <- remote_download(remote, quiet = quiet)
   on.exit(unlink(bundle), add = TRUE)
 
+  if (inherits(remote, "url_remote") && remote$pkg_type == "binary") {
+    install_packages(bundle, repos = NULL, dependencies = dependencies, ...,
+      quiet = quiet, out_dir = out_dir, skip_if_log_exists = skip_if_log_exists)
+    return(invisible(TRUE))
+  }
+
   source <- source_pkg(bundle, subdir = remote$subdir)
   on.exit(unlink(source, recursive = TRUE), add = TRUE)
 
@@ -213,7 +219,8 @@ package2remote <- function(name, repos = getOption("repos"), type = getOption("p
     url = remote("url",
       url = x$RemoteUrl,
       subdir = x$RemoteSubdir,
-      config = x$RemoteConfig),
+      config = x$RemoteConfig,
+      pkg_type = x$RemotePkgType),
     bioc = remote("bioc",
       repo = x$RemoteRepo,
       mirror = x$RemoteMirror,
