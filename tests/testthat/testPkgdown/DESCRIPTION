@@ -1,0 +1,12 @@
+Package: testPkgdown
+Title: Tools to make developing R code easier
+License: GPL-2
+Description:
+Authors@R: c(
+ person("Hadley", email = "h.wickham@gmail.com", role = c("aut", "cre")))
+Maintainer: Hadley <h.wickham@gmail.com>
+Version: 0.1
+VignetteBuilder: knitr
+Suggests: knitr,
+  pkgdown
+RoxygenNote: 6.0.1

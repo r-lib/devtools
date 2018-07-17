@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* add `pkgdown::build_site()` wrapper (@kiwiroy, #1777)
+
 * add pkgdown site (https://devtools.r-lib.org) (#1779, @jayhesselberth)
 
 * local remotes now use the package version as the RemoteSha unless they were installed from a git commit

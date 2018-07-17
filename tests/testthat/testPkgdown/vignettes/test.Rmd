@@ -1,0 +1,14 @@
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{Test vignette}
+-->
+
+This is a test.
+
+```{r}
+library(testPkgdown)
+
+pkgdown_test_test()
+
+1 + 2
+```

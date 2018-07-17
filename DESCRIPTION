@@ -49,6 +49,7 @@ Suggests:
     mockery,
     pingr,
     MASS,
+    pkgdown,
     Rcpp (>= 0.10.0),
     rhub,
     rmarkdown,
