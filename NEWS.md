@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* Fix skipping when installing from a full SHA (#1624)
+
 * add `pkgdown::build_site()` wrapper (@kiwiroy, #1777)
 
 * add pkgdown site (https://devtools.r-lib.org) (#1779, @jayhesselberth)

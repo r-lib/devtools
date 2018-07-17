@@ -131,13 +131,6 @@ remote_package_name.gitlab_remote <- function(remote, url = "https://gitlab.com/
 
 #' @export
 remote_sha.gitlab_remote <- function(remote, url = "https://gitlab.com", ...) {
-  # If the remote ref is the same as the sha it is a pinned commit so just
-  # return that.
-  if (!is.null(remote$ref) && !is.null(remote$sha) &&
-    grepl(paste0("^", remote$ref), remote$sha)) {
-    return(remote$sha)
-  }
-
   tryCatch({
     res <- git2r::remote_ls(
       paste0(url, "/", remote$username, "/", remote$repo, ".git"),
@@ -145,8 +138,9 @@ remote_sha.gitlab_remote <- function(remote, url = "https://gitlab.com", ...) {
 
     found <- grep(pattern = paste0("\\b", remote$ref), x = names(res), perl = TRUE)
 
+    # If none found, assume it is a Sha1, so return the ref
     if (length(found) == 0) {
-      return(NA_character_)
+      return(remote$ref)
     }
 
     unname(res[found[1]])
