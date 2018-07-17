@@ -1,0 +1,9 @@
+Name: Run a test file
+Description: Run the current test file, using `devtools::test_file()`.
+Binding: test_file
+Interactive: false
+
+Name: Calculate test coverage for a file
+Description: Calculate test coverage for the current test file, using `devtools::test_coverage_file()`.
+Binding: test_coverage_file
+Interactive: false
