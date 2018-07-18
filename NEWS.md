@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+*  New function `build_readme()` to build the README.md from a README.Rmd (#1762)
+
 * `build_vignettes()` now has a `clean` and `upgrade` arguments, to control
   cleaning of intermediate files and upgrading vignette dependencies
   respectively. (#1770).
