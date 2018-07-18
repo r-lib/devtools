@@ -276,7 +276,7 @@ update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
   unavailable <- object$diff == UNAVAILABLE & non_cran
   if (any(unavailable)) {
     if (upgrade) {
-      install_remotes(object$remote[unavailable], ..., quiet = quiet)
+      install_remotes(object$remote[unavailable], ..., quiet = quiet, upgrade = upgrade)
     } else if (!quiet) {
       message(sprintf(ngettext(sum(unavailable),
             "Skipping %d unavailable package: %s",
@@ -288,7 +288,7 @@ update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
   ahead <- object$diff == AHEAD & non_cran
   if (any(ahead)) {
     if (upgrade) {
-      install_remotes(object$remote[ahead], ..., quiet = quiet)
+      install_remotes(object$remote[ahead], ..., quiet = quiet, upgrade = upgrade)
     } else if (!quiet) {
       message(sprintf(ngettext(sum(ahead),
             "Skipping %d package ahead of CRAN: %s",
@@ -303,7 +303,7 @@ update.package_deps <- function(object, ..., quiet = FALSE, upgrade = TRUE) {
     behind <- is.na(object$installed)
   }
 
-  install_remotes(object$remote[behind], ..., quiet = quiet)
+  install_remotes(object$remote[behind], ..., quiet = quiet, upgrade = upgrade)
 }
 
 install_packages <- function(pkgs, repos = getOption("repos"),

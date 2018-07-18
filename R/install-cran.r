@@ -55,7 +55,13 @@ remote_download.cran_remote <- function(x, quiet = FALSE) {
 }
 
 download_cran <- function(x, quiet, dest_dir) {
-  download.packages(x$name, destdir = dest_dir, repos = x$repos, type = x$pkg_type, quiet = quiet)[1, 2]
+  # For ‘download.packages’, ‘type = "both"’ looks at source packages only.
+  # We want to download the binary package if it is available
+  type <- x$pkg_type
+  if (type == "both") {
+    type <- "binary"
+  }
+  download.packages(x$name, destdir = dest_dir, repos = x$repos, type = type, quiet = quiet)[1, 2]
 }
 
 #' @export

@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `install_cran()` and the CRAN remote now now always downloads the binary if
+  one is available (#1724, #1605).
+
 * `release()` gains an additional question ensuring you updated codemeta.json
   if one exists (#1774, #1754)
 
