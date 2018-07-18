@@ -205,6 +205,7 @@ install_deps <- function(pkg = ".", dependencies = NA,
 
   pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
     type = type)
+  if (!quiet) print(pkg)
   update(pkg, ..., repos = repos, type = type, threads = threads, quiet =
     quiet, upgrade = upgrade, force = force_deps)
   invisible()
