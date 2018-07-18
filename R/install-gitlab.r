@@ -170,7 +170,7 @@ download_gitlab <- function(path, url, ...) {
 #'
 #' @keywords internal
 #' @export
-gitlab_pat <- function(quiet = FALSE) {
+gitlab_pat <- function(quiet = TRUE) {
   pat <- Sys.getenv("GITLAB_PAT")
   if (nzchar(pat)) {
     if (!quiet) {

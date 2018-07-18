@@ -83,7 +83,7 @@ github_tag <- function(username, repo, ref = "master") {
 #'
 #' @keywords internal
 #' @export
-github_pat <- function(quiet = FALSE) {
+github_pat <- function(quiet = TRUE) {
   pat <- Sys.getenv("GITHUB_PAT")
   if (nzchar(pat)) {
     if (!quiet) {
