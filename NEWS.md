@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `test()` now sets `useFancyQuotes = FALSE` to better mimic the environment tests
+  are run under with `R CMD check` (#1735).
+
 * `test_file()` and `test_coverage_file()` now have RStudio addins (#1650)
 
 * `test()` no longer passes encoding argument to `testthat::test_dir()` (#1776)

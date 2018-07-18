@@ -68,8 +68,11 @@ test <- function(pkg = ".", filter = NULL, ...) {
     testthat_args <- c(testthat_args, load_helpers = FALSE)
   }
 
-  withr::with_envvar(r_env_vars(),
-    do.call(testthat::test_dir, testthat_args))
+  withr::with_options(c(useFancyQuotes = FALSE),
+    withr::with_envvar(r_env_vars(),
+      do.call(testthat::test_dir, testthat_args)
+    )
+  )
 }
 
 #' @export
