@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `check()` argument `check_version` has been renamed to `remote` to better
+  describe what tests are disabled (#1811)
+
 * `get_path()`, `set_path()`, `add_path()` and `on_path()` have been removed,
   this functionality is available with `withr::with_path()` (#1796).
 

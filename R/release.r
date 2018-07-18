@@ -59,7 +59,7 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
       right = pkg$package,
       line = 2
     )
-    check(pkg, cran = TRUE, check_version = TRUE, manual = TRUE,
+    check(pkg, cran = TRUE, remote = TRUE, manual = TRUE,
           build_args = args, run_dont_test = TRUE)
   }
   if (yesno("Have you run `R CMD check` locally?"))

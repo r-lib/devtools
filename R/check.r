@@ -33,7 +33,7 @@
 #'   is set to \code{TRUE}. If no spell checker is installed, a warning is
 #'   issued.)
 #'
-#'  \item env vars set by arguments \code{check_version} and
+#'  \item env vars set by arguments \code{remote} and
 #'    \code{force_suggests}
 #' }
 #'
@@ -58,7 +58,7 @@ check <- function(pkg = ".",
                   ...,
                   manual = FALSE,
                   cran = TRUE,
-                  check_version = FALSE,
+                  remote = FALSE,
                   force_suggests = FALSE,
                   run_dont_test = FALSE,
                   args = NULL,
@@ -117,7 +117,7 @@ check <- function(pkg = ".",
   check_built(
     built_path,
     cran = cran,
-    check_version = check_version,
+    remote = remote,
     force_suggests = force_suggests,
     run_dont_test = run_dont_test,
     manual = manual,
@@ -134,9 +134,9 @@ check <- function(pkg = ".",
 #' @param path Path to built package.
 #' @param cran if \code{TRUE} (the default), check using the same settings as
 #'   CRAN uses.
-#' @param check_version Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
-#'   If \code{TRUE}, performs a number of checked related
-#'   to version numbers of packages on CRAN.
+#' @param remote Sets \code{_R_CHECK_CRAN_INCOMING_REMOTE_} env var.
+#'   If \code{TRUE}, performs a number of CRAN incoming checks that require
+#'   remote access.
 #' @param force_suggests Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
 #'   \code{FALSE} (the default), check will proceed even if all suggested
 #'   packages aren't found.
@@ -150,7 +150,7 @@ check <- function(pkg = ".",
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @inheritParams rcmdcheck::rcmdcheck
 check_built <- function(path = NULL, cran = TRUE,
-                        check_version = FALSE, force_suggests = FALSE,
+                        remote = FALSE, force_suggests = FALSE,
                         run_dont_test = FALSE, manual = FALSE, args = NULL,
                         env_vars = NULL,  check_dir = tempdir(), quiet = FALSE,
                         error_on = c("never", "error", "warning", "note")) {
@@ -184,7 +184,7 @@ check_built <- function(path = NULL, cran = TRUE,
     args <- c(args, "--no-manual")
   }
 
-  env_vars <- check_env_vars(cran, check_version, force_suggests, env_vars)
+  env_vars <- check_env_vars(cran, remote, force_suggests, env_vars)
   if (!quiet) {
     cat_rule(
       left = "Checking",
@@ -200,16 +200,16 @@ check_built <- function(path = NULL, cran = TRUE,
   })
 }
 
-check_env_vars <- function(cran = FALSE, check_version = FALSE,
+check_env_vars <- function(cran = FALSE, remote = FALSE,
                            force_suggests = TRUE, env_vars = character()) {
   c(
     aspell_env_var(),
     # Switch off expensive check for package version
     # https://github.com/r-lib/devtools/issues/1271
     if (getRversion() >= "3.4.0" && as.numeric(R.version[["svn rev"]]) >= 70944) {
-      c("_R_CHECK_CRAN_INCOMING_REMOTE_" = as.character(check_version))
+      c("_R_CHECK_CRAN_INCOMING_REMOTE_" = as.character(remote))
     } else {
-      c("_R_CHECK_CRAN_INCOMING_" = as.character(check_version))
+      c("_R_CHECK_CRAN_INCOMING_" = as.character(remote))
     },
     "_R_CHECK_FORCE_SUGGESTS_" = as.character(force_suggests),
     env_vars
