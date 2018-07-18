@@ -1,3 +1,4 @@
+^\.github$
 ^devtools\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
