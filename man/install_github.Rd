@@ -5,7 +5,7 @@
 \title{Attempts to install a package directly from GitHub.}
 \usage{
 install_github(repo, username = NULL, ref = "master", subdir = NULL,
-  auth_token = github_pat(quiet), host = "https://api.github.com",
+  auth_token = github_pat(), host = "https://api.github.com",
   quiet = FALSE, ...)
 }
 \arguments{

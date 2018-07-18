@@ -4,7 +4,7 @@
 \alias{install_gitlab}
 \title{Attempts to install a package directly from GitLab}
 \usage{
-install_gitlab(repo, auth_token = gitlab_pat(quiet),
+install_gitlab(repo, auth_token = gitlab_pat(),
   host = "https://www.gitlab.com", quiet = FALSE, ...)
 }
 \arguments{
