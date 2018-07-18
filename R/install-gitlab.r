@@ -17,7 +17,7 @@
 #' install_github("jimhester/covr")
 #' }
 install_gitlab <- function(repo,
-                           auth_token = gitlab_pat(quiet),
+                           auth_token = gitlab_pat(),
                            host = "https://www.gitlab.com", quiet = FALSE, ...)
 {
 

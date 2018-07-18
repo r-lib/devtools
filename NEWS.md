@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `github_pat()` and `gitlab_pat()` no longer print diagnostic messages by
+  default (#1752).
+
 * `test()` now sets `useFancyQuotes = FALSE` to better mimic the environment tests
   are run under with `R CMD check` (#1735).
 

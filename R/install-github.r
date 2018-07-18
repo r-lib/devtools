@@ -53,7 +53,7 @@
 #' }
 install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,
-                           auth_token = github_pat(quiet),
+                           auth_token = github_pat(),
                            host = "https://api.github.com", quiet = FALSE,
                            ...) {
 
