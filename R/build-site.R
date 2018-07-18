@@ -6,14 +6,13 @@
 #'
 #' @param path path to the package to build the static HTML.
 #' @param ...  additional arguments passed to [pkgdown::build_site()]
-#'
-#' @inheritParams pkgdown::build_site
+#' @inheritParams install
 #'
 #' @return NULL
 #' @export
 
-build_site <- function(path = ".", ...) {
-  check_suggested("pkgdown", path = path)
+build_site <- function(path = ".", quiet = TRUE, ...) {
+  check_suggested("pkgdown")
 
   if (rstudioapi::hasFun("documentSaveAll")) {
     rstudioapi::documentSaveAll()
@@ -22,7 +21,7 @@ build_site <- function(path = ".", ...) {
   pkg <- as.package(path)
 
   withr::with_temp_libpaths(action = "prefix", code = {
-    install(pkg = pkg$path, reload = FALSE)
+    install(pkg = pkg$path, upgrade = FALSE, reload = FALSE, quiet = quiet)
     pkgdown::build_site(pkg = pkg$path, ...)
   })
 }

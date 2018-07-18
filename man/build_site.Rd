@@ -4,10 +4,12 @@
 \alias{build_site}
 \title{Execute \pkg{pkgdown} build_site in a package}
 \usage{
-build_site(path = ".", ...)
+build_site(path = ".", quiet = TRUE, ...)
 }
 \arguments{
 \item{path}{path to the package to build the static HTML.}
+
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{...}{additional arguments passed to [pkgdown::build_site()]}
 }
