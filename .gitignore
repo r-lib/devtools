@@ -8,3 +8,4 @@
 inst/doc
 .httr-oauth
 tests/testthat/infrastructure/
+script.R
