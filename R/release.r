@@ -113,6 +113,7 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
     "Have you updated `DESCRIPTION`?",
     "Have you updated `cran-comments.md?`",
     if (dir.exists("docs/")) "Have you updated website in `docs/`?",
+    if (file.exists("codemeta.json")) "Have you updated codemeta.json with codemetar::write_codemeta()?",
     find_release_questions()
   )
   for (question in questions) {

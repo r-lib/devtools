@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `release()` gains an additional question ensuring you updated codemeta.json
+  if one exists (#1774, #1754)
+
 * `github_pat()` and `gitlab_pat()` no longer print diagnostic messages by
   default (#1752).
 
