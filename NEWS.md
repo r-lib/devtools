@@ -1,5 +1,9 @@
 # devtools 1.13.3.9000
 
+* `build_vignettes()` now has a `clean` and `upgrade` arguments, to control
+  cleaning of intermediate files and upgrading vignette dependencies
+  respectively. (#1770).
+
 * `check()` argument `check_version` has been renamed to `remote` to better
   describe what tests are disabled (#1811)
 

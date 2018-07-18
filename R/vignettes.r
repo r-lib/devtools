@@ -10,6 +10,7 @@
 #'   \code{\link{as.package}} for more information
 #' @param quiet If \code{TRUE}, suppresses most output. Set to \code{FALSE}
 #'   if you need to debug.
+#' @inheritParams tools::buildVignettes
 #' @inheritParams install_deps
 #' @keywords programming
 #' @seealso \code{\link{clean_vignettes}} to remove the pdfs in
@@ -18,16 +19,18 @@
 #' @seealso \code{\link{clean_vignettes}} to remove build tex/pdf files.
 build_vignettes <- function(pkg = ".",
                             dependencies = "VignetteBuilder",
+                            clean = TRUE,
+                            upgrade = FALSE,
                             quiet = TRUE
                             ) {
   pkg <- as.package(pkg)
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (length(vigns$docs) == 0) return()
 
-  install_deps(pkg, dependencies, upgrade = FALSE)
+  install_deps(pkg, dependencies, upgrade = upgrade)
 
   message("Building ", pkg$package, " vignettes")
-  tools::buildVignettes(dir = pkg$path, tangle = TRUE, quiet = quiet)
+  tools::buildVignettes(dir = pkg$path, clean = clean, tangle = TRUE, quiet = quiet)
   copy_vignettes(pkg)
 
   invisible(TRUE)
