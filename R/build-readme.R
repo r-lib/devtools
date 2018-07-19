@@ -26,7 +26,7 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
 
   build <- function(pkg_path, readme_path, ..., quiet) {
     withr::with_temp_libpaths(action = "prefix", code = {
-      devtools::install(pkg_path, upgrade = FALSE, reload = FALSE, quiet = quiet)
+      devtools::install(pkg_path, upgrade_dependencies = FALSE, reload = FALSE, quiet = quiet)
       rmarkdown::render(readme_path, ..., quiet = quiet)
     })
   }
