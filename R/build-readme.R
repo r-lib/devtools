@@ -31,9 +31,11 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
     })
   }
 
+  message("Building ", pkg$package, " readme")
+
   output <- callr::r(build,
     args = list(pkg_path = pkg$path, readme_path = readme_path, ... = ..., quiet = quiet),
     show = TRUE, spinner = FALSE)
 
-  message(output, " generated")
+  invisible(TRUE)
 }
