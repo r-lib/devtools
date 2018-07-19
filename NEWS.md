@@ -1,5 +1,9 @@
 # devtools 1.13.3.9000
 
+* `install_github()` now downloads tarballs from GitHub rather than zip
+  archives. This avoids issues with losing execute permissions on configure
+  scripts when systems are using R's internal unzip implementation (#1799)
+
 * Vignettes are now built in a separate process, and the package is installed
   before building the vignettes (#1822)
 
