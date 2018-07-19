@@ -24,9 +24,16 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
 
   readme_path <- file.path(pkg$path, readme_path[[1]])
 
-  withr::with_temp_libpaths(action = "prefix", code = {
-    install(pkg = pkg$path, upgrade = FALSE, reload = FALSE, quiet = quiet)
-    output <- rmarkdown::render(readme_path, ..., quiet = quiet)
-  })
+  build <- function(pkg_path, readme_path, ..., quiet) {
+    withr::with_temp_libpaths(action = "prefix", code = {
+      devtools::install(pkg_path, upgrade = FALSE, reload = FALSE, quiet = quiet)
+      rmarkdown::render(readme_path, ..., quiet = quiet)
+    })
+  }
+
+  output <- callr::r(build,
+    args = list(pkg_path = pkg$path, readme_path = readme_path, ... = ..., quiet = quiet),
+    show = TRUE, spinner = FALSE)
+
   message(output, " generated")
 }
