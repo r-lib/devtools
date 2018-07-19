@@ -106,10 +106,6 @@ test_that("vignettes built on install", {
     skip("pdflatex not available")
   }
 
-  # Make sure it fails if we build without installing
-  expect_error(build_vignettes("testVignettesBuilt"),
-    "there is no package called")
-
   install("testVignettesBuilt", reload = FALSE, quiet = TRUE,
     build_vignettes = TRUE)
   unlink("testVignettesBuilt/vignettes/new.tex")

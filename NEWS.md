@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* Vignettes are now built in a separate process, and the package is installed
+  before building the vignettes (#1822)
+
 *  New function `build_readme()` to build the README.md from a README.Rmd (#1762)
 
 * `build_vignettes()` now has a `clean` and `upgrade` arguments, to control

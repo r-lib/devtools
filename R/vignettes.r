@@ -30,7 +30,17 @@ build_vignettes <- function(pkg = ".",
   install_deps(pkg, dependencies, upgrade = upgrade)
 
   message("Building ", pkg$package, " vignettes")
-  tools::buildVignettes(dir = pkg$path, clean = clean, tangle = TRUE, quiet = quiet)
+
+  build <- function(pkg_path, clean, quiet) {
+    withr::with_temp_libpaths(action = "prefix", code = {
+      devtools::install(pkg_path, upgrade_dependencies = FALSE, reload = FALSE, quiet = quiet)
+      tools::buildVignettes(dir = pkg_path, clean = clean, tangle = TRUE, quiet = quiet)
+    })
+  }
+  callr::r(build,
+    args = list(pkg_path = pkg$path, clean = clean, quiet = quiet),
+    show = TRUE, spinner = FALSE)
+
   copy_vignettes(pkg)
 
   invisible(TRUE)
