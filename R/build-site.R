@@ -1,4 +1,3 @@
-
 #' Execute \pkg{pkgdown} build_site in a package
 #'
 #' `build_site()` is a shortcut for [pkgdown::build_site()], it generates the
@@ -10,7 +9,6 @@
 #'
 #' @return NULL
 #' @export
-
 build_site <- function(path = ".", quiet = TRUE, ...) {
   check_suggested("pkgdown")
 
@@ -22,6 +20,12 @@ build_site <- function(path = ".", quiet = TRUE, ...) {
 
   withr::with_temp_libpaths(action = "prefix", code = {
     install(pkg = pkg$path, upgrade = FALSE, reload = FALSE, quiet = quiet)
-    pkgdown::build_site(pkg = pkg$path, ...)
+    if (isTRUE(quiet)) {
+      withr::with_output_sink(tempfile(),
+        pkgdown::build_site(pkg = pkg$path, ...)
+      )
+    } else {
+      pkgdown::build_site(pkg = pkg$path, ...)
+    }
   })
 }
