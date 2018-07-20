@@ -45,5 +45,8 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
   )
 
   pkgload::dev_topic_index_reset(pkg$package)
+
+  build_package_index(pkg)
+
   invisible()
 }
