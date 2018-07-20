@@ -1,24 +1,24 @@
 context("Vignettes")
 
-test_that("Sweave vignettes copied into inst/doc", {
+test_that("Sweave vignettes copied into doc", {
   if (!pkgbuild::has_latex()) {
     skip("pdflatex not available")
   }
 
   clean_vignettes("testVignettes")
-  expect_false("new.pdf" %in% dir("testVignettes/inst/doc"))
-  expect_false("new.R" %in% dir("testVignettes/inst/doc"))
-  expect_false("new.Rnw" %in% dir("testVignettes/inst/doc"))
+  expect_false("new.pdf" %in% dir("testVignettes/doc"))
+  expect_false("new.R" %in% dir("testVignettes/doc"))
+  expect_false("new.Rnw" %in% dir("testVignettes/doc"))
 
   build_vignettes("testVignettes")
-  expect_true("new.pdf" %in% dir("testVignettes/inst/doc"))
-  expect_true("new.R" %in% dir("testVignettes/inst/doc"))
-  expect_true("new.Rnw" %in% dir("testVignettes/inst/doc"))
+  expect_true("new.pdf" %in% dir("testVignettes/doc"))
+  expect_true("new.R" %in% dir("testVignettes/doc"))
+  expect_true("new.Rnw" %in% dir("testVignettes/doc"))
 
   clean_vignettes("testVignettes")
-  expect_false("new.pdf" %in% dir("testVignettes/inst/doc"))
-  expect_false("new.R" %in% dir("testVignettes/inst/doc"))
-  expect_false("new.Rnw" %in% dir("testVignettes/inst/doc"))
+  expect_false("new.pdf" %in% dir("testVignettes/doc"))
+  expect_false("new.R" %in% dir("testVignettes/doc"))
+  expect_false("new.Rnw" %in% dir("testVignettes/doc"))
 })
 
 test_that("Built files are updated", {
@@ -30,7 +30,7 @@ test_that("Built files are updated", {
   build_vignettes("testVignettes")
   on.exit(clean_vignettes("testVignettes"))
 
-  output <- dir("testVignettes/inst/doc", "new", full.names = TRUE)
+  output <- dir("testVignettes/doc", "new", full.names = TRUE)
   first <- file.info(output)$mtime
 
   Sys.sleep(1)
@@ -41,9 +41,9 @@ test_that("Built files are updated", {
 })
 
 if (packageVersion("knitr") >= 1.2) {
-  test_that("Rmarkdown vignettes copied into inst/doc", {
+  test_that("Rmarkdown vignettes copied into doc", {
     pkg <- as.package("testMarkdownVignettes")
-    doc_path <- file.path(pkg$path, "inst", "doc")
+    doc_path <- file.path(pkg$path, "doc")
 
     clean_vignettes(pkg)
     expect_false("test.html" %in% dir(doc_path))
@@ -63,7 +63,7 @@ if (packageVersion("knitr") >= 1.2) {
 
   test_that("dependencies argument", {
     pkg <- as.package("testMarkdownVignettes")
-    doc_path <- file.path(pkg$path, "inst", "doc")
+    doc_path <- file.path(pkg$path, "doc")
 
     clean_vignettes(pkg)
     on.exit(clean_vignettes(pkg), add = TRUE)
@@ -83,7 +83,7 @@ test_that("Extra files copied and removed", {
   }
 
   pkg <- as.package("testVignetteExtras")
-  doc_path <- file.path(pkg$path, "inst", "doc")
+  doc_path <- file.path(pkg$path, "doc")
 
   extras_path <- file.path("testVignetteExtras", "vignettes",
     ".install_extras")
