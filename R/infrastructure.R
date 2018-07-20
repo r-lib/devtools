@@ -21,7 +21,13 @@ use_test <- function(name, pkg = ".") {
 #' @export
 use_rstudio <- function(pkg = ".") {
   .Deprecated("usethis::use_rstudio()", package = "devtools")
-  warn_unless_current_dir(pkg)
+
+  if (pkg != ".") {
+    warn_unless_current_dir(pkg)
+    old <- setwd(pkg)
+    on.exit(setwd(old))
+  }
+
   usethis::use_rstudio()
 }
 
