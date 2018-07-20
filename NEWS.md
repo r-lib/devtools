@@ -1,5 +1,9 @@
 # devtools 1.13.3.9000
 
+* devtools `use_*()` functions now temporarily set the active usethis project
+  if given a pkg argument that is not the current directory. This provides
+  backwards compatibility with previous behavior (#1823).
+
 * `install_github()` now downloads tarballs from GitHub rather than zip
   archives. This avoids issues with losing execute permissions on configure
   scripts when systems are using R's internal unzip implementation (#1799)
