@@ -36,7 +36,7 @@ NULL
 #' }
 #' @docType package
 #' @name devtools
-NULL
+"_PACKAGE"
 
 #' Deprecated Functions
 #'

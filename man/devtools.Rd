@@ -4,6 +4,7 @@
 \name{devtools}
 \alias{devtools}
 \alias{devtools-package}
+\alias{devtools-package}
 \title{Package development tools for R.}
 \description{
 Package development tools for R.
@@ -38,3 +39,27 @@ Devtools uses the following \code{\link{options}} to configure behaviour:
 }
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/r-lib/devtools}
+  \item Report bugs at \url{https://github.com/r-lib/devtools/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Jim Hester \email{jim.hester@rstudio.com}
+
+Authors:
+\itemize{
+  \item Hadley Wickham
+  \item Winston Chang
+}
+
+Other contributors:
+\itemize{
+  \item RStudio [copyright holder]
+  \item R Core team (Some namespace and vignette code extracted from base R) [contributor]
+}
+
+}
