@@ -8,6 +8,6 @@ build_package_index <- function(pkg) {
 
   db <- tools::Rd_db(dir = pkg$path)
   names(db) <- sub("\\.[Rr]d$", "", basename(as.character(names(db))))
-  ("tools" %:::% "makeLazyLoadDB")(db, file.path("help", pkg$package))
+  ("tools" %:::% "makeLazyLoadDB")(db, file.path(pkg$path, "help", pkg$package))
   ("tools" %:::% ".writePkgIndices")(pkg$path, pkg$path)
 }
