@@ -19,7 +19,7 @@ Imports:
     callr,
     cli,
     digest,
-    git2r (>= 0.21.0.9002),
+    git2r (>= 0.23.0),
     httr (>= 0.4),
     jsonlite,
     memoise (>= 1.0.0),
@@ -60,6 +60,5 @@ Suggests:
 VignetteBuilder: knitr
 Encoding: UTF-8
 Remotes:
-    r-lib/rcmdcheck,
-    ropensci/git2r
+    r-lib/rcmdcheck
 RoxygenNote: 6.0.1
