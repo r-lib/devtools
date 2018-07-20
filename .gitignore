@@ -9,3 +9,5 @@ inst/doc
 .httr-oauth
 tests/testthat/infrastructure/
 script.R
+doc
+Meta

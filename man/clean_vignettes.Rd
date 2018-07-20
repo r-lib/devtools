@@ -11,6 +11,6 @@ clean_vignettes(pkg = ".")
 \code{\link{as.package}} for more information}
 }
 \description{
-This uses a fairly rudimentary algorithm where any files in \file{inst/doc}
+This uses a fairly rudimentary algorithm where any files in \file{doc}
 with a name that exists in \file{vignettes} are removed.
 }

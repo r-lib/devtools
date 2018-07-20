@@ -19,10 +19,10 @@
 copy_vignettes <- function(pkg) {
   pkg <- as.package(pkg)
 
-  doc_dir <- file.path(pkg$path, "inst", "doc")
-  if (!file.exists(doc_dir)) {
-    dir.create(doc_dir, recursive = TRUE, showWarnings = FALSE)
-  }
+  usethis_use_directory(pkg, "doc", ignore = TRUE)
+  usethis_use_git_ignore(pkg, "doc")
+
+  doc_dir <- file.path(pkg$path, "doc")
 
   vigns <- tools::pkgVignettes(dir = pkg$path, output = TRUE, source = TRUE)
   if (length(vigns$docs) == 0) return(invisible())
@@ -30,11 +30,11 @@ copy_vignettes <- function(pkg) {
   out_mv <- c(vigns$outputs, unique(unlist(vigns$sources, use.names = FALSE)))
   out_cp <- vigns$docs
 
-  message("Moving ", paste(basename(out_mv), collapse = ", "), " to inst/doc/")
+  message("Moving ", paste(basename(out_mv), collapse = ", "), " to doc/")
   file.copy(out_mv, doc_dir, overwrite = TRUE)
   file.remove(out_mv)
 
-  message("Copying ", paste(basename(out_cp), collapse = ", "), " to inst/doc/")
+  message("Copying ", paste(basename(out_cp), collapse = ", "), " to doc/")
   file.copy(out_cp, doc_dir, overwrite = TRUE)
 
   # Copy extra files, if needed
@@ -42,7 +42,7 @@ copy_vignettes <- function(pkg) {
   if (length(extra_files) == 0) return(invisible())
 
   message("Copying extra files ", paste(basename(extra_files), collapse = ", "),
-    " to inst/doc/")
+    " to doc/")
   file.copy(extra_files, doc_dir, recursive = TRUE)
 
   invisible()
