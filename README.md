@@ -84,30 +84,36 @@ Check and release:
   uploads to CRAN. It also drafts an email to let the CRAN
   maintainers know that you've uploaded a new package.
 
-## Diaspora
+## Conscious uncoupling
 
-devtools started off as a lean-and-mean package to facilitate local package development, but over the years it accumulated more and more functionality. Currently devtools is undergoing a diaspora to split out functionality into smaller, more tightly focussed packages. The diaspora includes:
+devtools started off as a lean-and-mean package to facilitate local package
+development, but over the years it accumulated more and more functionality.
+Currently devtools is undergoing a [conscious
+uncoupling](https://web.archive.org/web/20140326060230/http://www.goop.com/journal/be/conscious-uncoupling)
+to split out functionality into smaller, more tightly focussed packages. This
+includes:
 
 * [pkgbuild](https://github.com/r-lib/pkgbuild): Building binary packages
   (including checking if build tools are available).
 
-* [pkgload](https://github.com/r-lib/pkgload): Simulating package loading 
+* [pkgload](https://github.com/r-lib/pkgload): Simulating package loading
   (i.e. `load_all()`)
 
 * [rcmdcheck](https://github.com/r-lib/rcmdcheck): Running R CMD check
   and reporting the results.
 
 * [revdepcheck](https://github.com/r-lib/revdepcheck): Running R CMD check
-  on all reverse dependencies, and figuring out what's changed since the 
+  on all reverse dependencies, and figuring out what's changed since the
   last CRAN release.
-
-* [remotes](https://github.com/r-lib/remotes): Installing packages.
 
 * [sessioninfo](https://github.com/r-lib/sessioninfo): Session info.
 
 * [usethis](https://github.com/r-lib/usethis): Automating package setup.
 
-Generally, you should not need to worry about these different packages, because devtools installs them all automatically. You will need to care, however, if you're filing a bug because reporting it at the correct place will lead to a speedier resolution.
+Generally, you should not need to worry about these different packages, because
+devtools installs them all automatically. You will need to care, however, if
+you're filing a bug because reporting it at the correct place will lead to a
+speedier resolution.
 
 ## Other tips
 
