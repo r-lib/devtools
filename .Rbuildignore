@@ -1,3 +1,5 @@
+^Meta$
+^doc$
 ^\.github$
 ^devtools\.Rproj$
 ^\.Rproj\.user$
@@ -11,4 +13,3 @@
 ^codecov\.yml$
 ^_pkgdown\.yml$
 ^docs$
-

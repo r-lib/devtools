@@ -5,7 +5,7 @@
 \title{Build package vignettes.}
 \usage{
 build_vignettes(pkg = ".", dependencies = "VignetteBuilder", clean = TRUE,
-  upgrade = FALSE, quiet = TRUE)
+  upgrade = FALSE, quiet = TRUE, install = TRUE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -22,17 +22,24 @@ argument \code{dependencies} of \code{\link{install.packages}}.}
 
 \item{quiet}{If \code{TRUE}, suppresses most output. Set to \code{FALSE}
 if you need to debug.}
+
+\item{install}{If \code{TRUE}, install the package before building
+vignettes.}
 }
 \description{
 Builds package vignettes using the same algorithm that \code{R CMD build}
 does. This means including non-Sweave vignettes, using makefiles (if
-present), and copying over extra files. You need to ensure that these
-files are not included in the built package - ideally they should not
-be checked into source, or at least excluded with \code{.Rbuildignore}
+present), and copying over extra files. The files are copied in the 'doc'
+directory and an vignette index is created in 'Meta/vignette.rds', as they
+would be in a built package. 'doc' and 'Meta' are added to
+\code{.Rbuildignore}, so will not be included in the built package. These
+files can be checked into version control, so they can be viewed with
+\code{browseVignettes()} and \code{vignette()} if the package has been
+loaded with \code{load_all()} without needing to re-build them locally.
 }
 \seealso{
 \code{\link{clean_vignettes}} to remove the pdfs in
-  \file{inst/doc} created from vignettes
+  \file{doc} created from vignettes
 
 \code{\link{clean_vignettes}} to remove build tex/pdf files.
 }
