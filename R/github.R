@@ -108,3 +108,7 @@ github_pat <- function(quiet = TRUE) {
 in_ci <- function() {
   nzchar(Sys.getenv("CI"))
 }
+
+github_user <- memoise::memoise(function(..., pat = github_pat(), host = "https://api.github.com") {
+  github_GET("/user", ...)[["login"]]
+})

@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `remote_sha.github()` now correctly looks up SHA in private repositories
+  (#1827, @renozao).
+
 * devtools `use_*()` functions now temporarily set the active usethis project
   if given a pkg argument that is not the current directory. This provides
   backwards compatibility with previous behavior (#1823).
