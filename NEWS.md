@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `remote_packge_name.github()` now uses the graphql API to retrieve the
+  content, which works with self hosted GitHub enterprise (#1831)
+
 * `remote_sha.github()` now correctly looks up SHA in private repositories
   (#1827, @renozao).
 

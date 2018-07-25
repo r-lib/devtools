@@ -76,6 +76,33 @@ github_tag <- function(username, repo, ref = "master") {
   github_GET(file.path("repos", username, repo, "tags", ref))
 }
 
+github_DESCRIPTION <- function(username, repo, ref = "master", ...) {
+  query <-
+    "query ($org: String!, $repo: String!, $expr: String!) {
+        repository(owner: $org, name: $repo) {
+          DESCRIPTION: object(expression: $expr) {
+            ... on Blob {
+              text
+            }
+          }
+        }
+      }"
+  res <- github_POST("graphql", body =
+    jsonlite::toJSON(auto_unbox = TRUE,
+      list(
+        query = query,
+        variables = list(
+          org = username,
+          repo = repo,
+          expr = paste0(ref, ":", "DESCRIPTION")
+        )
+      )
+    )
+  )
+
+  res$data$repository$DESCRIPTION$text
+}
+
 #' Retrieve Github personal access token.
 #'
 #' A github personal access token
