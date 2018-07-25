@@ -3,8 +3,8 @@
 * `remote_packge_name.github()` now uses the graphql API to retrieve the
   content, which works with self hosted GitHub enterprise (#1831)
 
-* `remote_sha.github()` now correctly looks up SHA in private repositories
-  (#1827, @renozao).
+* `remote_sha.github()` now uses the graphql API, so works better with GitHub
+  enterprise and private repositories. (#1827, @renozao).
 
 * devtools `use_*()` functions now temporarily set the active usethis project
   if given a pkg argument that is not the current directory. This provides

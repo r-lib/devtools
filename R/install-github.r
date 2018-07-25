@@ -260,27 +260,9 @@ remote_package_name.github_remote <- function(remote, ...) {
 }
 
 #' @export
-remote_sha.github_remote <- function(remote, url = "https://github.com", ...) {
-  tryCatch({
-    # honour credentials if any
-    cred <- if(!is.null(remote$auth_token)){
-      git2r::cred_user_pass(
-        username = github_user(pat = remote$auth_token, host = remote$host),
-        password = remote$auth_token)
-    }
-    res <- git2r::remote_ls(
-      paste0(url, "/", remote$username, "/", remote$repo, ".git"),
-      ..., credentials = cred)
-
-    found <- grep(pattern = paste0("\\b", remote$ref), x = names(res), perl = TRUE)
-
-    # If none found, assume it is a Sha1, so return the ref
-    if (length(found) == 0) {
-      return(remote$ref)
-    }
-
-    unname(res[found[1]])
-  }, error = function(e) NA_character_)
+remote_sha.github_remote <- function(remote, ...) {
+  github_sha(username = remote$username, repo = remote$repo,
+    host = remote$host, ref = remote$ref, pat = remote$auth_token)
 }
 
 #' @export
