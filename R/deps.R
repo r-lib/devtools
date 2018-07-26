@@ -106,8 +106,7 @@ dev_package_deps <- function(pkg = ".", dependencies = NA,
   deps <- unlist(lapply(parsed, `[[`, "name"), use.names = FALSE)
 
   if (isTRUE(bioconductor) && is_bioconductor(pkg)) {
-    check_bioconductor()
-    bioc_repos <- BiocManager::repositories()
+    bioc_repos <- bioconductor_repositories()
 
     missing_repos <- setdiff(names(bioc_repos), names(repos))
 
