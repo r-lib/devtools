@@ -18,33 +18,29 @@ test_that("bioc repo paths are parsed correctly", {
 test_that("install_bioc", {
   skip_if_not(nzchar(Sys.getenv("DEVTOOLS_TEST_BIOC", "")))
 
-  lib <- tempfile()
-  on.exit(unlink(lib, recursive = TRUE), add = TRUE)
-  dir.create(lib)
-  libpath <- .libPaths()
-  on.exit(.libPaths(libpath), add = TRUE)
-  .libPaths(lib)
+  withr::with_temp_libpaths({
 
-  # unload BiocManager if it is already loaded, unload it after this function
-  # finishes as well
+    # unload BiocManager if it is already loaded, unload it after this function
+    # finishes as well
 
-  if (getRversion() < "3.5") {
-    unloadNamespace("BiocInstaller")
-    on.exit(unloadNamespace("BiocInstaller"), add = TRUE)
+    if (getRversion() < "3.5") {
+      unloadNamespace("BiocInstaller")
+      on.exit(unloadNamespace("BiocInstaller"), add = TRUE)
 
-    # Install BiocInstaller to the new library
-    source("https://bioconductor.org/biocLite.R")
-  } else {
-    unloadNamespace("BiocManager")
-    on.exit(unloadNamespace("BiocManager"), add = TRUE)
+      # Install BiocInstaller to the new library
+      source("https://bioconductor.org/biocLite.R")
+    } else {
+      unloadNamespace("BiocManager")
+      on.exit(unloadNamespace("BiocManager"), add = TRUE)
 
-    # Install BiocManager to the new library
-    install.packages("BiocManager")
-  }
+      # Install BiocManager to the new library
+      install.packages("BiocManager")
+    }
 
-  # This package has no dependencies or compiled code and is old
-  install_bioc("MeasurementError.cor", quiet = TRUE)
+    # This package has no dependencies or compiled code and is old
+    install_bioc("MeasurementError.cor", quiet = TRUE)
 
-  expect_silent(packageDescription("MeasurementError.cor", lib.loc = .libPaths()))
-  expect_equal(packageDescription("MeasurementError.cor", lib.loc = .libPaths())$RemoteType, "bioc")
+    expect_silent(packageDescription("MeasurementError.cor", lib.loc = .libPaths()))
+    expect_equal(packageDescription("MeasurementError.cor", lib.loc = .libPaths())$RemoteType, "bioc")
+  })
 })
