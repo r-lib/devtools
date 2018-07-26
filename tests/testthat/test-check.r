@@ -1,6 +1,6 @@
 context("Check")
 
-test_that("sucessful check doesn't trigger error", {
+test_that("successful check doesn't trigger error", {
   skip_on_cran()
   results <- check("testTest", document = FALSE, quiet = TRUE)
 

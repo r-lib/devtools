@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* Bioconductor support now provided by the BiocManager CRAN package instead of
+  BiocInstaller (#1833).
+
 * `remote_packge_name.github()` now uses the graphql API to retrieve the
   content, which works with self hosted GitHub enterprise (#1831)
 

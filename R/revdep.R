@@ -322,7 +322,7 @@ cran_packages <- memoise::memoise(
 )
 
 bioc_packages <- memoise::memoise(
-  function(views = paste(BiocInstaller::biocinstallRepos()[["BioCsoft"]], "VIEWS", sep = "/")) {
+  function(views = paste(BiocManager::repositories()[["BioCsoft"]], "VIEWS", sep = "/")) {
     con <- url(views)
     on.exit(close(con))
     bioc <- read.dcf(con)

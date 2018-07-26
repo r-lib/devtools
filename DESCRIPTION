@@ -36,7 +36,7 @@ Imports:
     whisker,
     withr
 Suggests: 
-    BiocInstaller,
+    BiocManager,
     bitops,
     covr,
     crayon,

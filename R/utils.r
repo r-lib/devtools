@@ -37,11 +37,11 @@ is_installed <- function(pkg, version = 0) {
 }
 
 check_bioconductor <- function() {
-  if (is_installed("BiocInstaller")) {
+  if (is_installed("BiocManager")) {
     return()
   }
 
-  msg <- paste0("'BiocInstaller' must be installed to install Bioconductor packages")
+  msg <- paste0("'BiocManager' must be installed to install Bioconductor packages")
   if (!interactive()) {
     stop(msg, call. = FALSE)
   }
@@ -49,16 +49,13 @@ check_bioconductor <- function() {
   message(
     msg, ".\n",
     "Would you like to install it? ",
-    "This will source <https://bioconductor.org/biocLite.R>."
   )
 
   if (menu(c("Yes", "No")) != 1) {
-    stop("'BiocInstaller' not installed", call. = FALSE)
+    stop("'BiocManager' not installed", call. = FALSE)
   }
 
-  suppressMessages(
-    source("https://bioconductor.org/biocLite.R")
-  )
+  install_cran("BiocManager")
 }
 
 read_dcf <- function(path) {
@@ -123,7 +120,7 @@ file_ext <- function (x) {
 }
 
 is_bioconductor <- function(x) {
-  x$package != "BiocInstaller" && !is.null(x$biocviews)
+  (x$package != "BiocManager" || x$package != "BiocInstaller") && !is.null(x$biocviews)
 }
 
 trim_ws <- function(x) {

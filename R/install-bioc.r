@@ -102,7 +102,7 @@ remote_metadata.bioc_remote <- function(x, bundle = NULL, source = NULL) {
   }
 
   list(
-    RemoteType = "git",
+    RemoteType = "bioc",
     RemoteUrl = x$url,
     RemoteRef = x$ref,
     RemoteSha = sha
