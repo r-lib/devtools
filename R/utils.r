@@ -39,7 +39,7 @@ is_installed <- function(pkg, version = 0) {
 bioconductor_repositories <- function() {
   check_bioconductor()
   if (getRversion() < 3.5) {
-    BiocInstaller::biocInstallRepos()
+    BiocInstaller::biocinstallRepos()
   } else {
     BiocManager::repositories()
   }
@@ -73,9 +73,16 @@ check_bioconductor_3 <- function() {
     stop("'BiocInstaller' not installed", call. = FALSE)
   }
 
-  suppressMessages(
-    source("https://bioconductor.org/biocLite.R")
-  )
+  # No https in earlier R versions
+  if (getRversion() < 3.2) {
+    suppressMessages(
+      source("http://bioconductor.org/biocLite.R")
+    )
+  } else {
+    suppressMessages(
+      source("https://bioconductor.org/biocLite.R")
+    )
+  }
 }
 
 check_bioconductor_3.5 <- function() {
