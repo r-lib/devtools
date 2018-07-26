@@ -27,11 +27,20 @@ test_that("install_bioc", {
 
   # unload BiocManager if it is already loaded, unload it after this function
   # finishes as well
-  unloadNamespace("BiocManager")
-  on.exit(unloadNamespace("BiocManager"), add = TRUE)
 
-  # Install BiocManager to the new library
-  install.packages("BiocManager")
+  if (getRversion() < "3.5") {
+    unloadNamespace("BiocInstaller")
+    on.exit(unloadNamespace("BiocInstaller"), add = TRUE)
+
+    # Install BiocInstaller to the new library
+    source("https://bioconductor.org/biocLite.R")
+  } else {
+    unloadNamespace("BiocManager")
+    on.exit(unloadNamespace("BiocManager"), add = TRUE)
+
+    # Install BiocManager to the new library
+    install.packages("BiocManager")
+  }
 
   # This package has no dependencies or compiled code and is old
   install_bioc("MeasurementError.cor", quiet = TRUE)

@@ -36,7 +36,49 @@ is_installed <- function(pkg, version = 0) {
   !is.na(installed_version) && installed_version >= version
 }
 
+bioconductor_repositories <- function() {
+  check_bioconductor()
+  if (getRversion() < 3.5) {
+    BiocInstaller::biocInstallRepos()
+  } else {
+    BiocManager::repositories()
+  }
+}
+
 check_bioconductor <- function() {
+  if (getRversion() < 3.5) {
+    check_bioconductor_3()
+  } else {
+    check_bioconductor_3.5()
+  }
+}
+
+check_bioconductor_3 <- function() {
+  if (is_installed("BiocInstaller")) {
+    return()
+  }
+
+  msg <- paste0("'BiocInstaller' must be installed to install Bioconductor packages")
+  if (!interactive()) {
+    stop(msg, call. = FALSE)
+  }
+
+  message(
+    msg, ".\n",
+    "Would you like to install it? ",
+    "This will source <https://bioconductor.org/biocLite.R>."
+  )
+
+  if (menu(c("Yes", "No")) != 1) {
+    stop("'BiocInstaller' not installed", call. = FALSE)
+  }
+
+  suppressMessages(
+    source("https://bioconductor.org/biocLite.R")
+  )
+}
+
+check_bioconductor_3.5 <- function() {
   if (is_installed("BiocManager")) {
     return()
   }
@@ -48,7 +90,7 @@ check_bioconductor <- function() {
 
   message(
     msg, ".\n",
-    "Would you like to install it? ",
+    "Would you like to install it? "
   )
 
   if (menu(c("Yes", "No")) != 1) {
@@ -120,7 +162,11 @@ file_ext <- function (x) {
 }
 
 is_bioconductor <- function(x) {
-  (x$package != "BiocManager" || x$package != "BiocInstaller") && !is.null(x$biocviews)
+  if (getRversion() < 3.5) {
+    (x$package != "BiocInstaller") && !is.null(x$biocviews)
+  } else {
+    (x$package != "BiocManager" || x$package != "BiocInstaller") && !is.null(x$biocviews)
+  }
 }
 
 trim_ws <- function(x) {
