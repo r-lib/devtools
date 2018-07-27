@@ -25,7 +25,7 @@ a handwritten apology.
 `devtools` is opinionated about package development. It requires that you use
 `roxygen2` for documentation and `testthat` for testing. Not everyone would
 agree with this approach, and they are by no means perfect. But they have
-evolved out of the experience of writing over 30 R packages.
+evolved out of the experience of writing hundreds of R packages.
 
 I'm always happy to hear about what doesn't work for you and where `devtools`
 gets in your way. Either send an email to the [rdevtools mailing
@@ -40,16 +40,11 @@ https://github.com/r-lib/devtools. To install it:
 1. Install the release version of `devtools` from CRAN with
    `install.packages("devtools")`.
 
-2. Make sure you have a working development environment.
-    * **Windows**: Install
-      [Rtools](https://cran.r-project.org/bin/windows/Rtools/).
-    * **Mac**: Install Xcode from the Mac App Store.
-    * **Linux**: Install a compiler and various development libraries (details
-      vary across different flavors of Linux).
+2. Install the development version of devtools.
 
-3. Install the development version of devtools.
-
-   ```R devtools::install_github("r-lib/devtools") ```
+   ```r
+   devtools::install_github("r-lib/devtools")
+   ```
 
 ## Package development tools
 
@@ -61,13 +56,14 @@ Frequent development tasks:
 
 * `load_all()` simulates installing and reloading your package, loading R code
   in `R/`, compiled shared objects in `src/` and data files in `data/`. During
-  development you usually want to access all functions so `load_all()` ignores
-  the package `NAMESPACE`. `load_all()` will automatically create a
-  `DESCRIPTION` if needed.
+  development you usually want to access all functions (even un-exported
+  internal ones) so `load_all()` works as if all functions were exported in the
+  package `NAMESPACE`.
 
-* `document()` updates documentation, file collation and `NAMESPACE`.
+* `document()` updates generated documentation in `/man`, file collation and
+  `NAMESPACE`.
 
-* `test()` reloads your code, then runs all `testthat` tests.
+* `test()` reloads your code with `load_all()`, then runs all `testthat` tests.
 
 Building and installing:
 
@@ -80,10 +76,12 @@ Building and installing:
 
 * `install_*` functions install an R package:
    * `install_github()` from github,
-   * `install_bitbucket()` from bitbucket, 
-   * `install_url()` from an arbitrary url and
-   * `install_local()` from a local file on disk. 
-   * `install_version()` installs a specified version from cran.
+   * `install_gitlab()` from gitlab,
+   * `install_bitbucket()` from bitbucket,
+   * `install_url()` from an arbitrary url,
+   * `install_git()` and `install_svn()` from an arbitrary git or SVN repository.
+   * `install_local()` from a local file on disk.
+   * `install_version()` installs a specified version from CRAN.
 
 Check and release:
 
@@ -93,10 +91,7 @@ Check and release:
   check your package on windows.
 
 * `run_examples()` will run all examples to make sure they work. This is useful
-  because example checking is the last step of `R CMD check`.
-
-* `check_man()` runs most of the documentation checking components of `R CMD
-  check`
+  because example checking is one of the later steps of `R CMD check`.
 
 * `release()` makes sure everything is ok with your package (including asking
   you a number of questions), then builds and uploads to CRAN. It also drafts
@@ -134,34 +129,6 @@ Generally, you should not need to worry about these different packages, because
 devtools installs them all automatically. You will need to care, however, if
 you're filing a bug because reporting it at the correct place will lead to a
 speedier resolution.
-
-## Other tips
-
-I recommend adding the following code to your `.Rprofile`:
-
-```R .First <- function() { options( repos = c(CRAN =
-"https://cran.rstudio.com/"), browserNLdisabled = TRUE, deparse.max.lines = 2)
-}
-
-if (interactive()) { suppressMessages(require(devtools)) } ```
-
-See the complete list in `?devtools`
-
-This will set up R to:
-
-* always install packages from the RStudio CRAN mirror
-* ignore newlines when  `browse()`ing
-* give minimal output from `traceback()`
-* automatically load `devtools` in interactive sessions
-
-There are also a number of options you might want to set (in `.Rprofile`) to
-customise the default behaviour when creating packages and drafting emails:
-
-* `devtools.name`: your name, used to sign emails
-* `devtools.desc.author`: your R author string, in the form of `"Hadley Wickham
-  <h.wickham@gmail.com> [aut, cre]"`. Used when creating default `DESCRIPTION`
-  files.
-* `devtools.desc.license`: a default license used when creating new packages
 
 # Code of conduct
 
