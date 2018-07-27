@@ -16,6 +16,10 @@
 #'   if you need to debug.
 #' @param install If \code{TRUE}, install the package before building
 #'   vignettes.
+#' @param keep_md If \code{TRUE}, move md intermediates as well as rendered
+#'   outputs. Most useful when using the `keep_md` YAML option for Rmarkdown
+#'   outputs. See
+#'   \link{https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown}.
 #' @inheritParams tools::buildVignettes
 #' @inheritParams install_deps
 #' @keywords programming
@@ -26,9 +30,10 @@
 build_vignettes <- function(pkg = ".",
                             dependencies = "VignetteBuilder",
                             clean = TRUE,
-                            upgrade = FALSE,
+                            upgrade = TRUE,
                             quiet = TRUE,
-                            install = TRUE
+                            install = TRUE,
+                            keep_md = TRUE
                             ) {
   pkg <- as.package(pkg)
   vigns <- tools::pkgVignettes(dir = pkg$path)
@@ -41,7 +46,7 @@ build_vignettes <- function(pkg = ".",
   if (isTRUE(install)) {
     build <- function(pkg_path, clean, quiet) {
       withr::with_temp_libpaths(action = "prefix", {
-        devtools::install(pkg_path, upgrade_dependencies = FALSE, reload = FALSE, quiet = quiet)
+        devtools::install(pkg_path, upgrade_dependencies = upgrade, reload = FALSE, quiet = quiet)
         tools::buildVignettes(dir = pkg_path, clean = clean, tangle = TRUE, quiet = quiet)
                             })
     }
@@ -61,7 +66,7 @@ build_vignettes <- function(pkg = ".",
   # files as well
   vigns <- tools::pkgVignettes(dir = pkg$path, source = TRUE, output = TRUE)
 
-  copy_vignettes(pkg)
+  copy_vignettes(pkg, keep_md)
 
   create_vignette_index(pkg, vigns)
 

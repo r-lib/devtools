@@ -5,7 +5,7 @@
 \title{Build package vignettes.}
 \usage{
 build_vignettes(pkg = ".", dependencies = "VignetteBuilder", clean = TRUE,
-  upgrade = FALSE, quiet = TRUE, install = TRUE)
+  upgrade = TRUE, quiet = TRUE, install = TRUE, keep_md = TRUE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -25,6 +25,11 @@ if you need to debug.}
 
 \item{install}{If \code{TRUE}, install the package before building
 vignettes.}
+
+\item{keep_md}{If \code{TRUE}, move md intermediates as well as rendered
+outputs. Most useful when using the `keep_md` YAML option for Rmarkdown
+outputs. See
+\link{https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown}.}
 }
 \description{
 Builds package vignettes using the same algorithm that \code{R CMD build}

@@ -16,7 +16,7 @@
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
 
-copy_vignettes <- function(pkg) {
+copy_vignettes <- function(pkg, keep_md) {
   pkg <- as.package(pkg)
 
   usethis_use_directory(pkg, "doc", ignore = TRUE)
@@ -27,7 +27,12 @@ copy_vignettes <- function(pkg) {
   vigns <- tools::pkgVignettes(dir = pkg$path, output = TRUE, source = TRUE)
   if (length(vigns$docs) == 0) return(invisible())
 
-  out_mv <- c(vigns$outputs, unique(unlist(vigns$sources, use.names = FALSE)))
+  md_outputs <- character()
+  if (isTRUE(keep_md)) {
+    md_outputs <- list.files(path = vigns$dir, pattern = "[.]md$", full.names = TRUE)
+  }
+
+  out_mv <- c(md_outputs, vigns$outputs, unique(unlist(vigns$sources, use.names = FALSE)))
   out_cp <- vigns$docs
 
   message("Moving ", paste(basename(out_mv), collapse = ", "), " to doc/")

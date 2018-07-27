@@ -2,7 +2,9 @@
 title: "Devtools dependencies"
 author: "Jim Hester, Hadley Wickham"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
+    keep_md: true
 vignette: >
   %\VignetteIndexEntry{Devtools dependencies}
   %\VignetteEngine{knitr::rmarkdown}
