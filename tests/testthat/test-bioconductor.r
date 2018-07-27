@@ -27,14 +27,15 @@ test_that("install_bioc", {
       unloadNamespace("BiocInstaller")
       on.exit(unloadNamespace("BiocInstaller"), add = TRUE)
 
-      # Install BiocInstaller to the new library
-      source("https://bioconductor.org/biocLite.R")
+      # Install BiocInstaller to the new library, we use http here because R <
+      # 3.2 does not support https.
+      source("http://bioconductor.org/biocLite.R")
     } else {
       unloadNamespace("BiocManager")
       on.exit(unloadNamespace("BiocManager"), add = TRUE)
 
       # Install BiocManager to the new library
-      install.packages("BiocManager")
+      install.packages("BiocManager", repos = "https://cloud.r-project.org")
     }
 
     # This package has no dependencies or compiled code and is old
