@@ -1,4 +1,4 @@
-# devtools
+# devtools <img src="man/figures/logo.png" align="right" />
 
 [![Build Status](https://travis-ci.org/r-lib/devtools.svg?branch=master)](https://travis-ci.org/r-lib/devtools)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-lib/devtools?branch=master&svg=true)](https://ci.appveyor.com/project/hadley/devtools)
