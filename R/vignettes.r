@@ -44,21 +44,21 @@ build_vignettes <- function(pkg = ".",
   message("Building ", pkg$package, " vignettes")
 
   if (isTRUE(install)) {
-    build <- function(pkg_path, clean, quiet) {
+    build <- function(pkg_path, clean, quiet, upgrade) {
       withr::with_temp_libpaths(action = "prefix", {
         devtools::install(pkg_path, upgrade_dependencies = upgrade, reload = FALSE, quiet = quiet)
         tools::buildVignettes(dir = pkg_path, clean = clean, tangle = TRUE, quiet = quiet)
                             })
     }
   } else {
-    build <- function(pkg_path, clean, quiet) {
+    build <- function(pkg_path, clean, quiet, upgrade) {
       tools::buildVignettes(dir = pkg_path, clean = clean, tangle = TRUE, quiet = quiet)
     }
   }
 
   callr::r(
     build,
-    args = list(pkg_path = pkg$path, clean = clean, quiet = quiet),
+    args = list(pkg_path = pkg$path, clean = clean, upgrade = upgrade, quiet = quiet),
     show = TRUE,
     spinner = FALSE)
 
