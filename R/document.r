@@ -6,20 +6,12 @@
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   \code{\link{as.package}} for more information
-#' @param clean,reload Deprecated.
 #' @inheritParams roxygen2::roxygenise
 #' @seealso \code{\link[roxygen2]{roxygenize}},
 #'   \code{browseVignettes("roxygen2")}
 #' @export
-document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
+document <- function(pkg = ".", roclets = NULL) {
   check_suggested("roxygen2")
-  if (!missing(clean)) {
-    warning("`clean` is deprecated: roxygen2 now automatically cleans up",
-      call. = FALSE)
-  }
-  if (!missing(reload)) {
-    warning("`reload` is deprecated: code is now always reloaded", call. = FALSE)
-  }
 
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
@@ -28,16 +20,15 @@ document <- function(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE) {
     rstudioapi::documentSaveAll()
   }
 
-
   # Refresh the pkg structure with any updates to the Collate entry
   # in the DESCRIPTION file
   roxygen2::update_collate(pkg$path)
 
-  load_all(pkg$path, helpers = FALSE)
+  roclets <- roclets %||% roxygen2::load_options(pkg$path)$roclets
+  roclets <- setdiff(roclets, "collate")
 
-  if (packageVersion("roxygen2") > "4.1.1") {
-    roclets <- roclets %||% roxygen2::load_options(pkg$path)$roclets
-    roclets <- setdiff(roclets, "collate")
+  if (packageVersion("roxygen2") < "6.1.0") {
+    load_all(pkg$path, helpers = FALSE)
   }
 
   withr::with_envvar(r_env_vars(),

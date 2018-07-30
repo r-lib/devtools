@@ -4,13 +4,11 @@
 \alias{document}
 \title{Use roxygen to document a package.}
 \usage{
-document(pkg = ".", clean = NULL, roclets = NULL, reload = TRUE)
+document(pkg = ".", roclets = NULL)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
 \code{\link{as.package}} for more information}
-
-\item{clean, reload}{Deprecated.}
 
 \item{roclets}{Character vector of roclet names to use with package.
 This defaults to \code{NULL}, which will use the \code{roclets} fields in
