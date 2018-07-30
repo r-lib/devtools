@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Use roxygen to document a package. — document • devtools</title>
+<title>Build a Rmarkdown README for a package — build_readme • devtools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,10 @@
 
 
 
-<meta property="og:title" content="Use roxygen to document a package. — document" />
+<meta property="og:title" content="Build a Rmarkdown README for a package — build_readme" />
 
-<meta property="og:description" content="This function is a wrapper for the roxygenize()
-function from the roxygen2 package. See the documentation and vignettes of
-that package to learn how to use roxygen." />
+<meta property="og:description" content="`build_readme()` is a wrapper around [rmarkdown::render()], it generates the
+README.md from a README.Rmd file." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,46 +113,36 @@ that package to learn how to use roxygen." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Use roxygen to document a package.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/document.r'><code>R/document.r</code></a></small>
-    <div class="hidden name"><code>document.Rd</code></div>
+    <h1>Build a Rmarkdown README for a package</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/build-readme.R'><code>R/build-readme.R</code></a></small>
+    <div class="hidden name"><code>build_readme.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function is a wrapper for the <code><a href='http://www.rdocumentation.org/packages/roxygen2/topics/roxygenize'>roxygenize</a>()</code>
-function from the roxygen2 package. See the documentation and vignettes of
-that package to learn how to use roxygen.</p>
+    <p>`build_readme()` is a wrapper around [rmarkdown::render()], it generates the
+README.md from a README.Rmd file.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>document</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>clean</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>roclets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reload</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>build_readme</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pkg</th>
-      <td><p>package description, can be path or package name.  See
-<code><a href='as.package.html'>as.package</a></code> for more information</p></td>
+      <th>path</th>
+      <td><p>path to the package to build the readme.</p></td>
     </tr>
     <tr>
-      <th>clean, reload</th>
-      <td><p>Deprecated.</p></td>
+      <th>quiet</th>
+      <td><p>if <code>TRUE</code> suppresses output from this function.</p></td>
     </tr>
     <tr>
-      <th>roclets</th>
-      <td><p>Character vector of roclet names to use with package.
-This defaults to <code>NULL</code>, which will use the <code>roclets</code> fields in
-the list provided in the <code>Roxygen</code> DESCRIPTION field. If none are
-specified, defaults to <code>c("collate", "namespace", "rd")</code>.</p></td>
+      <th>...</th>
+      <td><p>additional arguments passed to [rmarkdown::render()]</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/roxygen2/topics/roxygenize'>roxygenize</a></code>,
-  <code>browseVignettes("roxygen2")</code></p></div>
     
 
   </div>
@@ -161,9 +150,7 @@ specified, defaults to <code>c("collate", "namespace", "rd")</code>.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>

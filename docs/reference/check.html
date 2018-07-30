@@ -21,9 +21,11 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 
@@ -33,6 +35,7 @@
 <meta property="og:description" content="check automatically builds and checks a source package, using all
 known best practices. check_built checks an already built package." />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -59,7 +62,7 @@ known best practices. check_built checks an already built package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.13.5.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.13.6.9000</span>
       </span>
     </div>
 
@@ -123,12 +126,12 @@ known best practices. <code>check_built</code> checks an already built package.<
     </div>
 
     <pre class="usage"><span class='fu'>check</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>document</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>build_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>cran</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>check_version</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>force_suggests</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>cran</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>remote</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>force_suggests</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>run_dont_test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>env_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>check_dir</span> <span class='kw'>=</span> <span class='fu'>tempdir</span>(), <span class='kw'>cleanup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>error_on</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"never"</span>, <span class='st'>"error"</span>,
   <span class='st'>"warning"</span>, <span class='st'>"note"</span>))
 
-<span class='fu'>check_built</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cran</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>check_version</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+<span class='fu'>check_built</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cran</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>remote</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>force_suggests</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>run_dont_test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>env_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>check_dir</span> <span class='kw'>=</span> <span class='fu'>tempdir</span>(), <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>error_on</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"never"</span>, <span class='st'>"error"</span>, <span class='st'>"warning"</span>, <span class='st'>"note"</span>))</pre>
@@ -166,10 +169,10 @@ and <code>FALSE</code> to override this default.</p></td>
 CRAN uses.</p></td>
     </tr>
     <tr>
-      <th>check_version</th>
-      <td><p>Sets <code>_R_CHECK_CRAN_INCOMING_</code> env var.
-If <code>TRUE</code>, performs a number of checked related
-to version numbers of packages on CRAN.</p></td>
+      <th>remote</th>
+      <td><p>Sets <code>_R_CHECK_CRAN_INCOMING_REMOTE_</code> env var.
+If <code>TRUE</code>, performs a number of CRAN incoming checks that require
+remote access.</p></td>
     </tr>
     <tr>
       <th>force_suggests</th>
@@ -252,7 +255,7 @@ with how check works on CRAN. This includes:</p>
 <li><p>If <code>aspell</code> is found <code>_R_CHECK_CRAN_INCOMING_USE_ASPELL_</code>
   is set to <code>TRUE</code>. If no spell checker is installed, a warning is
   issued.)</p></li>
-<li><p>env vars set by arguments <code>check_version</code> and
+<li><p>env vars set by arguments <code>remote</code> and
    <code>force_suggests</code></p></li>
 </ul>
     

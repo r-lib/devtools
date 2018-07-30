@@ -21,9 +21,11 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 
@@ -33,6 +35,7 @@
 <meta property="og:description" content="This function is vectorised on repo so you can install multiple
 packages in a single command." />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -59,7 +62,7 @@ packages in a single command." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.13.5.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.13.6.9000</span>
       </span>
     </div>
 
@@ -123,7 +126,7 @@ packages in a single command.</p>
     </div>
 
     <pre class="usage"><span class='fu'>install_github</span>(<span class='no'>repo</span>, <span class='kw'>username</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ref</span> <span class='kw'>=</span> <span class='st'>"master"</span>, <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>auth_token</span> <span class='kw'>=</span> <span class='fu'><a href='github_pat.html'>github_pat</a></span>(<span class='no'>quiet</span>), <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"https://api.github.com"</span>,
+  <span class='kw'>auth_token</span> <span class='kw'>=</span> <span class='fu'><a href='github_pat.html'>github_pat</a></span>(), <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"https://api.github.com"</span>,
   <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -140,16 +143,17 @@ precedence.</p></td>
     <tr>
       <th>username</th>
       <td><p>User name. Deprecated: please include username in the
-<code>repo</code></p></td>
+<code>repo</code> instead.</p></td>
     </tr>
     <tr>
       <th>ref</th>
-      <td><p>Desired git reference. Could be a commit, tag, or branch
-name, or a call to <code><a href='github_refs.html'>github_pull</a></code>. Defaults to <code>"master"</code>.</p></td>
+      <td><p>Desired git reference. Deprecated: please include ref in
+<code>repo</code> instead.</p></td>
     </tr>
     <tr>
       <th>subdir</th>
-      <td><p>subdirectory within repo that contains the R package.</p></td>
+      <td><p>subdirectory within repo that contains the R package.
+Deprecated: please include subdir in <code>repo</code> instead.</p></td>
     </tr>
     <tr>
       <th>auth_token</th>
@@ -188,10 +192,10 @@ better results.</p>
     <div class='dont-index'><p><code><a href='github_refs.html'>github_pull</a></code></p>
 <p>Other package installation: <code><a href='install_bioc.html'>install_bioc</a></code>,
   <code><a href='install_bitbucket.html'>install_bitbucket</a></code>,
-  <code><a href='install_cran.html'>install_cran</a></code>, <code><a href='install_git.html'>install_git</a></code>,
-  <code><a href='install_svn.html'>install_svn</a></code>, <code><a href='install_url.html'>install_url</a></code>,
-  <code><a href='install_version.html'>install_version</a></code>, <code><a href='install.html'>install</a></code>,
-  <code><a href='uninstall.html'>uninstall</a></code></p></div>
+  <code><a href='install_cran.html'>install_cran</a></code>, <code><a href='install_gitlab.html'>install_gitlab</a></code>,
+  <code><a href='install_git.html'>install_git</a></code>, <code><a href='install_svn.html'>install_svn</a></code>,
+  <code><a href='install_url.html'>install_url</a></code>, <code><a href='install_version.html'>install_version</a></code>,
+  <code><a href='install.html'>install</a></code>, <code><a href='uninstall.html'>uninstall</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

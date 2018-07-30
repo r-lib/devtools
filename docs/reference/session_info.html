@@ -21,9 +21,11 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 
@@ -35,6 +37,7 @@ data that's rarely useful (e.g., the full collate string or base packages
 loaded) and include stuff you'd like to know (e.g., where a package was
 installed from)." />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -61,7 +64,7 @@ installed from)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.13.5.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.13.6.9000</span>
       </span>
     </div>
 
@@ -146,221 +149,124 @@ false since base packages should always match the R version.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>session_info</span>()</div><div class='output co'>#&gt; <span class='message'>Session info ------------------------------------------------------------------</span></div><div class='output co'>#&gt;  setting  value                       
-#&gt;  version  R version 3.5.0 (2018-04-23)
-#&gt;  os       macOS High Sierra 10.13.4   
-#&gt;  system   x86_64, darwin17.5.0        
-#&gt;  ui       RStudio                     
+    <pre class="examples"><div class='input'><span class='fu'>session_info</span>()</div><div class='output co'>#&gt; ─ Session info ───────────────────────────────────────────────────────────────
+#&gt;  setting  value                       
+#&gt;  version  R version 3.5.1 (2018-07-02)
+#&gt;  os       macOS Sierra 10.12.6        
+#&gt;  system   x86_64, darwin15.6.0        
+#&gt;  ui       X11                         
 #&gt;  language (EN)                        
 #&gt;  collate  en_US.UTF-8                 
-#&gt;  tz       America/Denver              
-#&gt;  date     2018-05-14                  
-#&gt; </div><div class='output co'>#&gt; <span class='message'>Packages ----------------------------------------------------------------------</span></div><div class='output co'>#&gt;  package     ondiskversion loadedversion
-#&gt;  assertthat  0.2.0         0.2.0        
-#&gt;  backports   1.1.2         1.1.2        
-#&gt;  callr       2.0.3         2.0.3        
-#&gt;  cli         1.0.0         1.0.0        
-#&gt;  clisymbols  1.2.0         1.2.0        
-#&gt;  commonmark  1.5           1.5          
-#&gt;  crayon      1.3.4         1.3.4        
-#&gt;  curl        3.2           3.2          
-#&gt;  debugme     1.1.0         1.1.0        
-#&gt;  desc        1.2.0         1.2.0        
-#&gt;  devtools    1.13.5.9000   1.13.5.9000  
-#&gt;  digest      0.6.15        0.6.15       
-#&gt;  evaluate    0.10.1        0.10.1       
-#&gt;  fs          1.2.2         1.2.2        
-#&gt;  git2r       0.21.0.9002   0.21.0       
-#&gt;  highlight   0.4.7.2       0.4.7.2      
-#&gt;  htmltools   0.3.6         0.3.6        
-#&gt;  httr        1.3.1         1.3.1        
-#&gt;  jsonlite    1.5           1.5          
-#&gt;  knitr       1.20          1.20         
-#&gt;  magrittr    1.5           1.5          
-#&gt;  MASS        7.3.50        7.3-50       
-#&gt;  memoise     1.1.0         1.1.0        
-#&gt;  mime        0.5           0.5          
-#&gt;  openssl     1.0.1         1.0.1        
-#&gt;  pillar      1.2.2         1.2.2        
-#&gt;  pkgbuild    1.0.0         1.0.0        
-#&gt;  pkgdown     1.0.0.9000    1.0.0.9000   
-#&gt;  pkgload     1.0.0         1.0.0        
-#&gt;  prettyunits 1.0.2         1.0.2        
-#&gt;  purrr       0.2.4         0.2.4        
-#&gt;  R6          2.2.2         2.2.2        
-#&gt;  rcmdcheck   1.2.1.9005    1.2.1.9005   
-#&gt;  Rcpp        0.12.16       0.12.16      
-#&gt;  rematch     1.0.1         1.0.1        
-#&gt;  remotes     1.1.1         1.1.1        
-#&gt;  rlang       0.2.0         0.2.0        
-#&gt;  rmarkdown   1.9           1.9          
-#&gt;  roxygen2    6.0.1         6.0.1        
-#&gt;  rprojroot   1.3.2         1.3-2        
-#&gt;  rstudioapi  0.7           0.7          
-#&gt;  sessioninfo 1.0.0         1.0.0        
-#&gt;  stringi     1.2.2         1.2.2        
-#&gt;  stringr     1.3.0         1.3.0        
-#&gt;  testthat    2.0.0         2.0.0        
-#&gt;  tibble      1.4.2         1.4.2        
-#&gt;  usethis     1.3.0         1.3.0        
-#&gt;  whisker     0.3.2         0.3-2        
-#&gt;  withr       2.1.2         2.1.2        
-#&gt;  xml2        1.2.0         1.2.0        
-#&gt;  yaml        2.1.19        2.1.19       
-#&gt;  path                                           attached is_base date      
-#&gt;  /usr/local/lib/R/3.5/site-library/assertthat   FALSE    FALSE   2017-04-11
-#&gt;  /usr/local/lib/R/3.5/site-library/backports    FALSE    FALSE   2017-12-13
-#&gt;  /usr/local/lib/R/3.5/site-library/callr        FALSE    FALSE   2018-04-11
-#&gt;  /usr/local/lib/R/3.5/site-library/cli          FALSE    FALSE   2017-11-05
-#&gt;  /usr/local/lib/R/3.5/site-library/clisymbols   FALSE    FALSE   2017-05-21
-#&gt;  /usr/local/lib/R/3.5/site-library/commonmark   FALSE    FALSE   2018-04-28
-#&gt;  /usr/local/lib/R/3.5/site-library/crayon       FALSE    FALSE   2017-09-16
-#&gt;  /usr/local/lib/R/3.5/site-library/curl         FALSE    FALSE   2018-03-28
-#&gt;  /usr/local/lib/R/3.5/site-library/debugme      FALSE    FALSE   2017-10-22
-#&gt;  /usr/local/lib/R/3.5/site-library/desc         FALSE    FALSE   2018-05-01
-#&gt;  /Users/jayhesselberth/devel/devtools            TRUE    FALSE   &lt;NA&gt;      
-#&gt;  /usr/local/lib/R/3.5/site-library/digest       FALSE    FALSE   2018-01-28
-#&gt;  /usr/local/lib/R/3.5/site-library/evaluate     FALSE    FALSE   2017-06-24
-#&gt;  /usr/local/lib/R/3.5/site-library/fs           FALSE    FALSE   2018-03-21
-#&gt;  /usr/local/lib/R/3.5/site-library/git2r        FALSE    FALSE   2018-05-14
-#&gt;  /usr/local/lib/R/3.5/site-library/highlight    FALSE    FALSE   2017-10-04
-#&gt;  /usr/local/lib/R/3.5/site-library/htmltools    FALSE    FALSE   2017-04-28
-#&gt;  /usr/local/lib/R/3.5/site-library/httr         FALSE    FALSE   2017-08-20
-#&gt;  /usr/local/lib/R/3.5/site-library/jsonlite     FALSE    FALSE   2017-06-01
-#&gt;  /usr/local/lib/R/3.5/site-library/knitr        FALSE    FALSE   2018-02-20
-#&gt;  /usr/local/lib/R/3.5/site-library/magrittr     FALSE    FALSE   2014-11-22
-#&gt;  /usr/local/Cellar/r/3.5.0_1/lib/R/library/MASS FALSE    FALSE   2018-04-30
-#&gt;  /usr/local/lib/R/3.5/site-library/memoise      FALSE    FALSE   2017-04-21
-#&gt;  /usr/local/lib/R/3.5/site-library/mime         FALSE    FALSE   2016-07-07
-#&gt;  /usr/local/lib/R/3.5/site-library/openssl      FALSE    FALSE   2018-03-03
-#&gt;  /usr/local/lib/R/3.5/site-library/pillar       FALSE    FALSE   2018-04-26
-#&gt;  /usr/local/lib/R/3.5/site-library/pkgbuild     FALSE    FALSE   2018-05-14
-#&gt;  /usr/local/lib/R/3.5/site-library/pkgdown      FALSE    FALSE   2018-05-11
-#&gt;  /usr/local/lib/R/3.5/site-library/pkgload      FALSE    FALSE   2018-05-14
-#&gt;  /usr/local/lib/R/3.5/site-library/prettyunits  FALSE    FALSE   2015-07-13
-#&gt;  /usr/local/lib/R/3.5/site-library/purrr        FALSE    FALSE   2017-10-18
-#&gt;  /usr/local/lib/R/3.5/site-library/R6           FALSE    FALSE   2017-06-17
-#&gt;  /usr/local/lib/R/3.5/site-library/rcmdcheck    FALSE    FALSE   2018-05-14
-#&gt;  /usr/local/lib/R/3.5/site-library/Rcpp         FALSE    FALSE   2018-03-13
-#&gt;  /usr/local/lib/R/3.5/site-library/rematch      FALSE    FALSE   2016-04-21
-#&gt;  /usr/local/lib/R/3.5/site-library/remotes      FALSE    FALSE   2017-12-20
-#&gt;  /usr/local/lib/R/3.5/site-library/rlang        FALSE    FALSE   2018-02-20
-#&gt;  /usr/local/lib/R/3.5/site-library/rmarkdown    FALSE    FALSE   2018-03-01
-#&gt;  /usr/local/lib/R/3.5/site-library/roxygen2     FALSE    FALSE   2017-02-06
-#&gt;  /usr/local/lib/R/3.5/site-library/rprojroot    FALSE    FALSE   2018-01-03
-#&gt;  /usr/local/lib/R/3.5/site-library/rstudioapi   FALSE    FALSE   2017-09-07
-#&gt;  /usr/local/lib/R/3.5/site-library/sessioninfo  FALSE    FALSE   2017-06-21
-#&gt;  /usr/local/lib/R/3.5/site-library/stringi      FALSE    FALSE   2018-05-02
-#&gt;  /usr/local/lib/R/3.5/site-library/stringr      FALSE    FALSE   2018-02-19
-#&gt;  /usr/local/lib/R/3.5/site-library/testthat      TRUE    FALSE   2017-12-13
-#&gt;  /usr/local/lib/R/3.5/site-library/tibble       FALSE    FALSE   2018-01-22
-#&gt;  /usr/local/lib/R/3.5/site-library/usethis       TRUE    FALSE   2018-02-24
-#&gt;  /usr/local/lib/R/3.5/site-library/whisker      FALSE    FALSE   2013-04-28
-#&gt;  /usr/local/lib/R/3.5/site-library/withr        FALSE    FALSE   2018-03-15
-#&gt;  /usr/local/lib/R/3.5/site-library/xml2         FALSE    FALSE   2018-01-24
-#&gt;  /usr/local/lib/R/3.5/site-library/yaml         FALSE    FALSE   2018-05-01
-#&gt;  source                          
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  local                           
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  Github (ropensci/git2r@0eaa7fb) 
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  Github (r-lib/pkgbuild@0457039) 
-#&gt;  local                           
-#&gt;  Github (r-lib/pkgload@35efedd)  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  Github (r-lib/rcmdcheck@ad42561)
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  
-#&gt;  CRAN (R 3.5.0)                  </div><div class='input'><span class='fu'>session_info</span>(<span class='st'>"devtools"</span>)</div><div class='output co'>#&gt; <span class='message'>Session info ------------------------------------------------------------------</span></div><div class='output co'>#&gt;  setting  value                       
-#&gt;  version  R version 3.5.0 (2018-04-23)
-#&gt;  os       macOS High Sierra 10.13.4   
-#&gt;  system   x86_64, darwin17.5.0        
-#&gt;  ui       RStudio                     
+#&gt;  tz       America/New_York            
+#&gt;  date     2018-07-30                  
+#&gt; 
+#&gt; ─ Packages ───────────────────────────────────────────────────────────────────
+#&gt;  package     * version     date       source                          
+#&gt;  assertthat    0.2.0       2017-04-11 CRAN (R 3.5.0)                  
+#&gt;  backports     1.1.2       2017-12-13 CRAN (R 3.5.0)                  
+#&gt;  callr         2.0.4       2018-05-15 cran (@2.0.4)                   
+#&gt;  cli           1.0.0       2017-11-05 CRAN (R 3.5.0)                  
+#&gt;  clisymbols    1.2.0       2017-05-21 cran (@1.2.0)                   
+#&gt;  commonmark    1.5         2018-04-28 cran (@1.5)                     
+#&gt;  crayon        1.3.4       2017-09-16 CRAN (R 3.5.0)                  
+#&gt;  curl          3.2         2018-03-28 cran (@3.2)                     
+#&gt;  desc          1.2.0       2018-05-01 cran (@1.2.0)                   
+#&gt;  devtools    * 1.13.6.9000 &lt;NA&gt;       local                           
+#&gt;  digest        0.6.15      2018-01-28 CRAN (R 3.5.0)                  
+#&gt;  evaluate      0.11        2018-07-17 cran (@0.11)                    
+#&gt;  fs            1.2.3       2018-06-08 cran (@1.2.3)                   
+#&gt;  git2r         0.23.0.9000 2018-07-30 Github (ropensci/git2r@822155b) 
+#&gt;  glue          1.3.0       2018-07-27 Github (tidyverse/glue@a292148) 
+#&gt;  highlight     0.4.7.2     2017-10-04 cran (@0.4.7.2)                 
+#&gt;  htmltools     0.3.6       2017-04-28 CRAN (R 3.5.0)                  
+#&gt;  httr          1.3.1       2017-08-20 CRAN (R 3.5.0)                  
+#&gt;  jsonlite      1.5         2017-06-01 CRAN (R 3.5.0)                  
+#&gt;  knitr         1.20        2018-02-20 CRAN (R 3.5.0)                  
+#&gt;  magrittr      1.5         2014-11-22 CRAN (R 3.5.0)                  
+#&gt;  MASS          7.3-50      2018-04-30 CRAN (R 3.5.1)                  
+#&gt;  memoise       1.1.0       2018-07-26 Github (hadley/memoise@06d16ec) 
+#&gt;  nvimcom     * 0.9-48      2018-07-27 local                           
+#&gt;  pillar        1.3.0       2018-07-14 cran (@1.3.0)                   
+#&gt;  pkgbuild      1.0.0       2018-06-27 cran (@1.0.0)                   
+#&gt;  pkgdown       1.1.0       2018-06-02 cran (@1.1.0)                   
+#&gt;  pkgload       1.0.0       2018-07-07 cran (@1.0.0)                   
+#&gt;  prettyunits   1.0.2       2015-07-13 CRAN (R 3.5.0)                  
+#&gt;  processx      3.1.0       2018-05-15 cran (@3.1.0)                   
+#&gt;  purrr         0.2.5       2018-05-29 cran (@0.2.5)                   
+#&gt;  R6            2.2.2       2017-06-17 CRAN (R 3.5.0)                  
+#&gt;  rcmdcheck     1.2.1.9005  2018-07-26 Github (r-lib/rcmdcheck@ad42561)
+#&gt;  Rcpp          0.12.18     2018-07-23 cran (@0.12.18)                 
+#&gt;  rematch       1.0.1       2016-04-21 cran (@1.0.1)                   
+#&gt;  rlang         0.2.1       2018-05-30 cran (@0.2.1)                   
+#&gt;  rmarkdown     1.10        2018-06-11 cran (@1.10)                    
+#&gt;  roxygen2      6.0.1       2017-02-06 CRAN (R 3.5.0)                  
+#&gt;  rprojroot     1.3-2       2018-01-03 cran (@1.3-2)                   
+#&gt;  rstudioapi    0.7         2017-09-07 CRAN (R 3.5.0)                  
+#&gt;  sessioninfo   1.0.0       2017-06-21 cran (@1.0.0)                   
+#&gt;  stringi       1.2.4       2018-07-20 cran (@1.2.4)                   
+#&gt;  stringr       1.3.1       2018-05-10 CRAN (R 3.5.0)                  
+#&gt;  testthat    * 2.0.0       2017-12-13 CRAN (R 3.5.0)                  
+#&gt;  tibble        1.4.2       2018-01-22 cran (@1.4.2)                   
+#&gt;  usethis     * 1.3.0.9000  2018-07-27 Github (r-lib/usethis@585b9f7)  
+#&gt;  whisker       0.3-2       2013-04-28 CRAN (R 3.5.0)                  
+#&gt;  withr         2.1.2       2018-03-15 CRAN (R 3.5.0)                  
+#&gt;  xml2          1.2.0       2018-01-24 cran (@1.2.0)                   
+#&gt;  yaml          2.2.0       2018-07-25 cran (@2.2.0)                   </div><div class='input'><span class='fu'>session_info</span>(<span class='st'>"devtools"</span>)</div><div class='output co'>#&gt; ─ Session info ───────────────────────────────────────────────────────────────
+#&gt;  setting  value                       
+#&gt;  version  R version 3.5.1 (2018-07-02)
+#&gt;  os       macOS Sierra 10.12.6        
+#&gt;  system   x86_64, darwin15.6.0        
+#&gt;  ui       X11                         
 #&gt;  language (EN)                        
 #&gt;  collate  en_US.UTF-8                 
-#&gt;  tz       America/Denver              
-#&gt;  date     2018-05-14                  
-#&gt; </div><div class='output co'>#&gt; <span class='message'>Packages ----------------------------------------------------------------------</span></div><div class='output co'>#&gt;  package    ondiskversion loadedversion
-#&gt;  curl       3.2           3.2          
-#&gt;  devtools   1.13.5.9000   1.13.5.9000  
-#&gt;  digest     0.6.15        0.6.15       
-#&gt;  git2r      0.21.0.9002   0.21.0       
-#&gt;  httr       1.3.1         1.3.1        
-#&gt;  jsonlite   1.5           1.5          
-#&gt;  memoise    1.1.0         1.1.0        
-#&gt;  mime       0.5           0.5          
-#&gt;  openssl    1.0.1         1.0.1        
-#&gt;  R6         2.2.2         2.2.2        
-#&gt;  rstudioapi 0.7           0.7          
-#&gt;  whisker    0.3-2         0.3-2        
-#&gt;  withr      2.1.2         2.1.2        
-#&gt;  path                                         attached is_base date      
-#&gt;  /usr/local/lib/R/3.5/site-library/curl       FALSE    FALSE   2018-03-28
-#&gt;  /Users/jayhesselberth/devel/devtools          TRUE    FALSE   &lt;NA&gt;      
-#&gt;  /usr/local/lib/R/3.5/site-library/digest     FALSE    FALSE   2018-01-28
-#&gt;  /usr/local/lib/R/3.5/site-library/git2r      FALSE    FALSE   2018-05-14
-#&gt;  /usr/local/lib/R/3.5/site-library/httr       FALSE    FALSE   2017-08-20
-#&gt;  /usr/local/lib/R/3.5/site-library/jsonlite   FALSE    FALSE   2017-06-01
-#&gt;  /usr/local/lib/R/3.5/site-library/memoise    FALSE    FALSE   2017-04-21
-#&gt;  /usr/local/lib/R/3.5/site-library/mime       FALSE    FALSE   2016-07-07
-#&gt;  /usr/local/lib/R/3.5/site-library/openssl    FALSE    FALSE   2018-03-03
-#&gt;  /usr/local/lib/R/3.5/site-library/R6         FALSE    FALSE   2017-06-17
-#&gt;  /usr/local/lib/R/3.5/site-library/rstudioapi FALSE    FALSE   2017-09-07
-#&gt;  /usr/local/lib/R/3.5/site-library/whisker    FALSE    FALSE   2013-04-28
-#&gt;  /usr/local/lib/R/3.5/site-library/withr      FALSE    FALSE   2018-03-15
-#&gt;  source                         
-#&gt;  CRAN (R 3.5.0)                 
-#&gt;  local                          
-#&gt;  CRAN (R 3.5.0)                 
-#&gt;  Github (ropensci/git2r@0eaa7fb)
-#&gt;  CRAN (R 3.5.0)                 
-#&gt;  CRAN (R 3.5.0)                 
-#&gt;  CRAN (R 3.5.0)                 
-#&gt;  CRAN (R 3.5.0)                 
-#&gt;  CRAN (R 3.5.0)                 
-#&gt;  CRAN (R 3.5.0)                 
-#&gt;  CRAN (R 3.5.0)                 
-#&gt;  CRAN (R 3.5.0)                 
-#&gt;  CRAN (R 3.5.0)                 </div></pre>
+#&gt;  tz       America/New_York            
+#&gt;  date     2018-07-30                  
+#&gt; 
+#&gt; ─ Packages ───────────────────────────────────────────────────────────────────
+#&gt;  package     * version     date       source                          
+#&gt;  assertthat    0.2.0       2017-04-11 CRAN (R 3.5.0)                  
+#&gt;  backports     1.1.2       2017-12-13 CRAN (R 3.5.0)                  
+#&gt;  callr         2.0.4       2018-05-15 cran (@2.0.4)                   
+#&gt;  cli           1.0.0       2017-11-05 CRAN (R 3.5.0)                  
+#&gt;  clipr         0.4.1       2018-06-23 cran (@0.4.1)                   
+#&gt;  clisymbols    1.2.0       2017-05-21 cran (@1.2.0)                   
+#&gt;  crayon        1.3.4       2017-09-16 CRAN (R 3.5.0)                  
+#&gt;  curl          3.2         2018-03-28 cran (@3.2)                     
+#&gt;  desc          1.2.0       2018-05-01 cran (@1.2.0)                   
+#&gt;  devtools    * 1.13.6.9000 &lt;NA&gt;       local                           
+#&gt;  digest        0.6.15      2018-01-28 CRAN (R 3.5.0)                  
+#&gt;  fansi         0.2.3       2018-05-06 cran (@0.2.3)                   
+#&gt;  fs            1.2.3       2018-06-08 cran (@1.2.3)                   
+#&gt;  gh            1.0.1       2018-07-30 github (gaborcsardi/gh)         
+#&gt;  git2r         0.23.0.9000 2018-07-30 Github (ropensci/git2r@822155b) 
+#&gt;  glue          1.3.0       2018-07-27 Github (tidyverse/glue@a292148) 
+#&gt;  httr          1.3.1       2017-08-20 CRAN (R 3.5.0)                  
+#&gt;  ini           0.3.1       2018-05-20 cran (@0.3.1)                   
+#&gt;  jsonlite      1.5         2017-06-01 CRAN (R 3.5.0)                  
+#&gt;  magrittr      1.5         2014-11-22 CRAN (R 3.5.0)                  
+#&gt;  memoise       1.1.0       2018-07-26 Github (hadley/memoise@06d16ec) 
+#&gt;  mime          0.5         2016-07-07 CRAN (R 3.5.0)                  
+#&gt;  openssl       1.0.1       2018-03-03 cran (@1.0.1)                   
+#&gt;  pillar        1.3.0       2018-07-14 cran (@1.3.0)                   
+#&gt;  pkgbuild      1.0.0       2018-06-27 cran (@1.0.0)                   
+#&gt;  pkgload       1.0.0       2018-07-07 cran (@1.0.0)                   
+#&gt;  praise        1.0.0       2015-08-11 CRAN (R 3.5.0)                  
+#&gt;  prettyunits   1.0.2       2015-07-13 CRAN (R 3.5.0)                  
+#&gt;  processx      3.1.0       2018-05-15 cran (@3.1.0)                   
+#&gt;  R6            2.2.2       2017-06-17 CRAN (R 3.5.0)                  
+#&gt;  rcmdcheck     1.2.1.9005  2018-07-26 Github (r-lib/rcmdcheck@ad42561)
+#&gt;  Rcpp          0.12.18     2018-07-23 cran (@0.12.18)                 
+#&gt;  rematch2      2.0.1       2017-06-20 cran (@2.0.1)                   
+#&gt;  rlang         0.2.1       2018-05-30 cran (@0.2.1)                   
+#&gt;  rprojroot     1.3-2       2018-01-03 cran (@1.3-2)                   
+#&gt;  rstudioapi    0.7         2017-09-07 CRAN (R 3.5.0)                  
+#&gt;  sessioninfo   1.0.0       2017-06-21 cran (@1.0.0)                   
+#&gt;  testthat    * 2.0.0       2017-12-13 CRAN (R 3.5.0)                  
+#&gt;  tibble        1.4.2       2018-01-22 cran (@1.4.2)                   
+#&gt;  usethis     * 1.3.0.9000  2018-07-27 Github (r-lib/usethis@585b9f7)  
+#&gt;  utf8          1.1.4       2018-05-24 cran (@1.1.4)                   
+#&gt;  whisker       0.3-2       2013-04-28 CRAN (R 3.5.0)                  
+#&gt;  withr         2.1.2       2018-03-15 CRAN (R 3.5.0)                  </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

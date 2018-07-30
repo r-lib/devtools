@@ -225,3 +225,8 @@ mark {
   border-bottom: 2px solid rgba(255, 153, 51, 0.3);
   padding: 1px;
 }
+
+/* vertical spacing after htmlwidgets */
+.html-widget {
+  margin-bottom: 10px;
+}

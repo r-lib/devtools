@@ -21,14 +21,17 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 
 
 <meta property="og:title" content="Function reference" />
+
 
 
 <!-- mathjax -->
@@ -55,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.13.5.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.13.6.9000</span>
       </span>
     </div>
 
@@ -166,6 +169,18 @@
           <p><code><a href="build_manual.html">build_manual()</a></code> </p>
         </td>
         <td><p>Create package pdf manual</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="build_readme.html">build_readme()</a></code> </p>
+        </td>
+        <td><p>Build a Rmarkdown README for a package</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="build_site.html">build_site()</a></code> </p>
+        </td>
+        <td><p>Execute <span class="pkg">pkgdown</span> build_site in a package</p></td>
       </tr><tr>
         
         <td>
@@ -285,6 +300,12 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="install_gitlab.html">install_gitlab()</a></code> </p>
+        </td>
+        <td><p>Attempts to install a package directly from GitLab</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="install_local.html">install_local()</a></code> </p>
         </td>
         <td><p>Install a package from a local file</p></td>
@@ -368,12 +389,6 @@
           <p><code><a href="missing_s3.html">missing_s3()</a></code> </p>
         </td>
         <td><p>Find missing s3 exports.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="path.html">get_path()</a></code> <code><a href="path.html">set_path()</a></code> <code><a href="path.html">add_path()</a></code> </p>
-        </td>
-        <td><p>Get/set the PATH variable.</p></td>
       </tr><tr>
         
         <td>

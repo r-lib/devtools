@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Use roxygen to document a package. — document • devtools</title>
+<title>Attempts to install a package directly from GitLab — install_gitlab • devtools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,11 +30,12 @@
 
 
 
-<meta property="og:title" content="Use roxygen to document a package. — document" />
+<meta property="og:title" content="Attempts to install a package directly from GitLab — install_gitlab" />
 
-<meta property="og:description" content="This function is a wrapper for the roxygenize()
-function from the roxygen2 package. See the documentation and vignettes of
-that package to learn how to use roxygen." />
+<meta property="og:description" content="This function is vectorised on repo so you can install multiple
+packages in a single command. Like other remotes the repository will skip
+installation if `force == FALSE` (the default) and the remote state has
+not changed since the previous installation." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,48 +115,68 @@ that package to learn how to use roxygen." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Use roxygen to document a package.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/document.r'><code>R/document.r</code></a></small>
-    <div class="hidden name"><code>document.Rd</code></div>
+    <h1>Attempts to install a package directly from GitLab</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/install-gitlab.r'><code>R/install-gitlab.r</code></a></small>
+    <div class="hidden name"><code>install_gitlab.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This function is a wrapper for the <code><a href='http://www.rdocumentation.org/packages/roxygen2/topics/roxygenize'>roxygenize</a>()</code>
-function from the roxygen2 package. See the documentation and vignettes of
-that package to learn how to use roxygen.</p>
+    <p>This function is vectorised on <code>repo</code> so you can install multiple
+packages in a single command. Like other remotes the repository will skip
+installation if `force == FALSE` (the default) and the remote state has
+not changed since the previous installation.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>document</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>clean</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>roclets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reload</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>install_gitlab</span>(<span class='no'>repo</span>, <span class='kw'>auth_token</span> <span class='kw'>=</span> <span class='fu'><a href='gitlab_pat.html'>gitlab_pat</a></span>(),
+  <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"https://www.gitlab.com"</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pkg</th>
-      <td><p>package description, can be path or package name.  See
-<code><a href='as.package.html'>as.package</a></code> for more information</p></td>
+      <th>repo</th>
+      <td><p>Repository address in the format
+<code>username/repo[/subdir][@ref]</code>.</p></td>
     </tr>
     <tr>
-      <th>clean, reload</th>
-      <td><p>Deprecated.</p></td>
+      <th>auth_token</th>
+      <td><p>To install from a private repo, generate a personal
+access token (PAT) in <a href='https://github.com/settings/tokens'>https://github.com/settings/tokens</a> and
+supply to this argument. This is safer than using a password because
+you can easily delete a PAT without affecting any others. Defaults to
+the <code>GITHUB_PAT</code> environment variable.</p></td>
     </tr>
     <tr>
-      <th>roclets</th>
-      <td><p>Character vector of roclet names to use with package.
-This defaults to <code>NULL</code>, which will use the <code>roclets</code> fields in
-the list provided in the <code>Roxygen</code> DESCRIPTION field. If none are
-specified, defaults to <code>c("collate", "namespace", "rd")</code>.</p></td>
+      <th>host</th>
+      <td><p>GitLab API host to use. Override with your GitLab enterprise
+hostname, for example, <code>"gitlab.hostname.com"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>quiet</th>
+      <td><p>if <code>TRUE</code> suppresses output from this function.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments passed on to <code><a href='install.html'>install</a></code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='http://www.rdocumentation.org/packages/roxygen2/topics/roxygenize'>roxygenize</a></code>,
-  <code>browseVignettes("roxygen2")</code></p></div>
+    <div class='dont-index'><p>Other package installation: <code><a href='install_bioc.html'>install_bioc</a></code>,
+  <code><a href='install_bitbucket.html'>install_bitbucket</a></code>,
+  <code><a href='install_cran.html'>install_cran</a></code>, <code><a href='install_github.html'>install_github</a></code>,
+  <code><a href='install_git.html'>install_git</a></code>, <code><a href='install_svn.html'>install_svn</a></code>,
+  <code><a href='install_url.html'>install_url</a></code>, <code><a href='install_version.html'>install_version</a></code>,
+  <code><a href='install.html'>install</a></code>, <code><a href='uninstall.html'>uninstall</a></code></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='install_github.html'>install_github</a></span>(<span class='st'>"jimhester/covr"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -163,7 +184,9 @@ specified, defaults to <code>c("collate", "namespace", "rd")</code>.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#see-also">See also</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
