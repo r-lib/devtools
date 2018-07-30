@@ -246,6 +246,8 @@ revdep_check_from_cache <- function(pkg, cache) {
 
 
 revdep_check_save <- function(pkg, revdeps, check_path, lib_path) {
+  check_suggested("sessioninfo")
+
   platform <- sessioninfo::platform_info()
 
   # Revdep results

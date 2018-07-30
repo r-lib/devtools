@@ -28,12 +28,10 @@ Imports:
     pkgload,
     rcmdcheck,
     rstudioapi (>= 0.6.0.9000),
-    sessioninfo,
     stats,
     tools,
     usethis,
     utils,
-    whisker,
     withr
 Suggests: 
     BiocInstaller,
@@ -56,8 +54,10 @@ Suggests:
     rmarkdown,
     roxygen2 (>= 5.0.0),
     rversions,
+    sessioninfo,
     spelling (>= 1.1),
-    testthat (>= 1.0.2)
+    testthat (>= 1.0.2),
+    whisker
 VignetteBuilder: knitr
 Encoding: UTF-8
 Remotes:

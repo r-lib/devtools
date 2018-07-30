@@ -9,6 +9,7 @@ revdep_email <- function(pkg = ".", date,
                          template = "revdep/email.md",
                          only_problems = TRUE) {
   .Deprecated("revdepcheck::revdep_email()", package = "devtools")
+  check_suggested("whisker")
 
   pkg <- as.package(pkg)
   force(date)

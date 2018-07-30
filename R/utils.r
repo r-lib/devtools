@@ -26,6 +26,8 @@ ends_with_newline <- function(path) {
 }
 
 render_template <- function(name, data = list()) {
+  check_suggested("whisker")
+
   path <- system.file("templates", name, package = "devtools")
   template <- readLines(path)
   whisker::whisker.render(template, data)
