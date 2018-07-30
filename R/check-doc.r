@@ -23,15 +23,17 @@ check_man <- function(pkg = ".") {
 
   message("Checking documentation...")
   ok <-
-    man_message(("tools" %:::% ".check_package_parseRd")(dir = pkg$path)) &&
-    man_message(("tools" %:::% ".check_Rd_metadata")(dir = pkg$path)) &&
-    man_message(("tools" %:::% ".check_Rd_xrefs")(dir = pkg$path)) &&
-    man_message(("tools" %:::% ".check_Rd_contents")(dir = pkg$path)) &&
-    man_message(tools::checkDocFiles(dir = pkg$path))
-    man_message(tools::checkDocStyle(dir = pkg$path))
-    man_message(tools::checkReplaceFuns(dir = pkg$path))
-    man_message(tools::checkS3methods(dir = pkg$path))
-    man_message(tools::undoc(dir = pkg$path))
+    all(
+      man_message(("tools" %:::% ".check_package_parseRd")(dir = pkg$path)),
+      man_message(("tools" %:::% ".check_Rd_metadata")(dir = pkg$path)),
+      man_message(("tools" %:::% ".check_Rd_xrefs")(dir = pkg$path)),
+      man_message(("tools" %:::% ".check_Rd_contents")(dir = pkg$path)),
+      man_message(tools::checkDocFiles(dir = pkg$path)),
+      man_message(tools::checkDocStyle(dir = pkg$path)),
+      man_message(tools::checkReplaceFuns(dir = pkg$path)),
+      man_message(tools::checkS3methods(dir = pkg$path)),
+      man_message(tools::undoc(dir = pkg$path))
+    )
 
   if (ok) {
     message("No issues detected")
