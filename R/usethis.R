@@ -1,7 +1,7 @@
 # Some helpers around usethis functions
 
 #' @importFrom withr defer
-local_proj <- withr::local_(usethis::proj_set)
+local_proj <- withr::local_(function(path = ".", force = FALSE, quiet = FALSE) utils::capture.output(usethis::proj_set(path = path, force = force, quiet = quiet)))
 
 usethis_use_directory <- function(pkg, path, ignore = FALSE) {
   capture.output({

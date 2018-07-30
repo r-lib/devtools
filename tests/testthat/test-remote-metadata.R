@@ -45,7 +45,7 @@ test_that("install on packages adds metadata", {
     # dirty the repo
     cat("just a test", file = file.path(test_pkg, "test.txt"))
     install(test_pkg, quiet = TRUE)
-    pkg_info <- session_info()$packages
+    suppressWarnings(pkg_info <- session_info()$packages)
     pkg_source <- pkg_info[pkg_info[, "package"] %in% "testMetadataInstall", "source"]
     expect_match(pkg_source, "local")
 
