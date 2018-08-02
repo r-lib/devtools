@@ -86,7 +86,10 @@ test_coverage <- function(pkg = ".", ...) {
     rstudioapi::documentSaveAll()
   }
 
-  coverage <- covr::package_coverage(pkg$path, ...)
+  withr::with_envvar(r_env_vars(),
+    coverage <- covr::package_coverage(pkg$path, ...)
+  )
+
   covr::report(coverage)
 
   invisible(coverage)
