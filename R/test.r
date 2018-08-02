@@ -199,6 +199,8 @@ find_source_file <- function(file) {
 #' @rdname test
 #' @export
 test_coverage_file <- function(file = find_active_file(), ...) {
+  check_suggested("covr")
+
   is_source_file <- basename(dirname(file)) == "R"
 
   source_files <- normalizePath(winslash = "/", c(
@@ -214,9 +216,12 @@ test_coverage_file <- function(file = find_active_file(), ...) {
   env <- load_all(pkg$path, quiet = TRUE)$env
 
   withr::with_envvar(r_env_vars(),
-    coverage <- withr::with_dir("tests/testthat",
-      covr::file_coverage(source_files, test_files, ..., parent_env = env))
+    withr::with_dir("tests/testthat", {
+      coverage <- covr::environment_coverage(env, test_files, ...)
+    })
   )
+
+  coverage <- coverage[covr::display_name(coverage) %in% source_files]
 
   # Use relative paths
   attr(coverage, "relative") <- TRUE
