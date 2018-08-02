@@ -212,8 +212,11 @@ test_coverage_file <- function(file = find_active_file(), ...) {
   pkg <- as.package(dirname(file)[[1]])
 
   env <- load_all(pkg$path, quiet = TRUE)$env
-  coverage <- withr::with_dir("tests/testthat",
-    covr::file_coverage(source_files, test_files, ..., parent_env = env))
+
+  withr::with_envvar(r_env_vars(),
+    coverage <- withr::with_dir("tests/testthat",
+      covr::file_coverage(source_files, test_files, ..., parent_env = env))
+  )
 
   # Use relative paths
   attr(coverage, "relative") <- TRUE
