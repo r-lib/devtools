@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* `check()` gains a `incoming` option to toggle the CRAN incoming checks.
+
 * `build_vignette()` gains a `keep_md` option to allow keeping the intermediate markdown output (#1726)
 
 * Bioconductor support now provided by the BiocManager CRAN package instead of

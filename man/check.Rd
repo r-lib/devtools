@@ -6,12 +6,12 @@
 \title{Build and check a package, cleaning up automatically on success.}
 \usage{
 check(pkg = ".", document = NA, build_args = NULL, ..., manual = FALSE,
-  cran = TRUE, remote = FALSE, force_suggests = FALSE,
-  run_dont_test = FALSE, args = NULL, env_vars = NULL, quiet = FALSE,
-  check_dir = tempdir(), cleanup = TRUE, error_on = c("never", "error",
-  "warning", "note"))
+  cran = TRUE, remote = FALSE, incoming = remote,
+  force_suggests = FALSE, run_dont_test = FALSE, args = NULL,
+  env_vars = NULL, quiet = FALSE, check_dir = tempdir(), cleanup = TRUE,
+  error_on = c("never", "error", "warning", "note"))
 
-check_built(path = NULL, cran = TRUE, remote = FALSE,
+check_built(path = NULL, cran = TRUE, remote = FALSE, incoming = remote,
   force_suggests = FALSE, run_dont_test = FALSE, manual = FALSE,
   args = NULL, env_vars = NULL, check_dir = tempdir(), quiet = FALSE,
   error_on = c("never", "error", "warning", "note"))
@@ -37,6 +37,9 @@ CRAN uses.}
 \item{remote}{Sets \code{_R_CHECK_CRAN_INCOMING_REMOTE_} env var.
 If \code{TRUE}, performs a number of CRAN incoming checks that require
 remote access.}
+
+\item{incoming}{Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
+If \code{TRUE}, performs a number of CRAN incoming checks.}
 
 \item{force_suggests}{Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
 \code{FALSE} (the default), check will proceed even if all suggested
@@ -107,7 +110,7 @@ with how check works on CRAN. This includes:
   is set to \code{TRUE}. If no spell checker is installed, a warning is
   issued.)
 
- \item env vars set by arguments \code{remote} and
+ \item env vars set by arguments \code{incoming}, \code{remote} and
    \code{force_suggests}
 }
 }

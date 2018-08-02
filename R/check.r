@@ -33,7 +33,7 @@
 #'   is set to \code{TRUE}. If no spell checker is installed, a warning is
 #'   issued.)
 #'
-#'  \item env vars set by arguments \code{remote} and
+#'  \item env vars set by arguments \code{incoming}, \code{remote} and
 #'    \code{force_suggests}
 #' }
 #'
@@ -59,6 +59,7 @@ check <- function(pkg = ".",
                   manual = FALSE,
                   cran = TRUE,
                   remote = FALSE,
+                  incoming = remote,
                   force_suggests = FALSE,
                   run_dont_test = FALSE,
                   args = NULL,
@@ -118,6 +119,7 @@ check <- function(pkg = ".",
     built_path,
     cran = cran,
     remote = remote,
+    incoming = incoming,
     force_suggests = force_suggests,
     run_dont_test = run_dont_test,
     manual = manual,
@@ -137,6 +139,8 @@ check <- function(pkg = ".",
 #' @param remote Sets \code{_R_CHECK_CRAN_INCOMING_REMOTE_} env var.
 #'   If \code{TRUE}, performs a number of CRAN incoming checks that require
 #'   remote access.
+#' @param incoming Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
+#'   If \code{TRUE}, performs a number of CRAN incoming checks.
 #' @param force_suggests Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
 #'   \code{FALSE} (the default), check will proceed even if all suggested
 #'   packages aren't found.
@@ -150,7 +154,7 @@ check <- function(pkg = ".",
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @inheritParams rcmdcheck::rcmdcheck
 check_built <- function(path = NULL, cran = TRUE,
-                        remote = FALSE, force_suggests = FALSE,
+                        remote = FALSE, incoming = remote, force_suggests = FALSE,
                         run_dont_test = FALSE, manual = FALSE, args = NULL,
                         env_vars = NULL,  check_dir = tempdir(), quiet = FALSE,
                         error_on = c("never", "error", "warning", "note")) {
@@ -184,7 +188,7 @@ check_built <- function(path = NULL, cran = TRUE,
     args <- c(args, "--no-manual")
   }
 
-  env_vars <- check_env_vars(cran, remote, force_suggests, env_vars)
+  env_vars <- check_env_vars(cran, remote, incoming, force_suggests, env_vars)
   if (!quiet) {
     cat_rule(
       left = "Checking",
@@ -200,7 +204,7 @@ check_built <- function(path = NULL, cran = TRUE,
   })
 }
 
-check_env_vars <- function(cran = FALSE, remote = FALSE,
+check_env_vars <- function(cran = FALSE, remote = FALSE, incoming = remote,
                            force_suggests = TRUE, env_vars = character()) {
   c(
     aspell_env_var(),
@@ -208,9 +212,8 @@ check_env_vars <- function(cran = FALSE, remote = FALSE,
     # https://github.com/r-lib/devtools/issues/1271
     if (getRversion() >= "3.4.0" && as.numeric(R.version[["svn rev"]]) >= 70944) {
       c("_R_CHECK_CRAN_INCOMING_REMOTE_" = as.character(remote))
-    } else {
-      c("_R_CHECK_CRAN_INCOMING_" = as.character(remote))
     },
+    "_R_CHECK_CRAN_INCOMING_" = as.character(incoming),
     "_R_CHECK_FORCE_SUGGESTS_" = as.character(force_suggests),
     env_vars
   )
