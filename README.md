@@ -5,7 +5,7 @@
 [![Coverage Status](https://codecov.io/github/r-lib/devtools/coverage.svg?branch=master)](https://codecov.io/github/r-lib/devtools?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools)
 
-The aim of `devtools` is to make package development easier by providing R
+The aim of devtools is to make package development easier by providing R
 functions that simplify and expedite common tasks. [R
 packages](http://r-pkgs.had.co.nz/) is a book based around this workflow.
 
@@ -26,8 +26,8 @@ devtools::install_github("r-lib/devtools")
 
 ## Usage
 
-All `devtools` functions accept a path as an argument, e.g.
-`load_all("path/to/path/mypkg")`. If you don't specify a path, `devtools` will
+All devtools functions accept a path as an argument, e.g.
+`load_all("path/to/path/mypkg")`. If you don't specify a path, devtools will
 look in the current working directory - this is recommended practice.
 
 ### Frequent development tasks:
