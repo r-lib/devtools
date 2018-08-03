@@ -7,7 +7,6 @@
 ^cran-comments\.md$
 ^revdep$
 ^appveyor\.yml$
-^CONTRIBUTING\.md$
 ^\.httr-oauth$
 ^codecov\.yml$
 ^_pkgdown\.yml$
