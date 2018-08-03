@@ -38,7 +38,7 @@ look in the current working directory - this is recommended practice.
   internal ones) so `load_all()` works as if all functions were exported in the
   package `NAMESPACE`.
 
-* `document()` updates generated documentation in `/man`, file collation and
+* `document()` updates generated documentation in `man/`, file collation and
   `NAMESPACE`.
 
 * `test()` reloads your code with `load_all()`, then runs all `testthat` tests.
