@@ -57,13 +57,13 @@ look in the current working directory - this is recommended practice.
   a binary version of your package.
 
 * `install_*` functions install an R package:
-   * `install_github()` from GitHub,
-   * `install_gitlab()` from GitLab,
-   * `install_bitbucket()` from Bitbucket,
-   * `install_url()` from an arbitrary url,
-   * `install_git()` and `install_svn()` from an arbitrary git or SVN repository.
-   * `install_local()` from a local file on disk.
-   * `install_version()` installs a specified version from CRAN.
+   * `install_github()` from GitHub
+   * `install_gitlab()` from GitLab
+   * `install_bitbucket()` from Bitbucket
+   * `install_url()` from an arbitrary url
+   * `install_git()` and `install_svn()` from an arbitrary git or SVN repository
+   * `install_local()` from a local file on disk
+   * `install_version()` from a specific version on CRAN
 
 ### Check and release:
 
