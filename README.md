@@ -5,9 +5,9 @@
 [![Coverage Status](https://codecov.io/github/r-lib/devtools/coverage.svg?branch=master)](https://codecov.io/github/r-lib/devtools?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools)
 
-The aim of `devtools` is to make package development easier by providing R
+The aim of devtools is to make package development easier by providing R
 functions that simplify and expedite common tasks. [R
-packages](http://r-pkgs.had.co.nz/) is a book based around this workflow.
+Packages](http://r-pkgs.had.co.nz/) is a book based around this workflow.
 
 ## Installation
 
@@ -15,7 +15,7 @@ packages](http://r-pkgs.had.co.nz/) is a book based around this workflow.
 # Install devtools from CRAN
 install.packages("devtools")
 
-# Or the the development version from GitHub:
+# Or the development version from GitHub:
 # install.packages("devtools")
 devtools::install_github("r-lib/devtools")
 ```
@@ -26,8 +26,8 @@ devtools::install_github("r-lib/devtools")
 
 ## Usage
 
-All `devtools` functions accept a path as an argument, e.g.
-`load_all("path/to/path/mypkg")`. If you don't specify a path, `devtools` will
+All devtools functions accept a path as an argument, e.g.
+`load_all("path/to/mypkg")`. If you don't specify a path, devtools will
 look in the current working directory - this is recommended practice.
 
 ### Frequent development tasks:
@@ -38,7 +38,7 @@ look in the current working directory - this is recommended practice.
   internal ones) so `load_all()` works as if all functions were exported in the
   package `NAMESPACE`.
 
-* `document()` updates generated documentation in `/man`, file collation and
+* `document()` updates generated documentation in `man/`, file collation and
   `NAMESPACE`.
 
 * `test()` reloads your code with `load_all()`, then runs all `testthat` tests.
@@ -51,19 +51,19 @@ look in the current working directory - this is recommended practice.
 
 * `install()` reinstalls the package, detaches the currently loaded version
   then reloads the new version with `library()`. Reloading a package is not
-  guaranteed to work: see the documentation to `unload()` for caveats.
+  guaranteed to work: see the documentation for `unload()` for caveats.
 
 * `build()` builds a package file from package sources. You can use it to build
   a binary version of your package.
 
 * `install_*` functions install an R package:
-   * `install_github()` from GitHub,
-   * `install_gitlab()` from GitLab,
-   * `install_bitbucket()` from Bitbucket,
-   * `install_url()` from an arbitrary url,
-   * `install_git()` and `install_svn()` from an arbitrary git or SVN repository.
-   * `install_local()` from a local file on disk.
-   * `install_version()` installs a specified version from CRAN.
+   * `install_github()` from GitHub
+   * `install_gitlab()` from GitLab
+   * `install_bitbucket()` from Bitbucket
+   * `install_url()` from an arbitrary url
+   * `install_git()` and `install_svn()` from an arbitrary git or SVN repository
+   * `install_local()` from a local file on disk
+   * `install_version()` from a specific version on CRAN
 
 ### Check and release:
 
@@ -149,6 +149,4 @@ speedier resolution.
 
 ## Code of conduct
 
-Please note that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to abide by
-its terms.
+Please note that the devtools project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
