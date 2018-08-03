@@ -27,7 +27,7 @@ devtools::install_github("r-lib/devtools")
 ## Usage
 
 All devtools functions accept a path as an argument, e.g.
-`load_all("path/to/path/mypkg")`. If you don't specify a path, devtools will
+`load_all("path/to/mypkg")`. If you don't specify a path, devtools will
 look in the current working directory - this is recommended practice.
 
 ### Frequent development tasks:
