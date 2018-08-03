@@ -15,7 +15,7 @@ Packages](http://r-pkgs.had.co.nz/) is a book based around this workflow.
 # Install devtools from CRAN
 install.packages("devtools")
 
-# Or the the development version from GitHub:
+# Or the development version from GitHub:
 # install.packages("devtools")
 devtools::install_github("r-lib/devtools")
 ```
