@@ -6,9 +6,7 @@
 ^\.travis\.yml$
 ^cran-comments\.md$
 ^revdep$
-^CONDUCT\.md$
 ^appveyor\.yml$
-^CONTRIBUTING\.md$
 ^\.httr-oauth$
 ^codecov\.yml$
 ^_pkgdown\.yml$
