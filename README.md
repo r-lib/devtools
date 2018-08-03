@@ -7,7 +7,7 @@
 
 The aim of devtools is to make package development easier by providing R
 functions that simplify and expedite common tasks. [R
-packages](http://r-pkgs.had.co.nz/) is a book based around this workflow.
+Packages](http://r-pkgs.had.co.nz/) is a book based around this workflow.
 
 ## Installation
 
