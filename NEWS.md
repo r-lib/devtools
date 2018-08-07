@@ -39,7 +39,7 @@
 * `get_path()`, `set_path()`, `add_path()` and `on_path()` have been removed,
   this functionality is available with `withr::with_path()` (#1796).
 
-* `install_cran()` and the CRAN remote now now always downloads the binary if
+* `install_cran()` and the CRAN remote now always downloads the binary if
   one is available (#1724, #1605).
 
 * `release()` gains an additional question ensuring you updated codemeta.json
