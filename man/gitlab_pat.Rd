@@ -7,7 +7,7 @@
 gitlab_pat(quiet = TRUE)
 }
 \description{
-A github personal access token
+A Gitlab personal access token
 Looks in env var \code{GITLAB_PAT}
 }
 \keyword{internal}

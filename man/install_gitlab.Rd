@@ -32,7 +32,7 @@ not changed since the previous installation.
 }
 \examples{
 \dontrun{
-install_github("jimhester/covr")
+install_gitlab("jimhester/covr")
 }
 }
 \seealso{

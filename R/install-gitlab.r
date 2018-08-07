@@ -14,7 +14,7 @@
 #' @family package installation
 #' @examples
 #' \dontrun{
-#' install_github("jimhester/covr")
+#' install_gitlab("jimhester/covr")
 #' }
 install_gitlab <- function(repo,
                            auth_token = gitlab_pat(),
@@ -165,7 +165,7 @@ download_gitlab <- function(path, url, ...) {
 
 #' Retrieve Gitlab personal access token.
 #'
-#' A github personal access token
+#' A Gitlab personal access token
 #' Looks in env var \code{GITLAB_PAT}
 #'
 #' @keywords internal
