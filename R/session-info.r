@@ -44,6 +44,6 @@ dev_packages <- function() {
 #' session_info()
 #' session_info("devtools")
 session_info <- function(pkgs = NULL, include_base = FALSE) {
-  check_suggested("session_info")
+  check_suggested("sessioninfo")
   sessioninfo::session_info(pkgs = pkgs, include_base = include_base)
 }
