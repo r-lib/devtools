@@ -135,10 +135,12 @@ github_has_remotes <- function(x, auth = NULL) {
 #' @export
 remote_metadata.github_remote <- function(x, bundle = NULL, source = NULL) {
   # Determine sha as efficiently as possible
+  sha <- NULL
   if (!is.null(bundle)) {
     # Might be able to get from zip archive
     sha <- git_extract_sha1(bundle)
-  } else {
+  }
+  if (is.null(sha)) {
     # Otherwise can lookup with remote_ls
     sha <- remote_sha(x)
   }
