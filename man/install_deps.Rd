@@ -5,9 +5,10 @@
 \alias{install_dev_deps}
 \title{Install package dependencies if needed.}
 \usage{
-install_deps(pkg = ".", dependencies = NA, threads = getOption("Ncpus",
-  1), repos = getOption("repos"), type = getOption("pkgType"), ...,
-  upgrade = TRUE, quiet = FALSE, force_deps = FALSE)
+install_deps(pkg = ".", dependencies = NA,
+  threads = getOption("Ncpus", 1), repos = getOption("repos"),
+  type = getOption("pkgType"), ..., upgrade = TRUE, quiet = FALSE,
+  force_deps = FALSE)
 
 install_dev_deps(pkg = ".", ...)
 }

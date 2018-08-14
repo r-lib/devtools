@@ -9,10 +9,12 @@
 package_deps(pkg, dependencies = NA, repos = getOption("repos"),
   type = getOption("pkgType"))
 
-dev_package_deps(pkg = ".", dependencies = NA, repos = getOption("repos"),
-  type = getOption("pkgType"), bioconductor = TRUE)
+dev_package_deps(pkg = ".", dependencies = NA,
+  repos = getOption("repos"), type = getOption("pkgType"),
+  bioconductor = TRUE)
 
-\method{update}{package_deps}(object, ..., quiet = FALSE, upgrade = TRUE)
+\method{update}{package_deps}(object, ..., quiet = FALSE,
+  upgrade = TRUE)
 }
 \arguments{
 \item{pkg}{A character vector of package names. If missing, defaults to

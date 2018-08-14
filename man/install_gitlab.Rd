@@ -43,3 +43,4 @@ Other package installation: \code{\link{install_bioc}},
   \code{\link{install_url}}, \code{\link{install_version}},
   \code{\link{install}}, \code{\link{uninstall}}
 }
+\concept{package installation}

@@ -66,10 +66,14 @@ install_github("r-lib/devtools")
 # GITHUB_PAT.
 install_github("hadley/private", auth_token = "abc")
 
+# Use `update_packages()` to upgrade the version of a package installed by
+any of the `install_*()` functions.
+update_packages("ggplot2")
 }
 }
 \seealso{
-\code{\link{github_pull}}
+\code{\link{update_packages}} to update installed packages from the
+  source location
 
 Other package installation: \code{\link{install_bioc}},
   \code{\link{install_bitbucket}},
@@ -78,3 +82,4 @@ Other package installation: \code{\link{install_bioc}},
   \code{\link{install_url}}, \code{\link{install_version}},
   \code{\link{install}}, \code{\link{uninstall}}
 }
+\concept{package installation}

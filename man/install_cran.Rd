@@ -4,8 +4,8 @@
 \alias{install_cran}
 \title{Attempts to install a package from CRAN.}
 \usage{
-install_cran(pkgs, repos = getOption("repos"), type = getOption("pkgType"),
-  ..., quiet = FALSE)
+install_cran(pkgs, repos = getOption("repos"),
+  type = getOption("pkgType"), ..., quiet = FALSE)
 }
 \arguments{
 \item{pkgs}{Character vector of packages to install.}
@@ -37,3 +37,4 @@ Other package installation: \code{\link{install_bioc}},
   \code{\link{install_version}}, \code{\link{install}},
   \code{\link{uninstall}}
 }
+\concept{package installation}

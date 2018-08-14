@@ -26,8 +26,8 @@ confirm update of all installed packages.}
 \item{type}{Type of package to \code{update}.}
 }
 \description{
-Works similarly to \code{install.packages()} but doesn't install packages
-that are already installed, and also upgrades out dated dependencies.
+Works similarly to \code{update.packages()} but also works to update
+packages installed from non-CRAN sources, such as GitHub.
 }
 \examples{
 \dontrun{

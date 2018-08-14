@@ -4,8 +4,8 @@
 \alias{system_output}
 \title{Run a system command and capture the output.}
 \usage{
-system_output(cmd, args = character(), env_vars = character(), path = ".",
-  quiet = FALSE, ...)
+system_output(cmd, args = character(), env_vars = character(),
+  path = ".", quiet = FALSE, ...)
 }
 \arguments{
 \item{cmd}{Command to run. Will be quoted by \code{\link{shQuote}()}.}

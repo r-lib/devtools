@@ -4,8 +4,9 @@
 \alias{build_vignettes}
 \title{Build package vignettes.}
 \usage{
-build_vignettes(pkg = ".", dependencies = "VignetteBuilder", clean = TRUE,
-  upgrade = TRUE, quiet = TRUE, install = TRUE, keep_md = TRUE)
+build_vignettes(pkg = ".", dependencies = "VignetteBuilder",
+  clean = TRUE, upgrade = TRUE, quiet = TRUE, install = TRUE,
+  keep_md = TRUE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See

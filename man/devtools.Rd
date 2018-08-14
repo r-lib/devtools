@@ -4,10 +4,9 @@
 \name{devtools}
 \alias{devtools}
 \alias{devtools-package}
-\alias{devtools-package}
 \title{Package development tools for R.}
 \description{
-Package development tools for R.
+Collection of package development tools.
 }
 \section{Package options}{
 

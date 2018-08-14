@@ -31,9 +31,16 @@ a single command. You do not need to have git installed.
 \dontrun{
 install_git("git://github.com/hadley/stringr.git")
 install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
+
+# Use `update_packages()` to upgrade the version of a package installed by
+any of the `install_*()` functions.
+update_packages("stringr")
 }
 }
 \seealso{
+\code{\link{update_packages}} to update installed packages from the
+  source location
+
 Other package installation: \code{\link{install_bioc}},
   \code{\link{install_bitbucket}},
   \code{\link{install_cran}}, \code{\link{install_github}},
@@ -41,3 +48,4 @@ Other package installation: \code{\link{install_bioc}},
   \code{\link{install_url}}, \code{\link{install_version}},
   \code{\link{install}}, \code{\link{uninstall}}
 }
+\concept{package installation}

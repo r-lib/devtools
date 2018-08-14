@@ -44,8 +44,8 @@
 \alias{devtools-deprecated}
 \title{Deprecated Functions}
 \usage{
-check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"), srcpath = libpath,
-  check_libpath = libpath, bioconductor = FALSE,
+check_cran(pkgs, libpath = file.path(tempdir(), "R-lib"),
+  srcpath = libpath, check_libpath = libpath, bioconductor = FALSE,
   type = getOption("pkgType"), threads = getOption("Ncpus", 1),
   check_dir = tempfile("check_cran"),
   install_dir = tempfile("check_cran_install"), env_vars = NULL,
@@ -56,8 +56,8 @@ build_win(pkg = ".", version = c("R-devel", "R-release"))
 create(path, description = getOption("devtools.desc"), check = FALSE,
   rstudio = TRUE, quiet = FALSE)
 
-setup(path = ".", description = getOption("devtools.desc"), check = FALSE,
-  rstudio = TRUE, quiet = FALSE)
+setup(path = ".", description = getOption("devtools.desc"),
+  check = FALSE, rstudio = TRUE, quiet = FALSE)
 
 create_description(path = ".", extra = getOption("devtools.desc"),
   quiet = FALSE)
@@ -93,7 +93,8 @@ use_package_doc(pkg = ".")
 
 use_package(package, type = "Imports", pkg = ".")
 
-use_data(..., internal = FALSE, overwrite = FALSE, compress = "bzip2")
+use_data(..., internal = FALSE, overwrite = FALSE,
+  compress = "bzip2")
 
 use_data_raw(pkg = ".")
 
@@ -113,16 +114,16 @@ use_code_of_conduct(pkg = ".")
 
 use_cran_badge(pkg = ".")
 
-use_mit_license(pkg = ".", copyright_holder = getOption("devtools.name",
-  "<Author>"))
+use_mit_license(pkg = ".",
+  copyright_holder = getOption("devtools.name", "<Author>"))
 
 use_gpl3_license(pkg = ".")
 
 use_dev_version(pkg = ".")
 
-revdep_email(pkg = ".", date, version, author = getOption("devtools.name"),
-  draft = TRUE, unsent = NULL, template = "revdep/email.md",
-  only_problems = TRUE)
+revdep_email(pkg = ".", date, version,
+  author = getOption("devtools.name"), draft = TRUE, unsent = NULL,
+  template = "revdep/email.md", only_problems = TRUE)
 
 revdep_check_save_summary(pkg = ".")
 
@@ -131,9 +132,10 @@ revdep_check_print_problems(pkg = ".")
 revdep_check(pkg = ".", recursive = FALSE, ignore = NULL,
   dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
   skip = character(), libpath = getOption("devtools.revdep.libpath"),
-  srcpath = libpath, bioconductor = FALSE, type = getOption("pkgType"),
-  threads = getOption("Ncpus", 1), env_vars = NULL, check_dir = NULL,
-  install_dir = NULL, quiet_check = TRUE)
+  srcpath = libpath, bioconductor = FALSE,
+  type = getOption("pkgType"), threads = getOption("Ncpus", 1),
+  env_vars = NULL, check_dir = NULL, install_dir = NULL,
+  quiet_check = TRUE)
 
 revdep_check_resume(pkg = ".", ...)
 

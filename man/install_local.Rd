@@ -26,5 +26,13 @@ dir <- tempfile()
 dir.create(dir)
 pkg <- download.packages("testthat", dir, type = "source")
 install_local(pkg[, 2])
+
+# Use `update_packages()` to upgrade the version of a package installed by
+any of the `install_*()` functions.
+update_packages("testthat")
 }
+}
+\seealso{
+\code{\link{update_packages}} to update installed packages from the
+  source location
 }

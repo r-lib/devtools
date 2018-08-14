@@ -26,9 +26,16 @@ a single command.
 \examples{
 \dontrun{
 install_url("https://github.com/hadley/stringr/archive/master.zip")
+
+# Use `update_packages()` to upgrade the version of a package installed by
+any of the `install_*()` functions.
+update_packages("stringr")
 }
 }
 \seealso{
+\code{\link{update_packages}} to update installed packages from the
+  source location
+
 Other package installation: \code{\link{install_bioc}},
   \code{\link{install_bitbucket}},
   \code{\link{install_cran}}, \code{\link{install_github}},
@@ -36,3 +43,4 @@ Other package installation: \code{\link{install_bioc}},
   \code{\link{install_svn}}, \code{\link{install_version}},
   \code{\link{install}}, \code{\link{uninstall}}
 }
+\concept{package installation}

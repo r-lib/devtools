@@ -39,4 +39,5 @@ examples to pass - whenever one fails you need to fix the problem and then
 restart the whole process.  This function makes it a little easier by
 making it possible to run all examples from an R function.
 }
+\concept{example functions}
 \keyword{programming}

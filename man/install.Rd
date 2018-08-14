@@ -6,10 +6,11 @@
 \usage{
 install(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
   args = getOption("devtools.install.args"), quiet = FALSE,
-  dependencies = NA, upgrade_dependencies = TRUE, build_vignettes = FALSE,
-  keep_source = getOption("keep.source.pkgs"), threads = getOption("Ncpus",
-  1), force_deps = FALSE, metadata = remote_metadata(as.package(pkg)),
-  out_dir = NULL, skip_if_log_exists = FALSE, ...)
+  dependencies = NA, upgrade_dependencies = TRUE,
+  build_vignettes = FALSE, keep_source = getOption("keep.source.pkgs"),
+  threads = getOption("Ncpus", 1), force_deps = FALSE,
+  metadata = remote_metadata(as.package(pkg)), out_dir = NULL,
+  skip_if_log_exists = FALSE, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -86,8 +87,9 @@ not always completely possible, see \code{\link{reload}} for caveats.
 To install a package in a non-default library, use \code{\link[withr]{with_libpaths}}.
 }
 \seealso{
-\code{\link{with_debug}} to install packages with debugging flags
-  set.
+\code{\link{update_packages}} to update installed packages from the
+source location and \code{\link{with_debug}} to install packages with
+debugging flags set.
 
 Other package installation: \code{\link{install_bioc}},
   \code{\link{install_bitbucket}},
@@ -96,3 +98,4 @@ Other package installation: \code{\link{install_bioc}},
   \code{\link{install_svn}}, \code{\link{install_url}},
   \code{\link{install_version}}, \code{\link{uninstall}}
 }
+\concept{package installation}

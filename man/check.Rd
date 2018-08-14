@@ -5,16 +5,17 @@
 \alias{check_built}
 \title{Build and check a package, cleaning up automatically on success.}
 \usage{
-check(pkg = ".", document = NA, build_args = NULL, ..., manual = FALSE,
-  cran = TRUE, remote = FALSE, incoming = remote,
+check(pkg = ".", document = NA, build_args = NULL, ...,
+  manual = FALSE, cran = TRUE, remote = FALSE, incoming = remote,
   force_suggests = FALSE, run_dont_test = FALSE, args = NULL,
-  env_vars = NULL, quiet = FALSE, check_dir = tempdir(), cleanup = TRUE,
-  error_on = c("never", "error", "warning", "note"))
+  env_vars = NULL, quiet = FALSE, check_dir = tempdir(),
+  cleanup = TRUE, error_on = c("never", "error", "warning", "note"))
 
-check_built(path = NULL, cran = TRUE, remote = FALSE, incoming = remote,
-  force_suggests = FALSE, run_dont_test = FALSE, manual = FALSE,
-  args = NULL, env_vars = NULL, check_dir = tempdir(), quiet = FALSE,
-  error_on = c("never", "error", "warning", "note"))
+check_built(path = NULL, cran = TRUE, remote = FALSE,
+  incoming = remote, force_suggests = FALSE, run_dont_test = FALSE,
+  manual = FALSE, args = NULL, env_vars = NULL,
+  check_dir = tempdir(), quiet = FALSE, error_on = c("never",
+  "error", "warning", "note"))
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See

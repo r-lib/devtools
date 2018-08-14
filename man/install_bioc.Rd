@@ -38,9 +38,16 @@ install_bioc("SummarizedExperiment#abc123")
 install_bioc("user:password@release/SummarizedExperiment")
 install_bioc("user:password@devel/SummarizedExperiment")
 install_bioc("user:password@SummarizedExperiment#abc123")
+
+# Use `update_packages()` to upgrade the version of a package installed by
+any of the `install_*()` functions.
+update_packages("SummarizedExperiment")
 }
 }
 \seealso{
+\code{\link{update_packages}} to update installed packages from the
+  source location
+
 Other package installation: \code{\link{install_bitbucket}},
   \code{\link{install_cran}}, \code{\link{install_github}},
   \code{\link{install_gitlab}}, \code{\link{install_git}},
@@ -48,3 +55,4 @@ Other package installation: \code{\link{install_bitbucket}},
   \code{\link{install_version}}, \code{\link{install}},
   \code{\link{uninstall}}
 }
+\concept{package installation}

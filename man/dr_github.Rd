@@ -21,3 +21,4 @@ dr_github()
 \seealso{
 Other doctors: \code{\link{dr_devtools}}
 }
+\concept{doctors}

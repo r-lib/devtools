@@ -4,8 +4,8 @@
 \alias{install_svn}
 \title{Install a package from a SVN repository}
 \usage{
-install_svn(url, subdir = NULL, args = character(0), ..., revision = NULL,
-  quiet = FALSE)
+install_svn(url, subdir = NULL, args = character(0), ...,
+  revision = NULL, quiet = FALSE)
 }
 \arguments{
 \item{url}{Location of package. The url should point to a public or
@@ -34,9 +34,16 @@ a single command.
 \dontrun{
 install_svn("https://github.com/hadley/stringr")
 install_svn("https://github.com/hadley/httr")
+
+# Use `update_packages()` to upgrade the version of a package installed by
+any of the `install_*()` functions.
+update_packages("stringr")
 }
 }
 \seealso{
+\code{\link{update_packages}} to update installed packages from the
+  source location
+
 Other package installation: \code{\link{install_bioc}},
   \code{\link{install_bitbucket}},
   \code{\link{install_cran}}, \code{\link{install_github}},
@@ -44,3 +51,4 @@ Other package installation: \code{\link{install_bioc}},
   \code{\link{install_url}}, \code{\link{install_version}},
   \code{\link{install}}, \code{\link{uninstall}}
 }
+\concept{package installation}

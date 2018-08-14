@@ -5,17 +5,11 @@
 \name{reexports}
 \alias{reexports}
 \alias{inst}
-\alias{reexports}
 \alias{parse_deps}
-\alias{reexports}
 \alias{check_dep_version}
-\alias{reexports}
 \alias{with_debug}
-\alias{reexports}
 \alias{clean_dll}
-\alias{reexports}
 \alias{has_devel}
-\alias{reexports}
 \alias{unload}
 \title{Objects exported from other packages}
 \keyword{internal}

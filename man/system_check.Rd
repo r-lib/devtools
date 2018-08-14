@@ -4,8 +4,8 @@
 \alias{system_check}
 \title{Run a system command and check if it succeeds.}
 \usage{
-system_check(cmd, args = character(), env_vars = character(), path = ".",
-  quiet = FALSE, throw = TRUE, ...)
+system_check(cmd, args = character(), env_vars = character(),
+  path = ".", quiet = FALSE, throw = TRUE, ...)
 }
 \arguments{
 \item{cmd}{Command to run. Will be quoted by \code{\link{shQuote}()}.}

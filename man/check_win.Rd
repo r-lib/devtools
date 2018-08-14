@@ -42,3 +42,4 @@ is also useful to check that your package is ok on windows.
 \item \code{check_win_oldrelease}: Check package on the previous major release version of R.
 }}
 
+\concept{build functions}

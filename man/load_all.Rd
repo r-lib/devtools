@@ -4,8 +4,8 @@
 \alias{load_all}
 \title{Load complete package.}
 \usage{
-load_all(path = ".", reset = TRUE, recompile = FALSE, export_all = TRUE,
-  helpers = TRUE, quiet = FALSE, ...)
+load_all(path = ".", reset = TRUE, recompile = FALSE,
+  export_all = TRUE, helpers = TRUE, quiet = FALSE, ...)
 }
 \arguments{
 \item{path}{Path to a package, or within a package.}
@@ -96,3 +96,19 @@ a perfect replacement for \code{base::system.file}.
 
 }
 
+\examples{
+\dontrun{
+# Load the package in the current directory
+load_all("./")
+
+# Running again loads changed files
+load_all("./")
+
+# With reset=TRUE, unload and reload the package for a clean start
+load_all("./", TRUE)
+
+# With export_all=FALSE, only objects listed as exports in NAMESPACE
+# are exported
+load_all("./", export_all = FALSE)
+}
+}

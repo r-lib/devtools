@@ -5,8 +5,9 @@
 \alias{revdep_maintainers}
 \title{Reverse dependency tools.}
 \usage{
-revdep(pkg, dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
-  recursive = FALSE, ignore = NULL, bioconductor = FALSE)
+revdep(pkg, dependencies = c("Depends", "Imports", "Suggests",
+  "LinkingTo"), recursive = FALSE, ignore = NULL,
+  bioconductor = FALSE)
 
 revdep_maintainers(pkg = ".")
 }
