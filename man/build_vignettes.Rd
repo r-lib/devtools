@@ -30,7 +30,7 @@ vignettes.}
 \item{keep_md}{If \code{TRUE}, move md intermediates as well as rendered
 outputs. Most useful when using the `keep_md` YAML option for Rmarkdown
 outputs. See
-\link{https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown}.}
+\url{https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown}.}
 }
 \description{
 Builds package vignettes using the same algorithm that \code{R CMD build}
