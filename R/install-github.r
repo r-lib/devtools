@@ -32,7 +32,8 @@
 #' better results.
 #' @export
 #' @family package installation
-#' @seealso \code{\link{github_pull}}
+#' @seealso \code{\link{update_packages}} to update installed packages from the
+#'   source location
 #' @examples
 #' \dontrun{
 #' install_github("klutometis/roxygen")
@@ -50,6 +51,9 @@
 #' # GITHUB_PAT.
 #' install_github("hadley/private", auth_token = "abc")
 #'
+#' # Use `update_packages()` to upgrade the version of a package installed by
+#' any of the `install_*()` functions.
+#' update_packages("ggplot2")
 #' }
 install_github <- function(repo, username = NULL,
                            ref = "master", subdir = NULL,

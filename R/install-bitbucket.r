@@ -13,11 +13,17 @@
 #' @seealso Bitbucket API docs:
 #'   \url{https://confluence.atlassian.com/bitbucket/use-the-bitbucket-cloud-rest-apis-222724129.html}
 #' @family package installation
+#' @seealso \code{\link{update_packages}} to update installed packages from the
+#'   source location
 #' @export
 #' @examples
 #' \dontrun{
 #' install_bitbucket("sulab/mygene.r@@default")
 #' install_bitbucket("dannavarro/lsr-package")
+#'
+#' # Use `update_packages()` to upgrade the version of a package installed by
+#' any of the `install_*()` functions.
+#' update_packages("stringr")
 #' }
 install_bitbucket <- function(repo, username, ref = "master",
                               subdir = NULL, quiet = FALSE,

@@ -65,6 +65,10 @@ look in the current working directory - this is recommended practice.
    * `install_local()` from a local file on disk
    * `install_version()` from a specific version on CRAN
 
+* `update_packages()` updates a package to the latest version. This works
+  both on packages installed from CRAN as well as those installed from any of
+  the `install_*` functions.
+
 ### Check and release:
 
 * `check()` updates the documentation, then builds and checks the package locally.

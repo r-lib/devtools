@@ -55,10 +55,11 @@
 #' @param ... additional arguments passed to \code{\link{install.packages}}
 #'   when installing dependencies. \code{pkg} is installed with
 #'   \code{R CMD INSTALL}.
-#' @export
 #' @family package installation
-#' @seealso \code{\link{with_debug}} to install packages with debugging flags
-#'   set.
+#' @seealso \code{\link{update_packages}} to update installed packages from the
+#' source location and \code{\link{with_debug}} to install packages with
+#' debugging flags set.
+#' @export
 install <-
   function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
            args = getOption("devtools.install.args"), quiet = FALSE,

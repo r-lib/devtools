@@ -6,6 +6,8 @@
 #' @param path path to local directory, or compressed file (tar, zip, tar.gz
 #'   tar.bz2, tgz2 or tbz)
 #' @inheritParams install_url
+#' @seealso \code{\link{update_packages}} to update installed packages from the
+#'   source location
 #' @export
 #' @examples
 #' \dontrun{
@@ -13,6 +15,10 @@
 #' dir.create(dir)
 #' pkg <- download.packages("testthat", dir, type = "source")
 #' install_local(pkg[, 2])
+#'
+#' # Use `update_packages()` to upgrade the version of a package installed by
+#' any of the `install_*()` functions.
+#' update_packages("testthat")
 #' }
 install_local <- function(path, subdir = NULL, ..., quiet = FALSE) {
   remotes <- lapply(path, local_remote, subdir = subdir)

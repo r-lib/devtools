@@ -364,8 +364,8 @@ standardise_dep <- function(x) {
 
 #' Update packages that are missing or out-of-date.
 #'
-#' Works similarly to \code{install.packages()} but doesn't install packages
-#' that are already installed, and also upgrades out dated dependencies.
+#' Works similarly to \code{update.packages()} but also works to update
+#' packages installed from non-CRAN sources, such as GitHub.
 #'
 #' @param pkgs Character vector of packages to update. IF \code{TRUE} all
 #'   installed packages are updated. If \code{NULL} user is prompted to

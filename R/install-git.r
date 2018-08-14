@@ -14,10 +14,16 @@
 #' @inheritParams install_url
 #' @export
 #' @family package installation
+#' @seealso \code{\link{update_packages}} to update installed packages from the
+#'   source location
 #' @examples
 #' \dontrun{
 #' install_git("git://github.com/hadley/stringr.git")
 #' install_git("git://github.com/hadley/stringr.git", branch = "stringr-0.2")
+#'
+#' # Use `update_packages()` to upgrade the version of a package installed by
+#' any of the `install_*()` functions.
+#' update_packages("stringr")
 #'}
 install_git <- function(url, subdir = NULL, branch = NULL, credentials = NULL, quiet=FALSE, ...) {
 

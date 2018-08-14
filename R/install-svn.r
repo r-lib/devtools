@@ -15,10 +15,16 @@
 #' @param ... Other arguments passed on to \code{\link{install}}
 #' @export
 #' @family package installation
+#' @seealso \code{\link{update_packages}} to update installed packages from the
+#'   source location
 #' @examples
 #' \dontrun{
 #' install_svn("https://github.com/hadley/stringr")
 #' install_svn("https://github.com/hadley/httr")
+#'
+#' # Use `update_packages()` to upgrade the version of a package installed by
+#' any of the `install_*()` functions.
+#' update_packages("stringr")
 #'}
 install_svn <- function(url, subdir = NULL, args = character(0),
   ..., revision = NULL, quiet = FALSE) {

@@ -15,6 +15,8 @@
 #' @param mirror The bioconductor git mirror to use
 #' @param ... Other arguments passed on to \code{\link{install}}
 #' @export
+#' @seealso \code{\link{update_packages}} to update installed packages from the
+#'   source location
 #' @family package installation
 #' @examples
 #' \dontrun{
@@ -25,6 +27,10 @@
 #' install_bioc("user:password@release/SummarizedExperiment")
 #' install_bioc("user:password@devel/SummarizedExperiment")
 #' install_bioc("user:password@SummarizedExperiment#abc123")
+#'
+#' # Use `update_packages()` to upgrade the version of a package installed by
+#' any of the `install_*()` functions.
+#' update_packages("SummarizedExperiment")
 #'}
 install_bioc <- function(repo, mirror = getOption("BioC_git", "https://git.bioconductor.org/packages"), ..., quiet = FALSE) {
   remotes <- lapply(repo, bioc_remote, mirror = mirror)

@@ -1,5 +1,8 @@
 # devtools 1.13.3.9000
 
+* `update_packages()` better documented to advertise it can be used to update
+  packages installed by any of the `install_*` functions.
+
 * `check()` gains a `incoming` option to toggle the CRAN incoming checks.
 
 * `build_vignette()` gains a `keep_md` option to allow keeping the intermediate markdown output (#1726)
