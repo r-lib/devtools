@@ -30,7 +30,7 @@ Imports:
     rstudioapi (>= 0.6.0.9000),
     stats,
     tools,
-    usethis (>= 1.3.0.9000),
+    usethis (>= 1.4.0),
     utils,
     withr
 Suggests: 
@@ -61,6 +61,5 @@ Suggests:
 VignetteBuilder: knitr
 Encoding: UTF-8
 Remotes:
-    r-lib/usethis,
     r-lib/rcmdcheck
 RoxygenNote: 6.1.0
