@@ -103,32 +103,6 @@ github_DESCRIPTION <- function(username, repo, ref = "master", ...) {
   res$data$repository$DESCRIPTION$text
 }
 
-github_sha <- function(username, repo, ref = "master", ...) {
-  query <-
-   "query ($org: String!, $repo: String!, $ref: String!) {
-      repository(owner: $org, name: $repo) {
-        object(expression: $ref) {
-          oid
-        }
-      }
-    }"
-
-  res <- github_POST("graphql", body =
-    jsonlite::toJSON(auto_unbox = TRUE,
-      list(
-        query = query,
-        variables = list(
-          org = username,
-          repo = repo,
-          ref = ref
-        )
-      )
-    )
-  )
-
-  res$data$repository$object$oid %||% NA_character_
-}
-
 #' Retrieve Github personal access token.
 #'
 #' A github personal access token
