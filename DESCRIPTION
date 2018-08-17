@@ -52,7 +52,7 @@ Suggests:
     Rcpp (>= 0.10.0),
     rhub,
     rmarkdown,
-    roxygen2 (>= 5.0.0),
+    roxygen2 (>= 6.1.0),
     rversions,
     sessioninfo,
     spelling (>= 1.1),
