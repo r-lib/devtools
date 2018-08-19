@@ -1,5 +1,9 @@
 # devtools 1.13.3.9000
 
+* devtools now depends on roxygen2 6.1.0: this considerably simplifies 
+  `devtools::document()` and makes it more consistent with 
+  `roxygen2::roxygenise()`.
+
 * `update_packages()` better documented to advertise it can be used to update
   packages installed by any of the `install_*` functions.
 

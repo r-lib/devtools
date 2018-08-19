@@ -20,20 +20,7 @@ document <- function(pkg = ".", roclets = NULL) {
     rstudioapi::documentSaveAll()
   }
 
-  # Refresh the pkg structure with any updates to the Collate entry
-  # in the DESCRIPTION file
-  roxygen2::update_collate(pkg$path)
-
-  roclets <- roclets %||% roxygen2::load_options(pkg$path)$roclets
-  roclets <- setdiff(roclets, "collate")
-
-  if (packageVersion("roxygen2") < "6.1.0") {
-    load_all(pkg$path, helpers = FALSE)
-  }
-
-  withr::with_envvar(r_env_vars(),
-    roxygen2::roxygenise(pkg$path, roclets = roclets, load_code = pkgload::pkg_ns)
-  )
+  withr::with_envvar(r_env_vars(), roxygen2::roxygenise(pkg$path, roclets))
 
   pkgload::dev_topic_index_reset(pkg$package)
   invisible()
