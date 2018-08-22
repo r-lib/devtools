@@ -233,7 +233,7 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
   attr(coverage, "package") <- pkg
 
   if (isTRUE(show_report)) {
-    covr::report(coverage)
+    covr::file_report(coverage)
   }
 
   invisible(coverage)
