@@ -206,11 +206,11 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
 
   is_source_file <- basename(dirname(file)) == "R"
 
-  source_files <- normalizePath(winslash = "/", c(
+  source_files <- normalizePath(winslash = "/", mustWork = FALSE, c(
     vapply(file[!is_source_file], find_source_file, character(1)),
     file[is_source_file]))
 
-  test_files <- normalizePath(winslash = "/", c(
+  test_files <- normalizePath(winslash = "/", mustWork = FALSE, c(
     vapply(file[is_source_file], find_test_file, character(1)),
     file[!is_source_file]))
 
