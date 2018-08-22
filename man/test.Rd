@@ -10,13 +10,14 @@
 \usage{
 test(pkg = ".", filter = NULL, ...)
 
-test_coverage(pkg = ".", ...)
+test_coverage(pkg = ".", show_report = interactive(), ...)
 
 uses_testthat(pkg = ".")
 
 test_file(file = find_active_file(), ...)
 
-test_coverage_file(file = find_active_file(), ...)
+test_coverage_file(file = find_active_file(), filter = TRUE,
+  show_report = interactive(), ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name. See
@@ -28,6 +29,8 @@ name after it has been stripped of \code{"test-"} and \code{".R"}.}
 
 \item{...}{additional arguments passed to \code{\link[testthat:test_dir]{testthat::test_dir()}} and
 \code{\link[covr:package_coverage]{covr::package_coverage()}}}
+
+\item{show_report}{Show the test coverage report.}
 
 \item{file}{One or more source or test files. If a source file the
 corresponding test file will be run. The default is to use the active file

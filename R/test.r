@@ -75,9 +75,10 @@ test <- function(pkg = ".", filter = NULL, ...) {
   )
 }
 
+#' @param show_report Show the test coverage report.
 #' @export
 #' @rdname test
-test_coverage <- function(pkg = ".", ...) {
+test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   pkg <- as.package(pkg)
 
   check_suggested("covr")
@@ -90,7 +91,9 @@ test_coverage <- function(pkg = ".", ...) {
     coverage <- covr::package_coverage(pkg$path, ...)
   )
 
-  covr::report(coverage)
+  if (isTRUE(show_report)) {
+    covr::report(coverage)
+  }
 
   invisible(coverage)
 }
@@ -198,7 +201,7 @@ find_source_file <- function(file) {
 
 #' @rdname test
 #' @export
-test_coverage_file <- function(file = find_active_file(), ...) {
+test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_report = interactive(), ...) {
   check_suggested("covr")
 
   is_source_file <- basename(dirname(file)) == "R"
@@ -221,13 +224,17 @@ test_coverage_file <- function(file = find_active_file(), ...) {
     })
   )
 
-  coverage <- coverage[covr::display_name(coverage) %in% source_files]
+  if (isTRUE(filter)) {
+    coverage <- coverage[covr::display_name(coverage) %in% source_files]
+  }
 
   # Use relative paths
   attr(coverage, "relative") <- TRUE
   attr(coverage, "package") <- pkg
 
-  covr::report(coverage)
+  if (isTRUE(show_report)) {
+    covr::report(coverage)
+  }
 
   invisible(coverage)
 }
