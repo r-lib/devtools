@@ -21,7 +21,7 @@
 #'   outputs. See
 #'   \url{https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown}.
 #' @inheritParams tools::buildVignettes
-#' @inheritParams install_deps
+#' @inheritParams remotes::install_deps
 #' @keywords programming
 #' @seealso \code{\link{clean_vignettes}} to remove the pdfs in
 #'   \file{doc} created from vignettes
@@ -39,7 +39,7 @@ build_vignettes <- function(pkg = ".",
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (length(vigns$docs) == 0) return()
 
-  install_deps(pkg, dependencies, upgrade = upgrade)
+  install_deps(pkg$path, dependencies, upgrade = upgrade)
 
   message("Building ", pkg$package, " vignettes")
 
