@@ -16,6 +16,10 @@ r:
 # We need to install BiocInstaller for testing Bioconductor packages
 bioc_required: true
 
+install:
+  - git clone --depth 1 https://github.com/r-lib/remotes && R CMD build remotes && R CMD INSTALL remotes*tar.gz && rm -rf remotes remotes*tar.gz
+  - R -e 'remotes::install_local(".", dependencies = TRUE)'
+
 # Only report coverage for the release version
 after_success:
   - test $TRAVIS_R_VERSION_STRING = 'release' && Rscript -e 'covr::codecov()'

@@ -6,7 +6,7 @@
 #' By default, installation takes place using the current package directory.
 #' If you have compiled code, this means that artefacts of compilation will be
 #' created in the \code{src/} directory. If you want to avoid this, you can
-#' use \code{local = FALSE} to first build a package bundle and then install
+#' use \code{build = TRUE} to first build a package bundle and then install
 #' it from a temporary directory. This is slower, but keeps the source
 #' directory pristine.
 #'
@@ -21,19 +21,19 @@
 #'   package after installing.
 #' @param quick if \code{TRUE} skips docs, multiple-architectures,
 #'   demos, and vignettes, to make installation as fast as possible.
-#' @param local if \code{FALSE} \code{\link{build}}s the package first:
+#' @param build if \code{TRUE} \code{\link[pkgbuild]{build}}s the package first:
 #'   this ensures that the installation is completely clean, and prevents any
 #'   binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
 #'   package directory, but is considerably slower, because every compile has
 #'   to start from scratch.
 #' @param args An optional character vector of additional command line
-#'   arguments to be passed to \code{R CMD install}. This defaults to the
+#'   arguments to be passed to \code{R CMD INSTALL}. This defaults to the
 #'   value of the option \code{"devtools.install.args"}.
 #' @param quiet if \code{TRUE} suppresses output from this function.
 #' @param dependencies \code{logical} indicating to also install uninstalled
 #'   packages which this \code{pkg} depends on/links to/suggests. See
 #'   argument \code{dependencies} of \code{\link{install.packages}}.
-#' @param upgrade_dependencies If \code{TRUE}, the default, will also update
+#' @param upgrade If \code{TRUE}, the default, will also update
 #'   any out of date dependencies.
 #' @param build_vignettes if \code{TRUE}, will build vignettes. Normally it is
 #'   \code{build} that's responsible for creating vignettes; this argument makes
@@ -47,11 +47,6 @@
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
 #' @param force_deps whether to force installation of dependencies even if their
 #'   SHA1 reference hasn't changed from the currently installed version.
-#' @param metadata Named list of metadata entries to be added to the
-#'   \code{DESCRIPTION} after installation.
-#' @param out_dir Directory to store installation output in case of failure.
-#' @param skip_if_log_exists If the \code{out_dir} is defined and contains
-#'   a file named \code{package.out}, no installation is attempted.
 #' @param ... additional arguments passed to \code{\link{install.packages}}
 #'   when installing dependencies. \code{pkg} is installed with
 #'   \code{R CMD INSTALL}.
@@ -61,16 +56,13 @@
 #' debugging flags set.
 #' @export
 install <-
-  function(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
+  function(pkg = ".", reload = TRUE, quick = FALSE, build = TRUE,
            args = getOption("devtools.install.args"), quiet = FALSE,
-           dependencies = NA, upgrade_dependencies = TRUE,
+           dependencies = NA, upgrade = TRUE,
            build_vignettes = FALSE,
            keep_source = getOption("keep.source.pkgs"),
            threads = getOption("Ncpus", 1),
            force_deps = FALSE,
-           metadata = remote_metadata(as.package(pkg)),
-           out_dir = NULL,
-           skip_if_log_exists = FALSE,
            ...) {
 
   pkg <- as.package(pkg)
@@ -82,64 +74,10 @@ install <-
     eapply(pkgload::ns_env(pkg$package), force, all.names = TRUE)
   }
 
-  root_install <- is.null(installing$packages)
-  if (root_install) {
-    on.exit(installing$packages <- NULL, add = TRUE)
-  }
-
-  if (pkg$package %in% installing$packages) {
-    if (!quiet) {
-      message("Skipping ", pkg$package, ", it is already being installed.")
-    }
-    return(invisible(FALSE))
-  }
-
-  if (!is.null(out_dir)) {
-    out_file <- file.path(out_dir, paste0(pkg$package, ".out"))
-    if (skip_if_log_exists && file.exists(out_file)) {
-      message("Skipping ", pkg$package, ", installation failed before, see log in ", out_file)
-      return(invisible(FALSE))
-    }
+  if (isTRUE(build_vignettes)) {
+    build_opts <- c("--no-resave-data", "--no-manual")
   } else {
-    out_file <- NULL
-  }
-
-  installing$packages <- c(installing$packages, pkg$package)
-  if (!quiet) {
-    message("Installing ", pkg$package)
-  }
-
-  # If building vignettes, make sure we have all suggested packages too.
-  if (build_vignettes && missing(dependencies)) {
-    dependencies <- standardise_dep(TRUE)
-  } else {
-    dependencies <- standardise_dep(dependencies)
-  }
-
-  initial_deps <- dependencies[dependencies != "Suggests"]
-  final_deps <- dependencies[dependencies == "Suggests"]
-
-  # cache the Remote: dependencies here so we don't have to query them each
-  # time we call install_deps
-  installing$remote_deps <- remote_deps(pkg)
-  on.exit(installing$remote_deps <- NULL, add = TRUE)
-
-  install_deps(pkg, dependencies = initial_deps, upgrade = upgrade_dependencies,
-    threads = threads, force_deps = force_deps, quiet = quiet, ...,
-    out_dir = out_dir, skip_if_log_exists = skip_if_log_exists)
-
-  # Build the package. Only build locally if it doesn't have vignettes
-  has_vignettes <- length(tools::pkgVignettes(dir = pkg$path)$docs > 0)
-  if (local && !(has_vignettes && build_vignettes)) {
-    built_path <- pkg$path
-  } else {
-    built_path <- pkgbuild::build(
-      pkg$path,
-      tempdir(),
-      vignettes = build_vignettes,
-      quiet = quiet
-    )
-    on.exit(unlink(built_path), add = TRUE)
+    build_opts <- c("--no-resave-data", "--no-manual", "--no-build-vignettes")
   }
 
   opts <- c(
@@ -152,24 +90,7 @@ install <-
   }
   opts <- c(opts, args)
 
-  built_path <- normalizePath(built_path, winslash = "/")
-
-  pkgbuild::rcmd_build_tools(
-    "INSTALL",
-    c(built_path, opts),
-    echo = !quiet,
-    show = !quiet,
-    fail_on_status = TRUE,
-    required = FALSE
-  )
-
-  install_deps(pkg, dependencies = final_deps, upgrade = upgrade_dependencies,
-    threads = threads, force_deps = force_deps, quiet = quiet, ...,
-    out_dir = out_dir, skip_if_log_exists = skip_if_log_exists)
-
-  if (length(metadata) > 0) {
-    add_metadata(pkgload::inst(pkg$package), metadata)
-  }
+  remotes::install_local(pkg$path, build = build, build_opts = build_opts, INSTALL_opts = opts, dependencies = dependencies, quiet = quiet, ...)
 
   if (reload) {
     reload(pkg, quiet = quiet)
@@ -177,45 +98,11 @@ install <-
   invisible(TRUE)
 }
 
-# A environment to hold which packages are being installed so packages with
-# circular dependencies can be skipped the second time.
-installing <- new.env(parent = emptyenv())
-
-#' Install package dependencies if needed.
-#'
-#' \code{install_deps} is used by \code{install_*} to make sure you have
-#' all the dependencies for a package. \code{install_dev_deps()} is useful
-#' if you have a source version of the package and want to be able to
-#' develop with it: it installs all dependencies of the package, and it
-#' also installs roxygen2.
-#'
 #' @inheritParams install
-#' @inheritParams package_deps
-#' @param ... additional arguments passed to \code{\link{install.packages}}.
-#' @export
-#' @examples
-#' \dontrun{install_deps(".")}
-install_deps <- function(pkg = ".", dependencies = NA,
-                         threads = getOption("Ncpus", 1),
-                         repos = getOption("repos"),
-                         type = getOption("pkgType"),
-                         ...,
-                         upgrade = TRUE,
-                         quiet = FALSE,
-                         force_deps = FALSE) {
-
-  pkg <- dev_package_deps(pkg, repos = repos, dependencies = dependencies,
-    type = type)
-  if (!quiet) print(pkg)
-  update(pkg, ..., repos = repos, type = type, threads = threads, quiet =
-    quiet, upgrade = upgrade, force = force_deps)
-  invisible()
-}
-
-#' @rdname install_deps
+#' @inherit remotes::install_deps
 #' @export
 install_dev_deps <- function(pkg = ".", ...) {
-  update_packages("roxygen2")
+  remotes::update_packages("roxygen2")
   install_deps(pkg, ..., dependencies = TRUE, upgrade = FALSE,
     bioc_packages = TRUE)
 }

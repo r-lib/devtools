@@ -27,6 +27,7 @@ Imports:
     pkgbuild,
     pkgload,
     rcmdcheck,
+    remotes,
     rstudioapi (>= 0.6.0.9000),
     stats,
     tools,

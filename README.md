@@ -128,6 +128,9 @@ includes:
 * [roxygen2](https://github.com/klutometis/roxygen): Function and package documentation
   (i.e. `document()`).
 
+* [remotes](https://github.com/r-lib/remotes): Installing packages (i.e.
+  `install_github()`).
+
 * [pkgbuild](https://github.com/r-lib/pkgbuild): Building binary packages
   (including checking if build tools are available) (i.e. `build()`).
 

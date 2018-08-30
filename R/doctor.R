@@ -42,7 +42,7 @@ dr_devtools <- function() {
     )
   }
 
-  deps <- package_deps("devtools", dependencies = NA)
+  deps <- remotes::package_deps("devtools", dependencies = NA)
   old <- deps$diff < 0
   if (any(old)) {
     msg[["devtools"]] <- paste0(

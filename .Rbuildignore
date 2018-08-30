@@ -11,4 +11,5 @@
 ^codecov\.yml$
 ^_pkgdown\.yml$
 ^docs$
-^tests/.*\.Rbuildignore$
+^tests/testthat/test.*/\.Rbuildignore
+^script\.R$

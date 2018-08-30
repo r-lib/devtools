@@ -23,7 +23,7 @@ release_checks <- function(pkg = ".", built_path = NULL) {
 check_dev_versions <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  dep_list <- pkg[tolower(standardise_dep(TRUE))]
+  dep_list <- pkg[tolower(remotes::standardise_dep(TRUE))]
   deps <- do.call("rbind", unname(compact(lapply(dep_list, parse_deps))))
   deps <- deps[!is.na(deps$version), , drop = FALSE]
 
@@ -110,7 +110,7 @@ check_news_md <- function(pkg) {
 }
 
 check_remotes <- function(pkg) {
-  check_status(!has_dev_remotes(pkg),
+  check_status(!remotes::has_dev_remotes(pkg),
     "DESCRIPTION doesn't have Remotes field",
     "Remotes field should be removed before CRAN submission."
   )

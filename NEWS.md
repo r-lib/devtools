@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* All `install_*()` functions are now re-exported from remotes rather than being defined in devtools.
+
 * `save_all()` helper function wraps `rstudioapi::documentSaveAll()` calls (#1850, @amundsenjunior).
 
 * `check()` now allows users to run without `--timings` (#1655)

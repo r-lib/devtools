@@ -4,13 +4,11 @@
 \alias{install}
 \title{Install a local development package.}
 \usage{
-install(pkg = ".", reload = TRUE, quick = FALSE, local = TRUE,
+install(pkg = ".", reload = TRUE, quick = FALSE, build = TRUE,
   args = getOption("devtools.install.args"), quiet = FALSE,
-  dependencies = NA, upgrade_dependencies = TRUE,
-  build_vignettes = FALSE, keep_source = getOption("keep.source.pkgs"),
-  threads = getOption("Ncpus", 1), force_deps = FALSE,
-  metadata = remote_metadata(as.package(pkg)), out_dir = NULL,
-  skip_if_log_exists = FALSE, ...)
+  dependencies = NA, upgrade = TRUE, build_vignettes = FALSE,
+  keep_source = getOption("keep.source.pkgs"),
+  threads = getOption("Ncpus", 1), force_deps = FALSE, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -22,14 +20,14 @@ package after installing.}
 \item{quick}{if \code{TRUE} skips docs, multiple-architectures,
 demos, and vignettes, to make installation as fast as possible.}
 
-\item{local}{if \code{FALSE} \code{\link{build}}s the package first:
+\item{build}{if \code{TRUE} \code{\link[pkgbuild]{build}}s the package first:
 this ensures that the installation is completely clean, and prevents any
 binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
 package directory, but is considerably slower, because every compile has
 to start from scratch.}
 
 \item{args}{An optional character vector of additional command line
-arguments to be passed to \code{R CMD install}. This defaults to the
+arguments to be passed to \code{R CMD INSTALL}. This defaults to the
 value of the option \code{"devtools.install.args"}.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
@@ -38,7 +36,7 @@ value of the option \code{"devtools.install.args"}.}
 packages which this \code{pkg} depends on/links to/suggests. See
 argument \code{dependencies} of \code{\link{install.packages}}.}
 
-\item{upgrade_dependencies}{If \code{TRUE}, the default, will also update
+\item{upgrade}{If \code{TRUE}, the default, will also update
 any out of date dependencies.}
 
 \item{build_vignettes}{if \code{TRUE}, will build vignettes. Normally it is
@@ -57,14 +55,6 @@ It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 \item{force_deps}{whether to force installation of dependencies even if their
 SHA1 reference hasn't changed from the currently installed version.}
 
-\item{metadata}{Named list of metadata entries to be added to the
-\code{DESCRIPTION} after installation.}
-
-\item{out_dir}{Directory to store installation output in case of failure.}
-
-\item{skip_if_log_exists}{If the \code{out_dir} is defined and contains
-a file named \code{package.out}, no installation is attempted.}
-
 \item{...}{additional arguments passed to \code{\link{install.packages}}
 when installing dependencies. \code{pkg} is installed with
 \code{R CMD INSTALL}.}
@@ -77,7 +67,7 @@ dependencies of the package from CRAN, if they're not already installed.
 By default, installation takes place using the current package directory.
 If you have compiled code, this means that artefacts of compilation will be
 created in the \code{src/} directory. If you want to avoid this, you can
-use \code{local = FALSE} to first build a package bundle and then install
+use \code{build = TRUE} to first build a package bundle and then install
 it from a temporary directory. This is slower, but keeps the source
 directory pristine.
 
@@ -91,11 +81,6 @@ To install a package in a non-default library, use \code{\link[withr]{with_libpa
 source location and \code{\link{with_debug}} to install packages with
 debugging flags set.
 
-Other package installation: \code{\link{install_bioc}},
-  \code{\link{install_bitbucket}},
-  \code{\link{install_cran}}, \code{\link{install_github}},
-  \code{\link{install_gitlab}}, \code{\link{install_git}},
-  \code{\link{install_svn}}, \code{\link{install_url}},
-  \code{\link{install_version}}, \code{\link{uninstall}}
+Other package installation: \code{\link{uninstall}}
 }
 \concept{package installation}
