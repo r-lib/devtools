@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* `check()` now allows users to run without `--timings` (#1655)
+
 * devtools now depends on roxygen2 6.1.0: this considerably simplifies 
   `devtools::document()` and makes it more consistent with 
   `roxygen2::roxygenise()`.

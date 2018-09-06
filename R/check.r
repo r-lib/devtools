@@ -62,7 +62,7 @@ check <- function(pkg = ".",
                   incoming = remote,
                   force_suggests = FALSE,
                   run_dont_test = FALSE,
-                  args = NULL,
+                  args = "--timings",
                   env_vars = NULL,
                   quiet = FALSE,
                   check_dir = tempdir(),
@@ -155,7 +155,7 @@ check <- function(pkg = ".",
 #' @inheritParams rcmdcheck::rcmdcheck
 check_built <- function(path = NULL, cran = TRUE,
                         remote = FALSE, incoming = remote, force_suggests = FALSE,
-                        run_dont_test = FALSE, manual = FALSE, args = NULL,
+                        run_dont_test = FALSE, manual = FALSE, args = "--timings",
                         env_vars = NULL,  check_dir = tempdir(), quiet = FALSE,
                         error_on = c("never", "error", "warning", "note")) {
 
@@ -166,7 +166,6 @@ check_built <- function(path = NULL, cran = TRUE,
 
   pkgname <- gsub("_.*?$", "", basename(path))
 
-  args <- c("--timings", args)
   args <- c(paste0("--output=", normalizePath(check_dir)), args)
   if (cran) {
     args <- c("--as-cran", args)
