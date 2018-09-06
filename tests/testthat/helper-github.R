@@ -4,7 +4,7 @@ create_in_temp <- function(pkg) {
   dir.create(temp_path)
   test_pkg <- file.path(temp_path, pkg)
   capture.output(suppressMessages(usethis::create_package(test_pkg, fields = list())))
-  local_proj(test_pkg, quiet = TRUE, .local_envir = parent.frame())
+  local_proj(test_pkg, .local_envir = parent.frame())
   test_pkg
 }
 
