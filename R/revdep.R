@@ -29,7 +29,7 @@
 #' revdep("ggplot2")
 #'
 #' revdep("ggplot2", ignore = c("xkcd", "zoo"))
-#'}
+#' }
 revdep <- function(pkg,
                    dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
                    recursive = FALSE, ignore = NULL,
@@ -90,7 +90,8 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
     stop("Cache file `revdep/.cache.rds` exists.\n",
       "Use `revdep_check_resume()` to resume\n",
       "Use `revdep_check_reset()` to start afresh.",
-      call. = FALSE)
+      call. = FALSE
+    )
   }
 
   cat_rule(
@@ -105,7 +106,8 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
   }
   if (dir.exists(check_dir) && length(dir(check_dir, all.files = TRUE, no.. = TRUE)) > 0) {
     stop("`check_dir()` must not already exist: it is deleted after a successful run",
-      call. = FALSE)
+      call. = FALSE
+    )
   }
 
   if (is.null(install_dir)) {
@@ -114,8 +116,10 @@ revdep_check <- function(pkg = ".", recursive = FALSE, ignore = NULL,
   }
 
   message("Computing reverse dependencies... ")
-  revdeps <- revdep(pkg$package, recursive = recursive, ignore = ignore,
-    bioconductor = bioconductor, dependencies = dependencies)
+  revdeps <- revdep(pkg$package,
+    recursive = recursive, ignore = ignore,
+    bioconductor = bioconductor, dependencies = dependencies
+  )
 
   # Save arguments and revdeps to a cache
   cache <- list(
@@ -314,7 +318,8 @@ cran_packages <- memoise::memoise(
   function() {
     local <- file.path(tempdir(), "packages.rds")
     utils::download.file("http://cran.R-project.org/web/packages/packages.rds", local,
-      mode = "wb", quiet = TRUE)
+      mode = "wb", quiet = TRUE
+    )
     on.exit(unlink(local))
     cp <- readRDS(local)
     rownames(cp) <- unname(cp[, 1])

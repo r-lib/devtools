@@ -31,4 +31,3 @@ reload <- function(pkg = ".", quiet = FALSE) {
     require(pkg$package, character.only = TRUE, quietly = TRUE)
   }
 }
-

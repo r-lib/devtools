@@ -37,7 +37,9 @@ dev_mode <- local({
 
       if (!is_library(path)) {
         warning(path, " does not appear to be a library. ",
-          "Are sure you specified the correct directory?", call. = FALSE)
+          "Are sure you specified the correct directory?",
+          call. = FALSE
+        )
       }
 
       message("Dev mode: ON")
@@ -48,7 +50,6 @@ dev_mode <- local({
 
       .libPaths(c(path, lib_paths))
     } else {
-
       message("Dev mode: OFF")
       options(dev_path = NULL)
 
@@ -62,7 +63,7 @@ dev_mode <- local({
 
 is_library <- function(path) {
   # empty directories can be libraries
-  if (length(dir(path)) == 0) return (TRUE)
+  if (length(dir(path)) == 0) return(TRUE)
 
   # otherwise check that the directories are compiled R directories -
   # i.e. that they contain a Meta directory

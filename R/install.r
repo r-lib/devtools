@@ -57,52 +57,53 @@
 #' @export
 install <-
   function(pkg = ".", reload = TRUE, quick = FALSE, build = TRUE,
-           args = getOption("devtools.install.args"), quiet = FALSE,
-           dependencies = NA, upgrade = TRUE,
-           build_vignettes = FALSE,
-           keep_source = getOption("keep.source.pkgs"),
-           threads = getOption("Ncpus", 1),
-           force_deps = FALSE,
-           ...) {
+             args = getOption("devtools.install.args"), quiet = FALSE,
+             dependencies = NA, upgrade = TRUE,
+             build_vignettes = FALSE,
+             keep_source = getOption("keep.source.pkgs"),
+             threads = getOption("Ncpus", 1),
+             force_deps = FALSE,
+             ...) {
+    pkg <- as.package(pkg)
 
-  pkg <- as.package(pkg)
+    # Forcing all of the promises for the current namespace now will avoid lazy-load
+    # errors when the new package is installed overtop the old one.
+    # https://stat.ethz.ch/pipermail/r-devel/2015-December/072150.html
+    if (is_loaded(pkg)) {
+      eapply(pkgload::ns_env(pkg$package), force, all.names = TRUE)
+    }
 
-  # Forcing all of the promises for the current namespace now will avoid lazy-load
-  # errors when the new package is installed overtop the old one.
-  # https://stat.ethz.ch/pipermail/r-devel/2015-December/072150.html
-  if (is_loaded(pkg)) {
-    eapply(pkgload::ns_env(pkg$package), force, all.names = TRUE)
+    if (isTRUE(build_vignettes)) {
+      build_opts <- c("--no-resave-data", "--no-manual")
+    } else {
+      build_opts <- c("--no-resave-data", "--no-manual", "--no-build-vignettes")
+    }
+
+    opts <- c(
+      paste("--library=", .libPaths()[1], sep = ""),
+      if (keep_source) "--with-keep.source",
+      "--install-tests"
+    )
+    if (quick) {
+      opts <- c(opts, "--no-docs", "--no-multiarch", "--no-demo")
+    }
+    opts <- c(opts, args)
+
+    remotes::install_local(pkg$path, build = build, build_opts = build_opts, INSTALL_opts = opts, dependencies = dependencies, quiet = quiet, ...)
+
+    if (reload) {
+      reload(pkg, quiet = quiet)
+    }
+    invisible(TRUE)
   }
-
-  if (isTRUE(build_vignettes)) {
-    build_opts <- c("--no-resave-data", "--no-manual")
-  } else {
-    build_opts <- c("--no-resave-data", "--no-manual", "--no-build-vignettes")
-  }
-
-  opts <- c(
-    paste("--library=", .libPaths()[1], sep = ""),
-    if (keep_source) "--with-keep.source",
-    "--install-tests"
-  )
-  if (quick) {
-    opts <- c(opts, "--no-docs", "--no-multiarch", "--no-demo")
-  }
-  opts <- c(opts, args)
-
-  remotes::install_local(pkg$path, build = build, build_opts = build_opts, INSTALL_opts = opts, dependencies = dependencies, quiet = quiet, ...)
-
-  if (reload) {
-    reload(pkg, quiet = quiet)
-  }
-  invisible(TRUE)
-}
 
 #' @inheritParams install
 #' @inherit remotes::install_deps
 #' @export
 install_dev_deps <- function(pkg = ".", ...) {
   remotes::update_packages("roxygen2")
-  install_deps(pkg, ..., dependencies = TRUE, upgrade = FALSE,
-    bioc_packages = TRUE)
+  install_deps(pkg, ...,
+    dependencies = TRUE, upgrade = FALSE,
+    bioc_packages = TRUE
+  )
 }

@@ -34,7 +34,6 @@ check_rhub <- function(pkg = ".",
                        email = NULL,
                        interactive = TRUE,
                        ...) {
-
   check_suggested("rhub")
   pkg <- as.package(pkg)
 

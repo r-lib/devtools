@@ -45,8 +45,9 @@ test <- function(pkg = ".", filter = NULL, ...) {
   # Update package dependency to avoid explicit require() call (#798)
   if (pkg$package != "testthat") {
     pkg$depends <- paste0("testthat, ", pkg$depends)
-    if (grepl("^testthat, *$", pkg$depends))
+    if (grepl("^testthat, *$", pkg$depends)) {
       pkg$depends <- "testthat"
+    }
   }
 
   # Run tests in a child of the namespace environment, like
@@ -55,7 +56,8 @@ test <- function(pkg = ".", filter = NULL, ...) {
   ns_env <- load_all(pkg$path, quiet = TRUE)$env
 
   message("Testing ", pkg$package)
-  Sys.sleep(0.05); utils::flush.console() # Avoid misordered output in RStudio
+  Sys.sleep(0.05)
+  utils::flush.console() # Avoid misordered output in RStudio
 
   env <- new.env(parent = ns_env)
 
@@ -66,8 +68,10 @@ test <- function(pkg = ".", filter = NULL, ...) {
     testthat_args <- c(testthat_args, load_helpers = FALSE)
   }
 
-  withr::with_options(c(useFancyQuotes = FALSE),
-    withr::with_envvar(r_env_vars(),
+  withr::with_options(
+    c(useFancyQuotes = FALSE),
+    withr::with_envvar(
+      r_env_vars(),
       do.call(testthat::test_dir, testthat_args)
     )
   )
@@ -83,7 +87,8 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
 
   save_all()
 
-  withr::with_envvar(r_env_vars(),
+  withr::with_envvar(
+    r_env_vars(),
     coverage <- covr::package_coverage(pkg$path, ...)
   )
 
@@ -147,8 +152,10 @@ test_file <- function(file = find_active_file(), ...) {
   has_r_ext <- grepl("\\.[rR]$", file)
   if (any(!has_r_ext)) {
     stop("file(s): ",
-         paste0("'", file[!has_r_ext], "'", collapse = ", "),
-         " are not R files", call. = FALSE)
+      paste0("'", file[!has_r_ext], "'", collapse = ", "),
+      " are not R files",
+      call. = FALSE
+    )
   }
 
   file <- basename(file)
@@ -204,17 +211,20 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
 
   source_files <- normalizePath(winslash = "/", mustWork = FALSE, c(
     vapply(file[!is_source_file], find_source_file, character(1)),
-    file[is_source_file]))
+    file[is_source_file]
+  ))
 
   test_files <- normalizePath(winslash = "/", mustWork = FALSE, c(
     vapply(file[is_source_file], find_test_file, character(1)),
-    file[!is_source_file]))
+    file[!is_source_file]
+  ))
 
   pkg <- as.package(dirname(file)[[1]])
 
   env <- load_all(pkg$path, quiet = TRUE)$env
 
-  withr::with_envvar(r_env_vars(),
+  withr::with_envvar(
+    r_env_vars(),
     withr::with_dir("tests/testthat", {
       coverage <- covr::environment_coverage(env, test_files, ...)
     })

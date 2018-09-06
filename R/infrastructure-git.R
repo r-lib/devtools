@@ -43,8 +43,10 @@ use_github <- function(auth_token = github_pat(), private = FALSE, pkg = ".",
                        protocol = c("ssh", "https"), credentials = NULL, ...) {
   .Deprecated("usethis::use_github()", package = "devtools")
   warn_unless_current_dir(pkg)
-  usethis::use_github(auth_token = auth_token, private = private, host = host,
-                      protocol = protocol, credentials = credentials, ...)
+  usethis::use_github(
+    auth_token = auth_token, private = private, host = host,
+    protocol = protocol, credentials = credentials, ...
+  )
 }
 
 #' @rdname devtools-deprecated

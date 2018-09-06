@@ -6,16 +6,21 @@ test_that("git (non-)usage is detected, diagnosed, and can be added", {
   test_pkg <- create_in_temp("testNoGit")
 
   expect_false(uses_git(test_pkg))
-  expect_warning(expect_message(print(dr_github(test_pkg)),
-                                "not a git repository"),
-                 'DR_GITHUB FOUND PROBLEMS')
+  expect_warning(
+    expect_message(
+      print(dr_github(test_pkg)),
+      "not a git repository"
+    ),
+    "DR_GITHUB FOUND PROBLEMS"
+  )
 
-  expect_message(use_git_with_config(message = "initial", pkg = test_pkg, add_user_config = TRUE),
-                 "Initialising repo")
+  expect_message(
+    use_git_with_config(message = "initial", pkg = test_pkg, add_user_config = TRUE),
+    "Initialising repo"
+  )
   expect_true(uses_git(test_pkg))
 
   erase(test_pkg)
-
 })
 
 test_that("GitHub non-usage is handled", {
@@ -26,16 +31,19 @@ test_that("GitHub non-usage is handled", {
 
   expect_true(uses_git(test_pkg))
   expect_false(uses_github(test_pkg))
-  expect_warning(expect_message(print(dr_github(test_pkg)),
-                                "not a GitHub repository"),
-                 "DR_GITHUB FOUND PROBLEMS")
+  expect_warning(
+    expect_message(
+      print(dr_github(test_pkg)),
+      "not a GitHub repository"
+    ),
+    "DR_GITHUB FOUND PROBLEMS"
+  )
 
   expect_identical(github_dummy, github_info(test_pkg))
 
   expect_error(usethis::use_github_links(), "Cannot detect .* GitHub")
 
   erase(test_pkg)
-
 })
 
 ## If env var GITHUB_PAT exists and there's willingness to call GitHub
@@ -58,12 +66,20 @@ test_that("github info and links can be queried and manipulated", {
   desc <- read_dcf(desc_path)
 
   ## default GitHub links created by use_github_links() via use_github()
-  expect_identical(desc[["URL"]],
-                   file.path("https://github.com",
-                             gh_info$username, gh_info$repo))
-  expect_identical(desc[["BugReports"]],
-                   file.path("https://github.com",
-                             gh_info$username, gh_info$repo, "issues"))
+  expect_identical(
+    desc[["URL"]],
+    file.path(
+      "https://github.com",
+      gh_info$username, gh_info$repo
+    )
+  )
+  expect_identical(
+    desc[["BugReports"]],
+    file.path(
+      "https://github.com",
+      gh_info$username, gh_info$repo, "issues"
+    )
+  )
 
   ## make sure we don't clobber existing links
   mtime_before <- file.info(desc_path)$mtime
@@ -74,15 +90,22 @@ test_that("github info and links can be queried and manipulated", {
   desc$URL <- "http://www.example.com"
   desc$BugReports <- "http://www.example.com/issues"
   write_dcf(desc_path, desc)
-  expect_warning(expect_message(print(dr_github(test_pkg)),
-                                "no GitHub repo link"),
-                 "DR_GITHUB FOUND PROBLEMS")
-  expect_warning(expect_message(print(dr_github(test_pkg)),
-                                "no GitHub Issues"),
-                 "DR_GITHUB FOUND PROBLEMS")
+  expect_warning(
+    expect_message(
+      print(dr_github(test_pkg)),
+      "no GitHub repo link"
+    ),
+    "DR_GITHUB FOUND PROBLEMS"
+  )
+  expect_warning(
+    expect_message(
+      print(dr_github(test_pkg)),
+      "no GitHub Issues"
+    ),
+    "DR_GITHUB FOUND PROBLEMS"
+  )
 
   erase(test_pkg)
-
 })
 
 test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
@@ -92,8 +115,10 @@ test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
   mock_use_github(test_pkg)
 
   r <- git2r::repository(test_pkg, discover = TRUE)
-  git2r::remote_add(r, "anomaly",
-    "https://github.com/twitter/AnomalyDetection.git")
+  git2r::remote_add(
+    r, "anomaly",
+    "https://github.com/twitter/AnomalyDetection.git"
+  )
 
   ## defaults to "origin"
   expect_equal(github_info(test_pkg)$username, "r-lib")
@@ -115,12 +140,13 @@ test_that("github_info() prefers, but doesn't require, remote named 'origin'", {
   expect_error(github_info(test_pkg, remote_name = "nope"))
 
   erase(test_pkg)
-
 })
 
 test_that("username and repo are extracted from github remote URL", {
-  gh_info <- list(username = "r-lib", repo = "devtools",
-                  fullname = "r-lib/devtools")
+  gh_info <- list(
+    username = "r-lib", repo = "devtools",
+    fullname = "r-lib/devtools"
+  )
   expect_identical(github_remote_parse("https://github.com/r-lib/devtools.git"), gh_info)
   expect_identical(github_remote_parse("https://github.com/r-lib/devtools"), gh_info)
   expect_identical(github_remote_parse("git@github.com:r-lib/devtools.git"), gh_info)

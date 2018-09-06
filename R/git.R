@@ -47,10 +47,10 @@ git_sync_status <- function(path = ".", check_ahead = TRUE, check_behind = TRUE)
   c2 <- git2r::lookup(r, git2r::branch_target(upstream))
   ab <- git2r::ahead_behind(c1, c2)
 
-#   if (ab[1] > 0)
-#     message(ab[1], " ahead of remote")
-#   if (ab[2] > 0)
-#     message(ab[2], " behind remote")
+  #   if (ab[1] > 0)
+  #     message(ab[1], " ahead of remote")
+  #   if (ab[2] > 0)
+  #     message(ab[2], " behind remote")
 
   is_ahead <- ab[[1]] != 0
   is_behind <- ab[[2]] != 0
@@ -90,7 +90,7 @@ git_branch <- function(path = ".") {
   r <- git2r::repository(path, discover = TRUE)
 
   if (git2r::is_detached(r)) {
-     return(NULL)
+    return(NULL)
   }
 
   git2r::repository_head(r)$name
@@ -99,8 +99,9 @@ git_branch <- function(path = ".") {
 # GitHub ------------------------------------------------------------------
 
 uses_github <- function(path = ".") {
-  if (!uses_git(path))
+  if (!uses_git(path)) {
     return(FALSE)
+  }
 
   r <- git2r::repository(path, discover = TRUE)
   r_remote_urls <- git2r::remote_url(r)
@@ -109,14 +110,16 @@ uses_github <- function(path = ".") {
 }
 
 github_info <- function(path = ".", remote_name = NULL) {
-  if (!uses_github(path))
+  if (!uses_github(path)) {
     return(github_dummy)
+  }
 
   r <- git2r::repository(path, discover = TRUE)
   r_remote_urls <- grep("github", remote_urls(r), value = TRUE)
 
-  if (!is.null(remote_name) && !remote_name %in% names(r_remote_urls))
+  if (!is.null(remote_name) && !remote_name %in% names(r_remote_urls)) {
     stop("no github-related remote named ", remote_name, " found")
+  }
 
   remote_name <- c(remote_name, "origin", names(r_remote_urls))
   x <- r_remote_urls[remote_name]

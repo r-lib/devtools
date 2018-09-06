@@ -4,7 +4,6 @@
 #' @return A data frame with columns package and path, giving the name of
 #'   each package and the path it was loaded from.
 loaded_packages <- function() {
-
   attached <- data.frame(
     package = search(),
     path = searchpaths(),
@@ -21,8 +20,10 @@ loaded_packages <- function() {
 #' @export
 #' @keywords internal
 dev_packages <- function() {
-  packages <- vapply(loadedNamespaces(),
-    function(x) !is.null(pkgload::dev_meta(x)), logical(1))
+  packages <- vapply(
+    loadedNamespaces(),
+    function(x) !is.null(pkgload::dev_meta(x)), logical(1)
+  )
 
   names(packages)[packages]
 }

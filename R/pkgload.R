@@ -5,8 +5,10 @@ load_all <- function(path = ".", reset = TRUE, recompile = FALSE,
                      export_all = TRUE, helpers = TRUE, quiet = FALSE, ...) {
   save_all()
 
-  pkgload::load_all(path = path, reset = reset, recompile = recompile,
-    export_all = export_all, helpers = helpers, quiet = quiet, ...)
+  pkgload::load_all(
+    path = path, reset = reset, recompile = recompile,
+    export_all = export_all, helpers = helpers, quiet = quiet, ...
+  )
 }
 
 #' @importFrom pkgload unload

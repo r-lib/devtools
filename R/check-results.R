@@ -9,9 +9,9 @@ parse_check_results <- function(path) {
 
   structure(
     list(
-      errors =   pieces[grepl("... ERROR", pieces, fixed = TRUE)],
+      errors = pieces[grepl("... ERROR", pieces, fixed = TRUE)],
       warnings = pieces[grepl("... WARN", pieces, fixed = TRUE)],
-      notes =    pieces[grepl("... NOTE", pieces, fixed = TRUE)]
+      notes = pieces[grepl("... NOTE", pieces, fixed = TRUE)]
     ),
     path = path,
     class = "check_results"
@@ -23,10 +23,10 @@ signal_check_results <- function(x, on = c("none", "error", "warning", "note")) 
 
   on <- match.arg(on)
   has_problem <- switch(on,
-    none  =   FALSE,
-    error =   has$errors,
+    none = FALSE,
+    error = has$errors,
     warning = has$errors | has$warnings,
-    note =    has$errors | has$warnings | has$notes
+    note = has$errors | has$warnings | has$notes
   )
 
   if (has_problem) {
@@ -90,8 +90,9 @@ trunc_middle <- function(x, n_max = 25, n_top = 10, n_bottom = 10) {
     lines <- strsplit(x, "\n", fixed = TRUE)[[1]]
     nlines <- length(lines)
 
-    if (nlines <= n_max)
+    if (nlines <= n_max) {
       return(x)
+    }
 
     paste(c(
       lines[1:n_top],

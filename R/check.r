@@ -68,7 +68,6 @@ check <- function(pkg = ".",
                   check_dir = tempdir(),
                   cleanup = TRUE,
                   error_on = c("never", "error", "warning", "note")) {
-
   pkg <- as.package(pkg)
   withr::local_options(list(warn = 1))
 
@@ -154,9 +153,8 @@ check <- function(pkg = ".",
 check_built <- function(path = NULL, cran = TRUE,
                         remote = FALSE, incoming = remote, force_suggests = FALSE,
                         run_dont_test = FALSE, manual = FALSE, args = "--timings",
-                        env_vars = NULL,  check_dir = tempdir(), quiet = FALSE,
+                        env_vars = NULL, check_dir = tempdir(), quiet = FALSE,
                         error_on = c("never", "error", "warning", "note")) {
-
   if (missing(error_on) && !interactive()) {
     error_on <- "warning"
   }

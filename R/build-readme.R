@@ -14,11 +14,16 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
 
   pkg <- as.package(path)
 
-  readme_path <- grep(ignore.case = TRUE, value = TRUE,
-                      "readme[.]rmd",
-                      list.files(c(pkg$path, file.path(pkg$path, "inst"),
-                                 full.names = TRUE)))
-  if (length(readme_path) == 0) { return(invisible()) }
+  readme_path <- grep(
+    ignore.case = TRUE, value = TRUE,
+    "readme[.]rmd",
+    list.files(c(pkg$path, file.path(pkg$path, "inst"),
+      full.names = TRUE
+    ))
+  )
+  if (length(readme_path) == 0) {
+    return(invisible())
+  }
 
   readme_path <- file.path(pkg$path, readme_path[[1]])
 
@@ -33,7 +38,8 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
 
   output <- callr::r(build,
     args = list(pkg_path = pkg$path, readme_path = readme_path, ... = ..., quiet = quiet),
-    show = TRUE, spinner = FALSE)
+    show = TRUE, spinner = FALSE
+  )
 
   invisible(TRUE)
 }
