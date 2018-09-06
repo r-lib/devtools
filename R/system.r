@@ -21,7 +21,8 @@ system_check <- function(cmd, args = character(), env_vars = character(),
     message()
   }
 
-  result <- suppressWarnings(withr::with_dir(path, withr::with_envvar(env_vars,
+  result <- suppressWarnings(withr::with_dir(path, withr::with_envvar(
+    env_vars,
     system(full, intern = quiet, ignore.stderr = quiet, ...)
   )))
 
@@ -52,12 +53,14 @@ system2_check <- function(cmd, args = character(), env_vars = character(),
     message()
   }
 
-  if (quiet)
+  if (quiet) {
     std <- TRUE
-  else
+  } else {
     std <- ""
+  }
 
-  result <- suppressWarnings(withr::with_dir(path, withr::with_envvar(env_vars,
+  result <- suppressWarnings(withr::with_dir(path, withr::with_envvar(
+    env_vars,
     system2(cmd, args, stdout = std, stderr = std, ...)
   )))
 
@@ -95,10 +98,13 @@ system_output <- function(cmd, args = character(), env_vars = character(),
     message(wrap_command(full), "\n")
   }
 
-  result <- withCallingHandlers(withr::with_dir(path,
-      withr::with_envvar(env_vars,
-        system(full, intern = TRUE, ignore.stderr = quiet, ...)
-        )), warning = function(w) stop(w))
+  result <- withCallingHandlers(withr::with_dir(
+    path,
+    withr::with_envvar(
+      env_vars,
+      system(full, intern = TRUE, ignore.stderr = quiet, ...)
+    )
+  ), warning = function(w) stop(w))
 
   result
 }

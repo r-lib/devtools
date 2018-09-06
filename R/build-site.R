@@ -19,7 +19,8 @@ build_site <- function(path = ".", quiet = TRUE, ...) {
   withr::with_temp_libpaths(action = "prefix", code = {
     install(pkg = pkg$path, upgrade_dependencies = FALSE, reload = FALSE, quiet = quiet)
     if (isTRUE(quiet)) {
-      withr::with_output_sink(tempfile(),
+      withr::with_output_sink(
+        tempfile(),
         pkgdown::build_site(pkg = pkg$path, ...)
       )
     } else {

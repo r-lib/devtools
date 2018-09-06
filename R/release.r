@@ -46,12 +46,14 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
   if (!dr_d) {
     print(dr_d)
 
-    if (yesno("Proceed anyway?"))
+    if (yesno("Proceed anyway?")) {
       return(invisible())
+    }
   }
 
-  if (yesno("Have you checked for spelling errors (with `spell_check()`)?"))
+  if (yesno("Have you checked for spelling errors (with `spell_check()`)?")) {
     return(invisible())
+  }
 
   if (check) {
     cat_rule(
@@ -59,53 +61,65 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
       right = pkg$package,
       line = 2
     )
-    check(pkg, cran = TRUE, remote = TRUE, manual = TRUE,
-          build_args = args, run_dont_test = TRUE)
+    check(pkg,
+      cran = TRUE, remote = TRUE, manual = TRUE,
+      build_args = args, run_dont_test = TRUE
+    )
   }
-  if (yesno("Have you run `R CMD check` locally?"))
+  if (yesno("Have you run `R CMD check` locally?")) {
     return(invisible())
+  }
 
   release_checks(pkg)
-  if (yesno("Were devtool's checks successful?"))
+  if (yesno("Were devtool's checks successful?")) {
     return(invisible())
-
-  if (!new_pkg) {
-      show_cran_check <- TRUE
-      cran_details <- NULL
-      end_sentence <- " ?"
-      if (requireNamespace("foghorn", quietly = TRUE)) {
-          show_cran_check <- has_cran_results(pkg$package)
-          cran_details <- foghorn::cran_details(pkg = pkg$package)
-      }
-      if (show_cran_check) {
-          if (!is.null(cran_details)) {
-              end_sentence <- "\n shown above?"
-              cat_rule(paste0("Details of the CRAN check results for ", pkg$package))
-              summary(cran_details)
-              cat_rule()
-          }
-          cran_url <- paste0(cran_mirror(), "/web/checks/check_results_",
-                             pkg$package, ".html")
-          if (yesno("Have you fixed all existing problems at \n", cran_url,
-                    end_sentence))
-              return(invisible())
-      }
   }
 
-  if (yesno("Have you checked on R-hub (with `check_rhub()`)?"))
-    return(invisible())
+  if (!new_pkg) {
+    show_cran_check <- TRUE
+    cran_details <- NULL
+    end_sentence <- " ?"
+    if (requireNamespace("foghorn", quietly = TRUE)) {
+      show_cran_check <- has_cran_results(pkg$package)
+      cran_details <- foghorn::cran_details(pkg = pkg$package)
+    }
+    if (show_cran_check) {
+      if (!is.null(cran_details)) {
+        end_sentence <- "\n shown above?"
+        cat_rule(paste0("Details of the CRAN check results for ", pkg$package))
+        summary(cran_details)
+        cat_rule()
+      }
+      cran_url <- paste0(
+        cran_mirror(), "/web/checks/check_results_",
+        pkg$package, ".html"
+      )
+      if (yesno(
+        "Have you fixed all existing problems at \n", cran_url,
+        end_sentence
+      )) {
+        return(invisible())
+      }
+    }
+  }
 
-  if (yesno("Have you checked on win-builder (with `check_win_devel()`)?"))
+  if (yesno("Have you checked on R-hub (with `check_rhub()`)?")) {
     return(invisible())
+  }
+
+  if (yesno("Have you checked on win-builder (with `check_win_devel()`)?")) {
+    return(invisible())
+  }
 
   deps <- if (new_pkg) 0 else length(revdep(pkg$package))
   if (deps > 0) {
     msg <- paste0(
-      "Have you checked the ", deps , " reverse dependencies ",
+      "Have you checked the ", deps, " reverse dependencies ",
       "(with the revdepcheck package)?"
     )
-    if (yesno(msg))
+    if (yesno(msg)) {
       return(invisible())
+    }
   }
 
   questions <- c(
@@ -122,8 +136,9 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
 
   if (uses_git(pkg$path)) {
     git_checks(pkg)
-    if (yesno("Were Git checks successful?"))
+    if (yesno("Were Git checks successful?")) {
       return(invisible())
+    }
   }
 
   submit_cran(pkg, args = args)
@@ -156,16 +171,20 @@ release_email <- function(name, new_pkg) {
     "\n",
     if (new_pkg) {
       paste("I have uploaded a new package, ", name, ", to CRAN. ",
-        "I have read and agree to the CRAN policies.\n", sep = "")
+        "I have read and agree to the CRAN policies.\n",
+        sep = ""
+      )
     } else {
       paste("I have just uploaded a new version of ", name, " to CRAN.\n",
-        sep = "")
+        sep = ""
+      )
     },
     "\n",
     "Thanks!\n",
     "\n",
     getOption("devtools.name"), "\n",
-    sep = "")
+    sep = ""
+  )
 }
 
 yesno <- function(...) {
@@ -190,26 +209,29 @@ email <- function(address, subject, body) {
   )
 
   tryCatch({
-    utils::browseURL(url, browser = email_browser())},
-    error = function(e) {
-      message("Sending failed with error: ", e$message)
-      cat("To: ", address, "\n", sep = "")
-      cat("Subject: ", subject, "\n", sep = "")
-      cat("\n")
-      cat(body, "\n", sep = "")
-    }
+    utils::browseURL(url, browser = email_browser())
+  },
+  error = function(e) {
+    message("Sending failed with error: ", e$message)
+    cat("To: ", address, "\n", sep = "")
+    cat("Subject: ", subject, "\n", sep = "")
+    cat("\n")
+    cat(body, "\n", sep = "")
+  }
   )
 
   invisible(TRUE)
 }
 
 email_browser <- function() {
-  if (!identical(.Platform$GUI, "RStudio"))
-    return (getOption("browser"))
+  if (!identical(.Platform$GUI, "RStudio")) {
+    return(getOption("browser"))
+  }
 
   # Use default browser, even if RStudio running
-  if (.Platform$OS.type == "windows")
-    return (NULL)
+  if (.Platform$OS.type == "windows") {
+    return(NULL)
+  }
 
   browser <- Sys.which(c("xdg-open", "open"))
   browser[nchar(browser) > 0][[1]]
@@ -249,7 +271,8 @@ cran_comments <- function(pkg = ".") {
     warning("Can't find cran-comments.md.\n",
       "This file gives CRAN volunteers comments about the submission,\n",
       "Create it with use_cran_comments().\n",
-      call. = FALSE)
+      call. = FALSE
+    )
     return(character())
   }
 
@@ -273,11 +296,13 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #' @export
 #' @keywords internal
 submit_cran <- function(pkg = ".", args = NULL) {
-  if (yesno("Is your email address ", maintainer(pkg)$email, "?"))
+  if (yesno("Is your email address ", maintainer(pkg)$email, "?")) {
     return(invisible())
+  }
 
-  if (yesno("Ready to submit to CRAN?"))
+  if (yesno("Ready to submit to CRAN?")) {
     return(invisible())
+  }
 
   pkg <- as.package(pkg)
   built_path <- build_cran(pkg, args = args)
@@ -290,8 +315,10 @@ build_cran <- function(pkg, args) {
   message("Building")
   built_path <- pkgbuild::build(pkg$path, tempdir(), manual = TRUE, args = args)
   message("Submitting file: ", built_path)
-  message("File size: ",
-          format(as.object_size(file.info(built_path)$size), units = "auto"))
+  message(
+    "File size: ",
+    format(as.object_size(file.info(built_path)$size), units = "auto")
+  )
   built_path
 }
 
@@ -327,8 +354,10 @@ upload_cran <- function(pkg, built_path) {
   httr::stop_for_status(r)
   new_url <- httr::parse_url(r$url)
   if (new_url$query$submit == "1") {
-    message("Package submission successful.\n",
-      "Check your email for confirmation link.")
+    message(
+      "Package submission successful.\n",
+      "Check your email for confirmation link."
+    )
   } else {
     stop("Package failed to upload.", call. = FALSE)
   }

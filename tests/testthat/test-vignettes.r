@@ -85,8 +85,10 @@ test_that("Extra files copied and removed", {
   pkg <- as.package("testVignetteExtras")
   doc_path <- file.path(pkg$path, "doc")
 
-  extras_path <- file.path("testVignetteExtras", "vignettes",
-    ".install_extras")
+  extras_path <- file.path(
+    "testVignetteExtras", "vignettes",
+    ".install_extras"
+  )
   writeLines("a.r", extras_path)
   on.exit(unlink(extras_path))
 
@@ -106,8 +108,10 @@ test_that("vignettes built on install", {
     skip("pdflatex not available")
   }
 
-  install("testVignettesBuilt", reload = FALSE, quiet = TRUE,
-    build_vignettes = TRUE)
+  install("testVignettesBuilt",
+    reload = FALSE, quiet = TRUE,
+    build_vignettes = TRUE
+  )
   unlink("testVignettesBuilt/vignettes/new.tex")
   unlink("testVignettesBuilt/vignettes/.build.timestamp")
 

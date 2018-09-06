@@ -79,7 +79,8 @@ revdep_check_results_md <- function(results, has_problem) {
 
   summary_table <- paste0(
     paste0(revdep_check_results_kable(results), collapse = "\n"),
-    "\n\n")
+    "\n\n"
+  )
 
   summaries <- vapply(results, format, character(1))
 

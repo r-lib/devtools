@@ -52,7 +52,9 @@ source_url <- function(url, ..., sha1 = NULL) {
 
     if (!identical(file_sha1, sha1)) {
       stop("SHA-1 hash of downloaded file (", file_sha1,
-           ")\n  does not match expected value (", sha1, ")", call. = FALSE)
+        ")\n  does not match expected value (", sha1, ")",
+        call. = FALSE
+      )
     }
   }
 
@@ -137,7 +139,6 @@ find_gist <- function(id, filename) {
     if (is.na(which)) {
       stop("'", filename, "' not found in this gist", call. = FALSE)
     }
-
   } else {
     if (length(r_files) > 1) {
       warning("Multiple R files in gist, using first", call. = FALSE)

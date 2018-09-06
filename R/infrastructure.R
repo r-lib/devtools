@@ -87,12 +87,12 @@ use_data <- usethis::use_data
 # `use_data` uses non-tidy NSE, so we cannot use it inside a function
 # hygienically. We could fix this with tidyevalation / rlang, but it seems
 # overkill just to get a deprecation message.
-#function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
-                     #compress = "bzip2") {
-  #.Deprecated("usethis::use_data()", package = "devtools")
-  #usethis::use_data(..., internal = internal, overwrite = overwrite,
-                    #compress = compress)
-#}
+# function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
+#          compress = "bzip2") {
+#   .Deprecated("usethis::use_data()", package = "devtools")
+#   usethis::use_data(..., internal = internal, overwrite = overwrite,
+#     compress = compress)
+# }
 
 #' @rdname devtools-deprecated
 #' @export
@@ -169,7 +169,7 @@ use_cran_badge <- function(pkg = ".") {
 #' @rdname devtools-deprecated
 #' @export
 use_mit_license <- function(pkg = ".",
-                           copyright_holder = getOption("devtools.name", "<Author>")) {
+                            copyright_holder = getOption("devtools.name", "<Author>")) {
   .Deprecated("usethis::use_mit_license()", package = "devtools")
   warn_unless_current_dir(pkg)
   usethis::use_mit_license(copyright_holder = copyright_holder)

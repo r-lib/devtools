@@ -33,8 +33,9 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
   if (fresh) {
     to_run <-
       eval(substitute(
-          function() devtools::run_examples(pkg = path, start = start, test = test, run = run, fresh = FALSE),
-          list(path = pkg$path, start = start, test = test, run = run)))
+        function() devtools::run_examples(pkg = path, start = start, test = test, run = run, fresh = FALSE),
+        list(path = pkg$path, start = start, test = test, run = run)
+      ))
     callr::r(to_run, show = TRUE, spinner = FALSE)
     return(invisible())
   }
@@ -48,8 +49,9 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
   }
 
   files <- rd_files(pkg$path, start = start)
-  if (length(files) == 0)
+  if (length(files) == 0) {
     return()
+  }
 
   cat_rule(
     left = paste0("Running ", length(files), " example files"),

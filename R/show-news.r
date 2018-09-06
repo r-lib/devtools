@@ -18,8 +18,10 @@ show_news <- function(pkg = ".", latest = TRUE, ...) {
   if (latest) {
     ver <- numeric_version(out$Version)
     recent <- ver == max(ver)
-    structure(out[recent, ], class = class(out),
-      bad = attr(out, "bad")[recent])
+    structure(out[recent, ],
+      class = class(out),
+      bad = attr(out, "bad")[recent]
+    )
   } else {
     out
   }

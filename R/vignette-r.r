@@ -46,8 +46,10 @@ copy_vignettes <- function(pkg, keep_md) {
   extra_files <- find_vignette_extras(pkg)
   if (length(extra_files) == 0) return(invisible())
 
-  message("Copying extra files ", paste(basename(extra_files), collapse = ", "),
-    " to doc/")
+  message(
+    "Copying extra files ", paste(basename(extra_files), collapse = ", "),
+    " to doc/"
+  )
   file.copy(extra_files, doc_dir, recursive = TRUE)
 
   invisible()
@@ -63,8 +65,10 @@ find_vignette_extras <- function(pkg = ".") {
   if (length(extras) == 0) return(character())
 
   withr::with_dir(vig_path, {
-    allfiles <- dir(all.files = TRUE, full.names = TRUE, recursive = TRUE,
-      include.dirs = TRUE)
+    allfiles <- dir(
+      all.files = TRUE, full.names = TRUE, recursive = TRUE,
+      include.dirs = TRUE
+    )
   })
 
   inst <- rep(FALSE, length(allfiles))

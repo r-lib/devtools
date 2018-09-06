@@ -5,7 +5,8 @@ source_many <- function(files, envir = parent.frame()) {
   oop <- options(
     keep.source = TRUE,
     show.error.locations = TRUE,
-    topLevelEnvironment = as.environment(envir))
+    topLevelEnvironment = as.environment(envir)
+  )
   on.exit(options(oop))
 
   for (file in files) {
@@ -20,7 +21,8 @@ source_one <- function(file, envir = parent.frame()) {
 
   lines <- readLines(file, warn = FALSE)
   srcfile <- srcfilecopy(file, lines, file.info(file)[1, "mtime"],
-    isFile = TRUE)
+    isFile = TRUE
+  )
   exprs <- parse(text = lines, n = -1, srcfile = srcfile)
 
   n <- length(exprs)

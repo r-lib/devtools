@@ -57,7 +57,7 @@ package_file <- function(..., path = ".") {
 }
 
 has_description <- function(path) {
-  file.exists(file.path(path, 'DESCRIPTION'))
+  file.exists(file.path(path, "DESCRIPTION"))
 }
 
 is_root <- function(path) {

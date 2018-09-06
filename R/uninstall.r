@@ -13,7 +13,6 @@
 #' @seealso \code{\link{with_debug}} to install packages with debugging flags
 #'   set.
 uninstall <- function(pkg = ".", unload = TRUE, quiet = FALSE, ...) {
-
   pkg <- as.package(pkg)
 
   if (unload && pkg$package %in% loaded_packages()$package) {

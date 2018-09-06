@@ -33,8 +33,7 @@ build_vignettes <- function(pkg = ".",
                             upgrade = TRUE,
                             quiet = TRUE,
                             install = TRUE,
-                            keep_md = TRUE
-                            ) {
+                            keep_md = TRUE) {
   pkg <- as.package(pkg)
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (length(vigns$docs) == 0) return()
@@ -48,7 +47,7 @@ build_vignettes <- function(pkg = ".",
       withr::with_temp_libpaths(action = "prefix", {
         devtools::install(pkg_path, upgrade_dependencies = upgrade, reload = FALSE, quiet = quiet)
         tools::buildVignettes(dir = pkg_path, clean = clean, tangle = TRUE, quiet = quiet)
-                            })
+      })
     }
   } else {
     build <- function(pkg_path, clean, quiet, upgrade) {
@@ -60,7 +59,8 @@ build_vignettes <- function(pkg = ".",
     build,
     args = list(pkg_path = pkg$path, clean = clean, upgrade = upgrade, quiet = quiet),
     show = TRUE,
-    spinner = FALSE)
+    spinner = FALSE
+  )
 
   # We need to re-run pkgVignettes now that they are built to get the output
   # files as well
@@ -74,7 +74,6 @@ build_vignettes <- function(pkg = ".",
 }
 
 create_vignette_index <- function(pkg, vigns) {
-
   usethis_use_directory(pkg, "Meta", ignore = TRUE)
   usethis_use_git_ignore(pkg, "Meta")
 

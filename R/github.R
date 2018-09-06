@@ -22,22 +22,26 @@ github_error <- function(req) {
   parsed <- tryCatch(jsonlite::fromJSON(text, simplifyVector = FALSE),
     error = function(e) {
       list(message = text)
-    })
+    }
+  )
   errors <- vapply(parsed$errors, `[[`, "message", FUN.VALUE = character(1))
 
   structure(
     list(
       call = sys.call(-1),
-      message = paste0(parsed$message, " (", httr::status_code(req), ")\n",
+      message = paste0(
+        parsed$message, " (", httr::status_code(req), ")\n",
         if (length(errors) > 0) {
           paste("* ", errors, collapse = "\n")
-        })
-      ), class = c("condition", "error", "github_error"))
+        }
+      )
+    ),
+    class = c("condition", "error", "github_error")
+  )
 }
 
 github_GET <- function(path, ..., pat = github_pat(),
                        host = "https://api.github.com") {
-
   url <- httr::parse_url(host)
   url$path <- paste(url$path, path, sep = "/")
   ## May remove line below at release of httr > 1.1.0
@@ -49,7 +53,6 @@ github_GET <- function(path, ..., pat = github_pat(),
 
 github_POST <- function(path, body, ..., pat = github_pat(),
                         host = "https://api.github.com") {
-
   url <- httr::parse_url(host)
   url$path <- paste(url$path, path, sep = "/")
   ## May remove line below at release of httr > 1.1.0
@@ -65,7 +68,9 @@ github_rate_limit <- function() {
 
   reset <- as.POSIXct(core$reset, origin = "1970-01-01")
   cat(core$remaining, " / ", core$limit,
-    " (Reset ", strftime(reset, "%H:%M:%S"), ")\n", sep = "")
+    " (Reset ", strftime(reset, "%H:%M:%S"), ")\n",
+    sep = ""
+  )
 }
 
 github_commit <- function(username, repo, ref = "master") {
@@ -92,11 +97,13 @@ github_pat <- function(quiet = TRUE) {
     return(pat)
   }
   if (in_ci()) {
-    pat <- paste0("b2b7441d",
-                  "aeeb010b",
-                  "1df26f1f6",
-                  "0a7f1ed",
-                  "c485e443")
+    pat <- paste0(
+      "b2b7441d",
+      "aeeb010b",
+      "1df26f1f6",
+      "0a7f1ed",
+      "c485e443"
+    )
     if (!quiet) {
       message("Using bundled GitHub PAT. Please add your own PAT to the env var `GITHUB_PAT`")
     }

@@ -89,20 +89,27 @@ dr_github <- function(path = ".") {
   config <- git2r::config(r)
   config_names <- names(modifyList(config$global, config$local))
 
-  if (!uses_github(path))
+  if (!uses_github(path)) {
     msg[["github"]] <- " * cannot detect that this repo is connected to GitHub"
-  if (!("user.name" %in% config_names))
+  }
+  if (!("user.name" %in% config_names)) {
     msg[["name"]] <- "* user.name config option not set"
-  if (!("user.email" %in% config_names))
+  }
+  if (!("user.email" %in% config_names)) {
     msg[["user"]] <- "* user.email config option not set"
+  }
 
-  if (!file.exists("~/.ssh/id_rsa"))
+  if (!file.exists("~/.ssh/id_rsa")) {
     msg[["ssh"]] <- "* SSH private key not found"
+  }
 
-  if (identical(Sys.getenv("GITHUB_PAT"), ""))
-    msg[["PAT"]] <- paste("* GITHUB_PAT environment variable not set",
+  if (identical(Sys.getenv("GITHUB_PAT"), "")) {
+    msg[["PAT"]] <- paste(
+      "* GITHUB_PAT environment variable not set",
       "(this is not necessary unless you want to install private repos",
-      "or connect local repos to GitHub)")
+      "or connect local repos to GitHub)"
+    )
+  }
 
   desc_path <- file.path(path, "DESCRIPTION")
   desc <- read_dcf(desc_path)
@@ -111,16 +118,16 @@ dr_github <- function(path = ".") {
 
   re <- "https://github.com/(.*?)/(.*)"
   if (field_empty(desc, "URL")) {
-    msg[["URL_empty"]] <-"* empty URL field in DESCRIPTION"
+    msg[["URL_empty"]] <- "* empty URL field in DESCRIPTION"
   } else if (field_no_re(desc, "URL", re)) {
-    msg[["URL"]] <-"* no GitHub repo link in URL field in DESCRIPTION"
+    msg[["URL"]] <- "* no GitHub repo link in URL field in DESCRIPTION"
   }
 
   re <- paste0(re, "/issues")
   if (field_empty(desc, "BugReports")) {
-    msg[["BugReports_empty"]] <-"* empty BugReports field in DESCRIPTION"
+    msg[["BugReports_empty"]] <- "* empty BugReports field in DESCRIPTION"
   } else if (field_no_re(desc, "BugReports", re)) {
-    msg[["BugReports"]] <-"* no GitHub Issues link in URL field in DESCRIPTION"
+    msg[["BugReports"]] <- "* no GitHub Issues link in URL field in DESCRIPTION"
   }
 
   doctor("github", msg)

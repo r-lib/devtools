@@ -1,4 +1,6 @@
-# devtools 1.13.3.9000
+# devtools 1.13.6.9000
+
+* Executed `styler::style_pkg()` to update code style (#1851, @amundsenjunior).
 
 * All `install_*()` functions are now re-exported from remotes rather than being defined in devtools.
 

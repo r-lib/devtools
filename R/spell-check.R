@@ -14,7 +14,7 @@
 #'   \code{\link{as.package}} for more information
 #' @param vignettes include vignettes in the spell check; passed to
 #' \link[spelling:spell_check_package]{spelling::spell_check_package}
-spell_check <- function(pkg = ".", vignettes = TRUE){
+spell_check <- function(pkg = ".", vignettes = TRUE) {
   pkg <- as.package(pkg)
   spelling::spell_check_package(pkg = pkg, vignettes = vignettes)
 }

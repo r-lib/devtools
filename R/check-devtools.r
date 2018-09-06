@@ -50,7 +50,8 @@ check_version <- function(pkg = ".") {
   pkg <- as.package(pkg)
   ver <- unlist(numeric_version(pkg$version))
 
-  check_status(length(ver) == 3,
+  check_status(
+    length(ver) == 3,
     "version number has three components",
     paste0("version (", pkg$version, ") should have exactly three components")
   )
@@ -83,8 +84,9 @@ check_news_md <- function(pkg) {
   pkg <- as.package(pkg)
 
   news_path <- file.path(pkg$path, "NEWS.md")
-  if (!file.exists(news_path))
+  if (!file.exists(news_path)) {
     return()
+  }
 
   ignore_path <- file.path(pkg$path, ".Rbuildignore")
   if (!file.exists(ignore_path)) {
@@ -94,9 +96,10 @@ check_news_md <- function(pkg) {
   }
 
   has_news <- grepl("NEWS\\.md", ignore_lines, fixed = TRUE) |
-              grepl("NEWS.md", ignore_lines, fixed = TRUE)
+    grepl("NEWS.md", ignore_lines, fixed = TRUE)
 
-  check_status(!any(has_news),
+  check_status(
+    !any(has_news),
     "NEWS.md is not ignored",
     "NEWS.md now supported by CRAN and doesn't need to be ignored."
   )
@@ -110,7 +113,8 @@ check_news_md <- function(pkg) {
 }
 
 check_remotes <- function(pkg) {
-  check_status(!has_dev_remotes(pkg),
+  check_status(
+    !has_dev_remotes(pkg),
     "DESCRIPTION doesn't have Remotes field",
     "Remotes field should be removed before CRAN submission."
   )

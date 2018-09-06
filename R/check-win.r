@@ -43,14 +43,15 @@ check_win_oldrelease <- function(pkg = ".", args = NULL, quiet = FALSE, ...) {
 
 check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelease"),
                       args = NULL, quiet = FALSE, ...) {
-
   pkg <- as.package(pkg)
   version <- match.arg(version, several.ok = TRUE)
 
   if (!quiet) {
-    message("Building windows version of ", pkg$package, " (", pkg$version, ")",
-            " for ", paste(version, collapse = ", "),
-            " with win-builder.r-project.org.\n")
+    message(
+      "Building windows version of ", pkg$package, " (", pkg$version, ")",
+      " for ", paste(version, collapse = ", "),
+      " with win-builder.r-project.org.\n"
+    )
     if (interactive() && yesno("Email results to ", maintainer(pkg)$email, "?")) {
       return(invisible())
     }
@@ -59,15 +60,19 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   built_path <- pkgbuild::build(pkg$path, tempdir(), args = args, quiet = quiet, ...)
   on.exit(unlink(built_path))
 
-  url <- paste0("ftp://win-builder.r-project.org/", version, "/",
-                basename(built_path))
+  url <- paste0(
+    "ftp://win-builder.r-project.org/", version, "/",
+    basename(built_path)
+  )
   lapply(url, upload_ftp, file = built_path)
 
   if (!quiet) {
-    message("[", strftime(Sys.time(), "%I:%M %p (%Y-%m-%d)"), "] ",
-            "Check ", maintainer(pkg)$email, " for a link to the built package",
-            if (length(version) > 1) "s" else "",
-            " in 15-30 mins.")
+    message(
+      "[", strftime(Sys.time(), "%I:%M %p (%Y-%m-%d)"), "] ",
+      "Check ", maintainer(pkg)$email, " for a link to the built package",
+      if (length(version) > 1) "s" else "",
+      " in 15-30 mins."
+    )
   }
 
   invisible()
