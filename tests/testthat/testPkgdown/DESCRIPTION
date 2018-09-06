@@ -9,4 +9,4 @@ Version: 0.1
 VignetteBuilder: knitr
 Suggests: knitr,
   pkgdown
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
