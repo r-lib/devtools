@@ -3,9 +3,7 @@
 #' @export
 load_all <- function(path = ".", reset = TRUE, recompile = FALSE,
                      export_all = TRUE, helpers = TRUE, quiet = FALSE, ...) {
-  if (rstudioapi::hasFun("documentSaveAll")) {
-    rstudioapi::documentSaveAll()
-  }
+  save_all()
 
   pkgload::load_all(path = path, reset = reset, recompile = recompile,
     export_all = export_all, helpers = helpers, quiet = quiet, ...)

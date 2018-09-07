@@ -16,9 +16,7 @@ document <- function(pkg = ".", roclets = NULL) {
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
 
-  if (rstudioapi::hasFun("documentSaveAll")) {
-    rstudioapi::documentSaveAll()
-  }
+  save_all()
 
   withr::with_envvar(r_env_vars(), roxygen2::roxygenise(pkg$path, roclets))
 

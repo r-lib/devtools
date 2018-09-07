@@ -22,9 +22,7 @@
 test <- function(pkg = ".", filter = NULL, ...) {
   check_suggested("testthat")
 
-  if (rstudioapi::hasFun("documentSaveAll")) {
-    rstudioapi::documentSaveAll()
-  }
+  save_all()
 
   pkg <- as.package(pkg)
 
@@ -83,9 +81,7 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
 
   check_suggested("covr")
 
-  if (rstudioapi::hasFun("documentSaveAll")) {
-    rstudioapi::documentSaveAll()
-  }
+  save_all()
 
   withr::with_envvar(r_env_vars(),
     coverage <- covr::package_coverage(pkg$path, ...)

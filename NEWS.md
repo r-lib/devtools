@@ -1,5 +1,7 @@
 # devtools 1.13.3.9000
 
+* `save_all()` helper function wraps `rstudioapi::documentSaveAll()` calls (#1850, @amundsenjunior).
+
 * `check()` now allows users to run without `--timings` (#1655)
 
 * devtools now depends on roxygen2 6.1.0: this considerably simplifies 
