@@ -10,9 +10,7 @@
 build_readme <- function(path = ".", quiet = TRUE, ...) {
   check_suggested("rmarkdown")
 
-  if (rstudioapi::hasFun("documentSaveAll")) {
-    rstudioapi::documentSaveAll()
-  }
+  save_all()
 
   pkg <- as.package(path)
 

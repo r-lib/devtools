@@ -12,9 +12,7 @@
 build_site <- function(path = ".", quiet = TRUE, ...) {
   check_suggested("pkgdown")
 
-  if (rstudioapi::hasFun("documentSaveAll")) {
-    rstudioapi::documentSaveAll()
-  }
+  save_all()
 
   pkg <- as.package(path)
 

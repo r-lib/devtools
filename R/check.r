@@ -72,9 +72,7 @@ check <- function(pkg = ".",
   pkg <- as.package(pkg)
   withr::local_options(list(warn = 1))
 
-  if (rstudioapi::hasFun("documentSaveAll")) {
-    rstudioapi::documentSaveAll()
-  }
+  save_all()
 
   if (!missing(cleanup)) {
     warning("`cleanup` is deprecated", call. = FALSE)
