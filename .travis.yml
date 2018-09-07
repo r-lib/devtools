@@ -17,7 +17,7 @@ r:
 bioc_required: true
 
 install:
-  - R -e 'source("https://install-github.me/r-lib/remotes")'
+  - R -e 'source("http://install-github.me/r-lib/remotes")'
   - R -e 'remotes::install_local(".", dependencies = TRUE)'
 
 # Only report coverage for the release version
