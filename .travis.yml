@@ -17,7 +17,7 @@ r:
 bioc_required: true
 
 install:
-  - curl -LO 'https://install-github.me/r-lib/remotes' && Rscript remotes
+  - curl -LO 'https://install-github.me/r-lib/remotes' && Rscript remotes && rm remotes
   - R -e 'remotes::install_local(".", dependencies = TRUE)'
 
 # Only report coverage for the release version
