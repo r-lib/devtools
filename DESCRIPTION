@@ -62,6 +62,7 @@ Suggests:
 VignetteBuilder: knitr
 Encoding: UTF-8
 Remotes:
+    r-lib/remotes,
     r-lib/covr,
     r-lib/rcmdcheck
 RoxygenNote: 6.1.0

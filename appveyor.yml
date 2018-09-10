@@ -16,7 +16,6 @@ build_script:
   - Rscript -e "source('http://bioconductor.org/biocLite.R')"
   - travis-tool.sh install_deps
   - travis-tool.sh r_binary_install curl
-  - travis-tool.sh github_package jimhester/covr
 
 test_script:
   - travis-tool.sh run_tests
@@ -28,9 +27,6 @@ on_failure:
 before_test:
   - cinst pandoc
   - ps: $env:Path += ";C:\Program Files (x86)\Pandoc\"
-
-on_success:
-  - Rscript -e "covr::codecov()"
 
 environment:
   global:
