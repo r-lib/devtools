@@ -247,3 +247,7 @@ escape_special_regex <- function(x) {
   chars <- c("*", ".", "?", "^", "+", "$", "|", "(", ")", "[", "]", "{", "}", "\\")
   gsub(paste0("([\\", paste0(collapse = "\\", chars), "])"), "\\\\\\1", x, perl = TRUE)
 }
+
+has_dev_remotes <- function(pkg) {
+  !is.null(pkg[["remotes"]])
+}

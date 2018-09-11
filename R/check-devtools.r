@@ -110,7 +110,7 @@ check_news_md <- function(pkg) {
 }
 
 check_remotes <- function(pkg) {
-  check_status(!remotes::has_dev_remotes(pkg),
+  check_status(!has_dev_remotes(pkg),
     "DESCRIPTION doesn't have Remotes field",
     "Remotes field should be removed before CRAN submission."
   )
