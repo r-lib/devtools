@@ -26,8 +26,12 @@ reload <- function(pkg = ".", quiet = FALSE) {
   pkg <- as.package(pkg)
 
   if (is_attached(pkg)) {
-    if (!quiet) message("Reloading installed ", pkg$package)
+    if (!quiet) message("Reloading attached ", pkg$package)
     pkgload::unload(pkg$package)
     require(pkg$package, character.only = TRUE, quietly = TRUE)
+  } else if (is_loaded(pkg)) {
+    if (!quiet) message("Reloading loaded ", pkg$package)
+    pkgload::unload(pkg$package)
+    requireNamespace(pkg$package, character.only = TRUE, quietly = TRUE)
   }
 }
