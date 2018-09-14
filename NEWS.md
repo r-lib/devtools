@@ -1,5 +1,17 @@
 # devtools 1.13.6.9000
 
+## Breaking Changes
+
+* `devtools::install()` arguments have been changed as follows.
+  - `force_deps` -> `force`
+  - `upgrade_dependencies` -> `upgrade`
+  - `threads` -> Removed, but you can use `Ncpus`, which is passed by `...` to `install.packages()`
+  - `metadata` -> Removed
+  - `out_dir` -> Removed
+  - `skip_if_log_exists` -> Removed
+
+## Changes
+
 * `reload()` now reloads loaded but not attached packages as well as attached ones.
 
 * Executed `styler::style_pkg()` to update code style (#1851, @amundsenjunior).
