@@ -1,5 +1,7 @@
 # devtools 1.13.6.9000
 
+* `reload()` now reloads loaded but not attached packages as well as attached ones.
+
 * Executed `styler::style_pkg()` to update code style (#1851, @amundsenjunior).
 
 * All `install_*()` functions are now re-exported from remotes rather than being defined in devtools.
