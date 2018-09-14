@@ -45,8 +45,8 @@
 #' @param threads number of concurrent threads to use for installing
 #'   dependencies.
 #'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
-#' @param force_deps whether to force installation of dependencies even if their
-#'   SHA1 reference hasn't changed from the currently installed version.
+#' @param force whether to force installation of dependencies even if they
+#'   have not been updated from the previously installed version.
 #' @param ... additional arguments passed to \code{\link{install.packages}}
 #'   when installing dependencies. \code{pkg} is installed with
 #'   \code{R CMD INSTALL}.
@@ -62,9 +62,8 @@ install <-
              build_vignettes = FALSE,
              keep_source = getOption("keep.source.pkgs"),
              threads = getOption("Ncpus", 1),
-             force_deps = FALSE,
+             force = FALSE,
              ...) {
-    pkg <- as.package(pkg)
 
     # Forcing all of the promises for the current namespace now will avoid lazy-load
     # errors when the new package is installed overtop the old one.
@@ -89,7 +88,11 @@ install <-
     }
     opts <- c(opts, args)
 
-    remotes::install_local(pkg$path, build = build, build_opts = build_opts, INSTALL_opts = opts, dependencies = dependencies, quiet = quiet, ...)
+    remotes::install_local(pkg$path,
+      build = build, build_opts = build_opts,
+      INSTALL_opts = opts, dependencies = dependencies, quiet = quiet,
+      force = force, ...
+    )
 
     if (reload) {
       reload(pkg, quiet = quiet)
