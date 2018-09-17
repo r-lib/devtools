@@ -65,6 +65,8 @@ install <-
              force = FALSE,
              ...) {
 
+    pkg <- as.package(pkg)
+
     # Forcing all of the promises for the current namespace now will avoid lazy-load
     # errors when the new package is installed overtop the old one.
     # https://stat.ethz.ch/pipermail/r-devel/2015-December/072150.html
