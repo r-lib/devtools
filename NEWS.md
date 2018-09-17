@@ -1,5 +1,42 @@
 # devtools 1.13.6.9000
 
+## Breaking Changes
+
+* `devtools::install()` arguments have been changed as follows.
+  - `force_deps` -> `force`
+  - `upgrade_dependencies` -> `upgrade`
+  - `threads` -> Removed, but you can use `Ncpus`, which is passed by `...` to `install.packages()`
+  - `metadata` -> Removed
+  - `out_dir` -> Removed
+  - `skip_if_log_exists` -> Removed
+
+* `check()` argument `check_version` has been renamed to `remote` to better
+  describe what tests are disabled (#1811)
+
+* `get_path()`, `set_path()`, `add_path()` and `on_path()` have been removed,
+  this functionality is available with `withr::with_path()` (#1796).
+
+* The `lang` argument to `spell_check()` was removed, for compatibility with
+  [spelling](https://CRAN.R-project.org/package=spelling) v1.1. (#1715)
+
+* The previously deprecated `with_` functions have now been removed. The
+  functionality has been moved to the **withr** package.
+
+* `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
+  removed. These functions never worked terribly well, and have been replaced
+  by the much better functions in callr.
+
+
+## Deprecated functions
+
+* `build_win()` has been renamed to `check_win_release()`, `check_win_devel()`,
+  `check_win_oldrelease()` (#1598).
+
+* The `revdep_check_*` functions have been deprecated in favor of the
+  **revdepcheck** package.
+
+## Changes
+
 * `reload()` now reloads loaded but not attached packages as well as attached ones.
 
 * Executed `styler::style_pkg()` to update code style (#1851, @amundsenjunior).
@@ -22,10 +59,7 @@
 * `build_vignette()` gains a `keep_md` option to allow keeping the intermediate markdown output (#1726)
 
 * Bioconductor support now provided by the BiocManager CRAN package instead of
-  BiocInstaller (#1833).
-
-* `remote_packge_name.github()` now uses the graphql API to retrieve the
-  content, which works with self hosted GitHub enterprise (#1831)
+  BiocInstaller (for R versions 3.5+) (#1833).
 
 * `remote_sha.github()` now correctly looks up SHA in private repositories
   (#1827, @renozao).
@@ -34,33 +68,17 @@
   if given a pkg argument that is not the current directory. This provides
   backwards compatibility with previous behavior (#1823).
 
-* `install_github()` now downloads tarballs from GitHub rather than zip
-  archives. This avoids issues with losing execute permissions on configure
-  scripts when systems are using R's internal unzip implementation (#1799)
-
 * Vignettes are now built in a separate process, and the package is installed
   before building the vignettes (#1822)
 
-*  New function `build_readme()` to build the README.md from a README.Rmd (#1762)
+* `build_readme()` added to build the README.md from a README.Rmd (#1762)
 
 * `build_vignettes()` now has a `clean` and `upgrade` arguments, to control
   cleaning of intermediate files and upgrading vignette dependencies
   respectively. (#1770).
 
-* `check()` argument `check_version` has been renamed to `remote` to better
-  describe what tests are disabled (#1811)
-
-* `get_path()`, `set_path()`, `add_path()` and `on_path()` have been removed,
-  this functionality is available with `withr::with_path()` (#1796).
-
-* `install_cran()` and the CRAN remote now always downloads the binary if
-  one is available (#1724, #1605).
-
 * `release()` gains an additional question ensuring you updated codemeta.json
   if one exists (#1774, #1754)
-
-* `github_pat()` and `gitlab_pat()` no longer print diagnostic messages by
-  default (#1752).
 
 * `test()` now sets `useFancyQuotes = FALSE` to better mimic the environment tests
   are run under with `R CMD check` (#1735).
@@ -101,9 +119,6 @@
 
 * The CRAN-RELEASE file is now added to .Rbuildignore (#1711)
 
-* The `lang` argument to `spell_check()` was removed, for compatibility with
-  [spelling](https://CRAN.R-project.org/package=spelling) v1.1. (#1715)
-
 * `check()` and `check_built()` now have an `error_on` argument to specify if
   they should throw an error on check failures. When run non-interactively this
   is set to "warnings" unless specified.
@@ -128,9 +143,6 @@
 
 * New `test_coverage()` provides helper to compute test coverage using covr
   (#1628).
-
-* `build_win()` has been renamed to `check_win_release()`, `check_win_devel()`,
-  `check_win_oldrelease()` (#1598).
 
 * `document()`, `load_all()`, `check()`, `build()` and `test()` now
   automatically save open files when they are run inside the RStudio IDE. (#1576)
@@ -161,12 +173,6 @@
 
 * `session_info()` now uses the implementation in the **sessioninfo** package.
 
-* The previously deprecated `with_` functions have now been removed. The
-  functionality has been moved to the **withr** package.
-
-* The `revdep_check_*` functions have been deprecated in favor of the
-  **revdepcheck** package.
-
 * `source_gist()` works once more when there is only a single file
   in the gist (#1266).
 * Infrastructure functions (`use_*`) now use the implementations in **usethis**.
@@ -194,12 +200,6 @@
 * `find_rtools()`, `setup_rtools()`, `has_devel()`, `compiler_flags()`,
   `build()` and `with_debug()` have moved to the new pkgbuild package.
   `build()` and `with_debug()` are re-exported by devtools.
-
-* `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
-  removed. These functions never worked terribly well, and have been replaced 
-  by the much better functions in callr.
-
-* Deprecated `build_github_devtools()` has been removed.
 
 * If the **foghorn** package is installed, `release()` displays the results
   of the CRAN checks (#1672, @fmichonneau).
@@ -450,7 +450,9 @@ properly pass them to internal functions. (#1502)
 
 * Removed the deprecated `use_coveralls()`, `add_rstudio_project()`, 
   `add_test_infrastructure()`, and `add_travis()`.
-  
+
+* Deprecated `build_github_devtools()` has been removed.
+
 ## Checks and and release()
 
 * `check()` now always succeeds (instead of throwing an error when 
