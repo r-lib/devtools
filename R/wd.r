@@ -1,7 +1,7 @@
 #' Set working directory.
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
+#'   [as.package()] for more information
 #' @param path path within package. Leave empty to change working directory
 #'   to package directory.
 #' @export

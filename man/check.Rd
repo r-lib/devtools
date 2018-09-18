@@ -19,15 +19,15 @@ check_built(path = NULL, cran = TRUE, remote = FALSE,
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{document}{If \code{NA} and the package uses roxygen2, will
-rerun \code{\link{document}} prior to checking. Use \code{TRUE}
+rerun \code{\link[=document]{document()}} prior to checking. Use \code{TRUE}
 and \code{FALSE} to override this default.}
 
 \item{build_args}{Additional arguments passed to \code{R CMD build}}
 
-\item{...}{Additional arguments passed on to \code{\link[pkgbuild]{build}()}.}
+\item{...}{Additional arguments passed on to \code{\link[pkgbuild:build]{pkgbuild::build()}}.}
 
 \item{manual}{If \code{FALSE}, don't build and check manual
 (\code{--no-manual}).}
@@ -99,24 +99,24 @@ with how check works on CRAN. This includes:
 
 \itemize{
 
- \item The standard environment variables set by devtools:
-   \code{\link{r_env_vars}}. Of particular note for package tests is the
-   \code{NOT_CRAN} env var which lets you know that your tests are not
-   running on cran, and hence can take a reasonable amount of time.
+\item The standard environment variables set by devtools:
+\code{\link[=r_env_vars]{r_env_vars()}}. Of particular note for package tests is the
+\code{NOT_CRAN} env var which lets you know that your tests are not
+running on cran, and hence can take a reasonable amount of time.
 
- \item Debugging flags for the compiler, set by
-   \code{\link{compiler_flags}(FALSE)}.
+\item Debugging flags for the compiler, set by
+\code{\link{compiler_flags}(FALSE)}.
 
- \item If \code{aspell} is found \code{_R_CHECK_CRAN_INCOMING_USE_ASPELL_}
-  is set to \code{TRUE}. If no spell checker is installed, a warning is
-  issued.)
+\item If \code{aspell} is found \code{_R_CHECK_CRAN_INCOMING_USE_ASPELL_}
+is set to \code{TRUE}. If no spell checker is installed, a warning is
+issued.)
 
- \item env vars set by arguments \code{incoming}, \code{remote} and
-   \code{force_suggests}
+\item env vars set by arguments \code{incoming}, \code{remote} and
+\code{force_suggests}
 }
 }
 
 \seealso{
-\code{\link{release}} if you want to send the checked package to
-  CRAN.
+\code{\link[=release]{release()}} if you want to send the checked package to
+CRAN.
 }

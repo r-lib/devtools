@@ -5,19 +5,19 @@
 #' The package release process will:
 #'
 #' \itemize{
-#'   \item Confirm that the package passes \code{R CMD check} on relevant platoforms
+#'   \item Confirm that the package passes `R CMD check` on relevant platoforms
 #'   \item Confirm that important files are up-to-date
 #'   \item Build the package
 #'   \item Submit the package to CRAN, using comments in "cran-comments.md"
 #' }
 #'
 #' You can add arbitrary extra questions by defining an (un-exported) function
-#' called \code{release_questions()} that returns a character vector
+#' called `release_questions()` that returns a character vector
 #' of additional questions to ask.
 #'
 #' You also need to read the CRAN repository policy at
-#' \url{https://cran.r-project.org/web/packages/policies.html} and make
-#' sure you're in line with the policies. \code{release} tries to automate as
+#' <https://cran.r-project.org/web/packages/policies.html> and make
+#' sure you're in line with the policies. `release` tries to automate as
 #' many of polices as possible, but it's impossible to be completely
 #' comprehensive, and they do change in between releases of devtools.
 #'
@@ -29,12 +29,12 @@
 #' the mail.
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
-#' @param check if \code{TRUE}, run checking, otherwise omit it.  This
+#'   [as.package()] for more information
+#' @param check if `TRUE`, run checking, otherwise omit it.  This
 #'   is useful if you've just checked your package and you're ready to
 #'   release it.
 #' @param args An optional character vector of additional command
-#'   line arguments to be passed to \code{R CMD build}.
+#'   line arguments to be passed to `R CMD build`.
 #' @export
 release <- function(pkg = ".", check = FALSE, args = NULL) {
   pkg <- as.package(pkg)
@@ -287,11 +287,11 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #' will receive an email asking you to confirm submission - this is used
 #' to check that the package is submitted by the maintainer.
 #'
-#' It's recommended that you use \code{\link{release}()} rather than this
+#' It's recommended that you use [release()] rather than this
 #' function as it performs more checks prior to submission.
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
+#'   [as.package()] for more information
 #' @inheritParams release
 #' @export
 #' @keywords internal

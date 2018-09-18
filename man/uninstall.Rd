@@ -8,23 +8,23 @@ uninstall(pkg = ".", unload = TRUE, quiet = FALSE, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{unload}{if \code{TRUE} (the default), will automatically unload the
 package prior to uninstalling.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
-\item{...}{additional arguments passed to \code{\link{remove.packages}}.}
+\item{...}{additional arguments passed to \code{\link[=remove.packages]{remove.packages()}}.}
 }
 \description{
 Uses \code{remove.package} to uninstall the package.
 To uninstall a package from a non-default library,
-use \code{\link[withr]{with_libpaths}}.
+use \code{\link[withr:with_libpaths]{withr::with_libpaths()}}.
 }
 \seealso{
-\code{\link{with_debug}} to install packages with debugging flags
-  set.
+\code{\link[=with_debug]{with_debug()}} to install packages with debugging flags
+set.
 
 Other package installation: \code{\link{install}}
 }

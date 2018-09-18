@@ -10,7 +10,7 @@ source_gist(id, ..., filename = NULL, sha1 = NULL, quiet = FALSE)
 \item{id}{either full url (character), gist ID (numeric or character of
 numeric).}
 
-\item{...}{other options passed to \code{\link{source}}}
+\item{...}{other options passed to \code{\link[=source]{source()}}}
 
 \item{filename}{if there is more than one R file in the gist, which one to
 source (filename ending in '.R')? Default \code{NULL} will source the
@@ -18,15 +18,15 @@ first file.}
 
 \item{sha1}{The SHA-1 hash of the file at the remote URL. This is highly
 recommend as it prevents you from accidentally running code that's not
-what you expect. See \code{\link{source_url}} for more information on
+what you expect. See \code{\link[=source_url]{source_url()}} for more information on
 using a SHA-1 hash.}
 
 \item{quiet}{if \code{FALSE}, the default, prints informative messages.}
 }
 \description{
 \dQuote{Gist is a simple way to share snippets and pastes with others.
-  All gists are git repositories, so they are automatically versioned,
-  forkable and usable as a git repository.}
+All gists are git repositories, so they are automatically versioned,
+forkable and usable as a git repository.}
 \url{https://gist.github.com/}
 }
 \examples{
@@ -52,5 +52,5 @@ source_gist(6872663, filename = "hi.r", sha1 = "54f1db27e60")
 }
 }
 \seealso{
-\code{\link{source_url}}
+\code{\link[=source_url]{source_url()}}
 }

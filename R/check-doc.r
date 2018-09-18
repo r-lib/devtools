@@ -1,12 +1,12 @@
-#' Check documentation, as \code{R CMD check} does.
+#' Check documentation, as `R CMD check` does.
 #'
 #' This function attempts to run the documentation related checks in the
-#' same way that \code{R CMD check} does. Unfortunately it can't run them
+#' same way that `R CMD check` does. Unfortunately it can't run them
 #' all because some tests require the package to be loaded, and the way
 #' they attempt to load the code conflicts with how devtools does it.
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
+#'   [as.package()] for more information
 #' @return Nothing. This function is called purely for it's side effects: if
 #   no errors there will be no output.
 #' @export

@@ -8,7 +8,7 @@ document(pkg = ".", roclets = NULL)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{roclets}{Character vector of roclet names to use with package.
 This defaults to \code{NULL}, which will use the \code{roclets} fields in
@@ -16,11 +16,11 @@ the list provided in the \code{Roxygen} DESCRIPTION field. If none are
 specified, defaults to \code{c("collate", "namespace", "rd")}.}
 }
 \description{
-This function is a wrapper for the \code{\link[roxygen2]{roxygenize}()}
+This function is a wrapper for the \code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}}
 function from the roxygen2 package. See the documentation and vignettes of
 that package to learn how to use roxygen.
 }
 \seealso{
-\code{\link[roxygen2]{roxygenize}},
-  \code{browseVignettes("roxygen2")}
+\code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}},
+\code{browseVignettes("roxygen2")}
 }

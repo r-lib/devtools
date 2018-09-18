@@ -16,8 +16,8 @@ as.package(x = NULL, create = NA)
 \description{
 Possible specifications of package:
 \itemize{
-  \item path
-  \item package object
+\item path
+\item package object
 }
 }
 \keyword{internal}

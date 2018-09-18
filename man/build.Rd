@@ -29,7 +29,7 @@ or \code{R CMD install} if \code{binary = TRUE}.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
-\item{...}{Additional arguments passed to [pkgbuild::build].}
+\item{...}{Additional arguments passed to \link[pkgbuild:build]{pkgbuild::build}.}
 }
 \value{
 a string giving the location (including file name) of the built

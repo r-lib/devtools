@@ -1,14 +1,14 @@
 #' Activate and deactivate development mode.
 #'
-#' When activated, \code{dev_mode} creates a new library for storing installed
-#' packages. This new library is automatically created when \code{dev_mode} is
+#' When activated, `dev_mode` creates a new library for storing installed
+#' packages. This new library is automatically created when `dev_mode` is
 #' activated if it does not already exist.
 #' This allows you to test development packages in a sandbox, without
 #' interfering with the other packages you have installed.
 #'
-#' @param on turn dev mode on (\code{TRUE}) or off (\code{FALSE}).  If omitted
-#'  will guess based on whether or not \code{path} is in
-#'  \code{\link{.libPaths}}
+#' @param on turn dev mode on (`TRUE`) or off (`FALSE`).  If omitted
+#'  will guess based on whether or not `path` is in
+#'  [.libPaths()]
 #' @param path directory to library.
 #' @export
 #' @examples

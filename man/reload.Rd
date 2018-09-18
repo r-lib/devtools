@@ -8,16 +8,16 @@ reload(pkg = ".", quiet = FALSE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 }
 \description{
 This attempts to unload and reload a package. If the package is not loaded
 already, it does nothing. It's not always possible to cleanly unload a
-package: see the caveats in \code{\link{unload}} for some of the
+package: see the caveats in \code{\link[=unload]{unload()}} for some of the
 potential failure points. If in doubt, restart R and reload the package
-with \code{\link{library}}.
+with \code{\link[=library]{library()}}.
 }
 \examples{
 \dontrun{

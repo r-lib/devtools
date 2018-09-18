@@ -9,7 +9,7 @@ dev_mode(on = NULL, path = getOption("devtools.path"))
 \arguments{
 \item{on}{turn dev mode on (\code{TRUE}) or off (\code{FALSE}).  If omitted
 will guess based on whether or not \code{path} is in
-\code{\link{.libPaths}}}
+\code{\link[=.libPaths]{.libPaths()}}}
 
 \item{path}{directory to library.}
 }

@@ -8,7 +8,7 @@ system_check(cmd, args = character(), env_vars = character(),
   path = ".", quiet = FALSE, throw = TRUE, ...)
 }
 \arguments{
-\item{cmd}{Command to run. Will be quoted by \code{\link{shQuote}()}.}
+\item{cmd}{Command to run. Will be quoted by \code{\link[=shQuote]{shQuote()}}.}
 
 \item{args}{A character vector of arguments.}
 
@@ -21,7 +21,7 @@ system_check(cmd, args = character(), env_vars = character(),
 \item{throw}{If \code{TRUE}, will throw an error if the command fails
 (i.e. the return value is not 0).}
 
-\item{...}{additional arguments passed to \code{\link[base]{system}}}
+\item{...}{additional arguments passed to \code{\link[base:system]{base::system()}}}
 }
 \value{
 The exit status of the command, invisibly.

@@ -2,13 +2,13 @@
 #'
 #' This attempts to unload and reload a package. If the package is not loaded
 #' already, it does nothing. It's not always possible to cleanly unload a
-#' package: see the caveats in \code{\link{unload}} for some of the
+#' package: see the caveats in [unload()] for some of the
 #' potential failure points. If in doubt, restart R and reload the package
-#' with \code{\link{library}}.
+#' with [library()].
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
-#' @param quiet if \code{TRUE} suppresses output from this function.
+#'   [as.package()] for more information
+#' @param quiet if `TRUE` suppresses output from this function.
 #' @examples
 #' \dontrun{
 #' # Reload package that is in current directory

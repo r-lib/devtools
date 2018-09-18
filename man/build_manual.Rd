@@ -8,7 +8,7 @@ build_manual(pkg = ".", path = NULL)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information.}
+\code{\link[=as.package]{as.package()}} for more information.}
 
 \item{path}{path in which to produce package manual.
 If \code{NULL}, defaults to the parent directory of the package.}
@@ -17,5 +17,5 @@ If \code{NULL}, defaults to the parent directory of the package.}
 Create package pdf manual
 }
 \seealso{
-\code{\link{Rd2pdf}}
+\code{\link[=Rd2pdf]{Rd2pdf()}}
 }

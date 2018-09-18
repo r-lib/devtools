@@ -8,7 +8,7 @@ spell_check(pkg = ".", vignettes = TRUE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{vignettes}{include vignettes in the spell check; passed to
 \link[spelling:spell_check_package]{spelling::spell_check_package}}

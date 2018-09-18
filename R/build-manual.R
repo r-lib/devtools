@@ -1,11 +1,11 @@
 #' Create package pdf manual
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information.
+#'   [as.package()] for more information.
 #' @param path path in which to produce package manual.
-#'   If \code{NULL}, defaults to the parent directory of the package.
+#'   If `NULL`, defaults to the parent directory of the package.
 #'
-#' @seealso \code{\link{Rd2pdf}}
+#' @seealso [Rd2pdf()]
 #' @export
 build_manual <- function(pkg = ".", path = NULL) {
   pkg <- as.package(pkg)

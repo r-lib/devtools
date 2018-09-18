@@ -9,7 +9,7 @@ run_examples(pkg = ".", start = NULL, show = TRUE, test = FALSE,
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{start}{Where to start running the examples: this can either be the
 name of \code{Rd} file to start with (with or without extensions), or
@@ -27,14 +27,14 @@ out.}
 
 \item{fresh}{if \code{TRUE}, will be run in a fresh R session. This has
 the advantage that there's no way the examples can depend on anything in
-the current session, but interactive code (like \code{\link{browser}})
+the current session, but interactive code (like \code{\link[=browser]{browser()}})
 won't work.}
 
-\item{document}{if \code{TRUE}, \code{\link{document}} will be run to ensure
+\item{document}{if \code{TRUE}, \code{\link[=document]{document()}} will be run to ensure
 examples are updated before running them.}
 }
 \description{
-One of the most frustrating parts of `R CMD check` is getting all of your
+One of the most frustrating parts of \code{R CMD check} is getting all of your
 examples to pass - whenever one fails you need to fix the problem and then
 restart the whole process.  This function makes it a little easier by
 making it possible to run all examples from an R function.

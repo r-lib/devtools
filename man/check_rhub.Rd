@@ -9,12 +9,12 @@ check_rhub(pkg = ".", platforms = NULL, email = NULL,
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{platforms}{R-hub platforms to run the check on. If \code{NULL}
 uses default list of CRAN checkers (one for each major platform, and
 one with extra checks if you have compiled code). You can also specify
-your own, see \code{\link[rhub]{platforms}} for a complete list.}
+your own, see \code{\link[rhub:platforms]{rhub::platforms()}} for a complete list.}
 
 \item{email}{email address to notify, defaults to the maintainer
 address in the package.}
@@ -23,13 +23,13 @@ address in the package.}
 interactively. R-hub will send an email to the package maintainer's
 email address, regardless of whether the check is interactive or not.}
 
-\item{...}{extra arguments, passed to \code{\link[pkgbuild]{build}}.}
+\item{...}{extra arguments, passed to \code{\link[pkgbuild:build]{pkgbuild::build()}}.}
 }
 \value{
 a \code{rhub_check} object.
 }
 \description{
-It runs \code{\link{build}} on the package, with the arguments specified
+It runs \code{\link[=build]{build()}} on the package, with the arguments specified
 in \code{args}, and then submits it to the r-hub builder at
 \url{https://builder.r-hub.io}. The \code{interactive} option controls
 whether the function waits for the check output. Regardless, after the
@@ -40,7 +40,7 @@ maintainer.
 
 To build and check R packages on r-hub, you need to validate your
 email address. This is because r-hub sends out emails about build
-results. See more at \code{\link[rhub]{validate_email}}.
+results. See more at \code{\link[rhub:validate_email]{rhub::validate_email()}}.
 }
 
 \concept{build functions, rhub functions}

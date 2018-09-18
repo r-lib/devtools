@@ -10,7 +10,7 @@ build_vignettes(pkg = ".", dependencies = "VignetteBuilder",
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{dependencies}{Which dependencies do you want to check?
 Can be a character vector (selecting from "Depends", "Imports",
@@ -33,7 +33,7 @@ if you need to debug.}
 vignettes.}
 
 \item{keep_md}{If \code{TRUE}, move md intermediates as well as rendered
-outputs. Most useful when using the `keep_md` YAML option for Rmarkdown
+outputs. Most useful when using the \code{keep_md} YAML option for Rmarkdown
 outputs. See
 \url{https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown}.}
 }
@@ -49,9 +49,9 @@ files can be checked into version control, so they can be viewed with
 loaded with \code{load_all()} without needing to re-build them locally.
 }
 \seealso{
-\code{\link{clean_vignettes}} to remove the pdfs in
-  \file{doc} created from vignettes
+\code{\link[=clean_vignettes]{clean_vignettes()}} to remove the pdfs in
+\file{doc} created from vignettes
 
-\code{\link{clean_vignettes}} to remove build tex/pdf files.
+\code{\link[=clean_vignettes]{clean_vignettes()}} to remove build tex/pdf files.
 }
 \keyword{programming}

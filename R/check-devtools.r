@@ -1,10 +1,10 @@
 #' Custom devtools release checks.
 #'
 #' This function performs additional checks prior to release. It is called
-#' automatically by \code{\link{release}()}.
+#' automatically by [release()].
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information.
+#'   [as.package()] for more information.
 #' @keywords internal
 #' @export
 release_checks <- function(pkg = ".", built_path = NULL) {

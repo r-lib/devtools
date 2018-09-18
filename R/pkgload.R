@@ -1,5 +1,5 @@
 #' @inherit pkgload::load_all
-#' @param ... Additional arguments passed to [pkgload::load].
+#' @param ... Additional arguments passed to [pkgload::load_all()].
 #' @export
 load_all <- function(path = ".", reset = TRUE, recompile = FALSE,
                      export_all = TRUE, helpers = TRUE, quiet = FALSE, ...) {

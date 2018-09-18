@@ -13,15 +13,15 @@
 #'   current package.
 #' @param ignore A character vector of package names to ignore. These packages
 #'   will not appear in returned vector. This is used in
-#'   \code{\link{revdep_check}} to avoid packages with installation problems
+#'   [revdep_check()] to avoid packages with installation problems
 #'   or extremely long check times.
 #' @param dependencies A character vector listing the types of dependencies
 #'   to follow.
-#' @param bioconductor If \code{TRUE} also look for dependencies amongst
+#' @param bioconductor If `TRUE` also look for dependencies amongst
 #'   bioconductor packages.
-#' @param recursive If \code{TRUE} look for full set of recursive dependencies.
+#' @param recursive If `TRUE` look for full set of recursive dependencies.
 #' @inheritParams tools::dependsOnPkgs
-#' @seealso \code{\link{revdep_check}()} to run R CMD check on all reverse
+#' @seealso [revdep_check()] to run R CMD check on all reverse
 #'   dependencies.
 #' @export
 #' @examples

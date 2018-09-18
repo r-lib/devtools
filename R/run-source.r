@@ -1,6 +1,6 @@
 #' Run a script through some protocols such as http, https, ftp, etc.
 #'
-#' If a SHA-1 hash is specified with the \code{sha1} argument, then this
+#' If a SHA-1 hash is specified with the `sha1` argument, then this
 #' function will check the SHA-1 hash of the downloaded file to make sure it
 #' matches the expected value, and throw an error if it does not match. If the
 #' SHA-1 hash is not specified, it will print a message displaying the hash of
@@ -11,10 +11,10 @@
 #' as secure as the full hash.
 #'
 #' @param url url
-#' @param ... other options passed to \code{\link{source}}
+#' @param ... other options passed to [source()]
 #' @param sha1 The (prefix of the) SHA-1 hash of the file at the remote URL.
 #' @export
-#' @seealso \code{\link{source_gist}}
+#' @seealso [source_gist()]
 #' @examples
 #' \dontrun{
 #'
@@ -66,21 +66,21 @@ source_url <- function(url, ..., sha1 = NULL) {
 #' \dQuote{Gist is a simple way to share snippets and pastes with others.
 #'   All gists are git repositories, so they are automatically versioned,
 #'   forkable and usable as a git repository.}
-#' \url{https://gist.github.com/}
+#' <https://gist.github.com/>
 #'
 #' @param id either full url (character), gist ID (numeric or character of
 #'   numeric).
-#' @param ... other options passed to \code{\link{source}}
+#' @param ... other options passed to [source()]
 #' @param filename if there is more than one R file in the gist, which one to
-#' source (filename ending in '.R')? Default \code{NULL} will source the
+#' source (filename ending in '.R')? Default `NULL` will source the
 #' first file.
 #' @param sha1 The SHA-1 hash of the file at the remote URL. This is highly
 #'   recommend as it prevents you from accidentally running code that's not
-#'   what you expect. See \code{\link{source_url}} for more information on
+#'   what you expect. See [source_url()] for more information on
 #'   using a SHA-1 hash.
-#' @param quiet if \code{FALSE}, the default, prints informative messages.
+#' @param quiet if `FALSE`, the default, prints informative messages.
 #' @export
-#' @seealso \code{\link{source_url}}
+#' @seealso [source_url()]
 #' @examples
 #' \dontrun{
 #' # You can run gists given their id

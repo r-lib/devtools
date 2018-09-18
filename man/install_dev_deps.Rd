@@ -8,7 +8,7 @@ install_dev_deps(pkg = ".", ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{...}{additional arguments passed to \code{\link[utils:install.packages]{utils::install.packages()}}.}
 }

@@ -11,9 +11,9 @@ build_readme(path = ".", quiet = TRUE, ...)
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
-\item{...}{additional arguments passed to [rmarkdown::render()]}
+\item{...}{additional arguments passed to \code{\link[rmarkdown:render]{rmarkdown::render()}}}
 }
 \description{
-`build_readme()` is a wrapper around [rmarkdown::render()], it generates the
+\code{build_readme()} is a wrapper around \code{\link[rmarkdown:render]{rmarkdown::render()}}, it generates the
 README.md from a README.Rmd file.
 }

@@ -12,7 +12,7 @@ install(pkg = ".", reload = TRUE, quick = FALSE, build = TRUE,
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{reload}{if \code{TRUE} (the default), will automatically reload the
 package after installing.}
@@ -20,7 +20,7 @@ package after installing.}
 \item{quick}{if \code{TRUE} skips docs, multiple-architectures,
 demos, and vignettes, to make installation as fast as possible.}
 
-\item{build}{if \code{TRUE} \code{\link[pkgbuild]{build}}s the package first:
+\item{build}{if \code{TRUE} \code{\link[pkgbuild:build]{pkgbuild::build()}}s the package first:
 this ensures that the installation is completely clean, and prevents any
 binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
 package directory, but is considerably slower, because every compile has
@@ -34,7 +34,7 @@ value of the option \code{"devtools.install.args"}.}
 
 \item{dependencies}{\code{logical} indicating to also install uninstalled
 packages which this \code{pkg} depends on/links to/suggests. See
-argument \code{dependencies} of \code{\link{install.packages}}.}
+argument \code{dependencies} of \code{\link[=install.packages]{install.packages()}}.}
 
 \item{upgrade}{If \code{TRUE}, the default, will also update
 any out of date dependencies.}
@@ -55,7 +55,7 @@ It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
 \item{force}{whether to force installation of dependencies even if they
 have not been updated from the previously installed version.}
 
-\item{...}{additional arguments passed to \code{\link{install.packages}}
+\item{...}{additional arguments passed to \code{\link[=install.packages]{install.packages()}}
 when installing dependencies. \code{pkg} is installed with
 \code{R CMD INSTALL}.}
 }
@@ -72,13 +72,13 @@ it from a temporary directory. This is slower, but keeps the source
 directory pristine.
 
 If the package is loaded, it will be reloaded after installation. This is
-not always completely possible, see \code{\link{reload}} for caveats.
+not always completely possible, see \code{\link[=reload]{reload()}} for caveats.
 
-To install a package in a non-default library, use \code{\link[withr]{with_libpaths}}.
+To install a package in a non-default library, use \code{\link[withr:with_libpaths]{withr::with_libpaths()}}.
 }
 \seealso{
-\code{\link{update_packages}} to update installed packages from the
-source location and \code{\link{with_debug}} to install packages with
+\code{\link[=update_packages]{update_packages()}} to update installed packages from the
+source location and \code{\link[=with_debug]{with_debug()}} to install packages with
 debugging flags set.
 
 Other package installation: \code{\link{uninstall}}

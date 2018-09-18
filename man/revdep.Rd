@@ -24,7 +24,7 @@ to follow.}
 
 \item{ignore}{A character vector of package names to ignore. These packages
 will not appear in returned vector. This is used in
-\code{\link{revdep_check}} to avoid packages with installation problems
+\code{\link[=revdep_check]{revdep_check()}} to avoid packages with installation problems
 or extremely long check times.}
 
 \item{bioconductor}{If \code{TRUE} also look for dependencies amongst
@@ -47,6 +47,6 @@ revdep("ggplot2", ignore = c("xkcd", "zoo"))
 }
 }
 \seealso{
-\code{\link{revdep_check}()} to run R CMD check on all reverse
-  dependencies.
+\code{\link[=revdep_check]{revdep_check()}} to run R CMD check on all reverse
+dependencies.
 }

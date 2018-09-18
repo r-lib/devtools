@@ -8,7 +8,7 @@ loaded_packages()
 }
 \value{
 A data frame with columns package and path, giving the name of
-  each package and the path it was loaded from.
+each package and the path it was loaded from.
 }
 \description{
 Return a vector of names of attached packages

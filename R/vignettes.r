@@ -1,32 +1,32 @@
 #' Build package vignettes.
 #'
-#' Builds package vignettes using the same algorithm that \code{R CMD build}
+#' Builds package vignettes using the same algorithm that `R CMD build`
 #' does. This means including non-Sweave vignettes, using makefiles (if
 #' present), and copying over extra files. The files are copied in the 'doc'
 #' directory and an vignette index is created in 'Meta/vignette.rds', as they
 #' would be in a built package. 'doc' and 'Meta' are added to
-#' \code{.Rbuildignore}, so will not be included in the built package. These
+#' `.Rbuildignore`, so will not be included in the built package. These
 #' files can be checked into version control, so they can be viewed with
-#' \code{browseVignettes()} and \code{vignette()} if the package has been
-#' loaded with \code{load_all()} without needing to re-build them locally.
+#' `browseVignettes()` and `vignette()` if the package has been
+#' loaded with `load_all()` without needing to re-build them locally.
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
-#' @param quiet If \code{TRUE}, suppresses most output. Set to \code{FALSE}
+#'   [as.package()] for more information
+#' @param quiet If `TRUE`, suppresses most output. Set to `FALSE`
 #'   if you need to debug.
-#' @param install If \code{TRUE}, install the package before building
+#' @param install If `TRUE`, install the package before building
 #'   vignettes.
-#' @param keep_md If \code{TRUE}, move md intermediates as well as rendered
+#' @param keep_md If `TRUE`, move md intermediates as well as rendered
 #'   outputs. Most useful when using the `keep_md` YAML option for Rmarkdown
 #'   outputs. See
-#'   \url{https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown}.
+#'   <https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown>.
 #' @inheritParams tools::buildVignettes
 #' @inheritParams remotes::install_deps
 #' @keywords programming
-#' @seealso \code{\link{clean_vignettes}} to remove the pdfs in
+#' @seealso [clean_vignettes()] to remove the pdfs in
 #'   \file{doc} created from vignettes
 #' @export
-#' @seealso \code{\link{clean_vignettes}} to remove build tex/pdf files.
+#' @seealso [clean_vignettes()] to remove build tex/pdf files.
 build_vignettes <- function(pkg = ".",
                             dependencies = "VignetteBuilder",
                             clean = TRUE,
@@ -92,7 +92,7 @@ create_vignette_index <- function(pkg, vigns) {
 #' with a name that exists in \file{vignettes} are removed.
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
+#'   [as.package()] for more information
 #' @export
 clean_vignettes <- function(pkg = ".") {
   pkg <- as.package(pkg)

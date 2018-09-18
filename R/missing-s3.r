@@ -3,7 +3,7 @@
 #' The method is heuristic - looking for objs with a period in their name.
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
+#'   [as.package()] for more information
 #' @export
 missing_s3 <- function(pkg = ".") {
   pkg <- as.package(pkg)

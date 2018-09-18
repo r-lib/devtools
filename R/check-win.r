@@ -1,17 +1,17 @@
 #' Build windows binary package.
 #'
 #' This function works by bundling source package, and then uploading to
-#' \url{http://win-builder.r-project.org/}.  Once building is complete you'll
+#' <http://win-builder.r-project.org/>.  Once building is complete you'll
 #' receive a link to the built package in the email address listed in the
 #' maintainer field.  It usually takes around 30 minutes. As a side effect,
-#' win-build also runs \code{R CMD check} on the package, so \code{build_win}
+#' win-build also runs `R CMD check` on the package, so `build_win`
 #' is also useful to check that your package is ok on windows.
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
+#'   [as.package()] for more information
 #' @inheritParams pkgbuild::build
-#' @param quiet If \code{TRUE}, suppresses output.
-#' @param ... Additional arguments passed to \code{\link[pkgbuild]{build}}.
+#' @param quiet If `TRUE`, suppresses output.
+#' @param ... Additional arguments passed to [pkgbuild::build()].
 #' @family build functions
 #' @name check_win
 NULL

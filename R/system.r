@@ -1,13 +1,13 @@
 #' Run a system command and check if it succeeds.
 #'
-#' @param cmd Command to run. Will be quoted by \code{\link{shQuote}()}.
+#' @param cmd Command to run. Will be quoted by [shQuote()].
 #' @param args A character vector of arguments.
 #' @param env_vars A named character vector of environment variables.
 #' @param path Path in which to execute the command
-#' @param quiet If \code{FALSE}, the command to be run will be echoed.
-#' @param throw If \code{TRUE}, will throw an error if the command fails
+#' @param quiet If `FALSE`, the command to be run will be echoed.
+#' @param throw If `TRUE`, will throw an error if the command fails
 #'   (i.e. the return value is not 0).
-#' @param ... additional arguments passed to \code{\link[base]{system}}
+#' @param ... additional arguments passed to [base::system()]
 #' @keywords internal
 #' @export
 #' @return The exit status of the command, invisibly.
@@ -41,8 +41,8 @@ system_check <- function(cmd, args = character(), env_vars = character(),
 }
 
 #' @noRd
-#' @param out_file Path of file to which output is written if \code{quiet} is
-#'   \code{TRUE}
+#' @param out_file Path of file to which output is written if `quiet` is
+#'   `TRUE`
 system2_check <- function(cmd, args = character(), env_vars = character(),
                           path = ".", quiet = FALSE, throw = TRUE,
                           out_file = NULL, ...) {
@@ -85,7 +85,7 @@ system2_check <- function(cmd, args = character(), env_vars = character(),
 #' Run a system command and capture the output.
 #'
 #' @inheritParams system_check
-#' @param ... additional arguments passed to \code{\link[base]{system}}
+#' @param ... additional arguments passed to [base::system()]
 #' @return command output if the command succeeds, an error will be thrown if
 #'   the command fails.
 #' @keywords internal

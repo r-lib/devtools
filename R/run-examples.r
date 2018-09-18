@@ -6,23 +6,23 @@
 #' making it possible to run all examples from an R function.
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
+#'   [as.package()] for more information
 #' @param start Where to start running the examples: this can either be the
-#'   name of \code{Rd} file to start with (with or without extensions), or
+#'   name of `Rd` file to start with (with or without extensions), or
 #'   a topic name. If omitted, will start with the (lexicographically) first
 #'   file. This is useful if you have a lot of examples and don't want to
 #'   rerun them every time you fix a problem.
 #' @family example functions
 #' @param show DEPRECATED.
-#' @param test if \code{TRUE}, code in \code{\\donttest{}} will be commented
-#'   out. If \code{FALSE}, code in \code{\\testonly{}} will be commented out.
-#' @param run if \code{TRUE}, code in \code{\\dontrun{}} will be commented
+#' @param test if `TRUE`, code in \code{\\donttest{}} will be commented
+#'   out. If `FALSE`, code in \code{\\testonly{}} will be commented out.
+#' @param run if `TRUE`, code in \code{\\dontrun{}} will be commented
 #'   out.
-#' @param fresh if \code{TRUE}, will be run in a fresh R session. This has
+#' @param fresh if `TRUE`, will be run in a fresh R session. This has
 #'   the advantage that there's no way the examples can depend on anything in
-#'   the current session, but interactive code (like \code{\link{browser}})
+#'   the current session, but interactive code (like [browser()])
 #'   won't work.
-#' @param document if \code{TRUE}, \code{\link{document}} will be run to ensure
+#' @param document if `TRUE`, [document()] will be run to ensure
 #'   examples are updated before running them.
 #' @keywords programming
 #' @export

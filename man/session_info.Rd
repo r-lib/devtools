@@ -15,7 +15,7 @@ all dependencies of the package.}
 false since base packages should always match the R version.}
 }
 \description{
-This is \code{\link{sessionInfo}()} re-written from scratch to both exclude
+This is \code{\link[=sessionInfo]{sessionInfo()}} re-written from scratch to both exclude
 data that's rarely useful (e.g., the full collate string or base packages
 loaded) and include stuff you'd like to know (e.g., where a package was
 installed from).

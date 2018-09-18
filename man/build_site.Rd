@@ -11,9 +11,9 @@ build_site(path = ".", quiet = TRUE, ...)
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
-\item{...}{additional arguments passed to [pkgdown::build_site()]}
+\item{...}{additional arguments passed to \code{\link[pkgdown:build_site]{pkgdown::build_site()}}}
 }
 \description{
-`build_site()` is a shortcut for [pkgdown::build_site()], it generates the
-  static HTML documentation.
+\code{build_site()} is a shortcut for \code{\link[pkgdown:build_site]{pkgdown::build_site()}}, it generates the
+static HTML documentation.
 }

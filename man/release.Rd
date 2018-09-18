@@ -8,7 +8,7 @@ release(pkg = ".", check = FALSE, args = NULL)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{check}{if \code{TRUE}, run checking, otherwise omit it.  This
 is useful if you've just checked your package and you're ready to
@@ -24,10 +24,10 @@ Run automated and manual tests, then post package to CRAN.
 The package release process will:
 
 \itemize{
-  \item Confirm that the package passes \code{R CMD check} on relevant platoforms
-  \item Confirm that important files are up-to-date
-  \item Build the package
-  \item Submit the package to CRAN, using comments in "cran-comments.md"
+\item Confirm that the package passes \code{R CMD check} on relevant platoforms
+\item Confirm that important files are up-to-date
+\item Build the package
+\item Submit the package to CRAN, using comments in "cran-comments.md"
 }
 
 You can add arbitrary extra questions by defining an (un-exported) function

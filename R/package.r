@@ -7,7 +7,7 @@
 #' }
 #' @param x object to coerce to a package
 #' @param create only relevant if a package structure does not exist yet: if
-#'   \code{TRUE}, create a package structure; if \code{NA}, ask the user
+#'   `TRUE`, create a package structure; if `NA`, ask the user
 #'   (in interactive mode only)
 #' @export
 #' @keywords internal
@@ -21,7 +21,7 @@ as.package <- function(x = NULL, create = NA) {
 #' Find file in a package.
 #'
 #' It always starts by walking up the path until it finds the root directory,
-#' i.e. a directory containing \code{DESCRIPTION}. If it cannot find the root
+#' i.e. a directory containing `DESCRIPTION`. If it cannot find the root
 #' directory, or it can't find the specified path, it will throw an error.
 #'
 #' @param ... Components of the path.

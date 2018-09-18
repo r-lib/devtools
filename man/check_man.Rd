@@ -8,7 +8,7 @@ check_man(pkg = ".")
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 }
 \value{
 Nothing. This function is called purely for it's side effects: if

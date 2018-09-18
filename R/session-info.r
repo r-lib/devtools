@@ -30,12 +30,12 @@ dev_packages <- function() {
 
 #' Print session information
 #'
-#' This is \code{\link{sessionInfo}()} re-written from scratch to both exclude
+#' This is [sessionInfo()] re-written from scratch to both exclude
 #' data that's rarely useful (e.g., the full collate string or base packages
 #' loaded) and include stuff you'd like to know (e.g., where a package was
 #' installed from).
 #'
-#' @param pkgs Either a vector of package names or NULL. If \code{NULL},
+#' @param pkgs Either a vector of package names or NULL. If `NULL`,
 #'   displays all loaded packages. If a character vector, also, includes
 #'   all dependencies of the package.
 #' @param include_base Include base packages in summary? By default this is

@@ -9,7 +9,7 @@ source_url(url, ..., sha1 = NULL)
 \arguments{
 \item{url}{url}
 
-\item{...}{other options passed to \code{\link{source}}}
+\item{...}{other options passed to \code{\link[=source]{source()}}}
 
 \item{sha1}{The (prefix of the) SHA-1 hash of the file at the remote URL.}
 }
@@ -39,5 +39,5 @@ source_url("https://gist.github.com/hadley/6872663/raw/hi.r",
 }
 }
 \seealso{
-\code{\link{source_gist}}
+\code{\link[=source_gist]{source_gist()}}
 }

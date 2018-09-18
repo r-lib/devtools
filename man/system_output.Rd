@@ -8,7 +8,7 @@ system_output(cmd, args = character(), env_vars = character(),
   path = ".", quiet = FALSE, ...)
 }
 \arguments{
-\item{cmd}{Command to run. Will be quoted by \code{\link{shQuote}()}.}
+\item{cmd}{Command to run. Will be quoted by \code{\link[=shQuote]{shQuote()}}.}
 
 \item{args}{A character vector of arguments.}
 
@@ -18,11 +18,11 @@ system_output(cmd, args = character(), env_vars = character(),
 
 \item{quiet}{If \code{FALSE}, the command to be run will be echoed.}
 
-\item{...}{additional arguments passed to \code{\link[base]{system}}}
+\item{...}{additional arguments passed to \code{\link[base:system]{base::system()}}}
 }
 \value{
 command output if the command succeeds, an error will be thrown if
-  the command fails.
+the command fails.
 }
 \description{
 Run a system command and capture the output.

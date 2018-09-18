@@ -8,7 +8,7 @@ submit_cran(pkg = ".", args = NULL)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
-\code{\link{as.package}} for more information}
+\code{\link[=as.package]{as.package()}} for more information}
 
 \item{args}{An optional character vector of additional command
 line arguments to be passed to \code{R CMD build}.}
@@ -19,7 +19,7 @@ will receive an email asking you to confirm submission - this is used
 to check that the package is submitted by the maintainer.
 }
 \details{
-It's recommended that you use \code{\link{release}()} rather than this
+It's recommended that you use \code{\link[=release]{release()}} rather than this
 function as it performs more checks prior to submission.
 }
 \keyword{internal}

@@ -1,58 +1,58 @@
 #' Install a local development package.
 #'
-#' Uses \code{R CMD INSTALL} to install the package. Will also try to install
+#' Uses `R CMD INSTALL` to install the package. Will also try to install
 #' dependencies of the package from CRAN, if they're not already installed.
 #'
 #' By default, installation takes place using the current package directory.
 #' If you have compiled code, this means that artefacts of compilation will be
-#' created in the \code{src/} directory. If you want to avoid this, you can
-#' use \code{build = TRUE} to first build a package bundle and then install
+#' created in the `src/` directory. If you want to avoid this, you can
+#' use `build = TRUE` to first build a package bundle and then install
 #' it from a temporary directory. This is slower, but keeps the source
 #' directory pristine.
 #'
 #' If the package is loaded, it will be reloaded after installation. This is
-#' not always completely possible, see \code{\link{reload}} for caveats.
+#' not always completely possible, see [reload()] for caveats.
 #'
-#' To install a package in a non-default library, use \code{\link[withr]{with_libpaths}}.
+#' To install a package in a non-default library, use [withr::with_libpaths()].
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information
-#' @param reload if \code{TRUE} (the default), will automatically reload the
+#'   [as.package()] for more information
+#' @param reload if `TRUE` (the default), will automatically reload the
 #'   package after installing.
-#' @param quick if \code{TRUE} skips docs, multiple-architectures,
+#' @param quick if `TRUE` skips docs, multiple-architectures,
 #'   demos, and vignettes, to make installation as fast as possible.
-#' @param build if \code{TRUE} \code{\link[pkgbuild]{build}}s the package first:
+#' @param build if `TRUE` [pkgbuild::build()]s the package first:
 #'   this ensures that the installation is completely clean, and prevents any
-#'   binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
+#'   binary artefacts (like \file{.o}, `.so`) from appearing in your local
 #'   package directory, but is considerably slower, because every compile has
 #'   to start from scratch.
 #' @param args An optional character vector of additional command line
-#'   arguments to be passed to \code{R CMD INSTALL}. This defaults to the
-#'   value of the option \code{"devtools.install.args"}.
-#' @param quiet if \code{TRUE} suppresses output from this function.
-#' @param dependencies \code{logical} indicating to also install uninstalled
-#'   packages which this \code{pkg} depends on/links to/suggests. See
-#'   argument \code{dependencies} of \code{\link{install.packages}}.
-#' @param upgrade If \code{TRUE}, the default, will also update
+#'   arguments to be passed to `R CMD INSTALL`. This defaults to the
+#'   value of the option `"devtools.install.args"`.
+#' @param quiet if `TRUE` suppresses output from this function.
+#' @param dependencies `logical` indicating to also install uninstalled
+#'   packages which this `pkg` depends on/links to/suggests. See
+#'   argument `dependencies` of [install.packages()].
+#' @param upgrade If `TRUE`, the default, will also update
 #'   any out of date dependencies.
-#' @param build_vignettes if \code{TRUE}, will build vignettes. Normally it is
-#'   \code{build} that's responsible for creating vignettes; this argument makes
+#' @param build_vignettes if `TRUE`, will build vignettes. Normally it is
+#'   `build` that's responsible for creating vignettes; this argument makes
 #'   sure vignettes are built even if a build never happens (i.e. because
-#'   \code{local = TRUE}).
-#' @param keep_source If \code{TRUE} will keep the srcrefs from an installed
+#'   `local = TRUE`).
+#' @param keep_source If `TRUE` will keep the srcrefs from an installed
 #'   package. This is useful for debugging (especially inside of RStudio).
-#'   It defaults to the option \code{"keep.source.pkgs"}.
+#'   It defaults to the option `"keep.source.pkgs"`.
 #' @param threads number of concurrent threads to use for installing
 #'   dependencies.
-#'   It defaults to the option \code{"Ncpus"} or \code{1} if unset.
+#'   It defaults to the option `"Ncpus"` or `1` if unset.
 #' @param force whether to force installation of dependencies even if they
 #'   have not been updated from the previously installed version.
-#' @param ... additional arguments passed to \code{\link{install.packages}}
-#'   when installing dependencies. \code{pkg} is installed with
-#'   \code{R CMD INSTALL}.
+#' @param ... additional arguments passed to [install.packages()]
+#'   when installing dependencies. `pkg` is installed with
+#'   `R CMD INSTALL`.
 #' @family package installation
-#' @seealso \code{\link{update_packages}} to update installed packages from the
-#' source location and \code{\link{with_debug}} to install packages with
+#' @seealso [update_packages()] to update installed packages from the
+#' source location and [with_debug()] to install packages with
 #' debugging flags set.
 #' @export
 install <-

@@ -28,7 +28,7 @@ in the NAMESPACE file.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
-\item{...}{Additional arguments passed to [pkgload::load].}
+\item{...}{Additional arguments passed to \code{\link[pkgload:load_all]{pkgload::load_all()}}.}
 }
 \description{
 \code{load_all} loads a package. It roughly simulates what happens

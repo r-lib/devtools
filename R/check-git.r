@@ -1,10 +1,10 @@
 #' Git checks.
 #'
 #' This function performs Git checks checks prior to release. It is called
-#' automatically by \code{\link{release}()}.
+#' automatically by [release()].
 #'
 #' @param pkg package description, can be path or package name.  See
-#'   \code{\link{as.package}} for more information.
+#'   [as.package()] for more information.
 #' @keywords internal
 git_checks <- function(pkg = ".") {
   pkg <- as.package(pkg)
