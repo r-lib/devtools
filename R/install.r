@@ -81,7 +81,6 @@ install <-
     }
 
     opts <- c(
-      paste("--library=", .libPaths()[1], sep = ""),
       if (keep_source) "--with-keep.source",
       "--install-tests"
     )
@@ -99,6 +98,7 @@ install <-
     if (reload) {
       reload(pkg, quiet = quiet)
     }
+
     invisible(TRUE)
   }
 
