@@ -1,6 +1,6 @@
-# devtools 1.13.6.9000
+# devtools development
 
-## Breaking Changes
+## Breaking changes
 
 * `devtools::install()` arguments have been changed as follows.
   - `force_deps` -> `force`
@@ -35,21 +35,59 @@
 * The `revdep_check_*` functions have been deprecated in favor of the
   **revdepcheck** package.
 
-## Changes
+## Major changes
+
+* All `install_*()` functions are now re-exported from remotes rather than being defined in devtools.
+
+* devtools now depends on roxygen2 6.1.0: this considerably simplifies 
+  `devtools::document()` and makes it more consistent with 
+  `roxygen2::roxygenise()`.
+
+* Bioconductor support now provided by the BiocManager CRAN package instead of
+  BiocInstaller (for R versions 3.5+) (#1833).
+
+* `test_file()` function added to test one or more files from a package
+  (#1755).
+
+* New `test_coverage()` provides helper to compute test coverage using covr
+  (#1628).
+
+* `test_file_coverage()` function added to show the test coverage of one or
+  more files from a package. (#1755).
+
+* `session_info()` now uses the implementation in the **sessioninfo** package.
+
+* Infrastructure functions (`use_*`) now use the implementations in **usethis**.
+
+* `check()` now uses **rcmdcheck** to run and parse R CMD check output (#1153).
+
+* Code related to simulating package loading has been pulled out into a 
+  separate package, **pkgload**. The following functions have been moved to 
+  pkgload without a shim: `clean_dll()`, `compile_dll()`, `dev_example()`, 
+  `dev_help()`, `dev_meta()`, `find_topic()`, `imports_env()`, `inst()`, 
+  `load_code()`, `load_dll()`, `ns_env()`, `parse_ns_file()`, `pkg_env()`. 
+  These functions are primarily for internal use.
+
+    `load_all()` and `unload()` have been moved to pkgload, but devtools
+    provides shims since these are commonly used.
+
+* `find_rtools()`, `setup_rtools()`, `has_devel()`, `compiler_flags()`,
+  `build()` and `with_debug()` have moved to the new **pkgbuild** package.
+  `build()` and `with_debug()` are re-exported by devtools.
+
+* The `spell_check()` code has been moved into the new **spelling** package and
+  has thereby gained support for vignettes and package wordlists. The devtools
+  function now wraps `spelling::spell_check_package()`.
+
+## Bugfixes and additional changes
 
 * `reload()` now reloads loaded but not attached packages as well as attached ones.
 
 * Executed `styler::style_pkg()` to update code style (#1851, @amundsenjunior).
 
-* All `install_*()` functions are now re-exported from remotes rather than being defined in devtools.
-
 * `save_all()` helper function wraps `rstudioapi::documentSaveAll()` calls (#1850, @amundsenjunior).
 
 * `check()` now allows users to run without `--timings` (#1655)
-
-* devtools now depends on roxygen2 6.1.0: this considerably simplifies 
-  `devtools::document()` and makes it more consistent with 
-  `roxygen2::roxygenise()`.
 
 * `update_packages()` better documented to advertise it can be used to update
   packages installed by any of the `install_*` functions.
@@ -57,9 +95,6 @@
 * `check()` gains a `incoming` option to toggle the CRAN incoming checks.
 
 * `build_vignette()` gains a `keep_md` option to allow keeping the intermediate markdown output (#1726)
-
-* Bioconductor support now provided by the BiocManager CRAN package instead of
-  BiocInstaller (for R versions 3.5+) (#1833).
 
 * `remote_sha.github()` now correctly looks up SHA in private repositories
   (#1827, @renozao).
@@ -95,25 +130,6 @@
 
 * add pkgdown site (https://devtools.r-lib.org) (#1779, @jayhesselberth)
 
-* local remotes now use the package version as the RemoteSha unless they were installed from a git commit
-  with a clean working directory. This prevents unwanted reinstalls for development packages in possibly 
-  undesired states (@lionel-, #1804).
-
-* `install_gitlab()` function added to install repositories from GitLab,
-  (#1249, #716).
-
-
-* `test_file_coverage()` function added to show the test coverage of one or
-  more files from a package. (#1755).
-
-* `test_file()` function added to test one or more files from a package
-  (#1755).
-
-* `install_remote()` now uses the repo and type arguments from the remote
-  rather than using the argument passed to `...` (#1747).
-
-* `install_packages()` now correctly passes a list of options to `withr::with_options()` (@renozao, #1749).
-
 * `install_version()` can now install current version of CRAN package on Windows
   and macOS (@jdblischak, #1730)
 
@@ -122,14 +138,6 @@
 * `check()` and `check_built()` now have an `error_on` argument to specify if
   they should throw an error on check failures. When run non-interactively this
   is set to "warnings" unless specified.
-
-* `install_bioc()` has been updated to use git repositories instead of svn 
-  (@rcannood, #1649, #1705).
-
-* `install()` functions now work with git Remotes when the remote git server
-  does not support `git archive`. (#1689)
-
-* `install_local()` now works for package tarballs as documented (#1656).
 
 * `check()` now sets `_R_CHECK_CRAN_INCOMING_REMOTE_` instead of
   `_R_CHECK_CRAN_INCOMING_`on R versions which support the former option
@@ -140,9 +148,6 @@
 
 * `release()` has been tweaked to reflect modern submission workflow and to 
   ask questions rather than running code for you (#1632). 
-
-* New `test_coverage()` provides helper to compute test coverage using covr
-  (#1628).
 
 * `document()`, `load_all()`, `check()`, `build()` and `test()` now
   automatically save open files when they are run inside the RStudio IDE. (#1576)
@@ -166,40 +171,21 @@
 
 * `check()` defaults to running `document()` only if you have used
   roxygen previously (#1437).
+
 * Signal an error if commas are missing in between remote entries (#1511,
   @ianmcook).
 
 * `build_vignettes()` gains a quiet argument (#1543).
 
-* `session_info()` now uses the implementation in the **sessioninfo** package.
-
 * `source_gist()` works once more when there is only a single file
   in the gist (#1266).
-* Infrastructure functions (`use_*`) now use the implementations in **usethis**.
-* Use rcmdcheck to run and parse R CMD check output (#1153).
 
-* The `spell_check()` code has been moved into the new **spelling** package and
-  has thereby gained support for vignettes and package wordlists. The devtools 
-  function now wraps `spelling::spell_check_package()`.
-  
 * In order to not run test helpers in `document()`, the `helpers` argument of
   `load_all()` is set to `FALSE` (@nbenn, #1669)
 
-* The `my_unzip()` function is now able to use the `utils::unzip` fallback when R is compiled from source with no *unzip* package present (@theGreatWhiteShark, #1678)
-
-* Code related to simulating package loading has been pulled out into a 
-  separate package, pkgload. The following functions have been moved to 
-  pkgload without a shim: `clean_dll()`, `compile_dll()`, `dev_example()`, 
-  `dev_help()`, `dev_meta()`, `find_topic()`, `imports_env()`, `inst()`, 
-  `load_code()`, `load_dll()`, `ns_env()`, `parse_ns_file()`, `pkg_env()`. 
-  These functions are primarily for internal use.
-
-    `load_all()` and `unload()` have been moved to pkgload, but devtools
-    provides shims since these are commonly used.
-
-* `find_rtools()`, `setup_rtools()`, `has_devel()`, `compiler_flags()`,
-  `build()` and `with_debug()` have moved to the new pkgbuild package.
-  `build()` and `with_debug()` are re-exported by devtools.
+* The `my_unzip()` function is now able to use the `utils::unzip` fallback when
+  R is compiled from source with no *unzip* package present
+  (@theGreatWhiteShark, #1678)
 
 * If the **foghorn** package is installed, `release()` displays the results
   of the CRAN checks (#1672, @fmichonneau).
