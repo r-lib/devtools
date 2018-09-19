@@ -9,7 +9,7 @@ check_cran <- function(pkgs, libpath = file.path(tempdir(), "R-lib"),
                        install_dir = tempfile("check_cran_install"),
                        env_vars = NULL,
                        quiet_check = TRUE) {
-  .Deprecated("rcmdcheck::revdep_check()", package = "devtools")
+  .Deprecated("revdepcheck::revdep_check()", package = "devtools")
 }
 
 parse_check_time <- function(path) {
