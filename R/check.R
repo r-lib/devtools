@@ -94,8 +94,7 @@ check <- function(pkg = ".",
     cat_rule(
       left = "Building",
       right = pkg$package,
-      background_col = "blue",
-      col = "white"
+      col = "cyan"
     )
     show_env_vars(pkgbuild::compiler_flags(FALSE))
   }
@@ -104,8 +103,8 @@ check <- function(pkg = ".",
     built_path <- pkgbuild::build(
       pkg$path,
       tempdir(),
-      quiet = quiet,
       args = build_args,
+      quiet = quiet,
       manual = manual,
       ...
     )
@@ -187,10 +186,9 @@ check_built <- function(path = NULL, cran = TRUE,
     cat_rule(
       left = "Checking",
       right = pkgname,
-      background_col = "blue",
-      col = "white"
+      col = "cyan"
     )
-    show_env_vars(env_vars)
+    show_env_vars(env_vars, trailing = FALSE)
   }
 
   withr::with_envvar(env_vars, action = "prefix", {
@@ -221,8 +219,10 @@ aspell_env_var <- function() {
   }, error = function(e) character())
 }
 
-show_env_vars <- function(env_vars) {
+show_env_vars <- function(env_vars, trailing = TRUE) {
   cat_line("Setting env vars:", col = "darkgrey")
   cat_bullet(paste0(format(names(env_vars)), ": ", unname(env_vars)), col = "darkgrey")
-  cat_rule(col = "darkgrey")
+  if (trailing) {
+    cat_rule(col = "cyan")
+  }
 }

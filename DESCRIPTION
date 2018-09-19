@@ -26,7 +26,7 @@ Imports:
     methods,
     pkgbuild,
     pkgload,
-    rcmdcheck,
+    rcmdcheck (>= 1.3.0),
     remotes,
     rstudioapi (>= 0.6.0.9000),
     sessioninfo,
@@ -63,7 +63,6 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 Remotes:
     r-lib/remotes,
-    r-lib/covr,
-    r-lib/rcmdcheck
+    r-lib/covr
 RoxygenNote: 6.1.0
 Roxygen: list(markdown = TRUE)

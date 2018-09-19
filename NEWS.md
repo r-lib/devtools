@@ -81,6 +81,8 @@
 
 ## Bugfixes and additional changes
 
+* `check()` output now works more nicely with recent changes to rcmdcheck (#1874).
+
 * `reload()` now reloads loaded but not attached packages as well as attached ones.
 
 * Executed `styler::style_pkg()` to update code style (#1851, @amundsenjunior).
