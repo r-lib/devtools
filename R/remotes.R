@@ -18,6 +18,14 @@ remotes::install_git
 #' @export
 remotes::install_github
 
+#' @importFrom remotes github_pull
+#' @export
+remotes::github_pull
+
+#' @importFrom remotes github_release
+#' @export
+remotes::github_release
+
 #' @importFrom remotes install_gitlab
 #' @export
 remotes::install_gitlab
