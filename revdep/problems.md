@@ -1,41 +1,19 @@
 # abjutils
 
-Version: 0.0.1
+Version: 0.2.1
 
 ## In both
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      rm_accent(umlaut) not equal to `nudeUmlaut`.
-      1/1 mismatches
-      x[1]: "\"a\"e\"i\"o\"u\"A\"E\"I\"O\"U\"y"
-      y[1]: "aeiouAEIOUy"
-      
-      
-      testthat results ================================================================
-      OK: 10 SKIPPED: 0 FAILED: 4
-      1. Failure: rm_accent is the converted version of a string with all non-ASCII characters removed. (@test-rm_accent.R#30) 
-      2. Failure: rm_accent is the converted version of a string with all non-ASCII characters removed. (@test-rm_accent.R#32) 
-      3. Failure: rm_accent is the converted version of a string with all non-ASCII characters removed. (@test-rm_accent.R#33) 
-      4. Failure: rm_accent is the converted version of a string with all non-ASCII characters removed. (@test-rm_accent.R#34) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
 
 *   checking dependencies in R code ... NOTE
     ```
     Namespaces in Imports field not imported from:
-      ‘devtools’ ‘httr’
+      ‘httr’ ‘progress’
       All declared Imports should be used.
     ```
 
 # adapr
 
-Version: 1.0.2
+Version: 2.0.0
 
 ## In both
 
@@ -44,11 +22,36 @@ Version: 1.0.2
     Namespaces in Imports field not imported from:
       ‘plotly’ ‘shinydashboard’
       All declared Imports should be used.
+    Missing or unexported object: ‘devtools::clean_source’
     ```
 
 # alphavantager
 
 Version: 0.1.0
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      2: stop(content, call. = F) at .../revdep/checks.noindex/alphavantager/new/alphavantager.Rcheck/00_pkg_src/alphavantager/R/av_get.R:103
+      
+      ── 3. Error: call Technical Indicators (@test_av_get.R#57)  ────────────────────
+      Thank you for using Alpha Vantage! Please visit https://www.alphavantage.co/premium/ if you would like to have a higher API call volume.. API parameters used: symbol=MSFT, function=SMA, interval=monthly, time_period=60, series_type=close, apikey=HIDDEN_FOR_YOUR_SAFETY
+      1: av_get(symbol, av_fun, interval = interval, time_period = time_period, series_type = series_type) at testthat/test_av_get.R:57
+      2: stop(content, call. = F) at .../revdep/checks.noindex/alphavantager/new/alphavantager.Rcheck/00_pkg_src/alphavantager/R/av_get.R:103
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 5 SKIPPED: 0 FAILED: 3
+      1. Error: call TIMES_SERIES_INTRADAY (@test_av_get.R#13) 
+      2. Error: call SECTOR (@test_av_get.R#38) 
+      3. Error: call Technical Indicators (@test_av_get.R#57) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
 
 ## In both
 
@@ -58,35 +61,193 @@ Version: 0.1.0
       All declared Imports should be used.
     ```
 
-# annotatr
+# aMNLFA
 
-Version: 1.2.1
+Version: 0.1
 
 ## In both
 
-*   R CMD check timed out
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘devtools’ ‘gridExtra’
+      All declared Imports should be used.
+    ```
+
+# amt
+
+Version: 0.0.5.0
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    Attaching package: 'sp'
     
+    The following object is masked from 'package:amt':
+    
+        bbox
+    
+    
+    Attaching package: 'raster'
+    
+    The following object is masked from 'package:amt':
+    
+        select
+    
+    Warning in random_steps.steps_xy(., n = 15) :
+      Step-lengths or turning angles contained NA, which were removed.
+    Warning in random_steps.steps_xy(., n = 15) :
+      Step-lengths or turning angles contained NA, which were removed.
+    Quitting from lines 144-145 (p4_SSF.Rmd) 
+    Error: processing vignette 'p4_SSF.Rmd' failed with diagnostics:
+    'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
+    ```
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘Rcpp’ ‘magrittr’
+      All declared Imports should be used.
+    ```
+
+# annotatr
+
+Version: 1.6.0
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘annotatr-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: build_annotations
+    > ### Title: A function to build annotations from TxDb.* and AnnotationHub
+    > ###   resources
+    > ### Aliases: build_annotations
+    > 
+    > ### ** Examples
+    > 
+    > # Example with hg19 gene promoters
+    > annots = c('hg19_genes_promoters')
+    > annots_gr = build_annotations(genome = 'hg19', annotations = annots)
+    Error in build_gene_annots(genome = genome, annotations = gene_annotations) : 
+      The package TxDb.Hsapiens.UCSC.hg19.knownGene is not installed, please install it via Bioconductor.
+    Calls: build_annotations
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    snapshotDate(): 2018-04-30
+    Building annotation Gm12878 from AnnotationHub resource AH23256 ...
+    require("rtracklayer")
+    downloading 0 resources
+    loading from cache 
+        '/Users/jhester//.AnnotationHub/28684'
+    Quitting from lines 153-170 (annotatr-vignette.Rmd) 
+    Error: processing vignette 'annotatr-vignette.Rmd' failed with diagnostics:
+    The package TxDb.Hsapiens.UCSC.hg19.knownGene is not installed, please install it via Bioconductor.
+    Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Packages suggested but not available for checking:
+      ‘org.Dm.eg.db’ ‘org.Gg.eg.db’ ‘org.Hs.eg.db’ ‘org.Mm.eg.db’
+      ‘org.Rn.eg.db’ ‘TxDb.Dmelanogaster.UCSC.dm3.ensGene’
+      ‘TxDb.Dmelanogaster.UCSC.dm6.ensGene’
+      ‘TxDb.Ggallus.UCSC.galGal5.refGene’
+      ‘TxDb.Hsapiens.UCSC.hg19.knownGene’
+      ‘TxDb.Hsapiens.UCSC.hg38.knownGene’
+      ‘TxDb.Mmusculus.UCSC.mm9.knownGene’
+      ‘TxDb.Mmusculus.UCSC.mm10.knownGene’
+      ‘TxDb.Rnorvegicus.UCSC.rn4.ensGene’
+      ‘TxDb.Rnorvegicus.UCSC.rn5.refGene’
+      ‘TxDb.Rnorvegicus.UCSC.rn6.refGene’
+    ```
 
 *   checking R code for possible problems ... NOTE
     ```
     plot_coannotations: no visible binding for global variable ‘.’
-      (.../revdep/checks/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:176-178)
+      (.../revdep/checks.noindex/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:176-178)
     plot_numerical_coannotations: no visible binding for global variable
       ‘.’
-      (.../revdep/checks/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:412-429)
+      (.../revdep/checks.noindex/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:463-480)
     plot_numerical_coannotations: no visible binding for global variable
       ‘.’
-      (.../revdep/checks/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:415-420)
+      (.../revdep/checks.noindex/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:466-471)
     plot_numerical_coannotations: no visible binding for global variable
       ‘.’
-      (.../revdep/checks/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:422-427)
+      (.../revdep/checks.noindex/annotatr/new/annotatr.Rcheck/00_pkg_src/annotatr/R/visualize.R:473-478)
     Undefined global functions or variables:
       .
     ```
 
+# anomalize
+
+Version: 0.1.1
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.5Mb
+      sub-directories of 1Mb or more:
+        help   4.7Mb
+    ```
+
+# anyLib
+
+Version: 1.0.4
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘curl’ ‘httr’
+      All declared Imports should be used.
+    ```
+
 # archivist
 
-Version: 2.1.2
+Version: 2.3.1
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+    > 
+    > 
+    > createLocalRepo("ahistory_check", default = TRUE)
+    > library(dplyr)
+    
+    Attaching package: ‘dplyr’
+    
+    The following objects are masked from ‘package:stats’:
+    
+        filter, lag
+    
+    The following objects are masked from ‘package:base’:
+    
+        intersect, setdiff, setequal, union
+    
+    > iris %a%
+    + filter(Sepal.Length < 6) %a%
+    +  lm(Petal.Length~Species, data=.) %a%
+    +  summary() -> artifact
+    Error: ‘sessioninfo’ >= * must be installed for this functionality.
+    Execution halted
+    ```
 
 ## In both
 
@@ -97,12 +258,132 @@ Version: 2.1.2
 
 *   checking Rd cross-references ... NOTE
     ```
-    Package unavailable to check Rd xrefs: ‘archivist.github’
+    Packages unavailable to check Rd xrefs: ‘rmarkdown’, ‘archivist.github’
+    ```
+
+# assertive.code
+
+Version: 0.0-1
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      Attaching package: 'assertive.base'
+      
+      The following objects are masked from 'package:testthat':
+      
+          is_false, is_true
+      
+      > library(assertive.code)
+      > 
+      > with_envvar(
+      +   c(LANG = "en_US"),
+      +   test_check("assertive.code")
+      + )
+      Error in with_envvar(c(LANG = "en_US"), test_check("assertive.code")) : 
+        could not find function "with_envvar"
+      Execution halted
+    ```
+
+# assertive.data
+
+Version: 0.0-1
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(devtools)
+      > library(assertive.data)
+      > 
+      > with_envvar(
+      +   c(LANG = "en_US"),
+      +   test_check("assertive.data")
+      + )
+      Error in with_envvar(c(LANG = "en_US"), test_check("assertive.data")) : 
+        could not find function "with_envvar"
+      Execution halted
+    ```
+
+# assertive.data.uk
+
+Version: 0.0-1
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(devtools)
+      > library(assertive.data.uk)
+      > 
+      > with_envvar(
+      +   c(LANG = "en_US"),
+      +   test_check("assertive.data.uk")
+      + )
+      Error in with_envvar(c(LANG = "en_US"), test_check("assertive.data.uk")) : 
+        could not find function "with_envvar"
+      Execution halted
+    ```
+
+# assertive.data.us
+
+Version: 0.0-1
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(devtools)
+      > library(assertive.data.us)
+      > 
+      > with_envvar(
+      +   c(LANG = "en_US"),
+      +   test_check("assertive.data.us")
+      + )
+      Error in with_envvar(c(LANG = "en_US"), test_check("assertive.data.us")) : 
+        could not find function "with_envvar"
+      Execution halted
     ```
 
 # assertive.matrices
 
 Version: 0.0-1
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(devtools)
+      > library(assertive.matrices)
+      > 
+      > with_envvar(
+      +   c(LANG = "en_US"),
+      +   test_check("assertive.matrices")
+      + )
+      Error in with_envvar(c(LANG = "en_US"), test_check("assertive.matrices")) : 
+        could not find function "with_envvar"
+      Execution halted
+    ```
 
 ## In both
 
@@ -112,9 +393,165 @@ Version: 0.0-1
       See the note in ?`:::` about the use of this operator.
     ```
 
+# assertive.models
+
+Version: 0.0-1
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(devtools)
+      > library(assertive.models)
+      > 
+      > with_envvar(
+      +   c(LANG = "en_US"),
+      +   test_check("assertive.models")
+      + )
+      Error in with_envvar(c(LANG = "en_US"), test_check("assertive.models")) : 
+        could not find function "with_envvar"
+      Execution halted
+    ```
+
+# AUCell
+
+Version: 1.2.4
+
+## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Packages which this enhances but not available for checking: ‘doMC’ ‘doRNG’
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    'library' or 'require' call to ‘rbokeh’ in package code.
+      Please use :: or requireNamespace() instead.
+      See section 'Suggested packages' in the 'Writing R Extensions' manual.
+    ```
+
+*   checking R code for possible problems ... NOTE
+    ```
+    .cellProps_plotTsne: warning in adjustcolor(colorPal(10), alpha = 0.8):
+      partial argument match of 'alpha' to 'alpha.f'
+      (.../revdep/checks.noindex/AUCell/new/AUCell.Rcheck/00_pkg_src/AUCell/R/priv_plots.R:127)
+    AUCell_createViewerApp : <anonymous>: no visible global function
+      definition for ‘%>%’
+      (.../revdep/checks.noindex/AUCell/new/AUCell.Rcheck/00_pkg_src/AUCell/R/aux_createViewerApp.R:224-228)
+    AUCell_createViewerApp : <anonymous>: no visible binding for global
+      variable ‘tsne1’
+      (.../revdep/checks.noindex/AUCell/new/AUCell.Rcheck/00_pkg_src/AUCell/R/aux_createViewerApp.R:224-228)
+    AUCell_createViewerApp : <anonymous>: no visible binding for global
+      variable ‘tsne2’
+      (.../revdep/checks.noindex/AUCell/new/AUCell.Rcheck/00_pkg_src/AUCell/R/aux_createViewerApp.R:224-228)
+    AUCell_createViewerApp : <anonymous>: no visible binding for global
+      variable ‘cell’
+      (.../revdep/checks.noindex/AUCell/new/AUCell.Rcheck/00_pkg_src/AUCell/R/aux_createViewerApp.R:224-228)
+    Undefined global functions or variables:
+      %>% cell tsne1 tsne2
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘SingleCellExperiment’
+    ```
+
+*   checking for unstated dependencies in vignettes ... NOTE
+    ```
+    '::' or ':::' import not declared from: ‘reshape2’
+    ```
+
+# automagic
+
+Version: 0.3
+
+## Newly broken
+
+*   checking whether package ‘automagic’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘.../revdep/checks.noindex/automagic/new/automagic.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘automagic’ ...
+** package ‘automagic’ successfully unpacked and MD5 sums checked
+** R
+** byte-compile and prepare package for lazy loading
+Error : object ‘github_pull’ is not exported by 'namespace:devtools'
+ERROR: lazy loading failed for package ‘automagic’
+* removing ‘.../revdep/checks.noindex/automagic/new/automagic.Rcheck/automagic’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘automagic’ ...
+** package ‘automagic’ successfully unpacked and MD5 sums checked
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (automagic)
+
+```
+# baytrends
+
+Version: 1.0.7
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    ...
+     
+    
+    
+    
+    |Category     |Description                      |
+    |:------------|:--------------------------------|
+    |Name         |Jon B. Harcum, Ph.D.             |
+    |Organization |Tetra Tech, Inc.                 |
+    |Address      |313 Kings Way, Clemson, SC 29631 |
+    |Voice phone  |(864)650-5815                    |
+    |email        |jon.harcum@tetratech.com         |
+    
+    
+     
+    
+    
+    ##  
+    
+    ### Session Information
+    Error: ‘sessioninfo’ >= * must be installed for this functionality.
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.4Mb
+      sub-directories of 1Mb or more:
+        R         2.7Mb
+        data      1.0Mb
+        extdata   1.8Mb
+    ```
+
 # BEACH
 
-Version: 1.1.2
+Version: 1.2.1
 
 ## In both
 
@@ -124,9 +561,47 @@ Version: 1.1.2
       All declared Imports should be used.
     ```
 
+# beachmat
+
+Version: 1.2.1
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 24.8Mb
+      sub-directories of 1Mb or more:
+        doc    2.5Mb
+        lib   16.6Mb
+        libs   5.2Mb
+    ```
+
+# BETS
+
+Version: 0.4.4
+
+## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘mFilter’
+    ```
+
+# bigstep
+
+Version: 1.0.0
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘methods’
+      All declared Imports should be used.
+    ```
+
 # BiocCheck
 
-Version: 1.12.0
+Version: 1.16.0
 
 ## In both
 
@@ -144,6 +619,13 @@ Version: 1.12.0
     Package which this enhances but not available for checking: ‘codetoolsBioC’
     ```
 
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.4Mb
+      sub-directories of 1Mb or more:
+        unitTests   4.1Mb
+    ```
+
 *   checking dependencies in R code ... NOTE
     ```
     Unexported objects imported by ':::' calls:
@@ -151,73 +633,144 @@ Version: 1.12.0
       See the note in ?`:::` about the use of this operator.
     ```
 
-*   checking R code for possible problems ... NOTE
-    ```
-    checkValidDevelopmentURL: no visible global function definition for
-      ‘url.exists’
-      (.../revdep/checks/BiocCheck/new/BiocCheck.Rcheck/00_pkg_src/BiocCheck/R/checks.R:33-35)
-    Undefined global functions or variables:
-      url.exists
-    ```
+# BiocWorkflowTools
 
-# BiocInstaller
+Version: 1.6.2
 
-Version: 1.26.1
+## Newly broken
+
+*   checking examples ... WARNING
+    ```
+    Found the following significant warnings:
+    
+      Warning: 'create' is deprecated.
+      Warning: 'setup' is deprecated.
+      Warning: 'create_description' is deprecated.
+      Warning: 'use_rstudio' is deprecated.
+    Deprecated functions may be defunct as soon as of the next release of
+    R.
+    See ?Deprecated.
+    ```
 
 ## In both
 
+*   checking for hidden files and directories ... NOTE
+    ```
+    Found the following hidden files and directories:
+      .travis.yml
+    These were most likely included in error. See section ‘Package
+    structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
 *   checking dependencies in R code ... NOTE
     ```
-    'library' or 'require' call to ‘utils’ in package code.
-      Please use :: or requireNamespace() instead.
-      See section 'Suggested packages' in the 'Writing R Extensions' manual.
-    Unexported object imported by a ':::' call: ‘utils:::.clean_up_dependencies’
+    Unexported objects imported by ':::' calls:
+      ‘BiocStyle:::auth_affil_latex’ ‘BiocStyle:::modifyLines’
+      ‘rmarkdown:::partition_yaml_front_matter’
       See the note in ?`:::` about the use of this operator.
-    There are ::: calls to the package's namespace in its code. A package
-      almost never needs to use ::: for its own objects:
-      ‘.updateBiocInstallerFinish’ ‘.updateFinish’
     ```
 
 # BioInstaller
 
-Version: 0.2.2
+Version: 0.3.6
 
-## Newly broken
+## In both
 
 *   checking tests ...
     ```
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-             }
-             typeName = gsub("^CURLE_", "", typeName)
-             fun = (if (asError) 
-                 stop
-             else warning)
-             fun(structure(list(message = msg, call = sys.call()), class = c(typeName, "GenericCurlError", 
-                 "error", "condition")))
-         }(28L, "<not set>", TRUE)
-      
-      testthat results ================================================================
-      OK: 60 SKIPPED: 0 FAILED: 1
-      1. Error: download.file.custom is.dir (@test_utils.R#138) 
+      Please input y/n/Y/N!
+      /var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmphnLDFa/destdir.initial not empty, overwrite?[y]
+      More than 3 counts input, default is not to overwrite.
+      /var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmphnLDFa/destdir.initial existed, overwrite?[y]
+      Please input y/n/Y/N!
+      /var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmphnLDFa/destdir.initial existed, overwrite?[y]
+      Please input y/n/Y/N!
+      /var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmphnLDFa/destdir.initial existed, overwrite?[y]
+      More than 3 counts input, default is not to overwrite.
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 62 SKIPPED: 0 FAILED: 1
+      1. Error: install.github (@test_install.R#12) 
       
       Error: testthat unit tests failed
       Execution halted
     ```
 
-# biomartr
+*   checking installed package size ... NOTE
+    ```
+      installed size is 10.9Mb
+      sub-directories of 1Mb or more:
+        doc       2.5Mb
+        extdata   8.0Mb
+    ```
 
-Version: 0.5.2
+# biwavelet
+
+Version: 0.20.17
 
 ## In both
 
-*   R CMD check timed out
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘RColorBrewer’
+    ```
+
+# BloodCancerMultiOmics2017
+
+Version: 1.0.2
+
+## In both
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
     
+    The following objects are masked from 'package:IRanges':
+    
+        intersect, setdiff, union
+    
+    The following objects are masked from 'package:S4Vectors':
+    
+        intersect, setdiff, union
+    
+    The following objects are masked from 'package:BiocGenerics':
+    
+        intersect, setdiff, union
+    
+    The following objects are masked from 'package:base':
+    
+        intersect, setdiff, union
+    
+    Quitting from lines 46-92 (BloodCancerMultiOmics2017.Rmd) 
+    Error: processing vignette 'BloodCancerMultiOmics2017.Rmd' failed with diagnostics:
+    there is no package called 'org.Hs.eg.db'
+    Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘org.Hs.eg.db’
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 102.1Mb
+      sub-directories of 1Mb or more:
+        data     66.4Mb
+        doc      26.5Mb
+        extdata   8.5Mb
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘vsn’
+    ```
 
 # BrailleR
 
-Version: 0.26.0
+Version: 0.29.1
 
 ## In both
 
@@ -226,62 +779,234 @@ Version: 0.26.0
     Package suggested but not available for checking: ‘installr’
     ```
 
-# chimeraviz
+# cartools
 
-Version: 1.0.4
+Version: 0.1.0
 
 ## In both
 
-*   R CMD check timed out
-    
-
-*   checking package dependencies ... NOTE
+*   checking dependencies in R code ... NOTE
     ```
+    Namespaces in Imports field not imported from:
+      ‘animation’ ‘devtools’ ‘gapminder’ ‘knitr’ ‘rlist’ ‘rmarkdown’
+      ‘roxygen2’ ‘sde’ ‘shiny’ ‘tidyverse’ ‘usethis’ ‘utils’
+      All declared Imports should be used.
+    ```
+
+# CGPfunctions
+
+Version: 0.4
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘devtools’
+      All declared Imports should be used.
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Packages unavailable to check Rd xrefs: ‘BSDA’, ‘janitor’
+    ```
+
+# chimeraviz
+
+Version: 1.6.1
+
+## In both
+
+*   checking package dependencies ... ERROR
+    ```
+    Packages required but not available: ‘org.Hs.eg.db’ ‘org.Mm.eg.db’
+    
     Depends: includes the non-default packages:
       ‘Biostrings’ ‘GenomicRanges’ ‘IRanges’ ‘Gviz’ ‘S4Vectors’ ‘ensembldb’
       ‘AnnotationFilter’
     Adding so many packages to the search path is excessive and importing
     selectively is preferable.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.5Mb
-      sub-directories of 1Mb or more:
-        doc       2.7Mb
-        extdata   2.0Mb
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
     ```
 
 # chipenrich
 
-Version: 2.0.1
+Version: 2.4.0
 
 ## In both
 
-*   R CMD check timed out
+*   checking package dependencies ... ERROR
+    ```
+    Packages required but not available:
+      ‘org.Dm.eg.db’ ‘org.Dr.eg.db’ ‘org.Hs.eg.db’ ‘org.Mm.eg.db’
+      ‘org.Rn.eg.db’
     
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
+    ```
 
 # chipenrich.data
 
-Version: 2.0.0
+Version: 2.4.0
 
-## Newly broken
+## In both
 
-*   R CMD check timed out
-    
+*   checking package dependencies ... NOTE
+    ```
+    Packages suggested but not available for checking:
+      ‘GO.db’ ‘org.Dm.eg.db’ ‘org.Dr.eg.db’ ‘org.Hs.eg.db’ ‘org.Mm.eg.db’
+      ‘org.Rn.eg.db’ ‘TxDb.Dmelanogaster.UCSC.dm3.ensGene’
+      ‘TxDb.Dmelanogaster.UCSC.dm6.ensGene’
+      ‘TxDb.Drerio.UCSC.danRer10.refGene’
+      ‘TxDb.Hsapiens.UCSC.hg19.knownGene’
+      ‘TxDb.Hsapiens.UCSC.hg38.knownGene’
+      ‘TxDb.Mmusculus.UCSC.mm9.knownGene’
+      ‘TxDb.Mmusculus.UCSC.mm10.knownGene’
+      ‘TxDb.Rnorvegicus.UCSC.rn4.ensGene’
+      ‘TxDb.Rnorvegicus.UCSC.rn5.refGene’
+      ‘TxDb.Rnorvegicus.UCSC.rn6.refGene’
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 153.5Mb
+      sub-directories of 1Mb or more:
+        data  152.2Mb
+    ```
+
+# civis
+
+Version: 1.5.1
 
 ## In both
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 147.8Mb
+      installed size is  5.4Mb
       sub-directories of 1Mb or more:
-        data  147.0Mb
+        R      3.1Mb
+        help   1.7Mb
+    ```
+
+# CluMix
+
+Version: 2.1
+
+## Newly broken
+
+*   checking running R code from vignettes ...
+    ```
+       ‘CluMix.Rnw’ ... failed
+     ERROR
+    Errors in running code in vignettes:
+    when running code in ‘CluMix.Rnw’
+      ...
+    > confounderPlot(mixdata, x = "X4.ord", y = "X1.cat")
+    
+    > require(devtools)
+    Loading required package: devtools
+    
+    > session_info()
+    
+      When sourcing ‘CluMix.R’:
+    Error: ‘sessioninfo’ >= * must be installed for this functionality.
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... NOTE
+    ```
+    ...
+    The github page is: https://github.com/talgalili/dendextend/
+    
+    Suggestions and bug-reports can be submitted at: https://github.com/talgalili/dendextend/issues
+    Or contact: <tal.galili@gmail.com>
+    
+    	To suppress this message use:  suppressPackageStartupMessages(library(dendextend))
+    ---------------------
+    
+    
+    Attaching package: ‘dendextend’
+    
+    The following object is masked from ‘package:stats’:
+    
+        cutree
+    
+    Loading required package: devtools
+    
+    Error: processing vignette 'CluMix.Rnw' failed with diagnostics:
+     chunk 17 (label = sessioninfo) 
+    Error : ‘sessioninfo’ >= * must be installed for this functionality.
+    Execution halted
+    ```
+
+# ClusterJudge
+
+Version: 1.2.0
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘ClusterJudge-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: clusterJudge
+    > ### Title: judges clustering using an entity.attribute table
+    > ### Aliases: clusterJudge
+    > ### Keywords: attribute_mut_inf consolidate_entity_attribute
+    > 
+    > ### ** Examples
+    > 
+    > 
+    > library('yeastExpData')
+    Error in library("yeastExpData") : 
+      there is no package called ‘yeastExpData’
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Loading ClusterJudge
+    Loading required package: infotheo
+    Loading required package: lattice
+    Loading required package: latticeExtra
+    Loading required package: RColorBrewer
+    Loading required package: httr
+    Loading required package: jsonlite
+    Warning in readLines(con, warn = FALSE, n = n, ok = ok, skipNul = skipNul) :
+      invalid input found on input connection '.../revdep/checks.noindex/ClusterJudge/new/ClusterJudge.Rcheck/vign_test/ClusterJudge/R/clusterJudge_z_score.R'
+    Quitting from lines 61-62 (ClusterJudge-intro.Rmd) 
+    Error: processing vignette 'ClusterJudge-intro.Rmd' failed with diagnostics:
+    .../revdep/checks.noindex/ClusterJudge/new/ClusterJudge.Rcheck/vign_test/ClusterJudge/R/:24:0: unexpected end of input
+    22: ##### z-score definition
+    23: #####   z
+       ^
+    Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘yeastExpData’
+    ```
+
+# codemetar
+
+Version: 0.1.6
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘memoise’
+      All declared Imports should be used.
     ```
 
 # cogena
 
-Version: 1.10.0
+Version: 1.14.0
 
 ## In both
 
@@ -292,12 +1017,12 @@ Version: 1.10.0
     ```
     Found the following significant warnings:
       Warning: replacing previous import ‘class::somgrid’ by ‘kohonen::somgrid’ when loading ‘cogena’
-    See ‘.../revdep/checks/cogena/new/cogena.Rcheck/00install.out’ for details.
+    See ‘.../revdep/checks.noindex/cogena/new/cogena.Rcheck/00install.out’ for details.
     ```
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.4Mb
+      installed size is  6.5Mb
       sub-directories of 1Mb or more:
         doc       1.9Mb
         extdata   3.1Mb
@@ -307,13 +1032,13 @@ Version: 1.10.0
     ```
     ...
       ‘legend’
-      (.../revdep/checks/cogena/new/cogena.Rcheck/00_pkg_src/cogena/R/heatmapCluster.R:151-153)
+      (.../revdep/checks.noindex/cogena/new/cogena.Rcheck/00_pkg_src/cogena/R/heatmapCluster.R:151-153)
     heatmapCluster,cogena: no visible global function definition for
       ‘legend’
-      (.../revdep/checks/cogena/new/cogena.Rcheck/00_pkg_src/cogena/R/heatmapCluster.R:155-157)
+      (.../revdep/checks.noindex/cogena/new/cogena.Rcheck/00_pkg_src/cogena/R/heatmapCluster.R:155-157)
     heatmapCluster,cogena: no visible global function definition for
       ‘legend’
-      (.../revdep/checks/cogena/new/cogena.Rcheck/00_pkg_src/cogena/R/heatmapCluster.R:159-160)
+      (.../revdep/checks.noindex/cogena/new/cogena.Rcheck/00_pkg_src/cogena/R/heatmapCluster.R:159-160)
     Undefined global functions or variables:
       abline as.dist axis cor data density dist hist image layout legend
       lines median mtext order.dendrogram p.adjust par phyper plot.new
@@ -336,267 +1061,197 @@ Version: 1.10.0
 
 # COMPASS
 
-Version: 1.14.0
+Version: 1.18.0
 
 ## In both
-
-*   checking whether package ‘COMPASS’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘.../revdep/checks/COMPASS/new/COMPASS.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘COMPASS’ ...
-** libs
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c COMPASS_init.c -o COMPASS_init.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts.cpp -o CellCounts.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts_character.cpp -o CellCounts_character.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c digamma.c -o digamma.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c mat2vec.c -o mat2vec.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_dataframe.c -o melt_dataframe.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_matrix.c -o melt_matrix.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c samplePuPs.cpp -o samplePuPs.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c transpose_list.c -o transpose_list.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphas_Exp.cpp -o updatealphas_Exp.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau.cpp -o updatealphau.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau_noPu_Exp.cpp -o updatealphau_noPu_Exp.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatebeta_RW.cpp -o updatebeta_RW.o
-CellCounts.cpp:40:35: error: no matching function for call to 'sapply'
-      IntegerVector c_combo_abs = sapply(c_combo, ::abs);
-                                  ^~~~~~
-.../revdep/library/COMPASS/Rcpp/include/Rcpp/sugar/functions/sapply.h:126:1: note: candidate template ignored: couldn't infer template argument 'Function'
-sapply( const Rcpp::VectorBase<RTYPE,NA,T>& t, Function fun ){
-^
-.../revdep/library/COMPASS/Rcpp/include/Rcpp/vector/ListOf.h:134:3: note: candidate template ignored: could not match 'ListOf' against 'Vector'
-T sapply(const ListOf<T>& t, Function fun) {
-  ^
-1 error generated.
-make: *** [CellCounts.o] Error 1
-make: *** Waiting for unfinished jobs....
-ERROR: compilation failed for package ‘COMPASS’
-* removing ‘.../revdep/checks/COMPASS/new/COMPASS.Rcheck/COMPASS’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘COMPASS’ ...
-** libs
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c COMPASS_init.c -o COMPASS_init.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts.cpp -o CellCounts.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c CellCounts_character.cpp -o CellCounts_character.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c digamma.c -o digamma.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c mat2vec.c -o mat2vec.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_dataframe.c -o melt_dataframe.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c melt_matrix.c -o melt_matrix.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c samplePuPs.cpp -o samplePuPs.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c transpose_list.c -o transpose_list.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphas_Exp.cpp -o updatealphas_Exp.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau.cpp -o updatealphau.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatealphau_noPu_Exp.cpp -o updatealphau_noPu_Exp.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updatebeta_RW.cpp -o updatebeta_RW.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c updategammak_noPu.cpp -o updategammak_noPu.o
-clang -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/COMPASS/Rcpp/include" -I/usr/local/include   -fPIC  -Wall -g -O2  -c utils.c -o utils.o
-CellCounts.cpp:40:35: error: no matching function for call to 'sapply'
-      IntegerVector c_combo_abs = sapply(c_combo, ::abs);
-                                  ^~~~~~
-.../revdep/library/COMPASS/Rcpp/include/Rcpp/sugar/functions/sapply.h:126:1: note: candidate template ignored: couldn't infer template argument 'Function'
-sapply( const Rcpp::VectorBase<RTYPE,NA,T>& t, Function fun ){
-^
-.../revdep/library/COMPASS/Rcpp/include/Rcpp/vector/ListOf.h:134:3: note: candidate template ignored: could not match 'ListOf' against 'Vector'
-T sapply(const ListOf<T>& t, Function fun) {
-  ^
-1 error generated.
-make: *** [CellCounts.o] Error 1
-make: *** Waiting for unfinished jobs....
-ERROR: compilation failed for package ‘COMPASS’
-* removing ‘.../revdep/checks/COMPASS/old/COMPASS.Rcheck/COMPASS’
-
-```
-# congressbr
-
-Version: 0.1.1
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 1 marked UTF-8 string
-    ```
-
-# CountClust
-
-Version: 1.3.0
-
-## In both
-
-*   checking whether package ‘CountClust’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘.../revdep/checks/CountClust/new/CountClust.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘CountClust’ ...
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** preparing package for lazy loading
-Error : object ‘switch_axis_position’ is not exported by 'namespace:cowplot'
-ERROR: lazy loading failed for package ‘CountClust’
-* removing ‘.../revdep/checks/CountClust/new/CountClust.Rcheck/CountClust’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘CountClust’ ...
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** preparing package for lazy loading
-Error : object ‘switch_axis_position’ is not exported by 'namespace:cowplot'
-ERROR: lazy loading failed for package ‘CountClust’
-* removing ‘.../revdep/checks/CountClust/old/CountClust.Rcheck/CountClust’
-
-```
-# curatedMetagenomicData
-
-Version: 1.2.2
-
-## In both
-
-*   R CMD check timed out
-    
-
-*   checking package dependencies ... NOTE
-    ```
-    Depends: includes the non-default packages:
-      ‘dplyr’ ‘phyloseq’ ‘Biobase’ ‘ExperimentHub’ ‘AnnotationHub’
-      ‘magrittr’
-    Adding so many packages to the search path is excessive and importing
-    selectively is preferable.
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  8.6Mb
-      sub-directories of 1Mb or more:
-        help   7.9Mb
-    ```
-
-*   checking DESCRIPTION meta-information ... NOTE
-    ```
-    Package listed in more than one of Depends, Imports, Suggests, Enhances:
-      ‘BiocInstaller’
-    A package should be listed in only one of these fields.
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘BiocInstaller’
-      All declared Imports should be used.
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    ExpressionSet2MRexperiment: no visible global function definition for
-      ‘AnnotatedDataFrame’
-      (.../revdep/checks/curatedMetagenomicData/new/curatedMetagenomicData.Rcheck/00_pkg_src/curatedMetagenomicData/R/ExpressionSet2MRexperiment.R:45)
-    ExpressionSet2MRexperiment: no visible global function definition for
-      ‘phenoData’
-      (.../revdep/checks/curatedMetagenomicData/new/curatedMetagenomicData.Rcheck/00_pkg_src/curatedMetagenomicData/R/ExpressionSet2MRexperiment.R:46-47)
-    curatedMetagenomicData : <anonymous>: no visible global function
-      definition for ‘exprs<-’
-      (.../revdep/checks/curatedMetagenomicData/new/curatedMetagenomicData.Rcheck/00_pkg_src/curatedMetagenomicData/R/curatedMetagenomicData.R:57-58)
-    Undefined global functions or variables:
-      AnnotatedDataFrame exprs<- phenoData
-    ```
-
-*   checking Rd files ... NOTE
-    ```
-    prepare_Rd: HMP_2012.Rd:540-542: Dropping empty section \seealso
-    prepare_Rd: KarlssonFH_2013.Rd:90-92: Dropping empty section \seealso
-    prepare_Rd: LeChatelierE_2013.Rd:86-88: Dropping empty section \seealso
-    prepare_Rd: LomanNJ_2013_Hi.Rd:82-84: Dropping empty section \seealso
-    prepare_Rd: LomanNJ_2013_Mi.Rd:82-84: Dropping empty section \seealso
-    prepare_Rd: NielsenHB_2014.Rd:94-96: Dropping empty section \seealso
-    prepare_Rd: Obregon_TitoAJ_2015.Rd:94-96: Dropping empty section \seealso
-    prepare_Rd: OhJ_2014.Rd:86-88: Dropping empty section \seealso
-    prepare_Rd: QinJ_2012.Rd:106-108: Dropping empty section \seealso
-    prepare_Rd: QinN_2014.Rd:94-96: Dropping empty section \seealso
-    prepare_Rd: RampelliS_2015.Rd:90-92: Dropping empty section \seealso
-    prepare_Rd: TettAJ_2016.Rd:184-186: Dropping empty section \seealso
-    prepare_Rd: ZellerG_2014.Rd:94-96: Dropping empty section \seealso
-    ```
-
-# debrowser
-
-Version: 1.4.5
-
-## Newly broken
-
-*   R CMD check timed out
-    
-
-## Newly fixed
 
 *   checking re-building of vignette outputs ... WARNING
     ```
     Error in re-building vignettes:
       ...
-    Error: processing vignette 'DEBrowser.Rmd' failed with diagnostics:
-    there is no package called ‘BiocStyle’
+    Quitting from lines 39-41 (SimpleCOMPASS.Rmd) 
+    Error: processing vignette 'SimpleCOMPASS.Rmd' failed with diagnostics:
+    there is no package called 'readxl'
     Execution halted
     ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘BiocStyle’ ‘rmarkdown’
+      All declared Imports should be used.
+    ':::' call which should be '::': ‘flowWorkspace:::.getNodeInd’
+      See the note in ?`:::` about the use of this operator.
+    ```
+
+*   checking R code for possible problems ... NOTE
+    ```
+    COMPASSfitToCountsTable: no visible binding for global variable
+      ‘population’
+      (.../revdep/checks.noindex/COMPASS/new/COMPASS.Rcheck/00_pkg_src/COMPASS/R/utils.R:193)
+    COMPASSfitToCountsTable: no visible binding for global variable ‘Count’
+      (.../revdep/checks.noindex/COMPASS/new/COMPASS.Rcheck/00_pkg_src/COMPASS/R/utils.R:193)
+    COMPASSfitToCountsTable: no visible binding for global variable
+      ‘population’
+      (.../revdep/checks.noindex/COMPASS/new/COMPASS.Rcheck/00_pkg_src/COMPASS/R/utils.R:194)
+    COMPASSfitToCountsTable: no visible binding for global variable ‘Count’
+      (.../revdep/checks.noindex/COMPASS/new/COMPASS.Rcheck/00_pkg_src/COMPASS/R/utils.R:194)
+    COMPASSfitToCountsTable: no visible binding for global variable ‘id’
+      (.../revdep/checks.noindex/COMPASS/new/COMPASS.Rcheck/00_pkg_src/COMPASS/R/utils.R:200)
+    COMPASSfitToCountsTable: no visible binding for global variable ‘id’
+      (.../revdep/checks.noindex/COMPASS/new/COMPASS.Rcheck/00_pkg_src/COMPASS/R/utils.R:206)
+    Undefined global functions or variables:
+      Count id population
+    ```
+
+*   checking for unstated dependencies in vignettes ... NOTE
+    ```
+    'library' or 'require' calls not declared from:
+      ‘ggplot2’ ‘readxl’
+    ```
+
+# CompGLM
+
+Version: 2.0
+
+## In both
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      122                                                Variable and function names should be all lowercase.
+      123                                                        lines should not be more than 80 characters.
+      124                                                               Trailing blank lines are superfluous.
+      125                                                Variable and function names should be all lowercase.
+      126                                                Variable and function names should be all lowercase.
+      127                                                               Trailing blank lines are superfluous.
+      ── 1. Failure: check that package has google style (@test_code_style.R#11)  ────
+      length(lints) == 0 isn't true.
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 19 SKIPPED: 0 FAILED: 1
+      1. Failure: check that package has google style (@test_code_style.R#11) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# congressbr
+
+Version: 0.1.3
+
+## In both
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 187 marked UTF-8 strings
+    ```
+
+# CountClust
+
+Version: 1.8.0
 
 ## In both
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  9.3Mb
+      installed size is  8.4Mb
       sub-directories of 1Mb or more:
-        doc       6.3Mb
-        extdata   2.1Mb
+        data   7.3Mb
     ```
 
-*   checking R code for possible problems ... NOTE
+# crunch
+
+Version: 1.24.0
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.4Mb
+      sub-directories of 1Mb or more:
+        R     3.5Mb
+        doc   1.1Mb
+    ```
+
+# curatedMetagenomicData
+
+Version: 1.10.2
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.7Mb
+      sub-directories of 1Mb or more:
+        doc    1.4Mb
+        help   2.7Mb
+    ```
+
+# DataPackageR
+
+Version: 0.15.3
+
+## Newly broken
+
+*   checking examples ... ERROR
     ```
     ...
-    volcanoPlot: no visible binding for global variable ‘fillOpacity.hover’
-      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
-    volcanoPlot: no visible binding for global variable ‘fill.brush’
-      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
-    volcanoPlot: no visible binding for global variable ‘opacity’
-      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
-    volcanoPlot: no visible binding for global variable ‘key’
-      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:19-30)
-    volcanoZoom: no visible global function definition for ‘:=’
-      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
-    volcanoZoom: no visible binding for global variable ‘size’
-      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
-    volcanoZoom: no visible binding for global variable ‘size.hover’
-      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
-    volcanoZoom: no visible binding for global variable ‘key’
-      (.../revdep/checks/debrowser/new/debrowser.Rcheck/00_pkg_src/debrowser/R/volcano.R:51-61)
-    Undefined global functions or variables:
-      .startdebrowser.called := NUL align baseline biocLite conds debrowser
-      demodata fill fill.brush fillOpacity fillOpacity.hover fit fontSize
-      get_user_info googleAuth googleAuthUI initStore key opacity samples
-      searched size size.hover stroke updateStore with_shiny
+    INFO [2018-09-18 16:43:55] 1 required data objects created by foo.Rmd
+    INFO [2018-09-18 16:43:55] NEWS.md file not found, creating!
+    Enter a text description of the changes for the NEWS file.
+    INFO [2018-09-18 16:43:55] Saving to data
+    INFO [2018-09-18 16:43:55] Copied documentation to /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpWnwI2Q/fileaa793b065b2c/R/fileaa793b065b2c.R
+    
+    ✔ Setting active project to '/private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpWnwI2Q/fileaa793b065b2c'
+    ✔ Creating 'vignettes/'
+    ✔ Creating 'inst/doc/'
+    INFO [2018-09-18 16:43:55] Done
+    INFO [2018-09-18 16:43:55] DataPackageR succeeded
+    INFO [2018-09-18 16:43:55] Building documentation
+    First time using roxygen2. Upgrading automatically...
+    Updating roxygen version in /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpWnwI2Q/fileaa793b065b2c/DESCRIPTION
+    Writing NAMESPACE
+    Loading fileaa793b065b2c
+    Writing fileaa793b065b2c.Rd
+    Writing tbl.Rd
+    INFO [2018-09-18 16:43:56] Building package
+    Error: No root directory found in /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpWnwI2Q or its parent directories. Root criterion: contains a file `DESCRIPTION`
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      cars_over_20══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 90 SKIPPED: 0 FAILED: 13
+      1. Error: package can be built from different locations (@test-build-locations.R#19) 
+      2. Error: can add a data item (@test-conditional-build.R#19) 
+      3. Error: assert_data_version (@test-data-version.R#19) 
+      4. Error: documentation is built via document() (@test-document.R#13) 
+      5. Error: package built in different edge cases (@test-edge-cases.R#16) 
+      6. Error: manual bump version when data unchanged (@test-manual-version-bump.R#19) 
+      7. Error: news file is created (@test-news-update.R#13) 
+      8. Error: (unknown) (@test-project-path.R#12) 
+      9. Error: R file processing works and creates vignettes (@test-r-processing.R#13) 
+      1. ...
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 170-173 (usingDataPackageR.Rmd) 
+    Error: processing vignette 'usingDataPackageR.Rmd' failed with diagnostics:
+    No root directory found in /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpqMFMhm or its parent directories. Root criterion: contains a file `DESCRIPTION`
+    Execution halted
     ```
 
 # demi
@@ -609,19 +1264,19 @@ Version: 1.1.2
     ```
     ...
     diffexp,DEMIDiff: no visible global function definition for ‘p.adjust’
-      (.../revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIDiff-methods.R:352)
+      (.../revdep/checks.noindex/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIDiff-methods.R:352)
     loadAnnotation,DEMIExperiment-environment: no visible global function
       definition for ‘data’
-      (.../revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:549)
+      (.../revdep/checks.noindex/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:549)
     loadBlat,DEMIExperiment-environment: no visible global function
       definition for ‘data’
-      (.../revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:598)
+      (.../revdep/checks.noindex/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:598)
     loadCytoband,DEMIExperiment-environment: no visible global function
       definition for ‘data’
-      (.../revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:700)
+      (.../revdep/checks.noindex/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:700)
     loadPathway,DEMIExperiment-environment: no visible global function
       definition for ‘data’
-      (.../revdep/checks/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:735)
+      (.../revdep/checks.noindex/demi/new/demi.Rcheck/00_pkg_src/demi/R/DEMIExperiment-methods.R:735)
     Undefined global functions or variables:
       combn data dhyper median p.adjust t.test wilcox.test write.table
     Consider adding
@@ -633,12 +1288,55 @@ Version: 1.1.2
 
 # derfinder
 
-Version: 1.10.6
+Version: 1.14.0
 
 ## In both
 
-*   R CMD check timed out
-    
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/test-all.R’ failed.
+    Last 13 lines of output:
+        bplog: FALSE; bpthreshold: INFO; bpstopOnError: TRUE
+        bptimeout: 2592000; bpprogressbar: FALSE
+        bplogdir: NA
+      class: SerialParam
+        bpisup: TRUE; bpnworkers: 1; bptasks: 0; bpjobname: BPJOB
+        bplog: FALSE; bpthreshold: INFO; bpstopOnError: TRUE
+        bptimeout: 2592000; bpprogressbar: FALSE
+        bplogdir: NA
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 122 SKIPPED: 0 FAILED: 2
+      1. Error: (unknown) (@test_Fstats.R#104) 
+      2. Error: (unknown) (@test_annotation.R#4) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Warning in citation("BiocStyle") :
+      no date field in DESCRIPTION file of package 'BiocStyle'
+    Quitting from lines 63-131 (derfinder-quickstart.Rmd) 
+    Error: processing vignette 'derfinder-quickstart.Rmd' failed with diagnostics:
+    package 'knitrBootstrap' not found
+    Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘TxDb.Hsapiens.UCSC.hg19.knownGene’
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.8Mb
+      sub-directories of 1Mb or more:
+        doc   5.0Mb
+    ```
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -651,9 +1349,28 @@ Version: 1.10.6
       ‘.smootherFstats’
     ```
 
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘TxDb.Hsapiens.UCSC.hg19.knownGene’
+    ```
+
 # derfinderData
 
-Version: 0.110.0
+Version: 0.114.0
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Writing 5 Bibtex entries ... OK
+    Results written to file 'derfinderDataRef.bib'
+    Quitting from lines 210-213 (derfinderData.Rmd) 
+    Error: processing vignette 'derfinderData.Rmd' failed with diagnostics:
+    'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
+    ```
 
 ## In both
 
@@ -666,7 +1383,7 @@ Version: 0.110.0
 
 # derfinderHelper
 
-Version: 1.10.0
+Version: 1.14.0
 
 ## In both
 
@@ -676,47 +1393,109 @@ Version: 1.10.0
       ...
     Warning in citation("BiocStyle") :
       no date field in DESCRIPTION file of package 'BiocStyle'
-    Quitting from lines 51-82 (derfinderHelper.Rmd) 
+    Quitting from lines 61-90 (derfinderHelper.Rmd) 
     Error: processing vignette 'derfinderHelper.Rmd' failed with diagnostics:
     package 'BiocParallel' not found
     Execution halted
     ```
 
+*   checking for unstated dependencies in vignettes ... NOTE
+    ```
+    '::' or ':::' import not declared from: ‘RefManageR’
+    ```
+
 # derfinderPlot
 
-Version: 1.10.0
+Version: 1.14.0
 
 ## In both
 
-*   R CMD check timed out
+*   checking examples ... ERROR
+    ```
+    ...
+        rowMeans, rowSums, rownames, sapply, setdiff, sort, table, tapply,
+        union, unique, unsplit, which, which.max, which.min
     
-
-# document
-
-Version: 2.1.0
-
-## In both
+    
+    Attaching package: 'S4Vectors'
+    
+    The following object is masked from 'package:base':
+    
+        expand.grid
+    
+    Loading required package: IRanges
+    Loading required package: GenomeInfoDb
+    Loading required package: GenomicRanges
+    Loading required package: foreach
+    Loading required package: iterators
+    Loading required package: locfit
+    locfit 1.5-9.1 	 2013-03-22
+    > library('TxDb.Hsapiens.UCSC.hg19.knownGene')
+    Error in library("TxDb.Hsapiens.UCSC.hg19.knownGene") : 
+      there is no package called 'TxDb.Hsapiens.UCSC.hg19.knownGene'
+    Execution halted
+    ```
 
 *   checking tests ...
     ```
      ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
+    Running the tests in ‘tests/test-all.R’ failed.
     Last 13 lines of output:
-      .../revdep/checks/document/new/document.Rcheck
-      .../revdep/library/devtools/new
-      .../revdep/library/document
-      /Library/Frameworks/R.framework/Versions/3.4/Resources/library
-      Sys.info:
-      Jamess-MacBook-Pro-2.local
-      Darwin Kernel Version 16.7.0: Thu Jun 15 17:36:27 PDT 2017; root:xnu-3789.70.16~2/RELEASE_X86_64
-      Path: /var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmpgTYkas/document_922d1ae4d77e/mini.mal
-      ###
-      Error in check_package(package_directory = package_directory, working_directory = working_directory,  : 
-        R CMD check failed, read the above log and fix.
-      Calls: test_check ... source_file -> eval -> eval -> document -> check_package -> throw
-      testthat results ================================================================
-      OK: 0 SKIPPED: 0 FAILED: 0
+      1: library("TxDb.Hsapiens.UCSC.hg19.knownGene") at testthat/test_adv-plotCluster.R:3
+      2: stop(txt, domain = NA)
+      
+      ── 2. Error: (unknown) (@test_plotting.R#14)  ──────────────────────────────────
+      there is no package called 'TxDb.Hsapiens.UCSC.hg19.knownGene'
+      1: library("TxDb.Hsapiens.UCSC.hg19.knownGene") at testthat/test_plotting.R:14
+      2: stop(txt, domain = NA)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 0 SKIPPED: 0 FAILED: 2
+      1. Error: (unknown) (@test_adv-plotCluster.R#3) 
+      2. Error: (unknown) (@test_plotting.R#14) 
+      
+      Error: testthat unit tests failed
       Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Warning in citation("BiocStyle") :
+      no date field in DESCRIPTION file of package 'BiocStyle'
+    Warning in citation("devtools") :
+      no date field in DESCRIPTION file of package 'devtools'
+    Quitting from lines 62-115 (derfinderPlot.Rmd) 
+    Error: processing vignette 'derfinderPlot.Rmd' failed with diagnostics:
+    package 'TxDb.Hsapiens.UCSC.hg19.knownGene' not found
+    Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Packages suggested but not available for checking:
+      ‘org.Hs.eg.db’ ‘TxDb.Hsapiens.UCSC.hg19.knownGene’
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: 'RefManageR'
+      All declared Imports should be used.
+    ```
+
+# DLMtool
+
+Version: 5.2.3
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  8.7Mb
+      sub-directories of 1Mb or more:
+        R      5.2Mb
+        data   2.1Mb
     ```
 
 # dodgr
@@ -738,7 +1517,7 @@ Version: 0.0.3
 
 # doRNG
 
-Version: 1.6.6
+Version: 1.7.1
 
 ## In both
 
@@ -752,7 +1531,7 @@ Version: 1.6.6
     Package unavailable to check Rd xrefs: ‘doMPI’
     ```
 
-# dr4pl
+# dynutils
 
 Version: 1.0.0
 
@@ -761,13 +1540,13 @@ Version: 1.0.0
 *   checking dependencies in R code ... NOTE
     ```
     Namespaces in Imports field not imported from:
-      ‘devtools’ ‘drc’ ‘testthat’
+      ‘Rcpp’ ‘processx’
       All declared Imports should be used.
     ```
 
 # elementR
 
-Version: 1.3.3
+Version: 1.3.6
 
 ## In both
 
@@ -796,15 +1575,50 @@ Version: 1.3.3
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.6Mb
+      installed size is  6.5Mb
       sub-directories of 1Mb or more:
-        R         1.8Mb
+        R         2.7Mb
         Results   2.3Mb
+    ```
+
+# ELMER.data
+
+Version: 2.4.2
+
+## In both
+
+*   checking for hidden files and directories ... NOTE
+    ```
+    Found the following hidden files and directories:
+      .travis.yml
+    These were most likely included in error. See section ‘Package
+    structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 288.8Mb
+      sub-directories of 1Mb or more:
+        data  286.3Mb
+        doc     2.4Mb
+    ```
+
+*   checking DESCRIPTION meta-information ... NOTE
+    ```
+    Malformed Description field: should contain one or more complete sentences.
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Error in .requirePackage(package) : 
+        unable to find required package 'MultiAssayExperiment'
+      Calls: <Anonymous> ... getClass -> getClassDef -> .classEnv -> .requirePackage
+      Execution halted
     ```
 
 # epiNEM
 
-Version: 1.0.1
+Version: 1.4.0
 
 ## In both
 
@@ -815,6 +1629,11 @@ Version: 1.0.1
     Error: processing vignette 'epiNEM.Rmd' failed with diagnostics:
     there is no package called ‘BiocStyle’
     Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘org.Sc.sgd.db’
     ```
 
 *   checking foreign function calls ... NOTE
@@ -829,19 +1648,19 @@ Version: 1.0.1
     ```
     ...
     plot.epiSim: no visible global function definition for ‘axis’
-      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:375-377)
+      (.../revdep/checks.noindex/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:375-377)
     plot.epiSim: no visible global function definition for ‘boxplot’
-      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:403-405)
+      (.../revdep/checks.noindex/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:403-405)
     plot.epiSim: no visible global function definition for ‘abline’
-      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:407)
+      (.../revdep/checks.noindex/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:407)
     plot.epiSim: no visible global function definition for ‘axis’
-      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:409-411)
+      (.../revdep/checks.noindex/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:409-411)
     plot.epiSim: no visible global function definition for ‘boxplot’
-      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:413-415)
+      (.../revdep/checks.noindex/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:413-415)
     plot.epiSim: no visible global function definition for ‘abline’
-      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:417)
+      (.../revdep/checks.noindex/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:417)
     plot.epiSim: no visible global function definition for ‘axis’
-      (.../revdep/checks/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:419-421)
+      (.../revdep/checks.noindex/epiNEM/new/epiNEM.Rcheck/00_pkg_src/epiNEM/R/plot_results.R:419-421)
     Undefined global functions or variables:
       abline absorption adj axis bnem boxplot computeFc dnf2adj
       dummyCNOlist epiNEM2Bg layout popSize preprocessing readSIF sim
@@ -851,9 +1670,209 @@ Version: 1.0.1
     to your NAMESPACE file.
     ```
 
+# EValue
+
+Version: 1.1.5
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘devtools’ ‘msm’
+      All declared Imports should be used.
+    ```
+
+# exampletestr
+
+Version: 1.3.1
+
+## Newly broken
+
+*   checking examples ... WARNING
+    ```
+    Found the following significant warnings:
+    
+      Warning: 'devtools::create' is deprecated.
+      Warning: 'setup' is deprecated.
+      Warning: 'create_description' is deprecated.
+      Warning: 'use_rstudio' is deprecated.
+      Warning: 'devtools::create' is deprecated.
+      Warning: 'setup' is deprecated.
+      Warning: 'create_description' is deprecated.
+      Warning: 'use_rstudio' is deprecated.
+      Warning: 'devtools::create' is deprecated.
+      Warning: 'setup' is deprecated.
+      Warning: 'create_description' is deprecated.
+      Warning: 'use_rstudio' is deprecated.
+      Warning: 'devtools::use_testthat' is deprecated.
+    Deprecated functions may be defunct as soon as of the next release of
+    R.
+    See ?Deprecated.
+    ```
+
+# excerptr
+
+Version: 1.4.1
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘excerptr-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: excerptr
+    > ### Title: Excerpt Structuring Comments and Set a Table of Contents.
+    > ### Aliases: excerptr
+    > 
+    > ### ** Examples
+    > 
+    > root <- system.file(package = "excerptr")
+    > test_files <- file.path(root, "excerpts", "tests", "files")
+    > excerptr(file_name = file.path(test_files, "some_file.txt"),
+    +          output_path = tempdir(), run_pandoc = FALSE,
+    +          compile_latex = FALSE,
+    +          pandoc_formats = c("tex", "html"))
+    cloning into '.../inst/excerpts'...
+    Error in git2r::clone(url = "https://github.com/fvafrCU/excerpts/", branch = branch,  : 
+      Error in 'git2r_clone': unsupported URL protocol
+    Calls: excerptr -> load_excerpts -> get_excerpts -> <Anonymous>
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+             "html"), output_path = tempdir(), run_pandoc = TRUE) at testthat/test_basic.R:64
+      2: load_excerpts() at .../revdep/checks.noindex/excerptr/new/excerptr.Rcheck/00_pkg_src/excerptr/R/excerptr.R:36
+      3: get_excerpts(directory = python_directory) at .../revdep/checks.noindex/excerptr/new/excerptr.Rcheck/00_pkg_src/excerptr/R/utils.R:42
+      4: git2r::clone(url = "https://github.com/fvafrCU/excerpts/", branch = branch, local_path = directory) at .../revdep/checks.noindex/excerptr/new/excerptr.Rcheck/00_pkg_src/excerptr/R/get_excerpts.R:21
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 2 SKIPPED: 0 FAILED: 5
+      1. Error: get (@test_basic.R#9) 
+      2. Error: load (@test_basic.R#15) 
+      3. Error: md (@test_basic.R#38) 
+      4. Error: pandoc_formats (@test_basic.R#52) 
+      5. Error: pandoc_formats_list (@test_basic.R#64) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# ExPanDaR
+
+Version: 0.2.0
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘CodeDepends’ ‘DT’ ‘PKI’ ‘shinycssloaders’ ‘tictoc’
+      All declared Imports should be used.
+    ```
+
+# fakemake
+
+Version: 1.3.0
+
+## Newly broken
+
+*   checking examples ... WARNING
+    ```
+    Found the following significant warnings:
+    
+      Warning: 'devtools::create' is deprecated.
+      Warning: 'setup' is deprecated.
+      Warning: 'create_description' is deprecated.
+      Warning: 'use_rstudio' is deprecated.
+    Deprecated functions may be defunct as soon as of the next release of
+    R.
+    See ?Deprecated.
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Creating package 'fakepack' in '/private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpDYF5IK'
+    No DESCRIPTION found. Creating with values:
+    
+    
+    Prerequisite DESCRIPTION found.
+    Prerequisite R/throw.R found.
+    Prerequisite R/throw.R found.
+    Prerequisite R/throw.R found.
+    Prerequisite R/throw.R found.
+    ```
+
+## Newly fixed
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘rcmdcheck’
+    ```
+
+# fitODBOD
+
+Version: 1.2.0
+
+## In both
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Packages unavailable to check Rd xrefs: ‘BinaryEPPM’, ‘extraDistr’, ‘triangle’
+    ```
+
+# gbfs
+
+Version: 1.0.0
+
+## In both
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 30-31 (kc_bikeshare.Rmd) 
+    Error: processing vignette 'kc_bikeshare.Rmd' failed with diagnostics:
+    Column `num_bikes_available_types` must be a 1d atomic vector or a list
+    Execution halted
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘devtools’ ‘roxygen2’ ‘testthat’ ‘utils’ ‘withr’
+      All declared Imports should be used.
+    ```
+
+# ggalluvial
+
+Version: 0.9.0
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
+      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
+    Loading required package: ggplot2
+    Quitting from lines 212-213 (ggalluvial.rmd) 
+    Error: processing vignette 'ggalluvial.rmd' failed with diagnostics:
+    'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
+    ```
+
 # ggExtra
 
-Version: 0.7
+Version: 0.8
 
 ## In both
 
@@ -863,9 +1882,76 @@ Version: 0.7
       All declared Imports should be used.
     ```
 
+# ggforce
+
+Version: 0.1.3
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 550-551 (Visual_Guide.Rmd) 
+    Error: processing vignette 'Visual_Guide.Rmd' failed with diagnostics:
+    'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
+    ```
+
+# githubinstall
+
+Version: 0.2.2
+
+## Newly broken
+
+*   checking whether package ‘githubinstall’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘.../revdep/checks.noindex/githubinstall/new/githubinstall.Rcheck/00install.out’ for details.
+    ```
+
+## Newly fixed
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘mockery’
+      All declared Imports should be used.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘githubinstall’ ...
+** package ‘githubinstall’ successfully unpacked and MD5 sums checked
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error : object ‘github_pull’ is not exported by 'namespace:devtools'
+ERROR: lazy loading failed for package ‘githubinstall’
+* removing ‘.../revdep/checks.noindex/githubinstall/new/githubinstall.Rcheck/githubinstall’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘githubinstall’ ...
+** package ‘githubinstall’ successfully unpacked and MD5 sums checked
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+* DONE (githubinstall)
+
+```
 # googleAuthR
 
-Version: 0.6.0
+Version: 0.6.3
 
 ## In both
 
@@ -875,32 +1961,36 @@ Version: 0.6.0
       All declared Imports should be used.
     ```
 
-# googleComputeEngineR
+# graticule
 
-Version: 0.2.0
+Version: 0.1.2
 
-## In both
+## Newly broken
 
-*   checking tests ...
+*   checking re-building of vignette outputs ... WARNING
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      testthat results ================================================================
-      OK: 5 SKIPPED: 0 FAILED: 46
-      1. Error: We can see a project resource (@test_aa_auth.R#16) 
-      2. Error: We can set auto project (@test_aa_auth.R#26) 
-      3. Error: We can get auto project (@test_aa_auth.R#37) 
-      4. Error: We can list networks (@test_aa_auth.R#70) 
-      5. Error: We can get a network (@test_aa_auth.R#79) 
-      6. Error: We can make a container VM (@test_bb_create_vm.R#7) 
-      7. Error: We can make a VM with metadata (@test_bb_create_vm.R#24) 
-      8. Error: We can make a template VM (@test_bb_create_vm.R#41) 
-      9. Error: We can make a VM with custom disk size (@test_bb_create_vm.R#57) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Execution halted
+    ...
+      ...
+    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
+      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
+    Loading required package: sp
+    rgdal: version: 1.3-4, (SVN revision 766)
+     Geospatial Data Abstraction Library extensions to R successfully loaded
+     Loaded GDAL runtime: GDAL 2.1.3, released 2017/20/01
+     Path to GDAL shared files: .../revdep/library.noindex/graticule/rgdal/gdal
+     GDAL binary built with GEOS: FALSE 
+     Loaded PROJ.4 runtime: Rel. 4.9.3, 15 August 2016, [PJ_VERSION: 493]
+     Path to PROJ.4 shared files: .../revdep/library.noindex/graticule/rgdal/proj
+     Linking to sp version: 1.3-1 
+    ### Welcome to rworldmap ###
+    For a short introduction type : 	 vignette('rworldmap')
+    Failed with error:  'there is no package called 'rgeos''
+    Loading required package: gsw
+    Loading required package: testthat
+    Quitting from lines 231-232 (graticule.Rmd) 
+    Error: processing vignette 'graticule.Rmd' failed with diagnostics:
+    'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
     ```
 
 # gsrc
@@ -909,66 +1999,91 @@ Version: 1.1
 
 ## In both
 
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    ```
+
 *   checking package dependencies ... NOTE
     ```
     Package suggested but not available for checking: ‘brassicaData’
     ```
 
-# huxtable
+# HMP16SData
 
-Version: 1.1.0
+Version: 1.0.1
 
 ## In both
 
-*   checking tests ...
+*   checking re-building of vignette outputs ... WARNING
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-             message = handle_message))
-      4: withCallingHandlers(withVisible(code), warning = handle_warning, message = handle_message)
-      5: withVisible(code)
-      6: rmarkdown::render("table-tester-2.Rmd", quiet = TRUE, output_format = "pdf_document")
-      7: convert(output_file, run_citeproc)
-      8: pandoc_convert(utf8_input, pandoc_to, output_format$pandoc$from, output, citeproc, 
-             output_format$pandoc$args, !quiet)
-      9: stop("pandoc document conversion failed with error ", result, call. = FALSE)
-      
-      testthat results ================================================================
-      OK: 290 SKIPPED: 48 FAILED: 1
-      1. Error: table-tester-2.Rmd renders without errors in LaTeX (@test-with-pandoc.R#27) 
-      
-      Error: testthat unit tests failed
-      Execution halted
+    ...
+    Attaching package: 'dendextend'
+    
+    The following object is masked from 'package:stats':
+    
+        cutree
+    
+    ========================================
+    circlize version 0.4.4
+    CRAN page: https://cran.r-project.org/package=circlize
+    Github page: https://github.com/jokergoo/circlize
+    Documentation: http://jokergoo.github.io/circlize_book/book/
+    
+    If you use it in published research, please cite:
+    Gu, Z. circlize implements and enhances circular visualization 
+      in R. Bioinformatics 2014.
+    ========================================
+    
+    Quitting from lines 58-71 (HMP16SData.Rmd) 
+    Error: processing vignette 'HMP16SData.Rmd' failed with diagnostics:
+    there is no package called 'curatedMetagenomicData'
+    Execution halted
     ```
 
-*   checking Rd cross-references ... NOTE
+*   checking package dependencies ... NOTE
     ```
-    Package unavailable to check Rd xrefs: ‘xtable’
+    Package suggested but not available for checking: ‘curatedMetagenomicData’
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 19.1Mb
+      sub-directories of 1Mb or more:
+        doc       1.5Mb
+        extdata  17.4Mb
     ```
 
 # hyperSpec
 
-Version: 0.99-20171005
+Version: 0.99-20180627
 
 ## In both
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.0Mb
+      installed size is  6.3Mb
       sub-directories of 1Mb or more:
-        R     1.6Mb
-        doc   3.9Mb
+        R     2.0Mb
+        doc   3.8Mb
     ```
 
-*   checking R code for possible problems ... NOTE
+*   checking Rd cross-references ... NOTE
     ```
-    Warning: local assignments to syntactic functions: ~
+    Package unavailable to check Rd xrefs: ‘caTools’
     ```
 
 # icd9
 
 Version: 1.3.1
+
+## Newly broken
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Missing or unexported object: ‘devtools::load_data’
+    ```
 
 ## In both
 
@@ -980,27 +2095,65 @@ Version: 1.3.1
 
 # IHW
 
-Version: 1.4.0
+Version: 1.8.0
 
 ## In both
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    
+    The following objects are masked from 'package:S4Vectors':
+    
+        first, intersect, rename, setdiff, setequal, union
+    
+    The following objects are masked from 'package:BiocGenerics':
+    
+        combine, intersect, setdiff, union
+    
+    The following objects are masked from 'package:stats':
+    
+        filter, lag
+    
+    The following objects are masked from 'package:base':
+    
+        intersect, setdiff, setequal, union
+    
+    Quitting from lines 42-47 (introduction_to_ihw.Rmd) 
+    Error: processing vignette 'introduction_to_ihw.Rmd' failed with diagnostics:
+    there is no package called 'airway'
+    Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘airway’
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.2Mb
+      sub-directories of 1Mb or more:
+        doc   5.8Mb
+    ```
 
 *   checking R code for possible problems ... NOTE
     ```
     ...
-      (.../revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:101)
+      (.../revdep/checks.noindex/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:101)
     plot_decisionboundary: no visible binding for global variable
       ‘covariate’
-      (.../revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:110-112)
+      (.../revdep/checks.noindex/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:110-112)
     plot_decisionboundary: no visible binding for global variable ‘pvalue’
-      (.../revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:110-112)
+      (.../revdep/checks.noindex/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:110-112)
     plot_decisionboundary: no visible binding for global variable ‘fold’
-      (.../revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:110-112)
+      (.../revdep/checks.noindex/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/plots.R:110-112)
     thresholds_ihwResult: no visible global function definition for
       ‘na.exclude’
-      (.../revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/ihw_class.R:96-97)
+      (.../revdep/checks.noindex/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/ihw_class.R:96-97)
     thresholds,ihwResult: no visible global function definition for
       ‘na.exclude’
-      (.../revdep/checks/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/ihw_class.R:96-97)
+      (.../revdep/checks.noindex/IHW/new/IHW.Rcheck/00_pkg_src/IHW/R/ihw_class.R:96-97)
     Undefined global functions or variables:
       covariate fold gurobi mcols mcols<- metadata metadata<- na.exclude
       p.adjust pvalue runif str stratum
@@ -1010,27 +2163,15 @@ Version: 1.4.0
     to your NAMESPACE file.
     ```
 
-# jpmesh
+# iLaplace
 
-Version: 0.4.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘readr’
-      All declared Imports should be used.
-    ```
-
-# jpndistrict
-
-Version: 0.2.0
+Version: 1.1.0
 
 ## In both
 
-*   checking data for non-ASCII characters ... NOTE
+*   checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... WARNING
     ```
-      Note: found 188 marked UTF-8 strings
+      apparently using $(LAPACK_LIBS) without following $(BLAS_LIBS) in ‘src/Makevars’
     ```
 
 # KoNLP
@@ -1041,7 +2182,7 @@ Version: 0.80.1
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.5Mb
+      installed size is  6.6Mb
       sub-directories of 1Mb or more:
         java   6.0Mb
     ```
@@ -1057,69 +2198,92 @@ Version: 1.3.5
       Note: found 7 marked UTF-8 strings
     ```
 
-# Logolas
+# lilikoi
 
-Version: 1.0.0
+Version: 0.1.0
 
 ## In both
 
-*   checking files in ‘vignettes’ ... NOTE
+*   checking installed package size ... NOTE
     ```
-    The following directory looks like a leftover from 'knitr':
-      ‘figure’
-    Please remove from your package.
+      installed size is  5.2Mb
+      sub-directories of 1Mb or more:
+        data      3.8Mb
+        extdata   1.1Mb
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘Matrix’ ‘devtools’ ‘e1071’ ‘glmnet’ ‘hash’ ‘pamr’ ‘randomForest’
+      All declared Imports should be used.
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 3837 marked UTF-8 strings
+    ```
+
+# lime
+
+Version: 0.4.0
+
+## In both
+
+*   checking package dependencies ... ERROR
+    ```
+    Packages required but not available:
+      ‘glmnet’ ‘ggplot2’ ‘stringi’ ‘stringdist’ ‘htmlwidgets’ ‘shiny’
+      ‘shinythemes’ ‘magick’ ‘gower’ ‘RcppEigen’
+    
+    Packages suggested but not available for checking:
+      ‘xgboost’ ‘testthat’ ‘mlr’ ‘h2o’ ‘text2vec’ ‘knitr’ ‘rmarkdown’
+      ‘keras’
+    
+    VignetteBuilder package required for checking but not installed: ‘knitr’
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
+    ```
+
+# loose.rock
+
+Version: 1.0.9
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘futile.options’ ‘ggfortify’ ‘grDevices’ ‘stats’
+      All declared Imports should be used.
     ```
 
 # Luminescence
 
-Version: 0.7.5
+Version: 0.8.5
 
 ## In both
 
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      	 >> 2 records have been read successfully!
-      
-      testthat results ================================================================
-      OK: 488 SKIPPED: 0 FAILED: 1
-      1. Failure: Full check of analyse_baSAR function (@test_analyse_baSAR.R#48) 
-      
-      Error: testthat unit tests failed
-      In addition: Warning messages:
-      1: closing unused connection 8 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmprDjKyh/read_BIN2R_FILEa9bd5d84fabe) 
-      2: closing unused connection 7 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmprDjKyh/read_BIN2R_FILEa9bd1dce7583) 
-      3: closing unused connection 6 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmprDjKyh/read_BIN2R_FILEa9bd6824283f) 
-      4: closing unused connection 5 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmprDjKyh/read_BIN2R_FILEa9bd6634200c) 
-      5: closing unused connection 4 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmprDjKyh/read_BIN2R_FILEa9bd6c0f57a) 
-      6: closing unused connection 3 (/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//RtmprDjKyh/read_BIN2R_FILEa9bd6718b3bf) 
-      Execution halted
-    ```
-
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.6Mb
+      installed size is  8.7Mb
       sub-directories of 1Mb or more:
-        R   4.5Mb
+        R   6.2Mb
     ```
 
 # MCbiclust
 
-Version: 1.0.1
+Version: 1.4.0
 
 ## In both
 
-*   R CMD check timed out
-    
-
-*   checking installed package size ... NOTE
+*   checking package dependencies ... ERROR
     ```
-      installed size is  9.0Mb
-      sub-directories of 1Mb or more:
-        data   3.1Mb
-        doc    4.9Mb
+    Packages required but not available: ‘GO.db’ ‘org.Hs.eg.db’
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
     ```
 
 # metafolio
@@ -1132,14 +2296,14 @@ Version: 0.1.0
     ```
     ...
     plot_sp_A_ts: no visible global function definition for ‘axis’
-      (.../revdep/checks/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/plot_sp_A_ts.R:90-91)
+      (.../revdep/checks.noindex/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/plot_sp_A_ts.R:90-91)
     run_cons_plans: no visible binding for global variable ‘var’
     thermal_area: no visible global function definition for ‘uniroot’
-      (.../revdep/checks/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/thermal_integration.R:19-21)
+      (.../revdep/checks.noindex/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/thermal_integration.R:19-21)
     thermal_area: no visible global function definition for ‘uniroot’
-      (.../revdep/checks/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/thermal_integration.R:22-24)
+      (.../revdep/checks.noindex/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/thermal_integration.R:22-24)
     thermal_area: no visible global function definition for ‘integrate’
-      (.../revdep/checks/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/thermal_integration.R:26-28)
+      (.../revdep/checks.noindex/metafolio/new/metafolio.Rcheck/00_pkg_src/metafolio/R/thermal_integration.R:26-28)
     Undefined global functions or variables:
       abline axTicks axis barplot box chull contourLines hcl integrate
       legend lines lm matplot mtext na.omit optimize par plot plot.default
@@ -1154,163 +2318,291 @@ Version: 0.1.0
     to your NAMESPACE file.
     ```
 
-# MODIS
+# metagenomeFeatures
+
+Version: 2.0.0
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+    ✖ ggplot2::Position() masks BiocGenerics::Position(), base::Position()
+    ✖ dplyr::combine()    masks Biobase::combine(), BiocGenerics::combine()
+    ✖ dplyr::filter()     masks stats::filter()
+    ✖ dplyr::lag()        masks stats::lag()
+    ggtree v1.12.7  For help: https://guangchuangyu.github.io/software/ggtree
+    
+    If you use ggtree in published research, please cite:
+    Guangchuang Yu, David Smith, Huachen Zhu, Yi Guan, Tommy Tsan-Yuk Lam. ggtree: an R package for visualization and annotation of phylogenetic trees with their covariates and other associated data. Methods in Ecology and Evolution 2017, 8(1):28-36, doi:10.1111/2041-210X.12628
+    
+    Attaching package: 'ggtree'
+    
+    The following object is masked from 'package:tidyr':
+    
+        expand
+    
+    Found more than one class "phylo" in cache; using the first, from namespace 'metagenomeFeatures'
+    Also defined by 'tidytree'
+    Quitting from lines 132-134 (database-explore.Rmd) 
+    Error: processing vignette 'database-explore.Rmd' failed with diagnostics:
+    'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
+    ```
+
+## In both
+
+*   checking whether package ‘metagenomeFeatures’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: subclass "QualityScaledDNAStringSet" of class "DNAStringSet" is not local and cannot be updated for new inheritance information; consider setClassUnion()
+      Warning: replacing previous import ‘lazyeval::is_formula’ by ‘purrr::is_formula’ when loading ‘metagenomeFeatures’
+      Warning: replacing previous import ‘lazyeval::is_atomic’ by ‘purrr::is_atomic’ when loading ‘metagenomeFeatures’
+    See ‘.../revdep/checks.noindex/metagenomeFeatures/new/metagenomeFeatures.Rcheck/00install.out’ for details.
+    ```
+
+*   checking for missing documentation entries ... WARNING
+    ```
+    Undocumented S4 methods:
+      generic '[' and siglist 'mgFeatures'
+    All user-level objects in a package (including S4 classes and methods)
+    should have documentation entries.
+    See chapter ‘Writing R documentation files’ in the ‘Writing R
+    Extensions’ manual.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.1Mb
+      sub-directories of 1Mb or more:
+        extdata   3.5Mb
+    ```
+
+*   checking R code for possible problems ... NOTE
+    ```
+    .select: no visible binding for global variable ‘identifier’
+      (.../revdep/checks.noindex/metagenomeFeatures/new/metagenomeFeatures.Rcheck/00_pkg_src/metagenomeFeatures/R/mgDb_method_select.R:96-97)
+    .select.taxa: no visible binding for global variable ‘Keys’
+      (.../revdep/checks.noindex/metagenomeFeatures/new/metagenomeFeatures.Rcheck/00_pkg_src/metagenomeFeatures/R/mgDb_method_select.R:21)
+    .select.taxa: no visible binding for global variable ‘.’
+      (.../revdep/checks.noindex/metagenomeFeatures/new/metagenomeFeatures.Rcheck/00_pkg_src/metagenomeFeatures/R/mgDb_method_select.R:21)
+    get_gg13.8_85MgDb: no visible binding for global variable ‘metadata’
+      (.../revdep/checks.noindex/metagenomeFeatures/new/metagenomeFeatures.Rcheck/00_pkg_src/metagenomeFeatures/R/gg13.8_85MgDb.R:23-25)
+    Undefined global functions or variables:
+      . Keys identifier metadata
+    ```
+
+# micompr
 
 Version: 1.1.0
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.4Mb
-      sub-directories of 1Mb or more:
-        R          1.2Mb
-        external   3.9Mb
-    ```
-
-# modules
-
-Version: 0.6.0
-
-## In both
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-                                               ~^~
-      tests/testthat/testS4import/R/all.r:1:29: style: Put spaces around all infix operators.
-      setClass('derived', contains='class_to_export')
-                                 ~^~
-      tests/testthat/testVignettesBuilt/R/code.r:1:1: style: Variable and function names should not be longer than 20 characters.
-      function_with_unusual_name <- function() {
-      ^~~~~~~~~~~~~~~~~~~~~~~~~~
-      
-      
-      testthat results ================================================================
-      OK: 72 SKIPPED: 0 FAILED: 1
-      1. Failure: Package Style (@test-lintr.R#3) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# Momocs
-
-Version: 1.2.2
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.6Mb
-      sub-directories of 1Mb or more:
-        R      1.9Mb
-        data   1.5Mb
-        doc    2.3Mb
-    ```
-
-# MonetDBLite
-
-Version: 0.4.1
-
-## In both
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      1: In .Internal(gc(verbose, reset)) :
-        Connection is garbage-collected, use dbDisconnect() to avoid this.
-      2: In .Internal(gc(verbose, reset)) :
-        Connection is garbage-collected, use dbDisconnect() to avoid this.
-      3: In .Internal(gc(verbose, reset)) :
-        Connection is garbage-collected, use dbDisconnect() to avoid this.
-      4: In .Internal(gc(verbose, reset)) :
-        Connection is garbage-collected, use dbDisconnect() to avoid this.
-      5: In .Internal(gc(verbose, reset)) :
-        Connection is garbage-collected, use dbDisconnect() to avoid this.
-      6: Connection is garbage-collected, use dbDisconnect() to avoid this. 
-      7: Connection is garbage-collected, use dbDisconnect() to avoid this. 
-      8: In .Internal(gc(verbose, reset)) :
-        Connection is garbage-collected, use dbDisconnect() to avoid this.
-      Execution halted
-    ```
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.7Mb
-      sub-directories of 1Mb or more:
-        libs   5.1Mb
-    ```
-
-# MoonlightR
-
-Version: 1.2.0
-
-## In both
-
-*   R CMD check timed out
-    
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.9Mb
-      sub-directories of 1Mb or more:
-        data   3.1Mb
-        doc    2.6Mb
-    ```
-
-# msgtools
-
-Version: 0.2.7
 
 ## In both
 
 *   checking examples ... ERROR
     ```
     ...
-    >   # make a translation
-    >   tran <- make_translation("es", translator = "Some Person <example@examle.com>", pkg = pkg)
-    Updating the PO-Revision-Date to ‘2017-11-08 12:38:02-0500’.
-    Updating the Language-Team to ‘’.
-    >   write_translation(tran, pkg = pkg)
-    > 
-    >   # install translation(s)
-    >   check_translations(pkg = pkg) # check for errors before install
-    $`R-es`
-    No errors
+    Running examples in ‘micompr-Ex.R’ failed
+    The error most likely occurred in:
     
-    >   install_translations(pkg = pkg)
-    sh: msgfmt: command not found
-    Warning in install_translations(pkg = pkg) :
-      running msgfmt on R-es.po failed
-    Updating the PO-Revision-Date to ‘2017-11-08 12:38:03-0500’.
-    Updating the Language-Team to ‘’.
-    sh: msgconv: command not found
-    Error in install_translations(pkg = pkg) : 
-      running msgconv on 'R-en@quot' UTF-8 localization failed
+    > ### Name: assumptions.cmpoutput
+    > ### Title: Get assumptions for parametric tests performed on output
+    > ###   comparisons
+    > ### Aliases: assumptions.cmpoutput
+    > 
+    > ### ** Examples
+    > 
+    > 
+    > # Create a cmpoutput object from the provided datasets
+    > cmp <- cmpoutput("All", 0.9, pphpc_ok$data[["All"]], pphpc_ok$obs_lvls)
+    > 
+    > # Get the assumptions for the parametric tests performed in cmp
+    > acmp <- assumptions(cmp)
+    sROC 0.1-2 loaded
+    MANOVA assumptions require 'MVN' and 'biotools' packages.
+    Error in `*tmp*`[[i]] : subscript out of bounds
+    Calls: assumptions -> assumptions.cmpoutput
     Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      subscript out of bounds
+      1: assumptions(mic1a) at testthat/test_micomp.R:281
+      2: assumptions.micomp(mic1a) at .../revdep/checks.noindex/micompr/new/micompr.Rcheck/00_pkg_src/micompr/R/assumptions.R:19
+      3: lapply(obj, function(x) assumptions(x)) at .../revdep/checks.noindex/micompr/new/micompr.Rcheck/00_pkg_src/micompr/R/micomp.R:498
+      4: FUN(X[[i]], ...)
+      5: assumptions(x) at .../revdep/checks.noindex/micompr/new/micompr.Rcheck/00_pkg_src/micompr/R/micomp.R:498
+      6: assumptions.cmpoutput(x) at .../revdep/checks.noindex/micompr/new/micompr.Rcheck/00_pkg_src/micompr/R/assumptions.R:19
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 363 SKIPPED: 0 FAILED: 2
+      1. Error: assumptions.cmpoutput creates the correct object (@test_cmpoutput.R#214) 
+      2. Error: micomp assumptions have the correct properties (@test_micomp.R#281) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
 *   checking re-building of vignette outputs ... WARNING
     ```
     Error in re-building vignettes:
       ...
-    sh: xgettext: command not found
-    sh: msgmerge: command not found
-    sh: msgmerge: command not found
-    sh: msgfmt: command not found
-    sh: msgconv: command not found
-    Quitting from lines 136-138 (Tutorial.Rmd) 
-    Error: processing vignette 'Tutorial.Rmd' failed with diagnostics:
-    running msgconv on 'R-en@quot' UTF-8 localization failed
+    Quitting from lines 341-342 (paper.Rnw) 
+    Error: processing vignette 'paper.Rnw' failed with diagnostics:
+    subscript out of bounds
     Execution halted
     ```
 
-# myTAI
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘biotools’
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘biotools’
+    ```
+
+# microsamplingDesign
+
+Version: 1.0.5
+
+## Newly broken
+
+*   checking whether package ‘microsamplingDesign’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘.../revdep/checks.noindex/microsamplingDesign/new/microsamplingDesign.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘microsamplingDesign’ ...
+** package ‘microsamplingDesign’ successfully unpacked and MD5 sums checked
+** libs
+clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/microsamplingDesign/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2 -c RcppExports.cpp -o RcppExports.o
+clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/microsamplingDesign/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2 -c interpolation.cpp -o interpolation.o
+clang++ -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o microsamplingDesign.so RcppExports.o interpolation.o -L/Library/Frameworks/R.framework/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Resources/lib -lRblas -L/usr/local/gfortran/lib/gcc/x86_64-apple-darwin15/6.1.0 -L/usr/local/gfortran/lib -lgfortran -lquadmath -lm -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+ld: warning: directory not found for option '-L/usr/local/gfortran/lib/gcc/x86_64-apple-darwin15/6.1.0'
+ld: warning: directory not found for option '-L/usr/local/gfortran/lib'
+installing to .../revdep/checks.noindex/microsamplingDesign/new/microsamplingDesign.Rcheck/microsamplingDesign/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error : object ‘dev_package_deps’ is not exported by 'namespace:devtools'
+ERROR: lazy loading failed for package ‘microsamplingDesign’
+* removing ‘.../revdep/checks.noindex/microsamplingDesign/new/microsamplingDesign.Rcheck/microsamplingDesign’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘microsamplingDesign’ ...
+** package ‘microsamplingDesign’ successfully unpacked and MD5 sums checked
+** libs
+clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/microsamplingDesign/Rcpp/include" -I".../revdep/library.noindex/microsamplingDesign/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2 -c RcppExports.cpp -o RcppExports.o
+clang++ -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/microsamplingDesign/Rcpp/include" -I".../revdep/library.noindex/microsamplingDesign/RcppArmadillo/include" -I/usr/local/include   -fPIC  -Wall -g -O2 -c interpolation.cpp -o interpolation.o
+clang++ -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o microsamplingDesign.so RcppExports.o interpolation.o -L/Library/Frameworks/R.framework/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Resources/lib -lRblas -L/usr/local/gfortran/lib/gcc/x86_64-apple-darwin15/6.1.0 -L/usr/local/gfortran/lib -lgfortran -lquadmath -lm -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+ld: warning: directory not found for option '-L/usr/local/gfortran/lib/gcc/x86_64-apple-darwin15/6.1.0'
+ld: warning: directory not found for option '-L/usr/local/gfortran/lib'
+installing to .../revdep/checks.noindex/microsamplingDesign/old/microsamplingDesign.Rcheck/microsamplingDesign/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+* DONE (microsamplingDesign)
+
+```
+# miscset
+
+Version: 1.1.0
+
+## Newly broken
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘miscset-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: info
+    > ### Title: Print enhanced session information
+    > ### Aliases: info
+    > ### Keywords: session
+    > 
+    > ### ** Examples
+    > 
+    > info()
+    Error: ‘sessioninfo’ >= * must be installed for this functionality.
+    Execution halted
+    ```
+
+# MODIS
+
+Version: 1.1.3
+
+## In both
+
+*   checking S3 generic/method consistency ... WARNING
+    ```
+    sh: gdalinfo: command not found
+    See section ‘Generic functions and methods’ in the ‘Writing R
+    Extensions’ manual.
+    ```
+
+*   checking replacement functions ... WARNING
+    ```
+    sh: gdalinfo: command not found
+    The argument of a replacement function which corresponds to the right
+    hand side must be named ‘value’.
+    ```
+
+*   checking for missing documentation entries ... WARNING
+    ```
+    sh: gdalinfo: command not found
+    All user-level objects in a package should have documentation entries.
+    See chapter ‘Writing R documentation files’ in the ‘Writing R
+    Extensions’ manual.
+    ```
+
+*   checking for code/documentation mismatches ... WARNING
+    ```
+    sh: gdalinfo: command not found
+    sh: gdalinfo: command not found
+    sh: gdalinfo: command not found
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    sh: gdalinfo: command not found
+    ```
+
+*   checking foreign function calls ... NOTE
+    ```
+    sh: gdalinfo: command not found
+    See chapter ‘System and foreign language interfaces’ in the ‘Writing R
+    Extensions’ manual.
+    ```
+
+*   checking Rd \usage sections ... NOTE
+    ```
+    sh: gdalinfo: command not found
+    The \usage entries for S3 methods should use the \method markup and not
+    their full name.
+    See chapter ‘Writing R documentation files’ in the ‘Writing R
+    Extensions’ manual.
+    ```
+
+# MonetDBLite
 
 Version: 0.6.0
 
@@ -1318,28 +2610,107 @@ Version: 0.6.0
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.6Mb
+      installed size is  6.0Mb
       sub-directories of 1Mb or more:
-        data   2.0Mb
-        doc    2.7Mb
+        libs   5.3Mb
     ```
 
-# NetworkToolbox
+# MoonlightR
 
-Version: 0.0.1.0
+Version: 1.6.1
 
 ## In both
 
+*   checking whether package ‘MoonlightR’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘.../revdep/checks.noindex/MoonlightR/new/MoonlightR.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘MoonlightR’ ...
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Warning in fun(libname, pkgname) : couldn't connect to display ""
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘DO.db’
+ERROR: lazy loading failed for package ‘MoonlightR’
+* removing ‘.../revdep/checks.noindex/MoonlightR/new/MoonlightR.Rcheck/MoonlightR’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘MoonlightR’ ...
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Warning in fun(libname, pkgname) : couldn't connect to display ""
+Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘DO.db’
+ERROR: lazy loading failed for package ‘MoonlightR’
+* removing ‘.../revdep/checks.noindex/MoonlightR/old/MoonlightR.Rcheck/MoonlightR’
+
+```
+# msgtools
+
+Version: 0.2.7
+
+## Newly broken
+
+*   checking examples ... WARNING
+    ```
+    Found the following significant warnings:
+    
+      Warning: 'create' is deprecated.
+      Warning: 'setup' is deprecated.
+      Warning: 'create_description' is deprecated.
+      Warning: 'create' is deprecated.
+      Warning: 'setup' is deprecated.
+      Warning: 'create_description' is deprecated.
+      Warning: 'create' is deprecated.
+      Warning: 'setup' is deprecated.
+      Warning: 'create_description' is deprecated.
+      Warning: 'create' is deprecated.
+      Warning: 'setup' is deprecated.
+      Warning: 'create_description' is deprecated.
+    Deprecated functions may be defunct as soon as of the next release of
+    R.
+    See ?Deprecated.
+    ```
+
+# myTAI
+
+Version: 0.8.0
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.5Mb
+      sub-directories of 1Mb or more:
+        data   2.0Mb
+        doc    2.4Mb
+    ```
+
 *   checking dependencies in R code ... NOTE
     ```
-    Namespaces in Imports field not imported from:
-      ‘devtools’ ‘qdap’
+    Namespace in Imports field not imported from: ‘biomartr’
       All declared Imports should be used.
     ```
 
 # networktools
 
-Version: 1.1.0
+Version: 1.2.0
 
 ## In both
 
@@ -1351,13 +2722,14 @@ Version: 1.1.0
 
 # nima
 
-Version: 0.4.5
+Version: 0.5.0
 
 ## In both
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘survival’
+    Namespaces in Imports field not imported from:
+      ‘ProjectTemplate’ ‘devtools’ ‘plyr’ ‘survival’
       All declared Imports should be used.
     ```
 
@@ -1377,55 +2749,23 @@ Version: 2.0.6
 
 # NMF
 
-Version: 0.20.6
+Version: 0.21.0
 
 ## In both
 
 *   R CMD check timed out
     
 
-*   checking Rd cross-references ... WARNING
-    ```
-    Unknown package ‘RcppOctave’ in Rd xrefs
-    ```
-
 *   checking package dependencies ... NOTE
     ```
-    Packages suggested but not available for checking: ‘RcppOctave’ ‘doMPI’
+    Package suggested but not available for checking: ‘doMPI’
     ```
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.1Mb
+      installed size is  5.3Mb
       sub-directories of 1Mb or more:
-        R     2.6Mb
-        doc   1.1Mb
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    ...
-      variable ‘n’
-      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1584)
-    nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
-      variable ‘n’
-      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1590-1592)
-    nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
-      variable ‘n’
-      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1597-1599)
-    nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
-      variable ‘n’
-      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1618-1621)
-    nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
-      variable ‘n’
-      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1653)
-    nmf,matrix-numeric-NMFStrategy : run.all: no visible binding for global
-      variable ‘n’
-      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/nmf.R:1666-1676)
-    rss,matrix: no visible binding for global variable ‘Biobase’
-      (.../revdep/checks/NMF/new/NMF.Rcheck/00_pkg_src/NMF/R/NMF-class.R:2263-2264)
-    Undefined global functions or variables:
-      Biobase RNGobj fstop n
+        R   3.2Mb
     ```
 
 # npsm
@@ -1438,16 +2778,16 @@ Version: 0.5
     ```
     ...
     onecovahomog: no visible global function definition for ‘pf’
-      (.../revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/racov.r:53)
+      (.../revdep/checks.noindex/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/racov.r:53)
     rank.test: no visible global function definition for ‘pnorm’
-      (.../revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/rank.test.r:12-16)
+      (.../revdep/checks.noindex/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/rank.test.r:12-16)
     rank.test: no visible global function definition for ‘coef’
-      (.../revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/rank.test.r:21)
+      (.../revdep/checks.noindex/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/rank.test.r:21)
     rank.test: no visible global function definition for ‘qt’
-      (.../revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/rank.test.r:24-28)
+      (.../revdep/checks.noindex/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/rank.test.r:24-28)
     rcn: no visible global function definition for ‘rnorm’
     vanElteren.test: no visible global function definition for ‘pnorm’
-      (.../revdep/checks/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/vanElteren.test.r:23)
+      (.../revdep/checks.noindex/npsm/new/npsm.Rcheck/00_pkg_src/npsm/R/vanElteren.test.r:23)
     Undefined global functions or variables:
       coef cor dnorm median model.matrix new pchisq pf pnorm qnorm qt
       quantile resid rnorm var
@@ -1462,7 +2802,7 @@ Version: 0.5
 
 # opencpu
 
-Version: 2.0.5
+Version: 2.0.8
 
 ## In both
 
@@ -1473,7 +2813,7 @@ Version: 2.0.5
 
 # OpenMx
 
-Version: 2.8.3
+Version: 2.11.3
 
 ## In both
 
@@ -1484,16 +2824,75 @@ Version: 2.8.3
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 17.0Mb
+      installed size is 18.2Mb
       sub-directories of 1Mb or more:
-        R        6.1Mb
-        libs     3.5Mb
-        models   4.6Mb
+        R        6.6Mb
+        libs     4.1Mb
+        models   4.7Mb
     ```
 
 *   checking Rd cross-references ... NOTE
     ```
     Packages unavailable to check Rd xrefs: ‘ifaTools’, ‘umx’
+    ```
+
+# openPrimeR
+
+Version: 1.2.0
+
+## In both
+
+*   checking for hidden files and directories ... NOTE
+    ```
+    Found the following hidden files and directories:
+      .travis.yml
+    These were most likely included in error. See section ‘Package
+    structure’ in the ‘Writing R Extensions’ manual.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 15.2Mb
+      sub-directories of 1Mb or more:
+        R         3.9Mb
+        extdata  10.2Mb
+    ```
+
+# OPWeight
+
+Version: 1.2.0
+
+## In both
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+      ...
+    Installing package into '.../revdep/checks.noindex/OPWeight/new/OPWeight.Rcheck'
+    (as 'lib' is unspecified)
+    trying URL 'https://bioconductor.org/packages/3.7/bioc/bin/macosx/el-capitan/contrib/3.5/BiocInstaller_1.30.0.tgz'
+    Content type 'application/x-gzip' length 84646 bytes (82 KB)
+    ==================================================
+    downloaded 82 KB
+    
+    Bioconductor version 3.7 (BiocInstaller 1.30.0), ?biocLite for help
+    BioC_mirror: https://bioconductor.org
+    Using Bioconductor 3.7 (BiocInstaller 1.30.0), R 3.5.1 (2018-07-02).
+    Installing package(s) 'OPWeight'
+    trying URL 'https://bioconductor.org/packages/3.7/bioc/bin/macosx/el-capitan/contrib/3.5/OPWeight_1.2.0.tgz'
+    Content type 'application/x-gzip' length 632632 bytes (617 KB)
+    ==================================================
+    downloaded 617 KB
+    
+    Quitting from lines 46-59 (OPWeight.Rmd) 
+    Error: processing vignette 'OPWeight.Rmd' failed with diagnostics:
+    there is no package called 'airway'
+    Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘airway’
     ```
 
 # osmplotr
@@ -1504,42 +2903,54 @@ Version: 0.3.0
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  6.8Mb
+      installed size is  6.9Mb
       sub-directories of 1Mb or more:
         doc   5.9Mb
     ```
 
 # packrat
 
-Version: 0.4.8-1
+Version: 0.4.9-3
 
 ## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Package which this enhances but not available for checking: ‘BiocInstaller’
+    ```
+
+# pacman
+
+Version: 0.4.6
+
+## Newly broken
 
 *   checking tests ...
     ```
      ERROR
-    Running the tests in ‘tests/test-all.R’ failed.
+    Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      testthat results ================================================================
-      OK: 47 SKIPPED: 1 FAILED: 11
-      1. Error: Bundle works when using R's internal tar (@test-bundle.R#14) 
-      2. Error: Bundle works when omitting CRAN packages (@test-bundle.R#36) 
-      3. Error: init creates project structure and installs dependencies (@test-packrat.R#19) 
-      4. Error: restore ignores dirty packages (@test-packrat.R#35) 
-      5. Error: restore installs missing packages (@test-packrat.R#48) 
-      6. Error: snapshot captures new dependencies (@test-packrat.R#62) 
-      7. Error: dependencies in library directories are ignored (@test-packrat.R#89) 
-      8. Error: clean removes libraries and sources (@test-packrat.R#103) 
-      9. Error: init works with multiple repos (@test-packrat.R#133) 
-      1. ...
+      9: vapply(remotes, install_remote, ..., FUN.VALUE = character(1)) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmp4JgeQf/R.INSTALL6bdd3174f127/remotes/R/install-remote.R:73
+      10: FUN(X[[i]], ...)
+      11: remote_package_name(remote) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmp4JgeQf/R.INSTALL6bdd3174f127/remotes/R/install-remote.R:24
+      12: remote_package_name.github_remote(remote) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmp4JgeQf/R.INSTALL6bdd3174f127/remotes/R/install-remote.R:105
+      13: github_DESCRIPTION(username = remote$username, repo = remote$repo, subdir = remote$subdir, 
+             host = remote$host, ref = remote$ref, pat = remote$auth_token %||% github_pat(), 
+             use_curl = use_curl) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmp4JgeQf/R.INSTALL6bdd3174f127/remotes/R/install-github.R:222
+      14: stop("HTTP error ", res$status_code, ".", "\n", github_error_message(res), call. = FALSE) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmp4JgeQf/R.INSTALL6bdd3174f127/remotes/R/github.R:101
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 54 SKIPPED: 3 FAILED: 1
+      1. Error: p_install_gh works (@test-p_install_gh.R#5) 
       
       Error: testthat unit tests failed
       Execution halted
     ```
 
-*   checking package dependencies ... NOTE
+*   checking dependencies in R code ... NOTE
     ```
-    Package which this enhances but not available for checking: ‘BiocInstaller’
+    Missing or unexported objects:
+      ‘devtools::github_pull’ ‘devtools::github_release’
     ```
 
 # parlitools
@@ -1553,62 +2964,75 @@ Version: 0.2.1
       Note: found 13 marked UTF-8 strings
     ```
 
-# perccalc
+# pkgdown
 
-Version: 1.0.0
+Version: 1.1.0
+
+## In both
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      nrow(out) not equal to 1.
+      1/1 mismatches
+      [1] 0 - 1 == -1
+      
+      ── 2. Failure: can autodetect published tutorials (@test-tutorials.R#31)  ──────
+      out$name not equal to "test-1".
+      Lengths differ: 0 is not 1
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 241 SKIPPED: 9 FAILED: 2
+      1. Failure: can autodetect published tutorials (@test-tutorials.R#30) 
+      2. Failure: can autodetect published tutorials (@test-tutorials.R#31) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+# pkgmaker
+
+Version: 0.27
 
 ## In both
 
 *   checking dependencies in R code ... NOTE
     ```
     Namespaces in Imports field not imported from:
-      ‘MASS’ ‘devtools’ ‘ggplot2’ ‘haven’ ‘tidyverse’
+      ‘magrittr’ ‘stringi’
       All declared Imports should be used.
     ```
 
-# pkgmaker
+# pkgnet
 
-Version: 0.22
+Version: 0.2.0
 
 ## In both
 
 *   checking dependencies in R code ... NOTE
     ```
-    'library' or 'require' calls in package code:
-      ‘argparse’ ‘devtools’ ‘knitr’
-      Please use :: or requireNamespace() instead.
-      See section 'Suggested packages' in the 'Writing R Extensions' manual.
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    ...
-      (.../revdep/checks/pkgmaker/new/pkgmaker.Rcheck/00_pkg_src/pkgmaker/R/unitTests.R:792)
-    utest,character: no visible global function definition for ‘test_file’
-      (.../revdep/checks/pkgmaker/new/pkgmaker.Rcheck/00_pkg_src/pkgmaker/R/unitTests.R:797)
-    Undefined global functions or variables:
-      .testLogger ArgumentParser HTMLReport RweaveLatex Sweave
-      available.packages browseURL capture.output citation compareVersion
-      contrib.url data defineTestSuite dev.off devtools file_test finish
-      getErrors head hwrite installed.packages is.package knit knit2html
-      knit2pdf knit_hooks load_all opts_chunk packageDescription par png
-      printHTMLProtocol printTextProtocol proto publish read.bib
-      runTestFile runTestSuite sessionInfo str tail test_dir test_file
-      toBibtex toLatex untar
-    Consider adding
-      importFrom("grDevices", "dev.off", "png")
-      importFrom("graphics", "par")
-      importFrom("utils", "RweaveLatex", "Sweave", "available.packages",
-                 "browseURL", "capture.output", "citation", "compareVersion",
-                 "contrib.url", "data", "file_test", "head",
-                 "installed.packages", "packageDescription", "sessionInfo",
-                 "str", "tail", "toBibtex", "toLatex", "untar")
-    to your NAMESPACE file.
+    Namespaces in Imports field not imported from:
+      ‘DT’ ‘covr’ ‘knitr’
+      All declared Imports should be used.
     ```
 
 # PKPDmisc
 
-Version: 2.0.0
+Version: 2.1.1
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 84-85 (multiplot.Rmd) 
+    Error: processing vignette 'multiplot.Rmd' failed with diagnostics:
+    'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
+    ```
 
 ## In both
 
@@ -1616,6 +3040,20 @@ Version: 2.0.0
     ```
     Namespace in Imports field not imported from: ‘purrr’
       All declared Imports should be used.
+    ```
+
+# plotly
+
+Version: 4.8.0
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  6.5Mb
+      sub-directories of 1Mb or more:
+        R             1.7Mb
+        htmlwidgets   3.1Mb
     ```
 
 # poio
@@ -1636,13 +3074,14 @@ Version: 0.0-3
 
 # prodigenr
 
-Version: 0.3.0
+Version: 0.4.0
 
 ## In both
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespace in Imports field not imported from: ‘stats’
+    Namespaces in Imports field not imported from:
+      ‘clipr’ ‘desc’ ‘devtools’
       All declared Imports should be used.
     ```
 
@@ -1659,28 +3098,71 @@ Version: 1.1.4
 
 # psichomics
 
-Version: 1.2.1
+Version: 1.6.1
 
 ## In both
 
 *   checking installed package size ... NOTE
     ```
-      installed size is  5.4Mb
+      installed size is  9.6Mb
       sub-directories of 1Mb or more:
-        R     1.4Mb
-        doc   3.3Mb
+        R     2.9Mb
+        doc   5.6Mb
     ```
 
-# pulver
+*   checking R code for possible problems ... NOTE
+    ```
+    ...
+      (.../revdep/checks.noindex/psichomics/new/psichomics.Rcheck/00_pkg_src/psichomics/R/data_local.R:284)
+    prepareGeneQuantSTAR : <anonymous>: no visible binding for global
+      variable ‘index’
+      (.../revdep/checks.noindex/psichomics/new/psichomics.Rcheck/00_pkg_src/psichomics/R/data_local.R:284)
+    prepareGeneQuantSTAR : <anonymous>: no visible binding for global
+      variable ‘index’
+      (.../revdep/checks.noindex/psichomics/new/psichomics.Rcheck/00_pkg_src/psichomics/R/data_local.R:285)
+    prepareJunctionQuantSTAR: no visible binding for '<<-' assignment to
+      ‘index’
+      (.../revdep/checks.noindex/psichomics/new/psichomics.Rcheck/00_pkg_src/psichomics/R/data_local.R:198)
+    prepareJunctionQuantSTAR : <anonymous>: no visible binding for '<<-'
+      assignment to ‘index’
+      (.../revdep/checks.noindex/psichomics/new/psichomics.Rcheck/00_pkg_src/psichomics/R/data_local.R:200)
+    prepareJunctionQuantSTAR : <anonymous>: no visible binding for global
+      variable ‘index’
+      (.../revdep/checks.noindex/psichomics/new/psichomics.Rcheck/00_pkg_src/psichomics/R/data_local.R:200)
+    prepareJunctionQuantSTAR : <anonymous>: no visible binding for global
+      variable ‘index’
+      (.../revdep/checks.noindex/psichomics/new/psichomics.Rcheck/00_pkg_src/psichomics/R/data_local.R:201)
+    Undefined global functions or variables:
+      ..strandedness index
+    ```
 
-Version: 0.1.0
+*   checking compiled code ... NOTE
+    ```
+    File ‘psichomics/libs/psichomics.so’:
+      Found ‘___stdoutp’, possibly from ‘stdout’ (C)
+        Object: ‘psiFastCalc.o’
+      Found ‘_printf’, possibly from ‘printf’ (C)
+        Object: ‘psiFastCalc.o’
+      Found ‘_putchar’, possibly from ‘putchar’ (C)
+        Object: ‘psiFastCalc.o’
+    
+    Compiled code should not call entry points which might terminate R nor
+    write to stdout/stderr instead of to the console, nor use Fortran I/O
+    nor system RNGs.
+    
+    See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual.
+    ```
 
-## In both
+# PSPManalysis
 
-*   checking whether package ‘pulver’ can be installed ... ERROR
+Version: 0.2.0
+
+## Newly broken
+
+*   checking whether package ‘PSPManalysis’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘.../revdep/checks/pulver/new/pulver.Rcheck/00install.out’ for details.
+    See ‘.../revdep/checks.noindex/PSPManalysis/new/PSPManalysis.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -1688,55 +3170,92 @@ Version: 0.1.0
 ### Devel
 
 ```
-* installing *source* package ‘pulver’ ...
-** package ‘pulver’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘PSPManalysis’ ...
+** package ‘PSPManalysis’ successfully unpacked and MD5 sums checked
 ** libs
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c partial_result.cpp -o partial_result.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c pulver.cpp -o pulver.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c result.cpp -o result.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c storage.cpp -o storage.o
-clang: error: unsupported option '-fopenmp'
-clang: error: unsupported option '-fopenmp'
-clang: error: unsupported option '-fopenmp'
-clang: error: unsupported option '-fopenmp'
-make: *** [RcppExports.o] Error 1
-make: *** Waiting for unfinished jobs....
-make: *** [pulver.o] Error 1
-make: *** [partial_result.o] Error 1
-make: *** [result.o] Error 1
-clang: error: unsupported option '-fopenmp'
-make: *** [storage.o] Error 1
-ERROR: compilation failed for package ‘pulver’
-* removing ‘.../revdep/checks/pulver/new/pulver.Rcheck/pulver’
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I/usr/local/include   -fPIC  -Wall -g -O2  -c PSPManalysis_init.c -o PSPManalysis_init.o
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I/usr/local/include   -fPIC  -Wall -g -O2  -c csb2rlist.c -o csb2rlist.o
+clang -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o PSPManalysis.so PSPManalysis_init.o csb2rlist.o -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+installing to .../revdep/checks.noindex/PSPManalysis/new/PSPManalysis.Rcheck/PSPManalysis/libs
+** R
+** demo
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+Error: package or namespace load failed for ‘PSPManalysis’:
+ .onAttach failed in attachNamespace() for 'PSPManalysis', details:
+  call: NULL
+  error: 'setup_rtools' is not an exported object from 'namespace:devtools'
+Error: loading failed
+Execution halted
+ERROR: loading failed
+* removing ‘.../revdep/checks.noindex/PSPManalysis/new/PSPManalysis.Rcheck/PSPManalysis’
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘pulver’ ...
-** package ‘pulver’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘PSPManalysis’ ...
+** package ‘PSPManalysis’ successfully unpacked and MD5 sums checked
 ** libs
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c partial_result.cpp -o partial_result.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c pulver.cpp -o pulver.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c result.cpp -o result.o
-clang++  -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I".../revdep/library/pulver/Rcpp/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c storage.cpp -o storage.o
-clang: clangclang: : errorerror: : clangerrorclangunsupported option '-fopenmp'
-: : : unsupported option '-fopenmp'unsupported option '-fopenmp'
-error: error: 
-unsupported option '-fopenmp'
-unsupported option '-fopenmp'
-make: *** [storage.o] Error 1
-make: *** Waiting for unfinished jobs....
-make: *** [result.o] Error 1
-make: *** [pulver.o] Error 1
-make: *** [partial_result.o] Error 1
-make: *** [RcppExports.o] Error 1
-ERROR: compilation failed for package ‘pulver’
-* removing ‘.../revdep/checks/pulver/old/pulver.Rcheck/pulver’
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I/usr/local/include   -fPIC  -Wall -g -O2  -c PSPManalysis_init.c -o PSPManalysis_init.o
+clang -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG   -I/usr/local/include   -fPIC  -Wall -g -O2  -c csb2rlist.c -o csb2rlist.o
+clang -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/Library/Frameworks/R.framework/Resources/lib -L/usr/local/lib -o PSPManalysis.so PSPManalysis_init.o csb2rlist.o -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+installing to .../revdep/checks.noindex/PSPManalysis/old/PSPManalysis.Rcheck/PSPManalysis/libs
+** R
+** demo
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+* DONE (PSPManalysis)
 
 ```
+# pulver
+
+Version: 0.1.0
+
+## In both
+
+*   checking package dependencies ... ERROR
+    ```
+    Package required but not available: ‘DatABEL’
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
+    ```
+
+# qqplotr
+
+Version: 0.0.3
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘knitr’ ‘purrr’ ‘rmarkdown’
+      All declared Imports should be used.
+    ```
+
+# qsort
+
+Version: 0.2.2
+
+## In both
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 6 marked UTF-8 strings
+    ```
+
 # rbundler
 
 Version: 0.3.7
@@ -1753,19 +3272,19 @@ Version: 0.3.7
     ...
     install_version: no visible global function definition for
       ‘contrib.url’
-      (.../revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:25)
+      (.../revdep/checks.noindex/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:25)
     install_version: no visible global function definition for
       ‘available.packages’
-      (.../revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:26)
+      (.../revdep/checks.noindex/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:26)
     install_version: no visible global function definition for
       ‘install_url’
-      (.../revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:37)
+      (.../revdep/checks.noindex/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:37)
     load_available_packages: no visible global function definition for
       ‘contrib.url’
-      (.../revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/load_available_packages.r:5)
+      (.../revdep/checks.noindex/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/load_available_packages.r:5)
     validate_installed_package: no visible global function definition for
       ‘installed.packages’
-      (.../revdep/checks/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:55)
+      (.../revdep/checks.noindex/rbundler/new/rbundler.Rcheck/00_pkg_src/rbundler/R/install_version.r:55)
     Undefined global functions or variables:
       available.packages contrib.url install_url installed.packages
     Consider adding
@@ -1774,36 +3293,55 @@ Version: 0.3.7
     to your NAMESPACE file.
     ```
 
+# RcppProgress
+
+Version: 0.4.1
+
+## In both
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      
+      ── 4. Failure: eta_progress_bar (@test-pkg_examples.R#28)  ─────────────────────
+      `eta_progress_bar(nb = 1000)` threw an error.
+      Message: System command error
+      Class:   system_command_status_error/system_command_error/error/condition
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 0 SKIPPED: 0 FAILED: 4
+      1. Failure: test_sequential (@test-pkg_examples.R#6) 
+      2. Failure: test_multithreaded (@test-pkg_examples.R#13) 
+      3. Failure: amardillo_multithreaded (@test-pkg_examples.R#20) 
+      4. Failure: eta_progress_bar (@test-pkg_examples.R#28) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
 # recount
 
-Version: 1.2.3
+Version: 1.6.3
 
 ## In both
 
 *   R CMD check timed out
     
 
-*   checking installed package size ... NOTE
+*   checking package dependencies ... NOTE
     ```
-      installed size is 13.5Mb
-      sub-directories of 1Mb or more:
-        data  10.7Mb
-        doc    2.6Mb
+    Packages suggested but not available for checking:
+      ‘EnsDb.Hsapiens.v79’ ‘org.Hs.eg.db’
     ```
 
-*   checking R code for possible problems ... NOTE
+*   checking installed package size ... NOTE
     ```
-    add_predictions: no visible binding for global variable
-      ‘PredictedPhenotypes’
-      (.../revdep/checks/recount/new/recount.Rcheck/00_pkg_src/recount/R/add_predictions.R:80)
-    add_predictions: no visible binding for global variable
-      ‘PredictedPhenotypes’
-      (.../revdep/checks/recount/new/recount.Rcheck/00_pkg_src/recount/R/add_predictions.R:82)
-    add_predictions: no visible binding for global variable
-      ‘PredictedPhenotypes’
-      (.../revdep/checks/recount/new/recount.Rcheck/00_pkg_src/recount/R/add_predictions.R:84-85)
-    Undefined global functions or variables:
-      PredictedPhenotypes
+      installed size is 15.6Mb
+      sub-directories of 1Mb or more:
+        data  12.0Mb
+        doc    3.3Mb
     ```
 
 *   checking data for non-ASCII characters ... NOTE
@@ -1815,55 +3353,93 @@ Version: 1.2.3
 
 Version: 0.9.8
 
-## In both
+## Newly broken
 
-*   checking tests ...
+*   checking re-building of vignette outputs ... WARNING
     ```
-     ERROR
-    Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
-      
-      3. Error: Write Batch -Update Two Fields (@test-write-batch.R#138) -------------
-      wrong sign in 'by' argument
-      1: REDCapR::redcap_write(ds = returned_object1$data, redcap_uri = project$redcap_uri, 
-             token = project$token) at testthat/test-write-batch.R:138
-      2: REDCapR::create_batch_glossary(row_count = base::nrow(ds_to_write), batch_size = batch_size) at .../revdep/checks/REDCapR/new/REDCapR.Rcheck/00_pkg_src/REDCapR/R/redcap-write.R:95
-      
-      testthat results ================================================================
-      OK: 574 SKIPPED: 0 FAILED: 3
-      1. Failure: Write Batch -Update One Field (@test-write-batch.R#112) 
-      2. Failure: Write Batch -Update Two Fields (@test-write-batch.R#127) 
-      3. Error: Write Batch -Update Two Fields (@test-write-batch.R#138) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-# redlistr
-
-Version: 1.0.0
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘rgdal’
-      All declared Imports should be used.
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 186-191 (BasicREDCapROperations.Rmd) 
+    Error: processing vignette 'BasicREDCapROperations.Rmd' failed with diagnostics:
+    'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
     ```
 
 # regionReport
 
-Version: 1.10.2
+Version: 1.14.3
 
 ## In both
 
-*   R CMD check timed out
+*   checking examples ... ERROR
+    ```
+    ...
+      ordinary text without R code
     
+    label: reproducibility1 (with options) 
+    List of 1
+     $ echo: logi FALSE
+    
+      ordinary text without R code
+    
+    label: reproducibility2 (with options) 
+    List of 1
+     $ echo: logi FALSE
+    
+      ordinary text without R code
+    
+    label: reproducibility3 (with options) 
+    List of 1
+     $ echo: logi FALSE
+    
+    Quitting from lines 341-344 (DESeq2Exploration.Rmd) 
+    Error: 'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 126-135 (bumphunterExample.Rmd) 
+    Error: processing vignette 'bumphunterExample.Rmd' failed with diagnostics:
+    'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘TxDb.Hsapiens.UCSC.hg19.knownGene’
+    ```
 
 *   checking dependencies in R code ... NOTE
     ```
     Unexported object imported by a ':::' call: ‘DESeq2:::pvalueAdjustment’
       See the note in ?`:::` about the use of this operator.
+    ```
+
+# reprex
+
+Version: 0.2.1
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘tools’
+      All declared Imports should be used.
+    ```
+
+# reproducible
+
+Version: 0.2.3
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘gdalUtils’
+      All declared Imports should be used.
     ```
 
 # rfishbase
@@ -1872,17 +3448,41 @@ Version: 2.1.2
 
 ## In both
 
-*   R CMD check timed out
-    
-
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 44 marked UTF-8 strings
     ```
 
+# Ricetl
+
+Version: 0.2.5
+
+## In both
+
+*   checking package dependencies ... ERROR
+    ```
+    Package required but not available: ‘gWidgetsRGtk2’
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
+    ```
+
 # RIVER
 
-Version: 1.0.0
+Version: 1.4.0
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    zcat: can't stat: .../revdep/checks.noindex/RIVER/new/RIVER.Rcheck/RIVER/extdata/simulation_RIVER.gz (.../revdep/checks.noindex/RIVER/new/RIVER.Rcheck/RIVER/extdata/simulation_RIVER.gz.Z): No such file or directory
+    Quitting from lines 375-379 (RIVER.Rmd) 
+    Error: processing vignette 'RIVER.Rmd' failed with diagnostics:
+    'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
+    ```
 
 ## In both
 
@@ -1907,24 +3507,40 @@ Version: 0.1.0
       Note: found 7 marked Latin-1 strings
     ```
 
-# ropenaq
-
-Version: 0.2.2
-
-## In both
-
-*   R CMD check timed out
-    
-
 # rpivotTable
 
-Version: 0.2.0
+Version: 0.3.0
 
 ## In both
 
 *   checking package dependencies ... NOTE
     ```
     Package which this enhances but not available for checking: ‘shiny’
+    ```
+
+# rsimsum
+
+Version: 0.3.3
+
+## In both
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Package unavailable to check Rd xrefs: ‘ggthemes’
+    ```
+
+# rsMove
+
+Version: 0.2.4
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespaces in Imports field not imported from:
+      ‘gdalUtils’ ‘igraph’ ‘lattice’ ‘lubridate’ ‘randomForest’ ‘rgdal’
+      ‘spatialEco’
+      All declared Imports should be used.
     ```
 
 # rsoi
@@ -1939,96 +3555,30 @@ Version: 0.3.0
       All declared Imports should be used.
     ```
 
-# RTCGA
+# RtutoR
 
-Version: 1.6.0
+Version: 1.2
 
 ## In both
 
-*   checking examples ... ERROR
+*   checking dependencies in R code ... NOTE
     ```
-    Running examples in ‘RTCGA-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: boxplotTCGA
-    > ### Title: Create Boxplots for TCGA Datasets
-    > ### Aliases: boxplotTCGA
-    > 
-    > ### ** Examples
-    > 
-    > library(RTCGA.rnaseq)
-    Error in library(RTCGA.rnaseq) : 
-      there is no package called ‘RTCGA.rnaseq’
-    Execution halted
+    Namespaces in Imports field not imported from:
+      ‘DT’ ‘rmarkdown’
+      All declared Imports should be used.
     ```
 
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(RTCGA)
-      Welcome to the RTCGA (version: 1.6.0).
-      > library(RTCGA.rnaseq)
-      Error in library(RTCGA.rnaseq) : 
-        there is no package called 'RTCGA.rnaseq'
-      Execution halted
-    ```
+# Ryacas
 
-*   checking package dependencies ... NOTE
-    ```
-    Packages suggested but not available for checking:
-      ‘RTCGA.rnaseq’ ‘RTCGA.clinical’ ‘RTCGA.mutations’ ‘RTCGA.RPPA’
-      ‘RTCGA.mRNA’ ‘RTCGA.miRNASeq’ ‘RTCGA.methylation’ ‘RTCGA.CNV’
-      ‘RTCGA.PANCAN12’
-    ```
+Version: 0.3-1
 
-*   checking R code for possible problems ... NOTE
-    ```
-    ...
-      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
-    ggbiplot: no visible binding for global variable ‘xvar’
-      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
-    ggbiplot: no visible binding for global variable ‘yvar’
-      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
-    ggbiplot: no visible binding for global variable ‘angle’
-      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
-    ggbiplot: no visible binding for global variable ‘hjust’
-      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
-    read.mutations: no visible binding for global variable ‘.’
-      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/readTCGA.R:383)
-    read.mutations: no visible binding for global variable ‘.’
-      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/readTCGA.R:386)
-    read.rnaseq: no visible binding for global variable ‘.’
-      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/readTCGA.R:372-375)
-    survivalTCGA: no visible binding for global variable ‘times’
-      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/survivalTCGA.R:101-137)
-    whichDateToUse: no visible binding for global variable ‘.’
-      (.../revdep/checks/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/downloadTCGA.R:167-168)
-    Undefined global functions or variables:
-      . angle hjust muted times varname xvar yvar
-    ```
+## In both
 
-*   checking Rd cross-references ... NOTE
+*   checking whether package ‘Ryacas’ can be installed ... WARNING
     ```
-    Packages unavailable to check Rd xrefs: ‘RTCGA.rnaseq’, ‘RTCGA.clinical’, ‘RTCGA.mutations’, ‘RTCGA.CNV’, ‘RTCGA.RPPA’, ‘RTCGA.mRNA’, ‘RTCGA.miRNASeq’, ‘RTCGA.methylation’
-    ```
-
-# RxODE
-
-Version: 0.6-1
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 380-382 (RxODE-intro.Rmd) 
-    Error: processing vignette 'RxODE-intro.Rmd' failed with diagnostics:
-    Tried both LSODA and DOP853, but could not solve the system.
-    Execution halted
+    Found the following significant warnings:
+      yacas/src/obmalloc.cpp:584:23: warning: comparison of constant 384307168202282325 with expression of type 'unsigned int' is always false [-Wtautological-constant-out-of-range-compare]
+    See ‘.../revdep/checks.noindex/Ryacas/new/Ryacas.Rcheck/00install.out’ for details.
     ```
 
 # SciencesPo
@@ -2036,6 +3586,23 @@ Version: 0.6-1
 Version: 1.4.1
 
 ## In both
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
+      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
+    SciencesPo 1.4.1
+    Warning: `panel.margin` is deprecated. Please use `panel.spacing` property instead
+    Warning: `legend.margin` must be specified using `margin()`. For the old behavior use legend.spacing
+    Warning: `panel.margin` is deprecated. Please use `panel.spacing` property instead
+    Warning: `legend.margin` must be specified using `margin()`. For the old behavior use legend.spacing
+    Quitting from lines 754-756 (Indices.Rmd) 
+    Error: processing vignette 'Indices.Rmd' failed with diagnostics:
+    'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
+    ```
 
 *   checking Rd cross-references ... NOTE
     ```
@@ -2053,22 +3620,57 @@ Version: 1.2.0
       Note: found 145 marked UTF-8 strings
     ```
 
-# SpaDES.addins
+# SpaDES
 
-Version: 0.1.0
+Version: 2.0.2
 
 ## In both
 
-*   checking dependencies in R code ... NOTE
+*   checking package dependencies ... ERROR
     ```
-    Namespaces in Imports field not imported from:
-      ‘devtools’ ‘rstudioapi’
-      All declared Imports should be used.
+    Package required but not available: ‘SpaDES.core’
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
+    ```
+
+# SpaDES.addins
+
+Version: 0.1.1
+
+## In both
+
+*   checking package dependencies ... ERROR
+    ```
+    Package required but not available: ‘SpaDES.core’
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
+    ```
+
+# specmine
+
+Version: 2.0.3
+
+## In both
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘rcytoscapejs’
     ```
 
 # spectrolab
 
-Version: 0.0.2
+Version: 0.0.7
+
+## Newly broken
+
+*   checking whether package ‘spectrolab’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: 'devtools::use_package' is deprecated.
+    See ‘.../revdep/checks.noindex/spectrolab/new/spectrolab.Rcheck/00install.out’ for details.
+    ```
 
 ## In both
 
@@ -2112,78 +3714,67 @@ Version: 1.3.0
 
 # SpidermiR
 
-Version: 1.7.4
+Version: 1.10.0
 
 ## In both
 
-*   checking R code for possible problems ... NOTE
+*   checking package dependencies ... ERROR
     ```
-    .SpidermiRvisualize_gene: possible error in simpleNetwork(NetworkData,
-      linkColour = "gray", textColour = "black", zoom = TRUE): unused
-      argument (textColour = "black")
-      (.../revdep/checks/SpidermiR/new/SpidermiR.Rcheck/00_pkg_src/SpidermiR/R/SpidermiRInternal.R:31)
-    SpidermiRvisualize_plot_target: no visible binding for global variable
-      ‘miRNAs’
-      (.../revdep/checks/SpidermiR/new/SpidermiR.Rcheck/00_pkg_src/SpidermiR/R/SpidermiRvisualize.R:143-145)
-    SpidermiRvisualize_plot_target: no visible binding for global variable
-      ‘mRNA_target’
-      (.../revdep/checks/SpidermiR/new/SpidermiR.Rcheck/00_pkg_src/SpidermiR/R/SpidermiRvisualize.R:143-145)
-    Undefined global functions or variables:
-      mRNA_target miRNAs
+    Packages required but not available: ‘miRNAtap.db’ ‘org.Hs.eg.db’
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
+    ```
+
+# srnadiff
+
+Version: 1.0.0
+
+## Newly broken
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    ...
+      Computing p-values...
+      ... values computed
+      Running HMM...
+      ... HMM run.
+      ... 4 regions found.
+    ... HMM step done.
+    Starting slice step...
+      ... 37 regions found.
+    ... slice step done.
+    Computing differential expression...
+    estimating size factors
+    estimating dispersions
+    gene-wise dispersion estimates
+    mean-dispersion relationship
+    final dispersion estimates
+    fitting model and testing
+    ... done.
+    Quitting from lines 373-374 (srnadiff.Rmd) 
+    Error: processing vignette 'srnadiff.Rmd' failed with diagnostics:
+    'sessioninfo' >= * must be installed for this functionality.
+    Execution halted
     ```
 
 # StarBioTrek
 
-Version: 1.2.1
+Version: 1.6.0
 
 ## In both
 
-*   checking installed package size ... NOTE
+*   checking package dependencies ... ERROR
     ```
-      installed size is 11.1Mb
-      sub-directories of 1Mb or more:
-        data   8.8Mb
-        doc    2.0Mb
-    ```
-
-*   checking R code for possible problems ... NOTE
-    ```
-    ...
-      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/getdata.R:108)
-    getKEGGdata: no visible binding for global variable ‘Nervous_system’
-      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/getdata.R:113)
-    getKEGGdata: no visible binding for global variable ‘Sensory_system’
-      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/getdata.R:118)
-    matrix_plot: no visible binding for global variable ‘path’
-      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/path_star.R:132)
-    plotting_cross_talk: no visible binding for global variable ‘path’
-      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/path_star.R:179)
-    svm_classification: no visible binding for global variable ‘Target’
-      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/path_star.R:441)
-    svm_classification: no visible binding for global variable ‘Target’
-      (.../revdep/checks/StarBioTrek/new/StarBioTrek.Rcheck/00_pkg_src/StarBioTrek/R/path_star.R:444)
-    Undefined global functions or variables:
-      Aminoacid Carbohydrate Cell_growth_and_death Cellular_community
-      Circulatory_system Cofa_vita_met Digestive_system Endocrine_system
-      Energy Excretory_system Folding_sorting_and_degradation Glybio_met
-      Immune_system Lipid Nervous_system Replication_and_repair
-      Sensory_system Signal_transduction
-      Signaling_molecules_and_interaction Target Transcription Translation
-      Transport_and_catabolism path
-    ```
-
-# SuperLearner
-
-Version: 2.0-22
-
-## In both
-
-*   R CMD check timed out
+    Package required but not available: ‘org.Hs.eg.db’
     
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
+    ```
 
 # sweep
 
-Version: 0.2.0
+Version: 0.2.1.1
 
 ## In both
 
@@ -2194,285 +3785,159 @@ Version: 0.2.0
       All declared Imports should be used.
     ```
 
-# taxlist
+# syuzhet
 
-Version: 0.1.2
-
-## Newly fixed
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    This is taxlist 0.1.2
-    
-    Attaching package: 'taxlist'
-    
-    The following object is masked from 'package:base':
-    
-        levels
-    
-    Calling http://taxosaurus.org/retrieve/9e960e5dacf3c865aa9bcdf341441d44
-    Quitting from lines 105-108 (taxlist-intro.Rmd) 
-    Error: processing vignette 'taxlist-intro.Rmd' failed with diagnostics:
-    HTTP status 502 - Bad Gateway
-    Execution halted
-    ```
+Version: 1.0.4
 
 ## In both
 
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.1Mb
+      sub-directories of 1Mb or more:
+        R         1.3Mb
+        extdata   3.1Mb
+    ```
+
+# taxlist
+
+Version: 0.1.5
+
+## In both
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘grDevices’
+      All declared Imports should be used.
+    ```
+
 *   checking data for non-ASCII characters ... NOTE
     ```
-      Note: found 126 marked UTF-8 strings
+      Note: found 97 marked UTF-8 strings
     ```
 
 # TCGAbiolinks
 
-Version: 2.5.9
+Version: 2.8.4
 
 ## In both
-
-*   checking examples ... ERROR
-    ```
-    ...
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    |NA                          |NA                                  |NA                   |NA                           |
-    Error in checkProjectInput(project) : 
-      Please set a valid project argument from the column id above. Project TCGA-ACC was not found.
-    Calls: GDCquery -> checkProjectInput
-    Execution halted
-    ```
 
 *   R CMD check timed out
     
 
+*   checking dependencies in R code ... WARNING
+    ```
+    '::' or ':::' import not declared from: ‘tidyr’
+    ```
+
 *   checking installed package size ... NOTE
     ```
-      installed size is 61.8Mb
+      installed size is 72.7Mb
       sub-directories of 1Mb or more:
-        R      1.9Mb
-        data   2.3Mb
-        doc   57.4Mb
+        R      2.5Mb
+        data   3.5Mb
+        doc   66.4Mb
     ```
 
 *   checking R code for possible problems ... NOTE
     ```
     ...
-      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/analyze.R:1131)
-    TCGAvisualize_SurvivalCoxNET: no visible global function definition for
-      ‘dNetInduce’
-      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:156-157)
     TCGAvisualize_SurvivalCoxNET: no visible global function definition for
       ‘dNetPipeline’
-      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:161-162)
+      (.../revdep/checks.noindex/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:161-162)
     TCGAvisualize_SurvivalCoxNET: no visible global function definition for
       ‘dCommSignif’
-      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:174)
+      (.../revdep/checks.noindex/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:174)
     TCGAvisualize_SurvivalCoxNET: no visible global function definition for
       ‘visNet’
-      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:184-189)
+      (.../revdep/checks.noindex/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:184-189)
     TCGAvisualize_oncoprint: no visible binding for global variable ‘value’
-      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:933)
-    getTSS: no visible global function definition for ‘promoters’
-      (.../revdep/checks/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/methylation.R:1745-1746)
+      (.../revdep/checks.noindex/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/visualize.R:944)
+    readExonQuantification: no visible binding for global variable ‘exon’
+      (.../revdep/checks.noindex/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/prepare.R:234-235)
+    readExonQuantification: no visible binding for global variable
+      ‘coordinates’
+      (.../revdep/checks.noindex/TCGAbiolinks/new/TCGAbiolinks.Rcheck/00_pkg_src/TCGAbiolinks/R/prepare.R:234-235)
     Undefined global functions or variables:
-      c3net dCommSignif dNetInduce dNetPipeline knnmi.cross
-      limmacontrasts.fit limmamakeContrasts minet portions promoters value
+      TabSubtypesCol_merged Tumor.purity barcode c3net clinical coordinates
+      dCommSignif dNetInduce dNetPipeline exon knnmi.cross
+      limmacontrasts.fit limmamakeContrasts minet portions rse_gene value
       visNet
     ```
 
-# TCGAbiolinksGUI
+# TCGAutils
 
-Version: 1.2.1
+Version: 1.0.1
 
 ## In both
 
 *   checking re-building of vignette outputs ... WARNING
     ```
-    ...
-    
-    The following objects are masked from 'package:S4Vectors':
-    
-        first, intersect, rename, setdiff, setequal, union
-    
-    The following objects are masked from 'package:BiocGenerics':
-    
-        combine, intersect, setdiff, union
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    Quitting from lines 11-15 (data.Rmd) 
-    Error: processing vignette 'data.Rmd' failed with diagnostics:
-    there is no package called 'DT'
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 16-22 (TCGAutils.Rmd) 
+    Error: processing vignette 'TCGAutils.Rmd' failed with diagnostics:
+    there is no package called 'curatedTCGAData'
     Execution halted
     ```
 
-*   checking installed package size ... NOTE
+*   checking package dependencies ... NOTE
     ```
-      installed size is 30.3Mb
-      sub-directories of 1Mb or more:
-        app   1.0Mb
-        doc  28.9Mb
+    Package suggested but not available for checking: ‘curatedTCGAData’
     ```
-
-*   checking DESCRIPTION meta-information ... NOTE
-    ```
-    Malformed Description field: should contain one or more complete sentences.
-    ```
-
-*   checking for unstated dependencies in vignettes ... NOTE
-    ```
-    'library' or 'require' calls not declared from:
-      ‘DT’ ‘dplyr’
-    ```
-
-# teachingApps
-
-Version: 1.0.2
-
-## In both
 
 *   checking dependencies in R code ... NOTE
     ```
-    Namespaces in Imports field not imported from:
-      ‘data.table’ ‘datasets’ ‘stats’
-      All declared Imports should be used.
+    Unexported objects imported by ':::' calls:
+      ‘BiocGenerics:::replaceSlots’ ‘GenomicRanges:::.normarg_field’
+      See the note in ?`:::` about the use of this operator.
     ```
 
-# testthis
+# testthat
 
-Version: 1.0.2
+Version: 2.0.0
 
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespace in Imports field not imported from: ‘rprojroot’
-      All declared Imports should be used.
-    ```
-
-# TeXCheckR
-
-Version: 0.4.4
-
-## In both
+## Newly broken
 
 *   checking tests ...
     ```
      ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
+    Running the tests in ‘tests/test-catch.R’ failed.
     Last 13 lines of output:
-      	or is a single closing brace, or a blank line. If you can, run
-      	lint_bib('./validate-bib/field-broken-over2lines.bib')
-                                  bib_file line_no       key    value  authors
-      1: validate-bib/near-dup-authors.bib       8 VicRoadsr VicRoads VicRoads
-      
-      Same author used with inconsistent upper/lowercase.
-      ✖ 28: 
-      Ensure the entries above are used with consistent case so ibid/idem's are respected.
-      testthat results ================================================================
-      OK: 207 SKIPPED: 0 FAILED: 2
-      1. Error: No misspelled words (@test-zzz-check-pkgs-spelling.R#36) 
-      2. Failure: Couldn't find an entry for (@test_check_biber.R#10) 
-      
-      Error: testthat unit tests failed
+      Calls: local ... with_rprofile_user -> with_envvar -> force -> force -> i.p
+      In addition: Warning messages:
+      1: 'devtools::create' is deprecated.
+      Use 'usethis::create_package()' instead.
+      See help("Deprecated") and help("devtools-deprecated"). 
+      2: 'setup' is deprecated.
+      Use 'usethis::create_package()' instead.
+      See help("Deprecated") and help("devtools-deprecated"). 
+      3: 'create_description' is deprecated.
+      Use 'usethis::use_description()' instead.
+      See help("Deprecated") and help("devtools-deprecated"). 
+      4: 'use_rstudio' is deprecated.
+      Use 'usethis::use_rstudio()' instead.
+      See help("Deprecated") and help("devtools-deprecated"). 
       Execution halted
     ```
 
 # texmex
 
-Version: 2.3
+Version: 2.4
 
 ## In both
 
-*   R CMD check timed out
-    
-
-# tidyquant
-
-Version: 0.5.3
-
-## In both
-
-*   checking tests ...
+*   checking installed package size ... NOTE
     ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      
-      
-      testthat results ================================================================
-      OK: 179 SKIPPED: 0 FAILED: 3
-      1. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#15) 
-      2. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#17) 
-      3. Failure: Test returns tibble with correct rows and columns. (@test_tq_get_key_stats.R#19) 
-      
-      Error: testthat unit tests failed
-      In addition: Warning messages:
-      1: In download.file(url, destfile = tmp, quiet = TRUE) :
-        cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
-      2: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-       
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
-      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
-    Warning: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-    
-    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
-      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
-    Warning: x = 'AAPL', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=AAPL&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-     Removing AAPL.
-    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
-      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=FB&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
-    Warning: x = 'FB', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=FB&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-     Removing FB.
-    Warning in download.file(url, destfile = tmp, quiet = TRUE) :
-      cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv': HTTP status was '403 Forbidden'
-    Warning: x = 'GOOG', get = 'key.stats': Error in download.file(url, destfile = tmp, quiet = TRUE): cannot open URL 'http://download.finance.yahoo.com/d/quotes.csv?s=GOOG&f=aa2a5bb4b6c1c4dd1ee7e8e9f6ghjj1j2j4j5j6kk3k4k5ll1mm3m4m5m6m7m8nopp2p5p6qrr1r5r6r7s6s7t8vwxy&e=.csv'
-     Removing GOOG.
-    Warning in value[[3L]](cond) : Returning as nested data frame.
-    Quitting from lines 211-214 (TQ01-core-functions-in-tidyquant.Rmd) 
-    Error: processing vignette 'TQ01-core-functions-in-tidyquant.Rmd' failed with diagnostics:
-    object 'Ask' not found
-    Execution halted
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘broom’ ‘curl’ ‘devtools’ ‘rvest’ ‘timeSeries’ ‘tseries’ ‘zoo’
-      All declared Imports should be used.
+      installed size is  5.1Mb
+      sub-directories of 1Mb or more:
+        R     1.6Mb
+        doc   3.2Mb
     ```
 
 # timetk
 
-Version: 0.1.0
+Version: 0.1.1.1
 
 ## In both
 
@@ -2483,9 +3948,61 @@ Version: 0.1.0
       All declared Imports should be used.
     ```
 
+# tosca
+
+Version: 0.1-2
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/run-all.R’ failed.
+    Last 13 lines of output:
+      
+      range of date: 1987-06-25 till 2014-08-06
+      NAs in date: 1 (0.33)
+      ---------------------------------------------------------------------- 
+      
+      metamult:
+                n NA.abs NA.rel
+      metamult1 6      0      0
+      metamult2 5      0      0
+      == testthat results  ===========================================================
+      OK: 224 SKIPPED: 0 FAILED: 1
+      1. Error: readWiki (@test_readWiki.R#6) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+*   checking re-building of vignette outputs ... WARNING
+    ```
+    Error in re-building vignettes:
+      ...
+    Quitting from lines 75-77 (Vignette.Rmd) 
+    Error: processing vignette 'Vignette.Rmd' failed with diagnostics:
+    Timeout was reached: Resolving timed out after 10000 milliseconds
+    Execution halted
+    ```
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.8Mb
+      sub-directories of 1Mb or more:
+        data   4.7Mb
+    ```
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 1946 marked UTF-8 strings
+    ```
+
 # toxplot
 
-Version: 0.1.0
+Version: 0.1.1
 
 ## In both
 
@@ -2495,47 +4012,85 @@ Version: 0.1.0
       All declared Imports should be used.
     ```
 
-# uavRmp
+# twoddpcr
 
-Version: 0.5.1
+Version: 1.4.1
 
 ## In both
 
-*   checking examples ... ERROR
+*   checking installed package size ... NOTE
     ```
-    ...
-    > 
-    > ## (2) make position flight plan
-    > makeTP  <-  makeTP(missionTrackList= tutorial_flightArea,
-    +                    demFn = dsmFn,
-    +                    uavType = "solo",
-    +                    followSurfaceRes=5,
-    +                    launchPos = c(8.679,50.856))
-    preprocessing DSM data...
-    Warning in gdal_setInstallation(ignore.full_scan = ignore.full_scan, verbose = verbose) :
-      No GDAL installation found. Please install 'gdal' before continuing:
-    	- www.gdal.org (no HDF4 support!)
-    	- www.trac.osgeo.org/osgeo4w/ (with HDF4 support RECOMMENDED)
-    	- www.fwtools.maptools.org (with HDF4 support)
-    
-    Warning in gdal_setInstallation(ignore.full_scan = ignore.full_scan, verbose = verbose) :
-      If you think GDAL is installed, please run:
-    gdal_setInstallation(ignore.full_scan=FALSE)
-    Error in (function (classes, fdef, mtable)  : 
-      unable to find an inherited method for function ‘crop’ for signature ‘"NULL"’
-    Calls: makeTP -> makeFlightPathT3 -> <Anonymous> -> <Anonymous>
-    Execution halted
+      installed size is  6.4Mb
+      sub-directories of 1Mb or more:
+        data   1.2Mb
+        doc    4.1Mb
+    ```
+
+# UKgrid
+
+Version: 0.1.0
+
+## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 12.0Mb
+      sub-directories of 1Mb or more:
+        data   3.6Mb
+        doc    8.3Mb
+    ```
+
+*   checking dependencies in R code ... NOTE
+    ```
+    Namespace in Imports field not imported from: ‘rlang’
+      All declared Imports should be used.
     ```
 
 # umx
 
-Version: 1.9.1
+Version: 2.8.0
 
 ## In both
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is  5.4Mb
+      sub-directories of 1Mb or more:
+        R      2.9Mb
+        help   2.2Mb
+    ```
 
 *   checking Rd cross-references ... NOTE
     ```
     Package unavailable to check Rd xrefs: ‘sem’
+    ```
+
+# unitizer
+
+Version: 1.4.5
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/runtt.R’ failed.
+    Last 13 lines of output:
+      +   warning("Cannot run tests without `testthat` available")
+      + }
+      Loading required package: testthat
+      State tracking is disabled by default to comply with CRAN policies. Add `options(unitizer.state='recommended')` to your 'Rprofile' file to enable, or `options(unitizer.state='off')` to quash this message without enabling.  See `?unitizerState` for details.
+      setup packages
+      Error in i.p(...) : 
+        (converted from warning) installation of package '/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//Rtmp3CYdvq/fileafec4010be4e/unitizerdummypkg1_0.1.tar.gz' had non-zero exit status
+      Error in eval(quote({ : install error
+      Calls: source ... local -> eval.parent -> eval -> eval -> eval -> eval
+      Removing packages from '.../revdep/checks.noindex/unitizer/new/unitizer.Rcheck'
+      (as 'lib' is unspecified)
+      Error in find.package(pkgs, lib) : 
+        there are no packages called 'unitizerdummypkg1', 'unitizerdummypkg2', 'utzflm'
+      Calls: source ... local -> eval.parent -> eval -> eval -> eval -> eval
+      Execution halted
     ```
 
 # unvotes
@@ -2547,17 +4102,6 @@ Version: 0.2.0
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 4494 marked UTF-8 strings
-    ```
-
-# vaersvax
-
-Version: 1.0.4
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Packages suggested but not available for checking: ‘vaers’ ‘vaersND’
     ```
 
 # veccompare
@@ -2574,28 +4118,13 @@ Version: 0.1.0
 
 # vegtable
 
-Version: 0.1.0
+Version: 0.1.3
 
 ## In both
 
 *   checking data for non-ASCII characters ... NOTE
     ```
       Note: found 124 marked UTF-8 strings
-    ```
-
-# wallace
-
-Version: 0.6.4
-
-## In both
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Namespaces in Imports field not imported from:
-      ‘DT’ ‘ENMeval’ ‘RColorBrewer’ ‘devtools’ ‘dismo’ ‘dplyr’ ‘maptools’
-      ‘raster’ ‘rgdal’ ‘rgeos’ ‘rmarkdown’ ‘shinyBS’ ‘shinyjs’
-      ‘shinythemes’ ‘spThin’ ‘spocc’
-      All declared Imports should be used.
     ```
 
 # Wats
@@ -2606,9 +4135,48 @@ Version: 0.10.3
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 12.3Mb
+      installed size is 12.4Mb
       sub-directories of 1Mb or more:
         doc  12.1Mb
+    ```
+
+# weathercan
+
+Version: 0.2.7
+
+## In both
+
+*   checking data for non-ASCII characters ... NOTE
+    ```
+      Note: found 25 marked UTF-8 strings
+    ```
+
+# workflowr
+
+Version: 1.1.1
+
+## In both
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      remotes["origin"] == "https://github.com/fakename/fakerepo.git" isn't true.
+      
+      ── 5. Failure: wflow_git_remote can add a second remote. (@test-wflow_git_remote
+      remotes["upstream"] == "https://github.com/fake2/fakerepo2.git" isn't true.
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 556 SKIPPED: 90 FAILED: 5
+      1. Failure: authenticate_git can create HTTPS credentials (@test-wflow_git_push_pull.R#144) 
+      2. Failure: authenticate_git can create HTTPS credentials (@test-wflow_git_push_pull.R#145) 
+      3. Failure: authenticate_git can create HTTPS credentials (@test-wflow_git_push_pull.R#146) 
+      4. Failure: wflow_git_remote can add a remote. (@test-wflow_git_remote.R#45) 
+      5. Failure: wflow_git_remote can add a second remote. (@test-wflow_git_remote.R#52) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
 # wru
@@ -2622,5 +4190,33 @@ Version: 0.1-7
       installed size is  5.8Mb
       sub-directories of 1Mb or more:
         data   5.6Mb
+    ```
+
+# yearn
+
+Version: 0.1.3
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      4: asNamespace(ns)
+      5: getNamespace(ns)
+      6: tryCatch(loadNamespace(name), error = function(e) stop(e))
+      7: tryCatchList(expr, classes, parentenv, handlers)
+      8: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+      9: value[[3L]](cond)
+      
+      ══ testthat results  ═══════════════════════════════════════════════════════════
+      OK: 0 SKIPPED: 0 FAILED: 3
+      1. Error: A package with no matches does not match (@test_core.R#3) 
+      2. Error: FindClosestPackage can return multiple matches (@test_core.R#9) 
+      3. Error: FindClosestPackage selects properly (@test_core.R#15) 
+      
+      Error: testthat unit tests failed
+      Execution halted
     ```
 
