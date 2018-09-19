@@ -29,6 +29,7 @@ Imports:
     rcmdcheck,
     remotes,
     rstudioapi (>= 0.6.0.9000),
+    sessioninfo,
     stats,
     tools,
     usethis (>= 1.4.0),
@@ -55,7 +56,6 @@ Suggests:
     rmarkdown,
     roxygen2 (>= 6.1.0),
     rversions,
-    sessioninfo,
     spelling (>= 1.1),
     testthat (>= 1.0.2),
     whisker

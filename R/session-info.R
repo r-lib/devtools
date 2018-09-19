@@ -28,23 +28,6 @@ dev_packages <- function() {
   names(packages)[packages]
 }
 
-#' Print session information
-#'
-#' This is [sessionInfo()] re-written from scratch to both exclude
-#' data that's rarely useful (e.g., the full collate string or base packages
-#' loaded) and include stuff you'd like to know (e.g., where a package was
-#' installed from).
-#'
-#' @param pkgs Either a vector of package names or NULL. If `NULL`,
-#'   displays all loaded packages. If a character vector, also, includes
-#'   all dependencies of the package.
-#' @param include_base Include base packages in summary? By default this is
-#'   false since base packages should always match the R version.
 #' @export
-#' @examples
-#' session_info()
-#' session_info("devtools")
-session_info <- function(pkgs = NULL, include_base = FALSE) {
-  check_suggested("sessioninfo")
-  sessioninfo::session_info(pkgs = pkgs, include_base = include_base)
-}
+#' @importFrom sessioninfo session_info
+sessioninfo::session_info
