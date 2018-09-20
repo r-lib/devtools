@@ -4,7 +4,7 @@
 \alias{install}
 \title{Install a local development package.}
 \usage{
-install(pkg = ".", reload = TRUE, quick = FALSE, build = TRUE,
+install(pkg = ".", reload = TRUE, quick = FALSE, build = !quick,
   args = getOption("devtools.install.args"), quiet = FALSE,
   dependencies = NA, upgrade = TRUE, build_vignettes = FALSE,
   keep_source = getOption("keep.source.pkgs"),
