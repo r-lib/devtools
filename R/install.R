@@ -56,7 +56,7 @@
 #' debugging flags set.
 #' @export
 install <-
-  function(pkg = ".", reload = TRUE, quick = FALSE, build = TRUE,
+  function(pkg = ".", reload = TRUE, quick = FALSE, build = !quick,
              args = getOption("devtools.install.args"), quiet = FALSE,
              dependencies = NA, upgrade = TRUE,
              build_vignettes = FALSE,
@@ -89,11 +89,19 @@ install <-
     }
     opts <- c(opts, args)
 
-    remotes::install_local(pkg$path,
+    remotes::install_deps(pkg$path,
       build = build, build_opts = build_opts,
       INSTALL_opts = opts, dependencies = dependencies, quiet = quiet,
       force = force, ...
     )
+
+    if (build) {
+      install_path <- pkgbuild::build(pkg$path, args = build_opts, quiet = quiet)
+    } else {
+      install_path <- pkg$path
+    }
+
+    callr::rcmd("INSTALL", c(install_path, opts), echo = !quiet, show = !quiet)
 
     if (reload) {
       reload(pkg, quiet = quiet)
