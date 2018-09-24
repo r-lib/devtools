@@ -31,3 +31,7 @@ dev_packages <- function() {
 #' @export
 #' @importFrom sessioninfo session_info
 sessioninfo::session_info
+
+#' @export
+#' @importFrom sessioninfo package_info
+sessioninfo::package_info

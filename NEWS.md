@@ -62,6 +62,8 @@ you should switch your package to depend on **usethis** directly instead.
   Packages using `devtools::session_info()` are encouraged to switch to using
   `sessioninfo::session_info()` instead.
 
+* `package_info()` function now re-exported from the **sessioninfo** package.
+
 * `check()` now uses **rcmdcheck** to run and parse R CMD check output (#1153).
 
 * Code related to simulating package loading has been pulled out into a 

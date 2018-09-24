@@ -26,6 +26,7 @@
 \alias{install_deps}
 \alias{update_packages}
 \alias{session_info}
+\alias{package_info}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -39,6 +40,6 @@ below to see their documentation.
 
   \item{remotes}{\code{\link[remotes]{install_bioc}}, \code{\link[remotes]{install_bitbucket}}, \code{\link[remotes]{install_cran}}, \code{\link[remotes]{install_git}}, \code{\link[remotes]{install_github}}, \code{\link[remotes]{github_pull}}, \code{\link[remotes]{github_release}}, \code{\link[remotes]{install_gitlab}}, \code{\link[remotes]{install_local}}, \code{\link[remotes]{install_svn}}, \code{\link[remotes]{install_url}}, \code{\link[remotes]{install_version}}, \code{\link[remotes]{install_deps}}, \code{\link[remotes]{update_packages}}}
 
-  \item{sessioninfo}{\code{\link[sessioninfo]{session_info}}}
+  \item{sessioninfo}{\code{\link[sessioninfo]{session_info}}, \code{\link[sessioninfo]{package_info}}}
 }}
 
