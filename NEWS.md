@@ -26,11 +26,14 @@
   removed. These functions never worked terribly well, and have been replaced
   by the much better functions in callr.
 
+* `build_win()` has been renamed to `check_win_release()`, `check_win_devel()`,
+  `check_win_oldrelease()` (#1598).
 
 ## Deprecated functions
 
-* `build_win()` has been renamed to `check_win_release()`, `check_win_devel()`,
-  `check_win_oldrelease()` (#1598).
+* Infrastructure functions (`use_*`) now use the implementations in **usethis**
+and the versions in devtools are deprecated. If you use these from a package
+you should switch your package to depend on **usethis** directly instead.
 
 * The `revdep_check_*` functions have been deprecated in favor of the
   **revdepcheck** package.
@@ -56,8 +59,8 @@
   more files from a package. (#1755).
 
 * `session_info()` now uses the implementation in the **sessioninfo** package.
-
-* Infrastructure functions (`use_*`) now use the implementations in **usethis**.
+  Packages using `devtools::session_info()` are encouraged to switch to using
+  `sessioninfo::session_info()` instead.
 
 * `check()` now uses **rcmdcheck** to run and parse R CMD check output (#1153).
 
