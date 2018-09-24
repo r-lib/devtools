@@ -1,7 +1,7 @@
 # Configuration for lock-threads - https://github.com/dessant/lock-threads
 
 # Number of days of inactivity before a closed issue or pull request is locked
-daysUntilLock: 365
+daysUntilLock: 180
 
 # Issues and pull requests with these labels will not be locked. Set to `[]` to disable
 exemptLabels: []
@@ -13,7 +13,10 @@ lockLabel: false
 setLockReason: false
 
 # Comment to post before locking. Set to `false` to disable
-lockComment: false
+lockComment: >
+  This old issue has been automatically locked. If you believe you
+  have found a related problem, please file a new issue (with reprex)
+  and link to this issue. <https://reprex.tidyverse.org/>
 
 # Limit to only `issues` or `pulls`
 only: issues
