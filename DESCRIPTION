@@ -39,7 +39,7 @@ Suggests:
     BiocInstaller,
     BiocManager,
     bitops,
-    covr,
+    covr (>= 3.2.0),
     crayon,
     curl (>= 0.9),
     evaluate,
@@ -62,7 +62,6 @@ Suggests:
 VignetteBuilder: knitr
 Encoding: UTF-8
 Remotes:
-    r-lib/remotes,
-    r-lib/covr
+    r-lib/remotes
 RoxygenNote: 6.1.0
 Roxygen: list(markdown = TRUE)
