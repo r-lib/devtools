@@ -29,7 +29,7 @@ Version: 2.0.0
 
 Version: 0.1.0
 
-## Newly broken
+## In both
 
 *   checking tests ...
     ```
@@ -44,16 +44,14 @@ Version: 0.1.0
       2: stop(content, call. = F) at .../revdep/checks.noindex/alphavantager/new/alphavantager.Rcheck/00_pkg_src/alphavantager/R/av_get.R:103
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 5 SKIPPED: 0 FAILED: 3
-      1. Error: call TIMES_SERIES_INTRADAY (@test_av_get.R#13) 
+      OK: 7 SKIPPED: 0 FAILED: 3
+      1. Error: call TIMES_SERIES_INTRADAY (@test_av_get.R#22) 
       2. Error: call SECTOR (@test_av_get.R#38) 
       3. Error: call Technical Indicators (@test_av_get.R#57) 
       
       Error: testthat unit tests failed
       Execution halted
     ```
-
-## In both
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -77,34 +75,6 @@ Version: 0.1
 # amt
 
 Version: 0.0.5.0
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    Attaching package: 'sp'
-    
-    The following object is masked from 'package:amt':
-    
-        bbox
-    
-    
-    Attaching package: 'raster'
-    
-    The following object is masked from 'package:amt':
-    
-        select
-    
-    Warning in random_steps.steps_xy(., n = 15) :
-      Step-lengths or turning angles contained NA, which were removed.
-    Warning in random_steps.steps_xy(., n = 15) :
-      Step-lengths or turning angles contained NA, which were removed.
-    Quitting from lines 144-145 (p4_SSF.Rmd) 
-    Error: processing vignette 'p4_SSF.Rmd' failed with diagnostics:
-    'sessioninfo' >= * must be installed for this functionality.
-    Execution halted
-    ```
 
 ## In both
 
@@ -220,34 +190,6 @@ Version: 1.0.4
 # archivist
 
 Version: 2.3.1
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    > 
-    > 
-    > createLocalRepo("ahistory_check", default = TRUE)
-    > library(dplyr)
-    
-    Attaching package: ‘dplyr’
-    
-    The following objects are masked from ‘package:stats’:
-    
-        filter, lag
-    
-    The following objects are masked from ‘package:base’:
-    
-        intersect, setdiff, setequal, union
-    
-    > iris %a%
-    + filter(Sepal.Length < 6) %a%
-    +  lm(Petal.Length~Species, data=.) %a%
-    +  summary() -> artifact
-    Error: ‘sessioninfo’ >= * must be installed for this functionality.
-    Execution halted
-    ```
 
 ## In both
 
@@ -466,77 +408,9 @@ Version: 1.2.4
     '::' or ':::' import not declared from: ‘reshape2’
     ```
 
-# automagic
-
-Version: 0.3
-
-## Newly broken
-
-*   checking whether package ‘automagic’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘.../revdep/checks.noindex/automagic/new/automagic.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘automagic’ ...
-** package ‘automagic’ successfully unpacked and MD5 sums checked
-** R
-** byte-compile and prepare package for lazy loading
-Error : object ‘github_pull’ is not exported by 'namespace:devtools'
-ERROR: lazy loading failed for package ‘automagic’
-* removing ‘.../revdep/checks.noindex/automagic/new/automagic.Rcheck/automagic’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘automagic’ ...
-** package ‘automagic’ successfully unpacked and MD5 sums checked
-** R
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** testing if installed package can be loaded
-* DONE (automagic)
-
-```
 # baytrends
 
 Version: 1.0.7
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-     
-    
-    
-    
-    |Category     |Description                      |
-    |:------------|:--------------------------------|
-    |Name         |Jon B. Harcum, Ph.D.             |
-    |Organization |Tetra Tech, Inc.                 |
-    |Address      |313 Kings Way, Clemson, SC 29631 |
-    |Voice phone  |(864)650-5815                    |
-    |email        |jon.harcum@tetratech.com         |
-    
-    
-     
-    
-    
-    ##  
-    
-    ### Session Information
-    Error: ‘sessioninfo’ >= * must be installed for this functionality.
-    Execution halted
-    ```
 
 ## In both
 
@@ -889,57 +763,6 @@ Version: 1.5.1
         help   1.7Mb
     ```
 
-# CluMix
-
-Version: 2.1
-
-## Newly broken
-
-*   checking running R code from vignettes ...
-    ```
-       ‘CluMix.Rnw’ ... failed
-     ERROR
-    Errors in running code in vignettes:
-    when running code in ‘CluMix.Rnw’
-      ...
-    > confounderPlot(mixdata, x = "X4.ord", y = "X1.cat")
-    
-    > require(devtools)
-    Loading required package: devtools
-    
-    > session_info()
-    
-      When sourcing ‘CluMix.R’:
-    Error: ‘sessioninfo’ >= * must be installed for this functionality.
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
-    ```
-    ...
-    The github page is: https://github.com/talgalili/dendextend/
-    
-    Suggestions and bug-reports can be submitted at: https://github.com/talgalili/dendextend/issues
-    Or contact: <tal.galili@gmail.com>
-    
-    	To suppress this message use:  suppressPackageStartupMessages(library(dendextend))
-    ---------------------
-    
-    
-    Attaching package: ‘dendextend’
-    
-    The following object is masked from ‘package:stats’:
-    
-        cutree
-    
-    Loading required package: devtools
-    
-    Error: processing vignette 'CluMix.Rnw' failed with diagnostics:
-     chunk 17 (label = sessioninfo) 
-    Error : ‘sessioninfo’ >= * must be installed for this functionality.
-    Execution halted
-    ```
-
 # ClusterJudge
 
 Version: 1.2.0
@@ -1009,9 +832,6 @@ Version: 0.1.6
 Version: 1.14.0
 
 ## In both
-
-*   R CMD check timed out
-    
 
 *   checking whether package ‘cogena’ can be installed ... WARNING
     ```
@@ -1199,26 +1019,26 @@ Version: 0.15.3
 *   checking examples ... ERROR
     ```
     ...
-    INFO [2018-09-18 16:43:55] 1 required data objects created by foo.Rmd
-    INFO [2018-09-18 16:43:55] NEWS.md file not found, creating!
+    INFO [2018-09-19 12:49:46] 1 required data objects created by foo.Rmd
+    INFO [2018-09-19 12:49:46] NEWS.md file not found, creating!
     Enter a text description of the changes for the NEWS file.
-    INFO [2018-09-18 16:43:55] Saving to data
-    INFO [2018-09-18 16:43:55] Copied documentation to /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpWnwI2Q/fileaa793b065b2c/R/fileaa793b065b2c.R
+    INFO [2018-09-19 12:49:46] Saving to data
+    INFO [2018-09-19 12:49:46] Copied documentation to /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpIplDIY/filed29629fa55a9/R/filed29629fa55a9.R
     
-    ✔ Setting active project to '/private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpWnwI2Q/fileaa793b065b2c'
+    ✔ Setting active project to '/private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpIplDIY/filed29629fa55a9'
     ✔ Creating 'vignettes/'
     ✔ Creating 'inst/doc/'
-    INFO [2018-09-18 16:43:55] Done
-    INFO [2018-09-18 16:43:55] DataPackageR succeeded
-    INFO [2018-09-18 16:43:55] Building documentation
+    INFO [2018-09-19 12:49:46] Done
+    INFO [2018-09-19 12:49:46] DataPackageR succeeded
+    INFO [2018-09-19 12:49:46] Building documentation
     First time using roxygen2. Upgrading automatically...
-    Updating roxygen version in /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpWnwI2Q/fileaa793b065b2c/DESCRIPTION
+    Updating roxygen version in /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpIplDIY/filed29629fa55a9/DESCRIPTION
     Writing NAMESPACE
-    Loading fileaa793b065b2c
-    Writing fileaa793b065b2c.Rd
+    Loading filed29629fa55a9
+    Writing filed29629fa55a9.Rd
     Writing tbl.Rd
-    INFO [2018-09-18 16:43:56] Building package
-    Error: No root directory found in /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpWnwI2Q or its parent directories. Root criterion: contains a file `DESCRIPTION`
+    INFO [2018-09-19 12:49:46] Building package
+    Error: No root directory found in /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpIplDIY or its parent directories. Root criterion: contains a file `DESCRIPTION`
     Execution halted
     ```
 
@@ -1250,7 +1070,7 @@ Version: 0.15.3
       ...
     Quitting from lines 170-173 (usingDataPackageR.Rmd) 
     Error: processing vignette 'usingDataPackageR.Rmd' failed with diagnostics:
-    No root directory found in /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpqMFMhm or its parent directories. Root criterion: contains a file `DESCRIPTION`
+    No root directory found in /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpFWUdaY or its parent directories. Root criterion: contains a file `DESCRIPTION`
     Execution halted
     ```
 
@@ -1357,20 +1177,6 @@ Version: 1.14.0
 # derfinderData
 
 Version: 0.114.0
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Writing 5 Bibtex entries ... OK
-    Results written to file 'derfinderDataRef.bib'
-    Quitting from lines 210-213 (derfinderData.Rmd) 
-    Error: processing vignette 'derfinderData.Rmd' failed with diagnostics:
-    'sessioninfo' >= * must be installed for this functionality.
-    Execution halted
-    ```
 
 ## In both
 
@@ -1799,7 +1605,7 @@ Version: 1.3.0
     ```
     Error in re-building vignettes:
       ...
-    Creating package 'fakepack' in '/private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpDYF5IK'
+    Creating package 'fakepack' in '/private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmp1lGf2b'
     No DESCRIPTION found. Creating with values:
     
     
@@ -1851,25 +1657,6 @@ Version: 1.0.0
       All declared Imports should be used.
     ```
 
-# ggalluvial
-
-Version: 0.9.0
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Loading required package: ggplot2
-    Quitting from lines 212-213 (ggalluvial.rmd) 
-    Error: processing vignette 'ggalluvial.rmd' failed with diagnostics:
-    'sessioninfo' >= * must be installed for this functionality.
-    Execution halted
-    ```
-
 # ggExtra
 
 Version: 0.8
@@ -1882,35 +1669,11 @@ Version: 0.8
       All declared Imports should be used.
     ```
 
-# ggforce
-
-Version: 0.1.3
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 550-551 (Visual_Guide.Rmd) 
-    Error: processing vignette 'Visual_Guide.Rmd' failed with diagnostics:
-    'sessioninfo' >= * must be installed for this functionality.
-    Execution halted
-    ```
-
 # githubinstall
 
 Version: 0.2.2
 
-## Newly broken
-
-*   checking whether package ‘githubinstall’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘.../revdep/checks.noindex/githubinstall/new/githubinstall.Rcheck/00install.out’ for details.
-    ```
-
-## Newly fixed
+## In both
 
 *   checking dependencies in R code ... NOTE
     ```
@@ -1918,37 +1681,6 @@ Version: 0.2.2
       All declared Imports should be used.
     ```
 
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘githubinstall’ ...
-** package ‘githubinstall’ successfully unpacked and MD5 sums checked
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error : object ‘github_pull’ is not exported by 'namespace:devtools'
-ERROR: lazy loading failed for package ‘githubinstall’
-* removing ‘.../revdep/checks.noindex/githubinstall/new/githubinstall.Rcheck/githubinstall’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘githubinstall’ ...
-** package ‘githubinstall’ successfully unpacked and MD5 sums checked
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded
-* DONE (githubinstall)
-
-```
 # googleAuthR
 
 Version: 0.6.3
@@ -1959,38 +1691,6 @@ Version: 0.6.3
     ```
     Namespace in Imports field not imported from: ‘R6’
       All declared Imports should be used.
-    ```
-
-# graticule
-
-Version: 0.1.2
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-      ...
-    Warning in engine$weave(file, quiet = quiet, encoding = enc) :
-      The vignette engine knitr::rmarkdown is not available, because the rmarkdown package is not installed. Please install it.
-    Loading required package: sp
-    rgdal: version: 1.3-4, (SVN revision 766)
-     Geospatial Data Abstraction Library extensions to R successfully loaded
-     Loaded GDAL runtime: GDAL 2.1.3, released 2017/20/01
-     Path to GDAL shared files: .../revdep/library.noindex/graticule/rgdal/gdal
-     GDAL binary built with GEOS: FALSE 
-     Loaded PROJ.4 runtime: Rel. 4.9.3, 15 August 2016, [PJ_VERSION: 493]
-     Path to PROJ.4 shared files: .../revdep/library.noindex/graticule/rgdal/proj
-     Linking to sp version: 1.3-1 
-    ### Welcome to rworldmap ###
-    For a short introduction type : 	 vignette('rworldmap')
-    Failed with error:  'there is no package called 'rgeos''
-    Loading required package: gsw
-    Loading required package: testthat
-    Quitting from lines 231-232 (graticule.Rmd) 
-    Error: processing vignette 'graticule.Rmd' failed with diagnostics:
-    'sessioninfo' >= * must be installed for this functionality.
-    Execution halted
     ```
 
 # gsrc
@@ -2322,34 +2022,6 @@ Version: 0.1.0
 
 Version: 2.0.0
 
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-    ✖ ggplot2::Position() masks BiocGenerics::Position(), base::Position()
-    ✖ dplyr::combine()    masks Biobase::combine(), BiocGenerics::combine()
-    ✖ dplyr::filter()     masks stats::filter()
-    ✖ dplyr::lag()        masks stats::lag()
-    ggtree v1.12.7  For help: https://guangchuangyu.github.io/software/ggtree
-    
-    If you use ggtree in published research, please cite:
-    Guangchuang Yu, David Smith, Huachen Zhu, Yi Guan, Tommy Tsan-Yuk Lam. ggtree: an R package for visualization and annotation of phylogenetic trees with their covariates and other associated data. Methods in Ecology and Evolution 2017, 8(1):28-36, doi:10.1111/2041-210X.12628
-    
-    Attaching package: 'ggtree'
-    
-    The following object is masked from 'package:tidyr':
-    
-        expand
-    
-    Found more than one class "phylo" in cache; using the first, from namespace 'metagenomeFeatures'
-    Also defined by 'tidytree'
-    Quitting from lines 132-134 (database-explore.Rmd) 
-    Error: processing vignette 'database-explore.Rmd' failed with diagnostics:
-    'sessioninfo' >= * must be installed for this functionality.
-    Execution halted
-    ```
-
 ## In both
 
 *   checking whether package ‘metagenomeFeatures’ can be installed ... WARNING
@@ -2523,29 +2195,6 @@ installing to .../revdep/checks.noindex/microsamplingDesign/old/microsamplingDes
 * DONE (microsamplingDesign)
 
 ```
-# miscset
-
-Version: 1.1.0
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘miscset-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: info
-    > ### Title: Print enhanced session information
-    > ### Aliases: info
-    > ### Keywords: session
-    > 
-    > ### ** Examples
-    > 
-    > info()
-    Error: ‘sessioninfo’ >= * must be installed for this functionality.
-    Execution halted
-    ```
-
 # MODIS
 
 Version: 1.1.3
@@ -2753,9 +2402,6 @@ Version: 0.21.0
 
 ## In both
 
-*   R CMD check timed out
-    
-
 *   checking package dependencies ... NOTE
     ```
     Package suggested but not available for checking: ‘doMPI’
@@ -2930,14 +2576,14 @@ Version: 0.4.6
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 13 lines of output:
-      9: vapply(remotes, install_remote, ..., FUN.VALUE = character(1)) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmp4JgeQf/R.INSTALL6bdd3174f127/remotes/R/install-remote.R:73
+      9: vapply(remotes, install_remote, ..., FUN.VALUE = character(1)) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpROUfuj/R.INSTALL1463c63119464/remotes/R/install-remote.R:73
       10: FUN(X[[i]], ...)
-      11: remote_package_name(remote) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmp4JgeQf/R.INSTALL6bdd3174f127/remotes/R/install-remote.R:24
-      12: remote_package_name.github_remote(remote) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmp4JgeQf/R.INSTALL6bdd3174f127/remotes/R/install-remote.R:105
+      11: remote_package_name(remote) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpROUfuj/R.INSTALL1463c63119464/remotes/R/install-remote.R:24
+      12: remote_package_name.github_remote(remote) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpROUfuj/R.INSTALL1463c63119464/remotes/R/install-remote.R:105
       13: github_DESCRIPTION(username = remote$username, repo = remote$repo, subdir = remote$subdir, 
              host = remote$host, ref = remote$ref, pat = remote$auth_token %||% github_pat(), 
-             use_curl = use_curl) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmp4JgeQf/R.INSTALL6bdd3174f127/remotes/R/install-github.R:222
-      14: stop("HTTP error ", res$status_code, ".", "\n", github_error_message(res), call. = FALSE) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmp4JgeQf/R.INSTALL6bdd3174f127/remotes/R/github.R:101
+             use_curl = use_curl) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpROUfuj/R.INSTALL1463c63119464/remotes/R/install-github.R:222
+      14: stop("HTTP error ", res$status_code, ".", "\n", github_error_message(res), call. = FALSE) at /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpROUfuj/R.INSTALL1463c63119464/remotes/R/github.R:101
       
       ══ testthat results  ═══════════════════════════════════════════════════════════
       OK: 54 SKIPPED: 3 FAILED: 1
@@ -2945,12 +2591,6 @@ Version: 0.4.6
       
       Error: testthat unit tests failed
       Execution halted
-    ```
-
-*   checking dependencies in R code ... NOTE
-    ```
-    Missing or unexported objects:
-      ‘devtools::github_pull’ ‘devtools::github_release’
     ```
 
 # parlitools
@@ -3021,18 +2661,6 @@ Version: 0.2.0
 # PKPDmisc
 
 Version: 2.1.1
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 84-85 (multiplot.Rmd) 
-    Error: processing vignette 'multiplot.Rmd' failed with diagnostics:
-    'sessioninfo' >= * must be installed for this functionality.
-    Execution halted
-    ```
 
 ## In both
 
@@ -3349,22 +2977,6 @@ Version: 1.6.3
       Note: found 347 marked UTF-8 strings
     ```
 
-# REDCapR
-
-Version: 0.9.8
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 186-191 (BasicREDCapROperations.Rmd) 
-    Error: processing vignette 'BasicREDCapROperations.Rmd' failed with diagnostics:
-    'sessioninfo' >= * must be installed for this functionality.
-    Execution halted
-    ```
-
 # regionReport
 
 Version: 1.14.3
@@ -3471,19 +3083,6 @@ Version: 0.2.5
 
 Version: 1.4.0
 
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    zcat: can't stat: .../revdep/checks.noindex/RIVER/new/RIVER.Rcheck/RIVER/extdata/simulation_RIVER.gz (.../revdep/checks.noindex/RIVER/new/RIVER.Rcheck/RIVER/extdata/simulation_RIVER.gz.Z): No such file or directory
-    Quitting from lines 375-379 (RIVER.Rmd) 
-    Error: processing vignette 'RIVER.Rmd' failed with diagnostics:
-    'sessioninfo' >= * must be installed for this functionality.
-    Execution halted
-    ```
-
 ## In both
 
 *   checking Rd cross-references ... NOTE
@@ -3555,6 +3154,82 @@ Version: 0.3.0
       All declared Imports should be used.
     ```
 
+# RTCGA
+
+Version: 1.10.0
+
+## In both
+
+*   checking examples ... ERROR
+    ```
+    Running examples in ‘RTCGA-Ex.R’ failed
+    The error most likely occurred in:
+    
+    > ### Name: boxplotTCGA
+    > ### Title: Create Boxplots for TCGA Datasets
+    > ### Aliases: boxplotTCGA
+    > 
+    > ### ** Examples
+    > 
+    > library(RTCGA.rnaseq)
+    Error in library(RTCGA.rnaseq) : 
+      there is no package called ‘RTCGA.rnaseq’
+    Execution halted
+    ```
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(RTCGA)
+      Welcome to the RTCGA (version: 1.10.0).
+      > library(RTCGA.rnaseq)
+      Error in library(RTCGA.rnaseq) : 
+        there is no package called 'RTCGA.rnaseq'
+      Execution halted
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Packages suggested but not available for checking:
+      ‘RTCGA.rnaseq’ ‘RTCGA.clinical’ ‘RTCGA.mutations’ ‘RTCGA.RPPA’
+      ‘RTCGA.mRNA’ ‘RTCGA.miRNASeq’ ‘RTCGA.methylation’ ‘RTCGA.CNV’
+      ‘RTCGA.PANCAN12’
+    ```
+
+*   checking R code for possible problems ... NOTE
+    ```
+    ...
+      (.../revdep/checks.noindex/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
+    ggbiplot: no visible binding for global variable ‘xvar’
+      (.../revdep/checks.noindex/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
+    ggbiplot: no visible binding for global variable ‘yvar’
+      (.../revdep/checks.noindex/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
+    ggbiplot: no visible binding for global variable ‘angle’
+      (.../revdep/checks.noindex/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
+    ggbiplot: no visible binding for global variable ‘hjust’
+      (.../revdep/checks.noindex/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/ggbiplot.R:157-161)
+    read.mutations: no visible binding for global variable ‘.’
+      (.../revdep/checks.noindex/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/readTCGA.R:383)
+    read.mutations: no visible binding for global variable ‘.’
+      (.../revdep/checks.noindex/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/readTCGA.R:386)
+    read.rnaseq: no visible binding for global variable ‘.’
+      (.../revdep/checks.noindex/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/readTCGA.R:372-375)
+    survivalTCGA: no visible binding for global variable ‘times’
+      (.../revdep/checks.noindex/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/survivalTCGA.R:101-137)
+    whichDateToUse: no visible binding for global variable ‘.’
+      (.../revdep/checks.noindex/RTCGA/new/RTCGA.Rcheck/00_pkg_src/RTCGA/R/downloadTCGA.R:167-168)
+    Undefined global functions or variables:
+      . angle hjust muted times varname xvar yvar
+    ```
+
+*   checking Rd cross-references ... NOTE
+    ```
+    Packages unavailable to check Rd xrefs: ‘RTCGA.rnaseq’, ‘RTCGA.clinical’, ‘RTCGA.mutations’, ‘RTCGA.CNV’, ‘RTCGA.RPPA’, ‘RTCGA.mRNA’, ‘RTCGA.miRNASeq’, ‘RTCGA.methylation’
+    ```
+
 # RtutoR
 
 Version: 1.2
@@ -3609,6 +3284,66 @@ Version: 1.4.1
     Package unavailable to check Rd xrefs: ‘gmodels’
     ```
 
+# segclust2d
+
+Version: 0.1.0
+
+## In both
+
+*   checking whether package ‘segclust2d’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘.../revdep/checks.noindex/segclust2d/new/segclust2d.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘segclust2d’ ...
+** package ‘segclust2d’ successfully unpacked and MD5 sums checked
+** libs
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c SegTraj_DynProg.cpp -o SegTraj_DynProg.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c SegTraj_EM.cpp -o SegTraj_EM.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c SegTraj_Gmixt.cpp -o SegTraj_Gmixt.o
+clang: error: unsupported option '-fopenmp'
+clangclang: error: : error: unsupported option '-fopenmp'clang: 
+errorunsupported option '-fopenmp': 
+unsupported option '-fopenmp'
+make: *** [RcppExports.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [SegTraj_Gmixt.o] Error 1
+make: *** [SegTraj_EM.o] Error 1
+make: *** [SegTraj_DynProg.o] Error 1
+ERROR: compilation failed for package ‘segclust2d’
+* removing ‘.../revdep/checks.noindex/segclust2d/new/segclust2d.Rcheck/segclust2d’
+
+```
+### CRAN
+
+```
+* installing *source* package ‘segclust2d’ ...
+** package ‘segclust2d’ successfully unpacked and MD5 sums checked
+** libs
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/segclust2d/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/segclust2d/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c SegTraj_DynProg.cpp -o SegTraj_DynProg.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/segclust2d/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c SegTraj_EM.cpp -o SegTraj_EM.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/segclust2d/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c SegTraj_Gmixt.cpp -o SegTraj_Gmixt.o
+clang: error: unsupported option '-fopenmp'
+clang: error: unsupported option '-fopenmp'
+clang: error: unsupported option '-fopenmp'
+clang: error: unsupported option '-fopenmp'
+make: *** [SegTraj_Gmixt.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [SegTraj_EM.o] Error 1
+make: *** [SegTraj_DynProg.o] Error 1
+make: *** [RcppExports.o] Error 1
+ERROR: compilation failed for package ‘segclust2d’
+* removing ‘.../revdep/checks.noindex/segclust2d/old/segclust2d.Rcheck/segclust2d’
+
+```
 # soilcarbon
 
 Version: 1.2.0
@@ -3726,38 +3461,6 @@ Version: 1.10.0
     manual.
     ```
 
-# srnadiff
-
-Version: 1.0.0
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    ...
-      Computing p-values...
-      ... values computed
-      Running HMM...
-      ... HMM run.
-      ... 4 regions found.
-    ... HMM step done.
-    Starting slice step...
-      ... 37 regions found.
-    ... slice step done.
-    Computing differential expression...
-    estimating size factors
-    estimating dispersions
-    gene-wise dispersion estimates
-    mean-dispersion relationship
-    final dispersion estimates
-    fitting model and testing
-    ... done.
-    Quitting from lines 373-374 (srnadiff.Rmd) 
-    Error: processing vignette 'srnadiff.Rmd' failed with diagnostics:
-    'sessioninfo' >= * must be installed for this functionality.
-    Execution halted
-    ```
-
 # StarBioTrek
 
 Version: 1.6.0
@@ -3865,6 +3568,26 @@ Version: 2.8.4
       visNet
     ```
 
+# TCGAbiolinksGUI
+
+Version: 1.6.1
+
+## In both
+
+*   checking package dependencies ... ERROR
+    ```
+    Packages required but not available:
+      ‘IlluminaHumanMethylation450kanno.ilmn12.hg19’
+      ‘IlluminaHumanMethylation450kmanifest’
+      ‘IlluminaHumanMethylation27kmanifest’
+      ‘IlluminaHumanMethylation27kanno.ilmn12.hg19’
+      ‘IlluminaHumanMethylationEPICanno.ilm10b2.hg19’
+      ‘IlluminaHumanMethylationEPICmanifest’
+    
+    See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+    manual.
+    ```
+
 # TCGAutils
 
 Version: 1.0.1
@@ -3951,40 +3674,6 @@ Version: 0.1.1.1
 # tosca
 
 Version: 0.1-2
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/run-all.R’ failed.
-    Last 13 lines of output:
-      
-      range of date: 1987-06-25 till 2014-08-06
-      NAs in date: 1 (0.33)
-      ---------------------------------------------------------------------- 
-      
-      metamult:
-                n NA.abs NA.rel
-      metamult1 6      0      0
-      metamult2 5      0      0
-      == testthat results  ===========================================================
-      OK: 224 SKIPPED: 0 FAILED: 1
-      1. Error: readWiki (@test_readWiki.R#6) 
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 75-77 (Vignette.Rmd) 
-    Error: processing vignette 'Vignette.Rmd' failed with diagnostics:
-    Timeout was reached: Resolving timed out after 10000 milliseconds
-    Execution halted
-    ```
 
 ## In both
 
@@ -4082,7 +3771,7 @@ Version: 1.4.5
       State tracking is disabled by default to comply with CRAN policies. Add `options(unitizer.state='recommended')` to your 'Rprofile' file to enable, or `options(unitizer.state='off')` to quash this message without enabling.  See `?unitizerState` for details.
       setup packages
       Error in i.p(...) : 
-        (converted from warning) installation of package '/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//Rtmp3CYdvq/fileafec4010be4e/unitizerdummypkg1_0.1.tar.gz' had non-zero exit status
+        (converted from warning) installation of package '/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//Rtmp0Mv8SU/file7c5f12eac003/unitizerdummypkg1_0.1.tar.gz' had non-zero exit status
       Error in eval(quote({ : install error
       Calls: source ... local -> eval.parent -> eval -> eval -> eval -> eval
       Removing packages from '.../revdep/checks.noindex/unitizer/new/unitizer.Rcheck'
@@ -4190,33 +3879,5 @@ Version: 0.1-7
       installed size is  5.8Mb
       sub-directories of 1Mb or more:
         data   5.6Mb
-    ```
-
-# yearn
-
-Version: 0.1.3
-
-## Newly broken
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      4: asNamespace(ns)
-      5: getNamespace(ns)
-      6: tryCatch(loadNamespace(name), error = function(e) stop(e))
-      7: tryCatchList(expr, classes, parentenv, handlers)
-      8: tryCatchOne(expr, names, parentenv, handlers[[1L]])
-      9: value[[3L]](cond)
-      
-      ══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 0 SKIPPED: 0 FAILED: 3
-      1. Error: A package with no matches does not match (@test_core.R#3) 
-      2. Error: FindClosestPackage can return multiple matches (@test_core.R#9) 
-      3. Error: FindClosestPackage selects properly (@test_core.R#15) 
-      
-      Error: testthat unit tests failed
-      Execution halted
     ```
 
