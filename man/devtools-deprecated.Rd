@@ -93,7 +93,7 @@ use_package_doc(pkg = ".")
 
 use_package(package, type = "Imports", pkg = ".")
 
-use_data(..., internal = FALSE, overwrite = FALSE,
+use_data(..., pkg = ".", internal = FALSE, overwrite = FALSE,
   compress = "bzip2")
 
 use_data_raw(pkg = ".")

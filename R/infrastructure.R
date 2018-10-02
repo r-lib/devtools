@@ -81,18 +81,17 @@ use_package <- function(package, type = "Imports", pkg = ".") {
   usethis::use_package(package = package, type = type)
 }
 
+
+# The NSE in use_data could potentially fail, but we will use it anyway.
 #' @rdname devtools-deprecated
 #' @export
-use_data <- usethis::use_data
-# `use_data` uses non-tidy NSE, so we cannot use it inside a function
-# hygienically. We could fix this with tidyevalation / rlang, but it seems
-# overkill just to get a deprecation message.
-# function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
-#          compress = "bzip2") {
-#   .Deprecated("usethis::use_data()", package = "devtools")
-#   usethis::use_data(..., internal = internal, overwrite = overwrite,
-#     compress = compress)
-# }
+use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
+                     compress = "bzip2") {
+  .Deprecated("usethis::use_data()", package = "devtools")
+  warn_unless_current_dir(pkg)
+  usethis::use_data(..., internal = internal, overwrite = overwrite,
+                    compress = compress)
+}
 
 #' @rdname devtools-deprecated
 #' @export
