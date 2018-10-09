@@ -53,3 +53,7 @@ remotes::install_deps
 #' @importFrom remotes update_packages
 #' @export
 remotes::update_packages
+
+#' @importFrom remotes dev_package_deps
+#' @export
+remotes::dev_package_deps
