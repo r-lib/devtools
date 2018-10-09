@@ -5,13 +5,11 @@ Wickham will need to approve the change <hadley@rstudio.com>.
 
 ## Test environments
 
-* local OS X install, R 3.4.3
-* Ubuntu 12.04 (on travis-ci), R-oldrel, R-release, R-devel
-* Windows Server 2012 R2 (x64), R 3.4.3
+* local OS X install, R 3.5.1
+* Ubuntu 14.04 (on travis-ci), R-oldrel, R-release, R-devel
+* Windows Server 2012 R2 (x64), R 3.5.1
 * Rhub
   * Windows Server 2008 R2 SP1, R-devel, 32/64 bit
-  * Debian Linux, R-devel, GCC ASAN/UBSAN
-  * Fedora Linux, R-devel, clang, gfortran
   * Ubuntu Linux 16.04 LTS, R-release, GCC
 * win-builder (devel and release)
 
@@ -21,39 +19,29 @@ Wickham will need to approve the change <hadley@rstudio.com>.
 
 ## Downstream dependencies
 
-* This change differs from the previous release only by changes to the tests.
-  Nonetheless I ran reverse dependency checks on all 232
-  dependencies. There were no failures caused by these changes.
+* I tested all 303 reverse dependencies on CRAN and Bioconductor. The full
+  results can be viewed at
+  https://github.com/r-lib/devtools/tree/master/revdep#readme
 
-- amt - 'sessioninfo' >= * must be installed for this functionality.
-- archivist - Error: ‘sessioninfo’ >= * must be installed for this functionality.
-- assertive\* - could not find function "with_envvar"
-- automagic - ‘github_pull’ is not exported by 'namespace:devtools'
-- baytrends - Error: ‘sessioninfo’ >= * must be installed for this functionality.
-- BiocWorkflowTools - Warning: 'create' is deprecated.
-- CluMix - Error: ‘sessioninfo’ >= * must be installed for this functionality.
-- cogena - lots of errors, is Bioc package, so no worried about it
-- DataPackageR - not sure, bunch of tests + examples failing, maybe something with load_all?
-- derfinderData - sessioninfo
-- exampletestr - deprecated usethis functions
-- fakemake - usethis
-- ggalluvial - sessioninfo
-- ggforce - sessioninfo
-- githubinstall - github_pull not exported
-- icd9 - Missing or unexported object: ‘devtools::load_data’
-- metagenomeFeatures - 'sessioninfo' >= * must be installed for this functionality.
-- microsamplingDesign - dev_package_deps
-- miscset - Error: ‘sessioninfo’ >= * must be installed for this functionality.
-- msgtools - usethis
-- pacman - ‘devtools::github_pull’ ‘devtools::github_release’
-- PKPDmisc - 'sessioninfo' >= * must be installed for this functionality.
-- PSPManalysis - error: 'setup_rtools' is not an exported object from 'namespace:devtools'
-- REDCapR - 'sessioninfo' >= * must be installed for this functionality.
-- RIVER - 'sessioninfo' >= * must be installed for this functionality.
-- spectrolab - usethis
-- srnadiff - 'sessioninfo' >= * must be installed for this functionality.
-- testthat - usethis
-- tosca - looks like false positive
-- unitizer - not sure - TODO investigate
-- yearn - not sure - github_pull
+### 4 packages have additional warnings with devtools 2.0.0
 
+These warnings are due to functions now deprecated in devtools that have been
+moved to the usethis package. The maintainers were notified on 2018-09-21 they
+should change their dependency from devtools to usethis.
+
+- BiocWorkflowTools - Maintainer notified on 2018-09-21 to switch to the **usethis** package.
+- fakemake  - Maintainer notified on 2018-09-21 to switch to the **usethis** package.
+- msgtools  - Maintainer notified on 2018-09-21 to switch to the **usethis** package.
+- spectrolab - Maintainer notified on 2018-09-21 to switch to the **usethis** package.
+
+### 10 packages have additional errors with devtools 2.0.0
+
+In all cases either pull requests were sent to the authors to fix the errors or
+maintainers contacted via email.
+
+- assertive\* - emailed on 2018-09-19, maintainer responded on same day saying they would
+  update the packages.
+- pacman - Already fixed in devel version - https://github.com/trinker/pacman/issues/113
+- PSPManalysis - https://github.com/cran/PSPManalysis/blob/729b7b05b28a95b924773e17971589824fe7dd05/R/setup.R#L2-L13 - (emailed 2018-10-09)
+- testthat - https://github.com/r-lib/testthat/pull/803
+- unitizer - https://github.com/brodieG/unitizer/pull/255

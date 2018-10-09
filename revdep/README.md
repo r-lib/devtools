@@ -3,13 +3,14 @@
 |field    |value                        |
 |:--------|:----------------------------|
 |version  |R version 3.5.1 (2018-07-02) |
-|os       |macOS Sierra 10.12.6         |
+|os       |macOS  10.14                 |
 |system   |x86_64, darwin15.6.0         |
 |ui       |X11                          |
 |language |(EN)                         |
 |collate  |en_US.UTF-8                  |
+|ctype    |en_US.UTF-8                  |
 |tz       |America/New_York             |
-|date     |2018-09-24                   |
+|date     |2018-10-09                   |
 
 # Dependencies
 
@@ -20,10 +21,9 @@
 |backports   |NA     |1.1.2       |*  |
 |base64enc   |NA     |0.1-3       |*  |
 |callr       |NA     |3.0.0       |*  |
-|cli         |NA     |1.0.0       |*  |
+|cli         |NA     |1.0.1       |*  |
 |clipr       |NA     |0.4.1       |*  |
 |clisymbols  |NA     |1.2.0       |*  |
-|covr        |NA     |3.1.0       |*  |
 |crayon      |NA     |1.3.4       |*  |
 |curl        |3.2    |3.2         |   |
 |desc        |NA     |1.2.0       |*  |
@@ -35,25 +35,23 @@
 |httr        |1.3.1  |1.3.1       |   |
 |ini         |NA     |0.3.1       |*  |
 |jsonlite    |1.5    |1.5         |   |
-|lazyeval    |NA     |0.2.1       |*  |
 |magrittr    |NA     |1.5         |*  |
 |memoise     |1.1.0  |1.1.0       |   |
-|mime        |0.5    |0.5         |   |
+|mime        |0.6    |0.6         |   |
 |openssl     |1.0.2  |1.0.2       |   |
-|pkgbuild    |NA     |1.0.1.9000  |*  |
+|pkgbuild    |NA     |1.0.1       |*  |
 |pkgload     |NA     |1.0.0       |*  |
 |prettyunits |NA     |1.0.2       |*  |
 |processx    |NA     |3.2.0       |*  |
 |ps          |NA     |1.1.0       |*  |
-|R6          |2.2.2  |2.2.2       |   |
+|R6          |2.3.0  |2.3.0       |   |
 |rcmdcheck   |NA     |1.3.0       |*  |
-|Rcpp        |NA     |0.12.18     |*  |
+|Rcpp        |NA     |0.12.19     |*  |
 |remotes     |NA     |1.1.1.9000  |*  |
-|rex         |NA     |1.1.2       |*  |
 |rlang       |NA     |0.2.2       |*  |
 |rprojroot   |NA     |1.3-2       |*  |
-|rstudioapi  |0.7    |0.7         |   |
-|sessioninfo |NA     |1.0.0       |*  |
+|rstudioapi  |0.8    |0.8         |   |
+|sessioninfo |NA     |1.1.0       |*  |
 |usethis     |NA     |1.4.0       |*  |
 |whisker     |0.3-2  |0.3-2       |   |
 |withr       |2.1.2  |2.1.2       |   |
@@ -61,18 +59,17 @@
 
 # Revdeps
 
-## Couldn't check (6)
+## Couldn't check (5)
 
 |package                                                |version |error  |warning |note |
 |:------------------------------------------------------|:-------|:------|:-------|:----|
 |[microsamplingDesign](problems.md#microsamplingdesign) |1.0.5   |__+1__ |        |     |
-|[MoonlightR](problems.md#moonlightr)                   |1.6.1   |1      |        |     |
 |[PSPManalysis](problems.md#pspmanalysis)               |0.2.0   |__+1__ |        |     |
 |[recount](problems.md#recount)                         |1.6.3   |1      |        |3    |
 |[segclust2d](problems.md#segclust2d)                   |0.1.0   |1      |        |     |
 |[TCGAbiolinks](problems.md#tcgabiolinks)               |2.8.4   |1      |1       |2    |
 
-## Broken (16)
+## Broken (14)
 
 |package                                             |version |error  |warning |note     |
 |:---------------------------------------------------|:-------|:------|:-------|:--------|
@@ -83,8 +80,6 @@
 |[assertive.matrices](problems.md#assertivematrices) |0.0-1   |__+1__ |        |1        |
 |[assertive.models](problems.md#assertivemodels)     |0.0-1   |__+1__ |        |         |
 |[BiocWorkflowTools](problems.md#biocworkflowtools)  |1.6.2   |       |__+1__  |2        |
-|[DataPackageR](problems.md#datapackager)            |0.15.3  |__+2__ |__+1__  |         |
-|[exampletestr](problems.md#exampletestr)            |1.3.1   |       |__+1__  |         |
 |[fakemake](problems.md#fakemake)                    |1.3.0   |       |__+2__  |-1       |
 |[icd9](problems.md#icd9)                            |1.3.1   |       |        |1 __+1__ |
 |[msgtools](problems.md#msgtools)                    |0.2.7   |       |__+1__  |         |
@@ -162,7 +157,7 @@
 |[crunch](problems.md#crunch)                                       |1.24.0        |       |        |1        |
 |[curatedMetagenomicData](problems.md#curatedmetagenomicdata)       |1.10.2        |       |        |1        |
 |DataCombine                                                        |0.2.21        |       |        |         |
-|[DataPackageR](problems.md#datapackager)                           |0.15.3        |__+2__ |__+1__  |         |
+|DataPackageR                                                       |0.15.3        |       |        |         |
 |datr                                                               |0.1.0         |       |        |         |
 |DCG                                                                |0.9.2         |       |        |         |
 |deBInfer                                                           |0.4.2         |       |        |         |
@@ -191,7 +186,7 @@
 |episode                                                            |1.0.0         |       |        |         |
 |etl                                                                |0.3.7         |       |        |         |
 |[EValue](problems.md#evalue)                                       |1.1.5         |       |        |1        |
-|[exampletestr](problems.md#exampletestr)                           |1.3.1         |       |__+1__  |         |
+|exampletestr                                                       |1.4.0         |       |        |         |
 |[excerptr](problems.md#excerptr)                                   |1.4.1         |2      |        |         |
 |[ExPanDaR](problems.md#expandar)                                   |0.2.0         |       |        |1        |
 |[fakemake](problems.md#fakemake)                                   |1.3.0         |       |__+2__  |-1       |
@@ -260,7 +255,7 @@
 |modules                                                            |0.7.0         |       |        |         |
 |Momocs                                                             |1.2.9         |       |        |         |
 |[MonetDBLite](problems.md#monetdblite)                             |0.6.0         |       |        |1        |
-|[MoonlightR](problems.md#moonlightr)                               |1.6.1         |1      |        |         |
+|[MoonlightR](problems.md#moonlightr)                               |1.6.1         |       |        |1        |
 |morpheus                                                           |0.2-0         |       |        |         |
 |mptools                                                            |1.0.1         |       |        |         |
 |[msgtools](problems.md#msgtools)                                   |0.2.7         |       |__+1__  |         |

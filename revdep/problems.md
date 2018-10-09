@@ -1010,70 +1010,6 @@ Version: 1.10.2
         help   2.7Mb
     ```
 
-# DataPackageR
-
-Version: 0.15.3
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    ...
-    INFO [2018-09-19 12:49:46] 1 required data objects created by foo.Rmd
-    INFO [2018-09-19 12:49:46] NEWS.md file not found, creating!
-    Enter a text description of the changes for the NEWS file.
-    INFO [2018-09-19 12:49:46] Saving to data
-    INFO [2018-09-19 12:49:46] Copied documentation to /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpIplDIY/filed29629fa55a9/R/filed29629fa55a9.R
-    
-    ✔ Setting active project to '/private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpIplDIY/filed29629fa55a9'
-    ✔ Creating 'vignettes/'
-    ✔ Creating 'inst/doc/'
-    INFO [2018-09-19 12:49:46] Done
-    INFO [2018-09-19 12:49:46] DataPackageR succeeded
-    INFO [2018-09-19 12:49:46] Building documentation
-    First time using roxygen2. Upgrading automatically...
-    Updating roxygen version in /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpIplDIY/filed29629fa55a9/DESCRIPTION
-    Writing NAMESPACE
-    Loading filed29629fa55a9
-    Writing filed29629fa55a9.Rd
-    Writing tbl.Rd
-    INFO [2018-09-19 12:49:46] Building package
-    Error: No root directory found in /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpIplDIY or its parent directories. Root criterion: contains a file `DESCRIPTION`
-    Execution halted
-    ```
-
-*   checking tests ...
-    ```
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      cars_over_20══ testthat results  ═══════════════════════════════════════════════════════════
-      OK: 90 SKIPPED: 0 FAILED: 13
-      1. Error: package can be built from different locations (@test-build-locations.R#19) 
-      2. Error: can add a data item (@test-conditional-build.R#19) 
-      3. Error: assert_data_version (@test-data-version.R#19) 
-      4. Error: documentation is built via document() (@test-document.R#13) 
-      5. Error: package built in different edge cases (@test-edge-cases.R#16) 
-      6. Error: manual bump version when data unchanged (@test-manual-version-bump.R#19) 
-      7. Error: news file is created (@test-news-update.R#13) 
-      8. Error: (unknown) (@test-project-path.R#12) 
-      9. Error: R file processing works and creates vignettes (@test-r-processing.R#13) 
-      1. ...
-      
-      Error: testthat unit tests failed
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error in re-building vignettes:
-      ...
-    Quitting from lines 170-173 (usingDataPackageR.Rmd) 
-    Error: processing vignette 'usingDataPackageR.Rmd' failed with diagnostics:
-    No root directory found in /private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpFWUdaY or its parent directories. Root criterion: contains a file `DESCRIPTION`
-    Execution halted
-    ```
-
 # demi
 
 Version: 1.1.2
@@ -1489,34 +1425,6 @@ Version: 1.1.5
       All declared Imports should be used.
     ```
 
-# exampletestr
-
-Version: 1.3.1
-
-## Newly broken
-
-*   checking examples ... WARNING
-    ```
-    Found the following significant warnings:
-    
-      Warning: 'devtools::create' is deprecated.
-      Warning: 'setup' is deprecated.
-      Warning: 'create_description' is deprecated.
-      Warning: 'use_rstudio' is deprecated.
-      Warning: 'devtools::create' is deprecated.
-      Warning: 'setup' is deprecated.
-      Warning: 'create_description' is deprecated.
-      Warning: 'use_rstudio' is deprecated.
-      Warning: 'devtools::create' is deprecated.
-      Warning: 'setup' is deprecated.
-      Warning: 'create_description' is deprecated.
-      Warning: 'use_rstudio' is deprecated.
-      Warning: 'devtools::use_testthat' is deprecated.
-    Deprecated functions may be defunct as soon as of the next release of
-    R.
-    See ?Deprecated.
-    ```
-
 # excerptr
 
 Version: 1.4.1
@@ -1605,7 +1513,7 @@ Version: 1.3.0
     ```
     Error in re-building vignettes:
       ...
-    Creating package 'fakepack' in '/private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/Rtmp1lGf2b'
+    Creating package 'fakepack' in '/private/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T/RtmpWyVmqy'
     No DESCRIPTION found. Creating with values:
     
     
@@ -2270,46 +2178,14 @@ Version: 1.6.1
 
 ## In both
 
-*   checking whether package ‘MoonlightR’ can be installed ... ERROR
+*   checking installed package size ... NOTE
     ```
-    Installation failed.
-    See ‘.../revdep/checks.noindex/MoonlightR/new/MoonlightR.Rcheck/00install.out’ for details.
+      installed size is 11.3Mb
+      sub-directories of 1Mb or more:
+        data   3.1Mb
+        doc    7.9Mb
     ```
 
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘MoonlightR’ ...
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Warning in fun(libname, pkgname) : couldn't connect to display ""
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘DO.db’
-ERROR: lazy loading failed for package ‘MoonlightR’
-* removing ‘.../revdep/checks.noindex/MoonlightR/new/MoonlightR.Rcheck/MoonlightR’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘MoonlightR’ ...
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Warning in fun(libname, pkgname) : couldn't connect to display ""
-Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-  there is no package called ‘DO.db’
-ERROR: lazy loading failed for package ‘MoonlightR’
-* removing ‘.../revdep/checks.noindex/MoonlightR/old/MoonlightR.Rcheck/MoonlightR’
-
-```
 # msgtools
 
 Version: 0.2.7
@@ -2960,15 +2836,14 @@ Version: 1.6.3
 
 *   checking package dependencies ... NOTE
     ```
-    Packages suggested but not available for checking:
-      ‘EnsDb.Hsapiens.v79’ ‘org.Hs.eg.db’
+    Package suggested but not available for checking: ‘EnsDb.Hsapiens.v79’
     ```
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 15.6Mb
+      installed size is 15.7Mb
       sub-directories of 1Mb or more:
-        data  12.0Mb
+        data  12.1Mb
         doc    3.3Mb
     ```
 
@@ -3304,19 +3179,19 @@ Version: 0.1.0
 * installing *source* package ‘segclust2d’ ...
 ** package ‘segclust2d’ successfully unpacked and MD5 sums checked
 ** libs
-clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c SegTraj_DynProg.cpp -o SegTraj_DynProg.o
-clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c SegTraj_EM.cpp -o SegTraj_EM.o
-clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c SegTraj_Gmixt.cpp -o SegTraj_Gmixt.o
-clang: error: unsupported option '-fopenmp'
-clangclang: error: : error: unsupported option '-fopenmp'clang: 
-errorunsupported option '-fopenmp': 
-unsupported option '-fopenmp'
-make: *** [RcppExports.o] Error 1
-make: *** Waiting for unfinished jobs....
-make: *** [SegTraj_Gmixt.o] Error 1
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Og -g -Wextra -Wno-unused-parameter -Wpedantic -fcolor-diagnostics -c RcppExports.cpp -o RcppExports.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Og -g -Wextra -Wno-unused-parameter -Wpedantic -fcolor-diagnostics -c SegTraj_DynProg.cpp -o SegTraj_DynProg.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Og -g -Wextra -Wno-unused-parameter -Wpedantic -fcolor-diagnostics -c SegTraj_EM.cpp -o SegTraj_EM.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/devtools/new/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Og -g -Wextra -Wno-unused-parameter -Wpedantic -fcolor-diagnostics -c SegTraj_Gmixt.cpp -o SegTraj_Gmixt.o
+clang: clang: [0;1;31merror: [0munsupported option '-fopenmp'[0m[0;1;31merror
+: [0munsupported option '-fopenmp'[0m
+clang: [0;1;31merror: [0munsupported option '-fopenmp'[0m
+clang: [0;1;31merror: [0munsupported option '-fopenmp'[0m
 make: *** [SegTraj_EM.o] Error 1
+make: *** Waiting for unfinished jobs....
 make: *** [SegTraj_DynProg.o] Error 1
+make: *** [RcppExports.o] Error 1
+make: *** [SegTraj_Gmixt.o] Error 1
 ERROR: compilation failed for package ‘segclust2d’
 * removing ‘.../revdep/checks.noindex/segclust2d/new/segclust2d.Rcheck/segclust2d’
 
@@ -3327,17 +3202,17 @@ ERROR: compilation failed for package ‘segclust2d’
 * installing *source* package ‘segclust2d’ ...
 ** package ‘segclust2d’ successfully unpacked and MD5 sums checked
 ** libs
-clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/segclust2d/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c RcppExports.cpp -o RcppExports.o
-clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/segclust2d/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c SegTraj_DynProg.cpp -o SegTraj_DynProg.o
-clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/segclust2d/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c SegTraj_EM.cpp -o SegTraj_EM.o
-clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/segclust2d/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Wall -g -O2  -c SegTraj_Gmixt.cpp -o SegTraj_Gmixt.o
-clang: error: unsupported option '-fopenmp'
-clang: error: unsupported option '-fopenmp'
-clang: error: unsupported option '-fopenmp'
-clang: error: unsupported option '-fopenmp'
-make: *** [SegTraj_Gmixt.o] Error 1
-make: *** Waiting for unfinished jobs....
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/segclust2d/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Og -g -Wextra -Wno-unused-parameter -Wpedantic -fcolor-diagnostics -c RcppExports.cpp -o RcppExports.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/segclust2d/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Og -g -Wextra -Wno-unused-parameter -Wpedantic -fcolor-diagnostics -c SegTraj_DynProg.cpp -o SegTraj_DynProg.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/segclust2d/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Og -g -Wextra -Wno-unused-parameter -Wpedantic -fcolor-diagnostics -c SegTraj_EM.cpp -o SegTraj_EM.o
+clang++  -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I".../revdep/library.noindex/segclust2d/Rcpp/include" -I".../revdep/library.noindex/segclust2d/RcppArmadillo/include" -I/usr/local/include  -fopenmp -fPIC  -Og -g -Wextra -Wno-unused-parameter -Wpedantic -fcolor-diagnostics -c SegTraj_Gmixt.cpp -o SegTraj_Gmixt.o
+clang: clang: [0;1;31merrorclang: : [0munsupported option '-fopenmp'[0m[0;1;31merror[0;1;31m: [0munsupported option '-fopenmp'error: 
+[0m
+[0munsupported option '-fopenmp'[0m
+clang: [0;1;31merror: [0munsupported option '-fopenmp'[0m
 make: *** [SegTraj_EM.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [SegTraj_Gmixt.o] Error 1
 make: *** [SegTraj_DynProg.o] Error 1
 make: *** [RcppExports.o] Error 1
 ERROR: compilation failed for package ‘segclust2d’
@@ -3535,10 +3410,10 @@ Version: 2.8.4
 
 *   checking installed package size ... NOTE
     ```
-      installed size is 72.7Mb
+      installed size is 74.7Mb
       sub-directories of 1Mb or more:
-        R      2.5Mb
-        data   3.5Mb
+        R      4.1Mb
+        data   3.9Mb
         doc   66.4Mb
     ```
 
@@ -3771,7 +3646,7 @@ Version: 1.4.5
       State tracking is disabled by default to comply with CRAN policies. Add `options(unitizer.state='recommended')` to your 'Rprofile' file to enable, or `options(unitizer.state='off')` to quash this message without enabling.  See `?unitizerState` for details.
       setup packages
       Error in i.p(...) : 
-        (converted from warning) installation of package '/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//Rtmp0Mv8SU/file7c5f12eac003/unitizerdummypkg1_0.1.tar.gz' had non-zero exit status
+        (converted from warning) installation of package '/var/folders/dt/r5s12t392tb5sk181j3gs4zw0000gn/T//Rtmp4lhiBZ/file1352dfa6605/unitizerdummypkg1_0.1.tar.gz' had non-zero exit status
       Error in eval(quote({ : install error
       Calls: source ... local -> eval.parent -> eval -> eval -> eval -> eval
       Removing packages from '.../revdep/checks.noindex/unitizer/new/unitizer.Rcheck'
