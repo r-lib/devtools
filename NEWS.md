@@ -3,6 +3,7 @@
 ## Breaking changes
 
 * `devtools::install()` arguments have been changed as follows.
+  - `local` -> `build`
   - `force_deps` -> `force`
   - `upgrade_dependencies` -> `upgrade`
   - `threads` -> Removed, but you can use `Ncpus`, which is passed by `...` to `install.packages()`
