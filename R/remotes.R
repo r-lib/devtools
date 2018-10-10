@@ -10,6 +10,10 @@ remotes::install_bitbucket
 #' @export
 remotes::install_cran
 
+#' @importFrom remotes install_dev
+#' @export
+remotes::install_dev
+
 #' @importFrom remotes install_git
 #' @export
 remotes::install_git
