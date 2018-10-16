@@ -3,8 +3,8 @@ sudo: false
 cache: packages
 
 env:
-  - _R_CHECK_FORCE_SUGGESTS_=false
-  - R_REMOTES_NO_ERRORS_FROM_WARNINGS=false
+  _R_CHECK_FORCE_SUGGESTS_=false
+  R_REMOTES_NO_ERRORS_FROM_WARNINGS=true
 
 r:
  - 3.1
@@ -18,8 +18,9 @@ r:
 bioc_required: true
 
 install:
-  - git clone --depth 1 https://github.com/r-lib/remotes && R CMD build remotes && R CMD INSTALL remotes*tar.gz && rm -rf remotes remotes*tar.gz
-  - R -e 'remotes::install_deps(".", dependencies = TRUE)'
+
+  - git clone --depth 1 https://github.com/r-lib/remotes && R CMD build --no-build-vignettes remotes && R CMD INSTALL remotes*tar.gz && rm -rf remotes remotes*tar.gz
+  - R -e 'install.packages("curl")' -e 'remotes::install_deps(".", dependencies = TRUE)'
 
 # Only report coverage for the release version
 after_success:
