@@ -7,11 +7,14 @@
 \alias{check_win_oldrelease}
 \title{Build windows binary package.}
 \usage{
-check_win_devel(pkg = ".", args = NULL, quiet = FALSE, ...)
+check_win_devel(pkg = ".", args = NULL, manual = TRUE,
+  quiet = FALSE, ...)
 
-check_win_release(pkg = ".", args = NULL, quiet = FALSE, ...)
+check_win_release(pkg = ".", args = NULL, manual = TRUE,
+  quiet = FALSE, ...)
 
-check_win_oldrelease(pkg = ".", args = NULL, quiet = FALSE, ...)
+check_win_oldrelease(pkg = ".", args = NULL, manual = TRUE,
+  quiet = FALSE, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -20,6 +23,9 @@ check_win_oldrelease(pkg = ".", args = NULL, quiet = FALSE, ...)
 \item{args}{An optional character vector of additional command
 line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},
 or \code{R CMD install} if \code{binary = TRUE}.}
+
+\item{manual}{For source packages: if \code{FALSE}, don't build PDF
+vignettes (\code{--no-build-vignettes}) or manual (\code{--no-manual}).}
 
 \item{quiet}{If \code{TRUE}, suppresses output.}
 
