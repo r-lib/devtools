@@ -1,14 +1,15 @@
 #' Unload and reload package.
 #'
-#' This attempts to unload and reload a package. If the package is not loaded
-#' already, it does nothing. It's not always possible to cleanly unload a
-#' package: see the caveats in [unload()] for some of the
-#' potential failure points. If in doubt, restart R and reload the package
-#' with [library()].
+#' This attempts to unload and reload an _installed_ package. If the package is
+#' not loaded already, it does nothing. It's not always possible to cleanly
+#' unload a package: see the caveats in [unload()] for some of the potential
+#' failure points. If in doubt, restart R and reload the package with
+#' [library()].
 #'
 #' @param pkg package description, can be path or package name.  See
 #'   [as.package()] for more information
 #' @param quiet if `TRUE` suppresses output from this function.
+#' @seealso [load_all()] to load a package for interactive development.
 #' @examples
 #' \dontrun{
 #' # Reload package that is in current directory

@@ -13,11 +13,11 @@ reload(pkg = ".", quiet = FALSE)
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 }
 \description{
-This attempts to unload and reload a package. If the package is not loaded
-already, it does nothing. It's not always possible to cleanly unload a
-package: see the caveats in \code{\link[=unload]{unload()}} for some of the
-potential failure points. If in doubt, restart R and reload the package
-with \code{\link[=library]{library()}}.
+This attempts to unload and reload an \emph{installed} package. If the package is
+not loaded already, it does nothing. It's not always possible to cleanly
+unload a package: see the caveats in \code{\link[=unload]{unload()}} for some of the potential
+failure points. If in doubt, restart R and reload the package with
+\code{\link[=library]{library()}}.
 }
 \examples{
 \dontrun{
@@ -31,4 +31,7 @@ reload("ggplot2/")
 # This will reload the installed ggplot2 package
 reload(pkgload::inst("ggplot2"))
 }
+}
+\seealso{
+\code{\link[=load_all]{load_all()}} to load a package for interactive development.
 }
