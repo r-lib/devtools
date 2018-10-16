@@ -3,7 +3,8 @@ sudo: false
 cache: packages
 
 env:
-  _R_CHECK_FORCE_SUGGESTS_=false
+  - _R_CHECK_FORCE_SUGGESTS_=false
+  - R_REMOTES_NO_ERRORS_FROM_WARNINGS=false
 
 r:
  - 3.1
