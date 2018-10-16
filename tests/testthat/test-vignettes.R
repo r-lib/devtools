@@ -89,17 +89,17 @@ test_that("Extra files copied and removed", {
     "testVignetteExtras", "vignettes",
     ".install_extras"
   )
-  writeLines("a.r", extras_path)
+  writeLines("a.R", extras_path)
   on.exit(unlink(extras_path))
 
   clean_vignettes(pkg)
-  expect_false("a.r" %in% dir(doc_path))
+  expect_false("a.R" %in% dir(doc_path))
 
   build_vignettes(pkg)
-  expect_true("a.r" %in% dir(doc_path))
+  expect_true("a.R" %in% dir(doc_path))
 
   clean_vignettes(pkg)
-  expect_false("a.r" %in% dir(doc_path))
+  expect_false("a.R" %in% dir(doc_path))
 })
 
 
