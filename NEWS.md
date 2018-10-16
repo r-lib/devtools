@@ -87,6 +87,8 @@ you should switch your package to depend on **usethis** directly instead.
 
 ## Bugfixes and additional changes
 
+* `check_win_*()` now build the package with `manual = TRUE` by default (#1890).
+
 * `check()` output now works more nicely with recent changes to rcmdcheck (#1874).
 
 * `reload()` now reloads loaded but not attached packages as well as attached ones.

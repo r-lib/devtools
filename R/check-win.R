@@ -25,24 +25,33 @@ build_win <- function(pkg = ".", version = c("R-devel", "R-release")) {
 
 #' @describeIn check_win Check package on the development version of R.
 #' @export
-check_win_devel <- function(pkg = ".", args = NULL, quiet = FALSE, ...) {
-  check_win(pkg = pkg, version = "R-devel", args = args, quiet = quiet, ...)
+check_win_devel <- function(pkg = ".", args = NULL, manual = TRUE, quiet = FALSE, ...) {
+  check_win(
+    pkg = pkg, version = "R-devel", args = args, manual = manual,
+    quiet = quiet, ...
+  )
 }
 
 #' @describeIn check_win Check package on the release version of R.
 #' @export
-check_win_release <- function(pkg = ".", args = NULL, quiet = FALSE, ...) {
-  check_win(pkg = pkg, version = "R-release", args = args, quiet = quiet, ...)
+check_win_release <- function(pkg = ".", args = NULL, manual = TRUE, quiet = FALSE, ...) {
+  check_win(
+    pkg = pkg, version = "R-release", args = args, manual = manual,
+    quiet = quiet, ...
+  )
 }
 
 #' @describeIn check_win Check package on the previous major release version of R.
 #' @export
-check_win_oldrelease <- function(pkg = ".", args = NULL, quiet = FALSE, ...) {
-  check_win(pkg = pkg, version = "R-oldrelease", args = args, quiet = quiet, ...)
+check_win_oldrelease <- function(pkg = ".", args = NULL, manual = TRUE, quiet = FALSE, ...) {
+  check_win(
+    pkg = pkg, version = "R-oldrelease", args = args, manual = manual,
+    quiet = quiet, ...
+  )
 }
 
 check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelease"),
-                      args = NULL, quiet = FALSE, ...) {
+                      args = NULL, manual = TRUE, quiet = FALSE, ...) {
   pkg <- as.package(pkg)
   version <- match.arg(version, several.ok = TRUE)
 
@@ -57,7 +66,10 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
     }
   }
 
-  built_path <- pkgbuild::build(pkg$path, tempdir(), args = args, quiet = quiet, ...)
+  built_path <- pkgbuild::build(pkg$path, tempdir(),
+    args = args,
+    manual = manual, quiet = quiet, ...
+  )
   on.exit(unlink(built_path))
 
   url <- paste0(
