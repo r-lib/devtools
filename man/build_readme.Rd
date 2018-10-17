@@ -9,7 +9,7 @@ build_readme(path = ".", quiet = TRUE, ...)
 \arguments{
 \item{path}{path to the package to build the readme.}
 
-\item{quiet}{if \code{TRUE} suppresses output from this function.}
+\item{quiet}{If \code{TRUE}, suppress output.}
 
 \item{...}{additional arguments passed to \code{\link[rmarkdown:render]{rmarkdown::render()}}}
 }

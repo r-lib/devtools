@@ -5,7 +5,7 @@
 \title{Build package vignettes.}
 \usage{
 build_vignettes(pkg = ".", dependencies = "VignetteBuilder",
-  clean = TRUE, upgrade = TRUE, quiet = TRUE, install = TRUE,
+  clean = TRUE, upgrade = "never", quiet = TRUE, install = TRUE,
   keep_md = TRUE)
 }
 \arguments{

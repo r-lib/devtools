@@ -13,7 +13,7 @@ uninstall(pkg = ".", unload = TRUE, quiet = FALSE, ...)
 \item{unload}{if \code{TRUE} (the default), will automatically unload the
 package prior to uninstalling.}
 
-\item{quiet}{if \code{TRUE} suppresses output from this function.}
+\item{quiet}{If \code{TRUE}, suppress output.}
 
 \item{...}{additional arguments passed to \code{\link[=remove.packages]{remove.packages()}}.}
 }

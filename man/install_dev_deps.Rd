@@ -4,11 +4,16 @@
 \alias{install_dev_deps}
 \title{Install package dependencies if needed.}
 \usage{
-install_dev_deps(pkg = ".", ...)
+install_dev_deps(pkg = ".", upgrade = "ask", ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
 \code{\link[=as.package]{as.package()}} for more information}
+
+\item{upgrade}{One of "ask", "always" or "never". "ask" prompts the user for
+which out of date packages to upgrade. For non-interactive sessions "ask" is
+equivalent to "always". \code{TRUE} and \code{FALSE} are also accepted and
+correspond to "always" and "never" respectively.}
 
 \item{...}{additional arguments passed to \code{\link[utils:install.packages]{utils::install.packages()}}.}
 }

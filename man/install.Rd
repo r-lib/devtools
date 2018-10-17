@@ -6,9 +6,8 @@
 \usage{
 install(pkg = ".", reload = TRUE, quick = FALSE, build = !quick,
   args = getOption("devtools.install.args"), quiet = FALSE,
-  dependencies = NA, upgrade = TRUE, build_vignettes = FALSE,
-  keep_source = getOption("keep.source.pkgs"),
-  threads = getOption("Ncpus", 1), force = FALSE, ...)
+  dependencies = NA, upgrade = "ask", build_vignettes = FALSE,
+  keep_source = getOption("keep.source.pkgs"), force = FALSE, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -30,14 +29,21 @@ to start from scratch.}
 arguments to be passed to \code{R CMD INSTALL}. This defaults to the
 value of the option \code{"devtools.install.args"}.}
 
-\item{quiet}{if \code{TRUE} suppresses output from this function.}
+\item{quiet}{If \code{TRUE}, suppress output.}
 
-\item{dependencies}{\code{logical} indicating to also install uninstalled
-packages which this \code{pkg} depends on/links to/suggests. See
-argument \code{dependencies} of \code{\link[=install.packages]{install.packages()}}.}
+\item{dependencies}{Which dependencies do you want to check?
+Can be a character vector (selecting from "Depends", "Imports",
+"LinkingTo", "Suggests", or "Enhances"), or a logical vector.
 
-\item{upgrade}{If \code{TRUE}, the default, will also update
-any out of date dependencies.}
+\code{TRUE} is shorthand for "Depends", "Imports", "LinkingTo" and
+"Suggests". \code{NA} is shorthand for "Depends", "Imports" and "LinkingTo"
+and is the default. \code{FALSE} is shorthand for no dependencies (i.e.
+just check this package, not its dependencies).}
+
+\item{upgrade}{One of "ask", "always" or "never". "ask" prompts the user for
+which out of date packages to upgrade. For non-interactive sessions "ask" is
+equivalent to "always". \code{TRUE} and \code{FALSE} are also accepted and
+correspond to "always" and "never" respectively.}
 
 \item{build_vignettes}{if \code{TRUE}, will build vignettes. Normally it is
 \code{build} that's responsible for creating vignettes; this argument makes
@@ -48,16 +54,11 @@ sure vignettes are built even if a build never happens (i.e. because
 package. This is useful for debugging (especially inside of RStudio).
 It defaults to the option \code{"keep.source.pkgs"}.}
 
-\item{threads}{number of concurrent threads to use for installing
-dependencies.
-It defaults to the option \code{"Ncpus"} or \code{1} if unset.}
+\item{force}{Force installation, even if the remote state has not changed
+since the previous install.}
 
-\item{force}{whether to force installation of dependencies even if they
-have not been updated from the previously installed version.}
-
-\item{...}{additional arguments passed to \code{\link[=install.packages]{install.packages()}}
-when installing dependencies. \code{pkg} is installed with
-\code{R CMD INSTALL}.}
+\item{...}{additional arguments passed to \code{\link[remotes:install_deps]{remotes::install_deps()}}
+when installing dependencies.}
 }
 \description{
 Uses \code{R CMD INSTALL} to install the package. Will also try to install

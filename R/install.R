@@ -15,6 +15,7 @@
 #'
 #' To install a package in a non-default library, use [withr::with_libpaths()].
 #'
+#' @inheritParams remotes::install_local
 #' @param pkg package description, can be path or package name.  See
 #'   [as.package()] for more information
 #' @param reload if `TRUE` (the default), will automatically reload the
@@ -29,12 +30,6 @@
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to `R CMD INSTALL`. This defaults to the
 #'   value of the option `"devtools.install.args"`.
-#' @param quiet if `TRUE` suppresses output from this function.
-#' @param dependencies `logical` indicating to also install uninstalled
-#'   packages which this `pkg` depends on/links to/suggests. See
-#'   argument `dependencies` of [install.packages()].
-#' @param upgrade If `TRUE`, the default, will also update
-#'   any out of date dependencies.
 #' @param build_vignettes if `TRUE`, will build vignettes. Normally it is
 #'   `build` that's responsible for creating vignettes; this argument makes
 #'   sure vignettes are built even if a build never happens (i.e. because
@@ -42,14 +37,8 @@
 #' @param keep_source If `TRUE` will keep the srcrefs from an installed
 #'   package. This is useful for debugging (especially inside of RStudio).
 #'   It defaults to the option `"keep.source.pkgs"`.
-#' @param threads number of concurrent threads to use for installing
-#'   dependencies.
-#'   It defaults to the option `"Ncpus"` or `1` if unset.
-#' @param force whether to force installation of dependencies even if they
-#'   have not been updated from the previously installed version.
-#' @param ... additional arguments passed to [install.packages()]
-#'   when installing dependencies. `pkg` is installed with
-#'   `R CMD INSTALL`.
+#' @param ... additional arguments passed to [remotes::install_deps()]
+#'   when installing dependencies.
 #' @family package installation
 #' @seealso [update_packages()] to update installed packages from the
 #' source location and [with_debug()] to install packages with
@@ -58,10 +47,9 @@
 install <-
   function(pkg = ".", reload = TRUE, quick = FALSE, build = !quick,
              args = getOption("devtools.install.args"), quiet = FALSE,
-             dependencies = NA, upgrade = TRUE,
+             dependencies = NA, upgrade = "ask",
              build_vignettes = FALSE,
              keep_source = getOption("keep.source.pkgs"),
-             threads = getOption("Ncpus", 1),
              force = FALSE,
              ...) {
 
@@ -96,7 +84,8 @@ install <-
     )
 
     if (build) {
-      install_path <- pkgbuild::build(pkg$path, args = build_opts, quiet = quiet)
+      install_path <- pkgbuild::build(pkg$path, dest_path = tempdir(), args = build_opts, quiet = quiet)
+      on.exit(unlink(install_path), add = TRUE)
     } else {
       install_path <- pkg$path
     }
@@ -113,10 +102,10 @@ install <-
 #' @inheritParams install
 #' @inherit remotes::install_deps
 #' @export
-install_dev_deps <- function(pkg = ".", ...) {
+install_dev_deps <- function(pkg = ".", upgrade = "ask", ...) {
   remotes::update_packages("roxygen2")
   install_deps(pkg, ...,
-    dependencies = TRUE, upgrade = FALSE,
+    dependencies = TRUE, upgrade = upgrade,
     bioc_packages = TRUE
   )
 }
