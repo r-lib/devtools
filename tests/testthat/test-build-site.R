@@ -5,7 +5,7 @@ test_that("Package pkgdown site can be built ", {
 
   build_output <- capture.output({
     build_site(
-      path = "./testPkgdown",
+      path = "testPkgdown",
       override = list(destination = destination)
     )
   }, type = c("output"))
