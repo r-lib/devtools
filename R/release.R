@@ -91,7 +91,7 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
         cat_rule()
       }
       cran_url <- paste0(
-        cran_mirror(), "/web/checks/check_results_",
+        getOption("repos")[["CRAN"]], "/web/checks/check_results_",
         pkg$package, ".html"
       )
       if (yesno(
@@ -385,4 +385,14 @@ flag_release <- function(pkg = ".") {
   )
   writeLines(msg, file.path(pkg$path, "CRAN-RELEASE"))
   usethis::use_build_ignore("CRAN-RELEASE")
+}
+
+cran_mirror <- function(repos = getOption("repos")) {
+  repos[repos == "@CRAN@"] <- "http://cloud.r-project.org"
+
+  if (is.null(names(repos))) {
+    names(repos) <- "CRAN"
+  }
+
+  repos[["CRAN"]]
 }

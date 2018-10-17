@@ -29,17 +29,3 @@ r_env_vars <- function() {
 
   vars
 }
-
-# Create a temporary .Rprofile based on the current "repos" option
-# and return a named vector that corresponds to environment variables
-# that need to be set to use this .Rprofile
-r_profile <- function() {
-  tmp_user_profile <- file.path(tempdir(), "Rprofile-devtools")
-  tmp_user_profile_con <- file(tmp_user_profile, "w")
-  on.exit(close(tmp_user_profile_con), add = TRUE)
-  writeLines("options(repos =", tmp_user_profile_con)
-  dput(getOption("repos"), tmp_user_profile_con)
-  writeLines(")", tmp_user_profile_con)
-
-  c(R_PROFILE_USER = tmp_user_profile)
-}
