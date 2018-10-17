@@ -30,7 +30,7 @@
 build_vignettes <- function(pkg = ".",
                             dependencies = "VignetteBuilder",
                             clean = TRUE,
-                            upgrade = TRUE,
+                            upgrade = "never",
                             quiet = TRUE,
                             install = TRUE,
                             keep_md = TRUE) {
@@ -45,7 +45,7 @@ build_vignettes <- function(pkg = ".",
   if (isTRUE(install)) {
     build <- function(pkg_path, clean, quiet, upgrade) {
       withr::with_temp_libpaths(action = "prefix", {
-        devtools::install(pkg_path, upgrade_dependencies = upgrade, reload = FALSE, quiet = quiet)
+        devtools::install(pkg_path, upgrade = upgrade, reload = FALSE, quiet = quiet)
         tools::buildVignettes(dir = pkg_path, clean = clean, tangle = TRUE, quiet = quiet)
       })
     }
