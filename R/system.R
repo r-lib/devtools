@@ -14,6 +14,8 @@
 system_check <- function(cmd, args = character(), env_vars = character(),
                          path = ".", quiet = FALSE, throw = TRUE,
                          ...) {
+  .Deprecated("processx::run()", package = "devtools")
+
   full <- paste(shQuote(cmd), " ", paste(args, collapse = " "), sep = "")
 
   if (!quiet) {
@@ -93,6 +95,8 @@ system2_check <- function(cmd, args = character(), env_vars = character(),
 system_output <- function(cmd, args = character(), env_vars = character(),
                           path = ".", quiet = FALSE, ...) {
   full <- paste(shQuote(cmd), " ", paste(args, collapse = " "), sep = "")
+
+  .Deprecated("processx::run()", package = "devtools")
 
   if (!quiet) {
     message(wrap_command(full), "\n")
