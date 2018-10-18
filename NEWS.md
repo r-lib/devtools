@@ -1,6 +1,31 @@
 # devtools 2.0.0
 
+Devtools 2.0.0 is a _major_ release that contains work from the past year and a
+half, since the major devtools release (1.13.0).
+
+This release splits the functionality in **devtools** into a number of smaller
+packages which are simpler to develop and also easier for other packages to
+depend on. In particular the following packages have been spun off in what we
+are calling the 'conscious uncoupling' of **devtools**.
+
+* remotes: Installing packages (i.e. `install_github()`).
+* pkgbuild: Building binary packages (including checking if build tools are available) (i.e. `build()`).
+* pkgload: Simulating package loading (i.e. `load_all()`).
+* rcmdcheck: Running R CMD check and reporting the results (i.e. `check()`).
+* revdepcheck: Running R CMD check on all reverse dependencies, and figuring
+  out what's changed since the last CRAN release (i.e. `revdep_check()`).
+* sessioninfo: R session info (i.e. `session_info()`).
+* usethis: Automating package setup (i.e. `use_test()`).
+
+devtools will remain the main package developers will interact with when
+writing R packages; it will just rely on these other packages internally
+for most of the functionality.
+
 ## Breaking changes
+
+There have been a number of breaking changes in this release, while this will
+cause some short term pain for users it will result in a easier to understand
+API in the future, so we feel the tradeoff is worthwhile.
 
 * `devtools::install()` arguments have been changed as follows.
   - `local` -> `build`
@@ -25,36 +50,39 @@
 
 * `RCMD()`, `clean_source()`, `eval_clean()` and `evalq_clean()` have been
   removed. These functions never worked terribly well, and have been replaced
-  by the much better functions in callr.
+  by the much better functions in **callr**.
 
 * `build_win()` has been renamed to `check_win_release()`, `check_win_devel()`,
-  `check_win_oldrelease()` (#1598).
+  and `check_win_oldrelease()` (#1598).
 
 ## Deprecated functions
 
 * Infrastructure functions (`use_*`) now use the implementations in **usethis**
-and the versions in devtools are deprecated. If you use these from a package
+and the versions in **devtools** are deprecated. If you use these from a package
 you should switch your package to depend on **usethis** directly instead.
 
 * The `revdep_check_*` functions have been deprecated in favor of the
   **revdepcheck** package.
 
+* `system_check()` and `system_output()` have been deprecated in factor of the
+  **processx** package.
+
 ## Major changes
 
-* All `install_*()` functions are now re-exported from remotes rather than being defined in devtools.
+* All `install_*()` functions are now re-exported from **remotes** rather than
+  being defined in **devtools**
 
-* devtools now depends on roxygen2 6.1.0: this considerably simplifies 
+* **devtools** now depends on **roxygen2** 6.1.0: this considerably simplifies 
   `devtools::document()` and makes it more consistent with 
   `roxygen2::roxygenise()`.
-
-* Bioconductor support now provided by the BiocManager CRAN package instead of
-  BiocInstaller (for R versions 3.5+) (#1833).
 
 * `test_file()` function added to test one or more files from a package
   (#1755).
 
-* New `test_coverage()` provides helper to compute test coverage using covr
-  (#1628).
+* `test_coverage()` function added to provide a helper to compute test coverage
+  using **covr** (#1628).
+
+* `test_file()` and `test_coverage_file()` now have RStudio addins (#1650)
 
 * `test_file_coverage()` function added to show the test coverage of one or
   more files from a package. (#1755).
@@ -74,22 +102,22 @@ you should switch your package to depend on **usethis** directly instead.
   `load_code()`, `load_dll()`, `ns_env()`, `parse_ns_file()`, `pkg_env()`. 
   These functions are primarily for internal use.
 
-    `load_all()` and `unload()` have been moved to pkgload, but devtools
+    `load_all()` and `unload()` have been moved to pkgload, but **devtools**
     provides shims since these are commonly used.
 
 * `find_rtools()`, `setup_rtools()`, `has_devel()`, `compiler_flags()`,
   `build()` and `with_debug()` have moved to the new **pkgbuild** package.
-  `build()` and `with_debug()` are re-exported by devtools.
+  `build()` and `with_debug()` are re-exported by **devtools**
 
 * The `spell_check()` code has been moved into the new **spelling** package and
-  has thereby gained support for vignettes and package wordlists. The devtools
+  has thereby gained support for vignettes and package wordlists. The **devtools**
   function now wraps `spelling::spell_check_package()`.
 
-## Bugfixes and additional changes
+## Minor improvements and fixes
 
 * `check_win_*()` now build the package with `manual = TRUE` by default (#1890).
 
-* `check()` output now works more nicely with recent changes to rcmdcheck (#1874).
+* `check()` output now works more nicely with recent changes to **rcmdcheck** (#1874).
 
 * `reload()` now reloads loaded but not attached packages as well as attached ones.
 
@@ -109,7 +137,7 @@ you should switch your package to depend on **usethis** directly instead.
 * `remote_sha.github()` now correctly looks up SHA in private repositories
   (#1827, @renozao).
 
-* devtools `use_*()` functions now temporarily set the active usethis project
+* **devtools** `use_*()` functions now temporarily set the active **usethis** project
   if given a pkg argument that is not the current directory. This provides
   backwards compatibility with previous behavior (#1823).
 
@@ -127,8 +155,6 @@ you should switch your package to depend on **usethis** directly instead.
 
 * `test()` now sets `useFancyQuotes = FALSE` to better mimic the environment tests
   are run under with `R CMD check` (#1735).
-
-* `test_file()` and `test_coverage_file()` now have RStudio addins (#1650)
 
 * `test()` no longer passes encoding argument to `testthat::test_dir()` (#1776)
 

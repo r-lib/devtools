@@ -1,7 +1,4 @@
-This is a point release fixing failing tests on CRAN.
-
-This release also makes Jim Hester the new maintainer of devtools. Hadley
-Wickham will need to approve the change <hadley@rstudio.com>.
+This release adds additional functionality and also addresses check failures in R-devel
 
 ## Test environments
 
@@ -39,9 +36,9 @@ should change their dependency from devtools to usethis.
 In all cases either pull requests were sent to the authors to fix the errors or
 maintainers contacted via email.
 
-- assertive\* - emailed on 2018-09-19, maintainer responded on same day saying they would
-  update the packages.
+- assertive\* - emailed the maintainer on 2018-09-19, maintainer responded on
+  same day saying they would update the packages.
 - pacman - Already fixed in devel version - https://github.com/trinker/pacman/issues/113
 - PSPManalysis - https://github.com/cran/PSPManalysis/blob/729b7b05b28a95b924773e17971589824fe7dd05/R/setup.R#L2-L13 - (emailed 2018-10-09)
-- testthat - https://github.com/r-lib/testthat/pull/803
+- testthat - https://github.com/r-lib/testthat/pull/803 - now on CRAN as testthat 2.0.1
 - unitizer - https://github.com/brodieG/unitizer/pull/255
