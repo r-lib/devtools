@@ -2,12 +2,12 @@
 % Please edit documentation in R/github.R
 \name{github_pat}
 \alias{github_pat}
-\title{Retrieve Github personal access token.}
+\title{Retrieve GitHub personal access token.}
 \usage{
 github_pat(quiet = TRUE)
 }
 \description{
-A github personal access token
+A GitHub personal access token
 Looks in env var \code{GITHUB_PAT}
 }
 \keyword{internal}

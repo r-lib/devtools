@@ -5,7 +5,7 @@
 #' The package release process will:
 #'
 #' \itemize{
-#'   \item Confirm that the package passes `R CMD check` on relevant platoforms
+#'   \item Confirm that the package passes `R CMD check` on relevant platforms
 #'   \item Confirm that important files are up-to-date
 #'   \item Build the package
 #'   \item Submit the package to CRAN, using comments in "cran-comments.md"
