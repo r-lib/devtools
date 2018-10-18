@@ -1,4 +1,4 @@
-# devtools development
+# devtools 2.0.0
 
 ## Breaking changes
 
