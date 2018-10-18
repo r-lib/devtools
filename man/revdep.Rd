@@ -28,15 +28,15 @@ will not appear in returned vector. This is used in
 or extremely long check times.}
 
 \item{bioconductor}{If \code{TRUE} also look for dependencies amongst
-bioconductor packages.}
+Bioconductor packages.}
 }
 \description{
-Tools to check and notify maintainers of all CRAN and bioconductor
+Tools to check and notify maintainers of all CRAN and Bioconductor
 packages that depend on the specified package.
 }
 \details{
 The first run in a session will be time-consuming because it must download
-all package metadata from CRAN and bioconductor. Subsequent runs will
+all package metadata from CRAN and Bioconductor. Subsequent runs will
 be faster.
 }
 \examples{

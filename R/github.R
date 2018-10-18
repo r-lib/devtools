@@ -81,9 +81,9 @@ github_tag <- function(username, repo, ref = "master") {
   github_GET(file.path("repos", username, repo, "tags", ref))
 }
 
-#' Retrieve Github personal access token.
+#' Retrieve GitHub personal access token.
 #'
-#' A github personal access token
+#' A GitHub personal access token
 #' Looks in env var `GITHUB_PAT`
 #'
 #' @keywords internal

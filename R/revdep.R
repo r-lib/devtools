@@ -1,10 +1,10 @@
 #' Reverse dependency tools.
 #'
-#' Tools to check and notify maintainers of all CRAN and bioconductor
+#' Tools to check and notify maintainers of all CRAN and Bioconductor
 #' packages that depend on the specified package.
 #'
 #' The first run in a session will be time-consuming because it must download
-#' all package metadata from CRAN and bioconductor. Subsequent runs will
+#' all package metadata from CRAN and Bioconductor. Subsequent runs will
 #' be faster.
 #'
 #' @param pkg Package name. This is unlike most devtools packages which
@@ -18,7 +18,7 @@
 #' @param dependencies A character vector listing the types of dependencies
 #'   to follow.
 #' @param bioconductor If `TRUE` also look for dependencies amongst
-#'   bioconductor packages.
+#'   Bioconductor packages.
 #' @param recursive If `TRUE` look for full set of recursive dependencies.
 #' @inheritParams tools::dependsOnPkgs
 #' @seealso [revdep_check()] to run R CMD check on all reverse

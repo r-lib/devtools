@@ -24,7 +24,7 @@
 #'  \item The standard environment variables set by devtools:
 #'    [r_env_vars()]. Of particular note for package tests is the
 #'    `NOT_CRAN` env var which lets you know that your tests are not
-#'    running on cran, and hence can take a reasonable amount of time.
+#'    running on CRAN, and hence can take a reasonable amount of time.
 #'
 #'  \item Debugging flags for the compiler, set by
 #'    \code{\link{compiler_flags}(FALSE)}.

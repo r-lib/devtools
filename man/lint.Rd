@@ -16,7 +16,7 @@ use the previous results.}
 \item{...}{additional arguments passed to \code{\link[lintr:lint_package]{lintr::lint_package()}}}
 }
 \description{
-The default lintings correspond to the style guide at
+The default linters correspond to the style guide at
 \url{http://r-pkgs.had.co.nz/r.html#style}, however it is possible to
 override any or all of them using the \code{linters} parameter.
 }
