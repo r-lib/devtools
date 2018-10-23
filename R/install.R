@@ -80,7 +80,7 @@ install <-
     remotes::install_deps(pkg$path,
       build = build, build_opts = build_opts,
       INSTALL_opts = opts, dependencies = dependencies, quiet = quiet,
-      force = force, ...
+      force = force, upgrade = upgrade, ...
     )
 
     if (build) {
