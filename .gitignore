@@ -12,3 +12,4 @@ script.R
 doc
 Meta
 tests/*/*/.gitignore
+docs/
