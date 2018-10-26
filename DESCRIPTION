@@ -23,7 +23,6 @@ Imports:
     httr (>= 0.4),
     jsonlite,
     memoise (>= 1.0.0),
-    methods,
     pkgbuild (>= 1.0.2),
     pkgload (>= 1.0.1),
     rcmdcheck (>= 1.3.0),
