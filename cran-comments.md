@@ -1,4 +1,6 @@
-This release adds additional functionality and also addresses check failures in R-devel
+This is a small patch release fixing bugs discovered in the previous release.
+
+It also fixes the check errors on CRAN
 
 ## Test environments
 
@@ -16,29 +18,4 @@ This release adds additional functionality and also addresses check failures in 
 
 ## Downstream dependencies
 
-* I tested all 303 reverse dependencies on CRAN and Bioconductor. The full
-  results can be viewed at
-  https://github.com/r-lib/devtools/tree/master/revdep#readme
-
-### 4 packages have additional warnings with devtools 2.0.0
-
-These warnings are due to functions now deprecated in devtools that have been
-moved to the usethis package. The maintainers were notified on 2018-09-21 they
-should change their dependency from devtools to usethis.
-
-- BiocWorkflowTools - Maintainer notified on 2018-09-21 to switch to the **usethis** package.
-- fakemake  - Maintainer notified on 2018-09-21 to switch to the **usethis** package.
-- msgtools  - Maintainer notified on 2018-09-21 to switch to the **usethis** package.
-- spectrolab - Maintainer notified on 2018-09-21 to switch to the **usethis** package.
-
-### 10 packages have additional errors with devtools 2.0.0
-
-In all cases either pull requests were sent to the authors to fix the errors or
-maintainers contacted via email.
-
-- assertive\* - emailed the maintainer on 2018-09-19, maintainer responded on
-  same day saying they would update the packages.
-- pacman - Already fixed in devel version - https://github.com/trinker/pacman/issues/113
-- PSPManalysis - https://github.com/cran/PSPManalysis/blob/729b7b05b28a95b924773e17971589824fe7dd05/R/setup.R#L2-L13 - (emailed 2018-10-09)
-- testthat - https://github.com/r-lib/testthat/pull/803 - now on CRAN as testthat 2.0.1
-- unitizer - https://github.com/brodieG/unitizer/pull/255
+* I did not test all dependencies, but do not think any of the changes should effect them.
