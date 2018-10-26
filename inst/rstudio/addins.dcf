@@ -3,7 +3,12 @@ Description: Run the current test file, using `devtools::test_file()`.
 Binding: test_file
 Interactive: false
 
-Name: Calculate test coverage for a file
-Description: Calculate test coverage for the current test file, using `devtools::test_coverage_file()`.
+Name: Report test coverage for a file
+Description: Calculate and report test coverage for the current test file, using `devtools::test_coverage_file()`.
 Binding: test_coverage_file
+Interactive: false
+
+Name: Report test coverage for a package
+Description: Calculate and report the test coverage for the current package, using `devtools::test_coverage()`.
+Binding: test_coverage
 Interactive: false
