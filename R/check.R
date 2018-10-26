@@ -192,8 +192,10 @@ check_built <- function(path = NULL, cran = TRUE,
   }
 
   withr::with_envvar(env_vars, action = "prefix", {
-    rcmdcheck::rcmdcheck(path, quiet = quiet, args = args,
-                         check_dir = check_dir, error_on = error_on)
+    rcmdcheck::rcmdcheck(path,
+      quiet = quiet, args = args,
+      check_dir = check_dir, error_on = error_on
+    )
   })
 }
 

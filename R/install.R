@@ -52,7 +52,6 @@ install <-
              keep_source = getOption("keep.source.pkgs"),
              force = FALSE,
              ...) {
-
     pkg <- as.package(pkg)
 
     # Forcing all of the promises for the current namespace now will avoid lazy-load
@@ -146,5 +145,6 @@ install_dev_deps <- function(pkg = ".",
   pkg <- as.package(pkg)
 
   remotes::install_deps(pkg$path, ...,
-    dependencies = TRUE, upgrade = upgrade)
+    dependencies = TRUE, upgrade = upgrade
+  )
 }

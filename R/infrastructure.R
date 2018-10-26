@@ -89,8 +89,10 @@ use_data <- function(..., pkg = ".", internal = FALSE, overwrite = FALSE,
                      compress = "bzip2") {
   .Deprecated("usethis::use_data()", package = "devtools")
   warn_unless_current_dir(pkg)
-  usethis::use_data(..., internal = internal, overwrite = overwrite,
-                    compress = compress)
+  usethis::use_data(...,
+    internal = internal, overwrite = overwrite,
+    compress = compress
+  )
 }
 
 #' @rdname devtools-deprecated
