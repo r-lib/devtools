@@ -1,5 +1,7 @@
 # devtools 2.0.0.9000 - Development
 
+* `install_deps()` now again works from any directory within a package (#1905)
+
 * Add a RStudio addin for `test_coverage()`.
 
 * `install()` now correctly passes the `upgrade` parameter to

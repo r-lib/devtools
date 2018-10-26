@@ -50,10 +50,6 @@ remotes::install_url
 #' @export
 remotes::install_version
 
-#' @importFrom remotes install_deps
-#' @export
-remotes::install_deps
-
 #' @importFrom remotes update_packages
 #' @export
 remotes::update_packages

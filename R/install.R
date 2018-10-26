@@ -99,13 +99,52 @@ install <-
     invisible(TRUE)
   }
 
+#' Install package dependencies if needed.
+
+#' `install_deps()` will install the
+#' user dependencies needed to run the package, `install_dev_deps()` will also
+#' install the development dependencies needed to test and build the package.
 #' @inheritParams install
 #' @inherit remotes::install_deps
 #' @export
-install_dev_deps <- function(pkg = ".", upgrade = "ask", ...) {
-  remotes::update_packages("roxygen2")
-  install_deps(pkg, ...,
-    dependencies = TRUE, upgrade = upgrade,
-    bioc_packages = TRUE
+install_deps <- function(pkg = ".",
+                         dependencies = NA,
+                         repos = getOption("repos"),
+                         type = getOption("pkgType"),
+                         upgrade = c("ask", "always", "never"),
+                         quiet = FALSE,
+                         build = TRUE,
+                         build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
+                         ...) {
+  pkg <- as.package(pkg)
+
+  remotes::install_deps(pkg$path,
+    dependencies = dependencies,
+    repos = repos,
+    type = type,
+    upgrade = upgrade,
+    quiet = quiet,
+    build = build,
+    build_opts = build_opts,
+    ...
   )
+}
+
+#' @rdname install_deps
+#' @export
+install_dev_deps <- function(pkg = ".",
+                             dependencies = TRUE,
+                             repos = getOption("repos"),
+                             type = getOption("pkgType"),
+                             upgrade = c("ask", "always", "never"),
+                             quiet = FALSE,
+                             build = TRUE,
+                             build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
+                             ...) {
+  remotes::update_packages("roxygen2")
+
+  pkg <- as.package(pkg)
+
+  remotes::install_deps(pkg$path, ...,
+    dependencies = TRUE, upgrade = upgrade)
 }
