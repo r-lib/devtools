@@ -16,8 +16,8 @@ any pieces of the package. This is equivalent to running
 faster for large code bases, but is a significantly less accurate
 approximation.}
 
-\item{recompile}{force a recompile of DLL from source code, if present.
-This is equivalent to running \code{\link[pkgbuild:clean_dll]{pkgbuild::clean_dll()}} before
+\item{recompile}{DEPRECATED. force a recompile of DLL from source code, if
+present. This is equivalent to running \code{\link[pkgbuild:clean_dll]{pkgbuild::clean_dll()}} before
 \code{load_all}}
 
 \item{export_all}{If \code{TRUE} (the default), export all objects.
@@ -53,7 +53,7 @@ for more details.
 functions at the correct times.
 
 \item If you use \pkg{testthat}, will load all test helpers so
-you can access them interactively. Devtools sets the
+you can access them interactively. devtools sets the
 \code{DEVTOOLS_LOAD} environment variable to \code{"true"} to
 let you check whether the helpers are run during package loading.
 
