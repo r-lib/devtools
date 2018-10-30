@@ -58,19 +58,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.0.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -81,12 +75,26 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dependencies.html">Devtools dependencies</a>
+      <a href="../articles/dependencies.html">Remote development dependencies</a>
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Release notes</li>
+    <li>
+      <a href="https://www.tidyverse.org/articles/2018/10/devtools-2.0.0/">Version 2.0.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Change log</a>
+    </li>
+  </ul>
 </li>
       </ul>
       
@@ -113,13 +121,16 @@
       <small>Source: <a href='https://github.com/r-lib/devtools/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="devtools-2-0-0-9000---development" class="section level1">
+    <div id="devtools-2-0-1" class="section level1">
 <h1 class="page-header">
-<a href="#devtools-2-0-0-9000---development" class="anchor"></a>devtools 2.0.0.9000 - Development<small> Unreleased </small>
+<a href="#devtools-2-0-1" class="anchor"></a>devtools 2.0.1<small> 2018-10-26 </small>
 </h1>
+<p>This is a minor release mainly fixing bugs which snuck through in the devtools 2.0.0 release.</p>
 <ul>
-<li>
-<code><a href="../reference/install.html">install()</a></code> now correctly passes the <code>upgrade</code> parameter to <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_deps">remotes::install_deps()</a></code> (<a href='http://github.com/Paxanator'>@Paxanator</a>, <a href='https://github.com/r-lib/devtools/issues/1898'>#1898</a>).</li>
+<li><p><code><a href="../reference/install.html">install()</a></code> now correctly passes the <code>upgrade</code> parameter to <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_deps">remotes::install_deps()</a></code> (<a href='http://github.com/Paxanator'>@Paxanator</a>, <a href='https://github.com/r-lib/devtools/issues/1898'>#1898</a>).</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_deps()</a></code> now again works from any directory within a package (<a href='https://github.com/r-lib/devtools/issues/1905'>#1905</a>)</p></li>
+<li><p>Add a RStudio addin for <code><a href="../reference/test.html">test_coverage()</a></code>.</p></li>
+<li><p>All tests which use remote resources are now skipped on CRAN, to avoid spurious failures</p></li>
 </ul>
 </div>
     <div id="devtools-2-0-0" class="section level1">
@@ -227,7 +238,7 @@
 <li><p><code><a href="../reference/test.html">test()</a></code> no longer passes encoding argument to <code><a href="http://www.rdocumentation.org/packages/testthat/topics/test_dir">testthat::test_dir()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1776'>#1776</a>)</p></li>
 <li><p><code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_url">install_url()</a></code> can now install package binaries on windows (<a href='https://github.com/r-lib/devtools/issues/1765'>#1765</a>)</p></li>
 <li><p>Fix skipping when installing from a full SHA (<a href='https://github.com/r-lib/devtools/issues/1624'>#1624</a>)</p></li>
-<li><p>add <code><a href="http://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code> wrapper (<a href='http://github.com/kiwiroy'>@kiwiroy</a>, <a href='https://github.com/r-lib/devtools/issues/1777'>#1777</a>)</p></li>
+<li><p>add <code><a href="https://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code> wrapper (<a href='http://github.com/kiwiroy'>@kiwiroy</a>, <a href='https://github.com/r-lib/devtools/issues/1777'>#1777</a>)</p></li>
 <li><p>add pkgdown site (<a href="https://devtools.r-lib.org" class="uri">https://devtools.r-lib.org</a>) (<a href='https://github.com/r-lib/devtools/issues/1779'>#1779</a>, <a href='http://github.com/jayhesselberth'>@jayhesselberth</a>)</p></li>
 <li><p><code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_version">install_version()</a></code> can now install current version of CRAN package on Windows and macOS (<a href='http://github.com/jdblischak'>@jdblischak</a>, <a href='https://github.com/r-lib/devtools/issues/1730'>#1730</a>)</p></li>
 <li><p>The CRAN-RELEASE file is now added to .Rbuildignore (<a href='https://github.com/r-lib/devtools/issues/1711'>#1711</a>)</p></li>
@@ -370,7 +381,7 @@
 <a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li><p>New <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_bioc">install_bioc()</a></code> function and bioc remote to install Bioconductor packages from their SVN repository.</p></li>
-<li><p><code><a href="../reference/install_dev_deps.html">install_dev_deps()</a></code> gets everything you need to start development on source package - it installs all dependencies, and roxygen2 (<a href='https://github.com/r-lib/devtools/issues/1193'>#1193</a>).</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_dev_deps()</a></code> gets everything you need to start development on source package - it installs all dependencies, and roxygen2 (<a href='https://github.com/r-lib/devtools/issues/1193'>#1193</a>).</p></li>
 <li><p><code><a href="../reference/devtools-deprecated.html">use_dev_version()</a></code> automates the process of switching from a release version number by tweaking the <code>DESCRIPTION</code>, adding a heading to <code>NEWS.md</code> (if present), and checking into git (if you use it) (<a href='https://github.com/r-lib/devtools/issues/1076'>#1076</a>.)</p></li>
 <li><p><code><a href="../reference/devtools-deprecated.html">use_github()</a></code> accepts a host argument, similar to <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github()</a></code> (<a href='http://github.com/ijlyttle'>@ijlyttle</a>, <a href='https://github.com/r-lib/devtools/issues/1101'>#1101</a>)</p></li>
 </ul>
@@ -549,7 +560,7 @@
 <li><p><code>find_rtools()</code> now looks for registry keys in both HKCU (user) and HKLM (admin) locations (<a href='http://github.com/Kevin'>@Kevin</a>-Jin, <a href='https://github.com/r-lib/devtools/issues/844'>#844</a>)</p></li>
 <li><p><code><a href="../reference/install.html">install()</a></code> can now install dependencies from remote repositories by specifying them as <code>Remotes</code> in the <code>DESCRIPTION</code> file (<a href='https://github.com/r-lib/devtools/issues/902'>#902</a>, <a href='http://github.com/jimhester'>@jimhester</a>). See <code><a href="../articles/dependencies.html">vignette("dependencies")</a></code> for more details.</p></li>
 <li><p><code>install_*()</code> detects if called on a Bioconductor package and if so, automatically includes the Bioconductor repositories if needed (<a href='https://github.com/r-lib/devtools/issues/895'>#895</a>, <a href='http://github.com/jimhester'>@jimhester</a>).</p></li>
-<li><p><code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_deps">install_deps()</a></code> now automatically upgrades out of date dependencies. This is typically what you want when you’re working on a development version of a package. To suppress this behaviour, set <code>upgrade_dependencies = FALSE</code> (<a href='https://github.com/r-lib/devtools/issues/863'>#863</a>). <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_deps">install_deps()</a></code> is more careful with <code>...</code> - this means additional arguments to <code>install_*</code> are more likely to work (<a href='https://github.com/r-lib/devtools/issues/870'>#870</a>).</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_deps()</a></code> now automatically upgrades out of date dependencies. This is typically what you want when you’re working on a development version of a package. To suppress this behaviour, set <code>upgrade_dependencies = FALSE</code> (<a href='https://github.com/r-lib/devtools/issues/863'>#863</a>). <code><a href="../reference/install_deps.html">install_deps()</a></code> is more careful with <code>...</code> - this means additional arguments to <code>install_*</code> are more likely to work (<a href='https://github.com/r-lib/devtools/issues/870'>#870</a>).</p></li>
 <li><p><code>install_gitorious()</code> has been removed since gitorious no longer exists (<a href='https://github.com/r-lib/devtools/issues/913'>#913</a>).</p></li>
 <li><p><code><a href="../reference/load_all.html">load_all()</a></code> no longer fails if a <code>useDynLib()</code> entry in the NAMESPACE is incorrect. This should make it easy to recover from an incorrect <code><a href='http://github.com/useDynLib'>@useDynLib</a></code>, because re-documenting() should now succeed.</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> works for packages not located at root of git repository (<a href='https://github.com/r-lib/devtools/issues/845'>#845</a>, <a href='https://github.com/r-lib/devtools/issues/846'>#846</a>, <a href='http://github.com/mbjones'>@mbjones</a>).</p></li>
@@ -590,8 +601,8 @@
 <a href="#package-installation-and-info" class="anchor"></a>Package installation and info</h2>
 <ul>
 <li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> automatically installs the VignetteBuilder package, if necessary (<a href='https://github.com/r-lib/devtools/issues/736'>#736</a>).</p></li>
-<li><p><code><a href="../reference/install.html">install()</a></code> and <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_deps">install_deps()</a></code> gain a <code>...</code> argument, so additional arguments can be passed to <code><a href="http://www.rdocumentation.org/packages/utils/topics/install.packages">utils::install.packages()</a></code> (<a href='http://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/712'>#712</a>). <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_svn">install_svn()</a></code> optionally accepts a revision (<a href='http://github.com/lev'>@lev</a>-kuznetsov, <a href='https://github.com/r-lib/devtools/issues/739'>#739</a>). <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_version">install_version()</a></code> now knows how to look in multiple repos (<a href='https://github.com/r-lib/devtools/issues/721'>#721</a>).</p></li>
-<li><p><code>package_deps()</code> (and <code><a href="http://www.rdocumentation.org/packages/remotes/topics/package_deps">dev_package_deps()</a></code>) determines all recursive dependencies and whether or not they’re up-to-date (<a href='https://github.com/r-lib/devtools/issues/663'>#663</a>). Use <code>update(package_deps("xyz"))</code> to update out of date dependencies. This code is used in <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_deps">install_deps()</a></code> and <code><a href="../reference/devtools-deprecated.html">revdep_check()</a></code> - it’s slightly more aggressive than previous code (i.e. it forces you to use the latest version), which should avoid problems when you go to submit to CRAN.</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> and <code><a href="../reference/install_deps.html">install_deps()</a></code> gain a <code>...</code> argument, so additional arguments can be passed to <code><a href="http://www.rdocumentation.org/packages/utils/topics/install.packages">utils::install.packages()</a></code> (<a href='http://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/712'>#712</a>). <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_svn">install_svn()</a></code> optionally accepts a revision (<a href='http://github.com/lev'>@lev</a>-kuznetsov, <a href='https://github.com/r-lib/devtools/issues/739'>#739</a>). <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_version">install_version()</a></code> now knows how to look in multiple repos (<a href='https://github.com/r-lib/devtools/issues/721'>#721</a>).</p></li>
+<li><p><code>package_deps()</code> (and <code><a href="http://www.rdocumentation.org/packages/remotes/topics/package_deps">dev_package_deps()</a></code>) determines all recursive dependencies and whether or not they’re up-to-date (<a href='https://github.com/r-lib/devtools/issues/663'>#663</a>). Use <code>update(package_deps("xyz"))</code> to update out of date dependencies. This code is used in <code><a href="../reference/install_deps.html">install_deps()</a></code> and <code><a href="../reference/devtools-deprecated.html">revdep_check()</a></code> - it’s slightly more aggressive than previous code (i.e. it forces you to use the latest version), which should avoid problems when you go to submit to CRAN.</p></li>
 <li><p>New <code><a href="http://www.rdocumentation.org/packages/remotes/topics/update_packages">update_packages()</a></code> will install a package (and its dependencies) only if they are missing or out of date (<a href='https://github.com/r-lib/devtools/issues/675'>#675</a>).</p></li>
 <li><p><code><a href="http://www.rdocumentation.org/packages/sessioninfo/topics/session_info">session_info()</a></code> can now take a vector of package names, in which case it will print the version of those packages and their dependencies (<a href='https://github.com/r-lib/devtools/issues/664'>#664</a>).</p></li>
 </ul>
@@ -801,7 +812,7 @@
 <li><p><code><a href="../reference/devtools-deprecated.html">build_win()</a></code> now builds R-release and R-devel by default (<a href='http://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/438'>#438</a>). It also gains parameter <code>args</code>, which is passed on to <code><a href="../reference/build.html">build()</a></code> (<a href='http://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/421'>#421</a>).</p></li>
 <li><p><code>check_doc()</code> now runs <code><a href="../reference/document.html">document()</a></code> automatically.</p></li>
 <li><p><code><a href="../reference/install.html">install()</a></code> gains <code>thread</code> argument which allows you to install multiple packages in parallel (<a href='http://github.com/mllg'>@mllg</a>, <a href='https://github.com/r-lib/devtools/issues/401'>#401</a>). <code>threads</code> argument to <code><a href="../reference/devtools-deprecated.html">check_cran()</a></code> now defaults to <code>getOption("Ncpus")</code></p></li>
-<li><p><code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_deps">install_deps(deps = T)</a></code> no longer installs all dependencies of dependencies (<a href='https://github.com/r-lib/devtools/issues/369'>#369</a>).</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_deps(deps = T)</a></code> no longer installs all dependencies of dependencies (<a href='https://github.com/r-lib/devtools/issues/369'>#369</a>).</p></li>
 <li><p><code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github()</a></code> now prefers personal access tokens supplied to <code>auth_token</code> rather than passwords (<a href='https://github.com/r-lib/devtools/issues/418'>#418</a>, <a href='http://github.com/jeroenooms'>@jeroenooms</a>).</p></li>
 <li><p><code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github()</a></code> now defaults to <code>dependencies = TRUE</code> so you definitely get all the packages you need to build from source.</p></li>
 <li><p>devtools supplies its own version of <code>system.file()</code> so that when the function is called from the R console, it will have special behavior for packages loaded with devtools.</p></li>
@@ -813,7 +824,7 @@
 <a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li><p><code>check_devtools()</code> no longer called by <code><a href="../reference/check.html">check()</a></code> because the relevant functionality is now included in <code>R CMD CHECK</code> and it was causing false positives (<a href='https://github.com/r-lib/devtools/issues/446'>#446</a>).</p></li>
-<li><p><code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_deps">install_deps(TRUE)</a></code> now includes packages listed in <code>VignetteBuilder</code> (<a href='https://github.com/r-lib/devtools/issues/396'>#396</a>)</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_deps(TRUE)</a></code> now includes packages listed in <code>VignetteBuilder</code> (<a href='https://github.com/r-lib/devtools/issues/396'>#396</a>)</p></li>
 <li><p><code><a href="../reference/build.html">build()</a></code> no longer checks for <code>pdflatex</code> when building vignettes, as many modern vignettes don’t need it (<a href='https://github.com/r-lib/devtools/issues/398'>#398</a>). It also uses <code>--no-build-vignettes</code> for &gt;3.0.0 compatibility (<a href='https://github.com/r-lib/devtools/issues/391'>#391</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> does a better job of opening your email client if you’re inside of RStudio (<a href='https://github.com/r-lib/devtools/issues/433'>#433</a>).</p></li>
 <li><p><code><a href="../reference/check.html">check()</a></code> now correctly reports the location of the <code>R CMD check</code> output when called with a custom <code>check_dir</code>. (Thanks to <a href='http://github.com/brentonk'>@brentonk</a>)</p></li>
@@ -851,7 +862,7 @@
 <li><p><code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_github">install_github()</a></code> now adds details on the source of the installed package (e.g. repository, SHA1, etc.) to the package DESCRIPTION file. (Thanks to JJ Allaire)</p></li>
 <li><p>Adjusted <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_version">install_version()</a></code> to new meta data structure on CRAN. (Thanks to Kornelius Rohmeyer)</p></li>
 <li><p>Fixed bug so that <code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_version">install_version()</a></code> works with version numbers that contain hyphens. (Thanks to Kornelius Rohmeyer)</p></li>
-<li><p><code><a href="http://www.rdocumentation.org/packages/remotes/topics/install_deps">install_deps()</a></code> is now exported, making it easier to install the dependencies of a package.</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_deps()</a></code> is now exported, making it easier to install the dependencies of a package.</p></li>
 </ul>
 </div>
 <div id="other-minor-improvements" class="section level2">
@@ -1318,7 +1329,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#devtools-2-0-0-9000---development">2.0.0.9000</a></li>
+        <li><a href="#devtools-2-0-1">2.0.1</a></li>
         <li><a href="#devtools-2-0-0">2.0.0</a></li>
         <li><a href="#devtools-1-13-5">1.13.5</a></li>
         <li><a href="#devtools-1-13-4">1.13.4</a></li>

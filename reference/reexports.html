@@ -39,7 +39,7 @@ below to see their documentation.
 
 <meta property="og:description" content="pkgloadinst, parse_deps, check_dep_version, unload" />
 
-<meta property="og:description" content="remotesinstall_bioc, install_bitbucket, install_cran, install_dev, install_git, install_github, github_pull, github_release, install_gitlab, install_local, install_svn, install_url, install_version, install_deps, update_packages, dev_package_deps" />
+<meta property="og:description" content="remotesinstall_bioc, install_bitbucket, install_cran, install_dev, install_git, install_github, github_pull, github_release, install_gitlab, install_local, install_svn, install_url, install_version, update_packages, dev_package_deps" />
 
 <meta property="og:description" content="sessioninfosession_info, package_info
 " />
@@ -71,19 +71,13 @@ below to see their documentation.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.0.0.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -94,12 +88,26 @@ below to see their documentation.
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dependencies.html">Devtools dependencies</a>
+      <a href="../articles/dependencies.html">Remote development dependencies</a>
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Release notes</li>
+    <li>
+      <a href="https://www.tidyverse.org/articles/2018/10/devtools-2.0.0/">Version 2.0.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Change log</a>
+    </li>
+  </ul>
 </li>
       </ul>
       
@@ -136,7 +144,7 @@ below to see their documentation.</p>
 
     <dt>pkgload</dt><dd><p><code><a href='http://www.rdocumentation.org/packages/pkgload/topics/inst'>inst</a></code>, <code><a href='http://www.rdocumentation.org/packages/pkgload/topics/parse_deps'>parse_deps</a></code>, <code><a href='http://www.rdocumentation.org/packages/pkgload/topics/check_dep_version'>check_dep_version</a></code>, <code><a href='http://www.rdocumentation.org/packages/pkgload/topics/unload'>unload</a></code></p></dd>
 
-    <dt>remotes</dt><dd><p><code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_bioc'>install_bioc</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_bitbucket'>install_bitbucket</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_cran'>install_cran</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_dev'>install_dev</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_git'>install_git</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_github'>install_github</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/github_refs'>github_pull</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/github_refs'>github_release</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_gitlab'>install_gitlab</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_local'>install_local</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_svn'>install_svn</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_url'>install_url</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_version'>install_version</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_deps'>install_deps</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/update_packages'>update_packages</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/package_deps'>dev_package_deps</a></code></p></dd>
+    <dt>remotes</dt><dd><p><code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_bioc'>install_bioc</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_bitbucket'>install_bitbucket</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_cran'>install_cran</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_dev'>install_dev</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_git'>install_git</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_github'>install_github</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/github_refs'>github_pull</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/github_refs'>github_release</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_gitlab'>install_gitlab</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_local'>install_local</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_svn'>install_svn</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_url'>install_url</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/install_version'>install_version</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/update_packages'>update_packages</a></code>, <code><a href='http://www.rdocumentation.org/packages/remotes/topics/package_deps'>dev_package_deps</a></code></p></dd>
 
     <dt>sessioninfo</dt><dd><p><code><a href='http://www.rdocumentation.org/packages/sessioninfo/topics/session_info'>session_info</a></code>, <code><a href='http://www.rdocumentation.org/packages/sessioninfo/topics/package_info'>package_info</a></code></p></dd>
 </dl>

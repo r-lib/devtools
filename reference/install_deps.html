@@ -6,7 +6,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Install package dependencies if needed. — install_deps • devtools</title>
+<title>Install package dependencies if needed.
+<code>install_deps()</code> will install the
+user dependencies needed to run the package, <code>install_dev_deps()</code> will also
+install the development dependencies needed to test and build the package. — install_deps • devtools</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,13 +33,12 @@
 
 
 
-<meta property="og:title" content="Install package dependencies if needed. — install_deps" />
+<meta property="og:title" content="Install package dependencies if needed.
+<code>install_deps()</code> will install the
+user dependencies needed to run the package, <code>install_dev_deps()</code> will also
+install the development dependencies needed to test and build the package. — install_deps" />
 
-<meta property="og:description" content="install_deps is used by install_* to make sure you have
-all the dependencies for a package. install_dev_deps() is useful
-if you have a source version of the package and want to be able to
-develop with it: it installs all dependencies of the package, and it
-also installs roxygen2." />
+<meta property="og:description" content="Install package dependencies if needed." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,19 +67,13 @@ also installs roxygen2." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.13.6.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">2.0.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -88,12 +84,26 @@ also installs roxygen2." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dependencies.html">Devtools dependencies</a>
+      <a href="../articles/dependencies.html">Remote development dependencies</a>
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Release notes</li>
+    <li>
+      <a href="https://www.tidyverse.org/articles/2018/10/devtools-2.0.0/">Version 2.0.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Change log</a>
+    </li>
+  </ul>
 </li>
       </ul>
       
@@ -116,26 +126,31 @@ also installs roxygen2." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Install package dependencies if needed.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/install.r'><code>R/install.r</code></a></small>
+    <h1>Install package dependencies if needed.
+<code>install_deps()</code> will install the
+user dependencies needed to run the package, <code>install_dev_deps()</code> will also
+install the development dependencies needed to test and build the package.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/install.R'><code>R/install.R</code></a></small>
     <div class="hidden name"><code>install_deps.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>install_deps</code> is used by <code>install_*</code> to make sure you have
-all the dependencies for a package. <code>install_dev_deps()</code> is useful
-if you have a source version of the package and want to be able to
-develop with it: it installs all dependencies of the package, and it
-also installs roxygen2.</p>
+    <p>Install package dependencies if needed.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>install_deps</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>threads</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"Ncpus"</span>,
-  <span class='fl'>1</span>), <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"repos"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"pkgType"</span>), <span class='no'>...</span>,
-  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>force_deps</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>install_deps</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"repos"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"pkgType"</span>),
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>), <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>,
+  <span class='st'>" --no-build-vignettes"</span>), <span class='no'>...</span>)
 
-<span class='fu'>install_dev_deps</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>install_dev_deps</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"repos"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"pkgType"</span>),
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>), <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>,
+  <span class='st'>" --no-build-vignettes"</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,19 +158,17 @@ also installs roxygen2.</p>
     <tr>
       <th>pkg</th>
       <td><p>package description, can be path or package name.  See
-<code><a href='as.package.html'>as.package</a></code> for more information</p></td>
+<code><a href='as.package.html'>as.package()</a></code> for more information</p></td>
     </tr>
     <tr>
       <th>dependencies</th>
-      <td><p><code>logical</code> indicating to also install uninstalled
-packages which this <code>pkg</code> depends on/links to/suggests. See
-argument <code>dependencies</code> of <code>install.packages</code>.</p></td>
-    </tr>
-    <tr>
-      <th>threads</th>
-      <td><p>number of concurrent threads to use for installing
-dependencies.
-It defaults to the option <code>"Ncpus"</code> or <code>1</code> if unset.</p></td>
+      <td><p>Which dependencies do you want to check?
+Can be a character vector (selecting from "Depends", "Imports",
+"LinkingTo", "Suggests", or "Enhances"), or a logical vector.</p>
+<p><code>TRUE</code> is shorthand for "Depends", "Imports", "LinkingTo" and
+"Suggests". <code>NA</code> is shorthand for "Depends", "Imports" and "LinkingTo"
+and is the default. <code>FALSE</code> is shorthand for no dependencies (i.e.
+just check this package, not its dependencies).</p></td>
     </tr>
     <tr>
       <th>repos</th>
@@ -166,21 +179,28 @@ It defaults to the option <code>"Ncpus"</code> or <code>1</code> if unset.</p></
       <td><p>Type of package to <code>update</code>.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>additional arguments passed to <code>install.packages</code>.</p></td>
-    </tr>
-    <tr>
       <th>upgrade</th>
-      <td><p>If <code>TRUE</code>, also upgrade any of out date dependencies.</p></td>
+      <td><p>One of "ask", "always" or "never". "ask" prompts the user for
+which out of date packages to upgrade. For non-interactive sessions "ask" is
+equivalent to "always". <code>TRUE</code> and <code>FALSE</code> are also accepted and
+correspond to "always" and "never" respectively.</p></td>
     </tr>
     <tr>
       <th>quiet</th>
-      <td><p>if <code>TRUE</code> suppresses output from this function.</p></td>
+      <td><p>If <code>TRUE</code>, suppress output.</p></td>
     </tr>
     <tr>
-      <th>force_deps</th>
-      <td><p>whether to force installation of dependencies even if their
-SHA1 reference hasn't changed from the currently installed version.</p></td>
+      <th>build</th>
+      <td><p>If <code>TRUE</code> build the package before installing.</p></td>
+    </tr>
+    <tr>
+      <th>build_opts</th>
+      <td><p>Options to pass to <code>R CMD build</code>, only used when <code>build</code>
+is <code>TRUE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments passed to <code><a href='http://www.rdocumentation.org/packages/utils/topics/install.packages'>utils::install.packages()</a></code>.</p></td>
     </tr>
     </table>
     
