@@ -1,5 +1,8 @@
 # devtools 2.0.1.9000 - Development
 
+* `check()` now replaces existing environment variables rather than appending
+  them (#1914).
+
 # devtools 2.0.1
 
 This is a minor release mainly fixing bugs which snuck through in the devtools
