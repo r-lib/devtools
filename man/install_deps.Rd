@@ -10,14 +10,14 @@ install the development dependencies needed to test and build the package.}
 \usage{
 install_deps(pkg = ".", dependencies = NA,
   repos = getOption("repos"), type = getOption("pkgType"),
-  upgrade = c("ask", "always", "never"), quiet = FALSE, build = TRUE,
-  build_opts = c("--no-resave-data", "--no-manual",
+  upgrade = c("default", "ask", "always", "never"), quiet = FALSE,
+  build = TRUE, build_opts = c("--no-resave-data", "--no-manual",
   " --no-build-vignettes"), ...)
 
 install_dev_deps(pkg = ".", dependencies = TRUE,
   repos = getOption("repos"), type = getOption("pkgType"),
-  upgrade = c("ask", "always", "never"), quiet = FALSE, build = TRUE,
-  build_opts = c("--no-resave-data", "--no-manual",
+  upgrade = c("default", "ask", "always", "never"), quiet = FALSE,
+  build = TRUE, build_opts = c("--no-resave-data", "--no-manual",
   " --no-build-vignettes"), ...)
 }
 \arguments{
