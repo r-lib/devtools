@@ -1,5 +1,9 @@
 # devtools 2.0.1.9000 - Development
 
+* `test()`, `test_coverage()` and `test_coverage_file()` now set the
+  `TESTTHAT_PKG` environment variable, so it is more consistent with running
+  the tests during `R CMD check` (testthat#787).
+
 * `check()` now replaces existing environment variables rather than appending
   them (#1914).
 

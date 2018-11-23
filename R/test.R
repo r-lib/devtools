@@ -71,7 +71,9 @@ test <- function(pkg = ".", filter = NULL, ...) {
   withr::with_options(
     c(useFancyQuotes = FALSE),
     withr::with_envvar(
-      r_env_vars(),
+      c(r_env_vars(),
+        "TESTTHAT_PKG" = pkg$package
+      ),
       do.call(testthat::test_dir, testthat_args)
     )
   )
@@ -88,7 +90,9 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   save_all()
 
   withr::with_envvar(
-    r_env_vars(),
+    c(r_env_vars(),
+      "TESTTHAT_PKG" = pkg$package
+    ),
     coverage <- covr::package_coverage(pkg$path, ...)
   )
 
@@ -224,7 +228,9 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
   env <- load_all(pkg$path, quiet = TRUE)$env
 
   withr::with_envvar(
-    r_env_vars(),
+    c(r_env_vars(),
+      "TESTTHAT_PKG" = pkg$package
+    ),
     withr::with_dir("tests/testthat", {
       coverage <- covr::environment_coverage(env, test_files, ...)
     })

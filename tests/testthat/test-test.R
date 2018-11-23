@@ -24,3 +24,7 @@ test_that("devtools::test_file works", {
   test_file("testTest/R/dummy.R", pkg = "testTest", reporter = "stop")
   expect_true(TRUE)
 })
+
+test_that("TESTTHAT_PKG environment varaible is set", {
+  expect_equal(Sys.getenv("TESTTHAT_PKG"), "devtools")
+})
