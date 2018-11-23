@@ -10,14 +10,14 @@ install the development dependencies needed to test and build the package.}
 \usage{
 install_deps(pkg = ".", dependencies = NA,
   repos = getOption("repos"), type = getOption("pkgType"),
-  upgrade = c("ask", "always", "never"), quiet = FALSE, build = TRUE,
-  build_opts = c("--no-resave-data", "--no-manual",
+  upgrade = c("default", "ask", "always", "never"), quiet = FALSE,
+  build = TRUE, build_opts = c("--no-resave-data", "--no-manual",
   " --no-build-vignettes"), ...)
 
 install_dev_deps(pkg = ".", dependencies = TRUE,
   repos = getOption("repos"), type = getOption("pkgType"),
-  upgrade = c("ask", "always", "never"), quiet = FALSE, build = TRUE,
-  build_opts = c("--no-resave-data", "--no-manual",
+  upgrade = c("default", "ask", "always", "never"), quiet = FALSE,
+  build = TRUE, build_opts = c("--no-resave-data", "--no-manual",
   " --no-build-vignettes"), ...)
 }
 \arguments{
@@ -37,10 +37,12 @@ just check this package, not its dependencies).}
 
 \item{type}{Type of package to \code{update}.}
 
-\item{upgrade}{One of "ask", "always" or "never". "ask" prompts the user for
-which out of date packages to upgrade. For non-interactive sessions "ask" is
-equivalent to "always". \code{TRUE} and \code{FALSE} are also accepted and
-correspond to "always" and "never" respectively.}
+\item{upgrade}{One of "default", "ask", "always", or "never". "default"
+respects the value of the \code{R_REMOTES_UPGRADE} environment variable if set,
+and falls back to "ask" if unset. "ask" prompts the user for which out of
+date packages to upgrade. For non-interactive sessions "ask" is equivalent
+to "always". \code{TRUE} and \code{FALSE} are also accepted and correspond to
+"always" and "never" respectively.}
 
 \item{quiet}{If \code{TRUE}, suppress output.}
 
