@@ -4,7 +4,7 @@
 #' <http://win-builder.r-project.org/>.  Once building is complete you'll
 #' receive a link to the built package in the email address listed in the
 #' maintainer field.  It usually takes around 30 minutes. As a side effect,
-#' win-build also runs `R CMD check` on the package, so `build_win`
+#' win-build also runs `R CMD check` on the package, so `check_win`
 #' is also useful to check that your package is ok on windows.
 #'
 #' @param pkg package description, can be path or package name.  See
