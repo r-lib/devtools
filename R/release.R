@@ -300,12 +300,13 @@ submit_cran <- function(pkg = ".", args = NULL) {
     return(invisible())
   }
 
-  if (yesno("Ready to submit to CRAN?")) {
+  pkg <- as.package(pkg)
+  built_path <- build_cran(pkg, args = args)
+
+  if (yesno("Ready to submit ", pkg$package, " (", pkg$version, ") to CRAN?")) {
     return(invisible())
   }
 
-  pkg <- as.package(pkg)
-  built_path <- build_cran(pkg, args = args)
   upload_cran(pkg, built_path)
 
   flag_release(pkg)
