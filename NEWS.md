@@ -1,5 +1,8 @@
 # devtools 2.0.1.9000 - Development
 
+* `load_all()` now accepts 'package' objects, regaining previous behavior in
+  devtools prior to 2.0.0 (#1923)
+
 * `test()`, `test_coverage()` and `test_coverage_file()` now set the
   `TESTTHAT_PKG` environment variable, so it is more consistent with running
   the tests during `R CMD check` (testthat#787).
