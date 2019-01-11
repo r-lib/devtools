@@ -1,5 +1,7 @@
 # devtools 2.0.1.9000 - Development
 
+* Appveyor template busts package cache when the DESCRIPTION file changes (@schloerke, #1961)
+
 * `load_all()` now accepts 'package' objects, regaining previous behavior in
   devtools prior to 2.0.0 (#1923)
 
