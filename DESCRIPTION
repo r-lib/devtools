@@ -51,7 +51,7 @@ Suggests:
     MASS,
     pkgdown,
     Rcpp (>= 0.10.0),
-    rhub,
+    rhub (>= 1.0.2),
     rmarkdown,
     roxygen2 (>= 6.1.0),
     rversions,
