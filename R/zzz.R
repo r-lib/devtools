@@ -2,6 +2,7 @@
 #'   installed.packages modifyList packageDescription
 #'   packageVersion remove.packages
 #' @importFrom cli cat_rule cat_line cat_bullet
+#' @importFrom pkgbuild find_rtools
 NULL
 
 #' Package development tools for R.
