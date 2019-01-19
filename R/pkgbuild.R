@@ -24,3 +24,7 @@ pkgbuild::clean_dll
 #' @importFrom pkgbuild has_devel
 #' @export
 pkgbuild::has_devel
+
+#' @importFrom pkgbuild find_rtools
+#' @export
+pkgbuild::find_rtools
