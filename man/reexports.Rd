@@ -10,6 +10,7 @@
 \alias{with_debug}
 \alias{clean_dll}
 \alias{has_devel}
+\alias{find_rtools}
 \alias{unload}
 \alias{install_bioc}
 \alias{install_bitbucket}
@@ -35,7 +36,7 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{pkgbuild}{\code{\link[pkgbuild]{with_debug}}, \code{\link[pkgbuild]{clean_dll}}, \code{\link[pkgbuild]{has_devel}}}
+  \item{pkgbuild}{\code{\link[pkgbuild]{with_debug}}, \code{\link[pkgbuild]{clean_dll}}, \code{\link[pkgbuild]{has_devel}}, \code{\link[pkgbuild]{find_rtools}}}
 
   \item{pkgload}{\code{\link[pkgload]{inst}}, \code{\link[pkgload]{parse_deps}}, \code{\link[pkgload]{check_dep_version}}, \code{\link[pkgload]{unload}}}
 
