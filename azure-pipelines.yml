@@ -1,0 +1,30 @@
+# R package
+# Test an R package
+
+jobs: 
+
+- job: 'Test'
+  pool:
+    vmImage: 'Ubuntu-16.04'
+  variables:
+    R_LIBS_USER: '$(Agent.BuildDirectory)/R/library'
+    _R_CHECK_FORCE_SUGGESTS_: 'false'
+
+  steps:
+  - bash: |
+      sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+      sudo add-apt-repository 'deb [arch=amd64,i386] https://cran.rstudio.com/bin/linux/ubuntu xenial/'
+      sudo apt-get update
+      sudo apt-get install -qq libxml2-dev libcurl4-openssl-dev libssl-dev -y
+      sudo apt-get install -qq r-base -y
+      echo 'options(repos = "https://cloud.r-project.org")' > ~/.Rprofile.site
+      mkdir -p ${R_LIBS_USER}
+      echo ${R_LIBS_USER}
+      R -e "install.packages(c('remotes', 'rcmdcheck'))"
+    displayName: 'Install R'
+
+  - script: Rscript -e "remotes::install_deps(dependencies = TRUE)"
+    displayName: 'Install package dependencies'
+
+  - script: Rscript -e 'rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "warning")'
+    displayName: 'Check package'
