@@ -40,10 +40,12 @@ Can be a character vector (selecting from "Depends", "Imports",
 and is the default. \code{FALSE} is shorthand for no dependencies (i.e.
 just check this package, not its dependencies).}
 
-\item{upgrade}{One of "ask", "always" or "never". "ask" prompts the user for
-which out of date packages to upgrade. For non-interactive sessions "ask" is
-equivalent to "always". \code{TRUE} and \code{FALSE} are also accepted and
-correspond to "always" and "never" respectively.}
+\item{upgrade}{One of "default", "ask", "always", or "never". "default"
+respects the value of the \code{R_REMOTES_UPGRADE} environment variable if set,
+and falls back to "ask" if unset. "ask" prompts the user for which out of
+date packages to upgrade. For non-interactive sessions "ask" is equivalent
+to "always". \code{TRUE} and \code{FALSE} are also accepted and correspond to
+"always" and "never" respectively.}
 
 \item{build_vignettes}{if \code{TRUE}, will build vignettes. Normally it is
 \code{build} that's responsible for creating vignettes; this argument makes
