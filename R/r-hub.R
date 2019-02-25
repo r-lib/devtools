@@ -1,16 +1,16 @@
 
-#' Run CRAN checks for package on r-hub
+#' Run CRAN checks for package on R-hub
 #'
 #' It runs [build()] on the package, with the arguments specified
-#' in `args`, and then submits it to the r-hub builder at
+#' in `args`, and then submits it to the R-hub builder at
 #' <https://builder.r-hub.io>. The `interactive` option controls
 #' whether the function waits for the check output. Regardless, after the
-#' check is complete, r-hub sends an email with the results to the package
+#' check is complete, R-hub sends an email with the results to the package
 #' maintainer.
 #'
 #' @section About email validation on r-hub:
-#' To build and check R packages on r-hub, you need to validate your
-#' email address. This is because r-hub sends out emails about build
+#' To build and check R packages on R-hub, you need to validate your
+#' email address. This is because R-hub sends out emails about build
 #' results. See more at [rhub::validate_email()].
 #'
 #' @param platforms R-hub platforms to run the check on. If `NULL`
@@ -48,7 +48,7 @@ check_rhub <- function(pkg = ".",
   )
 
   if (!interactive) {
-    message("r-hub check for package ", sQuote(pkg$package), " submitted.")
+    message("R-hub check for package ", sQuote(pkg$package), " submitted.")
     status
   } else {
     status
