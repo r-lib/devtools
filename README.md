@@ -85,13 +85,17 @@ look in the current working directory - this is recommended practice.
 R package development can be intimidating, however there are now a number of
 valuable resources to help!
 
-<a href="http://r-pkgs.had.co.nz/"><img src="http://r-pkgs.had.co.nz/cover.png" height="252" align = "right"/></a>
+<a href="https://r-pkgs.org"><img src="https://r-pkgs.org/images/cover.png" height="252" align = "right"/></a>
 
-1. [R Packages](http://r-pkgs.had.co.nz/) gives a comprehensive
-   treatment of all common parts of package development and uses devtools
-   throughout. The [Package
-   structure](http://r-pkgs.had.co.nz/package.html) chapter is a great place to get started
-   understanding the parts of a package and how they work together.
+1. R Packages is a book that gives a comprehensive treatment of all common parts
+   of package development and uses devtools throughout.
+    * The first edition is available at <http://r-pkgs.had.co.nz>, but note that
+      it has grown somewhat out of sync with the current version of devtools.
+    * A second edition is under development and is evolving to reflect the
+      current state of devtools. It is available at <https://r-pkgs.org>.
+    * The [Whole Game](https://r-pkgs.org/whole-game.html) and
+      [Package structure](https://r-pkgs.org/package-structure.html) chapters
+      make great places to start.
 
 2. [RStudio community - package
    development](https://community.rstudio.com/c/package-development)
