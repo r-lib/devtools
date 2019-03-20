@@ -2,7 +2,7 @@
 % Please edit documentation in R/r-hub.R
 \name{check_rhub}
 \alias{check_rhub}
-\title{Run CRAN checks for package on r-hub}
+\title{Run CRAN checks for package on R-hub}
 \usage{
 check_rhub(pkg = ".", platforms = NULL, email = NULL,
   interactive = TRUE, ...)
@@ -30,16 +30,16 @@ a \code{rhub_check} object.
 }
 \description{
 It runs \code{\link[=build]{build()}} on the package, with the arguments specified
-in \code{args}, and then submits it to the r-hub builder at
+in \code{args}, and then submits it to the R-hub builder at
 \url{https://builder.r-hub.io}. The \code{interactive} option controls
 whether the function waits for the check output. Regardless, after the
-check is complete, r-hub sends an email with the results to the package
+check is complete, R-hub sends an email with the results to the package
 maintainer.
 }
 \section{About email validation on r-hub}{
 
-To build and check R packages on r-hub, you need to validate your
-email address. This is because r-hub sends out emails about build
+To build and check R packages on R-hub, you need to validate your
+email address. This is because R-hub sends out emails about build
 results. See more at \code{\link[rhub:validate_email]{rhub::validate_email()}}.
 }
 
