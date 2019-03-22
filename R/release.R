@@ -193,9 +193,8 @@ yesno <- function(...) {
 
   cat(paste0(..., collapse = ""))
   qs <- c(sample(yeses, 1), sample(nos, 2))
-  rand <- sample(length(qs))
 
-  menu(qs[rand]) != which(rand == 1)
+  menu(qs)
 }
 
 # http://tools.ietf.org/html/rfc2368
