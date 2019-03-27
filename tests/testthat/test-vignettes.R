@@ -104,6 +104,10 @@ test_that("Extra files copied and removed", {
 
 
 test_that("vignettes built on install", {
+  # Since we install this package it should not run on CRAN, as it would change
+  # the default library
+  skip_on_cran()
+
   if (!pkgbuild::has_latex()) {
     skip("pdflatex not available")
   }
