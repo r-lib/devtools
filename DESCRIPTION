@@ -35,7 +35,6 @@ Imports:
     utils,
     withr
 Suggests: 
-    BiocInstaller,
     BiocManager,
     bitops,
     covr (>= 3.2.0),
