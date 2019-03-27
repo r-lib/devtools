@@ -42,7 +42,7 @@ Suggests:
     crayon,
     curl (>= 0.9),
     evaluate,
-    foghorn (>= 1.0.1),
+    foghorn (>= 1.1.0),
     gmailr (> 0.7.0),
     knitr,
     lintr (>= 0.2.1),
