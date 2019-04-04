@@ -474,7 +474,7 @@ properly pass them to internal functions. (#1502)
   package authors (#1123).
 
 * All `use_` function have been overhauled to be more consistent, particularly
-  arround notification. Most functions now also ask to overwrite if a file 
+  around notification. Most functions now also ask to overwrite if a file 
   already exists (#1074).
 
 * `use_coverage()` now adds covr to "Suggests", rather than recommending you
@@ -502,7 +502,7 @@ properly pass them to internal functions. (#1502)
 
 * Deprecated `build_github_devtools()` has been removed.
 
-## Checks and and release()
+## Checks and release()
 
 * `check()` now always succeeds (instead of throwing an error when 
   `R CMD check` finds an `ERROR`), returning an object that summarises
@@ -1028,7 +1028,7 @@ I've also tweaked the output of `revdep_maintainers()` so it's easier to copy an
   but it will allow the development of future tools like generic update
   functions.
   
-* Vignettes are no longer installed by default because they potentally require 
+* Vignettes are no longer installed by default because they potentially require 
   all suggested packages to also be installed. Use `build_vignettes = TRUE` to 
   force building and to install all suggested packages (#573).
   
@@ -1072,7 +1072,7 @@ I've also tweaked the output of `revdep_maintainers()` so it's easier to copy an
 
 ## Other minor improvements and bug fixes
 
-* If you're using RStudio, and you you're trying to build a binary package
+* If you're using RStudio, and you're trying to build a binary package
   without the necessary build tools, RStudio will prompt to download and
   install the right thing. (#488)
 
@@ -1226,7 +1226,7 @@ Two dependencies were incremented:
 
 # devtools 1.4.1
 
-* Fixed bug in `wd()` when `path` was ommitted. (#374)
+* Fixed bug in `wd()` when `path` was omitted. (#374)
 
 * Fixed bug in `dev_help()` that prevented it from working when not using
   RStudio.
@@ -1319,7 +1319,7 @@ Two dependencies were incremented:
   be doing and why.
 
 * `load_all()` now defaults to `reset = TRUE` so that changes to the NAMESPACE
-  etc are incorporated. This makes it slightly slower (but hopefully not
+  etc. are incorporated. This makes it slightly slower (but hopefully not
   noticeably so), and generally more accurate, and a better simulation of
   the install + restart + reload cycle.
 
@@ -1609,7 +1609,7 @@ Two dependencies were incremented:
 * new `clean_vignettes` function to remove pdfs in `inst/doc` that were built
   from vignettes in `vignettes/`
 
-* `load_all` does a much much better job at simulating package loading (see
+* `load_all` does a much better job at simulating package loading (see
   LOADING section). It also compiles and loads C/C++/Fortran code.
 
 * `unload()` is now an exported function, which unloads a package, trying
@@ -1664,7 +1664,7 @@ Two dependencies were incremented:
 
 * The NAMESPACE file is now used for loading imports, instead of the
   DESCRIPTION file. Previously, `load_all` loaded all objects from the
-  packages listed in DESCRIPTION. Now it loads packages (and, when
+  packages listed in DESCRIPTION. Now it loads packages (and,
   when 'importfrom' is used, specific objects from packages) listed in
   NAMESPACE. This more closely simulates normal package loading. It
   still checks version numbers of packages listed in DESCRIPTION.
@@ -1693,7 +1693,7 @@ Two dependencies were incremented:
 * `load_all` now compiles C files in the /src directory. (Winston Chang)
 
 * New functions `compile_dll()` and `clean_dll()`, which compile C/C++/
-  Fortan source code, and clean up the compiled objects, respectively.
+  Fortran source code, and clean up the compiled objects, respectively.
   (Winston Chang. Fixes #131)
 
 ## Bug fixes
@@ -1940,7 +1940,7 @@ Two dependencies were incremented:
 
 * `build_win` sends your package to the R windows builder, allowing you to
   make a binary version of your package for windows users if you're using
-  linux or a max (if you're using windows already, use `build(binary = T)`)
+  linux or macOS (if you're using windows already, use `build(binary = T)`)
 
 ## Improvements and bug fixes
 
