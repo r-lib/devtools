@@ -1,6 +1,4 @@
-This is a small patch release fixing bugs discovered in the previous release.
-
-It also fixes the check errors on CRAN
+This is a small patch fixing test failures on CRAN
 
 ## Test environments
 
