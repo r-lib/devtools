@@ -7,7 +7,6 @@ env:
   R_REMOTES_NO_ERRORS_FROM_WARNINGS=true
 
 r:
- - 3.1
  - 3.2
  - 3.3
  - oldrel
