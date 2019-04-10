@@ -1,3 +1,5 @@
+# devtools (development version)
+
 # devtools 2.0.2
 
 * Two tests are not skipped when run on CRAN, as they fail due to an outdated
