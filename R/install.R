@@ -37,8 +37,6 @@
 #' @param keep_source If `TRUE` will keep the srcrefs from an installed
 #'   package. This is useful for debugging (especially inside of RStudio).
 #'   It defaults to the option `"keep.source.pkgs"`.
-#' @param ... additional arguments passed to [remotes::install_deps()]
-#'   when installing dependencies.
 #' @family package installation
 #' @seealso [update_packages()] to update installed packages from the
 #' source location and [with_debug()] to install packages with
@@ -50,8 +48,7 @@ install <-
              dependencies = NA, upgrade = "ask",
              build_vignettes = FALSE,
              keep_source = getOption("keep.source.pkgs"),
-             force = FALSE,
-             ...) {
+             force = FALSE) {
     pkg <- as.package(pkg)
 
     # Forcing all of the promises for the current namespace now will avoid lazy-load
@@ -78,8 +75,8 @@ install <-
 
     remotes::install_deps(pkg$path,
       build = build, build_opts = build_opts,
-      INSTALL_opts = opts, dependencies = dependencies, quiet = quiet,
-      force = force, upgrade = upgrade, ...
+      dependencies = dependencies, quiet = quiet,
+      upgrade = upgrade
     )
 
     if (build) {
