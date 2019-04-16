@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `test_file()` and `test_coverage_file()` now work with C
+  and C++ files in the src/ directory as well.
+
 # devtools 2.0.2
 
 * Two tests are not skipped when run on CRAN, as they fail due to an outdated

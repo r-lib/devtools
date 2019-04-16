@@ -148,26 +148,33 @@ uses_testthat <- function(pkg = ".") {
   any(dir.exists(paths))
 }
 
+src_ext <- c("c", "cc", "cpp", "cxx", "h", "hpp", "hxx")
+
 #' @export
 #' @rdname test
 test_file <- function(file = find_active_file(), ...) {
-  is_source_file <- basename(dirname(file)) == "R"
 
-  has_r_ext <- grepl("\\.[rR]$", file)
-  if (any(!has_r_ext)) {
+  ext <- tolower(tools::file_ext(file))
+  valid_files <- ext %in% c("r", src_ext)
+  if (any(!valid_files)) {
     stop("file(s): ",
-      paste0("'", file[!has_r_ext], "'", collapse = ", "),
-      " are not R files",
+      paste0("'", file[!valid_files], "'", collapse = ", "),
+      " are not valid R or src files",
       call. = FALSE
     )
   }
 
-  file <- basename(file)
-  file[!is_source_file] <- sub("^test-?", "", file[!is_source_file])
+  is_source_file <- basename(dirname(file)) %in% c("R", "src")
 
-  file <- sub("\\.[rR]$", "", file)
+  test_files <- normalizePath(winslash = "/", mustWork = FALSE, c(
+    vapply(file[is_source_file], find_test_file, character(1)),
+    file[!is_source_file]
+  ))
 
-  regex <- paste0("^", escape_special_regex(file), "$", collapse = "|")
+  test_files <- sub("^test-", "",
+    basename(tools::file_path_sans_ext(test_files)))
+
+  regex <- paste0("^", escape_special_regex(test_files), "$", collapse = "|")
 
   test(filter = regex, ...)
 }
@@ -180,16 +187,31 @@ find_active_file <- function(arg = "file") {
 }
 
 find_test_file <- function(file) {
-  dir <- basename(dirname(file))
-  if (dir != "R") {
-    stop("Open file not in `R/` directory", call. = FALSE)
-  }
+  dir <- tolower(basename(dirname(file)))
+  switch(dir,
+    r = find_test_file_r(file),
+    src = find_test_file_src(file),
+    stop("Open file is not in `R/` or `src/` directories", call. = FALSE)
+  )
+}
 
+find_test_file_r <- function(file) {
   if (!grepl("\\.[Rr]$", file)) {
     stop("Open file is does not end in `.R`", call. = FALSE)
   }
 
   file.path("tests", "testthat", paste0("test-", basename(file)))
+}
+
+find_test_file_src <- function(file) {
+  ext <- tolower(tools::file_ext(file))
+  if (!ext %in% src_ext) {
+    stop(paste0(
+        "Open file is does not end in a valid extension:\n",
+        "* Must be one of ", paste0("`.", valid_ext, "`", collapse = ", ")), call. = FALSE)
+  }
+
+  file.path("tests", "testthat", paste0("test-", basename(tools::file_path_sans_ext(file)), ".R"))
 }
 
 find_source_file <- function(file) {
@@ -211,7 +233,7 @@ find_source_file <- function(file) {
 test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_report = interactive(), ...) {
   check_suggested("covr")
 
-  is_source_file <- basename(dirname(file)) == "R"
+  is_source_file <- basename(dirname(file)) %in% c("R", "src")
 
   source_files <- normalizePath(winslash = "/", mustWork = FALSE, c(
     vapply(file[!is_source_file], find_source_file, character(1)),
