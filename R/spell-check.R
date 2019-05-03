@@ -13,5 +13,5 @@
 #' @inheritParams spelling::spell_check_package
 spell_check <- function(pkg = ".", vignettes = TRUE, use_wordlist = TRUE) {
   pkg <- as.package(pkg)
-  spelling::spell_check_package(pkg = pkg, vignettes = vignettes, use_wordlist = TRUE)
+  spelling::spell_check_package(pkg = pkg, vignettes = vignettes, use_wordlist = use_wordlist)
 }
