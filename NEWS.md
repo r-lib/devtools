@@ -5,7 +5,7 @@
 
 # devtools 2.0.2
 
-* Two tests are not skipped when run on CRAN, as they fail due to an outdated
+* Two tests are now skipped when run on CRAN, as they fail due to an outdated
   pandoc and restrictions on writing to the package library respectively.
 
 * `load_all()` now accepts 'package' objects, regaining previous behavior in
