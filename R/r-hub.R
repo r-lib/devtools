@@ -22,7 +22,8 @@
 #' @param interactive whether to show the status of the build
 #'   interactively. R-hub will send an email to the package maintainer's
 #'   email address, regardless of whether the check is interactive or not.
-#' @param ... extra arguments, passed to [pkgbuild::build()].
+#' @param build_args Arguments passed to `R CMD build`
+#' @param ... extra arguments, passed to [rhub::check_for_cran()].
 #' @inheritParams check
 #' @family build functions, rhub functions
 #' @return a `rhub_check` object.
@@ -33,18 +34,21 @@ check_rhub <- function(pkg = ".",
                        platforms = NULL,
                        email = NULL,
                        interactive = TRUE,
+                       build_args = NULL,
                        ...) {
   check_suggested("rhub")
   pkg <- as.package(pkg)
 
-  built_path <- build(pkg$path, tempdir(), quiet = !interactive, ...)
+  built_path <- build(pkg$path, tempdir(), quiet = !interactive,
+                      args = build_args)
   on.exit(unlink(built_path), add = TRUE)
 
   status <- rhub::check_for_cran(
     path = built_path,
     email = email,
     platforms = platforms,
-    show_status = interactive
+    show_status = interactive,
+    ...
   )
 
   if (!interactive) {

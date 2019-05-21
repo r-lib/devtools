@@ -5,7 +5,7 @@
 \title{Run CRAN checks for package on R-hub}
 \usage{
 check_rhub(pkg = ".", platforms = NULL, email = NULL,
-  interactive = TRUE, ...)
+  interactive = TRUE, build_args = NULL, ...)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -23,7 +23,9 @@ address in the package.}
 interactively. R-hub will send an email to the package maintainer's
 email address, regardless of whether the check is interactive or not.}
 
-\item{...}{extra arguments, passed to \code{\link[pkgbuild:build]{pkgbuild::build()}}.}
+\item{build_args}{Arguments passed to \code{R CMD build}}
+
+\item{...}{extra arguments, passed to \code{\link[rhub:check_for_cran]{rhub::check_for_cran()}}.}
 }
 \value{
 a \code{rhub_check} object.
