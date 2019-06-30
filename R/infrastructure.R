@@ -1,5 +1,7 @@
 #' @details
-#' Instead of the use_xyz functions from devtools use \link[usethis]{use_testthat}.
+#' Instead of the use_xyz functions from devtools use the same function from
+#' the \href{https://github.com/r-lib/usethis}{usethis} package, for example
+#' \code{usethis::\link[usethis]{use_testthat}}.
 #' @rdname devtools-deprecated
 #' @importFrom usethis use_testthat
 #' @export

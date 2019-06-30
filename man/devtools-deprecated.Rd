@@ -146,9 +146,11 @@ These functions are Deprecated in this release of devtools, they will be
 marked as Defunct and removed in a future version.
 }
 \details{
-Instead of the use_xyz functions from devtools use \link[usethis]{use_testthat}.
+Instead of the use_xyz functions from devtools use the same function from
+the \href{https://github.com/r-lib/usethis}{usethis} package, for example
+\code{usethis::\link[usethis]{use_testthat}}.
 
-Instead of the revdep functions in devtools a better alternative is
-\sQuote{revdepcheck::revdep_check()}.
+Instead of the revdep functions from devtools use the same function from
+the \href{https://github.com/r-lib/revdepcheck}{revdepcheck} package.
 }
 \keyword{internal}
