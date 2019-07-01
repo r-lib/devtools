@@ -1,5 +1,19 @@
 # devtools (development version)
 
+## Deprecated functions now removed
+
+* `create()`, `create_description()`, `setup()`
+`use_appveyor()`, `use_build_ignore()`, `use_code_of_conduct()`,
+`use_coverage()`, `use_cran_badge()`, `use_cran_comments()`, `use_data()`,
+`use_data_raw()`, `use_dev_version()`, `use_git()`, `use_git_hook()`,
+`use_github()`, `use_github_links()`, `use_gpl3_license()`,
+`use_mit_license()`, `use_news_md()`, `use_package()`, `use_package_doc()`,
+`use_rcpp()`, `use_readme_md()`, `use_readme_rmd()`, `use_revdep()`,
+`use_rstudio()`, `use_test()`, `use_testthat()`, `use_travis()`,
+`use_vignette()`, have all been removed after being deprecated in previous
+releases. If you want to access these functions use the versions in the [usethis](https://usethis.r-lib.org/)
+package directly.
+
 * `check_rhub` gains a new argument `build_args` for arguments passed to 
 `R CMD build`. `...` is now passed to `rhub::check_for_cran()` (@gaborcsardi, @maelle, #2041)
 * `build_manual()` now fails if the manual fails to build. (#2056)

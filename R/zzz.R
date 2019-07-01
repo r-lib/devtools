@@ -64,11 +64,3 @@ devtools_default_options <- list(
 
   invisible()
 }
-
-.onAttach <- function(libname, pkgname) {
-  env <- as.environment(paste0("package:", pkgname))
-  env[[".conflicts.OK"]] <- TRUE
-  usethis_lib <- dirname(getNamespaceInfo("usethis", "path"))
-  suppressPackageStartupMessages((
-    get("library", baseenv()))("usethis", lib.loc = usethis_lib))
-}
