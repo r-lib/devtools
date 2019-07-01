@@ -31,6 +31,8 @@
 
 * `build_win()` has been removed, after being deprecated in previous releases.
 
+* `yesno()` as used in `release()` now has clearer synonyms for "yes" (@mattmalin, #1993)
+
 ## Minor improvements and fixes
 
 * `check_rhub` gains a new argument `build_args` for arguments passed to 
