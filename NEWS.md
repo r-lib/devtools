@@ -8,22 +8,26 @@
 ## Deprecated functions now removed
 
 * `create()`, `create_description()`, `setup()`
-`use_appveyor()`, `use_build_ignore()`, `use_code_of_conduct()`,
-`use_coverage()`, `use_cran_badge()`, `use_cran_comments()`, `use_data()`,
-`use_data_raw()`, `use_dev_version()`, `use_git()`, `use_git_hook()`,
-`use_github()`, `use_github_links()`, `use_gpl3_license()`,
-`use_mit_license()`, `use_news_md()`, `use_package()`, `use_package_doc()`,
-`use_rcpp()`, `use_readme_md()`, `use_readme_rmd()`, `use_revdep()`,
-`use_rstudio()`, `use_test()`, `use_testthat()`, `use_travis()`,
-`use_vignette()`, have all been removed after being deprecated in previous
-releases. If you want to access these functions use the versions in the [usethis](https://usethis.r-lib.org/)
-package directly.
+  `use_appveyor()`, `use_build_ignore()`, `use_code_of_conduct()`,
+  `use_coverage()`, `use_cran_badge()`, `use_cran_comments()`, `use_data()`,
+  `use_data_raw()`, `use_dev_version()`, `use_git()`, `use_git_hook()`,
+  `use_github()`, `use_github_links()`, `use_gpl3_license()`,
+  `use_mit_license()`, `use_news_md()`, `use_package()`, `use_package_doc()`,
+  `use_rcpp()`, `use_readme_md()`, `use_readme_rmd()`, `use_revdep()`,
+  `use_rstudio()`, `use_test()`, `use_testthat()`, `use_travis()`,
+  `use_vignette()`, have been removed after being deprecated in previous
+  releases. Use the versions in the [usethis](https://usethis.r-lib.org/)
+  package directly.
 
 * `revdep()`, `revdep_check()`, `revdep_check_print_problems()`,
-`revdep_check_reset()`, `revdep_check_resume()`, `revdep_check_save_summary()`,
-`revdep_email()`, `revdep_maintainers()` have all been removed after being
-deprecated in prevous releases. If you want to access these functions use the
-[revdepcheck](https://github.com/r-lib/revdepcheck) package.
+  `revdep_check_reset()`, `revdep_check_resume()`, `revdep_check_save_summary()`,
+  `revdep_email()`, `revdep_maintainers()` have been removed after being
+  deprecated in prevous releases. It is recommended to use the
+  [revdepcheck](https://github.com/r-lib/revdepcheck) package instead.
+
+* `system_check()`, `system_output()` have been removed after being deprecated
+  in previous releases. It is recommend to use the
+  [processx](https://processx.r-lib.org/) package instead.
 
 ## Minor improvements and fixes
 
