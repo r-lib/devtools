@@ -45,4 +45,7 @@ email address. This is because R-hub sends out emails about build
 results. See more at \code{\link[rhub:validate_email]{rhub::validate_email()}}.
 }
 
-\concept{build functions, rhub functions}
+\seealso{
+Other build functions: \code{\link{check_win}}
+}
+\concept{build functions}

@@ -25,7 +25,7 @@
 #' @param build_args Arguments passed to `R CMD build`
 #' @param ... extra arguments, passed to [rhub::check_for_cran()].
 #' @inheritParams check
-#' @family build functions, rhub functions
+#' @family build functions
 #' @return a `rhub_check` object.
 #'
 #' @export
