@@ -161,4 +161,4 @@ speedier resolution.
 
 ## Code of conduct
 
-Please note that the devtools project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+Please note that the devtools project is released with a [Contributor Code of Conduct](https://github.com/r-lib/devtools/blob/master/.github/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
