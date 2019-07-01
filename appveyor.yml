@@ -13,9 +13,8 @@ install:
 # Adapt as necessary starting from here
 
 build_script:
-  - Rscript -e "install.packages('BiocManager')"
   - travis-tool.sh install_deps
-  - travis-tool.sh r_binary_install curl
+  - travis-tool.sh r_binary_install curl BiocManager
 
 test_script:
   - travis-tool.sh run_tests
