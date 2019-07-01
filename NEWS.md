@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `yesno()` as used in `release()` now has clearer synonyms for "yes" (@mattmalin, #1993)
+
 * `check_rhub` gains a new argument `build_args` for arguments passed to 
 `R CMD build`. `...` is now passed to `rhub::check_for_cran()` (@gaborcsardi, @maelle, #2041)
 * `build_manual()` now fails if the manual fails to build. (#2056)
