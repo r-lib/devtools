@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.0.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
       </span>
     </div>
 
@@ -136,6 +136,39 @@
       <small>Source: <a href='https://github.com/r-lib/devtools/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="devtools-2-1-0" class="section level1">
+<h1 class="page-header">
+<a href="#devtools-2-1-0" class="anchor"></a>devtools 2.1.0<small> Unreleased </small>
+</h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New Features</h2>
+<ul>
+<li>
+<code>testthat</code> and <code>roxygen2</code> are now added to <code>Imports</code> rather than <code>Suggests</code>, so they are automatically installed when you install devtools.</li>
+</ul>
+</div>
+<div id="deprecated-functions-now-removed" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deprecated-functions-now-removed" class="anchor"></a>Deprecated functions now removed</h2>
+<ul>
+<li><p><code>create()</code>, <code>create_description()</code>, <code>setup()</code> <code>use_appveyor()</code>, <code>use_build_ignore()</code>, <code>use_code_of_conduct()</code>, <code>use_coverage()</code>, <code>use_cran_badge()</code>, <code>use_cran_comments()</code>, <code>use_data()</code>, <code>use_data_raw()</code>, <code>use_dev_version()</code>, <code>use_git()</code>, <code>use_git_hook()</code>, <code>use_github()</code>, <code>use_github_links()</code>, <code>use_gpl3_license()</code>, <code>use_mit_license()</code>, <code>use_news_md()</code>, <code>use_package()</code>, <code>use_package_doc()</code>, <code>use_rcpp()</code>, <code>use_readme_md()</code>, <code>use_readme_rmd()</code>, <code>use_revdep()</code>, <code>use_rstudio()</code>, <code>use_test()</code>, <code>use_testthat()</code>, <code>use_travis()</code>, <code>use_vignette()</code>, have been removed after being deprecated in previous releases. Use the versions in the <a href="https://usethis.r-lib.org/">usethis</a> package directly.</p></li>
+<li><p><code>check_cran()</code>, <code>revdep_check()</code>, <code>revdep_check_print_problems()</code>, <code>revdep_check_reset()</code>, <code>revdep_check_resume()</code>, <code>revdep_check_save_summary()</code>, <code>revdep_email()</code> have been removed after being deprecated in prevous releases. It is recommended to use the <a href="https://github.com/r-lib/revdepcheck">revdepcheck</a> package instead.</p></li>
+<li><p><code>system_check()</code>, <code>system_output()</code> have been removed after being deprecated in previous releases. It is recommend to use the <a href="https://processx.r-lib.org/">processx</a> package instead.</p></li>
+<li><p><code>build_win()</code> has been removed, after being deprecated in previous releases.</p></li>
+<li><p><code>yesno()</code> as used in <code><a href="../reference/release.html">release()</a></code> now has clearer synonyms for “yes” (<a href='https://github.com/mattmalin'>@mattmalin</a>, <a href='https://github.com/r-lib/devtools/issues/1993'>#1993</a>)</p></li>
+</ul>
+</div>
+<div id="minor-improvements-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<ul>
+<li><p><code>check_rhub</code> gains a new argument <code>build_args</code> for arguments passed to <code>R CMD build</code>. <code>...</code> is now passed to <code><a href="https://r-hub.github.io/rhub/reference/check_for_cran.html">rhub::check_for_cran()</a></code> (<a href='https://github.com/gaborcsardi'>@gaborcsardi</a>, <a href='https://github.com/maelle'>@maelle</a>, <a href='https://github.com/r-lib/devtools/issues/2041'>#2041</a>)</p></li>
+<li><p><code><a href="../reference/build_manual.html">build_manual()</a></code> now fails if the manual fails to build. (<a href='https://github.com/r-lib/devtools/issues/2056'>#2056</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test_file()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> now work with C and C++ files in the src/ directory as well.</p></li>
+</ul>
+</div>
+</div>
     <div id="devtools-2-0-2" class="section level1">
 <h1 class="page-header">
 <a href="#devtools-2-0-2" class="anchor"></a>devtools 2.0.2<small> 2019-04-08 </small>
@@ -559,7 +592,7 @@
 <li><p>Verifies the integrity of already downloaded package archives (<a href='https://github.com/r-lib/devtools/issues/930'>#930</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>)</p></li>
 <li><p>Is now more tolerant of errors when retrieving the summary for a checked package (<a href='https://github.com/r-lib/devtools/issues/929'>#929</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p>When <code>ncpus &gt; 1</code>, it includes the package name for when so you know which package has failed and can start looking at the output without needing to wait for all packages to finish (<a href='https://github.com/mattdowle'>@mattdowle</a>).</p></li>
-<li><p>Uses proper repository when <code>BiocInstaller::useDevel(TRUE)</code> (<a href='https://github.com/r-lib/devtools/issues/937'>#937</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
+<li><p>Uses proper repository when <code><a href="https://www.rdocumentation.org/packages/BiocInstaller/topics/useDevel">BiocInstaller::useDevel(TRUE)</a></code> (<a href='https://github.com/r-lib/devtools/issues/937'>#937</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
 </ul>
 </li>
 <li><p>Shimmed <code><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file()</a></code> now respects <code>mustWork = TRUE</code> and throws an error if the file does not exist (<a href='https://github.com/r-lib/devtools/issues/1034'>#1034</a>).</p></li>
@@ -1355,6 +1388,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#devtools-2-1-0">2.1.0</a></li>
         <li><a href="#devtools-2-0-2">2.0.2</a></li>
         <li><a href="#devtools-2-0-1">2.0.1</a></li>
         <li><a href="#devtools-2-0-0">2.0.0</a></li>
