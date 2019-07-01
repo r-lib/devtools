@@ -3,7 +3,7 @@ Title: Tools to Make Developing R Packages Easier
 Version: 2.1.0
 Authors@R: c(
     person("Hadley", "Wickham", role = "aut"),
-    person("Jim", "Hester", , "james.hester@rstudio.com", role = c("aut", "cre")),
+    person("Jim", "Hester", , "jim.hester@rstudio.com", role = c("aut", "cre")),
     person("Winston", "Chang", role = "aut"),
     person("RStudio", role = "cph"),
     person("R Core team", role = "ctb",
