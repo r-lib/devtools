@@ -592,7 +592,7 @@
 <li><p>Verifies the integrity of already downloaded package archives (<a href='https://github.com/r-lib/devtools/issues/930'>#930</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>)</p></li>
 <li><p>Is now more tolerant of errors when retrieving the summary for a checked package (<a href='https://github.com/r-lib/devtools/issues/929'>#929</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p>When <code>ncpus &gt; 1</code>, it includes the package name for when so you know which package has failed and can start looking at the output without needing to wait for all packages to finish (<a href='https://github.com/mattdowle'>@mattdowle</a>).</p></li>
-<li><p>Uses proper repository when <code><a href="https://www.rdocumentation.org/packages/BiocInstaller/topics/useDevel">BiocInstaller::useDevel(TRUE)</a></code> (<a href='https://github.com/r-lib/devtools/issues/937'>#937</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
+<li><p>Uses proper repository when <code>BiocInstaller::useDevel(TRUE)</code> (<a href='https://github.com/r-lib/devtools/issues/937'>#937</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
 </ul>
 </li>
 <li><p>Shimmed <code><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file()</a></code> now respects <code>mustWork = TRUE</code> and throws an error if the file does not exist (<a href='https://github.com/r-lib/devtools/issues/1034'>#1034</a>).</p></li>
