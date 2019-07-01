@@ -84,7 +84,7 @@ load_pkg_description <- function(path, create) {
     }
 
     if (create) {
-      setup(path = path)
+      usethis::create_package(path = path)
     } else {
       stop("No description at ", path_desc, call. = FALSE)
     }

@@ -116,7 +116,7 @@ trunc_middle <- function(x, n_max = 25, n_top = 10, n_bottom = 10) {
 #' @return a character vector with the relevant messages, can have length zero
 #'   if no messages are found
 #'
-#' @seealso [check()], [revdep_check()]
+#' @seealso [check()]
 #' @export
 check_failures <- function(path, error = TRUE, warning = TRUE, note = TRUE) {
   check_dir <- file.path(path, "00check.log")

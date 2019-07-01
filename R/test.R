@@ -20,8 +20,6 @@
 #' @inheritParams run_examples
 #' @export
 test <- function(pkg = ".", filter = NULL, ...) {
-  check_suggested("testthat")
-
   save_all()
 
   pkg <- as.package(pkg)
@@ -29,7 +27,7 @@ test <- function(pkg = ".", filter = NULL, ...) {
   if (!uses_testthat(pkg) && interactive()) {
     message("No testing infrastructure found. Create it?")
     if (menu(c("Yes", "No")) == 1) {
-      use_testthat(pkg)
+      usethis_use_testthat(pkg)
     }
     return(invisible())
   }
@@ -208,7 +206,7 @@ find_test_file_src <- function(file) {
   if (!ext %in% src_ext) {
     stop(paste0(
         "Open file is does not end in a valid extension:\n",
-        "* Must be one of ", paste0("`.", valid_ext, "`", collapse = ", ")), call. = FALSE)
+        "* Must be one of ", paste0("`.", src_ext, "`", collapse = ", ")), call. = FALSE)
   }
 
   file.path("tests", "testthat", paste0("test-", basename(tools::file_path_sans_ext(file)), ".R"))
