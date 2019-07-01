@@ -29,8 +29,8 @@ before_test:
 
 environment:
   global:
-    WARNINGS_ARE_ERRORS: 1
-    _R_CHECK_FORCE_SUGGESTS_: 0
+    WARNINGS_ARE_ERRORS: true
+    _R_CHECK_FORCE_SUGGESTS_: false
     R_ARCH: x64
     USE_RTOOLS: true ## to be able to use Remotes (i.e. packages from non-CRAN sources)
 
