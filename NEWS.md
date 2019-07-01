@@ -29,6 +29,8 @@
   in previous releases. It is recommend to use the
   [processx](https://processx.r-lib.org/) package instead.
 
+* `build_win()` has been removed, after being deprecated in previous releases.
+
 ## Minor improvements and fixes
 
 * `check_rhub` gains a new argument `build_args` for arguments passed to 
