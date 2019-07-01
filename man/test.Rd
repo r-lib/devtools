@@ -24,7 +24,7 @@ test_coverage_file(file = find_active_file(), filter = TRUE,
 \code{\link[=as.package]{as.package()}} for more information}
 
 \item{filter}{If not \code{NULL}, only tests with file names matching this
-regular expression will be executed.  Matching will take on the file
+regular expression will be executed. Matching be performed on the file
 name after it has been stripped of \code{"test-"} and \code{".R"}.}
 
 \item{...}{additional arguments passed to \code{\link[testthat:test_dir]{testthat::test_dir()}} and

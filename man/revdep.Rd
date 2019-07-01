@@ -23,9 +23,7 @@ to follow.}
 \item{recursive}{If \code{TRUE} look for full set of recursive dependencies.}
 
 \item{ignore}{A character vector of package names to ignore. These packages
-will not appear in returned vector. This is used in
-\code{\link[=revdep_check]{revdep_check()}} to avoid packages with installation problems
-or extremely long check times.}
+will not appear in returned vector.}
 
 \item{bioconductor}{If \code{TRUE} also look for dependencies amongst
 Bioconductor packages.}
@@ -47,6 +45,6 @@ revdep("ggplot2", ignore = c("xkcd", "zoo"))
 }
 }
 \seealso{
-\code{\link[=revdep_check]{revdep_check()}} to run R CMD check on all reverse
-dependencies.
+The \href{https://github.com/r-lib/revdepcheck}{revdepcheck} package can
+be used to run R CMD check on all reverse dependencies.
 }

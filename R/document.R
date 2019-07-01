@@ -11,8 +11,6 @@
 #'   `browseVignettes("roxygen2")`
 #' @export
 document <- function(pkg = ".", roclets = NULL) {
-  check_suggested("roxygen2")
-
   pkg <- as.package(pkg)
   message("Updating ", pkg$package, " documentation")
 

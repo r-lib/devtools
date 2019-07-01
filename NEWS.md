@@ -1,9 +1,43 @@
 # devtools (development version)
 
+## New Features
+
+* `testthat` and `roxygen2` are now added to `Imports` rather than `Suggests`,
+  so they are automatically installed when you install devtools.
+
+## Deprecated functions now removed
+
+* `create()`, `create_description()`, `setup()`
+  `use_appveyor()`, `use_build_ignore()`, `use_code_of_conduct()`,
+  `use_coverage()`, `use_cran_badge()`, `use_cran_comments()`, `use_data()`,
+  `use_data_raw()`, `use_dev_version()`, `use_git()`, `use_git_hook()`,
+  `use_github()`, `use_github_links()`, `use_gpl3_license()`,
+  `use_mit_license()`, `use_news_md()`, `use_package()`, `use_package_doc()`,
+  `use_rcpp()`, `use_readme_md()`, `use_readme_rmd()`, `use_revdep()`,
+  `use_rstudio()`, `use_test()`, `use_testthat()`, `use_travis()`,
+  `use_vignette()`, have been removed after being deprecated in previous
+  releases. Use the versions in the [usethis](https://usethis.r-lib.org/)
+  package directly.
+
+* `check_cran()`, `revdep_check()`, `revdep_check_print_problems()`,
+  `revdep_check_reset()`, `revdep_check_resume()`, `revdep_check_save_summary()`,
+  `revdep_email()` have been removed after being
+  deprecated in prevous releases. It is recommended to use the
+  [revdepcheck](https://github.com/r-lib/revdepcheck) package instead.
+
+* `system_check()`, `system_output()` have been removed after being deprecated
+  in previous releases. It is recommend to use the
+  [processx](https://processx.r-lib.org/) package instead.
+
+* `build_win()` has been removed, after being deprecated in previous releases.
+
 * `yesno()` as used in `release()` now has clearer synonyms for "yes" (@mattmalin, #1993)
+
+## Minor improvements and fixes
 
 * `check_rhub` gains a new argument `build_args` for arguments passed to 
 `R CMD build`. `...` is now passed to `rhub::check_for_cran()` (@gaborcsardi, @maelle, #2041)
+
 * `build_manual()` now fails if the manual fails to build. (#2056)
 
 * `test_file()` and `test_coverage_file()` now work with C
