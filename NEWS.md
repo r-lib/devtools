@@ -14,6 +14,12 @@
 releases. If you want to access these functions use the versions in the [usethis](https://usethis.r-lib.org/)
 package directly.
 
+* `revdep()`, `revdep_check()`, `revdep_check_print_problems()`,
+`revdep_check_reset()`, `revdep_check_resume()`, `revdep_check_save_summary()`,
+`revdep_email()`, `revdep_maintainers()` have all been removed after being
+deprecated in prevous releases. If you want to access these functions use the
+[revdepcheck](https://github.com/r-lib/revdepcheck) package.
+
 * `check_rhub` gains a new argument `build_args` for arguments passed to 
 `R CMD build`. `...` is now passed to `rhub::check_for_cran()` (@gaborcsardi, @maelle, #2041)
 * `build_manual()` now fails if the manual fails to build. (#2056)
