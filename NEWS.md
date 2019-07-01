@@ -1,5 +1,10 @@
 # devtools (development version)
 
+## New Features
+
+* `testthat` and `roxygen2` are now added to `Imports` rather than `Suggests`,
+  so they are automatically installed when you install devtools.
+
 ## Deprecated functions now removed
 
 * `create()`, `create_description()`, `setup()`
@@ -20,8 +25,11 @@ package directly.
 deprecated in prevous releases. If you want to access these functions use the
 [revdepcheck](https://github.com/r-lib/revdepcheck) package.
 
+## Minor improvements and fixes
+
 * `check_rhub` gains a new argument `build_args` for arguments passed to 
 `R CMD build`. `...` is now passed to `rhub::check_for_cran()` (@gaborcsardi, @maelle, #2041)
+
 * `build_manual()` now fails if the manual fails to build. (#2056)
 
 * `test_file()` and `test_coverage_file()` now work with C

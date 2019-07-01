@@ -24,15 +24,16 @@ Imports:
     httr (>= 0.4),
     jsonlite,
     memoise (>= 1.0.0),
-    pkgbuild (>= 1.0.2),
-    pkgload (>= 1.0.1),
-    rcmdcheck (>= 1.3.2),
-    remotes (>= 2.0.3),
-    rstudioapi (>= 0.6.0.9000),
-    sessioninfo,
+    pkgbuild (>= 1.0.3),
+    pkgload (>= 1.0.2),
+    rcmdcheck (>= 1.3.3),
+    remotes (>= 2.1.0),
+    roxygen2 (>= 6.1.1),
+    rstudioapi (>= 0.7),
+    sessioninfo (>= 1.1.1),
     stats,
+    testthat (>= 2.1.1),
     tools,
-    usethis (>= 1.4.0),
     utils,
     withr
 Suggests: 
@@ -53,10 +54,8 @@ Suggests:
     Rcpp (>= 0.10.0),
     rhub (>= 1.0.2),
     rmarkdown,
-    roxygen2 (>= 6.1.0),
     rversions,
     spelling (>= 1.1),
-    testthat (>= 1.0.2),
     whisker
 VignetteBuilder: knitr
 Encoding: UTF-8
