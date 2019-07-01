@@ -45,8 +45,7 @@ to "always". \code{TRUE} and \code{FALSE} are also accepted and correspond to
 
 \item{build}{If \code{TRUE} build the package before installing.}
 
-\item{build_opts}{Options to pass to \code{R CMD build}, only used when \code{build}
-is \code{TRUE}.}
+\item{build_opts}{Options to pass to \code{R CMD build}, only used when \code{build}}
 
 \item{...}{additional arguments passed to \code{\link[utils:install.packages]{utils::install.packages()}}.}
 }
