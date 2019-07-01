@@ -25,9 +25,13 @@
     for (var i = 0; i < links.length; i++) {
       if (links[i].getAttribute("href") === "#")
         continue;
-      var path = paths(links[i].pathname);
+      // Ignore external links
+      if (links[i].host !== location.host)
+        continue;
 
-      var length = prefix_length(cur_path, path);
+      var nav_path = paths(links[i].pathname);
+
+      var length = prefix_length(nav_path, cur_path);
       if (length > max_length) {
         max_length = length;
         pos = i;
@@ -52,13 +56,14 @@
     return(pieces);
   }
 
+  // Returns -1 if not found
   function prefix_length(needle, haystack) {
     if (needle.length > haystack.length)
-      return(0);
+      return(-1);
 
     // Special case for length-0 haystack, since for loop won't run
     if (haystack.length === 0) {
-      return(needle.length === 0 ? 1 : 0);
+      return(needle.length === 0 ? 0 : -1);
     }
 
     for (var i = 0; i < haystack.length; i++) {
@@ -78,9 +83,9 @@
     element.setAttribute('data-original-title', tooltipOriginalTitle);
   }
 
-  if(Clipboard.isSupported()) {
+  if(ClipboardJS.isSupported()) {
     $(document).ready(function() {
-      var copyButton = "<button type='button' class='btn btn-primary btn-copy-ex' type = 'submit' title='Copy to clipboard' aria-hidden='true' data-toggle='tooltip' data-placement='left auto' data-trigger='hover' data-clipboard-copy><i class='fa fa-copy' aria-hidden='true'></i></button>";
+      var copyButton = "<button type='button' class='btn btn-primary btn-copy-ex' type = 'submit' title='Copy to clipboard' aria-label='Copy to clipboard' data-toggle='tooltip' data-placement='left auto' data-trigger='hover' data-clipboard-copy><i class='fa fa-copy'></i></button>";
 
       $(".examples, div.sourceCode").addClass("hasCopyButton");
 
@@ -91,7 +96,7 @@
       $('.btn-copy-ex').tooltip({container: 'body'});
 
       // Initialize clipboard:
-      var clipboardBtnCopies = new Clipboard('[data-clipboard-copy]', {
+      var clipboardBtnCopies = new ClipboardJS('[data-clipboard-copy]', {
         text: function(trigger) {
           return trigger.parentNode.textContent;
         }

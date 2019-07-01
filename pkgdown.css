@@ -58,9 +58,14 @@ img {
   max-width: 100%;
 }
 
+/* Fix bug in bootstrap (only seen in firefox) */
+summary {
+  display: list-item;
+}
+
 /* Typographic tweaking ---------------------------------*/
 
-.contents h1.page-header {
+.contents .page-header {
   margin-top: calc(-60px + 1em);
 }
 
@@ -136,10 +141,9 @@ a.anchor {
 .ref-index th {font-weight: normal;}
 
 .ref-index td {vertical-align: top;}
+.ref-index .icon {width: 40px;}
 .ref-index .alias {width: 40%;}
-.ref-index .title {width: 60%;}
-
-.ref-index .alias {width: 40%;}
+.ref-index-icons .alias {width: calc(40% - 40px);}
 .ref-index .title {width: 60%;}
 
 .ref-arguments th {text-align: right; padding-right: 10px;}
