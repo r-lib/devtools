@@ -19,9 +19,9 @@
   releases. Use the versions in the [usethis](https://usethis.r-lib.org/)
   package directly.
 
-* `revdep()`, `revdep_check()`, `revdep_check_print_problems()`,
+* `check_cran()`, `revdep_check()`, `revdep_check_print_problems()`,
   `revdep_check_reset()`, `revdep_check_resume()`, `revdep_check_save_summary()`,
-  `revdep_email()`, `revdep_maintainers()` have been removed after being
+  `revdep_email()` have been removed after being
   deprecated in prevous releases. It is recommended to use the
   [revdepcheck](https://github.com/r-lib/revdepcheck) package instead.
 
