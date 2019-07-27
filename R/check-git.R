@@ -10,9 +10,14 @@ git_checks <- function(pkg = ".") {
   pkg <- as.package(pkg)
   cat_rule(paste0("Running Git checks for ", pkg$package))
 
+  git_report_branch(pkg)
   git_check_uncommitted(pkg)
   git_check_sync_status(pkg)
   cat_rule()
+}
+
+git_report_branch <- function(pkg) {
+  cat("Current branch:", git_branch(pkg$path), "\n")
 }
 
 git_check_uncommitted <- function(pkg) {
