@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `create()` added, the RStudio IDE uses `create()`, so removing it in version 2.1.0
+  broke old versions of the IDE.
+
 # devtools 2.1.0
 
 ## New Features
