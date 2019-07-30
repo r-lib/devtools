@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0.9000</span>
       </span>
     </div>
 
@@ -152,7 +152,7 @@
 <h2 class="hasAnchor">
 <a href="#deprecated-functions-now-removed" class="anchor"></a>Deprecated functions now removed</h2>
 <ul>
-<li><p><code>create()</code>, <code>create_description()</code>, <code>setup()</code> <code>use_appveyor()</code>, <code>use_build_ignore()</code>, <code>use_code_of_conduct()</code>, <code>use_coverage()</code>, <code>use_cran_badge()</code>, <code>use_cran_comments()</code>, <code>use_data()</code>, <code>use_data_raw()</code>, <code>use_dev_version()</code>, <code>use_git()</code>, <code>use_git_hook()</code>, <code>use_github()</code>, <code>use_github_links()</code>, <code>use_gpl3_license()</code>, <code>use_mit_license()</code>, <code>use_news_md()</code>, <code>use_package()</code>, <code>use_package_doc()</code>, <code>use_rcpp()</code>, <code>use_readme_md()</code>, <code>use_readme_rmd()</code>, <code>use_revdep()</code>, <code>use_rstudio()</code>, <code>use_test()</code>, <code>use_testthat()</code>, <code>use_travis()</code>, <code>use_vignette()</code>, have been removed after being deprecated in previous releases. Use the versions in the <a href="https://usethis.r-lib.org/">usethis</a> package directly.</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code>, <code>create_description()</code>, <code>setup()</code> <code>use_appveyor()</code>, <code>use_build_ignore()</code>, <code>use_code_of_conduct()</code>, <code>use_coverage()</code>, <code>use_cran_badge()</code>, <code>use_cran_comments()</code>, <code>use_data()</code>, <code>use_data_raw()</code>, <code>use_dev_version()</code>, <code>use_git()</code>, <code>use_git_hook()</code>, <code>use_github()</code>, <code>use_github_links()</code>, <code>use_gpl3_license()</code>, <code>use_mit_license()</code>, <code>use_news_md()</code>, <code>use_package()</code>, <code>use_package_doc()</code>, <code>use_rcpp()</code>, <code>use_readme_md()</code>, <code>use_readme_rmd()</code>, <code>use_revdep()</code>, <code>use_rstudio()</code>, <code>use_test()</code>, <code>use_testthat()</code>, <code>use_travis()</code>, <code>use_vignette()</code>, have been removed after being deprecated in previous releases. Use the versions in the <a href="https://usethis.r-lib.org/">usethis</a> package directly.</p></li>
 <li><p><code>check_cran()</code>, <code>revdep_check()</code>, <code>revdep_check_print_problems()</code>, <code>revdep_check_reset()</code>, <code>revdep_check_resume()</code>, <code>revdep_check_save_summary()</code>, <code>revdep_email()</code> have been removed after being deprecated in prevous releases. It is recommended to use the <a href="https://github.com/r-lib/revdepcheck">revdepcheck</a> package instead.</p></li>
 <li><p><code>system_check()</code>, <code>system_output()</code> have been removed after being deprecated in previous releases. It is recommend to use the <a href="https://processx.r-lib.org/">processx</a> package instead.</p></li>
 <li><p><code>build_win()</code> has been removed, after being deprecated in previous releases.</p></li>
@@ -417,7 +417,7 @@
 <li><p>Improve Git integration. <code>use_git_ignore()</code> and <code>use_git_config()</code> gain <code>quiet</code> argument, tests work without setting <code>user.name</code> and <code>user.email</code> Git configuration settings (<a href='https://github.com/r-lib/devtools/issues/1320'>#1320</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p>Improve Git status checks used in <code><a href="../reference/release.html">release()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1205'>#1205</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p>Improved handling of local <code>file://</code> repositories in <code><a href="../reference/install.html">install()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1284'>#1284</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
-<li><p><code>setup()</code> and <code>create()</code> gain new <code>quiet</code> argument (<a href='https://github.com/r-lib/devtools/issues/1284'>#1284</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p><code>setup()</code> and <code><a href="../reference/create.html">create()</a></code> gain new <code>quiet</code> argument (<a href='https://github.com/r-lib/devtools/issues/1284'>#1284</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p>Avoid unnecessary query of <code>available_packages()</code> (<a href='https://github.com/r-lib/devtools/issues/1269'>#1269</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p>Add cache setting to AppVeyor template (<a href='https://github.com/r-lib/devtools/issues/1290'>#1290</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p>Fix AppVeyor test by manually installing <code>curl</code> (<a href='https://github.com/r-lib/devtools/issues/1301'>#1301</a>).</p></li>
@@ -574,8 +574,8 @@
 <ul>
 <li><p><code>check_dev_versions()</code> checks only package dependencies (<a href='https://github.com/r-lib/devtools/issues/983'>#983</a>).</p></li>
 <li><p><code><a href="../reference/check_man.html">check_man()</a></code> replaces <code>check_doc()</code> (since most other functions are named after the corresponding directory). <code>check_doc()</code> will hang around as an alias for the forseeable future (<a href='https://github.com/r-lib/devtools/issues/958'>#958</a>).</p></li>
-<li><p><code>create()</code> produces a dummy namespace will fake comment so roxygen2 will overwrite silently (<a href='https://github.com/r-lib/devtools/issues/1016'>#1016</a>).</p></li>
-<li><p><code>create()</code> and <code>setup()</code> are more permissive – they now accept a path to either a new directory or empty directory. (<a href='https://github.com/r-lib/devtools/issues/966'>#966</a>, <a href='https://github.com/kevinushey'>@kevinushey</a>)</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code> produces a dummy namespace will fake comment so roxygen2 will overwrite silently (<a href='https://github.com/r-lib/devtools/issues/1016'>#1016</a>).</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code> and <code>setup()</code> are more permissive – they now accept a path to either a new directory or empty directory. (<a href='https://github.com/r-lib/devtools/issues/966'>#966</a>, <a href='https://github.com/kevinushey'>@kevinushey</a>)</p></li>
 <li><p><code><a href="../reference/document.html">document()</a></code> now only runs <code>update_collate()</code> once.</p></li>
 <li><p><code><a href="../reference/load_all.html">load_all()</a></code> resolves a longstanding lazy load database corruption issue when reloading packages which define S3 methods on generics from base or other packages (<a href='https://github.com/r-lib/devtools/issues/1001'>#1001</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
 <li>
@@ -724,7 +724,7 @@
 <a href="#minor-improvements" class="anchor"></a>Minor improvements</h2>
 <ul>
 <li><p>Deprecated <code>doc_clean</code> argument to <code><a href="../reference/check.html">check()</a></code> has been removed.</p></li>
-<li><p>Initial package version in <code>create()</code> is now <code>0.0.0.9000</code> (<a href='https://github.com/r-lib/devtools/issues/632'>#632</a>). <code>create()</code> and <code>create_description()</code> checks that the package name is valid (<a href='https://github.com/r-lib/devtools/issues/610'>#610</a>).</p></li>
+<li><p>Initial package version in <code><a href="../reference/create.html">create()</a></code> is now <code>0.0.0.9000</code> (<a href='https://github.com/r-lib/devtools/issues/632'>#632</a>). <code><a href="../reference/create.html">create()</a></code> and <code>create_description()</code> checks that the package name is valid (<a href='https://github.com/r-lib/devtools/issues/610'>#610</a>).</p></li>
 <li><p><code><a href="../reference/load_all.html">load_all()</a></code> runs <code><a href="https://www.rdocumentation.org/packages/roxygen2/topics/update_collate">roxygen2::update_collate()</a></code> before loading code. This ensures that files are sourced in the way you expect, as defined by roxygen <code>@include</code> tags. If you don’t have any <code>@include</code> tags, the collate will be not be touched (<a href='https://github.com/r-lib/devtools/issues/623'>#623</a>).</p></li>
 <li><p><code><a href="https://www.rdocumentation.org/packages/sessioninfo/topics/session_info">session_info()</a></code> gains <code>include_base</code> argument to also display loaded/attached base packages (<a href='https://github.com/r-lib/devtools/issues/646'>#646</a>).</p></li>
 <li>
@@ -738,7 +738,7 @@
 </li>
 <li><p><code>use_travis()</code> now sets an environment variable so that any WARNING will also cause the build to fail (<a href='https://github.com/r-lib/devtools/issues/570'>#570</a>).</p></li>
 <li><p><code><a href="https://www.rdocumentation.org/packages/pkgbuild/topics/with_debug">with_debug()</a></code> and <code>compiler_flags()</code> set <code>CFLAGS</code> etc instead of <code>PKG_CFLAGS</code>. <code>PKG_*</code> are for packages to use, the raw values are for users to set. (According to <a href="http://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Using-Makevars" class="uri">http://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Using-Makevars</a>)</p></li>
-<li><p>New <code>setup()</code> works like <code>create()</code> but assumes an existing, not necessarily empty, directory (<a href='https://github.com/r-lib/devtools/issues/627'>#627</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p>New <code>setup()</code> works like <code><a href="../reference/create.html">create()</a></code> but assumes an existing, not necessarily empty, directory (<a href='https://github.com/r-lib/devtools/issues/627'>#627</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 </ul>
 </div>
 <div id="bug-fixes" class="section level2">
@@ -769,10 +769,10 @@
 </h1>
 <div id="tool-templates-and-create" class="section level2">
 <h2 class="hasAnchor">
-<a href="#tool-templates-and-create" class="anchor"></a>Tool templates and <code>create()</code>
+<a href="#tool-templates-and-create" class="anchor"></a>Tool templates and <code><a href="../reference/create.html">create()</a></code>
 </h2>
 <ul>
-<li><p><code>create()</code> no longer generates <code>man/</code> directory - roxygen2 now does this automatically. It also no longer generates an package-level doc template. If you want this, use <code>use_package_doc()</code>. It also makes a dummy namespace so that you can build &amp; reload without running <code><a href="../reference/document.html">document()</a></code> first.</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code> no longer generates <code>man/</code> directory - roxygen2 now does this automatically. It also no longer generates an package-level doc template. If you want this, use <code>use_package_doc()</code>. It also makes a dummy namespace so that you can build &amp; reload without running <code><a href="../reference/document.html">document()</a></code> first.</p></li>
 <li><p>New <code>use_data()</code> makes it easy to include data in a package, either in <code>data/</code> (for exported datasets) or in <code>R/sysdata.rda</code> (for internal data). (<a href='https://github.com/r-lib/devtools/issues/542'>#542</a>)</p></li>
 <li><p>New <code>use_data_raw()</code> creates <code>data-raw/</code> directory for reproducible generation of <code>data/</code> files (<a href='https://github.com/r-lib/devtools/issues/541'>#541</a>).</p></li>
 <li><p>New <code>use_package()</code> allows you to set dependencies (<a href='https://github.com/r-lib/devtools/issues/559'>#559</a>).</p></li>
@@ -855,7 +855,7 @@
 <p>Four new functions make it easier to add useful infrastructure to packages:</p>
 <ul>
 <li><p><code>add_test_infrastructure()</code> will create test infrastructure for a new package. It is called automatically from <code><a href="../reference/test.html">test()</a></code> if no test directories are found, the session is interactive and you agree.</p></li>
-<li><p><code>add_rstudio_project()</code> adds an RStudio project file to your package. <code>create()</code> gains an <code>rstudio</code> argument which will automatically create an RStudio project in the package directory. It defaults to <code>TRUE</code>: if you don’t use RStudio, just delete the file.</p></li>
+<li><p><code>add_rstudio_project()</code> adds an RStudio project file to your package. <code><a href="../reference/create.html">create()</a></code> gains an <code>rstudio</code> argument which will automatically create an RStudio project in the package directory. It defaults to <code>TRUE</code>: if you don’t use RStudio, just delete the file.</p></li>
 <li><p><code>add_travis()</code> adds a basic travis template to your package. <code>.travis.yml</code> is automatically added to <code>.Rbuildignore</code> to avoid including it in the built package.</p></li>
 <li><p><code>add_build_ignore()</code> makes it easy to add files to <code>.Rbuildignore</code>, correctly escaping special characters</p></li>
 </ul>
@@ -1031,7 +1031,7 @@
 <li><p><code>load_data()</code> got an overhaul and now respects <code>LazyData</code> and correctly exports datasets by default (Fixes <a href='https://github.com/r-lib/devtools/issues/242'>#242</a>)</p></li>
 <li><p><code>with_envvar</code> gains the option to either replace, prefix or suffix existing environmental variables. The default is to replace, which was the previous behaviour.</p></li>
 <li><p><code>check_cran</code> includes <code><a href="https://www.rdocumentation.org/packages/utils/topics/sessionInfo">sessionInfo()</a></code> in the summary output (Fixes <a href='https://github.com/r-lib/devtools/issues/273'>#273</a>)</p></li>
-<li><p><code>create()</code> gains a <code>check</code> argument which defaults to FALSE.</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code> gains a <code>check</code> argument which defaults to FALSE.</p></li>
 <li><p><code>with_env</code> will be deprecated in 1.2 and removed in 1.3</p></li>
 <li><p>When <code><a href="../reference/load_all.html">load_all()</a></code> calls <code><a href="https://www.rdocumentation.org/packages/base/topics/ns-hooks">.onAttach()</a></code> and <code><a href="https://www.rdocumentation.org/packages/base/topics/ns-hooks">.onLoad()</a></code>, it now passes the lib path to those functions.</p></li>
 </ul>
