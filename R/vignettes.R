@@ -35,10 +35,12 @@ build_vignettes <- function(pkg = ".",
                             install = TRUE,
                             keep_md = TRUE) {
   pkg <- as.package(pkg)
+
+  deps <- remotes::dev_package_deps(pkg$path, dependencies)
+  update(deps, upgrade = upgrade)
+
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (length(vigns$docs) == 0) return()
-
-  install_deps(pkg$path, dependencies, upgrade = upgrade)
 
   message("Building ", pkg$package, " vignettes")
 

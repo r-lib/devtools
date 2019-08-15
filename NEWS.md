@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `build_vignettes()` now correctly installs the vignette builder if it is not
+  already installed (#2089).
+
 * `create()` added, the RStudio IDE uses `create()`, so removing it in version 2.1.0
   broke old versions of the IDE.
 
