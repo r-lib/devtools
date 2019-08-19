@@ -53,6 +53,14 @@
   (#1974).
 
 * `release()` now works without error when `options("repos")` is unnamed (#1956).
+* `create()` added, the RStudio IDE uses `create()`, so removing it in version 2.1.0
+  broke old versions of the IDE.
+  
+* In several places `http:` URLs were used instead of `https:`, the most 
+  critical being in the `cran_mirror`, `cran_pacakges`, and `cran_submission_url`
+  values which could have enabled discrete activity disclosure and person-in-the-middle 
+  attacks (i.e. changing the contents while uploading/downloading). All `http:` 
+  URLS have been changed to `https:` URLs. (@hrbrmstr, #2091)
 
 # devtools 2.1.0
 
@@ -98,6 +106,8 @@
 
 * `test_file()` and `test_coverage_file()` now work with C
   and C++ files in the src/ directory as well.
+  
+* 
 
 # devtools 2.0.2
 
