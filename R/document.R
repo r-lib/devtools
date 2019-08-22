@@ -16,7 +16,16 @@ document <- function(pkg = ".", roclets = NULL) {
 
   save_all()
 
-  withr::with_envvar(r_env_vars(), roxygen2::roxygenise(pkg$path, roclets))
+  if (pkg$package == "roxygen2") {
+    # roxygen2 crashes if it reloads itself
+    load_all(pkg$path, quiet = TRUE)
+    load_code <- function(path) asNamespace("roxygen2")
+  } else {
+    load_code <- roxygen2::env_package
+  }
+  withr::with_envvar(r_env_vars(),
+    roxygen2::roxygenise(pkg$path, roclets, load_code = load_code)
+  )
 
   pkgload::dev_topic_index_reset(pkg$package)
   invisible()
