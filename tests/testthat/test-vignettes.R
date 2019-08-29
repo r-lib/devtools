@@ -60,20 +60,6 @@ if (packageVersion("knitr") >= 1.2) {
     expect_false("test.R" %in% dir(doc_path))
     expect_false("test.Rmd" %in% dir(doc_path))
   })
-
-  test_that("dependencies argument", {
-    pkg <- as.package("testMarkdownVignettes")
-    doc_path <- file.path(pkg$path, "doc")
-
-    clean_vignettes(pkg)
-    on.exit(clean_vignettes(pkg), add = TRUE)
-    installed_deps <- NULL
-    with_mock(
-      install_deps = function(pkg, dependencies, ...) installed_deps <<- dependencies,
-      build_vignettes(pkg, FALSE)
-    )
-    expect_false(installed_deps)
-  })
 }
 
 
