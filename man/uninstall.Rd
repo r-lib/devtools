@@ -4,7 +4,8 @@
 \alias{uninstall}
 \title{Uninstall a local development package.}
 \usage{
-uninstall(pkg = ".", unload = TRUE, quiet = FALSE, ...)
+uninstall(pkg = ".", unload = TRUE, quiet = FALSE,
+  lib = .libPaths()[[1]])
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -15,7 +16,9 @@ package prior to uninstalling.}
 
 \item{quiet}{If \code{TRUE}, suppress output.}
 
-\item{...}{additional arguments passed to \code{\link[=remove.packages]{remove.packages()}}.}
+\item{lib}{a character vector giving the library directories to remove the
+    packages from.  If missing, defaults to the first element in
+    \code{\link{.libPaths}()}.}
 }
 \description{
 Uses \code{remove.package} to uninstall the package.
