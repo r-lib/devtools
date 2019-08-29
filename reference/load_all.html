@@ -8,11 +8,13 @@
 
 <title>Load complete package. — load_all • devtools</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,13 +32,13 @@
 
 
 
-<meta property="og:title" content="Load complete package. — load_all" />
 
+<meta property="og:title" content="Load complete package. — load_all" />
 <meta property="og:description" content="load_all loads a package. It roughly simulates what happens
 when a package is installed and loaded with library()." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -115,7 +117,6 @@ when a package is installed and loaded with library()." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/devtools">
@@ -141,15 +142,13 @@ when a package is installed and loaded with library()." />
     </div>
 
     <div class="ref-description">
-    
     <p><code>load_all</code> loads a package. It roughly simulates what happens
 when a package is installed and loaded with <code><a href='https://www.rdocumentation.org/packages/base/topics/library'>library()</a></code>.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>load_all</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>reset</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>recompile</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>helpers</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -190,7 +189,7 @@ in the NAMESPACE file.</p></td>
       <td><p>Additional arguments passed to <code><a href='https://www.rdocumentation.org/packages/pkgload/topics/load_all'>pkgload::load_all()</a></code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Currently <code>load_all</code>:</p>
@@ -210,7 +209,6 @@ you can access them interactively. devtools sets the
 <code>DEVTOOLS_LOAD</code> environment variable to <code>"true"</code> to
 let you check whether the helpers are run during package loading.</p></li>
 </ul>
-    
     <h2 class="hasAnchor" id="namespaces"><a class="anchor" href="#namespaces"></a>Namespaces</h2>
 
     
@@ -231,7 +229,6 @@ objects easy to access.</p>
 <code>export_all=FALSE</code>. This more closely simulates behavior when
 loading an installed package with <code><a href='https://www.rdocumentation.org/packages/base/topics/library'>library()</a></code>, and can be
 useful for checking for missing exports.</p>
-    
     <h2 class="hasAnchor" id="shim-files"><a class="anchor" href="#shim-files"></a>Shim files</h2>
 
     
@@ -241,7 +238,6 @@ of the loaded package. It presently adds a replacement version of
 <code><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>base::system.file</a></code>. This is needed because installed and uninstalled
 package sources have different directory structures. Note that this is not
 a perfect replacement for <code><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>base::system.file</a></code>.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
@@ -263,13 +259,9 @@ a perfect replacement for <code><a href='https://www.rdocumentation.org/packages
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#details">Details</a></li>
-
       <li><a href="#namespaces">Namespaces</a></li>
-
       <li><a href="#shim-files">Shim files</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -8,11 +8,13 @@
 
 <title>Build package vignettes. — build_vignettes • devtools</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,8 +32,8 @@
 
 
 
-<meta property="og:title" content="Build package vignettes. — build_vignettes" />
 
+<meta property="og:title" content="Build package vignettes. — build_vignettes" />
 <meta property="og:description" content="Builds package vignettes using the same algorithm that R CMD build
 does. This means including non-Sweave vignettes, using makefiles (if
 present), and copying over extra files. The files are copied in the 'doc'
@@ -41,9 +43,9 @@ would be in a built package. 'doc' and 'Meta' are added to
 files can be checked into version control, so they can be viewed with
 browseVignettes() and vignette() if the package has been
 loaded with load_all() without needing to re-build them locally." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -122,7 +124,6 @@ loaded with load_all() without needing to re-build them locally." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/devtools">
@@ -148,7 +149,6 @@ loaded with load_all() without needing to re-build them locally." />
     </div>
 
     <div class="ref-description">
-    
     <p>Builds package vignettes using the same algorithm that <code>R CMD build</code>
 does. This means including non-Sweave vignettes, using makefiles (if
 present), and copying over extra files. The files are copied in the 'doc'
@@ -158,13 +158,12 @@ would be in a built package. 'doc' and 'Meta' are added to
 files can be checked into version control, so they can be viewed with
 <code><a href='https://www.rdocumentation.org/packages/utils/topics/browseVignettes'>browseVignettes()</a></code> and <code>vignette()</code> if the package has been
 loaded with <code><a href='load_all.html'>load_all()</a></code> without needing to re-build them locally.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>build_vignettes</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='st'>"VignetteBuilder"</span>,
   <span class='kw'>clean</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='st'>"never"</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>install</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>keep_md</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -215,22 +214,20 @@ outputs. See
 <a href='https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown'>https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown</a>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='clean_vignettes.html'>clean_vignettes()</a></code> to remove the pdfs in
 <code class="file">doc</code> created from vignettes</p>
 <p><code><a href='clean_vignettes.html'>clean_vignettes()</a></code> to remove build tex/pdf files.</p></div>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#see-also">See also</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>

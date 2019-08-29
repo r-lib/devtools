@@ -8,11 +8,13 @@
 
 <title>Build windows binary package. — check_win • devtools</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,17 +32,17 @@
 
 
 
-<meta property="og:title" content="Build windows binary package. — check_win" />
 
+<meta property="og:title" content="Build windows binary package. — check_win" />
 <meta property="og:description" content="This function works by bundling source package, and then uploading to
 http://win-builder.r-project.org/.  Once building is complete you'll
 receive a link to the built package in the email address listed in the
 maintainer field.  It usually takes around 30 minutes. As a side effect,
 win-build also runs R CMD check on the package, so check_win
 is also useful to check that your package is ok on windows." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -119,7 +121,6 @@ is also useful to check that your package is ok on windows." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/devtools">
@@ -145,14 +146,12 @@ is also useful to check that your package is ok on windows." />
     </div>
 
     <div class="ref-description">
-    
     <p>This function works by bundling source package, and then uploading to
 <a href='http://win-builder.r-project.org/'>http://win-builder.r-project.org/</a>.  Once building is complete you'll
 receive a link to the built package in the email address listed in the
 maintainer field.  It usually takes around 30 minutes. As a side effect,
 win-build also runs <code>R CMD check</code> on the package, so <code>check_win</code>
 is also useful to check that your package is ok on windows.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>check_win_devel</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>manual</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -163,7 +162,7 @@ is also useful to check that your package is ok on windows.</p>
 
 <span class='fu'>check_win_oldrelease</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>manual</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -192,7 +191,7 @@ vignettes (<code>--no-build-vignettes</code>) or manual (<code>--no-manual</code
       <td><p>Additional arguments passed to <code><a href='https://www.rdocumentation.org/packages/pkgbuild/topics/build'>pkgbuild::build()</a></code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     <ul>
@@ -200,22 +199,18 @@ vignettes (<code>--no-build-vignettes</code>) or manual (<code>--no-manual</code
 <li><p><code>check_win_release</code>: Check package on the release version of R.</p></li>
 <li><p><code>check_win_oldrelease</code>: Check package on the previous major release version of R.</p></li>
 </ul>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other build functions: <code><a href='check_rhub.html'>check_rhub</a></code></p></div>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#functions">Functions</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>

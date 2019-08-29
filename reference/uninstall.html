@@ -8,11 +8,13 @@
 
 <title>Uninstall a local development package. — uninstall • devtools</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,14 +32,14 @@
 
 
 
-<meta property="og:title" content="Uninstall a local development package. — uninstall" />
 
+<meta property="og:title" content="Uninstall a local development package. — uninstall" />
 <meta property="og:description" content="Uses remove.package to uninstall the package.
 To uninstall a package from a non-default library,
 use withr::with_libpaths()." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -116,7 +118,6 @@ use withr::with_libpaths()." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/devtools">
@@ -142,15 +143,14 @@ use withr::with_libpaths()." />
     </div>
 
     <div class="ref-description">
-    
     <p>Uses <code>remove.package</code> to uninstall the package.
 To uninstall a package from a non-default library,
 use <code><a href='https://www.rdocumentation.org/packages/withr/topics/with_libpaths'>withr::with_libpaths()</a></code>.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>uninstall</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>unload</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>uninstall</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>unload</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>lib</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/libPaths'>.libPaths</a></span>()<span class='kw'>[[</span><span class='fl'>1</span>]])</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -169,26 +169,26 @@ package prior to uninstalling.</p></td>
       <td><p>If <code>TRUE</code>, suppress output.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>additional arguments passed to <code><a href='https://www.rdocumentation.org/packages/utils/topics/remove.packages'>remove.packages()</a></code>.</p></td>
+      <th>lib</th>
+      <td><p>a character vector giving the library directories to remove the
+    packages from.  If missing, defaults to the first element in
+    <code><a href='https://www.rdocumentation.org/packages/base/topics/libPaths'>.libPaths</a>()</code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/pkgbuild/topics/with_debug'>with_debug()</a></code> to install packages with debugging flags
 set.</p>
 <p>Other package installation: <code><a href='install.html'>install</a></code></p></div>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#see-also">See also</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>

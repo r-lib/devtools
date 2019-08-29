@@ -8,11 +8,13 @@
 
 <title>Build and check a package, cleaning up automatically on success. — check • devtools</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,13 +32,13 @@
 
 
 
-<meta property="og:title" content="Build and check a package, cleaning up automatically on success. — check" />
 
+<meta property="og:title" content="Build and check a package, cleaning up automatically on success. — check" />
 <meta property="og:description" content="check automatically builds and checks a source package, using all
 known best practices. check_built checks an already built package." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -115,7 +117,6 @@ known best practices. check_built checks an already built package." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/devtools">
@@ -141,10 +142,8 @@ known best practices. check_built checks an already built package." />
     </div>
 
     <div class="ref-description">
-    
     <p><code>check</code> automatically builds and checks a source package, using all
 known best practices. <code>check_built</code> checks an already built package.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>check</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>document</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>build_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>,
@@ -158,7 +157,7 @@ known best practices. <code>check_built</code> checks an already built package.<
   <span class='kw'>manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='st'>"--timings"</span>, <span class='kw'>env_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>check_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/tempfile'>tempdir</a></span>(), <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>error_on</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"never"</span>,
   <span class='st'>"error"</span>, <span class='st'>"warning"</span>, <span class='st'>"note"</span>))</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -251,11 +250,10 @@ error.</p></td>
       <td><p>Path to built package.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>An object containing errors, warnings, and notes.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Passing <code>R CMD check</code> is essential if you want to submit your package
@@ -267,7 +265,6 @@ represent serious problems.</p>
 as this is the recommended way to check packages.  Note that this process
 runs in an independent realisation of R, so nothing in your current
 workspace will affect the process.</p>
-    
     <h2 class="hasAnchor" id="environment-variables"><a class="anchor" href="#environment-variables"></a>Environment variables</h2>
 
     
@@ -286,27 +283,21 @@ issued.)</p></li>
 <li><p>env vars set by arguments <code>incoming</code>, <code>remote</code> and
 <code>force_suggests</code></p></li>
 </ul>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='release.html'>release()</a></code> if you want to send the checked package to
 CRAN.</p></div>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#environment-variables">Environment variables</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>

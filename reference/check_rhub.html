@@ -8,11 +8,13 @@
 
 <title>Run CRAN checks for package on R-hub — check_rhub • devtools</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,17 +32,17 @@
 
 
 
-<meta property="og:title" content="Run CRAN checks for package on R-hub — check_rhub" />
 
+<meta property="og:title" content="Run CRAN checks for package on R-hub — check_rhub" />
 <meta property="og:description" content="It runs build() on the package, with the arguments specified
 in args, and then submits it to the R-hub builder at
 https://builder.r-hub.io. The interactive option controls
 whether the function waits for the check output. Regardless, after the
 check is complete, R-hub sends an email with the results to the package
 maintainer." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -119,7 +121,6 @@ maintainer." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/devtools">
@@ -145,19 +146,17 @@ maintainer." />
     </div>
 
     <div class="ref-description">
-    
     <p>It runs <code><a href='build.html'>build()</a></code> on the package, with the arguments specified
 in <code>args</code>, and then submits it to the R-hub builder at
 <a href='https://builder.r-hub.io'>https://builder.r-hub.io</a>. The <code>interactive</code> option controls
 whether the function waits for the check output. Regardless, after the
 check is complete, R-hub sends an email with the results to the package
 maintainer.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>check_rhub</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>platforms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>email</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>interactive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>build_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -193,35 +192,29 @@ email address, regardless of whether the check is interactive or not.</p></td>
       <td><p>extra arguments, passed to <code><a href='https://r-hub.github.io/rhub/reference/check_for_cran.html'>rhub::check_for_cran()</a></code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a <code>rhub_check</code> object.</p>
-    
     <h2 class="hasAnchor" id="about-email-validation-on-r-hub"><a class="anchor" href="#about-email-validation-on-r-hub"></a>About email validation on r-hub</h2>
 
     
     <p>To build and check R packages on R-hub, you need to validate your
 email address. This is because R-hub sends out emails about build
 results. See more at <code><a href='https://r-hub.github.io/rhub/reference/validate_email.html'>rhub::validate_email()</a></code>.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other build functions: <code><a href='check_win.html'>check_win</a></code></p></div>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#about-email-validation-on-r-hub">About email validation on r-hub</a></li>
-
       <li><a href="#see-also">See also</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>

@@ -8,11 +8,13 @@
 
 <title>Build package — build • devtools</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -30,8 +32,8 @@
 
 
 
-<meta property="og:title" content="Build package — build" />
 
+<meta property="og:title" content="Build package — build" />
 <meta property="og:description" content="Building converts a package source directory into a single bundled file.
 If binary = FALSE this creates a tar.gz package that can
 be installed on any platform, provided they have a full development
@@ -40,9 +42,9 @@ installed out of the box). If binary = TRUE, the package will have
 a platform specific extension (e.g. .zip for windows), and will
 only be installable on the current platform, but no development
 environment is needed." />
-
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -121,7 +123,6 @@ environment is needed." />
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/devtools">
@@ -147,7 +148,6 @@ environment is needed." />
     </div>
 
     <div class="ref-description">
-    
     <p>Building converts a package source directory into a single bundled file.
 If <code>binary = FALSE</code> this creates a <code>tar.gz</code> package that can
 be installed on any platform, provided they have a full development
@@ -156,12 +156,11 @@ installed out of the box). If <code>binary = TRUE</code>, the package will have
 a platform specific extension (e.g. <code>.zip</code> for windows), and will
 only be installable on the current platform, but no development
 environment is needed.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>build</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>binary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>vignettes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -204,21 +203,19 @@ or <code>R CMD install</code> if <code>binary = TRUE</code>.</p></td>
       <td><p>Additional arguments passed to <a href='https://www.rdocumentation.org/packages/pkgbuild/topics/build'>pkgbuild::build</a>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a string giving the location (including file name) of the built
 package</p>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
