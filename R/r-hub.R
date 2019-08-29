@@ -43,6 +43,8 @@ check_rhub <- function(pkg = ".",
                       args = build_args)
   on.exit(unlink(built_path), add = TRUE)
 
+  check_dots_used()
+
   status <- rhub::check_for_cran(
     path = built_path,
     email = email,

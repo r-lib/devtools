@@ -58,6 +58,8 @@ source_url <- function(url, ..., sha1 = NULL) {
     }
   }
 
+  check_dots_used()
+
   source(temp_file, ...)
 }
 
@@ -119,6 +121,9 @@ source_gist <- function(id, ..., filename = NULL, sha1 = NULL, quiet = FALSE) {
   }
 
   if (!quiet) message("Sourcing ", url)
+
+  check_dots_used()
+
   source_url(url, ..., sha1 = sha1)
 }
 

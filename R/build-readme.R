@@ -36,6 +36,8 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
 
   message("Building ", pkg$package, " readme")
 
+  check_dots_used()
+
   output <- callr::r(build,
     args = list(pkg_path = pkg$path, readme_path = readme_path, ... = ..., quiet = quiet),
     show = TRUE, spinner = FALSE

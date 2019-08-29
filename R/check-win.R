@@ -19,6 +19,8 @@ NULL
 #' @describeIn check_win Check package on the development version of R.
 #' @export
 check_win_devel <- function(pkg = ".", args = NULL, manual = TRUE, quiet = FALSE, ...) {
+  check_dots_used()
+
   check_win(
     pkg = pkg, version = "R-devel", args = args, manual = manual,
     quiet = quiet, ...
@@ -28,6 +30,8 @@ check_win_devel <- function(pkg = ".", args = NULL, manual = TRUE, quiet = FALSE
 #' @describeIn check_win Check package on the release version of R.
 #' @export
 check_win_release <- function(pkg = ".", args = NULL, manual = TRUE, quiet = FALSE, ...) {
+  check_dots_used()
+
   check_win(
     pkg = pkg, version = "R-release", args = args, manual = manual,
     quiet = quiet, ...
@@ -37,6 +41,8 @@ check_win_release <- function(pkg = ".", args = NULL, manual = TRUE, quiet = FAL
 #' @describeIn check_win Check package on the previous major release version of R.
 #' @export
 check_win_oldrelease <- function(pkg = ".", args = NULL, manual = TRUE, quiet = FALSE, ...) {
+  check_dots_used()
+
   check_win(
     pkg = pkg, version = "R-oldrelease", args = args, manual = manual,
     quiet = quiet, ...

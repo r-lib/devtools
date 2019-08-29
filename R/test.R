@@ -66,6 +66,8 @@ test <- function(pkg = ".", filter = NULL, ...) {
     testthat_args <- c(testthat_args, load_helpers = FALSE)
   }
 
+  check_dots_used()
+
   withr::with_options(
     c(useFancyQuotes = FALSE),
     withr::with_envvar(
@@ -86,6 +88,8 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   check_suggested("covr")
 
   save_all()
+
+  check_dots_used()
 
   withr::with_envvar(
     c(r_env_vars(),
@@ -151,7 +155,6 @@ src_ext <- c("c", "cc", "cpp", "cxx", "h", "hpp", "hxx")
 #' @export
 #' @rdname test
 test_file <- function(file = find_active_file(), ...) {
-
   ext <- tolower(tools::file_ext(file))
   valid_files <- ext %in% c("r", src_ext)
   if (any(!valid_files)) {
@@ -173,6 +176,8 @@ test_file <- function(file = find_active_file(), ...) {
     basename(tools::file_path_sans_ext(test_files)))
 
   regex <- paste0("^", escape_special_regex(test_files), "$", collapse = "|")
+
+  check_dots_used()
 
   test(filter = regex, ...)
 }
@@ -246,6 +251,8 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
   pkg <- as.package(dirname(file)[[1]])
 
   env <- load_all(pkg$path, quiet = TRUE)$env
+
+  check_dots_used()
 
   withr::with_envvar(
     c(r_env_vars(),

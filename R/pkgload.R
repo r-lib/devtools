@@ -3,12 +3,13 @@
 #' @export
 load_all <- function(path = ".", reset = TRUE, recompile = FALSE,
                      export_all = TRUE, helpers = TRUE, quiet = FALSE, ...) {
-
   if (inherits(path, "package")) {
     path <- path$path
   }
 
   save_all()
+
+  check_dots_used()
 
   pkgload::load_all(
     path = path, reset = reset, recompile = recompile,

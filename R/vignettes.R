@@ -22,6 +22,7 @@
 #'   <https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown>.
 #' @inheritParams tools::buildVignettes
 #' @inheritParams remotes::install_deps
+#' @importFrom stats update
 #' @keywords programming
 #' @seealso [clean_vignettes()] to remove the pdfs in
 #'   \file{doc} created from vignettes

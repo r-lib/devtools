@@ -99,6 +99,8 @@ check <- function(pkg = ".",
     show_env_vars(pkgbuild::compiler_flags(FALSE))
   }
 
+  check_dots_used()
+
   withr::with_envvar(pkgbuild::compiler_flags(FALSE), action = "prefix", {
     built_path <- pkgbuild::build(
       pkg$path,

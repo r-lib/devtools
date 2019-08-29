@@ -19,5 +19,8 @@ lint <- function(pkg = ".", cache = TRUE, ...) {
   pkg <- as.package(pkg)
 
   message("Linting ", pkg$package, appendLF = FALSE)
+
+  check_dots_used()
+
   lintr::lint_package(pkg$path, cache = cache, ...)
 }

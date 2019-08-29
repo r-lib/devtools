@@ -12,21 +12,8 @@
 \alias{has_devel}
 \alias{find_rtools}
 \alias{unload}
-\alias{install_bioc}
-\alias{install_bitbucket}
-\alias{install_cran}
-\alias{install_dev}
-\alias{install_git}
-\alias{install_github}
 \alias{github_pull}
 \alias{github_release}
-\alias{install_gitlab}
-\alias{install_local}
-\alias{install_svn}
-\alias{install_url}
-\alias{install_version}
-\alias{update_packages}
-\alias{dev_package_deps}
 \alias{session_info}
 \alias{package_info}
 \title{Objects exported from other packages}
@@ -40,7 +27,7 @@ below to see their documentation.
 
   \item{pkgload}{\code{\link[pkgload]{inst}}, \code{\link[pkgload]{parse_deps}}, \code{\link[pkgload]{check_dep_version}}, \code{\link[pkgload]{unload}}}
 
-  \item{remotes}{\code{\link[remotes]{install_bioc}}, \code{\link[remotes]{install_bitbucket}}, \code{\link[remotes]{install_cran}}, \code{\link[remotes]{install_dev}}, \code{\link[remotes]{install_git}}, \code{\link[remotes]{install_github}}, \code{\link[remotes]{github_pull}}, \code{\link[remotes]{github_release}}, \code{\link[remotes]{install_gitlab}}, \code{\link[remotes]{install_local}}, \code{\link[remotes]{install_svn}}, \code{\link[remotes]{install_url}}, \code{\link[remotes]{install_version}}, \code{\link[remotes]{update_packages}}, \code{\link[remotes]{dev_package_deps}}}
+  \item{remotes}{\code{\link[remotes]{github_pull}}, \code{\link[remotes]{github_release}}}
 
   \item{sessioninfo}{\code{\link[sessioninfo]{session_info}}, \code{\link[sessioninfo]{package_info}}}
 }}

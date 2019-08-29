@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* All functions taking `...` now use the ellipsis package. This catches errors
+  when arguments are misspelled or incorrectly specified (#2016)
+
 * `build_vignettes()` now correctly installs the vignette builder if it is not
   already installed (#2089).
 

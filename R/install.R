@@ -76,6 +76,8 @@ install <-
     }
     opts <- c(opts, args)
 
+    check_dots_used()
+
     remotes::install_deps(pkg$path,
       build = build, build_opts = build_opts,
       INSTALL_opts = opts, dependencies = dependencies, quiet = quiet,
@@ -117,6 +119,8 @@ install_deps <- function(pkg = ".",
                          ...) {
   pkg <- as.package(pkg)
 
+  check_dots_used()
+
   remotes::install_deps(pkg$path,
     dependencies = dependencies,
     repos = repos,
@@ -143,6 +147,8 @@ install_dev_deps <- function(pkg = ".",
   remotes::update_packages("roxygen2")
 
   pkg <- as.package(pkg)
+
+  check_dots_used()
 
   remotes::install_deps(pkg$path, ...,
     dependencies = TRUE, upgrade = upgrade

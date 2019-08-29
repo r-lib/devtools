@@ -14,6 +14,8 @@ show_news <- function(pkg = ".", latest = TRUE, ...) {
     stop("No NEWS found", call. = FALSE)
   }
 
+  check_dots_used()
+
   out <- utils::news(..., db = ("tools" %:::% ".news_reader_default")(news_path))
   if (latest) {
     ver <- numeric_version(out$Version)
