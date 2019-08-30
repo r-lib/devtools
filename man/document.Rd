@@ -4,7 +4,7 @@
 \alias{document}
 \title{Use roxygen to document a package.}
 \usage{
-document(pkg = ".", roclets = NULL)
+document(pkg = ".", roclets = NULL, quiet = FALSE)
 }
 \arguments{
 \item{pkg}{package description, can be path or package name.  See
@@ -14,6 +14,8 @@ document(pkg = ".", roclets = NULL)
 This defaults to \code{NULL}, which will use the \code{roclets} fields in
 the list provided in the \code{Roxygen} DESCRIPTION field. If none are
 specified, defaults to \code{c("collate", "namespace", "rd")}.}
+
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 }
 \description{
 This function is a wrapper for the \code{\link[roxygen2:roxygenize]{roxygen2::roxygenize()}}

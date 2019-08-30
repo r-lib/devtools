@@ -3,7 +3,7 @@
 NULL
 
 .rstudio_release <- function() {
-  url <- "http://s3.amazonaws.com/rstudio-server/current.ver"
+  url <- "http://s3.amazonaws.com/rstudio-desktop/current.ver"
   res <- readLines(url, warn = FALSE)
   if (length(res) != 1) {
     return(0)

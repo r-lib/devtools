@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `document()` gains a `quiet` parameter, to silence output and `check()` now
+  passes its quiet argument to it (#1986).
+
 * Add the DT package as a dependency, so that `test_coverage()` and
   `test_coverage_file()` work without having to install additional packages
   (#2085).

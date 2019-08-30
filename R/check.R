@@ -87,7 +87,7 @@ check <- function(pkg = ".",
     document <- !is.null(pkg$roxygennote)
   }
   if (document) {
-    document(pkg)
+    document(pkg, quiet = quiet)
   }
 
   if (!quiet) {
