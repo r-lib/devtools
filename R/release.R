@@ -165,28 +165,6 @@ find_release_questions <- function(pkg = ".") {
   }
 }
 
-release_email <- function(name, new_pkg) {
-  paste(
-    "Dear CRAN maintainers,\n",
-    "\n",
-    if (new_pkg) {
-      paste("I have uploaded a new package, ", name, ", to CRAN. ",
-        "I have read and agree to the CRAN policies.\n",
-        sep = ""
-      )
-    } else {
-      paste("I have just uploaded a new version of ", name, " to CRAN.\n",
-        sep = ""
-      )
-    },
-    "\n",
-    "Thanks!\n",
-    "\n",
-    getOption("devtools.name"), "\n",
-    sep = ""
-  )
-}
-
 yesno <- function(...) {
   yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "Of course", "Absolutely")
   nos <- c("No way", "Not yet", "I forget", "No", "Nope", "Uhhhh... Maybe?")

@@ -48,8 +48,7 @@ NULL
 
 devtools_default_options <- list(
   devtools.path = "~/R-dev",
-  devtools.install.args = "",
-  devtools.name = "Your name goes here"
+  devtools.install.args = ""
 )
 
 .onLoad <- function(libname, pkgname) {
