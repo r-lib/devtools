@@ -95,4 +95,4 @@ update_packages <- with_ellipsis(remotes::update_packages)
 #' @importFrom remotes dev_package_deps
 #' @rdname remote-reexports
 #' @export
-dev_packge_deps <- with_ellipsis(remotes::dev_package_deps)
+dev_package_deps <- with_ellipsis(remotes::dev_package_deps)

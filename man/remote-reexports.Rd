@@ -14,7 +14,7 @@
 \alias{install_url}
 \alias{install_version}
 \alias{update_packages}
-\alias{dev_packge_deps}
+\alias{dev_package_deps}
 \title{Functions re-exported from the remotes package}
 \usage{
 install_bioc(repo, mirror = getOption("BioC_git",
@@ -107,7 +107,7 @@ update_packages(packages = TRUE, dependencies = NA,
   build_vignettes = FALSE, repos = getOption("repos"),
   type = getOption("pkgType"), ...)
 
-dev_packge_deps(pkgdir = ".", dependencies = NA,
+dev_package_deps(pkgdir = ".", dependencies = NA,
   repos = getOption("repos"), type = getOption("pkgType"))
 }
 \description{
