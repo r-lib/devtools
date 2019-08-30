@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `release()` now works without error when `options("repos")` is unnamed (#1956).
+
 * `document()` gains a `quiet` parameter, to silence output and `check()` now
   passes its quiet argument to it (#1986).
 

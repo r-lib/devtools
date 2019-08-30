@@ -91,7 +91,7 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
         cat_rule()
       }
       cran_url <- paste0(
-        getOption("repos")[["CRAN"]], "/web/checks/check_results_",
+        cran_mirror(), "/web/checks/check_results_",
         pkg$package, ".html"
       )
       if (yesno(
