@@ -82,6 +82,8 @@ test <- function(pkg = ".", filter = NULL, ...) {
 #' @param show_report Show the test coverage report.
 #' @export
 #' @rdname test
+#' @importFrom DT datatable
+# we now depend on DT in devtools so DT is installed when users call test_coverage
 test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   pkg <- as.package(pkg)
 

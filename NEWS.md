@@ -1,5 +1,9 @@
 # devtools (development version)
 
+* Add the DT package as a dependency, so that `test_coverage()` and
+  `test_coverage_file()` work without having to install additional packages
+  (#2085).
+
 * All functions taking `...` now use the ellipsis package. This catches errors
   when arguments are misspelled or incorrectly specified (#2016)
 
