@@ -87,8 +87,8 @@ bioc_packages <- memoise::memoise(
 )
 
 packages <- function() {
-  cran <- cran_packages()
   bioc <- bioc_packages()
+  cran <- cran_packages()
   cols <- intersect(colnames(cran), colnames(bioc))
   rbind(cran[, cols], bioc[, cols])
 }
