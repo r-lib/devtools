@@ -148,7 +148,7 @@ function from the roxygen2 package. See the documentation and vignettes of
 that package to learn how to use roxygen.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>document</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>roclets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>document</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>roclets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,6 +164,10 @@ that package to learn how to use roxygen.</p>
 This defaults to <code>NULL</code>, which will use the <code>roclets</code> fields in
 the list provided in the <code>Roxygen</code> DESCRIPTION field. If none are
 specified, defaults to <code><a href='https://www.rdocumentation.org/packages/base/topics/c'>c("collate", "namespace", "rd")</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>quiet</th>
+      <td><p>if <code>TRUE</code> suppresses output from this function.</p></td>
     </tr>
     </table>
 
