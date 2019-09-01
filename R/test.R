@@ -56,9 +56,13 @@ test <- function(pkg = ".", filter = NULL, ...) {
   Sys.sleep(0.05)
   utils::flush.console() # Avoid misordered output in RStudio
 
+  # Be specific about the env used by testthat::test_dir() and the
+  # fact that devtools::test() is not expected to return a non-zero exit
+  # code if the tests breaks.
   env <- new.env(parent = ns_env)
+  stop_on_failure <- FALSE
 
-  testthat_args <- list(test_path, filter = filter, env = env, ... = ...)
+  testthat_args <- list(test_path, filter = filter, env = env, stop_on_failure = stop_on_failure, ... = ...)
   if (packageVersion("testthat") >= "1.0.2.9000") { # 2.0.0
     testthat_args <- c(testthat_args, load_helpers = FALSE)
   } else if (packageVersion("testthat") > "1.0.2") {
