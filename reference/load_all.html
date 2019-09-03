@@ -8,6 +8,13 @@
 
 <title>Load complete package. — load_all • devtools</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -18,13 +25,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -61,6 +70,7 @@ when a package is installed and loaded with library()." />
 
   gtag('config', 'UA-115082821-1');
 </script>
+
 
   </head>
 
@@ -120,7 +130,7 @@ when a package is installed and loaded with library()." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/devtools">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -131,6 +141,7 @@ when a package is installed and loaded with library()." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -143,7 +154,7 @@ when a package is installed and loaded with library()." />
 
     <div class="ref-description">
     <p><code>load_all</code> loads a package. It roughly simulates what happens
-when a package is installed and loaded with <code><a href='https://www.rdocumentation.org/packages/base/topics/library'>library()</a></code>.</p>
+when a package is installed and loaded with <code><a href='https://rdrr.io/r/base/library.html'>library()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>load_all</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>reset</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>recompile</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -160,14 +171,14 @@ when a package is installed and loaded with <code><a href='https://www.rdocument
       <th>reset</th>
       <td><p>clear package environment and reset file cache before loading
 any pieces of the package. This is equivalent to running
-<code><a href='https://www.rdocumentation.org/packages/pkgload/topics/unload'>unload()</a></code> and is the default. Use <code>reset = FALSE</code> may be
+<code><a href='https://rdrr.io/pkg/pkgload/man/unload.html'>unload()</a></code> and is the default. Use <code>reset = FALSE</code> may be
 faster for large code bases, but is a significantly less accurate
 approximation.</p></td>
     </tr>
     <tr>
       <th>recompile</th>
       <td><p>DEPRECATED. force a recompile of DLL from source code, if
-present. This is equivalent to running <code><a href='https://www.rdocumentation.org/packages/pkgbuild/topics/clean_dll'>pkgbuild::clean_dll()</a></code> before
+present. This is equivalent to running <code><a href='https://rdrr.io/pkg/pkgbuild/man/clean_dll.html'>pkgbuild::clean_dll()</a></code> before
 <code>load_all</code></p></td>
     </tr>
     <tr>
@@ -186,7 +197,7 @@ in the NAMESPACE file.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to <code><a href='https://www.rdocumentation.org/packages/pkgload/topics/load_all'>pkgload::load_all()</a></code>.</p></td>
+      <td><p>Additional arguments passed to <code><a href='https://rdrr.io/pkg/pkgload/man/load_all.html'>pkgload::load_all()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -202,17 +213,20 @@ below and <code>load_code()</code> for more details.</p></li>
 <li><p>Compiles any C, C++, or Fortran code in the <code>src/</code> directory
 and connects the generated DLL into R. See <code>compile_dll()</code>
 for more details.</p></li>
-<li><p>Runs <code><a href='https://www.rdocumentation.org/packages/base/topics/ns-hooks'>.onAttach()</a></code>, <code><a href='https://www.rdocumentation.org/packages/base/topics/ns-hooks'>.onLoad()</a></code> and <code><a href='https://www.rdocumentation.org/packages/base/topics/ns-hooks'>.onUnload()</a></code>
+<li><p>Runs <code><a href='https://rdrr.io/r/base/ns-hooks.html'>.onAttach()</a></code>, <code><a href='https://rdrr.io/r/base/ns-hooks.html'>.onLoad()</a></code> and <code><a href='https://rdrr.io/r/base/ns-hooks.html'>.onUnload()</a></code>
 functions at the correct times.</p></li>
 <li><p>If you use <span class="pkg">testthat</span>, will load all test helpers so
 you can access them interactively. devtools sets the
 <code>DEVTOOLS_LOAD</code> environment variable to <code>"true"</code> to
 let you check whether the helpers are run during package loading.</p></li>
 </ul>
+
     <h2 class="hasAnchor" id="namespaces"><a class="anchor" href="#namespaces"></a>Namespaces</h2>
 
     
-    <p>The namespace environment <code>&lt;namespace:pkgname&gt;</code>, is a child of
+
+
+<p>The namespace environment <code>&lt;namespace:pkgname&gt;</code>, is a child of
 the imports environment, which has the name attribute
 <code>imports:pkgname</code>. It is in turn is a child of
 <code>&lt;namespace:base&gt;</code>, which is a child of the global environment.
@@ -227,20 +241,22 @@ environment. This is useful during development because it makes all
 objects easy to access.</p>
 <p>To export only the objects listed as exports, use
 <code>export_all=FALSE</code>. This more closely simulates behavior when
-loading an installed package with <code><a href='https://www.rdocumentation.org/packages/base/topics/library'>library()</a></code>, and can be
+loading an installed package with <code><a href='https://rdrr.io/r/base/library.html'>library()</a></code>, and can be
 useful for checking for missing exports.</p>
     <h2 class="hasAnchor" id="shim-files"><a class="anchor" href="#shim-files"></a>Shim files</h2>
 
     
-    <p><code>load_all</code> also inserts shim functions into the imports environment
+
+
+<p><code>load_all</code> also inserts shim functions into the imports environment
 of the loaded package. It presently adds a replacement version of
 <code>system.file</code> which returns different paths from
-<code><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>base::system.file</a></code>. This is needed because installed and uninstalled
+<code><a href='https://rdrr.io/r/base/system.file.html'>base::system.file</a></code>. This is needed because installed and uninstalled
 package sources have different directory structures. Note that this is not
-a perfect replacement for <code><a href='https://www.rdocumentation.org/packages/base/topics/system.file'>base::system.file</a></code>.</p>
+a perfect replacement for <code><a href='https://rdrr.io/r/base/system.file.html'>base::system.file</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Load the package in the current directory</span>
 <span class='fu'>load_all</span>(<span class='st'>"./"</span>)
 
@@ -253,7 +269,7 @@ a perfect replacement for <code><a href='https://www.rdocumentation.org/packages
 <span class='co'># With export_all=FALSE, only objects listed as exports in NAMESPACE</span>
 <span class='co'># are exported</span>
 <span class='fu'>load_all</span>(<span class='st'>"./"</span>, <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='co'># }</span></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -268,19 +284,23 @@ a perfect replacement for <code><a href='https://www.rdocumentation.org/packages
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by <a href='http://hadley.nz'>Hadley Wickham</a>, Jim Hester, Winston Chang.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

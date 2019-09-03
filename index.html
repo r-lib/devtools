@@ -6,9 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tools to Make Developing R Packages Easier • devtools</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Tools to Make Developing R Packages Easier">
 <meta property="og:description" content="Collection of package development tools.">
 <meta property="og:image" content="/logo.png">
@@ -79,7 +86,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/r-lib/devtools">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -92,6 +99,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="contents col-md-9">
 <div id="devtools" class="section level1">
@@ -104,11 +112,11 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Install devtools from CRAN</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Or the development version from GitHub:</span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/remote-reexports">install_github</a></span>(<span class="st">"r-lib/devtools"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-6" data-line-number="6">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"r-lib/devtools"</span>)</a></code></pre></div>
 </div>
 <div id="cheatsheet" class="section level2">
 <h2 class="hasAnchor">
@@ -133,7 +141,7 @@
 <h3 class="hasAnchor">
 <a href="#building-and-installing" class="anchor"></a>Building and installing:</h3>
 <ul>
-<li><p><code><a href="reference/install.html">install()</a></code> reinstalls the package, detaches the currently loaded version then reloads the new version with <code><a href="https://www.rdocumentation.org/packages/base/topics/library">library()</a></code>. Reloading a package is not guaranteed to work: see the documentation for <code><a href="https://www.rdocumentation.org/packages/pkgload/topics/unload">unload()</a></code> for caveats.</p></li>
+<li><p><code><a href="reference/install.html">install()</a></code> reinstalls the package, detaches the currently loaded version then reloads the new version with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. Reloading a package is not guaranteed to work: see the documentation for <code><a href="https://rdrr.io/pkg/pkgload/man/unload.html">unload()</a></code> for caveats.</p></li>
 <li><p><code><a href="reference/build.html">build()</a></code> builds a package file from package sources. You can use it to build a binary version of your package.</p></li>
 <li>
 <code>install_*</code> functions install an R package:
@@ -204,7 +212,7 @@
 <li><p><a href="https://github.com/r-lib/pkgload">pkgload</a>: Simulating package loading (i.e. <code><a href="reference/load_all.html">load_all()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/rcmdcheck">rcmdcheck</a>: Running R CMD check and reporting the results (i.e. <code><a href="reference/check.html">check()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/revdepcheck">revdepcheck</a>: Running R CMD check on all reverse dependencies, and figuring out what’s changed since the last CRAN release (i.e. <code>revdep_check()</code>).</p></li>
-<li><p><a href="https://github.com/r-lib/sessioninfo">sessioninfo</a>: R session info (i.e. <code><a href="https://www.rdocumentation.org/packages/sessioninfo/topics/session_info">session_info()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/sessioninfo">sessioninfo</a>: R session info (i.e. <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/usethis">usethis</a>: Automating package setup (i.e. <code>use_test()</code>).</p></li>
 </ul>
 <p>Generally, you should not need to worry about these different packages, because devtools installs them all automatically. You will need to care, however, if you’re filing a bug because reporting it at the correct place will lead to a speedier resolution.</p>
@@ -235,6 +243,13 @@
 <li>GPL (&gt;= 2)</li>
 </ul>
 </div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
@@ -258,17 +273,20 @@
 </div>
 </div>
 
+
       <footer><div class="copyright">
   <p>Developed by <a href="http://hadley.nz">Hadley Wickham</a>, Jim Hester, Winston Chang.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
