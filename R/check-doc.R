@@ -43,7 +43,10 @@ check_man <- function(pkg = ".") {
 }
 
 man_message <- function(x) {
-  if ("bad" %in% names(x) && length(x$bad) == 0) {
+  if (inherits(x, "undoc") && length(x$code) == 0) {
+    # Returned by tools::undoc()
+    TRUE
+  } else if ("bad" %in% names(x) && length(x$bad) == 0) {
     # Returned by check_Rd_xrefs()
     TRUE
   } else if (length(x) == 0) {

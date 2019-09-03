@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `check_man()` now succeeds when `tools::undoc()` returns empty results (#1944).
+
 * `check_win_*()` functions gain a `email` argument, so temporarily change the
   email the check results will be sent to (#1723).
 
