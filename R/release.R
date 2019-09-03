@@ -287,7 +287,9 @@ submit_cran <- function(pkg = ".", args = NULL) {
 
   upload_cran(pkg, built_path)
 
-  flag_release(pkg)
+  usethis::with_project(pkg$path,
+    flag_release(pkg)
+  )
 }
 
 build_cran <- function(pkg, args) {
