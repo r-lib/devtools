@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `dr_devtools()` now uses the same endpoint to detect the current RStudio
+  version as the IDE (#2050).
+
 * `release()` now works again when `pkg` is not the current working directory
   (#1974).
 

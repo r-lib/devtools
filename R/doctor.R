@@ -2,16 +2,39 @@
 #' @importFrom memoise memoise
 NULL
 
-.rstudio_release <- function() {
-  url <- "http://s3.amazonaws.com/rstudio-desktop/current.ver"
-  res <- readLines(url, warn = FALSE)
-  if (length(res) != 1) {
-    return(0)
-  }
-  numeric_version(res)
-}
+check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]), version = rstudioapi::getVersion(), in_rstudio = rstudioapi::isAvailable()) {
 
-rstudio_release <- memoise::memoise(.rstudio_release)
+  if (!in_rstudio) {
+    return()
+  }
+
+  url <- sprintf("https://www.rstudio.org/links/check_for_update?version=%s&os=%s&format=kvp", version, os, "kvp")
+
+  tmp <- tempfile()
+  on.exit(unlink(tmp))
+  utils::download.file(url, tmp, quiet = TRUE)
+  result <- readLines(tmp, warn = FALSE)
+
+  result <- strsplit(result, "&")[[1]]
+
+  result <- strsplit(result, "=")
+
+  # If no values then we are current
+  if (length(result[[1]]) == 1) {
+    return()
+  }
+
+  nms <- vcapply(result, `[[`, 1)
+  values <- vcapply(result, function(x) URLdecode(x[[2]]))
+
+  result <- stats::setNames(values, nms)
+
+  if (!nzchar(result[["update-version"]])) {
+    return()
+  }
+
+  sprintf("* RStudio is out of date, %s. Download at: %s", result[["update-message"]], result[["update-url"]])
+}
 
 .r_release <- function() {
   check_suggested("rversions")
@@ -51,16 +74,7 @@ dr_devtools <- function() {
     )
   }
 
-  if (rstudioapi::isAvailable()) {
-    rel <- rstudio_release()
-    cur <- rstudioapi::getVersion()
-
-    if (cur < rel) {
-      msg[["rstudio"]] <- paste0(
-        "* RStudio is out of date (", cur, " vs ", rel, ")"
-      )
-    }
-  }
+  msg[["rstudio"]] <- check_for_rstudio_updates("mac", "1.0.0", TRUE)
 
   doctor("devtools", msg)
 }

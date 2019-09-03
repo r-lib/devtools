@@ -174,3 +174,7 @@ escape_special_regex <- function(x) {
 has_dev_remotes <- function(pkg) {
   !is.null(pkg[["remotes"]])
 }
+
+vcapply <- function(x, FUN, ...) {
+  vapply(x, FUN, FUN.VALUE = character(1), ...)
+}
