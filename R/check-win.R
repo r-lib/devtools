@@ -10,6 +10,8 @@
 #' @param pkg package description, can be path or package name.  See
 #'   [as.package()] for more information
 #' @inheritParams pkgbuild::build
+#' @param email An alternative email to use, default `NULL` uses the package
+#'   Maintainer's email.
 #' @param quiet If `TRUE`, suppresses output.
 #' @param ... Additional arguments passed to [pkgbuild::build()].
 #' @family build functions
@@ -18,40 +20,52 @@ NULL
 
 #' @describeIn check_win Check package on the development version of R.
 #' @export
-check_win_devel <- function(pkg = ".", args = NULL, manual = TRUE, quiet = FALSE, ...) {
+check_win_devel <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
   check_dots_used()
 
   check_win(
     pkg = pkg, version = "R-devel", args = args, manual = manual,
-    quiet = quiet, ...
+    email = email, quiet = quiet, ...
   )
 }
 
 #' @describeIn check_win Check package on the release version of R.
 #' @export
-check_win_release <- function(pkg = ".", args = NULL, manual = TRUE, quiet = FALSE, ...) {
+check_win_release <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
   check_dots_used()
 
   check_win(
     pkg = pkg, version = "R-release", args = args, manual = manual,
-    quiet = quiet, ...
+    email = email, quiet = quiet, ...
   )
 }
 
 #' @describeIn check_win Check package on the previous major release version of R.
 #' @export
-check_win_oldrelease <- function(pkg = ".", args = NULL, manual = TRUE, quiet = FALSE, ...) {
+check_win_oldrelease <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
   check_dots_used()
 
   check_win(
     pkg = pkg, version = "R-oldrelease", args = args, manual = manual,
-    quiet = quiet, ...
+    email = email, quiet = quiet, ...
   )
 }
 
 check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelease"),
-                      args = NULL, manual = TRUE, quiet = FALSE, ...) {
+                      args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
   pkg <- as.package(pkg)
+
+  if (!is.null(email)) {
+    desc_file <- file.path(pkg$path, "DESCRIPTION")
+    backup <- tempfile()
+    file.copy(desc_file, backup)
+    on.exit(file.rename(backup, desc_file), add = TRUE)
+
+    change_maintainer_email(desc_file, email)
+
+    pkg <- as.package(pkg$path)
+  }
+
   version <- match.arg(version, several.ok = TRUE)
 
   if (!quiet) {
@@ -87,4 +101,22 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   }
 
   invisible()
+}
+
+change_maintainer_email <- function(desc, email) {
+  desc <- desc::desc(file = desc)
+
+  if (!desc$has_fields("Authors@R")) {
+    stop("DESCRIPTION must use `Authors@R` field to change the maintainer email", call. = FALSE)
+  }
+  aut <- desc$get_authors()
+  roles <- aut$role
+  ## Broken person() API, vector for 1 author, list otherwise...
+  if (!is.list(roles)) roles <- list(roles)
+  is_maintainer <- vapply(roles, function(r) all("cre" %in% r), logical(1))
+  aut[is_maintainer]$email <- email
+
+  desc$set_authors(aut)
+
+  desc$write()
 }

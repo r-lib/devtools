@@ -19,6 +19,7 @@ Depends:
 Imports: 
     callr,
     cli,
+    desc,
     digest,
     DT,
     ellipsis,

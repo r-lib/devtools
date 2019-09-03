@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `check_win_*()` functions gain a `email` argument, so temporarily change the
+  email the check results will be sent to (#1723).
+
 * `release()` now works without error when `options("repos")` is unnamed (#1956).
 
 * `document()` gains a `quiet` parameter, to silence output and `check()` now
