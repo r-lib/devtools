@@ -1,4 +1,6 @@
 test_that("check_for_rstudio_updates", {
+  skip_on_cran()
+
   # returns nothing rstudio not available
   expect_null(check_for_rstudio_updates("mac", "1.0.0", FALSE))
 

@@ -2,9 +2,9 @@
 
 S3method(format,check_results)
 S3method(print,check_results)
+S3method(print,dev_sitrep)
 S3method(print,doctor)
 S3method(print,maintainers)
-S3method(print,pkg_sitrep)
 export(as.package)
 export(bash)
 export(build)
