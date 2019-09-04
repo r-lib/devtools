@@ -183,12 +183,16 @@ hd_line <- function(name) {
   cat_rule(crayon::bold(name))
 }
 
-kv_line <- function (key, value) {
+kv_line <- function (key, value, path = FALSE) {
   if (is.null(value)) {
     value <- crayon::silver("<unset>")
   }
   else {
-    value <- ui_value(value)
+    if (path) {
+      value <- ui_path(value, base = NA)
+    } else {
+      value <- ui_value(value)
+    }
   }
   cat_line("* ", key, ": ", value)
 }

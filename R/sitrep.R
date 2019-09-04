@@ -63,7 +63,7 @@ r_release <- memoise::memoise(.r_release)
 #'   everything should be ready for package development.
 #'
 #' @return A named list, with S3 class `dev_sitrep` (for printing purposes).
-#' @importFrom usethis ui_code ui_field ui_todo ui_value ui_done
+#' @importFrom usethis ui_code ui_field ui_todo ui_value ui_done ui_path
 #' @export
 #' @examples
 #' \dontrun{
@@ -72,14 +72,20 @@ r_release <- memoise::memoise(.r_release)
 dev_sitrep <- function(pkg = ".", debug = FALSE) {
   pkg <- as.package(pkg)
 
+  has_build_tools <- !is_windows || pkgbuild::has_build_tools(debug = debug)
+
   structure(
     list(
       pkg = pkg,
       r_version = getRversion(),
+      r_path = normalizePath(R.home()),
       r_release_version = r_release(),
-      has_build_tools = !is_windows || pkgbuild::has_build_tools(debug = debug),
+      has_build_tools = has_build_tools,
+      rtools_path = if (has_build_tools) pkgbuild::rtools_path(),
+      devtools_version = packageVersion("devtools"),
       devtools_deps = remotes::package_deps("devtools", dependencies = NA),
       pkg_deps = remotes::dev_package_deps(pkg$path, dependencies = TRUE),
+      rstudio_version = if (rstudioapi::isAvailable()) rstudioapi::getVersion(),
       rstudio_msg = check_for_rstudio_updates()
     ),
     class = "dev_sitrep"
@@ -92,11 +98,11 @@ print.dev_sitrep <- function(x, ...) {
   all_ok <- TRUE
 
   hd_line("R")
-  kv_line("R version", x$r_version)
-  kv_line("R path", R.home())
+  kv_line("version", x$r_version)
+  kv_line("path", x$r_path, path = TRUE)
   if (x$r_version < x$r_release_version) {
     ui_todo('
-      {ui_field("R")} is out of date ({ui_value(getRversion())} vs {ui_value(r_release())})
+      {ui_field("R")} is out of date ({ui_value(x$r_version} vs {ui_value(x$r_release_version)})
       ')
       all_ok <- FALSE
   }
@@ -104,7 +110,7 @@ print.dev_sitrep <- function(x, ...) {
   if (is_windows) {
     hd_line("Rtools")
     if (x$has_build_tools) {
-      kv_line("Rtools path", pkgbuild::rtools_path())
+      kv_line("path", x$rtools_path, path = TRUE)
     } else {
       ui_todo('
         {ui_field("RTools")} is not installed:
@@ -114,9 +120,9 @@ print.dev_sitrep <- function(x, ...) {
     all_ok <- FALSE
   }
 
-  if (rstudioapi::isAvailable()) {
+  if (!is.null(x$rstudio_version)) {
     hd_line("RStudio")
-    kv_line("RStudio version", rstudioapi::getVersion())
+    kv_line("version", x$rstudio_version)
 
     if (!is.null(x$rstudio_msg)) {
       ui_todo(x$rstudio_msg)
@@ -126,7 +132,7 @@ print.dev_sitrep <- function(x, ...) {
 
 
   hd_line("devtools")
-  kv_line("devtools version", packageVersion("devtools"))
+  kv_line("version", x$devtools_version)
 
   devtools_deps_old <- x$devtools_deps$diff < 0
   if (any(devtools_deps_old)) {
@@ -140,7 +146,7 @@ print.dev_sitrep <- function(x, ...) {
 
   hd_line("dev package")
   kv_line("package", x$pkg$package)
-  kv_line("path", x$pkg$path)
+  kv_line("path", x$pkg$path, path = TRUE)
 
   pkg_deps_old <- x$pkg_deps$diff < 0
   if (any(pkg_deps_old)) {
