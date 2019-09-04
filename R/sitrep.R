@@ -63,7 +63,7 @@ r_release <- memoise::memoise(.r_release)
 #'   everything should be ready for package development.
 #'
 #' @return A named list, with S3 class `dev_sitrep` (for printing purposes).
-#' @importFrom usethis ui_code ui_field ui_todo ui_value
+#' @importFrom usethis ui_code ui_field ui_todo ui_value ui_done
 #' @export
 #' @examples
 #' \dontrun{
@@ -88,22 +88,45 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
 
 #' @export
 print.dev_sitrep <- function(x, ...) {
+
+  all_ok <- TRUE
+
+  hd_line("R")
+  kv_line("R version", x$r_version)
+  kv_line("R path", R.home())
   if (x$r_version < x$r_release_version) {
     ui_todo('
       {ui_field("R")} is out of date ({ui_value(getRversion())} vs {ui_value(r_release())})
       ')
+      all_ok <- FALSE
   }
 
-  if (!is.null(x$rstudio_msg)) {
-    ui_todo(x$rstudio_msg)
-  }
-
-  if (!x$has_build_tools) {
+  if (is_windows) {
+    hd_line("Rtools")
+    if (x$has_build_tools) {
+      kv_line("Rtools path", pkgbuild::rtools_path())
+    } else {
       ui_todo('
         {ui_field("RTools")} is not installed:
         Download and install it from: {ui_field("https://cloud.r-project.org/bin/windows/Rtools/")}
         ')
+    }
+    all_ok <- FALSE
   }
+
+  if (rstudioapi::isAvailable()) {
+    hd_line("RStudio")
+    kv_line("RStudio version", rstudioapi::getVersion())
+
+    if (!is.null(x$rstudio_msg)) {
+      ui_todo(x$rstudio_msg)
+      all_ok <- FALSE
+    }
+  }
+
+
+  hd_line("devtools")
+  kv_line("devtools version", packageVersion("devtools"))
 
   devtools_deps_old <- x$devtools_deps$diff < 0
   if (any(devtools_deps_old)) {
@@ -112,7 +135,12 @@ print.dev_sitrep <- function(x, ...) {
       {paste(ui_value(x$devtools_deps$package[devtools_deps_old]), collapse = ", ")}
       Update them with {ui_code("devtools::update_packages(\\"devtools\\")")}
       ')
+      all_ok <- FALSE
   }
+
+  hd_line("dev package")
+  kv_line("package", x$pkg$package)
+  kv_line("path", x$pkg$path)
 
   pkg_deps_old <- x$pkg_deps$diff < 0
   if (any(pkg_deps_old)) {
@@ -121,6 +149,13 @@ print.dev_sitrep <- function(x, ...) {
       {paste(ui_value(x$pkg_deps$package[pkg_deps_old]), collapse = ", ")}
       Update them with {ui_code("devtools::install_dev_deps()")}
       ')
+      all_ok <- FALSE
+  }
+
+  if (all_ok) {
+    ui_done("
+      All checks passed
+      ")
   }
 
   invisible(x)
