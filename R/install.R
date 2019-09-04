@@ -90,6 +90,10 @@ install <-
       install_path <- pkg$path
     }
 
+    if (is_loaded(pkg)) {
+      pkgload::unload(pkg$package)
+    }
+
     callr::rcmd("INSTALL", c(install_path, opts), echo = !quiet, show = !quiet)
 
     if (reload) {

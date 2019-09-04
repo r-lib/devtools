@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `install()` now explicitly unloads packages before trying to install a new
+  version (#2094).
+
 * `dr_devtools()` now uses the same endpoint to detect the current RStudio
   version as the IDE (#2050).
 
