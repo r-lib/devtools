@@ -94,7 +94,9 @@ install <-
       pkgload::unload(pkg$package)
     }
 
-    callr::rcmd("INSTALL", c(install_path, opts), echo = !quiet, show = !quiet)
+    pkgbuild::with_build_tools(required = FALSE,
+      callr::rcmd("INSTALL", c(install_path, opts), echo = !quiet, show = !quiet)
+    )
 
     if (reload) {
       reload(pkg, quiet = quiet)

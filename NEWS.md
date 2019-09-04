@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* All `install_*()` functions now attach build tools to the PATH, which makes them work on
+  Windows when RTools is not on the default PATH (#2093).
+
 * `install()` now explicitly unloads packages before trying to install a new
   version (#2094).
 
