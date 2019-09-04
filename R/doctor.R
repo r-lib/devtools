@@ -51,7 +51,7 @@ r_release <- memoise::memoise(.r_release)
 #'
 #' @template devtools
 #' @inheritParams pkgbuild::has_build_tools
-#' @description `pkg_sitrep()` reports
+#' @description `dev_sitrep()` reports
 #'   * If R is up to date
 #'   * If RStudio is up to date
 #'   * If compiler build tools are installed and available for use
@@ -62,14 +62,14 @@ r_release <- memoise::memoise(.r_release)
 #'   what's wrong or how to fix it. If this function returns no output
 #'   everything should be ready for package development.
 #'
-#' @return A named list, with S3 class `pkg_sitrep` (for printing purposes).
+#' @return A named list, with S3 class `dev_sitrep` (for printing purposes).
 #' @importFrom usethis ui_code ui_field ui_todo ui_value
 #' @export
 #' @examples
 #' \dontrun{
-#' pkg_sitrep()
+#' dev_sitrep()
 #' }
-pkg_sitrep <- function(pkg = ".", debug = FALSE) {
+dev_sitrep <- function(pkg = ".", debug = FALSE) {
   pkg <- as.package(pkg)
 
   structure(
@@ -82,12 +82,12 @@ pkg_sitrep <- function(pkg = ".", debug = FALSE) {
       pkg_deps = remotes::dev_package_deps(pkg$path, dependencies = TRUE),
       rstudio_msg = check_for_rstudio_updates()
     ),
-    class = "pkg_sitrep"
+    class = "dev_sitrep"
   )
 }
 
 #' @export
-print.pkg_sitrep <- function(x, ...) {
+print.dev_sitrep <- function(x, ...) {
   if (x$r_version < x$r_release_version) {
     ui_todo('
       {ui_field("R")} is out of date ({ui_value(getRversion())} vs {ui_value(r_release())})
@@ -129,8 +129,8 @@ print.pkg_sitrep <- function(x, ...) {
 #' @export
 #' @rdname devtools-deprecated
 dr_devtools <- function() {
-  .Deprecated("pkg_sitrep()", package = "devtools")
-  pkg_sitrep()
+  .Deprecated("dev_sitrep()", package = "devtools")
+  dev_sitrep()
 }
 
 #' @export

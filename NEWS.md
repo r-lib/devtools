@@ -1,6 +1,6 @@
 # devtools (development version)
 
-* New `pkg_sitrep()` function to return information about your development
+* New `dev_sitrep()` function to return information about your development
   environment and diagnose common problems. The former functions
   `dr_devtools()` and `dr_github()` have been deprecated. (#1970)
 
