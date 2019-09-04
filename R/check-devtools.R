@@ -3,8 +3,7 @@
 #' This function performs additional checks prior to release. It is called
 #' automatically by [release()].
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information.
+#' @template devtools
 #' @keywords internal
 #' @export
 release_checks <- function(pkg = ".", built_path = NULL) {

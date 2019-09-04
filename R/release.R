@@ -28,8 +28,7 @@
 #' Please forward me the email and your address, and I'll get a card in
 #' the mail.
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
+#' @template devtools
 #' @param check if `TRUE`, run checking, otherwise omit it.  This
 #'   is useful if you've just checked your package and you're ready to
 #'   release it.
@@ -268,8 +267,7 @@ cran_submission_url <- "http://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #' It's recommended that you use [release()] rather than this
 #' function as it performs more checks prior to submission.
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
+#' @template devtools
 #' @inheritParams release
 #' @export
 #' @keywords internal

@@ -6,8 +6,7 @@
 #'
 #' @export
 #' @rdname spell_check
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
+#' @template devtools
 #' @param vignettes also check all `rmd` and `rnw` files in the pkg `vignettes` folder
 #' @param use_wordlist ignore words in the package [WORDLIST][spelling::get_wordlist] file
 #' @inheritParams spelling::spell_check_package

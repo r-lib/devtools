@@ -7,8 +7,8 @@
 reload(pkg = ".", quiet = FALSE)
 }
 \arguments{
-\item{pkg}{package description, can be path or package name.  See
-\code{\link[=as.package]{as.package()}} for more information}
+\item{pkg}{The package to use, can be a file path to the package or a
+package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 }

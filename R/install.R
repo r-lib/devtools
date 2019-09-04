@@ -15,9 +15,8 @@
 #'
 #' To install a package in a non-default library, use [withr::with_libpaths()].
 #'
+#' @template devtools
 #' @inheritParams remotes::install_local
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
 #' @param reload if `TRUE` (the default), will automatically reload the
 #'   package after installing.
 #' @param quick if `TRUE` skips docs, multiple-architectures,

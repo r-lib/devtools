@@ -7,8 +7,8 @@
 missing_s3(pkg = ".")
 }
 \arguments{
-\item{pkg}{package description, can be path or package name.  See
-\code{\link[=as.package]{as.package()}} for more information}
+\item{pkg}{The package to use, can be a file path to the package or a
+package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 }
 \description{
 The method is heuristic - looking for objs with a period in their name.

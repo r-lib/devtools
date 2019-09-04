@@ -7,8 +7,8 @@
 release_checks(pkg = ".", built_path = NULL)
 }
 \arguments{
-\item{pkg}{package description, can be path or package name.  See
-\code{\link[=as.package]{as.package()}} for more information.}
+\item{pkg}{The package to use, can be a file path to the package or a
+package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 }
 \description{
 This function performs additional checks prior to release. It is called

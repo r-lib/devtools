@@ -1,7 +1,6 @@
 #' Show package news
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
+#' @template devtools
 #' @param latest if `TRUE`, only show the news for the most recent
 #'   version.
 #' @param ... other arguments passed on to `news`

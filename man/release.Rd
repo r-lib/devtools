@@ -7,8 +7,8 @@
 release(pkg = ".", check = FALSE, args = NULL)
 }
 \arguments{
-\item{pkg}{package description, can be path or package name.  See
-\code{\link[=as.package]{as.package()}} for more information}
+\item{pkg}{The package to use, can be a file path to the package or a
+package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
 \item{check}{if \code{TRUE}, run checking, otherwise omit it.  This
 is useful if you've just checked your package and you're ready to

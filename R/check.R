@@ -38,8 +38,7 @@
 #' }
 #'
 #' @return An object containing errors, warnings, and notes.
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
+#' @template devtools
 #' @param document If `NA` and the package uses roxygen2, will
 #'   rerun [document()] prior to checking. Use `TRUE`
 #'   and `FALSE` to override this default.

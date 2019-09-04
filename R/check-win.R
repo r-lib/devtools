@@ -7,8 +7,7 @@
 #' win-build also runs `R CMD check` on the package, so `check_win`
 #' is also useful to check that your package is ok on windows.
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
+#' @template devtools
 #' @inheritParams pkgbuild::build
 #' @param email An alternative email to use, default `NULL` uses the package
 #'   Maintainer's email.

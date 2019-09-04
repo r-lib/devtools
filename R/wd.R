@@ -1,7 +1,6 @@
 #' Set working directory.
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
+#' @template devtools
 #' @param path path within package. Leave empty to change working directory
 #'   to package directory.
 #' @export

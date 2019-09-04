@@ -1,4 +1,4 @@
-#' @param pkg Path to a package, or within a package.
+#' @template devtools
 #' @param path Path in which to produce package.  If `NULL`, defaults to
 #'   the parent directory of the package.
 #' @inherit pkgbuild::build

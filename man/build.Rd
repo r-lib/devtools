@@ -8,7 +8,8 @@ build(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
   manual = FALSE, args = NULL, quiet = FALSE, ...)
 }
 \arguments{
-\item{pkg}{Path to a package, or within a package.}
+\item{pkg}{The package to use, can be a file path to the package or a
+package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
 \item{path}{Path in which to produce package.  If \code{NULL}, defaults to
 the parent directory of the package.}

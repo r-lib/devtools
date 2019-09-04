@@ -5,8 +5,7 @@
 #' all because some tests require the package to be loaded, and the way
 #' they attempt to load the code conflicts with how devtools does it.
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
+#' @template devtools
 #' @return Nothing. This function is called purely for it's side effects: if
 #   no errors there will be no output.
 #' @export

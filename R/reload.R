@@ -6,8 +6,7 @@
 #' failure points. If in doubt, restart R and reload the package with
 #' [library()].
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
+#' @template devtools
 #' @param quiet if `TRUE` suppresses output from this function.
 #' @seealso [load_all()] to load a package for interactive development.
 #' @examples

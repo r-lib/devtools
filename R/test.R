@@ -9,8 +9,7 @@
 #'   shortcut for [covr::file_coverage()] and [covr::report()].
 #'
 #' @md
-#' @param pkg package description, can be path or package name. See
-#'   [as.package()] for more information
+#' @template devtools
 #' @param ... additional arguments passed to [testthat::test_dir()] and
 #'   [covr::package_coverage()]
 #' @param file One or more source or test files. If a source file the

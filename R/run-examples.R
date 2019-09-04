@@ -5,8 +5,7 @@
 #' restart the whole process.  This function makes it a little easier by
 #' making it possible to run all examples from an R function.
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
+#' @template devtools
 #' @param start Where to start running the examples: this can either be the
 #'   name of `Rd` file to start with (with or without extensions), or
 #'   a topic name. If omitted, will start with the (lexicographically) first

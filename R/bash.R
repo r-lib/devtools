@@ -1,7 +1,6 @@
 #' Open bash shell in package directory.
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
+#' @template devtools
 #' @export
 bash <- function(pkg = ".") {
   pkg <- as.package(pkg)

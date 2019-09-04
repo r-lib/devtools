@@ -8,8 +8,8 @@ uninstall(pkg = ".", unload = TRUE, quiet = FALSE,
   lib = .libPaths()[[1]])
 }
 \arguments{
-\item{pkg}{package description, can be path or package name.  See
-\code{\link[=as.package]{as.package()}} for more information}
+\item{pkg}{The package to use, can be a file path to the package or a
+package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
 \item{unload}{if \code{TRUE} (the default), will automatically unload the
 package prior to uninstalling.}

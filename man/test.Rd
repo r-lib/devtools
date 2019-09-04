@@ -20,8 +20,8 @@ test_coverage_file(file = find_active_file(), filter = TRUE,
   show_report = interactive(), ...)
 }
 \arguments{
-\item{pkg}{package description, can be path or package name. See
-\code{\link[=as.package]{as.package()}} for more information}
+\item{pkg}{The package to use, can be a file path to the package or a
+package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
 \item{filter}{If not \code{NULL}, only tests with file names matching this
 regular expression will be executed. Matching be performed on the file

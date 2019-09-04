@@ -4,8 +4,7 @@
 #' function from the roxygen2 package. See the documentation and vignettes of
 #' that package to learn how to use roxygen.
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information
+#' @template devtools
 #' @inheritParams roxygen2::roxygenise
 #' @param quiet if `TRUE` suppresses output from this function.
 #' @seealso [roxygen2::roxygenize()],

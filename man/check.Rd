@@ -18,8 +18,8 @@ check_built(path = NULL, cran = TRUE, remote = FALSE,
   "error", "warning", "note"))
 }
 \arguments{
-\item{pkg}{package description, can be path or package name.  See
-\code{\link[=as.package]{as.package()}} for more information}
+\item{pkg}{The package to use, can be a file path to the package or a
+package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
 \item{document}{If \code{NA} and the package uses roxygen2, will
 rerun \code{\link[=document]{document()}} prior to checking. Use \code{TRUE}

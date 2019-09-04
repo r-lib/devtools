@@ -1,7 +1,6 @@
 #' Create package pdf manual
 #'
-#' @param pkg package description, can be path or package name.  See
-#'   [as.package()] for more information.
+#' @template devtools
 #' @param path path in which to produce package manual.
 #'   If `NULL`, defaults to the parent directory of the package.
 #'
