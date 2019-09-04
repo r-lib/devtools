@@ -8,6 +8,14 @@ with_ellipsis <- function(fun) {
   fun
 }
 
+with_pkgbuild_build_tools <- function(fun) {
+  b <- body(fun)
+  pkgbuild_call <- as.call(c(call("::", as.symbol("pkgbuild"), as.symbol("with_build_tools")), b, list(required = FALSE)))
+
+  body(fun) <- pkgbuild_call
+  fun
+}
+
 #' Functions re-exported from the remotes package
 #'
 
@@ -25,32 +33,32 @@ with_ellipsis <- function(fun) {
 #' @name remote-reexports
 #' @keywords internal
 #' @export
-install_bioc <- with_ellipsis(remotes::install_bioc)
+install_bioc <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_bioc))
 
 #' @importFrom remotes install_bitbucket
 #' @rdname remote-reexports
 #' @export
-install_bitbucket <- with_ellipsis(remotes::install_bitbucket)
+install_bitbucket <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_bitbucket))
 
 #' @importFrom remotes install_cran
 #' @rdname remote-reexports
 #' @export
-install_cran <- with_ellipsis(remotes::install_cran)
+install_cran <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_cran))
 
 #' @importFrom remotes install_dev
 #' @rdname remote-reexports
 #' @export
-install_dev <- with_ellipsis(remotes::install_dev)
+install_dev <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_dev))
 
 #' @importFrom remotes install_git
 #' @rdname remote-reexports
 #' @export
-install_git <- with_ellipsis(remotes::install_git)
+install_git <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_git))
 
 #' @importFrom remotes install_github
 #' @rdname remote-reexports
 #' @export
-install_github <- with_ellipsis(remotes::install_github)
+install_github <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_github))
 
 #' @importFrom remotes github_pull
 #' @rdname reexports
@@ -65,34 +73,34 @@ remotes::github_release
 #' @importFrom remotes install_gitlab
 #' @rdname remote-reexports
 #' @export
-install_gitlab <- with_ellipsis(remotes::install_gitlab)
+install_gitlab <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_gitlab))
 
 #' @importFrom remotes install_local
 #' @rdname remote-reexports
 #' @export
-install_local <- with_ellipsis(remotes::install_local)
+install_local <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_local))
 
 #' @importFrom remotes install_svn
 #' @rdname remote-reexports
 #' @export
-install_svn <- with_ellipsis(remotes::install_svn)
+install_svn <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_svn))
 
 #' @importFrom remotes install_url
 #' @rdname remote-reexports
 #' @export
-install_url <- with_ellipsis(remotes::install_url)
+install_url <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_url))
 
 #' @importFrom remotes install_version
 #' @rdname remote-reexports
 #' @export
-install_version <- with_ellipsis(remotes::install_version)
+install_version <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_version))
 
 #' @importFrom remotes update_packages
 #' @rdname remote-reexports
 #' @export
-update_packages <- with_ellipsis(remotes::update_packages)
+update_packages <- with_pkgbuild_build_tools(with_ellipsis(remotes::update_packages))
 
 #' @importFrom remotes dev_package_deps
 #' @rdname remote-reexports
 #' @export
-dev_package_deps <- with_ellipsis(remotes::dev_package_deps)
+dev_package_deps <- with_pkgbuild_build_tools(with_ellipsis(remotes::dev_package_deps))
