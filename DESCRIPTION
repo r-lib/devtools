@@ -23,6 +23,7 @@ Imports:
     digest,
     DT,
     ellipsis,
+    glue,
     git2r (>= 0.23.0),
     httr (>= 0.4),
     jsonlite,

@@ -25,7 +25,7 @@ check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]), ver
   }
 
   nms <- vcapply(result, `[[`, 1)
-  values <- vcapply(result, function(x) URLdecode(x[[2]]))
+  values <- vcapply(result, function(x) utils::URLdecode(x[[2]]))
 
   result <- stats::setNames(values, nms)
 
@@ -33,7 +33,11 @@ check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]), ver
     return()
   }
 
-  sprintf("* RStudio is out of date, %s. Download at: %s", result[["update-message"]], result[["update-url"]])
+  return(glue::glue('
+    {result[["update-message"]]}.
+    Download at: {ui_field(result[["update-url"]])}
+    ')
+  )
 }
 
 .r_release <- function() {
@@ -43,53 +47,96 @@ check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]), ver
 
 r_release <- memoise::memoise(.r_release)
 
-
-#' Diagnose potential devtools issues
+#' Report package development situation
 #'
-#' This checks to make sure you're using the latest release of R,
-#' the released version of RStudio (if you're using it as your gui),
-#' and the latest version of devtools and its dependencies.
+#' @template devtools
+#' @inheritParams pkgbuild::has_build_tools
+#' @description `pkg_sitrep()` reports
+#'   * If R is up to date
+#'   * If RStudio is up to date
+#'   * If compiler build tools are installed and available for use
+#'   * If devtools and its dependencies are up to date
+#'   * If the package's dependencies are up to date
 #'
-#' @family doctors
+#' @description Call this function if things seem weird and you're not sure
+#'   what's wrong or how to fix it. If this function returns no output
+#'   everything should be ready for package development.
+#'
+#' @return A named list, with S3 class `pkg_sitrep` (for printing purposes).
+#' @importFrom usethis ui_code ui_field ui_todo ui_value
 #' @export
 #' @examples
 #' \dontrun{
-#' dr_devtools()
+#' pkg_sitrep()
 #' }
-dr_devtools <- function() {
-  msg <- character()
+pkg_sitrep <- function(pkg = ".", debug = FALSE) {
+  pkg <- as.package(pkg)
 
-  if (getRversion() < r_release()) {
-    msg[["R"]] <- paste0(
-      "* R is out of date (", getRversion(), " vs ", r_release(), ")"
-    )
-  }
-
-  deps <- remotes::package_deps("devtools", dependencies = NA)
-  old <- deps$diff < 0
-  if (any(old)) {
-    msg[["devtools"]] <- paste0(
-      "* Devtools or dependencies out of date: \n",
-      paste(deps$package[old], collapse = ", ")
-    )
-  }
-
-  msg[["rstudio"]] <- check_for_rstudio_updates("mac", "1.0.0", TRUE)
-
-  doctor("devtools", msg)
+  structure(
+    list(
+      pkg = pkg,
+      r_version = getRversion(),
+      r_release_version = r_release(),
+      has_build_tools = !is_windows || pkgbuild::has_build_tools(debug = debug),
+      devtools_deps = remotes::package_deps("devtools", dependencies = NA),
+      pkg_deps = remotes::dev_package_deps(pkg$path, dependencies = TRUE),
+      rstudio_msg = check_for_rstudio_updates()
+    ),
+    class = "pkg_sitrep"
+  )
 }
 
-#' Diagnose potential GitHub issues
-#'
-#' @param path Path to repository to check. Defaults to current working
-#'   directory
-#' @family doctors
 #' @export
-#' @examples
-#' \donttest{
-#' dr_github()
-#' }
+print.pkg_sitrep <- function(x, ...) {
+  if (x$r_version < x$r_release_version) {
+    ui_todo('
+      {ui_field("R")} is out of date ({ui_value(getRversion())} vs {ui_value(r_release())})
+      ')
+  }
+
+  if (!is.null(x$rstudio_msg)) {
+    ui_todo(x$rstudio_msg)
+  }
+
+  if (!x$has_build_tools) {
+      ui_todo('
+        {ui_field("RTools")} is not installed:
+        Download and install it from: {ui_field("https://cloud.r-project.org/bin/windows/Rtools/")}
+        ')
+  }
+
+  devtools_deps_old <- x$devtools_deps$diff < 0
+  if (any(devtools_deps_old)) {
+    ui_todo('
+      {ui_field("devtools")} or its dependencies out of date:
+      {paste(ui_value(x$devtools_deps$package[devtools_deps_old]), collapse = ", ")}
+      Update them with {ui_code("devtools::update_packages(\\"devtools\\")")}
+      ')
+  }
+
+  pkg_deps_old <- x$pkg_deps$diff < 0
+  if (any(pkg_deps_old)) {
+    ui_todo('
+      {ui_field(x$pkg$package)} dependencies out of date:
+      {paste(ui_value(x$pkg_deps$package[pkg_deps_old]), collapse = ", ")}
+      Update them with {ui_code("devtools::install_dev_deps()")}
+      ')
+  }
+
+  invisible(x)
+}
+
+#' @export
+#' @rdname devtools-deprecated
+dr_devtools <- function() {
+  .Deprecated("pkg_sitrep()", package = "devtools")
+  pkg_sitrep()
+}
+
+#' @export
+#' @rdname devtools-deprecated
 dr_github <- function(path = ".") {
+  .Deprecated(package = "devtools")
   if (!uses_git(path)) {
     return(doctor("github", "Path is not a git repository"))
   }

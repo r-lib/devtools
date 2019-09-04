@@ -103,4 +103,4 @@ update_packages <- with_pkgbuild_build_tools(with_ellipsis(remotes::update_packa
 #' @importFrom remotes dev_package_deps
 #' @rdname remote-reexports
 #' @export
-dev_package_deps <- with_pkgbuild_build_tools(with_ellipsis(remotes::dev_package_deps))
+dev_package_deps <- with_pkgbuild_build_tools(remotes::dev_package_deps)

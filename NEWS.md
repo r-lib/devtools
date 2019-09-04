@@ -1,5 +1,9 @@
 # devtools (development version)
 
+* New `pkg_sitrep()` function to return information about your development
+  environment and diagnose common problems. The former functions
+  `dr_devtools()` and `dr_github()` have been deprecated. (#1970)
+
 * All `install_*()` functions now attach build tools to the PATH, which makes them work on
   Windows when RTools is not on the default PATH (#2093).
 
