@@ -40,12 +40,7 @@ sure you're in line with the policies. \code{release} tries to automate as
 many of polices as possible, but it's impossible to be completely
 comprehensive, and they do change in between releases of devtools.
 }
-\section{Guarantee}{
-
-
-If a devtools bug causes one of the CRAN maintainers to treat you
-impolitely, I will personally send you a handwritten apology note.
-Please forward me the email and your address, and I'll get a card in
-the mail.
+\seealso{
+\code{\link[usethis:use_release_issue]{usethis::use_release_issue()}} to create a checklist of release
+tasks that you can use in addition to or in place of \code{release}.
 }
-

@@ -21,19 +21,14 @@
 #' many of polices as possible, but it's impossible to be completely
 #' comprehensive, and they do change in between releases of devtools.
 #'
-#' @section Guarantee:
-#'
-#' If a devtools bug causes one of the CRAN maintainers to treat you
-#' impolitely, I will personally send you a handwritten apology note.
-#' Please forward me the email and your address, and I'll get a card in
-#' the mail.
-#'
 #' @template devtools
 #' @param check if `TRUE`, run checking, otherwise omit it.  This
 #'   is useful if you've just checked your package and you're ready to
 #'   release it.
 #' @param args An optional character vector of additional command
 #'   line arguments to be passed to `R CMD build`.
+#' @seealso [usethis::use_release_issue()] to create a checklist of release
+#'   tasks that you can use in addition to or in place of `release`.
 #' @export
 release <- function(pkg = ".", check = FALSE, args = NULL) {
   pkg <- as.package(pkg)
