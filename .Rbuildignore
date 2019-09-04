@@ -15,3 +15,4 @@
 ^tests/testthat/test.*/\.Rbuildignore
 ^script\.R$
 ^pkgdown$
+^man-roxygen$
