@@ -121,7 +121,7 @@ valuable resources to help!
 
 devtools started off as a lean-and-mean package to facilitate local package
 development, but over the years it accumulated more and more functionality.
-Currently devtools is undergoing a [conscious
+devtools has undergone a [conscious
 uncoupling](https://web.archive.org/web/20140326060230/http://www.goop.com/journal/be/conscious-uncoupling)
 to split out functionality into smaller, more tightly focussed packages. This
 includes:
@@ -158,6 +158,17 @@ Generally, you should not need to worry about these different packages, because
 devtools installs them all automatically. You will need to care, however, if
 you're filing a bug because reporting it at the correct place will lead to a
 speedier resolution.
+
+You also may need to care if you are trying to use some devtools functionality
+in your own package or deployed application. Generally in these cases it
+is better to depend on the particular package directly rather than depend on devtools,
+e.g. use `sessioninfo::session_info()` rather than `devtools::session_info()`,
+or `remotes::install_github()` vs `devtools::install_github()`.
+
+However for day to day development we recommend you continue to use
+`library(devtools)` to quickly load all needed deveolpment tools, just like
+`library(tidyverse)` quickly loads all the tools nessesary for data exploration
+and vizualization.
 
 ## Code of conduct
 
