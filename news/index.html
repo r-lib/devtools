@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.0</span>
       </span>
     </div>
 
@@ -149,34 +149,44 @@
       <small>Source: <a href='https://github.com/r-lib/devtools/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="devtools-development-version" class="section level1">
+    <div id="devtools-2-2-0" class="section level1">
 <h1 class="page-header">
-<a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
+<a href="#devtools-2-2-0" class="anchor"></a>devtools 2.2.0<small> Unreleased </small>
 </h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New Features</h2>
 <ul>
-<li><p><code><a href="../reference/test.html">test_coverage_file()</a></code> now works when there is not a 1 to 1 correspondence between test and source files (<a href='https://github.com/r-lib/devtools/issues/2011'>#2011</a>).</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code> added back, the RStudio IDE uses <code><a href="../reference/create.html">create()</a></code> in the create packages dialog, so removing it in version 2.1.0 broke old versions of the IDE.</p></li>
 <li><p>New <code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> function to return information about your development environment and diagnose common problems. The former functions <code><a href="../reference/devtools-deprecated.html">dr_devtools()</a></code> and <code><a href="../reference/devtools-deprecated.html">dr_github()</a></code> have been deprecated. (<a href='https://github.com/r-lib/devtools/issues/1970'>#1970</a>)</p></li>
-<li><p>All <code>install_*()</code> functions now attach build tools to the PATH, which makes them work on Windows when RTools is not on the default PATH (<a href='https://github.com/r-lib/devtools/issues/2093'>#2093</a>).</p></li>
-<li><p><code><a href="../reference/install.html">install()</a></code> now explicitly unloads packages before trying to install a new version (<a href='https://github.com/r-lib/devtools/issues/2094'>#2094</a>).</p></li>
-<li><p><code><a href="../reference/devtools-deprecated.html">dr_devtools()</a></code> now uses the same endpoint to detect the current RStudio version as the IDE (<a href='https://github.com/r-lib/devtools/issues/2050'>#2050</a>).</p></li>
-<li><p><code><a href="../reference/release.html">release()</a></code> now works again when <code>pkg</code> is not the current working directory (<a href='https://github.com/r-lib/devtools/issues/1974'>#1974</a>).</p></li>
-<li><p><code><a href="../reference/check_man.html">check_man()</a></code> now succeeds when <code><a href="https://rdrr.io/r/tools/undoc.html">tools::undoc()</a></code> returns empty results (<a href='https://github.com/r-lib/devtools/issues/1944'>#1944</a>).</p></li>
-<li><p><code>check_win_*()</code> functions gain a <code>email</code> argument, so temporarily change the email the check results will be sent to (<a href='https://github.com/r-lib/devtools/issues/1723'>#1723</a>).</p></li>
-<li><p><code><a href="../reference/release.html">release()</a></code> now works without error when <code><a href="https://rdrr.io/r/base/options.html">options("repos")</a></code> is unnamed (<a href='https://github.com/r-lib/devtools/issues/1956'>#1956</a>).</p></li>
+<li><p>All functions taking <code>...</code> now use the ellipsis package. This catches errors when arguments are misspelled or incorrectly specified (<a href='https://github.com/r-lib/devtools/issues/2016'>#2016</a>)</p></li>
+</ul>
+</div>
+<div id="minor-improvements-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<ul>
+<li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> now correctly installs the vignette builder if it is not already installed (<a href='https://github.com/r-lib/devtools/issues/2089'>#2089</a>).</p></li>
+<li><p><code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> now uses the same endpoint to detect the current RStudio version as the IDE (<a href='https://github.com/r-lib/devtools/issues/2050'>#2050</a>).</p></li>
 <li><p><code><a href="../reference/document.html">document()</a></code> gains a <code>quiet</code> parameter, to silence output and <code><a href="../reference/check.html">check()</a></code> now passes its quiet argument to it (<a href='https://github.com/r-lib/devtools/issues/1986'>#1986</a>).</p></li>
 <li><p>Add the DT package as a dependency, so that <code><a href="../reference/test.html">test_coverage()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> work without having to install additional packages (<a href='https://github.com/r-lib/devtools/issues/2085'>#2085</a>).</p></li>
-<li><p>All functions taking <code>...</code> now use the ellipsis package. This catches errors when arguments are misspelled or incorrectly specified (<a href='https://github.com/r-lib/devtools/issues/2016'>#2016</a>)</p></li>
-<li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> now correctly installs the vignette builder if it is not already installed (<a href='https://github.com/r-lib/devtools/issues/2089'>#2089</a>).</p></li>
-<li><p><code><a href="../reference/create.html">create()</a></code> added, the RStudio IDE uses <code><a href="../reference/create.html">create()</a></code>, so removing it in version 2.1.0 broke old versions of the IDE.</p></li>
+<li><p><code><a href="../reference/check_man.html">check_man()</a></code> now succeeds when <code><a href="https://rdrr.io/r/tools/undoc.html">tools::undoc()</a></code> returns empty results (<a href='https://github.com/r-lib/devtools/issues/1944'>#1944</a>).</p></li>
+<li><p><code>check_win_*()</code> functions gain a <code>email</code> argument, so temporarily change the email the check results will be sent to (<a href='https://github.com/r-lib/devtools/issues/1723'>#1723</a>).</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> now explicitly unloads packages before trying to install a new version (<a href='https://github.com/r-lib/devtools/issues/2094'>#2094</a>).</p></li>
+<li><p>All <code>install_*()</code> functions now attach build tools to the PATH, which makes them work on Windows when RTools is not on the default PATH (<a href='https://github.com/r-lib/devtools/issues/2093'>#2093</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test_coverage_file()</a></code> now works when there is not a 1 to 1 correspondence between test and source files (<a href='https://github.com/r-lib/devtools/issues/2011'>#2011</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> now works again when <code>pkg</code> is not the current working directory (<a href='https://github.com/r-lib/devtools/issues/1974'>#1974</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> now works without error when <code><a href="https://rdrr.io/r/base/options.html">options("repos")</a></code> is unnamed (<a href='https://github.com/r-lib/devtools/issues/1956'>#1956</a>).</p></li>
 </ul>
+</div>
 </div>
     <div id="devtools-2-1-0" class="section level1">
 <h1 class="page-header">
 <a href="#devtools-2-1-0" class="anchor"></a>devtools 2.1.0<small> 2019-07-06 </small>
 </h1>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New Features</h2>
+<a href="#new-features-1" class="anchor"></a>New Features</h2>
 <ul>
 <li>
 <code>testthat</code> and <code>roxygen2</code> are now added to <code>Imports</code> rather than <code>Suggests</code>, so they are automatically installed when you install devtools.</li>
@@ -193,9 +203,9 @@
 <li><p><code>yesno()</code> as used in <code><a href="../reference/release.html">release()</a></code> now has clearer synonyms for “yes” (<a href='https://github.com/mattmalin'>@mattmalin</a>, <a href='https://github.com/r-lib/devtools/issues/1993'>#1993</a>)</p></li>
 </ul>
 </div>
-<div id="minor-improvements-and-fixes" class="section level2">
+<div id="minor-improvements-and-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<a href="#minor-improvements-and-fixes-1" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li><p><code>check_rhub</code> gains a new argument <code>build_args</code> for arguments passed to <code>R CMD build</code>. <code>...</code> is now passed to <code><a href="https://r-hub.github.io/rhub/reference/check_for_cran.html">rhub::check_for_cran()</a></code> (<a href='https://github.com/gaborcsardi'>@gaborcsardi</a>, <a href='https://github.com/maelle'>@maelle</a>, <a href='https://github.com/r-lib/devtools/issues/2041'>#2041</a>)</p></li>
 <li><p><code><a href="../reference/build_manual.html">build_manual()</a></code> now fails if the manual fails to build. (<a href='https://github.com/r-lib/devtools/issues/2056'>#2056</a>)</p></li>
@@ -308,9 +318,9 @@
 <li><p>The <code><a href="../reference/spell_check.html">spell_check()</a></code> code has been moved into the new <strong>spelling</strong> package and has thereby gained support for vignettes and package wordlists. The <strong>devtools</strong> function now wraps <code><a href="https://docs.ropensci.org/spelling/reference/spell_check_package.html">spelling::spell_check_package()</a></code>.</p></li>
 </ul>
 </div>
-<div id="minor-improvements-and-fixes-1" class="section level2">
+<div id="minor-improvements-and-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-improvements-and-fixes-1" class="anchor"></a>Minor improvements and fixes</h2>
+<a href="#minor-improvements-and-fixes-2" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li><p><code>check_win_*()</code> now build the package with <code>manual = TRUE</code> by default (<a href='https://github.com/r-lib/devtools/issues/1890'>#1890</a>).</p></li>
 <li><p><code><a href="../reference/check.html">check()</a></code> output now works more nicely with recent changes to <strong>rcmdcheck</strong> (<a href='https://github.com/r-lib/devtools/issues/1874'>#1874</a>).</p></li>
@@ -406,9 +416,9 @@
 <h1 class="page-header">
 <a href="#devtools-1-13-0" class="anchor"></a>devtools 1.13.0<small> 2017-05-08 </small>
 </h1>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New Features</h2>
+<a href="#new-features-2" class="anchor"></a>New Features</h2>
 <ul>
 <li><p><code>spell_check</code> gains a <code>dict</code> argument to set a custom language or dictionary</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> now checks documentation for spelling errors by default.</p></li>
@@ -469,9 +479,9 @@
 <h1 class="page-header">
 <a href="#devtools-1-12-0" class="anchor"></a>devtools 1.12.0<small> 2016-06-24 </small>
 </h1>
-<div id="new-features-2" class="section level2">
+<div id="new-features-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-2" class="anchor"></a>New features</h2>
+<a href="#new-features-3" class="anchor"></a>New features</h2>
 <ul>
 <li><p>New <code><a href="../reference/remote-reexports.html">install_bioc()</a></code> function and bioc remote to install Bioconductor packages from their SVN repository.</p></li>
 <li><p><code><a href="../reference/install_deps.html">install_dev_deps()</a></code> gets everything you need to start development on source package - it installs all dependencies, and roxygen2 (<a href='https://github.com/r-lib/devtools/issues/1193'>#1193</a>).</p></li>
@@ -578,9 +588,9 @@
 <h1 class="page-header">
 <a href="#devtools-1-10-0" class="anchor"></a>devtools 1.10.0<small> 2016-01-23 </small>
 </h1>
-<div id="new-features-3" class="section level2">
+<div id="new-features-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-3" class="anchor"></a>New features</h2>
+<a href="#new-features-4" class="anchor"></a>New features</h2>
 <ul>
 <li><p><code>curl</code>, <code>evaluate</code>, <code>roxygen2</code> and <code>rversions</code> have been moved from Imports to Suggests to lighten the dependency load of devtools. If you run a function that needs one of the packages, you’ll prompted to install it (<a href='https://github.com/r-lib/devtools/issues/962'>#962</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
 <li><p>Devtools uses a new strategy for detecting RTools on windows: it now only looks for Rtools if you need to <code><a href="../reference/load_all.html">load_all()</a></code> or <code><a href="../reference/build.html">build()</a></code> a package with compiled code. This should make it easier to work with devtools if you’re developing pure R packages (<a href='https://github.com/r-lib/devtools/issues/947'>#947</a>).</p></li>
@@ -991,9 +1001,9 @@
 <li><p>New devtools guarantee: if because of a devtools bug, a CRAN maintainer yells at you, I’ll send you a hand-written apology note. Just forward me the email and your address.</p></li>
 </ul>
 </div>
-<div id="new-features-4" class="section level2">
+<div id="new-features-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-4" class="anchor"></a>New features</h2>
+<a href="#new-features-5" class="anchor"></a>New features</h2>
 <ul>
 <li><p>New <code><a href="../reference/remote-reexports.html">install_local()</a></code> function for installing local package files (as zip, tar, tgz, etc.) (Suggested by landroni)</p></li>
 <li><p><code><a href="https://rdrr.io/pkg/pkgload/man/parse_deps.html">parse_deps()</a></code>, which parses R’s package dependency strings, is now exported.</p></li>
@@ -1044,9 +1054,9 @@
 <li><p><code>clean_source</code> loses the <code>vanilla</code> argument (which did not work) and gains a <code>quiet</code> argument</p></li>
 </ul>
 </div>
-<div id="new-features-5" class="section level2">
+<div id="new-features-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-5" class="anchor"></a>New features</h2>
+<a href="#new-features-6" class="anchor"></a>New features</h2>
 <ul>
 <li><p><code>source_url</code> and <code>source_gist</code> now allow you to specify a sha, so you can make sure that files you source from the internet don’t change without you knowing about it. (Fixes <a href='https://github.com/r-lib/devtools/issues/259'>#259</a>)</p></li>
 <li><p><code>build_vignettes</code> builds using <code>buildVignette()</code> and movies/copies outputs using the same algorithm as <code>R CMD build</code>. This means that <code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> now exactly mimics R’s regular behaviour, including building non-Sweave vignettes (<a href='https://github.com/r-lib/devtools/issues/277'>#277</a>), building in the correct directory (<a href='https://github.com/r-lib/devtools/issues/231'>#231</a>), using make files (if present), and copying over extra files.</p></li>
@@ -1144,9 +1154,9 @@
 <h1 class="page-header">
 <a href="#devtools-0-8-0" class="anchor"></a>devtools 0.8.0<small> Unreleased </small>
 </h1>
-<div id="new-features-6" class="section level2">
+<div id="new-features-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-6" class="anchor"></a>New features</h2>
+<a href="#new-features-7" class="anchor"></a>New features</h2>
 <ul>
 <li><p><code>create</code> function makes it easier to create a package skeleton using devtools standards.</p></li>
 <li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> can now install from a pull request – it installs the branch referenced in the pull request.</p></li>
@@ -1277,9 +1287,9 @@
 <h1 class="page-header">
 <a href="#devtools-0-6" class="anchor"></a>devtools 0.6<small> 2012-02-28 </small>
 </h1>
-<div id="new-features-7" class="section level2">
+<div id="new-features-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-7" class="anchor"></a>New features</h2>
+<a href="#new-features-8" class="anchor"></a>New features</h2>
 <ul>
 <li><p><code>test</code> function takes <code>filter</code> argument which allows you to restrict which tests are to be run</p></li>
 <li><p><code>check</code> runs with example timings, as is done on CRAN. Run with new param <code>cleanup = F</code> to access the timings.</p></li>
@@ -1422,7 +1432,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#devtools-development-version">development version</a></li>
+        <li><a href="#devtools-2-2-0">2.2.0</a></li>
         <li><a href="#devtools-2-1-0">2.1.0</a></li>
         <li><a href="#devtools-2-0-2">2.0.2</a></li>
         <li><a href="#devtools-2-0-1">2.0.1</a></li>
