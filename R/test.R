@@ -86,8 +86,6 @@ test <- function(pkg = ".", filter = NULL, ...) {
 test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   pkg <- as.package(pkg)
 
-  check_suggested("covr")
-
   save_all()
 
   check_dots_used()
@@ -235,7 +233,6 @@ find_source_file <- function(file) {
 #' @rdname test
 #' @export
 test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_report = interactive(), ...) {
-  check_suggested("covr")
 
   is_source_file <- basename(dirname(file)) %in% c("R", "src")
 

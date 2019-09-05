@@ -41,7 +41,6 @@ check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]), ver
 }
 
 .r_release <- function() {
-  check_suggested("rversions")
   R_system_version(rversions::r_release()$version)
 }
 

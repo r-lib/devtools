@@ -19,6 +19,8 @@ Depends:
 Imports: 
     callr,
     cli,
+    covr (>= 3.2.0),
+    crayon,
     desc,
     digest,
     DT,
@@ -34,6 +36,7 @@ Imports:
     remotes (>= 2.1.0),
     roxygen2 (>= 6.1.1),
     rstudioapi (>= 0.7),
+    rversions,
     sessioninfo (>= 1.1.1),
     stats,
     testthat (>= 2.1.1),
@@ -43,8 +46,6 @@ Imports:
 Suggests: 
     BiocManager,
     bitops,
-    covr (>= 3.2.0),
-    crayon,
     curl (>= 0.9),
     evaluate,
     foghorn (>= 1.1.0),
@@ -58,7 +59,6 @@ Suggests:
     Rcpp (>= 0.10.0),
     rhub (>= 1.0.2),
     rmarkdown,
-    rversions,
     spelling (>= 1.1),
     whisker
 VignetteBuilder: knitr
