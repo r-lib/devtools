@@ -60,7 +60,8 @@ Suggests:
     rmarkdown,
     rversions,
     spelling (>= 1.1),
-    whisker
+    whisker,
+    xml2
 VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 6.1.1

@@ -16,3 +16,4 @@
 ^script\.R$
 ^pkgdown$
 ^man-roxygen$
+^azure-pipelines\.yml$
