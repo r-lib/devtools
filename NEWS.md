@@ -1,4 +1,4 @@
-# devtools (development version)
+# devtools 2.2.0
 
 ## New Features
 
