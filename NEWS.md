@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `test_coverage_file()` now works when there is not a 1 to 1 correspondence
+  between test and source files (#2011).
+
 * New `dev_sitrep()` function to return information about your development
   environment and diagnose common problems. The former functions
   `dr_devtools()` and `dr_github()` have been deprecated. (#1970)

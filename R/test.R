@@ -264,6 +264,8 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
     })
   )
 
+  filter <- isTRUE(filter) && all(file.exists(source_files))
+
   if (isTRUE(filter)) {
     coverage <- coverage[covr::display_name(coverage) %in% source_files]
   }
@@ -273,7 +275,11 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
   attr(coverage, "package") <- pkg
 
   if (isTRUE(show_report)) {
-    covr::file_report(coverage)
+    if (isTRUE(filter)) {
+      covr::file_report(coverage)
+    } else {
+      covr::report(coverage)
+    }
   }
 
   invisible(coverage)
