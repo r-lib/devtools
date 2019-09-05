@@ -154,9 +154,10 @@
 <a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li><p>New <code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> function to return information about your development environment and diagnose common problems. The former functions <code><a href="../reference/devtools-deprecated.html">dr_devtools()</a></code> and <code><a href="../reference/devtools-deprecated.html">dr_github()</a></code> have been deprecated. (<a href='https://github.com/r-lib/devtools/issues/1970'>#1970</a>)</p></li>
 <li><p>All <code>install_*()</code> functions now attach build tools to the PATH, which makes them work on Windows when RTools is not on the default PATH (<a href='https://github.com/r-lib/devtools/issues/2093'>#2093</a>).</p></li>
 <li><p><code><a href="../reference/install.html">install()</a></code> now explicitly unloads packages before trying to install a new version (<a href='https://github.com/r-lib/devtools/issues/2094'>#2094</a>).</p></li>
-<li><p><code><a href="../reference/dr_devtools.html">dr_devtools()</a></code> now uses the same endpoint to detect the current RStudio version as the IDE (<a href='https://github.com/r-lib/devtools/issues/2050'>#2050</a>).</p></li>
+<li><p><code><a href="../reference/devtools-deprecated.html">dr_devtools()</a></code> now uses the same endpoint to detect the current RStudio version as the IDE (<a href='https://github.com/r-lib/devtools/issues/2050'>#2050</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> now works again when <code>pkg</code> is not the current working directory (<a href='https://github.com/r-lib/devtools/issues/1974'>#1974</a>).</p></li>
 <li><p><code><a href="../reference/check_man.html">check_man()</a></code> now succeeds when <code><a href="https://rdrr.io/r/tools/undoc.html">tools::undoc()</a></code> returns empty results (<a href='https://github.com/r-lib/devtools/issues/1944'>#1944</a>).</p></li>
 <li><p><code>check_win_*()</code> functions gain a <code>email</code> argument, so temporarily change the email the check results will be sent to (<a href='https://github.com/r-lib/devtools/issues/1723'>#1723</a>).</p></li>
@@ -661,7 +662,7 @@
 <li><p><code>use_cran_badge()</code> uses canonical url form preferred by CRAN.</p></li>
 <li><p><code>use_data()</code> also works with data from the parent frame (<a href='https://github.com/r-lib/devtools/issues/829'>#829</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code>use_git_hook()</code> now creates <code>.git/hooks</code> if needed (<a href='https://github.com/r-lib/devtools/issues/888'>#888</a>)</p></li>
-<li><p>GitHub integration extended: <code>use_github()</code> gains a <code>protocol</code> argument (ssh or https), populates URL and BugReports fields of DESCRIPTION (only if non-existent or empty), pushes to the newly created GitHub repo, and sets a remote tracking branch. <code>use_github_links()</code> is a new exported function. <code><a href="../reference/dr_github.html">dr_github()</a></code> diagnoses more possible problems. (<a href='https://github.com/r-lib/devtools/issues/642'>#642</a>, <a href='https://github.com/jennybc'>@jennybc</a>).</p></li>
+<li><p>GitHub integration extended: <code>use_github()</code> gains a <code>protocol</code> argument (ssh or https), populates URL and BugReports fields of DESCRIPTION (only if non-existent or empty), pushes to the newly created GitHub repo, and sets a remote tracking branch. <code>use_github_links()</code> is a new exported function. <code><a href="../reference/devtools-deprecated.html">dr_github()</a></code> diagnoses more possible problems. (<a href='https://github.com/r-lib/devtools/issues/642'>#642</a>, <a href='https://github.com/jennybc'>@jennybc</a>).</p></li>
 <li><p><code>use_travis()</code>: Default travis script leaves notifications on default settings.</p></li>
 <li><p><code><a href="../reference/test.html">uses_testthat()</a></code> and <code><a href="../reference/check_failures.html">check_failures()</a></code> are now exported (<a href='https://github.com/r-lib/devtools/issues/824'>#824</a>, <a href='https://github.com/r-lib/devtools/issues/839'>#839</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code>use_readme_rmd()</code> uses <code>uses_git()</code> correctly (<a href='https://github.com/r-lib/devtools/issues/793'>#793</a>).</p></li>
@@ -679,7 +680,7 @@
 <h2 class="hasAnchor">
 <a href="#helpers" class="anchor"></a>Helpers</h2>
 <ul>
-<li><p>New <code><a href="../reference/dr_devtools.html">dr_devtools()</a></code> runs some common diagnostics: are you using the latest version of R and devtools? It is run automatically by <code><a href="../reference/release.html">release()</a></code> (<a href='https://github.com/r-lib/devtools/issues/592'>#592</a>).</p></li>
+<li><p>New <code><a href="../reference/devtools-deprecated.html">dr_devtools()</a></code> runs some common diagnostics: are you using the latest version of R and devtools? It is run automatically by <code><a href="../reference/release.html">release()</a></code> (<a href='https://github.com/r-lib/devtools/issues/592'>#592</a>).</p></li>
 <li><p><code>use_code_of_conduct()</code> adds a contributor code of conduct from <a href="http://contributor-covenant.org" class="uri">http://contributor-covenant.org</a>. (<a href='https://github.com/r-lib/devtools/issues/729'>#729</a>)</p></li>
 <li><p><code>use_coveralls()</code> allows you to easily add test coverage with coveralls (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/680'>#680</a>, <a href='https://github.com/r-lib/devtools/issues/681'>#681</a>).</p></li>
 <li><p><code>use_git()</code> sets up a package to use git, initialising the repo and checking the existing files.</p></li>
@@ -703,7 +704,7 @@
 <a href="#git-and-github" class="anchor"></a>Git and github</h2>
 <ul>
 <li><p>Devtools now uses the git2r package to inspect git properties and install remote git packages with <code><a href="../reference/remote-reexports.html">install_git()</a></code>. This should be considerably more reliable than the previous strategy which involves calling the command line <code>git</code> client. It has two small downsides: <code><a href="../reference/remote-reexports.html">install_git()</a></code> no longer accepts additional <code>args</code>, and must do a deep clone when installing.</p></li>
-<li><p><code><a href="../reference/dr_github.html">dr_github()</a></code> checks for common problems with git/github setup (<a href='https://github.com/r-lib/devtools/issues/643'>#643</a>).</p></li>
+<li><p><code><a href="../reference/devtools-deprecated.html">dr_github()</a></code> checks for common problems with git/github setup (<a href='https://github.com/r-lib/devtools/issues/643'>#643</a>).</p></li>
 <li><p>If you use git, <code><a href="../reference/release.html">release()</a></code> now warns you if you have uncommited changes, or if you’ve forgotten to synchronise with the remote (<a href='https://github.com/r-lib/devtools/issues/691'>#691</a>).</p></li>
 <li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> warns if repository contains submodules (<a href='https://github.com/ashander'>@ashander</a>, <a href='https://github.com/r-lib/devtools/issues/751'>#751</a>).</p></li>
 </ul>

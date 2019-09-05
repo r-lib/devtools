@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deprecated Functions — dr_devtools • devtools</title>
+<title>Report package development situation — dev_sitrep • devtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,9 +42,18 @@
 
 
 
-<meta property="og:title" content="Deprecated Functions — dr_devtools" />
-<meta property="og:description" content="These functions are Deprecated in this release of devtools, they will be
-marked as Defunct and removed in a future version." />
+<meta property="og:title" content="Report package development situation — dev_sitrep" />
+<meta property="og:description" content="dev_sitrep() reports
+If R is up to date
+If RStudio is up to date
+If compiler build tools are installed and available for use
+If devtools and its dependencies are up to date
+If the package's dependencies are up to date
+
+
+Call this function if things seem weird and you're not sure
+what's wrong or how to fix it. If this function returns no output
+everything should be ready for package development." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -147,26 +156,57 @@ marked as Defunct and removed in a future version." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Deprecated Functions</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/sitrep.R'><code>R/sitrep.R</code></a>, <a href='https://github.com/r-lib/devtools/blob/master/R/zzz.R'><code>R/zzz.R</code></a></small>
-    <div class="hidden name"><code>devtools-deprecated.Rd</code></div>
+    <h1>Report package development situation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/sitrep.R'><code>R/sitrep.R</code></a></small>
+    <div class="hidden name"><code>dev_sitrep.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>These functions are Deprecated in this release of devtools, they will be
-marked as Defunct and removed in a future version.</p>
+    <p><code>dev_sitrep()</code> reports</p><ul>
+<li><p>If R is up to date</p></li>
+<li><p>If RStudio is up to date</p></li>
+<li><p>If compiler build tools are installed and available for use</p></li>
+<li><p>If devtools and its dependencies are up to date</p></li>
+<li><p>If the package's dependencies are up to date</p></li>
+</ul>
+
+<p>Call this function if things seem weird and you're not sure
+what's wrong or how to fix it. If this function returns no output
+everything should be ready for package development.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dr_devtools</span>()
+    <pre class="usage"><span class='fu'>dev_sitrep</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>debug</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
-<span class='fu'>dr_github</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>pkg</th>
+      <td><p>The package to use, can be a file path to the package or a
+package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
+    </tr>
+    <tr>
+      <th>debug</th>
+      <td><p>If <code>TRUE</code>, will print out extra information useful for
+debugging. If <code>FALSE</code>, it will use result cached from a previous run.</p></td>
+    </tr>
+    </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A named list, with S3 class <code>dev_sitrep</code> (for printing purposes).</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>dev_sitrep</span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
