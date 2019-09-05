@@ -94,7 +94,7 @@ valuable resources to help!
     * A second edition is under development and is evolving to reflect the
       current state of devtools. It is available at <https://r-pkgs.org>.
     * The [Whole Game](https://r-pkgs.org/whole-game.html) and
-      [Package structure](https://r-pkgs.org/package-structure.html) chapters
+      [Package structure](https://r-pkgs.org/package-structure-state.html) chapters
       make great places to start.
 
 2. [RStudio community - package
