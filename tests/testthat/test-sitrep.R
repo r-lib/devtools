@@ -9,6 +9,6 @@ test_that("check_for_rstudio_updates", {
 
   # returns something if the version is behind of the current version
   res <- check_for_rstudio_updates("mac", "0.0.1", TRUE)
-  expect_match(res, "RStudio is out of date")
+  expect_match(res, "RStudio .* is now available")
   expect_match(res, "Download at")
 })
