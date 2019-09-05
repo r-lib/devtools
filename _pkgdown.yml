@@ -11,6 +11,7 @@ reference:
     - starts_with("build_")
     - document
     - check
+    - create
     - load_all
     - starts_with("package")
     - ends_with("package")
@@ -28,7 +29,7 @@ reference:
     - bash
     - clean_vignettes
     - dev_mode
-    - starts_with("dr_")
+    - dev_sitrep
     - github_pull
     - lint
     - missing_s3
