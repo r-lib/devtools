@@ -203,7 +203,7 @@
 <div id="conscious-uncoupling" class="section level2">
 <h2 class="hasAnchor">
 <a href="#conscious-uncoupling" class="anchor"></a>Conscious uncoupling</h2>
-<p>devtools started off as a lean-and-mean package to facilitate local package development, but over the years it accumulated more and more functionality. Currently devtools is undergoing a <a href="https://web.archive.org/web/20140326060230/http://www.goop.com/journal/be/conscious-uncoupling">conscious uncoupling</a> to split out functionality into smaller, more tightly focussed packages. This includes:</p>
+<p>devtools started off as a lean-and-mean package to facilitate local package development, but over the years it accumulated more and more functionality. devtools has undergone a <a href="https://web.archive.org/web/20140326060230/http://www.goop.com/journal/be/conscious-uncoupling">conscious uncoupling</a> to split out functionality into smaller, more tightly focussed packages. This includes:</p>
 <ul>
 <li><p><a href="https://github.com/r-lib/testthat">testthat</a>: Writing and running tests (i.e. <code><a href="reference/test.html">test()</a></code>).</p></li>
 <li><p><a href="https://github.com/klutometis/roxygen">roxygen2</a>: Function and package documentation (i.e. <code><a href="reference/document.html">document()</a></code>).</p></li>
@@ -216,6 +216,8 @@
 <li><p><a href="https://github.com/r-lib/usethis">usethis</a>: Automating package setup (i.e. <code>use_test()</code>).</p></li>
 </ul>
 <p>Generally, you should not need to worry about these different packages, because devtools installs them all automatically. You will need to care, however, if you’re filing a bug because reporting it at the correct place will lead to a speedier resolution.</p>
+<p>You also may need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">sessioninfo::session_info()</a></code> rather than <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code>, or <code><a href="https://rdrr.io/pkg/remotes/man/install_github.html">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
+<p>However for day to day development we recommend you continue to use <code><a href="https://rdrr.io/r/base/library.html">library(devtools)</a></code> to quickly load all needed deveolpment tools, just like <code><a href="https://rdrr.io/r/base/library.html">library(tidyverse)</a></code> quickly loads all the tools nessesary for data exploration and vizualization.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
