@@ -36,15 +36,6 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
   cran_version <- cran_pkg_version(pkg$package)
   new_pkg <- is.null(cran_version)
 
-  dr_d <- dr_devtools()
-  if (!dr_d) {
-    print(dr_d)
-
-    if (yesno("Proceed anyway?")) {
-      return(invisible())
-    }
-  }
-
   if (yesno("Have you checked for spelling errors (with `spell_check()`)?")) {
     return(invisible())
   }
