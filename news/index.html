@@ -154,6 +154,7 @@
 <a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li><p><code><a href="../reference/test.html">test()</a></code> now explicitly passes <code>stop_on_failure = FALSE</code> to <code><a href="https://rdrr.io/pkg/testthat/man/test_dir.html">testthat::test_dir()</a></code> (<a href='https://github.com/jameslamb'>@jameslamb</a>, <a href='https://github.com/r-lib/devtools/issues/2099'>#2099</a>)</p></li>
 <li><p><code><a href="../reference/install.html">install()</a></code> now again reloads and re-attaches packages if they were previously loaded (<a href='https://github.com/r-lib/devtools/issues/2111'>#2111</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> no longer calls the deprecated <code><a href="../reference/devtools-deprecated.html">dr_devtools()</a></code> (<a href='https://github.com/r-lib/devtools/issues/2105'>#2105</a>)</p></li>
 </ul>
@@ -185,7 +186,10 @@
 <li><p>All <code>install_*()</code> functions now attach build tools to the PATH, which makes them work on Windows when RTools is not on the default PATH (<a href='https://github.com/r-lib/devtools/issues/2093'>#2093</a>).</p></li>
 <li><p><code><a href="../reference/test.html">test_coverage_file()</a></code> now works when there is not a 1 to 1 correspondence between test and source files (<a href='https://github.com/r-lib/devtools/issues/2011'>#2011</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> now works again when <code>pkg</code> is not the current working directory (<a href='https://github.com/r-lib/devtools/issues/1974'>#1974</a>).</p></li>
-<li><p><code><a href="../reference/release.html">release()</a></code> now works without error when <code><a href="https://rdrr.io/r/base/options.html">options("repos")</a></code> is unnamed (<a href='https://github.com/r-lib/devtools/issues/1956'>#1956</a>).</p></li>
+<li>
+<code><a href="../reference/release.html">release()</a></code> now works without error when <code><a href="https://rdrr.io/r/base/options.html">options("repos")</a></code> is unnamed (<a href='https://github.com/r-lib/devtools/issues/1956'>#1956</a>).</li>
+<li><p><code><a href="../reference/create.html">create()</a></code> added, the RStudio IDE uses <code><a href="../reference/create.html">create()</a></code>, so removing it in version 2.1.0 broke old versions of the IDE.</p></li>
+<li><p>In several places <code>http:</code> URLs were used instead of <code>https:</code>, the most critical being in the <code>cran_mirror</code>, <code>cran_pacakges</code>, and <code>cran_submission_url</code> values which could have enabled discrete activity disclosure and person-in-the-middle attacks (i.e. changing the contents while uploading/downloading). All <code>http:</code> URLS have been changed to <code>https:</code> URLs. (<a href='https://github.com/hrbrmstr'>@hrbrmstr</a>, <a href='https://github.com/r-lib/devtools/issues/2091'>#2091</a>)</p></li>
 </ul>
 </div>
 </div>
