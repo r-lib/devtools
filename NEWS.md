@@ -106,8 +106,6 @@
 
 * `test_file()` and `test_coverage_file()` now work with C
   and C++ files in the src/ directory as well.
-  
-* 
 
 # devtools 2.0.2
 
