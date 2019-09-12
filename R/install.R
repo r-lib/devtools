@@ -90,7 +90,10 @@ install <-
       install_path <- pkg$path
     }
 
-    if (is_loaded(pkg)) {
+    was_loaded <- is_loaded(pkg)
+    was_attached <- is_attached(pkg)
+
+    if (was_loaded) {
       pkgload::unload(pkg$package)
     }
 
@@ -98,8 +101,12 @@ install <-
       callr::rcmd("INSTALL", c(install_path, opts), echo = !quiet, show = !quiet)
     )
 
-    if (reload) {
-      reload(pkg, quiet = quiet)
+    if (reload && was_loaded) {
+      if (was_attached) {
+        require(pkg$package, quietly = TRUE, character.only = TRUE)
+      } else {
+        requireNamespace(pkg$package, quietly = TRUE)
+      }
     }
 
     invisible(TRUE)

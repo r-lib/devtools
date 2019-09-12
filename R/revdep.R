@@ -64,7 +64,7 @@ print.maintainers <- function(x, ...) {
 cran_packages <- memoise::memoise(
   function() {
     local <- file.path(tempdir(), "packages.rds")
-    utils::download.file("http://cran.R-project.org/web/packages/packages.rds", local,
+    utils::download.file("https://cran.R-project.org/web/packages/packages.rds", local,
       mode = "wb", quiet = TRUE
     )
     on.exit(unlink(local))

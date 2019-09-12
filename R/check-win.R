@@ -1,7 +1,7 @@
 #' Build windows binary package.
 #'
 #' This function works by bundling source package, and then uploading to
-#' <http://win-builder.r-project.org/>.  Once building is complete you'll
+#' <https://win-builder.r-project.org/>.  Once building is complete you'll
 #' receive a link to the built package in the email address listed in the
 #' maintainer field.  It usually takes around 30 minutes. As a side effect,
 #' win-build also runs `R CMD check` on the package, so `check_win`

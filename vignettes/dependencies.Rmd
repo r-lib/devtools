@@ -64,10 +64,10 @@ Also' section in `?install` for a complete list.
 Remotes: gitlab::jimhester/covr
 
 # Git
-Remotes: git::git@bitbucket.org:dannavarro/lsr-package.git
+Remotes: git::git@bitbucket.org:djnavarro/lsr.git
 
 # Bitbucket
-Remotes: bitbucket::sulab/mygene.r@default, dannavarro/lsr-package
+Remotes: bitbucket::sulab/mygene.r@default, djnavarro/lsr
 
 # Bioconductor
 Remotes: bioc::3.3/SummarizedExperiment#117513, bioc::release/Biobase
