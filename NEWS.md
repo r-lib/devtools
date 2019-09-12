@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `test()` now explicitly passes `stop_on_failure = FALSE` to
+  `testthat::test_dir()` (@jameslamb, #2099)
+
 # devtools 2.2.0
 
 ## New Features
