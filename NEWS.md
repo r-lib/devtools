@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `install()` now again reloads and re-attaches packages if they were
+  previously loaded (#2111).
+
 * `release()` no longer calls the deprecated `dr_devtools()` (#2105)
 
 # devtools 2.2.0

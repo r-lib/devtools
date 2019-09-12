@@ -32,6 +32,6 @@ reload <- function(pkg = ".", quiet = FALSE) {
   } else if (is_loaded(pkg)) {
     if (!quiet) message("Reloading loaded ", pkg$package)
     pkgload::unload(pkg$package)
-    requireNamespace(pkg$package, character.only = TRUE, quietly = TRUE)
+    requireNamespace(pkg$package, quietly = TRUE)
   }
 }

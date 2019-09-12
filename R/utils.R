@@ -134,6 +134,8 @@ is_loaded <- function(pkg = ".") {
 }
 
 is_attached <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
   !is.null(pkgload::pkg_env(pkg$package))
 }
 
