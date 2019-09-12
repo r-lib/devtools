@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `test()` now explicitly passes `stop_on_failure = FALSE` to
+  `testthat::test_dir()` (@jameslamb, #2099)
+
 * `install()` now again reloads and re-attaches packages if they were
   previously loaded (#2111).
 

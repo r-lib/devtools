@@ -58,7 +58,7 @@ test <- function(pkg = ".", filter = NULL, ...) {
 
   env <- new.env(parent = ns_env)
 
-  testthat_args <- list(test_path, filter = filter, env = env, ... = ...)
+  testthat_args <- list(test_path, filter = filter, env = env, stop_on_failure = FALSE, ... = ...)
   if (packageVersion("testthat") >= "1.0.2.9000") { # 2.0.0
     testthat_args <- c(testthat_args, load_helpers = FALSE)
   } else if (packageVersion("testthat") > "1.0.2") {
