@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `release()` no longer calls the deprecated `dr_devtools()` (#2105)
+
 # devtools 2.2.0
 
 ## New Features
