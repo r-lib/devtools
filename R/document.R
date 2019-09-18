@@ -21,10 +21,17 @@ document <- function(pkg = ".", roclets = NULL, quiet = FALSE) {
   if (pkg$package == "roxygen2") {
     # roxygen2 crashes if it reloads itself
     load_all(pkg$path, quiet = quiet)
-    load_code <- function(path) asNamespace("roxygen2")
+  }
+
+  if (packageVersion("roxyen2") >= "6.1.99.9001") {
+    load_code <- NULL
   } else {
-    load_code <- function(path) {
-      pkgload::load_all(path, compile = FALSE, helpers = FALSE, attach_testthat = FALSE, quiet = quiet)$env
+    if (pkg$package == "roxygen2") {
+      load_code <- function(path) asNamespace("roxygen2")
+    } else {
+      load_code <- function(path) {
+        pkgload::load_all(path, compile = FALSE, helpers = FALSE, attach_testthat = FALSE, quiet = quiet)$env
+      }
     }
   }
 
