@@ -5,7 +5,7 @@
 \title{Create a package}
 \usage{
 create(path, fields = NULL, rstudio = rstudioapi::isAvailable(),
-  check_name = TRUE, open = interactive())
+  open = interactive())
 }
 \arguments{
 \item{path}{A path. If it exists, it is used. If it does not exist, it is
@@ -17,9 +17,6 @@ personalized defaults using package options}
 
 \item{rstudio}{If \code{TRUE}, calls \code{\link[=use_rstudio]{use_rstudio()}} to make the new package or
 into an \href{https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects}{RStudio Project}.}
-
-\item{check_name}{Whether to check if the name is valid for CRAN and throw an
-error if not}
 
 \item{open}{If \code{TRUE}, \link[=proj_activate]{activates} the new project:
 \itemize{
