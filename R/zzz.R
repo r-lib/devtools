@@ -48,7 +48,8 @@ NULL
 
 devtools_default_options <- list(
   devtools.path = "~/R-dev",
-  devtools.install.args = ""
+  devtools.install.args = "",
+  devtools.ellipsis_action = rlang::warn
 )
 
 .onLoad <- function(libname, pkgname) {

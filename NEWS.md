@@ -1,5 +1,19 @@
 # devtools (development version)
 
+* New `options("devtools.ellipsis_action")` option added to control the action
+  of ellipsis in devtools. This should be one of
+  - `rlang::abort` - to emit an error if arguments are unused
+  - `rlang::warn` - to emit a warning if arguments are unused
+  - `rlang::inform` - to emit a message if arguments are unused
+  - `rlang::signal` - to emit a message if arguments are unused
+  Using `rlang::signal` will produce no output unless the custom condition is
+  caught, so it is the best way to retain backwards compatibility with devtools
+  behavior prior to 2.2.0.
+  The default behavior was also changed to issue a
+  warning rather than an error if any arguments are unused, as there are some
+  cases where devtools does not need to install the package, so unused
+  arguments are false positives (#2109).
+
 * `install()` now throws an error when it fails, as intended (#2120)
 
 * `test()` now explicitly passes `stop_on_failure = FALSE` to

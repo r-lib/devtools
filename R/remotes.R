@@ -1,10 +1,15 @@
 #' @importFrom ellipsis check_dots_used
 with_ellipsis <- function(fun) {
   b <- body(fun)
-  ellipsis_call <- as.call(c(call("::", as.symbol("ellipsis"), as.symbol("check_dots_used")), list()))
 
-  b <- as.call(c(as.symbol("{"), ellipsis_call, as.list(b[-1])))
-  body(fun) <- b
+  f <- function(...) {
+    ellipsis::check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+
+    !! b
+  }
+  f <- rlang::expr_interp(f)
+
+  body(fun) <- body(f)
   fun
 }
 
