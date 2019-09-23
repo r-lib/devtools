@@ -1,4 +1,4 @@
-# devtools (development version)
+# devtools 2.2.1
 
 * New `options("devtools.ellipsis_action")` option added to control the action
   of ellipsis in devtools. This should be one of
