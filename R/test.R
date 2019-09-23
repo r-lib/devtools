@@ -67,13 +67,15 @@ test <- function(pkg = ".", filter = NULL, ...) {
 
   check_dots_used()
 
-  withr::with_options(
-    c(useFancyQuotes = FALSE),
-    withr::with_envvar(
-      c(r_env_vars(),
-        "TESTTHAT_PKG" = pkg$package
-      ),
-      do.call(testthat::test_dir, testthat_args)
+  withr::with_collate("C",
+    withr::with_options(
+      c(useFancyQuotes = FALSE),
+      withr::with_envvar(
+        c(r_env_vars(),
+          "TESTTHAT_PKG" = pkg$package
+          ),
+        do.call(testthat::test_dir, testthat_args)
+      )
     )
   )
 }

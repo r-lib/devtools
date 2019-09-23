@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `test()` now sets the collation order to `C` before running, which matches
+  the behavior of tests when run with `R CMD check` (#2121)
+
 * New `options("devtools.ellipsis_action")` option added to control the action
   of ellipsis in devtools. This should be one of
   - `rlang::abort` - to emit an error if arguments are unused
