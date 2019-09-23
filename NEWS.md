@@ -16,13 +16,13 @@
 
 * `install()` now throws an error when it fails, as intended (#2120)
 
-* `test()` now explicitly passes `stop_on_failure = FALSE` to
-  `testthat::test_dir()` (@jameslamb, #2099)
-
 * `install()` now again reloads and re-attaches packages if they were
   previously loaded (#2111).
 
 * `release()` no longer calls the deprecated `dr_devtools()` (#2105)
+
+* `test()` now explicitly passes `stop_on_failure = FALSE` to
+  `testthat::test_dir()` (@jameslamb, #2099)
 
 # devtools 2.2.0
 
