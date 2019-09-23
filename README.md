@@ -166,9 +166,9 @@ e.g. use `sessioninfo::session_info()` rather than `devtools::session_info()`,
 or `remotes::install_github()` vs `devtools::install_github()`.
 
 However for day to day development we recommend you continue to use
-`library(devtools)` to quickly load all needed deveolpment tools, just like
-`library(tidyverse)` quickly loads all the tools nessesary for data exploration
-and vizualization.
+`library(devtools)` to quickly load all needed development tools, just like
+`library(tidyverse)` quickly loads all the tools necessary for data exploration
+and visualization.
 
 ## Code of conduct
 
