@@ -154,6 +154,20 @@
 <a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li><p><code><a href="../reference/test.html">test()</a></code> now sets the collation order to <code>C</code> before running, which matches the behavior of tests when run with <code>R CMD check</code> (<a href='https://github.com/r-lib/devtools/issues/2121'>#2121</a>)</p></li>
+<li>New <code><a href="https://rdrr.io/r/base/options.html">options("devtools.ellipsis_action")</a></code> option added to control the action of ellipsis in devtools. This should be one of
+<ul>
+<li>
+<code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::abort</a></code> - to emit an error if arguments are unused</li>
+<li>
+<code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::warn</a></code> - to emit a warning if arguments are unused</li>
+<li>
+<code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::inform</a></code> - to emit a message if arguments are unused</li>
+<li>
+<code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::signal</a></code> - to emit a message if arguments are unused Using <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::signal</a></code> will produce no output unless the custom condition is caught, so it is the best way to retain backwards compatibility with devtools behavior prior to 2.2.0. The default behavior was also changed to issue a warning rather than an error if any arguments are unused, as there are some cases where devtools does not need to install the package, so unused arguments are false positives (<a href='https://github.com/r-lib/devtools/issues/2109'>#2109</a>).</li>
+</ul>
+</li>
+<li><p><code><a href="../reference/install.html">install()</a></code> now throws an error when it fails, as intended (<a href='https://github.com/r-lib/devtools/issues/2120'>#2120</a>)</p></li>
 <li><p><code><a href="../reference/test.html">test()</a></code> now explicitly passes <code>stop_on_failure = FALSE</code> to <code><a href="https://rdrr.io/pkg/testthat/man/test_dir.html">testthat::test_dir()</a></code> (<a href='https://github.com/jameslamb'>@jameslamb</a>, <a href='https://github.com/r-lib/devtools/issues/2099'>#2099</a>)</p></li>
 <li><p><code><a href="../reference/install.html">install()</a></code> now again reloads and re-attaches packages if they were previously loaded (<a href='https://github.com/r-lib/devtools/issues/2111'>#2111</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> no longer calls the deprecated <code><a href="../reference/devtools-deprecated.html">dr_devtools()</a></code> (<a href='https://github.com/r-lib/devtools/issues/2105'>#2105</a>)</p></li>
