@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1</span>
       </span>
     </div>
 
@@ -149,9 +149,9 @@
       <small>Source: <a href='https://github.com/r-lib/devtools/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="devtools-development-version" class="section level1">
+    <div id="devtools-2-2-1" class="section level1">
 <h1 class="page-header">
-<a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
+<a href="#devtools-2-2-1" class="anchor"></a>devtools 2.2.1<small> Unreleased </small>
 </h1>
 <ul>
 <li><p><code><a href="../reference/test.html">test()</a></code> now sets the collation order to <code>C</code> before running, which matches the behavior of tests when run with <code>R CMD check</code> (<a href='https://github.com/r-lib/devtools/issues/2121'>#2121</a>)</p></li>
@@ -168,9 +168,9 @@
 </ul>
 </li>
 <li><p><code><a href="../reference/install.html">install()</a></code> now throws an error when it fails, as intended (<a href='https://github.com/r-lib/devtools/issues/2120'>#2120</a>)</p></li>
-<li><p><code><a href="../reference/test.html">test()</a></code> now explicitly passes <code>stop_on_failure = FALSE</code> to <code><a href="https://rdrr.io/pkg/testthat/man/test_dir.html">testthat::test_dir()</a></code> (<a href='https://github.com/jameslamb'>@jameslamb</a>, <a href='https://github.com/r-lib/devtools/issues/2099'>#2099</a>)</p></li>
 <li><p><code><a href="../reference/install.html">install()</a></code> now again reloads and re-attaches packages if they were previously loaded (<a href='https://github.com/r-lib/devtools/issues/2111'>#2111</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> no longer calls the deprecated <code><a href="../reference/devtools-deprecated.html">dr_devtools()</a></code> (<a href='https://github.com/r-lib/devtools/issues/2105'>#2105</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> now explicitly passes <code>stop_on_failure = FALSE</code> to <code><a href="https://rdrr.io/pkg/testthat/man/test_dir.html">testthat::test_dir()</a></code> (<a href='https://github.com/jameslamb'>@jameslamb</a>, <a href='https://github.com/r-lib/devtools/issues/2099'>#2099</a>)</p></li>
 </ul>
 </div>
     <div id="devtools-2-2-0" class="section level1">
@@ -224,7 +224,7 @@
 <a href="#deprecated-functions-now-removed" class="anchor"></a>Deprecated functions now removed</h2>
 <ul>
 <li><p><code><a href="../reference/create.html">create()</a></code>, <code>create_description()</code>, <code>setup()</code> <code>use_appveyor()</code>, <code>use_build_ignore()</code>, <code>use_code_of_conduct()</code>, <code>use_coverage()</code>, <code>use_cran_badge()</code>, <code>use_cran_comments()</code>, <code>use_data()</code>, <code>use_data_raw()</code>, <code>use_dev_version()</code>, <code>use_git()</code>, <code>use_git_hook()</code>, <code>use_github()</code>, <code>use_github_links()</code>, <code>use_gpl3_license()</code>, <code>use_mit_license()</code>, <code>use_news_md()</code>, <code>use_package()</code>, <code>use_package_doc()</code>, <code>use_rcpp()</code>, <code>use_readme_md()</code>, <code>use_readme_rmd()</code>, <code>use_revdep()</code>, <code>use_rstudio()</code>, <code>use_test()</code>, <code>use_testthat()</code>, <code>use_travis()</code>, <code>use_vignette()</code>, have been removed after being deprecated in previous releases. Use the versions in the <a href="https://usethis.r-lib.org/">usethis</a> package directly.</p></li>
-<li><p><code>check_cran()</code>, <code>revdep_check()</code>, <code>revdep_check_print_problems()</code>, <code>revdep_check_reset()</code>, <code>revdep_check_resume()</code>, <code>revdep_check_save_summary()</code>, <code>revdep_email()</code> have been removed after being deprecated in prevous releases. It is recommended to use the <a href="https://github.com/r-lib/revdepcheck">revdepcheck</a> package instead.</p></li>
+<li><p><code>check_cran()</code>, <code>revdep_check()</code>, <code>revdep_check_print_problems()</code>, <code>revdep_check_reset()</code>, <code>revdep_check_resume()</code>, <code>revdep_check_save_summary()</code>, <code>revdep_email()</code> have been removed after being deprecated in previous releases. It is recommended to use the <a href="https://github.com/r-lib/revdepcheck">revdepcheck</a> package instead.</p></li>
 <li><p><code>system_check()</code>, <code>system_output()</code> have been removed after being deprecated in previous releases. It is recommend to use the <a href="https://processx.r-lib.org/">processx</a> package instead.</p></li>
 <li><p><code>build_win()</code> has been removed, after being deprecated in previous releases.</p></li>
 <li><p><code>yesno()</code> as used in <code><a href="../reference/release.html">release()</a></code> now has clearer synonyms for “yes” (<a href='https://github.com/mattmalin'>@mattmalin</a>, <a href='https://github.com/r-lib/devtools/issues/1993'>#1993</a>)</p></li>
@@ -757,7 +757,7 @@
 <li><p><code>dev_help()</code> now uses <code><a href="https://rdrr.io/r/base/normalizePath.html">normalizePath()</a></code>. Hopefully this will make it more likely to work if you’re on windows and have a space in the path.</p></li>
 <li><p><code><a href="../reference/lint.html">lint()</a></code> gains a <code>cache</code> argument (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/708'>#708</a>).</p></li>
 <li><p>Fixed namespace issues related to <code><a href="https://rdrr.io/r/stats/setNames.html">stats::setNames()</a></code> (<a href='https://github.com/r-lib/devtools/issues/734'>#734</a>, <a href='https://github.com/r-lib/devtools/issues/772'>#772</a>) and <code><a href="https://rdrr.io/r/utils/unzip.html">utils::unzip()</a></code> (<a href='https://github.com/r-lib/devtools/issues/761'>#761</a>, <a href='https://github.com/robertzk'>@robertzk</a>).</p></li>
-<li><p><code><a href="../reference/release.html">release()</a></code> now reminds you to check the existing CRAN check results page (<a href='https://github.com/r-lib/devtools/issues/613'>#613</a>) ands shows file size before uploading to CRAN (<a href='https://github.com/r-lib/devtools/issues/683'>#683</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> now reminds you to check the existing CRAN check results page (<a href='https://github.com/r-lib/devtools/issues/613'>#613</a>) and shows file size before uploading to CRAN (<a href='https://github.com/r-lib/devtools/issues/683'>#683</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code>RCMD()</code> and <code>system_check()</code> are now exported so they can be used by other packages. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/699'>#699</a>).</p></li>
 <li><p><code>revdep_check()</code> creates directories if needed (<a href='https://github.com/r-lib/devtools/issues/759'>#759</a>).</p></li>
 <li><p><code>system_check()</code> combines arguments with ` <code>, not</code>, `. (<a href='https://github.com/r-lib/devtools/issues/753'>#753</a>)</p></li>
@@ -1009,7 +1009,7 @@
 <li><p><code>dev_help</code> will now use the RStudio help pane, if you’re using a recent version of RStudio (<a href='https://github.com/r-lib/devtools/issues/322'>#322</a>)</p></li>
 <li><p>Release is now a little bit smarter: if it’s a new package, it’ll ask you to read and agree to the CRAN policies; it will only ask about dependencies if it has any.</p></li>
 <li><p><code><a href="../reference/source_url.html">source_url()</a></code> (and <code><a href="../reference/source_gist.html">source_gist()</a></code>) accept SHA1 prefixes.</p></li>
-<li><p><code><a href="../reference/source_gist.html">source_gist()</a></code> uses the github api to reliably locate the raw gist. Additionally it now only attempts to source files with <code>.R</code> or <code>.r</code> extensions, and gains a <code>quiet</code> argument. (<a href='https://github.com/r-lib/devtools/issues/348'>#348</a>)</p></li>
+<li><p><code><a href="../reference/source_gist.html">source_gist()</a></code> uses the GitHub API to reliably locate the raw gist. Additionally it now only attempts to source files with <code>.R</code> or <code>.r</code> extensions, and gains a <code>quiet</code> argument. (<a href='https://github.com/r-lib/devtools/issues/348'>#348</a>)</p></li>
 <li><p>Safer installation of source packages, which were previously extracted directly into the temp directory; this could be a problem if directory names collide. Instead, source packages are now extracted into unique subdirectories.</p></li>
 </ul>
 </div>
@@ -1215,7 +1215,7 @@
 <ul>
 <li><p>Development packages are now loaded into a namespace environment, <xxxx>, and then the objects namespace are copied to the package environment, <xxxx>. This more accurately simulates how packages are normally loaded. However, all of the objects (not just the exported ones) are still copied to the package environment. (Winston Chang. Fixes <a href='https://github.com/r-lib/devtools/issues/3'>#3</a>, <a href='https://github.com/r-lib/devtools/issues/60'>#60</a>, and <a href='https://github.com/r-lib/devtools/issues/125'>#125</a>)</xxxx></xxxx></p></li>
 <li><p>Packages listed in Imports and Depends are now loaded into an imports environment, with name attribute “imports:xxxx”, which is the parent of the namespace environment. The imports environment is in turn a child of the <base></p></li>
-<li><p>The NAMESPACE file is now used for loading imports, instead of the DESCRIPTION file. Previously, <code>load_all</code> loaded all objects from the packages listed in DESCRIPTION. Now it loads packages (and, when ‘importfrom’ is used, specific objects from packages) listed in NAMESPACE. This more closely simulates normal package loading. It still checks version numbers of packages listed in DESCRIPTION. (Winston Chang)</p></li>
+<li><p>The NAMESPACE file is now used for loading imports, instead of the DESCRIPTION file. Previously, <code>load_all</code> loaded all objects from the packages listed in DESCRIPTION. Now it loads packages (and, when ‘importFrom’ is used, specific objects from packages) listed in NAMESPACE. This more closely simulates normal package loading. It still checks version numbers of packages listed in DESCRIPTION. (Winston Chang)</p></li>
 <li><p><code>load_all</code> can now be used to properly reload devtools. It does this by creating a copy of the devtools namespace environment, and calling <code>load_all</code> from that environment. (Winston Chang)</p></li>
 <li><p>The <code>.onLoad</code> and <code>.onAttach</code> functions for a development package are now both called when loading a package for the first time, or with <code>reset=TRUE</code>, and the order more correctly simulates normal package loading (create the namespace, call <code>.onLoad</code>, copy objects to the package environment, and then call <code>.onAttach</code>). (Winston Chang)</p></li>
 <li><p><code>load_all</code> will now throw a warning if a dependency package does not satisfy the version requirement listed in DESCRIPTION. (Winston Chang. Fixes <a href='https://github.com/r-lib/devtools/issues/109'>#109</a>)</p></li>
@@ -1459,7 +1459,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#devtools-development-version">development version</a></li>
+        <li><a href="#devtools-2-2-1">2.2.1</a></li>
         <li><a href="#devtools-2-2-0">2.2.0</a></li>
         <li><a href="#devtools-2-1-0">2.1.0</a></li>
         <li><a href="#devtools-2-0-2">2.0.2</a></li>

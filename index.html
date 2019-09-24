@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1</span>
       </span>
     </div>
 
@@ -178,13 +178,13 @@
 <h2 class="hasAnchor">
 <a href="#learning-more" class="anchor"></a>Learning more</h2>
 <p>R package development can be intimidating, however there are now a number of valuable resources to help!</p>
-<p><a href="https://r-pkgs.org"><img src="https://r-pkgs.org/images/cover.png" height="252" align="right"></a></p>
+<p><a href="http://r-pkgs.org"><img src="http://r-pkgs.org/images/cover.png" height="252" align="right"></a></p>
 <ol>
 <li>R Packages is a book that gives a comprehensive treatment of all common parts of package development and uses devtools throughout.
 <ul>
 <li>The first edition is available at <a href="http://r-pkgs.had.co.nz" class="uri">http://r-pkgs.had.co.nz</a>, but note that it has grown somewhat out of sync with the current version of devtools.</li>
-<li>A second edition is under development and is evolving to reflect the current state of devtools. It is available at <a href="https://r-pkgs.org" class="uri">https://r-pkgs.org</a>.</li>
-<li>The <a href="https://r-pkgs.org/whole-game.html">Whole Game</a> and <a href="https://r-pkgs.org/package-structure-state.html">Package structure</a> chapters make great places to start.</li>
+<li>A second edition is under development and is evolving to reflect the current state of devtools. It is available at <a href="http://r-pkgs.org" class="uri">http://r-pkgs.org</a>.</li>
+<li>The <a href="http://r-pkgs.org/whole-game.html">Whole Game</a> and <a href="http://r-pkgs.org/package-structure-state.html">Package structure</a> chapters make great places to start.</li>
 </ul>
 </li>
 <li><p><a href="https://community.rstudio.com/c/package-development">RStudio community - package development</a> is a great place to ask specific questions related to package development.</p></li>
@@ -217,7 +217,7 @@
 </ul>
 <p>Generally, you should not need to worry about these different packages, because devtools installs them all automatically. You will need to care, however, if you’re filing a bug because reporting it at the correct place will lead to a speedier resolution.</p>
 <p>You also may need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">sessioninfo::session_info()</a></code> rather than <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code>, or <code><a href="https://rdrr.io/pkg/remotes/man/install_github.html">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
-<p>However for day to day development we recommend you continue to use <code><a href="https://rdrr.io/r/base/library.html">library(devtools)</a></code> to quickly load all needed deveolpment tools, just like <code><a href="https://rdrr.io/r/base/library.html">library(tidyverse)</a></code> quickly loads all the tools nessesary for data exploration and vizualization.</p>
+<p>However for day to day development we recommend you continue to use <code><a href="https://rdrr.io/r/base/library.html">library(devtools)</a></code> to quickly load all needed development tools, just like <code><a href="https://rdrr.io/r/base/library.html">library(tidyverse)</a></code> quickly loads all the tools necessary for data exploration and visualization.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
