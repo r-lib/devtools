@@ -1,6 +1,6 @@
 Package: devtools
 Title: Tools to Make Developing R Packages Easier
-Version: 2.2.0.9000
+Version: 2.2.1
 Authors@R: c(
     person("Hadley", "Wickham", role = "aut"),
     person("Jim", "Hester", , "jim.hester@rstudio.com", role = c("aut", "cre")),
@@ -66,3 +66,4 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
+Language: en-US

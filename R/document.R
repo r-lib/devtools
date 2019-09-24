@@ -23,7 +23,7 @@ document <- function(pkg = ".", roclets = NULL, quiet = FALSE) {
     load_all(pkg$path, quiet = quiet)
   }
 
-  if (packageVersion("roxyen2") >= "6.1.99.9001") {
+  if (packageVersion("roxygen2") >= "6.1.99.9001") {
     load_code <- NULL
   } else {
     if (pkg$package == "roxygen2") {

@@ -1,4 +1,4 @@
-# devtools (development version)
+# devtools 2.2.1
 
 * `test()` now sets the collation order to `C` before running, which matches
   the behavior of tests when run with `R CMD check` (#2121)
@@ -19,13 +19,13 @@
 
 * `install()` now throws an error when it fails, as intended (#2120)
 
-* `test()` now explicitly passes `stop_on_failure = FALSE` to
-  `testthat::test_dir()` (@jameslamb, #2099)
-
 * `install()` now again reloads and re-attaches packages if they were
   previously loaded (#2111).
 
 * `release()` no longer calls the deprecated `dr_devtools()` (#2105)
+
+* `test()` now explicitly passes `stop_on_failure = FALSE` to
+  `testthat::test_dir()` (@jameslamb, #2099)
 
 # devtools 2.2.0
 
@@ -108,7 +108,7 @@
 * `check_cran()`, `revdep_check()`, `revdep_check_print_problems()`,
   `revdep_check_reset()`, `revdep_check_resume()`, `revdep_check_save_summary()`,
   `revdep_email()` have been removed after being
-  deprecated in prevous releases. It is recommended to use the
+  deprecated in previous releases. It is recommended to use the
   [revdepcheck](https://github.com/r-lib/revdepcheck) package instead.
 
 * `system_check()`, `system_output()` have been removed after being deprecated
@@ -1000,7 +1000,7 @@ There were a handful of smaller fixes:
   `utils::unzip()` (#761, @robertzk).
 
 * `release()` now reminds you to check the existing CRAN check results page
-  (#613) ands shows file size before uploading to CRAN (#683, @krlmlr).
+  (#613) and shows file size before uploading to CRAN (#683, @krlmlr).
 
 * `RCMD()` and `system_check()` are now exported so they can be used by other 
   packages. (@jimhester, #699).
@@ -1434,7 +1434,7 @@ Two dependencies were incremented:
 
 * `source_url()` (and `source_gist()`) accept SHA1 prefixes.
 
-* `source_gist()` uses the github api to reliably locate the raw gist.
+* `source_gist()` uses the GitHub API to reliably locate the raw gist.
   Additionally it now only attempts to source files with `.R` or `.r`
   extensions, and gains a `quiet` argument. (#348)
 
@@ -1799,7 +1799,7 @@ Two dependencies were incremented:
 * The NAMESPACE file is now used for loading imports, instead of the
   DESCRIPTION file. Previously, `load_all` loaded all objects from the
   packages listed in DESCRIPTION. Now it loads packages (and,
-  when 'importfrom' is used, specific objects from packages) listed in
+  when 'importFrom' is used, specific objects from packages) listed in
   NAMESPACE. This more closely simulates normal package loading. It
   still checks version numbers of packages listed in DESCRIPTION.
   (Winston Chang)
