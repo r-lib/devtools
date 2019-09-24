@@ -19,7 +19,7 @@ lint <- function(pkg = ".", cache = TRUE, ...) {
 
   message("Linting ", pkg$package, appendLF = FALSE)
 
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   lintr::lint_package(pkg$path, cache = cache, ...)
 }

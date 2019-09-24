@@ -13,7 +13,7 @@ show_news <- function(pkg = ".", latest = TRUE, ...) {
     stop("No NEWS found", call. = FALSE)
   }
 
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   out <- utils::news(..., db = ("tools" %:::% ".news_reader_default")(news_path))
   if (latest) {

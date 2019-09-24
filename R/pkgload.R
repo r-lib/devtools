@@ -9,7 +9,7 @@ load_all <- function(path = ".", reset = TRUE, recompile = FALSE,
 
   save_all()
 
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   pkgload::load_all(
     path = path, reset = reset, recompile = recompile,

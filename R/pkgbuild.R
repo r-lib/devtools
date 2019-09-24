@@ -8,7 +8,7 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
                   manual = FALSE, args = NULL, quiet = FALSE, ...) {
   save_all()
 
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   pkgbuild::build(
     path = pkg, dest_path = path, binary = binary,

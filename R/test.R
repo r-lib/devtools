@@ -65,7 +65,7 @@ test <- function(pkg = ".", filter = NULL, ...) {
     testthat_args <- c(testthat_args, load_helpers = FALSE)
   }
 
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   withr::with_collate("C",
     withr::with_options(
@@ -92,7 +92,7 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
 
   save_all()
 
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   withr::with_envvar(
     c(r_env_vars(),
@@ -180,7 +180,7 @@ test_file <- function(file = find_active_file(), ...) {
 
   regex <- paste0("^", escape_special_regex(test_files), "$", collapse = "|")
 
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   test(filter = regex, ...)
 }
@@ -254,7 +254,7 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
 
   env <- load_all(pkg$path, quiet = TRUE)$env
 
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   withr::with_envvar(
     c(r_env_vars(),

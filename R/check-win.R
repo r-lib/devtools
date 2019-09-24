@@ -20,7 +20,7 @@ NULL
 #' @describeIn check_win Check package on the development version of R.
 #' @export
 check_win_devel <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   check_win(
     pkg = pkg, version = "R-devel", args = args, manual = manual,
@@ -31,7 +31,7 @@ check_win_devel <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL,
 #' @describeIn check_win Check package on the release version of R.
 #' @export
 check_win_release <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   check_win(
     pkg = pkg, version = "R-release", args = args, manual = manual,
@@ -42,7 +42,7 @@ check_win_release <- function(pkg = ".", args = NULL, manual = TRUE, email = NUL
 #' @describeIn check_win Check package on the previous major release version of R.
 #' @export
 check_win_oldrelease <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   check_win(
     pkg = pkg, version = "R-oldrelease", args = args, manual = manual,

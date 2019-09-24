@@ -16,7 +16,7 @@ build_site <- function(path = ".", quiet = TRUE, ...) {
 
   pkg <- as.package(path)
 
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   withr::with_temp_libpaths(action = "prefix", code = {
     install(pkg = pkg$path, upgrade = "never", reload = FALSE, quiet = quiet)

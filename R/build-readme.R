@@ -36,7 +36,7 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
 
   message("Building ", pkg$package, " readme")
 
-  check_dots_used()
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   output <- callr::r(build,
     args = list(pkg_path = pkg$path, readme_path = readme_path, ... = ..., quiet = quiet),
