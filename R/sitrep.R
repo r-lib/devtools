@@ -69,7 +69,7 @@ r_release <- memoise::memoise(.r_release)
 #' dev_sitrep()
 #' }
 dev_sitrep <- function(pkg = ".", debug = FALSE) {
-  pkg <- as.package(pkg)
+  pkg <- tryCatch(as.package(pkg), error = function(e) NULL)
 
   has_build_tools <- !is_windows || pkgbuild::has_build_tools(debug = debug)
 
@@ -83,7 +83,7 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
       rtools_path = if (has_build_tools) pkgbuild::rtools_path(),
       devtools_version = packageVersion("devtools"),
       devtools_deps = remotes::package_deps("devtools", dependencies = NA),
-      pkg_deps = remotes::dev_package_deps(pkg$path, dependencies = TRUE),
+      pkg_deps = if (!is.null(pkg)) { remotes::dev_package_deps(pkg$path, dependencies = TRUE) },
       rstudio_version = if (rstudioapi::isAvailable()) rstudioapi::getVersion(),
       rstudio_msg = check_for_rstudio_updates()
     ),

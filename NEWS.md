@@ -1,5 +1,6 @@
 # devtools (development version)
 
+* `dev_sitrep()` now works if run outside a package directory (#2127).
 * `release()` now works if the package root is not in the working directory.
 
 # devtools 2.2.1
