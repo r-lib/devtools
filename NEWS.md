@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `release()` now works if the package root is not in the working directory.
+
 # devtools 2.2.1
 
 * `test()` now sets the collation order to `C` before running, which matches
