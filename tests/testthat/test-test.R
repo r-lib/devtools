@@ -29,3 +29,17 @@ test_that("TESTTHAT_PKG environment varaible is set", {
   test("testTest", filter = "envvar", reporter = "stop")
   expect_true(TRUE)
 })
+
+test_that("stop_on_failure set to FALSE if not provided", {
+  expect_output(test("testTestWithFailure", filter = "fail"), "Broken")
+})
+
+test_that("stop_on_failure passed on if provided", {
+  expect_output(test("testTestWithFailure", filter = "fail", stop_on_failure = FALSE), "Broken")
+  expect_error(test("testTestWithFailure", filter = "fail", stop_on_failure = TRUE))
+})
+
+test_that("stop_on_warning passed on if provided", {
+  expect_output(test("testTestWithFailure", filter = "warn", stop_on_warning = FALSE), "Beware!")
+  expect_error(test("testTestWithFailure", filter = "warn", stop_on_warning = TRUE))
+})

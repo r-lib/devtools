@@ -1,0 +1,5 @@
+context("warning")
+
+test_that("warning from test", {
+  warning("Beware!")
+})

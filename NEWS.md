@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `test()` now passes any user-specified value for `stop_on_failure`,
+  rather than always setting it to FALSE (@infotroph, #2129)
 * `dev_sitrep()` now works if run outside a package directory (#2127).
 * `release()` now works if the package root is not in the working directory.
 
