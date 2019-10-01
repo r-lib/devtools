@@ -1,7 +1,9 @@
 # devtools (development version)
 
-* `test()` now passes any user-specified value for `stop_on_failure`,
-  rather than always setting it to FALSE (@infotroph, #2129)
+* `test()` now takes `stop_on_failure` as a formal argument (FALSE by default)
+  instead of in `...`. Its value is still passed to `testthat::test_dir` as
+  before (@infotroph, #2129).
+
 * `dev_sitrep()` now works if run outside a package directory (#2127).
 * `release()` now works if the package root is not in the working directory.
 

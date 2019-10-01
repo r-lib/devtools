@@ -18,7 +18,7 @@
 #' @inheritParams testthat::test_dir
 #' @inheritParams run_examples
 #' @export
-test <- function(pkg = ".", filter = NULL, ...) {
+test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, ...) {
   save_all()
 
   pkg <- as.package(pkg)
@@ -58,8 +58,7 @@ test <- function(pkg = ".", filter = NULL, ...) {
 
   env <- new.env(parent = ns_env)
 
-  testthat_args <- list(test_path, filter = filter, env = env,  ... = ...)
-  testthat_args$stop_on_failure <- testthat_args$stop_on_failure %||% FALSE
+  testthat_args <- list(test_path, filter = filter, env = env, stop_on_failure = stop_on_failure, ... = ...)
 
   if (packageVersion("testthat") >= "1.0.2.9000") { # 2.0.0
     testthat_args <- c(testthat_args, load_helpers = FALSE)
