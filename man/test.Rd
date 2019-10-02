@@ -8,7 +8,7 @@
 \alias{test_coverage_file}
 \title{Execute \pkg{test_that} tests in a package.}
 \usage{
-test(pkg = ".", filter = NULL, ...)
+test(pkg = ".", filter = NULL, stop_on_failure = FALSE, ...)
 
 test_coverage(pkg = ".", show_report = interactive(), ...)
 
@@ -26,6 +26,8 @@ package object.  See \code{\link[=as.package]{as.package()}} for more informatio
 \item{filter}{If not \code{NULL}, only tests with file names matching this
 regular expression will be executed. Matching be performed on the file
 name after it has been stripped of \code{"test-"} and \code{".R"}.}
+
+\item{stop_on_failure}{If \code{TRUE}, throw an error if any tests fail.}
 
 \item{...}{additional arguments passed to \code{\link[testthat:test_dir]{testthat::test_dir()}} and
 \code{\link[covr:package_coverage]{covr::package_coverage()}}}
