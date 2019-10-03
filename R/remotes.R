@@ -1,7 +1,4 @@
-check_dots_used <- function(...) {
-  ellipsis::check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
-}
-
+#' @importFrom ellipsis check_dots_used
 with_ellipsis <- function(fun) {
   b <- body(fun)
 
