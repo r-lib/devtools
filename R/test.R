@@ -16,9 +16,10 @@
 #'   corresponding test file will be run. The default is to use the active file
 #'   in RStudio (if available).
 #' @inheritParams testthat::test_dir
+#' @inheritParams pkgload::load_all
 #' @inheritParams run_examples
 #' @export
-test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, ...) {
+test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...) {
   save_all()
 
   pkg <- as.package(pkg)
@@ -50,7 +51,7 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, ...) {
   # Run tests in a child of the namespace environment, like
   # testthat::test_package
   message("Loading ", pkg$package)
-  ns_env <- load_all(pkg$path, quiet = TRUE)$env
+  ns_env <- load_all(pkg$path, quiet = TRUE, export_all = export_all)$env
 
   message("Testing ", pkg$package)
   Sys.sleep(0.05)
@@ -237,7 +238,7 @@ find_source_file <- function(file) {
 
 #' @rdname test
 #' @export
-test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_report = interactive(), ...) {
+test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_report = interactive(), export_all = TRUE, ...) {
 
   is_source_file <- basename(dirname(file)) %in% c("R", "src")
 
@@ -253,7 +254,7 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
 
   pkg <- as.package(dirname(file)[[1]])
 
-  env <- load_all(pkg$path, quiet = TRUE)$env
+  env <- load_all(pkg$path, quiet = TRUE, export_all = export_all)$env
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
