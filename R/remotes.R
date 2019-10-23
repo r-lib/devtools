@@ -29,10 +29,10 @@ with_pkgbuild_build_tools <- function(fun) {
 #' arguments are used.
 #'
 #' Follow the links below to see the documentation.
-#' [install_bioc()], [install_bitbucket()], [install_cran()], [install_dev()],
-#' [install_git()], [install_github()], [install_gitlab()], [install_local()],
-#' [install_svn()], [install_url()], [install_version()], [update_packages()],
-#' [dev_package_deps()].
+#' [remotes::install_bioc()], [remotes::install_bitbucket()], [remotes::install_cran()], [remotes::install_dev()],
+#' [remotes::install_git()], [remotes::install_github()], [remotes::install_gitlab()], [remotes::install_local()],
+#' [remotes::install_svn()], [remotes::install_url()], [remotes::install_version()], [remotes::update_packages()],
+#' [remotes::dev_package_deps()].
 #'
 #' @importFrom remotes install_bioc
 #' @name remote-reexports

@@ -117,9 +117,9 @@ arguments are used.
 }
 \details{
 Follow the links below to see the documentation.
-\code{\link[=install_bioc]{install_bioc()}}, \code{\link[=install_bitbucket]{install_bitbucket()}}, \code{\link[=install_cran]{install_cran()}}, \code{\link[=install_dev]{install_dev()}},
-\code{\link[=install_git]{install_git()}}, \code{\link[=install_github]{install_github()}}, \code{\link[=install_gitlab]{install_gitlab()}}, \code{\link[=install_local]{install_local()}},
-\code{\link[=install_svn]{install_svn()}}, \code{\link[=install_url]{install_url()}}, \code{\link[=install_version]{install_version()}}, \code{\link[=update_packages]{update_packages()}},
-\code{\link[=dev_package_deps]{dev_package_deps()}}.
+\code{\link[remotes:install_bioc]{remotes::install_bioc()}}, \code{\link[remotes:install_bitbucket]{remotes::install_bitbucket()}}, \code{\link[remotes:install_cran]{remotes::install_cran()}}, \code{\link[remotes:install_dev]{remotes::install_dev()}},
+\code{\link[remotes:install_git]{remotes::install_git()}}, \code{\link[remotes:install_github]{remotes::install_github()}}, \code{\link[remotes:install_gitlab]{remotes::install_gitlab()}}, \code{\link[remotes:install_local]{remotes::install_local()}},
+\code{\link[remotes:install_svn]{remotes::install_svn()}}, \code{\link[remotes:install_url]{remotes::install_url()}}, \code{\link[remotes:install_version]{remotes::install_version()}}, \code{\link[remotes:update_packages]{remotes::update_packages()}},
+\code{\link[remotes:dev_package_deps]{remotes::dev_package_deps()}}.
 }
 \keyword{internal}
