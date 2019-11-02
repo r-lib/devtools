@@ -32,6 +32,25 @@ The `type` is an optional parameter.  If the type is missing the default is
 to install from GitHub. Additional remote dependencies should be separated by
 commas, just like normal dependencies elsewhere in the `DESCRIPTION` file.
 
+It is important to remember that you **must always declare the dependency in the usual way**, i.e. include it in `Depends`, `Imports`, `Suggests` or `Enhances`. The `Remotes` field only provides instructions on where to install the dependency from. In this example `DESCRIPTION` file, note how rlang appears in `Imports` and in `Remotes`:
+
+```
+Package: xyz
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "First",
+           family = "Last",
+           role = c("aut", "cre"),
+           email = "first.last@example.com")
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Imports: 
+    rlang
+Remotes:  
+    r-lib/rlang
+```
+
 ### GitHub
 
 Because GitHub is the most commonly used unofficial package distribution in R, it's the default:
