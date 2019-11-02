@@ -37,12 +37,18 @@ commas, just like normal dependencies elsewhere in the `DESCRIPTION` file.
 Because GitHub is the most commonly used unofficial package distribution in R, it's the default:
 
 ```yaml
+Imports: hadley/testthat
+
 Remotes: hadley/testthat
 ```
 
 You can also specify a specific hash, tag, or pull request (using the same syntax as `install_github()` if you want a particular commit. Otherwise the latest commit on the master branch is used.
 
 ```yaml
+Imports: hadley/httr
+  klutometis/roxygen
+  hadley/testthat
+  
 Remotes: hadley/httr@v0.4,
   klutometis/roxygen#142,
   hadley/testthat@c67018fa4970
@@ -51,6 +57,8 @@ Remotes: hadley/httr@v0.4,
 A type of `github` can be specified, but is not required
 
 ```yaml
+Imports: hadley/ggplot2
+
 Remotes: github::hadley/ggplot2
 ```
 
