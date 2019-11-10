@@ -26,7 +26,7 @@
 #' @keywords programming
 #' @export
 run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
-                         run = TRUE, fresh = FALSE, document = TRUE) {
+                         run = FALSE, fresh = FALSE, document = TRUE) {
   pkg <- as.package(pkg)
 
   if (fresh) {
