@@ -1,5 +1,6 @@
 # devtools (development version)
 
+* `check_win_*()` function now resets the email to the original email after execution (@muschellij2, #2152).
 * `test()` now takes `stop_on_failure` as a formal argument (FALSE by default)
   instead of in `...`. Its value is still passed to `testthat::test_dir` as
   before (@infotroph, #2129).
