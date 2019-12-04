@@ -32,7 +32,7 @@
 #' @param build_vignettes if `TRUE`, will build vignettes. Normally it is
 #'   `build` that's responsible for creating vignettes; this argument makes
 #'   sure vignettes are built even if a build never happens (i.e. because
-#'   `local = TRUE`).
+#'   `build = FALSE`).
 #' @param keep_source If `TRUE` will keep the srcrefs from an installed
 #'   package. This is useful for debugging (especially inside of RStudio).
 #'   It defaults to the option `"keep.source.pkgs"`.
