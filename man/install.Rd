@@ -50,7 +50,7 @@ to "always". \code{TRUE} and \code{FALSE} are also accepted and correspond to
 \item{build_vignettes}{if \code{TRUE}, will build vignettes. Normally it is
 \code{build} that's responsible for creating vignettes; this argument makes
 sure vignettes are built even if a build never happens (i.e. because
-\code{local = TRUE}).}
+\code{build = FALSE}).}
 
 \item{keep_source}{If \code{TRUE} will keep the srcrefs from an installed
 package. This is useful for debugging (especially inside of RStudio).
