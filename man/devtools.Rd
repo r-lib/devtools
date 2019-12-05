@@ -20,7 +20,7 @@ Devtools uses the following \code{\link[=options]{options()}} to configure behav
 emails.
 
 \item \code{devtools.install.args}: a string giving extra arguments passed
-to \code{R CMD install} by \code{\link[=install]{install()}}.
+to \verb{R CMD install} by \code{\link[=install]{install()}}.
 
 \item \code{devtools.desc.author}: a string providing a default Authors@R
 string to be used in new \file{DESCRIPTION}s.  Should be a R code, and

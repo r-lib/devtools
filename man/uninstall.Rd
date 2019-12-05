@@ -4,8 +4,7 @@
 \alias{uninstall}
 \title{Uninstall a local development package.}
 \usage{
-uninstall(pkg = ".", unload = TRUE, quiet = FALSE,
-  lib = .libPaths()[[1]])
+uninstall(pkg = ".", unload = TRUE, quiet = FALSE, lib = .libPaths()[[1]])
 }
 \arguments{
 \item{pkg}{The package to use, can be a file path to the package or a
@@ -29,6 +28,7 @@ use \code{\link[withr:with_libpaths]{withr::with_libpaths()}}.
 \code{\link[=with_debug]{with_debug()}} to install packages with debugging flags
 set.
 
-Other package installation: \code{\link{install}}
+Other package installation: 
+\code{\link{install}()}
 }
 \concept{package installation}

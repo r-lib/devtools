@@ -23,12 +23,12 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{pkgbuild}{\code{\link[pkgbuild]{with_debug}}, \code{\link[pkgbuild]{clean_dll}}, \code{\link[pkgbuild]{has_devel}}, \code{\link[pkgbuild]{find_rtools}}}
+  \item{pkgbuild}{\code{\link[pkgbuild]{clean_dll}}, \code{\link[pkgbuild]{find_rtools}}, \code{\link[pkgbuild]{has_devel}}, \code{\link[pkgbuild]{with_debug}}}
 
-  \item{pkgload}{\code{\link[pkgload]{inst}}, \code{\link[pkgload]{parse_deps}}, \code{\link[pkgload]{check_dep_version}}, \code{\link[pkgload]{unload}}}
+  \item{pkgload}{\code{\link[pkgload]{check_dep_version}}, \code{\link[pkgload]{inst}}, \code{\link[pkgload]{parse_deps}}, \code{\link[pkgload]{unload}}}
 
   \item{remotes}{\code{\link[remotes]{github_pull}}, \code{\link[remotes]{github_release}}}
 
-  \item{sessioninfo}{\code{\link[sessioninfo]{session_info}}, \code{\link[sessioninfo]{package_info}}}
+  \item{sessioninfo}{\code{\link[sessioninfo]{package_info}}, \code{\link[sessioninfo]{session_info}}}
 }}
 

@@ -4,8 +4,15 @@
 \alias{run_examples}
 \title{Run all examples in a package.}
 \usage{
-run_examples(pkg = ".", start = NULL, show = TRUE, test = FALSE,
-  run = TRUE, fresh = FALSE, document = TRUE)
+run_examples(
+  pkg = ".",
+  start = NULL,
+  show = TRUE,
+  test = FALSE,
+  run = TRUE,
+  fresh = FALSE,
+  document = TRUE
+)
 }
 \arguments{
 \item{pkg}{The package to use, can be a file path to the package or a
@@ -34,7 +41,7 @@ won't work.}
 examples are updated before running them.}
 }
 \description{
-One of the most frustrating parts of \code{R CMD check} is getting all of your
+One of the most frustrating parts of \verb{R CMD check} is getting all of your
 examples to pass - whenever one fails you need to fix the problem and then
 restart the whole process.  This function makes it a little easier by
 making it possible to run all examples from an R function.

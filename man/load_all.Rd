@@ -4,15 +4,22 @@
 \alias{load_all}
 \title{Load complete package.}
 \usage{
-load_all(path = ".", reset = TRUE, recompile = FALSE,
-  export_all = TRUE, helpers = TRUE, quiet = FALSE, ...)
+load_all(
+  path = ".",
+  reset = TRUE,
+  recompile = FALSE,
+  export_all = TRUE,
+  helpers = TRUE,
+  quiet = FALSE,
+  ...
+)
 }
 \arguments{
 \item{path}{Path to a package, or within a package.}
 
 \item{reset}{clear package environment and reset file cache before loading
 any pieces of the package. This is equivalent to running
-\code{\link[=unload]{unload()}} and is the default. Use \code{reset = FALSE} may be
+\code{\link[pkgload:unload]{unload()}} and is the default. Use \code{reset = FALSE} may be
 faster for large code bases, but is a significantly less accurate
 approximation.}
 
@@ -38,12 +45,12 @@ when a package is installed and loaded with \code{\link[=library]{library()}}.
 Currently \code{load_all}:
 
 \itemize{
-\item Loads all data files in \code{data/}.  See \code{\link[=load_data]{load_data()}}
+\item Loads all data files in \code{data/}.  See \code{\link[pkgload:load_data]{load_data()}}
 for more details.
 
 \item Sources all R files in the R directory, storing results in
 environment that behaves like a regular package namespace. See
-below and \code{\link[=load_code]{load_code()}} for more details.
+below and \code{\link[pkgload:load_code]{load_code()}} for more details.
 
 \item Compiles any C, C++, or Fortran code in the \code{src/} directory
 and connects the generated DLL into R. See \code{\link[=compile_dll]{compile_dll()}}

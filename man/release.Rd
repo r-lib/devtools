@@ -15,7 +15,7 @@ is useful if you've just checked your package and you're ready to
 release it.}
 
 \item{args}{An optional character vector of additional command
-line arguments to be passed to \code{R CMD build}.}
+line arguments to be passed to \verb{R CMD build}.}
 }
 \description{
 Run automated and manual tests, then post package to CRAN.
@@ -24,7 +24,7 @@ Run automated and manual tests, then post package to CRAN.
 The package release process will:
 
 \itemize{
-\item Confirm that the package passes \code{R CMD check} on relevant platforms
+\item Confirm that the package passes \verb{R CMD check} on relevant platforms
 \item Confirm that important files are up-to-date
 \item Build the package
 \item Submit the package to CRAN, using comments in "cran-comments.md"

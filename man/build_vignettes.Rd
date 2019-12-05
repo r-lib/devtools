@@ -4,9 +4,15 @@
 \alias{build_vignettes}
 \title{Build package vignettes.}
 \usage{
-build_vignettes(pkg = ".", dependencies = "VignetteBuilder",
-  clean = TRUE, upgrade = "never", quiet = TRUE, install = TRUE,
-  keep_md = TRUE)
+build_vignettes(
+  pkg = ".",
+  dependencies = "VignetteBuilder",
+  clean = TRUE,
+  upgrade = "never",
+  quiet = TRUE,
+  install = TRUE,
+  keep_md = TRUE
+)
 }
 \arguments{
 \item{pkg}{The package to use, can be a file path to the package or a
@@ -43,7 +49,7 @@ outputs. See
 \url{https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown}.}
 }
 \description{
-Builds package vignettes using the same algorithm that \code{R CMD build}
+Builds package vignettes using the same algorithm that \verb{R CMD build}
 does. This means including non-Sweave vignettes, using makefiles (if
 present), and copying over extra files. The files are copied in the 'doc'
 directory and an vignette index is created in 'Meta/vignette.rds', as they
