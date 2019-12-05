@@ -1,6 +1,9 @@
 # devtools (development version)
 
 * `check_win_*()` function now resets the email to the original email after execution (@muschellij2, #2152).
+* `check()` now sets `NOT_CRAN=true` by default, as was originally intended
+  (#2135).
+
 * `test()` now takes `stop_on_failure` as a formal argument (FALSE by default)
   instead of in `...`. Its value is still passed to `testthat::test_dir` as
   before (@infotroph, #2129).
