@@ -17,7 +17,7 @@ check(
   force_suggests = FALSE,
   run_dont_test = FALSE,
   args = "--timings",
-  env_vars = NULL,
+  env_vars = c(NOT_CRAN = "true"),
   quiet = FALSE,
   check_dir = tempdir(),
   cleanup = TRUE,
