@@ -1,5 +1,6 @@
 # devtools (development version)
 
+* `check()` gains a `vignettes` argument, to more easily disable checks for vignettes (#2165).
 * `check_win_*()` function now resets the email to the original email after execution (@muschellij2, #2152).
 * `check()` now sets `NOT_CRAN=true` by default, as was originally intended
   (#2135).

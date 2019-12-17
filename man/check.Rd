@@ -21,6 +21,7 @@ check(
   quiet = FALSE,
   check_dir = tempdir(),
   cleanup = TRUE,
+  vignettes = TRUE,
   error_on = c("never", "error", "warning", "note")
 )
 
@@ -83,6 +84,9 @@ compatibility. \code{args = "--output=/foo/bar"} can be used to change the
 check directory.}
 
 \item{cleanup}{Deprecated.}
+
+\item{vignettes}{If \code{FALSE}, do not build or check vignettes, equivalent to
+using \verb{args = '--ignore-vignettes' and }build_args = '--no-build-vignettes'.}
 
 \item{error_on}{Whether to throw an error on \code{R CMD check} failures.
 Note that the check is always completed (unless a timeout happens),
