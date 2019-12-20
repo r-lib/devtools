@@ -61,6 +61,7 @@ addin
 addins
 al
 amongst
+args
 artefacts
 behaviour
 bioc
@@ -140,6 +141,7 @@ revdep
 revdepcheck
 rgl
 rhub
+rlang
 rmarkdown
 roclet
 roxygen
