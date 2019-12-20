@@ -1,4 +1,4 @@
-# devtools (development version)
+# devtools 2.2.2
 
 * `check()` gains a `vignettes` argument, to more easily disable checks for
   vignettes (#2165).
