@@ -3,11 +3,11 @@
 #' Uses `R CMD INSTALL` to install the package. Will also try to install
 #' dependencies of the package from CRAN, if they're not already installed.
 #'
-#' By default, installation takes place using the current package directory.
-#' If you have compiled code, this means that artefacts of compilation will be
-#' created in the `src/` directory. If you want to avoid this, you can
-#' use `build = TRUE` to first build a package bundle and then install
-#' it from a temporary directory. This is slower, but keeps the source
+#' If `quick = TRUE`, installation takes place using the current package
+#' directory. If you have compiled code, this means that artefacts of
+#' compilation will be created in the `src/` directory. If you want to avoid
+#' this, you can use `build = TRUE` to first build a package bundle and then
+#' install it from a temporary directory. This is slower, but keeps the source
 #' directory pristine.
 #'
 #' If the package is loaded, it will be reloaded after installation. This is

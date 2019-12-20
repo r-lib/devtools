@@ -77,11 +77,11 @@ Uses \verb{R CMD INSTALL} to install the package. Will also try to install
 dependencies of the package from CRAN, if they're not already installed.
 }
 \details{
-By default, installation takes place using the current package directory.
-If you have compiled code, this means that artefacts of compilation will be
-created in the \verb{src/} directory. If you want to avoid this, you can
-use \code{build = TRUE} to first build a package bundle and then install
-it from a temporary directory. This is slower, but keeps the source
+If \code{quick = TRUE}, installation takes place using the current package
+directory. If you have compiled code, this means that artefacts of
+compilation will be created in the \verb{src/} directory. If you want to avoid
+this, you can use \code{build = TRUE} to first build a package bundle and then
+install it from a temporary directory. This is slower, but keeps the source
 directory pristine.
 
 If the package is loaded, it will be reloaded after installation. This is
