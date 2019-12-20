@@ -1,5 +1,8 @@
 # devtools 2.2.2
 
+* `submit_cran()` now returns a more informative error when the CRAN submission
+  portal is down (#1958)
+
 * `check()` gains a `vignettes` argument, to more easily disable checks for
   vignettes (#2165).
 
