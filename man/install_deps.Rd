@@ -5,35 +5,72 @@
 \alias{install_dev_deps}
 \title{Install package dependencies if needed.}
 \usage{
-install_deps(pkg = ".", ...)
+install_deps(
+  pkg = ".",
+  dependencies = NA,
+  repos = getOption("repos"),
+  type = getOption("pkgType"),
+  upgrade = c("default", "ask", "always", "never"),
+  quiet = FALSE,
+  build = TRUE,
+  build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
+  ...
+)
 
-install_dev_deps(pkg = ".", ...)
+install_dev_deps(
+  pkg = ".",
+  dependencies = TRUE,
+  repos = getOption("repos"),
+  type = getOption("pkgType"),
+  upgrade = c("default", "ask", "always", "never"),
+  quiet = FALSE,
+  build = TRUE,
+  build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
+  ...
+)
 }
 \arguments{
 \item{pkg}{The package to use, can be a file path to the package or a
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
-\item{...}{
-  Arguments passed on to \code{\link[remotes:install_deps]{remotes::install_deps}}
-  \describe{
-    \item{\code{repos}}{A character vector giving repositories to use.}
-    \item{\code{type}}{Type of package to \code{update}.}
-    \item{\code{upgrade}}{One of "default", "ask", "always", or "never". "default"
+\item{dependencies}{Which dependencies do you want to check?
+Can be a character vector (selecting from "Depends", "Imports",
+"LinkingTo", "Suggests", or "Enhances"), or a logical vector.
+
+\code{TRUE} is shorthand for "Depends", "Imports", "LinkingTo" and
+"Suggests". \code{NA} is shorthand for "Depends", "Imports" and "LinkingTo"
+and is the default. \code{FALSE} is shorthand for no dependencies (i.e.
+just check this package, not its dependencies).}
+
+\item{repos}{A character vector giving repositories to use.}
+
+\item{type}{Type of package to \code{update}.}
+
+\item{upgrade}{One of "default", "ask", "always", or "never". "default"
 respects the value of the \code{R_REMOTES_UPGRADE} environment variable if set,
 and falls back to "ask" if unset. "ask" prompts the user for which out of
 date packages to upgrade. For non-interactive sessions "ask" is equivalent
 to "always". \code{TRUE} and \code{FALSE} are also accepted and correspond to
 "always" and "never" respectively.}
-    \item{\code{quiet}}{If \code{TRUE}, suppress output.}
-    \item{\code{build}}{If \code{TRUE} build the package before installing.}
-    \item{\code{build_opts}}{Options to pass to \code{R CMD build}, only used when \code{build}}
-    \item{\code{build_manual}}{If \code{FALSE}, don't build PDF manual ('--no-manual').}
-    \item{\code{build_vignettes}}{If \code{FALSE}, don't build package vignettes ('--no-build-vignettes').
-is \code{TRUE}.}
-  }}
+
+\item{quiet}{If \code{TRUE}, suppress output.}
+
+\item{build}{if \code{TRUE} \code{\link[pkgbuild:build]{pkgbuild::build()}}s the package first:
+this ensures that the installation is completely clean, and prevents any
+binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
+package directory, but is considerably slower, because every compile has
+to start from scratch.}
+
+\item{build_opts}{Options to pass to \code{R CMD build}, only used when \code{build}}
+
+\item{...}{additional arguments passed to \code{\link[remotes:install_deps]{remotes::install_deps()}}
+when installing dependencies.}
 }
 \description{
 \code{install_deps()} will install the
 user dependencies needed to run the package, \code{install_dev_deps()} will also
 install the development dependencies needed to test and build the package.
+}
+\examples{
+\dontrun{install_deps(".")}
 }

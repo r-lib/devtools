@@ -2,49 +2,100 @@ context("Install")
 
 library(mockery)
 
-pkg <- test_path("testReadme")
-pkg_path <- normalizePath(pkg)
+pkg <- normalizePath(test_path("testReadme"))
 
-test_that("install_deps passes optional args to remotes::install_deps", {
-  mck <- mock(NULL, cycle = TRUE)
-  stub(install_deps, "remotes::install_deps", mck)
+expect_passes_args <- function(fn, stub, input_args = list(), expected_args) {
+  mck <- mockery::mock(NULL)
+  mockery::stub(fn, stub, mck)
 
-  type <- "foo"
+  do.call(fn, input_args)
 
-  install_deps(pkg, type = type)
+  mockery::expect_called(mck, 1)
+  expect_equal(mockery::mock_args(mck)[[1]], expected_args)
+}
 
-  expect_called(mck, 1)
-  expect_args(mck, 1, pkg_path, dependencies = NA, type = type)
+custom_args <- list(
+  dependencies = "dep",
+  repos = "repo",
+  type = "type",
+  upgrade = "upgrade",
+  quiet = "quiet",
+  build = "build",
+  build_opts = "build_opts"
+)
+
+dep_defaults <- list(
+  dependencies = NA,
+  repos = getOption("repos"),
+  type = getOption("pkgType"),
+  upgrade = c("default", "ask", "always", "never"),
+  quiet = FALSE,
+  build = TRUE,
+  build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes")
+)
+
+dev_dep_defaults <- list(
+  dependencies = TRUE,
+  repos = getOption("repos"),
+  type = getOption("pkgType"),
+  upgrade = c("default", "ask", "always", "never"),
+  quiet = FALSE,
+  build = TRUE,
+  build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes")
+)
+
+extra <- list(foo = "foo", bar = "bar")
+
+test_that("install_deps passes default args to remotes::install_deps", {
+  expect_passes_args(
+    install_deps,
+    "remotes::install_deps",
+    list(pkg),
+    c(pkg, dep_defaults)
+  )
 })
 
-test_that("install_deps passes dependency = NA to remotes::install_deps", {
-  mck <- mock(NULL, cycle = TRUE)
-  stub(install_deps, "remotes::install_deps", mck)
-
-  install_deps(pkg)
-
-  expect_called(mck, 1)
-  expect_args(mck, 1, pkg_path, dependencies = NA)
+test_that("install_deps passes custom args to remotes::install_deps", {
+  expect_passes_args(
+    install_deps,
+    "remotes::install_deps",
+    c(pkg, custom_args),
+    c(pkg, custom_args)
+  )
 })
 
-test_that("install_dev_deps passes optional args to remotes::install_deps", {
-  mck <- mock(NULL, cycle = TRUE)
-  stub(install_dev_deps, "remotes::install_deps", mck)
-
-  type <- "foo"
-
-  install_dev_deps(pkg, type = type)
-
-  expect_called(mck, 1)
-  expect_args(mck, 1, pkg_path, dependencies = TRUE, type = type)
+test_that("install_deps passes ellipsis args to remotes::install_deps", {
+  expect_passes_args(
+    install_deps,
+    "remotes::install_deps",
+    c(pkg, extra),
+    c(pkg, dep_defaults, extra)
+  )
 })
 
-test_that("install_dev_deps passes dependency = TRUE to remotes::install_deps", {
-  mck <- mock(NULL, cycle = TRUE)
-  stub(install_dev_deps, "remotes::install_deps", mck)
+test_that("install_dev_deps passes default args to remotes::install_deps", {
+  expect_passes_args(
+    install_dev_deps,
+    "remotes::install_deps",
+    list(pkg),
+    c(pkg, dev_dep_defaults)
+  )
+})
 
-  install_dev_deps(pkg)
+test_that("install_dev_deps passes custom args to remotes::install_deps", {
+  expect_passes_args(
+    install_dev_deps,
+    "remotes::install_deps",
+    c(pkg, custom_args),
+    c(pkg, custom_args)
+  )
+})
 
-  expect_called(mck, 1)
-  expect_args(mck, 1, pkg_path, dependencies = TRUE)
+test_that("install_dev_deps passes ellipsis args to remotes::install_deps", {
+  expect_passes_args(
+    install_dev_deps,
+    "remotes::install_deps",
+    c(pkg, extra),
+    c(pkg, dev_dep_defaults, extra)
+  )
 })

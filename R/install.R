@@ -117,27 +117,63 @@ install <-
 #' `install_deps()` will install the
 #' user dependencies needed to run the package, `install_dev_deps()` will also
 #' install the development dependencies needed to test and build the package.
-#' @template devtools
-#' @inheritDotParams remotes::install_deps -pkgdir -dependencies
+#' @inheritParams install
+#' @inherit remotes::install_deps
 #' @export
-install_deps <- function(pkg = ".", ...) {
+install_deps <- function(pkg = ".",
+                         dependencies = NA,
+                         repos = getOption("repos"),
+                         type = getOption("pkgType"),
+                         upgrade = c("default", "ask", "always", "never"),
+                         quiet = FALSE,
+                         build = TRUE,
+                         build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
+                         ...) {
   remotes::update_packages("roxygen2")
 
   pkg <- as.package(pkg)
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  remotes::install_deps(pkg$path, dependencies = NA, ...)
+  remotes::install_deps(
+    pkg$path,
+    dependencies = dependencies,
+    repos = repos,
+    type = type,
+    upgrade = upgrade,
+    quiet = quiet,
+    build = build,
+    build_opts = build_opts,
+    ...
+  )
 }
 
 #' @rdname install_deps
 #' @export
-install_dev_deps <- function(pkg = ".", ...) {
+install_dev_deps <- function(pkg = ".",
+                             dependencies = TRUE,
+                             repos = getOption("repos"),
+                             type = getOption("pkgType"),
+                             upgrade = c("default", "ask", "always", "never"),
+                             quiet = FALSE,
+                             build = TRUE,
+                             build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
+                             ...) {
   remotes::update_packages("roxygen2")
 
   pkg <- as.package(pkg)
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  remotes::install_deps(pkg$path, dependencies = TRUE, ...)
+  remotes::install_deps(
+    pkg$path,
+    dependencies = dependencies,
+    repos = repos,
+    type = type,
+    upgrade = upgrade,
+    quiet = quiet,
+    build = build,
+    build_opts = build_opts,
+    ...
+  )
 }
