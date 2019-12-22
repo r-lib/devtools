@@ -1,6 +1,6 @@
 # devtools 2.2.2
 
-* `install_dev_deps()` now returns all formal args onto `remotes::install_deps()`
+* `install_dev_deps()` now passes formal args onto `remotes::install_deps()`
 (@t-gibson, #2166)
 
 * `submit_cran()` now returns a more informative error when the CRAN submission
