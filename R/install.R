@@ -129,8 +129,6 @@ install_deps <- function(pkg = ".",
                          build = TRUE,
                          build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
                          ...) {
-  remotes::update_packages("roxygen2")
-
   pkg <- as.package(pkg)
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
