@@ -41,6 +41,7 @@ extra options to add to \file{DESCRIPTION}
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://devtools.r-lib.org/}
   \item \url{https://github.com/r-lib/devtools}
   \item Report bugs at \url{https://github.com/r-lib/devtools/issues}
 }

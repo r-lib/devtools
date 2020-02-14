@@ -61,7 +61,7 @@ binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
 package directory, but is considerably slower, because every compile has
 to start from scratch.}
 
-\item{build_opts}{Options to pass to \code{R CMD build}, only used when \code{build}}
+\item{build_opts}{Options to pass to \verb{R CMD build}, only used when \code{build}}
 
 \item{...}{additional arguments passed to \code{\link[remotes:install_deps]{remotes::install_deps()}}
 when installing dependencies.}

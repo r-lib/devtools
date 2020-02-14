@@ -95,7 +95,7 @@ install_github(
   repo,
   ref = "master",
   subdir = NULL,
-  auth_token = github_pat(),
+  auth_token = github_pat(quiet),
   host = "api.github.com",
   dependencies = NA,
   upgrade = c("default", "ask", "always", "never"),
@@ -112,7 +112,8 @@ install_github(
 
 install_gitlab(
   repo,
-  auth_token = gitlab_pat(),
+  subdir = NULL,
+  auth_token = gitlab_pat(quiet),
   host = "gitlab.com",
   dependencies = NA,
   upgrade = c("default", "ask", "always", "never"),
