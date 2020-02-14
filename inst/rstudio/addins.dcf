@@ -12,3 +12,8 @@ Name: Report test coverage for a package
 Description: Calculate and report the test coverage for the current package, using `devtools::test_coverage()`.
 Binding: test_coverage
 Interactive: false
+
+Name: Document a package.
+Description: A wrapper for `roxygen`'s `roxygen2::roxygenize()`
+Binding: document
+Interactive: false
