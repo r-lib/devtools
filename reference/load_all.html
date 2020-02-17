@@ -45,7 +45,7 @@
 <meta property="og:title" content="Load complete package. — load_all" />
 <meta property="og:description" content="load_all loads a package. It roughly simulates what happens
 when a package is installed and loaded with library()." />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://devtools.r-lib.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -88,7 +88,7 @@ when a package is installed and loaded with library()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.2</span>
       </span>
     </div>
 
@@ -160,8 +160,15 @@ when a package is installed and loaded with library()." />
 when a package is installed and loaded with <code><a href='https://rdrr.io/r/base/library.html'>library()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>load_all</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>reset</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>recompile</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>helpers</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>load_all</span>(
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>reset</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>recompile</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>helpers</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -208,11 +215,11 @@ in the NAMESPACE file.</p></td>
 
     <p>Currently <code>load_all</code>:</p>
 <ul>
-<li><p>Loads all data files in <code>data/</code>.  See <code>load_data()</code>
+<li><p>Loads all data files in <code>data/</code>.  See <code><a href='https://rdrr.io/pkg/pkgload/man/load_data.html'>load_data()</a></code>
 for more details.</p></li>
 <li><p>Sources all R files in the R directory, storing results in
 environment that behaves like a regular package namespace. See
-below and <code>load_code()</code> for more details.</p></li>
+below and <code><a href='https://rdrr.io/pkg/pkgload/man/load_code.html'>load_code()</a></code> for more details.</p></li>
 <li><p>Compiles any C, C++, or Fortran code in the <code>src/</code> directory
 and connects the generated DLL into R. See <code>compile_dll()</code>
 for more details.</p></li>

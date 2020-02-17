@@ -44,7 +44,7 @@
 
 <meta property="og:title" content="Create a package — create" />
 <meta property="og:description" content="Create a package" />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://devtools.r-lib.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -87,7 +87,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.2</span>
       </span>
     </div>
 
@@ -158,8 +158,12 @@
     <p>Create a package</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create</span>(<span class='no'>path</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>rstudio</span> <span class='kw'>=</span> <span class='kw pkg'>rstudioapi</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rstudioapi/man/isAvailable.html'>isAvailable</a></span>(),
-  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>())</pre>
+    <pre class="usage"><span class='fu'>create</span>(
+  <span class='no'>path</span>,
+  <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>rstudio</span> <span class='kw'>=</span> <span class='kw pkg'>rstudioapi</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/rstudioapi/man/isAvailable.html'>isAvailable</a></span>(),
+  <span class='kw'>open</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,7 +176,7 @@ created, provided that the parent path exists.</p></td>
     <tr>
       <th>fields</th>
       <td><p>A named list of fields to add to <code>DESCRIPTION</code>, potentially
-overriding default values. See <code>use_description()</code> for how you can set
+overriding default values. See <code><a href='https://usethis.r-lib.org/reference/use_description.html'>use_description()</a></code> for how you can set
 personalized defaults using package options</p></td>
     </tr>
     <tr>

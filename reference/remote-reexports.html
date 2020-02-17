@@ -46,7 +46,7 @@
 <meta property="og:description" content="These functions are re-exported from the remotes package. They differ only
 that the ones in devtools use the ellipsis package to ensure all dotted
 arguments are used." />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://devtools.r-lib.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -89,7 +89,7 @@ arguments are used." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.2</span>
       </span>
     </div>
 
@@ -162,107 +162,213 @@ that the ones in devtools use the ellipsis package to ensure all dotted
 arguments are used.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>install_bioc</span>(<span class='no'>repo</span>, <span class='kw'>mirror</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"BioC_git"</span>,
-  <span class='fu'>download_url</span>(<span class='st'>"git.bioconductor.org/packages"</span>)), <span class='kw'>git</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"auto"</span>,
-  <span class='st'>"git2r"</span>, <span class='st'>"external"</span>), <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>,
-  <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>), <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>,
-  <span class='st'>"--no-build-vignettes"</span>), <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>), <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>install_bioc</span>(
+  <span class='no'>repo</span>,
+  <span class='kw'>mirror</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"BioC_git"</span>, <span class='fu'>download_url</span>(<span class='st'>"git.bioconductor.org/packages"</span>)),
+  <span class='kw'>git</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"auto"</span>, <span class='st'>"git2r"</span>, <span class='st'>"external"</span>),
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
+  <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
+  <span class='no'>...</span>
+)
 
-<span class='fu'>install_bitbucket</span>(<span class='no'>repo</span>, <span class='kw'>ref</span> <span class='kw'>=</span> <span class='st'>"master"</span>, <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>auth_user</span> <span class='kw'>=</span> <span class='fu'>bitbucket_user</span>(), <span class='kw'>password</span> <span class='kw'>=</span> <span class='fu'>bitbucket_password</span>(),
-  <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"api.bitbucket.org/2.0"</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>), <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>,
-  <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>), <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>), <span class='no'>...</span>)
+<span class='fu'>install_bitbucket</span>(
+  <span class='no'>repo</span>,
+  <span class='kw'>ref</span> <span class='kw'>=</span> <span class='st'>"master"</span>,
+  <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>auth_user</span> <span class='kw'>=</span> <span class='fu'>bitbucket_user</span>(),
+  <span class='kw'>password</span> <span class='kw'>=</span> <span class='fu'>bitbucket_password</span>(),
+  <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"api.bitbucket.org/2.0"</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
+  <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
+  <span class='no'>...</span>
+)
 
-<span class='fu'>install_cran</span>(<span class='no'>pkgs</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>), <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>), <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>,
-  <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>), <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+<span class='fu'>install_cran</span>(
+  <span class='no'>pkgs</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
+  <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)
 
 <span class='fu'>install_dev</span>(<span class='no'>package</span>, <span class='kw'>cran_url</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>)<span class='kw'>[[</span><span class='st'>"CRAN"</span>]], <span class='no'>...</span>)
 
-<span class='fu'>install_git</span>(<span class='no'>url</span>, <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ref</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>branch</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>credentials</span> <span class='kw'>=</span> <span class='fu'>git_credentials</span>(), <span class='kw'>git</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"auto"</span>, <span class='st'>"git2r"</span>,
-  <span class='st'>"external"</span>), <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>,
-  <span class='st'>"always"</span>, <span class='st'>"never"</span>), <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>,
-  <span class='st'>"--no-build-vignettes"</span>), <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>), <span class='no'>...</span>)
+<span class='fu'>install_git</span>(
+  <span class='no'>url</span>,
+  <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ref</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>branch</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>credentials</span> <span class='kw'>=</span> <span class='fu'>git_credentials</span>(),
+  <span class='kw'>git</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"auto"</span>, <span class='st'>"git2r"</span>, <span class='st'>"external"</span>),
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
+  <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
+  <span class='no'>...</span>
+)
 
-<span class='fu'>install_github</span>(<span class='no'>repo</span>, <span class='kw'>ref</span> <span class='kw'>=</span> <span class='st'>"master"</span>, <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>auth_token</span> <span class='kw'>=</span> <span class='fu'><a href='github_pat.html'>github_pat</a></span>(), <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"api.github.com"</span>,
-  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>,
-  <span class='st'>"--no-build-vignettes"</span>), <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>), <span class='no'>...</span>)
+<span class='fu'>install_github</span>(
+  <span class='no'>repo</span>,
+  <span class='kw'>ref</span> <span class='kw'>=</span> <span class='st'>"master"</span>,
+  <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>auth_token</span> <span class='kw'>=</span> <span class='fu'><a href='github_pat.html'>github_pat</a></span>(<span class='no'>quiet</span>),
+  <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"api.github.com"</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
+  <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
+  <span class='no'>...</span>
+)
 
-<span class='fu'>install_gitlab</span>(<span class='no'>repo</span>, <span class='kw'>auth_token</span> <span class='kw'>=</span> <span class='fu'>gitlab_pat</span>(), <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"gitlab.com"</span>,
-  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>,
-  <span class='st'>"--no-build-vignettes"</span>), <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>), <span class='no'>...</span>)
+<span class='fu'>install_gitlab</span>(
+  <span class='no'>repo</span>,
+  <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>auth_token</span> <span class='kw'>=</span> <span class='fu'>gitlab_pat</span>(<span class='no'>quiet</span>),
+  <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"gitlab.com"</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
+  <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
+  <span class='no'>...</span>
+)
 
-<span class='fu'>install_local</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>), <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> !<span class='fu'>is_binary_pkg</span>(<span class='no'>path</span>),
-  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>,
-  <span class='st'>"--no-build-vignettes"</span>), <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>), <span class='no'>...</span>)
+<span class='fu'>install_local</span>(
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> !<span class='fu'>is_binary_pkg</span>(<span class='no'>path</span>),
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
+  <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
+  <span class='no'>...</span>
+)
 
-<span class='fu'>install_svn</span>(<span class='no'>url</span>, <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>), <span class='kw'>revision</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>,
-  <span class='st'>"--no-build-vignettes"</span>), <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>), <span class='no'>...</span>)
+<span class='fu'>install_svn</span>(
+  <span class='no'>url</span>,
+  <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>),
+  <span class='kw'>revision</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
+  <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
+  <span class='no'>...</span>
+)
 
-<span class='fu'>install_url</span>(<span class='no'>url</span>, <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>), <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>,
-  <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>), <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>), <span class='no'>...</span>)
+<span class='fu'>install_url</span>(
+  <span class='no'>url</span>,
+  <span class='kw'>subdir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
+  <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
+  <span class='no'>...</span>
+)
 
-<span class='fu'>install_version</span>(<span class='no'>package</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>), <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>,
-  <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>), <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"source"</span>, <span class='no'>...</span>)
+<span class='fu'>install_version</span>(
+  <span class='no'>package</span>,
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
+  <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"source"</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>update_packages</span>(<span class='kw'>packages</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>), <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>,
-  <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>), <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>), <span class='no'>...</span>)
+<span class='fu'>update_packages</span>(
+  <span class='kw'>packages</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
+  <span class='kw'>build_manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
+  <span class='no'>...</span>
+)
 
-<span class='fu'>dev_package_deps</span>(<span class='kw'>pkgdir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>), <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>))</pre>
+<span class='fu'>dev_package_deps</span>(
+  <span class='kw'>pkgdir</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>)
+)</pre>
 
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Follow the links below to see the documentation.
-<code>install_bioc()</code>, <code>install_bitbucket()</code>, <code>install_cran()</code>, <code>install_dev()</code>,
-<code>install_git()</code>, <code>install_github()</code>, <code>install_gitlab()</code>, <code>install_local()</code>,
-<code>install_svn()</code>, <code>install_url()</code>, <code>install_version()</code>, <code>update_packages()</code>,
-<code>dev_package_deps()</code>.</p>
+<code><a href='https://remotes.r-lib.org/reference/install_bioc.html'>remotes::install_bioc()</a></code>, <code><a href='https://remotes.r-lib.org/reference/install_bitbucket.html'>remotes::install_bitbucket()</a></code>, <code><a href='https://remotes.r-lib.org/reference/install_cran.html'>remotes::install_cran()</a></code>, <code><a href='https://remotes.r-lib.org/reference/install_dev.html'>remotes::install_dev()</a></code>,
+<code><a href='https://remotes.r-lib.org/reference/install_git.html'>remotes::install_git()</a></code>, <code><a href='https://remotes.r-lib.org/reference/install_github.html'>remotes::install_github()</a></code>, <code><a href='https://remotes.r-lib.org/reference/install_gitlab.html'>remotes::install_gitlab()</a></code>, <code><a href='https://remotes.r-lib.org/reference/install_local.html'>remotes::install_local()</a></code>,
+<code><a href='https://remotes.r-lib.org/reference/install_svn.html'>remotes::install_svn()</a></code>, <code><a href='https://remotes.r-lib.org/reference/install_url.html'>remotes::install_url()</a></code>, <code><a href='https://remotes.r-lib.org/reference/install_version.html'>remotes::install_version()</a></code>, <code><a href='https://remotes.r-lib.org/reference/update_packages.html'>remotes::update_packages()</a></code>,
+<code><a href='https://remotes.r-lib.org/reference/package_deps.html'>remotes::dev_package_deps()</a></code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

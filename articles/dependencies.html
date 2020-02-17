@@ -18,7 +18,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Devtools dependencies">
 <meta property="og:description" content="">
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="https://devtools.r-lib.org/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.2</span>
       </span>
     </div>
 
@@ -109,7 +109,7 @@
       <h1>Devtools dependencies</h1>
                         <h4 class="author">Jim Hester, Hadley Wickham</h4>
             
-            <h4 class="date">2019-09-26</h4>
+            <h4 class="date">2020-02-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-lib/devtools/blob/master/vignettes/dependencies.Rmd"><code>vignettes/dependencies.Rmd</code></a></small>
       <div class="hidden name"><code>dependencies.Rmd</code></div>
@@ -126,45 +126,60 @@
 <p>The remote dependencies specified in <code>Remotes</code> should be described in the following form.</p>
 <pre><code>Remotes: [type::]&lt;Repository&gt;, [type2::]&lt;Repository2&gt;</code></pre>
 <p>The <code>type</code> is an optional parameter. If the type is missing the default is to install from GitHub. Additional remote dependencies should be separated by commas, just like normal dependencies elsewhere in the <code>DESCRIPTION</code> file.</p>
+<p>It is important to remember that you <strong>must always declare the dependency in the usual way</strong>, i.e. include it in <code>Depends</code>, <code>Imports</code>, <code>Suggests</code> or <code>Enhances</code>. The <code>Remotes</code> field only provides instructions on where to install the dependency from. In this example <code>DESCRIPTION</code> file, note how rlang appears in <code>Imports</code> and in <code>Remotes</code>:</p>
+<pre><code>Package: xyz
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "First",
+           family = "Last",
+           role = c("aut", "cre"),
+           email = "first.last@example.com")
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Imports: 
+    rlang
+Remotes:  
+    r-lib/rlang</code></pre>
 <div id="github" class="section level3">
 <h3 class="hasAnchor">
 <a href="#github" class="anchor"></a>GitHub</h3>
 <p>Because GitHub is the most commonly used unofficial package distribution in R, it’s the default:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">Remotes:</span><span class="at"> hadley/testthat</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">Remotes:</span><span class="at"> hadley/testthat</span></a></code></pre></div>
 <p>You can also specify a specific hash, tag, or pull request (using the same syntax as <code><a href="../reference/remote-reexports.html">install_github()</a></code> if you want a particular commit. Otherwise the latest commit on the master branch is used.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">Remotes:</span><span class="at"> hadley/httr@v0.4,</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  klutometis/roxygen<span class="co">#142,</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  hadley/testthat@c67018fa4970</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">Remotes:</span><span class="at"> hadley/httr@v0.4,</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  klutometis/roxygen<span class="co">#142,</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  hadley/testthat@c67018fa4970</a></code></pre></div>
 <p>A type of <code>github</code> can be specified, but is not required</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">Remotes:</span><span class="at"> github::hadley/ggplot2</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">Remotes:</span><span class="at"> github::hadley/ggplot2</span></a></code></pre></div>
 </div>
 <div id="other-sources" class="section level3">
 <h3 class="hasAnchor">
 <a href="#other-sources" class="anchor"></a>Other sources</h3>
 <p>All of the currently supported install sources are available, see the ‘See Also’ section in <code><a href="../reference/install.html">?install</a></code> for a complete list.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># GitLab</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="fu">Remotes:</span><span class="at"> gitlab::jimhester/covr</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># Git</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="fu">Remotes:</span><span class="at"> git::git@bitbucket.org:djnavarro/lsr.git</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co"># Bitbucket</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="fu">Remotes:</span><span class="at"> bitbucket::sulab/mygene.r@default, djnavarro/lsr</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co"># Bioconductor</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="fu">Remotes:</span><span class="at"> bioc::3.3/SummarizedExperiment</span><span class="co">#117513, bioc::release/Biobase</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co"># SVN</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="fu">Remotes:</span><span class="at"> svn::https://github.com/hadley/stringr</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co"># URL</span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="fu">Remotes:</span><span class="at"> url::https://github.com/hadley/stringr/archive/master.zip</span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co"># Local</span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="fu">Remotes:</span><span class="at"> local::/pkgs/testthat</span></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co"># Gitorious</span></a>
-<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="fu">Remotes:</span><span class="at"> gitorious::r-mpc-package/r-mpc-package</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># GitLab</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="fu">Remotes:</span><span class="at"> gitlab::jimhester/covr</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co"># Git</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="fu">Remotes:</span><span class="at"> git::git@bitbucket.org:djnavarro/lsr.git</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co"># Bitbucket</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="fu">Remotes:</span><span class="at"> bitbucket::sulab/mygene.r@default, djnavarro/lsr</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co"># Bioconductor</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="fu">Remotes:</span><span class="at"> bioc::3.3/SummarizedExperiment</span><span class="co">#117513, bioc::release/Biobase</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co"># SVN</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="fu">Remotes:</span><span class="at"> svn::https://github.com/hadley/stringr</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co"># URL</span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="fu">Remotes:</span><span class="at"> url::https://github.com/hadley/stringr/archive/master.zip</span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co"># Local</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="fu">Remotes:</span><span class="at"> local::/pkgs/testthat</span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co"># Gitorious</span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="fu">Remotes:</span><span class="at"> gitorious::r-mpc-package/r-mpc-package</span></a></code></pre></div>
 </div>
 <div id="cran-submission" class="section level3">
 <h3 class="hasAnchor">

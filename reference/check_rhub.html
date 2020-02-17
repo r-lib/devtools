@@ -49,7 +49,7 @@ https://builder.r-hub.io. The interactive option controls
 whether the function waits for the check output. Regardless, after the
 check is complete, R-hub sends an email with the results to the package
 maintainer." />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://devtools.r-lib.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -92,7 +92,7 @@ maintainer." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.2</span>
       </span>
     </div>
 
@@ -168,8 +168,14 @@ check is complete, R-hub sends an email with the results to the package
 maintainer.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_rhub</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>platforms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>email</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>interactive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>build_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>check_rhub</span>(
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>platforms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>email</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>interactive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -219,7 +225,8 @@ email address. This is because R-hub sends out emails about build
 results. See more at <code><a href='https://r-hub.github.io/rhub/reference/validate_email.html'>rhub::validate_email()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other build functions: <code><a href='check_win.html'>check_win</a></code></p></div>
+    <div class='dont-index'><p>Other build functions: 
+<code><a href='check_win.html'>check_win</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

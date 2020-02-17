@@ -45,7 +45,7 @@
 <meta property="og:title" content="Reverse dependency tools. — revdep" />
 <meta property="og:description" content="Tools to check and notify maintainers of all CRAN and Bioconductor
 packages that depend on the specified package." />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://devtools.r-lib.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -88,7 +88,7 @@ packages that depend on the specified package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.2</span>
       </span>
     </div>
 
@@ -160,9 +160,13 @@ packages that depend on the specified package." />
 packages that depend on the specified package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>revdep</span>(<span class='no'>pkg</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Depends"</span>, <span class='st'>"Imports"</span>, <span class='st'>"Suggests"</span>,
-  <span class='st'>"LinkingTo"</span>), <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ignore</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bioconductor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+    <pre class="usage"><span class='fu'>revdep</span>(
+  <span class='no'>pkg</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Depends"</span>, <span class='st'>"Imports"</span>, <span class='st'>"Suggests"</span>, <span class='st'>"LinkingTo"</span>),
+  <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>ignore</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>bioconductor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)
 
 <span class='fu'>revdep_maintainers</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
 

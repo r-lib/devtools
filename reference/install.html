@@ -45,7 +45,7 @@
 <meta property="og:title" content="Install a local development package. — install" />
 <meta property="og:description" content="Uses R CMD INSTALL to install the package. Will also try to install
 dependencies of the package from CRAN, if they're not already installed." />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://devtools.r-lib.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -88,7 +88,7 @@ dependencies of the package from CRAN, if they're not already installed." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.2</span>
       </span>
     </div>
 
@@ -160,10 +160,20 @@ dependencies of the package from CRAN, if they're not already installed." />
 dependencies of the package from CRAN, if they're not already installed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>install</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>reload</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>build</span> <span class='kw'>=</span> !<span class='no'>quick</span>,
-  <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"devtools.install.args"</span>), <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='st'>"ask"</span>, <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>keep_source</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"keep.source.pkgs"</span>), <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>install</span>(
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>reload</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> !<span class='no'>quick</span>,
+  <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"devtools.install.args"</span>),
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='st'>"ask"</span>,
+  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>keep_source</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"keep.source.pkgs"</span>),
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -225,7 +235,7 @@ to "always". <code>TRUE</code> and <code>FALSE</code> are also accepted and corr
       <td><p>if <code>TRUE</code>, will build vignettes. Normally it is
 <code>build</code> that's responsible for creating vignettes; this argument makes
 sure vignettes are built even if a build never happens (i.e. because
-<code>local = TRUE</code>).</p></td>
+<code>build = FALSE</code>).</p></td>
     </tr>
     <tr>
       <th>keep_source</th>
@@ -240,18 +250,18 @@ since the previous install.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional arguments passed to <code><a href='https://rdrr.io/pkg/remotes/man/install_deps.html'>remotes::install_deps()</a></code>
+      <td><p>additional arguments passed to <code><a href='https://remotes.r-lib.org/reference/install_deps.html'>remotes::install_deps()</a></code>
 when installing dependencies.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>By default, installation takes place using the current package directory.
-If you have compiled code, this means that artefacts of compilation will be
-created in the <code>src/</code> directory. If you want to avoid this, you can
-use <code>build = TRUE</code> to first build a package bundle and then install
-it from a temporary directory. This is slower, but keeps the source
+    <p>If <code>quick = TRUE</code>, installation takes place using the current package
+directory. If you have compiled code, this means that artefacts of
+compilation will be created in the <code>src/</code> directory. If you want to avoid
+this, you can use <code>build = TRUE</code> to first build a package bundle and then
+install it from a temporary directory. This is slower, but keeps the source
 directory pristine.</p>
 <p>If the package is loaded, it will be reloaded after installation. This is
 not always completely possible, see <code><a href='reload.html'>reload()</a></code> for caveats.</p>
@@ -261,7 +271,8 @@ not always completely possible, see <code><a href='reload.html'>reload()</a></co
     <div class='dont-index'><p><code><a href='remote-reexports.html'>update_packages()</a></code> to update installed packages from the
 source location and <code><a href='https://rdrr.io/pkg/pkgbuild/man/with_debug.html'>with_debug()</a></code> to install packages with
 debugging flags set.</p>
-<p>Other package installation: <code><a href='uninstall.html'>uninstall</a></code></p></div>
+<p>Other package installation: 
+<code><a href='uninstall.html'>uninstall</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

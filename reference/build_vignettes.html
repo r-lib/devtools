@@ -52,7 +52,7 @@ would be in a built package. 'doc' and 'Meta' are added to
 files can be checked into version control, so they can be viewed with
 browseVignettes() and vignette() if the package has been
 loaded with load_all() without needing to re-build them locally." />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://devtools.r-lib.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -95,7 +95,7 @@ loaded with load_all() without needing to re-build them locally." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.2</span>
       </span>
     </div>
 
@@ -174,9 +174,15 @@ files can be checked into version control, so they can be viewed with
 loaded with <code><a href='load_all.html'>load_all()</a></code> without needing to re-build them locally.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>build_vignettes</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='st'>"VignetteBuilder"</span>,
-  <span class='kw'>clean</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='st'>"never"</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>install</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>keep_md</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>build_vignettes</span>(
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='st'>"VignetteBuilder"</span>,
+  <span class='kw'>clean</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='st'>"never"</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>install</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>keep_md</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

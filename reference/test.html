@@ -50,7 +50,7 @@ test_coverage() computes test coverage for your package. It is a shortcut
 for covr::package_coverage() and covr::report().
 test_coverage_file() computes test coverage for the active file. Is a
 shortcut for covr::file_coverage() and covr::report()." />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://devtools.r-lib.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -93,7 +93,7 @@ shortcut for covr::file_coverage() and covr::report()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.2</span>
       </span>
     </div>
 
@@ -165,12 +165,12 @@ shortcut for covr::file_coverage() and covr::report()." />
 package's tests.
 <code>test_file</code> runs <code>test()</code> on the active file.
 <code>test_coverage()</code> computes test coverage for your package. It is a shortcut
-for <code><a href='https://rdrr.io/pkg/covr/man/package_coverage.html'>covr::package_coverage()</a></code> and <code><a href='https://rdrr.io/pkg/covr/man/report.html'>covr::report()</a></code>.
+for <code><a href='http://covr.r-lib.org/reference/package_coverage.html'>covr::package_coverage()</a></code> and <code><a href='http://covr.r-lib.org/reference/report.html'>covr::report()</a></code>.
 <code>test_coverage_file()</code> computes test coverage for the active file. Is a
-shortcut for <code><a href='https://rdrr.io/pkg/covr/man/file_coverage.html'>covr::file_coverage()</a></code> and <code><a href='https://rdrr.io/pkg/covr/man/report.html'>covr::report()</a></code>.</p>
+shortcut for <code><a href='http://covr.r-lib.org/reference/file_coverage.html'>covr::file_coverage()</a></code> and <code><a href='http://covr.r-lib.org/reference/report.html'>covr::report()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>test</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>filter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>test</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>filter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stop_on_failure</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='fu'>test_coverage</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>show_report</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(), <span class='no'>...</span>)
 
@@ -178,8 +178,13 @@ shortcut for <code><a href='https://rdrr.io/pkg/covr/man/file_coverage.html'>cov
 
 <span class='fu'>test_file</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>find_active_file</span>(), <span class='no'>...</span>)
 
-<span class='fu'>test_coverage_file</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>find_active_file</span>(), <span class='kw'>filter</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>show_report</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(), <span class='no'>...</span>)</pre>
+<span class='fu'>test_coverage_file</span>(
+  <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>find_active_file</span>(),
+  <span class='kw'>filter</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>show_report</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(),
+  <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,9 +201,23 @@ regular expression will be executed. Matching be performed on the file
 name after it has been stripped of <code>"test-"</code> and <code>".R"</code>.</p></td>
     </tr>
     <tr>
+      <th>stop_on_failure</th>
+      <td><p>If <code>TRUE</code>, throw an error if any tests fail.</p>
+<p>For historical reasons, the default value of <code>stop_on_failure</code> is <code>TRUE</code>
+for  <code>test_package()</code> and <code>test_check()</code> but <code>FALSE</code> for <code>test_dir()</code>, so
+if you're calling <code>test_dir()</code> you may want to consider explicitly setting
+<code>stop_on_failure = TRUE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>export_all</th>
+      <td><p>If <code>TRUE</code> (the default), export all objects.
+If <code>FALSE</code>, export only the objects that are listed as exports
+in the NAMESPACE file.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>additional arguments passed to <code><a href='https://rdrr.io/pkg/testthat/man/test_dir.html'>testthat::test_dir()</a></code> and
-<code><a href='https://rdrr.io/pkg/covr/man/package_coverage.html'>covr::package_coverage()</a></code></p></td>
+<code><a href='http://covr.r-lib.org/reference/package_coverage.html'>covr::package_coverage()</a></code></p></td>
     </tr>
     <tr>
       <th>show_report</th>

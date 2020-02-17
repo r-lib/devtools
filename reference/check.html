@@ -45,7 +45,7 @@
 <meta property="og:title" content="Build and check a package, cleaning up automatically on success. — check" />
 <meta property="og:description" content="check automatically builds and checks a source package, using all
 known best practices. check_built checks an already built package." />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://devtools.r-lib.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -88,7 +88,7 @@ known best practices. check_built checks an already built package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.2</span>
       </span>
     </div>
 
@@ -160,17 +160,40 @@ known best practices. check_built checks an already built package." />
 known best practices. <code>check_built</code> checks an already built package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>document</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>build_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>,
-  <span class='kw'>manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>cran</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>remote</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>incoming</span> <span class='kw'>=</span> <span class='no'>remote</span>,
-  <span class='kw'>force_suggests</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>run_dont_test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='st'>"--timings"</span>,
-  <span class='kw'>env_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>check_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(),
-  <span class='kw'>cleanup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>error_on</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"never"</span>, <span class='st'>"error"</span>, <span class='st'>"warning"</span>, <span class='st'>"note"</span>))
+    <pre class="usage"><span class='fu'>check</span>(
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>document</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>build_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>cran</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>remote</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>incoming</span> <span class='kw'>=</span> <span class='no'>remote</span>,
+  <span class='kw'>force_suggests</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>run_dont_test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>args</span> <span class='kw'>=</span> <span class='st'>"--timings"</span>,
+  <span class='kw'>env_vars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='kw'>NOT_CRAN</span> <span class='kw'>=</span> <span class='st'>"true"</span>),
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>check_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(),
+  <span class='kw'>cleanup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>vignettes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>error_on</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"never"</span>, <span class='st'>"error"</span>, <span class='st'>"warning"</span>, <span class='st'>"note"</span>)
+)
 
-<span class='fu'>check_built</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cran</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>remote</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>incoming</span> <span class='kw'>=</span> <span class='no'>remote</span>, <span class='kw'>force_suggests</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>run_dont_test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='st'>"--timings"</span>, <span class='kw'>env_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>check_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>error_on</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"never"</span>,
-  <span class='st'>"error"</span>, <span class='st'>"warning"</span>, <span class='st'>"note"</span>))</pre>
+<span class='fu'>check_built</span>(
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cran</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>remote</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>incoming</span> <span class='kw'>=</span> <span class='no'>remote</span>,
+  <span class='kw'>force_suggests</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>run_dont_test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>args</span> <span class='kw'>=</span> <span class='st'>"--timings"</span>,
+  <span class='kw'>env_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>check_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(),
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>error_on</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"never"</span>, <span class='st'>"error"</span>, <span class='st'>"warning"</span>, <span class='st'>"note"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -248,6 +271,11 @@ check directory.</p></td>
     <tr>
       <th>cleanup</th>
       <td><p>Deprecated.</p></td>
+    </tr>
+    <tr>
+      <th>vignettes</th>
+      <td><p>If <code>FALSE</code>, do not build or check vignettes, equivalent to
+using <code>args = '--ignore-vignettes' and </code>build_args = '--no-build-vignettes'.</p></td>
     </tr>
     <tr>
       <th>error_on</th>

@@ -43,7 +43,7 @@
 
 
 <meta property="og:title" content="Changelog" />
-<meta property="og:image" content="/logo.png" />
+<meta property="og:image" content="https://devtools.r-lib.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.2</span>
       </span>
     </div>
 
@@ -152,10 +152,23 @@
       <small>Source: <a href='https://github.com/r-lib/devtools/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="devtools-development-version" class="section level1">
+    <div id="devtools-2-2-2" class="section level1">
 <h1 class="page-header">
-<a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
+<a href="#devtools-2-2-2" class="anchor"></a>devtools 2.2.2<small> Unreleased </small>
 </h1>
+<ul>
+<li><p><code><a href="../reference/install_deps.html">install_dev_deps()</a></code> now passes formal args onto <code><a href="https://remotes.r-lib.org/reference/install_deps.html">remotes::install_deps()</a></code> (<a href='https://github.com/t-gibson'>@t-gibson</a>, <a href='https://github.com/r-lib/devtools/issues/2166'>#2166</a>)</p></li>
+<li><p><code><a href="../reference/spell_check.html">spell_check()</a></code> now checks if <code>spelling</code> is installed and prompts users to install it if not (<a href='https://github.com/mikemahoney218'>@mikemahoney218</a>, <a href='https://github.com/r-lib/devtools/issues/2172'>#2172</a>)</p></li>
+<li><p><code><a href="../reference/submit_cran.html">submit_cran()</a></code> now returns a more informative error when the CRAN submission portal is down (<a href='https://github.com/r-lib/devtools/issues/1958'>#1958</a>)</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> gains a <code>vignettes</code> argument, to more easily disable checks for vignettes (<a href='https://github.com/r-lib/devtools/issues/2165'>#2165</a>).</p></li>
+<li><p><code>check_win_*()</code> function now resets the email to the original email after execution (<a href='https://github.com/muschellij2'>@muschellij2</a>, <a href='https://github.com/r-lib/devtools/issues/2152'>#2152</a>).</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now sets <code>NOT_CRAN=true</code> by default, as was originally intended (<a href='https://github.com/r-lib/devtools/issues/2135'>#2135</a>).</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_deps()</a></code> now supports <code><a href="https://rdrr.io/r/base/options.html">options("devtools.ellipsis_action")</a></code> as well (<a href='https://github.com/r-lib/devtools/issues/2169'>#2169</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> now takes <code>stop_on_failure</code> as a formal argument (FALSE by default) instead of in <code>...</code>. Its value is still passed to <code><a href="https://rdrr.io/pkg/testthat/man/test_dir.html">testthat::test_dir</a></code> as before (<a href='https://github.com/infotroph'>@infotroph</a>, <a href='https://github.com/r-lib/devtools/issues/2129'>#2129</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> gain a <code>export_all</code> argument, which controls if all functions in a package are automatically exported (<a href='https://github.com/r-lib/devtools/issues/1201'>#1201</a>).</p></li>
+<li><p><code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> now works if run outside a package directory (<a href='https://github.com/r-lib/devtools/issues/2127'>#2127</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> now works if the package root is not in the working directory.</p></li>
+</ul>
 </div>
     <div id="devtools-2-2-1" class="section level1">
 <h1 class="page-header">
@@ -265,7 +278,7 @@
 </h1>
 <p>This is a minor release mainly fixing bugs which snuck through in the devtools 2.0.0 release.</p>
 <ul>
-<li><p><code><a href="../reference/install.html">install()</a></code> now correctly passes the <code>upgrade</code> parameter to <code><a href="https://rdrr.io/pkg/remotes/man/install_deps.html">remotes::install_deps()</a></code> (<a href='https://github.com/Paxanator'>@Paxanator</a>, <a href='https://github.com/r-lib/devtools/issues/1898'>#1898</a>).</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> now correctly passes the <code>upgrade</code> parameter to <code><a href="https://remotes.r-lib.org/reference/install_deps.html">remotes::install_deps()</a></code> (<a href='https://github.com/Paxanator'>@Paxanator</a>, <a href='https://github.com/r-lib/devtools/issues/1898'>#1898</a>).</p></li>
 <li><p><code><a href="../reference/install_deps.html">install_deps()</a></code> now again works from any directory within a package (<a href='https://github.com/r-lib/devtools/issues/1905'>#1905</a>)</p></li>
 <li><p>Add a RStudio addin for <code><a href="../reference/test.html">test_coverage()</a></code>.</p></li>
 <li><p>All tests which use remote resources are now skipped on CRAN, to avoid spurious failures</p></li>
@@ -337,7 +350,7 @@
 <a href="#major-changes" class="anchor"></a>Major changes</h2>
 <ul>
 <li><p>All <code>install_*()</code> functions are now re-exported from <strong>remotes</strong> rather than being defined in <strong>devtools</strong></p></li>
-<li><p><strong>devtools</strong> now depends on <strong>roxygen2</strong> 6.1.0: this considerably simplifies <code><a href="../reference/document.html">devtools::document()</a></code> and makes it more consistent with <code><a href="https://rdrr.io/pkg/roxygen2/man/roxygenize.html">roxygen2::roxygenise()</a></code>.</p></li>
+<li><p><strong>devtools</strong> now depends on <strong>roxygen2</strong> 6.1.0: this considerably simplifies <code><a href="../reference/document.html">devtools::document()</a></code> and makes it more consistent with <code><a href="https://roxygen2.r-lib.org/reference/roxygenize.html">roxygen2::roxygenise()</a></code>.</p></li>
 <li><p><code><a href="../reference/test.html">test_file()</a></code> function added to test one or more files from a package (<a href='https://github.com/r-lib/devtools/issues/1755'>#1755</a>).</p></li>
 <li><p><code><a href="../reference/test.html">test_coverage()</a></code> function added to provide a helper to compute test coverage using <strong>covr</strong> (<a href='https://github.com/r-lib/devtools/issues/1628'>#1628</a>).</p></li>
 <li><p><code><a href="../reference/test.html">test_file()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> now have RStudio addins (<a href='https://github.com/r-lib/devtools/issues/1650'>#1650</a>)</p></li>
@@ -804,7 +817,7 @@
 <ul>
 <li><p>Deprecated <code>doc_clean</code> argument to <code><a href="../reference/check.html">check()</a></code> has been removed.</p></li>
 <li><p>Initial package version in <code><a href="../reference/create.html">create()</a></code> is now <code>0.0.0.9000</code> (<a href='https://github.com/r-lib/devtools/issues/632'>#632</a>). <code><a href="../reference/create.html">create()</a></code> and <code>create_description()</code> checks that the package name is valid (<a href='https://github.com/r-lib/devtools/issues/610'>#610</a>).</p></li>
-<li><p><code><a href="../reference/load_all.html">load_all()</a></code> runs <code><a href="https://rdrr.io/pkg/roxygen2/man/update_collate.html">roxygen2::update_collate()</a></code> before loading code. This ensures that files are sourced in the way you expect, as defined by roxygen <code>@include</code> tags. If you don’t have any <code>@include</code> tags, the collate will be not be touched (<a href='https://github.com/r-lib/devtools/issues/623'>#623</a>).</p></li>
+<li><p><code><a href="../reference/load_all.html">load_all()</a></code> runs <code><a href="https://roxygen2.r-lib.org/reference/update_collate.html">roxygen2::update_collate()</a></code> before loading code. This ensures that files are sourced in the way you expect, as defined by roxygen <code>@include</code> tags. If you don’t have any <code>@include</code> tags, the collate will be not be touched (<a href='https://github.com/r-lib/devtools/issues/623'>#623</a>).</p></li>
 <li><p><code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info()</a></code> gains <code>include_base</code> argument to also display loaded/attached base packages (<a href='https://github.com/r-lib/devtools/issues/646'>#646</a>).</p></li>
 <li>
 <p><code><a href="../reference/release.html">release()</a></code> no longer asks if you’ve read the CRAN policies since the CRAN submission process now asks the same question (<a href='https://github.com/r-lib/devtools/issues/692'>#692</a>).</p>
@@ -1467,7 +1480,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#devtools-development-version">development version</a></li>
+        <li><a href="#devtools-2-2-2">2.2.2</a></li>
         <li><a href="#devtools-2-2-1">2.2.1</a></li>
         <li><a href="#devtools-2-2-0">2.2.0</a></li>
         <li><a href="#devtools-2-1-0">2.1.0</a></li>

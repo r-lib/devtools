@@ -3,4 +3,7 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   dependencies: dependencies.html
+urls:
+  reference: https://devtools.r-lib.org//reference
+  article: https://devtools.r-lib.org//articles
 
