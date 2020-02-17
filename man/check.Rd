@@ -5,17 +5,40 @@
 \alias{check_built}
 \title{Build and check a package, cleaning up automatically on success.}
 \usage{
-check(pkg = ".", document = NA, build_args = NULL, ...,
-  manual = FALSE, cran = TRUE, remote = FALSE, incoming = remote,
-  force_suggests = FALSE, run_dont_test = FALSE, args = "--timings",
-  env_vars = NULL, quiet = FALSE, check_dir = tempdir(),
-  cleanup = TRUE, error_on = c("never", "error", "warning", "note"))
+check(
+  pkg = ".",
+  document = NA,
+  build_args = NULL,
+  ...,
+  manual = FALSE,
+  cran = TRUE,
+  remote = FALSE,
+  incoming = remote,
+  force_suggests = FALSE,
+  run_dont_test = FALSE,
+  args = "--timings",
+  env_vars = c(NOT_CRAN = "true"),
+  quiet = FALSE,
+  check_dir = tempdir(),
+  cleanup = TRUE,
+  vignettes = TRUE,
+  error_on = c("never", "error", "warning", "note")
+)
 
-check_built(path = NULL, cran = TRUE, remote = FALSE,
-  incoming = remote, force_suggests = FALSE, run_dont_test = FALSE,
-  manual = FALSE, args = "--timings", env_vars = NULL,
-  check_dir = tempdir(), quiet = FALSE, error_on = c("never",
-  "error", "warning", "note"))
+check_built(
+  path = NULL,
+  cran = TRUE,
+  remote = FALSE,
+  incoming = remote,
+  force_suggests = FALSE,
+  run_dont_test = FALSE,
+  manual = FALSE,
+  args = "--timings",
+  env_vars = NULL,
+  check_dir = tempdir(),
+  quiet = FALSE,
+  error_on = c("never", "error", "warning", "note")
+)
 }
 \arguments{
 \item{pkg}{The package to use, can be a file path to the package or a
@@ -25,7 +48,7 @@ package object.  See \code{\link[=as.package]{as.package()}} for more informatio
 rerun \code{\link[=document]{document()}} prior to checking. Use \code{TRUE}
 and \code{FALSE} to override this default.}
 
-\item{build_args}{Additional arguments passed to \code{R CMD build}}
+\item{build_args}{Additional arguments passed to \verb{R CMD build}}
 
 \item{...}{Additional arguments passed on to \code{\link[pkgbuild:build]{pkgbuild::build()}}.}
 
@@ -35,14 +58,14 @@ and \code{FALSE} to override this default.}
 \item{cran}{if \code{TRUE} (the default), check using the same settings as
 CRAN uses.}
 
-\item{remote}{Sets \code{_R_CHECK_CRAN_INCOMING_REMOTE_} env var.
+\item{remote}{Sets \verb{_R_CHECK_CRAN_INCOMING_REMOTE_} env var.
 If \code{TRUE}, performs a number of CRAN incoming checks that require
 remote access.}
 
-\item{incoming}{Sets \code{_R_CHECK_CRAN_INCOMING_} env var.
+\item{incoming}{Sets \verb{_R_CHECK_CRAN_INCOMING_} env var.
 If \code{TRUE}, performs a number of CRAN incoming checks.}
 
-\item{force_suggests}{Sets \code{_R_CHECK_FORCE_SUGGESTS_}. If
+\item{force_suggests}{Sets \verb{_R_CHECK_FORCE_SUGGESTS_}. If
 \code{FALSE} (the default), check will proceed even if all suggested
 packages aren't found.}
 
@@ -50,9 +73,9 @@ packages aren't found.}
 \code{\\dontest\{\}} are also tested. This is important for CRAN
 submission.}
 
-\item{args}{Additional arguments passed to \code{R CMD check}}
+\item{args}{Additional arguments passed to \verb{R CMD check}}
 
-\item{env_vars}{Environment variables set during \code{R CMD check}}
+\item{env_vars}{Environment variables set during \verb{R CMD check}}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
@@ -61,6 +84,9 @@ compatibility. \code{args = "--output=/foo/bar"} can be used to change the
 check directory.}
 
 \item{cleanup}{Deprecated.}
+
+\item{vignettes}{If \code{FALSE}, do not build or check vignettes, equivalent to
+using \verb{args = '--ignore-vignettes' and }build_args = '--no-build-vignettes'.}
 
 \item{error_on}{Whether to throw an error on \code{R CMD check} failures.
 Note that the check is always completed (unless a timeout happens),
@@ -80,7 +106,7 @@ An object containing errors, warnings, and notes.
 known best practices. \code{check_built} checks an already built package.
 }
 \details{
-Passing \code{R CMD check} is essential if you want to submit your package
+Passing \verb{R CMD check} is essential if you want to submit your package
 to CRAN: you must not have any ERRORs or WARNINGs, and you want to ensure
 that there are as few NOTEs as possible.  If you are not submitting to CRAN,
 at least ensure that there are no ERRORs or WARNINGs: these typically
@@ -107,7 +133,7 @@ running on CRAN, and hence can take a reasonable amount of time.
 \item Debugging flags for the compiler, set by
 \code{\link{compiler_flags}(FALSE)}.
 
-\item If \code{aspell} is found \code{_R_CHECK_CRAN_INCOMING_USE_ASPELL_}
+\item If \code{aspell} is found \verb{_R_CHECK_CRAN_INCOMING_USE_ASPELL_}
 is set to \code{TRUE}. If no spell checker is installed, a warning is
 issued.)
 

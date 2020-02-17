@@ -287,6 +287,22 @@ build_cran <- function(pkg, args) {
   built_path
 }
 
+extract_cran_msg <- function(msg) {
+  # Remove "CRAN package Submission" and "Submit package to CRAN"
+  msg <- gsub("CRAN package Submission|Submit package to CRAN", "", msg)
+
+  # remove all html tags
+  msg <- gsub("<[^>]+>", "", msg)
+
+  # remove tabs
+  msg <- gsub("\t+", "", msg)
+
+  # Remove extra newlines
+  msg <- gsub("\n+", "\n", msg)
+
+  msg
+}
+
 upload_cran <- function(pkg, built_path) {
   pkg <- as.package(pkg)
   maint <- maintainer(pkg)
@@ -303,6 +319,17 @@ upload_cran <- function(pkg, built_path) {
     upload = "Upload package"
   )
   r <- httr::POST(cran_submission_url, body = body)
+
+  # If a 404 likely CRAN is closed for maintenance, try to get the message
+  if (httr::status_code(r) == 404) {
+    msg <- ""
+    try({
+      r2 <- httr::GET(sub("index2", "index", cran_submission_url))
+      msg <- extract_cran_msg(httr::content(r2, "text"))
+    })
+    stop("Submission failed:", msg, call. = FALSE)
+  }
+
   httr::stop_for_status(r)
   new_url <- httr::parse_url(r$url)
 

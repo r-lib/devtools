@@ -4,10 +4,20 @@
 \alias{install}
 \title{Install a local development package.}
 \usage{
-install(pkg = ".", reload = TRUE, quick = FALSE, build = !quick,
-  args = getOption("devtools.install.args"), quiet = FALSE,
-  dependencies = NA, upgrade = "ask", build_vignettes = FALSE,
-  keep_source = getOption("keep.source.pkgs"), force = FALSE, ...)
+install(
+  pkg = ".",
+  reload = TRUE,
+  quick = FALSE,
+  build = !quick,
+  args = getOption("devtools.install.args"),
+  quiet = FALSE,
+  dependencies = NA,
+  upgrade = "ask",
+  build_vignettes = FALSE,
+  keep_source = getOption("keep.source.pkgs"),
+  force = FALSE,
+  ...
+)
 }
 \arguments{
 \item{pkg}{The package to use, can be a file path to the package or a
@@ -26,7 +36,7 @@ package directory, but is considerably slower, because every compile has
 to start from scratch.}
 
 \item{args}{An optional character vector of additional command line
-arguments to be passed to \code{R CMD INSTALL}. This defaults to the
+arguments to be passed to \verb{R CMD INSTALL}. This defaults to the
 value of the option \code{"devtools.install.args"}.}
 
 \item{quiet}{If \code{TRUE}, suppress output.}
@@ -50,7 +60,7 @@ to "always". \code{TRUE} and \code{FALSE} are also accepted and correspond to
 \item{build_vignettes}{if \code{TRUE}, will build vignettes. Normally it is
 \code{build} that's responsible for creating vignettes; this argument makes
 sure vignettes are built even if a build never happens (i.e. because
-\code{local = TRUE}).}
+\code{build = FALSE}).}
 
 \item{keep_source}{If \code{TRUE} will keep the srcrefs from an installed
 package. This is useful for debugging (especially inside of RStudio).
@@ -63,15 +73,15 @@ since the previous install.}
 when installing dependencies.}
 }
 \description{
-Uses \code{R CMD INSTALL} to install the package. Will also try to install
+Uses \verb{R CMD INSTALL} to install the package. Will also try to install
 dependencies of the package from CRAN, if they're not already installed.
 }
 \details{
-By default, installation takes place using the current package directory.
-If you have compiled code, this means that artefacts of compilation will be
-created in the \code{src/} directory. If you want to avoid this, you can
-use \code{build = TRUE} to first build a package bundle and then install
-it from a temporary directory. This is slower, but keeps the source
+If \code{quick = TRUE}, installation takes place using the current package
+directory. If you have compiled code, this means that artefacts of
+compilation will be created in the \verb{src/} directory. If you want to avoid
+this, you can use \code{build = TRUE} to first build a package bundle and then
+install it from a temporary directory. This is slower, but keeps the source
 directory pristine.
 
 If the package is loaded, it will be reloaded after installation. This is
@@ -84,6 +94,7 @@ To install a package in a non-default library, use \code{\link[withr:with_libpat
 source location and \code{\link[=with_debug]{with_debug()}} to install packages with
 debugging flags set.
 
-Other package installation: \code{\link{uninstall}}
+Other package installation: 
+\code{\link{uninstall}()}
 }
 \concept{package installation}

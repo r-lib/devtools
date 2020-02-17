@@ -8,8 +8,7 @@
 \alias{test_coverage_file}
 \title{Execute \pkg{test_that} tests in a package.}
 \usage{
-test(pkg = ".", filter = NULL, stop_on_failure = FALSE,
-  export_all = TRUE, ...)
+test(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...)
 
 test_coverage(pkg = ".", show_report = interactive(), ...)
 
@@ -17,8 +16,13 @@ uses_testthat(pkg = ".")
 
 test_file(file = find_active_file(), ...)
 
-test_coverage_file(file = find_active_file(), filter = TRUE,
-  show_report = interactive(), export_all = TRUE, ...)
+test_coverage_file(
+  file = find_active_file(),
+  filter = TRUE,
+  show_report = interactive(),
+  export_all = TRUE,
+  ...
+)
 }
 \arguments{
 \item{pkg}{The package to use, can be a file path to the package or a
@@ -28,7 +32,12 @@ package object.  See \code{\link[=as.package]{as.package()}} for more informatio
 regular expression will be executed. Matching be performed on the file
 name after it has been stripped of \code{"test-"} and \code{".R"}.}
 
-\item{stop_on_failure}{If \code{TRUE}, throw an error if any tests fail.}
+\item{stop_on_failure}{If \code{TRUE}, throw an error if any tests fail.
+
+For historical reasons, the default value of \code{stop_on_failure} is \code{TRUE}
+for  \code{test_package()} and \code{test_check()} but \code{FALSE} for \code{test_dir()}, so
+if you're calling \code{test_dir()} you may want to consider explicitly setting
+\code{stop_on_failure = TRUE}.}
 
 \item{export_all}{If \code{TRUE} (the default), export all objects.
 If \code{FALSE}, export only the objects that are listed as exports

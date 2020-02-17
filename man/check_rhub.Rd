@@ -4,8 +4,14 @@
 \alias{check_rhub}
 \title{Run CRAN checks for package on R-hub}
 \usage{
-check_rhub(pkg = ".", platforms = NULL, email = NULL,
-  interactive = TRUE, build_args = NULL, ...)
+check_rhub(
+  pkg = ".",
+  platforms = NULL,
+  email = NULL,
+  interactive = TRUE,
+  build_args = NULL,
+  ...
+)
 }
 \arguments{
 \item{pkg}{The package to use, can be a file path to the package or a
@@ -23,7 +29,7 @@ address in the package.}
 interactively. R-hub will send an email to the package maintainer's
 email address, regardless of whether the check is interactive or not.}
 
-\item{build_args}{Arguments passed to \code{R CMD build}}
+\item{build_args}{Arguments passed to \verb{R CMD build}}
 
 \item{...}{extra arguments, passed to \code{\link[rhub:check_for_cran]{rhub::check_for_cran()}}.}
 }
@@ -46,6 +52,7 @@ results. See more at \code{\link[rhub:validate_email]{rhub::validate_email()}}.
 }
 
 \seealso{
-Other build functions: \code{\link{check_win}}
+Other build functions: 
+\code{\link{check_win}()}
 }
 \concept{build functions}

@@ -7,14 +7,32 @@
 \alias{check_win_oldrelease}
 \title{Build windows binary package.}
 \usage{
-check_win_devel(pkg = ".", args = NULL, manual = TRUE,
-  email = NULL, quiet = FALSE, ...)
+check_win_devel(
+  pkg = ".",
+  args = NULL,
+  manual = TRUE,
+  email = NULL,
+  quiet = FALSE,
+  ...
+)
 
-check_win_release(pkg = ".", args = NULL, manual = TRUE,
-  email = NULL, quiet = FALSE, ...)
+check_win_release(
+  pkg = ".",
+  args = NULL,
+  manual = TRUE,
+  email = NULL,
+  quiet = FALSE,
+  ...
+)
 
-check_win_oldrelease(pkg = ".", args = NULL, manual = TRUE,
-  email = NULL, quiet = FALSE, ...)
+check_win_oldrelease(
+  pkg = ".",
+  args = NULL,
+  manual = TRUE,
+  email = NULL,
+  quiet = FALSE,
+  ...
+)
 }
 \arguments{
 \item{pkg}{The package to use, can be a file path to the package or a
@@ -39,7 +57,7 @@ This function works by bundling source package, and then uploading to
 \url{https://win-builder.r-project.org/}.  Once building is complete you'll
 receive a link to the built package in the email address listed in the
 maintainer field.  It usually takes around 30 minutes. As a side effect,
-win-build also runs \code{R CMD check} on the package, so \code{check_win}
+win-build also runs \verb{R CMD check} on the package, so \code{check_win}
 is also useful to check that your package is ok on windows.
 }
 \section{Functions}{
@@ -52,6 +70,7 @@ is also useful to check that your package is ok on windows.
 }}
 
 \seealso{
-Other build functions: \code{\link{check_rhub}}
+Other build functions: 
+\code{\link{check_rhub}()}
 }
 \concept{build functions}

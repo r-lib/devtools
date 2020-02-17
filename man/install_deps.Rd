@@ -5,17 +5,29 @@
 \alias{install_dev_deps}
 \title{Install package dependencies if needed.}
 \usage{
-install_deps(pkg = ".", dependencies = NA,
-  repos = getOption("repos"), type = getOption("pkgType"),
-  upgrade = c("default", "ask", "always", "never"), quiet = FALSE,
-  build = TRUE, build_opts = c("--no-resave-data", "--no-manual",
-  " --no-build-vignettes"), ...)
+install_deps(
+  pkg = ".",
+  dependencies = NA,
+  repos = getOption("repos"),
+  type = getOption("pkgType"),
+  upgrade = c("default", "ask", "always", "never"),
+  quiet = FALSE,
+  build = TRUE,
+  build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
+  ...
+)
 
-install_dev_deps(pkg = ".", dependencies = TRUE,
-  repos = getOption("repos"), type = getOption("pkgType"),
-  upgrade = c("default", "ask", "always", "never"), quiet = FALSE,
-  build = TRUE, build_opts = c("--no-resave-data", "--no-manual",
-  " --no-build-vignettes"), ...)
+install_dev_deps(
+  pkg = ".",
+  dependencies = TRUE,
+  repos = getOption("repos"),
+  type = getOption("pkgType"),
+  upgrade = c("default", "ask", "always", "never"),
+  quiet = FALSE,
+  build = TRUE,
+  build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
+  ...
+)
 }
 \arguments{
 \item{pkg}{The package to use, can be a file path to the package or a
@@ -43,11 +55,16 @@ to "always". \code{TRUE} and \code{FALSE} are also accepted and correspond to
 
 \item{quiet}{If \code{TRUE}, suppress output.}
 
-\item{build}{If \code{TRUE} build the package before installing.}
+\item{build}{if \code{TRUE} \code{\link[pkgbuild:build]{pkgbuild::build()}}s the package first:
+this ensures that the installation is completely clean, and prevents any
+binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
+package directory, but is considerably slower, because every compile has
+to start from scratch.}
 
-\item{build_opts}{Options to pass to \code{R CMD build}, only used when \code{build}}
+\item{build_opts}{Options to pass to \verb{R CMD build}, only used when \code{build}}
 
-\item{...}{additional arguments passed to \code{\link[utils:install.packages]{utils::install.packages()}}.}
+\item{...}{additional arguments passed to \code{\link[remotes:install_deps]{remotes::install_deps()}}
+when installing dependencies.}
 }
 \description{
 \code{install_deps()} will install the

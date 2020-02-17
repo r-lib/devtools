@@ -47,6 +47,8 @@
 #'   compatibility. `args = "--output=/foo/bar"` can be used to change the
 #'   check directory.
 #' @param ... Additional arguments passed on to [pkgbuild::build()].
+#' @param vignettes If `FALSE`, do not build or check vignettes, equivalent to
+#'   using `args = '--ignore-vignettes' and `build_args = '--no-build-vignettes'.
 #' @param cleanup Deprecated.
 #' @seealso [release()] if you want to send the checked package to
 #'   CRAN.
@@ -62,10 +64,11 @@ check <- function(pkg = ".",
                   force_suggests = FALSE,
                   run_dont_test = FALSE,
                   args = "--timings",
-                  env_vars = NULL,
+                  env_vars = c(NOT_CRAN = "true"),
                   quiet = FALSE,
                   check_dir = tempdir(),
                   cleanup = TRUE,
+                  vignettes = TRUE,
                   error_on = c("never", "error", "warning", "note")) {
   pkg <- as.package(pkg)
   withr::local_options(list(warn = 1))
@@ -100,6 +103,10 @@ check <- function(pkg = ".",
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
+  if (identical(vignettes, FALSE)) {
+    args <- union(args, "--ignore-vignettes")
+  }
+
   withr::with_envvar(pkgbuild::compiler_flags(FALSE), action = "prefix", {
     built_path <- pkgbuild::build(
       pkg$path,
@@ -107,6 +114,7 @@ check <- function(pkg = ".",
       args = build_args,
       quiet = quiet,
       manual = manual,
+      vignettes = vignettes,
       ...
     )
     on.exit(unlink(built_path), add = TRUE)

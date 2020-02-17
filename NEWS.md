@@ -1,12 +1,34 @@
-# devtools (development version)
+# devtools 2.2.2
+
+* `install_dev_deps()` now passes formal args onto `remotes::install_deps()`
+(@t-gibson, #2166)
+
+* `spell_check()` now checks if `spelling` is installed and prompts users to 
+  install it if not (@mikemahoney218, #2172)
+
+* `submit_cran()` now returns a more informative error when the CRAN submission
+  portal is down (#1958)
+
+* `check()` gains a `vignettes` argument, to more easily disable checks for
+  vignettes (#2165).
+
+* `check_win_*()` function now resets the email to the original email after
+  execution (@muschellij2, #2152).
+
+* `check()` now sets `NOT_CRAN=true` by default, as was originally intended (#2135).
+
+* `install_deps()` now supports `options("devtools.ellipsis_action")` as well
+  (#2169)
 
 * `test()` now takes `stop_on_failure` as a formal argument (FALSE by default)
   instead of in `...`. Its value is still passed to `testthat::test_dir` as
   before (@infotroph, #2129).
+
 * `test()` and `test_coverage_file()` gain a `export_all` argument, which
   controls if all functions in a package are automatically exported (#1201).
 
 * `dev_sitrep()` now works if run outside a package directory (#2127).
+
 * `release()` now works if the package root is not in the working directory.
 
 # devtools 2.2.1

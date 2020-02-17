@@ -11,9 +11,8 @@ document(pkg = ".", roclets = NULL, quiet = FALSE)
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
 \item{roclets}{Character vector of roclet names to use with package.
-This defaults to \code{NULL}, which will use the \code{roclets} fields in
-the list provided in the \code{Roxygen} DESCRIPTION field. If none are
-specified, defaults to \code{c("collate", "namespace", "rd")}.}
+The default, \code{NULL}, uses the roxygen \code{roclets} option,
+which defaults to \code{c("collate", "namespace", "rd")}.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 }

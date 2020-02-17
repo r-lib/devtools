@@ -4,8 +4,16 @@
 \alias{build}
 \title{Build package}
 \usage{
-build(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
-  manual = FALSE, args = NULL, quiet = FALSE, ...)
+build(
+  pkg = ".",
+  path = NULL,
+  binary = FALSE,
+  vignettes = TRUE,
+  manual = FALSE,
+  args = NULL,
+  quiet = FALSE,
+  ...
+)
 }
 \arguments{
 \item{pkg}{The package to use, can be a file path to the package or a

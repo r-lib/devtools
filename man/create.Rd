@@ -4,15 +4,19 @@
 \alias{create}
 \title{Create a package}
 \usage{
-create(path, fields = NULL, rstudio = rstudioapi::isAvailable(),
-  open = interactive())
+create(
+  path,
+  fields = NULL,
+  rstudio = rstudioapi::isAvailable(),
+  open = interactive()
+)
 }
 \arguments{
 \item{path}{A path. If it exists, it is used. If it does not exist, it is
 created, provided that the parent path exists.}
 
 \item{fields}{A named list of fields to add to \code{DESCRIPTION}, potentially
-overriding default values. See \code{\link[=use_description]{use_description()}} for how you can set
+overriding default values. See \code{\link[usethis:use_description]{use_description()}} for how you can set
 personalized defaults using package options}
 
 \item{rstudio}{If \code{TRUE}, calls \code{\link[=use_rstudio]{use_rstudio()}} to make the new package or

@@ -11,6 +11,7 @@
 #' @param use_wordlist ignore words in the package [WORDLIST][spelling::get_wordlist] file
 #' @inheritParams spelling::spell_check_package
 spell_check <- function(pkg = ".", vignettes = TRUE, use_wordlist = TRUE) {
+  check_suggested("spelling")
   pkg <- as.package(pkg)
   spelling::spell_check_package(pkg = pkg, vignettes = vignettes, use_wordlist = use_wordlist)
 }

@@ -11,7 +11,7 @@ submit_cran(pkg = ".", args = NULL)
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
 \item{args}{An optional character vector of additional command
-line arguments to be passed to \code{R CMD build}.}
+line arguments to be passed to \verb{R CMD build}.}
 }
 \description{
 This uses the new CRAN web-form submission process. After submission, you

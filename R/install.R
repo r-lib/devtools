@@ -3,11 +3,11 @@
 #' Uses `R CMD INSTALL` to install the package. Will also try to install
 #' dependencies of the package from CRAN, if they're not already installed.
 #'
-#' By default, installation takes place using the current package directory.
-#' If you have compiled code, this means that artefacts of compilation will be
-#' created in the `src/` directory. If you want to avoid this, you can
-#' use `build = TRUE` to first build a package bundle and then install
-#' it from a temporary directory. This is slower, but keeps the source
+#' If `quick = TRUE`, installation takes place using the current package
+#' directory. If you have compiled code, this means that artefacts of
+#' compilation will be created in the `src/` directory. If you want to avoid
+#' this, you can use `build = TRUE` to first build a package bundle and then
+#' install it from a temporary directory. This is slower, but keeps the source
 #' directory pristine.
 #'
 #' If the package is loaded, it will be reloaded after installation. This is
@@ -32,7 +32,7 @@
 #' @param build_vignettes if `TRUE`, will build vignettes. Normally it is
 #'   `build` that's responsible for creating vignettes; this argument makes
 #'   sure vignettes are built even if a build never happens (i.e. because
-#'   `local = TRUE`).
+#'   `build = FALSE`).
 #' @param keep_source If `TRUE` will keep the srcrefs from an installed
 #'   package. This is useful for debugging (especially inside of RStudio).
 #'   It defaults to the option `"keep.source.pkgs"`.
@@ -133,7 +133,8 @@ install_deps <- function(pkg = ".",
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  remotes::install_deps(pkg$path,
+  remotes::install_deps(
+    pkg$path,
     dependencies = dependencies,
     repos = repos,
     type = type,
@@ -162,7 +163,15 @@ install_dev_deps <- function(pkg = ".",
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  remotes::install_deps(pkg$path, ...,
-    dependencies = TRUE, upgrade = upgrade
+  remotes::install_deps(
+    pkg$path,
+    dependencies = dependencies,
+    repos = repos,
+    type = type,
+    upgrade = upgrade,
+    quiet = quiet,
+    build = build,
+    build_opts = build_opts,
+    ...
   )
 }
