@@ -133,7 +133,8 @@ install_deps <- function(pkg = ".",
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  remotes::install_deps(pkg$path,
+  remotes::install_deps(
+    pkg$path,
     dependencies = dependencies,
     repos = repos,
     type = type,
@@ -162,7 +163,15 @@ install_dev_deps <- function(pkg = ".",
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  remotes::install_deps(pkg$path, ...,
-    dependencies = TRUE, upgrade = upgrade
+  remotes::install_deps(
+    pkg$path,
+    dependencies = dependencies,
+    repos = repos,
+    type = type,
+    upgrade = upgrade,
+    quiet = quiet,
+    build = build,
+    build_opts = build_opts,
+    ...
   )
 }
