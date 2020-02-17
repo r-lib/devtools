@@ -9,7 +9,7 @@ run_examples(
   start = NULL,
   show = TRUE,
   test = FALSE,
-  run = TRUE,
+  run = FALSE,
   fresh = FALSE,
   document = TRUE
 )
@@ -29,7 +29,7 @@ rerun them every time you fix a problem.}
 \item{test}{if \code{TRUE}, code in \code{\\donttest{}} will be commented
 out. If \code{FALSE}, code in \code{\\testonly{}} will be commented out.}
 
-\item{run}{if \code{TRUE}, code in \code{\\dontrun{}} will be commented
+\item{run}{if \code{FALSE}, code in \code{\\dontrun{}} will be commented
 out.}
 
 \item{fresh}{if \code{TRUE}, will be run in a fresh R session. This has

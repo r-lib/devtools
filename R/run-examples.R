@@ -15,7 +15,7 @@
 #' @param show DEPRECATED.
 #' @param test if `TRUE`, code in \code{\\donttest{}} will be commented
 #'   out. If `FALSE`, code in \code{\\testonly{}} will be commented out.
-#' @param run if `TRUE`, code in \code{\\dontrun{}} will be commented
+#' @param run if `FALSE`, code in \code{\\dontrun{}} will be commented
 #'   out.
 #' @param fresh if `TRUE`, will be run in a fresh R session. This has
 #'   the advantage that there's no way the examples can depend on anything in
@@ -26,7 +26,7 @@
 #' @keywords programming
 #' @export
 run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
-                         run = TRUE, fresh = FALSE, document = TRUE) {
+                         run = FALSE, fresh = FALSE, document = TRUE) {
   pkg <- as.package(pkg)
 
   if (fresh) {
