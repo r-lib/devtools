@@ -28,13 +28,13 @@ devtools::install_github("r-lib/devtools")
 
 All devtools functions accept a path as an argument, e.g.
 `load_all("path/to/mypkg")`. If you don't specify a path, devtools will
-look in the current working directory - this is recommended practice.
+look in the current working directory - this is a recommended practice.
 
 ### Frequent development tasks:
 
 * `load_all()` simulates installing and reloading your package, loading R code
   in `R/`, compiled shared objects in `src/` and data files in `data/`. During
-  development you usually want to access all functions (even un-exported
+  development you would usually want to access all functions (even un-exported
   internal ones) so `load_all()` works as if all functions were exported in the
   package `NAMESPACE`.
 
@@ -154,12 +154,12 @@ includes:
 * [usethis](https://github.com/r-lib/usethis): Automating package setup (i.e.
   `use_test()`).
 
-Generally, you should not need to worry about these different packages, because
-devtools installs them all automatically. You will need to care, however, if
+Generally, you would not need to worry about these different packages, because
+devtools installs all of them automatically. You will need to care, however, if
 you're filing a bug because reporting it at the correct place will lead to a
 speedier resolution.
 
-You also may need to care if you are trying to use some devtools functionality
+You may also need to care if you are trying to use some devtools functionality
 in your own package or deployed application. Generally in these cases it
 is better to depend on the particular package directly rather than depend on devtools,
 e.g. use `sessioninfo::session_info()` rather than `devtools::session_info()`,
