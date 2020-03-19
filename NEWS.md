@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* New `build_rmd()` can build any `.Rmd` file in a clean session.
+
 # devtools 2.2.2
 
 * `install_dev_deps()` now passes formal args onto `remotes::install_deps()`
