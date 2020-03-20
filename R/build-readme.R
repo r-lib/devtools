@@ -1,17 +1,47 @@
-#' Build a Rmarkdown README for a package
+#' Build a Rmarkdown files package
 #'
-#' `build_readme()` is a wrapper around [rmarkdown::render()], it generates the
-#' README.md from a README.Rmd file.
+#' `build_rmd()` is a wrapper around [rmarkdown::render()] that first installs
+#' a temporary copy of the package, and then renders each `.Rmd` in a clean R
+#' session. `build_readme()` locates your `README.Rmd` and builds it into a
+#' `README.md`
 #'
+#' @param files
 #' @param path path to the package to build the readme.
 #' @param ...  additional arguments passed to [rmarkdown::render()]
 #' @inheritParams install
 #' @export
-build_readme <- function(path = ".", quiet = TRUE, ...) {
-  check_suggested("rmarkdown")
+build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = TRUE) {
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
+  pkg <- as.package(path)
+
+  check_suggested("rmarkdown")
   save_all()
 
+  message("Installing ", pkg$package, " in temporary library")
+  withr::local_temp_libpaths()
+  install(pkg, upgrade = "never", reload = FALSE, quick = TRUE, quiet = quiet)
+
+  # Ensure rendering github_document() doesn't generate HTML file
+  output_options$html_preview <- FALSE
+
+  paths <- file.path(pkg$path, files)
+  for (path in paths) {
+    message("Building ", path)
+    callr::r_safe(
+      function(...) rmarkdown::render(...),
+      args = list(input = path, ..., output_options = output_options, quiet = quiet),
+      show = TRUE,
+      spinner = FALSE
+    )
+  }
+
+  invisible(TRUE)
+}
+
+#' @rdname build_rmd
+#' @export
+build_readme <- function(path = ".", quiet = TRUE, ...) {
   pkg <- as.package(path)
 
   readme_path <- grep(
@@ -25,23 +55,5 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
     return(invisible())
   }
 
-  readme_path <- file.path(pkg$path, readme_path[[1]])
-
-  build <- function(pkg_path, readme_path, ..., quiet) {
-    withr::with_temp_libpaths(action = "prefix", code = {
-      devtools::install(pkg_path, upgrade = "never", reload = FALSE, quiet = quiet)
-      rmarkdown::render(readme_path, ..., quiet = quiet)
-    })
-  }
-
-  message("Building ", pkg$package, " readme")
-
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
-
-  output <- callr::r(build,
-    args = list(pkg_path = pkg$path, readme_path = readme_path, ... = ..., quiet = quiet),
-    show = TRUE, spinner = FALSE
-  )
-
-  invisible(TRUE)
+  build_rmd(readme_path, path = path, quiet = quiet, ...)
 }
