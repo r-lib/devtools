@@ -101,7 +101,7 @@ print.dev_sitrep <- function(x, ...) {
   kv_line("path", x$r_path, path = TRUE)
   if (x$r_version < x$r_release_version) {
     ui_todo('
-      {ui_field("R")} is out of date ({ui_value(x$r_version} vs {ui_value(x$r_release_version)})
+      {ui_field("R")} is out of date ({ui_value(x$r_version)} vs {ui_value(x$r_release_version)})
       ')
       all_ok <- FALSE
   }
