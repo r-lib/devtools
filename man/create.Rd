@@ -4,30 +4,13 @@
 \alias{create}
 \title{Create a package}
 \usage{
-create(
-  path,
-  fields = NULL,
-  rstudio = rstudioapi::isAvailable(),
-  open = interactive()
-)
+create(path, ...)
 }
 \arguments{
 \item{path}{A path. If it exists, it is used. If it does not exist, it is
 created, provided that the parent path exists.}
 
-\item{fields}{A named list of fields to add to \code{DESCRIPTION}, potentially
-overriding default values. See \code{\link[usethis:use_description]{use_description()}} for how you can set
-personalized defaults using package options}
-
-\item{rstudio}{If \code{TRUE}, calls \code{\link[=use_rstudio]{use_rstudio()}} to make the new package or
-into an \href{https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects}{RStudio Project}.}
-
-\item{open}{If \code{TRUE}, \link[=proj_activate]{activates} the new project:
-\itemize{
-\item If RStudio desktop, the package is opened in a new session.
-\item If on RStudio server, the current RStudio project is activated.
-\item Otherwise, the working directory and active project is changed.
-}}
+\item{...}{Additional arguments passed to \code{\link[usethis:create_package]{usethis::create_package()}}}
 }
 \value{
 The path to the created package, invisibly.
