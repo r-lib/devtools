@@ -260,7 +260,8 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
 
   withr::with_envvar(
     c(r_env_vars(),
-      "TESTTHAT_PKG" = pkg$package
+      "TESTTHAT_PKG" = pkg$package,
+      TESTTHAT = "true"
     ),
     withr::with_dir("tests/testthat", {
       coverage <- covr::environment_coverage(env, test_files, ...)
