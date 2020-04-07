@@ -206,3 +206,10 @@ cat_line <- function (..., quiet = getOption("usethis.quiet", default = FALSE)) 
   lines <- paste0(..., "\n")
   cat(lines, sep = "")
 }
+
+release_bullets <- function() {
+  c(
+    '`usethis::use_latest_dependencies(TRUE, "CRAN")`',
+    NULL
+  )
+}
