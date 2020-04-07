@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Is the object a package? — is.package • devtools</title>
+<title>Build a Rmarkdown files package — build_rmd • devtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,11 @@
 
 
 
-<meta property="og:title" content="Is the object a package? — is.package" />
-<meta property="og:description" content="Is the object a package?" />
+<meta property="og:title" content="Build a Rmarkdown files package — build_rmd" />
+<meta property="og:description" content="build_rmd() is a wrapper around rmarkdown::render() that first installs
+a temporary copy of the package, and then renders each .Rmd in a clean R
+session. build_readme() locates your README.Rmd and builds it into a
+README.md" />
 <meta property="og:image" content="https://devtools.r-lib.org/logo.svg" />
 
 
@@ -152,17 +155,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Is the object a package?</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/package.R'><code>R/package.R</code></a></small>
-    <div class="hidden name"><code>is.package.Rd</code></div>
+    <h1>Build a Rmarkdown files package</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/build-readme.R'><code>R/build-readme.R</code></a></small>
+    <div class="hidden name"><code>build_rmd.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Is the object a package?</p>
+    <p><code>build_rmd()</code> is a wrapper around <code><a href='https://rdrr.io/pkg/rmarkdown/man/render.html'>rmarkdown::render()</a></code> that first installs
+a temporary copy of the package, and then renders each <code>.Rmd</code> in a clean R
+session. <code>build_readme()</code> locates your <code>README.Rmd</code> and builds it into a
+<code>README.md</code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>is.package</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>build_rmd</span>(<span class='no'>files</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>output_options</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(), <span class='no'>...</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
+<span class='fu'>build_readme</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>path</th>
+      <td><p>path to the package to build the readme.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments passed to <code><a href='https://rdrr.io/pkg/rmarkdown/man/render.html'>rmarkdown::render()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>quiet</th>
+      <td><p>If <code>TRUE</code>, suppress output.</p></td>
+    </tr>
+    </table>
 
 
   </div>

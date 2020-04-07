@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="pkgdown.css" rel="stylesheet">
@@ -43,8 +47,7 @@
 
 
 <meta property="og:title" content="NA" />
-<meta property="og:image" content="https://devtools.r-lib.org/logo.png" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:image" content="https://devtools.r-lib.org/logo.svg" />
 
 
 
@@ -72,7 +75,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -130,7 +133,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/r-lib/devtools">
+  <a href="https://github.com/r-lib/devtools/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -166,7 +169,7 @@
 <a href="#issues" class="anchor"></a>Issues</h2>
 <p>Before you file an issue:</p>
 <ol>
-<li><p>Check that you’re using the latest version of devtools. It’s quite possible that the problem you’re experiencing has already been fixed.</p></li>
+<li><p>Check that youâre using the latest version of devtools. Itâs quite possible that the problem youâre experiencing has already been fixed.</p></li>
 <li>
 <p>Check that the issue belongs in devtools. Much functionality now lives in separate packages. Please read the list below and check if you should be submitting your issue on another repo:</p>
 <ul>
@@ -178,13 +181,13 @@
 <li><p>Any function that starts with <code>use_</code>: <a href="https://github.com/r-lib/usethis">usethis</a></p></li>
 </ul>
 </li>
-<li><p>Spend a few minutes looking at the existing issues. It’s possible that your issue has already been filed. But it’s almost always better to open a new issue instead of commenting on an existing issue. The only exception is that you are confident that your issue is identical to an existing problem, and your contribution will help us better understand the general case. It’s generally a bad idea to comment on a closed issue or a commit. Those comments don’t show up in the issue tracker and are easily misplaced.</p></li>
+<li><p>Spend a few minutes looking at the existing issues. Itâs possible that your issue has already been filed. But itâs almost always better to open a new issue instead of commenting on an existing issue. The only exception is that you are confident that your issue is identical to an existing problem, and your contribution will help us better understand the general case. Itâs generally a bad idea to comment on a closed issue or a commit. Those comments donât show up in the issue tracker and are easily misplaced.</p></li>
 </ol>
 <p>When filing an issue, the most important thing is to include a minimal reproducible example so that we can quickly verify the problem, and then figure out how to fix it. There are three things you need to include to make your example reproducible: required packages, data, code.</p>
 <ol>
-<li><p><strong>Packages</strong> should be loaded at the top of the script, so it’s easy to see which ones the example needs. Unless you’ve been specifically asked for it, please don’t include the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> or <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code>.</p></li>
+<li><p><strong>Packages</strong> should be loaded at the top of the script, so itâs easy to see which ones the example needs. Unless youâve been specifically asked for it, please donât include the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> or <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code>.</p></li>
 <li>
-<p>The easiest way to include <strong>data</strong> is to use <code><a href="https://rdrr.io/r/base/dput.html">dput()</a></code> to generate the R code to recreate it. For example, to recreate the <code>mtcars</code> dataset in R, I’d perform the following steps:</p>
+<p>The easiest way to include <strong>data</strong> is to use <code><a href="https://rdrr.io/r/base/dput.html">dput()</a></code> to generate the R code to recreate it. For example, to recreate the <code>mtcars</code> dataset in R, Iâd perform the following steps:</p>
 <ol>
 <li>Run <code><a href="https://rdrr.io/r/base/dput.html">dput(mtcars)</a></code> in R</li>
 <li>Copy the output</li>
@@ -195,14 +198,14 @@
 <li>
 <p>Spend a little bit of time ensuring that your <strong>code</strong> is easy for others to read:</p>
 <ul>
-<li><p>make sure you’ve used spaces and your variable names are concise, but informative</p></li>
+<li><p>make sure youâve used spaces and your variable names are concise, but informative</p></li>
 <li><p>use comments to indicate where your problem lies</p></li>
 <li><p>do your best to remove everything that is not related to the problem.<br>
 The shorter your code is, the easier it is to understand.</p></li>
 </ul>
-<p>Learn a little <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">markdown</a> so you can correctly format your issue. The most important thing is to surround your code with <code>``` R</code> and <code>```</code> so it’s syntax highlighted (which makes it easier to read).</p>
+<p>Learn a little <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">markdown</a> so you can correctly format your issue. The most important thing is to surround your code with <code>``` R</code> and <code>```</code> so itâs syntax highlighted (which makes it easier to read).</p>
 </li>
-<li><p>Check that you’ve actually made a reproducible example by using the <a href="https://github.com/jennybc/reprex">reprex package</a>.</p></li>
+<li><p>Check that youâve actually made a reproducible example by using the <a href="https://github.com/jennybc/reprex">reprex package</a>.</p></li>
 </ol>
 </div>
 <div id="pull-requests" class="section level2">
@@ -210,22 +213,28 @@ The shorter your code is, the easier it is to understand.</p></li>
 <a href="#pull-requests" class="anchor"></a>Pull requests</h2>
 <ul>
 <li><p>Your pull request will be easiest for us to read if you use a common style: <a href="http://r-pkgs.had.co.nz/r.html#style" class="uri">http://r-pkgs.had.co.nz/r.html#style</a>. Please pay particular attention to whitespace.</p></li>
-<li><p>You should always add a bullet point to <code>NEWS.md</code> motivating the change. It should look like “This is what changed (@yourusername, #issuenumber)”. Please don’t add headings like “bug fix” or “new features” - these are added during the release process.</p></li>
+<li><p>You should always add a bullet point to <code>NEWS.md</code> motivating the change. It should look like âThis is what changed (@yourusername, #issuenumber)â. Please donât add headings like âbug fixâ or ânew featuresâ - these are added during the release process.</p></li>
 <li><p>If you can, also write a test. Testing devtools is particularly difficult because most devtools functions are called for their side-effects, but do the best you can.</p></li>
-<li><p>If you’re adding new parameters or a new function, you’ll also need to document them with <a href="http://r-pkgs.had.co.nz/man.html">roxygen2</a>. Make sure to re-run <code><a href="reference/document.html">devtools::document()</a></code> on the code before submitting.</p></li>
+<li><p>If youâre adding new parameters or a new function, youâll also need to document them with <a href="http://r-pkgs.had.co.nz/man.html">roxygen2</a>. Make sure to re-run <code><a href="reference/document.html">devtools::document()</a></code> on the code before submitting.</p></li>
 </ul>
-<p>A pull request is a process, and unless you’re a practiced contributor it’s unlikely that your pull request will be accepted as is. Typically the process looks like this:</p>
+<p>A pull request is a process, and unless youâre a practiced contributor itâs unlikely that your pull request will be accepted as is. Typically the process looks like this:</p>
 <ol>
 <li><p>You submit the pull request.</p></li>
-<li><p>We review at a high-level and determine if this is something that we want to include in the package. If not, we’ll close the pull request and suggest an alternative home for your code.</p></li>
-<li><p>We’ll take a closer look at the code and give you feedback.</p></li>
-<li><p>You respond to our feedback, update the pull request and add a comment like “PTAL” (please take a look). Adding the comment is important, otherwise we don’t get any notification that your pull request is ready for review.</p></li>
+<li><p>We review at a high-level and determine if this is something that we want to include in the package. If not, weâll close the pull request and suggest an alternative home for your code.</p></li>
+<li><p>Weâll take a closer look at the code and give you feedback.</p></li>
+<li><p>You respond to our feedback, update the pull request and add a comment like âPTALâ (please take a look). Adding the comment is important, otherwise we donât get any notification that your pull request is ready for review.</p></li>
 </ol>
-<p>Don’t worry if your pull request isn’t perfect. It’s a learning process and we’ll be happy to help you out.</p>
-<p>It can be frustrating that your PR is ignored for months, and then we request a whole bunch on changes within a short time period. Don’t worry - if your PR doesn’t make it for this release, it will for the next one.</p>
+<p>Donât worry if your pull request isnât perfect. Itâs a learning process and weâll be happy to help you out.</p>
+<p>It can be frustrating that your PR is ignored for months, and then we request a whole bunch on changes within a short time period. Donât worry - if your PR doesnât make it for this release, it will for the next one.</p>
 </div>
 
 
+  </div>
+
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -238,7 +247,7 @@ The shorter your code is, the easier it is to understand.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.9000.</p>
 </div>
 
       </footer>
