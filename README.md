@@ -1,9 +1,10 @@
 # devtools <img src="man/figures/logo.svg" align="right" height = 150/>
 
-[![Build Status](https://travis-ci.org/r-lib/devtools.svg?branch=master)](https://travis-ci.org/r-lib/devtools)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/r-lib/devtools?branch=master&svg=true)](https://ci.appveyor.com/project/hadley/devtools)
+<!-- badges: start -->
+[![R build status](https://github.com/r-lib/devtools/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/devtools/actions)
 [![Coverage Status](https://codecov.io/github/r-lib/devtools/coverage.svg?branch=master)](https://codecov.io/github/r-lib/devtools?branch=master)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools)
+<!-- badges: end -->
 
 The aim of devtools is to make package development easier by providing R
 functions that simplify and expedite common tasks. [R
