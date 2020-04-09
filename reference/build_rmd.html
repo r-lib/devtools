@@ -175,8 +175,20 @@ session. <code>build_readme()</code> locates your <code>README.Rmd</code> and bu
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>files</th>
+      <td><p>The Rmarkdown files to be rendered.</p></td>
+    </tr>
+    <tr>
       <th>path</th>
       <td><p>path to the package to build the readme.</p></td>
+    </tr>
+    <tr>
+      <th>output_options</th>
+      <td><p>List of output options that can override the options
+specified in metadata (e.g. could be used to force <code>self_contained</code> or
+<code>mathjax = "local"</code>). Note that this is only valid when the output
+format is read from metadata (i.e. not a custom format object passed to
+<code>output_format</code>).</p></td>
     </tr>
     <tr>
       <th>...</th>

@@ -130,7 +130,7 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>All devtools functions accept a path as an argument, e.g. <code><a href="reference/load_all.html">load_all("path/to/mypkg")</a></code>. If you donât specify a path, devtools will look in the current working directory - this is a recommended practice.</p>
+<p>All devtools functions accept a path as an argument, e.g. <code><a href="reference/load_all.html">load_all("path/to/mypkg")</a></code>. If you don’t specify a path, devtools will look in the current working directory - this is a recommended practice.</p>
 <div id="frequent-development-tasks" class="section level3">
 <h3 class="hasAnchor">
 <a href="#frequent-development-tasks" class="anchor"></a>Frequent development tasks:</h3>
@@ -198,7 +198,7 @@
 <p>There are a number of fantastic blog posts on writing your first package, including</p>
 <ul>
 <li><a href="https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/">Writing an R package from scratch - Hilary Parker</a></li>
-<li><a href="http://www.masalmon.eu/2017/12/11/goodrpackages/">How to develop good R packages - MaÃ«lle Salmon</a></li>
+<li><a href="http://www.masalmon.eu/2017/12/11/goodrpackages/">How to develop good R packages - Maëlle Salmon</a></li>
 <li><a href="http://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html">Making your first R package - Fong Chun Chan</a></li>
 <li><a href="https://r-mageddon.netlify.com/post/writing-an-r-package-from-scratch/">Writing an R package from scratch - Tomas Westlake</a></li>
 </ul>
@@ -211,18 +211,18 @@
 <a href="#conscious-uncoupling" class="anchor"></a>Conscious uncoupling</h2>
 <p>devtools started off as a lean-and-mean package to facilitate local package development, but over the years it accumulated more and more functionality. devtools has undergone a <a href="https://web.archive.org/web/20140326060230/http://www.goop.com/journal/be/conscious-uncoupling">conscious uncoupling</a> to split out functionality into smaller, more tightly focussed packages. This includes:</p>
 <ul>
-<li><p><a href="https://github.com/r-lib/testthat">testthat</a>: Writing and running tests (i.e.Â <code><a href="reference/test.html">test()</a></code>).</p></li>
-<li><p><a href="https://github.com/klutometis/roxygen">roxygen2</a>: Function and package documentation (i.e.Â <code><a href="reference/document.html">document()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/testthat">testthat</a>: Writing and running tests (i.e. <code><a href="reference/test.html">test()</a></code>).</p></li>
+<li><p><a href="https://github.com/klutometis/roxygen">roxygen2</a>: Function and package documentation (i.e. <code><a href="reference/document.html">document()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/remotes">remotes</a>: Installing packages (i.e. <code><a href="reference/remote-reexports.html">install_github()</a></code>).</p></li>
-<li><p><a href="https://github.com/r-lib/pkgbuild">pkgbuild</a>: Building binary packages (including checking if build tools are available) (i.e.Â <code><a href="reference/build.html">build()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/pkgbuild">pkgbuild</a>: Building binary packages (including checking if build tools are available) (i.e. <code><a href="reference/build.html">build()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/pkgload">pkgload</a>: Simulating package loading (i.e. <code><a href="reference/load_all.html">load_all()</a></code>).</p></li>
-<li><p><a href="https://github.com/r-lib/rcmdcheck">rcmdcheck</a>: Running R CMD check and reporting the results (i.e.Â <code><a href="reference/check.html">check()</a></code>).</p></li>
-<li><p><a href="https://github.com/r-lib/revdepcheck">revdepcheck</a>: Running R CMD check on all reverse dependencies, and figuring out whatâs changed since the last CRAN release (i.e.Â <code>revdep_check()</code>).</p></li>
+<li><p><a href="https://github.com/r-lib/rcmdcheck">rcmdcheck</a>: Running R CMD check and reporting the results (i.e. <code><a href="reference/check.html">check()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/revdepcheck">revdepcheck</a>: Running R CMD check on all reverse dependencies, and figuring out what’s changed since the last CRAN release (i.e. <code>revdep_check()</code>).</p></li>
 <li><p><a href="https://github.com/r-lib/sessioninfo">sessioninfo</a>: R session info (i.e. <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/usethis">usethis</a>: Automating package setup (i.e. <code>use_test()</code>).</p></li>
 </ul>
-<p>Generally, you would not need to worry about these different packages, because devtools installs all of them automatically. You will need to care, however, if youâre filing a bug because reporting it at the correct place will lead to a speedier resolution.</p>
-<p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g.Â use <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">sessioninfo::session_info()</a></code> rather than <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
+<p>Generally, you would not need to worry about these different packages, because devtools installs all of them automatically. You will need to care, however, if you’re filing a bug because reporting it at the correct place will lead to a speedier resolution.</p>
+<p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">sessioninfo::session_info()</a></code> rather than <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
 <p>However for day to day development we recommend you continue to use <code><a href="https://devtools.r-lib.org//reference">library(devtools)</a></code> to quickly load all needed development tools, just like <code><a href="https://rdrr.io/pkg/tidyverse/man">library(tidyverse)</a></code> quickly loads all the tools necessary for data exploration and visualization.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
