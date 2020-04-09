@@ -8,6 +8,10 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
                   manual = FALSE, args = NULL, quiet = FALSE, ...) {
   save_all()
 
+  if (!file.exists(pkg)) {
+    stop("`pkg` must exist", call. = FALSE)
+  }
+
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   pkgbuild::build(
