@@ -61,6 +61,8 @@ install <-
     }
 
     if (isTRUE(build_vignettes)) {
+      # we likely need all Suggested dependencies if building vignettes
+      dependencies <- TRUE
       build_opts <- c("--no-resave-data", "--no-manual")
     } else {
       build_opts <- c("--no-resave-data", "--no-manual", "--no-build-vignettes")
