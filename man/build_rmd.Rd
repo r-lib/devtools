@@ -10,7 +10,15 @@ build_rmd(files, path = ".", output_options = list(), ..., quiet = TRUE)
 build_readme(path = ".", quiet = TRUE, ...)
 }
 \arguments{
+\item{files}{The Rmarkdown files to be rendered.}
+
 \item{path}{path to the package to build the readme.}
+
+\item{output_options}{List of output options that can override the options
+specified in metadata (e.g. could be used to force \code{self_contained} or
+\code{mathjax = "local"}). Note that this is only valid when the output
+format is read from metadata (i.e. not a custom format object passed to
+\code{output_format}).}
 
 \item{...}{additional arguments passed to \code{\link[rmarkdown:render]{rmarkdown::render()}}}
 

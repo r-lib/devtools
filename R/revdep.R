@@ -18,7 +18,6 @@
 #' @param bioconductor If `TRUE` also look for dependencies amongst
 #'   Bioconductor packages.
 #' @param recursive If `TRUE` look for full set of recursive dependencies.
-#' @inheritParams tools::dependsOnPkgs
 #' @seealso The [revdepcheck](https://github.com/r-lib/revdepcheck) package can
 #'  be used to run R CMD check on all reverse dependencies.
 #' @export

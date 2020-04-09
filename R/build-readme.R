@@ -5,10 +5,11 @@
 #' session. `build_readme()` locates your `README.Rmd` and builds it into a
 #' `README.md`
 #'
-#' @param files
+#' @param files The Rmarkdown files to be rendered.
 #' @param path path to the package to build the readme.
 #' @param ...  additional arguments passed to [rmarkdown::render()]
 #' @inheritParams install
+#' @inheritParams rmarkdown::render
 #' @export
 build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = TRUE) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))

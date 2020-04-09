@@ -9,7 +9,6 @@
 #' @template devtools
 #' @param vignettes also check all `rmd` and `rnw` files in the pkg `vignettes` folder
 #' @param use_wordlist ignore words in the package [WORDLIST][spelling::get_wordlist] file
-#' @inheritParams spelling::spell_check_package
 spell_check <- function(pkg = ".", vignettes = TRUE, use_wordlist = TRUE) {
   check_suggested("spelling")
   pkg <- as.package(pkg)
