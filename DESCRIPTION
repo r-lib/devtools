@@ -46,9 +46,7 @@ Imports:
     withr (>= 2.1.2)
 Suggests: 
     BiocManager (>= 1.30.10),
-    bitops (>= 1.0-6),
     curl (>= 4.3),
-    evaluate (>= 0.14),
     foghorn (>= 1.1.5),
     gmailr (>= 1.0.0),
     knitr (>= 1.28),
@@ -57,11 +55,9 @@ Suggests:
     pingr (>= 2.0.0),
     MASS,
     pkgdown (>= 1.5.1),
-    Rcpp (>= 1.0.4.6),
     rhub (>= 1.1.1),
     rmarkdown (>= 2.1),
-    spelling (>= 2.1),
-    whisker (>= 0.4)
+    spelling (>= 2.1)
 VignetteBuilder: knitr
 Encoding: UTF-8
 RoxygenNote: 7.1.0

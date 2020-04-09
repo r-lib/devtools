@@ -1,5 +1,0 @@
-export(a)
-export(bitAnd)
-import(compiler)
-importFrom(bitops,bitAnd)
-importFrom(bitops,bitOr)

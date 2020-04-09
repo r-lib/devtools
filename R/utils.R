@@ -25,14 +25,6 @@ ends_with_newline <- function(path) {
   lastByte == 0x0a
 }
 
-render_template <- function(name, data = list()) {
-  check_suggested("whisker")
-
-  path <- system.file("templates", name, package = "devtools")
-  template <- readLines(path)
-  whisker::whisker.render(template, data)
-}
-
 is_installed <- function(pkg, version = 0) {
   installed_version <- tryCatch(utils::packageVersion(pkg), error = function(e) NA)
   !is.na(installed_version) && installed_version >= version
