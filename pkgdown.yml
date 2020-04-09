@@ -3,7 +3,7 @@ pkgdown: 1.5.0.9000
 pkgdown_sha: cb9866146685f6924b67c2b95a97a9637e934714
 articles:
   dependencies: dependencies.html
-last_built: 2020-04-09T15:34Z
+last_built: 2020-04-09T15:51Z
 urls:
   reference: https://devtools.r-lib.org//reference
   article: https://devtools.r-lib.org//articles
