@@ -1,4 +1,4 @@
-# devtools (development version)
+# devtools 2.3.0
 
 * `build()` now errors with a more informative error message when passed an
   invalid `pkg`. (#2177)
