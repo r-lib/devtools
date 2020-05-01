@@ -89,7 +89,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0</span>
       </span>
     </div>
 
@@ -155,9 +155,9 @@
       <small>Source: <a href='https://github.com/r-lib/devtools/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="devtools-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
+    <div id="devtools-230" class="section level1">
+<h1 class="page-header" data-toc-text="2.3.0">
+<a href="#devtools-230" class="anchor"></a>devtools 2.3.0<small> 2020-04-10 </small>
 </h1>
 <ul>
 <li><p><code><a href="../reference/build.html">build()</a></code> now errors with a more informative error message when passed an invalid <code>pkg</code>. (<a href='https://github.com/r-lib/devtools/issues/2177'>#2177</a>)</p></li>
@@ -177,7 +177,7 @@
 <li><p><code>check_win_*()</code> function now resets the email to the original email after execution (<a href='https://github.com/muschellij2'>@muschellij2</a>, <a href='https://github.com/r-lib/devtools/issues/2152'>#2152</a>).</p></li>
 <li><p><code><a href="../reference/check.html">check()</a></code> now sets <code>NOT_CRAN=true</code> by default, as was originally intended (<a href='https://github.com/r-lib/devtools/issues/2135'>#2135</a>).</p></li>
 <li><p><code><a href="../reference/install_deps.html">install_deps()</a></code> now supports <code><a href="https://rdrr.io/r/base/options.html">options("devtools.ellipsis_action")</a></code> as well (<a href='https://github.com/r-lib/devtools/issues/2169'>#2169</a>)</p></li>
-<li><p><code><a href="../reference/test.html">test()</a></code> now takes <code>stop_on_failure</code> as a formal argument (FALSE by default) instead of in <code>...</code>. Its value is still passed to <code><a href="https://rdrr.io/pkg/testthat/man/test_dir.html">testthat::test_dir</a></code> as before (<a href='https://github.com/infotroph'>@infotroph</a>, <a href='https://github.com/r-lib/devtools/issues/2129'>#2129</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> now takes <code>stop_on_failure</code> as a formal argument (FALSE by default) instead of in <code>...</code>. Its value is still passed to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir</a></code> as before (<a href='https://github.com/infotroph'>@infotroph</a>, <a href='https://github.com/r-lib/devtools/issues/2129'>#2129</a>).</p></li>
 <li><p><code><a href="../reference/test.html">test()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> gain a <code>export_all</code> argument, which controls if all functions in a package are automatically exported (<a href='https://github.com/r-lib/devtools/issues/1201'>#1201</a>).</p></li>
 <li><p><code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> now works if run outside a package directory (<a href='https://github.com/r-lib/devtools/issues/2127'>#2127</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> now works if the package root is not in the working directory.</p></li>
@@ -205,7 +205,7 @@
 <li><p><code><a href="../reference/install.html">install()</a></code> now throws an error when it fails, as intended (<a href='https://github.com/r-lib/devtools/issues/2120'>#2120</a>)</p></li>
 <li><p><code><a href="../reference/install.html">install()</a></code> now again reloads and re-attaches packages if they were previously loaded (<a href='https://github.com/r-lib/devtools/issues/2111'>#2111</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> no longer calls the deprecated <code><a href="../reference/devtools-deprecated.html">dr_devtools()</a></code> (<a href='https://github.com/r-lib/devtools/issues/2105'>#2105</a>)</p></li>
-<li><p><code><a href="../reference/test.html">test()</a></code> now explicitly passes <code>stop_on_failure = FALSE</code> to <code><a href="https://rdrr.io/pkg/testthat/man/test_dir.html">testthat::test_dir()</a></code> (<a href='https://github.com/jameslamb'>@jameslamb</a>, <a href='https://github.com/r-lib/devtools/issues/2099'>#2099</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> now explicitly passes <code>stop_on_failure = FALSE</code> to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir()</a></code> (<a href='https://github.com/jameslamb'>@jameslamb</a>, <a href='https://github.com/r-lib/devtools/issues/2099'>#2099</a>)</p></li>
 </ul>
 </div>
     <div id="devtools-220" class="section level1">
@@ -399,7 +399,7 @@
 <li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> now has a <code>clean</code> and <code>upgrade</code> arguments, to control cleaning of intermediate files and upgrading vignette dependencies respectively. (<a href='https://github.com/r-lib/devtools/issues/1770'>#1770</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> gains an additional question ensuring you updated codemeta.json if one exists (<a href='https://github.com/r-lib/devtools/issues/1774'>#1774</a>, <a href='https://github.com/r-lib/devtools/issues/1754'>#1754</a>)</p></li>
 <li><p><code><a href="../reference/test.html">test()</a></code> now sets <code>useFancyQuotes = FALSE</code> to better mimic the environment tests are run under with <code>R CMD check</code> (<a href='https://github.com/r-lib/devtools/issues/1735'>#1735</a>).</p></li>
-<li><p><code><a href="../reference/test.html">test()</a></code> no longer passes encoding argument to <code><a href="https://rdrr.io/pkg/testthat/man/test_dir.html">testthat::test_dir()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1776'>#1776</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> no longer passes encoding argument to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1776'>#1776</a>)</p></li>
 <li><p><code><a href="../reference/remote-reexports.html">install_url()</a></code> can now install package binaries on windows (<a href='https://github.com/r-lib/devtools/issues/1765'>#1765</a>)</p></li>
 <li><p>Fix skipping when installing from a full SHA (<a href='https://github.com/r-lib/devtools/issues/1624'>#1624</a>)</p></li>
 <li><p>add <code><a href="https://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code> wrapper (<a href='https://github.com/kiwiroy'>@kiwiroy</a>, <a href='https://github.com/r-lib/devtools/issues/1777'>#1777</a>)</p></li>
@@ -715,7 +715,7 @@
 </h1>
 <ul>
 <li><p>Avoid importing heavy dependencies to speed up loading (<a href='https://github.com/r-lib/devtools/issues/830'>#830</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
-<li><p>Remove explicit <code><a href="https://rdrr.io/pkg/testthat/man">library(testthat)</a></code> call in <code><a href="../reference/test.html">test()</a></code> (<a href='https://github.com/r-lib/devtools/issues/798'>#798</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p>Remove explicit <code><a href="https://testthat.r-lib.org/reference">library(testthat)</a></code> call in <code><a href="../reference/test.html">test()</a></code> (<a href='https://github.com/r-lib/devtools/issues/798'>#798</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code><a href="../reference/as.package.html">as.package()</a></code> and <code><a href="../reference/load_all.html">load_all()</a></code> gain new argument <code>create</code>. Like other functions with a <code>pkg</code> argument, <code><a href="../reference/load_all.html">load_all()</a></code> looks for a <code>DESCRIPTION</code> file in parent directories - if <code>create = TRUE</code> it will be automatically created if there’s a <code>R/</code> or <code>data/</code> directory (<a href='https://github.com/r-lib/devtools/issues/852'>#852</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> gains dependencies argument (<a href='https://github.com/r-lib/devtools/issues/825'>#825</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code>build_win()</code> now uses <code>curl</code> instead of <code>RCurl</code> for ftp upload.</p></li>
@@ -795,7 +795,7 @@
 <li><p><code>RCMD()</code> and <code>system_check()</code> are now exported so they can be used by other packages. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/699'>#699</a>).</p></li>
 <li><p><code>revdep_check()</code> creates directories if needed (<a href='https://github.com/r-lib/devtools/issues/759'>#759</a>).</p></li>
 <li><p><code>system_check()</code> combines arguments with <code></code>, not <code>,</code>. (<a href='https://github.com/r-lib/devtools/issues/753'>#753</a>)</p></li>
-<li><p><code><a href="../reference/test.html">test()</a></code> gains an <code>...</code> argument so that additional arguments can be passed to <code><a href="https://rdrr.io/pkg/testthat/man/test_dir.html">testthat::test_dir</a></code> (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/747'>#747</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> gains an <code>...</code> argument so that additional arguments can be passed to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir</a></code> (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/747'>#747</a>)</p></li>
 <li><p><code>use_travis()</code> now suggests you link to the svg icon since that looks a little sharper. Default template sets <code>CRAN: http://cran.rstudio.com/</code> to enable the cyclic dependency check.</p></li>
 <li><p><code>NOT_CRAN</code> envvar no longer overrides externally set variable.</p></li>
 <li><p><code><a href="../reference/check.html">check(check_version = TRUE)</a></code> also checks spelling of the <code>DESCRIPTION</code>; if no spell checker is installed, a warning is given (<a href='https://github.com/r-lib/devtools/issues/784'>#784</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
@@ -1504,7 +1504,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
 
       </footer>
