@@ -47,7 +47,7 @@ Imports:
 Suggests: 
     BiocManager (>= 1.30.10),
     curl (>= 4.3),
-    foghorn (>= 1.1.5),
+    foghorn (>= 1.2.1),
     gmailr (>= 1.0.0),
     knitr (>= 1.28),
     lintr (>= 2.0.1),
