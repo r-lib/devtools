@@ -45,14 +45,14 @@ when a package is installed and loaded with \code{\link[=library]{library()}}.
 Currently \code{load_all}:
 
 \itemize{
-\item Loads all data files in \code{data/}.  See \code{\link[pkgload:load_data]{load_data()}}
+\item Loads all data files in \verb{data/}.  See \code{\link[pkgload:load_data]{load_data()}}
 for more details.
 
 \item Sources all R files in the R directory, storing results in
 environment that behaves like a regular package namespace. See
 below and \code{\link[pkgload:load_code]{load_code()}} for more details.
 
-\item Compiles any C, C++, or Fortran code in the \code{src/} directory
+\item Compiles any C, C++, or Fortran code in the \verb{src/} directory
 and connects the generated DLL into R. See \code{\link[=compile_dll]{compile_dll()}}
 for more details.
 
@@ -69,14 +69,14 @@ let you check whether the helpers are run during package loading.
 \section{Namespaces}{
 
 
-The namespace environment \code{<namespace:pkgname>}, is a child of
+The namespace environment \verb{<namespace:pkgname>}, is a child of
 the imports environment, which has the name attribute
 \code{imports:pkgname}. It is in turn is a child of
-\code{<namespace:base>}, which is a child of the global environment.
+\verb{<namespace:base>}, which is a child of the global environment.
 (There is also a copy of the base namespace that is a child of the empty
 environment.)
 
-The package environment \code{<package:pkgname>} is an ancestor of the
+The package environment \verb{<package:pkgname>} is an ancestor of the
 global environment. Normally when loading a package, the objects
 listed as exports in the NAMESPACE file are copied from the namespace
 to the package environment. However, \code{load_all} by default will

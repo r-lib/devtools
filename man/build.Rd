@@ -32,8 +32,8 @@ vignettes (\code{--no-build-vignettes}) or manual (\code{--no-manual}).}
 vignettes (\code{--no-build-vignettes}) or manual (\code{--no-manual}).}
 
 \item{args}{An optional character vector of additional command
-line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},
-or \code{R CMD install} if \code{binary = TRUE}.}
+line arguments to be passed to \verb{R CMD build} if \code{binary = FALSE},
+or \verb{R CMD install} if \code{binary = TRUE}.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
