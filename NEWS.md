@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `run_examples()` arguments `run` and `test` are deprecated in favor of the (hopefully) more clear `run_dontrun` and `run_donttest` (pkgload/#107).
+
 # devtools 2.3.0
 
 * `build()` now errors with a more informative error message when passed an

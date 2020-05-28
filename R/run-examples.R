@@ -6,6 +6,7 @@
 #' making it possible to run all examples from an R function.
 #'
 #' @template devtools
+#' @inheritParams pkgload::run_example
 #' @param start Where to start running the examples: this can either be the
 #'   name of `Rd` file to start with (with or without extensions), or
 #'   a topic name. If omitted, will start with the (lexicographically) first
@@ -13,10 +14,6 @@
 #'   rerun them every time you fix a problem.
 #' @family example functions
 #' @param show DEPRECATED.
-#' @param test if `TRUE`, code in \code{\\donttest{}} will be commented
-#'   out. If `FALSE`, code in \code{\\testonly{}} will be commented out.
-#' @param run if `FALSE`, code in \code{\\dontrun{}} will be commented
-#'   out.
 #' @param fresh if `TRUE`, will be run in a fresh R session. This has
 #'   the advantage that there's no way the examples can depend on anything in
 #'   the current session, but interactive code (like [browser()])
@@ -25,8 +22,18 @@
 #'   examples are updated before running them.
 #' @keywords programming
 #' @export
-run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
-                         run = FALSE, fresh = FALSE, document = TRUE) {
+run_examples <- function(pkg = ".", start = NULL, show = TRUE, run_donttest = FALSE,
+                         run_dontrun = FALSE, fresh = FALSE, document = TRUE, run, test) {
+
+  if (!missing(run)) {
+    warning("`run_examples(run=)` is deprecated, please use `run_example(run_dontrun=)` instead", call. = FALSE)
+    run_dontrun <- run
+  }
+  if (!missing(test)) {
+    warning("`run_examples(test=)` is deprecated, please use `run_example(run_donttest=)` instead", call. = FALSE)
+    run_donttest <- test
+  }
+
   pkg <- as.package(pkg)
 
   if (fresh) {
@@ -60,7 +67,7 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, test = FALSE,
   load_all(pkg$path, reset = TRUE, export_all = FALSE)
   on.exit(load_all(pkg$path, reset = TRUE))
 
-  lapply(files, pkgload::run_example, test = test, run = run)
+  lapply(files, pkgload::run_example, run_donttest = run_donttest, run_dontrun = run_dontrun)
 
   invisible()
 }
