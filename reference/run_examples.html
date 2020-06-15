@@ -171,10 +171,12 @@ making it possible to run all examples from an R function.</p>
   <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>,
   <span class='kw'>start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>show</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>test</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>run</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>run_donttest</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>run_dontrun</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>fresh</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>document</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>document</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>run</span>,
+  <span class='no'>test</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -198,14 +200,13 @@ rerun them every time you fix a problem.</p></td>
       <td><p>DEPRECATED.</p></td>
     </tr>
     <tr>
-      <th>test</th>
-      <td><p>if <code>TRUE</code>, code in <code>\donttest{}</code> will be commented
-out. If <code>FALSE</code>, code in <code>\testonly{}</code> will be commented out.</p></td>
+      <th>run_donttest</th>
+      <td><p>if <code>TRUE</code>, do run <code>\donttest</code> sections in the Rd files.
+out.</p></td>
     </tr>
     <tr>
-      <th>run</th>
-      <td><p>if <code>FALSE</code>, code in <code>\dontrun{}</code> will be commented
-out.</p></td>
+      <th>run_dontrun</th>
+      <td><p>if <code>TRUE</code>, do run <code>\dontrun</code> sections in the Rd files.</p></td>
     </tr>
     <tr>
       <th>fresh</th>
@@ -218,6 +219,14 @@ won't work.</p></td>
       <th>document</th>
       <td><p>if <code>TRUE</code>, <code><a href='document.html'>document()</a></code> will be run to ensure
 examples are updated before running them.</p></td>
+    </tr>
+    <tr>
+      <th>run</th>
+      <td><p>Deprecated, see <code>run_dontrun</code> and <code>run_donttest</code> above.</p></td>
+    </tr>
+    <tr>
+      <th>test</th>
+      <td><p>Deprecated, see <code>run_dontrun</code> and <code>run_donttest</code> above.</p></td>
     </tr>
     </table>
 
