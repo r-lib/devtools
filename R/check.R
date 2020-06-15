@@ -154,7 +154,6 @@ check <- function(pkg = ".",
 #'   submission.
 #' @param manual If `FALSE`, don't build and check manual
 #'   (`--no-manual`).
-#' @param args Additional arguments passed to `R CMD check`
 #' @param env_vars Environment variables set during `R CMD check`
 #' @param quiet if `TRUE` suppresses output from this function.
 #' @inheritParams rcmdcheck::rcmdcheck
