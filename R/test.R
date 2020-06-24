@@ -48,38 +48,48 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
     }
   }
 
-  # Run tests in a child of the namespace environment, like
-  # testthat::test_package
+  # Run tests in a child of the namespace environment
   message("Loading ", pkg$package)
   ns_env <- load_all(pkg$path, quiet = TRUE, export_all = export_all)$env
+  env <- new.env(parent = ns_env)
 
   message("Testing ", pkg$package)
   Sys.sleep(0.05)
   utils::flush.console() # Avoid misordered output in RStudio
 
-  env <- new.env(parent = ns_env)
-
-  testthat_args <- list(
-    test_path,
-    filter = filter,
-    env = env,
-    stop_on_failure = stop_on_failure,
-    load_helpers = FALSE,
-    ... = ...)
-
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  withr::with_collate("C",
-    withr::with_options(
-      c(useFancyQuotes = FALSE),
-      withr::with_envvar(
-        c(r_env_vars(),
-          "TESTTHAT_PKG" = pkg$package
-          ),
-        do.call(testthat::test_dir, testthat_args)
+  if (packageVersion("testthat") >= "2.99") {
+    testthat::test_dir(
+      test_path,
+      package = pkg$package,
+      filter = filter,
+      env = env,
+      stop_on_failure = stop_on_failure,
+      load_helpers = FALSE,
+      ...
+    )
+  } else {
+    testthat_args <- list(
+      test_path,
+      filter = filter,
+      env = env,
+      stop_on_failure = stop_on_failure,
+      load_helpers = FALSE,
+      ... = ...
+    )
+    withr::with_collate("C",
+      withr::with_options(
+        c(useFancyQuotes = FALSE),
+        withr::with_envvar(
+          c(r_env_vars(),
+            "TESTTHAT_PKG" = pkg$package
+            ),
+          do.call(testthat::test_dir, testthat_args)
+        )
       )
     )
-  )
+  }
 }
 
 #' @param show_report Show the test coverage report.
