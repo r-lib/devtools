@@ -60,6 +60,7 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   if (packageVersion("testthat") >= "2.99") {
+    withr::local_envvar(r_env_vars())
     testthat::test_dir(
       test_path,
       package = pkg$package,
@@ -106,6 +107,7 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
+  withr::local_envvar(r_env_vars())
   if (packageVersion("testthat") >= "2.99") {
     testthat::local_test_directory(pkg$path, pkg$package)
   } else {
@@ -268,6 +270,7 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
+  withr::local_envvar(r_env_vars())
   if (packageVersion("testthat") >= "2.99") {
     testthat::local_test_directory(pkg$path, pkg$package)
   } else {
