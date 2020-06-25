@@ -106,12 +106,12 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  withr::with_envvar(
-    c(r_env_vars(),
-      "TESTTHAT_PKG" = pkg$package
-    ),
-    coverage <- covr::package_coverage(pkg$path, ...)
-  )
+  if (packageVersion("testthat") >= "2.99") {
+    testthat::local_test_directory(pkg$path, pkg$package)
+  } else {
+    withr::local_envvar(c(TESTTHAT = "true", TESTTHAT_PKG = pkg$package))
+  }
+  coverage <- covr::package_coverage(pkg$path, ...)
 
   if (isTRUE(show_report)) {
     covr::report(coverage)
@@ -268,15 +268,15 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  withr::with_envvar(
-    c(r_env_vars(),
-      "TESTTHAT_PKG" = pkg$package,
-      TESTTHAT = "true"
-    ),
-    withr::with_dir("tests/testthat", {
-      coverage <- covr::environment_coverage(env, test_files, ...)
-    })
-  )
+  if (packageVersion("testthat") >= "2.99") {
+    testthat::local_test_directory(pkg$path, pkg$package)
+  } else {
+    withr::local_envvar(c(TESTTHAT = "true", TESTTHAT_PKG = pkg$package))
+  }
+
+  withr::with_dir("tests/testthat", {
+    coverage <- covr::environment_coverage(env, test_files, ...)
+  })
 
   filter <- isTRUE(filter) && all(file.exists(source_files))
 
