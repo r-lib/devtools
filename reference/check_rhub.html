@@ -163,7 +163,7 @@ maintainer." />
     </div>
 
     <div class="ref-description">
-    <p>It runs <code><a href='build.html'>build()</a></code> on the package, with the arguments specified
+    <p>It runs <code><a href='https://rdrr.io/r/utils/PkgUtils.html'>build()</a></code> on the package, with the arguments specified
 in <code>args</code>, and then submits it to the R-hub builder at
 <a href='https://builder.r-hub.io'>https://builder.r-hub.io</a>. The <code>interactive</code> option controls
 whether the function waits for the check output. Regardless, after the
@@ -172,12 +172,12 @@ maintainer.</p>
     </div>
 
     <pre class="usage"><span class='fu'>check_rhub</span>(
-  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>,
-  <span class='kw'>platforms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>email</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>interactive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>build_args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
+  pkg = <span class='st'>"."</span>,
+  platforms = <span class='kw'>NULL</span>,
+  email = <span class='kw'>NULL</span>,
+  interactive = <span class='fl'>TRUE</span>,
+  build_args = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -186,7 +186,7 @@ maintainer.</p>
     <tr>
       <th>pkg</th>
       <td><p>The package to use, can be a file path to the package or a
-package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
+package object.  See <code>as.package()</code> for more information.</p></td>
     </tr>
     <tr>
       <th>platforms</th>
@@ -229,7 +229,7 @@ results. See more at <code><a href='https://r-hub.github.io/rhub/reference/valid
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other build functions: 
-<code><a href='check_win.html'>check_win</a>()</code></p></div>
+<code>check_win()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

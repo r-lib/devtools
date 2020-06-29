@@ -165,7 +165,7 @@ To uninstall a package from a non-default library,
 use <code><a href='https://rdrr.io/pkg/withr/man/with_libpaths.html'>withr::with_libpaths()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>uninstall</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>unload</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>lib</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/libPaths.html'>.libPaths</a></span>()<span class='kw'>[[</span><span class='fl'>1</span>]])</pre>
+    <pre class="usage"><span class='fu'>uninstall</span>(pkg = <span class='st'>"."</span>, unload = <span class='fl'>TRUE</span>, quiet = <span class='fl'>FALSE</span>, lib = <span class='fu'><a href='https://rdrr.io/r/base/libPaths.html'>.libPaths</a></span>()[[<span class='fl'>1</span>]])</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,7 +173,7 @@ use <code><a href='https://rdrr.io/pkg/withr/man/with_libpaths.html'>withr::with
     <tr>
       <th>pkg</th>
       <td><p>The package to use, can be a file path to the package or a
-package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
+package object.  See <code>as.package()</code> for more information.</p></td>
     </tr>
     <tr>
       <th>unload</th>
@@ -194,10 +194,10 @@ package prior to uninstalling.</p></td>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/pkgbuild/man/with_debug.html'>with_debug()</a></code> to install packages with debugging flags
+    <div class='dont-index'><p><code>with_debug()</code> to install packages with debugging flags
 set.</p>
 <p>Other package installation: 
-<code><a href='install.html'>install</a>()</code></p></div>
+<code>install()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

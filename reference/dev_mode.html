@@ -169,7 +169,7 @@ This allows you to test development packages in a sandbox, without
 interfering with the other packages you have installed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>dev_mode</span>(<span class='kw'>on</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"devtools.path"</span>))</pre>
+    <pre class="usage"><span class='fu'>dev_mode</span>(on = <span class='kw'>NULL</span>, path = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"devtools.path"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,7 +188,7 @@ will guess based on whether or not <code>path</code> is in
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>dev_mode</span>()
 <span class='fu'>dev_mode</span>()
 }</div></pre>

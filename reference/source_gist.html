@@ -167,7 +167,7 @@ forkable and usable as a git repository.&#8221;
 <a href='https://gist.github.com/'>https://gist.github.com/</a></p>
     </div>
 
-    <pre class="usage"><span class='fu'>source_gist</span>(<span class='no'>id</span>, <span class='no'>...</span>, <span class='kw'>filename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sha1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>source_gist</span>(<span class='kw'>id</span>, <span class='kw'>...</span>, filename = <span class='kw'>NULL</span>, sha1 = <span class='kw'>NULL</span>, quiet = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -191,7 +191,7 @@ first file.</p></td>
       <th>sha1</th>
       <td><p>The SHA-1 hash of the file at the remote URL. This is highly
 recommend as it prevents you from accidentally running code that's not
-what you expect. See <code><a href='source_url.html'>source_url()</a></code> for more information on
+what you expect. See <code>source_url()</code> for more information on
 using a SHA-1 hash.</p></td>
     </tr>
     <tr>
@@ -202,10 +202,10 @@ using a SHA-1 hash.</p></td>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='source_url.html'>source_url()</a></code></p></div>
+    <div class='dont-index'><p><code>source_url()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># You can run gists given their id</span>
 <span class='fu'>source_gist</span>(<span class='fl'>6872663</span>)
 <span class='fu'>source_gist</span>(<span class='st'>"6872663"</span>)
@@ -217,13 +217,13 @@ using a SHA-1 hash.</p></td>
 <span class='co'># It's highly recommend that you run source_gist with the optional</span>
 <span class='co'># sha1 argument - this will throw an error if the file has changed since</span>
 <span class='co'># you first ran it</span>
-<span class='fu'>source_gist</span>(<span class='fl'>6872663</span>, <span class='kw'>sha1</span> <span class='kw'>=</span> <span class='st'>"54f1db27e60"</span>)
+<span class='fu'>source_gist</span>(<span class='fl'>6872663</span>, sha1 = <span class='st'>"54f1db27e60"</span>)
 <span class='co'># Wrong hash will result in error</span>
-<span class='fu'>source_gist</span>(<span class='fl'>6872663</span>, <span class='kw'>sha1</span> <span class='kw'>=</span> <span class='st'>"54f1db27e61"</span>)
+<span class='fu'>source_gist</span>(<span class='fl'>6872663</span>, sha1 = <span class='st'>"54f1db27e61"</span>)
 
 <span class='co'>#' # You can speficy a particular R file in the gist</span>
-<span class='fu'>source_gist</span>(<span class='fl'>6872663</span>, <span class='kw'>filename</span> <span class='kw'>=</span> <span class='st'>"hi.r"</span>)
-<span class='fu'>source_gist</span>(<span class='fl'>6872663</span>, <span class='kw'>filename</span> <span class='kw'>=</span> <span class='st'>"hi.r"</span>, <span class='kw'>sha1</span> <span class='kw'>=</span> <span class='st'>"54f1db27e60"</span>)
+<span class='fu'>source_gist</span>(<span class='fl'>6872663</span>, filename = <span class='st'>"hi.r"</span>)
+<span class='fu'>source_gist</span>(<span class='fl'>6872663</span>, filename = <span class='st'>"hi.r"</span>, sha1 = <span class='st'>"54f1db27e60"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

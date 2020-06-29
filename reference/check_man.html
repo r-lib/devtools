@@ -167,7 +167,7 @@ all because some tests require the package to be loaded, and the way
 they attempt to load the code conflicts with how devtools does it.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_man</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>check_man</span>(pkg = <span class='st'>"."</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,7 +175,7 @@ they attempt to load the code conflicts with how devtools does it.</p>
     <tr>
       <th>pkg</th>
       <td><p>The package to use, can be a file path to the package or a
-package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
+package object.  See <code>as.package()</code> for more information.</p></td>
     </tr>
     </table>
 
@@ -184,7 +184,7 @@ package object.  See <code><a href='as.package.html'>as.package()</a></code> for
     <p>Nothing. This function is called purely for it's side effects: if</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>check_man</span>(<span class='st'>"mypkg"</span>)
 }</div></pre>
   </div>

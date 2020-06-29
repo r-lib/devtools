@@ -173,20 +173,20 @@ for <code><a href='http://covr.r-lib.org/reference/package_coverage.html'>covr::
 shortcut for <code><a href='http://covr.r-lib.org/reference/file_coverage.html'>covr::file_coverage()</a></code> and <code><a href='http://covr.r-lib.org/reference/report.html'>covr::report()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>test</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>filter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stop_on_failure</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>test</span>(pkg = <span class='st'>"."</span>, filter = <span class='kw'>NULL</span>, stop_on_failure = <span class='fl'>FALSE</span>, export_all = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)
 
-<span class='fu'>test_coverage</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>show_report</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(), <span class='no'>...</span>)
+<span class='fu'>test_coverage</span>(pkg = <span class='st'>"."</span>, show_report = <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(), <span class='kw'>...</span>)
 
-<span class='fu'>uses_testthat</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)
+<span class='fu'>uses_testthat</span>(pkg = <span class='st'>"."</span>)
 
-<span class='fu'>test_file</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>find_active_file</span>(), <span class='no'>...</span>)
+<span class='fu'>test_file</span>(file = <span class='fu'>find_active_file</span>(), <span class='kw'>...</span>)
 
 <span class='fu'>test_coverage_file</span>(
-  <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>find_active_file</span>(),
-  <span class='kw'>filter</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>show_report</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(),
-  <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
+  file = <span class='fu'>find_active_file</span>(),
+  filter = <span class='fl'>TRUE</span>,
+  show_report = <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(),
+  export_all = <span class='fl'>TRUE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -195,7 +195,7 @@ shortcut for <code><a href='http://covr.r-lib.org/reference/file_coverage.html'>
     <tr>
       <th>pkg</th>
       <td><p>The package to use, can be a file path to the package or a
-package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
+package object.  See <code>as.package()</code> for more information.</p></td>
     </tr>
     <tr>
       <th>filter</th>

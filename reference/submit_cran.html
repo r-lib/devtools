@@ -165,7 +165,7 @@ will receive an email asking you to confirm submission - this is used
 to check that the package is submitted by the maintainer.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>submit_cran</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>submit_cran</span>(pkg = <span class='st'>"."</span>, args = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,7 +173,7 @@ to check that the package is submitted by the maintainer.</p>
     <tr>
       <th>pkg</th>
       <td><p>The package to use, can be a file path to the package or a
-package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
+package object.  See <code>as.package()</code> for more information.</p></td>
     </tr>
     <tr>
       <th>args</th>
@@ -184,7 +184,7 @@ line arguments to be passed to <code>R CMD build</code>.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>It's recommended that you use <code><a href='release.html'>release()</a></code> rather than this
+    <p>It's recommended that you use <code>release()</code> rather than this
 function as it performs more checks prior to submission.</p>
 
   </div>

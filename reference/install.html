@@ -164,18 +164,18 @@ dependencies of the package from CRAN, if they're not already installed.</p>
     </div>
 
     <pre class="usage"><span class='fu'>install</span>(
-  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>,
-  <span class='kw'>reload</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>quick</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>build</span> <span class='kw'>=</span> !<span class='no'>quick</span>,
-  <span class='kw'>args</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"devtools.install.args"</span>),
-  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='st'>"ask"</span>,
-  <span class='kw'>build_vignettes</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>keep_source</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"keep.source.pkgs"</span>),
-  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
+  pkg = <span class='st'>"."</span>,
+  reload = <span class='fl'>TRUE</span>,
+  quick = <span class='fl'>FALSE</span>,
+  build = <span class='op'>!</span><span class='kw'>quick</span>,
+  args = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"devtools.install.args"</span>),
+  quiet = <span class='fl'>FALSE</span>,
+  dependencies = <span class='fl'>NA</span>,
+  upgrade = <span class='st'>"ask"</span>,
+  build_vignettes = <span class='fl'>FALSE</span>,
+  keep_source = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"keep.source.pkgs"</span>),
+  force = <span class='fl'>FALSE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -184,7 +184,7 @@ dependencies of the package from CRAN, if they're not already installed.</p>
     <tr>
       <th>pkg</th>
       <td><p>The package to use, can be a file path to the package or a
-package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
+package object.  See <code>as.package()</code> for more information.</p></td>
     </tr>
     <tr>
       <th>reload</th>
@@ -267,15 +267,15 @@ this, you can use <code>build = TRUE</code> to first build a package bundle and 
 install it from a temporary directory. This is slower, but keeps the source
 directory pristine.</p>
 <p>If the package is loaded, it will be reloaded after installation. This is
-not always completely possible, see <code><a href='reload.html'>reload()</a></code> for caveats.</p>
+not always completely possible, see <code>reload()</code> for caveats.</p>
 <p>To install a package in a non-default library, use <code><a href='https://rdrr.io/pkg/withr/man/with_libpaths.html'>withr::with_libpaths()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='remote-reexports.html'>update_packages()</a></code> to update installed packages from the
-source location and <code><a href='https://rdrr.io/pkg/pkgbuild/man/with_debug.html'>with_debug()</a></code> to install packages with
+    <div class='dont-index'><p><code>update_packages()</code> to update installed packages from the
+source location and <code>with_debug()</code> to install packages with
 debugging flags set.</p>
 <p>Other package installation: 
-<code><a href='uninstall.html'>uninstall</a>()</code></p></div>
+<code>uninstall()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
