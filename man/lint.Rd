@@ -26,5 +26,5 @@ be configured by setting \code{options(lintr.cache_directory)}).  It can be
 cleared by calling \code{\link[lintr:clear_cache]{lintr::clear_cache()}}.
 }
 \seealso{
-\code{\link[lintr:lint_package]{lintr::lint_package()}}, \code{\link[lintr:lint]{lintr::lint()}}
+\code{\link[lintr:lint_package]{lintr::lint_package()}}, \code{\link[lintr:lint_file]{lintr::lint()}}
 }
