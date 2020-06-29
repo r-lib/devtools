@@ -63,3 +63,4 @@ Encoding: UTF-8
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 Language: en-US
+Remotes: r-lib/testthat
