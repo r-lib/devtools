@@ -1,11 +1,13 @@
 #' @title Bump build version
 #' @description Increase the build version of the package on DESCRIPTION
 #' @param file path and name of the description file
-#' @param sep character separating major.minor.patch version from build
-#'   identifier
+#' @param sep character separating major_minor.patch version from build
+#' identifier
 #' @param test if `FALSE`, actually change the contents of DESCRIPTION
 #' @importFrom utils packageVersion
 #' @examples increase_version(test=TRUE)
+#' @return Textual output informing of version change plus, by default, actual
+#' change on the DESCRIPTION file.
 #' @export
 #'
 increase_version <- function(file = "DESCRIPTION", sep = ".", test = FALSE) {
@@ -20,24 +22,25 @@ increase_version <- function(file = "DESCRIPTION", sep = ".", test = FALSE) {
       break
     }
   }
-  reg.sep      <- paste0("\\", sep)
-  str.split   <- strsplit(str, reg.sep)[[1]]
-  dev.version <- as.numeric(str.split[length(str.split)])
+  reg_sep     <- paste0("\\",  sep)
+  str_split   <- strsplit(str, reg_sep)[[1]]
+  dev_version <- as.numeric(str_split[length(str_split)])
 
   # ============================================================================
   # Update build version numver
   # ============================================================================
-  dev.version.updated <- dev.version + 1
+  dev_version_updated <- dev_version + 1
 
   # ============================================================================
   # Reassembling new number into description
   # ============================================================================
-  fixed.str   <- str.split[1:(length(str.split) - 1)]
-  str.updated <- paste(c(fixed.str, dev.version.updated), collapse = sep)
-  description[line] <- str.updated
+  fixed_str         <- str_split[1:(length(str_split) - 1)]
+  str_updated       <- paste(c(fixed_str, dev_version_updated), collapse = sep)
+  description[line] <- str_updated
 
-  message(gsub("Package: " , "", pkg),
-          " updated from ", str, " to ", str.updated)
+  message(
+    gsub("Package: " , "", pkg), " updated from ", str, " to ", str_updated
+  )
   # ============================================================================
   # Output
   # ============================================================================
