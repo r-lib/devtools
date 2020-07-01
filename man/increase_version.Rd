@@ -9,10 +9,14 @@ increase_version(file = "DESCRIPTION", sep = ".", test = FALSE)
 \arguments{
 \item{file}{path and name of the description file}
 
-\item{sep}{character separating major.minor.patch version from build
+\item{sep}{character separating major_minor.patch version from build
 identifier}
 
 \item{test}{if \code{FALSE}, actually change the contents of DESCRIPTION}
+}
+\value{
+Textual output informing of version change plus, by default, actual
+change on the DESCRIPTION file.
 }
 \description{
 Increase the build version of the package on DESCRIPTION

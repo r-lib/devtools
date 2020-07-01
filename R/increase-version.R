@@ -39,7 +39,8 @@ increase_version <- function(file = "DESCRIPTION", sep = ".", test = FALSE) {
   description[line] <- str_updated
 
   message(
-    gsub("Package: " , "", pkg), " updated from ", str, " to ", str_updated
+    gsub("Package: " , "", pkg), " updated from ",
+    gsub(":", "", tolower(str)), " to ", gsub(":", "", tolower(str_updated))
   )
   # ============================================================================
   # Output
