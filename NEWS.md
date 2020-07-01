@@ -1,7 +1,7 @@
 # devtools (development version)
 
 * `run_examples()` arguments `run` and `test` are deprecated in favor of the (hopefully) more clear `run_dontrun` and `run_donttest` (pkgload/#107).
-* Added `increase_version()` function to increase the build number.
+* Added `increase_version()` function to increase the build number. (@wleoncio)
 
 # devtools 2.3.0
 
