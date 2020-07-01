@@ -12,7 +12,7 @@ package object.  See \code{\link[=as.package]{as.package()}} for more informatio
 
 \item{vignettes}{also check all \code{rmd} and \code{rnw} files in the pkg \code{vignettes} folder}
 
-\item{use_wordlist}{ignore words in the package \link[spelling:wordlist]{WORDLIST} file}
+\item{use_wordlist}{ignore words in the package \link[spelling:get_wordlist]{WORDLIST} file}
 }
 \description{
 Runs a spell check on text fields in the package description file, manual
