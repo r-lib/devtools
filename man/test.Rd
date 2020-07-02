@@ -14,7 +14,7 @@ test_coverage(pkg = ".", show_report = interactive(), ...)
 
 uses_testthat(pkg = ".")
 
-test_file(file = find_active_file(), ...)
+test_file(file = find_active_file(), ..., reporter = NULL)
 
 test_coverage_file(
   file = find_active_file(),
@@ -51,6 +51,12 @@ in the NAMESPACE file.}
 \item{file}{One or more source or test files. If a source file the
 corresponding test file will be run. The default is to use the active file
 in RStudio (if available).}
+
+\item{reporter}{Reporter to use to summarise output. Can be supplied
+as a string (e.g. "summary") or as an R6 object
+(e.g. \code{SummaryReporter$new()}).
+
+See \link[testthat]{Reporter} for more details and a list of built-in reporters.}
 }
 \description{
 \code{test()} is a shortcut for \code{\link[testthat:test_dir]{testthat::test_dir()}}, it runs all of a

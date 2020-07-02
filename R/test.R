@@ -171,7 +171,7 @@ src_ext <- c("c", "cc", "cpp", "cxx", "h", "hpp", "hxx")
 
 #' @export
 #' @rdname test
-test_file <- function(file = find_active_file(), ...) {
+test_file <- function(file = find_active_file(), ..., reporter = NULL) {
   ext <- tolower(tools::file_ext(file))
   valid_files <- ext %in% c("r", src_ext)
   if (any(!valid_files)) {
@@ -196,7 +196,13 @@ test_file <- function(file = find_active_file(), ...) {
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  test(filter = regex, ...)
+  if (packageVersion("testthat") > "2.99") {
+    reporter <- reporter %||% testthat::default_compact_reporter()
+  } else {
+    reporter <- reporter %||% testthat::default_reporter()
+  }
+
+  test(filter = regex, reporter = reporter, ...)
 }
 
 find_active_file <- function(arg = "file") {
