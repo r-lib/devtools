@@ -19,7 +19,7 @@
 #' @inheritParams pkgload::load_all
 #' @inheritParams run_examples
 #' @export
-test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...) {
+test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, quiet = FALSE, ...) {
   save_all()
 
   pkg <- as.package(pkg)
@@ -49,11 +49,15 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
   }
 
   # Run tests in a child of the namespace environment
-  message("Loading ", pkg$package)
+  if (!quiet) {
+    message("Loading ", pkg$package)
+  }
   ns_env <- load_all(pkg$path, quiet = TRUE, export_all = export_all)$env
   env <- new.env(parent = ns_env)
 
-  message("Testing ", pkg$package)
+  if (!quiet) {
+    message("Testing ", pkg$package)
+  }
   Sys.sleep(0.05)
   utils::flush.console() # Avoid misordered output in RStudio
 
@@ -202,7 +206,7 @@ test_file <- function(file = find_active_file(), ..., reporter = NULL) {
     reporter <- reporter %||% testthat::default_reporter()
   }
 
-  test(filter = regex, reporter = reporter, ...)
+  test(filter = regex, reporter = reporter, quiet = TRUE, ...)
 }
 
 find_active_file <- function(arg = "file") {

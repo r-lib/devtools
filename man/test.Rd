@@ -8,7 +8,14 @@
 \alias{test_coverage_file}
 \title{Execute \pkg{test_that} tests in a package.}
 \usage{
-test(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...)
+test(
+  pkg = ".",
+  filter = NULL,
+  stop_on_failure = FALSE,
+  export_all = TRUE,
+  quiet = FALSE,
+  ...
+)
 
 test_coverage(pkg = ".", show_report = interactive(), ...)
 
@@ -42,6 +49,8 @@ if you're calling \code{test_dir()} you may want to consider explicitly setting
 \item{export_all}{If \code{TRUE} (the default), export all objects.
 If \code{FALSE}, export only the objects that are listed as exports
 in the NAMESPACE file.}
+
+\item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{...}{additional arguments passed to \code{\link[testthat:test_dir]{testthat::test_dir()}} and
 \code{\link[covr:package_coverage]{covr::package_coverage()}}}
