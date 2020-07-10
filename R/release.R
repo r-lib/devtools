@@ -151,6 +151,10 @@ find_release_questions <- function(pkg = ".") {
 }
 
 yesno <- function(...) {
+  if (!rlang::is_interactive()) {
+    return(FALSE)
+  }
+
   yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "Of course", "Absolutely")
   nos <- c("No way", "Not yet", "I forget", "No", "Nope", "Uhhhh... Maybe?")
 
