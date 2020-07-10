@@ -283,12 +283,16 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
   withr::local_envvar(r_env_vars())
   if (packageVersion("testthat") >= "2.99") {
     testthat::local_test_directory(pkg$path, pkg$package)
+    reporter <- testthat::local_snapshotter(file)
   } else {
     withr::local_envvar(c(TESTTHAT = "true", TESTTHAT_PKG = pkg$package))
+    reporter <- NULL
   }
 
   withr::with_dir("tests/testthat", {
-    coverage <- covr::environment_coverage(env, test_files, ...)
+    testthat::with_reporter(reporter, {
+      coverage <- covr::environment_coverage(env, test_files, ...)
+    })
   })
 
   filter <- isTRUE(filter) && all(file.exists(source_files))
