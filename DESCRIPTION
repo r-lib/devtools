@@ -33,7 +33,7 @@ Imports:
     pkgbuild (>= 1.0.6),
     pkgload (>= 1.0.2),
     rcmdcheck (>= 1.3.3),
-    remotes (>= 2.1.1),
+    remotes (>= 2.2.0),
     rlang (>= 0.4.5),
     roxygen2 (>= 7.1.0),
     rstudioapi (>= 0.11),

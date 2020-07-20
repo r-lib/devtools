@@ -36,7 +36,7 @@ install_bioc(
 
 install_bitbucket(
   repo,
-  ref = "master",
+  ref = "HEAD",
   subdir = NULL,
   auth_user = bitbucket_user(),
   password = bitbucket_password(),
@@ -93,7 +93,7 @@ install_git(
 
 install_github(
   repo,
-  ref = "master",
+  ref = "HEAD",
   subdir = NULL,
   auth_token = github_pat(quiet),
   host = "api.github.com",
