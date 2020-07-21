@@ -8,7 +8,7 @@ git_branch <- function(path = ".") {
   system2("git", c("rev-parse", "--abbrev-ref", "HEAD"), stdout = TRUE)
 }
 
-git_uncommited <- function(path = ".") {
+git_uncommitted <- function(path = ".") {
   withr::local_dir(path)
 
   out <- system2("git", c("status", "--porcelain=v1"), stdout = TRUE)

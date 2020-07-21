@@ -20,7 +20,7 @@ git_report_branch <- function(pkg) {
 
 git_check_uncommitted <- function(pkg) {
   check_status(
-    !asNamespace("usethis")$git_uncommitted(pkg$path),
+    !git_uncommitted(pkg$path),
     "uncommitted files",
     "All files should be tracked and committed before release. Please add and commit."
   )
