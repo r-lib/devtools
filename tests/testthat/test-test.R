@@ -26,10 +26,10 @@ test_that("Filtering works with devtools::test", {
 test_that("devtools::test_file works", {
   expect_error(test_file("testTest/DESCRIPTION"), "are not valid R or src files")
   suppressMessages(
-    test_file("testTest/tests/testthat/test-dummy.R", pkg = "testTest", reporter = "stop")
+    test_file("testTest/tests/testthat/test-dummy.R", pkg = "testTest", reporter = "silent")
   )
   suppressMessages(
-    test_file("testTest/R/dummy.R", pkg = "testTest", reporter = "stop")
+    test_file("testTest/R/dummy.R", pkg = "testTest", reporter = "silent")
   )
   expect_true(TRUE)
 })
