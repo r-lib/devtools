@@ -9,13 +9,13 @@ test_that("reload works", {
   expect_false(is_loaded(pkg))
 
   # Do nothing if the package is not loaded
-  expect_error(reload(pkg), NA)
+  expect_error(reload(pkg, quiet = TRUE), NA)
   expect_false(is_loaded(pkg))
 
   # Reload if loaded
   requireNamespace(pkg$package, quietly = TRUE)
   expect_true(is_loaded(pkg))
-  reload(pkg)
+  reload(pkg, quiet = TRUE)
   expect_true(is_loaded(pkg))
 
   # Re-attach if attached
@@ -23,7 +23,7 @@ test_that("reload works", {
   library(pkg$package, character.only = TRUE, quietly = TRUE)
   expect_true(is_loaded(pkg))
   expect_true(is_attached(pkg))
-  reload(pkg)
+  reload(pkg, quiet = TRUE)
   expect_true(is_loaded(pkg))
   expect_true(is_attached(pkg))
 })
