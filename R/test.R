@@ -19,7 +19,7 @@
 #' @inheritParams pkgload::load_all
 #' @inheritParams run_examples
 #' @export
-test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, quiet = FALSE, ...) {
+test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...) {
   save_all()
 
   pkg <- as.package(pkg)
@@ -30,6 +30,15 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
       usethis_use_testthat(pkg)
     }
     return(invisible())
+  }
+
+  if (packageVersion("testthat") >= "2.99") {
+    return(testthat::test_local(
+      pkg$path,
+      filter = filter,
+      stop_on_failure = stop_on_failure,
+      ...
+    ))
   }
 
   test_path <- find_test_dir(pkg$path)
@@ -48,53 +57,38 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
     }
   }
 
-  # Run tests in a child of the namespace environment
-  if (!quiet) {
-    message("Loading ", pkg$package)
-  }
+  # Run tests in a child of the namespace environment, like
+  # testthat::test_package
+  message("Loading ", pkg$package)
   ns_env <- load_all(pkg$path, quiet = TRUE, export_all = export_all)$env
-  env <- new.env(parent = ns_env)
 
-  if (!quiet) {
-    message("Testing ", pkg$package)
-  }
+  message("Testing ", pkg$package)
   Sys.sleep(0.05)
   utils::flush.console() # Avoid misordered output in RStudio
 
+  env <- new.env(parent = ns_env)
+
+  testthat_args <- list(
+    test_path,
+    filter = filter,
+    env = env,
+    stop_on_failure = stop_on_failure,
+    load_helpers = FALSE,
+    ... = ...)
+
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  if (packageVersion("testthat") >= "2.99") {
-    withr::local_envvar(r_env_vars())
-    testthat::test_dir(
-      test_path,
-      package = pkg$package,
-      filter = filter,
-      env = env,
-      stop_on_failure = stop_on_failure,
-      load_helpers = FALSE,
-      ...
-    )
-  } else {
-    testthat_args <- list(
-      test_path,
-      filter = filter,
-      env = env,
-      stop_on_failure = stop_on_failure,
-      load_helpers = FALSE,
-      ... = ...
-    )
-    withr::with_collate("C",
-      withr::with_options(
-        c(useFancyQuotes = FALSE),
-        withr::with_envvar(
-          c(r_env_vars(),
-            "TESTTHAT_PKG" = pkg$package
-            ),
-          do.call(testthat::test_dir, testthat_args)
-        )
+  withr::with_collate("C",
+    withr::with_options(
+      c(useFancyQuotes = FALSE),
+      withr::with_envvar(
+        c(r_env_vars(),
+          "TESTTHAT_PKG" = pkg$package
+          ),
+        do.call(testthat::test_dir, testthat_args)
       )
     )
-  }
+  )
 }
 
 #' @param show_report Show the test coverage report.
@@ -175,7 +169,7 @@ src_ext <- c("c", "cc", "cpp", "cxx", "h", "hpp", "hxx")
 
 #' @export
 #' @rdname test
-test_file <- function(file = find_active_file(), ..., reporter = NULL) {
+test_file <- function(file = find_active_file(), ...) {
   ext <- tolower(tools::file_ext(file))
   valid_files <- ext %in% c("r", src_ext)
   if (any(!valid_files)) {
@@ -193,6 +187,12 @@ test_file <- function(file = find_active_file(), ..., reporter = NULL) {
     file[!is_source_file]
   ))
 
+  if (packageVersion("testthat") > "2.99") {
+    load_all(pkg$path, quiet = TRUE)
+    return(testthat::test_file(test_files))
+  }
+
+
   test_files <- sub("^test-", "",
     basename(tools::file_path_sans_ext(test_files)))
 
@@ -200,13 +200,7 @@ test_file <- function(file = find_active_file(), ..., reporter = NULL) {
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  if (packageVersion("testthat") > "2.99") {
-    reporter <- reporter %||% testthat::default_compact_reporter()
-  } else {
-    reporter <- reporter %||% testthat::default_reporter()
-  }
-
-  test(filter = regex, reporter = reporter, quiet = TRUE, ...)
+  test(filter = regex, ...)
 }
 
 find_active_file <- function(arg = "file") {

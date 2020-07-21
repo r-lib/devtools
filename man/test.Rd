@@ -8,20 +8,13 @@
 \alias{test_coverage_file}
 \title{Execute \pkg{test_that} tests in a package.}
 \usage{
-test(
-  pkg = ".",
-  filter = NULL,
-  stop_on_failure = FALSE,
-  export_all = TRUE,
-  quiet = FALSE,
-  ...
-)
+test(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...)
 
 test_coverage(pkg = ".", show_report = interactive(), ...)
 
 uses_testthat(pkg = ".")
 
-test_file(file = find_active_file(), ..., reporter = NULL)
+test_file(file = find_active_file(), ...)
 
 test_coverage_file(
   file = find_active_file(),
@@ -36,21 +29,14 @@ test_coverage_file(
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
 \item{filter}{If not \code{NULL}, only tests with file names matching this
-regular expression will be executed. Matching be performed on the file
-name after it has been stripped of \code{"test-"} and \code{".R"}.}
+regular expression will be executed. Matching is performed on the file
+name after it's stripped of \code{"test-"} and \code{".R"}.}
 
-\item{stop_on_failure}{If \code{TRUE}, throw an error if any tests fail.
-
-For historical reasons, the default value of \code{stop_on_failure} is \code{TRUE}
-for  \code{test_package()} and \code{test_check()} but \code{FALSE} for \code{test_dir()}, so
-if you're calling \code{test_dir()} you may want to consider explicitly setting
-\code{stop_on_failure = TRUE}.}
+\item{stop_on_failure}{If \code{TRUE}, throw an error if any tests fail.}
 
 \item{export_all}{If \code{TRUE} (the default), export all objects.
 If \code{FALSE}, export only the objects that are listed as exports
 in the NAMESPACE file.}
-
-\item{quiet}{if \code{TRUE} suppresses output from this function.}
 
 \item{...}{additional arguments passed to \code{\link[testthat:test_dir]{testthat::test_dir()}} and
 \code{\link[covr:package_coverage]{covr::package_coverage()}}}
@@ -60,12 +46,6 @@ in the NAMESPACE file.}
 \item{file}{One or more source or test files. If a source file the
 corresponding test file will be run. The default is to use the active file
 in RStudio (if available).}
-
-\item{reporter}{Reporter to use to summarise output. Can be supplied
-as a string (e.g. "summary") or as an R6 object
-(e.g. \code{SummaryReporter$new()}).
-
-See \link[testthat]{Reporter} for more details and a list of built-in reporters.}
 }
 \description{
 \code{test()} is a shortcut for \code{\link[testthat:test_dir]{testthat::test_dir()}}, it runs all of a
