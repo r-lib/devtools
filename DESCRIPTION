@@ -54,6 +54,7 @@ Suggests:
     curl (>= 4.3),
     digest (>= 0.6.25),
     foghorn (>= 1.2.1),
+    gh,
     gmailr (>= 1.0.0),
     knitr (>= 1.28),
     lintr (>= 2.0.1),
