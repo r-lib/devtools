@@ -19,9 +19,12 @@ test_that("Filtering works with devtools::test", {
 })
 
 test_that("devtools::test_file works", {
-  expect_error(test_file("testTest/DESCRIPTION"), "are not valid R or src files")
-  test_file("testTest/tests/testthat/test-dummy.R", pkg = "testTest", reporter = "stop")
-  test_file("testTest/R/dummy.R", pkg = "testTest", reporter = "stop")
+  expect_error(test_file(test_path("testTest/DESCRIPTION")), "are not valid R or src files")
+
+  skip_if_not_installed("testthat", "2.99")
+
+  test_file(test_path("testTest/tests/testthat/test-dummy.R"), reporter = "stop")
+  test_file(test_path("testTest/R/dummy.R"), reporter = "stop")
   expect_true(TRUE)
 })
 
