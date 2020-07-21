@@ -188,6 +188,7 @@ test_file <- function(file = find_active_file(), ...) {
   ))
 
   if (packageVersion("testthat") > "2.99") {
+    pkg <- as.package(dirname(file)[[1]])
     load_all(pkg$path, quiet = TRUE)
     return(testthat::test_file(test_files))
   }
