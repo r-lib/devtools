@@ -278,7 +278,7 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
   if (packageVersion("testthat") >= "2.99") {
     testthat::local_test_directory(pkg$path, pkg$package)
     reporter <- testthat::local_snapshotter(cleanup = TRUE)
-    reporter$start_file(file)
+    reporter$start_file(file, "test")
   } else {
     withr::local_envvar(c(TESTTHAT = "true", TESTTHAT_PKG = pkg$package))
     reporter <- NULL
