@@ -33,7 +33,6 @@ Imports:
     DT (>= 0.13),
     ellipsis (>= 0.3.0),
     httr (>= 1.4.1),
-    jsonlite (>= 1.6.1),
     memoise (>= 1.1.0),
     pkgbuild (>= 1.0.6),
     pkgload (>= 1.0.2),
