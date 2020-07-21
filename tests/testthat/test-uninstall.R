@@ -1,5 +1,3 @@
-context("Uninstall")
-
 test_that("uninstall() unloads and removes from library", {
 
   # Make a temp lib directory to install test package into

@@ -1,5 +1,3 @@
-context("Install")
-
 library(mockery)
 
 pkg <- normalizePath(test_path("testReadme"))

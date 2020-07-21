@@ -1,5 +1,3 @@
-context("Vignettes")
-
 test_that("Sweave vignettes copied into doc", {
   if (!pkgbuild::has_latex()) {
     skip("pdflatex not available")

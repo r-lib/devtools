@@ -1,5 +1,3 @@
-context("source_gist")
-
 test_that("gist containing single file works unambiguously", {
   skip_on_cran()
 

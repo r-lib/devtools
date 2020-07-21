@@ -1,5 +1,3 @@
-context("Build Site")
-
 test_that("Package pkgdown site can be built ", {
   # This test requires internet
   skip_on_cran()

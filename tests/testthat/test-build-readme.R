@@ -1,5 +1,3 @@
-context("Build README")
-
 test_that("Package readme can be built ", {
   skip_on_cran()
 
