@@ -17,35 +17,19 @@ document <- function(pkg = ".", roclets = NULL, quiet = FALSE) {
   }
 
   save_all()
-
   if (pkg$package == "roxygen2") {
     # roxygen2 crashes if it reloads itself
     load_all(pkg$path, quiet = quiet)
   }
 
-  if (packageVersion("roxygen2") >= "6.1.99.9001") {
-    load_code <- NULL
-  } else {
-    if (pkg$package == "roxygen2") {
-      load_code <- function(path) asNamespace("roxygen2")
-    } else {
-      load_code <- function(path) {
-        pkgload::load_all(path, compile = FALSE, helpers = FALSE, attach_testthat = FALSE, quiet = quiet)$env
-      }
-    }
-  }
-
   if (quiet) {
     output <- tempfile()
     on.exit(unlink(output))
-
     withr::local_output_sink(output)
   }
+  withr::local_envvar(r_env_vars())
 
-  withr::with_envvar(r_env_vars(),
-    roxygen2::roxygenise(pkg$path, roclets, load_code = load_code)
-  )
-
+  roxygen2::roxygenise(pkg$path, roclets)
   pkgload::dev_topic_index_reset(pkg$package)
   invisible()
 }
