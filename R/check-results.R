@@ -62,8 +62,8 @@ summarise_check_results <- function(x, colour = FALSE) {
 
 show_count <- function(n, singular, plural, is_error = FALSE) {
   out <- paste0(n, " ", ngettext(n, singular, plural))
-  if (is_error && requireNamespace("crayon", quietly = TRUE)) {
-    out <- crayon::red(out)
+  if (is_error && requireNamespace("cli", quietly = TRUE)) {
+    out <- cli::col_red(out)
   }
   out
 }

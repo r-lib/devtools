@@ -36,7 +36,7 @@ install_bioc(
 
 install_bitbucket(
   repo,
-  ref = "master",
+  ref = "HEAD",
   subdir = NULL,
   auth_user = bitbucket_user(),
   password = bitbucket_password(),
@@ -93,7 +93,7 @@ install_git(
 
 install_github(
   repo,
-  ref = "master",
+  ref = "HEAD",
   subdir = NULL,
   auth_token = github_pat(quiet),
   host = "api.github.com",
@@ -226,6 +226,6 @@ Follow the links below to see the documentation.
 \code{\link[remotes:install_bioc]{remotes::install_bioc()}}, \code{\link[remotes:install_bitbucket]{remotes::install_bitbucket()}}, \code{\link[remotes:install_cran]{remotes::install_cran()}}, \code{\link[remotes:install_dev]{remotes::install_dev()}},
 \code{\link[remotes:install_git]{remotes::install_git()}}, \code{\link[remotes:install_github]{remotes::install_github()}}, \code{\link[remotes:install_gitlab]{remotes::install_gitlab()}}, \code{\link[remotes:install_local]{remotes::install_local()}},
 \code{\link[remotes:install_svn]{remotes::install_svn()}}, \code{\link[remotes:install_url]{remotes::install_url()}}, \code{\link[remotes:install_version]{remotes::install_version()}}, \code{\link[remotes:update_packages]{remotes::update_packages()}},
-\code{\link[remotes:dev_package_deps]{remotes::dev_package_deps()}}.
+\code{\link[remotes:package_deps]{remotes::dev_package_deps()}}.
 }
 \keyword{internal}

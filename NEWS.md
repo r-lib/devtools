@@ -1,6 +1,10 @@
-# devtools (development version)
+# devtools 2.3.1
 
 * `run_examples()` arguments `run` and `test` are deprecated in favor of the (hopefully) more clear `run_dontrun` and `run_donttest` (pkgload/#107).
+
+* Previously deprecated functions `dr_devtools()` and `dr_github()` have been removed.
+
+* Documentation has been synced with remotes 2.2.0
 
 # devtools 2.3.0
 

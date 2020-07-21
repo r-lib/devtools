@@ -1,17 +1,26 @@
 Package: devtools
 Title: Tools to Make Developing R Packages Easier
-Version: 2.3.0.9000
-Authors@R: c(
-    person("Hadley", "Wickham", role = "aut"),
-    person("Jim", "Hester", , "jim.hester@rstudio.com", role = c("aut", "cre")),
-    person("Winston", "Chang", role = "aut"),
-    person("RStudio", role = "cph"),
-    person("R Core team", role = "ctb",
-      comment = "Some namespace and vignette code extracted from base R")
-    )
+Version: 2.3.1
+Authors@R: 
+    c(person(given = "Hadley",
+             family = "Wickham",
+             role = "aut"),
+      person(given = "Jim",
+             family = "Hester",
+             role = c("aut", "cre"),
+             email = "jim.hester@rstudio.com"),
+      person(given = "Winston",
+             family = "Chang",
+             role = "aut"),
+      person(given = "RStudio",
+             role = "cph"),
+      person(given = "R Core team",
+             role = "ctb",
+             comment = "Some namespace and vignette code extracted from base R"))
 Description: Collection of package development tools.
 License: GPL (>= 2)
-URL: https://devtools.r-lib.org/, https://github.com/r-lib/devtools
+URL: https://devtools.r-lib.org/,
+    https://github.com/r-lib/devtools
 BugReports: https://github.com/r-lib/devtools/issues
 Depends: 
     R (>= 3.0.2),
@@ -20,20 +29,16 @@ Imports:
     callr (>= 3.4.3),
     cli (>= 2.0.2),
     covr (>= 3.5.0),
-    crayon (>= 1.3.4),
     desc (>= 1.2.0),
-    digest (>= 0.6.25),
     DT (>= 0.13),
     ellipsis (>= 0.3.0),
-    glue (>= 1.4.0),
-    git2r (>= 0.26.1),
     httr (>= 1.4.1),
     jsonlite (>= 1.6.1),
     memoise (>= 1.1.0),
     pkgbuild (>= 1.0.6),
     pkgload (>= 1.0.2),
     rcmdcheck (>= 1.3.3),
-    remotes (>= 2.1.1),
+    remotes (>= 2.2.0),
     rlang (>= 0.4.5),
     roxygen2 (>= 7.1.0),
     rstudioapi (>= 0.11),
@@ -47,20 +52,23 @@ Imports:
 Suggests: 
     BiocManager (>= 1.30.10),
     curl (>= 4.3),
+    digest (>= 0.6.25),
     foghorn (>= 1.2.1),
     gmailr (>= 1.0.0),
     knitr (>= 1.28),
     lintr (>= 2.0.1),
+    MASS,
     mockery (>= 0.4.2),
     pingr (>= 2.0.0),
-    MASS,
     pkgdown (>= 1.5.1),
     rhub (>= 1.1.1),
     rmarkdown (>= 2.1),
     spelling (>= 2.1)
-VignetteBuilder: knitr
+VignetteBuilder: 
+    knitr
+Remotes: 
+    r-lib/testthat
 Encoding: UTF-8
-RoxygenNote: 7.1.0
-Roxygen: list(markdown = TRUE)
 Language: en-US
-Remotes: r-lib/testthat
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1

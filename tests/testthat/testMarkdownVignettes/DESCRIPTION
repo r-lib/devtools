@@ -6,4 +6,4 @@ Author: Hadley <h.wickham@gmail.com>
 Maintainer: Hadley <h.wickham@gmail.com>
 Version: 0.1
 VignetteBuilder: knitr
-Suggests: knitr
+Suggests: knitr, rmarkdown

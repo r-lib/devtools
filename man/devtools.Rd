@@ -25,7 +25,7 @@ to \verb{R CMD install} by \code{\link[=install]{install()}}.
 \item \code{devtools.desc.author}: a string providing a default Authors@R
 string to be used in new \file{DESCRIPTION}s.  Should be a R code, and
 look like \code{"Hadley Wickham <h.wickham@gmail.com> [aut, cre]"}. See
-\code{\link[utils:as.person]{utils::as.person()}} for more details.
+\code{\link[utils:person]{utils::as.person()}} for more details.
 
 \item \code{devtools.desc.license}: a default license string to use for
 new packages.

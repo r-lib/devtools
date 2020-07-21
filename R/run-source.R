@@ -30,6 +30,9 @@
 #' }
 source_url <- function(url, ..., sha1 = NULL) {
   stopifnot(is.character(url), length(url) == 1)
+  if (!requireNamespace("digest", quietly = TRUE)) {
+    stop("`digest` must be installed to use `source_url()`", call. = FALSE)
+  }
 
   temp_file <- tempfile()
   on.exit(unlink(temp_file))
