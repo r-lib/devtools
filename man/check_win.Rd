@@ -39,8 +39,8 @@ check_win_oldrelease(
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
 \item{args}{An optional character vector of additional command
-line arguments to be passed to \code{R CMD build} if \code{binary = FALSE},
-or \code{R CMD install} if \code{binary = TRUE}.}
+line arguments to be passed to \verb{R CMD build} if \code{binary = FALSE},
+or \verb{R CMD install} if \code{binary = TRUE}.}
 
 \item{manual}{For source packages: if \code{FALSE}, don't build PDF
 vignettes (\code{--no-build-vignettes}) or manual (\code{--no-manual}).}

@@ -2,6 +2,8 @@
 
 * `run_examples()` arguments `run` and `test` are deprecated in favor of the (hopefully) more clear `run_dontrun` and `run_donttest` (pkgload/#107).
 
+* Previously deprecated functions `dr_devtools()` and `dr_github()` have been removed.
+
 # devtools 2.3.0
 
 * `build()` now errors with a more informative error message when passed an

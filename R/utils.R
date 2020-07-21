@@ -174,12 +174,12 @@ vcapply <- function(x, FUN, ...) {
 }
 
 hd_line <- function(name) {
-  cat_rule(crayon::bold(name))
+  cat_rule(cli::style_bold(name))
 }
 
 kv_line <- function (key, value, path = FALSE) {
   if (is.null(value)) {
-    value <- crayon::silver("<unset>")
+    value <- cli::col_silver("<unset>")
   }
   else {
     if (path) {
