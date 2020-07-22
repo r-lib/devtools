@@ -9,19 +9,16 @@ reference:
     description: Primary commands used when developing a package.
     contents:
     - build
-    - starts_with("check_")
     - starts_with("build_")
-    - document
+    - starts_with("check_")
     - check
     - create
+    - document
     - load_all
-    - starts_with("package")
-    - ends_with("package")
     - reload
     - release
-    - revdep
-    - test
     - spell_check
+    - test
   - title: Package Installation
     contents:
     - starts_with("install")

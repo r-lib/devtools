@@ -21,6 +21,7 @@
 #' @seealso The [revdepcheck](https://github.com/r-lib/revdepcheck) package can
 #'  be used to run R CMD check on all reverse dependencies.
 #' @export
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' revdep("ggplot2")

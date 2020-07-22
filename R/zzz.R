@@ -35,6 +35,7 @@ NULL
 #'
 #' }
 #' @docType package
+#' @keywords internal
 #' @name devtools
 "_PACKAGE"
 
