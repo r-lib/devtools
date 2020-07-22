@@ -45,7 +45,7 @@ Imports:
     rversions (>= 2.0.1),
     sessioninfo (>= 1.1.1),
     stats,
-    testthat (>= 2.3.2),
+    testthat (>= 2.99),
     tools,
     utils,
     withr (>= 2.1.2)

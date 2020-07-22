@@ -32,62 +32,11 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
     return(invisible())
   }
 
-  if (packageVersion("testthat") >= "2.99") {
-    return(testthat::test_local(
-      pkg$path,
-      filter = filter,
-      stop_on_failure = stop_on_failure,
-      ...
-    ))
-  }
-
-  test_path <- find_test_dir(pkg$path)
-  test_files <- dir(test_path, "^test.*\\.[rR]$")
-  if (length(test_files) == 0) {
-    message("No tests: no files in ", test_path, " match '^test.*\\.[rR]$'")
-    return(invisible())
-  }
-
-  # Need to attach testthat so that (e.g.) context() is available
-  # Update package dependency to avoid explicit require() call (#798)
-  if (pkg$package != "testthat") {
-    pkg$depends <- paste0("testthat, ", pkg$depends)
-    if (grepl("^testthat, *$", pkg$depends)) {
-      pkg$depends <- "testthat"
-    }
-  }
-
-  # Run tests in a child of the namespace environment, like
-  # testthat::test_package
-  message("Loading ", pkg$package)
-  ns_env <- load_all(pkg$path, quiet = TRUE, export_all = export_all)$env
-
-  message("Testing ", pkg$package)
-  Sys.sleep(0.05)
-  utils::flush.console() # Avoid misordered output in RStudio
-
-  env <- new.env(parent = ns_env)
-
-  testthat_args <- list(
-    test_path,
+  testthat::test_local(
+    pkg$path,
     filter = filter,
-    env = env,
     stop_on_failure = stop_on_failure,
-    load_helpers = FALSE,
-    ... = ...)
-
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
-
-  withr::with_collate("C",
-    withr::with_options(
-      c(useFancyQuotes = FALSE),
-      withr::with_envvar(
-        c(r_env_vars(),
-          "TESTTHAT_PKG" = pkg$package
-          ),
-        do.call(testthat::test_dir, testthat_args)
-      )
-    )
+    ...
   )
 }
 
@@ -106,11 +55,8 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   withr::local_envvar(r_env_vars())
-  if (packageVersion("testthat") >= "2.99") {
-    testthat::local_test_directory(pkg$path, pkg$package)
-  } else {
-    withr::local_envvar(c(TESTTHAT = "true", TESTTHAT_PKG = pkg$package))
-  }
+  testthat::local_test_directory(pkg$path, pkg$package)
+
   coverage <- covr::package_coverage(pkg$path, ...)
 
   if (isTRUE(show_report)) {
@@ -120,15 +66,6 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   invisible(coverage)
 }
 
-find_test_dir <- function(path) {
-  testthat <- file.path(path, "tests", "testthat")
-  if (dir.exists(testthat)) return(testthat)
-
-  inst <- file.path(path, "inst", "tests")
-  if (dir.exists(inst)) return(inst)
-
-  stop("No testthat directories found in ", path, call. = FALSE)
-}
 
 #' Return the path to one of the packages in the devtools test dir
 #'
@@ -187,21 +124,9 @@ test_file <- function(file = find_active_file(), ...) {
     file[!is_source_file]
   ))
 
-  if (packageVersion("testthat") > "2.99") {
-    pkg <- as.package(dirname(file)[[1]])
-    load_all(pkg$path, quiet = TRUE)
-    return(testthat::test_file(test_files, ...))
-  }
-
-
-  test_files <- sub("^test-", "",
-    basename(tools::file_path_sans_ext(test_files)))
-
-  regex <- paste0("^", escape_special_regex(test_files), "$", collapse = "|")
-
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
-
-  test(filter = regex, ...)
+  pkg <- as.package(dirname(file)[[1]])
+  load_all(pkg$path, quiet = TRUE)
+  return(testthat::test_file(test_files, ...))
 }
 
 find_active_file <- function(arg = "file") {
@@ -276,14 +201,9 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   withr::local_envvar(r_env_vars())
-  if (packageVersion("testthat") >= "2.99") {
-    testthat::local_test_directory(pkg$path, pkg$package)
-    reporter <- testthat::local_snapshotter(cleanup = TRUE)
-    reporter$start_file(file, "test")
-  } else {
-    withr::local_envvar(c(TESTTHAT = "true", TESTTHAT_PKG = pkg$package))
-    reporter <- NULL
-  }
+  testthat::local_test_directory(pkg$path, pkg$package)
+  reporter <- testthat::local_snapshotter(cleanup = TRUE)
+  reporter$start_file(file, "test")
 
   withr::with_dir("tests/testthat", {
     testthat::with_reporter(reporter, {
