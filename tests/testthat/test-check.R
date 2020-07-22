@@ -1,5 +1,3 @@
-context("Check")
-
 test_that("successful check doesn't trigger error", {
   skip_on_cran()
   results <- check("testTest", document = FALSE, quiet = TRUE)
@@ -7,8 +5,7 @@ test_that("successful check doesn't trigger error", {
   expect_error(signal_check_results(results), NA)
   expect_equal(
     summarise_check_results(results),
-    "0 errors | 0 warnings | 0 notes",
-    fixed = TRUE
+    "0 errors | 0 warnings | 0 notes"
   )
 })
 

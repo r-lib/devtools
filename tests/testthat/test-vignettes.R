@@ -1,113 +1,89 @@
-context("Vignettes")
-
 test_that("Sweave vignettes copied into doc", {
   if (!pkgbuild::has_latex()) {
     skip("pdflatex not available")
   }
+  pkg <- test_path("testVignettes")
+  doc <- file.path(pkg, "doc")
 
-  clean_vignettes("testVignettes")
-  expect_false("new.pdf" %in% dir("testVignettes/doc"))
-  expect_false("new.R" %in% dir("testVignettes/doc"))
-  expect_false("new.Rnw" %in% dir("testVignettes/doc"))
+  suppressMessages(clean_vignettes(pkg))
+  expect_equal(dir(doc), character())
 
-  build_vignettes("testVignettes")
-  expect_true("new.pdf" %in% dir("testVignettes/doc"))
-  expect_true("new.R" %in% dir("testVignettes/doc"))
-  expect_true("new.Rnw" %in% dir("testVignettes/doc"))
+  suppressMessages(build_vignettes(pkg))
+  expect_setequal(dir(doc), c("new.pdf", "new.R", "new.Rnw"))
 
-  clean_vignettes("testVignettes")
-  expect_false("new.pdf" %in% dir("testVignettes/doc"))
-  expect_false("new.R" %in% dir("testVignettes/doc"))
-  expect_false("new.Rnw" %in% dir("testVignettes/doc"))
+  suppressMessages(clean_vignettes(pkg))
+  expect_equal(dir(doc), character())
 })
 
 test_that("Built files are updated", {
   if (!pkgbuild::has_latex()) {
     skip("pdflatex not available")
   }
+  pkg <- test_path("testVignettes")
 
-  clean_vignettes("testVignettes")
-  build_vignettes("testVignettes")
-  on.exit(clean_vignettes("testVignettes"))
+  suppressMessages(clean_vignettes(pkg))
+  suppressMessages(build_vignettes(pkg))
+  on.exit(suppressMessages(clean_vignettes(pkg)))
 
-  output <- dir("testVignettes/doc", "new", full.names = TRUE)
+  output <- dir(file.path(pkg, "doc"), "new", full.names = TRUE)
   first <- file.info(output)$mtime
 
   Sys.sleep(1)
-  build_vignettes("testVignettes")
+  suppressMessages(build_vignettes(pkg))
   second <- file.info(output)$mtime
 
   expect_true(all(second > first))
 })
 
-if (packageVersion("knitr") >= 1.2) {
-  test_that("Rmarkdown vignettes copied into doc", {
-    pkg <- as.package("testMarkdownVignettes")
-    doc_path <- file.path(pkg$path, "doc")
+test_that("Rmarkdown vignettes copied into doc", {
+  pkg <- test_path("testMarkdownVignettes")
+  doc <- file.path(pkg, "doc")
 
-    clean_vignettes(pkg)
-    expect_false("test.html" %in% dir(doc_path))
-    expect_false("test.R" %in% dir(doc_path))
-    expect_false("test.Rmd" %in% dir(doc_path))
+  suppressMessages(clean_vignettes(pkg))
+  expect_equal(dir(doc), character())
 
-    build_vignettes(pkg)
-    expect_true("test.html" %in% dir(doc_path))
-    expect_true("test.R" %in% dir(doc_path))
-    expect_true("test.Rmd" %in% dir(doc_path))
+  suppressMessages(build_vignettes(pkg))
+  expect_setequal(dir(doc), c("test.html", "test.R", "test.Rmd"))
 
-    clean_vignettes(pkg)
-    expect_false("test.html" %in% dir(doc_path))
-    expect_false("test.R" %in% dir(doc_path))
-    expect_false("test.Rmd" %in% dir(doc_path))
-  })
-}
-
+  suppressMessages(clean_vignettes(pkg))
+  expect_equal(dir(doc), character())
+})
 
 test_that("Extra files copied and removed", {
   if (!pkgbuild::has_latex()) {
     skip("pdflatex not available")
   }
 
-  pkg <- as.package("testVignetteExtras")
-  doc_path <- file.path(pkg$path, "doc")
+  pkg <- test_path("testVignetteExtras")
+  doc <- file.path(pkg, "doc")
 
-  extras_path <- file.path(
-    "testVignetteExtras", "vignettes",
-    ".install_extras"
-  )
+  extras_path <- file.path(pkg, "vignettes", ".install_extras")
   writeLines("a.R", extras_path)
   on.exit(unlink(extras_path))
 
-  clean_vignettes(pkg)
-  expect_false("a.R" %in% dir(doc_path))
+  suppressMessages(clean_vignettes(pkg))
+  expect_false(file.exists(file.path(doc, "a.R")))
 
-  build_vignettes(pkg)
-  expect_true("a.R" %in% dir(doc_path))
+  suppressMessages(build_vignettes(pkg))
+  expect_true(file.exists(file.path(doc, "a.R")))
 
-  clean_vignettes(pkg)
-  expect_false("a.R" %in% dir(doc_path))
+  suppressMessages(clean_vignettes(pkg))
+  expect_false(file.exists(file.path(doc, "a.R")))
 })
 
-
 test_that("vignettes built on install", {
-  # Since we install this package it should not run on CRAN, as it would change
-  # the default library
   skip_on_cran()
 
   if (!pkgbuild::has_latex()) {
     skip("pdflatex not available")
   }
 
-  install("testVignettesBuilt",
-    reload = FALSE, quiet = TRUE,
-    build_vignettes = TRUE
-  )
-  unlink("testVignettesBuilt/vignettes/new.tex")
-  unlink("testVignettesBuilt/vignettes/.build.timestamp")
+  pkg <- test_path("testVignettesBuilt")
+
+  withr::local_temp_libpaths()
+  install(pkg, reload = FALSE, quiet = TRUE, build_vignettes = TRUE)
 
   vigs <- vignette(package = "testVignettesBuilt")$results
   expect_equal(nrow(vigs), 1)
   expect_equal(vigs[3], "new")
-
-  suppressMessages(remove.packages("testVignettesBuilt"))
 })
