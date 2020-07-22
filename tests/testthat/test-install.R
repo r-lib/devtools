@@ -1,5 +1,3 @@
-context("Install")
-
 library(mockery)
 
 pkg <- normalizePath(test_path("testReadme"))
@@ -8,7 +6,7 @@ expect_passes_args <- function(fn, stub, input_args = list(), expected_args) {
   mck <- mockery::mock(NULL)
   mockery::stub(fn, stub, mck)
 
-  do.call(fn, input_args)
+  suppressMessages(do.call(fn, input_args))
 
   mockery::expect_called(mck, 1)
   expect_equal(mockery::mock_args(mck)[[1]], expected_args)

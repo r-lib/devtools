@@ -60,7 +60,7 @@ build_vignettes <- function(pkg = ".",
   callr::r(
     build,
     args = list(pkg_path = pkg$path, clean = clean, upgrade = upgrade, quiet = quiet),
-    show = TRUE,
+    show = !quiet,
     spinner = FALSE
   )
 
