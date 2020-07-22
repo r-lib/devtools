@@ -6,7 +6,7 @@ template:
 
 reference:
   - title: Package Development
-    description: Primary commands used when developing a package.
+    desc: Primary commands used when developing a package.
     contents:
     - build
     - starts_with("build_")
