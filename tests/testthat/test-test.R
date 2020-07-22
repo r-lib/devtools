@@ -28,11 +28,6 @@ test_that("Filtering works with devtools::test", {
 })
 
 test_that("devtools::test_file works", {
-  expect_error(
-    test_test_file(test_path("testTest/DESCRIPTION")),
-    "are not valid R or src files"
-  )
-
   out <- test_test_file(test_path("testTest/tests/testthat/test-dummy.R"))
   expect_equal(length(out), 1)
 })

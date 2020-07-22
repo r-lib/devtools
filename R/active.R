@@ -5,46 +5,40 @@ find_active_file <- function(arg = "file") {
   rstudioapi::getSourceEditorContext()$path
 }
 
-find_test_file <- function(file) {
-  dir <- tolower(basename(dirname(file)))
-  switch(dir,
-    r = find_test_file_r(file),
-    src = find_test_file_src(file),
-    stop("Open file is not in `R/` or `src/` directories", call. = FALSE)
-  )
+find_test_file <- function(path) {
+  type <- test_file_type(path)
+  if (any(is.na(type))) {
+    rlang::abort(c("Don't know how to find tests for: ", path[is.na(type)]))
+  }
+
+  is_test <- type == "test"
+  path[!is_test] <- paste0("tests/testthat/test-", name_source(path[!is_test]), ".R")
+  path <- unique(path[file.exists(path)])
+
+  if (length(path) == 0) {
+    rlang::abort("No test files found")
+  }
+  path
 }
 
-find_test_file_r <- function(file) {
-  if (!grepl("\\.[Rr]$", file)) {
-    stop("Open file is does not end in `.R`", call. = FALSE)
-  }
+test_file_type <- function(path) {
+  dir <- basename(dirname(path))
+  name <- basename(path)
+  ext <- tolower(tools::file_ext(path))
 
-  file.path("tests", "testthat", paste0("test-", basename(file)))
+  src_ext <- c("c", "cc", "cpp", "cxx", "h", "hpp", "hxx")
+
+  type <- rep(NA_character_, length(path))
+  type[dir == "R" & ext == "r"] <- "R"
+  type[dir == "testthat" & ext == "r" & grepl("^test", name)] <- "test"
+  type[dir == "src" & ext %in% src_ext] <- "src"
+  type
 }
 
-src_ext <- c("c", "cc", "cpp", "cxx", "h", "hpp", "hxx")
-
-find_test_file_src <- function(file) {
-  ext <- tolower(tools::file_ext(file))
-  if (!ext %in% src_ext) {
-    stop(paste0(
-        "Open file is does not end in a valid extension:\n",
-        "* Must be one of ", paste0("`.", src_ext, "`", collapse = ", ")), call. = FALSE)
-  }
-
-  file.path("tests", "testthat", paste0("test-", basename(tools::file_path_sans_ext(file)), ".R"))
+# Figure out "name" of a test or source file
+name_test <- function(path) {
+  gsub("^test[-_]", "", name_source(path))
 }
-
-find_source_file <- function(file) {
-  dir <- basename(dirname(file))
-
-  if (dir != "testthat") {
-    stop("Open file not in `tests/testthat/` directory", call. = FALSE)
-  }
-
-  if (!grepl("\\.[Rr]$", file)) {
-    stop("Open file is does not end in `.R`", call. = FALSE)
-  }
-
-  file.path("R", gsub("^test-", "", basename(file)))
+name_source <- function(path) {
+  tools::file_path_sans_ext(basename(path))
 }
