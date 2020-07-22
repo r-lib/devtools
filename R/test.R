@@ -1,17 +1,16 @@
-#' Execute \pkg{test_that} tests in a package.
+#' Execute testthat tests in a package
 #'
-#' `test()` is a shortcut for [testthat::test_dir()], it runs all of a
-#'   package's tests.
-#' `test_file` runs `test()` on the active file.
-#' `test_coverage()` computes test coverage for your package. It is a shortcut
-#'   for [covr::package_coverage()] and [covr::report()].
-#' `test_coverage_file()` computes test coverage for the active file. Is a
-#'   shortcut for [covr::file_coverage()] and [covr::report()].
+#' @description
+#' * `test()` runs all tests in a package. It's a shortcut for
+#'   [testthat::test_dir()]
+#' * `test_file()` runs `test()` on the active file.
+#' * `test_coverage()` computes test coverage for your package. It's a
+#'   shortcut for [covr::package_coverage()] plus [covr::report()].
+#' * `test_coverage_file()` computes test coverage for the active file. It's a
+#'   shortcut for [covr::file_coverage()] plus [covr::report()].
 #'
-#' @md
 #' @template devtools
-#' @param ... additional arguments passed to [testthat::test_dir()] and
-#'   [covr::package_coverage()]
+#' @param ... additional arguments passed to wrapped functions.
 #' @param file One or more source or test files. If a source file the
 #'   corresponding test file will be run. The default is to use the active file
 #'   in RStudio (if available).
@@ -40,50 +39,6 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
   )
 }
 
-#' @param show_report Show the test coverage report.
-#' @export
-#' @rdname test
-# we now depend on DT in devtools so DT is installed when users call test_coverage
-test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
-  # This is just here to avoid a R CMD check NOTE about unused dependencies
-  DT::datatable
-
-  pkg <- as.package(pkg)
-
-  save_all()
-
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
-
-  withr::local_envvar(r_env_vars())
-  testthat::local_test_directory(pkg$path, pkg$package)
-
-  coverage <- covr::package_coverage(pkg$path, ...)
-
-  if (isTRUE(show_report)) {
-    covr::report(coverage)
-  }
-
-  invisible(coverage)
-}
-
-
-
-#' @inheritParams test
-#' @rdname test
-#' @export
-uses_testthat <- function(pkg = ".") {
-  pkg <- as.package(pkg)
-
-  paths <- c(
-    file.path(pkg$path, "inst", "tests"),
-    file.path(pkg$path, "tests", "testthat")
-  )
-
-  any(dir.exists(paths))
-}
-
-src_ext <- c("c", "cc", "cpp", "cxx", "h", "hpp", "hxx")
-
 #' @export
 #' @rdname test
 test_file <- function(file = find_active_file(), ...) {
@@ -109,53 +64,30 @@ test_file <- function(file = find_active_file(), ...) {
   return(testthat::test_file(test_files, ...))
 }
 
-find_active_file <- function(arg = "file") {
-  if (!rstudioapi::isAvailable()) {
-    stop("Argument `", arg, "` is missing, with no default", call. = FALSE)
-  }
-  rstudioapi::getSourceEditorContext()$path
-}
+#' @param show_report Show the test coverage report.
+#' @export
+#' @rdname test
+# we now depend on DT in devtools so DT is installed when users call test_coverage
+test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
+  # This is just here to avoid a R CMD check NOTE about unused dependencies
+  DT::datatable
 
-find_test_file <- function(file) {
-  dir <- tolower(basename(dirname(file)))
-  switch(dir,
-    r = find_test_file_r(file),
-    src = find_test_file_src(file),
-    stop("Open file is not in `R/` or `src/` directories", call. = FALSE)
-  )
-}
+  pkg <- as.package(pkg)
 
-find_test_file_r <- function(file) {
-  if (!grepl("\\.[Rr]$", file)) {
-    stop("Open file is does not end in `.R`", call. = FALSE)
-  }
+  save_all()
 
-  file.path("tests", "testthat", paste0("test-", basename(file)))
-}
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-find_test_file_src <- function(file) {
-  ext <- tolower(tools::file_ext(file))
-  if (!ext %in% src_ext) {
-    stop(paste0(
-        "Open file is does not end in a valid extension:\n",
-        "* Must be one of ", paste0("`.", src_ext, "`", collapse = ", ")), call. = FALSE)
+  withr::local_envvar(r_env_vars())
+  testthat::local_test_directory(pkg$path, pkg$package)
+
+  coverage <- covr::package_coverage(pkg$path, ...)
+
+  if (isTRUE(show_report)) {
+    covr::report(coverage)
   }
 
-  file.path("tests", "testthat", paste0("test-", basename(tools::file_path_sans_ext(file)), ".R"))
-}
-
-find_source_file <- function(file) {
-  dir <- basename(dirname(file))
-
-  if (dir != "testthat") {
-    stop("Open file not in `tests/testthat/` directory", call. = FALSE)
-  }
-
-  if (!grepl("\\.[Rr]$", file)) {
-    stop("Open file is does not end in `.R`", call. = FALSE)
-  }
-
-  file.path("R", gsub("^test-", "", basename(file)))
+  invisible(coverage)
 }
 
 #' @rdname test
@@ -210,4 +142,21 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
   }
 
   invisible(coverage)
+}
+
+
+
+#' Does a package use testthat?
+#'
+#' @export
+#' @keywords internal
+uses_testthat <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+
+  paths <- c(
+    file.path(pkg$path, "inst", "tests"),
+    file.path(pkg$path, "tests", "testthat")
+  )
+
+  any(dir.exists(paths))
 }
