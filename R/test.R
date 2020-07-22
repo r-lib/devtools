@@ -21,7 +21,6 @@
 test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...) {
   save_all()
   pkg <- as.package(pkg)
-  message("Testing ", pkg$package)
 
   if (!uses_testthat(pkg) && interactive()) {
     message("No testing infrastructure found. Create it?")
@@ -31,6 +30,9 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
     return(invisible())
   }
 
+  load_all(pkg$path, quiet = TRUE)
+
+  message("Testing ", pkg$package)
   testthat::test_local(
     pkg$path,
     filter = filter,
