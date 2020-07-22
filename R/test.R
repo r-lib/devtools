@@ -20,8 +20,8 @@
 #' @export
 test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...) {
   save_all()
-
   pkg <- as.package(pkg)
+  message("Testing ", pkg$package)
 
   if (!uses_testthat(pkg) && interactive()) {
     message("No testing infrastructure found. Create it?")
@@ -60,9 +60,7 @@ test_file <- function(file = find_active_file(), ...) {
   ))
 
   pkg <- as.package(dirname(file)[[1]])
-  if (pkg$package != "devtools") {
-    load_all(pkg$path, quiet = TRUE)
-  }
+  load_all(pkg$path, quiet = TRUE)
   testthat::test_file(test_files, ...)
 }
 
@@ -74,9 +72,9 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   # This is just here to avoid a R CMD check NOTE about unused dependencies
   DT::datatable
 
-  pkg <- as.package(pkg)
-
   save_all()
+  pkg <- as.package(pkg)
+  message("Computing test coverage for ", pkg$package)
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
