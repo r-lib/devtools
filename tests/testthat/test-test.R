@@ -2,7 +2,8 @@ test_test <- function(...) {
   suppressMessages(test(..., reporter = "silent"))
 }
 test_test_file <- function(...) {
-  suppressMessages(test_file(..., reporter = "silent"))
+  # Avoid accidentally using testthat::test_file()
+  suppressMessages(devtools::test_file(..., reporter = "silent"))
 }
 
 test_that("Package can be tested with testthat not on search path", {
@@ -28,7 +29,7 @@ test_that("Filtering works with devtools::test", {
 
 test_that("devtools::test_file works", {
   expect_error(
-    test_file(test_path("testTest/DESCRIPTION")),
+    test_test_file(test_path("testTest/DESCRIPTION")),
     "are not valid R or src files"
   )
 

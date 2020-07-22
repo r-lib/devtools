@@ -60,8 +60,10 @@ test_file <- function(file = find_active_file(), ...) {
   ))
 
   pkg <- as.package(dirname(file)[[1]])
-  load_all(pkg$path, quiet = TRUE)
-  return(testthat::test_file(test_files, ...))
+  if (pkg$package != "devtools") {
+    load_all(pkg$path, quiet = TRUE)
+  }
+  testthat::test_file(test_files, ...)
 }
 
 #' @param show_report Show the test coverage report.
