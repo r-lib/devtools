@@ -30,7 +30,7 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
     return(invisible())
   }
 
-  load_all(pkg$path, quiet = TRUE)
+  load_all(pkg$path)
 
   message("Testing ", pkg$package)
   testthat::test_local(
