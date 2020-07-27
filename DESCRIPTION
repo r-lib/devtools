@@ -59,7 +59,6 @@ Suggests:
     lintr (>= 2.0.1),
     MASS,
     mockery (>= 0.4.2),
-    pingr (>= 2.0.1),
     pkgdown (>= 1.5.1),
     rhub (>= 1.1.1),
     rmarkdown (>= 2.3),

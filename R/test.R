@@ -26,7 +26,7 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
 
   if (!uses_testthat(pkg) && interactive()) {
     message("No testing infrastructure found. Create it?")
-    if (menu(c("Yes", "No")) == 1) {
+    if (utils::menu(c("Yes", "No")) == 1) {
       usethis_use_testthat(pkg)
     }
     return(invisible())

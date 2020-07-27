@@ -122,10 +122,6 @@ clean_vignettes <- function(pkg = ".") {
   invisible(TRUE)
 }
 
-ext_variations <- function(path, valid_ext) {
-  unique(c(outer(file_name(path), valid_ext, FUN = paste, sep = ".")))
-}
-
 file_name <- function(x) {
   if (length(x) == 0) return(NULL)
   tools::file_path_sans_ext(basename(x))

@@ -119,6 +119,10 @@ check_remotes <- function(pkg) {
   )
 }
 
+has_dev_remotes <- function(pkg) {
+  !is.null(pkg[["remotes"]])
+}
+
 check_status <- function(status, name, warning) {
   cat("Checking ", name, "...", sep = "")
 
