@@ -26,6 +26,7 @@ as.package <- function(x = NULL, create = NA) {
 #'
 #' @param ... Components of the path.
 #' @param path Place to start search for package directory.
+#' @keywords internal
 #' @export
 #' @examples
 #' \dontrun{

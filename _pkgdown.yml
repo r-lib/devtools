@@ -6,22 +6,19 @@ template:
 
 reference:
   - title: Package Development
-    description: Primary commands used when developing a package.
+    desc: Primary commands used when developing a package.
     contents:
     - build
-    - starts_with("check_")
     - starts_with("build_")
-    - document
+    - starts_with("check_")
     - check
     - create
+    - document
     - load_all
-    - starts_with("package")
-    - ends_with("package")
     - reload
     - release
-    - revdep
-    - test
     - spell_check
+    - test
   - title: Package Installation
     contents:
     - starts_with("install")
@@ -43,23 +40,9 @@ reference:
     - wd
     - save_all
 
-navbar:
-  title: ~
-  type: default
-  left:
-  - text: Reference
-    href: reference/index.html
-  - text: Articles
-    menu:
-    - text: Remote development dependencies
-      href: articles/dependencies.html
-  - text: News
-    menu:
-    - text: "Release notes"
-    - text: "Version 2.2.1"
-      href: https://www.tidyverse.org/articles/2019/09/devtools-2-2-1/
-    - text: "Version 2.0.0"
-      href: https://www.tidyverse.org/articles/2018/10/devtools-2-0-0/
-    - text: "------------------"
-    - text: "Change log"
-      href: news/index.html
+news:
+  releases:
+  - text: "Version 2.2.1"
+    href: https://www.tidyverse.org/articles/2019/09/devtools-2-2-1/
+  - text: "Version 2.0.0"
+    href: https://www.tidyverse.org/articles/2018/10/devtools-2-0-0/
