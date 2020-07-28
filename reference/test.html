@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Execute <span class="pkg">test_that</span> tests in a package. — test • devtools</title>
+<title>Execute testthat tests in a package — test • devtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,14 +46,18 @@
 
 
 
-<meta property="og:title" content="Execute <span class="pkg">test_that</span> tests in a package. — test" />
-<meta property="og:description" content="test() is a shortcut for testthat::test_dir(), it runs all of a
-package's tests.
-test_file runs test() on the active file.
-test_coverage() computes test coverage for your package. It is a shortcut
-for covr::package_coverage() and covr::report().
-test_coverage_file() computes test coverage for the active file. Is a
-shortcut for covr::file_coverage() and covr::report()." />
+<meta property="og:title" content="Execute testthat tests in a package — test" />
+<meta property="og:description" content="
+
+test() runs all tests in a package. It's a shortcut for
+testthat::test_dir()
+test_file() runs test() on the active file.
+test_coverage() computes test coverage for your package. It's a
+shortcut for covr::package_coverage() plus covr::report().
+test_coverage_file() computes test coverage for the active file. It's a
+shortcut for covr::file_coverage() plus covr::report().
+
+" />
 <meta property="og:image" content="https://devtools.r-lib.org/logo.svg" />
 
 
@@ -164,28 +168,30 @@ shortcut for covr::file_coverage() and covr::report()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Execute <span class="pkg">test_that</span> tests in a package.</h1>
+    <h1>Execute testthat tests in a package</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/test.R'><code>R/test.R</code></a></small>
     <div class="hidden name"><code>test.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>test()</code> is a shortcut for <code><a href='https://testthat.r-lib.org/reference/test_dir.html'>testthat::test_dir()</a></code>, it runs all of a
-package's tests.
-<code>test_file</code> runs <code>test()</code> on the active file.
-<code>test_coverage()</code> computes test coverage for your package. It is a shortcut
-for <code><a href='http://covr.r-lib.org/reference/package_coverage.html'>covr::package_coverage()</a></code> and <code><a href='http://covr.r-lib.org/reference/report.html'>covr::report()</a></code>.
-<code>test_coverage_file()</code> computes test coverage for the active file. Is a
-shortcut for <code><a href='http://covr.r-lib.org/reference/file_coverage.html'>covr::file_coverage()</a></code> and <code><a href='http://covr.r-lib.org/reference/report.html'>covr::report()</a></code>.</p>
+    
+<ul>
+<li><p><code>test()</code> runs all tests in a package. It's a shortcut for
+<code><a href='https://testthat.r-lib.org/reference/test_dir.html'>testthat::test_dir()</a></code></p></li>
+<li><p><code>test_file()</code> runs <code>test()</code> on the active file.</p></li>
+<li><p><code>test_coverage()</code> computes test coverage for your package. It's a
+shortcut for <code><a href='http://covr.r-lib.org/reference/package_coverage.html'>covr::package_coverage()</a></code> plus <code><a href='http://covr.r-lib.org/reference/report.html'>covr::report()</a></code>.</p></li>
+<li><p><code>test_coverage_file()</code> computes test coverage for the active file. It's a
+shortcut for <code><a href='http://covr.r-lib.org/reference/file_coverage.html'>covr::file_coverage()</a></code> plus <code><a href='http://covr.r-lib.org/reference/report.html'>covr::report()</a></code>.</p></li>
+</ul>
+
     </div>
 
     <pre class="usage"><span class='fu'>test</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>filter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stop_on_failure</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
-<span class='fu'>test_coverage</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>show_report</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(), <span class='no'>...</span>)
-
-<span class='fu'>uses_testthat</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)
-
 <span class='fu'>test_file</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>find_active_file</span>(), <span class='no'>...</span>)
+
+<span class='fu'>test_coverage</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>show_report</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(), <span class='no'>...</span>)
 
 <span class='fu'>test_coverage_file</span>(
   <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>find_active_file</span>(),
@@ -221,18 +227,17 @@ in the NAMESPACE file.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional arguments passed to <code><a href='https://testthat.r-lib.org/reference/test_dir.html'>testthat::test_dir()</a></code> and
-<code><a href='http://covr.r-lib.org/reference/package_coverage.html'>covr::package_coverage()</a></code></p></td>
-    </tr>
-    <tr>
-      <th>show_report</th>
-      <td><p>Show the test coverage report.</p></td>
+      <td><p>additional arguments passed to wrapped functions.</p></td>
     </tr>
     <tr>
       <th>file</th>
       <td><p>One or more source or test files. If a source file the
 corresponding test file will be run. The default is to use the active file
 in RStudio (if available).</p></td>
+    </tr>
+    <tr>
+      <th>show_report</th>
+      <td><p>Show the test coverage report.</p></td>
     </tr>
     </table>
 

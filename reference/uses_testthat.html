@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return the path to one of the packages in the devtools test dir — devtest • devtools</title>
+<title>Does a package use testthat? — uses_testthat • devtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Return the path to one of the packages in the devtools test dir — devtest" />
-<meta property="og:description" content="Devtools comes with some simple packages for testing. This function
-returns the path to them." />
+<meta property="og:title" content="Does a package use testthat? — uses_testthat" />
+<meta property="og:description" content="Does a package use testthat?" />
 <meta property="og:image" content="https://devtools.r-lib.org/logo.svg" />
 
 
@@ -159,32 +158,19 @@ returns the path to them." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return the path to one of the packages in the devtools test dir</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>devtest.Rd</code></div>
+    <h1>Does a package use testthat?</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/test.R'><code>R/test.R</code></a></small>
+    <div class="hidden name"><code>uses_testthat.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Devtools comes with some simple packages for testing. This function
-returns the path to them.</p>
+    <p>Does a package use testthat?</p>
     </div>
 
-    <pre class="usage"><span class='fu'>devtest</span>(<span class='no'>package</span>)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>package</th>
-      <td><p>Name of the test package.</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='fu'>uses_testthat</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='has_tests.html'>has_tests</a></span>()) {
-<span class='fu'>devtest</span>(<span class='st'>"testUseData"</span>)
-}</div></pre>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
