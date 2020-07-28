@@ -1,6 +1,10 @@
 test_test <- function(...) {
   suppressMessages(test(..., reporter = "silent"))
 }
+test_test_file <- function(...) {
+  # Avoid accidentally using testthat::test_file()
+  suppressMessages(devtools::test_file(..., reporter = "silent"))
+}
 
 test_that("Package can be tested with testthat not on search path", {
   pkg1 <- test_path("testTest")
@@ -24,14 +28,8 @@ test_that("Filtering works with devtools::test", {
 })
 
 test_that("devtools::test_file works", {
-  expect_error(test_file("testTest/DESCRIPTION"), "are not valid R or src files")
-  suppressMessages(
-    test_file("testTest/tests/testthat/test-dummy.R", pkg = "testTest", reporter = "silent")
-  )
-  suppressMessages(
-    test_file("testTest/R/dummy.R", pkg = "testTest", reporter = "silent")
-  )
-  expect_true(TRUE)
+  out <- test_test_file(test_path("testTest/tests/testthat/test-dummy.R"))
+  expect_equal(length(out), 1)
 })
 
 test_that("TESTTHAT_PKG environment varaible is set", {

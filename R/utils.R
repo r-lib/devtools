@@ -57,3 +57,24 @@ release_bullets <- function() {
     NULL
   )
 }
+
+#' Return the path to one of the packages in the devtools test dir
+#'
+#' Devtools comes with some simple packages for testing. This function
+#' returns the path to them.
+#'
+#' @param package Name of the test package.
+#' @keywords internal
+#' @examples
+#' if (has_tests()) {
+#' devtest("testUseData")
+#' }
+#' @export
+devtest <- function(package) {
+  stopifnot(has_tests())
+
+  path <- system.file(package = "devtools", "tests", "testthat", package)
+  if (path == "") stop(package, " not found", call. = FALSE)
+
+  path
+}

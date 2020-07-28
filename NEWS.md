@@ -1,5 +1,10 @@
 # devtools (development version)
 
+* Now uses (what will become) testthat 3.0.0 to power `test()`, `test_file()`,
+  `test_coverage()`, and `test_coverage_file()`. The major difference is that
+  `test_file()` now generates a compact summary that takes up less space on
+   the console.
+
 # devtools 2.3.1
 
 * `run_examples()` arguments `run` and `test` are deprecated in favor of the (hopefully) more clear `run_dontrun` and `run_donttest` (pkgload/#107).
