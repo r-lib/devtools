@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* The internal `devtest()` function has been removed.
+
 * Now uses (what will become) testthat 3.0.0 to power `test()`, `test_file()`,
   `test_coverage()`, and `test_coverage_file()`. The major difference is that
   `test_file()` now generates a compact summary that takes up less space on
