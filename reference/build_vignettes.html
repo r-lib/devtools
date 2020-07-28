@@ -98,13 +98,19 @@ loaded with load_all() without needing to re-build them locally." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -115,7 +121,7 @@ loaded with load_all() without needing to re-build them locally." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dependencies.html">Remote development dependencies</a>
+      <a href="../articles/dependencies.html">Devtools dependencies</a>
     </li>
   </ul>
 </li>
@@ -126,7 +132,7 @@ loaded with load_all() without needing to re-build them locally." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/09/devtools-2-2-1/">Version 2.2.1</a>
     </li>
@@ -135,7 +141,7 @@ loaded with load_all() without needing to re-build them locally." />
     </li>
     <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
@@ -174,17 +180,17 @@ would be in a built package. 'doc' and 'Meta' are added to
 <code>.Rbuildignore</code>, so will not be included in the built package. These
 files can be checked into version control, so they can be viewed with
 <code><a href='https://rdrr.io/r/utils/browseVignettes.html'>browseVignettes()</a></code> and <code>vignette()</code> if the package has been
-loaded with <code>load_all()</code> without needing to re-build them locally.</p>
+loaded with <code><a href='load_all.html'>load_all()</a></code> without needing to re-build them locally.</p>
     </div>
 
     <pre class="usage"><span class='fu'>build_vignettes</span>(
-  pkg = <span class='st'>"."</span>,
-  dependencies = <span class='st'>"VignetteBuilder"</span>,
-  clean = <span class='fl'>TRUE</span>,
-  upgrade = <span class='st'>"never"</span>,
-  quiet = <span class='fl'>TRUE</span>,
-  install = <span class='fl'>TRUE</span>,
-  keep_md = <span class='fl'>TRUE</span>
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='st'>"VignetteBuilder"</span>,
+  <span class='kw'>clean</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='st'>"never"</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>install</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>keep_md</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -193,7 +199,7 @@ loaded with <code>load_all()</code> without needing to re-build them locally.</p
     <tr>
       <th>pkg</th>
       <td><p>The package to use, can be a file path to the package or a
-package object.  See <code>as.package()</code> for more information.</p></td>
+package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
     </tr>
     <tr>
       <th>dependencies</th>
@@ -203,7 +209,13 @@ Can be a character vector (selecting from "Depends", "Imports",
 <p><code>TRUE</code> is shorthand for "Depends", "Imports", "LinkingTo" and
 "Suggests". <code>NA</code> is shorthand for "Depends", "Imports" and "LinkingTo"
 and is the default. <code>FALSE</code> is shorthand for no dependencies (i.e.
-just check this package, not its dependencies).</p></td>
+just check this package, not its dependencies).</p>
+<p>The value "soft" means the same as <code>TRUE</code>, "hard" means the same as <code>NA</code>.</p>
+<p>You can also specify dependencies from one or more additional fields,
+common ones include:</p><ul>
+<li><p>Config/Needs/website - for dependencies used in building the pkgdown site.</p></li>
+<li><p>Config/Needs/coverage for dependencies used in calculating test coverage.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>clean</th>
@@ -240,9 +252,9 @@ outputs. See
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>clean_vignettes()</code> to remove the pdfs in
+    <div class='dont-index'><p><code><a href='clean_vignettes.html'>clean_vignettes()</a></code> to remove the pdfs in
 <code class="file">doc</code> created from vignettes</p>
-<p><code>clean_vignettes()</code> to remove build tex/pdf files.</p></div>
+<p><code><a href='clean_vignettes.html'>clean_vignettes()</a></code> to remove build tex/pdf files.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -259,7 +271,7 @@ outputs. See
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

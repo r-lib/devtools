@@ -92,13 +92,19 @@ install the development dependencies needed to test and build the package." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -109,7 +115,7 @@ install the development dependencies needed to test and build the package." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dependencies.html">Remote development dependencies</a>
+      <a href="../articles/dependencies.html">Devtools dependencies</a>
     </li>
   </ul>
 </li>
@@ -120,7 +126,7 @@ install the development dependencies needed to test and build the package." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/09/devtools-2-2-1/">Version 2.2.1</a>
     </li>
@@ -129,7 +135,7 @@ install the development dependencies needed to test and build the package." />
     </li>
     <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
@@ -166,27 +172,27 @@ install the development dependencies needed to test and build the package.</p>
     </div>
 
     <pre class="usage"><span class='fu'>install_deps</span>(
-  pkg = <span class='st'>"."</span>,
-  dependencies = <span class='fl'>NA</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='fl'>TRUE</span>,
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>" --no-build-vignettes"</span>),
-  <span class='kw'>...</span>
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>" --no-build-vignettes"</span>),
+  <span class='no'>...</span>
 )
 
 <span class='fu'>install_dev_deps</span>(
-  pkg = <span class='st'>"."</span>,
-  dependencies = <span class='fl'>TRUE</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='fl'>TRUE</span>,
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>" --no-build-vignettes"</span>),
-  <span class='kw'>...</span>
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>repos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
+  <span class='kw'>upgrade</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>build</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>build_opts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>" --no-build-vignettes"</span>),
+  <span class='no'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -195,7 +201,7 @@ install the development dependencies needed to test and build the package.</p>
     <tr>
       <th>pkg</th>
       <td><p>The package to use, can be a file path to the package or a
-package object.  See <code>as.package()</code> for more information.</p></td>
+package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
     </tr>
     <tr>
       <th>dependencies</th>
@@ -205,7 +211,13 @@ Can be a character vector (selecting from "Depends", "Imports",
 <p><code>TRUE</code> is shorthand for "Depends", "Imports", "LinkingTo" and
 "Suggests". <code>NA</code> is shorthand for "Depends", "Imports" and "LinkingTo"
 and is the default. <code>FALSE</code> is shorthand for no dependencies (i.e.
-just check this package, not its dependencies).</p></td>
+just check this package, not its dependencies).</p>
+<p>The value "soft" means the same as <code>TRUE</code>, "hard" means the same as <code>NA</code>.</p>
+<p>You can also specify dependencies from one or more additional fields,
+common ones include:</p><ul>
+<li><p>Config/Needs/website - for dependencies used in building the pkgdown site.</p></li>
+<li><p>Config/Needs/coverage for dependencies used in calculating test coverage.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>repos</th>
@@ -249,7 +261,7 @@ when installing dependencies.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'>install_deps</span>(<span class='st'>"."</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'>install_deps</span>(<span class='st'>"."</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -265,7 +277,7 @@ when installing dependencies.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

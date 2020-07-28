@@ -1,8 +1,9 @@
 pandoc: 2.7.3
-pkgdown: 1.5.1.9000
-pkgdown_sha: caf7cc74e008e8d0d6e53eeda93cd3cad3545bf2
-articles: []
-last_built: 2020-06-29T12:34Z
+pkgdown: 1.5.1
+pkgdown_sha: ~
+articles:
+  dependencies: dependencies.html
+last_built: 2020-07-28T18:12Z
 urls:
   reference: https://devtools.r-lib.org//reference
   article: https://devtools.r-lib.org//articles

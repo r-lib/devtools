@@ -89,13 +89,19 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -106,7 +112,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dependencies.html">Remote development dependencies</a>
+      <a href="../articles/dependencies.html">Devtools dependencies</a>
     </li>
   </ul>
 </li>
@@ -117,7 +123,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/09/devtools-2-2-1/">Version 2.2.1</a>
     </li>
@@ -126,7 +132,7 @@
     </li>
     <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
@@ -159,9 +165,15 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
 </h1>
+</div>
+    <div id="devtools-231" class="section level1">
+<h1 class="page-header" data-toc-text="2.3.1">
+<a href="#devtools-231" class="anchor"></a>devtools 2.3.1<small> 2020-07-21 </small>
+</h1>
 <ul>
-<li>
-<code>run_examples()</code> arguments <code>run</code> and <code>test</code> are deprecated in favor of the (hopefully) more clear <code>run_dontrun</code> and <code>run_donttest</code> (pkgload/<a href='https://github.com/r-lib/devtools/issues/107'>#107</a>).</li>
+<li><p><code><a href="../reference/run_examples.html">run_examples()</a></code> arguments <code>run</code> and <code>test</code> are deprecated in favor of the (hopefully) more clear <code>run_dontrun</code> and <code>run_donttest</code> (pkgload/<a href='https://github.com/r-lib/devtools/issues/107'>#107</a>).</p></li>
+<li><p>Previously deprecated functions <code>dr_devtools()</code> and <code>dr_github()</code> have been removed.</p></li>
+<li><p>Documentation has been synced with remotes 2.2.0</p></li>
 </ul>
 </div>
     <div id="devtools-230" class="section level1">
@@ -169,9 +181,9 @@
 <a href="#devtools-230" class="anchor"></a>devtools 2.3.0<small> 2020-04-10 </small>
 </h1>
 <ul>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code> now errors with a more informative error message when passed an invalid <code>pkg</code>. (<a href='https://github.com/r-lib/devtools/issues/2177'>#2177</a>)</p></li>
-<li><p>New <code>build_rmd()</code> can build any <code>.Rmd</code> file in a clean session.</p></li>
-<li><p><code>dev_sitrep()</code> now works correctly when R is out of date (<a href='https://github.com/r-lib/devtools/issues/2204'>#2204</a>)</p></li>
+<li><p><code><a href="../reference/build.html">build()</a></code> now errors with a more informative error message when passed an invalid <code>pkg</code>. (<a href='https://github.com/r-lib/devtools/issues/2177'>#2177</a>)</p></li>
+<li><p>New <code><a href="../reference/build_rmd.html">build_rmd()</a></code> can build any <code>.Rmd</code> file in a clean session.</p></li>
+<li><p><code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> now works correctly when R is out of date (<a href='https://github.com/r-lib/devtools/issues/2204'>#2204</a>)</p></li>
 </ul>
 </div>
     <div id="devtools-222" class="section level1">
@@ -179,17 +191,17 @@
 <a href="#devtools-222" class="anchor"></a>devtools 2.2.2<small> 2020-02-17 </small>
 </h1>
 <ul>
-<li><p><code>install_dev_deps()</code> now passes formal args onto <code><a href="https://remotes.r-lib.org/reference/install_deps.html">remotes::install_deps()</a></code> (<a href='https://github.com/t-gibson'>@t-gibson</a>, <a href='https://github.com/r-lib/devtools/issues/2166'>#2166</a>)</p></li>
-<li><p><code>spell_check()</code> now checks if <code>spelling</code> is installed and prompts users to install it if not (<a href='https://github.com/mikemahoney218'>@mikemahoney218</a>, <a href='https://github.com/r-lib/devtools/issues/2172'>#2172</a>)</p></li>
-<li><p><code>submit_cran()</code> now returns a more informative error when the CRAN submission portal is down (<a href='https://github.com/r-lib/devtools/issues/1958'>#1958</a>)</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> gains a <code>vignettes</code> argument, to more easily disable checks for vignettes (<a href='https://github.com/r-lib/devtools/issues/2165'>#2165</a>).</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_dev_deps()</a></code> now passes formal args onto <code><a href="https://remotes.r-lib.org/reference/install_deps.html">remotes::install_deps()</a></code> (<a href='https://github.com/t-gibson'>@t-gibson</a>, <a href='https://github.com/r-lib/devtools/issues/2166'>#2166</a>)</p></li>
+<li><p><code><a href="../reference/spell_check.html">spell_check()</a></code> now checks if <code>spelling</code> is installed and prompts users to install it if not (<a href='https://github.com/mikemahoney218'>@mikemahoney218</a>, <a href='https://github.com/r-lib/devtools/issues/2172'>#2172</a>)</p></li>
+<li><p><code><a href="../reference/submit_cran.html">submit_cran()</a></code> now returns a more informative error when the CRAN submission portal is down (<a href='https://github.com/r-lib/devtools/issues/1958'>#1958</a>)</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> gains a <code>vignettes</code> argument, to more easily disable checks for vignettes (<a href='https://github.com/r-lib/devtools/issues/2165'>#2165</a>).</p></li>
 <li><p><code>check_win_*()</code> function now resets the email to the original email after execution (<a href='https://github.com/muschellij2'>@muschellij2</a>, <a href='https://github.com/r-lib/devtools/issues/2152'>#2152</a>).</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> now sets <code>NOT_CRAN=true</code> by default, as was originally intended (<a href='https://github.com/r-lib/devtools/issues/2135'>#2135</a>).</p></li>
-<li><p><code>install_deps()</code> now supports <code><a href="https://rdrr.io/r/base/options.html">options("devtools.ellipsis_action")</a></code> as well (<a href='https://github.com/r-lib/devtools/issues/2169'>#2169</a>)</p></li>
-<li><p><code>test()</code> now takes <code>stop_on_failure</code> as a formal argument (FALSE by default) instead of in <code>...</code>. Its value is still passed to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir</a></code> as before (<a href='https://github.com/infotroph'>@infotroph</a>, <a href='https://github.com/r-lib/devtools/issues/2129'>#2129</a>).</p></li>
-<li><p><code>test()</code> and <code>test_coverage_file()</code> gain a <code>export_all</code> argument, which controls if all functions in a package are automatically exported (<a href='https://github.com/r-lib/devtools/issues/1201'>#1201</a>).</p></li>
-<li><p><code>dev_sitrep()</code> now works if run outside a package directory (<a href='https://github.com/r-lib/devtools/issues/2127'>#2127</a>).</p></li>
-<li><p><code>release()</code> now works if the package root is not in the working directory.</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now sets <code>NOT_CRAN=true</code> by default, as was originally intended (<a href='https://github.com/r-lib/devtools/issues/2135'>#2135</a>).</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_deps()</a></code> now supports <code><a href="https://rdrr.io/r/base/options.html">options("devtools.ellipsis_action")</a></code> as well (<a href='https://github.com/r-lib/devtools/issues/2169'>#2169</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> now takes <code>stop_on_failure</code> as a formal argument (FALSE by default) instead of in <code>...</code>. Its value is still passed to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir</a></code> as before (<a href='https://github.com/infotroph'>@infotroph</a>, <a href='https://github.com/r-lib/devtools/issues/2129'>#2129</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> gain a <code>export_all</code> argument, which controls if all functions in a package are automatically exported (<a href='https://github.com/r-lib/devtools/issues/1201'>#1201</a>).</p></li>
+<li><p><code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> now works if run outside a package directory (<a href='https://github.com/r-lib/devtools/issues/2127'>#2127</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> now works if the package root is not in the working directory.</p></li>
 </ul>
 </div>
     <div id="devtools-221" class="section level1">
@@ -197,7 +209,7 @@
 <a href="#devtools-221" class="anchor"></a>devtools 2.2.1<small> 2019-09-24 </small>
 </h1>
 <ul>
-<li><p><code>test()</code> now sets the collation order to <code>C</code> before running, which matches the behavior of tests when run with <code>R CMD check</code> (<a href='https://github.com/r-lib/devtools/issues/2121'>#2121</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> now sets the collation order to <code>C</code> before running, which matches the behavior of tests when run with <code>R CMD check</code> (<a href='https://github.com/r-lib/devtools/issues/2121'>#2121</a>)</p></li>
 <li>
 <p>New <code><a href="https://rdrr.io/r/base/options.html">options("devtools.ellipsis_action")</a></code> option added to control the action of ellipsis in devtools. This should be one of</p>
 <ul>
@@ -211,10 +223,10 @@
 <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::signal</a></code> - to emit a message if arguments are unused Using <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::signal</a></code> will produce no output unless the custom condition is caught, so it is the best way to retain backwards compatibility with devtools behavior prior to 2.2.0. The default behavior was also changed to issue a warning rather than an error if any arguments are unused, as there are some cases where devtools does not need to install the package, so unused arguments are false positives (<a href='https://github.com/r-lib/devtools/issues/2109'>#2109</a>).</li>
 </ul>
 </li>
-<li><p><code>install()</code> now throws an error when it fails, as intended (<a href='https://github.com/r-lib/devtools/issues/2120'>#2120</a>)</p></li>
-<li><p><code>install()</code> now again reloads and re-attaches packages if they were previously loaded (<a href='https://github.com/r-lib/devtools/issues/2111'>#2111</a>).</p></li>
-<li><p><code>release()</code> no longer calls the deprecated <code>dr_devtools()</code> (<a href='https://github.com/r-lib/devtools/issues/2105'>#2105</a>)</p></li>
-<li><p><code>test()</code> now explicitly passes <code>stop_on_failure = FALSE</code> to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir()</a></code> (<a href='https://github.com/jameslamb'>@jameslamb</a>, <a href='https://github.com/r-lib/devtools/issues/2099'>#2099</a>)</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> now throws an error when it fails, as intended (<a href='https://github.com/r-lib/devtools/issues/2120'>#2120</a>)</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> now again reloads and re-attaches packages if they were previously loaded (<a href='https://github.com/r-lib/devtools/issues/2111'>#2111</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> no longer calls the deprecated <code>dr_devtools()</code> (<a href='https://github.com/r-lib/devtools/issues/2105'>#2105</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> now explicitly passes <code>stop_on_failure = FALSE</code> to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir()</a></code> (<a href='https://github.com/jameslamb'>@jameslamb</a>, <a href='https://github.com/r-lib/devtools/issues/2099'>#2099</a>)</p></li>
 </ul>
 </div>
     <div id="devtools-220" class="section level1">
@@ -225,8 +237,8 @@
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New Features</h2>
 <ul>
-<li><p><code>create()</code> added back, the RStudio IDE uses <code>create()</code> in the create packages dialog, so removing it in version 2.1.0 broke old versions of the IDE.</p></li>
-<li><p>New <code>dev_sitrep()</code> function to return information about your development environment and diagnose common problems. The former functions <code>dr_devtools()</code> and <code>dr_github()</code> have been deprecated. (<a href='https://github.com/r-lib/devtools/issues/1970'>#1970</a>)</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code> added back, the RStudio IDE uses <code><a href="../reference/create.html">create()</a></code> in the create packages dialog, so removing it in version 2.1.0 broke old versions of the IDE.</p></li>
+<li><p>New <code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> function to return information about your development environment and diagnose common problems. The former functions <code>dr_devtools()</code> and <code>dr_github()</code> have been deprecated. (<a href='https://github.com/r-lib/devtools/issues/1970'>#1970</a>)</p></li>
 <li><p>All functions taking <code>...</code> now use the ellipsis package. This catches errors when arguments are misspelled or incorrectly specified (<a href='https://github.com/r-lib/devtools/issues/2016'>#2016</a>)</p></li>
 </ul>
 </div>
@@ -234,18 +246,18 @@
 <h2 class="hasAnchor">
 <a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
-<li><p><code>build_vignettes()</code> now correctly installs the vignette builder if it is not already installed (<a href='https://github.com/r-lib/devtools/issues/2089'>#2089</a>).</p></li>
-<li><p><code>dev_sitrep()</code> now uses the same endpoint to detect the current RStudio version as the IDE (<a href='https://github.com/r-lib/devtools/issues/2050'>#2050</a>).</p></li>
-<li><p><code>document()</code> gains a <code>quiet</code> parameter, to silence output and <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> now passes its quiet argument to it (<a href='https://github.com/r-lib/devtools/issues/1986'>#1986</a>).</p></li>
-<li><p>Add the DT package as a dependency, so that <code>test_coverage()</code> and <code>test_coverage_file()</code> work without having to install additional packages (<a href='https://github.com/r-lib/devtools/issues/2085'>#2085</a>).</p></li>
-<li><p><code>check_man()</code> now succeeds when <code><a href="https://rdrr.io/r/tools/undoc.html">tools::undoc()</a></code> returns empty results (<a href='https://github.com/r-lib/devtools/issues/1944'>#1944</a>).</p></li>
+<li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> now correctly installs the vignette builder if it is not already installed (<a href='https://github.com/r-lib/devtools/issues/2089'>#2089</a>).</p></li>
+<li><p><code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> now uses the same endpoint to detect the current RStudio version as the IDE (<a href='https://github.com/r-lib/devtools/issues/2050'>#2050</a>).</p></li>
+<li><p><code><a href="../reference/document.html">document()</a></code> gains a <code>quiet</code> parameter, to silence output and <code><a href="../reference/check.html">check()</a></code> now passes its quiet argument to it (<a href='https://github.com/r-lib/devtools/issues/1986'>#1986</a>).</p></li>
+<li><p>Add the DT package as a dependency, so that <code><a href="../reference/test.html">test_coverage()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> work without having to install additional packages (<a href='https://github.com/r-lib/devtools/issues/2085'>#2085</a>).</p></li>
+<li><p><code><a href="../reference/check_man.html">check_man()</a></code> now succeeds when <code><a href="https://rdrr.io/r/tools/undoc.html">tools::undoc()</a></code> returns empty results (<a href='https://github.com/r-lib/devtools/issues/1944'>#1944</a>).</p></li>
 <li><p><code>check_win_*()</code> functions gain a <code>email</code> argument, so temporarily change the email the check results will be sent to (<a href='https://github.com/r-lib/devtools/issues/1723'>#1723</a>).</p></li>
-<li><p><code>install()</code> now explicitly unloads packages before trying to install a new version (<a href='https://github.com/r-lib/devtools/issues/2094'>#2094</a>).</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> now explicitly unloads packages before trying to install a new version (<a href='https://github.com/r-lib/devtools/issues/2094'>#2094</a>).</p></li>
 <li><p>All <code>install_*()</code> functions now attach build tools to the PATH, which makes them work on Windows when RTools is not on the default PATH (<a href='https://github.com/r-lib/devtools/issues/2093'>#2093</a>).</p></li>
-<li><p><code>test_coverage_file()</code> now works when there is not a 1 to 1 correspondence between test and source files (<a href='https://github.com/r-lib/devtools/issues/2011'>#2011</a>).</p></li>
-<li><p><code>release()</code> now works again when <code>pkg</code> is not the current working directory (<a href='https://github.com/r-lib/devtools/issues/1974'>#1974</a>).</p></li>
-<li><p><code>release()</code> now works without error when <code><a href="https://rdrr.io/r/base/options.html">options("repos")</a></code> is unnamed (<a href='https://github.com/r-lib/devtools/issues/1956'>#1956</a>).</p></li>
-<li><p><code>create()</code> added, the RStudio IDE uses <code>create()</code>, so removing it in version 2.1.0 broke old versions of the IDE.</p></li>
+<li><p><code><a href="../reference/test.html">test_coverage_file()</a></code> now works when there is not a 1 to 1 correspondence between test and source files (<a href='https://github.com/r-lib/devtools/issues/2011'>#2011</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> now works again when <code>pkg</code> is not the current working directory (<a href='https://github.com/r-lib/devtools/issues/1974'>#1974</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> now works without error when <code><a href="https://rdrr.io/r/base/options.html">options("repos")</a></code> is unnamed (<a href='https://github.com/r-lib/devtools/issues/1956'>#1956</a>).</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code> added, the RStudio IDE uses <code><a href="../reference/create.html">create()</a></code>, so removing it in version 2.1.0 broke old versions of the IDE.</p></li>
 <li><p>In several places <code>http:</code> URLs were used instead of <code>https:</code>, the most critical being in the <code>cran_mirror</code>, <code>cran_pacakges</code>, and <code>cran_submission_url</code> values which could have enabled discrete activity disclosure and person-in-the-middle attacks (i.e. changing the contents while uploading/downloading). All <code>http:</code> URLS have been changed to <code>https:</code> URLs. (<a href='https://github.com/hrbrmstr'>@hrbrmstr</a>, <a href='https://github.com/r-lib/devtools/issues/2091'>#2091</a>)</p></li>
 </ul>
 </div>
@@ -266,11 +278,11 @@
 <h2 class="hasAnchor">
 <a href="#deprecated-functions-now-removed" class="anchor"></a>Deprecated functions now removed</h2>
 <ul>
-<li><p><code>create()</code>, <code>create_description()</code>, <code>setup()</code> <code>use_appveyor()</code>, <code>use_build_ignore()</code>, <code>use_code_of_conduct()</code>, <code>use_coverage()</code>, <code>use_cran_badge()</code>, <code>use_cran_comments()</code>, <code>use_data()</code>, <code>use_data_raw()</code>, <code>use_dev_version()</code>, <code>use_git()</code>, <code>use_git_hook()</code>, <code>use_github()</code>, <code>use_github_links()</code>, <code>use_gpl3_license()</code>, <code>use_mit_license()</code>, <code>use_news_md()</code>, <code>use_package()</code>, <code>use_package_doc()</code>, <code>use_rcpp()</code>, <code>use_readme_md()</code>, <code>use_readme_rmd()</code>, <code>use_revdep()</code>, <code>use_rstudio()</code>, <code>use_test()</code>, <code>use_testthat()</code>, <code>use_travis()</code>, <code>use_vignette()</code>, have been removed after being deprecated in previous releases. Use the versions in the <a href="https://usethis.r-lib.org/">usethis</a> package directly.</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code>, <code>create_description()</code>, <code>setup()</code> <code>use_appveyor()</code>, <code>use_build_ignore()</code>, <code>use_code_of_conduct()</code>, <code>use_coverage()</code>, <code>use_cran_badge()</code>, <code>use_cran_comments()</code>, <code>use_data()</code>, <code>use_data_raw()</code>, <code>use_dev_version()</code>, <code>use_git()</code>, <code>use_git_hook()</code>, <code>use_github()</code>, <code>use_github_links()</code>, <code>use_gpl3_license()</code>, <code>use_mit_license()</code>, <code>use_news_md()</code>, <code>use_package()</code>, <code>use_package_doc()</code>, <code>use_rcpp()</code>, <code>use_readme_md()</code>, <code>use_readme_rmd()</code>, <code>use_revdep()</code>, <code>use_rstudio()</code>, <code>use_test()</code>, <code>use_testthat()</code>, <code>use_travis()</code>, <code>use_vignette()</code>, have been removed after being deprecated in previous releases. Use the versions in the <a href="https://usethis.r-lib.org/">usethis</a> package directly.</p></li>
 <li><p><code>check_cran()</code>, <code>revdep_check()</code>, <code>revdep_check_print_problems()</code>, <code>revdep_check_reset()</code>, <code>revdep_check_resume()</code>, <code>revdep_check_save_summary()</code>, <code>revdep_email()</code> have been removed after being deprecated in previous releases. It is recommended to use the <a href="https://github.com/r-lib/revdepcheck">revdepcheck</a> package instead.</p></li>
 <li><p><code>system_check()</code>, <code>system_output()</code> have been removed after being deprecated in previous releases. It is recommend to use the <a href="https://processx.r-lib.org/">processx</a> package instead.</p></li>
 <li><p><code>build_win()</code> has been removed, after being deprecated in previous releases.</p></li>
-<li><p><code>yesno()</code> as used in <code>release()</code> now has clearer synonyms for “yes” (<a href='https://github.com/mattmalin'>@mattmalin</a>, <a href='https://github.com/r-lib/devtools/issues/1993'>#1993</a>)</p></li>
+<li><p><code>yesno()</code> as used in <code><a href="../reference/release.html">release()</a></code> now has clearer synonyms for “yes” (<a href='https://github.com/mattmalin'>@mattmalin</a>, <a href='https://github.com/r-lib/devtools/issues/1993'>#1993</a>)</p></li>
 </ul>
 </div>
 <div id="minor-improvements-and-fixes-1" class="section level2">
@@ -278,8 +290,8 @@
 <a href="#minor-improvements-and-fixes-1" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li><p><code>check_rhub</code> gains a new argument <code>build_args</code> for arguments passed to <code>R CMD build</code>. <code>...</code> is now passed to <code><a href="https://r-hub.github.io/rhub/reference/check_for_cran.html">rhub::check_for_cran()</a></code> (<a href='https://github.com/gaborcsardi'>@gaborcsardi</a>, <a href='https://github.com/maelle'>@maelle</a>, <a href='https://github.com/r-lib/devtools/issues/2041'>#2041</a>)</p></li>
-<li><p><code>build_manual()</code> now fails if the manual fails to build. (<a href='https://github.com/r-lib/devtools/issues/2056'>#2056</a>)</p></li>
-<li><p><code>test_file()</code> and <code>test_coverage_file()</code> now work with C and C++ files in the src/ directory as well.</p></li>
+<li><p><code><a href="../reference/build_manual.html">build_manual()</a></code> now fails if the manual fails to build. (<a href='https://github.com/r-lib/devtools/issues/2056'>#2056</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test_file()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> now work with C and C++ files in the src/ directory as well.</p></li>
 </ul>
 </div>
 </div>
@@ -289,9 +301,9 @@
 </h1>
 <ul>
 <li><p>Two tests are now skipped when run on CRAN, as they fail due to an outdated pandoc and restrictions on writing to the package library respectively.</p></li>
-<li><p><code>load_all()</code> now accepts ‘package’ objects, regaining previous behavior in devtools prior to 2.0.0 (<a href='https://github.com/r-lib/devtools/issues/1923'>#1923</a>)</p></li>
-<li><p><code>test()</code>, <code>test_coverage()</code> and <code>test_coverage_file()</code> now set the <code>TESTTHAT_PKG</code> environment variable, so it is more consistent with running the tests during <code>R CMD check</code> (testthat<a href='https://github.com/r-lib/devtools/issues/787'>#787</a>).</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> now replaces existing environment variables rather than appending them (<a href='https://github.com/r-lib/devtools/issues/1914'>#1914</a>).</p></li>
+<li><p><code><a href="../reference/load_all.html">load_all()</a></code> now accepts ‘package’ objects, regaining previous behavior in devtools prior to 2.0.0 (<a href='https://github.com/r-lib/devtools/issues/1923'>#1923</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> now set the <code>TESTTHAT_PKG</code> environment variable, so it is more consistent with running the tests during <code>R CMD check</code> (testthat<a href='https://github.com/r-lib/devtools/issues/787'>#787</a>).</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now replaces existing environment variables rather than appending them (<a href='https://github.com/r-lib/devtools/issues/1914'>#1914</a>).</p></li>
 </ul>
 </div>
     <div id="devtools-201" class="section level1">
@@ -300,9 +312,9 @@
 </h1>
 <p>This is a minor release mainly fixing bugs which snuck through in the devtools 2.0.0 release.</p>
 <ul>
-<li><p><code>install()</code> now correctly passes the <code>upgrade</code> parameter to <code><a href="https://remotes.r-lib.org/reference/install_deps.html">remotes::install_deps()</a></code> (<a href='https://github.com/Paxanator'>@Paxanator</a>, <a href='https://github.com/r-lib/devtools/issues/1898'>#1898</a>).</p></li>
-<li><p><code>install_deps()</code> now again works from any directory within a package (<a href='https://github.com/r-lib/devtools/issues/1905'>#1905</a>)</p></li>
-<li><p>Add a RStudio addin for <code>test_coverage()</code>.</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> now correctly passes the <code>upgrade</code> parameter to <code><a href="https://remotes.r-lib.org/reference/install_deps.html">remotes::install_deps()</a></code> (<a href='https://github.com/Paxanator'>@Paxanator</a>, <a href='https://github.com/r-lib/devtools/issues/1898'>#1898</a>).</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_deps()</a></code> now again works from any directory within a package (<a href='https://github.com/r-lib/devtools/issues/1905'>#1905</a>)</p></li>
+<li><p>Add a RStudio addin for <code><a href="../reference/test.html">test_coverage()</a></code>.</p></li>
 <li><p>All tests which use remote resources are now skipped on CRAN, to avoid spurious failures</p></li>
 </ul>
 </div>
@@ -313,12 +325,12 @@
 <p>Devtools 2.0.0 is a <em>major</em> release that contains work from the past year and a half, since the major devtools release (1.13.0).</p>
 <p>This release splits the functionality in <strong>devtools</strong> into a number of smaller packages which are simpler to develop and also easier for other packages to depend on. In particular the following packages have been spun off in what we are calling the ‘conscious uncoupling’ of <strong>devtools</strong>.</p>
 <ul>
-<li>remotes: Installing packages (i.e. <code>install_github()</code>).</li>
-<li>pkgbuild: Building binary packages (including checking if build tools are available) (i.e. <code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code>).</li>
-<li>pkgload: Simulating package loading (i.e. <code>load_all()</code>).</li>
-<li>rcmdcheck: Running R CMD check and reporting the results (i.e. <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code>).</li>
+<li>remotes: Installing packages (i.e. <code><a href="../reference/remote-reexports.html">install_github()</a></code>).</li>
+<li>pkgbuild: Building binary packages (including checking if build tools are available) (i.e. <code><a href="../reference/build.html">build()</a></code>).</li>
+<li>pkgload: Simulating package loading (i.e. <code><a href="../reference/load_all.html">load_all()</a></code>).</li>
+<li>rcmdcheck: Running R CMD check and reporting the results (i.e. <code><a href="../reference/check.html">check()</a></code>).</li>
 <li>revdepcheck: Running R CMD check on all reverse dependencies, and figuring out what’s changed since the last CRAN release (i.e. <code>revdep_check()</code>).</li>
-<li>sessioninfo: R session info (i.e. <code>session_info()</code>).</li>
+<li>sessioninfo: R session info (i.e. <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info()</a></code>).</li>
 <li>usethis: Automating package setup (i.e. <code>use_test()</code>).</li>
 </ul>
 <p>devtools will remain the main package developers will interact with when writing R packages; it will just rely on these other packages internally for most of the functionality.</p>
@@ -328,7 +340,7 @@
 <p>There have been a number of breaking changes in this release, while this will cause some short term pain for users it will result in a easier to understand API in the future, so we feel the tradeoff is worthwhile.</p>
 <ul>
 <li>
-<p><code><a href="https://devtools.r-lib.org//reference/install.html">devtools::install()</a></code> arguments have been changed as follows.</p>
+<p><code><a href="../reference/install.html">devtools::install()</a></code> arguments have been changed as follows.</p>
 <ul>
 <li>
 <code>local</code> -&gt; <code>build</code>
@@ -350,12 +362,12 @@
 <code>skip_if_log_exists</code> -&gt; Removed</li>
 </ul>
 </li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> argument <code>check_version</code> has been renamed to <code>remote</code> to better describe what tests are disabled (<a href='https://github.com/r-lib/devtools/issues/1811'>#1811</a>)</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> argument <code>check_version</code> has been renamed to <code>remote</code> to better describe what tests are disabled (<a href='https://github.com/r-lib/devtools/issues/1811'>#1811</a>)</p></li>
 <li><p><code>get_path()</code>, <code>set_path()</code>, <code>add_path()</code> and <code>on_path()</code> have been removed, this functionality is available with <code><a href="https://rdrr.io/pkg/withr/man/with_path.html">withr::with_path()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1796'>#1796</a>).</p></li>
-<li><p>The <code>lang</code> argument to <code>spell_check()</code> was removed, for compatibility with <a href="https://CRAN.R-project.org/package=spelling">spelling</a> v1.1. (<a href='https://github.com/r-lib/devtools/issues/1715'>#1715</a>)</p></li>
+<li><p>The <code>lang</code> argument to <code><a href="../reference/spell_check.html">spell_check()</a></code> was removed, for compatibility with <a href="https://CRAN.R-project.org/package=spelling">spelling</a> v1.1. (<a href='https://github.com/r-lib/devtools/issues/1715'>#1715</a>)</p></li>
 <li><p>The previously deprecated <code>with_</code> functions have now been removed. The functionality has been moved to the <strong>withr</strong> package.</p></li>
 <li><p><code>RCMD()</code>, <code>clean_source()</code>, <code>eval_clean()</code> and <code>evalq_clean()</code> have been removed. These functions never worked terribly well, and have been replaced by the much better functions in <strong>callr</strong>.</p></li>
-<li><p><code>build_win()</code> has been renamed to <code>check_win_release()</code>, <code>check_win_devel()</code>, and <code>check_win_oldrelease()</code> (<a href='https://github.com/r-lib/devtools/issues/1598'>#1598</a>).</p></li>
+<li><p><code>build_win()</code> has been renamed to <code><a href="../reference/check_win.html">check_win_release()</a></code>, <code><a href="../reference/check_win.html">check_win_devel()</a></code>, and <code><a href="../reference/check_win.html">check_win_oldrelease()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1598'>#1598</a>).</p></li>
 </ul>
 </div>
 <div id="deprecated-functions" class="section level2">
@@ -372,20 +384,20 @@
 <a href="#major-changes" class="anchor"></a>Major changes</h2>
 <ul>
 <li><p>All <code>install_*()</code> functions are now re-exported from <strong>remotes</strong> rather than being defined in <strong>devtools</strong></p></li>
-<li><p><strong>devtools</strong> now depends on <strong>roxygen2</strong> 6.1.0: this considerably simplifies <code><a href="https://devtools.r-lib.org//reference/document.html">devtools::document()</a></code> and makes it more consistent with <code><a href="https://roxygen2.r-lib.org/reference/roxygenize.html">roxygen2::roxygenise()</a></code>.</p></li>
-<li><p><code>test_file()</code> function added to test one or more files from a package (<a href='https://github.com/r-lib/devtools/issues/1755'>#1755</a>).</p></li>
-<li><p><code>test_coverage()</code> function added to provide a helper to compute test coverage using <strong>covr</strong> (<a href='https://github.com/r-lib/devtools/issues/1628'>#1628</a>).</p></li>
-<li><p><code>test_file()</code> and <code>test_coverage_file()</code> now have RStudio addins (<a href='https://github.com/r-lib/devtools/issues/1650'>#1650</a>)</p></li>
+<li><p><strong>devtools</strong> now depends on <strong>roxygen2</strong> 6.1.0: this considerably simplifies <code><a href="../reference/document.html">devtools::document()</a></code> and makes it more consistent with <code><a href="https://roxygen2.r-lib.org/reference/roxygenize.html">roxygen2::roxygenise()</a></code>.</p></li>
+<li><p><code><a href="../reference/test.html">test_file()</a></code> function added to test one or more files from a package (<a href='https://github.com/r-lib/devtools/issues/1755'>#1755</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test_coverage()</a></code> function added to provide a helper to compute test coverage using <strong>covr</strong> (<a href='https://github.com/r-lib/devtools/issues/1628'>#1628</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test_file()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> now have RStudio addins (<a href='https://github.com/r-lib/devtools/issues/1650'>#1650</a>)</p></li>
 <li><p><code>test_file_coverage()</code> function added to show the test coverage of one or more files from a package. (<a href='https://github.com/r-lib/devtools/issues/1755'>#1755</a>).</p></li>
-<li><p><code>session_info()</code> now uses the implementation in the <strong>sessioninfo</strong> package. Packages using <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code> are encouraged to switch to using <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">sessioninfo::session_info()</a></code> instead.</p></li>
-<li><p><code>package_info()</code> function now re-exported from the <strong>sessioninfo</strong> package.</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> now uses <strong>rcmdcheck</strong> to run and parse R CMD check output (<a href='https://github.com/r-lib/devtools/issues/1153'>#1153</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info()</a></code> now uses the implementation in the <strong>sessioninfo</strong> package. Packages using <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code> are encouraged to switch to using <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">sessioninfo::session_info()</a></code> instead.</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/sessioninfo/man/package_info.html">package_info()</a></code> function now re-exported from the <strong>sessioninfo</strong> package.</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now uses <strong>rcmdcheck</strong> to run and parse R CMD check output (<a href='https://github.com/r-lib/devtools/issues/1153'>#1153</a>).</p></li>
 <li>
-<p>Code related to simulating package loading has been pulled out into a separate package, <strong>pkgload</strong>. The following functions have been moved to pkgload without a shim: <code>clean_dll()</code>, <code>compile_dll()</code>, <code>dev_example()</code>, <code>dev_help()</code>, <code>dev_meta()</code>, <code>find_topic()</code>, <code>imports_env()</code>, <code>inst()</code>, <code>load_code()</code>, <code>load_dll()</code>, <code>ns_env()</code>, <code>parse_ns_file()</code>, <code>pkg_env()</code>. These functions are primarily for internal use.</p>
-<p><code>load_all()</code> and <code>unload()</code> have been moved to pkgload, but <strong>devtools</strong> provides shims since these are commonly used.</p>
+<p>Code related to simulating package loading has been pulled out into a separate package, <strong>pkgload</strong>. The following functions have been moved to pkgload without a shim: <code><a href="https://rdrr.io/pkg/pkgbuild/man/clean_dll.html">clean_dll()</a></code>, <code>compile_dll()</code>, <code>dev_example()</code>, <code>dev_help()</code>, <code>dev_meta()</code>, <code>find_topic()</code>, <code>imports_env()</code>, <code><a href="https://rdrr.io/pkg/pkgload/man/inst.html">inst()</a></code>, <code>load_code()</code>, <code>load_dll()</code>, <code>ns_env()</code>, <code>parse_ns_file()</code>, <code>pkg_env()</code>. These functions are primarily for internal use.</p>
+<p><code><a href="../reference/load_all.html">load_all()</a></code> and <code><a href="https://rdrr.io/pkg/pkgload/man/unload.html">unload()</a></code> have been moved to pkgload, but <strong>devtools</strong> provides shims since these are commonly used.</p>
 </li>
-<li><p><code>find_rtools()</code>, <code>setup_rtools()</code>, <code>has_devel()</code>, <code>compiler_flags()</code>, <code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code> and <code>with_debug()</code> have moved to the new <strong>pkgbuild</strong> package. <code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code> and <code>with_debug()</code> are re-exported by <strong>devtools</strong></p></li>
-<li><p>The <code>spell_check()</code> code has been moved into the new <strong>spelling</strong> package and has thereby gained support for vignettes and package wordlists. The <strong>devtools</strong> function now wraps <code><a href="https://docs.ropensci.org/spelling/reference/spell_check_package.html">spelling::spell_check_package()</a></code>.</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/pkgbuild/man/has_rtools.html">find_rtools()</a></code>, <code>setup_rtools()</code>, <code><a href="https://rdrr.io/pkg/pkgbuild/man/has_compiler.html">has_devel()</a></code>, <code>compiler_flags()</code>, <code><a href="../reference/build.html">build()</a></code> and <code><a href="https://rdrr.io/pkg/pkgbuild/man/with_debug.html">with_debug()</a></code> have moved to the new <strong>pkgbuild</strong> package. <code><a href="../reference/build.html">build()</a></code> and <code><a href="https://rdrr.io/pkg/pkgbuild/man/with_debug.html">with_debug()</a></code> are re-exported by <strong>devtools</strong></p></li>
+<li><p>The <code><a href="../reference/spell_check.html">spell_check()</a></code> code has been moved into the new <strong>spelling</strong> package and has thereby gained support for vignettes and package wordlists. The <strong>devtools</strong> function now wraps <code><a href="https://docs.ropensci.org/spelling/reference/spell_check_package.html">spelling::spell_check_package()</a></code>.</p></li>
 </ul>
 </div>
 <div id="minor-improvements-and-fixes-2" class="section level2">
@@ -393,46 +405,46 @@
 <a href="#minor-improvements-and-fixes-2" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li><p><code>check_win_*()</code> now build the package with <code>manual = TRUE</code> by default (<a href='https://github.com/r-lib/devtools/issues/1890'>#1890</a>).</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> output now works more nicely with recent changes to <strong>rcmdcheck</strong> (<a href='https://github.com/r-lib/devtools/issues/1874'>#1874</a>).</p></li>
-<li><p><code>reload()</code> now reloads loaded but not attached packages as well as attached ones.</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> output now works more nicely with recent changes to <strong>rcmdcheck</strong> (<a href='https://github.com/r-lib/devtools/issues/1874'>#1874</a>).</p></li>
+<li><p><code><a href="../reference/reload.html">reload()</a></code> now reloads loaded but not attached packages as well as attached ones.</p></li>
 <li><p>Executed <code>styler::style_pkg()</code> to update code style (<a href='https://github.com/r-lib/devtools/issues/1851'>#1851</a>, <a href='https://github.com/amundsenjunior'>@amundsenjunior</a>).</p></li>
-<li><p><code>save_all()</code> helper function wraps <code><a href="https://rdrr.io/pkg/rstudioapi/man/rstudio-documents.html">rstudioapi::documentSaveAll()</a></code> calls (<a href='https://github.com/r-lib/devtools/issues/1850'>#1850</a>, <a href='https://github.com/amundsenjunior'>@amundsenjunior</a>).</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> now allows users to run without <code>--timings</code> (<a href='https://github.com/r-lib/devtools/issues/1655'>#1655</a>)</p></li>
-<li><p><code>update_packages()</code> better documented to advertise it can be used to update packages installed by any of the <code>install_*</code> functions.</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> gains a <code>incoming</code> option to toggle the CRAN incoming checks.</p></li>
+<li><p><code><a href="../reference/save_all.html">save_all()</a></code> helper function wraps <code><a href="https://rdrr.io/pkg/rstudioapi/man/rstudio-documents.html">rstudioapi::documentSaveAll()</a></code> calls (<a href='https://github.com/r-lib/devtools/issues/1850'>#1850</a>, <a href='https://github.com/amundsenjunior'>@amundsenjunior</a>).</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now allows users to run without <code>--timings</code> (<a href='https://github.com/r-lib/devtools/issues/1655'>#1655</a>)</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">update_packages()</a></code> better documented to advertise it can be used to update packages installed by any of the <code>install_*</code> functions.</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> gains a <code>incoming</code> option to toggle the CRAN incoming checks.</p></li>
 <li><p><code>build_vignette()</code> gains a <code>keep_md</code> option to allow keeping the intermediate markdown output (<a href='https://github.com/r-lib/devtools/issues/1726'>#1726</a>)</p></li>
 <li><p><code>remote_sha.github()</code> now correctly looks up SHA in private repositories (<a href='https://github.com/r-lib/devtools/issues/1827'>#1827</a>, <a href='https://github.com/renozao'>@renozao</a>).</p></li>
 <li><p><strong>devtools</strong> <code>use_*()</code> functions now temporarily set the active <strong>usethis</strong> project if given a pkg argument that is not the current directory. This provides backwards compatibility with previous behavior (<a href='https://github.com/r-lib/devtools/issues/1823'>#1823</a>).</p></li>
 <li><p>Vignettes are now built in a separate process, and the package is installed before building the vignettes (<a href='https://github.com/r-lib/devtools/issues/1822'>#1822</a>)</p></li>
-<li><p><code>build_readme()</code> added to build the README.md from a README.Rmd (<a href='https://github.com/r-lib/devtools/issues/1762'>#1762</a>)</p></li>
-<li><p><code>build_vignettes()</code> now has a <code>clean</code> and <code>upgrade</code> arguments, to control cleaning of intermediate files and upgrading vignette dependencies respectively. (<a href='https://github.com/r-lib/devtools/issues/1770'>#1770</a>).</p></li>
-<li><p><code>release()</code> gains an additional question ensuring you updated codemeta.json if one exists (<a href='https://github.com/r-lib/devtools/issues/1774'>#1774</a>, <a href='https://github.com/r-lib/devtools/issues/1754'>#1754</a>)</p></li>
-<li><p><code>test()</code> now sets <code>useFancyQuotes = FALSE</code> to better mimic the environment tests are run under with <code>R CMD check</code> (<a href='https://github.com/r-lib/devtools/issues/1735'>#1735</a>).</p></li>
-<li><p><code>test()</code> no longer passes encoding argument to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1776'>#1776</a>)</p></li>
-<li><p><code>install_url()</code> can now install package binaries on windows (<a href='https://github.com/r-lib/devtools/issues/1765'>#1765</a>)</p></li>
+<li><p><code><a href="../reference/build_rmd.html">build_readme()</a></code> added to build the README.md from a README.Rmd (<a href='https://github.com/r-lib/devtools/issues/1762'>#1762</a>)</p></li>
+<li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> now has a <code>clean</code> and <code>upgrade</code> arguments, to control cleaning of intermediate files and upgrading vignette dependencies respectively. (<a href='https://github.com/r-lib/devtools/issues/1770'>#1770</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> gains an additional question ensuring you updated codemeta.json if one exists (<a href='https://github.com/r-lib/devtools/issues/1774'>#1774</a>, <a href='https://github.com/r-lib/devtools/issues/1754'>#1754</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> now sets <code>useFancyQuotes = FALSE</code> to better mimic the environment tests are run under with <code>R CMD check</code> (<a href='https://github.com/r-lib/devtools/issues/1735'>#1735</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> no longer passes encoding argument to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1776'>#1776</a>)</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_url()</a></code> can now install package binaries on windows (<a href='https://github.com/r-lib/devtools/issues/1765'>#1765</a>)</p></li>
 <li><p>Fix skipping when installing from a full SHA (<a href='https://github.com/r-lib/devtools/issues/1624'>#1624</a>)</p></li>
 <li><p>add <code><a href="https://pkgdown.r-lib.org/reference/build_site.html">pkgdown::build_site()</a></code> wrapper (<a href='https://github.com/kiwiroy'>@kiwiroy</a>, <a href='https://github.com/r-lib/devtools/issues/1777'>#1777</a>)</p></li>
 <li><p>add pkgdown site (<a href="https://devtools.r-lib.org" class="uri">https://devtools.r-lib.org</a>) (<a href='https://github.com/r-lib/devtools/issues/1779'>#1779</a>, <a href='https://github.com/jayhesselberth'>@jayhesselberth</a>)</p></li>
-<li><p><code>install_version()</code> can now install current version of CRAN package on Windows and macOS (<a href='https://github.com/jdblischak'>@jdblischak</a>, <a href='https://github.com/r-lib/devtools/issues/1730'>#1730</a>)</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_version()</a></code> can now install current version of CRAN package on Windows and macOS (<a href='https://github.com/jdblischak'>@jdblischak</a>, <a href='https://github.com/r-lib/devtools/issues/1730'>#1730</a>)</p></li>
 <li><p>The CRAN-RELEASE file is now added to .Rbuildignore (<a href='https://github.com/r-lib/devtools/issues/1711'>#1711</a>)</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> and <code>check_built()</code> now have an <code>error_on</code> argument to specify if they should throw an error on check failures. When run non-interactively this is set to “warnings” unless specified.</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> now sets <code>_R_CHECK_CRAN_INCOMING_REMOTE_</code> instead of <code>_R_CHECK_CRAN_INCOMING_</code>on R versions which support the former option (<a href='https://github.com/r-lib/devtools/issues/1271'>#1271</a>, <a href='https://github.com/r-lib/devtools/issues/1276'>#1276</a>, <a href='https://github.com/r-lib/devtools/issues/1702'>#1702</a>).</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> and <code><a href="../reference/check.html">check_built()</a></code> now have an <code>error_on</code> argument to specify if they should throw an error on check failures. When run non-interactively this is set to “warnings” unless specified.</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now sets <code>_R_CHECK_CRAN_INCOMING_REMOTE_</code> instead of <code>_R_CHECK_CRAN_INCOMING_</code>on R versions which support the former option (<a href='https://github.com/r-lib/devtools/issues/1271'>#1271</a>, <a href='https://github.com/r-lib/devtools/issues/1276'>#1276</a>, <a href='https://github.com/r-lib/devtools/issues/1702'>#1702</a>).</p></li>
 <li><p>Now use cli package to draw rules - they are more aesthetically pleasing and the correct width in the RStudio build pane (<a href='https://github.com/r-lib/devtools/issues/1627'>#1627</a>).</p></li>
-<li><p><code>release()</code> has been tweaked to reflect modern submission workflow and to ask questions rather than running code for you (<a href='https://github.com/r-lib/devtools/issues/1632'>#1632</a>).</p></li>
-<li><p><code>document()</code>, <code>load_all()</code>, <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code>, <code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code> and <code>test()</code> now automatically save open files when they are run inside the RStudio IDE. (<a href='https://github.com/r-lib/devtools/issues/1576'>#1576</a>)</p></li>
-<li><p>New <code>check_rhub()</code> function to check packages using <a href="https://builder.r-hub.io/" class="uri">https://builder.r-hub.io/</a>.</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> has been tweaked to reflect modern submission workflow and to ask questions rather than running code for you (<a href='https://github.com/r-lib/devtools/issues/1632'>#1632</a>).</p></li>
+<li><p><code><a href="../reference/document.html">document()</a></code>, <code><a href="../reference/load_all.html">load_all()</a></code>, <code><a href="../reference/check.html">check()</a></code>, <code><a href="../reference/build.html">build()</a></code> and <code><a href="../reference/test.html">test()</a></code> now automatically save open files when they are run inside the RStudio IDE. (<a href='https://github.com/r-lib/devtools/issues/1576'>#1576</a>)</p></li>
+<li><p>New <code><a href="../reference/check_rhub.html">check_rhub()</a></code> function to check packages using <a href="https://builder.r-hub.io/" class="uri">https://builder.r-hub.io/</a>.</p></li>
 <li><p><code>run_examples</code> was mistakenly passing <code>show</code> to <code><a href="https://rdrr.io/pkg/pkgload/man/dev_example.html">pkgload::run_example</a></code>, causing it to fail (<a href='https://github.com/amcdavid'>@amcdavid</a>, <a href='https://github.com/r-lib/devtools/issues/1449'>#1449</a>)</p></li>
-<li><p>New <code>build_manual()</code> function that produces pdf manual for the package (<a href='https://github.com/twolodzko'>@twolodzko</a>, <a href='https://github.com/r-lib/devtools/issues/1238'>#1238</a>).</p></li>
-<li><p>If you use git <code>release()</code> now generates a file called <code>CRAN-RELEASE</code> that reminds you to tag the commit that you submitted to CRAN (<a href='https://github.com/r-lib/devtools/issues/1198'>#1198</a>).</p></li>
-<li><p><code>release()</code> once again looks for additional release questions in the correct environment (<a href='https://github.com/r-lib/devtools/issues/1434'>#1434</a>).</p></li>
-<li><p><code>submit_cran()</code> now checks that you’re ready to submit, since this is a potentially expensive operation (<a href='https://github.com/r-lib/devtools/issues/1228'>#1228</a>)</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> defaults to running <code>document()</code> only if you have used roxygen previously (<a href='https://github.com/r-lib/devtools/issues/1437'>#1437</a>).</p></li>
+<li><p>New <code><a href="../reference/build_manual.html">build_manual()</a></code> function that produces pdf manual for the package (<a href='https://github.com/twolodzko'>@twolodzko</a>, <a href='https://github.com/r-lib/devtools/issues/1238'>#1238</a>).</p></li>
+<li><p>If you use git <code><a href="../reference/release.html">release()</a></code> now generates a file called <code>CRAN-RELEASE</code> that reminds you to tag the commit that you submitted to CRAN (<a href='https://github.com/r-lib/devtools/issues/1198'>#1198</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> once again looks for additional release questions in the correct environment (<a href='https://github.com/r-lib/devtools/issues/1434'>#1434</a>).</p></li>
+<li><p><code><a href="../reference/submit_cran.html">submit_cran()</a></code> now checks that you’re ready to submit, since this is a potentially expensive operation (<a href='https://github.com/r-lib/devtools/issues/1228'>#1228</a>)</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> defaults to running <code><a href="../reference/document.html">document()</a></code> only if you have used roxygen previously (<a href='https://github.com/r-lib/devtools/issues/1437'>#1437</a>).</p></li>
 <li><p>Signal an error if commas are missing in between remote entries (<a href='https://github.com/r-lib/devtools/issues/1511'>#1511</a>, <a href='https://github.com/ianmcook'>@ianmcook</a>).</p></li>
-<li><p><code>build_vignettes()</code> gains a quiet argument (<a href='https://github.com/r-lib/devtools/issues/1543'>#1543</a>).</p></li>
-<li><p><code>source_gist()</code> works once more when there is only a single file in the gist (<a href='https://github.com/r-lib/devtools/issues/1266'>#1266</a>).</p></li>
-<li><p>In order to not run test helpers in <code>document()</code>, the <code>helpers</code> argument of  <code>load_all()</code> is set to <code>FALSE</code> (<a href='https://github.com/nbenn'>@nbenn</a>, <a href='https://github.com/r-lib/devtools/issues/1669'>#1669</a>)</p></li>
+<li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> gains a quiet argument (<a href='https://github.com/r-lib/devtools/issues/1543'>#1543</a>).</p></li>
+<li><p><code><a href="../reference/source_gist.html">source_gist()</a></code> works once more when there is only a single file in the gist (<a href='https://github.com/r-lib/devtools/issues/1266'>#1266</a>).</p></li>
+<li><p>In order to not run test helpers in <code><a href="../reference/document.html">document()</a></code>, the <code>helpers</code> argument of  <code><a href="../reference/load_all.html">load_all()</a></code> is set to <code>FALSE</code> (<a href='https://github.com/nbenn'>@nbenn</a>, <a href='https://github.com/r-lib/devtools/issues/1669'>#1669</a>)</p></li>
 <li><p>The <code>my_unzip()</code> function is now able to use the <code><a href="https://rdrr.io/r/utils/unzip.html">utils::unzip</a></code> fallback when R is compiled from source with no <em>unzip</em> package present (<a href='https://github.com/theGreatWhiteShark'>@theGreatWhiteShark</a>, <a href='https://github.com/r-lib/devtools/issues/1678'>#1678</a>)</p></li>
-<li><p>If the <strong>foghorn</strong> package is installed, <code>release()</code> displays the results of the CRAN checks (<a href='https://github.com/r-lib/devtools/issues/1672'>#1672</a>, <a href='https://github.com/fmichonneau'>@fmichonneau</a>).</p></li>
+<li><p>If the <strong>foghorn</strong> package is installed, <code><a href="../reference/release.html">release()</a></code> displays the results of the CRAN checks (<a href='https://github.com/r-lib/devtools/issues/1672'>#1672</a>, <a href='https://github.com/fmichonneau'>@fmichonneau</a>).</p></li>
 </ul>
 </div>
 </div>
@@ -476,10 +488,10 @@
 <li><p>Bugfix for installing from git remote and not passing git2r credentials (<a href='https://github.com/james-atkins'>@james-atkins</a>, <a href='https://github.com/r-lib/devtools/issues/1498'>#1498</a>)</p></li>
 <li><p>Bugfix for installation of dependencies of dependencies (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/1409'>#1409</a>).</p></li>
 <li><p>Bugfix for installation of dependencies in CRAN-like repositories such as those created by drat (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/1243'>#1243</a>, <a href='https://github.com/r-lib/devtools/issues/1339'>#1339</a>).</p></li>
-<li><p><code>load_all()</code> no longer automatically creates a description for you.</p></li>
+<li><p><code><a href="../reference/load_all.html">load_all()</a></code> no longer automatically creates a description for you.</p></li>
 <li><p><code>use_test()</code> template no longer includes useless comments (<a href='https://github.com/r-lib/devtools/issues/1349'>#1349</a>)</p></li>
-<li><p>Fix <code>test()</code> compatibility with testthat versions 1.0.2 (<a href='https://github.com/r-lib/devtools/issues/1503'>#1503</a>).</p></li>
-<li><p>Fix <code>install_version()</code>, <code>install_bitbucket()</code>, <code>install_local()</code>, <code>install_url()</code>, <code>install_svn()</code>, <code>install_bioc()</code> gain <code>quiet</code> arguments and properly pass them to internal functions. (<a href='https://github.com/r-lib/devtools/issues/1502'>#1502</a>)</p></li>
+<li><p>Fix <code><a href="../reference/test.html">test()</a></code> compatibility with testthat versions 1.0.2 (<a href='https://github.com/r-lib/devtools/issues/1503'>#1503</a>).</p></li>
+<li><p>Fix <code><a href="../reference/remote-reexports.html">install_version()</a></code>, <code><a href="../reference/remote-reexports.html">install_bitbucket()</a></code>, <code><a href="../reference/remote-reexports.html">install_local()</a></code>, <code><a href="../reference/remote-reexports.html">install_url()</a></code>, <code><a href="../reference/remote-reexports.html">install_svn()</a></code>, <code><a href="../reference/remote-reexports.html">install_bioc()</a></code> gain <code>quiet</code> arguments and properly pass them to internal functions. (<a href='https://github.com/r-lib/devtools/issues/1502'>#1502</a>)</p></li>
 </ul>
 </div>
     <div id="devtools-1130" class="section level1">
@@ -491,7 +503,7 @@
 <a href="#new-features-2" class="anchor"></a>New Features</h2>
 <ul>
 <li><p><code>spell_check</code> gains a <code>dict</code> argument to set a custom language or dictionary</p></li>
-<li><p><code>release()</code> now checks documentation for spelling errors by default.</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> now checks documentation for spelling errors by default.</p></li>
 <li><p>New <code>use_gpl3_license()</code> sets the license field in <code>DESCRIPTION</code> and includes a copy of the license in <code>LICENSE</code>.</p></li>
 </ul>
 </div>
@@ -519,27 +531,27 @@
 <ul>
 <li><p>Handle case of un-installed package being passed to session_info (<a href='https://github.com/r-lib/devtools/issues/1281'>#1281</a>).</p></li>
 <li><p>Using authentication to access Github package name. (<a href='https://github.com/r-lib/devtools/issues/1262'>#1262</a>, <a href='https://github.com/eriknil'>@eriknil</a>).</p></li>
-<li><p><code>spell_check()</code> checks for hunspell before running (<a href='https://github.com/r-lib/devtools/issues/1475'>#1475</a>, <a href='https://github.com/jimvine'>@jimvine</a>).</p></li>
+<li><p><code><a href="../reference/spell_check.html">spell_check()</a></code> checks for hunspell before running (<a href='https://github.com/r-lib/devtools/issues/1475'>#1475</a>, <a href='https://github.com/jimvine'>@jimvine</a>).</p></li>
 <li><p><code>add_desc_package()</code> checks for package dependencies correctly (<a href='https://github.com/r-lib/devtools/issues/1463'>#1463</a>, <a href='https://github.com/thomasp85'>@thomasp85</a>).</p></li>
-<li><p>Remove deprecated <code>args</code> argument from <code>install_git()</code> to allow passthrough to <code>install</code> (<a href='https://github.com/r-lib/devtools/issues/1373'>#1373</a>, <a href='https://github.com/ReportMort'>@ReportMort</a>).</p></li>
-<li><p>added a <code>quiet</code> argument to <code>install_bitbucket()</code>, with a default value of <code>FALSE</code> (fixes issue <a href='https://github.com/r-lib/devtools/issues/1345'>#1345</a>, <a href='https://github.com/plantarum'>@plantarum</a>).</p></li>
-<li><p><code>update_packages()</code> allows for override of interactive prompt (<a href='https://github.com/r-lib/devtools/issues/1260'>#1260</a>, <a href='https://github.com/pkq'>@pkq</a>).</p></li>
+<li><p>Remove deprecated <code>args</code> argument from <code><a href="../reference/remote-reexports.html">install_git()</a></code> to allow passthrough to <code>install</code> (<a href='https://github.com/r-lib/devtools/issues/1373'>#1373</a>, <a href='https://github.com/ReportMort'>@ReportMort</a>).</p></li>
+<li><p>added a <code>quiet</code> argument to <code><a href="../reference/remote-reexports.html">install_bitbucket()</a></code>, with a default value of <code>FALSE</code> (fixes issue <a href='https://github.com/r-lib/devtools/issues/1345'>#1345</a>, <a href='https://github.com/plantarum'>@plantarum</a>).</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">update_packages()</a></code> allows for override of interactive prompt (<a href='https://github.com/r-lib/devtools/issues/1260'>#1260</a>, <a href='https://github.com/pkq'>@pkq</a>).</p></li>
 <li><p><code>use_test()</code> template no longer includes useless comments (<a href='https://github.com/r-lib/devtools/issues/1349'>#1349</a>)</p></li>
 <li><p>Add encoding support in <code>test_dir()</code> call by adding reference to pkg$encoding (<a href='https://github.com/r-lib/devtools/issues/1306'>#1306</a>, <a href='https://github.com/hansharhoff'>@hansharhoff</a>)</p></li>
 <li><p>Parse valid Git remote URLs that lack trailing <code>.git</code>, e.g. GitHub browser URLs (<a href='https://github.com/r-lib/devtools/issues/1253'>#1253</a>, <a href='https://github.com/jennybc'>@jennybc</a>).</p></li>
 <li><p>Add a <code>check_bioconductor()</code> internal function to automatically install BiocInstaller() if it is not installed and the user wants to do so.</p></li>
 <li><p>Improve Git integration. <code>use_git_ignore()</code> and <code>use_git_config()</code> gain <code>quiet</code> argument, tests work without setting <code>user.name</code> and <code>user.email</code> Git configuration settings (<a href='https://github.com/r-lib/devtools/issues/1320'>#1320</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
-<li><p>Improve Git status checks used in <code>release()</code> (<a href='https://github.com/r-lib/devtools/issues/1205'>#1205</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
-<li><p>Improved handling of local <code>file://</code> repositories in <code>install()</code> (<a href='https://github.com/r-lib/devtools/issues/1284'>#1284</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
-<li><p><code>setup()</code> and <code>create()</code> gain new <code>quiet</code> argument (<a href='https://github.com/r-lib/devtools/issues/1284'>#1284</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p>Improve Git status checks used in <code><a href="../reference/release.html">release()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1205'>#1205</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p>Improved handling of local <code>file://</code> repositories in <code><a href="../reference/install.html">install()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1284'>#1284</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p><code>setup()</code> and <code><a href="../reference/create.html">create()</a></code> gain new <code>quiet</code> argument (<a href='https://github.com/r-lib/devtools/issues/1284'>#1284</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p>Avoid unnecessary query of <code>available_packages()</code> (<a href='https://github.com/r-lib/devtools/issues/1269'>#1269</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p>Add cache setting to AppVeyor template (<a href='https://github.com/r-lib/devtools/issues/1290'>#1290</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p>Fix AppVeyor test by manually installing <code>curl</code> (<a href='https://github.com/r-lib/devtools/issues/1301'>#1301</a>).</p></li>
-<li><p><code>install(dependencies = FALSE)</code> doesn’t query the available packages anymore (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/1269'>#1269</a>).</p></li>
+<li><p><code><a href="../reference/install.html">install(dependencies = FALSE)</a></code> doesn’t query the available packages anymore (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/1269'>#1269</a>).</p></li>
 <li><p><code>use_travis()</code> now opens a webpage in your browser to more easily activate a repo.</p></li>
 <li><p><code>use_readme_rmd()</code> and <code>use_readme()</code> share a common template with sections for package overview, GitHub installation (if applicable), and an example (<a href='https://github.com/jennybc'>@jennybc</a>, <a href='https://github.com/r-lib/devtools/issues/1287'>#1287</a>).</p></li>
-<li><p><code>test()</code> doesn’t load helpers twice anymore (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/1256'>#1256</a>).</p></li>
-<li><p>Fix auto download method selection for <code>install_github()</code> on R 3.1 which lacks “libcurl” in <code><a href="https://rdrr.io/r/base/capabilities.html">capabilities()</a></code>. (<a href='https://github.com/kiwiroy'>@kiwiroy</a>, <a href='https://github.com/r-lib/devtools/issues/1244'>#1244</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> doesn’t load helpers twice anymore (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/1256'>#1256</a>).</p></li>
+<li><p>Fix auto download method selection for <code><a href="../reference/remote-reexports.html">install_github()</a></code> on R 3.1 which lacks “libcurl” in <code><a href="https://rdrr.io/r/base/capabilities.html">capabilities()</a></code>. (<a href='https://github.com/kiwiroy'>@kiwiroy</a>, <a href='https://github.com/r-lib/devtools/issues/1244'>#1244</a>)</p></li>
 <li><p>Fix removal of vignette files by not trying to remove files twice anymore (<a href='https://github.com/r-lib/devtools/issues/1291'>#1291</a>)</p></li>
 <li><p>add timestamp to messages in <code>build_win()</code> (<a href='https://github.com/achubaty'>@achubaty</a>, <a href='https://github.com/r-lib/devtools/issues/1367'>#1367</a>).</p></li>
 </ul>
@@ -553,10 +565,10 @@
 <h2 class="hasAnchor">
 <a href="#new-features-3" class="anchor"></a>New features</h2>
 <ul>
-<li><p>New <code>install_bioc()</code> function and bioc remote to install Bioconductor packages from their SVN repository.</p></li>
-<li><p><code>install_dev_deps()</code> gets everything you need to start development on source package - it installs all dependencies, and roxygen2 (<a href='https://github.com/r-lib/devtools/issues/1193'>#1193</a>).</p></li>
+<li><p>New <code><a href="../reference/remote-reexports.html">install_bioc()</a></code> function and bioc remote to install Bioconductor packages from their SVN repository.</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_dev_deps()</a></code> gets everything you need to start development on source package - it installs all dependencies, and roxygen2 (<a href='https://github.com/r-lib/devtools/issues/1193'>#1193</a>).</p></li>
 <li><p><code>use_dev_version()</code> automates the process of switching from a release version number by tweaking the <code>DESCRIPTION</code>, adding a heading to <code>NEWS.md</code> (if present), and checking into git (if you use it) (<a href='https://github.com/r-lib/devtools/issues/1076'>#1076</a>.)</p></li>
-<li><p><code>use_github()</code> accepts a host argument, similar to <code>install_github()</code> (<a href='https://github.com/ijlyttle'>@ijlyttle</a>, <a href='https://github.com/r-lib/devtools/issues/1101'>#1101</a>)</p></li>
+<li><p><code>use_github()</code> accepts a host argument, similar to <code><a href="../reference/remote-reexports.html">install_github()</a></code> (<a href='https://github.com/ijlyttle'>@ijlyttle</a>, <a href='https://github.com/r-lib/devtools/issues/1101'>#1101</a>)</p></li>
 </ul>
 </div>
 <div id="bug-fixes-and-minor-improvements-1" class="section level2">
@@ -569,13 +581,13 @@
 <li><p>Suggested packages, including those specified as <code>Remotes:</code> are now installed after package installation. This allows you to use circular <code>Remotes:</code> dependencies for two related packages as long as one of the dependencies is a Suggested package. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/1184'>#1184</a>, hadley/dplyr<a href='https://github.com/r-lib/devtools/issues/1809'>#1809</a>)</p></li>
 <li><p>bug fix for installation of binary packages on windows, they must be installed directly from a zip file. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/1191'>#1191</a>, <a href='https://github.com/r-lib/devtools/issues/1192'>#1192</a>)</p></li>
 <li><p><code>build_vignette()</code> will now only install the “VignetteBuilder” if it’s not present, not try and upgrade it if it is (<a href='https://github.com/r-lib/devtools/issues/1139'>#1139</a>).</p></li>
-<li><p><code>clean_dll()</code> Only removes package_name.def files and now operates recursively. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/1175'>#1175</a>, <a href='https://github.com/r-lib/devtools/issues/1159'>#1159</a>, <a href='https://github.com/r-lib/devtools/issues/1161'>#1161</a>)</p></li>
-<li><p><code>check_man()</code> now prints a message if no problems are found (<a href='https://github.com/r-lib/devtools/issues/1187'>#1187</a>).</p></li>
-<li><p><code>install_*</code> functions and <code>update_packages()</code> refactored to allow updating of packages installed using any of the install methods. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/1067'>#1067</a>)</p></li>
-<li><p><code>install_github()</code> now uses <code>https://api.github.com</code> as the host argument, so users can specify ‘http:’ or other protocols if needed. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/1131'>#1131</a>, <a href='https://github.com/r-lib/devtools/issues/1200'>#1200</a>)</p></li>
-<li><p><code>load_all()</code> runs package hooks before sourcing test helper files allowing test helper to make use of objects created when a package is loaded or attached. (<a href='https://github.com/imanuelcostigan'>@imanuelcostigan</a>, <a href='https://github.com/r-lib/devtools/issues/1146'>#1146</a>)</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/pkgbuild/man/clean_dll.html">clean_dll()</a></code> Only removes package_name.def files and now operates recursively. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/1175'>#1175</a>, <a href='https://github.com/r-lib/devtools/issues/1159'>#1159</a>, <a href='https://github.com/r-lib/devtools/issues/1161'>#1161</a>)</p></li>
+<li><p><code><a href="../reference/check_man.html">check_man()</a></code> now prints a message if no problems are found (<a href='https://github.com/r-lib/devtools/issues/1187'>#1187</a>).</p></li>
+<li><p><code>install_*</code> functions and <code><a href="../reference/remote-reexports.html">update_packages()</a></code> refactored to allow updating of packages installed using any of the install methods. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/1067'>#1067</a>)</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> now uses <code>https://api.github.com</code> as the host argument, so users can specify ‘http:’ or other protocols if needed. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/1131'>#1131</a>, <a href='https://github.com/r-lib/devtools/issues/1200'>#1200</a>)</p></li>
+<li><p><code><a href="../reference/load_all.html">load_all()</a></code> runs package hooks before sourcing test helper files allowing test helper to make use of objects created when a package is loaded or attached. (<a href='https://github.com/imanuelcostigan'>@imanuelcostigan</a>, <a href='https://github.com/r-lib/devtools/issues/1146'>#1146</a>)</p></li>
 <li><p><code>revdep_check()</code> will now create the <code>revdep/</code> directory if it does not already exist (<a href='https://github.com/r-lib/devtools/issues/1178'>#1178</a>).</p></li>
-<li><p><code>source_gist()</code> gains a <code>filename</code> argument to specify a particular file to source from a GitHub gist. (<a href='https://github.com/ateucher'>@ateucher</a>, <a href='https://github.com/r-lib/devtools/issues/1172'>#1172</a>)</p></li>
+<li><p><code><a href="../reference/source_gist.html">source_gist()</a></code> gains a <code>filename</code> argument to specify a particular file to source from a GitHub gist. (<a href='https://github.com/ateucher'>@ateucher</a>, <a href='https://github.com/r-lib/devtools/issues/1172'>#1172</a>)</p></li>
 <li><p>Add a default codecov.yml file to turn off commenting with <code>use_coverage()</code> (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/1188'>#1188</a>)</p></li>
 <li><p>Bug fix for ‘nchar(text) : invalid multibyte string’ errors when running <code>write_dcf()</code> on DESCRIPTION files with non-ASCII encodings (<a href='https://github.com/r-lib/devtools/issues/1224'>#1224</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
 </ul>
@@ -615,13 +627,13 @@
 <h2 class="hasAnchor">
 <a href="#checks-and-release" class="anchor"></a>Checks and release()</h2>
 <ul>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> now always succeeds (instead of throwing an error when <code>R CMD check</code> finds an <code>ERROR</code>), returning an object that summarises the check failures.</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> gains <code>run_dont_test</code> and <code>manual</code> arguments to control whether or not <code>\donttest{}</code> tests are tested, or manuals are built. This defaults to <code>FALSE</code>, but <code>release()</code> runs check with it set to <code>TRUE</code> (<a href='https://github.com/r-lib/devtools/issues/1071'>#1071</a>; <a href='https://github.com/r-lib/devtools/issues/1087'>#1087</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
-<li><p>The <code>cleanup</code> argument to <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> is deprecated: it now always returns the path to the check directory.</p></li>
-<li><p><code>check_built()</code> allows you to run <code>R CMD check</code> on an already built package.</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now always succeeds (instead of throwing an error when <code>R CMD check</code> finds an <code>ERROR</code>), returning an object that summarises the check failures.</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> gains <code>run_dont_test</code> and <code>manual</code> arguments to control whether or not <code>\donttest{}</code> tests are tested, or manuals are built. This defaults to <code>FALSE</code>, but <code><a href="../reference/release.html">release()</a></code> runs check with it set to <code>TRUE</code> (<a href='https://github.com/r-lib/devtools/issues/1071'>#1071</a>; <a href='https://github.com/r-lib/devtools/issues/1087'>#1087</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p>The <code>cleanup</code> argument to <code><a href="../reference/check.html">check()</a></code> is deprecated: it now always returns the path to the check directory.</p></li>
+<li><p><code><a href="../reference/check.html">check_built()</a></code> allows you to run <code>R CMD check</code> on an already built package.</p></li>
 <li><p><code>check_cran()</code> suppresses X11 with <code>DISPLAY = ""</code>.</p></li>
-<li><p><code>release()</code> has been tweaked to improve the order of the questions, and to ensure that you’re ok with problems. It warns if both <code>inst/NEWS.Rd</code> and <code>NEWS.md</code> exist (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/1135'>#1135</a>), doesn’t throw error if Git head is detached (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/1136'>#1136</a>).</p></li>
-<li><p><code>release()</code> gains an <code>args</code> argument to control build options, e.g. to allow passing <code>args = "--compact-vignettes=both"</code> for packages with heavy PDF vignettes (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/1077'>#1077</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> has been tweaked to improve the order of the questions, and to ensure that you’re ok with problems. It warns if both <code>inst/NEWS.Rd</code> and <code>NEWS.md</code> exist (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/1135'>#1135</a>), doesn’t throw error if Git head is detached (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/1136'>#1136</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> gains an <code>args</code> argument to control build options, e.g. to allow passing <code>args = "--compact-vignettes=both"</code> for packages with heavy PDF vignettes (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/1077'>#1077</a>).</p></li>
 <li><p><code>system_check()</code> gains new arguments <code>path</code> to controls the working directory of the command, and <code>throw</code> to control whether or not it throws an error on command failure. <code>env</code> has been renamed to the more explicit <code>env_vars</code>.</p></li>
 </ul>
 </div>
@@ -629,7 +641,7 @@
 <h2 class="hasAnchor">
 <a href="#revdep-checks" class="anchor"></a>Revdep checks</h2>
 <p><code>revdep_check()</code> has been overhauled. All <code>revdep_</code> functions now work like other devtools functions, taking a path to the package as the first argument.</p>
-<p><code>revdep_check()</code> now saves its results to disk as <code>check/check.rds</code>, and the other <code>revdep()</code> functions read from that cache. This also allows you to resume a partial run with <code>revdep_check_resume()</code>. This should be a big time saver if something goes unexpected wrong in the middle of the checks. You can blow away the cache and start afresh with <code>revdep_check_reset()</code>.</p>
+<p><code>revdep_check()</code> now saves its results to disk as <code>check/check.rds</code>, and the other <code><a href="../reference/revdep.html">revdep()</a></code> functions read from that cache. This also allows you to resume a partial run with <code>revdep_check_resume()</code>. This should be a big time saver if something goes unexpected wrong in the middle of the checks. You can blow away the cache and start afresh with <code>revdep_check_reset()</code>.</p>
 <p><code>revdep_check_save_summary()</code> now creates <code>README.md</code> to save one level of clicking in github. It also creates a <code>problems.md</code> that contains only results for only packages that had warnings or errors. Each problem is limited to at most 25 lines of output - this avoids lengthy output for failing examples. <code>revdep_check_print_problems()</code> prints a bulleted list of problems, suitable for inclusion in your <code>cran-comments.md</code>.</p>
 <p>Summary results are reported as they come in, every then messages you’ll get a message giving elapsed and estimated remaining time.</p>
 <p>An experimental <code>revdep_email()</code> emails individual maintainers with their <code>R CMD check</code> summary results (<a href='https://github.com/r-lib/devtools/issues/1014'>#1014</a>). See testthat and dplyr for example usage.</p>
@@ -646,8 +658,8 @@
 <a href="#other-improvements" class="anchor"></a>Other improvements</h2>
 <ul>
 <li><p>Devtools now uses new gcc toolchain on windows, if installed (<a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
-<li><p><code>install_git()</code> now allows you to pass credentials to git2r to specify specific ssh credentials (<a href='https://github.com/onlymee'>@onlymee</a>, <a href='https://github.com/r-lib/devtools/issues/982'>#982</a>)</p></li>
-<li><p><code>load_all()</code> now sources all test helpers if you use testthat. This makes it much easier to interactively run tests (<a href='https://github.com/r-lib/devtools/issues/1125'>#1125</a>). <code>load_all()</code> also correctly handles <code>unix</code> and <code>windows</code> subdirectories within <code>R</code> (<a href='https://github.com/gaborcsardi'>@gaborcsardi</a>, <a href='https://github.com/r-lib/devtools/issues/1102'>#1102</a>)</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_git()</a></code> now allows you to pass credentials to git2r to specify specific ssh credentials (<a href='https://github.com/onlymee'>@onlymee</a>, <a href='https://github.com/r-lib/devtools/issues/982'>#982</a>)</p></li>
+<li><p><code><a href="../reference/load_all.html">load_all()</a></code> now sources all test helpers if you use testthat. This makes it much easier to interactively run tests (<a href='https://github.com/r-lib/devtools/issues/1125'>#1125</a>). <code><a href="../reference/load_all.html">load_all()</a></code> also correctly handles <code>unix</code> and <code>windows</code> subdirectories within <code>R</code> (<a href='https://github.com/gaborcsardi'>@gaborcsardi</a>, <a href='https://github.com/r-lib/devtools/issues/1102'>#1102</a>)</p></li>
 <li><p><code>build_win()</code> defaults to only R-devel, since this is most commonly what you want.</p></li>
 <li><p>Help shims now inform you that you’re using development documentation (<a href='https://github.com/r-lib/devtools/issues/1049'>#1049</a>).</p></li>
 <li><p><code>git_sha1()</code> Fix fetching the latest git commit so that it also works for shallow git clones, i.e. git clones which make use of depth. (<a href='https://github.com/r-lib/devtools/issues/1048'>#1048</a>, <a href='https://github.com/r-lib/devtools/issues/1046'>#1046</a>, <a href='https://github.com/nparley'>@nparley</a>)</p></li>
@@ -663,22 +675,22 @@
 <a href="#new-features-4" class="anchor"></a>New features</h2>
 <ul>
 <li><p><code>curl</code>, <code>evaluate</code>, <code>roxygen2</code> and <code>rversions</code> have been moved from Imports to Suggests to lighten the dependency load of devtools. If you run a function that needs one of the packages, you’ll prompted to install it (<a href='https://github.com/r-lib/devtools/issues/962'>#962</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
-<li><p>Devtools uses a new strategy for detecting RTools on windows: it now only looks for Rtools if you need to <code>load_all()</code> or <code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code> a package with compiled code. This should make it easier to work with devtools if you’re developing pure R packages (<a href='https://github.com/r-lib/devtools/issues/947'>#947</a>).</p></li>
-<li><p><code>package_file()</code> lets you find files inside a package. It starts by finding the root directory of the package (i.e. the directory that contains <code>DESCRIPTION</code>) (<a href='https://github.com/r-lib/devtools/issues/985'>#985</a>).</p></li>
+<li><p>Devtools uses a new strategy for detecting RTools on windows: it now only looks for Rtools if you need to <code><a href="../reference/load_all.html">load_all()</a></code> or <code><a href="../reference/build.html">build()</a></code> a package with compiled code. This should make it easier to work with devtools if you’re developing pure R packages (<a href='https://github.com/r-lib/devtools/issues/947'>#947</a>).</p></li>
+<li><p><code><a href="../reference/package_file.html">package_file()</a></code> lets you find files inside a package. It starts by finding the root directory of the package (i.e. the directory that contains <code>DESCRIPTION</code>) (<a href='https://github.com/r-lib/devtools/issues/985'>#985</a>).</p></li>
 <li><p><code>use_news_md()</code> adds a basic <code>NEWS.md</code> template (<a href='https://github.com/r-lib/devtools/issues/957'>#957</a>).</p></li>
 <li><p><code>use_mit_license()</code> writes the necessary infrastructure to declare and release an R package under the MIT license in a CRAN-compliant way. (<a href='https://github.com/r-lib/devtools/issues/995'>#995</a>, <a href='https://github.com/kevinushey'>@kevinushey</a>)</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check(cran = TRUE)</a></code> adds <code>--run-donttest</code> since you do need to test code in <code>\dontest()</code> for CRAN submission (<a href='https://github.com/r-lib/devtools/issues/1002'>#1002</a>).</p></li>
+<li><p><code><a href="../reference/check.html">check(cran = TRUE)</a></code> adds <code>--run-donttest</code> since you do need to test code in <code>\dontest()</code> for CRAN submission (<a href='https://github.com/r-lib/devtools/issues/1002'>#1002</a>).</p></li>
 </ul>
 </div>
 <div id="package-installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#package-installation" class="anchor"></a>Package installation</h2>
 <ul>
-<li><p><code>install()</code> installs packages specified in the <code>Additional_repositories</code> field, such as drat repositories. (<a href='https://github.com/r-lib/devtools/issues/907'>#907</a>, <a href='https://github.com/r-lib/devtools/issues/1028'>#1028</a>, <a href='https://github.com/jimhester'>@jimhester</a>). It correctly installs missing dependencies (<a href='https://github.com/r-lib/devtools/issues/1013'>#1013</a>, <a href='https://github.com/gaborcsardi'>@gaborcsardi</a>). If called on a Bioconductor package, include the Bioconductor repositories if they are not already set (<a href='https://github.com/r-lib/devtools/issues/895'>#895</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
-<li><p><code>install()</code> gains a <code>metadata</code> argument which lets you add extra fields to the <code>DESCRIPTION</code> on install. (<a href='https://github.com/r-lib/devtools/issues/1027'>#1027</a>, <a href='https://github.com/rmflight'>@rmflight</a>)</p></li>
-<li><p><code>install_github()</code> and <code>install_git()</code> only downloads and installs the package if the remote SHA1 reference differs from the currently installed reference (<a href='https://github.com/r-lib/devtools/issues/903'>#903</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
-<li><p><code>install_local()</code> captures git and github information and stores it in the <code>DESCRIPTION</code> (<a href='https://github.com/r-lib/devtools/issues/1027'>#1027</a>, <a href='https://github.com/rmflight'>@rmflight</a>).</p></li>
-<li><p><code>install_version()</code> is more robust when handling multiple repos (<a href='https://github.com/r-lib/devtools/issues/943'>#943</a>, <a href='https://github.com/r-lib/devtools/issues/1030'>#1030</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> installs packages specified in the <code>Additional_repositories</code> field, such as drat repositories. (<a href='https://github.com/r-lib/devtools/issues/907'>#907</a>, <a href='https://github.com/r-lib/devtools/issues/1028'>#1028</a>, <a href='https://github.com/jimhester'>@jimhester</a>). It correctly installs missing dependencies (<a href='https://github.com/r-lib/devtools/issues/1013'>#1013</a>, <a href='https://github.com/gaborcsardi'>@gaborcsardi</a>). If called on a Bioconductor package, include the Bioconductor repositories if they are not already set (<a href='https://github.com/r-lib/devtools/issues/895'>#895</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> gains a <code>metadata</code> argument which lets you add extra fields to the <code>DESCRIPTION</code> on install. (<a href='https://github.com/r-lib/devtools/issues/1027'>#1027</a>, <a href='https://github.com/rmflight'>@rmflight</a>)</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> and <code><a href="../reference/remote-reexports.html">install_git()</a></code> only downloads and installs the package if the remote SHA1 reference differs from the currently installed reference (<a href='https://github.com/r-lib/devtools/issues/903'>#903</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_local()</a></code> captures git and github information and stores it in the <code>DESCRIPTION</code> (<a href='https://github.com/r-lib/devtools/issues/1027'>#1027</a>, <a href='https://github.com/rmflight'>@rmflight</a>).</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_version()</a></code> is more robust when handling multiple repos (<a href='https://github.com/r-lib/devtools/issues/943'>#943</a>, <a href='https://github.com/r-lib/devtools/issues/1030'>#1030</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
 <li><p>Bugfix for <code>Remotes:</code> feature that prevented it from working if devtools was not attached as is done in travis-r (<a href='https://github.com/r-lib/devtools/issues/936'>#936</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
 </ul>
 </div>
@@ -687,13 +699,13 @@
 <a href="#bug-fixes-and-minor-improvements-2" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
 <li><p><code>check_dev_versions()</code> checks only package dependencies (<a href='https://github.com/r-lib/devtools/issues/983'>#983</a>).</p></li>
-<li><p><code>check_man()</code> replaces <code>check_doc()</code> (since most other functions are named after the corresponding directory). <code>check_doc()</code> will hang around as an alias for the forseeable future (<a href='https://github.com/r-lib/devtools/issues/958'>#958</a>).</p></li>
-<li><p><code>create()</code> produces a dummy namespace will fake comment so roxygen2 will overwrite silently (<a href='https://github.com/r-lib/devtools/issues/1016'>#1016</a>).</p></li>
-<li><p><code>create()</code> and <code>setup()</code> are more permissive – they now accept a path to either a new directory or empty directory. (<a href='https://github.com/r-lib/devtools/issues/966'>#966</a>, <a href='https://github.com/kevinushey'>@kevinushey</a>)</p></li>
-<li><p><code>document()</code> now only runs <code>update_collate()</code> once.</p></li>
-<li><p><code>load_all()</code> resolves a longstanding lazy load database corruption issue when reloading packages which define S3 methods on generics from base or other packages (<a href='https://github.com/r-lib/devtools/issues/1001'>#1001</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
+<li><p><code><a href="../reference/check_man.html">check_man()</a></code> replaces <code>check_doc()</code> (since most other functions are named after the corresponding directory). <code>check_doc()</code> will hang around as an alias for the forseeable future (<a href='https://github.com/r-lib/devtools/issues/958'>#958</a>).</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code> produces a dummy namespace will fake comment so roxygen2 will overwrite silently (<a href='https://github.com/r-lib/devtools/issues/1016'>#1016</a>).</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code> and <code>setup()</code> are more permissive – they now accept a path to either a new directory or empty directory. (<a href='https://github.com/r-lib/devtools/issues/966'>#966</a>, <a href='https://github.com/kevinushey'>@kevinushey</a>)</p></li>
+<li><p><code><a href="../reference/document.html">document()</a></code> now only runs <code>update_collate()</code> once.</p></li>
+<li><p><code><a href="../reference/load_all.html">load_all()</a></code> resolves a longstanding lazy load database corruption issue when reloading packages which define S3 methods on generics from base or other packages (<a href='https://github.com/r-lib/devtools/issues/1001'>#1001</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
 <li>
-<p><code>release_checks()</code> gains two new checks:</p>
+<p><code><a href="../reference/release_checks.html">release_checks()</a></code> gains two new checks:</p>
 <ul>
 <li><p><code>check_vignette_titles()</code> checks that your vignette titles aren’t the default “Vignette Title” (<a href='https://github.com/r-lib/devtools/issues/960'>#960</a>, <a href='https://github.com/jennybc'>@jennybc</a>).</p></li>
 <li><p><code>check_news_md()</code> checks that <code>NEWS.md</code> isn’t in your <code>.Rbuildignore</code> (since it’s now supported by CRAN, <a href='https://github.com/r-lib/devtools/issues/1042'>#1042</a>).</p></li>
@@ -724,33 +736,33 @@
 </h1>
 <ul>
 <li><p>Avoid importing heavy dependencies to speed up loading (<a href='https://github.com/r-lib/devtools/issues/830'>#830</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
-<li><p>Remove explicit <code><a href="http://testthat.r-lib.org">library(testthat)</a></code> call in <code>test()</code> (<a href='https://github.com/r-lib/devtools/issues/798'>#798</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
-<li><p><code>as.package()</code> and <code>load_all()</code> gain new argument <code>create</code>. Like other functions with a <code>pkg</code> argument, <code>load_all()</code> looks for a <code>DESCRIPTION</code> file in parent directories - if <code>create = TRUE</code> it will be automatically created if there’s a <code>R/</code> or <code>data/</code> directory (<a href='https://github.com/r-lib/devtools/issues/852'>#852</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
-<li><p><code>build_vignettes()</code> gains dependencies argument (<a href='https://github.com/r-lib/devtools/issues/825'>#825</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p>Remove explicit <code><a href="https://testthat.r-lib.org/reference">library(testthat)</a></code> call in <code><a href="../reference/test.html">test()</a></code> (<a href='https://github.com/r-lib/devtools/issues/798'>#798</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p><code><a href="../reference/as.package.html">as.package()</a></code> and <code><a href="../reference/load_all.html">load_all()</a></code> gain new argument <code>create</code>. Like other functions with a <code>pkg</code> argument, <code><a href="../reference/load_all.html">load_all()</a></code> looks for a <code>DESCRIPTION</code> file in parent directories - if <code>create = TRUE</code> it will be automatically created if there’s a <code>R/</code> or <code>data/</code> directory (<a href='https://github.com/r-lib/devtools/issues/852'>#852</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> gains dependencies argument (<a href='https://github.com/r-lib/devtools/issues/825'>#825</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code>build_win()</code> now uses <code>curl</code> instead of <code>RCurl</code> for ftp upload.</p></li>
 <li><p><code>build_win()</code> asks for consent to receive e-mail at maintainer address in interactive mode (<a href='https://github.com/r-lib/devtools/issues/800'>#800</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> now uses a better strategy when <code>cran = TRUE</code>. Instead of attempting to simulate <code>--as-cran</code> behaviour by turning on certain env vars, it now uses <code>--as-cran</code> and turns off problematic checks with env vars (<a href='https://github.com/r-lib/devtools/issues/866'>#866</a>). The problematic <code>cran_env_vars()</code> function has been removed.</p></li>
-<li><p><code>find_rtools()</code> now looks for registry keys in both HKCU (user) and HKLM (admin) locations (<a href='https://github.com/Kevin-Jin'>@Kevin-Jin</a>, <a href='https://github.com/r-lib/devtools/issues/844'>#844</a>)</p></li>
-<li><p><code>install()</code> can now install dependencies from remote repositories by specifying them as <code>Remotes</code> in the <code>DESCRIPTION</code> file (<a href='https://github.com/r-lib/devtools/issues/902'>#902</a>, <a href='https://github.com/jimhester'>@jimhester</a>). See <code>vignette("dependencies")</code> for more details.</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now uses a better strategy when <code>cran = TRUE</code>. Instead of attempting to simulate <code>--as-cran</code> behaviour by turning on certain env vars, it now uses <code>--as-cran</code> and turns off problematic checks with env vars (<a href='https://github.com/r-lib/devtools/issues/866'>#866</a>). The problematic <code>cran_env_vars()</code> function has been removed.</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/pkgbuild/man/has_rtools.html">find_rtools()</a></code> now looks for registry keys in both HKCU (user) and HKLM (admin) locations (<a href='https://github.com/Kevin-Jin'>@Kevin-Jin</a>, <a href='https://github.com/r-lib/devtools/issues/844'>#844</a>)</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> can now install dependencies from remote repositories by specifying them as <code>Remotes</code> in the <code>DESCRIPTION</code> file (<a href='https://github.com/r-lib/devtools/issues/902'>#902</a>, <a href='https://github.com/jimhester'>@jimhester</a>). See <code><a href="../articles/dependencies.html">vignette("dependencies")</a></code> for more details.</p></li>
 <li><p><code>install_*()</code> detects if called on a Bioconductor package and if so, automatically includes the Bioconductor repositories if needed (<a href='https://github.com/r-lib/devtools/issues/895'>#895</a>, <a href='https://github.com/jimhester'>@jimhester</a>).</p></li>
-<li><p><code>install_deps()</code> now automatically upgrades out of date dependencies. This is typically what you want when you’re working on a development version of a package. To suppress this behaviour, set <code>upgrade_dependencies = FALSE</code> (<a href='https://github.com/r-lib/devtools/issues/863'>#863</a>). <code>install_deps()</code> is more careful with <code>...</code> - this means additional arguments to <code>install_*</code> are more likely to work (<a href='https://github.com/r-lib/devtools/issues/870'>#870</a>).</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_deps()</a></code> now automatically upgrades out of date dependencies. This is typically what you want when you’re working on a development version of a package. To suppress this behaviour, set <code>upgrade_dependencies = FALSE</code> (<a href='https://github.com/r-lib/devtools/issues/863'>#863</a>). <code><a href="../reference/install_deps.html">install_deps()</a></code> is more careful with <code>...</code> - this means additional arguments to <code>install_*</code> are more likely to work (<a href='https://github.com/r-lib/devtools/issues/870'>#870</a>).</p></li>
 <li><p><code>install_gitorious()</code> has been removed since gitorious no longer exists (<a href='https://github.com/r-lib/devtools/issues/913'>#913</a>).</p></li>
-<li><p><code>load_all()</code> no longer fails if a <code>useDynLib()</code> entry in the NAMESPACE is incorrect. This should make it easy to recover from an incorrect <code>@useDynLib</code>, because re-documenting() should now succeed.</p></li>
-<li><p><code>release()</code> works for packages not located at root of git repository (<a href='https://github.com/r-lib/devtools/issues/845'>#845</a>, <a href='https://github.com/r-lib/devtools/issues/846'>#846</a>, <a href='https://github.com/mbjones'>@mbjones</a>).</p></li>
+<li><p><code><a href="../reference/load_all.html">load_all()</a></code> no longer fails if a <code>useDynLib()</code> entry in the NAMESPACE is incorrect. This should make it easy to recover from an incorrect <code>@useDynLib</code>, because re-documenting() should now succeed.</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> works for packages not located at root of git repository (<a href='https://github.com/r-lib/devtools/issues/845'>#845</a>, <a href='https://github.com/r-lib/devtools/issues/846'>#846</a>, <a href='https://github.com/mbjones'>@mbjones</a>).</p></li>
 <li><p><code>revdep_check()</code> now installs <em>suggested</em> packages by default (<a href='https://github.com/r-lib/devtools/issues/808'>#808</a>), and sets <code>NOT_CRAN</code> env var to <code>false</code> (<a href='https://github.com/r-lib/devtools/issues/809'>#809</a>). This makes testing more similar to CRAN so that more packages should pass cleanly. It also sets <code>RGL_USE_NULL</code> to <code>true</code> to stop rgl windows from popping up during testing (<a href='https://github.com/r-lib/devtools/issues/897'>#897</a>). It also downloads all source packages at the beginning - this makes life a bit easier if you’re on a flaky internet connection (<a href='https://github.com/r-lib/devtools/issues/906'>#906</a>).</p></li>
-<li><p>New <code>uninstall()</code> removes installed package (<a href='https://github.com/r-lib/devtools/issues/820'>#820</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p>New <code><a href="../reference/uninstall.html">uninstall()</a></code> removes installed package (<a href='https://github.com/r-lib/devtools/issues/820'>#820</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p>Add <code>use_coverage()</code> function to add codecov.io or coveralls.io to a project, deprecate <code>use_coveralls()</code> (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/822'>#822</a>, <a href='https://github.com/r-lib/devtools/issues/818'>#818</a>).</p></li>
 <li><p><code>use_cran_badge()</code> uses canonical url form preferred by CRAN.</p></li>
 <li><p><code>use_data()</code> also works with data from the parent frame (<a href='https://github.com/r-lib/devtools/issues/829'>#829</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code>use_git_hook()</code> now creates <code>.git/hooks</code> if needed (<a href='https://github.com/r-lib/devtools/issues/888'>#888</a>)</p></li>
 <li><p>GitHub integration extended: <code>use_github()</code> gains a <code>protocol</code> argument (ssh or https), populates URL and BugReports fields of DESCRIPTION (only if non-existent or empty), pushes to the newly created GitHub repo, and sets a remote tracking branch. <code>use_github_links()</code> is a new exported function. <code>dr_github()</code> diagnoses more possible problems. (<a href='https://github.com/r-lib/devtools/issues/642'>#642</a>, <a href='https://github.com/jennybc'>@jennybc</a>).</p></li>
 <li><p><code>use_travis()</code>: Default travis script leaves notifications on default settings.</p></li>
-<li><p><code>uses_testthat()</code> and <code>check_failures()</code> are now exported (<a href='https://github.com/r-lib/devtools/issues/824'>#824</a>, <a href='https://github.com/r-lib/devtools/issues/839'>#839</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p><code><a href="../reference/test.html">uses_testthat()</a></code> and <code><a href="../reference/check_failures.html">check_failures()</a></code> are now exported (<a href='https://github.com/r-lib/devtools/issues/824'>#824</a>, <a href='https://github.com/r-lib/devtools/issues/839'>#839</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code>use_readme_rmd()</code> uses <code>uses_git()</code> correctly (<a href='https://github.com/r-lib/devtools/issues/793'>#793</a>).</p></li>
-<li><p><code>with_debug()</code> now uses <code>with_makevars()</code> rather than <code>with_env()</code>, because R reads compilation variables from the Makevars rather than the environment (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/788'>#788</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/pkgbuild/man/with_debug.html">with_debug()</a></code> now uses <code>with_makevars()</code> rather than <code>with_env()</code>, because R reads compilation variables from the Makevars rather than the environment (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/788'>#788</a>).</p></li>
 <li><p>Properly reset library path after <code>with_lib()</code> (<a href='https://github.com/r-lib/devtools/issues/836'>#836</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code>remove_s4classes()</code> performs a topological sort of the classes (<a href='https://github.com/r-lib/devtools/issues/848'>#848</a>, <a href='https://github.com/r-lib/devtools/issues/849'>#849</a>, <a href='https://github.com/famuvie'>@famuvie</a>).</p></li>
-<li><p><code>load_all()</code> warns (instead of failing) if importing symbols, methods, or classes from <code>NAMESPACE</code> fails (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/921'>#921</a>).</p></li>
+<li><p><code><a href="../reference/load_all.html">load_all()</a></code> warns (instead of failing) if importing symbols, methods, or classes from <code>NAMESPACE</code> fails (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/921'>#921</a>).</p></li>
 </ul>
 </div>
     <div id="devtools-180" class="section level1">
@@ -761,7 +773,7 @@
 <h2 class="hasAnchor">
 <a href="#helpers" class="anchor"></a>Helpers</h2>
 <ul>
-<li><p>New <code>dr_devtools()</code> runs some common diagnostics: are you using the latest version of R and devtools? It is run automatically by <code>release()</code> (<a href='https://github.com/r-lib/devtools/issues/592'>#592</a>).</p></li>
+<li><p>New <code>dr_devtools()</code> runs some common diagnostics: are you using the latest version of R and devtools? It is run automatically by <code><a href="../reference/release.html">release()</a></code> (<a href='https://github.com/r-lib/devtools/issues/592'>#592</a>).</p></li>
 <li><p><code>use_code_of_conduct()</code> adds a contributor code of conduct from <a href="http://contributor-covenant.org" class="uri">http://contributor-covenant.org</a>. (<a href='https://github.com/r-lib/devtools/issues/729'>#729</a>)</p></li>
 <li><p><code>use_coveralls()</code> allows you to easily add test coverage with coveralls (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/680'>#680</a>, <a href='https://github.com/r-lib/devtools/issues/681'>#681</a>).</p></li>
 <li><p><code>use_git()</code> sets up a package to use git, initialising the repo and checking the existing files.</p></li>
@@ -773,41 +785,41 @@
 <h2 class="hasAnchor">
 <a href="#package-installation-and-info" class="anchor"></a>Package installation and info</h2>
 <ul>
-<li><p><code>build_vignettes()</code> automatically installs the VignetteBuilder package, if necessary (<a href='https://github.com/r-lib/devtools/issues/736'>#736</a>).</p></li>
-<li><p><code>install()</code> and <code>install_deps()</code> gain a <code>...</code> argument, so additional arguments can be passed to <code><a href="https://rdrr.io/r/utils/install.packages.html">utils::install.packages()</a></code> (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/712'>#712</a>). <code>install_svn()</code> optionally accepts a revision (<a href='https://github.com/lev-kuznetsov'>@lev-kuznetsov</a>, <a href='https://github.com/r-lib/devtools/issues/739'>#739</a>). <code>install_version()</code> now knows how to look in multiple repos (<a href='https://github.com/r-lib/devtools/issues/721'>#721</a>).</p></li>
-<li><p><code>package_deps()</code> (and <code>dev_package_deps()</code>) determines all recursive dependencies and whether or not they’re up-to-date (<a href='https://github.com/r-lib/devtools/issues/663'>#663</a>). Use <code><a href="https://rdrr.io/r/stats/update.html">update(package_deps("xyz"))</a></code> to update out of date dependencies. This code is used in <code>install_deps()</code> and <code>revdep_check()</code> - it’s slightly more aggressive than previous code (i.e. it forces you to use the latest version), which should avoid problems when you go to submit to CRAN.</p></li>
-<li><p>New <code>update_packages()</code> will install a package (and its dependencies) only if they are missing or out of date (<a href='https://github.com/r-lib/devtools/issues/675'>#675</a>).</p></li>
-<li><p><code>session_info()</code> can now take a vector of package names, in which case it will print the version of those packages and their dependencies (<a href='https://github.com/r-lib/devtools/issues/664'>#664</a>).</p></li>
+<li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> automatically installs the VignetteBuilder package, if necessary (<a href='https://github.com/r-lib/devtools/issues/736'>#736</a>).</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> and <code><a href="../reference/install_deps.html">install_deps()</a></code> gain a <code>...</code> argument, so additional arguments can be passed to <code><a href="https://rdrr.io/r/utils/install.packages.html">utils::install.packages()</a></code> (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/712'>#712</a>). <code><a href="../reference/remote-reexports.html">install_svn()</a></code> optionally accepts a revision (<a href='https://github.com/lev-kuznetsov'>@lev-kuznetsov</a>, <a href='https://github.com/r-lib/devtools/issues/739'>#739</a>). <code><a href="../reference/remote-reexports.html">install_version()</a></code> now knows how to look in multiple repos (<a href='https://github.com/r-lib/devtools/issues/721'>#721</a>).</p></li>
+<li><p><code>package_deps()</code> (and <code><a href="../reference/remote-reexports.html">dev_package_deps()</a></code>) determines all recursive dependencies and whether or not they’re up-to-date (<a href='https://github.com/r-lib/devtools/issues/663'>#663</a>). Use <code><a href="https://rdrr.io/r/stats/update.html">update(package_deps("xyz"))</a></code> to update out of date dependencies. This code is used in <code><a href="../reference/install_deps.html">install_deps()</a></code> and <code>revdep_check()</code> - it’s slightly more aggressive than previous code (i.e. it forces you to use the latest version), which should avoid problems when you go to submit to CRAN.</p></li>
+<li><p>New <code><a href="../reference/remote-reexports.html">update_packages()</a></code> will install a package (and its dependencies) only if they are missing or out of date (<a href='https://github.com/r-lib/devtools/issues/675'>#675</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info()</a></code> can now take a vector of package names, in which case it will print the version of those packages and their dependencies (<a href='https://github.com/r-lib/devtools/issues/664'>#664</a>).</p></li>
 </ul>
 </div>
 <div id="git-and-github" class="section level2">
 <h2 class="hasAnchor">
 <a href="#git-and-github" class="anchor"></a>Git and github</h2>
 <ul>
-<li><p>Devtools now uses the git2r package to inspect git properties and install remote git packages with <code>install_git()</code>. This should be considerably more reliable than the previous strategy which involves calling the command line <code>git</code> client. It has two small downsides: <code>install_git()</code> no longer accepts additional <code>args</code>, and must do a deep clone when installing.</p></li>
+<li><p>Devtools now uses the git2r package to inspect git properties and install remote git packages with <code><a href="../reference/remote-reexports.html">install_git()</a></code>. This should be considerably more reliable than the previous strategy which involves calling the command line <code>git</code> client. It has two small downsides: <code><a href="../reference/remote-reexports.html">install_git()</a></code> no longer accepts additional <code>args</code>, and must do a deep clone when installing.</p></li>
 <li><p><code>dr_github()</code> checks for common problems with git/github setup (<a href='https://github.com/r-lib/devtools/issues/643'>#643</a>).</p></li>
-<li><p>If you use git, <code>release()</code> now warns you if you have uncommited changes, or if you’ve forgotten to synchronise with the remote (<a href='https://github.com/r-lib/devtools/issues/691'>#691</a>).</p></li>
-<li><p><code>install_github()</code> warns if repository contains submodules (<a href='https://github.com/ashander'>@ashander</a>, <a href='https://github.com/r-lib/devtools/issues/751'>#751</a>).</p></li>
+<li><p>If you use git, <code><a href="../reference/release.html">release()</a></code> now warns you if you have uncommited changes, or if you’ve forgotten to synchronise with the remote (<a href='https://github.com/r-lib/devtools/issues/691'>#691</a>).</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> warns if repository contains submodules (<a href='https://github.com/ashander'>@ashander</a>, <a href='https://github.com/r-lib/devtools/issues/751'>#751</a>).</p></li>
 </ul>
 </div>
 <div id="bug-fixes-and-minor-improvements-3" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes-and-minor-improvements-3" class="anchor"></a>Bug fixes and minor improvements</h2>
 <ul>
-<li><p>Previously, devtools ran all external R processes with <code>R --vanilla</code>. Now it only suppresses user profiles, and constructs a custom <code>.Rprofile</code> to override the default. Currently, this <code>.Rprofile</code> sets up the <code>repos</code> option. Among others, this enables the cyclic dependency check in <code><a href="https://devtools.r-lib.org//reference/release.html">devtools::release</a></code> (<a href='https://github.com/r-lib/devtools/issues/602'>#602</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p>Previously, devtools ran all external R processes with <code>R --vanilla</code>. Now it only suppresses user profiles, and constructs a custom <code>.Rprofile</code> to override the default. Currently, this <code>.Rprofile</code> sets up the <code>repos</code> option. Among others, this enables the cyclic dependency check in <code><a href="../reference/release.html">devtools::release</a></code> (<a href='https://github.com/r-lib/devtools/issues/602'>#602</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code>R_BROWSER</code> and <code>R_PDFVIEWER</code> environment variables are set to “false” to suppress random windows opening during checks.</p></li>
 <li><p>Devtools correctly identifies RTools 3.1 and 3.2 (<a href='https://github.com/r-lib/devtools/issues/738'>#738</a>), and preserves continuation lines in the <code>DESCRIPTION</code> (<a href='https://github.com/r-lib/devtools/issues/709'>#709</a>).</p></li>
 <li><p><code>dev_help()</code> now uses <code><a href="https://rdrr.io/r/base/normalizePath.html">normalizePath()</a></code>. Hopefully this will make it more likely to work if you’re on windows and have a space in the path.</p></li>
-<li><p><code>lint()</code> gains a <code>cache</code> argument (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/708'>#708</a>).</p></li>
+<li><p><code><a href="../reference/lint.html">lint()</a></code> gains a <code>cache</code> argument (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/708'>#708</a>).</p></li>
 <li><p>Fixed namespace issues related to <code><a href="https://rdrr.io/r/stats/setNames.html">stats::setNames()</a></code> (<a href='https://github.com/r-lib/devtools/issues/734'>#734</a>, <a href='https://github.com/r-lib/devtools/issues/772'>#772</a>) and <code><a href="https://rdrr.io/r/utils/unzip.html">utils::unzip()</a></code> (<a href='https://github.com/r-lib/devtools/issues/761'>#761</a>, <a href='https://github.com/robertzk'>@robertzk</a>).</p></li>
-<li><p><code>release()</code> now reminds you to check the existing CRAN check results page (<a href='https://github.com/r-lib/devtools/issues/613'>#613</a>) and shows file size before uploading to CRAN (<a href='https://github.com/r-lib/devtools/issues/683'>#683</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> now reminds you to check the existing CRAN check results page (<a href='https://github.com/r-lib/devtools/issues/613'>#613</a>) and shows file size before uploading to CRAN (<a href='https://github.com/r-lib/devtools/issues/683'>#683</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code>RCMD()</code> and <code>system_check()</code> are now exported so they can be used by other packages. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/699'>#699</a>).</p></li>
 <li><p><code>revdep_check()</code> creates directories if needed (<a href='https://github.com/r-lib/devtools/issues/759'>#759</a>).</p></li>
 <li><p><code>system_check()</code> combines arguments with <code></code>, not <code>,</code>. (<a href='https://github.com/r-lib/devtools/issues/753'>#753</a>)</p></li>
-<li><p><code>test()</code> gains an <code>...</code> argument so that additional arguments can be passed to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir</a></code> (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/747'>#747</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> gains an <code>...</code> argument so that additional arguments can be passed to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir</a></code> (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/747'>#747</a>)</p></li>
 <li><p><code>use_travis()</code> now suggests you link to the svg icon since that looks a little sharper. Default template sets <code>CRAN: http://cran.rstudio.com/</code> to enable the cyclic dependency check.</p></li>
 <li><p><code>NOT_CRAN</code> envvar no longer overrides externally set variable.</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check(check_version = TRUE)</a></code> also checks spelling of the <code>DESCRIPTION</code>; if no spell checker is installed, a warning is given (<a href='https://github.com/r-lib/devtools/issues/784'>#784</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p><code><a href="../reference/check.html">check(check_version = TRUE)</a></code> also checks spelling of the <code>DESCRIPTION</code>; if no spell checker is installed, a warning is given (<a href='https://github.com/r-lib/devtools/issues/784'>#784</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 </ul>
 </div>
 </div>
@@ -820,13 +832,13 @@
 <a href="#improve-reverse-dependency-checking" class="anchor"></a>Improve reverse dependency checking</h2>
 <p>Devtools now supports a new and improved style of revdep checking with <code>use_revdep()</code>. This creates a new directory called <code>revdep</code> which contains a <code>check.R</code> template. Run this template to check all reverse dependencies, and save summarised results to <code>check/summary.md</code>. You can then check this file into git, making it much easier to track how reverse dependency results change between versions. The documentation for <code>revdep_check()</code> is much improved, and should be more useful (<a href='https://github.com/r-lib/devtools/issues/635'>#635</a>)</p>
 <p>I recommend that you specify a library to use when checking with <code><a href="https://rdrr.io/r/base/options.html">options("devtools.revdep.libpath")</a></code>. (This should be a directory that already exists). This should be difference from your default library to keep the revdep environment isolated from your development environment.</p>
-<p>I’ve also tweaked the output of <code>revdep_maintainers()</code> so it’s easier to copy and paste into an email (<a href='https://github.com/r-lib/devtools/issues/634'>#634</a>). This makes life a little easier pre-release.</p>
+<p>I’ve also tweaked the output of <code><a href="../reference/revdep.html">revdep_maintainers()</a></code> so it’s easier to copy and paste into an email (<a href='https://github.com/r-lib/devtools/issues/634'>#634</a>). This makes life a little easier pre-release.</p>
 </div>
 <div id="new-helpers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-helpers" class="anchor"></a>New helpers</h2>
 <ul>
-<li><p><code>lint()</code> runs <code><a href="https://rdrr.io/pkg/lintr/man/lint_package.html">lintr::lint_package()</a></code> to check style consistency and errors in a package. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/694'>#694</a>)</p></li>
+<li><p><code><a href="../reference/lint.html">lint()</a></code> runs <code><a href="https://rdrr.io/pkg/lintr/man/lint_package.html">lintr::lint_package()</a></code> to check style consistency and errors in a package. (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/694'>#694</a>)</p></li>
 <li><p><code>use_appveyor()</code> sets up a package for testing with AppVeyor (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/549'>#549</a>).</p></li>
 <li><p><code>use_cran_comments()</code> creates a <code>cran-comments.md</code> template and adds it to <code>.Rbuildignore</code> to help with CRAN submissions. (<a href='https://github.com/r-lib/devtools/issues/661'>#661</a>)</p></li>
 <li><p><code>use_git_hook()</code> allows you to easily add a git hook to a package.</p></li>
@@ -837,30 +849,30 @@
 <h2 class="hasAnchor">
 <a href="#minor-improvements" class="anchor"></a>Minor improvements</h2>
 <ul>
-<li><p>Deprecated <code>doc_clean</code> argument to <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> has been removed.</p></li>
-<li><p>Initial package version in <code>create()</code> is now <code>0.0.0.9000</code> (<a href='https://github.com/r-lib/devtools/issues/632'>#632</a>). <code>create()</code> and <code>create_description()</code> checks that the package name is valid (<a href='https://github.com/r-lib/devtools/issues/610'>#610</a>).</p></li>
-<li><p><code>load_all()</code> runs <code><a href="https://roxygen2.r-lib.org/reference/update_collate.html">roxygen2::update_collate()</a></code> before loading code. This ensures that files are sourced in the way you expect, as defined by roxygen <code>@include</code> tags. If you don’t have any <code>@include</code> tags, the collate will be not be touched (<a href='https://github.com/r-lib/devtools/issues/623'>#623</a>).</p></li>
-<li><p><code>session_info()</code> gains <code>include_base</code> argument to also display loaded/attached base packages (<a href='https://github.com/r-lib/devtools/issues/646'>#646</a>).</p></li>
+<li><p>Deprecated <code>doc_clean</code> argument to <code><a href="../reference/check.html">check()</a></code> has been removed.</p></li>
+<li><p>Initial package version in <code><a href="../reference/create.html">create()</a></code> is now <code>0.0.0.9000</code> (<a href='https://github.com/r-lib/devtools/issues/632'>#632</a>). <code><a href="../reference/create.html">create()</a></code> and <code>create_description()</code> checks that the package name is valid (<a href='https://github.com/r-lib/devtools/issues/610'>#610</a>).</p></li>
+<li><p><code><a href="../reference/load_all.html">load_all()</a></code> runs <code><a href="https://roxygen2.r-lib.org/reference/update_collate.html">roxygen2::update_collate()</a></code> before loading code. This ensures that files are sourced in the way you expect, as defined by roxygen <code>@include</code> tags. If you don’t have any <code>@include</code> tags, the collate will be not be touched (<a href='https://github.com/r-lib/devtools/issues/623'>#623</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info()</a></code> gains <code>include_base</code> argument to also display loaded/attached base packages (<a href='https://github.com/r-lib/devtools/issues/646'>#646</a>).</p></li>
 <li>
-<p><code>release()</code> no longer asks if you’ve read the CRAN policies since the CRAN submission process now asks the same question (<a href='https://github.com/r-lib/devtools/issues/692'>#692</a>).</p>
-<p><code>release(check = TRUE)</code> now runs some additional custom checks. These include:</p>
+<p><code><a href="../reference/release.html">release()</a></code> no longer asks if you’ve read the CRAN policies since the CRAN submission process now asks the same question (<a href='https://github.com/r-lib/devtools/issues/692'>#692</a>).</p>
+<p><code><a href="../reference/release.html">release(check = TRUE)</a></code> now runs some additional custom checks. These include:</p>
 <ul>
 <li><p>Checking that you don’t depend on a development version of a package.</p></li>
 <li><p>Checking that the version number has exactly three components (<a href='https://github.com/r-lib/devtools/issues/633'>#633</a>).</p></li>
 </ul>
-<p><code>release()</code> now builds packages without the <code>--no-manual</code> switch, both for checking and for actually building the release package (<a href='https://github.com/r-lib/devtools/issues/603'>#603</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>). <code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code> gains an additional argument <code>manual</code>, defaulting to <code>FALSE</code>, and <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> gains <code>...</code> unmodified to <code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code>.</p>
+<p><code><a href="../reference/release.html">release()</a></code> now builds packages without the <code>--no-manual</code> switch, both for checking and for actually building the release package (<a href='https://github.com/r-lib/devtools/issues/603'>#603</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>). <code><a href="../reference/build.html">build()</a></code> gains an additional argument <code>manual</code>, defaulting to <code>FALSE</code>, and <code><a href="../reference/check.html">check()</a></code> gains <code>...</code> unmodified to <code><a href="../reference/build.html">build()</a></code>.</p>
 </li>
 <li><p><code>use_travis()</code> now sets an environment variable so that any WARNING will also cause the build to fail (<a href='https://github.com/r-lib/devtools/issues/570'>#570</a>).</p></li>
-<li><p><code>with_debug()</code> and <code>compiler_flags()</code> set <code>CFLAGS</code> etc instead of <code>PKG_CFLAGS</code>. <code>PKG_*</code> are for packages to use, the raw values are for users to set. (According to <a href="http://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Using-Makevars" class="uri">http://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Using-Makevars</a>)</p></li>
-<li><p>New <code>setup()</code> works like <code>create()</code> but assumes an existing, not necessarily empty, directory (<a href='https://github.com/r-lib/devtools/issues/627'>#627</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/pkgbuild/man/with_debug.html">with_debug()</a></code> and <code>compiler_flags()</code> set <code>CFLAGS</code> etc instead of <code>PKG_CFLAGS</code>. <code>PKG_*</code> are for packages to use, the raw values are for users to set. (According to <a href="http://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Using-Makevars" class="uri">http://cran.rstudio.com/doc/manuals/r-devel/R-exts.html#Using-Makevars</a>)</p></li>
+<li><p>New <code>setup()</code> works like <code><a href="../reference/create.html">create()</a></code> but assumes an existing, not necessarily empty, directory (<a href='https://github.com/r-lib/devtools/issues/627'>#627</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 </ul>
 </div>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li><p>When installing a pull request, <code>install_github()</code> now uses the repository associated with the pull request’s branch (and not the repository of the user who created the pull request) (<a href='https://github.com/r-lib/devtools/issues/658'>#658</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
-<li><p><code>missing_s3()</code> works once again (<a href='https://github.com/r-lib/devtools/issues/672'>#672</a>)</p></li>
+<li><p>When installing a pull request, <code><a href="../reference/remote-reexports.html">install_github()</a></code> now uses the repository associated with the pull request’s branch (and not the repository of the user who created the pull request) (<a href='https://github.com/r-lib/devtools/issues/658'>#658</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p><code><a href="../reference/missing_s3.html">missing_s3()</a></code> works once again (<a href='https://github.com/r-lib/devtools/issues/672'>#672</a>)</p></li>
 <li><p>Fixed scoping issues with <code><a href="https://rdrr.io/r/utils/unzip.html">unzip()</a></code>.</p></li>
 <li><p><code>load_code()</code> now executes the package’s code with the package’s root as working directory, just like <code>R CMD build</code> et al. (<a href='https://github.com/r-lib/devtools/issues/640'>#640</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 </ul>
@@ -886,7 +898,7 @@
 <a href="#tool-templates-and-create" class="anchor"></a>Tool templates and <code>create()</code>
 </h2>
 <ul>
-<li><p><code>create()</code> no longer generates <code>man/</code> directory - roxygen2 now does this automatically. It also no longer generates an package-level doc template. If you want this, use <code>use_package_doc()</code>. It also makes a dummy namespace so that you can build &amp; reload without running <code>document()</code> first.</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code> no longer generates <code>man/</code> directory - roxygen2 now does this automatically. It also no longer generates an package-level doc template. If you want this, use <code>use_package_doc()</code>. It also makes a dummy namespace so that you can build &amp; reload without running <code><a href="../reference/document.html">document()</a></code> first.</p></li>
 <li><p>New <code>use_data()</code> makes it easy to include data in a package, either in <code>data/</code> (for exported datasets) or in <code>R/sysdata.rda</code> (for internal data). (<a href='https://github.com/r-lib/devtools/issues/542'>#542</a>)</p></li>
 <li><p>New <code>use_data_raw()</code> creates <code>data-raw/</code> directory for reproducible generation of <code>data/</code> files (<a href='https://github.com/r-lib/devtools/issues/541'>#541</a>).</p></li>
 <li><p>New <code>use_package()</code> allows you to set dependencies (<a href='https://github.com/r-lib/devtools/issues/559'>#559</a>).</p></li>
@@ -901,20 +913,20 @@
 <h2 class="hasAnchor">
 <a href="#the-release-process" class="anchor"></a>The release process</h2>
 <ul>
-<li><p>You can add arbitrary extra questions to <code>release()</code> by defining a function <code>release_questions()</code> in your package. Your <code>release_questions()</code> should return a character vector of questions to ask (<a href='https://github.com/r-lib/devtools/issues/451'>#451</a>).</p></li>
-<li><p><code>release()</code> uses new CRAN submission process, as implemented by <code>submit_cran()</code> (<a href='https://github.com/r-lib/devtools/issues/430'>#430</a>).</p></li>
+<li><p>You can add arbitrary extra questions to <code><a href="../reference/release.html">release()</a></code> by defining a function <code>release_questions()</code> in your package. Your <code>release_questions()</code> should return a character vector of questions to ask (<a href='https://github.com/r-lib/devtools/issues/451'>#451</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> uses new CRAN submission process, as implemented by <code><a href="../reference/submit_cran.html">submit_cran()</a></code> (<a href='https://github.com/r-lib/devtools/issues/430'>#430</a>).</p></li>
 </ul>
 </div>
 <div id="package-installation-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#package-installation-1" class="anchor"></a>Package installation</h2>
 <ul>
-<li><p>All <code>install_*</code> now use the same code and store much useful metadata. Currently only <code>session_info()</code> takes advantage of this information, but it will allow the development of future tools like generic update functions.</p></li>
+<li><p>All <code>install_*</code> now use the same code and store much useful metadata. Currently only <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info()</a></code> takes advantage of this information, but it will allow the development of future tools like generic update functions.</p></li>
 <li><p>Vignettes are no longer installed by default because they potentially require all suggested packages to also be installed. Use <code>build_vignettes = TRUE</code> to force building and to install all suggested packages (<a href='https://github.com/r-lib/devtools/issues/573'>#573</a>).</p></li>
-<li><p><code>install_bitbucket()</code> has been bought into alignment with <code>install_github()</code>: this means you can now specify repos with the compact <code>username/repo@ref</code> syntax. The <code>username</code> is now deprecated.</p></li>
-<li><p><code>install_git()</code> has been simplified and many of the arguments have changed names for consistency with metadata for other package installs.</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_bitbucket()</a></code> has been bought into alignment with <code><a href="../reference/remote-reexports.html">install_github()</a></code>: this means you can now specify repos with the compact <code>username/repo@ref</code> syntax. The <code>username</code> is now deprecated.</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_git()</a></code> has been simplified and many of the arguments have changed names for consistency with metadata for other package installs.</p></li>
 <li>
-<p><code>install_github()</code> has been considerably improved:</p>
+<p><code><a href="../reference/remote-reexports.html">install_github()</a></code> has been considerably improved:</p>
 <ul>
 <li><p><code>username</code> is deprecated - please include the user in the repo name: <code>rstudio/shiny</code>, <code>hadley/devtools</code> etc.</p></li>
 <li><p><code>dependencies = TRUE</code> is no longer forced (regression in 1.5) (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/462'>#462</a>).</p></li>
@@ -924,9 +936,9 @@
 <li><p>To download a specified pull request, use <code>ref = github_pull(...)</code> (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/509'>#509</a>). To install the latest release, use <code>"user/repo@*release"</code> or <code>ref = github_release()</code> (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/350'>#350</a>).</p></li>
 </ul>
 </li>
-<li><p><code>install_gitorious()</code> has been bought into alignment with <code>install_github()</code>: this means you can now specify repos with the compact <code>username/repo@ref</code> syntax. You must now always supply user (project) name and repo.</p></li>
-<li><p><code>install_svn()</code> lets you install an R package from a subversion repository (assuming you have subversion installed).</p></li>
-<li><p><code>decompress()</code> and hence <code>install_url()</code> now work when the downloaded file decompresses without additional top-level directory (<a href='https://github.com/r-lib/devtools/issues/537'>#537</a>).</p></li>
+<li><p><code>install_gitorious()</code> has been bought into alignment with <code><a href="../reference/remote-reexports.html">install_github()</a></code>: this means you can now specify repos with the compact <code>username/repo@ref</code> syntax. You must now always supply user (project) name and repo.</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_svn()</a></code> lets you install an R package from a subversion repository (assuming you have subversion installed).</p></li>
+<li><p><code>decompress()</code> and hence <code><a href="../reference/remote-reexports.html">install_url()</a></code> now work when the downloaded file decompresses without additional top-level directory (<a href='https://github.com/r-lib/devtools/issues/537'>#537</a>).</p></li>
 </ul>
 </div>
 <div id="other-minor-improvements-and-bug-fixes" class="section level2">
@@ -935,19 +947,19 @@
 <ul>
 <li><p>If you’re using RStudio, and you’re trying to build a binary package without the necessary build tools, RStudio will prompt to download and install the right thing. (<a href='https://github.com/r-lib/devtools/issues/488'>#488</a>)</p></li>
 <li><p>Commands are no longer run with <code>LC_ALL=C</code> - this no longer seems necessary (<a href='https://github.com/r-lib/devtools/issues/507'>#507</a>).</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">build(binary = TRUE)</a></code> creates an even-more-temporary package library avoid conflicts (<a href='https://github.com/r-lib/devtools/issues/557'>#557</a>).</p></li>
+<li><p><code><a href="../reference/build.html">build(binary = TRUE)</a></code> creates an even-more-temporary package library avoid conflicts (<a href='https://github.com/r-lib/devtools/issues/557'>#557</a>).</p></li>
 <li><p><code>check_dir()</code> no longer fails on UNC paths (<a href='https://github.com/r-lib/devtools/issues/522'>#522</a>).</p></li>
 <li><p><code>check_devtools()</code> also checks for dependencies on development versions of packages (<a href='https://github.com/r-lib/devtools/issues/534'>#534</a>).</p></li>
-<li><p><code>load_all()</code> no longer fails on partial loading of a package containing S4 or RC classes (<a href='https://github.com/r-lib/devtools/issues/577'>#577</a>).</p></li>
-<li><p>On windows, <code>find_rtools()</code> is now run on package load, not package attach.</p></li>
-<li><p><code>help()</code>, <code><a href="https://rdrr.io/r/utils/Question.html">?</a></code>, and <code><a href="https://rdrr.io/r/base/system.file.html">system.file()</a></code> are now made available when a package is loaded with <code>load_all()</code>, even if the devtools package isn’t attached.</p></li>
+<li><p><code><a href="../reference/load_all.html">load_all()</a></code> no longer fails on partial loading of a package containing S4 or RC classes (<a href='https://github.com/r-lib/devtools/issues/577'>#577</a>).</p></li>
+<li><p>On windows, <code><a href="https://rdrr.io/pkg/pkgbuild/man/has_rtools.html">find_rtools()</a></code> is now run on package load, not package attach.</p></li>
+<li><p><code>help()</code>, <code>?</code>, and <code><a href="https://rdrr.io/r/base/system.file.html">system.file()</a></code> are now made available when a package is loaded with <code><a href="../reference/load_all.html">load_all()</a></code>, even if the devtools package isn’t attached.</p></li>
 <li><p><code>httr</code> 0.3 required (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/466'>#466</a>).</p></li>
-<li><p><code>load_all()</code> no longer gives an error when objects listed as exports are missing.</p></li>
+<li><p><code><a href="../reference/load_all.html">load_all()</a></code> no longer gives an error when objects listed as exports are missing.</p></li>
 <li><p>Shim added for <code><a href="https://rdrr.io/r/base/library.dynam.html">library.dynam.unload()</a></code>.</p></li>
-<li><p><code>loaded_packages()</code> now returns package name and path it was loaded from. (<a href='https://github.com/r-lib/devtools/issues/486'>#486</a>)</p></li>
+<li><p><code><a href="../reference/loaded_packages.html">loaded_packages()</a></code> now returns package name and path it was loaded from. (<a href='https://github.com/r-lib/devtools/issues/486'>#486</a>)</p></li>
 <li><p>The <code>parenvs()</code> function has been removed from devtools, because is now in the pryr package.</p></li>
-<li><p><code>missing_s3()</code> uses a better heuristic for determining if a function is a S3 method (<a href='https://github.com/r-lib/devtools/issues/393'>#393</a>).</p></li>
-<li><p>New <code>session_info()</code> provides useful information about your R session. It’s a little more focussed than <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> and includes where packages where installed from (<a href='https://github.com/r-lib/devtools/issues/526'>#526</a>).</p></li>
+<li><p><code><a href="../reference/missing_s3.html">missing_s3()</a></code> uses a better heuristic for determining if a function is a S3 method (<a href='https://github.com/r-lib/devtools/issues/393'>#393</a>).</p></li>
+<li><p>New <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info()</a></code> provides useful information about your R session. It’s a little more focussed than <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> and includes where packages where installed from (<a href='https://github.com/r-lib/devtools/issues/526'>#526</a>).</p></li>
 <li><p><code>rstudioapi</code> package moved from suggests to imports, since it’s always needed (it’s job is to figure out if rstudio is available, <a href='https://github.com/r-lib/devtools/issues/458'>#458</a>)</p></li>
 <li><p>Implemented own version <code><a href="https://rdrr.io/r/utils/unzip.html">utils::unzip()</a></code> that throws error if command fails and doesn’t print unneeded messages on non-Windows platforms (<a href='https://github.com/r-lib/devtools/issues/540'>#540</a>).</p></li>
 <li><p>Wrote own version of <code><a href="https://rdrr.io/r/base/dcf.html">write.dcf()</a></code> that doesn’t butcher whitespace and fieldnames.</p></li>
@@ -957,7 +969,7 @@
 <h2 class="hasAnchor">
 <a href="#removed-functionality" class="anchor"></a>Removed functionality</h2>
 <ul>
-<li><p>The <code>fresh</code> argument to <code>test()</code> has been removed - this is best done by the editor since it can run the tests in a completely clean environment by starting a new R session.</p></li>
+<li><p>The <code>fresh</code> argument to <code><a href="../reference/test.html">test()</a></code> has been removed - this is best done by the editor since it can run the tests in a completely clean environment by starting a new R session.</p></li>
 <li><p><code>compile_dll()</code> can now build packages located in R’s <code><a href="https://rdrr.io/r/base/tempfile.html">tempdir()</a></code> directory (<a href='https://github.com/richfitz'>@richfitz</a>, <a href='https://github.com/r-lib/devtools/issues/531'>#531</a>).</p></li>
 </ul>
 </div>
@@ -968,44 +980,44 @@
 </h1>
 <p>Four new functions make it easier to add useful infrastructure to packages:</p>
 <ul>
-<li><p><code>add_test_infrastructure()</code> will create test infrastructure for a new package. It is called automatically from <code>test()</code> if no test directories are found, the session is interactive and you agree.</p></li>
-<li><p><code>add_rstudio_project()</code> adds an RStudio project file to your package. <code>create()</code> gains an <code>rstudio</code> argument which will automatically create an RStudio project in the package directory. It defaults to <code>TRUE</code>: if you don’t use RStudio, just delete the file.</p></li>
+<li><p><code>add_test_infrastructure()</code> will create test infrastructure for a new package. It is called automatically from <code><a href="../reference/test.html">test()</a></code> if no test directories are found, the session is interactive and you agree.</p></li>
+<li><p><code>add_rstudio_project()</code> adds an RStudio project file to your package. <code><a href="../reference/create.html">create()</a></code> gains an <code>rstudio</code> argument which will automatically create an RStudio project in the package directory. It defaults to <code>TRUE</code>: if you don’t use RStudio, just delete the file.</p></li>
 <li><p><code>add_travis()</code> adds a basic travis template to your package. <code>.travis.yml</code> is automatically added to <code>.Rbuildignore</code> to avoid including it in the built package.</p></li>
 <li><p><code>add_build_ignore()</code> makes it easy to add files to <code>.Rbuildignore</code>, correctly escaping special characters</p></li>
 </ul>
 <p>Two dependencies were incremented:</p>
 <ul>
 <li><p>devtools requires at least R version 3.0.2.</p></li>
-<li><p><code>document()</code> requires at least roxygen2 version 3.0.0.</p></li>
+<li><p><code><a href="../reference/document.html">document()</a></code> requires at least roxygen2 version 3.0.0.</p></li>
 </ul>
 <div id="minor-improvements-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minor-improvements-1" class="anchor"></a>Minor improvements</h2>
 <ul>
-<li><p><code>build_win()</code> now builds R-release and R-devel by default (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/438'>#438</a>). It also gains parameter <code>args</code>, which is passed on to <code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code> (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/421'>#421</a>).</p></li>
-<li><p><code>check_doc()</code> now runs <code>document()</code> automatically.</p></li>
-<li><p><code>install()</code> gains <code>thread</code> argument which allows you to install multiple packages in parallel (<a href='https://github.com/mllg'>@mllg</a>, <a href='https://github.com/r-lib/devtools/issues/401'>#401</a>). <code>threads</code> argument to <code>check_cran()</code> now defaults to <code><a href="https://rdrr.io/r/base/options.html">getOption("Ncpus")</a></code></p></li>
-<li><p><code>install_deps(deps = T)</code> no longer installs all dependencies of dependencies (<a href='https://github.com/r-lib/devtools/issues/369'>#369</a>).</p></li>
-<li><p><code>install_github()</code> now prefers personal access tokens supplied to <code>auth_token</code> rather than passwords (<a href='https://github.com/r-lib/devtools/issues/418'>#418</a>, <a href='https://github.com/jeroenooms'>@jeroenooms</a>).</p></li>
-<li><p><code>install_github()</code> now defaults to <code>dependencies = TRUE</code> so you definitely get all the packages you need to build from source.</p></li>
+<li><p><code>build_win()</code> now builds R-release and R-devel by default (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/438'>#438</a>). It also gains parameter <code>args</code>, which is passed on to <code><a href="../reference/build.html">build()</a></code> (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/421'>#421</a>).</p></li>
+<li><p><code>check_doc()</code> now runs <code><a href="../reference/document.html">document()</a></code> automatically.</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> gains <code>thread</code> argument which allows you to install multiple packages in parallel (<a href='https://github.com/mllg'>@mllg</a>, <a href='https://github.com/r-lib/devtools/issues/401'>#401</a>). <code>threads</code> argument to <code>check_cran()</code> now defaults to <code><a href="https://rdrr.io/r/base/options.html">getOption("Ncpus")</a></code></p></li>
+<li><p><code><a href="../reference/install_deps.html">install_deps(deps = T)</a></code> no longer installs all dependencies of dependencies (<a href='https://github.com/r-lib/devtools/issues/369'>#369</a>).</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> now prefers personal access tokens supplied to <code>auth_token</code> rather than passwords (<a href='https://github.com/r-lib/devtools/issues/418'>#418</a>, <a href='https://github.com/jeroenooms'>@jeroenooms</a>).</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> now defaults to <code>dependencies = TRUE</code> so you definitely get all the packages you need to build from source.</p></li>
 <li><p>devtools supplies its own version of <code><a href="https://rdrr.io/r/base/system.file.html">system.file()</a></code> so that when the function is called from the R console, it will have special behavior for packages loaded with devtools.</p></li>
-<li><p>devtools supplies its own version of <code>help</code> and <code><a href="https://rdrr.io/r/utils/Question.html">?</a></code>, which will search devtools-loaded packages as well as normally-loaded packages.</p></li>
+<li><p>devtools supplies its own version of <code>help</code> and <code>?</code>, which will search devtools-loaded packages as well as normally-loaded packages.</p></li>
 </ul>
 </div>
 <div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li><p><code>check_devtools()</code> no longer called by <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> because the relevant functionality is now included in <code>R CMD CHECK</code> and it was causing false positives (<a href='https://github.com/r-lib/devtools/issues/446'>#446</a>).</p></li>
-<li><p><code>install_deps(TRUE)</code> now includes packages listed in <code>VignetteBuilder</code> (<a href='https://github.com/r-lib/devtools/issues/396'>#396</a>)</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code> no longer checks for <code>pdflatex</code> when building vignettes, as many modern vignettes don’t need it (<a href='https://github.com/r-lib/devtools/issues/398'>#398</a>). It also uses <code>--no-build-vignettes</code> for &gt;3.0.0 compatibility (<a href='https://github.com/r-lib/devtools/issues/391'>#391</a>).</p></li>
-<li><p><code>release()</code> does a better job of opening your email client if you’re inside of RStudio (<a href='https://github.com/r-lib/devtools/issues/433'>#433</a>).</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> now correctly reports the location of the <code>R CMD check</code> output when called with a custom <code>check_dir</code>. (Thanks to <a href='https://github.com/brentonk'>@brentonk</a>)</p></li>
+<li><p><code>check_devtools()</code> no longer called by <code><a href="../reference/check.html">check()</a></code> because the relevant functionality is now included in <code>R CMD CHECK</code> and it was causing false positives (<a href='https://github.com/r-lib/devtools/issues/446'>#446</a>).</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_deps(TRUE)</a></code> now includes packages listed in <code>VignetteBuilder</code> (<a href='https://github.com/r-lib/devtools/issues/396'>#396</a>)</p></li>
+<li><p><code><a href="../reference/build.html">build()</a></code> no longer checks for <code>pdflatex</code> when building vignettes, as many modern vignettes don’t need it (<a href='https://github.com/r-lib/devtools/issues/398'>#398</a>). It also uses <code>--no-build-vignettes</code> for &gt;3.0.0 compatibility (<a href='https://github.com/r-lib/devtools/issues/391'>#391</a>).</p></li>
+<li><p><code><a href="../reference/release.html">release()</a></code> does a better job of opening your email client if you’re inside of RStudio (<a href='https://github.com/r-lib/devtools/issues/433'>#433</a>).</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now correctly reports the location of the <code>R CMD check</code> output when called with a custom <code>check_dir</code>. (Thanks to <a href='https://github.com/brentonk'>@brentonk</a>)</p></li>
 <li><p><code>check_cran()</code> records check times for each package tested.</p></li>
 <li><p>Improved default <code>DESCRIPTION</code> file created by <code>create_description()</code>. (Thanks to <a href='https://github.com/ncarchedi'>@ncarchedi</a>, <a href='https://github.com/r-lib/devtools/issues/428'>#428</a>)</p></li>
-<li><p>Fixed bug in <code>install_github()</code> that prevented installing a pull request by supplying <code>repo = "username/repo#pull"</code>. (<a href='https://github.com/r-lib/devtools/issues/388'>#388</a>)</p></li>
+<li><p>Fixed bug in <code><a href="../reference/remote-reexports.html">install_github()</a></code> that prevented installing a pull request by supplying <code>repo = "username/repo#pull"</code>. (<a href='https://github.com/r-lib/devtools/issues/388'>#388</a>)</p></li>
 <li><p>explicitly specify user agent when querying user name and ref for pull request in <code>install_github</code>. (Thanks to Kirill Müller, <a href='https://github.com/r-lib/devtools/issues/405'>#405</a>)</p></li>
-<li><p><code>install_github()</code> now removes blank lines found in a package <code>DESCRIPTION</code> file, protecting users from the vague <code>error: contains a blank line</code> error. (<a href='https://github.com/r-lib/devtools/issues/394'>#394</a>)</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> now removes blank lines found in a package <code>DESCRIPTION</code> file, protecting users from the vague <code>error: contains a blank line</code> error. (<a href='https://github.com/r-lib/devtools/issues/394'>#394</a>)</p></li>
 <li><p><code>with_options()</code> now works, instead of throwing an error (Thanks to <a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/434'>#434</a>)</p></li>
 </ul>
 </div>
@@ -1015,10 +1027,10 @@
 <a href="#devtools-141" class="anchor"></a>devtools 1.4.1<small> 2013-11-27 </small>
 </h1>
 <ul>
-<li><p>Fixed bug in <code>wd()</code> when <code>path</code> was omitted. (<a href='https://github.com/r-lib/devtools/issues/374'>#374</a>)</p></li>
+<li><p>Fixed bug in <code><a href="../reference/wd.html">wd()</a></code> when <code>path</code> was omitted. (<a href='https://github.com/r-lib/devtools/issues/374'>#374</a>)</p></li>
 <li><p>Fixed bug in <code>dev_help()</code> that prevented it from working when not using RStudio.</p></li>
-<li><p><code>source_gist()</code> respects new github policy by sending user agent (hadley/devtools)</p></li>
-<li><p><code>install_github()</code> now takes repo names of the form <code>[username/]repo[/subdir][@ref|#pull]</code> - this is now the recommended form to specify username, subdir, ref and/or pull for install_github. (Thanks to Kirill Müller, <a href='https://github.com/r-lib/devtools/issues/376'>#376</a>)</p></li>
+<li><p><code><a href="../reference/source_gist.html">source_gist()</a></code> respects new github policy by sending user agent (hadley/devtools)</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> now takes repo names of the form <code>[username/]repo[/subdir][@ref|#pull]</code> - this is now the recommended form to specify username, subdir, ref and/or pull for install_github. (Thanks to Kirill Müller, <a href='https://github.com/r-lib/devtools/issues/376'>#376</a>)</p></li>
 </ul>
 </div>
     <div id="devtools-14" class="section level1">
@@ -1029,30 +1041,30 @@
 <h2 class="hasAnchor">
 <a href="#installation-improvements" class="anchor"></a>Installation improvements</h2>
 <ul>
-<li><p><code>install()</code> now respects the global option <code>keep.source.pkgs</code>.</p></li>
-<li><p><code>install()</code> gains a <code>build_vignettes</code> which defaults to TRUE, and ensures that vignettes are built even when doing a local install. It does this by forcing <code>local = FALSE</code> if the package has vignettes, so <code>R CMD build</code> can follow the usual process. (<a href='https://github.com/r-lib/devtools/issues/344'>#344</a>)</p></li>
-<li><p><code>install_github()</code> now takes repo names of the form <code>username/repo</code> - this is now the recommended form for install_github if your username is not hadley ;)</p></li>
-<li><p><code>install_github()</code> now adds details on the source of the installed package (e.g. repository, SHA1, etc.) to the package DESCRIPTION file. (Thanks to JJ Allaire)</p></li>
-<li><p>Adjusted <code>install_version()</code> to new meta data structure on CRAN. (Thanks to Kornelius Rohmeyer)</p></li>
-<li><p>Fixed bug so that <code>install_version()</code> works with version numbers that contain hyphens. (Thanks to Kornelius Rohmeyer)</p></li>
-<li><p><code>install_deps()</code> is now exported, making it easier to install the dependencies of a package.</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> now respects the global option <code>keep.source.pkgs</code>.</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> gains a <code>build_vignettes</code> which defaults to TRUE, and ensures that vignettes are built even when doing a local install. It does this by forcing <code>local = FALSE</code> if the package has vignettes, so <code>R CMD build</code> can follow the usual process. (<a href='https://github.com/r-lib/devtools/issues/344'>#344</a>)</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> now takes repo names of the form <code>username/repo</code> - this is now the recommended form for install_github if your username is not hadley ;)</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> now adds details on the source of the installed package (e.g. repository, SHA1, etc.) to the package DESCRIPTION file. (Thanks to JJ Allaire)</p></li>
+<li><p>Adjusted <code><a href="../reference/remote-reexports.html">install_version()</a></code> to new meta data structure on CRAN. (Thanks to Kornelius Rohmeyer)</p></li>
+<li><p>Fixed bug so that <code><a href="../reference/remote-reexports.html">install_version()</a></code> works with version numbers that contain hyphens. (Thanks to Kornelius Rohmeyer)</p></li>
+<li><p><code><a href="../reference/install_deps.html">install_deps()</a></code> is now exported, making it easier to install the dependencies of a package.</p></li>
 </ul>
 </div>
 <div id="other-minor-improvements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-minor-improvements" class="anchor"></a>Other minor improvements</h2>
 <ul>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">build(binary = TRUE)</a></code> now no longer installs the package as a side-effect. (<a href='https://github.com/r-lib/devtools/issues/335'>#335</a>)</p></li>
+<li><p><code><a href="../reference/build.html">build(binary = TRUE)</a></code> now no longer installs the package as a side-effect. (<a href='https://github.com/r-lib/devtools/issues/335'>#335</a>)</p></li>
 <li><p><code>build_github_devtools()</code> is a new function which makes it easy for Windows users to upgrade to the development version of devtools.</p></li>
 <li><p><code>create_description()</code> does a better job of combining defaults and user specified options. (<a href='https://github.com/r-lib/devtools/issues/332'>#332</a>)</p></li>
-<li><p><code>install()</code> also installs the dependencies that do not have the required versions; besides, the argument <code>dependencies</code> now works like <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> (in previous versions, it was essentially <code><a href="https://rdrr.io/r/base/c.html">c("Depends", "Imports", "LinkingTo")</a></code>) (thanks, Yihui Xie, <a href='https://github.com/r-lib/devtools/issues/355'>#355</a>)</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> and <code>check_cran()</code> gain new <code>check_dir</code> argument to control where checking takes place (<a href='https://github.com/r-lib/devtools/issues/337'>#337</a>)</p></li>
+<li><p><code><a href="../reference/install.html">install()</a></code> also installs the dependencies that do not have the required versions; besides, the argument <code>dependencies</code> now works like <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> (in previous versions, it was essentially <code><a href="https://rdrr.io/r/base/c.html">c("Depends", "Imports", "LinkingTo")</a></code>) (thanks, Yihui Xie, <a href='https://github.com/r-lib/devtools/issues/355'>#355</a>)</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> and <code>check_cran()</code> gain new <code>check_dir</code> argument to control where checking takes place (<a href='https://github.com/r-lib/devtools/issues/337'>#337</a>)</p></li>
 <li><p><code>check_devtools()</code> no longer incorrectly complains about a <code>vignettes/</code> directory</p></li>
 <li><p>Decompression of zip files now respects <code><a href="https://rdrr.io/r/base/options.html">getOption("unzip")</a></code> (<a href='https://github.com/r-lib/devtools/issues/326'>#326</a>)</p></li>
 <li><p><code>dev_help</code> will now use the RStudio help pane, if you’re using a recent version of RStudio (<a href='https://github.com/r-lib/devtools/issues/322'>#322</a>)</p></li>
 <li><p>Release is now a little bit smarter: if it’s a new package, it’ll ask you to read and agree to the CRAN policies; it will only ask about dependencies if it has any.</p></li>
-<li><p><code>source_url()</code> (and <code>source_gist()</code>) accept SHA1 prefixes.</p></li>
-<li><p><code>source_gist()</code> uses the GitHub API to reliably locate the raw gist. Additionally it now only attempts to source files with <code>.R</code> or <code>.r</code> extensions, and gains a <code>quiet</code> argument. (<a href='https://github.com/r-lib/devtools/issues/348'>#348</a>)</p></li>
+<li><p><code><a href="../reference/source_url.html">source_url()</a></code> (and <code><a href="../reference/source_gist.html">source_gist()</a></code>) accept SHA1 prefixes.</p></li>
+<li><p><code><a href="../reference/source_gist.html">source_gist()</a></code> uses the GitHub API to reliably locate the raw gist. Additionally it now only attempts to source files with <code>.R</code> or <code>.r</code> extensions, and gains a <code>quiet</code> argument. (<a href='https://github.com/r-lib/devtools/issues/348'>#348</a>)</p></li>
 <li><p>Safer installation of source packages, which were previously extracted directly into the temp directory; this could be a problem if directory names collide. Instead, source packages are now extracted into unique subdirectories.</p></li>
 </ul>
 </div>
@@ -1066,8 +1078,8 @@
 <a href="#changes-to-best-practices" class="anchor"></a>Changes to best practices</h2>
 <ul>
 <li><p>The documentation for many devtools functions has been considerably expanded, aiming to give the novice package developer more hints about what they should be doing and why.</p></li>
-<li><p><code>load_all()</code> now defaults to <code>reset = TRUE</code> so that changes to the NAMESPACE etc. are incorporated. This makes it slightly slower (but hopefully not noticeably so), and generally more accurate, and a better simulation of the install + restart + reload cycle.</p></li>
-<li><p><code>test()</code> now looks in both <code>inst/test</code> and <code>tests/testthat</code> for unit tests. It is recommended to use <code>tests/testthat</code> because it allows users to choose whether or not to install test. If you move your tests from <code>inst/tests</code> to <code>tests/testthat</code>, you’ll also need to change <code>tests/test-all.R</code> to run <code>test_check()</code> instead of <code>test_package()</code>. This change requires testthat 0.8 which will be available on CRAN shortly.</p></li>
+<li><p><code><a href="../reference/load_all.html">load_all()</a></code> now defaults to <code>reset = TRUE</code> so that changes to the NAMESPACE etc. are incorporated. This makes it slightly slower (but hopefully not noticeably so), and generally more accurate, and a better simulation of the install + restart + reload cycle.</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> now looks in both <code>inst/test</code> and <code>tests/testthat</code> for unit tests. It is recommended to use <code>tests/testthat</code> because it allows users to choose whether or not to install test. If you move your tests from <code>inst/tests</code> to <code>tests/testthat</code>, you’ll also need to change <code>tests/test-all.R</code> to run <code>test_check()</code> instead of <code>test_package()</code>. This change requires testthat 0.8 which will be available on CRAN shortly.</p></li>
 <li><p>New devtools guarantee: if because of a devtools bug, a CRAN maintainer yells at you, I’ll send you a hand-written apology note. Just forward me the email and your address.</p></li>
 </ul>
 </div>
@@ -1075,8 +1087,8 @@
 <h2 class="hasAnchor">
 <a href="#new-features-5" class="anchor"></a>New features</h2>
 <ul>
-<li><p>New <code>install_local()</code> function for installing local package files (as zip, tar, tgz, etc.) (Suggested by landroni)</p></li>
-<li><p><code>parse_deps()</code>, which parses R’s package dependency strings, is now exported.</p></li>
+<li><p>New <code><a href="../reference/remote-reexports.html">install_local()</a></code> function for installing local package files (as zip, tar, tgz, etc.) (Suggested by landroni)</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/pkgload/man/parse_deps.html">parse_deps()</a></code>, which parses R’s package dependency strings, is now exported.</p></li>
 <li><p>All package and user events (e.g. load, unload, attach and detach) are now called in the correct place.</p></li>
 </ul>
 </div>
@@ -1084,16 +1096,16 @@
 <h2 class="hasAnchor">
 <a href="#minor-improvements-and-bug-fixes" class="anchor"></a>Minor improvements and bug fixes</h2>
 <ul>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code> gains <code>args</code> parameter allowing you to add additional arbitrary arguments, and <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> gains similar <code>build_args</code> parameter.</p></li>
+<li><p><code><a href="../reference/build.html">build()</a></code> gains <code>args</code> parameter allowing you to add additional arbitrary arguments, and <code><a href="../reference/check.html">check()</a></code> gains similar <code>build_args</code> parameter.</p></li>
 <li><p><code>install_git</code> gains <code>git_arg</code> parameter allowing you to add arbitrary additional arguments.</p></li>
 <li><p>Files are now loaded in a way that preserves srcreferences - this means that you will get much better locations on error messages, which should considerably aid debugging.</p></li>
-<li><p>Fixed bug in <code>build_vignettes()</code> which prevented files in <code>inst/doc</code> from being updated</p></li>
-<li><p><code>as.package()</code> no longer uses the full path, which should make for nicer error messages.</p></li>
+<li><p>Fixed bug in <code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> which prevented files in <code>inst/doc</code> from being updated</p></li>
+<li><p><code><a href="../reference/as.package.html">as.package()</a></code> no longer uses the full path, which should make for nicer error messages.</p></li>
 <li><p>More flexibility when installing package dependencies with the <code>dependencies</code> argument to <code>install_*()</code> (thanks to Martin Studer)</p></li>
 <li><p>The deprecated <code>show_rd()</code> function has now been removed.</p></li>
-<li><p><code>install_bitbucket()</code> gains <code>auth_user</code> and <code>password</code> params so that you can install from private repos (thanks to Brian Bolt)</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_bitbucket()</a></code> gains <code>auth_user</code> and <code>password</code> params so that you can install from private repos (thanks to Brian Bolt)</p></li>
 <li><p>Better git detection on windows (thanks to Mikhail Titov)</p></li>
-<li><p>Fix bug so that <code>document()</code> will automatically create <code>man/</code> directory</p></li>
+<li><p>Fix bug so that <code><a href="../reference/document.html">document()</a></code> will automatically create <code>man/</code> directory</p></li>
 <li><p>Default <code>DESCRIPTION</code> gains <code>LazyData: true</code></p></li>
 <li><p><code>create_description()</code> now checks that the directory is probably a package by looking for <code>R/</code>, <code>data/</code> or <code>src/</code> directories</p></li>
 <li><p>Rolled back required R version from 3.0 to 2.15.</p></li>
@@ -1129,25 +1141,25 @@
 <a href="#new-features-6" class="anchor"></a>New features</h2>
 <ul>
 <li><p><code>source_url</code> and <code>source_gist</code> now allow you to specify a sha, so you can make sure that files you source from the internet don’t change without you knowing about it. (Fixes <a href='https://github.com/r-lib/devtools/issues/259'>#259</a>)</p></li>
-<li><p><code>build_vignettes</code> builds using <code>buildVignette()</code> and movies/copies outputs using the same algorithm as <code>R CMD build</code>. This means that <code>build_vignettes()</code> now exactly mimics R’s regular behaviour, including building non-Sweave vignettes (<a href='https://github.com/r-lib/devtools/issues/277'>#277</a>), building in the correct directory (<a href='https://github.com/r-lib/devtools/issues/231'>#231</a>), using make files (if present), and copying over extra files.</p></li>
-<li><p>devtools now sets best practice compiler flags: from <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code>, <code>-Wall -pedantic</code> and from <code>load_all()</code>, <code>-Wall -pedantic -g -O0 -UNDEBUG</code>. These are prefixed to existing environment variables so that you can override them if desired. (Fixes <a href='https://github.com/r-lib/devtools/issues/257'>#257</a>)</p></li>
-<li><p>If there’s no <code>DESCRIPTION</code> file present, <code>load_all()</code> will automatically create one using <code>create_description()</code>. You can set options in your <code>.Rprofile</code> to control what it contains: see <code>package?devtools</code> for more details.</p></li>
+<li><p><code>build_vignettes</code> builds using <code>buildVignette()</code> and movies/copies outputs using the same algorithm as <code>R CMD build</code>. This means that <code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> now exactly mimics R’s regular behaviour, including building non-Sweave vignettes (<a href='https://github.com/r-lib/devtools/issues/277'>#277</a>), building in the correct directory (<a href='https://github.com/r-lib/devtools/issues/231'>#231</a>), using make files (if present), and copying over extra files.</p></li>
+<li><p>devtools now sets best practice compiler flags: from <code><a href="../reference/check.html">check()</a></code>, <code>-Wall -pedantic</code> and from <code><a href="../reference/load_all.html">load_all()</a></code>, <code>-Wall -pedantic -g -O0 -UNDEBUG</code>. These are prefixed to existing environment variables so that you can override them if desired. (Fixes <a href='https://github.com/r-lib/devtools/issues/257'>#257</a>)</p></li>
+<li><p>If there’s no <code>DESCRIPTION</code> file present, <code><a href="../reference/load_all.html">load_all()</a></code> will automatically create one using <code>create_description()</code>. You can set options in your <code>.Rprofile</code> to control what it contains: see <code><a href="../reference/devtools.html">package?devtools</a></code> for more details.</p></li>
 </ul>
 </div>
 <div id="minor-improvements-2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minor-improvements-2" class="anchor"></a>Minor improvements</h2>
 <ul>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> now also sets environment variable <code>_R_CHECK_CODE_DATA_INTO_GLOBALENV_</code> to TRUE (to match current <code>--as-cran</code> behaviour) (Fixes <a href='https://github.com/r-lib/devtools/issues/256'>#256</a>)</p></li>
-<li><p>Improved default email sent by <code>release()</code>, eliminating <code><a href="https://rdrr.io/r/utils/create.post.html">create.post()</a></code> boilerplate</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now also sets environment variable <code>_R_CHECK_CODE_DATA_INTO_GLOBALENV_</code> to TRUE (to match current <code>--as-cran</code> behaviour) (Fixes <a href='https://github.com/r-lib/devtools/issues/256'>#256</a>)</p></li>
+<li><p>Improved default email sent by <code><a href="../reference/release.html">release()</a></code>, eliminating <code><a href="https://rdrr.io/r/utils/create.post.html">create.post()</a></code> boilerplate</p></li>
 <li><p><code>revdep</code> includes LinkingTo by default.</p></li>
 <li><p>Fixed regular expression problem that caused RTools <code>3.0.*</code> to fail to be found on Windows.</p></li>
 <li><p><code>load_data()</code> got an overhaul and now respects <code>LazyData</code> and correctly exports datasets by default (Fixes <a href='https://github.com/r-lib/devtools/issues/242'>#242</a>)</p></li>
 <li><p><code>with_envvar</code> gains the option to either replace, prefix or suffix existing environmental variables. The default is to replace, which was the previous behaviour.</p></li>
 <li><p><code>check_cran</code> includes <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> in the summary output (Fixes <a href='https://github.com/r-lib/devtools/issues/273'>#273</a>)</p></li>
-<li><p><code>create()</code> gains a <code>check</code> argument which defaults to FALSE.</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code> gains a <code>check</code> argument which defaults to FALSE.</p></li>
 <li><p><code>with_env</code> will be deprecated in 1.2 and removed in 1.3</p></li>
-<li><p>When <code>load_all()</code> calls <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onAttach()</a></code> and <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onLoad()</a></code>, it now passes the lib path to those functions.</p></li>
+<li><p>When <code><a href="../reference/load_all.html">load_all()</a></code> calls <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onAttach()</a></code> and <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onLoad()</a></code>, it now passes the lib path to those functions.</p></li>
 </ul>
 </div>
 </div>
@@ -1156,10 +1168,10 @@
 <a href="#devtools-11" class="anchor"></a>devtools 1.1<small> 2013-02-09 </small>
 </h1>
 <ul>
-<li><p><code>source_gist()</code> has been updated to accept new gist URLs with username. (Fixes <a href='https://github.com/r-lib/devtools/issues/247'>#247</a>)</p></li>
-<li><p><code>test()</code> and <code>document()</code> now set environment variables, including NOT_CRAN.</p></li>
+<li><p><code><a href="../reference/source_gist.html">source_gist()</a></code> has been updated to accept new gist URLs with username. (Fixes <a href='https://github.com/r-lib/devtools/issues/247'>#247</a>)</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> and <code><a href="../reference/document.html">document()</a></code> now set environment variables, including NOT_CRAN.</p></li>
 <li><p>Test packages have been renamed to avoid conflicts with existing packages on CRAN. This bug prevented devtools 1.0 from passing check on CRAN for some platforms.</p></li>
-<li><p>Catch additional case in <code>find_rtools()</code>: previously installed, but directory empty/deleted (Fixes <a href='https://github.com/r-lib/devtools/issues/241'>#241</a>)</p></li>
+<li><p>Catch additional case in <code><a href="https://rdrr.io/pkg/pkgbuild/man/has_rtools.html">find_rtools()</a></code>: previously installed, but directory empty/deleted (Fixes <a href='https://github.com/r-lib/devtools/issues/241'>#241</a>)</p></li>
 </ul>
 </div>
     <div id="devtools-10" class="section level1">
@@ -1191,16 +1203,16 @@
 <a href="#minor-features" class="anchor"></a>Minor features</h2>
 <ul>
 <li><p><code>check_cran</code> now downloads packages from cran.rstudio.com.</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> now makes the CRAN version check optional, and off by default. The <code>release()</code> function still checks the version number against CRAN.</p></li>
-<li><p>In <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code>, it is optional to require suggested packages, using the <code>force_suggests</code> option.</p></li>
-<li><p>When <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code> is called, the new default behavior is to not delete existing .Rd files from man/. This behavior can be set with the “devtools.cleandoc” option.</p></li>
-<li><p><code>install_bitbucket()</code> now always uses lowercase repo names. (Thanks to mnel)</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now makes the CRAN version check optional, and off by default. The <code><a href="../reference/release.html">release()</a></code> function still checks the version number against CRAN.</p></li>
+<li><p>In <code><a href="../reference/check.html">check()</a></code>, it is optional to require suggested packages, using the <code>force_suggests</code> option.</p></li>
+<li><p>When <code><a href="../reference/check.html">check()</a></code> is called, the new default behavior is to not delete existing .Rd files from man/. This behavior can be set with the “devtools.cleandoc” option.</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_bitbucket()</a></code> now always uses lowercase repo names. (Thanks to mnel)</p></li>
 <li><p>New function <code>with_lib()</code>, which runs an expression code with a library path prepended to the existing libpaths. It differs slightly from <code>with_libpaths()</code>, which replaces the existing libpaths.</p></li>
-<li><p>New function <code>install_git()</code> installs a package directly from a git repository. (Thanks to David Coallier)</p></li>
-<li><p>If <code>pdflatex</code> isn’t available, don’t try to build vignettes with <code>install()</code> or <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code>. (Fixes <a href='https://github.com/r-lib/devtools/issues/173'>#173</a>)</p></li>
-<li><p><code>install_github()</code> now downloads from a new URL, to reflect changes on how files are hosted on GitHub.</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code> now has a <code>vignettes</code> option to turn off rebuilding vignettes.</p></li>
-<li><p><code>install(quick=TRUE)</code> now builds the package without rebuilding vignettes. (Fixes <a href='https://github.com/r-lib/devtools/issues/167'>#167</a>)</p></li>
+<li><p>New function <code><a href="../reference/remote-reexports.html">install_git()</a></code> installs a package directly from a git repository. (Thanks to David Coallier)</p></li>
+<li><p>If <code>pdflatex</code> isn’t available, don’t try to build vignettes with <code><a href="../reference/install.html">install()</a></code> or <code><a href="../reference/check.html">check()</a></code>. (Fixes <a href='https://github.com/r-lib/devtools/issues/173'>#173</a>)</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> now downloads from a new URL, to reflect changes on how files are hosted on GitHub.</p></li>
+<li><p><code><a href="../reference/build.html">build()</a></code> now has a <code>vignettes</code> option to turn off rebuilding vignettes.</p></li>
+<li><p><code><a href="../reference/install.html">install(quick=TRUE)</a></code> now builds the package without rebuilding vignettes. (Fixes <a href='https://github.com/r-lib/devtools/issues/167'>#167</a>)</p></li>
 <li><p>All R commands called from <code>devtools</code> now have the environment variable <code>NOT_CRAN</code> set, so that you can perform tasks when you know your code is definitely not running on CRAN. (Closes <a href='https://github.com/r-lib/devtools/issues/227'>#227</a>)</p></li>
 <li><p>Most devtools functions can a quiet argument that suppresses output. This is particularly useful for testing.</p></li>
 </ul>
@@ -1213,10 +1225,10 @@
 <li><p>Reloading a package that requires a forced-unload of the namespace now works.</p></li>
 <li><p>When reloading a package that another loaded package depends on, if there was an error loading the code, devtools would print out something about an error in <code>unloadNamespace</code>, which was confusing. It now gives more useful errors.</p></li>
 <li><p>An intermittent error in <code>clear_topic_index</code> related to using <code><a href="https://rdrr.io/r/base/rm.html">rm()</a></code> has been fixed. (Thanks to Gregory Jefferis)</p></li>
-<li><p><code>revdep()</code> now lists “Suggests” packages, in addition to “Depends” and “Imports”.</p></li>
-<li><p><code>revdep_check()</code> now correctly passes the <code>recursive</code> argument to <code>revdep()</code>.</p></li>
+<li><p><code><a href="../reference/revdep.html">revdep()</a></code> now lists “Suggests” packages, in addition to “Depends” and “Imports”.</p></li>
+<li><p><code>revdep_check()</code> now correctly passes the <code>recursive</code> argument to <code><a href="../reference/revdep.html">revdep()</a></code>.</p></li>
 <li><p>The collection of check results at the end of <code>check_cran()</code> previously did not remove existing results, but now it does.</p></li>
-<li><p>When a package is loaded with <code>load_all()</code>, it now passes the name of the package to the <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onLoad()</a></code> function. (Thanks to Andrew Redd)</p></li>
+<li><p>When a package is loaded with <code><a href="../reference/load_all.html">load_all()</a></code>, it now passes the name of the package to the <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onLoad()</a></code> function. (Thanks to Andrew Redd)</p></li>
 </ul>
 </div>
 </div>
@@ -1229,16 +1241,16 @@
 <a href="#new-features-7" class="anchor"></a>New features</h2>
 <ul>
 <li><p><code>create</code> function makes it easier to create a package skeleton using devtools standards.</p></li>
-<li><p><code>install_github()</code> can now install from a pull request – it installs the branch referenced in the pull request.</p></li>
+<li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> can now install from a pull request – it installs the branch referenced in the pull request.</p></li>
 <li><p><code>install_github</code> now accepts <code>auth_user</code> and <code>password</code> arguments if you want to install a package in a private github repo. You only need to specify <code>auth_user</code> if it’s not your package (i.e. it’s not your <code>username</code>) (Fixes <a href='https://github.com/r-lib/devtools/issues/116'>#116</a>)</p></li>
 <li><p>new <code>dev_help</code> function replaces <code>show_rd</code> and makes it easy to get help on any topic in a development package (i.e. a package loaded with <code>load_all</code>) (Fixes <a href='https://github.com/r-lib/devtools/issues/110'>#110</a>)</p></li>
 <li><p><code>dev_example</code> runs the examples for one in-development package. (Fixes <a href='https://github.com/r-lib/devtools/issues/108'>#108</a>)</p></li>
 <li><p><code>build_vignettes</code> now looks in modern location for vignettes (<code>vignettes/</code>) and warn if vignettes found in old location (<code>inst/doc</code>). Building now occurs in a temporary directory (to avoid polluting the package with build artefacts) and only final pdf files are copied over.</p></li>
 <li><p>new <code>clean_vignettes</code> function to remove pdfs in <code>inst/doc</code> that were built from vignettes in <code>vignettes/</code></p></li>
 <li><p><code>load_all</code> does a much better job at simulating package loading (see LOADING section). It also compiles and loads C/C++/Fortran code.</p></li>
-<li><p><code>unload()</code> is now an exported function, which unloads a package, trying harder than just <code>detach</code>. It now also unloads DLLs. (Winston Chang. Fixes <a href='https://github.com/r-lib/devtools/issues/119'>#119</a>)</p></li>
+<li><p><code><a href="https://rdrr.io/pkg/pkgload/man/unload.html">unload()</a></code> is now an exported function, which unloads a package, trying harder than just <code>detach</code>. It now also unloads DLLs. (Winston Chang. Fixes <a href='https://github.com/r-lib/devtools/issues/119'>#119</a>)</p></li>
 <li><p><code>run_examples</code> now has parameters <code>show</code>, <code>test</code>, <code>run</code> to control which of <code>\dontrun{}</code>, <code>\dontshow{}</code>, <code>\donttest{}</code> and <code>\testonly{}</code> are commented out. The <code>strict</code> parameter has been removed since it is no longer necessary because <code>load_all</code> can respect namespaces. (Fixes <a href='https://github.com/r-lib/devtools/issues/118'>#118</a>)</p></li>
-<li><p><code><a href="https://rdrr.io/r/utils/PkgUtils.html">build()</a></code>, <code><a href="https://rdrr.io/r/utils/PkgUtils.html">check()</a></code>, <code>install()</code> etc now run R in <code>--vanilla</code> mode which prevents it from reading any of your site or personal configuration files. This should prevent inconsistencies between the environment in which the package is run between your computer and other computers (e.g. the CRAN server) (Fixes <a href='https://github.com/r-lib/devtools/issues/145'>#145</a>)</p></li>
+<li><p><code><a href="../reference/build.html">build()</a></code>, <code><a href="../reference/check.html">check()</a></code>, <code><a href="../reference/install.html">install()</a></code> etc now run R in <code>--vanilla</code> mode which prevents it from reading any of your site or personal configuration files. This should prevent inconsistencies between the environment in which the package is run between your computer and other computers (e.g. the CRAN server) (Fixes <a href='https://github.com/r-lib/devtools/issues/145'>#145</a>)</p></li>
 <li><p>All system R command now print the full command used to make it easier to understand what’s going on.</p></li>
 </ul>
 </div>
@@ -1248,8 +1260,8 @@
 <ul>
 <li><p><code>as.package</code> no longer uses <code>~/.Rpackages</code>.</p></li>
 <li><p><code>as.package</code> provides more informative error messages when path does not exist, isn’t a directory, or doesn’t contain a <code>DESCRIPTION</code> file.</p></li>
-<li><p>New function <code>inst()</code> takes the name of a package and returns the installed path of that package. (Winston Chang. Fixes <a href='https://github.com/r-lib/devtools/issues/130'>#130</a>). This makes it possible to use <code>devtools</code> functions (e.g. <code>unload</code>) with regular installed packages, not just in-development source packages.</p></li>
-<li><p>New function <code>devtest()</code> returns paths to an internal testing packages in devtools.</p></li>
+<li><p>New function <code><a href="https://rdrr.io/pkg/pkgload/man/inst.html">inst()</a></code> takes the name of a package and returns the installed path of that package. (Winston Chang. Fixes <a href='https://github.com/r-lib/devtools/issues/130'>#130</a>). This makes it possible to use <code>devtools</code> functions (e.g. <code>unload</code>) with regular installed packages, not just in-development source packages.</p></li>
+<li><p>New function <code><a href="../reference/devtest.html">devtest()</a></code> returns paths to an internal testing packages in devtools.</p></li>
 </ul>
 </div>
 <div id="loading" class="section level2">
@@ -1265,7 +1277,7 @@
 <li><p>The package environment now has a ‘path’ attribute, similar to a package loaded the normal way. (Winston Chang)</p></li>
 <li><p><code>load_all</code> now has an option <code>export_all</code>. When set to TRUE, only the objects listed as exports in NAMESPACE are exported. (Winston Chang)</p></li>
 <li><p><code>load_all</code> now compiles C files in the /src directory. (Winston Chang)</p></li>
-<li><p>New functions <code>compile_dll()</code> and <code>clean_dll()</code>, which compile C/C++/ Fortran source code, and clean up the compiled objects, respectively. (Winston Chang. Fixes <a href='https://github.com/r-lib/devtools/issues/131'>#131</a>)</p></li>
+<li><p>New functions <code>compile_dll()</code> and <code><a href="https://rdrr.io/pkg/pkgbuild/man/clean_dll.html">clean_dll()</a></code>, which compile C/C++/ Fortran source code, and clean up the compiled objects, respectively. (Winston Chang. Fixes <a href='https://github.com/r-lib/devtools/issues/131'>#131</a>)</p></li>
 </ul>
 </div>
 <div id="bug-fixes-3" class="section level2">
@@ -1283,7 +1295,7 @@
 <h2 class="hasAnchor">
 <a href="#introspection" class="anchor"></a>Introspection</h2>
 <ul>
-<li><p>New function <code>loaded_packages()</code>, which returns the names of packages that are loaded and attached.</p></li>
+<li><p>New function <code><a href="../reference/loaded_packages.html">loaded_packages()</a></code>, which returns the names of packages that are loaded and attached.</p></li>
 <li><p>Packages loaded with <code>load_all</code> now store devtools metadata in their namespace environment, in a variable called <code>.__DEVTOOLS__</code>. This can be accessed with the <code>dev_meta</code> function. (Winston Chang. Fixes <a href='https://github.com/r-lib/devtools/issues/128'>#128</a>)</p></li>
 <li><p><code>dev_mode</code> now stores the path it uses in option <code>dev_path</code>. That makes it easy for other applications to detect when it is on and to act accordingly.</p></li>
 <li><p>New function <code>parse_ns_file()</code>, which parses a NAMESPACE file for a package.</p></li>
@@ -1443,7 +1455,7 @@
 <li><p>new <code>wd</code> function to change the working directory to a package subdirectory.</p></li>
 <li><p><code>check_doc</code> now checks package documentation as a whole, in the same way that <code>R CMD check</code> does, rather than low-level syntax checking, which is done by <code>roxygen2. DESCRIPTION checking has been moved into</code>load_all<code>.</code>check_rd` has been removed.</p></li>
 <li><p><code>build</code> is now exported, and defaults to building in the package’s parent directory. It also gains a new <code>binary</code> parameter controls whether a binary or a source version (with no vignettes or manuals) is built. Confusingly, binary packages are built with <code>R CMD INSTALL</code>.</p></li>
-<li><p><code>build_win</code> sends your package to the R windows builder, allowing you to make a binary version of your package for windows users if you’re using linux or macOS (if you’re using windows already, use <code><a href="https://rdrr.io/r/utils/PkgUtils.html">build(binary = T)</a></code>)</p></li>
+<li><p><code>build_win</code> sends your package to the R windows builder, allowing you to make a binary version of your package for windows users if you’re using linux or macOS (if you’re using windows already, use <code><a href="../reference/build.html">build(binary = T)</a></code>)</p></li>
 </ul>
 </div>
 <div id="improvements-and-bug-fixes-1" class="section level2">
@@ -1467,8 +1479,8 @@
 <a href="#devtools-03" class="anchor"></a>devtools 0.3<small> 2011-06-30 </small>
 </h1>
 <ul>
-<li><p>new <code>bash()</code> function that starts bash shell in package directory. Useful if you want to use git etc.</p></li>
-<li><p>removed inelegant <code>update_src()</code> since now superseded by <code>bash()</code></p></li>
+<li><p>new <code><a href="../reference/bash.html">bash()</a></code> function that starts bash shell in package directory. Useful if you want to use git etc.</p></li>
+<li><p>removed inelegant <code>update_src()</code> since now superseded by <code><a href="../reference/bash.html">bash()</a></code></p></li>
 <li><p>fix bug in ftp upload that was adding extraneous space</p></li>
 <li><p><code>build</code> function builds package in specified directory. <code>install</code>, <code>check</code> and <code>release</code> now all use this function.</p></li>
 <li><p><code>build</code>, <code>install</code>, <code>check</code> and <code>release</code> better about cleaning up after themselves - always try to both work in session temporary directory and delete any files/directories that they create</p></li>
@@ -1513,7 +1525,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

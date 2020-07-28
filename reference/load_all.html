@@ -91,13 +91,19 @@ when a package is installed and loaded with library()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -108,7 +114,7 @@ when a package is installed and loaded with library()." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dependencies.html">Remote development dependencies</a>
+      <a href="../articles/dependencies.html">Devtools dependencies</a>
     </li>
   </ul>
 </li>
@@ -119,7 +125,7 @@ when a package is installed and loaded with library()." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/09/devtools-2-2-1/">Version 2.2.1</a>
     </li>
@@ -128,7 +134,7 @@ when a package is installed and loaded with library()." />
     </li>
     <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
@@ -164,13 +170,13 @@ when a package is installed and loaded with <code><a href='https://rdrr.io/r/bas
     </div>
 
     <pre class="usage"><span class='fu'>load_all</span>(
-  path = <span class='st'>"."</span>,
-  reset = <span class='fl'>TRUE</span>,
-  recompile = <span class='fl'>FALSE</span>,
-  export_all = <span class='fl'>TRUE</span>,
-  helpers = <span class='fl'>TRUE</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>reset</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>recompile</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>helpers</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -269,7 +275,7 @@ package sources have different directory structures. Note that this is not
 a perfect replacement for <code><a href='https://rdrr.io/r/base/system.file.html'>base::system.file</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Load the package in the current directory</span>
 <span class='fu'>load_all</span>(<span class='st'>"./"</span>)
 
@@ -281,7 +287,7 @@ a perfect replacement for <code><a href='https://rdrr.io/r/base/system.file.html
 
 <span class='co'># With export_all=FALSE, only objects listed as exports in NAMESPACE</span>
 <span class='co'># are exported</span>
-<span class='fu'>load_all</span>(<span class='st'>"./"</span>, export_all = <span class='fl'>FALSE</span>)
+<span class='fu'>load_all</span>(<span class='st'>"./"</span>, <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -298,7 +304,7 @@ a perfect replacement for <code><a href='https://rdrr.io/r/base/system.file.html
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

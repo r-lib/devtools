@@ -93,13 +93,19 @@ making it possible to run all examples from an R function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -110,7 +116,7 @@ making it possible to run all examples from an R function." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dependencies.html">Remote development dependencies</a>
+      <a href="../articles/dependencies.html">Devtools dependencies</a>
     </li>
   </ul>
 </li>
@@ -121,7 +127,7 @@ making it possible to run all examples from an R function." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/09/devtools-2-2-1/">Version 2.2.1</a>
     </li>
@@ -130,7 +136,7 @@ making it possible to run all examples from an R function." />
     </li>
     <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
@@ -168,15 +174,15 @@ making it possible to run all examples from an R function.</p>
     </div>
 
     <pre class="usage"><span class='fu'>run_examples</span>(
-  pkg = <span class='st'>"."</span>,
-  start = <span class='kw'>NULL</span>,
-  show = <span class='fl'>TRUE</span>,
-  run_donttest = <span class='fl'>FALSE</span>,
-  run_dontrun = <span class='fl'>FALSE</span>,
-  fresh = <span class='fl'>FALSE</span>,
-  document = <span class='fl'>TRUE</span>,
-  <span class='kw'>run</span>,
-  <span class='kw'>test</span>
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>start</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>show</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>run_donttest</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>run_dontrun</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>fresh</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>document</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>run</span>,
+  <span class='no'>test</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -185,7 +191,7 @@ making it possible to run all examples from an R function.</p>
     <tr>
       <th>pkg</th>
       <td><p>The package to use, can be a file path to the package or a
-package object.  See <code>as.package()</code> for more information.</p></td>
+package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
     </tr>
     <tr>
       <th>start</th>
@@ -200,6 +206,15 @@ rerun them every time you fix a problem.</p></td>
       <td><p>DEPRECATED.</p></td>
     </tr>
     <tr>
+      <th>run_donttest</th>
+      <td><p>if <code>TRUE</code>, do run <code>\donttest</code> sections in the Rd files.
+out.</p></td>
+    </tr>
+    <tr>
+      <th>run_dontrun</th>
+      <td><p>if <code>TRUE</code>, do run <code>\dontrun</code> sections in the Rd files.</p></td>
+    </tr>
+    <tr>
       <th>fresh</th>
       <td><p>if <code>TRUE</code>, will be run in a fresh R session. This has
 the advantage that there's no way the examples can depend on anything in
@@ -208,19 +223,16 @@ won't work.</p></td>
     </tr>
     <tr>
       <th>document</th>
-      <td><p>if <code>TRUE</code>, <code>document()</code> will be run to ensure
+      <td><p>if <code>TRUE</code>, <code><a href='document.html'>document()</a></code> will be run to ensure
 examples are updated before running them.</p></td>
     </tr>
     <tr>
       <th>run</th>
-      <td><p>if <code>TRUE</code>, code in <code>\dontrun{}</code> will be commented
-out.</p></td>
+      <td><p>Deprecated, see <code>run_dontrun</code> and <code>run_donttest</code> above.</p></td>
     </tr>
     <tr>
       <th>test</th>
-      <td><p>if <code>TRUE</code>, code in <code>\donttest{}</code> will be commented
-out. If <code>FALSE</code>, code in <code>\testonly{}</code> will be commented out. This
-parameter is only used in R 3.2 and greater.</p></td>
+      <td><p>Deprecated, see <code>run_dontrun</code> and <code>run_donttest</code> above.</p></td>
     </tr>
     </table>
 
@@ -240,7 +252,7 @@ parameter is only used in R 3.2 and greater.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

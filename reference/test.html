@@ -96,13 +96,19 @@ shortcut for covr::file_coverage() and covr::report()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -113,7 +119,7 @@ shortcut for covr::file_coverage() and covr::report()." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dependencies.html">Remote development dependencies</a>
+      <a href="../articles/dependencies.html">Devtools dependencies</a>
     </li>
   </ul>
 </li>
@@ -124,7 +130,7 @@ shortcut for covr::file_coverage() and covr::report()." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/09/devtools-2-2-1/">Version 2.2.1</a>
     </li>
@@ -133,7 +139,7 @@ shortcut for covr::file_coverage() and covr::report()." />
     </li>
     <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
@@ -173,20 +179,20 @@ for <code><a href='http://covr.r-lib.org/reference/package_coverage.html'>covr::
 shortcut for <code><a href='http://covr.r-lib.org/reference/file_coverage.html'>covr::file_coverage()</a></code> and <code><a href='http://covr.r-lib.org/reference/report.html'>covr::report()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>test</span>(pkg = <span class='st'>"."</span>, filter = <span class='kw'>NULL</span>, stop_on_failure = <span class='fl'>FALSE</span>, export_all = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)
+    <pre class="usage"><span class='fu'>test</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>filter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>stop_on_failure</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
-<span class='fu'>test_coverage</span>(pkg = <span class='st'>"."</span>, show_report = <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(), <span class='kw'>...</span>)
+<span class='fu'>test_coverage</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>show_report</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(), <span class='no'>...</span>)
 
-<span class='fu'>uses_testthat</span>(pkg = <span class='st'>"."</span>)
+<span class='fu'>uses_testthat</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)
 
-<span class='fu'>test_file</span>(file = <span class='fu'>find_active_file</span>(), <span class='kw'>...</span>)
+<span class='fu'>test_file</span>(<span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>find_active_file</span>(), <span class='no'>...</span>)
 
 <span class='fu'>test_coverage_file</span>(
-  file = <span class='fu'>find_active_file</span>(),
-  filter = <span class='fl'>TRUE</span>,
-  show_report = <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(),
-  export_all = <span class='fl'>TRUE</span>,
-  <span class='kw'>...</span>
+  <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>find_active_file</span>(),
+  <span class='kw'>filter</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>show_report</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(),
+  <span class='kw'>export_all</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -195,21 +201,17 @@ shortcut for <code><a href='http://covr.r-lib.org/reference/file_coverage.html'>
     <tr>
       <th>pkg</th>
       <td><p>The package to use, can be a file path to the package or a
-package object.  See <code>as.package()</code> for more information.</p></td>
+package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
     </tr>
     <tr>
       <th>filter</th>
       <td><p>If not <code>NULL</code>, only tests with file names matching this
-regular expression will be executed. Matching be performed on the file
-name after it has been stripped of <code>"test-"</code> and <code>".R"</code>.</p></td>
+regular expression will be executed. Matching is performed on the file
+name after it's stripped of <code>"test-"</code> and <code>".R"</code>.</p></td>
     </tr>
     <tr>
       <th>stop_on_failure</th>
-      <td><p>If <code>TRUE</code>, throw an error if any tests fail.</p>
-<p>For historical reasons, the default value of <code>stop_on_failure</code> is <code>TRUE</code>
-for  <code>test_package()</code> and <code>test_check()</code> but <code>FALSE</code> for <code>test_dir()</code>, so
-if you're calling <code>test_dir()</code> you may want to consider explicitly setting
-<code>stop_on_failure = TRUE</code>.</p></td>
+      <td><p>If <code>TRUE</code>, throw an error if any tests fail.</p></td>
     </tr>
     <tr>
       <th>export_all</th>
@@ -250,7 +252,7 @@ in RStudio (if available).</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

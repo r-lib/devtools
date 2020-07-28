@@ -94,13 +94,19 @@ library()." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -111,7 +117,7 @@ library()." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dependencies.html">Remote development dependencies</a>
+      <a href="../articles/dependencies.html">Devtools dependencies</a>
     </li>
   </ul>
 </li>
@@ -122,7 +128,7 @@ library()." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/09/devtools-2-2-1/">Version 2.2.1</a>
     </li>
@@ -131,7 +137,7 @@ library()." />
     </li>
     <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
@@ -164,12 +170,12 @@ library()." />
     <div class="ref-description">
     <p>This attempts to unload and reload an <em>installed</em> package. If the package is
 not loaded already, it does nothing. It's not always possible to cleanly
-unload a package: see the caveats in <code>unload()</code> for some of the potential
+unload a package: see the caveats in <code><a href='https://rdrr.io/pkg/pkgload/man/unload.html'>unload()</a></code> for some of the potential
 failure points. If in doubt, restart R and reload the package with
 <code><a href='https://rdrr.io/r/base/library.html'>library()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>reload</span>(pkg = <span class='st'>"."</span>, quiet = <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>reload</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,7 +183,7 @@ failure points. If in doubt, restart R and reload the package with
     <tr>
       <th>pkg</th>
       <td><p>The package to use, can be a file path to the package or a
-package object.  See <code>as.package()</code> for more information.</p></td>
+package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
     </tr>
     <tr>
       <th>quiet</th>
@@ -187,10 +193,10 @@ package object.  See <code>as.package()</code> for more information.</p></td>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>load_all()</code> to load a package for interactive development.</p></div>
+    <div class='dont-index'><p><code><a href='load_all.html'>load_all()</a></code> to load a package for interactive development.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Reload package that is in current directory</span>
 <span class='fu'>reload</span>(<span class='st'>"."</span>)
 
@@ -199,7 +205,7 @@ package object.  See <code>as.package()</code> for more information.</p></td>
 
 <span class='co'># Can use inst() to find the package path</span>
 <span class='co'># This will reload the installed ggplot2 package</span>
-<span class='fu'>reload</span>(<span class='kw'>pkgload</span>::<span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/inst.html'>inst</a></span>(<span class='st'>"ggplot2"</span>))
+<span class='fu'>reload</span>(<span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/inst.html'>inst</a></span>(<span class='st'>"ggplot2"</span>))
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -216,7 +222,7 @@ package object.  See <code>as.package()</code> for more information.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

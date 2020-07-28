@@ -97,13 +97,19 @@ environment is needed." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fas fa fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -114,7 +120,7 @@ environment is needed." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dependencies.html">Remote development dependencies</a>
+      <a href="../articles/dependencies.html">Devtools dependencies</a>
     </li>
   </ul>
 </li>
@@ -125,7 +131,7 @@ environment is needed." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Release notes</li>
+    <li class="dropdown-header">Releases</li>
     <li>
       <a href="https://www.tidyverse.org/articles/2019/09/devtools-2-2-1/">Version 2.2.1</a>
     </li>
@@ -134,7 +140,7 @@ environment is needed." />
     </li>
     <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Change log</a>
+      <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
@@ -175,15 +181,15 @@ only be installable on the current platform, but no development
 environment is needed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/PkgUtils.html'>build</a></span>(
-  pkg = <span class='st'>"."</span>,
-  path = <span class='kw'>NULL</span>,
-  binary = <span class='fl'>FALSE</span>,
-  vignettes = <span class='fl'>TRUE</span>,
-  manual = <span class='fl'>FALSE</span>,
-  args = <span class='kw'>NULL</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
+    <pre class="usage"><span class='fu'>build</span>(
+  <span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>,
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>binary</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>vignettes</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>manual</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>args</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -192,7 +198,7 @@ environment is needed.</p>
     <tr>
       <th>pkg</th>
       <td><p>The package to use, can be a file path to the package or a
-package object.  See <code>as.package()</code> for more information.</p></td>
+package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
     </tr>
     <tr>
       <th>path</th>
@@ -250,7 +256,7 @@ package</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
