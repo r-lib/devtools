@@ -166,7 +166,8 @@
 <a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
 </h1>
 <ul>
-<li>Now uses (what will become) testthat 3.0.0 to power <code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_file()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code>, and <code><a href="../reference/test.html">test_coverage_file()</a></code>. The major difference is that <code><a href="../reference/test.html">test_file()</a></code> now generates a compact summary that takes up less space on the console.</li>
+<li><p>The internal <code>devtest()</code> function has been removed.</p></li>
+<li><p>Now uses (what will become) testthat 3.0.0 to power <code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_file()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code>, and <code><a href="../reference/test.html">test_coverage_file()</a></code>. The major difference is that <code><a href="../reference/test.html">test_file()</a></code> now generates a compact summary that takes up less space on the console.</p></li>
 </ul>
 </div>
     <div id="devtools-231" class="section level1">
@@ -1264,7 +1265,7 @@
 <li><p><code>as.package</code> no longer uses <code>~/.Rpackages</code>.</p></li>
 <li><p><code>as.package</code> provides more informative error messages when path does not exist, isn’t a directory, or doesn’t contain a <code>DESCRIPTION</code> file.</p></li>
 <li><p>New function <code><a href="https://rdrr.io/pkg/pkgload/man/inst.html">inst()</a></code> takes the name of a package and returns the installed path of that package. (Winston Chang. Fixes <a href='https://github.com/r-lib/devtools/issues/130'>#130</a>). This makes it possible to use <code>devtools</code> functions (e.g. <code>unload</code>) with regular installed packages, not just in-development source packages.</p></li>
-<li><p>New function <code><a href="../reference/devtest.html">devtest()</a></code> returns paths to an internal testing packages in devtools.</p></li>
+<li><p>New function <code>devtest()</code> returns paths to an internal testing packages in devtools.</p></li>
 </ul>
 </div>
 <div id="loading" class="section level2">
