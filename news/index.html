@@ -166,6 +166,7 @@
 <a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li><p>Old <code>check_results()</code> function has been removed. It was not used by any CRAN package, and much better alternatives are available in the<br><a href="http://github.com/r-lib/rcmdcheck">rcmdcheck</a> package.</p></li>
 <li><p>The internal <code>devtest()</code> function has been removed.</p></li>
 <li><p>Now uses (what will become) testthat 3.0.0 to power <code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_file()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code>, and <code><a href="../reference/test.html">test_coverage_file()</a></code>. The major difference is that <code><a href="../reference/test.html">test_file()</a></code> now generates a compact summary that takes up less space on the console.</p></li>
 </ul>
@@ -761,7 +762,7 @@
 <li><p><code>use_git_hook()</code> now creates <code>.git/hooks</code> if needed (<a href='https://github.com/r-lib/devtools/issues/888'>#888</a>)</p></li>
 <li><p>GitHub integration extended: <code>use_github()</code> gains a <code>protocol</code> argument (ssh or https), populates URL and BugReports fields of DESCRIPTION (only if non-existent or empty), pushes to the newly created GitHub repo, and sets a remote tracking branch. <code>use_github_links()</code> is a new exported function. <code>dr_github()</code> diagnoses more possible problems. (<a href='https://github.com/r-lib/devtools/issues/642'>#642</a>, <a href='https://github.com/jennybc'>@jennybc</a>).</p></li>
 <li><p><code>use_travis()</code>: Default travis script leaves notifications on default settings.</p></li>
-<li><p><code><a href="../reference/uses_testthat.html">uses_testthat()</a></code> and <code><a href="../reference/check_failures.html">check_failures()</a></code> are now exported (<a href='https://github.com/r-lib/devtools/issues/824'>#824</a>, <a href='https://github.com/r-lib/devtools/issues/839'>#839</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p><code><a href="../reference/uses_testthat.html">uses_testthat()</a></code> and <code>check_failures()</code> are now exported (<a href='https://github.com/r-lib/devtools/issues/824'>#824</a>, <a href='https://github.com/r-lib/devtools/issues/839'>#839</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code>use_readme_rmd()</code> uses <code>uses_git()</code> correctly (<a href='https://github.com/r-lib/devtools/issues/793'>#793</a>).</p></li>
 <li><p><code><a href="https://rdrr.io/pkg/pkgbuild/man/with_debug.html">with_debug()</a></code> now uses <code>with_makevars()</code> rather than <code>with_env()</code>, because R reads compilation variables from the Makevars rather than the environment (<a href='https://github.com/jimhester'>@jimhester</a>, <a href='https://github.com/r-lib/devtools/issues/788'>#788</a>).</p></li>
 <li><p>Properly reset library path after <code>with_lib()</code> (<a href='https://github.com/r-lib/devtools/issues/836'>#836</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
