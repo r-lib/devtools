@@ -256,8 +256,9 @@ packages aren't found.</p></td>
     <tr>
       <th>run_dont_test</th>
       <td><p>Sets <code>--run-donttest</code> so that tests surrounded in
-<code>\dontest{}</code> are also tested. This is important for CRAN
-submission.</p></td>
+<code>\dontest{}</code> are also tested. When <code>cran = TRUE</code>, this only affects
+R 3.6 and earlier; in R 4.0.0 code in <code>\dontest{}</code> is always run as
+part of CRAN submission.</p></td>
     </tr>
     <tr>
       <th>args</th>
