@@ -70,8 +70,9 @@ If \code{TRUE}, performs a number of CRAN incoming checks.}
 packages aren't found.}
 
 \item{run_dont_test}{Sets \code{--run-donttest} so that tests surrounded in
-\code{\\dontest\{\}} are also tested. This is important for CRAN
-submission.}
+\verb{\\dontest\{\}} are also tested. When \code{cran = TRUE}, this only affects
+R 3.6 and earlier; in R 4.0.0 code in \verb{\\dontest\{\}} is always run as
+part of CRAN submission.}
 
 \item{args}{Character vector of arguments to pass to
 \code{R CMD check}. (Note that instead of the \code{--output} option you
