@@ -54,7 +54,7 @@ check_rhub <- function(pkg = ".",
   )
 
   if (!interactive) {
-    message("R-hub check for package ", sQuote(pkg$package), " submitted.")
+    glue_inform("R-hub check for package {sQuote(pkg$package)} submitted.")
     status
   } else {
     status

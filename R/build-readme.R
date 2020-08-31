@@ -19,7 +19,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
   check_suggested("rmarkdown")
   save_all()
 
-  message("Installing ", pkg$package, " in temporary library")
+  glue_inform("Installing {pkg$package} in temporary library")
   withr::local_temp_libpaths()
   install(pkg, upgrade = "never", reload = FALSE, quick = TRUE, quiet = quiet)
 
@@ -28,7 +28,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
 
   paths <- file.path(pkg$path, files)
   for (path in paths) {
-    message("Building ", path)
+    glue_inform("Building {path}")
     callr::r_safe(
       function(...) rmarkdown::render(...),
       args = list(input = path, ..., output_options = output_options, quiet = quiet),

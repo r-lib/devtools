@@ -175,7 +175,7 @@ email <- function(address, subject, body) {
     utils::browseURL(url, browser = email_browser())
   },
   error = function(e) {
-    message("Sending failed with error: ", e$message)
+    glue_inform("Sending failed with error: {e$message}")
     cat("To: ", address, "\n", sep = "")
     cat("Subject: ", subject, "\n", sep = "")
     cat("\n")
@@ -277,13 +277,11 @@ submit_cran <- function(pkg = ".", args = NULL) {
 }
 
 build_cran <- function(pkg, args) {
-  message("Building")
+  glue_inform("Building")
   built_path <- pkgbuild::build(pkg$path, tempdir(), manual = TRUE, args = args)
-  message("Submitting file: ", built_path)
-  message(
-    "File size: ",
-    format(as.object_size(file.info(built_path)$size), units = "auto")
-  )
+  glue_inform("Submitting file: {built_path}")
+  size <- format(as.object_size(file.info(built_path)$size), units = "auto")
+  glue_inform("File size: {size}")
   built_path
 }
 
@@ -309,7 +307,7 @@ upload_cran <- function(pkg, built_path) {
   comments <- cran_comments(pkg)
 
   # Initial upload ---------
-  message("Uploading package & comments")
+  glue_inform("Uploading package & comments")
   body <- list(
     pkg_id = "",
     name = maint$name,
@@ -334,7 +332,7 @@ upload_cran <- function(pkg, built_path) {
   new_url <- httr::parse_url(r$url)
 
   # Confirmation -----------
-  message("Confirming submission")
+  glue_inform("Confirming submission")
   body <- list(
     pkg_id = new_url$query$pkg_id,
     name = maint$name,
@@ -346,7 +344,7 @@ upload_cran <- function(pkg, built_path) {
   httr::stop_for_status(r)
   new_url <- httr::parse_url(r$url)
   if (new_url$query$submit == "1") {
-    message(
+    glue_inform(
       "Package submission successful.\n",
       "Check your email for confirmation link."
     )
@@ -365,7 +363,7 @@ flag_release <- function(pkg = ".") {
     return(invisible())
   }
 
-  message("Don't forget to tag this release once accepted by CRAN")
+  glue_inform("Don't forget to tag this release once accepted by CRAN")
 
   date <- Sys.Date()
   withr::with_dir(pkg$path, {

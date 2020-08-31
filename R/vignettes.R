@@ -42,7 +42,7 @@ build_vignettes <- function(pkg = ".",
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (length(vigns$docs) == 0) return()
 
-  message("Building ", pkg$package, " vignettes")
+  glue_inform("Building {pkg$package} vignettes")
 
   if (isTRUE(install)) {
     build <- function(pkg_path, clean, quiet, upgrade) {
@@ -79,7 +79,7 @@ create_vignette_index <- function(pkg, vigns) {
   usethis_use_directory(pkg, "Meta", ignore = TRUE)
   usethis_use_git_ignore(pkg, "Meta")
 
-  message("Building vignette index")
+  glue_inform("Building vignette index")
 
   vignette_index <- ("tools" %:::% ".build_vignette_index")(vigns)
 
@@ -100,7 +100,7 @@ clean_vignettes <- function(pkg = ".") {
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (basename(vigns$dir) != "vignettes") return()
 
-  message("Cleaning built vignettes and index from ", pkg$package)
+  glue_inform("Cleaning built vignettes and index from {pkg$package}")
 
   doc_path <- file.path(pkg$path, "doc")
 
@@ -115,7 +115,7 @@ clean_vignettes <- function(pkg = ".") {
 
   to_remove <- c(vig_rm, extra_rm, vig_index_rm)
   if (length(to_remove) > 0) {
-    message("Removing ", paste(basename(to_remove), collapse = ", "))
+    glue_inform("Removing {paste(basename(to_remove), collapse = ', ')}")
     file.remove(to_remove)
   }
 

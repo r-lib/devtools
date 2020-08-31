@@ -20,7 +20,7 @@ uninstall <- function(pkg = ".", unload = TRUE, quiet = FALSE, lib = .libPaths()
   }
 
   if (!quiet) {
-    message("Uninstalling ", pkg$package)
+    glue_inform("Uninstalling {pkg$package}")
   }
 
   remove.packages(pkg$package, .libPaths()[[1]])

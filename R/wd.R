@@ -12,6 +12,6 @@ wd <- function(pkg = ".", path = "") {
     stop(path, " does not exist", call. = FALSE)
   }
 
-  message("Changing working directory to ", path)
+  glue_inform("Changing working directory to {path}")
   setwd(path)
 }

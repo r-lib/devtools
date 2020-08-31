@@ -178,7 +178,7 @@ check_built <- function(path = NULL, cran = TRUE,
   }
 
   if (manual && !pkgbuild::has_latex()) {
-    message(
+    glue_inform(
       "pdflatex not found! Not building PDF manual or vignettes.\n",
       "If you are planning to release this package, please run a check with ",
       "manual and vignettes beforehand."

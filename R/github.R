@@ -9,7 +9,7 @@ github_pat <- function(quiet = TRUE) {
   pat <- Sys.getenv("GITHUB_PAT")
   if (nzchar(pat)) {
     if (!quiet) {
-      message("Using GitHub PAT from envvar GITHUB_PAT")
+      glue_inform("Using GitHub PAT from envvar GITHUB_PAT")
     }
     return(pat)
   }
@@ -22,7 +22,7 @@ github_pat <- function(quiet = TRUE) {
       "c485e443"
     )
     if (!quiet) {
-      message("Using bundled GitHub PAT. Please add your own PAT to the env var `GITHUB_PAT`")
+      glue_inform("Using bundled GitHub PAT. Please add your own PAT to the env var `GITHUB_PAT`")
     }
     return(pat)
   }

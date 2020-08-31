@@ -13,7 +13,7 @@
 document <- function(pkg = ".", roclets = NULL, quiet = FALSE) {
   pkg <- as.package(pkg)
   if (!isTRUE(quiet)) {
-    message("Updating ", pkg$package, " documentation")
+    glue_inform("Updating {pkg$package} documentation")
   }
 
   save_all()
