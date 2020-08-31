@@ -135,7 +135,7 @@ check_status <- function(status, name, warning) {
     },
     error = function(e) {
       cat("\n")
-      glue_infom("ERROR: {conditionMessage(e)}")
+      glue_inform("ERROR: {conditionMessage(e)}")
       FALSE
     }
   )
