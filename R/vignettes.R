@@ -61,7 +61,8 @@ build_vignettes <- function(pkg = ".",
     build,
     args = list(pkg_path = pkg$path, clean = clean, upgrade = upgrade, quiet = quiet),
     show = !quiet,
-    spinner = FALSE
+    spinner = FALSE,
+    stderr = "2>&1"
   )
 
   # We need to re-run pkgVignettes now that they are built to get the output
