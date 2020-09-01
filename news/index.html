@@ -166,6 +166,7 @@
 <a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li><p><code><a href="https://rdrr.io/pkg/pkgload/man/inst.html">pkgload::inst()</a></code> is no longer re-exported (<a href='https://github.com/r-lib/devtools/issues/2218'>#2218</a>).</p></li>
 <li><p>Old <code>check_results()</code> function has been removed. It was not used by any CRAN package, and much better alternatives are available in the<br><a href="http://github.com/r-lib/rcmdcheck">rcmdcheck</a> package.</p></li>
 <li><p>The internal <code>devtest()</code> function has been removed.</p></li>
 <li><p>Now uses (what will become) testthat 3.0.0 to power <code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_file()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code>, and <code><a href="../reference/test.html">test_coverage_file()</a></code>. The major difference is that <code><a href="../reference/test.html">test_file()</a></code> now generates a compact summary that takes up less space on the console.</p></li>
@@ -398,7 +399,7 @@
 <li><p><code><a href="https://rdrr.io/pkg/sessioninfo/man/package_info.html">package_info()</a></code> function now re-exported from the <strong>sessioninfo</strong> package.</p></li>
 <li><p><code><a href="../reference/check.html">check()</a></code> now uses <strong>rcmdcheck</strong> to run and parse R CMD check output (<a href='https://github.com/r-lib/devtools/issues/1153'>#1153</a>).</p></li>
 <li>
-<p>Code related to simulating package loading has been pulled out into a separate package, <strong>pkgload</strong>. The following functions have been moved to pkgload without a shim: <code><a href="https://rdrr.io/pkg/pkgbuild/man/clean_dll.html">clean_dll()</a></code>, <code>compile_dll()</code>, <code>dev_example()</code>, <code>dev_help()</code>, <code>dev_meta()</code>, <code>find_topic()</code>, <code>imports_env()</code>, <code><a href="https://rdrr.io/pkg/pkgload/man/inst.html">inst()</a></code>, <code>load_code()</code>, <code>load_dll()</code>, <code>ns_env()</code>, <code>parse_ns_file()</code>, <code>pkg_env()</code>. These functions are primarily for internal use.</p>
+<p>Code related to simulating package loading has been pulled out into a separate package, <strong>pkgload</strong>. The following functions have been moved to pkgload without a shim: <code><a href="https://rdrr.io/pkg/pkgbuild/man/clean_dll.html">clean_dll()</a></code>, <code>compile_dll()</code>, <code>dev_example()</code>, <code>dev_help()</code>, <code>dev_meta()</code>, <code>find_topic()</code>, <code>imports_env()</code>, <code>inst()</code>, <code>load_code()</code>, <code>load_dll()</code>, <code>ns_env()</code>, <code>parse_ns_file()</code>, <code>pkg_env()</code>. These functions are primarily for internal use.</p>
 <p><code><a href="../reference/load_all.html">load_all()</a></code> and <code><a href="https://rdrr.io/pkg/pkgload/man/unload.html">unload()</a></code> have been moved to pkgload, but <strong>devtools</strong> provides shims since these are commonly used.</p>
 </li>
 <li><p><code><a href="https://rdrr.io/pkg/pkgbuild/man/has_rtools.html">find_rtools()</a></code>, <code>setup_rtools()</code>, <code><a href="https://rdrr.io/pkg/pkgbuild/man/has_compiler.html">has_devel()</a></code>, <code>compiler_flags()</code>, <code><a href="../reference/build.html">build()</a></code> and <code><a href="https://rdrr.io/pkg/pkgbuild/man/with_debug.html">with_debug()</a></code> have moved to the new <strong>pkgbuild</strong> package. <code><a href="../reference/build.html">build()</a></code> and <code><a href="https://rdrr.io/pkg/pkgbuild/man/with_debug.html">with_debug()</a></code> are re-exported by <strong>devtools</strong></p></li>
@@ -1265,7 +1266,7 @@
 <ul>
 <li><p><code>as.package</code> no longer uses <code>~/.Rpackages</code>.</p></li>
 <li><p><code>as.package</code> provides more informative error messages when path does not exist, isn’t a directory, or doesn’t contain a <code>DESCRIPTION</code> file.</p></li>
-<li><p>New function <code><a href="https://rdrr.io/pkg/pkgload/man/inst.html">inst()</a></code> takes the name of a package and returns the installed path of that package. (Winston Chang. Fixes <a href='https://github.com/r-lib/devtools/issues/130'>#130</a>). This makes it possible to use <code>devtools</code> functions (e.g. <code>unload</code>) with regular installed packages, not just in-development source packages.</p></li>
+<li><p>New function <code>inst()</code> takes the name of a package and returns the installed path of that package. (Winston Chang. Fixes <a href='https://github.com/r-lib/devtools/issues/130'>#130</a>). This makes it possible to use <code>devtools</code> functions (e.g. <code>unload</code>) with regular installed packages, not just in-development source packages.</p></li>
 <li><p>New function <code>devtest()</code> returns paths to an internal testing packages in devtools.</p></li>
 </ul>
 </div>
