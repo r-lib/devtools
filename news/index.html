@@ -368,7 +368,7 @@
 </ul>
 </li>
 <li><p><code><a href="../reference/check.html">check()</a></code> argument <code>check_version</code> has been renamed to <code>remote</code> to better describe what tests are disabled (<a href='https://github.com/r-lib/devtools/issues/1811'>#1811</a>)</p></li>
-<li><p><code>get_path()</code>, <code>set_path()</code>, <code>add_path()</code> and <code>on_path()</code> have been removed, this functionality is available with <code><a href="https://rdrr.io/pkg/withr/man/with_path.html">withr::with_path()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1796'>#1796</a>).</p></li>
+<li><p><code>get_path()</code>, <code>set_path()</code>, <code>add_path()</code> and <code>on_path()</code> have been removed, this functionality is available with <code><a href="https://withr.r-lib.org/reference/with_path.html">withr::with_path()</a></code> (<a href='https://github.com/r-lib/devtools/issues/1796'>#1796</a>).</p></li>
 <li><p>The <code>lang</code> argument to <code><a href="../reference/spell_check.html">spell_check()</a></code> was removed, for compatibility with <a href="https://CRAN.R-project.org/package=spelling">spelling</a> v1.1. (<a href='https://github.com/r-lib/devtools/issues/1715'>#1715</a>)</p></li>
 <li><p>The previously deprecated <code>with_</code> functions have now been removed. The functionality has been moved to the <strong>withr</strong> package.</p></li>
 <li><p><code>RCMD()</code>, <code>clean_source()</code>, <code>eval_clean()</code> and <code>evalq_clean()</code> have been removed. These functions never worked terribly well, and have been replaced by the much better functions in <strong>callr</strong>.</p></li>
