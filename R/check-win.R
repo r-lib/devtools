@@ -68,8 +68,8 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   version <- match.arg(version, several.ok = TRUE)
 
   if (!quiet) {
-    glue_inform(
-      "Building windows version of {pkg$package} ({pkg$version})",
+    cli::cli_alert_info(
+      "Building windows version of {.pkg {pkg$package}} ({pkg$version})",
       " for {paste(version, collapse = ', ')} with win-builder.r-project.org."
     )
     if (interactive() && yesno("Email results to ", maintainer(pkg)$email, "?")) {
@@ -92,10 +92,9 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   if (!quiet) {
     time <- strftime(Sys.time() + 30 * 60, "%I:%M %p")
     email <- maintainer(pkg)$email
-    package <- if (length(version) > 1) "packages" else "package"
 
-    glue_inform(
-      "[{Sys.Date()}] Check <{email}> for a link to the built {package} in 15-30 mins. (~{time})"
+    cli::cli_alert_success(
+      "[{Sys.Date()}] Check <{.email {email}}> for a link to results in 15-30 mins (~{time})."
     )
   }
 

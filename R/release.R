@@ -175,7 +175,7 @@ email <- function(address, subject, body) {
     utils::browseURL(url, browser = email_browser())
   },
   error = function(e) {
-    glue_inform("Sending failed with error: {e$message}")
+    cli::cli_alert_danger("Sending failed with error: {e$message}")
     cat("To: ", address, "\n", sep = "")
     cat("Subject: ", subject, "\n", sep = "")
     cat("\n")
@@ -277,11 +277,11 @@ submit_cran <- function(pkg = ".", args = NULL) {
 }
 
 build_cran <- function(pkg, args) {
-  glue_inform("Building")
+  cli::cli_alert_info("Building")
   built_path <- pkgbuild::build(pkg$path, tempdir(), manual = TRUE, args = args)
-  glue_inform("Submitting file: {built_path}")
+  cli::cli_alert_info("Submitting file: {built_path}")
   size <- format(as.object_size(file.info(built_path)$size), units = "auto")
-  glue_inform("File size: {size}")
+  cli::cli_alert_info("File size: {size}")
   built_path
 }
 
@@ -307,7 +307,7 @@ upload_cran <- function(pkg, built_path) {
   comments <- cran_comments(pkg)
 
   # Initial upload ---------
-  glue_inform("Uploading package & comments")
+  cli::cli_alert_info("Uploading package & comments")
   body <- list(
     pkg_id = "",
     name = maint$name,
@@ -332,7 +332,7 @@ upload_cran <- function(pkg, built_path) {
   new_url <- httr::parse_url(r$url)
 
   # Confirmation -----------
-  glue_inform("Confirming submission")
+  cli::cli_alert_info("Confirming submission")
   body <- list(
     pkg_id = new_url$query$pkg_id,
     name = maint$name,
@@ -344,10 +344,8 @@ upload_cran <- function(pkg, built_path) {
   httr::stop_for_status(r)
   new_url <- httr::parse_url(r$url)
   if (new_url$query$submit == "1") {
-    glue_inform(
-      "Package submission successful.\n",
-      "Check your email for confirmation link."
-    )
+    cli::cli_alert_success("Package submission successful")
+    cli::cli_alert_info("Check your email for confirmation link.")
   } else {
     stop("Package failed to upload.", call. = FALSE)
   }
@@ -363,7 +361,7 @@ flag_release <- function(pkg = ".") {
     return(invisible())
   }
 
-  glue_inform("Don't forget to tag this release once accepted by CRAN")
+  cli::cli_alert_warning("Don't forget to tag this release once accepted by CRAN")
 
   date <- Sys.Date()
   withr::with_dir(pkg$path, {

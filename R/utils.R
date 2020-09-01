@@ -57,6 +57,3 @@ release_bullets <- function() {
     NULL
   )
 }
-
-glue_inform <- function(..., .envir = parent.frame())
-  rlang::inform(glue::glue(..., .envir = .envir))

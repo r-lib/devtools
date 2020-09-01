@@ -32,7 +32,6 @@ Imports:
     desc (>= 1.2.0),
     DT (>= 0.14),
     ellipsis (>= 0.3.1),
-    glue,
     httr (>= 1.4.2),
     memoise (>= 1.1.0),
     pkgbuild (>= 1.1.0),
