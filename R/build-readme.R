@@ -33,7 +33,8 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
       function(...) rmarkdown::render(...),
       args = list(input = path, ..., output_options = output_options, quiet = quiet),
       show = TRUE,
-      spinner = FALSE
+      spinner = FALSE,
+      stderr = "2>&1"
     )
   }
 

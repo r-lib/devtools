@@ -42,7 +42,7 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, run_donttest = FA
         function() devtools::run_examples(pkg = path, start = start, test = test, run = run, fresh = FALSE),
         list(path = pkg$path, start = start, test = test, run = run)
       ))
-    callr::r(to_run, show = TRUE, spinner = FALSE)
+    callr::r(to_run, show = TRUE, spinner = FALSE, stderr = "2>&1")
     return(invisible())
   }
 

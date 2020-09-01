@@ -100,7 +100,7 @@ install <-
     }
 
     pkgbuild::with_build_tools(required = FALSE,
-      callr::rcmd("INSTALL", c(install_path, opts), echo = !quiet, show = !quiet, fail_on_status = TRUE)
+      callr::rcmd("INSTALL", c(install_path, opts), echo = !quiet, show = !quiet, spinner = FALSE, stderr = "2>&1", fail_on_status = TRUE)
     )
 
     if (reload && was_loaded) {
