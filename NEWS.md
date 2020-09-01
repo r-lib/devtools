@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `pkgload::inst()` is no longer re-exported (#2218).
+
 * Old `check_results()` function has been removed. It was not used by any
   CRAN package, and much better alternatives are available in the   
   [rcmdcheck](http://github.com/r-lib/rcmdcheck) package.
