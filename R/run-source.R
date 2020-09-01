@@ -44,7 +44,7 @@ source_url <- function(url, ..., sha1 = NULL) {
   file_sha1 <- digest::digest(file = temp_file, algo = "sha1")
 
   if (is.null(sha1)) {
-    message("SHA-1 hash of file is ", file_sha1)
+    cli::cli_alert_info("SHA-1 hash of file is {file_sha1}")
   } else {
     if (nchar(sha1) < 6) {
       stop("Supplied SHA-1 hash is too short (must be at least 6 characters)")
@@ -126,7 +126,7 @@ source_gist <- function(id, ..., filename = NULL, sha1 = NULL, quiet = FALSE) {
     stop("Unknown id: ", id)
   }
 
-  if (!quiet) message("Sourcing ", url)
+  if (!quiet) cli::cli_alert_info("Sourcing {url}")
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 

@@ -14,9 +14,9 @@ build_manual <- function(pkg = ".", path = NULL) {
     "--force",
     paste0("--output=", path, "/", name),
     pkg$path
-  ), fail_on_status = TRUE),
+  ), fail_on_status = TRUE, stderr = "2>&1", spinner = FALSE),
   error = function(e) {
-    cat(e$stderr)
+    cat(e$stdout)
     stop("Failed to build manual", call. = FALSE)
   })
 

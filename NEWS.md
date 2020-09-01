@@ -2,6 +2,10 @@
 
 * `pkgload::inst()` is no longer re-exported (#2218).
 
+* Old `check_results()` function has been removed. It was not used by any
+  CRAN package, and much better alternatives are available in the   
+  [rcmdcheck](http://github.com/r-lib/rcmdcheck) package.
+
 * The internal `devtest()` function has been removed.
 
 * Now uses (what will become) testthat 3.0.0 to power `test()`, `test_file()`,

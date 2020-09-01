@@ -68,10 +68,9 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   version <- match.arg(version, several.ok = TRUE)
 
   if (!quiet) {
-    message(
-      "Building windows version of ", pkg$package, " (", pkg$version, ")",
-      " for ", paste(version, collapse = ", "),
-      " with win-builder.r-project.org.\n"
+    cli::cli_alert_info(
+      "Building windows version of {.pkg {pkg$package}} ({pkg$version})",
+      " for {paste(version, collapse = ', ')} with win-builder.r-project.org."
     )
     if (interactive() && yesno("Email results to ", maintainer(pkg)$email, "?")) {
       return(invisible())
@@ -91,11 +90,11 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   lapply(url, upload_ftp, file = built_path)
 
   if (!quiet) {
-    message(
-      "[", strftime(Sys.time(), "%I:%M %p (%Y-%m-%d)"), "] ",
-      "Check ", maintainer(pkg)$email, " for a link to the built package",
-      if (length(version) > 1) "s" else "",
-      " in 15-30 mins."
+    time <- strftime(Sys.time() + 30 * 60, "%I:%M %p")
+    email <- maintainer(pkg)$email
+
+    cli::cli_alert_success(
+      "[{Sys.Date()}] Check <{.email {email}}> for a link to results in 15-30 mins (~{time})."
     )
   }
 
