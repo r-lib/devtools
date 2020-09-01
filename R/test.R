@@ -23,7 +23,7 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
   pkg <- as.package(pkg)
 
   if (!uses_testthat(pkg) && interactive()) {
-    message("No testing infrastructure found. Create it?")
+    cli::cli_alert_danger("No testing infrastructure found. Create it?")
     if (utils::menu(c("Yes", "No")) == 1) {
       usethis_use_testthat(pkg)
     }
@@ -32,7 +32,7 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
 
   load_all(pkg$path)
 
-  message("Testing ", pkg$package)
+  cli::cli_alert_info("Testing {.pkg {pkg$package}}")
   testthat::test_local(
     pkg$path,
     filter = filter,
@@ -62,7 +62,7 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
 
   save_all()
   pkg <- as.package(pkg)
-  message("Computing test coverage for ", pkg$package)
+  cli::cli_alert_info("Computing test coverage for {.pkg {pkg$package}}")
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 

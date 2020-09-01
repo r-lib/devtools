@@ -17,7 +17,7 @@ lint <- function(pkg = ".", cache = TRUE, ...) {
   check_suggested("lintr")
   pkg <- as.package(pkg)
 
-  message("Linting ", pkg$package, appendLF = FALSE)
+  cli::cli_alert_info("Linting {.pkg {pkg$package}}")
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 

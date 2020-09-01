@@ -77,7 +77,7 @@ load_pkg_description <- function(path, create) {
   if (!file.exists(path_desc)) {
     if (is.na(create)) {
       if (interactive()) {
-        message("No package infrastructure found in ", path, ". Create it?")
+        cli::cli_alert_danger("No package infrastructure found in {.file {path}}. Create it?")
         create <- (utils::menu(c("Yes", "No")) == 1)
       } else {
         create <- FALSE
