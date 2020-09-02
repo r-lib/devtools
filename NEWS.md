@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `check()` only re-documents if you have a matching version of roxygen2
+   (#2263).
+
 * `pkgload::inst()` is no longer re-exported (#2218).
 
 * Old `check_results()` function has been removed. It was not used by any
