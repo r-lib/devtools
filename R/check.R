@@ -146,7 +146,7 @@ can_document <- function(pkg) {
     cli::cli_alert_info(
       "Installed roxygen2 version ({installed}) doesn't match required version ({required})"
     )
-    cli::cli_alert_danger("check() will not redocument this package")
+    cli::cli_alert_danger("check() will not re-document this package")
     cli::cli_rule()
 
     FALSE
