@@ -742,7 +742,7 @@
 </h1>
 <ul>
 <li><p>Avoid importing heavy dependencies to speed up loading (<a href='https://github.com/r-lib/devtools/issues/830'>#830</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
-<li><p>Remove explicit <code><a href="https://testthat.r-lib.org/reference">library(testthat)</a></code> call in <code><a href="../reference/test.html">test()</a></code> (<a href='https://github.com/r-lib/devtools/issues/798'>#798</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
+<li><p>Remove explicit <code><a href="https://testthat.r-lib.org">library(testthat)</a></code> call in <code><a href="../reference/test.html">test()</a></code> (<a href='https://github.com/r-lib/devtools/issues/798'>#798</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code><a href="../reference/as.package.html">as.package()</a></code> and <code><a href="../reference/load_all.html">load_all()</a></code> gain new argument <code>create</code>. Like other functions with a <code>pkg</code> argument, <code><a href="../reference/load_all.html">load_all()</a></code> looks for a <code>DESCRIPTION</code> file in parent directories - if <code>create = TRUE</code> it will be automatically created if there’s a <code>R/</code> or <code>data/</code> directory (<a href='https://github.com/r-lib/devtools/issues/852'>#852</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> gains dependencies argument (<a href='https://github.com/r-lib/devtools/issues/825'>#825</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</p></li>
 <li><p><code>build_win()</code> now uses <code>curl</code> instead of <code>RCurl</code> for ftp upload.</p></li>
@@ -958,7 +958,7 @@
 <li><p><code>check_devtools()</code> also checks for dependencies on development versions of packages (<a href='https://github.com/r-lib/devtools/issues/534'>#534</a>).</p></li>
 <li><p><code><a href="../reference/load_all.html">load_all()</a></code> no longer fails on partial loading of a package containing S4 or RC classes (<a href='https://github.com/r-lib/devtools/issues/577'>#577</a>).</p></li>
 <li><p>On windows, <code><a href="https://rdrr.io/pkg/pkgbuild/man/has_rtools.html">find_rtools()</a></code> is now run on package load, not package attach.</p></li>
-<li><p><code>help()</code>, <code>?</code>, and <code><a href="https://rdrr.io/r/base/system.file.html">system.file()</a></code> are now made available when a package is loaded with <code><a href="../reference/load_all.html">load_all()</a></code>, even if the devtools package isn’t attached.</p></li>
+<li><p><code>help()</code>, <code><a href="https://rdrr.io/r/utils/Question.html">?</a></code>, and <code><a href="https://rdrr.io/r/base/system.file.html">system.file()</a></code> are now made available when a package is loaded with <code><a href="../reference/load_all.html">load_all()</a></code>, even if the devtools package isn’t attached.</p></li>
 <li><p><code>httr</code> 0.3 required (<a href='https://github.com/krlmlr'>@krlmlr</a>, <a href='https://github.com/r-lib/devtools/issues/466'>#466</a>).</p></li>
 <li><p><code><a href="../reference/load_all.html">load_all()</a></code> no longer gives an error when objects listed as exports are missing.</p></li>
 <li><p>Shim added for <code><a href="https://rdrr.io/r/base/library.dynam.html">library.dynam.unload()</a></code>.</p></li>
@@ -1007,7 +1007,7 @@
 <li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> now prefers personal access tokens supplied to <code>auth_token</code> rather than passwords (<a href='https://github.com/r-lib/devtools/issues/418'>#418</a>, <a href='https://github.com/jeroenooms'>@jeroenooms</a>).</p></li>
 <li><p><code><a href="../reference/remote-reexports.html">install_github()</a></code> now defaults to <code>dependencies = TRUE</code> so you definitely get all the packages you need to build from source.</p></li>
 <li><p>devtools supplies its own version of <code><a href="https://rdrr.io/r/base/system.file.html">system.file()</a></code> so that when the function is called from the R console, it will have special behavior for packages loaded with devtools.</p></li>
-<li><p>devtools supplies its own version of <code>help</code> and <code>?</code>, which will search devtools-loaded packages as well as normally-loaded packages.</p></li>
+<li><p>devtools supplies its own version of <code>help</code> and <code><a href="https://rdrr.io/r/utils/Question.html">?</a></code>, which will search devtools-loaded packages as well as normally-loaded packages.</p></li>
 </ul>
 </div>
 <div id="bug-fixes-1" class="section level2">
@@ -1531,7 +1531,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

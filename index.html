@@ -121,12 +121,14 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="co"># Install devtools from CRAN</span>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># Install devtools from CRAN</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
 
 <span class="co"># Or the development version from GitHub:</span>
 <span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="reference/remote-reexports.html">install_github</a></span>(<span class="st">"r-lib/devtools"</span>)</pre></div>
+<span class="kw">devtools</span>::<span class="fu"><a href="reference/remote-reexports.html">install_github</a></span>(<span class="st">"r-lib/devtools"</span>)
+</pre></div>
 </div>
 <div id="cheatsheet" class="section level2">
 <h2 class="hasAnchor">
@@ -229,7 +231,7 @@
 </ul>
 <p>Generally, you would not need to worry about these different packages, because devtools installs all of them automatically. You will need to care, however, if you’re filing a bug because reporting it at the correct place will lead to a speedier resolution.</p>
 <p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">sessioninfo::session_info()</a></code> rather than <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
-<p>However for day to day development we recommend you continue to use <code><a href="https://devtools.r-lib.org//reference">library(devtools)</a></code> to quickly load all needed development tools, just like <code><a href="https://rdrr.io/pkg/tidyverse/man">library(tidyverse)</a></code> quickly loads all the tools necessary for data exploration and visualization.</p>
+<p>However for day to day development we recommend you continue to use <code><a href="https://devtools.r-lib.org">library(devtools)</a></code> to quickly load all needed development tools, just like <code>library(tidyverse)</code> quickly loads all the tools necessary for data exploration and visualization.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
@@ -292,7 +294,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

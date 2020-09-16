@@ -170,14 +170,14 @@ packages that depend on the specified package.</p>
     </div>
 
     <pre class="usage"><span class='fu'>revdep</span>(
-  <span class='no'>pkg</span>,
-  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Depends"</span>, <span class='st'>"Imports"</span>, <span class='st'>"Suggests"</span>, <span class='st'>"LinkingTo"</span>),
-  <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ignore</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bioconductor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>pkg</span>,
+  dependencies = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Depends"</span>, <span class='st'>"Imports"</span>, <span class='st'>"Suggests"</span>, <span class='st'>"LinkingTo"</span>),
+  recursive = <span class='fl'>FALSE</span>,
+  ignore = <span class='kw'>NULL</span>,
+  bioconductor = <span class='fl'>FALSE</span>
 )
 
-<span class='fu'>revdep_maintainers</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+<span class='fu'>revdep_maintainers</span>(pkg = <span class='st'>"."</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -221,11 +221,12 @@ be faster.</p>
 be used to run R CMD check on all reverse dependencies.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>revdep</span>(<span class='st'>"ggplot2"</span>)
 
-<span class='fu'>revdep</span>(<span class='st'>"ggplot2"</span>, <span class='kw'>ignore</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xkcd"</span>, <span class='st'>"zoo"</span>))
-}</div></pre>
+<span class='fu'>revdep</span>(<span class='st'>"ggplot2"</span>, ignore = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xkcd"</span>, <span class='st'>"zoo"</span>))
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -241,7 +242,7 @@ be used to run R CMD check on all reverse dependencies.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

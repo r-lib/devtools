@@ -183,7 +183,7 @@ hash, down to 6 characters, but keep in mind that a truncated hash won't be
 as secure as the full hash.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>source_url</span>(<span class='no'>url</span>, <span class='no'>...</span>, <span class='kw'>sha1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>source_url</span>(<span class='kw'>url</span>, <span class='kw'>...</span>, sha1 = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,18 +207,19 @@ as secure as the full hash.</p>
     <div class='dont-index'><p><code><a href='source_gist.html'>source_gist()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 
 <span class='fu'>source_url</span>(<span class='st'>"https://gist.github.com/hadley/6872663/raw/hi.r"</span>)
 
 <span class='co'># With a hash, to make sure the remote file hasn't changed</span>
 <span class='fu'>source_url</span>(<span class='st'>"https://gist.github.com/hadley/6872663/raw/hi.r"</span>,
-  <span class='kw'>sha1</span> <span class='kw'>=</span> <span class='st'>"54f1db27e60bb7e0486d785604909b49e8fef9f9"</span>)
+  sha1 = <span class='st'>"54f1db27e60bb7e0486d785604909b49e8fef9f9"</span>)
 
 <span class='co'># With a truncated hash</span>
 <span class='fu'>source_url</span>(<span class='st'>"https://gist.github.com/hadley/6872663/raw/hi.r"</span>,
-  <span class='kw'>sha1</span> <span class='kw'>=</span> <span class='st'>"54f1db27e60"</span>)
-}</div></pre>
+  sha1 = <span class='st'>"54f1db27e60"</span>)
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -234,7 +235,7 @@ as secure as the full hash.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

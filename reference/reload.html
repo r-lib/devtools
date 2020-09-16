@@ -175,7 +175,7 @@ failure points. If in doubt, restart R and reload the package with
 <code><a href='https://rdrr.io/r/base/library.html'>library()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>reload</span>(<span class='kw'>pkg</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>reload</span>(pkg = <span class='st'>"."</span>, quiet = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,7 +196,7 @@ package object.  See <code><a href='as.package.html'>as.package()</a></code> for
     <div class='dont-index'><p><code><a href='load_all.html'>load_all()</a></code> to load a package for interactive development.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Reload package that is in current directory</span>
 <span class='fu'>reload</span>(<span class='st'>"."</span>)
 
@@ -205,8 +205,9 @@ package object.  See <code><a href='as.package.html'>as.package()</a></code> for
 
 <span class='co'># Can use inst() to find the package path</span>
 <span class='co'># This will reload the installed ggplot2 package</span>
-<span class='fu'>reload</span>(<span class='kw pkg'>pkgload</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/inst.html'>inst</a></span>(<span class='st'>"ggplot2"</span>))
-}</div></pre>
+<span class='fu'>reload</span>(<span class='kw'>pkgload</span>::<span class='fu'><a href='https://rdrr.io/pkg/pkgload/man/inst.html'>inst</a></span>(<span class='st'>"ggplot2"</span>))
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -222,7 +223,7 @@ package object.  See <code><a href='as.package.html'>as.package()</a></code> for
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
