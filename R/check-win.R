@@ -68,10 +68,9 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   version <- match.arg(version, several.ok = TRUE)
 
   if (!quiet) {
-    message(
-      "Building windows version of ", pkg$package, " (", pkg$version, ")",
-      " for ", paste(version, collapse = ", "),
-      " with win-builder.r-project.org.\n"
+    cli::cli_alert_info(
+      "Building windows version of {.pkg {pkg$package}} ({pkg$version})",
+      " for {paste(version, collapse = ', ')} with win-builder.r-project.org."
     )
     if (interactive() && yesno("Email results to ", maintainer(pkg)$email, "?")) {
       return(invisible())
@@ -91,11 +90,11 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   lapply(url, upload_ftp, file = built_path)
 
   if (!quiet) {
-    message(
-      "[", strftime(Sys.time(), "%I:%M %p (%Y-%m-%d)"), "] ",
-      "Check ", maintainer(pkg)$email, " for a link to the built package",
-      if (length(version) > 1) "s" else "",
-      " in 15-30 mins."
+    time <- strftime(Sys.time() + 30 * 60, "%I:%M %p")
+    email <- maintainer(pkg)$email
+
+    cli::cli_alert_success(
+      "[{Sys.Date()}] Check <{.email {email}}> for a link to results in 15-30 mins (~{time})."
     )
   }
 
@@ -118,4 +117,18 @@ change_maintainer_email <- function(desc, email) {
   desc$set_authors(aut)
 
   desc$write()
+}
+
+upload_ftp <- function(file, url, verbose = FALSE) {
+  check_suggested("curl")
+
+  stopifnot(file.exists(file))
+  stopifnot(is.character(url))
+  con <- file(file, open = "rb")
+  on.exit(close(con))
+  h <- curl::new_handle(upload = TRUE, filetime = FALSE)
+  curl::handle_setopt(h, readfunction = function(n) {
+    readBin(con, raw(), n = n)
+  }, verbose = verbose)
+  curl::curl_fetch_memory(url, handle = h)
 }

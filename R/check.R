@@ -39,9 +39,9 @@
 #'
 #' @return An object containing errors, warnings, and notes.
 #' @template devtools
-#' @param document If `NA` and the package uses roxygen2, will
-#'   rerun [document()] prior to checking. Use `TRUE`
-#'   and `FALSE` to override this default.
+#' @param document By default (`NULL`) will document if your installed
+#'   roxygen2 version matches the version declared in the `DESCRIPTION`
+#'   file. Use `TRUE` or `FALSE` to override the default.
 #' @param build_args Additional arguments passed to `R CMD build`
 #' @param check_dir the directory in which the package is checked
 #'   compatibility. `args = "--output=/foo/bar"` can be used to change the
@@ -54,7 +54,7 @@
 #'   CRAN.
 #' @export
 check <- function(pkg = ".",
-                  document = NA,
+                  document = NULL,
                   build_args = NULL,
                   ...,
                   manual = FALSE,
@@ -84,10 +84,7 @@ check <- function(pkg = ".",
   }
   error_on <- match.arg(error_on)
 
-  # document only if package uses roxygen, i.e. has RoxygenNote field
-  if (identical(document, NA)) {
-    document <- !is.null(pkg$roxygennote)
-  }
+  document <- document %||% can_document(pkg)
   if (document) {
     document(pkg, quiet = quiet)
   }
@@ -136,6 +133,28 @@ check <- function(pkg = ".",
   )
 }
 
+can_document <- function(pkg) {
+  required <- pkg$roxygennote
+  if (is.null(required)) {
+    # Doesn't use roxygen2 at all
+    return(FALSE)
+  }
+
+  installed <- packageVersion("roxygen2")
+  if (required != installed) {
+    cli::cli_rule()
+    cli::cli_alert_info(
+      "Installed roxygen2 version ({installed}) doesn't match required version ({required})"
+    )
+    cli::cli_alert_danger("check() will not re-document this package")
+    cli::cli_rule()
+
+    FALSE
+  } else {
+    TRUE
+  }
+}
+
 #' @export
 #' @rdname check
 #' @param path Path to built package.
@@ -150,11 +169,11 @@ check <- function(pkg = ".",
 #'   `FALSE` (the default), check will proceed even if all suggested
 #'   packages aren't found.
 #' @param run_dont_test Sets `--run-donttest` so that tests surrounded in
-#'   \code{\\dontest\{\}} are also tested. This is important for CRAN
-#'   submission.
+#'   `\dontest{}` are also tested. When `cran = TRUE`, this only affects
+#'   R 3.6 and earlier; in R 4.0.0 code in `\dontest{}` is always run as
+#'   part of CRAN submission.
 #' @param manual If `FALSE`, don't build and check manual
 #'   (`--no-manual`).
-#' @param args Additional arguments passed to `R CMD check`
 #' @param env_vars Environment variables set during `R CMD check`
 #' @param quiet if `TRUE` suppresses output from this function.
 #' @inheritParams rcmdcheck::rcmdcheck
@@ -178,11 +197,7 @@ check_built <- function(path = NULL, cran = TRUE,
   }
 
   if (manual && !pkgbuild::has_latex()) {
-    message(
-      "pdflatex not found! Not building PDF manual or vignettes.\n",
-      "If you are planning to release this package, please run a check with ",
-      "manual and vignettes beforehand."
-    )
+    cli::cli_alert_danger("pdflatex not found! Not building PDF manual or vignettes")
     manual <- FALSE
   }
 

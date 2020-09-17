@@ -1,5 +1,3 @@
-context("sort")
-
 test_that("case-insensitive sort order", {
   expect_equal(sort_ci(rev(letters)), letters)
   expect_equal(sort_ci(rev(LETTERS)), LETTERS)

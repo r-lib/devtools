@@ -1,5 +1,29 @@
 # devtools (development version)
 
+* `check()` only re-documents if you have a matching version of roxygen2
+   (#2263).
+
+* `pkgload::inst()` is no longer re-exported (#2218).
+
+* Old `check_results()` function has been removed. It was not used by any
+  CRAN package, and much better alternatives are available in the   
+  [rcmdcheck](http://github.com/r-lib/rcmdcheck) package.
+
+* The internal `devtest()` function has been removed.
+
+* Now uses (what will become) testthat 3.0.0 to power `test()`, `test_file()`,
+  `test_coverage()`, and `test_coverage_file()`. The major difference is that
+  `test_file()` now generates a compact summary that takes up less space on
+   the console.
+
+# devtools 2.3.1
+
+* `run_examples()` arguments `run` and `test` are deprecated in favor of the (hopefully) more clear `run_dontrun` and `run_donttest` (pkgload/#107).
+
+* Previously deprecated functions `dr_devtools()` and `dr_github()` have been removed.
+
+* Documentation has been synced with remotes 2.2.0
+
 # devtools 2.3.0
 
 * `build()` now errors with a more informative error message when passed an

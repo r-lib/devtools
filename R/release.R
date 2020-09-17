@@ -16,7 +16,7 @@
 #' of additional questions to ask.
 #'
 #' You also need to read the CRAN repository policy at
-#' <https://cran.r-project.org/web/packages/policies.html> and make
+#' 'https://cran.r-project.org/web/packages/policies.html' and make
 #' sure you're in line with the policies. `release` tries to automate as
 #' many of polices as possible, but it's impossible to be completely
 #' comprehensive, and they do change in between releases of devtools.
@@ -158,7 +158,7 @@ yesno <- function(...) {
   qs <- c(sample(yeses, 1), sample(nos, 2))
   rand <- sample(length(qs))
 
-  menu(qs[rand]) != which(rand == 1)
+  utils::menu(qs[rand]) != which(rand == 1)
 }
 
 # https://tools.ietf.org/html/rfc2368
@@ -175,7 +175,7 @@ email <- function(address, subject, body) {
     utils::browseURL(url, browser = email_browser())
   },
   error = function(e) {
-    message("Sending failed with error: ", e$message)
+    cli::cli_alert_danger("Sending failed with error: {e$message}")
     cat("To: ", address, "\n", sep = "")
     cat("Subject: ", subject, "\n", sep = "")
     cat("\n")
@@ -283,13 +283,11 @@ submit_cran <- function(pkg = ".", args = NULL) {
 }
 
 build_cran <- function(pkg, args) {
-  message("Building")
+  cli::cli_alert_info("Building")
   built_path <- pkgbuild::build(pkg$path, tempdir(), manual = TRUE, args = args)
-  message("Submitting file: ", built_path)
-  message(
-    "File size: ",
-    format(as.object_size(file.info(built_path)$size), units = "auto")
-  )
+  cli::cli_alert_info("Submitting file: {built_path}")
+  size <- format(as.object_size(file.info(built_path)$size), units = "auto")
+  cli::cli_alert_info("File size: {size}")
   built_path
 }
 
@@ -315,7 +313,7 @@ upload_cran <- function(pkg, built_path) {
   comments <- cran_comments(pkg)
 
   # Initial upload ---------
-  message("Uploading package & comments")
+  cli::cli_alert_info("Uploading package & comments")
   body <- list(
     pkg_id = "",
     name = maint$name,
@@ -340,7 +338,7 @@ upload_cran <- function(pkg, built_path) {
   new_url <- httr::parse_url(r$url)
 
   # Confirmation -----------
-  message("Confirming submission")
+  cli::cli_alert_info("Confirming submission")
   body <- list(
     pkg_id = new_url$query$pkg_id,
     name = maint$name,
@@ -352,10 +350,8 @@ upload_cran <- function(pkg, built_path) {
   httr::stop_for_status(r)
   new_url <- httr::parse_url(r$url)
   if (new_url$query$submit == "1") {
-    message(
-      "Package submission successful.\n",
-      "Check your email for confirmation link."
-    )
+    cli::cli_alert_success("Package submission successful")
+    cli::cli_alert_info("Check your email for confirmation link.")
   } else {
     stop("Package failed to upload.", call. = FALSE)
   }
@@ -371,11 +367,12 @@ flag_release <- function(pkg = ".") {
     return(invisible())
   }
 
-  message("Don't forget to tag this release once accepted by CRAN")
+  cli::cli_alert_warning("Don't forget to tag this release once accepted by CRAN")
 
   date <- Sys.Date()
-  commit <- git2r::commits(git2r::init(pkg$path), n = 1)[[1]]
-  sha <- substr(as.data.frame(commit)$sha, 1, 10)
+  withr::with_dir(pkg$path, {
+    sha <- system2("git", c("rev-parse", "--short", "HEAD"), stdout = TRUE)
+  })
 
   msg <- paste0(
     "This package was submitted to CRAN on ", date, ".\n",
@@ -393,4 +390,16 @@ cran_mirror <- function(repos = getOption("repos")) {
   }
 
   repos[["CRAN"]]
+}
+
+# Return the version of a package on CRAN (or other repository)
+# @param package The name of the package.
+# @param available A matrix of information about packages.
+cran_pkg_version <- function(package, available = available.packages()) {
+  idx <- available[, "Package"] == package
+  if (any(idx)) {
+    as.package_version(available[package, "Version"])
+  } else {
+    NULL
+  }
 }

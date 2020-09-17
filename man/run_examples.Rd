@@ -8,10 +8,12 @@ run_examples(
   pkg = ".",
   start = NULL,
   show = TRUE,
-  test = FALSE,
-  run = FALSE,
+  run_donttest = FALSE,
+  run_dontrun = FALSE,
   fresh = FALSE,
-  document = TRUE
+  document = TRUE,
+  run,
+  test
 )
 }
 \arguments{
@@ -26,11 +28,10 @@ rerun them every time you fix a problem.}
 
 \item{show}{DEPRECATED.}
 
-\item{test}{if \code{TRUE}, code in \code{\\donttest{}} will be commented
-out. If \code{FALSE}, code in \code{\\testonly{}} will be commented out.}
-
-\item{run}{if \code{FALSE}, code in \code{\\dontrun{}} will be commented
+\item{run_donttest}{if \code{TRUE}, do run \verb{\\donttest} sections in the Rd files.
 out.}
+
+\item{run_dontrun}{if \code{TRUE}, do run \verb{\\dontrun} sections in the Rd files.}
 
 \item{fresh}{if \code{TRUE}, will be run in a fresh R session. This has
 the advantage that there's no way the examples can depend on anything in
@@ -39,6 +40,10 @@ won't work.}
 
 \item{document}{if \code{TRUE}, \code{\link[=document]{document()}} will be run to ensure
 examples are updated before running them.}
+
+\item{run}{Deprecated, see \code{run_dontrun} and \code{run_donttest} above.}
+
+\item{test}{Deprecated, see \code{run_dontrun} and \code{run_donttest} above.}
 }
 \description{
 One of the most frustrating parts of \verb{R CMD check} is getting all of your

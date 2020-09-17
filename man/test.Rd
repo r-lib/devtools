@@ -2,19 +2,16 @@
 % Please edit documentation in R/test.R
 \name{test}
 \alias{test}
-\alias{test_coverage}
-\alias{uses_testthat}
 \alias{test_file}
+\alias{test_coverage}
 \alias{test_coverage_file}
-\title{Execute \pkg{test_that} tests in a package.}
+\title{Execute testthat tests in a package}
 \usage{
 test(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...)
 
-test_coverage(pkg = ".", show_report = interactive(), ...)
-
-uses_testthat(pkg = ".")
-
 test_file(file = find_active_file(), ...)
+
+test_coverage(pkg = ".", show_report = interactive(), ...)
 
 test_coverage_file(
   file = find_active_file(),
@@ -43,21 +40,22 @@ if you're calling \code{test_dir()} you may want to consider explicitly setting
 If \code{FALSE}, export only the objects that are listed as exports
 in the NAMESPACE file.}
 
-\item{...}{additional arguments passed to \code{\link[testthat:test_dir]{testthat::test_dir()}} and
-\code{\link[covr:package_coverage]{covr::package_coverage()}}}
-
-\item{show_report}{Show the test coverage report.}
+\item{...}{additional arguments passed to wrapped functions.}
 
 \item{file}{One or more source or test files. If a source file the
 corresponding test file will be run. The default is to use the active file
 in RStudio (if available).}
+
+\item{show_report}{Show the test coverage report.}
 }
 \description{
-\code{test()} is a shortcut for \code{\link[testthat:test_dir]{testthat::test_dir()}}, it runs all of a
-package's tests.
-\code{test_file} runs \code{test()} on the active file.
-\code{test_coverage()} computes test coverage for your package. It is a shortcut
-for \code{\link[covr:package_coverage]{covr::package_coverage()}} and \code{\link[covr:report]{covr::report()}}.
-\code{test_coverage_file()} computes test coverage for the active file. Is a
-shortcut for \code{\link[covr:file_coverage]{covr::file_coverage()}} and \code{\link[covr:report]{covr::report()}}.
+\itemize{
+\item \code{test()} runs all tests in a package. It's a shortcut for
+\code{\link[testthat:test_dir]{testthat::test_dir()}}
+\item \code{test_file()} runs \code{test()} on the active file.
+\item \code{test_coverage()} computes test coverage for your package. It's a
+shortcut for \code{\link[covr:package_coverage]{covr::package_coverage()}} plus \code{\link[covr:report]{covr::report()}}.
+\item \code{test_coverage_file()} computes test coverage for the active file. It's a
+shortcut for \code{\link[covr:file_coverage]{covr::file_coverage()}} plus \code{\link[covr:report]{covr::report()}}.
+}
 }

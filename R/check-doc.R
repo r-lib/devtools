@@ -20,7 +20,7 @@ check_man <- function(pkg = ".") {
   old <- options(warn = -1)
   on.exit(options(old))
 
-  message("Checking documentation...")
+  cli::cli_alert_info("Checking documentation...")
   ok <-
     all(
       man_message(("tools" %:::% ".check_package_parseRd")(dir = pkg$path)),
@@ -35,7 +35,7 @@ check_man <- function(pkg = ".") {
     )
 
   if (ok) {
-    message("No issues detected")
+    cli::cli_alert_success("No issues detected")
   }
 
   invisible()

@@ -21,3 +21,4 @@ directory, or it can't find the specified path, it will throw an error.
 package_file("figures", "figure_1")
 }
 }
+\keyword{internal}
