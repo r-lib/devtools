@@ -26,15 +26,10 @@ test_coverage_file(
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
 \item{filter}{If not \code{NULL}, only tests with file names matching this
-regular expression will be executed. Matching be performed on the file
-name after it has been stripped of \code{"test-"} and \code{".R"}.}
+regular expression will be executed. Matching is performed on the file
+name after it's stripped of \code{"test-"} and \code{".R"}.}
 
-\item{stop_on_failure}{If \code{TRUE}, throw an error if any tests fail.
-
-For historical reasons, the default value of \code{stop_on_failure} is \code{TRUE}
-for  \code{test_package()} and \code{test_check()} but \code{FALSE} for \code{test_dir()}, so
-if you're calling \code{test_dir()} you may want to consider explicitly setting
-\code{stop_on_failure = TRUE}.}
+\item{stop_on_failure}{If \code{TRUE}, throw an error if any tests fail.}
 
 \item{export_all}{If \code{TRUE} (the default), export all objects.
 If \code{FALSE}, export only the objects that are listed as exports
