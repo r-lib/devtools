@@ -39,9 +39,9 @@
 #'
 #' @return An object containing errors, warnings, and notes.
 #' @template devtools
-#' @param document If `NA` and the package uses roxygen2, will
-#'   rerun [document()] prior to checking. Use `TRUE`
-#'   and `FALSE` to override this default.
+#' @param document By default (`NULL`) will document if your installed
+#'   roxygen2 version matches the version declared in the `DESCRIPTION`
+#'   file. Use `TRUE` or `FALSE` to override the default.
 #' @param build_args Additional arguments passed to `R CMD build`
 #' @param check_dir the directory in which the package is checked
 #'   compatibility. `args = "--output=/foo/bar"` can be used to change the
@@ -54,7 +54,7 @@
 #'   CRAN.
 #' @export
 check <- function(pkg = ".",
-                  document = NA,
+                  document = NULL,
                   build_args = NULL,
                   ...,
                   manual = FALSE,
@@ -84,10 +84,7 @@ check <- function(pkg = ".",
   }
   error_on <- match.arg(error_on)
 
-  # document only if package uses roxygen, i.e. has RoxygenNote field
-  if (identical(document, NA)) {
-    document <- !is.null(pkg$roxygennote)
-  }
+  document <- document %||% can_document(pkg)
   if (document) {
     document(pkg, quiet = quiet)
   }
@@ -134,6 +131,28 @@ check <- function(pkg = ".",
     check_dir = check_dir,
     error_on = error_on
   )
+}
+
+can_document <- function(pkg) {
+  required <- pkg$roxygennote
+  if (is.null(required)) {
+    # Doesn't use roxygen2 at all
+    return(FALSE)
+  }
+
+  installed <- packageVersion("roxygen2")
+  if (required != installed) {
+    cli::cli_rule()
+    cli::cli_alert_info(
+      "Installed roxygen2 version ({installed}) doesn't match required version ({required})"
+    )
+    cli::cli_alert_danger("check() will not re-document this package")
+    cli::cli_rule()
+
+    FALSE
+  } else {
+    TRUE
+  }
 }
 
 #' @export
