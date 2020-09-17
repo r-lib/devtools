@@ -5,6 +5,8 @@
 #' @importFrom usethis use_test
 NULL
 
+# Need to import defer because the local_ function uses it unqualified
+#' @importFrom withr defer
 local_proj <- withr::local_(function(path = ".", force = FALSE) {
   utils::capture.output(
     res <- usethis::proj_set(path = path, force = force)
