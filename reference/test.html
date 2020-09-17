@@ -212,16 +212,12 @@ package object.  See <code><a href='as.package.html'>as.package()</a></code> for
     <tr>
       <th>filter</th>
       <td><p>If not <code>NULL</code>, only tests with file names matching this
-regular expression will be executed. Matching be performed on the file
-name after it has been stripped of <code>"test-"</code> and <code>".R"</code>.</p></td>
+regular expression will be executed. Matching is performed on the file
+name after it's stripped of <code>"test-"</code> and <code>".R"</code>.</p></td>
     </tr>
     <tr>
       <th>stop_on_failure</th>
-      <td><p>If <code>TRUE</code>, throw an error if any tests fail.</p>
-<p>For historical reasons, the default value of <code>stop_on_failure</code> is <code>TRUE</code>
-for  <code>test_package()</code> and <code>test_check()</code> but <code>FALSE</code> for <code>test_dir()</code>, so
-if you're calling <code>test_dir()</code> you may want to consider explicitly setting
-<code>stop_on_failure = TRUE</code>.</p></td>
+      <td><p>If <code>TRUE</code>, throw an error if any tests fail.</p></td>
     </tr>
     <tr>
       <th>export_all</th>
