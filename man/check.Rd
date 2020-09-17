@@ -7,7 +7,7 @@
 \usage{
 check(
   pkg = ".",
-  document = NA,
+  document = NULL,
   build_args = NULL,
   ...,
   manual = FALSE,
@@ -44,9 +44,9 @@ check_built(
 \item{pkg}{The package to use, can be a file path to the package or a
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
-\item{document}{If \code{NA} and the package uses roxygen2, will
-rerun \code{\link[=document]{document()}} prior to checking. Use \code{TRUE}
-and \code{FALSE} to override this default.}
+\item{document}{By default (\code{NULL}) will document if your installed
+roxygen2 version matches the version declared in the \code{DESCRIPTION}
+file. Use \code{TRUE} or \code{FALSE} to override the default.}
 
 \item{build_args}{Additional arguments passed to \verb{R CMD build}}
 
