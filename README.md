@@ -3,12 +3,12 @@
 <!-- badges: start -->
 [![R build status](https://github.com/r-lib/devtools/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/devtools/actions)
 [![Coverage Status](https://codecov.io/github/r-lib/devtools/coverage.svg?branch=master)](https://codecov.io/github/r-lib/devtools?branch=master)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools)
 <!-- badges: end -->
 
 The aim of devtools is to make package development easier by providing R
 functions that simplify and expedite common tasks. [R
-Packages](http://r-pkgs.had.co.nz/) is a book based around this workflow.
+Packages](https://r-pkgs.org/) is a book based around this workflow.
 
 ## Installation
 
@@ -74,8 +74,8 @@ look in the current working directory - this is a recommended practice.
 
 * `check()` updates the documentation, then builds and checks the package locally.
   `check_win()` checks a package using
-  [win-builder](http://win-builder.r-project.org/), and `check_rhub()` checks a package using
-  [r-hub](http://log.r-hub.io/). This allows you to easily check
+  [win-builder](https://win-builder.r-project.org/), and `check_rhub()` checks a package using
+  [r-hub](https://log.r-hub.io/). This allows you to easily check
   your package on all systems CRAN uses before submission.
 
 * `release()` makes sure everything is ok with your package (including asking
@@ -86,32 +86,32 @@ look in the current working directory - this is a recommended practice.
 R package development can be intimidating, however there are now a number of
 valuable resources to help!
 
-<a href="http://r-pkgs.org"><img src="http://r-pkgs.org/images/cover.png" height="252" align = "right"/></a>
+<a href="https://r-pkgs.org"><img src="http://r-pkgs.org/images/cover.png" height="252" align = "right"/></a>
 
 1. R Packages is a book that gives a comprehensive treatment of all common parts
    of package development and uses devtools throughout.
-    * The first edition is available at <http://r-pkgs.had.co.nz>, but note that
+    * The first edition is available at <https://r-pkgs.org/>, but note that
       it has grown somewhat out of sync with the current version of devtools.
     * A second edition is under development and is evolving to reflect the
-      current state of devtools. It is available at <http://r-pkgs.org>.
-    * The [Whole Game](http://r-pkgs.org/whole-game.html) and
-      [Package structure](http://r-pkgs.org/package-structure-state.html) chapters
+      current state of devtools. It is available at <https://r-pkgs.org>.
+    * The [Whole Game](https://r-pkgs.org/whole-game.html) and
+      [Package structure](https://r-pkgs.org/package-structure-state.html) chapters
       make great places to start.
 
 2. [RStudio community - package
-   development](https://community.rstudio.com/c/package-development)
+   development](https://community.rstudio.com/c/package-development/11)
    is a great place to ask specific questions related to package development.
 
-3. [rOpenSci packages](https://ropensci.github.io/dev_guide/) has
+3. [rOpenSci packages](https://devguide.ropensci.org/) has
    extensive documentation on best practices for R packages looking to be
    contributed to rOpenSci, but also very useful general recommendations
    for package authors.
 
 4. There are a number of fantastic blog posts on writing your first package, including
    - [Writing an R package from scratch - Hilary Parker](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
-   - [How to develop good R packages - Maëlle Salmon](http://www.masalmon.eu/2017/12/11/goodrpackages/)
-   - [Making your first R package - Fong Chun Chan](http://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html)
-   - [Writing an R package from scratch - Tomas Westlake](https://r-mageddon.netlify.com/post/writing-an-r-package-from-scratch/)
+   - [How to develop good R packages - Maëlle Salmon](https://masalmon.eu/2017/12/11/goodrpackages/)
+   - [Making your first R package - Fong Chun Chan](https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html)
+   - [Writing an R package from scratch - Tomas Westlake](https://r-mageddon.netlify.app/post/writing-an-r-package-from-scratch/)
 
 5. [Writing R
    Extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html) is
@@ -123,14 +123,14 @@ valuable resources to help!
 devtools started off as a lean-and-mean package to facilitate local package
 development, but over the years it accumulated more and more functionality.
 devtools has undergone a [conscious
-uncoupling](https://web.archive.org/web/20140326060230/http://www.goop.com/journal/be/conscious-uncoupling)
+uncoupling](https://web.archive.org/web/20140326060230/https://www.goop.com/journal/be/conscious-uncoupling)
 to split out functionality into smaller, more tightly focussed packages. This
 includes:
 
 * [testthat](https://github.com/r-lib/testthat): Writing and running tests
   (i.e. `test()`).
 
-* [roxygen2](https://github.com/klutometis/roxygen): Function and package documentation
+* [roxygen2](https://github.com/r-lib/roxygen2): Function and package documentation
   (i.e. `document()`).
 
 * [remotes](https://github.com/r-lib/remotes): Installing packages (i.e.

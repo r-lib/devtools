@@ -148,7 +148,7 @@ trim_ws <- function(x, which = c("both", "left", "right")) {
 warn_unless_current_dir <- function(pkg, envir = parent.frame()) {
   if (pkg != ".") {
     warning("`pkg` is not `.`, which is now unsupported.\n  Please use `usethis::proj_set()` to set the project directory.", immediate. = TRUE)
-    local_proj(pkg, .local_envir = envir)
+    usethis::local_project(pkg, quiet = TRUE, .local_envir = envir)
   }
 }
 

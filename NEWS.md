@@ -1,3 +1,7 @@
+# devtools 2.3.2
+
+* Fix for compatibility with withr 2.3.0
+
 # devtools 2.3.1
 
 * `run_examples()` arguments `run` and `test` are deprecated in favor of the (hopefully) more clear `run_dontrun` and `run_donttest` (pkgload/#107).

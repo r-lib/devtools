@@ -1,7 +1,7 @@
 #' Lint all source files in a package.
 #'
 #' The default linters correspond to the style guide at
-#' <http://r-pkgs.had.co.nz/r.html#style>, however it is possible to
+#' <https://style.tidyverse.org/>, however it is possible to
 #' override any or all of them using the `linters` parameter.
 #' @template devtools
 #' @param cache store the lint results so repeated lints of the same content
