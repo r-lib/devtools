@@ -171,7 +171,7 @@ known best practices. <code>check_built</code> checks an already built package.<
 
     <pre class="usage"><span class='fu'>check</span>(
   pkg = <span class='st'>"."</span>,
-  document = <span class='fl'>NA</span>,
+  document = <span class='kw'>NULL</span>,
   build_args = <span class='kw'>NULL</span>,
   <span class='kw'>...</span>,
   manual = <span class='fl'>FALSE</span>,
@@ -214,9 +214,9 @@ package object.  See <code><a href='as.package.html'>as.package()</a></code> for
     </tr>
     <tr>
       <th>document</th>
-      <td><p>If <code>NA</code> and the package uses roxygen2, will
-rerun <code><a href='document.html'>document()</a></code> prior to checking. Use <code>TRUE</code>
-and <code>FALSE</code> to override this default.</p></td>
+      <td><p>By default (<code>NULL</code>) will document if your installed
+roxygen2 version matches the version declared in the <code>DESCRIPTION</code>
+file. Use <code>TRUE</code> or <code>FALSE</code> to override the default.</p></td>
     </tr>
     <tr>
       <th>build_args</th>
