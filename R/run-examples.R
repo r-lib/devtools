@@ -38,11 +38,9 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, run_donttest = FA
 
   if (fresh) {
     to_run <-
-      eval(substitute(
-        function() devtools::run_examples(pkg = path, start = start, test = test, run = run, fresh = FALSE),
-        list(path = pkg$path, start = start, test = test, run = run)
-      ))
-    callr::r(to_run, show = TRUE, spinner = FALSE, stderr = "2>&1")
+        function(path, start, run_donttest, run_dontrun) devtools::run_examples(pkg = path, start = start, run_donttest = run_donttest, run_dontrun = run_dontrun, document = FALSE)
+
+    callr::r(to_run, args = list(path = pkg$path, start = start, run_donttest = run_donttest, run_dontrun = run_dontrun), show = TRUE, spinner = FALSE, stderr = "2>&1")
     return(invisible())
   }
 

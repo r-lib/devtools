@@ -2,6 +2,7 @@
 
 * `check()` only re-documents if you have a matching version of roxygen2
    (#2263).
+* `run_examples(fresh = TRUE)` again works without error (#2264)
 
 * `pkgload::inst()` is no longer re-exported (#2218).
 
