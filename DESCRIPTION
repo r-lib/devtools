@@ -62,7 +62,8 @@ Suggests:
     pkgdown (>= 1.5.1),
     rhub (>= 1.1.1),
     rmarkdown (>= 2.3),
-    spelling (>= 2.1)
+    spelling (>= 2.1),
+    xopen
 VignetteBuilder: 
     knitr
 Remotes: 
