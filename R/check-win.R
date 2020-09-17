@@ -125,7 +125,7 @@ upload_ftp <- function(file, url, verbose = FALSE) {
   stopifnot(file.exists(file))
   stopifnot(is.character(url))
   con <- file(file, open = "rb")
-  on.exit(close(con))
+  on.exit(close(con), add = TRUE)
   h <- curl::new_handle(upload = TRUE, filetime = FALSE)
   curl::handle_setopt(h, readfunction = function(n) {
     readBin(con, raw(), n = n)
