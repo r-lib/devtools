@@ -169,15 +169,15 @@ packages that depend on the specified package." />
 packages that depend on the specified package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>revdep</span>(
-  <span class='kw'>pkg</span>,
-  dependencies = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Depends"</span>, <span class='st'>"Imports"</span>, <span class='st'>"Suggests"</span>, <span class='st'>"LinkingTo"</span>),
-  recursive = <span class='fl'>FALSE</span>,
-  ignore = <span class='kw'>NULL</span>,
-  bioconductor = <span class='fl'>FALSE</span>
-)
+    <pre class="usage"><span class='fu'>revdep</span><span class='op'>(</span>
+  <span class='va'>pkg</span>,
+  dependencies <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Depends"</span>, <span class='st'>"Imports"</span>, <span class='st'>"Suggests"</span>, <span class='st'>"LinkingTo"</span><span class='op'>)</span>,
+  recursive <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  ignore <span class='op'>=</span> <span class='cn'>NULL</span>,
+  bioconductor <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span>
 
-<span class='fu'>revdep_maintainers</span>(pkg = <span class='st'>"."</span>)</pre>
+<span class='fu'>revdep_maintainers</span><span class='op'>(</span>pkg <span class='op'>=</span> <span class='st'>"."</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -221,11 +221,11 @@ be faster.</p>
 be used to run R CMD check on all reverse dependencies.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>revdep</span>(<span class='st'>"ggplot2"</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'>revdep</span><span class='op'>(</span><span class='st'>"ggplot2"</span><span class='op'>)</span>
 
-<span class='fu'>revdep</span>(<span class='st'>"ggplot2"</span>, ignore = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xkcd"</span>, <span class='st'>"zoo"</span>))
-}
+<span class='fu'>revdep</span><span class='op'>(</span><span class='st'>"ggplot2"</span>, ignore <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"xkcd"</span>, <span class='st'>"zoo"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

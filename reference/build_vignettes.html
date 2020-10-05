@@ -179,19 +179,19 @@ directory and an vignette index is created in 'Meta/vignette.rds', as they
 would be in a built package. 'doc' and 'Meta' are added to
 <code>.Rbuildignore</code>, so will not be included in the built package. These
 files can be checked into version control, so they can be viewed with
-<code><a href='https://rdrr.io/r/utils/browseVignettes.html'>browseVignettes()</a></code> and <code>vignette()</code> if the package has been
+<code><a href='https://rdrr.io/r/utils/browseVignettes.html'>browseVignettes()</a></code> and <code><a href='https://rdrr.io/r/utils/vignette.html'>vignette()</a></code> if the package has been
 loaded with <code><a href='load_all.html'>load_all()</a></code> without needing to re-build them locally.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>build_vignettes</span>(
-  pkg = <span class='st'>"."</span>,
-  dependencies = <span class='st'>"VignetteBuilder"</span>,
-  clean = <span class='fl'>TRUE</span>,
-  upgrade = <span class='st'>"never"</span>,
-  quiet = <span class='fl'>TRUE</span>,
-  install = <span class='fl'>TRUE</span>,
-  keep_md = <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>build_vignettes</span><span class='op'>(</span>
+  pkg <span class='op'>=</span> <span class='st'>"."</span>,
+  dependencies <span class='op'>=</span> <span class='st'>"VignetteBuilder"</span>,
+  clean <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  upgrade <span class='op'>=</span> <span class='st'>"never"</span>,
+  quiet <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  install <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  keep_md <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

@@ -123,12 +123,11 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co"># Install devtools from CRAN</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
 
 <span class="co"># Or the development version from GitHub:</span>
 <span class="co"># install.packages("devtools")</span>
-<span class="kw">devtools</span>::<span class="fu"><a href="reference/remote-reexports.html">install_github</a></span>(<span class="st">"r-lib/devtools"</span>)
-</pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"r-lib/devtools"</span><span class="op">)</span></pre></div>
 </div>
 <div id="cheatsheet" class="section level2">
 <h2 class="hasAnchor">
@@ -153,7 +152,7 @@
 <h3 class="hasAnchor">
 <a href="#building-and-installing" class="anchor"></a>Building and installing:</h3>
 <ul>
-<li><p><code><a href="reference/install.html">install()</a></code> reinstalls the package, detaches the currently loaded version then reloads the new version with <code>library()</code>. Reloading a package is not guaranteed to work: see the documentation for <code><a href="https://rdrr.io/pkg/pkgload/man/unload.html">unload()</a></code> for caveats.</p></li>
+<li><p><code><a href="reference/install.html">install()</a></code> reinstalls the package, detaches the currently loaded version then reloads the new version with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. Reloading a package is not guaranteed to work: see the documentation for <code><a href="https://rdrr.io/pkg/pkgload/man/unload.html">unload()</a></code> for caveats.</p></li>
 <li><p><code><a href="reference/build.html">build()</a></code> builds a package file from package sources. You can use it to build a binary version of your package.</p></li>
 <li>
 <p><code>install_*</code> functions install an R package:</p>
@@ -231,7 +230,7 @@
 </ul>
 <p>Generally, you would not need to worry about these different packages, because devtools installs all of them automatically. You will need to care, however, if you’re filing a bug because reporting it at the correct place will lead to a speedier resolution.</p>
 <p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">sessioninfo::session_info()</a></code> rather than <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
-<p>However for day to day development we recommend you continue to use <code><a href="https://devtools.r-lib.org">library(devtools)</a></code> to quickly load all needed development tools, just like <code>library(tidyverse)</code> quickly loads all the tools necessary for data exploration and visualization.</p>
+<p>However for day to day development we recommend you continue to use <code><a href="https://devtools.r-lib.org/">library(devtools)</a></code> to quickly load all needed development tools, just like <code>library(tidyverse)</code> quickly loads all the tools necessary for data exploration and visualization.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">

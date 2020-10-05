@@ -171,204 +171,204 @@ that the ones in devtools use the ellipsis package to ensure all dotted
 arguments are used.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>install_bioc</span>(
-  <span class='kw'>repo</span>,
-  mirror = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"BioC_git"</span>, <span class='fu'>download_url</span>(<span class='st'>"git.bioconductor.org/packages"</span>)),
-  git = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"auto"</span>, <span class='st'>"git2r"</span>, <span class='st'>"external"</span>),
-  dependencies = <span class='fl'>NA</span>,
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  force = <span class='fl'>FALSE</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='fl'>TRUE</span>,
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
-  build_manual = <span class='fl'>FALSE</span>,
-  build_vignettes = <span class='fl'>FALSE</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
-  <span class='kw'>...</span>
-)
+    <pre class="usage"><span class='fu'>install_bioc</span><span class='op'>(</span>
+  <span class='va'>repo</span>,
+  mirror <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"BioC_git"</span>, <span class='fu'>download_url</span><span class='op'>(</span><span class='st'>"git.bioconductor.org/packages"</span><span class='op'>)</span><span class='op'>)</span>,
+  git <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"auto"</span>, <span class='st'>"git2r"</span>, <span class='st'>"external"</span><span class='op'>)</span>,
+  dependencies <span class='op'>=</span> <span class='cn'>NA</span>,
+  upgrade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span><span class='op'>)</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  build_opts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span><span class='op'>)</span>,
+  build_manual <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build_vignettes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  repos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"pkgType"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>install_bitbucket</span>(
-  <span class='kw'>repo</span>,
-  ref = <span class='st'>"HEAD"</span>,
-  subdir = <span class='kw'>NULL</span>,
-  auth_user = <span class='fu'>bitbucket_user</span>(),
-  password = <span class='fu'>bitbucket_password</span>(),
-  host = <span class='st'>"api.bitbucket.org/2.0"</span>,
-  dependencies = <span class='fl'>NA</span>,
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  force = <span class='fl'>FALSE</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='fl'>TRUE</span>,
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
-  build_manual = <span class='fl'>FALSE</span>,
-  build_vignettes = <span class='fl'>FALSE</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'>install_bitbucket</span><span class='op'>(</span>
+  <span class='va'>repo</span>,
+  ref <span class='op'>=</span> <span class='st'>"HEAD"</span>,
+  subdir <span class='op'>=</span> <span class='cn'>NULL</span>,
+  auth_user <span class='op'>=</span> <span class='fu'>bitbucket_user</span><span class='op'>(</span><span class='op'>)</span>,
+  password <span class='op'>=</span> <span class='fu'>bitbucket_password</span><span class='op'>(</span><span class='op'>)</span>,
+  host <span class='op'>=</span> <span class='st'>"api.bitbucket.org/2.0"</span>,
+  dependencies <span class='op'>=</span> <span class='cn'>NA</span>,
+  upgrade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span><span class='op'>)</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  build_opts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span><span class='op'>)</span>,
+  build_manual <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build_vignettes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  repos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"pkgType"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>install_cran</span>(
-  <span class='kw'>pkgs</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
-  dependencies = <span class='fl'>NA</span>,
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  force = <span class='fl'>FALSE</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='fl'>TRUE</span>,
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
-  build_manual = <span class='fl'>FALSE</span>,
-  build_vignettes = <span class='fl'>FALSE</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>install_cran</span><span class='op'>(</span>
+  <span class='va'>pkgs</span>,
+  repos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"pkgType"</span><span class='op'>)</span>,
+  dependencies <span class='op'>=</span> <span class='cn'>NA</span>,
+  upgrade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span><span class='op'>)</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  build_opts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span><span class='op'>)</span>,
+  build_manual <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build_vignettes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>install_dev</span>(<span class='kw'>package</span>, cran_url = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>)[[<span class='st'>"CRAN"</span>]], <span class='kw'>...</span>)
+<span class='fu'>install_dev</span><span class='op'>(</span><span class='va'>package</span>, cran_url <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span><span class='op'>[[</span><span class='st'>"CRAN"</span><span class='op'>]</span><span class='op'>]</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>install_git</span>(
-  <span class='kw'>url</span>,
-  subdir = <span class='kw'>NULL</span>,
-  ref = <span class='kw'>NULL</span>,
-  branch = <span class='kw'>NULL</span>,
-  credentials = <span class='fu'>git_credentials</span>(),
-  git = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"auto"</span>, <span class='st'>"git2r"</span>, <span class='st'>"external"</span>),
-  dependencies = <span class='fl'>NA</span>,
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  force = <span class='fl'>FALSE</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='fl'>TRUE</span>,
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
-  build_manual = <span class='fl'>FALSE</span>,
-  build_vignettes = <span class='fl'>FALSE</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'>install_git</span><span class='op'>(</span>
+  <span class='va'>url</span>,
+  subdir <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ref <span class='op'>=</span> <span class='cn'>NULL</span>,
+  branch <span class='op'>=</span> <span class='cn'>NULL</span>,
+  credentials <span class='op'>=</span> <span class='fu'>git_credentials</span><span class='op'>(</span><span class='op'>)</span>,
+  git <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"auto"</span>, <span class='st'>"git2r"</span>, <span class='st'>"external"</span><span class='op'>)</span>,
+  dependencies <span class='op'>=</span> <span class='cn'>NA</span>,
+  upgrade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span><span class='op'>)</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  build_opts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span><span class='op'>)</span>,
+  build_manual <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build_vignettes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  repos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"pkgType"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>install_github</span>(
-  <span class='kw'>repo</span>,
-  ref = <span class='st'>"HEAD"</span>,
-  subdir = <span class='kw'>NULL</span>,
-  auth_token = <span class='fu'><a href='github_pat.html'>github_pat</a></span>(<span class='kw'>quiet</span>),
-  host = <span class='st'>"api.github.com"</span>,
-  dependencies = <span class='fl'>NA</span>,
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  force = <span class='fl'>FALSE</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='fl'>TRUE</span>,
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
-  build_manual = <span class='fl'>FALSE</span>,
-  build_vignettes = <span class='fl'>FALSE</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'>install_github</span><span class='op'>(</span>
+  <span class='va'>repo</span>,
+  ref <span class='op'>=</span> <span class='st'>"HEAD"</span>,
+  subdir <span class='op'>=</span> <span class='cn'>NULL</span>,
+  auth_token <span class='op'>=</span> <span class='fu'><a href='github_pat.html'>github_pat</a></span><span class='op'>(</span><span class='va'>quiet</span><span class='op'>)</span>,
+  host <span class='op'>=</span> <span class='st'>"api.github.com"</span>,
+  dependencies <span class='op'>=</span> <span class='cn'>NA</span>,
+  upgrade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span><span class='op'>)</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  build_opts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span><span class='op'>)</span>,
+  build_manual <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build_vignettes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  repos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"pkgType"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>install_gitlab</span>(
-  <span class='kw'>repo</span>,
-  subdir = <span class='kw'>NULL</span>,
-  auth_token = <span class='fu'>gitlab_pat</span>(<span class='kw'>quiet</span>),
-  host = <span class='st'>"gitlab.com"</span>,
-  dependencies = <span class='fl'>NA</span>,
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  force = <span class='fl'>FALSE</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='fl'>TRUE</span>,
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
-  build_manual = <span class='fl'>FALSE</span>,
-  build_vignettes = <span class='fl'>FALSE</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'>install_gitlab</span><span class='op'>(</span>
+  <span class='va'>repo</span>,
+  subdir <span class='op'>=</span> <span class='cn'>NULL</span>,
+  auth_token <span class='op'>=</span> <span class='fu'>gitlab_pat</span><span class='op'>(</span><span class='va'>quiet</span><span class='op'>)</span>,
+  host <span class='op'>=</span> <span class='st'>"gitlab.com"</span>,
+  dependencies <span class='op'>=</span> <span class='cn'>NA</span>,
+  upgrade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span><span class='op'>)</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  build_opts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span><span class='op'>)</span>,
+  build_manual <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build_vignettes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  repos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"pkgType"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>install_local</span>(
-  path = <span class='st'>"."</span>,
-  subdir = <span class='kw'>NULL</span>,
-  dependencies = <span class='fl'>NA</span>,
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  force = <span class='fl'>FALSE</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='op'>!</span><span class='fu'>is_binary_pkg</span>(<span class='kw'>path</span>),
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
-  build_manual = <span class='fl'>FALSE</span>,
-  build_vignettes = <span class='fl'>FALSE</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'>install_local</span><span class='op'>(</span>
+  path <span class='op'>=</span> <span class='st'>"."</span>,
+  subdir <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dependencies <span class='op'>=</span> <span class='cn'>NA</span>,
+  upgrade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span><span class='op'>)</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build <span class='op'>=</span> <span class='op'>!</span><span class='fu'>is_binary_pkg</span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span>,
+  build_opts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span><span class='op'>)</span>,
+  build_manual <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build_vignettes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  repos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"pkgType"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>install_svn</span>(
-  <span class='kw'>url</span>,
-  subdir = <span class='kw'>NULL</span>,
-  args = <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(<span class='fl'>0</span>),
-  revision = <span class='kw'>NULL</span>,
-  dependencies = <span class='fl'>NA</span>,
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  force = <span class='fl'>FALSE</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='fl'>TRUE</span>,
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
-  build_manual = <span class='fl'>FALSE</span>,
-  build_vignettes = <span class='fl'>FALSE</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'>install_svn</span><span class='op'>(</span>
+  <span class='va'>url</span>,
+  subdir <span class='op'>=</span> <span class='cn'>NULL</span>,
+  args <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span>,
+  revision <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dependencies <span class='op'>=</span> <span class='cn'>NA</span>,
+  upgrade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span><span class='op'>)</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  build_opts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span><span class='op'>)</span>,
+  build_manual <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build_vignettes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  repos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"pkgType"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>install_url</span>(
-  <span class='kw'>url</span>,
-  subdir = <span class='kw'>NULL</span>,
-  dependencies = <span class='fl'>NA</span>,
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  force = <span class='fl'>FALSE</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='fl'>TRUE</span>,
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
-  build_manual = <span class='fl'>FALSE</span>,
-  build_vignettes = <span class='fl'>FALSE</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'>install_url</span><span class='op'>(</span>
+  <span class='va'>url</span>,
+  subdir <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dependencies <span class='op'>=</span> <span class='cn'>NA</span>,
+  upgrade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span><span class='op'>)</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  build_opts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span><span class='op'>)</span>,
+  build_manual <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build_vignettes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  repos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"pkgType"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>install_version</span>(
-  <span class='kw'>package</span>,
-  version = <span class='kw'>NULL</span>,
-  dependencies = <span class='fl'>NA</span>,
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  force = <span class='fl'>FALSE</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='fl'>FALSE</span>,
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
-  build_manual = <span class='fl'>FALSE</span>,
-  build_vignettes = <span class='fl'>FALSE</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='st'>"source"</span>,
-  <span class='kw'>...</span>
-)
+<span class='fu'>install_version</span><span class='op'>(</span>
+  <span class='va'>package</span>,
+  version <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dependencies <span class='op'>=</span> <span class='cn'>NA</span>,
+  upgrade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span><span class='op'>)</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build_opts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span><span class='op'>)</span>,
+  build_manual <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build_vignettes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  repos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='st'>"source"</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>update_packages</span>(
-  packages = <span class='fl'>TRUE</span>,
-  dependencies = <span class='fl'>NA</span>,
-  upgrade = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span>),
-  force = <span class='fl'>FALSE</span>,
-  quiet = <span class='fl'>FALSE</span>,
-  build = <span class='fl'>TRUE</span>,
-  build_opts = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span>),
-  build_manual = <span class='fl'>FALSE</span>,
-  build_vignettes = <span class='fl'>FALSE</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>),
-  <span class='kw'>...</span>
-)
+<span class='fu'>update_packages</span><span class='op'>(</span>
+  packages <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  dependencies <span class='op'>=</span> <span class='cn'>NA</span>,
+  upgrade <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"default"</span>, <span class='st'>"ask"</span>, <span class='st'>"always"</span>, <span class='st'>"never"</span><span class='op'>)</span>,
+  force <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  build_opts <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"--no-resave-data"</span>, <span class='st'>"--no-manual"</span>, <span class='st'>"--no-build-vignettes"</span><span class='op'>)</span>,
+  build_manual <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  build_vignettes <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  repos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"pkgType"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>dev_package_deps</span>(
-  pkgdir = <span class='st'>"."</span>,
-  dependencies = <span class='fl'>NA</span>,
-  repos = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"repos"</span>),
-  type = <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"pkgType"</span>)
-)</pre>
+<span class='fu'>dev_package_deps</span><span class='op'>(</span>
+  pkgdir <span class='op'>=</span> <span class='st'>"."</span>,
+  dependencies <span class='op'>=</span> <span class='cn'>NA</span>,
+  repos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"pkgType"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
