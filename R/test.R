@@ -92,10 +92,8 @@ test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_re
   reporter$start_file(file, "test")
 
   env <- load_all(pkg$path, quiet = TRUE, export_all = export_all)$env
-  withr::with_dir("tests/testthat", {
-    testthat::with_reporter(reporter, {
-      coverage <- covr::environment_coverage(env, test_files, ...)
-    })
+  testthat::with_reporter(reporter, {
+    coverage <- covr::environment_coverage(env, test_files, ...)
   })
 
   if (isTRUE(filter)) {
