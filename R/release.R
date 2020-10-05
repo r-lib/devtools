@@ -265,7 +265,7 @@ submit_cran <- function(pkg = ".", args = NULL) {
   pkg <- as.package(pkg)
   built_path <- build_cran(pkg, args = args)
 
-  if (!is_installed("xopen")) {
+  if (!rlang::is_installed("xopen")) {
     inform("Install xopen to view tarball before submission.")
   } else if (!yesno("View tarball?")) {
     xopen::xopen(built_path)
