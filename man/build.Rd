@@ -9,7 +9,7 @@ build(
   path = NULL,
   binary = FALSE,
   vignettes = TRUE,
-  manual = FALSE,
+  manual = TRUE,
   args = NULL,
   quiet = FALSE,
   ...
