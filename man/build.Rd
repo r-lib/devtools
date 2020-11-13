@@ -9,7 +9,7 @@ build(
   path = NULL,
   binary = FALSE,
   vignettes = TRUE,
-  manual = TRUE,
+  manual = FALSE,
   args = NULL,
   quiet = FALSE,
   ...
@@ -52,4 +52,9 @@ installed out of the box). If \code{binary = TRUE}, the package will have
 a platform specific extension (e.g. \code{.zip} for windows), and will
 only be installable on the current platform, but no development
 environment is needed.
+}
+\note{
+The default \code{manual = FALSE} is not suitable for a CRAN
+submission, which may require \code{manual = TRUE}.  Even better, use
+\code{\link[=submit_cran]{submit_cran()}} or \code{\link[=release]{release()}}.
 }
