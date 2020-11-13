@@ -53,3 +53,8 @@ a platform specific extension (e.g. \code{.zip} for windows), and will
 only be installable on the current platform, but no development
 environment is needed.
 }
+\note{
+The default \code{manual = FALSE} is not suitable for a CRAN
+submission, which may require \code{manual = TRUE}.  Even better, use
+\code{\link[=submit_cran]{submit_cran()}} or \code{\link[=release]{release()}}.
+}

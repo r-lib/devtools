@@ -2,6 +2,9 @@
 #' @param path Path in which to produce package.  If `NULL`, defaults to
 #'   the parent directory of the package.
 #' @inherit pkgbuild::build
+#' @note The default `manual = FALSE` is not suitable for a CRAN
+#'   submission, which may require `manual = TRUE`.  Even better, use
+#'   [submit_cran()] or [release()].
 #' @param ... Additional arguments passed to [pkgbuild::build].
 #' @export
 build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
