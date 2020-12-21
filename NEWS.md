@@ -1,7 +1,7 @@
 # devtools (development version)
 
 * Add a check to `change_maintainer_email()` to assess whether the email is actually changed.
-  If the email is not changed, the code now stops such that an email is not accidentally sent to the wrong recipient.
+  If the email is not changed, the code now stops such that an email is not accidentally sent to the wrong recipient. (@emilsjoerup, #2073)
 
 * `check()` only re-documents if you have a matching version of roxygen2
    (#2263).
