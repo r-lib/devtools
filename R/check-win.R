@@ -115,6 +115,10 @@ change_maintainer_email <- function(desc, email) {
   aut[is_maintainer]$email <- email
 
   desc$set_authors(aut)
+  ## Check if the email is actually changed before we actually send the email
+  if(!grepl(email, desc$get_maintainer())){
+    stop("Changing maintainer email failed. Possible reason is using both Authors@R and Maintainer fields in the DESCRIPTION file.", call. = FALSE)
+  }
 
   desc$write()
 }
