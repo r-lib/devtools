@@ -105,7 +105,7 @@ environment is needed." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -148,7 +148,7 @@ environment is needed." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/devtools/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -240,6 +240,11 @@ or <code>R CMD install</code> if <code>binary = TRUE</code>.</p></td>
 
     <p>a string giving the location (including file name) of the built
 package</p>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>The default <code>manual = FALSE</code> is not suitable for a CRAN
+submission, which may require <code>manual = TRUE</code>.  Even better, use
+<code><a href='submit_cran.html'>submit_cran()</a></code> or <code><a href='release.html'>release()</a></code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

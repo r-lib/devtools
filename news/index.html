@@ -97,7 +97,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -140,7 +140,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/r-lib/devtools/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -166,6 +166,7 @@
 <a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li><p>Add a check to <code>change_maintainer_email()</code> to assess whether the email is actually changed. If the email is not changed, the code now stops such that an email is not accidentally sent to the wrong recipient. (<a href='https://github.com/emilsjoerup'>@emilsjoerup</a>, <a href='https://github.com/r-lib/devtools/issues/2073'>#2073</a>)</p></li>
 <li><p><code><a href="../reference/check.html">check()</a></code> only re-documents if you have a matching version of roxygen2 (<a href='https://github.com/r-lib/devtools/issues/2263'>#2263</a>).</p></li>
 <li><p><code><a href="../reference/run_examples.html">run_examples(fresh = TRUE)</a></code> again works without error (<a href='https://github.com/r-lib/devtools/issues/2264'>#2264</a>)</p></li>
 <li><p><code><a href="https://rdrr.io/pkg/pkgload/man/inst.html">pkgload::inst()</a></code> is no longer re-exported (<a href='https://github.com/r-lib/devtools/issues/2218'>#2218</a>).</p></li>
