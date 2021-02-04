@@ -72,7 +72,9 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
       "Building windows version of {.pkg {pkg$package}} ({pkg$version})",
       " for {paste(version, collapse = ', ')} with win-builder.r-project.org."
     )
-    if (interactive() && yesno("Email results to ", maintainer(pkg)$email, "?")) {
+
+    email <- cli::style_bold(maintainer(pkg)$email)
+    if (interactive() && yesno("Email results to ", email, "?")) {
       return(invisible())
     }
   }
