@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: RStudio Community Support
+    url: https://community.rstudio.com/
+    about: Please ask questions for general configuration issues and failures here.
+  - name: remotes
+    url: https://github.com/r-lib/remotes/issues
+    about: Please open issues related to package installation here.
