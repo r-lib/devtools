@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   dependencies: dependencies.html
-last_built: 2021-02-04T17:49Z
+last_built: 2021-02-08T14:40Z
 urls:
   reference: https://devtools.r-lib.org//reference
   article: https://devtools.r-lib.org//articles
