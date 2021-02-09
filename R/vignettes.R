@@ -78,7 +78,7 @@ build_vignettes <- function(pkg = ".",
 
 create_vignette_index <- function(pkg, vigns) {
   usethis_use_directory(pkg, "Meta", ignore = TRUE)
-  usethis_use_git_ignore(pkg, "Meta")
+  usethis_use_git_ignore(pkg, "/Meta/")
 
   cli::cli_alert_info("Building vignette index")
 

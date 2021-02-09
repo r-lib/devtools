@@ -87,3 +87,18 @@ test_that("vignettes built on install", {
   expect_equal(nrow(vigs), 1)
   expect_equal(vigs[3], "new")
 })
+
+test_that(".gitignore updated when building vignettes", {
+  if (!pkgbuild::has_latex()) {
+    skip("pdflatex not available")
+  }
+
+  pkg <- test_path("testVignettes")
+  gitignore <- file.path(pkg, ".gitignore")
+
+  suppressMessages(clean_vignettes(pkg))
+  suppressMessages(build_vignettes(pkg))
+  on.exit(suppressMessages(clean_vignettes(pkg)))
+
+  expect_true(all(c("/Meta/", "/doc/") %in% readLines(gitignore)))
+})
