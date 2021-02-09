@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* Make the `.gitignore` entries automatically created by `build_vignettes` more
+  specific. (@klmr, #2317)
+
 * Add a check to `change_maintainer_email()` to assess whether the email is actually changed.
   If the email is not changed, the code now stops such that an email is not accidentally sent to the wrong recipient. (@emilsjoerup, #2073)
 
