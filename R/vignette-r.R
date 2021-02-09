@@ -20,7 +20,7 @@ copy_vignettes <- function(pkg, keep_md) {
   pkg <- as.package(pkg)
 
   usethis_use_directory(pkg, "doc", ignore = TRUE)
-  usethis_use_git_ignore(pkg, "doc")
+  usethis_use_git_ignore(pkg, "/doc/")
 
   doc_dir <- file.path(pkg$path, "doc")
 
