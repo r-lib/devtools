@@ -9,7 +9,7 @@ inst/doc
 .httr-oauth
 tests/testthat/infrastructure/
 script.R
-doc
-Meta
+/doc/
+/Meta/
 tests/*/*/.gitignore
 docs/
