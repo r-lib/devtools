@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* DT has been moved from Imports to Suggests. DT is only needed when running
+  `test_coverage()` so now you'll be prompted to install it when needed.
+
 * Make the `.gitignore` entries automatically created by `build_vignettes` more
   specific. (@klmr, #2317)
 

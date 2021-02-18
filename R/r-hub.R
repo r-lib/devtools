@@ -36,7 +36,7 @@ check_rhub <- function(pkg = ".",
                        interactive = TRUE,
                        build_args = NULL,
                        ...) {
-  check_suggested("rhub")
+  rlang::check_installed("rhub")
   pkg <- as.package(pkg)
 
   built_path <- build(pkg$path, tempdir(), quiet = !interactive,

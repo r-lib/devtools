@@ -16,7 +16,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
 
   pkg <- as.package(path)
 
-  check_suggested("rmarkdown")
+  rlang::check_installed("rmarkdown")
   save_all()
 
   cli::cli_alert_info("Installing {.pkg {pkg$package}} in temporary library")
