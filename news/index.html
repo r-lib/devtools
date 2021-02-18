@@ -89,7 +89,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.3.2.9000</span>
       </span>
     </div>
 
@@ -173,7 +173,12 @@
 <li><p><code><a href="https://rdrr.io/pkg/pkgload/man/inst.html">pkgload::inst()</a></code> is no longer re-exported (<a href='https://github.com/r-lib/devtools/issues/2218'>#2218</a>).</p></li>
 <li><p>Old <code>check_results()</code> function has been removed. It was not used by any CRAN package, and much better alternatives are available in the<br><a href="http://github.com/r-lib/rcmdcheck">rcmdcheck</a> package.</p></li>
 <li><p>The internal <code>devtest()</code> function has been removed.</p></li>
-<li><p>Now uses (what will become) testthat 3.0.0 to power <code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_file()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code>, and <code><a href="../reference/test.html">test_coverage_file()</a></code>. The major difference is that <code><a href="../reference/test.html">test_file()</a></code> now generates a compact summary that takes up less space on the console.</p></li>
+<li>
+<p>Now uses (what will become) testthat 3.0.0 to power <code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_file()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code>, and <code><a href="../reference/test.html">test_coverage_file()</a></code>. The major difference is that <code><a href="../reference/test.html">test_file()</a></code> now generates a compact summary that takes up less space on the console.</p>
+<h1 id="devtools-232" class="page-header" data-toc-text="development version">devtools 2.3.2<small> Unreleased </small>
+</h1>
+</li>
+<li><p>Fix for compatibility with withr 2.3.0</p></li>
 </ul>
 </div>
     <div id="devtools-231" class="section level1">
