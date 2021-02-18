@@ -17,7 +17,7 @@ use the previous results.}
 }
 \description{
 The default linters correspond to the style guide at
-\url{http://r-pkgs.had.co.nz/r.html#style}, however it is possible to
+\url{https://style.tidyverse.org/}, however it is possible to
 override any or all of them using the \code{linters} parameter.
 }
 \details{

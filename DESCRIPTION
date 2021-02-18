@@ -1,6 +1,6 @@
 Package: devtools
 Title: Tools to Make Developing R Packages Easier
-Version: 2.3.1.9000
+Version: 2.3.2.9000
 Authors@R: 
     c(person(given = "Hadley",
              family = "Wickham",
@@ -24,15 +24,16 @@ URL: https://devtools.r-lib.org/,
 BugReports: https://github.com/r-lib/devtools/issues
 Depends: 
     R (>= 3.0.2),
-    usethis (>= 1.6.1)
+    usethis (>= 1.6.3)
 Imports: 
-    callr (>= 3.4.3),
+    callr (>= 3.4.4),
     cli (>= 2.0.2),
-    covr (>= 3.5.0),
+    covr (>= 3.5.1),
     desc (>= 1.2.0),
-    DT (>= 0.14),
+    DT (>= 0.15),
     ellipsis (>= 0.3.1),
     httr (>= 1.4.2),
+    jsonlite (>= 1.7.1),
     memoise (>= 1.1.0),
     pkgbuild (>= 1.1.0),
     pkgload (>= 1.1.0),
@@ -52,18 +53,17 @@ Suggests:
     BiocManager (>= 1.30.10),
     curl (>= 4.3),
     digest (>= 0.6.25),
-    foghorn (>= 1.2.1),
-    gh,
+    foghorn (>= 1.3.1),
     gmailr (>= 1.0.0),
     knitr (>= 1.29),
     lintr (>= 2.0.1),
     MASS,
     mockery (>= 0.4.2),
-    pkgdown (>= 1.5.1),
+    pingr (>= 2.0.1),
+    pkgdown (>= 1.6.1),
     rhub (>= 1.1.1),
     rmarkdown (>= 2.3),
-    spelling (>= 2.1),
-    xopen
+    spelling (>= 2.1)
 VignetteBuilder: 
     knitr
 Remotes: 

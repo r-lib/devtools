@@ -42,6 +42,35 @@ is_attached <- function(pkg = ".") {
   !is.null(pkgload::pkg_env(pkg$package))
 }
 
+# This is base::trimws from 3.2 on
+trim_ws <- function(x, which = c("both", "left", "right")) {
+  which <- match.arg(which)
+  mysub <- function(re, x) sub(re, "", x, perl = TRUE)
+  if (which == "left") {
+    return(mysub("^[ \t\r\n]+", x))
+  }
+  if (which == "right") {
+    return(mysub("[ \t\r\n]+$", x))
+  }
+  mysub("[ \t\r\n]+$", mysub("^[ \t\r\n]+", x))
+}
+
+# throws a warning if the argument is not the current directory.
+warn_unless_current_dir <- function(pkg, envir = parent.frame()) {
+  if (pkg != ".") {
+    warning("`pkg` is not `.`, which is now unsupported.\n  Please use `usethis::proj_set()` to set the project directory.", immediate. = TRUE)
+    usethis::local_project(pkg, quiet = TRUE, .local_envir = envir)
+  }
+}
+
+menu <- function(...) {
+  utils::menu(...)
+}
+
+file.info <- function(...) {
+  base::file.info(...)
+}
+
 escape_special_regex <- function(x) {
   chars <- c("*", ".", "?", "^", "+", "$", "|", "(", ")", "[", "]", "{", "}", "\\")
   gsub(paste0("([\\", paste0(collapse = "\\", chars), "])"), "\\\\\\1", x, perl = TRUE)

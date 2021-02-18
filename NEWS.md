@@ -22,6 +22,9 @@
   `test_coverage()`, and `test_coverage_file()`. The major difference is that
   `test_file()` now generates a compact summary that takes up less space on
    the console.
+# devtools 2.3.2
+
+* Fix for compatibility with withr 2.3.0
 
 # devtools 2.3.1
 
