@@ -14,7 +14,7 @@
 #' cleared by calling [lintr::clear_cache()].
 #' @export
 lint <- function(pkg = ".", cache = TRUE, ...) {
-  check_suggested("lintr")
+  rlang::check_installed("lintr")
   pkg <- as.package(pkg)
 
   cli::cli_alert_info("Linting {.pkg {pkg$package}}")

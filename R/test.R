@@ -57,8 +57,7 @@ test_file <- function(file = find_active_file(), ...) {
 #' @rdname test
 # we now depend on DT in devtools so DT is installed when users call test_coverage
 test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
-  # This is just here to avoid a R CMD check NOTE about unused dependencies
-  DT::datatable
+  rlang::check_installed("DT")
 
   save_all()
   pkg <- as.package(pkg)

@@ -126,7 +126,7 @@ change_maintainer_email <- function(desc, email) {
 }
 
 upload_ftp <- function(file, url, verbose = FALSE) {
-  check_suggested("curl")
+  rlang::check_installed("curl")
 
   stopifnot(file.exists(file))
   stopifnot(is.character(url))
