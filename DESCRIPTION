@@ -24,47 +24,47 @@ URL: https://devtools.r-lib.org/,
 BugReports: https://github.com/r-lib/devtools/issues
 Depends: 
     R (>= 3.0.2),
-    usethis (>= 1.6.3)
+    usethis (>= 2.0.1)
 Imports: 
-    callr (>= 3.4.4),
-    cli (>= 2.0.2),
+    callr (>= 3.5.1),
+    cli (>= 2.3.0),
     covr (>= 3.5.1),
     desc (>= 1.2.0),
     ellipsis (>= 0.3.1),
     httr (>= 1.4.2),
-    jsonlite (>= 1.7.1),
-    memoise (>= 1.1.0),
-    pkgbuild (>= 1.1.0),
-    pkgload (>= 1.1.0),
+    jsonlite (>= 1.7.2),
+    memoise (>= 2.0.0),
+    pkgbuild (>= 1.2.0),
+    pkgload (>= 1.2.0),
     rcmdcheck (>= 1.3.3),
     remotes (>= 2.2.0),
     rlang (>= 0.4.10),
     roxygen2 (>= 7.1.1),
-    rstudioapi (>= 0.11),
+    rstudioapi (>= 0.13),
     rversions (>= 2.0.2),
     sessioninfo (>= 1.1.1),
     stats,
-    testthat (>= 2.99),
+    testthat (>= 3.0.2),
     tools,
     utils,
-    withr (>= 2.2.0)
+    withr (>= 2.4.1)
 Suggests: 
     BiocManager (>= 1.30.10),
     curl (>= 4.3),
-    digest (>= 0.6.25),
-    DT (>= 0.15),
-    foghorn (>= 1.3.1),
+    digest (>= 0.6.27),
+    DT (>= 0.17),
+    foghorn (>= 1.3.2),
     gh,
     gmailr (>= 1.0.0),
-    knitr (>= 1.29),
+    knitr (>= 1.31),
     lintr (>= 2.0.1),
     MASS,
     mockery (>= 0.4.2),
     pingr (>= 2.0.1),
     pkgdown (>= 1.6.1),
     rhub (>= 1.1.1),
-    rmarkdown (>= 2.3),
-    spelling (>= 2.1)
+    rmarkdown (>= 2.7),
+    spelling (>= 2.2)
 VignetteBuilder: 
     knitr
 Remotes: 
