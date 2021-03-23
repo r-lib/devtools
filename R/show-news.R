@@ -7,9 +7,9 @@
 #' @export
 show_news <- function(pkg = ".", latest = TRUE, ...) {
   pkg <- as.package(pkg)
-  news_path <- file.path(pkg$path, "NEWS")
+  news_path <- path(pkg$path, "NEWS")
 
-  if (!file.exists(news_path)) {
+  if (!file_exists(news_path)) {
     stop("No NEWS found", call. = FALSE)
   }
 
