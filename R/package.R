@@ -50,7 +50,7 @@ package_file <- function(..., path = ".") {
     path <- dirname(path)
 
     if (is_root(path)) {
-      stop("Could not find package root, is your working directory inside a package?", call. = FALSE)
+      stop("Could not find package root. Is your working directory inside a package?", call. = FALSE)
     }
   }
 
