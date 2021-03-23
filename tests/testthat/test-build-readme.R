@@ -1,10 +1,13 @@
 test_that("Package readme can be built ", {
   skip_on_cran()
 
-  on.exit(unlink(c("testReadme/README.md", "testReadme/man/figures"), recursive = TRUE))
+  on.exit({
+    file_delete("testReadme/README.md")
+    dir_delete("testReadme/man/figures")
+  })
 
   suppressMessages(build_readme("testReadme"))
 
-  expect_true(file.exists(file.path("testReadme", "README.md")))
-  expect_false(file.exists(file.path("testReadme", "README.html")))
+  expect_true(file_exists(path("testReadme", "README.md")))
+  expect_false(file_exists(path("testReadme", "README.html")))
 })

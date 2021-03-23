@@ -3,16 +3,16 @@ test_that("Sweave vignettes copied into doc", {
     skip("pdflatex not available")
   }
   pkg <- test_path("testVignettes")
-  doc <- file.path(pkg, "doc")
+  doc <- path(pkg, "doc")
 
   suppressMessages(clean_vignettes(pkg))
-  expect_equal(dir(doc), character())
+  expect_equal(dir_ls(doc), character())
 
   suppressMessages(build_vignettes(pkg))
-  expect_setequal(dir(doc), c("new.pdf", "new.R", "new.Rnw"))
+  expect_setequal(path_file(dir_ls(doc)), c("new.pdf", "new.R", "new.Rnw"))
 
   suppressMessages(clean_vignettes(pkg))
-  expect_equal(dir(doc), character())
+  expect_equal(dir_ls(doc), character())
 })
 
 test_that("Built files are updated", {
@@ -25,28 +25,28 @@ test_that("Built files are updated", {
   suppressMessages(build_vignettes(pkg))
   on.exit(suppressMessages(clean_vignettes(pkg)))
 
-  output <- dir(file.path(pkg, "doc"), "new", full.names = TRUE)
-  first <- file.info(output)$mtime
+  output <- dir_ls(path(pkg, "doc"), regexp = "new")
+  first <- file_info(output)$modification_time
 
   Sys.sleep(1)
   suppressMessages(build_vignettes(pkg))
-  second <- file.info(output)$mtime
+  second <- file_info(output)$modification_time
 
   expect_true(all(second > first))
 })
 
 test_that("Rmarkdown vignettes copied into doc", {
   pkg <- test_path("testMarkdownVignettes")
-  doc <- file.path(pkg, "doc")
+  doc <- path(pkg, "doc")
 
   suppressMessages(clean_vignettes(pkg))
-  expect_equal(dir(doc), character())
+  expect_equal(dir_ls(doc), character())
 
   suppressMessages(build_vignettes(pkg))
-  expect_setequal(dir(doc), c("test.html", "test.R", "test.Rmd"))
+  expect_setequal(path_file(dir_ls(doc)), c("test.html", "test.R", "test.Rmd"))
 
   suppressMessages(clean_vignettes(pkg))
-  expect_equal(dir(doc), character())
+  expect_equal(dir_ls(doc), character())
 })
 
 test_that("Extra files copied and removed", {
@@ -55,20 +55,20 @@ test_that("Extra files copied and removed", {
   }
 
   pkg <- test_path("testVignetteExtras")
-  doc <- file.path(pkg, "doc")
+  doc <- path(pkg, "doc")
 
-  extras_path <- file.path(pkg, "vignettes", ".install_extras")
+  extras_path <- path(pkg, "vignettes", ".install_extras")
   writeLines("a.R", extras_path)
-  on.exit(unlink(extras_path))
+  on.exit(file_delete(extras_path))
 
   suppressMessages(clean_vignettes(pkg))
-  expect_false(file.exists(file.path(doc, "a.R")))
+  expect_false(file_exists(path(doc, "a.R")))
 
   suppressMessages(build_vignettes(pkg))
-  expect_true(file.exists(file.path(doc, "a.R")))
+  expect_true(file_exists(path(doc, "a.R")))
 
   suppressMessages(clean_vignettes(pkg))
-  expect_false(file.exists(file.path(doc, "a.R")))
+  expect_false(file_exists(path(doc, "a.R")))
 })
 
 test_that("vignettes built on install", {
@@ -94,7 +94,7 @@ test_that(".gitignore updated when building vignettes", {
   }
 
   pkg <- test_path("testVignettes")
-  gitignore <- file.path(pkg, ".gitignore")
+  gitignore <- path(pkg, ".gitignore")
 
   suppressMessages(clean_vignettes(pkg))
   suppressMessages(build_vignettes(pkg))
