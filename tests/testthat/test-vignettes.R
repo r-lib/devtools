@@ -6,13 +6,13 @@ test_that("Sweave vignettes copied into doc", {
   doc <- path(pkg, "doc")
 
   suppressMessages(clean_vignettes(pkg))
-  expect_equal(dir_ls(doc), character())
+  expect_false(dir_exists(doc))
 
   suppressMessages(build_vignettes(pkg))
   expect_setequal(path_file(dir_ls(doc)), c("new.pdf", "new.R", "new.Rnw"))
 
   suppressMessages(clean_vignettes(pkg))
-  expect_equal(dir_ls(doc), character())
+  expect_false(dir_exists(doc))
 })
 
 test_that("Built files are updated", {
@@ -40,13 +40,13 @@ test_that("Rmarkdown vignettes copied into doc", {
   doc <- path(pkg, "doc")
 
   suppressMessages(clean_vignettes(pkg))
-  expect_equal(dir_ls(doc), character())
+  expect_false(dir_exists(doc))
 
   suppressMessages(build_vignettes(pkg))
   expect_setequal(path_file(dir_ls(doc)), c("test.html", "test.R", "test.Rmd"))
 
   suppressMessages(clean_vignettes(pkg))
-  expect_equal(dir_ls(doc), character())
+  expect_false(dir_exists(doc))
 })
 
 test_that("Extra files copied and removed", {

@@ -105,13 +105,14 @@ clean_vignettes <- function(pkg = ".") {
 
   doc_path <- path(pkg$path, "doc")
 
-  vig_candidates <- dir_ls(doc_path)
+  vig_candidates <- if (dir_exists(doc_path)) dir_ls(doc_path) else character()
   vig_rm <- vig_candidates[file_name(vig_candidates) %in% file_name(vigns$docs)]
 
   extra_candidates <- path(doc_path, path_file(find_vignette_extras(pkg)))
   extra_rm <- extra_candidates[file_exists(extra_candidates)]
 
-  vig_index_path <- path(pkg$path, "Meta", "vignette.rds")
+  meta_path <- path(pkg$path, "Meta")
+  vig_index_path <- path(meta_path, "vignette.rds")
   vig_index_rm <- if (file_exists(vig_index_path)) vig_index_path
 
   to_remove <- c(vig_rm, extra_rm, vig_index_rm)
@@ -120,7 +121,16 @@ clean_vignettes <- function(pkg = ".") {
     file_delete(to_remove)
   }
 
+  lapply(c(doc_path, meta_path), dir_delete_if_empty)
+
   invisible(TRUE)
+}
+
+dir_delete_if_empty <- function(x) {
+  if (dir_exists(x) && rlang::is_empty(dir_ls(x))) {
+    dir_delete(x)
+    cli::cli_alert_warning("Removing {.file {path_file(x)}}")
+  }
 }
 
 file_name <- function(x) {
