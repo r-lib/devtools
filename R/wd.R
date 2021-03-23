@@ -6,9 +6,9 @@
 #' @export
 wd <- function(pkg = ".", path = "") {
   pkg <- as.package(pkg)
-  path <- file.path(pkg$path, path)
+  path <- path(pkg$path, path)
 
-  if (!file.exists(path)) {
+  if (!file_exists(path)) {
     stop(path, " does not exist", call. = FALSE)
   }
 
