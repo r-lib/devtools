@@ -83,7 +83,7 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
     args = args,
     manual = manual, quiet = quiet, ...
   )
-  on.exit(dir_delete(built_path), add = TRUE)
+  on.exit(file_delete(built_path), add = TRUE)
 
   url <- paste0(
     "ftp://win-builder.r-project.org/", version, "/",

@@ -111,8 +111,8 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
     "Have you updated `NEWS.md` file?",
     "Have you updated `DESCRIPTION`?",
     "Have you updated `cran-comments.md?`",
-    if (dir.exists("docs/")) "Have you updated website in `docs/`?",
-    if (file.exists("codemeta.json")) "Have you updated codemeta.json with codemetar::write_codemeta()?",
+    if (dir_exists("docs/")) "Have you updated website in `docs/`?",
+    if (file_exists("codemeta.json")) "Have you updated codemeta.json with codemetar::write_codemeta()?",
     find_release_questions(pkg)
   )
   for (question in questions) {
@@ -229,8 +229,8 @@ maintainer <- function(pkg = ".") {
 cran_comments <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  path <- file.path(pkg$path, "cran-comments.md")
-  if (!file.exists(path)) {
+  path <- path(pkg$path, "cran-comments.md")
+  if (!file_exists(path)) {
     warning("Can't find cran-comments.md.\n",
       "This file gives CRAN volunteers comments about the submission,\n",
       "Create it with use_cran_comments().\n",
@@ -280,7 +280,7 @@ build_cran <- function(pkg, args) {
   cli::cli_alert_info("Building")
   built_path <- pkgbuild::build(pkg$path, tempdir(), manual = TRUE, args = args)
   cli::cli_alert_info("Submitting file: {built_path}")
-  size <- format(as.object_size(file.info(built_path)$size), units = "auto")
+  size <- format(as.object_size(file_info(built_path)$size), units = "auto")
   cli::cli_alert_info("File size: {size}")
   built_path
 }
@@ -372,7 +372,7 @@ flag_release <- function(pkg = ".") {
     "This package was submitted to CRAN on ", date, ".\n",
     "Once it is accepted, delete this file and tag the release (commit ", sha, ")."
   )
-  writeLines(msg, file.path(pkg$path, "CRAN-RELEASE"))
+  writeLines(msg, path(pkg$path, "CRAN-RELEASE"))
   usethis::use_build_ignore("CRAN-RELEASE")
 }
 

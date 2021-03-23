@@ -2,7 +2,7 @@
 % Please edit documentation in R/pkgload.R
 \name{load_all}
 \alias{load_all}
-\title{Load complete package.}
+\title{Load complete package}
 \usage{
 load_all(
   path = ".",
