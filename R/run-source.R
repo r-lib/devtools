@@ -32,8 +32,8 @@ source_url <- function(url, ..., sha1 = NULL) {
   stopifnot(is.character(url), length(url) == 1)
   rlang::check_installed("digest")
 
-  temp_file <- tempfile()
-  on.exit(unlink(temp_file))
+  temp_file <- file_temp()
+  on.exit(file_delete(temp_file))
 
   request <- httr::GET(url)
   httr::stop_for_status(request)
