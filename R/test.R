@@ -46,7 +46,7 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
 test_file <- function(file = find_active_file(), ...) {
   save_all()
   test_files <- find_test_file(file)
-  pkg <- as.package(dirname(test_files)[[1]])
+  pkg <- as.package(path_dir(test_files)[[1]])
 
   load_all(pkg$path, quiet = TRUE)
   testthat::test_file(test_files, ...)
@@ -81,7 +81,7 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
 test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_report = interactive(), export_all = TRUE, ...) {
   save_all()
   test_files <- find_test_file(file)
-  pkg <- as.package(dirname(file)[[1]])
+  pkg <- as.package(path_dir(file)[[1]])
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
@@ -127,9 +127,9 @@ uses_testthat <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   paths <- c(
-    file.path(pkg$path, "inst", "tests"),
-    file.path(pkg$path, "tests", "testthat")
+    path(pkg$path, "inst", "tests"),
+    path(pkg$path, "tests", "testthat")
   )
 
-  any(dir.exists(paths))
+  any(dir_exists(paths))
 }
