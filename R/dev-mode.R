@@ -69,7 +69,7 @@ is_library <- function(path) {
   # i.e. that they contain a Meta directory
   dirs <- dir_ls(path, type = "folder")
 
-  has_pkg_dir <- function(path) length(dir(path, pattern = "Meta")) > 0
+  has_pkg_dir <- function(path) length(dir_ls(path, regexp = "Meta")) > 0
   help_dirs <- vapply(dirs, has_pkg_dir, logical(1))
 
   all(help_dirs)
