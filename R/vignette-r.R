@@ -35,18 +35,18 @@ copy_vignettes <- function(pkg, keep_md) {
   out_mv <- c(md_outputs, vigns$outputs, unique(unlist(vigns$sources, use.names = FALSE)))
   out_cp <- vigns$docs
 
-  cli::cli_alert_info("Moving {.file {basename(out_mv)}} to {.path doc/}")
+  cli::cli_alert_info("Moving {.file {path_file(out_mv)}} to {.path doc/}")
   file_copy(out_mv, doc_dir, overwrite = TRUE)
   file_delete(out_mv)
 
-  cli::cli_alert_info("Copying {.file {basename(out_cp)}} to {.path doc/}")
+  cli::cli_alert_info("Copying {.file {path_file(out_cp)}} to {.path doc/}")
   file_copy(out_cp, doc_dir, overwrite = TRUE)
 
   # Copy extra files, if needed
   extra_files <- find_vignette_extras(pkg)
   if (length(extra_files) == 0) return(invisible())
 
-  cli::cli_alert_info("Copying extra files {.file {basename(extra_files)}} to {.path doc/}")
+  cli::cli_alert_info("Copying extra files {.file {path_file(extra_files)}} to {.path doc/}")
   file_copy(extra_files, doc_dir)
 
   invisible()
