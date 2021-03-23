@@ -23,8 +23,8 @@ document <- function(pkg = ".", roclets = NULL, quiet = FALSE) {
   }
 
   if (quiet) {
-    output <- tempfile()
-    on.exit(unlink(output))
+    output <- file_temp()
+    on.exit(file_delete(output))
     withr::local_output_sink(output)
   }
   withr::local_envvar(r_env_vars())

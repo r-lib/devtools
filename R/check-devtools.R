@@ -65,7 +65,7 @@ check_vignette_titles <- function(pkg = ".") {
     h <- readLines(v, n = n)
     any(grepl("Vignette Title", h))
   }
-  v <- stats::setNames(vigns$docs, basename(vigns$docs))
+  v <- stats::setNames(vigns$docs, path_file(vigns$docs))
   has_vt <- vapply(v, has_vignette_title, logical(1), n = 30)
 
   check_status(
@@ -82,13 +82,13 @@ check_vignette_titles <- function(pkg = ".") {
 check_news_md <- function(pkg) {
   pkg <- as.package(pkg)
 
-  news_path <- file.path(pkg$path, "NEWS.md")
-  if (!file.exists(news_path)) {
+  news_path <- path(pkg$path, "NEWS.md")
+  if (!file_exists(news_path)) {
     return()
   }
 
-  ignore_path <- file.path(pkg$path, ".Rbuildignore")
-  if (!file.exists(ignore_path)) {
+  ignore_path <- path(pkg$path, ".Rbuildignore")
+  if (!file_exists(ignore_path)) {
     ignore_lines <- character()
   } else {
     ignore_lines <- readLines(ignore_path)
@@ -103,9 +103,9 @@ check_news_md <- function(pkg) {
     "NEWS.md now supported by CRAN and doesn't need to be ignored."
   )
 
-  news_rd_path <- file.path(pkg$path, "inst/NEWS.Rd")
+  news_rd_path <- path(pkg$path, "inst/NEWS.Rd")
   check_status(
-    !file.exists(news_rd_path),
+    !file_exists(news_rd_path),
     "NEWS.Rd does not exist",
     "NEWS.md now supported by CRAN, NEWS.Rd can be removed."
   )
