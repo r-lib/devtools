@@ -11,5 +11,5 @@ test_that("can determine when to document", {
 test_that("fail instead of sending an email to wrong recipient", {
   # The testTest package has both Authors@R and Maintainer field - this causes problems in change_maintainer_email().
   # The function checks if the provided email is actually the one in the maintainer field instead of sending the report to the wrong recipient
-  expect_error(check_win_release(file.path("testTest"), email = "foo@bar.com"))
+  expect_error(check_win_release(path("testTest"), email = "foo@bar.com"))
 })
