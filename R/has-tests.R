@@ -3,5 +3,10 @@
 #' @keywords internal
 #' @export
 has_tests <- function() {
-  system.file("tests", package = "devtools") != ""
+  test_path <- tryCatch(
+    path_package("devtools", "tests"),
+    error = function(e) NULL
+  )
+
+  !is.null(test_path)
 }
