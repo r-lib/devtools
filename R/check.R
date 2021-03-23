@@ -114,7 +114,7 @@ check <- function(pkg = ".",
       vignettes = vignettes,
       ...
     )
-    on.exit(dir_delete(built_path), add = TRUE)
+    on.exit(file_delete(built_path), add = TRUE)
   })
 
   check_built(

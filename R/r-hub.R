@@ -41,7 +41,7 @@ check_rhub <- function(pkg = ".",
 
   built_path <- build(pkg$path, tempdir(), quiet = !interactive,
                       args = build_args)
-  on.exit(unlink(built_path), add = TRUE)
+  on.exit(file_delete(built_path), add = TRUE)
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
