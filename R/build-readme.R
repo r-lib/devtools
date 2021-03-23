@@ -26,7 +26,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
   # Ensure rendering github_document() doesn't generate HTML file
   output_options$html_preview <- FALSE
 
-  paths <- file.path(pkg$path, files)
+  paths <- path(pkg$path, files)
   for (path in paths) {
     cli::cli_alert_info("Building {.path {path}}")
     callr::r_safe(
@@ -45,13 +45,13 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
 #' @export
 build_readme <- function(path = ".", quiet = TRUE, ...) {
   pkg <- as.package(path)
+  inst <- path(pkg$path, "inst")
+  dirs <- c(pkg$path, if (dir_exists(inst)) inst)
 
   readme_path <- grep(
     ignore.case = TRUE, value = TRUE,
     "readme[.]rmd",
-    list.files(c(pkg$path, file.path(pkg$path, "inst"),
-      full.names = TRUE
-    ))
+    path_file(dir_ls(dirs))
   )
   if (length(readme_path) == 0) {
     return(invisible())

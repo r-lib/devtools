@@ -22,7 +22,7 @@ build_site <- function(path = ".", quiet = TRUE, ...) {
     install(pkg = pkg$path, upgrade = "never", reload = FALSE, quiet = quiet)
     if (isTRUE(quiet)) {
       withr::with_output_sink(
-        tempfile(),
+        file_temp(),
         pkgdown::build_site(pkg = pkg$path, ...)
       )
     } else {
