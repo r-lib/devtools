@@ -48,7 +48,9 @@ test_file <- function(file = find_active_file(), ...) {
   test_files <- find_test_file(file)
   pkg <- as.package(path_dir(test_files)[[1]])
 
+  withr::local_envvar(r_env_vars())
   load_all(pkg$path, quiet = TRUE)
+
   testthat::test_file(test_files, ...)
 }
 
