@@ -87,7 +87,7 @@ install <-
 
     if (build) {
       install_path <- pkgbuild::build(pkg$path, dest_path = tempdir(), args = build_opts, quiet = quiet)
-      on.exit(unlink(install_path), add = TRUE)
+      on.exit(file_delete(install_path), add = TRUE)
     } else {
       install_path <- pkg$path
     }

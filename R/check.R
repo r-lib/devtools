@@ -114,7 +114,7 @@ check <- function(pkg = ".",
       vignettes = vignettes,
       ...
     )
-    on.exit(unlink(built_path), add = TRUE)
+    on.exit(file_delete(built_path), add = TRUE)
   })
 
   check_built(
@@ -187,7 +187,7 @@ check_built <- function(path = NULL, cran = TRUE,
   }
   error_on <- match.arg(error_on)
 
-  pkgname <- gsub("_.*?$", "", basename(path))
+  pkgname <- gsub("_.*?$", "", path_file(path))
 
   if (cran) {
     args <- c("--as-cran", args)

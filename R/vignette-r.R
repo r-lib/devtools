@@ -22,32 +22,32 @@ copy_vignettes <- function(pkg, keep_md) {
   usethis_use_directory(pkg, "doc", ignore = TRUE)
   usethis_use_git_ignore(pkg, "/doc/")
 
-  doc_dir <- file.path(pkg$path, "doc")
+  doc_dir <- path(pkg$path, "doc")
 
   vigns <- tools::pkgVignettes(dir = pkg$path, output = TRUE, source = TRUE)
   if (length(vigns$docs) == 0) return(invisible())
 
   md_outputs <- character()
   if (isTRUE(keep_md)) {
-    md_outputs <- list.files(path = vigns$dir, pattern = "[.]md$", full.names = TRUE)
+    md_outputs <- dir_ls(path = vigns$dir, regexp = "[.]md$")
   }
 
   out_mv <- c(md_outputs, vigns$outputs, unique(unlist(vigns$sources, use.names = FALSE)))
   out_cp <- vigns$docs
 
-  cli::cli_alert_info("Moving {.file {basename(out_mv)}} to {.path doc/}")
-  file.copy(out_mv, doc_dir, overwrite = TRUE)
-  file.remove(out_mv)
+  cli::cli_alert_info("Moving {.file {path_file(out_mv)}} to {.path doc/}")
+  file_copy(out_mv, doc_dir, overwrite = TRUE)
+  file_delete(out_mv)
 
-  cli::cli_alert_info("Copying {.file {basename(out_cp)}} to {.path doc/}")
-  file.copy(out_cp, doc_dir, overwrite = TRUE)
+  cli::cli_alert_info("Copying {.file {path_file(out_cp)}} to {.path doc/}")
+  file_copy(out_cp, doc_dir, overwrite = TRUE)
 
   # Copy extra files, if needed
   extra_files <- find_vignette_extras(pkg)
   if (length(extra_files) == 0) return(invisible())
 
-  cli::cli_alert_info("Copying extra files {.file {basename(extra_files)}} to {.path doc/}")
-  file.copy(extra_files, doc_dir, recursive = TRUE)
+  cli::cli_alert_info("Copying extra files {.file {path_file(extra_files)}} to {.path doc/}")
+  file_copy(extra_files, doc_dir)
 
   invisible()
 }
@@ -55,17 +55,14 @@ copy_vignettes <- function(pkg, keep_md) {
 find_vignette_extras <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  vig_path <- file.path(pkg$path, "vignettes")
-  extras_file <- file.path(vig_path, ".install_extras")
-  if (!file.exists(extras_file)) return(character())
+  vig_path <- path(pkg$path, "vignettes")
+  extras_file <- path(vig_path, ".install_extras")
+  if (!file_exists(extras_file)) return(character())
   extras <- readLines(extras_file, warn = FALSE)
   if (length(extras) == 0) return(character())
 
   withr::with_dir(vig_path, {
-    allfiles <- dir(
-      all.files = TRUE, full.names = TRUE, recursive = TRUE,
-      include.dirs = TRUE
-    )
+    allfiles <- dir_ls(all = TRUE)
   })
 
   inst <- rep(FALSE, length(allfiles))
@@ -73,5 +70,5 @@ find_vignette_extras <- function(pkg = ".") {
     inst <- inst | grepl(e, allfiles, perl = TRUE, ignore.case = TRUE)
   }
 
-  normalizePath(file.path(vig_path, allfiles[inst]))
+  path_real(path(vig_path, allfiles[inst]))
 }

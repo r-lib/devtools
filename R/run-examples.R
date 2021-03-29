@@ -81,14 +81,14 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, run_donttest = FA
 rd_files <- function(pkg = ".", start = NULL) {
   pkg <- as.package(pkg)
 
-  path_man <- file.path(pkg$path, "man")
-  files <- dir(path_man, pattern = "\\.[Rr]d$", full.names = TRUE)
-  names(files) <- basename(files)
+  path_man <- path(pkg$path, "man")
+  files <- dir_ls(path_man, regexp = "\\.[Rr]d$")
+  names(files) <- path_file(files)
   files <- sort_ci(files)
 
   if (!is.null(start)) {
     topic <- pkgload::dev_help(start, dev_packages = pkg$package)
-    start_path <- basename(topic$path)
+    start_path <- path_file(topic$path)
 
     start_pos <- which(names(files) == start_path)
     if (length(start_pos) == 1) {

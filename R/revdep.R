@@ -63,11 +63,11 @@ print.maintainers <- function(x, ...) {
 
 cran_packages <- memoise::memoise(
   function() {
-    local <- file.path(tempdir(), "packages.rds")
+    local <- path_temp("packages.rds")
     utils::download.file("https://cran.R-project.org/web/packages/packages.rds", local,
       mode = "wb", quiet = TRUE
     )
-    on.exit(unlink(local))
+    on.exit(file_delete(local))
     cp <- readRDS(local)
     rownames(cp) <- unname(cp[, 1])
     cp

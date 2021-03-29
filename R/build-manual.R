@@ -8,7 +8,7 @@
 #' @export
 build_manual <- function(pkg = ".", path = NULL) {
   pkg <- as.package(pkg)
-  path <- path %||% dirname(pkg$path)
+  path <- path %||% path_dir(pkg$path)
   name <- paste0(pkg$package, "_", pkg$version, ".pdf", collapse = " ")
   tryCatch(msg <- callr::rcmd("Rd2pdf", cmdargs = c(
     "--force",

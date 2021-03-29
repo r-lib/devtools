@@ -1,5 +1,5 @@
 uses_git <- function(path = ".") {
-  dir.exists(file.path(path, ".git"))
+  dir_exists(path(path, ".git"))
 }
 
 git_branch <- function(path = ".") {

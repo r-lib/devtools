@@ -1,10 +1,3 @@
-# Given the name or vector of names, returns a named vector reporting
-# whether each exists and is a directory.
-dir.exists <- function(x) {
-  res <- file.exists(x) & file.info(x)$isdir
-  stats::setNames(res, x)
-}
-
 compact <- function(x) {
   is_empty <- vapply(x, function(x) length(x) == 0, logical(1))
   x[!is_empty]
@@ -65,10 +58,6 @@ warn_unless_current_dir <- function(pkg, envir = parent.frame()) {
 
 menu <- function(...) {
   utils::menu(...)
-}
-
-file.info <- function(...) {
-  base::file.info(...)
 }
 
 escape_special_regex <- function(x) {

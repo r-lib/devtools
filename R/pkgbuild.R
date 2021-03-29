@@ -11,7 +11,7 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
                   manual = FALSE, args = NULL, quiet = FALSE, ...) {
   save_all()
 
-  if (!file.exists(pkg)) {
+  if (!file_exists(pkg)) {
     stop("`pkg` must exist", call. = FALSE)
   }
 

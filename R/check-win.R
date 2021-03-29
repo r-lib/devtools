@@ -55,10 +55,10 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   pkg <- as.package(pkg)
 
   if (!is.null(email)) {
-    desc_file <- file.path(pkg$path, "DESCRIPTION")
-    backup <- tempfile()
-    file.copy(desc_file, backup)
-    on.exit(file.rename(backup, desc_file), add = TRUE)
+    desc_file <- path(pkg$path, "DESCRIPTION")
+    backup <- file_temp()
+    file_copy(desc_file, backup)
+    on.exit(file_move(backup, desc_file), add = TRUE)
 
     change_maintainer_email(desc_file, email)
 
@@ -83,11 +83,11 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
     args = args,
     manual = manual, quiet = quiet, ...
   )
-  on.exit(unlink(built_path), add = TRUE)
+  on.exit(file_delete(built_path), add = TRUE)
 
   url <- paste0(
     "ftp://win-builder.r-project.org/", version, "/",
-    basename(built_path)
+    path_file(built_path)
   )
   lapply(url, upload_ftp, file = built_path)
 
@@ -128,7 +128,7 @@ change_maintainer_email <- function(desc, email) {
 upload_ftp <- function(file, url, verbose = FALSE) {
   rlang::check_installed("curl")
 
-  stopifnot(file.exists(file))
+  stopifnot(file_exists(file))
   stopifnot(is.character(url))
   con <- file(file, open = "rb")
   on.exit(close(con), add = TRUE)

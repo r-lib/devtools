@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `build_readme()` now supports readme files located in `inst/README.Rmd`, as intended (#2333)
+
 * DT has been moved from Imports to Suggests. DT is only needed when running
   `test_coverage()` so now you'll be prompted to install it when needed.
 
@@ -25,6 +27,9 @@
   `test_coverage()`, and `test_coverage_file()`. The major difference is that
   `test_file()` now generates a compact summary that takes up less space on
    the console.
+   
+* Switched to fs for all file system functions (#2331, @malcolmbarrett)
+   
 # devtools 2.3.2
 
 * Fix for compatibility with withr 2.3.0
