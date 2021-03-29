@@ -185,5 +185,5 @@ kv_line <- function (key, value, path = FALSE) {
       value <- ui_value(value)
     }
   }
-  cli::cat_line("* ", key, ": ", value)
+  cli::cat_line(cli::symbol$bullet, " ", key, ": ", value)
 }
