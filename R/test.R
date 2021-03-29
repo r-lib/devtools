@@ -33,6 +33,7 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
   load_all(pkg$path)
 
   cli::cli_alert_info("Testing {.pkg {pkg$package}}")
+  withr::local_envvar(r_env_vars())
   testthat::test_local(
     pkg$path,
     filter = filter,
@@ -50,7 +51,6 @@ test_file <- function(file = find_active_file(), ...) {
 
   withr::local_envvar(r_env_vars())
   load_all(pkg$path, quiet = TRUE)
-
   testthat::test_file(test_files, ...)
 }
 
