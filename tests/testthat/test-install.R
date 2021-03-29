@@ -1,6 +1,8 @@
 library(mockery)
 
-pkg <- path_real(test_path("testReadme"))
+local({
+
+pkg <- create_local_package()
 
 path2char <- function(x) {
   if (inherits(x, "fs_path")) {
@@ -106,4 +108,6 @@ test_that("install_dev_deps passes ellipsis args to remotes::install_deps", {
     c(pkg, extra),
     c(pkg, dev_dep_defaults, extra)
   )
+})
+
 })

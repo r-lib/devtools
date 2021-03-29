@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `build_readme()` now supports readme files located in `inst/README.Rmd`, as intended (#2333)
+
 * DT has been moved from Imports to Suggests. DT is only needed when running
   `test_coverage()` so now you'll be prompted to install it when needed.
 
