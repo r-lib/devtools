@@ -28,7 +28,7 @@ test_that("Built files are updated", {
   output <- dir_ls(path(pkg, "doc"), regexp = "new")
   first <- file_info(output)$modification_time
 
-  Sys.sleep(1)
+  Sys.sleep(.01)
   suppressMessages(build_vignettes(pkg))
   second <- file_info(output)$modification_time
 
