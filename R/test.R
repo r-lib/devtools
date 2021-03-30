@@ -3,10 +3,10 @@
 #' @description
 #' * `test()` runs all tests in a package. It's a shortcut for
 #'   [testthat::test_dir()]
-#' * `test_file()` runs `test()` on the active file.
+#' * `test_active_file()` runs `test()` on the active file.
 #' * `test_coverage()` computes test coverage for your package. It's a
 #'   shortcut for [covr::package_coverage()] plus [covr::report()].
-#' * `test_coverage_file()` computes test coverage for the active file. It's a
+#' * `test_coverage_active_file()` computes test coverage for the active file. It's a
 #'   shortcut for [covr::file_coverage()] plus [covr::report()].
 #'
 #' @template devtools
@@ -42,9 +42,16 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
   )
 }
 
+#' @rdname devtools-deprecated
+#' @export
+test_file <- function(file = find_active_file(), ...) {
+  lifecycle::deprecate_soft("2.4.0", "test_file()", "test_active_file()")
+  test_active_file(file, ...)
+}
+
 #' @export
 #' @rdname test
-test_file <- function(file = find_active_file(), ...) {
+test_active_file <- function(file = find_active_file(), ...) {
   save_all()
   test_files <- find_test_file(file)
   pkg <- as.package(path_dir(test_files)[[1]])
@@ -57,9 +64,8 @@ test_file <- function(file = find_active_file(), ...) {
 #' @param show_report Show the test coverage report.
 #' @export
 #' @rdname test
-# we now depend on DT in devtools so DT is installed when users call test_coverage
 test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
-  rlang::check_installed("DT")
+  rlang::check_installed(c("covr", "DT"))
 
   save_all()
   pkg <- as.package(pkg)
@@ -78,9 +84,18 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   invisible(coverage)
 }
 
+#' @rdname devtools-deprecated
+#' @export
+test_coverage_file <- function(file = find_active_file(), ...) {
+  lifecycle::deprecate_soft("2.4.0", "test_coverage()", "test_coverage_active_file()")
+  test_coverage_active_file(file, ...)
+}
+
 #' @rdname test
 #' @export
-test_coverage_file <- function(file = find_active_file(), filter = TRUE, show_report = interactive(), export_all = TRUE, ...) {
+test_coverage_active_file <- function(file = find_active_file(), filter = TRUE, show_report = interactive(), export_all = TRUE, ...) {
+  rlang::check_installed(c("covr", "DT"))
+
   save_all()
   test_files <- find_test_file(file)
   pkg <- as.package(path_dir(file)[[1]])

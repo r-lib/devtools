@@ -1,9 +1,8 @@
 test_test <- function(...) {
   suppressMessages(test(..., reporter = "silent"))
 }
-test_test_file <- function(...) {
-  # Avoid accidentally using testthat::test_file()
-  suppressMessages(devtools::test_file(..., reporter = "silent"))
+test_test_active_file <- function(...) {
+  suppressMessages(test_active_file(..., reporter = "silent"))
 }
 
 test_that("Package can be tested with testthat not on search path", {
@@ -27,8 +26,8 @@ test_that("Filtering works with devtools::test", {
   expect_equal(length(out), 1)
 })
 
-test_that("devtools::test_file works", {
-  out <- test_test_file(test_path("testTest/tests/testthat/test-dummy.R"))
+test_that("devtools::test_active_file works", {
+  out <- test_test_active_file(test_path("testTest/tests/testthat/test-dummy.R"))
   expect_equal(length(out), 1)
 })
 

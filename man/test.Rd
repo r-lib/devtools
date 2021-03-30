@@ -2,18 +2,18 @@
 % Please edit documentation in R/test.R
 \name{test}
 \alias{test}
-\alias{test_file}
+\alias{test_active_file}
 \alias{test_coverage}
-\alias{test_coverage_file}
+\alias{test_coverage_active_file}
 \title{Execute testthat tests in a package}
 \usage{
 test(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...)
 
-test_file(file = find_active_file(), ...)
+test_active_file(file = find_active_file(), ...)
 
 test_coverage(pkg = ".", show_report = interactive(), ...)
 
-test_coverage_file(
+test_coverage_active_file(
   file = find_active_file(),
   filter = TRUE,
   show_report = interactive(),
@@ -47,10 +47,10 @@ in RStudio (if available).}
 \itemize{
 \item \code{test()} runs all tests in a package. It's a shortcut for
 \code{\link[testthat:test_dir]{testthat::test_dir()}}
-\item \code{test_file()} runs \code{test()} on the active file.
+\item \code{test_active_file()} runs \code{test()} on the active file.
 \item \code{test_coverage()} computes test coverage for your package. It's a
 shortcut for \code{\link[covr:package_coverage]{covr::package_coverage()}} plus \code{\link[covr:report]{covr::report()}}.
-\item \code{test_coverage_file()} computes test coverage for the active file. It's a
+\item \code{test_coverage_active_file()} computes test coverage for the active file. It's a
 shortcut for \code{\link[covr:file_coverage]{covr::file_coverage()}} plus \code{\link[covr:report]{covr::report()}}.
 }
 }

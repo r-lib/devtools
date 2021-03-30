@@ -1,32 +1,30 @@
 # devtools (development version)
 
+* `test_file()` has been renamed to  `test_active_file()` and `test_coverage_file()` has been renamed to `test_coverage_active_file()` to avoid a name collision with `testthat::test_file()`.
+  The previous names have been soft deprecated in this release, they will be hard deprecated in the next release and eventually removed. (#2125)
+
 * `build_readme()` now supports readme files located in `inst/README.Rmd`, as intended (#2333)
 
-* DT has been moved from Imports to Suggests. DT is only needed when running
-  `test_coverage()` so now you'll be prompted to install it when needed.
+* The covr and DT packages have been moved from Imports to Suggests.
+  They are only needed when running `test_coverage()` and `test_coverage_active_file()` so now you'll be prompted to install them we needed.
 
-* Make the `.gitignore` entries automatically created by `build_vignettes` more
-  specific. (@klmr, #2317)
+* Make the `.gitignore` entries automatically created by `build_vignettes` more specific. (@klmr, #2317)
 
 * Add a check to `change_maintainer_email()` to assess whether the email is actually changed.
   If the email is not changed, the code now stops such that an email is not accidentally sent to the wrong recipient. (@emilsjoerup, #2073)
 
-* `check()` only re-documents if you have a matching version of roxygen2
-   (#2263).
+* `check()` only re-documents if you have a matching version of roxygen2 (#2263).
 * `run_examples(fresh = TRUE)` again works without error (#2264)
 
 * `pkgload::inst()` is no longer re-exported (#2218).
 
-* Old `check_results()` function has been removed. It was not used by any
-  CRAN package, and much better alternatives are available in the   
-  [rcmdcheck](http://github.com/r-lib/rcmdcheck) package.
+* Old `check_results()` function has been removed.
+  It was not used by any CRAN package, and much better alternatives are available in the [rcmdcheck](http://github.com/r-lib/rcmdcheck) package.
 
 * The internal `devtest()` function has been removed.
 
-* Now uses (what will become) testthat 3.0.0 to power `test()`, `test_file()`,
-  `test_coverage()`, and `test_coverage_file()`. The major difference is that
-  `test_file()` now generates a compact summary that takes up less space on
-   the console.
+* Now uses testthat 3.0.0 to power `test()`, `test_active_file()`, `test_coverage()`, and `test_coverage_active_file()`.
+  The major difference is that `test_active-file()` now generates a compact summary that takes up less space on the console.
    
 * Switched to fs for all file system functions (#2331, @malcolmbarrett)
    
