@@ -58,7 +58,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item RStudio [copyright holder]
+  \item RStudio [copyright holder, funder]
   \item R Core team (Some namespace and vignette code extracted from base R) [contributor]
 }
 
