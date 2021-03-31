@@ -51,10 +51,10 @@
 
 test() runs all tests in a package. It's a shortcut for
 testthat::test_dir()
-test_file() runs test() on the active file.
+test_active_file() runs test() on the active file.
 test_coverage() computes test coverage for your package. It's a
 shortcut for covr::package_coverage() plus covr::report().
-test_coverage_file() computes test coverage for the active file. It's a
+test_coverage_active_file() computes test coverage for the active file. It's a
 shortcut for covr::file_coverage() plus covr::report().
 
 " />
@@ -178,10 +178,10 @@ shortcut for covr::file_coverage() plus covr::report().
 <ul>
 <li><p><code>test()</code> runs all tests in a package. It's a shortcut for
 <code><a href='https://testthat.r-lib.org/reference/test_dir.html'>testthat::test_dir()</a></code></p></li>
-<li><p><code>test_file()</code> runs <code>test()</code> on the active file.</p></li>
+<li><p><code>test_active_file()</code> runs <code>test()</code> on the active file.</p></li>
 <li><p><code>test_coverage()</code> computes test coverage for your package. It's a
 shortcut for <code><a href='http://covr.r-lib.org/reference/package_coverage.html'>covr::package_coverage()</a></code> plus <code><a href='http://covr.r-lib.org/reference/report.html'>covr::report()</a></code>.</p></li>
-<li><p><code>test_coverage_file()</code> computes test coverage for the active file. It's a
+<li><p><code>test_coverage_active_file()</code> computes test coverage for the active file. It's a
 shortcut for <code><a href='http://covr.r-lib.org/reference/file_coverage.html'>covr::file_coverage()</a></code> plus <code><a href='http://covr.r-lib.org/reference/report.html'>covr::report()</a></code>.</p></li>
 </ul>
 
@@ -189,11 +189,11 @@ shortcut for <code><a href='http://covr.r-lib.org/reference/file_coverage.html'>
 
     <pre class="usage"><span class='fu'>test</span><span class='op'>(</span>pkg <span class='op'>=</span> <span class='st'>"."</span>, filter <span class='op'>=</span> <span class='cn'>NULL</span>, stop_on_failure <span class='op'>=</span> <span class='cn'>FALSE</span>, export_all <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>test_file</span><span class='op'>(</span>file <span class='op'>=</span> <span class='fu'>find_active_file</span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
+<span class='fu'>test_active_file</span><span class='op'>(</span>file <span class='op'>=</span> <span class='fu'>find_active_file</span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
 
 <span class='fu'>test_coverage</span><span class='op'>(</span>pkg <span class='op'>=</span> <span class='st'>"."</span>, show_report <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span>
 
-<span class='fu'>test_coverage_file</span><span class='op'>(</span>
+<span class='fu'>test_coverage_active_file</span><span class='op'>(</span>
   file <span class='op'>=</span> <span class='fu'>find_active_file</span><span class='op'>(</span><span class='op'>)</span>,
   filter <span class='op'>=</span> <span class='cn'>TRUE</span>,
   show_report <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span>,
@@ -253,7 +253,7 @@ in RStudio (if available).</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://hadley.nz'>Hadley Wickham</a>, Jim Hester, Winston Chang.</p>
+  <p>Developed by <a href='http://hadley.nz'>Hadley Wickham</a>, Jim Hester, Winston Chang, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.</p>
 </div>
 
 <div class="pkgdown">

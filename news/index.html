@@ -166,15 +166,17 @@
 <a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
 </h1>
 <ul>
-<li><p>DT has been moved from Imports to Suggests. DT is only needed when running <code><a href="../reference/test.html">test_coverage()</a></code> so now you’ll be prompted to install it when needed.</p></li>
+<li><p><code><a href="../reference/test_file.html">test_file()</a></code> has been renamed to <code><a href="../reference/test.html">test_active_file()</a></code> and <code><a href="../reference/test_file.html">test_coverage_file()</a></code> has been renamed to <code><a href="../reference/test.html">test_coverage_active_file()</a></code> to avoid a name collision with <code><a href="https://testthat.r-lib.org/reference/test_file.html">testthat::test_file()</a></code>. The previous names have been soft deprecated in this release, they will be hard deprecated in the next release and eventually removed. (<a href='https://github.com/r-lib/devtools/issues/2125'>#2125</a>)</p></li>
+<li><p><code><a href="../reference/build_rmd.html">build_readme()</a></code> now supports readme files located in <code>inst/README.Rmd</code>, as intended (<a href='https://github.com/r-lib/devtools/issues/2333'>#2333</a>)</p></li>
+<li><p>The covr and DT packages have been moved from Imports to Suggests. They are only needed when running <code><a href="../reference/test.html">test_coverage()</a></code> and <code><a href="../reference/test.html">test_coverage_active_file()</a></code> so now you’ll be prompted to install them we needed.</p></li>
 <li><p>Make the <code>.gitignore</code> entries automatically created by <code>build_vignettes</code> more specific. (<a href='https://github.com/klmr'>@klmr</a>, <a href='https://github.com/r-lib/devtools/issues/2317'>#2317</a>)</p></li>
 <li><p>Add a check to <code>change_maintainer_email()</code> to assess whether the email is actually changed. If the email is not changed, the code now stops such that an email is not accidentally sent to the wrong recipient. (<a href='https://github.com/emilsjoerup'>@emilsjoerup</a>, <a href='https://github.com/r-lib/devtools/issues/2073'>#2073</a>)</p></li>
 <li><p><code><a href="../reference/check.html">check()</a></code> only re-documents if you have a matching version of roxygen2 (<a href='https://github.com/r-lib/devtools/issues/2263'>#2263</a>).</p></li>
 <li><p><code><a href="../reference/run_examples.html">run_examples(fresh = TRUE)</a></code> again works without error (<a href='https://github.com/r-lib/devtools/issues/2264'>#2264</a>)</p></li>
 <li><p><code><a href="https://rdrr.io/pkg/pkgload/man/inst.html">pkgload::inst()</a></code> is no longer re-exported (<a href='https://github.com/r-lib/devtools/issues/2218'>#2218</a>).</p></li>
-<li><p>Old <code>check_results()</code> function has been removed. It was not used by any CRAN package, and much better alternatives are available in the<br><a href="http://github.com/r-lib/rcmdcheck">rcmdcheck</a> package.</p></li>
+<li><p>Old <code>check_results()</code> function has been removed. It was not used by any CRAN package, and much better alternatives are available in the <a href="http://github.com/r-lib/rcmdcheck">rcmdcheck</a> package.</p></li>
 <li><p>The internal <code>devtest()</code> function has been removed.</p></li>
-<li><p>Now uses (what will become) testthat 3.0.0 to power <code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_file()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code>, and <code><a href="../reference/test.html">test_coverage_file()</a></code>. The major difference is that <code><a href="../reference/test.html">test_file()</a></code> now generates a compact summary that takes up less space on the console.</p></li>
+<li><p>Now uses testthat 3.0.0 to power <code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_active_file()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code>, and <code><a href="../reference/test.html">test_coverage_active_file()</a></code>. The major difference is that <code>test_active-file()</code> now generates a compact summary that takes up less space on the console.</p></li>
 <li><p>Switched to fs for all file system functions (<a href='https://github.com/r-lib/devtools/issues/2331'>#2331</a>, <a href='https://github.com/malcolmbarrett'>@malcolmbarrett</a>)</p></li>
 </ul>
 </div>
@@ -220,7 +222,7 @@
 <li><p><code><a href="../reference/check.html">check()</a></code> now sets <code>NOT_CRAN=true</code> by default, as was originally intended (<a href='https://github.com/r-lib/devtools/issues/2135'>#2135</a>).</p></li>
 <li><p><code><a href="../reference/install_deps.html">install_deps()</a></code> now supports <code><a href="https://rdrr.io/r/base/options.html">options("devtools.ellipsis_action")</a></code> as well (<a href='https://github.com/r-lib/devtools/issues/2169'>#2169</a>)</p></li>
 <li><p><code><a href="../reference/test.html">test()</a></code> now takes <code>stop_on_failure</code> as a formal argument (FALSE by default) instead of in <code>...</code>. Its value is still passed to <code><a href="https://testthat.r-lib.org/reference/test_dir.html">testthat::test_dir</a></code> as before (<a href='https://github.com/infotroph'>@infotroph</a>, <a href='https://github.com/r-lib/devtools/issues/2129'>#2129</a>).</p></li>
-<li><p><code><a href="../reference/test.html">test()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> gain a <code>export_all</code> argument, which controls if all functions in a package are automatically exported (<a href='https://github.com/r-lib/devtools/issues/1201'>#1201</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> and <code><a href="../reference/test_file.html">test_coverage_file()</a></code> gain a <code>export_all</code> argument, which controls if all functions in a package are automatically exported (<a href='https://github.com/r-lib/devtools/issues/1201'>#1201</a>).</p></li>
 <li><p><code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> now works if run outside a package directory (<a href='https://github.com/r-lib/devtools/issues/2127'>#2127</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> now works if the package root is not in the working directory.</p></li>
 </ul>
@@ -270,12 +272,12 @@
 <li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> now correctly installs the vignette builder if it is not already installed (<a href='https://github.com/r-lib/devtools/issues/2089'>#2089</a>).</p></li>
 <li><p><code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> now uses the same endpoint to detect the current RStudio version as the IDE (<a href='https://github.com/r-lib/devtools/issues/2050'>#2050</a>).</p></li>
 <li><p><code><a href="../reference/document.html">document()</a></code> gains a <code>quiet</code> parameter, to silence output and <code><a href="../reference/check.html">check()</a></code> now passes its quiet argument to it (<a href='https://github.com/r-lib/devtools/issues/1986'>#1986</a>).</p></li>
-<li><p>Add the DT package as a dependency, so that <code><a href="../reference/test.html">test_coverage()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> work without having to install additional packages (<a href='https://github.com/r-lib/devtools/issues/2085'>#2085</a>).</p></li>
+<li><p>Add the DT package as a dependency, so that <code><a href="../reference/test.html">test_coverage()</a></code> and <code><a href="../reference/test_file.html">test_coverage_file()</a></code> work without having to install additional packages (<a href='https://github.com/r-lib/devtools/issues/2085'>#2085</a>).</p></li>
 <li><p><code><a href="../reference/check_man.html">check_man()</a></code> now succeeds when <code><a href="https://rdrr.io/r/tools/undoc.html">tools::undoc()</a></code> returns empty results (<a href='https://github.com/r-lib/devtools/issues/1944'>#1944</a>).</p></li>
 <li><p><code>check_win_*()</code> functions gain a <code>email</code> argument, so temporarily change the email the check results will be sent to (<a href='https://github.com/r-lib/devtools/issues/1723'>#1723</a>).</p></li>
 <li><p><code><a href="../reference/install.html">install()</a></code> now explicitly unloads packages before trying to install a new version (<a href='https://github.com/r-lib/devtools/issues/2094'>#2094</a>).</p></li>
 <li><p>All <code>install_*()</code> functions now attach build tools to the PATH, which makes them work on Windows when RTools is not on the default PATH (<a href='https://github.com/r-lib/devtools/issues/2093'>#2093</a>).</p></li>
-<li><p><code><a href="../reference/test.html">test_coverage_file()</a></code> now works when there is not a 1 to 1 correspondence between test and source files (<a href='https://github.com/r-lib/devtools/issues/2011'>#2011</a>).</p></li>
+<li><p><code><a href="../reference/test_file.html">test_coverage_file()</a></code> now works when there is not a 1 to 1 correspondence between test and source files (<a href='https://github.com/r-lib/devtools/issues/2011'>#2011</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> now works again when <code>pkg</code> is not the current working directory (<a href='https://github.com/r-lib/devtools/issues/1974'>#1974</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> now works without error when <code><a href="https://rdrr.io/r/base/options.html">options("repos")</a></code> is unnamed (<a href='https://github.com/r-lib/devtools/issues/1956'>#1956</a>).</p></li>
 <li><p><code><a href="../reference/create.html">create()</a></code> added, the RStudio IDE uses <code><a href="../reference/create.html">create()</a></code>, so removing it in version 2.1.0 broke old versions of the IDE.</p></li>
@@ -312,7 +314,7 @@
 <ul>
 <li><p><code>check_rhub</code> gains a new argument <code>build_args</code> for arguments passed to <code>R CMD build</code>. <code>...</code> is now passed to <code><a href="https://r-hub.github.io/rhub/reference/check_for_cran.html">rhub::check_for_cran()</a></code> (<a href='https://github.com/gaborcsardi'>@gaborcsardi</a>, <a href='https://github.com/maelle'>@maelle</a>, <a href='https://github.com/r-lib/devtools/issues/2041'>#2041</a>)</p></li>
 <li><p><code><a href="../reference/build_manual.html">build_manual()</a></code> now fails if the manual fails to build. (<a href='https://github.com/r-lib/devtools/issues/2056'>#2056</a>)</p></li>
-<li><p><code><a href="../reference/test.html">test_file()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> now work with C and C++ files in the src/ directory as well.</p></li>
+<li><p><code><a href="../reference/test_file.html">test_file()</a></code> and <code><a href="../reference/test_file.html">test_coverage_file()</a></code> now work with C and C++ files in the src/ directory as well.</p></li>
 </ul>
 </div>
 </div>
@@ -323,7 +325,7 @@
 <ul>
 <li><p>Two tests are now skipped when run on CRAN, as they fail due to an outdated pandoc and restrictions on writing to the package library respectively.</p></li>
 <li><p><code><a href="../reference/load_all.html">load_all()</a></code> now accepts ‘package’ objects, regaining previous behavior in devtools prior to 2.0.0 (<a href='https://github.com/r-lib/devtools/issues/1923'>#1923</a>)</p></li>
-<li><p><code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> now set the <code>TESTTHAT_PKG</code> environment variable, so it is more consistent with running the tests during <code>R CMD check</code> (testthat<a href='https://github.com/r-lib/devtools/issues/787'>#787</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code> and <code><a href="../reference/test_file.html">test_coverage_file()</a></code> now set the <code>TESTTHAT_PKG</code> environment variable, so it is more consistent with running the tests during <code>R CMD check</code> (testthat<a href='https://github.com/r-lib/devtools/issues/787'>#787</a>).</p></li>
 <li><p><code><a href="../reference/check.html">check()</a></code> now replaces existing environment variables rather than appending them (<a href='https://github.com/r-lib/devtools/issues/1914'>#1914</a>).</p></li>
 </ul>
 </div>
@@ -406,9 +408,9 @@
 <ul>
 <li><p>All <code>install_*()</code> functions are now re-exported from <strong>remotes</strong> rather than being defined in <strong>devtools</strong></p></li>
 <li><p><strong>devtools</strong> now depends on <strong>roxygen2</strong> 6.1.0: this considerably simplifies <code><a href="../reference/document.html">devtools::document()</a></code> and makes it more consistent with <code><a href="https://roxygen2.r-lib.org/reference/roxygenize.html">roxygen2::roxygenise()</a></code>.</p></li>
-<li><p><code><a href="../reference/test.html">test_file()</a></code> function added to test one or more files from a package (<a href='https://github.com/r-lib/devtools/issues/1755'>#1755</a>).</p></li>
+<li><p><code><a href="../reference/test_file.html">test_file()</a></code> function added to test one or more files from a package (<a href='https://github.com/r-lib/devtools/issues/1755'>#1755</a>).</p></li>
 <li><p><code><a href="../reference/test.html">test_coverage()</a></code> function added to provide a helper to compute test coverage using <strong>covr</strong> (<a href='https://github.com/r-lib/devtools/issues/1628'>#1628</a>).</p></li>
-<li><p><code><a href="../reference/test.html">test_file()</a></code> and <code><a href="../reference/test.html">test_coverage_file()</a></code> now have RStudio addins (<a href='https://github.com/r-lib/devtools/issues/1650'>#1650</a>)</p></li>
+<li><p><code><a href="../reference/test_file.html">test_file()</a></code> and <code><a href="../reference/test_file.html">test_coverage_file()</a></code> now have RStudio addins (<a href='https://github.com/r-lib/devtools/issues/1650'>#1650</a>)</p></li>
 <li><p><code>test_file_coverage()</code> function added to show the test coverage of one or more files from a package. (<a href='https://github.com/r-lib/devtools/issues/1755'>#1755</a>).</p></li>
 <li><p><code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info()</a></code> now uses the implementation in the <strong>sessioninfo</strong> package. Packages using <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code> are encouraged to switch to using <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">sessioninfo::session_info()</a></code> instead.</p></li>
 <li><p><code><a href="https://rdrr.io/pkg/sessioninfo/man/package_info.html">package_info()</a></code> function now re-exported from the <strong>sessioninfo</strong> package.</p></li>
@@ -1542,7 +1544,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='http://hadley.nz'>Hadley Wickham</a>, Jim Hester, Winston Chang.</p>
+  <p>Developed by <a href='http://hadley.nz'>Hadley Wickham</a>, Jim Hester, Winston Chang, <a href='https://www.rstudio.com'><img src='https://www.tidyverse.org/rstudio-logo.svg' alt='RStudio' height='24' /></a>.</p>
 </div>
 
 <div class="pkgdown">
