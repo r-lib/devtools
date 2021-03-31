@@ -13,7 +13,7 @@ Authors@R:
              family = "Chang",
              role = "aut"),
       person(given = "RStudio",
-             role = c("cph", "fnd"))
+             role = c("cph", "fnd")))
 Description: Collection of package development tools.
 License: MIT + file LICENSE
 URL: https://devtools.r-lib.org/, https://github.com/r-lib/devtools

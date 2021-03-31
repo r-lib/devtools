@@ -74,10 +74,13 @@ packages aren't found.}
 R 3.6 and earlier; in R 4.0.0 code in \verb{\\dontest\{\}} is always run as
 part of CRAN submission.}
 
-\item{args}{Character vector of arguments to pass to
-\code{R CMD check}. (Note that instead of the \code{--output} option you
-should use the \code{check_dir} argument, because  \code{--output} cannot
-deal with spaces and other special characters on Windows.}
+\item{args}{Character vector of arguments to pass to \verb{R CMD check}. Pass each
+argument as a single element of this character vector (do not use spaces to
+delimit arguments like you would in the shell). For example, to skip
+running of examples and tests, use \code{args = c("--no-examples", "--no-tests")} and not \code{args = "--no-examples --no-tests"}. (Note that
+instead of the \code{--output} option you should use the \code{check_dir} argument,
+because  \code{--output} cannot deal with spaces and other special characters on
+Windows.)}
 
 \item{env_vars}{Environment variables set during \verb{R CMD check}}
 
@@ -92,7 +95,7 @@ check directory.}
 \item{vignettes}{If \code{FALSE}, do not build or check vignettes, equivalent to
 using \verb{args = '--ignore-vignettes' and }build_args = '--no-build-vignettes'.}
 
-\item{error_on}{Whether to throw an error on \code{R CMD check} failures.
+\item{error_on}{Whether to throw an error on \verb{R CMD check} failures.
 Note that the check is always completed (unless a timeout happens),
 and the error is only thrown after completion. If \code{"never"}, then
 no errors are thrown. If \code{"error"}, then only \code{ERROR} failures
