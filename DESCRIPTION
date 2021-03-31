@@ -13,7 +13,7 @@ Authors@R:
              family = "Chang",
              role = "aut"),
       person(given = "RStudio",
-             role = "cph"))
+             role = c("cph", "fnd"))
 Description: Collection of package development tools.
 License: MIT + file LICENSE
 URL: https://devtools.r-lib.org/, https://github.com/r-lib/devtools
@@ -27,9 +27,9 @@ Imports:
     desc (>= 1.3.0),
     ellipsis (>= 0.3.1),
     fs (>= 1.5.0),
-    lifecycle (>= 1.0.0),
     httr (>= 1.4.2),
     jsonlite (>= 1.7.2),
+    lifecycle (>= 1.0.0),
     memoise (>= 2.0.0),
     pkgbuild (>= 1.2.0),
     pkgload (>= 1.2.0),
