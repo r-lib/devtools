@@ -16,3 +16,4 @@
 ^script\.R$
 ^pkgdown$
 ^man-roxygen$
+^LICENSE\.md$
