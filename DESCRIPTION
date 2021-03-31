@@ -13,12 +13,9 @@ Authors@R:
              family = "Chang",
              role = "aut"),
       person(given = "RStudio",
-             role = c("cph", "fnd")),
-      person(given = "R Core team",
-             role = "ctb",
-             comment = "Some namespace and vignette code extracted from base R"))
+             role = c("cph", "fnd"))
 Description: Collection of package development tools.
-License: GPL (>= 2)
+License: MIT + file LICENSE
 URL: https://devtools.r-lib.org/, https://github.com/r-lib/devtools
 BugReports: https://github.com/r-lib/devtools/issues
 Depends: 
