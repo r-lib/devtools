@@ -165,20 +165,36 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
 </h1>
+<div id="breaking-changes-and-deprecated-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes-and-deprecated-functions" class="anchor"></a>Breaking changes and deprecated functions</h2>
 <ul>
-<li><p><code><a href="../reference/test_file.html">test_file()</a></code> has been renamed to <code><a href="../reference/test.html">test_active_file()</a></code> and <code><a href="../reference/test_file.html">test_coverage_file()</a></code> has been renamed to <code><a href="../reference/test.html">test_coverage_active_file()</a></code> to avoid a name collision with <code><a href="https://testthat.r-lib.org/reference/test_file.html">testthat::test_file()</a></code>. The previous names have been soft deprecated in this release, they will be hard deprecated in the next release and eventually removed. (<a href='https://github.com/r-lib/devtools/issues/2125'>#2125</a>)</p></li>
-<li><p><code><a href="../reference/build_rmd.html">build_readme()</a></code> now supports readme files located in <code>inst/README.Rmd</code>, as intended (<a href='https://github.com/r-lib/devtools/issues/2333'>#2333</a>)</p></li>
-<li><p>The covr and DT packages have been moved from Imports to Suggests. They are only needed when running <code><a href="../reference/test.html">test_coverage()</a></code> and <code><a href="../reference/test.html">test_coverage_active_file()</a></code> so now you’ll be prompted to install them we needed.</p></li>
-<li><p>Make the <code>.gitignore</code> entries automatically created by <code>build_vignettes</code> more specific. (<a href='https://github.com/klmr'>@klmr</a>, <a href='https://github.com/r-lib/devtools/issues/2317'>#2317</a>)</p></li>
-<li><p>Add a check to <code>change_maintainer_email()</code> to assess whether the email is actually changed. If the email is not changed, the code now stops such that an email is not accidentally sent to the wrong recipient. (<a href='https://github.com/emilsjoerup'>@emilsjoerup</a>, <a href='https://github.com/r-lib/devtools/issues/2073'>#2073</a>)</p></li>
-<li><p><code><a href="../reference/check.html">check()</a></code> only re-documents if you have a matching version of roxygen2 (<a href='https://github.com/r-lib/devtools/issues/2263'>#2263</a>).</p></li>
-<li><p><code><a href="../reference/run_examples.html">run_examples(fresh = TRUE)</a></code> again works without error (<a href='https://github.com/r-lib/devtools/issues/2264'>#2264</a>)</p></li>
+<li><p>The <code>check_results()</code> function has been removed. It was not used by any CRAN package, and much better alternatives are available in the <a href="https://github.com/r-lib/rcmdcheck">rcmdcheck</a> package.</p></li>
 <li><p><code><a href="https://rdrr.io/pkg/pkgload/man/inst.html">pkgload::inst()</a></code> is no longer re-exported (<a href='https://github.com/r-lib/devtools/issues/2218'>#2218</a>).</p></li>
-<li><p>Old <code>check_results()</code> function has been removed. It was not used by any CRAN package, and much better alternatives are available in the <a href="http://github.com/r-lib/rcmdcheck">rcmdcheck</a> package.</p></li>
-<li><p>The internal <code>devtest()</code> function has been removed.</p></li>
-<li><p>Now uses testthat 3.0.0 to power <code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_active_file()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code>, and <code><a href="../reference/test.html">test_coverage_active_file()</a></code>. The major difference is that <code>test_active-file()</code> now generates a compact summary that takes up less space on the console.</p></li>
-<li><p>Switched to fs for all file system functions (<a href='https://github.com/r-lib/devtools/issues/2331'>#2331</a>, <a href='https://github.com/malcolmbarrett'>@malcolmbarrett</a>)</p></li>
+<li><p><code><a href="../reference/test_file.html">test_file()</a></code> has been renamed to <code><a href="../reference/test.html">test_active_file()</a></code> and <code><a href="../reference/test_file.html">test_coverage_file()</a></code> has been renamed to <code><a href="../reference/test.html">test_coverage_active_file()</a></code> to avoid a name collision with <code><a href="https://testthat.r-lib.org/reference/test_file.html">testthat::test_file()</a></code>. The previous names have been soft deprecated in this release, they will be hard deprecated in the next release and eventually removed. (<a href='https://github.com/r-lib/devtools/issues/2125'>#2125</a>)</p></li>
 </ul>
+</div>
+<div id="re-licensing" class="section level2">
+<h2 class="hasAnchor">
+<a href="#re-licensing" class="anchor"></a>Re-licensing</h2>
+<ul>
+<li>devtools is now released under a MIT license (<a href='https://github.com/r-lib/devtools/issues/2326'>#2326</a>)</li>
+</ul>
+</div>
+<div id="minor-improvements-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<ul>
+<li><p><code><a href="../reference/build_rmd.html">build_readme()</a></code> now supports readme files located in <code>inst/README.Rmd</code>, as intended (<a href='https://github.com/r-lib/devtools/issues/2333'>#2333</a>)</p></li>
+<li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> now creates more specific <code>.gitignore</code> entries (<a href='https://github.com/klmr'>@klmr</a>, <a href='https://github.com/r-lib/devtools/issues/2317'>#2317</a>)</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now only re-documents if you have a matching version of roxygen2 (<a href='https://github.com/r-lib/devtools/issues/2263'>#2263</a>).</p></li>
+<li><p><code>change_maintainer_email()</code> now has a check to assess whether the email is actually changed. If the email is not changed, the code now stops such that an email is not accidentally sent to the wrong recipient. (<a href='https://github.com/emilsjoerup'>@emilsjoerup</a>, <a href='https://github.com/r-lib/devtools/issues/2073'>#2073</a>)</p></li>
+<li><p><code><a href="../reference/run_examples.html">run_examples(fresh = TRUE)</a></code> again works without error (<a href='https://github.com/r-lib/devtools/issues/2264'>#2264</a>)</p></li>
+<li><p>The covr and DT packages have been moved from Imports to Suggests. They are only needed when running <code><a href="../reference/test.html">test_coverage()</a></code> and <code><a href="../reference/test.html">test_coverage_active_file()</a></code> so now you’ll be prompted to install them when needed.</p></li>
+<li><p>Switched to fs for all file system functions (<a href='https://github.com/r-lib/devtools/issues/2331'>#2331</a>, <a href='https://github.com/malcolmbarrett'>@malcolmbarrett</a>)</p></li>
+<li><p>Now uses testthat 3.0.0 to power <code><a href="../reference/test.html">test()</a></code>, <code><a href="../reference/test.html">test_active_file()</a></code>, <code><a href="../reference/test.html">test_coverage()</a></code>, and <code><a href="../reference/test.html">test_coverage_active_file()</a></code>. The major difference is that <code><a href="../reference/test.html">test_active_file()</a></code> now generates a compact summary that takes up less space on the console.</p></li>
+</ul>
+</div>
 </div>
     <div id="devtools-232" class="section level1">
 <h1 class="page-header" data-toc-text="2.3.2">
@@ -265,9 +281,9 @@
 <li><p>All functions taking <code>...</code> now use the ellipsis package. This catches errors when arguments are misspelled or incorrectly specified (<a href='https://github.com/r-lib/devtools/issues/2016'>#2016</a>)</p></li>
 </ul>
 </div>
-<div id="minor-improvements-and-fixes" class="section level2">
+<div id="minor-improvements-and-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<a href="#minor-improvements-and-fixes-1" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> now correctly installs the vignette builder if it is not already installed (<a href='https://github.com/r-lib/devtools/issues/2089'>#2089</a>).</p></li>
 <li><p><code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> now uses the same endpoint to detect the current RStudio version as the IDE (<a href='https://github.com/r-lib/devtools/issues/2050'>#2050</a>).</p></li>
@@ -308,9 +324,9 @@
 <li><p><code>yesno()</code> as used in <code><a href="../reference/release.html">release()</a></code> now has clearer synonyms for “yes” (<a href='https://github.com/mattmalin'>@mattmalin</a>, <a href='https://github.com/r-lib/devtools/issues/1993'>#1993</a>)</p></li>
 </ul>
 </div>
-<div id="minor-improvements-and-fixes-1" class="section level2">
+<div id="minor-improvements-and-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-improvements-and-fixes-1" class="anchor"></a>Minor improvements and fixes</h2>
+<a href="#minor-improvements-and-fixes-2" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li><p><code>check_rhub</code> gains a new argument <code>build_args</code> for arguments passed to <code>R CMD build</code>. <code>...</code> is now passed to <code><a href="https://r-hub.github.io/rhub/reference/check_for_cran.html">rhub::check_for_cran()</a></code> (<a href='https://github.com/gaborcsardi'>@gaborcsardi</a>, <a href='https://github.com/maelle'>@maelle</a>, <a href='https://github.com/r-lib/devtools/issues/2041'>#2041</a>)</p></li>
 <li><p><code><a href="../reference/build_manual.html">build_manual()</a></code> now fails if the manual fails to build. (<a href='https://github.com/r-lib/devtools/issues/2056'>#2056</a>)</p></li>
@@ -423,9 +439,9 @@
 <li><p>The <code><a href="../reference/spell_check.html">spell_check()</a></code> code has been moved into the new <strong>spelling</strong> package and has thereby gained support for vignettes and package wordlists. The <strong>devtools</strong> function now wraps <code><a href="https://docs.ropensci.org/spelling/reference/spell_check_package.html">spelling::spell_check_package()</a></code>.</p></li>
 </ul>
 </div>
-<div id="minor-improvements-and-fixes-2" class="section level2">
+<div id="minor-improvements-and-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-improvements-and-fixes-2" class="anchor"></a>Minor improvements and fixes</h2>
+<a href="#minor-improvements-and-fixes-3" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li><p><code>check_win_*()</code> now build the package with <code>manual = TRUE</code> by default (<a href='https://github.com/r-lib/devtools/issues/1890'>#1890</a>).</p></li>
 <li><p><code><a href="../reference/check.html">check()</a></code> output now works more nicely with recent changes to <strong>rcmdcheck</strong> (<a href='https://github.com/r-lib/devtools/issues/1874'>#1874</a>).</p></li>
