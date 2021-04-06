@@ -2,7 +2,7 @@
 % Please edit documentation in R/pkgload.R
 \name{load_all}
 \alias{load_all}
-\title{Load complete package.}
+\title{Load complete package}
 \usage{
 load_all(
   path = ".",
@@ -18,10 +18,10 @@ load_all(
 \item{path}{Path to a package, or within a package.}
 
 \item{reset}{clear package environment and reset file cache before loading
-any pieces of the package. This is equivalent to running
-\code{\link[pkgload:unload]{unload()}} and is the default. Use \code{reset = FALSE} may be
-faster for large code bases, but is a significantly less accurate
-approximation.}
+any pieces of the package. This largely equivalent to running
+\code{\link[pkgload:unload]{unload()}}, however the old namespaces are not completely removed and no
+\code{.onUnload()} hooks are called. Use \code{reset = FALSE} may be faster for
+large code bases, but is a significantly less accurate approximation.}
 
 \item{recompile}{DEPRECATED. force a recompile of DLL from source code, if
 present. This is equivalent to running \code{\link[pkgbuild:clean_dll]{pkgbuild::clean_dll()}} before
@@ -53,7 +53,7 @@ environment that behaves like a regular package namespace. See
 below and \code{\link[pkgload:load_code]{load_code()}} for more details.
 
 \item Compiles any C, C++, or Fortran code in the \verb{src/} directory
-and connects the generated DLL into R. See \code{\link[=compile_dll]{compile_dll()}}
+and connects the generated DLL into R. See \code{pkgload::compile_dll()}
 for more details.
 
 \item Runs \code{.onAttach()}, \code{.onLoad()} and \code{.onUnload()}
