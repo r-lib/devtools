@@ -16,6 +16,8 @@ test_that("Sweave vignettes copied into doc", {
 })
 
 test_that("Built files are updated", {
+  # This test is time dependant and sometimes fails on CRAN because the systems are under heavy load.
+  skip_on_cran()
   if (!pkgbuild::has_latex()) {
     skip("pdflatex not available")
   }
