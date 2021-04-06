@@ -3,7 +3,7 @@
 ## Breaking changes and deprecated functions
 
 * The `check_results()` function has been removed.
-  It was not used by any CRAN package, and much better alternatives are available in the [rcmdcheck](http://github.com/r-lib/rcmdcheck) package.
+  It was not used by any CRAN package, and much better alternatives are available in the [rcmdcheck](https://github.com/r-lib/rcmdcheck) package.
 
 * `pkgload::inst()` is no longer re-exported (#2218).
 
