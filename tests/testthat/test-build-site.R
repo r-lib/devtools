@@ -1,5 +1,6 @@
 test_that("Package pkgdown site can be built ", {
   # This test requires internet
+  skip_if_offline()
   skip_on_cran()
 
   destination <- path(tempdir(), "testPkgdown", "docs")

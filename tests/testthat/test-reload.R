@@ -1,6 +1,4 @@
 test_that("reload works", {
-  skip_on_cran()
-
   withr::local_temp_libpaths()
 
   pkg <- as.package(test_path("testTest"))

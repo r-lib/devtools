@@ -1,4 +1,5 @@
 test_that("check_for_rstudio_updates", {
+  skip_if_offline()
   skip_on_cran()
 
   # returns nothing rstudio not available

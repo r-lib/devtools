@@ -1,4 +1,5 @@
 test_that("gist containing single file works unambiguously", {
+  skip_if_offline()
   skip_on_cran()
   withr::local_envvar(list("GITHUB_PAT" = bundled_pat))
 
@@ -13,6 +14,7 @@ test_that("gist containing single file works unambiguously", {
 })
 
 test_that("gist with multiple files uses first with warning", {
+  skip_if_offline()
   skip_on_cran()
   withr::local_envvar(list("GITHUB_PAT" = bundled_pat))
 
@@ -30,6 +32,7 @@ test_that("gist with multiple files uses first with warning", {
 })
 
 test_that("can specify filename", {
+  skip_if_offline()
   skip_on_cran()
   withr::local_envvar(list("GITHUB_PAT" = bundled_pat))
 
@@ -45,6 +48,7 @@ test_that("can specify filename", {
 })
 
 test_that("error if file doesn't exist or no files", {
+  skip_if_offline()
   skip_on_cran()
   withr::local_envvar(list("GITHUB_PAT" = bundled_pat))
 
