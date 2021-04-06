@@ -1,4 +1,4 @@
-# devtools (development version)
+# devtools 2.4.0
 
 ## Breaking changes and deprecated functions
 
