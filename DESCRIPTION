@@ -65,8 +65,6 @@ Suggests:
     spelling (>= 2.2)
 VignetteBuilder: 
     knitr
-Remotes: 
-    r-lib/testthat
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
