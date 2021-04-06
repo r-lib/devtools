@@ -229,7 +229,7 @@ common ones include:</p><ul>
     </tr>
     <tr>
       <th>upgrade</th>
-      <td><p>One of "default", "ask", "always", or "never". "default"
+      <td><p>Should package dependencies be upgraded? One of "default", "ask", "always", or "never". "default"
 respects the value of the <code>R_REMOTES_UPGRADE</code> environment variable if set,
 and falls back to "ask" if unset. "ask" prompts the user for which out of
 date packages to upgrade. For non-interactive sessions "ask" is equivalent
@@ -250,7 +250,7 @@ to start from scratch.</p></td>
     </tr>
     <tr>
       <th>build_opts</th>
-      <td><p>Options to pass to <code>R CMD build</code>, only used when <code>build</code></p></td>
+      <td><p>Options to pass to <code>R CMD build</code>, only used when <code>build</code> is <code>TRUE</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>

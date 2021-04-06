@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Load complete package. — load_all • devtools</title>
+<title>Load complete package — load_all • devtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Load complete package. — load_all" />
+<meta property="og:title" content="Load complete package — load_all" />
 <meta property="og:description" content="load_all loads a package. It roughly simulates what happens
 when a package is installed and loaded with library()." />
 <meta property="og:image" content="https://devtools.r-lib.org/logo.svg" />
@@ -159,7 +159,7 @@ when a package is installed and loaded with library()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Load complete package.</h1>
+    <h1>Load complete package</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/pkgload.R'><code>R/pkgload.R</code></a></small>
     <div class="hidden name"><code>load_all.Rd</code></div>
     </div>
@@ -189,10 +189,10 @@ when a package is installed and loaded with <code><a href='https://rdrr.io/r/bas
     <tr>
       <th>reset</th>
       <td><p>clear package environment and reset file cache before loading
-any pieces of the package. This is equivalent to running
-<code><a href='https://rdrr.io/pkg/pkgload/man/unload.html'>unload()</a></code> and is the default. Use <code>reset = FALSE</code> may be
-faster for large code bases, but is a significantly less accurate
-approximation.</p></td>
+any pieces of the package. This largely equivalent to running
+<code><a href='https://rdrr.io/pkg/pkgload/man/unload.html'>unload()</a></code>, however the old namespaces are not completely removed and no
+<code><a href='https://rdrr.io/r/base/ns-hooks.html'>.onUnload()</a></code> hooks are called. Use <code>reset = FALSE</code> may be faster for
+large code bases, but is a significantly less accurate approximation.</p></td>
     </tr>
     <tr>
       <th>recompile</th>
@@ -230,7 +230,7 @@ for more details.</p></li>
 environment that behaves like a regular package namespace. See
 below and <code><a href='https://rdrr.io/pkg/pkgload/man/load_code.html'>load_code()</a></code> for more details.</p></li>
 <li><p>Compiles any C, C++, or Fortran code in the <code>src/</code> directory
-and connects the generated DLL into R. See <code>compile_dll()</code>
+and connects the generated DLL into R. See <code>pkgload::compile_dll()</code>
 for more details.</p></li>
 <li><p>Runs <code><a href='https://rdrr.io/r/base/ns-hooks.html'>.onAttach()</a></code>, <code><a href='https://rdrr.io/r/base/ns-hooks.html'>.onLoad()</a></code> and <code><a href='https://rdrr.io/r/base/ns-hooks.html'>.onUnload()</a></code>
 functions at the correct times.</p></li>
