@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* The RStudio addins now use `test_active_file()` and `test_coverage_active_file()` instead of the deprecated `test_file()` and `test_coverage_file()` (#2339)
+
 # devtools 2.4.0
 
 ## Breaking changes and deprecated functions
