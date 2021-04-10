@@ -67,7 +67,7 @@ is_library <- function(path) {
 
   # otherwise check that the directories are compiled R directories -
   # i.e. that they contain a Meta directory
-  dirs <- dir_ls(path, type = "folder")
+  dirs <- dir_ls(path, type = "directory")
 
   has_pkg_dir <- function(path) length(dir_ls(path, regexp = "Meta")) > 0
   help_dirs <- vapply(dirs, has_pkg_dir, logical(1))
