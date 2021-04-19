@@ -51,7 +51,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
 build_readme <- function(path = ".", quiet = TRUE, ...) {
   pkg <- as.package(path)
 
-  readme_path <- path_abs(dir_ls(ignore.case = TRUE, regexp = "(inst/)?readme[.]rmd", recurse = 1, type = "file"))
+  readme_path <- path_abs(dir_ls(pkg$path, ignore.case = TRUE, regexp = "(inst/)?readme[.]rmd", recurse = 1, type = "file"))
 
   if (length(readme_path) == 0) {
     rlang::abort("Can't find a 'README.Rmd' or 'inst/README.Rmd' file.")
