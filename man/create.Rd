@@ -4,13 +4,20 @@
 \alias{create}
 \title{Create a package}
 \usage{
-create(path, ...)
+create(path, ..., open = FALSE)
 }
 \arguments{
 \item{path}{A path. If it exists, it is used. If it does not exist, it is
 created, provided that the parent path exists.}
 
 \item{...}{Additional arguments passed to \code{\link[usethis:create_package]{usethis::create_package()}}}
+
+\item{open}{If \code{TRUE}, \link[usethis:proj_activate]{activates} the new project:
+\itemize{
+\item If RStudio desktop, the package is opened in a new session.
+\item If on RStudio server, the current RStudio project is activated.
+\item Otherwise, the working directory and active project is changed.
+}}
 }
 \value{
 The path to the created package, invisibly.
