@@ -167,7 +167,7 @@
     <p>Create a package</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create</span><span class='op'>(</span><span class='va'>path</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>create</span><span class='op'>(</span><span class='va'>path</span>, <span class='va'>...</span>, open <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,6 +180,14 @@ created, provided that the parent path exists.</p></td>
     <tr>
       <th>...</th>
       <td><p>Additional arguments passed to <code><a href='https://usethis.r-lib.org/reference/create_package.html'>usethis::create_package()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>open</th>
+      <td><p>If <code>TRUE</code>, <a href='https://usethis.r-lib.org/reference/proj_activate.html'>activates</a> the new project:</p><ul>
+<li><p>If RStudio desktop, the package is opened in a new session.</p></li>
+<li><p>If on RStudio server, the current RStudio project is activated.</p></li>
+<li><p>Otherwise, the working directory and active project is changed.</p></li>
+</ul></td>
     </tr>
     </table>
 
