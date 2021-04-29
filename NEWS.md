@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `install(upgrade)` now defaults to 'default' rather than 'ask'. This allows you to control the default asking behavior with the `R_REMOTES_UPGRADE` environment variable (#2345)
+
 * `build_readme()` now uses the `path` argument, as designed (#2344)
 
 * The RStudio addins now use `test_active_file()` and `test_coverage_active_file()` instead of the deprecated `test_file()` and `test_coverage_file()` (#2339)

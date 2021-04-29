@@ -12,7 +12,7 @@ install(
   args = getOption("devtools.install.args"),
   quiet = FALSE,
   dependencies = NA,
-  upgrade = "ask",
+  upgrade = "default",
   build_vignettes = FALSE,
   keep_source = getOption("keep.source.pkgs"),
   force = FALSE,

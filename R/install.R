@@ -46,7 +46,7 @@
 install <-
   function(pkg = ".", reload = TRUE, quick = FALSE, build = !quick,
              args = getOption("devtools.install.args"), quiet = FALSE,
-             dependencies = NA, upgrade = "ask",
+             dependencies = NA, upgrade = "default",
              build_vignettes = FALSE,
              keep_source = getOption("keep.source.pkgs"),
              force = FALSE,
