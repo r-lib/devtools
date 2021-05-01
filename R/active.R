@@ -8,7 +8,10 @@ find_active_file <- function(arg = "file") {
 find_test_file <- function(path) {
   type <- test_file_type(path)
   if (any(is.na(type))) {
-    rlang::abort(c("Don't know how to find tests for: ", path[is.na(type)]))
+    rlang::abort(c(
+      "Don't know how to find tests associated with the active file:",
+      path[is.na(type)]
+    ))
   }
 
   is_test <- type == "test"
