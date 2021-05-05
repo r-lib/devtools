@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* RStudio addins now run in interactive mode, rather than background mode (@jennybc, #2350)
+
 * `install(upgrade)` now defaults to 'default' rather than 'ask'. This allows you to control the default asking behavior with the `R_REMOTES_UPGRADE` environment variable (#2345)
 
 * `build_readme()` now uses the `path` argument, as designed (#2344)
