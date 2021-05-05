@@ -166,11 +166,11 @@
 <a href="#devtools-development-version" class="anchor"></a>devtools (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li><p><code><a href="../reference/build_rmd.html">build_readme()</a></code> now uses the <code>path</code> argument, as designed (<a href='https://github.com/r-lib/devtools/issues/2344'>#2344</a>)</p></li>
+<li><p><code><a href="../reference/create.html">create()</a></code> no longer opens projects by default to avoid duplicate projects opened by the RStudio IDE project template (<a href='https://github.com/r-lib/devtools/issues/2347'>#2347</a>, <a href='https://github.com/malcolmbarrett'>@malcolmbarrett</a>)</p></li>
+<li><p>The RStudio addins now use <code><a href="../reference/test.html">test_active_file()</a></code> and <code><a href="../reference/test.html">test_coverage_active_file()</a></code> instead of the deprecated <code><a href="../reference/test_file.html">test_file()</a></code> and <code><a href="../reference/test_file.html">test_coverage_file()</a></code> (<a href='https://github.com/r-lib/devtools/issues/2339'>#2339</a>)</p></li>
 <li><p>RStudio addins now run in interactive mode, rather than background mode (<a href='https://github.com/jennybc'>@jennybc</a>, <a href='https://github.com/r-lib/devtools/issues/2350'>#2350</a>)</p></li>
 <li><p><code><a href="../reference/install.html">install(upgrade)</a></code> now defaults to ‘default’ rather than ‘ask’. This allows you to control the default asking behavior with the <code>R_REMOTES_UPGRADE</code> environment variable (<a href='https://github.com/r-lib/devtools/issues/2345'>#2345</a>)</p></li>
-<li><p><code><a href="../reference/build_rmd.html">build_readme()</a></code> now uses the <code>path</code> argument, as designed (<a href='https://github.com/r-lib/devtools/issues/2344'>#2344</a>)</p></li>
-<li><p>The RStudio addins now use <code><a href="../reference/test.html">test_active_file()</a></code> and <code><a href="../reference/test.html">test_coverage_active_file()</a></code> instead of the deprecated <code><a href="../reference/test_file.html">test_file()</a></code> and <code><a href="../reference/test_file.html">test_coverage_file()</a></code> (<a href='https://github.com/r-lib/devtools/issues/2339'>#2339</a>)</p></li>
-<li><p><code><a href="../reference/create.html">create()</a></code> no longer opens projects by default to avoid duplicate projects opened by the RStudio IDE project template (<a href='https://github.com/r-lib/devtools/issues/2347'>#2347</a>, <a href='https://github.com/malcolmbarrett'>@malcolmbarrett</a>)</p></li>
 </ul>
 </div>
     <div id="devtools-240" class="section level1">
