@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `document(quiet = TRUE)` now works without failure on windows (#2351)
+
 # devtools 2.4.1
 
 * `build_readme()` now uses the `path` argument, as designed (#2344)

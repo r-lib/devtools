@@ -24,7 +24,7 @@ document <- function(pkg = ".", roclets = NULL, quiet = FALSE) {
 
   if (quiet) {
     output <- file_temp()
-    on.exit(file_delete(output))
+    withr::defer(file_delete(output))
     withr::local_output_sink(output)
   }
   withr::local_envvar(r_env_vars())
