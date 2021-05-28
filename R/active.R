@@ -2,7 +2,7 @@ find_active_file <- function(arg = "file") {
   if (!rstudioapi::isAvailable()) {
     stop("Argument `", arg, "` is missing, with no default", call. = FALSE)
   }
-  rstudioapi::getSourceEditorContext()$path
+  normalizePath(rstudioapi::getSourceEditorContext()$path)
 }
 
 find_test_file <- function(path) {
