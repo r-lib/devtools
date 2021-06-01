@@ -21,12 +21,19 @@ check_man <- function(pkg = ".") {
   on.exit(options(old))
 
   cli::cli_alert_info("Checking documentation...")
+
+  check_Rd_contents <- if (getRversion() < "4.1") {
+    "tools" %:::% ".check_Rd_contents"
+  } else {
+    tools::checkRdContents
+  }
+
   ok <-
     all(
       man_message(("tools" %:::% ".check_package_parseRd")(dir = pkg$path)),
       man_message(("tools" %:::% ".check_Rd_metadata")(dir = pkg$path)),
       man_message(("tools" %:::% ".check_Rd_xrefs")(dir = pkg$path)),
-      man_message(("tools" %:::% ".check_Rd_contents")(dir = pkg$path)),
+      man_message(check_Rd_contents(dir = pkg$path)),
       man_message(tools::checkDocFiles(dir = pkg$path)),
       man_message(tools::checkDocStyle(dir = pkg$path)),
       man_message(tools::checkReplaceFuns(dir = pkg$path)),

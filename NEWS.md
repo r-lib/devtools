@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `check_man()` now works with R versions 4.1+ (#2354)
+
 * `test_active_file()` now again works on windows projects stored under the user's home directory (`~`) (#2355)
 
 * `document(quiet = TRUE)` now works without failure on windows (#2351)
