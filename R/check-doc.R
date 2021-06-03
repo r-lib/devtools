@@ -23,9 +23,9 @@ check_man <- function(pkg = ".") {
   cli::cli_alert_info("Checking documentation...")
 
   check_Rd_contents <- if (getRversion() < "4.1") {
-    "tools" %:::% ".check_Rd_contents"
+    asNamespace("tools")$.check_Rd_contents
   } else {
-    tools::checkRdContents
+    asNamespace("tools")$checkRdContents
   }
 
   ok <-
