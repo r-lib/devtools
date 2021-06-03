@@ -6,6 +6,8 @@
 
 * `document(quiet = TRUE)` now works without failure on windows (#2351)
 
+* Minor test failure on R 4.2 has been fixed.
+
 # devtools 2.4.1
 
 * `build_readme()` now uses the `path` argument, as designed (#2344)
