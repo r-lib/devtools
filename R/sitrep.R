@@ -8,7 +8,7 @@ check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]), ver
     return()
   }
 
-  url <- sprintf("https://www.rstudio.org/links/check_for_update?version=%s&os=%s&format=kvp", version, os, "kvp")
+  url <- sprintf("https://www.rstudio.org/links/check_for_update?version=%s&os=%s&format=%s", version, os, "kvp")
 
   tmp <- file_temp()
   on.exit(file_delete(tmp))
