@@ -17,3 +17,8 @@ Name: Document a package
 Description: A wrapper for `roxygen`'s `roxygen2::roxygenize()`
 Binding: document
 Interactive: true
+
+Name: Run examples
+Description: Runs R code in examples using `devtools::run_examples()`
+Binding: run_examples
+Interactive: true
