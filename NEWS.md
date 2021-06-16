@@ -8,6 +8,8 @@
 
 * Minor test failure on R 4.2 has been fixed.
 
+* New Rstudio addin for `run_examples()` (#2358)
+
 # devtools 2.4.1
 
 * `build_readme()` now uses the `path` argument, as designed (#2344)
