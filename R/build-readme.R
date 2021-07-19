@@ -19,6 +19,19 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
   rlang::check_installed("rmarkdown")
   save_all()
 
+  paths <- files
+  abs_files <- is_absolute_path(files)
+  paths[!abs_files] <- path(pkg$path, files[!abs_files])
+
+  ok <- file_exists(paths)
+  if (any(!ok)) {
+    stop(
+      "Can't find file(s): ",
+      paste0(encodeString(files[!ok], quote = "'"), collapse = ", "), ".",
+      call. = FALSE
+    )
+  }
+
   cli::cli_alert_info("Installing {.pkg {pkg$package}} in temporary library")
   withr::local_temp_libpaths()
   install(pkg, upgrade = "never", reload = FALSE, quick = TRUE, quiet = quiet)
@@ -26,11 +39,6 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
   # Ensure rendering github_document() doesn't generate HTML file
   output_options$html_preview <- FALSE
 
-  paths <- files
-
-  abs_files <- is_absolute_path(files)
-
-  paths[!abs_files] <- path(pkg$path, files[!abs_files])
 
   for (path in paths) {
     cli::cli_alert_info("Building {.path {path}}")
