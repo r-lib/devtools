@@ -25,11 +25,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
 
   ok <- file_exists(paths)
   if (any(!ok)) {
-    stop(
-      "Can't find file(s): ",
-      paste0(encodeString(files[!ok], quote = "'"), collapse = ", "), ".",
-      call. = FALSE
-    )
+    cli::cli_abort("Can't find file{?s}: {.path {files[!ok]}}.")
   }
 
   cli::cli_alert_info("Installing {.pkg {pkg$package}} in temporary library")
