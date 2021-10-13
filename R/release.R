@@ -368,10 +368,8 @@ flag_release <- function(pkg = ".") {
   })
 
   dat <- list(
-    # helps usethis distinguish old vs. new format for CRAN-RELEASE
-    DCF = TRUE,
-    submitted_to_cran_on = Sys.Date(),
-    version = pkg$version,
+    Version = pkg$version,
+    Date = Sys.Date(),
     SHA = sha
   )
 
