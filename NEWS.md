@@ -1,3 +1,5 @@
+# devtools (development version)
+
 # devtools 2.4.2
 
 * `check_man()` now works with R versions 4.1+ (#2354)
