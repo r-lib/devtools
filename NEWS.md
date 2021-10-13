@@ -1,5 +1,7 @@
 # devtools (development version)
 
+`release()` and `submit_cran()` now record submission details using the Debian Control File format, for better machine-readability. This file now includes package version, in addition to full SHA and a timestamp.
+
 # devtools 2.4.2
 
 * `check_man()` now works with R versions 4.1+ (#2354)
