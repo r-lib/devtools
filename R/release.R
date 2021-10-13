@@ -369,7 +369,7 @@ flag_release <- function(pkg = ".") {
 
   dat <- list(
     Version = pkg$version,
-    Date = Sys.time(),
+    Date = format(Sys.time(), tz = "UTC",usetz = TRUE),
     SHA = sha
   )
 
