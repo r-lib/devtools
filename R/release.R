@@ -363,16 +363,19 @@ flag_release <- function(pkg = ".") {
 
   cli::cli_alert_warning("Don't forget to tag this release once accepted by CRAN")
 
-  date <- Sys.Date()
   withr::with_dir(pkg$path, {
-    sha <- system2("git", c("rev-parse", "--short", "HEAD"), stdout = TRUE)
+    sha <- system2("git", c("rev-parse", "HEAD"), stdout = TRUE)
   })
 
-  msg <- paste0(
-    "This package was submitted to CRAN on ", date, ".\n",
-    "Once it is accepted, delete this file and tag the release (commit ", sha, ")."
+  dat <- list(
+    # helps usethis distinguish old vs. new format for CRAN-RELEASE
+    DCF = TRUE,
+    submitted_to_cran_on = Sys.Date(),
+    version = pkg$version,
+    SHA = sha
   )
-  writeLines(msg, path(pkg$path, "CRAN-RELEASE"))
+
+  write.dcf(dat, file = path(pkg$path, "CRAN-RELEASE"))
   usethis::use_build_ignore("CRAN-RELEASE")
 }
 
