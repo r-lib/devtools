@@ -373,8 +373,8 @@ flag_release <- function(pkg = ".") {
     SHA = sha
   )
 
-  write.dcf(dat, file = path(pkg$path, "CRAN-RELEASE"))
-  usethis::use_build_ignore("CRAN-RELEASE")
+  write.dcf(dat, file = path(pkg$path, "CRAN-SUBMISSION"))
+  usethis::use_build_ignore("CRAN-SUBMISSION")
 }
 
 cran_mirror <- function(repos = getOption("repos")) {
