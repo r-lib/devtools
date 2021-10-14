@@ -48,14 +48,6 @@ trim_ws <- function(x, which = c("both", "left", "right")) {
   mysub("[ \t\r\n]+$", mysub("^[ \t\r\n]+", x))
 }
 
-# throws a warning if the argument is not the current directory.
-warn_unless_current_dir <- function(pkg, envir = parent.frame()) {
-  if (pkg != ".") {
-    warning("`pkg` is not `.`, which is now unsupported.\n  Please use `usethis::proj_set()` to set the project directory.", immediate. = TRUE)
-    usethis::local_project(pkg, quiet = TRUE, .local_envir = envir)
-  }
-}
-
 menu <- function(...) {
   utils::menu(...)
 }
