@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/r-lib/devtools/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/devtools/actions)
-[![Coverage Status](https://codecov.io/github/r-lib/devtools/coverage.svg?branch=master)](https://codecov.io/github/r-lib/devtools?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/devtools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/r-lib/devtools?branch=master)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools)
 <!-- badges: end -->
 
