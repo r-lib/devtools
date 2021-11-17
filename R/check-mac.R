@@ -1,34 +1,21 @@
 #' Check macOS package
 #'
 #' This function works by bundling source package, and then uploading to
-#' <https://mac.r-project.org/macbuilder/submit.html>.  Once building is
-#' complete you'll receive a link to the built package in the email address
-#' listed in the maintainer field.
+#' <https://mac.r-project.org/macbuilder/submit.html>.  This function returns a
+#' link to the page with the check results.
 #'
 #' @template devtools
 #' @inheritParams pkgbuild::build
-#' @param email An alternative email to use, default `NULL` uses the package
-#'   Maintainer's email.
+#' @param dep_pkgs Additional custom dependencies to install prior to checking the package.
 #' @param quiet If `TRUE`, suppresses output.
 #' @param ... Additional arguments passed to [pkgbuild::build()].
 #' @family build functions
 #' @return The url with the check results (invisibly)
 #' @export
-check_mac_release <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
+check_mac_release <- function(pkg = ".", dep_pkgs = ".", args = NULL, manual = TRUE, quiet = FALSE, ...) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   pkg <- as.package(pkg)
-
-  if (!is.null(email)) {
-    desc_file <- path(pkg$path, "DESCRIPTION")
-    backup <- file_temp()
-    file_copy(desc_file, backup)
-    on.exit(file_move(backup, desc_file), add = TRUE)
-
-    change_maintainer_email(desc_file, email)
-
-    pkg <- as.package(pkg$path)
-  }
 
   if (!quiet) {
     cli::cli_alert_info(
@@ -41,29 +28,44 @@ check_mac_release <- function(pkg = ".", args = NULL, manual = TRUE, email = NUL
     args = args,
     manual = manual, quiet = quiet, ...
   )
-  on.exit(file_delete(built_path), add = TRUE)
+
+  dep_built_paths <- character()
+  for (i in seq_along(dep_pkgs)) {
+    dep_pkg <- as.package(dep_pkgs[[i]])$path
+    dep_built_paths[[i]] <- pkgbuild::build(dep_pkg, tempdir(),
+      args = args,
+      manual = manual, quiet = quiet, ...
+    )
+  }
+  on.exit(file_delete(c(built_path, dep_built_paths)), add = TRUE)
 
   url <- "https://mac.r-project.org/macbuilder/v1/submit"
 
+  body <- list(pkgfile = httr::upload_file(built_path))
+
+  if (length(dep_built_paths) > 0) {
+    uploads <- lapply(dep_built_paths, httr::upload_file)
+    names(uploads) <- rep("depfiles", length(uploads))
+    body <- append(body, uploads)
+  }
+
   res <- httr::POST(url,
-    body = list(
-      pkgfile = httr::upload_file(built_path)
-    ),
+    body = body,
     headers = list(
       "Content-Type" = "multipart/form-data"
     ),
     encode = "multipart"
   )
 
-  httr::stop_for_status(res)
+  httr::stop_for_status(res, task = "Uploading package")
 
   response_url <- httr::content(res)$url
 
   if (!quiet) {
-    time <- strftime(Sys.time() + 30 * 60, "%I:%M %p")
+    time <- strftime(Sys.time() + 10 * 60, "%I:%M %p")
 
     cli::cli_alert_success(
-      "[{Sys.Date()}] Check {.url {response_url}} for a link to results in 15-30 mins (~{time})."
+      "[{Sys.Date()}] Check {.url {response_url}} for the results in 5-10 mins (~{time})."
     )
   }
 

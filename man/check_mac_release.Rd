@@ -6,9 +6,9 @@
 \usage{
 check_mac_release(
   pkg = ".",
+  dep_pkgs = ".",
   args = NULL,
   manual = TRUE,
-  email = NULL,
   quiet = FALSE,
   ...
 )
@@ -17,15 +17,14 @@ check_mac_release(
 \item{pkg}{The package to use, can be a file path to the package or a
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
+\item{dep_pkgs}{Additional custom dependencies to install prior to checking the package.}
+
 \item{args}{An optional character vector of additional command
 line arguments to be passed to \verb{R CMD build} if \code{binary = FALSE},
 or \verb{R CMD install} if \code{binary = TRUE}.}
 
 \item{manual}{For source packages: if \code{FALSE}, don't build PDF
 vignettes (\code{--no-build-vignettes}) or manual (\code{--no-manual}).}
-
-\item{email}{An alternative email to use, default \code{NULL} uses the package
-Maintainer's email.}
 
 \item{quiet}{If \code{TRUE}, suppresses output.}
 
@@ -36,9 +35,8 @@ The url with the check results (invisibly)
 }
 \description{
 This function works by bundling source package, and then uploading to
-\url{https://mac.r-project.org/macbuilder/submit.html}.  Once building is
-complete you'll receive a link to the built package in the email address
-listed in the maintainer field.
+\url{https://mac.r-project.org/macbuilder/submit.html}.  This function returns a
+link to the page with the check results.
 }
 \seealso{
 Other build functions: 
