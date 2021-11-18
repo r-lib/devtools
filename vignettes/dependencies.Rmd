@@ -59,7 +59,7 @@ Because GitHub is the most commonly used unofficial package distribution in R, i
 Remotes: hadley/testthat
 ```
 
-You can also specify a specific hash, tag, or pull request (using the same syntax as `install_github()` if you want a particular commit. Otherwise the latest commit on the master branch is used.
+You can also specify a specific hash, tag, or pull request (using the same syntax as `install_github()` if you want a particular commit. Otherwise the latest commit on the HEAD of the branch is used.
 
 ```yaml
 Remotes: hadley/httr@v0.4,
@@ -92,10 +92,10 @@ Remotes: bitbucket::sulab/mygene.r@default, djnavarro/lsr
 Remotes: bioc::3.3/SummarizedExperiment#117513, bioc::release/Biobase
 
 # SVN
-Remotes: svn::https://github.com/hadley/stringr
+Remotes: svn::https://github.com/tidyverse/stringr
 
 # URL
-Remotes: url::https://github.com/hadley/stringr/archive/master.zip
+Remotes: url::https://github.com/tidyverse/stringr/archive/main.zip
 
 # Local
 Remotes: local::/pkgs/testthat
