@@ -137,7 +137,7 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>All devtools functions accept a path as an argument, e.g. <code><a href="reference/load_all.html">load_all("path/to/mypkg")</a></code>. If you don’t specify a path, devtools will look in the current working directory - this is a recommended practice.</p>
+<p>All devtools functions accept a path as an argument, e.g. <code>load_all("path/to/mypkg")</code>. If you don’t specify a path, devtools will look in the current working directory - this is a recommended practice.</p>
 <div id="frequent-development-tasks" class="section level3">
 <h3 class="hasAnchor">
 <a href="#frequent-development-tasks" class="anchor"></a>Frequent development tasks:</h3>
@@ -225,12 +225,12 @@
 <li><p><a href="https://github.com/r-lib/pkgload">pkgload</a>: Simulating package loading (i.e. <code><a href="reference/load_all.html">load_all()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/rcmdcheck">rcmdcheck</a>: Running R CMD check and reporting the results (i.e. <code><a href="reference/check.html">check()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/revdepcheck">revdepcheck</a>: Running R CMD check on all reverse dependencies, and figuring out what’s changed since the last CRAN release (i.e. <code>revdep_check()</code>).</p></li>
-<li><p><a href="https://github.com/r-lib/sessioninfo">sessioninfo</a>: R session info (i.e. <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">session_info()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/sessioninfo">sessioninfo</a>: R session info (i.e. <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html">session_info()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/usethis">usethis</a>: Automating package setup (i.e. <code>use_test()</code>).</p></li>
 </ul>
 <p>Generally, you would not need to worry about these different packages, because devtools installs all of them automatically. You will need to care, however, if you’re filing a bug because reporting it at the correct place will lead to a speedier resolution.</p>
-<p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">sessioninfo::session_info()</a></code> rather than <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
-<p>However for day to day development we recommend you continue to use <code><a href="https://devtools.r-lib.org/">library(devtools)</a></code> to quickly load all needed development tools, just like <code><a href="https://rdrr.io/r/base/library.html">library(tidyverse)</a></code> quickly loads all the tools necessary for data exploration and visualization.</p>
+<p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html">sessioninfo::session_info()</a></code> rather than <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
+<p>However for day to day development we recommend you continue to use <code><a href="https://devtools.r-lib.org/">library(devtools)</a></code> to quickly load all needed development tools, just like <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> quickly loads all the tools necessary for data exploration and visualization.</p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">

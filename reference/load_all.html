@@ -275,21 +275,21 @@ package sources have different directory structures. Note that this is not
 a perfect replacement for <code><a href='https://rdrr.io/r/base/system.file.html'>base::system.file</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'># Load the package in the current directory</span>
-<span class='fu'>load_all</span><span class='op'>(</span><span class='st'>"./"</span><span class='op'>)</span>
-
-<span class='co'># Running again loads changed files</span>
-<span class='fu'>load_all</span><span class='op'>(</span><span class='st'>"./"</span><span class='op'>)</span>
-
-<span class='co'># With reset=TRUE, unload and reload the package for a clean start</span>
-<span class='fu'>load_all</span><span class='op'>(</span><span class='st'>"./"</span>, <span class='cn'>TRUE</span><span class='op'>)</span>
-
-<span class='co'># With export_all=FALSE, only objects listed as exports in NAMESPACE</span>
-<span class='co'># are exported</span>
-<span class='fu'>load_all</span><span class='op'>(</span><span class='st'>"./"</span>, export_all <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'># Load the package in the current directory</span></span>
+<span class='r-in'><span class='fu'>load_all</span><span class='op'>(</span><span class='st'>"./"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Running again loads changed files</span></span>
+<span class='r-in'><span class='fu'>load_all</span><span class='op'>(</span><span class='st'>"./"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># With reset=TRUE, unload and reload the package for a clean start</span></span>
+<span class='r-in'><span class='fu'>load_all</span><span class='op'>(</span><span class='st'>"./"</span>, <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># With export_all=FALSE, only objects listed as exports in NAMESPACE</span></span>
+<span class='r-in'><span class='co'># are exported</span></span>
+<span class='r-in'><span class='fu'>load_all</span><span class='op'>(</span><span class='st'>"./"</span>, export_all <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -191,11 +191,11 @@
 </ol>
 <p>When filing an issue, the most important thing is to include a minimal reproducible example so that we can quickly verify the problem, and then figure out how to fix it. There are three things you need to include to make your example reproducible: required packages, data, code.</p>
 <ol>
-<li><p><strong>Packages</strong> should be loaded at the top of the script, so it’s easy to see which ones the example needs. Unless you’ve been specifically asked for it, please don’t include the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> or <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html">devtools::session_info()</a></code>.</p></li>
+<li><p><strong>Packages</strong> should be loaded at the top of the script, so it’s easy to see which ones the example needs. Unless you’ve been specifically asked for it, please don’t include the output of <code><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo()</a></code> or <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html">devtools::session_info()</a></code>.</p></li>
 <li>
 <p>The easiest way to include <strong>data</strong> is to use <code><a href="https://rdrr.io/r/base/dput.html">dput()</a></code> to generate the R code to recreate it. For example, to recreate the <code>mtcars</code> dataset in R, I’d perform the following steps:</p>
 <ol>
-<li>Run <code><a href="https://rdrr.io/r/base/dput.html">dput(mtcars)</a></code> in R</li>
+<li>Run <code>dput(mtcars)</code> in R</li>
 <li>Copy the output</li>
 <li>In my reproducible script, type <code>mtcars &lt;-</code> then paste.</li>
 </ol>

@@ -6,15 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Find file in a package. — package_file • devtools</title>
+<title>NA • devtools</title>
 
 <!-- favicons -->
-<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -25,8 +25,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
 <!-- bootstrap-toc -->
-<link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script>
+<link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -40,16 +40,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script>
 
 
 
 
-<meta property="og:title" content="Find file in a package. — package_file" />
-<meta property="og:description" content="It always starts by walking up the path until it finds the root directory,
-i.e. a directory containing DESCRIPTION. If it cannot find the root
-directory, or it can't find the specified path, it will throw an error." />
+<meta property="og:title" content="NA" />
 <meta property="og:image" content="https://devtools.r-lib.org/logo.svg" />
 
 
@@ -79,7 +76,7 @@ directory, or it can't find the specified path, it will throw an error." />
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -91,7 +88,7 @@ directory, or it can't find the specified path, it will throw an error." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">devtools</a>
+        <a class="navbar-link" href="index.html">devtools</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.2.9000</span>
       </span>
     </div>
@@ -99,13 +96,13 @@ directory, or it can't find the specified path, it will throw an error." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="index.html">
     <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -115,7 +112,7 @@ directory, or it can't find the specified path, it will throw an error." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/dependencies.html">Devtools dependencies</a>
+      <a href="articles/dependencies.html">Devtools dependencies</a>
     </li>
   </ul>
 </li>
@@ -135,7 +132,7 @@ directory, or it can't find the specified path, it will throw an error." />
     </li>
     <li class="divider"></li>
     <li>
-      <a href="../news/index.html">Changelog</a>
+      <a href="news/index.html">Changelog</a>
     </li>
   </ul>
 </li>
@@ -158,47 +155,40 @@ directory, or it can't find the specified path, it will throw an error." />
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>Find file in a package.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/package.R'><code>R/package.R</code></a></small>
-    <div class="hidden name"><code>package_file.Rd</code></div>
+      <h1>NA</h1>
     </div>
 
-    <div class="ref-description">
-    <p>It always starts by walking up the path until it finds the root directory,
-i.e. a directory containing <code>DESCRIPTION</code>. If it cannot find the root
-directory, or it can't find the specified path, it will throw an error.</p>
-    </div>
 
-    <pre class="usage"><span class='fu'>package_file</span><span class='op'>(</span><span class='va'>...</span>, path <span class='op'>=</span> <span class='st'>"."</span><span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>...</th>
-      <td><p>Components of the path.</p></td>
-    </tr>
-    <tr>
-      <th>path</th>
-      <td><p>Place to start search for package directory.</p></td>
-    </tr>
-    </table>
+<div id="current-state" class="section level2">
+<h2 class="hasAnchor">
+<a href="#current-state" class="anchor"></a>Current state</h2>
+<p>Devtools is generally stable, most of the active development has moved to sub-packages like remotes and usethis, and relatively little code lives in devtools itself.</p>
+</div>
+<div id="known-outstanding-issues" class="section level2">
+<h2 class="hasAnchor">
+<a href="#known-outstanding-issues" class="anchor"></a>Known outstanding issues</h2>
+<p>I don’t know of any major outstanding issues in devtools itself.</p>
+</div>
+<div id="future-directions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#future-directions" class="anchor"></a>Future directions</h2>
+<p>The package development cheatsheet likely needs a major overhaul to account for much more functionality in usethis and the current state of devtools. <a href="https://github.com/r-lib/devtools/issues/2107" class="uri">https://github.com/r-lib/devtools/issues/2107</a></p>
+<p>Should devtools be converted to use pak for installation, or should the installation commands be deprecated in devtools and users suggested to use pak directly?</p>
+</div>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'><span class='fu'>package_file</span><span class='op'>(</span><span class='st'>"figures"</span>, <span class='st'>"figure_1"</span><span class='op'>)</span></span>
-<span class='r-in'><span class='op'>}</span></span>
-</pre>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
+
 
 
       <footer>
