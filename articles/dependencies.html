@@ -152,7 +152,7 @@ Remotes:
 <a href="#github" class="anchor"></a>GitHub</h3>
 <p>Because GitHub is the most commonly used unofficial package distribution in R, it’s the default:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> hadley/testthat</span></span></code></pre></div>
-<p>You can also specify a specific hash, tag, or pull request (using the same syntax as <code><a href="../reference/remote-reexports.html">install_github()</a></code> if you want a particular commit. Otherwise the latest commit on the master branch is used.</p>
+<p>You can also specify a specific hash, tag, or pull request (using the same syntax as <code><a href="../reference/remote-reexports.html">install_github()</a></code> if you want a particular commit. Otherwise the latest commit on the HEAD of the branch is used.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> hadley/httr@v0.4,</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="at">  klutometis/roxygen</span><span class="co">#142,</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="at">  hadley/testthat@c67018fa4970</span></span></code></pre></div>
@@ -176,10 +176,10 @@ Remotes:
 <span id="cb6-11"><a href="#cb6-11"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> bioc::3.3/SummarizedExperiment</span><span class="co">#117513, bioc::release/Biobase</span></span>
 <span id="cb6-12"><a href="#cb6-12"></a></span>
 <span id="cb6-13"><a href="#cb6-13"></a><span class="co"># SVN</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> svn::https://github.com/hadley/stringr</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> svn::https://github.com/tidyverse/stringr</span></span>
 <span id="cb6-15"><a href="#cb6-15"></a></span>
 <span id="cb6-16"><a href="#cb6-16"></a><span class="co"># URL</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> url::https://github.com/hadley/stringr/archive/master.zip</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> url::https://github.com/tidyverse/stringr/archive/main.zip</span></span>
 <span id="cb6-18"><a href="#cb6-18"></a></span>
 <span id="cb6-19"><a href="#cb6-19"></a><span class="co"># Local</span></span>
 <span id="cb6-20"><a href="#cb6-20"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> local::/pkgs/testthat</span></span>
