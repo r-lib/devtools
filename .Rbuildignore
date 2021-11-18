@@ -17,3 +17,4 @@
 ^pkgdown$
 ^man-roxygen$
 ^LICENSE\.md$
+^MAINTENANCE\.md$
