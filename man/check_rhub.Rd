@@ -53,6 +53,7 @@ results. See more at \code{\link[rhub:validate_email]{rhub::validate_email()}}.
 
 \seealso{
 Other build functions: 
+\code{\link{check_mac_release}()},
 \code{\link{check_win}()}
 }
 \concept{build functions}

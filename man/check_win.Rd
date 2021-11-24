@@ -71,6 +71,7 @@ is also useful to check that your package is ok on windows.
 
 \seealso{
 Other build functions: 
+\code{\link{check_mac_release}()},
 \code{\link{check_rhub}()}
 }
 \concept{build functions}
