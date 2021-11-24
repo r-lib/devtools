@@ -262,10 +262,13 @@ part of CRAN submission.</p></td>
     </tr>
     <tr>
       <th>args</th>
-      <td><p>Character vector of arguments to pass to
-<code>R CMD check</code>. (Note that instead of the <code>--output</code> option you
-should use the <code>check_dir</code> argument, because  <code>--output</code> cannot
-deal with spaces and other special characters on Windows.</p></td>
+      <td><p>Character vector of arguments to pass to <code>R CMD check</code>. Pass each
+argument as a single element of this character vector (do not use spaces to
+delimit arguments like you would in the shell). For example, to skip
+running of examples and tests, use <code>args = c("--no-examples", "--no-tests")</code> and not <code>args = "--no-examples --no-tests"</code>. (Note that
+instead of the <code>--output</code> option you should use the <code>check_dir</code> argument,
+because  <code>--output</code> cannot deal with spaces and other special characters on
+Windows.)</p></td>
     </tr>
     <tr>
       <th>env_vars</th>
@@ -298,7 +301,8 @@ and the error is only thrown after completion. If <code>"never"</code>, then
 no errors are thrown. If <code>"error"</code>, then only <code>ERROR</code> failures
 generate errors. If <code>"warning"</code>, then <code>WARNING</code> failures generate
 errors as well. If <code>"note"</code>, then any check failure generated an
-error.</p></td>
+error. Its default can be modified with the <code>RCMDCHECK_ERROR_ON</code>
+environment variable. If that is not set, then <code>"never"</code> is used.</p></td>
     </tr>
     <tr>
       <th>path</th>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Run CRAN checks for package on R-hub — check_rhub • devtools</title>
+<title>Check macOS package — check_mac_release • devtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,13 +46,10 @@
 
 
 
-<meta property="og:title" content="Run CRAN checks for package on R-hub — check_rhub" />
-<meta property="og:description" content="It runs build() on the package, with the arguments specified
-in args, and then submits it to the R-hub builder at
-https://builder.r-hub.io. The interactive option controls
-whether the function waits for the check output. Regardless, after the
-check is complete, R-hub sends an email with the results to the package
-maintainer." />
+<meta property="og:title" content="Check macOS package — check_mac_release" />
+<meta property="og:description" content="This function works by bundling source package, and then uploading to
+https://mac.r-project.org/macbuilder/submit.html.  This function returns a
+link to the page with the check results." />
 <meta property="og:image" content="https://devtools.r-lib.org/logo.svg" />
 
 
@@ -163,26 +160,23 @@ maintainer." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Run CRAN checks for package on R-hub</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/r-hub.R'><code>R/r-hub.R</code></a></small>
-    <div class="hidden name"><code>check_rhub.Rd</code></div>
+    <h1>Check macOS package</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/devtools/blob/master/R/check-mac.R'><code>R/check-mac.R</code></a></small>
+    <div class="hidden name"><code>check_mac_release.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>It runs <code><a href='build.html'>build()</a></code> on the package, with the arguments specified
-in <code>args</code>, and then submits it to the R-hub builder at
-<a href='https://builder.r-hub.io'>https://builder.r-hub.io</a>. The <code>interactive</code> option controls
-whether the function waits for the check output. Regardless, after the
-check is complete, R-hub sends an email with the results to the package
-maintainer.</p>
+    <p>This function works by bundling source package, and then uploading to
+<a href='https://mac.r-project.org/macbuilder/submit.html'>https://mac.r-project.org/macbuilder/submit.html</a>.  This function returns a
+link to the page with the check results.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>check_rhub</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>check_mac_release</span><span class='op'>(</span>
   pkg <span class='op'>=</span> <span class='st'>"."</span>,
-  platforms <span class='op'>=</span> <span class='cn'>NULL</span>,
-  email <span class='op'>=</span> <span class='cn'>NULL</span>,
-  interactive <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  build_args <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dep_pkgs <span class='op'>=</span> <span class='st'>"."</span>,
+  args <span class='op'>=</span> <span class='cn'>NULL</span>,
+  manual <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  quiet <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -195,47 +189,37 @@ maintainer.</p>
 package object.  See <code><a href='as.package.html'>as.package()</a></code> for more information.</p></td>
     </tr>
     <tr>
-      <th>platforms</th>
-      <td><p>R-hub platforms to run the check on. If <code>NULL</code>
-uses default list of CRAN checkers (one for each major platform, and
-one with extra checks if you have compiled code). You can also specify
-your own, see <code><a href='https://r-hub.github.io/rhub/reference/platforms.html'>rhub::platforms()</a></code> for a complete list.</p></td>
+      <th>dep_pkgs</th>
+      <td><p>Additional custom dependencies to install prior to checking the package.</p></td>
     </tr>
     <tr>
-      <th>email</th>
-      <td><p>email address to notify, defaults to the maintainer
-address in the package.</p></td>
+      <th>args</th>
+      <td><p>An optional character vector of additional command
+line arguments to be passed to <code>R CMD build</code> if <code>binary = FALSE</code>,
+or <code>R CMD install</code> if <code>binary = TRUE</code>.</p></td>
     </tr>
     <tr>
-      <th>interactive</th>
-      <td><p>whether to show the status of the build
-interactively. R-hub will send an email to the package maintainer's
-email address, regardless of whether the check is interactive or not.</p></td>
+      <th>manual</th>
+      <td><p>For source packages: if <code>FALSE</code>, don't build PDF
+vignettes (<code>--no-build-vignettes</code>) or manual (<code>--no-manual</code>).</p></td>
     </tr>
     <tr>
-      <th>build_args</th>
-      <td><p>Arguments passed to <code>R CMD build</code></p></td>
+      <th>quiet</th>
+      <td><p>If <code>TRUE</code>, suppresses output.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>extra arguments, passed to <code><a href='https://r-hub.github.io/rhub/reference/check_for_cran.html'>rhub::check_for_cran()</a></code>.</p></td>
+      <td><p>Additional arguments passed to <code><a href='https://rdrr.io/pkg/pkgbuild/man/build.html'>pkgbuild::build()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <code>rhub_check</code> object.</p>
-    <h2 class="hasAnchor" id="about-email-validation-on-r-hub"><a class="anchor" href="#about-email-validation-on-r-hub"></a>About email validation on r-hub</h2>
-
-    
-
-<p>To build and check R packages on R-hub, you need to validate your
-email address. This is because R-hub sends out emails about build
-results. See more at <code><a href='https://r-hub.github.io/rhub/reference/validate_email.html'>rhub::validate_email()</a></code>.</p>
+    <p>The url with the check results (invisibly)</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other build functions: 
-<code><a href='check_mac_release.html'>check_mac_release</a>()</code>,
+<code><a href='check_rhub.html'>check_rhub</a>()</code>,
 <code><a href='check_win.html'>check_win</a>()</code></p></div>
 
   </div>
