@@ -1,6 +1,7 @@
 # devtools (development version)
 
 * New `check_mac_release()` function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (#2375)
+* Jenny Bryan is now the official maintainer.
 
 * `release()` and `submit_cran()` now record submission details using the Debian Control File format, for better machine-readability. This file has a new name, CRAN-SUBMISSION (instead of CRAN-RELEASE) and now includes package version, in addition to the full SHA and a timestamp.
 
