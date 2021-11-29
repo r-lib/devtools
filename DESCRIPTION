@@ -1,6 +1,6 @@
 Package: devtools
 Title: Tools to Make Developing R Packages Easier
-Version: 2.4.2.9000
+Version: 2.4.3
 Authors@R: 
     c(person(given = "Hadley",
              family = "Wickham",

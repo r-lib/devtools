@@ -1,4 +1,4 @@
-# devtools (development version)
+# devtools 2.4.3
 
 * New `check_mac_release()` function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (#2375)
 * Jenny Bryan is now the official maintainer.
