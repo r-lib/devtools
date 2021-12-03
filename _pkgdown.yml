@@ -10,6 +10,9 @@ template:
   params:
     ganalytics: UA-115082821-1
 
+development:
+  mode: auto
+
 reference:
   - title: Package Development
     desc: Primary commands used when developing a package.
