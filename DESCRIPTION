@@ -72,3 +72,4 @@ Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+Config/Needs/website: tidyverse/tidytemplate
