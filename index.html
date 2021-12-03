@@ -4,7 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Collection of package development tools.">
 <title>Tools to Make Developing R Packages Easier • devtools</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -12,12 +13,13 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="deps/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="deps/_Source%20Code%20Pro-0.4.0/font.css" rel="stylesheet">
+<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Tools to Make Developing R Packages Easier">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Tools to Make Developing R Packages Easier">
 <meta property="og:description" content="Collection of package development tools.">
 <meta property="og:image" content="https://devtools.r-lib.org/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -29,130 +31,106 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-115082821-1');
-</script>
+</script><script defer data-domain="devtools.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">devtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.3</span>
-      </span>
-    </div>
+<body>
+    <a href="#container" class="visually-hidden-focusable">Skip to content</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-none"><div class="container">
+    
+    <a class="navbar-brand me-2" href="index.html">devtools</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.4.3.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-2">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/dependencies.html">Devtools dependencies</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    News
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Releases</li>
-    <li>
-      <a href="https://www.tidyverse.org/articles/2019/09/devtools-2-2-1/">Version 2.2.1</a>
-    </li>
-    <li>
-      <a href="https://www.tidyverse.org/articles/2018/10/devtools-2-0-0/">Version 2.0.0</a>
-    </li>
-    <li class="divider">
-    <li>
-      <a href="news/index.html">Changelog</a>
-    </li>
-  </ul>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/r-lib/devtools/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/dependencies.html">Devtools dependencies</a>
   </div>
-<!--/.container -->
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-news">News</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-news">
+    <h6 class="dropdown-header" data-toc-skip>Releases</h6>
+    <a class="external-link dropdown-item" href="https://www.tidyverse.org/articles/2019/09/devtools-2-2-1/">Version 2.2.1</a>
+    <a class="external-link dropdown-item" href="https://www.tidyverse.org/articles/2018/10/devtools-2-0-0/">Version 2.0.0</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="news/index.html">Changelog</a>
+  </div>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/r-lib/devtools/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
-
-      </header><div class="row">
-  <div class="contents col-md-9">
-<div id="devtools-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#devtools-" class="anchor"></a>devtools <img src="reference/figures/logo.svg" align="right" height="150/">
-</h1></div>
+    
+  </div>
+</nav><div class="container template-home" id="container">
+<div class="row">
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header">
+<img src="logo.svg" class="logo" alt=""><h1 id="devtools-">devtools <a class="anchor" aria-label="anchor" href="#devtools-"></a>
+</h1>
+</div>
 <!-- badges: start -->
 
-<p>The aim of devtools is to make package development easier by providing R functions that simplify and expedite common tasks. <a href="https://r-pkgs.org/">R Packages</a> is a book based around this workflow.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<p>The aim of devtools is to make package development easier by providing R functions that simplify and expedite common tasks. <a href="https://r-pkgs.org/" class="external-link">R Packages</a> is a book based around this workflow.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Install devtools from CRAN</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
 
 <span class="co"># Or the development version from GitHub:</span>
 <span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"r-lib/devtools"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="cheatsheet" class="section level2">
-<h2 class="hasAnchor">
-<a href="#cheatsheet" class="anchor"></a>Cheatsheet</h2>
-<p><a href="https://rawgit.com/rstudio/cheatsheets/main/package-development.pdf"><img src="https://raw.githubusercontent.com/batpigandme/cheatsheets/1c942c36846559b3e8efbd40d023bc351aeed6ba/pngs/thumbnails/package-development-thumbs.png" height="252"></a></p>
+<div class="section level2">
+<h2 id="cheatsheet">Cheatsheet<a class="anchor" aria-label="anchor" href="#cheatsheet"></a>
+</h2>
+<p><a href="https://rawgit.com/rstudio/cheatsheets/main/package-development.pdf" class="external-link"><img src="https://raw.githubusercontent.com/batpigandme/cheatsheets/1c942c36846559b3e8efbd40d023bc351aeed6ba/pngs/thumbnails/package-development-thumbs.png" height="252"></a></p>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>All devtools functions accept a path as an argument, e.g. <code>load_all("path/to/mypkg")</code>. If you don’t specify a path, devtools will look in the current working directory - this is a recommended practice.</p>
-<div id="frequent-development-tasks" class="section level3">
-<h3 class="hasAnchor">
-<a href="#frequent-development-tasks" class="anchor"></a>Frequent development tasks:</h3>
+<div class="section level3">
+<h3 id="frequent-development-tasks">Frequent development tasks:<a class="anchor" aria-label="anchor" href="#frequent-development-tasks"></a>
+</h3>
 <ul>
 <li><p><code><a href="reference/load_all.html">load_all()</a></code> simulates installing and reloading your package, loading R code in <code>R/</code>, compiled shared objects in <code>src/</code> and data files in <code>data/</code>. During development you would usually want to access all functions (even un-exported internal ones) so <code><a href="reference/load_all.html">load_all()</a></code> works as if all functions were exported in the package <code>NAMESPACE</code>.</p></li>
 <li><p><code><a href="reference/document.html">document()</a></code> updates generated documentation in <code>man/</code>, file collation and <code>NAMESPACE</code>.</p></li>
 <li><p><code><a href="reference/test.html">test()</a></code> reloads your code with <code><a href="reference/load_all.html">load_all()</a></code>, then runs all <code>testthat</code> tests.</p></li>
-<li><p><code><a href="reference/test.html">test_coverage()</a></code> runs test coverage on your package with <a href="https://github.com/r-lib/covr">covr</a>. This makes it easy to see what parts of your package could use more tests!</p></li>
+<li><p><code><a href="reference/test.html">test_coverage()</a></code> runs test coverage on your package with <a href="https://github.com/r-lib/covr" class="external-link">covr</a>. This makes it easy to see what parts of your package could use more tests!</p></li>
 </ul>
 </div>
-<div id="building-and-installing" class="section level3">
-<h3 class="hasAnchor">
-<a href="#building-and-installing" class="anchor"></a>Building and installing:</h3>
+<div class="section level3">
+<h3 id="building-and-installing">Building and installing:<a class="anchor" aria-label="anchor" href="#building-and-installing"></a>
+</h3>
 <ul>
-<li><p><code><a href="reference/install.html">install()</a></code> reinstalls the package, detaches the currently loaded version then reloads the new version with <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>. Reloading a package is not guaranteed to work: see the documentation for <code><a href="https://rdrr.io/pkg/pkgload/man/unload.html">unload()</a></code> for caveats.</p></li>
+<li><p><code><a href="reference/install.html">install()</a></code> reinstalls the package, detaches the currently loaded version then reloads the new version with <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code>. Reloading a package is not guaranteed to work: see the documentation for <code><a href="https://rdrr.io/pkg/pkgload/man/unload.html" class="external-link">unload()</a></code> for caveats.</p></li>
 <li><p><code><a href="reference/build.html">build()</a></code> builds a package file from package sources. You can use it to build a binary version of your package.</p></li>
 <li>
 <p><code>install_*</code> functions install an R package:</p>
@@ -176,134 +154,141 @@
 <li><p><code><a href="reference/remote-reexports.html">update_packages()</a></code> updates a package to the latest version. This works both on packages installed from CRAN as well as those installed from any of the <code>install_*</code> functions.</p></li>
 </ul>
 </div>
-<div id="check-and-release" class="section level3">
-<h3 class="hasAnchor">
-<a href="#check-and-release" class="anchor"></a>Check and release:</h3>
+<div class="section level3">
+<h3 id="check-and-release">Check and release:<a class="anchor" aria-label="anchor" href="#check-and-release"></a>
+</h3>
 <ul>
-<li><p><code><a href="reference/check.html">check()</a></code> updates the documentation, then builds and checks the package locally. <code><a href="reference/check_win.html">check_win()</a></code> checks a package using <a href="https://win-builder.r-project.org/">win-builder</a>, and <code><a href="reference/check_rhub.html">check_rhub()</a></code> checks a package using <a href="https://log.r-hub.io/">r-hub</a>. This allows you to easily check your package on all systems CRAN uses before submission.</p></li>
+<li><p><code><a href="reference/check.html">check()</a></code> updates the documentation, then builds and checks the package locally. <code><a href="reference/check_win.html">check_win()</a></code> checks a package using <a href="https://win-builder.r-project.org/" class="external-link">win-builder</a>, and <code><a href="reference/check_rhub.html">check_rhub()</a></code> checks a package using <a href="https://log.r-hub.io/" class="external-link">r-hub</a>. This allows you to easily check your package on all systems CRAN uses before submission.</p></li>
 <li><p><code><a href="reference/release.html">release()</a></code> makes sure everything is ok with your package (including asking you a number of questions), then builds and uploads to CRAN.</p></li>
 </ul>
 </div>
 </div>
-<div id="learning-more" class="section level2">
-<h2 class="hasAnchor">
-<a href="#learning-more" class="anchor"></a>Learning more</h2>
+<div class="section level2">
+<h2 id="learning-more">Learning more<a class="anchor" aria-label="anchor" href="#learning-more"></a>
+</h2>
 <p>R package development can be intimidating, however there are now a number of valuable resources to help!</p>
-<p><a href="https://r-pkgs.org"><img src="http://r-pkgs.org/images/cover.png" height="252" align="right"></a></p>
-<ol>
+<p><a href="https://r-pkgs.org" class="external-link"><img src="http://r-pkgs.org/images/cover.png" height="252" align="right"></a></p>
+<ol style="list-style-type: decimal">
 <li>
 <p>R Packages is a book that gives a comprehensive treatment of all common parts of package development and uses devtools throughout.</p>
 <ul>
-<li>The first edition is available at <a href="https://r-pkgs.org/" class="uri">https://r-pkgs.org/</a>, but note that it has grown somewhat out of sync with the current version of devtools.</li>
-<li>A second edition is under development and is evolving to reflect the current state of devtools. It is available at <a href="https://r-pkgs.org" class="uri">https://r-pkgs.org</a>.</li>
-<li>The <a href="https://r-pkgs.org/whole-game.html">Whole Game</a> and <a href="https://r-pkgs.org/package-structure-state.html">Package structure</a> chapters make great places to start.</li>
+<li>The first edition is available at <a href="https://r-pkgs.org/" class="external-link uri">https://r-pkgs.org/</a>, but note that it has grown somewhat out of sync with the current version of devtools.</li>
+<li>A second edition is under development and is evolving to reflect the current state of devtools. It is available at <a href="https://r-pkgs.org" class="external-link uri">https://r-pkgs.org</a>.</li>
+<li>The <a href="https://r-pkgs.org/whole-game.html" class="external-link">Whole Game</a> and <a href="https://r-pkgs.org/package-structure-state.html" class="external-link">Package structure</a> chapters make great places to start.</li>
 </ul>
 </li>
-<li><p><a href="https://community.rstudio.com/c/package-development/11">RStudio community - package development</a> is a great place to ask specific questions related to package development.</p></li>
-<li><p><a href="https://devguide.ropensci.org/">rOpenSci packages</a> has extensive documentation on best practices for R packages looking to be contributed to rOpenSci, but also very useful general recommendations for package authors.</p></li>
+<li><p><a href="https://community.rstudio.com/c/package-development/11" class="external-link">RStudio community - package development</a> is a great place to ask specific questions related to package development.</p></li>
+<li><p><a href="https://devguide.ropensci.org/" class="external-link">rOpenSci packages</a> has extensive documentation on best practices for R packages looking to be contributed to rOpenSci, but also very useful general recommendations for package authors.</p></li>
 <li>
 <p>There are a number of fantastic blog posts on writing your first package, including</p>
 <ul>
-<li><a href="https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/">Writing an R package from scratch - Hilary Parker</a></li>
-<li><a href="https://masalmon.eu/2017/12/11/goodrpackages/">How to develop good R packages - Maëlle Salmon</a></li>
-<li><a href="https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html">Making your first R package - Fong Chun Chan</a></li>
-<li><a href="https://r-mageddon.netlify.app/post/writing-an-r-package-from-scratch/">Writing an R package from scratch - Tomas Westlake</a></li>
+<li><a href="https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/" class="external-link">Writing an R package from scratch - Hilary Parker</a></li>
+<li><a href="https://masalmon.eu/2017/12/11/goodrpackages/" class="external-link">How to develop good R packages - Maëlle Salmon</a></li>
+<li><a href="https://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html" class="external-link">Making your first R package - Fong Chun Chan</a></li>
+<li><a href="https://r-mageddon.netlify.app/post/writing-an-r-package-from-scratch/" class="external-link">Writing an R package from scratch - Tomas Westlake</a></li>
 </ul>
 </li>
-<li><p><a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html">Writing R Extensions</a> is the exhaustive, canonical reference for writing R packages, maintained by the R core developers.</p></li>
+<li><p><a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html" class="external-link">Writing R Extensions</a> is the exhaustive, canonical reference for writing R packages, maintained by the R core developers.</p></li>
 </ol>
 </div>
-<div id="conscious-uncoupling" class="section level2">
-<h2 class="hasAnchor">
-<a href="#conscious-uncoupling" class="anchor"></a>Conscious uncoupling</h2>
-<p>devtools started off as a lean-and-mean package to facilitate local package development, but over the years it accumulated more and more functionality. devtools has undergone a <a href="https://web.archive.org/web/20140326060230/https://www.goop.com/journal/be/conscious-uncoupling">conscious uncoupling</a> to split out functionality into smaller, more tightly focussed packages. This includes:</p>
+<div class="section level2">
+<h2 id="conscious-uncoupling">Conscious uncoupling<a class="anchor" aria-label="anchor" href="#conscious-uncoupling"></a>
+</h2>
+<p>devtools started off as a lean-and-mean package to facilitate local package development, but over the years it accumulated more and more functionality. devtools has undergone a <a href="https://web.archive.org/web/20140326060230/https://www.goop.com/journal/be/conscious-uncoupling" class="external-link">conscious uncoupling</a> to split out functionality into smaller, more tightly focussed packages. This includes:</p>
 <ul>
-<li><p><a href="https://github.com/r-lib/testthat">testthat</a>: Writing and running tests (i.e. <code><a href="reference/test.html">test()</a></code>).</p></li>
-<li><p><a href="https://github.com/r-lib/roxygen2">roxygen2</a>: Function and package documentation (i.e. <code><a href="reference/document.html">document()</a></code>).</p></li>
-<li><p><a href="https://github.com/r-lib/remotes">remotes</a>: Installing packages (i.e. <code><a href="reference/remote-reexports.html">install_github()</a></code>).</p></li>
-<li><p><a href="https://github.com/r-lib/pkgbuild">pkgbuild</a>: Building binary packages (including checking if build tools are available) (i.e. <code><a href="reference/build.html">build()</a></code>).</p></li>
-<li><p><a href="https://github.com/r-lib/pkgload">pkgload</a>: Simulating package loading (i.e. <code><a href="reference/load_all.html">load_all()</a></code>).</p></li>
-<li><p><a href="https://github.com/r-lib/rcmdcheck">rcmdcheck</a>: Running R CMD check and reporting the results (i.e. <code><a href="reference/check.html">check()</a></code>).</p></li>
-<li><p><a href="https://github.com/r-lib/revdepcheck">revdepcheck</a>: Running R CMD check on all reverse dependencies, and figuring out what’s changed since the last CRAN release (i.e. <code>revdep_check()</code>).</p></li>
-<li><p><a href="https://github.com/r-lib/sessioninfo">sessioninfo</a>: R session info (i.e. <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html">session_info()</a></code>).</p></li>
-<li><p><a href="https://github.com/r-lib/usethis">usethis</a>: Automating package setup (i.e. <code>use_test()</code>).</p></li>
+<li><p><a href="https://github.com/r-lib/testthat" class="external-link">testthat</a>: Writing and running tests (i.e. <code><a href="reference/test.html">test()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/roxygen2" class="external-link">roxygen2</a>: Function and package documentation (i.e. <code><a href="reference/document.html">document()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/remotes" class="external-link">remotes</a>: Installing packages (i.e. <code><a href="reference/remote-reexports.html">install_github()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/pkgbuild" class="external-link">pkgbuild</a>: Building binary packages (including checking if build tools are available) (i.e. <code><a href="reference/build.html">build()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/pkgload" class="external-link">pkgload</a>: Simulating package loading (i.e. <code><a href="reference/load_all.html">load_all()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/rcmdcheck" class="external-link">rcmdcheck</a>: Running R CMD check and reporting the results (i.e. <code><a href="reference/check.html">check()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/revdepcheck" class="external-link">revdepcheck</a>: Running R CMD check on all reverse dependencies, and figuring out what’s changed since the last CRAN release (i.e. <code>revdep_check()</code>).</p></li>
+<li><p><a href="https://github.com/r-lib/sessioninfo" class="external-link">sessioninfo</a>: R session info (i.e. <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">session_info()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/usethis" class="external-link">usethis</a>: Automating package setup (i.e. <code>use_test()</code>).</p></li>
 </ul>
 <p>Generally, you would not need to worry about these different packages, because devtools installs all of them automatically. You will need to care, however, if you’re filing a bug because reporting it at the correct place will lead to a speedier resolution.</p>
-<p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html">sessioninfo::session_info()</a></code> rather than <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
-<p>However for day to day development we recommend you continue to use <code><a href="https://devtools.r-lib.org/">library(devtools)</a></code> to quickly load all needed development tools, just like <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code> quickly loads all the tools necessary for data exploration and visualization.</p>
+<p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">sessioninfo::session_info()</a></code> rather than <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
+<p>However for day to day development we recommend you continue to use <code><a href="https://devtools.r-lib.org/">library(devtools)</a></code> to quickly load all needed development tools, just like <code><a href="https://tidyverse.tidyverse.org" class="external-link">library(tidyverse)</a></code> quickly loads all the tools necessary for data exploration and visualization.</p>
 </div>
-<div id="code-of-conduct" class="section level2">
-<h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of conduct</h2>
-<p>Please note that the devtools project is released with a <a href="https://github.com/r-lib/devtools/blob/main/.github/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<div class="section level2">
+<h2 id="code-of-conduct">Code of conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h2>
+<p>Please note that the devtools project is released with a <a href="https://github.com/r-lib/devtools/blob/main/.github/CODE_OF_CONDUCT.md" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="links">
-<h2>Links</h2>
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=devtools">https://​cloud.r-project.org/​package=devtools</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/r-lib/devtools/">https://​github.com/​r-lib/​devtools/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/r-lib/devtools/issues">https://​github.com/​r-lib/​devtools/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=devtools" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/r-lib/devtools/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/r-lib/devtools/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing devtools</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="http://hadley.nz">Hadley Wickham</a> <br><small class="roles"> Author </small>  </li>
-<li>Jim Hester <br><small class="roles"> Author </small>  </li>
-<li>Winston Chang <br><small class="roles"> Author </small>  </li>
-<li>Jennifer Bryan <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6983-2759" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="http://hadley.nz" class="external-link">Hadley Wickham</a> <br><small class="roles"> Author </small>  </li>
 <li>
-<a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a> <br><small class="roles"> Copyright holder, funder </small>  </li>
+<a href="https://www.jimhester.com/" class="external-link">Jim Hester</a> <br><small class="roles"> Author </small>  </li>
+<li>
+<a href="https://github.com/wch" class="external-link">Winston Chang</a> <br><small class="roles"> Author </small>  </li>
+<li>
+<a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6983-2759" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a> <br><small class="roles"> Copyright holder, funder </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/r-lib/devtools/actions"><img src="https://github.com/r-lib/devtools/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/r-lib/devtools?branch=main"><img src="https://codecov.io/gh/r-lib/devtools/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://cran.r-project.org/package=devtools"><img src="https://www.r-pkg.org/badges/version/devtools" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://github.com/r-lib/devtools/actions" class="external-link"><img src="https://github.com/r-lib/devtools/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/r-lib/devtools?branch=main" class="external-link"><img src="https://codecov.io/gh/r-lib/devtools/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://cran.r-project.org/package=devtools" class="external-link"><img src="https://www.r-pkg.org/badges/version/devtools" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>
-</div>
-</div>
 
-
-      <footer><div class="copyright">
-  <p>Developed by <a href="http://hadley.nz">Hadley Wickham</a>, Jim Hester, Winston Chang, Jennifer Bryan, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>.</p>
+  </aside>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+
+   </div>
+  <footer><div class="container">
+  <div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://www.jimhester.com/" class="external-link">Jim Hester</a>, <a href="https://github.com/wch" class="external-link">Winston Chang</a>, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
 </div>
 
-      </footer>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
-  
-
-
-  </body>
+  </div></footer>
+</body>
 </html>
