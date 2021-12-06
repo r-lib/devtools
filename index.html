@@ -41,7 +41,7 @@
     
     <a class="navbar-brand me-2" href="index.html">devtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.4.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -203,11 +203,11 @@
 <li><p><a href="https://github.com/r-lib/pkgload" class="external-link">pkgload</a>: Simulating package loading (i.e. <code><a href="reference/load_all.html">load_all()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/rcmdcheck" class="external-link">rcmdcheck</a>: Running R CMD check and reporting the results (i.e. <code><a href="reference/check.html">check()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/revdepcheck" class="external-link">revdepcheck</a>: Running R CMD check on all reverse dependencies, and figuring out what’s changed since the last CRAN release (i.e. <code>revdep_check()</code>).</p></li>
-<li><p><a href="https://github.com/r-lib/sessioninfo" class="external-link">sessioninfo</a>: R session info (i.e. <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html" class="external-link">session_info()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/sessioninfo" class="external-link">sessioninfo</a>: R session info (i.e. <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">session_info()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/usethis" class="external-link">usethis</a>: Automating package setup (i.e. <code>use_test()</code>).</p></li>
 </ul>
 <p>Generally, you would not need to worry about these different packages, because devtools installs all of them automatically. You will need to care, however, if you’re filing a bug because reporting it at the correct place will lead to a speedier resolution.</p>
-<p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html" class="external-link">sessioninfo::session_info()</a></code> rather than <code><a href="https://rdrr.io/pkg/sessioninfo/man/session_info.html" class="external-link">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
+<p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">sessioninfo::session_info()</a></code> rather than <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
 <p>However for day to day development we recommend you continue to use <code><a href="https://devtools.r-lib.org/">library(devtools)</a></code> to quickly load all needed development tools, just like <code><a href="https://tidyverse.tidyverse.org" class="external-link">library(tidyverse)</a></code> quickly loads all the tools necessary for data exploration and visualization.</p>
 </div>
 <div class="section level2">
@@ -255,7 +255,8 @@
 <a href="http://hadley.nz" class="external-link">Hadley Wickham</a> <br><small class="roles"> Author </small>  </li>
 <li>
 <a href="https://www.jimhester.com/" class="external-link">Jim Hester</a> <br><small class="roles"> Author </small>  </li>
-<li>Winston Chang <br><small class="roles"> Author </small>  </li>
+<li>
+<a href="https://github.com/wch" class="external-link">Winston Chang</a> <br><small class="roles"> Author </small>  </li>
 <li>
 <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6983-2759" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>
@@ -280,7 +281,7 @@
   <footer><div class="container">
   <div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://www.jimhester.com/" class="external-link">Jim Hester</a>, Winston Chang, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
+<p>Developed by <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://www.jimhester.com/" class="external-link">Jim Hester</a>, <a href="https://github.com/wch" class="external-link">Winston Chang</a>, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

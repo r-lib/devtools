@@ -41,7 +41,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">devtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.4.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,13 +87,12 @@
     
   </div>
 </nav><div class="container template-article" id="container">
-
-<div class="row">
+<script src="dependencies_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Devtools dependencies</h1>
                         <h4 data-toc-skip class="author">Jim Hester, Hadley Wickham</h4>
             
-            <h4 data-toc-skip class="date">2021-12-03</h4>
+            <h4 data-toc-skip class="date">2021-12-06</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-lib/devtools/blob/HEAD/vignettes/dependencies.Rmd" class="external-link"><code>vignettes/dependencies.Rmd</code></a></small>
       <div class="d-none name"><code>dependencies.Rmd</code></div>
@@ -128,41 +127,41 @@ Remotes:
 <h3 id="github">GitHub<a class="anchor" aria-label="anchor" href="#github"></a>
 </h3>
 <p>Because GitHub is the most commonly used unofficial package distribution in R, it’s the default:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> hadley/testthat</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> hadley/testthat</span></span></code></pre></div>
 <p>You can also specify a specific hash, tag, or pull request (using the same syntax as <code><a href="../reference/remote-reexports.html">install_github()</a></code> if you want a particular commit. Otherwise the latest commit on the HEAD of the branch is used.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> hadley/httr@v0.4,</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  klutometis/roxygen</span><span class="co">#142,</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  hadley/testthat@c67018fa4970</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> hadley/httr@v0.4,</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="at">  klutometis/roxygen</span><span class="co">#142,</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="at">  hadley/testthat@c67018fa4970</span></span></code></pre></div>
 <p>A type of <code>github</code> can be specified, but is not required</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> github::hadley/ggplot2</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> github::hadley/ggplot2</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="other-sources">Other sources<a class="anchor" aria-label="anchor" href="#other-sources"></a>
 </h3>
 <p>All of the currently supported install sources are available, see the ‘See Also’ section in <code><a href="../reference/install.html">?install</a></code> for a complete list.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GitLab</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> gitlab::jimhester/covr</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Git</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> git::git@bitbucket.org:djnavarro/lsr.git</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Bitbucket</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> bitbucket::sulab/mygene.r@default, djnavarro/lsr</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Bioconductor</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> bioc::3.3/SummarizedExperiment</span><span class="co">#117513, bioc::release/Biobase</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># SVN</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> svn::https://github.com/tidyverse/stringr</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># URL</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> url::https://github.com/tidyverse/stringr/archive/main.zip</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Local</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> local::/pkgs/testthat</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Gitorious</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> gitorious::r-mpc-package/r-mpc-package</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># GitLab</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> gitlab::jimhester/covr</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Git</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> git::git@bitbucket.org:djnavarro/lsr.git</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># Bitbucket</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> bitbucket::sulab/mygene.r@default, djnavarro/lsr</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># Bioconductor</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> bioc::3.3/SummarizedExperiment</span><span class="co">#117513, bioc::release/Biobase</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># SVN</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> svn::https://github.com/tidyverse/stringr</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co"># URL</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> url::https://github.com/tidyverse/stringr/archive/main.zip</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co"># Local</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> local::/pkgs/testthat</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co"># Gitorious</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> gitorious::r-mpc-package/r-mpc-package</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="cran-submission">CRAN submission<a class="anchor" aria-label="anchor" href="#cran-submission"></a>
@@ -180,7 +179,7 @@ Remotes:
   <footer><div class="container">
   <div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://www.jimhester.com/" class="external-link">Jim Hester</a>, Winston Chang, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
+<p>Developed by <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://www.jimhester.com/" class="external-link">Jim Hester</a>, <a href="https://github.com/wch" class="external-link">Winston Chang</a>, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
