@@ -12,7 +12,7 @@
 #' @family build functions
 #' @return The url with the check results (invisibly)
 #' @export
-check_mac_release <- function(pkg = ".", dep_pkgs = ".", args = NULL, manual = TRUE, quiet = FALSE, ...) {
+check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, manual = TRUE, quiet = FALSE, ...) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   pkg <- as.package(pkg)

@@ -56,6 +56,8 @@ below and \code{\link[pkgload:load_code]{load_code()}} for more details.
 and connects the generated DLL into R. See \code{pkgload::compile_dll()}
 for more details.
 
+\item Loads any compiled translations in \code{inst/po}.
+
 \item Runs \code{.onAttach()}, \code{.onLoad()} and \code{.onUnload()}
 functions at the correct times.
 

@@ -6,7 +6,7 @@
 \usage{
 check_mac_release(
   pkg = ".",
-  dep_pkgs = ".",
+  dep_pkgs = character(),
   args = NULL,
   manual = TRUE,
   quiet = FALSE,
