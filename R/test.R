@@ -30,7 +30,7 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
       }
     } else {
       cli::cli_alert_danger("No testing infrastructure found.")
-      ui_todo('Setup testing with {ui_code("usethis::use_testthat()")}')
+      ui_todo('Setup testing with {ui_code("usethis::use_testthat()")}.')
     }
     return(invisible())
   }
