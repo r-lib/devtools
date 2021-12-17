@@ -6,7 +6,7 @@
 NULL
 
 usethis_use_testthat <- function(pkg) {
-  usethis::local_project(pkg$path, quiet = TRUE)
+  usethis::local_project(pkg$path, quiet = FALSE)
   usethis::use_testthat()
 }
 
