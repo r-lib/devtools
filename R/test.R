@@ -22,11 +22,16 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
   save_all()
   pkg <- as.package(pkg)
 
-  if (!uses_testthat(pkg) && interactive()) {
-    cli::cli_alert_danger("No testing infrastructure found. Create it?")
-    if (utils::menu(c("Yes", "No")) == 1) {
-      usethis_use_testthat(pkg)
+  if (!uses_testthat(pkg)) {
+    cli::cli_alert_danger("No testing infrastructure found.")
+    if (!interactive()) {
+      ui_todo('Setup testing with {ui_code("usethis::use_testthat()")}.')
+      return(invisible())
     }
+    if (yesno("Create it?")) {
+      return(invisible())
+    }
+    usethis_use_testthat(pkg)
     return(invisible())
   }
 
