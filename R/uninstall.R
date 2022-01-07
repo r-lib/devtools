@@ -1,6 +1,6 @@
 #' Uninstall a local development package.
 #'
-#' Uses `remove.package` to uninstall the package.
+#' Uses `remove.packages` to uninstall the package.
 #' To uninstall a package from a non-default library,
 #' use [withr::with_libpaths()].
 #'

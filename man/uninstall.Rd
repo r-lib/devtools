@@ -20,7 +20,7 @@ package prior to uninstalling.}
     \code{\link{.libPaths}()}.}
 }
 \description{
-Uses \code{remove.package} to uninstall the package.
+Uses \code{remove.packages} to uninstall the package.
 To uninstall a package from a non-default library,
 use \code{\link[withr:with_libpaths]{withr::with_libpaths()}}.
 }
