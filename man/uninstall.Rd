@@ -2,7 +2,7 @@
 % Please edit documentation in R/uninstall.R
 \name{uninstall}
 \alias{uninstall}
-\title{Uninstall a local development package.}
+\title{Uninstall a local development package}
 \usage{
 uninstall(pkg = ".", unload = TRUE, quiet = FALSE, lib = .libPaths()[[1]])
 }
@@ -10,8 +10,8 @@ uninstall(pkg = ".", unload = TRUE, quiet = FALSE, lib = .libPaths()[[1]])
 \item{pkg}{The package to use, can be a file path to the package or a
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
-\item{unload}{if \code{TRUE} (the default), will automatically unload the
-package prior to uninstalling.}
+\item{unload}{if \code{TRUE} (the default), ensures the package is unloaded, prior
+to uninstalling.}
 
 \item{quiet}{If \code{TRUE}, suppress output.}
 
@@ -20,13 +20,11 @@ package prior to uninstalling.}
     \code{\link{.libPaths}()}.}
 }
 \description{
-Uses \code{remove.packages} to uninstall the package.
-To uninstall a package from a non-default library,
-use \code{\link[withr:with_libpaths]{withr::with_libpaths()}}.
+Uses \code{remove.packages()} to uninstall the package. To uninstall a package
+from a non-default library, use in combination with \code{\link[withr:with_libpaths]{withr::with_libpaths()}}.
 }
 \seealso{
-\code{\link[=with_debug]{with_debug()}} to install packages with debugging flags
-set.
+\code{\link[=with_debug]{with_debug()}} to install packages with debugging flags set.
 
 Other package installation: 
 \code{\link{install}()}
