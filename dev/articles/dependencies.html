@@ -49,7 +49,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -88,12 +88,15 @@
     
   </div>
 </nav><div class="container template-article" id="container">
+
+
+
 <script src="dependencies_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Devtools dependencies</h1>
                         <h4 data-toc-skip class="author">Jim Hester, Hadley Wickham</h4>
             
-            <h4 data-toc-skip class="date">2022-01-07</h4>
+            <h4 data-toc-skip class="date">2022-01-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-lib/devtools/blob/HEAD/vignettes/dependencies.Rmd" class="external-link"><code>vignettes/dependencies.Rmd</code></a></small>
       <div class="d-none name"><code>dependencies.Rmd</code></div>
@@ -101,9 +104,9 @@
 
     
     
-<div class="section level1">
-<h1 id="package-remotes">Package remotes<a class="anchor" aria-label="anchor" href="#package-remotes"></a>
-</h1>
+<div class="section level2">
+<h2 id="package-remotes">Package remotes<a class="anchor" aria-label="anchor" href="#package-remotes"></a>
+</h2>
 <p>Devtools version 1.9 supports package dependency installation for packages not yet in a standard package repository such as <a href="https://cran.r-project.org" class="external-link">CRAN</a> or <a href="http://bioconductor.org" class="external-link">Bioconductor</a>.</p>
 <p>You can mark any regular dependency defined in the <code>Depends</code>, <code>Imports</code>, <code>Suggests</code> or <code>Enhances</code> fields as being installed from a remote location by adding the remote location to <code>Remotes</code> in your <code>DESCRIPTION</code> file. This will cause devtools to download and install them prior to installing your package (so they won’t be installed from CRAN).</p>
 <p>The remote dependencies specified in <code>Remotes</code> should be described in the following form.</p>
@@ -124,9 +127,9 @@ Imports:
     rlang
 Remotes:  
     r-lib/rlang</code></pre>
-<div class="section level3">
-<h3 id="github">GitHub<a class="anchor" aria-label="anchor" href="#github"></a>
-</h3>
+<div class="section level4">
+<h4 id="github">GitHub<a class="anchor" aria-label="anchor" href="#github"></a>
+</h4>
 <p>Because GitHub is the most commonly used unofficial package distribution in R, it’s the default:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> hadley/testthat</span></span></code></pre></div>
 <p>You can also specify a specific hash, tag, or pull request (using the same syntax as <code><a href="../reference/remote-reexports.html">install_github()</a></code> if you want a particular commit. Otherwise the latest commit on the HEAD of the branch is used.</p>
@@ -136,9 +139,9 @@ Remotes:
 <p>A type of <code>github</code> can be specified, but is not required</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> github::hadley/ggplot2</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="other-sources">Other sources<a class="anchor" aria-label="anchor" href="#other-sources"></a>
-</h3>
+<div class="section level4">
+<h4 id="other-sources">Other sources<a class="anchor" aria-label="anchor" href="#other-sources"></a>
+</h4>
 <p>All of the currently supported install sources are available, see the ‘See Also’ section in <code><a href="../reference/install.html">?install</a></code> for a complete list.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># GitLab</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> gitlab::jimhester/covr</span></span>
@@ -164,9 +167,9 @@ Remotes:
 <span id="cb6-22"><a href="#cb6-22"></a><span class="co"># Gitorious</span></span>
 <span id="cb6-23"><a href="#cb6-23"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> gitorious::r-mpc-package/r-mpc-package</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="cran-submission">CRAN submission<a class="anchor" aria-label="anchor" href="#cran-submission"></a>
-</h3>
+<div class="section level4">
+<h4 id="cran-submission">CRAN submission<a class="anchor" aria-label="anchor" href="#cran-submission"></a>
+</h4>
 <p>When you submit your package to CRAN, all of its dependencies must also be available on CRAN. For this reason, <code><a href="../reference/release.html">release()</a></code> will warn you if you try to release a package with a <code>Remotes</code> field.</p>
 </div>
 </div>
@@ -185,7 +188,7 @@ Remotes:
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
   </div></footer>
