@@ -169,8 +169,8 @@ can_document <- function(pkg) {
 #'   `FALSE` (the default), check will proceed even if all suggested
 #'   packages aren't found.
 #' @param run_dont_test Sets `--run-donttest` so that tests surrounded in
-#'   `\dontest{}` are also tested. When `cran = TRUE`, this only affects
-#'   R 3.6 and earlier; in R 4.0.0 code in `\dontest{}` is always run as
+#'   `\donttest{}` are also tested. When `cran = TRUE`, this only affects
+#'   R 3.6 and earlier; in R 4.0.0 code in `\donttest{}` is always run as
 #'   part of CRAN submission.
 #' @param manual If `FALSE`, don't build and check manual
 #'   (`--no-manual`).
