@@ -18,7 +18,7 @@ check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]),
   }
 
   url <- sprintf(
-    "https://www.rstudio.org/links/check_for_update?version=%s&os=%s&format=%s",
+    "https://www.rstudio.org/links/check_for_update?version=%s&os=%s&format=%s&manual=true",
     utils::URLencode(version, reserved = TRUE), os, "kvp"
   )
 
