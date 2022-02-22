@@ -2,13 +2,17 @@
 #' @importFrom memoise memoise
 NULL
 
-check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]), version = rstudioapi::getVersion(), in_rstudio = rstudioapi::isAvailable()) {
-
+check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]),
+                                      version = rstudioapi::versionInfo()$long_version,
+                                      in_rstudio = rstudioapi::isAvailable()) {
   if (!in_rstudio) {
     return()
   }
 
-  url <- sprintf("https://www.rstudio.org/links/check_for_update?version=%s&os=%s&format=%s", version, os, "kvp")
+  url <- sprintf(
+    "https://www.rstudio.org/links/check_for_update?version=%s&os=%s&format=%s",
+    utils::URLencode(version, reserved = TRUE), os, "kvp"
+  )
 
   tmp <- file_temp()
   on.exit(file_delete(tmp))
