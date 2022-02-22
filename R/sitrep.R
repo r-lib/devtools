@@ -2,8 +2,16 @@
 #' @importFrom memoise memoise
 NULL
 
+rstudio_version_string <- function() {
+  if (!rstudioapi::isAvailable()) {
+    return(character())
+  }
+  rvi <- rstudioapi::versionInfo()
+  rvi$long_version %||% as.character(rvi$version)
+}
+
 check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]),
-                                      version = rstudioapi::versionInfo()$long_version,
+                                      version = rstudio_version_string(),
                                       in_rstudio = rstudioapi::isAvailable()) {
   if (!in_rstudio) {
     return()
