@@ -15,8 +15,18 @@ check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]),
   )
 
   tmp <- file_temp()
-  on.exit(file_delete(tmp))
-  utils::download.file(url, tmp, quiet = TRUE)
+  withr::defer(file_exists(tmp) && nzchar(file_delete(tmp)))
+  suppressWarnings(
+    download_ok <- tryCatch({
+      utils::download.file(url, tmp, quiet = TRUE)
+      TRUE
+    }, error = function(e) FALSE)
+  )
+  if (!download_ok) {
+    # I'll take silent failure here over dev_sitrep() falling over completely
+    # if this download fails
+    return()
+  }
   result <- readLines(tmp, warn = FALSE)
 
   result <- strsplit(result, "&")[[1]]
