@@ -1,6 +1,13 @@
 # check_for_rstudio_updates
 
     Code
+      writeLines(check_for_rstudio_updates("windows", "haha-no-wut", TRUE))
+    Output
+      Unable to check for RStudio updates (you're using haha-no-wut).
+
+---
+
+    Code
       writeLines(check_for_rstudio_updates("darwin", "0.0.1", TRUE))
     Output
       RStudio {VERSION} is now available (you're using 0.0.1).

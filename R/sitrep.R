@@ -31,9 +31,9 @@ check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]),
     }, error = function(e) FALSE)
   )
   if (!download_ok) {
-    # I'll take silent failure here over dev_sitrep() falling over completely
-    # if this download fails
-    return()
+    return(
+      sprintf("Unable to check for RStudio updates (you're using %s).", version)
+    )
   }
   result <- readLines(tmp, warn = FALSE)
 

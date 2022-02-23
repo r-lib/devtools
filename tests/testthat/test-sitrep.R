@@ -12,11 +12,18 @@ test_that("check_for_rstudio_updates", {
   # returns nothing if the version is ahead of the current version
   expect_null(check_for_rstudio_updates("windows", "2030.12.0+123", TRUE))
 
-  # returns something if the version is behind the current version
+  # returns something if ...
   local_edition(3)
   scrub_current_version <- function(message) {
     sub("(?<=^RStudio )[0-9\\.\\+]+", "{VERSION}", message, perl = TRUE)
   }
+
+  # version is not understood by the service
+  expect_snapshot(
+    writeLines(check_for_rstudio_updates("windows", "haha-no-wut", TRUE))
+  )
+
+  # version is behind the current version
 
   # truly ancient
   expect_snapshot(
@@ -34,13 +41,13 @@ test_that("check_for_rstudio_updates", {
   # YYYY.MM.<patch>[-(daily|preview)]+<build number>[.pro<pro suffix>]
   # YYY.MM is th expected date of release for dailies and previews
 
-  # a superceded preview
+  # an out-of-date preview
   expect_snapshot(
     writeLines(check_for_rstudio_updates("darwin", "2021.09.1+372", TRUE)),
     transform = scrub_current_version
   )
 
-  # a superceded daily
+  # an out-of-date daily
   expect_snapshot(
     writeLines(check_for_rstudio_updates("windows", "2021.09.0-daily+328", TRUE)),
     transform = scrub_current_version
