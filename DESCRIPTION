@@ -62,7 +62,7 @@ Suggests:
     MASS,
     mockery (>= 0.4.2),
     pingr (>= 2.0.1),
-    pkgdown (>= 1.6.1),
+    pkgdown (>= 2.0.0),
     rhub (>= 1.1.1),
     rmarkdown (>= 2.7),
     spelling (>= 2.2)
