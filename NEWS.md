@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `dev_sitrep()` has been updated for the calendar-based version number scheme adopted by the RStudio IDE in September 2021 (#2397, #2410).
+
 # devtools 2.4.3
 
 * New `check_mac_release()` function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (#2375)

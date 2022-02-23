@@ -2,17 +2,39 @@
 #' @importFrom memoise memoise
 NULL
 
-check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]), version = rstudioapi::getVersion(), in_rstudio = rstudioapi::isAvailable()) {
+rstudio_version_string <- function() {
+  if (!rstudioapi::isAvailable()) {
+    return(character())
+  }
+  rvi <- rstudioapi::versionInfo()
+  rvi$long_version %||% as.character(rvi$version)
+}
 
+check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]),
+                                      version = rstudio_version_string(),
+                                      in_rstudio = rstudioapi::isAvailable()) {
   if (!in_rstudio) {
     return()
   }
 
-  url <- sprintf("https://www.rstudio.org/links/check_for_update?version=%s&os=%s&format=%s", version, os, "kvp")
+  url <- sprintf(
+    "https://www.rstudio.org/links/check_for_update?version=%s&os=%s&format=%s&manual=true",
+    utils::URLencode(version, reserved = TRUE), os, "kvp"
+  )
 
   tmp <- file_temp()
-  on.exit(file_delete(tmp))
-  utils::download.file(url, tmp, quiet = TRUE)
+  withr::defer(file_exists(tmp) && nzchar(file_delete(tmp)))
+  suppressWarnings(
+    download_ok <- tryCatch({
+      utils::download.file(url, tmp, quiet = TRUE)
+      TRUE
+    }, error = function(e) FALSE)
+  )
+  if (!download_ok) {
+    return(
+      sprintf("Unable to check for RStudio updates (you're using %s).", version)
+    )
+  }
   result <- readLines(tmp, warn = FALSE)
 
   result <- strsplit(result, "&")[[1]]
