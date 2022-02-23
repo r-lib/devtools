@@ -65,7 +65,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="devtools-development-version">devtools (development version)<a class="anchor" aria-label="anchor" href="#devtools-development-version"></a></h2>
-</div>
+<ul><li>
+<code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> has been updated for the calendar-based version number scheme adopted by the RStudio IDE in September 2021 (<a href="https://github.com/r-lib/devtools/issues/2397" class="external-link">#2397</a>, <a href="https://github.com/r-lib/devtools/issues/2410" class="external-link">#2410</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.4.3" id="devtools-243">devtools 2.4.3<a class="anchor" aria-label="anchor" href="#devtools-243"></a></h2><p class="text-muted">CRAN release: 2021-11-30</p>
 <ul><li><p>New <code><a href="../reference/check_mac_release.html">check_mac_release()</a></code> function to check a package using the macOS builder at <a href="https://mac.r-project.org/macbuilder/submit.html" class="external-link uri">https://mac.r-project.org/macbuilder/submit.html</a> (<a href="https://github.com/r-lib/devtools/issues/2375" class="external-link">#2375</a>)</p></li>
@@ -762,7 +764,7 @@
 <li><p><code>install_deps(TRUE)</code> now includes packages listed in <code>VignetteBuilder</code> (<a href="https://github.com/r-lib/devtools/issues/396" class="external-link">#396</a>)</p></li>
 <li><p><code><a href="../reference/build.html">build()</a></code> no longer checks for <code>pdflatex</code> when building vignettes, as many modern vignettes don’t need it (<a href="https://github.com/r-lib/devtools/issues/398" class="external-link">#398</a>). It also uses <code>--no-build-vignettes</code> for &gt;3.0.0 compatibility (<a href="https://github.com/r-lib/devtools/issues/391" class="external-link">#391</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> does a better job of opening your email client if you’re inside of RStudio (<a href="https://github.com/r-lib/devtools/issues/433" class="external-link">#433</a>).</p></li>
-<li><p><code><a href="../reference/check.html">check()</a></code> now correctly reports the location of the <code>R CMD check</code> output when called with a custom <code>check_dir</code>. (Thanks to <a href="https://github.com/brentonk" class="external-link">@brentonk</a>)</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now correctly reports the location of the <code>R CMD   check</code> output when called with a custom <code>check_dir</code>. (Thanks to <a href="https://github.com/brentonk" class="external-link">@brentonk</a>)</p></li>
 <li><p><code>check_cran()</code> records check times for each package tested.</p></li>
 <li><p>Improved default <code>DESCRIPTION</code> file created by <code>create_description()</code>. (Thanks to <a href="https://github.com/ncarchedi" class="external-link">@ncarchedi</a>, <a href="https://github.com/r-lib/devtools/issues/428" class="external-link">#428</a>)</p></li>
 <li><p>Fixed bug in <code><a href="../reference/remote-reexports.html">install_github()</a></code> that prevented installing a pull request by supplying <code>repo = "username/repo#pull"</code>. (<a href="https://github.com/r-lib/devtools/issues/388" class="external-link">#388</a>)</p></li>
