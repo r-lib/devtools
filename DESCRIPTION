@@ -17,14 +17,11 @@ Depends:
     R (>= 3.0.2),
     usethis (>= 2.1.5)
 Imports: 
-    callr (>= 3.7.0),
     cli (>= 3.2.0),
     desc (>= 1.4.0),
     DT (>= 0.21),
     ellipsis (>= 0.3.2),
     fs (>= 1.5.2),
-    httr (>= 1.4.2),
-    lifecycle (>= 1.0.1),
     memoise (>= 2.0.1),
     miniUI (>= 0.1.1.1),
     pkgbuild (>= 1.3.1),
@@ -35,7 +32,6 @@ Imports:
     remotes (>= 2.4.2),
     rlang (>= 1.0.1),
     roxygen2 (>= 7.1.2),
-    rstudioapi (>= 0.13),
     rversions (>= 2.1.1),
     sessioninfo (>= 1.2.2),
     stats,
@@ -46,19 +42,23 @@ Imports:
     withr (>= 2.4.3)
 Suggests: 
     BiocManager (>= 1.30.16),
+    callr (>= 3.7.0),
     covr (>= 3.5.1),
     curl (>= 4.3.2),
     digest (>= 0.6.29),
     foghorn (>= 1.4.2),
     gh (>= 1.3.0),
     gmailr (>= 1.0.1),
+    httr (>= 1.4.2),
     knitr (>= 1.37),
+    lifecycle (>= 1.0.1),
     lintr (>= 2.0.1),
     MASS,
     mockery (>= 0.4.3),
     pingr (>= 2.0.1),
     rhub (>= 1.1.1),
     rmarkdown (>= 2.11),
+    rstudioapi (>= 0.13),
     spelling (>= 2.2)
 VignetteBuilder: 
     knitr
