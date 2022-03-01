@@ -1,23 +1,14 @@
 Package: devtools
 Title: Tools to Make Developing R Packages Easier
 Version: 2.4.3.9000
-Authors@R: 
-    c(person(given = "Hadley",
-             family = "Wickham",
-             role = "aut"),
-      person(given = "Jim",
-             family = "Hester",
-             role = "aut"),
-      person(given = "Winston",
-             family = "Chang",
-             role = "aut"),
-      person(given = "Jennifer",
-             family = "Bryan",
-             role = c("aut", "cre"),
-             email = "jenny@rstudio.com",
-             comment = c(ORCID = "0000-0002-6983-2759")),
-      person(given = "RStudio",
-             role = c("cph", "fnd")))
+Authors@R: c(
+    person("Hadley", "Wickham", role = "aut"),
+    person("Jim", "Hester", role = "aut"),
+    person("Winston", "Chang", role = "aut"),
+    person("Jennifer", "Bryan", , "jenny@rstudio.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-6983-2759")),
+    person("RStudio", role = c("cph", "fnd"))
+  )
 Description: Collection of package development tools.
 License: MIT + file LICENSE
 URL: https://devtools.r-lib.org/, https://github.com/r-lib/devtools
@@ -68,8 +59,8 @@ Suggests:
     spelling (>= 2.2)
 VignetteBuilder: 
     knitr
+Config/Needs/website: tidyverse/tidytemplate
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Config/Needs/website: tidyverse/tidytemplate
