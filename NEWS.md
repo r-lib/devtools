@@ -1,5 +1,9 @@
 # devtools (development version)
 
+* Installing devtools now installs pkgdown, profvis, bench, miniUI, DT, 
+  and urlchecker, ensuring that you have everything needed for package
+  development (#2388).
+
 * `dev_sitrep()` has been updated for the calendar-based version number scheme adopted by the RStudio IDE in September 2021 (#2397, #2410).
 
 # devtools 2.4.3

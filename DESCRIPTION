@@ -1,75 +1,69 @@
 Package: devtools
 Title: Tools to Make Developing R Packages Easier
 Version: 2.4.3.9000
-Authors@R: 
-    c(person(given = "Hadley",
-             family = "Wickham",
-             role = "aut"),
-      person(given = "Jim",
-             family = "Hester",
-             role = "aut"),
-      person(given = "Winston",
-             family = "Chang",
-             role = "aut"),
-      person(given = "Jennifer",
-             family = "Bryan",
-             role = c("aut", "cre"),
-             email = "jenny@rstudio.com",
-             comment = c(ORCID = "0000-0002-6983-2759")),
-      person(given = "RStudio",
-             role = c("cph", "fnd")))
+Authors@R: c(
+    person("Hadley", "Wickham", role = "aut"),
+    person("Jim", "Hester", role = "aut"),
+    person("Winston", "Chang", role = "aut"),
+    person("Jennifer", "Bryan", , "jenny@rstudio.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-6983-2759")),
+    person("RStudio", role = c("cph", "fnd"))
+  )
 Description: Collection of package development tools.
 License: MIT + file LICENSE
 URL: https://devtools.r-lib.org/, https://github.com/r-lib/devtools
 BugReports: https://github.com/r-lib/devtools/issues
 Depends: 
     R (>= 3.0.2),
-    usethis (>= 2.0.1)
+    usethis (>= 2.1.5)
 Imports: 
-    callr (>= 3.6.0),
-    cli (>= 3.0.0),
-    desc (>= 1.3.0),
-    ellipsis (>= 0.3.1),
-    fs (>= 1.5.0),
-    httr (>= 1.4.2),
-    lifecycle (>= 1.0.0),
-    memoise (>= 2.0.0),
-    pkgbuild (>= 1.2.0),
-    pkgload (>= 1.2.1),
-    rcmdcheck (>= 1.3.3),
-    remotes (>= 2.3.0),
-    rlang (>= 0.4.10),
-    roxygen2 (>= 7.1.1),
-    rstudioapi (>= 0.13),
-    rversions (>= 2.0.2),
-    sessioninfo (>= 1.1.1),
+    cli (>= 3.2.0),
+    desc (>= 1.4.0),
+    DT (>= 0.21),
+    ellipsis (>= 0.3.2),
+    fs (>= 1.5.2),
+    memoise (>= 2.0.1),
+    miniUI (>= 0.1.1.1),
+    pkgbuild (>= 1.3.1),
+    pkgdown (>= 2.0.2),
+    pkgload (>= 1.2.4),
+    profvis (>= 0.3.7),
+    rcmdcheck (>= 1.4.0),
+    remotes (>= 2.4.2),
+    rlang (>= 1.0.1),
+    roxygen2 (>= 7.1.2),
+    rversions (>= 2.1.1),
+    sessioninfo (>= 1.2.2),
     stats,
-    testthat (>= 3.0.2),
+    testthat (>= 3.1.2),
     tools,
+    urlchecker (>= 1.0.1),
     utils,
-    withr (>= 2.4.1)
+    withr (>= 2.4.3)
 Suggests: 
-    BiocManager (>= 1.30.12),
+    BiocManager (>= 1.30.16),
+    callr (>= 3.7.0),
     covr (>= 3.5.1),
-    curl (>= 4.3),
-    digest (>= 0.6.27),
-    DT (>= 0.17),
-    foghorn (>= 1.3.2),
-    gh (>= 1.2.1),
-    gmailr (>= 1.0.0),
-    knitr (>= 1.31),
+    curl (>= 4.3.2),
+    digest (>= 0.6.29),
+    foghorn (>= 1.4.2),
+    gh (>= 1.3.0),
+    gmailr (>= 1.0.1),
+    httr (>= 1.4.2),
+    knitr (>= 1.37),
+    lifecycle (>= 1.0.1),
     lintr (>= 2.0.1),
     MASS,
-    mockery (>= 0.4.2),
+    mockery (>= 0.4.3),
     pingr (>= 2.0.1),
-    pkgdown (>= 2.0.0),
     rhub (>= 1.1.1),
-    rmarkdown (>= 2.7),
+    rmarkdown (>= 2.11),
+    rstudioapi (>= 0.13),
     spelling (>= 2.2)
 VignetteBuilder: 
     knitr
+Config/Needs/website: tidyverse/tidytemplate
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Config/Needs/website: tidyverse/tidytemplate
