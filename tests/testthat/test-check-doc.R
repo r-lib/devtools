@@ -3,7 +3,7 @@ test_that("check_man works", {
   # and recommended packages will all be in the library path, which is not the
   # case during R CMD check, so we only run these tests interactively
 
-  skip_if(!interactive())
+  skip_if_not(interactive())
 
   pkg <- create_local_package()
   dir.create(file.path(pkg, "man"))
