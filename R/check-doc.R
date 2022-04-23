@@ -7,7 +7,7 @@
 #'
 #' @template devtools
 #' @return Nothing. This function is called purely for it's side effects: if
-#   no errors there will be no output.
+#' no errors there will be no output.
 #' @export
 #' @examples
 #' \dontrun{
