@@ -12,6 +12,7 @@ package object.  See \code{\link[=as.package]{as.package()}} for more informatio
 }
 \value{
 Nothing. This function is called purely for it's side effects: if
+no errors there will be no output.
 }
 \description{
 This function attempts to run the documentation related checks in the
