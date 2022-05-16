@@ -25,10 +25,7 @@ the parent directory of the package.}
 \item{binary}{Produce a binary (\code{--binary}) or source (
 \code{--no-manual --no-resave-data}) version of the package.}
 
-\item{vignettes}{For source packages: if \code{FALSE}, don't build PDF
-vignettes (\code{--no-build-vignettes}) or manual (\code{--no-manual}).}
-
-\item{manual}{For source packages: if \code{FALSE}, don't build PDF
+\item{vignettes, manual}{For source packages: if \code{FALSE}, don't build PDF
 vignettes (\code{--no-build-vignettes}) or manual (\code{--no-manual}).}
 
 \item{args}{An optional character vector of additional command

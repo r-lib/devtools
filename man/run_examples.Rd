@@ -41,9 +41,7 @@ won't work.}
 \item{document}{if \code{TRUE}, \code{\link[=document]{document()}} will be run to ensure
 examples are updated before running them.}
 
-\item{run}{Deprecated, see \code{run_dontrun} and \code{run_donttest} above.}
-
-\item{test}{Deprecated, see \code{run_dontrun} and \code{run_donttest} above.}
+\item{run, test}{Deprecated, see \code{run_dontrun} and \code{run_donttest} above.}
 }
 \description{
 One of the most frustrating parts of \verb{R CMD check} is getting all of your
