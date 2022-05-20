@@ -243,5 +243,4 @@ aspell_env_var <- function() {
 show_env_vars <- function(env_vars) {
   cli::cat_line("Setting env vars:", col = "darkgrey")
   cat_bullet(paste0(format(names(env_vars)), ": ", unname(env_vars)), col = "darkgrey")
-  cli::cat_line()
 }
