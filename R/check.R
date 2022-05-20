@@ -90,6 +90,9 @@ check <- function(pkg = ".",
       cat_rule("Documenting", col = "cyan", line = 2)
     }
     document(pkg, quiet = quiet)
+    if (!quiet) {
+      cli::cat_line()
+    }
   }
 
   if (!quiet) {
