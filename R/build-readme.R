@@ -58,11 +58,10 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
   readme_path <- path_abs(dir_ls(pkg$path, ignore.case = TRUE, regexp = "(inst/)?readme[.]rmd", recurse = 1, type = "file"))
 
   if (length(readme_path) == 0) {
-    rlang::abort("Can't find a 'README.Rmd' or 'inst/README.Rmd' file.")
+    cli::cli_abort("Can't find {.file README.Rmd} or {.file inst/README.Rmd}.")
   }
-
   if (length(readme_path) > 1) {
-    rlang::abort("Can't have both a 'README.Rmd' and 'inst/README.Rmd' file.")
+    cli::cli_abort("Can't have both {.file README.Rmd} and {.file inst/README.Rmd}.")
   }
 
   build_rmd(readme_path, path = path, quiet = quiet, ...)
