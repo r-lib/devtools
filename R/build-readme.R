@@ -28,9 +28,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
     cli::cli_abort("Can't find file{?s}: {.path {files[!ok]}}.")
   }
 
-  cli::cli_alert_info("Installing {.pkg {pkg$package}} in temporary library")
-  withr::local_temp_libpaths()
-  install(pkg, upgrade = "never", reload = FALSE, quick = TRUE, quiet = quiet)
+  local_install(pkg, quiet = TRUE)
 
   # Ensure rendering github_document() doesn't generate HTML file
   output_options$html_preview <- FALSE
