@@ -1,6 +1,6 @@
-find_active_file <- function(arg = "file") {
-  if (!rstudioapi::isAvailable()) {
-    stop("Argument `", arg, "` is missing, with no default", call. = FALSE)
+find_active_file <- function(arg = "file", call = parent.frame()) {
+  if (!is_rstudio_running()) {
+    cli::cli_abort("Argument {.arg {arg}} is missing, with no default", call = call)
   }
   normalizePath(rstudioapi::getSourceEditorContext()$path)
 }

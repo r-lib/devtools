@@ -1,3 +1,7 @@
+test_that("find_active_file() gives useful error if no RStudio", {
+  expect_snapshot(find_active_file(), error = TRUE)
+})
+
 test_that("fails if can't find tests", {
   expect_snapshot(error = TRUE, {
     find_test_file("R/foo.blah")

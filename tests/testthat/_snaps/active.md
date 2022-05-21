@@ -1,3 +1,11 @@
+# find_active_file() gives useful error if no RStudio
+
+    Code
+      find_active_file()
+    Condition
+      Error:
+      ! Argument `file` is missing, with no default
+
 # fails if can't find tests
 
     Code
