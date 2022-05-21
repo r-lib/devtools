@@ -16,7 +16,7 @@ expect_passes_args <- function(fn, stub, input_args = list(), expected_args) {
   mck <- mockery::mock(NULL)
   mockery::stub(fn, stub, mck)
 
-  suppressMessages(do.call(fn, input_args))
+  capture.output(suppressMessages(do.call(fn, input_args)))
 
   mockery::expect_called(mck, 1)
   mock_args <- mockery::mock_args(mck)[[1]]
