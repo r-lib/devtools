@@ -6,7 +6,9 @@ create_local_package <- function() {
   dir <- file_temp()
 
   withr::defer(envir = parent.frame(), {
-    proj_set(old_project, force = TRUE)
+    usethis::ui_silence({
+      proj_set(old_project, force = TRUE)
+    })
     setwd(old_wd)
     dir_delete(dir)
   })
