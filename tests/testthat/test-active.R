@@ -1,6 +1,8 @@
 test_that("fails if can't find tests", {
-  expect_error(find_test_file("DESCRIPTION"), "find tests")
-  expect_error(find_test_file("R/foo.R"), "No test files found")
+  expect_snapshot(error = TRUE, {
+    find_test_file("R/foo.blah")
+    find_test_file("R/foo.R")
+  })
 })
 
 test_that("can determine file type", {

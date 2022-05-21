@@ -5,13 +5,14 @@ find_active_file <- function(arg = "file") {
   normalizePath(rstudioapi::getSourceEditorContext()$path)
 }
 
-find_test_file <- function(path) {
+find_test_file <- function(path, call = parent.frame()) {
   type <- test_file_type(path)
   if (any(is.na(type))) {
-    rlang::abort(c(
-      "Don't know how to find tests associated with the active file:",
-      path[is.na(type)]
-    ))
+    file <- path_file(path[is.na(type)])
+    cli::cli_abort(
+      "Don't know how to find tests associated with the active file {.file {file}}",
+      call = call
+    )
   }
 
   is_test <- type == "test"
@@ -19,7 +20,7 @@ find_test_file <- function(path) {
   path <- unique(path[file_exists(path)])
 
   if (length(path) == 0) {
-    rlang::abort("No test files found")
+    cli::cli_abort("No test files found", call = call)
   }
   path
 }
