@@ -42,6 +42,8 @@ package object.  See \code{\link[=as.package]{as.package()}} for more informatio
 line arguments to be passed to \verb{R CMD build} if \code{binary = FALSE},
 or \verb{R CMD install} if \code{binary = TRUE}.}
 
+\item{manual}{Should the manual be built?}
+
 \item{email}{An alternative email to use, default \code{NULL} uses the package
 Maintainer's email.}
 

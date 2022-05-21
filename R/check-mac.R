@@ -5,10 +5,8 @@
 #' link to the page with the check results.
 #'
 #' @template devtools
-#' @inheritParams pkgbuild::build
+#' @inheritParams check_win
 #' @param dep_pkgs Additional custom dependencies to install prior to checking the package.
-#' @param quiet If `TRUE`, suppresses output.
-#' @param ... Additional arguments passed to [pkgbuild::build()].
 #' @family build functions
 #' @return The url with the check results (invisibly)
 #' @export
