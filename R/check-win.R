@@ -61,7 +61,7 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
     file_copy(desc_file, backup)
     on.exit(file_move(backup, desc_file), add = TRUE)
 
-    change_maintainer_email(desc_file, email)
+    change_maintainer_email(desc_file, email, call = parent.frame())
 
     pkg <- as.package(pkg$path)
   }
@@ -104,24 +104,31 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   invisible()
 }
 
-change_maintainer_email <- function(desc, email) {
-  desc <- desc::desc(file = desc)
+change_maintainer_email <- function(path, email, call = parent.frame()) {
+  desc <- desc::desc(file = path)
 
   if (!desc$has_fields("Authors@R")) {
-    stop("DESCRIPTION must use `Authors@R` field to change the maintainer email", call. = FALSE)
+    cli::cli_abort(
+      "DESCRIPTION must use {.field Authors@R} field when changing {.arg email}",
+      call = call
+    )
   }
+  if (desc$has_fields("Maintainer")) {
+    cli::cli_abort(
+      "DESCRIPTION can't use {.field Mainainter} field when changing {.arg email}",
+      call = call
+    )
+  }
+
   aut <- desc$get_authors()
   roles <- aut$role
   ## Broken person() API, vector for 1 author, list otherwise...
-  if (!is.list(roles)) roles <- list(roles)
+  if (!is.list(roles)) {
+    roles <- list(roles)
+  }
   is_maintainer <- vapply(roles, function(r) all("cre" %in% r), logical(1))
   aut[is_maintainer]$email <- email
-
   desc$set_authors(aut)
-  ## Check if the email is actually changed before we actually send the email
-  if(!grepl(email, desc$get_maintainer())){
-    stop("Changing maintainer email failed. Possible reason is using both Authors@R and Maintainer fields in the DESCRIPTION file.", call. = FALSE)
-  }
 
   desc$write()
 }
