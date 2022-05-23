@@ -2,7 +2,7 @@ library(mockery)
 
 local({
 
-pkg <- create_local_package()
+pkg <- fs::path_real(local_package_create())
 
 path2char <- function(x) {
   if (inherits(x, "fs_path")) {
