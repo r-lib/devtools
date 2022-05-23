@@ -79,10 +79,7 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
         cran_mirror(), "/web/checks/check_results_",
         pkg$package, ".html"
       )
-      if (yesno(
-        "Have you fixed all existing problems at \n", cran_url,
-        end_sentence
-      )) {
+      if (yesno("Have you fixed all existing problems at \n{cran_url}{end_sentence}")) {
         return(invisible())
       }
     }
@@ -149,56 +146,16 @@ find_release_questions <- function(pkg = ".") {
   }
 }
 
-yesno <- function(...) {
+yesno <- function(msg, .envir = parent.frame()) {
   yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "Of course", "Absolutely")
   nos <- c("No way", "Not yet", "I forget", "No", "Nope", "Uhhhh... Maybe?")
 
-  cat(paste0(..., collapse = ""))
+  cli::cli_inform(msg, .envir = .envir)
   qs <- c(sample(yeses, 1), sample(nos, 2))
   rand <- sample(length(qs))
 
   utils::menu(qs[rand]) != which(rand == 1)
 }
-
-# https://tools.ietf.org/html/rfc2368
-email <- function(address, subject, body) {
-  url <- paste(
-    "mailto:",
-    utils::URLencode(address),
-    "?subject=", utils::URLencode(subject),
-    "&body=", utils::URLencode(body),
-    sep = ""
-  )
-
-  tryCatch({
-    utils::browseURL(url, browser = email_browser())
-  },
-  error = function(e) {
-    cli::cli_alert_danger("Sending failed with error: {e$message}")
-    cat("To: ", address, "\n", sep = "")
-    cat("Subject: ", subject, "\n", sep = "")
-    cat("\n")
-    cat(body, "\n", sep = "")
-  }
-  )
-
-  invisible(TRUE)
-}
-
-email_browser <- function() {
-  if (!identical(.Platform$GUI, "RStudio")) {
-    return(getOption("browser"))
-  }
-
-  # Use default browser, even if RStudio running
-  if (.Platform$OS.type == "windows") {
-    return(NULL)
-  }
-
-  browser <- Sys.which(c("xdg-open", "open"))
-  browser[nchar(browser) > 0][[1]]
-}
-
 
 maintainer <- function(pkg = ".") {
   pkg <- as.package(pkg)
@@ -214,7 +171,7 @@ maintainer <- function(pkg = ".") {
   } else {
     maintainer <- pkg$maintainer
     if (is.null(maintainer)) {
-      stop("No maintainer defined in package.", call. = FALSE)
+      cli::cli_abort("No maintainer defined in package.")
     }
     maintainer <- utils::as.person(maintainer)
   }
@@ -225,15 +182,18 @@ maintainer <- function(pkg = ".") {
   )
 }
 
-cran_comments <- function(pkg = ".") {
+cran_comments <- function(pkg = ".", call = parent.frame()) {
   pkg <- as.package(pkg)
 
   path <- path(pkg$path, "cran-comments.md")
   if (!file_exists(path)) {
-    warning("Can't find cran-comments.md.\n",
-      "This file gives CRAN volunteers comments about the submission,\n",
-      "Create it with use_cran_comments().\n",
-      call. = FALSE
+    cli::cli_warn(
+      c(
+        x = "Can't find {.file cran-comments.md}.",
+        i = "This file is used to communicate your release process to the CRAN team.",
+        i = "Create it with {.code use_cran_comments()}."
+      ),
+      call = call
     )
     return(character())
   }
@@ -257,14 +217,23 @@ cran_submission_url <- "https://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #' @export
 #' @keywords internal
 submit_cran <- function(pkg = ".", args = NULL) {
-  if (yesno("Is your email address ", maintainer(pkg)$email, "?")) {
+  if (yesno("Is your email address {maintainer(pkg)$email}?")) {
     return(invisible())
   }
 
   pkg <- as.package(pkg)
-  built_path <- build_cran(pkg, args = args)
 
-  if (yesno("Ready to submit ", pkg$package, " (", pkg$version, ") to CRAN?")) {
+  built_path <- pkgbuild::build(pkg$path, tempdir(), manual = TRUE, args = args)
+
+  size <- format(as.object_size(file_info(built_path)$size), units = "auto")
+  cli::cat_rule("Submitting", col = "cyan")
+  cli::cli_inform(c(
+    "i" = "Path {.file {built_path}}",
+    "i" = "File size: {size}"
+  ))
+  cli::cat_line()
+
+  if (yesno("Ready to submit {pkg$package} ({pkg$version}) to CRAN?")) {
     return(invisible())
   }
 
@@ -273,15 +242,6 @@ submit_cran <- function(pkg = ".", args = NULL) {
   usethis::with_project(pkg$path,
     flag_release(pkg)
   )
-}
-
-build_cran <- function(pkg, args) {
-  cli::cli_alert_info("Building")
-  built_path <- pkgbuild::build(pkg$path, tempdir(), manual = TRUE, args = args)
-  cli::cli_alert_info("Submitting file: {built_path}")
-  size <- format(as.object_size(file_info(built_path)$size), units = "auto")
-  cli::cli_alert_info("File size: {size}")
-  built_path
 }
 
 extract_cran_msg <- function(msg) {
@@ -300,13 +260,13 @@ extract_cran_msg <- function(msg) {
   msg
 }
 
-upload_cran <- function(pkg, built_path) {
+upload_cran <- function(pkg, built_path, call = parent.frame()) {
   pkg <- as.package(pkg)
   maint <- maintainer(pkg)
-  comments <- cran_comments(pkg)
+  comments <- cran_comments(pkg, call = call)
 
   # Initial upload ---------
-  cli::cli_alert_info("Uploading package & comments")
+  cli::cli_inform(c(i = "Uploading package & comments"))
   body <- list(
     pkg_id = "",
     name = maint$name,
@@ -324,14 +284,20 @@ upload_cran <- function(pkg, built_path) {
       r2 <- httr::GET(sub("index2", "index", cran_submission_url))
       msg <- extract_cran_msg(httr::content(r2, "text"))
     })
-    stop("Submission failed:", msg, call. = FALSE)
+    cli::cli_abort(
+      c(
+        "*" = "Submission failed",
+        "x" = msg
+      ),
+      call = call
+    )
   }
 
   httr::stop_for_status(r)
   new_url <- httr::parse_url(r$url)
 
   # Confirmation -----------
-  cli::cli_alert_info("Confirming submission")
+  cli::cli_inform(c(i = "Confirming submission"))
   body <- list(
     pkg_id = new_url$query$pkg_id,
     name = maint$name,
@@ -343,10 +309,12 @@ upload_cran <- function(pkg, built_path) {
   httr::stop_for_status(r)
   new_url <- httr::parse_url(r$url)
   if (new_url$query$submit == "1") {
-    cli::cli_alert_success("Package submission successful")
-    cli::cli_alert_info("Check your email for confirmation link.")
+    cli::cli_inform(c(
+      "v" = "Package submission successful",
+      "i" = "Check your email for confirmation link."
+    ))
   } else {
-    stop("Package failed to upload.", call. = FALSE)
+    cli::cli_abort("Package failed to upload.", call = call)
   }
 
   invisible(TRUE)
@@ -360,7 +328,7 @@ flag_release <- function(pkg = ".") {
     return(invisible())
   }
 
-  cli::cli_alert_warning("Don't forget to tag this release once accepted by CRAN")
+  cli::cli_inform(c("!" = "Don't forget to tag this release once accepted by CRAN"))
 
   withr::with_dir(pkg$path, {
     sha <- system2("git", c("rev-parse", "HEAD"), stdout = TRUE)
