@@ -20,7 +20,7 @@
 # create argument is deprecated
 
     Code
-      x <- as.package(".", create = TRUE)
+      x <- as.package(path, create = TRUE)
     Condition
       Warning:
       The `create` argument of `as.package()` is deprecated as of devtools 2.5.0.

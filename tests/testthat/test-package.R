@@ -7,5 +7,6 @@ test_that("package_file() gives useful errors", {
 })
 
 test_that("create argument is deprecated", {
-  expect_snapshot(x <- as.package(".", create = TRUE))
+  path <- create_local_package()
+  expect_snapshot(x <- as.package(path, create = TRUE))
 })
