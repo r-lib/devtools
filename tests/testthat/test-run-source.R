@@ -63,7 +63,8 @@ test_that("error if file doesn't exist or no files", {
 })
 
 test_that("check_sha1() checks or reports sha1 as needed", {
-  path <- withr::local_tempfile(lines = "abc")
+  path <- withr::local_tempfile()
+  writeBin("abc\n", path)
 
   expect_snapshot(error = TRUE, {
     check_sha1(path, NULL)

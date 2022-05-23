@@ -37,7 +37,7 @@
     Code
       check_sha1(path, NULL)
     Message
-      i SHA-1 hash of file is "03cfd743661f07975fa2f1220c5194cbaff48451"
+      i SHA-1 hash of file is "9f7efafc467018e11a7efc4bb7089ff0e5bff371"
     Code
       check_sha1(path, "f")
     Condition
@@ -47,5 +47,5 @@
       check_sha1(path, "ffffff")
     Condition
       Error in `check_sha1()`:
-      ! `sha1` ("ffffff") doesn't match SHA-1 hash of downloaded file ("03cfd7")
+      ! `sha1` ("ffffff") doesn't match SHA-1 hash of downloaded file ("9f7efa")
 
