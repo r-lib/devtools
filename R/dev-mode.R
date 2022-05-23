@@ -32,7 +32,7 @@ dev_mode <- local({
         dir_create(path)
       }
       if (!file_exists(path)) {
-        stop("Failed to create ", path, call. = FALSE)
+        cli::cli_abort("Failed to create {.path {path}}")
       }
 
       if (!is_library(path)) {

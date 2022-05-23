@@ -12,7 +12,7 @@ build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
   save_all()
 
   if (!file_exists(pkg)) {
-    stop("`pkg` must exist", call. = FALSE)
+    cli::cli_abort("{.arg pkg} must exist")
   }
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
