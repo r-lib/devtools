@@ -69,13 +69,13 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   version <- match.arg(version, several.ok = TRUE)
 
   if (!quiet) {
-    cli::cli_alert_info(
+    cli::cli_inform(c(
       "Building windows version of {.pkg {pkg$package}} ({pkg$version})",
-      " for {paste(version, collapse = ', ')} with win-builder.r-project.org."
-    )
+      i = "Using {paste(version, collapse = ', ')} with win-builder.r-project.org."
+    ))
 
-    email <- cli::style_bold(maintainer(pkg)$email)
-    if (interactive() && yesno("Email results to {email}?")) {
+    email <- maintainer(pkg)$email
+    if (interactive() && yesno("Email results to {.strong {email}}?")) {
       return(invisible())
     }
   }
@@ -96,9 +96,10 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
     time <- strftime(Sys.time() + 30 * 60, "%I:%M %p")
     email <- maintainer(pkg)$email
 
-    cli::cli_alert_success(
-      "[{Sys.Date()}] Check <{.email {email}}> for a link to results in 15-30 mins (~{time})."
-    )
+    cli::cat_rule(col = "cyan")
+    cli::cli_inform(c(
+      i = "Check <{.email {email}}> for the results in 15-30 mins (~{time})."
+    ))
   }
 
   invisible()

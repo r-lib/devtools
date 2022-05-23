@@ -12,6 +12,6 @@ wd <- function(pkg = ".", path = "") {
     cli::cli_abort("{.path {path} does not exist")
   }
 
-  cli::cli_alert_info("Changing working directory to {.path {path}}")
+  cli::cli_inform(c(i = "Changing working directory to {.path {path}}"))
   setwd(path)
 }

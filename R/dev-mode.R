@@ -42,7 +42,7 @@ dev_mode <- local({
         )
       }
 
-      cli::cli_alert_success("Dev mode: ON")
+      cli::cli_inform(c(v = "Dev mode: ON"))
       options(dev_path = path)
 
       if (is.null(.prompt)) .prompt <<- getOption("prompt")
@@ -50,7 +50,7 @@ dev_mode <- local({
 
       .libPaths(c(path, lib_paths))
     } else {
-      cli::cli_alert_success("Dev mode: OFF")
+      cli::cli_inform(c(v = "Dev mode: OFF"))
       options(dev_path = NULL)
 
       if (!is.null(.prompt)) options(prompt = .prompt)

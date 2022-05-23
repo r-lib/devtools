@@ -28,7 +28,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
     cli::cli_abort("Can't find file{?s}: {.path {files[!ok]}}.")
   }
 
-  cli::cli_alert_info("Installing {.pkg {pkg$package}} in temporary library")
+  cli::cli_inform(c(i = "Installing {.pkg {pkg$package}} in temporary library"))
   withr::local_temp_libpaths()
   install(pkg, upgrade = "never", reload = FALSE, quick = TRUE, quiet = quiet)
 
@@ -37,7 +37,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
 
 
   for (path in paths) {
-    cli::cli_alert_info("Building {.path {path}}")
+    cli::cli_inform(c(i = "Building {.path {path}}"))
     callr::r_safe(
       function(...) rmarkdown::render(...),
       args = list(input = path, ..., output_options = output_options, quiet = quiet),
