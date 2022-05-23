@@ -2,7 +2,6 @@
 name: Feature request
 about: Suggest an idea for devtools
 title: ''
-labels: feature
 assignees: ''
 
 ---

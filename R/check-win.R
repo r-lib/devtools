@@ -9,6 +9,7 @@
 #'
 #' @template devtools
 #' @inheritParams pkgbuild::build
+#' @param manual Should the manual be built?
 #' @param email An alternative email to use, default `NULL` uses the package
 #'   Maintainer's email.
 #' @param quiet If `TRUE`, suppresses output.
