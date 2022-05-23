@@ -1,7 +1,6 @@
 test_that("gist containing single file works unambiguously", {
   skip_if_offline()
   skip_on_cran()
-  withr::local_envvar(list("GITHUB_PAT" = asNamespace("remotes")$github_pat()))
 
   a <- 10
   source_gist(
@@ -16,7 +15,6 @@ test_that("gist containing single file works unambiguously", {
 test_that("gist with multiple files uses first with warning", {
   skip_if_offline()
   skip_on_cran()
-  withr::local_envvar(list("GITHUB_PAT" = asNamespace("remotes")$github_pat()))
 
   a <- 10
   expect_snapshot(
@@ -36,7 +34,6 @@ test_that("errors with bad id", {
 test_that("can specify filename", {
   skip_if_offline()
   skip_on_cran()
-  withr::local_envvar(list("GITHUB_PAT" = asNamespace("remotes")$github_pat()))
 
   b <- 10
   source_gist(
@@ -52,7 +49,6 @@ test_that("can specify filename", {
 test_that("error if file doesn't exist or no files", {
   skip_if_offline()
   skip_on_cran()
-  withr::local_envvar(list("GITHUB_PAT" = asNamespace("remotes")$github_pat()))
 
   expect_snapshot(error = TRUE, {
     find_gist("605a984e764f9ed358556b4ce48cbd08", 1)
