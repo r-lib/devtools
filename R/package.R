@@ -41,6 +41,7 @@ package_file <- function(..., path = ".") {
     cli::cli_abort("{.path {path}} is not a directory.")
   }
 
+  base_path <- path
   path <- strip_slashes(path_real(path))
 
   # Walk up to root directory
@@ -49,8 +50,8 @@ package_file <- function(..., path = ".") {
 
     if (is_root(path)) {
       cli::cli_abort(c(
-        "Could not find package root",
-        i = "Is your working directory inside a package?"
+        "Could not find package root.",
+        i = "Is {.path {base_path}} inside a package?"
       ))
     }
   }

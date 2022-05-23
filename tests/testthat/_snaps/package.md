@@ -14,8 +14,8 @@
       package_file(path = "/")
     Condition
       Error in `package_file()`:
-      ! Could not find package root
-      i Is your working directory inside a package?
+      ! Could not find package root.
+      i Is '/' inside a package?
 
 # create argument is deprecated
 
