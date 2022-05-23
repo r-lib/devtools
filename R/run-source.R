@@ -39,29 +39,31 @@ source_url <- function(url, ..., sha1 = NULL) {
   httr::stop_for_status(request)
   writeBin(httr::content(request, type = "raw"), temp_file)
 
-  file_sha1 <- digest::digest(file = temp_file, algo = "sha1")
+  check_sha1(temp_file, sha1)
+
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  source(temp_file, ...)
+}
+
+check_sha1 <- function(path, sha1) {
+  file_sha1 <- digest::digest(file = path, algo = "sha1")
 
   if (is.null(sha1)) {
-    cli::cli_alert_info("SHA-1 hash of file is {file_sha1}")
+    cli::cli_inform(c(i = "SHA-1 hash of file is {.str {file_sha1}}"))
   } else {
     if (nchar(sha1) < 6) {
-      stop("Supplied SHA-1 hash is too short (must be at least 6 characters)")
+      cli::cli_abort("{.arg sha1} must be at least 6 characters, not {nchar(sha1)}.")
     }
 
     # Truncate file_sha1 to length of sha1
     file_sha1 <- substr(file_sha1, 1, nchar(sha1))
 
     if (!identical(file_sha1, sha1)) {
-      stop("SHA-1 hash of downloaded file (", file_sha1,
-        ")\n  does not match expected value (", sha1, ")",
-        call. = FALSE
+      cli::cli_abort(
+        "{.arg sha1} ({.str {sha1}}) doesn't match SHA-1 hash of downloaded file ({.str {file_sha1}})"
       )
     }
   }
-
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
-
-  source(temp_file, ...)
 }
 
 #' Run a script on gist
@@ -119,36 +121,40 @@ source_gist <- function(id, ..., filename = NULL, sha1 = NULL, quiet = FALSE) {
     # 1654919 or "1654919"
     url <- find_gist(id, filename)
   } else {
-    stop("Unknown id: ", id)
+    cli::cli_abort("Invalid gist id specification {.str {id}}")
   }
 
-  if (!quiet) cli::cli_alert_info("Sourcing {url}")
+  if (!quiet) {
+    cli::cli_inform(c(i = "Sourcing gist {.str {id}}"))
+  }
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
-
   source_url(url, ..., sha1 = sha1)
 }
 
-find_gist <- function(id, filename) {
+find_gist <- function(id, filename = NULL, call = parent.frame()) {
   files <- gh::gh("GET /gists/:id", id = id)$files
   r_files <- files[grepl("\\.[rR]$", names(files))]
 
   if (length(r_files) == 0) {
-    stop("No R files found in gist", call. = FALSE)
+    cli::cli_abort("No R files found in gist", call = call)
   }
 
   if (!is.null(filename)) {
     if (!is.character(filename) || length(filename) > 1 || !grepl("\\.[rR]$", filename)) {
-      stop("'filename' must be NULL, or a single filename ending in .R/.r", call. = FALSE)
+      cli::cli_abort(
+        "{.arg filename} must be {.code NULL}, or a single filename ending in .R/.r",
+        call = call
+      )
     }
 
     which <- match(tolower(filename), tolower(names(r_files)))
     if (is.na(which)) {
-      stop("'", filename, "' not found in this gist", call. = FALSE)
+      cli::cli_abort("{.path {filename}} not found in gist", call = call)
     }
   } else {
     if (length(r_files) > 1) {
-      warning("Multiple R files in gist, using first", call. = FALSE)
+      cli::cli_inform("{length(r_files)} .R files in gist, using first", call = call)
     }
     which <- 1
   }
