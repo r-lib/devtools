@@ -8,3 +8,10 @@ local_package_create <- function(envir = parent.frame()) {
 
   dir
 }
+
+local_package_copy <- function(path, env = parent.frame()) {
+  temp_path <- withr::local_tempdir(.local_envir = env)
+
+  dir_copy(path, temp_path, overwrite = TRUE)
+  temp_path
+}

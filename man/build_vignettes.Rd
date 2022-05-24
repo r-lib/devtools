@@ -9,7 +9,7 @@ build_vignettes(
   dependencies = "VignetteBuilder",
   clean = TRUE,
   upgrade = "never",
-  quiet = TRUE,
+  quiet = FALSE,
   install = TRUE,
   keep_md = TRUE
 )

@@ -31,59 +31,52 @@ build_vignettes <- function(pkg = ".",
                             dependencies = "VignetteBuilder",
                             clean = TRUE,
                             upgrade = "never",
-                            quiet = TRUE,
+                            quiet = FALSE,
                             install = TRUE,
                             keep_md = TRUE) {
   pkg <- as.package(pkg)
-
-  deps <- remotes::dev_package_deps(pkg$path, dependencies)
-  update(deps, upgrade = upgrade)
+  save_all()
 
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (length(vigns$docs) == 0) return()
 
-  cli::cli_alert_info("Building {.pkg {pkg$package}} vignettes")
+  deps <- remotes::dev_package_deps(pkg$path, dependencies)
+  update(deps, upgrade = upgrade)
 
   if (isTRUE(install)) {
-    build <- function(pkg_path, clean, quiet, upgrade) {
-      withr::with_temp_libpaths(action = "prefix", {
-        devtools::install(pkg_path, upgrade = upgrade, reload = FALSE, quiet = quiet)
-        tools::buildVignettes(dir = pkg_path, clean = clean, tangle = TRUE, quiet = quiet)
-      })
-    }
-  } else {
-    build <- function(pkg_path, clean, quiet, upgrade) {
-      tools::buildVignettes(dir = pkg_path, clean = clean, tangle = TRUE, quiet = quiet)
-    }
+    local_install(pkg, quiet = TRUE)
   }
 
+  cli::cli_inform(c(i = "Building vignettes for {.pkg {pkg$package}}"))
   callr::r(
-    build,
-    args = list(pkg_path = pkg$path, clean = clean, upgrade = upgrade, quiet = quiet),
+    function(...) tools::buildVignettes(...),
+    args = list(
+      dir = pkg$path,
+      clean = clean,
+      tangle = TRUE,
+      quiet = quiet
+    ),
     show = !quiet,
-    spinner = FALSE,
-    stderr = "2>&1"
+    spinner = FALSE
   )
 
   # We need to re-run pkgVignettes now that they are built to get the output
   # files as well
+  cli::cli_inform(c(i = "Copying vignettes"))
   vigns <- tools::pkgVignettes(dir = pkg$path, source = TRUE, output = TRUE)
-
   copy_vignettes(pkg, keep_md)
-
   create_vignette_index(pkg, vigns)
 
   invisible(TRUE)
 }
 
 create_vignette_index <- function(pkg, vigns) {
+  cli::cli_inform(c(i = "Building vignette index"))
+
   usethis_use_directory(pkg, "Meta", ignore = TRUE)
   usethis_use_git_ignore(pkg, "/Meta/")
 
-  cli::cli_alert_info("Building vignette index")
-
   vignette_index <- ("tools" %:::% ".build_vignette_index")(vigns)
-
   vignette_index_path <- path(pkg$path, "Meta", "vignette.rds")
 
   saveRDS(vignette_index, vignette_index_path, version = 2L)
@@ -101,7 +94,7 @@ clean_vignettes <- function(pkg = ".") {
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (path_file(vigns$dir) != "vignettes") return()
 
-  cli::cli_alert_info("Cleaning built vignettes and index from {.pkg {pkg$package}}")
+  cli::cli_inform(c(i = "Cleaning built vignettes and index from {.pkg {pkg$package}}"))
 
   doc_path <- path(pkg$path, "doc")
 
@@ -117,7 +110,7 @@ clean_vignettes <- function(pkg = ".") {
 
   to_remove <- c(vig_rm, extra_rm, vig_index_rm)
   if (length(to_remove) > 0) {
-    cli::cli_alert_warning("Removing {.file {path_file(to_remove)}}")
+    cli::cli_inform(c(x = "Removing {.file {path_file(to_remove)}}"))
     file_delete(to_remove)
   }
 
@@ -129,7 +122,7 @@ clean_vignettes <- function(pkg = ".") {
 dir_delete_if_empty <- function(x) {
   if (dir_exists(x) && rlang::is_empty(dir_ls(x))) {
     dir_delete(x)
-    cli::cli_alert_warning("Removing {.file {path_file(x)}}")
+    cli::cli_inform(c(x = "Removing {.file {path_file(x)}}"))
   }
 }
 
