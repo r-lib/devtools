@@ -116,7 +116,7 @@ change_maintainer_email <- function(path, email, call = parent.frame()) {
   }
   if (desc$has_fields("Maintainer")) {
     cli::cli_abort(
-      "DESCRIPTION can't use {.field Mainainter} field when changing {.arg email}",
+      "DESCRIPTION can't use {.field Maintainer} field when changing {.arg email}",
       call = call
     )
   }
