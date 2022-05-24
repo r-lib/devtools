@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `aspell_env_var()` does a better job of matching R CMD check behaviour,
+  which is only to use `aspell`, not `hunspell` or `ispell` (#2376).
+
 * Installing devtools now installs pkgdown, profvis, bench, miniUI, DT, 
   and urlchecker, ensuring that you have everything needed for package
   development (#2388).

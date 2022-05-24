@@ -237,7 +237,7 @@ check_env_vars <- function(cran = FALSE, remote = FALSE, incoming = remote,
 
 aspell_env_var <- function() {
   tryCatch({
-    utils::aspell(NULL)
+    utils::aspell(NULL, program = "aspell")
     c("_R_CHECK_CRAN_INCOMING_USE_ASPELL_" = "TRUE")
   }, error = function(e) character())
 }
