@@ -47,7 +47,7 @@ build_vignettes <- function(pkg = ".",
     local_install(pkg, quiet = TRUE)
   }
 
-  cli::cli_alert_info("Building vignettes for {.pkg {pkg$package}}")
+  cli::cli_inform(c(i = "Building vignettes for {.pkg {pkg$package}}"))
   callr::r(
     function(...) tools::buildVignettes(...),
     args = list(
@@ -62,7 +62,7 @@ build_vignettes <- function(pkg = ".",
 
   # We need to re-run pkgVignettes now that they are built to get the output
   # files as well
-  cli::cli_alert_info("Copying vignettes")
+  cli::cli_inform(c(i = "Copying vignettes"))
   vigns <- tools::pkgVignettes(dir = pkg$path, source = TRUE, output = TRUE)
   copy_vignettes(pkg, keep_md)
   create_vignette_index(pkg, vigns)
@@ -71,7 +71,7 @@ build_vignettes <- function(pkg = ".",
 }
 
 create_vignette_index <- function(pkg, vigns) {
-  cli::cli_alert_info("Building vignette index")
+  cli::cli_inform(c(i = "Building vignette index"))
 
   usethis_use_directory(pkg, "Meta", ignore = TRUE)
   usethis_use_git_ignore(pkg, "/Meta/")
@@ -94,7 +94,7 @@ clean_vignettes <- function(pkg = ".") {
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (path_file(vigns$dir) != "vignettes") return()
 
-  cli::cli_alert_info("Cleaning built vignettes and index from {.pkg {pkg$package}}")
+  cli::cli_inform(c(i = "Cleaning built vignettes and index from {.pkg {pkg$package}}"))
 
   doc_path <- path(pkg$path, "doc")
 
@@ -110,7 +110,7 @@ clean_vignettes <- function(pkg = ".") {
 
   to_remove <- c(vig_rm, extra_rm, vig_index_rm)
   if (length(to_remove) > 0) {
-    cli::cli_alert_warning("Removing {.file {path_file(to_remove)}}")
+    cli::cli_inform(c(x = "Removing {.file {path_file(to_remove)}}"))
     file_delete(to_remove)
   }
 
@@ -122,7 +122,7 @@ clean_vignettes <- function(pkg = ".") {
 dir_delete_if_empty <- function(x) {
   if (dir_exists(x) && rlang::is_empty(dir_ls(x))) {
     dir_delete(x)
-    cli::cli_alert_warning("Removing {.file {path_file(x)}}")
+    cli::cli_inform(c(x = "Removing {.file {path_file(x)}}"))
   }
 }
 
