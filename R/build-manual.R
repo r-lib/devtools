@@ -17,7 +17,7 @@ build_manual <- function(pkg = ".", path = NULL) {
   ), fail_on_status = TRUE, stderr = "2>&1", spinner = FALSE),
   error = function(e) {
     cat(e$stdout)
-    stop("Failed to build manual", call. = FALSE)
+    cli::cli_abort("Failed to build manual")
   })
 
   cat(msg$stdout)

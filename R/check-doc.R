@@ -20,7 +20,7 @@ check_man <- function(pkg = ".") {
   old <- options(warn = -1)
   on.exit(options(old))
 
-  cli::cli_alert_info("Checking documentation...")
+  cli::cli_inform(c(i = "Checking documentation..."))
 
   check_Rd_contents <- if (getRversion() < "4.1") {
     asNamespace("tools")$.check_Rd_contents
@@ -42,7 +42,7 @@ check_man <- function(pkg = ".") {
     )
 
   if (ok) {
-    cli::cli_alert_success("No issues detected")
+    cli::cli_inform(c(v = "No issues detected"))
   }
 
   invisible()

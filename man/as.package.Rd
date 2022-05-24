@@ -4,14 +4,12 @@
 \alias{as.package}
 \title{Coerce input to a package.}
 \usage{
-as.package(x = NULL, create = NA)
+as.package(x = NULL, create = deprecated())
 }
 \arguments{
 \item{x}{object to coerce to a package}
 
-\item{create}{only relevant if a package structure does not exist yet: if
-\code{TRUE}, create a package structure; if \code{NA}, ask the user
-(in interactive mode only)}
+\item{create}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Hasn't worked for some time.}
 }
 \description{
 Possible specifications of package:

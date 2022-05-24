@@ -6,16 +6,17 @@
 #'   \item package object
 #' }
 #' @param x object to coerce to a package
-#' @param create only relevant if a package structure does not exist yet: if
-#'   `TRUE`, create a package structure; if `NA`, ask the user
-#'   (in interactive mode only)
+#' @param create `r lifecycle::badge("deprecated")` Hasn't worked for some time.
 #' @export
 #' @keywords internal
-as.package <- function(x = NULL, create = NA) {
+as.package <- function(x = NULL, create = deprecated()) {
   if (is.package(x)) return(x)
+  if (lifecycle::is_present(create)) {
+    lifecycle::deprecate_warn("2.5.0", "as.package(create = )")
+  }
 
   x <- package_file(path = x)
-  load_pkg_description(x, create = create)
+  load_pkg_description(x)
 }
 
 #' Find file in a package.
@@ -34,23 +35,24 @@ as.package <- function(x = NULL, create = NA) {
 #' }
 package_file <- function(..., path = ".") {
   if (!is.character(path) || length(path) != 1) {
-    stop("`path` must be a string.", call. = FALSE)
+    cli::cli_abort("{.arg path} must be a string.")
   }
-  path <- strip_slashes(path_real(path))
+  if (!dir_exists(path)) {
+    cli::cli_abort("{.path {path}} is not a directory.")
+  }
 
-  if (!file_exists(path)) {
-    stop("Can't find '", path, "'.", call. = FALSE)
-  }
-  if (!is_dir(path)) {
-    stop("'", path, "' is not a directory.", call. = FALSE)
-  }
+  base_path <- path
+  path <- strip_slashes(path_real(path))
 
   # Walk up to root directory
   while (!has_description(path)) {
     path <- path_dir(path)
 
     if (is_root(path)) {
-      stop("Could not find package root. Is your working directory inside a package?", call. = FALSE)
+      cli::cli_abort(c(
+        "Could not find package root.",
+        i = "Is {.path {base_path}} inside a package?"
+      ))
     }
   }
 
@@ -71,25 +73,9 @@ strip_slashes <- function(x) {
 }
 
 # Load package DESCRIPTION into convenient form.
-load_pkg_description <- function(path, create) {
+load_pkg_description <- function(path) {
   path_desc <- path(path, "DESCRIPTION")
 
-  if (!file_exists(path_desc)) {
-    if (is.na(create)) {
-      if (interactive()) {
-        cli::cli_alert_danger("No package infrastructure found in {.file {path}}. Create it?")
-        create <- (utils::menu(c("Yes", "No")) == 1)
-      } else {
-        create <- FALSE
-      }
-    }
-
-    if (create) {
-      usethis::create_package(path = path)
-    } else {
-      stop("No description at ", path_desc, call. = FALSE)
-    }
-  }
   info <- read.dcf(path_desc)[1, ]
   Encoding(info) <- 'UTF-8'
   desc <- as.list(info)
@@ -98,7 +84,6 @@ load_pkg_description <- function(path, create) {
 
   structure(desc, class = "package")
 }
-
 
 #' Is the object a package?
 #'

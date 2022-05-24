@@ -18,7 +18,7 @@ uninstall <- function(pkg = ".", unload = TRUE, quiet = FALSE, lib = .libPaths()
   }
 
   if (!quiet) {
-    cli::cli_alert_info("Uninstalling {.pkg {pkg$package}}")
+    cli::cli_inform(c(i = "Uninstalling {.pkg {pkg$package}}"))
   }
 
   remove.packages(pkg$package, .libPaths()[[1]])

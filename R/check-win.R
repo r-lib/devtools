@@ -61,7 +61,7 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
     file_copy(desc_file, backup)
     on.exit(file_move(backup, desc_file), add = TRUE)
 
-    change_maintainer_email(desc_file, email)
+    change_maintainer_email(desc_file, email, call = parent.frame())
 
     pkg <- as.package(pkg$path)
   }
@@ -69,13 +69,13 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   version <- match.arg(version, several.ok = TRUE)
 
   if (!quiet) {
-    cli::cli_alert_info(
+    cli::cli_inform(c(
       "Building windows version of {.pkg {pkg$package}} ({pkg$version})",
-      " for {paste(version, collapse = ', ')} with win-builder.r-project.org."
-    )
+      i = "Using {paste(version, collapse = ', ')} with win-builder.r-project.org."
+    ))
 
-    email <- cli::style_bold(maintainer(pkg)$email)
-    if (interactive() && yesno("Email results to ", email, "?")) {
+    email <- maintainer(pkg)$email
+    if (interactive() && yesno("Email results to {.strong {email}}?")) {
       return(invisible())
     }
   }
@@ -96,32 +96,40 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
     time <- strftime(Sys.time() + 30 * 60, "%I:%M %p")
     email <- maintainer(pkg)$email
 
-    cli::cli_alert_success(
-      "[{Sys.Date()}] Check <{.email {email}}> for a link to results in 15-30 mins (~{time})."
-    )
+    cli::cat_rule(col = "cyan")
+    cli::cli_inform(c(
+      i = "Check <{.email {email}}> for the results in 15-30 mins (~{time})."
+    ))
   }
 
   invisible()
 }
 
-change_maintainer_email <- function(desc, email) {
-  desc <- desc::desc(file = desc)
+change_maintainer_email <- function(path, email, call = parent.frame()) {
+  desc <- desc::desc(file = path)
 
   if (!desc$has_fields("Authors@R")) {
-    stop("DESCRIPTION must use `Authors@R` field to change the maintainer email", call. = FALSE)
+    cli::cli_abort(
+      "DESCRIPTION must use {.field Authors@R} field when changing {.arg email}",
+      call = call
+    )
   }
+  if (desc$has_fields("Maintainer")) {
+    cli::cli_abort(
+      "DESCRIPTION can't use {.field Maintainer} field when changing {.arg email}",
+      call = call
+    )
+  }
+
   aut <- desc$get_authors()
   roles <- aut$role
   ## Broken person() API, vector for 1 author, list otherwise...
-  if (!is.list(roles)) roles <- list(roles)
+  if (!is.list(roles)) {
+    roles <- list(roles)
+  }
   is_maintainer <- vapply(roles, function(r) all("cre" %in% r), logical(1))
   aut[is_maintainer]$email <- email
-
   desc$set_authors(aut)
-  ## Check if the email is actually changed before we actually send the email
-  if(!grepl(email, desc$get_maintainer())){
-    stop("Changing maintainer email failed. Possible reason is using both Authors@R and Maintainer fields in the DESCRIPTION file.", call. = FALSE)
-  }
 
   desc$write()
 }

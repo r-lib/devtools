@@ -5,7 +5,7 @@ test_that("check_man works", {
 
   skip_if_not(interactive())
 
-  pkg <- create_local_package()
+  pkg <- local_package_create()
   dir.create(file.path(pkg, "man"))
   writeLines(c("
 \\name{foo}

@@ -10,7 +10,7 @@ show_news <- function(pkg = ".", latest = TRUE, ...) {
   news_path <- path(pkg$path, "NEWS")
 
   if (!file_exists(news_path)) {
-    stop("No NEWS found", call. = FALSE)
+    cli::cli_abort("No NEWS found")
   }
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))

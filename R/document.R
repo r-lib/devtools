@@ -13,7 +13,7 @@
 document <- function(pkg = ".", roclets = NULL, quiet = FALSE) {
   pkg <- as.package(pkg)
   if (!isTRUE(quiet)) {
-    cli::cli_alert_info("Updating {.pkg {pkg$package}} documentation")
+    cli::cli_inform(c(i = "Updating {.pkg {pkg$package}} documentation"))
   }
 
   save_all()

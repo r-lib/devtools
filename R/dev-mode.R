@@ -32,17 +32,17 @@ dev_mode <- local({
         dir_create(path)
       }
       if (!file_exists(path)) {
-        stop("Failed to create ", path, call. = FALSE)
+        cli::cli_abort("Failed to create {.path {path}}")
       }
 
       if (!is_library(path)) {
-        warning(path, " does not appear to be a library. ",
-          "Are sure you specified the correct directory?",
-          call. = FALSE
-        )
+        cli::cli_warn(c(
+          "{.path {path}} does not appear to be a library.",
+          "Are sure you specified the correct directory?"
+        ))
       }
 
-      cli::cli_alert_success("Dev mode: ON")
+      cli::cli_inform(c(v = "Dev mode: ON"))
       options(dev_path = path)
 
       if (is.null(.prompt)) .prompt <<- getOption("prompt")
@@ -50,7 +50,7 @@ dev_mode <- local({
 
       .libPaths(c(path, lib_paths))
     } else {
-      cli::cli_alert_success("Dev mode: OFF")
+      cli::cli_inform(c(v = "Dev mode: OFF"))
       options(dev_path = NULL)
 
       if (!is.null(.prompt)) options(prompt = .prompt)

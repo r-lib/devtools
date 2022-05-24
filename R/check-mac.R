@@ -16,10 +16,10 @@ check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, ma
   pkg <- as.package(pkg)
 
   if (!quiet) {
-    cli::cli_alert_info(
+    cli::cli_inform(c(
       "Building macOS version of {.pkg {pkg$package}} ({pkg$version})",
-      "with https://mac.r-project.org/macbuilder/submit.html."
-    )
+      i = "Using https://mac.r-project.org/macbuilder/submit.html."
+    ))
   }
 
   built_path <- pkgbuild::build(pkg$path, tempdir(),
@@ -62,9 +62,10 @@ check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, ma
   if (!quiet) {
     time <- strftime(Sys.time() + 10 * 60, "%I:%M %p")
 
-    cli::cli_alert_success(
-      "[{Sys.Date()}] Check {.url {response_url}} for the results in 5-10 mins (~{time})."
-    )
+    cli::cat_rule(col = "cyan")
+    cli::cli_inform(c(
+      i = "Check {.url {response_url}} the results in 5-10 mins (~{time})."
+    ))
   }
 
   invisible(response_url)

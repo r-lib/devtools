@@ -76,7 +76,7 @@ check <- function(pkg = ".",
   save_all()
 
   if (!missing(cleanup)) {
-    warning("`cleanup` is deprecated", call. = FALSE)
+    lifecycle::deprecate_stop("1.11.0", "lifecycle::check(cleanup = )")
   }
 
   if (missing(error_on) && !interactive()) {
@@ -86,15 +86,17 @@ check <- function(pkg = ".",
 
   document <- document %||% can_document(pkg)
   if (document) {
+    if (!quiet) {
+      cat_rule("Documenting", col = "cyan", line = 2)
+    }
     document(pkg, quiet = quiet)
+    if (!quiet) {
+      cli::cat_line()
+    }
   }
 
   if (!quiet) {
-    cat_rule(
-      left = "Building",
-      right = pkg$package,
-      col = "cyan"
-    )
+    cat_rule("Building", col = "cyan", line = 2)
     show_env_vars(pkgbuild::compiler_flags(FALSE))
   }
 
@@ -143,12 +145,11 @@ can_document <- function(pkg) {
   installed <- packageVersion("roxygen2")
   if (required != installed) {
     cli::cli_rule()
-    cli::cli_alert_info(
-      "Installed roxygen2 version ({installed}) doesn't match required version ({required})"
-    )
-    cli::cli_alert_danger("check() will not re-document this package")
+    cli::cli_inform(c(
+      i = "Installed roxygen2 version ({installed}) doesn't match required ({required})",
+      x = "{.fun check} will not re-document this package"
+    ))
     cli::cli_rule()
-
     FALSE
   } else {
     TRUE
@@ -197,7 +198,7 @@ check_built <- function(path = NULL, cran = TRUE,
   }
 
   if (manual && !pkgbuild::has_latex()) {
-    cli::cli_alert_danger("pdflatex not found! Not building PDF manual or vignettes")
+    cli::cli_inform(c(x = "pdflatex not found! Not building PDF manual"))
     manual <- FALSE
   }
 
@@ -207,12 +208,8 @@ check_built <- function(path = NULL, cran = TRUE,
 
   env_vars <- check_env_vars(cran, remote, incoming, force_suggests, env_vars)
   if (!quiet) {
-    cat_rule(
-      left = "Checking",
-      right = pkgname,
-      col = "cyan"
-    )
-    show_env_vars(env_vars, trailing = FALSE)
+    cat_rule("Checking", col = "cyan", line = 2)
+    show_env_vars(env_vars)
   }
 
   withr::with_envvar(env_vars, action = "replace", {
@@ -245,10 +242,7 @@ aspell_env_var <- function() {
   }, error = function(e) character())
 }
 
-show_env_vars <- function(env_vars, trailing = TRUE) {
+show_env_vars <- function(env_vars) {
   cli::cat_line("Setting env vars:", col = "darkgrey")
   cat_bullet(paste0(format(names(env_vars)), ": ", unname(env_vars)), col = "darkgrey")
-  if (trailing) {
-    cat_rule(col = "cyan")
-  }
 }
