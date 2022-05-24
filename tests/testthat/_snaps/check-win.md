@@ -12,5 +12,5 @@
       change_maintainer_email(path, "x@example.com")
     Condition
       Error:
-      ! DESCRIPTION can't use Mainainter field when changing `email`
+      ! DESCRIPTION can't use Maintainer field when changing `email`
 
