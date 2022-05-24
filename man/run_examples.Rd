@@ -7,13 +7,13 @@
 run_examples(
   pkg = ".",
   start = NULL,
-  show = TRUE,
+  show = deprecated(),
   run_donttest = FALSE,
   run_dontrun = FALSE,
   fresh = FALSE,
   document = TRUE,
-  run,
-  test
+  run = deprecated(),
+  test = deprecated()
 )
 }
 \arguments{

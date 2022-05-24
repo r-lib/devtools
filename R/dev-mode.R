@@ -36,10 +36,10 @@ dev_mode <- local({
       }
 
       if (!is_library(path)) {
-        warning(path, " does not appear to be a library. ",
-          "Are sure you specified the correct directory?",
-          call. = FALSE
-        )
+        cli::cli_warn(c(
+          "{.path {path}} does not appear to be a library.",
+          "Are sure you specified the correct directory?"
+        ))
       }
 
       cli::cli_inform(c(v = "Dev mode: ON"))

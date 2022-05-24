@@ -22,16 +22,20 @@
 #'   examples are updated before running them.
 #' @keywords programming
 #' @export
-run_examples <- function(pkg = ".", start = NULL, show = TRUE, run_donttest = FALSE,
-                         run_dontrun = FALSE, fresh = FALSE, document = TRUE, run, test) {
+run_examples <- function(pkg = ".", start = NULL, show = deprecated(), run_donttest = FALSE,
+                         run_dontrun = FALSE, fresh = FALSE, document = TRUE,
+                         run = deprecated(), test = deprecated()) {
 
   if (!missing(run)) {
-    warning("`run_examples(run=)` is deprecated, please use `run_example(run_dontrun=)` instead", call. = FALSE)
+    lifecycle::deprecate_warn("2.3.1", "run_examples(run)", 'run_example(run_dontrun)')
     run_dontrun <- run
   }
   if (!missing(test)) {
-    warning("`run_examples(test=)` is deprecated, please use `run_example(run_donttest=)` instead", call. = FALSE)
+    lifecycle::deprecate_warn("2.3.1", "run_examples(test)", 'run_example(run_donttest)')
     run_donttest <- test
+  }
+  if (!missing(show)) {
+    lifecycle::deprecate_warn("2.3.1", "run_examples(show)")
   }
 
   pkg <- as.package(pkg)
@@ -46,10 +50,6 @@ run_examples <- function(pkg = ".", start = NULL, show = TRUE, run_donttest = FA
 
   if (document) {
     document(pkg)
-  }
-
-  if (!missing(show)) {
-    warning("`show` is deprecated", call. = FALSE)
   }
 
   files <- rd_files(pkg$path, start = start)

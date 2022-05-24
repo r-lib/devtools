@@ -76,7 +76,7 @@ check <- function(pkg = ".",
   save_all()
 
   if (!missing(cleanup)) {
-    warning("`cleanup` is deprecated", call. = FALSE)
+    lifecycle::deprecate_stop("1.11.0", "lifecycle::check(cleanup = )")
   }
 
   if (missing(error_on) && !interactive()) {
