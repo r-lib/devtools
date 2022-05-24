@@ -28,7 +28,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
     cli::cli_abort("Can't find file{?s}: {.path {files[!ok]}}.")
   }
 
-  cli::cli_alert_info("Installing {.pkg {pkg$package}} in temporary library")
+  cli::cli_inform(c(i = "Installing {.pkg {pkg$package}} in temporary library"))
   withr::local_temp_libpaths()
   install(pkg, upgrade = "never", reload = FALSE, quick = TRUE, quiet = quiet)
 
@@ -37,7 +37,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
 
 
   for (path in paths) {
-    cli::cli_alert_info("Building {.path {path}}")
+    cli::cli_inform(c(i = "Building {.path {path}}"))
     callr::r_safe(
       function(...) rmarkdown::render(...),
       args = list(input = path, ..., output_options = output_options, quiet = quiet),
@@ -58,11 +58,10 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
   readme_path <- path_abs(dir_ls(pkg$path, ignore.case = TRUE, regexp = "(inst/)?readme[.]rmd", recurse = 1, type = "file"))
 
   if (length(readme_path) == 0) {
-    rlang::abort("Can't find a 'README.Rmd' or 'inst/README.Rmd' file.")
+    cli::cli_abort("Can't find {.file README.Rmd} or {.file inst/README.Rmd}.")
   }
-
   if (length(readme_path) > 1) {
-    rlang::abort("Can't have both a 'README.Rmd' and 'inst/README.Rmd' file.")
+    cli::cli_abort("Can't have both {.file README.Rmd} and {.file inst/README.Rmd}.")
   }
 
   build_rmd(readme_path, path = path, quiet = quiet, ...)

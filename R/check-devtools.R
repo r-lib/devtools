@@ -131,11 +131,11 @@ check_status <- function(status, name, warning) {
       cat(" OK\n")
     } else {
       cat("\n")
-      cli::cli_alert_danger("WARNING: {warning}")
+      cli::cli_inform(c(x = "WARNING: {warning}"))
     },
     error = function(e) {
       cat("\n")
-      cli::cli_alert_danger("ERROR: {conditionMessage(e)}")
+      cli::cli_inform(c(x = "ERROR: {conditionMessage(e)}"))
       FALSE
     }
   )

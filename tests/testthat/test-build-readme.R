@@ -1,45 +1,38 @@
-test_that("Package readme in root directory can be built ", {
+test_that("can build README in root directory", {
   skip_on_cran()
 
-  pkg_path <- create_local_package()
+  pkg <- local_package_create()
+  suppressMessages(usethis::with_project(pkg, use_readme_rmd()))
 
-  # errors if no readme found
-  expect_error(
-    build_readme(pkg_path),
-    "Can't find a 'README.Rmd'"
-  )
-
-  suppressMessages(use_readme_rmd())
-
-  suppressMessages(build_readme(pkg_path))
-
-  expect_true(file_exists(path(pkg_path, "README.md")))
-  expect_false(file_exists(path(pkg_path, "README.html")))
+  suppressMessages(build_readme(pkg))
+  expect_true(file_exists(path(pkg, "README.md")))
+  expect_false(file_exists(path(pkg, "README.html")))
 })
 
-test_that("Package readme in inst/ can be built ", {
+test_that("can build README in inst/", {
   skip_on_cran()
 
-  pkg_path <- create_local_package()
-  suppressMessages(use_readme_rmd())
-  dir_create(pkg_path, "inst")
-  file_copy(
-    path(pkg_path, "README.Rmd"),
-    path(pkg_path, "inst", "README.Rmd")
+  pkg <- local_package_create()
+  suppressMessages(usethis::with_project(pkg, use_readme_rmd()))
+  dir_create(pkg, "inst")
+  file_move(
+    path(pkg, "README.Rmd"),
+    path(pkg, "inst", "README.Rmd")
   )
 
-  # errors if both a root readme and inst readme found
-  expect_error(
-    build_readme(pkg_path),
-    "Can't have both"
-  )
+  suppressMessages(build_readme(pkg))
+  expect_true(file_exists(path(pkg, "inst", "README.md")))
+  expect_false(file_exists(path(pkg, "README.Rmd")))
+  expect_false(file_exists(path(pkg, "README.md")))
+  expect_false(file_exists(path(pkg, "inst", "README.html")))
+})
 
-  file_delete(path(pkg_path, "README.Rmd"))
+test_that("useful errors if too few or too many", {
+  pkg <- local_package_create()
+  expect_snapshot(build_readme(pkg), error = TRUE)
 
-  suppressMessages(build_readme(pkg_path))
-
-  expect_true(file_exists(path(pkg_path, "inst", "README.md")))
-  expect_false(file_exists(path(pkg_path, "README.Rmd")))
-  expect_false(file_exists(path(pkg_path, "README.md")))
-  expect_false(file_exists(path(pkg_path, "inst", "README.html")))
+  suppressMessages(usethis::with_project(pkg, use_readme_rmd()))
+  dir_create(pkg, "inst")
+  file_copy(path(pkg, "README.Rmd"), path(pkg, "inst", "README.Rmd"))
+  expect_snapshot(build_readme(pkg), error = TRUE)
 })

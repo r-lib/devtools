@@ -67,3 +67,11 @@ release_bullets <- function() {
     NULL
   )
 }
+
+is_testing <- function() {
+  identical(Sys.getenv("TESTTHAT"), "true")
+}
+
+is_rstudio_running <- function() {
+  !is_testing() && rstudioapi::isAvailable()
+}

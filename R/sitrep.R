@@ -3,7 +3,7 @@
 NULL
 
 rstudio_version_string <- function() {
-  if (!rstudioapi::isAvailable()) {
+  if (!is_rstudio_running()) {
     return(character())
   }
   rvi <- rstudioapi::versionInfo()
@@ -12,7 +12,7 @@ rstudio_version_string <- function() {
 
 check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]),
                                       version = rstudio_version_string(),
-                                      in_rstudio = rstudioapi::isAvailable()) {
+                                      in_rstudio = is_rstudio_running()) {
   if (!in_rstudio) {
     return()
   }
@@ -107,7 +107,7 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
       devtools_version = packageVersion("devtools"),
       devtools_deps = remotes::package_deps("devtools", dependencies = NA),
       pkg_deps = if (!is.null(pkg)) { remotes::dev_package_deps(pkg$path, dependencies = TRUE) },
-      rstudio_version = if (rstudioapi::isAvailable()) rstudioapi::getVersion(),
+      rstudio_version = if (is_rstudio_running()) rstudioapi::getVersion(),
       rstudio_msg = check_for_rstudio_updates()
     ),
     class = "dev_sitrep"

@@ -76,7 +76,7 @@ check <- function(pkg = ".",
   save_all()
 
   if (!missing(cleanup)) {
-    warning("`cleanup` is deprecated", call. = FALSE)
+    lifecycle::deprecate_stop("1.11.0", "lifecycle::check(cleanup = )")
   }
 
   if (missing(error_on) && !interactive()) {
@@ -145,12 +145,11 @@ can_document <- function(pkg) {
   installed <- packageVersion("roxygen2")
   if (required != installed) {
     cli::cli_rule()
-    cli::cli_alert_info(
-      "Installed roxygen2 version ({installed}) doesn't match required version ({required})"
-    )
-    cli::cli_alert_danger("check() will not re-document this package")
+    cli::cli_inform(c(
+      i = "Installed roxygen2 version ({installed}) doesn't match required ({required})",
+      x = "{.fun check} will not re-document this package"
+    ))
     cli::cli_rule()
-
     FALSE
   } else {
     TRUE
@@ -199,7 +198,7 @@ check_built <- function(path = NULL, cran = TRUE,
   }
 
   if (manual && !pkgbuild::has_latex()) {
-    cli::cli_alert_danger("pdflatex not found! Not building PDF manual or vignettes")
+    cli::cli_inform(c(x = "pdflatex not found! Not building PDF manual"))
     manual <- FALSE
   }
 
