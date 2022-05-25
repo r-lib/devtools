@@ -1,3 +1,7 @@
+f <- function() {
+  stop("!")
+}
+
 #' Execute testthat tests in a package
 #'
 #' @description
