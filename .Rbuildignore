@@ -18,3 +18,4 @@
 ^man-roxygen$
 ^LICENSE\.md$
 ^MAINTENANCE\.md$
+^\.lintr$
