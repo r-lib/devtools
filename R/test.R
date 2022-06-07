@@ -35,8 +35,6 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
     return(invisible())
   }
 
-  load_all(pkg$path)
-
   cli::cli_inform(c(i = "Testing {.pkg {pkg$package}}"))
   withr::local_envvar(r_env_vars())
   testthat::test_local(
@@ -62,8 +60,7 @@ test_active_file <- function(file = find_active_file(), ...) {
   pkg <- as.package(path_dir(test_files)[[1]])
 
   withr::local_envvar(r_env_vars())
-  load_all(pkg$path, quiet = TRUE)
-  testthat::test_file(test_files, ...)
+  testthat::test_file(test_files, ..., load_package = "source")
 }
 
 #' @param show_report Show the test coverage report.
