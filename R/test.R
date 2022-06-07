@@ -35,7 +35,7 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
     return(invisible())
   }
 
-  cli::cli_inform(c(i = "Testing {.pkg {pkg$package}}"))
+  cli::cli_inform(c(i = "Testing {.pkg {pkg$package}}."))
   withr::local_envvar(r_env_vars())
   testthat::test_local(
     pkg$path,
