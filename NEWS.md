@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `test()` no longer calls `load_all()` twice. `test_active_file()`
+  now calls `load_all()` via testthat.
+
 * `aspell_env_var()` does a better job of matching R CMD check behaviour,
   which is only to use `aspell`, not `hunspell` or `ispell` (#2376).
 
