@@ -36,7 +36,7 @@ Imports:
     rversions (>= 2.1.1),
     sessioninfo (>= 1.2.2),
     stats,
-    testthat (>= 3.1.2),
+    testthat (>= 3.1.4),
     tools,
     urlchecker (>= 1.0.1),
     utils,

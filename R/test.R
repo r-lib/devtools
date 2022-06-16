@@ -106,7 +106,7 @@ test_coverage_active_file <- function(file = find_active_file(), filter = TRUE, 
 
   withr::local_envvar(r_env_vars())
   testthat::local_test_directory(pkg$path, pkg$package)
-  reporter <- testthat::local_snapshotter(cleanup = TRUE)
+  reporter <- testthat::local_snapshotter()
   reporter$start_file(file, "test")
 
   env <- load_all(pkg$path, quiet = TRUE, export_all = export_all)$env
