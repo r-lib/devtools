@@ -88,26 +88,39 @@ when a package is installed and loaded with <code><a href="https://rdrr.io/r/bas
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>path</dt>
 <dd><p>Path to a package, or within a package.</p></dd>
+
+
 <dt>reset</dt>
 <dd><p>clear package environment and reset file cache before loading
 any pieces of the package. This largely equivalent to running
 <code><a href="https://rdrr.io/pkg/pkgload/man/unload.html" class="external-link">unload()</a></code>, however the old namespaces are not completely removed and no
 <code><a href="https://rdrr.io/r/base/ns-hooks.html" class="external-link">.onUnload()</a></code> hooks are called. Use <code>reset = FALSE</code> may be faster for
 large code bases, but is a significantly less accurate approximation.</p></dd>
+
+
 <dt>recompile</dt>
 <dd><p>DEPRECATED. force a recompile of DLL from source code, if
 present. This is equivalent to running <code><a href="https://rdrr.io/pkg/pkgbuild/man/clean_dll.html" class="external-link">pkgbuild::clean_dll()</a></code> before
 <code>load_all</code></p></dd>
+
+
 <dt>export_all</dt>
 <dd><p>If <code>TRUE</code> (the default), export all objects.
 If <code>FALSE</code>, export only the objects that are listed as exports
 in the NAMESPACE file.</p></dd>
+
+
 <dt>helpers</dt>
 <dd><p>if <code>TRUE</code> loads <span class="pkg">testthat</span> test helpers.</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>if <code>TRUE</code> suppresses output from this function.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments passed to <code><a href="https://rdrr.io/pkg/pkgload/man/load_all.html" class="external-link">pkgload::load_all()</a></code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -193,7 +206,7 @@ a perfect replacement for <code><a href="https://rdrr.io/r/base/system.file.html
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

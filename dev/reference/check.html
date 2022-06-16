@@ -114,36 +114,56 @@ known best practices. <code>check_built</code> checks an already built package.<
     <dl><dt>pkg</dt>
 <dd><p>The package to use, can be a file path to the package or a
 package object.  See <code><a href="as.package.html">as.package()</a></code> for more information.</p></dd>
+
+
 <dt>document</dt>
 <dd><p>By default (<code>NULL</code>) will document if your installed
 roxygen2 version matches the version declared in the <code>DESCRIPTION</code>
 file. Use <code>TRUE</code> or <code>FALSE</code> to override the default.</p></dd>
+
+
 <dt>build_args</dt>
 <dd><p>Additional arguments passed to <code>R CMD build</code></p></dd>
+
+
 <dt>...</dt>
 <dd><p>Additional arguments passed on to <code><a href="https://rdrr.io/pkg/pkgbuild/man/build.html" class="external-link">pkgbuild::build()</a></code>.</p></dd>
+
+
 <dt>manual</dt>
 <dd><p>If <code>FALSE</code>, don't build and check manual
 (<code>--no-manual</code>).</p></dd>
+
+
 <dt>cran</dt>
 <dd><p>if <code>TRUE</code> (the default), check using the same settings as
 CRAN uses.</p></dd>
+
+
 <dt>remote</dt>
 <dd><p>Sets <code>_R_CHECK_CRAN_INCOMING_REMOTE_</code> env var.
 If <code>TRUE</code>, performs a number of CRAN incoming checks that require
 remote access.</p></dd>
+
+
 <dt>incoming</dt>
 <dd><p>Sets <code>_R_CHECK_CRAN_INCOMING_</code> env var.
 If <code>TRUE</code>, performs a number of CRAN incoming checks.</p></dd>
+
+
 <dt>force_suggests</dt>
 <dd><p>Sets <code>_R_CHECK_FORCE_SUGGESTS_</code>. If
 <code>FALSE</code> (the default), check will proceed even if all suggested
 packages aren't found.</p></dd>
+
+
 <dt>run_dont_test</dt>
 <dd><p>Sets <code>--run-donttest</code> so that tests surrounded in
 <code>\donttest{}</code> are also tested. When <code>cran = TRUE</code>, this only affects
 R 3.6 and earlier; in R 4.0.0 code in <code>\donttest{}</code> is always run as
 part of CRAN submission.</p></dd>
+
+
 <dt>args</dt>
 <dd><p>Character vector of arguments to pass to <code>R CMD check</code>. Pass each
 argument as a single element of this character vector (do not use spaces to
@@ -152,19 +172,31 @@ running of examples and tests, use <code>args = c("--no-examples", "--no-tests")
 instead of the <code>--output</code> option you should use the <code>check_dir</code> argument,
 because  <code>--output</code> cannot deal with spaces and other special characters on
 Windows.)</p></dd>
+
+
 <dt>env_vars</dt>
 <dd><p>Environment variables set during <code>R CMD check</code></p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>if <code>TRUE</code> suppresses output from this function.</p></dd>
+
+
 <dt>check_dir</dt>
 <dd><p>the directory in which the package is checked
 compatibility. <code>args = "--output=/foo/bar"</code> can be used to change the
 check directory.</p></dd>
+
+
 <dt>cleanup</dt>
 <dd><p>Deprecated.</p></dd>
+
+
 <dt>vignettes</dt>
 <dd><p>If <code>FALSE</code>, do not build or check vignettes, equivalent to
 using <code>args = '--ignore-vignettes' and </code>build_args = '--no-build-vignettes'.</p></dd>
+
+
 <dt>error_on</dt>
 <dd><p>Whether to throw an error on <code>R CMD check</code> failures.
 Note that the check is always completed (unless a timeout happens),
@@ -174,12 +206,17 @@ generate errors. If <code>"warning"</code>, then <code>WARNING</code> failures g
 errors as well. If <code>"note"</code>, then any check failure generated an
 error. Its default can be modified with the <code>RCMDCHECK_ERROR_ON</code>
 environment variable. If that is not set, then <code>"never"</code> is used.</p></dd>
+
+
 <dt>path</dt>
 <dd><p>Path to built package.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object containing errors, warnings, and notes.</p>
+    
+
+<p>An object containing errors, warnings, and notes.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -229,7 +266,7 @@ CRAN.</p></div>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

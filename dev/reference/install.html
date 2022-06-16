@@ -94,24 +94,36 @@ dependencies of the package from CRAN, if they're not already installed.</p>
     <dl><dt>pkg</dt>
 <dd><p>The package to use, can be a file path to the package or a
 package object.  See <code><a href="as.package.html">as.package()</a></code> for more information.</p></dd>
+
+
 <dt>reload</dt>
 <dd><p>if <code>TRUE</code> (the default), will automatically reload the
 package after installing.</p></dd>
+
+
 <dt>quick</dt>
 <dd><p>if <code>TRUE</code> skips docs, multiple-architectures,
 demos, and vignettes, to make installation as fast as possible.</p></dd>
+
+
 <dt>build</dt>
 <dd><p>if <code>TRUE</code> <code><a href="https://rdrr.io/pkg/pkgbuild/man/build.html" class="external-link">pkgbuild::build()</a></code>s the package first:
 this ensures that the installation is completely clean, and prevents any
 binary artefacts (like <code class="file">.o</code>, <code>.so</code>) from appearing in your local
 package directory, but is considerably slower, because every compile has
 to start from scratch.</p></dd>
+
+
 <dt>args</dt>
 <dd><p>An optional character vector of additional command line
 arguments to be passed to <code>R CMD INSTALL</code>. This defaults to the
 value of the option <code>"devtools.install.args"</code>.</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>If <code>TRUE</code>, suppress output.</p></dd>
+
+
 <dt>dependencies</dt>
 <dd><p>Which dependencies do you want to check?
 Can be a character vector (selecting from "Depends", "Imports",
@@ -125,6 +137,8 @@ just check this package, not its dependencies).</p>
 common ones include:</p><ul><li><p>Config/Needs/website - for dependencies used in building the pkgdown site.</p></li>
 <li><p>Config/Needs/coverage for dependencies used in calculating test coverage.</p></li>
 </ul></dd>
+
+
 <dt>upgrade</dt>
 <dd><p>Should package dependencies be upgraded? One of "default", "ask", "always", or "never". "default"
 respects the value of the <code>R_REMOTES_UPGRADE</code> environment variable if set,
@@ -132,21 +146,30 @@ and falls back to "ask" if unset. "ask" prompts the user for which out of
 date packages to upgrade. For non-interactive sessions "ask" is equivalent
 to "always". <code>TRUE</code> and <code>FALSE</code> are also accepted and correspond to
 "always" and "never" respectively.</p></dd>
+
+
 <dt>build_vignettes</dt>
 <dd><p>if <code>TRUE</code>, will build vignettes. Normally it is
 <code>build</code> that's responsible for creating vignettes; this argument makes
 sure vignettes are built even if a build never happens (i.e. because
 <code>build = FALSE</code>).</p></dd>
+
+
 <dt>keep_source</dt>
 <dd><p>If <code>TRUE</code> will keep the srcrefs from an installed
 package. This is useful for debugging (especially inside of RStudio).
 It defaults to the option <code>"keep.source.pkgs"</code>.</p></dd>
+
+
 <dt>force</dt>
 <dd><p>Force installation, even if the remote state has not changed
 since the previous install.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments passed to <code><a href="https://remotes.r-lib.org/reference/install_deps.html" class="external-link">remotes::install_deps()</a></code>
 when installing dependencies.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -180,7 +203,7 @@ debugging flags set.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

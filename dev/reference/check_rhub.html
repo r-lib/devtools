@@ -100,26 +100,39 @@ maintainer.</p>
     <dl><dt>pkg</dt>
 <dd><p>The package to use, can be a file path to the package or a
 package object.  See <code><a href="as.package.html">as.package()</a></code> for more information.</p></dd>
+
+
 <dt>platforms</dt>
 <dd><p>R-hub platforms to run the check on. If <code>NULL</code>
 uses default list of CRAN checkers (one for each major platform, and
 one with extra checks if you have compiled code). You can also specify
 your own, see <code><a href="https://r-hub.github.io/rhub/reference/platforms.html" class="external-link">rhub::platforms()</a></code> for a complete list.</p></dd>
+
+
 <dt>email</dt>
 <dd><p>email address to notify, defaults to the maintainer
 address in the package.</p></dd>
+
+
 <dt>interactive</dt>
 <dd><p>whether to show the status of the build
 interactively. R-hub will send an email to the package maintainer's
 email address, regardless of whether the check is interactive or not.</p></dd>
+
+
 <dt>build_args</dt>
 <dd><p>Arguments passed to <code>R CMD build</code></p></dd>
+
+
 <dt>...</dt>
 <dd><p>extra arguments, passed to <code><a href="https://r-hub.github.io/rhub/reference/check_for_cran.html" class="external-link">rhub::check_for_cran()</a></code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a <code>rhub_check</code> object.</p>
+    
+
+<p>a <code>rhub_check</code> object.</p>
     </div>
     <div class="section level2">
     <h2 id="about-email-validation-on-r-hub">About email validation on r-hub<a class="anchor" aria-label="anchor" href="#about-email-validation-on-r-hub"></a></h2>
@@ -147,7 +160,7 @@ results. See more at <code><a href="https://r-hub.github.io/rhub/reference/valid
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

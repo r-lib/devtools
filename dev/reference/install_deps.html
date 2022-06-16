@@ -106,6 +106,8 @@ install the development dependencies needed to test and build the package.</p>
     <dl><dt>pkg</dt>
 <dd><p>The package to use, can be a file path to the package or a
 package object.  See <code><a href="as.package.html">as.package()</a></code> for more information.</p></dd>
+
+
 <dt>dependencies</dt>
 <dd><p>Which dependencies do you want to check?
 Can be a character vector (selecting from "Depends", "Imports",
@@ -119,10 +121,16 @@ just check this package, not its dependencies).</p>
 common ones include:</p><ul><li><p>Config/Needs/website - for dependencies used in building the pkgdown site.</p></li>
 <li><p>Config/Needs/coverage for dependencies used in calculating test coverage.</p></li>
 </ul></dd>
+
+
 <dt>repos</dt>
 <dd><p>A character vector giving repositories to use.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>Type of package to <code>update</code>.</p></dd>
+
+
 <dt>upgrade</dt>
 <dd><p>Should package dependencies be upgraded? One of "default", "ask", "always", or "never". "default"
 respects the value of the <code>R_REMOTES_UPGRADE</code> environment variable if set,
@@ -130,19 +138,28 @@ and falls back to "ask" if unset. "ask" prompts the user for which out of
 date packages to upgrade. For non-interactive sessions "ask" is equivalent
 to "always". <code>TRUE</code> and <code>FALSE</code> are also accepted and correspond to
 "always" and "never" respectively.</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>If <code>TRUE</code>, suppress output.</p></dd>
+
+
 <dt>build</dt>
 <dd><p>if <code>TRUE</code> <code><a href="https://rdrr.io/pkg/pkgbuild/man/build.html" class="external-link">pkgbuild::build()</a></code>s the package first:
 this ensures that the installation is completely clean, and prevents any
 binary artefacts (like <code class="file">.o</code>, <code>.so</code>) from appearing in your local
 package directory, but is considerably slower, because every compile has
 to start from scratch.</p></dd>
+
+
 <dt>build_opts</dt>
 <dd><p>Options to pass to <code>R CMD build</code>, only used when <code>build</code> is <code>TRUE</code>.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments passed to <code><a href="https://remotes.r-lib.org/reference/install_deps.html" class="external-link">remotes::install_deps()</a></code>
 when installing dependencies.</p></dd>
+
 </dl></div>
 
     <div class="section level2">
@@ -161,7 +178,7 @@ when installing dependencies.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>
