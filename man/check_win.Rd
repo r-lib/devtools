@@ -61,13 +61,13 @@ is also useful to check that your package is ok on windows.
 }
 \section{Functions}{
 \itemize{
-\item \code{check_win_devel}: Check package on the development version of R.
+\item \code{check_win_devel()}: Check package on the development version of R.
 
-\item \code{check_win_release}: Check package on the release version of R.
+\item \code{check_win_release()}: Check package on the release version of R.
 
-\item \code{check_win_oldrelease}: Check package on the previous major release version of R.
+\item \code{check_win_oldrelease()}: Check package on the previous major release version of R.
+
 }}
-
 \seealso{
 Other build functions: 
 \code{\link{check_mac_release}()},
