@@ -28,8 +28,7 @@ rerun them every time you fix a problem.}
 
 \item{show}{DEPRECATED.}
 
-\item{run_donttest}{if \code{TRUE}, do run \verb{\\donttest} sections in the Rd files.
-out.}
+\item{run_donttest}{if \code{TRUE}, do run \verb{\\donttest} sections in the Rd files.}
 
 \item{run_dontrun}{if \code{TRUE}, do run \verb{\\dontrun} sections in the Rd files.}
 

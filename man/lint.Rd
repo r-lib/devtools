@@ -14,7 +14,7 @@ package object.  See \code{\link[=as.package]{as.package()}} for more informatio
 the previous results. Consult the lintr package to learn more about its
 caching behaviour.}
 
-\item{...}{Additional arguments passed to \code{\link[lintr:lint_package]{lintr::lint_package()}}.}
+\item{...}{Additional arguments passed to \code{\link[lintr:lint]{lintr::lint_package()}}.}
 }
 \description{
 The default linters correspond to the style guide at
@@ -22,5 +22,5 @@ The default linters correspond to the style guide at
 of them using the \code{linters} parameter.
 }
 \seealso{
-\code{\link[lintr:lint_package]{lintr::lint_package()}}, \code{\link[lintr:lint_file]{lintr::lint()}}
+\code{\link[lintr:lint]{lintr::lint_package()}}, \code{\link[lintr:lint]{lintr::lint()}}
 }

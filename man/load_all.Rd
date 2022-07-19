@@ -43,31 +43,51 @@ when a package is installed and loaded with \code{\link[=library]{library()}}.
 }
 \details{
 Currently \code{load_all}:
-
 \itemize{
-\item Loads all data files in \verb{data/}.  See \code{\link[pkgload:load_data]{load_data()}}
-for more details.
-
+\item Loads all data files in \verb{data/}.  See \code{\link[pkgload:load_data]{load_data()}} for more
+details.
 \item Sources all R files in the R directory, storing results in
 environment that behaves like a regular package namespace. See
 below and \code{\link[pkgload:load_code]{load_code()}} for more details.
-
-\item Compiles any C, C++, or Fortran code in the \verb{src/} directory
-and connects the generated DLL into R. See \code{pkgload::compile_dll()}
+\item Compiles any C, C++, or Fortran code in the \verb{src/} directory and
+connects the generated DLL into R. See \code{\link[pkgbuild:compile_dll]{pkgbuild::compile_dll()}}
 for more details.
-
 \item Loads any compiled translations in \code{inst/po}.
+\item Runs \code{.onAttach()}, \code{.onLoad()} and \code{.onUnload()} functions at
+the correct times.
+\item If you use \pkg{testthat}, will load all test helpers so you can
+access them interactively. devtools sets the \code{DEVTOOLS_LOAD}
+environment variable to \code{"true"} to let you check whether the
+helpers are run during package loading.
+}
 
-\item Runs \code{.onAttach()}, \code{.onLoad()} and \code{.onUnload()}
-functions at the correct times.
+\code{is_loading()} returns \code{TRUE} when it is called while \code{load_all()}
+is running. This may be useful e.g. in onLoad hooks.
+}
+\section{Differences with \code{loadNamespace()} and \code{library()}}{
 
-\item If you use \pkg{testthat}, will load all test helpers so
-you can access them interactively. devtools sets the
-\code{DEVTOOLS_LOAD} environment variable to \code{"true"} to
-let you check whether the helpers are run during package loading.
+
+\code{load_all()} tries its best to reproduce the behaviour of
+\code{\link[=loadNamespace]{loadNamespace()}} and \code{\link[=library]{library()}}. However it deviates from normal
+package loading in several ways.
+\itemize{
+\item It doesn't install the package on disk, so \code{\link[pkgload:system.file]{system.file()}} has no
+way of determining the location of the development files. To work
+around this, pkgload installs its own version of \code{\link[pkgload:system.file]{system.file()}}
+on the search path to make it easier to use interactively while
+developing. However this definition is only visible to the global
+environment, not to the namespaces of third party packages.
+
+One workaround for other packages to see the development files of
+your package while you're developing with devtools is for them to
+use \code{fs::path_package()} instead of \code{system.file()}.
+\item Whereas \code{loadNamespace()} and \code{library()} only load package
+dependencies when they are needed, \code{load_all()} loads all packages
+referenced in \code{Imports} at load time.
+}
 
 }
-}
+
 \section{Namespaces}{
 
 
