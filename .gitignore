@@ -13,3 +13,4 @@ script.R
 /Meta/
 tests/*/*/.gitignore
 docs/
+*.key
