@@ -32,5 +32,8 @@
 
 ## usethis namespace: start
 #' @importFrom lifecycle deprecated
+#' @importFrom miniUI miniPage
+#' @importFrom profvis profvis
+#' @importFrom urlchecker url_check
 ## usethis namespace: end
 NULL
