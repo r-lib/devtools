@@ -19,7 +19,6 @@ Depends:
 Imports: 
     cli (>= 3.2.0),
     desc (>= 1.4.0),
-    DT (>= 0.21),
     ellipsis (>= 0.3.2),
     fs (>= 1.5.2),
     lifecycle (>= 1.0.1),
@@ -47,6 +46,7 @@ Suggests:
     covr (>= 3.5.1),
     curl (>= 4.3.2),
     digest (>= 0.6.29),
+    DT (>= 0.21),
     foghorn (>= 1.4.2),
     gh (>= 1.3.0),
     gmailr (>= 1.0.1),
