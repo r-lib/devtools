@@ -23,7 +23,8 @@ devtools::install_github("r-lib/devtools")
 
 ## Cheatsheet
 
-<a href="https://rawgit.com/rstudio/cheatsheets/main/package-development.pdf"><img src="https://raw.githubusercontent.com/batpigandme/cheatsheets/1c942c36846559b3e8efbd40d023bc351aeed6ba/pngs/thumbnails/package-development-thumbs.png" height="252"/></a>
+<a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/package-development.pdf"><img src="https://github.com/rstudio/cheatsheets/raw/main/pngs/thumbnails/package-development-thumbs.png" height="252"/></a>
+
 
 ## Usage
 
