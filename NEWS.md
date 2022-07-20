@@ -1,4 +1,4 @@
-# devtools (development version)
+# devtools 2.4.4
 
 * `install(reload = TRUE)` now calls `pkgload::unregister()` instead
   of `pkload::unload()` (#2349). This allows the package to keep
