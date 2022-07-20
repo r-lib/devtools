@@ -96,7 +96,7 @@ install <-
     was_attached <- is_attached(pkg)
 
     if (reload && was_loaded) {
-      pkgload::unload(pkg$package)
+      pkgload::unregister(pkg$package)
     }
 
     pkgbuild::with_build_tools(required = FALSE,
