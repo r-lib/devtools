@@ -21,20 +21,6 @@ emails.
 
 \item \code{devtools.install.args}: a string giving extra arguments passed
 to \verb{R CMD install} by \code{\link[=install]{install()}}.
-
-\item \code{devtools.desc.author}: a string providing a default Authors@R
-string to be used in new \file{DESCRIPTION}s.  Should be a R code, and
-look like \code{"Hadley Wickham <h.wickham@gmail.com> [aut, cre]"}. See
-\code{\link[utils:person]{utils::as.person()}} for more details.
-
-\item \code{devtools.desc.license}: a default license string to use for
-new packages.
-
-\item \code{devtools.desc.suggests}: a character vector listing packages to
-to add to suggests by defaults for new packages.
-\item \code{devtools.desc}: a named list listing any other
-extra options to add to \file{DESCRIPTION}
-
 }
 }
 
