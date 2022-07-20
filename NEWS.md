@@ -1,3 +1,5 @@
+# devtools (development version)
+
 # devtools 2.4.4
 
 * `install(reload = TRUE)` now calls `pkgload::unregister()` instead
