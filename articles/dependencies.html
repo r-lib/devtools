@@ -14,9 +14,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
-<link href="../deps/_Source%20Code%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.2/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.2/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Devtools dependencies">
@@ -41,14 +41,14 @@
     
     <a class="navbar-brand me-2" href="../index.html">devtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -87,12 +87,16 @@
     
   </div>
 </nav><div class="container template-article" id="container">
-<script src="dependencies_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <main id="main"><div class="page-header">
+
+
+
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Devtools dependencies</h1>
                         <h4 data-toc-skip class="author">Jim Hester, Hadley Wickham</h4>
             
-            <h4 data-toc-skip class="date">2021-12-06</h4>
+            <h4 data-toc-skip class="date">2022-07-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/r-lib/devtools/blob/HEAD/vignettes/dependencies.Rmd" class="external-link"><code>vignettes/dependencies.Rmd</code></a></small>
       <div class="d-none name"><code>dependencies.Rmd</code></div>
@@ -100,9 +104,9 @@
 
     
     
-<div class="section level1">
-<h1 id="package-remotes">Package remotes<a class="anchor" aria-label="anchor" href="#package-remotes"></a>
-</h1>
+<div class="section level2">
+<h2 id="package-remotes">Package remotes<a class="anchor" aria-label="anchor" href="#package-remotes"></a>
+</h2>
 <p>Devtools version 1.9 supports package dependency installation for packages not yet in a standard package repository such as <a href="https://cran.r-project.org" class="external-link">CRAN</a> or <a href="http://bioconductor.org" class="external-link">Bioconductor</a>.</p>
 <p>You can mark any regular dependency defined in the <code>Depends</code>, <code>Imports</code>, <code>Suggests</code> or <code>Enhances</code> fields as being installed from a remote location by adding the remote location to <code>Remotes</code> in your <code>DESCRIPTION</code> file. This will cause devtools to download and install them prior to installing your package (so they won’t be installed from CRAN).</p>
 <p>The remote dependencies specified in <code>Remotes</code> should be described in the following form.</p>
@@ -123,49 +127,49 @@ Imports:
     rlang
 Remotes:  
     r-lib/rlang</code></pre>
-<div class="section level3">
-<h3 id="github">GitHub<a class="anchor" aria-label="anchor" href="#github"></a>
-</h3>
+<div class="section level4">
+<h4 id="github">GitHub<a class="anchor" aria-label="anchor" href="#github"></a>
+</h4>
 <p>Because GitHub is the most commonly used unofficial package distribution in R, it’s the default:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> hadley/testthat</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> hadley/testthat</span></span></code></pre></div>
 <p>You can also specify a specific hash, tag, or pull request (using the same syntax as <code><a href="../reference/remote-reexports.html">install_github()</a></code> if you want a particular commit. Otherwise the latest commit on the HEAD of the branch is used.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> hadley/httr@v0.4,</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="at">  klutometis/roxygen</span><span class="co">#142,</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="at">  hadley/testthat@c67018fa4970</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> hadley/httr@v0.4,</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  klutometis/roxygen</span><span class="co">#142,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">  hadley/testthat@c67018fa4970</span></span></code></pre></div>
 <p>A type of <code>github</code> can be specified, but is not required</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> github::hadley/ggplot2</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> github::hadley/ggplot2</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="other-sources">Other sources<a class="anchor" aria-label="anchor" href="#other-sources"></a>
-</h3>
+<div class="section level4">
+<h4 id="other-sources">Other sources<a class="anchor" aria-label="anchor" href="#other-sources"></a>
+</h4>
 <p>All of the currently supported install sources are available, see the ‘See Also’ section in <code><a href="../reference/install.html">?install</a></code> for a complete list.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># GitLab</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> gitlab::jimhester/covr</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Git</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> git::git@bitbucket.org:djnavarro/lsr.git</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># Bitbucket</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> bitbucket::sulab/mygene.r@default, djnavarro/lsr</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># Bioconductor</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> bioc::3.3/SummarizedExperiment</span><span class="co">#117513, bioc::release/Biobase</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># SVN</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> svn::https://github.com/tidyverse/stringr</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co"># URL</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> url::https://github.com/tidyverse/stringr/archive/main.zip</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="co"># Local</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> local::/pkgs/testthat</span></span>
-<span id="cb6-21"><a href="#cb6-21"></a></span>
-<span id="cb6-22"><a href="#cb6-22"></a><span class="co"># Gitorious</span></span>
-<span id="cb6-23"><a href="#cb6-23"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> gitorious::r-mpc-package/r-mpc-package</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GitLab</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> gitlab::jimhester/covr</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Git</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> git::git@bitbucket.org:djnavarro/lsr.git</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Bitbucket</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> bitbucket::sulab/mygene.r@default, djnavarro/lsr</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Bioconductor</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> bioc::3.3/SummarizedExperiment</span><span class="co">#117513, bioc::release/Biobase</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># SVN</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> svn::https://github.com/tidyverse/stringr</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># URL</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> url::https://github.com/tidyverse/stringr/archive/main.zip</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Local</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> local::/pkgs/testthat</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Gitorious</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">Remotes</span><span class="kw">:</span><span class="at"> gitorious::r-mpc-package/r-mpc-package</span></span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="cran-submission">CRAN submission<a class="anchor" aria-label="anchor" href="#cran-submission"></a>
-</h3>
+<div class="section level4">
+<h4 id="cran-submission">CRAN submission<a class="anchor" aria-label="anchor" href="#cran-submission"></a>
+</h4>
 <p>When you submit your package to CRAN, all of its dependencies must also be available on CRAN. For this reason, <code><a href="../reference/release.html">release()</a></code> will warn you if you try to release a package with a <code>Remotes</code> field.</p>
 </div>
 </div>
@@ -184,7 +188,7 @@ Remotes:
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
   </div></footer>
