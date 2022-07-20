@@ -1,5 +1,10 @@
 # devtools (development version)
 
+* `install(reload = TRUE)` now calls `pkgload::unregister()` instead
+  of `pkload::unload()` (#2349). This allows the package to keep
+  functioning if it is still in use in the R session (e.g. through
+  event handlers).
+
 * `test()` no longer calls `load_all()` twice. `test_active_file()`
   now calls `load_all()` via testthat.
 
