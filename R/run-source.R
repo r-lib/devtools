@@ -33,7 +33,7 @@ source_url <- function(url, ..., sha1 = NULL) {
   rlang::check_installed("digest")
 
   temp_file <- file_temp()
-  on.exit(file_delete(temp_file))
+  on.exit(file_delete(temp_file), add = TRUE)
 
   request <- httr::GET(url)
   httr::stop_for_status(request)
