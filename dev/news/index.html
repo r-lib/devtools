@@ -65,7 +65,7 @@
 
     <div class="section level2"><h2 class="pkg-version" data-toc-text="development version" id="devtools-development-version">devtools (development version)<a class="anchor" aria-label="anchor" href="#devtools-development-version"></a></h2></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.4.4" id="devtools-244">devtools 2.4.4<a class="anchor" aria-label="anchor" href="#devtools-244"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.4.4" id="devtools-244">devtools 2.4.4<a class="anchor" aria-label="anchor" href="#devtools-244"></a></h2><p class="text-muted">CRAN release: 2022-07-20</p>
 <ul><li><p><code>install(reload = TRUE)</code> now calls <code><a href="https://pkgload.r-lib.org/reference/unload.html" class="external-link">pkgload::unregister()</a></code> instead of <code>pkload::unload()</code> (<a href="https://github.com/r-lib/devtools/issues/2349" class="external-link">#2349</a>). This allows the package to keep functioning if it is still in use in the R session (e.g. through event handlers).</p></li>
 <li><p><code><a href="../reference/test.html">test()</a></code> no longer calls <code><a href="../reference/load_all.html">load_all()</a></code> twice. <code><a href="../reference/test.html">test_active_file()</a></code> now calls <code><a href="../reference/load_all.html">load_all()</a></code> via testthat.</p></li>
 <li><p><code>aspell_env_var()</code> does a better job of matching <code>R CMD check</code> behaviour, which is only to use <code>aspell</code>, not <code>hunspell</code> or <code>ispell</code> (<a href="https://github.com/r-lib/devtools/issues/2376" class="external-link">#2376</a>).</p></li>
