@@ -60,6 +60,9 @@ test_active_file <- function(file = find_active_file(), ...) {
   pkg <- as.package(path_dir(test_files)[[1]])
 
   withr::local_envvar(r_env_vars())
+  if (is_rstudio_running()) {
+    rstudioapi::executeCommand("activateConsole", quiet = TRUE)
+  }
   testthat::test_file(test_files, ..., load_package = "source")
 }
 
