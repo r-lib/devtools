@@ -39,17 +39,18 @@
 #'
 #' @return An object containing errors, warnings, and notes.
 #' @template devtools
+#' @inheritParams rcmdcheck::rcmdcheck
 #' @param document By default (`NULL`) will document if your installed
 #'   roxygen2 version matches the version declared in the `DESCRIPTION`
 #'   file. Use `TRUE` or `FALSE` to override the default.
 #' @param build_args Additional arguments passed to `R CMD build`
-#' @param check_dir the directory in which the package is checked
-#'   compatibility. `args = "--output=/foo/bar"` can be used to change the
-#'   check directory.
 #' @param ... Additional arguments passed on to [pkgbuild::build()].
 #' @param vignettes If `FALSE`, do not build or check vignettes, equivalent to
 #'   using `args = '--ignore-vignettes' and `build_args = '--no-build-vignettes'.
-#' @param cleanup Deprecated.
+#' @param cleanup `r lifecycle::badge("deprecated")` `check()` no longer does
+#'   any cleanup, so if you want to inspect the built package, store the return
+#'   value of `check()` and use the `check_dir` argument to leave it in your
+#'   preferred location.
 #' @seealso [release()] if you want to send the checked package to
 #'   CRAN.
 #' @export
@@ -67,7 +68,7 @@ check <- function(pkg = ".",
                   env_vars = c(NOT_CRAN = "true"),
                   quiet = FALSE,
                   check_dir = tempdir(),
-                  cleanup = TRUE,
+                  cleanup = deprecated(),
                   vignettes = TRUE,
                   error_on = c("never", "error", "warning", "note")) {
   pkg <- as.package(pkg)
@@ -75,8 +76,8 @@ check <- function(pkg = ".",
 
   save_all()
 
-  if (!missing(cleanup)) {
-    lifecycle::deprecate_stop("1.11.0", "lifecycle::check(cleanup = )")
+  if (lifecycle::is_present(cleanup)) {
+    lifecycle::deprecate_stop("1.11.0", "check(cleanup = )")
   }
 
   if (missing(error_on) && !interactive()) {

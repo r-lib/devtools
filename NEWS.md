@@ -1,5 +1,9 @@
 # devtools (development version)
 
+* `check(cleanup =)` was deprecated in devtools v1.11.0 (2016-04-12) and was
+  made defunct in v2.4.4 (2022-07-20). The documentation is more clear now about
+  recommended alternatives.
+
 # devtools 2.4.4
 
 * `install(reload = TRUE)` now calls `pkgload::unregister()` instead

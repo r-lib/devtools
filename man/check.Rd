@@ -20,7 +20,7 @@ check(
   env_vars = c(NOT_CRAN = "true"),
   quiet = FALSE,
   check_dir = tempdir(),
-  cleanup = TRUE,
+  cleanup = deprecated(),
   vignettes = TRUE,
   error_on = c("never", "error", "warning", "note")
 )
@@ -86,11 +86,14 @@ Windows.)}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
-\item{check_dir}{the directory in which the package is checked
-compatibility. \code{args = "--output=/foo/bar"} can be used to change the
-check directory.}
+\item{check_dir}{Path to a directory where the check is performed.
+If this is not \code{NULL}, then the a temporary directory is used, that
+is cleaned up when the returned object is garbage collected.}
 
-\item{cleanup}{Deprecated.}
+\item{cleanup}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{check()} no longer does
+any cleanup, so if you want to inspect the built package, store the return
+value of \code{check()} and use the \code{check_dir} argument to leave it in your
+preferred location.}
 
 \item{vignettes}{If \code{FALSE}, do not build or check vignettes, equivalent to
 using \verb{args = '--ignore-vignettes' and }build_args = '--no-build-vignettes'.}
