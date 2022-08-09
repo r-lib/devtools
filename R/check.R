@@ -48,10 +48,7 @@
 #' @param ... Additional arguments passed on to [pkgbuild::build()].
 #' @param vignettes If `FALSE`, do not build or check vignettes, equivalent to
 #'   using `args = '--ignore-vignettes' and `build_args = '--no-build-vignettes'.
-#' @param cleanup `r lifecycle::badge("deprecated")` `check()` no longer does
-#'   any cleanup, so if you want to inspect the built package, store the return
-#'   value of `check()` and use the `check_dir` argument to leave it in your
-#'   preferred location.
+#' @param cleanup `r lifecycle::badge("deprecated")` See `check_dir` for details.
 #' @seealso [release()] if you want to send the checked package to
 #'   CRAN.
 #' @export
