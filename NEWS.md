@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `check(check_dir = NULL)` is the new default, to align with the default
+  behaviour of the underlying `rcmdcheck::rcmdcheck()`.
+
 * `check(cleanup =)` was deprecated in devtools v1.11.0 (2016-04-12) and was
   made defunct in v2.4.4 (2022-07-20). The documentation is more clear now about
   recommended alternatives.
