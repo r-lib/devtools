@@ -65,7 +65,7 @@ check <- function(pkg = ".",
                   args = "--timings",
                   env_vars = c(NOT_CRAN = "true"),
                   quiet = FALSE,
-                  check_dir = tempdir(),
+                  check_dir = NULL,
                   cleanup = deprecated(),
                   vignettes = TRUE,
                   error_on = c("never", "error", "warning", "note")) {
