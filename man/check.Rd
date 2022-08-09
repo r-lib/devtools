@@ -87,10 +87,7 @@ Windows.)}
 If this is not \code{NULL}, then the a temporary directory is used, that
 is cleaned up when the returned object is garbage collected.}
 
-\item{cleanup}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{check()} no longer does
-any cleanup, so if you want to inspect the built package, store the return
-value of \code{check()} and use the \code{check_dir} argument to leave it in your
-preferred location.}
+\item{cleanup}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} See \code{check_dir} for details.}
 
 \item{vignettes}{If \code{FALSE}, do not build or check vignettes, equivalent to
 using \verb{args = '--ignore-vignettes' and }build_args = '--no-build-vignettes'.}
