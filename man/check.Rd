@@ -3,7 +3,7 @@
 \name{check}
 \alias{check}
 \alias{check_built}
-\title{Build and check a package, cleaning up automatically on success.}
+\title{Build and check a package}
 \usage{
 check(
   pkg = ".",
@@ -20,7 +20,7 @@ check(
   env_vars = c(NOT_CRAN = "true"),
   quiet = FALSE,
   check_dir = tempdir(),
-  cleanup = TRUE,
+  cleanup = deprecated(),
   vignettes = TRUE,
   error_on = c("never", "error", "warning", "note")
 )
@@ -52,27 +52,24 @@ file. Use \code{TRUE} or \code{FALSE} to override the default.}
 
 \item{...}{Additional arguments passed on to \code{\link[pkgbuild:build]{pkgbuild::build()}}.}
 
-\item{manual}{If \code{FALSE}, don't build and check manual
-(\code{--no-manual}).}
+\item{manual}{If \code{FALSE}, don't build and check manual (\code{--no-manual}).}
 
-\item{cran}{if \code{TRUE} (the default), check using the same settings as
-CRAN uses.}
+\item{cran}{if \code{TRUE} (the default), check using the same settings as CRAN
+uses.}
 
-\item{remote}{Sets \verb{_R_CHECK_CRAN_INCOMING_REMOTE_} env var.
-If \code{TRUE}, performs a number of CRAN incoming checks that require
-remote access.}
+\item{remote}{Sets \verb{_R_CHECK_CRAN_INCOMING_REMOTE_} env var. If \code{TRUE},
+performs a number of CRAN incoming checks that require remote access.}
 
-\item{incoming}{Sets \verb{_R_CHECK_CRAN_INCOMING_} env var.
-If \code{TRUE}, performs a number of CRAN incoming checks.}
+\item{incoming}{Sets \verb{_R_CHECK_CRAN_INCOMING_} env var. If \code{TRUE}, performs a
+number of CRAN incoming checks.}
 
-\item{force_suggests}{Sets \verb{_R_CHECK_FORCE_SUGGESTS_}. If
-\code{FALSE} (the default), check will proceed even if all suggested
-packages aren't found.}
+\item{force_suggests}{Sets \verb{_R_CHECK_FORCE_SUGGESTS_}. If \code{FALSE} (the
+default), check will proceed even if all suggested packages aren't found.}
 
-\item{run_dont_test}{Sets \code{--run-donttest} so that tests surrounded in
-\verb{\donttest{}} are also tested. When \code{cran = TRUE}, this only affects
-R 3.6 and earlier; in R 4.0.0 code in \verb{\donttest{}} is always run as
-part of CRAN submission.}
+\item{run_dont_test}{Sets \code{--run-donttest} so that examples surrounded in
+\verb{\donttest{}} are also run. When \code{cran = TRUE}, this only affects R 3.6 and
+earlier; in R 4.0, code in \verb{\donttest{}} is always run as part of CRAN
+submission.}
 
 \item{args}{Character vector of arguments to pass to \verb{R CMD check}. Pass each
 argument as a single element of this character vector (do not use spaces to
@@ -86,11 +83,11 @@ Windows.)}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
-\item{check_dir}{the directory in which the package is checked
-compatibility. \code{args = "--output=/foo/bar"} can be used to change the
-check directory.}
+\item{check_dir}{Path to a directory where the check is performed.
+If this is not \code{NULL}, then the a temporary directory is used, that
+is cleaned up when the returned object is garbage collected.}
 
-\item{cleanup}{Deprecated.}
+\item{cleanup}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} See \code{check_dir} for details.}
 
 \item{vignettes}{If \code{FALSE}, do not build or check vignettes, equivalent to
 using \verb{args = '--ignore-vignettes' and }build_args = '--no-build-vignettes'.}
@@ -110,20 +107,19 @@ environment variable. If that is not set, then \code{"never"} is used.}
 An object containing errors, warnings, and notes.
 }
 \description{
-\code{check} automatically builds and checks a source package, using all
-known best practices. \code{check_built} checks an already built package.
-}
-\details{
-Passing \verb{R CMD check} is essential if you want to submit your package
-to CRAN: you must not have any ERRORs or WARNINGs, and you want to ensure
-that there are as few NOTEs as possible.  If you are not submitting to CRAN,
-at least ensure that there are no ERRORs or WARNINGs: these typically
-represent serious problems.
+\code{check()} automatically builds and checks a source package, using all known
+best practices. \code{check_built()} checks an already-built package.
 
-\code{check} automatically builds a package before calling \code{check_built}
-as this is the recommended way to check packages.  Note that this process
-runs in an independent realisation of R, so nothing in your current
-workspace will affect the process.
+Passing \verb{R CMD check} is essential if you want to submit your package to
+CRAN: you must not have any ERRORs or WARNINGs, and you want to ensure that
+there are as few NOTEs as possible.  If you are not submitting to CRAN, at
+least ensure that there are no ERRORs or WARNINGs: these typically represent
+serious problems.
+
+\code{check()} automatically builds a package before calling \code{check_built()}, as
+this is the recommended way to check packages.  Note that this process runs
+in an independent R session, so nothing in your current workspace will affect
+the process.
 }
 \section{Environment variables}{
 
