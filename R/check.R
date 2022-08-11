@@ -159,7 +159,9 @@ can_document <- function(pkg) {
 #' @rdname check
 #' @param path Path to built package.
 #' @param cran if `TRUE` (the default), check using the same settings as CRAN
-#'   uses.
+#'   uses. Because this is a moving target and is not uniform across all of
+#'   CRAN's machine, this is on a "best effort" basis. It is more complicated
+#'   than simply setting `--as-cran`.
 #' @param remote Sets `_R_CHECK_CRAN_INCOMING_REMOTE_` env var. If `TRUE`,
 #'   performs a number of CRAN incoming checks that require remote access.
 #' @param incoming Sets `_R_CHECK_CRAN_INCOMING_` env var. If `TRUE`, performs a
@@ -188,6 +190,10 @@ check_built <- function(path = NULL, cran = TRUE,
 
   if (cran) {
     args <- c("--as-cran", args)
+    env_vars <- c(
+      "_R_CHECK_PACKAGES_USED_IGNORE_UNUSED_IMPORTS_" = as.character(FALSE),
+      env_vars
+    )
   }
   if (run_dont_test) {
     args <- c("--run-donttest", args)

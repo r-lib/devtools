@@ -55,7 +55,9 @@ file. Use \code{TRUE} or \code{FALSE} to override the default.}
 \item{manual}{If \code{FALSE}, don't build and check manual (\code{--no-manual}).}
 
 \item{cran}{if \code{TRUE} (the default), check using the same settings as CRAN
-uses.}
+uses. Because this is a moving target and is not uniform across all of
+CRAN's machine, this is on a "best effort" basis. It is more complicated
+than simply setting \code{--as-cran}.}
 
 \item{remote}{Sets \verb{_R_CHECK_CRAN_INCOMING_REMOTE_} env var. If \code{TRUE},
 performs a number of CRAN incoming checks that require remote access.}
