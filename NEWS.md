@@ -1,5 +1,11 @@
 # devtools (development version)
 
+* `check(cran = TRUE)` sets the env var
+  `_R_CHECK_PACKAGES_USED_IGNORE_UNUSED_IMPORTS_` to `FALSE`, in order to
+  surface the `"Namespace in Imports field not imported from"` NOTE. This only
+  applies to R >= 4.2, due to favorable changes in the behaviour of
+  `R CMD check --as-cran` (#2459).
+
 * `check(check_dir = NULL)` is the new default, to align with the default
   behaviour of the underlying `rcmdcheck::rcmdcheck()`.
 
