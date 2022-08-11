@@ -13,7 +13,8 @@
 #' `check()` automatically builds a package before calling `check_built()`, as
 #' this is the recommended way to check packages.  Note that this process runs
 #' in an independent R session, so nothing in your current workspace will affect
-#' the process.
+#' the process. Under-the-hood, `check()` and `check_built()` rely on
+#' [pkgbuild::build()] and [rcmdcheck::rcmdcheck()].
 #'
 #' @section Environment variables:
 #'
@@ -38,7 +39,7 @@
 #'    `force_suggests`
 #' }
 #'
-#' @return An object containing errors, warnings, and notes.
+#' @return An object containing errors, warnings, notes, and more.
 #' @template devtools
 #' @inheritParams rcmdcheck::rcmdcheck
 #' @param document By default (`NULL`) will document if your installed

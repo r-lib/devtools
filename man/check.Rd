@@ -104,7 +104,7 @@ environment variable. If that is not set, then \code{"never"} is used.}
 \item{path}{Path to built package.}
 }
 \value{
-An object containing errors, warnings, and notes.
+An object containing errors, warnings, notes, and more.
 }
 \description{
 \code{check()} automatically builds and checks a source package, using all known
@@ -119,7 +119,8 @@ serious problems.
 \code{check()} automatically builds a package before calling \code{check_built()}, as
 this is the recommended way to check packages.  Note that this process runs
 in an independent R session, so nothing in your current workspace will affect
-the process.
+the process. Under-the-hood, \code{check()} and \code{check_built()} rely on
+\code{\link[pkgbuild:build]{pkgbuild::build()}} and \code{\link[rcmdcheck:rcmdcheck]{rcmdcheck::rcmdcheck()}}.
 }
 \section{Environment variables}{
 
