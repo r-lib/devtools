@@ -3,8 +3,6 @@ compact <- function(x) {
   x[!is_empty]
 }
 
-"%||%" <- function(a, b) if (!is.null(a)) a else b
-
 "%:::%" <- function(p, f) {
   get(f, envir = asNamespace(p))
 }
@@ -28,13 +26,6 @@ is_attached <- function(pkg = ".") {
 
 vcapply <- function(x, FUN, ...) {
   vapply(x, FUN, FUN.VALUE = character(1), ...)
-}
-
-release_bullets <- function() {
-  c(
-    '`usethis::use_latest_dependencies(TRUE, "CRAN")`',
-    NULL
-  )
 }
 
 is_testing <- function() {
