@@ -32,6 +32,13 @@ is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }
 
+release_bullets <- function() {
+  c(
+    '`usethis::use_latest_dependencies(TRUE, "CRAN")`',
+    NULL
+  )
+}
+
 is_rstudio_running <- function() {
   !is_testing() && rstudioapi::isAvailable()
 }
