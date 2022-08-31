@@ -28,15 +28,15 @@ vcapply <- function(x, FUN, ...) {
   vapply(x, FUN, FUN.VALUE = character(1), ...)
 }
 
-is_testing <- function() {
-  identical(Sys.getenv("TESTTHAT"), "true")
-}
-
 release_bullets <- function() {
   c(
     '`usethis::use_latest_dependencies(TRUE, "CRAN")`',
     NULL
   )
+}
+
+is_testing <- function() {
+  identical(Sys.getenv("TESTTHAT"), "true")
 }
 
 is_rstudio_running <- function() {
