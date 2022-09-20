@@ -31,8 +31,19 @@ test_that("devtools::test_active_file works", {
   expect_equal(length(out), 1)
 })
 
-test_that("TESTTHAT_PKG environment varaible is set", {
-  test_test(test_path("testTest"), filter = "envvar")
+test_that("TESTTHAT_PKG environment variable is set", {
+  withr::local_envvar("TESTTHAT_PKG" = "incorrect")
+
+  test_test(
+    test_path("testTest"),
+    filter = "envvar",
+    stop_on_failure = TRUE
+  )
+  test_active_file(
+    test_path("testTest/tests/testthat/test-envvar.R"),
+    stop_on_failure = TRUE
+  )
+
   expect_true(TRUE)
 })
 

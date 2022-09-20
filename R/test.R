@@ -63,7 +63,12 @@ test_active_file <- function(file = find_active_file(), ...) {
   if (is_rstudio_running()) {
     rstudioapi::executeCommand("activateConsole", quiet = TRUE)
   }
-  testthat::test_file(test_files, ..., load_package = "source")
+  testthat::test_file(
+    test_files,
+    package = pkg$package,
+    ...,
+    load_package = "source"
+  )
 }
 
 #' @param show_report Show the test coverage report.
