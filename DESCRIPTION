@@ -35,7 +35,7 @@ Imports:
     rversions (>= 2.1.1),
     sessioninfo (>= 1.2.2),
     stats,
-    testthat (>= 3.1.4),
+    testthat (>= 3.1.4.9000),
     tools,
     urlchecker (>= 1.0.1),
     utils,
@@ -68,3 +68,5 @@ Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Config/testthat/edition: 3
+Remotes:  
+    r-lib/testthat

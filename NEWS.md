@@ -1,5 +1,11 @@
 # devtools (development version)
 
+* `test_active_file()` passes the package onto to testthat so it can correctly
+  set the `TESTTHAT_PKG` envvar (#2470).
+
+* You can once again use `devtools::test()` and `devtools::test_active_file()`
+  with the testthat package.
+
 * `check(cran = TRUE)` sets the env var
   `_R_CHECK_PACKAGES_USED_IGNORE_UNUSED_IMPORTS_` to `FALSE`, in order to
   surface the `"Namespace in Imports field not imported from"` NOTE. This only

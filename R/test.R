@@ -37,10 +37,13 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
 
   cli::cli_inform(c(i = "Testing {.pkg {pkg$package}}"))
   withr::local_envvar(r_env_vars())
+
+  load_package <- load_package_if_needed(pkg)
   testthat::test_local(
     pkg$path,
     filter = filter,
     stop_on_failure = stop_on_failure,
+    load_package = load_package,
     ...
   )
 }
@@ -63,7 +66,25 @@ test_active_file <- function(file = find_active_file(), ...) {
   if (is_rstudio_running()) {
     rstudioapi::executeCommand("activateConsole", quiet = TRUE)
   }
-  testthat::test_file(test_files, ..., load_package = "source")
+
+  load_package <- load_package_if_needed(pkg)
+  testthat::test_file(
+    test_files,
+    package = pkg$package,
+    load_package = load_package,
+    ...
+  )
+}
+
+load_package_if_needed <- function(pkg) {
+  if (pkg$package == "testthat") {
+    # Must load testthat outside of testthat so tests are run with
+    # dev testthat
+    load_all(pkg$path, quiet = TRUE)
+    "none"
+  } else {
+    "source"
+  }
 }
 
 #' @param show_report Show the test coverage report.
