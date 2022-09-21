@@ -43,6 +43,7 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
     pkg$path,
     filter = filter,
     stop_on_failure = stop_on_failure,
+    load_package = load_package,
     ...
   )
 }
@@ -70,8 +71,8 @@ test_active_file <- function(file = find_active_file(), ...) {
   testthat::test_file(
     test_files,
     package = pkg$package,
-    ...,
-    load_package = load_package
+    load_package = load_package,
+    ...
   )
 }
 
