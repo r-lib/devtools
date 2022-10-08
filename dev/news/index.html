@@ -65,11 +65,11 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="devtools-development-version">devtools (development version)<a class="anchor" aria-label="anchor" href="#devtools-development-version"></a></h2>
-<ul><li><p><code><a href="../reference/test.html">test_active_file()</a></code> passes the package onto to testthat so it can correctly set the <code>TESTTHAT_PKG</code> envvar (<a href="https://github.com/r-lib/devtools/issues/2470" class="external-link">#2470</a>).</p></li>
-<li><p>You can once again use <code><a href="../reference/test.html">devtools::test()</a></code> and <code><a href="../reference/test.html">devtools::test_active_file()</a></code> with the testthat package.</p></li>
-<li><p><code>check(cran = TRUE)</code> sets the env var <code>_R_CHECK_PACKAGES_USED_IGNORE_UNUSED_IMPORTS_</code> to <code>FALSE</code>, in order to surface the <code>"Namespace in Imports field not imported from"</code> NOTE. This only applies to R &gt;= 4.2, due to favorable changes in the behaviour of <code>R CMD check --as-cran</code> (<a href="https://github.com/r-lib/devtools/issues/2459" class="external-link">#2459</a>).</p></li>
+<ul><li><p><code>check(cleanup =)</code> was deprecated in devtools v1.11.0 (2016-04-12) and was made defunct in v2.4.4 (2022-07-20). The documentation is more clear now about recommended alternatives.</p></li>
 <li><p><code>check(check_dir = NULL)</code> is the new default, to align with the default behaviour of the underlying <code><a href="http://r-lib.github.io/rcmdcheck/reference/rcmdcheck.html" class="external-link">rcmdcheck::rcmdcheck()</a></code>.</p></li>
-<li><p><code>check(cleanup =)</code> was deprecated in devtools v1.11.0 (2016-04-12) and was made defunct in v2.4.4 (2022-07-20). The documentation is more clear now about recommended alternatives.</p></li>
+<li><p><code>check(cran = TRUE)</code> sets the env var <code>_R_CHECK_PACKAGES_USED_IGNORE_UNUSED_IMPORTS_</code> to <code>FALSE</code>, in order to surface the <code>"Namespace in Imports field not imported from"</code> NOTE. This only applies to R &gt;= 4.2, due to favorable changes in the behaviour of <code>R CMD check --as-cran</code> (<a href="https://github.com/r-lib/devtools/issues/2459" class="external-link">#2459</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test_active_file()</a></code> passes the package onto to testthat so it can correctly set the <code>TESTTHAT_PKG</code> envvar (<a href="https://github.com/r-lib/devtools/issues/2470" class="external-link">#2470</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> and <code><a href="../reference/test.html">test_active_file()</a></code> once again work with testthat itself.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.4.4" id="devtools-244">devtools 2.4.4<a class="anchor" aria-label="anchor" href="#devtools-244"></a></h2><p class="text-muted">CRAN release: 2022-07-20</p>
