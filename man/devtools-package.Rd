@@ -14,7 +14,8 @@ Collection of package development tools.
 Devtools uses the following \code{\link[=options]{options()}} to configure behaviour:
 
 \itemize{
-\item \code{devtools.path}: path to use for \code{\link[=dev_mode]{dev_mode()}}
+\item \code{devtools.path}: path to use for \code{\link[=dev_mode]{dev_mode()}}; note that \code{dev_mode()}
+is deprecated.
 
 \item \code{devtools.name}: your name, used when signing draft
 emails.

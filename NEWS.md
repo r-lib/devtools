@@ -18,6 +18,8 @@
 
 * `test()` and `test_active_file()` once again work with testthat itself.
 
+* `dev_mode()` is deprecated (#2467).
+
 # devtools 2.4.4
 
 * `install(reload = TRUE)` now calls `pkgload::unregister()` instead

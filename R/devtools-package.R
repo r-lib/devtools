@@ -3,7 +3,8 @@
 #' Devtools uses the following [options()] to configure behaviour:
 #'
 #' \itemize{
-#'   \item `devtools.path`: path to use for [dev_mode()]
+#'   \item `devtools.path`: path to use for [dev_mode()]; note that `dev_mode()`
+#'     is deprecated.
 #'
 #'   \item `devtools.name`: your name, used when signing draft
 #'     emails.

@@ -1,5 +1,7 @@
 #' Activate and deactivate development mode.
 #'
+#' `r lifecycle::badge("deprecated")`
+#'
 #' When activated, `dev_mode` creates a new library for storing installed
 #' packages. This new library is automatically created when `dev_mode` is
 #' activated if it does not already exist.
@@ -11,6 +13,7 @@
 #'  [.libPaths()]
 #' @param path directory to library.
 #' @export
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' dev_mode()
@@ -20,6 +23,7 @@ dev_mode <- local({
   .prompt <- NULL
 
   function(on = NULL, path = getOption("devtools.path")) {
+    lifecycle::deprecate_warn("2.4.5", "dev_mode()")
     lib_paths <- .libPaths()
 
     path <- path_real(path)

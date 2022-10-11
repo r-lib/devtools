@@ -14,6 +14,9 @@ will guess based on whether or not \code{path} is in
 \item{path}{directory to library.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+}
+\details{
 When activated, \code{dev_mode} creates a new library for storing installed
 packages. This new library is automatically created when \code{dev_mode} is
 activated if it does not already exist.
@@ -26,3 +29,4 @@ dev_mode()
 dev_mode()
 }
 }
+\keyword{internal}
