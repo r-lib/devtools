@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">devtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,15 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="2.4.4" id="devtools-244">devtools 2.4.4<a class="anchor" aria-label="anchor" href="#devtools-244"></a></h2>
+<h2 class="pkg-version" data-toc-text="2.4.5" id="devtools-245">devtools 2.4.5<a class="anchor" aria-label="anchor" href="#devtools-245"></a></h2>
+<ul><li><p><code>check(cleanup =)</code> was deprecated in devtools v1.11.0 (2016-04-12) and was made defunct in v2.4.4 (2022-07-20). The documentation is more clear now about recommended alternatives.</p></li>
+<li><p><code>check(check_dir = NULL)</code> is the new default, to align with the default behaviour of the underlying <code><a href="http://r-lib.github.io/rcmdcheck/reference/rcmdcheck.html" class="external-link">rcmdcheck::rcmdcheck()</a></code>.</p></li>
+<li><p><code>check(cran = TRUE)</code> sets the env var <code>_R_CHECK_PACKAGES_USED_IGNORE_UNUSED_IMPORTS_</code> to <code>FALSE</code>, in order to surface the <code>"Namespace in Imports field not imported from"</code> NOTE. This only applies to R &gt;= 4.2, due to favorable changes in the behaviour of <code>R CMD check --as-cran</code> (<a href="https://github.com/r-lib/devtools/issues/2459" class="external-link">#2459</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test_active_file()</a></code> passes the package onto to testthat so it can correctly set the <code>TESTTHAT_PKG</code> envvar (<a href="https://github.com/r-lib/devtools/issues/2470" class="external-link">#2470</a>).</p></li>
+<li><p><code><a href="../reference/test.html">test()</a></code> and <code><a href="../reference/test.html">test_active_file()</a></code> once again work with testthat itself.</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.4.4" id="devtools-244">devtools 2.4.4<a class="anchor" aria-label="anchor" href="#devtools-244"></a></h2><p class="text-muted">CRAN release: 2022-07-20</p>
 <ul><li><p><code>install(reload = TRUE)</code> now calls <code><a href="https://pkgload.r-lib.org/reference/unload.html" class="external-link">pkgload::unregister()</a></code> instead of <code>pkload::unload()</code> (<a href="https://github.com/r-lib/devtools/issues/2349" class="external-link">#2349</a>). This allows the package to keep functioning if it is still in use in the R session (e.g. through event handlers).</p></li>
 <li><p><code><a href="../reference/test.html">test()</a></code> no longer calls <code><a href="../reference/load_all.html">load_all()</a></code> twice. <code><a href="../reference/test.html">test_active_file()</a></code> now calls <code><a href="../reference/load_all.html">load_all()</a></code> via testthat.</p></li>
 <li><p><code>aspell_env_var()</code> does a better job of matching <code>R CMD check</code> behaviour, which is only to use <code>aspell</code>, not <code>hunspell</code> or <code>ispell</code> (<a href="https://github.com/r-lib/devtools/issues/2376" class="external-link">#2376</a>).</p></li>
@@ -299,7 +307,7 @@
 <li><p><code><a href="../reference/check.html">check()</a></code> output now works more nicely with recent changes to <strong>rcmdcheck</strong> (<a href="https://github.com/r-lib/devtools/issues/1874" class="external-link">#1874</a>).</p></li>
 <li><p><code><a href="../reference/reload.html">reload()</a></code> now reloads loaded but not attached packages as well as attached ones.</p></li>
 <li><p>Executed <code>styler::style_pkg()</code> to update code style (<a href="https://github.com/r-lib/devtools/issues/1851" class="external-link">#1851</a>, <a href="https://github.com/amundsenjunior" class="external-link">@amundsenjunior</a>).</p></li>
-<li><p><code><a href="../reference/save_all.html">save_all()</a></code> helper function wraps <code><a href="https://rdrr.io/pkg/rstudioapi/man/rstudio-documents.html" class="external-link">rstudioapi::documentSaveAll()</a></code> calls (<a href="https://github.com/r-lib/devtools/issues/1850" class="external-link">#1850</a>, <a href="https://github.com/amundsenjunior" class="external-link">@amundsenjunior</a>).</p></li>
+<li><p><code><a href="../reference/save_all.html">save_all()</a></code> helper function wraps <code><a href="https://rstudio.github.io/rstudioapi/reference/rstudio-documents.html" class="external-link">rstudioapi::documentSaveAll()</a></code> calls (<a href="https://github.com/r-lib/devtools/issues/1850" class="external-link">#1850</a>, <a href="https://github.com/amundsenjunior" class="external-link">@amundsenjunior</a>).</p></li>
 <li><p><code><a href="../reference/check.html">check()</a></code> now allows users to run without <code>--timings</code> (<a href="https://github.com/r-lib/devtools/issues/1655" class="external-link">#1655</a>)</p></li>
 <li><p><code><a href="../reference/remote-reexports.html">update_packages()</a></code> better documented to advertise it can be used to update packages installed by any of the <code>install_*</code> functions.</p></li>
 <li><p><code><a href="../reference/check.html">check()</a></code> gains a <code>incoming</code> option to toggle the CRAN incoming checks.</p></li>
