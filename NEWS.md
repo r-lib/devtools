@@ -1,4 +1,4 @@
-# devtools (development version)
+# devtools 2.4.5
 
 * `check(cleanup =)` was deprecated in devtools v1.11.0 (2016-04-12) and was
   made defunct in v2.4.4 (2022-07-20). The documentation is more clear now about
