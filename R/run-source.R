@@ -111,6 +111,7 @@ source_gist <- function(id, ..., filename = NULL, sha1 = NULL, quiet = FALSE) {
   rlang::check_installed("gh")
   stopifnot(length(id) == 1)
 
+  # TODO: this regex work would need to be generalized to accomodate GHE
   url_match <- "((^https://)|^)gist.github.com/([^/]+/)?([0-9a-f]+)$"
   if (grepl(url_match, id)) {
     # https://gist.github.com/kohske/1654919, https://gist.github.com/1654919,
@@ -129,10 +130,15 @@ source_gist <- function(id, ..., filename = NULL, sha1 = NULL, quiet = FALSE) {
   }
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  # TODO: if we want source_gist() to work for GHE, we can't call source_url()
+  # we'd need to switch to a new helper that gets the gist content using gh
+  # and the github API, so that host-appropriate creds are used
   source_url(url, ..., sha1 = sha1)
 }
 
 find_gist <- function(id, filename = NULL, call = parent.frame()) {
+  # the gist content is actually returned by this API call (with some risk of
+  # truncation, which is reported when it happens)
   files <- gh::gh("GET /gists/:id", id = id)$files
   r_files <- files[grepl("\\.[rR]$", names(files))]
 
@@ -161,3 +167,34 @@ find_gist <- function(id, filename = NULL, call = parent.frame()) {
 
   r_files[[which]]$raw_url
 }
+
+# TODO: groundwork for updating regex work
+# currently just changes the approach for github.com to one that would be more
+# pleasant to extednd to GHE
+# gist URLs for GHE begin like so:
+# http(s)://[hostname]/gist
+# http(s)://gist.[hostname]
+#
+# replacing:
+# ((^https://)|^)gist.github.com/([^/]+/)?([0-9a-f]+)$
+# example of what this should match:
+# https://gist.github.com/jennybc/847c6b43c4e35cec2e5bb30a3f38af73
+github_gist_regex <- paste0(
+  "^",
+  "(?<protocol>\\w+://)?",
+  "gist.github.com/",
+  "(?<user>[^/]+/)?",
+  "(?<id>[0-9a-f]+)",
+  "$"
+)
+
+# to be used like this:
+# re_match(
+#   "https://gist.github.com/jennybc/847c6b43c4e35cec2e5bb30a3f38af73",
+#   github_gist_regex
+# )
+
+# exploration of using gh's existing functionality to support GHE gists:
+# Sys.setenv(GITHUB_API_URL = "https://github.ubc.ca")
+# id <- "3c4c6e7d0cbfb79cd71dfbbed42f63f0"
+# x <- gh::gh("/gists/{gist_id}", gist_id = id)
