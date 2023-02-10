@@ -36,3 +36,14 @@ test_that("useful errors if too few or too many", {
   file_copy(path(pkg, "README.Rmd"), path(pkg, "inst", "README.Rmd"))
   expect_snapshot(build_readme(pkg), error = TRUE)
 })
+
+test_that("don't error for README in another directory", {
+  skip_on_cran()
+
+  pkg <- local_package_create()
+  suppressMessages(usethis::with_project(pkg, use_readme_rmd(open = FALSE)))
+  dir_create(pkg, "data-raw")
+  file_create(pkg, "data-raw", "README.md")
+
+  expect_no_error(suppressMessages(build_readme(pkg)))
+})
