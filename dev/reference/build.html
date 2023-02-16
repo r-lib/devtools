@@ -147,6 +147,62 @@ or <code>R CMD install</code> if <code>binary = TRUE</code>.</p></dd>
 package</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    
+<div class="section">
+<h3 id="configuration">Configuration<a class="anchor" aria-label="anchor" href="#configuration"></a></h3>
+
+<div class="section">
+<h4 id="description-entries"><code>DESCRIPTION</code> entries<a class="anchor" aria-label="anchor" href="#description-entries"></a></h4>
+
+<ul><li><p><code>Config/build/clean-inst-doc</code> can be set to <code>FALSE</code> to avoid cleaning up
+<code>inst/doc</code> when building a source package. Set it to <code>TRUE</code> to force a
+cleanup. See the <code>clean_doc</code> argument.</p></li>
+<li><p><code>Config/build/copy-method</code> can be used to avoid copying large
+directories in <code>R CMD build</code>. It works by copying (or linking) the
+files of the package to a temporary directory, leaving out the
+(possibly large) files that are not part of the package. Possible
+values:</p><ul><li><p><code>none</code>: pkgbuild does not copy the package tree. This is the default.</p></li>
+<li><p><code>copy</code>: the package files are copied to a temporary directory before
+<code> R CMD build</code>.</p></li>
+<li><p><code>link</code>: the package files are symbolic linked to a temporary
+directory before <code>R CMD build</code>. Windows does not have symbolic
+links, so on Windows this is equivalent to <code>copy</code>.</p></li>
+</ul><p>You can also use the <code>pkg.build_copy_method</code> option or the
+<code>PKG_BUILD_COPY_METHOD</code> environment variable to set the copy method.
+The option is consulted first, then the <code>DESCRIPTION</code> entry, then the
+environment variable.</p></li>
+</ul></div>
+
+<div class="section">
+<h4 id="options">Options<a class="anchor" aria-label="anchor" href="#options"></a></h4>
+
+<ul><li><p><code>pkg.build_copy_method</code>: use this option to avoid copying large
+directories when building a package. See possible values above, at the
+<code>Config/build/copy-method</code> <code>DESCRIPTION</code> entry.</p></li>
+<li><p><code>pkg.build_stop_for_warnings</code>: if it is set to <code>TRUE</code>, then pkgbuild
+will stop for <code>R CMD build</code> errors. It takes precedence over the
+<code>PKG_BUILD_STOP_FOR_WARNINGS</code> environment variable.</p></li>
+</ul></div>
+
+<div class="section">
+<h4 id="environment-variables">Environment variables<a class="anchor" aria-label="anchor" href="#environment-variables"></a></h4>
+
+<ul><li><p><code>PKG_BUILD_COLOR_DIAGNOSTICS</code>: set it to <code>false</code> to opt out of colored
+compiler diagnostics. Set it to <code>true</code> to force colored compiler
+diagnostics.</p></li>
+<li><p><code>PKG_BUILD_COPY_METHOD</code>: use this environment variable to avoid copying
+large directories when building a package. See possible values above,
+at the <code>Config/build/copy-method</code> <code>DESCRIPTION</code> entry.</p></li>
+</ul><p>will stop for <code>R CMD build</code> errors. The <code>pkg.build_stop_for_warnings</code>
+option takes precedence over this environment variable.</p>
+</div>
+
+
+</div>
+
+    </div>
+    <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>The default <code>manual = FALSE</code> is not suitable for a CRAN
 submission, which may require <code>manual = TRUE</code>.  Even better, use
