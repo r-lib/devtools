@@ -5,7 +5,7 @@
 \alias{check_win_devel}
 \alias{check_win_release}
 \alias{check_win_oldrelease}
-\title{Build windows binary package.}
+\title{Check a package on Windows}
 \usage{
 check_win_devel(
   pkg = ".",
@@ -44,26 +44,26 @@ or \verb{R CMD install} if \code{binary = TRUE}.}
 
 \item{manual}{Should the manual be built?}
 
-\item{email}{An alternative email to use, default \code{NULL} uses the package
-Maintainer's email.}
+\item{email}{An alternative email address to use. If \code{NULL}, the default is
+to use the package maintainer's email.}
 
 \item{quiet}{If \code{TRUE}, suppresses output.}
 
 \item{...}{Additional arguments passed to \code{\link[pkgbuild:build]{pkgbuild::build()}}.}
 }
 \description{
-This function works by bundling source package, and then uploading to
-\url{https://win-builder.r-project.org/}.  Once building is complete you'll
-receive a link to the built package in the email address listed in the
-maintainer field.  It usually takes around 30 minutes. As a side effect,
-win-build also runs \verb{R CMD check} on the package, so \code{check_win}
-is also useful to check that your package is ok on windows.
+This function first bundles a source package, then uploads it to
+\url{https://win-builder.r-project.org/}. Once the service has built and checked
+the package, an email is sent to address of the maintainer listed in
+\code{DESCRIPTION}. This usually takes around 30 minutes. The email contains a
+link to a directory with the package binary and check logs, which will be
+deleted after a couple of days.
 }
 \section{Functions}{
 \itemize{
 \item \code{check_win_devel()}: Check package on the development version of R.
 
-\item \code{check_win_release()}: Check package on the release version of R.
+\item \code{check_win_release()}: Check package on the released version of R.
 
 \item \code{check_win_oldrelease()}: Check package on the previous major release version of R.
 

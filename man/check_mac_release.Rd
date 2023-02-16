@@ -2,7 +2,7 @@
 % Please edit documentation in R/check-mac.R
 \name{check_mac_release}
 \alias{check_mac_release}
-\title{Check macOS package}
+\title{Check a package on macOS}
 \usage{
 check_mac_release(
   pkg = ".",
@@ -17,7 +17,8 @@ check_mac_release(
 \item{pkg}{The package to use, can be a file path to the package or a
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
-\item{dep_pkgs}{Additional custom dependencies to install prior to checking the package.}
+\item{dep_pkgs}{Additional custom dependencies to install prior to checking
+the package.}
 
 \item{args}{An optional character vector of additional command
 line arguments to be passed to \verb{R CMD build} if \code{binary = FALSE},
@@ -33,9 +34,9 @@ or \verb{R CMD install} if \code{binary = TRUE}.}
 The url with the check results (invisibly)
 }
 \description{
-This function works by bundling source package, and then uploading to
-\url{https://mac.r-project.org/macbuilder/submit.html}.  This function returns a
-link to the page with the check results.
+This function first bundles a source package, then uploads it to
+\url{https://mac.r-project.org/macbuilder/submit.html}. This function returns a
+link to the page where the check results will appear.
 }
 \seealso{
 Other build functions: 

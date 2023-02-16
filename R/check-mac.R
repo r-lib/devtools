@@ -1,12 +1,13 @@
-#' Check macOS package
+#' Check a package on macOS
 #'
-#' This function works by bundling source package, and then uploading to
-#' <https://mac.r-project.org/macbuilder/submit.html>.  This function returns a
-#' link to the page with the check results.
+#' This function first bundles a source package, then uploads it to
+#' <https://mac.r-project.org/macbuilder/submit.html>. This function returns a
+#' link to the page where the check results will appear.
 #'
 #' @template devtools
 #' @inheritParams check_win
-#' @param dep_pkgs Additional custom dependencies to install prior to checking the package.
+#' @param dep_pkgs Additional custom dependencies to install prior to checking
+#'   the package.
 #' @family build functions
 #' @return The url with the check results (invisibly)
 #' @export

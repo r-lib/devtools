@@ -1,17 +1,17 @@
-#' Build windows binary package.
+#' Check a package on Windows
 #'
-#' This function works by bundling source package, and then uploading to
-#' <https://win-builder.r-project.org/>.  Once building is complete you'll
-#' receive a link to the built package in the email address listed in the
-#' maintainer field.  It usually takes around 30 minutes. As a side effect,
-#' win-build also runs `R CMD check` on the package, so `check_win`
-#' is also useful to check that your package is ok on windows.
+#' This function first bundles a source package, then uploads it to
+#' <https://win-builder.r-project.org/>. Once the service has built and checked
+#' the package, an email is sent to address of the maintainer listed in
+#' `DESCRIPTION`. This usually takes around 30 minutes. The email contains a
+#' link to a directory with the package binary and check logs, which will be
+#' deleted after a couple of days.
 #'
 #' @template devtools
 #' @inheritParams pkgbuild::build
 #' @param manual Should the manual be built?
-#' @param email An alternative email to use, default `NULL` uses the package
-#'   Maintainer's email.
+#' @param email An alternative email address to use. If `NULL`, the default is
+#'   to use the package maintainer's email.
 #' @param quiet If `TRUE`, suppresses output.
 #' @param ... Additional arguments passed to [pkgbuild::build()].
 #' @family build functions
@@ -29,7 +29,7 @@ check_win_devel <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL,
   )
 }
 
-#' @describeIn check_win Check package on the release version of R.
+#' @describeIn check_win Check package on the released version of R.
 #' @export
 check_win_release <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
