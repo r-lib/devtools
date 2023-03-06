@@ -71,13 +71,13 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
     if (show_cran_check) {
       if (!is.null(cran_details)) {
         end_sentence <- "\n shown above?"
-        cat_rule(paste0("Details of the CRAN check results for ", pkg$package))
+        cat_rule(glue("Details of the CRAN check results for {pkg$package}"))
         summary(cran_details)
         cat_rule()
       }
-      cran_url <- paste0(
-        cran_mirror(), "/web/checks/check_results_",
-        pkg$package, ".html"
+      cran_url <- glue(
+        "{cran_mirror()}/web/checks/check_results_",
+        "{pkg$package}.html"
       )
       if (yesno("Have you fixed all existing problems at \n{cran_url}{end_sentence}")) {
         return(invisible())
@@ -95,8 +95,8 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
 
   deps <- if (new_pkg) 0 else length(revdep(pkg$package))
   if (deps > 0) {
-    msg <- paste0(
-      "Have you checked the ", deps, " reverse dependencies ",
+    msg <- glue(
+      "Have you checked the {deps} reverse dependencies ",
       "(with the revdepcheck package)?"
     )
     if (yesno(msg)) {
