@@ -19,10 +19,6 @@ is_attached <- function(pkg = ".") {
   !is.null(pkgload::pkg_env(pkg$package))
 }
 
-vcapply <- function(x, FUN, ...) {
-  vapply(x, FUN, FUN.VALUE = character(1), ...)
-}
-
 release_bullets <- function() {
   c(
     '`usethis::use_latest_dependencies(TRUE, "CRAN")`',
