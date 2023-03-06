@@ -21,6 +21,7 @@ Imports:
     desc (>= 1.4.1),
     ellipsis (>= 0.3.2),
     fs (>= 1.5.2),
+    glue,
     lifecycle (>= 1.0.1),
     memoise (>= 2.0.1),
     miniUI (>= 0.1.1.1),
