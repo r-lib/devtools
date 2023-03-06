@@ -58,7 +58,7 @@ run_examples <- function(pkg = ".", start = NULL, show = deprecated(), run_dontt
   }
 
   cat_rule(
-    left = paste0("Running ", length(files), " example files"),
+    left = glue("Running {length(files)} example files"),
     right = pkg$package
   )
 

@@ -8,7 +8,7 @@
 #' @export
 release_checks <- function(pkg = ".", built_path = NULL) {
   pkg <- as.package(pkg)
-  cat_rule(paste0("Running additional devtools checks for ", pkg$package))
+  cat_rule(glue("Running additional devtools checks for {pkg$package}"))
 
   check_version(pkg)
   check_dev_versions(pkg)
@@ -52,7 +52,7 @@ check_version <- function(pkg = ".") {
   check_status(
     length(ver) == 3,
     "version number has three components",
-    paste0("version (", pkg$version, ") should have exactly three components")
+    glue("version ({pkg$version}) should have exactly three components")
   )
 }
 

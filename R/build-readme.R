@@ -53,7 +53,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
 build_readme <- function(path = ".", quiet = TRUE, ...) {
   pkg <- as.package(path)
 
-  regexp <- paste0(path_file(pkg$path), "/(inst/)?readme[.]rmd")
+  regexp <- glue("{path_file(pkg$path)}/(inst/)?readme[.]rmd")
   readme_path <- path_abs(dir_ls(pkg$path, ignore.case = TRUE, regexp = regexp, recurse = 1, type = "file"))
 
   if (length(readme_path) == 0) {

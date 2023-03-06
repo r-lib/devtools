@@ -12,7 +12,7 @@ build_manual <- function(pkg = ".", path = NULL) {
   name <- paste0(pkg$package, "_", pkg$version, ".pdf", collapse = " ")
   tryCatch(msg <- callr::rcmd("Rd2pdf", cmdargs = c(
     "--force",
-    paste0("--output=", path, "/", name),
+    glue("--output={path}/{name}"),
     pkg$path
   ), fail_on_status = TRUE, stderr = "2>&1", spinner = FALSE),
   error = function(e) {
