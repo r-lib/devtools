@@ -17,8 +17,8 @@ Packages](https://r-pkgs.org/) is a book based around this workflow.
 install.packages("devtools")
 
 # Or the development version from GitHub:
-# install.packages("devtools")
-devtools::install_github("r-lib/devtools")
+# install.packages("pak")
+pak::pak("r-lib/devtools")
 ```
 
 ## Cheatsheet
