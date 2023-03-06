@@ -36,7 +36,6 @@ reference:
     contents:
     - bash
     - clean_vignettes
-    - dev_mode
     - dev_sitrep
     - github_pull
     - lint

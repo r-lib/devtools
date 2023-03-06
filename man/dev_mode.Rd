@@ -2,26 +2,32 @@
 % Please edit documentation in R/dev-mode.R
 \name{dev_mode}
 \alias{dev_mode}
-\title{Activate and deactivate development mode.}
+\title{Activate and deactivate development mode}
 \usage{
 dev_mode(on = NULL, path = getOption("devtools.path"))
 }
 \arguments{
-\item{on}{turn dev mode on (\code{TRUE}) or off (\code{FALSE}).  If omitted
-will guess based on whether or not \code{path} is in
-\code{\link[=.libPaths]{.libPaths()}}}
+\item{on}{turn dev mode on (\code{TRUE}) or off (\code{FALSE}).  If omitted will guess
+based on whether or not \code{path} is in \code{\link[=.libPaths]{.libPaths()}}}
 
 \item{path}{directory to library.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
-}
-\details{
-When activated, \code{dev_mode} creates a new library for storing installed
-packages. This new library is automatically created when \code{dev_mode} is
-activated if it does not already exist.
-This allows you to test development packages in a sandbox, without
-interfering with the other packages you have installed.
+
+We no longer recommend \code{dev_mode()} and it will be removed in a future
+release of devtools. Instead, we now rely on \code{\link[=load_all]{load_all()}} to test drive an
+in-development package. If you really like the idea of corralling
+experimental packages in a special library, you might enjoy
+\code{withr::local_libpaths()}. If you are concerned about different projects
+interfering with each other through the use of a shared library, consider
+using the \href{https://rstudio.github.io/renv/}{renv package}.
+
+Original description: When activated, \code{dev_mode} creates a new library for
+storing installed packages. This new library is automatically created when
+\code{dev_mode} is activated if it does not already exist. This allows you to test
+development packages in a sandbox, without interfering with the other
+packages you have installed.
 }
 \examples{
 \dontrun{

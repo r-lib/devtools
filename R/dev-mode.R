@@ -1,16 +1,25 @@
-#' Activate and deactivate development mode.
+#' Activate and deactivate development mode
 #'
+#' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' When activated, `dev_mode` creates a new library for storing installed
-#' packages. This new library is automatically created when `dev_mode` is
-#' activated if it does not already exist.
-#' This allows you to test development packages in a sandbox, without
-#' interfering with the other packages you have installed.
+
+#' We no longer recommend `dev_mode()` and it will be removed in a future
+#' release of devtools. Instead, we now rely on [load_all()] to test drive an
+#' in-development package. If you really like the idea of corralling
+#' experimental packages in a special library, you might enjoy
+#' `withr::local_libpaths()`. If you are concerned about different projects
+#' interfering with each other through the use of a shared library, consider
+#' using the [renv package](https://rstudio.github.io/renv/).
 #'
-#' @param on turn dev mode on (`TRUE`) or off (`FALSE`).  If omitted
-#'  will guess based on whether or not `path` is in
-#'  [.libPaths()]
+#' Original description: When activated, `dev_mode` creates a new library for
+#' storing installed packages. This new library is automatically created when
+#' `dev_mode` is activated if it does not already exist. This allows you to test
+#' development packages in a sandbox, without interfering with the other
+#' packages you have installed.
+#'
+#' @param on turn dev mode on (`TRUE`) or off (`FALSE`).  If omitted will guess
+#'   based on whether or not `path` is in [.libPaths()]
 #' @param path directory to library.
 #' @export
 #' @keywords internal

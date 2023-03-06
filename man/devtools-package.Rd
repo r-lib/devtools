@@ -12,16 +12,11 @@ Collection of package development tools.
 
 
 Devtools uses the following \code{\link[=options]{options()}} to configure behaviour:
-
 \itemize{
-\item \code{devtools.path}: path to use for \code{\link[=dev_mode]{dev_mode()}}; note that \code{dev_mode()}
-is deprecated.
-
-\item \code{devtools.name}: your name, used when signing draft
-emails.
-
-\item \code{devtools.install.args}: a string giving extra arguments passed
-to \verb{R CMD install} by \code{\link[=install]{install()}}.
+\item \code{devtools.install.args}: a string giving extra arguments passed to
+\verb{R CMD install} by \code{\link[=install]{install()}}.
+\item \code{devtools.path}: Deprecated. Path used by the now-deprecated \code{\link[=dev_mode]{dev_mode()}}
+function.
 }
 }
 
