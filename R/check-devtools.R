@@ -28,8 +28,8 @@ check_dev_versions <- function(pkg = ".") {
 
   parsed <- lapply(deps$version, function(x) unlist(numeric_version(x)))
 
-  lengths <- vapply(parsed, length, integer(1))
-  last_ver <- vapply(parsed, function(x) x[[length(x)]], integer(1))
+  lengths <- map_int(parsed, length)
+  last_ver <- map_int(parsed, function(x) x[[length(x)]])
 
   is_dev <- lengths == 4 & last_ver >= 9000
 
@@ -66,7 +66,7 @@ check_vignette_titles <- function(pkg = ".") {
     any(grepl("Vignette Title", h))
   }
   v <- stats::setNames(vigns$docs, path_file(vigns$docs))
-  has_vt <- vapply(v, has_vignette_title, logical(1), n = 30)
+  has_vt <- map_lgl(v, has_vignette_title, n = 30)
 
   check_status(
     !any(has_vt),
