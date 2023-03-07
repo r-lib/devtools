@@ -47,7 +47,7 @@ check_for_rstudio_updates <- function(os = tolower(Sys.info()[["sysname"]]),
   }
 
   nms <- map_chr(result, `[[`, 1)
-  values <- map_chr(result, ~ utils::URLdecode(.x[[2]]))
+  values <- map_chr(result, function(x) utils::URLdecode(x[[2]]))
 
   result <- stats::setNames(values, nms)
 

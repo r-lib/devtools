@@ -126,7 +126,7 @@ change_maintainer_email <- function(path, email, call = parent.frame()) {
   if (!is.list(roles)) {
     roles <- list(roles)
   }
-  is_maintainer <- map_lgl(roles, ~ all("cre" %in% .x))
+  is_maintainer <- map_lgl(roles, function(r) all("cre" %in% r))
   aut[is_maintainer]$email <- email
   desc$set_authors(aut)
 

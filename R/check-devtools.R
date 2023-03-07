@@ -26,10 +26,10 @@ check_dev_versions <- function(pkg = ".") {
   deps <- do.call("rbind", unname(compact(map(dep_list, parse_deps))))
   deps <- deps[!is.na(deps$version), , drop = FALSE]
 
-  parsed <- map(deps$version, ~ unlist(numeric_version(.x)))
+  parsed <- map(deps$version, function(x) unlist(numeric_version(x)))
 
   lengths <- map_int(parsed, length)
-  last_ver <- map_int(parsed, ~ .x[[length(.x)]])
+  last_ver <- map_int(parsed, function(x) x[[length(x)]])
 
   is_dev <- lengths == 4 & last_ver >= 9000
 
