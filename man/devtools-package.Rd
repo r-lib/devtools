@@ -6,21 +6,19 @@
 \alias{devtools-package}
 \title{devtools: Tools to Make Developing R Packages Easier}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Collection of package development tools.
 }
 \section{Package options}{
 
 
 Devtools uses the following \code{\link[=options]{options()}} to configure behaviour:
-
 \itemize{
-\item \code{devtools.path}: path to use for \code{\link[=dev_mode]{dev_mode()}}
-
-\item \code{devtools.name}: your name, used when signing draft
-emails.
-
-\item \code{devtools.install.args}: a string giving extra arguments passed
-to \verb{R CMD install} by \code{\link[=install]{install()}}.
+\item \code{devtools.install.args}: a string giving extra arguments passed to
+\verb{R CMD install} by \code{\link[=install]{install()}}.
+\item \code{devtools.path}: Deprecated. Path used by the now-deprecated \code{\link[=dev_mode]{dev_mode()}}
+function.
 }
 }
 
@@ -34,7 +32,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Jennifer Bryan \email{jenny@rstudio.com} (\href{https://orcid.org/0000-0002-6983-2759}{ORCID})
+\strong{Maintainer}: Jennifer Bryan \email{jenny@posit.co} (\href{https://orcid.org/0000-0002-6983-2759}{ORCID})
 
 Authors:
 \itemize{
@@ -45,7 +43,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item RStudio [copyright holder, funder]
+  \item Posit, PBC [copyright holder, funder]
 }
 
 }
