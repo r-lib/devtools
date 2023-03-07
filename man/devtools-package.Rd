@@ -6,6 +6,8 @@
 \alias{devtools-package}
 \title{devtools: Tools to Make Developing R Packages Easier}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Collection of package development tools.
 }
 \section{Package options}{
@@ -30,7 +32,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Jennifer Bryan \email{jenny@rstudio.com} (\href{https://orcid.org/0000-0002-6983-2759}{ORCID})
+\strong{Maintainer}: Jennifer Bryan \email{jenny@posit.co} (\href{https://orcid.org/0000-0002-6983-2759}{ORCID})
 
 Authors:
 \itemize{
@@ -41,7 +43,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item RStudio [copyright holder, funder]
+  \item Posit, PBC [copyright holder, funder]
 }
 
 }
