@@ -7,7 +7,7 @@ Authors@R: c(
     person("Winston", "Chang", role = "aut"),
     person("Jennifer", "Bryan", , "jenny@posit.co", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6983-2759")),
-    person(given = "Posit, PBC", role = c("cph", "fnd"))
+    person(given = "Posit Software, PBC", role = c("cph", "fnd"))
   )
 Description: Collection of package development tools.
 License: MIT + file LICENSE
