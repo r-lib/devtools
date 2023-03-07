@@ -76,8 +76,7 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
         cat_rule()
       }
       cran_url <- glue(
-        "{cran_mirror()}/web/checks/check_results_",
-        "{pkg$package}.html"
+        "{cran_mirror()}/web/checks/check_results_{pkg$package}.html"
       )
       if (yesno("Have you fixed all existing problems at \n{cran_url}{end_sentence}")) {
         return(invisible())
