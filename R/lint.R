@@ -12,7 +12,7 @@
 #' @seealso [lintr::lint_package()], [lintr::lint()]
 #' @export
 lint <- function(pkg = ".", cache = TRUE, ...) {
-  rlang::check_installed("lintr")
+  check_installed("lintr")
   pkg <- as.package(pkg)
 
   cli::cli_inform(c(i = "Linting {.pkg {pkg$package}}"))

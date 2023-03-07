@@ -91,7 +91,7 @@ load_package_if_needed <- function(pkg) {
 #' @export
 #' @rdname test
 test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
-  rlang::check_installed(c("covr", "DT"))
+  check_installed(c("covr", "DT"))
 
   save_all()
   pkg <- as.package(pkg)
@@ -120,7 +120,7 @@ test_coverage_file <- function(file = find_active_file(), ...) {
 #' @rdname test
 #' @export
 test_coverage_active_file <- function(file = find_active_file(), filter = TRUE, show_report = interactive(), export_all = TRUE, ...) {
-  rlang::check_installed(c("covr", "DT"))
+  check_installed(c("covr", "DT"))
 
   save_all()
   test_files <- find_test_file(file)

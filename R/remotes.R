@@ -7,7 +7,7 @@ with_ellipsis <- function(fun) {
 
     !! b
   }
-  f <- rlang::expr_interp(f)
+  f <- expr_interp(f)
 
   body(fun) <- body(f)
   fun

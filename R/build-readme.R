@@ -16,7 +16,7 @@ build_rmd <- function(files, path = ".", output_options = list(), ..., quiet = T
 
   pkg <- as.package(path)
 
-  rlang::check_installed("rmarkdown")
+  check_installed("rmarkdown")
   save_all()
 
   paths <- files
