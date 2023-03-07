@@ -43,7 +43,7 @@ check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, ma
   body <- list(pkgfile = httr::upload_file(built_path))
 
   if (length(dep_built_paths) > 0) {
-    uploads <- lapply(dep_built_paths, httr::upload_file)
+    uploads <- map(dep_built_paths, httr::upload_file)
     names(uploads) <- rep("depfiles", length(uploads))
     body <- append(body, uploads)
   }

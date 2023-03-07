@@ -114,7 +114,7 @@ clean_vignettes <- function(pkg = ".") {
     file_delete(to_remove)
   }
 
-  lapply(c(doc_path, meta_path), dir_delete_if_empty)
+  map(c(doc_path, meta_path), dir_delete_if_empty)
 
   invisible(TRUE)
 }

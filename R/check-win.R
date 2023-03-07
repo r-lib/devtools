@@ -89,7 +89,7 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   url <- glue(
     "ftp://win-builder.r-project.org/{version}/{path_file(built_path)}"
   )
-  lapply(url, upload_ftp, file = built_path)
+  map(url, upload_ftp, file = built_path)
 
   if (!quiet) {
     time <- strftime(Sys.time() + 30 * 60, "%I:%M %p")
@@ -126,7 +126,7 @@ change_maintainer_email <- function(path, email, call = parent.frame()) {
   if (!is.list(roles)) {
     roles <- list(roles)
   }
-  is_maintainer <- map_lgl(roles, function(r) all("cre" %in% r))
+  is_maintainer <- map_lgl(roles, ~ all("cre" %in% .x))
   aut[is_maintainer]$email <- email
   desc$set_authors(aut)
 

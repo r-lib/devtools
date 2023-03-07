@@ -23,13 +23,13 @@ check_dev_versions <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   dep_list <- pkg[tolower(remotes::standardise_dep(TRUE))]
-  deps <- do.call("rbind", unname(compact(lapply(dep_list, parse_deps))))
+  deps <- do.call("rbind", unname(compact(map(dep_list, parse_deps))))
   deps <- deps[!is.na(deps$version), , drop = FALSE]
 
-  parsed <- lapply(deps$version, function(x) unlist(numeric_version(x)))
+  parsed <- map(deps$version, ~ unlist(numeric_version(.x)))
 
   lengths <- map_int(parsed, length)
-  last_ver <- map_int(parsed, function(x) x[[length(x)]])
+  last_ver <- map_int(parsed, ~ .x[[length(.x)]])
 
   is_dev <- lengths == 4 & last_ver >= 9000
 
