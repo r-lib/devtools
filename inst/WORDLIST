@@ -5,6 +5,7 @@ Bitbucket
 BugReports
 Bugfix
 CMD
+CRAN's
 CYGWIN
 Cheatsheet
 Chun
@@ -34,7 +35,9 @@ Maëlle
 Müller
 NOTEs
 ORCID
+PBC
 README
+RStudio
 RTools
 Rbuildignore
 Rcpp
@@ -138,6 +141,7 @@ rds
 readme
 realisation
 reinstalls
+renv
 repo
 repos
 revdep
