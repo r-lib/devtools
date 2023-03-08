@@ -1,13 +1,5 @@
 # devtools (development version)
 
-* Copyright holder is now "Posit Software, PBC".
-
-* We have updated the Contributor Code of Conduct and changed the contact
-  email to codeofconduct@posit.co.
-
-* Internally we are now using glue and purrr-like functionality from 
-  `usethis::use_standalone("r-lib/rlang", "purrr")` for consistency.
-
 # devtools 2.4.5
 
 * `check(cleanup =)` was deprecated in devtools v1.11.0 (2016-04-12) and was
