@@ -134,6 +134,7 @@ pre
 processx
 profvis
 pryr
+purrr
 rOpenSci
 randomises
 rcmdcheck
