@@ -23,7 +23,7 @@ pak::pak("r-lib/devtools")
 
 ## Cheatsheet
 
-<a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/package-development.pdf"><img src="https://github.com/rstudio/cheatsheets/raw/main/pngs/thumbnails/package-development-thumbs.png" height="252" alt="thumbnail of devtools cheatsheet"/></a>
+<a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/package-development.pdf"><img src="https://github.com/rstudio/cheatsheets/raw/main/pngs/thumbnails/package-development-thumbs.png" height="252" alt="thumbnail of package development cheatsheet"/></a>
 
 
 ## Usage
