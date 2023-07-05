@@ -136,7 +136,7 @@ or <code>R CMD install</code> if <code>binary = TRUE</code>.</p></dd>
 
 
 <dt>...</dt>
-<dd><p>Additional arguments passed to <a href="https://r-lib.github.io/pkgbuild/reference/build.html" class="external-link">pkgbuild::build</a>.</p></dd>
+<dd><p>Additional arguments passed to <a href="https://pkgbuild.r-lib.org/reference/build.html" class="external-link">pkgbuild::build</a>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -172,6 +172,14 @@ links, so on Windows this is equivalent to <code>copy</code>.</p></li>
 <code>PKG_BUILD_COPY_METHOD</code> environment variable to set the copy method.
 The option is consulted first, then the <code>DESCRIPTION</code> entry, then the
 environment variable.</p></li>
+<li><p><code>Config/build/extra-sources</code> can be used to define extra source files
+for pkgbuild to decide whether a package DLL needs to be recompiled in
+<code>needs_compile()</code>. The syntax is a comma separated list of file names,
+or globs. (See <code><a href="https://rdrr.io/r/utils/glob2rx.html" class="external-link">utils::glob2rx()</a></code>.) E.g. <code>src/rust/src/*.rs</code> or
+<code>configure*</code>.</p></li>
+<li><p><code>Config/build/bootstrap</code> can be set to <code>TRUE</code> to run
+<code>Rscript bootstrap.R</code> in the source directory prior to running subsequent
+build steps.</p></li>
 </ul></div>
 
 <div class="section">
