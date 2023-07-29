@@ -100,8 +100,8 @@ and the error is only thrown after completion. If \code{"never"}, then
 no errors are thrown. If \code{"error"}, then only \code{ERROR} failures
 generate errors. If \code{"warning"}, then \code{WARNING} failures generate
 errors as well. If \code{"note"}, then any check failure generated an
-error. Its default can be modified with the \code{RCMDCHECK_ERROR_ON}
-environment variable. If that is not set, then \code{"never"} is used.}
+error. The default is \code{"never"} for interactive sessions and \code{"warning"}
+for non-interactive session.}
 
 \item{path}{Path to built package.}
 }

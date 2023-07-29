@@ -50,6 +50,14 @@
 #' @param vignettes If `FALSE`, do not build or check vignettes, equivalent to
 #'   using `args = '--ignore-vignettes' and `build_args = '--no-build-vignettes'.
 #' @param cleanup `r lifecycle::badge("deprecated")` See `check_dir` for details.
+#' @param error_on Whether to throw an error on `R CMD check` failures.
+#'   Note that the check is always completed (unless a timeout happens),
+#'   and the error is only thrown after completion. If `"never"`, then
+#'   no errors are thrown. If `"error"`, then only `ERROR` failures
+#'   generate errors. If `"warning"`, then `WARNING` failures generate
+#'   errors as well. If `"note"`, then any check failure generated an
+#'   error. The default is `"never"` for interactive sessions and `"warning"`
+#'   for non-interactive session.
 #' @seealso [release()] if you want to send the checked package to
 #'   CRAN.
 #' @export
