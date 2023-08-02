@@ -128,15 +128,15 @@ test_coverage_active_file <- function(file = find_active_file(), filter = TRUE, 
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-    withr::local_envvar(r_env_vars())
-    testthat::local_test_directory(pkg$path, pkg$package)
-    reporter <- testthat::local_snapshotter()
-    reporter$start_file(file, "test")
+  withr::local_envvar(r_env_vars())
+  testthat::local_test_directory(pkg$path, pkg$package)
+  reporter <- testthat::local_snapshotter()
+  reporter$start_file(file, "test")
 
   env <- load_all(pkg$path, quiet = TRUE, export_all = export_all)$env
-    testthat::with_reporter(reporter, {
-      coverage <- covr::environment_coverage(env, test_files, ...)
-    })
+  testthat::with_reporter(reporter, {
+    coverage <- covr::environment_coverage(env, test_files, ...)
+  })
 
   if (isTRUE(filter)) {
     coverage_name <- name_source(covr::display_name(coverage))
