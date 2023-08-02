@@ -38,7 +38,7 @@ test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all =
   cli::cli_inform(c(i = "Testing {.pkg {pkg$package}}"))
   withr::local_envvar(r_env_vars())
 
-  load_package <- load_package_if_needed(pkg)
+  load_package <- load_package_for_testing(pkg)
   testthat::test_local(
     pkg$path,
     filter = filter,
@@ -67,7 +67,7 @@ test_active_file <- function(file = find_active_file(), ...) {
     rstudioapi::executeCommand("activateConsole", quiet = TRUE)
   }
 
-  load_package <- load_package_if_needed(pkg)
+  load_package <- load_package_for_testing(pkg)
   testthat::test_file(
     test_files,
     package = pkg$package,
@@ -76,11 +76,11 @@ test_active_file <- function(file = find_active_file(), ...) {
   )
 }
 
-load_package_if_needed <- function(pkg) {
+load_package_for_testing <- function(pkg) {
   if (pkg$package == "testthat") {
     # Must load testthat outside of testthat so tests are run with
     # dev testthat
-    load_all(pkg$path, quiet = TRUE)
+    load_all(pkg$path, quiet = TRUE, helpers = FALSE)
     "none"
   } else {
     "source"
