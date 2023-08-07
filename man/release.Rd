@@ -22,7 +22,6 @@ Run automated and manual tests, then post package to CRAN.
 }
 \details{
 The package release process will:
-
 \itemize{
 \item Confirm that the package passes \verb{R CMD check} on relevant platforms
 \item Confirm that important files are up-to-date
