@@ -100,7 +100,7 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   withr::local_envvar(r_env_vars())
-  testthat::local_test_directory(pkg$path, pkg$package)
+  testthat::local_test_directory(pkg$path)
   coverage <- covr::package_coverage(pkg$path, ...)
 
   if (isTRUE(show_report)) {
