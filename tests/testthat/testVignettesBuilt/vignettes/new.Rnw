@@ -1,6 +1,6 @@
 %\VignetteIndexEntry{New}
 
-\documentclass[oneside]{article}
+\documentclass{article}
 \begin{document}
 
 <<>>=
