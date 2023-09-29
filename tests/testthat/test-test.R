@@ -39,7 +39,7 @@ test_that("TESTTHAT_PKG environment variable is set", {
     filter = "envvar",
     stop_on_failure = TRUE
   )
-  test_active_file(
+  test_test_active_file(
     test_path("testTest/tests/testthat/test-envvar.R"),
     stop_on_failure = TRUE
   )
