@@ -1,5 +1,10 @@
 # devtools (development version)
 
+* `test_coverage()` now works if the package has not been installed.
+
+* `test_coverage_active_file()` now reports if any tests failed and does
+  a better job of executing snapshot comparisons.
+
 # devtools 2.4.5
 
 * `check(cleanup =)` was deprecated in devtools v1.11.0 (2016-04-12) and was

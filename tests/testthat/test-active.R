@@ -3,6 +3,9 @@ test_that("find_active_file() gives useful error if no RStudio", {
 })
 
 test_that("fails if can't find tests", {
+  dir <- local_package_create()
+  withr::local_dir(dir)
+
   expect_snapshot(error = TRUE, {
     find_test_file("R/foo.blah")
     find_test_file("R/foo.R")

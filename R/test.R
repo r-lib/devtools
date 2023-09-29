@@ -100,7 +100,6 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   withr::local_envvar(r_env_vars())
-  testthat::local_test_directory(pkg$path, pkg$package)
   coverage <- covr::package_coverage(pkg$path, ...)
 
   if (isTRUE(show_report)) {
@@ -119,28 +118,42 @@ test_coverage_file <- function(file = find_active_file(), ...) {
 
 #' @rdname test
 #' @export
-test_coverage_active_file <- function(file = find_active_file(), filter = TRUE, show_report = interactive(), export_all = TRUE, ...) {
+test_coverage_active_file <- function(file = find_active_file(),
+                                      filter = TRUE,
+                                      show_report = interactive(),
+                                      export_all = TRUE,
+                                      ...) {
   rlang::check_installed(c("covr", "DT"))
-
-  save_all()
-  test_files <- find_test_file(file)
-  pkg <- as.package(path_dir(file)[[1]])
-
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  withr::local_envvar(r_env_vars())
-  testthat::local_test_directory(pkg$path, pkg$package)
-  reporter <- testthat::local_snapshotter()
-  reporter$start_file(file, "test")
+  test_file <- find_test_file(file)
+  test_dir <- path_dir(test_file)
+  pkg <- as.package(test_dir)
 
   env <- load_all(pkg$path, quiet = TRUE, export_all = export_all)$env
+  # this always ends up using the package DESCRIPTION, which will refer
+  # to the source package because of the load_all() above
+  testthat::local_test_directory(test_dir, pkg$package)
+
+  # To correctly simulate test_file() we need to set up both a temporary
+  # snapshotter (with correct directory specification) for snapshot comparisons
+  # and a stop reporter to inform the user about test failures
+  snap_reporter <- testthat::local_snapshotter(file.path(test_dir, "_snaps"))
+  snap_reporter$start_file(basename(test_file))
+  reporter <- testthat::MultiReporter$new(reporters = list(
+    testthat::StopReporter$new(praise = FALSE),
+    snap_reporter
+  ))
+
+  withr::local_envvar(r_env_vars())
   testthat::with_reporter(reporter, {
-    coverage <- covr::environment_coverage(env, test_files, ...)
+    coverage <- covr::environment_coverage(env, test_file, ...)
+    reporter$end_file() # needed to write new snapshots
   })
 
   if (isTRUE(filter)) {
     coverage_name <- name_source(covr::display_name(coverage))
-    local_name <- name_test(file)
+    local_name <- name_test(test_file)
     coverage <- coverage[coverage_name %in% local_name]
   }
 
