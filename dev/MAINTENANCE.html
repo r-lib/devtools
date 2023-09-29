@@ -77,6 +77,14 @@
 <p>The package development cheatsheet likely needs a major overhaul to account for much more functionality in usethis and the current state of devtools. <a href="https://github.com/r-lib/devtools/issues/2107" class="external-link uri">https://github.com/r-lib/devtools/issues/2107</a></p>
 <p>Should devtools be converted to use pak for installation, or should the installation commands be deprecated in devtools and users suggested to use pak directly?</p>
 </div>
+<div class="section level2">
+<h2 id="r-cmd-check-notes">R CMD check notes<a class="anchor" aria-label="anchor" href="#r-cmd-check-notes"></a></h2>
+<p>devtools has some vintage tests around <code>.Rnw</code> vignettes. It’s not clear if it makes sense to keep these, but I (jennybc) am not rushing to remove these tests. Since I inherited the maintainership of devtools, I have not pursued why 2 of these tests fail locally (they are skipped on GHA). However, today, I did sort it out and want to record what I did. In case it comes up in the future, this caused the necessary LaTeX package to be installed:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tinytex</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tinytex/man/parse_install.html" class="external-link">parse_install</a></span><span class="op">(</span></span>
+<span>  text <span class="op">=</span> <span class="st">"! LaTeX Error: File `grfext.sty' not found."</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
 
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
