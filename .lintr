@@ -17,4 +17,3 @@ linters: funs <- c(
     fun = funs,
     symbol_is_undesirable = FALSE
   ))
-encoding: "UTF-8"
