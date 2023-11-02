@@ -1,4 +1,5 @@
-linters: funs <- c(
+linters <- list(lintr::undesirable_function_linter(
+  fun = c(
     # Base messaging
     "message" = "use cli::cli_inform()",
     "warning" = "use cli::cli_warn()",
@@ -12,8 +13,6 @@ linters: funs <- c(
     "cli_alert_info" = "use cli::cli_inform()",
     "cli_alert_success" = "use cli::cli_inform()",
     "cli_alert_warning" = "use cli::cli_inform()"
-  )
-  list(lintr::undesirable_function_linter(
-    fun = funs,
-    symbol_is_undesirable = FALSE
-  ))
+  ),
+  symbol_is_undesirable = FALSE
+))
