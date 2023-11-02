@@ -227,14 +227,12 @@ using <code>args = '--ignore-vignettes' and </code>build_args = '--no-build-vign
 
 
 <dt>error_on</dt>
-<dd><p>Whether to throw an error on <code>R CMD check</code> failures.
-Note that the check is always completed (unless a timeout happens),
-and the error is only thrown after completion. If <code>"never"</code>, then
-no errors are thrown. If <code>"error"</code>, then only <code>ERROR</code> failures
-generate errors. If <code>"warning"</code>, then <code>WARNING</code> failures generate
-errors as well. If <code>"note"</code>, then any check failure generated an
-error. Its default can be modified with the <code>RCMDCHECK_ERROR_ON</code>
-environment variable. If that is not set, then <code>"never"</code> is used.</p></dd>
+<dd><p>Whether to throw an error on <code>R CMD check</code> failures. Note
+that the check is always completed (unless a timeout happens), and the
+error is only thrown after completion.</p>
+<p><code>error_on</code> is passed through to <code><a href="http://r-lib.github.io/rcmdcheck/reference/rcmdcheck.html" class="external-link">rcmdcheck::rcmdcheck()</a></code>, which is the
+definitive source for what the different values mean. If not specified by
+the user, both <code>check()</code> and <code>check_built()</code> default to <code>error_on = "never"</code> in interactive use and <code>"warning"</code> in a non-interactive setting.</p></dd>
 
 
 <dt>path</dt>
@@ -253,18 +251,16 @@ environment variable. If that is not set, then <code>"never"</code> is used.</p>
 
 
 <p>Devtools does its best to set up an environment that combines best practices
-with how check works on CRAN. This includes:</p>
-<ul><li><p>The standard environment variables set by devtools:
-<code><a href="r_env_vars.html">r_env_vars()</a></code>. Of particular note for package tests is the
-<code>NOT_CRAN</code> env var which lets you know that your tests are not
-running on CRAN, and hence can take a reasonable amount of time.</p></li>
+with how check works on CRAN. This includes:</p><ul><li><p>The standard environment variables set by devtools:
+<code><a href="r_env_vars.html">r_env_vars()</a></code>. Of particular note for package tests is the <code>NOT_CRAN</code> env
+var, which lets you know that your tests are running somewhere other than
+CRAN, and hence can take a reasonable amount of time.</p></li>
 <li><p>Debugging flags for the compiler, set by
 <code>compiler_flags(FALSE)</code>.</p></li>
-<li><p>If <code>aspell</code> is found <code>_R_CHECK_CRAN_INCOMING_USE_ASPELL_</code>
-is set to <code>TRUE</code>. If no spell checker is installed, a warning is
-issued.)</p></li>
-<li><p>env vars set by arguments <code>incoming</code>, <code>remote</code> and
-<code>force_suggests</code></p></li>
+<li><p>If <code>aspell</code> is found, <code>_R_CHECK_CRAN_INCOMING_USE_ASPELL_</code>
+is set to <code>TRUE</code>. If no spell checker is installed, a warning is issued.</p></li>
+<li><p>Environment variables, controlled by arguments <code>incoming</code>, <code>remote</code> and
+<code>force_suggests</code>.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
