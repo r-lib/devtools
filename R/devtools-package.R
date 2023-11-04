@@ -13,8 +13,12 @@
 #' @import rlang
 #' @importFrom glue glue
 #' @importFrom lifecycle deprecated
-#' @importFrom miniUI miniPage
-#' @importFrom profvis profvis
-#' @importFrom urlchecker url_check
 ## usethis namespace: end
 NULL
+
+# https://r-pkgs.org/dependencies-in-practice.html#how-to-not-use-a-package-in-imports
+ignore_unused_imports <- function() {
+  miniUI::miniPage
+  profvis::profvis
+  urlchecker::url_check
+}

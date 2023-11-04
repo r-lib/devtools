@@ -1,5 +1,10 @@
 # devtools (development version)
 
+* `test_coverage()` now works if the package has not been installed.
+
+* `test_coverage_active_file()` now reports if any tests failed and does
+  a better job of executing snapshot comparisons.
+
 # devtools 2.4.5
 
 * `check(cleanup =)` was deprecated in devtools v1.11.0 (2016-04-12) and was
@@ -907,7 +912,7 @@ There were a handful of smaller fixes:
   (#995, @kevinushey)
 
 * `check(cran = TRUE)` adds `--run-donttest` since you do need to test
-  code in `\dontest()` for CRAN submission (#1002).
+  code in `\donttest()` for CRAN submission (#1002).
 
 ## Package installation
 
@@ -939,7 +944,7 @@ There were a handful of smaller fixes:
 
 * `check_man()` replaces `check_doc()` (since most other functions are
   named after the corresponding directory). `check_doc()` will hang around
-  as an alias for the forseeable future (#958).
+  as an alias for the foreseeable future (#958).
 
 * `create()` produces a dummy namespace will fake comment so roxygen2 will 
   overwrite silently (#1016).

@@ -7,14 +7,14 @@ Authors@R: c(
     person("Winston", "Chang", role = "aut"),
     person("Jennifer", "Bryan", , "jenny@posit.co", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-6983-2759")),
-    person(given = "Posit Software, PBC", role = c("cph", "fnd"))
+    person("Posit Software, PBC", role = c("cph", "fnd"))
   )
 Description: Collection of package development tools.
 License: MIT + file LICENSE
 URL: https://devtools.r-lib.org/, https://github.com/r-lib/devtools
 BugReports: https://github.com/r-lib/devtools/issues
 Depends: 
-    R (>= 3.0.2),
+    R (>= 3.6),
     usethis (>= 2.1.6)
 Imports: 
     callr (>= 3.7.3),
@@ -39,7 +39,7 @@ Imports:
     rversions (>= 2.1.2),
     sessioninfo (>= 1.2.2),
     stats,
-    testthat (>= 3.1.6),
+    testthat (>= 3.1.10.9000),
     tools,
     urlchecker (>= 1.0.1),
     utils,
@@ -63,9 +63,11 @@ Suggests:
     spelling (>= 2.2)
 VignetteBuilder: 
     knitr
+Remotes: 
+    r-lib/testthat
 Config/Needs/website: tidyverse/tidytemplate
+Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Config/testthat/edition: 3

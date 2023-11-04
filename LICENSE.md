@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2021 devtools authors
+Copyright (c) 2023 devtools authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

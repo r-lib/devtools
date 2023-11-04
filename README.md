@@ -1,4 +1,4 @@
-# devtools <a href="https://devtools.r-lib.org/"><img src="man/figures/logo.png" align="right" height="138" /></a>
+# devtools <a href="https://devtools.r-lib.org/"><img src="man/figures/logo.png" align="right" height="138" alt=""/></a>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/r-lib/devtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/devtools/actions/workflows/R-CMD-check.yaml)
@@ -23,7 +23,7 @@ pak::pak("r-lib/devtools")
 
 ## Cheatsheet
 
-<a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/package-development.pdf"><img src="https://github.com/rstudio/cheatsheets/raw/main/pngs/thumbnails/package-development-thumbs.png" height="252"/></a>
+<a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/package-development.pdf"><img src="https://github.com/rstudio/cheatsheets/raw/main/pngs/thumbnails/package-development-thumbs.png" height="252" alt="thumbnail of package development cheatsheet"/></a>
 
 
 ## Usage
@@ -87,7 +87,7 @@ look in the current working directory - this is a recommended practice.
 R package development can be intimidating, however there are now a number of
 valuable resources to help!
 
-<a href="https://r-pkgs.org"><img src="http://r-pkgs.org/images/cover.png" height="252" align = "right"/></a>
+<a href="https://r-pkgs.org"><img src="http://r-pkgs.org/images/cover.png" height="252" align = "right" alt="Cover image of R Packages book"/></a>
 
 1. R Packages is a book that gives a comprehensive treatment of all common parts
    of package development and uses devtools throughout.

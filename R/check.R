@@ -21,23 +21,19 @@
 #' Devtools does its best to set up an environment that combines best practices
 #' with how check works on CRAN. This includes:
 #'
-#' \itemize{
+#' * The standard environment variables set by devtools:
+#' [r_env_vars()]. Of particular note for package tests is the `NOT_CRAN` env
+#' var, which lets you know that your tests are running somewhere other than
+#' CRAN, and hence can take a reasonable amount of time.
 #'
-#'  \item The standard environment variables set by devtools:
-#'    [r_env_vars()]. Of particular note for package tests is the
-#'    `NOT_CRAN` env var which lets you know that your tests are not
-#'    running on CRAN, and hence can take a reasonable amount of time.
+#' * Debugging flags for the compiler, set by
+#' [`compiler_flags(FALSE)`][compiler_flags()].
 #'
-#'  \item Debugging flags for the compiler, set by
-#'    \code{\link{compiler_flags}(FALSE)}.
+#' * If `aspell` is found, `_R_CHECK_CRAN_INCOMING_USE_ASPELL_`
+#' is set to `TRUE`. If no spell checker is installed, a warning is issued.
 #'
-#'  \item If `aspell` is found `_R_CHECK_CRAN_INCOMING_USE_ASPELL_`
-#'   is set to `TRUE`. If no spell checker is installed, a warning is
-#'   issued.)
-#'
-#'  \item env vars set by arguments `incoming`, `remote` and
-#'    `force_suggests`
-#' }
+#' * Environment variables, controlled by arguments `incoming`, `remote` and
+#' `force_suggests`.
 #'
 #' @return An object containing errors, warnings, notes, and more.
 #' @template devtools
@@ -175,7 +171,14 @@ can_document <- function(pkg) {
 #' @param manual If `FALSE`, don't build and check manual (`--no-manual`).
 #' @param env_vars Environment variables set during `R CMD check`
 #' @param quiet if `TRUE` suppresses output from this function.
-#' @inheritParams rcmdcheck::rcmdcheck
+#' @param error_on Whether to throw an error on `R CMD check` failures. Note
+#'   that the check is always completed (unless a timeout happens), and the
+#'   error is only thrown after completion.
+#'
+#'   `error_on` is passed through to [rcmdcheck::rcmdcheck()], which is the
+#'   definitive source for what the different values mean. If not specified by
+#'   the user, both `check()` and `check_built()` default to `error_on =
+#'   "never"` in interactive use and `"warning"` in a non-interactive setting.
 check_built <- function(path = NULL, cran = TRUE,
                         remote = FALSE, incoming = remote, force_suggests = FALSE,
                         run_dont_test = FALSE, manual = FALSE, args = "--timings",

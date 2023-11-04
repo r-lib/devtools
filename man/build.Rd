@@ -75,6 +75,14 @@ You can also use the \code{pkg.build_copy_method} option or the
 \code{PKG_BUILD_COPY_METHOD} environment variable to set the copy method.
 The option is consulted first, then the \code{DESCRIPTION} entry, then the
 environment variable.
+\item \code{Config/build/extra-sources} can be used to define extra source files
+for pkgbuild to decide whether a package DLL needs to be recompiled in
+\code{needs_compile()}. The syntax is a comma separated list of file names,
+or globs. (See \code{\link[utils:glob2rx]{utils::glob2rx()}}.) E.g. \verb{src/rust/src/*.rs} or
+\verb{configure*}.
+\item \code{Config/build/bootstrap} can be set to \code{TRUE} to run
+\verb{Rscript bootstrap.R} in the source directory prior to running subsequent
+build steps.
 }
 }
 

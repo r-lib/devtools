@@ -94,14 +94,13 @@ is cleaned up when the returned object is garbage collected.}
 \item{vignettes}{If \code{FALSE}, do not build or check vignettes, equivalent to
 using \verb{args = '--ignore-vignettes' and }build_args = '--no-build-vignettes'.}
 
-\item{error_on}{Whether to throw an error on \verb{R CMD check} failures.
-Note that the check is always completed (unless a timeout happens),
-and the error is only thrown after completion. If \code{"never"}, then
-no errors are thrown. If \code{"error"}, then only \code{ERROR} failures
-generate errors. If \code{"warning"}, then \code{WARNING} failures generate
-errors as well. If \code{"note"}, then any check failure generated an
-error. Its default can be modified with the \code{RCMDCHECK_ERROR_ON}
-environment variable. If that is not set, then \code{"never"} is used.}
+\item{error_on}{Whether to throw an error on \verb{R CMD check} failures. Note
+that the check is always completed (unless a timeout happens), and the
+error is only thrown after completion.
+
+\code{error_on} is passed through to \code{\link[rcmdcheck:rcmdcheck]{rcmdcheck::rcmdcheck()}}, which is the
+definitive source for what the different values mean. If not specified by
+the user, both \code{check()} and \code{check_built()} default to \code{error_on = "never"} in interactive use and \code{"warning"} in a non-interactive setting.}
 
 \item{path}{Path to built package.}
 }
@@ -129,23 +128,17 @@ the process. Under-the-hood, \code{check()} and \code{check_built()} rely on
 
 Devtools does its best to set up an environment that combines best practices
 with how check works on CRAN. This includes:
-
 \itemize{
-
 \item The standard environment variables set by devtools:
-\code{\link[=r_env_vars]{r_env_vars()}}. Of particular note for package tests is the
-\code{NOT_CRAN} env var which lets you know that your tests are not
-running on CRAN, and hence can take a reasonable amount of time.
-
+\code{\link[=r_env_vars]{r_env_vars()}}. Of particular note for package tests is the \code{NOT_CRAN} env
+var, which lets you know that your tests are running somewhere other than
+CRAN, and hence can take a reasonable amount of time.
 \item Debugging flags for the compiler, set by
-\code{\link{compiler_flags}(FALSE)}.
-
-\item If \code{aspell} is found \verb{_R_CHECK_CRAN_INCOMING_USE_ASPELL_}
-is set to \code{TRUE}. If no spell checker is installed, a warning is
-issued.)
-
-\item env vars set by arguments \code{incoming}, \code{remote} and
-\code{force_suggests}
+\code{\link[=compiler_flags]{compiler_flags(FALSE)}}.
+\item If \code{aspell} is found, \verb{_R_CHECK_CRAN_INCOMING_USE_ASPELL_}
+is set to \code{TRUE}. If no spell checker is installed, a warning is issued.
+\item Environment variables, controlled by arguments \code{incoming}, \code{remote} and
+\code{force_suggests}.
 }
 }
 

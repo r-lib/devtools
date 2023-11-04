@@ -18,6 +18,6 @@
 ^man-roxygen$
 ^LICENSE\.md$
 ^MAINTENANCE\.md$
-^\.lintr$
+^\.lintr\.R$
 ^notes$
 ^CRAN-SUBMISSION$
