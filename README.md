@@ -87,7 +87,7 @@ look in the current working directory - this is a recommended practice.
 R package development can be intimidating, however there are now a number of
 valuable resources to help!
 
-<a href="https://r-pkgs.org"><img src="http://r-pkgs.org/images/cover.png" height="252" align = "right" alt="Cover image of R Packages book"/></a>
+<a href="https://r-pkgs.org"><img src="http://r-pkgs.org/images/cover-2e-small.png" height="252" align = "right" alt="Cover image of R Packages book"/></a>
 
 1. R Packages is a book that gives a comprehensive treatment of all common parts
    of package development and uses devtools throughout.
