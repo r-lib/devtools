@@ -37,6 +37,7 @@ run_examples <- function(pkg = ".", start = NULL, show = deprecated(), run_dontt
   if (!missing(show)) {
     lifecycle::deprecate_warn("2.3.1", "run_examples(show)")
   }
+  rlang::local_interactive(FALSE)
 
   pkg <- as.package(pkg)
 
