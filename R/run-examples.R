@@ -62,7 +62,7 @@ run_examples <- function(pkg = ".", start = NULL, show = deprecated(), run_dontt
     right = pkg$package
   )
 
-  load_all(pkg$path, reset = TRUE, export_all = FALSE)
+  load_all(pkg$path, reset = TRUE, export_all = FALSE, helpers = FALSE)
   on.exit(load_all(pkg$path, reset = TRUE))
 
   lapply(files, pkgload::run_example, run_donttest = run_donttest, run_dontrun = run_dontrun)
