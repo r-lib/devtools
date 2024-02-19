@@ -9,10 +9,10 @@
 build_manual <- function(pkg = ".", path = NULL) {
   pkg <- as.package(pkg)
   path <- path %||% path_dir(pkg$path)
-  name <- paste0(pkg$package, "_", pkg$version, ".pdf", collapse = " ")
+  name <- glue("{pkg$package}_{pkg$version}.pdf")
   tryCatch(msg <- callr::rcmd("Rd2pdf", cmdargs = c(
     "--force",
-    paste0("--output=", path, "/", name),
+    glue("--output={path}/{name}"),
     pkg$path
   ), fail_on_status = TRUE, stderr = "2>&1", spinner = FALSE),
   error = function(e) {

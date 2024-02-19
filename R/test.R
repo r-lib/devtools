@@ -91,7 +91,7 @@ load_package_for_testing <- function(pkg) {
 #' @export
 #' @rdname test
 test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
-  rlang::check_installed(c("covr", "DT"))
+  check_installed(c("covr", "DT"))
 
   save_all()
   pkg <- as.package(pkg)
@@ -123,7 +123,7 @@ test_coverage_active_file <- function(file = find_active_file(),
                                       show_report = interactive(),
                                       export_all = TRUE,
                                       ...) {
-  rlang::check_installed(c("covr", "DT"))
+  check_installed(c("covr", "DT"))
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   test_file <- find_test_file(file)

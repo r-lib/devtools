@@ -18,7 +18,7 @@ find_test_file <- function(path, call = parent.frame()) {
   pkg <- as.package(dirname(path))
 
   is_test <- type == "test"
-  path[!is_test] <- paste0(pkg$path, "/tests/testthat/test-", name_source(path[!is_test]), ".R")
+  path[!is_test] <- glue("{pkg$path}/tests/testthat/test-{name_source(path[!is_test])}.R")
   path <- unique(path[file_exists(path)])
 
   if (length(path) == 0) {

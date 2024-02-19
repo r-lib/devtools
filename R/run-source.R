@@ -30,7 +30,7 @@
 #' }
 source_url <- function(url, ..., sha1 = NULL) {
   stopifnot(is.character(url), length(url) == 1)
-  rlang::check_installed("digest")
+  check_installed("digest")
 
   temp_file <- file_temp()
   on.exit(file_delete(temp_file), add = TRUE)
@@ -108,7 +108,7 @@ check_sha1 <- function(path, sha1) {
 #' source_gist(6872663, filename = "hi.r", sha1 = "54f1db27e60")
 #' }
 source_gist <- function(id, ..., filename = NULL, sha1 = NULL, quiet = FALSE) {
-  rlang::check_installed("gh")
+  check_installed("gh")
   stopifnot(length(id) == 1)
 
   url_match <- "((^https://)|^)gist.github.com/([^/]+/)?([0-9a-f]+)$"
