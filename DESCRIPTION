@@ -32,6 +32,7 @@ Imports:
     remotes (>= 2.4.2),
     rlang (>= 1.0.4),
     roxygen2 (>= 7.2.1),
+    rprojroot (>= 2.0.4),
     rversions (>= 2.1.1),
     sessioninfo (>= 1.2.2),
     stats,
