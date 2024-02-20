@@ -42,6 +42,7 @@
 #'   roxygen2 version matches the version declared in the `DESCRIPTION`
 #'   file. Use `TRUE` or `FALSE` to override the default.
 #' @param build_args Additional arguments passed to `R CMD build`
+#' @param pkgdown Should run [pkgdown::check_pkgdown()]?
 #' @param ... Additional arguments passed on to [pkgbuild::build()].
 #' @param vignettes If `FALSE`, do not build or check vignettes, equivalent to
 #'   using `args = '--ignore-vignettes' and `build_args = '--no-build-vignettes'.
@@ -61,6 +62,7 @@ check <- function(pkg = ".",
                   run_dont_test = FALSE,
                   args = "--timings",
                   env_vars = c(NOT_CRAN = "true"),
+                  pkgdown = NULL,
                   quiet = FALSE,
                   check_dir = NULL,
                   cleanup = deprecated(),
@@ -86,6 +88,17 @@ check <- function(pkg = ".",
       cat_rule("Documenting", col = "cyan", line = 2)
     }
     document(pkg, quiet = quiet)
+    if (!quiet) {
+      cli::cat_line()
+    }
+  }
+  pkgdown <- pkgdown %||% has_pkgdown(pkg$path)
+
+  if (pkgdown) {
+    if (!quiet) {
+      cat_rule("Checking pkgdown", col = "cyan", line = 2)
+    }
+    pkgdown::check_pkgdown(pkg = pkg$path)
     if (!quiet) {
       cli::cat_line()
     }
@@ -149,6 +162,17 @@ can_document <- function(pkg) {
   } else {
     TRUE
   }
+}
+
+has_pkgdown <- function(pkg) {
+  tryCatch(
+    !is.null(
+      rprojroot::find_root_file(
+        criterion = rprojroot::is_pkgdown_project,
+        path = ".")
+      ),
+    error = function(e) FALSE
+    )
 }
 
 #' @export
