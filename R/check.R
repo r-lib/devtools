@@ -164,12 +164,12 @@ can_document <- function(pkg) {
   }
 }
 
-has_pkgdown <- function(pkg) {
+has_pkgdown <- function(path) {
   tryCatch(
     !is.null(
       rprojroot::find_root_file(
         criterion = rprojroot::is_pkgdown_project,
-        path = ".")
+        path = path)
       ),
     error = function(e) FALSE
     )
