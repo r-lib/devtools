@@ -63,8 +63,6 @@ Suggests:
     spelling (>= 2.2)
 VignetteBuilder: 
     knitr
-Remotes: 
-    r-lib/testthat
 Config/Needs/website: tidyverse/tidytemplate
 Config/testthat/edition: 3
 Encoding: UTF-8
