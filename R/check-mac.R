@@ -65,7 +65,7 @@ check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, ma
 
     cli::cat_rule(col = "cyan")
     cli::cli_inform(c(
-      i = "Check {.url {response_url}} the results in 5-10 mins (~{time})."
+      i = "Check {.url {response_url}} for the results in 5-10 mins (~{time})."
     ))
   }
 
