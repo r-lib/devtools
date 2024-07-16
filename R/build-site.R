@@ -10,7 +10,7 @@
 #' @return NULL
 #' @export
 build_site <- function(path = ".", quiet = TRUE, ...) {
-  rlang::check_installed("pkgdown")
+  check_installed("pkgdown")
 
   save_all()
 

@@ -86,11 +86,10 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   )
   on.exit(file_delete(built_path), add = TRUE)
 
-  url <- paste0(
-    "ftp://win-builder.r-project.org/", version, "/",
-    path_file(built_path)
+  url <- glue(
+    "ftp://win-builder.r-project.org/{version}/{path_file(built_path)}"
   )
-  lapply(url, upload_ftp, file = built_path)
+  map(url, upload_ftp, file = built_path)
 
   if (!quiet) {
     time <- strftime(Sys.time() + 30 * 60, "%I:%M %p")
@@ -127,7 +126,7 @@ change_maintainer_email <- function(path, email, call = parent.frame()) {
   if (!is.list(roles)) {
     roles <- list(roles)
   }
-  is_maintainer <- vapply(roles, function(r) all("cre" %in% r), logical(1))
+  is_maintainer <- map_lgl(roles, function(r) all("cre" %in% r))
   aut[is_maintainer]$email <- email
   desc$set_authors(aut)
 
@@ -135,7 +134,7 @@ change_maintainer_email <- function(path, email, call = parent.frame()) {
 }
 
 upload_ftp <- function(file, url, verbose = FALSE) {
-  rlang::check_installed("curl")
+  check_installed("curl")
 
   stopifnot(file_exists(file))
   stopifnot(is.character(url))

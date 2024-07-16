@@ -1,10 +1,3 @@
-compact <- function(x) {
-  is_empty <- vapply(x, function(x) length(x) == 0, logical(1))
-  x[!is_empty]
-}
-
-"%||%" <- function(a, b) if (!is.null(a)) a else b
-
 "%:::%" <- function(p, f) {
   get(f, envir = asNamespace(p))
 }
@@ -24,10 +17,6 @@ is_attached <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
   !is.null(pkgload::pkg_env(pkg$package))
-}
-
-vcapply <- function(x, FUN, ...) {
-  vapply(x, FUN, FUN.VALUE = character(1), ...)
 }
 
 release_bullets <- function() {
