@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `check()` now runs `pkgdown::check_pkgdown()` optionally (@olivroy, #2449)
+
 * `test_coverage()` now works if the package has not been installed.
 
 * `test_coverage_active_file()` now reports if any tests failed and does
