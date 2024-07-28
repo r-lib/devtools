@@ -277,6 +277,7 @@ upload_cran <- function(pkg, built_path, call = parent.frame()) {
 
   # Initial upload ---------
   cli::cli_inform(c(i = "Uploading package & comments"))
+  rlang::check_installed("httr")
   body <- list(
     pkg_id = "",
     name = maint$name,

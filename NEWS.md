@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* Use `httr` package conditionally with `rlang::check_installed("httr")` 
+  (#2573).
+
 * `test_coverage()` now works if the package has not been installed.
 
 * `test_coverage_active_file()` now reports if any tests failed and does
