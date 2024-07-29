@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* Functions that use httr now explicitly check that it is installed
+  (@catalamarti, #2573).
+
 * `test_coverage()` now works if the package has not been installed.
 
 * `test_coverage_active_file()` now reports if any tests failed and does

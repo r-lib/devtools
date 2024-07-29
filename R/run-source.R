@@ -31,6 +31,7 @@
 source_url <- function(url, ..., sha1 = NULL) {
   stopifnot(is.character(url), length(url) == 1)
   rlang::check_installed("digest")
+  rlang::check_installed("httr")
 
   temp_file <- file_temp()
   on.exit(file_delete(temp_file), add = TRUE)
