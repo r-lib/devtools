@@ -1,7 +1,7 @@
 # devtools (development version)
 
-* Use `httr` package conditionally with `rlang::check_installed("httr")` 
-  (#2573).
+* Functions that use httr now explicitly check that it is installed
+  (@catalamarti, #2573).
 
 * `test_coverage()` now works if the package has not been installed.
 
