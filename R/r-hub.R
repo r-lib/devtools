@@ -23,7 +23,7 @@ rhub_check <- function(gh_url = NULL,
                        platforms = c("ubuntu-release", "windows", "macos"),
                        r_versions = NULL,
                        branch = NULL) {
-  rlang::check_installed("rhub")
+  rlang::check_installed("rhub", version = "2.0.0")
 
   rhub::rhub_doctor(gh_url = gh_url)
 
