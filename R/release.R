@@ -83,7 +83,7 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
     }
   }
 
-  if (yesno("Have you checked on R-hub (with `check_rhub()`)?")) {
+  if (yesno("Have you checked on R-hub (with `rhub_check()`)?")) {
     return(invisible())
   }
 
