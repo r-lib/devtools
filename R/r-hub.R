@@ -36,7 +36,10 @@ rhub_check <- function(gh_url = NULL,
 #' @rdname rhub_check
 #' @export
 
-check_rhub <- function() {
+check_rhub <- function(gh_url = NULL,
+                       platforms = c("ubuntu-release", "windows", "macos"),
+                       r_versions = NULL,
+                       branch = NULL) {
   lifecycle::deprecate_soft(when = "2.4.6", what = "check_rhub()", with = "rhub_check()")
   rhub_check(gh_url = gh_url,
              platforms = platforms,
