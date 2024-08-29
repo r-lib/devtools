@@ -92,7 +92,7 @@ is cleaned up when the returned object is garbage collected.}
 \item{cleanup}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} See \code{check_dir} for details.}
 
 \item{vignettes}{If \code{FALSE}, do not build or check vignettes, equivalent to
-using \verb{args = '--ignore-vignettes' and }build_args = '--no-build-vignettes'.}
+using \code{args = '--ignore-vignettes'} and \code{build_args = '--no-build-vignettes'}.}
 
 \item{error_on}{Whether to throw an error on \verb{R CMD check} failures. Note
 that the check is always completed (unless a timeout happens), and the
