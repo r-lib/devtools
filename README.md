@@ -91,16 +91,14 @@ valuable resources to help!
 
 1. R Packages is a book that gives a comprehensive treatment of all common parts
    of package development and uses devtools throughout.
-    * The first edition is available at <https://r-pkgs.org/>, but note that
-      it has grown somewhat out of sync with the current version of devtools.
-    * A second edition is under development and is evolving to reflect the
-      current state of devtools. It is available at <https://r-pkgs.org>.
+    * The first edition is no longer available online, but it is still in print. Note that it has grown somewhat out of sync with the current version of devtools.
+    * A second edition that reflects the current state of devtools, plus new topics such as package websites and GitHub Actions, is available at <https://r-pkgs.org> and in paperback format.
     * The [Whole Game](https://r-pkgs.org/whole-game.html) and
       [Package structure](https://r-pkgs.org/package-structure-state.html) chapters
       make great places to start.
 
-2. [RStudio community - package
-   development](https://community.rstudio.com/c/package-development/11)
+2. [Posit Community - package
+   development](https://forum.posit.co/c/package-development/11)
    is a great place to ask specific questions related to package development.
 
 3. [rOpenSci packages](https://devguide.ropensci.org/) has
