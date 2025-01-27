@@ -28,10 +28,10 @@ check_dev_versions <- function(pkg = ".") {
 
   parsed <- lapply(deps$version, function(x) unlist(numeric_version(x)))
 
-  lengths <- vapply(parsed, length, integer(1))
+  lens <- lengths(parsed)
   last_ver <- vapply(parsed, function(x) x[[length(x)]], integer(1))
 
-  is_dev <- lengths == 4 & last_ver >= 9000
+  is_dev <- lens == 4 & last_ver >= 9000
 
   check_status(
     !any(is_dev),
