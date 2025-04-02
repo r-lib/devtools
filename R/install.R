@@ -36,6 +36,23 @@
 #' @param keep_source If `TRUE` will keep the srcrefs from an installed
 #'   package. This is useful for debugging (especially inside of RStudio).
 #'   It defaults to the option `"keep.source.pkgs"`.
+#' @param generate_dsym (macOS only) If `TRUE`, and if the package includes a
+#'   native library (a `.so` file), a `dSYM` sidecar file is generated and
+#'   installed alongside the library. This file contains source and line
+#'   information that allows a debugger to step through original sources.
+#'
+#'   Note that since `install()` operates from a temporary directory, the source
+#'   paths will point to dangling locations. You will need to remap these paths
+#'   to the actual sources on your disk, e.g. with lldb:
+#'
+#'   ```
+#'   # Get information about the dangling temporary path for a function in your
+#'   # library
+#'   image lookup -vn my_function
+#'
+#'   # Remap the dangling location to the actual package path
+#'   settings set target.source-map /private/tmp/Rtmpnl5XgE/R.INSTALLe5133dcc3211/mypackage /path/to/mypackage
+#'   ```
 #' @param ... additional arguments passed to [remotes::install_deps()]
 #'   when installing dependencies.
 #' @family package installation
@@ -50,6 +67,7 @@ install <-
              build_vignettes = FALSE,
              keep_source = getOption("keep.source.pkgs"),
              force = FALSE,
+             generate_dsym = TRUE,
              ...) {
     pkg <- as.package(pkg)
 
@@ -70,6 +88,7 @@ install <-
 
     opts <- c(
       if (keep_source) "--with-keep.source",
+      if (is_macos && generate_dsym) "--dsym",
       "--install-tests"
     )
     if (quick) {
