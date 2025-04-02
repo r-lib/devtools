@@ -10,6 +10,7 @@ compact <- function(x) {
 }
 
 is_windows <- isTRUE(.Platform$OS.type == "windows")
+is_macos <- isTRUE(tolower(Sys.info()[["sysname"]]) == "darwin")
 
 sort_ci <- function(x) {
   withr::with_collate("C", x[order(tolower(x), x)])
