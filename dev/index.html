@@ -16,8 +16,8 @@
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.9/font.css" rel="stylesheet">
 <link href="deps/Source_Code_Pro-0.4.9/font.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Tools to Make Developing R Packages Easier">
 <meta name="description" content="Collection of package development tools.">
 <meta property="og:description" content="Collection of package development tools.">
@@ -194,11 +194,11 @@
 <li><p><a href="https://github.com/r-lib/pkgload" class="external-link">pkgload</a>: Simulating package loading (i.e. <code><a href="reference/load_all.html">load_all()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/rcmdcheck" class="external-link">rcmdcheck</a>: Running R CMD check and reporting the results (i.e. <code><a href="reference/check.html">check()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/revdepcheck" class="external-link">revdepcheck</a>: Running R CMD check on all reverse dependencies, and figuring out what’s changed since the last CRAN release (i.e. <code>revdep_check()</code>).</p></li>
-<li><p><a href="https://github.com/r-lib/sessioninfo" class="external-link">sessioninfo</a>: R session info (i.e. <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">session_info()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/sessioninfo" class="external-link">sessioninfo</a>: R session info (i.e. <code><a href="https://sessioninfo.r-lib.org/reference/session_info.html" class="external-link">session_info()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/usethis" class="external-link">usethis</a>: Automating package setup (i.e. <code>use_test()</code>).</p></li>
 </ul>
 <p>Generally, you would not need to worry about these different packages, because devtools installs all of them automatically. You will need to care, however, if you’re filing a bug because reporting it at the correct place will lead to a speedier resolution.</p>
-<p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">sessioninfo::session_info()</a></code> rather than <code><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html" class="external-link">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
+<p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://sessioninfo.r-lib.org/reference/session_info.html" class="external-link">sessioninfo::session_info()</a></code> rather than <code><a href="https://sessioninfo.r-lib.org/reference/session_info.html" class="external-link">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
 <p>However for day to day development we recommend you continue to use <code><a href="https://devtools.r-lib.org/">library(devtools)</a></code> to quickly load all needed development tools, just like <code><a href="https://tidyverse.tidyverse.org" class="external-link">library(tidyverse)</a></code> quickly loads all the tools necessary for data exploration and visualization.</p>
 </div>
 <div class="section level2">
