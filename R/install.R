@@ -41,9 +41,10 @@
 #'   installed alongside the library. This file contains source and line
 #'   information that allows a debugger to step through original sources.
 #'
-#'   Note that since `install()` operates from a temporary directory, the source
-#'   paths will point to dangling locations. You will need to remap these paths
-#'   to the actual sources on your disk, e.g. with lldb:
+#'   Note that when `build` is set to `TRUE`, `install()` operates from a
+#'   temporary directory which causes the source paths to point to dangling
+#'   locations. You will need to remap these paths to the actual sources on your
+#'   disk, e.g. with lldb:
 #'
 #'   ```
 #'   # Get information about the dangling temporary path for a function in your
@@ -53,6 +54,9 @@
 #'   # Remap the dangling location to the actual package path
 #'   settings set target.source-map /private/tmp/Rtmpnl5XgE/R.INSTALLe5133dcc3211/mypackage /path/to/mypackage
 #'   ```
+#'
+#'   To avoid this, set `build` to `FALSE` to install directly from the source
+#'   location instead of a "built" package tarball.
 #' @param ... additional arguments passed to [remotes::install_deps()]
 #'   when installing dependencies.
 #' @family package installation
