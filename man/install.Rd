@@ -16,7 +16,6 @@ install(
   build_vignettes = FALSE,
   keep_source = getOption("keep.source.pkgs"),
   force = FALSE,
-  generate_dsym = TRUE,
   ...
 )
 }
@@ -34,7 +33,14 @@ demos, and vignettes, to make installation as fast as possible.}
 this ensures that the installation is completely clean, and prevents any
 binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
 package directory, but is considerably slower, because every compile has
-to start from scratch.}
+to start from scratch.
+
+One downside of installing from a built tarball is that the package is
+installed from a temporary location. This means that any source references,
+at R level or C/C++ level, will point to dangling locations. The debuggers
+will not be able to find the sources for step-debugging. If you're
+installing the package for development, consider setting \code{build} to
+\code{FALSE}.}
 
 \item{args}{An optional character vector of additional command line
 arguments to be passed to \verb{R CMD INSTALL}. This defaults to the
@@ -78,27 +84,6 @@ It defaults to the option \code{"keep.source.pkgs"}.}
 
 \item{force}{Force installation, even if the remote state has not changed
 since the previous install.}
-
-\item{generate_dsym}{(macOS only) If \code{TRUE}, and if the package includes a
-native library (a \code{.so} file), a \code{dSYM} sidecar file is generated and
-installed alongside the library. This file contains source and line
-information that allows a debugger to step through original sources.
-
-Note that when \code{build} is set to \code{TRUE}, \code{install()} operates from a
-temporary directory which causes the source paths to point to dangling
-locations. You will need to remap these paths to the actual sources on your
-disk, e.g. with lldb:
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{# Get information about the dangling temporary path for a function in your
-# library
-image lookup -vn my_function
-
-# Remap the dangling location to the actual package path
-settings set target.source-map /private/tmp/Rtmpnl5XgE/R.INSTALLe5133dcc3211/mypackage /path/to/mypackage
-}\if{html}{\out{</div>}}
-
-To avoid this, set \code{build} to \code{FALSE} to install directly from the source
-location instead of a "built" package tarball.}
 
 \item{...}{additional arguments passed to \code{\link[remotes:install_deps]{remotes::install_deps()}}
 when installing dependencies.}
