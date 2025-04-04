@@ -136,7 +136,13 @@ to "always". <code>TRUE</code> and <code>FALSE</code> are also accepted and corr
 this ensures that the installation is completely clean, and prevents any
 binary artefacts (like <code class="file">.o</code>, <code>.so</code>) from appearing in your local
 package directory, but is considerably slower, because every compile has
-to start from scratch.</p></dd>
+to start from scratch.</p>
+<p>One downside of installing from a built tarball is that the package is
+installed from a temporary location. This means that any source references,
+at R level or C/C++ level, will point to dangling locations. The debuggers
+will not be able to find the sources for step-debugging. If you're
+installing the package for development, consider setting <code>build</code> to
+<code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-build-opts">build_opts<a class="anchor" aria-label="anchor" href="#arg-build-opts"></a></dt>
