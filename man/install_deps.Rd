@@ -68,7 +68,14 @@ to "always". \code{TRUE} and \code{FALSE} are also accepted and correspond to
 this ensures that the installation is completely clean, and prevents any
 binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
 package directory, but is considerably slower, because every compile has
-to start from scratch.}
+to start from scratch.
+
+One downside of installing from a built tarball is that the package is
+installed from a temporary location. This means that any source references,
+at R level or C/C++ level, will point to dangling locations. The debuggers
+will not be able to find the sources for step-debugging. If you're
+installing the package for development, consider setting \code{build} to
+\code{FALSE}.}
 
 \item{build_opts}{Options to pass to \verb{R CMD build}, only used when \code{build} is \code{TRUE}.}
 
