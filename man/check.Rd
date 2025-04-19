@@ -134,7 +134,7 @@ with how check works on CRAN. This includes:
 var, which lets you know that your tests are running somewhere other than
 CRAN, and hence can take a reasonable amount of time.
 \item Debugging flags for the compiler, set by
-\code{\link[=compiler_flags]{compiler_flags(FALSE)}}.
+\code{\link[pkgbuild:compiler_flags]{compiler_flags(FALSE)}}.
 \item If \code{aspell} is found, \verb{_R_CHECK_CRAN_INCOMING_USE_ASPELL_}
 is set to \code{TRUE}. If no spell checker is installed, a warning is issued.
 \item Environment variables, controlled by arguments \code{incoming}, \code{remote} and

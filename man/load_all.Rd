@@ -17,11 +17,9 @@ load_all(
 \arguments{
 \item{path}{Path to a package, or within a package.}
 
-\item{reset}{clear package environment and reset file cache before loading
-any pieces of the package. This largely equivalent to running
-\code{\link[pkgload:unload]{unload()}}, however the old namespaces are not completely removed and no
-\code{.onUnload()} hooks are called. Use \code{reset = FALSE} may be faster for
-large code bases, but is a significantly less accurate approximation.}
+\item{reset}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} This is no longer supported
+because preserving the namespace requires unlocking its environment, which
+is no longer possible in recent versions of R.}
 
 \item{recompile}{DEPRECATED. force a recompile of DLL from source code, if
 present. This is equivalent to running \code{\link[pkgbuild:clean_dll]{pkgbuild::clean_dll()}} before
@@ -67,6 +65,8 @@ helpers are run during package loading.
 
 \code{is_loading()} returns \code{TRUE} when it is called while \code{load_all()}
 is running. This may be useful e.g. in \code{.onLoad} hooks.
+A package loaded with \code{load_all()} can be identified with with
+\code{\link[pkgload:is_dev_package]{is_dev_package()}}.
 }
 \section{Differences to regular loading}{
 
@@ -101,9 +101,6 @@ load_all("./")
 
 # Running again loads changed files
 load_all("./")
-
-# With reset=TRUE, unload and reload the package for a clean start
-load_all("./", TRUE)
 
 # With export_all=FALSE, only objects listed as exports in NAMESPACE
 # are exported

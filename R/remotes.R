@@ -25,7 +25,7 @@ with_pkgbuild_build_tools <- function(fun) {
 #'
 
 #' These functions are re-exported from the remotes package. They differ only
-#' that the ones in devtools use the [ellipsis] package to ensure all dotted
+#' that the ones in devtools use the [ellipsis::check_dots_used] feature to ensure all dotted
 #' arguments are used.
 #'
 #' Follow the links below to see the documentation.
