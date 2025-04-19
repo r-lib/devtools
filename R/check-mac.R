@@ -8,6 +8,7 @@
 #' @inheritParams check_win
 #' @param dep_pkgs Additional custom dependencies to install prior to checking
 #'   the package.
+#' @importFrom httr2 request req_body_multipart req_perform resp_check_status resp_body_string
 #' @family build functions
 #' @return The url with the check results (invisibly)
 #' @export
@@ -40,26 +41,25 @@ check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, ma
 
   url <- "https://mac.r-project.org/macbuilder/v1/submit"
 
-  rlang::check_installed("httr")
-  body <- list(pkgfile = httr::upload_file(built_path))
+  rlang::check_installed("httr2")
+  body <- list(pkgfile = upload_file(built_path))
 
+  # upload_file function implemented in utils.R
+  
   if (length(dep_built_paths) > 0) {
-    uploads <- lapply(dep_built_paths, httr::upload_file)
+    uploads <- lapply(dep_built_paths, upload_file)
     names(uploads) <- rep("depfiles", length(uploads))
     body <- append(body, uploads)
   }
 
-  res <- httr::POST(url,
-    body = body,
-    headers = list(
-      "Content-Type" = "multipart/form-data"
-    ),
-    encode = "multipart"
-  )
+  req <- httr2::request(url)
+  req <- httr2::req_body_multipart(req, !!!body)
+  res <- httr2::req_perform(req)
 
-  httr::stop_for_status(res, task = "Uploading package")
+  httr2::resp_check_status(res, info = "Uploading package")
 
-  response_url <- httr::content(res)$url
+  res_body <- httr2::resp_body_string(res)
+  response_url <- regmatches(res_body, regexpr("https://mac\\.R-project\\.org/macbuilder/results/[0-9a-zA-Z\\-]+/", res_body))
 
   if (!quiet) {
     time <- strftime(Sys.time() + 10 * 60, "%I:%M %p")
@@ -72,3 +72,5 @@ check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, ma
 
   invisible(response_url)
 }
+
+

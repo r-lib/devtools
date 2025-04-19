@@ -13,6 +13,10 @@
 #' @param url url
 #' @param ... other options passed to [source()]
 #' @param sha1 The (prefix of the) SHA-1 hash of the file at the remote URL.
+#' @importFrom fs file_temp file_delete
+#' @importFrom rlang check_installed warn
+#' @importFrom httr2 request req_perform resp_check_status resp_body_raw
+#' @importFrom ellipsis check_dots_used
 #' @export
 #' @seealso [source_gist()]
 #' @examples
@@ -31,18 +35,20 @@
 source_url <- function(url, ..., sha1 = NULL) {
   stopifnot(is.character(url), length(url) == 1)
   rlang::check_installed("digest")
-  rlang::check_installed("httr")
+  rlang::check_installed("httr2")
 
-  temp_file <- file_temp()
-  on.exit(file_delete(temp_file), add = TRUE)
+  temp_file <- fs::file_temp()
+  on.exit(fs::file_delete(temp_file), add = TRUE)
 
-  request <- httr::GET(url)
-  httr::stop_for_status(request)
-  writeBin(httr::content(request, type = "raw"), temp_file)
+  resp <-  httr2::req_perform(httr2::request(url))
+
+  httr2::resp_check_status(resp)
+
+  writeBin(httr2::resp_body_raw(resp), temp_file)
 
   check_sha1(temp_file, sha1)
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  ellipsis::check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
   source(temp_file, ...)
 }
 
