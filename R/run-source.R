@@ -104,7 +104,7 @@ check_sha1 <- function(path, sha1) {
 #' # Wrong hash will result in error
 #' source_gist(6872663, sha1 = "54f1db27e61")
 #'
-#' #' # You can speficy a particular R file in the gist
+#' #' # You can specify a particular R file in the gist
 #' source_gist(6872663, filename = "hi.r")
 #' source_gist(6872663, filename = "hi.r", sha1 = "54f1db27e60")
 #' }
