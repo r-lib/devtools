@@ -8,6 +8,8 @@
 * `test_coverage_active_file()` now reports if any tests failed and does
   a better job of executing snapshot comparisons.
 
+* New `check_mac_devel()` function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (@nfrerebeau, #2507)
+
 # devtools 2.4.5
 
 * `check(cleanup =)` was deprecated in devtools v1.11.0 (2016-04-12) and was
