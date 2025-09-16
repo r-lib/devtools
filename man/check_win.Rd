@@ -13,6 +13,7 @@ check_win_devel(
   manual = TRUE,
   email = NULL,
   quiet = FALSE,
+  webform = FALSE,
   ...
 )
 
@@ -22,6 +23,7 @@ check_win_release(
   manual = TRUE,
   email = NULL,
   quiet = FALSE,
+  webform = FALSE,
   ...
 )
 
@@ -31,6 +33,7 @@ check_win_oldrelease(
   manual = TRUE,
   email = NULL,
   quiet = FALSE,
+  webform = FALSE,
   ...
 )
 }
@@ -48,6 +51,8 @@ or \verb{R CMD install} if \code{binary = TRUE}.}
 to use the package maintainer's email.}
 
 \item{quiet}{If \code{TRUE}, suppresses output.}
+
+\item{webform}{If \code{TRUE}, uses web form instead of passive FTP upload.}
 
 \item{...}{Additional arguments passed to \code{\link[pkgbuild:build]{pkgbuild::build()}}.}
 }
