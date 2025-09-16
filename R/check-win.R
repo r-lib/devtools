@@ -175,6 +175,7 @@ extract_hidden_fields <- function(html_text) {
 }
 
 upload_webform <- function(file, version) {
+  rlang::check_installed("httr")
 
   upload_url <- "https://win-builder.r-project.org/upload.aspx"
   form_page <- httr::GET(upload_url)
