@@ -212,10 +212,6 @@ check_built <- function(path = NULL, cran = TRUE,
   }
 
   env_vars <- check_env_vars(cran, remote, incoming, force_suggests, env_vars)
-  if (!quiet) {
-    cat_rule("Checking", col = "cyan", line = 2)
-    show_env_vars(env_vars)
-  }
 
   withr::with_envvar(env_vars, action = "replace", {
     rcmdcheck::rcmdcheck(path,
