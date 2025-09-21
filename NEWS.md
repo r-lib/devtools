@@ -8,6 +8,8 @@
 * `test_coverage_active_file()` now reports if any tests failed and does
   a better job of executing snapshot comparisons.
 
+* `check_built()` no longer prints check env variables - now handled by `rcmdcheck::rcmdcheck()` directly as of r-lib/rcmdcheck#237 (#2621)
+
 # devtools 2.4.5
 
 * `check(cleanup =)` was deprecated in devtools v1.11.0 (2016-04-12) and was
