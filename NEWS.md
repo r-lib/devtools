@@ -54,6 +54,8 @@ Other improvements
 
 * `dev_mode()` and `check_rhub()` are deprecated.
 
+* `check_built()` no longer prints check env variables - now handled by `rcmdcheck::rcmdcheck()` directly as of r-lib/rcmdcheck#237 (#2621)
+
 # devtools 2.4.5
 
 * `check(cleanup =)` was deprecated in devtools v1.11.0 (2016-04-12) and was
