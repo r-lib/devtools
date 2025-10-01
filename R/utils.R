@@ -45,3 +45,12 @@ is_testing <- function() {
 is_rstudio_running <- function() {
   !is_testing() && rstudioapi::isAvailable()
 }
+
+#' @importFrom mime guess_type
+upload_file <- function(path, type = NULL) {
+  stopifnot(is.character(path), length(path) == 1, file.exists(path))
+  if (is.null(type)) {
+    type <- mime::guess_type(path)
+  }
+  curl::form_file(path, type)
+}

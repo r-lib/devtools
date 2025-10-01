@@ -27,7 +27,7 @@
 #' CRAN, and hence can take a reasonable amount of time.
 #'
 #' * Debugging flags for the compiler, set by
-#' [`compiler_flags(FALSE)`][compiler_flags()].
+#' [`compiler_flags(FALSE)`][pkgbuild::compiler_flags()].
 #'
 #' * If `aspell` is found, `_R_CHECK_CRAN_INCOMING_USE_ASPELL_`
 #' is set to `TRUE`. If no spell checker is installed, a warning is issued.
