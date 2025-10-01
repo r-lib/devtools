@@ -83,6 +83,12 @@ or globs. (See \code{\link[utils:glob2rx]{utils::glob2rx()}}.) E.g. \verb{src/ru
 \item \code{Config/build/bootstrap} can be set to \code{TRUE} to run
 \verb{Rscript bootstrap.R} in the source directory prior to running subsequent
 build steps.
+\item \code{Config/build/never-clean} can be set to \code{TRUE} to never add \code{--preclean}
+to \verb{R CMD INSTALL}, e.g., when header files have changed.
+This helps avoiding rebuilds that can take long for very large C/C++ codebases
+and can lead to build failures if object files are out of sync with header files.
+Control the dependencies between object files and header files
+by adding \verb{include file.d} to \code{Makevars} for each \code{file.c} or \code{file.cpp} source file.
 }
 }
 
