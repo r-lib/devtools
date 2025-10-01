@@ -53,7 +53,7 @@
 <ul><li><p>Functions that use httr now explicitly check that it is installed (<a href="https://github.com/catalamarti" class="external-link">@catalamarti</a>, <a href="https://github.com/r-lib/devtools/issues/2573" class="external-link">#2573</a>).</p></li>
 <li><p><code><a href="../reference/test.html">test_coverage()</a></code> now works if the package has not been installed.</p></li>
 <li><p><code><a href="../reference/test.html">test_coverage_active_file()</a></code> now reports if any tests failed and does a better job of executing snapshot comparisons.</p></li>
-<li><p><code><a href="../reference/dev_mode.html">dev_mode()</a></code> is deprecated.</p></li>
+<li><p><code><a href="../reference/dev_mode.html">dev_mode()</a></code> and <code><a href="../reference/check_rhub.html">check_rhub()</a></code> are deprecated.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.4.5" id="devtools-245">devtools 2.4.5<a class="anchor" aria-label="anchor" href="#devtools-245"></a></h2><p class="text-muted">CRAN release: 2022-10-11</p>
@@ -327,7 +327,7 @@
 <li><p>Now use cli package to draw rules - they are more aesthetically pleasing and the correct width in the RStudio build pane (<a href="https://github.com/r-lib/devtools/issues/1627" class="external-link">#1627</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> has been tweaked to reflect modern submission workflow and to ask questions rather than running code for you (<a href="https://github.com/r-lib/devtools/issues/1632" class="external-link">#1632</a>).</p></li>
 <li><p><code><a href="../reference/document.html">document()</a></code>, <code><a href="../reference/load_all.html">load_all()</a></code>, <code><a href="../reference/check.html">check()</a></code>, <code><a href="../reference/build.html">build()</a></code> and <code><a href="../reference/test.html">test()</a></code> now automatically save open files when they are run inside the RStudio IDE. (<a href="https://github.com/r-lib/devtools/issues/1576" class="external-link">#1576</a>)</p></li>
-<li><p>New <code><a href="../reference/check_rhub.html">check_rhub()</a></code> function to check packages using <a href="https://builder.r-hub.io/" class="external-link uri">https://builder.r-hub.io/</a>.</p></li>
+<li><p>New <code><a href="../reference/check_rhub.html">check_rhub()</a></code> function to check packages using <code>https://builder.r-hub.io/</code>.</p></li>
 <li><p><code>run_examples</code> was mistakenly passing <code>show</code> to <code><a href="https://pkgload.r-lib.org/reference/dev_example.html" class="external-link">pkgload::run_example</a></code>, causing it to fail (<a href="https://github.com/amcdavid" class="external-link">@amcdavid</a>, <a href="https://github.com/r-lib/devtools/issues/1449" class="external-link">#1449</a>)</p></li>
 <li><p>New <code><a href="../reference/build_manual.html">build_manual()</a></code> function that produces pdf manual for the package (<a href="https://github.com/twolodzko" class="external-link">@twolodzko</a>, <a href="https://github.com/r-lib/devtools/issues/1238" class="external-link">#1238</a>).</p></li>
 <li><p>If you use git <code><a href="../reference/release.html">release()</a></code> now generates a file called <code>CRAN-RELEASE</code> that reminds you to tag the commit that you submitted to CRAN (<a href="https://github.com/r-lib/devtools/issues/1198" class="external-link">#1198</a>).</p></li>

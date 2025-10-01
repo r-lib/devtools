@@ -148,8 +148,12 @@
 <h3 id="check-and-release">Check and release:<a class="anchor" aria-label="anchor" href="#check-and-release"></a>
 </h3>
 <ul>
-<li><p><code><a href="reference/check.html">check()</a></code> updates the documentation, then builds and checks the package locally. <code><a href="reference/check_win.html">check_win()</a></code> checks a package using <a href="https://win-builder.r-project.org/" class="external-link">win-builder</a>, and <code><a href="reference/check_rhub.html">check_rhub()</a></code> checks a package using <a href="https://log.r-hub.io/" class="external-link">r-hub</a>. This allows you to easily check your package on all systems CRAN uses before submission.</p></li>
-<li><p><code><a href="reference/release.html">release()</a></code> makes sure everything is ok with your package (including asking you a number of questions), then builds and uploads to CRAN.</p></li>
+<li>
+<code><a href="reference/check.html">check()</a></code> updates the documentation, then builds and checks the package locally.</li>
+<li>
+<code><a href="reference/check_win.html">check_win_release()</a></code>, <code><a href="reference/check_win.html">check_win_devel()</a></code>, and <code><a href="reference/check_mac_release.html">check_mac_release()</a></code> check a package using <a href="https://win-builder.r-project.org/" class="external-link">win-builder</a> or <a href="https://mac.r-project.org/macbuilder/submit.html" class="external-link uri">https://mac.r-project.org/macbuilder/submit.html</a>.</li>
+<li>
+<code><a href="reference/release.html">release()</a></code> and <code><a href="reference/submit_cran.html">submit_cran()</a></code> handle the mechanics of CRAN submission with or without, respectively, (re)-running lots of local checks.</li>
 </ul>
 </div>
 </div>
