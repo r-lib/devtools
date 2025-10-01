@@ -165,6 +165,12 @@ or globs. (See <code><a href="https://rdrr.io/r/utils/glob2rx.html" class="exter
 <li><p><code>Config/build/bootstrap</code> can be set to <code>TRUE</code> to run
 <code>Rscript bootstrap.R</code> in the source directory prior to running subsequent
 build steps.</p></li>
+<li><p><code>Config/build/never-clean</code> can be set to <code>TRUE</code> to never add <code>--preclean</code>
+to <code>R CMD INSTALL</code>, e.g., when header files have changed.
+This helps avoiding rebuilds that can take long for very large C/C++ codebases
+and can lead to build failures if object files are out of sync with header files.
+Control the dependencies between object files and header files
+by adding <code>include file.d</code> to <code>Makevars</code> for each <code>file.c</code> or <code>file.cpp</code> source file.</p></li>
 </ul></div>
 
 <div class="section">

@@ -72,9 +72,11 @@ created, provided that the parent path exists.</p></dd>
 
 
 <dt id="arg-open">open<a class="anchor" aria-label="anchor" href="#arg-open"></a></dt>
-<dd><p>If <code>TRUE</code>, <a href="https://usethis.r-lib.org/reference/proj_activate.html" class="external-link">activates</a> the new project:</p><ul><li><p>If using RStudio desktop, the package is opened in a new session.</p></li>
-<li><p>If on RStudio server, the current RStudio project is activated.</p></li>
-<li><p>Otherwise, the working directory and active project is changed.</p></li>
+<dd><p>If <code>TRUE</code>, <a href="https://usethis.r-lib.org/reference/proj_activate.html" class="external-link">activates</a> the new project:</p><ul><li><p>If using RStudio or Positron, the new project is opened in a new session,
+window, or browser tab, depending on the product (RStudio or Positron)
+and context (desktop or server).</p></li>
+<li><p>Otherwise, the working directory and active project of the current R
+session are changed to the new project.</p></li>
 </ul></dd>
 
 </dl></div>

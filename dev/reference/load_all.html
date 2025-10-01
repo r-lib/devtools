@@ -26,7 +26,9 @@ helpers are run during package loading.
 
 
 is_loading() returns TRUE when it is called while load_all()
-is running. This may be useful e.g. in .onLoad hooks."><meta property="og:description" content="load_all() loads a package. It roughly simulates what happens
+is running. This may be useful e.g. in .onLoad hooks.
+A package loaded with load_all() can be identified with
+is_dev_package()."><meta property="og:description" content="load_all() loads a package. It roughly simulates what happens
 when a package is installed and loaded with library(), without
 having to first install the package. It:
 Loads all data files in data/. See load_data() for more
@@ -53,7 +55,9 @@ helpers are run during package loading.
 
 
 is_loading() returns TRUE when it is called while load_all()
-is running. This may be useful e.g. in .onLoad hooks."><meta property="og:image" content="https://devtools.r-lib.org/logo.png"><meta name="robots" content="noindex"><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>
+is running. This may be useful e.g. in .onLoad hooks.
+A package loaded with load_all() can be identified with
+is_dev_package()."><meta property="og:image" content="https://devtools.r-lib.org/logo.png"><meta name="robots" content="noindex"><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -128,7 +132,9 @@ access them interactively. devtools sets the <code>DEVTOOLS_LOAD</code>
 environment variable to the package name to let you check whether the
 helpers are run during package loading.</p></li>
 </ul><p><code>is_loading()</code> returns <code>TRUE</code> when it is called while <code>load_all()</code>
-is running. This may be useful e.g. in <code>.onLoad</code> hooks.</p>
+is running. This may be useful e.g. in <code>.onLoad</code> hooks.
+A package loaded with <code>load_all()</code> can be identified with
+<code><a href="https://pkgload.r-lib.org/reference/is_dev_package.html" class="external-link">is_dev_package()</a></code>.</p>
     </div>
 
     <div class="section level2">
@@ -153,11 +159,9 @@ is running. This may be useful e.g. in <code>.onLoad</code> hooks.</p>
 
 
 <dt id="arg-reset">reset<a class="anchor" aria-label="anchor" href="#arg-reset"></a></dt>
-<dd><p>clear package environment and reset file cache before loading
-any pieces of the package. This largely equivalent to running
-<code><a href="https://pkgload.r-lib.org/reference/unload.html" class="external-link">unload()</a></code>, however the old namespaces are not completely removed and no
-<code>.onUnload()</code> hooks are called. Use <code>reset = FALSE</code> may be faster for
-large code bases, but is a significantly less accurate approximation.</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> This is no longer supported
+because preserving the namespace requires unlocking its environment, which
+is no longer possible in recent versions of R.</p></dd>
 
 
 <dt id="arg-recompile">recompile<a class="anchor" aria-label="anchor" href="#arg-recompile"></a></dt>
@@ -207,6 +211,17 @@ listed as exports, use <code>export_all = FALSE</code>. This more closely simula
 behavior when loading an installed package with <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code>, and can
 be useful for checking for missing exports.</p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="controlling-the-debug-compiler-flags">Controlling the debug compiler flags<a class="anchor" aria-label="anchor" href="#controlling-the-debug-compiler-flags"></a></h2>
+
+
+<p><code>load_all()</code> delegates to <code><a href="https://pkgbuild.r-lib.org/reference/compile_dll.html" class="external-link">pkgbuild::compile_dll()</a></code> to perform the actual
+compilation, during which by default some debug compiler flags are
+appended. If you would like to produce an optimized build instead, you can
+opt out by either using <code>debug = FALSE</code>, setting the <code>pkg.build_extra_flags</code>
+option to <code>FALSE</code>, or setting the <code>PKG_BUILD_EXTRA_FLAGS</code> environment variable
+to <code>FALSE</code>. For further details see the Details section in <code><a href="https://pkgbuild.r-lib.org/reference/compile_dll.html" class="external-link">pkgbuild::compile_dll()</a></code>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -216,9 +231,6 @@ be useful for checking for missing exports.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Running again loads changed files</span></span></span>
 <span class="r-in"><span><span class="fu">load_all</span><span class="op">(</span><span class="st">"./"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># With reset=TRUE, unload and reload the package for a clean start</span></span></span>
-<span class="r-in"><span><span class="fu">load_all</span><span class="op">(</span><span class="st">"./"</span>, <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># With export_all=FALSE, only objects listed as exports in NAMESPACE</span></span></span>
 <span class="r-in"><span><span class="co"># are exported</span></span></span>
