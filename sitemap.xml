@@ -1,183 +1,63 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://devtools.r-lib.org/404.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/MAINTENANCE.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/articles/dependencies.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/index.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/as.package.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/bash.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/build.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/build_manual.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/build_rmd.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/build_site.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/build_vignettes.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/check.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/check_mac_release.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/check_man.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/check_rhub.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/check_win.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/clean_vignettes.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/create.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/dev_mode.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/dev_packages.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/dev_sitrep.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/devtools-deprecated.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/devtools-package.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/document.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/git_checks.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/has_tests.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/install.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/install_deps.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/is.package.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/lint.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/load_all.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/loaded_packages.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/missing_s3.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/package_file.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/r_env_vars.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/release.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/release_checks.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/reload.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/remote-reexports.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/revdep.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/run_examples.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/save_all.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/show_news.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/source_gist.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/source_url.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/spell_check.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/submit_cran.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/test.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/uninstall.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/uses_testthat.html</loc>
-  </url>
-  <url>
-    <loc>https://devtools.r-lib.org/reference/wd.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://devtools.r-lib.org/404.html</loc></url>
+<url><loc>https://devtools.r-lib.org/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://devtools.r-lib.org/CONTRIBUTING.html</loc></url>
+<url><loc>https://devtools.r-lib.org/LICENSE-text.html</loc></url>
+<url><loc>https://devtools.r-lib.org/LICENSE.html</loc></url>
+<url><loc>https://devtools.r-lib.org/MAINTENANCE.html</loc></url>
+<url><loc>https://devtools.r-lib.org/articles/dependencies.html</loc></url>
+<url><loc>https://devtools.r-lib.org/articles/index.html</loc></url>
+<url><loc>https://devtools.r-lib.org/authors.html</loc></url>
+<url><loc>https://devtools.r-lib.org/index.html</loc></url>
+<url><loc>https://devtools.r-lib.org/news/index.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/as.package.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/bash.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/build.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/build_manual.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/build_rmd.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/build_site.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/build_vignettes.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/check.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/check_mac_release.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/check_man.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/check_rhub.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/check_win.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/clean_vignettes.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/create.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/dev_mode.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/dev_packages.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/dev_sitrep.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/devtools-deprecated.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/devtools-package.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/document.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/git_checks.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/has_tests.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/index.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/install.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/install_deps.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/is.package.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/lint.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/load_all.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/loaded_packages.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/missing_s3.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/package_file.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/r_env_vars.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/reexports.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/release.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/release_checks.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/reload.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/remote-reexports.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/revdep.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/run_examples.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/save_all.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/show_news.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/source_gist.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/source_url.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/spell_check.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/submit_cran.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/test.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/uninstall.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/uses_testthat.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/wd.html</loc></url>
 </urlset>
+

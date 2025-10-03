@@ -1,10 +1,9 @@
-pandoc: 2.14.2
-pkgdown: 2.0.6
+pandoc: 3.1.11
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   dependencies: dependencies.html
-last_built: 2022-10-11T17:20Z
+last_built: 2025-10-03T17:01Z
 urls:
   reference: https://devtools.r-lib.org/reference
   article: https://devtools.r-lib.org/articles
-
