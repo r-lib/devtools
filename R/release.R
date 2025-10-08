@@ -83,7 +83,7 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
     }
   }
 
-  if (yesno("Have you checked on R-hub (with `check_rhub()`)?")) {
+  if (yesno("Have you checked on R-hub (see `?rhub::rhubv2`)?")) {
     return(invisible())
   }
 
@@ -277,6 +277,7 @@ upload_cran <- function(pkg, built_path, call = parent.frame()) {
 
   # Initial upload ---------
   cli::cli_inform(c(i = "Uploading package & comments"))
+  rlang::check_installed("httr")
   body <- list(
     pkg_id = "",
     name = maint$name,

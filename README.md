@@ -2,8 +2,8 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/r-lib/devtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/devtools/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/r-lib/devtools/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/devtools?branch=main)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/devtools/graph/badge.svg)](https://app.codecov.io/gh/r-lib/devtools)
 <!-- badges: end -->
 
 The aim of devtools is to make package development easier by providing R
@@ -74,13 +74,11 @@ look in the current working directory - this is a recommended practice.
 ### Check and release:
 
 * `check()` updates the documentation, then builds and checks the package locally.
-  `check_win()` checks a package using
-  [win-builder](https://win-builder.r-project.org/), and `check_rhub()` checks a package using
-  [r-hub](https://log.r-hub.io/). This allows you to easily check
-  your package on all systems CRAN uses before submission.
-
-* `release()` makes sure everything is ok with your package (including asking
-  you a number of questions), then builds and uploads to CRAN.
+* `check_win_release()`, `check_win_devel()`, and `check_mac_release()` check
+  a package using [win-builder](https://win-builder.r-project.org/) or
+  <https://mac.r-project.org/macbuilder/submit.html>.
+* `release()` and `submit_cran()` handle the mechanics of CRAN submission with
+  or without, respectively, (re)-running lots of local checks.
 
 ## Learning more
 
@@ -91,16 +89,14 @@ valuable resources to help!
 
 1. R Packages is a book that gives a comprehensive treatment of all common parts
    of package development and uses devtools throughout.
-    * The first edition is available at <https://r-pkgs.org/>, but note that
-      it has grown somewhat out of sync with the current version of devtools.
-    * A second edition is under development and is evolving to reflect the
-      current state of devtools. It is available at <https://r-pkgs.org>.
+    * The first edition is no longer available online, but it is still in print. Note that it has grown somewhat out of sync with the current version of devtools.
+    * A second edition that reflects the current state of devtools, plus new topics such as package websites and GitHub Actions, is available at <https://r-pkgs.org> and in paperback format.
     * The [Whole Game](https://r-pkgs.org/whole-game.html) and
       [Package structure](https://r-pkgs.org/package-structure-state.html) chapters
       make great places to start.
 
-2. [RStudio community - package
-   development](https://community.rstudio.com/c/package-development/11)
+2. [Posit Community - package
+   development](https://forum.posit.co/c/package-development/11)
    is a great place to ask specific questions related to package development.
 
 3. [rOpenSci packages](https://devguide.ropensci.org/) has

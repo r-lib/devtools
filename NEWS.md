@@ -2,10 +2,17 @@
 
 * `check()` now runs `pkgdown::check_pkgdown()` optionally (@olivroy, #2449)
 
+# devtools 2.4.6
+
+* Functions that use httr now explicitly check that it is installed
+  (@catalamarti, #2573).
+
 * `test_coverage()` now works if the package has not been installed.
 
 * `test_coverage_active_file()` now reports if any tests failed and does
   a better job of executing snapshot comparisons.
+
+* `dev_mode()` and `check_rhub()` are deprecated.
 
 # devtools 2.4.5
 
@@ -525,7 +532,7 @@ you should switch your package to depend on **usethis** directly instead.
 * `document()`, `load_all()`, `check()`, `build()` and `test()` now
   automatically save open files when they are run inside the RStudio IDE. (#1576)
 
-* New `check_rhub()` function to check packages using <https://builder.r-hub.io/>.
+* New `check_rhub()` function to check packages using `https://builder.r-hub.io/`.
 
 * `run_examples` was mistakenly passing `show` to
   `pkgload::run_example`, causing it to fail (@amcdavid, #1449)

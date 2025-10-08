@@ -33,7 +33,14 @@ demos, and vignettes, to make installation as fast as possible.}
 this ensures that the installation is completely clean, and prevents any
 binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
 package directory, but is considerably slower, because every compile has
-to start from scratch.}
+to start from scratch.
+
+One downside of installing from a built tarball is that the package is
+installed from a temporary location. This means that any source references,
+at R level or C/C++ level, will point to dangling locations. The debuggers
+will not be able to find the sources for step-debugging. If you're
+installing the package for development, consider setting \code{build} to
+\code{FALSE}.}
 
 \item{args}{An optional character vector of additional command line
 arguments to be passed to \verb{R CMD INSTALL}. This defaults to the

@@ -45,7 +45,7 @@
 #' @param pkgdown Should run [pkgdown::check_pkgdown()]?
 #' @param ... Additional arguments passed on to [pkgbuild::build()].
 #' @param vignettes If `FALSE`, do not build or check vignettes, equivalent to
-#'   using `args = '--ignore-vignettes' and `build_args = '--no-build-vignettes'.
+#'   using `args = '--ignore-vignettes'` and `build_args = '--no-build-vignettes'`.
 #' @param cleanup `r lifecycle::badge("deprecated")` See `check_dir` for details.
 #' @seealso [release()] if you want to send the checked package to
 #'   CRAN.

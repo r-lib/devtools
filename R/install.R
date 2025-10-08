@@ -26,6 +26,13 @@
 #'   binary artefacts (like \file{.o}, `.so`) from appearing in your local
 #'   package directory, but is considerably slower, because every compile has
 #'   to start from scratch.
+#'
+#'   One downside of installing from a built tarball is that the package is
+#'   installed from a temporary location. This means that any source references,
+#'   at R level or C/C++ level, will point to dangling locations. The debuggers
+#'   will not be able to find the sources for step-debugging. If you're
+#'   installing the package for development, consider setting `build` to
+#'   `FALSE`.
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to `R CMD INSTALL`. This defaults to the
 #'   value of the option `"devtools.install.args"`.
