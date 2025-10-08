@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `check()` now runs `pkgdown::check_pkgdown()` optionally (@olivroy, #2449)
+
 # devtools 2.4.6
 
 * Functions that use httr now explicitly check that it is installed

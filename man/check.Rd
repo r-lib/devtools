@@ -18,6 +18,7 @@ check(
   run_dont_test = FALSE,
   args = "--timings",
   env_vars = c(NOT_CRAN = "true"),
+  pkgdown = NULL,
   quiet = FALSE,
   check_dir = NULL,
   cleanup = deprecated(),
@@ -82,6 +83,8 @@ because  \code{--output} cannot deal with spaces and other special characters on
 Windows.)}
 
 \item{env_vars}{Environment variables set during \verb{R CMD check}}
+
+\item{pkgdown}{Should run \code{\link[pkgdown:check_pkgdown]{pkgdown::check_pkgdown()}}?}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
