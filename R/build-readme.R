@@ -55,6 +55,7 @@ build_md <- function(
   }
 
   local_install(pkg, quiet = TRUE)
+  env <- r_env_vars()
 
   for (path in paths) {
     cli::cli_inform(c(i = "Building {.path {path}}"))
@@ -68,7 +69,8 @@ build_md <- function(
         ),
         show = TRUE,
         spinner = FALSE,
-        stderr = "2>&1"
+        stderr = "2>&1",
+        env = env
       )
     } else {
       callr::r_safe(
@@ -81,7 +83,8 @@ build_md <- function(
         ),
         show = TRUE,
         spinner = FALSE,
-        stderr = "2>&1"
+        stderr = "2>&1",
+        env = env
       )
     }
   }
@@ -108,7 +111,7 @@ build_rmd <- function(...) {
 build_readme <- function(path = ".", quiet = TRUE, ...) {
   pkg <- as.package(path)
 
-  regexp <- paste0(path_file(pkg$path), "/(inst/)?readme[.](r|q)md")
+  regexp <- paste0(path_file(pkg$path), "/(inst/)?readme[.](r|q)md$")
   readme_path <- path_abs(
     dir_ls(
       pkg$path,

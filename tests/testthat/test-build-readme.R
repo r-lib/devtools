@@ -1,4 +1,4 @@
-test_that("can build README in root directory", {
+test_that("can build README in root directory (Rmd)", {
   skip_on_cran()
 
   pkg <- local_package_create()
@@ -9,7 +9,7 @@ test_that("can build README in root directory", {
   expect_false(file_exists(path(pkg, "README.html")))
 })
 
-test_that("can build README in inst/", {
+test_that("can build README in inst/ (Rmd)", {
   skip_on_cran()
 
   pkg <- local_package_create()
@@ -27,7 +27,7 @@ test_that("can build README in inst/", {
   expect_false(file_exists(path(pkg, "inst", "README.html")))
 })
 
-test_that("can build Quarto README in root directory", {
+test_that("can build README in root directory (qmd)", {
   skip_on_cran()
 
   pkg <- local_package_create()
@@ -38,7 +38,7 @@ test_that("can build Quarto README in root directory", {
   expect_false(file_exists(path(pkg, "README.html")))
 })
 
-test_that("can build Quarto README in inst/", {
+test_that("can build README in inst/ (qmd)", {
   skip_on_cran()
 
   pkg <- local_package_create()
@@ -51,18 +51,27 @@ test_that("can build Quarto README in inst/", {
 
   suppressMessages(build_readme(pkg))
   expect_true(file_exists(path(pkg, "inst", "README.md")))
-  expect_false(file_exists(path(pkg, "README.Rmd")))
+  expect_false(file_exists(path(pkg, "README.qmd")))
   expect_false(file_exists(path(pkg, "README.md")))
   expect_false(file_exists(path(pkg, "inst", "README.html")))
 })
 
-test_that("useful errors if too few or too many", {
+test_that("useful errors if too few or too many (Rmd)", {
+  skip_on_cran()
+
   pkg <- local_package_create()
   expect_snapshot(build_readme(pkg), error = TRUE)
 
   suppressMessages(usethis::with_project(pkg, use_readme_rmd()))
   dir_create(pkg, "inst")
   file_copy(path(pkg, "README.Rmd"), path(pkg, "inst", "README.Rmd"))
+  expect_snapshot(build_readme(pkg), error = TRUE)
+})
+
+test_that("useful errors if too few or too many (qmd)", {
+  skip_on_cran()
+
+  pkg <- local_package_create()
   expect_snapshot(build_readme(pkg), error = TRUE)
 
   suppressMessages(usethis::with_project(pkg, use_readme_qmd()))
@@ -72,12 +81,18 @@ test_that("useful errors if too few or too many", {
 })
 
 test_that("useful errors if too many--mixed Quarto and Rmd", {
-  suppressMessages(usethis::with_project(pkg, use_readme_rmd()))
-  suppressMessages(usethis::with_project(pkg, use_readme_qmd()))
+  skip_on_cran()
+
+  pkg <- local_package_create()
+
+  suppressMessages(usethis::with_project(pkg, use_readme_rmd(open = FALSE)))
+
+  file_copy(path(pkg, "README.Rmd"), path(pkg, "README.qmd"))
+
   expect_snapshot(build_readme(pkg), error = TRUE)
 })
 
-test_that("don't error for README in another directory", {
+test_that("don't error for README in another directory (Rmd)", {
   skip_on_cran()
 
   pkg <- local_package_create()
@@ -88,7 +103,7 @@ test_that("don't error for README in another directory", {
   expect_no_error(suppressMessages(build_readme(pkg)))
 })
 
-test_that("don't error for Quarto README in another directory", {
+test_that("don't error for README in another directory (qmd)", {
   skip_on_cran()
 
   pkg <- local_package_create()
