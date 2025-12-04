@@ -85,9 +85,13 @@ Windows.)}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 
-\item{check_dir}{Path to a directory where the check is performed.
-If this is not \code{NULL}, then the a temporary directory is used, that
-is cleaned up when the returned object is garbage collected.}
+\item{check_dir}{Path to a directory where the check will be performed.
+The path will be created if needed and is reported in the \code{checkdir} field
+of the object returned by \code{rcmdcheck()}.
+
+If \code{check_dir = NULL} (the default), the check is performed in a temporary
+directory that is automatically cleaned up when the object returned by
+\code{rcmdcheck()} is deleted.}
 
 \item{cleanup}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} See \code{check_dir} for details.}
 

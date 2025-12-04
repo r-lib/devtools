@@ -4,7 +4,7 @@
       build_readme(pkg)
     Condition
       Error in `build_readme()`:
-      ! Can't find 'README.Rmd' or 'inst/README.Rmd'.
+      ! Can't find 'README.Rmd', 'inst/README.Rmd', 'README.qmd', or 'inst/README.qmd'.
 
 ---
 
@@ -12,5 +12,5 @@
       build_readme(pkg)
     Condition
       Error in `build_readme()`:
-      ! Can't have both 'README.Rmd' and 'inst/README.Rmd'.
+      ! Can't have multiple README sources: 'README.Rmd', 'inst/README.Rmd', 'README.qmd', or 'inst/README.qmd'.
 
