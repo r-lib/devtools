@@ -36,7 +36,8 @@ run_examples(
   `Rd` file to start with (with or without extensions), or a topic name.
   If omitted, will start with the (lexicographically) first file. This
   is useful if you have a lot of examples and don't want to rerun them
-  every time you fix a problem.
+  every time you fix a problem. To run only one example, use
+  [`pkgload::run_example()`](https://pkgload.r-lib.org/reference/dev_example.html).
 
 - show:
 
@@ -66,3 +67,8 @@ run_examples(
 - run, test:
 
   Deprecated, see `run_dontrun` and `run_donttest` above.
+
+## See also
+
+[`pkgload::run_example()`](https://pkgload.r-lib.org/reference/dev_example.html)
+to run a single example.
