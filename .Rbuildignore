@@ -21,3 +21,4 @@
 ^\.lintr\.R$
 ^notes$
 ^CRAN-SUBMISSION$
+^\.claude$
