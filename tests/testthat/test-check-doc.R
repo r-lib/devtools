@@ -7,17 +7,22 @@ test_that("check_man works", {
 
   pkg <- local_package_create()
   dir.create(file.path(pkg, "man"))
-  writeLines(c("
+  writeLines(
+    c(
+      "
 \\name{foo}
 \\title{Foo bar}
 \\usage{
 foo(x)
 }
 \\arguments{\\item{foo}{}}
-"), file.path(pkg, "man", "foo.Rd"))
+"
+    ),
+    file.path(pkg, "man", "foo.Rd")
+  )
 
-expect_output(
-  check_man(pkg),
-  "Undocumented arguments"
-)
+  expect_output(
+    check_man(pkg),
+    "Undocumented arguments"
+  )
 })

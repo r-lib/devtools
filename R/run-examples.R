@@ -22,16 +22,31 @@
 #'   examples are updated before running them.
 #' @keywords programming
 #' @export
-run_examples <- function(pkg = ".", start = NULL, show = deprecated(), run_donttest = FALSE,
-                         run_dontrun = FALSE, fresh = FALSE, document = TRUE,
-                         run = deprecated(), test = deprecated()) {
-
+run_examples <- function(
+  pkg = ".",
+  start = NULL,
+  show = deprecated(),
+  run_donttest = FALSE,
+  run_dontrun = FALSE,
+  fresh = FALSE,
+  document = TRUE,
+  run = deprecated(),
+  test = deprecated()
+) {
   if (!missing(run)) {
-    lifecycle::deprecate_warn("2.3.1", "run_examples(run)", 'run_example(run_dontrun)')
+    lifecycle::deprecate_warn(
+      "2.3.1",
+      "run_examples(run)",
+      'run_example(run_dontrun)'
+    )
     run_dontrun <- run
   }
   if (!missing(test)) {
-    lifecycle::deprecate_warn("2.3.1", "run_examples(test)", 'run_example(run_donttest)')
+    lifecycle::deprecate_warn(
+      "2.3.1",
+      "run_examples(test)",
+      'run_example(run_donttest)'
+    )
     run_donttest <- test
   }
   if (!missing(show)) {
@@ -42,9 +57,28 @@ run_examples <- function(pkg = ".", start = NULL, show = deprecated(), run_dontt
 
   if (fresh) {
     to_run <-
-        function(path, start, run_donttest, run_dontrun) devtools::run_examples(pkg = path, start = start, run_donttest = run_donttest, run_dontrun = run_dontrun, document = FALSE)
+      function(path, start, run_donttest, run_dontrun) {
+        devtools::run_examples(
+          pkg = path,
+          start = start,
+          run_donttest = run_donttest,
+          run_dontrun = run_dontrun,
+          document = FALSE
+        )
+      }
 
-    callr::r(to_run, args = list(path = pkg$path, start = start, run_donttest = run_donttest, run_dontrun = run_dontrun), show = TRUE, spinner = FALSE, stderr = "2>&1")
+    callr::r(
+      to_run,
+      args = list(
+        path = pkg$path,
+        start = start,
+        run_donttest = run_donttest,
+        run_dontrun = run_dontrun
+      ),
+      show = TRUE,
+      spinner = FALSE,
+      stderr = "2>&1"
+    )
     return(invisible())
   }
 
@@ -65,7 +99,12 @@ run_examples <- function(pkg = ".", start = NULL, show = deprecated(), run_dontt
   load_all(pkg$path, reset = TRUE, export_all = FALSE, helpers = FALSE)
   on.exit(load_all(pkg$path, reset = TRUE))
 
-  lapply(files, pkgload::run_example, run_donttest = run_donttest, run_dontrun = run_dontrun)
+  lapply(
+    files,
+    pkgload::run_example,
+    run_donttest = run_donttest,
+    run_dontrun = run_dontrun
+  )
 
   invisible()
 }
@@ -76,7 +115,6 @@ run_examples <- function(pkg = ".", start = NULL, show = deprecated(), run_dontt
 #   * browser
 #   * rerun example and rerun
 #   * reload code and rerun
-
 
 rd_files <- function(pkg = ".", start = NULL) {
   pkg <- as.package(pkg)

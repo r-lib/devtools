@@ -59,7 +59,9 @@ check_version <- function(pkg = ".") {
 check_vignette_titles <- function(pkg = ".") {
   pkg <- as.package(pkg)
   vigns <- tools::pkgVignettes(dir = pkg$path)
-  if (length(vigns$docs) == 0) return()
+  if (length(vigns$docs) == 0) {
+    return()
+  }
 
   has_vignette_title <- function(v, n) {
     h <- readLines(v, n = n)
