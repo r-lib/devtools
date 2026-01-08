@@ -11,7 +11,8 @@
 #'   name of `Rd` file to start with (with or without extensions), or
 #'   a topic name. If omitted, will start with the (lexicographically) first
 #'   file. This is useful if you have a lot of examples and don't want to
-#'   rerun them every time you fix a problem.
+#'   rerun them every time you fix a problem. To run only one example, use
+#'   [pkgload::run_example()].
 #' @family example functions
 #' @param show DEPRECATED.
 #' @param fresh if `TRUE`, will be run in a fresh R session. This has
@@ -21,6 +22,8 @@
 #' @param document if `TRUE`, [document()] will be run to ensure
 #'   examples are updated before running them.
 #' @keywords programming
+#'
+#' @seealso [pkgload::run_example()] to run a single example.
 #' @export
 run_examples <- function(pkg = ".", start = NULL, show = deprecated(), run_donttest = FALSE,
                          run_dontrun = FALSE, fresh = FALSE, document = TRUE,
