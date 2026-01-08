@@ -119,9 +119,9 @@ test_coverage_file <- function(file = find_active_file(), ...) {
 #' @rdname test
 #' @export
 test_coverage_active_file <- function(file = find_active_file(),
-  filter = TRUE,
-  show_report = interactive(),
-  export_all = TRUE,
+                                      filter = TRUE,
+                                      show_report = interactive(),
+                                      export_all = TRUE,
                                       ...) {
   rlang::check_installed(c("covr", "DT"))
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
@@ -143,8 +143,8 @@ test_coverage_active_file <- function(file = find_active_file(),
   )
   snap_reporter$start_file(basename(test_file))
   reporter <- testthat::MultiReporter$new(reporters = list(
-      testthat::StopReporter$new(praise = FALSE),
-      snap_reporter
+    testthat::StopReporter$new(praise = FALSE),
+    snap_reporter
   ))
 
   withr::local_envvar(r_env_vars())
