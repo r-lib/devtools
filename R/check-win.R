@@ -13,6 +13,7 @@
 #' @param email An alternative email address to use. If `NULL`, the default is
 #'   to use the package maintainer's email.
 #' @param quiet If `TRUE`, suppresses output.
+#' @param webform If `TRUE`, uses web form instead of passive FTP upload.
 #' @param ... Additional arguments passed to [pkgbuild::build()].
 #' @family build functions
 #' @name check_win
@@ -20,39 +21,40 @@ NULL
 
 #' @describeIn check_win Check package on the development version of R.
 #' @export
-check_win_devel <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
+check_win_devel <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, webform = FALSE, ...) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   check_win(
     pkg = pkg, version = "R-devel", args = args, manual = manual,
-    email = email, quiet = quiet, ...
+    email = email, quiet = quiet, webform = webform, ...
   )
 }
 
 #' @describeIn check_win Check package on the released version of R.
 #' @export
-check_win_release <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
+check_win_release <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, webform = FALSE, ...) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   check_win(
     pkg = pkg, version = "R-release", args = args, manual = manual,
-    email = email, quiet = quiet, ...
+    email = email, quiet = quiet, webform = webform, ...
   )
 }
 
 #' @describeIn check_win Check package on the previous major release version of R.
 #' @export
-check_win_oldrelease <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
+check_win_oldrelease <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, webform = FALSE, ...) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   check_win(
     pkg = pkg, version = "R-oldrelease", args = args, manual = manual,
-    email = email, quiet = quiet, ...
+    email = email, quiet = quiet, webform = webform, ...
   )
 }
 
 check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelease"),
-                      args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
+                      args = NULL, manual = TRUE, email = NULL, quiet = FALSE,
+                      webform = FALSE, ...) {
   pkg <- as.package(pkg)
 
   if (!is.null(email)) {
@@ -81,16 +83,16 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   }
 
   built_path <- pkgbuild::build(pkg$path, tempdir(),
-    args = args,
-    manual = manual, quiet = quiet, ...
+                                args = args,
+                                manual = manual, quiet = quiet, ...
   )
   on.exit(file_delete(built_path), add = TRUE)
 
-  url <- paste0(
-    "ftp://win-builder.r-project.org/", version, "/",
-    path_file(built_path)
-  )
-  lapply(url, upload_ftp, file = built_path)
+  if (webform) {
+    submit_winbuilder_webform(built_path, version)
+  } else {
+    submit_winbuilder_ftp(built_path, version)
+  }
 
   if (!quiet) {
     time <- strftime(Sys.time() + 30 * 60, "%I:%M %p")
@@ -103,6 +105,15 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
   }
 
   invisible()
+}
+
+submit_winbuilder_ftp <- function(path, version) {
+  url <- paste0("ftp://win-builder.r-project.org/", version, "/", path_file(path))
+  lapply(url, upload_ftp, file = path)
+}
+
+submit_winbuilder_webform <- function(path, version) {
+  lapply(version, upload_webform, file = path)
 }
 
 change_maintainer_email <- function(path, email, call = parent.frame()) {
@@ -146,4 +157,46 @@ upload_ftp <- function(file, url, verbose = FALSE) {
     readBin(con, raw(), n = n)
   }, verbose = verbose)
   curl::curl_fetch_memory(url, handle = h)
+}
+
+extract_hidden_fields <- function(html_text) {
+  extract_value <- function(name) {
+    pattern <- sprintf('name="%s"[^>]*value="([^"]+)"', name)
+    match <- regexec(pattern, html_text)
+    result <- regmatches(html_text, match)
+    if (length(result[[1]]) >= 2) result[[1]][2] else NA_character_
+  }
+
+  list(
+    `__VIEWSTATE` = extract_value("__VIEWSTATE"),
+    `__VIEWSTATEGENERATOR` = extract_value("__VIEWSTATEGENERATOR"),
+    `__EVENTVALIDATION` = extract_value("__EVENTVALIDATION")
+  )
+}
+
+upload_webform <- function(file, version) {
+  rlang::check_installed("httr")
+
+  upload_url <- "https://win-builder.r-project.org/upload.aspx"
+  form_page <- httr::GET(upload_url)
+  html_text <- httr::content(form_page, as = "text")
+
+  field_map <- list(
+    "R-release" = list(file = "FileUpload1", button = "Button1"),
+    "R-devel" = list(file = "FileUpload2", button = "Button2"),
+    "R-oldrelease" = list(file = "FileUpload3", button = "Button3")
+  )
+
+  fields <- field_map[[version]]
+
+  body <- extract_hidden_fields(html_text)
+  body[[fields$file]] <- httr::upload_file(file)
+  body[[fields$button]] <- "Upload File"
+
+  r <- httr::POST(
+    url = upload_url,
+    body = body,
+    encode = "multipart"
+  )
+  httr::stop_for_status(r)
 }
