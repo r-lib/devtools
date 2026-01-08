@@ -7,7 +7,7 @@ find_active_file <- function(arg = "file", call = parent.frame()) {
 
 find_test_file <- function(path, call = parent.frame()) {
   type <- test_file_type(path)
-  if (any(is.na(type))) {
+  if (anyNA(type)) {
     file <- path_file(path[is.na(type)])
     cli::cli_abort(
       "Don't know how to find tests associated with the active file {.file {file}}",
