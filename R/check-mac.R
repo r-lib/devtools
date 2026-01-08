@@ -11,7 +11,14 @@
 #' @family build functions
 #' @return The url with the check results (invisibly)
 #' @export
-check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, manual = TRUE, quiet = FALSE, ...) {
+check_mac_release <- function(
+  pkg = ".",
+  dep_pkgs = character(),
+  args = NULL,
+  manual = TRUE,
+  quiet = FALSE,
+  ...
+) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   pkg <- as.package(pkg)
@@ -23,17 +30,25 @@ check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, ma
     ))
   }
 
-  built_path <- pkgbuild::build(pkg$path, tempdir(),
+  built_path <- pkgbuild::build(
+    pkg$path,
+    tempdir(),
     args = args,
-    manual = manual, quiet = quiet, ...
+    manual = manual,
+    quiet = quiet,
+    ...
   )
 
   dep_built_paths <- character()
   for (i in seq_along(dep_pkgs)) {
     dep_pkg <- as.package(dep_pkgs[[i]])$path
-    dep_built_paths[[i]] <- pkgbuild::build(dep_pkg, tempdir(),
+    dep_built_paths[[i]] <- pkgbuild::build(
+      dep_pkg,
+      tempdir(),
       args = args,
-      manual = manual, quiet = quiet, ...
+      manual = manual,
+      quiet = quiet,
+      ...
     )
   }
   on.exit(file_delete(c(built_path, dep_built_paths)), add = TRUE)
@@ -49,7 +64,8 @@ check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, ma
     body <- append(body, uploads)
   }
 
-  res <- httr::POST(url,
+  res <- httr::POST(
+    url,
     body = body,
     headers = list(
       "Content-Type" = "multipart/form-data"

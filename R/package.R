@@ -10,7 +10,9 @@
 #' @export
 #' @keywords internal
 as.package <- function(x = NULL, create = deprecated()) {
-  if (is.package(x)) return(x)
+  if (is.package(x)) {
+    return(x)
+  }
   if (lifecycle::is_present(create)) {
     lifecycle::deprecate_warn("2.5.0", "as.package(create = )")
   }

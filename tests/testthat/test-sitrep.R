@@ -49,7 +49,11 @@ test_that("check_for_rstudio_updates", {
 
   # an out-of-date daily
   expect_snapshot(
-    writeLines(check_for_rstudio_updates("windows", "2021.09.0-daily+328", TRUE)),
+    writeLines(check_for_rstudio_updates(
+      "windows",
+      "2021.09.0-daily+328",
+      TRUE
+    )),
     transform = scrub_current_version
   )
 })

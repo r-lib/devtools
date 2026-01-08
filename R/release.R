@@ -44,9 +44,13 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
       right = pkg$package,
       line = 2
     )
-    check(pkg,
-      cran = TRUE, remote = TRUE, manual = TRUE,
-      build_args = args, run_dont_test = TRUE
+    check(
+      pkg,
+      cran = TRUE,
+      remote = TRUE,
+      manual = TRUE,
+      build_args = args,
+      run_dont_test = TRUE
     )
   }
   if (yesno("Have you run `R CMD check` locally?")) {
@@ -74,10 +78,16 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
         cat_rule()
       }
       cran_url <- paste0(
-        cran_mirror(), "/web/checks/check_results_",
-        pkg$package, ".html"
+        cran_mirror(),
+        "/web/checks/check_results_",
+        pkg$package,
+        ".html"
       )
-      if (yesno("Have you fixed all existing problems at \n{cran_url}{end_sentence}")) {
+      if (
+        yesno(
+          "Have you fixed all existing problems at \n{cran_url}{end_sentence}"
+        )
+      ) {
         return(invisible())
       }
     }
@@ -94,7 +104,9 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
   deps <- if (new_pkg) 0 else length(revdep(pkg$package))
   if (deps > 0) {
     msg <- paste0(
-      "Have you checked the ", deps, " reverse dependencies ",
+      "Have you checked the ",
+      deps,
+      " reverse dependencies ",
       "(with the revdepcheck package)?"
     )
     if (yesno(msg)) {
@@ -106,7 +118,9 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
     "Have you updated `NEWS.md` file?",
     "Have you updated `DESCRIPTION`?",
     "Have you updated `cran-comments.md?`",
-    if (file_exists("codemeta.json")) "Have you updated codemeta.json with codemetar::write_codemeta()?",
+    if (file_exists("codemeta.json")) {
+      "Have you updated codemeta.json with codemetar::write_codemeta()?"
+    },
     find_release_questions(pkg)
   )
   for (question in questions) {
@@ -145,7 +159,15 @@ find_release_questions <- function(pkg = ".") {
 }
 
 yesno <- function(msg, .envir = parent.frame()) {
-  yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "Of course", "Absolutely")
+  yeses <- c(
+    "Yes",
+    "Definitely",
+    "For sure",
+    "Yup",
+    "Yeah",
+    "Of course",
+    "Absolutely"
+  )
   nos <- c("No way", "Not yet", "I forget", "No", "Nope", "Uhhhh... Maybe?")
 
   cli::cli_inform(msg, .envir = .envir)
@@ -249,9 +271,7 @@ submit_cran <- function(pkg = ".", args = NULL) {
 
   upload_cran(pkg, built_path)
 
-  usethis::with_project(pkg$path,
-    flag_release(pkg)
-  )
+  usethis::with_project(pkg$path, flag_release(pkg))
 }
 
 extract_cran_msg <- function(msg) {
@@ -339,7 +359,9 @@ flag_release <- function(pkg = ".") {
     return(invisible())
   }
 
-  cli::cli_inform(c("!" = "Don't forget to tag this release once accepted by CRAN"))
+  cli::cli_inform(c(
+    "!" = "Don't forget to tag this release once accepted by CRAN"
+  ))
 
   withr::with_dir(pkg$path, {
     sha <- system2("git", c("rev-parse", "HEAD"), stdout = TRUE)

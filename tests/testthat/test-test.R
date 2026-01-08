@@ -27,7 +27,9 @@ test_that("Filtering works with devtools::test", {
 })
 
 test_that("devtools::test_active_file works", {
-  out <- test_test_active_file(test_path("testTest/tests/testthat/test-dummy.R"))
+  out <- test_test_active_file(test_path(
+    "testTest/tests/testthat/test-dummy.R"
+  ))
   expect_equal(length(out), 1)
 })
 

@@ -28,11 +28,16 @@
 #'
 #' revdep("ggplot2", ignore = c("xkcd", "zoo"))
 #' }
-revdep <- function(pkg,
-                   dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
-                   recursive = FALSE, ignore = NULL,
-                   bioconductor = FALSE) {
-  if (missing(pkg)) pkg <- as.package(".")$package
+revdep <- function(
+  pkg,
+  dependencies = c("Depends", "Imports", "Suggests", "LinkingTo"),
+  recursive = FALSE,
+  ignore = NULL,
+  bioconductor = FALSE
+) {
+  if (missing(pkg)) {
+    pkg <- as.package(".")$package
+  }
 
   all <- if (bioconductor) packages() else cran_packages()
 
@@ -44,7 +49,9 @@ revdep <- function(pkg,
 #' @rdname revdep
 #' @export
 revdep_maintainers <- function(pkg = ".") {
-  if (missing(pkg)) pkg <- as.package(".")$package
+  if (missing(pkg)) {
+    pkg <- as.package(".")$package
+  }
 
   maintainers <- unique(packages()[revdep(pkg), "Maintainer"])
   class(maintainers) <- "maintainers"
@@ -64,26 +71,31 @@ print.maintainers <- function(x, ...) {
 cran_packages <- memoise::memoise(
   function() {
     local <- path_temp("packages.rds")
-    utils::download.file("https://cran.R-project.org/web/packages/packages.rds", local,
-      mode = "wb", quiet = TRUE
+    utils::download.file(
+      "https://cran.R-project.org/web/packages/packages.rds",
+      local,
+      mode = "wb",
+      quiet = TRUE
     )
     on.exit(file_delete(local))
     cp <- readRDS(local)
     rownames(cp) <- unname(cp[, 1])
     cp
   },
-  ~memoise::timeout(30 * 60)
+  ~ memoise::timeout(30 * 60)
 )
 
 bioc_packages <- memoise::memoise(
-  function(views = paste(BiocManager::repositories()[["BioCsoft"]], "VIEWS", sep = "/")) {
+  function(
+    views = paste(BiocManager::repositories()[["BioCsoft"]], "VIEWS", sep = "/")
+  ) {
     con <- url(views)
     on.exit(close(con))
     bioc <- read.dcf(con)
     rownames(bioc) <- bioc[, 1]
     bioc
   },
-  ~memoise::timeout(30 * 60)
+  ~ memoise::timeout(30 * 60)
 )
 
 packages <- function() {

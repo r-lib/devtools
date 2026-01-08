@@ -53,7 +53,9 @@ check_sha1 <- function(path, sha1) {
     cli::cli_inform(c(i = "SHA-1 hash of file is {.str {file_sha1}}"))
   } else {
     if (nchar(sha1) < 6) {
-      cli::cli_abort("{.arg sha1} must be at least 6 characters, not {nchar(sha1)}.")
+      cli::cli_abort(
+        "{.arg sha1} must be at least 6 characters, not {nchar(sha1)}."
+      )
     }
 
     # Truncate file_sha1 to length of sha1
@@ -142,7 +144,11 @@ find_gist <- function(id, filename = NULL, call = parent.frame()) {
   }
 
   if (!is.null(filename)) {
-    if (!is.character(filename) || length(filename) > 1 || !grepl("\\.[rR]$", filename)) {
+    if (
+      !is.character(filename) ||
+        length(filename) > 1 ||
+        !grepl("\\.[rR]$", filename)
+    ) {
       cli::cli_abort(
         "{.arg filename} must be {.code NULL}, or a single filename ending in .R/.r",
         call = call
@@ -155,7 +161,10 @@ find_gist <- function(id, filename = NULL, call = parent.frame()) {
     }
   } else {
     if (length(r_files) > 1) {
-      cli::cli_inform("{length(r_files)} .R files in gist, using first", call = call)
+      cli::cli_inform(
+        "{length(r_files)} .R files in gist, using first",
+        call = call
+      )
     }
     which <- 1
   }
