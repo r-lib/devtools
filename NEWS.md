@@ -1,4 +1,5 @@
 # devtools (development version)
+* `build_rmd()` is deprecated in favor of `build_md()` which also handles Quarto.
 
 # devtools 2.4.6
 

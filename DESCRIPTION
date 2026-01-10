@@ -57,6 +57,7 @@ Suggests:
     MASS,
     mockery (>= 0.4.3),
     pingr (>= 2.0.1),
+    quarto (>= 1.5.1),
     rhub (>= 1.1.1),
     rmarkdown (>= 2.14),
     rstudioapi (>= 0.13),
