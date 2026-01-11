@@ -17,7 +17,10 @@ build_manual <- function(pkg = ".", path = NULL) {
   ), fail_on_status = TRUE, stderr = "2>&1", spinner = FALSE),
   error = function(e) {
     cat(e$stdout)
-    cli::cli_abort("Failed to build manual")
+    msg <- regmatches(e$stderr,
+                      regexpr("LaTeX Error:.*", e$stderr, perl = TRUE))
+    cli::cli_abort(c("x" = msg,
+                     "!" = "Failed to build manual"))
   })
 
   cat(msg$stdout)
