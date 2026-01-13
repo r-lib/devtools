@@ -24,6 +24,9 @@ Rscript -e "devtools::document()"
 # To check pkgdown documentation
 Rscript -e "pkgdown::check_pkgdown()"
 
+# To check the package with R CMD check
+Rscript -e "devtools::check()"
+
 # To format code
 air format .
 ```
@@ -53,7 +56,7 @@ air format .
 ### `NEWS.md`
 
 - Every user-facing change should be given a bullet in `NEWS.md`. Do not add bullets for small documentation changes or internal refactorings.
-- Each bullet should briefly describes the change to the end user, and mention the related issue in parentheses.
+- Each bullet should briefly describe the change to the end user and mention the related issue in parentheses.
 - A bullet can consist of multiple sentences but should not contain any new lines (i.e. don't wrap the bullet).
 - If the change is related to a function, put the name of the function early in the bullet.
 - Order bullets alphabetically by function name. Put all bullets that don't mention function names at the beginning.
