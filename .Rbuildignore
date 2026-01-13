@@ -22,3 +22,5 @@
 ^notes$
 ^CRAN-SUBMISSION$
 ^\.claude$
+^[.]?air[.]toml$
+^\.vscode$

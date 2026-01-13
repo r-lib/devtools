@@ -15,14 +15,14 @@ show_news <- function(pkg = ".", latest = TRUE, ...) {
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-  out <- utils::news(..., db = ("tools" %:::% ".news_reader_default")(news_path))
+  out <- utils::news(
+    ...,
+    db = ("tools" %:::% ".news_reader_default")(news_path)
+  )
   if (latest) {
     ver <- numeric_version(out$Version)
     recent <- ver == max(ver)
-    structure(out[recent, ],
-      class = class(out),
-      bad = attr(out, "bad")[recent]
-    )
+    structure(out[recent, ], class = class(out), bad = attr(out, "bad")[recent])
   } else {
     out
   }
