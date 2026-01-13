@@ -14,6 +14,13 @@ load_all <- function(
     path <- path$path
   }
 
+  if (is_loading()) {
+    cli::cli_abort(c(
+      "Recursive loading detected.",
+      i = "Did you accidentally include {.fn load_all} in an R source file?"
+    ))
+  }
+
   save_all()
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
@@ -28,6 +35,10 @@ load_all <- function(
     ...
   )
 }
+
+#' @importFrom pkgload is_loading
+#' @export
+pkgload::is_loading
 
 #' @importFrom pkgload unload
 #' @export
