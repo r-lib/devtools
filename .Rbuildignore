@@ -21,3 +21,5 @@
 ^\.lintr\.R$
 ^notes$
 ^CRAN-SUBMISSION$
+^[.]?air[.]toml$
+^\.vscode$
