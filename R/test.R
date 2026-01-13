@@ -138,7 +138,9 @@ test_coverage_active_file <- function(file = find_active_file(),
   # To correctly simulate test_file() we need to set up both a temporary
   # snapshotter (with correct directory specification) for snapshot comparisons
   # and a stop reporter to inform the user about test failures
-  snap_reporter <- testthat::local_snapshotter(file.path(test_dir, "_snaps"))
+  snap_reporter <- testthat::local_snapshotter(
+    snap_dir = file.path(test_dir, "_snaps")
+  )
   snap_reporter$start_file(basename(test_file))
   reporter <- testthat::MultiReporter$new(reporters = list(
     testthat::StopReporter$new(praise = FALSE),
