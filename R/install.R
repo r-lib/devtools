@@ -26,6 +26,13 @@
 #'   binary artefacts (like \file{.o}, `.so`) from appearing in your local
 #'   package directory, but is considerably slower, because every compile has
 #'   to start from scratch.
+#'
+#'   One downside of installing from a built tarball is that the package is
+#'   installed from a temporary location. This means that any source references,
+#'   at R level or C/C++ level, will point to dangling locations. The debuggers
+#'   will not be able to find the sources for step-debugging. If you're
+#'   installing the package for development, consider setting `build` to
+#'   `FALSE`.
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to `R CMD INSTALL`. This defaults to the
 #'   value of the option `"devtools.install.args"`.
@@ -44,13 +51,20 @@
 #' debugging flags set.
 #' @export
 install <-
-  function(pkg = ".", reload = TRUE, quick = FALSE, build = !quick,
-             args = getOption("devtools.install.args"), quiet = FALSE,
-             dependencies = NA, upgrade = "default",
-             build_vignettes = FALSE,
-             keep_source = getOption("keep.source.pkgs"),
-             force = FALSE,
-             ...) {
+  function(
+    pkg = ".",
+    reload = TRUE,
+    quick = FALSE,
+    build = !quick,
+    args = getOption("devtools.install.args"),
+    quiet = FALSE,
+    dependencies = NA,
+    upgrade = "default",
+    build_vignettes = FALSE,
+    keep_source = getOption("keep.source.pkgs"),
+    force = FALSE,
+    ...
+  ) {
     pkg <- as.package(pkg)
 
     # Forcing all of the promises for the current namespace now will avoid lazy-load
@@ -79,14 +93,25 @@ install <-
 
     check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
-    remotes::install_deps(pkg$path,
-      build = build, build_opts = build_opts,
-      INSTALL_opts = opts, dependencies = dependencies, quiet = quiet,
-      force = force, upgrade = upgrade, ...
+    remotes::install_deps(
+      pkg$path,
+      build = build,
+      build_opts = build_opts,
+      INSTALL_opts = opts,
+      dependencies = dependencies,
+      quiet = quiet,
+      force = force,
+      upgrade = upgrade,
+      ...
     )
 
     if (build) {
-      install_path <- pkgbuild::build(pkg$path, dest_path = tempdir(), args = build_opts, quiet = quiet)
+      install_path <- pkgbuild::build(
+        pkg$path,
+        dest_path = tempdir(),
+        args = build_opts,
+        quiet = quiet
+      )
       on.exit(file_delete(install_path), add = TRUE)
     } else {
       install_path <- pkg$path
@@ -99,8 +124,17 @@ install <-
       pkgload::unregister(pkg$package)
     }
 
-    pkgbuild::with_build_tools(required = FALSE,
-      callr::rcmd("INSTALL", c(install_path, opts), echo = !quiet, show = !quiet, spinner = FALSE, stderr = "2>&1", fail_on_status = TRUE)
+    pkgbuild::with_build_tools(
+      required = FALSE,
+      callr::rcmd(
+        "INSTALL",
+        c(install_path, opts),
+        echo = !quiet,
+        show = !quiet,
+        spinner = FALSE,
+        stderr = "2>&1",
+        fail_on_status = TRUE
+      )
     )
 
     if (reload && was_loaded) {
@@ -122,15 +156,17 @@ install <-
 #' @inheritParams install
 #' @inherit remotes::install_deps
 #' @export
-install_deps <- function(pkg = ".",
-                         dependencies = NA,
-                         repos = getOption("repos"),
-                         type = getOption("pkgType"),
-                         upgrade = c("default", "ask", "always", "never"),
-                         quiet = FALSE,
-                         build = TRUE,
-                         build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
-                         ...) {
+install_deps <- function(
+  pkg = ".",
+  dependencies = NA,
+  repos = getOption("repos"),
+  type = getOption("pkgType"),
+  upgrade = c("default", "ask", "always", "never"),
+  quiet = FALSE,
+  build = TRUE,
+  build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
+  ...
+) {
   pkg <- as.package(pkg)
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
@@ -150,15 +186,17 @@ install_deps <- function(pkg = ".",
 
 #' @rdname install_deps
 #' @export
-install_dev_deps <- function(pkg = ".",
-                             dependencies = TRUE,
-                             repos = getOption("repos"),
-                             type = getOption("pkgType"),
-                             upgrade = c("default", "ask", "always", "never"),
-                             quiet = FALSE,
-                             build = TRUE,
-                             build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
-                             ...) {
+install_dev_deps <- function(
+  pkg = ".",
+  dependencies = TRUE,
+  repos = getOption("repos"),
+  type = getOption("pkgType"),
+  upgrade = c("default", "ask", "always", "never"),
+  quiet = FALSE,
+  build = TRUE,
+  build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
+  ...
+) {
   remotes::update_packages("roxygen2")
 
   pkg <- as.package(pkg)

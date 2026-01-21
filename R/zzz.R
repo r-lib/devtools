@@ -22,7 +22,9 @@ devtools_default_options <- list(
 .onLoad <- function(libname, pkgname) {
   op <- options()
   toset <- !(names(devtools_default_options) %in% names(op))
-  if (any(toset)) options(devtools_default_options[toset])
+  if (any(toset)) {
+    options(devtools_default_options[toset])
+  }
 
   invisible()
 }

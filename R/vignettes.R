@@ -27,18 +27,22 @@
 #'   \file{doc} created from vignettes
 #' @export
 #' @seealso [clean_vignettes()] to remove build tex/pdf files.
-build_vignettes <- function(pkg = ".",
-                            dependencies = "VignetteBuilder",
-                            clean = TRUE,
-                            upgrade = "never",
-                            quiet = FALSE,
-                            install = TRUE,
-                            keep_md = TRUE) {
+build_vignettes <- function(
+  pkg = ".",
+  dependencies = "VignetteBuilder",
+  clean = TRUE,
+  upgrade = "never",
+  quiet = FALSE,
+  install = TRUE,
+  keep_md = TRUE
+) {
   pkg <- as.package(pkg)
   save_all()
 
   vigns <- tools::pkgVignettes(dir = pkg$path)
-  if (length(vigns$docs) == 0) return()
+  if (length(vigns$docs) == 0) {
+    return()
+  }
 
   deps <- remotes::dev_package_deps(pkg$path, dependencies)
   update(deps, upgrade = upgrade)
@@ -92,9 +96,13 @@ create_vignette_index <- function(pkg, vigns) {
 clean_vignettes <- function(pkg = ".") {
   pkg <- as.package(pkg)
   vigns <- tools::pkgVignettes(dir = pkg$path)
-  if (path_file(vigns$dir) != "vignettes") return()
+  if (path_file(vigns$dir) != "vignettes") {
+    return()
+  }
 
-  cli::cli_inform(c(i = "Cleaning built vignettes and index from {.pkg {pkg$package}}"))
+  cli::cli_inform(c(
+    i = "Cleaning built vignettes and index from {.pkg {pkg$package}}"
+  ))
 
   doc_path <- path(pkg$path, "doc")
 
@@ -127,6 +135,8 @@ dir_delete_if_empty <- function(x) {
 }
 
 file_name <- function(x) {
-  if (length(x) == 0) return(NULL)
+  if (length(x) == 0) {
+    return(NULL)
+  }
   path_ext_remove(path_file(x))
 }

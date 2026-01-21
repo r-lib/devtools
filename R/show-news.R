@@ -20,7 +20,8 @@ show_news <- function(pkg = ".", latest = TRUE, ...) {
     cli::cli_abort("No NEWS found")
   }
 
-  news_db <- switch (path_ext(news_path),
+  news_db <- switch(
+    path_ext(news_path),
     Rd = ("tools" %:::% ".build_news_db_from_package_NEWS_Rd")(news_path),
     md = ("tools" %:::% ".build_news_db_from_package_NEWS_md")(news_path),
     ("tools" %:::% ".news_reader_default")(news_path)
@@ -36,10 +37,7 @@ show_news <- function(pkg = ".", latest = TRUE, ...) {
   if (latest) {
     ver <- numeric_version(out$Version)
     recent <- ver == max(ver)
-    structure(out[recent, ],
-      class = class(out),
-      bad = attr(out, "bad")[recent]
-    )
+    structure(out[recent, ], class = class(out), bad = attr(out, "bad")[recent])
   } else {
     out
   }

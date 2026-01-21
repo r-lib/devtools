@@ -1,8 +1,8 @@
 #' Check a package on macOS
 #'
-#' This function first bundles a source package, then uploads it to
-#' <https://mac.r-project.org/macbuilder/submit.html>. This function returns a
-#' link to the page where the check results will appear.
+#' Check on either the released or development versions of R, using
+#' <https://mac.r-project.org/macbuilder/>.
+#'
 #'
 #' @template devtools
 #' @inheritParams check_win
@@ -11,36 +11,100 @@
 #' @family build functions
 #' @return The url with the check results (invisibly)
 #' @export
-check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, manual = TRUE, quiet = FALSE, ...) {
+check_mac_release <- function(
+  pkg = ".",
+  dep_pkgs = character(),
+  args = NULL,
+  manual = TRUE,
+  quiet = FALSE,
+  ...
+) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
+  check_mac(
+    pkg = pkg,
+    version = "R-release",
+    dep_pkgs = dep_pkgs,
+    args = args,
+    manual = manual,
+    quiet = quiet,
+    ...
+  )
+}
+
+#' @rdname check_mac_release
+#' @export
+check_mac_devel <- function(
+  pkg = ".",
+  dep_pkgs = character(),
+  args = NULL,
+  manual = TRUE,
+  quiet = FALSE,
+  ...
+) {
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+
+  check_mac(
+    pkg = pkg,
+    version = "R-devel",
+    dep_pkgs = dep_pkgs,
+    args = args,
+    manual = manual,
+    quiet = quiet,
+    ...
+  )
+}
+
+check_mac <- function(
+  pkg = ".",
+  version = c("R-devel", "R-release"),
+  dep_pkgs = character(),
+  args = NULL,
+  manual = TRUE,
+  quiet = FALSE,
+  ...
+) {
   pkg <- as.package(pkg)
+
+  version <- match.arg(version, several.ok = FALSE)
 
   if (!quiet) {
     cli::cli_inform(c(
-      "Building macOS version of {.pkg {pkg$package}} ({pkg$version})",
+      "Checking macOS version of {.pkg {pkg$package}} ({pkg$version})",
       i = "Using https://mac.r-project.org/macbuilder/submit.html."
     ))
   }
 
-  built_path <- pkgbuild::build(pkg$path, tempdir(),
+  built_path <- pkgbuild::build(
+    pkg$path,
+    tempdir(),
     args = args,
-    manual = manual, quiet = quiet, ...
+    manual = manual,
+    quiet = quiet,
+    ...
   )
 
   dep_built_paths <- character()
   for (i in seq_along(dep_pkgs)) {
     dep_pkg <- as.package(dep_pkgs[[i]])$path
-    dep_built_paths[[i]] <- pkgbuild::build(dep_pkg, tempdir(),
+    dep_built_paths[[i]] <- pkgbuild::build(
+      dep_pkg,
+      tempdir(),
       args = args,
-      manual = manual, quiet = quiet, ...
+      manual = manual,
+      quiet = quiet,
+      ...
     )
   }
   on.exit(file_delete(c(built_path, dep_built_paths)), add = TRUE)
 
   url <- "https://mac.r-project.org/macbuilder/v1/submit"
 
-  body <- list(pkgfile = httr::upload_file(built_path))
+  rlang::check_installed("httr")
+  body <- list(
+    pkgfile = httr::upload_file(built_path),
+    rflavor = tolower(version)
+  )
 
   if (length(dep_built_paths) > 0) {
     uploads <- lapply(dep_built_paths, httr::upload_file)
@@ -48,7 +112,8 @@ check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, ma
     body <- append(body, uploads)
   }
 
-  res <- httr::POST(url,
+  res <- httr::POST(
+    url,
     body = body,
     headers = list(
       "Content-Type" = "multipart/form-data"
@@ -65,7 +130,7 @@ check_mac_release <- function(pkg = ".", dep_pkgs = character(), args = NULL, ma
 
     cli::cat_rule(col = "cyan")
     cli::cli_inform(c(
-      i = "Check {.url {response_url}} the results in 5-10 mins (~{time})."
+      i = "Check {.url {response_url}} for the results in 5-10 mins (~{time})."
     ))
   }
 

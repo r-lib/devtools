@@ -24,7 +24,8 @@ package object.  See \code{\link[=as.package]{as.package()}} for more informatio
 name of \code{Rd} file to start with (with or without extensions), or
 a topic name. If omitted, will start with the (lexicographically) first
 file. This is useful if you have a lot of examples and don't want to
-rerun them every time you fix a problem.}
+rerun them every time you fix a problem. To run only one example, use
+\code{\link[pkgload:dev_example]{pkgload::run_example()}}.}
 
 \item{show}{DEPRECATED.}
 
@@ -47,6 +48,9 @@ One of the most frustrating parts of \verb{R CMD check} is getting all of your
 examples to pass - whenever one fails you need to fix the problem and then
 restart the whole process.  This function makes it a little easier by
 making it possible to run all examples from an R function.
+}
+\seealso{
+\code{\link[pkgload:dev_example]{pkgload::run_example()}} to run a single example.
 }
 \concept{example functions}
 \keyword{programming}

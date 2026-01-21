@@ -3,9 +3,11 @@ with_ellipsis <- function(fun) {
   b <- body(fun)
 
   f <- function(...) {
-    ellipsis::check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+    ellipsis::check_dots_used(
+      action = getOption("devtools.ellipsis_action", rlang::warn)
+    )
 
-    !! b
+    !!b
   }
   f <- rlang::expr_interp(f)
 
@@ -15,7 +17,11 @@ with_ellipsis <- function(fun) {
 
 with_pkgbuild_build_tools <- function(fun) {
   b <- body(fun)
-  pkgbuild_call <- as.call(c(call("::", as.symbol("pkgbuild"), as.symbol("with_build_tools")), b, list(required = FALSE)))
+  pkgbuild_call <- as.call(c(
+    call("::", as.symbol("pkgbuild"), as.symbol("with_build_tools")),
+    b,
+    list(required = FALSE)
+  ))
 
   body(fun) <- pkgbuild_call
   fun
@@ -43,7 +49,9 @@ install_bioc <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_bioc))
 #' @importFrom remotes install_bitbucket
 #' @rdname remote-reexports
 #' @export
-install_bitbucket <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_bitbucket))
+install_bitbucket <- with_pkgbuild_build_tools(with_ellipsis(
+  remotes::install_bitbucket
+))
 
 #' @importFrom remotes install_cran
 #' @rdname remote-reexports
@@ -63,7 +71,9 @@ install_git <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_git))
 #' @importFrom remotes install_github
 #' @rdname remote-reexports
 #' @export
-install_github <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_github))
+install_github <- with_pkgbuild_build_tools(with_ellipsis(
+  remotes::install_github
+))
 
 #' @importFrom remotes github_pull
 #' @rdname reexports
@@ -78,12 +88,16 @@ remotes::github_release
 #' @importFrom remotes install_gitlab
 #' @rdname remote-reexports
 #' @export
-install_gitlab <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_gitlab))
+install_gitlab <- with_pkgbuild_build_tools(with_ellipsis(
+  remotes::install_gitlab
+))
 
 #' @importFrom remotes install_local
 #' @rdname remote-reexports
 #' @export
-install_local <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_local))
+install_local <- with_pkgbuild_build_tools(with_ellipsis(
+  remotes::install_local
+))
 
 #' @importFrom remotes install_svn
 #' @rdname remote-reexports
@@ -98,12 +112,16 @@ install_url <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_url))
 #' @importFrom remotes install_version
 #' @rdname remote-reexports
 #' @export
-install_version <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_version))
+install_version <- with_pkgbuild_build_tools(with_ellipsis(
+  remotes::install_version
+))
 
 #' @importFrom remotes update_packages
 #' @rdname remote-reexports
 #' @export
-update_packages <- with_pkgbuild_build_tools(with_ellipsis(remotes::update_packages))
+update_packages <- with_pkgbuild_build_tools(with_ellipsis(
+  remotes::update_packages
+))
 
 #' @importFrom remotes dev_package_deps
 #' @rdname remote-reexports

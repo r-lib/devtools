@@ -6,6 +6,7 @@ template:
 
   includes:
     in_header: |
+      <script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script>
       <script defer data-domain="devtools.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
   params:
     ganalytics: UA-115082821-1
@@ -14,39 +15,39 @@ development:
   mode: auto
 
 reference:
-  - title: Package Development
-    desc: Primary commands used when developing a package.
-    contents:
-    - build
-    - starts_with("build_")
-    - starts_with("check_")
-    - check
-    - create
-    - document
-    - load_all
-    - reload
-    - release
-    - spell_check
-    - test
-  - title: Package Installation
-    contents:
-    - starts_with("install")
-    - uninstall
-  - title: Utilities
-    contents:
-    - bash
-    - clean_vignettes
-    - dev_sitrep
-    - github_pull
-    - lint
-    - missing_s3
-    - run_examples
-    - session_info
-    - show_news
-    - starts_with("source_")
-    - update_packages
-    - wd
-    - save_all
+- title: Package Development
+  desc: Primary commands used when developing a package.
+  contents:
+  - build
+  - starts_with("build_")
+  - starts_with("check_")
+  - check
+  - create
+  - document
+  - load_all
+  - reload
+  - release
+  - spell_check
+  - test
+- title: Package Installation
+  contents:
+  - starts_with("install")
+  - uninstall
+- title: Utilities
+  contents:
+  - bash
+  - clean_vignettes
+  - dev_sitrep
+  - github_pull
+  - lint
+  - missing_s3
+  - run_examples
+  - session_info
+  - show_news
+  - starts_with("source_")
+  - update_packages
+  - wd
+  - save_all
 
 news:
   releases:

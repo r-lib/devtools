@@ -10,12 +10,18 @@
 \alias{clean_dll}
 \alias{has_devel}
 \alias{find_rtools}
+\alias{is_loading}
 \alias{unload}
 \alias{github_pull}
 \alias{github_release}
 \alias{session_info}
 \alias{package_info}
 \title{Objects exported from other packages}
+\usage{
+github_pull(pull)
+
+github_release()
+}
 \keyword{internal}
 \description{
 These objects are imported from other packages. Follow the links
@@ -24,9 +30,7 @@ below to see their documentation.
 \describe{
   \item{pkgbuild}{\code{\link[pkgbuild]{clean_dll}}, \code{\link[pkgbuild:has_rtools]{find_rtools}}, \code{\link[pkgbuild:has_compiler]{has_devel}}, \code{\link[pkgbuild]{with_debug}}}
 
-  \item{pkgload}{\code{\link[pkgload]{check_dep_version}}, \code{\link[pkgload]{parse_deps}}, \code{\link[pkgload]{unload}}}
-
-  \item{remotes}{\code{\link[remotes:github_refs]{github_pull}}, \code{\link[remotes:github_refs]{github_release}}}
+  \item{pkgload}{\code{\link[pkgload]{check_dep_version}}, \code{\link[pkgload:load_all]{is_loading}}, \code{\link[pkgload]{parse_deps}}, \code{\link[pkgload]{unload}}}
 
   \item{sessioninfo}{\code{\link[sessioninfo]{package_info}}, \code{\link[sessioninfo]{session_info}}}
 }}

@@ -3,7 +3,6 @@
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-
 #' We no longer recommend `dev_mode()` and it will be removed in a future
 #' release of devtools. Instead, we now rely on [load_all()] to test drive an
 #' in-development package. If you really like the idea of corralling
@@ -32,7 +31,7 @@ dev_mode <- local({
   .prompt <- NULL
 
   function(on = NULL, path = getOption("devtools.path")) {
-    lifecycle::deprecate_warn("2.4.5", "dev_mode()")
+    lifecycle::deprecate_warn("2.4.6", "dev_mode()")
     lib_paths <- .libPaths()
 
     path <- path_real(path)
@@ -58,7 +57,9 @@ dev_mode <- local({
       cli::cli_inform(c(v = "Dev mode: ON"))
       options(dev_path = path)
 
-      if (is.null(.prompt)) .prompt <<- getOption("prompt")
+      if (is.null(.prompt)) {
+        .prompt <<- getOption("prompt")
+      }
       options(prompt = paste("d> "))
 
       .libPaths(c(path, lib_paths))
@@ -66,7 +67,9 @@ dev_mode <- local({
       cli::cli_inform(c(v = "Dev mode: OFF"))
       options(dev_path = NULL)
 
-      if (!is.null(.prompt)) options(prompt = .prompt)
+      if (!is.null(.prompt)) {
+        options(prompt = .prompt)
+      }
       .prompt <<- NULL
 
       .libPaths(setdiff(lib_paths, path))
@@ -76,7 +79,9 @@ dev_mode <- local({
 
 is_library <- function(path) {
   # empty directories can be libraries
-  if (length(dir_ls(path)) == 0) return(TRUE)
+  if (length(dir_ls(path)) == 0) {
+    return(TRUE)
+  }
 
   # otherwise check that the directories are compiled R directories -
   # i.e. that they contain a Meta directory

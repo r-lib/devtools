@@ -1,6 +1,5 @@
 compact <- function(x) {
-  is_empty <- vapply(x, function(x) length(x) == 0, logical(1))
-  x[!is_empty]
+  x[lengths(x) > 0]
 }
 
 "%||%" <- function(a, b) if (!is.null(a)) a else b
@@ -10,6 +9,7 @@ compact <- function(x) {
 }
 
 is_windows <- isTRUE(.Platform$OS.type == "windows")
+is_macos <- isTRUE(tolower(Sys.info()[["sysname"]]) == "darwin")
 
 sort_ci <- function(x) {
   withr::with_collate("C", x[order(tolower(x), x)])
