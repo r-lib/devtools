@@ -1,8 +1,8 @@
 #' Check a package on macOS
 #'
-#' This function first bundles a source package, then uploads it to
-#' <https://mac.r-project.org/macbuilder/submit.html>. This function returns a
-#' link to the page where the check results will appear.
+#' Check on either the released or development versions of R, using
+#' <https://mac.r-project.org/macbuilder/>.
+#'
 #'
 #' @template devtools
 #' @inheritParams check_win
@@ -10,33 +10,6 @@
 #'   the package.
 #' @family build functions
 #' @return The url with the check results (invisibly)
-#' @name check_mac
-NULL
-
-#' @describeIn check_mac Check package on the development version of R.
-#' @export
-check_mac_devel <- function(
-  pkg = ".",
-  dep_pkgs = character(),
-  args = NULL,
-  manual = TRUE,
-  quiet = FALSE,
-  ...
-) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
-
-  check_mac(
-    pkg = pkg,
-    version = "R-devel",
-    dep_pkgs = dep_pkgs,
-    args = args,
-    manual = manual,
-    quiet = quiet,
-    ...
-  )
-}
-
-#' @describeIn check_mac Check package on the released version of R.
 #' @export
 check_mac_release <- function(
   pkg = ".",
@@ -51,6 +24,29 @@ check_mac_release <- function(
   check_mac(
     pkg = pkg,
     version = "R-release",
+    dep_pkgs = dep_pkgs,
+    args = args,
+    manual = manual,
+    quiet = quiet,
+    ...
+  )
+}
+
+#' @rdname check_mac_release
+#' @export
+check_mac_devel <- function(
+  pkg = ".",
+  dep_pkgs = character(),
+  args = NULL,
+  manual = TRUE,
+  quiet = FALSE,
+  ...
+) {
+  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+
+  check_mac(
+    pkg = pkg,
+    version = "R-devel",
     dep_pkgs = dep_pkgs,
     args = args,
     manual = manual,
@@ -74,7 +70,7 @@ check_mac <- function(
 
   if (!quiet) {
     cli::cli_inform(c(
-      "Building macOS version of {.pkg {pkg$package}} ({pkg$version})",
+      "Checking macOS version of {.pkg {pkg$package}} ({pkg$version})",
       i = "Using https://mac.r-project.org/macbuilder/submit.html."
     ))
   }
