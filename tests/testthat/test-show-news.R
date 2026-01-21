@@ -1,63 +1,28 @@
-test_that("can read NEWS.md in root directory", {
-  skip_on_cran()
-
-  pkg <- local_package_create()
-  write(
-    "# test 0.0.1\n\n* Initial CRAN submission.\n",
-    path(pkg, "NEWS.md")
-  )
-
-  expect_no_error(show_news(pkg))
-})
-
-test_that("can read NEWS.Rd in inst directory", {
-  skip_on_cran()
-
+test_that("find_news() finds NEWS in all expected locations", {
   pkg <- local_package_create()
 
   dir_create(pkg, "inst")
-  write(
-    "\\name{NEWS}
-\\title{News for Package 'test'}
+  file_create(pkg, "inst", "NEWS")
+  expect_equal(path_rel(find_news(pkg), pkg), path("inst/NEWS"))
 
-\\section{CHANGES IN test VERSION 0.0.1}{
-  \\itemize{
-    \\item First version
-  }
-}",
-    path(pkg, "inst", "NEWS.Rd")
-  )
+  file_create(pkg, "NEWS")
+  expect_equal(path_rel(find_news(pkg), pkg), path("NEWS"))
 
-  expect_no_error(show_news(pkg))
+  file_create(pkg, "NEWS.md")
+  expect_equal(path_rel(find_news(pkg), pkg), path("NEWS.md"))
+
+  file_create(pkg, "inst", "NEWS.Rd")
+  expect_equal(path_rel(find_news(pkg), pkg), path("inst/NEWS.Rd"))
 })
 
-test_that("can read NEWS in inst directory", {
+test_that("fails when NEWS is missing or improperly formatted", {
   skip_on_cran()
 
   pkg <- local_package_create()
-
-  dir_create(pkg, "inst")
-  write("v0.1-1  (2024-01-09)\n\n  o first release", path(pkg, "inst", "NEWS"))
-
-  expect_no_error(show_news(pkg))
-})
-
-test_that("fails when NEWS is missing", {
-  skip_on_cran()
-
-  pkg <- local_package_create()
-
-  expect_error(show_news(pkg))
-})
-
-test_that("fails when NEWS is improperly formatted", {
-  skip_on_cran()
-
-  pkg <- local_package_create()
-  suppressMessages(usethis::with_project(pkg, use_news_md()))
+  expect_snapshot(show_news(pkg), error = TRUE)
 
   dir_create(pkg, "inst")
   file_create(pkg, "inst", "NEWS.Rd")
 
-  expect_error(show_news(pkg))
+  expect_snapshot(show_news(pkg), error = TRUE)
 })
