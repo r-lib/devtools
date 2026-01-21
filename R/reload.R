@@ -26,11 +26,15 @@ reload <- function(pkg = ".", quiet = FALSE) {
   pkg <- as.package(pkg)
 
   if (is_attached(pkg)) {
-    if (!quiet) cli::cli_inform(c(i = "Reloading attached {.pkg {pkg$package}}"))
+    if (!quiet) {
+      cli::cli_inform(c(i = "Reloading attached {.pkg {pkg$package}}"))
+    }
     pkgload::unload(pkg$package)
     require(pkg$package, character.only = TRUE, quietly = TRUE)
   } else if (is_loaded(pkg)) {
-    if (!quiet) cli::cli_inform(c(i = "Reloading loaded {.pkg {pkg$package}}"))
+    if (!quiet) {
+      cli::cli_inform(c(i = "Reloading loaded {.pkg {pkg$package}}"))
+    }
     pkgload::unload(pkg$package)
     requireNamespace(pkg$package, quietly = TRUE)
   }

@@ -15,7 +15,7 @@ vignette: >
 
 Devtools version 1.9 supports package dependency installation for packages not
 yet in a standard package repository such as [CRAN](https://cran.r-project.org)
-or [Bioconductor](http://bioconductor.org).
+or [Bioconductor](https://bioconductor.org/).
 
 You can mark any regular dependency defined in the `Depends`, `Imports`,
 `Suggests` or `Enhances` fields as being installed from a remote location by
@@ -38,16 +38,16 @@ It is important to remember that you **must always declare the dependency in the
 Package: xyz
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     person(given = "First",
            family = "Last",
            role = c("aut", "cre"),
            email = "first.last@example.com")
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
-Imports: 
+Imports:
     rlang
-Remotes:  
+Remotes:
     r-lib/rlang
 ```
 

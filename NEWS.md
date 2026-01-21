@@ -1,5 +1,10 @@
 # devtools (development version)
 
+* `is_loading()` is now re-exported from pkgload (#2556).
+* `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
+
+# devtools 2.4.6
+
 * Functions that use httr now explicitly check that it is installed
   (@catalamarti, #2573).
 
@@ -9,6 +14,8 @@
   a better job of executing snapshot comparisons.
 
 * `check_built()` no longer prints check env variables - now handled by `rcmdcheck::rcmdcheck()` directly as of r-lib/rcmdcheck#237 (#2621)
+
+* `dev_mode()` and `check_rhub()` are deprecated.
 
 # devtools 2.4.5
 
@@ -528,7 +535,7 @@ you should switch your package to depend on **usethis** directly instead.
 * `document()`, `load_all()`, `check()`, `build()` and `test()` now
   automatically save open files when they are run inside the RStudio IDE. (#1576)
 
-* New `check_rhub()` function to check packages using <https://builder.r-hub.io/>.
+* New `check_rhub()` function to check packages using `https://builder.r-hub.io/`.
 
 * `run_examples` was mistakenly passing `show` to
   `pkgload::run_example`, causing it to fail (@amcdavid, #1449)

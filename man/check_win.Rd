@@ -70,7 +70,6 @@ deleted after a couple of days.
 }}
 \seealso{
 Other build functions: 
-\code{\link{check_mac_release}()},
-\code{\link{check_rhub}()}
+\code{\link{check_mac_release}()}
 }
 \concept{build functions}

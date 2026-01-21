@@ -2,8 +2,8 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/r-lib/devtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/devtools/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/r-lib/devtools/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/devtools?branch=main)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/devtools/graph/badge.svg)](https://app.codecov.io/gh/r-lib/devtools)
 <!-- badges: end -->
 
 The aim of devtools is to make package development easier by providing R
@@ -74,13 +74,11 @@ look in the current working directory - this is a recommended practice.
 ### Check and release:
 
 * `check()` updates the documentation, then builds and checks the package locally.
-  `check_win()` checks a package using
-  [win-builder](https://win-builder.r-project.org/), and `check_rhub()` checks a package using
-  [r-hub](https://log.r-hub.io/). This allows you to easily check
-  your package on all systems CRAN uses before submission.
-
-* `release()` makes sure everything is ok with your package (including asking
-  you a number of questions), then builds and uploads to CRAN.
+* `check_win_release()`, `check_win_devel()`, and `check_mac_release()` check
+  a package using [win-builder](https://win-builder.r-project.org/) or
+  <https://mac.r-project.org/macbuilder/submit.html>.
+* `release()` and `submit_cran()` handle the mechanics of CRAN submission with
+  or without, respectively, (re)-running lots of local checks.
 
 ## Learning more
 
