@@ -1,5 +1,6 @@
 # devtools (development version)
 
+* `build_manual()` reports more details on failure (#2586).
 * `is_loading()` is now re-exported from pkgload (#2556).
 * `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
 
