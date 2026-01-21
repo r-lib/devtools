@@ -118,9 +118,7 @@ check_win <- function(
     ))
 
     email <- maintainer(pkg)$email
-    if (interactive() && yesno("Email results to {.strong {email}}?")) {
-      return(invisible())
-    }
+    confirm_maintainer_email(email)
   }
 
   built_path <- pkgbuild::build(
@@ -152,6 +150,24 @@ check_win <- function(
   }
 
   invisible()
+}
+
+confirm_maintainer_email <- function(email, call = parent.frame()) {
+  if (!interactive()) {
+    return(FALSE)
+  }
+
+  if (!yesno("Email results to {.strong {email}}?")) {
+    return()
+  }
+
+  cli::cli_abort(
+    c(
+      "User declined upload.",
+      i = "Use `email = {.str your email}` to override."
+    ),
+    call = call
+  )
 }
 
 change_maintainer_email <- function(path, email, call = parent.frame()) {
