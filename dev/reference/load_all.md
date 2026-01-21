@@ -43,9 +43,10 @@ first install the package. It:
   to the package name to let you check whether the helpers are run
   during package loading.
 
-`is_loading()` returns `TRUE` when it is called while `load_all()` is
-running. This may be useful e.g. in `.onLoad` hooks. A package loaded
-with `load_all()` can be identified with
+[`is_loading()`](https://pkgload.r-lib.org/reference/load_all.html)
+returns `TRUE` when it is called while `load_all()` is running. This may
+be useful e.g. in `.onLoad` hooks. A package loaded with `load_all()`
+can be identified with
 [`is_dev_package()`](https://pkgload.r-lib.org/reference/is_dev_package.html).
 
 ## Usage

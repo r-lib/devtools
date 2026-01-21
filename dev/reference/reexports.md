@@ -13,6 +13,7 @@ to see their documentation.
 - pkgload:
 
   [`check_dep_version`](https://pkgload.r-lib.org/reference/check_dep_version.html),
+  [`is_loading`](https://pkgload.r-lib.org/reference/load_all.html),
   [`parse_deps`](https://pkgload.r-lib.org/reference/parse_deps.html),
   [`unload`](https://pkgload.r-lib.org/reference/unload.html)
 

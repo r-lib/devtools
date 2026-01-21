@@ -50,7 +50,11 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="devtools-development-version">devtools (development version)<a class="anchor" aria-label="anchor" href="#devtools-development-version"></a></h2>
-</div>
+<ul><li>
+<code><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">is_loading()</a></code> is now re-exported from pkgload (<a href="https://github.com/r-lib/devtools/issues/2556" class="external-link">#2556</a>).</li>
+<li>
+<code><a href="../reference/load_all.html">load_all()</a></code> now errors if called recursively, i.e. if you accidentally include a <code><a href="../reference/load_all.html">load_all()</a></code> call in one of your R source files (<a href="https://github.com/r-lib/devtools/issues/2617" class="external-link">#2617</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.4.6" id="devtools-246">devtools 2.4.6<a class="anchor" aria-label="anchor" href="#devtools-246"></a></h2><p class="text-muted">CRAN release: 2025-10-03</p>
 <ul><li><p>Functions that use httr now explicitly check that it is installed (<a href="https://github.com/catalamarti" class="external-link">@catalamarti</a>, <a href="https://github.com/r-lib/devtools/issues/2573" class="external-link">#2573</a>).</p></li>

@@ -2,6 +2,15 @@
 
 ## devtools (development version)
 
+- [`is_loading()`](https://pkgload.r-lib.org/reference/load_all.html) is
+  now re-exported from pkgload
+  ([\#2556](https://github.com/r-lib/devtools/issues/2556)).
+- [`load_all()`](https://devtools.r-lib.org/dev/reference/load_all.md)
+  now errors if called recursively, i.e. if you accidentally include a
+  [`load_all()`](https://devtools.r-lib.org/dev/reference/load_all.md)
+  call in one of your R source files
+  ([\#2617](https://github.com/r-lib/devtools/issues/2617)).
+
 ## devtools 2.4.6
 
 CRAN release: 2025-10-03
