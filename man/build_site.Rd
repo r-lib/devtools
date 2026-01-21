@@ -2,18 +2,16 @@
 % Please edit documentation in R/build-site.R
 \name{build_site}
 \alias{build_site}
-\title{Execute \pkg{pkgdown} build_site in a package}
+\title{Run \code{pkgdown::build_site()}}
 \usage{
-build_site(path = ".", quiet = TRUE, ...)
+build_site(path = ".", ...)
 }
 \arguments{
-\item{path}{path to the package to build the static HTML.}
+\item{path}{Path to the package to build the static HTML.}
 
-\item{quiet}{If \code{TRUE}, suppress output.}
-
-\item{...}{additional arguments passed to \code{\link[pkgdown:build_site]{pkgdown::build_site()}}}
+\item{...}{Additional arguments passed to \code{\link[pkgdown:build_site]{pkgdown::build_site()}}.}
 }
 \description{
-\code{build_site()} is a shortcut for \code{\link[pkgdown:build_site]{pkgdown::build_site()}}, it generates the
-static HTML documentation.
+This is a thin wrapper around \code{\link[pkgdown:build_site]{pkgdown::build_site()}}, used for generating
+static HTML documentation. Learn more at \url{https://pkgdown.r-lib.org}.
 }
