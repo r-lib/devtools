@@ -17,6 +17,7 @@ test_that("find_news() finds NEWS in all expected locations", {
 
 test_that("fails when NEWS is missing or improperly formatted", {
   skip_on_cran()
+  skip_unless_r(">= 4.2.0") # different error message
 
   pkg <- local_package_create()
   expect_snapshot(show_news(pkg), error = TRUE)
