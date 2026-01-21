@@ -2,6 +2,9 @@
 
 ## devtools (development version)
 
+- [`build_manual()`](https://devtools.r-lib.org/dev/reference/build_manual.md)
+  reports more details on failure
+  ([\#2586](https://github.com/r-lib/devtools/issues/2586)).
 - New
   [`check_mac_devel()`](https://devtools.r-lib.org/dev/reference/check_mac_release.md)
   function to check a package using the macOS builder at
