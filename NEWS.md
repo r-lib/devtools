@@ -1,5 +1,8 @@
 # devtools (development version)
 
+* `is_loading()` is now re-exported from pkgload (#2556).
+* `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
+
 # devtools 2.4.6
 
 * Functions that use httr now explicitly check that it is installed

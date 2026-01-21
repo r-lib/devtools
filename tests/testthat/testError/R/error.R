@@ -3,5 +3,4 @@ f <- function() {
 }
 
 
-
 stop("This is an error!") # nolint

@@ -59,7 +59,6 @@ test_that("error if file doesn't exist or no files", {
     find_gist("605a984e764f9ed358556b4ce48cbd08", "c.r")
     find_gist("c535eee2d02e5f47c8e7642811bc327c")
   })
-
 })
 
 test_that("check_sha1() checks or reports sha1 as needed", {
