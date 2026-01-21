@@ -13,19 +13,24 @@ build_manual <- function(pkg = ".", path = NULL) {
   output <- file.path(path, name)
 
   cli::cli_inform("Saving manual to {.file {output}}")
-  tryCatch(
-    invisible(callr::rcmd(
-      "Rd2pdf",
-      cmdargs = c("--force", paste0("--output=", output), pkg$path),
-      stdout = "",
-      fail_on_status = TRUE,
-      spinner = FALSE
-    )),
+  withCallingHandlers(
+    invisible(rd2pdf(pkg$path, output)),
     error = function(e) {
       cli::cli_abort(
         c("Failed to build manual.", no_wrap(e$stderr)),
-        call = quote(build_manual())
+        call = quote(build_manual()),
+        parent = e
       )
     }
+  )
+}
+
+rd2pdf <- function(pkg_path, output_path) {
+  callr::rcmd(
+    "Rd2pdf",
+    cmdargs = c("--force", paste0("--output=", output_path), pkg_path),
+    stdout = "",
+    fail_on_status = TRUE,
+    spinner = FALSE
   )
 }

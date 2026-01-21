@@ -8,4 +8,6 @@
       Error in `build_manual()`:
       ! Failed to build manual.
       ! LaTeX Error: File `inconsolata.sty' not found.
+      Caused by error in `rd2pdf()`:
+      ! System command 'R' failed
 
