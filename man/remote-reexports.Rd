@@ -213,9 +213,7 @@ dev_package_deps(
   pkgdir = ".",
   dependencies = NA,
   repos = getOption("repos"),
-  type = getOption("pkgType"),
-  remote_precedence = TRUE,
-  additional_repositories = TRUE
+  type = getOption("pkgType")
 )
 }
 \description{
