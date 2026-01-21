@@ -19,6 +19,12 @@
   [`load_all()`](https://devtools.r-lib.org/dev/reference/load_all.md)
   call in one of your R source files
   ([\#2617](https://github.com/r-lib/devtools/issues/2617)).
+- [`show_news()`](https://devtools.r-lib.org/dev/reference/show_news.md)
+  now looks for NEWS files in the same locations as
+  [`utils::news()`](https://rdrr.io/r/utils/news.html): `inst/NEWS.Rd`,
+  `NEWS.md`, `NEWS`, and `inst/NEWS`
+  ([@arcresu](https://github.com/arcresu),
+  [\#2499](https://github.com/r-lib/devtools/issues/2499)).
 
 ## devtools 2.4.6
 
