@@ -18,7 +18,13 @@
 #' @inheritParams pkgload::load_all
 #' @inheritParams run_examples
 #' @export
-test <- function(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...) {
+test <- function(
+  pkg = ".",
+  filter = NULL,
+  stop_on_failure = FALSE,
+  export_all = TRUE,
+  ...
+) {
   save_all()
   pkg <- as.package(pkg)
 
@@ -112,17 +118,23 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
 #' @rdname devtools-deprecated
 #' @export
 test_coverage_file <- function(file = find_active_file(), ...) {
-  lifecycle::deprecate_soft("2.4.0", "test_coverage()", "test_coverage_active_file()")
+  lifecycle::deprecate_soft(
+    "2.4.0",
+    "test_coverage()",
+    "test_coverage_active_file()"
+  )
   test_coverage_active_file(file, ...)
 }
 
 #' @rdname test
 #' @export
-test_coverage_active_file <- function(file = find_active_file(),
-                                      filter = TRUE,
-                                      show_report = interactive(),
-                                      export_all = TRUE,
-                                      ...) {
+test_coverage_active_file <- function(
+  file = find_active_file(),
+  filter = TRUE,
+  show_report = interactive(),
+  export_all = TRUE,
+  ...
+) {
   rlang::check_installed(c("covr", "DT"))
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
@@ -138,12 +150,16 @@ test_coverage_active_file <- function(file = find_active_file(),
   # To correctly simulate test_file() we need to set up both a temporary
   # snapshotter (with correct directory specification) for snapshot comparisons
   # and a stop reporter to inform the user about test failures
-  snap_reporter <- testthat::local_snapshotter(file.path(test_dir, "_snaps"))
+  snap_reporter <- testthat::local_snapshotter(
+    snap_dir = file.path(test_dir, "_snaps")
+  )
   snap_reporter$start_file(basename(test_file))
-  reporter <- testthat::MultiReporter$new(reporters = list(
-    testthat::StopReporter$new(praise = FALSE),
-    snap_reporter
-  ))
+  reporter <- testthat::MultiReporter$new(
+    reporters = list(
+      testthat::StopReporter$new(praise = FALSE),
+      snap_reporter
+    )
+  )
 
   withr::local_envvar(r_env_vars())
   testthat::with_reporter(reporter, {

@@ -20,39 +20,82 @@ NULL
 
 #' @describeIn check_win Check package on the development version of R.
 #' @export
-check_win_devel <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
+check_win_devel <- function(
+  pkg = ".",
+  args = NULL,
+  manual = TRUE,
+  email = NULL,
+  quiet = FALSE,
+  ...
+) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   check_win(
-    pkg = pkg, version = "R-devel", args = args, manual = manual,
-    email = email, quiet = quiet, ...
+    pkg = pkg,
+    version = "R-devel",
+    args = args,
+    manual = manual,
+    email = email,
+    quiet = quiet,
+    ...
   )
 }
 
 #' @describeIn check_win Check package on the released version of R.
 #' @export
-check_win_release <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
+check_win_release <- function(
+  pkg = ".",
+  args = NULL,
+  manual = TRUE,
+  email = NULL,
+  quiet = FALSE,
+  ...
+) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   check_win(
-    pkg = pkg, version = "R-release", args = args, manual = manual,
-    email = email, quiet = quiet, ...
+    pkg = pkg,
+    version = "R-release",
+    args = args,
+    manual = manual,
+    email = email,
+    quiet = quiet,
+    ...
   )
 }
 
 #' @describeIn check_win Check package on the previous major release version of R.
 #' @export
-check_win_oldrelease <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
+check_win_oldrelease <- function(
+  pkg = ".",
+  args = NULL,
+  manual = TRUE,
+  email = NULL,
+  quiet = FALSE,
+  ...
+) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   check_win(
-    pkg = pkg, version = "R-oldrelease", args = args, manual = manual,
-    email = email, quiet = quiet, ...
+    pkg = pkg,
+    version = "R-oldrelease",
+    args = args,
+    manual = manual,
+    email = email,
+    quiet = quiet,
+    ...
   )
 }
 
-check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelease"),
-                      args = NULL, manual = TRUE, email = NULL, quiet = FALSE, ...) {
+check_win <- function(
+  pkg = ".",
+  version = c("R-devel", "R-release", "R-oldrelease"),
+  args = NULL,
+  manual = TRUE,
+  email = NULL,
+  quiet = FALSE,
+  ...
+) {
   pkg <- as.package(pkg)
 
   if (!is.null(email)) {
@@ -80,14 +123,20 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
     }
   }
 
-  built_path <- pkgbuild::build(pkg$path, tempdir(),
+  built_path <- pkgbuild::build(
+    pkg$path,
+    tempdir(),
     args = args,
-    manual = manual, quiet = quiet, ...
+    manual = manual,
+    quiet = quiet,
+    ...
   )
   on.exit(file_delete(built_path), add = TRUE)
 
   url <- paste0(
-    "ftp://win-builder.r-project.org/", version, "/",
+    "ftp://win-builder.r-project.org/",
+    version,
+    "/",
     path_file(built_path)
   )
   lapply(url, upload_ftp, file = built_path)
@@ -142,8 +191,12 @@ upload_ftp <- function(file, url, verbose = FALSE) {
   con <- file(file, open = "rb")
   on.exit(close(con), add = TRUE)
   h <- curl::new_handle(upload = TRUE, filetime = FALSE)
-  curl::handle_setopt(h, readfunction = function(n) {
-    readBin(con, raw(), n = n)
-  }, verbose = verbose)
+  curl::handle_setopt(
+    h,
+    readfunction = function(n) {
+      readBin(con, raw(), n = n)
+    },
+    verbose = verbose
+  )
   curl::curl_fetch_memory(url, handle = h)
 }

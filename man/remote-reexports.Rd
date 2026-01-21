@@ -218,7 +218,7 @@ dev_package_deps(
 }
 \description{
 These functions are re-exported from the remotes package. They differ only
-that the ones in devtools use the \link{ellipsis} package to ensure all dotted
+that the ones in devtools use the \link[ellipsis:ellipsis-package]{ellipsis::ellipsis} package to ensure all dotted
 arguments are used.
 }
 \details{

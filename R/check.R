@@ -49,23 +49,25 @@
 #' @seealso [release()] if you want to send the checked package to
 #'   CRAN.
 #' @export
-check <- function(pkg = ".",
-                  document = NULL,
-                  build_args = NULL,
-                  ...,
-                  manual = FALSE,
-                  cran = TRUE,
-                  remote = FALSE,
-                  incoming = remote,
-                  force_suggests = FALSE,
-                  run_dont_test = FALSE,
-                  args = "--timings",
-                  env_vars = c(NOT_CRAN = "true"),
-                  quiet = FALSE,
-                  check_dir = NULL,
-                  cleanup = deprecated(),
-                  vignettes = TRUE,
-                  error_on = c("never", "error", "warning", "note")) {
+check <- function(
+  pkg = ".",
+  document = NULL,
+  build_args = NULL,
+  ...,
+  manual = FALSE,
+  cran = TRUE,
+  remote = FALSE,
+  incoming = remote,
+  force_suggests = FALSE,
+  run_dont_test = FALSE,
+  args = "--timings",
+  env_vars = c(NOT_CRAN = "true"),
+  quiet = FALSE,
+  check_dir = NULL,
+  cleanup = deprecated(),
+  vignettes = TRUE,
+  error_on = c("never", "error", "warning", "note")
+) {
   pkg <- as.package(pkg)
   withr::local_options(list(warn = 1))
 
@@ -80,7 +82,7 @@ check <- function(pkg = ".",
   }
   error_on <- match.arg(error_on)
 
-  document <- document %||% can_document(pkg)
+  document <- document %||% can_document(pkg$roxygennote)
   if (document) {
     if (!quiet) {
       cat_rule("Documenting", col = "cyan", line = 2)
@@ -131,19 +133,17 @@ check <- function(pkg = ".",
   )
 }
 
-can_document <- function(pkg) {
-  required <- pkg$roxygennote
+can_document <- function(required, installed = packageVersion("roxygen2")) {
   if (is.null(required)) {
-    # Doesn't use roxygen2 at all
     return(FALSE)
   }
 
-  installed <- packageVersion("roxygen2")
   if (required != installed) {
     cli::cat_rule("Documenting", col = "red", line = 2)
     cli::cli_inform(c(
-      i = "Installed roxygen2 version ({installed}) doesn't match required ({required})",
-      x = "{.fun check} will not re-document this package"
+      i = "Installed roxygen2 version ({installed}) doesn't match declared ({required})",
+      x = "{.fun check} will not re-document this package.",
+      i = "Do you need to re-run {.fun document}?"
     ))
     FALSE
   } else {
@@ -179,11 +179,20 @@ can_document <- function(pkg) {
 #'   definitive source for what the different values mean. If not specified by
 #'   the user, both `check()` and `check_built()` default to `error_on =
 #'   "never"` in interactive use and `"warning"` in a non-interactive setting.
-check_built <- function(path = NULL, cran = TRUE,
-                        remote = FALSE, incoming = remote, force_suggests = FALSE,
-                        run_dont_test = FALSE, manual = FALSE, args = "--timings",
-                        env_vars = NULL, check_dir = tempdir(), quiet = FALSE,
-                        error_on = c("never", "error", "warning", "note")) {
+check_built <- function(
+  path = NULL,
+  cran = TRUE,
+  remote = FALSE,
+  incoming = remote,
+  force_suggests = FALSE,
+  run_dont_test = FALSE,
+  manual = FALSE,
+  args = "--timings",
+  env_vars = NULL,
+  check_dir = tempdir(),
+  quiet = FALSE,
+  error_on = c("never", "error", "warning", "note")
+) {
   if (missing(error_on) && !interactive()) {
     error_on <- "warning"
   }
@@ -218,20 +227,30 @@ check_built <- function(path = NULL, cran = TRUE,
   }
 
   withr::with_envvar(env_vars, action = "replace", {
-    rcmdcheck::rcmdcheck(path,
-      quiet = quiet, args = args,
-      check_dir = check_dir, error_on = error_on
+    rcmdcheck::rcmdcheck(
+      path,
+      quiet = quiet,
+      args = args,
+      check_dir = check_dir,
+      error_on = error_on
     )
   })
 }
 
-check_env_vars <- function(cran = FALSE, remote = FALSE, incoming = remote,
-                           force_suggests = TRUE, env_vars = character()) {
+check_env_vars <- function(
+  cran = FALSE,
+  remote = FALSE,
+  incoming = remote,
+  force_suggests = TRUE,
+  env_vars = character()
+) {
   c(
     aspell_env_var(),
     # Switch off expensive check for package version
     # https://github.com/r-lib/devtools/issues/1271
-    if (getRversion() >= "3.4.0" && as.numeric(R.version[["svn rev"]]) >= 70944) {
+    if (
+      getRversion() >= "3.4.0" && as.numeric(R.version[["svn rev"]]) >= 70944
+    ) {
       c("_R_CHECK_CRAN_INCOMING_REMOTE_" = as.character(remote))
     },
     "_R_CHECK_CRAN_INCOMING_" = as.character(incoming),
@@ -241,13 +260,19 @@ check_env_vars <- function(cran = FALSE, remote = FALSE, incoming = remote,
 }
 
 aspell_env_var <- function() {
-  tryCatch({
-    utils::aspell(NULL, program = "aspell")
-    c("_R_CHECK_CRAN_INCOMING_USE_ASPELL_" = "TRUE")
-  }, error = function(e) character())
+  tryCatch(
+    {
+      utils::aspell(NULL, program = "aspell")
+      c("_R_CHECK_CRAN_INCOMING_USE_ASPELL_" = "TRUE")
+    },
+    error = function(e) character()
+  )
 }
 
 show_env_vars <- function(env_vars) {
   cli::cat_line("Setting env vars:", col = "darkgrey")
-  cat_bullet(paste0(format(names(env_vars)), ": ", unname(env_vars)), col = "darkgrey")
+  cat_bullet(
+    paste0(format(names(env_vars)), ": ", unname(env_vars)),
+    col = "darkgrey"
+  )
 }

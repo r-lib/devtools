@@ -5,12 +5,12 @@ Bitbucket
 BugReports
 Bugfix
 CMD
+CRAN's
 CYGWIN
 Cheatsheet
 Chun
 Coallier
 Codecov
-Config
 DT
 ERRORs
 Fong
@@ -20,7 +20,6 @@ HKCU
 HKLM
 HTTPS
 JJ
-JSON
 Jefferis
 Kirill
 Kohske
@@ -28,13 +27,15 @@ Kornelius
 Laake
 LinkingTo
 Lovell
-Maintainer's
 Makevars
 Maëlle
 Müller
 NOTEs
 ORCID
+PBC
 README
+ROR
+RStudio
 RTools
 Rbuildignore
 Rcpp
@@ -56,7 +57,6 @@ VignetteBuilder
 WARNINGs
 Westlake
 Xie
-YAML
 Yihui
 addin
 addins
@@ -70,10 +70,10 @@ bitbucket
 callr
 cleandoc
 cli
+codebases
 codecov
 codemeta
 compileAttributes
-config
 covr
 cran
 dev
@@ -85,7 +85,6 @@ et
 fieldnames
 focussed
 forkable
-foreseeable
 fs
 funder
 gcc
@@ -96,6 +95,7 @@ gz
 hadley
 http
 https
+httr
 hunspell
 importFrom
 initialising
@@ -110,7 +110,6 @@ libpaths
 linters
 lintr
 linux
-macOS
 maintainer's
 makefiles
 md
@@ -118,7 +117,6 @@ miniUI
 mnel
 nchar
 objs
-onLoad
 pandoc
 param
 params
@@ -126,7 +124,6 @@ passthrough
 pkgbuild
 pkgdown
 pkgload
-pkgs
 pre
 processx
 profvis
@@ -136,10 +133,8 @@ randomises
 rcmdcheck
 rds
 readme
-realisation
 reinstalls
-repo
-repos
+renv
 revdep
 revdepcheck
 rgl
@@ -152,7 +147,6 @@ rtools
 sessioninfo
 sha
 snuck
-src
 srcreferences
 srcrefs
 subdir
@@ -171,7 +165,6 @@ un
 uncommited
 urlchecker
 usethis
-vectorised
 withr
 wordlists
 xxxx

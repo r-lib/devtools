@@ -58,7 +58,6 @@ link to the page where the check results will appear.
 }}
 \seealso{
 Other build functions: 
-\code{\link{check_rhub}()},
 \code{\link{check_win}()}
 }
 \concept{build functions}
