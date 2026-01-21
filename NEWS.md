@@ -1,5 +1,6 @@
 # devtools (development version)
 
+* `check_built()` no longer prints `R_CHECK_` check env variables - now handled by `rcmdcheck::rcmdcheck()` directly as of r-lib/rcmdcheck#237 (#2621)
 * `is_loading()` is now re-exported from pkgload (#2556).
 * `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
 
@@ -12,8 +13,6 @@
 
 * `test_coverage_active_file()` now reports if any tests failed and does
   a better job of executing snapshot comparisons.
-
-* `check_built()` no longer prints check env variables - now handled by `rcmdcheck::rcmdcheck()` directly as of r-lib/rcmdcheck#237 (#2621)
 
 * `dev_mode()` and `check_rhub()` are deprecated.
 
