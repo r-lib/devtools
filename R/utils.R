@@ -44,3 +44,10 @@ is_testing <- function() {
 is_rstudio_running <- function() {
   !is_testing() && rstudioapi::isAvailable()
 }
+
+# Suppress cli wrapping
+no_wrap <- function(x) {
+  x <- gsub(" ", "\u00a0", x, fixed = TRUE)
+  x <- gsub("\n", "\f", x, fixed = TRUE)
+  x
+}
