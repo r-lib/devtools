@@ -31,14 +31,12 @@
 source_url <- function(url, ..., sha1 = NULL) {
   stopifnot(is.character(url), length(url) == 1)
   rlang::check_installed("digest")
-  rlang::check_installed("httr")
+  rlang::check_installed("httr2")
 
   temp_file <- file_temp()
   on.exit(file_delete(temp_file), add = TRUE)
 
-  request <- httr::GET(url)
-  httr::stop_for_status(request)
-  writeBin(httr::content(request, type = "raw"), temp_file)
+  httr2::req_perform(httr2::request(url), path = temp_file)
 
   check_sha1(temp_file, sha1)
 
