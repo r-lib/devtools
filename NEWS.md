@@ -37,6 +37,7 @@ Other improvements
 * `check_mac_devel()` is a new function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (@nfrerebeau, #2507)
 * `check_win()` and friends gain a `webform` argument that uses a webform instead of passive FTP upload (@brownag, #2619).
 * `dev_sitrep()` now works correctly inside Positron (#2618), uses pak instead of remotes to check for dependencies that are missing/behind/ahead (#2663), and uses cli for user-facing messages.
+* `check_built()` no longer prints `R_CHECK_` check env variables - now handled by `rcmdcheck::rcmdcheck()` directly as of r-lib/rcmdcheck#237 (#2621)
 * `is_loading()` is now re-exported from pkgload (#2556).
 * `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
 * `show_news()` now looks for NEWS files in the same locations as `utils::news()`: `inst/NEWS.Rd`, `NEWS.md`, `NEWS`, and `inst/NEWS` (@arcresu, #2499).
