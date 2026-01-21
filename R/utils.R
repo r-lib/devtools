@@ -41,6 +41,10 @@ is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }
 
+is_positron <- function() {
+  Sys.getenv("POSITRON") == "1"
+}
+
 is_rstudio_running <- function() {
   !is_testing() && rstudioapi::isAvailable()
 }
