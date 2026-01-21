@@ -6,10 +6,8 @@ test_that("build_manual() shows stderr on failure", {
 
   # Too hard to replicate actual error, so we just simulate
   local_mocked_bindings(rd2pdf = function(...) {
-    rlang::abort(
-      "System command 'R' failed",
-      stderr = "! LaTeX Error: File `inconsolata.sty' not found."
-    )
+    stderr <- "! LaTeX Error: File `inconsolata.sty' not found."
+    rlang::abort("System command 'R' failed", stderr = stderr) #nolint
   })
 
   expect_snapshot(build_manual(pkg), error = TRUE, transform = function(x) {
