@@ -82,7 +82,7 @@ check <- function(
   }
   error_on <- match.arg(error_on)
 
-  document <- document %||% can_document(pkg)
+  document <- document %||% can_document(pkg$roxygennote)
   if (document) {
     if (!quiet) {
       cat_rule("Documenting", col = "cyan", line = 2)
@@ -133,19 +133,17 @@ check <- function(
   )
 }
 
-can_document <- function(pkg) {
-  required <- pkg$roxygennote
+can_document <- function(required, installed = packageVersion("roxygen2")) {
   if (is.null(required)) {
-    # Doesn't use roxygen2 at all
     return(FALSE)
   }
 
-  installed <- packageVersion("roxygen2")
   if (required != installed) {
     cli::cat_rule("Documenting", col = "red", line = 2)
     cli::cli_inform(c(
-      i = "Installed roxygen2 version ({installed}) doesn't match required ({required})",
-      x = "{.fun check} will not re-document this package, use {.fun document} to update the {.file DESCRIPTION} file"
+      i = "Installed roxygen2 version ({installed}) doesn't match declared ({required})",
+      x = "{.fun check} will not re-document this package.",
+      i = "Do you need to re-run {.fun document}?"
     ))
     FALSE
   } else {
