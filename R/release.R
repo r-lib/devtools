@@ -1,23 +1,12 @@
 #' Release package to CRAN.
 #'
-#' Run automated and manual tests, then post package to CRAN.
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-#' The package release process will:
-#'
-#'   * Confirm that the package passes `R CMD check` on relevant platforms
-#'   * Confirm that important files are up-to-date
-#'   * Build the package
-#'   * Submit the package to CRAN, using comments in "cran-comments.md"
-#'
-#' You can add arbitrary extra questions by defining an (un-exported) function
-#' called `release_questions()` that returns a character vector
-#' of additional questions to ask.
-#'
-#' You also need to read the CRAN repository policy at
-#' 'https://cran.r-project.org/web/packages/policies.html' and make
-#' sure you're in line with the policies. `release` tries to automate as
-#' many of polices as possible, but it's impossible to be completely
-#' comprehensive, and they do change in between releases of devtools.
+#' `release()` is deprecated in favour of [usethis::use_release_issue()].
+#' We no longer feel confident recommrding `release()` because we don't use it
+#' ourselves, so there's no guarantee that it will track best practices as
+#' they evolve over time.
 #'
 #' @template devtools
 #' @param check if `TRUE`, run checking, otherwise omit it.  This
@@ -29,6 +18,11 @@
 #'   tasks that you can use in addition to or in place of `release`.
 #' @export
 release <- function(pkg = ".", check = FALSE, args = NULL) {
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "release()",
+    "usethis::use_release_issue()"
+  )
   pkg <- as.package(pkg)
   # Figure out if this is a new package
   cran_version <- cran_pkg_version(pkg$package)
@@ -159,6 +153,10 @@ find_release_questions <- function(pkg = ".") {
 }
 
 yesno <- function(msg, .envir = parent.frame()) {
+  if (!rlang::is_interactive()) {
+    cli::cli_abort("Called from non-interactive context.")
+  }
+
   yeses <- c(
     "Yes",
     "Definitely",
