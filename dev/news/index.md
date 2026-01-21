@@ -2,6 +2,12 @@
 
 ## devtools (development version)
 
+- New
+  [`check_mac_devel()`](https://devtools.r-lib.org/dev/reference/check_mac_release.md)
+  function to check a package using the macOS builder at
+  <https://mac.r-project.org/macbuilder/submit.html>
+  ([@nfrerebeau](https://github.com/nfrerebeau),
+  [\#2507](https://github.com/r-lib/devtools/issues/2507))
 - [`is_loading()`](https://pkgload.r-lib.org/reference/load_all.html) is
   now re-exported from pkgload
   ([\#2556](https://github.com/r-lib/devtools/issues/2556)).

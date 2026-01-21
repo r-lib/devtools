@@ -1,13 +1,21 @@
 # Check a package on macOS
 
-This function first bundles a source package, then uploads it to
-<https://mac.r-project.org/macbuilder/submit.html>. This function
-returns a link to the page where the check results will appear.
+Check on either the released or development versions of R, using
+<https://mac.r-project.org/macbuilder/>.
 
 ## Usage
 
 ``` r
 check_mac_release(
+  pkg = ".",
+  dep_pkgs = character(),
+  args = NULL,
+  manual = TRUE,
+  quiet = FALSE,
+  ...
+)
+
+check_mac_devel(
   pkg = ".",
   dep_pkgs = character(),
   args = NULL,

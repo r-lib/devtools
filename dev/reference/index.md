@@ -27,6 +27,7 @@ Primary commands used when developing a package.
   Build and check a package
 
 - [`check_mac_release()`](https://devtools.r-lib.org/dev/reference/check_mac_release.md)
+  [`check_mac_devel()`](https://devtools.r-lib.org/dev/reference/check_mac_release.md)
   : Check a package on macOS
 
 - [`check_man()`](https://devtools.r-lib.org/dev/reference/check_man.md)
