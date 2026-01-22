@@ -29,7 +29,7 @@
 #'   sha1 = "54f1db27e60")
 #' }
 source_url <- function(url, ..., sha1 = NULL) {
-  stopifnot(is.character(url), length(url) == 1)
+  check_string(url)
   check_installed("digest")
   check_installed("httr")
 
