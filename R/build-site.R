@@ -10,13 +10,13 @@
 #' @return NULL
 #' @export
 build_site <- function(path = ".", quiet = TRUE, ...) {
-  rlang::check_installed("pkgdown")
+  check_installed("pkgdown")
 
   save_all()
 
   pkg <- as.package(path)
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   withr::with_temp_libpaths(action = "prefix", code = {
     install(pkg = pkg$path, upgrade = "never", reload = FALSE, quiet = quiet)

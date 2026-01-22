@@ -98,7 +98,7 @@ check <- function(
     show_env_vars(pkgbuild::compiler_flags(FALSE))
   }
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   if (identical(vignettes, FALSE)) {
     args <- union(args, "--ignore-vignettes")

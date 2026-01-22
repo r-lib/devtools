@@ -97,13 +97,13 @@ load_package_for_testing <- function(pkg) {
 #' @export
 #' @rdname test
 test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
-  rlang::check_installed(c("covr", "DT"))
+  check_installed(c("covr", "DT"))
 
   save_all()
   pkg <- as.package(pkg)
   cli::cli_inform(c(i = "Computing test coverage for {.pkg {pkg$package}}"))
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   withr::local_envvar(r_env_vars())
   coverage <- covr::package_coverage(pkg$path, ...)
@@ -135,8 +135,8 @@ test_coverage_active_file <- function(
   export_all = TRUE,
   ...
 ) {
-  rlang::check_installed(c("covr", "DT"))
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_installed(c("covr", "DT"))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   test_file <- find_test_file(file)
   test_dir <- path_dir(test_file)

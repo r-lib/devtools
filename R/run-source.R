@@ -30,8 +30,8 @@
 #' }
 source_url <- function(url, ..., sha1 = NULL) {
   stopifnot(is.character(url), length(url) == 1)
-  rlang::check_installed("digest")
-  rlang::check_installed("httr")
+  check_installed("digest")
+  check_installed("httr")
 
   temp_file <- file_temp()
   on.exit(file_delete(temp_file), add = TRUE)
@@ -42,7 +42,7 @@ source_url <- function(url, ..., sha1 = NULL) {
 
   check_sha1(temp_file, sha1)
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
   source(temp_file, ...)
 }
 
@@ -111,7 +111,7 @@ check_sha1 <- function(path, sha1) {
 #' source_gist(6872663, filename = "hi.r", sha1 = "54f1db27e60")
 #' }
 source_gist <- function(id, ..., filename = NULL, sha1 = NULL, quiet = FALSE) {
-  rlang::check_installed("gh")
+  check_installed("gh")
   stopifnot(length(id) == 1)
 
   url_match <- "((^https://)|^)gist.github.com/([^/]+/)?([0-9a-f]+)$"
@@ -131,7 +131,7 @@ source_gist <- function(id, ..., filename = NULL, sha1 = NULL, quiet = FALSE) {
     cli::cli_inform(c(i = "Sourcing gist {.str {id}}"))
   }
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
   source_url(url, ..., sha1 = sha1)
 }
 
