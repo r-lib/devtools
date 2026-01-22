@@ -4,9 +4,9 @@
       check_doc_fields(pkg)
     Message
       ! Missing `\value` section in 1 file:
-      * foo.Rd
+      * man/foo.Rd
       ! Missing `\examples` section in 1 file:
-      * bar.Rd
+      * man/bar.Rd
 
 # check_doc_fields output - all present
 

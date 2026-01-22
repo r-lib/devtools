@@ -90,7 +90,7 @@ check_doc_fields <- function(pkg = ".", fields = c("value", "examples")) {
 
   results <- lapply(stats::setNames(fields, fields), function(field) {
     missing <- !vapply(rd, has_tag, logical(1), tag = field)
-    path_file(paths[missing])
+    path_rel(paths[missing], pkg$path)
   })
 
   for (field in fields) {
