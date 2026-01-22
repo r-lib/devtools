@@ -23,7 +23,7 @@ build <- function(
     cli::cli_abort("{.arg pkg} must exist")
   }
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   pkgbuild::build(
     path = pkg,

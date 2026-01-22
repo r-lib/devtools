@@ -36,9 +36,7 @@ as.package <- function(x = NULL, create = deprecated()) {
 #' package_file("figures", "figure_1")
 #' }
 package_file <- function(..., path = ".") {
-  if (!is.character(path) || length(path) != 1) {
-    cli::cli_abort("{.arg path} must be a string.")
-  }
+  check_string(path)
   if (!dir_exists(path)) {
     cli::cli_abort("{.path {path}} is not a directory.")
   }

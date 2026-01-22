@@ -4,12 +4,12 @@ with_ellipsis <- function(fun) {
 
   f <- function(...) {
     ellipsis::check_dots_used(
-      action = getOption("devtools.ellipsis_action", rlang::warn)
+      action = getOption("devtools.ellipsis_action", warn)
     )
 
     !!b
   }
-  f <- rlang::expr_interp(f)
+  f <- expr_interp(f)
 
   body(fun) <- body(f)
   fun
