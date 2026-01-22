@@ -19,7 +19,7 @@ build_site <- function(path = ".", quiet = TRUE, ...) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   withr::with_temp_libpaths(action = "prefix", code = {
-    install(pkg = pkg$path, upgrade = "never", reload = FALSE, quiet = quiet)
+    install(pkg = pkg$path, upgrade = FALSE, reload = FALSE, quiet = quiet)
     if (isTRUE(quiet)) {
       withr::with_output_sink(
         file_temp(),

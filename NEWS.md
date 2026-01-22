@@ -3,6 +3,7 @@
 * `build_manual()` reports more details on failure (#2586).
 * New `check_mac_devel()` function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (@nfrerebeau, #2507)
 * `is_loading()` is now re-exported from pkgload (#2556).
+* `install()` now uses `pak::local_install()` instead of `remotes::install_deps()`. This gives a lot of improved behaviours, particularly around upgrading dependencies that you already have installed  (#2486).
 * `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
 * `show_news()` now looks for NEWS files in the same locations as `utils::news()`: `inst/NEWS.Rd`, `NEWS.md`, `NEWS`, and `inst/NEWS` (@arcresu, #2499).
 

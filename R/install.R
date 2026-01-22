@@ -1,26 +1,23 @@
-#' Install a local development package.
+#' Install a local development package
 #'
-#' Uses `R CMD INSTALL` to install the package. Will also try to install
-#' dependencies of the package from CRAN, if they're not already installed.
-#'
-#' If `quick = TRUE`, installation takes place using the current package
-#' directory. If you have compiled code, this means that artefacts of
-#' compilation will be created in the `src/` directory. If you want to avoid
-#' this, you can use `build = TRUE` to first build a package bundle and then
-#' install it from a temporary directory. This is slower, but keeps the source
-#' directory pristine.
-#'
-#' If the package is loaded, it will be reloaded after installation. This is
-#' not always completely possible, see [reload()] for caveats.
+#' @description
+#' Uses `R CMD INSTALL` to install the package, after installing needed
+#' dependencies with [pak::local_install_deps()].
 #'
 #' To install a package in a non-default library, use [withr::with_libpaths()].
 #'
 #' @template devtools
-#' @inheritParams remotes::install_local
-#' @param reload if `TRUE` (the default), will automatically reload the
-#'   package after installing.
+#' @param reload if `TRUE` (the default), will automatically attempt reload the
+#'   package after installing. Reloading is always completely possible so see
+#'   [pkgload::unregister()] for caveats.
 #' @param quick if `TRUE` skips docs, multiple-architectures,
 #'   demos, and vignettes, to make installation as fast as possible.
+#'   If `quick = TRUE`, installation takes place using the current package
+#'   directory. If you have compiled code, this means that artefacts of
+#'   compilation will be created in the `src/` directory. If you want to avoid
+#'   this, you can use `build = TRUE` to first build a package bundle and then
+#'   install it from a temporary directory. This is slower, but keeps the source
+#'   directory pristine.
 #' @param build if `TRUE` [pkgbuild::build()]s the package first:
 #'   this ensures that the installation is completely clean, and prevents any
 #'   binary artefacts (like \file{.o}, `.so`) from appearing in your local
@@ -43,118 +40,124 @@
 #' @param keep_source If `TRUE` will keep the srcrefs from an installed
 #'   package. This is useful for debugging (especially inside of RStudio).
 #'   It defaults to the option `"keep.source.pkgs"`.
-#' @param ... additional arguments passed to [remotes::install_deps()]
-#'   when installing dependencies.
+#' @param quiet If `TRUE`, suppress output.
+#' @param force `r lifecycle::badge("deprecated")` No longer used.
 #' @family package installation
-#' @seealso [update_packages()] to update installed packages from the
-#' source location and [with_debug()] to install packages with
-#' debugging flags set.
+#' @inheritParams pak::local_install_deps
+#' @seealso [with_debug()] to install packages with debugging flags set.
 #' @export
-install <-
-  function(
-    pkg = ".",
-    reload = TRUE,
-    quick = FALSE,
-    build = !quick,
-    args = getOption("devtools.install.args"),
-    quiet = FALSE,
-    dependencies = NA,
-    upgrade = "default",
-    build_vignettes = FALSE,
-    keep_source = getOption("keep.source.pkgs"),
-    force = FALSE,
-    ...
-  ) {
-    pkg <- as.package(pkg)
-
-    # Forcing all of the promises for the current namespace now will avoid lazy-load
-    # errors when the new package is installed overtop the old one.
-    # https://stat.ethz.ch/pipermail/r-devel/2015-December/072150.html
-    if (reload && is_loaded(pkg)) {
-      eapply(pkgload::ns_env(pkg$package), force, all.names = TRUE)
-    }
-
-    if (isTRUE(build_vignettes)) {
-      # we likely need all Suggested dependencies if building vignettes
-      dependencies <- TRUE
-      build_opts <- c("--no-resave-data", "--no-manual")
-    } else {
-      build_opts <- c("--no-resave-data", "--no-manual", "--no-build-vignettes")
-    }
-
-    opts <- c(
-      if (keep_source) "--with-keep.source",
-      "--install-tests"
-    )
-    if (quick) {
-      opts <- c(opts, "--no-docs", "--no-multiarch", "--no-demo")
-    }
-    opts <- c(opts, args)
-
-    check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
-
-    remotes::install_deps(
-      pkg$path,
-      build = build,
-      build_opts = build_opts,
-      INSTALL_opts = opts,
-      dependencies = dependencies,
-      quiet = quiet,
-      force = force,
-      upgrade = upgrade,
-      ...
-    )
-
-    if (build) {
-      install_path <- pkgbuild::build(
-        pkg$path,
-        dest_path = tempdir(),
-        args = build_opts,
-        quiet = quiet
-      )
-      on.exit(file_delete(install_path), add = TRUE)
-    } else {
-      install_path <- pkg$path
-    }
-
-    was_loaded <- is_loaded(pkg)
-    was_attached <- is_attached(pkg)
-
-    if (reload && was_loaded) {
-      pkgload::unregister(pkg$package)
-    }
-
-    pkgbuild::with_build_tools(
-      required = FALSE,
-      callr::rcmd(
-        "INSTALL",
-        c(install_path, opts),
-        echo = !quiet,
-        show = !quiet,
-        spinner = FALSE,
-        stderr = "2>&1",
-        fail_on_status = TRUE
-      )
-    )
-
-    if (reload && was_loaded) {
-      if (was_attached) {
-        require(pkg$package, quietly = TRUE, character.only = TRUE)
-      } else {
-        requireNamespace(pkg$package, quietly = TRUE)
-      }
-    }
-
-    invisible(TRUE)
+install <- function(
+  pkg = ".",
+  reload = TRUE,
+  quick = FALSE,
+  build = !quick,
+  args = getOption("devtools.install.args"),
+  quiet = FALSE,
+  dependencies = NA,
+  upgrade = FALSE,
+  build_vignettes = FALSE,
+  keep_source = getOption("keep.source.pkgs"),
+  force = deprecated()
+) {
+  if (!is.logical(upgrade) || length(upgrade) != 1) {
+    cli::cli_abort("{.arg upgrade} must be a single TRUE, FALSE, or NA")
   }
+  if (lifecycle::is_present(force)) {
+    lifecycle::deprecate_warn("2.5.0", "intall(force)")
+  }
+
+  pkg <- as.package(pkg)
+
+  # Forcing all of the promises for the current namespace now will avoid lazy-load
+  # errors when the new package is installed overtop the old one.
+  # https://stat.ethz.ch/pipermail/r-devel/2015-December/072150.html
+  if (reload && is_loaded(pkg)) {
+    eapply(pkgload::ns_env(pkg$package), base::force, all.names = TRUE)
+  }
+
+  # Install dependencies
+  local({
+    if (quiet) {
+      withr::local_output_sink(withr::local_tempfile())
+      withr::local_message_sink(withr::local_tempfile())
+    } else {
+      cli::cat_rule("Installing dependencies", col = "cyan")
+    }
+    pak::local_install_deps(
+      pkg$path,
+      upgrade = upgrade,
+      dependencies = dependencies || isTRUE(build_vignettes)
+    )
+  })
+
+  if (isTRUE(build_vignettes)) {
+    build_opts <- c("--no-resave-data", "--no-manual")
+  } else {
+    build_opts <- c("--no-resave-data", "--no-manual", "--no-build-vignettes")
+  }
+  opts <- c(
+    if (keep_source) "--with-keep.source",
+    "--install-tests"
+  )
+  if (quick) {
+    opts <- c(opts, "--no-docs", "--no-multiarch", "--no-demo")
+  }
+  opts <- c(opts, args)
+
+  if (build) {
+    install_path <- pkgbuild::build(
+      pkg$path,
+      dest_path = tempdir(),
+      args = build_opts,
+      quiet = quiet
+    )
+    on.exit(file_delete(install_path), add = TRUE)
+  } else {
+    install_path <- pkg$path
+  }
+
+  was_loaded <- is_loaded(pkg)
+  was_attached <- is_attached(pkg)
+
+  if (reload && was_loaded) {
+    pkgload::unregister(pkg$package)
+  }
+
+  if (!quiet) {
+    cli::cat_rule(paste0("R CMD INTSTALL"), col = "cyan")
+  }
+  pkgbuild::with_build_tools(
+    required = FALSE,
+    callr::rcmd(
+      "INSTALL",
+      c(install_path, opts),
+      echo = !quiet,
+      show = !quiet,
+      spinner = FALSE,
+      stderr = "2>&1",
+      fail_on_status = TRUE
+    )
+  )
+
+  if (reload && was_loaded) {
+    if (was_attached) {
+      require(pkg$package, quietly = TRUE, character.only = TRUE)
+    } else {
+      requireNamespace(pkg$package, quietly = TRUE)
+    }
+  }
+
+  invisible(TRUE)
+}
 
 #' Install package dependencies if needed.
 #'
 #' `install_deps()` will install the
 #' user dependencies needed to run the package, `install_dev_deps()` will also
 #' install the development dependencies needed to test and build the package.
-#' @inheritParams install
 #' @inherit remotes::install_deps
+#' @inheritParams install
+#' @param ... Additional arguments passed to [remotes::install_deps()].
 #' @export
 install_deps <- function(
   pkg = ".",
@@ -221,5 +224,5 @@ local_install <- function(pkg = ".", quiet = TRUE, env = parent.frame()) {
 
   cli::cli_inform(c(i = "Installing {.pkg {pkg$package}} in temporary library"))
   withr::local_temp_libpaths(.local_envir = env)
-  install(pkg, upgrade = "never", reload = FALSE, quick = TRUE, quiet = quiet)
+  install(pkg, upgrade = FALSE, reload = FALSE, quick = TRUE, quiet = quiet)
 }
