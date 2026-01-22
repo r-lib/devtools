@@ -124,7 +124,7 @@ install <- function(
   }
 
   if (!quiet) {
-    cli::cat_rule(paste0("R CMD INTSTALL"), col = "cyan")
+    cli::cat_rule(paste0("R CMD INSTALL"), col = "cyan")
   }
   pkgbuild::with_build_tools(
     required = FALSE,
