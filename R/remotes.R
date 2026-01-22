@@ -81,7 +81,11 @@ install_git <- function(...) {
 #' @rdname install-deprecated
 #' @export
 install_github <- function(...) {
-  lifecycle::deprecate_warn("2.5.0", "install_github()", "pak::pak()")
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "install_github()",
+    I('pak::pak("user/repo")')
+  )
   pkgbuild::with_build_tools(remotes::install_github(...), required = FALSE)
 }
 
