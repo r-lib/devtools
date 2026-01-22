@@ -153,7 +153,7 @@ check_win <- function(
 }
 
 confirm_maintainer_email <- function(email, call = parent.frame()) {
-  if (!interactive()) {
+  if (!rlang::is_interactive()) {
     return(FALSE)
   }
 

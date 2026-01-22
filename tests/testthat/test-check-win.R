@@ -16,6 +16,7 @@ test_that("change_maintainer_email checks fields", {
 })
 
 test_that("email confirmation gives useful advice", {
+  withr::local_options(rlang_interactive = TRUE)
   local_mocked_bindings(yesno = function(msg) {
     cli::cli_inform(msg, .envir = parent.frame())
     TRUE
