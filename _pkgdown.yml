@@ -22,10 +22,8 @@ reference:
   - starts_with("build_")
   - starts_with("check_")
   - check
-  - create
   - document
   - load_all
-  - reload
   - release
   - spell_check
   - test
@@ -35,19 +33,24 @@ reference:
   - uninstall
 - title: Utilities
   contents:
-  - bash
   - clean_vignettes
   - dev_sitrep
   - github_pull
   - lint
-  - missing_s3
   - run_examples
   - session_info
-  - show_news
   - starts_with("source_")
   - update_packages
-  - wd
   - save_all
+- title: Deprecated
+  contents:
+  - bash
+  - create
+  - dev_mode
+  - missing_s3
+  - reload
+  - show_news
+  - wd
 
 news:
   releases:

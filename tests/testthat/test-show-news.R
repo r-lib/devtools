@@ -16,6 +16,7 @@ test_that("find_news() finds NEWS in all expected locations", {
 })
 
 test_that("fails when NEWS is missing or improperly formatted", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   skip_on_cran()
   skip_unless_r(">= 4.2.0") # different error message
 

@@ -16,5 +16,9 @@ version.}
 \item{...}{other arguments passed on to \code{news}}
 }
 \description{
-Show package news
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{show_news()} is deprecated because we no longer use or recommend this
+workflow.
 }
+\keyword{internal}
