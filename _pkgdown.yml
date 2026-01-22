@@ -31,23 +31,26 @@ reference:
   - test
 - title: Package Installation
   contents:
-  - starts_with("install")
+  - install
   - uninstall
 - title: Utilities
   contents:
   - bash
   - clean_vignettes
   - dev_sitrep
-  - github_pull
   - lint
   - missing_s3
   - run_examples
   - session_info
   - show_news
   - starts_with("source_")
-  - update_packages
   - wd
   - save_all
+- title: Deprecated
+  contents:
+  - install-deprecated
+  - install_deps
+  - devtools-deprecated
 
 news:
   releases:
