@@ -11,12 +11,12 @@ test(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...)
 
 test_active_file(file = find_active_file(), ...)
 
-test_coverage(pkg = ".", show_report = interactive(), ...)
+test_coverage(pkg = ".", report = NULL, ...)
 
 test_coverage_active_file(
   file = find_active_file(),
   filter = TRUE,
-  show_report = interactive(),
+  report = NULL,
   export_all = TRUE,
   ...
 )
@@ -41,7 +41,14 @@ in the NAMESPACE file.}
 corresponding test file will be run. The default is to use the active file
 in RStudio (if available).}
 
-\item{show_report}{Show the test coverage report.}
+\item{report}{How to display the coverage report.
+\itemize{
+\item \code{"html"} opens an interactive report in the browser.
+\item \code{"zero"} prints uncovered lines to the console.
+\item \code{"silent"} returns the coverage object without display.
+}
+
+Defaults to \code{"html"} if interactive; otherwise to \code{"zero"}.}
 }
 \description{
 \itemize{

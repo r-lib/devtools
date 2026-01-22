@@ -93,10 +93,15 @@ load_package_for_testing <- function(pkg) {
   }
 }
 
-#' @param show_report Show the test coverage report.
+#' @param report How to display the coverage report.
+#'  * `"html"` opens an interactive report in the browser.
+#'  * `"zero"` prints uncovered lines to the console.
+#'  * `"silent"` returns the coverage object without display.
+#'
+#'  Defaults to `"html"` if interactive; otherwise to `"zero"`.
 #' @export
 #' @rdname test
-test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
+test_coverage <- function(pkg = ".", report = NULL, ...) {
   rlang::check_installed(c("covr", "DT"))
 
   save_all()
@@ -108,11 +113,7 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   withr::local_envvar(r_env_vars())
   coverage <- covr::package_coverage(pkg$path, ...)
 
-  if (isTRUE(show_report)) {
-    covr::report(coverage)
-  }
-
-  invisible(coverage)
+  show_report(coverage, report = report, path = pkg$path)
 }
 
 #' @rdname devtools-deprecated
@@ -131,7 +132,7 @@ test_coverage_file <- function(file = find_active_file(), ...) {
 test_coverage_active_file <- function(
   file = find_active_file(),
   filter = TRUE,
-  show_report = interactive(),
+  report = NULL,
   export_all = TRUE,
   ...
 ) {
@@ -177,17 +178,7 @@ test_coverage_active_file <- function(
   attr(coverage, "relative") <- TRUE
   attr(coverage, "package") <- pkg
 
-  if (isTRUE(show_report)) {
-    covered <- unique(covr::display_name(coverage))
-
-    if (length(covered) == 1) {
-      covr::file_report(coverage)
-    } else {
-      covr::report(coverage)
-    }
-  }
-
-  invisible(coverage)
+  show_report(coverage, report = report, path = pkg$path)
 }
 
 
@@ -204,4 +195,61 @@ uses_testthat <- function(pkg = ".") {
   )
 
   any(dir_exists(paths))
+}
+
+report_default <- function(report, call = rlang::caller_env()) {
+  if (is.null(report)) {
+    if (is_llm() || !rlang::is_interactive()) "zero" else "html"
+  } else {
+    rlang::arg_match(report, c("silent", "zero", "html"), error_call = call)
+  }
+}
+
+show_report <- function(coverage, report, path, call = rlang::caller_env()) {
+  report <- report_default(report, call = call)
+
+  if (report == "html") {
+    covered <- unique(covr::display_name(coverage))
+
+    if (length(covered) == 1) {
+      covr::file_report(coverage)
+    } else {
+      covr::report(coverage)
+    }
+  } else if (report == "zero") {
+    zero <- covr::zero_coverage(coverage)
+    if (nrow(zero) == 0) {
+      cli::cli_inform(c(v = "All lines covered!"))
+    } else {
+      for (file in unique(zero$filename)) {
+        file_zero <- zero[zero$filename == file, ]
+        lines_by_fun <- split(file_zero$line, file_zero$functions)
+
+        rel_path <- path_rel(file, path)
+        cli::cli_inform("Uncovered lines in {.file {rel_path}}:")
+        for (fun in names(lines_by_fun)) {
+          lines <- paste0(collapse_lines(lines_by_fun[[fun]]), collapse = ", ")
+          cli::cli_inform(c("*" = "{.fn {fun}}: {lines}"))
+        }
+      }
+    }
+  }
+  invisible(coverage)
+}
+
+collapse_lines <- function(x) {
+  x <- sort(unique(x))
+  breaks <- c(0, which(diff(x) != 1), length(x))
+
+  ranges <- character(length(breaks) - 1)
+  for (i in seq_along(ranges)) {
+    start <- x[breaks[i] + 1]
+    end <- x[breaks[i + 1]]
+    if (start == end) {
+      ranges[i] <- as.character(start)
+    } else {
+      ranges[i] <- paste0(start, "-", end)
+    }
+  }
+  ranges
 }

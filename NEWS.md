@@ -5,6 +5,7 @@
 * `is_loading()` is now re-exported from pkgload (#2556).
 * `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
 * `show_news()` now looks for NEWS files in the same locations as `utils::news()`: `inst/NEWS.Rd`, `NEWS.md`, `NEWS`, and `inst/NEWS` (@arcresu, #2499).
+* `test_coverage()` and `test_coverage_active_file()` gain a new `report` argument that can be set to `"html"` (the default, for an interactive browser report), `"zero"` (prints uncovered lines to the console, used for LLMs and non-interactive contexts), or `"silent"` (#2632).
 
 # devtools 2.4.6
 
