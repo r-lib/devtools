@@ -1,6 +1,7 @@
 # devtools (development version)
 
 * `build_manual()` reports more details on failure (#2586).
+* `build_vignettes()` and `clean_vignettes()` are now deprecated. We no longer recommend building and checking in vignettes; instead use `pkgdown::build_article()` to render articles locally for polishing (#2488).
 * New `check_mac_devel()` function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (@nfrerebeau, #2507)
 * `is_loading()` is now re-exported from pkgload (#2556).
 * `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).

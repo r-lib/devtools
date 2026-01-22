@@ -1,4 +1,5 @@
 test_that("Sweave vignettes copied into doc", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   if (!pkgbuild::has_latex()) {
     skip("pdflatex not available")
   }
@@ -13,6 +14,7 @@ test_that("Sweave vignettes copied into doc", {
 })
 
 test_that("Built files are updated", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   # This test is time dependant and sometimes fails on CRAN because the systems are under heavy load.
   skip_on_cran()
   pkg <- local_package_copy(test_path("testMarkdownVignettes"))
@@ -29,6 +31,7 @@ test_that("Built files are updated", {
 })
 
 test_that("Rmarkdown vignettes copied into doc", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   pkg <- local_package_copy(test_path("testMarkdownVignettes"))
   doc <- path(pkg, "doc")
 
@@ -37,6 +40,7 @@ test_that("Rmarkdown vignettes copied into doc", {
 })
 
 test_that("extra files copied and removed", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   pkg <- local_package_copy(test_path("testMarkdownVignettes"))
   writeLines("a <- 1", path(pkg, "vignettes", "a.R"))
 
@@ -51,9 +55,18 @@ test_that("extra files copied and removed", {
 })
 
 test_that(".gitignore updated when building vignettes", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   pkg <- local_package_copy(test_path("testMarkdownVignettes"))
   gitignore <- path(pkg, ".gitignore")
 
   suppressMessages(build_vignettes(pkg, quiet = TRUE))
   expect_true(all(c("/Meta/", "/doc/") %in% readLines(gitignore)))
+})
+
+test_that("build_vignettes() and clean_vignettes() are deprecated", {
+  pkg <- local_package_create()
+  expect_snapshot({
+    build_vignettes(pkg)
+    clean_vignettes(pkg)
+  })
 })

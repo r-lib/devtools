@@ -2,7 +2,7 @@
 % Please edit documentation in R/vignettes.R
 \name{clean_vignettes}
 \alias{clean_vignettes}
-\title{Clean built vignettes.}
+\title{Clean built vignettes}
 \usage{
 clean_vignettes(pkg = ".")
 }
@@ -11,6 +11,8 @@ clean_vignettes(pkg = ".")
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 }
 \description{
-This uses a fairly rudimentary algorithm where any files in \file{doc}
-with a name that exists in \file{vignettes} are removed.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{clean_vignettes()} is deprecated because \code{\link[=build_vignettes]{build_vignettes()}} is deprecated.
 }
+\keyword{internal}
