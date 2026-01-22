@@ -2,7 +2,7 @@
 % Please edit documentation in R/vignettes.R
 \name{build_vignettes}
 \alias{build_vignettes}
-\title{Build package vignettes.}
+\title{Build package vignettes}
 \usage{
 build_vignettes(
   pkg = ".",
@@ -58,20 +58,11 @@ outputs. See
 \url{https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown}.}
 }
 \description{
-Builds package vignettes using the same algorithm that \verb{R CMD build}
-does. This means including non-Sweave vignettes, using makefiles (if
-present), and copying over extra files. The files are copied in the 'doc'
-directory and an vignette index is created in 'Meta/vignette.rds', as they
-would be in a built package. 'doc' and 'Meta' are added to
-\code{.Rbuildignore}, so will not be included in the built package. These
-files can be checked into version control, so they can be viewed with
-\code{browseVignettes()} and \code{vignette()} if the package has been
-loaded with \code{load_all()} without needing to re-build them locally.
-}
-\seealso{
-\code{\link[=clean_vignettes]{clean_vignettes()}} to remove the pdfs in
-\file{doc} created from vignettes
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-\code{\link[=clean_vignettes]{clean_vignettes()}} to remove build tex/pdf files.
+\code{build_vignettes()} is deprecated because we no longer recommend that you
+build and check in vignettes. Instead, use \code{pkgdown::build_article()} to
+render articles locally for polishing and rely on GitHub Actions or similar
+to build your pkgdown site.
 }
-\keyword{programming}
+\keyword{internal}
