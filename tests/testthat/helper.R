@@ -2,9 +2,8 @@
 local_package_create <- function(envir = parent.frame()) {
   dir <- withr::local_tempdir(.local_envir = envir)
 
-  usethis::ui_silence({
-    create_package(dir, rstudio = FALSE, open = FALSE, check_name = FALSE)
-  })
+  withr::local_options(usethis.quiet = TRUE)
+  create_package(dir, rstudio = FALSE, open = FALSE, check_name = FALSE)
 
   dir
 }
