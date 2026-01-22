@@ -28,6 +28,10 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
   cran_version <- cran_pkg_version(pkg$package)
   new_pkg <- is.null(cran_version)
 
+  if (!rlang::is_interactive()) {
+    cli::cli_abort("Interactive session required.")
+  }
+
   if (yesno("Have you checked for spelling errors (with `spell_check()`)?")) {
     return(invisible())
   }
