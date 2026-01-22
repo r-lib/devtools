@@ -4,7 +4,7 @@
       find_active_file()
     Condition
       Error:
-      ! Argument `file` is missing, with no default
+      ! `file` is absent but must be supplied.
 
 # fails if can't find tests
 
