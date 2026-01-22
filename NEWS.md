@@ -1,5 +1,6 @@
 # devtools (development version)
 
+* `bash()`, `create()`, `missing_s3()`, `reload()`, `show_news()`, and `wd()` are now deprecated. These functions are all historical parts of our workflow that we no longer use or recommend. `create()` is superseded by `usethis::create_package()`.
 * `build_manual()` reports more details on failure (#2586).
 * New `check_mac_devel()` function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (@nfrerebeau, #2507)
 * `is_loading()` is now re-exported from pkgload (#2556).

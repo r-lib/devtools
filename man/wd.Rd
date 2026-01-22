@@ -2,7 +2,7 @@
 % Please edit documentation in R/wd.R
 \name{wd}
 \alias{wd}
-\title{Set working directory.}
+\title{Set working directory}
 \usage{
 wd(pkg = ".", path = "")
 }
@@ -14,5 +14,8 @@ package object.  See \code{\link[=as.package]{as.package()}} for more informatio
 to package directory.}
 }
 \description{
-Set working directory.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{wd()} is deprecated because we no longer use or recommend this workflow.
 }
+\keyword{internal}
