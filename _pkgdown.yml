@@ -26,7 +26,6 @@ reference:
   - document
   - load_all
   - reload
-  - release
   - spell_check
   - test
 - title: Package Installation
@@ -48,6 +47,10 @@ reference:
   - update_packages
   - wd
   - save_all
+
+- title: Deprecated functions
+  contents:
+  - release
 
 news:
   releases:

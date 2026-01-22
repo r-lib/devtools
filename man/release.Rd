@@ -18,26 +18,12 @@ release it.}
 line arguments to be passed to \verb{R CMD build}.}
 }
 \description{
-Run automated and manual tests, then post package to CRAN.
-}
-\details{
-The package release process will:
-\itemize{
-\item Confirm that the package passes \verb{R CMD check} on relevant platforms
-\item Confirm that important files are up-to-date
-\item Build the package
-\item Submit the package to CRAN, using comments in "cran-comments.md"
-}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-You can add arbitrary extra questions by defining an (un-exported) function
-called \code{release_questions()} that returns a character vector
-of additional questions to ask.
-
-You also need to read the CRAN repository policy at
-'https://cran.r-project.org/web/packages/policies.html' and make
-sure you're in line with the policies. \code{release} tries to automate as
-many of polices as possible, but it's impossible to be completely
-comprehensive, and they do change in between releases of devtools.
+\code{release()} is deprecated in favour of \code{\link[usethis:use_release_issue]{usethis::use_release_issue()}}.
+We no longer feel confident recommrding \code{release()} because we don't use it
+ourselves, so there's no guarantee that it will track best practices as
+they evolve over time.
 }
 \seealso{
 \code{\link[usethis:use_release_issue]{usethis::use_release_issue()}} to create a checklist of release
