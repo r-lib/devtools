@@ -1,4 +1,4 @@
-#' Install a local development package.
+#' Install a local development package
 #'
 #' Uses `R CMD INSTALL` to install the package. Will also try to install
 #' dependencies of the package from CRAN, if they're not already installed.
@@ -148,7 +148,7 @@ install <-
     invisible(TRUE)
   }
 
-#' Install package dependencies if needed.
+#' Install package dependencies if needed
 #'
 #' `install_deps()` will install the
 #' user dependencies needed to run the package, `install_dev_deps()` will also

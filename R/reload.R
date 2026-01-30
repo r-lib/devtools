@@ -1,4 +1,4 @@
-#' Unload and reload package.
+#' Unload and reload package
 #'
 #' This attempts to unload and reload an _installed_ package. If the package is
 #' not loaded already, it does nothing. It's not always possible to cleanly
