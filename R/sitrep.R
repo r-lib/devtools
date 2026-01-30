@@ -108,6 +108,7 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
     r_version = getRversion(),
     r_path = path_real(R.home()),
     r_release_version = r_release(),
+    is_windows = is_windows,
     has_build_tools = has_build_tools,
     rtools_path = if (has_build_tools) pkgbuild::rtools_path(),
     devtools_version = packageVersion("devtools"),
@@ -125,6 +126,7 @@ new_dev_sitrep <- function(
   r_version = getRversion(),
   r_path = path_real(R.home()),
   r_release_version = r_version,
+  is_windows = FALSE,
   has_build_tools = TRUE,
   rtools_path = NULL,
   devtools_version = packageVersion("devtools"),
@@ -139,6 +141,7 @@ new_dev_sitrep <- function(
       r_version = r_version,
       r_path = r_path,
       r_release_version = r_release_version,
+      is_windows = is_windows,
       has_build_tools = has_build_tools,
       rtools_path = rtools_path,
       devtools_version = devtools_version,
@@ -165,7 +168,7 @@ print.dev_sitrep <- function(x, ...) {
     all_ok <- FALSE
   }
 
-  if (is_windows) {
+  if (x$is_windows) {
     cli::cli_rule("Rtools")
     if (x$has_build_tools) {
       kv_line("path", x$rtools_path, path = TRUE)
