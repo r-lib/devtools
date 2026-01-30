@@ -1,3 +1,84 @@
+# print shows all checks passed
+
+    Code
+      print(x)
+    Message
+      -- R -------------------------------------------------------
+      * version: 4.4.0
+      * path: '/usr/lib/R'
+      -- devtools ------------------------------------------------
+      * version: 2.4.6
+      -- dev package ---------------------------------------------
+      * package: <unset>
+      * path: <unset>
+      v All checks passed
+
+# print warns when R is out of date
+
+    Code
+      print(x)
+    Message
+      -- R -------------------------------------------------------
+      * version: 4.3.0
+      * path: '/usr/lib/R'
+      ! R is out of date (4.3.0 vs 4.4.0)
+      -- devtools ------------------------------------------------
+      * version: 2.4.6
+      -- dev package ---------------------------------------------
+      * package: <unset>
+      * path: <unset>
+
+# print warns about outdated devtools deps
+
+    Code
+      print(x)
+    Message
+      -- R -------------------------------------------------------
+      * version: 4.4.0
+      * path: '/usr/lib/R'
+      -- devtools ------------------------------------------------
+      * version: 2.4.6
+      ! devtools or its dependencies out of date:
+        "cli"
+        Update them with `devtools::update_packages("devtools")`
+      -- dev package ---------------------------------------------
+      * package: <unset>
+      * path: <unset>
+
+# print warns about outdated package deps
+
+    Code
+      print(x)
+    Message
+      -- R -------------------------------------------------------
+      * version: 4.4.0
+      * path: '/usr/lib/R'
+      -- devtools ------------------------------------------------
+      * version: 2.4.6
+      -- dev package ---------------------------------------------
+      * package: "mypkg"
+      * path: '/tmp/mypkg'
+      ! mypkg dependencies out of date:
+        "dplyr" and "tidyr"
+        Update them with `devtools::install_dev_deps()`
+
+# print shows RStudio update message
+
+    Code
+      print(x)
+    Message
+      -- R -------------------------------------------------------
+      * version: 4.4.0
+      * path: '/usr/lib/R'
+      -- RStudio -------------------------------------------------
+      * version: "2024.04.0"
+      ! RStudio is out of date.
+      -- devtools ------------------------------------------------
+      * version: 2.4.6
+      -- dev package ---------------------------------------------
+      * package: <unset>
+      * path: <unset>
+
 # check_for_rstudio_updates
 
     Code
