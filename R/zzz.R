@@ -1,7 +1,3 @@
-#' @importFrom utils available.packages contrib.url install.packages
-#'   installed.packages modifyList packageDescription
-#'   packageVersion remove.packages
-#' @importFrom cli cat_rule cat_bullet
 #' @import fs
 NULL
 

@@ -26,7 +26,7 @@ uninstall <- function(
     cli::cli_inform(c(i = "Uninstalling {.pkg {pkg$package}}"))
   }
 
-  remove.packages(pkg$package, .libPaths()[[1]])
+  utils::remove.packages(pkg$package, .libPaths()[[1]])
 
   invisible(TRUE)
 }
