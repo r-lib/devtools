@@ -1,4 +1,4 @@
-# Use roxygen to document a package.
+# Use roxygen to document a package
 
 This function is a wrapper for the
 [`roxygen2::roxygenize()`](https://roxygen2.r-lib.org/reference/roxygenize.html)

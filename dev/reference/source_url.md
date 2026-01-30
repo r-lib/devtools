@@ -1,4 +1,4 @@
-# Run a script through some protocols such as http, https, ftp, etc.
+# Run a script through some protocols such as http, https, ftp, etc
 
 If a SHA-1 hash is specified with the `sha1` argument, then this
 function will check the SHA-1 hash of the downloaded file to make sure

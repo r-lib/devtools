@@ -1,6 +1,6 @@
-# Open bash shell in package directory.
+# Open bash shell in package directory
 
-Open bash shell in package directory.
+Open bash shell in package directory
 
 ## Usage
 

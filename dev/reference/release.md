@@ -1,4 +1,4 @@
-# Release package to CRAN.
+# Release package to CRAN
 
 **\[deprecated\]**
 

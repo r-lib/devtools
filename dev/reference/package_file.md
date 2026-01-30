@@ -1,4 +1,4 @@
-# Find file in a package.
+# Find file in a package
 
 It always starts by walking up the path until it finds the root
 directory, i.e. a directory containing `DESCRIPTION`. If it cannot find

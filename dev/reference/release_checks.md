@@ -1,4 +1,4 @@
-# Custom devtools release checks.
+# Custom devtools release checks
 
 This function performs additional checks prior to release. It is called
 automatically by

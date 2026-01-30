@@ -1,4 +1,4 @@
-# Coerce input to a package.
+# Coerce input to a package
 
 Possible specifications of package:
 

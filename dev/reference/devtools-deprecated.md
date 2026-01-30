@@ -1,4 +1,4 @@
-# Deprecated Functions
+# Deprecated functions
 
 These functions are Deprecated in this release of devtools, they will be
 marked as Defunct and removed in a future version.

@@ -1,4 +1,4 @@
-# Git checks.
+# Git checks
 
 This function performs Git checks checks prior to release. It is called
 automatically by

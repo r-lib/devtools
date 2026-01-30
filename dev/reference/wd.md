@@ -1,6 +1,6 @@
-# Set working directory.
+# Set working directory
 
-Set working directory.
+Set working directory
 
 ## Usage
 
