@@ -85,9 +85,11 @@ when installing dependencies.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-These functions are deprecated. Please use \code{pak::local_install_deps()}
-instead of \code{install_deps()} and \code{pak::local_install_dev_deps()} instead of
-\code{install_dev_deps()}.
+These functions are deprecated. Better alternatives:
+\itemize{
+\item \code{pak::local_install_deps()} instead of \code{install_deps()}
+\item \code{pak::local_install_dev_deps()} instead of \code{install_dev_deps()}
+}
 }
 \examples{
 \dontrun{install_deps(".")}

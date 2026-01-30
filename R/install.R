@@ -153,9 +153,9 @@ install <-
 #' @description
 #' `r lifecycle::badge("deprecated")`
 #'
-#' These functions are deprecated. Please use `pak::local_install_deps()`
-#' instead of `install_deps()` and `pak::local_install_dev_deps()` instead of
-#' `install_dev_deps()`.
+#' These functions are deprecated. Better alternatives:
+#' * `pak::local_install_deps()` instead of `install_deps()`
+#' * `pak::local_install_dev_deps()` instead of `install_dev_deps()`
 #'
 #' @inheritParams install
 #' @inherit remotes::install_deps
