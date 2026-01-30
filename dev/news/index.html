@@ -62,6 +62,8 @@
 <li>
 <code><a href="../reference/load_all.html">load_all()</a></code> now errors if called recursively, i.e. if you accidentally include a <code><a href="../reference/load_all.html">load_all()</a></code> call in one of your R source files (<a href="https://github.com/r-lib/devtools/issues/2617" class="external-link">#2617</a>).</li>
 <li>
+<code><a href="../reference/release.html">release()</a></code> is deprecated in favour of <code><a href="https://usethis.r-lib.org/reference/use_release_issue.html" class="external-link">usethis::use_release_issue()</a></code>.</li>
+<li>
 <code><a href="../reference/show_news.html">show_news()</a></code> now looks for NEWS files in the same locations as <code><a href="https://rdrr.io/r/utils/news.html" class="external-link">utils::news()</a></code>: <code>inst/NEWS.Rd</code>, <code>NEWS.md</code>, <code>NEWS</code>, and <code>inst/NEWS</code> (<a href="https://github.com/arcresu" class="external-link">@arcresu</a>, <a href="https://github.com/r-lib/devtools/issues/2499" class="external-link">#2499</a>).</li>
 </ul></div>
     <div class="section level2">

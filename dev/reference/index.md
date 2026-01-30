@@ -53,9 +53,6 @@ Primary commands used when developing a package.
 - [`reload()`](https://devtools.r-lib.org/dev/reference/reload.md) :
   Unload and reload package.
 
-- [`release()`](https://devtools.r-lib.org/dev/reference/release.md) :
-  Release package to CRAN.
-
 - [`spell_check()`](https://devtools.r-lib.org/dev/reference/spell_check.md)
   : Spell checking
 
@@ -116,3 +113,8 @@ Primary commands used when developing a package.
   directory.
 - [`save_all()`](https://devtools.r-lib.org/dev/reference/save_all.md) :
   Save all documents in an active IDE session.
+
+## Deprecated functions
+
+- [`release()`](https://devtools.r-lib.org/dev/reference/release.md)
+  **\[deprecated\]** : Release package to CRAN.

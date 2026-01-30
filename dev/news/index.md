@@ -27,6 +27,9 @@
   [`load_all()`](https://devtools.r-lib.org/dev/reference/load_all.md)
   call in one of your R source files
   ([\#2617](https://github.com/r-lib/devtools/issues/2617)).
+- [`release()`](https://devtools.r-lib.org/dev/reference/release.md) is
+  deprecated in favour of
+  [`usethis::use_release_issue()`](https://usethis.r-lib.org/reference/use_release_issue.html).
 - [`show_news()`](https://devtools.r-lib.org/dev/reference/show_news.md)
   now looks for NEWS files in the same locations as
   [`utils::news()`](https://rdrr.io/r/utils/news.html): `inst/NEWS.Rd`,

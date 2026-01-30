@@ -1,6 +1,15 @@
 # Release package to CRAN.
 
-Run automated and manual tests, then post package to CRAN.
+**\[deprecated\]**
+
+`release()` is deprecated in favour of
+[`usethis::use_release_issue()`](https://usethis.r-lib.org/reference/use_release_issue.html).
+We no longer feel confident recommending `release()` because we don't
+use it ourselves, so there's no guarantee that it will track best
+practices as they evolve over time.
+
+If you want to programmatical submit to CRAN, you can continue to use
+[`submit_cran()`](https://devtools.r-lib.org/dev/reference/submit_cran.md).
 
 ## Usage
 
@@ -26,28 +35,6 @@ release(pkg = ".", check = FALSE, args = NULL)
 
   An optional character vector of additional command line arguments to
   be passed to `R CMD build`.
-
-## Details
-
-The package release process will:
-
-- Confirm that the package passes `R CMD check` on relevant platforms
-
-- Confirm that important files are up-to-date
-
-- Build the package
-
-- Submit the package to CRAN, using comments in "cran-comments.md"
-
-You can add arbitrary extra questions by defining an (un-exported)
-function called `release_questions()` that returns a character vector of
-additional questions to ask.
-
-You also need to read the CRAN repository policy at
-'https://cran.r-project.org/web/packages/policies.html' and make sure
-you're in line with the policies. `release` tries to automate as many of
-polices as possible, but it's impossible to be completely comprehensive,
-and they do change in between releases of devtools.
 
 ## See also
 
