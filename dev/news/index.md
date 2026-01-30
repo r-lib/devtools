@@ -11,6 +11,9 @@
   <https://mac.r-project.org/macbuilder/submit.html>
   ([@nfrerebeau](https://github.com/nfrerebeau),
   [\#2507](https://github.com/r-lib/devtools/issues/2507))
+- [`dev_sitrep()`](https://devtools.r-lib.org/dev/reference/dev_sitrep.md)
+  now works correctly in Positron
+  ([\#2618](https://github.com/r-lib/devtools/issues/2618)).
 - [`is_loading()`](https://pkgload.r-lib.org/reference/load_all.html) is
   now re-exported from pkgload
   ([\#2556](https://github.com/r-lib/devtools/issues/2556)).
