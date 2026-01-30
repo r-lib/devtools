@@ -6,6 +6,7 @@
 * `dev_sitrep()` now works correctly in Positron (#2618).
 * `is_loading()` is now re-exported from pkgload (#2556).
 * `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
+* `release()` is deprecated in favour of `usethis::use_release_issue()`.
 * `show_news()` now looks for NEWS files in the same locations as `utils::news()`: `inst/NEWS.Rd`, `NEWS.md`, `NEWS`, and `inst/NEWS` (@arcresu, #2499).
 
 # devtools 2.4.6
