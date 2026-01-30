@@ -32,6 +32,7 @@
 <url><loc>https://devtools.r-lib.org/dev/reference/git_checks.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/has_tests.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/index.html</loc></url>
+<url><loc>https://devtools.r-lib.org/dev/reference/install-deprecated.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/install.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/install_deps.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/is.package.html</loc></url>
@@ -45,7 +46,6 @@
 <url><loc>https://devtools.r-lib.org/dev/reference/release.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/release_checks.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/reload.html</loc></url>
-<url><loc>https://devtools.r-lib.org/dev/reference/remote-reexports.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/revdep.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/run_examples.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/save_all.html</loc></url>

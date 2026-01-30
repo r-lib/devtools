@@ -66,24 +66,24 @@ look in the current working directory - this is a recommended practice.
 
 - `install_*` functions install an R package:
 
-  - [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  - [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
     from GitHub
-  - [`install_gitlab()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  - [`install_gitlab()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
     from GitLab
-  - [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  - [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
     from Bitbucket
-  - [`install_url()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  - [`install_url()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
     from an arbitrary url
-  - [`install_git()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  - [`install_git()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
     and
-    [`install_svn()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+    [`install_svn()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
     from an arbitrary git or SVN repository
-  - [`install_local()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  - [`install_local()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
     from a local file on disk
-  - [`install_version()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  - [`install_version()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
     from a specific version on CRAN
 
-- [`update_packages()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`update_packages()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   updates a package to the latest version. This works both on packages
   installed from CRAN as well as those installed from any of the
   `install_*` functions.
@@ -170,7 +170,7 @@ This includes:
   (i.e. [`document()`](https://devtools.r-lib.org/dev/reference/document.md)).
 
 - [remotes](https://github.com/r-lib/remotes): Installing packages (i.e.
-  [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)).
+  [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)).
 
 - [pkgbuild](https://github.com/r-lib/pkgbuild): Building binary
   packages (including checking if build tools are available)
@@ -210,7 +210,7 @@ rather than
 or
 [`remotes::install_github()`](https://remotes.r-lib.org/reference/install_github.html)
 vs
-[`devtools::install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md).
+[`devtools::install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md).
 
 However for day to day development we recommend you continue to use
 [`library(devtools)`](https://devtools.r-lib.org/) to quickly load all

@@ -143,7 +143,7 @@ To install a package in a non-default library, use
 
 ## See also
 
-[`update_packages()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+[`update_packages()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
 to update installed packages from the source location and
 [`with_debug()`](https://pkgbuild.r-lib.org/reference/with_debug.html)
 to install packages with debugging flags set.

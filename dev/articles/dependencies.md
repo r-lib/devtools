@@ -56,7 +56,7 @@ Remotes: hadley/testthat
 
 You can also specify a specific hash, tag, or pull request (using the
 same syntax as
-[`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+[`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
 if you want a particular commit. Otherwise the latest commit on the HEAD
 of the branch is used.
 

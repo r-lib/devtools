@@ -1,8 +1,14 @@
 # Install package dependencies if needed
 
-`install_deps()` will install the user dependencies needed to run the
-package, `install_dev_deps()` will also install the development
-dependencies needed to test and build the package.
+**\[deprecated\]**
+
+These functions are deprecated. Better alternatives:
+
+- [`pak::local_install_deps()`](https://pak.r-lib.org/reference/local_install_deps.html)
+  instead of `install_deps()`
+
+- [`pak::local_install_dev_deps()`](https://pak.r-lib.org/reference/local_install_dev_deps.html)
+  instead of `install_dev_deps()`
 
 ## Usage
 

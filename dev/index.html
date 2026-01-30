@@ -126,22 +126,22 @@
 <p><code>install_*</code> functions install an R package:</p>
 <ul>
 <li>
-<code><a href="reference/remote-reexports.html">install_github()</a></code> from GitHub</li>
+<code><a href="reference/install-deprecated.html">install_github()</a></code> from GitHub</li>
 <li>
-<code><a href="reference/remote-reexports.html">install_gitlab()</a></code> from GitLab</li>
+<code><a href="reference/install-deprecated.html">install_gitlab()</a></code> from GitLab</li>
 <li>
-<code><a href="reference/remote-reexports.html">install_bitbucket()</a></code> from Bitbucket</li>
+<code><a href="reference/install-deprecated.html">install_bitbucket()</a></code> from Bitbucket</li>
 <li>
-<code><a href="reference/remote-reexports.html">install_url()</a></code> from an arbitrary url</li>
+<code><a href="reference/install-deprecated.html">install_url()</a></code> from an arbitrary url</li>
 <li>
-<code><a href="reference/remote-reexports.html">install_git()</a></code> and <code><a href="reference/remote-reexports.html">install_svn()</a></code> from an arbitrary git or SVN repository</li>
+<code><a href="reference/install-deprecated.html">install_git()</a></code> and <code><a href="reference/install-deprecated.html">install_svn()</a></code> from an arbitrary git or SVN repository</li>
 <li>
-<code><a href="reference/remote-reexports.html">install_local()</a></code> from a local file on disk</li>
+<code><a href="reference/install-deprecated.html">install_local()</a></code> from a local file on disk</li>
 <li>
-<code><a href="reference/remote-reexports.html">install_version()</a></code> from a specific version on CRAN</li>
+<code><a href="reference/install-deprecated.html">install_version()</a></code> from a specific version on CRAN</li>
 </ul>
 </li>
-<li><p><code><a href="reference/remote-reexports.html">update_packages()</a></code> updates a package to the latest version. This works both on packages installed from CRAN as well as those installed from any of the <code>install_*</code> functions.</p></li>
+<li><p><code><a href="reference/install-deprecated.html">update_packages()</a></code> updates a package to the latest version. This works both on packages installed from CRAN as well as those installed from any of the <code>install_*</code> functions.</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -192,7 +192,7 @@
 <ul>
 <li><p><a href="https://github.com/r-lib/testthat" class="external-link">testthat</a>: Writing and running tests (i.e. <code><a href="reference/test.html">test()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/roxygen2" class="external-link">roxygen2</a>: Function and package documentation (i.e. <code><a href="reference/document.html">document()</a></code>).</p></li>
-<li><p><a href="https://github.com/r-lib/remotes" class="external-link">remotes</a>: Installing packages (i.e. <code><a href="reference/remote-reexports.html">install_github()</a></code>).</p></li>
+<li><p><a href="https://github.com/r-lib/remotes" class="external-link">remotes</a>: Installing packages (i.e. <code><a href="reference/install-deprecated.html">install_github()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/pkgbuild" class="external-link">pkgbuild</a>: Building binary packages (including checking if build tools are available) (i.e. <code><a href="reference/build.html">build()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/pkgload" class="external-link">pkgload</a>: Simulating package loading (i.e. <code><a href="reference/load_all.html">load_all()</a></code>).</p></li>
 <li><p><a href="https://github.com/r-lib/rcmdcheck" class="external-link">rcmdcheck</a>: Running R CMD check and reporting the results (i.e. <code><a href="reference/check.html">check()</a></code>).</p></li>
@@ -201,7 +201,7 @@
 <li><p><a href="https://github.com/r-lib/usethis" class="external-link">usethis</a>: Automating package setup (i.e. <code>use_test()</code>).</p></li>
 </ul>
 <p>Generally, you would not need to worry about these different packages, because devtools installs all of them automatically. You will need to care, however, if you’re filing a bug because reporting it at the correct place will lead to a speedier resolution.</p>
-<p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://sessioninfo.r-lib.org/reference/session_info.html" class="external-link">sessioninfo::session_info()</a></code> rather than <code><a href="https://sessioninfo.r-lib.org/reference/session_info.html" class="external-link">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code> vs <code><a href="reference/remote-reexports.html">devtools::install_github()</a></code>.</p>
+<p>You may also need to care if you are trying to use some devtools functionality in your own package or deployed application. Generally in these cases it is better to depend on the particular package directly rather than depend on devtools, e.g. use <code><a href="https://sessioninfo.r-lib.org/reference/session_info.html" class="external-link">sessioninfo::session_info()</a></code> rather than <code><a href="https://sessioninfo.r-lib.org/reference/session_info.html" class="external-link">devtools::session_info()</a></code>, or <code><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">remotes::install_github()</a></code> vs <code><a href="reference/install-deprecated.html">devtools::install_github()</a></code>.</p>
 <p>However for day to day development we recommend you continue to use <code><a href="https://devtools.r-lib.org/">library(devtools)</a></code> to quickly load all needed development tools, just like <code><a href="https://tidyverse.tidyverse.org" class="external-link">library(tidyverse)</a></code> quickly loads all the tools necessary for data exploration and visualization.</p>
 </div>
 <div class="section level2">

@@ -30,6 +30,27 @@
 - [`is_loading()`](https://pkgload.r-lib.org/reference/load_all.html) is
   now re-exported from pkgload
   ([\#2556](https://github.com/r-lib/devtools/issues/2556)).
+- Package installation functions are now deprecated:
+  [`install_bioc()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_cran()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_deps()`](https://devtools.r-lib.org/dev/reference/install_deps.md),
+  [`install_dev()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_dev_deps()`](https://devtools.r-lib.org/dev/reference/install_deps.md),
+  [`install_git()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_gitlab()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_local()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_svn()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_url()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_version()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`update_packages()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`dev_package_deps()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`github_pull()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  and
+  [`github_release()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md).
+  We now recommend pak (<https://pak.r-lib.org/>) for general package
+  installation. See `?install-deprecated` for migration guidance.
 - [`load_all()`](https://devtools.r-lib.org/dev/reference/load_all.md)
   now errors if called recursively, i.e. if you accidentally include a
   [`load_all()`](https://devtools.r-lib.org/dev/reference/load_all.md)
@@ -638,7 +659,7 @@ spun off in what we are calling the ‘conscious uncoupling’ of
 **devtools**.
 
 - remotes: Installing packages
-  (i.e. [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)).
+  (i.e. [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)).
 - pkgbuild: Building binary packages (including checking if build tools
   are available)
   (i.e. [`build()`](https://devtools.r-lib.org/dev/reference/build.md)).
@@ -821,7 +842,7 @@ understand API in the future, so we feel the tradeoff is worthwhile.
   allows users to run without `--timings`
   ([\#1655](https://github.com/r-lib/devtools/issues/1655))
 
-- [`update_packages()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`update_packages()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   better documented to advertise it can be used to update packages
   installed by any of the `install_*` functions.
 
@@ -869,7 +890,7 @@ understand API in the future, so we feel the tradeoff is worthwhile.
   [`testthat::test_dir()`](https://testthat.r-lib.org/reference/test_dir.html)
   ([\#1776](https://github.com/r-lib/devtools/issues/1776))
 
-- [`install_url()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_url()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   can now install package binaries on windows
   ([\#1765](https://github.com/r-lib/devtools/issues/1765))
 
@@ -885,7 +906,7 @@ understand API in the future, so we feel the tradeoff is worthwhile.
   ([\#1779](https://github.com/r-lib/devtools/issues/1779),
   [@jayhesselberth](https://github.com/jayhesselberth))
 
-- [`install_version()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_version()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   can now install current version of CRAN package on Windows and macOS
   ([@jdblischak](https://github.com/jdblischak),
   [\#1730](https://github.com/r-lib/devtools/issues/1730))
@@ -1045,12 +1066,12 @@ CRAN release: 2017-05-13
   ([\#1503](https://github.com/r-lib/devtools/issues/1503)).
 
 - Fix
-  [`install_version()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md),
-  [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md),
-  [`install_local()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md),
-  [`install_url()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md),
-  [`install_svn()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md),
-  [`install_bioc()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_version()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_local()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_url()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_svn()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
+  [`install_bioc()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   gain `quiet` arguments and properly pass them to internal functions.
   ([\#1502](https://github.com/r-lib/devtools/issues/1502))
 
@@ -1142,18 +1163,18 @@ CRAN release: 2017-05-08
   [@thomasp85](https://github.com/thomasp85)).
 
 - Remove deprecated `args` argument from
-  [`install_git()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_git()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   to allow passthrough to `install`
   ([\#1373](https://github.com/r-lib/devtools/issues/1373),
   [@ReportMort](https://github.com/ReportMort)).
 
 - added a `quiet` argument to
-  [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md),
+  [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
   with a default value of `FALSE` (fixes issue
   [\#1345](https://github.com/r-lib/devtools/issues/1345),
   [@plantarum](https://github.com/plantarum)).
 
-- [`update_packages()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`update_packages()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   allows for override of interactive prompt
   ([\#1260](https://github.com/r-lib/devtools/issues/1260),
   [@pkq](https://github.com/pkq)).
@@ -1224,7 +1245,7 @@ CRAN release: 2017-05-08
   [\#1256](https://github.com/r-lib/devtools/issues/1256)).
 
 - Fix auto download method selection for
-  [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   on R 3.1 which lacks “libcurl” in
   [`capabilities()`](https://rdrr.io/r/base/capabilities.html).
   ([@kiwiroy](https://github.com/kiwiroy),
@@ -1244,7 +1265,7 @@ CRAN release: 2016-06-24
 ### New features
 
 - New
-  [`install_bioc()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_bioc()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   function and bioc remote to install Bioconductor packages from their
   SVN repository.
 
@@ -1259,7 +1280,7 @@ CRAN release: 2016-06-24
   ([\#1076](https://github.com/r-lib/devtools/issues/1076).)
 
 - `use_github()` accepts a host argument, similar to
-  [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   ([@ijlyttle](https://github.com/ijlyttle),
   [\#1101](https://github.com/r-lib/devtools/issues/1101))
 
@@ -1307,12 +1328,12 @@ CRAN release: 2016-06-24
   ([\#1187](https://github.com/r-lib/devtools/issues/1187)).
 
 - `install_*` functions and
-  [`update_packages()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`update_packages()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   refactored to allow updating of packages installed using any of the
   install methods. ([@jimhester](https://github.com/jimhester),
   [\#1067](https://github.com/r-lib/devtools/issues/1067))
 
-- [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now uses `https://api.github.com` as the host argument, so users can
   specify ‘http:’ or other protocols if needed.
   ([@jimhester](https://github.com/jimhester),
@@ -1494,7 +1515,7 @@ There were a handful of smaller fixes:
 - Devtools now uses new gcc toolchain on windows, if installed
   ([@jimhester](https://github.com/jimhester)).
 
-- [`install_git()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_git()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now allows you to pass credentials to git2r to specify specific ssh
   credentials ([@onlymee](https://github.com/onlymee),
   [\#982](https://github.com/r-lib/devtools/issues/982))
@@ -1580,20 +1601,20 @@ CRAN release: 2016-01-23
   ([\#1027](https://github.com/r-lib/devtools/issues/1027),
   [@rmflight](https://github.com/rmflight))
 
-- [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   and
-  [`install_git()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_git()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   only downloads and installs the package if the remote SHA1 reference
   differs from the currently installed reference
   ([\#903](https://github.com/r-lib/devtools/issues/903),
   [@jimhester](https://github.com/jimhester)).
 
-- [`install_local()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_local()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   captures git and github information and stores it in the `DESCRIPTION`
   ([\#1027](https://github.com/r-lib/devtools/issues/1027),
   [@rmflight](https://github.com/rmflight)).
 
-- [`install_version()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_version()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   is more robust when handling multiple repos
   ([\#943](https://github.com/r-lib/devtools/issues/943),
   [\#1030](https://github.com/r-lib/devtools/issues/1030),
@@ -1904,16 +1925,16 @@ CRAN release: 2015-05-09
   [`utils::install.packages()`](https://rdrr.io/r/utils/install.packages.html)
   ([@jimhester](https://github.com/jimhester),
   [\#712](https://github.com/r-lib/devtools/issues/712)).
-  [`install_svn()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_svn()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   optionally accepts a revision
   ([@lev-kuznetsov](https://github.com/lev-kuznetsov),
   [\#739](https://github.com/r-lib/devtools/issues/739)).
-  [`install_version()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_version()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now knows how to look in multiple repos
   ([\#721](https://github.com/r-lib/devtools/issues/721)).
 
 - `package_deps()` (and
-  [`dev_package_deps()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md))
+  [`dev_package_deps()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md))
   determines all recursive dependencies and whether or not they’re
   up-to-date ([\#663](https://github.com/r-lib/devtools/issues/663)).
   Use `update(package_deps("xyz"))` to update out of date dependencies.
@@ -1924,7 +1945,7 @@ CRAN release: 2015-05-09
   avoid problems when you go to submit to CRAN.
 
 - New
-  [`update_packages()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`update_packages()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   will install a package (and its dependencies) only if they are missing
   or out of date
   ([\#675](https://github.com/r-lib/devtools/issues/675)).
@@ -1938,11 +1959,11 @@ CRAN release: 2015-05-09
 
 - Devtools now uses the git2r package to inspect git properties and
   install remote git packages with
-  [`install_git()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md).
+  [`install_git()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md).
   This should be considerably more reliable than the previous strategy
   which involves calling the command line `git` client. It has two small
   downsides:
-  [`install_git()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_git()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   no longer accepts additional `args`, and must do a deep clone when
   installing.
 
@@ -1955,7 +1976,7 @@ CRAN release: 2015-05-09
   synchronise with the remote
   ([\#691](https://github.com/r-lib/devtools/issues/691)).
 
-- [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   warns if repository contains submodules
   ([@ashander](https://github.com/ashander),
   [\#751](https://github.com/r-lib/devtools/issues/751)).
@@ -2148,7 +2169,7 @@ a little easier pre-release.
 ### Bug fixes
 
 - When installing a pull request,
-  [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now uses the repository associated with the pull request’s branch (and
   not the repository of the user who created the pull request)
   ([\#658](https://github.com/r-lib/devtools/issues/658),
@@ -2255,17 +2276,17 @@ CRAN release: 2014-09-23
   suggested packages
   ([\#573](https://github.com/r-lib/devtools/issues/573)).
 
-- [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   has been bought into alignment with
-  [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md):
+  [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md):
   this means you can now specify repos with the compact
   `username/repo@ref` syntax. The `username` is now deprecated.
 
-- [`install_git()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_git()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   has been simplified and many of the arguments have changed names for
   consistency with metadata for other package installs.
 
-- [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   has been considerably improved:
 
   - `username` is deprecated - please include the user in the repo name:
@@ -2295,17 +2316,17 @@ CRAN release: 2014-09-23
     [\#350](https://github.com/r-lib/devtools/issues/350)).
 
 - `install_gitorious()` has been bought into alignment with
-  [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md):
+  [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md):
   this means you can now specify repos with the compact
   `username/repo@ref` syntax. You must now always supply user (project)
   name and repo.
 
-- [`install_svn()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_svn()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   lets you install an R package from a subversion repository (assuming
   you have subversion installed).
 
 - `decompress()` and hence
-  [`install_url()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_url()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now work when the downloaded file decompresses without additional
   top-level directory
   ([\#537](https://github.com/r-lib/devtools/issues/537)).
@@ -2453,12 +2474,12 @@ Two dependencies were incremented:
 - `install_deps(deps = T)` no longer installs all dependencies of
   dependencies ([\#369](https://github.com/r-lib/devtools/issues/369)).
 
-- [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now prefers personal access tokens supplied to `auth_token` rather
   than passwords ([\#418](https://github.com/r-lib/devtools/issues/418),
   [@jeroenooms](https://github.com/jeroenooms)).
 
-- [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now defaults to `dependencies = TRUE` so you definitely get all the
   packages you need to build from source.
 
@@ -2504,7 +2525,7 @@ Two dependencies were incremented:
   [\#428](https://github.com/r-lib/devtools/issues/428))
 
 - Fixed bug in
-  [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   that prevented installing a pull request by supplying
   `repo = "username/repo#pull"`.
   ([\#388](https://github.com/r-lib/devtools/issues/388))
@@ -2513,7 +2534,7 @@ Two dependencies were incremented:
   request in `install_github`. (Thanks to Kirill Müller,
   [\#405](https://github.com/r-lib/devtools/issues/405))
 
-- [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now removes blank lines found in a package `DESCRIPTION` file,
   protecting users from the vague `error: contains a blank line` error.
   ([\#394](https://github.com/r-lib/devtools/issues/394))
@@ -2536,7 +2557,7 @@ CRAN release: 2013-11-27
 - [`source_gist()`](https://devtools.r-lib.org/dev/reference/source_gist.md)
   respects new github policy by sending user agent (hadley/devtools)
 
-- [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now takes repo names of the form
   `[username/]repo[/subdir][@ref|#pull]` - this is now the recommended
   form to specify username, subdir, ref and/or pull for install_github.
@@ -2559,21 +2580,21 @@ CRAN release: 2013-11-20
   can follow the usual process.
   ([\#344](https://github.com/r-lib/devtools/issues/344))
 
-- [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now takes repo names of the form `username/repo` - this is now the
   recommended form for install_github if your username is not hadley ;)
 
-- [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now adds details on the source of the installed package
   (e.g. repository, SHA1, etc.) to the package DESCRIPTION file. (Thanks
   to JJ Allaire)
 
 - Adjusted
-  [`install_version()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_version()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   to new meta data structure on CRAN. (Thanks to Kornelius Rohmeyer)
 
 - Fixed bug so that
-  [`install_version()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_version()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   works with version numbers that contain hyphens. (Thanks to Kornelius
   Rohmeyer)
 
@@ -2667,7 +2688,7 @@ CRAN release: 2013-07-04
 ### New features
 
 - New
-  [`install_local()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_local()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   function for installing local package files (as zip, tar, tgz, etc.)
   (Suggested by landroni)
 
@@ -2704,7 +2725,7 @@ CRAN release: 2013-07-04
 
 - The deprecated `show_rd()` function has now been removed.
 
-- [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   gains `auth_user` and `password` params so that you can install from
   private repos (thanks to Brian Bolt)
 
@@ -2915,7 +2936,7 @@ CRAN release: 2013-01-22
   from man/. This behavior can be set with the “devtools.cleandoc”
   option.
 
-- [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now always uses lowercase repo names. (Thanks to mnel)
 
 - New function `with_lib()`, which runs an expression code with a
@@ -2923,7 +2944,7 @@ CRAN release: 2013-01-22
   from `with_libpaths()`, which replaces the existing libpaths.
 
 - New function
-  [`install_git()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+  [`install_git()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   installs a package directly from a git repository. (Thanks to David
   Coallier)
 
@@ -2932,7 +2953,7 @@ CRAN release: 2013-01-22
   [`check()`](https://devtools.r-lib.org/dev/reference/check.md). (Fixes
   [\#173](https://github.com/r-lib/devtools/issues/173))
 
-- [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   now downloads from a new URL, to reflect changes on how files are
   hosted on GitHub.
 
@@ -2990,7 +3011,7 @@ CRAN release: 2013-01-22
 - `create` function makes it easier to create a package skeleton using
   devtools standards.
 
-- [`install_github()`](https://devtools.r-lib.org/dev/reference/remote-reexports.md)
+- [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   can now install from a pull request – it installs the branch
   referenced in the pull request.
 

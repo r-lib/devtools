@@ -21,11 +21,3 @@ to see their documentation.
 
   [`package_info`](https://sessioninfo.r-lib.org/reference/package_info.html),
   [`session_info`](https://sessioninfo.r-lib.org/reference/session_info.html)
-
-## Usage
-
-``` r
-github_pull(pull)
-
-github_release()
-```
