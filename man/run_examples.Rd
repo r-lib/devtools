@@ -2,7 +2,7 @@
 % Please edit documentation in R/run-examples.R
 \name{run_examples}
 \alias{run_examples}
-\title{Run all examples in a package.}
+\title{Run all examples in a package}
 \usage{
 run_examples(
   pkg = ".",

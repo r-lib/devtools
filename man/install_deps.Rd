@@ -3,7 +3,7 @@
 \name{install_deps}
 \alias{install_deps}
 \alias{install_dev_deps}
-\title{Install package dependencies if needed.}
+\title{Install package dependencies if needed}
 \usage{
 install_deps(
   pkg = ".",

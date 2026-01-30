@@ -2,7 +2,7 @@
 % Please edit documentation in R/release.R
 \name{release}
 \alias{release}
-\title{Release package to CRAN.}
+\title{Release package to CRAN}
 \usage{
 release(pkg = ".", check = FALSE, args = NULL)
 }
