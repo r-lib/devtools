@@ -1,17 +1,12 @@
-# Build package vignettes.
+# Build package vignettes
 
-Builds package vignettes using the same algorithm that `R CMD build`
-does. This means including non-Sweave vignettes, using makefiles (if
-present), and copying over extra files. The files are copied in the
-'doc' directory and an vignette index is created in 'Meta/vignette.rds',
-as they would be in a built package. 'doc' and 'Meta' are added to
-`.Rbuildignore`, so will not be included in the built package. These
-files can be checked into version control, so they can be viewed with
-[`browseVignettes()`](https://rdrr.io/r/utils/browseVignettes.html) and
-[`vignette()`](https://rdrr.io/r/utils/vignette.html) if the package has
-been loaded with
-[`load_all()`](https://devtools.r-lib.org/dev/reference/load_all.md)
-without needing to re-build them locally.
+**\[deprecated\]**
+
+`build_vignettes()` is deprecated because we no longer recommend that
+you build vignettes in this way, because it leaves build artifacts in
+your development directory. Instead, use
+[`pkgdown::build_article()`](https://pkgdown.r-lib.org/reference/build_articles.html)
+to render articles locally for preview and polishing.
 
 ## Usage
 
@@ -88,11 +83,3 @@ build_vignettes(
   If `TRUE`, move md intermediates as well as rendered outputs. Most
   useful when using the `keep_md` YAML option for Rmarkdown outputs. See
   <https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown>.
-
-## See also
-
-[`clean_vignettes()`](https://devtools.r-lib.org/dev/reference/clean_vignettes.md)
-to remove the pdfs in `doc` created from vignettes
-
-[`clean_vignettes()`](https://devtools.r-lib.org/dev/reference/clean_vignettes.md)
-to remove build tex/pdf files.

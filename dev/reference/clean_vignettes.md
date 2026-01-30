@@ -1,7 +1,10 @@
-# Clean built vignettes.
+# Clean built vignettes
 
-This uses a fairly rudimentary algorithm where any files in `doc` with a
-name that exists in `vignettes` are removed.
+**\[deprecated\]**
+
+`clean_vignettes()` is deprecated because
+[`build_vignettes()`](https://devtools.r-lib.org/dev/reference/build_vignettes.md)
+is deprecated.
 
 ## Usage
 

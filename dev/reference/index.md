@@ -20,9 +20,6 @@ Primary commands used when developing a package.
   Run
   [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html)
 
-- [`build_vignettes()`](https://devtools.r-lib.org/dev/reference/build_vignettes.md)
-  : Build package vignettes.
-
 - [`check()`](https://devtools.r-lib.org/dev/reference/check.md)
   [`check_built()`](https://devtools.r-lib.org/dev/reference/check.md) :
   Build and check a package
@@ -76,8 +73,6 @@ Primary commands used when developing a package.
 
 - [`bash()`](https://devtools.r-lib.org/dev/reference/bash.md) : Open
   bash shell in package directory.
-- [`clean_vignettes()`](https://devtools.r-lib.org/dev/reference/clean_vignettes.md)
-  : Clean built vignettes.
 - [`dev_sitrep()`](https://devtools.r-lib.org/dev/reference/dev_sitrep.md)
   : Report package development situation
 - [`github_pull()`](https://devtools.r-lib.org/dev/reference/reexports.md)
@@ -116,5 +111,9 @@ Primary commands used when developing a package.
 
 ## Deprecated functions
 
+- [`build_vignettes()`](https://devtools.r-lib.org/dev/reference/build_vignettes.md)
+  **\[deprecated\]** : Build package vignettes
+- [`clean_vignettes()`](https://devtools.r-lib.org/dev/reference/clean_vignettes.md)
+  **\[deprecated\]** : Clean built vignettes
 - [`release()`](https://devtools.r-lib.org/dev/reference/release.md)
   **\[deprecated\]** : Release package to CRAN.
