@@ -23,7 +23,7 @@ load_all <- function(
 
   save_all()
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   pkgload::load_all(
     path = path,

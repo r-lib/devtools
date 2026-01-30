@@ -19,7 +19,7 @@ check_mac_release <- function(
   quiet = FALSE,
   ...
 ) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   check_mac(
     pkg = pkg,
@@ -42,7 +42,7 @@ check_mac_devel <- function(
   quiet = FALSE,
   ...
 ) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   check_mac(
     pkg = pkg,
@@ -100,7 +100,7 @@ check_mac <- function(
 
   url <- "https://mac.r-project.org/macbuilder/v1/submit"
 
-  rlang::check_installed("httr")
+  check_installed("httr")
   body <- list(
     pkgfile = httr::upload_file(built_path),
     rflavor = tolower(version)

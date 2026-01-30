@@ -18,11 +18,11 @@ build_rmd <- function(
   ...,
   quiet = TRUE
 ) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   pkg <- as.package(path)
 
-  rlang::check_installed("rmarkdown")
+  check_installed("rmarkdown")
   save_all()
 
   paths <- files
