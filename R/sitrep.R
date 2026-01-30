@@ -118,7 +118,7 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
         remotes::dev_package_deps(pkg$path, dependencies = TRUE)
       },
       rstudio_version = if (is_rstudio_running()) rstudioapi::getVersion(),
-      rstudio_msg = check_for_rstudio_updates()
+      rstudio_msg = if (!is_positron()) check_for_rstudio_updates()
     ),
     class = "dev_sitrep"
   )
@@ -156,7 +156,7 @@ print.dev_sitrep <- function(x, ...) {
   }
 
   if (!is.null(x$rstudio_version)) {
-    hd_line("RStudio")
+    hd_line(if (is_positron()) "Positron" else "RStudio")
     kv_line("version", x$rstudio_version)
 
     if (!is.null(x$rstudio_msg)) {
