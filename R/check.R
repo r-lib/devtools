@@ -85,7 +85,7 @@ check <- function(
   document <- document %||% can_document(pkg$roxygennote)
   if (document) {
     if (!quiet) {
-      cat_rule("Documenting", col = "cyan", line = 2)
+      cli::cat_rule("Documenting", col = "cyan", line = 2)
     }
     document(pkg, quiet = quiet)
     if (!quiet) {
@@ -94,7 +94,7 @@ check <- function(
   }
 
   if (!quiet) {
-    cat_rule("Building", col = "cyan", line = 2)
+    cli::cat_rule("Building", col = "cyan", line = 2)
     show_env_vars(pkgbuild::compiler_flags(FALSE))
   }
 
@@ -222,7 +222,7 @@ check_built <- function(
 
   env_vars <- check_env_vars(cran, remote, incoming, force_suggests, env_vars)
   if (!quiet) {
-    cat_rule("Checking", col = "cyan", line = 2)
+    cli::cat_rule("Checking", col = "cyan", line = 2)
     show_env_vars(env_vars)
   }
 
@@ -271,7 +271,7 @@ aspell_env_var <- function() {
 
 show_env_vars <- function(env_vars) {
   cli::cat_line("Setting env vars:", col = "darkgrey")
-  cat_bullet(
+  cli::cat_bullet(
     paste0(format(names(env_vars)), ": ", unname(env_vars)),
     col = "darkgrey"
   )

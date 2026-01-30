@@ -211,7 +211,7 @@ print.dev_sitrep <- function(x, ...) {
 # Helpers -----------------------------------------------------------------
 
 hd_line <- function(name) {
-  cat_rule(cli::style_bold(name))
+  cli::cat_rule(cli::style_bold(name))
 }
 
 kv_line <- function(key, value, path = FALSE) {

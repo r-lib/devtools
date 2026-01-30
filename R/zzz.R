@@ -1,4 +1,3 @@
-#' @importFrom cli cat_rule cat_bullet
 #' @import fs
 NULL
 
