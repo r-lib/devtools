@@ -28,7 +28,6 @@ reference:
   - document
   - load_all
   - reload
-  - release
   - spell_check
   - test
 - title: Package Installation
@@ -53,6 +52,10 @@ reference:
   contents:
   - build_vignettes
   - clean_vignettes
+
+- title: Deprecated functions
+  contents:
+  - release
 
 news:
   releases:
