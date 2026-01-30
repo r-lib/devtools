@@ -31,7 +31,9 @@ test <- function(
   if (!uses_testthat(pkg)) {
     cli::cli_inform(c(i = "No testing infrastructure found."))
     if (!interactive()) {
-      ui_todo('Setup testing with {ui_code("usethis::use_testthat()")}.')
+      cli::cli_bullets(c(
+        "!" = 'Setup testing with {.code usethis::use_testthat()}.'
+      ))
       return(invisible())
     }
     if (yesno("Create it?")) {
