@@ -3,12 +3,12 @@
     Code
       print(x)
     Message
-      -- R -----------------------------------
+      -- R -------------------------------------------------------
       * version: 4.4.0
       * path: '/usr/lib/R'
-      -- devtools ----------------------------
+      -- devtools ------------------------------------------------
       * version: 2.4.6
-      -- dev package -------------------------
+      -- dev package ---------------------------------------------
       * package: <unset>
       * path: <unset>
       v All checks passed
@@ -18,13 +18,13 @@
     Code
       print(x)
     Message
-      -- R -----------------------------------
+      -- R -------------------------------------------------------
       * version: 4.3.0
       * path: '/usr/lib/R'
       ! R is out of date (4.3.0 vs 4.4.0)
-      -- devtools ----------------------------
+      -- devtools ------------------------------------------------
       * version: 2.4.6
-      -- dev package -------------------------
+      -- dev package ---------------------------------------------
       * package: <unset>
       * path: <unset>
 
@@ -33,17 +33,15 @@
     Code
       print(x)
     Message
-      -- R -----------------------------------
+      -- R -------------------------------------------------------
       * version: 4.4.0
       * path: '/usr/lib/R'
-      -- devtools ----------------------------
+      -- devtools ------------------------------------------------
       * version: 2.4.6
-      ! devtools or its dependencies out of
-        date:
+      ! devtools or its dependencies out of date:
         "cli"
-        Update them with
-        `devtools::update_packages("devtools")`
-      -- dev package -------------------------
+        Update them with `devtools::update_packages("devtools")`
+      -- dev package ---------------------------------------------
       * package: <unset>
       * path: <unset>
 
@@ -52,33 +50,32 @@
     Code
       print(x)
     Message
-      -- R -----------------------------------
+      -- R -------------------------------------------------------
       * version: 4.4.0
       * path: '/usr/lib/R'
-      -- devtools ----------------------------
+      -- devtools ------------------------------------------------
       * version: 2.4.6
-      -- dev package -------------------------
+      -- dev package ---------------------------------------------
       * package: "mypkg"
       * path: '/tmp/mypkg'
       ! mypkg dependencies out of date:
         "dplyr" and "tidyr"
-        Update them with
-        `devtools::install_dev_deps()`
+        Update them with `devtools::install_dev_deps()`
 
 # print shows RStudio update message
 
     Code
       print(x)
     Message
-      -- R -----------------------------------
+      -- R -------------------------------------------------------
       * version: 4.4.0
       * path: '/usr/lib/R'
-      -- RStudio -----------------------------
+      -- RStudio -------------------------------------------------
       * version: "2024.04.0"
       ! RStudio is out of date.
-      -- devtools ----------------------------
+      -- devtools ------------------------------------------------
       * version: 2.4.6
-      -- dev package -------------------------
+      -- dev package ---------------------------------------------
       * package: <unset>
       * path: <unset>
 

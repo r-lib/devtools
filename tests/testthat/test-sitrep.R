@@ -1,5 +1,5 @@
 test_that("print shows all checks passed", {
-  local_reproducible_output(width = 40)
+  local_reproducible_output(width = 60)
   x <- new_dev_sitrep(
     r_version = R_system_version("4.4.0"),
     r_path = "/usr/lib/R",
@@ -9,7 +9,7 @@ test_that("print shows all checks passed", {
 })
 
 test_that("print warns when R is out of date", {
-  local_reproducible_output(width = 40)
+  local_reproducible_output(width = 60)
   x <- new_dev_sitrep(
     r_version = R_system_version("4.3.0"),
     r_path = "/usr/lib/R",
@@ -20,7 +20,7 @@ test_that("print warns when R is out of date", {
 })
 
 test_that("print warns about outdated devtools deps", {
-  local_reproducible_output(width = 40)
+  local_reproducible_output(width = 60)
   x <- new_dev_sitrep(
     r_version = R_system_version("4.4.0"),
     r_path = "/usr/lib/R",
@@ -31,7 +31,7 @@ test_that("print warns about outdated devtools deps", {
 })
 
 test_that("print warns about outdated package deps", {
-  local_reproducible_output(width = 40)
+  local_reproducible_output(width = 60)
   x <- new_dev_sitrep(
     r_version = R_system_version("4.4.0"),
     r_path = "/usr/lib/R",
@@ -43,7 +43,7 @@ test_that("print warns about outdated package deps", {
 })
 
 test_that("print shows RStudio update message", {
-  local_reproducible_output(width = 40)
+  local_reproducible_output(width = 60)
   withr::local_envvar(POSITRON = "")
   x <- new_dev_sitrep(
     r_version = R_system_version("4.4.0"),
