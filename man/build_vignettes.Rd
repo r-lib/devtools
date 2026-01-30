@@ -61,8 +61,8 @@ outputs. See
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 \code{build_vignettes()} is deprecated because we no longer recommend that you
-build and check in vignettes. Instead, use \code{pkgdown::build_article()} to
-render articles locally for polishing and rely on GitHub Actions or similar
-to build your pkgdown site.
+build vignettes in this way, because it leaves build artifacts in your
+development directory. Instead, use \code{\link[pkgdown:build_articles]{pkgdown::build_article()}} to
+render articles locally for preview and polishing.
 }
 \keyword{internal}

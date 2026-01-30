@@ -4,7 +4,8 @@
 #' `r lifecycle::badge("deprecated")`
 #'
 #' `build_vignettes()` is deprecated because we no longer recommend that you
-#' build and check in vignettes. Instead, use `pkgdown::build_article()` to
+#' build vignettes in this way, because it leaves build artifacts in your
+#' development directory. Instead, use [pkgdown::build_article()] to
 #' render articles locally for preview and polishing.
 #'
 #' @template devtools
