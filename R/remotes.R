@@ -1,6 +1,3 @@
-#' @importFrom ellipsis check_dots_used
-NULL
-
 #' Deprecated package installation functions
 #'
 #' @description
