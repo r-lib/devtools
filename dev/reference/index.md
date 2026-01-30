@@ -1,6 +1,6 @@
 # Package index
 
-## Package Development
+## Package development
 
 Primary commands used when developing a package.
 
@@ -59,7 +59,7 @@ Primary commands used when developing a package.
   [`test_coverage_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
   : Execute testthat tests in a package
 
-## Package Installation
+## Package installation
 
 - [`install()`](https://devtools.r-lib.org/dev/reference/install.md) :
   Install a local development package.
