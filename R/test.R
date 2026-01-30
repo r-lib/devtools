@@ -54,13 +54,6 @@ test <- function(
   )
 }
 
-#' @rdname devtools-deprecated
-#' @export
-test_file <- function(file = find_active_file(), ...) {
-  lifecycle::deprecate_soft("2.4.0", "test_file()", "test_active_file()")
-  test_active_file(file, ...)
-}
-
 #' @export
 #' @rdname test
 test_active_file <- function(file = find_active_file(), ...) {
@@ -113,17 +106,6 @@ test_coverage <- function(pkg = ".", show_report = interactive(), ...) {
   }
 
   invisible(coverage)
-}
-
-#' @rdname devtools-deprecated
-#' @export
-test_coverage_file <- function(file = find_active_file(), ...) {
-  lifecycle::deprecate_soft(
-    "2.4.0",
-    "test_coverage()",
-    "test_coverage_active_file()"
-  )
-  test_coverage_active_file(file, ...)
 }
 
 #' @rdname test
@@ -204,4 +186,29 @@ uses_testthat <- function(pkg = ".") {
   )
 
   any(dir_exists(paths))
+}
+
+
+#' Deprecated functions
+#'
+#' These functions are Deprecated in this release of devtools, they will be
+#' marked as Defunct and removed in a future version.
+#' @name devtools-deprecated
+#' @keywords internal
+NULL
+
+#' @rdname devtools-deprecated
+#' @export
+test_file <- function(file = find_active_file(), ...) {
+  lifecycle::deprecate_stop("2.4.0", "test_file()", "test_active_file()")
+}
+
+#' @rdname devtools-deprecated
+#' @export
+test_coverage_file <- function(file = find_active_file(), ...) {
+  lifecycle::deprecate_stop(
+    "2.4.0",
+    "test_coverage_file()",
+    "test_coverage_active_file()"
+  )
 }
