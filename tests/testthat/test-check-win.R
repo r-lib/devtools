@@ -14,3 +14,13 @@ test_that("change_maintainer_email checks fields", {
   desc$write(path)
   expect_snapshot(change_maintainer_email(path, "x@example.com"), error = TRUE)
 })
+
+test_that("email confirmation gives useful advice", {
+  withr::local_options(rlang_interactive = TRUE)
+  local_mocked_bindings(yesno = function(msg) {
+    cli::cli_inform(msg, .envir = parent.frame())
+    TRUE
+  })
+
+  expect_snapshot(confirm_maintainer_email("hadley@posit.co"), error = TRUE)
+})

@@ -41,6 +41,19 @@ is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }
 
+is_positron <- function() {
+  Sys.getenv("POSITRON") == "1"
+}
+
 is_rstudio_running <- function() {
   !is_testing() && rstudioapi::isAvailable()
+}
+
+# Suppress cli wrapping
+no_wrap <- function(x) {
+  x <- gsub("{", "{{", x, fixed = TRUE)
+  x <- gsub("}", "}}", x, fixed = TRUE)
+  x <- gsub(" ", "\u00a0", x, fixed = TRUE)
+  x <- gsub("\n", "\f", x, fixed = TRUE)
+  x
 }
