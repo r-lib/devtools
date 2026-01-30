@@ -244,7 +244,8 @@ Primary commands used when developing a package.
 - [`build_site()`](https://devtools.r-lib.org/dev/reference/build_site.md)
   :
 
-  Execute pkgdown build_site in a package
+  Run
+  [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html)
 
 - [`build_vignettes()`](https://devtools.r-lib.org/dev/reference/build_vignettes.md)
   : Build package vignettes.

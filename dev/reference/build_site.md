@@ -1,26 +1,23 @@
-# Execute pkgdown build_site in a package
+# Run `pkgdown::build_site()`
 
-`build_site()` is a shortcut for
+This is a thin wrapper around
 [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html),
-it generates the static HTML documentation.
+used for generating static HTML documentation. Learn more at
+<https://pkgdown.r-lib.org>.
 
 ## Usage
 
 ``` r
-build_site(path = ".", quiet = TRUE, ...)
+build_site(path = ".", ...)
 ```
 
 ## Arguments
 
 - path:
 
-  path to the package to build the static HTML.
-
-- quiet:
-
-  If `TRUE`, suppress output.
+  Path to the package to build the static HTML.
 
 - ...:
 
-  additional arguments passed to
-  [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html)
+  Additional arguments passed to
+  [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html).

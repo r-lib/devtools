@@ -5,6 +5,11 @@
 - [`build_manual()`](https://devtools.r-lib.org/dev/reference/build_manual.md)
   reports more details on failure
   ([\#2586](https://github.com/r-lib/devtools/issues/2586)).
+- [`build_site()`](https://devtools.r-lib.org/dev/reference/build_site.md)
+  now just calls
+  [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html),
+  meaning that you will get more (informative) output by default
+  ([\#2578](https://github.com/r-lib/devtools/issues/2578)).
 - New
   [`check_mac_devel()`](https://devtools.r-lib.org/dev/reference/check_mac_release.md)
   function to check a package using the macOS builder at
