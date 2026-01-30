@@ -21,9 +21,12 @@ line arguments to be passed to \verb{R CMD build}.}
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 \code{release()} is deprecated in favour of \code{\link[usethis:use_release_issue]{usethis::use_release_issue()}}.
-We no longer feel confident recommrding \code{release()} because we don't use it
+We no longer feel confident recommending \code{release()} because we don't use it
 ourselves, so there's no guarantee that it will track best practices as
 they evolve over time.
+
+If you want to programmatical submit to CRAN, you can continue to use
+\code{\link[=submit_cran]{submit_cran()}}.
 }
 \seealso{
 \code{\link[usethis:use_release_issue]{usethis::use_release_issue()}} to create a checklist of release
