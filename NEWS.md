@@ -1,6 +1,7 @@
 # devtools (development version)
 
 * `build_manual()` reports more details on failure (#2586).
+* `build_vignettes()` and `clean_vignettes()` are now deprecated. We no longer recommend building vignettes in this way; instead use `pkgdown::build_article()` to render articles locally (#2488).
 * `build_site()` now just calls `pkgdown::build_site()`, meaning that you will get more (informative) output by default (#2578).
 * New `check_mac_devel()` function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (@nfrerebeau, #2507)
 * `dev_sitrep()` now works correctly in Positron (#2618).

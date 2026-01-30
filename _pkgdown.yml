@@ -19,7 +19,9 @@ reference:
   desc: Primary commands used when developing a package.
   contents:
   - build
-  - starts_with("build_")
+  - build_manual
+  - build_rmd
+  - build_site
   - starts_with("check_")
   - check
   - create
@@ -35,7 +37,6 @@ reference:
 - title: Utilities
   contents:
   - bash
-  - clean_vignettes
   - dev_sitrep
   - github_pull
   - lint
@@ -47,9 +48,10 @@ reference:
   - update_packages
   - wd
   - save_all
-
 - title: Deprecated functions
   contents:
+  - build_vignettes
+  - clean_vignettes
   - release
 
 news:
