@@ -1,10 +1,14 @@
 # devtools (development version)
 
 * `build_manual()` reports more details on failure (#2586).
+* `build_vignettes()` and `clean_vignettes()` are now deprecated. We no longer recommend building vignettes in this way; instead use `pkgdown::build_article()` to render articles locally (#2488).
+* `build_site()` now just calls `pkgdown::build_site()`, meaning that you will get more (informative) output by default (#2578).
 * New `check_mac_devel()` function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (@nfrerebeau, #2507)
+* `dev_sitrep()` now works correctly in Positron (#2618).
 * `is_loading()` is now re-exported from pkgload (#2556).
 * Package installation functions are now deprecated: `install_bioc()`, `install_bitbucket()`, `install_cran()`, `install_deps()`, `install_dev()`, `install_dev_deps()`, `install_git()`, `install_github()`, `install_gitlab()`, `install_local()`, `install_svn()`, `install_url()`, `install_version()`, `update_packages()`, `dev_package_deps()`, `github_pull()`, and `github_release()`. We now recommend pak for general package installation. See `?install-deprecated` for migration guidance.
 * `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
+* `release()` is deprecated in favour of `usethis::use_release_issue()`.
 * `show_news()` now looks for NEWS files in the same locations as `utils::news()`: `inst/NEWS.Rd`, `NEWS.md`, `NEWS`, and `inst/NEWS` (@arcresu, #2499).
 
 # devtools 2.4.6

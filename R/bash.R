@@ -1,4 +1,4 @@
-#' Open bash shell in package directory.
+#' Open bash shell in package directory
 #'
 #' @template devtools
 #' @export

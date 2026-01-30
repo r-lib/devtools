@@ -1,4 +1,4 @@
-#' Install a local development package.
+#' Install a local development package
 #'
 #' Uses `R CMD INSTALL` to install the package. Will also try to install
 #' dependencies of the package from CRAN, if they're not already installed.

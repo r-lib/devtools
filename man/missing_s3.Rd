@@ -2,7 +2,7 @@
 % Please edit documentation in R/missing-s3.R
 \name{missing_s3}
 \alias{missing_s3}
-\title{Find missing s3 exports.}
+\title{Find missing s3 exports}
 \usage{
 missing_s3(pkg = ".")
 }

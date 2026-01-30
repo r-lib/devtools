@@ -1,4 +1,4 @@
-#' Reverse dependency tools.
+#' Reverse dependency tools
 #'
 #' Tools to check and notify maintainers of all CRAN and Bioconductor
 #' packages that depend on the specified package.

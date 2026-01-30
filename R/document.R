@@ -1,4 +1,4 @@
-#' Use roxygen to document a package.
+#' Use roxygen to document a package
 #'
 #' This function is a wrapper for the [roxygen2::roxygenize()]
 #' function from the roxygen2 package. See the documentation and vignettes of

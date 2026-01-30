@@ -1,4 +1,4 @@
-#' Find missing s3 exports.
+#' Find missing s3 exports
 #'
 #' The method is heuristic - looking for objs with a period in their name.
 #'

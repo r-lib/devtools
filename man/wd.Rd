@@ -2,7 +2,7 @@
 % Please edit documentation in R/wd.R
 \name{wd}
 \alias{wd}
-\title{Set working directory.}
+\title{Set working directory}
 \usage{
 wd(pkg = ".", path = "")
 }
@@ -14,5 +14,5 @@ package object.  See \code{\link[=as.package]{as.package()}} for more informatio
 to package directory.}
 }
 \description{
-Set working directory.
+Set working directory
 }

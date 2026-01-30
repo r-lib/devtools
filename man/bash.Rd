@@ -2,7 +2,7 @@
 % Please edit documentation in R/bash.R
 \name{bash}
 \alias{bash}
-\title{Open bash shell in package directory.}
+\title{Open bash shell in package directory}
 \usage{
 bash(pkg = ".")
 }
@@ -11,5 +11,5 @@ bash(pkg = ".")
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 }
 \description{
-Open bash shell in package directory.
+Open bash shell in package directory
 }

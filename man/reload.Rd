@@ -2,7 +2,7 @@
 % Please edit documentation in R/reload.R
 \name{reload}
 \alias{reload}
-\title{Unload and reload package.}
+\title{Unload and reload package}
 \usage{
 reload(pkg = ".", quiet = FALSE)
 }

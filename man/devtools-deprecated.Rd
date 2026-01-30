@@ -4,7 +4,7 @@
 \alias{test_file}
 \alias{test_coverage_file}
 \alias{devtools-deprecated}
-\title{Deprecated Functions}
+\title{Deprecated functions}
 \usage{
 test_file(file = find_active_file(), ...)
 
