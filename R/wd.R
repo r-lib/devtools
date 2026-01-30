@@ -1,4 +1,4 @@
-#' Set working directory.
+#' Set working directory
 #'
 #' @template devtools
 #' @param path path within package. Leave empty to change working directory
