@@ -1,6 +1,7 @@
 test_that("check_for_rstudio_updates", {
   skip_if_offline()
   skip_on_cran()
+  withr::local_envvar(POSITRON = "")
 
   # the IDE ends up calling this with `os = "mac"` on macOS, but we would send
   # "darwin" in that case, so I test with "darwin"
