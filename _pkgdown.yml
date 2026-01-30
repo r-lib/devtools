@@ -48,13 +48,10 @@ reference:
   - update_packages
   - wd
   - save_all
-- title: Deprecated
+- title: Deprecated functions
   contents:
   - build_vignettes
   - clean_vignettes
-
-- title: Deprecated functions
-  contents:
   - release
 
 news:
