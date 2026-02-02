@@ -35,11 +35,8 @@ Imports:
     roxygen2 (>= 7.3.3),
     rversions (>= 2.1.2),
     sessioninfo (>= 1.2.3),
-    stats,
     testthat (>= 3.2.3),
-    tools,
     urlchecker (>= 1.0.1),
-    utils,
     withr (>= 3.0.2)
 Suggests:
     BiocManager (>= 1.30.18),
