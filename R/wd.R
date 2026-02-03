@@ -4,6 +4,7 @@
 #' `r lifecycle::badge("deprecated")`
 #'
 #' `wd()` is deprecated because we no longer use or recommend this workflow.
+#' Set working directory
 #'
 #' @template devtools
 #' @param path path within package. Leave empty to change working directory

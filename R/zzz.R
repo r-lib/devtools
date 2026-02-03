@@ -1,11 +1,7 @@
-#' @importFrom utils available.packages contrib.url install.packages
-#'   installed.packages modifyList packageDescription
-#'   packageVersion remove.packages
-#' @importFrom cli cat_rule cat_bullet
 #' @import fs
 NULL
 
-#' Deprecated Functions
+#' Deprecated functions
 #'
 #' These functions are Deprecated in this release of devtools, they will be
 #' marked as Defunct and removed in a future version.

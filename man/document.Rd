@@ -2,7 +2,7 @@
 % Please edit documentation in R/document.R
 \name{document}
 \alias{document}
-\title{Use roxygen to document a package.}
+\title{Use roxygen to document a package}
 \usage{
 document(pkg = ".", roclets = NULL, quiet = FALSE)
 }

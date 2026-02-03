@@ -15,42 +15,49 @@ development:
   mode: auto
 
 reference:
-- title: Package Development
+- title: Package development
   desc: Primary commands used when developing a package.
   contents:
   - build
-  - starts_with("build_")
+  - build_manual
+  - build_rmd
+  - build_site
   - starts_with("check_")
   - check
   - document
   - load_all
-  - release
   - spell_check
   - test
-- title: Package Installation
+
+- title: Package installation
   contents:
-  - starts_with("install")
+  - install
   - uninstall
+
 - title: Utilities
   contents:
-  - clean_vignettes
   - dev_sitrep
-  - github_pull
   - lint
   - run_examples
   - session_info
   - starts_with("source_")
-  - update_packages
   - save_all
+
 - title: Deprecated
   contents:
   - bash
+  - build_vignettes
+  - clean_vignettes
   - create
   - dev_mode
+  - install-deprecated
+  - install_deps
   - missing_s3
   - reload
+  - release
   - show_news
   - wd
+  - devtools-deprecated
 
 news:
   releases:

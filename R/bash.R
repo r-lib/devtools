@@ -4,6 +4,7 @@
 #' `r lifecycle::badge("deprecated")`
 #'
 #' `bash()` is deprecated because we no longer use or recommend this workflow.
+#' Open bash shell in package directory
 #'
 #' @template devtools
 #' @export
