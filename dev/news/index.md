@@ -2,6 +2,17 @@
 
 ## devtools (development version)
 
+- [`bash()`](https://devtools.r-lib.org/dev/reference/bash.md),
+  [`create()`](https://devtools.r-lib.org/dev/reference/create.md),
+  [`missing_s3()`](https://devtools.r-lib.org/dev/reference/missing_s3.md),
+  [`reload()`](https://devtools.r-lib.org/dev/reference/reload.md),
+  [`show_news()`](https://devtools.r-lib.org/dev/reference/show_news.md),
+  and [`wd()`](https://devtools.r-lib.org/dev/reference/wd.md) are now
+  deprecated. These functions are all historical parts of our workflow
+  that we no longer use or recommend.
+  [`create()`](https://devtools.r-lib.org/dev/reference/create.md) is
+  superseded by
+  [`usethis::create_package()`](https://usethis.r-lib.org/reference/create_package.html).
 - [`build_manual()`](https://devtools.r-lib.org/dev/reference/build_manual.md)
   reports more details on failure
   ([\#2586](https://github.com/r-lib/devtools/issues/2586)).

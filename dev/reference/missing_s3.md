@@ -1,6 +1,11 @@
 # Find missing s3 exports
 
-The method is heuristic - looking for objs with a period in their name.
+**\[deprecated\]**
+
+`missing_s3()` is deprecated because roxygen2 now provides the same
+functionality. Run
+[`devtools::document()`](https://devtools.r-lib.org/dev/reference/document.md)
+and look for `"Missing documentation for S3 method"` warnings.
 
 ## Usage
 

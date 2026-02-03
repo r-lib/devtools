@@ -51,6 +51,8 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="devtools-development-version">devtools (development version)<a class="anchor" aria-label="anchor" href="#devtools-development-version"></a></h2>
 <ul><li>
+<code><a href="../reference/bash.html">bash()</a></code>, <code><a href="../reference/create.html">create()</a></code>, <code><a href="../reference/missing_s3.html">missing_s3()</a></code>, <code><a href="../reference/reload.html">reload()</a></code>, <code><a href="../reference/show_news.html">show_news()</a></code>, and <code><a href="../reference/wd.html">wd()</a></code> are now deprecated. These functions are all historical parts of our workflow that we no longer use or recommend. <code><a href="../reference/create.html">create()</a></code> is superseded by <code><a href="https://usethis.r-lib.org/reference/create_package.html" class="external-link">usethis::create_package()</a></code>.</li>
+<li>
 <code><a href="../reference/build_manual.html">build_manual()</a></code> reports more details on failure (<a href="https://github.com/r-lib/devtools/issues/2586" class="external-link">#2586</a>).</li>
 <li>
 <code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> and <code><a href="../reference/clean_vignettes.html">clean_vignettes()</a></code> are now deprecated. We no longer recommend building vignettes in this way; instead use <code><a href="https://pkgdown.r-lib.org/reference/build_articles.html" class="external-link">pkgdown::build_article()</a></code> to render articles locally (<a href="https://github.com/r-lib/devtools/issues/2488" class="external-link">#2488</a>).</li>

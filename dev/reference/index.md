@@ -38,17 +38,11 @@ Primary commands used when developing a package.
   [`check_win_oldrelease()`](https://devtools.r-lib.org/dev/reference/check_win.md)
   : Check a package on Windows
 
-- [`create()`](https://devtools.r-lib.org/dev/reference/create.md) :
-  Create a package
-
 - [`document()`](https://devtools.r-lib.org/dev/reference/document.md) :
   Use roxygen to document a package
 
 - [`load_all()`](https://devtools.r-lib.org/dev/reference/load_all.md) :
   Load complete package
-
-- [`reload()`](https://devtools.r-lib.org/dev/reference/reload.md) :
-  Unload and reload package
 
 - [`spell_check()`](https://devtools.r-lib.org/dev/reference/spell_check.md)
   : Spell checking
@@ -68,14 +62,10 @@ Primary commands used when developing a package.
 
 ## Utilities
 
-- [`bash()`](https://devtools.r-lib.org/dev/reference/bash.md) : Open
-  bash shell in package directory
 - [`dev_sitrep()`](https://devtools.r-lib.org/dev/reference/dev_sitrep.md)
   : Report package development situation
 - [`lint()`](https://devtools.r-lib.org/dev/reference/lint.md) : Lint
   all source files in a package
-- [`missing_s3()`](https://devtools.r-lib.org/dev/reference/missing_s3.md)
-  : Find missing s3 exports
 - [`run_examples()`](https://devtools.r-lib.org/dev/reference/run_examples.md)
   : Run all examples in a package
 - [`reexports`](https://devtools.r-lib.org/dev/reference/reexports.md)
@@ -90,25 +80,25 @@ Primary commands used when developing a package.
   [`session_info`](https://devtools.r-lib.org/dev/reference/reexports.md)
   [`package_info`](https://devtools.r-lib.org/dev/reference/reexports.md)
   : Objects exported from other packages
-- [`show_news()`](https://devtools.r-lib.org/dev/reference/show_news.md)
-  : Show package news
 - [`source_gist()`](https://devtools.r-lib.org/dev/reference/source_gist.md)
   : Run a script on gist
 - [`source_url()`](https://devtools.r-lib.org/dev/reference/source_url.md)
   : Run a script through some protocols such as http, https, ftp, etc
-- [`wd()`](https://devtools.r-lib.org/dev/reference/wd.md) : Set working
-  directory
 - [`save_all()`](https://devtools.r-lib.org/dev/reference/save_all.md) :
   Save all documents in an active IDE session
 
 ## Deprecated
 
+- [`bash()`](https://devtools.r-lib.org/dev/reference/bash.md)
+  **\[deprecated\]** : Open bash shell in package directory
 - [`build_vignettes()`](https://devtools.r-lib.org/dev/reference/build_vignettes.md)
   **\[deprecated\]** : Build package vignettes
 - [`clean_vignettes()`](https://devtools.r-lib.org/dev/reference/clean_vignettes.md)
   **\[deprecated\]** : Clean built vignettes
-- [`release()`](https://devtools.r-lib.org/dev/reference/release.md)
-  **\[deprecated\]** : Release package to CRAN
+- [`create()`](https://devtools.r-lib.org/dev/reference/create.md)
+  **\[deprecated\]** : Create a package
+- [`dev_mode()`](https://devtools.r-lib.org/dev/reference/dev_mode.md)
+  **\[deprecated\]** : Activate and deactivate development mode
 - [`install_bioc()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
   [`install_cran()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
@@ -128,6 +118,16 @@ Primary commands used when developing a package.
 - [`install_deps()`](https://devtools.r-lib.org/dev/reference/install_deps.md)
   [`install_dev_deps()`](https://devtools.r-lib.org/dev/reference/install_deps.md)
   **\[deprecated\]** : Install package dependencies if needed
+- [`missing_s3()`](https://devtools.r-lib.org/dev/reference/missing_s3.md)
+  **\[deprecated\]** : Find missing s3 exports
+- [`reload()`](https://devtools.r-lib.org/dev/reference/reload.md)
+  **\[deprecated\]** : Unload and reload package
+- [`release()`](https://devtools.r-lib.org/dev/reference/release.md)
+  **\[deprecated\]** : Release package to CRAN
+- [`show_news()`](https://devtools.r-lib.org/dev/reference/show_news.md)
+  **\[deprecated\]** : Show package news
+- [`wd()`](https://devtools.r-lib.org/dev/reference/wd.md)
+  **\[deprecated\]** : Set working directory
 - [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
   [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
   : Deprecated functions

@@ -1,6 +1,9 @@
 # Set working directory
 
-Set working directory
+**\[deprecated\]**
+
+`wd()` is deprecated because we no longer use or recommend this
+workflow. Set working directory
 
 ## Usage
 

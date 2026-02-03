@@ -1,6 +1,9 @@
 # Show package news
 
-Show package news
+**\[deprecated\]**
+
+`show_news()` is deprecated because we no longer use or recommend this
+workflow.
 
 ## Usage
 

@@ -1,6 +1,10 @@
 # Create a package
 
-Create a package
+**\[deprecated\]**
+
+`create()` is deprecated. Please use
+[`usethis::create_package()`](https://usethis.r-lib.org/reference/create_package.html)
+directly instead.
 
 ## Usage
 
