@@ -10,6 +10,7 @@
 * `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
 * `release()` is deprecated in favour of `usethis::use_release_issue()`.
 * `show_news()` now looks for NEWS files in the same locations as `utils::news()`: `inst/NEWS.Rd`, `NEWS.md`, `NEWS`, and `inst/NEWS` (@arcresu, #2499).
+* `test_active_file()` now works when the active file is a snapshot file.
 
 # devtools 2.4.6
 
