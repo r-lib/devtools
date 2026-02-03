@@ -7,11 +7,11 @@
 #' @keywords internal
 git_checks <- function(pkg = ".") {
   pkg <- as.package(pkg)
-  cat_rule(paste0("Running Git checks for ", pkg$package))
+  cli::cat_rule(paste0("Running Git checks for ", pkg$package))
 
   git_report_branch(pkg)
   git_check_uncommitted(pkg)
-  cat_rule()
+  cli::cat_rule()
 }
 
 git_report_branch <- function(pkg) {
