@@ -1,14 +1,6 @@
 #' @import fs
 NULL
 
-#' Deprecated functions
-#'
-#' These functions are Deprecated in this release of devtools, they will be
-#' marked as Defunct and removed in a future version.
-#' @name devtools-deprecated
-#' @keywords internal
-NULL
-
 devtools_default_options <- list(
   devtools.path = "~/R-dev",
   devtools.install.args = "",
