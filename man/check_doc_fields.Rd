@@ -17,8 +17,9 @@ A named list of character vectors, one for each field, containing
 the names of Rd files missing that field. Returned invisibly.
 }
 \description{
-Checks all Rd files in \verb{man/} for missing \verb{\\value} and \verb{\\examples} sections.
-These are commonly flagged by CRAN, particularly for initial submissions.
+Checks all Rd files in \verb{man/} and looks for any that have a \verb{\\usage} section
+(i.e. a function) but that \emph{don't} have \verb{\\value} and \verb{\\examples} sections.
+These missing fields are flagged by CRAN on initial submission.
 }
 \examples{
 \dontrun{

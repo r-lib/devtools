@@ -3,11 +3,11 @@ test_that("check_doc_fields output - missing fields", {
   dir.create(file.path(pkg, "man"))
 
   writeLines(
-    "\\name{foo}\\title{Foo}\\description{A function.}\\examples{foo()}",
+    "\\name{foo}\\title{Foo}\\usage{foo()}\\description{A function.}\\examples{foo()}",
     file.path(pkg, "man", "foo.Rd")
   )
   writeLines(
-    "\\name{bar}\\title{Bar}\\description{A function.}\\value{Something.}",
+    "\\name{bar}\\title{Bar}\\usage{foo()}\\description{A function.}\\value{Something.}",
     file.path(pkg, "man", "bar.Rd")
   )
 
@@ -19,7 +19,7 @@ test_that("check_doc_fields output - all present", {
   dir.create(file.path(pkg, "man"))
 
   writeLines(
-    "\\name{foo}\\title{Foo}\\description{A function.}\\value{A value.}\\examples{foo()}",
+    "\\name{foo}\\title{Foo}\\usage{foo()}\\description{A function.}\\value{A value.}\\examples{foo()}",
     file.path(pkg, "man", "foo.Rd")
   )
 
