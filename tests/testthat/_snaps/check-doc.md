@@ -13,8 +13,8 @@
     Code
       check_doc_fields(pkg)
     Message
-      v All Rd files have `\value` sections.
-      v All Rd files have `\examples` sections.
+      v All Rd files have a `\value` section.
+      v All Rd files have a `\examples` section.
 
 # check_man works
 

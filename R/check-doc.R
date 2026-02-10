@@ -101,7 +101,7 @@ check_doc_fields <- function(pkg = ".", fields = c("value", "examples")) {
         stats::setNames(missing, rep("*", length(missing)))
       ))
     } else {
-      cli::cli_inform(c("v" = "All Rd files have {.code \\{field}} sections."))
+      cli::cli_inform(c("v" = "All Rd files have a {.code \\{field}} section."))
     }
   }
 
