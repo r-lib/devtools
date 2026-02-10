@@ -24,10 +24,8 @@ reference:
   - build_site
   - starts_with("check_")
   - check
-  - create
   - document
   - load_all
-  - reload
   - spell_check
   - test
 
@@ -38,25 +36,28 @@ reference:
 
 - title: Utilities
   contents:
-  - bash
   - dev_sitrep
   - lint
-  - missing_s3
   - run_examples
   - session_info
-  - show_news
   - starts_with("source_")
-  - wd
   - save_all
-  
+
 - title: Deprecated
   contents:
+  - bash
   - build_vignettes
   - clean_vignettes
-  - release
+  - create
+  - dev_mode
   - install-deprecated
   - install_deps
-  - devtools-deprecated
+  - missing_s3
+  - reload
+  - release
+  - show_news
+  - wd
+  - devtools-defunct
 
 news:
   releases:

@@ -62,3 +62,54 @@ man_message <- function(x) {
     FALSE
   }
 }
+
+#' Check for missing documentation fields
+#'
+#' Checks all Rd files in `man/` and looks for any that have a `\usage` section
+#' (i.e. a function) but that *don't* have `\value` and `\examples` sections.
+#' These missing fields are flagged by CRAN on initial submission.
+#'
+#' @template devtools
+#' @param fields A character vector of Rd field names to check for.
+#' @returns A named list of character vectors, one for each field, containing
+#'   the names of Rd files missing that field. Returned invisibly.
+#' @export
+#' @examples
+#' \dontrun{
+#' check_doc_fields(".")
+#' }
+check_doc_fields <- function(pkg = ".", fields = c("value", "examples")) {
+  pkg <- as.package(pkg)
+  fields <- stats::setNames(fields, fields)
+
+  paths <- dir_ls(path(pkg$path, "man"), regexp = "\\.Rd$")
+  names(paths) <- path_rel(paths, pkg$path)
+  rd <- lapply(paths, tools::parse_Rd, permissive = TRUE)
+  rd_tags <- lapply(rd, \(x) unlist(lapply(x, attr, "Rd_tag")))
+
+  has_tag <- function(tags, this) {
+    any(paste0("\\", this) %in% tags)
+  }
+
+  has_usage <- vapply(rd_tags, has_tag, logical(1), this = "usage")
+  rd_tags <- rd_tags[has_usage]
+
+  results <- lapply(fields, function(field) {
+    missing <- !vapply(rd_tags, has_tag, logical(1), this = field)
+    names(rd_tags)[missing]
+  })
+
+  for (field in fields) {
+    missing <- results[[field]]
+    if (length(missing) > 0) {
+      cli::cli_inform(c(
+        "!" = "Missing {.code \\{field}} section in {length(missing)} file{?s}:",
+        stats::setNames(missing, rep("*", length(missing)))
+      ))
+    } else {
+      cli::cli_inform(c("v" = "All Rd files have a {.code \\{field}} section."))
+    }
+  }
+
+  invisible(results)
+}

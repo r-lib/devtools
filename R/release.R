@@ -40,7 +40,7 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
   }
 
   if (check) {
-    cat_rule(
+    cli::cat_rule(
       left = "Building and checking",
       right = pkg$package,
       line = 2
@@ -74,9 +74,9 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
     if (show_cran_check) {
       if (!is.null(cran_details)) {
         end_sentence <- "\n shown above?"
-        cat_rule(paste0("Details of the CRAN check results for ", pkg$package))
+        cli::cat_rule(paste0("Details of the CRAN check results for ", pkg$package))
         summary(cran_details)
-        cat_rule()
+        cli::cat_rule()
       }
       cran_url <- paste0(
         cran_mirror(),
@@ -385,7 +385,7 @@ cran_mirror <- function(repos = getOption("repos")) {
 # Return the version of a package on CRAN (or other repository)
 # @param package The name of the package.
 # @param available A matrix of information about packages.
-cran_pkg_version <- function(package, available = available.packages()) {
+cran_pkg_version <- function(package, available = utils::available.packages()) {
   idx <- available[, "Package"] == package
   if (any(idx)) {
     as.package_version(available[package, "Version"])

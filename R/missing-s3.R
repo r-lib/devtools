@@ -1,10 +1,17 @@
 #' Find missing s3 exports
 #'
-#' The method is heuristic - looking for objs with a period in their name.
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `missing_s3()` is deprecated because roxygen2 now provides the same
+#' functionality. Run `devtools::document()` and look for
+#' `"Missing documentation for S3 method"` warnings.
 #'
 #' @template devtools
 #' @export
+#' @keywords internal
 missing_s3 <- function(pkg = ".") {
+  lifecycle::deprecate_warn("2.5.0", "missing_s3()")
   pkg <- as.package(pkg)
   loaded <- load_all(pkg$path)
 

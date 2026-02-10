@@ -1,6 +1,8 @@
 # devtools (development version)
 
+* `bash()`, `create()`, `missing_s3()`, `reload()`, `show_news()`, and `wd()` are now deprecated. These functions are all historical parts of our workflow that we no longer use or recommend. `create()` is superseded by `usethis::create_package()`.
 * `build_manual()` reports more details on failure (#2586).
+* `check_doc_fields()` is a new function that checks for missing `\value` and `\examples` fields in Rd files, which are commonly flagged by CRAN (#2525).
 * `build_vignettes()` and `clean_vignettes()` are now deprecated. We no longer recommend building vignettes in this way; instead use `pkgdown::build_article()` to render articles locally (#2488).
 * `build_site()` now just calls `pkgdown::build_site()`, meaning that you will get more (informative) output by default (#2578).
 * New `check_mac_devel()` function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (@nfrerebeau, #2507)
@@ -11,6 +13,8 @@
 * `release()` is deprecated in favour of `usethis::use_release_issue()`.
 * `show_news()` now looks for NEWS files in the same locations as `utils::news()`: `inst/NEWS.Rd`, `NEWS.md`, `NEWS`, and `inst/NEWS` (@arcresu, #2499).
 * `test_active_file()` now works when the active file is a snapshot file.
+* `test_coverage()` and `test_coverage_active_file()` gain a new `report` argument that can be set to `"html"` (the default, for an interactive browser report), `"zero"` (prints uncovered lines to the console, used for LLMs and non-interactive contexts), or `"silent"`. The `show_report` argument has been removed (#2632).
+* `test_file()` and `test_coverage_file()` are now defunct. These were deprecated in devtools 2.4.0 (2021-04-07) in favour of `test_active_file()` and `test_coverage_active_file()`. Removing `test_file()` eliminates the conflict with `testthat::test_file()`.
 
 # devtools 2.4.6
 
