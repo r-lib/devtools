@@ -17,6 +17,7 @@
 <url><loc>https://devtools.r-lib.org/dev/reference/build_site.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/build_vignettes.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/check.html</loc></url>
+<url><loc>https://devtools.r-lib.org/dev/reference/check_doc_fields.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/check_mac_release.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/check_man.html</loc></url>
 <url><loc>https://devtools.r-lib.org/dev/reference/check_rhub.html</loc></url>

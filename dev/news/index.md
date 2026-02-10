@@ -16,6 +16,10 @@
 - [`build_manual()`](https://devtools.r-lib.org/dev/reference/build_manual.md)
   reports more details on failure
   ([\#2586](https://github.com/r-lib/devtools/issues/2586)).
+- [`check_doc_fields()`](https://devtools.r-lib.org/dev/reference/check_doc_fields.md)
+  is a new function that checks for missing `\value` and `\examples`
+  fields in Rd files, which are commonly flagged by CRAN
+  ([\#2525](https://github.com/r-lib/devtools/issues/2525)).
 - [`build_vignettes()`](https://devtools.r-lib.org/dev/reference/build_vignettes.md)
   and
   [`clean_vignettes()`](https://devtools.r-lib.org/dev/reference/clean_vignettes.md)

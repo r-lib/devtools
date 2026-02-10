@@ -24,6 +24,9 @@ Primary commands used when developing a package.
   [`check_built()`](https://devtools.r-lib.org/dev/reference/check.md) :
   Build and check a package
 
+- [`check_doc_fields()`](https://devtools.r-lib.org/dev/reference/check_doc_fields.md)
+  : Check for missing documentation fields
+
 - [`check_mac_release()`](https://devtools.r-lib.org/dev/reference/check_mac_release.md)
   [`check_mac_devel()`](https://devtools.r-lib.org/dev/reference/check_mac_release.md)
   : Check a package on macOS

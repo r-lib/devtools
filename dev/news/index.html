@@ -55,6 +55,8 @@
 <li>
 <code><a href="../reference/build_manual.html">build_manual()</a></code> reports more details on failure (<a href="https://github.com/r-lib/devtools/issues/2586" class="external-link">#2586</a>).</li>
 <li>
+<code><a href="../reference/check_doc_fields.html">check_doc_fields()</a></code> is a new function that checks for missing <code>\value</code> and <code>\examples</code> fields in Rd files, which are commonly flagged by CRAN (<a href="https://github.com/r-lib/devtools/issues/2525" class="external-link">#2525</a>).</li>
+<li>
 <code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> and <code><a href="../reference/clean_vignettes.html">clean_vignettes()</a></code> are now deprecated. We no longer recommend building vignettes in this way; instead use <code><a href="https://pkgdown.r-lib.org/reference/build_articles.html" class="external-link">pkgdown::build_article()</a></code> to render articles locally (<a href="https://github.com/r-lib/devtools/issues/2488" class="external-link">#2488</a>).</li>
 <li>
 <code><a href="../reference/build_site.html">build_site()</a></code> now just calls <code><a href="https://pkgdown.r-lib.org/reference/build_site.html" class="external-link">pkgdown::build_site()</a></code>, meaning that you will get more (informative) output by default (<a href="https://github.com/r-lib/devtools/issues/2578" class="external-link">#2578</a>).</li>
