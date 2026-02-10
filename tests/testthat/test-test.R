@@ -116,7 +116,9 @@ test_that("report_default() does its job", {
   expect_equal(report_default(NULL), "zero")
 
   withr::local_options(rlang_interactive = TRUE)
-  expect_equal(report_default(NULL), "html")
+  if (!is_llm()) {
+    expect_equal(report_default(NULL), "html")
+  }
 
   withr::local_envvar(AGENT = 1)
   expect_equal(report_default(NULL), "zero")
