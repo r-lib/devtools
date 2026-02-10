@@ -1,3 +1,21 @@
+# check_doc_fields output - missing fields
+
+    Code
+      check_doc_fields(pkg)
+    Message
+      ! Missing `\value` section in 1 file:
+      * man/foo.Rd
+      ! Missing `\examples` section in 1 file:
+      * man/bar.Rd
+
+# check_doc_fields output - all present
+
+    Code
+      check_doc_fields(pkg)
+    Message
+      v All Rd files have a `\value` section.
+      v All Rd files have a `\examples` section.
+
 # check_man works
 
     Code
