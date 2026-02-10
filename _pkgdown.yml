@@ -57,7 +57,7 @@ reference:
   - release
   - show_news
   - wd
-  - devtools-deprecated
+  - devtools-defunct
 
 news:
   releases:
