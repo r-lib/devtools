@@ -61,6 +61,7 @@ test_that("stop_on_failure defaults to FALSE", {
 })
 
 test_that("test_coverage_active_file() computes coverage", {
+  skip_on_covr()
   pkg <- local_package_create()
   writeLines(
     c(
@@ -90,6 +91,7 @@ test_that("test_coverage_active_file() computes coverage", {
 })
 
 test_that("test_coverage_active_file() reports full coverage", {
+  skip_on_covr()
   pkg <- local_package_create()
   writeLines(
     "add <- function(x, y) x + y",
