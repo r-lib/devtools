@@ -2,7 +2,7 @@
 % Please edit documentation in R/install.R
 \name{install}
 \alias{install}
-\title{Install a local development package.}
+\title{Install a local development package}
 \usage{
 install(
   pkg = ".",

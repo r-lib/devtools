@@ -112,13 +112,13 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
       r_release_version = r_release(),
       has_build_tools = has_build_tools,
       rtools_path = if (has_build_tools) pkgbuild::rtools_path(),
-      devtools_version = packageVersion("devtools"),
+      devtools_version = utils::packageVersion("devtools"),
       devtools_deps = remotes::package_deps("devtools", dependencies = NA),
       pkg_deps = if (!is.null(pkg)) {
         remotes::dev_package_deps(pkg$path, dependencies = TRUE)
       },
       rstudio_version = if (is_rstudio_running()) rstudioapi::getVersion(),
-      rstudio_msg = check_for_rstudio_updates()
+      rstudio_msg = if (!is_positron()) check_for_rstudio_updates()
     ),
     class = "dev_sitrep"
   )
@@ -156,7 +156,7 @@ print.dev_sitrep <- function(x, ...) {
   }
 
   if (!is.null(x$rstudio_version)) {
-    hd_line("RStudio")
+    hd_line(if (is_positron()) "Positron" else "RStudio")
     kv_line("version", x$rstudio_version)
 
     if (!is.null(x$rstudio_msg)) {
@@ -211,7 +211,7 @@ print.dev_sitrep <- function(x, ...) {
 # Helpers -----------------------------------------------------------------
 
 hd_line <- function(name) {
-  cat_rule(cli::style_bold(name))
+  cli::cat_rule(cli::style_bold(name))
 }
 
 kv_line <- function(key, value, path = FALSE) {

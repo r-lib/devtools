@@ -1,4 +1,4 @@
-#' Check documentation, as `R CMD check` does.
+#' Check documentation, as `R CMD check` does
 #'
 #' This function attempts to run the documentation related checks in the
 #' same way that `R CMD check` does. Unfortunately it can't run them

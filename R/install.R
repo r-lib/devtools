@@ -1,4 +1,4 @@
-#' Install a local development package.
+#' Install a local development package
 #'
 #' Uses `R CMD INSTALL` to install the package. Will also try to install
 #' dependencies of the package from CRAN, if they're not already installed.
@@ -148,11 +148,15 @@ install <-
     invisible(TRUE)
   }
 
-#' Install package dependencies if needed.
+#' Install package dependencies if needed
 #'
-#' `install_deps()` will install the
-#' user dependencies needed to run the package, `install_dev_deps()` will also
-#' install the development dependencies needed to test and build the package.
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' These functions are deprecated. Better alternatives:
+#' * `pak::local_install_deps()` instead of `install_deps()`
+#' * `pak::local_install_dev_deps()` instead of `install_dev_deps()`
+#'
 #' @inheritParams install
 #' @inherit remotes::install_deps
 #' @export
@@ -167,6 +171,11 @@ install_deps <- function(
   build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
   ...
 ) {
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "install_deps()",
+    "pak::local_install_deps()"
+  )
   pkg <- as.package(pkg)
 
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
@@ -197,6 +206,11 @@ install_dev_deps <- function(
   build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
   ...
 ) {
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "install_dev_deps()",
+    "pak::local_install_dev_deps()"
+  )
   remotes::update_packages("roxygen2")
 
   pkg <- as.package(pkg)

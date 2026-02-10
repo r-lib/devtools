@@ -49,8 +49,8 @@ foo(x)
     file.path(pkg, "man", "foo.Rd")
   )
 
-  expect_output(
+  expect_snapshot(
     check_man(pkg),
-    "Undocumented arguments"
+    transform = \(x) gsub(basename(pkg), "{package}", x, fixed = TRUE)
   )
 })
