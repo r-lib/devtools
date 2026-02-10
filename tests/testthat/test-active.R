@@ -15,6 +15,7 @@ test_that("fails if can't find tests", {
 test_that("find_test_file() works with snapshot files", {
   dir <- local_package_create()
   withr::local_dir(dir)
+
   dir_create("tests/testthat/_snaps")
   file_create("tests/testthat/test-foo.R")
   file_create("tests/testthat/_snaps/foo.md")
@@ -25,8 +26,8 @@ test_that("find_test_file() works with snapshot files", {
 
 test_that("find_test_file() works with snapshot variant files", {
   dir <- local_package_create()
-
   withr::local_dir(dir)
+
   dir_create("tests/testthat/_snaps/variant")
   file_create("tests/testthat/test-foo.R")
   file_create("tests/testthat/_snaps/variant/foo.md")

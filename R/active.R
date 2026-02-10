@@ -37,6 +37,7 @@ find_test_file <- function(path, call = parent.frame()) {
 
 test_file_type <- function(path) {
   dir <- path_file(path_dir(path))
+  # this accounts for snapshot files in a variant subfolder
   parent_dir <- path_file(path_dir(path_dir(path)))
   name <- path_file(path)
   ext <- tolower(path_ext(path))
