@@ -80,6 +80,8 @@
   `NEWS.md`, `NEWS`, and `inst/NEWS`
   ([@arcresu](https://github.com/arcresu),
   [\#2499](https://github.com/r-lib/devtools/issues/2499)).
+- [`test_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
+  now works when the active file is a snapshot file.
 - [`test_coverage()`](https://devtools.r-lib.org/dev/reference/test.md)
   and
   [`test_coverage_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
