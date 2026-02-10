@@ -12,6 +12,7 @@
 * `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
 * `release()` is deprecated in favour of `usethis::use_release_issue()`.
 * `show_news()` now looks for NEWS files in the same locations as `utils::news()`: `inst/NEWS.Rd`, `NEWS.md`, `NEWS`, and `inst/NEWS` (@arcresu, #2499).
+* `test_active_file()` now works when the active file is a snapshot file.
 * `test_coverage()` and `test_coverage_active_file()` gain a new `report` argument that can be set to `"html"` (the default, for an interactive browser report), `"zero"` (prints uncovered lines to the console, used for LLMs and non-interactive contexts), or `"silent"`. The `show_report` argument has been removed (#2632).
 * `test_file()` and `test_coverage_file()` are now defunct. These were deprecated in devtools 2.4.0 (2021-04-07) in favour of `test_active_file()` and `test_coverage_active_file()`. Removing `test_file()` eliminates the conflict with `testthat::test_file()`.
 
