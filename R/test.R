@@ -189,21 +189,21 @@ uses_testthat <- function(pkg = ".") {
 }
 
 
-#' Deprecated functions
+#' Defunct functions
 #'
-#' These functions are Deprecated in this release of devtools, they will be
-#' marked as Defunct and removed in a future version.
-#' @name devtools-deprecated
+#' These functions are defunct and will be removed in a future version of
+#' devtools.
+#' @name devtools-defunct
 #' @keywords internal
 NULL
 
-#' @rdname devtools-deprecated
+#' @rdname devtools-defunct
 #' @export
 test_file <- function(file = find_active_file(), ...) {
   lifecycle::deprecate_stop("2.5.0", "test_file()", "test_active_file()")
 }
 
-#' @rdname devtools-deprecated
+#' @rdname devtools-defunct
 #' @export
 test_coverage_file <- function(file = find_active_file(), ...) {
   lifecycle::deprecate_stop(
