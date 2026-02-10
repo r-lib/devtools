@@ -1,4 +1,4 @@
-#' Run all examples in a package.
+#' Run all examples in a package
 #'
 #' One of the most frustrating parts of `R CMD check` is getting all of your
 #' examples to pass - whenever one fails you need to fix the problem and then
@@ -94,7 +94,7 @@ run_examples <- function(
     return()
   }
 
-  cat_rule(
+  cli::cat_rule(
     left = paste0("Running ", length(files), " example files"),
     right = pkg$package
   )

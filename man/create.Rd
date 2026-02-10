@@ -25,5 +25,9 @@ session are changed to the new project.
 The path to the created package, invisibly.
 }
 \description{
-Create a package
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{create()} is deprecated. Please use \code{\link[usethis:create_package]{usethis::create_package()}} directly
+instead.
 }
+\keyword{internal}
