@@ -355,9 +355,9 @@ Primary commands used when developing a package.
   **\[deprecated\]** : Show package news
 - [`wd()`](https://devtools.r-lib.org/dev/reference/wd.md)
   **\[deprecated\]** : Set working directory
-- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
-  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
-  : Deprecated functions
+- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
+  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
+  : Defunct functions
 
 # Articles
 

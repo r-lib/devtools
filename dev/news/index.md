@@ -76,6 +76,18 @@
   `NEWS.md`, `NEWS`, and `inst/NEWS`
   ([@arcresu](https://github.com/arcresu),
   [\#2499](https://github.com/r-lib/devtools/issues/2499)).
+- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
+  and
+  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
+  are now defunct. These were deprecated in devtools 2.4.0 (2021-04-07)
+  in favour of
+  [`test_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
+  and
+  [`test_coverage_active_file()`](https://devtools.r-lib.org/dev/reference/test.md).
+  Removing
+  [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
+  eliminates the conflict with
+  [`testthat::test_file()`](https://testthat.r-lib.org/reference/test_file.html).
 
 ## devtools 2.4.6
 
@@ -223,9 +235,9 @@ CRAN release: 2021-05-05
   and
   [`test_coverage_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
   instead of the deprecated
-  [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+  [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   and
-  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   ([\#2339](https://github.com/r-lib/devtools/issues/2339))
 
 - RStudio addins now run in interactive mode, rather than background
@@ -251,11 +263,11 @@ CRAN release: 2021-04-07
   no longer re-exported
   ([\#2218](https://github.com/r-lib/devtools/issues/2218)).
 
-- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   has been renamed to
   [`test_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
   and
-  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   has been renamed to
   [`test_coverage_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
   to avoid a name collision with
@@ -398,7 +410,7 @@ CRAN release: 2020-02-17
   [\#2129](https://github.com/r-lib/devtools/issues/2129)).
 
 - [`test()`](https://devtools.r-lib.org/dev/reference/test.md) and
-  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   gain a `export_all` argument, which controls if all functions in a
   package are automatically exported
   ([\#1201](https://github.com/r-lib/devtools/issues/1201)).
@@ -499,7 +511,7 @@ CRAN release: 2019-09-07
 - Add the DT package as a dependency, so that
   [`test_coverage()`](https://devtools.r-lib.org/dev/reference/test.md)
   and
-  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   work without having to install additional packages
   ([\#2085](https://github.com/r-lib/devtools/issues/2085)).
 
@@ -520,7 +532,7 @@ CRAN release: 2019-09-07
   makes them work on Windows when RTools is not on the default PATH
   ([\#2093](https://github.com/r-lib/devtools/issues/2093)).
 
-- [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+- [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   now works when there is not a 1 to 1 correspondence between test and
   source files
   ([\#2011](https://github.com/r-lib/devtools/issues/2011)).
@@ -604,9 +616,9 @@ CRAN release: 2019-07-06
   now fails if the manual fails to build.
   ([\#2056](https://github.com/r-lib/devtools/issues/2056))
 
-- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   and
-  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   now work with C and C++ files in the src/ directory as well.
 
 ## devtools 2.0.2
@@ -625,7 +637,7 @@ CRAN release: 2019-04-08
 - [`test()`](https://devtools.r-lib.org/dev/reference/test.md),
   [`test_coverage()`](https://devtools.r-lib.org/dev/reference/test.md)
   and
-  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   now set the `TESTTHAT_PKG` environment variable, so it is more
   consistent with running the tests during `R CMD check` (testthat#787).
 
@@ -762,7 +774,7 @@ understand API in the future, so we feel the tradeoff is worthwhile.
   and makes it more consistent with
   [`roxygen2::roxygenise()`](https://roxygen2.r-lib.org/reference/roxygenize.html).
 
-- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   function added to test one or more files from a package
   ([\#1755](https://github.com/r-lib/devtools/issues/1755)).
 
@@ -770,9 +782,9 @@ understand API in the future, so we feel the tradeoff is worthwhile.
   function added to provide a helper to compute test coverage using
   **covr** ([\#1628](https://github.com/r-lib/devtools/issues/1628)).
 
-- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   and
-  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-deprecated.md)
+  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   now have RStudio addins
   ([\#1650](https://github.com/r-lib/devtools/issues/1650))
 
