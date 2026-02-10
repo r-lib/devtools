@@ -73,6 +73,8 @@
 <li>
 <code><a href="../reference/show_news.html">show_news()</a></code> now looks for NEWS files in the same locations as <code><a href="https://rdrr.io/r/utils/news.html" class="external-link">utils::news()</a></code>: <code>inst/NEWS.Rd</code>, <code>NEWS.md</code>, <code>NEWS</code>, and <code>inst/NEWS</code> (<a href="https://github.com/arcresu" class="external-link">@arcresu</a>, <a href="https://github.com/r-lib/devtools/issues/2499" class="external-link">#2499</a>).</li>
 <li>
+<code><a href="../reference/test.html">test_coverage()</a></code> and <code><a href="../reference/test.html">test_coverage_active_file()</a></code> gain a new <code>report</code> argument that can be set to <code>"html"</code> (the default, for an interactive browser report), <code>"zero"</code> (prints uncovered lines to the console, used for LLMs and non-interactive contexts), or <code>"silent"</code>. The <code>show_report</code> argument has been removed (<a href="https://github.com/r-lib/devtools/issues/2632" class="external-link">#2632</a>).</li>
+<li>
 <code><a href="../reference/devtools-defunct.html">test_file()</a></code> and <code><a href="../reference/devtools-defunct.html">test_coverage_file()</a></code> are now defunct. These were deprecated in devtools 2.4.0 (2021-04-07) in favour of <code><a href="../reference/test.html">test_active_file()</a></code> and <code><a href="../reference/test.html">test_coverage_active_file()</a></code>. Removing <code><a href="../reference/devtools-defunct.html">test_file()</a></code> eliminates the conflict with <code><a href="https://testthat.r-lib.org/reference/test_file.html" class="external-link">testthat::test_file()</a></code>.</li>
 </ul></div>
     <div class="section level2">

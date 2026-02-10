@@ -22,12 +22,12 @@ test(pkg = ".", filter = NULL, stop_on_failure = FALSE, export_all = TRUE, ...)
 
 test_active_file(file = find_active_file(), ...)
 
-test_coverage(pkg = ".", show_report = interactive(), ...)
+test_coverage(pkg = ".", report = NULL, ...)
 
 test_coverage_active_file(
   file = find_active_file(),
   filter = TRUE,
-  show_report = interactive(),
+  report = NULL,
   export_all = TRUE,
   ...
 )
@@ -67,6 +67,14 @@ test_coverage_active_file(
   test file will be run. The default is to use the active file in
   RStudio (if available).
 
-- show_report:
+- report:
 
-  Show the test coverage report.
+  How to display the coverage report.
+
+  - `"html"` opens an interactive report in the browser.
+
+  - `"zero"` prints uncovered lines to the console.
+
+  - `"silent"` returns the coverage object without display.
+
+  Defaults to `"html"` if interactive; otherwise to `"zero"`.

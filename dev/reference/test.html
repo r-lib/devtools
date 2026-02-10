@@ -86,12 +86,12 @@ shortcut for <code><a href="http://covr.r-lib.org/reference/file_coverage.html" 
 <span></span>
 <span><span class="fu">test_active_file</span><span class="op">(</span>file <span class="op">=</span> <span class="fu">find_active_file</span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">test_coverage</span><span class="op">(</span>pkg <span class="op">=</span> <span class="st">"."</span>, show_report <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">test_coverage</span><span class="op">(</span>pkg <span class="op">=</span> <span class="st">"."</span>, report <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">test_coverage_active_file</span><span class="op">(</span></span>
 <span>  file <span class="op">=</span> <span class="fu">find_active_file</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  filter <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  show_report <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  report <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  export_all <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -132,8 +132,11 @@ corresponding test file will be run. The default is to use the active file
 in RStudio (if available).</p></dd>
 
 
-<dt id="arg-show-report">show_report<a class="anchor" aria-label="anchor" href="#arg-show-report"></a></dt>
-<dd><p>Show the test coverage report.</p></dd>
+<dt id="arg-report">report<a class="anchor" aria-label="anchor" href="#arg-report"></a></dt>
+<dd><p>How to display the coverage report.</p><ul><li><p><code>"html"</code> opens an interactive report in the browser.</p></li>
+<li><p><code>"zero"</code> prints uncovered lines to the console.</p></li>
+<li><p><code>"silent"</code> returns the coverage object without display.</p></li>
+</ul><p>Defaults to <code>"html"</code> if interactive; otherwise to <code>"zero"</code>.</p></dd>
 
 </dl></div>
 

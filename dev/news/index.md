@@ -80,6 +80,14 @@
   `NEWS.md`, `NEWS`, and `inst/NEWS`
   ([@arcresu](https://github.com/arcresu),
   [\#2499](https://github.com/r-lib/devtools/issues/2499)).
+- [`test_coverage()`](https://devtools.r-lib.org/dev/reference/test.md)
+  and
+  [`test_coverage_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
+  gain a new `report` argument that can be set to `"html"` (the default,
+  for an interactive browser report), `"zero"` (prints uncovered lines
+  to the console, used for LLMs and non-interactive contexts), or
+  `"silent"`. The `show_report` argument has been removed
+  ([\#2632](https://github.com/r-lib/devtools/issues/2632)).
 - [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
   and
   [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
