@@ -24,38 +24,40 @@ reference:
   - build_site
   - starts_with("check_")
   - check
-  - create
   - document
   - load_all
-  - reload
   - spell_check
   - test
 
 - title: Package installation
   contents:
-  - starts_with("install")
+  - install
   - uninstall
 
 - title: Utilities
   contents:
-  - bash
   - dev_sitrep
-  - github_pull
   - lint
-  - missing_s3
   - run_examples
   - session_info
-  - show_news
   - starts_with("source_")
-  - update_packages
-  - wd
   - save_all
-  
-- title: Deprecated functions
+
+- title: Deprecated
   contents:
+  - bash
   - build_vignettes
   - clean_vignettes
+  - create
+  - dev_mode
+  - install-deprecated
+  - install_deps
+  - missing_s3
+  - reload
   - release
+  - show_news
+  - wd
+  - devtools-deprecated
 
 news:
   releases:

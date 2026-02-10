@@ -35,11 +35,8 @@ Imports:
     roxygen2 (>= 7.3.3),
     rversions (>= 2.1.2),
     sessioninfo (>= 1.2.3),
-    stats,
     testthat (>= 3.2.3),
-    tools,
     urlchecker (>= 1.0.1),
-    utils,
     withr (>= 3.0.2)
 Suggests:
     BiocManager (>= 1.30.18),
@@ -50,14 +47,9 @@ Suggests:
     DT (>= 0.23),
     foghorn (>= 1.4.2),
     gh (>= 1.3.0),
-    gmailr (>= 1.0.1),
     httr (>= 1.4.3),
     knitr (>= 1.39),
     lintr (>= 3.0.0),
-    MASS,
-    mockery (>= 0.4.3),
-    pingr (>= 2.0.1),
-    rhub (>= 1.1.1),
     rmarkdown (>= 2.14),
     rstudioapi (>= 0.13),
     spelling (>= 2.2)

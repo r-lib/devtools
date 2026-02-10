@@ -112,7 +112,7 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
       r_release_version = r_release(),
       has_build_tools = has_build_tools,
       rtools_path = if (has_build_tools) pkgbuild::rtools_path(),
-      devtools_version = packageVersion("devtools"),
+      devtools_version = utils::packageVersion("devtools"),
       devtools_deps = remotes::package_deps("devtools", dependencies = NA),
       pkg_deps = if (!is.null(pkg)) {
         remotes::dev_package_deps(pkg$path, dependencies = TRUE)
@@ -211,7 +211,7 @@ print.dev_sitrep <- function(x, ...) {
 # Helpers -----------------------------------------------------------------
 
 hd_line <- function(name) {
-  cat_rule(cli::style_bold(name))
+  cli::cat_rule(cli::style_bold(name))
 }
 
 kv_line <- function(key, value, path = FALSE) {

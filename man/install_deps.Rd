@@ -83,9 +83,13 @@ installing the package for development, consider setting \code{build} to
 when installing dependencies.}
 }
 \description{
-\code{install_deps()} will install the
-user dependencies needed to run the package, \code{install_dev_deps()} will also
-install the development dependencies needed to test and build the package.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+These functions are deprecated. Better alternatives:
+\itemize{
+\item \code{pak::local_install_deps()} instead of \code{install_deps()}
+\item \code{pak::local_install_dev_deps()} instead of \code{install_dev_deps()}
+}
 }
 \examples{
 \dontrun{install_deps(".")}

@@ -13,25 +13,13 @@ package object.  See \code{\link[=as.package]{as.package()}} for more informatio
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
 }
 \description{
-This attempts to unload and reload an \emph{installed} package. If the package is
-not loaded already, it does nothing. It's not always possible to cleanly
-unload a package: see the caveats in \code{\link[=unload]{unload()}} for some of the potential
-failure points. If in doubt, restart R and reload the package with
-\code{\link[=library]{library()}}.
-}
-\examples{
-\dontrun{
-# Reload package that is in current directory
-reload(".")
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-# Reload package that is in ./ggplot2/
-reload("ggplot2/")
-
-# Can use inst() to find the package path
-# This will reload the installed ggplot2 package
-reload(pkgload::inst("ggplot2"))
-}
+\code{reload()} is deprecated because we no longer use or recommend this
+workflow. Instead, we recommend \code{\link[=load_all]{load_all()}} to load a package for
+interactive development.
 }
 \seealso{
 \code{\link[=load_all]{load_all()}} to load a package for interactive development.
 }
+\keyword{internal}
