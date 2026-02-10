@@ -200,14 +200,14 @@ NULL
 #' @rdname devtools-deprecated
 #' @export
 test_file <- function(file = find_active_file(), ...) {
-  lifecycle::deprecate_stop("2.4.0", "test_file()", "test_active_file()")
+  lifecycle::deprecate_stop("2.5.0", "test_file()", "test_active_file()")
 }
 
 #' @rdname devtools-deprecated
 #' @export
 test_coverage_file <- function(file = find_active_file(), ...) {
   lifecycle::deprecate_stop(
-    "2.4.0",
+    "2.5.0",
     "test_coverage_file()",
     "test_coverage_active_file()"
   )
