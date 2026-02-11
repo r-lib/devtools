@@ -174,7 +174,7 @@ print.dev_sitrep <- function(x, ...) {
       kv_line("path", x$rtools_path, path = TRUE)
     } else {
       cli::cli_bullets(c(
-        "!" = "{.field RTools} is not installed.",
+        "!" = "{.field Rtools} is not installed.",
         " " = "Download and install it from: {.url https://cloud.r-project.org/bin/windows/Rtools/}"
       ))
     }
@@ -197,7 +197,7 @@ print.dev_sitrep <- function(x, ...) {
   devtools_deps_old <- x$devtools_deps$diff < 0
   if (any(devtools_deps_old)) {
     cli::cli_bullets(c(
-      "!" = "{.field devtools} or its dependencies out of date:",
+      "!" = "{.pkg devtools} or its dependencies out of date:",
       " " = "{.val {x$devtools_deps$package[devtools_deps_old]}}",
       " " = "Update them with {.code devtools::update_packages(\"devtools\")}"
     ))
