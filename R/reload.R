@@ -1,28 +1,19 @@
 #' Unload and reload package
 #'
-#' This attempts to unload and reload an _installed_ package. If the package is
-#' not loaded already, it does nothing. It's not always possible to cleanly
-#' unload a package: see the caveats in [unload()] for some of the potential
-#' failure points. If in doubt, restart R and reload the package with
-#' [library()].
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `reload()` is deprecated because we no longer use or recommend this
+#' workflow. Instead, we recommend [load_all()] to load a package for
+#' interactive development.
 #'
 #' @template devtools
 #' @param quiet if `TRUE` suppresses output from this function.
 #' @seealso [load_all()] to load a package for interactive development.
-#' @examples
-#' \dontrun{
-#' # Reload package that is in current directory
-#' reload(".")
-#'
-#' # Reload package that is in ./ggplot2/
-#' reload("ggplot2/")
-#'
-#' # Can use inst() to find the package path
-#' # This will reload the installed ggplot2 package
-#' reload(pkgload::inst("ggplot2"))
-#' }
 #' @export
+#' @keywords internal
 reload <- function(pkg = ".", quiet = FALSE) {
+  lifecycle::deprecate_warn("2.5.0", "reload()", "load_all()")
   pkg <- as.package(pkg)
 
   if (is_attached(pkg)) {

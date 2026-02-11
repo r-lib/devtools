@@ -1,129 +1,170 @@
-#' @importFrom ellipsis check_dots_used
-with_ellipsis <- function(fun) {
-  b <- body(fun)
-
-  f <- function(...) {
-    ellipsis::check_dots_used(
-      action = getOption("devtools.ellipsis_action", rlang::warn)
-    )
-
-    !!b
-  }
-  f <- rlang::expr_interp(f)
-
-  body(fun) <- body(f)
-  fun
-}
-
-with_pkgbuild_build_tools <- function(fun) {
-  b <- body(fun)
-  pkgbuild_call <- as.call(c(
-    call("::", as.symbol("pkgbuild"), as.symbol("with_build_tools")),
-    b,
-    list(required = FALSE)
-  ))
-
-  body(fun) <- pkgbuild_call
-  fun
-}
-
-#' Functions re-exported from the remotes package
+#' Deprecated package installation functions
 #'
-
-#' These functions are re-exported from the remotes package. They differ only
-#' that the ones in devtools use the [ellipsis] package to ensure all dotted
-#' arguments are used.
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-#' Follow the links below to see the documentation.
-#' [remotes::install_bioc()], [remotes::install_bitbucket()], [remotes::install_cran()], [remotes::install_dev()],
-#' [remotes::install_git()], [remotes::install_github()], [remotes::install_gitlab()], [remotes::install_local()],
-#' [remotes::install_svn()], [remotes::install_url()], [remotes::install_version()], [remotes::update_packages()],
-#' [remotes::dev_package_deps()].
+#' These functions have been deprecated in favor of [pak](https://pak.r-lib.org/),
+#' as that is what we now recommend for package installation. There are a few
+#' functions which have no pak equivalent, where you can instead call the
+#' old remotes functions directly.
 #'
-#' @importFrom remotes install_bioc
-#' @name remote-reexports
+#' ## Migration guide
+#'
+#' | devtools function | Replacement |
+#' |-------------------|-------------|
+#' | `install_bioc("pkg")` | `pak::pak("bioc::pkg")` |
+#' | `install_bitbucket("user/repo")` | `remotes::install_bitbucket("user/repo")` |
+#' | `install_cran("pkg")` | `pak::pak("pkg")` |
+#' | `install_dev("pkg")` | `remotes::install_dev("pkg")` |
+#' | `install_git("url")` | `pak::pak("git::url")` |
+#' | `install_github("user/repo")` | `pak::pak("user/repo")` |
+#' | `install_gitlab("user/repo")` | `pak::pak("gitlab::user/repo")` |
+#' | `install_local("path")` | `pak::pak("local::path")` |
+#' | `install_svn("url")` | `remotes::install_svn("url")` |
+#' | `install_url("url")` | `pak::pak("url::url")` |
+#' | `install_version("pkg", "1.0.0")` | `pak::pak("pkg@1.0.0")` |
+#' | `update_packages("pkg")` | `pak::pak("pkg")` |
+#' | `dev_package_deps()` | `pak::local_dev_deps()` |
+#' | `github_pull("123")` | `remotes::github_pull("123")` |
+#' | `github_release()` | `remotes::github_release()` |
+#'
+#' @name install-deprecated
 #' @keywords internal
-#' @export
-install_bioc <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_bioc))
+NULL
 
-#' @importFrom remotes install_bitbucket
-#' @rdname remote-reexports
+#' @rdname install-deprecated
 #' @export
-install_bitbucket <- with_pkgbuild_build_tools(with_ellipsis(
-  remotes::install_bitbucket
-))
+install_bioc <- function(...) {
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "install_bioc()",
+    I('pak::pak("bioc::pkg")')
+  )
+  pkgbuild::with_build_tools(remotes::install_bioc(...), required = FALSE)
+}
 
-#' @importFrom remotes install_cran
-#' @rdname remote-reexports
+#' @rdname install-deprecated
 #' @export
-install_cran <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_cran))
+install_bitbucket <- function(...) {
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "install_bitbucket()",
+    "remotes::install_bitbucket()"
+  )
+  pkgbuild::with_build_tools(remotes::install_bitbucket(...), required = FALSE)
+}
 
-#' @importFrom remotes install_dev
-#' @rdname remote-reexports
+#' @rdname install-deprecated
 #' @export
-install_dev <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_dev))
+install_cran <- function(...) {
+  lifecycle::deprecate_warn("2.5.0", "install_cran()", "pak::pak()")
+  pkgbuild::with_build_tools(remotes::install_cran(...), required = FALSE)
+}
 
-#' @importFrom remotes install_git
-#' @rdname remote-reexports
+#' @rdname install-deprecated
 #' @export
-install_git <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_git))
+install_dev <- function(...) {
+  lifecycle::deprecate_warn("2.5.0", "install_dev()", "remotes::install_dev()")
+  pkgbuild::with_build_tools(remotes::install_dev(...), required = FALSE)
+}
 
-#' @importFrom remotes install_github
-#' @rdname remote-reexports
+#' @rdname install-deprecated
 #' @export
-install_github <- with_pkgbuild_build_tools(with_ellipsis(
-  remotes::install_github
-))
+install_git <- function(...) {
+  lifecycle::deprecate_warn("2.5.0", "install_git()", I('pak::pak("git::url")'))
+  pkgbuild::with_build_tools(remotes::install_git(...), required = FALSE)
+}
 
-#' @importFrom remotes github_pull
-#' @rdname reexports
+#' @rdname install-deprecated
 #' @export
-remotes::github_pull
+install_github <- function(...) {
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "install_github()",
+    I('pak::pak("user/repo")')
+  )
+  pkgbuild::with_build_tools(remotes::install_github(...), required = FALSE)
+}
 
-#' @importFrom remotes github_release
-#' @rdname reexports
+#' @rdname install-deprecated
 #' @export
-remotes::github_release
+install_gitlab <- function(...) {
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "install_gitlab()",
+    I('pak::pak("gitlab::user/repo")')
+  )
+  pkgbuild::with_build_tools(remotes::install_gitlab(...), required = FALSE)
+}
 
-#' @importFrom remotes install_gitlab
-#' @rdname remote-reexports
+#' @rdname install-deprecated
 #' @export
-install_gitlab <- with_pkgbuild_build_tools(with_ellipsis(
-  remotes::install_gitlab
-))
+install_local <- function(...) {
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "install_local()",
+    I('pak::pak("local::path")')
+  )
+  pkgbuild::with_build_tools(remotes::install_local(...), required = FALSE)
+}
 
-#' @importFrom remotes install_local
-#' @rdname remote-reexports
+#' @rdname install-deprecated
 #' @export
-install_local <- with_pkgbuild_build_tools(with_ellipsis(
-  remotes::install_local
-))
+install_svn <- function(...) {
+  lifecycle::deprecate_warn("2.5.0", "install_svn()", "remotes::install_svn()")
+  pkgbuild::with_build_tools(remotes::install_svn(...), required = FALSE)
+}
 
-#' @importFrom remotes install_svn
-#' @rdname remote-reexports
+#' @rdname install-deprecated
 #' @export
-install_svn <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_svn))
+install_url <- function(...) {
+  lifecycle::deprecate_warn("2.5.0", "install_url()", I('pak::pak("url::url")'))
+  pkgbuild::with_build_tools(remotes::install_url(...), required = FALSE)
+}
 
-#' @importFrom remotes install_url
-#' @rdname remote-reexports
+#' @rdname install-deprecated
 #' @export
-install_url <- with_pkgbuild_build_tools(with_ellipsis(remotes::install_url))
+install_version <- function(...) {
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "install_version()",
+    I('pak::pak("pkg@version")')
+  )
+  pkgbuild::with_build_tools(remotes::install_version(...), required = FALSE)
+}
 
-#' @importFrom remotes install_version
-#' @rdname remote-reexports
+#' @rdname install-deprecated
 #' @export
-install_version <- with_pkgbuild_build_tools(with_ellipsis(
-  remotes::install_version
-))
+update_packages <- function(...) {
+  lifecycle::deprecate_warn("2.5.0", "update_packages()", "pak::pak()")
+  pkgbuild::with_build_tools(remotes::update_packages(...), required = FALSE)
+}
 
-#' @importFrom remotes update_packages
-#' @rdname remote-reexports
+#' @rdname install-deprecated
 #' @export
-update_packages <- with_pkgbuild_build_tools(with_ellipsis(
-  remotes::update_packages
-))
+dev_package_deps <- function(...) {
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "dev_package_deps()",
+    "pak::local_dev_deps()"
+  )
+  pkgbuild::with_build_tools(remotes::dev_package_deps(...), required = FALSE)
+}
 
-#' @importFrom remotes dev_package_deps
-#' @rdname remote-reexports
+#' @rdname install-deprecated
 #' @export
-dev_package_deps <- with_pkgbuild_build_tools(remotes::dev_package_deps)
+github_pull <- function(...) {
+  lifecycle::deprecate_warn("2.5.0", "github_pull()", "remotes::github_pull()")
+  remotes::github_pull(...)
+}
+
+#' @rdname install-deprecated
+#' @export
+github_release <- function(...) {
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "github_release()",
+    "remotes::github_release()"
+  )
+  remotes::github_release(...)
+}

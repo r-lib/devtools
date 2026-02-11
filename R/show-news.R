@@ -1,11 +1,19 @@
 #' Show package news
 #'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `show_news()` is deprecated because we no longer use or recommend this
+#' workflow.
+#'
 #' @template devtools
 #' @param latest if `TRUE`, only show the news for the most recent
 #'   version.
 #' @param ... other arguments passed on to `news`
 #' @export
+#' @keywords internal
 show_news <- function(pkg = ".", latest = TRUE, ...) {
+  lifecycle::deprecate_warn("2.5.0", "show_news()")
   pkg <- as.package(pkg)
   news_path <- find_news(pkg$path)
 

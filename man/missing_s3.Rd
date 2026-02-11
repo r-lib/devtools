@@ -11,5 +11,10 @@ missing_s3(pkg = ".")
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 }
 \description{
-The method is heuristic - looking for objs with a period in their name.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{missing_s3()} is deprecated because roxygen2 now provides the same
+functionality. Run \code{devtools::document()} and look for
+\code{"Missing documentation for S3 method"} warnings.
 }
+\keyword{internal}
