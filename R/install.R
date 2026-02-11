@@ -63,7 +63,7 @@ install <- function(
     cli::cli_abort("{.arg upgrade} must be a single TRUE, FALSE, or NA")
   }
   if (lifecycle::is_present(force)) {
-    lifecycle::deprecate_warn("2.5.0", "intall(force)")
+    lifecycle::deprecate_warn("2.5.0", "install(force)")
   }
 
   pkg <- as.package(pkg)
