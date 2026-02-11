@@ -4,32 +4,30 @@
 #' Uses `R CMD INSTALL` to install the package, after installing needed
 #' dependencies with [pak::local_install_deps()].
 #'
-#' To install a package in a non-default library, use [withr::with_libpaths()].
+#' To install to a non-default library, use [withr::with_libpaths()].
 #'
 #' @template devtools
 #' @param reload if `TRUE` (the default), will automatically attempt to reload
 #'   the package after installing. Reloading is not always completely possible
 #'   so see [pkgload::unregister()] for caveats.
-#' @param quick if `TRUE` skips docs, multiple-architectures,
-#'   demos, and vignettes, to make installation as fast as possible.
-#'   If `quick = TRUE`, installation takes place using the current package
-#'   directory. If you have compiled code, this means that artefacts of
-#'   compilation will be created in the `src/` directory. If you want to avoid
-#'   this, you can use `build = TRUE` to first build a package bundle and then
-#'   install it from a temporary directory. This is slower, but keeps the source
-#'   directory pristine.
-#' @param build if `TRUE` [pkgbuild::build()]s the package first:
-#'   this ensures that the installation is completely clean, and prevents any
-#'   binary artefacts (like \file{.o}, `.so`) from appearing in your local
-#'   package directory, but is considerably slower, because every compile has
-#'   to start from scratch.
+#' @param quick if `TRUE`, skips some optional steps (e.g. help
+#'   pre-rendering and multi-arch builds) to make installation as fast
+#'   as possible.
+#' @param build if `TRUE` (the default), [pkgbuild::build()]s the package
+#'   first. This ensures that the installation is completely clean, and
+#'   prevents any binary artefacts (like \file{.o}, `.so`) from appearing
+#'   in your local package directory, but is considerably slower, because
+#'   every compile has to start from scratch.
 #'
 #'   One downside of installing from a built tarball is that the package is
-#'   installed from a temporary location. This means that any source references,
-#'   at R level or C/C++ level, will point to dangling locations. The debuggers
-#'   will not be able to find the sources for step-debugging. If you're
-#'   installing the package for development, consider setting `build` to
-#'   `FALSE`.
+#'   installed from a temporary location. This means that any source references
+#'   will point to dangling locations and debuggers won't have direct access to
+#'   the source for step-debugging. For development purposes, `build = FALSE` is
+#'   often the better choice.
+#'
+#'   If `FALSE`, the package is installed directly from its source
+#'   directory. This is faster and can be favorable for preserving source
+#'   references for debugging (see `keep_source`).
 #' @param args An optional character vector of additional command line
 #'   arguments to be passed to `R CMD INSTALL`. This defaults to the
 #'   value of the option `"devtools.install.args"`.
@@ -38,8 +36,10 @@
 #'   sure vignettes are built even if a build never happens (i.e. because
 #'   `build = FALSE`).
 #' @param keep_source If `TRUE` will keep the srcrefs from an installed
-#'   package. This is useful for debugging (especially inside of RStudio).
-#'   It defaults to the option `"keep.source.pkgs"`.
+#'   package. This is useful for debugging (especially inside of RStudio or
+#'   Positron). Defaults to `getOption("keep.source.pkgs") || !build`,
+#'   since srcrefs are most useful when the package is installed from its
+#'   source directory, i.e. when `build = FALSE`.
 #' @param quiet If `TRUE`, suppress output.
 #' @param force `r lifecycle::badge("deprecated")` No longer used.
 #' @family package installation
@@ -56,7 +56,7 @@ install <- function(
   dependencies = NA,
   upgrade = FALSE,
   build_vignettes = FALSE,
-  keep_source = getOption("keep.source.pkgs"),
+  keep_source = getOption("keep.source.pkgs") || !build,
   force = deprecated()
 ) {
   if (!is.logical(upgrade) || length(upgrade) != 1) {
