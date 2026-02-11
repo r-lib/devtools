@@ -111,7 +111,7 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
     is_windows = is_windows,
     has_build_tools = has_build_tools,
     rtools_path = if (has_build_tools) pkgbuild::rtools_path(),
-    devtools_version = packageVersion("devtools"),
+    devtools_version = utils::packageVersion("devtools"),
     devtools_deps = remotes::package_deps("devtools", dependencies = NA),
     pkg_deps = if (!is.null(pkg)) {
       remotes::dev_package_deps(pkg$path, dependencies = TRUE)
@@ -129,7 +129,7 @@ new_dev_sitrep <- function(
   is_windows = FALSE,
   has_build_tools = TRUE,
   rtools_path = NULL,
-  devtools_version = packageVersion("devtools"),
+  devtools_version = utils::packageVersion("devtools"),
   devtools_deps = data.frame(package = character(), diff = numeric()),
   pkg_deps = NULL,
   rstudio_version = NULL,
