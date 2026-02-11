@@ -24,6 +24,7 @@ Jefferis
 Kirill
 Kohske
 Kornelius
+LLMs
 Laake
 LinkingTo
 Lovell
@@ -52,6 +53,7 @@ SHA
 Studer
 Takahashi
 Titov
+UI
 UNC
 VignetteBuilder
 WARNINGs
@@ -82,6 +84,7 @@ dplyr
 env
 envvar
 et
+favour
 fieldnames
 focussed
 forkable
@@ -116,6 +119,7 @@ md
 miniUI
 mnel
 nchar
+pak
 objs
 pak
 pandoc
@@ -128,11 +132,11 @@ pkgload
 pre
 processx
 profvis
+programmatical
 pryr
 rOpenSci
 randomises
 rcmdcheck
-rds
 readme
 reinstalls
 renv
@@ -157,7 +161,6 @@ summarises
 svg
 synchronise
 testthat
-tex
 tgz
 toolchain
 travis

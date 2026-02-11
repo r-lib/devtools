@@ -1,32 +1,14 @@
-#' Execute \pkg{pkgdown} build_site in a package
+#' Run `pkgdown::build_site()`
 #'
-#' `build_site()` is a shortcut for [pkgdown::build_site()], it generates the
-#'   static HTML documentation.
+#' This is a thin wrapper around [pkgdown::build_site()], used for generating
+#' static HTML documentation. Learn more at <https://pkgdown.r-lib.org>.
 #'
-#' @param path path to the package to build the static HTML.
-#' @param ...  additional arguments passed to [pkgdown::build_site()]
-#' @inheritParams install
-#'
-#' @return NULL
+#' @param path Path to the package to build the static HTML.
+#' @param ...  Additional arguments passed to [pkgdown::build_site()].
 #' @export
-build_site <- function(path = ".", quiet = TRUE, ...) {
+build_site <- function(path = ".", ...) {
   rlang::check_installed("pkgdown")
 
   save_all()
-
-  pkg <- as.package(path)
-
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
-
-  withr::with_temp_libpaths(action = "prefix", code = {
-    install(pkg = pkg$path, upgrade = FALSE, reload = FALSE, quiet = quiet)
-    if (isTRUE(quiet)) {
-      withr::with_output_sink(
-        file_temp(),
-        pkgdown::build_site(pkg = pkg$path, ...)
-      )
-    } else {
-      pkgdown::build_site(pkg = pkg$path, ...)
-    }
-  })
+  pkgdown::build_site(pkg = path, ...)
 }

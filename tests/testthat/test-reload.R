@@ -1,4 +1,5 @@
 test_that("reload works", {
+  withr::local_options(lifecycle_verbosity = "quiet")
   withr::local_temp_libpaths()
 
   pkg <- as.package(test_path("testTest"))

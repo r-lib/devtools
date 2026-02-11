@@ -41,8 +41,20 @@ is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }
 
+is_positron <- function() {
+  Sys.getenv("POSITRON") == "1"
+}
+
 is_rstudio_running <- function() {
   !is_testing() && rstudioapi::isAvailable()
+}
+
+# Copied from testthat:::is_llm()
+is_llm <- function() {
+  nzchar(Sys.getenv("AGENT")) ||
+    nzchar(Sys.getenv("CLAUDECODE")) ||
+    nzchar(Sys.getenv("GEMINI_CLI")) ||
+    nzchar(Sys.getenv("CURSOR_AGENT"))
 }
 
 # Suppress cli wrapping

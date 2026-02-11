@@ -1,4 +1,4 @@
-#' Custom devtools release checks.
+#' Custom devtools release checks
 #'
 #' This function performs additional checks prior to release. It is called
 #' automatically by [release()].
@@ -8,7 +8,7 @@
 #' @export
 release_checks <- function(pkg = ".", built_path = NULL) {
   pkg <- as.package(pkg)
-  cat_rule(paste0("Running additional devtools checks for ", pkg$package))
+  cli::cat_rule(paste0("Running additional devtools checks for ", pkg$package))
 
   check_version(pkg)
   check_dev_versions(pkg)
@@ -16,7 +16,7 @@ release_checks <- function(pkg = ".", built_path = NULL) {
   check_news_md(pkg)
   check_remotes(pkg)
 
-  cat_rule()
+  cli::cat_rule()
 }
 
 check_dev_versions <- function(pkg = ".") {

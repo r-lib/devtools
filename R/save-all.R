@@ -1,4 +1,4 @@
-#' Save all documents in an active IDE session.
+#' Save all documents in an active IDE session
 #'
 #' Helper function wrapping IDE-specific calls to save all documents in the
 #' active session. In this form, callers of `save_all()` don't need to
