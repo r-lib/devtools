@@ -22,9 +22,9 @@ install(
 \item{pkg}{The package to use, can be a file path to the package or a
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
-\item{reload}{if \code{TRUE} (the default), will automatically attempt reload the
-package after installing. Reloading is always completely possible so see
-\code{\link[pkgload:unload]{pkgload::unregister()}} for caveats.}
+\item{reload}{if \code{TRUE} (the default), will automatically attempt to reload
+the package after installing. Reloading is not always completely possible
+so see \code{\link[pkgload:unload]{pkgload::unregister()}} for caveats.}
 
 \item{quick}{if \code{TRUE} skips docs, multiple-architectures,
 demos, and vignettes, to make installation as fast as possible.

@@ -7,9 +7,9 @@
 #' To install a package in a non-default library, use [withr::with_libpaths()].
 #'
 #' @template devtools
-#' @param reload if `TRUE` (the default), will automatically attempt reload the
-#'   package after installing. Reloading is always completely possible so see
-#'   [pkgload::unregister()] for caveats.
+#' @param reload if `TRUE` (the default), will automatically attempt to reload
+#'   the package after installing. Reloading is not always completely possible
+#'   so see [pkgload::unregister()] for caveats.
 #' @param quick if `TRUE` skips docs, multiple-architectures,
 #'   demos, and vignettes, to make installation as fast as possible.
 #'   If `quick = TRUE`, installation takes place using the current package
