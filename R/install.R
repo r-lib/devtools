@@ -81,7 +81,10 @@ install <- function(
       withr::local_output_sink(withr::local_tempfile())
       withr::local_message_sink(withr::local_tempfile())
     } else {
-      cli::cat_rule("Installing dependencies", col = "cyan")
+      cli::cat_rule(
+        paste0("Installing dependencies of ", pkg$package),
+        col = "cyan"
+      )
     }
     pak::local_install_deps(
       pkg$path,
@@ -105,6 +108,9 @@ install <- function(
   opts <- c(opts, args)
 
   if (build) {
+    if (!quiet) {
+      cli::cat_rule(paste0("Building ", pkg$package), col = "cyan")
+    }
     install_path <- pkgbuild::build(
       pkg$path,
       dest_path = tempdir(),
@@ -124,7 +130,7 @@ install <- function(
   }
 
   if (!quiet) {
-    cli::cat_rule(paste0("R CMD INSTALL"), col = "cyan")
+    cli::cat_rule(paste0("Installing ", pkg$package), col = "cyan")
   }
   pkgbuild::with_build_tools(
     required = FALSE,
