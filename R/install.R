@@ -13,8 +13,8 @@
 #' @param quick if `TRUE`, skips some optional steps (e.g. help
 #'   pre-rendering and multi-arch builds) to make installation as fast
 #'   as possible.
-#' @param build if `TRUE` (the default), [pkgbuild::build()]s the package
-#'   first. This ensures that the installation is completely clean, and
+#' @param build If `TRUE` (the default), first [pkgbuild::build()]s the
+#'   package. This ensures that the installation is completely clean, and
 #'   prevents any binary artefacts (like \file{.o}, `.so`) from appearing
 #'   in your local package directory, but is considerably slower, because
 #'   every compile has to start from scratch.
