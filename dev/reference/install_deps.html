@@ -138,17 +138,7 @@ to "always". <code>TRUE</code> and <code>FALSE</code> are also accepted and corr
 
 
 <dt id="arg-build">build<a class="anchor" aria-label="anchor" href="#arg-build"></a></dt>
-<dd><p>if <code>TRUE</code> <code><a href="https://pkgbuild.r-lib.org/reference/build.html" class="external-link">pkgbuild::build()</a></code>s the package first:
-this ensures that the installation is completely clean, and prevents any
-binary artefacts (like <code class="file">.o</code>, <code>.so</code>) from appearing in your local
-package directory, but is considerably slower, because every compile has
-to start from scratch.</p>
-<p>One downside of installing from a built tarball is that the package is
-installed from a temporary location. This means that any source references,
-at R level or C/C++ level, will point to dangling locations. The debuggers
-will not be able to find the sources for step-debugging. If you're
-installing the package for development, consider setting <code>build</code> to
-<code>FALSE</code>.</p></dd>
+<dd><p>If <code>TRUE</code> build the package before installing.</p></dd>
 
 
 <dt id="arg-build-opts">build_opts<a class="anchor" aria-label="anchor" href="#arg-build-opts"></a></dt>
@@ -156,8 +146,7 @@ installing the package for development, consider setting <code>build</code> to
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>additional arguments passed to <code><a href="https://remotes.r-lib.org/reference/install_deps.html" class="external-link">remotes::install_deps()</a></code>
-when installing dependencies.</p></dd>
+<dd><p>Additional arguments passed to <code><a href="https://remotes.r-lib.org/reference/install_deps.html" class="external-link">remotes::install_deps()</a></code>.</p></dd>
 
 </dl></div>
 

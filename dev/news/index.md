@@ -48,6 +48,17 @@
 - [`is_loading()`](https://pkgload.r-lib.org/reference/load_all.html) is
   now re-exported from pkgload
   ([\#2556](https://github.com/r-lib/devtools/issues/2556)).
+- [`install()`](https://devtools.r-lib.org/dev/reference/install.md) now
+  installs dependencies with
+  [`pak::local_install_deps()`](https://pak.r-lib.org/reference/local_install_deps.html)
+  instead of
+  [`remotes::install_deps()`](https://remotes.r-lib.org/reference/install_deps.html).
+  This lets us default to `upgrade = FALSE`, so that existing
+  dependencies are only upgraded when a newer version is actually
+  required ([\#2486](https://github.com/r-lib/devtools/issues/2486)).
+  `keep_source` now defaults to `TRUE` when `build = FALSE`, so that
+  source references are automatically preserved during development
+  installs.
 - Package installation functions are now deprecated:
   [`install_bioc()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
   [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),

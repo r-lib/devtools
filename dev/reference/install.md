@@ -1,7 +1,11 @@
 # Install a local development package
 
-Uses `R CMD INSTALL` to install the package. Will also try to install
-dependencies of the package from CRAN, if they're not already installed.
+Uses `R CMD INSTALL` to install the package, after installing needed
+dependencies with
+[`pak::local_install_deps()`](https://pak.r-lib.org/reference/local_install_deps.html).
+
+To install to a non-default library, use
+[`withr::with_libpaths()`](https://withr.r-lib.org/reference/with_libpaths.html).
 
 ## Usage
 
@@ -14,11 +18,10 @@ install(
   args = getOption("devtools.install.args"),
   quiet = FALSE,
   dependencies = NA,
-  upgrade = "default",
+  upgrade = FALSE,
   build_vignettes = FALSE,
-  keep_source = getOption("keep.source.pkgs"),
-  force = FALSE,
-  ...
+  keep_source = getOption("keep.source.pkgs") || !build,
+  force = deprecated()
 )
 ```
 
@@ -33,29 +36,35 @@ install(
 
 - reload:
 
-  if `TRUE` (the default), will automatically reload the package after
-  installing.
+  if `TRUE` (the default), will automatically attempt to reload the
+  package after installing. Reloading is not always completely possible
+  so see
+  [`pkgload::unregister()`](https://pkgload.r-lib.org/reference/unload.html)
+  for caveats.
 
 - quick:
 
-  if `TRUE` skips docs, multiple-architectures, demos, and vignettes, to
-  make installation as fast as possible.
+  if `TRUE`, skips some optional steps (e.g. help pre-rendering and
+  multi-arch builds) to make installation as fast as possible.
 
 - build:
 
-  if `TRUE`
+  if `TRUE` (the default),
   [`pkgbuild::build()`](https://pkgbuild.r-lib.org/reference/build.html)s
-  the package first: this ensures that the installation is completely
+  the package first. This ensures that the installation is completely
   clean, and prevents any binary artefacts (like `.o`, `.so`) from
   appearing in your local package directory, but is considerably slower,
   because every compile has to start from scratch.
 
   One downside of installing from a built tarball is that the package is
   installed from a temporary location. This means that any source
-  references, at R level or C/C++ level, will point to dangling
-  locations. The debuggers will not be able to find the sources for
-  step-debugging. If you're installing the package for development,
-  consider setting `build` to `FALSE`.
+  references will point to dangling locations and debuggers won't have
+  direct access to the source for step-debugging. For development
+  purposes, `build = FALSE` is often the better choice.
+
+  If `FALSE`, the package is installed directly from its source
+  directory. This is faster and can be favorable for preserving source
+  references for debugging (see `keep_source`).
 
 - args:
 
@@ -69,36 +78,32 @@ install(
 
 - dependencies:
 
-  Which dependencies do you want to check? Can be a character vector
-  (selecting from "Depends", "Imports", "LinkingTo", "Suggests", or
-  "Enhances"), or a logical vector.
+  What kinds of dependencies to install. Most commonly one of the
+  following values:
 
-  `TRUE` is shorthand for "Depends", "Imports", "LinkingTo" and
-  "Suggests". `NA` is shorthand for "Depends", "Imports" and "LinkingTo"
-  and is the default. `FALSE` is shorthand for no dependencies (i.e.
-  just check this package, not its dependencies).
+  - `NA`: only required (hard) dependencies,
 
-  The value "soft" means the same as `TRUE`, "hard" means the same as
-  `NA`.
+  - `TRUE`: required dependencies plus optional and development
+    dependencies,
 
-  You can also specify dependencies from one or more additional fields,
-  common ones include:
-
-  - Config/Needs/website - for dependencies used in building the pkgdown
-    site.
-
-  - Config/Needs/coverage for dependencies used in calculating test
-    coverage.
+  - `FALSE`: do not install any dependencies. (You might end up with a
+    non-working package, and/or the installation might fail.) See
+    [Package dependency
+    types](https://pak.r-lib.org/reference/package-dependency-types.html)
+    for other possible values and more information about package
+    dependencies.
 
 - upgrade:
 
-  Should package dependencies be upgraded? One of "default", "ask",
-  "always", or "never". "default" respects the value of the
-  `R_REMOTES_UPGRADE` environment variable if set, and falls back to
-  "ask" if unset. "ask" prompts the user for which out of date packages
-  to upgrade. For non-interactive sessions "ask" is equivalent to
-  "always". `TRUE` and `FALSE` are also accepted and correspond to
-  "always" and "never" respectively.
+  When `FALSE`, the default, pak does the minimum amount of work to give
+  you the latest version(s) of `pkg`. It will only upgrade dependent
+  packages if `pkg`, or one of their dependencies explicitly require a
+  higher version than what you currently have. It will also prefer a
+  binary package over to source package, even it the binary package is
+  older.
+
+  When `upgrade = TRUE`, pak will ensure that you have the latest
+  version(s) of `pkg` and all their dependencies.
 
 - build_vignettes:
 
@@ -110,41 +115,17 @@ install(
 - keep_source:
 
   If `TRUE` will keep the srcrefs from an installed package. This is
-  useful for debugging (especially inside of RStudio). It defaults to
-  the option `"keep.source.pkgs"`.
+  useful for debugging (especially inside of RStudio or Positron).
+  Defaults to `getOption("keep.source.pkgs") || !build`, since srcrefs
+  are most useful when the package is installed from its source
+  directory, i.e. when `build = FALSE`.
 
 - force:
 
-  Force installation, even if the remote state has not changed since the
-  previous install.
-
-- ...:
-
-  additional arguments passed to
-  [`remotes::install_deps()`](https://remotes.r-lib.org/reference/install_deps.html)
-  when installing dependencies.
-
-## Details
-
-If `quick = TRUE`, installation takes place using the current package
-directory. If you have compiled code, this means that artefacts of
-compilation will be created in the `src/` directory. If you want to
-avoid this, you can use `build = TRUE` to first build a package bundle
-and then install it from a temporary directory. This is slower, but
-keeps the source directory pristine.
-
-If the package is loaded, it will be reloaded after installation. This
-is not always completely possible, see
-[`reload()`](https://devtools.r-lib.org/dev/reference/reload.md) for
-caveats.
-
-To install a package in a non-default library, use
-[`withr::with_libpaths()`](https://withr.r-lib.org/reference/with_libpaths.html).
+  **\[deprecated\]** No longer used.
 
 ## See also
 
-[`update_packages()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
-to update installed packages from the source location and
 [`with_debug()`](https://pkgbuild.r-lib.org/reference/with_debug.html)
 to install packages with debugging flags set.
 

@@ -94,19 +94,7 @@ install_dev_deps(
 
 - build:
 
-  if `TRUE`
-  [`pkgbuild::build()`](https://pkgbuild.r-lib.org/reference/build.html)s
-  the package first: this ensures that the installation is completely
-  clean, and prevents any binary artefacts (like `.o`, `.so`) from
-  appearing in your local package directory, but is considerably slower,
-  because every compile has to start from scratch.
-
-  One downside of installing from a built tarball is that the package is
-  installed from a temporary location. This means that any source
-  references, at R level or C/C++ level, will point to dangling
-  locations. The debuggers will not be able to find the sources for
-  step-debugging. If you're installing the package for development,
-  consider setting `build` to `FALSE`.
+  If `TRUE` build the package before installing.
 
 - build_opts:
 
@@ -114,9 +102,8 @@ install_dev_deps(
 
 - ...:
 
-  additional arguments passed to
-  [`remotes::install_deps()`](https://remotes.r-lib.org/reference/install_deps.html)
-  when installing dependencies.
+  Additional arguments passed to
+  [`remotes::install_deps()`](https://remotes.r-lib.org/reference/install_deps.html).
 
 ## Examples
 
