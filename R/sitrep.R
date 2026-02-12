@@ -53,8 +53,8 @@ check_for_rstudio_updates <- function(
     return()
   }
 
-  nms <- vcapply(result, `[[`, 1)
-  values <- vcapply(result, function(x) utils::URLdecode(x[[2]]))
+  nms <- map_chr(result, `[[`, 1)
+  values <- map_chr(result, function(x) utils::URLdecode(x[[2]]))
 
   result <- stats::setNames(values, nms)
 
