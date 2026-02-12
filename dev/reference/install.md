@@ -49,12 +49,12 @@ install(
 
 - build:
 
-  if `TRUE` (the default),
+  If `TRUE` (the default), first
   [`pkgbuild::build()`](https://pkgbuild.r-lib.org/reference/build.html)s
-  the package first. This ensures that the installation is completely
-  clean, and prevents any binary artefacts (like `.o`, `.so`) from
-  appearing in your local package directory, but is considerably slower,
-  because every compile has to start from scratch.
+  the package. This ensures that the installation is completely clean,
+  and prevents any binary artefacts (like `.o`, `.so`) from appearing in
+  your local package directory, but is considerably slower, because
+  every compile has to start from scratch.
 
   One downside of installing from a built tarball is that the package is
   installed from a temporary location. This means that any source
