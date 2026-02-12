@@ -71,28 +71,25 @@ check_for_rstudio_updates <- function(
   )
 }
 
-.r_release <- function() {
-  R_system_version(rversions::r_release()$version)
+r_release <- function() {
+  R_system_version(rversions::resolve("release")$version)
 }
-
-r_release <- memoise::memoise(.r_release)
 
 #' Report package development situation
 #'
-#' @template devtools
-#' @inheritParams pkgbuild::has_build_tools
-#' @description `dev_sitrep()` reports
-#'   * If R is up to date
-#'   * If RStudio is up to date
-#'   * If compiler build tools are installed and available for use
-#'   * If devtools and its dependencies are up to date
-#'   * If the package's dependencies are up to date
+#' @description
+#' Call this function if things seem weird and you're not sure
+#' what's wrong or how to fix it. It reports:
 #'
-#' @description Call this function if things seem weird and you're not sure
-#'   what's wrong or how to fix it. If this function returns no output
-#'   everything should be ready for package development.
+#' * If R is up to date.
+#' * If RStudio is up to date.
+#' * If compiler build tools are installed and available for use.
+#' * If devtools and its dependencies are up to date.
+#' * If the package's dependencies are up to date.
 #'
 #' @return A named list, with S3 class `dev_sitrep` (for printing purposes).
+#' @template devtools
+#' @inheritParams pkgbuild::has_build_tools
 #' @export
 #' @examples
 #' \dontrun{
@@ -177,8 +174,8 @@ print.dev_sitrep <- function(x, ...) {
         "!" = "{.field Rtools} is not installed.",
         " " = "Download and install it from: {.url https://cloud.r-project.org/bin/windows/Rtools/}"
       ))
+      all_ok <- FALSE
     }
-    all_ok <- FALSE
   }
 
   if (!is.null(x$rstudio_version)) {
@@ -197,7 +194,7 @@ print.dev_sitrep <- function(x, ...) {
   devtools_deps_old <- x$devtools_deps$diff < 0
   if (any(devtools_deps_old)) {
     cli::cli_bullets(c(
-      "!" = "{.pkg devtools} or its dependencies out of date:",
+      "!" = "{.field devtools} or its dependencies out of date:",
       " " = "{.val {x$devtools_deps$package[devtools_deps_old]}}",
       " " = "Update them with {.code devtools::update_packages(\"devtools\")}"
     ))
