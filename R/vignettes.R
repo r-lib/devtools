@@ -18,7 +18,6 @@
 #'   outputs. See
 #'   <https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown>.
 #' @inheritParams tools::buildVignettes
-#' @inheritParams remotes::install_deps
 #' @importFrom stats update
 #' @keywords internal
 #' @export
@@ -40,6 +39,7 @@ build_vignettes <- function(
     return(invisible())
   }
 
+  check_installed("remotes")
   deps <- remotes::dev_package_deps(pkg$path, dependencies)
   update(deps, upgrade = upgrade)
 

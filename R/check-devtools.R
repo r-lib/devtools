@@ -22,7 +22,7 @@ release_checks <- function(pkg = ".", built_path = NULL) {
 check_dev_versions <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  dep_list <- pkg[tolower(remotes::standardise_dep(TRUE))]
+  dep_list <- pkg[tolower(c("Depends", "Imports", "LinkingTo", "Suggests"))]
   deps <- do.call("rbind", unname(compact(lapply(dep_list, parse_deps))))
   deps <- deps[!is.na(deps$version), , drop = FALSE]
 

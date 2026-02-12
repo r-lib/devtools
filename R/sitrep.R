@@ -112,9 +112,9 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
     has_build_tools = has_build_tools,
     rtools_path = if (has_build_tools) pkgbuild::rtools_path(),
     devtools_version = utils::packageVersion("devtools"),
-    devtools_deps = remotes::package_deps("devtools", dependencies = NA),
+    devtools_deps = outdated_deps(pak::pkg_deps("devtools", dependencies = NA)),
     pkg_deps = if (!is.null(pkg)) {
-      remotes::dev_package_deps(pkg$path, dependencies = TRUE)
+      outdated_deps(pak::local_dev_deps(pkg$path, dependencies = TRUE))
     },
     rstudio_version = if (is_rstudio_running()) rstudioapi::getVersion(),
     rstudio_msg = if (!is_positron()) check_for_rstudio_updates()
@@ -199,7 +199,7 @@ print.dev_sitrep <- function(x, ...) {
     cli::cli_bullets(c(
       "!" = "{.pkg devtools} or its dependencies out of date:",
       " " = "{.val {x$devtools_deps$package[devtools_deps_old]}}",
-      " " = "Update them with {.code devtools::update_packages(\"devtools\")}"
+      " " = "Update them with {.code pak::pak(\"devtools\")}"
     ))
     all_ok <- FALSE
   }
@@ -213,7 +213,7 @@ print.dev_sitrep <- function(x, ...) {
     cli::cli_bullets(c(
       "!" = "{.field {x$pkg$package}} dependencies out of date:",
       " " = "{.val {x$pkg_deps$package[pkg_deps_old]}}",
-      " " = "Update them with {.code devtools::install_dev_deps()}"
+      " " = "Update them with {.code pak::local_install_dev_deps()}"
     ))
     all_ok <- FALSE
   }
@@ -227,6 +227,31 @@ print.dev_sitrep <- function(x, ...) {
 
 
 # Helpers -----------------------------------------------------------------
+
+outdated_deps <- function(deps) {
+  installed <- vapply(
+    deps$package,
+    function(p) {
+      tryCatch(
+        as.character(utils::packageVersion(p)),
+        error = function(e) NA_character_
+      )
+    },
+    character(1)
+  )
+  diff <- mapply(
+    function(inst, avail) {
+      if (is.na(inst)) {
+        return(-1L)
+      }
+      as.integer(utils::compareVersion(inst, avail))
+    },
+    installed,
+    deps$version,
+    USE.NAMES = FALSE
+  )
+  data.frame(package = deps$package, diff = diff)
+}
 
 kv_line <- function(key, value, path = FALSE) {
   if (is.null(value)) {

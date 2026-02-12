@@ -55,6 +55,25 @@ test_that("print shows RStudio update message", {
   expect_snapshot(print(x))
 })
 
+test_that("outdated_deps detects outdated packages", {
+  deps <- data.frame(
+    package = c("rlang", "cli"),
+    version = c("0.0.1", "0.0.1")
+  )
+  result <- outdated_deps(deps)
+  expect_equal(result$package, c("rlang", "cli"))
+  expect_equal(result$diff, c(1, 1))
+})
+
+test_that("outdated_deps reports missing packages as outdated", {
+  deps <- data.frame(
+    package = c("rlang", "thereIsNoSuchPackage"),
+    version = c("0.0.1", "1.0.0")
+  )
+  result <- outdated_deps(deps)
+  expect_equal(result$diff[[2]], -1L)
+})
+
 test_that("check_for_rstudio_updates", {
   skip_if_offline()
   skip_on_cran()
