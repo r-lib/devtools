@@ -2,7 +2,7 @@
 % Please edit documentation in R/bash.R
 \name{bash}
 \alias{bash}
-\title{Open bash shell in package directory.}
+\title{Open bash shell in package directory}
 \usage{
 bash(pkg = ".")
 }
@@ -11,5 +11,9 @@ bash(pkg = ".")
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 }
 \description{
-Open bash shell in package directory.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{bash()} is deprecated because we no longer use or recommend this workflow.
+Open bash shell in package directory
 }
+\keyword{internal}

@@ -1,4 +1,4 @@
-#' Coerce input to a package.
+#' Coerce input to a package
 #'
 #' Possible specifications of package:
 #' \itemize{
@@ -21,7 +21,7 @@ as.package <- function(x = NULL, create = deprecated()) {
   load_pkg_description(x)
 }
 
-#' Find file in a package.
+#' Find file in a package
 #'
 #' It always starts by walking up the path until it finds the root directory,
 #' i.e. a directory containing `DESCRIPTION`. If it cannot find the root

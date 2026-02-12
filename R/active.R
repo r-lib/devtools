@@ -34,6 +34,8 @@ find_test_file <- function(path, call = parent.frame()) {
 
 test_file_type <- function(path) {
   dir <- path_file(path_dir(path))
+  # this accounts for snapshot files in a variant subfolder
+  parent_dir <- path_file(path_dir(path_dir(path)))
   name <- path_file(path)
   ext <- tolower(path_ext(path))
 
@@ -43,6 +45,8 @@ test_file_type <- function(path) {
   type[dir == "R" & ext == "r"] <- "R"
   type[dir == "testthat" & ext == "r" & grepl("^test", name)] <- "test"
   type[dir == "src" & ext %in% src_ext] <- "src"
+  type[dir == "_snaps" & ext == "md"] <- "snap"
+  type[parent_dir == "_snaps" & ext == "md"] <- "snap"
   type
 }
 

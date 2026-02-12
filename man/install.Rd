@@ -2,7 +2,7 @@
 % Please edit documentation in R/install.R
 \name{install}
 \alias{install}
-\title{Install a local development package.}
+\title{Install a local development package}
 \usage{
 install(
   pkg = ".",
@@ -12,35 +12,39 @@ install(
   args = getOption("devtools.install.args"),
   quiet = FALSE,
   dependencies = NA,
-  upgrade = "default",
+  upgrade = FALSE,
   build_vignettes = FALSE,
-  keep_source = getOption("keep.source.pkgs"),
-  force = FALSE,
-  ...
+  keep_source = getOption("keep.source.pkgs") || !build,
+  force = deprecated()
 )
 }
 \arguments{
 \item{pkg}{The package to use, can be a file path to the package or a
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
-\item{reload}{if \code{TRUE} (the default), will automatically reload the
-package after installing.}
+\item{reload}{if \code{TRUE} (the default), will automatically attempt to reload
+the package after installing. Reloading is not always completely possible
+so see \code{\link[pkgload:unload]{pkgload::unregister()}} for caveats.}
 
-\item{quick}{if \code{TRUE} skips docs, multiple-architectures,
-demos, and vignettes, to make installation as fast as possible.}
+\item{quick}{if \code{TRUE}, skips some optional steps (e.g. help
+pre-rendering and multi-arch builds) to make installation as fast
+as possible.}
 
-\item{build}{if \code{TRUE} \code{\link[pkgbuild:build]{pkgbuild::build()}}s the package first:
-this ensures that the installation is completely clean, and prevents any
-binary artefacts (like \file{.o}, \code{.so}) from appearing in your local
-package directory, but is considerably slower, because every compile has
-to start from scratch.
+\item{build}{If \code{TRUE} (the default), first \code{\link[pkgbuild:build]{pkgbuild::build()}}s the
+package. This ensures that the installation is completely clean, and
+prevents any binary artefacts (like \file{.o}, \code{.so}) from appearing
+in your local package directory, but is considerably slower, because
+every compile has to start from scratch.
 
 One downside of installing from a built tarball is that the package is
-installed from a temporary location. This means that any source references,
-at R level or C/C++ level, will point to dangling locations. The debuggers
-will not be able to find the sources for step-debugging. If you're
-installing the package for development, consider setting \code{build} to
-\code{FALSE}.}
+installed from a temporary location. This means that any source references
+will point to dangling locations and debuggers won't have direct access to
+the source for step-debugging. For development purposes, \code{build = FALSE} is
+often the better choice.
+
+If \code{FALSE}, the package is installed directly from its source
+directory. This is faster and can be favorable for preserving source
+references for debugging (see \code{keep_source}).}
 
 \item{args}{An optional character vector of additional command line
 arguments to be passed to \verb{R CMD INSTALL}. This defaults to the
@@ -48,30 +52,27 @@ value of the option \code{"devtools.install.args"}.}
 
 \item{quiet}{If \code{TRUE}, suppress output.}
 
-\item{dependencies}{Which dependencies do you want to check?
-Can be a character vector (selecting from "Depends", "Imports",
-"LinkingTo", "Suggests", or "Enhances"), or a logical vector.
-
-\code{TRUE} is shorthand for "Depends", "Imports", "LinkingTo" and
-"Suggests". \code{NA} is shorthand for "Depends", "Imports" and "LinkingTo"
-and is the default. \code{FALSE} is shorthand for no dependencies (i.e.
-just check this package, not its dependencies).
-
-The value "soft" means the same as \code{TRUE}, "hard" means the same as \code{NA}.
-
-You can also specify dependencies from one or more additional fields,
-common ones include:
+\item{dependencies}{What kinds of dependencies to install. Most commonly
+one of the following values:
 \itemize{
-\item Config/Needs/website - for dependencies used in building the pkgdown site.
-\item Config/Needs/coverage for dependencies used in calculating test coverage.
+\item \code{NA}: only required (hard) dependencies,
+\item \code{TRUE}: required dependencies plus optional and development
+dependencies,
+\item \code{FALSE}: do not install any dependencies. (You might end up with a
+non-working package, and/or the installation might fail.)
+See \link[pak]{Package dependency types} for other possible values and more
+information about package dependencies.
 }}
 
-\item{upgrade}{Should package dependencies be upgraded? One of "default", "ask", "always", or "never". "default"
-respects the value of the \code{R_REMOTES_UPGRADE} environment variable if set,
-and falls back to "ask" if unset. "ask" prompts the user for which out of
-date packages to upgrade. For non-interactive sessions "ask" is equivalent
-to "always". \code{TRUE} and \code{FALSE} are also accepted and correspond to
-"always" and "never" respectively.}
+\item{upgrade}{When \code{FALSE}, the default, pak does the minimum amount
+of work to give you the latest version(s) of \code{pkg}. It will only upgrade
+dependent packages if \code{pkg}, or one of their dependencies explicitly
+require a higher version than what you currently have. It will also
+prefer a binary package over to source package, even it the binary
+package is older.
+
+When \code{upgrade = TRUE}, pak will ensure that you have the latest
+version(s) of \code{pkg} and all their dependencies.}
 
 \item{build_vignettes}{if \code{TRUE}, will build vignettes. Normally it is
 \code{build} that's responsible for creating vignettes; this argument makes
@@ -79,36 +80,21 @@ sure vignettes are built even if a build never happens (i.e. because
 \code{build = FALSE}).}
 
 \item{keep_source}{If \code{TRUE} will keep the srcrefs from an installed
-package. This is useful for debugging (especially inside of RStudio).
-It defaults to the option \code{"keep.source.pkgs"}.}
+package. This is useful for debugging (especially inside of RStudio or
+Positron). Defaults to \code{getOption("keep.source.pkgs") || !build},
+since srcrefs are most useful when the package is installed from its
+source directory, i.e. when \code{build = FALSE}.}
 
-\item{force}{Force installation, even if the remote state has not changed
-since the previous install.}
-
-\item{...}{additional arguments passed to \code{\link[remotes:install_deps]{remotes::install_deps()}}
-when installing dependencies.}
+\item{force}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} No longer used.}
 }
 \description{
-Uses \verb{R CMD INSTALL} to install the package. Will also try to install
-dependencies of the package from CRAN, if they're not already installed.
-}
-\details{
-If \code{quick = TRUE}, installation takes place using the current package
-directory. If you have compiled code, this means that artefacts of
-compilation will be created in the \verb{src/} directory. If you want to avoid
-this, you can use \code{build = TRUE} to first build a package bundle and then
-install it from a temporary directory. This is slower, but keeps the source
-directory pristine.
+Uses \verb{R CMD INSTALL} to install the package, after installing needed
+dependencies with \code{\link[pak:local_install_deps]{pak::local_install_deps()}}.
 
-If the package is loaded, it will be reloaded after installation. This is
-not always completely possible, see \code{\link[=reload]{reload()}} for caveats.
-
-To install a package in a non-default library, use \code{\link[withr:with_libpaths]{withr::with_libpaths()}}.
+To install to a non-default library, use \code{\link[withr:with_libpaths]{withr::with_libpaths()}}.
 }
 \seealso{
-\code{\link[=update_packages]{update_packages()}} to update installed packages from the
-source location and \code{\link[=with_debug]{with_debug()}} to install packages with
-debugging flags set.
+\code{\link[=with_debug]{with_debug()}} to install packages with debugging flags set.
 
 Other package installation: 
 \code{\link{uninstall}()}
