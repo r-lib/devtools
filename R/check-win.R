@@ -137,7 +137,7 @@ check_win <- function(
     "/",
     path_file(built_path)
   )
-  lapply(url, upload_ftp, file = built_path)
+  walk(url, upload_ftp, file = built_path)
 
   if (!quiet) {
     time <- strftime(Sys.time() + 30 * 60, "%I:%M %p")
@@ -192,7 +192,7 @@ change_maintainer_email <- function(path, email, call = parent.frame()) {
   if (!is.list(roles)) {
     roles <- list(roles)
   }
-  is_maintainer <- vapply(roles, function(r) all("cre" %in% r), logical(1))
+  is_maintainer <- map_lgl(roles, function(r) all("cre" %in% r))
   aut[is_maintainer]$email <- email
   desc$set_authors(aut)
 
