@@ -108,9 +108,6 @@ install <- function(
   opts <- c(opts, args)
 
   if (build) {
-    if (!quiet) {
-      cli::cat_rule(paste0("Building ", pkg$package), col = "cyan")
-    }
     install_path <- pkgbuild::build(
       pkg$path,
       dest_path = tempdir(),
