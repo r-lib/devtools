@@ -1,11 +1,21 @@
 # install reports stages
 
     Code
+      install(pkg, reload = FALSE, build = FALSE)
+    Output
+      -- pak::local_install_deps() -------------------------------
+    Message
+    Output
+      -- R CMD INSTALL -------------------------------------------
+
+---
+
+    Code
       install(pkg, reload = FALSE, build = TRUE)
     Output
-      -- Installing dependencies of testTest ---------------------
+      -- pak::local_install_deps() -------------------------------
     Message
     Output
       -- R CMD build ---------------------------------------------
-      -- Installing testTest -------------------------------------
+      -- R CMD INSTALL -------------------------------------------
 

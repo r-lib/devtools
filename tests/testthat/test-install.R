@@ -12,6 +12,10 @@ test_that("install reports stages", {
   withr::local_temp_libpaths()
 
   expect_snapshot(
+    install(pkg, reload = FALSE, build = FALSE),
+    transform = show_headers
+  )
+  expect_snapshot(
     install(pkg, reload = FALSE, build = TRUE),
     transform = show_headers
   )
