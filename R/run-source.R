@@ -30,8 +30,7 @@
 #' }
 source_url <- function(url, ..., sha1 = NULL) {
   check_string(url)
-  check_installed("digest")
-  check_installed("httr")
+  check_installed(c("digest", "httr"))
 
   temp_file <- file_temp()
   on.exit(file_delete(temp_file), add = TRUE)
