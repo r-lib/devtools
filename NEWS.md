@@ -9,6 +9,7 @@
 * `dev_sitrep()` now uses cli for user-facing messages instead of deprecated usethis UI functions.
 * `dev_sitrep()` now works correctly in Positron (#2618).
 * `is_loading()` is now re-exported from pkgload (#2556).
+* `install()` now installs dependencies with `pak::local_install_deps()` instead of `remotes::install_deps()`. This lets us default to `upgrade = FALSE`, so that existing dependencies are only upgraded when a newer version is actually required (#2486). `keep_source` now defaults to `TRUE` when `build = FALSE`, so that source references are automatically preserved during development installs.
 * Package installation functions are now deprecated: `install_bioc()`, `install_bitbucket()`, `install_cran()`, `install_deps()`, `install_dev()`, `install_dev_deps()`, `install_git()`, `install_github()`, `install_gitlab()`, `install_local()`, `install_svn()`, `install_url()`, `install_version()`, `update_packages()`, `dev_package_deps()`, `github_pull()`, and `github_release()`. We now recommend pak (<https://pak.r-lib.org/>) for general package installation. See `?install-deprecated` for migration guidance.
 * `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
 * `release()` is deprecated in favour of `usethis::use_release_issue()`.

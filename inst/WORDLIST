@@ -120,6 +120,8 @@ miniUI
 mnel
 nchar
 pak
+objs
+pak
 pandoc
 param
 params
