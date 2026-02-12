@@ -1,13 +1,8 @@
 test_that("can determine when to document", {
-  expect_false(can_document(list()))
-  # TODO: switch to expect_snapshot()
-  expect_output(
-    expect_message(
-      expect_false(can_document(list(roxygennote = "15.0.00"))),
-      "doesn't match required"
-    )
-  )
-  expect_true(can_document(list(roxygennote = packageVersion("roxygen2"))))
+  expect_false(can_document(NULL))
+  expect_true(can_document("1.0.0", installed = "1.0.0"))
+  expect_snapshot(result <- can_document("1.0.0", installed = "2.0.0"))
+  expect_false(result)
 })
 
 test_that("fail instead of sending an email to wrong recipient", {

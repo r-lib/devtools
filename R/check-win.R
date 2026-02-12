@@ -28,7 +28,7 @@ check_win_devel <- function(
   quiet = FALSE,
   ...
 ) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   check_win(
     pkg = pkg,
@@ -51,7 +51,7 @@ check_win_release <- function(
   quiet = FALSE,
   ...
 ) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   check_win(
     pkg = pkg,
@@ -74,7 +74,7 @@ check_win_oldrelease <- function(
   quiet = FALSE,
   ...
 ) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   check_win(
     pkg = pkg,
@@ -118,9 +118,7 @@ check_win <- function(
     ))
 
     email <- maintainer(pkg)$email
-    if (interactive() && yesno("Email results to {.strong {email}}?")) {
-      return(invisible())
-    }
+    confirm_maintainer_email(email)
   }
 
   built_path <- pkgbuild::build(
@@ -154,6 +152,24 @@ check_win <- function(
   invisible()
 }
 
+confirm_maintainer_email <- function(email, call = parent.frame()) {
+  if (!rlang::is_interactive()) {
+    return(FALSE)
+  }
+
+  if (!yesno("Email results to {.strong {email}}?")) {
+    return()
+  }
+
+  cli::cli_abort(
+    c(
+      "User declined upload.",
+      i = "Use `email = {.str your email}` to override."
+    ),
+    call = call
+  )
+}
+
 change_maintainer_email <- function(path, email, call = parent.frame()) {
   desc <- desc::desc(file = path)
 
@@ -184,7 +200,7 @@ change_maintainer_email <- function(path, email, call = parent.frame()) {
 }
 
 upload_ftp <- function(file, url, verbose = FALSE) {
-  rlang::check_installed("curl")
+  check_installed("curl")
 
   stopifnot(file_exists(file))
   stopifnot(is.character(url))

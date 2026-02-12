@@ -82,10 +82,10 @@ check <- function(
   }
   error_on <- match.arg(error_on)
 
-  document <- document %||% can_document(pkg)
+  document <- document %||% can_document(pkg$roxygennote)
   if (document) {
     if (!quiet) {
-      cat_rule("Documenting", col = "cyan", line = 2)
+      cli::cat_rule("Documenting", col = "cyan", line = 2)
     }
     document(pkg, quiet = quiet)
     if (!quiet) {
@@ -94,11 +94,11 @@ check <- function(
   }
 
   if (!quiet) {
-    cat_rule("Building", col = "cyan", line = 2)
+    cli::cat_rule("Building", col = "cyan", line = 2)
     show_env_vars(pkgbuild::compiler_flags(FALSE))
   }
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   if (identical(vignettes, FALSE)) {
     args <- union(args, "--ignore-vignettes")
@@ -133,19 +133,20 @@ check <- function(
   )
 }
 
-can_document <- function(pkg) {
-  required <- pkg$roxygennote
+can_document <- function(
+  required,
+  installed = utils::packageVersion("roxygen2")
+) {
   if (is.null(required)) {
-    # Doesn't use roxygen2 at all
     return(FALSE)
   }
 
-  installed <- packageVersion("roxygen2")
   if (required != installed) {
     cli::cat_rule("Documenting", col = "red", line = 2)
     cli::cli_inform(c(
-      i = "Installed roxygen2 version ({installed}) doesn't match required ({required})",
-      x = "{.fun check} will not re-document this package"
+      i = "Installed roxygen2 version ({installed}) doesn't match declared ({required})",
+      x = "{.fun check} will not re-document this package.",
+      i = "Do you need to re-run {.fun document}?"
     ))
     FALSE
   } else {
@@ -224,7 +225,7 @@ check_built <- function(
 
   env_vars <- check_env_vars(cran, remote, incoming, force_suggests, env_vars)
   if (!quiet) {
-    cat_rule("Checking", col = "cyan", line = 2)
+    cli::cat_rule("Checking", col = "cyan", line = 2)
     show_env_vars(env_vars)
   }
 
@@ -273,7 +274,7 @@ aspell_env_var <- function() {
 
 show_env_vars <- function(env_vars) {
   cli::cat_line("Setting env vars:", col = "darkgrey")
-  cat_bullet(
+  cli::cat_bullet(
     paste0(format(names(env_vars)), ": ", unname(env_vars)),
     col = "darkgrey"
   )

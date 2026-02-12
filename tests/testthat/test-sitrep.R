@@ -1,6 +1,64 @@
+test_that("print shows all checks passed", {
+  local_reproducible_output(width = 60)
+  x <- new_dev_sitrep(
+    r_version = R_system_version("4.4.0"),
+    r_path = "/usr/lib/R",
+    devtools_version = package_version("2.4.6")
+  )
+  expect_snapshot(print(x))
+})
+
+test_that("print warns when R is out of date", {
+  local_reproducible_output(width = 60)
+  x <- new_dev_sitrep(
+    r_version = R_system_version("4.3.0"),
+    r_path = "/usr/lib/R",
+    r_release_version = R_system_version("4.4.0"),
+    devtools_version = package_version("2.4.6")
+  )
+  expect_snapshot(print(x))
+})
+
+test_that("print warns about outdated devtools deps", {
+  local_reproducible_output(width = 60)
+  x <- new_dev_sitrep(
+    r_version = R_system_version("4.4.0"),
+    r_path = "/usr/lib/R",
+    devtools_version = package_version("2.4.6"),
+    devtools_deps = data.frame(package = c("rlang", "cli"), diff = c(0, -1))
+  )
+  expect_snapshot(print(x))
+})
+
+test_that("print warns about outdated package deps", {
+  local_reproducible_output(width = 60)
+  x <- new_dev_sitrep(
+    r_version = R_system_version("4.4.0"),
+    r_path = "/usr/lib/R",
+    devtools_version = package_version("2.4.6"),
+    pkg = list(package = "mypkg", path = "/tmp/mypkg"),
+    pkg_deps = data.frame(package = c("dplyr", "tidyr"), diff = c(-1, -1))
+  )
+  expect_snapshot(print(x))
+})
+
+test_that("print shows RStudio update message", {
+  local_reproducible_output(width = 60)
+  withr::local_envvar(POSITRON = "")
+  x <- new_dev_sitrep(
+    r_version = R_system_version("4.4.0"),
+    r_path = "/usr/lib/R",
+    devtools_version = package_version("2.4.6"),
+    rstudio_version = "2024.04.0",
+    rstudio_msg = "RStudio is out of date."
+  )
+  expect_snapshot(print(x))
+})
+
 test_that("check_for_rstudio_updates", {
   skip_if_offline()
   skip_on_cran()
+  withr::local_envvar(POSITRON = "")
 
   # the IDE ends up calling this with `os = "mac"` on macOS, but we would send
   # "darwin" in that case, so I test with "darwin"

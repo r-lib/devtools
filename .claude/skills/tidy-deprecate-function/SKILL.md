@@ -5,7 +5,7 @@ description: Guide for deprecating R functions/arguments. Use when a user asks t
 
 # Deprecate functions and function arguments
 
-Use this skill when deprecating functions or function parameters in dbplyr.
+Use this skill when deprecating functions or function parameters in this package.
 
 ## Overview
 
@@ -124,10 +124,10 @@ Then re-document the package.
 
 ### Step 5: Add NEWS entry
 
-Add a bullet point to the top of the "# dbplyr (development version)" section in NEWS.md:
+Add a bullet point to the top of the "# packagename (development version)" section in NEWS.md:
 
 ```markdown
-# dbplyr (development version)
+# packagename (development version)
 
 * `function_name(parameter)` is deprecated and will be removed in a future
   version.
