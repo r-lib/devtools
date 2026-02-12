@@ -289,14 +289,17 @@ extract_cran_msg <- function(msg) {
 }
 
 upload_cran <- function(pkg, built_path, call = parent.frame()) {
+  check_installed("httr2")
+
   pkg <- as.package(pkg)
   maint <- maintainer(pkg)
   comments <- cran_comments(pkg, call = call)
 
   # Initial upload ---------
   cli::cli_inform(c(i = "Uploading package & comments"))
-  check_installed("httr2")
-  body <- list(
+  req <- httr2::request(cran_submission_url)
+  req <- httr2::req_body_multipart(
+    req,
     pkg_id = "",
     name = maint$name,
     email = maint$email,
@@ -304,25 +307,22 @@ upload_cran <- function(pkg, built_path, call = parent.frame()) {
     comment = comments,
     upload = "Upload package"
   )
-  req <- httr2::request(cran_submission_url) |>
-    httr2::req_body_multipart(!!!body)
-
-  httr2::resp_check_status(resp)
+  resp <- httr2::req_perform(req)
   new_url <- httr2::url_parse(httr2::resp_url(resp))
 
   # Confirmation -----------
   cli::cli_inform(c(i = "Confirming submission"))
-  body <- list(
+
+  req <- httr2::request(cran_submission_url)
+  req <- httr2::req_body_multipart(
+    req,
     pkg_id = new_url$query$pkg_id,
     name = maint$name,
     email = maint$email,
     policy_check = "1/",
     submit = "Submit package"
   )
-  req <- do.call(
-    httr2::req_body_multipart,
-    c(list(httr2::request(cran_submission_url)), body)
-  )
+
   resp <- httr2::req_perform(req)
   new_url <- httr2::url_parse(httr2::resp_url(resp))
   if (new_url$query$submit == "1") {
