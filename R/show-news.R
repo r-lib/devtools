@@ -31,7 +31,7 @@ show_news <- function(pkg = ".", latest = TRUE, ...) {
     }
   )
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   out <- utils::news(..., db = news_db)
   if (latest) {

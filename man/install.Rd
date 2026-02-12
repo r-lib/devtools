@@ -30,8 +30,8 @@ so see \code{\link[pkgload:unload]{pkgload::unregister()}} for caveats.}
 pre-rendering and multi-arch builds) to make installation as fast
 as possible.}
 
-\item{build}{if \code{TRUE} (the default), \code{\link[pkgbuild:build]{pkgbuild::build()}}s the package
-first. This ensures that the installation is completely clean, and
+\item{build}{If \code{TRUE} (the default), first \code{\link[pkgbuild:build]{pkgbuild::build()}}s the
+package. This ensures that the installation is completely clean, and
 prevents any binary artefacts (like \file{.o}, \code{.so}) from appearing
 in your local package directory, but is considerably slower, because
 every compile has to start from scratch.

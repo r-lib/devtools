@@ -97,13 +97,13 @@ load_package_for_testing <- function(pkg) {
 #' @export
 #' @rdname test
 test_coverage <- function(pkg = ".", report = NULL, ...) {
-  rlang::check_installed("covr")
+  check_installed("covr")
 
   save_all()
   pkg <- as.package(pkg)
   cli::cli_inform(c(i = "Computing test coverage for {.pkg {pkg$package}}"))
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   withr::local_envvar(r_env_vars())
   coverage <- covr::package_coverage(pkg$path, ...)
@@ -120,8 +120,8 @@ test_coverage_active_file <- function(
   export_all = TRUE,
   ...
 ) {
-  rlang::check_installed("covr")
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_installed("covr")
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   test_file <- find_test_file(file)
   test_dir <- path_dir(test_file)
@@ -181,19 +181,19 @@ uses_testthat <- function(pkg = ".") {
   any(dir_exists(paths))
 }
 
-report_default <- function(report, call = rlang::caller_env()) {
+report_default <- function(report, call = caller_env()) {
   if (is.null(report)) {
-    if (is_llm() || !rlang::is_interactive()) "zero" else "html"
+    if (is_llm() || !is_interactive()) "zero" else "html"
   } else {
-    rlang::arg_match(report, c("silent", "zero", "html"), error_call = call)
+    arg_match(report, c("silent", "zero", "html"), error_call = call)
   }
 }
 
-show_report <- function(coverage, report, path, call = rlang::caller_env()) {
+show_report <- function(coverage, report, path, call = caller_env()) {
   report <- report_default(report, call = call)
 
   if (report == "html") {
-    rlang::check_installed("DT")
+    check_installed("DT")
     covered <- unique(covr::display_name(coverage))
 
     if (length(covered) == 1) {

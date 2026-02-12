@@ -12,12 +12,12 @@
 #' @seealso [lintr::lint_package()], [lintr::lint()]
 #' @export
 lint <- function(pkg = ".", cache = TRUE, ...) {
-  rlang::check_installed("lintr")
+  check_installed("lintr")
   pkg <- as.package(pkg)
 
   cli::cli_inform(c(i = "Linting {.pkg {pkg$package}}"))
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   lintr::lint_package(pkg$path, cache = cache, ...)
 }

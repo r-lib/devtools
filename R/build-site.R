@@ -7,7 +7,7 @@
 #' @param ...  Additional arguments passed to [pkgdown::build_site()].
 #' @export
 build_site <- function(path = ".", ...) {
-  rlang::check_installed("pkgdown")
+  check_installed("pkgdown")
 
   save_all()
   pkgdown::build_site(pkg = path, ...)

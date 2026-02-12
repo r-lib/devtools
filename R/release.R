@@ -26,7 +26,7 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
     "release()",
     "usethis::use_release_issue()"
   )
-  if (!rlang::is_interactive()) {
+  if (!is_interactive()) {
     cli::cli_abort("Interactive session required.")
   }
 
@@ -74,7 +74,10 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
     if (show_cran_check) {
       if (!is.null(cran_details)) {
         end_sentence <- "\n shown above?"
-        cli::cat_rule(paste0("Details of the CRAN check results for ", pkg$package))
+        cli::cat_rule(paste0(
+          "Details of the CRAN check results for ",
+          pkg$package
+        ))
         summary(cran_details)
         cli::cat_rule()
       }
@@ -160,7 +163,7 @@ find_release_questions <- function(pkg = ".") {
 }
 
 yesno <- function(msg, .envir = parent.frame()) {
-  if (!rlang::is_interactive()) {
+  if (!is_interactive()) {
     cli::cli_abort("Called from non-interactive context.")
   }
 
@@ -292,7 +295,7 @@ upload_cran <- function(pkg, built_path, call = parent.frame()) {
 
   # Initial upload ---------
   cli::cli_inform(c(i = "Uploading package & comments"))
-  rlang::check_installed("httr")
+  check_installed("httr")
   body <- list(
     pkg_id = "",
     name = maint$name,

@@ -12,6 +12,7 @@
 ## usethis namespace: start
 #' @importFrom ellipsis check_dots_used
 #' @importFrom lifecycle deprecated
+#' @import rlang
 ## usethis namespace: end
 NULL
 
