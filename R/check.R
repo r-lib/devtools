@@ -133,7 +133,10 @@ check <- function(
   )
 }
 
-can_document <- function(required, installed = utils::packageVersion("roxygen2")) {
+can_document <- function(
+  required,
+  installed = utils::packageVersion("roxygen2")
+) {
   if (is.null(required)) {
     return(FALSE)
   }
