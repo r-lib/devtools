@@ -40,7 +40,7 @@
       * version: 2.4.6
       ! devtools or its dependencies out of date:
         "cli"
-        Update them with `devtools::update_packages("devtools")`
+        Update them with `pak::pak("devtools")`
       -- dev package ---------------------------------------------
       * package: <unset>
       * path: <unset>
@@ -60,7 +60,7 @@
       * path: '/tmp/mypkg'
       ! mypkg dependencies out of date:
         "dplyr" and "tidyr"
-        Update them with `devtools::install_dev_deps()`
+        Update them with `pak::local_install_dev_deps()`
 
 # print shows RStudio update message
 

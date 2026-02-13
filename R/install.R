@@ -181,6 +181,7 @@ install_deps <- function(
 
   check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
+  check_installed("remotes")
   remotes::install_deps(
     pkg$path,
     dependencies = dependencies,
@@ -212,6 +213,7 @@ install_dev_deps <- function(
     "install_dev_deps()",
     "pak::local_install_dev_deps()"
   )
+  check_installed("remotes")
   remotes::update_packages("roxygen2")
 
   pkg <- as.package(pkg)
