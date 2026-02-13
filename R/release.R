@@ -289,54 +289,42 @@ extract_cran_msg <- function(msg) {
 }
 
 upload_cran <- function(pkg, built_path, call = parent.frame()) {
+  check_installed("httr2")
+
   pkg <- as.package(pkg)
   maint <- maintainer(pkg)
   comments <- cran_comments(pkg, call = call)
 
   # Initial upload ---------
   cli::cli_inform(c(i = "Uploading package & comments"))
-  check_installed("httr")
-  body <- list(
+  req <- httr2::request(cran_submission_url)
+  req <- httr2::req_body_multipart(
+    req,
     pkg_id = "",
     name = maint$name,
     email = maint$email,
-    uploaded_file = httr::upload_file(built_path, "application/x-gzip"),
+    uploaded_file = curl::form_file(built_path, "application/x-gzip"),
     comment = comments,
     upload = "Upload package"
   )
-  r <- httr::POST(cran_submission_url, body = body)
-
-  # If a 404 likely CRAN is closed for maintenance, try to get the message
-  if (httr::status_code(r) == 404) {
-    msg <- ""
-    try({
-      r2 <- httr::GET(sub("index2", "index", cran_submission_url))
-      msg <- extract_cran_msg(httr::content(r2, "text"))
-    })
-    cli::cli_abort(
-      c(
-        "*" = "Submission failed",
-        "x" = msg
-      ),
-      call = call
-    )
-  }
-
-  httr::stop_for_status(r)
-  new_url <- httr::parse_url(r$url)
+  resp <- httr2::req_perform(req)
+  new_url <- httr2::url_parse(httr2::resp_url(resp))
 
   # Confirmation -----------
   cli::cli_inform(c(i = "Confirming submission"))
-  body <- list(
+
+  req <- httr2::request(cran_submission_url)
+  req <- httr2::req_body_multipart(
+    req,
     pkg_id = new_url$query$pkg_id,
     name = maint$name,
     email = maint$email,
     policy_check = "1/",
     submit = "Submit package"
   )
-  r <- httr::POST(cran_submission_url, body = body)
-  httr::stop_for_status(r)
-  new_url <- httr::parse_url(r$url)
+
+  resp <- httr2::req_perform(req)
+  new_url <- httr2::url_parse(httr2::resp_url(resp))
   if (new_url$query$submit == "1") {
     cli::cli_inform(c(
       "v" = "Package submission successful",
