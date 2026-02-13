@@ -169,8 +169,8 @@ This includes:
   documentation
   (i.e. [`document()`](https://devtools.r-lib.org/dev/reference/document.md)).
 
-- [remotes](https://github.com/r-lib/remotes): Installing packages (i.e.
-  [`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)).
+- [pak](https://pak.r-lib.org): Installing packages
+  (i.e. [`pak::pak()`](https://pak.r-lib.org/reference/pak.html)).
 
 - [pkgbuild](https://github.com/r-lib/pkgbuild): Building binary
   packages (including checking if build tools are available)
@@ -207,10 +207,7 @@ rather than depend on devtools, e.g. use
 [`sessioninfo::session_info()`](https://sessioninfo.r-lib.org/reference/session_info.html)
 rather than
 [`devtools::session_info()`](https://sessioninfo.r-lib.org/reference/session_info.html),
-or
-[`remotes::install_github()`](https://remotes.r-lib.org/reference/install_github.html)
-vs
-[`devtools::install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md).
+or `pak::pak("user/repo")` vs `devtools::install_github("user/repo")`.
 
 However for day to day development we recommend you continue to use
 [`library(devtools)`](https://devtools.r-lib.org/) to quickly load all

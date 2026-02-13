@@ -2,6 +2,8 @@
 
 ## devtools (development version)
 
+- remotes has moved from Imports to Suggests
+  ([\#2663](https://github.com/r-lib/devtools/issues/2663)).
 - [`bash()`](https://devtools.r-lib.org/dev/reference/bash.md),
   [`create()`](https://devtools.r-lib.org/dev/reference/create.md),
   [`missing_s3()`](https://devtools.r-lib.org/dev/reference/missing_s3.md),
@@ -39,6 +41,9 @@
   <https://mac.r-project.org/macbuilder/submit.html>
   ([@nfrerebeau](https://github.com/nfrerebeau),
   [\#2507](https://github.com/r-lib/devtools/issues/2507))
+- [`dev_sitrep()`](https://devtools.r-lib.org/dev/reference/dev_sitrep.md)
+  now uses pak instead of remotes to check for outdated dependencies
+  ([\#2663](https://github.com/r-lib/devtools/issues/2663)).
 - [`dev_sitrep()`](https://devtools.r-lib.org/dev/reference/dev_sitrep.md)
   now uses cli for user-facing messages instead of deprecated usethis UI
   functions.
