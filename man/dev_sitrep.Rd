@@ -17,18 +17,15 @@ debugging. If \code{FALSE}, it will use result cached from a previous run.}
 A named list, with S3 class \code{dev_sitrep} (for printing purposes).
 }
 \description{
-\code{dev_sitrep()} reports
-\itemize{
-\item If R is up to date
-\item If RStudio is up to date
-\item If compiler build tools are installed and available for use
-\item If devtools and its dependencies are up to date
-\item If the package's dependencies are up to date
-}
-
 Call this function if things seem weird and you're not sure
-what's wrong or how to fix it. If this function returns no output
-everything should be ready for package development.
+what's wrong or how to fix it. It reports:
+\itemize{
+\item If R is up to date.
+\item If RStudio is up to date.
+\item If compiler build tools are installed and available for use.
+\item If devtools and its dependencies are up to date.
+\item If the package's dependencies are up to date.
+}
 }
 \examples{
 \dontrun{
