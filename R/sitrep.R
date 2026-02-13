@@ -1,7 +1,3 @@
-# Supress R CMD check note
-#' @importFrom memoise memoise
-NULL
-
 rstudio_version_string <- function() {
   if (!is_rstudio_running()) {
     return(character())
