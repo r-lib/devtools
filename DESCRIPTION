@@ -31,7 +31,6 @@ Imports:
     pkgload (>= 1.5.0),
     profvis (>= 0.4.0),
     rcmdcheck (>= 1.4.0),
-    remotes (>= 2.5.0),
     rlang (>= 1.1.7),
     roxygen2 (>= 7.3.3),
     rversions (>= 3.0.0),
@@ -51,6 +50,7 @@ Suggests:
     httr (>= 1.4.3),
     knitr (>= 1.39),
     lintr (>= 3.0.0),
+    remotes (>= 2.5.0),
     rmarkdown (>= 2.14),
     rstudioapi (>= 0.13),
     spelling (>= 2.2)

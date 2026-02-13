@@ -40,6 +40,7 @@ build_vignettes <- function(
     return(invisible())
   }
 
+  check_installed("remotes")
   deps <- remotes::dev_package_deps(pkg$path, dependencies)
   update(deps, upgrade = upgrade)
 
