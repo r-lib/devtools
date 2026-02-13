@@ -38,9 +38,43 @@
       * path: '/usr/lib/R'
       -- devtools ------------------------------------------------
       * version: 2.4.6
-      ! devtools or its dependencies out of date:
-        "cli"
-        Update them with `pak::pak("devtools")`
+      ! devtools or its dependencies are out of date.
+        Update them with `pak::pak("devtools").`
+        cli (behind: 0.5.0 vs 1.0.0)
+      -- dev package ---------------------------------------------
+      * package: <unset>
+      * path: <unset>
+
+# print warns about missing devtools deps
+
+    Code
+      print(x)
+    Message
+      -- R -------------------------------------------------------
+      * version: 4.4.0
+      * path: '/usr/lib/R'
+      -- devtools ------------------------------------------------
+      * version: 2.4.6
+      ! devtools or its dependencies are out of date.
+        Update them with `pak::pak("devtools").`
+        somepkg (not installed)
+      -- dev package ---------------------------------------------
+      * package: <unset>
+      * path: <unset>
+
+# print notes dev versions of devtools deps
+
+    Code
+      print(x)
+    Message
+      -- R -------------------------------------------------------
+      * version: 4.4.0
+      * path: '/usr/lib/R'
+      -- devtools ------------------------------------------------
+      * version: 2.4.6
+      i devtools or its dependencies are installed from a dev
+        version, FYI:
+        usethis (ahead: 3.2.1.9000 vs 3.2.1)
       -- dev package ---------------------------------------------
       * package: <unset>
       * path: <unset>
@@ -58,9 +92,26 @@
       -- dev package ---------------------------------------------
       * package: "mypkg"
       * path: '/tmp/mypkg'
-      ! mypkg dependencies out of date:
-        "dplyr" and "tidyr"
-        Update them with `pak::local_install_dev_deps()`
+      ! mypkg dependencies are out of date.
+        Update them with `pak::local_install_dev_deps()`.
+        dplyr (behind: 1.0.0 vs 1.1.0)
+        tidyr (behind: 1.0.0 vs 1.1.0)
+
+# print notes dev versions of package deps
+
+    Code
+      print(x)
+    Message
+      -- R -------------------------------------------------------
+      * version: 4.4.0
+      * path: '/usr/lib/R'
+      -- devtools ------------------------------------------------
+      * version: 2.4.6
+      -- dev package ---------------------------------------------
+      * package: "mypkg"
+      * path: '/tmp/mypkg'
+      i mypkg dependencies are installed from a dev version, FYI:
+        usethis (ahead: 3.2.1.9000 vs 3.2.1)
 
 # print shows RStudio update message
 

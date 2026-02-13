@@ -21,7 +21,7 @@ Call this function if things seem weird and you're not sure
 what's wrong or how to fix it. It reports:
 \itemize{
 \item If R is up to date.
-\item If RStudio is up to date.
+\item If RStudio or Positron is up to date.
 \item If compiler build tools are installed and available for use.
 \item If devtools and its dependencies are up to date.
 \item If the package's dependencies are up to date.

@@ -78,7 +78,7 @@ r_release <- function() {
 #' what's wrong or how to fix it. It reports:
 #'
 #' * If R is up to date.
-#' * If RStudio is up to date.
+#' * If RStudio or Positron is up to date.
 #' * If compiler build tools are installed and available for use.
 #' * If devtools and its dependencies are up to date.
 #' * If the package's dependencies are up to date.
@@ -105,9 +105,9 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
     has_build_tools = has_build_tools,
     rtools_path = if (has_build_tools) pkgbuild::rtools_path(),
     devtools_version = utils::packageVersion("devtools"),
-    devtools_deps = outdated_deps(pak::pkg_deps("devtools", dependencies = NA)),
+    devtools_deps = compare_deps(pak::pkg_deps("devtools", dependencies = NA)),
     pkg_deps = if (!is.null(pkg)) {
-      outdated_deps(pak::local_dev_deps(pkg$path, dependencies = TRUE))
+      compare_deps(pak::local_dev_deps(pkg$path, dependencies = TRUE))
     },
     rstudio_version = if (is_rstudio_running()) rstudioapi::getVersion(),
     rstudio_msg = if (!is_positron()) check_for_rstudio_updates()
@@ -123,7 +123,7 @@ new_dev_sitrep <- function(
   has_build_tools = TRUE,
   rtools_path = NULL,
   devtools_version = utils::packageVersion("devtools"),
-  devtools_deps = data.frame(package = character(), diff = numeric()),
+  devtools_deps = NULL,
   pkg_deps = NULL,
   rstudio_version = NULL,
   rstudio_msg = NULL
@@ -155,10 +155,10 @@ print.dev_sitrep <- function(x, ...) {
   kv_line("version", x$r_version)
   kv_line("path", x$r_path, path = TRUE)
   if (x$r_version < x$r_release_version) {
+    all_ok <- FALSE
     cli::cli_bullets(c(
       "!" = "{.field R} is out of date ({.val {x$r_version}} vs {.val {x$r_release_version}})"
     ))
-    all_ok <- FALSE
   }
 
   if (x$is_windows) {
@@ -166,11 +166,11 @@ print.dev_sitrep <- function(x, ...) {
     if (x$has_build_tools) {
       kv_line("path", x$rtools_path, path = TRUE)
     } else {
+      all_ok <- FALSE
       cli::cli_bullets(c(
         "!" = "{.field Rtools} is not installed.",
         " " = "Download and install it from: {.url https://cloud.r-project.org/bin/windows/Rtools/}"
       ))
-      all_ok <- FALSE
     }
   }
 
@@ -179,36 +179,60 @@ print.dev_sitrep <- function(x, ...) {
     kv_line("version", x$rstudio_version)
 
     if (!is.null(x$rstudio_msg)) {
-      cli::cli_bullets(c("!" = "{x$rstudio_msg}"))
       all_ok <- FALSE
+      cli::cli_bullets(c("!" = "{x$rstudio_msg}"))
     }
   }
 
   cli::cli_rule("devtools")
   kv_line("version", x$devtools_version)
 
-  devtools_deps_old <- x$devtools_deps$diff < 0
-  if (any(devtools_deps_old)) {
-    cli::cli_bullets(c(
-      "!" = "{.field devtools} or its dependencies out of date:",
-      " " = "{.val {x$devtools_deps$package[devtools_deps_old]}}",
-      " " = "Update them with {.code pak::pak(\"devtools\")}"
-    ))
+  devtools_not_ok <- any(x$devtools_deps$status != "ok")
+  if (devtools_not_ok) {
     all_ok <- FALSE
+
+    behind <- x$devtools_deps[x$devtools_deps$status == "behind", ]
+    if (nrow(behind) > 0) {
+      cli::cli_bullets(c(
+        "!" = "{.field devtools} or its dependencies are out of date.",
+        " " = "Update them with {.code pak::pak(\"devtools\").}"
+      ))
+      cli::cli_verbatim(paste(" ", dep_labels(behind)))
+    }
+
+    ahead <- x$devtools_deps[x$devtools_deps$status == "ahead", ]
+    if (nrow(ahead) > 0) {
+      cli::cli_bullets(c(
+        "i" = "{.field devtools} or its dependencies are installed from a dev version, FYI:"
+      ))
+      cli::cli_verbatim(paste(" ", dep_labels(ahead)))
+    }
   }
 
   cli::cli_rule("dev package")
   kv_line("package", x$pkg$package)
   kv_line("path", x$pkg$path, path = TRUE)
 
-  pkg_deps_old <- x$pkg_deps$diff < 0
-  if (any(pkg_deps_old)) {
-    cli::cli_bullets(c(
-      "!" = "{.field {x$pkg$package}} dependencies out of date:",
-      " " = "{.val {x$pkg_deps$package[pkg_deps_old]}}",
-      " " = "Update them with {.code pak::local_install_dev_deps()}"
-    ))
+  dev_pkg_not_ok <- any(x$pkg_deps$status != "ok")
+  if (dev_pkg_not_ok) {
     all_ok <- FALSE
+
+    behind <- x$pkg_deps[x$pkg_deps$status == "behind", ]
+    if (nrow(behind) > 0) {
+      cli::cli_bullets(c(
+        "!" = "{.field {x$pkg$package}} dependencies are out of date.",
+        " " = "Update them with {.code pak::local_install_dev_deps()}."
+      ))
+      cli::cli_verbatim(paste(" ", dep_labels(behind)))
+    }
+
+    ahead <- x$pkg_deps[x$pkg_deps$status == "ahead", ]
+    if (nrow(ahead) > 0) {
+      cli::cli_bullets(c(
+        "i" = "{.field {x$pkg$package}} dependencies are installed from a dev version, FYI:"
+      ))
+      cli::cli_verbatim(paste(" ", dep_labels(ahead)))
+    }
   }
 
   if (all_ok) {
@@ -218,10 +242,9 @@ print.dev_sitrep <- function(x, ...) {
   invisible(x)
 }
 
-
 # Helpers -----------------------------------------------------------------
 
-outdated_deps <- function(deps) {
+compare_deps <- function(deps) {
   installed <- vapply(
     deps$package,
     function(p) {
@@ -232,18 +255,53 @@ outdated_deps <- function(deps) {
     },
     character(1)
   )
-  diff <- mapply(
-    function(inst, avail) {
+  status <- mapply(
+    function(inst, latest) {
       if (is.na(inst)) {
-        return(-1L)
+        return("behind")
       }
-      as.integer(utils::compareVersion(inst, avail))
+      switch(
+        as.character(utils::compareVersion(inst, latest)),
+        "-1" = "behind",
+        "0" = "ok",
+        "1" = "ahead"
+      )
     },
     installed,
     deps$version,
     USE.NAMES = FALSE
   )
-  data.frame(package = deps$package, diff = diff)
+  data.frame(
+    package = deps$package,
+    latest = deps$version,
+    installed = installed,
+    status = status
+  )
+}
+
+dep_labels <- function(deps) {
+  labels <- mapply(
+    format_dep_line,
+    format(deps$package, justify = "left"),
+    deps$installed,
+    deps$latest,
+    deps$status,
+    USE.NAMES = FALSE
+  )
+  stats::setNames(labels, rep(" ", length(labels)))
+}
+
+format_dep_line <- function(package, installed, latest, status) {
+  if (is.na(installed)) {
+    paste0(package, " (not installed)")
+  } else {
+    status_styled <- if (status == "behind") {
+      cli::col_red(status)
+    } else {
+      cli::col_cyan(status)
+    }
+    paste0(package, " (", status_styled, ": ", installed, " vs ", latest, ")")
+  }
 }
 
 kv_line <- function(key, value, path = FALSE) {
