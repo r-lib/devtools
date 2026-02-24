@@ -14,3 +14,4 @@ script.R
 tests/*/*/.gitignore
 docs/
 *.key
+scratch.R
