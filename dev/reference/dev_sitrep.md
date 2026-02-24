@@ -1,20 +1,17 @@
 # Report package development situation
 
-`dev_sitrep()` reports
-
-- If R is up to date
-
-- If RStudio is up to date
-
-- If compiler build tools are installed and available for use
-
-- If devtools and its dependencies are up to date
-
-- If the package's dependencies are up to date
-
 Call this function if things seem weird and you're not sure what's wrong
-or how to fix it. If this function returns no output everything should
-be ready for package development.
+or how to fix it. It reports:
+
+- If R is up to date.
+
+- If RStudio or Positron is up to date.
+
+- If compiler build tools are installed and available for use.
+
+- If devtools and its dependencies are up to date.
+
+- If the package's dependencies are up to date.
 
 ## Usage
 
