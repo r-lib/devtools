@@ -1,3 +1,7 @@
+# Suppress R CMD check note. memoise is used at build time!
+#' @importFrom memoise memoise
+NULL
+
 rstudio_version_string <- function() {
   if (!is_rstudio_running()) {
     return(character())
