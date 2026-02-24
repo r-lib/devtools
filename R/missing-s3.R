@@ -18,7 +18,7 @@ missing_s3 <- function(pkg = ".") {
   # Find all S3 methods in package
   objs <- ls(envir = loaded$env)
   is_s3 <- function(x) roxygen2::is_s3_method(x, env = loaded$env)
-  s3_objs <- Filter(is_s3, objs)
+  s3_objs <- keep(objs, is_s3)
 
   # Find all S3 methods in NAMESPACE
   ns <- pkgload::parse_ns_file(pkg$path)
