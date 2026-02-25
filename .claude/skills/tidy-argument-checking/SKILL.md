@@ -73,9 +73,9 @@ These functions are exported by rlang.
 
   Note that partial matching is an error, unlike `base::match.arg()`. 
 
-- `check_exclusive()` ensures only one of two arguments can be supplied. Supplying both together (i.e. both of them are non-`NULL`) is an error. Use `.require = TRUE` if both can be omitted.
+- `check_exclusive()` ensures only one of two arguments can be supplied. Supplying both together (i.e. both of them are non-`NULL`) is an error. Use `.require = FALSE` if both can be omitted.
 
-- `check_required()`: Nice error message if required argument is not supplied.
+- `check_required()`: Nice error message if required argument (i.e. can't be `missing()`) is not supplied.
 
 ## `call` and `arg` arguments
 
