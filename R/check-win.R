@@ -28,7 +28,7 @@ check_win_devel <- function(
   quiet = FALSE,
   ...
 ) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   check_win(
     pkg = pkg,
@@ -51,7 +51,7 @@ check_win_release <- function(
   quiet = FALSE,
   ...
 ) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   check_win(
     pkg = pkg,
@@ -74,7 +74,7 @@ check_win_oldrelease <- function(
   quiet = FALSE,
   ...
 ) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   check_win(
     pkg = pkg,
@@ -118,9 +118,7 @@ check_win <- function(
     ))
 
     email <- maintainer(pkg)$email
-    if (interactive() && yesno("Email results to {.strong {email}}?")) {
-      return(invisible())
-    }
+    confirm_maintainer_email(email)
   }
 
   built_path <- pkgbuild::build(
@@ -139,7 +137,7 @@ check_win <- function(
     "/",
     path_file(built_path)
   )
-  lapply(url, upload_ftp, file = built_path)
+  walk(url, upload_ftp, file = built_path)
 
   if (!quiet) {
     time <- strftime(Sys.time() + 30 * 60, "%I:%M %p")
@@ -152,6 +150,24 @@ check_win <- function(
   }
 
   invisible()
+}
+
+confirm_maintainer_email <- function(email, call = parent.frame()) {
+  if (!rlang::is_interactive()) {
+    return(FALSE)
+  }
+
+  if (!yesno("Email results to {.strong {email}}?")) {
+    return()
+  }
+
+  cli::cli_abort(
+    c(
+      "User declined upload.",
+      i = "Use `email = {.str your email}` to override."
+    ),
+    call = call
+  )
 }
 
 change_maintainer_email <- function(path, email, call = parent.frame()) {
@@ -176,7 +192,7 @@ change_maintainer_email <- function(path, email, call = parent.frame()) {
   if (!is.list(roles)) {
     roles <- list(roles)
   }
-  is_maintainer <- vapply(roles, function(r) all("cre" %in% r), logical(1))
+  is_maintainer <- map_lgl(roles, function(r) all("cre" %in% r))
   aut[is_maintainer]$email <- email
   desc$set_authors(aut)
 
@@ -184,7 +200,7 @@ change_maintainer_email <- function(path, email, call = parent.frame()) {
 }
 
 upload_ftp <- function(file, url, verbose = FALSE) {
-  rlang::check_installed("curl")
+  check_installed("curl")
 
   stopifnot(file_exists(file))
   stopifnot(is.character(url))

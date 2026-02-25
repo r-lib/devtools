@@ -1,4 +1,4 @@
-# Supress R CMD check note
+# Suppress R CMD check note. memoise is used at build time!
 #' @importFrom memoise memoise
 NULL
 
@@ -53,8 +53,8 @@ check_for_rstudio_updates <- function(
     return()
   }
 
-  nms <- vcapply(result, `[[`, 1)
-  values <- vcapply(result, function(x) utils::URLdecode(x[[2]]))
+  nms <- map_chr(result, `[[`, 1)
+  values <- map_chr(result, function(x) utils::URLdecode(x[[2]]))
 
   result <- stats::setNames(values, nms)
 
@@ -66,34 +66,30 @@ check_for_rstudio_updates <- function(
     sprintf(
       "%s.\nDownload at: %s",
       result[["update-message"]],
-      ui_field(result[["update-url"]])
+      result[["update-url"]]
     )
   )
 }
 
-.r_release <- function() {
-  R_system_version(rversions::r_release()$version)
+r_release <- function() {
+  R_system_version(rversions::resolve("release")$version)
 }
-
-r_release <- memoise::memoise(.r_release)
 
 #' Report package development situation
 #'
-#' @template devtools
-#' @inheritParams pkgbuild::has_build_tools
-#' @description `dev_sitrep()` reports
-#'   * If R is up to date
-#'   * If RStudio is up to date
-#'   * If compiler build tools are installed and available for use
-#'   * If devtools and its dependencies are up to date
-#'   * If the package's dependencies are up to date
+#' @description
+#' Call this function if things seem weird and you're not sure
+#' what's wrong or how to fix it. It reports:
 #'
-#' @description Call this function if things seem weird and you're not sure
-#'   what's wrong or how to fix it. If this function returns no output
-#'   everything should be ready for package development.
+#' * If R is up to date.
+#' * If RStudio or Positron is up to date.
+#' * If compiler build tools are installed and available for use.
+#' * If devtools and its dependencies are up to date.
+#' * If the package's dependencies are up to date.
 #'
 #' @return A named list, with S3 class `dev_sitrep` (for printing purposes).
-#' @importFrom usethis ui_code ui_field ui_todo ui_value ui_done ui_path
+#' @template devtools
+#' @inheritParams pkgbuild::has_build_tools
 #' @export
 #' @examples
 #' \dontrun{
@@ -104,21 +100,52 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
 
   has_build_tools <- !is_windows || pkgbuild::has_build_tools(debug = debug)
 
+  new_dev_sitrep(
+    pkg = pkg,
+    r_version = getRversion(),
+    r_path = path_real(R.home()),
+    r_release_version = r_release(),
+    is_windows = is_windows,
+    has_build_tools = has_build_tools,
+    rtools_path = if (has_build_tools) pkgbuild::rtools_path(),
+    devtools_version = utils::packageVersion("devtools"),
+    devtools_deps = compare_deps(pak::pkg_deps("devtools", dependencies = NA)),
+    pkg_deps = if (!is.null(pkg)) {
+      compare_deps(pak::local_dev_deps(pkg$path, dependencies = TRUE))
+    },
+    rstudio_version = if (is_rstudio_running()) rstudioapi::getVersion(),
+    rstudio_msg = if (!is_positron()) check_for_rstudio_updates()
+  )
+}
+
+new_dev_sitrep <- function(
+  pkg = NULL,
+  r_version = getRversion(),
+  r_path = path_real(R.home()),
+  r_release_version = r_version,
+  is_windows = FALSE,
+  has_build_tools = TRUE,
+  rtools_path = NULL,
+  devtools_version = utils::packageVersion("devtools"),
+  devtools_deps = NULL,
+  pkg_deps = NULL,
+  rstudio_version = NULL,
+  rstudio_msg = NULL
+) {
   structure(
     list(
       pkg = pkg,
-      r_version = getRversion(),
-      r_path = path_real(R.home()),
-      r_release_version = r_release(),
+      r_version = r_version,
+      r_path = r_path,
+      r_release_version = r_release_version,
+      is_windows = is_windows,
       has_build_tools = has_build_tools,
-      rtools_path = if (has_build_tools) pkgbuild::rtools_path(),
-      devtools_version = packageVersion("devtools"),
-      devtools_deps = remotes::package_deps("devtools", dependencies = NA),
-      pkg_deps = if (!is.null(pkg)) {
-        remotes::dev_package_deps(pkg$path, dependencies = TRUE)
-      },
-      rstudio_version = if (is_rstudio_running()) rstudioapi::getVersion(),
-      rstudio_msg = check_for_rstudio_updates()
+      rtools_path = rtools_path,
+      devtools_version = devtools_version,
+      devtools_deps = devtools_deps,
+      pkg_deps = pkg_deps,
+      rstudio_version = rstudio_version,
+      rstudio_msg = rstudio_msg
     ),
     class = "dev_sitrep"
   )
@@ -128,101 +155,151 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
 print.dev_sitrep <- function(x, ...) {
   all_ok <- TRUE
 
-  hd_line("R")
+  cli::cli_rule("R")
   kv_line("version", x$r_version)
   kv_line("path", x$r_path, path = TRUE)
   if (x$r_version < x$r_release_version) {
-    ui_todo(
-      '
-      {ui_field("R")} is out of date ({ui_value(x$r_version)} vs {ui_value(x$r_release_version)})
-      '
-    )
     all_ok <- FALSE
+    cli::cli_bullets(c(
+      "!" = "{.field R} is out of date ({.val {x$r_version}} vs {.val {x$r_release_version}})"
+    ))
   }
 
-  if (is_windows) {
-    hd_line("Rtools")
+  if (x$is_windows) {
+    cli::cli_rule("Rtools")
     if (x$has_build_tools) {
       kv_line("path", x$rtools_path, path = TRUE)
     } else {
-      ui_todo(
-        '
-        {ui_field("RTools")} is not installed:
-        Download and install it from: {ui_field("https://cloud.r-project.org/bin/windows/Rtools/")}
-        '
-      )
+      all_ok <- FALSE
+      cli::cli_bullets(c(
+        "!" = "{.field Rtools} is not installed.",
+        " " = "Download and install it from: {.url https://cloud.r-project.org/bin/windows/Rtools/}"
+      ))
     }
-    all_ok <- FALSE
   }
 
   if (!is.null(x$rstudio_version)) {
-    hd_line("RStudio")
+    cli::cli_rule(if (is_positron()) "Positron" else "RStudio")
     kv_line("version", x$rstudio_version)
 
     if (!is.null(x$rstudio_msg)) {
-      ui_todo(x$rstudio_msg)
       all_ok <- FALSE
+      cli::cli_bullets(c("!" = "{x$rstudio_msg}"))
     }
   }
 
-  hd_line("devtools")
+  cli::cli_rule("devtools")
   kv_line("version", x$devtools_version)
 
-  devtools_deps_old <- x$devtools_deps$diff < 0
-  if (any(devtools_deps_old)) {
-    ui_todo(
-      '
-      {ui_field("devtools")} or its dependencies out of date:
-      {paste(ui_value(x$devtools_deps$package[devtools_deps_old]), collapse = ", ")}
-      Update them with {ui_code("devtools::update_packages(\\"devtools\\")")}
-      '
-    )
+  devtools_not_ok <- any(x$devtools_deps$status != "ok")
+  if (devtools_not_ok) {
     all_ok <- FALSE
+
+    behind <- x$devtools_deps[x$devtools_deps$status == "behind", ]
+    if (nrow(behind) > 0) {
+      cli::cli_bullets(c(
+        "!" = "{.field devtools} or its dependencies are out of date.",
+        " " = "Update them with {.code pak::pak(\"devtools\").}"
+      ))
+      cli::cli_verbatim(paste(" ", dep_labels(behind)))
+    }
+
+    ahead <- x$devtools_deps[x$devtools_deps$status == "ahead", ]
+    if (nrow(ahead) > 0) {
+      cli::cli_bullets(c(
+        "i" = "{.field devtools} or its dependencies are installed from a dev version, FYI:"
+      ))
+      cli::cli_verbatim(paste(" ", dep_labels(ahead)))
+    }
   }
 
-  hd_line("dev package")
+  cli::cli_rule("dev package")
   kv_line("package", x$pkg$package)
   kv_line("path", x$pkg$path, path = TRUE)
 
-  pkg_deps_old <- x$pkg_deps$diff < 0
-  if (any(pkg_deps_old)) {
-    ui_todo(
-      '
-      {ui_field(x$pkg$package)} dependencies out of date:
-      {paste(ui_value(x$pkg_deps$package[pkg_deps_old]), collapse = ", ")}
-      Update them with {ui_code("devtools::install_dev_deps()")}
-      '
-    )
+  dev_pkg_not_ok <- any(x$pkg_deps$status != "ok")
+  if (dev_pkg_not_ok) {
     all_ok <- FALSE
+
+    behind <- x$pkg_deps[x$pkg_deps$status == "behind", ]
+    if (nrow(behind) > 0) {
+      cli::cli_bullets(c(
+        "!" = "{.field {x$pkg$package}} dependencies are out of date.",
+        " " = "Update them with {.code pak::local_install_dev_deps()}."
+      ))
+      cli::cli_verbatim(paste(" ", dep_labels(behind)))
+    }
+
+    ahead <- x$pkg_deps[x$pkg_deps$status == "ahead", ]
+    if (nrow(ahead) > 0) {
+      cli::cli_bullets(c(
+        "i" = "{.field {x$pkg$package}} dependencies are installed from a dev version, FYI:"
+      ))
+      cli::cli_verbatim(paste(" ", dep_labels(ahead)))
+    }
   }
 
   if (all_ok) {
-    ui_done(
-      "
-      All checks passed
-      "
-    )
+    cli::cli_bullets(c("v" = "All checks passed"))
   }
 
   invisible(x)
 }
 
-
 # Helpers -----------------------------------------------------------------
 
-hd_line <- function(name) {
-  cat_rule(cli::style_bold(name))
+compare_deps <- function(deps) {
+  installed <- map_chr(deps$package, function(p) {
+    tryCatch(
+      as.character(utils::packageVersion(p)),
+      error = function(e) NA_character_
+    )
+  })
+  status <- map2_chr(installed, deps$version, function(inst, latest) {
+    if (is.na(inst)) {
+      return("behind")
+    }
+    switch(
+      as.character(utils::compareVersion(inst, latest)),
+      "-1" = "behind",
+      "0" = "ok",
+      "1" = "ahead"
+    )
+  })
+  data.frame(
+    package = deps$package,
+    latest = deps$version,
+    installed = installed,
+    status = status
+  )
+}
+
+dep_labels <- function(deps) {
+  # helps with readability
+  deps$package <- format(deps$package, justify = "left")
+  labels <- list_c(pmap(deps, format_dep_line))
+  stats::setNames(labels, rep(" ", length(labels)))
+}
+
+format_dep_line <- function(package, installed, latest, status) {
+  if (is.na(installed)) {
+    paste0(package, " (not installed)")
+  } else {
+    status_styled <- if (status == "behind") {
+      cli::col_red(status)
+    } else {
+      cli::col_cyan(status)
+    }
+    paste0(package, " (", status_styled, ": ", installed, " vs ", latest, ")")
+  }
 }
 
 kv_line <- function(key, value, path = FALSE) {
   if (is.null(value)) {
-    value <- cli::col_silver("<unset>")
+    cli::cli_inform(c("*" = "{key}: {.silver <unset>}"))
+  } else if (path) {
+    cli::cli_inform(c("*" = "{key}: {.path {value}}"))
   } else {
-    if (path) {
-      value <- ui_path(value, base = NA)
-    } else {
-      value <- ui_value(value)
-    }
+    cli::cli_inform(c("*" = "{key}: {.val {value}}"))
   }
-  cli::cat_line(cli::symbol$bullet, " ", key, ": ", value)
 }

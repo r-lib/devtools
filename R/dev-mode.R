@@ -88,7 +88,7 @@ is_library <- function(path) {
   dirs <- dir_ls(path, type = "directory")
 
   has_pkg_dir <- function(path) length(dir_ls(path, regexp = "Meta")) > 0
-  help_dirs <- vapply(dirs, has_pkg_dir, logical(1))
+  help_dirs <- map_lgl(dirs, has_pkg_dir)
 
   all(help_dirs)
 }

@@ -4,7 +4,7 @@
       package_file(path = 1)
     Condition
       Error in `package_file()`:
-      ! `path` must be a string.
+      ! `path` must be a single string, not the number 1.
     Code
       package_file(path = "doesntexist")
     Condition

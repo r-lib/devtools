@@ -22,24 +22,21 @@ Imports:
     desc (>= 1.4.3),
     ellipsis (>= 0.3.2),
     fs (>= 1.6.6),
-    lifecycle (>= 1.0.4),
+    lifecycle (>= 1.0.5),
     memoise (>= 2.0.1),
     miniUI (>= 0.1.2),
+    pak (>= 0.9.2),
     pkgbuild (>= 1.4.8),
-    pkgdown (>= 2.1.3),
-    pkgload (>= 1.4.1),
+    pkgdown (>= 2.2.0),
+    pkgload (>= 1.5.0),
     profvis (>= 0.4.0),
     rcmdcheck (>= 1.4.0),
-    remotes (>= 2.5.0),
-    rlang (>= 1.1.6),
+    rlang (>= 1.1.7),
     roxygen2 (>= 7.3.3),
-    rversions (>= 2.1.2),
+    rversions (>= 3.0.0),
     sessioninfo (>= 1.2.3),
-    stats,
-    testthat (>= 3.2.3),
-    tools,
+    testthat (>= 3.3.2),
     urlchecker (>= 1.0.1),
-    utils,
     withr (>= 3.0.2)
 Suggests:
     BiocManager (>= 1.30.18),
@@ -50,14 +47,10 @@ Suggests:
     DT (>= 0.23),
     foghorn (>= 1.4.2),
     gh (>= 1.3.0),
-    gmailr (>= 1.0.1),
-    httr (>= 1.4.3),
+    httr2 (>= 1.0.0),
     knitr (>= 1.39),
     lintr (>= 3.0.0),
-    MASS,
-    mockery (>= 0.4.3),
-    pingr (>= 2.0.1),
-    rhub (>= 1.1.1),
+    remotes (>= 2.5.0),
     rmarkdown (>= 2.14),
     rstudioapi (>= 0.13),
     spelling (>= 2.2)
@@ -65,6 +58,7 @@ VignetteBuilder:
     knitr
 Config/Needs/website: tidyverse/tidytemplate
 Config/testthat/edition: 3
+Config/testthat/parallel: true
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)

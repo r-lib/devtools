@@ -1,14 +1,12 @@
-#' Build package vignettes.
+#' Build package vignettes
 #'
-#' Builds package vignettes using the same algorithm that `R CMD build`
-#' does. This means including non-Sweave vignettes, using makefiles (if
-#' present), and copying over extra files. The files are copied in the 'doc'
-#' directory and an vignette index is created in 'Meta/vignette.rds', as they
-#' would be in a built package. 'doc' and 'Meta' are added to
-#' `.Rbuildignore`, so will not be included in the built package. These
-#' files can be checked into version control, so they can be viewed with
-#' `browseVignettes()` and `vignette()` if the package has been
-#' loaded with `load_all()` without needing to re-build them locally.
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `build_vignettes()` is deprecated because we no longer recommend that you
+#' build vignettes in this way, because it leaves build artifacts in your
+#' development directory. Instead, use [pkgdown::build_article()] to
+#' render articles locally for preview and polishing.
 #'
 #' @template devtools
 #' @param quiet If `TRUE`, suppresses most output. Set to `FALSE`
@@ -22,11 +20,8 @@
 #' @inheritParams tools::buildVignettes
 #' @inheritParams remotes::install_deps
 #' @importFrom stats update
-#' @keywords programming
-#' @seealso [clean_vignettes()] to remove the pdfs in
-#'   \file{doc} created from vignettes
+#' @keywords internal
 #' @export
-#' @seealso [clean_vignettes()] to remove build tex/pdf files.
 build_vignettes <- function(
   pkg = ".",
   dependencies = "VignetteBuilder",
@@ -36,14 +31,16 @@ build_vignettes <- function(
   install = TRUE,
   keep_md = TRUE
 ) {
+  lifecycle::deprecate_warn("2.5.0", "build_vignettes()")
   pkg <- as.package(pkg)
   save_all()
 
   vigns <- tools::pkgVignettes(dir = pkg$path)
   if (length(vigns$docs) == 0) {
-    return()
+    return(invisible())
   }
 
+  check_installed("remotes")
   deps <- remotes::dev_package_deps(pkg$path, dependencies)
   update(deps, upgrade = upgrade)
 
@@ -86,18 +83,22 @@ create_vignette_index <- function(pkg, vigns) {
   saveRDS(vignette_index, vignette_index_path, version = 2L)
 }
 
-#' Clean built vignettes.
+#' Clean built vignettes
 #'
-#' This uses a fairly rudimentary algorithm where any files in \file{doc}
-#' with a name that exists in \file{vignettes} are removed.
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `clean_vignettes()` is deprecated because [build_vignettes()] is deprecated.
 #'
 #' @template devtools
+#' @keywords internal
 #' @export
 clean_vignettes <- function(pkg = ".") {
+  lifecycle::deprecate_warn("2.5.0", "clean_vignettes()")
   pkg <- as.package(pkg)
   vigns <- tools::pkgVignettes(dir = pkg$path)
-  if (path_file(vigns$dir) != "vignettes") {
-    return()
+  if (length(vigns$docs) == 0 || path_file(vigns$dir) != "vignettes") {
+    return(invisible())
   }
 
   cli::cli_inform(c(
@@ -122,13 +123,13 @@ clean_vignettes <- function(pkg = ".") {
     file_delete(to_remove)
   }
 
-  lapply(c(doc_path, meta_path), dir_delete_if_empty)
+  walk(c(doc_path, meta_path), dir_delete_if_empty)
 
   invisible(TRUE)
 }
 
 dir_delete_if_empty <- function(x) {
-  if (dir_exists(x) && rlang::is_empty(dir_ls(x))) {
+  if (dir_exists(x) && is_empty(dir_ls(x))) {
     dir_delete(x)
     cli::cli_inform(c(x = "Removing {.file {path_file(x)}}"))
   }

@@ -1,4 +1,4 @@
-#' Custom devtools release checks.
+#' Custom devtools release checks
 #'
 #' This function performs additional checks prior to release. It is called
 #' automatically by [release()].
@@ -8,7 +8,7 @@
 #' @export
 release_checks <- function(pkg = ".", built_path = NULL) {
   pkg <- as.package(pkg)
-  cat_rule(paste0("Running additional devtools checks for ", pkg$package))
+  cli::cat_rule(paste0("Running additional devtools checks for ", pkg$package))
 
   check_version(pkg)
   check_dev_versions(pkg)
@@ -16,20 +16,20 @@ release_checks <- function(pkg = ".", built_path = NULL) {
   check_news_md(pkg)
   check_remotes(pkg)
 
-  cat_rule()
+  cli::cat_rule()
 }
 
 check_dev_versions <- function(pkg = ".") {
   pkg <- as.package(pkg)
 
-  dep_list <- pkg[tolower(remotes::standardise_dep(TRUE))]
-  deps <- do.call("rbind", unname(compact(lapply(dep_list, parse_deps))))
+  dep_list <- pkg[tolower(c("Depends", "Imports", "LinkingTo", "Suggests"))]
+  deps <- do.call("rbind", unname(compact(map(dep_list, parse_deps))))
   deps <- deps[!is.na(deps$version), , drop = FALSE]
 
-  parsed <- lapply(deps$version, function(x) unlist(numeric_version(x)))
+  parsed <- map(deps$version, function(x) unlist(numeric_version(x)))
 
   lens <- lengths(parsed)
-  last_ver <- vapply(parsed, function(x) x[[length(x)]], integer(1))
+  last_ver <- map_int(parsed, function(x) x[[length(x)]])
 
   is_dev <- lens == 4 & last_ver >= 9000
 
@@ -68,7 +68,7 @@ check_vignette_titles <- function(pkg = ".") {
     any(grepl("Vignette Title", h))
   }
   v <- stats::setNames(vigns$docs, path_file(vigns$docs))
-  has_vt <- vapply(v, has_vignette_title, logical(1), n = 30)
+  has_vt <- map_lgl(v, has_vignette_title, n = 30)
 
   check_status(
     !any(has_vt),

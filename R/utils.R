@@ -1,9 +1,3 @@
-compact <- function(x) {
-  x[lengths(x) > 0]
-}
-
-"%||%" <- function(a, b) if (!is.null(a)) a else b
-
 "%:::%" <- function(p, f) {
   get(f, envir = asNamespace(p))
 }
@@ -26,10 +20,6 @@ is_attached <- function(pkg = ".") {
   !is.null(pkgload::pkg_env(pkg$package))
 }
 
-vcapply <- function(x, FUN, ...) {
-  vapply(x, FUN, FUN.VALUE = character(1), ...)
-}
-
 release_bullets <- function() {
   c(
     '`usethis::use_latest_dependencies(TRUE, "CRAN")`',
@@ -41,6 +31,27 @@ is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }
 
+is_positron <- function() {
+  Sys.getenv("POSITRON") == "1"
+}
+
 is_rstudio_running <- function() {
   !is_testing() && rstudioapi::isAvailable()
+}
+
+# Copied from testthat:::is_llm()
+is_llm <- function() {
+  nzchar(Sys.getenv("AGENT")) ||
+    nzchar(Sys.getenv("CLAUDECODE")) ||
+    nzchar(Sys.getenv("GEMINI_CLI")) ||
+    nzchar(Sys.getenv("CURSOR_AGENT"))
+}
+
+# Suppress cli wrapping
+no_wrap <- function(x) {
+  x <- gsub("{", "{{", x, fixed = TRUE)
+  x <- gsub("}", "}}", x, fixed = TRUE)
+  x <- gsub(" ", "\u00a0", x, fixed = TRUE)
+  x <- gsub("\n", "\f", x, fixed = TRUE)
+  x
 }
