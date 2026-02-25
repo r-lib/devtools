@@ -63,7 +63,7 @@ build_rmd <- function(
 build_readme <- function(path = ".", quiet = TRUE, ...) {
   pkg <- as.package(path)
 
-  regexp <- paste0(path_file(pkg$path), "/(inst/)?readme[.]rmd")
+  regexp <- paste0(path_file(pkg$path), "/(inst/)?readme[.]rmd$")
   readme_path <- path_abs(dir_ls(
     pkg$path,
     ignore.case = TRUE,
