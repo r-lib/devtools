@@ -99,6 +99,7 @@ hadley
 http
 https
 httr
+httr2
 hunspell
 importFrom
 initialising

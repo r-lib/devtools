@@ -100,30 +100,24 @@ check_mac <- function(
 
   url <- "https://mac.r-project.org/macbuilder/v1/submit"
 
-  check_installed("httr")
+  check_installed("httr2")
   body <- list(
-    pkgfile = httr::upload_file(built_path),
+    pkgfile = curl::form_file(built_path),
     rflavor = tolower(version)
   )
 
   if (length(dep_built_paths) > 0) {
-    uploads <- map(dep_built_paths, httr::upload_file)
+    uploads <- map(dep_built_paths, curl::form_file)
     names(uploads) <- rep("depfiles", length(uploads))
     body <- append(body, uploads)
   }
 
-  res <- httr::POST(
-    url,
-    body = body,
-    headers = list(
-      "Content-Type" = "multipart/form-data"
-    ),
-    encode = "multipart"
-  )
+  req <- httr2::request(url) |>
+    httr2::req_body_multipart(!!!body) |>
+    httr2::req_headers(Accept = "application/json")
+  resp <- httr2::req_perform(req)
 
-  httr::stop_for_status(res, task = "Uploading package")
-
-  response_url <- httr::content(res)$url
+  response_url <- httr2::resp_body_json(resp)$url
 
   if (!quiet) {
     time <- strftime(Sys.time() + 10 * 60, "%I:%M %p")
