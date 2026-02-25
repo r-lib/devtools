@@ -25,7 +25,44 @@ test_that("print warns about outdated devtools deps", {
     r_version = R_system_version("4.4.0"),
     r_path = "/usr/lib/R",
     devtools_version = package_version("2.4.6"),
-    devtools_deps = data.frame(package = c("rlang", "cli"), diff = c(0, -1))
+    devtools_deps = data.frame(
+      package = c("rlang", "cli"),
+      latest = c("1.0.0", "1.0.0"),
+      installed = c("1.0.0", "0.5.0"),
+      status = c("ok", "behind")
+    )
+  )
+  expect_snapshot(print(x))
+})
+
+test_that("print warns about missing devtools deps", {
+  local_reproducible_output(width = 60)
+  x <- new_dev_sitrep(
+    r_version = R_system_version("4.4.0"),
+    r_path = "/usr/lib/R",
+    devtools_version = package_version("2.4.6"),
+    devtools_deps = data.frame(
+      package = c("rlang", "somepkg"),
+      latest = c("1.0.0", "1.0.0"),
+      installed = c("1.0.0", NA_character_),
+      status = c("ok", "behind")
+    )
+  )
+  expect_snapshot(print(x))
+})
+
+test_that("print notes dev versions of devtools deps", {
+  local_reproducible_output(width = 60)
+  x <- new_dev_sitrep(
+    r_version = R_system_version("4.4.0"),
+    r_path = "/usr/lib/R",
+    devtools_version = package_version("2.4.6"),
+    devtools_deps = data.frame(
+      package = "usethis",
+      latest = "3.2.1",
+      installed = "3.2.1.9000",
+      status = "ahead"
+    )
   )
   expect_snapshot(print(x))
 })
@@ -37,7 +74,29 @@ test_that("print warns about outdated package deps", {
     r_path = "/usr/lib/R",
     devtools_version = package_version("2.4.6"),
     pkg = list(package = "mypkg", path = "/tmp/mypkg"),
-    pkg_deps = data.frame(package = c("dplyr", "tidyr"), diff = c(-1, -1))
+    pkg_deps = data.frame(
+      package = c("dplyr", "tidyr"),
+      latest = c("1.1.0", "1.1.0"),
+      installed = c("1.0.0", "1.0.0"),
+      status = c("behind", "behind")
+    )
+  )
+  expect_snapshot(print(x))
+})
+
+test_that("print notes dev versions of package deps", {
+  local_reproducible_output(width = 60)
+  x <- new_dev_sitrep(
+    r_version = R_system_version("4.4.0"),
+    r_path = "/usr/lib/R",
+    devtools_version = package_version("2.4.6"),
+    pkg = list(package = "mypkg", path = "/tmp/mypkg"),
+    pkg_deps = data.frame(
+      package = "usethis",
+      latest = "3.2.1",
+      installed = "3.2.1.9000",
+      status = "ahead"
+    )
   )
   expect_snapshot(print(x))
 })
@@ -55,6 +114,32 @@ test_that("print shows RStudio update message", {
   expect_snapshot(print(x))
 })
 
+test_that("compare_deps detects ahead packages", {
+  result <- compare_deps(data.frame(
+    package = c("rlang", "cli"),
+    version = c("0.0.1", "0.0.1")
+  ))
+  expect_equal(result$status, c("ahead", "ahead"))
+  expect_equal(result$latest, c("0.0.1", "0.0.1"))
+})
+
+test_that("compare_deps detects behind packages", {
+  result <- compare_deps(data.frame(
+    package = "rlang",
+    version = "99999.0.0"
+  ))
+  expect_equal(result$status, "behind")
+})
+
+test_that("compare_deps reports missing packages", {
+  result <- compare_deps(data.frame(
+    package = c("rlang", "thereIsNoSuchPackage"),
+    version = c("0.0.1", "1.0.0")
+  ))
+  expect_equal(result$status, c("ahead", "behind"))
+  expect_true(is.na(result$installed[[2]]))
+})
+
 test_that("check_for_rstudio_updates", {
   skip_if_offline()
   skip_on_cran()
@@ -64,7 +149,7 @@ test_that("check_for_rstudio_updates", {
   # "darwin" in that case, so I test with "darwin"
   # also mix in some "windows"
 
-  # returns nothing rstudio not available
+  # returns nothing rstudio not needed
   expect_null(check_for_rstudio_updates("darwin", "1.0.0", FALSE))
 
   # returns nothing if the version is ahead of the current version

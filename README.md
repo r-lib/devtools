@@ -130,8 +130,7 @@ includes:
 * [roxygen2](https://github.com/r-lib/roxygen2): Function and package documentation
   (i.e. `document()`).
 
-* [remotes](https://github.com/r-lib/remotes): Installing packages (i.e.
-  `install_github()`).
+* [pak](https://pak.r-lib.org): Installing packages (i.e. `pak::pak()`).
 
 * [pkgbuild](https://github.com/r-lib/pkgbuild): Building binary packages
   (including checking if build tools are available) (i.e. `build()`).
@@ -161,7 +160,7 @@ You may also need to care if you are trying to use some devtools functionality
 in your own package or deployed application. Generally in these cases it
 is better to depend on the particular package directly rather than depend on devtools,
 e.g. use `sessioninfo::session_info()` rather than `devtools::session_info()`,
-or `remotes::install_github()` vs `devtools::install_github()`.
+or `pak::pak("user/repo")` vs `devtools::install_github("user/repo")`.
 
 However for day to day development we recommend you continue to use
 `library(devtools)` to quickly load all needed development tools, just like

@@ -107,7 +107,7 @@ check_mac <- function(
   )
 
   if (length(dep_built_paths) > 0) {
-    uploads <- lapply(dep_built_paths, curl::form_file)
+    uploads <- map(dep_built_paths, curl::form_file)
     names(uploads) <- rep("depfiles", length(uploads))
     body <- append(body, uploads)
   }

@@ -40,6 +40,7 @@ install_bioc <- function(...) {
     "install_bioc()",
     I('pak::pak("bioc::pkg")')
   )
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::install_bioc(...), required = FALSE)
 }
 
@@ -51,6 +52,7 @@ install_bitbucket <- function(...) {
     "install_bitbucket()",
     "remotes::install_bitbucket()"
   )
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::install_bitbucket(...), required = FALSE)
 }
 
@@ -58,6 +60,7 @@ install_bitbucket <- function(...) {
 #' @export
 install_cran <- function(...) {
   lifecycle::deprecate_warn("2.5.0", "install_cran()", "pak::pak()")
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::install_cran(...), required = FALSE)
 }
 
@@ -65,6 +68,7 @@ install_cran <- function(...) {
 #' @export
 install_dev <- function(...) {
   lifecycle::deprecate_warn("2.5.0", "install_dev()", "remotes::install_dev()")
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::install_dev(...), required = FALSE)
 }
 
@@ -72,6 +76,7 @@ install_dev <- function(...) {
 #' @export
 install_git <- function(...) {
   lifecycle::deprecate_warn("2.5.0", "install_git()", I('pak::pak("git::url")'))
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::install_git(...), required = FALSE)
 }
 
@@ -83,6 +88,7 @@ install_github <- function(...) {
     "install_github()",
     I('pak::pak("user/repo")')
   )
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::install_github(...), required = FALSE)
 }
 
@@ -94,6 +100,7 @@ install_gitlab <- function(...) {
     "install_gitlab()",
     I('pak::pak("gitlab::user/repo")')
   )
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::install_gitlab(...), required = FALSE)
 }
 
@@ -105,6 +112,7 @@ install_local <- function(...) {
     "install_local()",
     I('pak::pak("local::path")')
   )
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::install_local(...), required = FALSE)
 }
 
@@ -112,6 +120,7 @@ install_local <- function(...) {
 #' @export
 install_svn <- function(...) {
   lifecycle::deprecate_warn("2.5.0", "install_svn()", "remotes::install_svn()")
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::install_svn(...), required = FALSE)
 }
 
@@ -119,6 +128,7 @@ install_svn <- function(...) {
 #' @export
 install_url <- function(...) {
   lifecycle::deprecate_warn("2.5.0", "install_url()", I('pak::pak("url::url")'))
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::install_url(...), required = FALSE)
 }
 
@@ -130,6 +140,7 @@ install_version <- function(...) {
     "install_version()",
     I('pak::pak("pkg@version")')
   )
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::install_version(...), required = FALSE)
 }
 
@@ -137,6 +148,7 @@ install_version <- function(...) {
 #' @export
 update_packages <- function(...) {
   lifecycle::deprecate_warn("2.5.0", "update_packages()", "pak::pak()")
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::update_packages(...), required = FALSE)
 }
 
@@ -148,6 +160,7 @@ dev_package_deps <- function(...) {
     "dev_package_deps()",
     "pak::local_dev_deps()"
   )
+  check_installed("remotes")
   pkgbuild::with_build_tools(remotes::dev_package_deps(...), required = FALSE)
 }
 
@@ -155,6 +168,7 @@ dev_package_deps <- function(...) {
 #' @export
 github_pull <- function(...) {
   lifecycle::deprecate_warn("2.5.0", "github_pull()", "remotes::github_pull()")
+  check_installed("remotes")
   remotes::github_pull(...)
 }
 
@@ -166,5 +180,6 @@ github_release <- function(...) {
     "github_release()",
     "remotes::github_release()"
   )
+  check_installed("remotes")
   remotes::github_release(...)
 }

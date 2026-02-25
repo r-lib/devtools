@@ -102,7 +102,7 @@ run_examples <- function(
   load_all(pkg$path, reset = TRUE, export_all = FALSE, helpers = FALSE)
   on.exit(load_all(pkg$path, reset = TRUE))
 
-  lapply(
+  walk(
     files,
     pkgload::run_example,
     run_donttest = run_donttest,
