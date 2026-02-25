@@ -53,8 +53,8 @@ check_for_rstudio_updates <- function(
     return()
   }
 
-  nms <- vcapply(result, `[[`, 1)
-  values <- vcapply(result, function(x) utils::URLdecode(x[[2]]))
+  nms <- map_chr(result, `[[`, 1)
+  values <- map_chr(result, function(x) utils::URLdecode(x[[2]]))
 
   result <- stats::setNames(values, nms)
 
@@ -249,32 +249,23 @@ print.dev_sitrep <- function(x, ...) {
 # Helpers -----------------------------------------------------------------
 
 compare_deps <- function(deps) {
-  installed <- vapply(
-    deps$package,
-    function(p) {
-      tryCatch(
-        as.character(utils::packageVersion(p)),
-        error = function(e) NA_character_
-      )
-    },
-    character(1)
-  )
-  status <- mapply(
-    function(inst, latest) {
-      if (is.na(inst)) {
-        return("behind")
-      }
-      switch(
-        as.character(utils::compareVersion(inst, latest)),
-        "-1" = "behind",
-        "0" = "ok",
-        "1" = "ahead"
-      )
-    },
-    installed,
-    deps$version,
-    USE.NAMES = FALSE
-  )
+  installed <- map_chr(deps$package, function(p) {
+    tryCatch(
+      as.character(utils::packageVersion(p)),
+      error = function(e) NA_character_
+    )
+  })
+  status <- map2_chr(installed, deps$version, function(inst, latest) {
+    if (is.na(inst)) {
+      return("behind")
+    }
+    switch(
+      as.character(utils::compareVersion(inst, latest)),
+      "-1" = "behind",
+      "0" = "ok",
+      "1" = "ahead"
+    )
+  })
   data.frame(
     package = deps$package,
     latest = deps$version,
@@ -284,14 +275,9 @@ compare_deps <- function(deps) {
 }
 
 dep_labels <- function(deps) {
-  labels <- mapply(
-    format_dep_line,
-    format(deps$package, justify = "left"),
-    deps$installed,
-    deps$latest,
-    deps$status,
-    USE.NAMES = FALSE
-  )
+  # helps with readability
+  deps$package <- format(deps$package, justify = "left")
+  labels <- list_c(pmap(deps, format_dep_line))
   stats::setNames(labels, rep(" ", length(labels)))
 }
 

@@ -84,18 +84,18 @@ check_doc_fields <- function(pkg = ".", fields = c("value", "examples")) {
 
   paths <- dir_ls(path(pkg$path, "man"), regexp = "\\.Rd$")
   names(paths) <- path_rel(paths, pkg$path)
-  rd <- lapply(paths, tools::parse_Rd, permissive = TRUE)
-  rd_tags <- lapply(rd, \(x) unlist(lapply(x, attr, "Rd_tag")))
+  rd <- map(paths, tools::parse_Rd, permissive = TRUE)
+  rd_tags <- map(rd, \(x) unlist(map(x, attr, "Rd_tag")))
 
   has_tag <- function(tags, this) {
     any(paste0("\\", this) %in% tags)
   }
 
-  has_usage <- vapply(rd_tags, has_tag, logical(1), this = "usage")
+  has_usage <- map_lgl(rd_tags, has_tag, this = "usage")
   rd_tags <- rd_tags[has_usage]
 
-  results <- lapply(fields, function(field) {
-    missing <- !vapply(rd_tags, has_tag, logical(1), this = field)
+  results <- map(fields, function(field) {
+    missing <- !map_lgl(rd_tags, has_tag, this = field)
     names(rd_tags)[missing]
   })
 
