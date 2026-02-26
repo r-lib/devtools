@@ -1,9 +1,12 @@
-#' Build a Rmarkdown files package
+#' Build Rmarkdown files
 #'
-#' `build_rmd()` is a wrapper around [rmarkdown::render()] that first installs
-#' a temporary copy of the package, and then renders each `.Rmd` in a clean R
-#' session. `build_readme()` locates your `README.Rmd` and builds it into a
-#' `README.md`
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' `build_rmd()` is deprecated, as it is a low-level helper for internal use. To
+#' render your package's `README.Rmd` or `README.qmd`, use [build_readme()]. To
+#' preview a vignette or article, use functions like [pkgdown::build_site()] or
+#' [pkgdown::build_article()].
 #'
 #' @param files The Rmarkdown files to be rendered.
 #' @param path path to the package to build the readme.
@@ -11,7 +14,28 @@
 #' @inheritParams install
 #' @inheritParams rmarkdown::render
 #' @export
+#' @keywords internal
 build_rmd <- function(
+  files,
+  path = ".",
+  output_options = list(),
+  ...,
+  quiet = TRUE
+) {
+  lifecycle::deprecate_soft("2.5.0", "build_rmd()", "build_readme()")
+  build_rmd_impl(
+    files = files,
+    path = path,
+    output_options = output_options,
+    ...,
+    quiet = quiet
+  )
+}
+
+# Created as part of the deprecation process to de-export build_rmd().
+# We still want to use this internally without needing to suppress deprecation
+# signals.
+build_rmd_impl <- function(
   files,
   path = ".",
   output_options = list(),
@@ -40,7 +64,9 @@ build_rmd <- function(
   output_options$html_preview <- FALSE
 
   for (path in paths) {
-    cli::cli_inform(c(i = "Building {.path {path}}"))
+    if (!quiet) {
+      cli::cli_inform(c(i = "Building {.path {path}}"))
+    }
     callr::r_safe(
       function(...) rmarkdown::render(...),
       args = list(
@@ -58,7 +84,17 @@ build_rmd <- function(
   invisible(TRUE)
 }
 
-#' @rdname build_rmd
+#' Build README
+#'
+#' Renders an executable README, such as `README.Rmd`, to `README.md`.
+#' Specifically, `build_readme()`:
+#' * Installs a copy of the package's current source to a temporary library
+#' * Renders the README in a clean R session
+#'
+#' @param path Path to the package to build the README.
+#' @param quiet If `TRUE`, suppresses most output. Set to `FALSE`
+#'   if you need to debug.
+#' @param ... Additional arguments passed to [rmarkdown::render()].
 #' @export
 build_readme <- function(path = ".", quiet = TRUE, ...) {
   pkg <- as.package(path)
@@ -81,5 +117,5 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
     )
   }
 
-  build_rmd(readme_path, path = path, quiet = quiet, ...)
+  build_rmd_impl(readme_path, path = path, quiet = quiet, ...)
 }
