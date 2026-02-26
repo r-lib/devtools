@@ -20,7 +20,7 @@ reference:
   contents:
   - build
   - build_manual
-  - build_rmd
+  - build_readme
   - build_site
   - starts_with("check_")
   - check
@@ -46,6 +46,7 @@ reference:
 - title: Deprecated
   contents:
   - bash
+  - build_rmd
   - build_vignettes
   - clean_vignettes
   - create

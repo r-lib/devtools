@@ -3,6 +3,7 @@
 * remotes has moved from Imports to Suggests (#2663).
 * `bash()`, `create()`, `missing_s3()`, `reload()`, `show_news()`, and `wd()` are now deprecated. These functions are all historical parts of our workflow that we no longer use or recommend. `create()` is superseded by `usethis::create_package()`.
 * `build_manual()` reports more details on failure (#2586).
+* `build_rmd()` is soft-deprecated and is discouraged for external use. It exists to be an internal helper for `build_readme()`.
 * `check_doc_fields()` is a new function that checks for missing `\value` and `\examples` fields in Rd files, which are commonly flagged by CRAN (#2525).
 * `build_vignettes()` and `clean_vignettes()` are now deprecated. We no longer recommend building vignettes in this way; instead use `pkgdown::build_article()` to render articles locally (#2488).
 * `build_site()` now just calls `pkgdown::build_site()`, meaning that you will get more (informative) output by default (#2578).

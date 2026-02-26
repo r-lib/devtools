@@ -236,7 +236,11 @@ install_dev_deps <- function(
 local_install <- function(pkg = ".", quiet = TRUE, env = parent.frame()) {
   pkg <- as.package(pkg)
 
-  cli::cli_inform(c(i = "Installing {.pkg {pkg$package}} in temporary library"))
+  if (!quiet) {
+    cli::cli_inform(c(
+      i = "Installing {.pkg {pkg$package}} in temporary library"
+    ))
+  }
   withr::local_temp_libpaths(.local_envir = env)
   install(pkg, upgrade = FALSE, reload = FALSE, quick = TRUE, quiet = quiet)
 }
