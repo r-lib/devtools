@@ -2,6 +2,7 @@
 
 * Email: <mailto:clement.coclet@gmail.com>
 * GitHub mirror: <https://github.com/cran/ggtaxplot>
+* https://gitlab.com/ccoclet/ggtaxplot/-/issues/1
 
 Run `revdepcheck::cloud_details(, "ggtaxplot")` for more info
 
@@ -36,6 +37,7 @@ Run `revdepcheck::cloud_details(, "ggtaxplot")` for more info
 * GitHub: <https://github.com/R-Lum/Luminescence>
 * Email: <mailto:maintainer_luminescence@r-luminescence.org>
 * GitHub mirror: <https://github.com/cran/Luminescence>
+* https://github.com/R-Lum/Luminescence/issues/1453
 
 Run `revdepcheck::cloud_details(, "Luminescence")` for more info
 
@@ -54,6 +56,8 @@ Run `revdepcheck::cloud_details(, "Luminescence")` for more info
 * GitHub: <https://github.com/pharmaR/riskmetric>
 * Email: <mailto:eli.miller@atorusresearch.com>
 * GitHub mirror: <https://github.com/cran/riskmetric>
+* I cloned locally. I can't really tell what's going on -- no obvious smoking gun.
+  https://github.com/pharmaR/riskmetric/issues/397
 
 Run `revdepcheck::cloud_details(, "riskmetric")` for more info
 
@@ -78,6 +82,8 @@ Run `revdepcheck::cloud_details(, "riskmetric")` for more info
 * GitHub: <https://github.com/kforner/srcpkgs>
 * Email: <mailto:karl.forner@gmail.com>
 * GitHub mirror: <https://github.com/cran/srcpkgs>
+* I cloned locally. I can't really tell what's going on -- no obvious smoking gun.
+  https://github.com/kforner/srcpkgs/issues/6
 
 Run `revdepcheck::cloud_details(, "srcpkgs")` for more info
 
@@ -159,4 +165,3 @@ Run `revdepcheck::cloud_details(, "srcpkgs")` for more info
      Error: Vignette re-building failed.
      Execution halted
      ```
-

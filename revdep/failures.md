@@ -3,6 +3,7 @@
 * GitHub: <https://github.com/frederikfabriciusbjerre/caugi>
 * Email: <mailto:frederik@fabriciusbjerre.dk>
 * GitHub mirror: <https://github.com/cran/caugi>
+* Appears to be a rust issue, not devtools-related.
 
 Run `revdepcheck::cloud_details(, "caugi")` for more info
 
@@ -59,6 +60,7 @@ ERROR: configuration failed for package ‘caugi’
 * GitHub: <https://github.com/Core-Bioinformatics/ClustAssess>
 * Email: <mailto:am3019@cam.ac.uk>
 * GitHub mirror: <https://github.com/cran/ClustAssess>
+* Can't install dependency monocle3, which is on BioConductor
 
 Run `revdepcheck::cloud_details(, "ClustAssess")` for more info
 
@@ -129,6 +131,7 @@ Status: OK
 * GitHub: <https://github.com/cdriveraus/ctsem>
 * Email: <mailto:charles.driver2@uzh.ch>
 * GitHub mirror: <https://github.com/cran/ctsem>
+* Appears to be a compilation issue, so not devtools. Apparently ctsem has been here in failures.md in the past.
 
 Run `revdepcheck::cloud_details(, "ctsem")` for more info
 
@@ -200,6 +203,7 @@ ERROR: compilation failed for package ‘ctsem’
 
 * Email: <mailto:ahoken@isu.edu>
 * GitHub mirror: <https://github.com/cran/streamDAG>
+* Needed XQuartz, which I installed. Then needed LaTeX, which I declined to install. Based on code search, I don't think this is a legit dependency, so I don't think devools can break it.
 
 Run `revdepcheck::cloud_details(, "streamDAG")` for more info
 
