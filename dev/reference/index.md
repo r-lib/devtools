@@ -10,9 +10,8 @@ Primary commands used when developing a package.
 - [`build_manual()`](https://devtools.r-lib.org/dev/reference/build_manual.md)
   : Create package pdf manual
 
-- [`build_rmd()`](https://devtools.r-lib.org/dev/reference/build_rmd.md)
-  [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_rmd.md)
-  : Build a Rmarkdown files package
+- [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_readme.md)
+  : Build README
 
 - [`build_site()`](https://devtools.r-lib.org/dev/reference/build_site.md)
   :
@@ -94,6 +93,8 @@ Primary commands used when developing a package.
 
 - [`bash()`](https://devtools.r-lib.org/dev/reference/bash.md)
   **\[deprecated\]** : Open bash shell in package directory
+- [`build_rmd()`](https://devtools.r-lib.org/dev/reference/build_rmd.md)
+  **\[deprecated\]** : Build Rmarkdown files
 - [`build_vignettes()`](https://devtools.r-lib.org/dev/reference/build_vignettes.md)
   **\[deprecated\]** : Build package vignettes
 - [`clean_vignettes()`](https://devtools.r-lib.org/dev/reference/clean_vignettes.md)

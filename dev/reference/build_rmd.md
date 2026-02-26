@@ -1,17 +1,19 @@
-# Build a Rmarkdown files package
+# Build Rmarkdown files
 
-`build_rmd()` is a wrapper around
-[`rmarkdown::render()`](https://pkgs.rstudio.com/rmarkdown/reference/render.html)
-that first installs a temporary copy of the package, and then renders
-each `.Rmd` in a clean R session. `build_readme()` locates your
-`README.Rmd` and builds it into a `README.md`
+**\[deprecated\]**
+
+`build_rmd()` is deprecated, as it is a low-level helper for internal
+use. To render your package's `README.Rmd` or `README.qmd`, use
+[`build_readme()`](https://devtools.r-lib.org/dev/reference/build_readme.md).
+To preview a vignette or article, use functions like
+[`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html)
+or
+[`pkgdown::build_article()`](https://pkgdown.r-lib.org/reference/build_articles.html).
 
 ## Usage
 
 ``` r
 build_rmd(files, path = ".", output_options = list(), ..., quiet = TRUE)
-
-build_readme(path = ".", quiet = TRUE, ...)
 ```
 
 ## Arguments

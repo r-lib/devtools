@@ -18,6 +18,10 @@
 - [`build_manual()`](https://devtools.r-lib.org/dev/reference/build_manual.md)
   reports more details on failure
   ([\#2586](https://github.com/r-lib/devtools/issues/2586)).
+- [`build_rmd()`](https://devtools.r-lib.org/dev/reference/build_rmd.md)
+  is soft-deprecated and is discouraged for external use. It exists to
+  be an internal helper for
+  [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_readme.md).
 - [`check_doc_fields()`](https://devtools.r-lib.org/dev/reference/check_doc_fields.md)
   is a new function that checks for missing `\value` and `\examples`
   fields in Rd files, which are commonly flagged by CRAN
@@ -253,7 +257,7 @@ CRAN release: 2021-06-07
 
 CRAN release: 2021-05-05
 
-- [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_rmd.md)
+- [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_readme.md)
   now uses the `path` argument, as designed
   ([\#2344](https://github.com/r-lib/devtools/issues/2344))
 
@@ -316,7 +320,7 @@ CRAN release: 2021-04-07
 
 ### Minor improvements and fixes
 
-- [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_rmd.md)
+- [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_readme.md)
   now supports readme files located in `inst/README.Rmd`, as intended
   ([\#2333](https://github.com/r-lib/devtools/issues/2333))
 
@@ -922,7 +926,7 @@ understand API in the future, so we feel the tradeoff is worthwhile.
   installed before building the vignettes
   ([\#1822](https://github.com/r-lib/devtools/issues/1822))
 
-- [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_rmd.md)
+- [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_readme.md)
   added to build the README.md from a README.Rmd
   ([\#1762](https://github.com/r-lib/devtools/issues/1762))
 

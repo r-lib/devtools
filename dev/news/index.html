@@ -56,6 +56,8 @@
 <li>
 <code><a href="../reference/build_manual.html">build_manual()</a></code> reports more details on failure (<a href="https://github.com/r-lib/devtools/issues/2586" class="external-link">#2586</a>).</li>
 <li>
+<code><a href="../reference/build_rmd.html">build_rmd()</a></code> is soft-deprecated and is discouraged for external use. It exists to be an internal helper for <code><a href="../reference/build_readme.html">build_readme()</a></code>.</li>
+<li>
 <code><a href="../reference/check_doc_fields.html">check_doc_fields()</a></code> is a new function that checks for missing <code>\value</code> and <code>\examples</code> fields in Rd files, which are commonly flagged by CRAN (<a href="https://github.com/r-lib/devtools/issues/2525" class="external-link">#2525</a>).</li>
 <li>
 <code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> and <code><a href="../reference/clean_vignettes.html">clean_vignettes()</a></code> are now deprecated. We no longer recommend building vignettes in this way; instead use <code><a href="https://pkgdown.r-lib.org/reference/build_articles.html" class="external-link">pkgdown::build_article()</a></code> to render articles locally (<a href="https://github.com/r-lib/devtools/issues/2488" class="external-link">#2488</a>).</li>
@@ -126,7 +128,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.4.1" id="devtools-241">devtools 2.4.1<a class="anchor" aria-label="anchor" href="#devtools-241"></a></h2><p class="text-muted">CRAN release: 2021-05-05</p>
-<ul><li><p><code><a href="../reference/build_rmd.html">build_readme()</a></code> now uses the <code>path</code> argument, as designed (<a href="https://github.com/r-lib/devtools/issues/2344" class="external-link">#2344</a>)</p></li>
+<ul><li><p><code><a href="../reference/build_readme.html">build_readme()</a></code> now uses the <code>path</code> argument, as designed (<a href="https://github.com/r-lib/devtools/issues/2344" class="external-link">#2344</a>)</p></li>
 <li><p><code><a href="../reference/create.html">create()</a></code> no longer opens projects by default to avoid duplicate projects opened by the RStudio IDE project template (<a href="https://github.com/r-lib/devtools/issues/2347" class="external-link">#2347</a>, <a href="https://github.com/malcolmbarrett" class="external-link">@malcolmbarrett</a>)</p></li>
 <li><p>The RStudio addins now use <code><a href="../reference/test.html">test_active_file()</a></code> and <code><a href="../reference/test.html">test_coverage_active_file()</a></code> instead of the deprecated <code><a href="../reference/devtools-defunct.html">test_file()</a></code> and <code><a href="../reference/devtools-defunct.html">test_coverage_file()</a></code> (<a href="https://github.com/r-lib/devtools/issues/2339" class="external-link">#2339</a>)</p></li>
 <li><p>RStudio addins now run in interactive mode, rather than background mode (<a href="https://github.com/jennybc" class="external-link">@jennybc</a>, <a href="https://github.com/r-lib/devtools/issues/2350" class="external-link">#2350</a>)</p></li>
@@ -146,7 +148,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="minor-improvements-and-fixes-2-4-0">Minor improvements and fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-fixes-2-4-0"></a></h3>
-<ul><li><p><code><a href="../reference/build_rmd.html">build_readme()</a></code> now supports readme files located in <code>inst/README.Rmd</code>, as intended (<a href="https://github.com/r-lib/devtools/issues/2333" class="external-link">#2333</a>)</p></li>
+<ul><li><p><code><a href="../reference/build_readme.html">build_readme()</a></code> now supports readme files located in <code>inst/README.Rmd</code>, as intended (<a href="https://github.com/r-lib/devtools/issues/2333" class="external-link">#2333</a>)</p></li>
 <li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> now creates more specific <code>.gitignore</code> entries (<a href="https://github.com/klmr" class="external-link">@klmr</a>, <a href="https://github.com/r-lib/devtools/issues/2317" class="external-link">#2317</a>)</p></li>
 <li><p><code><a href="../reference/check.html">check()</a></code> now only re-documents if you have a matching version of roxygen2 (<a href="https://github.com/r-lib/devtools/issues/2263" class="external-link">#2263</a>).</p></li>
 <li><p><code>change_maintainer_email()</code> now has a check to assess whether the email is actually changed. If the email is not changed, the code now stops such that an email is not accidentally sent to the wrong recipient. (<a href="https://github.com/emilsjoerup" class="external-link">@emilsjoerup</a>, <a href="https://github.com/r-lib/devtools/issues/2073" class="external-link">#2073</a>)</p></li>
@@ -349,7 +351,7 @@
 <li><p><code>remote_sha.github()</code> now correctly looks up SHA in private repositories (<a href="https://github.com/r-lib/devtools/issues/1827" class="external-link">#1827</a>, <a href="https://github.com/renozao" class="external-link">@renozao</a>).</p></li>
 <li><p><strong>devtools</strong> <code>use_*()</code> functions now temporarily set the active <strong>usethis</strong> project if given a pkg argument that is not the current directory. This provides backwards compatibility with previous behavior (<a href="https://github.com/r-lib/devtools/issues/1823" class="external-link">#1823</a>).</p></li>
 <li><p>Vignettes are now built in a separate process, and the package is installed before building the vignettes (<a href="https://github.com/r-lib/devtools/issues/1822" class="external-link">#1822</a>)</p></li>
-<li><p><code><a href="../reference/build_rmd.html">build_readme()</a></code> added to build the README.md from a README.Rmd (<a href="https://github.com/r-lib/devtools/issues/1762" class="external-link">#1762</a>)</p></li>
+<li><p><code><a href="../reference/build_readme.html">build_readme()</a></code> added to build the README.md from a README.Rmd (<a href="https://github.com/r-lib/devtools/issues/1762" class="external-link">#1762</a>)</p></li>
 <li><p><code><a href="../reference/build_vignettes.html">build_vignettes()</a></code> now has a <code>clean</code> and <code>upgrade</code> arguments, to control cleaning of intermediate files and upgrading vignette dependencies respectively. (<a href="https://github.com/r-lib/devtools/issues/1770" class="external-link">#1770</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> gains an additional question ensuring you updated codemeta.json if one exists (<a href="https://github.com/r-lib/devtools/issues/1774" class="external-link">#1774</a>, <a href="https://github.com/r-lib/devtools/issues/1754" class="external-link">#1754</a>)</p></li>
 <li><p><code><a href="../reference/test.html">test()</a></code> now sets <code>useFancyQuotes = FALSE</code> to better mimic the environment tests are run under with <code>R CMD check</code> (<a href="https://github.com/r-lib/devtools/issues/1735" class="external-link">#1735</a>).</p></li>
