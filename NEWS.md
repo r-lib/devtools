@@ -1,5 +1,6 @@
 # devtools (development version)
 
+* `check_built()` no longer prints `R_CHECK_` check env variables - now handled by `rcmdcheck::rcmdcheck()` directly as of r-lib/rcmdcheck#237 (#2621)
 * remotes has moved from Imports to Suggests (#2663).
 * `bash()`, `create()`, `missing_s3()`, `reload()`, `show_news()`, and `wd()` are now deprecated. These functions are all historical parts of our workflow that we no longer use or recommend. `create()` is superseded by `usethis::create_package()`.
 * `build_manual()` reports more details on failure (#2586).
