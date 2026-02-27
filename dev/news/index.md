@@ -2,72 +2,8 @@
 
 ## devtools (development version)
 
-- remotes has moved from Imports to Suggests
-  ([\#2663](https://github.com/r-lib/devtools/issues/2663)).
-- [`bash()`](https://devtools.r-lib.org/dev/reference/bash.md),
-  [`create()`](https://devtools.r-lib.org/dev/reference/create.md),
-  [`missing_s3()`](https://devtools.r-lib.org/dev/reference/missing_s3.md),
-  [`reload()`](https://devtools.r-lib.org/dev/reference/reload.md),
-  [`show_news()`](https://devtools.r-lib.org/dev/reference/show_news.md),
-  and [`wd()`](https://devtools.r-lib.org/dev/reference/wd.md) are now
-  deprecated. These functions are all historical parts of our workflow
-  that we no longer use or recommend.
-  [`create()`](https://devtools.r-lib.org/dev/reference/create.md) is
-  superseded by
-  [`usethis::create_package()`](https://usethis.r-lib.org/reference/create_package.html).
-- [`build_manual()`](https://devtools.r-lib.org/dev/reference/build_manual.md)
-  reports more details on failure
-  ([\#2586](https://github.com/r-lib/devtools/issues/2586)).
-- [`build_rmd()`](https://devtools.r-lib.org/dev/reference/build_rmd.md)
-  is soft-deprecated and is discouraged for external use. It exists to
-  be an internal helper for
-  [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_readme.md).
-- [`check_doc_fields()`](https://devtools.r-lib.org/dev/reference/check_doc_fields.md)
-  is a new function that checks for missing `\value` and `\examples`
-  fields in Rd files, which are commonly flagged by CRAN
-  ([\#2525](https://github.com/r-lib/devtools/issues/2525)).
-- [`build_vignettes()`](https://devtools.r-lib.org/dev/reference/build_vignettes.md)
-  and
-  [`clean_vignettes()`](https://devtools.r-lib.org/dev/reference/clean_vignettes.md)
-  are now deprecated. We no longer recommend building vignettes in this
-  way; instead use
-  [`pkgdown::build_article()`](https://pkgdown.r-lib.org/reference/build_articles.html)
-  to render articles locally
-  ([\#2488](https://github.com/r-lib/devtools/issues/2488)).
-- [`build_site()`](https://devtools.r-lib.org/dev/reference/build_site.md)
-  now just calls
-  [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html),
-  meaning that you will get more (informative) output by default
-  ([\#2578](https://github.com/r-lib/devtools/issues/2578)).
-- New
-  [`check_mac_devel()`](https://devtools.r-lib.org/dev/reference/check_mac_release.md)
-  function to check a package using the macOS builder at
-  <https://mac.r-project.org/macbuilder/submit.html>
-  ([@nfrerebeau](https://github.com/nfrerebeau),
-  [\#2507](https://github.com/r-lib/devtools/issues/2507))
-- [`dev_sitrep()`](https://devtools.r-lib.org/dev/reference/dev_sitrep.md)
-  now uses pak instead of remotes to check for outdated dependencies
-  ([\#2663](https://github.com/r-lib/devtools/issues/2663)).
-- [`dev_sitrep()`](https://devtools.r-lib.org/dev/reference/dev_sitrep.md)
-  now uses cli for user-facing messages instead of deprecated usethis UI
-  functions.
-- [`dev_sitrep()`](https://devtools.r-lib.org/dev/reference/dev_sitrep.md)
-  now works correctly in Positron
-  ([\#2618](https://github.com/r-lib/devtools/issues/2618)).
-- [`is_loading()`](https://pkgload.r-lib.org/reference/load_all.html) is
-  now re-exported from pkgload
-  ([\#2556](https://github.com/r-lib/devtools/issues/2556)).
-- [`install()`](https://devtools.r-lib.org/dev/reference/install.md) now
-  installs dependencies with
-  [`pak::local_install_deps()`](https://pak.r-lib.org/reference/local_install_deps.html)
-  instead of
-  [`remotes::install_deps()`](https://remotes.r-lib.org/reference/install_deps.html).
-  This lets us default to `upgrade = FALSE`, so that existing
-  dependencies are only upgraded when a newer version is actually
-  required ([\#2486](https://github.com/r-lib/devtools/issues/2486)).
-  `keep_source` now defaults to `TRUE` when `build = FALSE`, so that
-  source references are automatically preserved during development
-  installs.
+Deprecations
+
 - Package installation functions are now deprecated:
   [`install_bioc()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
   [`install_bitbucket()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md),
@@ -89,14 +25,92 @@
   [`github_release()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md).
   We now recommend pak (<https://pak.r-lib.org/>) for general package
   installation. See `?install-deprecated` for migration guidance.
+- remotes has moved from Imports to Suggests, as part of the pivot
+  towards pak for package installation
+  ([\#2663](https://github.com/r-lib/devtools/issues/2663)).
+- [`build_rmd()`](https://devtools.r-lib.org/dev/reference/build_rmd.md)
+  is soft-deprecated and is discouraged for external use. It exists to
+  be an internal helper for
+  [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_readme.md).
+- [`build_vignettes()`](https://devtools.r-lib.org/dev/reference/build_vignettes.md)
+  and
+  [`clean_vignettes()`](https://devtools.r-lib.org/dev/reference/clean_vignettes.md)
+  are now deprecated. We no longer recommend building vignettes in this
+  way; instead use
+  [`pkgdown::build_article()`](https://pkgdown.r-lib.org/reference/build_articles.html)
+  to render articles locally
+  ([\#2488](https://github.com/r-lib/devtools/issues/2488)).
+- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
+  and
+  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
+  are now defunct. These were deprecated in devtools 2.4.0 (2021-04-07)
+  in favour of
+  [`test_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
+  and
+  [`test_coverage_active_file()`](https://devtools.r-lib.org/dev/reference/test.md).
+  Removing
+  [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
+  eliminates the conflict with
+  [`testthat::test_file()`](https://testthat.r-lib.org/reference/test_file.html).
+- [`release()`](https://devtools.r-lib.org/dev/reference/release.md) is
+  deprecated in favour of
+  [`usethis::use_release_issue()`](https://usethis.r-lib.org/reference/use_release_issue.html).
+- [`create()`](https://devtools.r-lib.org/dev/reference/create.md) is
+  deprecated in favour
+  of[`usethis::create_package()`](https://usethis.r-lib.org/reference/create_package.html).
+- [`bash()`](https://devtools.r-lib.org/dev/reference/bash.md),
+  [`missing_s3()`](https://devtools.r-lib.org/dev/reference/missing_s3.md),
+  [`reload()`](https://devtools.r-lib.org/dev/reference/reload.md),
+  [`show_news()`](https://devtools.r-lib.org/dev/reference/show_news.md),
+  and [`wd()`](https://devtools.r-lib.org/dev/reference/wd.md) are now
+  deprecated. These functions are all historical parts of our workflow
+  that we no longer use or recommend.
+
+Other improvements
+
+- [`install()`](https://devtools.r-lib.org/dev/reference/install.md) now
+  installs dependencies with
+  [`pak::local_install_deps()`](https://pak.r-lib.org/reference/local_install_deps.html)
+  instead of
+  [`remotes::install_deps()`](https://remotes.r-lib.org/reference/install_deps.html).
+  This lets us default to `upgrade = FALSE`, so that existing
+  dependencies are only upgraded when a newer version is actually
+  required ([\#2486](https://github.com/r-lib/devtools/issues/2486)).
+  `keep_source` now defaults to `TRUE` when `build = FALSE`, so that
+  source references are automatically preserved during development
+  installs.
+- [`build_manual()`](https://devtools.r-lib.org/dev/reference/build_manual.md)
+  reports more details on failure
+  ([\#2586](https://github.com/r-lib/devtools/issues/2586)).
+- [`build_site()`](https://devtools.r-lib.org/dev/reference/build_site.md)
+  now just calls
+  [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html),
+  meaning that you will get more (informative) output by default
+  ([\#2578](https://github.com/r-lib/devtools/issues/2578)).
+- [`check_doc_fields()`](https://devtools.r-lib.org/dev/reference/check_doc_fields.md)
+  is a new function that checks for missing `\value` and `\examples`
+  fields in Rd files, which are commonly flagged by CRAN
+  ([\#2525](https://github.com/r-lib/devtools/issues/2525)).
+- [`check_mac_devel()`](https://devtools.r-lib.org/dev/reference/check_mac_release.md)
+  is a new function to check a package using the macOS builder at
+  <https://mac.r-project.org/macbuilder/submit.html>
+  ([@nfrerebeau](https://github.com/nfrerebeau),
+  [\#2507](https://github.com/r-lib/devtools/issues/2507))
+- [`dev_sitrep()`](https://devtools.r-lib.org/dev/reference/dev_sitrep.md)
+  now works correctly inside Positron
+  ([\#2618](https://github.com/r-lib/devtools/issues/2618)), uses pak
+  instead of remotes to check for dependencies that are
+  missing/behind/ahead
+  ([\#2663](https://github.com/r-lib/devtools/issues/2663)), and uses
+  cli for user-facing messages.
+- [`is_loading()`](https://pkgload.r-lib.org/reference/load_all.html) is
+  now re-exported from pkgload
+  ([\#2556](https://github.com/r-lib/devtools/issues/2556)).
 - [`load_all()`](https://devtools.r-lib.org/dev/reference/load_all.md)
   now errors if called recursively, i.e. if you accidentally include a
   [`load_all()`](https://devtools.r-lib.org/dev/reference/load_all.md)
   call in one of your R source files
   ([\#2617](https://github.com/r-lib/devtools/issues/2617)).
-- [`release()`](https://devtools.r-lib.org/dev/reference/release.md) is
-  deprecated in favour of
-  [`usethis::use_release_issue()`](https://usethis.r-lib.org/reference/use_release_issue.html).
 - [`show_news()`](https://devtools.r-lib.org/dev/reference/show_news.md)
   now looks for NEWS files in the same locations as
   [`utils::news()`](https://rdrr.io/r/utils/news.html): `inst/NEWS.Rd`,
@@ -113,18 +127,6 @@
   to the console, used for LLMs and non-interactive contexts), or
   `"silent"`. The `show_report` argument has been removed
   ([\#2632](https://github.com/r-lib/devtools/issues/2632)).
-- [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
-  and
-  [`test_coverage_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
-  are now defunct. These were deprecated in devtools 2.4.0 (2021-04-07)
-  in favour of
-  [`test_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
-  and
-  [`test_coverage_active_file()`](https://devtools.r-lib.org/dev/reference/test.md).
-  Removing
-  [`test_file()`](https://devtools.r-lib.org/dev/reference/devtools-defunct.md)
-  eliminates the conflict with
-  [`testthat::test_file()`](https://testthat.r-lib.org/reference/test_file.html).
 
 ## devtools 2.4.6
 
