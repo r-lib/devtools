@@ -1,25 +1,29 @@
 # devtools (development version)
 
-* remotes has moved from Imports to Suggests (#2663).
-* `bash()`, `create()`, `missing_s3()`, `reload()`, `show_news()`, and `wd()` are now deprecated. These functions are all historical parts of our workflow that we no longer use or recommend. `create()` is superseded by `usethis::create_package()`.
-* `build_manual()` reports more details on failure (#2586).
-* `build_rmd()` is soft-deprecated and is discouraged for external use. It exists to be an internal helper for `build_readme()`.
-* `check_doc_fields()` is a new function that checks for missing `\value` and `\examples` fields in Rd files, which are commonly flagged by CRAN (#2525).
-* `build_vignettes()` and `clean_vignettes()` are now deprecated. We no longer recommend building vignettes in this way; instead use `pkgdown::build_article()` to render articles locally (#2488).
-* `build_site()` now just calls `pkgdown::build_site()`, meaning that you will get more (informative) output by default (#2578).
-* New `check_mac_devel()` function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (@nfrerebeau, #2507)
-* `dev_sitrep()` now uses pak instead of remotes to check for outdated dependencies (#2663).
-* `dev_sitrep()` now uses cli for user-facing messages instead of deprecated usethis UI functions.
-* `dev_sitrep()` now works correctly in Positron (#2618).
-* `is_loading()` is now re-exported from pkgload (#2556).
-* `install()` now installs dependencies with `pak::local_install_deps()` instead of `remotes::install_deps()`. This lets us default to `upgrade = FALSE`, so that existing dependencies are only upgraded when a newer version is actually required (#2486). `keep_source` now defaults to `TRUE` when `build = FALSE`, so that source references are automatically preserved during development installs.
+Deprecations
+
 * Package installation functions are now deprecated: `install_bioc()`, `install_bitbucket()`, `install_cran()`, `install_deps()`, `install_dev()`, `install_dev_deps()`, `install_git()`, `install_github()`, `install_gitlab()`, `install_local()`, `install_svn()`, `install_url()`, `install_version()`, `update_packages()`, `dev_package_deps()`, `github_pull()`, and `github_release()`. We now recommend pak (<https://pak.r-lib.org/>) for general package installation. See `?install-deprecated` for migration guidance.
-* `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
+* remotes has moved from Imports to Suggests, as part of the pivot towards pak for package installation (#2663).
+* `build_rmd()` is soft-deprecated and is discouraged for external use. It exists to be an internal helper for `build_readme()`.
+* `build_vignettes()` and `clean_vignettes()` are now deprecated. We no longer recommend building vignettes in this way; instead use `pkgdown::build_article()` to render articles locally (#2488).
+* `test_file()` and `test_coverage_file()` are now defunct. These were deprecated in devtools 2.4.0 (2021-04-07) in favour of `test_active_file()` and `test_coverage_active_file()`. Removing `test_file()` eliminates the conflict with `testthat::test_file()`.
 * `release()` is deprecated in favour of `usethis::use_release_issue()`.
+* `create()` is deprecated in favour of`usethis::create_package()`.
+* `bash()`, `missing_s3()`, `reload()`, `show_news()`, and `wd()` are now deprecated. These functions are all historical parts of our workflow that we no longer use or recommend. 
+
+Other improvements
+
+* `install()` now installs dependencies with `pak::local_install_deps()` instead of `remotes::install_deps()`. This lets us default to `upgrade = FALSE`, so that existing dependencies are only upgraded when a newer version is actually required (#2486). `keep_source` now defaults to `TRUE` when `build = FALSE`, so that source references are automatically preserved during development installs.
+* `build_manual()` reports more details on failure (#2586).
+* `build_site()` now just calls `pkgdown::build_site()`, meaning that you will get more (informative) output by default (#2578).
+* `check_doc_fields()` is a new function that checks for missing `\value` and `\examples` fields in Rd files, which are commonly flagged by CRAN (#2525).
+* `check_mac_devel()` is a new function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (@nfrerebeau, #2507)
+* `dev_sitrep()` now works correctly inside Positron (#2618), uses pak instead of remotes to check for dependencies that are missing/behind/ahead (#2663), and uses cli for user-facing messages.
+* `is_loading()` is now re-exported from pkgload (#2556).
+* `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
 * `show_news()` now looks for NEWS files in the same locations as `utils::news()`: `inst/NEWS.Rd`, `NEWS.md`, `NEWS`, and `inst/NEWS` (@arcresu, #2499).
 * `test_active_file()` now works when the active file is a snapshot file.
 * `test_coverage()` and `test_coverage_active_file()` gain a new `report` argument that can be set to `"html"` (the default, for an interactive browser report), `"zero"` (prints uncovered lines to the console, used for LLMs and non-interactive contexts), or `"silent"`. The `show_report` argument has been removed (#2632).
-* `test_file()` and `test_coverage_file()` are now defunct. These were deprecated in devtools 2.4.0 (2021-04-07) in favour of `test_active_file()` and `test_coverage_active_file()`. Removing `test_file()` eliminates the conflict with `testthat::test_file()`.
 
 # devtools 2.4.6
 
