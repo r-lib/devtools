@@ -165,11 +165,11 @@ submit_winbuilder_ftp <- function(path, version) {
     "/",
     path_file(path)
   )
-  lapply(url, upload_ftp, file = path)
+  walk(url, upload_ftp, file = path)
 }
 
 submit_winbuilder_webform <- function(path, version) {
-  lapply(version, upload_webform, file = path)
+  walk(version, upload_webform, file = path)
 }
 
 confirm_maintainer_email <- function(email, call = parent.frame()) {
