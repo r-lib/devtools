@@ -54,7 +54,8 @@ Suggests:
     remotes (>= 2.5.0),
     rmarkdown (>= 2.14),
     rstudioapi (>= 0.13),
-    spelling (>= 2.2)
+    spelling (>= 2.2),
+    xml2
 VignetteBuilder: knitr, quarto
 Config/Needs/website: tidyverse/tidytemplate
 Config/testthat/edition: 3

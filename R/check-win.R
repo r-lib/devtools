@@ -237,42 +237,51 @@ upload_ftp <- function(file, url, verbose = FALSE) {
   curl::curl_fetch_memory(url, handle = h)
 }
 
-extract_hidden_fields <- function(html_text) {
-  extract_value <- function(name) {
-    pattern <- sprintf('name="%s"[^>]*value="([^"]+)"', name)
-    match <- regexec(pattern, html_text)
-    result <- regmatches(html_text, match)
-    if (length(result[[1]]) >= 2) result[[1]][2] else NA_character_
+parse_winbuilder_form <- function(url, version) {
+  req <- httr2::request(url)
+  resp <- httr2::req_perform(req)
+  html <- xml2::read_html(httr2::resp_body_string(resp))
+
+  # Extract hidden fields shared by the whole form
+  hidden_nodes <- xml2::xml_find_all(html, ".//input[@type='hidden']")
+  hidden <- as.list(xml2::xml_attr(hidden_nodes, "value"))
+  names(hidden) <- xml2::xml_attr(hidden_nodes, "name")
+
+  # Find the <h2> heading for the requested version, then grab the file
+  # input and submit button from the <div> that follows it
+  headings <- xml2::xml_find_all(html, ".//h2")
+  heading_texts <- xml2::xml_text(headings)
+  idx <- match(version, heading_texts)
+  if (is.na(idx)) {
+    cli::cli_abort(
+      "Could not find {.val {version}} section in the WinBuilder form."
+    )
   }
 
-  list(
-    `__VIEWSTATE` = extract_value("__VIEWSTATE"),
-    `__VIEWSTATEGENERATOR` = extract_value("__VIEWSTATEGENERATOR"),
-    `__EVENTVALIDATION` = extract_value("__EVENTVALIDATION")
+  section <- xml2::xml_find_first(headings[[idx]], "following-sibling::div")
+  file_field <- xml2::xml_attr(
+    xml2::xml_find_first(section, ".//input[@type='file']"),
+    "name"
   )
+  button_field <- xml2::xml_attr(
+    xml2::xml_find_first(section, ".//input[@type='submit']"),
+    "name"
+  )
+
+  list(hidden = hidden, file_field = file_field, button_field = button_field)
 }
 
 upload_webform <- function(file, version) {
-  check_installed("httr2")
+  check_installed(c("httr2", "xml2"))
 
   upload_url <- "https://win-builder.r-project.org/upload.aspx"
-  req <- httr2::request(upload_url)
-  resp <- httr2::req_perform(req)
-  html_text <- httr2::resp_body_string(resp)
+  form <- parse_winbuilder_form(upload_url, version)
 
-  field_map <- list(
-    "R-release" = list(file = "FileUpload1", button = "Button1"),
-    "R-devel" = list(file = "FileUpload2", button = "Button2"),
-    "R-oldrelease" = list(file = "FileUpload3", button = "Button3")
-  )
-
-  fields <- field_map[[version]]
-
-  hidden <- extract_hidden_fields(html_text)
-  hidden[[fields$file]] <- curl::form_file(file)
-  hidden[[fields$button]] <- "Upload File"
+  body <- form$hidden
+  body[[form$file_field]] <- curl::form_file(file)
+  body[[form$button_field]] <- "Upload File"
 
   req <- httr2::request(upload_url)
-  req <- httr2::req_body_multipart(req, !!!hidden)
+  req <- httr2::req_body_multipart(req, !!!body)
   httr2::req_perform(req)
 }
