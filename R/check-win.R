@@ -21,40 +21,89 @@ NULL
 
 #' @describeIn check_win Check package on the development version of R.
 #' @export
-check_win_devel <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, webform = FALSE, ...) {
+check_win_devel <- function(
+  pkg = ".",
+  args = NULL,
+  manual = TRUE,
+  email = NULL,
+  quiet = FALSE,
+  webform = FALSE,
+  ...
+) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   check_win(
-    pkg = pkg, version = "R-devel", args = args, manual = manual,
-    email = email, quiet = quiet, webform = webform, ...
+    pkg = pkg,
+    version = "R-devel",
+    args = args,
+    manual = manual,
+    email = email,
+    quiet = quiet,
+    webform = webform,
+    ...
   )
 }
 
 #' @describeIn check_win Check package on the released version of R.
 #' @export
-check_win_release <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, webform = FALSE, ...) {
+check_win_release <- function(
+  pkg = ".",
+  args = NULL,
+  manual = TRUE,
+  email = NULL,
+  quiet = FALSE,
+  webform = FALSE,
+  ...
+) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   check_win(
-    pkg = pkg, version = "R-release", args = args, manual = manual,
-    email = email, quiet = quiet, webform = webform, ...
+    pkg = pkg,
+    version = "R-release",
+    args = args,
+    manual = manual,
+    email = email,
+    quiet = quiet,
+    webform = webform,
+    ...
   )
 }
 
 #' @describeIn check_win Check package on the previous major release version of R.
 #' @export
-check_win_oldrelease <- function(pkg = ".", args = NULL, manual = TRUE, email = NULL, quiet = FALSE, webform = FALSE, ...) {
+check_win_oldrelease <- function(
+  pkg = ".",
+  args = NULL,
+  manual = TRUE,
+  email = NULL,
+  quiet = FALSE,
+  webform = FALSE,
+  ...
+) {
   check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
 
   check_win(
-    pkg = pkg, version = "R-oldrelease", args = args, manual = manual,
-    email = email, quiet = quiet, webform = webform, ...
+    pkg = pkg,
+    version = "R-oldrelease",
+    args = args,
+    manual = manual,
+    email = email,
+    quiet = quiet,
+    webform = webform,
+    ...
   )
 }
 
-check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelease"),
-                      args = NULL, manual = TRUE, email = NULL, quiet = FALSE,
-                      webform = FALSE, ...) {
+check_win <- function(
+  pkg = ".",
+  version = c("R-devel", "R-release", "R-oldrelease"),
+  args = NULL,
+  manual = TRUE,
+  email = NULL,
+  quiet = FALSE,
+  webform = FALSE,
+  ...
+) {
   pkg <- as.package(pkg)
 
   if (!is.null(email)) {
@@ -110,7 +159,12 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
 }
 
 submit_winbuilder_ftp <- function(path, version) {
-  url <- paste0("ftp://win-builder.r-project.org/", version, "/", path_file(path))
+  url <- paste0(
+    "ftp://win-builder.r-project.org/",
+    version,
+    "/",
+    path_file(path)
+  )
   lapply(url, upload_ftp, file = path)
 }
 
