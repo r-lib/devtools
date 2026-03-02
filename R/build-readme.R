@@ -101,13 +101,13 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
   pkg <- as.package(path)
 
   regexp <- paste0(path_file(pkg$path), "/(inst/)?readme[.](r|q)md$")
-  readme_path <- path_abs(dir_ls(
+  readme_path <- sort(path_abs(dir_ls(
     pkg$path,
     ignore.case = TRUE,
     regexp = regexp,
     recurse = 1,
     type = "file"
-  ))
+  )), method = "radix")
 
   if (length(readme_path) == 0) {
     cli::cli_abort(
