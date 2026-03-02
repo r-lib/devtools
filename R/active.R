@@ -1,13 +1,13 @@
 find_active_file <- function(arg = "file", call = parent.frame()) {
   if (!is_rstudio_running()) {
-    cli::cli_abort("Argument {.arg {arg}} is missing, with no default", call = call)
+    cli::cli_abort("{.arg {arg}} is absent but must be supplied.", call = call)
   }
   normalizePath(rstudioapi::getSourceEditorContext()$path)
 }
 
 find_test_file <- function(path, call = parent.frame()) {
   type <- test_file_type(path)
-  if (any(is.na(type))) {
+  if (anyNA(type)) {
     file <- path_file(path[is.na(type)])
     cli::cli_abort(
       "Don't know how to find tests associated with the active file {.file {file}}",
@@ -18,7 +18,12 @@ find_test_file <- function(path, call = parent.frame()) {
   pkg <- as.package(dirname(path))
 
   is_test <- type == "test"
-  path[!is_test] <- paste0(pkg$path, "/tests/testthat/test-", name_source(path[!is_test]), ".R")
+  path[!is_test] <- paste0(
+    pkg$path,
+    "/tests/testthat/test-",
+    name_source(path[!is_test]),
+    ".R"
+  )
   path <- unique(path[file_exists(path)])
 
   if (length(path) == 0) {
@@ -29,6 +34,8 @@ find_test_file <- function(path, call = parent.frame()) {
 
 test_file_type <- function(path) {
   dir <- path_file(path_dir(path))
+  # this accounts for snapshot files in a variant subfolder
+  parent_dir <- path_file(path_dir(path_dir(path)))
   name <- path_file(path)
   ext <- tolower(path_ext(path))
 
@@ -38,6 +45,8 @@ test_file_type <- function(path) {
   type[dir == "R" & ext == "r"] <- "R"
   type[dir == "testthat" & ext == "r" & grepl("^test", name)] <- "test"
   type[dir == "src" & ext %in% src_ext] <- "src"
+  type[dir == "_snaps" & ext == "md"] <- "snap"
+  type[parent_dir == "_snaps" & ext == "md"] <- "snap"
   type
 }
 

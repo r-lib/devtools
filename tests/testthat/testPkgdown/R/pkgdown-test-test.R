@@ -1,4 +1,3 @@
-
 #' pkgdown_test_test
 #'
 #' @param x marks the spot

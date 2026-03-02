@@ -2,12 +2,9 @@
 % Please edit documentation in R/build-readme.R
 \name{build_rmd}
 \alias{build_rmd}
-\alias{build_readme}
-\title{Build a Rmarkdown files package}
+\title{Build Rmarkdown files}
 \usage{
 build_rmd(files, path = ".", output_options = list(), ..., quiet = TRUE)
-
-build_readme(path = ".", quiet = TRUE, ...)
 }
 \arguments{
 \item{files}{The Rmarkdown files to be rendered.}
@@ -25,8 +22,11 @@ format is read from metadata (i.e. not a custom format object passed to
 \item{quiet}{If \code{TRUE}, suppress output.}
 }
 \description{
-\code{build_rmd()} is a wrapper around \code{\link[rmarkdown:render]{rmarkdown::render()}} that first installs
-a temporary copy of the package, and then renders each \code{.Rmd} in a clean R
-session. \code{build_readme()} locates your \code{README.Rmd} and builds it into a
-\code{README.md}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{build_rmd()} is deprecated, as it is a low-level helper for internal use. To
+render your package's \code{README.Rmd} or \code{README.qmd}, use \code{\link[=build_readme]{build_readme()}}. To
+preview a vignette or article, use functions like \code{\link[pkgdown:build_site]{pkgdown::build_site()}} or
+\code{\link[pkgdown:build_articles]{pkgdown::build_article()}}.
 }
+\keyword{internal}

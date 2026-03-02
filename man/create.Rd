@@ -14,14 +14,20 @@ created, provided that the parent path exists.}
 
 \item{open}{If \code{TRUE}, \link[usethis:proj_activate]{activates} the new project:
 \itemize{
-\item If using RStudio desktop, the package is opened in a new session.
-\item If on RStudio server, the current RStudio project is activated.
-\item Otherwise, the working directory and active project is changed.
+\item If using RStudio or Positron, the new project is opened in a new session,
+window, or browser tab, depending on the product (RStudio or Positron)
+and context (desktop or server).
+\item Otherwise, the working directory and active project of the current R
+session are changed to the new project.
 }}
 }
 \value{
 The path to the created package, invisibly.
 }
 \description{
-Create a package
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{create()} is deprecated. Please use \code{\link[usethis:create_package]{usethis::create_package()}} directly
+instead.
 }
+\keyword{internal}

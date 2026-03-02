@@ -2,8 +2,8 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/r-lib/devtools/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/devtools/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/r-lib/devtools/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/devtools?branch=main)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/devtools)](https://cran.r-project.org/package=devtools)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/devtools/graph/badge.svg)](https://app.codecov.io/gh/r-lib/devtools)
 <!-- badges: end -->
 
 The aim of devtools is to make package development easier by providing R
@@ -74,13 +74,11 @@ look in the current working directory - this is a recommended practice.
 ### Check and release:
 
 * `check()` updates the documentation, then builds and checks the package locally.
-  `check_win()` checks a package using
-  [win-builder](https://win-builder.r-project.org/), and `check_rhub()` checks a package using
-  [r-hub](https://log.r-hub.io/). This allows you to easily check
-  your package on all systems CRAN uses before submission.
-
-* `release()` makes sure everything is ok with your package (including asking
-  you a number of questions), then builds and uploads to CRAN.
+* `check_win_release()`, `check_win_devel()`, and `check_mac_release()` check
+  a package using [win-builder](https://win-builder.r-project.org/) or
+  <https://mac.r-project.org/macbuilder/submit.html>.
+* `release()` and `submit_cran()` handle the mechanics of CRAN submission with
+  or without, respectively, (re)-running lots of local checks.
 
 ## Learning more
 
@@ -132,8 +130,7 @@ includes:
 * [roxygen2](https://github.com/r-lib/roxygen2): Function and package documentation
   (i.e. `document()`).
 
-* [remotes](https://github.com/r-lib/remotes): Installing packages (i.e.
-  `install_github()`).
+* [pak](https://pak.r-lib.org): Installing packages (i.e. `pak::pak()`).
 
 * [pkgbuild](https://github.com/r-lib/pkgbuild): Building binary packages
   (including checking if build tools are available) (i.e. `build()`).
@@ -163,7 +160,7 @@ You may also need to care if you are trying to use some devtools functionality
 in your own package or deployed application. Generally in these cases it
 is better to depend on the particular package directly rather than depend on devtools,
 e.g. use `sessioninfo::session_info()` rather than `devtools::session_info()`,
-or `remotes::install_github()` vs `devtools::install_github()`.
+or `pak::pak("user/repo")` vs `devtools::install_github("user/repo")`.
 
 However for day to day development we recommend you continue to use
 `library(devtools)` to quickly load all needed development tools, just like

@@ -8,9 +8,8 @@ on:
   push:
     branches: [main, master]
   pull_request:
-    branches: [main, master]
 
-name: R-CMD-check
+name: R-CMD-check.yaml
 
 permissions: read-all
 
@@ -27,8 +26,14 @@ jobs:
           - {os: macos-latest,   r: 'release'}
 
           - {os: windows-latest, r: 'release'}
-          # use 4.1 to check with rtools40's older compiler
-          - {os: windows-latest, r: '4.1'}
+          # specifying oldrel-3 instead of oldrel-4, because ragg is a problem
+          # and that's what ragg itself is doing (???)
+          # seems like we lose coverage of rtools40's compiler, but that also
+          # doesn't seem like a devtools problem
+          # https://github.com/r-lib/ragg/pull/195/commits/0ce19424eab2dad15b38b41992804e3226d86e22
+          - {os: windows-latest, r: 'oldrel-3'}
+          # use 4.0 or 4.1 to check with rtools40's older compiler
+          #- {os: windows-latest, r: 'oldrel-4'}
 
           - {os: ubuntu-latest,  r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,  r: 'release'}

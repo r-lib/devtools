@@ -2,7 +2,7 @@
 % Please edit documentation in R/run-source.R
 \name{source_url}
 \alias{source_url}
-\title{Run a script through some protocols such as http, https, ftp, etc.}
+\title{Run a script through some protocols such as http, https, ftp, etc}
 \usage{
 source_url(url, ..., sha1 = NULL)
 }

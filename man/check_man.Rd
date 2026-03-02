@@ -2,7 +2,7 @@
 % Please edit documentation in R/check-doc.R
 \name{check_man}
 \alias{check_man}
-\title{Check documentation, as \verb{R CMD check} does.}
+\title{Check documentation, as \verb{R CMD check} does}
 \usage{
 check_man(pkg = ".")
 }

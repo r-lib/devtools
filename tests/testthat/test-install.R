@@ -1,3 +1,26 @@
+show_headers <- function(lines) {
+  lines <- cli::ansi_strip(lines)
+  lines <- lines[grepl("^--", lines)]
+  lines
+}
+
+test_that("install reports stages", {
+  skip_on_cran()
+  local_reproducible_output(width = 60)
+
+  pkg <- local_package_copy(test_path("testTest"))
+  withr::local_temp_libpaths()
+
+  expect_snapshot(
+    install(pkg, reload = FALSE, build = FALSE),
+    transform = show_headers
+  )
+  expect_snapshot(
+    install(pkg, reload = FALSE, build = TRUE),
+    transform = show_headers
+  )
+})
+
 test_that("vignettes built on install", {
   skip_on_cran()
 

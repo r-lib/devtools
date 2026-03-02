@@ -2,7 +2,7 @@
 % Please edit documentation in R/check-git.R
 \name{git_checks}
 \alias{git_checks}
-\title{Git checks.}
+\title{Git checks}
 \usage{
 git_checks(pkg = ".")
 }

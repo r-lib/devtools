@@ -77,14 +77,16 @@ check_win <- function(pkg = ".", version = c("R-devel", "R-release", "R-oldrelea
     ))
 
     email <- maintainer(pkg)$email
-    if (interactive() && yesno("Email results to {.strong {email}}?")) {
-      return(invisible())
-    }
+    confirm_maintainer_email(email)
   }
 
-  built_path <- pkgbuild::build(pkg$path, tempdir(),
-                                args = args,
-                                manual = manual, quiet = quiet, ...
+  built_path <- pkgbuild::build(
+    pkg$path,
+    tempdir(),
+    args = args,
+    manual = manual,
+    quiet = quiet,
+    ...
   )
   on.exit(file_delete(built_path), add = TRUE)
 
@@ -116,6 +118,24 @@ submit_winbuilder_webform <- function(path, version) {
   lapply(version, upload_webform, file = path)
 }
 
+confirm_maintainer_email <- function(email, call = parent.frame()) {
+  if (!rlang::is_interactive()) {
+    return(FALSE)
+  }
+
+  if (!yesno("Email results to {.strong {email}}?")) {
+    return()
+  }
+
+  cli::cli_abort(
+    c(
+      "User declined upload.",
+      i = "Use `email = {.str your email}` to override."
+    ),
+    call = call
+  )
+}
+
 change_maintainer_email <- function(path, email, call = parent.frame()) {
   desc <- desc::desc(file = path)
 
@@ -138,7 +158,7 @@ change_maintainer_email <- function(path, email, call = parent.frame()) {
   if (!is.list(roles)) {
     roles <- list(roles)
   }
-  is_maintainer <- vapply(roles, function(r) all("cre" %in% r), logical(1))
+  is_maintainer <- map_lgl(roles, function(r) all("cre" %in% r))
   aut[is_maintainer]$email <- email
   desc$set_authors(aut)
 
@@ -146,16 +166,20 @@ change_maintainer_email <- function(path, email, call = parent.frame()) {
 }
 
 upload_ftp <- function(file, url, verbose = FALSE) {
-  rlang::check_installed("curl")
+  check_installed("curl")
 
   stopifnot(file_exists(file))
   stopifnot(is.character(url))
   con <- file(file, open = "rb")
   on.exit(close(con), add = TRUE)
   h <- curl::new_handle(upload = TRUE, filetime = FALSE)
-  curl::handle_setopt(h, readfunction = function(n) {
-    readBin(con, raw(), n = n)
-  }, verbose = verbose)
+  curl::handle_setopt(
+    h,
+    readfunction = function(n) {
+      readBin(con, raw(), n = n)
+    },
+    verbose = verbose
+  )
   curl::curl_fetch_memory(url, handle = h)
 }
 

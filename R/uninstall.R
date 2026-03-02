@@ -10,7 +10,12 @@
 #' @export
 #' @family package installation
 #' @seealso [with_debug()] to install packages with debugging flags set.
-uninstall <- function(pkg = ".", unload = TRUE, quiet = FALSE, lib = .libPaths()[[1]]) {
+uninstall <- function(
+  pkg = ".",
+  unload = TRUE,
+  quiet = FALSE,
+  lib = .libPaths()[[1]]
+) {
   pkg <- as.package(pkg)
 
   if (unload && pkg$package %in% loaded_packages()$package) {
@@ -21,7 +26,7 @@ uninstall <- function(pkg = ".", unload = TRUE, quiet = FALSE, lib = .libPaths()
     cli::cli_inform(c(i = "Uninstalling {.pkg {pkg$package}}"))
   }
 
-  remove.packages(pkg$package, .libPaths()[[1]])
+  utils::remove.packages(pkg$package, .libPaths()[[1]])
 
   invisible(TRUE)
 }

@@ -1,23 +1,15 @@
-#' Release package to CRAN.
+#' Release package to CRAN
 #'
-#' Run automated and manual tests, then post package to CRAN.
+#' @description
+#' `r lifecycle::badge("deprecated")`
 #'
-#' The package release process will:
+#' `release()` is deprecated in favour of [usethis::use_release_issue()].
+#' We no longer feel confident recommending `release()` because we don't use it
+#' ourselves, so there's no guarantee that it will track best practices as
+#' they evolve over time.
 #'
-#'   * Confirm that the package passes `R CMD check` on relevant platforms
-#'   * Confirm that important files are up-to-date
-#'   * Build the package
-#'   * Submit the package to CRAN, using comments in "cran-comments.md"
-#'
-#' You can add arbitrary extra questions by defining an (un-exported) function
-#' called `release_questions()` that returns a character vector
-#' of additional questions to ask.
-#'
-#' You also need to read the CRAN repository policy at
-#' 'https://cran.r-project.org/web/packages/policies.html' and make
-#' sure you're in line with the policies. `release` tries to automate as
-#' many of polices as possible, but it's impossible to be completely
-#' comprehensive, and they do change in between releases of devtools.
+#' If you want to programmatical submit to CRAN, you can continue to use
+#' [submit_cran()].
 #'
 #' @template devtools
 #' @param check if `TRUE`, run checking, otherwise omit it.  This
@@ -29,6 +21,15 @@
 #'   tasks that you can use in addition to or in place of `release`.
 #' @export
 release <- function(pkg = ".", check = FALSE, args = NULL) {
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "release()",
+    "usethis::use_release_issue()"
+  )
+  if (!is_interactive()) {
+    cli::cli_abort("Interactive session required.")
+  }
+
   pkg <- as.package(pkg)
   # Figure out if this is a new package
   cran_version <- cran_pkg_version(pkg$package)
@@ -39,14 +40,18 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
   }
 
   if (check) {
-    cat_rule(
+    cli::cat_rule(
       left = "Building and checking",
       right = pkg$package,
       line = 2
     )
-    check(pkg,
-      cran = TRUE, remote = TRUE, manual = TRUE,
-      build_args = args, run_dont_test = TRUE
+    check(
+      pkg,
+      cran = TRUE,
+      remote = TRUE,
+      manual = TRUE,
+      build_args = args,
+      run_dont_test = TRUE
     )
   }
   if (yesno("Have you run `R CMD check` locally?")) {
@@ -69,21 +74,30 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
     if (show_cran_check) {
       if (!is.null(cran_details)) {
         end_sentence <- "\n shown above?"
-        cat_rule(paste0("Details of the CRAN check results for ", pkg$package))
+        cli::cat_rule(paste0(
+          "Details of the CRAN check results for ",
+          pkg$package
+        ))
         summary(cran_details)
-        cat_rule()
+        cli::cat_rule()
       }
       cran_url <- paste0(
-        cran_mirror(), "/web/checks/check_results_",
-        pkg$package, ".html"
+        cran_mirror(),
+        "/web/checks/check_results_",
+        pkg$package,
+        ".html"
       )
-      if (yesno("Have you fixed all existing problems at \n{cran_url}{end_sentence}")) {
+      if (
+        yesno(
+          "Have you fixed all existing problems at \n{cran_url}{end_sentence}"
+        )
+      ) {
         return(invisible())
       }
     }
   }
 
-  if (yesno("Have you checked on R-hub (with `check_rhub()`)?")) {
+  if (yesno("Have you checked on R-hub (see `?rhub::rhubv2`)?")) {
     return(invisible())
   }
 
@@ -94,7 +108,9 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
   deps <- if (new_pkg) 0 else length(revdep(pkg$package))
   if (deps > 0) {
     msg <- paste0(
-      "Have you checked the ", deps, " reverse dependencies ",
+      "Have you checked the ",
+      deps,
+      " reverse dependencies ",
       "(with the revdepcheck package)?"
     )
     if (yesno(msg)) {
@@ -106,7 +122,9 @@ release <- function(pkg = ".", check = FALSE, args = NULL) {
     "Have you updated `NEWS.md` file?",
     "Have you updated `DESCRIPTION`?",
     "Have you updated `cran-comments.md?`",
-    if (file_exists("codemeta.json")) "Have you updated codemeta.json with codemetar::write_codemeta()?",
+    if (file_exists("codemeta.json")) {
+      "Have you updated codemeta.json with codemetar::write_codemeta()?"
+    },
     find_release_questions(pkg)
   )
   for (question in questions) {
@@ -145,7 +163,19 @@ find_release_questions <- function(pkg = ".") {
 }
 
 yesno <- function(msg, .envir = parent.frame()) {
-  yeses <- c("Yes", "Definitely", "For sure", "Yup", "Yeah", "Of course", "Absolutely")
+  if (!is_interactive()) {
+    cli::cli_abort("Called from non-interactive context.")
+  }
+
+  yeses <- c(
+    "Yes",
+    "Definitely",
+    "For sure",
+    "Yup",
+    "Yeah",
+    "Of course",
+    "Absolutely"
+  )
   nos <- c("No way", "Not yet", "I forget", "No", "Nope", "Uhhhh... Maybe?")
 
   cli::cli_inform(msg, .envir = .envir)
@@ -204,23 +234,13 @@ cran_submission_url <- "https://xmpalantir.wu.ac.at/cransubmit/index2.php"
 #' Submit a package to CRAN
 #'
 #' @description
-
 #' This submits your package to CRAN using the web-form submission process.
-#' After submission, you will receive an email asking you to confirm submission
-#' - this is used to check that the package is submitted by the maintainer.
+#' To complete the submission you will need respond to the email sent to the
+#' maintainer email address.
 #'
-#' You may prefer to use `submit_cran()` indirectly, by calling [release()]
-#' instead. `release()` performs many checks verifying that your package is
-#' indeed ready for CRAN, before eventually asking for your confirmation that
-#' you'd like to submit it to CRAN (which it does by calling `submit_cran()`).
-#'
-#' Whether to use `release()` or `submit_cran()` depends on the rest of your
-#' development process. If you want to be super cautious, use `release()`, even
-#' though it may be redundant with other checks you have performed. On the other
-#' hand, if you have many other checks in place (such as automated checks via
-#' GitHub Actions and the task list generated by
-#' [usethis::use_release_issue()]), it makes sense to use `submit_cran()`
-#' directly.
+#' We generally recommend using this part of the process defined by
+#' [use_release_issue()]; this process maximizes the chances of a successful
+#' submission.
 #'
 #' @template devtools
 #' @inheritParams release
@@ -249,9 +269,7 @@ submit_cran <- function(pkg = ".", args = NULL) {
 
   upload_cran(pkg, built_path)
 
-  usethis::with_project(pkg$path,
-    flag_release(pkg)
-  )
+  usethis::with_project(pkg$path, flag_release(pkg))
 }
 
 extract_cran_msg <- function(msg) {
@@ -271,54 +289,42 @@ extract_cran_msg <- function(msg) {
 }
 
 upload_cran <- function(pkg, built_path, call = parent.frame()) {
+  check_installed("httr2")
+
   pkg <- as.package(pkg)
   maint <- maintainer(pkg)
   comments <- cran_comments(pkg, call = call)
 
   # Initial upload ---------
   cli::cli_inform(c(i = "Uploading package & comments"))
-  rlang::check_installed("httr")
-  body <- list(
+  req <- httr2::request(cran_submission_url)
+  req <- httr2::req_body_multipart(
+    req,
     pkg_id = "",
     name = maint$name,
     email = maint$email,
-    uploaded_file = httr::upload_file(built_path, "application/x-gzip"),
+    uploaded_file = curl::form_file(built_path, "application/x-gzip"),
     comment = comments,
     upload = "Upload package"
   )
-  r <- httr::POST(cran_submission_url, body = body)
-
-  # If a 404 likely CRAN is closed for maintenance, try to get the message
-  if (httr::status_code(r) == 404) {
-    msg <- ""
-    try({
-      r2 <- httr::GET(sub("index2", "index", cran_submission_url))
-      msg <- extract_cran_msg(httr::content(r2, "text"))
-    })
-    cli::cli_abort(
-      c(
-        "*" = "Submission failed",
-        "x" = msg
-      ),
-      call = call
-    )
-  }
-
-  httr::stop_for_status(r)
-  new_url <- httr::parse_url(r$url)
+  resp <- httr2::req_perform(req)
+  new_url <- httr2::url_parse(httr2::resp_url(resp))
 
   # Confirmation -----------
   cli::cli_inform(c(i = "Confirming submission"))
-  body <- list(
+
+  req <- httr2::request(cran_submission_url)
+  req <- httr2::req_body_multipart(
+    req,
     pkg_id = new_url$query$pkg_id,
     name = maint$name,
     email = maint$email,
     policy_check = "1/",
     submit = "Submit package"
   )
-  r <- httr::POST(cran_submission_url, body = body)
-  httr::stop_for_status(r)
-  new_url <- httr::parse_url(r$url)
+
+  resp <- httr2::req_perform(req)
+  new_url <- httr2::url_parse(httr2::resp_url(resp))
   if (new_url$query$submit == "1") {
     cli::cli_inform(c(
       "v" = "Package submission successful",
@@ -339,7 +345,9 @@ flag_release <- function(pkg = ".") {
     return(invisible())
   }
 
-  cli::cli_inform(c("!" = "Don't forget to tag this release once accepted by CRAN"))
+  cli::cli_inform(c(
+    "!" = "Don't forget to tag this release once accepted by CRAN"
+  ))
 
   withr::with_dir(pkg$path, {
     sha <- system2("git", c("rev-parse", "HEAD"), stdout = TRUE)
@@ -368,7 +376,7 @@ cran_mirror <- function(repos = getOption("repos")) {
 # Return the version of a package on CRAN (or other repository)
 # @param package The name of the package.
 # @param available A matrix of information about packages.
-cran_pkg_version <- function(package, available = available.packages()) {
+cran_pkg_version <- function(package, available = utils::available.packages()) {
   idx <- available[, "Package"] == package
   if (any(idx)) {
     as.package_version(available[package, "Version"])

@@ -16,3 +16,8 @@ linters <- list(lintr::undesirable_function_linter(
   ),
   symbol_is_undesirable = FALSE
 ))
+
+exclusions <- list(
+  "R/import-standalone-obj-type.R",
+  "R/import-standalone-types-check.R"
+)

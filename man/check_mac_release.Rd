@@ -2,9 +2,19 @@
 % Please edit documentation in R/check-mac.R
 \name{check_mac_release}
 \alias{check_mac_release}
+\alias{check_mac_devel}
 \title{Check a package on macOS}
 \usage{
 check_mac_release(
+  pkg = ".",
+  dep_pkgs = character(),
+  args = NULL,
+  manual = TRUE,
+  quiet = FALSE,
+  ...
+)
+
+check_mac_devel(
   pkg = ".",
   dep_pkgs = character(),
   args = NULL,
@@ -34,13 +44,11 @@ or \verb{R CMD install} if \code{binary = TRUE}.}
 The url with the check results (invisibly)
 }
 \description{
-This function first bundles a source package, then uploads it to
-\url{https://mac.r-project.org/macbuilder/submit.html}. This function returns a
-link to the page where the check results will appear.
+Check on either the released or development versions of R, using
+\url{https://mac.r-project.org/macbuilder/}.
 }
 \seealso{
 Other build functions: 
-\code{\link{check_rhub}()},
 \code{\link{check_win}()}
 }
 \concept{build functions}

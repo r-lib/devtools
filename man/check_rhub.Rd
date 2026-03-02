@@ -17,43 +17,24 @@ check_rhub(
 \item{pkg}{The package to use, can be a file path to the package or a
 package object.  See \code{\link[=as.package]{as.package()}} for more information.}
 
-\item{platforms}{R-hub platforms to run the check on. If \code{NULL}
-uses default list of CRAN checkers (one for each major platform, and
-one with extra checks if you have compiled code). You can also specify
-your own, see \code{\link[rhub:platforms]{rhub::platforms()}} for a complete list.}
+\item{platforms}{R-hub platforms to run the check on.}
 
-\item{email}{email address to notify, defaults to the maintainer
-address in the package.}
+\item{email}{email address to notify.}
 
-\item{interactive}{whether to show the status of the build
-interactively. R-hub will send an email to the package maintainer's
-email address, regardless of whether the check is interactive or not.}
+\item{interactive}{whether to show the status of the build.}
 
-\item{build_args}{Arguments passed to \verb{R CMD build}}
+\item{build_args}{Arguments passed to \verb{R CMD build}.}
 
-\item{...}{extra arguments, passed to \code{\link[rhub:check_for_cran]{rhub::check_for_cran()}}.}
+\item{...}{extra arguments, passed to \code{rhub::check_for_cran()}.}
 }
 \value{
 a \code{rhub_check} object.
 }
 \description{
-It runs \code{\link[=build]{build()}} on the package, with the arguments specified
-in \code{args}, and then submits it to the R-hub builder at
-\url{https://builder.r-hub.io}. The \code{interactive} option controls
-whether the function waits for the check output. Regardless, after the
-check is complete, R-hub sends an email with the results to the package
-maintainer.
-}
-\section{About email validation on r-hub}{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-To build and check R packages on R-hub, you need to validate your
-email address. This is because R-hub sends out emails about build
-results. See more at \code{\link[rhub:validate_email]{rhub::validate_email()}}.
+This function is deprecated since the underlying function
+\code{rhub::check_for_cran()} is now deprecated and defunct. See \code{\link[rhub:rhubv2]{rhub::rhubv2}}
+learn about the new check system, R-hub v2.
 }
-
-\seealso{
-Other build functions: 
-\code{\link{check_mac_release}()},
-\code{\link{check_win}()}
-}
-\concept{build functions}
+\keyword{internal}

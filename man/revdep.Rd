@@ -3,7 +3,7 @@
 \name{revdep}
 \alias{revdep}
 \alias{revdep_maintainers}
-\title{Reverse dependency tools.}
+\title{Reverse dependency tools}
 \usage{
 revdep(
   pkg,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/package.R
 \name{as.package}
 \alias{as.package}
-\title{Coerce input to a package.}
+\title{Coerce input to a package}
 \usage{
 as.package(x = NULL, create = deprecated())
 }

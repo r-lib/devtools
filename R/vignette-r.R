@@ -36,7 +36,9 @@ copy_vignettes <- function(pkg, keep_md) {
     return(invisible())
   }
 
-  cli::cli_inform(c(i = "Copying extra files {.file {path_file(extra_files)}} to {.path doc/}"))
+  cli::cli_inform(c(
+    i = "Copying extra files {.file {path_file(extra_files)}} to {.path doc/}"
+  ))
   file_copy(extra_files, doc_dir)
 
   invisible()

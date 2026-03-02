@@ -2,7 +2,7 @@
 % Please edit documentation in R/package.R
 \name{package_file}
 \alias{package_file}
-\title{Find file in a package.}
+\title{Find file in a package}
 \usage{
 package_file(..., path = ".")
 }

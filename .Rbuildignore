@@ -21,3 +21,9 @@
 ^\.lintr\.R$
 ^notes$
 ^CRAN-SUBMISSION$
+^[.]?air[.]toml$
+^\.vscode$
+^\.claude$
+^scratch\.R$
+^vignettes/\.quarto$
+^vignettes/*_files$

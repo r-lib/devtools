@@ -1,4 +1,4 @@
-#' Coerce input to a package.
+#' Coerce input to a package
 #'
 #' Possible specifications of package:
 #' \itemize{
@@ -10,7 +10,9 @@
 #' @export
 #' @keywords internal
 as.package <- function(x = NULL, create = deprecated()) {
-  if (is.package(x)) return(x)
+  if (is.package(x)) {
+    return(x)
+  }
   if (lifecycle::is_present(create)) {
     lifecycle::deprecate_warn("2.5.0", "as.package(create = )")
   }
@@ -19,7 +21,7 @@ as.package <- function(x = NULL, create = deprecated()) {
   load_pkg_description(x)
 }
 
-#' Find file in a package.
+#' Find file in a package
 #'
 #' It always starts by walking up the path until it finds the root directory,
 #' i.e. a directory containing `DESCRIPTION`. If it cannot find the root
@@ -34,9 +36,7 @@ as.package <- function(x = NULL, create = deprecated()) {
 #' package_file("figures", "figure_1")
 #' }
 package_file <- function(..., path = ".") {
-  if (!is.character(path) || length(path) != 1) {
-    cli::cli_abort("{.arg path} must be a string.")
-  }
+  check_string(path)
   if (!dir_exists(path)) {
     cli::cli_abort("{.path {path}} is not a directory.")
   }

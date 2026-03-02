@@ -7,19 +7,33 @@
 #'   [submit_cran()] or [release()].
 #' @param ... Additional arguments passed to [pkgbuild::build].
 #' @export
-build <- function(pkg = ".", path = NULL, binary = FALSE, vignettes = TRUE,
-                  manual = FALSE, args = NULL, quiet = FALSE, ...) {
+build <- function(
+  pkg = ".",
+  path = NULL,
+  binary = FALSE,
+  vignettes = TRUE,
+  manual = FALSE,
+  args = NULL,
+  quiet = FALSE,
+  ...
+) {
   save_all()
 
   if (!file_exists(pkg)) {
     cli::cli_abort("{.arg pkg} must exist")
   }
 
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   pkgbuild::build(
-    path = pkg, dest_path = path, binary = binary,
-    vignettes = vignettes, manual = manual, args = args, quiet = quiet, ...
+    path = pkg,
+    dest_path = path,
+    binary = binary,
+    vignettes = vignettes,
+    manual = manual,
+    args = args,
+    quiet = quiet,
+    ...
   )
 }
 

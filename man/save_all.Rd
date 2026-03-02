@@ -2,7 +2,7 @@
 % Please edit documentation in R/save-all.R
 \name{save_all}
 \alias{save_all}
-\title{Save all documents in an active IDE session.}
+\title{Save all documents in an active IDE session}
 \usage{
 save_all()
 }

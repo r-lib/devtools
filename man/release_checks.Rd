@@ -2,7 +2,7 @@
 % Please edit documentation in R/check-devtools.R
 \name{release_checks}
 \alias{release_checks}
-\title{Custom devtools release checks.}
+\title{Custom devtools release checks}
 \usage{
 release_checks(pkg = ".", built_path = NULL)
 }
