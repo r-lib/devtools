@@ -16,3 +16,4 @@ docs/
 *.key
 scratch.R
 .claude/plans
+**/.quarto/

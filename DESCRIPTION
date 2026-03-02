@@ -50,12 +50,12 @@ Suggests:
     httr2 (>= 1.0.0),
     knitr (>= 1.39),
     lintr (>= 3.0.0),
+    quarto,
     remotes (>= 2.5.0),
     rmarkdown (>= 2.14),
     rstudioapi (>= 0.13),
     spelling (>= 2.2)
-VignetteBuilder:
-    knitr
+VignetteBuilder: knitr, quarto
 Config/Needs/website: tidyverse/tidytemplate
 Config/testthat/edition: 3
 Config/testthat/parallel: true

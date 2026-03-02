@@ -25,3 +25,5 @@
 ^\.vscode$
 ^\.claude$
 ^scratch\.R$
+^vignettes/\.quarto$
+^vignettes/*_files$

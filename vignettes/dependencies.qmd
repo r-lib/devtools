@@ -1,0 +1,97 @@
+---
+title: "Depending on a development version"
+vignette: >
+  %\VignetteIndexEntry{Depending on a development version}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+---
+
+Sometimes you need your package to depend on a development version of another package that isn't yet available on [CRAN](https://cran.r-project.org) or [Bioconductor](https://bioconductor.org/).
+The `Remotes` field in `DESCRIPTION` lets you specify where to install such a dependency from.
+**`Remotes` is not a standard `DESCRIPTION` field**.
+It is not acceptable when releasing a package on CRAN.
+The `Remotes` field is understood by devtools, [pak](https://pak.r-lib.org/), and related tools, and is meant to be a temporary measure during development.
+
+This vignette covers the mechanics of the `Remotes` field.
+For more context, see the [Nonstandard dependencies](https://r-pkgs.org/dependencies-in-practice.html#nonstandard-dependencies) section of the R Packages book.
+
+## The `Remotes` field
+
+You can mark any dependency listed in `Depends`, `Imports`, `Suggests`, or `Enhances` as being installed from a non-standard source by adding a package reference to `Remotes` in your `DESCRIPTION` file.
+
+The general form is:
+
+```
+Remotes: [type::]<source>, [type2::]<source2>
+```
+
+Multiple remote dependencies are separated by commas, just like regular dependencies elsewhere in `DESCRIPTION`.
+
+It is important to remember that you **must always declare the dependency in the usual way**, i.e. in `Depends`, `Imports`, `Suggests`, or `Enhances`.
+The `Remotes` field only provides instructions about *where* to install the dependency from.
+For example, note how rlang appears in both `Imports` and `Remotes`:
+
+```
+Package: mypackage
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Imports:
+    rlang (>= 1.1.0.9000)
+Remotes:
+    r-lib/rlang
+```
+
+You can use `usethis::use_dev_package()` to add or update a development dependency.
+It takes care of modifying both the `Imports` (or `Suggests`) and `Remotes` fields.
+
+## GitHub
+
+GitHub is the most commonly used source for development packages, and the default when no type prefix is specified:
+
+```yaml
+Remotes: r-lib/rlang
+```
+
+You can request a specific branch, tag, commit (SHA), or pull request:
+
+```yaml
+Remotes: r-lib/rlang@some-branch,
+  r-lib/rlang@v1.0.0,
+  r-lib/rlang@84be6207,
+  r-lib/rlang#142
+```
+
+A `github::` prefix is accepted but not required:
+
+```yaml
+Remotes: github::r-lib/rlang
+```
+
+## Other sources
+
+There are many other supported source types:
+
+```yaml
+# GitLab
+Remotes: gitlab::user/repo
+
+# Git (any host)
+Remotes: git::https://github.com/r-lib/rlang.git
+
+# Bioconductor
+Remotes: bioc::SummarizedExperiment
+
+# URL (package archive)
+Remotes: url::https://example.com/package-0.1.0.tar.gz
+
+# Local
+Remotes: local::/path/to/package
+```
+
+See the [pak documentation on package sources](https://pak.r-lib.org/reference/pak_package_sources.html) for a complete list.
+
+## CRAN submission
+
+When you submit your package to CRAN, all of its dependencies must also be available on CRAN or Bioconductor.
+You need to remove the `Remotes` field from your `DESCRIPTION` before submission.
+This means having a `Remotes` field is a temporary development state: once the dependency you need is released to CRAN or Bioconductor, you should update your minimum version requirement and drop the `Remotes` entry.
