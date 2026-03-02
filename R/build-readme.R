@@ -4,7 +4,7 @@
 #' `r lifecycle::badge("deprecated")`
 #'
 #' `build_rmd()` is deprecated, as it is a low-level helper for internal use. To
-#' render your package's `README.Rmd` or `README.qmd`, use [build_readme()]. To
+#' render your package's `README.qmd` or `README.Rmd`, use [build_readme()]. To
 #' preview a vignette or article, use functions like [pkgdown::build_site()] or
 #' [pkgdown::build_article()].
 #'
@@ -86,20 +86,21 @@ build_rmd_impl <- function(
 
 #' Build README
 #'
-#' Renders an executable README, such as `README.Rmd`, to `README.md`.
-#' Specifically, `build_readme()`:
+#' Renders an executable README, i.e. `README.qmd` or `README.Rmd`, to
+#' `README.md`. Specifically, `build_readme()`:
 #' * Installs a copy of the package's current source to a temporary library
 #' * Renders the README in a clean R session
 #'
-#' @param path Path to the package to build the README.
+#' @param path Path to the top-level directory of the source package.
 #' @param quiet If `TRUE`, suppresses most output. Set to `FALSE`
 #'   if you need to debug.
-#' @param ... Additional arguments passed to [rmarkdown::render()].
+#' @param ... Additional arguments passed to [rmarkdown::render()], in the
+#'   case of `README.Rmd`. Not used for `README.qmd`
 #' @export
 build_readme <- function(path = ".", quiet = TRUE, ...) {
   pkg <- as.package(path)
 
-  regexp <- paste0(path_file(pkg$path), "/(inst/)?readme[.]rmd$")
+  regexp <- paste0(path_file(pkg$path), "/(inst/)?readme[.](r|q)md$")
   readme_path <- path_abs(dir_ls(
     pkg$path,
     ignore.case = TRUE,
@@ -109,13 +110,54 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
   ))
 
   if (length(readme_path) == 0) {
-    cli::cli_abort("Can't find {.file README.Rmd} or {.file inst/README.Rmd}.")
+    cli::cli_abort(
+      "Can't find {.file README.qmd} or {.file README.Rmd}, at the top-level or
+      below {.file inst/}."
+    )
   }
   if (length(readme_path) > 1) {
+    rel_paths <- path_rel(readme_path, pkg$path)
     cli::cli_abort(
-      "Can't have both {.file README.Rmd} and {.file inst/README.Rmd}."
+      "Found multiple executable READMEs: {.file {rel_paths}}. There can only be
+      one."
     )
   }
 
-  build_rmd_impl(readme_path, path = path, quiet = quiet, ...)
+  if (path_ext(readme_path) == "qmd") {
+    build_qmd_readme(readme_path, path = path, quiet = quiet)
+  } else {
+    build_rmd_impl(readme_path, path = path, quiet = quiet, ...)
+  }
+}
+
+build_qmd_readme <- function(readme_path, path = ".", quiet = TRUE) {
+  pkg <- as.package(path)
+
+  check_installed("quarto")
+  save_all()
+
+  local_install(pkg, quiet = TRUE)
+
+  if (!quiet) {
+    cli::cli_inform(c(i = "Building {.path {readme_path}}"))
+  }
+
+  # Quarto spawns its own R process for knitr, which won't inherit .libPaths().
+
+  # Pass library paths via R_LIBS_USER so the quarto subprocess finds the
+  # temporarily installed package first, ahead of any user-installed version.
+  lib_paths <- paste(.libPaths(), collapse = .Platform$path.sep)
+
+  callr::r_safe(
+    function(input, quiet, lib_paths) {
+      withr::local_envvar(R_LIBS_USER = lib_paths)
+      quarto::quarto_render(input = input, quiet = quiet)
+    },
+    args = list(input = readme_path, quiet = quiet, lib_paths = lib_paths),
+    show = TRUE,
+    spinner = FALSE,
+    stderr = "2>&1"
+  )
+
+  invisible(TRUE)
 }

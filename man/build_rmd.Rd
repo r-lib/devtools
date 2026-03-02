@@ -25,7 +25,7 @@ format is read from metadata (i.e. not a custom format object passed to
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 \code{build_rmd()} is deprecated, as it is a low-level helper for internal use. To
-render your package's \code{README.Rmd} or \code{README.qmd}, use \code{\link[=build_readme]{build_readme()}}. To
+render your package's \code{README.qmd} or \code{README.Rmd}, use \code{\link[=build_readme]{build_readme()}}. To
 preview a vignette or article, use functions like \code{\link[pkgdown:build_site]{pkgdown::build_site()}} or
 \code{\link[pkgdown:build_articles]{pkgdown::build_article()}}.
 }

@@ -7,16 +7,17 @@
 build_readme(path = ".", quiet = TRUE, ...)
 }
 \arguments{
-\item{path}{Path to the package to build the README.}
+\item{path}{Path to the top-level directory of the source package.}
 
 \item{quiet}{If \code{TRUE}, suppresses most output. Set to \code{FALSE}
 if you need to debug.}
 
-\item{...}{Additional arguments passed to \code{\link[rmarkdown:render]{rmarkdown::render()}}.}
+\item{...}{Additional arguments passed to \code{\link[rmarkdown:render]{rmarkdown::render()}}, in the
+case of \code{README.Rmd}. Not used for \code{README.qmd}}
 }
 \description{
-Renders an executable README, such as \code{README.Rmd}, to \code{README.md}.
-Specifically, \code{build_readme()}:
+Renders an executable README, i.e. \code{README.qmd} or \code{README.Rmd}, to
+\code{README.md}. Specifically, \code{build_readme()}:
 \itemize{
 \item Installs a copy of the package's current source to a temporary library
 \item Renders the README in a clean R session

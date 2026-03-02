@@ -50,6 +50,7 @@ Suggests:
     httr2 (>= 1.0.0),
     knitr (>= 1.39),
     lintr (>= 3.0.0),
+    quarto (>= 1.5.1),
     remotes (>= 2.5.0),
     rmarkdown (>= 2.14),
     rstudioapi (>= 0.13),

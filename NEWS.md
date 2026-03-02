@@ -13,6 +13,7 @@ Deprecations
 
 Other improvements
 
+* `build_readme()` gains support for `README.qmd` and renders using Quarto (#2620).
 * `install()` now installs dependencies with `pak::local_install_deps()` instead of `remotes::install_deps()`. This lets us default to `upgrade = FALSE`, so that existing dependencies are only upgraded when a newer version is actually required (#2486). `keep_source` now defaults to `TRUE` when `build = FALSE`, so that source references are automatically preserved during development installs.
 * `build_manual()` reports more details on failure (#2586).
 * `build_site()` now just calls `pkgdown::build_site()`, meaning that you will get more (informative) output by default (#2578).
@@ -27,8 +28,7 @@ Other improvements
 
 # devtools 2.4.6
 
-* Functions that use httr now explicitly check that it is installed
-  (@catalamarti, #2573).
+* Functions that use httr now explicitly check that it is installed (@catalamarti, #2573).
 
 * `test_coverage()` now works if the package has not been installed.
 
