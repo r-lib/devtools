@@ -40,7 +40,7 @@ test_that("can build README.Rmd in inst/", {
 test_that("can build README.qmd in root directory", {
   skip_on_cran()
   skip_if_not_installed("quarto")
-  skip_if(!nzchar(Sys.which("quarto")), "quarto cli not available")
+  skip_if_not(quarto::quarto_available(), "quarto cli not available")
 
   pkg <- local_package_create()
   usethis::ui_silence(
@@ -57,7 +57,7 @@ test_that("can build README.qmd in root directory", {
 test_that("can build README.qmd in inst/", {
   skip_on_cran()
   skip_if_not_installed("quarto")
-  skip_if(!nzchar(Sys.which("quarto")), "quarto cli not available")
+  skip_if_not(quarto::quarto_available(), "quarto cli not available")
 
   pkg <- local_package_create()
   usethis::ui_silence(
