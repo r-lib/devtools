@@ -253,11 +253,12 @@ extract_hidden_fields <- function(html_text) {
 }
 
 upload_webform <- function(file, version) {
-  rlang::check_installed("httr")
+  check_installed("httr2")
 
   upload_url <- "https://win-builder.r-project.org/upload.aspx"
-  form_page <- httr::GET(upload_url)
-  html_text <- httr::content(form_page, as = "text")
+  req <- httr2::request(upload_url)
+  resp <- httr2::req_perform(req)
+  html_text <- httr2::resp_body_string(resp)
 
   field_map <- list(
     "R-release" = list(file = "FileUpload1", button = "Button1"),
@@ -267,14 +268,11 @@ upload_webform <- function(file, version) {
 
   fields <- field_map[[version]]
 
-  body <- extract_hidden_fields(html_text)
-  body[[fields$file]] <- httr::upload_file(file)
-  body[[fields$button]] <- "Upload File"
+  hidden <- extract_hidden_fields(html_text)
+  hidden[[fields$file]] <- curl::form_file(file)
+  hidden[[fields$button]] <- "Upload File"
 
-  r <- httr::POST(
-    url = upload_url,
-    body = body,
-    encode = "multipart"
-  )
-  httr::stop_for_status(r)
+  req <- httr2::request(upload_url)
+  req <- httr2::req_body_multipart(req, !!!hidden)
+  httr2::req_perform(req)
 }
