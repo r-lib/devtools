@@ -30,7 +30,7 @@ check_win_devel <- function(
   webform = FALSE,
   ...
 ) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   check_win(
     pkg = pkg,
@@ -55,7 +55,7 @@ check_win_release <- function(
   webform = FALSE,
   ...
 ) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   check_win(
     pkg = pkg,
@@ -80,7 +80,7 @@ check_win_oldrelease <- function(
   webform = FALSE,
   ...
 ) {
-  check_dots_used(action = getOption("devtools.ellipsis_action", rlang::warn))
+  check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
   check_win(
     pkg = pkg,
