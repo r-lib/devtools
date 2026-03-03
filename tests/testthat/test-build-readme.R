@@ -43,11 +43,19 @@ test_that("can build README.qmd in root directory", {
   skip_if_not(quarto::quarto_available(), "quarto cli not available")
 
   pkg <- local_package_create()
-  usethis::ui_silence(
-    usethis::with_project(
-      pkg,
-      use_readme_qmd(open = FALSE)
-    )
+  # TODO: use usethis::use_readme_qmd() once it's in a usethis release
+  # https://github.com/r-lib/usethis/pull/2219
+  writeLines(
+    c(
+      "---",
+      "format: gfm",
+      "---",
+      "",
+      "# testpkg",
+      "",
+      "This is a test package."
+    ),
+    path(pkg, "README.qmd")
   )
 
   build_readme(pkg, quiet = TRUE)
@@ -60,15 +68,19 @@ test_that("can build README.qmd in inst/", {
   skip_if_not(quarto::quarto_available(), "quarto cli not available")
 
   pkg <- local_package_create()
-  usethis::ui_silence(
-    usethis::with_project(
-      pkg,
-      use_readme_qmd(open = FALSE)
-    )
-  )
+  # TODO: use usethis::use_readme_qmd() once it's in a usethis release
+  # https://github.com/r-lib/usethis/pull/2219
   dir_create(pkg, "inst")
-  file_move(
-    path(pkg, "README.qmd"),
+  writeLines(
+    c(
+      "---",
+      "format: gfm",
+      "---",
+      "",
+      "# testpkg",
+      "",
+      "This is a test package."
+    ),
     path(pkg, "inst", "README.qmd")
   )
 
