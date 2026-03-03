@@ -16,6 +16,7 @@ check_win_devel(
   manual = TRUE,
   email = NULL,
   quiet = FALSE,
+  webform = FALSE,
   ...
 )
 
@@ -25,6 +26,7 @@ check_win_release(
   manual = TRUE,
   email = NULL,
   quiet = FALSE,
+  webform = FALSE,
   ...
 )
 
@@ -34,6 +36,7 @@ check_win_oldrelease(
   manual = TRUE,
   email = NULL,
   quiet = FALSE,
+  webform = FALSE,
   ...
 )
 ```
@@ -65,6 +68,10 @@ check_win_oldrelease(
 - quiet:
 
   If `TRUE`, suppresses output.
+
+- webform:
+
+  If `TRUE`, uses web form instead of passive FTP upload.
 
 - ...:
 

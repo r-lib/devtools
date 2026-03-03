@@ -24,7 +24,7 @@
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/dependencies.html">Devtools dependencies</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/dependencies.html">Depending on a development version</a></li>
   </ul></li>
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
@@ -76,6 +76,8 @@
 <code><a href="../reference/check_doc_fields.html">check_doc_fields()</a></code> is a new function that checks for missing <code>\value</code> and <code>\examples</code> fields in Rd files, which are commonly flagged by CRAN (<a href="https://github.com/r-lib/devtools/issues/2525" class="external-link">#2525</a>).</li>
 <li>
 <code><a href="../reference/check_mac_release.html">check_mac_devel()</a></code> is a new function to check a package using the macOS builder at <a href="https://mac.r-project.org/macbuilder/submit.html" class="external-link uri">https://mac.r-project.org/macbuilder/submit.html</a> (<a href="https://github.com/nfrerebeau" class="external-link">@nfrerebeau</a>, <a href="https://github.com/r-lib/devtools/issues/2507" class="external-link">#2507</a>)</li>
+<li>
+<code><a href="../reference/check_win.html">check_win()</a></code> and friends gain a <code>webform</code> argument that uses a webform instead of passive FTP upload (<a href="https://github.com/brownag" class="external-link">@brownag</a>, <a href="https://github.com/r-lib/devtools/issues/2619" class="external-link">#2619</a>).</li>
 <li>
 <code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> now works correctly inside Positron (<a href="https://github.com/r-lib/devtools/issues/2618" class="external-link">#2618</a>), uses pak instead of remotes to check for dependencies that are missing/behind/ahead (<a href="https://github.com/r-lib/devtools/issues/2663" class="external-link">#2663</a>), and uses cli for user-facing messages.</li>
 <li>

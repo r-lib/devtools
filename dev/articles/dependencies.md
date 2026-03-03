@@ -1,113 +1,106 @@
-# Devtools dependencies
+# Depending on a development version
 
-## Package remotes
-
-Devtools version 1.9 supports package dependency installation for
-packages not yet in a standard package repository such as
+Sometimes you need your package to depend on a development version of
+another package that isn’t yet available on
 [CRAN](https://cran.r-project.org) or
-[Bioconductor](https://bioconductor.org/).
+[Bioconductor](https://bioconductor.org/). The `Remotes` field in
+`DESCRIPTION` lets you specify where to install such a dependency from.
+**`Remotes` is not a standard `DESCRIPTION` field**. It is not
+acceptable when releasing a package on CRAN. The `Remotes` field is
+understood by devtools, [pak](https://pak.r-lib.org/), and related
+tools, and is meant to be a temporary measure during development.
 
-You can mark any regular dependency defined in the `Depends`, `Imports`,
-`Suggests` or `Enhances` fields as being installed from a remote
-location by adding the remote location to `Remotes` in your
-`DESCRIPTION` file. This will cause devtools to download and install
-them prior to installing your package (so they won’t be installed from
-CRAN).
+This vignette covers the mechanics of the `Remotes` field. For more
+context, see the [Nonstandard
+dependencies](https://r-pkgs.org/dependencies-in-practice.html#nonstandard-dependencies)
+section of the R Packages book.
 
-The remote dependencies specified in `Remotes` should be described in
-the following form.
+## The `Remotes` field
 
-    Remotes: [type::]<Repository>, [type2::]<Repository2>
+You can mark any dependency listed in `Depends`, `Imports`, `Suggests`,
+or `Enhances` as being installed from a non-standard source by adding a
+package reference to `Remotes` in your `DESCRIPTION` file.
 
-The `type` is an optional parameter. If the type is missing the default
-is to install from GitHub. Additional remote dependencies should be
-separated by commas, just like normal dependencies elsewhere in the
-`DESCRIPTION` file.
+The general form is:
+
+    Remotes: [type::]<source>, [type2::]<source2>
+
+Multiple remote dependencies are separated by commas, just like regular
+dependencies elsewhere in `DESCRIPTION`.
 
 It is important to remember that you **must always declare the
-dependency in the usual way**, i.e. include it in `Depends`, `Imports`,
-`Suggests` or `Enhances`. The `Remotes` field only provides instructions
-on where to install the dependency from. In this example `DESCRIPTION`
-file, note how rlang appears in `Imports` and in `Remotes`:
+dependency in the usual way**, i.e. in `Depends`, `Imports`, `Suggests`,
+or `Enhances`. The `Remotes` field only provides instructions about
+*where* to install the dependency from. For example, note how rlang
+appears in both `Imports` and `Remotes`:
 
-    Package: xyz
+    Package: mypackage
     Title: What the Package Does (One Line, Title Case)
     Version: 0.0.0.9000
-    Authors@R:
-        person(given = "First",
-               family = "Last",
-               role = c("aut", "cre"),
-               email = "first.last@example.com")
-    Description: What the package does (one paragraph).
-    License: MIT + file LICENSE
     Imports:
-        rlang
+        rlang (>= 1.1.0.9000)
     Remotes:
         r-lib/rlang
 
-#### GitHub
+You can use
+[`usethis::use_dev_package()`](https://usethis.r-lib.org/reference/use_package.html)
+to add or update a development dependency. It takes care of modifying
+both the `Imports` (or `Suggests`) and `Remotes` fields.
 
-Because GitHub is the most commonly used unofficial package distribution
-in R, it’s the default:
+## GitHub
 
-``` yaml
-Remotes: hadley/testthat
-```
-
-You can also specify a specific hash, tag, or pull request (using the
-same syntax as
-[`install_github()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
-if you want a particular commit. Otherwise the latest commit on the HEAD
-of the branch is used.
+GitHub is the most commonly used source for development packages, and
+the default when no type prefix is specified:
 
 ``` yaml
-Remotes: hadley/httr@v0.4,
-  klutometis/roxygen#142,
-  hadley/testthat@c67018fa4970
+Remotes: r-lib/rlang
 ```
 
-A type of `github` can be specified, but is not required
+You can request a specific branch, tag, commit (SHA), or pull request:
 
 ``` yaml
-Remotes: github::hadley/ggplot2
+Remotes: r-lib/rlang@some-branch,
+  r-lib/rlang@v1.0.0,
+  r-lib/rlang@84be6207,
+  r-lib/rlang#142
 ```
 
-#### Other sources
+A `github::` prefix is accepted but not required:
 
-All of the currently supported install sources are available, see the
-‘See Also’ section in
-[`?install`](https://devtools.r-lib.org/dev/reference/install.md) for a
-complete list.
+``` yaml
+Remotes: github::r-lib/rlang
+```
+
+## Other sources
+
+There are many other supported source types:
 
 ``` yaml
 # GitLab
-Remotes: gitlab::jimhester/covr
+Remotes: gitlab::user/repo
 
-# Git
-Remotes: git::git@bitbucket.org:djnavarro/lsr.git
-
-# Bitbucket
-Remotes: bitbucket::sulab/mygene.r@default, djnavarro/lsr
+# Git (any host)
+Remotes: git::https://github.com/r-lib/rlang.git
 
 # Bioconductor
-Remotes: bioc::3.3/SummarizedExperiment#117513, bioc::release/Biobase
+Remotes: bioc::SummarizedExperiment
 
-# SVN
-Remotes: svn::https://github.com/tidyverse/stringr
-
-# URL
-Remotes: url::https://github.com/tidyverse/stringr/archive/main.zip
+# URL (package archive)
+Remotes: url::https://example.com/package-0.1.0.tar.gz
 
 # Local
-Remotes: local::/pkgs/testthat
-
-# Gitorious
-Remotes: gitorious::r-mpc-package/r-mpc-package
+Remotes: local::/path/to/package
 ```
 
-#### CRAN submission
+See the [pak documentation on package
+sources](https://pak.r-lib.org/reference/pak_package_sources.html) for a
+complete list.
+
+## CRAN submission
 
 When you submit your package to CRAN, all of its dependencies must also
-be available on CRAN. For this reason,
-[`release()`](https://devtools.r-lib.org/dev/reference/release.md) will
-warn you if you try to release a package with a `Remotes` field.
+be available on CRAN or Bioconductor. You need to remove the `Remotes`
+field from your `DESCRIPTION` before submission. This means having a
+`Remotes` field is a temporary development state: once the dependency
+you need is released to CRAN or Bioconductor, you should update your
+minimum version requirement and drop the `Remotes` entry.

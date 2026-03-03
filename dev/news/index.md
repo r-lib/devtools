@@ -96,6 +96,10 @@ Other improvements
   <https://mac.r-project.org/macbuilder/submit.html>
   ([@nfrerebeau](https://github.com/nfrerebeau),
   [\#2507](https://github.com/r-lib/devtools/issues/2507))
+- [`check_win()`](https://devtools.r-lib.org/dev/reference/check_win.md)
+  and friends gain a `webform` argument that uses a webform instead of
+  passive FTP upload ([@brownag](https://github.com/brownag),
+  [\#2619](https://github.com/r-lib/devtools/issues/2619)).
 - [`dev_sitrep()`](https://devtools.r-lib.org/dev/reference/dev_sitrep.md)
   now works correctly inside Positron
   ([\#2618](https://github.com/r-lib/devtools/issues/2618)), uses pak
