@@ -149,11 +149,11 @@ build_qmd_readme <- function(readme_path, path = ".", quiet = TRUE) {
   lib_paths <- paste(.libPaths(), collapse = .Platform$path.sep)
 
   callr::r_safe(
-    function(input, quiet, lib_paths) {
-      withr::local_envvar(R_LIBS_USER = lib_paths)
+    function(input, quiet) {
       quarto::quarto_render(input = input, quiet = quiet)
     },
-    args = list(input = readme_path, quiet = quiet, lib_paths = lib_paths),
+    args = list(input = readme_path, quiet = quiet),
+    env = c(callr::rcmd_safe_env(), R_LIBS_USER = lib_paths),
     show = TRUE,
     spinner = FALSE,
     stderr = "2>&1"
