@@ -64,9 +64,6 @@ build_rmd_impl <- function(
   output_options$html_preview <- FALSE
 
   for (path in paths) {
-    if (!quiet) {
-      cli::cli_inform(c(i = "Building {.path {path}}"))
-    }
     callr::r_safe(
       function(...) rmarkdown::render(...),
       args = list(
@@ -101,13 +98,16 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
   pkg <- as.package(path)
 
   regexp <- paste0(path_file(pkg$path), "/(inst/)?readme[.](r|q)md$")
-  readme_path <- sort(path_abs(dir_ls(
-    pkg$path,
-    ignore.case = TRUE,
-    regexp = regexp,
-    recurse = 1,
-    type = "file"
-  )), method = "radix")
+  readme_path <- sort(
+    path_abs(dir_ls(
+      pkg$path,
+      ignore.case = TRUE,
+      regexp = regexp,
+      recurse = 1,
+      type = "file"
+    )),
+    method = "radix"
+  )
 
   if (length(readme_path) == 0) {
     cli::cli_abort(
@@ -121,6 +121,10 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
       "Found multiple executable READMEs: {.file {rel_paths}}. There can only be
       one."
     )
+  }
+
+  if (!quiet) {
+    cli::cli_inform(c(i = "Building {.path {readme_path}}"))
   }
 
   if (path_ext(readme_path) == "qmd") {
@@ -137,10 +141,6 @@ build_qmd_readme <- function(readme_path, path = ".", quiet = TRUE) {
   save_all()
 
   local_install(pkg, quiet = TRUE)
-
-  if (!quiet) {
-    cli::cli_inform(c(i = "Building {.path {readme_path}}"))
-  }
 
   # Quarto spawns its own R process for knitr, which won't inherit .libPaths().
 
