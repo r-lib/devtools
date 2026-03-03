@@ -18,6 +18,7 @@ Other improvements
 * `build_site()` now just calls `pkgdown::build_site()`, meaning that you will get more (informative) output by default (#2578).
 * `check_doc_fields()` is a new function that checks for missing `\value` and `\examples` fields in Rd files, which are commonly flagged by CRAN (#2525).
 * `check_mac_devel()` is a new function to check a package using the macOS builder at https://mac.r-project.org/macbuilder/submit.html (@nfrerebeau, #2507)
+* `check_win()` and friends gain a `webform` argument that uses a webform instead of passive FTP upload (@brownag, #2619).
 * `dev_sitrep()` now works correctly inside Positron (#2618), uses pak instead of remotes to check for dependencies that are missing/behind/ahead (#2663), and uses cli for user-facing messages.
 * `is_loading()` is now re-exported from pkgload (#2556).
 * `load_all()` now errors if called recursively, i.e. if you accidentally include a `load_all()` call in one of your R source files (#2617).
