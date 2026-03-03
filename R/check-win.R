@@ -13,6 +13,7 @@
 #' @param email An alternative email address to use. If `NULL`, the default is
 #'   to use the package maintainer's email.
 #' @param quiet If `TRUE`, suppresses output.
+#' @param webform If `TRUE`, uses web form instead of passive FTP upload.
 #' @param ... Additional arguments passed to [pkgbuild::build()].
 #' @family build functions
 #' @name check_win
@@ -26,6 +27,7 @@ check_win_devel <- function(
   manual = TRUE,
   email = NULL,
   quiet = FALSE,
+  webform = FALSE,
   ...
 ) {
   check_dots_used(action = getOption("devtools.ellipsis_action", warn))
@@ -37,6 +39,7 @@ check_win_devel <- function(
     manual = manual,
     email = email,
     quiet = quiet,
+    webform = webform,
     ...
   )
 }
@@ -49,6 +52,7 @@ check_win_release <- function(
   manual = TRUE,
   email = NULL,
   quiet = FALSE,
+  webform = FALSE,
   ...
 ) {
   check_dots_used(action = getOption("devtools.ellipsis_action", warn))
@@ -60,6 +64,7 @@ check_win_release <- function(
     manual = manual,
     email = email,
     quiet = quiet,
+    webform = webform,
     ...
   )
 }
@@ -72,6 +77,7 @@ check_win_oldrelease <- function(
   manual = TRUE,
   email = NULL,
   quiet = FALSE,
+  webform = FALSE,
   ...
 ) {
   check_dots_used(action = getOption("devtools.ellipsis_action", warn))
@@ -83,6 +89,7 @@ check_win_oldrelease <- function(
     manual = manual,
     email = email,
     quiet = quiet,
+    webform = webform,
     ...
   )
 }
@@ -94,6 +101,7 @@ check_win <- function(
   manual = TRUE,
   email = NULL,
   quiet = FALSE,
+  webform = FALSE,
   ...
 ) {
   pkg <- as.package(pkg)
@@ -131,13 +139,11 @@ check_win <- function(
   )
   on.exit(file_delete(built_path), add = TRUE)
 
-  url <- paste0(
-    "ftp://win-builder.r-project.org/",
-    version,
-    "/",
-    path_file(built_path)
-  )
-  walk(url, upload_ftp, file = built_path)
+  if (webform) {
+    submit_winbuilder_webform(built_path, version)
+  } else {
+    submit_winbuilder_ftp(built_path, version)
+  }
 
   if (!quiet) {
     time <- strftime(Sys.time() + 30 * 60, "%I:%M %p")
@@ -150,6 +156,20 @@ check_win <- function(
   }
 
   invisible()
+}
+
+submit_winbuilder_ftp <- function(path, version) {
+  url <- paste0(
+    "ftp://win-builder.r-project.org/",
+    version,
+    "/",
+    path_file(path)
+  )
+  walk(url, upload_ftp, file = path)
+}
+
+submit_winbuilder_webform <- function(path, version) {
+  walk(version, upload_webform, file = path)
 }
 
 confirm_maintainer_email <- function(email, call = parent.frame()) {
@@ -215,4 +235,53 @@ upload_ftp <- function(file, url, verbose = FALSE) {
     verbose = verbose
   )
   curl::curl_fetch_memory(url, handle = h)
+}
+
+parse_winbuilder_form <- function(url, version) {
+  req <- httr2::request(url)
+  resp <- httr2::req_perform(req)
+  html <- xml2::read_html(httr2::resp_body_string(resp))
+
+  # Extract hidden fields shared by the whole form
+  hidden_nodes <- xml2::xml_find_all(html, ".//input[@type='hidden']")
+  hidden <- as.list(xml2::xml_attr(hidden_nodes, "value"))
+  names(hidden) <- xml2::xml_attr(hidden_nodes, "name")
+
+  # Find the <h2> heading for the requested version, then grab the file
+  # input and submit button from the <div> that follows it
+  headings <- xml2::xml_find_all(html, ".//h2")
+  heading_texts <- xml2::xml_text(headings)
+  idx <- match(version, heading_texts)
+  if (is.na(idx)) {
+    cli::cli_abort(
+      "Could not find {.val {version}} section in the WinBuilder form."
+    )
+  }
+
+  section <- xml2::xml_find_first(headings[[idx]], "following-sibling::div")
+  file_field <- xml2::xml_attr(
+    xml2::xml_find_first(section, ".//input[@type='file']"),
+    "name"
+  )
+  button_field <- xml2::xml_attr(
+    xml2::xml_find_first(section, ".//input[@type='submit']"),
+    "name"
+  )
+
+  list(hidden = hidden, file_field = file_field, button_field = button_field)
+}
+
+upload_webform <- function(file, version) {
+  check_installed(c("httr2", "xml2"))
+
+  upload_url <- "https://win-builder.r-project.org/upload.aspx"
+  form <- parse_winbuilder_form(upload_url, version)
+
+  body <- form$hidden
+  body[[form$file_field]] <- curl::form_file(file)
+  body[[form$button_field]] <- "Upload File"
+
+  req <- httr2::request(upload_url)
+  req <- httr2::req_body_multipart(req, !!!body)
+  httr2::req_perform(req)
 }
