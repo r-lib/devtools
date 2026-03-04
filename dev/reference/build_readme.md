@@ -1,7 +1,7 @@
 # Build README
 
-Renders an executable README, such as `README.Rmd`, to `README.md`.
-Specifically, `build_readme()`:
+Renders an executable README, i.e. `README.qmd` or `README.Rmd`, to
+`README.md`. Specifically, `build_readme()`:
 
 - Installs a copy of the package's current source to a temporary library
 
@@ -17,7 +17,7 @@ build_readme(path = ".", quiet = TRUE, ...)
 
 - path:
 
-  Path to the package to build the README.
+  Path to the top-level directory of the source package.
 
 - quiet:
 
@@ -27,4 +27,5 @@ build_readme(path = ".", quiet = TRUE, ...)
 - ...:
 
   Additional arguments passed to
-  [`rmarkdown::render()`](https://pkgs.rstudio.com/rmarkdown/reference/render.html).
+  [`rmarkdown::render()`](https://pkgs.rstudio.com/rmarkdown/reference/render.html),
+  in the case of `README.Rmd`. Not used for `README.qmd`

@@ -3,7 +3,7 @@
 **\[deprecated\]**
 
 `build_rmd()` is deprecated, as it is a low-level helper for internal
-use. To render your package's `README.Rmd` or `README.qmd`, use
+use. To render your package's `README.qmd` or `README.Rmd`, use
 [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_readme.md).
 To preview a vignette or article, use functions like
 [`pkgdown::build_site()`](https://pkgdown.r-lib.org/reference/build_site.html)

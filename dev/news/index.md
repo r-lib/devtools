@@ -68,6 +68,9 @@ Deprecations
 
 Other improvements
 
+- [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_readme.md)
+  gains support for `README.qmd` and renders using Quarto
+  ([\#2620](https://github.com/r-lib/devtools/issues/2620)).
 - [`install()`](https://devtools.r-lib.org/dev/reference/install.md) now
   installs dependencies with
   [`pak::local_install_deps()`](https://pak.r-lib.org/reference/local_install_deps.html)
