@@ -81,5 +81,4 @@ build_vignettes(
 - keep_md:
 
   If `TRUE`, move md intermediates as well as rendered outputs. Most
-  useful when using the `keep_md` YAML option for Rmarkdown outputs. See
-  <https://bookdown.org/yihui/rmarkdown/html-document.html#keeping-markdown>.
+  useful when using the `keep_md` YAML option for Rmarkdown outputs.

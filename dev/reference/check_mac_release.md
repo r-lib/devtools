@@ -1,7 +1,7 @@
 # Check a package on macOS
 
 Check on either the released or development versions of R, using
-<https://mac.r-project.org/macbuilder/>.
+<https://mac.r-project.org/macbuilder/submit.html>.
 
 ## Usage
 
