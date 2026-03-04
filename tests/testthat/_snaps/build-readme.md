@@ -20,7 +20,7 @@
       build_readme(pkg)
     Condition
       Error in `build_readme()`:
-      ! Found multiple executable READMEs: 'README.Rmd' and 'README.qmd'. There can only be one.
+      ! Found multiple executable READMEs: 'README.qmd' and 'README.Rmd'. There can only be one.
 
 # build_rmd() is deprecated
 

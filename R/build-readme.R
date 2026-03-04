@@ -97,17 +97,13 @@ build_rmd_impl <- function(
 build_readme <- function(path = ".", quiet = TRUE, ...) {
   pkg <- as.package(path)
 
-  regexp <- paste0(path_file(pkg$path), "/(inst/)?readme[.](r|q)md$")
-  readme_path <- sort(
-    path_abs(dir_ls(
-      pkg$path,
-      ignore.case = TRUE,
-      regexp = regexp,
-      recurse = 1,
-      type = "file"
-    )),
-    method = "radix"
+  readme_candidates <- c(
+    path(pkg$path, "README.qmd"),
+    path(pkg$path, "README.Rmd"),
+    path(pkg$path, "inst", "README.qmd"),
+    path(pkg$path, "inst", "README.Rmd")
   )
+  readme_path <- readme_candidates[file_exists(readme_candidates)]
 
   if (length(readme_path) == 0) {
     cli::cli_abort(
