@@ -128,6 +128,11 @@ test_coverage_active_file <- function(
   pkg <- as.package(test_dir)
 
   env <- load_all(pkg$path, quiet = TRUE, export_all = export_all)$env
+
+  # Must capture before local_test_directory() sets TESTTHAT envvar,
+  # which causes rlang::is_interactive() to return FALSE
+  report <- report_default(report)
+
   # this always ends up using the package DESCRIPTION, which will refer
   # to the source package because of the load_all() above
   testthat::local_test_directory(test_dir, pkg$package)
