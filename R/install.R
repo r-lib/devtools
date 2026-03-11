@@ -80,14 +80,26 @@ install <- function(
     if (quiet) {
       withr::local_output_sink(withr::local_tempfile())
       withr::local_message_sink(withr::local_tempfile())
+      # pak uses callr internally. When install() itself runs inside a callr
+      # worker (e.g. testthat parallel tests), pak's callr_message conditions
+      # leak to the parent process. Muffle them here; tryInvokeRestart() is a
+      # safe no-op when the muffleMessage restart doesn't exist.
+      withCallingHandlers(
+        pak::local_install_deps(
+          pkg$path,
+          upgrade = upgrade,
+          dependencies = dependencies || isTRUE(build_vignettes)
+        ),
+        callr_message = function(cnd) tryInvokeRestart("muffleMessage")
+      )
     } else {
       cli::cat_rule("pak::local_install_deps()", col = "cyan")
+      pak::local_install_deps(
+        pkg$path,
+        upgrade = upgrade,
+        dependencies = dependencies || isTRUE(build_vignettes)
+      )
     }
-    pak::local_install_deps(
-      pkg$path,
-      upgrade = upgrade,
-      dependencies = dependencies || isTRUE(build_vignettes)
-    )
   })
 
   if (isTRUE(build_vignettes)) {
