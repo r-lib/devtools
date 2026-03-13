@@ -652,8 +652,7 @@ CRAN release: 2019-07-06
 ### Minor improvements and fixes
 
 - `check_rhub` gains a new argument `build_args` for arguments passed to
-  `R CMD build`. `...` is now passed to
-  [`rhub::check_for_cran()`](https://r-hub.github.io/rhub/reference/check_for_cran.html)
+  `R CMD build`. `...` is now passed to `rhub::check_for_cran()`
   ([@gaborcsardi](https://github.com/gaborcsardi),
   [@maelle](https://github.com/maelle),
   [\#2041](https://github.com/r-lib/devtools/issues/2041))

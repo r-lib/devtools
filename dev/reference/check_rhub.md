@@ -3,10 +3,8 @@
 **\[deprecated\]**
 
 This function is deprecated since the underlying function
-[`rhub::check_for_cran()`](https://r-hub.github.io/rhub/reference/check_for_cran.html)
-is now deprecated and defunct. See
-[`rhub::rhubv2`](https://r-hub.github.io/rhub/reference/rhubv2.html)
-learn about the new check system, R-hub v2.
+`rhub::check_for_cran()` is now deprecated and defunct. See
+`rhub::rhubv2` learn about the new check system, R-hub v2.
 
 ## Usage
 
@@ -48,8 +46,7 @@ check_rhub(
 
 - ...:
 
-  extra arguments, passed to
-  [`rhub::check_for_cran()`](https://r-hub.github.io/rhub/reference/check_for_cran.html).
+  extra arguments, passed to `rhub::check_for_cran()`.
 
 ## Value
 
