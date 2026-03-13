@@ -38,7 +38,7 @@ jobs:
           mkdir -p "$HOME/bin"
           cat > "$HOME/bin/sudo" << 'EOF'
           #!/bin/bash
-          echo "SUDO CALLED with args: $*" >&2
+          echo "SUDO CALLED with args: $*" >> /tmp/sudo-tripwire.log
           exit 1
           EOF
           chmod +x "$HOME/bin/sudo"
@@ -52,8 +52,9 @@ jobs:
       - name: Check for sudo calls
         if: always()
         run: |
-          if grep -r "SUDO CALLED" '${{ runner.temp }}/package.Rcheck/' 2>/dev/null; then
+          if [ -f /tmp/sudo-tripwire.log ]; then
             echo "::error::sudo was called during R CMD check!"
+            cat /tmp/sudo-tripwire.log
             exit 1
           else
             echo "No sudo calls detected."
