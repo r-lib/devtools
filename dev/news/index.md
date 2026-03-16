@@ -28,7 +28,9 @@ Deprecations
   and
   [`github_release()`](https://devtools.r-lib.org/dev/reference/install-deprecated.md).
   We now recommend pak (<https://pak.r-lib.org/>) for general package
-  installation. See `?install-deprecated` for migration guidance.
+  installation. See
+  [`` ?`install-deprecated` ``](https://devtools.r-lib.org/dev/reference/install-deprecated.md)
+  for migration guidance.
 - remotes has moved from Imports to Suggests, as part of the pivot
   towards pak for package installation
   ([\#2663](https://github.com/r-lib/devtools/issues/2663)).
