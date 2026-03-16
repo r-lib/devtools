@@ -63,7 +63,7 @@ is_dev_package()."><meta property="og:image" content="https://devtools.r-lib.org
   gtag('js', new Date());
 
   gtag('config', 'UA-115082821-1');
-</script><script defer data-domain="devtools.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script></head><body>
+</script><script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><script defer data-domain="devtools.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script></head><body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
 
 
@@ -71,7 +71,7 @@ is_dev_package()."><meta property="og:image" content="https://devtools.r-lib.org
 
     <a class="navbar-brand me-2" href="../index.html">devtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,7 +82,7 @@ is_dev_package()."><meta property="og:image" content="https://devtools.r-lib.org
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/dependencies.html">Devtools dependencies</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/dependencies.html">Depending on a development version</a></li>
   </ul></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
@@ -103,7 +103,7 @@ is_dev_package()."><meta property="og:image" content="https://devtools.r-lib.org
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Load complete package</h1>
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/devtools/blob/v2.4.6/R/pkgload.R" class="external-link"><code>R/pkgload.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/devtools/blob/main/R/pkgload.R" class="external-link"><code>R/pkgload.R</code></a></small>
       <div class="d-none name"><code>load_all.Rd</code></div>
     </div>
 
@@ -131,7 +131,7 @@ the correct times.</p></li>
 access them interactively. devtools sets the <code>DEVTOOLS_LOAD</code>
 environment variable to the package name to let you check whether the
 helpers are run during package loading.</p></li>
-</ul><p><code>is_loading()</code> returns <code>TRUE</code> when it is called while <code>load_all()</code>
+</ul><p><code><a href="https://pkgload.r-lib.org/reference/load_all.html" class="external-link">is_loading()</a></code> returns <code>TRUE</code> when it is called while <code>load_all()</code>
 is running. This may be useful e.g. in <code>.onLoad</code> hooks.
 A package loaded with <code>load_all()</code> can be identified with
 <code><a href="https://pkgload.r-lib.org/reference/is_dev_package.html" class="external-link">is_dev_package()</a></code>.</p>
@@ -249,7 +249,7 @@ to <code>FALSE</code>. For further details see the Details section in <code><a h
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
   </div></footer></body></html>

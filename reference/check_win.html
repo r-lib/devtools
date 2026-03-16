@@ -15,7 +15,7 @@ deleted after a couple of days."><meta property="og:image" content="https://devt
   gtag('js', new Date());
 
   gtag('config', 'UA-115082821-1');
-</script><script defer data-domain="devtools.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script></head><body>
+</script><script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><script defer data-domain="devtools.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script></head><body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
 
 
@@ -23,7 +23,7 @@ deleted after a couple of days."><meta property="og:image" content="https://devt
 
     <a class="navbar-brand me-2" href="../index.html">devtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.4.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@ deleted after a couple of days."><meta property="og:image" content="https://devt
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/dependencies.html">Devtools dependencies</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/dependencies.html">Depending on a development version</a></li>
   </ul></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
@@ -55,7 +55,7 @@ deleted after a couple of days."><meta property="og:image" content="https://devt
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Check a package on Windows</h1>
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/devtools/blob/v2.4.6/R/check-win.R" class="external-link"><code>R/check-win.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/devtools/blob/main/R/check-win.R" class="external-link"><code>R/check-win.R</code></a></small>
       <div class="d-none name"><code>check_win.Rd</code></div>
     </div>
 
@@ -76,6 +76,7 @@ deleted after a couple of days.</p>
 <span>  manual <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  email <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  webform <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -85,6 +86,7 @@ deleted after a couple of days.</p>
 <span>  manual <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  email <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  webform <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -94,6 +96,7 @@ deleted after a couple of days.</p>
 <span>  manual <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  email <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  quiet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  webform <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -126,6 +129,10 @@ to use the package maintainer's email.</p></dd>
 <dd><p>If <code>TRUE</code>, suppresses output.</p></dd>
 
 
+<dt id="arg-webform">webform<a class="anchor" aria-label="anchor" href="#arg-webform"></a></dt>
+<dd><p>If <code>TRUE</code>, uses web form instead of passive FTP upload.</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments passed to <code><a href="https://pkgbuild.r-lib.org/reference/build.html" class="external-link">pkgbuild::build()</a></code>.</p></dd>
 
@@ -140,7 +147,7 @@ to use the package maintainer's email.</p></dd>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other build functions:
-<code><a href="check_mac_release.html">check_mac_release</a>()</code></p></div>
+<code><a href="check_mac_release.html">check_mac_release()</a></code></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -154,7 +161,7 @@ to use the package maintainer's email.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
   </div></footer></body></html>

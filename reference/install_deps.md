@@ -1,0 +1,112 @@
+# Install package dependencies if needed
+
+**\[deprecated\]**
+
+These functions are deprecated. Better alternatives:
+
+- [`pak::local_install_deps()`](https://pak.r-lib.org/reference/local_install_deps.html)
+  instead of `install_deps()`
+
+- [`pak::local_install_dev_deps()`](https://pak.r-lib.org/reference/local_install_dev_deps.html)
+  instead of `install_dev_deps()`
+
+## Usage
+
+``` r
+install_deps(
+  pkg = ".",
+  dependencies = NA,
+  repos = getOption("repos"),
+  type = getOption("pkgType"),
+  upgrade = c("default", "ask", "always", "never"),
+  quiet = FALSE,
+  build = TRUE,
+  build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
+  ...
+)
+
+install_dev_deps(
+  pkg = ".",
+  dependencies = TRUE,
+  repos = getOption("repos"),
+  type = getOption("pkgType"),
+  upgrade = c("default", "ask", "always", "never"),
+  quiet = FALSE,
+  build = TRUE,
+  build_opts = c("--no-resave-data", "--no-manual", " --no-build-vignettes"),
+  ...
+)
+```
+
+## Arguments
+
+- pkg:
+
+  The package to use, can be a file path to the package or a package
+  object. See
+  [`as.package()`](https://devtools.r-lib.org/reference/as.package.md)
+  for more information.
+
+- dependencies:
+
+  Which dependencies do you want to check? Can be a character vector
+  (selecting from "Depends", "Imports", "LinkingTo", "Suggests", or
+  "Enhances"), or a logical vector.
+
+  `TRUE` is shorthand for "Depends", "Imports", "LinkingTo" and
+  "Suggests". `NA` is shorthand for "Depends", "Imports" and "LinkingTo"
+  and is the default. `FALSE` is shorthand for no dependencies (i.e.
+  just check this package, not its dependencies).
+
+  The value "soft" means the same as `TRUE`, "hard" means the same as
+  `NA`.
+
+  You can also specify dependencies from one or more additional fields,
+  common ones include:
+
+  - Config/Needs/website - for dependencies used in building the pkgdown
+    site.
+
+  - Config/Needs/coverage for dependencies used in calculating test
+    coverage.
+
+- repos:
+
+  A character vector giving repositories to use.
+
+- type:
+
+  Type of package to `update`.
+
+- upgrade:
+
+  Should package dependencies be upgraded? One of "default", "ask",
+  "always", or "never". "default" respects the value of the
+  `R_REMOTES_UPGRADE` environment variable if set, and falls back to
+  "ask" if unset. "ask" prompts the user for which out of date packages
+  to upgrade. For non-interactive sessions "ask" is equivalent to
+  "always". `TRUE` and `FALSE` are also accepted and correspond to
+  "always" and "never" respectively.
+
+- quiet:
+
+  If `TRUE`, suppress output.
+
+- build:
+
+  If `TRUE` build the package before installing.
+
+- build_opts:
+
+  Options to pass to `R CMD build`, only used when `build` is `TRUE`.
+
+- ...:
+
+  Additional arguments passed to
+  [`remotes::install_deps()`](https://remotes.r-lib.org/reference/install_deps.html).
+
+## Examples
+
+``` r
+if (FALSE) install_deps(".") # \dontrun{}
+```

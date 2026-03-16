@@ -14,10 +14,12 @@
 <url><loc>https://devtools.r-lib.org/reference/bash.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/build.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/build_manual.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/build_readme.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/build_rmd.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/build_site.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/build_vignettes.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/check.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/check_doc_fields.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/check_mac_release.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/check_man.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/check_rhub.html</loc></url>
@@ -27,12 +29,13 @@
 <url><loc>https://devtools.r-lib.org/reference/dev_mode.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/dev_packages.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/dev_sitrep.html</loc></url>
-<url><loc>https://devtools.r-lib.org/reference/devtools-deprecated.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/devtools-defunct.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/devtools-package.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/document.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/git_checks.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/has_tests.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/index.html</loc></url>
+<url><loc>https://devtools.r-lib.org/reference/install-deprecated.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/install.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/install_deps.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/is.package.html</loc></url>
@@ -46,7 +49,6 @@
 <url><loc>https://devtools.r-lib.org/reference/release.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/release_checks.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/reload.html</loc></url>
-<url><loc>https://devtools.r-lib.org/reference/remote-reexports.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/revdep.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/run_examples.html</loc></url>
 <url><loc>https://devtools.r-lib.org/reference/save_all.html</loc></url>
