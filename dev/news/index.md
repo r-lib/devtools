@@ -2,6 +2,10 @@
 
 ## devtools (development version)
 
+## devtools 2.5.0
+
+CRAN release: 2026-03-14
+
 Deprecations
 
 - Package installation functions are now deprecated:
