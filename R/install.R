@@ -254,5 +254,12 @@ local_install <- function(pkg = ".", quiet = TRUE, env = parent.frame()) {
     ))
   }
   withr::local_temp_libpaths(.local_envir = env)
-  install(pkg, upgrade = FALSE, reload = FALSE, quick = TRUE, quiet = quiet)
+  install(
+    pkg,
+    upgrade = FALSE,
+    reload = FALSE,
+    quick = TRUE,
+    dependencies = FALSE,
+    quiet = quiet
+  )
 }
