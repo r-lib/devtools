@@ -50,7 +50,11 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="devtools-development-version">devtools (development version)<a class="anchor" aria-label="anchor" href="#devtools-development-version"></a></h2>
-</div>
+<ul><li>
+<code><a href="../reference/build_readme.html">build_readme()</a></code> no longer installs dependencies into the temporary library (a regression introduced in 2.5.0). It now exits early if a required dependency is missing and reports any that are out of date or at a dev version (<a href="https://github.com/r-lib/devtools/issues/2683" class="external-link">#2683</a>).</li>
+<li>
+<code><a href="../reference/dev_sitrep.html">dev_sitrep()</a></code> reports if devtools itself is out of date (<a href="https://github.com/r-lib/devtools/issues/2687" class="external-link">#2687</a>).</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.5.0" id="devtools-250">devtools 2.5.0<a class="anchor" aria-label="anchor" href="#devtools-250"></a></h2><p class="text-muted">CRAN release: 2026-03-14</p>
 <p>Deprecations</p>

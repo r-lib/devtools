@@ -2,6 +2,15 @@
 
 ## devtools (development version)
 
+- [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_readme.md)
+  no longer installs dependencies into the temporary library (a
+  regression introduced in 2.5.0). It now exits early if a required
+  dependency is missing and reports any that are out of date or at a dev
+  version ([\#2683](https://github.com/r-lib/devtools/issues/2683)).
+- [`dev_sitrep()`](https://devtools.r-lib.org/dev/reference/dev_sitrep.md)
+  reports if devtools itself is out of date
+  ([\#2687](https://github.com/r-lib/devtools/issues/2687)).
+
 ## devtools 2.5.0
 
 CRAN release: 2026-03-14
