@@ -109,10 +109,12 @@ dev_sitrep <- function(pkg = ".", debug = FALSE) {
     has_build_tools = has_build_tools,
     rtools_path = if (has_build_tools) pkgbuild::rtools_path(),
     devtools_version = utils::packageVersion("devtools"),
-    devtools_deps = compare_deps(pak::pkg_deps("devtools", dependencies = NA)),
-    pkg_deps = if (!is.null(pkg)) {
-      compare_deps(pak::local_dev_deps(pkg$path, dependencies = TRUE))
-    },
+    devtools_cran_version = pak::pkg_deps(
+      "devtools",
+      dependencies = FALSE
+    )$version,
+    devtools_deps = pkg_dep_status("devtools", dependencies = NA),
+    pkg_deps = if (!is.null(pkg)) pkg_dep_status(pkg, dependencies = TRUE),
     rstudio_version = if (is_rstudio_running()) rstudioapi::getVersion(),
     rstudio_msg = if (!is_positron()) check_for_rstudio_updates()
   )
@@ -127,6 +129,7 @@ new_dev_sitrep <- function(
   has_build_tools = TRUE,
   rtools_path = NULL,
   devtools_version = utils::packageVersion("devtools"),
+  devtools_cran_version = devtools_version,
   devtools_deps = NULL,
   pkg_deps = NULL,
   rstudio_version = NULL,
@@ -142,6 +145,7 @@ new_dev_sitrep <- function(
       has_build_tools = has_build_tools,
       rtools_path = rtools_path,
       devtools_version = devtools_version,
+      devtools_cran_version = devtools_cran_version,
       devtools_deps = devtools_deps,
       pkg_deps = pkg_deps,
       rstudio_version = rstudio_version,
@@ -191,26 +195,28 @@ print.dev_sitrep <- function(x, ...) {
   cli::cli_rule("devtools")
   kv_line("version", x$devtools_version)
 
+  devtools_version <- package_version(x$devtools_version)
+  devtools_cran_version <- package_version(x$devtools_cran_version)
+  if (devtools_version < devtools_cran_version) {
+    all_ok <- FALSE
+    cli::cli_bullets(c(
+      "!" = "{.field devtools} is out of date ({.val {devtools_version}} vs {.val {devtools_cran_version}}).",
+      " " = "Update it with {.run pak::pak(\"devtools\")}."
+    ))
+  } else if (devtools_version > devtools_cran_version) {
+    cli::cli_bullets(c(
+      "i" = "{.field devtools} is ahead of CRAN ({.val {devtools_version}} vs {.val {devtools_cran_version}})."
+    ))
+  }
+
   devtools_not_ok <- any(x$devtools_deps$status != "ok")
   if (devtools_not_ok) {
     all_ok <- FALSE
-
-    behind <- x$devtools_deps[x$devtools_deps$status == "behind", ]
-    if (nrow(behind) > 0) {
-      cli::cli_bullets(c(
-        "!" = "{.field devtools} or its dependencies are out of date.",
-        " " = "Update them with {.code pak::pak(\"devtools\").}"
-      ))
-      cli::cli_verbatim(paste(" ", dep_labels(behind)))
-    }
-
-    ahead <- x$devtools_deps[x$devtools_deps$status == "ahead", ]
-    if (nrow(ahead) > 0) {
-      cli::cli_bullets(c(
-        "i" = "{.field devtools} or its dependencies are installed from a dev version, FYI:"
-      ))
-      cli::cli_verbatim(paste(" ", dep_labels(ahead)))
-    }
+    report_deps_ahead_behind(
+      x$devtools_deps,
+      pkg_name = "devtools",
+      update_code = 'pak::pak("devtools")'
+    )
   }
 
   cli::cli_rule("dev package")
@@ -220,23 +226,11 @@ print.dev_sitrep <- function(x, ...) {
   dev_pkg_not_ok <- any(x$pkg_deps$status != "ok")
   if (dev_pkg_not_ok) {
     all_ok <- FALSE
-
-    behind <- x$pkg_deps[x$pkg_deps$status == "behind", ]
-    if (nrow(behind) > 0) {
-      cli::cli_bullets(c(
-        "!" = "{.field {x$pkg$package}} dependencies are out of date.",
-        " " = "Update them with {.code pak::local_install_dev_deps()}."
-      ))
-      cli::cli_verbatim(paste(" ", dep_labels(behind)))
-    }
-
-    ahead <- x$pkg_deps[x$pkg_deps$status == "ahead", ]
-    if (nrow(ahead) > 0) {
-      cli::cli_bullets(c(
-        "i" = "{.field {x$pkg$package}} dependencies are installed from a dev version, FYI:"
-      ))
-      cli::cli_verbatim(paste(" ", dep_labels(ahead)))
-    }
+    report_deps_ahead_behind(
+      x$pkg_deps,
+      pkg_name = x$pkg$package,
+      update_code = "pak::local_install_dev_deps()"
+    )
   }
 
   if (all_ok) {
@@ -248,7 +242,29 @@ print.dev_sitrep <- function(x, ...) {
 
 # Helpers -----------------------------------------------------------------
 
-compare_deps <- function(deps) {
+#' Get dependency status for a package, excluding the package itself
+#'
+#' @param pkg A package name or a package object, as returned by `as.package()`.
+#' @param dependencies Which dependency types to include. Passed along to
+#'   `pak::pkg_deps()` or `pak::local_dev_deps()`.
+#' @returns A data frame with one row per dependency and columns:
+#'   * package (name)
+#'   * latest (version)
+#'   * installed (version)
+#'   * status (one of: missing, behind, ok, ahead)
+#' @noRd
+pkg_dep_status <- function(pkg, dependencies = NA) {
+  if (is_string(pkg)) {
+    deps <- pak::pkg_deps(pkg, dependencies = dependencies)
+  } else if (inherits(pkg, "package")) {
+    deps <- pak::local_dev_deps(pkg$path, dependencies = dependencies)
+    deps <- deps[deps$package != pkg$package, ]
+  } else {
+    cli::cli_abort(
+      "{.arg pkg} must be a string package name or a package object."
+    )
+  }
+
   installed <- map_chr(deps$package, function(p) {
     tryCatch(
       as.character(utils::packageVersion(p)),
@@ -257,7 +273,7 @@ compare_deps <- function(deps) {
   })
   status <- map2_chr(installed, deps$version, function(inst, latest) {
     if (is.na(inst)) {
-      return("behind")
+      return("missing")
     }
     switch(
       as.character(utils::compareVersion(inst, latest)),
@@ -274,6 +290,46 @@ compare_deps <- function(deps) {
   )
 }
 
+#' Emit cli messages about ahead/behind dependencies
+#'
+#' @param dep_status A data frame as returned by `compare_deps()`, with
+#'   columns `package`, `latest`, `installed`, `status`.
+#' @param pkg_name Package name to mention in the message.
+#' @param update_code Code suggestion for updating behind deps.
+#' @return Called for its side effects.
+#' @noRd
+report_deps_ahead_behind <- function(dep_status, pkg_name, update_code) {
+  missing <- dep_status[dep_status$status == "missing", ]
+  if (nrow(missing) > 0) {
+    n <- nrow(missing)
+    cli::cli_bullets(c(
+      "!" = "{n} {.field {pkg_name}} {cli::qty(n)}{?dependency is/dependencies are} not installed.",
+      " " = "Install {cli::qty(n)}{?it/them} with {.run {update_code}}."
+    ))
+    cli::cli_verbatim(paste("  ", dep_labels(missing)))
+  }
+
+  behind <- dep_status[dep_status$status == "behind", ]
+  if (nrow(behind) > 0) {
+    n <- nrow(behind)
+    cli::cli_bullets(c(
+      "!" = "{n} {.field {pkg_name}} {cli::qty(n)}{?dependency is/dependencies are} out of date.",
+      " " = "Update {cli::qty(n)}{?it/them} with {.run {update_code}}."
+    ))
+    cli::cli_verbatim(paste("  ", dep_labels(behind)))
+  }
+
+  ahead <- dep_status[dep_status$status == "ahead", ]
+  if (nrow(ahead) > 0) {
+    n <- nrow(ahead)
+    cli::cli_bullets(c(
+      "i" = "{n} {.field {pkg_name}} {cli::qty(n)}{?dependency is/dependencies are} ahead of CRAN."
+    ))
+    cli::cli_verbatim(paste(" ", dep_labels(ahead)))
+  }
+}
+
+
 dep_labels <- function(deps) {
   # helps with readability
   deps$package <- format(deps$package, justify = "left")
@@ -283,7 +339,7 @@ dep_labels <- function(deps) {
 
 format_dep_line <- function(package, installed, latest, status) {
   if (is.na(installed)) {
-    paste0(package, " (not installed)")
+    paste0(package, " (", cli::col_red("missing"), ")")
   } else {
     status_styled <- if (status == "behind") {
       cli::col_red(status)

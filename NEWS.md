@@ -1,5 +1,11 @@
 # devtools (development version)
 
+* `build_readme()` no longer installs dependencies into the temporary library
+  (a regression introduced in 2.5.0). It now exits early if a required
+  dependency is missing and reports any that are out of date or at a dev
+  version (#2683).
+* `dev_sitrep()` reports if devtools itself is out of date (#2687).
+
 # devtools 2.5.0
 
 Deprecations

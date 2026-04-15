@@ -40,7 +40,8 @@ build_rmd_impl <- function(
   path = ".",
   output_options = list(),
   ...,
-  quiet = TRUE
+  quiet = TRUE,
+  call = parent.frame()
 ) {
   check_dots_used(action = getOption("devtools.ellipsis_action", warn))
 
@@ -58,7 +59,7 @@ build_rmd_impl <- function(
     cli::cli_abort("Can't find file{?s}: {.path {files[!ok]}}.")
   }
 
-  local_install(pkg, quiet = TRUE)
+  local_install(pkg, quiet = quiet, call = call)
 
   # Ensure rendering github_document() doesn't generate HTML file
   output_options$html_preview <- FALSE
@@ -130,13 +131,18 @@ build_readme <- function(path = ".", quiet = TRUE, ...) {
   }
 }
 
-build_qmd_readme <- function(readme_path, path = ".", quiet = TRUE) {
+build_qmd_readme <- function(
+  readme_path,
+  path = ".",
+  quiet = TRUE,
+  call = parent.frame()
+) {
   pkg <- as.package(path)
 
   check_installed("quarto")
   save_all()
 
-  local_install(pkg, quiet = TRUE)
+  local_install(pkg, quiet = quiet, call = call)
 
   # Quarto spawns its own R process for knitr, which won't inherit .libPaths().
 

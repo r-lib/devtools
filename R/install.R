@@ -245,8 +245,38 @@ install_dev_deps <- function(
   )
 }
 
-local_install <- function(pkg = ".", quiet = TRUE, env = parent.frame()) {
+abort_for_missing_deps <- function(dep_status, pkg, call = parent.frame()) {
+  missing <- dep_status[dep_status$status == "missing", ]
+  if (nrow(missing) == 0) {
+    return(invisible())
+  }
+
+  n <- nrow(missing)
+  cli::cli_abort(
+    c(
+      "{n} {.pkg {pkg$package}} {cli::qty(n)}{?dependency is/dependencies are} not installed.",
+      "i" = "Install {cli::qty(n)}{?it/them} with {.run pak::local_install_dev_deps()}.",
+      dep_labels(missing)
+    ),
+    call = call
+  )
+}
+
+local_install <- function(
+  pkg = ".",
+  quiet = TRUE,
+  env = parent.frame(),
+  call = parent.frame()
+) {
   pkg <- as.package(pkg)
+
+  dep_status <- pkg_dep_status(pkg, dependencies = NA)
+  abort_for_missing_deps(dep_status, pkg, call = call)
+  report_deps_ahead_behind(
+    dep_status,
+    pkg_name = pkg$package,
+    update_code = "pak::local_install_dev_deps()"
+  )
 
   if (!quiet) {
     cli::cli_inform(c(
