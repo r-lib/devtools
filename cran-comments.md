@@ -1,3 +1,7 @@
+I have not run revdep checks for this small patch release (v2.5.1).
+
+The notes below pertain to the previous minor version release (v2.5.0), which was on 2026-03-14, just about 1 month ago.
+
 ## revdepcheck results
 
 We checked 549 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
