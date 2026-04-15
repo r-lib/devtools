@@ -27,3 +27,4 @@
 ^scratch\.R$
 ^vignettes/\.quarto$
 ^vignettes/*_files$
+^\.positai/settings\.json$
