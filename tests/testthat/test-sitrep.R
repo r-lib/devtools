@@ -45,7 +45,7 @@ test_that("print warns about missing devtools deps", {
       package = c("rlang", "somepkg"),
       latest = c("1.0.0", "1.0.0"),
       installed = c("1.0.0", NA_character_),
-      status = c("ok", "behind")
+      status = c("ok", "missing")
     )
   )
   expect_snapshot(print(x))
@@ -101,6 +101,50 @@ test_that("print notes dev versions of package deps", {
   expect_snapshot(print(x))
 })
 
+test_that("pkg_dep_status detects ahead packages", {
+  local_mocked_bindings(
+    pkg_deps = function(...) {
+      data.frame(
+        package = c("rlang", "cli"),
+        version = c("0.0.1", "0.0.1")
+      )
+    },
+    .package = "pak"
+  )
+  result <- pkg_dep_status("SOMEPACKAGE")
+  expect_equal(result$status, c("ahead", "ahead"))
+  expect_equal(result$latest, c("0.0.1", "0.0.1"))
+})
+
+test_that("pkg_dep_status detects behind packages", {
+  local_mocked_bindings(
+    pkg_deps = function(...) {
+      data.frame(
+        package = "rlang",
+        version = "99999.0.0"
+      )
+    },
+    .package = "pak"
+  )
+  result <- pkg_dep_status("SOMEPACKAGE")
+  expect_equal(result$status, "behind")
+})
+
+test_that("pkg_dep_status reports missing packages", {
+  local_mocked_bindings(
+    pkg_deps = function(...) {
+      data.frame(
+        package = c("rlang", "thereIsNoSuchPackage"),
+        version = c("0.0.1", "1.0.0")
+      )
+    },
+    .package = "pak"
+  )
+  result <- pkg_dep_status("SOMEPACKAGE")
+  expect_equal(result$status, c("ahead", "missing"))
+  expect_true(is.na(result$installed[[2]]))
+})
+
 test_that("print shows RStudio update message", {
   local_reproducible_output(width = 60)
   withr::local_envvar(POSITRON = "")
@@ -112,32 +156,6 @@ test_that("print shows RStudio update message", {
     rstudio_msg = "RStudio is out of date."
   )
   expect_snapshot(print(x))
-})
-
-test_that("compare_deps detects ahead packages", {
-  result <- compare_deps(data.frame(
-    package = c("rlang", "cli"),
-    version = c("0.0.1", "0.0.1")
-  ))
-  expect_equal(result$status, c("ahead", "ahead"))
-  expect_equal(result$latest, c("0.0.1", "0.0.1"))
-})
-
-test_that("compare_deps detects behind packages", {
-  result <- compare_deps(data.frame(
-    package = "rlang",
-    version = "99999.0.0"
-  ))
-  expect_equal(result$status, "behind")
-})
-
-test_that("compare_deps reports missing packages", {
-  result <- compare_deps(data.frame(
-    package = c("rlang", "thereIsNoSuchPackage"),
-    version = c("0.0.1", "1.0.0")
-  ))
-  expect_equal(result$status, c("ahead", "behind"))
-  expect_true(is.na(result$installed[[2]]))
 })
 
 test_that("check_for_rstudio_updates", {

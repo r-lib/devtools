@@ -38,9 +38,9 @@
       * path: '/usr/lib/R'
       -- devtools ------------------------------------------------
       * version: 2.4.6
-      ! devtools or its dependencies are out of date.
-        Update them with `pak::pak("devtools").`
-        cli (behind: 0.5.0 vs 1.0.0)
+      ! 1 devtools dependency is out of date.
+        Update it with `pak::pak("devtools")`.
+         cli (behind: 0.5.0 vs 1.0.0)
       -- dev package ---------------------------------------------
       * package: <unset>
       * path: <unset>
@@ -55,9 +55,9 @@
       * path: '/usr/lib/R'
       -- devtools ------------------------------------------------
       * version: 2.4.6
-      ! devtools or its dependencies are out of date.
-        Update them with `pak::pak("devtools").`
-        somepkg (not installed)
+      ! 1 devtools dependency is not installed.
+        Install it with `pak::pak("devtools")`.
+         somepkg (missing)
       -- dev package ---------------------------------------------
       * package: <unset>
       * path: <unset>
@@ -72,8 +72,7 @@
       * path: '/usr/lib/R'
       -- devtools ------------------------------------------------
       * version: 2.4.6
-      i devtools or its dependencies are installed from a dev
-        version, FYI:
+      i 1 devtools dependency is ahead of CRAN.
         usethis (ahead: 3.2.1.9000 vs 3.2.1)
       -- dev package ---------------------------------------------
       * package: <unset>
@@ -92,10 +91,10 @@
       -- dev package ---------------------------------------------
       * package: "mypkg"
       * path: '/tmp/mypkg'
-      ! mypkg dependencies are out of date.
+      ! 2 mypkg dependencies are out of date.
         Update them with `pak::local_install_dev_deps()`.
-        dplyr (behind: 1.0.0 vs 1.1.0)
-        tidyr (behind: 1.0.0 vs 1.1.0)
+         dplyr (behind: 1.0.0 vs 1.1.0)
+         tidyr (behind: 1.0.0 vs 1.1.0)
 
 # print notes dev versions of package deps
 
@@ -110,7 +109,7 @@
       -- dev package ---------------------------------------------
       * package: "mypkg"
       * path: '/tmp/mypkg'
-      i mypkg dependencies are installed from a dev version, FYI:
+      i 1 mypkg dependency is ahead of CRAN.
         usethis (ahead: 3.2.1.9000 vs 3.2.1)
 
 # print shows RStudio update message
