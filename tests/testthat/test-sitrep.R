@@ -181,24 +181,27 @@ test_that("pkg_dep_status reports missing packages", {
   expect_true(is.na(result$installed[[2]]))
 })
 
-test_that("pkg_dep_status works with a package object and filters self", {
+test_that("pkg_dep_status filters out self", {
   pkg_path <- local_package_create()
   pkg_obj <- as.package(pkg_path)
+  pkg_name <- pkg_obj$package
+
+  deps <- data.frame(
+    package = c(pkg_name, "rlang"),
+    version = c("0.0.1", "99999.0.0")
+  )
 
   local_mocked_bindings(
-    local_dev_deps = function(...) {
-      data.frame(
-        # the package itself typically appears as first row and we want to
-        # confirm it gets filtered out
-        package = c(pkg_obj$package, "rlang"),
-        version = c("0.0.1", "99999.0.0")
-      )
-    },
+    local_dev_deps = function(...) deps,
+    pkg_deps = function(...) deps,
     .package = "pak"
   )
 
   result <- pkg_dep_status(pkg_obj)
-  expect_false(pkg_obj$package %in% result$package)
+  expect_false(pkg_name %in% result$package)
+
+  result <- pkg_dep_status(pkg_name)
+  expect_false(pkg_name %in% result$package)
 })
 
 test_that("print shows RStudio update message", {

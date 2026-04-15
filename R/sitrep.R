@@ -255,15 +255,17 @@ print.dev_sitrep <- function(x, ...) {
 #' @noRd
 pkg_dep_status <- function(pkg, dependencies = NA) {
   if (is_string(pkg)) {
+    pkg_name <- pkg
     deps <- pak::pkg_deps(pkg, dependencies = dependencies)
   } else if (inherits(pkg, "package")) {
+    pkg_name <- pkg$package
     deps <- pak::local_dev_deps(pkg$path, dependencies = dependencies)
-    deps <- deps[deps$package != pkg$package, ]
   } else {
     cli::cli_abort(
       "{.arg pkg} must be a string package name or a package object."
     )
   }
+  deps <- deps[deps$package != pkg_name, ]
 
   installed <- map_chr(deps$package, function(p) {
     tryCatch(
