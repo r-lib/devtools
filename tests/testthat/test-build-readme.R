@@ -112,6 +112,30 @@ test_that("errors if both README.qmd and README.Rmd exist", {
   expect_snapshot(build_readme(pkg), error = TRUE)
 })
 
+test_that("build_readme() aborts when a dep is missing", {
+  pkg <- local_package_create()
+  pkg_name <- basename(pkg)
+  usethis::ui_silence(
+    usethis::with_project(pkg, use_readme_rmd(open = FALSE))
+  )
+
+  local_mocked_bindings(
+    pkg_dep_status = function(...) {
+      data.frame(
+        package = "missingpkg",
+        latest = "1.0.0",
+        installed = NA_character_,
+        status = "missing"
+      )
+    }
+  )
+  expect_snapshot(
+    build_readme(pkg),
+    error = TRUE,
+    transform = function(x) gsub(pkg_name, "{PACKAGE}", x, fixed = TRUE)
+  )
+})
+
 test_that("don't error for README in another directory", {
   skip_on_cran()
 

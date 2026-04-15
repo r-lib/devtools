@@ -22,6 +22,16 @@
       Error in `build_readme()`:
       ! Found multiple executable READMEs: 'README.qmd' and 'README.Rmd'. There can only be one.
 
+# build_readme() aborts when a dep is missing
+
+    Code
+      build_readme(pkg)
+    Condition
+      Error in `build_readme()`:
+      ! 1 {PACKAGE} dependency is not installed.
+      i Install it with `pak::local_install_dev_deps()`.
+        missingpkg (missing)
+
 # build_rmd() is deprecated
 
     Code

@@ -8,6 +8,28 @@ test_that("print shows all checks passed", {
   expect_snapshot(print(x))
 })
 
+test_that("print warns when devtools is out of date", {
+  local_reproducible_output(width = 60)
+  x <- new_dev_sitrep(
+    r_version = R_system_version("4.4.0"),
+    r_path = "/usr/lib/R",
+    devtools_version = package_version("2.4.6"),
+    devtools_cran_version = package_version("2.5.0")
+  )
+  expect_snapshot(print(x))
+})
+
+test_that("print notes when devtools is ahead of CRAN", {
+  local_reproducible_output(width = 60)
+  x <- new_dev_sitrep(
+    r_version = R_system_version("4.4.0"),
+    r_path = "/usr/lib/R",
+    devtools_version = package_version("2.5.0.9000"),
+    devtools_cran_version = package_version("2.5.0")
+  )
+  expect_snapshot(print(x))
+})
+
 test_that("print warns when R is out of date", {
   local_reproducible_output(width = 60)
   x <- new_dev_sitrep(
@@ -116,6 +138,20 @@ test_that("pkg_dep_status detects ahead packages", {
   expect_equal(result$latest, c("0.0.1", "0.0.1"))
 })
 
+test_that("pkg_dep_status detects ok packages", {
+  local_mocked_bindings(
+    pkg_deps = function(...) {
+      data.frame(
+        package = "rlang",
+        version = as.character(packageVersion("rlang"))
+      )
+    },
+    .package = "pak"
+  )
+  result <- pkg_dep_status("SOMEPACKAGE")
+  expect_equal(result$status, "ok")
+})
+
 test_that("pkg_dep_status detects behind packages", {
   local_mocked_bindings(
     pkg_deps = function(...) {
@@ -143,6 +179,26 @@ test_that("pkg_dep_status reports missing packages", {
   result <- pkg_dep_status("SOMEPACKAGE")
   expect_equal(result$status, c("ahead", "missing"))
   expect_true(is.na(result$installed[[2]]))
+})
+
+test_that("pkg_dep_status works with a package object and filters self", {
+  pkg_path <- local_package_create()
+  pkg_obj <- as.package(pkg_path)
+
+  local_mocked_bindings(
+    local_dev_deps = function(...) {
+      data.frame(
+        # the package itself typically appears as first row and we want to
+        # confirm it gets filtered out
+        package = c(pkg_obj$package, "rlang"),
+        version = c("0.0.1", "99999.0.0")
+      )
+    },
+    .package = "pak"
+  )
+
+  result <- pkg_dep_status(pkg_obj)
+  expect_false(pkg_obj$package %in% result$package)
 })
 
 test_that("print shows RStudio update message", {

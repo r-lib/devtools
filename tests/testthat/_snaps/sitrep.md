@@ -13,6 +13,38 @@
       * path: <unset>
       v All checks passed
 
+# print warns when devtools is out of date
+
+    Code
+      print(x)
+    Message
+      -- R -------------------------------------------------------
+      * version: 4.4.0
+      * path: '/usr/lib/R'
+      -- devtools ------------------------------------------------
+      * version: 2.4.6
+      ! devtools is out of date (2.4.6 vs 2.5.0).
+        Update it with `pak::pak("devtools")`.
+      -- dev package ---------------------------------------------
+      * package: <unset>
+      * path: <unset>
+
+# print notes when devtools is ahead of CRAN
+
+    Code
+      print(x)
+    Message
+      -- R -------------------------------------------------------
+      * version: 4.4.0
+      * path: '/usr/lib/R'
+      -- devtools ------------------------------------------------
+      * version: 2.5.0.9000
+      i devtools is ahead of CRAN (2.5.0.9000 vs 2.5.0).
+      -- dev package ---------------------------------------------
+      * package: <unset>
+      * path: <unset>
+      v All checks passed
+
 # print warns when R is out of date
 
     Code
