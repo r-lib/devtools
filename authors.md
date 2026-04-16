@@ -18,16 +18,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/r-lib/devtools/blob/v2.5.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/r-lib/devtools/blob/main/DESCRIPTION)
 
 Wickham H, Hester J, Chang W, Bryan J (2026). *devtools: Tools to Make
-Developing R Packages Easier*. R package version 2.5.0,
+Developing R Packages Easier*. R package version 2.5.1,
 <https://devtools.r-lib.org/>.
 
     @Manual{,
       title = {devtools: Tools to Make Developing R Packages Easier},
       author = {Hadley Wickham and Jim Hester and Winston Chang and Jennifer Bryan},
       year = {2026},
-      note = {R package version 2.5.0},
+      note = {R package version 2.5.1},
       url = {https://devtools.r-lib.org/},
     }

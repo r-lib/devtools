@@ -1,5 +1,16 @@
 # Changelog
 
+## devtools 2.5.1
+
+- [`build_readme()`](https://devtools.r-lib.org/reference/build_readme.md)
+  no longer installs dependencies into the temporary library (a
+  regression introduced in 2.5.0). It now exits early if a required
+  dependency is missing and reports any that are out of date or at a dev
+  version ([\#2683](https://github.com/r-lib/devtools/issues/2683)).
+- [`dev_sitrep()`](https://devtools.r-lib.org/reference/dev_sitrep.md)
+  reports if devtools itself is out of date
+  ([\#2687](https://github.com/r-lib/devtools/issues/2687)).
+
 ## devtools 2.5.0
 
 CRAN release: 2026-03-14
@@ -26,7 +37,9 @@ Deprecations
   and
   [`github_release()`](https://devtools.r-lib.org/reference/install-deprecated.md).
   We now recommend pak (<https://pak.r-lib.org/>) for general package
-  installation. See `?install-deprecated` for migration guidance.
+  installation. See
+  [`` ?`install-deprecated` ``](https://devtools.r-lib.org/reference/install-deprecated.md)
+  for migration guidance.
 - remotes has moved from Imports to Suggests, as part of the pivot
   towards pak for package installation
   ([\#2663](https://github.com/r-lib/devtools/issues/2663)).
