@@ -2,6 +2,10 @@
 
 ## devtools (development version)
 
+## devtools 2.5.1
+
+CRAN release: 2026-04-16
+
 - [`build_readme()`](https://devtools.r-lib.org/dev/reference/build_readme.md)
   no longer installs dependencies into the temporary library (a
   regression introduced in 2.5.0). It now exits early if a required
