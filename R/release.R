@@ -219,7 +219,7 @@ cran_comments <- function(pkg = ".", call = parent.frame()) {
       c(
         x = "Can't find {.file cran-comments.md}.",
         i = "This file is used to communicate your release process to the CRAN team.",
-        i = "Create it with {.code use_cran_comments()}."
+        i = "Create it with {.run usethis::use_cran_comments()}."
       ),
       call = call
     )

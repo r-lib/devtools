@@ -32,7 +32,7 @@ test <- function(
     cli::cli_inform(c(i = "No testing infrastructure found."))
     if (!interactive()) {
       cli::cli_bullets(c(
-        "!" = 'Setup testing with {.code usethis::use_testthat()}.'
+        "!" = 'Setup testing with {.run usethis::use_testthat()}.'
       ))
       return(invisible())
     }
