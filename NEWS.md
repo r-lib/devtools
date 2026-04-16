@@ -1,4 +1,4 @@
-# devtools (development version)
+# devtools 2.5.1
 
 * `build_readme()` no longer installs dependencies into the temporary library
   (a regression introduced in 2.5.0). It now exits early if a required
