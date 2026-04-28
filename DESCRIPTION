@@ -25,7 +25,7 @@ Imports:
     lifecycle (>= 1.0.5),
     memoise (>= 2.0.1),
     miniUI (>= 0.1.2),
-    pak (>= 0.9.3),
+    pak (>= 0.9.5),
     pkgbuild (>= 1.4.8),
     pkgdown (>= 2.2.0),
     pkgload (>= 1.5.1),

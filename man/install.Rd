@@ -68,7 +68,7 @@ information about package dependencies.
 of work to give you the latest version(s) of \code{pkg}. It will only upgrade
 dependent packages if \code{pkg}, or one of their dependencies explicitly
 require a higher version than what you currently have. It will also
-prefer a binary package over to source package, even it the binary
+prefer a binary package over to source package, even if the binary
 package is older.
 
 When \code{upgrade = TRUE}, pak will ensure that you have the latest

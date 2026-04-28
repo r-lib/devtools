@@ -87,6 +87,7 @@ install <- function(
       withCallingHandlers(
         pak::local_install_deps(
           pkg$path,
+          lib = .libPaths(),
           upgrade = upgrade,
           dependencies = dependencies || isTRUE(build_vignettes)
         ),
@@ -96,6 +97,7 @@ install <- function(
       cli::cat_rule("pak::local_install_deps()", col = "cyan")
       pak::local_install_deps(
         pkg$path,
+        lib = .libPaths(),
         upgrade = upgrade,
         dependencies = dependencies || isTRUE(build_vignettes)
       )
