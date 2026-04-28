@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `install()` uses a new feature of `pak::local_install_deps()` to consider the current `.libPaths()` when resolving dependencies, instead of consulting only `.libPaths()[1]`. This was an unintended behavioural change introduced in 2.5.0 (#2691).
+
 # devtools 2.5.1
 
 * `build_readme()` no longer installs dependencies into the temporary library
