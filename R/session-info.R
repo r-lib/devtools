@@ -20,7 +20,9 @@ loaded_packages <- function() {
 #' @export
 #' @keywords internal
 dev_packages <- function() {
-  packages <- map_lgl(loadedNamespaces(), \(x) !is.null(pkgload::dev_meta(x)))
+  packages <- map_lgl(set_names(loadedNamespaces()), \(x) {
+    !is.null(pkgload::dev_meta(x))
+  })
 
   names(packages)[packages]
 }
