@@ -1,0 +1,10 @@
+Package: testInstallWithDeps
+Title: Test Package With Dependencies
+Version: 0.1.0
+Authors@R: person("Test", "User", role = c("aut", "cre"), email = "test@example.com")
+Description: Minimal package used to test that devtools::install() does not
+    reinstall dependencies that are already satisfied in a non-primary library.
+License: GPL-2
+Imports:
+    cli
+Encoding: UTF-8

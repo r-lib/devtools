@@ -21,6 +21,22 @@ test_that("install reports stages", {
   )
 })
 
+test_that("install() doesn't reinstall deps already in non-primary libpath", {
+  skip_on_cran()
+
+  pkg <- local_package_copy(test_path("testInstallWithDeps"))
+  withr::local_temp_libpaths()
+  tmp_lib <- .libPaths()[1]
+
+  install(pkg, reload = FALSE, build = FALSE, quiet = TRUE)
+
+  installed <- setdiff(
+    fs::path_file(fs::dir_ls(tmp_lib, type = "directory")),
+    "_cache"
+  )
+  expect_equal(installed, "testInstallWithDeps")
+})
+
 test_that("vignettes built on install", {
   skip_on_cran()
 
