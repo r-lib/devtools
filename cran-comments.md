@@ -1,6 +1,6 @@
-I have not run revdep checks for this small patch release (v2.5.1).
+I have not run revdep checks for this small patch release (v2.5.2).
 
-The notes below pertain to the previous minor version release (v2.5.0), which was on 2026-03-14, just about 1 month ago.
+The notes below pertain to the recent minor version release (v2.5.0), which was on 2026-03-14, about 6 weeks ago.
 
 ## revdepcheck results
 
