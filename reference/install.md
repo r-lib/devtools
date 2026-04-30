@@ -99,7 +99,7 @@ install(
   you the latest version(s) of `pkg`. It will only upgrade dependent
   packages if `pkg`, or one of their dependencies explicitly require a
   higher version than what you currently have. It will also prefer a
-  binary package over to source package, even it the binary package is
+  binary package over to source package, even if the binary package is
   older.
 
   When `upgrade = TRUE`, pak will ensure that you have the latest

@@ -1,6 +1,21 @@
 # Changelog
 
+## devtools 2.5.2
+
+CRAN release: 2026-04-30
+
+- [`install()`](https://devtools.r-lib.org/reference/install.md) uses a
+  new feature of
+  [`pak::local_install_deps()`](https://pak.r-lib.org/reference/local_install_deps.html)
+  to consider the current
+  [`.libPaths()`](https://rdrr.io/r/base/libPaths.html) when resolving
+  dependencies, instead of consulting only `.libPaths()[1]`. This was an
+  unintended behavioral change introduced in 2.5.0
+  ([\#2691](https://github.com/r-lib/devtools/issues/2691)).
+
 ## devtools 2.5.1
+
+CRAN release: 2026-04-16
 
 - [`build_readme()`](https://devtools.r-lib.org/reference/build_readme.md)
   no longer installs dependencies into the temporary library (a
