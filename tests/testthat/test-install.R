@@ -21,10 +21,26 @@ test_that("install reports stages", {
   )
 })
 
-test_that("install() doesn't reinstall deps already in non-primary libpath", {
+test_that("install() doesn't reinstall deps that are already installed", {
   skip_on_cran()
 
   pkg <- local_package_copy(test_path("testInstallWithDeps"))
+
+  # Install cli into a temp lib via pak, to make extra sure that
+  # pak considers it already satisfied when install() runs.
+  withr::local_temp_libpaths()
+
+  # It's very hard to silence pak.
+  local({
+    withr::local_output_sink(withr::local_tempfile())
+    withr::local_message_sink(withr::local_tempfile())
+    withCallingHandlers(
+      pak::pkg_install("cli", lib = .libPaths()[1], ask = FALSE),
+      callr_message = function(cnd) tryInvokeRestart("muffleMessage")
+    )
+  })
+
+  # Prepend a second temp lib in which to install the in-development package.
   withr::local_temp_libpaths()
   tmp_lib <- .libPaths()[1]
 
