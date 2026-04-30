@@ -18,7 +18,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/r-lib/devtools/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/r-lib/devtools/blob/v2.5.2/DESCRIPTION)
 
 Wickham H, Hester J, Chang W, Bryan J (2026). *devtools: Tools to Make
 Developing R Packages Easier*. R package version 2.5.2,
