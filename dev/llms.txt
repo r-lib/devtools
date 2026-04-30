@@ -7,6 +7,7 @@ Packages](https://r-pkgs.org/) is a book based around this workflow.
 ## Installation
 
 ``` r
+
 # Install devtools from CRAN
 install.packages("devtools")
 

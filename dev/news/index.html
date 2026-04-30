@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">devtools</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.5.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">2.5.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="devtools-development-version">devtools (development version)<a class="anchor" aria-label="anchor" href="#devtools-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.5.2" id="devtools-252">devtools 2.5.2<a class="anchor" aria-label="anchor" href="#devtools-252"></a></h2><p class="text-muted">CRAN release: 2026-04-30</p>
 <ul><li>
 <code><a href="../reference/install.html">install()</a></code> uses a new feature of <code><a href="https://pak.r-lib.org/reference/local_install_deps.html" class="external-link">pak::local_install_deps()</a></code> to consider the current <code><a href="https://rdrr.io/r/base/libPaths.html" class="external-link">.libPaths()</a></code> when resolving dependencies, instead of consulting only <code>.libPaths()[1]</code>. This was an unintended behavioral change introduced in 2.5.0 (<a href="https://github.com/r-lib/devtools/issues/2691" class="external-link">#2691</a>).</li>
 </ul></div>
@@ -825,7 +828,7 @@
 <li><p><code>install_deps(TRUE)</code> now includes packages listed in <code>VignetteBuilder</code> (<a href="https://github.com/r-lib/devtools/issues/396" class="external-link">#396</a>)</p></li>
 <li><p><code><a href="../reference/build.html">build()</a></code> no longer checks for <code>pdflatex</code> when building vignettes, as many modern vignettes don’t need it (<a href="https://github.com/r-lib/devtools/issues/398" class="external-link">#398</a>). It also uses <code>--no-build-vignettes</code> for &gt;3.0.0 compatibility (<a href="https://github.com/r-lib/devtools/issues/391" class="external-link">#391</a>).</p></li>
 <li><p><code><a href="../reference/release.html">release()</a></code> does a better job of opening your email client if you’re inside of RStudio (<a href="https://github.com/r-lib/devtools/issues/433" class="external-link">#433</a>).</p></li>
-<li><p><code><a href="../reference/check.html">check()</a></code> now correctly reports the location of the <code>R CMD   check</code> output when called with a custom <code>check_dir</code>. (Thanks to <a href="https://github.com/brentonk" class="external-link">@brentonk</a>)</p></li>
+<li><p><code><a href="../reference/check.html">check()</a></code> now correctly reports the location of the <code>R CMD check</code> output when called with a custom <code>check_dir</code>. (Thanks to <a href="https://github.com/brentonk" class="external-link">@brentonk</a>)</p></li>
 <li><p><code>check_cran()</code> records check times for each package tested.</p></li>
 <li><p>Improved default <code>DESCRIPTION</code> file created by <code>create_description()</code>. (Thanks to <a href="https://github.com/ncarchedi" class="external-link">@ncarchedi</a>, <a href="https://github.com/r-lib/devtools/issues/428" class="external-link">#428</a>)</p></li>
 <li><p>Fixed bug in <code><a href="../reference/install-deprecated.html">install_github()</a></code> that prevented installing a pull request by supplying <code>repo = "username/repo#pull"</code>. (<a href="https://github.com/r-lib/devtools/issues/388" class="external-link">#388</a>)</p></li>

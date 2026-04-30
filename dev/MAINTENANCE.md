@@ -31,6 +31,7 @@ In case it comes up in the future, this caused the necessary LaTeX
 package to be installed:
 
 ``` r
+
 tinytex::parse_install(
   text = "! LaTeX Error: File `grfext.sty' not found."
 )

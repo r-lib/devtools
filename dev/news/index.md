@@ -2,6 +2,10 @@
 
 ## devtools (development version)
 
+## devtools 2.5.2
+
+CRAN release: 2026-04-30
+
 - [`install()`](https://devtools.r-lib.org/dev/reference/install.md)
   uses a new feature of
   [`pak::local_install_deps()`](https://pak.r-lib.org/reference/local_install_deps.html)
