@@ -15,6 +15,7 @@ release_checks <- function(pkg = ".", built_path = NULL) {
   check_vignette_titles(pkg)
   check_news_md(pkg)
   check_remotes(pkg)
+  check_bug_reports(pkg)
 
   cli::cat_rule()
 }
@@ -123,6 +124,15 @@ check_remotes <- function(pkg) {
 
 has_dev_remotes <- function(pkg) {
   !is.null(pkg[["remotes"]])
+}
+
+check_bug_reports <- function(pkg = ".") {
+  pkg <- as.package(pkg)
+  check_status(
+    !is.null(pkg[["bugreports"]]),
+    "DESCRIPTION has a BugReports field",
+    "DESCRIPTION is missing a BugReports field."
+  )
 }
 
 check_status <- function(status, name, warning) {
