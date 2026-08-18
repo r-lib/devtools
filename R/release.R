@@ -307,7 +307,7 @@ upload_cran <- function(pkg, built_path, call = parent.frame()) {
     comment = comments,
     upload = "Upload package"
   )
-  resp <- httr2::req_perform(req)
+  resp <- req_perform_cran(req, call = call)
   new_url <- httr2::url_parse(httr2::resp_url(resp))
 
   # Confirmation -----------
@@ -323,18 +323,41 @@ upload_cran <- function(pkg, built_path, call = parent.frame()) {
     submit = "Submit package"
   )
 
-  resp <- httr2::req_perform(req)
+  resp <- req_perform_cran(req, call = call)
   new_url <- httr2::url_parse(httr2::resp_url(resp))
-  if (new_url$query$submit == "1") {
+  if (identical(new_url$query$submit, "1")) {
     cli::cli_inform(c(
       "v" = "Package submission successful",
       "i" = "Check your email for confirmation link."
     ))
   } else {
-    cli::cli_abort("Package failed to upload.", call = call)
+    cli::cli_abort("Unable to confirm package submission.", call = call)
   }
 
   invisible(TRUE)
+}
+
+# The submission form is periodically unavailable: during planned CRAN vacations
+# and sporadically at other times. This can take various forms, e.g. a 503 or a
+# 404 or a failure to connect at all when the server is down.
+req_perform_cran <- function(req, call = caller_env()) {
+  url <- httr2::req_get_url(req)
+  withCallingHandlers(
+    httr2::req_perform(req),
+    httr2_error = function(cnd) {
+      cli::cli_abort(
+        c(
+          "Can't submit to CRAN right now.",
+          "i" = "Request to {.url {url}} failed.",
+          "i" = "Check {.url https://cran.r-project.org} to see if there is a
+                 planned closure or known outage."
+        ),
+        # Chain so that we surface more detail from httr2 or even curl.
+        parent = cnd,
+        call = call
+      )
+    }
+  )
 }
 
 as.object_size <- function(x) structure(x, class = "object_size")

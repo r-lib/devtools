@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `submit_cran()` gives a more informative error when the CRAN submission form can't be used, suggesting that the user consult <https://cran.r-project.org> to see if there's a CRAN closure (#2700).
+
 # devtools 2.5.2
 
 * `install()` uses a new feature of `pak::local_install_deps()` to consider the current `.libPaths()` when resolving dependencies, instead of consulting only `.libPaths()[1]`. This was an unintended behavioral change introduced in 2.5.0 (#2691).
