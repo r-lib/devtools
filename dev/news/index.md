@@ -2,6 +2,12 @@
 
 ## devtools (development version)
 
+- [`submit_cran()`](https://devtools.r-lib.org/dev/reference/submit_cran.md)
+  gives a more informative error when the CRAN submission form can’t be
+  used, suggesting that the user consult <https://cran.r-project.org> to
+  see if there’s a CRAN closure
+  ([\#2700](https://github.com/r-lib/devtools/issues/2700)).
+
 ## devtools 2.5.2
 
 CRAN release: 2026-04-30
