@@ -1,5 +1,6 @@
 test_that("can build README.Rmd in root directory", {
   skip_on_cran()
+  skip_if_not(rmarkdown::pandoc_available(), "pandoc not available")
 
   pkg <- local_package_create()
   usethis::ui_silence(
@@ -16,6 +17,7 @@ test_that("can build README.Rmd in root directory", {
 
 test_that("can build README.Rmd in inst/", {
   skip_on_cran()
+  skip_if_not(rmarkdown::pandoc_available(), "pandoc not available")
 
   pkg <- local_package_create()
   usethis::ui_silence(
@@ -138,6 +140,7 @@ test_that("build_readme() aborts when a dep is missing", {
 
 test_that("don't error for README in another directory", {
   skip_on_cran()
+  skip_if_not(rmarkdown::pandoc_available(), "pandoc not available")
 
   pkg <- local_package_create()
   usethis::ui_silence(
@@ -154,6 +157,7 @@ test_that("don't error for README in another directory", {
 
 test_that("build_rmd() is deprecated", {
   skip_on_cran()
+  skip_if_not(rmarkdown::pandoc_available(), "pandoc not available")
 
   pkg <- local_package_create()
   usethis::ui_silence(
