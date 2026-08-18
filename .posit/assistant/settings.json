@@ -1,0 +1,14 @@
+{
+  "permission": {
+    "edit": {
+      "*.R": "allow"
+    },
+    "webfetch": {
+      "https://github.com/*": "allow"
+    },
+    "bash": {
+      "head *": "allow",
+      "gh run view *": "allow"
+    }
+  }
+}

@@ -28,3 +28,4 @@
 ^vignettes/\.quarto$
 ^vignettes/*_files$
 ^\.positai/settings\.json$
+^\.posit$
