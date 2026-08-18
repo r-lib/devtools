@@ -1,5 +1,7 @@
 # devtools (development version)
 
+* `release_checks()` now flags when `BugReports` is missing from DESCRIPTION.
+
 # devtools 2.5.2
 
 * `install()` uses a new feature of `pak::local_install_deps()` to consider the current `.libPaths()` when resolving dependencies, instead of consulting only `.libPaths()[1]`. This was an unintended behavioral change introduced in 2.5.0 (#2691).
