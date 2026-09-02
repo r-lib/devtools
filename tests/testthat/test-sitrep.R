@@ -73,6 +73,22 @@ test_that("print warns about missing devtools deps", {
   expect_snapshot(print(x))
 })
 
+test_that("print suggests upgrade = TRUE only for out-of-date deps", {
+  local_reproducible_output(width = 60)
+  x <- new_dev_sitrep(
+    r_version = R_system_version("4.4.0"),
+    r_path = "/usr/lib/R",
+    devtools_version = package_version("2.4.6"),
+    devtools_deps = data.frame(
+      package = c("rlang", "cli"),
+      latest = c("1.0.0", "1.0.0"),
+      installed = c(NA_character_, "0.5.0"),
+      status = c("missing", "behind")
+    )
+  )
+  expect_snapshot(print(x))
+})
+
 test_that("print notes dev versions of devtools deps", {
   local_reproducible_output(width = 60)
   x <- new_dev_sitrep(
