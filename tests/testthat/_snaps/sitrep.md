@@ -71,7 +71,7 @@
       -- devtools ------------------------------------------------
       * version: 2.4.6
       ! 1 devtools dependency is out of date.
-        Update it with `pak::pak("devtools")`.
+        Update it with `pak::pak("devtools", upgrade = TRUE)`.
          cli (behind: 0.5.0 vs 1.0.0)
       -- dev package ---------------------------------------------
       * package: <unset>
@@ -90,6 +90,26 @@
       ! 1 devtools dependency is not installed.
         Install it with `pak::pak("devtools")`.
          somepkg (missing)
+      -- dev package ---------------------------------------------
+      * package: <unset>
+      * path: <unset>
+
+# print suggests upgrade = TRUE only for out-of-date deps
+
+    Code
+      print(x)
+    Message
+      -- R -------------------------------------------------------
+      * version: 4.4.0
+      * path: '/usr/lib/R'
+      -- devtools ------------------------------------------------
+      * version: 2.4.6
+      ! 1 devtools dependency is not installed.
+        Install it with `pak::pak("devtools")`.
+         rlang (missing)
+      ! 1 devtools dependency is out of date.
+        Update it with `pak::pak("devtools", upgrade = TRUE)`.
+         cli (behind: 0.5.0 vs 1.0.0)
       -- dev package ---------------------------------------------
       * package: <unset>
       * path: <unset>
