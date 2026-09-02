@@ -1,5 +1,6 @@
 # devtools (development version)
 
+* `dev_sitrep()` now suggests `pak::pak("devtools", upgrade = TRUE)` for dependencies that are out of date, because the previously suggested `pak::pak("devtools")` does not upgrade dependencies that are already installed and therefore left the report unchanged (#2702).
 * `submit_cran()` gives a more informative error when the CRAN submission form can't be used, suggesting that the user consult <https://cran.r-project.org> to see if there's a CRAN closure (#2700).
 
 # devtools 2.5.2
