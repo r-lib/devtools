@@ -26,7 +26,7 @@ from a non-default library, use in combination with \code{\link[withr:with_libpa
 \seealso{
 \code{\link[=with_debug]{with_debug()}} to install packages with debugging flags set.
 
-Other package installation: 
-\code{\link{install}()}
+Other package installation:
+\code{\link[=install]{install()}}
 }
 \concept{package installation}

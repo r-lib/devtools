@@ -61,7 +61,7 @@ outputs.}
 
 \code{build_vignettes()} is deprecated because we no longer recommend that you
 build vignettes in this way, because it leaves build artifacts in your
-development directory. Instead, use \code{\link[pkgdown:build_articles]{pkgdown::build_article()}} to
+development directory. Instead, use \code{\link[pkgdown:build_article]{pkgdown::build_article()}} to
 render articles locally for preview and polishing.
 }
 \keyword{internal}

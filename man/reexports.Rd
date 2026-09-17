@@ -21,10 +21,10 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{pkgbuild}{\code{\link[pkgbuild]{clean_dll}}, \code{\link[pkgbuild:has_rtools]{find_rtools}}, \code{\link[pkgbuild:has_compiler]{has_devel}}, \code{\link[pkgbuild]{with_debug}}}
+  \item{pkgbuild}{\code{\link[pkgbuild:clean_dll]{clean_dll()}}, \code{\link[pkgbuild:find_rtools]{find_rtools()}}, \code{\link[pkgbuild:has_devel]{has_devel()}}, \code{\link[pkgbuild:with_debug]{with_debug()}}}
 
-  \item{pkgload}{\code{\link[pkgload]{check_dep_version}}, \code{\link[pkgload:load_all]{is_loading}}, \code{\link[pkgload]{parse_deps}}, \code{\link[pkgload]{unload}}}
+  \item{pkgload}{\code{\link[pkgload:check_dep_version]{check_dep_version()}}, \code{\link[pkgload:is_loading]{is_loading()}}, \code{\link[pkgload:parse_deps]{parse_deps()}}, \code{\link[pkgload:unload]{unload()}}}
 
-  \item{sessioninfo}{\code{\link[sessioninfo]{package_info}}, \code{\link[sessioninfo]{session_info}}}
+  \item{sessioninfo}{\code{\link[sessioninfo:package_info]{package_info()}}, \code{\link[sessioninfo:session_info]{session_info()}}}
 }}
 

@@ -36,6 +36,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Jennifer Bryan \email{jenny@posit.co} (\href{https://orcid.org/0000-0002-6983-2759}{ORCID})
   \item Hadley Wickham
   \item Jim Hester
   \item Winston Chang
