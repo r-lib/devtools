@@ -30,7 +30,7 @@ Imports:
     pkgdown (>= 2.2.0),
     pkgload (>= 1.5.2),
     profvis (>= 0.4.0),
-    rcmdcheck (>= 1.4.0),
+    rcmdcheck (>= 1.4.0.9001),
     rlang (>= 1.2.0),
     roxygen2 (>= 7.3.3),
     rversions (>= 3.0.0),
@@ -57,6 +57,8 @@ Suggests:
     spelling (>= 2.2),
     xml2
 VignetteBuilder: knitr, quarto
+Remotes:
+    r-lib/rcmdcheck#237
 Config/Needs/website: tidyverse/tidytemplate
 Config/testthat/edition: 3
 Config/testthat/parallel: true
