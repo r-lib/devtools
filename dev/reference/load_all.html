@@ -210,6 +210,12 @@ it makes internal objects easy to access.  To export only the objects
 listed as exports, use <code>export_all = FALSE</code>. This more closely simulates
 behavior when loading an installed package with <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code>, and can
 be useful for checking for missing exports.</p></li>
+<li><p>When reloading a package, <code>load_all()</code> runs the unload hooks
+(<code>.onUnload()</code> and hooks registered with <code><a href="https://rdrr.io/r/base/userhooks.html" class="external-link">setHook()</a></code>) of the old
+namespace, but doesn't unload the namespace or its DLL. This keeps
+dangling references to the old namespace in working order. Errors
+thrown from <code>.onUnload()</code> are demoted to warnings so that they can't
+prevent reloading.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="controlling-the-debug-compiler-flags">Controlling the debug compiler flags<a class="anchor" aria-label="anchor" href="#controlling-the-debug-compiler-flags"></a></h2>

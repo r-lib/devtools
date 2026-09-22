@@ -133,6 +133,14 @@ from normal package loading in several ways.
   [`library()`](https://rdrr.io/r/base/library.html), and can be useful
   for checking for missing exports.
 
+- When reloading a package, `load_all()` runs the unload hooks
+  (`.onUnload()` and hooks registered with
+  [`setHook()`](https://rdrr.io/r/base/userhooks.html)) of the old
+  namespace, but doesn't unload the namespace or its DLL. This keeps
+  dangling references to the old namespace in working order. Errors
+  thrown from `.onUnload()` are demoted to warnings so that they can't
+  prevent reloading.
+
 ## Controlling the debug compiler flags
 
 `load_all()` delegates to

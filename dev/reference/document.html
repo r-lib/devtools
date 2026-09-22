@@ -74,9 +74,14 @@ package object.  See <code><a href="as.package.html">as.package()</a></code> for
 
 
 <dt id="arg-roclets">roclets<a class="anchor" aria-label="anchor" href="#arg-roclets"></a></dt>
-<dd><p>Character vector of roclet names to use with package.
-The default, <code>NULL</code>, uses the roxygen <code>roclets</code> option,
-which defaults to <code>c("collate", "namespace", "rd")</code>.</p></dd>
+<dd><p>Character vector of <a href="https://roxygen2.r-lib.org/reference/roclet.html" class="external-link">roclets</a> to use.</p>
+<p>The default, <code>NULL</code>, uses the roxygen <code>roclets</code> option,
+which defaults to <code>c("collate", "namespace", "rd")</code>. This will update
+(if needed) the <code>Collate</code> field with <code><a href="https://roxygen2.r-lib.org/reference/update_collate.html" class="external-link">update_collate()</a></code>,
+produce the <code>NAMESPACE</code> file with <code><a href="https://roxygen2.r-lib.org/reference/namespace_roclet.html" class="external-link">namespace_roclet()</a></code>, and
+produce the Rd files with <code><a href="https://roxygen2.r-lib.org/reference/rd_roclet.html" class="external-link">rd_roclet()</a></code>.</p>
+<p>(Note that <code>update_collate()</code> is not technically a roclet but is still
+controlled with this argument for historical reasons.)</p></dd>
 
 
 <dt id="arg-quiet">quiet<a class="anchor" aria-label="anchor" href="#arg-quiet"></a></dt>

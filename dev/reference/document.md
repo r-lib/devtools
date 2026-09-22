@@ -22,9 +22,20 @@ document(pkg = ".", roclets = NULL, quiet = FALSE)
 
 - roclets:
 
-  Character vector of roclet names to use with package. The default,
-  `NULL`, uses the roxygen `roclets` option, which defaults to
-  `c("collate", "namespace", "rd")`.
+  Character vector of
+  [roclets](https://roxygen2.r-lib.org/reference/roclet.html) to use.
+
+  The default, `NULL`, uses the roxygen `roclets` option, which defaults
+  to `c("collate", "namespace", "rd")`. This will update (if needed) the
+  `Collate` field with
+  [`update_collate()`](https://roxygen2.r-lib.org/reference/update_collate.html),
+  produce the `NAMESPACE` file with
+  [`namespace_roclet()`](https://roxygen2.r-lib.org/reference/namespace_roclet.html),
+  and produce the Rd files with
+  [`rd_roclet()`](https://roxygen2.r-lib.org/reference/rd_roclet.html).
+
+  (Note that `update_collate()` is not technically a roclet but is still
+  controlled with this argument for historical reasons.)
 
 - quiet:
 
