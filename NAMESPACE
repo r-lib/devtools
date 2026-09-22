@@ -87,15 +87,21 @@ import(rlang)
 importFrom(ellipsis,check_dots_used)
 importFrom(lifecycle,deprecated)
 importFrom(memoise,memoise)
-importFrom(pkgbuild,clean_dll)
-importFrom(pkgbuild,find_rtools)
-importFrom(pkgbuild,has_devel)
-importFrom(pkgbuild,with_debug)
-importFrom(pkgload,check_dep_version)
-importFrom(pkgload,is_loading)
-importFrom(pkgload,parse_deps)
-importFrom(pkgload,unload)
-importFrom(sessioninfo,package_info)
-importFrom(sessioninfo,session_info)
+importFrom(pkgbuild,
+  clean_dll,
+  find_rtools,
+  has_devel,
+  with_debug
+)
+importFrom(pkgload,
+  check_dep_version,
+  is_loading,
+  parse_deps,
+  unload
+)
+importFrom(sessioninfo,
+  package_info,
+  session_info
+)
 importFrom(stats,update)
 importFrom(usethis,use_test)

@@ -19,7 +19,7 @@ To complete the submission you will need respond to the email sent to the
 maintainer email address.
 
 We generally recommend using this part of the process defined by
-\code{\link[usethis:use_release_issue]{usethis::use_release_issue()}}; this process maximizes the chances of a successful
+\code{\link[usethis:use_release_issue]{use_release_issue()}}; this process maximizes the chances of a successful
 submission.
 }
 \keyword{internal}

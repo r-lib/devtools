@@ -74,7 +74,7 @@ deleted after a couple of days.
 
 }}
 \seealso{
-Other build functions: 
-\code{\link{check_mac_release}()}
+Other build functions:
+\code{\link[=check_mac_release]{check_mac_release()}}
 }
 \concept{build functions}

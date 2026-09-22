@@ -90,6 +90,12 @@ it makes internal objects easy to access.  To export only the objects
 listed as exports, use \code{export_all = FALSE}. This more closely simulates
 behavior when loading an installed package with \code{\link[=library]{library()}}, and can
 be useful for checking for missing exports.
+\item When reloading a package, \code{load_all()} runs the unload hooks
+(\code{.onUnload()} and hooks registered with \code{\link[=setHook]{setHook()}}) of the old
+namespace, but doesn't unload the namespace or its DLL. This keeps
+dangling references to the old namespace in working order. Errors
+thrown from \code{.onUnload()} are demoted to warnings so that they can't
+prevent reloading.
 }
 
 }
