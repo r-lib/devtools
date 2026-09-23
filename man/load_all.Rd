@@ -11,6 +11,7 @@ load_all(
   export_all = TRUE,
   helpers = TRUE,
   quiet = FALSE,
+  debug = TRUE,
   ...
 )
 }
@@ -32,6 +33,10 @@ in the NAMESPACE file.}
 \item{helpers}{if \code{TRUE} loads \pkg{testthat} test helpers.}
 
 \item{quiet}{if \code{TRUE} suppresses output from this function.}
+
+\item{debug}{If \code{TRUE} (the default), then the build
+runs without optimisation (\code{-O0}) and with debug symbols (\code{-g}). See
+\code{\link[pkgbuild:compile_dll]{pkgbuild::compile_dll()}} for details.}
 
 \item{...}{Additional arguments passed to \code{\link[pkgload:load_all]{pkgload::load_all()}}.}
 }
