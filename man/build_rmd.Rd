@@ -27,6 +27,6 @@ format is read from metadata (i.e. not a custom format object passed to
 \code{build_rmd()} is deprecated, as it is a low-level helper for internal use. To
 render your package's \code{README.qmd} or \code{README.Rmd}, use \code{\link[=build_readme]{build_readme()}}. To
 preview a vignette or article, use functions like \code{\link[pkgdown:build_site]{pkgdown::build_site()}} or
-\code{\link[pkgdown:build_articles]{pkgdown::build_article()}}.
+\code{\link[pkgdown:build_article]{pkgdown::build_article()}}.
 }
 \keyword{internal}

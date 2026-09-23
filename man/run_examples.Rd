@@ -25,7 +25,7 @@ name of \code{Rd} file to start with (with or without extensions), or
 a topic name. If omitted, will start with the (lexicographically) first
 file. This is useful if you have a lot of examples and don't want to
 rerun them every time you fix a problem. To run only one example, use
-\code{\link[pkgload:dev_example]{pkgload::run_example()}}.}
+\code{\link[pkgload:run_example]{pkgload::run_example()}}.}
 
 \item{show}{DEPRECATED.}
 
@@ -50,7 +50,7 @@ restart the whole process.  This function makes it a little easier by
 making it possible to run all examples from an R function.
 }
 \seealso{
-\code{\link[pkgload:dev_example]{pkgload::run_example()}} to run a single example.
+\code{\link[pkgload:run_example]{pkgload::run_example()}} to run a single example.
 }
 \concept{example functions}
 \keyword{programming}

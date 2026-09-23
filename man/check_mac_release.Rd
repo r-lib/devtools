@@ -48,7 +48,7 @@ Check on either the released or development versions of R, using
 \url{https://mac.r-project.org/macbuilder/submit.html}.
 }
 \seealso{
-Other build functions: 
-\code{\link{check_win}()}
+Other build functions:
+\code{\link[=check_win]{check_win()}}
 }
 \concept{build functions}

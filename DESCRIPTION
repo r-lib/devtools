@@ -56,13 +56,15 @@ Suggests:
     rstudioapi (>= 0.13),
     spelling (>= 2.2),
     xml2
-VignetteBuilder: knitr, quarto
 Remotes:
     r-lib/rcmdcheck#237
+VignetteBuilder: 
+    knitr,
+    quarto
 Config/Needs/website: tidyverse/tidytemplate
+Config/roxygen2/version: 8.1.0
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3

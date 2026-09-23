@@ -24,7 +24,7 @@ package object.  See \code{\link[=as.package]{as.package()}} for more informatio
 
 \item{reload}{if \code{TRUE} (the default), will automatically attempt to reload
 the package after installing. Reloading is not always completely possible
-so see \code{\link[pkgload:unload]{pkgload::unregister()}} for caveats.}
+so see \code{\link[pkgload:unregister]{pkgload::unregister()}} for caveats.}
 
 \item{quick}{if \code{TRUE}, skips some optional steps (e.g. help
 pre-rendering and multi-arch builds) to make installation as fast
@@ -96,7 +96,7 @@ To install to a non-default library, use \code{\link[withr:with_libpaths]{withr:
 \seealso{
 \code{\link[=with_debug]{with_debug()}} to install packages with debugging flags set.
 
-Other package installation: 
-\code{\link{uninstall}()}
+Other package installation:
+\code{\link[=uninstall]{uninstall()}}
 }
 \concept{package installation}
