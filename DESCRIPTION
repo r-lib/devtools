@@ -57,7 +57,7 @@ Suggests:
     spelling (>= 2.2),
     xml2
 Remotes:
-    r-lib/rcmdcheck#237
+    r-lib/rcmdcheck
 VignetteBuilder: 
     knitr,
     quarto
