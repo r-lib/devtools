@@ -30,7 +30,7 @@ Imports:
     pkgdown (>= 2.2.0),
     pkgload (>= 1.5.2),
     profvis (>= 0.4.0),
-    rcmdcheck (>= 1.4.0),
+    rcmdcheck (>= 1.4.0.9001),
     rlang (>= 1.2.0),
     roxygen2 (>= 7.3.3),
     rversions (>= 3.0.0),
@@ -56,6 +56,8 @@ Suggests:
     rstudioapi (>= 0.13),
     spelling (>= 2.2),
     xml2
+Remotes:
+    r-lib/rcmdcheck
 VignetteBuilder: 
     knitr,
     quarto
