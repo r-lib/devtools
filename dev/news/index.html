@@ -52,6 +52,8 @@
 <h2 class="pkg-version" data-toc-text="development version" id="devtools-development-version">devtools (development version)<a class="anchor" aria-label="anchor" href="#devtools-development-version"></a></h2>
 <ul><li>
 <code><a href="../reference/submit_cran.html">submit_cran()</a></code> gives a more informative error when the CRAN submission form can’t be used, suggesting that the user consult <a href="https://cran.r-project.org" class="external-link uri">https://cran.r-project.org</a> to see if there’s a CRAN closure (<a href="https://github.com/r-lib/devtools/issues/2700" class="external-link">#2700</a>).</li>
+<li>
+<code><a href="../reference/check.html">check_built()</a></code> no longer prints <code>R_CHECK_</code> check env variables - now handled by <code><a href="http://r-lib.github.io/rcmdcheck/reference/rcmdcheck.html" class="external-link">rcmdcheck::rcmdcheck()</a></code> directly as of r-lib/rcmdcheck#237 (<a href="https://github.com/r-lib/devtools/issues/2621" class="external-link">#2621</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.5.2" id="devtools-252">devtools 2.5.2<a class="anchor" aria-label="anchor" href="#devtools-252"></a></h2><p class="text-muted">CRAN release: 2026-04-30</p>

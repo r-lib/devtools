@@ -7,6 +7,11 @@
   used, suggesting that the user consult <https://cran.r-project.org> to
   see if there’s a CRAN closure
   ([\#2700](https://github.com/r-lib/devtools/issues/2700)).
+- [`check_built()`](https://devtools.r-lib.org/dev/reference/check.md)
+  no longer prints `R_CHECK_` check env variables - now handled by
+  [`rcmdcheck::rcmdcheck()`](http://r-lib.github.io/rcmdcheck/reference/rcmdcheck.md)
+  directly as of r-lib/rcmdcheck#237
+  ([\#2621](https://github.com/r-lib/devtools/issues/2621))
 
 ## devtools 2.5.2
 
