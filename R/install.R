@@ -277,7 +277,7 @@ local_install <- function(
   report_deps_ahead_behind(
     dep_status,
     pkg_name = pkg$package,
-    update_code = "pak::local_install_dev_deps()"
+    install_code = "pak::local_install_dev_deps()"
   )
 
   if (!quiet) {
