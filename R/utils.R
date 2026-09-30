@@ -41,10 +41,12 @@ is_rstudio_running <- function() {
 
 # Copied from testthat:::is_llm()
 is_llm <- function() {
-  nzchar(Sys.getenv("AGENT")) ||
+  isTRUE(getOption("posit_assistant")) ||
+    nzchar(Sys.getenv("AGENT")) ||
     nzchar(Sys.getenv("CLAUDECODE")) ||
     nzchar(Sys.getenv("GEMINI_CLI")) ||
-    nzchar(Sys.getenv("CURSOR_AGENT"))
+    nzchar(Sys.getenv("CURSOR_AGENT")) ||
+    nzchar(Sys.getenv("CODEX_CI"))
 }
 
 # Suppress cli wrapping
