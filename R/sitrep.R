@@ -215,7 +215,8 @@ print.dev_sitrep <- function(x, ...) {
     report_deps_ahead_behind(
       x$devtools_deps,
       pkg_name = "devtools",
-      update_code = 'pak::pak("devtools")'
+      install_code = 'pak::pak("devtools")',
+      upgrade_code = 'pak::pak("devtools", upgrade = TRUE)'
     )
   }
 
@@ -229,7 +230,7 @@ print.dev_sitrep <- function(x, ...) {
     report_deps_ahead_behind(
       x$pkg_deps,
       pkg_name = x$pkg$package,
-      update_code = "pak::local_install_dev_deps()"
+      install_code = "pak::local_install_dev_deps()"
     )
   }
 
@@ -297,16 +298,22 @@ pkg_dep_status <- function(pkg, dependencies = NA) {
 #' @param dep_status A data frame as returned by `compare_deps()`, with
 #'   columns `package`, `latest`, `installed`, `status`.
 #' @param pkg_name Package name to mention in the message.
-#' @param update_code Code suggestion for updating behind deps.
+#' @param install_code Code suggestion for installing missing deps.
+#' @param upgrade_code Code suggestion for updating behind deps.
 #' @return Called for its side effects.
 #' @noRd
-report_deps_ahead_behind <- function(dep_status, pkg_name, update_code) {
+report_deps_ahead_behind <- function(
+  dep_status,
+  pkg_name,
+  install_code,
+  upgrade_code = install_code
+) {
   missing <- dep_status[dep_status$status == "missing", ]
   if (nrow(missing) > 0) {
     n <- nrow(missing)
     cli::cli_bullets(c(
       "!" = "{n} {.field {pkg_name}} {cli::qty(n)}{?dependency is/dependencies are} not installed.",
-      " " = "Install {cli::qty(n)}{?it/them} with {.run {update_code}}."
+      " " = "Install {cli::qty(n)}{?it/them} with {.run {install_code}}."
     ))
     cli::cli_verbatim(paste("  ", dep_labels(missing)))
   }
@@ -316,7 +323,7 @@ report_deps_ahead_behind <- function(dep_status, pkg_name, update_code) {
     n <- nrow(behind)
     cli::cli_bullets(c(
       "!" = "{n} {.field {pkg_name}} {cli::qty(n)}{?dependency is/dependencies are} out of date.",
-      " " = "Update {cli::qty(n)}{?it/them} with {.run {update_code}}."
+      " " = "Update {cli::qty(n)}{?it/them} with {.run {upgrade_code}}."
     ))
     cli::cli_verbatim(paste("  ", dep_labels(behind)))
   }
