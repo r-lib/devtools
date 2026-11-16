@@ -1,6 +1,6 @@
 # devtools (development version)
 
-* `test_coverage()` and `test_coverage_active_file()` no longer need DT for HTML reports with covr 4.0.0 or later, whose reports don't use it.
+* `test_coverage()` and `test_coverage_active_file()` no longer need DT for HTML reports with covr 4.0.0 or later, whose reports don't use it (@jimhester, #2712).
 * `submit_cran()` gives a more informative error when the CRAN submission form can't be used, suggesting that the user consult <https://cran.r-project.org> to see if there's a CRAN closure (#2700).
 * `check_built()` no longer prints `R_CHECK_` check env variables - now handled by `rcmdcheck::rcmdcheck()` directly as of r-lib/rcmdcheck#237 (#2621)
 
