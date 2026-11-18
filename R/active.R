@@ -39,7 +39,7 @@ test_file_type <- function(path) {
   name <- path_file(path)
   ext <- tolower(path_ext(path))
 
-  src_ext <- c("c", "cc", "cpp", "cxx", "h", "hpp", "hxx")
+  src_ext <- c("c", "cc", "cpp", "cxx", "h", "hpp", "hxx", "rs")
 
   type <- rep(NA_character_, length(path))
   type[dir == "R" & ext == "r"] <- "R"
