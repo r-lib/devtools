@@ -8,6 +8,7 @@ load_all <- function(
   export_all = TRUE,
   helpers = TRUE,
   quiet = FALSE,
+  debug = TRUE,
   ...
 ) {
   if (inherits(path, "package")) {
@@ -32,6 +33,7 @@ load_all <- function(
     export_all = export_all,
     helpers = helpers,
     quiet = quiet,
+    debug = debug,
     ...
   )
 }
