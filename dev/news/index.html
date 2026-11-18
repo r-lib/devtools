@@ -51,6 +51,8 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="devtools-development-version">devtools (development version)<a class="anchor" aria-label="anchor" href="#devtools-development-version"></a></h2>
 <ul><li>
+<code><a href="../reference/test.html">test_coverage()</a></code> and <code><a href="../reference/test.html">test_coverage_active_file()</a></code> no longer need DT for HTML reports with covr 4.0.0 or later, whose reports don’t use it (<a href="https://github.com/jimhester" class="external-link">@jimhester</a>, <a href="https://github.com/r-lib/devtools/issues/2712" class="external-link">#2712</a>).</li>
+<li>
 <code><a href="../reference/test.html">test_active_file()</a></code> and <code><a href="../reference/test.html">test_coverage_active_file()</a></code> now find the tests of Rust files in <code>src/rust/src/</code>, e.g. <code>test-lib.R</code> for <code>lib.rs</code>. With covr 4.0.0, <code><a href="../reference/test.html">test_coverage_active_file()</a></code> also reports their coverage (<a href="https://github.com/jimhester" class="external-link">@jimhester</a>, <a href="https://github.com/r-lib/devtools/issues/2711" class="external-link">#2711</a>).</li>
 <li>
 <code><a href="../reference/submit_cran.html">submit_cran()</a></code> gives a more informative error when the CRAN submission form can’t be used, suggesting that the user consult <a href="https://cran.r-project.org" class="external-link uri">https://cran.r-project.org</a> to see if there’s a CRAN closure (<a href="https://github.com/r-lib/devtools/issues/2700" class="external-link">#2700</a>).</li>

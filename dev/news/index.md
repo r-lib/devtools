@@ -2,6 +2,12 @@
 
 ## devtools (development version)
 
+- [`test_coverage()`](https://devtools.r-lib.org/dev/reference/test.md)
+  and
+  [`test_coverage_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
+  no longer need DT for HTML reports with covr 4.0.0 or later, whose
+  reports don’t use it ([@jimhester](https://github.com/jimhester),
+  [\#2712](https://github.com/r-lib/devtools/issues/2712)).
 - [`test_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
   and
   [`test_coverage_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
