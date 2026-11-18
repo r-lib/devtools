@@ -41,7 +41,7 @@ Imports:
 Suggests:
     BiocManager (>= 1.30.18),
     callr (>= 3.7.1),
-    covr (>= 3.5.1),
+    covr (>= 4.0.0),
     curl (>= 4.3.2),
     digest (>= 0.6.29),
     DT (>= 0.23),
