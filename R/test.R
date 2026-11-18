@@ -198,7 +198,10 @@ show_report <- function(coverage, report, path, call = caller_env()) {
   report <- report_default(report, call = call)
 
   if (report == "html") {
-    check_installed("DT")
+    # covr's reports only use DT before covr 4.0.0
+    if (utils::packageVersion("covr") < "4.0.0") {
+      check_installed("DT")
+    }
     covered <- unique(covr::display_name(coverage))
 
     if (length(covered) == 1) {
