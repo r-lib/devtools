@@ -96,8 +96,8 @@ make your example reproducible: required packages, data, code.
 ## Pull requests
 
 - Your pull request will be easiest for us to read if you use a common
-  style: <http://r-pkgs.had.co.nz/r.html#style>. Please pay particular
-  attention to whitespace.
+  style: <https://r-pkgs.org/code.html#code-style>. Please pay
+  particular attention to whitespace.
 
 - You should always add a bullet point to `NEWS.md` motivating the
   change. It should look like “This is what changed (@yourusername,
