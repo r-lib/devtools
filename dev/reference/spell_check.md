@@ -2,7 +2,7 @@
 
 Runs a spell check on text fields in the package description file,
 manual pages, and optionally vignettes. Wraps the
-[spelling](https://docs.ropensci.org/spelling//reference/spell_check_package.html)
+[spelling](https://docs.ropensci.org/spelling/reference/spell_check_package.html)
 package.
 
 ## Usage
@@ -27,5 +27,5 @@ spell_check(pkg = ".", vignettes = TRUE, use_wordlist = TRUE)
 - use_wordlist:
 
   ignore words in the package
-  [WORDLIST](https://docs.ropensci.org/spelling//reference/wordlist.html)
+  [WORDLIST](https://docs.ropensci.org/spelling/reference/wordlist.html)
   file

@@ -2,6 +2,15 @@
 
 ## devtools (development version)
 
+- [`test_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
+  and
+  [`test_coverage_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
+  now find the tests of Rust files in `src/rust/src/`, e.g. `test-lib.R`
+  for `lib.rs`. With covr 4.0.0,
+  [`test_coverage_active_file()`](https://devtools.r-lib.org/dev/reference/test.md)
+  also reports their coverage
+  ([@jimhester](https://github.com/jimhester),
+  [\#2711](https://github.com/r-lib/devtools/issues/2711)).
 - [`submit_cran()`](https://devtools.r-lib.org/dev/reference/submit_cran.md)
   gives a more informative error when the CRAN submission form can’t be
   used, suggesting that the user consult <https://cran.r-project.org> to
@@ -925,7 +934,7 @@ understand API in the future, so we feel the tradeoff is worthwhile.
   code has been moved into the new **spelling** package and has thereby
   gained support for vignettes and package wordlists. The **devtools**
   function now wraps
-  [`spelling::spell_check_package()`](https://docs.ropensci.org/spelling//reference/spell_check_package.html).
+  [`spelling::spell_check_package()`](https://docs.ropensci.org/spelling/reference/spell_check_package.html).
 
 ### Minor improvements and fixes
 
@@ -3205,7 +3214,10 @@ CRAN release: 2013-01-22
 - Packages listed in Imports and Depends are now loaded into an imports
   environment, with name attribute “imports:xxxx”, which is the parent
   of the namespace environment. The imports environment is in turn a
-  child of the
+  child of the environment, which is a child of the global environment.
+  This more accurately simulates how packages are normally loaded. These
+  packages previously were loaded and attached. (Winston Chang. Fixes
+  [\#85](https://github.com/r-lib/devtools/issues/85))
 
 - The NAMESPACE file is now used for loading imports, instead of the
   DESCRIPTION file. Previously, `load_all` loaded all objects from the

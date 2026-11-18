@@ -7,13 +7,13 @@
 
 - `test_coverage()` computes test coverage for your package. It's a
   shortcut for
-  [`covr::package_coverage()`](http://covr.r-lib.org/reference/package_coverage.md)
-  plus [`covr::report()`](http://covr.r-lib.org/reference/report.md).
+  [`covr::package_coverage()`](https://covr.r-lib.org/reference/package_coverage.html)
+  plus [`covr::report()`](https://covr.r-lib.org/reference/report.html).
 
 - `test_coverage_active_file()` computes test coverage for the active
   file. It's a shortcut for
-  [`covr::file_coverage()`](http://covr.r-lib.org/reference/file_coverage.md)
-  plus [`covr::report()`](http://covr.r-lib.org/reference/report.md).
+  [`covr::file_coverage()`](https://covr.r-lib.org/reference/file_coverage.html)
+  plus [`covr::report()`](https://covr.r-lib.org/reference/report.html).
 
 ## Usage
 
