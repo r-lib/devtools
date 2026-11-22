@@ -1,6 +1,6 @@
 #' Git checks
 #'
-#' This function performs Git checks checks prior to release. It is called
+#' This function performs Git checks prior to release. It is called
 #' automatically by [release()].
 #'
 #' @template devtools
