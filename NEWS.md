@@ -5,6 +5,8 @@
 * `submit_cran()` gives a more informative error when the CRAN submission form can't be used, suggesting that the user consult <https://cran.r-project.org> to see if there's a CRAN closure (#2700).
 * `check_built()` no longer prints `R_CHECK_` check env variables - now handled by `rcmdcheck::rcmdcheck()` directly as of r-lib/rcmdcheck#237 (#2621)
 
+* `update_packages()` now recommends `remotes::update_packages()`, which checks installed packages for updates when called without arguments (@M-Colley, #2709).
+
 # devtools 2.5.2
 
 * `install()` uses a new feature of `pak::local_install_deps()` to consider the current `.libPaths()` when resolving dependencies, instead of consulting only `.libPaths()[1]`. This was an unintended behavioral change introduced in 2.5.0 (#2691).

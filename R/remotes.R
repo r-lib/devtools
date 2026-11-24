@@ -23,10 +23,16 @@
 #' | `install_svn("url")` | `remotes::install_svn("url")` |
 #' | `install_url("url")` | `pak::pak("url::url")` |
 #' | `install_version("pkg", "1.0.0")` | `pak::pak("pkg@1.0.0")` |
-#' | `update_packages("pkg")` | `pak::pak("pkg")` |
+#' | `update_packages()` | `remotes::update_packages()` |
+#' | `update_packages("pkg")` | `remotes::update_packages("pkg")` |
 #' | `dev_package_deps()` | `pak::local_dev_deps()` |
 #' | `github_pull("123")` | `remotes::github_pull("123")` |
 #' | `github_release()` | `remotes::github_release()` |
+#'
+#' With no arguments, `remotes::update_packages()` checks installed packages for
+#' updates. Use `pak::pak("pkg")` to install or update a named package from a
+#' configured source. Use `pak::pak()` to install or update the current package
+#' project's development dependencies.
 #'
 #' @name install-deprecated
 #' @keywords internal
@@ -147,7 +153,11 @@ install_version <- function(...) {
 #' @rdname install-deprecated
 #' @export
 update_packages <- function(...) {
-  lifecycle::deprecate_warn("2.5.0", "update_packages()", "pak::pak()")
+  lifecycle::deprecate_warn(
+    "2.5.0",
+    "update_packages()",
+    "remotes::update_packages()"
+  )
   check_installed("remotes")
   pkgbuild::with_build_tools(remotes::update_packages(...), required = FALSE)
 }
