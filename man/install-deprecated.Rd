@@ -69,12 +69,18 @@ old remotes functions directly.
    \code{install_svn("url")} \tab \code{remotes::install_svn("url")} \cr
    \code{install_url("url")} \tab \code{pak::pak("url::url")} \cr
    \code{install_version("pkg", "1.0.0")} \tab \code{pak::pak("pkg@1.0.0")} \cr
-   \code{update_packages("pkg")} \tab \code{pak::pak("pkg")} \cr
+   \code{update_packages()} \tab \code{remotes::update_packages()} \cr
+   \code{update_packages("pkg")} \tab \code{remotes::update_packages("pkg")} \cr
    \code{dev_package_deps()} \tab \code{pak::local_dev_deps()} \cr
    \code{github_pull("123")} \tab \code{remotes::github_pull("123")} \cr
    \code{github_release()} \tab \code{remotes::github_release()} \cr
 }
 
+
+With no arguments, \code{remotes::update_packages()} checks installed packages for
+updates. Use \code{pak::pak("pkg")} to install or update a named package from a
+configured source. Use \code{pak::pak()} to install or update the current package
+project's development dependencies.
 }
 }
 \keyword{internal}
